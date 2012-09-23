@@ -1,0 +1,7 @@
+#!gbuild
+[Program]
+	-object_dir=objs\Cloudberry_Kingdom
+	-o Cloudberry_Kingdom.elf
+tgt\cafe_libs.gpj
+tgt\eppc.Cafe.ld
+Main.cpp

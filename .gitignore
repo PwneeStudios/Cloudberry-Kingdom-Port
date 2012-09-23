@@ -1,0 +1,17 @@
+*.opensdf
+*.sdf
+*.suo
+*.dep
+*.dla
+*.dnm
+*.elf
+*.map
+*.rpx
+*.user
+Debug/
+Release/
+*/Debug/
+*/Release/
+ipch/
+objs/
+tgt/

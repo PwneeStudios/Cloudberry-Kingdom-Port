@@ -1,0 +1,15 @@
+#!gbuild
+macro __OS_DIR=C:\Pwnee\cafe_sdk
+primaryTarget=ppc_cos.tgt
+#component top_level_project
+[Project]
+	-bsp cat-dev
+	-os_dir C:\Pwnee\cafe_sdk
+	-G
+	-object_dir=objs
+	:sourceDir=.
+	:optionsFile=cos.opt
+Core\Core.gpj		[Library]
+Game\Game.gpj		[Library]
+Cloudberry WiiU\Cloudberry_Kingdom.gpj		[Program]
+tgt\resources.gpj		[Project]
