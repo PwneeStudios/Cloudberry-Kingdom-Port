@@ -9,6 +9,9 @@ primaryTarget=ppc_cos.tgt
 	-object_dir=objs
 	:sourceDir=.
 	:optionsFile=cos.opt
+	-ICore/include
+	-IGame/include
+	-L.
 Core\Core.gpj		[Library]
 Game\Game.gpj		[Library]
 Cloudberry WiiU\Cloudberry_Kingdom.gpj		[Program]

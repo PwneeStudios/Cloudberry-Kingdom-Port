@@ -3,6 +3,8 @@
 *.suo
 *.dep
 *.dla
+*.a
+*.dba
 *.dnm
 *.elf
 *.map
@@ -13,6 +15,7 @@
 *.idb
 *.pdb
 *.lastbuildstate
+*.log
 Debug/
 Release/
 */Debug/

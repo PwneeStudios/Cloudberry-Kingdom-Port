@@ -12,15 +12,18 @@ class QuadDrawer : public Singleton< QuadDrawer >
 private:
 
 	/// No copying.
-	QuadDrawer( const QuadDrawer & ) { }
+	QuadDrawer( const QuadDrawer & );
 
 	/// No assignment.
-	QuadDrawer &operator = ( const QuadDrawer & ) { }
+	QuadDrawer &operator = ( const QuadDrawer & );
 
 public:
 
 	QuadDrawer();
 	~QuadDrawer();
+
+	/// Get quad drawer singleton.
+	static QuadDrawer &GetSingleton();
 
 };
 

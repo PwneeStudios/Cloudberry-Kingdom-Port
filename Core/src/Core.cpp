@@ -2,8 +2,11 @@
 
 #include <cstdlib>
 #include <GameLoop.h>
-#include <GL/glew.h>
-#include <GL/glfw.h>
+
+#ifndef CAFE
+	#include <GL/glew.h>
+	#include <GL/glfw.h>
+#endif
 
 // Single instance of the core.
 template<> Core *Singleton< Core >::singleton_ = 0;
@@ -26,6 +29,7 @@ Core::Core( GameLoop &game ) :
 	running_( false ),
 	game_( game )
 {
+#ifndef CAFE
 	if( !glfwInit() )
 		exit( EXIT_FAILURE );
 
@@ -41,13 +45,16 @@ Core::Core( GameLoop &game ) :
 		glfwTerminate();
 		exit( EXIT_FAILURE );
 	}
+#endif
 }
 
 Core::~Core()
 {
+#ifndef CAFE
 	glfwTerminate();
 
 	exit( EXIT_SUCCESS );
+#endif
 }
 
 int Core::Run()
@@ -65,4 +72,10 @@ int Core::Run()
 void Core::Exit()
 {
 	running_ = false;
+}
+
+Core &Core::GetSingleton()
+{
+	assert( singleton_ );
+	return *singleton_;
 }

@@ -1,3 +1,5 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Core.cpp
+src\Graphics\QuadDrawer.cpp

@@ -35,6 +35,10 @@ public:
 
 	/// Exit application.
 	void Exit();
+
+	/// Get core singleton.
+	static Core &GetSingleton();
+
 };
 
 /// The core! 

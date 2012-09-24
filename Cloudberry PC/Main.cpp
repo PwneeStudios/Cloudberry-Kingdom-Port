@@ -26,7 +26,5 @@ int main( int argc, char *argv[] )
 	MyGame game;
 	Core core( game );
 
-	core.Run();
-
-	return 0;
+	return core.Run();
 }
