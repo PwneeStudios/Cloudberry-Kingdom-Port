@@ -8,6 +8,11 @@
 *.map
 *.rpx
 *.user
+*.obj
+*.tlog
+*.idb
+*.pdb
+*.lastbuildstate
 Debug/
 Release/
 */Debug/
