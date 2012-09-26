@@ -3,6 +3,8 @@
 	-object_dir=objs\Cloudberry_Kingdom
 	-o Cloudberry_Kingdom.elf
 	-lCore.a
+	-lgx2.a
+	-lgx2spark.a
 tgt\cafe_libs.gpj
 tgt\eppc.Cafe.ld
 Main.cpp

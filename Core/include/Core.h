@@ -15,6 +15,10 @@ class Core : public Singleton< Core >
 	/// The game.
 	GameLoop &game_;
 
+	// Components.
+
+	QuadDrawer *qd_;
+
 private:
 
 	/// No copying.
@@ -36,6 +40,14 @@ public:
 	/// Exit application.
 	void Exit();
 
+	// Accessors to components.
+	
+	QuadDrawer *GetQuadDrawer()
+	{
+		assert( qd_ );
+		return qd_;
+	}
+
 	/// Get core singleton.
 	static Core &GetSingleton();
 
@@ -43,5 +55,8 @@ public:
 
 /// The core! 
 #define CORE Core::GetSingleton()
+
+/// Drawer of quads.
+#define QUAD_DRAWER CORE.GetQuadDrawer()
 
 #endif

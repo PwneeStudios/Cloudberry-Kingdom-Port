@@ -9,6 +9,9 @@
 class Core;
 class GameLoop;
 class QuadDrawer;
+struct SimpleQuad;
 template< class T > class Singleton;
+class Vector2;
+class Vector4;
 
 #endif

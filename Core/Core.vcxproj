@@ -16,10 +16,17 @@
     <ClInclude Include="include\ForwardDeclarations.h" />
     <ClInclude Include="include\GameLoop.h" />
     <ClInclude Include="include\Graphics\QuadDrawer.h" />
+    <ClInclude Include="include\Graphics\QuadDrawerPc.h" />
+    <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />
+    <ClInclude Include="include\Graphics\Types.h" />
+    <ClInclude Include="include\Math\Vectors.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp" />
-    <ClCompile Include="src\Graphics\QuadDrawer.cpp" />
+    <ClCompile Include="src\Graphics\QuadDrawerPc.cpp" />
+    <ClCompile Include="src\Graphics\QuadDrawerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>

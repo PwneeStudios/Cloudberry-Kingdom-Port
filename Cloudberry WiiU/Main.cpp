@@ -11,7 +11,7 @@ public:
 
 	void Update()
 	{
-		OSReport( "Hello, world!\n" );
+		OSReport( "Hello, Cloudberry Kingdom!\n" );
 		CORE.Exit();
 	}
 

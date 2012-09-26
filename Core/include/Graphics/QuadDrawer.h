@@ -1,30 +1,52 @@
 #ifndef _QUAD_DRAWER_H_
 #define _QUAD_DRAWER_H_
 
-#include <Architecture/Singleton.h>
+#include <ForwardDeclarations.h>
+
+// Pick the implementation we want to use.
+#ifdef CAFE
+	#include "QuadDrawerWiiU.h"
+#else
+	#include "QuadDrawerPc.h"
+#endif
 
 /**
  * Drawer of quads.
  */
-class QuadDrawer : public Singleton< QuadDrawer >
+class QuadDrawer
 {
+
+	/// IMPL from the PIMPL.
+#ifdef CAFE
+	QuadDrawerWiiU impl_;
+#else
+	QuadDrawerPc impl_;
+#endif
 
 private:
 
 	/// No copying.
-	QuadDrawer( const QuadDrawer & );
+	QuadDrawer( const QuadDrawer & ) { }
 
 	/// No assignment.
-	QuadDrawer &operator = ( const QuadDrawer & );
+	QuadDrawer &operator = ( const QuadDrawer & ) { return *this; }
 
 public:
 
-	QuadDrawer();
-	~QuadDrawer();
+	QuadDrawer() { }
+	~QuadDrawer() { }
 
-	/// Get quad drawer singleton.
-	static QuadDrawer &GetSingleton();
+	/// Draw a simple quad.
+	/**
+	 * @param quad Quad to draw.
+	 */
+	void Draw( const SimpleQuad &quad )
+	{
+		impl_.Draw( quad );
+	}
 
 };
+
+
 
 #endif
