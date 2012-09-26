@@ -33,7 +33,7 @@ public:
 
 	/// Run application.
 	/**
-	 * @return 1 on success and 0 on failure.
+	 * @return 0 on success and 1 on failure.
 	 */
 	int Run();
 

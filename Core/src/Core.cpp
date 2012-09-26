@@ -10,6 +10,7 @@
 #endif
 
 #ifdef CAFE
+	#include <cafe/demo.h>
 	#include <cafe/gx2.h>
 	#include <cafe/os.h>
 #endif
@@ -30,41 +31,6 @@ Core &Core::operator = ( const Core &rhs )
 {
 	return *this;
 }
-
-#ifdef CAFE
-
-#define MAKE_CASE( def ) \
-	case def: return #def;
-
-static const char *GX2TVScanModeToString( GX2TVScanMode mode )
-{
-	switch( mode )
-	{
-	MAKE_CASE( GX2_TV_SCAN_MODE_NONE ) 
-	MAKE_CASE( GX2_TV_SCAN_MODE_576I )
-	MAKE_CASE( GX2_TV_SCAN_MODE_480I )
-	MAKE_CASE( GX2_TV_SCAN_MODE_480P )
-	MAKE_CASE( GX2_TV_SCAN_MODE_720P )
-	MAKE_CASE( GX2_TV_SCAN_MODE_RESERVED )
-	MAKE_CASE( GX2_TV_SCAN_MODE_1080I )
-	MAKE_CASE( GX2_TV_SCAN_MODE_1080P )
-	}
-
-	return "GX2_TV_SCAN_MODE_OH_SHIT";
-}
-
-static const char *GX2AspectRatioToString( GX2AspectRatio aspect )
-{
-	switch( aspect )
-	{
-	MAKE_CASE( GX2_ASPECT_RATIO_4_BY_3 )
-	MAKE_CASE( GX2_ASPECT_RATIO_16_BY_9 )
-	}
-
-	return "GX2_ASPECT_RATIO_OH_SHIT";
-}
-
-#endif
 
 Core::Core( GameLoop &game ) :
 	running_( false ),
@@ -90,16 +56,9 @@ Core::Core( GameLoop &game ) :
 #endif
 
 #ifdef CAFE
-#ifdef _DEBUG
-	GX2DebugCaptureInit( NULL );
-
-	GX2TVScanMode scanMode = GX2GetSystemTVScanMode();
-	GX2AspectRatio aspect = GX2GetSystemTVAspectRatio();
-	
-	OSReport( "scanMode = %s\naspect = %s\n",
-		GX2TVScanModeToString( scanMode ),
-		GX2AspectRatioToString( aspect ) );
-#endif
+	DEMOInit();
+	DEMOTestInit( 0, 0 );
+	DEMOGfxInit( 0, 0 );
 #endif
 
 	qd_ = new QuadDrawer;
@@ -110,7 +69,9 @@ Core::~Core()
 	delete qd_;
 
 #ifdef CAFE
-
+	DEMOTestShutdown();
+	DEMOGfxShutdown();
+	DEMOShutdown();
 #endif
 
 #ifndef CAFE
@@ -127,6 +88,11 @@ int Core::Run()
 	while( running_ )
 	{
 #ifdef CAFE
+		DEMOGfxBeforeRender();
+		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 1 );
+		GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
+
+		DEMOGfxSetContextState();
 #endif
 
 #ifndef CAFE
@@ -135,7 +101,8 @@ int Core::Run()
 
 		game_.Update();
 
-#ifndef CAFE
+#ifdef CAFE
+		DEMOGfxDoneRender();
 #endif
 
 #ifndef CAFE
