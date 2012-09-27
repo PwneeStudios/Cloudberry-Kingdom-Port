@@ -43,6 +43,7 @@ public:
 
 class Vector4
 {
+
 	float x_;
 	float y_;
 	float z_;
@@ -56,6 +57,17 @@ public:
 	Vector4( float x ) : x_( x ), y_( x ), z_( x ), w_( x ) { }
 	Vector4( float x, float y, float z, float w ) :
 		x_( x ), y_( y ), z_( z ), w_( w ) { }
+
+	float x() const { return x_; }
+	float y() const { return y_; }
+	float z() const { return z_; }
+	float w() const { return w_; }
+
+	float r() const { return x_; }
+	float g() const { return y_; }
+	float b() const { return z_; }
+	float a() const { return w_; }
+
 };
 
 #endif

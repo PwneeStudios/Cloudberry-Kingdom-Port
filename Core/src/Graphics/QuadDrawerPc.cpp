@@ -1,36 +1,206 @@
 #include <Graphics/QuadDrawerPc.h>
 
 #include <cassert>
+#include <cstring>
+#include <fstream>
 #include <GL/glew.h>
 #include <Graphics/Types.h>
+#include <sstream>
+#include <string>
 
-QuadDrawerPc::QuadDrawerPc()
+/// Maximum number of displayable quads.
+#define MAX_QUADS 1000
+
+struct QuadVert
 {
-	glShadeModel( GL_SMOOTH );
-	glClearColor( 0, 0, 0, 0 );
+	Vector2 Position;
+	Vector2 TexCoord;
+	Vector4 Color;
+};
+
+struct QuadDrawerInternal
+{
+	GLuint QuadBuffer[2];
+	GLuint CurrentBuffer;
+	GLuint NumElements;
+	QuadVert *Vertices;
+
+	GLuint Program;
+	GLuint VertexAttrib;
+	GLuint ColorAttrib;
+
+	bool skip;
+};
+
+std::string ReadFile( const std::string &path )
+{
+	using namespace std;
+	stringstream ss;
+	fstream in( path.c_str(), ios_base::in | ios_base::binary );
+
+	string line;
+	while( getline( in, line ) )
+		ss << line << endl;
+
+	return ss.str();
+}
+
+GLuint CreateShader( GLenum type, const std::string &src )
+{
+	GLuint shader = glCreateShader( type );
+
+	const GLchar *source = src.c_str();
+	glShaderSource( shader, 1, &source, NULL );
+
+	glCompileShader( shader );
+
+	GLint param;
+	glGetShaderiv( shader, GL_COMPILE_STATUS, &param );
+	if( param == GL_FALSE )
+	{
+		glGetShaderiv( shader, GL_INFO_LOG_LENGTH, &param );
+		GLchar *errBuf = new GLchar[ param + 1 ];
+		glGetShaderInfoLog( shader, param, NULL, errBuf );
+		errBuf[ param ] = '\0';
+		
+		assert( !errBuf );
+		delete errBuf;
+
+		glDeleteShader( shader );
+		return 0;
+	}
+
+	return shader;
+}
+
+GLuint CreateProgram()
+{
+	using namespace std;
+
+	string vsSource = ReadFile( "Content/Shaders/screen.vs" );
+	string psSource = ReadFile( "Content/Shaders/screen.ps" );
+
+	GLuint vs = CreateShader( GL_VERTEX_SHADER, vsSource );
+	GLuint ps = CreateShader( GL_FRAGMENT_SHADER, psSource );
+
+	if( vs != 0 && ps != 0 )
+	{
+		GLuint program = glCreateProgram();
+
+		glAttachShader( program, vs );
+		glAttachShader( program, ps );
+		glLinkProgram( program );
+
+		GLint param;
+		glGetProgramiv( program, GL_LINK_STATUS, &param );
+		if( param == GL_FALSE )
+		{
+			glGetProgramiv( program, GL_INFO_LOG_LENGTH, &param );
+			GLchar *errBuf = new GLchar[ param + 1 ];
+			glGetProgramInfoLog( program, param, NULL, errBuf );
+			errBuf[ param ] = '\0';
+
+			assert( !errBuf );
+			delete errBuf;
+
+			glDeleteProgram( program );
+			return 0;
+		}
+
+		glDeleteShader( vs );
+		glDeleteShader( ps );
+		return program;
+	}
+
+	return 0;
+}
+
+QuadDrawerPc::QuadDrawerPc() :
+	internal_( new QuadDrawerInternal )
+{
+	memset( internal_, 0, sizeof( QuadDrawerInternal ) );
+
+	glGenBuffers( 2, internal_->QuadBuffer );
+
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ 0 ] );
+	glBufferData( GL_ARRAY_BUFFER, MAX_QUADS * 4 * sizeof( QuadVert ), 0, GL_DYNAMIC_DRAW );
+	internal_->Vertices = reinterpret_cast< QuadVert * >(
+		glMapBuffer( GL_ARRAY_BUFFER, GL_WRITE_ONLY )
+	);
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ 1 ] );
+	glBufferData( GL_ARRAY_BUFFER, MAX_QUADS * 4 * sizeof( QuadVert ), 0, GL_DYNAMIC_DRAW );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	internal_->Program = CreateProgram();
+
+	internal_->VertexAttrib = glGetAttribLocation( internal_->Program, "a_position" );
+	internal_->ColorAttrib = glGetAttribLocation( internal_->Program, "a_color" );
+
+	glClearColor( 0, 0, 0, 1 );
 	glClearDepth( 1 );
 	glEnable( GL_DEPTH_TEST );
 	glDepthFunc( GL_LEQUAL );
 	glHint( GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST );
+	glDisable( GL_CULL_FACE );
+	glViewport( 0, 0, 1280, 720 );
 
-	glViewport( 0, 0, 1024, 576 );
-
-	glMatrixMode( GL_PROJECTION );
-	glLoadIdentity();
-	glOrtho( 0, 1024, 576, 0, 0, 1 );
-	glMatrixMode( GL_MODELVIEW );
-	glLoadIdentity();
 }
 
 QuadDrawerPc::~QuadDrawerPc()
 {
+	glDeleteProgram( internal_->Program );
+
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
+	glUnmapBuffer( GL_ARRAY_BUFFER );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	glDeleteBuffers( 2, internal_->QuadBuffer );
+
+	delete internal_;
 }
 
 void QuadDrawerPc::Draw( const SimpleQuad &quad )
 {
-	glBegin( GL_QUADS );
-	glColor4fv( reinterpret_cast< const GLfloat * >( &quad.Color ) );
+	if( internal_->NumElements >= MAX_QUADS * 4 )
+		return;
+
 	for( int i = 0; i < 4; ++i )
-		glVertex2fv( reinterpret_cast< const GLfloat * >( &quad.V[ i ] ) );
-	glEnd();
+	{
+		internal_->Vertices->Position = quad.V[ i ];
+		internal_->Vertices->Color = quad.Color;
+		++internal_->Vertices;
+	}
+
+	internal_->NumElements += 4;
+}
+
+void QuadDrawerPc::Flush()
+{
+	if( internal_->NumElements == 0 )
+		return;
+
+	glUseProgram( internal_->Program );
+
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
+	glUnmapBuffer( GL_ARRAY_BUFFER );
+	glEnableVertexAttribArray( internal_->VertexAttrib );
+	glEnableVertexAttribArray( internal_->ColorAttrib );
+	glVertexAttribPointer( internal_->VertexAttrib, 2, GL_FLOAT, GL_FALSE,
+		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Position ) ) );
+	glVertexAttribPointer( internal_->ColorAttrib, 4, GL_FLOAT, GL_FALSE,
+		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	glDrawArrays( GL_QUADS, 0, internal_->NumElements );
+
+	glDisableVertexAttribArray( internal_->ColorAttrib );
+	glDisableVertexAttribArray( internal_->VertexAttrib );
+
+	internal_->NumElements = 0;
+	internal_->CurrentBuffer = 1 - internal_->CurrentBuffer;
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
+	internal_->Vertices = reinterpret_cast< QuadVert * >(
+		glMapBuffer( GL_ARRAY_BUFFER, GL_WRITE_ONLY )
+	);
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 }

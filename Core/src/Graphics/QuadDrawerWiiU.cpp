@@ -125,3 +125,7 @@ void QuadDrawerWiiU::Draw( const SimpleQuad &quad )
 
 	GX2Draw( GX2_PRIMITIVE_QUADS, TRIANGLE_VERTEX_NUM );
 }
+
+void QuadDrawerWiiU::Flush()
+{
+}

@@ -22,7 +22,7 @@ public:
 			quad.Color = Vector4( ( float )rand() / RAND_MAX,
 				( float )rand() / RAND_MAX,
 				( float )rand() / RAND_MAX,
-				( float )rand() / RAND_MAX
+				1
 			);
 
 			quad.V[ 0 ] = Vector2( x, y );

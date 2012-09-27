@@ -9,6 +9,9 @@
 class QuadDrawerPc
 {
 
+	// Internal bits.
+	struct QuadDrawerInternal *internal_;
+
 private:
 
 	/// No copying.
@@ -26,6 +29,11 @@ public:
 	 * @see QuadDrawer::Draw
 	 */
 	void Draw( const SimpleQuad &quad );
+
+	/**
+	 * @see QuadDrawer::Flush
+	 */
+	void Flush();
 
 };
 

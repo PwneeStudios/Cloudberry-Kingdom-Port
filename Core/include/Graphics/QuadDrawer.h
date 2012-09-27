@@ -45,6 +45,12 @@ public:
 		impl_.Draw( quad );
 	}
 
+	/// Flush any quads that need drawing.
+	void Flush()
+	{
+		impl_.Flush();
+	}
+
 };
 
 

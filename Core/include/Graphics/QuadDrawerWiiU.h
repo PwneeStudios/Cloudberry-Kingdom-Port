@@ -8,6 +8,7 @@
  */
 class QuadDrawerWiiU
 {
+
 	// Internal bits that we don't want to expose.
 	struct QuadDrawerInternal *internal_;
 
@@ -28,6 +29,12 @@ public:
 	 * @see QuadDrawer::Draw
 	 */
 	void Draw( const SimpleQuad &quad );
+
+	/**
+	 * @see QuadDrawer::Flush
+	 */
+	void Flush();
+
 };
 
 #endif
