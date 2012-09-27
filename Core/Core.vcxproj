@@ -13,6 +13,8 @@
   <ItemGroup>
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Core.h" />
+    <ClInclude Include="include\CorePc.h" />
+    <ClInclude Include="include\CoreWiiU.h" />
     <ClInclude Include="include\ForwardDeclarations.h" />
     <ClInclude Include="include\GameLoop.h" />
     <ClInclude Include="include\Graphics\QuadDrawer.h" />
@@ -23,6 +25,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp" />
+    <ClCompile Include="src\CorePc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerPc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

@@ -19,11 +19,14 @@ public:
 	Vector2( float x, float y ) : x_( x ), y_( y ) { }
 	Vector2( float x ) : x_( x ), y_( x ) { }
 
+	float x() const { return x_; }
+	float y() const { return y_; }
+
 	float LengthSq() const { return x_ * x_ + y_ * y_; }
 	
 	float Length() const { return sqrtf( LengthSq() ); }
 	
-	float Normalize()
+	void Normalize()
 	{
 		float length = Length();
 		x_ /= length;

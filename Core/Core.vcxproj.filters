@@ -42,6 +42,12 @@
     <ClInclude Include="include\Graphics\Types.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\CoreWiiU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\CorePc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -51,6 +57,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Graphics\QuadDrawerWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CorePc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

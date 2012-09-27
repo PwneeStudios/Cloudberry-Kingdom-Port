@@ -8,6 +8,8 @@
  */
 class QuadDrawerWiiU
 {
+	// Internal bits that we don't want to expose.
+	struct QuadDrawerInternal *internal_;
 
 private:
 

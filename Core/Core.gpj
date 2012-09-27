@@ -2,4 +2,5 @@
 [Library]
 	-object_dir=objs\Core
 src\Core.cpp
+src\CoreWiiU.cpp
 src\Graphics\QuadDrawerWiiU.cpp

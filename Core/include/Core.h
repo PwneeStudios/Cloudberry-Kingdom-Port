@@ -4,20 +4,28 @@
 #include "Architecture/Singleton.h"
 #include "ForwardDeclarations.h"
 
+// Pick implementation.
+#ifdef CAFE
+	#include "CoreWiiU.h"
+#else
+	#include "CorePc.h"
+#endif
+
 /**
  * The alpha and the omega.
  */
 class Core : public Singleton< Core >
 {
-	/// Is the game currently running?
-	bool running_;
 
-	/// The game.
+	/// Core implementation.
+#ifdef CAFE
+	CoreWiiU impl_;
+#else
+	CorePc impl_;
+#endif
+
+	/// Reference to game for later use.
 	GameLoop &game_;
-
-	// Components.
-
-	QuadDrawer *qd_;
 
 private:
 
@@ -28,6 +36,7 @@ private:
 	Core &operator = ( const Core & );
 
 public:
+
 	Core( GameLoop &game );
 	~Core();
 
@@ -35,17 +44,22 @@ public:
 	/**
 	 * @return 0 on success and 1 on failure.
 	 */
-	int Run();
+	int Run()
+	{
+		return impl_.Run();
+	}
 
 	/// Exit application.
-	void Exit();
+	void Exit()
+	{
+		impl_.Exit();
+	}
 
 	// Accessors to components.
 	
 	QuadDrawer *GetQuadDrawer()
 	{
-		assert( qd_ );
-		return qd_;
+		return impl_.GetQuadDrawer();
 	}
 
 	/// Get core singleton.
