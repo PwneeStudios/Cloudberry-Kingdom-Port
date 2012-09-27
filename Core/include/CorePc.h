@@ -21,7 +21,7 @@ class CorePc
 
 private:
 
-	/// No copyig.
+	/// No copying.
 	CorePc( const CorePc & );
 
 	/// No assignment.
@@ -45,7 +45,6 @@ public:
 	// Accessors to components.
 	QuadDrawer *GetQuadDrawer()
 	{
-		assert( qd_ );
 		return qd_;
 	}
 
