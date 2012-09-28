@@ -6,7 +6,17 @@
 #include <cafe/demo/demoGfxTypes.h>
 #include <Graphics/Types.h>
 
+/// Maximum number of displayable quads.
+#define MAX_QUADS 1024
+
 static const char *const GSH_SIMPLE_SHADER_FILE = "Shaders/simple.gsh";
+
+struct QuadVert
+{
+	Vector2 Position;
+	Vector2 TexCoord;
+	Vector4 Color;
+};
 
 struct AttribBuffer
 {
@@ -84,12 +94,28 @@ struct QuadDrawerInternal
 {
 	DEMOGfxShader SimpleShader;
 	AttribBuffer TriangleBuffer;
+	GX2RBuffer QuadBuffer;
+	GX2RBuffer IndexBuffer;
+
+	QuadVert *Vertices;
+	u32 *Indices;
+	u32 NumElements;
 };
 
 QuadDrawerWiiU::QuadDrawerWiiU() :
 	internal_( new QuadDrawerInternal )
 {
-	GX2UTInitBufferStruct( &internal_->TriangleBuffer.PositionBuffer, GX2R_BIND_VERTEX_BUFFER
+	GX2UTCreateBuffer( &internal_->QuadBuffer, GX2R_BIND_VERTEX_BUFFER
+		| GX2R_USAGE_CPU_WRITE | GX2R_USAGE_GPU_READ, sizeof( QuadVert ),
+		MAX_QUADS * 4 );
+	GX2RSetBufferName( &internal_->QuadBuffer, "QuadBuffer" );
+
+	GX2UTCreateBuffer( &internal_->IndexBuffer, GX2R_BIND_INDEX_BUFFER
+		| GX2R_USAGE_CPU_WRITE | GX2R_USAGE_GPU_READ, sizeof( u32 ),
+		MAX_QUADS * 6 );
+	GX2RSetBufferName( &internal_->IndexBuffer, "IndexBuffer" );
+
+	/*GX2UTInitBufferStruct( &internal_->TriangleBuffer.PositionBuffer, GX2R_BIND_VERTEX_BUFFER
 		| GX2R_USAGE_CPU_WRITE | GX2R_USAGE_GPU_READ, sizeof( TRIANGLE_POSITION_DATA )
 		/ TRIANGLE_VERTEX_NUM, TRIANGLE_VERTEX_NUM );
 	GX2RSetBufferName( &internal_->TriangleBuffer.PositionBuffer, "TRIANGLE_POSITION_DATA" );
@@ -100,13 +126,17 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 	GX2RSetBufferName( &internal_->TriangleBuffer.ColorBuffer, "TRIANGLE_COLOR_DATA" );
 
 	InitAttribData( &internal_->TriangleBuffer );
-	InitShader( &internal_->SimpleShader, &internal_->TriangleBuffer );
+	InitShader( &internal_->SimpleShader, &internal_->TriangleBuffer );*/
 }
 
 QuadDrawerWiiU::~QuadDrawerWiiU()
 {
 	DEMOGfxFreeShaders( &internal_->SimpleShader );
-	FreeAttribData( &internal_->TriangleBuffer );
+
+	GX2RDestroyBuffer( &internal_->QuadBuffer );
+	GX2RDestroyBuffer( &internal_->IndexBuffer );
+
+	//FreeAttribData( &internal_->TriangleBuffer );
 
 	delete internal_;
 }

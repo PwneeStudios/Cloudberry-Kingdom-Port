@@ -11,7 +11,7 @@ public:
 
 	void Update()
 	{
-		for( int i = 0; i < 512; ++i )
+		for( int i = 0; i < 1024; ++i )
 		{
 			int x = rand() % 1024;
 			int y = rand() % 576;

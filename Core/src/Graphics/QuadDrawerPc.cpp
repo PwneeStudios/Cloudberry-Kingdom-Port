@@ -9,7 +9,7 @@
 #include <string>
 
 /// Maximum number of displayable quads.
-#define MAX_QUADS 1000
+#define MAX_QUADS 1024
 
 struct QuadVert
 {
@@ -28,10 +28,13 @@ struct QuadDrawerInternal
 	GLuint Program;
 	GLuint VertexAttrib;
 	GLuint ColorAttrib;
-
-	bool skip;
 };
 
+/// Read a whole file into a string.
+/**
+ * @param path Path to file.
+ * @return String containing file contents.
+ */
 std::string ReadFile( const std::string &path )
 {
 	using namespace std;
@@ -45,6 +48,12 @@ std::string ReadFile( const std::string &path )
 	return ss.str();
 }
 
+/// Create a shader.
+/**
+ * @param type Shader type.
+ * @param src Shader source code.
+ * @return Shader identifier or 0 in case of failure.
+ */
 GLuint CreateShader( GLenum type, const std::string &src )
 {
 	GLuint shader = glCreateShader( type );
@@ -73,6 +82,10 @@ GLuint CreateShader( GLenum type, const std::string &src )
 	return shader;
 }
 
+/// Create screen program.
+/**
+ * @return Identifier of screen space drawing program or 0 in case of failure.
+ */
 GLuint CreateProgram()
 {
 	using namespace std;
