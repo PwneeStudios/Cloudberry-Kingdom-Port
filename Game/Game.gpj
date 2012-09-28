@@ -1,3 +1,4 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Game
+src\CloudberryKingdom.cpp
