@@ -1,4 +1,15 @@
-#include <cafe.h>
+#include <CloudberryKingdom.h>
+#include <Core.h>
+
+int main( int argc, char *argv[] )
+{
+	CloudberryKingdom game;
+	Core core( game );
+
+	return core.Run();
+}
+
+/*#include <cafe.h>
 #include <cafe/demo.h>
 
 #include <Core.h>
@@ -32,23 +43,26 @@ public:
 
 		++frames;
 
-		float x = 2.f * ( float )rand() / RAND_MAX - 1.f;
-		float y = 2.f * ( float )rand() / RAND_MAX - 1.f;
-		float w = ( float )rand() / RAND_MAX - 0.5f;
-		float h = ( float )rand() / RAND_MAX - 0.5f;
+		for( int i = 0; i < 1024; ++i )
+		{
+			int x = rand() % 1024;
+			int y = rand() % 576;
+			int w = rand() % 256;
+			int h = rand() % 144;
 
-		SimpleQuad quad;
-		quad.Color = Vector4( ( float )rand() / RAND_MAX,
-			( float )rand() / RAND_MAX,
-			( float )rand() / RAND_MAX,
-			( float )rand() / RAND_MAX
-		);
+			SimpleQuad quad;
+			quad.Color = Vector4( ( float )rand() / RAND_MAX,
+				( float )rand() / RAND_MAX,
+				( float )rand() / RAND_MAX,
+				1
+			);
 
-		quad.V[ 0 ] = Vector2( x, y );
-		quad.V[ 3 ] = Vector2( x + w, y );
-		quad.V[ 2 ] = Vector2( x + w, y + h );
-		quad.V[ 1 ] = Vector2( x, y + h );
-		QUAD_DRAWER->Draw( quad );
+			quad.V[ 0 ] = Vector2( x, y );
+			quad.V[ 3 ] = Vector2( x + w, y );
+			quad.V[ 2 ] = Vector2( x + w, y + h );
+			quad.V[ 1 ] = Vector2( x, y + h );
+			QUAD_DRAWER->Draw( quad );
+		}
 	}
 
 };
@@ -59,4 +73,4 @@ int main( int argc, char *argv[] )
 	Core core( game );
     
     return core.Run();
-}
+}*/

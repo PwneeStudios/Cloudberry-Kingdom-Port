@@ -68,6 +68,8 @@ int CoreWiiU::Run()
 
 		game_.Update();
 
+		qd_->Flush();
+
 		DEMOGfxDoneRender();
 	}
 
