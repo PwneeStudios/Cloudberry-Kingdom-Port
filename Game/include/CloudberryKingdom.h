@@ -1,0 +1,21 @@
+#ifndef _CLOUDBERRY_KINGDOM_H_
+#define _CLOUDBERRY_KINGDOM_H_
+
+#include <GameLoop.h>
+
+/**
+ * Cloudberry Kingdom game.
+ */
+class CloudberryKingdom : public GameLoop
+{
+	
+public:
+
+	/**
+	 * @see GameLoop::Update
+	 */
+	void Update();
+
+};
+
+#endif
