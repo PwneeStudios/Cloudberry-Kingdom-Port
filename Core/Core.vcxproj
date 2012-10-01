@@ -11,7 +11,22 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\zlib-1.2.7\crc32.h" />
+    <ClInclude Include="..\zlib-1.2.7\deflate.h" />
+    <ClInclude Include="..\zlib-1.2.7\gzguts.h" />
+    <ClInclude Include="..\zlib-1.2.7\inffast.h" />
+    <ClInclude Include="..\zlib-1.2.7\inffixed.h" />
+    <ClInclude Include="..\zlib-1.2.7\inflate.h" />
+    <ClInclude Include="..\zlib-1.2.7\inftrees.h" />
+    <ClInclude Include="..\zlib-1.2.7\trees.h" />
+    <ClInclude Include="..\zlib-1.2.7\zconf.h" />
+    <ClInclude Include="..\zlib-1.2.7\zlib.h" />
+    <ClInclude Include="..\zlib-1.2.7\zutil.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
+    <ClInclude Include="include\Content\Resource.h" />
+    <ClInclude Include="include\Content\ResourcePtr.h" />
+    <ClInclude Include="include\Content\Texture.h" />
+    <ClInclude Include="include\Content\Wad.h" />
     <ClInclude Include="include\Core.h" />
     <ClInclude Include="include\CorePc.h" />
     <ClInclude Include="include\CoreWiiU.h" />
@@ -24,6 +39,23 @@
     <ClInclude Include="include\Math\Vectors.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\zlib-1.2.7\adler32.c" />
+    <ClCompile Include="..\zlib-1.2.7\compress.c" />
+    <ClCompile Include="..\zlib-1.2.7\crc32.c" />
+    <ClCompile Include="..\zlib-1.2.7\deflate.c" />
+    <ClCompile Include="..\zlib-1.2.7\gzclose.c" />
+    <ClCompile Include="..\zlib-1.2.7\gzlib.c" />
+    <ClCompile Include="..\zlib-1.2.7\gzread.c" />
+    <ClCompile Include="..\zlib-1.2.7\gzwrite.c" />
+    <ClCompile Include="..\zlib-1.2.7\infback.c" />
+    <ClCompile Include="..\zlib-1.2.7\inffast.c" />
+    <ClCompile Include="..\zlib-1.2.7\inflate.c" />
+    <ClCompile Include="..\zlib-1.2.7\inftrees.c" />
+    <ClCompile Include="..\zlib-1.2.7\trees.c" />
+    <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
+    <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Content\Texture.cpp" />
+    <ClCompile Include="src\Content\Wad.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\CorePc.cpp" />
     <ClCompile Include="src\CoreWiiU.cpp">
@@ -64,10 +96,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

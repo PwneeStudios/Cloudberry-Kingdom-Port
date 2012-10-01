@@ -26,12 +26,12 @@ public:
 	~QuadDrawerPc();
 
 	/**
-	 * @see QuadDrawer::Draw
+	 * @see QuadDrawer::Draw()
 	 */
 	void Draw( const SimpleQuad &quad );
 
 	/**
-	 * @see QuadDrawer::Flush
+	 * @see QuadDrawer::Flush()
 	 */
 	void Flush();
 
