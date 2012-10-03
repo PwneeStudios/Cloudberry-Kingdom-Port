@@ -56,6 +56,7 @@ class ResourcePtr
 
 public:
 
+	ResourcePtr() : holder_( 0 ) { } 
 	explicit ResourcePtr( ResourceHolder *holder ) :
 		holder_( holder ) { }
 	ResourcePtr( const ResourceHolder &holder ) :

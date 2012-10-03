@@ -36,6 +36,8 @@ void CloudberryKingdom::Update()
 		quad.T[ 1 ] = Vector2( 0, 1 );
 		quad.T[ 2 ] = Vector2( 1, 1 );
 		quad.T[ 3 ] = Vector2( 1, 0 );
+
+		quad.Diffuse = texture;
 		QUAD_DRAWER->Draw( quad );
 #pragma warning( pop )
 	}

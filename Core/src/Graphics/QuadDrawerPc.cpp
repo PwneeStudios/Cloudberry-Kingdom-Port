@@ -1,6 +1,7 @@
 #include <Graphics/QuadDrawerPc.h>
 
 #include <cassert>
+#include <Content/Texture.h>
 #include <cstring>
 #include <fstream>
 #include <GL/glew.h>
@@ -29,6 +30,9 @@ struct QuadDrawerInternal
 	GLuint VertexAttrib;
 	GLuint TexCoordAttrib;
 	GLuint ColorAttrib;
+	GLuint TexUniform;
+
+	ResourcePtr< Texture > Tex;
 };
 
 /// Read a whole file into a string.
@@ -150,6 +154,7 @@ QuadDrawerPc::QuadDrawerPc() :
 	internal_->VertexAttrib = glGetAttribLocation( internal_->Program, "a_position" );
 	internal_->TexCoordAttrib = glGetAttribLocation( internal_->Program, "a_texcoord" );
 	internal_->ColorAttrib = glGetAttribLocation( internal_->Program, "a_color" );
+	internal_->TexUniform = glGetUniformLocation( internal_->Program, "u_texture" );
 
 	glClearColor( 0, 0, 0, 1 );
 	glClearDepth( 1 );
@@ -185,6 +190,7 @@ void QuadDrawerPc::Draw( const SimpleQuad &quad )
 		internal_->Vertices->TexCoord = quad.T[ i ];
 		internal_->Vertices->Color = quad.Color;
 		++internal_->Vertices;
+		internal_->Tex = quad.Diffuse;
 	}
 
 	internal_->NumElements += 4;
@@ -196,16 +202,23 @@ void QuadDrawerPc::Flush()
 		return;
 
 	glUseProgram( internal_->Program );
+	glUniform1i( internal_->TexUniform, 0 );
 
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
 	glUnmapBuffer( GL_ARRAY_BUFFER );
 	glEnableVertexAttribArray( internal_->VertexAttrib );
+	glEnableVertexAttribArray( internal_->TexCoordAttrib );
 	glEnableVertexAttribArray( internal_->ColorAttrib );
 	glVertexAttribPointer( internal_->VertexAttrib, 2, GL_FLOAT, GL_FALSE,
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Position ) ) );
+	glVertexAttribPointer( internal_->TexCoordAttrib, 2, GL_FLOAT, GL_FALSE,
+		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, TexCoord ) ) );
 	glVertexAttribPointer( internal_->ColorAttrib, 4, GL_FLOAT, GL_FALSE,
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	glActiveTexture( GL_TEXTURE0 + 0 );
+	internal_->Tex->Activate();
 
 	glDrawArrays( GL_QUADS, 0, internal_->NumElements );
 

@@ -52,6 +52,9 @@ public:
 	 */
 	void GpuDestroy();
 
+	/// Activate the texture on the Gpu.
+	void Activate();
+
 private:
 
 	/** Load a PNG texture. */

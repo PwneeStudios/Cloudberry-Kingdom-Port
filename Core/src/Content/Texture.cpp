@@ -81,6 +81,11 @@ void Texture::GpuDestroy()
 	internal_->TextureId = 0;
 }
 
+void Texture::Activate()
+{
+	glBindTexture( GL_TEXTURE_2D, internal_->TextureId );
+}
+
 // Private.
 void Texture::loadPng()
 {
