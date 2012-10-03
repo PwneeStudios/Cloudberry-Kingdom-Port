@@ -1,5 +1,6 @@
 #include <CorePc.h>
 
+#include <Content/Wad.h>
 #include <cstdlib>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
@@ -10,7 +11,8 @@
 // Private.
 CorePc::CorePc( const CorePc &other ) :
 	game_( other.game_ ),
-	qd_( other.qd_ )
+	qd_( other.qd_ ),
+	content_( other.content_ )
 {
 
 }
@@ -24,7 +26,8 @@ CorePc &CorePc::operator = ( const CorePc &rhs )
 CorePc::CorePc( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
-	qd_( 0 )
+	qd_( 0 ),
+	content_( 0 )
 {
 	if( !glfwInit() )
 		exit( EXIT_FAILURE );
@@ -43,6 +46,8 @@ CorePc::CorePc( GameLoop &game ) :
 	}
 
 	qd_ = new QuadDrawer;
+
+	content_ = new Wad( "Content/" );
 }
 
 CorePc::~CorePc()

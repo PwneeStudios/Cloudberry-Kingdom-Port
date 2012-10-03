@@ -1,5 +1,9 @@
 #include <Content/Texture.h>
 
+#include <cassert>
+#include <fstream>
+#include <GL/glew.h>
+#include <iostream>
 #include <zlib.h>
 
 #define NTOHS( val ) \
@@ -9,15 +13,15 @@
 	( ( NTOHS( ( val ) & 0xffff ) << 16 ) | ( NTOHS( val >> 16 ) ) )
 
 /** Read a unsigned integer from a PNG file. */
-static unsigned int ReadPngUInt( File *file )
+static unsigned int ReadPngUInt( std::ifstream &file )
 {
 	unsigned int temp;
-	file->Read( &temp, sizeof( temp ) );
+	file.read( reinterpret_cast< char * >( &temp ), sizeof( unsigned int ) );
 	return NTOHL( temp );
 }
 
 /** Read an integer from a PNG file. */
-static int ReadPngInt( File *file )
+static int ReadPngInt( std::ifstream &file )
 {
 	return static_cast< int >( ReadPngUInt( file ) ) ;
 }
@@ -25,17 +29,68 @@ static int ReadPngInt( File *file )
 #undef NTOHS
 #undef NTOHL
 
+struct TextureInternal
+{
+	GLuint TextureId;
+};
+
+Texture::Texture() :
+	width_( 0 ),
+	height_( 0 ),
+	internal_( new TextureInternal )
+{
+	memset( internal_, 0, sizeof( TextureInternal ) );
+}
+
+Texture::~Texture()
+{
+	GpuDestroy();
+	Unload();
+
+	delete internal_;
+}
+
+void Texture::Load()
+{
+	loadPng();
+}
+
+void Texture::Unload()
+{
+	width_ = 0;
+	height_ = 0;
+	data_ = std::vector< char >();
+}
+
+void Texture::GpuCreate()
+{
+	glGenTextures( 1, &internal_->TextureId );
+	glBindTexture( GL_TEXTURE_2D, internal_->TextureId );
+	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA,
+		GL_RGBA, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
+	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glBindTexture( GL_TEXTURE_2D, 0 );
+}
+
+void Texture::GpuDestroy()
+{
+	glDeleteTextures( 1, &internal_->TextureId );
+	internal_->TextureId = 0;
+}
+
 // Private.
-void Resource::loadPng()
+void Texture::loadPng()
 {
 	using namespace std;
 
 	const string &path = GetPath();
-	File *file = Files::GetSingleton().Open( path );
-	if( !file )
+	std::ifstream file( path.c_str(), ios_base::in | ios_base::binary );
+	if( !file.is_open() )
 	{
-		Log::GetSignleton() << "Failed to load texture: " << path << endl;
-		setLoaded( false );
+		cout << "Failed to load texture: " << path << endl;
 		return;
 	}
 
@@ -73,7 +128,7 @@ void Resource::loadPng()
 	} ihdr;
 #pragma pack( pop )
 
-	file->Read( &signature, sizeof( signature ) );
+	file.read( reinterpret_cast< char * >( &signature ), sizeof( signature ) );
 
 	// Concatenated image data.
 	std::vector< char > data;
@@ -92,7 +147,7 @@ void Resource::loadPng()
 			ihdr.Height = ReadPngInt( file );
 			width_ = ihdr.Width;
 			height_ = ihdr.Height;
-			file->Read( &ihdr.BitDepth, 5 * sizeof( char ) );
+			file.read( reinterpret_cast< char * >( &ihdr.BitDepth ), 5 * sizeof( char ) );
 			break;
 		case 'IDAT':
 			{
@@ -100,7 +155,7 @@ void Resource::loadPng()
 				data.resize( oldSize + chunk.Length );
 
 				// Read the compressed data.
-				file->Read( &data[ oldSize ], chunk.Length );
+				file.read( &data[ oldSize ], chunk.Length );
 			}
 			break;
 		case 'IEND':
@@ -108,14 +163,12 @@ void Resource::loadPng()
 			continue;
 			break;
 		default:
-			file->Seek( chunk.Length, File::Current );
+			file.seekg( chunk.Length, ios_base::cur );
 			break;
 		}
 
 		chunk.Checksum = ReadPngUInt( file );
 	}
-
-	delete file;
 
 	if( ( ihdr.ColorType == 2 && ihdr.BitDepth == 8 )
 		|| ( ihdr.ColorType == 6 && ihdr.BitDepth == 8 ) )
@@ -124,11 +177,7 @@ void Resource::loadPng()
 			* ( ( ihdr.ColorType == 2 ) ? 3 : 4 ) + height_ );
 
 		if( !uncompress( data, buffer ) )
-		{
-			setLoaded( false );
-			setMemoryUsage( 0 );
 			return;
-		}
 
 		// Allocate enough output space for a full RGBA stream.
 		data_.resize( width_ * height_ * sizeof( unsigned int ) );
@@ -140,15 +189,10 @@ void Resource::loadPng()
 	}
 	else
 	{
-		Log::GetSignleton() << "Unknown PNG format (ColorType = " << ihdr.ColorType
+		cout << "Unknown PNG format (ColorType = " << ihdr.ColorType
 			<< ", BitDepth = " << ihdr.BitDepth << ") in: " << path << endl;
-		setLoaded( false );
-		setMemoryUsage( 0 );
 		return;
 	}
-
-	setLoaded( true );
-	setMemoryUsage( data_.size() );
 }
 
 /** Special predictor used by PNG filter type 4. */
@@ -168,10 +212,9 @@ static unsigned char Paeth( short a, short b, short c )
 }
 
 // Private.
-void Resource::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
+void Texture::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
 {
 	using namespace std;
-	using namespace Tetrahedron;
 
 	// Convert data one scan-line at a time.
 	unsigned char *lastOut = 0;
@@ -226,10 +269,9 @@ void Resource::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
 }
 
 // Private.
-void Resource::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
+void Texture::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
 {
 	using namespace std;
-	using namespace Tetrahedron;
 
 	// Convert data one scan-line at a time.
 	unsigned char *lastOut = 0;
@@ -255,7 +297,7 @@ void Resource::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
 	}
 }
 
-void Resource::unfilterPngScanline( unsigned char *out, const unsigned char *scanline,
+void Texture::unfilterPngScanline( unsigned char *out, const unsigned char *scanline,
 	const unsigned char *lastOut, char filterType, int bpp, int scanlineRowBytes )
 {
 	switch( filterType )
@@ -332,8 +374,10 @@ void Resource::unfilterPngScanline( unsigned char *out, const unsigned char *sca
 	}
 }
 
-bool Resource::uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed )
+bool Texture::uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed )
 {
+	using namespace std;
+
 	z_stream stream;
 	int err;
 
@@ -352,7 +396,7 @@ bool Resource::uncompress( const std::vector< char > &compressed, std::vector< c
 	err = inflateInit( &stream );
 	if( err != Z_OK )
 	{
-		Log::GetSignleton() << "PNG: Failed to initialize de-compressor" << endl;
+		cout << "PNG: Failed to initialize de-compressor" << endl;
 		return false;
 	}
 
@@ -364,7 +408,7 @@ bool Resource::uncompress( const std::vector< char > &compressed, std::vector< c
 		if( err == Z_NEED_DICT
 			|| ( err == Z_BUF_ERROR && stream.avail_in == 0 ) )
 		{
-			Log::GetSignleton() << "PNG: Data inflation error" << endl;
+			cout << "PNG: Data inflation error" << endl;
 			return false;
 		}
 		return false;

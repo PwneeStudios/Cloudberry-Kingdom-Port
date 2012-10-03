@@ -19,6 +19,8 @@ class CorePc
 
 	QuadDrawer *qd_;
 
+	Wad *content_;
+
 private:
 
 	/// No copying.
@@ -43,9 +45,15 @@ public:
 	void Exit();
 
 	// Accessors to components.
+	
 	QuadDrawer *GetQuadDrawer()
 	{
 		return qd_;
+	}
+
+	Wad *GetContent()
+	{
+		return content_;
 	}
 
 };

@@ -15,7 +15,22 @@
 class Texture : public Resource
 {
 
+	/// Texture width.
+	int width_;
+
+	/// Texture height.
+	int height_;
+
+	/// Texture data.
+	std::vector< char > data_;
+
+	/// Platform specific internal bits.
+	struct TextureInternal *internal_;
+
 public:
+
+	Texture();
+	~Texture();
 
 	/**
 	 * @see Resource::Load()
@@ -26,6 +41,16 @@ public:
 	 * @see Resource::Unload()
 	 */
 	void Unload();
+
+	/**
+	 * @see Resource::GpuCreate()
+	 */
+	void GpuCreate();
+
+	/**
+	 * @see Resource::GpuDestroy()
+	 */
+	void GpuDestroy();
 
 private:
 
@@ -52,6 +77,7 @@ private:
 
 	/** Uncompress one buffer into another. */
 	bool uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed );
+
 };
 
 #endif

@@ -12,6 +12,7 @@
 struct SimpleQuad
 {
 	Vector2 V[4];
+	Vector2 T[4];
 	Vector4 Color;
 };
 

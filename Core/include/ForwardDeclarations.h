@@ -14,6 +14,7 @@ class ResourceHolder;
 template< class ResourceType > class ResourcePtr;
 struct SimpleQuad;
 template< class T > class Singleton;
+class Texture;
 class Vector2;
 class Vector4;
 class Wad;

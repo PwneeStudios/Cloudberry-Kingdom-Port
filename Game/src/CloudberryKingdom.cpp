@@ -1,5 +1,7 @@
 #include <CloudberryKingdom.h>
 
+#include <Content/Texture.h>
+#include <Content/Wad.h>
 #include <Core.h>
 #include <cstdlib>
 #include <Graphics/QuadDrawer.h>
@@ -7,8 +9,12 @@
 
 void CloudberryKingdom::Update()
 {
+	ResourcePtr< Texture > texture = CONTENT->Load< Texture >( "Art/Bob_Run_0001.png" );
+
 	for( int i = 0; i < 1024; ++i )
 	{
+#pragma warning( push )
+#pragma warning( disable: 4244 )
 		int x = rand() % 1024;
 		int y = rand() % 576;
 		int w = rand() % 256;
@@ -25,6 +31,12 @@ void CloudberryKingdom::Update()
 		quad.V[ 3 ] = Vector2( x + w, y );
 		quad.V[ 2 ] = Vector2( x + w, y + h );
 		quad.V[ 1 ] = Vector2( x, y + h );
+
+		quad.T[ 0 ] = Vector2( 0, 0 );
+		quad.T[ 1 ] = Vector2( 0, 1 );
+		quad.T[ 2 ] = Vector2( 1, 1 );
+		quad.T[ 3 ] = Vector2( 1, 0 );
 		QUAD_DRAWER->Draw( quad );
+#pragma warning( pop )
 	}
 }

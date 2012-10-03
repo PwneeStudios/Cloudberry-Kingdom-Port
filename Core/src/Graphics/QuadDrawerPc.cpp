@@ -27,6 +27,7 @@ struct QuadDrawerInternal
 
 	GLuint Program;
 	GLuint VertexAttrib;
+	GLuint TexCoordAttrib;
 	GLuint ColorAttrib;
 };
 
@@ -147,6 +148,7 @@ QuadDrawerPc::QuadDrawerPc() :
 	internal_->Program = CreateProgram();
 
 	internal_->VertexAttrib = glGetAttribLocation( internal_->Program, "a_position" );
+	internal_->TexCoordAttrib = glGetAttribLocation( internal_->Program, "a_texcoord" );
 	internal_->ColorAttrib = glGetAttribLocation( internal_->Program, "a_color" );
 
 	glClearColor( 0, 0, 0, 1 );
@@ -180,6 +182,7 @@ void QuadDrawerPc::Draw( const SimpleQuad &quad )
 	for( int i = 0; i < 4; ++i )
 	{
 		internal_->Vertices->Position = quad.V[ i ];
+		internal_->Vertices->TexCoord = quad.T[ i ];
 		internal_->Vertices->Color = quad.Color;
 		++internal_->Vertices;
 	}

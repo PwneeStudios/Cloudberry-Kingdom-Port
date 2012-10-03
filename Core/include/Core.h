@@ -62,6 +62,11 @@ public:
 		return impl_.GetQuadDrawer();
 	}
 
+	Wad *GetContent()
+	{
+		return impl_.GetContent();
+	}
+
 	/// Get core singleton.
 	static Core &GetSingleton();
 
@@ -72,5 +77,8 @@ public:
 
 /// Drawer of quads.
 #define QUAD_DRAWER CORE.GetQuadDrawer()
+
+/// Assets.
+#define CONTENT CORE.GetContent()
 
 #endif

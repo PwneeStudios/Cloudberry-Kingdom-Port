@@ -27,6 +27,12 @@ public:
 	/// Unload resource data.
 	virtual void Unload() { }
 
+	/// Create GPU counterpart for the resource.
+	virtual void GpuCreate() { }
+
+	/// Destroy GPU counterpart for the resource.
+	virtual void GpuDestroy() { }
+
 	/// Set resource path.
 	/**
 	 * @param path Path to resource.
