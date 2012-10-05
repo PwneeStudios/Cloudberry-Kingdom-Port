@@ -21,6 +21,8 @@ class CorePc
 
 	Wad *content_;
 
+	Scheduler *scheduler_;
+
 private:
 
 	/// No copying.
@@ -54,6 +56,11 @@ public:
 	Wad *GetContent()
 	{
 		return content_;
+	}
+
+	Scheduler *GetScheduler()
+	{
+		return scheduler_;
 	}
 
 };

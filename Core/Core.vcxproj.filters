@@ -99,6 +99,12 @@
     <ClInclude Include="include\Datastructures\Freelist.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Architecture\Scheduler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Architecture\SchedulerPc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -165,6 +171,9 @@
       <Filter>zlib</Filter>
     </ClCompile>
     <ClCompile Include="src\Content\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Architecture\SchedulerPc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

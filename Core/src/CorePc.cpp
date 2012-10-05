@@ -1,5 +1,6 @@
 #include <CorePc.h>
 
+#include <Architecture/Scheduler.h>
 #include <Content/Wad.h>
 #include <cstdlib>
 #include <GameLoop.h>
@@ -27,7 +28,8 @@ CorePc::CorePc( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
 	qd_( 0 ),
-	content_( 0 )
+	content_( 0 ),
+	scheduler_( 0 )
 {
 	if( !glfwInit() )
 		exit( EXIT_FAILURE );
@@ -45,6 +47,8 @@ CorePc::CorePc( GameLoop &game ) :
 		exit( EXIT_FAILURE );
 	}
 
+	scheduler_ = new Scheduler;
+
 	qd_ = new QuadDrawer;
 
 	content_ = new Wad( "Content/" );
@@ -55,6 +59,8 @@ CorePc::~CorePc()
 	delete qd_;
 
 	delete content_;
+
+	delete scheduler_;
 
 	glfwTerminate();
 

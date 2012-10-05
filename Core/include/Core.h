@@ -67,6 +67,11 @@ public:
 		return impl_.GetContent();
 	}
 
+	Scheduler *GetScheduler()
+	{
+		return impl_.GetScheduler();
+	}
+
 	/// Get core singleton.
 	static Core &GetSingleton();
 
@@ -80,5 +85,8 @@ public:
 
 /// Assets.
 #define CONTENT CORE.GetContent()
+
+/// Job scheduler.
+#define SCHEDULER CORE.GetScheduler()
 
 #endif

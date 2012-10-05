@@ -22,6 +22,8 @@
     <ClInclude Include="..\zlib-1.2.7\zconf.h" />
     <ClInclude Include="..\zlib-1.2.7\zlib.h" />
     <ClInclude Include="..\zlib-1.2.7\zutil.h" />
+    <ClInclude Include="include\Architecture\Scheduler.h" />
+    <ClInclude Include="include\Architecture\SchedulerPc.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Content\Resource.h" />
     <ClInclude Include="include\Content\ResourcePtr.h" />
@@ -55,6 +57,7 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Architecture\SchedulerPc.cpp" />
     <ClCompile Include="src\Content\Texture.cpp" />
     <ClCompile Include="src\Content\Wad.cpp" />
     <ClCompile Include="src\Core.cpp" />

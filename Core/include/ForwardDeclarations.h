@@ -13,6 +13,7 @@ class QuadDrawer;
 class Resource;
 class ResourceHolder;
 template< class ResourceType > class ResourcePtr;
+class Scheduler;
 struct SimpleQuad;
 template< class T > class Singleton;
 class Texture;
