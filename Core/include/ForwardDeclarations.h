@@ -7,6 +7,7 @@
 #define _FORWARD_DECLARATIONS_H_
 
 class Core;
+template< class T, unsigned int N > class Freelist;
 class GameLoop;
 class QuadDrawer;
 class Resource;

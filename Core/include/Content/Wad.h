@@ -7,6 +7,7 @@
 #define _WAD_H_
 
 #include <ForwardDeclarations.h>
+#include <map>
 #include "ResourcePtr.h"
 #include <string>
 
@@ -16,11 +17,20 @@
 class Wad
 {
 
+	/// Map between resource names and their holders.
+	typedef std::map< std::string, ResourceHolder * > HolderMap;
+
+	/// Layer of indirection for all resources.
+	HolderMap resourceHolders_;
+
 	/// Base resource path.
 	std::string base_;
 
+	/// Fast allocator for resource holders.
+	Freelist< ResourceHolder, 128 > *holderAllocator_;
+
 	/// Texture used in place of missing textures.
-	Texture *defaultTexture_;
+	ResourceHolder *defaultTexture_;
 
 public:
 	
@@ -34,8 +44,7 @@ public:
 	template< class ResourceType >
 	ResourcePtr< ResourceType > Load( const std::string name )
 	{
-		ResourceHolder rh( load( base_ + name ) );
-		return ResourcePtr< ResourceType >( rh );
+		return ResourcePtr< ResourceType >( load( base_ + name ) );
 	}
 	
 private:
@@ -43,9 +52,9 @@ private:
 	/// Load a resource.
 	/**
 	 * @param path Resource path.
-	 * @return Pointer to resource object.
+	 * @return Pointer to resource holder object.
 	 */
-	Resource *load( const std::string &path );
+	ResourceHolder *load( const std::string &path );
 
 };
 

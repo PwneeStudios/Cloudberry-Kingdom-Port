@@ -13,6 +13,7 @@ varying vec4 v_color;
 void main()
 {
 	vec2 clipSpace = 2.0f * a_position / vec2( 1280.0f, 720.0f ) - 1.0f;
+	clipSpace.y = -clipSpace.y;
     gl_Position = vec4( clipSpace, 0, 1 );
 	
 	v_texcoord = a_texcoord;

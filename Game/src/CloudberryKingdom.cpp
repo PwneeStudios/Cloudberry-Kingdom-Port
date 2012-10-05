@@ -28,9 +28,9 @@ void CloudberryKingdom::Update()
 		);
 
 		quad.V[ 0 ] = Vector2( x, y );
-		quad.V[ 3 ] = Vector2( x + w, y );
-		quad.V[ 2 ] = Vector2( x + w, y + h );
 		quad.V[ 1 ] = Vector2( x, y + h );
+		quad.V[ 2 ] = Vector2( x + w, y + h );
+		quad.V[ 3 ] = Vector2( x + w, y );
 
 		quad.T[ 0 ] = Vector2( 0, 0 );
 		quad.T[ 1 ] = Vector2( 0, 1 );

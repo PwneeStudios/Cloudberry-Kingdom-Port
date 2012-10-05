@@ -67,7 +67,7 @@ void Texture::GpuCreate()
 	glGenTextures( 1, &internal_->TextureId );
 	glBindTexture( GL_TEXTURE_2D, internal_->TextureId );
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA,
-		GL_RGBA, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
+		GL_UNSIGNED_BYTE, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT );
@@ -96,6 +96,7 @@ void Texture::loadPng()
 	if( !file.is_open() )
 	{
 		cout << "Failed to load texture: " << path << endl;
+		setLoaded( false );
 		return;
 	}
 
@@ -182,7 +183,10 @@ void Texture::loadPng()
 			* ( ( ihdr.ColorType == 2 ) ? 3 : 4 ) + height_ );
 
 		if( !uncompress( data, buffer ) )
+		{
+			setLoaded( false );
 			return;
+		}
 
 		// Allocate enough output space for a full RGBA stream.
 		data_.resize( width_ * height_ * sizeof( unsigned int ) );
@@ -196,8 +200,11 @@ void Texture::loadPng()
 	{
 		cout << "Unknown PNG format (ColorType = " << ihdr.ColorType
 			<< ", BitDepth = " << ihdr.BitDepth << ") in: " << path << endl;
+		setLoaded( false );
 		return;
 	}
+
+	setLoaded( true );
 }
 
 /** Special predictor used by PNG filter type 4. */

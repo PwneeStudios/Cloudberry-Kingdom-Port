@@ -54,6 +54,8 @@ CorePc::~CorePc()
 {
 	delete qd_;
 
+	delete content_;
+
 	glfwTerminate();
 
 	exit( EXIT_SUCCESS );

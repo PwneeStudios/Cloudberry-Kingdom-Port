@@ -17,8 +17,12 @@ class Resource
 	/// Path to resource.
 	std::string path_;
 
+	/// Is the resource loaded?
+	bool loaded_;
+
 public:
 
+	Resource() : loaded_( false ) { }
 	virtual ~Resource() { }
 
 	/// Load resource data.
@@ -44,6 +48,20 @@ public:
 	 * @return Resource location.
 	 */
 	const std::string &GetPath() const { return path_; }
+
+	/// Is this resource loaded?
+	/**
+	 * @return True if the resource is loaded, false otherwise.
+	 */
+	bool IsLoaded() const { return loaded_; }
+
+protected:
+
+	/// Set resource loaded status.
+	/**
+	 * @param loaded Current loaded value.
+	 */
+	void setLoaded( bool loaded ) { loaded_ = loaded; }
 
 };
 
