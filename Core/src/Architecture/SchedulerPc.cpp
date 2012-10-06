@@ -1,5 +1,6 @@
 #include <Architecture/SchedulerPc.h>
 
+#include <Content/Resource.h>
 #include <Datastructures/Freelist.h>
 #include <GL/glfw.h>
 
@@ -22,10 +23,55 @@ public:
 class ResourceLoaderJob : public Job
 {
 
+	ResourceHolder *holder_;
+	Resource *resource_;
+	bool gpuCreate_;
+
+public:
+
+	ResourceLoaderJob() :
+		holder_( 0 ),
+		resource_( 0 ),
+		gpuCreate_( false )
+	{
+	}
+
+	ResourceLoaderJob( ResourceHolder *holder, Resource *resource, bool gpuCreate ) :
+		holder_( holder ),
+		resource_( resource ),
+		gpuCreate_( gpuCreate )
+	{
+	}
+
+	void Do()
+	{
+		resource_->Load();
+
+		if( resource_->IsLoaded() && gpuCreate_ )
+		{
+
+		}
+	}
+
 };
 
 class ResourceCreatorJob : public Job
 {
+
+	ResourceHolder *holder_;
+	Resource *resource_;
+
+public:
+
+	ResourceCreatorJob( ResourceHolder *holder, Resource *resource ) :
+		holder_( holder ),
+		resource_( resource )
+	{
+	}
+
+	void Do()
+	{
+	}
 
 };
 

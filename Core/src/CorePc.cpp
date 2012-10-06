@@ -34,7 +34,9 @@ CorePc::CorePc( GameLoop &game ) :
 	if( !glfwInit() )
 		exit( EXIT_FAILURE );
 
-	if( !glfwOpenWindow( 1280, 720, 0, 0, 0,
+	const int width = 1280;
+	const int height = 720;
+	if( !glfwOpenWindow( width, height, 0, 0, 0,
 		0, 16, 0, GLFW_WINDOW ) )
 	{
 		glfwTerminate();
@@ -47,7 +49,7 @@ CorePc::CorePc( GameLoop &game ) :
 		exit( EXIT_FAILURE );
 	}
 
-	scheduler_ = new Scheduler;
+	//scheduler_ = new Scheduler;
 
 	qd_ = new QuadDrawer;
 
@@ -63,8 +65,6 @@ CorePc::~CorePc()
 	delete scheduler_;
 
 	glfwTerminate();
-
-	exit( EXIT_SUCCESS );
 }
 
 int CorePc::Run()
