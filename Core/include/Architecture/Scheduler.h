@@ -61,6 +61,10 @@ public:
 		impl_.CreateResource( holder, resource );
 	}
 
+	void CreateGpuResource( ResourceHolder *holder, Resource *resource )
+	{
+		impl_.CreateGpuResource( holder, resource );
+	}
 };
 
 #endif

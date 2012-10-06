@@ -1,6 +1,8 @@
 #include <Content/Wad.h>
 
+#include <Architecture/Scheduler.h>
 #include <Content/Texture.h>
+#include <Core.h>
 #include <Datastructures/Freelist.h>
 
 Wad::Wad( const std::string &base ) :
@@ -39,18 +41,13 @@ ResourceHolder *Wad::load( const std::string &path )
 	if( i != resourceHolders_.end() )
 		return i->second;
 
+	ResourceHolder *rh = new ( holderAllocator_->Allocate() ) ResourceHolder( *defaultTexture_ );
+	
+	// Kick off a loader job.
 	Texture *texture = new Texture;
 	texture->SetPath( path );
-	texture->Load();
-	texture->GpuCreate();
+	SCHEDULER->CreateResource( rh, texture );
 
-	if( !texture->IsLoaded() )
-	{
-		delete texture;
-		return defaultTexture_;
-	}
-
-	ResourceHolder *rh = new ( holderAllocator_->Allocate() ) ResourceHolder( texture );
 	resourceHolders_[ path ] = rh;
 
 	return rh;

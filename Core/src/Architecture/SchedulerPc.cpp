@@ -1,6 +1,9 @@
 #include <Architecture/SchedulerPc.h>
 
+#include <Architecture/Scheduler.h>
 #include <Content/Resource.h>
+#include <Content/ResourcePtr.h>
+#include <Core.h>
 #include <Datastructures/Freelist.h>
 #include <GL/glfw.h>
 
@@ -20,6 +23,9 @@ public:
 
 };
 
+/**
+ * Load a resource.
+ */
 class ResourceLoaderJob : public Job
 {
 
@@ -47,14 +53,26 @@ public:
 	{
 		resource_->Load();
 
-		if( resource_->IsLoaded() && gpuCreate_ )
+		// If there is an error, clean up resource and stop.
+		if( !resource_->IsLoaded() )
 		{
-
+			delete resource_;
+			return;
 		}
+
+		// Kick off a creation job.
+		if( gpuCreate_ )
+		{
+			SCHEDULER->CreateGpuResource( holder_, resource_ );
+		}
+
 	}
 
 };
 
+/**
+ * Create a resource.
+ */
 class ResourceCreatorJob : public Job
 {
 
@@ -71,6 +89,8 @@ public:
 
 	void Do()
 	{
+		resource_->GpuCreate();
+		holder_->SetResource( resource_ );
 	}
 
 };
@@ -79,6 +99,13 @@ struct SchedulerInternal
 {
 	GLFWthread Threads[ NUM_THREADS ];
 	bool WorkersRunning;
+
+	std::list< Job * > JobQueue;
+	GLFWmutex JobQueueMutex;
+	GLFWcond JobQueueCV;
+
+	std::list< Job * > MainThreadJobQueue;
+	GLFWmutex MainThreadJobQueueMutex;
 };
 
 /// Bootstrap for worker thread.
@@ -93,6 +120,11 @@ SchedulerPc::SchedulerPc() :
 {
 	internal_->WorkersRunning = true;
 
+	internal_->JobQueueMutex = glfwCreateMutex();
+	internal_->MainThreadJobQueueMutex = glfwCreateMutex();
+
+	internal_->JobQueueCV = glfwCreateCond();
+
 	// Start up some worker threads.
 	for( int i = 0; i < NUM_THREADS; ++i )
 		internal_->Threads[ i ] = glfwCreateThread( ThreadProc, this );
@@ -102,26 +134,72 @@ SchedulerPc::~SchedulerPc()
 {
 	internal_->WorkersRunning = false;
 
+	// Wake up all the workers to force them to quit.
+	for( int i = 0; i < NUM_THREADS; ++i )
+		glfwSignalCond( internal_->JobQueueCV );
+
 	for( int i = 0; i < NUM_THREADS; ++i )
 		glfwWaitThread( internal_->Threads[ i ], GLFW_WAIT );
+
+	glfwDestroyMutex( internal_->JobQueueMutex );
+	glfwDestroyMutex( internal_->MainThreadJobQueueMutex );
+
+	glfwDestroyCond( internal_->JobQueueCV );
 
 	delete internal_;
 }
 
 void SchedulerPc::MainThread()
 {
+	glfwLockMutex( internal_->MainThreadJobQueueMutex );
+	std::list< Job * > currentJobs( internal_->MainThreadJobQueue );
+	internal_->MainThreadJobQueue.clear();
+	glfwUnlockMutex( internal_->MainThreadJobQueueMutex );
 
+	std::list< Job * >::iterator i;
+	for( i = currentJobs.begin(); i != currentJobs.end(); ++i )
+	{
+		( *i )->Do();
+		delete ( *i );
+	}
 }
 
 void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )
 {
+	glfwLockMutex( internal_->JobQueueMutex );
+	internal_->JobQueue.push_back( new ResourceLoaderJob( holder, resource, true ) );
+	glfwUnlockMutex( internal_->JobQueueMutex );
 
+	glfwSignalCond( internal_->JobQueueCV );
+}
+
+void SchedulerPc::CreateGpuResource( ResourceHolder *holder, Resource *resource )
+{
+	glfwLockMutex( internal_->MainThreadJobQueueMutex );
+	internal_->MainThreadJobQueue.push_back( new ResourceCreatorJob( holder, resource ) );
+	glfwUnlockMutex( internal_->MainThreadJobQueueMutex );
 }
 
 void SchedulerPc::WorkerThread()
 {
 	while( internal_->WorkersRunning )
 	{
-		glfwSleep( 1 );
+		glfwLockMutex( internal_->JobQueueMutex );
+		while( internal_->JobQueue.size() == 0 )
+		{
+			glfwWaitCond( internal_->JobQueueCV, internal_->JobQueueMutex, GLFW_INFINITY );
+			if( !internal_->WorkersRunning )
+			{
+				glfwUnlockMutex( internal_->JobQueueMutex );
+				return;
+			}
+		}
+
+		Job *job = internal_->JobQueue.front();
+		internal_->JobQueue.pop_front();
+		glfwUnlockMutex( internal_->JobQueueMutex );
+
+		job->Do();
+		delete job;
 	}
 }

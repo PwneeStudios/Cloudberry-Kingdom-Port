@@ -41,6 +41,12 @@ public:
 	 */
 	Resource *GetResource() const { return resource_; }
 
+	/// Set the resource for this holder.
+	/**
+	 * @param resource Pointer to new resource.
+	 */
+	void SetResource( Resource *resource ) { resource_ = resource; }
+
 };
 
 /**

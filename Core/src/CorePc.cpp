@@ -49,7 +49,7 @@ CorePc::CorePc( GameLoop &game ) :
 		exit( EXIT_FAILURE );
 	}
 
-	//scheduler_ = new Scheduler;
+	scheduler_ = new Scheduler;
 
 	qd_ = new QuadDrawer;
 
@@ -74,6 +74,8 @@ int CorePc::Run()
 	while( running_ )
 	{
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+		scheduler_->MainThread();
 
 		game_.Update();
 

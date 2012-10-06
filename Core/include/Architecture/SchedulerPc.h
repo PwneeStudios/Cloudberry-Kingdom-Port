@@ -32,8 +32,15 @@ public:
 	 */
 	void CreateResource( ResourceHolder *holder, Resource *resource );
 
+	/**
+	 * @see Scheduler::CreateGpuResource()
+	 */
+	void CreateGpuResource( ResourceHolder *holder, Resource *resource );
+
 	/// Do worker thread processing.
 	void WorkerThread();
+
+private:
 
 };
 
