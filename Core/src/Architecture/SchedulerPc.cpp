@@ -146,11 +146,23 @@ SchedulerPc::~SchedulerPc()
 
 	glfwDestroyCond( internal_->JobQueueCV );
 
+	// Delete remaining jobs.
+	std::list< Job * >::iterator i;
+	
+	for( i = internal_->JobQueue.begin(); i != internal_->JobQueue.end(); ++i )
+		delete ( *i );
+
+	for( i = internal_->MainThreadJobQueue.begin();
+		 i != internal_->MainThreadJobQueue.end(); ++i )
+		 delete ( *i );
+
 	delete internal_;
 }
 
 void SchedulerPc::MainThread()
 {
+	// Make a copy of the current job thread so no one adds extra jobs
+	// while we are processing them one by one.
 	glfwLockMutex( internal_->MainThreadJobQueueMutex );
 	std::list< Job * > currentJobs( internal_->MainThreadJobQueue );
 	internal_->MainThreadJobQueue.clear();
@@ -170,6 +182,7 @@ void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )
 	internal_->JobQueue.push_back( new ResourceLoaderJob( holder, resource, true ) );
 	glfwUnlockMutex( internal_->JobQueueMutex );
 
+	// Notify worker thread about the new job.
 	glfwSignalCond( internal_->JobQueueCV );
 }
 
@@ -185,9 +198,13 @@ void SchedulerPc::WorkerThread()
 	while( internal_->WorkersRunning )
 	{
 		glfwLockMutex( internal_->JobQueueMutex );
+
+		// Keep trying to wait on the condition variable while the job queue is empty.
 		while( internal_->JobQueue.size() == 0 )
 		{
 			glfwWaitCond( internal_->JobQueueCV, internal_->JobQueueMutex, GLFW_INFINITY );
+
+			// Check if we were awoken in order to be shut down.
 			if( !internal_->WorkersRunning )
 			{
 				glfwUnlockMutex( internal_->JobQueueMutex );

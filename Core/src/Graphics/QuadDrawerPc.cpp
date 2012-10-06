@@ -1,6 +1,7 @@
 #include <Graphics/QuadDrawerPc.h>
 
 #include <cassert>
+#include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
 #include <cstring>
 #include <fstream>
@@ -8,6 +9,7 @@
 #include <Graphics/Types.h>
 #include <sstream>
 #include <string>
+#include <vector>
 
 /// Maximum number of displayable quads.
 #define MAX_QUADS 1024
@@ -18,6 +20,15 @@ struct QuadVert
 	Vector2 TexCoord;
 	Vector4 Color;
 };
+
+struct RenderBatch
+{
+	GLuint Offset;
+	GLuint NumElements;
+	ResourcePtr< Texture > Map;
+};
+
+typedef std::vector< RenderBatch > BatchList;
 
 struct QuadDrawerInternal
 {
@@ -32,7 +43,7 @@ struct QuadDrawerInternal
 	GLuint ColorAttrib;
 	GLuint TexUniform;
 
-	ResourcePtr< Texture > Tex;
+	BatchList Batches;
 };
 
 /// Read a whole file into a string.
@@ -184,15 +195,36 @@ void QuadDrawerPc::Draw( const SimpleQuad &quad )
 	if( internal_->NumElements >= MAX_QUADS * 4 )
 		return;
 
+	RenderBatch rb;
+	rb.Map = quad.Diffuse;
+	rb.Offset = 0;
+	rb.NumElements = 4;
+
 	for( int i = 0; i < 4; ++i )
 	{
 		internal_->Vertices->Position = quad.V[ i ];
 		internal_->Vertices->TexCoord = quad.T[ i ];
 		internal_->Vertices->Color = quad.Color;
 		++internal_->Vertices;
-		internal_->Tex = quad.Diffuse;
 	}
 
+	BatchList &batches = internal_->Batches;
+	if( batches.empty() )
+		batches.push_back( rb );
+	else
+	{
+		RenderBatch &lastBatch = batches[ batches.size() - 1 ];
+
+		// If the previous batch has the same texture, expand it. Otherwise
+		// start a new batch.
+		if( lastBatch.Map == rb.Map )
+			lastBatch.NumElements += 4;
+		else
+		{
+			rb.Offset = lastBatch.Offset + lastBatch.NumElements;
+			batches.push_back( rb );
+		}
+	}
 	internal_->NumElements += 4;
 }
 
@@ -215,16 +247,23 @@ void QuadDrawerPc::Flush()
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, TexCoord ) ) );
 	glVertexAttribPointer( internal_->ColorAttrib, 4, GL_FLOAT, GL_FALSE,
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 	glActiveTexture( GL_TEXTURE0 + 0 );
-	internal_->Tex->Activate();
 
-	glDrawArrays( GL_QUADS, 0, internal_->NumElements );
+	for( size_t i = 0; i < internal_->Batches.size(); ++i )
+	{
+		RenderBatch &batch = internal_->Batches[ i ];
+		batch.Map->Activate();
+		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
+	}
+
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 	glDisableVertexAttribArray( internal_->ColorAttrib );
+	glDisableVertexAttribArray( internal_->TexCoordAttrib );
 	glDisableVertexAttribArray( internal_->VertexAttrib );
 
+	internal_->Batches.clear();
 	internal_->NumElements = 0;
 	internal_->CurrentBuffer = 1 - internal_->CurrentBuffer;
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );

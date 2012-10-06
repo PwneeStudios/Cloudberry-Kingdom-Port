@@ -65,7 +65,7 @@ public:
 	ResourcePtr() : holder_( 0 ) { } 
 	ResourcePtr( ResourceHolder *holder ) :
 		holder_( holder ) { }
-	ResourcePtr( ResourcePtr< ResourceType > &ptr ) :
+	ResourcePtr( const ResourcePtr< ResourceType > &ptr ) :
 		holder_( ptr.holder_ ) { }
 
 	ResourcePtr< ResourceType > &operator = ( const ResourcePtr< ResourceType > &ptr )
@@ -82,6 +82,11 @@ public:
 	ResourceType &operator * () const
 	{
 		return *static_cast< ResourceType * >( holder_->GetResource() );
+	}
+
+	bool operator == ( const ResourcePtr< ResourceType > &ptr )
+	{
+		return holder_ == ptr.holder_;
 	}
 
 };
