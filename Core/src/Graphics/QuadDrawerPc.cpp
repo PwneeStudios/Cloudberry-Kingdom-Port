@@ -44,6 +44,19 @@ struct QuadDrawerInternal
 	GLuint TexUniform;
 
 	BatchList Batches;
+
+	QuadDrawerInternal() :
+		CurrentBuffer( 0 ),
+		NumElements( 0 ),
+		Vertices( 0 ),
+		Program( 0 ),
+		VertexAttrib( 0 ),
+		TexCoordAttrib( 0 ),
+		ColorAttrib( 0 ),
+		TexUniform( 0 )
+	{
+
+	}
 };
 
 /// Read a whole file into a string.
@@ -147,8 +160,6 @@ GLuint CreateProgram()
 QuadDrawerPc::QuadDrawerPc() :
 	internal_( new QuadDrawerInternal )
 {
-	memset( internal_, 0, sizeof( QuadDrawerInternal ) );
-
 	glGenBuffers( 2, internal_->QuadBuffer );
 
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ 0 ] );
@@ -213,7 +224,7 @@ void QuadDrawerPc::Draw( const SimpleQuad &quad )
 		batches.push_back( rb );
 	else
 	{
-		RenderBatch &lastBatch = batches[ batches.size() - 1 ];
+		RenderBatch &lastBatch = batches.back();
 
 		// If the previous batch has the same texture, expand it. Otherwise
 		// start a new batch.
@@ -247,17 +258,17 @@ void QuadDrawerPc::Flush()
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, TexCoord ) ) );
 	glVertexAttribPointer( internal_->ColorAttrib, 4, GL_FLOAT, GL_FALSE,
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 	glActiveTexture( GL_TEXTURE0 + 0 );
 
-	for( size_t i = 0; i < internal_->Batches.size(); ++i )
+	BatchList::iterator i;
+	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
-		RenderBatch &batch = internal_->Batches[ i ];
+		RenderBatch &batch = *i;
 		batch.Map->Activate();
 		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
 	}
-
-	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 	glDisableVertexAttribArray( internal_->ColorAttrib );
 	glDisableVertexAttribArray( internal_->TexCoordAttrib );
