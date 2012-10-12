@@ -58,4 +58,8 @@ main = do
 			   let columns = map processLine $ reverse $ reshape width $ makeBinary [255,0,255] rgba
 			   let rows = reshape 2 $ scanl1 (+) $ map length $ group columns
 			   print (width, height)
-			   print $ map rectify $ zip rows $ filter ((/=) [width]) columns
+			   let rects = concat $ map rectify $ zip rows $ filter ((/=) [width]) columns
+			   mapM_ (\x -> putStrLn ((show $ rectX x) ++ ", "
+								   ++ (show $ rectY x) ++ ", "
+								   ++ (show $ rectW x) ++ ", "
+								   ++ (show $ rectH x))) rects
