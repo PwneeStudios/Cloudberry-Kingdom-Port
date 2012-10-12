@@ -3,10 +3,13 @@
 
 int main( int argc, char *argv[] )
 {
-	CloudberryKingdom game;
-	Core core( game );
+	CloudberryKingdom *game = new CloudberryKingdom;
+	Core *core = new Core( *game );
+	int result = core->Run();
+	delete core;
+	delete game;
 
-	return core.Run();
+	return result;
 }
 
 /*#include <cafe.h>

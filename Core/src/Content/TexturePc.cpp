@@ -1,4 +1,4 @@
-#include <Content/Texture.h>
+#include <Content/TexturePc.h>
 
 #include <cassert>
 #include <fstream>
@@ -29,20 +29,20 @@ static int ReadPngInt( std::ifstream &file )
 #undef NTOHS
 #undef NTOHL
 
-struct TextureInternal
+struct TexturePcInternal
 {
-	GLuint TextureId;
+	GLuint TexturePcId;
 };
 
-Texture::Texture() :
+TexturePc::TexturePc() :
 	width_( 0 ),
 	height_( 0 ),
-	internal_( new TextureInternal )
+	internal_( new TexturePcInternal )
 {
-	memset( internal_, 0, sizeof( TextureInternal ) );
+	memset( internal_, 0, sizeof( TexturePcInternal ) );
 }
 
-Texture::~Texture()
+TexturePc::~TexturePc()
 {
 	GpuDestroy();
 	Unload();
@@ -50,22 +50,22 @@ Texture::~Texture()
 	delete internal_;
 }
 
-void Texture::Load()
+void TexturePc::Load()
 {
 	loadPng();
 }
 
-void Texture::Unload()
+void TexturePc::Unload()
 {
 	width_ = 0;
 	height_ = 0;
 	data_ = std::vector< char >();
 }
 
-void Texture::GpuCreate()
+void TexturePc::GpuCreate()
 {
-	glGenTextures( 1, &internal_->TextureId );
-	glBindTexture( GL_TEXTURE_2D, internal_->TextureId );
+	glGenTextures( 1, &internal_->TexturePcId );
+	glBindTexture( GL_TEXTURE_2D, internal_->TexturePcId );
 	glTexImage2D( GL_TEXTURE_2D, 0, GL_RGBA, width_, height_, 0, GL_RGBA,
 		GL_UNSIGNED_BYTE, reinterpret_cast< GLvoid * >( &data_[ 0 ] ) );
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR );
@@ -75,19 +75,19 @@ void Texture::GpuCreate()
 	glBindTexture( GL_TEXTURE_2D, 0 );
 }
 
-void Texture::GpuDestroy()
+void TexturePc::GpuDestroy()
 {
-	glDeleteTextures( 1, &internal_->TextureId );
-	internal_->TextureId = 0;
+	glDeleteTextures( 1, &internal_->TexturePcId );
+	internal_->TexturePcId = 0;
 }
 
-void Texture::Activate()
+void TexturePc::Activate()
 {
-	glBindTexture( GL_TEXTURE_2D, internal_->TextureId );
+	glBindTexture( GL_TEXTURE_2D, internal_->TexturePcId );
 }
 
 // Private.
-void Texture::loadPng()
+void TexturePc::loadPng()
 {
 	using namespace std;
 
@@ -95,7 +95,7 @@ void Texture::loadPng()
 	std::ifstream file( path.c_str(), ios_base::in | ios_base::binary );
 	if( !file.is_open() )
 	{
-		cout << "Failed to load texture: " << path << endl;
+		cout << "Failed to load TexturePc: " << path << endl;
 		setLoaded( false );
 		return;
 	}
@@ -224,7 +224,7 @@ static unsigned char Paeth( short a, short b, short c )
 }
 
 // Private.
-void Texture::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
+void TexturePc::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
 {
 	using namespace std;
 
@@ -281,7 +281,7 @@ void Texture::processPngIdat24Bpp( const std::vector< char > &uncompressed  )
 }
 
 // Private.
-void Texture::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
+void TexturePc::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
 {
 	using namespace std;
 
@@ -309,7 +309,7 @@ void Texture::processPngIdat32Bpp( const std::vector< char > &uncompressed  )
 	}
 }
 
-void Texture::unfilterPngScanline( unsigned char *out, const unsigned char *scanline,
+void TexturePc::unfilterPngScanline( unsigned char *out, const unsigned char *scanline,
 	const unsigned char *lastOut, char filterType, int bpp, int scanlineRowBytes )
 {
 	switch( filterType )
@@ -386,7 +386,7 @@ void Texture::unfilterPngScanline( unsigned char *out, const unsigned char *scan
 	}
 }
 
-bool Texture::uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed )
+bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed )
 {
 	using namespace std;
 

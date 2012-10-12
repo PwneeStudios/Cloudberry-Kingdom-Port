@@ -105,6 +105,15 @@
     <ClInclude Include="include\Architecture\SchedulerPc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Architecture\SchedulerWiiU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Content\TexturePc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Content\TextureWiiU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -170,10 +179,13 @@
     <ClCompile Include="..\zlib-1.2.7\zutil.c">
       <Filter>zlib</Filter>
     </ClCompile>
-    <ClCompile Include="src\Content\Texture.cpp">
+    <ClCompile Include="src\Architecture\SchedulerPc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Architecture\SchedulerPc.cpp">
+    <ClCompile Include="src\Architecture\SchedulerWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Content\TexturePc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

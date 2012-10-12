@@ -9,6 +9,7 @@
 #include <ForwardDeclarations.h>
 #include <map>
 #include "ResourcePtr.h"
+#include <set>
 #include <string>
 
 /**
@@ -19,6 +20,9 @@ class Wad
 
 	/// Map between resource names and their holders.
 	typedef std::map< std::string, ResourceHolder * > HolderMap;
+
+	/// Set of resources.
+	typedef std::set< Resource * > ResourceSet;
 
 	/// Layer of indirection for all resources.
 	HolderMap resourceHolders_;
@@ -31,6 +35,9 @@ class Wad
 
 	/// Texture used in place of missing textures.
 	ResourceHolder *defaultTexture_;
+
+	/// Unique resource set.
+	ResourceSet uniqueResources_;
 
 public:
 	

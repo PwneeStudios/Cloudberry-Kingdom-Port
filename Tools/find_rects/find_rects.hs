@@ -7,11 +7,6 @@ import Data.Maybe
 import Data.Word
 import System.Environment
 import System.IO
-
-
-data Interval = Interval { intervalStart :: Int
-						 , intervalEnd :: Int
-						 } deriving (Show)
 						 
 data Rect = Rect { rectX :: Int
 				 , rectY :: Int
@@ -32,8 +27,23 @@ reshape :: Int -> [a] -> [[a]]
 reshape _ [] = []
 reshape w arr = take w arr : (reshape w $ drop w arr)
 
-processLine :: [Word8] -> [Word8]
-processLine = map head . group
+everyOther :: [a] -> [a]
+everyOther [] = []
+everyOther (x:xs) = x : (everyOther $ drop 1 xs)
+
+processLine :: [Word8] -> [Int]
+processLine line =
+	let groups = group line;
+		widths = map length groups;
+		positions = scanl1 (+) $ widths
+	in positions
+
+rectify :: ([Int],[Int]) -> [Rect]
+rectify ([], _) = []
+rectify ([x], _) = []
+rectify (_, []) = []
+rectify (_, [x]) = []
+rectify ([y0,y1], x0:x1:xs) = Rect x0 y0 (x1 - x0) (y1 - y0) : rectify ([y0,y1], xs)
 
 main :: IO ()
 main = do
@@ -45,5 +55,7 @@ main = do
 		Right bmp ->
 			do let rgba = unpackBMPToRGBA32 bmp
 			   let (width, height) = bmpDimensions bmp
+			   let columns = map processLine $ reverse $ reshape width $ makeBinary [255,0,255] rgba
+			   let rows = reshape 2 $ scanl1 (+) $ map length $ group columns
 			   print (width, height)
-			   print $ map processLine $ reshape width $ makeBinary [255,0,255] rgba
+			   print $ map rectify $ zip rows $ filter ((/=) [width]) columns

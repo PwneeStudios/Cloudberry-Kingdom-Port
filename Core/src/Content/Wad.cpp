@@ -20,16 +20,14 @@ Wad::Wad( const std::string &base ) :
 	defaultTexture_ = new ( holderAllocator_->Allocate() ) ResourceHolder( pinkX );
 
 	resourceHolders_[ path ] = defaultTexture_;
+	uniqueResources_.insert( pinkX );
 }
 
 Wad::~Wad()
 {
-	HolderMap::iterator i;
-	for( i = resourceHolders_.begin(); i != resourceHolders_.end(); ++i )
-	{
-		Resource *resource = i->second->GetResource();
-		delete resource;
-	}
+	ResourceSet::iterator i;
+	for( i = uniqueResources_.begin(); i != uniqueResources_.end(); ++i )
+		delete *i;
 
 	delete holderAllocator_;
 }
@@ -49,6 +47,7 @@ ResourceHolder *Wad::load( const std::string &path )
 	SCHEDULER->CreateResource( rh, texture );
 
 	resourceHolders_[ path ] = rh;
+	uniqueResources_.insert( texture );
 
 	return rh;
 }

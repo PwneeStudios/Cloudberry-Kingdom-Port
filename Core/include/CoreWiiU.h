@@ -19,6 +19,10 @@ class CoreWiiU
 
 	QuadDrawer *qd_;
 
+	Wad *content_;
+
+	Scheduler *scheduler_;
+
 	/// Location 
 	void *mem1Storage_;
 
@@ -46,9 +50,20 @@ public:
 	void Exit();
 
 	// Accessors to components.
+	
 	QuadDrawer *GetQuadDrawer()
 	{
 		return qd_;
+	}
+
+	Wad *GetContent()
+	{
+		return content_;
+	}
+
+	Scheduler *GetScheduler()
+	{
+		return scheduler_;
 	}
 
 };

@@ -13,6 +13,5 @@ primaryTarget=ppc_cos.tgt
 	-IGame/include
 	-L.
 Core\Core.gpj		[Library]
-Game\Game.gpj		[Library]
 Cloudberry WiiU\Cloudberry_Kingdom.gpj		[Program]
 tgt\resources.gpj		[Project]

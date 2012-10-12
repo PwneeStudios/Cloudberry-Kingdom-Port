@@ -6,10 +6,14 @@
  */
 class GameLoop
 {
+
 public:
+
+	virtual ~GameLoop() { }
 
 	/// Update a single frame.
 	virtual void Update() = 0;
+
 };
 
 #endif

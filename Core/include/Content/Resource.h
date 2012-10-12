@@ -41,19 +41,19 @@ public:
 	/**
 	 * @param path Path to resource.
 	 */
-	void SetPath( const std::string &path ) { path_ = path; }
+	virtual void SetPath( const std::string &path ) { path_ = path; }
 	
 	/// Get resource path.
 	/**
 	 * @return Resource location.
 	 */
-	const std::string &GetPath() const { return path_; }
+	virtual const std::string &GetPath() const { return path_; }
 
 	/// Is this resource loaded?
 	/**
 	 * @return True if the resource is loaded, false otherwise.
 	 */
-	bool IsLoaded() const { return loaded_; }
+	virtual bool IsLoaded() const { return loaded_; }
 
 protected:
 

@@ -1,6 +1,8 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Architecture\SchedulerWiiU.cpp
+src\Content\Wad.cpp
 src\Core.cpp
 src\CoreWiiU.cpp
 src\Graphics\QuadDrawerWiiU.cpp

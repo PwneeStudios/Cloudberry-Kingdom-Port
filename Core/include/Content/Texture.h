@@ -7,7 +7,12 @@
 #define _TEXTURE_H_
 
 #include "Resource.h"
-#include <vector>
+
+#ifdef CAFE
+	#include "TextureWiiU.h"
+#else
+	#include "TexturePc.h"
+#endif
 
 /**
  * A texture resource.
@@ -15,71 +20,87 @@
 class Texture : public Resource
 {
 
-	/// Texture width.
-	int width_;
+	/// Platform specific implementation.
+#ifdef CAFE
+	TextureWiiU impl_;
+#else
+	TexturePc impl_;
+#endif
 
-	/// Texture height.
-	int height_;
+private:
 
-	/// Texture data.
-	std::vector< char > data_;
+	/// No copying.
+	Texture( const Texture & ) { }
 
-	/// Platform specific internal bits.
-	struct TextureInternal *internal_;
+	/// No assignment.
+	Texture &operator = ( const Texture & ) { return *this; }
 
 public:
 
-	Texture();
-	~Texture();
+	Texture() { }
+	~Texture() { }
 
 	/**
 	 * @see Resource::Load()
 	 */
-	void Load();
+	void Load()
+	{
+		impl_.Load();
+	}
 
 	/**
 	 * @see Resource::Unload()
 	 */
-	void Unload();
+	void Unload()
+	{
+		impl_.Unload();
+	}
 
 	/**
 	 * @see Resource::GpuCreate()
 	 */
-	void GpuCreate();
+	void GpuCreate()
+	{
+		impl_.GpuCreate();
+	}
 
 	/**
 	 * @see Resource::GpuDestroy()
 	 */
-	void GpuDestroy();
-
-	/// Activate the texture on the Gpu.
-	void Activate();
-
-private:
-
-	/** Load a PNG texture. */
-	void loadPng();
-
-	/** Handle a 24bit RGB stream. */
-	void processPngIdat24Bpp( const std::vector< char > &uncompressed );
-
-	/** Handle a 32bit RGBA stream. */
-	void processPngIdat32Bpp( const std::vector< char > &uncompressed );
+	void GpuDestroy()
+	{
+		impl_.GpuDestroy();
+	}
 
 	/**
-		* @brief Unfilter a single scanline.
-		* @param out Output buffer for unfiltered scanline data.
-		* @param scanline Input scanline data.
-		* @param lastOut Previous unfiltered scanline.
-		* @param filterType Type of filter used for this scanline.
-		* @param bpp Bytes per pixel.
-		* @param scalineRowBytes Number of bytes in a single scanline row.
-		*/
-	void unfilterPngScanline( unsigned char *out, const unsigned char *scanline,
-		const unsigned char *lastOut, char filterType, int bpp, int scanlineRowBytes );
+	 * @see Resource::SetPath()
+	 */
+	void SetPath( const std::string &path )
+	{
+		impl_.SetPath( path );
+	}
 
-	/** Uncompress one buffer into another. */
-	bool uncompress( const std::vector< char > &compressed, std::vector< char > &uncompressed );
+	/**
+	 * @see Resource::GetPath()
+	 */
+	const std::string &GetPath() const
+	{
+		return impl_.GetPath();
+	}
+
+	/**
+	 * @see Resource::IsLoaded()
+	 */
+	bool IsLoaded() const
+	{
+		return impl_.IsLoaded();
+	}
+
+	/// Activate the texture on the Gpu.
+	void Activate()
+	{
+		impl_.Activate();
+	}
 
 };
 
