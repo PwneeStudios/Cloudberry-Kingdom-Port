@@ -31,7 +31,7 @@ class Wad
 	std::string base_;
 
 	/// Fast allocator for resource holders.
-	Freelist< ResourceHolder, 128 > *holderAllocator_;
+	Freelist< ResourceHolder, 2048 > *holderAllocator_;
 
 	/// Texture used in place of missing textures.
 	ResourceHolder *defaultTexture_;
@@ -53,7 +53,7 @@ public:
 	{
 		return ResourcePtr< ResourceType >( load( base_ + name ) );
 	}
-	
+
 private:
 
 	/// Load a resource.
@@ -63,6 +63,20 @@ private:
 	 */
 	ResourceHolder *load( const std::string &path );
 
+	/// Load a font file.
+	/**
+	 * @param path Font path.
+	 * @return Pointer to font resource.
+	 */
+	ResourceHolder *loadFont( const std::string &path );
+
 };
+
+// Specialization for loading Fonts.
+template<>
+inline ResourcePtr< Font > Wad::Load< Font >( const std::string name )
+{
+	return ResourcePtr< Font >( loadFont( base_ + name ) );
+}
 
 #endif

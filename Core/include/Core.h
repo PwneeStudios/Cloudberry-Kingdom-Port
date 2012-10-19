@@ -72,6 +72,11 @@ public:
 		return impl_.GetScheduler();
 	}
 
+	TextDrawer *GetTextDrawer()
+	{
+		return impl_.GetTextDrawer();
+	}
+
 	/// Get core singleton.
 	static Core &GetSingleton();
 
@@ -88,5 +93,8 @@ public:
 
 /// Job scheduler.
 #define SCHEDULER CORE.GetScheduler()
+
+/// Drawer of text.
+#define TEXT_DRAWER CORE.GetTextDrawer()
 
 #endif

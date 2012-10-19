@@ -23,6 +23,8 @@ class CorePc
 
 	Scheduler *scheduler_;
 
+	TextDrawer *td_;
+
 private:
 
 	/// No copying.
@@ -61,6 +63,11 @@ public:
 	Scheduler *GetScheduler()
 	{
 		return scheduler_;
+	}
+
+	TextDrawer *GetTextDrawer()
+	{
+		return td_;
 	}
 
 };

@@ -60,6 +60,7 @@ void TexturePc::Unload()
 	width_ = 0;
 	height_ = 0;
 	data_ = std::vector< char >();
+	setLoaded( false );
 }
 
 void TexturePc::GpuCreate()
@@ -95,7 +96,7 @@ void TexturePc::loadPng()
 	std::ifstream file( path.c_str(), ios_base::in | ios_base::binary );
 	if( !file.is_open() )
 	{
-		cout << "Failed to load TexturePc: " << path << endl;
+		cout << "Failed to load texture: " << path << endl;
 		setLoaded( false );
 		return;
 	}
@@ -135,6 +136,12 @@ void TexturePc::loadPng()
 #pragma pack( pop )
 
 	file.read( reinterpret_cast< char * >( &signature ), sizeof( signature ) );
+
+	if( signature.Png[ 0 ] != 'P' || signature.Png[ 1 ] != 'N' || signature.Png[ 2 ] != 'G' )
+	{
+		setLoaded( false );
+		return;
+	}
 
 	// Concatenated image data.
 	std::vector< char > data;

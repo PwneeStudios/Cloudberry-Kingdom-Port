@@ -66,6 +66,11 @@ public:
 		return scheduler_;
 	}
 
+	TextDrawer *GetTextDrawer()
+	{
+		return 0;
+	}
+
 };
 
 #endif

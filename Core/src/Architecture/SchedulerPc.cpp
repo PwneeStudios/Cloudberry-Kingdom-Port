@@ -23,6 +23,8 @@ public:
 
 };
 
+#include <iostream>
+
 /**
  * Load a resource.
  */
@@ -53,12 +55,13 @@ public:
 	{
 		resource_->Load();
 
-		// If there is an error, clean up resource and stop.
+		// If there is an error, stop.
 		if( !resource_->IsLoaded() )
 		{
-			delete resource_;
 			return;
 		}
+
+		std::cout << "Loaded: " << resource_->GetPath() << std::endl;
 
 		// Kick off a creation job.
 		if( gpuCreate_ )
@@ -136,10 +139,10 @@ SchedulerPc::~SchedulerPc()
 
 	// Wake up all the workers to force them to quit.
 	for( int i = 0; i < NUM_THREADS; ++i )
-		glfwSignalCond( internal_->JobQueueCV );
-
-	for( int i = 0; i < NUM_THREADS; ++i )
-		glfwWaitThread( internal_->Threads[ i ], GLFW_WAIT );
+	{
+		while( GL_FALSE == glfwWaitThread( internal_->Threads[ i ], GLFW_NOWAIT ) )
+			glfwSignalCond( internal_->JobQueueCV );
+	}
 
 	glfwDestroyMutex( internal_->JobQueueMutex );
 	glfwDestroyMutex( internal_->MainThreadJobQueueMutex );

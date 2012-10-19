@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
+#include <Graphics/TextDrawer.h>
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -54,10 +55,14 @@ CorePc::CorePc( GameLoop &game ) :
 	qd_ = new QuadDrawer;
 
 	content_ = new Wad( "Content/" );
+
+	td_ = new TextDrawer;
 }
 
 CorePc::~CorePc()
 {
+	delete td_;
+
 	delete qd_;
 
 	delete content_;
@@ -70,6 +75,8 @@ CorePc::~CorePc()
 int CorePc::Run()
 {
 	running_ = true;
+
+	game_.Initialize();
 
 	while( running_ )
 	{

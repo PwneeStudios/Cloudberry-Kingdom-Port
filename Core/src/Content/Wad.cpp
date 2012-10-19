@@ -1,13 +1,14 @@
 #include <Content/Wad.h>
 
 #include <Architecture/Scheduler.h>
+#include <Content/Font.h>
 #include <Content/Texture.h>
 #include <Core.h>
 #include <Datastructures/Freelist.h>
 
 Wad::Wad( const std::string &base ) :
 	base_( base ),
-	holderAllocator_( new Freelist< ResourceHolder, 128 >() ),
+	holderAllocator_( new Freelist< ResourceHolder, 2048 >() ),
 	defaultTexture_( 0 )
 {
 	Texture *pinkX = new Texture;
@@ -48,6 +49,25 @@ ResourceHolder *Wad::load( const std::string &path )
 
 	resourceHolders_[ path ] = rh;
 	uniqueResources_.insert( texture );
+
+	return rh;
+}
+
+// Private.
+ResourceHolder *Wad::loadFont( const std::string &path )
+{
+	HolderMap::iterator i = resourceHolders_.find( path );
+	if( i != resourceHolders_.end() )
+		return i->second;
+
+	Font *font = new Font;
+	ResourceHolder *rh = new ( holderAllocator_->Allocate() ) ResourceHolder( font );
+
+	font->SetPath( path );
+	font->Load();
+
+	resourceHolders_[ path ] = rh;
+	uniqueResources_.insert( font );
 
 	return rh;
 }

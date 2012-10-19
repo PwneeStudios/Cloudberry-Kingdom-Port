@@ -57,9 +57,9 @@ main = do
 			   let (width, height) = bmpDimensions bmp
 			   let columns = map processLine $ reverse $ reshape width $ makeBinary [255,0,255] rgba
 			   let rows = reshape 2 $ scanl1 (+) $ map length $ group columns
-			   print (width, height)
-			   let rects = concat $ map rectify $ zip rows $ filter ((/=) [width]) columns
-			   mapM_ (\x -> putStrLn ((show $ rectX x) ++ ", "
-								   ++ (show $ rectY x) ++ ", "
-								   ++ (show $ rectW x) ++ ", "
+			   putStrLn ((show width) ++ "," ++ (show height))
+			   let rects = concat $ map rectify $ zip rows $ map head $ group $ filter ((/=) [width]) columns
+			   mapM_ (\x -> putStrLn ((show $ rectX x) ++ ","
+								   ++ (show $ rectY x) ++ ","
+								   ++ (show $ rectW x) ++ ","
 								   ++ (show $ rectH x))) rects

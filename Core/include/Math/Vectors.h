@@ -39,6 +39,13 @@ public:
 		return Vector2( x_ / length, y_ / length );
 	}
 
+	Vector2 &operator += ( const Vector2 &a )
+	{
+		x_ += a.x();
+		y_ += a.y();
+		return *this;
+	}
+
 };
 
 class Vector4

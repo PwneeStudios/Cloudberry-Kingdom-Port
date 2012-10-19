@@ -12,6 +12,11 @@ class CloudberryKingdom : public GameLoop
 public:
 
 	/**
+	 * @see GameLoop::Initialize
+	 */
+	void Initialize();
+
+	/**
 	 * @see GameLoop::Update
 	 */
 	void Update();

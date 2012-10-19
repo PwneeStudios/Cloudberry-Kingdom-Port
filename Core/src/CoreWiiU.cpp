@@ -69,8 +69,10 @@ CoreWiiU::~CoreWiiU()
 int CoreWiiU::Run()
 {
 	running_ = true;
+	
+	game_.Initialize();
 
-	while( running_ && DEMOIsRunning() )
+	//while( running_ && DEMOIsRunning() )
 	{
 		DEMOGfxBeforeRender();
 		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 1 );

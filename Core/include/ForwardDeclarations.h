@@ -7,6 +7,7 @@
 #define _FORWARD_DECLARATIONS_H_
 
 class Core;
+class Font;
 template< class T, unsigned int N > class Freelist;
 class GameLoop;
 class QuadDrawer;
@@ -16,6 +17,7 @@ template< class ResourceType > class ResourcePtr;
 class Scheduler;
 struct SimpleQuad;
 template< class T > class Singleton;
+class TextDrawer;
 class Texture;
 class Vector2;
 class Vector4;

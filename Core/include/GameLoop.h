@@ -11,6 +11,9 @@ public:
 
 	virtual ~GameLoop() { }
 
+	/// Initialize the game.
+	virtual void Initialize() = 0;
+
 	/// Update a single frame.
 	virtual void Update() = 0;
 
