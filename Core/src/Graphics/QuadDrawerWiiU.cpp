@@ -37,6 +37,13 @@ static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer )
 
 	attribBuffer++;
 
+	// Set up texture coordinate attribute.
+	DEMOGfxInitShaderAttribute( shader, "a_texcoord", attribBuffer,
+		0, GX2_ATTRIB_FORMAT_32_32_FLOAT );
+	GX2UTSetAttributeBuffer( positionBuffer, attribBuffer, offsetof( QuadVert, TexCoord ) );
+
+	attribBuffer++;
+
 	// Set up color vertex attribute.
 	DEMOGfxInitShaderAttribute( shader, "a_color", attribBuffer,
 		0, GX2_ATTRIB_FORMAT_32_32_32_32_FLOAT );

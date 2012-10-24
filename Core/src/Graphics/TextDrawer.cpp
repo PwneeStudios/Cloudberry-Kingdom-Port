@@ -5,6 +5,7 @@
 #include <Core.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/Types.h>
+#include <Utility/Log.h>
 
 TextDrawer::TextDrawer() :
 	font_( 0 ),
@@ -40,6 +41,6 @@ void TextDrawer::Draw( const std::string &text, const Vector2 &position )
 		quad.Diffuse = fontTexture_;
 
 		QUAD_DRAWER->Draw( quad );
-		p += Vector2( d.x() - 50, 0 );
+		p += Vector2( d.x() + font_->GetCharSpacing(), 0 );
 	}
 }

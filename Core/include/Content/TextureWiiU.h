@@ -9,33 +9,37 @@
 class TextureWiiU : public Resource
 {
 
+	struct TextureInternal *internal_;
+
 public:
 
-	TextureWiiU() { }
-	~TextureWiiU() { }
+	TextureWiiU();
+	~TextureWiiU();
 
 	/**
 	 * @see Resource::Load()
 	 */
-	void Load() { }
+	void Load();
 
 	/**
 	 * @see Resource::Unload()
 	 */
-	void Unload() { }
+	void Unload();
 
 	/**
 	 * @see Resource::GpuCreate()
 	 */
-	void GpuCreate() { }
+	void GpuCreate();
 
 	/**
 	 * @see Resource::GpuDestroy()
 	 */
-	void GpuDestroy() { }
+	void GpuDestroy();
 
-	/// Activate the texture on the Gpu.
-	void Activate() { }
+	/**
+	 * @see Texture::Activate()
+	 */
+	void Activate( unsigned int sampler );
 
 };
 

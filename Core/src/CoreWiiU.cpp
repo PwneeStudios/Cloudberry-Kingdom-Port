@@ -8,6 +8,7 @@
 #include <cstdlib>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
+#include <Graphics/TextDrawer.h>
 
 // Private.
 CoreWiiU::CoreWiiU( const CoreWiiU &other ) :
@@ -46,11 +47,15 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	qd_ = new QuadDrawer;
 
-	content_ = new Wad( "./" );
+	content_ = new Wad( "" );
+
+	td_ = new TextDrawer;
 }
 
 CoreWiiU::~CoreWiiU()
 {
+	delete td_;
+
 	delete qd_;
 
 	delete content_;

@@ -47,8 +47,10 @@ public:
 	 */
 	void GpuDestroy();
 
-	/// Activate the texture on the Gpu.
-	void Activate();
+	/**
+	 * @see Texture::Activate()
+	 */
+	void Activate( unsigned int sampler );
 
 private:
 

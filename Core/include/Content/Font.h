@@ -22,6 +22,9 @@ class Font : public Resource
 	/// Texture path.
 	std::string texturePath_;
 
+	/// Spacing offset between characters.
+	int charSpacing_;
+
 public:
 
 	/**
@@ -61,6 +64,15 @@ public:
 	const std::string &GetTexturePath() const
 	{
 		return texturePath_;
+	}
+
+	/// Get spacing between characters.
+	/**
+	 * @return Character spacing.
+	 */
+	int GetCharSpacing() const
+	{
+		return charSpacing_;
 	}
 
 };

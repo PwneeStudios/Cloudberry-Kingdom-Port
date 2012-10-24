@@ -3,7 +3,7 @@
 #include <cassert>
 #include <fstream>
 #include <GL/glew.h>
-#include <iostream>
+#include <Utility/Log.h>
 #include <zlib.h>
 
 #define NTOHS( val ) \
@@ -82,7 +82,7 @@ void TexturePc::GpuDestroy()
 	internal_->TexturePcId = 0;
 }
 
-void TexturePc::Activate()
+void TexturePc::Activate( unsigned int sampler )
 {
 	glBindTexture( GL_TEXTURE_2D, internal_->TexturePcId );
 }
@@ -96,7 +96,6 @@ void TexturePc::loadPng()
 	std::ifstream file( path.c_str(), ios_base::in | ios_base::binary );
 	if( !file.is_open() )
 	{
-		cout << "Failed to load texture: " << path << endl;
 		setLoaded( false );
 		return;
 	}
@@ -205,8 +204,8 @@ void TexturePc::loadPng()
 	}
 	else
 	{
-		cout << "Unknown PNG format (ColorType = " << ihdr.ColorType
-			<< ", BitDepth = " << ihdr.BitDepth << ") in: " << path << endl;
+		LOG.Write( "Unknown PNG format (ColorType = %d, BitDepth = %d) in: %s\n",
+			ihdr.ColorType, ihdr.BitDepth, path );
 		setLoaded( false );
 		return;
 	}
@@ -415,7 +414,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 	err = inflateInit( &stream );
 	if( err != Z_OK )
 	{
-		cout << "PNG: Failed to initialize de-compressor" << endl;
+		LOG.Write( "PNG: Failed to initialize de-compressor\n" );
 		return false;
 	}
 
@@ -427,7 +426,7 @@ bool TexturePc::uncompress( const std::vector< char > &compressed, std::vector< 
 		if( err == Z_NEED_DICT
 			|| ( err == Z_BUF_ERROR && stream.avail_in == 0 ) )
 		{
-			cout << "PNG: Data inflation error" << endl;
+			LOG.Write( "PNG: Data inflation error" );
 			return false;
 		}
 		return false;

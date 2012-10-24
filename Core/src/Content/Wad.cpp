@@ -5,6 +5,7 @@
 #include <Content/Texture.h>
 #include <Core.h>
 #include <Datastructures/Freelist.h>
+#include <Utility/Log.h>
 
 Wad::Wad( const std::string &base ) :
 	base_( base ),

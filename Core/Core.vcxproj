@@ -46,6 +46,7 @@
     <ClInclude Include="include\Graphics\TextDrawer.h" />
     <ClInclude Include="include\Graphics\Types.h" />
     <ClInclude Include="include\Math\Vectors.h" />
+    <ClInclude Include="include\Utility\Log.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\zlib-1.2.7\adler32.c" />
@@ -68,8 +69,13 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Content\File.cpp" />
     <ClCompile Include="src\Content\Font.cpp" />
     <ClCompile Include="src\Content\TexturePc.cpp" />
+    <ClCompile Include="src\Content\TextureWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Content\Wad.cpp" />
     <ClCompile Include="src\Core.cpp" />
     <ClCompile Include="src\CorePc.cpp" />
@@ -83,6 +89,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Graphics\TextDrawer.cpp" />
+    <ClCompile Include="src\Utility\Log.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>

@@ -1,38 +1,56 @@
 #include <Content/Font.h>
 
 #include <algorithm>
-#include <fstream>
+#include <Content/File.h>
 #include <sstream>
 #include <string>
-#include <cerrno>
+
+static std::istream& safeGetline( std::istream& is, std::string &t )
+{
+    t.clear();
+
+    std::istream::sentry se( is, true );
+    std::streambuf *sb = is.rdbuf();
+
+    for(;;)
+	{
+        int c = sb->sbumpc();
+        switch (c) {
+        case '\r':
+            c = sb->sgetc();
+            if( c == '\n' )
+                sb->sbumpc();
+            return is;
+        case '\n':
+        case EOF:
+            return is;
+        default:
+            t += ( char )c;
+        }
+    }
+}
 
 void Font::Load()
 {
 	using namespace std;
 
-	ifstream file( GetPath().c_str() );
-
-	if( !file )
+	string fileContents;
+	if( !File::ReadAsString( GetPath(), fileContents ) )
 	{
 		setLoaded( false );
 		return;
 	}
 
-	stringstream ss;
+	stringstream ss( fileContents );
 	string line;
 	
-	getline( file, texturePath_ );
+	safeGetline( ss, texturePath_ );
 
-	getline( file, line );
-	ss.str( line );
-	int charSpacing, lineSpacing;
-	ss >> charSpacing;
+	int lineSpacing;
+	ss >> charSpacing_;
 	ss.get();
 	ss >> lineSpacing;
 
-	getline( file, line );
-	ss.clear();
-	ss.str( line );
 	int width, height;
 	ss >> width;
 	ss.get();
@@ -43,10 +61,6 @@ void Font::Load()
 
 	for( char c = ' '; c <= '~'; ++c )
 	{
-		getline( file, line );
-		ss.clear();
-		ss.str( line );
-
 		int x, y, w, h;
 		ss >> x;
 		ss.get();

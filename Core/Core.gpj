@@ -1,6 +1,9 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Content\File.cpp
+src\Utility\Log.cpp
+src\Content\TextureWiiU.cpp
 src\Graphics\TextDrawer.cpp
 src\Content\Font.cpp
 src\Architecture\SchedulerWiiU.cpp

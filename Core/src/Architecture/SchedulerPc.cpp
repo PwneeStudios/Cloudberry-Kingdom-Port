@@ -6,6 +6,7 @@
 #include <Core.h>
 #include <Datastructures/Freelist.h>
 #include <GL/glfw.h>
+#include <Utility/Log.h>
 
 #define NUM_THREADS 4
 
@@ -58,17 +59,17 @@ public:
 		// If there is an error, stop.
 		if( !resource_->IsLoaded() )
 		{
+			LOG.Write( "Failed: %s\n", resource_->GetPath().c_str() );
 			return;
 		}
 
-		std::cout << "Loaded: " << resource_->GetPath() << std::endl;
+		LOG.Write( "Loaded: %s\n", resource_->GetPath().c_str() );
 
 		// Kick off a creation job.
 		if( gpuCreate_ )
 		{
 			SCHEDULER->CreateGpuResource( holder_, resource_ );
 		}
-
 	}
 
 };

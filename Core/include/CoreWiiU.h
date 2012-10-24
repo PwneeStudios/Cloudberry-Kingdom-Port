@@ -23,6 +23,8 @@ class CoreWiiU
 
 	Scheduler *scheduler_;
 
+	TextDrawer *td_;
+
 	/// Location 
 	void *mem1Storage_;
 
@@ -68,7 +70,7 @@ public:
 
 	TextDrawer *GetTextDrawer()
 	{
-		return 0;
+		return td_;
 	}
 
 };

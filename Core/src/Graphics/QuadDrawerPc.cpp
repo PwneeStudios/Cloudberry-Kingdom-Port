@@ -268,7 +268,7 @@ void QuadDrawerPc::Flush()
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
-		batch.Map->Activate();
+		batch.Map->Activate( 0 );
 		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
 	}
 

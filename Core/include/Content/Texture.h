@@ -97,9 +97,12 @@ public:
 	}
 
 	/// Activate the texture on the Gpu.
-	void Activate()
+	/**
+	 * @param sampler Sampler location.
+	 */
+	void Activate( unsigned int sampler )
 	{
-		impl_.Activate();
+		impl_.Activate( sampler );
 	}
 
 };
