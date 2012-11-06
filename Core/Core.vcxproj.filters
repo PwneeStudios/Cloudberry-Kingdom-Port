@@ -126,6 +126,18 @@
     <ClInclude Include="include\Utility\Log.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Input\Input.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input\InputPc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Input\InputWiiU.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Content\Sound.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -213,6 +225,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Content\File.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\Input.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\InputPc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Input\InputWiiU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

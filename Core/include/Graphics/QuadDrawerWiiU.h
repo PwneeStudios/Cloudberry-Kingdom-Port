@@ -35,6 +35,9 @@ public:
 	 */
 	void Flush();
 
+	/// Unlock any currently locked buffers.
+	void Unlock();
+
 };
 
 #endif

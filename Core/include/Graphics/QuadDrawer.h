@@ -34,7 +34,7 @@ private:
 public:
 
 	QuadDrawer() { }
-	~QuadDrawer() { }
+	virtual ~QuadDrawer() { }
 
 	/// Draw a simple quad.
 	/**

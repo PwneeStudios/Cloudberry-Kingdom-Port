@@ -30,6 +30,7 @@
     <ClInclude Include="include\Content\Font.h" />
     <ClInclude Include="include\Content\Resource.h" />
     <ClInclude Include="include\Content\ResourcePtr.h" />
+    <ClInclude Include="include\Content\Sound.h" />
     <ClInclude Include="include\Content\Texture.h" />
     <ClInclude Include="include\Content\TexturePc.h" />
     <ClInclude Include="include\Content\TextureWiiU.h" />
@@ -45,6 +46,9 @@
     <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />
     <ClInclude Include="include\Graphics\TextDrawer.h" />
     <ClInclude Include="include\Graphics\Types.h" />
+    <ClInclude Include="include\Input\Input.h" />
+    <ClInclude Include="include\Input\InputPc.h" />
+    <ClInclude Include="include\Input\InputWiiU.h" />
     <ClInclude Include="include\Math\Vectors.h" />
     <ClInclude Include="include\Utility\Log.h" />
   </ItemGroup>
@@ -89,6 +93,12 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Graphics\TextDrawer.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Input\InputPc.cpp" />
+    <ClCompile Include="src\Input\InputWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Utility\Log.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -9,6 +9,7 @@
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
+#include <Utility/Log.h>
 
 // Private.
 CoreWiiU::CoreWiiU( const CoreWiiU &other ) :
@@ -36,6 +37,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	DEMOInit();
 	DEMOTestInit( 0, NULL );
 	DEMOGfxInit( 0, NULL );
+	DEMODRCInit( 0, NULL );
 
 	// Allocate space for MEM1 for process switching.
 	u32 mem1Size;
@@ -54,6 +56,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 CoreWiiU::~CoreWiiU()
 {
+	LOG.Write( "SHUTDOWN START\n" );
 	delete td_;
 
 	delete qd_;
@@ -66,9 +69,11 @@ CoreWiiU::~CoreWiiU()
 	ProcUISetMEM1Storage( NULL, 0 );
 	MEMFreeToDefaultHeap( mem1Storage_ );
 
+	DEMODRCShutdown();
 	DEMOGfxShutdown();
 	DEMOTestShutdown();
 	DEMOShutdown();
+	LOG.Write( "SHUTDOWN END\n" );
 }
 
 int CoreWiiU::Run()
@@ -77,19 +82,39 @@ int CoreWiiU::Run()
 	
 	game_.Initialize();
 
-	//while( running_ && DEMOIsRunning() )
+	while( DEMOIsRunning() )
 	{
+		game_.Update();
+
+		if( DEMODRCGetStatus() != GX2_DRC_NONE )
+		{
+			DEMODRCBeforeRender();
+
+			GX2SetContextState( DEMODRCContextState );
+
+			qd_->Flush();
+
+			GX2SetContextState( DEMODRCContextState );
+
+			DEMODRCDoneRender();
+		}
+
 		DEMOGfxBeforeRender();
-		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 1 );
+		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
 		GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
 
 		DEMOGfxSetContextState();
 
-		game_.Update();
-
 		qd_->Flush();
 
 		DEMOGfxDoneRender();
+
+		// Close down.
+		if( !running_ )
+		{
+			DEMOStopRunning();
+			dynamic_cast< QuadDrawerWiiU * >( qd_ )->Unlock();
+		}
 	}
 
 	return 0;

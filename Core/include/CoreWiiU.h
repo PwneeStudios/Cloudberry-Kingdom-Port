@@ -9,7 +9,7 @@
 class CoreWiiU
 {
 
-	/// Is the game currently running?
+	/// Is the core currently running?
 	bool running_;
 
 	/// The game.

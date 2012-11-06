@@ -4,7 +4,11 @@
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <cafe/demo/demoGfxTypes.h>
+#include <Content/ResourcePtr.h>
+#include <Content/Texture.h>
 #include <Graphics/Types.h>
+#include <Utility/Log.h>
+#include <vector>
 
 /// Maximum number of displayable quads.
 #define MAX_QUADS 1024
@@ -18,8 +22,17 @@ struct QuadVert
 	Vector4 Color;
 };
 
+struct RenderBatch
+{
+	u32 Offset;
+	u32 NumElements;
+	ResourcePtr< Texture > Map;
+};
+
+typedef std::vector< RenderBatch > BatchList;
+
 // static void InitShader( DEMOGfxShader *shader, AttribBuffer *attribData )
-static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer )
+static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer, u32 &sampler )
 {
 	void *gshBuf;
 	u32 gshLen;
@@ -49,6 +62,11 @@ static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer )
 		0, GX2_ATTRIB_FORMAT_32_32_32_32_FLOAT );
 	GX2UTSetAttributeBuffer( positionBuffer, attribBuffer, offsetof( QuadVert, Color ) );
 
+	// Get location of texture sampler.
+	sampler = static_cast< u32 >(
+		GX2GetPixelSamplerVarLocation( shader->pPixelShader, "u_texture" )
+	);
+
 	DEMOGfxInitFetchShader( shader );
 
 	GX2SetShaders( &shader->fetchShader, shader->pVertexShader, shader->pPixelShader );
@@ -62,28 +80,44 @@ struct QuadDrawerInternal
 
 	QuadVert *Vertices;
 	u32 NumElements;
+
+	u32 SamplerLocation;
+	GX2Sampler Sampler;
+
+	BatchList Batches;
 };
 
 QuadDrawerWiiU::QuadDrawerWiiU() :
 	internal_( new QuadDrawerInternal )
 {
+	internal_->Vertices = 0;
+	internal_->NumElements = 0;
+	internal_->SamplerLocation = 0;
+
 	GX2UTCreateBuffer( &internal_->QuadBuffer, GX2R_BIND_VERTEX_BUFFER
 		| GX2R_USAGE_CPU_WRITE | GX2R_USAGE_GPU_READ, sizeof( QuadVert ),
 		MAX_QUADS * 4 );
 	GX2RSetBufferName( &internal_->QuadBuffer, "QuadBuffer" );
 
-	InitShader( &internal_->SimpleShader, &internal_->QuadBuffer );
+	InitShader( &internal_->SimpleShader, &internal_->QuadBuffer, internal_->SamplerLocation );
+
+	GX2InitSampler( &internal_->Sampler, GX2_TEX_CLAMP_CLAMP, GX2_TEX_XY_FILTER_BILINEAR );
 
 	internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);
+
+	GX2SetDepthOnlyControl( GX2_TRUE, GX2_TRUE, GX2_COMPARE_ALWAYS );
+	GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+
+	GX2SetDebugMode( ( GX2DebugMode )( GX2_DEBUG_MODE_FLUSH_PER_DRAW | GX2_DEBUG_MODE_DONE_PER_FLUSH ) );
 }
 
 QuadDrawerWiiU::~QuadDrawerWiiU()
 {
 	DEMOGfxFreeShaders( &internal_->SimpleShader );
 
-	GX2RUnlockBuffer( &internal_->QuadBuffer );
+	//GX2RUnlockBuffer( &internal_->QuadBuffer );
 
 	GX2RDestroyBuffer( &internal_->QuadBuffer );
 
@@ -95,11 +129,35 @@ void QuadDrawerWiiU::Draw( const SimpleQuad &quad )
 	if( internal_->NumElements >= MAX_QUADS * 4 )
 		return;
 
+	RenderBatch rb;
+	rb.Map = quad.Diffuse;
+	rb.Offset = 0;
+	rb.NumElements = 4;
+
 	for( int i = 0; i < 4; ++i )
 	{
 		internal_->Vertices->Position = quad.V[ i ];
+		internal_->Vertices->TexCoord = quad.T[ i ];
 		internal_->Vertices->Color = quad.Color;
 		++internal_->Vertices;
+	}
+
+	BatchList &batches = internal_->Batches;
+	if( batches.empty() )
+		batches.push_back( rb );
+	else
+	{
+		RenderBatch &lastBatch = batches.back();
+
+		// If the previous batch has the same texture, expand it. Otherwise
+		// start a new batch.
+		if( lastBatch.Map == rb.Map )
+			lastBatch.NumElements += 4;
+		else
+		{
+			rb.Offset = lastBatch.Offset + lastBatch.NumElements;
+			batches.push_back( rb );
+		}
 	}
 
 	internal_->NumElements += 4;	
@@ -112,10 +170,24 @@ void QuadDrawerWiiU::Flush()
 
 	GX2RUnlockBuffer( &internal_->QuadBuffer );
 
-	GX2Draw( GX2_PRIMITIVE_QUADS, internal_->NumElements );
-
+	BatchList::iterator i;
+	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
+	{
+		RenderBatch &batch = *i;
+		batch.Map->Activate( internal_->SamplerLocation );
+		GX2SetPixelSampler( &internal_->Sampler, internal_->SamplerLocation );
+		GX2DrawEx( GX2_PRIMITIVE_QUADS, batch.NumElements, batch.Offset, 1 );
+		
+	}
+	
+	internal_->Batches.clear();
 	internal_->NumElements = 0;
 	internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);
+}
+
+void QuadDrawerWiiU::Unlock()
+{
+	GX2RUnlockBuffer( &internal_->QuadBuffer );
 }
