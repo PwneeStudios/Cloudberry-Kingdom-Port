@@ -1,0 +1,68 @@
+﻿#ifndef ROCKETBOX
+#define ROCKETBOX
+
+#include "Box.h"
+#include "../Game/Collision Detection/Phsx.h"
+#include <cmath>
+#include <tchar.h>
+
+namespace CloudberryKingdom
+{
+	class Bob;
+}
+
+namespace CloudberryKingdom
+{
+	class BlockBase;
+}
+
+namespace CloudberryKingdom
+{
+	class Quad;
+}
+
+
+using namespace Microsoft::Xna::Framework;
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System;
+
+namespace CloudberryKingdom
+{
+	class BobPhsxRocketbox : public BobPhsxBox
+	{
+		// Singleton
+	protected:
+		virtual void InitSingleton();
+	private:
+		static const std::shared_ptr<BobPhsxRocketbox> instance;
+	public:
+		const static std::shared_ptr<BobPhsxRocketbox> &getInstance() const;
+
+		// Instancable class
+		BobPhsxRocketbox();
+
+		virtual void Init( const std::shared_ptr<Bob> &bob );
+
+		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
+
+		virtual void DefaultValues();
+
+		virtual void DoXAccel();
+
+	private:
+		std::shared_ptr<Quad> LeftWheel, RightWheel;
+		float WheelAngle;
+	public:
+		virtual void AnimStep();
+
+		virtual void GenerateInput( int CurPhsxStep );
+
+		virtual void PhsxStep2();
+
+	private:
+		void InitializeInstanceFields();
+	};
+}
+
+
+#endif	//#ifndef ROCKETBOX

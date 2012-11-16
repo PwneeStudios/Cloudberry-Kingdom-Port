@@ -1,0 +1,79 @@
+#ifndef HINTGIVER
+#define HINTGIVER
+
+#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "../Core/Lambdas/Lambda.h"
+#include <string>
+#include <tchar.h>
+
+namespace CloudberryKingdom
+{
+	class HintGiver;
+}
+
+
+using namespace Microsoft::Xna::Framework;
+
+namespace CloudberryKingdom
+{
+	class Hints
+	{
+	public:
+		static int YForHelpNum;
+		static void SetYForHelpNum( int val );
+		static void IncrYForHelpNum();
+
+		static int QuickSpawnNum;
+		static void SetQuickSpawnNum( int val );
+		static void IncrQuickSpawnNum();
+
+		static std::shared_ptr<HintGiver> CurrentGiver;
+	};
+
+	class HintGiver : public GUI_Panel
+	{
+	private:
+		class Check_QuickSpawnHelper : public Lambda
+		{
+		private:
+			std::shared_ptr<HintGiver> hg;
+
+		public:
+			Check_QuickSpawnHelper( const std::shared_ptr<HintGiver> &hg );
+
+			void Apply();
+		};
+
+	private:
+		class Check_YForHelpHelper : public Lambda
+		{
+		private:
+			std::shared_ptr<HintGiver> hg;
+
+		public:
+			Check_YForHelpHelper( const std::shared_ptr<HintGiver> &hg );
+
+			void Apply();
+		};
+
+	public:
+		HintGiver();
+
+	protected:
+		virtual void ReleaseBody();
+
+		virtual void MyPhsxStep();
+
+	public:
+		void Check_QuickSpawn();
+
+		const static std::wstring &getQuickSpawnHint() const;
+
+		const static std::wstring &getPowerupHint() const;
+
+		void Check_YForHelp();
+	};
+}
+
+
+#endif	//#ifndef HINTGIVER

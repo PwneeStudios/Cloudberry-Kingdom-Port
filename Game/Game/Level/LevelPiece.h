@@ -1,0 +1,84 @@
+﻿#ifndef LEVELPIECE
+#define LEVELPIECE
+
+#include "Replays/Recording.h"
+#include "../Core/PhsxData.h"
+#include <vector>
+#include <cmath>
+
+namespace CloudberryKingdom
+{
+	class Level;
+}
+
+namespace CloudberryKingdom
+{
+	class Bob;
+}
+
+namespace CloudberryKingdom
+{
+	class ComputerRecording;
+}
+
+namespace Microsoft
+{
+	namespace Xna
+	{
+		namespace Framework
+		{
+			class Vector2;
+		}
+	}
+}
+
+namespace CloudberryKingdom
+{
+	class PieceSeedData;
+}
+
+
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System;
+using namespace Microsoft::Xna::Framework;
+
+namespace CloudberryKingdom
+{
+	class LevelPiece
+	{
+	public:
+		int Par;
+
+		int StartPhsxStep, DelayStart;
+
+		std::shared_ptr<Level> MyLevel;
+		int NumBobs;
+		std::vector<Bob*> Computer;
+
+		int PieceLength;
+
+//C# TO C++ CONVERTER NOTE: The variable Recording was renamed since it is named the same as a user-defined type:
+		std::vector<ComputerRecording*> Recording_Renamed;
+
+		void Shift( Vector2 shift );
+
+		std::vector<PhsxData> StartData;
+		std::vector<Vector2> CheckpointShift;
+		Vector2 CamStartPos;
+
+		Vector2 LastPoint;
+
+		std::shared_ptr<PieceSeedData> MyData;
+		std::shared_ptr<Level::MakeData> MyMakeData;
+
+		void Release();
+
+		LevelPiece( int Length, const std::shared_ptr<Level> &level, std::vector<Bob*> computer, int numBobs );
+
+		PhsxData GetLastData();
+		PhsxData GetLastData( int Index );
+	};
+}
+
+
+#endif	//#ifndef LEVELPIECE

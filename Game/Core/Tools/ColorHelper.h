@@ -1,0 +1,58 @@
+﻿#ifndef COLORHELPER
+#define COLORHELPER
+
+#include <cmath>
+
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System;
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System::IO;
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System::Text;
+using namespace Microsoft::Xna::Framework;
+
+namespace CloudberryKingdom
+{
+	class ColorHelper
+	{
+	public:
+		static Color GrayColor( float val );
+		static Vector4 Gray( float val );
+
+	private:
+		static Matrix transform_red;
+
+		static Matrix transform_green;
+
+		static Matrix transform_blue;
+
+	public:
+		static Matrix LinearColorTransform( float angle );
+
+		static Matrix PureColor( Color color );
+
+		static Matrix HsvTransform( float V, float S, float H );
+
+		/// <summary>
+		/// Gets a non-unique number associated with a matrix.
+		/// Used to quickly determine if two matrices are probably the same.
+		/// </summary>
+		static float MatrixSignature( Matrix m );
+
+		/// <summary>
+		/// Premultiply a color's alpha against its RGB components.
+		/// </summary>
+		/// <param name="color">The normal, non-premultiplied color.</param>
+		static Color PremultiplyAlpha( Color color );
+
+		/// <summary>
+		/// Premultiply a color's alpha against its RGB components.
+		/// </summary>
+		/// <param name="color">The normal, non-premultiplied color.</param>
+		/// <param name="BlendAddRatio">When 0 blending is normal, when 1 blending is additive.</param>
+		static Color PremultiplyAlpha( Color color, float BlendAddRatio );
+	};
+}
+
+
+#endif	//#ifndef COLORHELPER

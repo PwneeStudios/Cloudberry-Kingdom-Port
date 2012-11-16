@@ -1,0 +1,112 @@
+﻿#ifndef CLRTEXTFX
+#define CLRTEXTFX
+
+#include "../Game/Localization.h"
+#include <string>
+#include <vector>
+
+namespace CloudberryKingdom
+{
+	class Lambda_1;
+}
+
+namespace CloudberryKingdom
+{
+	class Bob;
+}
+
+namespace CloudberryKingdom
+{
+	class EzTexture;
+}
+
+namespace CloudberryKingdom
+{
+	class EzEffect;
+}
+
+
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System;
+using namespace Microsoft::Xna::Framework;
+
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System::Collections::Generic;
+
+namespace CloudberryKingdom
+{
+	class Buyable
+	{
+	public:
+		virtual int GetGuid() = 0;
+		virtual int GetPrice() = 0;
+	};
+
+	class ClrTextFx : public Buyable
+	{
+	public:
+		int Guid, Price;
+		int GetGuid();
+		int GetPrice();
+
+		Localization::Words Name;
+
+		/// <summary>
+		/// A function that may modify the player object.
+		/// </summary>
+		std::shared_ptr<Lambda_1<Bob*> > ModObject;
+
+		std::shared_ptr<EzTexture> PicTexture;
+		Vector2 PicScale;
+
+		bool UsePaintTexture;
+
+		bool Equals( ClrTextFx a );
+
+		/// <summary>
+		/// This color is used instead of a texture in situations where the texture can't be applied.
+		/// Example: the Spaceship object and the colored Gamer Tags (player names)
+		/// </summary>
+		Color DetailColor;
+
+		Color Clr;
+		std::shared_ptr<EzTexture> Texture;
+		std::shared_ptr<EzEffect> Effect;
+
+		/// <summary>
+		/// This matrix is used to hue rotate Bob's outfit.
+		/// </summary>
+		Matrix M;
+
+		static std::vector<ClrTextFx> FullList;
+
+		ClrTextFx( int Guid, int Price, Color color, Matrix M );
+
+		ClrTextFx( int Guid, int Price, Color color, Matrix M, Localization::Words Name );
+
+		ClrTextFx( int Guid, int Price, Color color, Color DetailColor, Matrix M, Localization::Words Name );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::shared_ptr<EzTexture> &PicTexture );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::wstring &PicTextureName );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture, Color DetailColor, const std::shared_ptr<EzEffect> &effect );
+
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor, const std::wstring &effect );
+
+		bool operator == ( ClrTextFx B );
+
+		bool operator != ( ClrTextFx B );
+	};
+}
+
+
+#endif	//#ifndef CLRTEXTFX

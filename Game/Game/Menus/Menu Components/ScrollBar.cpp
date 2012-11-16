@@ -1,0 +1,154 @@
+﻿#include "ScrollBar.h"
+#include "Game/Menus/LongMenu.h"
+#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include "Game/Tools/Tools.h"
+#include "Game/Menus/Menu Components/MenuSlider.h"
+#include "Game/Menus/Menu.h"
+#include "Game/Menus/Menu Components/MenuScrollBar.h"
+#include "Game/Tools/WrappedFloat.h"
+
+using namespace Microsoft::Xna::Framework;
+
+namespace CloudberryKingdom
+{
+
+	ScrollBar::ScrollBarReleaseLambda::ScrollBarReleaseLambda( const std::shared_ptr<ScrollBar> &sb )
+	{
+		this->sb = sb;
+	}
+
+	void ScrollBar::ScrollBarReleaseLambda::Apply()
+	{
+		sb->Release();
+	}
+
+	ScrollBar::SliderSetProxy::SliderSetProxy( const std::shared_ptr<ScrollBar> &sb )
+	{
+		Sb = sb;
+	}
+
+	void ScrollBar::SliderSetProxy::Apply()
+	{
+		Sb->SliderSet();
+	}
+
+	ScrollBar::SliderGetLambda::SliderGetLambda( const std::shared_ptr<ScrollBar> &sb )
+	{
+		this->sb = sb;
+	}
+
+	float ScrollBar::SliderGetLambda::Apply()
+	{
+		return sb->SliderGet();
+	}
+
+	std::wstring ScrollBar::CopyToClipboard( const std::wstring &suffix )
+	{
+		return std::wstring::Format( _T( "{0}BarPos = {1}" ), suffix, Tools::ToCode( getBarPos() ) );
+	}
+
+	void ScrollBar::ProcessMouseInput( Vector2 shift, bool ShiftDown )
+	{
+		setBarPos( getBarPos() + shift );
+	}
+
+	void ScrollBar::ReleaseBody()
+	{
+		CkBaseMenu::ReleaseBody();
+
+		AttachedMenu.reset();
+		Parent.reset();
+	}
+
+	ScrollBar::ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent ) : CkBaseMenu( false )
+	{
+		this->AttachedMenu = AttachedMenu;
+		this->Parent = Parent;
+		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( this ) );
+
+		Constructor();
+	}
+
+	void ScrollBar::Init()
+	{
+		CkBaseMenu::Init();
+
+		// Make the menu
+		MyMenu = std::make_shared<Menu>( false );
+		MyMenu->CheckForOutsideClick = false;
+		MyMenu->AffectsOutsideMouse = false;
+
+		MyMenu->OnB.reset();
+		MyMenu->MouseOnly = true;
+		setControl( -1 );
+
+		EnsureFancy();
+
+		slider = std::make_shared<MenuScrollBar>();
+		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f,.72f) );
+		slider->CustomEndPoints = true;
+		slider->CustomStart = Vector2( 0, -800 );
+		slider->CustomEnd = Vector2( 0, 800 );
+	#if defined(PC_VERSION)
+		slider->BL_HitPadding.X += 50;
+		slider->TR_HitPadding.X += 50;
+	#endif
+		slider->Slider->setTextureName( _T( "BouncyBlock_Castle" ) );
+		slider->Slider->ScaleYToMatchRatio( 90 );
+		slider->SliderBack->setTextureName( _T( "Chain_Tile" ) );
+		slider->TabOffset = Vector2( 0, 28 );
+		slider->setMyFloat( std::make_shared<WrappedFloat>( 0, 0, 9 ) );
+
+		Height = AttachedMenu->Height();
+		slider->getMyFloat()->GetCallback = std::make_shared<SliderGetLambda>(this);
+		slider->getMyFloat()->SetCallback = std::make_shared<SliderSetProxy>(this);
+		slider->getMyFloat()->MaxVal = Height;
+		slider->getMyFloat()->MinVal = 0;
+
+		MyMenu->Add( slider );
+
+		slider->Pos = slider->PosOffset = slider->SelectedPos = Vector2::Zero;
+	}
+
+	float ScrollBar::SliderGet()
+	{
+		return Height - AttachedMenu->FancyPos->RelVal.Y;
+	}
+
+	void ScrollBar::SliderSet()
+	{
+		AttachedMenu->FancyPos->RelVal = Vector2( AttachedMenu->FancyPos->RelVal.X, Height - slider->getMyFloat()->MyFloat );
+	}
+
+	void ScrollBar::MyPhsxStep()
+	{
+		CkBaseMenu::MyPhsxStep();
+
+	#if defined(WINDOWS)
+		slider->getMyFloat()->setVal(slider->getMyFloat()->getVal() + Tools::DeltaScroll *.9f); // .68f;
+	#endif
+	}
+
+	const Microsoft::Xna::Framework::Vector2 &ScrollBar::getBarPos() const
+	{
+		return slider->Pos;
+	}
+
+	void ScrollBar::setBarPos( const Vector2 &value )
+	{
+		slider->Pos = value;
+	}
+
+	void ScrollBar::MyDraw()
+	{
+		CkBaseMenu::MyDraw();
+	}
+
+	void ScrollBar::OnAdd()
+	{
+		CkBaseMenu::OnAdd();
+
+		Pos->SetCenter( Parent->Pos );
+		SlideIn( 0 );
+	}
+}

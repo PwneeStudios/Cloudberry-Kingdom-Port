@@ -1,0 +1,374 @@
+﻿#include "Recycler.h"
+#include "Game/Objects/ObjectBase.h"
+#include "Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
+#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"
+#include "Game/Objects/In Game Objects/Grab/Coin.h"
+#include "Game/Objects/In Game Objects/Obstacles/Spike.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include "Game/Objects/In Game Objects/Obstacles/FireSpinner.h"
+#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
+#include "Game/Objects/In Game Objects/Blocks/MovingPlatform.h"
+#include "Game/Objects/In Game Objects/Blocks/MovingBlock.h"
+#include "Game/Objects/In Game Objects/Blocks/FallingBlock.h"
+#include "Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
+#include "Game/Objects/In Game Objects/Blocks/Lava_Castle.h"
+#include "Game/Objects/In Game Objects/Obstacles/Boulder.h"
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy.h"
+#include "Game/Objects/Special/CameraZone.h"
+#include "Game/Objects/Door/Door.h"
+#include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
+#include "Game/Objects/In Game Objects/Obstacles/Laser.h"
+#include "Game/Objects/In Game Objects/Obstacles/Cloud.h"
+#include "Game/Objects/In Game Objects/Blocks/GhostBlock.h"
+#include "Game/Objects/In Game Objects/Blocks/Conveyor.h"
+#include "Game/Objects/In Game Objects/Obstacles/SpikeyLine.h"
+#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Firesnake.h"
+#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.BerryBubble.h"
+#include "Game/Objects/In Game Objects/Blocks/Pendulum.h"
+#include "Game/Objects/In Game Objects/Obstacles/Serpent.h"
+#include "Game/Objects/In Game Objects/Obstacles/LavaDrip.h"
+#include "Game/Tools/Tools.h"
+
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System;
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System::Collections::Generic;
+//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
+//using namespace System::Linq;
+
+namespace CloudberryKingdom
+{
+
+	void RecycleBin::Release()
+	{
+		for ( std::stack<ObjectBase*>::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
+			if ( ( *obj )->getCore()->MyLevel == 0 )
+				( *obj )->Release();
+
+		for ( std::stack<ObjectBase*>::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
+			if ( ( *obj )->getCore()->MyLevel == 0 )
+				( *obj )->Release();
+	}
+
+	RecycleBin::RecycleBin( ObjectType type )
+	{
+		MyType = type;
+
+		FullObject = std::stack<ObjectBase*>();
+		BoxObject = std::stack<ObjectBase*>();
+	}
+
+	std::shared_ptr<ObjectBase> RecycleBin::GetObject( bool BoxesOnly )
+	{
+		if ( BoxesOnly )
+			return GetObject_BoxesOnly();
+		else
+			return GetObject_Graphical();
+	}
+
+	std::shared_ptr<ObjectBase> RecycleBin::GetObject_BoxesOnly()
+	{
+		return __GetObject( true );
+	}
+
+	std::shared_ptr<ObjectBase> RecycleBin::GetObject_Graphical()
+	{
+		return __GetObject( false );
+	}
+
+	std::shared_ptr<ObjectBase> RecycleBin::__GetObject( bool BoxesOnly )
+	{
+		std::shared_ptr<ObjectBase> obj = 0;
+
+		//lock (this)
+		{
+			if ( BoxesOnly )
+			{
+				if ( BoxObject.size() > 0 )
+					obj = BoxObject.pop();
+			}
+			else
+			{
+				if ( FullObject.size() > 0 )
+				{
+					obj = FullObject.pop();
+				}
+			}
+
+			if ( obj != 0 )
+				obj->MakeNew();
+			else
+				obj = NewObject( BoxesOnly );
+		}
+
+		return obj;
+	}
+
+	void RecycleBin::CollectObject( const std::shared_ptr<ObjectBase> &obj )
+	{
+		if ( obj->getCore()->MarkedForDeletion )
+			return;
+
+		obj->getCore()->MarkedForDeletion = true;
+		obj->getCore()->Active = false;
+		obj->getCore()->Show = false;
+
+		// If the object belongs to a level, add this object to the level's
+		// pre-recycle bin, to be actually recycled when the level cleans its
+		// object lists.
+		if ( obj->getCore()->MyLevel != 0 )
+		{
+			obj->getCore()->MyLevel->PreRecycleBin.push_back(obj);
+			return;
+		}
+
+		//lock (this)
+		{
+			if ( obj->getCore()->BoxesOnly )
+				BoxObject.push( obj );
+			else
+			{
+	//                    if (FullObject.Contains(obj))
+	  //                      Console.WriteLine("@@@@@@ Double recyled!");
+				FullObject.push( obj );
+			}
+		}
+	}
+
+	std::shared_ptr<ObjectBase> RecycleBin::NewObject( bool BoxesOnly )
+	{
+		switch ( MyType )
+		{
+			case ObjectType_FLYING_BLOB:
+				return std::make_shared<FlyingBlob>( BoxesOnly );
+			case ObjectType_BLOCK_EMITTER:
+				return std::make_shared<BlockEmitter>( BoxesOnly );
+			case ObjectType_COIN:
+				return std::make_shared<Coin>( BoxesOnly );
+			case ObjectType_SPIKE:
+				return std::make_shared<Spike>( BoxesOnly );
+			case ObjectType_FIREBALL:
+				return std::make_shared<Fireball>( BoxesOnly );
+			case ObjectType_FIRE_SPINNER:
+				return std::make_shared<FireSpinner>( BoxesOnly );
+			case ObjectType_NORMAL_BLOCK:
+				return std::make_shared<NormalBlock>( BoxesOnly );
+			case ObjectType_MOVING_PLATFORM:
+				return std::make_shared<MovingPlatform>( BoxesOnly );
+			case ObjectType_MOVING_BLOCK:
+				return std::make_shared<MovingBlock>( BoxesOnly );
+			case ObjectType_FALLING_BLOCK:
+				return std::make_shared<FallingBlock>( BoxesOnly );
+			case ObjectType_BOUNCY_BLOCK:
+				return std::make_shared<BouncyBlock>( BoxesOnly );
+			case ObjectType_LAVA_BLOCK:
+				//return new LavaBlock(BoxesOnly);
+				return std::make_shared<LavaBlock_Castle>( BoxesOnly );
+			case ObjectType_BOULDER:
+				return std::make_shared<Boulder>( BoxesOnly );
+			case ObjectType_SPIKEY_GUY:
+				return std::make_shared<SpikeyGuy>( BoxesOnly );
+			case ObjectType_CAMERA_ZONE:
+				return std::make_shared<CameraZone>();
+			case ObjectType_DOOR:
+				return std::make_shared<Door>( BoxesOnly );
+			case ObjectType_CHECKPOINT:
+				return std::make_shared<Checkpoint>();
+			case ObjectType_LASER:
+				return std::make_shared<Laser>( BoxesOnly );
+			case ObjectType_CLOUD:
+				return std::make_shared<Cloud>( BoxesOnly );
+			case ObjectType_GHOST_BLOCK:
+				return std::make_shared<GhostBlock>( BoxesOnly );
+			case ObjectType_CONVEYOR_BLOCK:
+				return std::make_shared<ConveyorBlock>( BoxesOnly );
+			case ObjectType_SPIKEY_LINE:
+				return std::make_shared<SpikeyLine>( BoxesOnly );
+			case ObjectType_FIRESNAKE:
+				return std::make_shared<Firesnake>( BoxesOnly );
+			case ObjectType_BERRY_BUBBLE:
+				return std::make_shared<BerryBubble>( BoxesOnly );
+
+			case ObjectType_PENDULUM:
+				return std::make_shared<Pendulum>( BoxesOnly );
+			case ObjectType_SERPENT:
+				return std::make_shared<Serpent>( BoxesOnly );
+			case ObjectType_LAVA_DRIP:
+				return std::make_shared<LavaDrip>( BoxesOnly );
+
+			default:
+				return 0;
+				throw ( std::exception( _T( "No type found for desired object" ) ) );
+		}
+	}
+
+int Recycler::MetaCount = 0;
+std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
+
+	std::shared_ptr<Recycler> Recycler::GetRecycler()
+	{
+		std::shared_ptr<Recycler> bin = 0;
+
+//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
+		lock ( MetaBin )
+		{
+			MetaCount++;
+			if ( MetaBin.empty() )
+				return std::make_shared<Recycler>();
+
+			bin = MetaBin.pop();
+		}
+
+		return bin;
+	}
+
+	void Recycler::ReturnRecycler( const std::shared_ptr<Recycler> &recycler )
+	{
+		recycler->Empty();
+//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
+		lock ( MetaBin )
+		{
+			MetaCount--;
+			MetaBin.push( recycler );
+		}
+	}
+
+	void Recycler::DumpMetaBin()
+	{
+//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
+		lock ( MetaBin )
+		{
+			for ( std::stack<Recycler*>::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
+				( *recycler )->Empty( false );
+			GC::Collect();
+		}
+	}
+
+	Recycler::Recycler()
+	{
+		Init();
+	}
+
+	void Recycler::Init()
+	{
+		//Bins = new Dictionary<ObjectType, RecycleBin>();
+		int N = Tools::GetValues<ObjectType>()->Count(); //Enum.GetValues(typeof(ObjectType)).Length;
+		Bins = std::vector<RecycleBin*>( N );
+	}
+
+	std::shared_ptr<ObjectBase> Recycler::GetNewObject( ObjectType type, bool BoxesOnly )
+	{
+		if ( type == ObjectType_UNDEFINED )
+			return 0;
+
+		if ( Bins[ static_cast<int>( type ) ] == 0 )
+			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+
+		std::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->NewObject( BoxesOnly );
+
+		return obj;
+	}
+
+	std::shared_ptr < ObjectBase *Recycler::operator []( ObjectType type, bool BoxesOnly )
+	{
+		return GetObject( type, BoxesOnly );
+	}
+
+	std::shared_ptr<ObjectBase> Recycler::GetObject( ObjectType type, bool BoxesOnly )
+	{
+		//if (type == ObjectType.FlyingBlob)
+		//    Tools.Write("!");
+
+		if ( type == ObjectType_UNDEFINED )
+			//throw (new System.Exception("No type found for desired object"));
+			return 0;
+
+		//if (!Bins.ContainsKey(type))
+		  //  Bins.Add(type, new RecycleBin(type));
+
+		if ( Bins[ static_cast<int>( type ) ] == 0 )
+			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+
+		//return Bins[type].GetObject(BoxesOnly);
+		std::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->GetObject( BoxesOnly );
+
+		return obj;
+	}
+
+	void Recycler::CollectObject( const std::shared_ptr<ObjectBase> &obj )
+	{
+		CollectObject( obj, true );
+	}
+
+	void Recycler::CollectObject( const std::shared_ptr<ObjectBase> &obj, bool CollectAssociates )
+	{
+		if ( obj == 0 || obj->getCore()->MarkedForDeletion )
+			return;
+
+		// Actions to be taken when the object is deleted
+		if ( !obj->getCore()->OnDeletionCodeRan )
+		{
+			if ( obj->getCore()->GenData.OnMarkedForDeletion != 0 )
+				obj->getCore()->GenData.OnMarkedForDeletion->Apply();
+			obj->OnMarkedForDeletion();
+
+			obj->getCore()->OnDeletionCodeRan = true;
+		}
+
+		// Get the object type
+		ObjectType type = obj->getCore()->MyType;
+		if ( type == ObjectType_UNDEFINED )
+		{
+			obj->getCore()->MarkedForDeletion = true;
+			obj->getCore()->Active = false;
+			obj->getCore()->Show = false;
+			return;
+		}
+
+		if ( Bins[ static_cast<int>( type ) ] == 0 )
+			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+
+		Bins[ static_cast<int>( type ) ]->CollectObject( obj );
+
+		// Collect associate objects
+		if ( CollectAssociates && obj->getCore()->Associations.size() > 0 )
+			for ( int i = 0; i < obj->getCore()->Associations.size(); i++ )
+				if ( obj->getCore()->Associations[ i ].Guid > 0 )
+				{
+					std::shared_ptr<ObjectBase> _obj = obj->getCore()->MyLevel->LookupGUID(obj->getCore()->Associations[ i ].Guid);
+					if ( _obj == 0 )
+						continue;
+
+					// Delete the associated object if DeleteWhenDeleted flag is set
+					if ( obj->getCore()->Associations[ i ].DeleteWhenDeleted )
+						CollectObject( _obj );
+					// Otherwise remove the association
+					else
+					{
+						if ( _obj->getCore()->Associations.size() > 0 )
+						{
+							for ( int j = 0; j < _obj->getCore()->Associations.size(); j++ )
+								if ( _obj->getCore()->Associations[ j ].Guid == obj->getCore()->MyGuid )
+									_obj->getCore()->Associations[ j ].Guid = 0;
+						}
+					}
+				}
+	}
+
+	void Recycler::Empty()
+	{
+		Empty( true );
+	}
+
+	void Recycler::Empty( bool DoGC )
+	{
+		for ( int i = 0; i < Bins.size(); i++ )
+			if ( Bins[ i ] != 0 )
+				Bins[ i ]->Release();
+
+		Init();
+
+		if ( DoGC )
+			GC::Collect();
+	}
+}
