@@ -36,11 +36,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MenuList : public MenuItem

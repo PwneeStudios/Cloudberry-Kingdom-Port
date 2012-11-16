@@ -102,11 +102,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Fireball : public _CircleDeath

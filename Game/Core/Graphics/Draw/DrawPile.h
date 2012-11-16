@@ -39,11 +39,6 @@ namespace Microsoft
 	}
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class DrawPile : public ViewReadWrite, public IViewableList

@@ -17,11 +17,6 @@ namespace CloudberryKingdom
 {
 	class TileSet;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class RndDifficulty

@@ -39,11 +39,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HelpMenu : public CkBaseMenu

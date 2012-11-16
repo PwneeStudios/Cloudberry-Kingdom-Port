@@ -8,16 +8,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	enum AnimQueueEntryType

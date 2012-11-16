@@ -25,31 +25,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace Forms = System::Windows::Forms;
 
 namespace CloudberryKingdom

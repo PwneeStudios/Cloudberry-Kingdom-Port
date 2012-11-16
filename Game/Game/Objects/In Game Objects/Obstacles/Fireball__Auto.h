@@ -32,11 +32,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Fireball_Parameters : public AutoGen_Parameters

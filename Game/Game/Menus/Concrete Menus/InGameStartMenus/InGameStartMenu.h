@@ -33,11 +33,6 @@ namespace CloudberryKingdom
 	class MenuItem;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class InGameStartMenu : public CkBaseMenu

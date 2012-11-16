@@ -69,16 +69,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class FlyingBlob : public _Obstacle, public IBound

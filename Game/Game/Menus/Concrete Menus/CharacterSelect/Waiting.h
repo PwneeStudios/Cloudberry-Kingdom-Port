@@ -10,11 +10,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Waiting : public CkBaseMenu

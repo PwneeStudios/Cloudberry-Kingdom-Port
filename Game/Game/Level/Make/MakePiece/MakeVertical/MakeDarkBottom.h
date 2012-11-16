@@ -8,11 +8,6 @@ namespace CloudberryKingdom
 	class Level;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MakeDarkBottom : public MakeFinalDoorVertical

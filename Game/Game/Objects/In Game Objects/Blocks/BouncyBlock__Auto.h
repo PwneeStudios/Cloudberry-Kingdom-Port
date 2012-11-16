@@ -29,11 +29,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BouncyBlock_Parameters : public AutoGen_Parameters

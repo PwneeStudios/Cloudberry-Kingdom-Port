@@ -36,11 +36,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxSpaceship : public BobPhsx

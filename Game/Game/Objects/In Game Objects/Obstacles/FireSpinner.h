@@ -32,11 +32,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class FireSpinner : public _LineDeath

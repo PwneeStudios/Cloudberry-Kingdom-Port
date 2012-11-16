@@ -29,11 +29,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SpikeyGuy : public _CircleDeath

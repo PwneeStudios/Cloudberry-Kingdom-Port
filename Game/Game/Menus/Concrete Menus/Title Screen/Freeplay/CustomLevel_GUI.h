@@ -75,11 +75,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CustomLevel_GUI : public CkBaseMenu

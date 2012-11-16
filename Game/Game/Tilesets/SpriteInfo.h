@@ -7,16 +7,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LineSpriteInfo

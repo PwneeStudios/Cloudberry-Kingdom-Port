@@ -5,11 +5,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LockableBool

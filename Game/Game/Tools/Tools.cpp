@@ -2,21 +2,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace XnaInput = Microsoft::Xna::Framework::Input;
 
 

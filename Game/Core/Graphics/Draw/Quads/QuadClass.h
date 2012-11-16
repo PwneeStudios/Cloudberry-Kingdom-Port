@@ -37,11 +37,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HsvQuad : public QuadClass

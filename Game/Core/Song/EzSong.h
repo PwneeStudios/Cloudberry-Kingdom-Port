@@ -20,11 +20,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EzSong

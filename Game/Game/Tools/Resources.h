@@ -21,26 +21,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Resources

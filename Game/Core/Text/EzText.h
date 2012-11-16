@@ -52,16 +52,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ButtonTexture

@@ -13,11 +13,6 @@ namespace CloudberryKingdom
 	class CharacterSelect;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CustomizeMenu : public CkBaseMenu

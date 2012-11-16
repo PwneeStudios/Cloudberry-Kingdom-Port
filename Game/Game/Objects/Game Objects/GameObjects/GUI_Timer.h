@@ -16,11 +16,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GUI_Timer : public GUI_Timer_Base

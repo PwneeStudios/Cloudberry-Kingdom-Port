@@ -12,11 +12,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	enum Side

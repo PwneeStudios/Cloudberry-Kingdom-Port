@@ -1,16 +1,6 @@
 ﻿#include <global_header.h>
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CoreEngine
 {
 

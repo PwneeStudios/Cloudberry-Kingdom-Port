@@ -36,11 +36,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class AggressiveUpgrades_GUI : public CustomUpgrades_GUI

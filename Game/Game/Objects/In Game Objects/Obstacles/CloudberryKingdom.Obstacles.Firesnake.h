@@ -29,16 +29,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	namespace Obstacles

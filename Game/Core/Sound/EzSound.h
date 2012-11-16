@@ -19,11 +19,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EzSound

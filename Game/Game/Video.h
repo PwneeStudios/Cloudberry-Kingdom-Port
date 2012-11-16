@@ -63,21 +63,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MainVideo

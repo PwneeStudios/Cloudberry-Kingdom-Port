@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class QuadClass;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MenuListExpand : public CkBaseMenu

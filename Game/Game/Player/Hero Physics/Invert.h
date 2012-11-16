@@ -49,11 +49,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxInvert : public BobPhsxNormal

@@ -20,11 +20,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HeroRush_Tutorial : public GameObject

@@ -50,11 +50,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Challenge_Escalation : public Challenge

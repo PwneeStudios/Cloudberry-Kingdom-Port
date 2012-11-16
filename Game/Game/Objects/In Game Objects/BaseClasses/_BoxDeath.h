@@ -26,11 +26,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class _BoxDeath : public _Death

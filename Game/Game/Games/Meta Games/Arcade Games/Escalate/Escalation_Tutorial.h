@@ -15,11 +15,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Escalation_Tutorial : public GameObject

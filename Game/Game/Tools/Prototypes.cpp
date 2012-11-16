@@ -3,11 +3,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -34,11 +29,6 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		obj->ParentQuad->Scale( Vector2( 260, 260 ) );
 
 		bool BrandNew = false;
-
-
-
-
-
 
 
 

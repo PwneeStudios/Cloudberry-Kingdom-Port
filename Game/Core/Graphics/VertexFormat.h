@@ -16,21 +16,6 @@ namespace Microsoft
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MyOwnVertexFormat : public IVertexType //, IReadWrite

@@ -136,16 +136,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Bob : public ObjectBase

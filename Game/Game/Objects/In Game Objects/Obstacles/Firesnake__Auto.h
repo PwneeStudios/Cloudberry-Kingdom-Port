@@ -26,11 +26,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Firesnake_Parameters : public AutoGen_Parameters

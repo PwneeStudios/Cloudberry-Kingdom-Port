@@ -10,11 +10,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HeroRush2_Tutorial : public HeroRush_Tutorial

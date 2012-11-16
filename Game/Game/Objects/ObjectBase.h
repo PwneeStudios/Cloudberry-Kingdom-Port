@@ -68,16 +68,6 @@ namespace CloudberryKingdom
 	class PlayerData;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ObjectBase : public ViewReadWrite

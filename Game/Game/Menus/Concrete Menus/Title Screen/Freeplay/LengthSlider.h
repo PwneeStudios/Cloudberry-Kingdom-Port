@@ -21,16 +21,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LengthSlider : public MenuSliderBase

@@ -28,11 +28,6 @@ namespace CloudberryKingdom
 	class MenuItem;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GameOverPanel : public CkBaseMenu

@@ -1,11 +1,6 @@
 ﻿#ifndef LAMBDA_1
 #define LAMBDA_1
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	template<typename T>

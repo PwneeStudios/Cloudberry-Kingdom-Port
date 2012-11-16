@@ -15,11 +15,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GUI_Text : public GUI_Panel

@@ -36,11 +36,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GUI_BlobQuota : public GUI_Blobs

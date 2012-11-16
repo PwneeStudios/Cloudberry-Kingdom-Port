@@ -35,11 +35,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 #if defined(PC_VERSION)

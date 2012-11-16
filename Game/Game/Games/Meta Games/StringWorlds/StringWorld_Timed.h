@@ -47,11 +47,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class StringWorldTimed : public StringWorldGameData

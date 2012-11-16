@@ -1,10 +1,5 @@
 ﻿#ifndef VERSION
 #define VERSION
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Version : public IComparable

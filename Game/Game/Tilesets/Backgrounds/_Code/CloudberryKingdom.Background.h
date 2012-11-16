@@ -45,21 +45,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Background : public ViewReadWrite

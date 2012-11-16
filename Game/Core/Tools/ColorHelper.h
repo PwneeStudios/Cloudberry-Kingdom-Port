@@ -6,11 +6,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ColorHelper

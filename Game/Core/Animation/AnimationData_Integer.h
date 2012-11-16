@@ -9,21 +9,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class OneAnim_Texture

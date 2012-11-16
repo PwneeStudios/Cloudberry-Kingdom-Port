@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class SpriteInfo;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ObjectIcon : public ViewReadWrite

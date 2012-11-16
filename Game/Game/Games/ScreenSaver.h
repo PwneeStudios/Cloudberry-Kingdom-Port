@@ -46,11 +46,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ScreenSaver : public StringWorldGameData

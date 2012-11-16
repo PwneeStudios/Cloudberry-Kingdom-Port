@@ -73,11 +73,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	enum ObjectDrawOrder

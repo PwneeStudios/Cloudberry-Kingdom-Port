@@ -19,21 +19,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ObjectBox

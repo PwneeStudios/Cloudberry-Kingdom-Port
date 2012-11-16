@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ZoneTrigger : public ObjectBase

@@ -13,16 +13,6 @@ namespace CloudberryKingdom
 	class Camera;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class TextList : public ObjectBase

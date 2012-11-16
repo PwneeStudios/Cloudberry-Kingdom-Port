@@ -1,10 +1,5 @@
 ﻿#ifndef LINE
 #define LINE
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Line

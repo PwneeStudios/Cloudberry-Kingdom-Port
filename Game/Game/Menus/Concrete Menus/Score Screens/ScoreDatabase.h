@@ -16,11 +16,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ScoreDatabase : public SaveLoad

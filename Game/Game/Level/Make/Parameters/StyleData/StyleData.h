@@ -39,11 +39,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class StyleData
@@ -331,11 +326,6 @@ namespace CloudberryKingdom
 		float GetSparsity();
 
 		int GetOffset( int Period, Vector2 pos, _OffsetType Type );
-
-
-
-
-
 	private:
 		void SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const std::shared_ptr<PieceSeedData> &Piece );
 

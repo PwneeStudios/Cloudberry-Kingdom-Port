@@ -2,11 +2,6 @@
 #define FLOATRECTANGLE
 
 #include <global_header.h>
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class FloatRectangle

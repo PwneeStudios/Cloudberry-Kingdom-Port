@@ -1,15 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
-
-
-
-
-
-
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 
 #endif

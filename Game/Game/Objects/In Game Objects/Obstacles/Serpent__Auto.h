@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class AutoGen_Parameters;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Serpent_Parameters : public AutoGen_Parameters

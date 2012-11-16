@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class Quad;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxRocketbox : public BobPhsxBox

@@ -28,11 +28,6 @@ namespace CloudberryKingdom
 	class EzText;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class PhsxSlider : public MenuSlider

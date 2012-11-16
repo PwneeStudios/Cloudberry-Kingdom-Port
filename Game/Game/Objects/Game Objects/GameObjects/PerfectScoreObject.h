@@ -13,11 +13,6 @@ namespace CloudberryKingdom
 	class EzText;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	/// <summary>

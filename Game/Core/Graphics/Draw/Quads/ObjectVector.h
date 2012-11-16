@@ -30,21 +30,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ObjectVector

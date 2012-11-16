@@ -29,16 +29,6 @@ namespace Microsoft
 }
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EzTexture

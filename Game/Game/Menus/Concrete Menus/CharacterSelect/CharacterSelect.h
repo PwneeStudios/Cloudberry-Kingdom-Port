@@ -46,11 +46,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)
 

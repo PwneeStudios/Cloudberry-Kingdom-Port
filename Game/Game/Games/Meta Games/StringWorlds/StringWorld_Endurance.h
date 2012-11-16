@@ -44,11 +44,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class StringWorldEndurance : public StringWorldGameData

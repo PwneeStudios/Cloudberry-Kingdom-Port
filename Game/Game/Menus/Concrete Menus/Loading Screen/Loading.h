@@ -46,11 +46,6 @@ namespace Microsoft
 	}
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ProgressBar : public ViewReadWrite

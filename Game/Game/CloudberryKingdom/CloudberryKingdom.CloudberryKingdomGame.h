@@ -128,42 +128,7 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace Forms = System::Windows::Forms;
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -479,11 +444,6 @@ namespace CloudberryKingdom
 
 
 		static void BenchmarkLoadSize();
-
-
-
-
-
 		bool ShowFPS;
 
 #if defined(DEBUG)

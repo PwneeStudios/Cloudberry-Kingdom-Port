@@ -12,11 +12,6 @@ namespace CloudberryKingdom
 {
 	class StyleData;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	// Stores the level of each obstacles

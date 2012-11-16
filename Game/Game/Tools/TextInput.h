@@ -18,11 +18,6 @@ namespace Microsoft
 #if defined(WINDOWS)
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CharacterEventArgs : public EventArgs

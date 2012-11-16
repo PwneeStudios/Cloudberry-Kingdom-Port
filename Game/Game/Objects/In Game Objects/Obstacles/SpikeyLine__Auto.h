@@ -24,11 +24,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SpikeyLine_Parameters : public AutoGen_Parameters

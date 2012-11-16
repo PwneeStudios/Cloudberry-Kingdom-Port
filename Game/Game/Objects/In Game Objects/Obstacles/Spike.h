@@ -44,16 +44,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Spike : public _BoxDeath

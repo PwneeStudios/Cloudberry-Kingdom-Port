@@ -10,11 +10,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Challenge_HeroFactoryEscalation : public Challenge_Escalation

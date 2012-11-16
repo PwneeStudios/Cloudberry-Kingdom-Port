@@ -61,11 +61,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Door : public ObjectBase, public ILevelConnector

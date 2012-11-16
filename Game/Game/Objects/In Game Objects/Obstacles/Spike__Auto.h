@@ -41,11 +41,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Spike_Parameters : public AutoGen_Parameters

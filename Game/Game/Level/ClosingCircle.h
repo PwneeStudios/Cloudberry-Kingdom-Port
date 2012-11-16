@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class IPos;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ClosingCircle

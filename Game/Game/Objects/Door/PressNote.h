@@ -11,11 +11,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class PressNote : public GUI_Text

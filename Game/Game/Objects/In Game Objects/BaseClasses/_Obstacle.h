@@ -9,11 +9,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class _Obstacle : public ObjectBase

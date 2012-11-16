@@ -24,16 +24,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class PieceQuadData

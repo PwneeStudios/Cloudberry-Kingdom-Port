@@ -15,11 +15,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Challenge_TimeCrisis : public Challenge_HeroRush

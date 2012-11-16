@@ -124,24 +124,9 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 
 #endif
-
-
-
-
-
 
 
 

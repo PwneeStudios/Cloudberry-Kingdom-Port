@@ -15,21 +15,6 @@ namespace Microsoft
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class OneAnim

@@ -5,11 +5,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class _Death : public _Obstacle

@@ -2,16 +2,6 @@
 #define BOBINPUT
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobInput

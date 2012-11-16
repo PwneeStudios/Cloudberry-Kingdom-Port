@@ -3,11 +3,6 @@
 
 #include <global_header.h>
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	template<typename T1, typename T2>

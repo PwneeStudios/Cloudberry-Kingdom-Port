@@ -1,9 +1,4 @@
 ﻿#include <global_header.h>
-
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -148,11 +143,6 @@ namespace CloudberryKingdom
 		BigEnd->setPos( Vector2( 1277.222f, 774.4444f ) );
 
 		SetPlayText();
-
-
-
-
-
 
 
 

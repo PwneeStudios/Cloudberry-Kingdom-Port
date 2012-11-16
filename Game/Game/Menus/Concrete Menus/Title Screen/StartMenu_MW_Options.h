@@ -7,11 +7,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class StartMenu_MW_Options : public SoundMenu

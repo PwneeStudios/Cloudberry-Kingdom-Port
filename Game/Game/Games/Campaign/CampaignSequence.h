@@ -23,16 +23,6 @@ namespace CloudberryKingdom
 	class LevelSeedData;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CampaignSequence : public LevelSequence

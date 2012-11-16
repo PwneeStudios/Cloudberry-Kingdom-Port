@@ -34,11 +34,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class FlyingBlob_Parameters : public AutoGen_Parameters

@@ -35,11 +35,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EzSongWad

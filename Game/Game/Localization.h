@@ -26,21 +26,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Localization

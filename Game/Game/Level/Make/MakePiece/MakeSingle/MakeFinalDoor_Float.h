@@ -25,11 +25,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MakeFinalDoor_Float : public MakeThing

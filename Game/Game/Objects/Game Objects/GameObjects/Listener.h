@@ -12,11 +12,6 @@ namespace CloudberryKingdom
 {
 	class ButtonClass;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Listener : public GUI_Panel

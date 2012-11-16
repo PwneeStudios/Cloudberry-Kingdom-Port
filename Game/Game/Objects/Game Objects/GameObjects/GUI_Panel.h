@@ -28,11 +28,6 @@ namespace CloudberryKingdom
 	class Lambda;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GUI_Panel : public GameObject

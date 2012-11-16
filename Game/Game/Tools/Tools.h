@@ -253,21 +253,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 namespace XnaInput = Microsoft::Xna::Framework::Input;
 
 

@@ -4,11 +4,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	namespace Obstacles

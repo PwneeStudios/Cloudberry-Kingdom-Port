@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class QuadClass;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class VerifyBaseMenu : public CkBaseMenu

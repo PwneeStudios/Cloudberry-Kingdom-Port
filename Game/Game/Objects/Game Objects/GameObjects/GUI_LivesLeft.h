@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class Level;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	/// <summary>

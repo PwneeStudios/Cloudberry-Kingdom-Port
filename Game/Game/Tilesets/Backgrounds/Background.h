@@ -13,16 +13,6 @@ namespace CloudberryKingdom
 	class Level;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BackgroundType

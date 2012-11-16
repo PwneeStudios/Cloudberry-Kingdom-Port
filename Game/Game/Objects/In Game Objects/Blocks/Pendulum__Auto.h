@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Pendulum_Parameters : public AutoGen_Parameters

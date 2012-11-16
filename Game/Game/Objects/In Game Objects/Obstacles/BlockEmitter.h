@@ -21,11 +21,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BlockEmitter : public ObjectBase

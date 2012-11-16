@@ -1,11 +1,6 @@
 ﻿#ifndef LAMBDA
 #define LAMBDA
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Lambda

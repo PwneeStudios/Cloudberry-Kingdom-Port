@@ -19,11 +19,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Laser_Parameters : public AutoGen_Parameters

@@ -7,11 +7,6 @@ namespace CloudberryKingdom
 {
 	class AutoGen;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Generators

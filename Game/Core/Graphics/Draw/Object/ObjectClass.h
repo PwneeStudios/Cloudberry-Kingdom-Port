@@ -120,16 +120,6 @@ namespace Microsoft
 }
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ObjectClass

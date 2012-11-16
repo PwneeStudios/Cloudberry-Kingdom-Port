@@ -2,11 +2,6 @@
 #define BOBPHSXCHARSELECT
 
 #include <global_header.h>
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxCharSelect : public BobPhsxNormal

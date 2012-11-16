@@ -7,11 +7,6 @@
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CoreMath

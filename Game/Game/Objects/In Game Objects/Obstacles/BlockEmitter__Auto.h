@@ -28,11 +28,6 @@ namespace CloudberryKingdom
 	class BlockEmitter;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BlockEmitter_Parameters : public AutoGen_Parameters

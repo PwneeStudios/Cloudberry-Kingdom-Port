@@ -31,11 +31,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MovingPlatform : public BlockBase

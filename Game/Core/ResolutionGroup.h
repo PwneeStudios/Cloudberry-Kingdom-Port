@@ -17,16 +17,6 @@ namespace Microsoft
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ResolutionGroup

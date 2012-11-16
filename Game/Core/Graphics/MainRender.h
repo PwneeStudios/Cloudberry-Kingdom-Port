@@ -30,11 +30,6 @@ namespace Microsoft
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MainRender

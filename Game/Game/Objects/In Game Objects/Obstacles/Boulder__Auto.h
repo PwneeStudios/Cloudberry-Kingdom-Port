@@ -50,11 +50,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Boulder_Parameters : public AutoGen_Parameters

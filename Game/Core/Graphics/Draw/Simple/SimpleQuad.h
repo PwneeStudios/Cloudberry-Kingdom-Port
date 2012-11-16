@@ -32,11 +32,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SimpleQuad : public IReadWrite

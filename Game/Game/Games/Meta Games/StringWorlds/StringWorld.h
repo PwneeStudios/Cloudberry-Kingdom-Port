@@ -49,11 +49,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EOL_StringWorldDoorActionProxy : public Lambda_1<Door*>

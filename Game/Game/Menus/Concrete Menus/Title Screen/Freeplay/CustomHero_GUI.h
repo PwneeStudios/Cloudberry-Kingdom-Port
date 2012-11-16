@@ -38,11 +38,6 @@ namespace CloudberryKingdom
 	class MenuList;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CustomHero_GUI : public CkBaseMenu

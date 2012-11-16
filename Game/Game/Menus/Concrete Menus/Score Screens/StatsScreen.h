@@ -39,11 +39,6 @@ namespace Microsoft
 	}
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class StatsMenu : public CkBaseMenu

@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class Lambda;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LevelItem : public MenuItem

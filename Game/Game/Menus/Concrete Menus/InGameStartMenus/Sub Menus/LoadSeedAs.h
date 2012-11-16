@@ -26,11 +26,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LoadSeedAs : public VerifyBaseMenu

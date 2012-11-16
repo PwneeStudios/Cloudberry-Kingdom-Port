@@ -1,11 +1,6 @@
 ﻿#ifndef UNSET
 #define UNSET
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Unset

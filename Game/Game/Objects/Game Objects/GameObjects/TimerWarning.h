@@ -15,11 +15,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class TimerWarning : public GameObject

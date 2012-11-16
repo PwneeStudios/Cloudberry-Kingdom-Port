@@ -43,11 +43,6 @@ namespace CloudberryKingdom
 	class Rand;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	enum LevelGeometry

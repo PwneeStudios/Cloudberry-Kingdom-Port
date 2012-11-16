@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class ObjectData;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class colData

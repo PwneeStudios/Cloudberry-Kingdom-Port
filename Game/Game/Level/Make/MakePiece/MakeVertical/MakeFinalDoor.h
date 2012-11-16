@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class Door;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MakeFinalDoorVertical : public MakeThing

@@ -8,11 +8,6 @@ namespace CloudberryKingdom
 	class LevelGenData;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	enum DifficultyParam

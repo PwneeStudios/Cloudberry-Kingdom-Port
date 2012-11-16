@@ -9,11 +9,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class LavaBlock_Castle : public LavaBlock

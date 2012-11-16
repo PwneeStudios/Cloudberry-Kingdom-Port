@@ -17,11 +17,6 @@ namespace CloudberryKingdom
 {
 	class Camera;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MenuScrollBar : public MenuSlider

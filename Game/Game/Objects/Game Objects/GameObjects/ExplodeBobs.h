@@ -14,11 +14,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ExplodeBobs : public GUI_Panel

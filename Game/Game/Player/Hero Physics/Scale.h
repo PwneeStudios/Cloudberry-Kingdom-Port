@@ -8,11 +8,6 @@ namespace CloudberryKingdom
 	class BobPhsx;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxScale : public BobPhsxNormal

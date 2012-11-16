@@ -27,11 +27,6 @@ namespace CloudberryKingdom
 {
 	class Level;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class NormalFactory : public GameFactory

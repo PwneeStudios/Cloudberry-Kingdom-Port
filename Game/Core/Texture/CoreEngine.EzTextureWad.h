@@ -55,16 +55,6 @@ namespace Microsoft
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CoreEngine
 {
 	class EzTextureWad

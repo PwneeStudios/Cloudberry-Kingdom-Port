@@ -54,11 +54,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	//public delegate void MenuItemGo(MenuItem item);

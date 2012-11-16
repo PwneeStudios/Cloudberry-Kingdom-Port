@@ -29,11 +29,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class GhostBlock_Parameters : public AutoGen_Parameters

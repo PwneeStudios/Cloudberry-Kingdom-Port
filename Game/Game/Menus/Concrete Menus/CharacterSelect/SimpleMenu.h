@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class MenuItem;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SimpleMenuBase : public CkBaseMenu

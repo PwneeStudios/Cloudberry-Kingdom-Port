@@ -48,16 +48,6 @@ namespace CloudberryKingdom
 	class Bob;
 }
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BlockData : public ObjectData

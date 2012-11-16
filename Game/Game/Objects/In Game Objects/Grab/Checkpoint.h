@@ -49,11 +49,6 @@ namespace CloudberryKingdom
 }
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Checkpoint : public ObjectBase

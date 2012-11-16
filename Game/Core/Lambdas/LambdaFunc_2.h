@@ -1,11 +1,6 @@
 ﻿#ifndef LAMBDAFUNC_2
 #define LAMBDAFUNC_2
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	template<typename T1, typename T2, typename OutputType>

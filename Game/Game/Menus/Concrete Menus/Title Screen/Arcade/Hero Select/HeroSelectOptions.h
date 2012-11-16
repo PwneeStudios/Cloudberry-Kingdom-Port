@@ -18,11 +18,6 @@ namespace CloudberryKingdom
 	class EzText;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HeroSelectOptions : public ArcadeBaseMenu

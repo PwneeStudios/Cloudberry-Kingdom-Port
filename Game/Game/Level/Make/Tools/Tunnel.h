@@ -12,11 +12,6 @@ namespace CloudberryKingdom
 {
 	class Level;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class TunnelFill

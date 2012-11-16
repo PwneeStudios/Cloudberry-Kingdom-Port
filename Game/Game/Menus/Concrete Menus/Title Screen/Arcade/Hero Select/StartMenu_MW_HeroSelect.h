@@ -43,11 +43,6 @@ namespace CloudberryKingdom
 	class HeroDoll;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class HeroItem : public MenuItem

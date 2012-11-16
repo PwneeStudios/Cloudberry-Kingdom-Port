@@ -34,11 +34,6 @@ namespace CloudberryKingdom
 	class AutoGen_Parameters;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SpikeyGuy_Parameters : public AutoGen_Parameters

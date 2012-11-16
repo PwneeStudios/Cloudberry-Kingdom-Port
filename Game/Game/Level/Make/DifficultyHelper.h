@@ -3,16 +3,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class DifficultyHelper

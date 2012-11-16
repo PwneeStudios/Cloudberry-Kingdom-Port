@@ -1,10 +1,5 @@
 ﻿#ifndef INTVECTOR2
 #define INTVECTOR2
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class IntVector2

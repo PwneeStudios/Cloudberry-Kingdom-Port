@@ -7,11 +7,6 @@ namespace CloudberryKingdom
 {
 	class QuadClass;
 }
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class ControlScreen : public CkBaseMenu

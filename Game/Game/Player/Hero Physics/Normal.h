@@ -30,11 +30,6 @@ namespace CloudberryKingdom
 
 
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class BobPhsxNormal : public BobPhsx

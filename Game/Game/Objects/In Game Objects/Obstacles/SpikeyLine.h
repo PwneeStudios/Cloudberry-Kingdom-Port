@@ -23,11 +23,6 @@ namespace CloudberryKingdom
 	class ObjectBase;
 }
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
 	class SpikeyLine : public _CircleDeath, public IBound
