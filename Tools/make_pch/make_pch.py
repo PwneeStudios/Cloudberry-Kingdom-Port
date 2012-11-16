@@ -21,21 +21,19 @@ def parse_options():
 		sys.stdout = open(options.header_file, 'w')
 		
 def build_tree(root):
-	print('#ifndef SUPER_GLOBAL_HEADER_H')
-	print('#define SUPER_GLOBAL_HEADER_H')
-	print('')
-	
 	for dirname, dirnames, filenames in os.walk(root):
-		for subdirname in dirnames:
-			build_tree(os.path.join(dirname, subdirname))
 		for filename in filenames:
 			if filename.endswith('.h'):
 				relative_path = os.path.relpath(os.path.join(dirname, filename), root_directory)
 				print('#include "' + relative_path + '"')
-	
-	print('')
-	print('#endif')
 
 if __name__ == '__main__':
 	parse_options()
+	print('#ifndef SUPER_GLOBAL_HEADER_H')
+	print('#define SUPER_GLOBAL_HEADER_H')
+	print('')
+	
 	build_tree(root_directory)
+	
+	print('')
+	print('#endif')
