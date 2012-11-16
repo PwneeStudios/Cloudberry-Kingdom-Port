@@ -1,16 +1,16 @@
 ﻿#ifndef DIFFICULTYHELPER
 #define DIFFICULTYHELPER
 
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::IO;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Text;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Collections::Generic;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Linq;
+
+
+
+
+
+
+
+
+
+
 
 
 namespace CloudberryKingdom
