@@ -1,13 +1,7 @@
 #ifndef STARTMENU
 #define STARTMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,20 +1,4 @@
-#include "SimpleMenu.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/ArrowMenu.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CustomizeMenu.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

@@ -1,19 +1,7 @@
 ﻿#ifndef GAMETYPE
 #define GAMETYPE
 
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Player/Stats.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Game/Objects/In Game Objects/Grab/Checkpoint.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

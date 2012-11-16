@@ -1,10 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Game/Objects/ObjectBase.h"
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

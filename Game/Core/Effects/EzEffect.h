@@ -1,7 +1,7 @@
 ﻿#ifndef EZEFFECT
 #define EZEFFECT
 
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

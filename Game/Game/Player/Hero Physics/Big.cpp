@@ -1,10 +1,4 @@
-﻿#include "Big.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Player/Hero Physics/Wheel.h"
-#include "Game/Player/Cape.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,7 +1,4 @@
-#include "Backdrop.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

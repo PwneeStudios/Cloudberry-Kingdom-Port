@@ -1,13 +1,7 @@
 ﻿#ifndef COLORSELECT
 #define COLORSELECT
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
-#include "../Game/Menus/Menu Components/MenuListExpand.h"
-#include "../Game/Localization.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

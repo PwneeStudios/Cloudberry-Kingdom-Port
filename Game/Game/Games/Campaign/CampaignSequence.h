@@ -1,17 +1,7 @@
 ﻿#ifndef CAMPAIGNSEQUENCE
 #define CAMPAIGNSEQUENCE
 
-#include "LevelSequence.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
-#include "../Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_NextLife.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

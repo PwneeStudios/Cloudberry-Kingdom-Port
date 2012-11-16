@@ -1,22 +1,7 @@
 ﻿#ifndef TOOLS
 #define TOOLS
 
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Version.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Oscillate.h"
-#include "../Core/PhsxData.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include "../Core/Graphics/VertexFormat.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <algorithm>
-#include <iostream>
-#include <cmath>
-#include <cctype>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace Microsoft
 {

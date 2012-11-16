@@ -1,13 +1,4 @@
-#include "Escalation_Tutorial.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "Game/Games/TutorialHelper.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tools/CkColorHelper.h"
-#include "Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

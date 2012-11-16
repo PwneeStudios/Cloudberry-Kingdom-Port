@@ -1,9 +1,7 @@
 ﻿#ifndef TITLEGAME_MW
 #define TITLEGAME_MW
 
-#include "../Game/Games/GameType.h"
-#include "TitleGameBase.h"
-#include "../Core/Lambdas/Lambda.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

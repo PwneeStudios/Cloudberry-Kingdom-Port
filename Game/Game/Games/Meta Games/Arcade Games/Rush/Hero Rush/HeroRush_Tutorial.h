@@ -1,12 +1,7 @@
 #ifndef HERORUSH_TUTORIAL
 #define HERORUSH_TUTORIAL
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Games/Meta Games/Arcade Games/Escalate/Escalation_Tutorial.h"
-#include "../Game/Games/Campaign/FadeIn.h"
-#include <vector>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

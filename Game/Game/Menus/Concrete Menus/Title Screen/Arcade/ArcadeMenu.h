@@ -1,15 +1,7 @@
 #ifndef ARCADEMENU
 #define ARCADEMENU
 
-#include "../Game/Menus/Menu Components/MenuItem.h"
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/CustomizeMenu.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomUpgrades_GUI.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

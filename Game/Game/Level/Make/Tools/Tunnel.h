@@ -1,8 +1,7 @@
 ﻿#ifndef TUNNEL
 #define TUNNEL
 
-#include <unordered_map>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

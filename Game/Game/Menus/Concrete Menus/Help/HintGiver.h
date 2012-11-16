@@ -1,10 +1,7 @@
 #ifndef HINTGIVER
 #define HINTGIVER
 
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

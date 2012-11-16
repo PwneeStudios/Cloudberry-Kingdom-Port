@@ -1,9 +1,7 @@
 ﻿#ifndef SERPENT__AUTO
 #define SERPENT__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,16 +1,4 @@
-#include "CustomUpgrades_GUI.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Menu Components/MenuSlider.h"
-#include "Game/Objects/Icon.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Tools/WrappedFloat.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Tools/Camera.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

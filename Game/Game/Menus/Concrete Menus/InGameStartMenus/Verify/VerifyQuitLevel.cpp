@@ -1,15 +1,4 @@
-#include "VerifyQuitLevel.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "Game/Menus/CkBaseMenu.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

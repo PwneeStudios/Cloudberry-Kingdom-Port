@@ -1,23 +1,4 @@
-#include "ArcadeMenu.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Core/Text/EzText.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/LongMenu.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

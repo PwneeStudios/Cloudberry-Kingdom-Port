@@ -1,8 +1,7 @@
 #ifndef STARTMENU_MW_CUSTOMLEVEL
 #define STARTMENU_MW_CUSTOMLEVEL
 
-#include "Freeplay/CustomLevel_GUI.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

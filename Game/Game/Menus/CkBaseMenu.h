@@ -1,13 +1,7 @@
 #ifndef CKBASEMENU
 #define CKBASEMENU
 
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "Concrete Menus/Help/HelpMenu.h"
-#include "Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Localization.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,22 +1,7 @@
 ﻿#ifndef BASE
 #define BASE
 
-#include "../Game/Level/Make/PieceSeedData.h"
-#include "../Core/Tools/Set.h"
-#include "../Game/Localization.h"
-#include "../Game/Player/Cape.h"
-#include "../Game/Tools/Oscillate.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include "../Game/Objects/Bob/Bob.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

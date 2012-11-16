@@ -1,15 +1,4 @@
-﻿#include "HeroRush2.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2_Tutorial.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Games/GameType.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Door/Sign.h"
-#include "Game/Objects/Game Objects/GameObjects/DoorIcon.h"
-#include "Game/Player/Hero Physics/Normal.h"
-#include "Game/Localization.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

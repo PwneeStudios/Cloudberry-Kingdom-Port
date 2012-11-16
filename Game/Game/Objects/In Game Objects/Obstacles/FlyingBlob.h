@@ -2,13 +2,7 @@
 #define FLYINGBLOB
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/In Game Objects/BaseClasses/_Obstacle.h"
-#include "../Game/Objects/IBounded.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Tools/Camera.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

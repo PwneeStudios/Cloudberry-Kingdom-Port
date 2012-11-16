@@ -1,12 +1,7 @@
 #ifndef SCORELIST
 #define SCORELIST
 
-#include "ScoreEntry.h"
-#include "../Game/Localization.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

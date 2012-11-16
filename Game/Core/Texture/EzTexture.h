@@ -1,8 +1,7 @@
 ﻿#ifndef EZTEXTURE
 #define EZTEXTURE
 
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

@@ -1,10 +1,7 @@
 ﻿#ifndef LEVELPIECE
 #define LEVELPIECE
 
-#include "Replays/Recording.h"
-#include "../Core/PhsxData.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

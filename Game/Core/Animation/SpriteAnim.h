@@ -1,8 +1,7 @@
 ﻿#ifndef SPRITEANIM
 #define SPRITEANIM
 
-#include <unordered_map>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

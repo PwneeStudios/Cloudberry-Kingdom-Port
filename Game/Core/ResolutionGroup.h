@@ -1,10 +1,7 @@
 #ifndef RESOLUTIONGROUP
 #define RESOLUTIONGROUP
 
-#include "../Game/Tools/IntVector2.h"
-#include "../Game/Objects/Bob/Bob.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

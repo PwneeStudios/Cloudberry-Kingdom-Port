@@ -1,11 +1,4 @@
-#include "StartMenu_MW_Campaign.h"
-#include "Game/Player/PlayerData.h"
-#include "Core/Text/EzText.h"
-#include "Game/Games/Campaign/CampaignSequence.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Tools.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

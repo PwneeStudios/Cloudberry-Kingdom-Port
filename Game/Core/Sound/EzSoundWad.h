@@ -1,8 +1,7 @@
 ﻿#ifndef EZSOUNDWAD
 #define EZSOUNDWAD
 
-#include <string>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

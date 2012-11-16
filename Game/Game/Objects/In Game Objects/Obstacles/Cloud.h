@@ -2,10 +2,7 @@
 #define CLOUD
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/In Game Objects/BaseClasses/_Obstacle.h"
-#include "../Game/Tilesets/TileSet.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

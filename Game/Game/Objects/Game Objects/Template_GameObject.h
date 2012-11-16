@@ -1,7 +1,7 @@
 #ifndef TEMPLATE_GAMEOBJECT
 #define TEMPLATE_GAMEOBJECT
 
-#include "GameObject.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

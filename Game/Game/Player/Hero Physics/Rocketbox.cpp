@@ -1,13 +1,4 @@
-﻿#include "Rocketbox.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Core/Graphics/Draw/Quads/Quad.h"
-#include "Game/Objects/In Game Objects/Blocks/Block.h"
-#include "Core/Tools/CoreMath.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

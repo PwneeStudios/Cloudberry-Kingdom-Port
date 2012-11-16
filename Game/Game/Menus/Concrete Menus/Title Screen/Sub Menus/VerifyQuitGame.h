@@ -1,11 +1,7 @@
 #ifndef VERIFYQUITGAME
 #define VERIFYQUITGAME
 
-#include "../Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Version.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

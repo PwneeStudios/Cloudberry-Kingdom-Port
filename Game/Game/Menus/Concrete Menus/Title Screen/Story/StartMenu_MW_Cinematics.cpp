@@ -1,9 +1,4 @@
-#include "StartMenu_MW_Cinematics.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Game/Localization.h"
-#include "Game/Video.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

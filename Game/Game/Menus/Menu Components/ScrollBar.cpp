@@ -1,11 +1,4 @@
-﻿#include "ScrollBar.h"
-#include "Game/Menus/LongMenu.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Menu Components/MenuSlider.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Menus/Menu Components/MenuScrollBar.h"
-#include "Game/Tools/WrappedFloat.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

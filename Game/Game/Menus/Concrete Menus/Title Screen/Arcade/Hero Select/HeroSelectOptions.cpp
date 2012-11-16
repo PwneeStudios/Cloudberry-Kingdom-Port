@@ -1,19 +1,4 @@
-#include "HeroSelectOptions.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreList.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
-#include "Game/Objects/Game Objects/GameObjects/End/HighScorePanel.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

@@ -1,11 +1,7 @@
 ﻿#ifndef SCROLLBAR
 #define SCROLLBAR
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

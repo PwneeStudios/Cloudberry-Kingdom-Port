@@ -1,15 +1,4 @@
-﻿#include "ReplayGUI.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Core/Tools/CoreMath.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

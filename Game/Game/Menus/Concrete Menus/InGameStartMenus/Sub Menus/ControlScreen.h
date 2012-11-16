@@ -1,8 +1,7 @@
 #ifndef CONTROLSCREEN
 #define CONTROLSCREEN
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

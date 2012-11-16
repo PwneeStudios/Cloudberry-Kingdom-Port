@@ -1,13 +1,4 @@
-#include "CkBaseMenu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Sound/EzSound.h"
-#include "Core/Text/EzFont.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

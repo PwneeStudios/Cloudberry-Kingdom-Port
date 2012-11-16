@@ -1,12 +1,7 @@
 #ifndef GUI_LEVEL
 #define GUI_LEVEL
 
-#include "GUI_Panel.h"
-#include "../Game/Localization.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include <string>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

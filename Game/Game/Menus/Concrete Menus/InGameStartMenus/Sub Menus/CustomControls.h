@@ -1,17 +1,7 @@
 #ifndef CUSTOMCONTROLS
 #define CUSTOMCONTROLS
 
-#include "../Game/Menus/Menu Components/MenuItem.h"
-#include "../Game/Localization.h"
-#include "../Game/Tools/Resources.h"
-#include "../Properties/Resources.Designer.h"
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,10 +1,7 @@
 #ifndef SCOREDATABASE
 #define SCOREDATABASE
 
-#include "../Game/Tools/EzStorage.h"
-#include <unordered_map>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

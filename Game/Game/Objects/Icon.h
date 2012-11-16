@@ -1,15 +1,7 @@
 ﻿#ifndef ICON
 #define ICON
 
-#include "../Core/IViewable.h"
-#include "AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include "../Game/Tools/Recycler.h"
-#include "../Game/Localization.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <unordered_map>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

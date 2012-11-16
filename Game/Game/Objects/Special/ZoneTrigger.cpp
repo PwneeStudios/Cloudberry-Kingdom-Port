@@ -1,9 +1,4 @@
-#include "ZoneTrigger.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Collision Detection/Phsx.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

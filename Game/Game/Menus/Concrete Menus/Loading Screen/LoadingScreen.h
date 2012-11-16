@@ -1,10 +1,7 @@
 ﻿#ifndef LOADINGSCREEN
 #define LOADINGSCREEN
 
-#include "ILoadingScreen.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

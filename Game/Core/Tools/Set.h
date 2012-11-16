@@ -1,8 +1,7 @@
 #ifndef SET
 #define SET
 
-#include "Random.h"
-#include <unordered_map>
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

@@ -1,18 +1,4 @@
-﻿#include "Spaceship.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Blocks/Block.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Core/Animation/SpriteAnim.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/In Game Objects/Blocks/GhostBlock__Auto.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

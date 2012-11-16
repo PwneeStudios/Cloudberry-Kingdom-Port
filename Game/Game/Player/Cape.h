@@ -1,11 +1,7 @@
 ﻿#ifndef CAPE
 #define CAPE
 
-#include "../Core/PhsxData.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include "../Game/Tools/Oscillate.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

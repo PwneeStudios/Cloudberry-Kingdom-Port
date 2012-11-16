@@ -1,7 +1,4 @@
-#include "_CircleDeath.h"
-#include "Game/Collision Detection/Circle.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/ObjectBase.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Text;

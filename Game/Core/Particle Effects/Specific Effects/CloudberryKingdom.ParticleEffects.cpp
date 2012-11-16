@@ -1,11 +1,4 @@
-﻿#include "CloudberryKingdom.ParticleEffects.h"
-#include "Core/Particle Effects/Particle.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Particle Effects/ParticleEmitter.h"
-#include "Core/Texture/EzTexture.h"
-#include "Core/Sound/EzSound.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

@@ -1,7 +1,7 @@
 #ifndef LEVELCONNECTOR
 #define LEVELCONNECTOR
 
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,11 +1,7 @@
 ﻿#ifndef PENDULUM__AUTO
 #define PENDULUM__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "MovingBlock__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/FlyingBlob__Auto.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

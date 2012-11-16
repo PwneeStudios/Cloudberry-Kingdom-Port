@@ -1,11 +1,4 @@
-#include "ArrowMenu.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/SimpleMenu.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Text/EzText.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,7 +1,4 @@
-﻿#include "LongMenu.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,13 +1,7 @@
 ﻿#ifndef MENULIST
 #define MENULIST
 
-#include "MenuItem.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

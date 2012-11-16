@@ -1,19 +1,7 @@
 #ifndef STARTMENU_MW_HEROSELECT
 #define STARTMENU_MW_HEROSELECT
 
-#include "../Game/Menus/Menu Components/MenuItem.h"
-#include "../Game/Tools/Resources.h"
-#include "../Properties/Resources.Designer.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/ColorSelect.h"
-#include "../Game/Menus/Menu Components/MenuListExpand.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include <vector>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

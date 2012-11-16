@@ -1,8 +1,7 @@
 ﻿#ifndef ARROW
 #define ARROW
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Graphics/Draw/Quads/PieceQuad.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

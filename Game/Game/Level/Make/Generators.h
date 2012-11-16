@@ -1,7 +1,7 @@
 ﻿#ifndef GENERATORS
 #define GENERATORS
 
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

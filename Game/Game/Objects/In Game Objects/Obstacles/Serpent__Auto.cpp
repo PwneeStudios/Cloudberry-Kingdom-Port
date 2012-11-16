@@ -1,11 +1,4 @@
-﻿#include "Serpent__Auto.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Level/Make/DifficultyHelper.h"
-#include "Game/Objects/In Game Objects/Obstacles/Serpent.h"
-#include "Game/Tools/Recycler.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

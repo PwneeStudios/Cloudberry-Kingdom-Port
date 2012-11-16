@@ -1,13 +1,7 @@
 ﻿#ifndef UPGRADES
 #define UPGRADES
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

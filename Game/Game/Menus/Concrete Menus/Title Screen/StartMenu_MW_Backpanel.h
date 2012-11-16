@@ -1,10 +1,7 @@
 #ifndef STARTMENU_MW_BACKPANEL
 #define STARTMENU_MW_BACKPANEL
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

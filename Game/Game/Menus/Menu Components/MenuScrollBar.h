@@ -1,10 +1,7 @@
 ﻿#ifndef MENUSCROLLBAR
 #define MENUSCROLLBAR
 
-#include "MenuSlider.h"
-#include "../Game/Tools/Resources.h"
-#include "../Properties/Resources.Designer.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

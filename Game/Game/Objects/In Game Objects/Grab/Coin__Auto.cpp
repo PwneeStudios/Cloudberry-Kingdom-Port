@@ -1,10 +1,4 @@
-﻿#include "Coin__Auto.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/In Game Objects/Grab/Coin.h"
-#include "Game/Tools/Recycler.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,13 +1,4 @@
-#include "PlayerData.h"
-#include "Game/Player/SavedSeeds.h"
-#include "Core/Tools/Set.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
-#include "Core/Chunk.h"
-#include "Game/Tools/Unset.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Core/Text/EzText.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Tools/Tools.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

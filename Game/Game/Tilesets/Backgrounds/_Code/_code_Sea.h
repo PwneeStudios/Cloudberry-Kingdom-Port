@@ -1,8 +1,7 @@
 ﻿#ifndef _CODE_SEA
 #define _CODE_SEA
 
-#include "../Game/Tilesets/Backgrounds/Background.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

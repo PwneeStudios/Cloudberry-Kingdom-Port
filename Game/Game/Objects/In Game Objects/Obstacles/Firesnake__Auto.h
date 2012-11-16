@@ -1,16 +1,7 @@
 ﻿#ifndef FIRESNAKE__AUTO
 #define FIRESNAKE__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "SpikeyLine__Auto.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "SpikeyGuy__Auto.h"
-#include "../Game/Objects/In Game Objects/Blocks/BouncyBlock__Auto.h"
-#include "FlyingBlob__Auto.h"
-#include "Boulder__Auto.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

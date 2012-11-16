@@ -1,16 +1,7 @@
 #ifndef PLAYERMANAGER
 #define PLAYERMANAGER
 
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Tools/Set.h"
-#include "../Game/Tools/EzStorage.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "Stats.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <stdexcept>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

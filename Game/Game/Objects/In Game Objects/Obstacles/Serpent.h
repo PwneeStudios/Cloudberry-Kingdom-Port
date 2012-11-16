@@ -1,8 +1,7 @@
 ﻿#ifndef SERPENT
 #define SERPENT
 
-#include "../Game/Objects/In Game Objects/BaseClasses/_BoxDeath.h"
-#include "../Game/Tilesets/TileSet.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,5 +1,4 @@
-﻿#include "_code_Hills.h"
-#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

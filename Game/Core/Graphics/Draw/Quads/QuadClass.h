@@ -1,15 +1,7 @@
 ﻿#ifndef QUADCLASS
 #define QUADCLASS
 
-#include "../Core/Tools/Set.h"
-#include "../Core/IViewable.h"
-#include "../Core/Graphics/Draw/Simple/SimpleQuad.h"
-#include "Quad.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 #ifndef GAMEOBJECT
 #define GAMEOBJECT
 
-#include "../Game/Objects/ObjectBase.h"
-#include "../Core/Lambdas/Lambda.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

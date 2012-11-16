@@ -1,8 +1,7 @@
 #ifndef GUI_TIMER_SIMPLE
 #define GUI_TIMER_SIMPLE
 
-#include "GUI_Timer_Base.h"
-#include "../Core/Lambdas/Lambda_1.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

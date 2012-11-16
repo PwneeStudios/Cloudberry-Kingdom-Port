@@ -1,12 +1,7 @@
 #ifndef HIGHSCOREPANEL
 #define HIGHSCOREPANEL
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

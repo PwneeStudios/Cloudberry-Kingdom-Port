@@ -1,12 +1,4 @@
-﻿#include "ColorSelect.h"
-#include "Game/Menus/Menu Components/MenuList.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Text/EzText.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

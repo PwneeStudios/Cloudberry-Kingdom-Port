@@ -1,15 +1,4 @@
-﻿#include "SignInChoiceMenu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/SimpleMenu.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Tools/Resources.h"
-#include "Core/Text/EzFont.h"
-#include "Properties/Resources.Designer.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

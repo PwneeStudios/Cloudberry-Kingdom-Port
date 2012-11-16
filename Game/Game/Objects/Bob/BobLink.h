@@ -1,8 +1,7 @@
 ﻿#ifndef BOBLINK
 #define BOBLINK
 
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

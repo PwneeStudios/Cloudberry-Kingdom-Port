@@ -1,5 +1,4 @@
-﻿#include "OneScreenData.h"
-#include "Core/Tools/Random.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,7 +1,7 @@
 ﻿#ifndef WAITING
 #define WAITING
 
-#include "../Game/Menus/CkBaseMenu.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

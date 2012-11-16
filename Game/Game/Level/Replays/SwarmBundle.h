@@ -1,9 +1,7 @@
 ﻿#ifndef SWARMBUNDLE
 #define SWARMBUNDLE
 
-#include "../Core/Lambdas/Lambda_2.h"
-#include <unordered_map>
-#include <vector>
+#include <global_header.h>
 
 namespace Microsoft
 {

@@ -1,16 +1,7 @@
 #ifndef PIECESEEDDATA
 #define PIECESEEDDATA
 
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

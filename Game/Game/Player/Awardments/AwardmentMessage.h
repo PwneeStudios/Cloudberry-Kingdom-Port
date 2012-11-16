@@ -1,10 +1,7 @@
 ﻿#ifndef AWARDMENTMESSAGE
 #define AWARDMENTMESSAGE
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

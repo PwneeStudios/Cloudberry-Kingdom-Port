@@ -1,19 +1,7 @@
 ﻿#ifndef BOULDER__AUTO
 #define BOULDER__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "Firesnake__Auto.h"
-#include "SpikeyLine__Auto.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "SpikeyGuy__Auto.h"
-#include "../Game/Objects/In Game Objects/Blocks/BouncyBlock__Auto.h"
-#include "FlyingBlob__Auto.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

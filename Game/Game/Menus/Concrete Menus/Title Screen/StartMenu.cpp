@@ -1,20 +1,4 @@
-#include "StartMenu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
-#include "Game/Games/ScreenSaver.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
-#include "Game/Player/Stats.h"
-#include "Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/VerifyQuitGame.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Localization.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

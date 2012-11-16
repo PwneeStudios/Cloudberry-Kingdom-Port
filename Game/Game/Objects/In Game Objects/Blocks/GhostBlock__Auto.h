@@ -1,10 +1,7 @@
 ﻿#ifndef GHOSTBLOCK__AUTO
 #define GHOSTBLOCK__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

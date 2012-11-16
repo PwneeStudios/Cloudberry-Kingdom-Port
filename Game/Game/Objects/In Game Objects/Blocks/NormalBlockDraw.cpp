@@ -1,6 +1,4 @@
-﻿#include "NormalBlockDraw.h"
-#include "Core/Graphics/Draw/Quads/PieceQuad.h"
-#include "Game/Objects/In Game Objects/Blocks/Block.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,7 +1,7 @@
 #ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

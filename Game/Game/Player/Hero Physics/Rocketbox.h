@@ -1,10 +1,7 @@
 ﻿#ifndef ROCKETBOX
 #define ROCKETBOX
 
-#include "Box.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

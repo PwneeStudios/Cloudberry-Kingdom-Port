@@ -1,9 +1,7 @@
 ﻿#ifndef SWARMRECORD
 #define SWARMRECORD
 
-#include <vector>
-#include <queue>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

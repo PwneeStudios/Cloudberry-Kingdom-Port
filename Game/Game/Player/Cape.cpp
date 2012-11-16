@@ -1,11 +1,4 @@
-﻿#include "Cape.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Core/Graphics/VertexFormat.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Effects/EzEffect.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

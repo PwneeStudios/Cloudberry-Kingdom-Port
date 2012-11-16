@@ -1,19 +1,7 @@
 ﻿#ifndef ESCALATION
 #define ESCALATION
 
-#include "../Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
-#include "../Game/Games/ScreenSaver.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
-#include "../Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
-#include "../Game/Games/Meta Games/StringWorlds/StringWorld_Endurance.h"
-#include "../Core/Lambdas/Lambda_2.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

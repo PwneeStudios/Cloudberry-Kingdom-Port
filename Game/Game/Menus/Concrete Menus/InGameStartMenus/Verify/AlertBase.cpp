@@ -1,10 +1,4 @@
-#include "AlertBase.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

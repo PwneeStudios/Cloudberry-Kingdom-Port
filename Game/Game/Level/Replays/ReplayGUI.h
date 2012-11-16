@@ -1,12 +1,7 @@
 ﻿#ifndef REPLAYGUI
 #define REPLAYGUI
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

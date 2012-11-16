@@ -1,18 +1,7 @@
 #ifndef PERFECTSCOREOBJECT
 #define PERFECTSCOREOBJECT
 
-#include "GUI_Panel.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Campaign/CampaignSequence.h"
-#include "CoinScoreMultiplierObject.h"
-#include "GUI_NextLife.h"
-#include "GUI_Timer.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

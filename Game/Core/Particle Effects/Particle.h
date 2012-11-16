@@ -1,12 +1,7 @@
 ﻿#ifndef PARTICLE
 #define PARTICLE
 
-#include "../Core/PhsxData.h"
-#include "../Core/Graphics/Draw/Simple/SimpleQuad.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <stack>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

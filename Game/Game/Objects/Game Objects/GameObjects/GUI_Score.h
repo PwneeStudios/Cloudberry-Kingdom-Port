@@ -1,11 +1,7 @@
 #ifndef GUI_SCORE
 #define GUI_SCORE
 
-#include "../Game/Player/PlayerManager.h"
-#include "GUI_Panel.h"
-#include <string>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

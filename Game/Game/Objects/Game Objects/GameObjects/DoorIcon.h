@@ -1,15 +1,7 @@
 #ifndef DOORICON
 #define DOORICON
 
-#include "GUI_Panel.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "../Game/Tools/Camera.h"
-#include "../Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include <string>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

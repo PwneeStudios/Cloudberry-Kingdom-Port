@@ -1,7 +1,7 @@
 #ifndef _BOXDEATH
 #define _BOXDEATH
 
-#include "_Death.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

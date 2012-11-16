@@ -1,7 +1,7 @@
 ﻿#ifndef EZSOUND
 #define EZSOUND
 
-#include <string>
+#include <global_header.h>
 
 namespace Microsoft
 {

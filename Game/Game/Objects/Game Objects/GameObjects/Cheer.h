@@ -1,8 +1,7 @@
 #ifndef CHEER
 #define CHEER
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

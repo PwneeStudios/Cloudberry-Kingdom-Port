@@ -1,10 +1,7 @@
 ﻿#ifndef JOINTEXT
 #define JOINTEXT
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "GamerTag.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,20 +1,4 @@
-﻿#include "Spike.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Core/Graphics/Draw/Simple/SimpleObject.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Prototypes.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Tools/CoreMath.h"
-#include "Core/Effects/EzEffectWad.h"
-#include "Core/Texture/CloudberryKingdom.EzTextureWad.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Collision Detection/Phsx.h"
-#include "Game/Objects/In Game Objects/Obstacles/Spike__Auto.h"
-#include "Game/Objects/ObjectBase.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

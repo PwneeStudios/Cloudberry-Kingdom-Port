@@ -1,12 +1,7 @@
 ﻿#ifndef MENUITEM
 #define MENUITEM
 
-#include "../Core/IViewable.h"
-#include "../Game/Tools/Oscillate.h"
-#include "../Game/Localization.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

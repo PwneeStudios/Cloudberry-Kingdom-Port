@@ -1,10 +1,7 @@
 ﻿#ifndef DOLL
 #define DOLL
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Game/Player/ClrTextFx.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

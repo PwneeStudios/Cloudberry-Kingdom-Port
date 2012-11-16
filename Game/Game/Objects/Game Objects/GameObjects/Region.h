@@ -1,9 +1,7 @@
 #ifndef REGION
 #define REGION
 
-#include "GUI_Panel.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

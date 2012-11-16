@@ -1,12 +1,4 @@
-﻿#include "SimpleQuad.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Texture/EzTexture.h"
-#include "Core/Animation/AnimationData_Integer.h"
-#include "Core/Texture/TextureOrAnim.h"
-#include "Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "Core/Effects/EzEffect.h"
-#include "Core/Graphics/Draw/Quads/Quad.h"
-#include "Core/Tools/ColorHelper.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

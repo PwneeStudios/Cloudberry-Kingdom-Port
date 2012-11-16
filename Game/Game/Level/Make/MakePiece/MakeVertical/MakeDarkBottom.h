@@ -1,7 +1,7 @@
 ﻿#ifndef MAKEDARKBOTTOM
 #define MAKEDARKBOTTOM
 
-#include "MakeFinalDoor.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

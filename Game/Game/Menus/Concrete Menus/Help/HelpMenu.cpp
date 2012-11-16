@@ -1,25 +1,4 @@
-#include "HelpMenu.h"
-#include "Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Objects/Game Objects/GameObjects/Guide.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Games/GameType.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/Help/HelpBlurb.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/In Game Objects/Grab/Coin.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Menus/Menu Components/MenuToggle.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Linq;

@@ -2,10 +2,7 @@
 #define MOVINGPLATFORM
 
 #define _USE_MATH_DEFINES
-#include "Block.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

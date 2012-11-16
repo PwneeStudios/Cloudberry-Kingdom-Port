@@ -1,8 +1,7 @@
 ﻿#ifndef LENGTHSLIDER
 #define LENGTHSLIDER
 
-#include "../Game/Menus/Menu Components/MenuSliderBase.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

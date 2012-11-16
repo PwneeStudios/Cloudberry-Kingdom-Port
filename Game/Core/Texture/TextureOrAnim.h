@@ -1,8 +1,7 @@
 ﻿#ifndef TEXTUREORANIM
 #define TEXTUREORANIM
 
-#include "../Core/Tools/Set.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef BOX
 #define BOX
 
-#include "Normal.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

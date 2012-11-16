@@ -1,13 +1,4 @@
-﻿#include "MovingPlatform.h"
-#include "Game/Tilesets/BlockGroup.h"
-#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/ObjectBase.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

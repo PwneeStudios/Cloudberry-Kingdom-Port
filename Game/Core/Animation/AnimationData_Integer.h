@@ -1,12 +1,7 @@
 ﻿#ifndef ANIMATIONDATA_INTEGER
 #define ANIMATIONDATA_INTEGER
 
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Core/Tools/Set.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,12 +1,7 @@
 ﻿#ifndef NORMAL
 #define NORMAL
 
-#include "Base.h"
-#include "../Game/Objects/Bob/Bob.h"
-#include <unordered_map>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

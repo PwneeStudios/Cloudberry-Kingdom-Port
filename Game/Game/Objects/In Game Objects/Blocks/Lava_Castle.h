@@ -1,9 +1,7 @@
 ﻿#ifndef LAVA_CASTLE
 #define LAVA_CASTLE
 
-#include "Lava.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

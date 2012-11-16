@@ -1,10 +1,7 @@
 ﻿#ifndef EZSONGWAD
 #define EZSONGWAD
 
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

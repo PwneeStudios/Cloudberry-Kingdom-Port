@@ -1,5 +1,4 @@
-﻿#include "UpData.h"
-#include "Core/Tools/Random.h"
+﻿#include <global_header.h>
 
 namespace CloudberryKingdom
 {

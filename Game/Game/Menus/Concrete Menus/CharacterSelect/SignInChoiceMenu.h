@@ -1,10 +1,7 @@
 ﻿#ifndef SIGNINCHOICEMENU
 #define SIGNINCHOICEMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

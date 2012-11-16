@@ -1,10 +1,7 @@
 ﻿#ifndef LAVADRIP__AUTO
 #define LAVADRIP__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

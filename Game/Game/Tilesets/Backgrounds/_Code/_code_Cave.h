@@ -1,8 +1,7 @@
 ﻿#ifndef _CODE_CAVE
 #define _CODE_CAVE
 
-#include "../Game/Tilesets/Backgrounds/Background.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

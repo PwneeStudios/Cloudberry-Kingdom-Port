@@ -1,13 +1,4 @@
-﻿#include "Rush.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Timer_Base.h"
-#include "Game/Games/GameType.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Timer.h"
-#include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

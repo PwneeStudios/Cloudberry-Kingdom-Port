@@ -1,12 +1,7 @@
 #ifndef SOUNDMENU
 #define SOUNDMENU
 
-#include "../Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,6 +1,4 @@
-﻿#include "HeroFactory_Escalation.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Localization.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

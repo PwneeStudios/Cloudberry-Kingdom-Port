@@ -1,11 +1,7 @@
 ﻿#ifndef SIMPLEQUAD
 #define SIMPLEQUAD
 
-#include "../Core/IViewable.h"
-#include "../Core/Tools/Set.h"
-#include "SimpleVector.h"
-#include "BasePoint.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

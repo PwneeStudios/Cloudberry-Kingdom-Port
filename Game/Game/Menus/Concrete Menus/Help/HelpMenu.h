@@ -1,20 +1,7 @@
 #ifndef HELPMENU
 #define HELPMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Player/PlayerManager.h"
-#include "../Game/Objects/Game Objects/GameObjects/SlowMo.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

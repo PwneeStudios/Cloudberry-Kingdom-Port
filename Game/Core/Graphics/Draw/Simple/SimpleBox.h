@@ -1,8 +1,7 @@
 ﻿#ifndef SIMPLEBOX
 #define SIMPLEBOX
 
-#include "SimpleVector.h"
-#include "BasePoint.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

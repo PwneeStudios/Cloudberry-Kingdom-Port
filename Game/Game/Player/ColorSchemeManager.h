@@ -1,12 +1,7 @@
 #ifndef COLORSCHEMEMANAGER
 #define COLORSCHEMEMANAGER
 
-#include "../Core/Lambdas/Lambda_1.h"
-#include "ColorScheme.h"
-#include "ClrTextFx.h"
-#include "../Game/Localization.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

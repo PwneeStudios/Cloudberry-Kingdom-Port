@@ -1,11 +1,7 @@
 ﻿#ifndef LEVELSEQUENCE
 #define LEVELSEQUENCE
 
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Rush.h"
-#include <string>
-#include <vector>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,7 @@
 ﻿#ifndef HEROFACTORY_ESCALATION
 #define HEROFACTORY_ESCALATION
 
-#include "Escalate/Escalation.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

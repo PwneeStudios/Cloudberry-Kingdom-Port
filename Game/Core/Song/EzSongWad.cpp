@@ -1,12 +1,4 @@
-﻿#include "EzSongWad.h"
-#include "Core/Song/EzSong.h"
-#include "Core/Text/EzText.h"
-#include "Game/Tools/Camera.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Tools/Tools.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Core/Input/ButtonCheck.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

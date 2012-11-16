@@ -1,10 +1,4 @@
-﻿#include "TimeCrisis.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis_Tutorial.h"
-#include "Game/Localization.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

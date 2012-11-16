@@ -1,9 +1,4 @@
-#include "LevelTitle.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

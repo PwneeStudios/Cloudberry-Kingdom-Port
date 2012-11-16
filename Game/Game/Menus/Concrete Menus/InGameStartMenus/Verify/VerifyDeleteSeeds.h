@@ -1,11 +1,7 @@
 #ifndef VERIFYDELETESEEDS
 #define VERIFYDELETESEEDS
 
-#include "VerifyBase.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

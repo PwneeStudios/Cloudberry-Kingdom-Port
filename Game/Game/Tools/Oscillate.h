@@ -1,9 +1,7 @@
 ﻿#ifndef OSCILLATE
 #define OSCILLATE
 
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Core/Tools/Set.h"
-#include <cmath>
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

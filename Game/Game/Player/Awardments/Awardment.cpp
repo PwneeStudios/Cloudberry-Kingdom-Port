@@ -1,13 +1,4 @@
-#include "Awardment.h"
-#include "Game/Player/ColorScheme.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Player/Stats.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Player/Awardments/AwardmentMessage.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
-#include "Game/Player/Hero Physics/Normal.h"
-#include "Game/Objects/Bob/Bob.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

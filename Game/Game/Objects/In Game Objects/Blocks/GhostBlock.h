@@ -1,13 +1,7 @@
 ﻿#ifndef GHOSTBLOCK
 #define GHOSTBLOCK
 
-#include "Block.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "../Game/Collision Detection/AABox.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

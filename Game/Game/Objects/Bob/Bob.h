@@ -1,18 +1,7 @@
 ﻿#ifndef BOB
 #define BOB
 
-#include "../Game/Objects/ObjectBase.h"
-#include "../Game/Player/ColorScheme.h"
-#include "../Game/Player/Cape.h"
-#include "BobInput.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "../Core/PhsxData.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

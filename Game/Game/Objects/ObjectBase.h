@@ -1,14 +1,7 @@
 ﻿#ifndef OBJECTBASE
 #define OBJECTBASE
 
-#include "../Core/IViewable.h"
-#include "../Game/Collision Detection/AABox.h"
-#include "Game Objects/GameObject.h"
-#include "../Game/Tools/Recycler.h"
-#include "../Core/PhsxData.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

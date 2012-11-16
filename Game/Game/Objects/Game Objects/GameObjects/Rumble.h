@@ -1,7 +1,7 @@
 #ifndef RUMBLE
 #define RUMBLE
 
-#include "GUI_Panel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

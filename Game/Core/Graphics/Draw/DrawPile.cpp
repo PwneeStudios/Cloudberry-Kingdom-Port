@@ -1,9 +1,4 @@
-﻿#include "DrawPile.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/FancyVector2.h"
-#include "Core/FancyColor.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

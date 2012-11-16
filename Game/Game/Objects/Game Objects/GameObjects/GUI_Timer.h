@@ -1,12 +1,7 @@
 #ifndef GUI_TIMER
 #define GUI_TIMER
 
-#include "GUI_Timer_Base.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Campaign/CampaignSequence.h"
-#include "CoinScoreMultiplierObject.h"
-#include "PerfectScoreObject.h"
-#include "GUI_NextLife.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

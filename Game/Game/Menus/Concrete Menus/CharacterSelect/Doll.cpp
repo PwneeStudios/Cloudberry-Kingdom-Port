@@ -1,16 +1,4 @@
-﻿#include "Doll.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Player/Hero Physics/Normal.h"
-#include "Game/Tools/Tools.h"
-#include "Core/PhsxData.h"
-#include "Game/Player/ColorScheme.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Player/Hero Physics/BobPhsxCharSelect.h"
-#include "Game/Player/Cape.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

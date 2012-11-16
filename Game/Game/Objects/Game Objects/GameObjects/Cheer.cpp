@@ -1,7 +1,4 @@
-#include "Cheer.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,9 +1,7 @@
 ﻿#ifndef CLRTEXTFX
 #define CLRTEXTFX
 
-#include "../Game/Localization.h"
-#include <string>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

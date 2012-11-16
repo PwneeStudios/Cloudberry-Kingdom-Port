@@ -1,11 +1,7 @@
 ﻿#ifndef NORMALBLOCK
 #define NORMALBLOCK
 
-#include "Block.h"
-#include "../Game/Collision Detection/AABox.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef LONGMENU
 #define LONGMENU
 
-#include "Menu.h"
-#include <vector>
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

@@ -1,20 +1,4 @@
-#include "HeroRush_Tutorial.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Objects/Special/Arrow.h"
-#include "Game/Games/TutorialHelper.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
-#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Localization.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

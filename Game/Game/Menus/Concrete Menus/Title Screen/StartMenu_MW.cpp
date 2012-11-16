@@ -1,17 +1,4 @@
-#include "StartMenu_MW.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Options.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Exit.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Story/StartMenu_MW_Campaign.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartMenu_MW_Arcade.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_CustomLevel.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Tools/ColorHelper.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

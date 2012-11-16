@@ -1,15 +1,7 @@
 #ifndef GUI_NEXTLIFE
 #define GUI_NEXTLIFE
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Campaign/CampaignSequence.h"
-#include "CoinScoreMultiplierObject.h"
-#include "PerfectScoreObject.h"
-#include "GUI_Timer.h"
-#include "GUI_Lives.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

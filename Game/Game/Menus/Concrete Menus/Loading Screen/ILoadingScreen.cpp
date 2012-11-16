@@ -1,5 +1,4 @@
-﻿#include "ILoadingScreen.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

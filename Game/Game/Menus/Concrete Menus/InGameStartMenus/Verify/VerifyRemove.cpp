@@ -1,10 +1,4 @@
-#include "VerifyRemove.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

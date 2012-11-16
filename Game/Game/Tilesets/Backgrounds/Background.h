@@ -1,10 +1,7 @@
 ﻿#ifndef BACKGROUND
 #define BACKGROUND
 
-#include "_Code/CloudberryKingdom.Background.h"
-#include <string>
-#include <unordered_map>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

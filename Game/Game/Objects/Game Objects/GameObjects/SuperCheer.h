@@ -1,8 +1,7 @@
 #ifndef SUPERCHEER
 #define SUPERCHEER
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Lambdas/Lambda.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

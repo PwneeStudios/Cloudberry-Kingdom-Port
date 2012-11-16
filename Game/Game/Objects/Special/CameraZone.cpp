@@ -1,6 +1,4 @@
-#include "CameraZone.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/ObjectBase.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

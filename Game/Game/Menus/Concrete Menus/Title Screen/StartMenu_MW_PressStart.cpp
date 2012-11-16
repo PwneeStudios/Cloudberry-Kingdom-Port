@@ -1,15 +1,4 @@
-#include "StartMenu_MW_PressStart.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Tools/Tools.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

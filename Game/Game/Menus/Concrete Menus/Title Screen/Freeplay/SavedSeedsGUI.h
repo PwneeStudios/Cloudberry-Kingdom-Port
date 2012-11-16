@@ -1,20 +1,7 @@
 #ifndef SAVEDSEEDSGUI
 #define SAVEDSEEDSGUI
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Menus/Concrete Menus/Help/HelpMenu.h"
-#include "../Game/Menus/Menu Components/MenuItem.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "../Game/Menus/Concrete Menus/ShopMenu.h"
-#include "../Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
-#include "../Game/Menus/Concrete Menus/Score Screens/ScoreScreen.h"
-#include "../Game/Objects/Game Objects/GameObjects/End/GameOverPanel.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

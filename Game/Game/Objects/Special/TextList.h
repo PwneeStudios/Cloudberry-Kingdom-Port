@@ -1,9 +1,7 @@
 ﻿#ifndef TEXTLIST
 #define TEXTLIST
 
-#include "../Game/Objects/ObjectBase.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

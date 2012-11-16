@@ -1,7 +1,4 @@
-﻿#include "Param.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Core/Tools/Random.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

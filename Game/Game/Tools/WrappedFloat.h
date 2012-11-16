@@ -1,8 +1,7 @@
 ﻿#ifndef WRAPPEDFLOAT
 #define WRAPPEDFLOAT
 
-#include "../Core/Tools/Set.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

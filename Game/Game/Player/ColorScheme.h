@@ -1,15 +1,7 @@
 ﻿#ifndef COLORSCHEME
 #define COLORSCHEME
 
-#include "../Game/Localization.h"
-#include "ClrTextFx.h"
-#include "../Game/Objects/Special/Arrow.h"
-#include "../Game/Objects/In Game Objects/Obstacles/Cloud.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

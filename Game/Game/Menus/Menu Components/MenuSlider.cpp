@@ -1,9 +1,4 @@
-﻿#include "MenuSlider.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

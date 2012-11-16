@@ -1,12 +1,4 @@
-﻿#include "Time.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

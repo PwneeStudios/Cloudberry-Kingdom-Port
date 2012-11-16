@@ -1,9 +1,4 @@
-#include "ActionGame.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tools/Camera.h"
-#include "Game/Tilesets/Backgrounds/Background.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

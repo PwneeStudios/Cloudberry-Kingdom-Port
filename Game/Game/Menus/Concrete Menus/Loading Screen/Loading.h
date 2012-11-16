@@ -1,9 +1,7 @@
 ﻿#ifndef LOADING
 #define LOADING
 
-#include "../Core/IViewable.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

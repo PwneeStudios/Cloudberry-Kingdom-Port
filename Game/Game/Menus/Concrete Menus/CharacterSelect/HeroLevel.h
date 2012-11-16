@@ -1,9 +1,7 @@
 ﻿#ifndef HEROLEVEL
 #define HEROLEVEL
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef CHALLENGE_BASE
 #define CHALLENGE_BASE
 
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Localization.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

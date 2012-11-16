@@ -1,11 +1,7 @@
 #ifndef SIMPLEMENU
 #define SIMPLEMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

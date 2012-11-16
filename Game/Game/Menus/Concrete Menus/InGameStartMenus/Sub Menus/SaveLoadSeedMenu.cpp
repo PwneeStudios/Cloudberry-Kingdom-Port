@@ -1,14 +1,4 @@
-#include "SaveLoadSeedMenu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Player/PlayerData.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/LoadSeedAs.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Graphics;

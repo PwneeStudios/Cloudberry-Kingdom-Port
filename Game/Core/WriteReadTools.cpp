@@ -1,6 +1,4 @@
-﻿#include "WriteReadTools.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

@@ -1,17 +1,4 @@
-#include "PerfectScoreObject.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Objects/Game Objects/GameObjects/Cheer.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Special/TextFloat.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Text/EzFont.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

@@ -1,19 +1,7 @@
 ﻿#ifndef SCREENSAVER
 #define SCREENSAVER
 
-#include "Meta Games/StringWorlds/StringWorld.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
-#include "Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
-#include "Meta Games/StringWorlds/StringWorld_Timed.h"
-#include "Meta Games/StringWorlds/StringWorld_Endurance.h"
-#include "../Core/FancyVector2.h"
-#include "../Core/Lambdas/Lambda_2.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

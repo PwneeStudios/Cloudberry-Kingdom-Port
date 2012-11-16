@@ -1,9 +1,7 @@
 #ifndef SAVEDSEEDS
 #define SAVEDSEEDS
 
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

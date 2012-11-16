@@ -1,20 +1,7 @@
 #ifndef SHOPMENU
 #define SHOPMENU
 
-#include "InGameStartMenus/Verify/VerifyBase.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "Score Screens/StatsScreen.h"
-#include "Score Screens/ScoreScreen.h"
-#include "Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "../Game/Objects/Game Objects/GameObjects/End/GameOverPanel.h"
-#include "../Game/Player/ClrTextFx.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

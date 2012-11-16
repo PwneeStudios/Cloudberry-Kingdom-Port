@@ -1,9 +1,7 @@
 #ifndef LISTENER
 #define LISTENER
 
-#include "GUI_Panel.h"
-#include "../Game/Tools/Oscillate.h"
-#include "../Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

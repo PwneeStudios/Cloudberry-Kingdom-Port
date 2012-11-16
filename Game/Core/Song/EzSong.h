@@ -1,7 +1,7 @@
 ﻿#ifndef EZSONG
 #define EZSONG
 
-#include <string>
+#include <global_header.h>
 
 namespace Microsoft
 {

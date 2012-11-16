@@ -1,10 +1,4 @@
-#include "Region.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Collision Detection/Phsx.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

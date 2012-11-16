@@ -1,14 +1,7 @@
 #ifndef GUI_TEXT
 #define GUI_TEXT
 
-#include "GUI_Panel.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include "../Game/Localization.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

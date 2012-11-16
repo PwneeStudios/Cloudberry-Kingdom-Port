@@ -1,27 +1,4 @@
-﻿#include "Escalation.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
-#include "Game/Games/GameType.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
-#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation_Tutorial.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "Game/Localization.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Objects/Game Objects/GameObjects/MultiplierUp.h"
-#include "Game/Objects/Game Objects/GameObjects/LevelTitle.h"
-#include "Game/Tools/CkColorHelper.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Tilesets/TileSet.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Game/Games/Meta Games/Challenges/_Regular.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

@@ -1,16 +1,4 @@
-﻿#include "Wheel.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Sound/EzSound.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/In Game Objects/Blocks/Block.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Animation/SpriteAnim.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

@@ -1,5 +1,4 @@
-﻿#include "EzFont.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework::Graphics;
 

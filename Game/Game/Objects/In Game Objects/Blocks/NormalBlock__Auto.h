@@ -1,9 +1,7 @@
 ﻿#ifndef NORMALBLOCK__AUTO
 #define NORMALBLOCK__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include "../Game/Level/Make/PieceSeedData.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

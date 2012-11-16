@@ -1,8 +1,7 @@
 #ifndef RANDOMDIFFICULTY
 #define RANDOMDIFFICULTY
 
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

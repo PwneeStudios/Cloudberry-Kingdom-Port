@@ -1,8 +1,7 @@
 ﻿#ifndef BASEQUAD
 #define BASEQUAD
 
-#include <string>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

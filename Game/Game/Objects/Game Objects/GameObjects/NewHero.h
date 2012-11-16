@@ -1,8 +1,7 @@
 #ifndef NEWHERO
 #define NEWHERO
 
-#include "GUI_Panel.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

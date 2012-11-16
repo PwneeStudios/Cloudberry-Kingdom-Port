@@ -1,13 +1,7 @@
 #ifndef COINSCOREMULTIPLIEROBJECT
 #define COINSCOREMULTIPLIEROBJECT
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Campaign/CampaignSequence.h"
-#include "PerfectScoreObject.h"
-#include "GUI_NextLife.h"
-#include "GUI_Timer.h"
-#include "../Core/Lambdas/Lambda.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,11 +1,7 @@
 ﻿#ifndef FANCYCOLOR
 #define FANCYCOLOR
 
-#include "FancyVector2.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "Text/EzText.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

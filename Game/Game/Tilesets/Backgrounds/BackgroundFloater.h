@@ -1,9 +1,7 @@
 ﻿#ifndef BACKGROUNDFLOATER
 #define BACKGROUNDFLOATER
 
-#include "../Core/IViewable.h"
-#include "../Core/PhsxData.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

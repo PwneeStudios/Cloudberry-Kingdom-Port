@@ -1,10 +1,7 @@
 #ifndef ESCALATION_TUTORIAL
 #define ESCALATION_TUTORIAL
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
-#include "../Game/Games/Campaign/FadeIn.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

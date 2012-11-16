@@ -1,19 +1,7 @@
 #ifndef CUSTOMUPGRADES_GUI
 #define CUSTOMUPGRADES_GUI
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include "../Game/Localization.h"
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "CustomHero_GUI.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/CustomizeMenu.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

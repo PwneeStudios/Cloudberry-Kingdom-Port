@@ -1,8 +1,4 @@
-﻿#include "LengthSlider.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/Loading Screen/Loading.h"
-#include "Game/Tools/WrappedFloat.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

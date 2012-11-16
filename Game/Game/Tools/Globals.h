@@ -1,8 +1,7 @@
 ﻿#ifndef GLOBALS
 #define GLOBALS
 
-#include "../Game/Objects/AutoGen.h"
-#include <string>
+#include <global_header.h>
 
 namespace Microsoft
 {

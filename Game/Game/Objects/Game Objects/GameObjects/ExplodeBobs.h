@@ -1,8 +1,7 @@
 #ifndef EXPLODEBOBS
 #define EXPLODEBOBS
 
-#include "GUI_Panel.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

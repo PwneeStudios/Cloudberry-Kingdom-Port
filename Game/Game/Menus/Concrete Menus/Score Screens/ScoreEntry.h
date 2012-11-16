@@ -1,12 +1,7 @@
 #ifndef SCOREENTRY
 #define SCOREENTRY
 
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "../Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

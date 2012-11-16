@@ -1,13 +1,7 @@
 ﻿#ifndef SIMPLEOBJECT
 #define SIMPLEOBJECT
 
-#include "BasePoint.h"
-#include "SimpleQuad.h"
-#include "../Core/Graphics/Draw/Quads/Quad.h"
-#include <string>
-#include <vector>
-#include <queue>
-#include <algorithm>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

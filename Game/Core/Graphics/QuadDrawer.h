@@ -1,9 +1,7 @@
 ﻿#ifndef QUADDRAWER
 #define QUADDRAWER
 
-#include "Draw/Simple/SimpleQuad.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

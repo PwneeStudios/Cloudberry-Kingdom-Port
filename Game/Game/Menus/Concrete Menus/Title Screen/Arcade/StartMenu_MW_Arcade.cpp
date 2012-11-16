@@ -1,14 +1,4 @@
-#include "StartMenu_MW_Arcade.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

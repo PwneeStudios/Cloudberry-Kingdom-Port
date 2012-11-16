@@ -1,11 +1,7 @@
 ﻿#ifndef BACKGROUNDFLOATERLIST
 #define BACKGROUNDFLOATERLIST
 
-#include "../Core/IViewable.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

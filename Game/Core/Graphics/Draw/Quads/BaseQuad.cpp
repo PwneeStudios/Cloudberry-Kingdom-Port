@@ -1,15 +1,4 @@
-﻿#include "BaseQuad.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Core/Graphics/Draw/Quads/Quad.h"
-#include "Core/Graphics/VertexFormat.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Core/Texture/EzTexture.h"
-#include "Core/Effects/EzEffect.h"
-#include "Core/Animation/AnimationData_Integer.h"
-#include "Core/Graphics/Draw/Quads/ObjectVector.h"
-#include "Core/Effects/EzEffectWad.h"
-#include "Core/Texture/CloudberryKingdom.EzTextureWad.h"
-#include "Core/Graphics/QuadDrawer.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

@@ -1,7 +1,4 @@
-#include "LevelConnector.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Objects/Door/Door.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,18 +1,7 @@
 ﻿#ifndef HERORUSH
 #define HERORUSH
 
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Rush.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
-#include "../Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "../Game/Games/ScreenSaver.h"
-#include "../Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
-#include "../Game/Games/Meta Games/StringWorlds/StringWorld_Endurance.h"
-#include "../Core/Lambdas/Lambda_2.h"
-#include <string>
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

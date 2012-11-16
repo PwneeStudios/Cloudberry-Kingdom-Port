@@ -1,10 +1,7 @@
 #ifndef CAMERAZONE
 #define CAMERAZONE
 
-#include "ZoneTrigger.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Tools/Camera.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,12 +1,7 @@
 ﻿#ifndef RUSH
 #define RUSH
 
-#include "../Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Games/Campaign/LevelSequence.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

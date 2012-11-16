@@ -1,11 +1,4 @@
-﻿#include "Loading.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/WrappedFloat.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Audio;

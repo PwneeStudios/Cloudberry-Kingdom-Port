@@ -1,10 +1,7 @@
 ﻿#ifndef LAVADRIP
 #define LAVADRIP
 
-#include "../Game/Objects/In Game Objects/BaseClasses/_BoxDeath.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Collision Detection/Line.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

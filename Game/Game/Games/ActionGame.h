@@ -1,7 +1,7 @@
 #ifndef ACTIONGAME
 #define ACTIONGAME
 
-#include "GameType.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

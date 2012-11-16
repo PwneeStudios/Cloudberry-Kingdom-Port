@@ -1,9 +1,7 @@
 ﻿#ifndef DOUBLE
 #define DOUBLE
 
-#include "Normal.h"
-#include "../Core/Tools/Set.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

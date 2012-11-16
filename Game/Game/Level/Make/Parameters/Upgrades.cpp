@@ -1,8 +1,4 @@
-﻿#include "Upgrades.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Game/Level/Make/DifficultyHelper.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

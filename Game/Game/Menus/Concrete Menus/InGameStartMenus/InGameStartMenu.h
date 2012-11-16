@@ -1,11 +1,7 @@
 #ifndef INGAMESTARTMENU
 #define INGAMESTARTMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Game/Menus/Concrete Menus/Help/HelpMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

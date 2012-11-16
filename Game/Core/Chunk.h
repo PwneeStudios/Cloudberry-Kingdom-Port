@@ -1,12 +1,7 @@
 ﻿#ifndef CHUNK
 #define CHUNK
 
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <vector>
-#include <stdexcept>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

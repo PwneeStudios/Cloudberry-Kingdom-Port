@@ -1,10 +1,4 @@
-﻿#include "Double.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Player/Cape.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

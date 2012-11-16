@@ -1,13 +1,7 @@
 ﻿#ifndef BLOCK
 #define BLOCK
 
-#include "../Game/Objects/ObjectBase.h"
-#include "../Core/Graphics/Draw/Quads/PieceQuad.h"
-#include "../Game/Collision Detection/AABox.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <vector>
-#include <stdexcept>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

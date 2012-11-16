@@ -1,8 +1,7 @@
 ﻿#ifndef MULTICASTER_2
 #define MULTICASTER_2
 
-#include "Lambda_2.h"
-#include <vector>
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

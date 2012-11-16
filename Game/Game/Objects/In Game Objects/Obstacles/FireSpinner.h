@@ -2,11 +2,7 @@
 #define FIRESPINNER
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/In Game Objects/BaseClasses/_LineDeath.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Objects/Special/Arrow.h"
-#include "../Core/Graphics/Draw/Quads/PieceQuad.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

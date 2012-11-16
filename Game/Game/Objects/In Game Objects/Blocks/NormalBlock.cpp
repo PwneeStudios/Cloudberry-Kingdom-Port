@@ -1,12 +1,4 @@
-﻿#include "NormalBlock.h"
-#include "Game/Objects/In Game Objects/Blocks/NormalBlockDraw.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
-#include "Core/Graphics/Draw/Quads/PieceQuad.h"
-#include "Game/Tilesets/TileSet.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Bob/Bob.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::IO;

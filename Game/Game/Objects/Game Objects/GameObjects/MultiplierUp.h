@@ -1,7 +1,7 @@
 #ifndef MULTIPLIERUP
 #define MULTIPLIERUP
 
-#include "GUI_Panel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

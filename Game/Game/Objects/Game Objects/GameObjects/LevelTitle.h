@@ -1,8 +1,7 @@
 #ifndef LEVELTITLE
 #define LEVELTITLE
 
-#include "GUI_Panel.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

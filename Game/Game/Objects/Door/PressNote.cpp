@@ -1,8 +1,4 @@
-﻿#include "PressNote.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Tools/Oscillate.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

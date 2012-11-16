@@ -1,16 +1,7 @@
 ﻿#ifndef EZTEXT
 #define EZTEXT
 
-#include "../Core/IViewable.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Game/Localization.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

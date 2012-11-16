@@ -1,8 +1,4 @@
-#include "VerifyDeleteSeeds.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

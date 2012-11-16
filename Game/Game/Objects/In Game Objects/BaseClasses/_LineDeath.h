@@ -1,8 +1,7 @@
 #ifndef _LINEDEATH
 #define _LINEDEATH
 
-#include "_Death.h"
-#include "../Game/Collision Detection/Line.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

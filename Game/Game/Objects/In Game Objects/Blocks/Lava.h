@@ -1,10 +1,7 @@
 ﻿#ifndef LAVA
 #define LAVA
 
-#include "Block.h"
-#include "../Game/Collision Detection/AABox.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

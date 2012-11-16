@@ -1,22 +1,7 @@
 #ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Lambdas/Lambda_2.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "../Game/Player/Stats.h"
-#include "PieceSeedData.h"
-#include "../Game/Games/GameType.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <stdexcept>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

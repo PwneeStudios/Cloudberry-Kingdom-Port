@@ -1,9 +1,4 @@
-﻿#include "MenuScrollBar.h"
-#include "Core/Text/EzText.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Input;

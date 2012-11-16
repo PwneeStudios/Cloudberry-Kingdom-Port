@@ -1,10 +1,4 @@
-#include "RandomDifficulty.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/AutoGen.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Tilesets/TileSet.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

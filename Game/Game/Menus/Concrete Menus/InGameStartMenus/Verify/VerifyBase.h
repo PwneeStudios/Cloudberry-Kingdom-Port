@@ -1,8 +1,7 @@
 #ifndef VERIFYBASE
 #define VERIFYBASE
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef OBJECTVECTOR
 #define OBJECTVECTOR
 
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Animation/AnimationData_Vector.h"
+#include <global_header.h>
 
 namespace Microsoft
 {

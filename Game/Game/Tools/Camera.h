@@ -1,15 +1,7 @@
 ﻿#ifndef CAMERA
 #define CAMERA
 
-#include "../Core/FancyVector2.h"
-#include "../Core/IViewable.h"
-#include "../Game/Objects/In Game Objects/Obstacles/FlyingBlob.h"
-#include "../Core/PhsxData.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef _CODE_FOREST
 #define _CODE_FOREST
 
-#include "../Game/Tilesets/Backgrounds/Background.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,7 @@
 ﻿#ifndef TUTORIALHELPER
 #define TUTORIALHELPER
 
-#include "../Core/Lambdas/Lambda.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

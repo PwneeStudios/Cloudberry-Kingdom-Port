@@ -1,15 +1,4 @@
-﻿#include "Coin.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Core/Sound/EzSound.h"
-#include "Core/Particle Effects/Particle.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/Special/TextFloat.h"
-#include "Game/Games/GameType.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Collision Detection/Phsx.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

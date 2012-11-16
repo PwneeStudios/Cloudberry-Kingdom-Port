@@ -1,8 +1,7 @@
 ﻿#ifndef PHSX
 #define PHSX
 
-#include "Line.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

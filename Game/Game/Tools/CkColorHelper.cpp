@@ -1,6 +1,4 @@
-#include "CkColorHelper.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

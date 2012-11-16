@@ -1,8 +1,7 @@
 ﻿#ifndef PACKEDTEXTURE
 #define PACKEDTEXTURE
 
-#include <string>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

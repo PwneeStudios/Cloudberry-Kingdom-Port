@@ -2,9 +2,7 @@
 #define TIMERWARNING
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

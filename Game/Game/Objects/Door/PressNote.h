@@ -1,10 +1,7 @@
 ﻿#ifndef PRESSNOTE
 #define PRESSNOTE
 
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Core/Text/EzText.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

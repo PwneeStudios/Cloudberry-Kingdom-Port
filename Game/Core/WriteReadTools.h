@@ -1,11 +1,7 @@
 ﻿#ifndef WRITEREADTOOLS
 #define WRITEREADTOOLS
 
-#include "Animation/AnimationData_Vector.h"
-#include "Animation/AnimationData_Integer.h"
-#include "Graphics/VertexFormat.h"
-#include "PhsxData.h"
-#include <string>
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

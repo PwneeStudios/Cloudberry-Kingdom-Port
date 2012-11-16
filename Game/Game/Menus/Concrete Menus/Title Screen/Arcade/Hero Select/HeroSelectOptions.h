@@ -1,12 +1,7 @@
 #ifndef HEROSELECTOPTIONS
 #define HEROSELECTOPTIONS
 
-#include "../Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

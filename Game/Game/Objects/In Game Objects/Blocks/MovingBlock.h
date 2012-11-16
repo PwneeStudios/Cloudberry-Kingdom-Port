@@ -2,12 +2,7 @@
 #define MOVINGBLOCK
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/IBounded.h"
-#include "Block.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "MovingPlatform.h"
-#include "../Game/Collision Detection/AABox.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

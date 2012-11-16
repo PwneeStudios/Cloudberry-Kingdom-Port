@@ -1,7 +1,7 @@
 ﻿#ifndef BIGDATA
 #define BIGDATA
 
-#include "StyleData.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

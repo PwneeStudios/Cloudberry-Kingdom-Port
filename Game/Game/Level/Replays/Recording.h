@@ -1,9 +1,7 @@
 ﻿#ifndef RECORDING
 #define RECORDING
 
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

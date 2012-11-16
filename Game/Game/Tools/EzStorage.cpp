@@ -1,8 +1,4 @@
-﻿#include "EzStorage.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Tools/WrappedFloat.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

@@ -1,16 +1,4 @@
-﻿#include "DifficultyGroups.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Player/Hero Physics/Box.h"
-#include "Game/Player/Hero Physics/Wheel.h"
-#include "Game/Player/Hero Physics/Rocketbox.h"
-#include "Game/Player/Hero Physics/Small.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Game/Player/Hero Physics/Double.h"
-#include "Game/Player/Hero Physics/Bouncy.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

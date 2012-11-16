@@ -1,7 +1,7 @@
 #ifndef HERORUSH2_TUTORIAL
 #define HERORUSH2_TUTORIAL
 
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

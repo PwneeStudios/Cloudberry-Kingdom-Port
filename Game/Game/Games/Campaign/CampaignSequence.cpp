@@ -1,17 +1,4 @@
-﻿#include "CampaignSequence.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Video.h"
-#include "Game/Games/ActionGame.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Game Objects/GameObjects/LevelTitle.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
-#include "Game/Games/GameType.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Player/PlayerData.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

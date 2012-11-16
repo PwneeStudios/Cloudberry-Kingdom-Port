@@ -1,14 +1,4 @@
-﻿#include "SimpleObject.h"
-#include "Core/Graphics/Draw/Simple/SimpleBox.h"
-#include "Core/Animation/AnimQueue.h"
-#include "Core/Effects/EzEffect.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Effects/EzEffectWad.h"
-#include "Core/Graphics/QuadDrawer.h"
-#include "Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Game/Tools/Oscillate.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

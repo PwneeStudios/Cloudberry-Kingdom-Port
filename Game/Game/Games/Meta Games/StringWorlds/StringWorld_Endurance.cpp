@@ -1,13 +1,4 @@
-﻿#include "StringWorld_Endurance.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Objects/Game Objects/GameObjects/PerfectScoreObject.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Score.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Level.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Lives.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_NextLife.h"
-#include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
-#include "Game/Games/GameType.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

@@ -1,10 +1,7 @@
 ﻿#ifndef DIFFICULTYGROUPS
 #define DIFFICULTYGROUPS
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

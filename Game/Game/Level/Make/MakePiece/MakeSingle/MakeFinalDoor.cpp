@@ -1,17 +1,4 @@
-﻿#include "MakeFinalDoor.h"
-#include "Game/Objects/In Game Objects/Blocks/Block.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Objects/Door/Sign.h"
-#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
-#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
-#include "Game/Objects/Special/CameraZone.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Tools/Recycler.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

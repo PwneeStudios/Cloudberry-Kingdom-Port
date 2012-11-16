@@ -1,10 +1,4 @@
-﻿#include "PhsxSlider.h"
-#include "Game/Tools/WrappedFloat.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomHero_GUI.h"
-#include "Core/Text/EzFont.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Text/EzText.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

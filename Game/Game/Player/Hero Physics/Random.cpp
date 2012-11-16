@@ -1,8 +1,4 @@
-﻿#include "Random.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Icon.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 namespace CloudberryKingdom
 {

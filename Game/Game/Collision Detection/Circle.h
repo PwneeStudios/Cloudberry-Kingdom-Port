@@ -1,7 +1,7 @@
 ﻿#ifndef CIRCLE
 #define CIRCLE
 
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

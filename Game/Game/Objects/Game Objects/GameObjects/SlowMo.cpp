@@ -1,8 +1,4 @@
-#include "SlowMo.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

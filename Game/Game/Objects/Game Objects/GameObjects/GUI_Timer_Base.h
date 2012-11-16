@@ -1,7 +1,7 @@
 #ifndef GUI_TIMER_BASE
 #define GUI_TIMER_BASE
 
-#include "GUI_Panel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

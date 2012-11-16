@@ -2,10 +2,7 @@
 #define BOULDER
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/In Game Objects/BaseClasses/_CircleDeath.h"
-#include "../Game/Objects/IBounded.h"
-#include "../Game/Tilesets/TileSet.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

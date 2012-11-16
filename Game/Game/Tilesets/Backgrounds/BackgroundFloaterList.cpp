@@ -1,10 +1,4 @@
-﻿#include "BackgroundFloaterList.h"
-#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
-#include "Game/Collision Detection/FloatRectangle.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

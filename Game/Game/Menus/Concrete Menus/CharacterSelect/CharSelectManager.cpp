@@ -1,19 +1,4 @@
-﻿#include "CharSelectManager.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/FancyVector2.h"
-#include "Core/Text/EzText.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Tools/Set.h"
-#include "Game/Player/ColorScheme.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/Backdrop.h"
-#include "Game/Games/GameType.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Game/Tools/Camera.h"
-#include "Core/Input/ButtonCheck.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

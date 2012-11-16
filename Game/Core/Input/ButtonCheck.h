@@ -1,14 +1,7 @@
 ﻿#ifndef BUTTONCHECK
 #define BUTTONCHECK
 
-#include "../Core/Tools/Set.h"
-#include "../Core/ResolutionGroup.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

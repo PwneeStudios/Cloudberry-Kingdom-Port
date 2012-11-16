@@ -1,22 +1,4 @@
-﻿#include "MovingBlock__Auto.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Game/Level/Make/DifficultyHelper.h"
-#include "Core/Tools/CoreMath.h"
-#include "Core/Tools/Random.h"
-#include "Game/Objects/In Game Objects/Blocks/MovingBlock.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Core/Text/EzText.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

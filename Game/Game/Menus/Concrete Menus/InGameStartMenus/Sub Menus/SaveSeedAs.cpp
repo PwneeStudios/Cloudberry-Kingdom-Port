@@ -1,13 +1,4 @@
-#include "SaveSeedAs.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_TextBox.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/AlertBase.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Graphics;

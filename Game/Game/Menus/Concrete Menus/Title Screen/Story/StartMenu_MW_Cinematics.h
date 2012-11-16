@@ -1,12 +1,7 @@
 #ifndef STARTMENU_MW_CINEMATICS
 #define STARTMENU_MW_CINEMATICS
 
-#include "../Game/Menus/Menu Components/MenuItem.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

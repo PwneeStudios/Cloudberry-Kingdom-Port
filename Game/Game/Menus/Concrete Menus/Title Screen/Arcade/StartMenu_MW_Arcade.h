@@ -1,9 +1,7 @@
 #ifndef STARTMENU_MW_ARCADE
 #define STARTMENU_MW_ARCADE
 
-#include "ArcadeMenu.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

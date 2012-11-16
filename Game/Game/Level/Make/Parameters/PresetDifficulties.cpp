@@ -1,8 +1,4 @@
-﻿#include "PresetDifficulties.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/AutoGen.h"
-#include "Game/Tools/Globals.h"
+﻿#include <global_header.h>
 
 namespace CloudberryKingdom
 {

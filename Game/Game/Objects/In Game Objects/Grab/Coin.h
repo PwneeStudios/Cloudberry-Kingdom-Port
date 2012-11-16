@@ -2,11 +2,7 @@
 #define COIN
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/ObjectBase.h"
-#include "../Game/Tilesets/TileSet.h"
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

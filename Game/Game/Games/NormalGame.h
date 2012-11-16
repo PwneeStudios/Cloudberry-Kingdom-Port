@@ -1,9 +1,7 @@
 #ifndef NORMALGAME
 #define NORMALGAME
 
-#include "GameType.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

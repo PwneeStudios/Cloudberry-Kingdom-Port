@@ -1,22 +1,4 @@
-#include "CustomizeMenu.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharacterSelect.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/Waiting.h"
-#include "Core/Text/EzText.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/ColorSelect.h"
-#include "Core/Tools/Set.h"
-#include "Game/Player/ColorScheme.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Player/ClrTextFx.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Player/PlayerManager.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

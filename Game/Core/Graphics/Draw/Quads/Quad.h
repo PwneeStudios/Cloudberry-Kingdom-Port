@@ -1,13 +1,7 @@
 ﻿#ifndef QUAD
 #define QUAD
 
-#include "BaseQuad.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

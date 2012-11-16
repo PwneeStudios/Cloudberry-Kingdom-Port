@@ -1,7 +1,4 @@
-﻿#include "TutorialHelper.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "Game/Games/GameType.h"
-#include "Game/Localization.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

@@ -1,10 +1,7 @@
 ﻿#ifndef LOCALIZATION
 #define LOCALIZATION
 
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

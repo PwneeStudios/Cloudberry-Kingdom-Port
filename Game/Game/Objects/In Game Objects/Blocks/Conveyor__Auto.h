@@ -1,9 +1,7 @@
 ﻿#ifndef CONVEYOR__AUTO
 #define CONVEYOR__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Level/Make/Parameters/Param.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

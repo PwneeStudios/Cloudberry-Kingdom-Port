@@ -1,8 +1,4 @@
-﻿#include "Background.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

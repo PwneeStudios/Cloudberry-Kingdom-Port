@@ -1,6 +1,4 @@
-#include "SuperCheer.h"
-#include "Game/Games/GameType.h"
-#include "Game/Objects/Game Objects/GameObjects/Cheer.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

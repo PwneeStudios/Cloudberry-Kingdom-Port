@@ -1,9 +1,7 @@
 #ifndef VERIFYREMOVE
 #define VERIFYREMOVE
 
-#include "VerifyBase.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

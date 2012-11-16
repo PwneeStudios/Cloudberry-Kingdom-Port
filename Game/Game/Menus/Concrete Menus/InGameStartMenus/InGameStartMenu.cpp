@@ -1,25 +1,4 @@
-#include "InGameStartMenu.h"
-#include "Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Objects/Game Objects/GameObject.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Localization.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyRemove.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Sub Menus/SoundMenu.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveSeedAs.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/SaveLoadSeedMenu.h"
-#include "Game/Player/Stats.h"
-#include "Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyQuitLevel.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

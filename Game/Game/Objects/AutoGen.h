@@ -1,8 +1,7 @@
 ﻿#ifndef AUTOGEN
 #define AUTOGEN
 
-#include "../Game/Tools/Globals.h"
-#include "../Game/Level/Make/Parameters/Param.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

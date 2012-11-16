@@ -1,9 +1,4 @@
-﻿#include "MenuListAll.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

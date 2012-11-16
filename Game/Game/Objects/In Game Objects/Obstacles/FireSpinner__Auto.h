@@ -1,11 +1,7 @@
 ﻿#ifndef FIRESPINNER__AUTO
 #define FIRESPINNER__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <vector>
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

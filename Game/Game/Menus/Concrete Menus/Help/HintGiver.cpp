@@ -1,10 +1,4 @@
-#include "HintGiver.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Menus/Concrete Menus/Help/HintBlurb.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Text/EzText.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

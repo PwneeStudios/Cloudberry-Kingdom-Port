@@ -1,8 +1,7 @@
 #ifndef STATS
 #define STATS
 
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

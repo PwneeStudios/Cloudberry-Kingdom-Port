@@ -1,8 +1,7 @@
 ﻿#ifndef MULTICASTER
 #define MULTICASTER
 
-#include "Lambda.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

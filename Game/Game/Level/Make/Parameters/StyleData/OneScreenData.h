@@ -1,7 +1,7 @@
 ﻿#ifndef ONESCREENDATA
 #define ONESCREENDATA
 
-#include "StyleData.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

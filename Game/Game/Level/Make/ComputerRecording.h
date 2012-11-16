@@ -1,7 +1,7 @@
 ﻿#ifndef COMPUTERRECORDING
 #define COMPUTERRECORDING
 
-#include <stack>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

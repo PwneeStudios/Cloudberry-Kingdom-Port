@@ -1,5 +1,4 @@
-#include "Rumble.h"
-#include "Game/Tools/Tools.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

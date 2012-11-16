@@ -1,10 +1,7 @@
 #ifndef GUI_BLOBS
 #define GUI_BLOBS
 
-#include "../Core/Lambdas/Lambda.h"
-#include "GUI_Panel.h"
-#include "../Game/Player/PlayerManager.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

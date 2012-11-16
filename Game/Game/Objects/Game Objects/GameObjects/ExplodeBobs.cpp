@@ -1,10 +1,4 @@
-#include "ExplodeBobs.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreScreen.h"
-#include "Core/Lambdas/Lambda.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

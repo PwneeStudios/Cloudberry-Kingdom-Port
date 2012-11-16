@@ -1,10 +1,7 @@
 ﻿#ifndef BACKGROUNDCOLLECTION
 #define BACKGROUNDCOLLECTION
 
-#include "../Core/IViewable.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

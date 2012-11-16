@@ -1,8 +1,7 @@
 ﻿#ifndef MAKEFINALDOOR_FLOAT
 #define MAKEFINALDOOR_FLOAT
 
-#include "../Game/Level/Make/MakePiece/MakeThing.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

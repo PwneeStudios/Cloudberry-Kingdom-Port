@@ -1,8 +1,7 @@
 ﻿#ifndef BLOCKGROUP
 #define BLOCKGROUP
 
-#include <unordered_map>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

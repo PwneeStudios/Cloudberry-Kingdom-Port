@@ -1,10 +1,7 @@
 ﻿#ifndef CONVEYOR
 #define CONVEYOR
 
-#include "Block.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Collision Detection/AABox.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

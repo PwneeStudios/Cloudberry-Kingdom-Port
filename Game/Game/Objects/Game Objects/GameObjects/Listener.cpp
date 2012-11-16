@@ -1,7 +1,4 @@
-#include "Listener.h"
-#include "Core/Lambdas/Lambda.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Player/PlayerManager.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

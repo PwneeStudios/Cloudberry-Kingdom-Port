@@ -1,10 +1,7 @@
 #ifndef ALERTBASE
 #define ALERTBASE
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Localization.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,11 +1,4 @@
-﻿#include "CoreEngine.EzTextureWad.h"
-#include "Core/Texture/TextureOrAnim.h"
-#include "Core/Texture/EzTexture.h"
-#include "Core/Animation/AnimationData_Integer.h"
-#include "Core/Texture/PackedTexture.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

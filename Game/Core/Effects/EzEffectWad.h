@@ -1,9 +1,7 @@
 ﻿#ifndef EZEFFECTWAD
 #define EZEFFECTWAD
 
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

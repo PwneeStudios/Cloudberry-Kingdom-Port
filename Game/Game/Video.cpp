@@ -1,26 +1,4 @@
-﻿#include "Video.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Localization.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Input/ButtonCheck.h"
-
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::IO;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Collections::Generic;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Linq;
-//C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
-//using namespace System::Text;
-using namespace Microsoft::Xna::Framework;
-using namespace Microsoft::Xna::Framework::Content;
-using namespace Microsoft::Xna::Framework::Graphics;
-using namespace Microsoft::Xna::Framework::Media;
-using namespace Microsoft::Xna::Framework::Input;
+﻿#include <global_header.h>
 
 namespace CloudberryKingdom
 {

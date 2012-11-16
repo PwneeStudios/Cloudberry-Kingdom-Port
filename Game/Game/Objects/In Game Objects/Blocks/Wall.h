@@ -1,13 +1,7 @@
 ﻿#ifndef WALL
 #define WALL
 
-#include "Block.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Level/Make/PieceSeedData.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Collision Detection/AABox.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

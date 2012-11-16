@@ -1,9 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Core/PhsxData.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

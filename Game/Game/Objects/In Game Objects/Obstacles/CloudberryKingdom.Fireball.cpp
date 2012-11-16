@@ -1,21 +1,4 @@
-﻿#include "CloudberryKingdom.Fireball.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Core/Particle Effects/Particle.h"
-#include "Core/Sound/EzSound.h"
-#include "Core/Graphics/Draw/Quads/Quad.h"
-#include "Core/Texture/EzTexture.h"
-#include "Core/Particle Effects/ParticleEmitter.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Tools/Random.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
-#include "Core/Effects/EzEffectWad.h"
-#include "Core/Effects/EzEffect.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/In Game Objects/Obstacles/Fireball__Auto.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/ObjectBase.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework::Graphics;
 using namespace Microsoft::Xna::Framework;

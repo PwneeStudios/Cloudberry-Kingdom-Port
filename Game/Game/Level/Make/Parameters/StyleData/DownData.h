@@ -1,7 +1,7 @@
 ﻿#ifndef DOWNDATA
 #define DOWNDATA
 
-#include "UpData.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

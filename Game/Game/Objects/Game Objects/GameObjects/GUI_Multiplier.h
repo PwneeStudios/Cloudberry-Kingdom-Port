@@ -1,14 +1,7 @@
 #ifndef GUI_MULTIPLIER
 #define GUI_MULTIPLIER
 
-#include "GUI_Panel.h"
-#include "GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include <string>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

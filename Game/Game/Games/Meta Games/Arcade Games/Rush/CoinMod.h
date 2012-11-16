@@ -1,7 +1,7 @@
 ﻿#ifndef COINMOD
 #define COINMOD
 
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

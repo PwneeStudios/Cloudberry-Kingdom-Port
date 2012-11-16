@@ -1,12 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Core/IViewable.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

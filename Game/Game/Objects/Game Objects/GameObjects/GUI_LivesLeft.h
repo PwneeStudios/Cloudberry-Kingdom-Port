@@ -1,11 +1,7 @@
 #ifndef GUI_LIVESLEFT
 #define GUI_LIVESLEFT
 
-#include "GUI_Panel.h"
-#include "../Core/Lambdas/Lambda.h"
-#include <string>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

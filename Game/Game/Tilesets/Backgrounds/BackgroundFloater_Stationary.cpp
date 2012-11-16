@@ -1,7 +1,4 @@
-﻿#include "BackgroundFloater_Stationary.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

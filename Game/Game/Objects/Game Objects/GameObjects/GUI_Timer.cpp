@@ -1,7 +1,4 @@
-#include "GUI_Timer.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Tools/CoreMath.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

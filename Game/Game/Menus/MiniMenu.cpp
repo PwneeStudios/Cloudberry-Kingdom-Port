@@ -1,6 +1,4 @@
-﻿#include "MiniMenu.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

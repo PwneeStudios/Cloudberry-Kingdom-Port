@@ -1,12 +1,4 @@
-#include "GUI_Panel.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Core/FancyVector2.h"
-#include "Game/Tools/Tools.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

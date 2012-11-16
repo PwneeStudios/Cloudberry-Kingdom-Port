@@ -1,11 +1,7 @@
 ﻿#ifndef CHARACTERSELECT
 #define CHARACTERSELECT
 
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomUpgrades_GUI.h"
-#include "../Game/Player/ColorScheme.h"
-#include "../Game/Player/ClrTextFx.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

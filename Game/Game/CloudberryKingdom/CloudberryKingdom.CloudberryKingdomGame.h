@@ -1,17 +1,7 @@
 #ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Core/Version.h"
-#include "../Core/ResolutionGroup.h"
-#include "../Game/Menus/Concrete Menus/Loading Screen/LoadingScreen.h"
-#include <string>
-#include <vector>
-#include <stack>
-#include <iostream>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

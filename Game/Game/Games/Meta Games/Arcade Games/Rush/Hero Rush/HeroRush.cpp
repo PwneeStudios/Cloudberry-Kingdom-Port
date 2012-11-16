@@ -1,23 +1,4 @@
-﻿#include "HeroRush.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
-#include "Game/Games/GameType.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/CoinMod.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Game Objects/GameObjects/DoorIcon.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Door/Sign.h"
-#include "Game/Objects/Game Objects/GameObjects/MultiplierUp.h"
-#include "Game/Objects/Game Objects/GameObjects/SuperCheer.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Tilesets/TileSet.h"
-#include "Game/Games/Meta Games/Challenges/_Regular.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

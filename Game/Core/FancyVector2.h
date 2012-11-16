@@ -1,16 +1,7 @@
 ﻿#ifndef FANCYVECTOR2
 #define FANCYVECTOR2
 
-#include "IViewable.h"
-#include "Animation/AnimationData_Vector.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "Text/EzText.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

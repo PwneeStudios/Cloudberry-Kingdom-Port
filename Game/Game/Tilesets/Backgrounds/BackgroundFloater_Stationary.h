@@ -1,7 +1,7 @@
 ﻿#ifndef BACKGROUNDFLOATER_STATIONARY
 #define BACKGROUNDFLOATER_STATIONARY
 
-#include "BackgroundFloater.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

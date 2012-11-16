@@ -1,9 +1,7 @@
 ﻿#ifndef TEXTFLOAT
 #define TEXTFLOAT
 
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Game/Localization.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

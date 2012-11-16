@@ -2,11 +2,7 @@
 #define SPIKE
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/In Game Objects/BaseClasses/_BoxDeath.h"
-#include "../Game/Tilesets/TileSet.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

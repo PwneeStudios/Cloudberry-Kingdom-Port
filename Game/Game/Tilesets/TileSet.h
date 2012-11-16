@@ -1,13 +1,7 @@
 ﻿#ifndef TILESET
 #define TILESET
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Tools/Globals.h"
-#include "../Game/Localization.h"
-#include "../Game/Objects/In Game Objects/Blocks/Wall.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

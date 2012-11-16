@@ -1,13 +1,4 @@
-#include "VerifyQuitGame.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Tools/CkColorHelper.h"
-#include "Core/Text/EzText.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Localization.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Tools/Tools.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

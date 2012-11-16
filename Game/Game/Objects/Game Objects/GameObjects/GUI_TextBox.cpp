@@ -1,11 +1,4 @@
-#include "GUI_TextBox.h"
-#include "Game/Localization.h"
-#include "Core/Text/EzText.h"
-#include "Core/Lambdas/Multicaster.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Tools/TextInput.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzFont.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Input;

@@ -1,23 +1,4 @@
-#include "SavedSeedsGUI.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Text/EzFont.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Menu Components/ScrollBar.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGameBase.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
-#include "Game/Tools/EzStorage.h"
-#include "Game/Player/PlayerData.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/LongMenu.h"
-#include "Game/Localization.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyDeleteSeeds.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

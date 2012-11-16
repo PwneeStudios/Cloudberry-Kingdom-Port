@@ -1,15 +1,7 @@
 #ifndef CUSTOMHERO_GUI
 #define CUSTOMHERO_GUI
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "CustomUpgrades_GUI.h"
-#include "../Game/Player/Hero Physics/Base.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

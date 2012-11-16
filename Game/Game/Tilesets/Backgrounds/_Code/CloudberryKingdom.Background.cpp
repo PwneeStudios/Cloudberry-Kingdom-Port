@@ -1,20 +1,4 @@
-﻿#include "CloudberryKingdom.Background.h"
-#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
-#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Graphics/VertexFormat.h"
-#include "Core/Graphics/Draw/Simple/BasePoint.h"
-#include "Core/PhsxData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Tools/Random.h"
-#include "Game/Tilesets/Backgrounds/Background.h"
-#include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
-#include "Game/Tilesets/TileSet.h"
-#include "Game/Collision Detection/FloatRectangle.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Tools/Camera.h"
-#include "Core/Tools/ColorHelper.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

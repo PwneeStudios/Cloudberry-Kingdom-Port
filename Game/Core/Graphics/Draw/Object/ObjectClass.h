@@ -1,12 +1,7 @@
 ﻿#ifndef OBJECTCLASS
 #define OBJECTCLASS
 
-#include <string>
-#include <vector>
-#include <queue>
-#include <algorithm>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

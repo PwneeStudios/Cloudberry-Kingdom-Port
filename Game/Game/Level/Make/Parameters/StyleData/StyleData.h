@@ -1,14 +1,7 @@
 ﻿#ifndef STYLEDATA
 #define STYLEDATA
 
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Tools/Oscillate.h"
-#include "../Core/PhsxData.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

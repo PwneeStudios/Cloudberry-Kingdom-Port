@@ -7,7 +7,7 @@
 //
 //	This class is used to replace some conversions to or from strings.
 //----------------------------------------------------------------------------------------
-#include <sstream>
+#include <global_header.h>
 
 class StringConverterHelper
 {

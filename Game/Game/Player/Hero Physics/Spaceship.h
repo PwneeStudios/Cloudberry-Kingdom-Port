@@ -1,17 +1,7 @@
 ﻿#ifndef SPACESHIP
 #define SPACESHIP
 
-#include "Base.h"
-#include "../Game/Collision Detection/Phsx.h"
-#include "../Game/Objects/Bob/Bob.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

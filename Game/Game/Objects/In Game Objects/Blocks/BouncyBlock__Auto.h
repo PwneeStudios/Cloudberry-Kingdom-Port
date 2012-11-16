@@ -1,17 +1,7 @@
 ﻿#ifndef BOUNCYBLOCK__AUTO
 #define BOUNCYBLOCK__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Objects/In Game Objects/Grab/Coin__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/Firesnake__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/SpikeyLine__Auto.h"
-#include "Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/SpikeyGuy__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/FlyingBlob__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/Boulder__Auto.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

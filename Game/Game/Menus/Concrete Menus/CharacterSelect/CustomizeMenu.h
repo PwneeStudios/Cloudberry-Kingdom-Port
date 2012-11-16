@@ -1,15 +1,7 @@
 #ifndef CUSTOMIZEMENU
 #define CUSTOMIZEMENU
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomUpgrades_GUI.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Localization.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

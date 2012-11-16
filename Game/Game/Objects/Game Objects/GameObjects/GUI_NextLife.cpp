@@ -1,17 +1,4 @@
-#include "GUI_NextLife.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_LivesLeft.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Special/TextFloat.h"
-#include "Game/Objects/In Game Objects/Grab/Coin.h"
-#include "Core/Text/EzText.h"
-#include "Core/Text/EzFont.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

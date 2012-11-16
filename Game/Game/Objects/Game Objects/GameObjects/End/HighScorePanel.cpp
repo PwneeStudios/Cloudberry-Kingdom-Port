@@ -1,19 +1,4 @@
-#include "HighScorePanel.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreList.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreEntry.h"
-#include "Game/Menus/Concrete Menus/Score Screens/ScoreDatabase.h"
-#include "Game/Menus/Menu.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

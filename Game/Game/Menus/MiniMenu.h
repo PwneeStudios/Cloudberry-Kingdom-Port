@@ -1,7 +1,7 @@
 ﻿#ifndef MINIMENU
 #define MINIMENU
 
-#include "Menu.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

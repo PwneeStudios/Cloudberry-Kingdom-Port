@@ -1,17 +1,4 @@
-﻿#include "Door.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Core/Sound/EzSound.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Objects/Door/PressNote.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Tools/CoreMath.h"
-#include "Core/Input/ButtonCheck.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

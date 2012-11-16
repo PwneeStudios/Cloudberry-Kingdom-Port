@@ -1,24 +1,4 @@
-#include "ShopMenu.h"
-#include "Core/Sound/EzSound.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Player/PlayerManager.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Menu Components/ScrollBar.h"
-#include "Game/Tools/EzStorage.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Player/ColorScheme.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Menus/LongMenu.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Tools/CkColorHelper.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

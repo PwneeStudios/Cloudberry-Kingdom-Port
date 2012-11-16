@@ -1,13 +1,7 @@
 ﻿#ifndef PHSXSLIDER
 #define PHSXSLIDER
 
-#include "../Game/Menus/Menu Components/MenuSlider.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Player/Hero Physics/Base.h"
-#include "../Game/Localization.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

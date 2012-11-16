@@ -1,11 +1,4 @@
-﻿#include "Cloud__Auto.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/In Game Objects/Obstacles/Cloud.h"
-#include "Game/Tools/Recycler.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

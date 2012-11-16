@@ -1,16 +1,4 @@
-﻿#include "CloudberryKingdom.TileSets.h"
-#include "Game/Tilesets/TileSet.h"
-#include "Core/Graphics/Draw/Quads/PieceQuad.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Game/Localization.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Freeplay/CustomLevel_GUI.h"
-#include "Core/Animation/AnimationData_Integer.h"
-#include "Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Tilesets/Backgrounds/Background.h"
-#include "Game/Objects/AutoGen.h"
-#include "Game/Tools/Globals.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

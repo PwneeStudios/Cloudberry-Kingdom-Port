@@ -1,7 +1,7 @@
 ﻿#ifndef RANDOM
 #define RANDOM
 
-#include "Base.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

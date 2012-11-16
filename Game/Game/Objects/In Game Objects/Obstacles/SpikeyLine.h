@@ -1,9 +1,7 @@
 #ifndef SPIKEYLINE
 #define SPIKEYLINE
 
-#include "../Game/Objects/In Game Objects/BaseClasses/_CircleDeath.h"
-#include "../Game/Objects/IBounded.h"
-#include "../Game/Tilesets/TileSet.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

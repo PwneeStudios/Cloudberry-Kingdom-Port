@@ -1,11 +1,7 @@
 ﻿#ifndef BLOCKEMITTER
 #define BLOCKEMITTER
 
-#include "../Game/Objects/ObjectBase.h"
-#include "../Game/Objects/In Game Objects/Blocks/MovingPlatform.h"
-#include "../Core/PhsxData.h"
-#include "BlockEmitter__Auto.h"
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

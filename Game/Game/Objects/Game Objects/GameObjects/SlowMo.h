@@ -1,8 +1,7 @@
 #ifndef SLOWMO
 #define SLOWMO
 
-#include "GUI_Panel.h"
-#include "ExplodeBobs.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

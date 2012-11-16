@@ -1,14 +1,7 @@
 #ifndef GUI_TEXTBOX
 #define GUI_TEXTBOX
 
-#include "../Game/Player/PlayerManager.h"
-#include "GUI_Text.h"
-#include "../Game/Tools/Resources.h"
-#include "../Properties/Resources.Designer.h"
-#include "../Game/Tools/Tools.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

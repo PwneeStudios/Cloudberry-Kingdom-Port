@@ -1,11 +1,4 @@
-﻿#include "_Regular.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Game/Player/Hero Physics/Normal.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Level/Make/DifficultyGroups.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Games/NormalGame.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

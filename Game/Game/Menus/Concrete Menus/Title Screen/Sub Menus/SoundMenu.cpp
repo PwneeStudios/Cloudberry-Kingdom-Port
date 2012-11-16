@@ -1,19 +1,4 @@
-#include "SoundMenu.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Tools/EzStorage.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/CustomControls.h"
-#include "Game/Menus/Menu Components/MenuList.h"
-#include "Core/ResolutionGroup.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Game/Menus/Menu Components/MenuSlider.h"
-#include "Game/Menus/Menu Components/MenuToggle.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Graphics;

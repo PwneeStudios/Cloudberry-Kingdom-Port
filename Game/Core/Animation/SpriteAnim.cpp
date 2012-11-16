@@ -1,6 +1,4 @@
-﻿#include "SpriteAnim.h"
-#include "Core/Lambdas/Lambda_2.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

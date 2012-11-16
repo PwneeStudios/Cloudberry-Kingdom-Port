@@ -1,11 +1,7 @@
 ﻿#ifndef LASER
 #define LASER
 
-#include "../Game/Objects/In Game Objects/BaseClasses/_LineDeath.h"
-#include "../Game/Objects/IBounded.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Collision Detection/Line.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

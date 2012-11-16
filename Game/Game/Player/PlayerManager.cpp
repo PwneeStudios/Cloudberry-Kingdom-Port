@@ -1,15 +1,4 @@
-#include "PlayerManager.h"
-#include "Game/Player/PlayerData.h"
-#include "Core/Chunk.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush_Tutorial.h"
-#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Game/Player/ClrTextFx.h"
-#include "Game/Tools/Tools.h"
-#include "Core/ResolutionGroup.h"
-#include "Core/Input/ButtonCheck.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Player/ColorSchemeManager.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

@@ -1,12 +1,7 @@
 ﻿#ifndef CHARSELECTMANAGER
 #define CHARSELECTMANAGER
 
-#include "../Core/IViewable.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

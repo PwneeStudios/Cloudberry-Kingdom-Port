@@ -1,13 +1,7 @@
 ﻿#ifndef PROTOTYPES
 #define PROTOTYPES
 
-#include "../Game/Objects/Door/Door.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <algorithm>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

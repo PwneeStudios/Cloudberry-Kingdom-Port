@@ -1,10 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Game/Objects/In Game Objects/BaseClasses/_CircleDeath.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Core/PhsxData.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

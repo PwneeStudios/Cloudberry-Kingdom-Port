@@ -1,9 +1,7 @@
 ﻿#ifndef PARTICLEEMITTER
 #define PARTICLEEMITTER
 
-#include "../Game/Collision Detection/Phsx.h"
-#include <list>
-#include <stack>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

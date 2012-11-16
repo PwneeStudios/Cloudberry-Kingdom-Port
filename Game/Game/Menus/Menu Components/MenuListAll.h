@@ -1,9 +1,7 @@
 ﻿#ifndef MENULISTALL
 #define MENULISTALL
 
-#include "MenuList.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

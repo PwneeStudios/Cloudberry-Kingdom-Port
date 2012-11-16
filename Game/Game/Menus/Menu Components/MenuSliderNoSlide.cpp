@@ -1,6 +1,4 @@
-﻿#include "MenuSliderNoSlide.h"
-#include "Core/Text/EzText.h"
-#include "Core/Input/ButtonCheck.h"
+﻿#include <global_header.h>
 
 namespace CloudberryKingdom
 {

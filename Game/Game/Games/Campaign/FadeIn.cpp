@@ -1,7 +1,4 @@
-#include "FadeIn.h"
-#include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Objects/Bob/Bob.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

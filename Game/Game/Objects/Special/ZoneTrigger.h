@@ -1,7 +1,7 @@
 #ifndef ZONETRIGGER
 #define ZONETRIGGER
 
-#include "../Game/Objects/ObjectBase.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

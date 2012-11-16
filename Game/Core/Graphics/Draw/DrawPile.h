@@ -1,12 +1,7 @@
 ﻿#ifndef DRAWPILE
 #define DRAWPILE
 
-#include "../Core/IViewable.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Tools/Oscillate.h"
-#include <string>
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

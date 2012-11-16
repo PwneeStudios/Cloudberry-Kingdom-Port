@@ -1,14 +1,7 @@
 #ifndef GAMEOVERPANEL
 #define GAMEOVERPANEL
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Menus/Concrete Menus/ShopMenu.h"
-#include "../Game/Menus/Concrete Menus/Score Screens/StatsScreen.h"
-#include "../Game/Menus/Concrete Menus/Score Screens/ScoreScreen.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

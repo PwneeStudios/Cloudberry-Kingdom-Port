@@ -1,7 +1,7 @@
 ﻿#ifndef _REGULAR
 #define _REGULAR
 
-#include "../Game/Menus/Concrete Menus/CharacterSelect/HeroLevel.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

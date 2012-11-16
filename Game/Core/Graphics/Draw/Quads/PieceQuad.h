@@ -1,17 +1,7 @@
 ﻿#ifndef PIECEQUAD
 #define PIECEQUAD
 
-#include "../Game/Objects/Special/Arrow.h"
-#include "../Game/Objects/In Game Objects/Blocks/BouncyBlock.h"
-#include "../Game/Objects/In Game Objects/Blocks/FallingBlock.h"
-#include "../Game/Objects/In Game Objects/Blocks/MovingBlock.h"
-#include "../Core/Graphics/Draw/Simple/SimpleQuad.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

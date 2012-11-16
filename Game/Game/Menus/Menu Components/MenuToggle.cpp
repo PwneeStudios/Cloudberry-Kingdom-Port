@@ -1,9 +1,4 @@
-﻿#include "MenuToggle.h"
-#include "Core/Text/EzFont.h"
-#include "Core/Text/EzText.h"
-#include "Game/Localization.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Core/Input/ButtonCheck.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

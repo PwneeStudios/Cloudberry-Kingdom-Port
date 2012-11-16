@@ -1,6 +1,4 @@
-#include "TimeCrisis_Tutorial.h"
-#include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

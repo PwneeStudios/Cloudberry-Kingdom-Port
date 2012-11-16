@@ -1,11 +1,7 @@
 #ifndef AWARDMENT
 #define AWARDMENT
 
-#include "../Game/Player/PlayerManager.h"
-#include "../Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include <string>
-#include <unordered_map>
-#include <vector>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

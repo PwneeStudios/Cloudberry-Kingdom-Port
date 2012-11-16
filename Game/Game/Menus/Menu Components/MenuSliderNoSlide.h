@@ -1,7 +1,7 @@
 ﻿#ifndef MENUSLIDERNOSLIDE
 #define MENUSLIDERNOSLIDE
 
-#include "MenuSliderBase.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

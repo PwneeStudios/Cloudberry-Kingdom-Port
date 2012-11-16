@@ -1,9 +1,7 @@
 #ifndef VERIFYQUITLEVEL
 #define VERIFYQUITLEVEL
 
-#include "VerifyBase.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

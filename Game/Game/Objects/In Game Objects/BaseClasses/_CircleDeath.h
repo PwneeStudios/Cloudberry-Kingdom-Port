@@ -1,7 +1,7 @@
 #ifndef _CIRCLEDEATH
 #define _CIRCLEDEATH
 
-#include "_Death.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

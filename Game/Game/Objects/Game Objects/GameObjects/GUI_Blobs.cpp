@@ -1,12 +1,4 @@
-#include "GUI_Blobs.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Objects/Door/Door.h"
-#include "Game/Player/PlayerData.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

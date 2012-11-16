@@ -2,10 +2,7 @@
 #define FIREBALL__AUTO
 
 #define _USE_MATH_DEFINES
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
-#include "../Game/Level/Make/PieceSeedData.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

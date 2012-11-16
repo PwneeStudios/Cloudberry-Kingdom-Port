@@ -1,13 +1,7 @@
 ﻿#ifndef MENUSLIDERBASE
 #define MENUSLIDERBASE
 
-#include "MenuItem.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include <string>
-#include <cmath>
-#include <tchar.h>
-#include "stringconverter.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

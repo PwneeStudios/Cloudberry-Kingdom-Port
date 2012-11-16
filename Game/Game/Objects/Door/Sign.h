@@ -1,7 +1,7 @@
 ﻿#ifndef SIGN
 #define SIGN
 
-#include "../Game/Objects/ObjectBase.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

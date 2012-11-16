@@ -1,10 +1,7 @@
 ﻿#ifndef FALLINGBLOCK
 #define FALLINGBLOCK
 
-#include "Block.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "../Game/Collision Detection/AABox.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

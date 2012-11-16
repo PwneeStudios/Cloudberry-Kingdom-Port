@@ -1,12 +1,4 @@
-﻿#include "SwarmRecord.h"
-#include "Game/Level/LevelPiece.h"
-#include "Game/Level/Replays/Recording.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Objects/Bob/BobLink.h"
-#include "Core/Animation/SpriteAnim.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

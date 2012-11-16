@@ -1,13 +1,4 @@
-﻿#include "ColorScheme.h"
-#include "Core/Texture/EzTexture.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Game/Player/Hero Physics/Normal.h"
-#include "Core/Graphics/Draw/Quads/BaseQuad.h"
-#include "Game/Tools/Prototypes.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
-#include "Core/Chunk.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Game/Tools/Tools.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

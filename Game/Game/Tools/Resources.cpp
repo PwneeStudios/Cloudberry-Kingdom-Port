@@ -1,23 +1,4 @@
-﻿#include "Resources.h"
-#include "Game/Tools/WrappedFloat.h"
-#include "Core/Text/EzFont.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Graphics/Draw/Quads/PieceQuad.h"
-#include "Core/Animation/AnimationData_Integer.h"
-#include "Game/Tilesets/BlockGroup.h"
-#include "Core/Song/EzSongWad.h"
-#include "Game/Tools/Globals.h"
-#include "Core/Sound/EzSoundWad.h"
-#include "Core/Sound/EzSound.h"
-#include "Game/Tools/ThreadHelper.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
-#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
-#include "Game/Player/Awardments/Awardment.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Tools/Prototypes.h"
-#include "Game/Objects/Icon.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Reflection;

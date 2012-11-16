@@ -1,16 +1,4 @@
-#include "Checkpoint.h"
-#include "Core/Texture/TextureOrAnim.h"
-#include "Core/Sound/EzSound.h"
-#include "Core/Particle Effects/Particle.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Collision Detection/AABox.h"
-#include "Core/Graphics/Draw/Simple/SimpleObject.h"
-#include "Game/Level/LevelPiece.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Tools/Prototypes.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Collision Detection/Phsx.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:

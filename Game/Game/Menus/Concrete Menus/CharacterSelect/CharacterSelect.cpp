@@ -1,17 +1,4 @@
-﻿#include "CharacterSelect.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/GamerTag.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/HeroLevel.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/Doll.h"
-#include "Game/Player/PlayerData.h"
-#include "Game/Player/PlayerManager.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Game/Games/GameType.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/JoinText.h"
-#include "Game/Tools/Unset.h"
-#include "Game/Menus/Concrete Menus/CharacterSelect/CharSelectManager.h"
-#include "Game/Player/ColorSchemeManager.h"
-#include "Core/Tools/CoreMath.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

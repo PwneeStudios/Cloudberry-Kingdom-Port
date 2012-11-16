@@ -1,8 +1,7 @@
 ﻿#ifndef ANIMATIONDATA_VECTOR
 #define ANIMATIONDATA_VECTOR
 
-#include "../Core/Tools/Set.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace Microsoft
 {

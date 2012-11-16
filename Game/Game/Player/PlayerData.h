@@ -1,12 +1,7 @@
 #ifndef PLAYERDATA
 #define PLAYERDATA
 
-#include "../Game/Tools/EzStorage.h"
-#include "Awardments/Awardment.h"
-#include "ColorScheme.h"
-#include "Stats.h"
-#include <string>
-#include <unordered_map>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

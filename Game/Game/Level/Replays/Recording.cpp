@@ -1,13 +1,4 @@
-﻿#include "Recording.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Level/Make/ComputerRecording.h"
-#include "Game/Objects/Bob/BobLink.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Animation/SpriteAnim.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

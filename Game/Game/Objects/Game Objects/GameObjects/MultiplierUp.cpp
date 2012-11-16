@@ -1,10 +1,4 @@
-#include "MultiplierUp.h"
-#include "Core/Text/EzText.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Tools/CkColorHelper.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

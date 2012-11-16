@@ -1,14 +1,7 @@
 ﻿#ifndef STRINGWORLD_ENDURANCE
 #define STRINGWORLD_ENDURANCE
 
-#include "StringWorld.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2.h"
-#include "../Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
-#include "../Game/Games/ScreenSaver.h"
-#include "../Game/Games/Meta Games/Arcade Games/Rush/Hero Rush/HeroRush.h"
-#include "StringWorld_Timed.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

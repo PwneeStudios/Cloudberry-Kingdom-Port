@@ -1,22 +1,4 @@
-﻿#include "Fireball__Auto.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Level/Make/DifficultyHelper.h"
-#include "Game/Objects/ObjectBase.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Core/Text/EzText.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
-#include "Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Tools/Recycler.h"
-#include "Core/PhsxData.h"
-#include "Core/Tools/Random.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

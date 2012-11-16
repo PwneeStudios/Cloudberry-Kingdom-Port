@@ -1,12 +1,7 @@
 #ifndef CHECKPOINT
 #define CHECKPOINT
 
-#include "../Game/Objects/ObjectBase.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "../Core/Graphics/Draw/Simple/SimpleQuad.h"
-#include "../Core/Graphics/Draw/Simple/BasePoint.h"
-#include <vector>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,9 +1,7 @@
 ﻿#ifndef MAKEFINALDOOR
 #define MAKEFINALDOOR
 
-#include "../Game/Level/Make/MakePiece/MakeThing.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include <cmath>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

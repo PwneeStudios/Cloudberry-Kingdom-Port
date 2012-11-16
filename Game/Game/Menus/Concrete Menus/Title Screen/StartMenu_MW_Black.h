@@ -1,9 +1,7 @@
 #ifndef STARTMENU_MW_BLACK
 #define STARTMENU_MW_BLACK
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

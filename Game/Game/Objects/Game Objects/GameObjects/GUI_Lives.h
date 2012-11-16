@@ -1,9 +1,7 @@
 #ifndef GUI_LIVES
 #define GUI_LIVES
 
-#include "GUI_Panel.h"
-#include "../Game/Objects/Bob/Bob.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

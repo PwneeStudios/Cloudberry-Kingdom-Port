@@ -1,14 +1,4 @@
-#include "SpikeyGuy.h"
-#include "Game/Tilesets/SpriteInfo.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Game/Objects/In Game Objects/Blocks/NormalBlock.h"
-#include "Game/Objects/In Game Objects/Obstacles/SpikeyGuy__Auto.h"
-#include "Game/Tools/Recycler.h"
-#include "Game/Objects/Bob/Bob.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Core/Tools/CoreMath.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/ObjectBase.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

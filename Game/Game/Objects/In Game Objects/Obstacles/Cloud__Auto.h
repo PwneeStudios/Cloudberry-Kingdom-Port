@@ -1,8 +1,7 @@
 ﻿#ifndef CLOUD__AUTO
 #define CLOUD__AUTO
 
-#include "../Game/Objects/AutoGen.h"
-#include "../Game/Level/Make/Parameters/Param.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,14 +1,7 @@
 ﻿#ifndef DOOR
 #define DOOR
 
-#include "../Game/Games/Meta Games/StringWorlds/LevelConnector.h"
-#include "../Game/Objects/ObjectBase.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Game/Tilesets/TileSet.h"
-#include "Sign.h"
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

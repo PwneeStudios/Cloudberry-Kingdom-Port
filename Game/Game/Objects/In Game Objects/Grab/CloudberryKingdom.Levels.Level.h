@@ -1,26 +1,7 @@
 ﻿#ifndef CLOUDBERRYKINGDOM
 #define CLOUDBERRYKINGDOM
 
-#include "../Core/IViewable.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Lambdas/Lambda.h"
-#include "../Core/Lambdas/Lambda_1.h"
-#include "../Game/Objects/Game Objects/GameObjects/Listener.h"
-#include "../Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "../Game/Tools/Oscillate.h"
-#include "../Core/Lambdas/LambdaFunc_2.h"
-#include "../Game/Level/Make/PieceSeedData.h"
-#include "../Game/Objects/Game Objects/GameObjects/GUI_Text.h"
-#include "../Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "../Game/Objects/In Game Objects/Obstacles/BlockEmitter__Auto.h"
-#include "../Core/Text/EzText.h"
-#include "../Game/Level/Replays/Recording.h"
-#include "../Game/Objects/Game Objects/GameObject.h"
-#include "../Game/Tools/Recycler.h"
-#include <string>
-#include <vector>
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

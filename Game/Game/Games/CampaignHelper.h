@@ -1,7 +1,7 @@
 #ifndef CAMPAIGNHELPER
 #define CAMPAIGNHELPER
 
-#include <string>
+#include <global_header.h>
 
 namespace Microsoft
 {

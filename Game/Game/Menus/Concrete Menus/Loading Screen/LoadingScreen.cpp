@@ -1,17 +1,4 @@
-﻿#include "LoadingScreen.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Game/Tools/CkColorHelper.h"
-#include "Game/Localization.h"
-#include "Game/Player/Hero Physics/Base.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Player/Hero Physics/Spaceship.h"
-#include "Game/Player/Hero Physics/Box.h"
-#include "Core/Graphics/Draw/Quads/BaseQuad.h"
-#include "Game/Tools/Camera.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

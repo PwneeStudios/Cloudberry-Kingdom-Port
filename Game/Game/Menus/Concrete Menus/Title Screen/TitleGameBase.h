@@ -1,8 +1,7 @@
 ﻿#ifndef TITLEGAMEBASE
 #define TITLEGAMEBASE
 
-#include "../Game/Games/GameType.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

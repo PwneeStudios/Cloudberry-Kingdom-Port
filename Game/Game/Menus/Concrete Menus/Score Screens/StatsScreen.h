@@ -1,16 +1,7 @@
 #ifndef STATSSCREEN
 #define STATSSCREEN
 
-#include "../Game/Menus/CkBaseMenu.h"
-#include "../Core/Lambdas/LambdaFunc_1.h"
-#include "../Core/Lambdas/LambdaFunc.h"
-#include "../Game/Menus/Concrete Menus/ShopMenu.h"
-#include "ScoreScreen.h"
-#include "../Game/Menus/Concrete Menus/Title Screen/Freeplay/SavedSeedsGUI.h"
-#include "../Game/Objects/Game Objects/GameObjects/End/GameOverPanel.h"
-#include "../Game/Player/Stats.h"
-#include <string>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

@@ -1,8 +1,7 @@
 ﻿#ifndef _CODE_CASTLE
 #define _CODE_CASTLE
 
-#include "../Game/Tilesets/Backgrounds/Background.h"
-#include <string>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

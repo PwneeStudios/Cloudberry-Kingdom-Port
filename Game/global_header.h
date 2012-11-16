@@ -1,8 +1,10 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
+#include <string>
+#include <vector>
+
 #include "CloudberryKingdom.h"
-#include "global_header.h"
 #include "stringconverter.h"
 #include "Core\Chunk.h"
 #include "Core\FancyColor.h"

@@ -1,19 +1,4 @@
-#include "PieceSeedData.h"
-#include "Game/Level/Make/Parameters/RandomDifficulty.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Game/Objects/AutoGen.h"
-#include "Game/Level/Make/Parameters/StyleData/StyleData.h"
-#include "Game/Level/Make/Parameters/LevelGenData.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
-#include "Core/Tools/Random.h"
-#include "Game/Level/Make/Parameters/StyleData/SingleData.h"
-#include "Game/Level/Make/Parameters/StyleData/DownData.h"
-#include "Game/Level/Make/Parameters/StyleData/UpData.h"
-#include "Game/Level/Make/Parameters/StyleData/OneScreenData.h"
-#include "Game/Level/Make/Parameters/StyleData/BigData.h"
-#include "Game/Tools/Globals.h"
+#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;

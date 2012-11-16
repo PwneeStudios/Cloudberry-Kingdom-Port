@@ -1,11 +1,7 @@
 ﻿#ifndef RESOURCES
 #define RESOURCES
 
-#include "../Properties/Resources.Designer.h"
-#include <string>
-#include <vector>
-#include <iostream>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

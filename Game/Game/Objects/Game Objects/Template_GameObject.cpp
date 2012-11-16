@@ -1,5 +1,4 @@
-#include "Template_GameObject.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

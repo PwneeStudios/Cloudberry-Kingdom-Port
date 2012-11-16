@@ -1,15 +1,4 @@
-﻿#include "StyleData.h"
-#include "Core/Lambdas/Multicaster_2.h"
-#include "Game/Level/Make/PieceSeedData.h"
-#include "Game/Objects/AutoGen.h"
-#include "Game/Level/Make/Generators.h"
-#include "Core/Tools/Random.h"
-#include "Game/Level/Make/Parameters/Upgrades.h"
-#include "Game/Tools/Globals.h"
-#include "Game/Tools/Tools.h"
-#include "Game/Objects/In Game Objects/Blocks/Ceiling__Auto.h"
-#include "Game/Objects/In Game Objects/Blocks/NormalBlock__Auto.h"
-#include "Game/Objects/In Game Objects/Blocks/BouncyBlock__Auto.h"
+﻿#include <global_header.h>
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;

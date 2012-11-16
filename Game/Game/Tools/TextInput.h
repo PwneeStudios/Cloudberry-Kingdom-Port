@@ -1,8 +1,7 @@
 ﻿#ifndef TEXTINPUT
 #define TEXTINPUT
 
-#include "../Game/Level/Make/Parameters/Param.h"
-#include <tchar.h>
+#include <global_header.h>
 
 namespace Microsoft
 {

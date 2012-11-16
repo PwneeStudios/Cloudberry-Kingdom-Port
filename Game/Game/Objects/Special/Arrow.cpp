@@ -1,8 +1,4 @@
-﻿#include "Arrow.h"
-#include "Core/Graphics/Draw/Simple/SimpleObject.h"
-#include "Game/Tools/Prototypes.h"
-#include "Game/Tools/Tools.h"
-#include "Core/Tools/CoreMath.h"
+﻿#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 

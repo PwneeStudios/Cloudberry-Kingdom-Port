@@ -1,16 +1,4 @@
-#include "ControlScreen.h"
-#include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Text/EzText.h"
-#include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/CustomControls.h"
-#include "Game/Objects/Game Objects/GameObjects/GUI_Panel.h"
-#include "Core/Graphics/Draw/DrawPile.h"
-#include "Game/Localization.h"
-#include "Game/Tools/Resources.h"
-#include "Properties/Resources.Designer.h"
-#include "Core/Tools/ColorHelper.h"
-#include "Game/Games/CampaignHelper.h"
-#include "Game/Menus/Menu.h"
-#include "Core/Input/ButtonCheck.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 using namespace Microsoft::Xna::Framework::Input;

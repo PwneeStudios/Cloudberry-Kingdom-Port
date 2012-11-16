@@ -1,9 +1,7 @@
 #ifndef CLOSINGCIRCLE
 #define CLOSINGCIRCLE
 
-#include "../Game/Objects/Game Objects/GameObjects/ExplodeBobs.h"
-#include <cmath>
-#include <tchar.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {

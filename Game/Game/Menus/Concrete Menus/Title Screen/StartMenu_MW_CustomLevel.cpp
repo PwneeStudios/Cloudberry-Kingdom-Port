@@ -1,8 +1,4 @@
-#include "StartMenu_MW_CustomLevel.h"
-#include "Game/Menus/Concrete Menus/Title Screen/TitleGame_MW.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu_MW_Backpanel.h"
-#include "Game/Menus/Menu Components/MenuItem.h"
-#include "Game/Menus/Concrete Menus/Title Screen/StartMenu.h"
+#include <global_header.h>
 
 using namespace Microsoft::Xna::Framework;
 
