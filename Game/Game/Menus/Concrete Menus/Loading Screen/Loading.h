@@ -47,9 +47,9 @@ namespace Microsoft
 }
 
 
-using namespace Microsoft::Xna::Framework;
-using namespace Microsoft::Xna::Framework::Audio;
-using namespace Microsoft::Xna::Framework::Content;
+
+
+
 
 namespace CloudberryKingdom
 {

@@ -243,18 +243,18 @@ namespace CloudberryKingdom
 }
 
 
-using namespace Microsoft::Xna::Framework;
 
-using namespace CloudberryKingdom::Bobs;
-using namespace CloudberryKingdom::Obstacles;
-using namespace CloudberryKingdom::InGameObjects;
+
+
+
+
 
 
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System;
 
 
-using namespace CloudberryKingdom::Blocks;
+
 
 
 
@@ -274,12 +274,12 @@ using namespace CloudberryKingdom::Blocks;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Text;
 
-using namespace Microsoft::Xna::Framework::Graphics;
 
-using namespace CoreEngine;
-using namespace CoreEngine::Random;
 
-using namespace CloudberryKingdom::Particles;
+
+
+
+
 
 namespace CloudberryKingdom
 {

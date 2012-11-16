@@ -9,10 +9,10 @@
 //using namespace System::Runtime::InteropServices;
 #endif
 #if defined(WINDOWS)
-using namespace Microsoft::Xna::Framework;
+
 #endif
 #if defined(WINDOWS)
-using namespace Microsoft::Xna::Framework::Input;
+
 #endif
 
 namespace CloudberryKingdom

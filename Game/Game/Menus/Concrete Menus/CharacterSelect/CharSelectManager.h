@@ -64,10 +64,10 @@ namespace CloudberryKingdom
 //using namespace System;
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Linq;
-using namespace Microsoft::Xna::Framework;
+
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)
-using namespace Microsoft::Xna::Framework::GamerServices;
+
 #endif
 
 

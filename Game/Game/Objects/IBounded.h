@@ -1,7 +1,7 @@
 ﻿#ifndef IBOUNDED
 #define IBOUNDED
 
-using namespace Microsoft::Xna::Framework;
+
 
 namespace CloudberryKingdom
 {

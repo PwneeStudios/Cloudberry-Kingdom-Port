@@ -9,8 +9,8 @@ namespace CloudberryKingdom
 }
 
 
-using namespace Microsoft::Xna::Framework;
-using namespace Microsoft::Xna::Framework::Input;
+
+
 
 namespace CloudberryKingdom
 {

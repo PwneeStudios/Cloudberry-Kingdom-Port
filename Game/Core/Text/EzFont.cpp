@@ -1,6 +1,6 @@
 ﻿#include <global_header.h>
 
-using namespace Microsoft::Xna::Framework::Graphics;
+
 
 namespace CloudberryKingdom
 {

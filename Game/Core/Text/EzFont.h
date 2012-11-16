@@ -18,7 +18,7 @@ namespace Microsoft
 }
 
 
-using namespace Microsoft::Xna::Framework::Graphics;
+
 
 namespace CloudberryKingdom
 {

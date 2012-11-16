@@ -135,13 +135,13 @@ namespace Microsoft
 //C# TO C++ CONVERTER TODO TASK: The .NET System namespace is not available from native C++:
 //using namespace System::Collections::Generic;
 
-using namespace Microsoft::Xna::Framework;
-using namespace Microsoft::Xna::Framework::Audio;
-using namespace Microsoft::Xna::Framework::Content;
-using namespace Microsoft::Xna::Framework::Graphics;
-using namespace Microsoft::Xna::Framework::Input;
-using namespace Microsoft::Xna::Framework::Media;
-using namespace Microsoft::Xna::Framework::GamerServices;
+
+
+
+
+
+
+
 
 
 
