@@ -39,15 +39,7 @@
     <ClCompile Include="Core\Graphics\VertexFormat.cpp" />
     <ClCompile Include="Core\Input\ButtonCheck.cpp" />
     <ClCompile Include="Core\IViewable.cpp" />
-    <ClCompile Include="Core\Lambdas\Lambda.cpp" />
-    <ClCompile Include="Core\Lambdas\LambdaFunc.cpp" />
-    <ClCompile Include="Core\Lambdas\LambdaFunc_1.cpp" />
-    <ClCompile Include="Core\Lambdas\LambdaFunc_2.cpp" />
-    <ClCompile Include="Core\Lambdas\Lambda_1.cpp" />
-    <ClCompile Include="Core\Lambdas\Lambda_2.cpp" />
     <ClCompile Include="Core\Lambdas\Multicaster.cpp" />
-    <ClCompile Include="Core\Lambdas\Multicaster_1.cpp" />
-    <ClCompile Include="Core\Lambdas\Multicaster_2.cpp" />
     <ClCompile Include="Core\Particle Effects\Particle.cpp" />
     <ClCompile Include="Core\Particle Effects\ParticleEmitter.cpp" />
     <ClCompile Include="Core\Particle Effects\Specific Effects\CloudberryKingdom.ParticleEffects.cpp" />

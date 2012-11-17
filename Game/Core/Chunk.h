@@ -5,14 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Chunk;
-}
-
-
-
-namespace CloudberryKingdom
-{
-	class Chunks : public IEnumerable<Chunk*>
+	class Chunks /*: public IEnumerable<Chunk*>*/
 	{
 	public:
 		static std::shared_ptr<Chunks> Get( std::vector<unsigned char> Data );
@@ -22,12 +15,12 @@ namespace CloudberryKingdom
 	public:
 		Chunks( std::vector<unsigned char> Data );
 
-		std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
+		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
-		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();
+		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
 	};
 
-	class ChunkEnumerator : public IEnumerator<Chunk*>
+	/*class ChunkEnumerator : public IEnumerator<Chunk*>
 	{
 	private:
 		std::vector<unsigned char> Data;
@@ -54,9 +47,9 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
-	};
+	};*/
 
-	class Chunk : public IEnumerable<Chunk*>
+	class Chunk /*: public IEnumerable<Chunk*>*/
 	{
 	public:
 		int Type;
@@ -75,9 +68,9 @@ namespace CloudberryKingdom
 		void Initialize( int Capacity );
 
 	public:
-		std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
+		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
-		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();
+		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
 
 		/// <summary>
 		/// Double the size of the buffer without losing any data.

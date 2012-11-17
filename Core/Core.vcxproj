@@ -41,6 +41,7 @@
     <ClInclude Include="include\Datastructures\Freelist.h" />
     <ClInclude Include="include\ForwardDeclarations.h" />
     <ClInclude Include="include\GameLoop.h" />
+    <ClInclude Include="include\Graphics\Color.h" />
     <ClInclude Include="include\Graphics\QuadDrawer.h" />
     <ClInclude Include="include\Graphics\QuadDrawerPc.h" />
     <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />

@@ -18,7 +18,7 @@
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
 }*/
 
-void CloudberryKingdom::Initialize()
+void CloudberryKingdomWrapper::Initialize()
 {
 	std::vector< std::string > paths;
 
@@ -32,7 +32,7 @@ void CloudberryKingdom::Initialize()
 		WPADSetConnectCallback( i, ConnectCallback );*/
 }
 
-void CloudberryKingdom::Update()
+void CloudberryKingdomWrapper::Update()
 {
 	/*PADStatus status[ PAD_MAX_CONTROLLERS ];
 	memset( status, 0, sizeof( status ) );

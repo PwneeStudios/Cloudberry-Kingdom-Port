@@ -17,21 +17,20 @@ namespace CloudberryKingdom
 		std::vector<Lambda*> MyList;
 
 	public:
-		void Apply();
-
-		void Clear();
-
-		void Add( const std::shared_ptr<Lambda> &L );
-
-		void Remove( const std::shared_ptr<Lambda> &L );
-
-	private:
-		void InitializeInstanceFields();
-
-public:
-		Multicaster()
+		void Apply()
 		{
-			InitializeInstanceFields();
+			for ( std::vector<Lambda*>::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
+				( *L )->Apply();
+		}
+
+		void Clear()
+		{
+			MyList.clear();
+		}
+
+		void Add( const std::shared_ptr<Lambda> &L )
+		{
+			MyList.push_back( L );
 		}
 	};
 }

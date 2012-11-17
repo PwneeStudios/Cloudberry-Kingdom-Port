@@ -6,7 +6,7 @@
 /**
  * Cloudberry Kingdom game.
  */
-class CloudberryKingdom : public GameLoop
+class CloudberryKingdomWrapper : public GameLoop
 {
 	
 public:

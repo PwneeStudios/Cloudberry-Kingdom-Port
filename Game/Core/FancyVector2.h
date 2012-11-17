@@ -3,17 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
 namespace CloudberryKingdom
 {
 	class ObjectBase;
@@ -35,6 +24,7 @@ namespace CloudberryKingdom
 		LerpStyle_DECAY_NO_OVERSHOOT,
 		LerpStyle_SIGMOID
 	};
+
 	class FancyVector2 : public ViewReadWrite, public IPos
 	{
 	public:
