@@ -29,11 +29,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum PendulumMoveType
-	{
-		PendulumMoveType_LINE,
-		PendulumMoveType_SQUARE
-	};
 	class Pendulum : public BlockBase, public IBound
 	{
 	public:

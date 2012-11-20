@@ -14,14 +14,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum Side
-	{
-		Side_RIGHT,
-		Side_LEFT,
-		Side_TOP,
-		Side_BOTTOM
-	};
-
 	class AABox
 	{
 	public:

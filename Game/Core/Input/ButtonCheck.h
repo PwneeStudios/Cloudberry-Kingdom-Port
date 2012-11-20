@@ -78,38 +78,7 @@ public:
 		}
 	};
 
-	enum ControllerButtons
-	{
-		ControllerButtons_A,
-		ControllerButtons_B,
-		ControllerButtons_X,
-		ControllerButtons_Y,
-		ControllerButtons_RS,
-		ControllerButtons_LS,
-		ControllerButtons_RT,
-		ControllerButtons_LT,
-		ControllerButtons_RJ,
-		ControllerButtons_RJBUTTON,
-		ControllerButtons_LJ,
-		ControllerButtons_LJBUTTON,
-		ControllerButtons_DPAD,
-		ControllerButtons_START,
-		ControllerButtons_BACK,
-		ControllerButtons_LEFT,
-		ControllerButtons_RIGHT,
-		ControllerButtons_UP,
-		ControllerButtons_DOWN,
-		ControllerButtons_ENTER,
-		ControllerButtons_NONE
-	};
-
-	enum MashType
-	{
-		MashType_HOLD,
-		MashType_TAP,
-		MashType_ALTERNATE,
-		MashType_HOLD_DIR
-	};
+	
 
 	class ButtonData
 	{

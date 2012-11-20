@@ -37,11 +37,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum GhostBlockState
-	{
-		GhostBlockState_PHASED_IN,
-		GhostBlockState_PHASED_OUT
-	};
 	class GhostBlock : public BlockBase
 	{
 	public:

@@ -17,15 +17,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum IconType
-	{
-		IconType_NUMBER,
-		IconType_BOSS,
-		IconType_OBSTACLE,
-		IconType_HERO,
-		IconType_PLACE,
-		IconType_BUNGEE
-	};
 	class DoorIcon : public GUI_Panel
 	{
 	private:

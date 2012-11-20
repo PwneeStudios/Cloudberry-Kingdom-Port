@@ -75,21 +75,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum ObjectDrawOrder
-	{
-		ObjectDrawOrder_WITH_OUTLINE,
-		ObjectDrawOrder_BEFORE_OUTLINE,
-		ObjectDrawOrder_AFTER_OUTLINE,
-		ObjectDrawOrder_ALL,
-		ObjectDrawOrder_NONE
-	};
-	enum ChangeMode
-	{
-		ChangeMode_SINGLE_FRAME,
-		ChangeMode_SINGLE_ANIM,
-		ChangeMode_ALL
-	};
-
 	class BaseQuad
 	{
 	public:

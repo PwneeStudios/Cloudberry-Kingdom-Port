@@ -26,13 +26,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum FallingBlockState
-	{
-		FallingBlockState_REGULAR,
-		FallingBlockState_TOUCHED,
-		FallingBlockState_FALLING,
-		FallingBlockState_ANGRY
-	};
 	class FallingBlock : public BlockBase
 	{
 	public:

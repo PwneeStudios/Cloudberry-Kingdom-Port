@@ -20,11 +20,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum ReplayGUIType
-	{
-		ReplayGUIType_REPLAY,
-		ReplayGUIType_COMPUTER
-	};
 	class ReplayGUI : public CkBaseMenu
 	{
 	public:

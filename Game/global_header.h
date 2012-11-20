@@ -1,31 +1,40 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
+#include "enums.h"
+#include "forward_declarations.h"
+
+class BinaryReader;
 class BinaryWriter;
+class DisplayMode;
 class Keys;
+class StreamReader;
+class StreamWriter;
 
 // Core library.
 #include <Graphics/Color.h>
 #include <Math/Vectors.h>
 
 // System includes.
+#include <map>
 #include <memory>
 #include <string>
 #include <vector>
 
 // Cloudberry Kingdom converted files.
+#include "Game/Tools/IntVector2.h"
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/IViewable.h"
 #include "CloudberryKingdom.h"
 #include "stringconverter.h"
 #include "Core/Chunk.h"
 #include "Core/FancyColor.h"
 #include "Core/FancyVector2.h"
-#include "Core/IViewable.h"
 #include "Core/PhsxData.h"
 #include "Core/ResolutionGroup.h"
 #include "Core/Version.h"
 #include "Core/WriteReadTools.h"
 #include "Core/Animation/AnimationData_Integer.h"
-#include "Core/Animation/AnimationData_Vector.h"
 #include "Core/Animation/AnimQueue.h"
 #include "Core/Animation/SpriteAnim.h"
 #include "Core/Effects/EzEffect.h"
@@ -372,7 +381,6 @@ class Keys;
 #include "Game/Tools/EzReader.h"
 #include "Game/Tools/EzStorage.h"
 #include "Game/Tools/Globals.h"
-#include "Game/Tools/IntVector2.h"
 #include "Game/Tools/Oscillate.h"
 #include "Game/Tools/Prototypes.h"
 #include "Game/Tools/Recycler.h"

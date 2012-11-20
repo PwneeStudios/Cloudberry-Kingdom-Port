@@ -433,6 +433,8 @@
     <ClInclude Include="Core\Tools\Set.h" />
     <ClInclude Include="Core\Version.h" />
     <ClInclude Include="Core\WriteReadTools.h" />
+    <ClInclude Include="enums.h" />
+    <ClInclude Include="forward_declarations.h" />
     <ClInclude Include="Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h" />
     <ClInclude Include="Game\Collision Detection\AABox.h" />
     <ClInclude Include="Game\Collision Detection\Circle.h" />

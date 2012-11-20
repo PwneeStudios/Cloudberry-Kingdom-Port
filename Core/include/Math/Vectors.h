@@ -9,43 +9,56 @@
 class Vector2
 {
 
-	float x_;
-	float y_;
-
 public:
 
-	Vector2() : x_( 0 ), y_( 0 ) { }
-	Vector2( const Vector2 &other ) : x_( other.x_ ), y_( other.y_ ) { }
-	Vector2( float x, float y ) : x_( x ), y_( y ) { }
-	Vector2( float x ) : x_( x ), y_( x ) { }
+	float X;
+	float Y;
 
-	float x() const { return x_; }
-	float y() const { return y_; }
+	Vector2() : X( 0 ), Y( 0 ) { }
+	Vector2( const Vector2 &other ) : X( other.X ), Y( other.Y ) { }
+	Vector2( float x, float y ) : X( x ), Y( y ) { }
+	Vector2( float x ) : X( x ), Y( x ) { }
 
-	float LengthSq() const { return x_ * x_ + y_ * y_; }
+	float x() const { return X; }
+	float y() const { return Y; }
+
+	float LengthSq() const { return X * X + Y * Y; }
 	
 	float Length() const { return sqrtf( LengthSq() ); }
 	
 	void Normalize()
 	{
 		float length = Length();
-		x_ /= length;
-		y_ /= length;
+		X /= length;
+		Y /= length;
 	}
 
 	Vector2 Normalized() const
 	{
 		float length;
-		return Vector2( x_ / length, y_ / length );
+		return Vector2( X / length, Y / length );
 	}
 
 	Vector2 &operator += ( const Vector2 &a )
 	{
-		x_ += a.x();
-		y_ += a.y();
+		X += a.x();
+		Y += a.y();
 		return *this;
 	}
 
+};
+
+class Vector3
+{
+
+	float X;
+	float Y;
+	float Z;
+
+	Vector3() : X(0), Y(0), Z(0) { }
+	Vector3( const Vector3 &other ) : X( other.X ), Y( other.Y ), Z( other.Z ) { }
+	Vector3( float x, float y, float z ) : X(x), Y(y), Z(z) { }
+	Vector3( float x ) : X(x), Y(x), Z(x) { }
 };
 
 class Vector4

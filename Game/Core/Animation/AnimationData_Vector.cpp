@@ -42,7 +42,7 @@ bool AnimationData::RecordAll = false;
 		}
 	}
 
-	AnimationData::AnimationData( AnimationData data )
+	AnimationData::AnimationData( const AnimationData &data )
 	{
 		Linear = false;
 
@@ -52,7 +52,7 @@ bool AnimationData::RecordAll = false;
 			CopyAnim( data, i );
 	}
 
-	void AnimationData::CopyAnim( AnimationData data, int Anim )
+	void AnimationData::CopyAnim( const AnimationData &data, int Anim )
 	{
 		if ( data.Anims[ Anim ].Data.size() > 0 )
 		{

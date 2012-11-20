@@ -5,43 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_2;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class Texture2D;
-			}
-		}
-	}
-}
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// Should be replaced. Right now this is used for drawing the players in the replays, but replays should instead be reusing the same draw code for the player as the normal draw code.
 	/// </summary>
 	class SpriteAnimGroup
 	{
 	public:
-		std::unordered_map<int, SpriteAnim*> SpriteAnims;
+		std::map<int, SpriteAnim*> SpriteAnims;
 
 		void Release();
 

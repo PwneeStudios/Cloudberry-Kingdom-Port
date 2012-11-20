@@ -16,15 +16,6 @@ namespace CloudberryKingdom
 		virtual const Vector2 &getPos() const = 0;
 	};
 
-	enum LerpStyle
-	{
-		LerpStyle_LINEAR,
-		LerpStyle_SMALL_OVERSHOOT,
-		LerpStyle_DECAY_PLUS_SMALL_OVERSHOOT,
-		LerpStyle_DECAY_NO_OVERSHOOT,
-		LerpStyle_SIGMOID
-	};
-
 	class FancyVector2 : public ViewReadWrite, public IPos
 	{
 	public:

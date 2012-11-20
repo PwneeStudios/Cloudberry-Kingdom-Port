@@ -3,20 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class DisplayMode;
-			}
-		}
-	}
-}
-
 namespace CloudberryKingdom
 {
 	class ResolutionGroup

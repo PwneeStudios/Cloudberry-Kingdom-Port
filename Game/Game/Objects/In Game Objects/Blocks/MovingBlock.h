@@ -24,12 +24,7 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum MovingBlockMoveType
-	{
-		MovingBlockMoveType_LINE,
-		MovingBlockMoveType_CIRCLE,
-		MovingBlockMoveType_FIGURE_EIGHT
-	};
+	
 	class MovingBlock : public BlockBase, public IBound
 	{
 	public:

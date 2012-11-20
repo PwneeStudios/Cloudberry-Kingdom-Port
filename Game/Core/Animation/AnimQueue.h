@@ -3,19 +3,8 @@
 
 #include <global_header.h>
 
-
-
-
-
-
 namespace CloudberryKingdom
 {
-	enum AnimQueueEntryType
-	{
-		AnimQueueEntryType_PLAY,
-		AnimQueueEntryType_PLAY_UNTIL,
-		AnimQueueEntryType_TRANSFER
-	};
 	class AnimQueueEntry
 	{
 	public:

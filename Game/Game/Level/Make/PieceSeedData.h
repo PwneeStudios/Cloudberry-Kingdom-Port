@@ -45,20 +45,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum LevelGeometry
-	{
-		LevelGeometry_RIGHT,
-		LevelGeometry_UP,
-		LevelGeometry_ONE_SCREEN,
-		LevelGeometry_DOWN,
-		LevelGeometry_BIG
-	};
-	enum LevelZoom
-	{
-		LevelZoom_NORMAL,
-		LevelZoom_BIG
-	};
-
 	class PieceSeedData
 	{
 		/// <summary>

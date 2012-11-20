@@ -32,15 +32,6 @@ namespace CloudberryKingdom
 		float Location;
 	};
 
-	enum ColType
-	{
-		ColType_NO_COL,
-		ColType_LEFT,
-		ColType_RIGHT,
-		ColType_TOP,
-		ColType_BOTTOM
-	};
-
 	class Phsx
 	{
 		/// <summary>

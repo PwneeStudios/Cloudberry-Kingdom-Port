@@ -32,11 +32,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	enum BouncyBlockState
-	{
-		BouncyBlockState_REGULAR,
-		BouncyBlockState_SUPER_STIFF
-	};
 	class BouncyBlock : public BlockBase
 	{
 	public:

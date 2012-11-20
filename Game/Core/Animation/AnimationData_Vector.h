@@ -3,18 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-
 namespace CloudberryKingdom
 {
 	class OneAnim
@@ -42,9 +30,9 @@ namespace CloudberryKingdom
 
 		void Read( const std::shared_ptr<BinaryReader> &reader );
 
-		AnimationData( AnimationData data );
+		AnimationData( const AnimationData &data );
 
-		void CopyAnim( AnimationData data, int Anim );
+		void CopyAnim( const AnimationData &data, int Anim );
 
 		//public AnimationData()
 		void Init();
