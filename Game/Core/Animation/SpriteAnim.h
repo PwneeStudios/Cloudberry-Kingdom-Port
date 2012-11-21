@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 
 		SpriteAnimGroup();
 
-		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding, const std::shared_ptr<CloudberryKingdom::Lambda_2<std::unordered_map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
+		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding, const std::shared_ptr<CloudberryKingdom::Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
 
 		std::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
 	};

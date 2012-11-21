@@ -39,27 +39,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class HsvQuad : public QuadClass
-	{
-		/// <summary>
-		/// Color rotation matrix.
-		/// </summary>
-	public:
-		const Matrix &getMyMatrix() const;
-
-		void setMyMatrix( const Matrix &value );
-	private:
-		Matrix _MyMatrix;
-		float _MyMatrixSignature;
-
-	public:
-		HsvQuad();
-
-		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );
-
-		virtual void Draw( bool Update, bool DrawQuad, bool DrawShadow );
-	};
-
 	class QuadClass : public ViewReadWrite
 	{
 #if defined(WINDOWS)
@@ -269,6 +248,27 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
+	};
+
+	class HsvQuad : public QuadClass
+	{
+		/// <summary>
+		/// Color rotation matrix.
+		/// </summary>
+	public:
+		const Matrix &getMyMatrix() const;
+
+		void setMyMatrix( const Matrix &value );
+	private:
+		Matrix _MyMatrix;
+		float _MyMatrixSignature;
+
+	public:
+		HsvQuad();
+
+		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );
+
+		virtual void Draw( bool Update, bool DrawQuad, bool DrawShadow );
 	};
 }
 

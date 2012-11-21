@@ -1,34 +1,6 @@
 ﻿#ifndef MAINRENDER
 #define MAINRENDER
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class GraphicsDevice;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class SpriteBatch;
-			}
-		}
-	}
-}
-
 
 namespace CloudberryKingdom
 {

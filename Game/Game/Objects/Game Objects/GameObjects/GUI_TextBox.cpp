@@ -89,23 +89,23 @@ namespace CloudberryKingdom
 
 	#if defined(WINDOWS)
 			KeyboardExtension::Freeze = false;
-			if ( ButtonCheck::State( Keys::Escape ).Down )
+			if ( ButtonCheck::State( Keys_Escape ).Down )
 			{
 				Cancel();
 				return;
 			}
-			if ( ButtonCheck::State( Keys::V ).Pressed && Tools::CntrlDown() )
+			if ( ButtonCheck::State( Keys_V ).Pressed && Tools::CntrlDown() )
 			{
 				Paste();
 				return;
 			}
 			//if (ButtonCheck.State(Keys.V).Pressed && Tools.CntrlDown()) { Paste(); return; }
-			if ( ButtonCheck::State( Keys::C ).Down && Tools::CntrlDown() )
+			if ( ButtonCheck::State( Keys_C ).Down && Tools::CntrlDown() )
 			{
 				Copy();
 				return;
 			}
-			if ( ButtonCheck::State( Keys::X ).Down && Tools::CntrlDown() )
+			if ( ButtonCheck::State( Keys_X ).Down && Tools::CntrlDown() )
 			{
 				Copy();
 				Clear();

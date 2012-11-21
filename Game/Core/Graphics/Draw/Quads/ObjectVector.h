@@ -3,33 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class BaseQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-
 namespace CloudberryKingdom
 {
 	class ObjectVector

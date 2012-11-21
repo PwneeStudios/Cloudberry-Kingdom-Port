@@ -248,7 +248,7 @@ namespace CloudberryKingdom
 		PremultipliedColor = ColorHelper::PremultiplyAlpha( color );
 
 		for ( int i = 0; i < NumVertices; i++ )
-			Vertices[ i ].Color = PremultipliedColor;
+			Vertices[ i ].TheColor = PremultipliedColor;
 	}
 
 	void BaseQuad::Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v )

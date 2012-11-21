@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static bool IsKeyDownCustom(this KeyboardState keyboard, Keys key)
-		static bool IsKeyDownCustom( KeyboardState keyboard, Keys key );
+		//static bool IsKeyDownCustom( KeyboardState keyboard, Keys key );
 	};
 
 	class ButtonStatistics

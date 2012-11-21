@@ -539,7 +539,7 @@ bool ScoreScreen::UseZoomIn = true;
 			if ( level->CanWatchReplay && ButtonCheck::State( ControllerButtons_X, -1 ).Pressed )
 				WatchReplay = true;
 	#if defined(PC_VERSION)
-		if ( Tools::Keyboard.IsKeyDownCustom( Microsoft::Xna::Framework::Input::Keys::Escape ) || Tools::PrevKeyboard.IsKeyDownCustom( Microsoft::Xna::Framework::Input::Keys::Escape ) )
+		if ( Tools::Keyboard.IsKeyDownCustom( Keys_Escape ) || Tools::PrevKeyboard.IsKeyDownCustom( Keys_Escape ) )
 			WatchReplay = false;
 	#endif
 

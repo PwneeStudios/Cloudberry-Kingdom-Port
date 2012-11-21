@@ -123,7 +123,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 	#if defined(NOT_PC)
 		return _T( "Hold " ) + ButtonString::LeftBumper( 85 ) + _T( " and " ) + ButtonString::RightBumper( 85 ) + _T( " to respawn quickly!" );
 	#else
-		return _T( "Press " ) + ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ) + _T( " or " ) + ButtonString::KeyStr( Microsoft::Xna::Framework::Input::Keys::Space, 85 ) + _T( " to respawn quickly!" );
+		return _T( "Press " ) + ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ) + _T( " or " ) + ButtonString::KeyStr( Keys_Space, 85 ) + _T( " to respawn quickly!" );
 	#endif
 	}
 

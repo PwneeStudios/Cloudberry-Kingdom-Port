@@ -682,14 +682,14 @@ bool Tools::MouseInWindow = false;
 #if defined(WINDOWS)
 	bool Tools::ShiftDown()
 	{
-		return Tools::Keyboard.IsKeyDown( XnaInput::Keys::LeftShift ) || Tools::Keyboard.IsKeyDown( XnaInput::Keys::RightShift );
+		return Tools::Keyboard.IsKeyDown( Keys_LeftShift ) || Tools::Keyboard.IsKeyDown( Keys_RightShift );
 	}
 #endif
 
 #if defined(WINDOWS)
 	bool Tools::CntrlDown()
 	{
-		return Tools::Keyboard.IsKeyDown( XnaInput::Keys::LeftControl ) || Tools::Keyboard.IsKeyDown( XnaInput::Keys::RightControl );
+		return Tools::Keyboard.IsKeyDown( Keys_LeftControl ) || Tools::Keyboard.IsKeyDown( Keys_RightControl );
 	}
 #endif
 
@@ -1213,7 +1213,7 @@ int Tools::WriteObjId = 0;
 				else if ( ( *info )->FieldType == MyOwnVertexFormat::typeid )
 				{
 					MyOwnVertexFormat v = static_cast<MyOwnVertexFormat>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3} {4} {5} {6} {7}" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.Color.R, v.Color.G, v.Color.B, v.Color.A );
+					line = std::wstring::Format( _T( "{0} {1} {2} {3} {4} {5} {6} {7}" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.TheColor.R, v.TheColor.G, v.TheColor.B, v.TheColor.A );
 				}
 				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 				{
@@ -1392,7 +1392,7 @@ bool Tools::LastLineWasBlank = false;
 				else if ( ( *info )->FieldType == MyOwnVertexFormat::typeid )
 				{
 					MyOwnVertexFormat v = static_cast<MyOwnVertexFormat>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "new MyOwnVertexFormat(new Vector2({0}f, {1}f), new Vector2({2}f, {3}f), new Color({4}, {5}, {6}, {7}))" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.Color.R, v.Color.G, v.Color.B, v.Color.A );
+					line = std::wstring::Format( _T( "new MyOwnVertexFormat(new Vector2({0}f, {1}f), new Vector2({2}f, {3}f), new Color({4}, {5}, {6}, {7}))" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.TheColor.R, v.TheColor.G, v.TheColor.B, v.TheColor.A );
 				}
 				// BasePoint
 				else if ( ( *info )->FieldType == BasePoint::typeid )
@@ -1669,10 +1669,10 @@ bool Tools::LastLineWasBlank = false;
 		b.uv.X = float::Parse( bit3 );
 		b.uv.Y = float::Parse( bit4 );
 
-		b.Color.R = unsigned char::Parse( bit5 );
-		b.Color.G = unsigned char::Parse( bit6 );
-		b.Color.B = unsigned char::Parse( bit7 );
-		b.Color.A = unsigned char::Parse( bit8 );
+		b.TheColor.R = unsigned char::Parse( bit5 );
+		b.TheColor.G = unsigned char::Parse( bit6 );
+		b.TheColor.B = unsigned char::Parse( bit7 );
+		b.TheColor.A = unsigned char::Parse( bit8 );
 
 		return b;
 	}

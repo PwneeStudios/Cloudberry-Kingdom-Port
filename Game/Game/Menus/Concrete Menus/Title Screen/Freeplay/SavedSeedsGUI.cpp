@@ -339,7 +339,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 	{
 		CkBaseMenu::MyPhsxStep();
 	#if defined(WINDOWS)
-		if ( ButtonCheck::State( Microsoft::Xna::Framework::Input::Keys::Delete ).Pressed )
+		if ( ButtonCheck::State( Keys_Delete ).Pressed )
 			Delete( MyMenu );
 	#endif
 	}

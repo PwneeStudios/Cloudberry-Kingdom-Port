@@ -5,22 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
-}
-
-
-namespace CloudberryKingdom
-{
 	class Multicaster : public Lambda
 	{
 	private:
-		std::vector<Lambda*> MyList;
+		std::vector<std::shared_ptr<Lambda> > MyList;
 
 	public:
 		void Apply()
 		{
-			for ( std::vector<Lambda*>::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
-				( *L )->Apply();
+			for ( std::vector<std::shared_ptr<Lambda> >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
+				( *L ).get()->Apply();
 		}
 
 		void Clear()

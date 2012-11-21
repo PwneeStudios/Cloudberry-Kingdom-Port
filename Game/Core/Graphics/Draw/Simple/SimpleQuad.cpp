@@ -590,10 +590,10 @@ std::vector<std::wstring> SimpleQuad::_bits_to_save_simple = std::vector<std::ws
 
 		PremultipliedColor = ColorHelper::PremultiplyAlpha( color, BlendAddRatio );
 
-		v0.Vertex.Color = PremultipliedColor;
-		v1.Vertex.Color = PremultipliedColor;
-		v2.Vertex.Color = PremultipliedColor;
-		v3.Vertex.Color = PremultipliedColor;
+		v0.Vertex.TheColor = PremultipliedColor;
+		v1.Vertex.TheColor = PremultipliedColor;
+		v2.Vertex.TheColor = PremultipliedColor;
+		v3.Vertex.TheColor = PremultipliedColor;
 	}
 
 	void SimpleQuad::SetColor( Vector4 color )

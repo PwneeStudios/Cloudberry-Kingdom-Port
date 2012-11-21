@@ -54,7 +54,7 @@ std::vector<std::wstring> PieceQuadGroup::suffixes = std::vector<std::wstring*>(
 		Center.CalcTexture( anim, t );
 	}
 
-std::unordered_map<std::wstring, PieceQuad*> PieceQuad::Dict = 0;
+std::map<std::wstring, PieceQuad*> PieceQuad::Dict;
 
 	std::shared_ptr<PieceQuad> PieceQuad::Get( const std::wstring &name )
 	{

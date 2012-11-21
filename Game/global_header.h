@@ -7,9 +7,18 @@
 class BinaryReader;
 class BinaryWriter;
 class DisplayMode;
-class Keys;
+class Effect;
+class EffectParameter;
+class EffectTechnique;
+class GraphicsDevice;
+class PresentationParameters;
+class RenderTarget2D;
+class SamplerState;
+class SpriteBatch;
 class StreamReader;
 class StreamWriter;
+class Texture2D;
+struct Viewport { float X; float Y; float W; float H; };
 
 // Core library.
 #include <Graphics/Color.h>
@@ -18,11 +27,23 @@ class StreamWriter;
 // System includes.
 #include <map>
 #include <memory>
+#include <queue>
 #include <string>
 #include <vector>
 
 // Cloudberry Kingdom converted files.
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/LambdaFunc.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+#include "Core/Lambdas/LambdaFunc_2.h"
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Lambdas/Lambda_2.h"
+#include "Core/Lambdas/Multicaster.h"
+#include "Core/Lambdas/Multicaster_1.h"
+#include "Core/Lambdas/Multicaster_2.h"
 #include "Game/Tools/IntVector2.h"
+#include "Game/Tools/Oscillate.h"
 #include "Core/Animation/AnimationData_Vector.h"
 #include "Core/IViewable.h"
 #include "CloudberryKingdom.h"
@@ -33,6 +54,9 @@ class StreamWriter;
 #include "Core/PhsxData.h"
 #include "Core/ResolutionGroup.h"
 #include "Core/Version.h"
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
 #include "Core/WriteReadTools.h"
 #include "Core/Animation/AnimationData_Integer.h"
 #include "Core/Animation/AnimQueue.h"
@@ -41,7 +65,6 @@ class StreamWriter;
 #include "Core/Effects/EzEffectWad.h"
 #include "Core/Graphics/MainRender.h"
 #include "Core/Graphics/QuadDrawer.h"
-#include "Core/Graphics/VertexFormat.h"
 #include "Core/Graphics/Draw/DrawPile.h"
 #include "Core/Graphics/Draw/Object/ObjectBox.h"
 #include "Core/Graphics/Draw/Object/ObjectClass.h"
@@ -50,21 +73,9 @@ class StreamWriter;
 #include "Core/Graphics/Draw/Quads/PieceQuad.h"
 #include "Core/Graphics/Draw/Quads/Quad.h"
 #include "Core/Graphics/Draw/Quads/QuadClass.h"
-#include "Core/Graphics/Draw/Simple/BasePoint.h"
 #include "Core/Graphics/Draw/Simple/SimpleBox.h"
 #include "Core/Graphics/Draw/Simple/SimpleObject.h"
-#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
-#include "Core/Graphics/Draw/Simple/SimpleVector.h"
 #include "Core/Input/ButtonCheck.h"
-#include "Core/Lambdas/Lambda.h"
-#include "Core/Lambdas/LambdaFunc.h"
-#include "Core/Lambdas/LambdaFunc_1.h"
-#include "Core/Lambdas/LambdaFunc_2.h"
-#include "Core/Lambdas/Lambda_1.h"
-#include "Core/Lambdas/Lambda_2.h"
-#include "Core/Lambdas/Multicaster.h"
-#include "Core/Lambdas/Multicaster_1.h"
-#include "Core/Lambdas/Multicaster_2.h"
 #include "Core/Particle Effects/Particle.h"
 #include "Core/Particle Effects/ParticleEmitter.h"
 #include "Core/Particle Effects/Specific Effects/CloudberryKingdom.ParticleEffects.h"
@@ -381,7 +392,6 @@ class StreamWriter;
 #include "Game/Tools/EzReader.h"
 #include "Game/Tools/EzStorage.h"
 #include "Game/Tools/Globals.h"
-#include "Game/Tools/Oscillate.h"
 #include "Game/Tools/Prototypes.h"
 #include "Game/Tools/Recycler.h"
 #include "Game/Tools/Resources.h"

@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		int Layer;
 
-		static std::unordered_map<std::wstring, PieceQuad*> Dict;
+		static std::map<std::wstring, PieceQuad*> Dict;
 
 		static std::shared_ptr<PieceQuad> Get( const std::wstring &name );
 

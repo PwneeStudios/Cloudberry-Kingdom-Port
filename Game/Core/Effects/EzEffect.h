@@ -5,61 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzEffectWad;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class Effect;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class EffectParameter;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class EffectTechnique;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class EzEffect
 	{
 	public:

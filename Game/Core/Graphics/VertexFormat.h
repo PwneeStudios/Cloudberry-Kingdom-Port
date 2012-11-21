@@ -1,37 +1,24 @@
 ﻿#ifndef VERTEXFORMAT
 #define VERTEXFORMAT
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class VertexDeclaration;
-			}
-		}
-	}
-}
-
+#include <Graphics/Color.h>
 
 namespace CloudberryKingdom
 {
-	class MyOwnVertexFormat : public IVertexType //, IReadWrite
+	class MyOwnVertexFormat// : public IVertexType //, IReadWrite
 	{
 	public:
 		Vector2 xy;
 		Vector2 uv;
-		Color Color;
+		Color TheColor;
 
 		MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color );
 
 		MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color, Vector3 depth );
 
-		const static std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> VertexDeclaration;
+		/*const static std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> VertexDeclaration;
 
-		const std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> &getVertexDeclaration() = IVertexType::VertexDeclaration::get const;
+		const std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> &getVertexDeclaration() = IVertexType::VertexDeclaration::get const;*/
 
 		/*
 		static string[] _bits_to_save = new string[] { "xy", "uv", "Color" };

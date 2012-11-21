@@ -486,7 +486,7 @@ namespace CloudberryKingdom
 		// End the replay
 		bool EndReplay = false;
 	#if defined(PC_VERSION)
-		if ( Tools::Keyboard.IsKeyDownCustom( Microsoft::Xna::Framework::Input::Keys::Escape ) )
+		if ( Tools::Keyboard.IsKeyDownCustom( Keys_Escape ) )
 			EndReplay = true;
 	#endif
 

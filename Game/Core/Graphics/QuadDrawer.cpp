@@ -244,13 +244,13 @@ namespace CloudberryKingdom
 		color = ColorHelper::PremultiplyAlpha( color );
 
 		LineQuad.v0.Vertex.xy = Vector2( BL.X, TR.Y );
-		LineQuad.v0.Vertex.Color = color;
+		LineQuad.v0.Vertex.TheColor = color;
 		LineQuad.v1.Vertex.xy = TR;
-		LineQuad.v1.Vertex.Color = color;
+		LineQuad.v1.Vertex.TheColor = color;
 		LineQuad.v2.Vertex.xy = BL;
-		LineQuad.v2.Vertex.Color = color;
+		LineQuad.v2.Vertex.TheColor = color;
 		LineQuad.v3.Vertex.xy = Vector2( TR.X, BL.Y );
-		LineQuad.v3.Vertex.Color = color;
+		LineQuad.v3.Vertex.TheColor = color;
 
 		LineQuad.v0.Vertex.uv = Vector2( 0, 0 );
 		LineQuad.v1.Vertex.uv = Vector2( 1, 0 );
@@ -339,13 +339,13 @@ namespace CloudberryKingdom
 		LineQuad.U_Wrap = LineQuad.V_Wrap = Wrap;
 
 		LineQuad.v0.Vertex.xy = x1 + Normal * width / 2;
-		LineQuad.v0.Vertex.Color = color;
+		LineQuad.v0.Vertex.TheColor = color;
 		LineQuad.v1.Vertex.xy = x1 - Normal * width / 2;
-		LineQuad.v1.Vertex.Color = color;
+		LineQuad.v1.Vertex.TheColor = color;
 		LineQuad.v2.Vertex.xy = x2 + Normal * width / 2;
-		LineQuad.v2.Vertex.Color = color;
+		LineQuad.v2.Vertex.TheColor = color;
 		LineQuad.v3.Vertex.xy = x2 - Normal * width / 2;
-		LineQuad.v3.Vertex.Color = color;
+		LineQuad.v3.Vertex.TheColor = color;
 
 		LineQuad.BlendAddRatio = BlendAddRatio;
 
@@ -367,10 +367,10 @@ namespace CloudberryKingdom
 		Vector2 Normal = Vector2( Tangent.Y, -Tangent.X );
 
 		LineQuad.MyEffect = fx;
-		LineQuad.v0.Vertex.Color = color;
-		LineQuad.v1.Vertex.Color = color;
-		LineQuad.v2.Vertex.Color = color;
-		LineQuad.v3.Vertex.Color = color;
+		LineQuad.v0.Vertex.TheColor = color;
+		LineQuad.v1.Vertex.TheColor = color;
+		LineQuad.v2.Vertex.TheColor = color;
+		LineQuad.v3.Vertex.TheColor = color;
 		LineQuad.BlendAddRatio = BlendAddRatio;
 
 		LineQuad.v0.Vertex.uv = Vector2( 0, 1 );
@@ -473,13 +473,13 @@ float QuadDrawer::CurLightSourceFade = 0;
 		}
 
 		LineQuad.v0.Vertex.xy = x + Vector2( -1, 1 ) * width / 2;
-		LineQuad.v0.Vertex.Color = color;
+		LineQuad.v0.Vertex.TheColor = color;
 		LineQuad.v1.Vertex.xy = x + Vector2( 1, 1 ) * width / 2;
-		LineQuad.v1.Vertex.Color = color;
+		LineQuad.v1.Vertex.TheColor = color;
 		LineQuad.v2.Vertex.xy = x + Vector2( -1, -1 ) * width / 2;
-		LineQuad.v2.Vertex.Color = color;
+		LineQuad.v2.Vertex.TheColor = color;
 		LineQuad.v3.Vertex.xy = x + Vector2( 1, -1 ) * width / 2;
-		LineQuad.v3.Vertex.Color = color;
+		LineQuad.v3.Vertex.TheColor = color;
 
 		LineQuad.v0.Vertex.uv = Vector2( 0, 0 );
 		LineQuad.v1.Vertex.uv = Vector2( 1, 0 );
@@ -518,13 +518,13 @@ float QuadDrawer::CurLightSourceFade = 0;
 		float a = width / LineQuad.getMyTexture()->getAspectRatio();
 
 		LineQuad.v0.Vertex.xy = x + Vector2( -width, a ) / 2;
-		LineQuad.v0.Vertex.Color = color;
+		LineQuad.v0.Vertex.TheColor = color;
 		LineQuad.v1.Vertex.xy = x + Vector2( width, a ) / 2;
-		LineQuad.v1.Vertex.Color = color;
+		LineQuad.v1.Vertex.TheColor = color;
 		LineQuad.v2.Vertex.xy = x + Vector2( -width, -a ) / 2;
-		LineQuad.v2.Vertex.Color = color;
+		LineQuad.v2.Vertex.TheColor = color;
 		LineQuad.v3.Vertex.xy = x + Vector2( width, -a ) / 2;
-		LineQuad.v3.Vertex.Color = color;
+		LineQuad.v3.Vertex.TheColor = color;
 
 		LineQuad.v0.Vertex.uv = Vector2( 0, 0 );
 		LineQuad.v1.Vertex.uv = Vector2( 1, 0 );

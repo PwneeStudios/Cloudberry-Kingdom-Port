@@ -3,7 +3,7 @@
 
 class Particle;
 class MyOwnVertexFormat;
-class colData;
+class ColData;
 class Phsx;
 class ViewReadWrite;
 class ObjectBase;

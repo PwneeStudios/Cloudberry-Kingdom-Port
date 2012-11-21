@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		WriteVector2( writer, ver.xy );
 		WriteVector2( writer, ver.uv );
 		WriteVector3( writer, Vector3( 0, 0, 0 ) );
-		WriteColor( writer, ver.Color );
+		WriteColor( writer, ver.TheColor );
 	}
 
 	void WriteReadTools::ReadVertex( const std::shared_ptr<BinaryReader> &reader, MyOwnVertexFormat &ver )
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
 		ReadVector2( reader, ver.uv );
 		Vector3 Trash = Vector3( 0, 0, 0 );
 		ReadVector3( reader, Trash );
-		ReadColor( reader, ver.Color );
+		ReadColor( reader, ver.TheColor );
 	}
 
 	void WriteReadTools::WritePhsxData( const std::shared_ptr<BinaryWriter> &writer, PhsxData data )

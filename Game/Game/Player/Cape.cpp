@@ -81,22 +81,22 @@ namespace CloudberryKingdom
 		{
 			for ( int j = 0; j < HorizontalSections; j++ )
 			{
-				Vertices[ count ].Color = PremultipliedColor_Darker;
+				Vertices[ count ].TheColor = PremultipliedColor_Darker;
 				Vertices[ count ].uv = Vector2( j * h1, i * h2 );
 
-				Vertices[ count + 1 ].Color = PremultipliedColor;
+				Vertices[ count + 1 ].TheColor = PremultipliedColor;
 				Vertices[ count + 1 ].uv = Vector2( ( j + 1 ) * h1, i * h2 );
 
-				Vertices[ count + 2 ].Color = PremultipliedColor_Darker;
+				Vertices[ count + 2 ].TheColor = PremultipliedColor_Darker;
 				Vertices[ count + 2 ].uv = Vector2( j * h1, ( i + 1 ) * h2 );
 
-				Vertices[ count + 3 ].Color = PremultipliedColor;
+				Vertices[ count + 3 ].TheColor = PremultipliedColor;
 				Vertices[ count + 3 ].uv = Vector2( ( j + 1 ) * h1, ( i + 1 ) * h2 );
 
-				Vertices[ count + 5 ].Color = PremultipliedColor;
+				Vertices[ count + 5 ].TheColor = PremultipliedColor;
 				Vertices[ count + 5 ].uv = Vector2( ( j + 1 ) * h1, i * h2 );
 
-				Vertices[ count + 4 ].Color = PremultipliedColor_Darker;
+				Vertices[ count + 4 ].TheColor = PremultipliedColor_Darker;
 				Vertices[ count + 4 ].uv = Vector2( j * h1, ( i + 1 ) * h2 );
 
 				count += 6;

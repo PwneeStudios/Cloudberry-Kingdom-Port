@@ -1,9 +1,6 @@
 ﻿#ifndef BASEPOINT
 #define BASEPOINT
 
-
-
-
 namespace CloudberryKingdom
 {
 	class BasePoint

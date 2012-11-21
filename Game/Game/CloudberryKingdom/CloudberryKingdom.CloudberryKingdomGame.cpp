@@ -506,7 +506,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 		// Do game update.
-		if ( !Tools::StepControl || ( Tools::Keyboard.IsKeyDownCustom( Keys::Enter ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::Enter ) ) )
+		if ( !Tools::StepControl || ( Tools::Keyboard.IsKeyDownCustom( Keys_Enter ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys_Enter ) ) )
 		{
 			DoGameDataPhsx();
 		}

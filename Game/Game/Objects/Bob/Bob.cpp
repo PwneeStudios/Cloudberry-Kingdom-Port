@@ -697,16 +697,16 @@ std::unordered_map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::
 
 		//if (MyPlayerIndex == PlayerIndex.One)
 		{
-			CurInput.A_Button |= Tools::Keyboard.IsKeyDownCustom( Keys::Up );
+			CurInput.A_Button |= Tools::Keyboard.IsKeyDownCustom( Keys_Up );
 			CurInput.A_Button |= Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Up_Secondary );
 			KeyboardDir.X = KeyboardDir.Y = 0;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Up ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Up ) )
 				KeyboardDir.Y = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Down ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Down ) )
 				KeyboardDir.Y = -1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Right ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Right ) )
 				KeyboardDir.X = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Left ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Left ) )
 				KeyboardDir.X = -1;
 			if ( Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Left_Secondary ) )
 				KeyboardDir.X = -1;
