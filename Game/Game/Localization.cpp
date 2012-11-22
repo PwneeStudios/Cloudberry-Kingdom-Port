@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		this->MyTexture = MyTexture;
 	}
 
-std::unordered_map<Language, std::unordered_map<Words, std::wstring> > Localization::Text = 0;
+std::map<Language, std::map<Words, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
 	{
@@ -26,9 +26,9 @@ std::unordered_map<Language, std::unordered_map<Words, std::wstring> > Localizat
 			return;
 
 		// Create new dictionaries for each language
-		Text = std::unordered_map<Language, std::unordered_map<Words, std::wstring> >();
+		Text = std::map<Language, std::map<Words, std::wstring> >();
 		for ( int i = 0; i < NumLanguages; i++ )
-			Text.insert( make_pair( static_cast<Language>( i ), std::unordered_map<Words, std::wstring>() ) );
+			Text.insert( make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
 
 		// Open the giant translation file
 		Tools::UseInvariantCulture();
@@ -81,7 +81,7 @@ std::unordered_map<Language, std::unordered_map<Words, std::wstring> > Localizat
 		return std::wstring::Format( _T( "{{p{1},{0},?}}" ), Size, WordToTextureName( Word ) );
 	}
 
-std::unordered_map<Language, LanguageInfo*> Localization::Languages = std::unordered_map<Language, LanguageInfo*>( NumLanguages );
+std::map<Language, LanguageInfo*> Localization::Languages = std::map<Language, LanguageInfo*>( NumLanguages );
 std::shared_ptr<ContentManager> Localization::Content = 0;
 std::shared_ptr<LanguageInfo> Localization::CurrentLanguage = 0;
 

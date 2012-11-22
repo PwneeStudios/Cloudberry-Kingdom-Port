@@ -6,32 +6,42 @@
 
 class BinaryReader;
 class BinaryWriter;
+class ContentManager;
 class DisplayMode;
 class Effect;
 class EffectParameter;
 class EffectTechnique;
 class GraphicsDevice;
+template<class T> class LinkedListNode;
 class PresentationParameters;
 class RenderTarget2D;
+struct Rectangle { int X; int Y; int Width; int Height; };
 class SamplerState;
+class Song;
+class SoundEffect;
 class SpriteBatch;
+class SpriteFont;
 class StreamReader;
 class StreamWriter;
+class StringBuilder;
 class Texture2D;
-struct Viewport { float X; float Y; float W; float H; };
+struct Viewport { float X; float Y; float Width; float Height; };
 
 // Core library.
 #include <Graphics/Color.h>
 #include <Math/Vectors.h>
 
 // System includes.
+#include <list>
 #include <map>
 #include <memory>
 #include <queue>
+#include <stack>
 #include <string>
 #include <vector>
 
 // Cloudberry Kingdom converted files.
+#include "Game/Localization.h"
 #include "Core/Graphics/Draw/Simple/BasePoint.h"
 #include "Core/Lambdas/Lambda.h"
 #include "Core/Lambdas/LambdaFunc.h"
@@ -94,7 +104,6 @@ struct Viewport { float X; float Y; float W; float H; };
 #include "Core/Tools/CoreMath.h"
 #include "Core/Tools/Random.h"
 #include "Core/Tools/Set.h"
-#include "Game/Localization.h"
 #include "Game/Video.h"
 #include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
 #include "Game/Collision Detection/AABox.h"

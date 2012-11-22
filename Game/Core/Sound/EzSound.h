@@ -3,22 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Audio
-			{
-				class SoundEffect;
-			}
-		}
-	}
-}
-
-
-
 namespace CloudberryKingdom
 {
 	class EzSound

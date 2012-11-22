@@ -183,7 +183,6 @@ public:
 		/// </summary>
 		static bool PreLogIn;
 
-		static ButtonData State( const std::shared_ptr<ButtonClass> &Button, PlayerIndex Index );
 		static ButtonData State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex );
 	private:
 		static ButtonData GetState( Keys Key, bool Prev );

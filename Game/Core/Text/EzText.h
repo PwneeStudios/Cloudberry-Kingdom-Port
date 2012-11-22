@@ -58,19 +58,19 @@ namespace CloudberryKingdom
 	{
 #if defined(PC_VERSION)
 	public:
-		const static std::shared_ptr<EzTexture> &getGo() const;
-		const static std::shared_ptr<EzTexture> &getBack() const;
-		const static std::shared_ptr<EzTexture> &getX() const;
-		const static std::shared_ptr<EzTexture> &getLeftRight() const;
-		const static std::shared_ptr<EzTexture> &getLeftBumper() const;
-		const static std::shared_ptr<EzTexture> &getRightBumper() const;
+		const static std::shared_ptr<EzTexture> &getGo();
+		const static std::shared_ptr<EzTexture> &getBack();
+		const static std::shared_ptr<EzTexture> &getX();
+		const static std::shared_ptr<EzTexture> &getLeftRight();
+		const static std::shared_ptr<EzTexture> &getLeftBumper();
+		const static std::shared_ptr<EzTexture> &getRightBumper();
 #else
-		const static std::shared_ptr<EzTexture> &getGo() const;
-		const static std::shared_ptr<EzTexture> &getBack() const;
-		const static std::shared_ptr<EzTexture> &getX() const;
-		const static std::shared_ptr<EzTexture> &getLeftRight() const;
-		const static std::shared_ptr<EzTexture> &getLeftBumper() const;
-		const static std::shared_ptr<EzTexture> &getRightBumper() const;
+		const static std::shared_ptr<EzTexture> &getGo();
+		const static std::shared_ptr<EzTexture> &getBack();
+		const static std::shared_ptr<EzTexture> &getX();
+		const static std::shared_ptr<EzTexture> &getLeftRight();
+		const static std::shared_ptr<EzTexture> &getLeftBumper();
+		const static std::shared_ptr<EzTexture> &getRightBumper();
 #endif
 	};
 

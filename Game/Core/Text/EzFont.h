@@ -3,23 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class SpriteFont;
-			}
-		}
-	}
-}
-
-
-
-
 namespace CloudberryKingdom
 {
 	class EzFont

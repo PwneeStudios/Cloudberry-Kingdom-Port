@@ -6,21 +6,21 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getGo() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Enter_Key" ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getBack() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Esc_Key" ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getX() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getX()
 	{
 	return ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
 	//return Tools.TextureWad.FindByName("Xbox_X");
@@ -28,63 +28,63 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "LeftRight_Key" ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper()
 	{
 		return ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper()
 	{
 		return ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getGo() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_A" ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getBack() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_B" ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getX() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getX()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_X" ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_Dir" ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_LB" ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper() const
+	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_RB" ) );
 	}

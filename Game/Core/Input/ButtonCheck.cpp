@@ -414,11 +414,6 @@ int ButtonCheck::PreventTimeStamp = 0;
 
 bool ButtonCheck::PreLogIn = true;
 
-	ButtonData ButtonCheck::State( const std::shared_ptr<ButtonClass> &Button, PlayerIndex Index )
-	{
-		return State( Button, -2 );
-	}
-
 	ButtonData ButtonCheck::State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
 	{
 		if ( Button == 0 )

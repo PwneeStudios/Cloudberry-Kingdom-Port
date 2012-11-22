@@ -3,22 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Media
-			{
-				class Song;
-			}
-		}
-	}
-}
-
-
-
 
 namespace CloudberryKingdom
 {

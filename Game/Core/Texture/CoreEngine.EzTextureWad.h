@@ -68,17 +68,17 @@ namespace CoreEngine
 		std::shared_ptr<EzTexture> DefaultTexture;
 
 		std::vector<EzTexture*> TextureList;
-		std::unordered_map<std::wstring, std::vector<EzTexture*> > TextureListByFolder;
+		std::map<std::wstring, std::vector<EzTexture*> > TextureListByFolder;
 
-		std::unordered_map<std::wstring, AnimationData_Texture*> AnimationDict;
+		std::map<std::wstring, AnimationData_Texture*> AnimationDict;
 		void Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name );
 
 
-		std::unordered_map<std::wstring, EzTexture*> PathDict, NameDict, BigNameDict;
+		std::map<std::wstring, EzTexture*> PathDict, NameDict, BigNameDict;
 		void Add( const std::shared_ptr<PackedTexture> &packed );
 
 
-		std::unordered_map<std::wstring, PackedTexture*> PackedDict;
+		std::map<std::wstring, PackedTexture*> PackedDict;
 
 		EzTextureWad();
 

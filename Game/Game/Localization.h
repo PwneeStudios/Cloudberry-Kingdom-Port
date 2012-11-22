@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Content
-			{
-				class ContentManager;
-			}
-		}
-	}
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class Localization
 	{
 	public:
@@ -370,7 +347,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		static std::unordered_map<Language, std::unordered_map<Words, std::wstring> > Text;
+		static std::map<Language, std::map<Words, std::wstring> > Text;
 
 		static void ReadTranslationGrid( const std::wstring &path );
 
@@ -384,7 +361,7 @@ namespace CloudberryKingdom
 		static std::wstring WordMarkup( Words Word, int Size );
 
 		static const int NumLanguages = 10;
-		static std::unordered_map<Language, LanguageInfo*> Languages;
+		static std::map<Language, LanguageInfo*> Languages;
 
 	private:
 		static std::shared_ptr<ContentManager> Content;
