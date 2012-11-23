@@ -5,12 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LambdaFunc;
-}
-
-
-namespace CloudberryKingdom
-{
 	class ToDoItem
 	{
 	public:

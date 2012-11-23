@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<Challenge_HeroRush> instance;
 	public:
-		const static std::shared_ptr<Challenge_HeroRush> &getInstance() const;
+		const static std::shared_ptr<Challenge_HeroRush> &getInstance();
 
 	protected:
 		Challenge_HeroRush();

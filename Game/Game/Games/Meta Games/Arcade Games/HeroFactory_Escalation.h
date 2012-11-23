@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<Challenge_HeroFactoryEscalation> instance;
 	public:
-		const static std::shared_ptr<Challenge_HeroFactoryEscalation> &getInstance() const;
+		const static std::shared_ptr<Challenge_HeroFactoryEscalation> &getInstance();
 
 	protected:
 		Challenge_HeroFactoryEscalation();

@@ -1,5 +1,5 @@
-#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+#ifndef CLOUDBERRYKINGDOM_XNAGAMECLASS
+#define CLOUDBERRYKINGDOM_XNAGAMECLASS
 
 #include <global_header.h>
 
@@ -56,4 +56,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_XNAGAMECLASS

@@ -8,16 +8,12 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
 
-	const std::shared_ptr<Generators> &Generators::getInstance() const
+	const std::shared_ptr<Generators> &Generators::getInstance()
 	{
 		return instance;
 	}
 
 std::vector<AutoGen*> Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens = 0;
-
-	Generators::Generators()
-	{
-	}
 
 	Generators::Generators()
 	{

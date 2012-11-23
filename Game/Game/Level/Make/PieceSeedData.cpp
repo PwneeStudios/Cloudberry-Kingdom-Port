@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 	}
 
-	std::shared_ptr < AutoGen_Parameters *PieceSeedData::operator []( const std::shared_ptr<AutoGen> &gen )
+	std::shared_ptr<AutoGen_Parameters> PieceSeedData::operator []( const std::shared_ptr<AutoGen> &gen )
 	{
 		return Style_FIND_PARAMS( gen );
 	}

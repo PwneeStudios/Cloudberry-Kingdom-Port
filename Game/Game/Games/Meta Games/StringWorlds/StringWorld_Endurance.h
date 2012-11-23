@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CoinScoreMultiplierObject> MyCoinScoreMultiplier;
 
 	public:
-		StringWorldEndurance( Func<int, LevelSeedData*> GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife );
+		StringWorldEndurance( const std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife );
 
 		virtual void Release();
 

@@ -1,5 +1,5 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_BACKGROUND
+#define CLOUDBERRYKINGDOM_BACKGROUND
 
 #include <global_header.h>
 
@@ -155,4 +155,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_BACKGROUND

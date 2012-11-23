@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 		et->End();
 	}
 
-	const bool &Escalation_Tutorial::getWatchedOnce() const
+	const bool &Escalation_Tutorial::getWatchedOnce()
 	{
 		return _WatchedOnce;
 	}

@@ -1,136 +1,7 @@
-#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+#ifndef CLOUDBERRYKINGDOM_CLOUDBERRYKINGDOMGAME
+#define CLOUDBERRYKINGDOM_CLOUDBERRYKINGDOMGAME
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleGameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class ResolutionGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class InitialLoadingScreen;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class GraphicsDevice;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class GraphicsDeviceManager;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class PreparingDeviceSettingsEventArgs;
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace GamerServices
-			{
-				class SignedOutEventArgs;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace GamerServices
-			{
-				class SignedInEventArgs;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class GameTime;
-		}
-	}
-}
-
-
-
-
-
-
-namespace Forms = System::Windows::Forms;
-
-
 
 namespace CloudberryKingdom
 {
@@ -434,11 +305,11 @@ namespace CloudberryKingdom
 
 		void BenchmarkAll();
 
-		static std::shared_ptr<System::Diagnostics::Stopwatch> stopwatch;
+		static std::shared_ptr<Stopwatch> stopwatch;
 		static void Start();
 		static long long Stop();
 
-		static std::shared_ptr<System::Diagnostics::Stopwatch> stopwatch2;
+		static std::shared_ptr<Stopwatch> stopwatch2;
 		static void Start2();
 		static long long Stop2();
 
@@ -489,4 +360,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_CLOUDBERRYKINGDOMGAME

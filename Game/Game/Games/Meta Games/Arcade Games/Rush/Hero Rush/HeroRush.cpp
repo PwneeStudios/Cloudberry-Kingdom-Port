@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
 
-	const std::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance() const
+	const std::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance()
 	{
 		return instance;
 	}

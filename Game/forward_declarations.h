@@ -88,7 +88,6 @@ class BmpWriter;
 class TextureOrAnim;
 class ParticleEffects;
 class TileSet;
-class TileSetInfo;
 class BackgroundFloater;
 class BackgroundFloater_Stationary;
 class RichLevelGenData;

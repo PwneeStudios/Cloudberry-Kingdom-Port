@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 std::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::FactoryHero = BobPhsxNormal::getInstance();
 const std::shared_ptr<Challenge_HeroFactoryEscalation> Challenge_HeroFactoryEscalation::instance = std::make_shared<Challenge_HeroFactoryEscalation>();
 
-	const std::shared_ptr<Challenge_HeroFactoryEscalation> &Challenge_HeroFactoryEscalation::getInstance() const
+	const std::shared_ptr<Challenge_HeroFactoryEscalation> &Challenge_HeroFactoryEscalation::getInstance()
 	{
 		return instance;
 	}

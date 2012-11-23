@@ -5,22 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// A singleton class to store data about LevelConnectors.
 	/// </summary>

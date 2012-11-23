@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-namespace CloudberryKingdom
-{
 	class DifficultyGroups
 	{
 	public:

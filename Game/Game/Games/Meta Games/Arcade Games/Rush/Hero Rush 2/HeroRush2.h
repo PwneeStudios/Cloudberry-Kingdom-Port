@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<Challenge_HeroRush2> instance;
 	public:
-		const static std::shared_ptr<Challenge_HeroRush2> &getInstance() const;
+		const static std::shared_ptr<Challenge_HeroRush2> &getInstance();
 
 	private:
 		static std::vector<std::vector<Vector2> > IconPos;

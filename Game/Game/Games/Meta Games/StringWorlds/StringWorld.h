@@ -28,26 +28,6 @@ namespace CloudberryKingdom
 	class GameData;
 }
 
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster_1;
-}
-
 
 namespace CloudberryKingdom
 {
@@ -158,7 +138,7 @@ namespace CloudberryKingdom
 		int Count;
 
 	protected:
-		Func<int, LevelSeedData*> GetSeedFunc;
+		std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > GetSeedFunc;
 	private:
 		std::shared_ptr<LevelSeedData> NextLevelSeed, CurLevelSeed;
 
@@ -267,7 +247,7 @@ namespace CloudberryKingdom
 
 		StringWorldGameData();
 
-		StringWorldGameData( Func<int, LevelSeedData*> GetSeed );
+		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > &GetSeed );
 
 		std::shared_ptr<Level> MakeLevel();
 

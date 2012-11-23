@@ -1,5 +1,5 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_TILESETS
+#define CLOUDBERRYKINGDOM_TILESETS
 
 #include <global_header.h>
 
@@ -64,4 +64,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_TILESETS

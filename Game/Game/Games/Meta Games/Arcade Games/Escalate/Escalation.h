@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 
 		static const std::shared_ptr<Challenge_Escalation> instance;
 	public:
-		const static std::shared_ptr<Challenge_Escalation> &getInstance() const;
+		const static std::shared_ptr<Challenge_Escalation> &getInstance();
 
 		std::shared_ptr<GUI_LivesLeft> Gui_LivesLeft;
 

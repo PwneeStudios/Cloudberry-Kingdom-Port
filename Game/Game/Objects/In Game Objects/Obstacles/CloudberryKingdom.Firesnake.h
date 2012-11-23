@@ -1,5 +1,5 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_FIRESNAKE
+#define CLOUDBERRYKINGDOM_FIRESNAKE
 
 #define _USE_MATH_DEFINES
 #include <global_header.h>
@@ -78,4 +78,4 @@ public:
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_FIRESNAKE

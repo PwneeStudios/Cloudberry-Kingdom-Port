@@ -5,26 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
 	class CampaignSequence : public LevelSequence
 	{
 	private:
@@ -69,7 +49,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<CampaignSequence> instance;
 	public:
-		const static std::shared_ptr<CampaignSequence> &getInstance() const;
+		const static std::shared_ptr<CampaignSequence> &getInstance();
 
 	private:
 		std::map<int, int> ChapterStart;

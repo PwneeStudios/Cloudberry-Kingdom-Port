@@ -1,106 +1,7 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_FIREBALL
+#define CLOUDBERRYKINGDOM_FIREBALL
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class RenderTarget2D;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class ParticleEmitter;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class GraphicsDevice;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class PresentationParameters;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class HsvQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
 
 namespace CloudberryKingdom
 {
@@ -189,4 +90,4 @@ public:
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_FIREBALL

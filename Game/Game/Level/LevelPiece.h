@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		Vector2 LastPoint;
 
 		std::shared_ptr<PieceSeedData> MyData;
-		std::shared_ptr<Level::MakeData> MyMakeData;
+		std::shared_ptr<MakeData> MyMakeData;
 
 		void Release();
 

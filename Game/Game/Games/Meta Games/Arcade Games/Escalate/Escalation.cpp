@@ -86,7 +86,7 @@ const int tempVector[] = { 15, 15, 15, 15, 15 };
 std::vector<int> Challenge_Escalation::NumLives = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std::make_shared<Challenge_Escalation>();
 
-	const std::shared_ptr<Challenge_Escalation> &Challenge_Escalation::getInstance() const
+	const std::shared_ptr<Challenge_Escalation> &Challenge_Escalation::getInstance()
 	{
 		return instance;
 	}

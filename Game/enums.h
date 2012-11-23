@@ -922,4 +922,17 @@ enum Upgrade
 	Upgrade_CEILING
 };
 
+enum LadderType
+{
+	LadderType_NONE,
+	LadderType_FINAL_PLAT,
+	LadderType_FINAL_BOUNCY,
+	LadderType_SIMPLE,
+	LadderType_SIMPLE2,
+	LadderType_DOUBLE,
+	LadderType_SIMPLE_MOVING,
+	LadderType_DOUBLE_MOVING,
+	LadderType_MAKE_PLAT
+};
+
 #endif

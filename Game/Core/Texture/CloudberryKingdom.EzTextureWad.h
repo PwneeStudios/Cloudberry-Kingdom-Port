@@ -1,5 +1,5 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_EZTEXTUREWAD
+#define CLOUDBERRYKINGDOM_EZTEXTUREWAD
 
 #include <global_header.h>
 
@@ -109,4 +109,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_EZTEXTUREWAD

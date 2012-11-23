@@ -1,99 +1,7 @@
-#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+#ifndef CLOUDBERRYKINGDOM_LEVELSEEDDATA
+#define CLOUDBERRYKINGDOM_LEVELSEEDDATA
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-namespace CloudberryKingdom
-{
-	class StringWorldGameData;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSong;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class GameObject;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_2;
-}
-
-namespace CloudberryKingdom
-{
-	class Upgrades;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster_1;
-}
-
-namespace CloudberryKingdom
-{
-	class LockableBool;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class GameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundTemplate;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-
 
 namespace CloudberryKingdom
 {
@@ -215,7 +123,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class ScoreScreenLambda : public LambdaFunc<GameObject*>
+		class ScoreScreenLambda : public LambdaFunc<std::shared_ptr<GameObject> >
 		{
 		private:
 			StatGroup stats;
@@ -540,4 +448,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_LEVELSEEDDATA

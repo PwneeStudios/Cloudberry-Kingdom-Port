@@ -13,9 +13,12 @@ class Effect;
 class EffectParameter;
 class EffectTechnique;
 class Game;
+class GameTime;
 class GraphicsDevice;
+class GraphicsDeviceManager;
 template<class T> class LinkedListNode;
 class Object;
+class PreparingDeviceSettingsEventArgs;
 class PresentationParameters;
 class Random;
 class RenderTarget2D;
@@ -25,10 +28,12 @@ class Song;
 class SoundEffect;
 class SpriteBatch;
 class SpriteFont;
+class Stopwatch;
 class StreamReader;
 class StreamWriter;
 class StringBuilder;
 class Texture2D;
+template<class A, class B> class Tuple;
 class Video;
 class VideoPlayer;
 struct Viewport { float X; float Y; float Width; float Height; };
@@ -130,14 +135,16 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Games/ActionGame.h"
 #include "Game/Games/CampaignHelper.h"
 #include "Game/Games/NormalGame.h"
+#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
 #include "Game/Games/ScreenSaver.h"
 #include "Game/Games/ToDoItem.h"
 #include "Game/Games/TutorialHelper.h"
+#include "Game/Games/Campaign/LevelSequence.h"
 #include "Game/Games/Campaign/CampaignSequence.h"
 #include "Game/Games/Campaign/FadeIn.h"
-#include "Game/Games/Campaign/LevelSequence.h"
-#include "Game/Games/Meta Games/Arcade Games/HeroFactory_Escalation.h"
+#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
 #include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation.h"
+#include "Game/Games/Meta Games/Arcade Games/HeroFactory_Escalation.h"
 #include "Game/Games/Meta Games/Arcade Games/Escalate/Escalation_Tutorial.h"
 #include "Game/Games/Meta Games/Arcade Games/Rush/CoinMod.h"
 #include "Game/Games/Meta Games/Arcade Games/Rush/Rush.h"
@@ -147,10 +154,8 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Games/Meta Games/Arcade Games/Rush/Hero Rush 2/HeroRush2_Tutorial.h"
 #include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis.h"
 #include "Game/Games/Meta Games/Arcade Games/Rush/Time Crisis/TimeCrisis_Tutorial.h"
-#include "Game/Games/Meta Games/Challenges/Challenge_Base.h"
 #include "Game/Games/Meta Games/Challenges/_Regular.h"
 #include "Game/Games/Meta Games/StringWorlds/LevelConnector.h"
-#include "Game/Games/Meta Games/StringWorlds/StringWorld.h"
 #include "Game/Games/Meta Games/StringWorlds/StringWorld_Endurance.h"
 #include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
 #include "Game/Level/ClosingCircle.h"
@@ -327,8 +332,8 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Objects/In Game Objects/Blocks/Pendulum__Auto.h"
 #include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
 #include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.BerryBubble.h"
+#include "Game/Objects/In Game Objects/Grab/MakeData.h"
 #include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Levels.Level.h"
 #include "Game/Objects/In Game Objects/Grab/Coin.h"
 #include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
 #include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"
@@ -338,8 +343,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Objects/In Game Objects/Obstacles/Cloud.h"
 #include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Fireball.h"
 #include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Firesnake.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Obstacles.Fireball.h"
-#include "Game/Objects/In Game Objects/Obstacles/CloudberryKingdom.Obstacles.Firesnake.h"
 #include "Game/Objects/In Game Objects/Obstacles/Cloud__Auto.h"
 #include "Game/Objects/In Game Objects/Obstacles/Fireball__Auto.h"
 #include "Game/Objects/In Game Objects/Obstacles/Firesnake__Auto.h"

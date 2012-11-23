@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 std::vector<HeroSpec> Challenge_HeroRush2::HeroList = std::vector<HeroSpec>( 100 );
 const std::shared_ptr<Challenge_HeroRush2> Challenge_HeroRush2::instance = std::make_shared<Challenge_HeroRush2>();
 
-	const std::shared_ptr<Challenge_HeroRush2> &Challenge_HeroRush2::getInstance() const
+	const std::shared_ptr<Challenge_HeroRush2> &Challenge_HeroRush2::getInstance()
 	{
 		return instance;
 	}

@@ -639,9 +639,6 @@
     <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Levels.Level.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -670,12 +667,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Fireball.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Firesnake.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Fireball__Auto.cpp">
@@ -1099,6 +1090,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Tilesets\TileSetInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Objects\In Game Objects\Grab\MakeData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1733,9 +1727,6 @@
     <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Levels.Level.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1764,12 +1755,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Fireball.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Firesnake.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Fireball__Auto.h">
@@ -2223,6 +2208,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Tilesets\TileSetInfo.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Objects\In Game Objects\Grab\MakeData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

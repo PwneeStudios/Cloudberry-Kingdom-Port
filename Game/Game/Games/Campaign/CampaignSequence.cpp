@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<CampaignSequence> CampaignSequence::instance = std::make_shared<CampaignSequence>();
 
-	const std::shared_ptr<CampaignSequence> &CampaignSequence::getInstance() const
+	const std::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
 	{
 		return instance;
 	}

@@ -273,9 +273,9 @@
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Checkpoint.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.cpp" />
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Levels.Level.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin__Auto.cpp" />
+    <ClCompile Include="Game\Objects\In Game Objects\Grab\MakeData.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\BlockEmitter.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\BlockEmitter__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Boulder.cpp" />
@@ -283,8 +283,6 @@
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Cloud.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Fireball.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.cpp" />
-    <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Fireball.cpp" />
-    <ClCompile Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Firesnake.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Cloud__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Fireball__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Firesnake__Auto.cpp" />
@@ -647,9 +645,9 @@
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Checkpoint.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.h" />
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Levels.Level.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin__Auto.h" />
+    <ClInclude Include="Game\Objects\In Game Objects\Grab\MakeData.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\BlockEmitter.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\BlockEmitter__Auto.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Boulder.h" />
@@ -657,8 +655,6 @@
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Cloud.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Fireball.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Firesnake.h" />
-    <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Fireball.h" />
-    <ClInclude Include="Game\Objects\In Game Objects\Obstacles\CloudberryKingdom.Obstacles.Firesnake.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Cloud__Auto.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Fireball__Auto.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Obstacles\Firesnake__Auto.h" />

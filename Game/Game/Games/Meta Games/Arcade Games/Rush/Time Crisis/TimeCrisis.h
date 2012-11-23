@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<Challenge_TimeCrisis> instance;
 	public:
-		const static std::shared_ptr<Challenge_TimeCrisis> &getInstance() const;
+		const static std::shared_ptr<Challenge_TimeCrisis> &getInstance();
 
 	protected:
 		Challenge_TimeCrisis();

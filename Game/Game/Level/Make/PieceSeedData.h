@@ -5,46 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class RichLevelGenData;
-}
-
-namespace CloudberryKingdom
-{
-	class Upgrades;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
 	class PieceSeedData
 	{
 		/// <summary>
@@ -55,7 +15,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Lambda_1<Level*> > PreStage1, PreStage2;
 
-		std::shared_ptr < AutoGen_Parameters *operator []( const std::shared_ptr<AutoGen> &gen );
+		std::shared_ptr<AutoGen_Parameters> operator []( const std::shared_ptr<AutoGen> &gen );
 
 		/// <summary>
 		/// Type of level to be made, relating to shape and direction. Different from the GameType.

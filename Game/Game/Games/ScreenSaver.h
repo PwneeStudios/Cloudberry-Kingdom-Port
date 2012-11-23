@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<GUI_Text> PressA;
 
-		const static int &getMandatoryWatchLength() const;
+		const static int &getMandatoryWatchLength();
 	private:
 		static const int MandatoryWatchLength_Initial = 400;
 

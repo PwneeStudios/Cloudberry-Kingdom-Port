@@ -1,5 +1,5 @@
-﻿#ifndef CLOUDBERRYKINGDOM
-#define CLOUDBERRYKINGDOM
+﻿#ifndef CLOUDBERRYKINGDOM_PARTICLEEFFECTS
+#define CLOUDBERRYKINGDOM_PARTICLEEFFECTS
 
 #include <global_header.h>
 
@@ -119,4 +119,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM
+#endif	//#ifndef CLOUDBERRYKINGDOM_PARTICLEEFFECTS

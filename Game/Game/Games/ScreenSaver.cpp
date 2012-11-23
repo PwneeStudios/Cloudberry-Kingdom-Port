@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 		Tools::CurLevel = this->MyLevel;
 	}
 
-	const int &ScreenSaver::getMandatoryWatchLength() const
+	const int &ScreenSaver::getMandatoryWatchLength()
 	{
 		if ( UserPowers::CanSkipScreensaver )
 			return 0;

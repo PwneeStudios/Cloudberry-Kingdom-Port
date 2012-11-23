@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
 
-	const std::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance() const
+	const std::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance()
 	{
 		return instance;
 	}

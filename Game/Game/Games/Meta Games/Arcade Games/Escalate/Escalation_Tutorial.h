@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 		/// Whether the Escalation introduction has been watched before.
 		/// </summary>
 	public:
-		const static bool &getWatchedOnce() const;
+		const static bool &getWatchedOnce();
 		static void setWatchedOnce( const bool &value );
 	private:
 		static bool _WatchedOnce;
