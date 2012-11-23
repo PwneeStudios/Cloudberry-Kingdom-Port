@@ -78,6 +78,7 @@ class DataBounds;
 class BobPhsxNormal;
 class BobPhsxInvert;
 class SimpleBox;
+class TileSetInfo;
 class TileSets;
 class StartMenu_MW_Black;
 class SaveLoad;

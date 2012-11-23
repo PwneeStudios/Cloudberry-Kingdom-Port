@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<ObjectData> CoreData;
 	public:
 		const std::shared_ptr<ObjectData> &getCore() const;
-		const std::shared_ptr<TileSet::TileSetInfo> &getInfo() const;
+		const std::shared_ptr<TileSetInfo> &getInfo() const;
 
 		ObjectBase();
 

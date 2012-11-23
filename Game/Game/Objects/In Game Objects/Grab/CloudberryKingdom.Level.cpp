@@ -2532,7 +2532,7 @@ int Step1, Level::Step2 = 0;
 		return MyTileSet;
 	}
 
-	const std::shared_ptr<TileSet::TileSetInfo> &Level::getInfo() const
+	const std::shared_ptr<TileSetInfo> &Level::getInfo() const
 	{
 		return MyTileSet->MyTileSetInfo;
 	}

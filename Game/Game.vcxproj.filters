@@ -1098,6 +1098,9 @@
     <ClCompile Include="MainClass\XboxPC\MainClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Tilesets\TileSetInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2217,6 +2220,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="enums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Tilesets\TileSetInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -918,7 +918,7 @@ public:
 		std::shared_ptr<TileSet> MyTileSet;
 
 		const std::shared_ptr<TileSet> &getMyTileSetInfo() const;
-		const std::shared_ptr<TileSet::TileSetInfo> &getInfo() const;
+		const std::shared_ptr<TileSetInfo> &getInfo() const;
 
 		int Par;
 

@@ -859,4 +859,67 @@ enum StatGroup
 	StatGroup_CAMPAIGN
 };
 
+enum ObjectType
+{
+	ObjectType_UNDEFINED,
+	ObjectType_COIN,
+	ObjectType_CHECKPOINT,
+	ObjectType_BERRY_BUBBLE,
+	ObjectType_FLYING_BLOB,
+	ObjectType_BLOCK_EMITTER,
+	ObjectType_SPIKE,
+	ObjectType_FIREBALL,
+	ObjectType_FIRE_SPINNER,
+	ObjectType_BOULDER,
+	ObjectType_LASER,
+	ObjectType_NORMAL_BLOCK,
+	ObjectType_FALLING_BLOCK,
+	ObjectType_LAVA_BLOCK,
+	ObjectType_MOVING_PLATFORM,
+	ObjectType_MOVING_BLOCK,
+	ObjectType_GHOST_BLOCK,
+	ObjectType_CLOUD,
+	ObjectType_BOUNCY_BLOCK,
+	ObjectType_SPIKEY_GUY,
+	ObjectType_SPIKEY_LINE,
+	ObjectType_PENDULUM,
+	ObjectType_SERPENT,
+	ObjectType_LAVA_DRIP,
+	ObjectType_FIRESNAKE,
+	ObjectType_CONVEYOR_BLOCK,
+	ObjectType_DOOR,
+	ObjectType_WALL,
+	ObjectType_ZONE_TRIGGER,
+	ObjectType_CAMERA_ZONE
+};
+
+// Would be nice to get rid of this, and just rely on ...__AutoGen.instances, and have dictionaries with instances as keys
+enum Upgrade
+{
+	Upgrade_FIREBALL,
+	Upgrade_FIRESNAKE,
+	Upgrade___UNUSED__1,
+	Upgrade_SPIKE,
+	Upgrade_FALLING_BLOCK,
+	Upgrade_FLY_BLOB,
+	Upgrade_FIRE_SPINNER,
+	Upgrade_MOVING_BLOCK,
+	Upgrade_ELEVATOR,
+	Upgrade_SPIKEY_GUY,
+	Upgrade_PINKY,
+	Upgrade_SPIKEY_LINE,
+	Upgrade_LASER,
+	Upgrade_GHOST_BLOCK,
+	Upgrade_BOUNCY_BLOCK,
+	Upgrade_CLOUD,
+	Upgrade_CONVEYOR,
+	Upgrade_PENDULUM,
+	Upgrade_SERPENT,
+	Upgrade_LAVA_DRIP,
+	Upgrade_GENERAL,
+	Upgrade_SPEED,
+	Upgrade_JUMP,
+	Upgrade_CEILING
+};
+
 #endif

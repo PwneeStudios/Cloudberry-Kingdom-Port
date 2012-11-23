@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	std::shared_ptr<TileSet> TileSets::Load_Cloud()
 	{
 		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Cloud" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<CloudberryKingdom::TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 

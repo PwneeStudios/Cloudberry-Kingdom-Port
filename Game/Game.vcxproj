@@ -353,6 +353,7 @@
     <ClCompile Include="Game\Tilesets\BlockGroup.cpp" />
     <ClCompile Include="Game\Tilesets\SpriteInfo.cpp" />
     <ClCompile Include="Game\Tilesets\TileSet.cpp" />
+    <ClCompile Include="Game\Tilesets\TileSetInfo.cpp" />
     <ClCompile Include="Game\Tilesets\Tilesets\CloudberryKingdom.TileSets.cpp" />
     <ClCompile Include="Game\Tools\Camera.cpp" />
     <ClCompile Include="Game\Tools\CkColorHelper.cpp" />
@@ -726,6 +727,7 @@
     <ClInclude Include="Game\Tilesets\BlockGroup.h" />
     <ClInclude Include="Game\Tilesets\SpriteInfo.h" />
     <ClInclude Include="Game\Tilesets\TileSet.h" />
+    <ClInclude Include="Game\Tilesets\TileSetInfo.h" />
     <ClInclude Include="Game\Tilesets\Tilesets\CloudberryKingdom.TileSets.h" />
     <ClInclude Include="Game\Tools\Camera.h" />
     <ClInclude Include="Game\Tools\CkColorHelper.h" />

@@ -121,9 +121,9 @@ struct Viewport { float X; float Y; float Width; float Height; };
 
 
 #include "Game/Objects/ObjectBase.h"
+#include "Game/Tilesets/TileSet.h"
 #include "Game/Objects/In Game Objects/Blocks/Block.h"
 #include "Game/Objects/In Game Objects/Blocks/Wall.h"
-#include "Game/Tilesets/TileSet.h"
 
 #include "Game/Objects/Game Objects/GameObject.h"
 #include "Game/Games/GameType.h"
@@ -421,5 +421,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Tools/WrappedFloat.h"
 #include "MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h"
 #include "MainClass/XboxPC/MainClass.h"
+
+#include "Game/Tilesets/TileSetInfo.h"
 
 #endif

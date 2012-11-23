@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		return CoreData;
 	}
 
-	const std::shared_ptr<TileSet::TileSetInfo> &ObjectBase::getInfo() const
+	const std::shared_ptr<TileSetInfo> &ObjectBase::getInfo() const
 	{
 		if ( CoreData->MyLevel == 0 )
 			return 0;

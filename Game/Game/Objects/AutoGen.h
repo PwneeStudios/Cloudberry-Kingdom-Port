@@ -26,35 +26,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	// Would be nice to get rid of this, and just rely on ...__AutoGen.instances, and have dictionaries with instances as keys
-	enum Upgrade
-	{
-		Upgrade_FIREBALL,
-		Upgrade_FIRESNAKE,
-		Upgrade___UNUSED__1,
-		Upgrade_SPIKE,
-		Upgrade_FALLING_BLOCK,
-		Upgrade_FLY_BLOB,
-		Upgrade_FIRE_SPINNER,
-		Upgrade_MOVING_BLOCK,
-		Upgrade_ELEVATOR,
-		Upgrade_SPIKEY_GUY,
-		Upgrade_PINKY,
-		Upgrade_SPIKEY_LINE,
-		Upgrade_LASER,
-		Upgrade_GHOST_BLOCK,
-		Upgrade_BOUNCY_BLOCK,
-		Upgrade_CLOUD,
-		Upgrade_CONVEYOR,
-		Upgrade_PENDULUM,
-		Upgrade_SERPENT,
-		Upgrade_LAVA_DRIP,
-		Upgrade_GENERAL,
-		Upgrade_SPEED,
-		Upgrade_JUMP,
-		Upgrade_CEILING
-	};
-
 	class AutoGen_Parameters
 	{
 		/// <summary>
