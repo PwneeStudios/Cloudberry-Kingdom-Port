@@ -850,4 +850,13 @@ enum PlayerIndex
     Four = 3
 };
 
+enum StatGroup
+{
+	StatGroup_LIFETIME,
+	StatGroup_GAME,
+	StatGroup_LEVEL,
+	StatGroup_TEMP,
+	StatGroup_CAMPAIGN
+};
+
 #endif

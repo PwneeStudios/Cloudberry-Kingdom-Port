@@ -9,18 +9,8 @@ namespace CloudberryKingdom
 }
 
 
-
-
 namespace CloudberryKingdom
 {
-	enum StatGroup
-	{
-		StatGroup_LIFETIME,
-		StatGroup_GAME,
-		StatGroup_LEVEL,
-		StatGroup_TEMP,
-		StatGroup_CAMPAIGN
-	};
 	class PlayerStats
 	{
 		#pragma region WriteRead

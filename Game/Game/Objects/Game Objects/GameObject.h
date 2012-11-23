@@ -5,25 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Set;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class GameObject : public ObjectBase
 	{
 	public:
