@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		static int Capacity;
 
 	private:
-		static std::unordered_map<int, std::vector<ScoreEntry*> > Games;
+		static std::map<int, std::vector<ScoreEntry*> > Games;
 
 	public:
 		static void Initialize();

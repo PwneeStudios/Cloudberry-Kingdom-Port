@@ -46,6 +46,21 @@ public:
 		return *this;
 	}
 
+	Vector2 operator + ( const Vector2 &a ) const
+	{
+		return Vector2( X + a.X, Y + a.Y );
+	}
+
+	Vector2 operator * ( float k ) const
+	{
+		return Vector2( X * k, Y * k );
+	}
+
+	static Vector2 Lerp( const Vector2 &a, const Vector2 &b, float t )
+	{
+		return a * ( 1 - t ) + b * t;
+	}
+
 };
 
 class Vector3

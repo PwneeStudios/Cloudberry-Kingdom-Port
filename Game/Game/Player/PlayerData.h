@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER NOTE: The variable Awardments was renamed since it is named the same as a user-defined type:
 		std::shared_ptr<Set<int> > Awardments_Renamed;
 
-		std::unordered_map<int, ScoreEntry*> HighScores;
+		std::map<int, ScoreEntry*> HighScores;
 
 		int CampaignLevel, CampaignCoins;
 

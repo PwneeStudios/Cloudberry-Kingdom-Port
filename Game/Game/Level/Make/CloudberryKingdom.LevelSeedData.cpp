@@ -801,7 +801,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 			try
 			{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::unordered_map<std::wstring, GameFactory*>::const_iterator kv = GameData::FactoryDict.begin(); kv != GameData::FactoryDict.end(); ++kv )
+				for ( std::map<std::wstring, GameFactory*>::const_iterator kv = GameData::FactoryDict.begin(); kv != GameData::FactoryDict.end(); ++kv )
 				{
 					if ( ( *kv )->Value == MyGameType )
 					{

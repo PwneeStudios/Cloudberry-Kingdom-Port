@@ -17,7 +17,7 @@ int ScoreDatabase::MostRecentScoreDate = 0;
 	}
 
 int ScoreDatabase::Capacity = 20;
-std::unordered_map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
+std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 
 	void ScoreDatabase::Initialize()
 	{
@@ -34,7 +34,7 @@ std::unordered_map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 	void ScoreDatabase::Serialize( const std::shared_ptr<BinaryWriter> &writer )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::unordered_map<int, std::vector<ScoreEntry*> >::const_iterator list = Games.begin(); list != Games.end(); ++list )
+		for ( std::map<int, std::vector<ScoreEntry*> >::const_iterator list = Games.begin(); list != Games.end(); ++list )
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			for ( unknown::const_iterator score = list->Value.begin(); score != list->Value.end(); ++score )
 				( *score )->WriteChunk_1000( writer );
@@ -42,7 +42,7 @@ std::unordered_map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 
 	void ScoreDatabase::FailLoad()
 	{
-		Games = std::unordered_map<int, std::vector<ScoreEntry*> >();
+		Games = std::map<int, std::vector<ScoreEntry*> >();
 	}
 
 	void ScoreDatabase::Deserialize( std::vector<unsigned char> Data )

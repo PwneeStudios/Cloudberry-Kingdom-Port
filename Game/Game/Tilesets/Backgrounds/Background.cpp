@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-std::unordered_map<std::wstring, BackgroundTemplate*> NameLookup, BackgroundType::PathLookup = std::unordered_map<std::wstring, BackgroundTemplate*>();
+std::map<std::wstring, BackgroundTemplate*> NameLookup, BackgroundType::PathLookup = std::map<std::wstring, BackgroundTemplate*>();
 std::shared_ptr<BackgroundTemplate> None, Random, _Sea, _Sea_Rain, _Hills, _Hills_Rain, _Forest, _Forest_Rain, _Cloud, _Cloud_Rain, _Cave, BackgroundType::_Castle = std::make_shared<Background_Castle>( _T( "castle" ) );
 
 	void BackgroundType::AddTemplate( const std::shared_ptr<BackgroundTemplate> &template_Renamed )

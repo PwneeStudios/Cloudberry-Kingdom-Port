@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 
 	void TunnelFill::CleanupTunnel( const std::shared_ptr<Level> &level )
 	{
-		std::unordered_map<unsigned long long, ObjectBase*> ObjDict = std::unordered_map<unsigned long long, ObjectBase*>();
+		std::map<unsigned long long, ObjectBase*> ObjDict = std::map<unsigned long long, ObjectBase*>();
 		for ( std::vector<ObjectBase*>::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( !ObjDict.find( ( *obj )->getCore()->MyGuid ) != ObjDict.end() )
 				ObjDict.insert( make_pair( ( *obj )->getCore()->MyGuid, *obj ) );

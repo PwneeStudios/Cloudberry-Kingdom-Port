@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 
 		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
-		virtual void ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 
 	private:
 		void InitializeInstanceFields();

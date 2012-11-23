@@ -28,14 +28,14 @@ namespace CloudberryKingdom
 		}
 	}
 
-	TextureOrAnim::operator TextureOrAnim*( const std::shared_ptr<EzTexture> &texture )
+	std::shared_ptr<TextureOrAnim> TextureOrAnim::TextureOrAnimOperatorProxy( const std::shared_ptr<EzTexture> &texture )
 	{
 		std::shared_ptr<TextureOrAnim> t_or_a = std::make_shared<TextureOrAnim>();
 		t_or_a->MyTexture = texture;
 		return t_or_a;
 	}
 
-	TextureOrAnim::operator TextureOrAnim*( const std::wstring &name )
+	std::shared_ptr<TextureOrAnim> TextureOrAnim::TextureOrAnimOperatorProxy( const std::wstring &name )
 	{
 		std::shared_ptr<TextureOrAnim> t_or_a = std::make_shared<TextureOrAnim>();
 		t_or_a->Set( name );

@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 	public:
 		virtual void AnimStep();
 
-		virtual void ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 
 		virtual void Die( Bob::BobDeathType DeathType );
 

@@ -224,7 +224,7 @@ const std::shared_ptr<CampaignSequence> CampaignSequence::instance = std::make_s
 
 	void CampaignSequence::InitializeInstanceFields()
 	{
-		ChapterStart = std::unordered_map<int, int>();
-		SpecialLevel = std::unordered_map<int, Tuple<std::wstring, std::wstring>*>();
+		ChapterStart = std::map<int, int>();
+		SpecialLevel = std::map<int, Tuple<std::wstring, std::wstring>*>();
 	}
 }

@@ -7,13 +7,17 @@
 class BinaryReader;
 class BinaryWriter;
 class ContentManager;
+struct DateTime { int Time; };
 class DisplayMode;
 class Effect;
 class EffectParameter;
 class EffectTechnique;
+class Game;
 class GraphicsDevice;
 template<class T> class LinkedListNode;
+class Object;
 class PresentationParameters;
+class Random;
 class RenderTarget2D;
 struct Rectangle { int X; int Y; int Width; int Height; };
 class SamplerState;
@@ -25,6 +29,8 @@ class StreamReader;
 class StreamWriter;
 class StringBuilder;
 class Texture2D;
+class Video;
+class VideoPlayer;
 struct Viewport { float X; float Y; float Width; float Height; };
 
 // Core library.
@@ -32,6 +38,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include <Math/Vectors.h>
 
 // System includes.
+#include <algorithm>
 #include <list>
 #include <map>
 #include <memory>
@@ -111,9 +118,9 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Collision Detection/FloatRectangle.h"
 #include "Game/Collision Detection/Line.h"
 #include "Game/Collision Detection/Phsx.h"
+#include "Game/Games/GameType.h"
 #include "Game/Games/ActionGame.h"
 #include "Game/Games/CampaignHelper.h"
-#include "Game/Games/GameType.h"
 #include "Game/Games/NormalGame.h"
 #include "Game/Games/ScreenSaver.h"
 #include "Game/Games/ToDoItem.h"

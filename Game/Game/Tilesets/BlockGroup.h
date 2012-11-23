@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	class BlockGroup
 	{
 	public:
-		std::unordered_map<int, std::vector<PieceQuad*> > Dict;
+		std::map<int, std::vector<PieceQuad*> > Dict;
 		std::vector<int> Widths;
 
 		BlockGroup();

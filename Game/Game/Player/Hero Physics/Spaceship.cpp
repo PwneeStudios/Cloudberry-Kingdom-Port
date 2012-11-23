@@ -339,7 +339,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		BobPhsx::AnimStep();
 	}
 
-	void BobPhsxSpaceship::ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxSpaceship::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
 	{
 		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
 		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );

@@ -420,7 +420,7 @@ namespace CloudberryKingdom
 		ListPadding = Vector2( 65, 0 );
 		TotalPadding = Vector2::Zero;
 #endif
-		ObjDict = std::unordered_map<MenuItem*, void*>();
+		ObjDict = std::map<MenuItem*, void*>();
 		DoIndexWrapping = true;
 		LastIncrDir = 0;
 		ClickForNextItem = true;

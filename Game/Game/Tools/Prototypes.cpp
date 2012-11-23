@@ -90,7 +90,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		q->TextureAnim = std::make_shared<AnimationData_Texture>();
 		q->TextureAnim->Anims = std::vector<OneAnim_Texture>( 20 );
 
-		std::shared_ptr<std::unordered_map<std::wstring, int> > ToAnim = std::unordered_map<std::wstring, int>();
+		std::shared_ptr<std::map<std::wstring, int> > ToAnim = std::map<std::wstring, int>();
 		ToAnim->Add( _T( "Stand" ), 0 );
 		ToAnim->Add( _T( "Run" ), 1 );
 		ToAnim->Add( _T( "Jump" ), 2 );
@@ -343,7 +343,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj = 0;
 std::shared_ptr<FlyingBlob> Prototypes::goomba = 0;
-std::unordered_map<BobPhsx*, Bob*> Prototypes::bob = 0;
+std::map<BobPhsx*, Bob*> Prototypes::bob = 0;
 std::shared_ptr<Spike> Prototypes::SpikeObj = 0;
 std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door, GrassDoor, Prototypes::ArrowObj = 0;
 std::shared_ptr<ObjectClass> Prototypes::Hero = 0;
@@ -395,7 +395,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		Prototypes::SpikeObj = std::make_shared<Spike>( Path::Combine( Globals::ContentDirectory, _T( "Objects\\regular_spike.smo" ) ), Tools::EffectWad, Tools::TextureWad );
 
 		// Create all the stickmen hero prototypes
-		bob = std::unordered_map<BobPhsx*, Bob*>();
+		bob = std::map<BobPhsx*, Bob*>();
 		std::shared_ptr<Bob> NewBob;
 
 		//// Bezier base object

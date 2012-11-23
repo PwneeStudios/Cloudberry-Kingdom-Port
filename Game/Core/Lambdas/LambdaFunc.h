@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	class LambdaFunc
 	{
 	public:
-		virtual std::shared_ptr<T> Apply() = 0;
+		virtual T Apply() = 0;
 	};
 }
 

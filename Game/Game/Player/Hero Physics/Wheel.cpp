@@ -195,7 +195,7 @@ int BobPhsxWheel::AnimIndex = 0;
 		Style_DOOR_HIT_BOX_PADDING = Vector2( 25, 0 );
 	}
 
-	void BobPhsxWheel::ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxWheel::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
 	{
 		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
 		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( AnimIndex, 1, false, Padding ) ) );

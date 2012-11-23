@@ -338,7 +338,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 SpritePadding;
 
-		virtual void ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 
 		virtual void Release();
 

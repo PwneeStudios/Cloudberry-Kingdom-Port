@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 	void StyleData::CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level )
 	{
-		GenParams = std::unordered_map<AutoGen*, AutoGen_Parameters*>();
+		GenParams = std::map<AutoGen*, AutoGen_Parameters*>();
 		for ( std::vector<AutoGen*>::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			GenParams.insert( make_pair( *gen, ( *gen )->SetParameters( SeedData, level ) ) );
 

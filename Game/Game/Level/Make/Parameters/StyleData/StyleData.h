@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		std::unordered_map<AutoGen*, AutoGen_Parameters*> GenParams;
+		std::map<AutoGen*, AutoGen_Parameters*> GenParams;
 		void CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level );
 		std::shared_ptr<AutoGen_Parameters> FindParams( const std::shared_ptr<AutoGen> &gen );
 

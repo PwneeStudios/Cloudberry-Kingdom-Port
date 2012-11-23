@@ -5,55 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class SpriteFont;
-			}
-		}
-	}
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ButtonTexture
 	{
 #if defined(PC_VERSION)
@@ -78,7 +29,7 @@ namespace CloudberryKingdom
 	{
 #if defined(PC_VERSION)
 	public:
-		static std::unordered_map<Keys, std::wstring> KeyToString;
+		static std::map<Keys, std::wstring> KeyToString;
 		static void Init();
 
 		static void SetKeyFromString( Keys &key, const std::wstring &str );

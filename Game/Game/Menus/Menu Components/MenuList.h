@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		virtual float Width();
 
 	private:
-		std::unordered_map<MenuItem*, void*> ObjDict;
+		std::map<MenuItem*, void*> ObjDict;
 	public:
 		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
 

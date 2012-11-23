@@ -3,132 +3,9 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc;
-}
-
-namespace CloudberryKingdom
-{
-	class StartMenu_MW_Black;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Recycler;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyColor;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster_1;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster;
-}
-
-namespace CloudberryKingdom
-{
-	class ToDoItem;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class GameObject;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace GamerServices
-			{
-				class SignedOutEventArgs;
-			}
-		}
-	}
-}
-
-
-
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 
 #endif
-
-
 
 namespace CloudberryKingdom
 {
@@ -413,7 +290,7 @@ namespace CloudberryKingdom
 		/// Dictionary to get a game factory from a string.
 		/// </summary>
 	public:
-		static std::unordered_map<std::wstring, GameFactory*> FactoryDict;
+		static std::map<std::wstring, GameFactory*> FactoryDict;
 
 		/// <summary>
 		/// Used in the Background Editor to assign GUID to objects.
@@ -427,7 +304,7 @@ namespace CloudberryKingdom
 		bool HasLava;
 
 	protected:
-		void KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e );
+		//void KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e );
 
 		/// <summary>
 		/// True when a single player has successfully navigated the level.

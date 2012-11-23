@@ -555,6 +555,14 @@ namespace CloudberryKingdom
 		ScaleToTextureSize();
 	}
 
+	QuadClass::QuadClass( const std::wstring &name )
+	{
+		InitializeInstanceFields();
+		Initialize( 0, false, false );
+		Set( Tools::Texture( name ), 1 );
+		ScaleToTextureSize();
+	}
+
 	QuadClass::QuadClass( const std::wstring &TextureName, float Width )
 	{
 		InitializeInstanceFields();

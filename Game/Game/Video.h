@@ -3,66 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Content
-			{
-				class ContentManager;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Media
-			{
-				class Video;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Media
-			{
-				class VideoPlayer;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class Localization;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-
-
-
 namespace CloudberryKingdom
 {
 	class MainVideo

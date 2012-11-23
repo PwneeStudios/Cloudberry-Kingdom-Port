@@ -533,7 +533,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		MaxJumpAccelMultiple = JumpAccelModifier = JumpLengthModifier = 1;
 	}
 
-	void BobPhsx::ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsx::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
 	{
 	}
 

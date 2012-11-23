@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 	}
 
 std::vector<Awardment*> Awardments::Awards = std::vector<Awardment*>();
-std::unordered_map<int, Awardment*> Awardments::AwardsDict = std::unordered_map<int, Awardment*>();
+std::map<int, Awardment*> Awardments::AwardsDict = std::map<int, Awardment*>();
 
 	bool Awardments::MessageOnScreen()
 	{

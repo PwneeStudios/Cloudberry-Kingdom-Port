@@ -97,10 +97,10 @@ namespace CloudberryKingdom
 		/// </summary>
 //ORIGINAL LINE: public static float MultiLerpRestrict(float t, params float[] values)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static float MultiLerpRestrict( float t, ... );
+		static float MultiLerpRestrict( float t, const std::vector<float> &values );
 //ORIGINAL LINE: public static Vector2 MultiLerpRestrict(float t, params Vector2[] values)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static Vector2 MultiLerpRestrict( float t, ... );
+		static Vector2 MultiLerpRestrict( float t, const std::vector<Vector2> &values );
 		static int LerpRestrict( int v1, int v2, float t );
 		static int Lerp( int v1, int v2, float t );
 		static float LerpRestrict( float v1, float v2, float t );

@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 		// High Scores
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::unordered_map<int, ScoreEntry*>::const_iterator HighScore = HighScores.begin(); HighScore != HighScores.end(); ++HighScore )
+		for ( std::map<int, ScoreEntry*>::const_iterator HighScore = HighScores.begin(); HighScore != HighScores.end(); ++HighScore )
 			HighScore->second->WriteChunk_1000( writer );
 
 		// Awardments
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 	void PlayerData::FailLoad()
 	{
 		MySavedSeeds = std::make_shared<SavedSeeds>();
-		HighScores = std::unordered_map<int, ScoreEntry*>();
+		HighScores = std::map<int, ScoreEntry*>();
 		Purchases = std::make_shared<Set<int> >();
 		Awardments_Renamed = std::make_shared<Set<int> >();
 	}

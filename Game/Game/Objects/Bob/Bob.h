@@ -441,7 +441,7 @@ namespace CloudberryKingdom
 
 	public:
 		std::shared_ptr<ObjectBase> KillingObject;
-		static std::unordered_map<BobDeathType, Localization::Words> BobDeathNames;
+		static std::map<BobDeathType, Localization::Words> BobDeathNames;
 
 		/// <summary>
 		/// Kill the player.

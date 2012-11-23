@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		this->bob = bob;
 	}
 
-	void SwarmBundle::BobToSpritesLambda::Apply( std::unordered_map<int, SpriteAnim*> &dict, Vector2 pos )
+	void SwarmBundle::BobToSpritesLambda::Apply( std::map<int, SpriteAnim*> &dict, Vector2 pos )
 	{
 		bob->MyPhsx->ToSprites( dict, pos );
 	}

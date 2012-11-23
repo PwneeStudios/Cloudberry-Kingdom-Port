@@ -571,7 +571,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		std::shared_ptr<ControlItem> item = dynamic_cast<ControlItem*>( MyMenu->getCurItem() );
 		if ( 0 != item )
 		{
-			for ( std::unordered_map<Keys, std::wstring>::const_iterator key = ButtonString::KeyToString.begin(); key != ButtonString::KeyToString.end(); ++key )
+			for ( std::map<Keys, std::wstring>::const_iterator key = ButtonString::KeyToString.begin(); key != ButtonString::KeyToString.end(); ++key )
 				if ( ButtonCheck::State( key->first ).Down )
 				{
 					//// Make sure there are no double keys

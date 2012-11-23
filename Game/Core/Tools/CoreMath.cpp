@@ -266,27 +266,27 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		val = Restrict( min, max, val );
 	}
 
-	float CoreMath::MultiLerpRestrict( float t, ... )
+	float CoreMath::MultiLerpRestrict( float t, const std::vector<float> &values )
 	{
 		if ( t <= 0 )
 			return values[ 0 ];
-		if ( t >= values->Length - 1 )
-			return values[ values->Length - 1 ];
+		if ( t >= values.size() - 1 )
+			return values[ values.size() - 1 ];
 
-		int i1 = __min( static_cast<int>( t ), values->Length - 1 );
+		int i1 = std::min( static_cast<int>( t ), static_cast<int>( values.size() ) - 1 );
 		int i2 = i1 + 1;
 
 		return Lerp( values[ i1 ], values[ i2 ], t - i1 );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::MultiLerpRestrict( float t, ... )
+	Vector2 CoreMath::MultiLerpRestrict( float t, const std::vector<Vector2> &values )
 	{
 		if ( t <= 0 )
 			return values[ 0 ];
-		if ( t >= values->Length - 1 )
-			return values[ values->Length - 1 ];
+		if ( t >= values.size() - 1 )
+			return values[ values.size() - 1 ];
 
-		int i1 = __min( static_cast<int>( t ), values->Length - 1 );
+		int i1 = std::min( static_cast<int>( t ), static_cast<int>( values.size() ) - 1 );
 		int i2 = i1 + 1;
 
 		return Vector2::Lerp( values[ i1 ], values[ i2 ], t - i1 );

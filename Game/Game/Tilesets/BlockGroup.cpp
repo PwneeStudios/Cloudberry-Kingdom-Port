@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	BlockGroup::BlockGroup()
 	{
-		Dict = std::unordered_map<int, std::vector<PieceQuad*> >();
+		Dict = std::map<int, std::vector<PieceQuad*> >();
 	}
 
 	void BlockGroup::Add( const std::shared_ptr<PieceQuad> &piece )

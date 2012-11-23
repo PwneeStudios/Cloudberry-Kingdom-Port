@@ -77,9 +77,6 @@ namespace CloudberryKingdom
 
 		virtual std::wstring ToString();
 
-//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		operator EzTexture*( const std::wstring &name );
-
 	private:
 		void InitializeInstanceFields();
 

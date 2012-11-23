@@ -36,13 +36,13 @@ namespace CloudberryKingdom
 		const int Size = 2000;
 
 		TextureList = std::vector<EzTexture*>( Size );
-		TextureListByFolder = std::unordered_map<std::wstring, std::vector<EzTexture*> >( Size );
+		TextureListByFolder = std::map<std::wstring, std::vector<EzTexture*> >( Size );
 
-		AnimationDict = std::unordered_map<std::wstring, AnimationData_Texture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		AnimationDict = std::map<std::wstring, AnimationData_Texture*>( Size, StringComparer::CurrentCultureIgnoreCase );
 
-		PathDict = std::unordered_map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
-		NameDict = std::unordered_map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
-		BigNameDict = std::unordered_map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		PathDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		NameDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		BigNameDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
 	}
 
 	void EzTextureWad::LoadFolder( const std::shared_ptr<ContentManager> &Content, const std::wstring &Folder )
@@ -247,6 +247,6 @@ namespace CloudberryKingdom
 
 	void EzTextureWad::InitializeInstanceFields()
 	{
-		PackedDict = std::unordered_map<std::wstring, PackedTexture*>();
+		PackedDict = std::map<std::wstring, PackedTexture*>();
 	}
 }

@@ -5,9 +5,6 @@
 #include <global_header.h>
 
 
-
-
-
 namespace CloudberryKingdom
 {
 	class Rand
@@ -16,7 +13,7 @@ namespace CloudberryKingdom
 		int MySeed;
 		Rand( int seed );
 
-		std::shared_ptr<System::Random> Rnd;
+		std::shared_ptr<Random> Rnd;
 
 		Vector2 RndPos( Vector2 BL, Vector2 TR );
 
@@ -71,8 +68,8 @@ namespace CloudberryKingdom
 		int RandomSnap( int Range, int SnapPoints );
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-		template<typename T> where T : class
-		int RndEnum();
+		/*template<typename T> where T : class
+		int RndEnum();*/
 
 		/// <summary>
 		/// Scrambles the ordering of the given list in place.

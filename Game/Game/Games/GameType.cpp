@@ -260,17 +260,17 @@ namespace CloudberryKingdom
 		}
 	}
 
-std::unordered_map<std::wstring, GameFactory*> GameData::FactoryDict = std::unordered_map<std::wstring, GameFactory*> { { _T( "normal" ), NormalGameData::Factory } };
+std::map<std::wstring, GameFactory*> GameData::FactoryDict = std::map<std::wstring, GameFactory*> { { _T( "normal" ), NormalGameData::Factory } };
 int GameData::DataCounter = 0;
 
-	void GameData::KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e )
+	/*void GameData::KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e )
 	{
 		std::shared_ptr<Thread> MakeThread = Thread::CurrentThread;
 		if ( MakeThread != 0 )
 		{
 			MakeThread->Abort();
 		}
-	}
+	}*/
 
 	void GameData::EOL_DoorAction( const std::shared_ptr<Door> &door )
 	{

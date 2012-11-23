@@ -72,8 +72,8 @@ namespace CloudberryKingdom
 		const static std::shared_ptr<CampaignSequence> &getInstance() const;
 
 	private:
-		std::unordered_map<int, int> ChapterStart;
-		std::unordered_map<int, Tuple<std::wstring, std::wstring>*> SpecialLevel;
+		std::map<int, int> ChapterStart;
+		std::map<int, Tuple<std::wstring, std::wstring>*> SpecialLevel;
 
 	public:
 		virtual void Start( int Chapter );

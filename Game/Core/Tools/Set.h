@@ -9,10 +9,10 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	class Set : public IEnumerable, public IEnumerable<T>
+	class Set// : public IEnumerable, public IEnumerable<T>
 	{
 	public:
-		std::unordered_map<T, bool> dict;
+		std::map<T, bool> dict;
 
 		const int &getCount() const
 		{
@@ -32,14 +32,14 @@ namespace CloudberryKingdom
 			return this;
 		}
 
-		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()
+		/*std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()
 		{
 			return dict.Keys->GetEnumerator();
 		}
 		std::shared_ptr<IEnumerator<T> > GetEnumerator()
 		{
 			return dict.Keys->GetEnumerator();
-		}
+		}*/
 
 		T Choose( const std::shared_ptr<Rand> &Rnd )
 		{
@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 	private:
 		void InitializeInstanceFields()
 		{
-			dict = std::unordered_map<T, bool>();
+			dict = std::map<T, bool>();
 		}
 
 public:

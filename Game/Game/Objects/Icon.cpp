@@ -9,8 +9,8 @@ namespace CloudberryKingdom
 
 std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, ObjectIcon::SlowMoIcon = 0;
 std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, ObjectIcon::CustomHoverIcon = 0;
-std::unordered_map<Upgrade, ObjectIcon*> ObjectIcon::UpgradeIcons = 0;
-std::unordered_map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
+std::map<Upgrade, ObjectIcon*> ObjectIcon::UpgradeIcons = 0;
+std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade )
 	{
@@ -104,7 +104,7 @@ std::unordered_map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	void ObjectIcon::InitIcons()
 	{
-		UpgradeIcons = std::unordered_map<Upgrade, ObjectIcon*>();
+		UpgradeIcons = std::map<Upgrade, ObjectIcon*>();
 
 		float StandardWidth = 161 * 1.31f;
 		//UpgradeIcons.Add(Upgrade.BouncyBlock, new PictureIcon("Bouncy blocks", "Icon_BouncyBlock1", Color.Lime, StandardWidth*.555f));
@@ -127,7 +127,7 @@ std::unordered_map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		UpgradeIcons.insert( make_pair( Upgrade_SPEED, std::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
 		UpgradeIcons.insert( make_pair( Upgrade_CEILING, std::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
 
-		ObjIcons = std::unordered_map<ObjectType, ObjectIcon*>();
+		ObjIcons = std::map<ObjectType, ObjectIcon*>();
 		//ObjIcons.Add(ObjectType.FallingBlock, UpgradeIcons[Upgrade.FallingBlock]);
 		//ObjIcons.Add(ObjectType.MovingBlock, UpgradeIcons[Upgrade.MovingBlock]);
 		//ObjIcons.Add(ObjectType.GhostBlock, UpgradeIcons[Upgrade.GhostBlock]);

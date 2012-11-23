@@ -226,7 +226,7 @@ template<typename T>
 	}
 
 template<typename TKey, typename TValue>
-	void DictionaryExtension::RemoveAll( std::unordered_map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition )
+	void DictionaryExtension::RemoveAll( std::map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( unknown::const_iterator cur = dict.Where( condition )->ToList().begin(); cur != dict.Where(condition)->ToList().end(); ++cur )
@@ -236,7 +236,7 @@ template<typename TKey, typename TValue>
 	}
 
 template<typename TKey, typename TValue>
-	void DictionaryExtension::AddOrOverwrite( std::unordered_map<TKey, TValue> &dict, TKey key, TValue value )
+	void DictionaryExtension::AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value )
 	{
 		if ( dict.find( key ) != dict.end() )
 			dict[ key ] = value;
@@ -1478,18 +1478,18 @@ bool Tools::LastLineWasBlank = false;
 		return ObjName( GetObjId() );
 	}
 
-	std::unordered_map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
+	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
 	{
-		std::shared_ptr<std::unordered_map<std::wstring, int> > dict = std::unordered_map<std::wstring, int>();
+		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
 		for ( int i = 0; i < Bits.size(); i++ )
 			if ( keywords->Contains( Bits[ i ] ) )
 				dict->Add( Bits[ i ], i );
 		return dict;
 	}
 
-	std::unordered_map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
+	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
 	{
-		std::shared_ptr<std::unordered_map<std::wstring, int> > dict = std::unordered_map<std::wstring, int>();
+		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
 		for ( int i = 0; i < Bits.size(); i++ )
 			if ( std::find( keywords.begin(), keywords.end(), Bits[ i ] ) != keywords.end() )
 				dict->Add( Bits[ i ], i );

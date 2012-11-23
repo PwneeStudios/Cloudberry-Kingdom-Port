@@ -35,10 +35,10 @@ namespace CloudberryKingdom
 		void Set( const std::wstring &name );
 
 //C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		operator TextureOrAnim*( const std::shared_ptr<EzTexture> &texture );
+		std::shared_ptr<TextureOrAnim> TextureOrAnimOperatorProxy( const std::shared_ptr<EzTexture> &texture );
 
 //C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		operator TextureOrAnim*( const std::wstring &name );
+		std::shared_ptr<TextureOrAnim> TextureOrAnimOperatorProxy( const std::wstring &name );
 
 	private:
 		void InitializeInstanceFields();

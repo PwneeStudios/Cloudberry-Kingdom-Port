@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 
 	public:
 		static std::vector<Awardment*> Awards;
-		static std::unordered_map<int, Awardment*> AwardsDict;
+		static std::map<int, Awardment*> AwardsDict;
 
 		/// <summary>
 		/// Whether there is an awardment message on the screen currently.

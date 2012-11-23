@@ -49,14 +49,14 @@ namespace CloudberryKingdom
 	class SwarmBundle
 	{
 	private:
-		class BobToSpritesLambda : public Lambda_2<std::unordered_map<int, SpriteAnim*>, Vector2>
+		class BobToSpritesLambda : public Lambda_2<std::map<int, SpriteAnim*>, Vector2>
 		{
 		private:
 			std::shared_ptr<Bob> bob;
 		public:
 			BobToSpritesLambda( const std::shared_ptr<Bob> &bob );
 
-			void Apply( std::unordered_map<int, SpriteAnim*> &dict, Vector2 pos );
+			void Apply( std::map<int, SpriteAnim*> &dict, Vector2 pos );
 		};
 
 	private:

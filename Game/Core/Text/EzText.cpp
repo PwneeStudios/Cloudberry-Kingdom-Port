@@ -91,13 +91,13 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-std::unordered_map<Keys, std::wstring> ButtonString::KeyToString = 0;
+std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 #endif
 
 #if defined(PC_VERSION)
 	void ButtonString::Init()
 	{
-		KeyToString = std::unordered_map<Keys, std::wstring>();
+		KeyToString = std::map<Keys, std::wstring>();
 
 		KeyToString.insert( make_pair( Keys_None, _T( "None" ) ) );
 
@@ -153,7 +153,7 @@ std::unordered_map<Keys, std::wstring> ButtonString::KeyToString = 0;
 	void ButtonString::SetKeyFromString( Keys &key, const std::wstring &str )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::unordered_map<Keys, std::wstring>::const_iterator pair = KeyToString.begin(); pair != KeyToString.end(); ++pair )
+		for ( std::map<Keys, std::wstring>::const_iterator pair = KeyToString.begin(); pair != KeyToString.end(); ++pair )
 		{
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( std::wstring::Compare( str, ( *pair )->Value, true ) == 0 )

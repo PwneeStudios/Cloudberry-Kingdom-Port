@@ -51,11 +51,6 @@ std::shared_ptr<Game> EzTexture::game = 0;
 		return Name;
 	}
 
-	EzTexture::operator EzTexture*( const std::wstring &name )
-	{
-		return Tools::Texture( name );
-	}
-
 	void EzTexture::InitializeInstanceFields()
 	{
 		FromPacked = false;

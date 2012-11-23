@@ -191,6 +191,7 @@ namespace CloudberryKingdom
 		void SetToDefault();
 
 		QuadClass( const std::shared_ptr<EzTexture> &texture );
+		QuadClass( const std::wstring &name );
 
 		QuadClass( const std::wstring &TextureName, float Width );
 		QuadClass( const std::wstring &TextureName, const std::wstring &Name );

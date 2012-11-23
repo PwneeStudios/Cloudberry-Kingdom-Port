@@ -253,7 +253,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 	public:
 		virtual void Die( Bob::BobDeathType DeathType );
 
-		virtual void ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 
 		virtual void DollInitialize();
 

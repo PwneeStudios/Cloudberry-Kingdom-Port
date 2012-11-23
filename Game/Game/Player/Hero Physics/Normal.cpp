@@ -1537,7 +1537,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		return;
 	}
 
-	void BobPhsxNormal::ToSprites( std::unordered_map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxNormal::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
 	{
 		BobPhsx::ToSprites( SpriteAnims, Padding );
 

@@ -444,12 +444,12 @@ namespace CloudberryKingdom
 		template<typename TKey, typename TValue>
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static void RemoveAll<TKey, TValue>(this Dictionary<TKey, TValue> dict, Func<KeyValuePair<TKey, TValue>, bool> condition)
-		static void RemoveAll( std::unordered_map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition );
+		static void RemoveAll( std::map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition );
 
 		template<typename TKey, typename TValue>
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static void AddOrOverwrite<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
-		static void AddOrOverwrite( std::unordered_map<TKey, TValue> &dict, TKey key, TValue value );
+		static void AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value );
 	};
 
 	class Tools
@@ -765,8 +765,8 @@ static std::wstring SourceTextureDirectory();
 	public:
 //ORIGINAL LINE: public static Dictionary<string, int> GetLocations(List<string> Bits, params string[] keywords)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static std::unordered_map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
-		static std::unordered_map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
+		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
+		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
 
 		static void ReadLineToObj( const std::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits );
 		static void ReadLineToObj( std::shared_ptr<Object> &obj, const std::wstring &field, std::vector<std::wstring> &Bits );
