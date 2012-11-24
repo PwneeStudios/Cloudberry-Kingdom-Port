@@ -54,13 +54,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_shared<FireSpinner_AutoGen>();
 
-	const std::shared_ptr<FireSpinner_AutoGen> &FireSpinner_AutoGen::getInstance() const
+	const std::shared_ptr<FireSpinner_AutoGen> &FireSpinner_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	FireSpinner_AutoGen::FireSpinner_AutoGen()
-	{
 	}
 
 	FireSpinner_AutoGen::FireSpinner_AutoGen()

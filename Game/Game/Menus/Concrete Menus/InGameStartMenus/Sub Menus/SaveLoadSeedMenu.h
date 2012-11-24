@@ -5,38 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-namespace CloudberryKingdom
-{
 	class SaveLoadSeedMenu : public VerifyBaseMenu
 	{
 	private:

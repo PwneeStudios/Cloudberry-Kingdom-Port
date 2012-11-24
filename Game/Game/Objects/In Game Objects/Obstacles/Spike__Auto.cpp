@@ -76,13 +76,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_AutoGen>();
 
-	const std::shared_ptr<Spike_AutoGen> &Spike_AutoGen::getInstance() const
+	const std::shared_ptr<Spike_AutoGen> &Spike_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Spike_AutoGen::Spike_AutoGen()
-	{
 	}
 
 	Spike_AutoGen::Spike_AutoGen()

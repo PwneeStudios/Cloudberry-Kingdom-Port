@@ -55,10 +55,8 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BouncyBlock_AutoGen> instance;
 	public:
-		const static std::shared_ptr<BouncyBlock_AutoGen> &getInstance() const;
+		const static std::shared_ptr<BouncyBlock_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static BouncyBlock_AutoGen();
 	private:
 		BouncyBlock_AutoGen();
 

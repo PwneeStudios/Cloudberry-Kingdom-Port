@@ -61,13 +61,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<Fireball_AutoGen>();
 
-	const std::shared_ptr<Fireball_AutoGen> &Fireball_AutoGen::getInstance() const
+	const std::shared_ptr<Fireball_AutoGen> &Fireball_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Fireball_AutoGen::Fireball_AutoGen()
-	{
 	}
 
 	Fireball_AutoGen::Fireball_AutoGen()

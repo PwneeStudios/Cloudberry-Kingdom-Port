@@ -25,13 +25,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
 
-	const std::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance() const
+	const std::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	LavaDrip_AutoGen::LavaDrip_AutoGen()
-	{
 	}
 
 	LavaDrip_AutoGen::LavaDrip_AutoGen()

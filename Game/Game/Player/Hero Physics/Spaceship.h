@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 
 		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 
-		virtual void Die( Bob::BobDeathType DeathType );
+		virtual void Die( BobDeathType DeathType );
 
 		virtual void BlockInteractions();
 

@@ -25,13 +25,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Serpent_AutoGen>();
 
-	const std::shared_ptr<Serpent_AutoGen> &Serpent_AutoGen::getInstance() const
+	const std::shared_ptr<Serpent_AutoGen> &Serpent_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Serpent_AutoGen::Serpent_AutoGen()
-	{
 	}
 
 	Serpent_AutoGen::Serpent_AutoGen()

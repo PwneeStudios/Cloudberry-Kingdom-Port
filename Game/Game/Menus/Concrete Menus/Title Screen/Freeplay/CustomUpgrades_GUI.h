@@ -38,31 +38,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class AggressiveUpgrades_GUI : public CustomUpgrades_GUI
-	{
-	public:
-		AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-
-		virtual std::vector<Upgrade> GetUpgradeList();
-
-	protected:
-		virtual void Go();
-
-		virtual Localization::Words HeaderText();
-	};
-
-	class PassiveUpgrades_GUI : public CustomUpgrades_GUI
-	{
-	public:
-		PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-
-		virtual std::vector<Upgrade> GetUpgradeList();
-
-	protected:
-		virtual void Go();
-
-		virtual Localization::Words HeaderText();
-	};
 
 	class CustomUpgrades_GUI : public CkBaseMenu
 	{
@@ -226,6 +201,32 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
+	};
+
+	class AggressiveUpgrades_GUI : public CustomUpgrades_GUI
+	{
+	public:
+		AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+
+		virtual std::vector<Upgrade> GetUpgradeList();
+
+	protected:
+		virtual void Go();
+
+		virtual Localization::Words HeaderText();
+	};
+
+	class PassiveUpgrades_GUI : public CustomUpgrades_GUI
+	{
+	public:
+		PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+
+		virtual std::vector<Upgrade> GetUpgradeList();
+
+	protected:
+		virtual void Go();
+
+		virtual Localization::Words HeaderText();
 	};
 }
 

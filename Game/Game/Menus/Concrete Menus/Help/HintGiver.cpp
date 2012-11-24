@@ -117,7 +117,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		}
 	}
 
-	const std::wstring &HintGiver::getQuickSpawnHint() const
+	const std::wstring &HintGiver::getQuickSpawnHint()
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)
@@ -127,7 +127,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 	#endif
 	}
 
-	const std::wstring &HintGiver::getPowerupHint() const
+	const std::wstring &HintGiver::getPowerupHint()
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)

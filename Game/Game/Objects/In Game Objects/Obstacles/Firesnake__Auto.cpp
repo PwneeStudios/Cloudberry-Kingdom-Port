@@ -39,13 +39,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make_shared<Firesnake_AutoGen>();
 
-	const std::shared_ptr<Firesnake_AutoGen> &Firesnake_AutoGen::getInstance() const
+	const std::shared_ptr<Firesnake_AutoGen> &Firesnake_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Firesnake_AutoGen::Firesnake_AutoGen()
-	{
 	}
 
 	Firesnake_AutoGen::Firesnake_AutoGen()

@@ -23,13 +23,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
 
-	const std::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance() const
+	const std::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Cloud_AutoGen::Cloud_AutoGen()
-	{
 	}
 
 	Cloud_AutoGen::Cloud_AutoGen()

@@ -307,7 +307,7 @@ RezData PlayerManager::d = 0;
 bool PartiallyInvisible, PlayerManager::TotallyInvisible = false;
 int PlayerManager::_CoinsSpent = 0;
 
-	const int &PlayerManager::getCoinsSpent() const
+	const int &PlayerManager::getCoinsSpent()
 	{
 		return _CoinsSpent;
 	}
@@ -323,7 +323,7 @@ std::wstring PlayerManager::_DefaultName = _T( "" );
 #endif
 
 #if defined(PC_VERSION)
-	const std::wstring &PlayerManager::getDefaultName() const
+	const std::wstring &PlayerManager::getDefaultName()
 	{
 		return _DefaultName;
 	}
@@ -579,7 +579,7 @@ std::vector<PlayerData*> PlayerManager::Players = 0;
 		return coins;
 	}
 
-	const std::vector<PlayerData*> &PlayerManager::getLoggedInPlayers() const
+	const std::vector<PlayerData*> &PlayerManager::getLoggedInPlayers()
 	{
 	#if defined(PC_VERSION)
 		return getExistingPlayers();
@@ -590,7 +590,7 @@ std::vector<PlayerData*> PlayerManager::Players = 0;
 	#endif
 	}
 
-	const std::vector<PlayerData*> &PlayerManager::getExistingPlayers() const
+	const std::vector<PlayerData*> &PlayerManager::getExistingPlayers()
 	{
 		_ExistingPlayers.clear();
 		for ( std::vector<CloudberryKingdom::PlayerData*>::const_iterator data = Players.begin(); data != Players.end(); ++data )
@@ -602,7 +602,7 @@ std::vector<PlayerData*> PlayerManager::Players = 0;
 
 std::vector<PlayerData*> PlayerManager::_ExistingPlayers = std::vector<PlayerData*>();
 
-	const std::vector<PlayerData*> &PlayerManager::getAlivePlayers() const
+	const std::vector<PlayerData*> &PlayerManager::getAlivePlayers()
 	{
 		_AlivePlayers.clear();
 		for ( std::vector<CloudberryKingdom::PlayerData*>::const_iterator data = Players.begin(); data != Players.end(); ++data )
@@ -615,7 +615,7 @@ std::vector<PlayerData*> PlayerManager::_ExistingPlayers = std::vector<PlayerDat
 std::vector<PlayerData*> PlayerManager::_AlivePlayers = std::vector<PlayerData*>();
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<PlayerData> &PlayerManager::getPlayer() const
+	const std::shared_ptr<PlayerData> &PlayerManager::getPlayer()
 	{
 		return Players[ 0 ];
 	}

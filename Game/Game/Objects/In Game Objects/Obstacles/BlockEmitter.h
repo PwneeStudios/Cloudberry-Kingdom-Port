@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 	private:
 		BoxStyle MyBoxStyle;
 	public:
-		void Init( Vector2 pos, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle MyBoxStyle );
+		void Init( Vector2 pos, const std::shared_ptr<Level> &level, BoxStyle MyBoxStyle );
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 

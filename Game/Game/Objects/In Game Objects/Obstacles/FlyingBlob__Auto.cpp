@@ -52,13 +52,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_shared<FlyingBlob_AutoGen>();
 
-	const std::shared_ptr<FlyingBlob_AutoGen> &FlyingBlob_AutoGen::getInstance() const
+	const std::shared_ptr<FlyingBlob_AutoGen> &FlyingBlob_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	FlyingBlob_AutoGen::FlyingBlob_AutoGen()
-	{
 	}
 
 	FlyingBlob_AutoGen::FlyingBlob_AutoGen()
@@ -159,7 +155,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		}
 	}
 
-	void FlyingBlob_AutoGen::Clean( array_Renamed<ObjectBase*, 2> *array_Renamed )
+	/*void FlyingBlob_AutoGen::Clean( array_Renamed<ObjectBase*, 2> *array_Renamed )
 	{
 		for ( int i = 0; i < array_Renamed.GetLength( 0 ); i++ )
 			for ( int j = 0; j < array_Renamed.GetLength( 1 ); j++ )
@@ -261,7 +257,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 
 		GUIDs = Params->TunnelGUIDs.clear();
 		Blobs.clear();
-	}
+	}*/
 
 	void FlyingBlob_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
@@ -283,8 +279,8 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		// Get Goomba parameters
 		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
 
-		if ( Params->Special.Tunnel )
-			CleanupTunnel( level );
+		/*if ( Params->Special.Tunnel )
+			CleanupTunnel( level );*/
 	}
 
 	void FlyingBlob_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )

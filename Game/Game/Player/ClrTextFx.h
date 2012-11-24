@@ -5,35 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffect;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
-	class Buyable
-	{
-	public:
-		virtual int GetGuid() = 0;
-		virtual int GetPrice() = 0;
-	};
 
 	class ClrTextFx : public Buyable
 	{

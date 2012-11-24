@@ -5,139 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Hat;
-}
-
-namespace CloudberryKingdom
-{
-	class Cape;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectVector;
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-namespace CloudberryKingdom
-{
-	class BobLink;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelPiece;
-}
-
-namespace CloudberryKingdom
-{
-	class ComputerRecording;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTextureWad;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerStats;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Localization;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class Ceiling_Parameters;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Bob : public ObjectBase
 	{
 	public:
@@ -154,58 +21,6 @@ namespace CloudberryKingdom
 			bool InvertDirX;
 
 			void Init();
-		};
-
-	public:
-		enum BobDeathType
-		{
-			BobDeathType_NONE,
-			BobDeathType_FIREBALL,
-			BobDeathType_FIRESNAKE,
-			BobDeathType_FIRE_SPINNER,
-			BobDeathType_BOULDER,
-			BobDeathType_SPIKEY_GUY,
-			BobDeathType_SPIKE,
-			BobDeathType_FALL,
-			BobDeathType_LAVA,
-			BobDeathType_BLOB,
-			BobDeathType_LASER,
-			BobDeathType_LAVA_FLOW,
-			BobDeathType_FALLING_SPIKE,
-			BobDeathType_UNNAMED1,
-			BobDeathType_UNNAMED2,
-			BobDeathType_UNNAMED3,
-			BobDeathType_UNNAMED4,
-			BobDeathType_UNNAMED5,
-			BobDeathType_UNNAMED6,
-			BobDeathType_UNNAMED7,
-			BobDeathType_UNNAMED8,
-			BobDeathType_UNNAMED9,
-			BobDeathType_UNNAMED10,
-			BobDeathType_UNNAMED11,
-			BobDeathType_UNNAMED12,
-			BobDeathType_UNNAMED13,
-			BobDeathType_UNNAMED14,
-			BobDeathType_UNNAMED15,
-			BobDeathType_UNNAMED16,
-			BobDeathType_UNNAMED17,
-			BobDeathType_UNNAMED18,
-			BobDeathType_UNNAMED19,
-			BobDeathType_UNNAMED20,
-			BobDeathType_UNNAMED21,
-			BobDeathType_UNNAMED22,
-			BobDeathType_UNNAMED23,
-			BobDeathType_UNNAMED24,
-			BobDeathType_UNNAMED25,
-			BobDeathType_UNNAMED26,
-			BobDeathType_UNNAMED27,
-			BobDeathType_UNNAMED28,
-			BobDeathType_UNNAMED29,
-			BobDeathType_UNNAMED30,
-			BobDeathType_TIME,
-			BobDeathType_LEFT_BEHIND,
-			BobDeathType_OTHER,
-			BobDeathType_TOTAL
 		};
 
 	public:
@@ -252,7 +67,7 @@ namespace CloudberryKingdom
 		Vector2 CapeWind, Wind;
 
 		std::shared_ptr<Hat> MyHat;
-		Cape::CapeType MyCapeType;
+		CapeType MyCapeType;
 		std::shared_ptr<Cape> MyCape;
 		bool ShowCape;
 		Color InsideColor;
@@ -411,7 +226,7 @@ namespace CloudberryKingdom
 
 		void SetHeroPhsx( const std::shared_ptr<BobPhsx> &type );
 
-		void MakeCape( Cape::CapeType CapeType );
+		void MakeCape( CapeType CapeType );
 
 		void Init( bool BoxesOnly, PhsxData StartData, const std::shared_ptr<GameData> &game );
 

@@ -71,13 +71,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Boulder_AutoGen>();
 
-	const std::shared_ptr<Boulder_AutoGen> &Boulder_AutoGen::getInstance() const
+	const std::shared_ptr<Boulder_AutoGen> &Boulder_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Boulder_AutoGen::Boulder_AutoGen()
-	{
 	}
 
 	Boulder_AutoGen::Boulder_AutoGen()

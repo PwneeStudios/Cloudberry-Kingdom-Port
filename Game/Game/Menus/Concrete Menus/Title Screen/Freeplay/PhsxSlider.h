@@ -5,31 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class WrappedFloat;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
 	class PhsxSlider : public MenuSlider
 	{
 	private:

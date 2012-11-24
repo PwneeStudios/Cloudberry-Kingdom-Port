@@ -52,13 +52,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_AutoGen>();
 
-	const std::shared_ptr<Coin_AutoGen> &Coin_AutoGen::getInstance() const
+	const std::shared_ptr<Coin_AutoGen> &Coin_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Coin_AutoGen::Coin_AutoGen()
-	{
 	}
 
 	Coin_AutoGen::Coin_AutoGen()

@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class MovingBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class MovingBlock_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -84,10 +51,8 @@ public:
 	private:
 		static const std::shared_ptr<MovingBlock_AutoGen> instance;
 	public:
-		const static std::shared_ptr<MovingBlock_AutoGen> &getInstance() const;
+		const static std::shared_ptr<MovingBlock_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static MovingBlock_AutoGen();
 	private:
 		MovingBlock_AutoGen();
 

@@ -35,13 +35,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std::make_shared<FallingBlock_AutoGen>();
 
-	const std::shared_ptr<FallingBlock_AutoGen> &FallingBlock_AutoGen::getInstance() const
+	const std::shared_ptr<FallingBlock_AutoGen> &FallingBlock_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	FallingBlock_AutoGen::FallingBlock_AutoGen()
-	{
 	}
 
 	FallingBlock_AutoGen::FallingBlock_AutoGen()

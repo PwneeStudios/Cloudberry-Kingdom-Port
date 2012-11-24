@@ -5,19 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Multicaster_1;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class GUI_Timer_Base : public GUI_Panel
 	{
 	private:

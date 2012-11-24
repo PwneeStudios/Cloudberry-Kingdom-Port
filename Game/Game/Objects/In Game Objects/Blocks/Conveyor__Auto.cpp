@@ -23,13 +23,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
 
-	const std::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance() const
+	const std::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	ConveyorBlock_AutoGen::ConveyorBlock_AutoGen()
-	{
 	}
 
 	ConveyorBlock_AutoGen::ConveyorBlock_AutoGen()

@@ -62,13 +62,6 @@ namespace CloudberryKingdom
 	class Cape
 	{
 	public:
-		enum CapeType
-		{
-			CapeType_NORMAL,
-			CapeType_SMALL,
-			CapeType_NONE
-		};
-	public:
 		static Vector2 SineWind( Vector2 Dir, float NormalIntensity, float Period, float t );
 
 		std::shared_ptr<Bob> MyBob;

@@ -38,10 +38,8 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<ConveyorBlock_AutoGen> instance;
 	public:
-		const static std::shared_ptr<ConveyorBlock_AutoGen> &getInstance() const;
+		const static std::shared_ptr<ConveyorBlock_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static ConveyorBlock_AutoGen();
 	private:
 		ConveyorBlock_AutoGen();
 

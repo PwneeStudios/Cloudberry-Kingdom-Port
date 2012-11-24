@@ -345,7 +345,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
 	}
 
-	void BobPhsxSpaceship::Die( Bob::BobDeathType DeathType )
+	void BobPhsxSpaceship::Die( BobDeathType DeathType )
 	{
 		BobPhsx::Die( DeathType );
 

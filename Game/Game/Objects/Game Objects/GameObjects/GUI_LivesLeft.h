@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Multicaster_1;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// A GUI element that tracks how many lives are left.
 	/// Element also shows how many lives are left, displayed after all players die and the level resets.

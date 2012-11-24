@@ -18,22 +18,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class GUI_CampaignScore : public GUI_Score
-	{
-	private:
-		class RunningCampaignScoreLambda : public PlayerIntLambda
-		{
-		public:
-			virtual int Apply( const std::shared_ptr<PlayerData> &p );
-		};
-	public:
-		GUI_CampaignScore();
-
-	protected:
-		virtual int GetScore();
-
-	};
-
 	class GUI_Score : public GUI_Panel
 	{
 		/// <summary>
@@ -75,6 +59,22 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
+	};
+
+	class GUI_CampaignScore : public GUI_Score
+	{
+	private:
+		class RunningCampaignScoreLambda : public PlayerIntLambda
+		{
+		public:
+			virtual int Apply( const std::shared_ptr<PlayerData> &p );
+		};
+	public:
+		GUI_CampaignScore();
+
+	protected:
+		virtual int GetScore();
+
 	};
 }
 

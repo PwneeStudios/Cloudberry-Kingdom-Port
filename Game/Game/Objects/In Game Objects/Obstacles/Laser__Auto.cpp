@@ -23,13 +23,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_AutoGen>();
 
-	const std::shared_ptr<Laser_AutoGen> &Laser_AutoGen::getInstance() const
+	const std::shared_ptr<Laser_AutoGen> &Laser_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Laser_AutoGen::Laser_AutoGen()
-	{
 	}
 
 	Laser_AutoGen::Laser_AutoGen()

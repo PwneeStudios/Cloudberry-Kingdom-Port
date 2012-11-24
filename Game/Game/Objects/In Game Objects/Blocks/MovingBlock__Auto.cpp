@@ -51,13 +51,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_shared<MovingBlock_AutoGen>();
 
-	const std::shared_ptr<MovingBlock_AutoGen> &MovingBlock_AutoGen::getInstance() const
+	const std::shared_ptr<MovingBlock_AutoGen> &MovingBlock_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	MovingBlock_AutoGen::MovingBlock_AutoGen()
-	{
 	}
 
 	MovingBlock_AutoGen::MovingBlock_AutoGen()

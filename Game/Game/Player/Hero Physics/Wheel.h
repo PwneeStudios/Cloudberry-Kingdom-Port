@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 
 		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
 
-		virtual void Die( Bob::BobDeathType DeathType );
+		virtual void Die( BobDeathType DeathType );
 
 		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 

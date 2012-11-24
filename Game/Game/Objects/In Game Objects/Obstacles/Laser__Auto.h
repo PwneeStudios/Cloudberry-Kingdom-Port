@@ -44,10 +44,8 @@ public:
 	private:
 		static const std::shared_ptr<Laser_AutoGen> instance;
 	public:
-		const static std::shared_ptr<Laser_AutoGen> &getInstance() const;
+		const static std::shared_ptr<Laser_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static Laser_AutoGen();
 	private:
 		Laser_AutoGen();
 

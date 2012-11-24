@@ -1,5 +1,5 @@
-﻿#ifndef MAKEFINALDOOR
-#define MAKEFINALDOOR
+﻿#ifndef MAKEFINALDOOR_VERTICAL
+#define MAKEFINALDOOR_VERTICAL
 
 #include <global_header.h>
 
@@ -69,4 +69,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef MAKEFINALDOOR
+#endif	//#ifndef MAKEFINALDOOR_VERTICAL

@@ -77,10 +77,8 @@ public:
 	private:
 		static const std::shared_ptr<Ceiling_AutoGen> instance;
 	public:
-		const static std::shared_ptr<Ceiling_AutoGen> &getInstance() const;
+		const static std::shared_ptr<Ceiling_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static Ceiling_AutoGen();
 	private:
 		Ceiling_AutoGen();
 

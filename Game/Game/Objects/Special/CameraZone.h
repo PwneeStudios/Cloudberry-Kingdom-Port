@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ZoneTrigger;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	class CameraZone : public ZoneTrigger
 	{
 	private:

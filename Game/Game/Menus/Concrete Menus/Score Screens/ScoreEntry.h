@@ -8,9 +8,6 @@ namespace CloudberryKingdom
 	class Chunk;
 }
 
-
-
-
 namespace CloudberryKingdom
 {
 	class ScoreEntry
@@ -24,7 +21,7 @@ namespace CloudberryKingdom
 			Format_TIME
 		};
 	public:
-		const static std::wstring &getDefaultName() const;
+		const static std::wstring &getDefaultName();
 
 		int GameId;
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:

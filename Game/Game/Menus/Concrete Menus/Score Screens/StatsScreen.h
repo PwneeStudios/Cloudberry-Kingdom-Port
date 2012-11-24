@@ -5,42 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LambdaFunc_1;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerStats;
-}
-
-namespace CloudberryKingdom
-{
-	class ScrollBar;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
 	class StatsMenu : public CkBaseMenu
 	{
 	private:

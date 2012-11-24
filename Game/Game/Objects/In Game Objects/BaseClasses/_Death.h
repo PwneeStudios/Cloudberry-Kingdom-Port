@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	class _Death : public _Obstacle
 	{
 	protected:
-		Bob::BobDeathType DeathType;
+		BobDeathType DeathType;
 
 	private:
 		void InitializeInstanceFields();

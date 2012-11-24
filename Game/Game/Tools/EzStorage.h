@@ -5,67 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class SaveLoad;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class WrappedInt;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Storage
-			{
-				class StorageDevice;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class WrappedBool;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Storage
-			{
-				class StorageContainer;
-			}
-		}
-	}
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class SaveGroup
 	{
 	private:

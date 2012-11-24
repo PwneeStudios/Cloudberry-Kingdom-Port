@@ -229,13 +229,6 @@ namespace CloudberryKingdom
 			Vector2 Apply( Vector2 pos );
 		};
 
-	public:
-		enum TimeTypes
-		{
-			TimeTypes_UNSET,
-			TimeTypes_REGULAR,
-			TimeTypes_X_SYNC
-		};
 	private:
 		class SetBackLambda : public Lambda
 		{

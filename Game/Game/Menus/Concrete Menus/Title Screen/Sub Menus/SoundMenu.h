@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuList;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class SoundMenu : public VerifyBaseMenu
 	{
 	private:

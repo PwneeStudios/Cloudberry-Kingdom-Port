@@ -49,13 +49,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_shared<GhostBlock_AutoGen>();
 
-	const std::shared_ptr<GhostBlock_AutoGen> &GhostBlock_AutoGen::getInstance() const
+	const std::shared_ptr<GhostBlock_AutoGen> &GhostBlock_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	GhostBlock_AutoGen::GhostBlock_AutoGen()
-	{
 	}
 
 	GhostBlock_AutoGen::GhostBlock_AutoGen()

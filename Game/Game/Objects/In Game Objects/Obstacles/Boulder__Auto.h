@@ -5,53 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class TunnelFill;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-
-namespace CloudberryKingdom
-{
 	class Boulder_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -114,10 +67,8 @@ public:
 	private:
 		static const std::shared_ptr<Boulder_AutoGen> instance;
 	public:
-		const static std::shared_ptr<Boulder_AutoGen> &getInstance() const;
+		const static std::shared_ptr<Boulder_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static Boulder_AutoGen();
 	private:
 		Boulder_AutoGen();
 

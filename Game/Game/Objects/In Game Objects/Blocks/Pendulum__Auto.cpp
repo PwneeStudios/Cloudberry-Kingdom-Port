@@ -41,13 +41,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();
 
-	const std::shared_ptr<Pendulum_AutoGen> &Pendulum_AutoGen::getInstance() const
+	const std::shared_ptr<Pendulum_AutoGen> &Pendulum_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Pendulum_AutoGen::Pendulum_AutoGen()
-	{
 	}
 
 	Pendulum_AutoGen::Pendulum_AutoGen()

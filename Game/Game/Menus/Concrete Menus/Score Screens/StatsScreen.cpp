@@ -331,7 +331,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 		Header->Selectable = false;
 		ItemPos += HeaderPosAdd;
 
-		int NumDeathTypes = Tools->Length<Bob::BobDeathType>();
+		int NumDeathTypes = Tools->Length<BobDeathType>();
 		for ( int i = 1; i < NumDeathTypes; i++ )
 		{
 			Bob::BobDeathType type = static_cast<Bob::BobDeathType>( i );

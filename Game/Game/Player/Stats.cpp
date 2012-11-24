@@ -147,7 +147,7 @@ namespace CloudberryKingdom
 
 	PlayerStats::PlayerStats()
 	{
-		DeathsBy = std::vector<int>( Tools->Length<Bob::BobDeathType>() );
+		DeathsBy = std::vector<int>( Tools->Length<BobDeathType>() );
 
 		Clean();
 	}

@@ -2213,5 +2213,8 @@
     <ClInclude Include="Game\Objects\In Game Objects\Grab\MakeData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game\Player\Buyable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

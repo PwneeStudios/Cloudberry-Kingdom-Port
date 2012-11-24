@@ -178,7 +178,7 @@ int BobPhsxWheel::AnimIndex = 0;
 		AngleSpeed *= .75f;
 	}
 
-	void BobPhsxWheel::Die( Bob::BobDeathType DeathType )
+	void BobPhsxWheel::Die( BobDeathType DeathType )
 	{
 		if ( Bob::AllExplode )
 		{

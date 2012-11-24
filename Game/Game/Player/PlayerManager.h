@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class Awardment;
-}
-
-namespace CloudberryKingdom
-{
-	class Buyable;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
-
-namespace CloudberryKingdom
-{
 	class PlayerIntLambda : public LambdaFunc_1<PlayerData*, int>
 	{
 	public:
@@ -190,7 +157,7 @@ namespace CloudberryKingdom
 	private:
 		static int _CoinsSpent;
 	public:
-		const static int &getCoinsSpent() const;
+		const static int &getCoinsSpent();
 		static void setCoinsSpent( const int &value );
 
 		static std::shared_ptr<_SavePlayerData> SavePlayerData;
@@ -198,7 +165,7 @@ namespace CloudberryKingdom
 	private:
 		static std::wstring _DefaultName;
 	public:
-		const static std::wstring &getDefaultName() const;
+		const static std::wstring &getDefaultName();
 		static void setDefaultName( const std::wstring &value );
 #endif
 
@@ -283,24 +250,24 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players that exist and are logged in.
 		/// </summary>
-		const static std::vector<PlayerData*> &getLoggedInPlayers() const;
+		const static std::vector<PlayerData*> &getLoggedInPlayers();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 #endif
 		/// <summary>
 		/// A list of all players currently existing.
 		/// </summary>
-		const static std::vector<PlayerData*> &getExistingPlayers() const;
+		const static std::vector<PlayerData*> &getExistingPlayers();
 		static std::vector<PlayerData*> _ExistingPlayers;
 
 		/// <summary>
 		/// A list of all players currently alive.
 		/// </summary>
-		const static std::vector<PlayerData*> &getAlivePlayers() const;
+		const static std::vector<PlayerData*> &getAlivePlayers();
 		static std::vector<PlayerData*> _AlivePlayers;
 
 #if defined(PC_VERSION)
-		const static std::shared_ptr<PlayerData> &getPlayer() const;
+		const static std::shared_ptr<PlayerData> &getPlayer();
 #endif
 
 		static std::shared_ptr<PlayerData> Get( int i );

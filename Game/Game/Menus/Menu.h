@@ -5,66 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc_1;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class InstancePlusName;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc;
-}
-
-namespace CloudberryKingdom
-{
 	class Cast
 	{
 	private:

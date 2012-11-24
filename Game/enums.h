@@ -941,4 +941,113 @@ enum BoxStyle
 	BoxStyle_FULL_BOX
 };
 
+enum TimeTypes
+{
+	TimeTypes_UNSET,
+	TimeTypes_REGULAR,
+	TimeTypes_X_SYNC
+};
+
+enum Hero_BaseType
+{
+	Hero_BaseType_CLASSIC,
+	Hero_BaseType_BOX,
+	Hero_BaseType_WHEEL,
+	Hero_BaseType_BOUNCY,
+	Hero_BaseType_SPACESHIP,
+	Hero_BaseType_MEAT,
+	Hero_BaseType_ROCKET_BOX
+};
+
+enum Hero_Shape
+{
+	Hero_Shape_CLASSIC,
+	Hero_Shape_SMALL,
+	Hero_Shape_OSCILLATE,
+	Hero_Shape_BIG
+};
+
+enum Hero_MoveMod
+{
+	Hero_MoveMod_CLASSIC,
+	Hero_MoveMod_DOUBLE,
+	Hero_MoveMod_JETPACK,
+	Hero_MoveMod_INVERT
+};
+
+enum Hero_Special
+{
+	Hero_Special_CLASSIC,
+	Hero_Special_TIME
+};
+
+enum CapeType
+{
+	CapeType_NORMAL,
+	CapeType_SMALL,
+	CapeType_NONE
+};
+
+enum BobDeathType
+{
+	BobDeathType_NONE,
+	BobDeathType_FIREBALL,
+	BobDeathType_FIRESNAKE,
+	BobDeathType_FIRE_SPINNER,
+	BobDeathType_BOULDER,
+	BobDeathType_SPIKEY_GUY,
+	BobDeathType_SPIKE,
+	BobDeathType_FALL,
+	BobDeathType_LAVA,
+	BobDeathType_BLOB,
+	BobDeathType_LASER,
+	BobDeathType_LAVA_FLOW,
+	BobDeathType_FALLING_SPIKE,
+	BobDeathType_UNNAMED1,
+	BobDeathType_UNNAMED2,
+	BobDeathType_UNNAMED3,
+	BobDeathType_UNNAMED4,
+	BobDeathType_UNNAMED5,
+	BobDeathType_UNNAMED6,
+	BobDeathType_UNNAMED7,
+	BobDeathType_UNNAMED8,
+	BobDeathType_UNNAMED9,
+	BobDeathType_UNNAMED10,
+	BobDeathType_UNNAMED11,
+	BobDeathType_UNNAMED12,
+	BobDeathType_UNNAMED13,
+	BobDeathType_UNNAMED14,
+	BobDeathType_UNNAMED15,
+	BobDeathType_UNNAMED16,
+	BobDeathType_UNNAMED17,
+	BobDeathType_UNNAMED18,
+	BobDeathType_UNNAMED19,
+	BobDeathType_UNNAMED20,
+	BobDeathType_UNNAMED21,
+	BobDeathType_UNNAMED22,
+	BobDeathType_UNNAMED23,
+	BobDeathType_UNNAMED24,
+	BobDeathType_UNNAMED25,
+	BobDeathType_UNNAMED26,
+	BobDeathType_UNNAMED27,
+	BobDeathType_UNNAMED28,
+	BobDeathType_UNNAMED29,
+	BobDeathType_UNNAMED30,
+	BobDeathType_TIME,
+	BobDeathType_LEFT_BEHIND,
+	BobDeathType_OTHER,
+	BobDeathType_TOTAL
+};
+
+enum Camera_PhsxType
+{
+	Camera_PhsxType_FIXED,
+	Camera_PhsxType_SIDE_LEVEL_RIGHT,
+	Camera_PhsxType_SIDE_LEVEL_UP,
+	Camera_PhsxType_SIDE_LEVEL_DOWN,
+	Camera_PhsxType_CENTER,
+	Camera_PhsxType_SIDE_LEVEL_UP_RELAXED,
+	Camera_PhsxType_WORLD_MAP
+};
+
 #endif

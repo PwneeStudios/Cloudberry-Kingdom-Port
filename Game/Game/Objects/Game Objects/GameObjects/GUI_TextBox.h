@@ -5,47 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Multicaster;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class CharacterEventArgs;
-}
-
-namespace CloudberryKingdom
-{
-	class KeyEventArgs;
-}
-
-
-
-namespace CloudberryKingdom
-{
-#if defined(PC_VERSION)
-	class GUI_EnterName : public GUI_TextBox
-	{
-	public:
-		GUI_EnterName();
-
-		virtual void Enter();
-	};
-#endif
 
 	class GUI_TextBox : public GUI_Text
 	{
@@ -153,6 +112,16 @@ namespace CloudberryKingdom
 	private:
 		void InitializeInstanceFields();
 	};
+
+#if defined(PC_VERSION)
+	class GUI_EnterName : public GUI_TextBox
+	{
+	public:
+		GUI_EnterName();
+
+		virtual void Enter();
+	};
+#endif
 }
 
 

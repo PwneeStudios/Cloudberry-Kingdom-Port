@@ -369,7 +369,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 		MakeCape( MyCapeType );
 	}
 
-	void Bob::MakeCape( Cape::CapeType CapeType )
+	void Bob::MakeCape( CapeType CapeType )
 	{
 		if ( MyCape == 0 && !BoxesOnly && CanHaveCape )
 		{

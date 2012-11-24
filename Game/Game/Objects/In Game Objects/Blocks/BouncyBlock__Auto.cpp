@@ -31,13 +31,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
 
-	const std::shared_ptr<BouncyBlock_AutoGen> &BouncyBlock_AutoGen::getInstance() const
+	const std::shared_ptr<BouncyBlock_AutoGen> &BouncyBlock_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	BouncyBlock_AutoGen::BouncyBlock_AutoGen()
-	{
 	}
 
 	BouncyBlock_AutoGen::BouncyBlock_AutoGen()

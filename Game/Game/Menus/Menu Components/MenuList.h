@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuListExpand;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_2;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class MenuList : public MenuItem
 	{
 	private:

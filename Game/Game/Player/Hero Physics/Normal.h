@@ -244,7 +244,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 	public:
 		virtual bool ShouldStartJumpAnim();
 
-		virtual void SetDeathVel( Bob::BobDeathType DeathType );
+		virtual void SetDeathVel( BobDeathType DeathType );
 
 
 	protected:

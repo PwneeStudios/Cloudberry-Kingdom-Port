@@ -5,37 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class FlyingBlob;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class FlyingBlob_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -107,10 +76,8 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<FlyingBlob_AutoGen> instance;
 	public:
-		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance() const;
+		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static FlyingBlob_AutoGen();
 	private:
 		FlyingBlob_AutoGen();
 
@@ -128,9 +95,9 @@ namespace CloudberryKingdom
 
 		void Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Clean( array_Renamed<ObjectBase*, 2> *array_Renamed );
+		/*void Clean( array_Renamed<ObjectBase*, 2> *array_Renamed );
 		void Clean( array_Renamed<ObjectBase*, 2> *array_Renamed, int i, int j );
-		void CleanupTunnel( const std::shared_ptr<Level> &level );
+		void CleanupTunnel( const std::shared_ptr<Level> &level );*/
 
 	public:
 		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

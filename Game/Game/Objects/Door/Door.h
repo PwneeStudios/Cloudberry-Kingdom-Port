@@ -5,64 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class NormalBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class PressNote;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class Door : public ObjectBase, public ILevelConnector
 	{
 	public:

@@ -5,15 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-namespace CloudberryKingdom
-{
 	class MenuToggle : public MenuItem
 	{
 	public:

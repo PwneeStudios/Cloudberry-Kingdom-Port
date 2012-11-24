@@ -5,20 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-namespace CloudberryKingdom
-{
 	class MenuScrollBar : public MenuSlider
 	{
 	public:

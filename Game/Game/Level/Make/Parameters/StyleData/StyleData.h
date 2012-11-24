@@ -5,42 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Multicaster_2;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class Upgrades;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-namespace CloudberryKingdom
-{
 	class StyleData
 	{
 	public:
@@ -199,7 +163,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<StyleData> Clone();
 
 		float Zoom;
-		Level::TimeTypes TimeType;
+		TimeTypes TimeType;
 
 		bool SuppressCoins, SuppressCheckpoints;
 
@@ -330,11 +294,11 @@ namespace CloudberryKingdom
 		void SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const std::shared_ptr<PieceSeedData> &Piece );
 
 	public:
-		void SetSinglePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetSinglePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
 
-		void SetDoubePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetDoubePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
 
-		void SetTriplePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetTriplePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
 
 		void SuppressGroundCeiling( const std::shared_ptr<PieceSeedData> &piece );
 

@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	const std::wstring &ScoreEntry::getDefaultName() const
+	const std::wstring &ScoreEntry::getDefaultName()
 	{
 		return PlayerManager::GetGroupGamerTag( 18 );
 	}

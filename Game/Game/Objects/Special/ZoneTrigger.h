@@ -5,26 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	class ZoneTrigger : public ObjectBase
 	{
 	public:

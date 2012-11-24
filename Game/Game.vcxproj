@@ -683,6 +683,7 @@
     <ClInclude Include="Game\Objects\Special\ZoneTrigger.h" />
     <ClInclude Include="Game\Player\Awardments\Awardment.h" />
     <ClInclude Include="Game\Player\Awardments\AwardmentMessage.h" />
+    <ClInclude Include="Game\Player\Buyable.h" />
     <ClInclude Include="Game\Player\Cape.h" />
     <ClInclude Include="Game\Player\ClrTextFx.h" />
     <ClInclude Include="Game\Player\ColorScheme.h" />
@@ -785,7 +786,7 @@
       </PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS;PC_VERSION;WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -800,7 +801,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WINDOWS;PC_VERSION;WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

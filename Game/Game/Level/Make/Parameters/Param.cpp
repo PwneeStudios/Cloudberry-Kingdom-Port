@@ -4,7 +4,6 @@
 
 namespace CloudberryKingdom
 {
-
 	VectorParam::VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed )
 	{
 		X = Param( PieceSeed );
@@ -50,6 +49,14 @@ namespace CloudberryKingdom
 	{
 		val1 = value;
 		val2_IsSet = false;
+	}
+
+	Param::Param()
+	{
+		PieceSeed.reset();
+
+		val1 = val2 = 0;
+		val1_IsSet = val2_IsSet = false;
 	}
 
 	Param::Param( float val )

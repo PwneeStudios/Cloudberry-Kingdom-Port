@@ -39,13 +39,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_shared<Ceiling_AutoGen>();
 
-	const std::shared_ptr<Ceiling_AutoGen> &Ceiling_AutoGen::getInstance() const
+	const std::shared_ptr<Ceiling_AutoGen> &Ceiling_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	Ceiling_AutoGen::Ceiling_AutoGen()
-	{
 	}
 
 	Ceiling_AutoGen::Ceiling_AutoGen()

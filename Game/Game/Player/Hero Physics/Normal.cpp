@@ -1454,7 +1454,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		return DynamicGreaterThan( getyVel(), 10 ) && !OnGround && StartJumpAnim;
 	}
 
-	void BobPhsxNormal::SetDeathVel( Bob::BobDeathType DeathType )
+	void BobPhsxNormal::SetDeathVel( BobDeathType DeathType )
 	{
 		if ( MyBob->KillingObject != 0 )
 		{

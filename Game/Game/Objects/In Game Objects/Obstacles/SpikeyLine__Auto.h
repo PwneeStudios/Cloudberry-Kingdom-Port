@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class SpikeyLine_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -48,10 +27,8 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<SpikeyLine_AutoGen> instance;
 	public:
-		const static std::shared_ptr<SpikeyLine_AutoGen> &getInstance() const;
+		const static std::shared_ptr<SpikeyLine_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static SpikeyLine_AutoGen();
 	private:
 		SpikeyLine_AutoGen();
 

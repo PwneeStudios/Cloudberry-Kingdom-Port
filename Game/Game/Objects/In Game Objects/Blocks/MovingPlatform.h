@@ -86,7 +86,7 @@ public:
 	private:
 		BoxStyle MyBoxStyle;
 	public:
-		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle boxstyle );
+		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BoxStyle boxstyle );
 
 
 		virtual void Move( Vector2 shift );

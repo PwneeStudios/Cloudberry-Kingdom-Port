@@ -5,79 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Blobs;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
-	class GUI_BlobQuota : public GUI_Blobs
-	{
-	private:
-		class MyPhsxStepHelper : public Lambda
-		{
-		private:
-			std::shared_ptr<GUI_BlobQuota> blobQuota;
-
-		public:
-			MyPhsxStepHelper( const std::shared_ptr<GUI_BlobQuota> &blobQuota );
-
-			void Apply();
-		};
-
-	public:
-		int Quota;
-
-		GUI_BlobQuota( int Quota );
-
-	protected:
-		virtual int OutOf();
-
-	public:
-		std::shared_ptr<Lambda_1<GUI_Blobs*> > OnQuotaMet;
-		bool QuotaMet;
-
-	private:
-		std::shared_ptr<Door> FinalDoor;
-	public:
-		virtual void OnAdd();
-
-		virtual void Reset( bool BoxesOnly );
-
-	protected:
-		virtual void MyPhsxStep();
-
-	private:
-		void InitializeInstanceFields();
-	};
-
 	class GUI_Blobs : public GUI_Panel
 	{
 	private:
@@ -131,6 +58,46 @@ namespace CloudberryKingdom
 
 	public:
 		virtual void Reset( bool BoxesOnly );
+
+	private:
+		void InitializeInstanceFields();
+	};
+
+	class GUI_BlobQuota : public GUI_Blobs
+	{
+	private:
+		class MyPhsxStepHelper : public Lambda
+		{
+		private:
+			std::shared_ptr<GUI_BlobQuota> blobQuota;
+
+		public:
+			MyPhsxStepHelper( const std::shared_ptr<GUI_BlobQuota> &blobQuota );
+
+			void Apply();
+		};
+
+	public:
+		int Quota;
+
+		GUI_BlobQuota( int Quota );
+
+	protected:
+		virtual int OutOf();
+
+	public:
+		std::shared_ptr<Lambda_1<GUI_Blobs*> > OnQuotaMet;
+		bool QuotaMet;
+
+	private:
+		std::shared_ptr<Door> FinalDoor;
+	public:
+		virtual void OnAdd();
+
+		virtual void Reset( bool BoxesOnly );
+
+	protected:
+		virtual void MyPhsxStep();
 
 	private:
 		void InitializeInstanceFields();

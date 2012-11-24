@@ -59,13 +59,9 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make_shared<BlockEmitter_AutoGen>();
 
-	const std::shared_ptr<BlockEmitter_AutoGen> &BlockEmitter_AutoGen::getInstance() const
+	const std::shared_ptr<BlockEmitter_AutoGen> &BlockEmitter_AutoGen::getInstance()
 	{
 		return instance;
-	}
-
-	BlockEmitter_AutoGen::BlockEmitter_AutoGen()
-	{
 	}
 
 	BlockEmitter_AutoGen::BlockEmitter_AutoGen()

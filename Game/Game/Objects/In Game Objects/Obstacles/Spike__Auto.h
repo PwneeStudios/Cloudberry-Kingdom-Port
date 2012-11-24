@@ -6,43 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class Spike;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-
-namespace CloudberryKingdom
-{
 	class Spike_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -82,10 +45,8 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<Spike_AutoGen> instance;
 	public:
-		const static std::shared_ptr<Spike_AutoGen> &getInstance() const;
+		const static std::shared_ptr<Spike_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static Spike_AutoGen();
 	private:
 		Spike_AutoGen();
 

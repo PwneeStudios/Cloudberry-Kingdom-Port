@@ -5,36 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Listener;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc_1;
-}
-
-namespace CloudberryKingdom
-{
-	class GameObject;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
 	class InGameStartMenu : public CkBaseMenu
 	{
 	private:

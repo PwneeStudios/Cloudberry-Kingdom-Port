@@ -92,36 +92,6 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 	};
 
-	enum Hero_BaseType
-	{
-		Hero_BaseType_CLASSIC,
-		Hero_BaseType_BOX,
-		Hero_BaseType_WHEEL,
-		Hero_BaseType_BOUNCY,
-		Hero_BaseType_SPACESHIP,
-		Hero_BaseType_MEAT,
-		Hero_BaseType_ROCKET_BOX
-	};
-	enum Hero_Shape
-	{
-		Hero_Shape_CLASSIC,
-		Hero_Shape_SMALL,
-		Hero_Shape_OSCILLATE,
-		Hero_Shape_BIG
-	};
-	enum Hero_MoveMod
-	{
-		Hero_MoveMod_CLASSIC,
-		Hero_MoveMod_DOUBLE,
-		Hero_MoveMod_JETPACK,
-		Hero_MoveMod_INVERT
-	};
-	enum Hero_Special
-	{
-		Hero_Special_CLASSIC,
-		Hero_Special_TIME
-	};
-
 	class BobPhsx
 	{
 	public:
@@ -259,7 +229,7 @@ namespace CloudberryKingdom
 
 	public:
 		std::shared_ptr<Bob> Prototype;
-		Cape::CapeType CapePrototype;
+		CapeType CapePrototype;
 		Vector2 CapeOffset;
 		Vector2 CapeOffset_Ducking;
 		Vector2 CapeGravity;
@@ -440,7 +410,7 @@ namespace CloudberryKingdom
 		int LastUsedStamp;
 		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
 
-		virtual void Die( Bob::BobDeathType DeathType );
+		virtual void Die( BobDeathType DeathType );
 
 		bool SkipInteraction( const std::shared_ptr<BlockBase> &block );
 
@@ -454,7 +424,7 @@ namespace CloudberryKingdom
 
 		virtual bool IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
 
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
 

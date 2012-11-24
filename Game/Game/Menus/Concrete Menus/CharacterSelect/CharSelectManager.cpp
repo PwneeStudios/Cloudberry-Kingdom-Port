@@ -53,7 +53,7 @@ std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel = 0;
 
 const std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
 
-	const std::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance() const
+	const std::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
 	{
 		return instance;
 	}

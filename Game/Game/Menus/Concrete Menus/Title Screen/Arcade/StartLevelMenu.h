@@ -5,26 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
 	class LevelItem : public MenuItem
 	{
 	public:

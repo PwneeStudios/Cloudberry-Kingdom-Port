@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Door;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class PressNote : public GUI_Text
 	{
 	public:

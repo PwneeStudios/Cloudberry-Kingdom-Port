@@ -781,7 +781,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 	{
 	}
 
-	void BobPhsx::Die( Bob::BobDeathType DeathType )
+	void BobPhsx::Die( BobDeathType DeathType )
 	{
 	}
 

@@ -43,10 +43,8 @@ public:
 	private:
 		static const std::shared_ptr<Serpent_AutoGen> instance;
 	public:
-		const static std::shared_ptr<Serpent_AutoGen> &getInstance() const;
+		const static std::shared_ptr<Serpent_AutoGen> &getInstance();
 
-//C# TO C++ CONVERTER TODO TASK: Static constructors are not allowed in native C++:
-		static Serpent_AutoGen();
 	private:
 		Serpent_AutoGen();
 

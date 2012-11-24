@@ -5,19 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class GUI_Timer : public GUI_Timer_Base
 	{
 	private:

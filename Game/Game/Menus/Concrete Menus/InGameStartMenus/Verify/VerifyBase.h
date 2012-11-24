@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Multicaster_1;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
 	class VerifyBaseMenu : public CkBaseMenu
 	{
 		/// <summary>

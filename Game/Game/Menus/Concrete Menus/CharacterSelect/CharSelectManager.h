@@ -3,71 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace GamerServices
-			{
-				class SignedInEventArgs;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class CharacterSelect;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Set;
-}
-
-namespace CloudberryKingdom
-{
-	class Hat;
-}
-
-namespace CloudberryKingdom
-{
-	class CharSelectBackdrop;
-}
-
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
-
-
 namespace CloudberryKingdom
 {
 	class CharacterSelectManager : public ViewReadWrite
@@ -115,7 +50,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<CharacterSelectManager> instance;
 	public:
-		const static std::shared_ptr<CharacterSelectManager> &getInstance() const;
+		const static std::shared_ptr<CharacterSelectManager> &getInstance();
 
 		static std::vector<CharacterSelect*> CharSelect;
 		static bool IsShowing;

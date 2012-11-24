@@ -5,57 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectIcon;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda_1;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-
-namespace CloudberryKingdom
-{
 	//public delegate void MenuItemGo(MenuItem item);
 	class MenuItem : public ViewReadWrite
 	{

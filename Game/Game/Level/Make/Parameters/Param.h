@@ -16,29 +16,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class VectorParam
-	{
-	public:
-		Param X, Y;
-
-		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed );
-
-		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v );
-
-		void SetVal( Vector2 v );
-
-		Vector2 GetVal();
-
-		Vector2 GetVal( Vector2 Pos );
-
-		/// <summary>
-		/// Assuming the top and bottom values of the vector are ranges of a value,
-		/// this method returns a randomly chosen value in that range.
-		/// </summary>
-		/// <returns></returns>
-		float RndFloat( Vector2 Pos, const std::shared_ptr<Rand> &Rnd );
-	};
-
 	class Param
 	{
 	private:
@@ -49,6 +26,8 @@ namespace CloudberryKingdom
 	public:
 		const float &getVal() const;
 		void setVal( const float &value );
+
+		Param();
 
 		Param( float val );
 
@@ -91,6 +70,31 @@ namespace CloudberryKingdom
 		//{
 		//    return new Param(val);
 		//}
+	};
+
+	class VectorParam
+	{
+	public:
+		Param X, Y;
+
+		VectorParam() { }
+
+		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed );
+
+		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v );
+
+		void SetVal( Vector2 v );
+
+		Vector2 GetVal();
+
+		Vector2 GetVal( Vector2 Pos );
+
+		/// <summary>
+		/// Assuming the top and bottom values of the vector are ranges of a value,
+		/// this method returns a randomly chosen value in that range.
+		/// </summary>
+		/// <returns></returns>
+		float RndFloat( Vector2 Pos, const std::shared_ptr<Rand> &Rnd );
 	};
 }
 

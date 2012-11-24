@@ -13,16 +13,6 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class GUI_CampaignLevel : public GUI_Level
-	{
-	public:
-		GUI_CampaignLevel();
-
-		virtual void OnAdd();
-
-		virtual std::wstring ToString();
-	};
-
 	class GUI_Level : public GUI_Panel
 	{
 	public:
@@ -70,6 +60,16 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
+	};
+
+	class GUI_CampaignLevel : public GUI_Level
+	{
+	public:
+		GUI_CampaignLevel();
+
+		virtual void OnAdd();
+
+		virtual std::wstring ToString();
 	};
 }
 
