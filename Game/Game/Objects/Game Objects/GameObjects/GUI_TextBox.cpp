@@ -49,8 +49,9 @@ namespace CloudberryKingdom
 	#if defined(WINDOWS)
 		KeyboardExtension::FreezeInput();
 
-		EventInput::CharEntered += std::make_shared<CharEnteredHandler>( this, &GUI_TextBox::CharEntered );
-		EventInput::KeyDown += std::make_shared<KeyEventHandler>( this, &GUI_TextBox::KeyDown );
+		// FIXME: Reimplement this using something similar.
+		//EventInput::CharEntered += std::make_shared<CharEnteredHandler>( this, &GUI_TextBox::CharEntered );
+		//EventInput::KeyDown += std::make_shared<KeyEventHandler>( this, &GUI_TextBox::KeyDown );
 	#endif
 	}
 
@@ -63,8 +64,9 @@ namespace CloudberryKingdom
 	#if defined(WINDOWS)
 		KeyboardExtension::UnfreezeInput();
 
-		EventInput::CharEntered -= CharEntered;
-		EventInput::KeyDown -= KeyDown;
+		// FIXME: As above.
+		//EventInput::CharEntered -= CharEntered;
+		//EventInput::KeyDown -= KeyDown;
 	#endif
 	}
 
@@ -311,7 +313,8 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	void GUI_TextBox::CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e )
+	// FIXME: Related to removal of TextInput.
+	/*void GUI_TextBox::CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e )
 	{
 		if ( !Active )
 			return;
@@ -323,7 +326,7 @@ namespace CloudberryKingdom
 			MyText->AppendText( e->getCharacter() );
 			Recenter();
 		}
-	}
+	}*/
 #endif
 
 #if defined(WINDOWS)
@@ -359,7 +362,8 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	void GUI_TextBox::KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e )
+	// FIXME: Related to removal of TextInput.
+	/*void GUI_TextBox::KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e )
 	{
 		if ( !Active )
 			return;
@@ -368,7 +372,7 @@ namespace CloudberryKingdom
 			Backspace();
 		if ( e->getKeyCode() == Keys::Enter )
 			Enter();
-	}
+	}*/
 #endif
 
 	void GUI_TextBox::Backspace()

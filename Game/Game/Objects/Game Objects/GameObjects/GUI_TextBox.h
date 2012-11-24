@@ -78,7 +78,8 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	private:
-		void CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e );
+		// FIXME: Related to removal of TextInput.
+		//void CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e );
 
 		bool IsAcceptableChar( wchar_t c );
 #endif
@@ -95,7 +96,8 @@ namespace CloudberryKingdom
 		void Recenter();
 
 #if defined(WINDOWS)
-		void KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e );
+		// FIXME: Related to removal of TextInput.
+		//void KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e );
 #endif
 
 		void Backspace();

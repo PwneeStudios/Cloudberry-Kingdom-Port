@@ -912,9 +912,6 @@
     <ClCompile Include="Game\Tools\Resources.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Tools\TextInput.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Tools\ThreadHelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1998,9 +1995,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Tools\Resources.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Tools\TextInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Tools\ThreadHelper.h">

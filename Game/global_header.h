@@ -426,7 +426,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Tools/Prototypes.h"
 #include "Game/Tools/Recycler.h"
 #include "Game/Tools/Resources.h"
-#include "Game/Tools/TextInput.h"
 #include "Game/Tools/ThreadHelper.h"
 #include "Game/Tools/Tools.h"
 #include "Game/Tools/Unset.h"
