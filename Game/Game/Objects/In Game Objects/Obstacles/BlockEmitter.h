@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		virtual void Move( Vector2 shift );
 
 	private:
-		BlockEmitter_Parameters::BoxStyle MyBoxStyle;
+		BoxStyle MyBoxStyle;
 	public:
 		void Init( Vector2 pos, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle MyBoxStyle );
 

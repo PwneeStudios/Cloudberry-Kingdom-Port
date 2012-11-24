@@ -935,4 +935,10 @@ enum LadderType
 	LadderType_MAKE_PLAT
 };
 
+enum BoxStyle
+{
+	BoxStyle_TOP_ONLY,
+	BoxStyle_FULL_BOX
+};
+
 #endif

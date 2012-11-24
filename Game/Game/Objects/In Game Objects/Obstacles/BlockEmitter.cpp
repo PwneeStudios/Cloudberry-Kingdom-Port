@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 		EmitData.Position += shift;
 	}
 
-	void BlockEmitter::Init( Vector2 pos, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle MyBoxStyle )
+	void BlockEmitter::Init( Vector2 pos, const std::shared_ptr<Level> &level, BoxStyle MyBoxStyle )
 	{
 		ObjectBase::Init( pos, level );
 

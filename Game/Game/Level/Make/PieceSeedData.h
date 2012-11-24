@@ -42,8 +42,8 @@ namespace CloudberryKingdom
 		int Paths;
 		bool LockNumOfPaths;
 
-		Level::LadderType Ladder;
-		BlockEmitter_Parameters::BoxStyle ElevatorBoxStyle;
+		LadderType Ladder;
+		BoxStyle ElevatorBoxStyle;
 
 		std::shared_ptr<PieceSeedData> PieceSeed; // Used if this is a platform used for making new platforms
 

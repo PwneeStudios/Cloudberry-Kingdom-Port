@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 			return 2;
 	}
 
-	Level::LadderType RndDifficulty::ChooseLadder( int Difficulty )
+	LadderType RndDifficulty::ChooseLadder( int Difficulty )
 	{
 		//if (Difficulty < 30)
 		//    return Level.LadderType.Simple2;

@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 	public:
 		static int ChoosePaths( const std::shared_ptr<PieceSeedData> &data );
 
-		static Level::LadderType ChooseLadder( int Difficulty );
+		static LadderType ChooseLadder( int Difficulty );
 
 		static void ZeroUpgrades( const std::shared_ptr<Upgrades> &upgrades );
 

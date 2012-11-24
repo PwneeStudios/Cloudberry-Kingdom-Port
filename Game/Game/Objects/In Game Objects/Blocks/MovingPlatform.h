@@ -84,7 +84,7 @@ public:
 		MovingPlatform( bool BoxesOnly );
 
 	private:
-		BlockEmitter_Parameters::BoxStyle MyBoxStyle;
+		BoxStyle MyBoxStyle;
 	public:
 		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle boxstyle );
 

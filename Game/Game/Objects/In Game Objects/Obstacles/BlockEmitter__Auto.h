@@ -33,13 +33,6 @@ namespace CloudberryKingdom
 	class BlockEmitter_Parameters : public AutoGen_Parameters
 	{
 	public:
-		enum BoxStyle
-		{
-			BoxStyle_TOP_ONLY,
-			BoxStyle_FULL_BOX
-		};
-
-	public:
 		enum Style
 		{
 			Style_FULL,

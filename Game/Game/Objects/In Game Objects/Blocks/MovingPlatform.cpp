@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		MakeNew();
 	}
 
-	void MovingPlatform::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BlockEmitter_Parameters::BoxStyle boxstyle )
+	void MovingPlatform::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BoxStyle boxstyle )
 	{
 		MyBoxStyle = boxstyle;
 
