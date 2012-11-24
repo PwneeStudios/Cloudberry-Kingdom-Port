@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance = std::make_shared<BobPhsxDouble>();
 
-	const std::shared_ptr<BobPhsxDouble> &BobPhsxDouble::getInstance() const
+	const std::shared_ptr<BobPhsxDouble> &BobPhsxDouble::getInstance()
 	{
 		return instance;
 	}

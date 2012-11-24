@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxNormal> instance;
 	public:
-		const static std::shared_ptr<BobPhsxNormal> &getInstance() const;
+		const static std::shared_ptr<BobPhsxNormal> &getInstance();
 
 		// Instancable class
 	private:
@@ -251,7 +251,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 		void Explode();
 
 	public:
-		virtual void Die( Bob::BobDeathType DeathType );
+		virtual void Die( BobDeathType DeathType );
 
 		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 

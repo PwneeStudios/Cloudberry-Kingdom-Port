@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxInvert> instance;
 	public:
-		const static std::shared_ptr<BobPhsxInvert> &getInstance() const;
+		const static std::shared_ptr<BobPhsxInvert> &getInstance();
 
 		// Instancable class
 		BobPhsxInvert();
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		virtual void PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData );
 
 	public:
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
 

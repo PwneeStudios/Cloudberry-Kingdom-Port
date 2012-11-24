@@ -235,10 +235,10 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 		return obj;
 	}
 
-	std::shared_ptr < ObjectBase *Recycler::operator []( ObjectType type, bool BoxesOnly )
+	/*std::shared_ptr <ObjectBase> Recycler::operator []( ObjectType type, bool BoxesOnly )
 	{
 		return GetObject( type, BoxesOnly );
-	}
+	}*/
 
 	std::shared_ptr<ObjectBase> Recycler::GetObject( ObjectType type, bool BoxesOnly )
 	{

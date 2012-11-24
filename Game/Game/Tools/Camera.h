@@ -153,13 +153,13 @@ namespace CloudberryKingdom
 
 		static bool DisableOscillate;
 
-		PhsxType MyPhsxType;
+		Camera_PhsxType MyPhsxType;
 	private:
 		float t;
 	public:
 		void PhsxStep();
 
-		void SetPhsxType( PhsxType NewType );
+		void SetPhsxType( Camera_PhsxType NewType );
 
 		void Fixed_PhsxStep();
 

@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxSpaceship : public BobPhsx
 	{
 	public:
@@ -49,7 +16,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxSpaceship> instance;
 	public:
-		const static std::shared_ptr<BobPhsxSpaceship> &getInstance() const;
+		const static std::shared_ptr<BobPhsxSpaceship> &getInstance();
 
 		// Instancable class
 	private:
@@ -98,7 +65,7 @@ namespace CloudberryKingdom
 
 		virtual void BlockInteractions();
 
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
 

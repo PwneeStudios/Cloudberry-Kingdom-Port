@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance = std::make_shared<BobPhsxWheel>();
 
-	const std::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance() const
+	const std::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance()
 	{
 		return instance;
 	}
@@ -188,7 +188,7 @@ int BobPhsxWheel::AnimIndex = 0;
 		SetDeathVel( DeathType );
 	}
 
-	void BobPhsxWheel::ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxWheel::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 

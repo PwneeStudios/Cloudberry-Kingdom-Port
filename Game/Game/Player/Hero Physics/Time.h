@@ -5,32 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxTime : public BobPhsxNormal
 	{
 	private:
@@ -45,7 +19,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxTime> instance;
 	public:
-		const static std::shared_ptr<BobPhsxTime> &getInstance() const;
+		const static std::shared_ptr<BobPhsxTime> &getInstance();
 
 		// Instancable class
 		BobPhsxTime();
@@ -65,7 +39,7 @@ namespace CloudberryKingdom
 	public:
 		virtual void GenerateInput( int CurPhsxStep );
 
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 	private:
 		void InitializeInstanceFields();

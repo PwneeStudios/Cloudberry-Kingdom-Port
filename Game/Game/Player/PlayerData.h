@@ -5,57 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class SavedSeeds;
-}
-
-namespace CloudberryKingdom
-{
-	class Set;
-}
-
-namespace CloudberryKingdom
-{
-	class ScoreEntry;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerStats;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace GamerServices
-			{
-				class Gamer;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
-
-
-namespace CloudberryKingdom
-{
 	class PlayerData : public SaveLoad
 	{
 	public:

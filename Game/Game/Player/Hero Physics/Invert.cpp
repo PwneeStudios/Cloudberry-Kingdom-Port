@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<BobPhsxInvert>();
 
-	const std::shared_ptr<BobPhsxInvert> &BobPhsxInvert::getInstance() const
+	const std::shared_ptr<BobPhsxInvert> &BobPhsxInvert::getInstance()
 	{
 		return instance;
 	}
@@ -218,7 +218,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 		// Do nothing
 	}
 
-	void BobPhsxInvert::ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxInvert::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 

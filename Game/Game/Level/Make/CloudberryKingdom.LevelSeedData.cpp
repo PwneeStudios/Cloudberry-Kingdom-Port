@@ -236,7 +236,7 @@ bool LevelSeedData::NoDoublePaths = true;
 			cam->Update();
 
 
-			std::shared_ptr<MakeData> makeData = std::make_shared<Level.MakeData>();
+			std::shared_ptr<MakeData> makeData = std::make_shared<MakeData>();
 			makeData->LevelSeed = this;
 			makeData->PieceSeed = *Piece;
 			makeData->GenData = ( *Piece )->MyGenData;

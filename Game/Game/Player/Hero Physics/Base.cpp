@@ -822,7 +822,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return Col == ColType_BOTTOM || Col != ColType_BOTTOM && getCore()->Data.Velocity.X != 0 && !OnGround && __min(MyBob->Box->Current->TR.Y, MyBob->Box->Target->TR.Y) < box->Target->BL.Y + __max(1.35 * getCore()->Data.Velocity.Y, 7);
 	}
 
-	void BobPhsx::ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsx::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
 	{
 	}
 

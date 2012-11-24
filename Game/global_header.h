@@ -12,6 +12,7 @@ class DisplayMode;
 class Effect;
 class EffectParameter;
 class EffectTechnique;
+class FileStream;
 class Game;
 class GameTime;
 class GraphicsDevice;
@@ -37,6 +38,7 @@ class StreamReader;
 class StreamWriter;
 class StringBuilder;
 class Texture2D;
+class Thread;
 template<class A, class B> class Tuple;
 class Video;
 class VideoPlayer;
@@ -386,6 +388,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Player/Stats.h"
 #include "Game/Player/Awardments/Awardment.h"
 #include "Game/Player/Awardments/AwardmentMessage.h"
+#include "Game/Player/Hero Physics/Normal.h"
 #include "Game/Player/Hero Physics/Big.h"
 #include "Game/Player/Hero Physics/BobPhsxCharSelect.h"
 #include "Game/Player/Hero Physics/Bouncy.h"
@@ -394,7 +397,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Player/Hero Physics/Invert.h"
 #include "Game/Player/Hero Physics/Jetman.h"
 #include "Game/Player/Hero Physics/Meat.h"
-#include "Game/Player/Hero Physics/Normal.h"
 #include "Game/Player/Hero Physics/Random.h"
 #include "Game/Player/Hero Physics/Rocketbox.h"
 #include "Game/Player/Hero Physics/Scale.h"
@@ -404,12 +406,12 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Player/Hero Physics/Wheel.h"
 #include "Game/Tilesets/BlockGroup.h"
 #include "Game/Tilesets/SpriteInfo.h"
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/Background.h"
 #include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
 #include "Game/Tilesets/Backgrounds/BackgroundFloater_Stationary.h"
-#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/_Code/_code_Castle.h"
 #include "Game/Tilesets/Backgrounds/_Code/_code_Cave.h"
 #include "Game/Tilesets/Backgrounds/_Code/_code_Cloud.h"

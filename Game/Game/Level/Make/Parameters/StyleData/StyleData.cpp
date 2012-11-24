@@ -175,7 +175,7 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 		}
 	}
 
-	void StyleData::SetSinglePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetSinglePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
 	{
 		SetStartType( makeData->Start[ 0 ], makeData->CheckpointShift[ 0 ], Bob1Start, Piece );
 
@@ -203,7 +203,7 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 		}
 	}
 
-	void StyleData::SetDoubePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetDoubePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
 	{
 		if ( DoublePathType == _DoublePathType_INDEPENDENT )
 			DoublePathType = _DoublePathType_GAP;
@@ -252,7 +252,7 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 		}
 	}
 
-	void StyleData::SetTriplePathType( const std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetTriplePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
 	{
 		if ( TriplePathType == _TriplePathType_INDEPENDENT )
 			TriplePathType = _TriplePathType_SEPARATED;

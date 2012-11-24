@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<BobPhsxBouncy>();
 
-	const std::shared_ptr<BobPhsxBouncy> &BobPhsxBouncy::getInstance() const
+	const std::shared_ptr<BobPhsxBouncy> &BobPhsxBouncy::getInstance()
 	{
 		return instance;
 	}

@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxMeat> instance;
 	public:
-		const static std::shared_ptr<BobPhsxMeat> &getInstance() const;
+		const static std::shared_ptr<BobPhsxMeat> &getInstance();
 
 		// Instancable class
 		BobPhsxMeat();
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
 
 		virtual bool IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
 
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 	private:
 		void InitializeInstanceFields();

@@ -3,18 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class GameWindow;
-		}
-	}
-}
-
-
 #if defined(WINDOWS)
 
 

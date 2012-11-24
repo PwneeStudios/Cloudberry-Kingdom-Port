@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxSmall> instance;
 	public:
-		const static std::shared_ptr<BobPhsxSmall> &getInstance() const;
+		const static std::shared_ptr<BobPhsxSmall> &getInstance();
 
 		// Instancable class
 		BobPhsxSmall();

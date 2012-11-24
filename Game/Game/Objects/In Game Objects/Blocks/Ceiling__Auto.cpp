@@ -59,7 +59,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 
 	void Ceiling_AutoGen::MakeLongCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<NormalBlock> cblock = static_cast<NormalBlock*>( level->getRecycle()[ ObjectType_NORMAL_BLOCK ][ true ] );
+		std::shared_ptr<NormalBlock> cblock = static_cast<NormalBlock*>( level->getRecycle()->GetObject( ObjectType_NORMAL_BLOCK, true ) );
 		Vector2 size = TR - BL + Vector2( 4000, 0 );
 		Vector2 pos = ( TR + BL ) / 2 + Vector2( 0, 500 );
 		cblock->Init( pos, size, level->getMyTileSetInfo() );

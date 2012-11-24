@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance = std::make_shared<BobPhsxJetman>();
 
-	const std::shared_ptr<BobPhsxJetman> &BobPhsxJetman::getInstance() const
+	const std::shared_ptr<BobPhsxJetman> &BobPhsxJetman::getInstance()
 	{
 		return instance;
 	}

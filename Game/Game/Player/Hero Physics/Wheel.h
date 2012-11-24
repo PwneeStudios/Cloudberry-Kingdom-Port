@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnim;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxWheel : public BobPhsxNormal
 	{
 		// Singleton
@@ -46,7 +13,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxWheel> instance;
 	public:
-		const static std::shared_ptr<BobPhsxWheel> &getInstance() const;
+		const static std::shared_ptr<BobPhsxWheel> &getInstance();
 
 		// Instancable class
 	private:
@@ -90,7 +57,7 @@ namespace CloudberryKingdom
 
 		virtual void Die( BobDeathType DeathType );
 
-		virtual void ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
 

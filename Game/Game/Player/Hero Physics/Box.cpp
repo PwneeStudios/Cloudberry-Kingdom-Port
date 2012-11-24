@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhsxBox>();
 
-	const std::shared_ptr<BobPhsxBox> &BobPhsxBox::getInstance() const
+	const std::shared_ptr<BobPhsxBox> &BobPhsxBox::getInstance()
 	{
 		return instance;
 	}

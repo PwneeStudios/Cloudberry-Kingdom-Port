@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxBig : public BobPhsxNormal
 	{
 	public:
@@ -24,7 +16,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxBig> instance;
 	public:
-		const static std::shared_ptr<BobPhsxBig> &getInstance() const;
+		const static std::shared_ptr<BobPhsxBig> &getInstance();
 
 		// Instancable class
 		BobPhsxBig();

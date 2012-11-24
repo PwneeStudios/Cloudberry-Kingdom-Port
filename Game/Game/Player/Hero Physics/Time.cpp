@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobPhsxTime>();
 
-	const std::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance() const
+	const std::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance()
 	{
 		return instance;
 	}
@@ -96,7 +96,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 		}
 	}
 
-	void BobPhsxTime::ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxTime::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 

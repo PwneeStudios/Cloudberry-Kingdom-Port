@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobPhsxMeat>();
 
-	const std::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance() const
+	const std::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance()
 	{
 		return instance;
 	}
@@ -415,7 +415,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		return Col == ColType_BOTTOM;
 	}
 
-	void BobPhsxMeat::ModData( std::shared_ptr<Level.MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxMeat::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 

@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<ObjectBase> GetNewObject( ObjectType type, bool BoxesOnly );
 
-		std::shared_ptr < ObjectBase *operator []( ObjectType type, bool BoxesOnly );
+		//std::shared_ptr<ObjectBase> operator []( ObjectType type, bool BoxesOnly );
 
 		std::shared_ptr<ObjectBase> GetObject( ObjectType type, bool BoxesOnly );
 
