@@ -22,12 +22,12 @@ namespace CloudberryKingdom
 
 	void ViewReadWrite::Write( const std::shared_ptr<StreamWriter> &writer )
 	{
-		Tools::WriteFields( this, writer, GetViewables() );
+		//Tools::WriteFields( this, writer, GetViewables() );
 	}
 
 	void ViewReadWrite::Read( const std::shared_ptr<StreamReader> &reader )
 	{
-		Tools::ReadFields( this, reader );
+		//Tools::ReadFields( this, reader );
 	}
 
 	void ViewReadWrite::WriteCode( const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer )

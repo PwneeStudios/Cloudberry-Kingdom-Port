@@ -48,7 +48,7 @@ bool KeyboardExtension::Freeze = false;
 
 	void ButtonStatistics::InitializeInstanceFields()
 	{
-		_DownCount = std::vector<int>( Tools->Length<ControllerButtons>() );
+		_DownCount = std::vector<int>( ControllerButtons_LENGTH );
 	}
 
 std::vector<ButtonStatistics*> ButtonStats::Controller = 0;

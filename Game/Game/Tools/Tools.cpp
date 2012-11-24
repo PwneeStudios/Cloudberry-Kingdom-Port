@@ -34,17 +34,6 @@ template<typename T> where T : IComparable
 		return std::wstring::Format( _T( "{0}, {1}" ), v.X, v.Y );
 	}
 
-	std::vector<Vector2> Vector2Extension::Map( std::vector<Vector2> list, Func<Vector2, Vector2> map )
-	{
-		std::vector<Vector2> product = std::vector<Vector2>( list.size() );
-		list.CopyTo( product, 0 );
-
-		for ( int i = 0; i < list.size(); i++ )
-			product[ i ] = map( product[ i ] );
-
-		return product;
-	}
-
 	bool Vector2Extension::LE( Vector2 v1, Vector2 v2 )
 	{
 		if ( v1.X <= v2.X && v1.Y <= v2.Y )
@@ -113,16 +102,6 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	}
 
 template<typename T>
-	Microsoft::Xna::Framework::Vector2 ListExtension::Sum( std::vector<T> &list, Func<T, Vector2> map )
-	{
-		Vector2 sum = Vector2::Zero;
-		for ( std::vector<T>::const_iterator item = list.begin(); item != list.end(); ++item )
-			sum += map( *item );
-
-		return sum;
-	}
-
-template<typename T>
 	T ListExtension::Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd )
 	{
 		return list[ rnd->RndInt( 0, list.size() - 1 ) ];
@@ -138,70 +117,6 @@ template<typename T>
 			return list[ rnd->RndInt( 0, list.size() - 1 ) ];
 	}
 
-template<typename T>
-	int ListExtension::IndexOf( std::vector<T> &list, Predicate<T> match )
-	{
-		return list.find( list.Find( match ) );
-	}
-
-#if defined(XBOX)
-template<typename T>
-	T ListExtension::Find( std::vector<T> &list, Predicate<T> func )
-	{
-		for ( std::vector<T>::const_iterator item = list.begin(); item != list.end(); ++item )
-		{
-			if ( func( *item ) )
-				return item;
-		}
-
-		return T();
-	}
-#endif
-
-#if defined(XBOX)
-template<typename T>
-	std::vector<T> ListExtension::FindAll( std::vector<T> &list, Predicate<T> func )
-	{
-		std::vector<T> matches = std::vector<T>();
-
-		for ( std::vector<T>::const_iterator item = list.begin(); item != list.end(); ++item )
-		{
-			if ( func( *item ) )
-				matches.push_back( *item );
-		}
-
-		return matches;
-	}
-#endif
-
-#if defined(XBOX)
-template<typename T>
-	int ListExtension::FindIndex( std::vector<T> &list, Predicate<T> func )
-	{
-		for ( int i = 0; i < list.size(); i++ )
-		{
-			if ( func( list[ i ] ) )
-				return i;
-		}
-
-		return -1;
-	}
-#endif
-
-#if defined(XBOX)
-template<typename T>
-	bool ListExtension::Exists( std::vector<T> &list, Predicate<T> func )
-	{
-		for ( std::vector<T>::const_iterator item = list.begin(); item != list.end(); ++item )
-		{
-			if ( func( *item ) )
-				return true;
-		}
-
-		return false;
-	}
-#endif
-
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
 template<typename T, typename S> where T : class where S : class
 	void ListExtension::AddRangeAndConvert( std::vector<T> &list, std::vector<S> &range )
@@ -210,30 +125,6 @@ template<typename T, typename S> where T : class where S : class
 			list.push_back( dynamic_cast<T*>( *s ) );
 	}
 
-template<typename T>
-	std::vector<T> ArrayExtension::Range( array_Renamed<T> *array_Renamed, int StartIndex, int EndIndex )
-	{
-		// Make sure we don't extend past the end of the array
-		EndIndex = __min( EndIndex, array_Renamed.size() - 1 );
-
-		// Create a new array to store the range
-		std::vector<T> range = std::vector<T>( EndIndex - StartIndex + 1 );
-
-		for ( int i = StartIndex; i <= EndIndex; i++ )
-			range[ i - StartIndex ] = array_Renamed[ i ];
-
-		return range;
-	}
-
-template<typename TKey, typename TValue>
-	void DictionaryExtension::RemoveAll( std::map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition )
-	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( unknown::const_iterator cur = dict.Where( condition )->ToList().begin(); cur != dict.Where(condition)->ToList().end(); ++cur )
-		{
-			dict.erase( ( *cur )->Key );
-		}
-	}
 
 template<typename TKey, typename TValue>
 	void DictionaryExtension::AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value )
@@ -431,12 +322,12 @@ template<typename TSource>
 	}
 
 template<typename TSource>
-	TSource Tools::ArgMin( const std::shared_ptr<IEnumerable<TSource> > &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+	TSource Tools::ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 	{
 		TSource min = TSource();
 		float minval = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( IEnumerable<TSource>::const_iterator item = source->begin(); item != source->end(); ++item )
+		for ( std::vector<TSource>:const_iterator item = source.begin(); item != source.end(); ++item )
 			if ( min == 0 || val->Apply( *item ) < minval )
 			{
 				minval = val->Apply( *item );
@@ -447,12 +338,12 @@ template<typename TSource>
 	}
 
 template<typename TSource>
-	TSource Tools::ArgMax( const std::shared_ptr<IEnumerable<TSource> > &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+	TSource Tools::ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 	{
 		TSource max = TSource();
 		float maxval = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( IEnumerable<TSource>::const_iterator item = source->begin(); item != source->end(); ++item )
+		for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
 			if ( max == 0 || val->Apply( *item ) > maxval )
 			{
 				maxval = val->Apply( *item );
@@ -480,7 +371,7 @@ template<typename TSource>
 
 float Tools::_VolumeFade = 0;
 
-	const float &Tools::getVolumeFade() const
+	const float &Tools::getVolumeFade()
 	{
 		return _VolumeFade;
 	}
@@ -498,7 +389,7 @@ bool Tools::WindowBorder = true;
 std::shared_ptr<XnaGameClass> Tools::GameClass = 0;
 std::shared_ptr<CloudberryKingdomGame> Tools::TheGame = 0;
 
-	const Version &Tools::getGameVersion() const
+	const Version &Tools::getGameVersion()
 	{
 		return CloudberryKingdomGame::GameVersion;
 	}
@@ -517,7 +408,7 @@ std::shared_ptr<GameData> Tools::CurGameData = 0;
 std::shared_ptr<Level> Tools::CurLevel = 0;
 std::shared_ptr<Camera> Tools::DummyCamera = 0;
 
-	const std::shared_ptr<Camera> &Tools::getCurCamera() const
+	const std::shared_ptr<Camera> &Tools::getCurCamera()
 	{
 		if ( CurLevel == 0 )
 		{
@@ -556,7 +447,7 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	const Microsoft::Xna::Framework::Vector2 &Tools::getMousePos() const
+	const Microsoft::Xna::Framework::Vector2 &Tools::getMousePos()
 	{
 		return Vector2( Mouse.X, Mouse.Y ) / Tools::Render->SpriteScaling;
 	}
@@ -570,7 +461,7 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	const bool &Tools::getFullscreen() const
+	const bool &Tools::getFullscreen()
 	{
 		return TheGame->MyGraphicsDeviceManager->IsFullScreen;
 	}
@@ -801,7 +692,7 @@ bool Tools::DrawGraphics = true;
 bool Tools::StepControl = false;
 int Tools::_PhsxSpeed = 1;
 
-	const int &Tools::getPhsxSpeed() const
+	const int &Tools::getPhsxSpeed()
 	{
 		return _PhsxSpeed;
 	}
@@ -996,7 +887,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 		return GetBitsFromLine( reader->ReadLine() );
 	}
 
-	std::shared_ptr<Object> Tools::ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader )
+	/*std::shared_ptr<Object> Tools::ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader )
 	{
 		std::shared_ptr<std::wstring> line = reader->ReadLine();
 		while ( line != 0 )
@@ -1069,9 +960,9 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 		}
 
 		return obj;
-	}
+	}*/
 
-	void Tools::ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType )
+	/*void Tools::ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType )
 	{
 		std::shared_ptr<std::wstring> line = reader->ReadLine();
 		bool ReadingList = true;
@@ -1119,12 +1010,12 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 			{
 			}
 		}
-	}
+	}*/
 
 int Tools::WriteRecursiveDepth = 0;
 int Tools::WriteObjId = 0;
 
-	void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
+	/*void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
 	{
 		WriteRecursiveDepth++;
 		std::wstring WhiteSpace = _T( "" );
@@ -1253,7 +1144,7 @@ int Tools::WriteObjId = 0;
 		}
 
 		WriteRecursiveDepth--;
-	}
+	}*/
 
 	void Tools::ResetWrite()
 	{
@@ -1752,17 +1643,17 @@ bool Tools::LastLineWasBlank = false;
 		return Name;
 	}
 
-template<typename T>
+/*template<typename T>
 	int Tools::Length()
 	{
 		return GetValues<T>()->Count();
-	}
+	}*/
 
-template<typename T>
+/*template<typename T>
 	std::shared_ptr<IEnumerable<T> > Tools::GetValues()
 	{
 		return ( from x in T::typeid::GetFields( BindingFlags::Static | BindingFlags::Public ) select ( T )x::GetValue( 0 ) );
-	}
+	}*/
 
 	unsigned char Tools::FloatToByte( float x )
 	{

@@ -46,7 +46,8 @@ enum ControllerButtons
 	ControllerButtons_UP,
 	ControllerButtons_DOWN,
 	ControllerButtons_ENTER,
-	ControllerButtons_NONE
+	ControllerButtons_NONE,
+	ControllerButtons_LENGTH
 };
 
 enum MashType
@@ -956,7 +957,8 @@ enum Hero_BaseType
 	Hero_BaseType_BOUNCY,
 	Hero_BaseType_SPACESHIP,
 	Hero_BaseType_MEAT,
-	Hero_BaseType_ROCKET_BOX
+	Hero_BaseType_ROCKET_BOX,
+	Hero_BaseType_LENGTH
 };
 
 enum Hero_Shape
@@ -964,7 +966,8 @@ enum Hero_Shape
 	Hero_Shape_CLASSIC,
 	Hero_Shape_SMALL,
 	Hero_Shape_OSCILLATE,
-	Hero_Shape_BIG
+	Hero_Shape_BIG,
+	Hero_Shape_LENGTH
 };
 
 enum Hero_MoveMod
@@ -972,13 +975,15 @@ enum Hero_MoveMod
 	Hero_MoveMod_CLASSIC,
 	Hero_MoveMod_DOUBLE,
 	Hero_MoveMod_JETPACK,
-	Hero_MoveMod_INVERT
+	Hero_MoveMod_INVERT,
+	Hero_MoveMod_LENGTH
 };
 
 enum Hero_Special
 {
 	Hero_Special_CLASSIC,
-	Hero_Special_TIME
+	Hero_Special_TIME,
+	Hero_Special_LENGTH
 };
 
 enum CapeType
@@ -1036,7 +1041,8 @@ enum BobDeathType
 	BobDeathType_TIME,
 	BobDeathType_LEFT_BEHIND,
 	BobDeathType_OTHER,
-	BobDeathType_TOTAL
+	BobDeathType_TOTAL,
+	BobDeathType_LENGTH
 };
 
 enum Camera_PhsxType

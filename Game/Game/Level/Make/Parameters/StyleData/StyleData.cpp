@@ -53,9 +53,9 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 		const float tempVector2[] = { 1, 1, 1, 1 };
 		std::vector<float> PauseTypeRatio = std::vector<float>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 		PauseTypeRatio[ 0 ] += .3f * JumpLevel;
-		PauseType = static_cast<_PauseType>( Rnd->Rnd->Next( 0, Tools->Length<_PauseType>() ) );
+		PauseType = static_cast<_PauseType>( Rnd->Rnd->Next( 0, _PauseType_LENGTH ) );
 
-		ReverseType = static_cast<_ReverseType>( Rnd->Rnd->Next( 0, Tools->Length<_ReverseType>() ) );
+		ReverseType = static_cast<_ReverseType>( Rnd->Rnd->Next( 0, _ReverseType_LENGTH ) );
 
 		CalculateKeepUnused( JumpLevel );
 	}
@@ -112,23 +112,23 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 		FlyingBlobOffsetType = static_cast<_OffsetType>( Rnd->Choose( OffsetTypeRatio ) );
 		PendulumOffsetType = static_cast<_OffsetType>( Rnd->Choose( OffsetTypeRatio ) );
 
-		JumpType = static_cast<_JumpType>( Rnd->Rnd->Next( 0, Tools->Length<_JumpType>() ) );
+		JumpType = static_cast<_JumpType>( Rnd->Rnd->Next( 0, _JumpType_LENGTH ) );
 
 
-		MoveTypePeriod = static_cast<_MoveTypePeriod>( Rnd->Rnd->Next( 0, Tools->Length<_MoveTypePeriod>() ) );
-		MoveTypeInnerPeriod = static_cast<_MoveTypeInnerPeriod>( Rnd->Rnd->Next( 0, Tools->Length<_MoveTypeInnerPeriod>() ) );
+		MoveTypePeriod = static_cast<_MoveTypePeriod>( Rnd->Rnd->Next( 0, _MoveTypePeriod_LENGTH ) );
+		MoveTypeInnerPeriod = static_cast<_MoveTypeInnerPeriod>( Rnd->Rnd->Next( 0, _MoveTypeInnerPeriod_LENGTH ) );
 
 		FillType = static_cast<_FillType>( Rnd->Choose( FillTypeRatio ) );
 
-		PauseType = static_cast<_PauseType>( Rnd->Rnd->Next( 0, Tools->Length<_PauseType>() ) );
+		PauseType = static_cast<_PauseType>( Rnd->Rnd->Next( 0, _PauseType_LENGTH ) );
 
 		// Path types
-		Bob1Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, Tools->Length<_StartType>() ) );
-		Bob2Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, Tools->Length<_StartType>() ) );
-		Bob3Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, Tools->Length<_StartType>() ) );
+		Bob1Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, _StartType_LENGTH ) );
+		Bob2Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, _StartType_LENGTH ) );
+		Bob3Start = static_cast<_StartType>( Rnd->Rnd->Next( 0, _StartType_LENGTH ) );
 		SinglePathType = static_cast<_SinglePathType>( Rnd->Choose( _SinglePathRatio ) );
-		DoublePathType = static_cast<_DoublePathType>( Rnd->Rnd->Next( 0, Tools->Length<_DoublePathType>() ) );
-		TriplePathType = static_cast<_TriplePathType>( Rnd->Rnd->Next( 0, Tools->Length<_TriplePathType>() ) );
+		DoublePathType = static_cast<_DoublePathType>( Rnd->Rnd->Next( 0, _DoublePathType_LENGTH ) );
+		TriplePathType = static_cast<_TriplePathType>( Rnd->Rnd->Next( 0, _TriplePathType_LENGTH ) );
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
 		Tools::Write( std::wstring::Format( _T( "Post-style: {0}" ), TestNumber ) );

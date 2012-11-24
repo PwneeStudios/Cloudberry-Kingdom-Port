@@ -23,12 +23,12 @@ std::vector<std::wstring> SimpleQuad::_bits_to_save_simple = std::vector<std::ws
 
 	void SimpleQuad::Write( const std::shared_ptr<StreamWriter> &writer )
 	{
-		Tools::WriteFields( *this, writer, get_bits_to_save() );
+		//Tools::WriteFields( *this, writer, get_bits_to_save() );
 	}
 
 	void SimpleQuad::Read( const std::shared_ptr<StreamReader> &reader )
 	{
-		*this = static_cast<SimpleQuad>( Tools::ReadFields( *this, reader ) );
+		//*this = static_cast<SimpleQuad>( Tools::ReadFields( *this, reader ) );
 		SetColor( MySetColor, true );
 	}
 

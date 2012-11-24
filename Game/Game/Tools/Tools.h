@@ -27,11 +27,6 @@ namespace CloudberryKingdom
 		static std::wstring ToSimpleString( Vector2 v );
 
 
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static Vector2[] Map(this Vector2[] list, Func<Vector2, Vector2> map)
-		static std::vector<Vector2> Map( std::vector<Vector2> list, Func<Vector2, Vector2> map );
-
-
 
 		/// <summary>
 		/// Whether the vector is less than or equal to another vector in both components
@@ -106,11 +101,6 @@ namespace CloudberryKingdom
 	class ListExtension
 	{
 	public:
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static Vector2 Sum<T>(this List<T> list, Func<T, Vector2> map)
-		static Vector2 Sum( std::vector<T> &list, Func<T, Vector2> map );
-
 		/// <summary>
 		/// Returns a single randomly chosen item from the list
 		/// </summary>
@@ -127,71 +117,16 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: public static T Choose<T>(this List<T> list, Rand rnd)
 		static T Choose( std::vector<T> &list, const std::shared_ptr<Rand> &rnd );
 
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static int IndexOf<T>(this List<T> list, Predicate<T> match)
-		static int IndexOf( std::vector<T> &list, Predicate<T> match );
-
-#if defined(XBOX)
-		/// <summary>
-		/// Find an element of a list.
-		/// </summary>
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static T Find<T>(this List<T> list, Predicate<T> func)
-		static T Find( std::vector<T> &list, Predicate<T> func );
-
-		/// <summary>
-		/// Find elements of a list.
-		/// </summary>
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static List<T> FindAll<T>(this List<T> list, Predicate<T> func)
-		static std::vector<T> FindAll( std::vector<T> &list, Predicate<T> func );
-
-		/// <summary>
-		/// Find the index of a matching element.
-		/// </summary>
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static int FindIndex<T>(this List<T> list, Predicate<T> func)
-		static int FindIndex( std::vector<T> &list, Predicate<T> func );
-
-		/// <summary>
-		/// Whether a matching element exists.
-		/// </summary>
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static bool Exists<T>(this List<T> list, Predicate<T> func)
-		static bool Exists( std::vector<T> &list, Predicate<T> func );
-#endif
-
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-		template<typename T, typename S> where T : class where S : class
+		template<typename T, typename S>
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static void AddRangeAndConvert<T, S>(this List<T> list, List<S> range) where T : class where S : class
 		static void AddRangeAndConvert( std::vector<T> &list, std::vector<S> &range );
 	};
 
-	class ArrayExtension
-	{
-		/// <summary>
-		/// Returns a subarray of a given array.
-		/// </summary>
-	public:
-		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static T[] Range<T>(this T[] array, int StartIndex, int EndIndex)
-		static std::vector<T> Range( array_Renamed<T> *array_Renamed, int StartIndex, int EndIndex );
-	};
-
 	class DictionaryExtension
 	{
 	public:
-		template<typename TKey, typename TValue>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void RemoveAll<TKey, TValue>(this Dictionary<TKey, TValue> dict, Func<KeyValuePair<TKey, TValue>, bool> condition)
-		static void RemoveAll( std::map<TKey, TValue> &dict, Func<KeyValuePair<TKey, TValue>*, bool> condition );
 
 		template<typename TKey, typename TValue>
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
@@ -263,19 +198,19 @@ static std::wstring SourceTextureDirectory();
 		/// Return the smallest element.
 		/// </summary>
 		template<typename TSource>
-		static TSource ArgMin( const std::shared_ptr<IEnumerable<TSource> > &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
+		static TSource ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
 		/// <summary>
 		/// Return the largest element.
 		/// </summary>
 		template<typename TSource>
-		static TSource ArgMax( const std::shared_ptr<IEnumerable<TSource> > &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
+		static TSource ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
 
 		static std::shared_ptr<SimpleObject> LoadSimpleObject( const std::wstring &file );
 
 	private:
 		static float _VolumeFade;
 	public:
-		const static float &getVolumeFade() const;
+		const static float &getVolumeFade();
 		static void setVolumeFade( const float &value );
 
 		static float CurSongVolume;
@@ -286,7 +221,7 @@ static std::wstring SourceTextureDirectory();
 		static std::shared_ptr<XnaGameClass> GameClass;
 
 		static std::shared_ptr<CloudberryKingdomGame> TheGame;
-		const static Version &getGameVersion() const;
+		const static Version &getGameVersion();
 		static void AddToDo( const std::shared_ptr<Lambda> &todo );
 
 		static std::vector<std::wstring> ButtonNames;
@@ -296,7 +231,7 @@ static std::wstring SourceTextureDirectory();
 		static std::shared_ptr<GameData> CurGameData;
 		static std::shared_ptr<Level> CurLevel;
 		static std::shared_ptr<Camera> DummyCamera;
-		const static std::shared_ptr<Camera> &getCurCamera() const;
+		const static std::shared_ptr<Camera> &getCurCamera();
 		static std::shared_ptr<GameData> WorldMap, TitleGame;
 
 		static std::vector<int> VibrateTimes;
@@ -306,16 +241,16 @@ static std::wstring SourceTextureDirectory();
 		static int UpgradeTypes; //Enum.GetValues(typeof(Upgrade)).Length;
 
 #if defined(WINDOWS)
-		static XnaInput::KeyboardState Keyboard, PrevKeyboard;
-		static XnaInput::MouseState Mouse, PrevMouse;
+		static KeyboardState Keyboard, PrevKeyboard;
+		static MouseState Mouse, PrevMouse;
 		static Vector2 DeltaMouse, RawDeltaMouse;
 		static int DeltaScroll;
 		static bool MouseInWindow;
 
-		const static Vector2 &getMousePos() const;
+		const static Vector2 &getMousePos();
 		static void setMousePos( const Vector2 &value );
 
-		const static bool &getFullscreen() const;
+		const static bool &getFullscreen();
 		static void setFullscreen( const bool &value );
 
 		/// <summary>
@@ -376,7 +311,7 @@ static std::wstring SourceTextureDirectory();
 #else
 		static std::wstring SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font );
 #endif
-		static std::vector<XnaInput::GamePadState> GamepadState, *PrevGamepadState;
+		static std::vector<GamePadState> GamepadState, *PrevGamepadState;
 
 		/// <summary>
 		/// Return just the file name of a path.
@@ -422,7 +357,7 @@ static std::wstring SourceTextureDirectory();
 	private:
 		static int _PhsxSpeed;
 	public:
-		const static int &getPhsxSpeed() const;
+		const static int &getPhsxSpeed();
 		static void setPhsxSpeed( const int &value );
 
 		static bool ShowLoadingScreen;
@@ -477,16 +412,16 @@ static std::wstring SourceTextureDirectory();
 		static std::vector<std::wstring> GetBitsFromReader( const std::shared_ptr<StreamReader> &reader );
 
 
-		static std::shared_ptr<Object> ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader );
+		//static std::shared_ptr<Object> ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader );
 
 	private:
-		static void ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType );
+		//static void ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType );
 		static int WriteRecursiveDepth;
 		static int WriteObjId;
 	public:
 //ORIGINAL LINE: public static void WriteFields(object obj, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
+		//static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
 
 	private:
 		static void ResetWrite();
@@ -556,11 +491,11 @@ static std::wstring SourceTextureDirectory();
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <returns></returns>
-		template<typename T>
-		static int Length();
+		/*template<typename T>
+		static int Length();*/
 
-		template<typename T>
-		static std::shared_ptr<IEnumerable<T> > GetValues();
+		/*template<typename T>
+		static std::shared_ptr<IEnumerable<T> > GetValues();*/
 
 		static unsigned char FloatToByte( float x );
 

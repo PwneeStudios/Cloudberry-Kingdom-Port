@@ -65,14 +65,16 @@ namespace CloudberryKingdom
 			_MoveTypePeriod_INF,
 			_MoveTypePeriod_SHORT,
 			_MoveTypePeriod_NORMAL1,
-			_MoveTypePeriod_NORMAL2
+			_MoveTypePeriod_NORMAL2,
+			_MoveTypePeriod_LENGTH
 		};
 	public:
 		enum _MoveTypeInnerPeriod
 		{
 			_MoveTypeInnerPeriod_LONG,
 			_MoveTypeInnerPeriod_SHORT,
-			_MoveTypeInnerPeriod_NORMAL
+			_MoveTypeInnerPeriod_NORMAL,
+			_MoveTypeInnerPeriod_LENGTH
 		};
 	public:
 		enum _PauseType
@@ -80,7 +82,8 @@ namespace CloudberryKingdom
 			_PauseType_NONE,
 			_PauseType_LIMITED,
 			_PauseType_NORMAL,
-			_PauseType_NORMAL2
+			_PauseType_NORMAL2,
+			_PauseType_LENGTH
 		};
 	public:
 		enum _ReverseType
@@ -88,7 +91,8 @@ namespace CloudberryKingdom
 			_ReverseType_NONE,
 			_ReverseType_NORMAL,
 			_ReverseType_NORMAL2,
-			_ReverseType_NORMAL3
+			_ReverseType_NORMAL3,
+			_ReverseType_LENGTH
 		};
 	public:
 		enum _JumpType
@@ -96,7 +100,8 @@ namespace CloudberryKingdom
 			_JumpType_ALWAYS,
 			_JumpType_ALOT,
 			_JumpType_NORMAL,
-			_JumpType_NORMAL2
+			_JumpType_NORMAL2,
+			_JumpType_LENGTH
 		};
 	public:
 		enum _ElevatorSwitchType
@@ -133,20 +138,23 @@ namespace CloudberryKingdom
 		{
 			_DoublePathType_SEPARATED,
 			_DoublePathType_GAP,
-			_DoublePathType_INDEPENDENT
+			_DoublePathType_INDEPENDENT,
+			_DoublePathType_LENGTH
 		};
 	public:
 		enum _TriplePathType
 		{
 			_TriplePathType_SEPARATED,
-			_TriplePathType_INDEPENDENT
+			_TriplePathType_INDEPENDENT,
+			_TriplePathType_LENGTH
 		};
 	public:
 		enum _StartType
 		{
 			_StartType_TOP,
 			_StartType_MIDDLE,
-			_StartType_BOTTOM
+			_StartType_BOTTOM,
+			_StartType_LENGTH
 		};
 		/// <summary>
 		/// A callback to modify AutoGen parameters after they have been set

@@ -34,11 +34,11 @@ std::vector<std::wstring> SimpleVector::_bits_to_save = std::vector<std::wstring
 
 	void SimpleVector::Write( const std::shared_ptr<StreamWriter> &writer )
 	{
-		Tools::WriteFields( *this, writer, _bits_to_save );
+		//Tools::WriteFields( *this, writer, _bits_to_save );
 	}
 
 	void SimpleVector::Read( const std::shared_ptr<StreamReader> &reader )
 	{
-		*this = static_cast<SimpleVector>( Tools::ReadFields( *this, reader ) );
+		//*this = static_cast<SimpleVector>( Tools::ReadFields( *this, reader ) );
 	}
 }

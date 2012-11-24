@@ -335,10 +335,10 @@ int BobPhsx::CustomPhsxData::Length = 16;
 			_BaseType = _Shape = _MoveMod = _Special = 0;
 		}
 
-		_BaseType = CoreMath::Restrict( 0, Tools->Length<Hero_BaseType>() - 1, _BaseType );
-		_Shape = CoreMath::Restrict( 0, Tools->Length<Hero_Shape>() - 1, _Shape );
-		_MoveMod = CoreMath::Restrict( 0, Tools->Length<Hero_MoveMod>() - 1, _MoveMod );
-		_Special = CoreMath::Restrict( 0, Tools->Length<Hero_Special>() - 1, _Special );
+		_BaseType = CoreMath::Restrict( 0, Hero_BaseType_LENGTH - 1, _BaseType );
+		_Shape = CoreMath::Restrict( 0, Hero_Shape_LENGTH - 1, _Shape );
+		_MoveMod = CoreMath::Restrict( 0, Hero_MoveMod_LENGTH - 1, _MoveMod );
+		_Special = CoreMath::Restrict( 0, Hero_Special_LENGTH - 1, _Special );
 
 		//return MakeCustom(_BaseType, _Shape, _MoveMod);
 		return MakeCustom( _BaseType, _Shape, _MoveMod, _Special );
