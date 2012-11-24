@@ -363,7 +363,6 @@
     <ClCompile Include="Game\Tools\Prototypes.cpp" />
     <ClCompile Include="Game\Tools\Recycler.cpp" />
     <ClCompile Include="Game\Tools\Resources.cpp" />
-    <ClCompile Include="Game\Tools\ThreadHelper.cpp" />
     <ClCompile Include="Game\Tools\Tools.cpp" />
     <ClCompile Include="Game\Tools\Unset.cpp" />
     <ClCompile Include="Game\Tools\WrappedFloat.cpp" />
@@ -735,7 +734,6 @@
     <ClInclude Include="Game\Tools\Prototypes.h" />
     <ClInclude Include="Game\Tools\Recycler.h" />
     <ClInclude Include="Game\Tools\Resources.h" />
-    <ClInclude Include="Game\Tools\ThreadHelper.h" />
     <ClInclude Include="Game\Tools\Tools.h" />
     <ClInclude Include="Game\Tools\Unset.h" />
     <ClInclude Include="Game\Tools\WrappedFloat.h" />
