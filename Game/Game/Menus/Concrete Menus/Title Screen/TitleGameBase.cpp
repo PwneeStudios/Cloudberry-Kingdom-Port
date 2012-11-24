@@ -110,7 +110,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		Tools::TheGame->ShowMouse = true;
 	#endif
 		std::shared_ptr<Camera> cam = MyLevel->getMainCamera();
-		cam->MyPhsxType = Camera::PhsxType_FIXED;
+		cam->MyPhsxType = Camera_PhsxType_FIXED;
 
 		cam->FancyPos->RelVal = Vector2::Zero;
 

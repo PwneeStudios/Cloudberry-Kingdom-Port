@@ -383,22 +383,22 @@ bool Camera::DisableOscillate = false;
 
 		switch ( MyPhsxType )
 		{
-			case PhsxType_WORLD_MAP:
+			case Camera_PhsxType_WORLD_MAP:
 				WorldMap_PhsxStep();
 				break;
 
-			case PhsxType_FIXED:
+			case Camera_PhsxType_FIXED:
 				Fixed_PhsxStep();
 				break;
 
-			case PhsxType_SIDE_LEVEL_UP:
-			case PhsxType_SIDE_LEVEL_UP_RELAXED:
-			case PhsxType_SIDE_LEVEL_DOWN:
-			case PhsxType_SIDE_LEVEL_RIGHT:
+			case Camera_PhsxType_SIDE_LEVEL_UP:
+			case Camera_PhsxType_SIDE_LEVEL_UP_RELAXED:
+			case Camera_PhsxType_SIDE_LEVEL_DOWN:
+			case Camera_PhsxType_SIDE_LEVEL_RIGHT:
 				SideLevel_PhsxStep();
 				break;
 
-			case PhsxType_CENTER:
+			case Camera_PhsxType_CENTER:
 				Center_PhsxStep();
 				break;
 		}
@@ -454,7 +454,7 @@ bool Camera::DisableOscillate = false;
 		PrevPos = Data.Position;
 	}
 
-	void Camera::SetPhsxType( PhsxType NewType )
+	void Camera::SetPhsxType( Camera_PhsxType NewType )
 	{
 		if ( NewType != MyPhsxType )
 		{
@@ -690,24 +690,24 @@ bool Camera::DisableOscillate = false;
 				// BoxShift = new Vector2(800, 0);
 
 
-				if ( MyPhsxType == PhsxType_SIDE_LEVEL_UP )
+				if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_UP )
 				{
 					//BoxSize = new Vector2(450, 200);
 					//BoxShift = new Vector2(250, 275);
 					BoxSize = Vector2( 450, 330 );
 					BoxShift = Vector2( 250, 400 );
 				}
-				else if ( MyPhsxType == PhsxType_SIDE_LEVEL_UP_RELAXED )
+				else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_UP_RELAXED )
 				{
 					BoxSize = Vector2( 450, 350 );
 					BoxShift = Vector2( 250, 160 );
 				}
-				else if ( MyPhsxType == PhsxType_SIDE_LEVEL_DOWN )
+				else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_DOWN )
 				{
 					BoxSize = Vector2( 450, 250 );
 					BoxShift = Vector2( 250, -800 );
 				}
-				else //if (MyPhsxType == PhsxType.SideLevel_Right)
+				else //if (MyPhsxType == Camera_PhsxType.SideLevel_Right)
 				{
 					BoxSize = Vector2( 450, 250 ); //1000);
 					BoxShift = Vector2( 250, 250 );
@@ -719,7 +719,7 @@ bool Camera::DisableOscillate = false;
 				// Single player: keep player nearly centered
 				if ( Count <= 1 )
 				{
-					if ( MyPhsxType == PhsxType_SIDE_LEVEL_RIGHT )
+					if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_RIGHT )
 						Target = BoxLimit_X( Data.Position, Pos, BoxSize, BoxShift );
 					else
 						Target = BoxLimit_Y( Data.Position, Pos, BoxSize, BoxShift );
@@ -727,36 +727,36 @@ bool Camera::DisableOscillate = false;
 				// Multiplayer: if all together, stay centered. Otherwise allow leading player to push ahead.
 				else
 				{
-					if ( MyPhsxType == PhsxType_SIDE_LEVEL_RIGHT )
+					if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_RIGHT )
 						Target = BoxLimitLeft( Data.Position, BL, BoxSize, BoxShift );
-					else if ( MyPhsxType == PhsxType_SIDE_LEVEL_UP )
+					else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_UP )
 						Target = BoxLimitDown( Data.Position, BL, BoxSize, BoxShift );
-					else if ( MyPhsxType == PhsxType_SIDE_LEVEL_DOWN )
+					else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_DOWN )
 						Target = BoxLimitUp( Data.Position, BL, BoxSize, BoxShift );
 
 					Vector2 Lead = Target;
-					if ( MyPhsxType == PhsxType_SIDE_LEVEL_DOWN )
+					if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_DOWN )
 					{
 						Lead = BL;
 
 						BoxSize = Vector2( 0, 500 );
 						BoxShift = Vector2( 0, -250 );
 					}
-					else if ( MyPhsxType == PhsxType_SIDE_LEVEL_UP )
+					else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_UP )
 					{
 						Lead = TR;
 
 						BoxSize = Vector2( 0, 500 );
 						BoxShift = Vector2( 0, 100 );
 					}
-					else if ( MyPhsxType == PhsxType_SIDE_LEVEL_UP_RELAXED )
+					else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_UP_RELAXED )
 					{
 						Lead = TR;
 
 						BoxSize = Vector2( 0, 600 );
 						BoxShift = Vector2( 0, 0 );
 					}
-					else if ( MyPhsxType == PhsxType_SIDE_LEVEL_RIGHT )
+					else if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_RIGHT )
 					{
 						Lead = TR;
 
@@ -764,7 +764,7 @@ bool Camera::DisableOscillate = false;
 						BoxShift = Vector2( 0, 0 );
 					}
 
-					if ( MyPhsxType == PhsxType_SIDE_LEVEL_RIGHT )
+					if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_RIGHT )
 						Target = BoxLimit_X( Target, Lead, BoxSize, BoxShift );
 					else
 						Target = BoxLimit_Y( Target, Lead, BoxSize, BoxShift );
@@ -821,7 +821,7 @@ bool Camera::DisableOscillate = false;
 		Oscillating = false;
 		ZoneLocked = false;
 		LastUpdate = -1;
-		MyPhsxType = PhsxType_SIDE_LEVEL_RIGHT;
+		MyPhsxType = Camera_PhsxType_SIDE_LEVEL_RIGHT;
 		MovingCamera = false;
 	}
 }

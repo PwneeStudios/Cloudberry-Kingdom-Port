@@ -12,14 +12,14 @@ namespace CloudberryKingdom
 		std::shared_ptr<CameraZone> CamZone = dynamic_cast<CameraZone*>( trig );
 
 		std::shared_ptr<Camera> cam = CamZone->getCore()->MyLevel->getMainCamera();
-		if ( cam->ZoneLocked || cam->MyPhsxType == Camera::PhsxType_FIXED )
+		if ( cam->ZoneLocked || cam->MyPhsxType == Camera_PhsxType_FIXED )
 			return;
 
 		if ( cam->MyZone == 0 || !cam->MyZone->Activated || cam->MyZone->Priority < CamZone->Priority )
 		{
 			switch ( zt->CameraType )
 			{
-				case Camera::PhsxType_CENTER:
+				case Camera_PhsxType_CENTER:
 					if ( cam->MyPhsxType != zt->CameraType )
 						cam->Target = zt->getCore()->Data.Position;
 					break;
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		CameraSpeed = 15;
 		SetCameraSpeed = true;
 
-		CameraType = Camera::PhsxType_SIDE_LEVEL_RIGHT;
+		CameraType = Camera_PhsxType_SIDE_LEVEL_RIGHT;
 
 		getCore()->MyType = ObjectType_CAMERA_ZONE;
 		getCore()->GenData.Used = true;

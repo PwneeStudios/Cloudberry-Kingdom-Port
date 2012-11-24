@@ -23,17 +23,6 @@ namespace CloudberryKingdom
 	class Camera : public ViewReadWrite, public IPos
 	{
 	public:
-		enum PhsxType
-		{
-			PhsxType_FIXED,
-			PhsxType_SIDE_LEVEL_RIGHT,
-			PhsxType_SIDE_LEVEL_UP,
-			PhsxType_SIDE_LEVEL_DOWN,
-			PhsxType_CENTER,
-			PhsxType_SIDE_LEVEL_UP_RELAXED,
-			PhsxType_WORLD_MAP
-		};
-	public:
 		virtual std::vector<std::wstring> GetViewables();
 
 		/// <summary>

@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		//public float CameraTargetSpeed = 30f;
 		float CameraSpeed; //30 for normal // 45 for the wheel
 		bool SetCameraSpeed;
-		Camera::PhsxType CameraType;
+		Camera_PhsxType CameraType;
 
 		virtual void MakeNew();
 

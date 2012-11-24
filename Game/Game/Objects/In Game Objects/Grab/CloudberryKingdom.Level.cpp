@@ -340,12 +340,12 @@ namespace CloudberryKingdom
 		if ( Geometry == LevelGeometry_UP )
 		{
 			CamZone->End = CamZone->Start + Vector2( 0, Height );
-			CamZone->CameraType = Camera::PhsxType_SIDE_LEVEL_UP;
+			CamZone->CameraType = Camera_PhsxType_SIDE_LEVEL_UP;
 		}
 		else if ( Geometry == LevelGeometry_DOWN )
 		{
 			CamZone->End = CamZone->Start - Vector2( 0, Height );
-			CamZone->CameraType = Camera::PhsxType_SIDE_LEVEL_DOWN;
+			CamZone->CameraType = Camera_PhsxType_SIDE_LEVEL_DOWN;
 
 			CamZone->Start.Y += 125;
 		}
