@@ -2204,5 +2204,8 @@
     <ClInclude Include="Game\Player\Buyable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hacks\BinaryWriter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

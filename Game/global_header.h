@@ -5,7 +5,7 @@
 #include "forward_declarations.h"
 
 class BinaryReader;
-class BinaryWriter;
+#include "Hacks/BinaryWriter.h"
 class ContentManager;
 struct DateTime { int Time; };
 class DisplayMode;
@@ -13,7 +13,7 @@ class Effect;
 class EffectParameter;
 class EffectTechnique;
 class FileStream;
-class Game;
+class Game { };
 class GamePadState { };
 class GameTime;
 class GraphicsDevice;

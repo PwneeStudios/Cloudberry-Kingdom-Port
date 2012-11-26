@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		this->Data = Data;
 	}
 
-	std::shared_ptr<IEnumerator<Chunk*> > Chunks::GetEnumerator()
+	/*std::shared_ptr<IEnumerator<Chunk*> > Chunks::GetEnumerator()
 	{
 		return std::make_shared<ChunkEnumerator>( Data );
 	}
@@ -22,9 +22,9 @@ namespace CloudberryKingdom
 	std::shared_ptr<IEnumerator> Chunks::IEnumerable_GetEnumerator()
 	{
 		return std::make_shared<ChunkEnumerator>( Data );
-	}
+	}*/
 
-	ChunkEnumerator::ChunkEnumerator( std::vector<unsigned char> Data )
+	/*ChunkEnumerator::ChunkEnumerator( std::vector<unsigned char> Data )
 	{
 		InitializeInstanceFields();
 		this->Data = Data;
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 	void ChunkEnumerator::InitializeInstanceFields()
 	{
 		Position = 0;
-	}
+	}*/
 
 	Chunk::Chunk()
 	{
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		Length = Capacity;
 	}
 
-	std::shared_ptr<IEnumerator<Chunk*> > Chunk::GetEnumerator()
+	/*std::shared_ptr<IEnumerator<Chunk*> > Chunk::GetEnumerator()
 	{
 		return std::make_shared<ChunkEnumerator>( Buffer, 8, Length );
 	}
@@ -115,12 +115,12 @@ namespace CloudberryKingdom
 	std::shared_ptr<IEnumerator> Chunk::IEnumerable_GetEnumerator()
 	{
 		return std::make_shared<ChunkEnumerator>( Buffer, 8, Length );
-	}
+	}*/
 
 	void Chunk::Expand()
 	{
 		std::vector<unsigned char> OldBuffer = Buffer;
-		Buffer = std::vector<unsigned char>( OldBuffer.Length * 2 );
+		Buffer = std::vector<unsigned char>( OldBuffer.size() * 2 );
 
 		for ( int i = 0; i < Position; i++ )
 			Buffer[ i ] = OldBuffer[ i ];
@@ -133,8 +133,10 @@ namespace CloudberryKingdom
 		int Size = Position;
 		Position = 0;
 
-		Write( BitConverter::GetBytes( Type ) );
-		Write( BitConverter::GetBytes( Size ) );
+		Write( Type );
+		Write( Size );
+		/*Write( BitConverter::GetBytes( Type ) );
+		Write( BitConverter::GetBytes( Size ) );*/
 
 		Position = Size;
 	}
@@ -142,44 +144,45 @@ namespace CloudberryKingdom
 	void Chunk::Finish( const std::shared_ptr<BinaryWriter> &writer )
 	{
 		SetTypeAndLength();
-		writer->Write( Buffer, 0, Position );
+		writer->Write( Buffer.data(), 0, Position );
 	}
 
-	void Chunk::Finish( const std::shared_ptr<Chunk> &ParentChunk )
+	void Chunk::Finish( Chunk &ParentChunk )
 	{
 		SetTypeAndLength();
-		ParentChunk->Write( Buffer, 0, Position );
+		ParentChunk.Write( Buffer.data(), 0, Position );
 	}
 
 	void Chunk::EnsureRoom( int Size )
 	{
 		// Make sure we don't write past the end of the buffer
-		while ( Position + Size >= Buffer.size() )
+		while ( Position + Size >= static_cast<int>( Buffer.size() ) )
 			Expand();
 	}
 
-	void Chunk::Write( std::vector<unsigned char> Bytes )
+	void Chunk::Write( const unsigned char *data, int length )
 	{
-		EnsureRoom( Bytes.size() );
+		EnsureRoom( length );
 
 		// Write the bytes
-		for ( int i = Position; i < Position + Bytes.size(); i++ )
-			Buffer[ i ] = Bytes[ i - Position ];
+		for ( int i = Position; i < Position + length; i++ )
+			Buffer[ i ] = data[ i - Position ];
 
-		Position += Bytes.size();
+		Position += length;
 	}
 
-	void Chunk::Write( std::vector<unsigned char> Bytes, int StartIndex, int BytesToCopy )
+	void Chunk::Write( const unsigned char *data, int startIndex, int length )
 	{
-		EnsureRoom( BytesToCopy );
+		EnsureRoom( length );
 
-		for ( int i = StartIndex; i < StartIndex + BytesToCopy; i++ )
-			Buffer[ Position + i - StartIndex ] = Bytes[ i ];
+		// Write the bytes
+		for ( int i = startIndex; i < startIndex + length; i++ )
+			Buffer[ Position + i - startIndex ] = data[ i ];
 
-		Position += BytesToCopy;
+		Position += length;
 	}
 
-	void Chunk::Copy( std::vector<unsigned char> Bytes, int StartIndex, int BytesToCopy )
+	void Chunk::Copy( const unsigned char *data, int StartIndex, int BytesToCopy )
 	{
 		Position = 0;
 		EnsureRoom( BytesToCopy );
@@ -187,52 +190,64 @@ namespace CloudberryKingdom
 		Position = 8;
 
 		for ( int i = StartIndex; i < StartIndex + BytesToCopy; i++ )
-			Buffer[ i - StartIndex ] = Bytes[ i ];
+			Buffer[ i - StartIndex ] = data[ i ];
 	}
 
 	void Chunk::Write( bool val )
 	{
-		Write( BitConverter::GetBytes( val ) );
+		Write( reinterpret_cast<unsigned char *>( &val ), sizeof( bool ) );
+		//Write( BitConverter::GetBytes( val ) );
 	}
 
 	void Chunk::Write( int val )
 	{
-		Write( BitConverter::GetBytes( val ) );
+		Write( reinterpret_cast<unsigned char *>( &val ), sizeof( int ) );
+		//Write( BitConverter::GetBytes( val ) );
 	}
 
 	void Chunk::Write( float val )
 	{
-		Write( BitConverter::GetBytes( val ) );
+		Write( reinterpret_cast<unsigned char *>( &val ), sizeof( float ) );
+		//Write( BitConverter::GetBytes( val ) );
 	}
 
 	void Chunk::Write( const std::wstring &val )
 	{
-		int StringLength = System::Text::Encoding::UTF8->GetByteCount( val );
-
+		int StringLength = val.size();
 		Write( StringLength );
-		Write( System::Text::Encoding::UTF8->GetBytes( val ) );
+		Write( reinterpret_cast<const unsigned char *>( val.c_str() ), StringLength * sizeof( wchar_t ) );
+		//int StringLength = System::Text::Encoding::UTF8->GetByteCount( val );
+
+		//Write( StringLength );
+		//Write( System::Text::Encoding::UTF8->GetBytes( val ) );
 	}
 
 	bool Chunk::ReadBool()
 	{
-		bool val = BitConverter::ToBoolean( Buffer, Position );
-		Position += 1;
+		bool val = *reinterpret_cast<bool *>( &Buffer[ Position ] );
+		Position += sizeof( bool );
+		//bool val = BitConverter::ToBoolean( Buffer, Position );
+		//Position += 1;
 
 		return val;
 	}
 
 	int Chunk::ReadInt()
 	{
-		int val = BitConverter::ToInt32( Buffer, Position );
-		Position += 4;
+		int val = *reinterpret_cast<int *>( &Buffer[ Position ] );
+		Position += sizeof( int );
+		//int val = BitConverter::ToInt32( Buffer, Position );
+		//Position += 4;
 
 		return val;
 	}
 
 	float Chunk::ReadFloat()
 	{
-		float val = BitConverter::ToSingle( Buffer, Position );
-		Position += 4;
+		float val = *reinterpret_cast<float *>( &Buffer[ Position ] );
+		Position += sizeof( float );
+		//float val = BitConverter::ToSingle( Buffer, Position );
+		//Position += 4;
 
 		return val;
 	}
@@ -240,9 +255,12 @@ namespace CloudberryKingdom
 	std::wstring Chunk::ReadString()
 	{
 		int StringLength = ReadInt();
-		std::shared_ptr<std::wstring> val = System::Text::Encoding::UTF8->GetString( Buffer, Position, StringLength );
+		const wchar_t *start = reinterpret_cast<const wchar_t *>(&Buffer[Position]);
+		std::wstring val(start, start + StringLength);
+		Position += StringLength * sizeof(wchar_t);
+		//std::shared_ptr<std::wstring> val = System::Text::Encoding::UTF8->GetString( Buffer, Position, StringLength );
 
-		Position += StringLength;
+		//Position += StringLength;
 
 		return val;
 	}
@@ -329,7 +347,7 @@ namespace CloudberryKingdom
 
 		chunk->Write( val );
 
-		chunk->Finish( this );
+		chunk->Finish( *this );
 	}
 
 	void Chunk::WriteSingle( int type, bool val )
@@ -339,7 +357,7 @@ namespace CloudberryKingdom
 
 		chunk->Write( val );
 
-		chunk->Finish( this );
+		chunk->Finish( *this );
 	}
 
 	void Chunk::WriteSingle( int type, float val )
@@ -349,7 +367,7 @@ namespace CloudberryKingdom
 
 		chunk->Write( val );
 
-		chunk->Finish( this );
+		chunk->Finish( *this );
 	}
 
 	void Chunk::WriteSingle( int type, const std::wstring &val )
@@ -359,7 +377,7 @@ namespace CloudberryKingdom
 
 		chunk->Write( val );
 
-		chunk->Finish( this );
+		chunk->Finish( *this );
 	}
 
 	void Chunk::InitializeInstanceFields()

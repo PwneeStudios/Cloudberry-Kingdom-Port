@@ -21,13 +21,6 @@ namespace CloudberryKingdom
 #endif
 
 		static void Main( std::vector<std::wstring&> args );
-
-#if defined(DEBUG) && defined(WINDOWS)
-	private:
-		static void CurrentDomain_FirstChanceException( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::Runtime::ExceptionServices::FirstChanceExceptionEventArgs> &e );
-#endif
-
-		static void CurrentDomain_UnhandledException( const std::shared_ptr<Object> &sender, const std::shared_ptr<UnhandledExceptionEventArgs> &e );
 	};
 }
 

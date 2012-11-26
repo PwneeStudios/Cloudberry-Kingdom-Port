@@ -10,11 +10,12 @@ namespace CloudberryKingdom
 	{
 		CloudberryKingdomGame::ProcessArgs( args );
 
-		AppDomain::CurrentDomain->UnhandledException += std::make_shared<UnhandledExceptionEventHandler>( &MainClass::CurrentDomain_UnhandledException );
+		// FIXME: Add other type of exception handling and logging.
+		/*AppDomain::CurrentDomain->UnhandledException += std::make_shared<UnhandledExceptionEventHandler>( &MainClass::CurrentDomain_UnhandledException );
 
 	#if defined(DEBUG) && defined(WINDOWS)
 		AppDomain::CurrentDomain->FirstChanceException += std::make_shared<EventHandler<System::Runtime::ExceptionServices::FirstChanceExceptionEventArgs*> >( &MainClass::CurrentDomain_FirstChanceException );
-	#endif
+	#endif*/
 
 	#if defined(GAME)
 //C# TO C++ CONVERTER NOTE: The following 'using' block is replaced by its C++ equivalent:
@@ -37,19 +38,6 @@ namespace CloudberryKingdom
 			if ( game != 0 )
 				game.Dispose();
 		}
-		}
+	}
 
-#if defined(DEBUG) && defined(WINDOWS)
-	void MainClass::CurrentDomain_FirstChanceException( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::Runtime::ExceptionServices::FirstChanceExceptionEventArgs> &e )
-	{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		Tools::Log( e->Exception->ToString() );
-	}
-#endif
-
-	void MainClass::CurrentDomain_UnhandledException( const std::shared_ptr<Object> &sender, const std::shared_ptr<UnhandledExceptionEventArgs> &e )
-	{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		Tools::Log( e->ExceptionObject->ToString() );
-	}
-	}
+}

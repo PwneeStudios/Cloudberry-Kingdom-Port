@@ -82,22 +82,22 @@ namespace CloudberryKingdom
 
 	public:
 		void Finish( const std::shared_ptr<BinaryWriter> &writer );
-		void Finish( const std::shared_ptr<Chunk> &ParentChunk );
+		void Finish( Chunk &ParentChunk );
 
 	private:
 		void EnsureRoom( int Size );
 
 	public:
-		void Write( std::vector<unsigned char> Bytes );
-		void Write( std::vector<unsigned char> Bytes, int StartIndex, int BytesToCopy );
+		void Write( const unsigned char *data, int length );
+		void Write( const unsigned char *data, int startIndex, int length );
 
 		/// <summary>
 		/// Copy bytes from another chunk. This will overwrite the Type and Length bytes for this chunk.
 		/// </summary>
-		/// <param name="Bytes">Bytes from the other chunk</param>
+		/// <param name="data">Bytes from the other chunk</param>
 		/// <param name="StartIndex">StartIndex in the other chunk's buffer.</param>
 		/// <param name="BytesToCopy">Number of bytes to copy from the other chunk's buffer.</param>
-		void Copy( std::vector<unsigned char> Bytes, int StartIndex, int BytesToCopy );
+		void Copy( const unsigned char *data, int StartIndex, int BytesToCopy );
 
 		void Write( bool val );
 		void Write( int val );

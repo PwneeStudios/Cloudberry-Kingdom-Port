@@ -5,15 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class LambdaFunc;
-}
-namespace CloudberryKingdom
-{
 	class WrappedBool
 	{
 	public:

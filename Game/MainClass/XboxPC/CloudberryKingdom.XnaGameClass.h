@@ -5,30 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class CloudberryKingdomGame;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class GameTime;
-		}
-	}
-}
-
-
-
-
-
-
-
-namespace Forms = System::Windows::Forms;
-
-namespace CloudberryKingdom
-{
 	class XnaGameClass : public Game
 	{
 	private:
