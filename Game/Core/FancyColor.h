@@ -10,8 +10,8 @@ namespace CloudberryKingdom
 	private:
 		std::shared_ptr<FancyVector2> clr1, clr2;
 	public:
-		const float &getA() const;
-		const Color &getColor() const;
+		float getA();
+		Color getColor();
 		void setColor( const Color &value );
 
 		void Release();

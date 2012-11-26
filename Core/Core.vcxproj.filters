@@ -239,5 +239,8 @@
     <ClCompile Include="src\Input\InputWiiU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\Graphics\Color.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

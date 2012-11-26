@@ -69,6 +69,7 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="include\Graphics\Color.cpp" />
     <ClCompile Include="src\Architecture\SchedulerPc.cpp" />
     <ClCompile Include="src\Architecture\SchedulerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

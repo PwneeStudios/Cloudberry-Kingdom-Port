@@ -1,12 +1,7 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
-
-	std::vector<std::wstring> FancyVector2::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "RelVal" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
 
 	const float &FancyVector2::getRelValX() const
 	{
@@ -28,12 +23,12 @@ namespace CloudberryKingdom
 		RelVal = Vector2( RelVal.X, value );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &FancyVector2::getPos() const
+	Vector2 FancyVector2::getPos()
 	{
 		return Update();
 	}
 
-	const float &FancyVector2::getVal() const
+	float FancyVector2::getVal()
 	{
 		return getPos().X;
 	}
@@ -91,7 +86,7 @@ namespace CloudberryKingdom
 		this->ObjCenter = ObjCenter;
 	}
 
-	Microsoft::Xna::Framework::Vector2 FancyVector2::GetDest()
+	Vector2 FancyVector2::GetDest()
 	{
 		if ( !Playing )
 			return RelVal;
@@ -114,35 +109,30 @@ namespace CloudberryKingdom
 		AnimData.Set( End, 0, 1 );
 		AnimData.Set( Start, 0, 2 );
 
-		Speed = 2 / Frames;
+		Speed = 2.f / Frames;
 		TimeStamp = GetCurStep();
 		t = 0;
 		Playing = true;
 	}
 
-	void FancyVector2::MultiLerp( int Frames, ... )
+	void FancyVector2::MultiLerp( int Frames, const std::vector<Vector2> Positions )
 	{
 		MultiLerp( Frames, false, Positions );
 	}
 
-	void FancyVector2::MultiLerpReverse( int Frames, ... )
-	{
-		MultiLerp( Frames, true, Positions );
-	}
-
-	void FancyVector2::MultiLerp( int Frames, bool Reverse, ... )
+	void FancyVector2::MultiLerp( int Frames, bool Reverse, const std::vector<Vector2> Positions )
 	{
 		AnimData = AnimationData();
 		AnimData.Init();
 
 		if ( Reverse )
-			for ( int i = 0; i < Positions->Length; i++ )
-				AnimData.Set( Positions[ Positions->Length - 1 - i ], 0, i );
+			for ( size_t i = 0; i < Positions.size(); i++ )
+				AnimData.Set( Positions[ Positions.size() - 1 - i ], 0, i );
 		else
-			for ( int i = 0; i < Positions->Length; i++ )
+			for ( size_t i = 0; i < Positions.size(); i++ )
 				AnimData.Set( Positions[ i ], 0, i );
 
-		Speed = 1 / Frames;
+		Speed = 1.f / Frames;
 		TimeStamp = GetCurStep();
 		t = 0;
 		Playing = true;
@@ -224,7 +214,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 			case LerpStyle_LINEAR:
 				AnimData.Set( Start, 0, 0 );
 				AnimData.Set( End, 0, 1 );
-				Speed = 1 / Frames;
+				Speed = 1.f / Frames;
 				break;
 
 			case LerpStyle_DECAY_PLUS_SMALL_OVERSHOOT:
@@ -234,7 +224,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 				AnimData.Set( .95f * End + 0.05f * Start, 0, 3 );
 				AnimData.Set( 1 * End + 0 * Start, 0, 4 );
 				AnimData.Set( 1 * End + 0 * Start, 0, 5 );
-				Speed = 3 / Frames;
+				Speed = 3.f / Frames;
 				AnimData.Linear = false;
 				break;
 
@@ -247,7 +237,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 				AnimData.AddFrame( .95f * End + 0.05f * Start, 0 );
 				AnimData.AddFrame( 1 * End + 0 * Start, 0 );
 				AnimData.AddFrame( 1 * End + 0 * Start, 0 );
-				Speed = 4 / Frames;
+				Speed = 4.f / Frames;
 				AnimData.Linear = false;
 				break;
 
@@ -259,7 +249,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 					AnimData.Set( ( 1 - s ) * End + s * Start, 0, i );
 				}
 				AnimData.Set( 1 * End + 0 * Start, 0, 20 );
-				Speed = 4 / Frames;
+				Speed = 4.f / Frames;
 				AnimData.Linear = false;
 				break;
 
@@ -269,7 +259,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 				AnimData.Set( End, 0, 2 );
 				AnimData.Set( End, 0, 3 );
 				AnimData.Set( End, 0, 4 );
-				Speed = 2 / Frames;
+				Speed = 2.f / Frames;
 				AnimData.Linear = false;
 				break;
 		}
@@ -286,7 +276,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 			if ( Tools::CurGameData != 0 )
 				return Tools::CurGameData->PhsxCount;
 			else
-				return int::MinValue;
+				return INT_MIN;
 		}
 
 		if ( UpdateOnPause )
@@ -295,12 +285,12 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 			return Tools::PhsxCount;
 	}
 
-	Microsoft::Xna::Framework::Vector2 FancyVector2::Update()
+	Vector2 FancyVector2::Update()
 	{
-		return Update( Vector2::One );
+		return Update( Vector2(1) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 FancyVector2::Update( Vector2 Scale )
+	Vector2 FancyVector2::Update( Vector2 Scale )
 	{
 		int CurStep = GetCurStep();
 
@@ -317,7 +307,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 
 			if ( Loop )
 			{
-				t = t % ( Length + 1 );
+				t = fmod( t, 1.f + Length );
 
 				RelVal = AnimData.Calc( 0, t, Length, true, AnimData.Linear );
 			}
@@ -346,7 +336,7 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 	{
 		HoldVecs = std::vector<Vector2>( 5 );
 		code = 0;
-		LastUpdate = int::MinValue;
+		LastUpdate = INT_MIN;
 		Playing = false;
 		Loop = false;
 		UpdateOnPause = true;

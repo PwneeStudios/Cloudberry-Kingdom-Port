@@ -4,6 +4,16 @@
 #include "enums.h"
 #include "forward_declarations.h"
 
+// System includes.
+#include <algorithm>
+#include <list>
+#include <map>
+#include <memory>
+#include <queue>
+#include <stack>
+#include <string>
+#include <vector>
+
 class BinaryReader;
 #include "Hacks/BinaryWriter.h"
 class ContentManager;
@@ -51,16 +61,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include <Graphics/Color.h>
 #include <Math/Vectors.h>
 
-// System includes.
-#include <algorithm>
-#include <list>
-#include <map>
-#include <memory>
-#include <queue>
-#include <stack>
-#include <string>
-#include <vector>
-
 // Cloudberry Kingdom converted files.
 #include "Game/Localization.h"
 #include "Core/Graphics/Draw/Simple/BasePoint.h"
@@ -80,8 +80,8 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "CloudberryKingdom.h"
 #include "stringconverter.h"
 #include "Core/Chunk.h"
-#include "Core/FancyColor.h"
 #include "Core/FancyVector2.h"
+#include "Core/FancyColor.h"
 #include "Core/PhsxData.h"
 #include "Core/ResolutionGroup.h"
 #include "Core/Version.h"

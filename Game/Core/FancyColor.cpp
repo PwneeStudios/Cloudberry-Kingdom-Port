@@ -1,21 +1,19 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-	const float &FancyColor::getA() const
+	float FancyColor::getA()
 	{
 		return clr2->getPos().Y;
 	}
 
-	const Microsoft::Xna::Framework::Color &FancyColor::getColor() const
+	Color FancyColor::getColor()
 	{
 		return ToColor( clr1->AbsVal, clr2->AbsVal );
 	}
 
-	void FancyColor::setColor( const Microsoft::Xna::Framework::Color &value )
+	void FancyColor::setColor( const Color &value )
 	{
 		clr1->Playing = false;
 		clr2->Playing = false;
@@ -35,13 +33,13 @@ namespace CloudberryKingdom
 		Init( getColor().White );
 	}
 
-	FancyColor::FancyColor( Microsoft::Xna::Framework::Color color )
+	FancyColor::FancyColor( Color color )
 	{
 		InitializeInstanceFields();
 		Init( color );
 	}
 
-	void FancyColor::Init( Microsoft::Xna::Framework::Color color )
+	void FancyColor::Init( Color color )
 	{
 		CreateVectors();
 		setColor( color );
@@ -53,22 +51,22 @@ namespace CloudberryKingdom
 		clr2 = std::make_shared<FancyVector2>();
 	}
 
-	Microsoft::Xna::Framework::Color FancyColor::ToColor( Vector2 v1, Vector2 v2 )
+	Color FancyColor::ToColor( Vector2 v1, Vector2 v2 )
 	{
 		return Color( Vector4( v1.X, v1.Y, v2.X, v2.Y ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 FancyColor::Pair1( Vector4 v )
+	Vector2 FancyColor::Pair1( Vector4 v )
 	{
 		return Vector2( v.X, v.Y );
 	}
 
-	Microsoft::Xna::Framework::Vector2 FancyColor::Pair2( Vector4 v )
+	Vector2 FancyColor::Pair2( Vector4 v )
 	{
 		return Vector2( v.Z, v.W );
 	}
 
-	Microsoft::Xna::Framework::Color FancyColor::GetDest()
+	Color FancyColor::GetDest()
 	{
 		return ToColor( clr1->GetDest(), clr2->GetDest() );
 	}
@@ -107,7 +105,7 @@ namespace CloudberryKingdom
 		clr2->LerpTo( Pair2( Start ), Pair2( End ), Frames, Style );
 	}
 
-	Microsoft::Xna::Framework::Color FancyColor::Update()
+	Color FancyColor::Update()
 	{
 		return ToColor( clr1->Update(), clr2->Update() );
 	}

@@ -13,13 +13,12 @@ namespace CloudberryKingdom
 	class IPos
 	{
 	public:
-		virtual const Vector2 &getPos() const = 0;
+		virtual Vector2 getPos() = 0;
 	};
 
-	class FancyVector2 : public ViewReadWrite, public IPos
+	class FancyVector2 : public IPos
 	{
 	public:
-		virtual std::vector<std::wstring> GetViewables();
 
 		AnimationData AnimData;
 
@@ -67,9 +66,9 @@ namespace CloudberryKingdom
 		float t;
 		bool Playing;
 		bool Loop;
-		const Vector2 &getPos() const;
+		Vector2 getPos();
 
-		const float &getVal() const;
+		float getVal();
 		void setVal( const float &value );
 
 
@@ -106,14 +105,12 @@ namespace CloudberryKingdom
 
 //ORIGINAL LINE: public void MultiLerp(int Frames, params Vector2[] Positions)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void MultiLerp( int Frames, ... );
-//ORIGINAL LINE: public void MultiLerpReverse(int Frames, params Vector2[] Positions)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void MultiLerpReverse( int Frames, ... );
+		void MultiLerp( int Frames, const std::vector<Vector2> Positions );
+
 	private:
 //ORIGINAL LINE: void MultiLerp(int Frames, bool Reverse, params Vector2[] Positions)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void MultiLerp( int Frames, bool Reverse, ... );
+		void MultiLerp( int Frames, bool Reverse, const std::vector<Vector2> Positions );
 
 	public:
 		static const LerpStyle DefaultLerpStyle;

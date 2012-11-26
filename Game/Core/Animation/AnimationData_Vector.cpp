@@ -42,6 +42,11 @@ bool AnimationData::RecordAll = false;
 		}
 	}
 
+	AnimationData::AnimationData()
+	{
+		Linear = false;
+	}
+
 	AnimationData::AnimationData( const AnimationData &data )
 	{
 		Linear = false;

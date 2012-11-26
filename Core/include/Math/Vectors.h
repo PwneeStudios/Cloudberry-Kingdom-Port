@@ -56,6 +56,21 @@ public:
 		return Vector2( X * k, Y * k );
 	}
 
+	Vector2 operator * ( const Vector2 &a )
+	{
+		return Vector2( X * a.X, Y * a.Y );
+	}
+
+	Vector2 operator - ( const Vector2 &a ) const
+	{
+		return Vector2( X - a.X, Y - a.Y );
+	}
+
+	Vector2 operator / ( float k ) const
+	{
+		return Vector2( X / k, Y / k );
+	}
+
 	static Vector2 Lerp( const Vector2 &a, const Vector2 &b, float t )
 	{
 		return a * ( 1 - t ) + b * t;
@@ -63,8 +78,15 @@ public:
 
 };
 
+inline Vector2 operator * ( float k, const Vector2 &a )
+{
+	return a * k;
+}
+
 class Vector3
 {
+
+public:
 
 	float X;
 	float Y;
@@ -79,29 +101,29 @@ class Vector3
 class Vector4
 {
 
-	float x_;
-	float y_;
-	float z_;
-	float w_;
-
 public:
 
-	Vector4() : x_( 0 ), y_( 0 ), z_( 0 ), w_( 0 ) { }
-	Vector4( const Vector4 &other) : x_( other.x_ ), y_( other.y_ ),
-		z_( other.z_ ), w_( other.w_ ) { }
-	Vector4( float x ) : x_( x ), y_( x ), z_( x ), w_( x ) { }
+	float X;
+	float Y;
+	float Z;
+	float W;
+
+	Vector4() : X( 0 ), Y( 0 ), Z( 0 ), W( 0 ) { }
+	Vector4( const Vector4 &other) : X( other.X ), Y( other.Y ),
+		Z( other.Z ), W( other.W ) { }
+	Vector4( float x ) : X( x ), Y( x ), Z( x ), W( x ) { }
 	Vector4( float x, float y, float z, float w ) :
-		x_( x ), y_( y ), z_( z ), w_( w ) { }
+		X( x ), Y( y ), Z( z ), W( w ) { }
 
-	float x() const { return x_; }
-	float y() const { return y_; }
-	float z() const { return z_; }
-	float w() const { return w_; }
+	float x() const { return X; }
+	float y() const { return Y; }
+	float z() const { return Z; }
+	float w() const { return W; }
 
-	float r() const { return x_; }
-	float g() const { return y_; }
-	float b() const { return z_; }
-	float a() const { return w_; }
+	float r() const { return X; }
+	float g() const { return Y; }
+	float b() const { return Z; }
+	float a() const { return W; }
 
 };
 

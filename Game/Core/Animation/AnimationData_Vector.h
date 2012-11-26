@@ -10,6 +10,7 @@ namespace CloudberryKingdom
 	public:
 		std::vector<Vector2> Data;
 	};
+
 	class AnimationData
 	{
 		/// <summary>
@@ -29,6 +30,8 @@ namespace CloudberryKingdom
 		void Write( const std::shared_ptr<BinaryWriter> &writer );
 
 		void Read( const std::shared_ptr<BinaryReader> &reader );
+
+		AnimationData();
 
 		AnimationData( const AnimationData &data );
 
