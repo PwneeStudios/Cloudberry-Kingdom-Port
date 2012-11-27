@@ -12,7 +12,7 @@ bool AnimationData::RecordAll = false;
 	void AnimationData::Release()
 	{
 		if ( Anims.size() > 0 )
-			for ( int i = 0; i < Anims.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Anims.size() ); i++ )
 				Anims[ i ].Data.clear();
 		Anims.clear();
 	}
@@ -23,8 +23,8 @@ bool AnimationData::RecordAll = false;
 			writer->Write( -1 );
 		else
 		{
-			writer->Write( Anims.size() );
-			for ( int i = 0; i < Anims.size(); i++ )
+			writer->Write( static_cast<int>( Anims.size() ) );
+			for ( int i = 0; i < static_cast<int>( Anims.size() ); i++ )
 				WriteReadTools::WriteOneAnim( writer, Anims[ i ] );
 		}
 	}
@@ -51,9 +51,9 @@ bool AnimationData::RecordAll = false;
 	{
 		Linear = false;
 
-		Hold = Vector2::Zero;
+		Hold = Vector2();
 		Anims = std::vector<OneAnim>( data.Anims.size() );
-		for ( int i = 0; i < data.Anims.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( data.Anims.size() ); i++ )
 			CopyAnim( data, i );
 	}
 
@@ -62,7 +62,8 @@ bool AnimationData::RecordAll = false;
 		if ( data.Anims[ Anim ].Data.size() > 0 )
 		{
 			Anims[ Anim ].Data = std::vector<Vector2>( data.Anims[ Anim ].Data.size() );
-			data.Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
+			//data.Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
+			Anims[ Anim ].Data.assign( data.Anims[ Anim ].Data.begin(), data.Anims[ Anim ].Data.end() );
 		}
 		else
 			Anims[ Anim ].Data.clear();
@@ -72,16 +73,16 @@ bool AnimationData::RecordAll = false;
 	{
 		const OneAnim tempVector[] = { OneAnim() };
 		Anims = std::vector<OneAnim>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		Hold = Vector2::Zero;
+		Hold = Vector2();
 	}
 
 	void AnimationData::InsertFrame( int anim, int frame )
 	{
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return;
 		if ( Anims[ anim ].Data.empty() )
 			return;
-		if ( frame >= Anims[ anim ].Data.size() )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) )
 			return;
 
 		OneAnim NewAnim = OneAnim();
@@ -89,18 +90,18 @@ bool AnimationData::RecordAll = false;
 		for ( int i = 0; i < frame; i++ )
 			NewAnim.Data[ i ] = Anims[ anim ].Data[ i ];
 		NewAnim.Data[ frame ] = Anims[ anim ].Data[ frame ];
-		for ( int i = frame + 1; i < Anims[ anim ].Data.size() + 1; i++ )
+		for ( int i = frame + 1; i < static_cast<int>( Anims[ anim ].Data.size() ) + 1; i++ )
 			NewAnim.Data[ i ] = Anims[ anim ].Data[ i - 1 ];
 		Anims[ anim ] = NewAnim;
 	}
 
 	void AnimationData::DeleteFrame( int anim, int frame )
 	{
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return;
 		if ( Anims[ anim ].Data.empty() )
 			return;
-		if ( frame >= Anims[ anim ].Data.size() )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) )
 			return;
 
 		if ( Anims[ anim ].Data.size() > 1 )
@@ -109,7 +110,7 @@ bool AnimationData::RecordAll = false;
 			NewAnim.Data = std::vector<Vector2>( Anims[ anim ].Data.size() - 1 );
 			for ( int i = 0; i < frame; i++ )
 				NewAnim.Data[ i ] = Anims[ anim ].Data[ i ];
-			for ( int i = frame + 1; i < Anims[ anim ].Data.size(); i++ )
+			for ( int i = frame + 1; i < static_cast<int>( Anims[ anim ].Data.size() ); i++ )
 				NewAnim.Data[ i - 1 ] = Anims[ anim ].Data[ i ];
 			Anims[ anim ] = NewAnim;
 		}
@@ -118,7 +119,7 @@ bool AnimationData::RecordAll = false;
 	void AnimationData::AddFrame( Vector2 val, int anim )
 	{
 		int frame = 0;
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			frame = 0;
 		else if ( Anims[ anim ].Data.empty() )
 			frame = 0;
@@ -136,10 +137,11 @@ bool AnimationData::RecordAll = false;
 			Default = Anims[ 0 ].Data[ 0 ];
 		}
 
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 		{
 			std::vector<OneAnim> NewAnims = std::vector<OneAnim>( anim + 1 );
-			Anims.CopyTo( NewAnims, 0 );
+			//Anims.CopyTo( NewAnims, 0 );
+			NewAnims.assign( Anims.begin(), Anims.end() );
 			Anims = NewAnims;
 		}
 
@@ -152,27 +154,31 @@ bool AnimationData::RecordAll = false;
 			if ( frame > 0 )
 				Default = Get( anim, frame - 1 );
 
-		if ( frame >= Anims[ anim ].Data.size() && !(val == Default && Anims[ anim ].Data.size() <= 1) )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) && !(val == Default && Anims[ anim ].Data.size() <= 1) )
 		{
 			std::vector<Vector2> NewData = std::vector<Vector2>( frame + 1 );
 			for ( int i = 0; i < frame + 1; i++ )
 				NewData[ i ] = Default;
-			Anims[ anim ].Data.CopyTo( NewData, 0 );
+			//Anims[ anim ].Data.CopyTo( NewData, 0 );
+			NewData.assign(Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
 			Anims[ anim ].Data = NewData;
 		}
 
-		if ( frame < Anims[ anim ].Data.size() )
+		if ( frame < static_cast<int>( Anims[ anim ].Data.size() ) )
 			Anims[ anim ].Data[ frame ] = val;
 	}
 
-	Microsoft::Xna::Framework::Vector2 AnimationData::Get( int anim, int frame )
+	// regex FIXME Microsoft::Xna::Framework::Vector2
+	// regex FIXME Vector2::Zero
+
+	Vector2 AnimationData::Get( int anim, int frame )
 	{
-		Vector2 Default = Vector2::Zero;
+		Vector2 Default = Vector2();
 		if ( Anims[ 0 ].Data.size() > 0 )
 			Default = Anims[ 0 ].Data[ 0 ];
 
 
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return Default;
 
 		if ( Anims[ anim ].Data.empty() )
@@ -193,13 +199,13 @@ bool AnimationData::RecordAll = false;
 			else
 				return Default;
 		}
-		if ( frame >= Anims[ anim ].Data.size() || frame < 0 )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) || frame < 0 )
 			return Default;
 
 		return Anims[ anim ].Data[ frame ];
 	}
 
-	Microsoft::Xna::Framework::Vector2 AnimationData::Transfer( int DestAnim, float DestT, int DestLength, bool DestLoop, bool DestLinear, float t )
+	Vector2 AnimationData::Transfer( int DestAnim, float DestT, int DestLength, bool DestLoop, bool DestLinear, float t )
 	{
 		Vector2 v1 = Hold;
 		Vector2 v2 = Calc( DestAnim, DestT, DestLength, DestLoop, DestLinear );
@@ -207,7 +213,7 @@ bool AnimationData::RecordAll = false;
 		return Vector2::Lerp( v1, v2, t );
 	}
 
-	Microsoft::Xna::Framework::Vector2 AnimationData::Calc( int anim, float t, int Length, bool Loop, bool Linear )
+	Vector2 AnimationData::Calc( int anim, float t, int Length, bool Loop, bool Linear )
 	{
 		if ( Linear )
 		{
@@ -261,12 +267,12 @@ bool AnimationData::RecordAll = false;
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector3 AnimationData::VecAndLength( Vector2 v )
+	Vector3 AnimationData::VecAndLength( Vector2 v )
 	{
 		return Vector3( v.X, v.Y, v.Length() );
 	}
 
-	Microsoft::Xna::Framework::Vector2 AnimationData::CalcAxis( int anim, float t, int Length, bool Loop, bool Linear )
+	Vector2 AnimationData::CalcAxis( int anim, float t, int Length, bool Loop, bool Linear )
 	{
 		Vector3 result;
 		if ( Linear )

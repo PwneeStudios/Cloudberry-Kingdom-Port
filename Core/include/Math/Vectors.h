@@ -39,10 +39,30 @@ public:
 		return Vector2( X / length, Y / length );
 	}
 
+	static Vector2 CatmullRom(Vector2 v1, Vector2 v2, Vector2 v3, Vector2 v4, float t)
+	{
+		Vector2 v;
+
+		float t2 = t * t;
+		float t3 = t * t2;
+
+		v.X = 0.5f * ((((2.f * v2.X) + ((-v1.X + v3.X) * t)) + (((((2.f * v1.X) - (5.f * v2.X)) + (4.f * v3.X)) - v4.X) * t2)) + ((((-v1.X + (3.f * v2.X)) - (3.f * v3.X)) + v4.X) * t3));
+		v.Y = 0.5f * ((((2.f * v2.Y) + ((-v1.Y + v3.Y) * t)) + (((((2.f * v1.Y) - (5.f * v2.Y)) + (4.f * v3.Y)) - v4.Y) * t2)) + ((((-v1.Y + (3.f * v2.Y)) - (3.f * v3.Y)) + v4.Y) * t3));
+		
+		return v;
+	}
+
 	Vector2 &operator += ( const Vector2 &a )
 	{
 		X += a.x();
 		Y += a.y();
+		return *this;
+	}
+
+	Vector2 &operator *= ( float k )
+	{
+		X *= k;
+		Y *= k;
 		return *this;
 	}
 
@@ -71,6 +91,11 @@ public:
 		return Vector2( X / k, Y / k );
 	}
 
+	bool operator == ( const Vector2 &a ) const
+	{
+		return X == a.X && Y == a.Y;
+	}
+
 	static Vector2 Lerp( const Vector2 &a, const Vector2 &b, float t )
 	{
 		return a * ( 1 - t ) + b * t;
@@ -96,7 +121,42 @@ public:
 	Vector3( const Vector3 &other ) : X( other.X ), Y( other.Y ), Z( other.Z ) { }
 	Vector3( float x, float y, float z ) : X(x), Y(y), Z(z) { }
 	Vector3( float x ) : X(x), Y(x), Z(x) { }
+
+	static Vector3 Lerp( const Vector3 &v1, const Vector3 &v2, float t )
+	{
+		return v1 * ( 1 - t ) + v2 * t;
+	}
+
+	static Vector3 CatmullRom(Vector3 v1, Vector3 v2, Vector3 v3, Vector3 v4, float t)
+	{
+		Vector3 v;
+
+		float t2 = t * t;
+		float t3 = t * t2;
+
+		v.X = 0.5f * ((((2.f * v2.X) + ((-v1.X + v3.X) * t)) + (((((2.f * v1.X) - (5.f * v2.X)) + (4.f * v3.X)) - v4.X) * t2)) + ((((-v1.X + (3.f * v2.X)) - (3.f * v3.X)) + v4.X) * t3));
+		v.Y = 0.5f * ((((2.f * v2.Y) + ((-v1.Y + v3.Y) * t)) + (((((2.f * v1.Y) - (5.f * v2.Y)) + (4.f * v3.Y)) - v4.Y) * t2)) + ((((-v1.Y + (3.f * v2.Y)) - (3.f * v3.Y)) + v4.Y) * t3));
+		v.Z = 0.5f * ((((2.f * v2.Z) + ((-v1.Z + v3.Z) * t)) + (((((2.f * v1.Z) - (5.f * v2.Z)) + (4.f * v3.Z)) - v4.Z) * t2)) + ((((-v1.Z + (3.f * v2.Z)) - (3.f * v3.Z)) + v4.Z) * t3));
+		
+		return v;
+	}
+
+	Vector3 operator + ( const Vector3 &a ) const
+	{
+		return Vector3( X + a.X, Y + a.Y, Z + a.Z );
+	}
+
+	Vector3 operator * ( float k ) const
+	{
+		return Vector3( X * k, Y * k, Z * k );
+	}
+
 };
+
+inline Vector3 operator * ( float k, const Vector3 &a )
+{
+	return a * k;
+}
 
 class Vector4
 {
@@ -129,10 +189,14 @@ public:
 
 class Matrix
 {
+
+public:
+
 	float M11, M12, M13, M14;
 	float M21, M22, M23, M24;
 	float M31, M32, M33, M34;
 	float M41, M42, M43, M44;
+
 };
 
 #endif
