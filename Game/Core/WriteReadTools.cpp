@@ -1,10 +1,11 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
-	Microsoft::Xna::Framework::Vector2 WriteReadTools::ReadVector2( const std::shared_ptr<BinaryReader> &reader )
+	Vector2 WriteReadTools::ReadVector2( const std::shared_ptr<BinaryReader> &reader )
 	{
-		Vector2 vec = Vector2::Zero;
+		Vector2 vec;
 		ReadVector2( reader, vec );
 		return vec;
 	}
@@ -27,8 +28,8 @@ namespace CloudberryKingdom
 			writer->Write( -1 );
 		else
 		{
-			writer->Write( anim.Data.size() );
-			for ( int i = 0; i < anim.Data.size(); i++ )
+			writer->Write( static_cast<int>( anim.Data.size() ) );
+			for ( size_t i = 0; i < anim.Data.size(); i++ )
 				WriteVector2( writer, anim.Data[ i ] );
 		}
 	}
@@ -52,12 +53,12 @@ namespace CloudberryKingdom
 			writer->Write( -1 );
 		else
 		{
-			writer->Write( anim.Data.size() );
-			for ( int i = 0; i < anim.Data.size(); i++ )
+			writer->Write( static_cast<int>( anim.Data.size() ) );
+			for ( size_t i = 0; i < anim.Data.size(); i++ )
 			{
 				writer->Write( anim.Data[ i ]->Name );
-				writer->Write( Vector2::Zero ); // Dummy
-				writer->Write( Vector2::Zero ); // Dummy
+				writer->Write( Vector2() ); // Dummy
+				writer->Write( Vector2() ); // Dummy
 			}
 		}
 	}
@@ -69,7 +70,7 @@ namespace CloudberryKingdom
 			anim.Data.clear();
 		else
 		{
-			anim.Data = std::vector<EzTexture*>( length );
+			anim.Data = std::vector<std::shared_ptr<EzTexture> >( length );
 			for ( int i = 0; i < length; i++ )
 			{
 				std::wstring s = reader->ReadString();

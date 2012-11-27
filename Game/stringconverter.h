@@ -9,6 +9,8 @@
 //----------------------------------------------------------------------------------------
 #include <global_header.h>
 
+#include <sstream>
+
 class StringConverterHelper
 {
 public:

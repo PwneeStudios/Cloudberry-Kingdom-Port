@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		{
 			for ( int i = StartFrame; i <= EndFrame; i++ )
 			{
-				int len = i == 0 ? 1 : static_cast<int>( log10( i ) ) + 1;
+				int len = i == 0 ? 1 : static_cast<int>( std::log10( static_cast<float>( i ) ) ) + 1;
 				std::wstring padding = len <= length ? pad[ length - len ] : _T( "" );
 				AddFrame( Tools::Texture( TextureRoot + format + padding + StringConverterHelper::toString( i ) ), 0 );
 			}
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 	void AnimationData_Texture::Release()
 	{
 		if ( Anims.size() > 0 )
-			for ( int i = 0; i < Anims.size(); i++ )
+			for ( size_t i = 0; i < Anims.size(); i++ )
 				Anims[ i ].Data.clear();
 		Anims.clear();
 	}
@@ -105,8 +105,8 @@ namespace CloudberryKingdom
 			writer->Write( -1 );
 		else
 		{
-			writer->Write( Anims.size() );
-			for ( int i = 0; i < Anims.size(); i++ )
+			writer->Write( static_cast<int>( Anims.size() ) );
+			for ( size_t i = 0; i < Anims.size(); i++ )
 				WriteReadTools::WriteOneAnim( writer, Anims[ i ] );
 		}
 	}
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		Anims = std::vector<OneAnim_Texture>( data->Anims.size() );
-		for ( int i = 0; i < data->Anims.size(); i++ )
+		for ( size_t i = 0; i < data->Anims.size(); i++ )
 			CopyAnim( data, i );
 	}
 
@@ -137,8 +137,9 @@ namespace CloudberryKingdom
 		if ( data->Anims[ Anim ].Data.size() > 0 )
 		{
 			Anims[ Anim ].Speed = data->Anims[ Anim ].Speed;
-			Anims[ Anim ].Data = std::vector<EzTexture*>( data->Anims[ Anim ].Data.size() );
-			data->Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
+			Anims[ Anim ].Data = std::vector<std::shared_ptr<EzTexture> >( data->Anims[ Anim ].Data.size() );
+			//data->Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
+			Anims[ Anim ].Data.assign( data->Anims[ Anim ].Data.begin(), data->Anims[ Anim ].Data.end() );
 		}
 		else
 			Anims[ Anim ].Data.clear();
@@ -152,51 +153,51 @@ namespace CloudberryKingdom
 
 	void AnimationData_Texture::InsertFrame( int anim, int frame )
 	{
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return;
 		if ( Anims[ anim ].Data.empty() )
 			return;
-		if ( frame >= Anims[ anim ].Data.size() )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) )
 			return;
 
 		OneAnim_Texture NewAnim = OneAnim_Texture();
-		NewAnim.Data = std::vector<EzTexture*>( Anims[ anim ].Data.size() + 1 );
+		NewAnim.Data = std::vector<std::shared_ptr<EzTexture> >( Anims[ anim ].Data.size() + 1 );
 		for ( int i = 0; i < frame; i++ )
 			NewAnim.Data[ i ] = Anims[ anim ].Data[ i ];
 		NewAnim.Data[ frame ] = Anims[ anim ].Data[ frame ];
-		for ( int i = frame + 1; i < Anims[ anim ].Data.size() + 1; i++ )
+		for ( int i = frame + 1; i < static_cast<int>( Anims[ anim ].Data.size() + 1 ); i++ )
 			NewAnim.Data[ i ] = Anims[ anim ].Data[ i - 1 ];
 		Anims[ anim ] = NewAnim;
 	}
 
 	void AnimationData_Texture::ClearAnim( int anim )
 	{
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return;
 		if ( Anims[ anim ].Data.empty() )
 			return;
 
 		OneAnim_Texture NewAnim = OneAnim_Texture();
-		NewAnim.Data = std::vector<EzTexture*>( 0 );
+		NewAnim.Data = std::vector<std::shared_ptr<EzTexture> >( 0 );
 		Anims[ anim ] = NewAnim;
 	}
 
 	void AnimationData_Texture::DeleteFrame( int anim, int frame )
 	{
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return;
 		if ( Anims[ anim ].Data.empty() )
 			return;
-		if ( frame >= Anims[ anim ].Data.size() )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) )
 			return;
 
 		if ( Anims[ anim ].Data.size() > 1 )
 		{
 			OneAnim_Texture NewAnim = OneAnim_Texture();
-			NewAnim.Data = std::vector<EzTexture*>( Anims[ anim ].Data.size() - 1 );
+			NewAnim.Data = std::vector<std::shared_ptr<EzTexture> >( Anims[ anim ].Data.size() - 1 );
 			for ( int i = 0; i < frame; i++ )
 				NewAnim.Data[ i ] = Anims[ anim ].Data[ i ];
-			for ( int i = frame + 1; i < Anims[ anim ].Data.size(); i++ )
+			for ( int i = frame + 1; i < static_cast<int>( Anims[ anim ].Data.size() ); i++ )
 				NewAnim.Data[ i - 1 ] = Anims[ anim ].Data[ i ];
 			Anims[ anim ] = NewAnim;
 		}
@@ -205,7 +206,7 @@ namespace CloudberryKingdom
 	void AnimationData_Texture::AddFrame( const std::shared_ptr<EzTexture> &val, int anim )
 	{
 		int frame = 0;
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			frame = 0;
 		else if ( Anims[ anim ].Data.empty() )
 			frame = 0;
@@ -223,33 +224,35 @@ namespace CloudberryKingdom
 			Default = Anims[ 0 ].Data[ 0 ];
 		}
 
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 		{
 			std::vector<OneAnim_Texture> NewAnims = std::vector<OneAnim_Texture>( anim + 1 );
-			Anims.CopyTo( NewAnims, 0 );
+			//Anims.CopyTo( NewAnims, 0 );
+			NewAnims.assign( Anims.begin(), Anims.end() );
 			Anims = NewAnims;
 		}
 
 		if ( Anims[ anim ].Data.empty() )
 		{
-			const EzTexture* tempVector3[] = { 0 };
-			Anims[ anim ].Data = std::vector<EzTexture*>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+			const std::shared_ptr<EzTexture> tempVector3[] = { 0 };
+			Anims[ anim ].Data = std::vector<std::shared_ptr<EzTexture> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 		}
 		else
 			if ( frame > 0 )
 				Default = Get( anim, frame - 1 );
 
-		if ( frame >= Anims[ anim ].Data.size() && !(val == Default && Anims[ anim ].Data.size() <= 1) )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) && !(val == Default && Anims[ anim ].Data.size() <= 1) )
 		{
-			std::vector<EzTexture*> NewData = std::vector<EzTexture*>( frame + 1 );
+			std::vector<std::shared_ptr<EzTexture> > NewData = std::vector<std::shared_ptr<EzTexture> >( frame + 1 );
 			for ( int i = 0; i < frame + 1; i++ )
 				NewData[ i ] = Default;
 
-			Anims[ anim ].Data.CopyTo( NewData, 0 );
+			//Anims[ anim ].Data.CopyTo( NewData, 0 );
+			NewData.assign( Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
 			Anims[ anim ].Data = NewData;
 		}
 
-		if ( frame < Anims[ anim ].Data.size() )
+		if ( frame < static_cast<int>( Anims[ anim ].Data.size() ) )
 		{
 			Anims[ anim ].Data[ frame ] = val;
 		}
@@ -262,7 +265,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<EzTexture> Default = Anims[ 0 ].Data[ 0 ];
 
-		if ( anim >= Anims.size() )
+		if ( anim >= static_cast<int>( Anims.size() ) )
 			return Default;
 
 		if ( Anims[ anim ].Data.empty() )
@@ -275,7 +278,7 @@ namespace CloudberryKingdom
 			else
 				return Default;
 		}
-		if ( frame >= Anims[ anim ].Data.size() || frame < 0 )
+		if ( frame >= static_cast<int>( Anims[ anim ].Data.size() ) || frame < 0 )
 			return Default;
 
 		return Anims[ anim ].Data[ frame ];
@@ -284,7 +287,7 @@ namespace CloudberryKingdom
 	std::shared_ptr<EzTexture> AnimationData_Texture::NextKeyFrame()
 	{
 		LastSetFrame++;
-		if ( LastSetFrame >= Anims[ LastSetAnim ].Data.size() )
+		if ( LastSetFrame >= static_cast<int>( Anims[ LastSetAnim ].Data.size() ) )
 			LastSetFrame = 0;
 
 		return Anims[ LastSetAnim ].Data[ LastSetFrame ];

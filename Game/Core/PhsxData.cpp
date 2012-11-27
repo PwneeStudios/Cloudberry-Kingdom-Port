@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -19,4 +20,5 @@ namespace CloudberryKingdom
 		Velocity += Acceleration;
 		Position += Velocity;
 	}
+
 }

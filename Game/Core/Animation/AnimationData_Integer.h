@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	class OneAnim_Texture
 	{
 	public:
-		std::vector<EzTexture*> Data;
+		std::vector<std::shared_ptr<EzTexture> > Data;
 		float Speed;
 	};
 

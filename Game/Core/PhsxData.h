@@ -1,5 +1,6 @@
 ﻿#ifndef PHSXDATA
 #define PHSXDATA
+
 namespace CloudberryKingdom
 {
 	class PhsxData

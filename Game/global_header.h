@@ -13,8 +13,13 @@
 #include <stack>
 #include <string>
 #include <vector>
+#include <tchar.h>
 
-class BinaryReader;
+// Core library.
+#include <Graphics/Color.h>
+#include <Math/Vectors.h>
+
+#include "Hacks/BinaryReader.h"
 #include "Hacks/BinaryWriter.h"
 class ContentManager;
 struct DateTime { int Time; };
@@ -57,10 +62,6 @@ class Video;
 class VideoPlayer;
 struct Viewport { float X; float Y; float Width; float Height; };
 
-// Core library.
-#include <Graphics/Color.h>
-#include <Math/Vectors.h>
-
 // Cloudberry Kingdom converted files.
 #include "Game/Localization.h"
 #include "Core/Graphics/Draw/Simple/BasePoint.h"
@@ -76,6 +77,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Tools/IntVector2.h"
 #include "Game/Tools/Oscillate.h"
 #include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Animation/AnimationData_Integer.h"
 #include "CloudberryKingdom.h"
 #include "stringconverter.h"
 #include "Core/Chunk.h"
@@ -88,7 +90,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Core/Graphics/Draw/Simple/SimpleVector.h"
 #include "Core/Graphics/Draw/Simple/SimpleQuad.h"
 #include "Core/WriteReadTools.h"
-#include "Core/Animation/AnimationData_Integer.h"
 #include "Core/Animation/AnimQueue.h"
 #include "Core/Animation/SpriteAnim.h"
 #include "Core/Effects/EzEffect.h"

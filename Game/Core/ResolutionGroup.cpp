@@ -1,17 +1,13 @@
 #include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
+//std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 
 	IntVector2 ResolutionGroup::SafeResolution( int width, int height )
 	{
-		bool MatchingFound = false;
+		/*bool MatchingFound = false;
 		int SuitableY = -1;
 
 		// Make sure this is a supported resolution
@@ -40,23 +36,24 @@ std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 			}
 		}
 
-		return IntVector2( width, height );
+		return IntVector2( width, height );*/
+		return IntVector2( 1280, 720 );
 	}
 
 	void ResolutionGroup::Use( const std::shared_ptr<DisplayMode> &mode )
 	{
-		LastSetMode = mode;
-		Use( mode->Width, mode->Height );
+		/*LastSetMode = mode;
+		Use( mode->Width, mode->Height );*/
 	}
 
 	void ResolutionGroup::Use( int width, int height )
 	{
-		Use( width, height, true );
+		//Use( width, height, true );
 	}
 
 	void ResolutionGroup::Use( int width, int height, bool AllowModifications )
 	{
-	#if defined(WINDOWS)
+	/*#if defined(WINDOWS)
 		Vector2 save = Tools::getMousePos();
 	#endif
 		if ( AllowModifications )
@@ -77,12 +74,12 @@ std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 
 	#if defined(WINDOWS) 
 		Tools::setMousePos( save );
-	#endif
+	#endif*/
 	}
 
 	void ResolutionGroup::Use()
 	{
-		int width = Backbuffer.X, height = Backbuffer.Y;
+		/*int width = Backbuffer.X, height = Backbuffer.Y;
 		if ( !Tools::TheGame->MyGraphicsDeviceManager->IsFullScreen )
 		{
 			height = static_cast<int>( ( 720 / 1280 ) * width );
@@ -91,29 +88,30 @@ std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 		Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferWidth = width;
 		Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferHeight = height;
 		Tools::TheGame->MyGraphicsDeviceManager->ApplyChanges();
-		Tools::Render->MakeInnerViewport();
+		Tools::Render->MakeInnerViewport();*/
 	}
 
 	std::wstring ResolutionGroup::ToString()
 	{
-		return Backbuffer.X + _T( " x " ) + Backbuffer.Y;
+		return _T( "FIXME" );
+		/*return Backbuffer.X + _T( " x " ) + Backbuffer.Y;*/
 	}
 
 	void ResolutionGroup::CopyTo( ResolutionGroup &dest )
 	{
-		dest.Backbuffer = Backbuffer;
+		/*dest.Backbuffer = Backbuffer;
 		dest.Bob_Renamed = Bob_Renamed;
 
 		dest.TextOrigin = TextOrigin;
-		dest.LineHeightMod = LineHeightMod;
+		dest.LineHeightMod = LineHeightMod;*/
 	}
 
 	void ResolutionGroup::CopyTo( ResolutionGroup &dest, Vector2 scale )
 	{
-		dest.Backbuffer = Backbuffer * scale;
+		/*dest.Backbuffer = Backbuffer * scale;
 		dest.Bob_Renamed = Bob_Renamed * scale;
 
 		dest.TextOrigin = TextOrigin - scale;
-		dest.LineHeightMod = LineHeightMod * scale.Y;
+		dest.LineHeightMod = LineHeightMod * scale.Y;*/
 	}
 }
