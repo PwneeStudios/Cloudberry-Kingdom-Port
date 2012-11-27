@@ -55,7 +55,14 @@ class StorageDevice;
 class StreamReader;
 class StreamWriter;
 class StringBuilder;
-class Texture2D;
+
+class Texture2D
+{
+public:
+	// FIXME: Implement this.
+	void Dispose() { } 
+};
+
 class Thread;
 template<class A, class B> class Tuple;
 class Video;
@@ -91,6 +98,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Core/Graphics/Draw/Simple/SimpleQuad.h"
 #include "Core/WriteReadTools.h"
 #include "Core/Animation/AnimQueue.h"
+#include "Core/Graphics/Draw/Object/ObjectClass.h"
 #include "Core/Animation/SpriteAnim.h"
 #include "Core/Effects/EzEffect.h"
 #include "Core/Effects/EzEffectWad.h"
@@ -98,7 +106,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Core/Graphics/QuadDrawer.h"
 #include "Core/Graphics/Draw/DrawPile.h"
 #include "Core/Graphics/Draw/Object/ObjectBox.h"
-#include "Core/Graphics/Draw/Object/ObjectClass.h"
 #include "Core/Graphics/Draw/Quads/BaseQuad.h"
 #include "Core/Graphics/Draw/Quads/ObjectVector.h"
 #include "Core/Graphics/Draw/Quads/PieceQuad.h"

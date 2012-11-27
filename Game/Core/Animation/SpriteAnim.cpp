@@ -1,15 +1,11 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
 	void SpriteAnimGroup::Release()
 	{
-		for ( std::map<int, SpriteAnim*>::const_iterator anim = SpriteAnims.begin(); anim != SpriteAnims.end(); ++anim )
+		for ( std::map<int, SpriteAnim*>::iterator anim = SpriteAnims.begin(); anim != SpriteAnims.end(); ++anim )
 			anim->second->Release();
 
 		SpriteAnims.clear();
@@ -20,7 +16,8 @@ namespace CloudberryKingdom
 		SpriteAnims = std::map<int, SpriteAnim*>();
 	}
 
-	void SpriteAnimGroup::Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding, const std::shared_ptr<CloudberryKingdom::Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc )
+	void SpriteAnimGroup::Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
+		const std::shared_ptr<Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc )
 	{
 		// Make sure stickman is oriented correctly            
 		Obj->xFlip = false;
@@ -35,13 +32,17 @@ namespace CloudberryKingdom
 			sprite->second->Padding = Padding;
 	}
 
-	std::shared_ptr<Texture2D> SpriteAnimGroup::Get( int anim, float t, Vector2 &padding )
+	// FIXME: This Texture2D * used to be std::shared_ptr<Texture2D>.
+	Texture2D *SpriteAnimGroup::Get( int anim, float t, Vector2 &padding )
 	{
-		if ( !SpriteAnims.find( anim ) != SpriteAnims.end() )
-			t = anim = 0;
+		if ( SpriteAnims.find( anim ) == SpriteAnims.end() )
+		{
+			t = 0.f;
+			anim = 0;
+		}
 
 		float dt = SpriteAnims[ anim ]->dt;
-		int frame = __min( static_cast<int>( t / dt ), SpriteAnims[ anim ]->Frames->size() - 1 );
+		int frame = __min( static_cast<int>( t / dt ), static_cast<int>( SpriteAnims[ anim ]->Frames.size() ) - 1 );
 		padding = SpriteAnims[ anim ]->Padding;
 		return SpriteAnims[ anim ]->Frames[ frame ];
 	}
@@ -49,7 +50,7 @@ namespace CloudberryKingdom
 	void SpriteAnim::Release()
 	{
 		if ( Frames.size() > 0 )
-			for ( int i = 0; i < Frames.size(); i++ )
+			for ( size_t i = 0; i < Frames.size(); i++ )
 				Frames[ i ]->Dispose();
 	}
 }

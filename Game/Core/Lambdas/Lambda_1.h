@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	class Lambda_1
 	{
 	public:
-		virtual void Apply( const std::shared_ptr<T> &t ) = 0;
+		virtual void Apply( T &t ) = 0;
 	};
 }
 

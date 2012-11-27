@@ -5,6 +5,17 @@
 
 namespace CloudberryKingdom
 {
+
+	class SpriteAnim
+	{
+	public:
+		float dt;
+		std::vector<Texture2D*> Frames;
+		Vector2 Padding;
+
+		void Release();
+	};
+
 	/// <summary>
 	/// Should be replaced. Right now this is used for drawing the players in the replays, but replays should instead be reusing the same draw code for the player as the normal draw code.
 	/// </summary>
@@ -17,20 +28,12 @@ namespace CloudberryKingdom
 
 		SpriteAnimGroup();
 
-		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding, const std::shared_ptr<CloudberryKingdom::Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
+		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
+			const std::shared_ptr<Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
 
-		std::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
+		Texture2D *Get( int anim, float t, Vector2 &padding );
 	};
 
-	class SpriteAnim
-	{
-	public:
-		float dt;
-		std::vector<Texture2D*> Frames;
-		Vector2 Padding;
-
-		void Release();
-	};
 }
 
 

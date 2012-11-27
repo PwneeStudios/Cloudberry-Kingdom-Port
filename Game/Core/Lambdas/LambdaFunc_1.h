@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	class LambdaFunc_1
 	{
 	public:
-		virtual std::shared_ptr<OutputType> Apply( const std::shared_ptr<T> &t ) = 0;
+		virtual OutputType Apply( T &t ) = 0;
 	};
 }
 

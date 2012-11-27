@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -22,4 +18,5 @@ namespace CloudberryKingdom
 		anim = entry->anim;
 		Initialized = entry->Initialized;
 	}
+
 }
