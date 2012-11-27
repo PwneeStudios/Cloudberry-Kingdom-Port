@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::FlyingBlobTileInfo::InitializeInstanceFields()
 	{
-		Body = std::make_shared<SpriteInfo>( 0, Vector2::One, Vector2(), Color::White );
+		Body = std::make_shared<SpriteInfo>( 0, Vector2(1), Vector2(), Color::White );
 		ObjectSize = Vector2( 616.05f, 616.05f );
 		GooSprite = 0;
 	}

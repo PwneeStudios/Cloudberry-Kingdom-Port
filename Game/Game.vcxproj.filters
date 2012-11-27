@@ -2204,5 +2204,8 @@
     <ClInclude Include="Hacks\BinaryReader.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hacks\String.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

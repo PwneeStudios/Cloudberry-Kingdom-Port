@@ -317,7 +317,7 @@ std::vector<Vector2> DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, 
 		{
 			scales = std::vector<Vector2>( BubbleScale.size() );
 			for ( int i = 0; i < BubbleScale.size(); i++ )
-				scales[ i ] = ( BubbleScale[ i ] - Vector2::One ) * Intensity + Vector2::One;
+				scales[ i ] = ( BubbleScale[ i ] - Vector2(1) ) * Intensity + Vector2(1);
 		}
 
 		FancyScale->MultiLerp( Length, scales );
@@ -351,7 +351,7 @@ std::vector<Vector2> DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, 
 	{
 		std::vector<Vector2> mapped = std::vector<Vector2>( JiggleScale.size() );
 		for ( int i = 0; i < JiggleScale.size(); i++ )
-			mapped[ i ] = ( JiggleScale[ i ] - Vector2::One ) * Intensity + Vector2::One;
+			mapped[ i ] = ( JiggleScale[ i ] - Vector2(1) ) * Intensity + Vector2(1);
 
 		FancyScale->MultiLerp( Length, mapped );
 

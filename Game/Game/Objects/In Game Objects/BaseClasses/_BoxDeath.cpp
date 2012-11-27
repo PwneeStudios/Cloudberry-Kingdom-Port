@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	{
 		_Death::MakeNew();
 
-		Box->Initialize( Vector2(), Vector2::One );
+		Box->Initialize( Vector2(), Vector2(1) );
 	}
 
 	_BoxDeath::_BoxDeath()

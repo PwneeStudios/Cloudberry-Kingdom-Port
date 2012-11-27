@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		getCore()->MyType = ObjectType_COIN;
 		getCore()->DrawLayer = 5;
 
-		Box->Initialize( Vector2(), Vector2::One );
+		Box->Initialize( Vector2(), Vector2(1) );
 	}
 
 	void Coin::Release()

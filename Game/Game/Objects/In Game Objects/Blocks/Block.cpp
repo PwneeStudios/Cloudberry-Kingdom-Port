@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 
 		UseCustomCenterAsParent = false;
 		CustomCenterAsParent = Vector2();
-		OffsetMultAsParent = Vector2::One;
+		OffsetMultAsParent = Vector2(1);
 
 		MyOrientation = PieceQuad::Orientation_NORMAL;
 

@@ -5,34 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class EzEffect;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class Effect;
-			}
-		}
-	}
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class EzEffectWad
 	{
 	public:
 		Vector2 ModZoom;
 
-		std::vector<EzEffect*> EffectList;
+		typedef std::vector<std::shared_ptr<EzEffect> > EffectVec;
+		EffectVec EffectList;
 
 	private:
 		Vector4 _CameraPosition;

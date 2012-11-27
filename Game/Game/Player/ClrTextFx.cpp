@@ -34,7 +34,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -53,7 +53,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -73,7 +73,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = color;
@@ -92,7 +92,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -110,7 +110,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -128,7 +128,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -146,7 +146,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		this->PicTexture = PicTexture;
 
 		ModObject.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -164,7 +164,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		this->PicTexture = Tools::TextureWad->FindByName( PicTextureName );
 
 		ModObject.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = this->DetailColor = color;
@@ -182,7 +182,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = color;
@@ -201,7 +201,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = color;
@@ -220,7 +220,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicTexture.reset();
-		PicScale = Vector2::One;
+		PicScale = Vector2(1);
 		Name = Localization::Words_NONE;
 
 		this->Clr = color;

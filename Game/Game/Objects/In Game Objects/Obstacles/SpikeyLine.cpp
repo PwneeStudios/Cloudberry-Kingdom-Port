@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 
 	void SpikeyLine::SpikeyLineTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( 0, Vector2::One );
+		Ball = std::make_shared<SpriteInfo>( 0, Vector2(1) );
 		Radius = 120;
 		Rotate = false;
 		RotateOffset = 0;

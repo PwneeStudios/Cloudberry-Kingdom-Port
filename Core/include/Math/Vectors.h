@@ -185,6 +185,16 @@ public:
 	float b() const { return Z; }
 	float a() const { return W; }
 
+	bool operator == ( const Vector4 &a ) const
+	{
+		return X == a.X && Y == a.Y && Z == a.Z && W == a.W;
+	}
+
+	bool operator != ( const Vector4 &a ) const
+	{
+		return !( *this == a );
+	}
+
 };
 
 class Matrix

@@ -15,6 +15,8 @@
 #include <vector>
 #include <tchar.h>
 
+#include <Hacks/String.h>
+
 // Core library.
 #include <Graphics/Color.h>
 #include <Math/Vectors.h>
@@ -24,9 +26,46 @@
 class ContentManager;
 struct DateTime { int Time; };
 class DisplayMode;
-class Effect;
-class EffectParameter;
-class EffectTechnique;
+
+class Effect
+{
+
+public:
+
+	// FIXME: Implement.
+	std::shared_ptr<class EffectParameter> Parameters( const std::wstring &name )
+	{
+		return 0;
+	}
+
+	// FIXME: Implement.
+	std::shared_ptr<class EffectTechnique> Techniques( const std::wstring &name )
+	{
+		return 0;
+	}
+
+};
+
+class EffectParameter
+{
+
+public:
+
+	// FIXME: Implement everything.
+	void SetValue( const Vector4 &v )
+	{
+	}
+
+	void SetValue( const std::shared_ptr<class Texture2D> &t )
+	{
+	}
+
+};
+
+class EffectTechnique
+{
+};
+
 class FileStream;
 class Game { };
 class GamePadState { };
@@ -100,8 +139,8 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Core/Animation/AnimQueue.h"
 #include "Core/Graphics/Draw/Object/ObjectClass.h"
 #include "Core/Animation/SpriteAnim.h"
-#include "Core/Effects/EzEffect.h"
 #include "Core/Effects/EzEffectWad.h"
+#include "Core/Effects/EzEffect.h"
 #include "Core/Graphics/MainRender.h"
 #include "Core/Graphics/QuadDrawer.h"
 #include "Core/Graphics/Draw/DrawPile.h"

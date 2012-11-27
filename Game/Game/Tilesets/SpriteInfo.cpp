@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
-		this->Size = Vector2::One;
+		this->Size = Vector2(1);
 		this->Offset = Vector2();
 		this->Tint = Color::White;
 		this->RelativeOffset = false;

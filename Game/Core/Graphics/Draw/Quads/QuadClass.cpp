@@ -679,7 +679,7 @@ namespace CloudberryKingdom
 		if ( FancyPos != 0 )
 			Base.Origin = FancyPos->Update( ParentScaling );
 
-		Vector2 HoldScale = Vector2::One;
+		Vector2 HoldScale = Vector2(1);
 		Color HoldColor = Quad_Renamed.MySetColor;
 		if ( FancyScale != 0 )
 		{
@@ -689,7 +689,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if ( ParentScaling != Vector2::One )
+			if ( ParentScaling != Vector2(1) )
 			{
 				HoldScale = getSize();
 				setSize( getSize() * ParentScaling );
@@ -728,7 +728,7 @@ namespace CloudberryKingdom
 			Tools::QDrawer->DrawQuad( Quad_Renamed );
 
 		// Reset scaling if modified
-		if ( FancyScale == 0 && ParentScaling != Vector2::One )
+		if ( FancyScale == 0 && ParentScaling != Vector2(1) )
 			setSize( HoldScale );
 		// Reset alpha if modified
 		if ( ParentAlpha != 1 )
@@ -779,7 +779,7 @@ namespace CloudberryKingdom
 		Quad_Renamed = SimpleQuad();
 		Name = _T( "" );
 		Layer = 0;
-		ParentScaling = Vector2::One;
+		ParentScaling = Vector2(1);
 		ParentAlpha = 1;
 		Fading = false;
 		FadeSpeed = 0;

@@ -371,7 +371,7 @@ bool ScoreScreen::UseZoomIn = true;
 			std::vector<Vector2> copy = std::vector<Vector2>( DrawPile::BubbleScale.size() );
 			for ( int i = 0; i < DrawPile::BubbleScale.size(); ++i )
 			{
-				copy[ i ] = ( DrawPile::BubbleScale[ i ] - Vector2::One ) *.3f + Vector2::One;
+				copy[ i ] = ( DrawPile::BubbleScale[ i ] - Vector2(1) ) *.3f + Vector2(1);
 			}
 			zoom->MultiLerp( 6, copy );
 		}

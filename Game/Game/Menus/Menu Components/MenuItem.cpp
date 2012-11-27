@@ -588,7 +588,7 @@ int MenuItem::ActivatingPlayer = -1;
 		GrayOutOnUnselectable = false;
 		Show = true;
 		JiggleOnGo = true;
-		_MyCameraZoom = Vector2::One;
+		_MyCameraZoom = Vector2(1);
 #if defined(WINDOWS)
 		Padding = Vector2( -22, -7 );
 #endif

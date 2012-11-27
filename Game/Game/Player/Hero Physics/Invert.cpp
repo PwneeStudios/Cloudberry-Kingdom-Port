@@ -30,7 +30,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 
 	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
-		Set( phsx, Vector2::One );
+		Set( phsx, Vector2(1) );
 	}
 
 	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )

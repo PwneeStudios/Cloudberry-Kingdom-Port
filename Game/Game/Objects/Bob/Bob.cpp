@@ -1608,7 +1608,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				Boxes = std::vector<AABox*>();
 				for ( int i = 0; i <= NumBoxes; i++ )
-					Boxes.push_back( std::make_shared<AABox>( Vector2(), Vector2::One ) );
+					Boxes.push_back( std::make_shared<AABox>( Vector2(), Vector2(1) ) );
 			}
 
 			// Update box list

@@ -434,7 +434,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity )
 	{
-		PieceOrb( level, style, pos, frame, intensity, 0, Vector2::One, Vector4::One );
+		PieceOrb( level, style, pos, frame, intensity, 0, Vector2(1), Vector4::One );
 	}
 
 	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, const std::shared_ptr<EzTexture> &texture, Vector2 size, Vector4 color )

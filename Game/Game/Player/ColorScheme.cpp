@@ -42,7 +42,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 
 	void Hat::Init()
 	{
-		HatPicScale = Vector2::One;
+		HatPicScale = Vector2(1);
 		QuadName = _T( "" );
 		DrawHead = true;
 		DrawSelf = true;
@@ -51,7 +51,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	Hat::Hat()
 	{
 		InitializeInstanceFields();
-		HatPicScale = Vector2::One;
+		HatPicScale = Vector2(1);
 		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = false;
@@ -64,7 +64,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	Hat::Hat( const std::wstring &QuadName )
 	{
 		InitializeInstanceFields();
-		HatPicScale = Vector2::One;
+		HatPicScale = Vector2(1);
 		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = true;
@@ -77,7 +77,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	Hat::Hat( const std::wstring &QuadName, bool DrawHead )
 	{
 		InitializeInstanceFields();
-		HatPicScale = Vector2::One;
+		HatPicScale = Vector2(1);
 		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = true;
@@ -90,7 +90,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	Hat::Hat( const std::wstring &QuadName, bool DrawHead, bool DrawSelf )
 	{
 		InitializeInstanceFields();
-		HatPicScale = Vector2::One;
+		HatPicScale = Vector2(1);
 		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		this->QuadName = QuadName;

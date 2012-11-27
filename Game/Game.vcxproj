@@ -426,6 +426,7 @@
     <ClInclude Include="Core\Tools\CoreMath.h" />
     <ClInclude Include="Core\Tools\Random.h" />
     <ClInclude Include="Core\Tools\Set.h" />
+    <ClInclude Include="Hacks\String.h" />
     <ClInclude Include="Core\Version.h" />
     <ClInclude Include="Core\WriteReadTools.h" />
     <ClInclude Include="enums.h" />

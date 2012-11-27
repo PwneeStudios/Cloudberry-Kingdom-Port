@@ -1056,7 +1056,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		// Scale if the parent this text is attached to is scaled
 		float HoldScale = getScale();
 		float HoldAlpha = Alpha;
-		if ( ParentScaling != Vector2::One )
+		if ( ParentScaling != Vector2(1) )
 		{
 			setScale( getScale() * ParentScaling.X );
 		}
@@ -1105,7 +1105,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		}
 
 		// Revert the scaling if this text is attached to something
-		if ( ParentScaling != Vector2::One )
+		if ( ParentScaling != Vector2(1) )
 		{
 			setScale( HoldScale );
 		}
@@ -1219,7 +1219,7 @@ bool EzText::ZoomWithCamera_Override = false;
 	{
 		Name = _T( "" );
 		Layer = 0;
-		ParentScaling = Vector2::One;
+		ParentScaling = Vector2(1);
 		ParentAlpha = 1;
 		OutlineColor = Color::Black.ToVector4();
 		Shadow = false;

@@ -385,7 +385,7 @@ namespace CloudberryKingdom
 					FinalCamZone->Start.Y -= 100;
 
 					block->getCore()->DrawLayer = 2;
-					block->Init( startblock->getPos(), Vector2::One, getMyTileSetInfo() );
+					block->Init( startblock->getPos(), Vector2(1), getMyTileSetInfo() );
 					block->Stretch( Side_RIGHT, 2000 );
 					block->Stretch( Side_LEFT, -2000 );
 					block->Stretch( Side_BOTTOM, -800 );
@@ -2947,8 +2947,8 @@ int Level::AfterPostDrawLayer = 12;
 				( *bob )->Init( BoxesOnly, StartData, MySourceGame );
 
 			// Start Bob's box off as tiny, so we can properly collide with ground if the start position is slightly off.
-			( *bob )->Box->Current->Size = Vector2::One;
-			( *bob )->Box->Target.Size = Vector2::One;
+			( *bob )->Box->Current->Size = Vector2(1);
+			( *bob )->Box->Target.Size = Vector2(1);
 			( *bob )->Box->Current->CalcBounds();
 			( *bob )->Box->Target.CalcBounds();
 			( *bob )->Box->CalcBounds();
@@ -3423,7 +3423,7 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 		if ( LevelReleased )
 			return;
 
-		if ( ModZoom != Vector2::One )
+		if ( ModZoom != Vector2(1) )
 		{
 			Tools::EffectWad->ModZoom = ModZoom;
 			Tools::EffectWad->ResetCameraPos();
@@ -3472,9 +3472,9 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 		}
 
 		// Draw final DrawLayer
-		if ( ModZoom != Vector2::One )
+		if ( ModZoom != Vector2(1) )
 		{
-			Tools::EffectWad->ModZoom = Vector2::One;
+			Tools::EffectWad->ModZoom = Vector2(1);
 			Tools::EffectWad->ResetCameraPos();
 		}
 		Tools::StartGUIDraw();
@@ -4113,7 +4113,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		TimeLimit = 7200;
 		HaveTimeLimit = true;
 		TimeLimitTimerLength = 62 * 10 - 1;
-		ModZoom = Vector2::One;
+		ModZoom = Vector2(1);
 		_UseLighting = false;
 		CurEditorDrawLayer = -1;
 		DrawLayer = std::vector<std::vector<ObjectBase*>*>( NumDrawLayers );

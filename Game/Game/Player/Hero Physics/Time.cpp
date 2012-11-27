@@ -27,7 +27,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 
 	void BobPhsxTime::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
-		Set( phsx, Vector2::One );
+		Set( phsx, Vector2(1) );
 	}
 
 	void BobPhsxTime::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )

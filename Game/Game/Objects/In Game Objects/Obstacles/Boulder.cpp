@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 
 	void Boulder::BoulderTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( 0, Vector2::One );
+		Ball = std::make_shared<SpriteInfo>( 0, Vector2(1) );
 		Radius = 120;
 		Chain = std::make_shared<LineSpriteInfo>( _T( "chain_tile" ), 44, 63, 0, ( Color( 255, 255, 255, 210 ) ).ToVector4(),.2f );
 	}

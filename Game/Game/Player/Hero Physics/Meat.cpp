@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxMeat::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
-		Set( phsx, Vector2::One );
+		Set( phsx, Vector2(1) );
 	}
 
 	void BobPhsxMeat::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )

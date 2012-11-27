@@ -219,7 +219,7 @@ namespace CloudberryKingdom
 	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) : GUI_Text( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false )
 	{
 		InitializeInstanceFields();
-		Init( InitialText, pos, Vector2::One, 1 );
+		Init( InitialText, pos, Vector2(1), 1 );
 	}
 
 	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont )

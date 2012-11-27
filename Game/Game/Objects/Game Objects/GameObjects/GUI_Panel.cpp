@@ -527,8 +527,8 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 		SlideOutLength = 30;
 		SlideInLength = 30;
-		DestinationScale = Vector2::One;
-		_MyCameraZoom = Vector2::One;
+		DestinationScale = Vector2(1);
+		_MyCameraZoom = Vector2(1);
 		IsOnScreen = false;
 		CheckForOutsideClick = false;
 		outside = false;

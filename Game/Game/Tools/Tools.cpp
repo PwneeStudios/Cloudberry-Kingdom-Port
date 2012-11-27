@@ -1557,7 +1557,7 @@ float Tools::HoldIllumination = 0;
 
 	void Tools::DrawText( Vector2 pos, const std::shared_ptr<Camera> &cam, const std::wstring &str, const std::shared_ptr<SpriteFont> &font )
 	{
-		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2::One );
+		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2(1) );
 
 		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2(), Vector2( .5f,.5f ), SpriteEffects::None, 0 );
 	}

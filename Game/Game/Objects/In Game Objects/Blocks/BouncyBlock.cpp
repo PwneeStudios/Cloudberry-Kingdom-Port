@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 		// Update the block's apparent center according to attached objects
 		getBlockCore()->UseCustomCenterAsParent = true;
 		getBlockCore()->CustomCenterAsParent = getBox()->Target->Center + Offset;
-		getBlockCore()->OffsetMultAsParent = Vector2::One + Vector2::Divide(SizeOffset, getBox()->Current->Size);
+		getBlockCore()->OffsetMultAsParent = Vector2(1) + Vector2::Divide(SizeOffset, getBox()->Current->Size);
 
 		if ( SizeOffset.X < .1f && State == BouncyBlockState_SUPER_STIFF )
 			SetState( BouncyBlockState_REGULAR );

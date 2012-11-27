@@ -828,7 +828,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		CheckForOutsideClick = false;
 		AffectsOutsideMouse = true;
 		outside = false;
-		_MyCameraZoom = Vector2::One;
+		_MyCameraZoom = Vector2(1);
 		Show = true;
 	}
 }
