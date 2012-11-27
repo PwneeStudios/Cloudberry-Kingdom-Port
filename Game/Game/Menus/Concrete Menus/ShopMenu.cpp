@@ -199,7 +199,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		std::shared_ptr<EzTexture> texture;
 		int width = 100, height = 96;
 
-		Vector2 Offset = Vector2::Zero;
+		Vector2 Offset = Vector2();
 		std::wstring offset = std::wstring::Format( _T( "{0},{1}" ), Offset.X, -Offset.Y );
 
 		std::wstring pic;

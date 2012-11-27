@@ -140,7 +140,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 		Flame_Emitter->Phsx();
 
 		// Emitter superparticle physics
-		ParticleEffects::Flame( Emitter_Emitter, Vector2::Zero, Tools::TheGame->DrawCount, 1, 20, false );
+		ParticleEffects::Flame( Emitter_Emitter, Vector2(), Tools::TheGame->DrawCount, 1, 20, false );
 		Emitter_Emitter->Phsx();
 	}
 
@@ -221,7 +221,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 
 	void Fireball::Explosion( Vector2 pos, const std::shared_ptr<Level> &level )
 	{
-		Explosion( pos, level, Vector2::Zero, 1, 1 );
+		Explosion( pos, level, Vector2(), 1, 1 );
 	}
 
 	void Fireball::Explosion( Vector2 pos, const std::shared_ptr<Level> &level, Vector2 vel, float Scale, float ScaleQuad )
@@ -323,7 +323,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Fireball::GetPos()
+	Vector2 Fireball::GetPos()
 	{
 		//if (!Alive) Tools.Write("!");
 

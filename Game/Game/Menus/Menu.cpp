@@ -117,7 +117,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		return Tools::Find( Items, std::make_shared<FindItemByNameLambda>( name ) );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Menu::getPos() const
+	const Vector2 &Menu::getPos() const
 	{
 		return FancyPos->RelVal;
 	}
@@ -392,7 +392,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 				// If we are checking whether to start showing selections again,
 				// only do so if we actually hit a MenuItem
 				if ( NoneSelected )
-					HitPadding = Vector2::Zero;
+					HitPadding = Vector2();
 
 				if ( !HitTest( HitPadding ) )
 					NoneSelected = true;
@@ -547,7 +547,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			if ( DelayCount > 0 )
 				DelayCount--;
 
-			Vector2 Dir = Vector2::Zero;
+			Vector2 Dir = Vector2();
 			if ( getControl() < 0 )
 			{
 				Dir = ButtonCheck::GetMaxDir( getControl() == -1 );
@@ -769,7 +769,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			return -1;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Menu::getMyCameraZoom() const
+	const Vector2 &Menu::getMyCameraZoom() const
 	{
 		return _MyCameraZoom;
 	}

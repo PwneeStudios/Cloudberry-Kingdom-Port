@@ -94,7 +94,7 @@ int OffLength, Sign::OnLength = 58;
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Sign::GetBottom()
+	Vector2 Sign::GetBottom()
 	{
 		MyQuad->Update();
 		return Vector2( getCore()->Data.Position.X, MyQuad->getBL().Y + 11.5f );

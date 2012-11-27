@@ -59,7 +59,7 @@ std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<
 
 		// Camera Zone
 		CamZone = static_cast<CameraZone*>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
-		CamZone->Init( Vector2::Zero, Vector2( 100000, 100000 ) );
+		CamZone->Init( Vector2(), Vector2( 100000, 100000 ) );
 		CamZone->Start = Center;
 		CamZone->End = Center;
 		CamZone->FreeY = false;

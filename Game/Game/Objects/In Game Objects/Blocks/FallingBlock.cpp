@@ -161,7 +161,7 @@ int FallingBlock::ResetTimerLength = 12;
 
 
 		if ( getCore()->MyLevel->GetPhsxStep() % 2 == 0 )
-			Offset = Vector2::Zero;
+			Offset = Vector2();
 
 		// Update the block's apparent center according to attached objects
 		getBlockCore()->UseCustomCenterAsParent = true;

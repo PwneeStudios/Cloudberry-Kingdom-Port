@@ -228,7 +228,7 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	Microsoft::Xna::Framework::Vector4 PlayerData::GetTextColor()
+	Vector4 PlayerData::GetTextColor()
 	{
 		Vector4 clr = ColorScheme_Renamed.SkinColor.DetailColor.ToVector4();
 		if ( clr.W == 0 )

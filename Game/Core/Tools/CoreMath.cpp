@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		return A + ( B - A ) * Normalized;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Periodic( Vector2 A, Vector2 B, float period, float t )
+	Vector2 CoreMath::Periodic( Vector2 A, Vector2 B, float period, float t )
 	{
 		float Normalized = .5f - .5f * static_cast<float>( cos( t * 2 * M_PI / period ) );
 		return A + ( B - A ) * Normalized;
@@ -136,23 +136,23 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return static_cast<float>( atan2( v.Y, v.X ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::CartesianToPolar( Vector2 v )
+	Vector2 CoreMath::CartesianToPolar( Vector2 v )
 	{
 		Vector2 polar = Vector2( VectorToAngle( v ), polar.Y = v.Length() );
 		return polar;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::PolarToCartesian( Vector2 v )
+	Vector2 CoreMath::PolarToCartesian( Vector2 v )
 	{
 		return v.Y * AngleToDir( v.X );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::AngleToDir( double Angle )
+	Vector2 CoreMath::AngleToDir( double Angle )
 	{
 		return Vector2( static_cast<float>( cos( Angle ) ), static_cast<float>( sin( Angle ) ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::DegreesToDir( double Angle )
+	Vector2 CoreMath::DegreesToDir( double Angle )
 	{
 		return AngleToDir( M_PI / 180 * Angle );
 	}
@@ -162,7 +162,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return spacing * static_cast<int>( x / spacing );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Snap( Vector2 x, Vector2 spacing )
+	Vector2 CoreMath::Snap( Vector2 x, Vector2 spacing )
 	{
 		return Vector2( Snap( x.X, spacing.X ), Snap( x.Y, spacing.Y ) );
 	}
@@ -172,7 +172,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return __max( abs( v.X ), abs( v.Y ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Sign( Vector2 v )
+	Vector2 CoreMath::Sign( Vector2 v )
 	{
 		return Vector2( Math::Sign( v.X ), Math::Sign( v.Y ) );
 	}
@@ -210,7 +210,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Abs( Vector2 v )
+	Vector2 CoreMath::Abs( Vector2 v )
 	{
 		return Vector2( abs( v.X ), abs( v.Y ) );
 	}
@@ -228,7 +228,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return true;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Restrict( float min, float max, Vector2 val )
+	Vector2 CoreMath::Restrict( float min, float max, Vector2 val )
 	{
 		val.X = Restrict( min, max, val.X );
 		val.Y = Restrict( min, max, val.Y );
@@ -312,7 +312,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return ( 1 - t ) * v1 + t * v2;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::LerpRestrict( Vector2 v1, Vector2 v2, float t )
+	Vector2 CoreMath::LerpRestrict( Vector2 v1, Vector2 v2, float t )
 	{
 		if ( t > 1 )
 			return v2;
@@ -371,7 +371,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return Lerp( v2, v3, _t - frame );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::FancyLerp( float t, std::vector<Vector2> keyframes )
+	Vector2 CoreMath::FancyLerp( float t, std::vector<Vector2> keyframes )
 	{
 		if ( t >= 1 )
 			return keyframes[ keyframes.size() - 1 ];
@@ -406,7 +406,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return apex.Y * static_cast<float>( q - pow( abs( t - apex.X ), power ) ) / q;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CoreMath::Reciprocal( Vector2 v )
+	Vector2 CoreMath::Reciprocal( Vector2 v )
 	{
 		return Vector2( v.Y, -v.X );
 	}

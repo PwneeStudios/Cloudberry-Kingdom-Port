@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		backdrop->setAlpha( .35f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 
-		Vector2 AdditionalAdd = Vector2::Zero;
+		Vector2 AdditionalAdd = Vector2();
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
 		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 140, _T("Button_Go") ) );

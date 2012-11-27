@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	Microsoft::Xna::Framework::Vector2 AABox::RealTR()
+	Vector2 AABox::RealTR()
 	{
 		return Vector2::Max( TR, BL );
 	}
 
-	Microsoft::Xna::Framework::Vector2 AABox::RealBL()
+	Vector2 AABox::RealBL()
 	{
 		return Vector2::Min( TR, BL );
 	}
@@ -151,13 +151,13 @@ namespace CloudberryKingdom
 		Invalidated = true;
 	}
 
-	Microsoft::Xna::Framework::Vector2 AABox::GetTR()
+	Vector2 AABox::GetTR()
 	{
 		Validate();
 		return TR;
 	}
 
-	Microsoft::Xna::Framework::Vector2 AABox::GetBL()
+	Vector2 AABox::GetBL()
 	{
 		Validate();
 		return BL;

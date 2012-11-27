@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 		if ( clipboard == _T( "" ) || clipboard.length() == 0 )
 			clipboard = _T( "Type in a seed!" );
 
-		TextBox = std::make_shared<GUI_TextBox>( clipboard, Vector2::Zero, Vector2( 1.85f,.65f ),.95f );
+		TextBox = std::make_shared<GUI_TextBox>( clipboard, Vector2(), Vector2( 1.85f,.65f ),.95f );
 		TextBox->MaxLength = 80;
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );

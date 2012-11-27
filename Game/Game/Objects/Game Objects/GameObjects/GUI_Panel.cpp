@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 	{
 		Active = true;
 		//Pos.LerpTo(Vector2.Zero, Frames, LerpStyle.DecayNoOvershoot);
-		Pos->LerpTo( Vector2::Zero, Frames );
+		Pos->LerpTo( Vector2(), Frames );
 	}
 
 	void GUI_Panel::CopySlideLengths( const std::shared_ptr<GUI_Panel> &source )
@@ -276,9 +276,9 @@ namespace CloudberryKingdom
 			Pos->LerpTo( Destination, Frames );
 	}
 
-	Microsoft::Xna::Framework::Vector2 GUI_Panel::SlideOutDestination( PresetPos Preset )
+	Vector2 GUI_Panel::SlideOutDestination( PresetPos Preset )
 	{
-		Vector2 Destination = Vector2::Zero;
+		Vector2 Destination = Vector2();
 		switch ( Preset )
 		{
 			case PresetPos_LEFT:
@@ -320,7 +320,7 @@ namespace CloudberryKingdom
 			return MyGame->getCam()->OnScreen(Pos->Update(), 800);
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &GUI_Panel::getMyCameraZoom() const
+	const Vector2 &GUI_Panel::getMyCameraZoom() const
 	{
 		return _MyCameraZoom;
 	}
@@ -517,7 +517,7 @@ namespace CloudberryKingdom
 	void GUI_Panel::InitializeInstanceFields()
 	{
 		_Control = -2;
-		AmountShifted = Vector2::Zero;
+		AmountShifted = Vector2();
 		ReturnToCallerDelay = 0;
 		CallDelay = 0;
 		NoBackIfNoCaller = false;

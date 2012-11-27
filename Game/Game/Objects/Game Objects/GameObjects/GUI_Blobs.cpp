@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 		SlideIn( 50 );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &GUI_Blobs::getApparentPos() const
+	const Vector2 &GUI_Blobs::getApparentPos() const
 	{
 		return Text->FancyPos->AbsVal + Text->GetWorldSize() / 2;
 	}

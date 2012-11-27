@@ -196,7 +196,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 				MyEffects.push_back( ( *quad )->MyEffect );
 	}
 
-	Microsoft::Xna::Framework::Vector2 ObjectClass::CalcBLBound()
+	Vector2 ObjectClass::CalcBLBound()
 	{
 		Vector2 BL = Vector2( 10000000, 10000000 );
 
@@ -208,7 +208,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		return BL;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ObjectClass::CalcTRBound()
+	Vector2 ObjectClass::CalcTRBound()
 	{
 		Vector2 TR = Vector2( -10000000, -10000000 );
 

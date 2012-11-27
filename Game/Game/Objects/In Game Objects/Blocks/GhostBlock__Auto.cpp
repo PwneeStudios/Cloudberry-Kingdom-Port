@@ -105,7 +105,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			int Width = static_cast<int>( Params->Width.GetVal( pos ) );
 			Vector2 size = Vector2( Width, Width );
 			//Vector2 offset = new Vector2(MyLevel.Rnd.Rnd.Next(-60, 0), MyLevel.Rnd.Rnd.Next(-60, 0) - size.Y);
-			Vector2 offset = Vector2::Zero;
+			Vector2 offset = Vector2();
 			if ( i == 1 )
 				offset = Vector2( 50, 0 );
 

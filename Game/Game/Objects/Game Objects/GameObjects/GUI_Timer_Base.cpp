@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 		GUI_Panel::ReleaseBody();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &GUI_Timer_Base::getApparentPos() const
+	const Vector2 &GUI_Timer_Base::getApparentPos() const
 	{
 		return TimerText->FancyPos->AbsVal + TimerText->GetWorldSize() / 2;
 	}

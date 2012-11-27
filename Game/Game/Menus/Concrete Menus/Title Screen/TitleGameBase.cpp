@@ -65,7 +65,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 
 		// Camera Zone
 		CamZone = static_cast<CameraZone*>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
-		CamZone->Init( Vector2::Zero, Vector2( 100000, 100000 ) );
+		CamZone->Init( Vector2(), Vector2( 100000, 100000 ) );
 		CamZone->Start = Center;
 		CamZone->End = Center;
 		CamZone->FreeY = false;
@@ -112,7 +112,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		std::shared_ptr<Camera> cam = MyLevel->getMainCamera();
 		cam->MyPhsxType = Camera_PhsxType_FIXED;
 
-		cam->FancyPos->RelVal = Vector2::Zero;
+		cam->FancyPos->RelVal = Vector2();
 
 		/*
 		// Pan the camera

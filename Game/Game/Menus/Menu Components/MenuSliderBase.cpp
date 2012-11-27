@@ -23,19 +23,19 @@ namespace CloudberryKingdom
 			OnSlide->Apply();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuSliderBase::getBL() const
+	const Vector2 &MenuSliderBase::getBL() const
 	{
-		return Vector2::Zero;
+		return Vector2();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuSliderBase::getTR() const
+	const Vector2 &MenuSliderBase::getTR() const
 	{
-		return Vector2::Zero;
+		return Vector2();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuSliderBase::getSlider_TR() const
+	const Vector2 &MenuSliderBase::getSlider_TR() const
 	{
-		return Vector2::Zero;
+		return Vector2();
 	}
 
 	const float &MenuSliderBase::getVal() const
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 
 	void MenuSliderBase::CalcEndPoints()
 	{
-		Start = End = Vector2::Zero;
+		Start = End = Vector2();
 	}
 
 	std::wstring MenuSliderBase::ToString()
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 			Slide();
 		}
 
-		Vector2 Dir = Vector2::Zero;
+		Vector2 Dir = Vector2();
 		if ( Control < 0 )
 			Dir = ButtonCheck::GetMaxDir();
 		else
@@ -268,8 +268,8 @@ namespace CloudberryKingdom
 		Acceleration = .03f;
 		Speed = 0;
 #if defined(PC_VERSION)
-		BL_HitPadding = Vector2::Zero;
-		TR_HitPadding = Vector2::Zero;
+		BL_HitPadding = Vector2();
+		TR_HitPadding = Vector2();
 #endif
 		ShowText = false;
 		Inverted = false;

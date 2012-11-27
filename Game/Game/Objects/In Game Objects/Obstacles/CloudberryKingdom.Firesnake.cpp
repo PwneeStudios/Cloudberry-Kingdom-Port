@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 
 	void Firesnake::FiresnakeTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2::Zero, Color::White );
+		Sprite = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2(), Color::White );
 	}
 
 	void Firesnake::MakeNew()
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		getCore()->MyType = ObjectType_FIRESNAKE;
 		getCore()->DrawLayer = 7;
 
-		Orbit = Vector2::Zero;
+		Orbit = Vector2();
 	}
 
 	void Firesnake::Init( Vector2 pos, const std::shared_ptr<Level> &level )

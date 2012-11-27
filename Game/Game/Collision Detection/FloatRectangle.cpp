@@ -27,8 +27,8 @@ namespace CloudberryKingdom
 		WriteReadTools::WriteVector2( writer, Size );
 
 		// Trash =(
-		WriteReadTools::WriteVector2( writer, Vector2::Zero );
-		WriteReadTools::WriteVector2( writer, Vector2::Zero );
+		WriteReadTools::WriteVector2( writer, Vector2() );
+		WriteReadTools::WriteVector2( writer, Vector2() );
 		writer->Write( false );
 		writer->Write( false );
 	}
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		WriteReadTools::ReadVector2( reader, Size );
 
 		// Trash =(
-		Vector2 trash = Vector2::Zero;
+		Vector2 trash = Vector2();
 		WriteReadTools::ReadVector2( reader, trash );
 		WriteReadTools::ReadVector2( reader, trash );
 		reader->ReadBoolean();
@@ -53,12 +53,12 @@ namespace CloudberryKingdom
 		return Tools::BoxSize( TR, BL );
 	}
 
-	Microsoft::Xna::Framework::Vector2 FloatRectangle::TL()
+	Vector2 FloatRectangle::TL()
 	{
 		return Vector2( BL.X, TR.Y );
 	}
 
-	Microsoft::Xna::Framework::Vector2 FloatRectangle::BR()
+	Vector2 FloatRectangle::BR()
 	{
 		return Vector2( TR.X, BL.Y );
 	}

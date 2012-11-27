@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		_SpinVelocity = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &BackgroundFloater::getPos() const
+	const Vector2 &BackgroundFloater::getPos() const
 	{
 		return Data.Position;
 	}
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 	void BackgroundFloater::InitializeInstanceFields()
 	{
 		Name = _T( "" );
-		uv_speed = Vector2::Zero;
-		uv_offset = Vector2::Zero;
+		uv_speed = Vector2();
+		uv_offset = Vector2();
 	}
 }

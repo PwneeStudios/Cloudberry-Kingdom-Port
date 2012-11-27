@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		return getCore()->MyLevel->getRnd();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ObjectBase::getPos() const
+	const Vector2 &ObjectBase::getPos() const
 	{
 		return getCore()->Data.Position;
 	}
@@ -407,7 +407,7 @@ unsigned long long ObjectData::NextId = 0;
 		ParentOffset = Data.Position - ParentBlock->getBox()->Current->Center;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ObjectData::GetPosFromParentOffset()
+	Vector2 ObjectData::GetPosFromParentOffset()
 	{
 		std::shared_ptr<BlockData> pdata = ParentBlock->getBlockCore();
 
@@ -471,7 +471,7 @@ unsigned long long ObjectData::NextId = 0;
 
 		VisualResettedOnce = false;
 
-		HeldOffset = Vector2::Zero;
+		HeldOffset = Vector2();
 		Held = Placed = false;
 
 		Holdable = EditHoldable = false;
@@ -488,7 +488,7 @@ unsigned long long ObjectData::NextId = 0;
 		StartData = PhsxData();
 
 		ParentBlock.reset();
-		ParentOffset = Vector2::Zero;
+		ParentOffset = Vector2();
 
 		DoNotScrollOut = false;
 

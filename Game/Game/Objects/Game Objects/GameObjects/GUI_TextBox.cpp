@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	GUI_EnterName::GUI_EnterName() : GUI_TextBox(PlayerManager::getDefaultName(), Vector2::Zero)
+	GUI_EnterName::GUI_EnterName() : GUI_TextBox(PlayerManager::getDefaultName(), Vector2())
 	{
 		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_NEW_HIGH_SCORE, Resources::Font_Grobold42 );
 

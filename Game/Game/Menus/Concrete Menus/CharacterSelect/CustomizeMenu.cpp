@@ -178,7 +178,7 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<ListSelectPanel> ClrSelect;
 
-		Vector2 ShiftSelect = Vector2::Zero;
+		Vector2 ShiftSelect = Vector2();
 
 		// Make the hat select
 		if ( MyMenu->CurIndex == 2 )

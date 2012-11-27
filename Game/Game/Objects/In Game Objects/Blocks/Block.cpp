@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		DoNotPushHard = false;
 
 		UseCustomCenterAsParent = false;
-		CustomCenterAsParent = Vector2::Zero;
+		CustomCenterAsParent = Vector2();
 		OffsetMultAsParent = Vector2::One;
 
 		MyOrientation = PieceQuad::Orientation_NORMAL;

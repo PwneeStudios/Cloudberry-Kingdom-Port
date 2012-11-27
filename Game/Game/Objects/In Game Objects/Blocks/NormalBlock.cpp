@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		getCore()->MyType = ObjectType_NORMAL_BLOCK;
 		getCore()->EditHoldable = getCore()->Holdable = true;
 
-		Init( Vector2::Zero, Vector2::Zero, TileSets::DefaultTileSet );
+		Init( Vector2(), Vector2(), TileSets::DefaultTileSet );
 	}
 
 	NormalBlock::NormalBlock( bool BoxesOnly )

@@ -67,12 +67,12 @@ namespace CloudberryKingdom
 		TR = TR_Bound();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Laser::TR_Bound()
+	Vector2 Laser::TR_Bound()
 	{
 		return Vector2::Max( p1, p2 );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Laser::BL_Bound()
+	Vector2 Laser::BL_Bound()
 	{
 		return Vector2::Min( p1, p2 );
 	}

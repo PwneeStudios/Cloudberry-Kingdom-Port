@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 
 	void _CircleDeath::MakeNew()
 	{
-		Circle->Initialize( Vector2::Zero, 1 );
+		Circle->Initialize( Vector2(), 1 );
 
 		getCore()->Init();
 		getCore()->GenData.OverlapWidth = 60;

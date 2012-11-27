@@ -4100,8 +4100,8 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 		GuidCounter = 0;
 		MyGlobalIllumination = 1;
 		AllowLava = true;
-		Wind = Vector2::Zero;
-		OffsetOffset = Vector2::Zero;
+		Wind = Vector2();
+		OffsetOffset = Vector2();
 		Light = 1;
 	}
 }

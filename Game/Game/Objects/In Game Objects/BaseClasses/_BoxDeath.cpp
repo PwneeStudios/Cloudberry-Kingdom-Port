@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	{
 		_Death::MakeNew();
 
-		Box->Initialize( Vector2::Zero, Vector2::One );
+		Box->Initialize( Vector2(), Vector2::One );
 	}
 
 	_BoxDeath::_BoxDeath()
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 		MakeNew();
 	}
 
-	Microsoft::Xna::Framework::Vector2 _BoxDeath::GetBoxPos()
+	Vector2 _BoxDeath::GetBoxPos()
 	{
 		return getPos();
 	}

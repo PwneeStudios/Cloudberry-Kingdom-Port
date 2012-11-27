@@ -52,7 +52,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2::One;
-		HatPicShift = Vector2::Zero;
+		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = false;
 		QuadName = _T( "None" );
@@ -65,7 +65,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2::One;
-		HatPicShift = Vector2::Zero;
+		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = true;
 		this->QuadName = QuadName;
@@ -78,7 +78,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2::One;
-		HatPicShift = Vector2::Zero;
+		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = true;
 		this->QuadName = QuadName;
@@ -91,7 +91,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2::One;
-		HatPicShift = Vector2::Zero;
+		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		this->QuadName = QuadName;
 		this->DrawHead = DrawHead;

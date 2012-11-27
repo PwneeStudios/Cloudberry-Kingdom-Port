@@ -2,7 +2,7 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Vector2 &_Obstacle::getPhsxCutoff() const
+	const Vector2 &_Obstacle::getPhsxCutoff() const
 	{
 		return getCore()->BoxesOnly ? PhsxCutoff_BoxesOnly : PhsxCutoff_Playing;
 	}

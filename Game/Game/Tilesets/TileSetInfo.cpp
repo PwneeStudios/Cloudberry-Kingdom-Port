@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 		AllowLava = true;
 		ObstacleCutoff = 1000;
 		ShiftStartDoor = 0;
-		ShiftStartBlock = Vector2::Zero;
+		ShiftStartBlock = Vector2();
 		AllowTopOnlyBlocks = true;
 		Walls = std::make_shared<Wall::WallTileInfo>();
 		Pendulums = std::make_shared<Pendulum::PendulumTileInfo>();

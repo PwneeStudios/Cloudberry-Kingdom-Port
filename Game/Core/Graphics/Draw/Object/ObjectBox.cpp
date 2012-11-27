@@ -107,12 +107,12 @@ namespace CloudberryKingdom
 		TR->PosFromRelPos();
 	}
 
-	Microsoft::Xna::Framework::Vector2 ObjectBox::Center()
+	Vector2 ObjectBox::Center()
 	{
 		return ( TR->Pos + BL->Pos ) / 2;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ObjectBox::Size()
+	Vector2 ObjectBox::Size()
 	{
 		return ( TR->Pos - BL->Pos );
 	}

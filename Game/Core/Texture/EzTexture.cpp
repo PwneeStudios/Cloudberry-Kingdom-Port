@@ -56,7 +56,7 @@ std::shared_ptr<Game> EzTexture::game = 0;
 		FromPacked = false;
 		Dynamic = false;
 		FromCode = false;
-		BL = Vector2::Zero;
+		BL = Vector2();
 		TR = Vector2::One;
 	}
 }

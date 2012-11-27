@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::FlyingBlobTileInfo::InitializeInstanceFields()
 	{
-		Body = std::make_shared<SpriteInfo>( 0, Vector2::One, Vector2::Zero, Color::White );
+		Body = std::make_shared<SpriteInfo>( 0, Vector2::One, Vector2(), Color::White );
 		ObjectSize = Vector2( 616.05f, 616.05f );
 		GooSprite = 0;
 	}
@@ -84,7 +84,7 @@ float FlyingBlob::BobXFriction = 1;
 
 		CopySource.reset();
 
-		Target = TargetVel = Vector2::Zero;
+		Target = TargetVel = Vector2();
 		getCore()->Data = PhsxData();
 
 		MyAnimSpeed = .1666f;
@@ -106,7 +106,7 @@ float FlyingBlob::BobXFriction = 1;
 		getCore()->MyType = ObjectType_FLYING_BLOB;
 		getCore()->Holdable = true;
 
-		Displacement = Vector2::Zero;
+		Displacement = Vector2();
 		Offset = 0;
 		Period = 1;
 
@@ -245,7 +245,7 @@ float FlyingBlob::BobXFriction = 1;
 		if ( KillingBob != 0 && KillingBob->GiveStats() )
 			KillingBob->getMyTempStats()->Blobs++;
 
-		Squish( Vector2::Zero );
+		Squish( Vector2() );
 	}
 
 	void FlyingBlob::Squish( Vector2 vel )
@@ -310,20 +310,20 @@ float FlyingBlob::BobXFriction = 1;
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 FlyingBlob::TR_Bound()
+	Vector2 FlyingBlob::TR_Bound()
 	{
 		Vector2 max = Vector2::Max( Vector2::Max( CalcPosition( 0 ), CalcPosition( .5f ) ), Vector2::Max( CalcPosition( 0.25f ), CalcPosition( .75f ) ) );
 		return max;
 	}
 
-	Microsoft::Xna::Framework::Vector2 FlyingBlob::BL_Bound()
+	Vector2 FlyingBlob::BL_Bound()
 	{
 		Vector2 min = Vector2::Min( Vector2::Min( CalcPosition( 0 ), CalcPosition( .5f ) ), Vector2::Min( CalcPosition( 0.25f ), CalcPosition( .75f ) ) );
 
 		return min;
 	}
 
-	Microsoft::Xna::Framework::Vector2 FlyingBlob::CalcPosition( float t )
+	Vector2 FlyingBlob::CalcPosition( float t )
 	{
 		switch ( MyMoveType )
 		{
@@ -494,7 +494,7 @@ float FlyingBlob::BobXFriction = 1;
 			MyObject->Draw( Tools::QDrawer, Tools::EffectWad );
 		else
 		{
-			Vector2 shift = Vector2::Zero;
+			Vector2 shift = Vector2();
 
 			// Hectic
 			//double t = 2 * Math.PI * (Core.GetPhsxStep() + Offset) / 12;

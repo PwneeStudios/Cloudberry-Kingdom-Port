@@ -102,7 +102,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 			Vector2 size = Vector2( Params->WidthRange.RndFloat( Pos, level->getRnd() ), Params->HeightRange.RndFloat(Pos, level->getRnd()) );
 
 			cblock = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-			cblock->Init( Vector2::Zero, size, level->getMyTileSetInfo() );
+			cblock->Init( Vector2(), size, level->getMyTileSetInfo() );
 			size = cblock->getBox()->Current->Size;
 
 			Vector2 offset = Vector2( size.X, 0 );

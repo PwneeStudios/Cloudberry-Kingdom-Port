@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	Microsoft::Xna::Framework::Vector2 Coin_Parameters::SnapToGrid( Vector2 pos )
+	Vector2 Coin_Parameters::SnapToGrid( Vector2 pos )
 	{
 		pos.X = static_cast<int>( pos.X / GridSpacing.X ) * GridSpacing.X;
 		pos.Y = static_cast<int>( pos.Y / GridSpacing.Y ) * GridSpacing.Y;
@@ -121,7 +121,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		return NewCoin;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Coin_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos )
+	Vector2 Coin_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos )
 	{
 		Vector2 center = bob->getCore()->Data.Position;
 		Vector2 top = Vector2( center.X, bob->Box->TR.Y );

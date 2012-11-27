@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		MaxAngle = 0;
 		Period = 150;
 		Offset = 0;
-		PivotPoint = Vector2::Zero;
+		PivotPoint = Vector2();
 
 		AddAngle = 0;
 		PivotLocationType = PivotLocationTypes_TOP_BOTTOM;
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Boulder::TR_Bound()
+	Vector2 Boulder::TR_Bound()
 	{
 		Vector2 TR = GetPos( 0 );
 		float step = .2f;
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 		return TR;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Boulder::BL_Bound()
+	Vector2 Boulder::BL_Bound()
 	{
 		Vector2 BL = GetPos( 0 );
 		float step = .2f;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		return PivotPoint.Y - Length;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Boulder::GetPos( float t )
+	Vector2 Boulder::GetPos( float t )
 	{
 		CorrespondingAngle = MaxAngle * static_cast<float>( cos( 2 * M_PI * t ) );
 		Vector2 Dir = Vector2( static_cast<float>( cos( AddAngle + CorrespondingAngle - M_PI / 2 ) ), static_cast<float>( sin( AddAngle + CorrespondingAngle - M_PI / 2 ) ) );
@@ -246,7 +246,7 @@ namespace CloudberryKingdom
 	{
 		_CircleDeath::Reset( BoxesOnly );
 
-		getCore()->Data.Velocity = Vector2::Zero;
+		getCore()->Data.Velocity = Vector2();
 	}
 
 	void Boulder::Clone( const std::shared_ptr<ObjectBase> &A )

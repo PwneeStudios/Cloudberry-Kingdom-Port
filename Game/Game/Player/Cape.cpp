@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		Show = true;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Cape::SineWind( Vector2 Dir, float NormalIntensity, float Period, float t )
+	Vector2 Cape::SineWind( Vector2 Dir, float NormalIntensity, float Period, float t )
 	{
 		Vector2 Normal = Vector2( -Dir.Y, Dir.X );
 		return Dir + NormalIntensity * Normal * static_cast<float>( sin( t / Period ) );
@@ -536,7 +536,7 @@ namespace CloudberryKingdom
 		GroundCollision = false;
 		GroundHeight = 50;
 		GravityScale = 1;
-		Wind = Vector2::Zero;
+		Wind = Vector2();
 		CapeThickness = 16;
 	}
 }

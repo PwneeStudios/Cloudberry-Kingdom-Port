@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 
 			std::shared_ptr<MenuItem> item = Items[ i ];
 
-			item->setSetPos( Vector2::Zero );
+			item->setSetPos( Vector2() );
 			item->PosOffset = getPos() + Shift * (i - TopItem);
 
 			item->Draw( true, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(item) );

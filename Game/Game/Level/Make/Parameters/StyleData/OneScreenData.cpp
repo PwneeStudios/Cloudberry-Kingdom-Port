@@ -17,6 +17,6 @@ namespace CloudberryKingdom
 
 	void OneScreenData::InitializeInstanceFields()
 	{
-		CamShift = Vector2::Zero;
+		CamShift = Vector2();
 	}
 }

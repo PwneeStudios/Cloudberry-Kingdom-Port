@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		getCore()->MyType = ObjectType_COIN;
 		getCore()->DrawLayer = 5;
 
-		Box->Initialize( Vector2::Zero, Vector2::One );
+		Box->Initialize( Vector2(), Vector2::One );
 	}
 
 	void Coin::Release()
@@ -131,7 +131,7 @@ Vector2 Coin::PosOfLastCoinGrabbed = 0;
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Coin::GetPos()
+	Vector2 Coin::GetPos()
 	{
 		double t = 2 * M_PI * ( getCore()->GetPhsxStep() + Offset ) / static_cast<float>(Period);
 		return Vector2( static_cast<float>( cos( t ) ) ) * Radii + getCore()->StartData.Position;

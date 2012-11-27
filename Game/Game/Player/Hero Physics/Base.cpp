@@ -453,7 +453,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return MyBob->getCore()->MyLevel->CurMakeData->GenData;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &BobPhsx::getPos() const
+	const Vector2 &BobPhsx::getPos() const
 	{
 		return MyBob->getCore()->Data.Position;
 	}
@@ -463,12 +463,12 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		MyBob->getCore()->Data.Position = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &BobPhsx::getApparentVelocity() const
+	const Vector2 &BobPhsx::getApparentVelocity() const
 	{
 		return getVel() + Vector2(GroundSpeed, 0);
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &BobPhsx::getVel() const
+	const Vector2 &BobPhsx::getVel() const
 	{
 		return MyBob->getCore()->Data.Velocity;
 	}
@@ -498,7 +498,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		MyBob->getCore()->Data.Velocity.Y = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &BobPhsx::getAcc() const
+	const Vector2 &BobPhsx::getAcc() const
 	{
 		return MyBob->getCore()->Data.Acceleration;
 	}
@@ -846,12 +846,12 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		Adjective = _T( "" );
 		NameTemplate = _T( "Hero" );
 		DefaultIconWidth = 150;
-		CapeOffset = Vector2::Zero;
+		CapeOffset = Vector2();
 		CapeOffset_Ducking = Vector2( -20, 0 );
 		CapeGravity = Vector2( 0, -1.45f ) / 1.45f;
 		ModCapeSize = Vector2::One;
 		DollCamZoomMod = 1;
-		HeroDollShift = Vector2::Zero;
+		HeroDollShift = Vector2();
 		SingletonInitialized = false;
 		BlobMod = 1;
 		DuckingCount = 0;
@@ -864,7 +864,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		MaxJumpAccelMultiple = 1;
 		JumpAccelModifier = 1;
 		JumpLengthModifier = 1;
-		SpritePadding = Vector2::Zero;
+		SpritePadding = Vector2();
 		ModInitSize = Vector2::One;
 		DoubleJumpModel = false;
 		JetpackModel = false;

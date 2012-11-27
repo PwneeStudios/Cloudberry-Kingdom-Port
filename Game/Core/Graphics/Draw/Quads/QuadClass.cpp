@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 	bool QuadClass::HitTest( Vector2 pos )
 	{
-		return HitTest( pos, Vector2::Zero );
+		return HitTest( pos, Vector2() );
 	}
 
 	bool QuadClass::HitTest( Vector2 pos, Vector2 padding )
@@ -107,12 +107,12 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &QuadClass::getTR() const
+	const Vector2 &QuadClass::getTR() const
 	{
 		return Quad_Renamed.v1.Vertex.xy;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &QuadClass::getBL() const
+	const Vector2 &QuadClass::getBL() const
 	{
 		return Quad_Renamed.v2.Vertex.xy;
 	}
@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 			FancyAngle.reset();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &QuadClass::getLightAlpha() const
+	const Vector2 &QuadClass::getLightAlpha() const
 	{
 		MakeLightAlpha();
 		return FancyLightAlpha->RelVal;
@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 		FancyLightAlpha->RelVal = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &QuadClass::getPos() const
+	const Vector2 &QuadClass::getPos() const
 	{
 		if ( FancyPos == 0 )
 			return Base.Origin;
@@ -251,7 +251,7 @@ namespace CloudberryKingdom
 		setSize( Vector2( getSize().X, value ) );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &QuadClass::getSize() const
+	const Vector2 &QuadClass::getSize() const
 	{
 		if ( FancyScale == 0 )
 			return Vector2( Base.e1.Length(), Base.e2.Length() );
@@ -437,7 +437,7 @@ namespace CloudberryKingdom
 		setSize( getSize() * scale );
 	}
 
-	Microsoft::Xna::Framework::Vector2 QuadClass::GetTextureScaling()
+	Vector2 QuadClass::GetTextureScaling()
 	{
 		return Vector2( getSize().X / Quad_Renamed.getTexWidth(), getSize().Y / Quad_Renamed.getTexHeight() );
 	}
@@ -467,7 +467,7 @@ namespace CloudberryKingdom
 	void QuadClass::RepeatY()
 	{
 		float V = ( getSize().Y / Quad_Renamed.getTexHeight() ) / (getSize().X / Quad_Renamed.getTexWidth());
-		Quad_Renamed.UVFromBounds( Vector2::Zero, Vector2( 1, V ) );
+		Quad_Renamed.UVFromBounds( Vector2(), Vector2( 1, V ) );
 		Quad_Renamed.V_Wrap = true;
 	}
 
@@ -773,7 +773,7 @@ namespace CloudberryKingdom
 	void QuadClass::InitializeInstanceFields()
 	{
 		Shadow = false;
-		ShadowOffset = Vector2::Zero;
+		ShadowOffset = Vector2();
 		ShadowColor = Color::Black;
 		ShadowScale = 1;
 		Quad_Renamed = SimpleQuad();

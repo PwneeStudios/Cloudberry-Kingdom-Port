@@ -15,12 +15,12 @@ namespace CloudberryKingdom
 
 	void BasePoint::Init()
 	{
-		Origin = Vector2::Zero;
+		Origin = Vector2();
 		e1 = Vector2( 1, 0 );
 		e2 = Vector2( 0, 1 );
 	}
 
-	Microsoft::Xna::Framework::Vector2 BasePoint::GetScale()
+	Vector2 BasePoint::GetScale()
 	{
 		return Vector2( e1.X, e2.Y );
 	}

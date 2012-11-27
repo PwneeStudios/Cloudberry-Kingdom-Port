@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 		getCore()->EditHoldable = true;
 
-		Displacement = Vector2::Zero;
+		Displacement = Vector2();
 
 		getCore()->WakeUpRequirements = true;
 	}

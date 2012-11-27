@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 			SelectedPos.Y = Pos.Y;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuItem::getSetPos() const
+	const Vector2 &MenuItem::getSetPos() const
 	{
 		return Pos;
 	}
@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 		MyFont = Resources::Font_Grobold42;
 	}
 
-	Microsoft::Xna::Framework::Vector2 MenuItem::Size()
+	Vector2 MenuItem::Size()
 	{
 		return Vector2( Width(), Height() );
 	}
@@ -377,7 +377,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuItem::getMyCameraZoom() const
+	const Vector2 &MenuItem::getMyCameraZoom() const
 	{
 		return _MyCameraZoom;
 	}
@@ -462,7 +462,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	bool MenuItem::HitTest( Vector2 pos )
 	{
-		return HitTest( pos, Vector2::Zero );
+		return HitTest( pos, Vector2() );
 	}
 #endif
 

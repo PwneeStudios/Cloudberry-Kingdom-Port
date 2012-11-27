@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		this->level = level;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::MakeVerticalCleanupHelper::Apply( Vector2 pos )
+	Vector2 Level::MakeVerticalCleanupHelper::Apply( Vector2 pos )
 	{
 		float dist = level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos );
 		return Vector2( dist, dist );
@@ -178,7 +178,7 @@ namespace CloudberryKingdom
 		this->level = level;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::GeneralMinDistLambda::Apply( Vector2 pos )
+	Vector2 Level::GeneralMinDistLambda::Apply( Vector2 pos )
 	{
 		float dist = level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos );
 		return Vector2( dist, dist );
@@ -264,7 +264,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::BaseMetric::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
+	Vector2 Level::BaseMetric::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
 	{
 		return Vector2( abs( A->getCore()->Data.Position.X - B->getCore()->Data.Position.X ), abs(A->getCore()->Data.Position.Y - B->getCore()->Data.Position.Y) );
 	}
@@ -274,7 +274,7 @@ namespace CloudberryKingdom
 		this->c = c;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::ConstLambda::Apply( Vector2 pos )
+	Vector2 Level::ConstLambda::Apply( Vector2 pos )
 	{
 		return c;
 	}
@@ -295,7 +295,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::CleanupCoinsHelper::Apply( Vector2 pos )
+	Vector2 Level::CleanupCoinsHelper::Apply( Vector2 pos )
 	{
 		float dist = Params->MinDist.GetVal( pos );
 		return Vector2( dist, dist );
@@ -798,7 +798,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	Microsoft::Xna::Framework::Vector2 Level::GetLadderSize( LadderType Type )
+	Vector2 Level::GetLadderSize( LadderType Type )
 	{
 		switch ( Type )
 		{
@@ -818,7 +818,7 @@ namespace CloudberryKingdom
 				return Vector2( 1000, 0 );
 		}
 
-		return Vector2::Zero;
+		return Vector2();
 	}
 
 	void Level::MakeLadder( const std::shared_ptr<PieceSeedData> &Piece )
@@ -856,7 +856,7 @@ namespace CloudberryKingdom
 
 			case LadderType_FINAL_PLAT:
 				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-				block->Init( TR, Vector2::Zero, getMyTileSetInfo() );
+				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X );
 				block->Extend( Side_RIGHT, LeftCenter.X + 5000 );
 				block->Extend( Side_TOP, LeftCenter.Y - getMainCamera()->GetHeight() / 2 + 150 );
@@ -877,7 +877,7 @@ namespace CloudberryKingdom
 
 				// Stop block, to prevent Bob from running off edge
 				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-				block->Init( TR, Vector2::Zero, getMyTileSetInfo() );
+				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X + 4400 );
 				block->Extend( Side_RIGHT, LeftCenter.X + 4500 );
 				block->Extend( Side_BOTTOM, LeftCenter.Y - 1500 );
@@ -943,7 +943,7 @@ namespace CloudberryKingdom
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
 				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
-				bm->Init( Vector2::Zero, this, Piece->ElevatorBoxStyle );
+				bm->Init( Vector2(), this, Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center;
 				bm->EmitData.Velocity = Vector2( 0, 6 );
 				bm->Delay = 100;
@@ -964,7 +964,7 @@ namespace CloudberryKingdom
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
 				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
-				bm->Init( Vector2::Zero, this, Piece->ElevatorBoxStyle );
+				bm->Init( Vector2(), this, Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(-175, 0);
 				bm->EmitData.Velocity = Vector2( 0, 6 );
 				bm->Delay = 100;
@@ -982,7 +982,7 @@ namespace CloudberryKingdom
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, getMainCamera()->GetHeight() / 2 + 250 );
 
 				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
-				bm->Init( Vector2::Zero, this, Piece->ElevatorBoxStyle );
+				bm->Init( Vector2(), this, Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(175, 0);
 				bm->EmitData.Velocity = Vector2( 0, -6 );
 				bm->Delay = 100;
@@ -3843,7 +3843,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 							{
 								CreationError = true;
 							}
-							if ( a != Vector2::Zero )
+							if ( a != Vector2() )
 							{
 								//bob.Core.Data.Position = a;
 								( *bob )->Move( a - ( *bob )->getCore()->Data->Position );
@@ -3983,7 +3983,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 				if ( Bobs.size() > 0 && Bobs[ 0 ] != 0 )
 				{
 					int NumAlive = 0;
-					Vector2 Pos = Vector2::Zero;
+					Vector2 Pos = Vector2();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 					for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 					{

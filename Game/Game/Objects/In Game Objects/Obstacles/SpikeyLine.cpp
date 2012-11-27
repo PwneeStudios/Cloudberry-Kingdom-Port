@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 SpikeyLine::GetPos( float t )
+	Vector2 SpikeyLine::GetPos( float t )
 	{
 		Vector2 pos = Vector2::Lerp( p1, p2, t );
 		return pos;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		_CircleDeath::Move( shift );
 	}
 
-	Microsoft::Xna::Framework::Vector2 SpikeyLine::TR_Bound()
+	Vector2 SpikeyLine::TR_Bound()
 	{
 		Vector2 TR = GetPos( 0 );
 		float step = .2f;
@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 		return TR;
 	}
 
-	Microsoft::Xna::Framework::Vector2 SpikeyLine::BL_Bound()
+	Vector2 SpikeyLine::BL_Bound()
 	{
 		Vector2 BL = GetPos( 0 );
 		float step = .2f;

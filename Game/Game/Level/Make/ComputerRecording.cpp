@@ -76,11 +76,11 @@ int ComputerRecording::PareDivider = 4;
 		for ( int i = 0; i < AutoJump.size(); i++ )
 			AutoJump[ i ] = 0;
 		for ( int i = 0; i < AutoLocs.size(); i++ )
-			AutoLocs[ i ] = Vector2::Zero;
+			AutoLocs[ i ] = Vector2();
 		for ( int i = 0; i < AutoVel.size(); i++ )
-			AutoVel[ i ] = Vector2::Zero;
+			AutoVel[ i ] = Vector2();
 		for ( int i = 0; i < BoxCenter.size(); i++ )
-			BoxCenter[ i ] = Vector2::Zero;
+			BoxCenter[ i ] = Vector2();
 		for ( int i = 0; i < AutoOnGround.size(); i++ )
 			AutoOnGround[ i ] = false;
 		for ( int i = 0; i < Anim.size(); i++ )
@@ -115,7 +115,7 @@ int ComputerRecording::PareDivider = 4;
 			return t[ Step / PareDivider ];
 	}
 
-	Microsoft::Xna::Framework::Vector2 ComputerRecording::GetBoxCenter( int Step )
+	Vector2 ComputerRecording::GetBoxCenter( int Step )
 	{
 		//if (!SuperSparse)
 		if ( true )

@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		Activated = false;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CameraZone::GetProjectedPos( Vector2 x )
+	Vector2 CameraZone::GetProjectedPos( Vector2 x )
 	{
 		Vector2 pos = x;
 
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		return Vector2( d, 0 );
 	}
 
-	Microsoft::Xna::Framework::Vector2 CameraZone::FromProjected( Vector2 x )
+	Vector2 CameraZone::FromProjected( Vector2 x )
 	{
 		Vector2 Tangent = End - Start;
 		float Length = Tangent.Length();

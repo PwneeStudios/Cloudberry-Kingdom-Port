@@ -12,12 +12,12 @@ namespace CloudberryKingdom
 		Rnd = std::make_shared<System::Random>( MySeed );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Rand::RndPos( Vector2 BL, Vector2 TR )
+	Vector2 Rand::RndPos( Vector2 BL, Vector2 TR )
 	{
 		return Vector2( RndFloat( BL.X, TR.X ), RndFloat( BL.Y, TR.Y ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Rand::RndVector2( float Width )
+	Vector2 Rand::RndVector2( float Width )
 	{
 		return Vector2( RndFloat( -Width / 2, Width / 2 ), RndFloat( -Width / 2, Width / 2 ) );
 	}
@@ -79,12 +79,12 @@ namespace CloudberryKingdom
 		return RndFloat( range.X, range.Y );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Rand::RndDir( float Length )
+	Vector2 Rand::RndDir( float Length )
 	{
 		return RndDir() * RndFloat(0, Length);
 	}
 
-	Microsoft::Xna::Framework::Vector2 Rand::RndDir()
+	Vector2 Rand::RndDir()
 	{
 		double Angle = Rnd->NextDouble() * 2 * M_PI;
 		return Vector2( static_cast<float>( cos( Angle ) ), static_cast<float>( sin( Angle ) ) );

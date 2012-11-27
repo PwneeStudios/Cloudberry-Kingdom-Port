@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	{
 		Group = 0;
 		Sprite = Tools::TextureWad->FindTextureOrAnim( _T( "fading block" ) );
-		Shift = Vector2::Zero;
+		Shift = Vector2();
 	}
 
 	void GhostBlock::MakeNew()

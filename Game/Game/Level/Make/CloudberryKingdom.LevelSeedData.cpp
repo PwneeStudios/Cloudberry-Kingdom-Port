@@ -1204,7 +1204,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 	{
 		std::shared_ptr<PieceSeedData> Piece;
 
-		Vector2 Pos = Vector2::Zero;
+		Vector2 Pos = Vector2();
 
 		for ( int i = 0; i < NumPieces; i++ )
 		{

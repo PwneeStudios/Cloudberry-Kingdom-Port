@@ -428,10 +428,10 @@ int GameData::DataCounter = 0;
 		return MyLevel->getRnd();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &GameData::getCamPos() const
+	const Vector2 &GameData::getCamPos() const
 	{
 		if ( MyLevel == 0 )
-			return Vector2::Zero;
+			return Vector2();
 		else
 			return MyLevel->getMainCamera()->Data.Position;
 	}
@@ -1617,8 +1617,8 @@ Vector2 GameData::DramaticEntryVel = 0;
 	{
 		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
-			( *bob )->getCore()->Data->Velocity = Vector2::Zero;
-			( *bob )->getCore()->Data->Acceleration = Vector2::Zero;
+			( *bob )->getCore()->Data->Velocity = Vector2();
+			( *bob )->getCore()->Data->Acceleration = Vector2();
 
 			bool HoldShow = ( *bob )->getCore()->Show;
 			( *bob )->getCore()->Show = true;

@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Spike_AutoGen::SpikeCleanup::Apply( Vector2 pos )
+	Vector2 Spike_AutoGen::SpikeCleanup::Apply( Vector2 pos )
 	{
 		float dist = Params->SpikeMinDist.GetVal( pos );
 		return Vector2( dist, dist );
@@ -140,7 +140,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 				//if (xdif > 15)
 			{
 					std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
-					spike->Init( Vector2::Zero, level );
+					spike->Init( Vector2(), level );
 
 					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 55;
 					float y;
@@ -187,7 +187,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 							continue;
 
 						std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
-						spike->Init( Vector2::Zero, level );
+						spike->Init( Vector2(), level );
 
 						if ( level->getRnd()->Rnd->Next(0, 2) == 0 )
 						{

@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 	LevelTitle::LevelTitle( const std::wstring &str )
 	{
 		InitializeInstanceFields();
-		Init( str, Vector2::Zero, 1, false );
+		Init( str, Vector2(), 1, false );
 	}
 
 	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma )

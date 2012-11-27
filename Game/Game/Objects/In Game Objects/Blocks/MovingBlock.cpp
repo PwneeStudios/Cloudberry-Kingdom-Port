@@ -44,13 +44,13 @@ namespace CloudberryKingdom
 		getCore()->BoxesOnly = BoxesOnly;
 	}
 
-	Microsoft::Xna::Framework::Vector2 MovingBlock::TR_Bound()
+	Vector2 MovingBlock::TR_Bound()
 	{
 		Vector2 max = Vector2::Max( Vector2::Max( CalcPosition( 0 ), CalcPosition( .5f ) ), Vector2::Max( CalcPosition( 0.25f ), CalcPosition( .75f ) ) );
 		return max;
 	}
 
-	Microsoft::Xna::Framework::Vector2 MovingBlock::BL_Bound()
+	Vector2 MovingBlock::BL_Bound()
 	{
 		Vector2 min = Vector2::Min( Vector2::Min( CalcPosition( 0 ), CalcPosition( .5f ) ), Vector2::Min( CalcPosition( 0.25f ), CalcPosition( .75f ) ) );
 
@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 		Active = false;
 	}
 
-	Microsoft::Xna::Framework::Vector2 MovingBlock::CalcPosition( float t )
+	Vector2 MovingBlock::CalcPosition( float t )
 	{
 		switch ( MoveType )
 		{

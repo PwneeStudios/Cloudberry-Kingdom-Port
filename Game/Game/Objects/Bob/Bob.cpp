@@ -212,7 +212,7 @@ std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
 		return PlayerManager::Get( MyPlayerIndex );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Bob::Feet()
+	Vector2 Bob::Feet()
 	{
 		Box->CalcBounds();
 
@@ -693,7 +693,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 	//#endif
 
 	#if defined(WINDOWS)
-		Vector2 KeyboardDir = Vector2::Zero;
+		Vector2 KeyboardDir = Vector2();
 
 		//if (MyPlayerIndex == PlayerIndex.One)
 		{
@@ -780,7 +780,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		UpdateObject();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Bob::getObjectPos() const
+	const Vector2 &Bob::getObjectPos() const
 	{
 		return PlayerObject->ParentQuad->Center->Pos;
 	}
@@ -940,7 +940,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Bob::GetScale()
+	Vector2 Bob::GetScale()
 	{
 		return PlayerObject->ParentQuad->getSize() / Vector2(260);
 	}
@@ -1282,7 +1282,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			return;
 
 		MyCape->Wind = CapeWind;
-		Vector2 AdditionalWind = Vector2::Zero;
+		Vector2 AdditionalWind = Vector2();
 		if ( getCore()->MyLevel != 0 && getCore()->MyLevel->MyBackground != 0 )
 		{
 			AdditionalWind += getCore()->MyLevel->MyBackground->Wind;
@@ -1330,7 +1330,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			MyCape->AnchorPoint[ 0 ].X += Amp * static_cast<float>( sin( t ) * AmplitudeY );
 		}
 		//MyCape.AnchorPoint[0].X += .1f * (Core.Data.Velocity).X;
-		Vector2 CheatShift = Vector2::Zero; //new Vector2(.15f, .35f) * Core.Data.Velocity;
+		Vector2 CheatShift = Vector2(); //new Vector2(.15f, .35f) * Core.Data.Velocity;
 		float l = ( vel - 2*AdditionalWind )->Length();
 		if ( l > 15 )
 		{
@@ -1352,7 +1352,7 @@ float Bob::Guide_h = 1 / GuideLength;
 	{
 		CurInput.A_Button = false;
 		CurInput.B_Button = false;
-		CurInput.xVec = Vector2::Zero;
+		CurInput.xVec = Vector2();
 
 		// Phsyics update
 		MyPhsx->PhsxStep();
@@ -1479,7 +1479,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		{
 			CurInput.A_Button = false;
 			CurInput.B_Button = false;
-			CurInput.xVec = Vector2::Zero;
+			CurInput.xVec = Vector2();
 		}
 
 		// Phsyics update
@@ -1608,7 +1608,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				Boxes = std::vector<AABox*>();
 				for ( int i = 0; i <= NumBoxes; i++ )
-					Boxes.push_back( std::make_shared<AABox>( Vector2::Zero, Vector2::One ) );
+					Boxes.push_back( std::make_shared<AABox>( Vector2(), Vector2::One ) );
 			}
 
 			// Update box list
@@ -2040,7 +2040,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		temp = 0;
 		Head = 0;
 		CanInteract = true;
-		TargetPosition = Vector2::Zero;
+		TargetPosition = Vector2();
 		ComputerWaitAtStartLength = 0;
 		PlaceDelay = 23;
 		DoNotTrackOffScreen = false;
@@ -2059,7 +2059,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		KillingObject = 0;
 		CameraWeight = 1;
 		ManualAnimAndUpdate = false;
-		ExtraShift = Vector2::Zero;
+		ExtraShift = Vector2();
 		RocketOffset = Vector2( -60, 0 );
 		DoObjectInteractions = true;
 	}

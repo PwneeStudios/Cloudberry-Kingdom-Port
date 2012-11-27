@@ -21,13 +21,13 @@ namespace CloudberryKingdom
 		return CoreMath::Lerp( Vector2( 1, Level1Val ), Vector2( 9, Level9Val ), level );
 	}
 
-	Microsoft::Xna::Framework::Vector2 DifficultyHelper::InterpRestrict19( Vector2 Level1Val, Vector2 Level9Val, float level )
+	Vector2 DifficultyHelper::InterpRestrict19( Vector2 Level1Val, Vector2 Level9Val, float level )
 	{
 		level = CoreMath::Restrict( 1, 9, level );
 		return Interp19( Level1Val, Level9Val, level );
 	}
 
-	Microsoft::Xna::Framework::Vector2 DifficultyHelper::Interp19( Vector2 Level1Val, Vector2 Level9Val, float level )
+	Vector2 DifficultyHelper::Interp19( Vector2 Level1Val, Vector2 Level9Val, float level )
 	{
 		float t = ( level - 1 ) / ( 9 - 1 );
 		return Vector2::Lerp( Level1Val, Level9Val, t );

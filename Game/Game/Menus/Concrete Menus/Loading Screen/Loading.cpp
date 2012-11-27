@@ -2,22 +2,22 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Vector2 &ProgressBar::getFull_BL() const
+	const Vector2 &ProgressBar::getFull_BL() const
 	{
 		return Outline->getBL();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ProgressBar::getFull_TR() const
+	const Vector2 &ProgressBar::getFull_TR() const
 	{
 		return Outline->getTR();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ProgressBar::getCurrent_TR() const
+	const Vector2 &ProgressBar::getCurrent_TR() const
 	{
 		return Vector2( getFull_BL().X + (getFull_TR().X - getFull_BL().X) * PercentDone / 100, getFull_TR().Y );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ProgressBar::getPos() const
+	const Vector2 &ProgressBar::getPos() const
 	{
 		return MyPile->getPos();
 	}

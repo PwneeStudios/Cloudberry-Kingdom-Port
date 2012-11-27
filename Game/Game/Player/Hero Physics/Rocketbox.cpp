@@ -99,7 +99,7 @@ const std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance = std::make_s
 			pos += getPos();
 
 			int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
-			ParticleEffects::CartThrust( MyBob->getCore()->MyLevel, layer, pos, dir, Vector2::Zero );
+			ParticleEffects::CartThrust( MyBob->getCore()->MyLevel, layer, pos, dir, Vector2() );
 			//ParticleEffects.Thrust(MyBob.Core.MyLevel, layer, pos, dir, Vel / 1.5f);
 		}
 	}

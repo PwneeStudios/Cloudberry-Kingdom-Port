@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 	MultiplierUp::MultiplierUp()
 	{
 		InitializeInstanceFields();
-		Init( Vector2::Zero, 1, false );
+		Init( Vector2(), 1, false );
 	}
 
 	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma )

@@ -168,9 +168,6 @@ bool AnimationData::RecordAll = false;
 			Anims[ anim ].Data[ frame ] = val;
 	}
 
-	// regex FIXME Microsoft::Xna::Framework::Vector2
-	// regex FIXME Vector2::Zero
-
 	Vector2 AnimationData::Get( int anim, int frame )
 	{
 		Vector2 Default = Vector2();

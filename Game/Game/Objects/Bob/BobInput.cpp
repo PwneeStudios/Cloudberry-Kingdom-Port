@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	void BobInput::Clean()
 	{
 		A_Button = B_Button = false;
-		xVec = Vector2::Zero;
+		xVec = Vector2();
 	}
 
 	void BobInput::Write( const std::shared_ptr<BinaryWriter> &writer )

@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 		v2.AnimData = quad->Corner[ 2 ]->AnimData;
 		v3.AnimData = quad->Corner[ 3 ]->AnimData;
 
-		PreCalc0 = PreCalc1 = PreCalc2 = PreCalc3 = Vector2::Zero;
+		PreCalc0 = PreCalc1 = PreCalc2 = PreCalc3 = Vector2();
 
 		MyEffect = quad.MyEffect;
 		_MyTexture.reset();
@@ -249,12 +249,12 @@ namespace CloudberryKingdom
 		v3.Pos = Vector2( 1, -Ratio );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &SimpleQuad::getTR() const
+	const Vector2 &SimpleQuad::getTR() const
 	{
 		return v1.Vertex.xy;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &SimpleQuad::getBL() const
+	const Vector2 &SimpleQuad::getBL() const
 	{
 		return v2.Vertex.xy;
 	}
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 		v3.Vertex.uv = hold;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &SimpleQuad::getUV_Offset() const
+	const Vector2 &SimpleQuad::getUV_Offset() const
 	{
 		if ( _MyTexture->FromPacked )
 			return v0.Vertex.uv / Vector2( _MyTexture->TR.X - _MyTexture->BL.X, _MyTexture->BL.Y - _MyTexture->TR.Y );
@@ -370,7 +370,7 @@ namespace CloudberryKingdom
 		UVFromBounds_2( value, value + getUV_Repeat() );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &SimpleQuad::getUV_Repeat() const
+	const Vector2 &SimpleQuad::getUV_Repeat() const
 	{
 		if ( _MyTexture->FromPacked )
 			return ( v3.Vertex.uv - v0.Vertex.uv ) / Vector2( _MyTexture->TR.X - _MyTexture->BL.X, _MyTexture->BL.Y - _MyTexture->TR.Y );

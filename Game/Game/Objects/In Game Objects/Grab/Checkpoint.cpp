@@ -103,7 +103,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 
 	void Checkpoint::Init( const std::shared_ptr<Level> &level )
 	{
-		ObjectBase::Init( Vector2::Zero, level );
+		ObjectBase::Init( Vector2(), level );
 
 		Box->Initialize( getCore()->Data.Position, level->getInfo()->Checkpoints->Size );
 

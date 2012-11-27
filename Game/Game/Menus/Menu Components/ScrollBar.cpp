@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 
 		MyMenu->Add( slider );
 
-		slider->Pos = slider->PosOffset = slider->SelectedPos = Vector2::Zero;
+		slider->Pos = slider->PosOffset = slider->SelectedPos = Vector2();
 	}
 
 	float ScrollBar::SliderGet()
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ScrollBar::getBarPos() const
+	const Vector2 &ScrollBar::getBarPos() const
 	{
 		return slider->Pos;
 	}

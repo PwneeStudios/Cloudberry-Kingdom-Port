@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		return Color( Gray( val ) );
 	}
 
-	Microsoft::Xna::Framework::Vector4 ColorHelper::Gray( float val )
+	Vector4 ColorHelper::Gray( float val )
 	{
 		return Vector4( val, val, val, 1 );
 	}

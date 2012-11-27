@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 	void BackgroundCollection::Clear()
 	{
-		Clear( std::make_shared<FloatRectangle>( Vector2::Zero, Vector2( 100000000 ) ) );
+		Clear( std::make_shared<FloatRectangle>( Vector2(), Vector2( 100000000 ) ) );
 	}
 
 	void BackgroundCollection::Clear( const std::shared_ptr<FloatRectangle> &Area )

@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Boulder_AutoGen::Cleanup_2Helper::Apply( Vector2 pos )
+	Vector2 Boulder_AutoGen::Cleanup_2Helper::Apply( Vector2 pos )
 	{
 		float dist = Params->FloaterMinDist.GetVal( pos );
 		return Vector2( dist, dist );
@@ -170,7 +170,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		return NewFloater;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Boulder_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, const std::shared_ptr<Rand> &Rnd )
+	Vector2 Boulder_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, const std::shared_ptr<Rand> &Rnd )
 	{
 		Vector2 pos = bob->getCore()->Data.Position + Vector2(Rnd->RndFloat(-600, 600), Rnd->RndFloat(-300, 400));
 		pos.Y = __min( pos.Y, TR.Y - 400 );

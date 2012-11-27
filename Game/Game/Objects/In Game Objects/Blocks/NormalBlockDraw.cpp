@@ -66,7 +66,7 @@ Vector2 NormalBlockDraw::ModCeilingSize = Vector2( 25, 0 );
 		MyBlock = block;
 
 		// Grow the block a bit if it is a ceiling piece
-		Vector2 ModSize = Vector2::Zero;
+		Vector2 ModSize = Vector2();
 
 		if ( MyPieces != 0 )
 		{
@@ -100,7 +100,7 @@ Vector2 NormalBlockDraw::ModCeilingSize = Vector2( 25, 0 );
 	void NormalBlockDraw::InitializeInstanceFields()
 	{
 		Shadow = false;
-		ShadowOffset = Vector2::Zero;
+		ShadowOffset = Vector2();
 		ShadowColor = Color::Black;
 	}
 }

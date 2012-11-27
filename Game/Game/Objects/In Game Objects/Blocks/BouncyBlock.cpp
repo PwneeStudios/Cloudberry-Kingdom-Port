@@ -132,8 +132,8 @@ namespace CloudberryKingdom
 
 		Active = true;
 
-		Offset = Vector2::Zero;
-		SizeOffset = Vector2::Zero;
+		Offset = Vector2();
+		SizeOffset = Vector2();
 
 		SetState( BouncyBlockState_REGULAR, true );
 

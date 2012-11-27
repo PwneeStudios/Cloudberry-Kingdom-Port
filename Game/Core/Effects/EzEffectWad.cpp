@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Vector4 &EzEffectWad::getCameraPosition() const
+	const Vector4 &EzEffectWad::getCameraPosition() const
 	{
 		return _CameraPosition;
 	}

@@ -113,7 +113,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
 
 		std::wstring line;
-		Vector2 shift = Vector2::Zero;
+		Vector2 shift = Vector2();
 		float scale = 1;
 
 		line = reader->ReadLine();

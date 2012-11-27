@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		Slider->Base.e2 *= Size.Y;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuSlider::getSliderBackSize() const
+	const Vector2 &MenuSlider::getSliderBackSize() const
 	{
 		return SliderBack->Base.GetScale();
 	}
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		SliderBack->Base.SetScale( value );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &MenuSlider::getSliderSize() const
+	const Vector2 &MenuSlider::getSliderSize() const
 	{
 		return Slider->Base.GetScale();
 	}

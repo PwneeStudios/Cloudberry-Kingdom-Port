@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 	{
 		Sprite = std::make_shared<SpriteInfo>( 0 );
 		Show = true;
-		SizePadding = Vector2::Zero;
-		ShiftBottom = Vector2::Zero;
-		ShiftStart = Vector2::Zero;
+		SizePadding = Vector2();
+		ShiftBottom = Vector2();
+		ShiftStart = Vector2();
 		CollisionSize = Vector2( 100, 200 );
 		DoorOpen = Tools::NewSound( _T( "Door_Opening" ), 1 );
 		DoorClose = Tools::NewSound( _T( "Door_Slamming" ), 1 );
@@ -134,14 +134,14 @@ namespace CloudberryKingdom
 		getCore()->BoxesOnly = BoxesOnly;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Door::GetBottom()
+	Vector2 Door::GetBottom()
 	{
 		MyQuad->Update();
 		//return ShiftBottom + new Vector2(Pos.X, MyQuad.BL.Y + 11.5f);
 		return getPos();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Door::GetTop()
+	Vector2 Door::GetTop()
 	{
 		MyQuad->Update();
 		//return new Vector2(Pos.X, MyQuad.TR.Y + 11.5f);
@@ -365,7 +365,7 @@ namespace CloudberryKingdom
 		else
 			bob->Move( ShiftStart + getPos() - bob->getPos() );
 
-		bob->getCore()->Data.Velocity = Vector2::Zero;
+		bob->getCore()->Data.Velocity = Vector2();
 		TemporaryBlock = true;
 	}
 
@@ -482,10 +482,10 @@ bool Door::AllowCompControl = false;
 
 	void Door::InitializeInstanceFields()
 	{
-		ShiftStart = Vector2::Zero;
-		ShiftBottom = Vector2::Zero;
+		ShiftStart = Vector2();
+		ShiftBottom = Vector2();
 		Mirror = false;
-		HitBoxPadding = Vector2::Zero;
+		HitBoxPadding = Vector2();
 		SuppressSound = false;
 		step = 0;
 		MoveFeet = false;

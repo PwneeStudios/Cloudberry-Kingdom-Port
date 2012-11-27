@@ -164,8 +164,8 @@ std::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, PieceQuad::Elev
 
 	void PieceQuad::Init( const std::shared_ptr<EzTexture> &tex, const std::shared_ptr<EzEffect> &fx )
 	{
-		Data.Center_BL_Shift = Vector2::Zero;
-		Data.Center_TR_Shift = Vector2::Zero;
+		Data.Center_BL_Shift = Vector2();
+		Data.Center_TR_Shift = Vector2();
 
 		Data.LeftWidth = Data.RightWidth = Data.TopWidth = Data.BottomWidth = 0;
 		Data.RepeatWidth = Data.RepeatHeight = 0;
@@ -184,7 +184,7 @@ std::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, PieceQuad::Elev
 		SetColor( Color::White );
 	}
 
-	Microsoft::Xna::Framework::Vector2 PieceQuad::FromBounds( Vector2 TR, Vector2 BL )
+	Vector2 PieceQuad::FromBounds( Vector2 TR, Vector2 BL )
 	{
 		CalcQuads( ( TR - BL ) / 2 );
 		return ( TR + BL ) / 2;

@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Vector2 &CircleBox::getCenter() const
+	const Vector2 &CircleBox::getCenter() const
 	{
 		return _Center;
 	}
@@ -89,13 +89,13 @@ namespace CloudberryKingdom
 		Invalidated = true;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CircleBox::GetTR()
+	Vector2 CircleBox::GetTR()
 	{
 		Validate();
 		return TR;
 	}
 
-	Microsoft::Xna::Framework::Vector2 CircleBox::GetBL()
+	Vector2 CircleBox::GetBL()
 	{
 		Validate();
 		return BL;

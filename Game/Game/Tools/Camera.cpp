@@ -2,7 +2,7 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Vector2 &Camera::getPos() const
+	const Vector2 &Camera::getPos() const
 	{
 		return Data.Position;
 	}
@@ -12,12 +12,12 @@ namespace CloudberryKingdom
 		Data.Position = value;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::PosToScreenPos( Vector2 pos, float parallax )
+	Vector2 Camera::PosToScreenPos( Vector2 pos, float parallax )
 	{
 		return ( pos - getPos() ) * parallax;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Camera::getZoom() const
+	const Vector2 &Camera::getZoom() const
 	{
 		return _Zoom;
 	}
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		_Zoom = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Camera::getScreenSize() const
+	const Vector2 &Camera::getScreenSize() const
 	{
 		return 2 * Vector2( ScreenWidth, ScreenHeight );
 	}
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 		FancyZoom->RelVal = getZoom();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::GetSize()
+	Vector2 Camera::GetSize()
 	{
 		return Vector2( GetWidth(), GetHeight() );
 	}
@@ -243,7 +243,7 @@ namespace CloudberryKingdom
 		Shaking = false;
 		setZoom( ShakingSaveZoom );
 		Data.Position = ShakingSavePos;
-		ShakeOffset = Vector2::Zero;
+		ShakeOffset = Vector2();
 	}
 
 	bool Camera::OnScreen( Vector2 pos )
@@ -290,7 +290,7 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	Microsoft::Xna::Framework::Vector4 Camera::GetVertex()
+	Vector4 Camera::GetVertex()
 	{
 		if ( UseEffective )
 			return Vector4( EffectivePos.X, EffectivePos.Y, EffectiveZoom.X, EffectiveZoom.Y );
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 		Update();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::CurVel()
+	Vector2 Camera::CurVel()
 	{
 		//return Data.Position - PrevPos;
 		return PrevPos - PrevPrevPos;
@@ -485,11 +485,11 @@ bool Camera::DisableOscillate = false;
 		TR = Vector2( -10000000, -10000000 );
 		BL = Vector2( 10000000, 10000000 );
 
-		MaxPlayerSpeed = Vector2::Zero;
+		MaxPlayerSpeed = Vector2();
 
 		int Count = 0;
 		float TotalWeight = 0;
-		Vector2 BobsCenter = Vector2::Zero;
+		Vector2 BobsCenter = Vector2();
 		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
@@ -560,7 +560,7 @@ bool Camera::DisableOscillate = false;
 		Update();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::BoxLimit_X( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
+	Vector2 Camera::BoxLimit_X( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
 	{
 		if ( Pos.X < BoxCenter.X - BoxSize.X + BoxShift.X )
 			Pos.X = BoxCenter.X - BoxSize.X + BoxShift.X;
@@ -570,7 +570,7 @@ bool Camera::DisableOscillate = false;
 		return Pos;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::BoxLimit_Y( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
+	Vector2 Camera::BoxLimit_Y( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
 	{
 		if ( Pos.Y < BoxCenter.Y - BoxSize.Y + BoxShift.Y )
 			Pos.Y = BoxCenter.Y - BoxSize.Y + BoxShift.Y;
@@ -580,7 +580,7 @@ bool Camera::DisableOscillate = false;
 		return Pos;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::BoxLimitLeft( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
+	Vector2 Camera::BoxLimitLeft( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
 	{
 		if ( Pos.X < BoxCenter.X - BoxSize.X + BoxShift.X )
 			Pos.X = BoxCenter.X - BoxSize.X + BoxShift.X;
@@ -588,7 +588,7 @@ bool Camera::DisableOscillate = false;
 		return Pos;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::BoxLimitDown( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
+	Vector2 Camera::BoxLimitDown( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
 	{
 		if ( Pos.Y < BoxCenter.Y - BoxSize.Y + BoxShift.Y )
 			Pos.Y = BoxCenter.Y - BoxSize.Y + BoxShift.Y;
@@ -596,7 +596,7 @@ bool Camera::DisableOscillate = false;
 		return Pos;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Camera::BoxLimitUp( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
+	Vector2 Camera::BoxLimitUp( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift )
 	{
 		if ( Pos.Y > BoxCenter.Y + BoxSize.Y + BoxShift.Y )
 			Pos.Y = BoxCenter.Y + BoxSize.Y + BoxShift.Y;
@@ -610,11 +610,11 @@ bool Camera::DisableOscillate = false;
 		TR = Vector2( -10000000, -10000000 );
 		BL = Vector2( 10000000, 10000000 );
 
-		MaxPlayerSpeed = Vector2::Zero;
+		MaxPlayerSpeed = Vector2();
 
 		int Count = 0;
 		float TotalWeight = 0;
-		Vector2 BobsCenter = Vector2::Zero;
+		Vector2 BobsCenter = Vector2();
 		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
@@ -647,7 +647,7 @@ bool Camera::DisableOscillate = false;
 		}
 
 
-		Vector2 BoxSize, BoxShift = Vector2::Zero;
+		Vector2 BoxSize, BoxShift = Vector2();
 		Vector2 Pos = TR;
 		if ( FollowCenter )
 			Pos = BobsCenter;

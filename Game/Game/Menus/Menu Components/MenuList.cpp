@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 			MyMenu->Active = false;
 
 			float Width = MyText->GetWorldWidth() / 2;
-			if ( MyExpandPos == Vector2::Zero )
+			if ( MyExpandPos == Vector2() )
 				MyMenuListExpand->Pos->RelVal = Pos + PosOffset - MyMenu->FancyPos->AbsVal + Vector2( -Width, 120 );
 			else
 				MyMenuListExpand->Pos->RelVal = MyExpandPos;
@@ -267,10 +267,10 @@ namespace CloudberryKingdom
 		HoldSelected = Selected;
 		int CurIndex = ListIndex;
 
-		Vector2 Dir = Vector2::Zero;
+		Vector2 Dir = Vector2();
 		if ( Selected )
 		{
-			Dir = Vector2::Zero;
+			Dir = Vector2();
 			if ( Control < 0 )
 				Dir = ButtonCheck::GetMaxDir( Control );
 			else
@@ -414,11 +414,11 @@ namespace CloudberryKingdom
 	void MenuList::InitializeInstanceFields()
 	{
 		_ExpandOnGo = false;
-		MyExpandPos = Vector2::Zero;
+		MyExpandPos = Vector2();
 		DrawArrowsWhenUnselected = false;
 #if defined(WINDOWS)
 		ListPadding = Vector2( 65, 0 );
-		TotalPadding = Vector2::Zero;
+		TotalPadding = Vector2();
 #endif
 		ObjDict = std::map<MenuItem*, void*>();
 		DoIndexWrapping = true;

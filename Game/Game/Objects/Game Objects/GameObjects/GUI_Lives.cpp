@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( false );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &GUI_Lives::getApparentPos() const
+	const Vector2 &GUI_Lives::getApparentPos() const
 	{
 		return Text->FancyPos->AbsVal + Text->GetWorldSize() / 2;
 	}

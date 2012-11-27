@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 	void Wall::MakeSpike( int count, float pos )
 	{
 		std::shared_ptr<Spike> spike = static_cast<Spike*>( getCore()->MyLevel->getRecycle()->GetObject(ObjectType_SPIKE, false) );
-		spike->Init( Vector2::Zero, getMyLevel() );
+		spike->Init( Vector2(), getMyLevel() );
 
 		if ( Horizontal )
 		{
@@ -219,7 +219,7 @@ namespace CloudberryKingdom
 			Offset = Vector2( getMyLevel()->getRnd()->RndFloat(-CurShakeIntensity, CurShakeIntensity), getMyLevel()->getRnd()->RndFloat(-CurShakeIntensity, CurShakeIntensity) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Wall::CalcPosition( float t )
+	Vector2 Wall::CalcPosition( float t )
 	{
 		if ( t < InitialDelay )
 			return getCore()->Data.Position;

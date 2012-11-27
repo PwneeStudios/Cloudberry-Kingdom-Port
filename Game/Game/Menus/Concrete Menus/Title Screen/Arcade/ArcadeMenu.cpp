@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 		SlideOutTo = PresetPos_LEFT;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ArcadeMenu::GetGoalPos()
+	Vector2 ArcadeMenu::GetGoalPos()
 	{
 		return Vector2( -174.6031f, -603.1746f );
 	}

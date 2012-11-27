@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		TR.Vertex.xy = Base.Origin + TR.Pos.X * Base.e1 + TR.Pos.Y * Base.e2;
 	}
 
-	Microsoft::Xna::Framework::Vector2 SimpleBox::Center()
+	Vector2 SimpleBox::Center()
 	{
 		return ( TR.Vertex.xy + BL.Vertex.xy ) / 2;
 	}
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		return ( TR.Pos.X - BL.Pos.X ) * Base.e1.Length();
 	}
 
-	Microsoft::Xna::Framework::Vector2 SimpleBox::Size()
+	Vector2 SimpleBox::Size()
 	{
 		return ( TR.Vertex.xy - BL.Vertex.xy );
 	}

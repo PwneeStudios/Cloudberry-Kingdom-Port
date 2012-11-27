@@ -171,7 +171,7 @@ std::shared_ptr<EzTexture> PoppedTexture, UnpoppedTexture, BerryBubble::BubbleTe
 		Popped = false;
 
 		getCore()->Data.Position = getCore()->StartData.Position;
-		getCore()->Data.Velocity = Vector2::Zero;
+		getCore()->Data.Velocity = Vector2();
 
 		SetTexture();
 	}

@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 			ParentQuad->Set_RelPosFromPos( this );
 		else
 		{
-			Vector2 C = Vector2::Zero;
+			Vector2 C = Vector2();
 			if ( CenterPoint != 0 )
 				C = CenterPoint->Pos;
 
@@ -141,7 +141,7 @@ namespace CloudberryKingdom
 			ParentQuad->Set_PosFromRelPos( this );
 		else
 		{
-			Vector2 C = Vector2::Zero;
+			Vector2 C = Vector2();
 			if ( CenterPoint != 0 )
 				C = CenterPoint->Pos;
 

@@ -447,7 +447,7 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	const Microsoft::Xna::Framework::Vector2 &Tools::getMousePos()
+	const Vector2 &Tools::getMousePos()
 	{
 		return Vector2( Mouse.X, Mouse.Y ) / Tools::Render->SpriteScaling;
 	}
@@ -556,7 +556,7 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	Microsoft::Xna::Framework::Vector2 Tools::MouseGUIPos( Vector2 zoom )
+	Vector2 Tools::MouseGUIPos( Vector2 zoom )
 	{
 		//return Tools.ToGUICoordinates(new Vector2(Tools.CurMouseState.X, Tools.CurMouseState.Y), Tools.CurLevel.MainCamera, zoom);
 		return Tools::ToGUICoordinates( getMousePos(), Tools::CurLevel->getMainCamera(), zoom );
@@ -564,7 +564,7 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	Microsoft::Xna::Framework::Vector2 Tools::MouseWorldPos()
+	Vector2 Tools::MouseWorldPos()
 	{
 		return Tools::ToWorldCoordinates( getMousePos(), Tools::CurLevel->getMainCamera() );
 	}
@@ -1277,9 +1277,9 @@ int Tools::WriteObjId = 0;
 		return str;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ParseToVector2( const std::wstring &bit1, const std::wstring &bit2 )
+	Vector2 Tools::ParseToVector2( const std::wstring &bit1, const std::wstring &bit2 )
 	{
-		Vector2 Vec = Vector2::Zero;
+		Vector2 Vec = Vector2();
 
 		Vec.X = float::Parse( bit1 );
 		Vec.Y = float::Parse( bit2 );
@@ -1287,9 +1287,9 @@ int Tools::WriteObjId = 0;
 		return Vec;
 	}
 
-	Microsoft::Xna::Framework::Vector4 Tools::ParseToVector4( const std::wstring &bit1, const std::wstring &bit2, const std::wstring &bit3, const std::wstring &bit4 )
+	Vector4 Tools::ParseToVector4( const std::wstring &bit1, const std::wstring &bit2, const std::wstring &bit3, const std::wstring &bit4 )
 	{
-		Vector4 Vec = Vector4::Zero;
+		Vector4 Vec = Vector4();
 
 		Vec.X = float::Parse( bit1 );
 		Vec.Y = float::Parse( bit2 );
@@ -1345,7 +1345,7 @@ int Tools::WriteObjId = 0;
 		return b;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ParseToVector2( const std::wstring &str )
+	Vector2 Tools::ParseToVector2( const std::wstring &str )
 	{
 		int CommaIndex = str.find( _T( "," ) );
 		Vector2 Vec = Vector2();
@@ -1453,9 +1453,9 @@ int Tools::WriteObjId = 0;
 		obj->Move( pos - obj->getCore()->Data.Position );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ToScreenCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 ZoomMod )
+	Vector2 Tools::ToScreenCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 ZoomMod )
 	{
-		Vector2 loc = Vector2::Zero;
+		Vector2 loc = Vector2();
 		loc.X = ( pos.X - cam->Data.Position.X ) / cam->AspectRatio * cam->getZoom().X * ZoomMod.X;
 		loc.Y = ( pos.Y - cam->Data.Position.Y ) * cam->getZoom().Y * ZoomMod.Y;
 
@@ -1468,22 +1468,22 @@ int Tools::WriteObjId = 0;
 		return loc;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
+	Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
 	{
 		return ToWorldCoordinates( pos, cam, Vector2( .001f,.001f ) );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
+	Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
 	{
 		return ToWorldCoordinates( pos, cam, zoom );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
+	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
 	{
 		return ToWorldCoordinates( pos, cam, cam->getZoom() );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
+	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
 	{
 		pos.X -= cam->ScreenWidth / 2;
 		pos.Y -= cam->ScreenHeight / 2;
@@ -1559,7 +1559,7 @@ float Tools::HoldIllumination = 0;
 	{
 		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2::One );
 
-		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2::Zero, Vector2( .5f,.5f ), SpriteEffects::None, 0 );
+		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2(), Vector2( .5f,.5f ), SpriteEffects::None, 0 );
 	}
 
 	void Tools::SetDefaultEffectParams( float AspectRatio )

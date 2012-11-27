@@ -4,8 +4,8 @@ namespace CloudberryKingdom
 
 	void SpikeyGuy::SpikeyGuyTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2::Zero, Color::White );
-		Base = std::make_shared<SpriteInfo>( _T( "Joint" ), Vector2( 50, -1 ), Vector2::Zero, Color::White );
+		Ball = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2(), Color::White );
+		Base = std::make_shared<SpriteInfo>( _T( "Joint" ), Vector2( 50, -1 ), Vector2(), Color::White );
 		Chain = std::make_shared<LineSpriteInfo>( _T( "Chain_Tile" ), 44, 63 );
 		Radius = 200;
 		Rotate = false;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		Dir = 1;
 		Period = 150;
 		Offset = 0;
-		PivotPoint = Vector2::Zero;
+		PivotPoint = Vector2();
 
 		getCore()->DrawLayer = 4;
 		getCore()->DrawLayer2 = 5;
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		return PivotPoint.Y - Length;
 	}
 
-	Microsoft::Xna::Framework::Vector2 SpikeyGuy::GetPos( float t )
+	Vector2 SpikeyGuy::GetPos( float t )
 	{
 		CorrespondingAngle = static_cast<float>( 2 * M_PI * t );
 		Vector2 Dir = CoreMath::AngleToDir( CorrespondingAngle );

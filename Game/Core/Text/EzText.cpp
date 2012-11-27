@@ -390,7 +390,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 
 	bool EzText::HitTest( Vector2 pos )
 	{
-		return HitTest( pos, Vector2::Zero );
+		return HitTest( pos, Vector2() );
 	}
 
 	bool EzText::HitTest( Vector2 pos, Vector2 padding )
@@ -458,7 +458,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &EzText::getPos() const
+	const Vector2 &EzText::getPos() const
 	{
 		if ( FancyPos == 0 )
 			return _Pos;
@@ -676,7 +676,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 						AsPaint = int::Parse( string_bits[ 5 ] ) > 0;
 				}
 				else
-					Parse_PicShift = Vector2::Zero;
+					Parse_PicShift = Vector2();
 
 				Vector2 size;
 				std::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
@@ -774,11 +774,11 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		return EndIndex;
 	}
 
-	Microsoft::Xna::Framework::Vector2 EzText::StringSize( const std::wstring &str )
+	Vector2 EzText::StringSize( const std::wstring &str )
 	{
 		MyFont->FixFont();
 
-		Vector2 Size = Vector2::Zero;
+		Vector2 Size = Vector2();
 		int BeginBracketIndex, EndBracketIndex;
 		bool flag = false;
 
@@ -891,7 +891,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		return LineHeight;
 	}
 
-	Microsoft::Xna::Framework::Vector2 EzText::GetWorldSize()
+	Vector2 EzText::GetWorldSize()
 	{
 		return Vector2( GetWorldWidth(), GetWorldHeight() );
 	}
@@ -911,7 +911,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		return getScale() * GetWorldFloat(MyFont->Font->MeasureString(str)->X);
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &EzText::getMyCameraZoom() const
+	const Vector2 &EzText::getMyCameraZoom() const
 	{
 		return _MyCameraZoom;
 	}
@@ -921,7 +921,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		_MyCameraZoom = value;
 	}
 
-	Microsoft::Xna::Framework::Vector2 EzText::GetWorldVector( Vector2 v )
+	Vector2 EzText::GetWorldVector( Vector2 v )
 	{
 		return GetWorldVector( v, getMyCameraZoom() );
 	}
@@ -936,7 +936,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		return GetWorldVector( Vector2( interval, 0 ), zoom ).X;
 	}
 
-	Microsoft::Xna::Framework::Vector2 EzText::GetWorldVector( Vector2 v, Vector2 zoom )
+	Vector2 EzText::GetWorldVector( Vector2 v, Vector2 zoom )
 	{
 		Vector2 vec2 = v;
 		Vector2 vec1 = Vector2( 0, 0 );
@@ -946,7 +946,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		return ( vec2 - vec1 ) * Tools::TheGame->Resolution.LineHeightMod;
 	}
 
-	Microsoft::Xna::Framework::Vector2 EzText::GetGUIVector( Vector2 v )
+	Vector2 EzText::GetGUIVector( Vector2 v )
 	{
 		Vector2 vec2 = v;
 		Vector2 vec1 = Vector2( 0, 0 );
@@ -977,7 +977,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 		Bits = std::vector<EzTextBit*>();
 		Pics = std::vector<EzTextPic*>();
 
-		loc = Vector2::Zero;
+		loc = Vector2();
 		LineHeight = 0;
 
 		int i = 0;
@@ -1162,7 +1162,7 @@ bool EzText::ZoomWithCamera_Override = false;
 					Tools::Render->EndSpriteBatch();
 					Tools::StartSpriteBatch( true );
 				}
-				Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2::Zero, scale, SpriteEffects::None, 0 );
+				Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects::None, 0 );
 				if ( ( *pic )->AsPaint )
 				{
 					Tools::Render->EndSpriteBatch();
@@ -1224,7 +1224,7 @@ bool EzText::ZoomWithCamera_Override = false;
 		OutlineColor = Color::Black.ToVector4();
 		Shadow = false;
 		PicShadow = true;
-		ShadowOffset = Vector2::Zero;
+		ShadowOffset = Vector2();
 		ShadowColor = Color::Black;
 		ShadowScale = 1;
 		Alpha = 1;

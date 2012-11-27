@@ -160,7 +160,7 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	Microsoft::Xna::Framework::Vector2 BaseQuad::BL()
+	Vector2 BaseQuad::BL()
 	{
 		Vector2 BL = Vector2( 100000, 100000 );
 		for ( int i = 0; i < NumVertices; i++ )
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 		return BL;
 	}
 
-	Microsoft::Xna::Framework::Vector2 BaseQuad::TR()
+	Vector2 BaseQuad::TR()
 	{
 		Vector2 TR = Vector2( -100000, -100000 );
 		for ( int i = 0; i < NumVertices; i++ )

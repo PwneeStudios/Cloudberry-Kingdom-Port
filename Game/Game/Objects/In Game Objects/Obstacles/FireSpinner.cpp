@@ -6,8 +6,8 @@ namespace CloudberryKingdom
 
 	void FireSpinner::FireSpinnerTileInfo::InitializeInstanceFields()
 	{
-		Flame = std::make_shared<SpriteInfo>( Tools::Texture( _T( "small flame" ) ), Vector2( 72, 72 ), Vector2::Zero, Color::White );
-		Base = std::make_shared<SpriteInfo>( 0, Vector2( 72, 72 ), Vector2::Zero, Color::White );
+		Flame = std::make_shared<SpriteInfo>( Tools::Texture( _T( "small flame" ) ), Vector2( 72, 72 ), Vector2(), Color::White );
+		Base = std::make_shared<SpriteInfo>( 0, Vector2( 72, 72 ), Vector2(), Color::White );
 		SegmentSpacing = 53;
 		SpaceFromBase = 0;
 		Rotate = true;
@@ -88,14 +88,14 @@ bool FireSpinner::RandomMiniOrientation = true;
 
 	void FireSpinner::SetCurrent( float Step )
 	{
-		Vector2 p1 = Vector2::Zero, p2 = Vector2::Zero;
+		Vector2 p1 = Vector2(), p2 = Vector2();
 		GetLine( Step, p1, p2 );
 		MyLine.SetCurrent( p1, p2 );
 	}
 
 	void FireSpinner::SetTarget( float Step )
 	{
-		Vector2 p1 = Vector2::Zero, p2 = Vector2::Zero;
+		Vector2 p1 = Vector2(), p2 = Vector2();
 		GetLine( Step, p1, p2 );
 		MyLine.SetTarget( p1, p2 );
 	}

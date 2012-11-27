@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 		Vector2 Tangent = ( j->getCore()->Data.Position - k->getCore()->Data.Position );
 
 		if ( Length < 1 )
-			Tangent = Vector2::Zero;
+			Tangent = Vector2();
 		else
 			Tangent /= Length;
 

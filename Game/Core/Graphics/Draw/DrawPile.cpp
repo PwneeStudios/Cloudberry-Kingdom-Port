@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &DrawPile::getSize() const
+	const Vector2 &DrawPile::getSize() const
 	{
 		return FancyScale->RelVal;
 	}
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		FancyScale->RelVal = value;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &DrawPile::getPos() const
+	const Vector2 &DrawPile::getPos() const
 	{
 		return FancyPos->RelVal;
 	}

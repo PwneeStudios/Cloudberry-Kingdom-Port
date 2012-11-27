@@ -184,7 +184,7 @@ bool ButtonCheck::PrevMouseInUse = false;
 	#endif
 			MouseInUse = false;
 
-		if ( Tools::DeltaMouse != Vector2::Zero || Tools::Mouse.LeftButton == ButtonState::Pressed || Tools::Mouse.RightButton == ButtonState::Pressed )
+		if ( Tools::DeltaMouse != Vector2() || Tools::Mouse.LeftButton == ButtonState::Pressed || Tools::Mouse.RightButton == ButtonState::Pressed )
 			MouseInUse = true;
 
 		PrevMouseInUse = MouseInUse;
@@ -240,12 +240,12 @@ float ButtonCheck::ThresholdSensitivity = .715f;
 		return -1;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ButtonCheck::GetDir( int Control )
+	Vector2 ButtonCheck::GetDir( int Control )
 	{
 		return GetDir( Control, true );
 	}
 
-	Microsoft::Xna::Framework::Vector2 ButtonCheck::GetDir( int Control, bool Threshold )
+	Vector2 ButtonCheck::GetDir( int Control, bool Threshold )
 	{
 		// Get joystick direction
 		Vector2 Dir = ButtonCheck::State( ControllerButtons_DPAD, Control ).Dir;
@@ -273,22 +273,22 @@ float ButtonCheck::ThresholdSensitivity = .715f;
 		return Dir;
 	}
 
-	Microsoft::Xna::Framework::Vector2 ButtonCheck::GetMaxDir()
+	Vector2 ButtonCheck::GetMaxDir()
 	{
 		return GetMaxDir( false );
 	}
 
-	Microsoft::Xna::Framework::Vector2 ButtonCheck::GetMaxDir( int Control )
+	Vector2 ButtonCheck::GetMaxDir( int Control )
 	{
 		return GetMaxDir( Control == -1 );
 	}
 
-	Microsoft::Xna::Framework::Vector2 ButtonCheck::GetMaxDir( bool MustExist )
+	Vector2 ButtonCheck::GetMaxDir( bool MustExist )
 	{
 		if ( PlayerManager::Players.empty() || PlayerManager::Players[ 0 ] == 0 || PlayerManager::Players[ 1 ] == 0 || PlayerManager::Players[ 2 ] == 0 || PlayerManager::Players[ 3 ] == 0 )
-			return Vector2::Zero;
+			return Vector2();
 
-		Vector2 Dir = Vector2::Zero;
+		Vector2 Dir = Vector2();
 		for ( int i = 0; i < 4; i++ )
 		{
 			if ( PlayerManager::Get( i )->Exists || !MustExist )
@@ -695,7 +695,7 @@ bool ButtonCheck::PreLogIn = true;
 				break;
 			case ControllerButtons_DPAD:
 			{
-					Data.Dir = Vector2::Zero;
+					Data.Dir = Vector2();
 					if ( Pad.DPad.Right == ButtonState::Pressed )
 						Data.Dir = Vector2( 1, 0 );
 					if ( Pad.DPad.Up == ButtonState::Pressed )
@@ -750,7 +750,7 @@ bool ButtonCheck::PreLogIn = true;
 
 		if ( Button == ControllerButtons_LJ )
 		{
-			Vector2 KeyboardDir = Vector2::Zero;
+			Vector2 KeyboardDir = Vector2();
 			if ( keyboard.IsKeyDownCustom( Keys::Left ) )
 				KeyboardDir.X = -1;
 			if ( keyboard.IsKeyDownCustom( Keys::Right ) )

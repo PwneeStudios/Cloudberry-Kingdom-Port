@@ -42,17 +42,17 @@ namespace CloudberryKingdom
 		MaxSlideSpeed = 550;
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &LengthSlider::getBL() const
+	const Vector2 &LengthSlider::getBL() const
 	{
 		return LengthBar->getFull_BL();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &LengthSlider::getTR() const
+	const Vector2 &LengthSlider::getTR() const
 	{
 		return LengthBar->getFull_TR();
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &LengthSlider::getSlider_TR() const
+	const Vector2 &LengthSlider::getSlider_TR() const
 	{
 		return LengthBar->getCurrent_TR();
 	}

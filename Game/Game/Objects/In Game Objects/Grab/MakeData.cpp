@@ -28,11 +28,11 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < N; i++ )
 		{
 			Start[ i ] = PhsxData();
-			CheckpointShift[ i ] = Vector2::Zero;
+			CheckpointShift[ i ] = Vector2();
 			MoveData[ i ] = Bob::BobMove();
 			MoveData[ i ].Init();
 		}
-		CamStartPos = Vector2::Zero;
+		CamStartPos = Vector2();
 
 		InitialPlats = FinalPlats = InitialCamZone = true;
 		SkinnyStart = false;

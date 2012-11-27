@@ -136,8 +136,8 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 			return 0;
 
 		std::shared_ptr<NormalBlock> block;
-		Vector2 size = Vector2::Zero;
-		Vector2 offset = Vector2::Zero;
+		Vector2 size = Vector2();
+		Vector2 offset = Vector2();
 
 		bool EnsureBoundsAfter = true;
 		switch ( Style_BLOCK_FILL_TYPE )

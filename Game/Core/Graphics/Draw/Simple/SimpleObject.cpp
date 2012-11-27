@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 		UpdateEffectList();
 	}
 
-	Microsoft::Xna::Framework::Vector2 SimpleObject::GetBoxCenter( int i )
+	Vector2 SimpleObject::GetBoxCenter( int i )
 	{
 		Vector2 c = Boxes[ i ]->Center();
 		if ( xFlip )

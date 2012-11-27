@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 						continue;
 					}
 
-				Vector2 padding = Vector2::Zero;
+				Vector2 padding = Vector2();
 				int anim = static_cast<int>( Recordings[ i ]->GetAnim( Step ) );
 				if ( anim > 200 )
 					continue;
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 				BobQuad->Base.e1 = Vector2( BoxSize.X + padding.X, 0 );
 				BobQuad->Base.e2 = Vector2( 0, BoxSize.Y + padding.Y );
 				BobQuad->Base.Origin = Recordings[ i ]->GetBoxCenter( Step );
-				if ( BobQuad->Base.Origin == Vector2::Zero )
+				if ( BobQuad->Base.Origin == Vector2() )
 					continue;
 
 				BobQuad->Draw();

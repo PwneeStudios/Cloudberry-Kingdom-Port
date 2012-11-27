@@ -146,7 +146,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		SlowMoIcon = std::make_shared<PictureIcon>( _T( "Powerup_SlowMo" ), Color::Lime, StandardWidth *.75f );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &ObjectIcon::getPos() const
+	const Vector2 &ObjectIcon::getPos() const
 	{
 		return FancyPos->RelVal;
 	}

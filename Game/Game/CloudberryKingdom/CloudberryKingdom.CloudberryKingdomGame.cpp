@@ -272,7 +272,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Resolutions[ 0 ] = ResolutionGroup();
 		Resolutions[ 0 ].Backbuffer = IntVector2( 1280, 800 );
 		Resolutions[ 0 ].Bob_Renamed = IntVector2( 135, 0 );
-		Resolutions[ 0 ].TextOrigin = Vector2::Zero;
+		Resolutions[ 0 ].TextOrigin = Vector2();
 		Resolutions[ 0 ].LineHeightMod = 1;
 
 		Resolutions[ 0 ].CopyTo( Resolutions[ 1 ] );
@@ -1218,7 +1218,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 			std::wstring nums = Tools::Num_0_to_2 + _T( "\n\n" ) + Tools::Num_0_to_360;
 
 			Tools::StartSpriteBatch();
-			Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, nums, Vector2( 0, 100 ), Color::Orange, 0, Vector2::Zero,.4f, SpriteEffects::None, 0 );
+			Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, nums, Vector2( 0, 100 ), Color::Orange, 0, Vector2(),.4f, SpriteEffects::None, 0 );
 			Tools::Render->EndSpriteBatch();
 			return;
 		}
@@ -1282,7 +1282,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 		//str = string.Format("{0,-5} {1,-5} {2,-5} {3,-5} {4,-5}", Level.Pre1, Level.Step1, Level.Pre2, Level.Step2, Level.Post);
 
 
-		Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, str, Vector2( 0, 100 ), Color::Orange, 0, Vector2::Zero, 1, SpriteEffects::None, 0 );
+		Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, str, Vector2( 0, 100 ), Color::Orange, 0, Vector2(), 1, SpriteEffects::None, 0 );
 		Tools::Render->EndSpriteBatch();
 	}
 

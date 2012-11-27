@@ -25,12 +25,12 @@ namespace CloudberryKingdom
 		Y.SetVal( v.Y );
 	}
 
-	Microsoft::Xna::Framework::Vector2 VectorParam::GetVal()
+	Vector2 VectorParam::GetVal()
 	{
 		return Vector2( X.GetVal(), Y.GetVal() );
 	}
 
-	Microsoft::Xna::Framework::Vector2 VectorParam::GetVal( Vector2 Pos )
+	Vector2 VectorParam::GetVal( Vector2 Pos )
 	{
 		return Vector2( X.GetVal( Pos ), Y.GetVal( Pos ) );
 	}

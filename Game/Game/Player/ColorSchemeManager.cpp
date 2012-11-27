@@ -77,35 +77,35 @@ ClrTextFx ColorSchemeManager::None = 0;
 		beard->Name = Localization::Words_VANDYKE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259001;
-		beard->HatPicShift = Vector2::Zero;
+		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Beard = beard = std::make_shared<Hat>( _T( "Facial_Beard" ) );
 		beard->Name = Localization::Words_RUGGED;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259002;
-		beard->HatPicShift = Vector2::Zero;
+		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Mustache = beard = std::make_shared<Hat>( _T( "Facial_Moustache" ) );
 		beard->Name = Localization::Words_MANHATTAN;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259003;
-		beard->HatPicShift = Vector2::Zero;
+		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::BigBeard = beard = std::make_shared<Hat>( _T( "Facial_BigBeard" ) );
 		beard->Name = Localization::Words_LUMBERJACK;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259004;
-		beard->HatPicShift = Vector2::Zero;
+		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Goatee = beard = std::make_shared<Hat>( _T( "Facial_Goatee" ) );
 		beard->Name = Localization::Words_GOATEE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259005;
-		beard->HatPicShift = Vector2::Zero;
+		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 

@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 	{
 #if defined(WINDOWS)
 		ListPadding = Vector2( 65, 0 );
-		TotalPadding = Vector2::Zero;
+		TotalPadding = Vector2();
 #endif
 		MyBrackets = std::make_shared<Brackets>();
 		ShiftAmount = 250;

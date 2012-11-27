@@ -195,12 +195,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Microsoft::Xna::Framework::Vector2 Quad::ToAxisCoordinates( Vector2 v, Vector2 xAxisPos, Vector2 yAxisPos )
+	Vector2 Quad::ToAxisCoordinates( Vector2 v, Vector2 xAxisPos, Vector2 yAxisPos )
 	{
 		return Vector2( Vector2::Dot( v, xAxisPos ) / xAxisPos.Length(), Vector2::Dot(v, yAxisPos) / yAxisPos.Length() );
 	}
 
-	Microsoft::Xna::Framework::Vector2 Quad::FromAxisCoordinates( Vector2 v, Vector2 xAxisPos, Vector2 yAxisPos )
+	Vector2 Quad::FromAxisCoordinates( Vector2 v, Vector2 xAxisPos, Vector2 yAxisPos )
 	{
 		return v.X * xAxisPos / xAxisPos.Length() + v.Y * yAxisPos / yAxisPos.Length();
 	}
@@ -645,7 +645,7 @@ namespace CloudberryKingdom
 		SetColor( Color( 1, 1, 1 ) );
 	}
 
-	const Microsoft::Xna::Framework::Vector2 &Quad::getSize() const
+	const Vector2 &Quad::getSize() const
 	{
 		return Vector2( xAxis->RelPos.Length(), yAxis->RelPos.Length() );
 	}
@@ -679,7 +679,7 @@ namespace CloudberryKingdom
 		yAxis->PosFromRelPos();
 	}
 
-	Microsoft::Xna::Framework::Vector2 Quad::CalcBLBound()
+	Vector2 Quad::CalcBLBound()
 	{
 		Vector2 BL = Center->Pos;
 		for ( int i = 0; i < NumVertices; i++ )
@@ -688,7 +688,7 @@ namespace CloudberryKingdom
 		return BL;
 	}
 
-	Microsoft::Xna::Framework::Vector2 Quad::CalcTRBound()
+	Vector2 Quad::CalcTRBound()
 	{
 		Vector2 TR = Center->Pos;
 		for ( int i = 0; i < NumVertices; i++ )
@@ -733,8 +733,8 @@ namespace CloudberryKingdom
 
 	void Quad::Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v )
 	{
-		Vector2 C1 = Vector2::Zero;
-		Vector2 C2 = Vector2::Zero;
+		Vector2 C1 = Vector2();
+		Vector2 C2 = Vector2();
 		if ( v->CenterPoint != 0 )
 			C1 = v->CenterPoint->Pos;
 

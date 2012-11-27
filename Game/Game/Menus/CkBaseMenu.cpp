@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		DarkBack->Fade( .1f );
 		DarkBack->MaxAlpha = .5f;
 		DarkBack->FullScreen( Tools::getCurCamera() );
-		DarkBack->setPos( Vector2::Zero );
+		DarkBack->setPos( Vector2() );
 		DarkBack->Scale( 5 );
 		MyPile->Add( DarkBack, _T( "Dark" ) );
 	}

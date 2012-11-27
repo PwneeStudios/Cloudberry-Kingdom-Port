@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		var current_bob = MyGame->MyLevel->Bobs.empty() ? 0 : MyGame->MyLevel->Bobs[ 0 ];
-		std::shared_ptr<CloudberryKingdom::FancyVector2> current_pos = current_bob == 0 ? Vector2::Zero : current_bob->Pos;
+		std::shared_ptr<CloudberryKingdom::FancyVector2> current_pos = current_bob == 0 ? Vector2() : current_bob->Pos;
 
 		// Grab cape
 		std::shared_ptr<Cape> PrevCape = 0;
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 
 		MyDoll->CapeWind = Cape::SineWind( Vector2( -1.25f, -.1f ),.5f,.05f, Tools::t ) *.7f;
 		MyDoll->MyPhsx->OnGround = true;
-		MyDoll->MyPhsx->setVel( Vector2::Zero );
+		MyDoll->MyPhsx->setVel( Vector2() );
 	}
 
 	void HeroDoll::DrawBob()

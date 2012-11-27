@@ -168,7 +168,7 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::OnAdd();
 
-		TextBox = std::make_shared<GUI_TextBox>( Tools::CurLevel->MyLevelSeed->SuggestedName(), Vector2::Zero, Vector2(1.85f,.65f),.95f );
+		TextBox = std::make_shared<GUI_TextBox>( Tools::CurLevel->MyLevelSeed->SuggestedName(), Vector2(), Vector2(1.85f,.65f),.95f );
 		TextBox->MaxLength = 50;
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
