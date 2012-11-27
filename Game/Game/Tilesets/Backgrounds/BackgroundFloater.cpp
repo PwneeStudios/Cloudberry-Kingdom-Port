@@ -147,20 +147,6 @@ namespace CloudberryKingdom
 		Tools::QDrawer->DrawQuad( MyQuad->Quad_Renamed );
 	}
 
-const std::wstring* tempVector[] = { _T( "Name" ), _T( "MyQuad" ), _T( "uv_speed" ), _T( "uv_offset" ), _T( "Data" ), _T( "StartData" ) };
-std::vector<std::wstring> BackgroundFloater::_bits_to_save = std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-
-	std::vector<std::wstring> BackgroundFloater::GetViewables()
-	{
-		return _bits_to_save;
-	}
-
-	void BackgroundFloater::Read( const std::shared_ptr<StreamReader> &reader )
-	{
-		ViewReadWrite::Read( reader );
-		InitialUpdate();
-	}
-
 	void BackgroundFloater::InitializeInstanceFields()
 	{
 		Name = _T( "" );

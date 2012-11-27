@@ -2321,11 +2321,6 @@ int Step1, Level::Step2 = 0;
 		makeData->CamStartPos = getMainCamera()->Data.Position;
 	}
 
-	std::vector<std::wstring> Level::GetViewables()
-	{
-		return std::vector<std::wstring*> ();
-	}
-
 	const std::shared_ptr<Recycler> &Level::getRecycle() const
 	{
 		if ( MySourceGame != 0 && !MySourceGame->Released )

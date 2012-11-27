@@ -2,12 +2,6 @@
 namespace CloudberryKingdom
 {
 
-	std::vector<std::wstring> Camera::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "!MyLevel" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
 	const Microsoft::Xna::Framework::Vector2 &Camera::getPos() const
 	{
 		return Data.Position;

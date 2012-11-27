@@ -6,32 +6,6 @@
 namespace CloudberryKingdom
 {
 
-	const std::vector<std::wstring> &SimpleQuad::get_bits_to_save() const
-	{
-		return IsDefault() ? _bits_to_save_simple : _bits_to_save_full;
-	}
-
-const std::wstring* tempVector[] = { _T( "v0" ), _T( "v1" ), _T( "v2" ), _T( "v3" ), _T( "MySetColor" ), _T( "PremultipliedColor" ), _T( "BlendAddRatio" ), _T( "_MyTexture" ), _T( "ExtraTexture1" ), _T( "ExtraTexture2" ), _T( "MyEffect" ) };
-std::vector<std::wstring> SimpleQuad::_bits_to_save_full = std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-const std::wstring* tempVector2[] = { _T( "MySetColor" ), _T( "PremultipliedColor" ), _T( "BlendAddRatio" ), _T( "_MyTexture" ), _T( "ExtraTexture1" ), _T( "ExtraTexture2" ), _T( "MyEffect" ) };
-std::vector<std::wstring> SimpleQuad::_bits_to_save_simple = std::vector<std::wstring*>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-
-	void SimpleQuad::WriteCode( const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer )
-	{
-		Tools::WriteFieldsToCode( *this, prefix, writer, get_bits_to_save() );
-	}
-
-	void SimpleQuad::Write( const std::shared_ptr<StreamWriter> &writer )
-	{
-		//Tools::WriteFields( *this, writer, get_bits_to_save() );
-	}
-
-	void SimpleQuad::Read( const std::shared_ptr<StreamReader> &reader )
-	{
-		//*this = static_cast<SimpleQuad>( Tools::ReadFields( *this, reader ) );
-		SetColor( MySetColor, true );
-	}
-
 	void SimpleQuad::NextKeyFrame()
 	{
 		std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->NextKeyFrame();

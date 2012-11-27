@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class CharacterSelectManager : public ViewReadWrite
+	class CharacterSelectManager
 	{
 	private:
 		class SignInGamerLambda : public Lambda

@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class StringWorldGameData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-
-namespace CloudberryKingdom
-{
 	class LevelSequence
 	{
 	private:

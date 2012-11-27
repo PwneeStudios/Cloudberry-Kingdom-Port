@@ -5,27 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectIcon : public ViewReadWrite
+	class ObjectIcon
 	{
 	public:
 		enum IconScale
@@ -35,7 +15,6 @@ namespace CloudberryKingdom
 			IconScale_NEARLY_FULL
 		};
 	public:
-		virtual std::vector<std::wstring> GetViewables();
 
 		bool Flipped;
 

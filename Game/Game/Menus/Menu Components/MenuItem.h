@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 	//public delegate void MenuItemGo(MenuItem item);
-	class MenuItem : public ViewReadWrite
+	class MenuItem
 	{
 	public:
 		int Code;
@@ -19,10 +19,6 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::shared_ptr<Object> MyObject;
 		int MyInt;
-
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
 
 		virtual std::wstring ToCode( const std::wstring &suffix );
 

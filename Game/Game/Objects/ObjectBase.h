@@ -5,72 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectData;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class Recycler;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase : public ViewReadWrite
+	class ObjectBase
 	{
 	public:
 		const std::shared_ptr<GameData> &getGame() const;

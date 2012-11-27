@@ -2,11 +2,6 @@
 namespace CloudberryKingdom
 {
 
-	std::vector<std::wstring> ProgressBar::GetViewables()
-	{
-		return std::vector<std::wstring*> ();
-	}
-
 	const Microsoft::Xna::Framework::Vector2 &ProgressBar::getFull_BL() const
 	{
 		return Outline->getBL();

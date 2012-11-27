@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Level : public ViewReadWrite
+	class Level
 	{
 	private:
 		class ElementDistanceSquared : public LambdaFunc_1<BlockBase*, float>
@@ -488,8 +488,6 @@ namespace CloudberryKingdom
 
 
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
 		const std::shared_ptr<Recycler> &getRecycle() const;
 
 		std::wstring Name;

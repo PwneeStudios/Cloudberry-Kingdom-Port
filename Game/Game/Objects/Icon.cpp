@@ -2,11 +2,6 @@
 namespace CloudberryKingdom
 {
 
-	std::vector<std::wstring> ObjectIcon::GetViewables()
-	{
-		return std::vector<std::wstring*> ();
-	}
-
 std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, ObjectIcon::SlowMoIcon = 0;
 std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, ObjectIcon::CustomHoverIcon = 0;
 std::map<Upgrade, ObjectIcon*> ObjectIcon::UpgradeIcons = 0;

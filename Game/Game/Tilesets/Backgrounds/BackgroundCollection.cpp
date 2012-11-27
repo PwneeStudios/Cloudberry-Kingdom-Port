@@ -104,9 +104,4 @@ namespace CloudberryKingdom
 			( *list )->PhsxStep();
 	}
 
-	std::vector<std::wstring> BackgroundCollection::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Lists" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
 }

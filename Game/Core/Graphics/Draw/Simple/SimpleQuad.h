@@ -3,47 +3,13 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class AnimationData_Texture;
-}
 
 namespace CloudberryKingdom
 {
-	class TextureOrAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffect;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
-	class SimpleQuad : public IReadWrite
+	class SimpleQuad
 	{
-	private:
-		const std::vector<std::wstring> get_bits_to_save() const;
-		static std::vector<std::wstring> _bits_to_save_full;
-		static std::vector<std::wstring> _bits_to_save_simple;
+
 	public:
-		void WriteCode( const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer );
-		void Write( const std::shared_ptr<StreamWriter> &writer );
-		void Read( const std::shared_ptr<StreamReader> &reader );
 
 		bool Animated;
 

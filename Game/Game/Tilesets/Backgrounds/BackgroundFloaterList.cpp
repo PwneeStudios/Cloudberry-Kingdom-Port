@@ -134,12 +134,6 @@ namespace CloudberryKingdom
 			( *Floater )->Draw();
 	}
 
-	std::vector<std::wstring> BackgroundFloaterList::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Name" ), _T( "Parallax" ), _T( "Floaters" ), _T( "Fixed" ), _T( "Foreground" ), _T( "DoPreDraw" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
 	void BackgroundFloaterList::InitializeInstanceFields()
 	{
 		Name = _T( "" );

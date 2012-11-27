@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<Lambda> ToAction( const std::shared_ptr<Lambda_1<Menu*> > &a );
 	};
 
-	class Menu : public ViewReadWrite, public IViewableList
+	class Menu
 	{
 	private:
 		class FindItemByNameLambda : public LambdaFunc_1<MenuItem*, bool>
@@ -124,15 +124,8 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual std::wstring CopyToClipboard( const std::wstring &suffix );
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
 
 		std::shared_ptr<MenuItem> FindItemByName( const std::wstring &name );
-
-		void GetChildren( std::vector<InstancePlusName*> &ViewableChildren );
 
 		/// <summary>
 		/// Layer of the menu, used in DrawPiles
@@ -282,8 +275,6 @@ namespace CloudberryKingdom
 		virtual void PhsxStep();
 
 		void ArrangeItems( float Spacing, Vector2 Center );
-
-
 
 		void SetBoundary();
 		void SetBoundary( Vector2 Padding );

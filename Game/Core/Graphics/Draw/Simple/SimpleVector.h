@@ -8,7 +8,7 @@
 
 namespace CloudberryKingdom
 {
-	class SimpleVector : public IReadWrite
+	class SimpleVector
 	{
 	public:
 		AnimationData AnimData;
@@ -20,13 +20,6 @@ namespace CloudberryKingdom
 		void RotateLeft();
 
 		void Release();
-
-	private:
-		static std::vector<std::wstring> _bits_to_save;
-	public:
-		void WriteCode( const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer );
-		void Write( const std::shared_ptr<StreamWriter> &writer );
-		void Read( const std::shared_ptr<StreamReader> &reader );
 	};
 }
 

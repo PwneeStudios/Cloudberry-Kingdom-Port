@@ -5,49 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundTemplate;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundCollection;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class FloatRectangle;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-
-
-namespace CloudberryKingdom
-{
-	class Background : public ViewReadWrite
+	class Background
 	{
 	public:
 		static void AddRainLayer( const std::shared_ptr<Background> &b );
@@ -139,9 +97,6 @@ namespace CloudberryKingdom
 		virtual void DrawForeground();
 
 		void DimAll( float dim );
-
-		virtual std::vector<std::wstring> GetViewables();
-		virtual void Read( const std::shared_ptr<StreamReader> &reader );
 
 		void Save( const std::wstring &path );
 

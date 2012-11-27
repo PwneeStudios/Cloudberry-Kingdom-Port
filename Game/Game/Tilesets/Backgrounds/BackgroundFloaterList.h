@@ -5,31 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundFloater;
-}
-
-namespace CloudberryKingdom
-{
-	class FloatRectangle;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Background;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
-	class BackgroundFloaterList : public ViewReadWrite
+	class BackgroundFloaterList
 	{
 	private:
 		class ClearBackgroundListLambda : public LambdaFunc_1<BackgroundFloater*, bool>
@@ -95,8 +71,6 @@ namespace CloudberryKingdom
 		void Draw( float CamMod );
 
 		bool DoPreDraw;
-
-		virtual std::vector<std::wstring> GetViewables();
 
 	private:
 		void InitializeInstanceFields();

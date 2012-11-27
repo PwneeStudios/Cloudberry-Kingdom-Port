@@ -3,51 +3,12 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class SpriteInfo;
-}
 
 namespace CloudberryKingdom
 {
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class TextureOrAnim;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
-	class QuadClass : public ViewReadWrite
+	class QuadClass
 	{
-#if defined(WINDOWS)
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
-#endif
-
 		static std::shared_ptr<QuadClass> FindQuad( std::vector<QuadClass*> &list, const std::wstring &Name );
 
 		bool HitTest( Vector2 pos );

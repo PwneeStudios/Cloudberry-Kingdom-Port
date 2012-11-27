@@ -4041,23 +4041,6 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 			}
 	}
 
-	std::vector<std::wstring> Background::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "MyGlobalIllumination" ), _T( "AllowLava" ), _T( "Light" ), _T( "BL" ), _T( "TR" ), _T( "MyCollection" ), _T( "GuidCounter" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
-	void Background::Read( const std::shared_ptr<StreamReader> &reader )
-	{
-		MyCollection->Lists.clear();
-
-		ViewReadWrite::Read( reader );
-
-		SetLevel( MyLevel );
-		SetBackground( this );
-		Reset();
-	}
-
 	void Background::Save( const std::wstring &path )
 	{
 		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );

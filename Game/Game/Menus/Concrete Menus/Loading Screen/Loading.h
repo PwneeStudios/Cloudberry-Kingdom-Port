@@ -5,50 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class DrawPile;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Audio
-			{
-				class SoundEffect;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class WrappedFloat;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Content
-			{
-				class ContentManager;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class ProgressBar : public ViewReadWrite
+	class ProgressBar
 	{
 	public:
 		enum BarType
@@ -58,8 +15,6 @@ namespace CloudberryKingdom
 		};
 	public:
 		BarType MyType;
-
-		virtual std::vector<std::wstring> GetViewables();
 
 		const Vector2 &getFull_BL() const;
 		const Vector2 &getFull_TR() const;

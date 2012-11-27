@@ -9,17 +9,6 @@
 
 namespace CloudberryKingdom
 {
-	class GameFactory
-	{
-	public:
-		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
-	};
-
-	class SimpleGameFactory
-	{
-	public:
-		virtual std::shared_ptr<GameData> Make();
-	};
 
 	class GameFlags
 	{
@@ -888,6 +877,19 @@ namespace CloudberryKingdom
 	private:
 		void InitializeInstanceFields();
 	};
+
+	class GameFactory
+	{
+	public:
+		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+	};
+
+	class SimpleGameFactory
+	{
+	public:
+		virtual std::shared_ptr<GameData> Make();
+	};
+
 }
 
 

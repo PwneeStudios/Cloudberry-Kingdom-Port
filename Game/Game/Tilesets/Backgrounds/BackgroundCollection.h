@@ -5,31 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundFloaterList;
-}
-
-namespace CloudberryKingdom
-{
-	class Background;
-}
-
-namespace CloudberryKingdom
-{
-	class FloatRectangle;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
-	class BackgroundCollection : public ViewReadWrite
+	class BackgroundCollection
 	{
 	public:
 		std::shared_ptr<Level> MyLevel;
@@ -64,8 +40,6 @@ namespace CloudberryKingdom
 		void Draw( float CamMod, bool Foreground );
 
 		void PhsxStep();
-
-		virtual std::vector<std::wstring> GetViewables();
 	};
 }
 

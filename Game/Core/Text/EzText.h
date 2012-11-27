@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 #endif
 	};
 
-	class EzText : public ViewReadWrite
+	class EzText
 	{
 	private:
 		class EzTextBit
@@ -134,11 +134,6 @@ namespace CloudberryKingdom
 			ParseData_COLOR
 		};
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual std::wstring GetConstructorString();
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
 
 		static std::wstring ColorToMarkup( int r, int g, int b );
 		static std::wstring ColorToMarkup( int r, int g, int b, int shift );

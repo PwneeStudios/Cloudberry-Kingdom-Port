@@ -423,18 +423,6 @@ static std::wstring SourceTextureDirectory();
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		//static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
 
-	private:
-		static void ResetWrite();
-
-	public:
-		static void WriteCode( const std::wstring &root, const std::shared_ptr<IReadWrite> &rw );
-
-		static std::wstring ToCode( Vector2 v );
-
-		static std::wstring ToCode( const std::wstring &s );
-
-	private:
-		static bool LastLineWasBlank;
 	public:
 //ORIGINAL LINE: public static void WriteFieldsToCode(object obj, string prefix, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:

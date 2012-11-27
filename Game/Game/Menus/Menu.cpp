@@ -112,48 +112,9 @@ Vector2 Menu::DefaultMenuInfo::Slider_StartPos = Vector2( -210, 0 );
 Vector2 Menu::DefaultMenuInfo::Slider_EndPos = Vector2( 210, 0 );
 Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
-	std::vector<std::wstring> Menu::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "BackdropShift" ), _T( "Items" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
-	std::wstring Menu::CopyToClipboard( const std::wstring &suffix )
-	{
-		std::wstring s = _T( "" );
-
-		if ( Items.size() > 0 )
-			s += _T( "MenuItem _item;\n" );
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
-		{
-			s += ( *item )->ToCode( suffix ) + _T( "\n" );
-		}
-
-		if ( Items.size() > 0 )
-			s += _T( "\n" );
-		s += std::wstring::Format( _T( "{0}Pos = {1};\n" ), suffix, Tools::ToCode( getPos() ) );
-
-		return s;
-	}
-
-	void Menu::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		setPos( getPos() + shift );
-	}
-
 	std::shared_ptr<MenuItem> Menu::FindItemByName( const std::wstring &name )
 	{
 		return Tools::Find( Items, std::make_shared<FindItemByNameLambda>( name ) );
-	}
-
-	void Menu::GetChildren( std::vector<InstancePlusName*> &ViewableChildren )
-	{
-		if ( Items.size() > 0 )
-			for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
-			{
-				std::wstring name = ( *item )->MyText->MyString;
-				ViewableChildren.push_back( std::make_shared<InstancePlusName>( *item, name ) );
-			}
 	}
 
 	const Microsoft::Xna::Framework::Vector2 &Menu::getPos() const

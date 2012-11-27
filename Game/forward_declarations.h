@@ -5,7 +5,6 @@ class Particle;
 class MyOwnVertexFormat;
 class ColData;
 class Phsx;
-class ViewReadWrite;
 class ObjectBase;
 class BlockBase;
 class FallingBlock;

@@ -3,45 +3,10 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class InstancePlusName;
-}
 
 namespace CloudberryKingdom
 {
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyColor;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class DrawPile : public ViewReadWrite, public IViewableList
+	class DrawPile
 	{
 	private:
 		class WaitThenPop : public Lambda
@@ -61,13 +26,6 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual std::wstring CopyToClipboard( const std::wstring &suffix );
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
-
-		void GetChildren( std::vector<InstancePlusName*> &ViewableChildren );
 
 		std::shared_ptr<FancyVector2> FancyScale;
 		const Vector2 &getSize() const;

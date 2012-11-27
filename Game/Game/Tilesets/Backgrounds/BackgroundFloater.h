@@ -5,31 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Background;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundFloaterList;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
-	class BackgroundFloater : public ViewReadWrite
+	class BackgroundFloater
 	{
 	private:
 		float _SpinVelocity;
@@ -82,13 +58,6 @@ namespace CloudberryKingdom
 		virtual void PhsxStep( const std::shared_ptr<BackgroundFloaterList> &list );
 
 		virtual void Draw();
-
-	private:
-		static std::vector<std::wstring> _bits_to_save;
-	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual void Read( const std::shared_ptr<StreamReader> &reader );
 
 	private:
 		void InitializeInstanceFields();

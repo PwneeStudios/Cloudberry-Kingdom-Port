@@ -346,25 +346,6 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 	}
 #endif
 
-	std::vector<std::wstring> EzText::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Name" ), _T( "MyString" ), _T( "Code" ), _T( "FancyPos" ), _T( "_Pos" ), _T( "Shadow" ), _T( "PicShadow" ), _T( "ShadowOffset" ), _T( "ShadowColor" ), _T( "ShadowScale" ), _T( "Alpha" ), _T( "MyColor" ), _T( "MyFloatColor" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
-	std::wstring EzText::GetConstructorString()
-	{
-		return std::wstring::Format( _T( "new EzText(\"{0}\", ItemFont)" ), MyString );
-	}
-
-	void EzText::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		if ( ShiftDown )
-			setScale( getScale() + (shift.X + shift.Y) *.00003f );
-		else
-			setPos( getPos() + shift );
-	}
-
 	std::wstring EzText::ColorToMarkup( int r, int g, int b )
 	{
 		return ColorToMarkup( r, g, b, 0, 0 );

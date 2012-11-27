@@ -37,41 +37,6 @@ namespace CloudberryKingdom
 		QuadClass::Draw( Update, DrawQuad, DrawShadow );
 	}
 
-#if defined(WINDOWS)
-	std::vector<std::wstring> QuadClass::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Quad" ), _T( "Base" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-#endif
-
-#if defined(WINDOWS)
-	void QuadClass::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		if ( ShiftDown )
-		{
-			if ( Tools::CntrlDown() )
-			{
-				if ( FancyAngle != 0 )
-					setAngle( getAngle() + shift.X *.001f );
-			}
-			else
-			{
-				// Only rescale the quad to the proper aspect ratio if we are using Left Shift.
-				if ( Tools::Keyboard.IsKeyDown( Keys_LeftShift ) )
-				{
-					setSize( getSize() + Vector2((shift.X + shift.Y) *.03f) );
-					ScaleXToMatchRatio( getSize().Y );
-				}
-				else
-					setSize( getSize() + .03f * Vector2(shift.X, shift.Y) );
-			}
-		}
-		else
-			setPos( getPos() + shift );
-	}
-#endif
-
 	std::shared_ptr<QuadClass> QuadClass::FindQuad( std::vector<QuadClass*> &list, const std::wstring &Name )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:

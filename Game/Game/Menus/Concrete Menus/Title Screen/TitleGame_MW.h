@@ -5,31 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleGameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class StartMenu_MW_Backpanel;
-}
-
-namespace CloudberryKingdom
-{
-	class StartMenu_MW_PressStart;
-}
-
-namespace CloudberryKingdom
-{
 	class TitleGameData_MW_Factory : public SimpleGameFactory
 	{
 	public:

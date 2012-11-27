@@ -2,25 +2,6 @@
 namespace CloudberryKingdom
 {
 
-	std::vector<std::wstring> MenuItem::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "MyText" ), _T( "MySelectedText" ), _T( "!MyMenu" ), _T( "SelectIconOffset" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
-	void MenuItem::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		if ( ShiftDown )
-		{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var scale = ( shift.X + shift.Y ) *.00003f;
-			MyText->setScale( MyText->getScale() + scale );
-			MySelectedText->setScale( MySelectedText->getScale() + scale );
-		}
-		else
-			setSetPos( getSetPos() + shift );
-	}
-
 	std::wstring MenuItem::ToCode( const std::wstring &suffix )
 	{
 		std::wstring SelectedPosStr = _T( "" );

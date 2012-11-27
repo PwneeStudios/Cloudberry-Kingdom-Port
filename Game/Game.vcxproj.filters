@@ -1062,9 +1062,6 @@
     <ClCompile Include="Core\FancyVector2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\IViewable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\PhsxData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2166,9 +2163,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\FancyVector2.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\IViewable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\PhsxData.h">

@@ -38,7 +38,6 @@
     <ClCompile Include="Core\Graphics\QuadDrawer.cpp" />
     <ClCompile Include="Core\Graphics\VertexFormat.cpp" />
     <ClCompile Include="Core\Input\ButtonCheck.cpp" />
-    <ClCompile Include="Core\IViewable.cpp" />
     <ClCompile Include="Core\Lambdas\Multicaster.cpp" />
     <ClCompile Include="Core\Particle Effects\Particle.cpp" />
     <ClCompile Include="Core\Particle Effects\ParticleEmitter.cpp" />
@@ -398,7 +397,6 @@
     <ClInclude Include="Core\Graphics\QuadDrawer.h" />
     <ClInclude Include="Core\Graphics\VertexFormat.h" />
     <ClInclude Include="Core\Input\ButtonCheck.h" />
-    <ClInclude Include="Core\IViewable.h" />
     <ClInclude Include="Core\Lambdas\Lambda.h" />
     <ClInclude Include="Core\Lambdas\LambdaFunc.h" />
     <ClInclude Include="Core\Lambdas\LambdaFunc_1.h" />

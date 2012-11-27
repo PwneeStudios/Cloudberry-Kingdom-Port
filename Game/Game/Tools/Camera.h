@@ -5,26 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class CameraZone;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera : public ViewReadWrite, public IPos
+	class Camera : public IPos
 	{
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
 		/// <summary>
 		/// When true the camera uses its EffectivePos and EffectiveZoom when drawing.
 		/// The camera's TR, BL, width, and height are unaffected and are updated normally.
