@@ -25,6 +25,11 @@ public:
 		return Vector2();
 	}
 
+	bool ReadBoolean()
+	{
+		return false;
+	}
+
 	float ReadSingle()
 	{
 		return 0;

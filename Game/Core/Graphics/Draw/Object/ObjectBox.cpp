@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -116,34 +112,6 @@ namespace CloudberryKingdom
 	{
 		return ( TR->Pos - BL->Pos );
 	}
-
-#if defined(EDITOR)
-	std::vector<ObjectVector*> ObjectBox::GetObjectVectors()
-	{
-		std::vector<ObjectVector*> ObjectVectorList = std::vector<ObjectVector*>();
-
-		ObjectVectorList.push_back( BL );
-		ObjectVectorList.push_back( TR );
-
-		return ObjectVectorList;
-	}
-#endif
-
-#if defined(EDITOR)
-	void ObjectBox::SaveState( int StateIndex )
-	{
-		TR->SaveState( StateIndex );
-		BL->SaveState( StateIndex );
-	}
-#endif
-
-#if defined(EDITOR)
-	void ObjectBox::RecoverState( int StateIndex )
-	{
-		TR->RecoverState( StateIndex );
-		BL->RecoverState( StateIndex );
-	}
-#endif
 
 	void ObjectBox::DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, Color clr )
 	{

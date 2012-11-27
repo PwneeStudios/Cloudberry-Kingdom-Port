@@ -5,22 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectVector;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadDrawer;
-}
-
-
-namespace CloudberryKingdom
-{
 	class ObjectBox
 	{
 	public:
@@ -54,14 +38,6 @@ namespace CloudberryKingdom
 		Vector2 Center();
 
 		Vector2 Size();
-
-#if defined(EDITOR)
-		std::vector<ObjectVector*> GetObjectVectors();
-
-		void SaveState( int StateIndex );
-
-		void RecoverState( int StateIndex );
-#endif
 
 		void DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, Color clr );
 
