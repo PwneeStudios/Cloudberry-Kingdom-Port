@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		this->v = v;
 	}
 
-	void ObjectVector::DefaultCallbackLambda::Apply( Vector2 &NewPos )
+	void ObjectVector::DefaultCallbackLambda::Apply( Vector2 NewPos )
 	{
 		v->Pos = NewPos;
 

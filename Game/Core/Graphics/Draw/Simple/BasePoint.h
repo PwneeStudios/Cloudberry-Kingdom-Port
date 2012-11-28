@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 	public:
 		Vector2 Origin, e1, e2;
 
+		BasePoint();
 		BasePoint( float e1x, float e1y, float e2x, float e2y, float ox, float oy );
 
 		void Init();

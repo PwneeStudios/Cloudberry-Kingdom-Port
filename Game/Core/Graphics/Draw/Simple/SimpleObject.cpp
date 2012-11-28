@@ -11,14 +11,18 @@ namespace CloudberryKingdom
 		Released = true;
 
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].Release();
 			//foreach (SimpleQuad quad in Quads)
 				//quad.Release();
 		if ( Boxes.size() > 0 )
-			for ( std::vector<CloudberryKingdom::SimpleBox*>::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
+			for ( std::vector<std::shared_ptr<SimpleBox> >::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
 				( *box )->Release();
-		AnimQueue.clear();
+
+		//AnimQueue.clear();
+		std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+		std::swap( AnimQueue, empty );
+		
 		LastAnimEntry.reset();
 		AnimLength.clear();
 		AnimName.clear();
@@ -33,21 +37,20 @@ namespace CloudberryKingdom
 			return;
 
 		if ( MyEffects.empty() )
-			MyEffects = std::vector<EzEffect*>();
+			MyEffects = std::vector<std::shared_ptr<EzEffect> >();
 		else
 			MyEffects.clear();
 
-		for ( int i = 0; i < Quads.size(); i++ )
-			if ( !std::find( MyEffects.begin(), MyEffects.end(), Quads[ i ].MyEffect ) != MyEffects.end() )
+		for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
+			if ( std::find( MyEffects.begin(), MyEffects.end(), Quads[ i ].MyEffect ) == MyEffects.end() )
 				MyEffects.push_back( Quads[ i ].MyEffect );
 	}
 
 	int SimpleObject::GetQuadIndex( const std::wstring &name )
 	{
-		for ( int i = 0; i < Quads.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( Quads[ i ].Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
+			if ( CompareIgnoreCase( Quads[ i ].Name, name ) == 0 )
 				return i;
 		}
 
@@ -63,7 +66,7 @@ namespace CloudberryKingdom
 	void SimpleObject::SetColor( Color color )
 	{
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].SetColor( color );
 	}
 
@@ -81,20 +84,29 @@ namespace CloudberryKingdom
 		if ( !BoxesOnly )
 		{
 			Quads = std::vector<SimpleQuad>( obj->Quads.size() );
-			for ( int i = 0; i < obj->Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( obj->Quads.size() ); i++ )
 				Quads[ i ] = SimpleQuad( obj->Quads[ i ] );
 		}
 
-		Boxes = std::vector<SimpleBox*>( obj->Boxes.size() );
-		for ( int i = 0; i < obj->Boxes.size(); i++ )
+		Boxes = std::vector<std::shared_ptr<SimpleBox> >( obj->Boxes.size() );
+		for ( int i = 0; i < static_cast<int>( obj->Boxes.size() ); i++ )
 			Boxes[ i ] = std::make_shared<SimpleBox>( obj->Boxes[ i ] );
 
-		AnimQueue = std::queue<AnimQueueEntry*>();
-		std::vector<AnimQueueEntry*> array_Renamed = obj->AnimQueue.ToArray();
+		// Copy the AnimQueue
+		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		while( !QueueCopy.empty() )
+		{
+			array_Renamed.push_back( QueueCopy.front() );
+			QueueCopy.pop();
+		}
+
+		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
 			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
-			for ( int i = 0; i < array_Renamed.size() - 1; i++ )
+			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
 				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			AnimQueue.push( LastAnimEntry );
 		}
@@ -107,11 +119,14 @@ namespace CloudberryKingdom
 		if ( DeepCopy )
 		{
 			AnimLength = std::vector<int>( 50 );
-			obj->AnimLength.CopyTo( AnimLength, 0 );
+			CopyFromTo( obj->AnimLength, AnimLength );
+			//obj->AnimLength.CopyTo( AnimLength, 0 );
 			AnimSpeed = std::vector<float>( 50 );
-			obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-			AnimName = std::vector<std::wstring*>( 50 );
-			obj->AnimName.CopyTo( AnimName, 0 );
+			CopyFromTo( obj->AnimSpeed, AnimSpeed );
+			//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
+			AnimName = std::vector<std::wstring>( 50 );
+			CopyFromTo( obj->AnimName, AnimName );
+			//obj->AnimName.CopyTo( AnimName, 0 );
 
 			UpdateEffectList();
 		}
@@ -132,19 +147,28 @@ namespace CloudberryKingdom
 		CenterFlipOnBox = obj->CenterFlipOnBox;
 
 		Quads = std::vector<SimpleQuad>( obj->QuadList.size() );
-		for ( int i = 0; i < obj->QuadList.size(); i++ )
-			Quads[ i ] = SimpleQuad( static_cast<Quad*>( obj->QuadList[ i ] ) );
-
-		Boxes = std::vector<SimpleBox*>( obj->BoxList.size() );
-		for ( int i = 0; i < obj->BoxList.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( obj->QuadList.size() ); i++ )
+			Quads[ i ] = SimpleQuad( std::dynamic_pointer_cast<Quad>( obj->QuadList[ i ] ) );
+		
+		Boxes = std::vector<std::shared_ptr<SimpleBox> >( obj->BoxList.size() );
+		for ( int i = 0; i < static_cast<int>( obj->BoxList.size() ); i++ )
 			Boxes[ i ] = std::make_shared<SimpleBox>( obj->BoxList[ i ] );
 
-		AnimQueue = std::queue<AnimQueueEntry*>();
-		std::vector<AnimQueueEntry*> array_Renamed = obj->AnimQueue.ToArray();
+		// Copy the AnimQueue
+		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		while( !QueueCopy.empty() )
+		{
+			array_Renamed.push_back( QueueCopy.front() );
+			QueueCopy.pop();
+		}
+
+		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
 			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
-			for ( int i = 0; i < array_Renamed.size() - 1; i++ )
+			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
 				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			AnimQueue.push( LastAnimEntry );
 		}
@@ -155,11 +179,14 @@ namespace CloudberryKingdom
 		t = obj->t;
 
 		AnimLength = std::vector<int>( 50 );
-		obj->AnimLength.CopyTo( AnimLength, 0 );
+		CopyFromTo( obj->AnimLength, AnimLength );
+		//obj->AnimLength.CopyTo( AnimLength, 0 );
 		AnimSpeed = std::vector<float>( 50 );
-		obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-		AnimName = std::vector<std::wstring*>( 50 );
-		obj->AnimName.CopyTo( AnimName, 0 );
+		CopyFromTo( obj->AnimSpeed, AnimSpeed );
+		//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
+		AnimName = std::vector<std::wstring>( 50 );
+		CopyFromTo( obj->AnimName, AnimName );
+		//obj->AnimName.CopyTo( AnimName, 0 );
 
 		UpdateEffectList();
 	}
@@ -179,10 +206,10 @@ namespace CloudberryKingdom
 		Vector2 shift = Base.Origin - source->Base.Origin;
 
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].CopyUpdate( source->Quads[ i ], shift );
 
-		for ( int i = 0; i < Boxes.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 			Boxes[ i ]->CopyUpdate( source->Boxes[ i ], shift );
 
 		if ( Boxes.size() > 0 )
@@ -194,13 +221,13 @@ namespace CloudberryKingdom
 	void SimpleObject::UpdateQuads()
 	{
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].Update( Base );
 	}
 
 	void SimpleObject::UpdateBoxes()
 	{
-		for ( int i = 0; i < Boxes.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 			Boxes[ i ]->Update( Base );
 
 		if ( Boxes.size() > 0 )
@@ -218,7 +245,7 @@ namespace CloudberryKingdom
 
 	void SimpleObject::UpdatedShift( Vector2 shift )
 	{
-		for ( int i = 0; i < Quads.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 			Quads[ i ].UpdatedShift( shift );
 	}
 
@@ -239,10 +266,10 @@ namespace CloudberryKingdom
 	void SimpleObject::Draw( const std::shared_ptr<QuadDrawer> &QDrawer, const std::shared_ptr<EzEffectWad> &EffectWad, int StartIndex, int EndIndex )
 	{
 		if ( xFlip || yFlip )
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			{
 				( *fx )->FlipCenter->SetValue( FlipCenter );
-				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1 : -1, yFlip ? 1 : -1 ) );
+				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1.f : -1.f, yFlip ? 1.f : -1.f ) );
 			}
 
 
@@ -252,18 +279,18 @@ namespace CloudberryKingdom
 		if ( xFlip || yFlip )
 		{
 			QDrawer->Flush();
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
-				( *fx )->FlipVector->SetValue( Vector2( -1, -1 ) );
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+				( *fx )->FlipVector->SetValue( Vector2( -1.f, -1.f ) );
 		}
 	}
 
 	void SimpleObject::DrawQuad( SimpleQuad &Quad_Renamed )
 	{
 		if ( xFlip || yFlip )
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			{
 				( *fx )->FlipCenter->SetValue( FlipCenter );
-				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1 : -1, yFlip ? 1 : -1 ) );
+				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1.f : -1.f, yFlip ? 1.f : -1.f ) );
 			}
 
 		Tools::QDrawer->DrawQuad( Quad_Renamed );
@@ -271,8 +298,8 @@ namespace CloudberryKingdom
 		if ( xFlip || yFlip )
 		{
 			Tools::QDrawer->Flush();
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
-				( *fx )->FlipVector->SetValue( Vector2( -1, -1 ) );
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+				( *fx )->FlipVector->SetValue( Vector2( -1.f, -1.f ) );
 		}
 	}
 
@@ -355,8 +382,8 @@ namespace CloudberryKingdom
 				if ( AnimQueue.size() > 0 )
 				{
 					std::shared_ptr<AnimQueueEntry> Next = AnimQueue.front();
-					if ( Next_ANIM == anim )
-						Next_START_T = CurAnimQueueEntry->DestT;
+					if ( Next->anim == anim )
+						Next->StartT = CurAnimQueueEntry->DestT;
 				}
 
 				t = 1;
@@ -387,7 +414,7 @@ namespace CloudberryKingdom
 					}
 					if ( t > AnimLength[ anim ] )
 					{
-						t = AnimLength[ anim ];
+						t = static_cast<float>( AnimLength[ anim ] );
 						AnimQueue.pop();
 					}
 				}
@@ -397,19 +424,19 @@ namespace CloudberryKingdom
 		if ( CurAnimQueueEntry->Type == AnimQueueEntryType_PLAY )
 		{
 			if ( Quads.size() > 0 )
-				for ( int i = 0; i < Quads.size(); i++ )
+				for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 					if ( Quads[ i ].Animated )
 						Quads[ i ].Calc( anim, t, AnimLength[ anim ], Loop, Linear );
-			for ( int i = 0; i < Boxes.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 				if ( Boxes[ i ]->Animated )
 					Boxes[ i ]->Calc( anim, t, AnimLength[ anim ], Loop, Linear );
 		}
 		else
 		{
 			if ( Quads.size() > 0 )
-				for ( int i = 0; i < Quads.size(); i++ )
+				for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 					Quads[ i ].Transfer( anim, CurAnimQueueEntry->DestT, AnimLength[ anim ], CurAnimQueueEntry->Loop, Linear, t );
-			for ( int i = 0; i < Boxes.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 				Boxes[ i ]->Transfer( anim, CurAnimQueueEntry->DestT, AnimLength[ anim ], CurAnimQueueEntry->Loop, Linear, t );
 		}
 	}
@@ -417,18 +444,18 @@ namespace CloudberryKingdom
 	void SimpleObject::SetHold()
 	{
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].SetHold();
-		for ( int i = 0; i < Boxes.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 			Boxes[ i ]->SetHold();
 	}
 
 	void SimpleObject::Read( int anim, int frame )
 	{
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].ReadAnim( anim, frame );
-		for ( int i = 0; i < Boxes.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Boxes.size() ); i++ )
 			Boxes[ i ]->ReadAnim( anim, frame );
 	}
 }
