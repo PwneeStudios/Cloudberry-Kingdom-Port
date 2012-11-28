@@ -36,6 +36,11 @@ struct Color
 		return Vector4( R / 255.f, G / 255.f, B / 255.f, A / 255.f );
 	}
 
+	bool operator == ( const Color &c ) const
+	{
+		return R == c.R && G == c.G && B == c.B && A == c.A;
+	}
+
 	static Color White;
 	static Color Transparent;
 };

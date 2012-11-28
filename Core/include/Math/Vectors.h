@@ -22,9 +22,9 @@ public:
 	float x() const { return X; }
 	float y() const { return Y; }
 
-	float LengthSq() const { return X * X + Y * Y; }
+	float LengthSquared() const { return X * X + Y * Y; }
 	
-	float Length() const { return sqrtf( LengthSq() ); }
+	float Length() const { return sqrtf( LengthSquared() ); }
 	
 	void Normalize()
 	{
@@ -50,6 +50,16 @@ public:
 		v.Y = 0.5f * ((((2.f * v2.Y) + ((-v1.Y + v3.Y) * t)) + (((((2.f * v1.Y) - (5.f * v2.Y)) + (4.f * v3.Y)) - v4.Y) * t2)) + ((((-v1.Y + (3.f * v2.Y)) - (3.f * v3.Y)) + v4.Y) * t3));
 		
 		return v;
+	}
+
+	static float Distance( const Vector2 &a, const Vector2 &b )
+	{
+		return ( b - a ).Length();
+	}
+
+	static float Dot( const Vector2 &a, const Vector2 &b )
+	{
+		return a.X * b.X + a.Y * b.Y;
 	}
 
 	static Vector2 Min( const Vector2 &a, const Vector2 &b )
@@ -101,9 +111,19 @@ public:
 		return Vector2( X / k, Y / k );
 	}
 
+	Vector2 operator / ( const Vector2 &a )
+	{
+		return Vector2( X / a.X, Y / a.Y );
+	}
+
 	bool operator == ( const Vector2 &a ) const
 	{
 		return X == a.X && Y == a.Y;
+	}
+
+	bool operator != ( const Vector2 &a ) const
+	{
+		return !( *this == a );
 	}
 
 	static Vector2 Lerp( const Vector2 &a, const Vector2 &b, float t )
@@ -216,6 +236,14 @@ public:
 	float M21, M22, M23, M24;
 	float M31, M32, M33, M34;
 	float M41, M42, M43, M44;
+
+	static Matrix Identity()
+	{
+		Matrix m;
+		memset( &m, 0, sizeof( Matrix ) );
+		m.M11 = m.M22 = m.M33 = m.M44 = 1.f;
+		return m;
+	}
 
 };
 
