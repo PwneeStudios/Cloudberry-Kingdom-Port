@@ -13,19 +13,19 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_GHOST_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_GHOST_BLOCK ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_GHOST_BLOCK ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_GHOST_BLOCK ) );
 
-		InLength = Param( PieceSeed, DifficultyHelper::Interp( 147, 75, u[ Upgrade_SPEED ] ) * DifficultyHelper::Interp( 1.275f,.275f, u[ Upgrade_GHOST_BLOCK ] ) );
+		InLength = Param( PieceSeed, DifficultyHelper::Interp( 147, 75, u->Get( Upgrade_SPEED ) ) * DifficultyHelper::Interp( 1.275f,.275f, u->Get( Upgrade_GHOST_BLOCK ) ) );
 
-		OutLength = Param( PieceSeed, __max( 60, 110 - 4 * u[ Upgrade_SPEED ] ) );
+		OutLength = Param( PieceSeed, __max( 60, 110 - 4 * u->Get( Upgrade_SPEED ) ) );
 
-		Width = Param( PieceSeed, __max( 40, 93 - 2 * u[ Upgrade_GHOST_BLOCK ] ) );
+		Width = Param( PieceSeed, __max( 40, 93 - 2 * u->Get( Upgrade_GHOST_BLOCK ) ) );
 
 		TimeSafety = Param( PieceSeed );
-		TimeSafety.SetVal( __max( 0, DifficultyHelper::Interp( 1, 0, u[ Upgrade_GHOST_BLOCK ] ) ) );
+		TimeSafety.SetVal( __max( 0, DifficultyHelper::Interp( 1, 0, u->Get( Upgrade_GHOST_BLOCK ) ) ) );
 
 		// Masochistic
 		if ( PieceSeed->getu()[ Upgrade_GHOST_BLOCK ] == 10 )

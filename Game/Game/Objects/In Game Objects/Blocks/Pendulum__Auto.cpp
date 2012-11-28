@@ -11,24 +11,24 @@ namespace CloudberryKingdom
 		float lvl = PieceSeed->MyUpgrades1->Get( Upgrade_PENDULUM );
 
 		Size = Param( PieceSeed );
-		Size.SetVal( 230 - ( 230 - 50 ) / 10 * u[ Upgrade_PENDULUM ] );
+		Size.SetVal( 230 - ( 230 - 50 ) / 10 * u->Get( Upgrade_PENDULUM ) );
 
 		Motion = static_cast<MotionType>( level->getRnd()->Choose(MotionLevel, static_cast<int>(lvl)) );
 
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_PENDULUM ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_PENDULUM ) ) );
 		}
 
 		FillWeight = Param( PieceSeed );
-		FillWeight.SetVal( u[ Upgrade_PENDULUM ] );
+		FillWeight.SetVal( u->Get( Upgrade_PENDULUM ) );
 
-		float speed = 300 - 30 * u[ Upgrade_SPEED ] + 45 *.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_PENDULUM ] );
+		float speed = 300 - 30 * u->Get( Upgrade_SPEED ) + 45 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_PENDULUM ) );
 		Period = Param( PieceSeed );
 		Period.SetVal( CoreMath::Restrict( 40, 1000, speed ) );
 
-		MaxAngle = Param( PieceSeed, __min( 750, 30 + 64 *.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_PENDULUM ] ) ) );
+		MaxAngle = Param( PieceSeed, __min( 750, 30 + 64 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_PENDULUM ) ) ) );
 	}
 
 	void Pendulum_Parameters::InitializeInstanceFields()

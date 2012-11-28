@@ -20,21 +20,21 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_FLY_BLOB ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FLY_BLOB ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_FLY_BLOB ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_FLY_BLOB ) );
 
-		float val = DifficultyHelper::Interp( 40, 500,.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_FLY_BLOB ] ) );
+		float val = DifficultyHelper::Interp( 40, 500,.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_FLY_BLOB ) ) );
 		if ( val < 80 )
 			val = 0;
 		Range = Param( PieceSeed, val );
 
-		float speed = 200 - 20 * u[ Upgrade_SPEED ] + 25 *.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_FLY_BLOB ] );
+		float speed = 200 - 20 * u->Get( Upgrade_SPEED ) + 25 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_FLY_BLOB ) );
 		Period = Param( PieceSeed, CoreMath::Restrict( 40, 1000, speed ) );
 
 		EdgeSafety = Param( PieceSeed );
-		EdgeSafety.SetVal( __max( 6, DifficultyHelper::Interp( 45, 6, u[ Upgrade_FLY_BLOB ] ) ) );
+		EdgeSafety.SetVal( __max( 6, DifficultyHelper::Interp( 45, 6, u->Get( Upgrade_FLY_BLOB ) ) ) );
 
 		Size = Param( PieceSeed, 1 );
 	}

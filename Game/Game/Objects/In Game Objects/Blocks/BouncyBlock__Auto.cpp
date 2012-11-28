@@ -11,22 +11,22 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_BOUNCY_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_BOUNCY_BLOCK ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_BOUNCY_BLOCK ) );
 
 		Speed = Param( PieceSeed );
-		Speed_SET_VAL( DifficultyHelper::Interp( 45, 60, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		Speed_SET_VAL( DifficultyHelper::Interp( 45, 60, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		SideDampening = Param( PieceSeed );
-		SideDampening.SetVal( DifficultyHelper::Interp159( .55f,.83f, 1.2f, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		SideDampening.SetVal( DifficultyHelper::Interp159( .55f,.83f, 1.2f, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		Size = Param( PieceSeed );
-		Size.SetVal( __max( 75, 105 - 1.85f * u[ Upgrade_BOUNCY_BLOCK ] ) );
+		Size.SetVal( __max( 75, 105 - 1.85f * u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		EdgeSafety = Param( PieceSeed );
-		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u[ Upgrade_BOUNCY_BLOCK ] ) ) );
+		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u->Get( Upgrade_BOUNCY_BLOCK ) ) ) );
 	}
 
 const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();

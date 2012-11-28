@@ -11,26 +11,26 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_FALLING_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FALLING_BLOCK ) ) );
 		}
 
 		FillWeight = Param( PieceSeed );
-		FillWeight.SetVal( u[ Upgrade_FALLING_BLOCK ] );
+		FillWeight.SetVal( u->Get( Upgrade_FALLING_BLOCK ) );
 
 		Delay = Param( PieceSeed );
-		Delay.SetVal( __max( 1, 60 - 7 * u[ Upgrade_FALLING_BLOCK ] ) );
+		Delay.SetVal( __max( 1, 60 - 7 * u->Get( Upgrade_FALLING_BLOCK ) ) );
 
 		Width = Param( PieceSeed );
-		Width.SetVal( __max( 70, 113 - .1f * ( 110 - 70 ) * u[ Upgrade_FALLING_BLOCK ] ) );
+		Width.SetVal( __max( 70, 113 - .1f * ( 110 - 70 ) * u->Get( Upgrade_FALLING_BLOCK ) ) );
 
 		AngryAccel = Param( PieceSeed );
-		AngryAccel.SetVal( DifficultyHelper::Interp( -70, 320, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		AngryAccel.SetVal( DifficultyHelper::Interp( -70, 320, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		AngryRatio = Param( PieceSeed );
-		AngryRatio.SetVal( DifficultyHelper::Interp( -27, 35, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		AngryRatio.SetVal( DifficultyHelper::Interp( -27, 35, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		AngrySpeed = Param( PieceSeed );
-		AngrySpeed.SetVal( 4 * u[ Upgrade_FALLING_BLOCK ] );
+		AngrySpeed.SetVal( 4 * u->Get( Upgrade_FALLING_BLOCK ) );
 	}
 
 const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std::make_shared<FallingBlock_AutoGen>();

@@ -25,11 +25,11 @@ namespace CloudberryKingdom
 		if ( PieceSeed->getu()[ Upgrade_CEILING ] <= 0 )
 			Make = false;
 
-		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u[ Upgrade_CEILING ] ) );
+		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u->Get( Upgrade_CEILING ) ) );
 
-		WidthRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 450, 1450 ), Vector2( 80, 80 ), u[ Upgrade_CEILING ] ) );
+		WidthRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 450, 1450 ), Vector2( 80, 80 ), u->Get( Upgrade_CEILING ) ) );
 
-		BufferSize = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 150, 10, u[ Upgrade_CEILING ] ) );
+		BufferSize = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 150, 10, u->Get( Upgrade_CEILING ) ) );
 	}
 
 	void Ceiling_Parameters::InitializeInstanceFields()

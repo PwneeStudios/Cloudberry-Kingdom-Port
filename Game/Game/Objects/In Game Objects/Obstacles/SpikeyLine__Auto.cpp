@@ -20,11 +20,11 @@ namespace CloudberryKingdom
 		else
 			NumOffsets = 4;
 
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_SPIKEY_LINE ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SPIKEY_LINE ) );
 
-		LineStep = Param( PieceSeed, DifficultyHelper::Interp159( 1550, 800, 340, u[ Upgrade_SPIKEY_LINE ] ) );
+		LineStep = Param( PieceSeed, DifficultyHelper::Interp159( 1550, 800, 340, u->Get( Upgrade_SPIKEY_LINE ) ) );
 
-		LinePeriod = Param( PieceSeed, __max( 70, 200 - 11 * u[ Upgrade_SPEED ] ) );
+		LinePeriod = Param( PieceSeed, __max( 70, 200 - 11 * u->Get( Upgrade_SPEED ) ) );
 	}
 
 const std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_shared<SpikeyLine_AutoGen>();

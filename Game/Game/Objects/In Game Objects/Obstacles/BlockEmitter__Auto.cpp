@@ -10,17 +10,17 @@ namespace CloudberryKingdom
 
 		MyStyle = static_cast<Style>( level->getRnd()->getRndEnum()<Style>() );
 
-		FillWeight = Param( PieceSeed,.5f * u[ Upgrade_ELEVATOR ] );
+		FillWeight = Param( PieceSeed,.5f * u->Get( Upgrade_ELEVATOR ) );
 
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_GHOST_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_GHOST_BLOCK ) ) );
 		}
 
 		float D;
-		if ( u[ Upgrade_ELEVATOR ] > 0 )
-			D = .105f * DifficultyHelper::Interp19( 5000, 500, u[ Upgrade_ELEVATOR ] );
+		if ( u->Get( Upgrade_ELEVATOR ) > 0 )
+			D = .105f * DifficultyHelper::Interp19( 5000, 500, u->Get( Upgrade_ELEVATOR ) );
 		else
 			D = 1400;
 
@@ -28,24 +28,24 @@ namespace CloudberryKingdom
 		Dist.SetVal( D );
 
 		DistAdd = Param( PieceSeed );
-		DistAdd.SetVal( DifficultyHelper::Interp19( .135f * 2800,.385f * 500, u[ Upgrade_ELEVATOR ] ) );
+		DistAdd.SetVal( DifficultyHelper::Interp19( .135f * 2800,.385f * 500, u->Get( Upgrade_ELEVATOR ) ) );
 
 		Amp = Param( PieceSeed );
-		Amp.SetVal( __min( 450, 0 + 30 * u[ Upgrade_ELEVATOR ] ) );
+		Amp.SetVal( __min( 450, 0 + 30 * u->Get( Upgrade_ELEVATOR ) ) );
 
 		Types = Param( PieceSeed );
-		Types.SetVal( __min( 2, u[ Upgrade_ELEVATOR ] / 4 ) );
+		Types.SetVal( __min( 2, u->Get( Upgrade_ELEVATOR ) / 4 ) );
 
 		Delay = Param( PieceSeed );
-		Delay.SetVal( __max( 60, 120 - 6 * u[ Upgrade_SPEED ] ) );
+		Delay.SetVal( __max( 60, 120 - 6 * u->Get( Upgrade_SPEED ) ) );
 
 		Speed = Param( PieceSeed );
-		Speed_SET_VAL( DifficultyHelper::Interp19( 5.6f, 16, u[ Upgrade_SPEED ] ) );
+		Speed_SET_VAL( DifficultyHelper::Interp19( 5.6f, 16, u->Get( Upgrade_SPEED ) ) );
 
-		Width = Param( PieceSeed, DifficultyHelper::Interp159( 150, 120, 75, u[ Upgrade_ELEVATOR ] ) );
+		Width = Param( PieceSeed, DifficultyHelper::Interp159( 150, 120, 75, u->Get( Upgrade_ELEVATOR ) ) );
 
 		SpeedAdd = Param( PieceSeed );
-		SpeedAdd.SetVal( DifficultyHelper::Interp19( 5.6f, 13, u[ Upgrade_SPEED ] ) *.025f * u[ Upgrade_ELEVATOR ] );
+		SpeedAdd.SetVal( DifficultyHelper::Interp19( 5.6f, 13, u->Get( Upgrade_SPEED ) ) *.025f * u->Get( Upgrade_ELEVATOR ) );
 
 		WidthAdd = Param( PieceSeed );
 		WidthAdd.SetVal( 0 );

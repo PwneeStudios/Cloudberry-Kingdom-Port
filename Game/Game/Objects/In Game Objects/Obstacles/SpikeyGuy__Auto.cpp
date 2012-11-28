@@ -20,15 +20,15 @@ namespace CloudberryKingdom
 		else
 			NumOffsets = 4;
 
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_PINKY ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_PINKY ) );
 
-		FloaterMinDist = Param( PieceSeed, DifficultyHelper::Interp159( 700, 320, 100, u[ Upgrade_PINKY ] ) );
+		FloaterMinDist = Param( PieceSeed, DifficultyHelper::Interp159( 700, 320, 100, u->Get( Upgrade_PINKY ) ) );
 
-		FloaterScale = Param( PieceSeed, __min( 160, 90 + 7 * u[ Upgrade_PINKY ] ) );
+		FloaterScale = Param( PieceSeed, __min( 160, 90 + 7 * u->Get( Upgrade_PINKY ) ) );
 
-		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u[ Upgrade_SPEED ] ) );
+		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u->Get( Upgrade_SPEED ) ) );
 
-		Density = Param( PieceSeed, u[ Upgrade_PINKY ] == 0 ? 0 : DifficultyHelper::Interp( 40, 73, u[ Upgrade_PINKY ] ) );
+		Density = Param( PieceSeed, u->Get( Upgrade_PINKY ) == 0 ? 0 : DifficultyHelper::Interp( 40, 73, u->Get( Upgrade_PINKY ) ) );
 	}
 
 	SpikeyGuy_AutoGen::MinDistHelper::MinDistHelper( const std::shared_ptr<SpikeyGuy_Parameters> &Params )

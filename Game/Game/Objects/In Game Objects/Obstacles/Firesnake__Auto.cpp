@@ -22,11 +22,11 @@ namespace CloudberryKingdom
 		else
 			NumOffsets = 4;
 
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_FIRESNAKE ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_FIRESNAKE ) );
 
-		Step = Param( PieceSeed, DifficultyHelper::Interp159( 1340, 830, 340, u[ Upgrade_FIRESNAKE ] ) );
+		Step = Param( PieceSeed, DifficultyHelper::Interp159( 1340, 830, 340, u->Get( Upgrade_FIRESNAKE ) ) );
 
-		Period = Param( PieceSeed, DifficultyHelper::Interp( 290, 150, u[ Upgrade_FIRESNAKE ] ) * DifficultyHelper::Interp( 1.7f, 1.0f, u[ Upgrade_SPEED ] ) );
+		Period = Param( PieceSeed, DifficultyHelper::Interp( 290, 150, u->Get( Upgrade_FIRESNAKE ) ) * DifficultyHelper::Interp( 1.7f, 1.0f, u->Get( Upgrade_SPEED ) ) );
 
 		RadiiX = VectorParam( PieceSeed, Vector2( 400, 1000 ) );
 		RadiiY = VectorParam( PieceSeed, Vector2( 1550, 1850 ) );

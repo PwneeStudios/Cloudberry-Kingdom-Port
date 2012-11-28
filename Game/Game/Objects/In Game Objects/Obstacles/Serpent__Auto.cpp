@@ -9,13 +9,13 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_SERPENT ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SERPENT ) );
 
-		NumToMake = Param( PieceSeed, u[ Upgrade_SERPENT ] < 4 ? 3 : 2 );
+		NumToMake = Param( PieceSeed, u->Get( Upgrade_SERPENT ) < 4 ? 3 : 2 );
 
-		SerpentStep = Param( PieceSeed, u[ Upgrade_SERPENT ] == 0 ? SerpentStepCutoff + 1 : DifficultyHelper::Interp159( 1650, 860, 350, u[ Upgrade_SERPENT ] ) );
+		SerpentStep = Param( PieceSeed, u->Get( Upgrade_SERPENT ) == 0 ? SerpentStepCutoff + 1 : DifficultyHelper::Interp159( 1650, 860, 350, u->Get( Upgrade_SERPENT ) ) );
 
-		SerpentPeriod = Param( PieceSeed, __max( 70, 200 - 9 * u[ Upgrade_SPEED ] ) );
+		SerpentPeriod = Param( PieceSeed, __max( 70, 200 - 9 * u->Get( Upgrade_SPEED ) ) );
 	}
 
 	void Serpent_Parameters::InitializeInstanceFields()

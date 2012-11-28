@@ -11,14 +11,14 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_CONVEYOR ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_CONVEYOR ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_CONVEYOR ] * ( .5f + .5f * u[ Upgrade_CONVEYOR ] / 10 ) );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_CONVEYOR ) * ( .5f + .5f * u->Get( Upgrade_CONVEYOR ) / 10 ) );
 
-		Speed = Param( PieceSeed, DifficultyHelper::Interp( .04175f,.16f, u[ Upgrade_CONVEYOR ] ) * DifficultyHelper::Interp( 1, 1.55f, u[ Upgrade_SPEED ] ) );
+		Speed = Param( PieceSeed, DifficultyHelper::Interp( .04175f,.16f, u->Get( Upgrade_CONVEYOR ) ) * DifficultyHelper::Interp( 1, 1.55f, u->Get( Upgrade_SPEED ) ) );
 
-		Width = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 240, 60, u[ Upgrade_CONVEYOR ] ) );
+		Width = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 240, 60, u->Get( Upgrade_CONVEYOR ) ) );
 	}
 
 const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();

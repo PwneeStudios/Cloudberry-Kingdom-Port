@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		Tunnel = std::make_shared<TunnelFill>();
-		HallwaySpacing = Vector2( 300 - 5 * u[ Upgrade_SPIKEY_GUY ], DifficultyHelper::Interp19( 220, 80, u[ Upgrade_SPIKEY_GUY ] ) );
+		HallwaySpacing = Vector2( 300 - 5 * u->Get( Upgrade_SPIKEY_GUY ), DifficultyHelper::Interp19( 220, 80, u->Get( Upgrade_SPIKEY_GUY ) ) );
 
 		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_GUY ) > 0 )
 			DoStage2Fill = true;
@@ -17,18 +17,18 @@ namespace CloudberryKingdom
 			DoStage2Fill = false;
 
 		// General difficulty
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_SPIKEY_GUY ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SPIKEY_GUY ) );
 
-		FloaterMinDist = Param( PieceSeed, __max( 80, 800 - 63.5f * u[ Upgrade_SPIKEY_GUY ] ) );
+		FloaterMinDist = Param( PieceSeed, __max( 80, 800 - 63.5f * u->Get( Upgrade_SPIKEY_GUY ) ) );
 
-		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u[ Upgrade_SPEED ] ) );
+		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u->Get( Upgrade_SPEED ) ) );
 
-		FloaterPlaceDelay = Param( PieceSeed,.705f * __max( 4.75f, 9 - u[ Upgrade_SPIKEY_GUY ] / 2 ) );
+		FloaterPlaceDelay = Param( PieceSeed,.705f * __max( 4.75f, 9 - u->Get( Upgrade_SPIKEY_GUY ) / 2 ) );
 
-		FloaterMaxAngle = Param( PieceSeed, __min( 750, 30 + 64 * u[ Upgrade_SPIKEY_GUY ] ) );
+		FloaterMaxAngle = Param( PieceSeed, __min( 750, 30 + 64 * u->Get( Upgrade_SPIKEY_GUY ) ) );
 
-		float sparsity = __max( 10, 10 - 0 * u[ Upgrade_SPIKEY_GUY ] );
-		if ( u[ Upgrade_SPIKEY_GUY ] <= 0 )
+		float sparsity = __max( 10, 10 - 0 * u->Get( Upgrade_SPIKEY_GUY ) );
+		if ( u->Get( Upgrade_SPIKEY_GUY ) <= 0 )
 			sparsity = -1;
 
 		FloaterSparsity = Param( PieceSeed, sparsity );

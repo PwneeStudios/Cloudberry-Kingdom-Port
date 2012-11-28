@@ -23,22 +23,22 @@ namespace CloudberryKingdom
 			NumOffsets = 4;
 
 		BobWidthLevel = Param( PieceSeed );
-		BobWidthLevel.SetVal( u[ Upgrade_FIRE_SPINNER ] );
+		BobWidthLevel.SetVal( u->Get( Upgrade_FIRE_SPINNER ) );
 
 		MinDist = Param( PieceSeed );
-		MinDist.SetVal( DifficultyHelper::Interp159( 650, 270, 110, u[ Upgrade_FIRE_SPINNER ] ) );
+		MinDist.SetVal( DifficultyHelper::Interp159( 650, 270, 110, u->Get( Upgrade_FIRE_SPINNER ) ) );
 
 		Length = Param( PieceSeed );
-		Length.SetVal( 240 + 36 * u[ Upgrade_FIRE_SPINNER ] );
+		Length.SetVal( 240 + 36 * u->Get( Upgrade_FIRE_SPINNER ) );
 
 		Period = Param( PieceSeed );
-		Period.SetVal( __max( 38, 150 + 13 * u[ Upgrade_FIRE_SPINNER ] - 13 * u[ Upgrade_SPEED ] ) );
+		Period.SetVal( __max( 38, 150 + 13 * u->Get( Upgrade_FIRE_SPINNER ) - 13 * u->Get( Upgrade_SPEED ) ) );
 
 		MinDensity = Param( PieceSeed );
-		MinDensity.SetVal( u[ Upgrade_FIRE_SPINNER ] == 0 ? 0 : DifficultyHelper::Interp( 50, 80, u[ Upgrade_FIRE_SPINNER ] ) );
+		MinDensity.SetVal( u->Get( Upgrade_FIRE_SPINNER ) == 0 ? 0 : DifficultyHelper::Interp( 50, 80, u->Get( Upgrade_FIRE_SPINNER ) ) );
 
 		MaxDensity = Param( PieceSeed );
-		MaxDensity.SetVal( u[ Upgrade_FIRE_SPINNER ] == 0 ? 0 : DifficultyHelper::Interp( 50, 150, u[ Upgrade_FIRE_SPINNER ] ) );
+		MaxDensity.SetVal( u->Get( Upgrade_FIRE_SPINNER ) == 0 ? 0 : DifficultyHelper::Interp( 50, 150, u->Get( Upgrade_FIRE_SPINNER ) ) );
 	}
 
 	FireSpinner_AutoGen::Cleanup_2Proxy::Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params )

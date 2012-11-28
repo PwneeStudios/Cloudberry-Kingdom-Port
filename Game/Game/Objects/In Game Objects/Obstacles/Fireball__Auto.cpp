@@ -17,17 +17,17 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_FIREBALL ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FIREBALL ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_FIREBALL ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_FIREBALL ) );
 
-		SetVal( SurvivalHallwaySpeed, DifficultyHelper::Interp19( 20, 45, u[ Upgrade_SPEED ] ) );
+		SetVal( SurvivalHallwaySpeed, DifficultyHelper::Interp19( 20, 45, u->Get( Upgrade_SPEED ) ) );
 
-		if ( u[ Upgrade_FIREBALL ] > 0 )
+		if ( u->Get( Upgrade_FIREBALL ) > 0 )
 			DoFill = true;
 
-		float v = DifficultyHelper::Interp159( 800, 500, 200, u[ Upgrade_FIREBALL ] );
+		float v = DifficultyHelper::Interp159( 800, 500, 200, u->Get( Upgrade_FIREBALL ) );
 		if ( PieceSeed->Style_MASOCHISTIC )
 			v *= .7f;
 
@@ -35,19 +35,19 @@ namespace CloudberryKingdom
 
 		// General difficulty
 		BobWidthLevel = Param( PieceSeed );
-		BobWidthLevel.SetVal( u[ Upgrade_FIREBALL ] );
+		BobWidthLevel.SetVal( u->Get( Upgrade_FIREBALL ) );
 
 		FireballMaxAngle = Param( PieceSeed );
-		FireballMaxAngle.SetVal( DifficultyHelper::Interp159( .01f,.3f,.75f, u[ Upgrade_FIREBALL ] ) );
+		FireballMaxAngle.SetVal( DifficultyHelper::Interp159( .01f,.3f,.75f, u->Get( Upgrade_FIREBALL ) ) );
 
 		FireballMinDist = Param( PieceSeed );
-		FireballMinDist.SetVal( DifficultyHelper::Interp159( 700, 340, 120, u[ Upgrade_FIREBALL ] ) );
+		FireballMinDist.SetVal( DifficultyHelper::Interp159( 700, 340, 120, u->Get( Upgrade_FIREBALL ) ) );
 
 		MaxFireballDensity = Param( PieceSeed );
-		MaxFireballDensity.SetVal( 4 * u[ Upgrade_FIREBALL ] );
+		MaxFireballDensity.SetVal( 4 * u->Get( Upgrade_FIREBALL ) );
 
 		Period = Param( PieceSeed );
-		Period.SetVal( DifficultyHelper::InterpRestrict159( 240, 195, 148,.7f * u[ Upgrade_SPEED ] + .3f * u[ Upgrade_FIREBALL ] ) );
+		Period.SetVal( DifficultyHelper::InterpRestrict159( 240, 195, 148,.7f * u->Get( Upgrade_SPEED ) + .3f * u->Get( Upgrade_FIREBALL ) ) );
 	}
 
 	void Fireball_Parameters::InitializeInstanceFields()
