@@ -5,38 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class MyOwnVertexFormat;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-namespace CloudberryKingdom
-{
 	class CapeNode
 	{
 	public:

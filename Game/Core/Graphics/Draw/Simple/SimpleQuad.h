@@ -3,7 +3,6 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 	class SimpleQuad
@@ -91,8 +90,8 @@ namespace CloudberryKingdom
 		const float &getLeft() const;
 		const float &getTop() const;
 		const float &getBottom() const;
-		const float &getWidth() const;
-		const float &getHeight() const;
+		const float getWidth() const;
+		const float getHeight() const;
 
 		void Shift( Vector2 shift );
 
@@ -108,9 +107,9 @@ namespace CloudberryKingdom
 
 		void MirrorUV_Horizontal();
 
-		const Vector2 &getUV_Offset() const;
+		const Vector2 getUV_Offset() const;
 		void setUV_Offset( const Vector2 &value );
-		const Vector2 &getUV_Repeat() const;
+		const Vector2 getUV_Repeat() const;
 		void setUV_Repeat( const Vector2 &value );
 
 		void UV_Phsx( Vector2 speed );

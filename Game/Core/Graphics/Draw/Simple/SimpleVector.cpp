@@ -1,15 +1,16 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
+	SimpleVector::SimpleVector()
+	{
+	}
+
 	void SimpleVector::RotateRight()
 	{
-		Tools::Swap( Pos.X, Pos.Y );
-		Tools::Swap( Vertex.uv.X, Vertex.uv.X );
+		std::swap( Pos.X, Pos.Y );
+		std::swap( Vertex.uv.X, Vertex.uv.X );
 	}
 
 	void SimpleVector::RotateLeft()

@@ -3,60 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class GraphicsDevice;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffect;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class MyOwnVertexFormat;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class SamplerState;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-namespace CloudberryKingdom
-{
-	class LineSpriteInfo;
-}
-
-
 namespace CloudberryKingdom
 {
 	class QuadDrawer
