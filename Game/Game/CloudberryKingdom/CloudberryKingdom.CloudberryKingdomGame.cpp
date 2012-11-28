@@ -1435,31 +1435,31 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades1 );
 
 
-		//piece.MyUpgrades1[Upgrade.SpikeyLine] = 5f;
-		//piece.MyUpgrades1[Upgrade.Ceiling] = 10;
-		////piece.MyUpgrades1[Upgrade.Elevator] = 11;
-		//piece.MyUpgrades1[Upgrade.SpikeyGuy] = 5;
-		//piece.MyUpgrades1[Upgrade.FireSpinner] = 6;
-		//piece.MyUpgrades1[Upgrade.GhostBlock] = 6;
-		//piece.MyUpgrades1[Upgrade.Serpent] = 5;
-		//piece.MyUpgrades1[Upgrade.Cloud] = 5;
-		//piece.MyUpgrades1[Upgrade.Pinky] = 5;
-		//piece.MyUpgrades1[Upgrade.Fireball] = 3;
-		//piece.MyUpgrades1[Upgrade.Pendulum] = 3;
-		//piece.MyUpgrades1[Upgrade.BouncyBlock] = 5;
-		//piece.MyUpgrades1[Upgrade.FallingBlock] = 5;
+		//piece.MyUpgrades1->Get(Upgrade.SpikeyLine) = 5f;
+		//piece.MyUpgrades1->Get(Upgrade.Ceiling) = 10;
+		////piece.MyUpgrades1->Get(Upgrade.Elevator) = 11;
+		//piece.MyUpgrades1->Get(Upgrade.SpikeyGuy) = 5;
+		//piece.MyUpgrades1->Get(Upgrade.FireSpinner) = 6;
+		//piece.MyUpgrades1->Get(Upgrade.GhostBlock) = 6;
+		//piece.MyUpgrades1->Get(Upgrade.Serpent) = 5;
+		//piece.MyUpgrades1->Get(Upgrade.Cloud) = 5;
+		//piece.MyUpgrades1->Get(Upgrade.Pinky) = 5;
+		//piece.MyUpgrades1->Get(Upgrade.Fireball) = 3;
+		//piece.MyUpgrades1->Get(Upgrade.Pendulum) = 3;
+		//piece.MyUpgrades1->Get(Upgrade.BouncyBlock) = 5;
+		//piece.MyUpgrades1->Get(Upgrade.FallingBlock) = 5;
 
 		__Roughly_Abusive( piece );
 		//__Roughly_Maso(piece);
 		//piece.Style.Masochistic = true;
 
-		piece->MyUpgrades1[ Upgrade_MOVING_BLOCK ] = 8;
-		//piece.MyUpgrades1[Upgrade.LavaDrip] = 9;
-		//piece.MyUpgrades1[Upgrade.Serpent] = 9;
-		//piece.MyUpgrades1[Upgrade.Pendulum] = 9;
-		//piece.MyUpgrades1[Upgrade.Fireball] = 9f;
-		//piece.MyUpgrades1[Upgrade.Jump] = 8;
-		//piece.MyUpgrades1[Upgrade.Speed] = 9;
+		piece->MyUpgrades1->Get( Upgrade_MOVING_BLOCK ) = 8;
+		//piece.MyUpgrades1->Get(Upgrade.LavaDrip) = 9;
+		//piece.MyUpgrades1->Get(Upgrade.Serpent) = 9;
+		//piece.MyUpgrades1->Get(Upgrade.Pendulum) = 9;
+		//piece.MyUpgrades1->Get(Upgrade.Fireball) = 9f;
+		//piece.MyUpgrades1->Get(Upgrade.Jump) = 8;
+		//piece.MyUpgrades1->Get(Upgrade.Speed) = 9;
 
 
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
@@ -1491,49 +1491,49 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 	void CloudberryKingdomGame::__Roughly_Maso( const std::shared_ptr<PieceSeedData> &piece )
 	{
-		piece->MyUpgrades1[ Upgrade_JUMP ] = 1;
-		piece->MyUpgrades1[ Upgrade_SPEED ] = 10;
+		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 1;
+		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 10;
 
-		piece->MyUpgrades1[ Upgrade_SERPENT ] = 7;
-		//piece.MyUpgrades1[Upgrade.LavaDrip] = 10;
-		piece->MyUpgrades1[ Upgrade_LASER ] = 5;
+		piece->MyUpgrades1->Get( Upgrade_SERPENT ) = 7;
+		//piece.MyUpgrades1->Get(Upgrade.LavaDrip) = 10;
+		piece->MyUpgrades1->Get( Upgrade_LASER ) = 5;
 
-		piece->MyUpgrades1[ Upgrade_FLY_BLOB ] = 3;
-		piece->MyUpgrades1[ Upgrade_GHOST_BLOCK ] = 4;
-		////piece.MyUpgrades1[Upgrade.FallingBlock] = 4;
-		////piece.MyUpgrades1[Upgrade.BouncyBlock] = 4;
-		piece->MyUpgrades1[ Upgrade_MOVING_BLOCK ] = 4;
-		//piece.MyUpgrades1[Upgrade.Elevator] = 1;
-		piece->MyUpgrades1[ Upgrade_SPIKEY_GUY ] = 10;
-		////piece.MyUpgrades1[Upgrade.Firesnake] = 6;
-		piece->MyUpgrades1[ Upgrade_SPIKE ] = 9;
-		piece->MyUpgrades1[ Upgrade_FIRE_SPINNER ] = 10;
+		piece->MyUpgrades1->Get( Upgrade_FLY_BLOB ) = 3;
+		piece->MyUpgrades1->Get( Upgrade_GHOST_BLOCK ) = 4;
+		////piece.MyUpgrades1->Get(Upgrade.FallingBlock) = 4;
+		////piece.MyUpgrades1->Get(Upgrade.BouncyBlock) = 4;
+		piece->MyUpgrades1->Get( Upgrade_MOVING_BLOCK ) = 4;
+		//piece.MyUpgrades1->Get(Upgrade.Elevator) = 1;
+		piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = 10;
+		////piece.MyUpgrades1->Get(Upgrade.Firesnake) = 6;
+		piece->MyUpgrades1->Get( Upgrade_SPIKE ) = 9;
+		piece->MyUpgrades1->Get( Upgrade_FIRE_SPINNER ) = 10;
 
-		piece->MyUpgrades1[ Upgrade_PINKY ] = 4;
-		//piece.MyUpgrades1[Upgrade.SpikeyLine] = 2;
-		//piece.MyUpgrades1[Upgrade.Conveyor] = 8;
+		piece->MyUpgrades1->Get( Upgrade_PINKY ) = 4;
+		//piece.MyUpgrades1->Get(Upgrade.SpikeyLine) = 2;
+		//piece.MyUpgrades1->Get(Upgrade.Conveyor) = 8;
 	}
 
 	void CloudberryKingdomGame::__Roughly_Abusive( const std::shared_ptr<PieceSeedData> &piece )
 	{
-		piece->MyUpgrades1[ Upgrade_JUMP ] = 1;
-		piece->MyUpgrades1[ Upgrade_SPEED ] = 3;
-		////piece.MyUpgrades1[Upgrade.Serpent] = 0;
-		////piece.MyUpgrades1[Upgrade.LavaDrip] = 4;
-		piece->MyUpgrades1[ Upgrade_FLY_BLOB ] = 3;
-		piece->MyUpgrades1[ Upgrade_GHOST_BLOCK ] = 4;
-		piece->MyUpgrades1[ Upgrade_FALLING_BLOCK ] = 4;
-		////piece.MyUpgrades1[Upgrade.BouncyBlock] = 4;
-		piece->MyUpgrades1[ Upgrade_MOVING_BLOCK ] = 4;
-		//piece.MyUpgrades1[Upgrade.Elevator] = 1;
-		piece->MyUpgrades1[ Upgrade_SPIKEY_GUY ] = 2;
-		////piece.MyUpgrades1[Upgrade.Firesnake] = 6;
-		piece->MyUpgrades1[ Upgrade_SPIKE ] = 2;
-		piece->MyUpgrades1[ Upgrade_FIRE_SPINNER ] = 2;
-		//piece.MyUpgrades1[Upgrade.Laser] = 2;
-		piece->MyUpgrades1[ Upgrade_PINKY ] = 1;
-		//piece.MyUpgrades1[Upgrade.SpikeyLine] = 2;
-		//piece.MyUpgrades1[Upgrade.Conveyor] = 8;
+		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 1;
+		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 3;
+		////piece.MyUpgrades1->Get(Upgrade.Serpent) = 0;
+		////piece.MyUpgrades1->Get(Upgrade.LavaDrip) = 4;
+		piece->MyUpgrades1->Get( Upgrade_FLY_BLOB ) = 3;
+		piece->MyUpgrades1->Get( Upgrade_GHOST_BLOCK ) = 4;
+		piece->MyUpgrades1->Get( Upgrade_FALLING_BLOCK ) = 4;
+		////piece.MyUpgrades1->Get(Upgrade.BouncyBlock) = 4;
+		piece->MyUpgrades1->Get( Upgrade_MOVING_BLOCK ) = 4;
+		//piece.MyUpgrades1->Get(Upgrade.Elevator) = 1;
+		piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = 2;
+		////piece.MyUpgrades1->Get(Upgrade.Firesnake) = 6;
+		piece->MyUpgrades1->Get( Upgrade_SPIKE ) = 2;
+		piece->MyUpgrades1->Get( Upgrade_FIRE_SPINNER ) = 2;
+		//piece.MyUpgrades1->Get(Upgrade.Laser) = 2;
+		piece->MyUpgrades1->Get( Upgrade_PINKY ) = 1;
+		//piece.MyUpgrades1->Get(Upgrade.SpikeyLine) = 2;
+		//piece.MyUpgrades1->Get(Upgrade.Conveyor) = 8;
 	}
 
 	void CloudberryKingdomGame::TestLevelModParams( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
@@ -1565,17 +1565,17 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 
 		float size = 90;
-		std::shared_ptr<FallingBlock_Parameters> FParams = static_cast<FallingBlock_Parameters*>( p->Style_FIND_PARAMS( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> FParams = static_cast<FallingBlock_Parameters*>( p->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
 		FParams->Width.SetVal( size );
-		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( p->Style_FIND_PARAMS( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( p->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		MParams->Size.SetVal( size );
 		MParams->Aspect = MovingBlock_Parameters::AspectType_SQUARE;
 		MParams->Motion = MovingBlock_Parameters::MotionType_VERTICAL;
-		std::shared_ptr<BouncyBlock_Parameters> BParams = static_cast<BouncyBlock_Parameters*>( p->Style_FIND_PARAMS( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> BParams = static_cast<BouncyBlock_Parameters*>( p->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		BParams->Size.SetVal( size );
-		std::shared_ptr<FlyingBlob_Parameters> GParams = static_cast<FlyingBlob_Parameters*>( p->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> GParams = static_cast<FlyingBlob_Parameters*>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 		//GParams.Counter
-		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( p->Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( p->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		//NParams.Make = false;
 
 

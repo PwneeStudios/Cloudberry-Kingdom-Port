@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<AutoGen_Parameters> PieceSeedData::operator []( const std::shared_ptr<AutoGen> &gen )
 	{
-		return Style_FIND_PARAMS( gen );
+		return Style->FindParams( gen );
 	}
 
 	const std::shared_ptr<Upgrades> &PieceSeedData::getu() const
@@ -129,8 +129,8 @@ namespace CloudberryKingdom
 
 	void PieceSeedData::NoBlobs()
 	{
-		MyUpgrades1[ Upgrade_FALLING_BLOCK ] = __max( MyUpgrades1[ Upgrade_FALLING_BLOCK ], MyUpgrades1[ Upgrade_FLY_BLOB ] );
-		MyUpgrades1[ Upgrade_FLY_BLOB ] = 0;
+		MyUpgrades1->Get( Upgrade_FALLING_BLOCK ] = __max( MyUpgrades1[ Upgrade_FALLING_BLOCK ], MyUpgrades1[ Upgrade_FLY_BLOB ) );
+		MyUpgrades1->Get( Upgrade_FLY_BLOB ) = 0;
 
 		MyUpgrades2[ Upgrade_MOVING_BLOCK ] = __max( MyUpgrades2[ Upgrade_MOVING_BLOCK ], MyUpgrades2[ Upgrade_FLY_BLOB ] );
 		MyUpgrades2[ Upgrade_FLY_BLOB ] = 0;

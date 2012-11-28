@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class BackgroundType
 	{
 	public:
-		static std::map<std::wstring, BackgroundTemplate*> NameLookup, PathLookup;
+		static std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
 
 		static std::shared_ptr<BackgroundTemplate> None, Random, _Sea, _Sea_Rain, _Hills, _Hills_Rain, _Forest, _Forest_Rain, _Cloud, _Cloud_Rain, _Cave, _Castle;
 

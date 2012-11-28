@@ -289,7 +289,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<AutoGen_Parameters> ObjectData::GetParams( const std::shared_ptr<AutoGen> &singleton )
 	{
-		return MyLevel->CurPiece->MyData->Style_FIND_PARAMS( singleton );
+		return MyLevel->CurPiece->MyData->Style->FindParams( singleton );
 	}
 
 unsigned long long ObjectData::NextId = 0;

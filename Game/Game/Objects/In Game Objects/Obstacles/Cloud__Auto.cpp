@@ -57,7 +57,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 		AutoGen::CreateAt( level, pos, BL, TR );
 
 		// Get Cloud parameters
-		std::shared_ptr<Cloud_Parameters> Params = static_cast<Cloud_Parameters*>( level->Style_FIND_PARAMS( Cloud_AutoGen::getInstance() ) );
+		std::shared_ptr<Cloud_Parameters> Params = static_cast<Cloud_Parameters*>( level->Style->FindParams( Cloud_AutoGen::getInstance() ) );
 
 		// Make the new cloud
 		pos += Vector2( level->getRnd()->Rnd->Next(0, 70), level->getRnd()->Rnd->Next(0, 70) );

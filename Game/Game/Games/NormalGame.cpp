@@ -1,14 +1,11 @@
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	std::shared_ptr<GameData> NormalFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
-		return std::make_shared<NormalGameData>( data, MakeInBackground );
+		return std::static_pointer_cast<GameData>( std::make_shared<NormalGameData>( data, MakeInBackground ) );
 	}
 
 	void NormalGameData::SetCreatedBobParameters( const std::shared_ptr<Bob> &bob )
@@ -23,7 +20,7 @@ namespace CloudberryKingdom
 		MyLevel->AllowRecording = true;
 	}
 
-std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFactory>();
+	std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFactory>();
 
 	NormalGameData::NormalGameData()
 	{
@@ -42,7 +39,7 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 		DefaultHeroType = LevelSeed->DefaultHeroType;
 
 		if ( !MakeInBackground )
-			Tools::CurGameData = this;
+			Tools::CurGameData = shared_from_this();
 
 		//Tools.Recycle.Empty();
 		Loading = true;
@@ -56,16 +53,17 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 
 		_MakeThreadLevelSeed = LevelSeed;
 		_MakeThreadMakeInBackground = MakeInBackground;
-		std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
-		{
-	#if defined(WINDOWS)
-			Name = _T( "MakeLevelThread" ),Priority = ThreadPriority::Normal,
-	#else
-			Name = _T( "MakeLevelThread" ),
-	#endif
-		};
+		// FIXME: Add threading.
+	//	std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
+	//	{
+	//#if defined(WINDOWS)
+	//		Name = _T( "MakeLevelThread" ),Priority = ThreadPriority::Normal,
+	//#else
+	//		Name = _T( "MakeLevelThread" ),
+	//#endif
+	//	};
 
-		MakeThread->Start();
+	//	MakeThread->Start();
 	}
 
 	void NormalGameData::_MakeThreadFunc()
@@ -73,25 +71,26 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 		std::shared_ptr<LevelSeedData> LevelSeed = _MakeThreadLevelSeed;
 		bool MakeInBackground = _MakeThreadMakeInBackground;
 
-	#if defined(XBOX) && !defined(WINDOWS)
-		const int tempVector[] = { 3 };
-		Thread::CurrentThread->SetProcessorAffinity( std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
-	#endif
-		Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( this, &NormalGameData::KillThread );
+		// FIXME: Related to threading.
+	//#if defined(XBOX) && !defined(WINDOWS)
+	//	const int tempVector[] = { 3 };
+	//	Thread::CurrentThread->SetProcessorAffinity( std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
+	//#endif
+	//	Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( this, &NormalGameData::KillThread );
 
-		MyLevel = LevelSeed->MakeLevel( this );
+		MyLevel = LevelSeed->MakeLevel( shared_from_this() );
 
 		if ( MyLevel->ReturnedEarly )
 		{
 			Tools::CurLevel = MyLevel;
-			Tools::CurGameData = this;
+			Tools::CurGameData = shared_from_this();
 		}
 
 		Tools::LevelIsFinished();
 
 		if ( !MakeInBackground )
 			Tools::CurLevel = MyLevel;
-		MyLevel->MyGame = this;
+		MyLevel->MyGame = shared_from_this();
 
 		if ( MyLevel->SetToWatchMake )
 		{
@@ -120,13 +119,13 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 		MyLevel->ResetAll( false, !MakeInBackground );
 
 		// Mark the level as loaded
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( LevelSeed->Loaded )
+		LevelSeed->Loaded->MyMutex.Lock();
 		{
 			Loading = false;
 			LevelSeed->Loaded->setval( true );
-			LevelSeed->MyGame = this;
+			LevelSeed->MyGame = shared_from_this();
 		}
+		LevelSeed->Loaded->MyMutex.Unlock();
 
 		// End the loading screen
 		if ( !MakeInBackground )
@@ -134,7 +133,8 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 			Tools::EndLoadingScreen();
 		}
 
-		Tools::TheGame->Exiting -= KillThread;
+		// FIXME: Related to threading.
+		//Tools::TheGame->Exiting -= KillThread;
 	}
 
 	void NormalGameData::PhsxStep()
@@ -177,4 +177,5 @@ std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFa
 	{
 		GameData::BobDoneDying( level, bob );
 	}
+
 }

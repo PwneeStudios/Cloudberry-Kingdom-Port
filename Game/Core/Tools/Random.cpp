@@ -1,15 +1,12 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	Rand::Rand( int seed )
 	{
 		MySeed = seed;
-		Rnd = std::make_shared<System::Random>( MySeed );
+		Rnd = std::make_shared<Random>( MySeed );
 	}
 
 	Vector2 Rand::RndPos( Vector2 BL, Vector2 TR )
@@ -154,7 +151,7 @@ template<typename T>
 		return Indices;
 	}
 
-template<typename T>
+	template<typename T>
 	std::vector<T> Rand::Shuffle( std::vector<T> &list )
 	{
 		std::vector<T> shuffled = std::vector<T>();
@@ -171,13 +168,13 @@ template<typename T>
 		return shuffled;
 	}
 
-template<typename T>
-	T Rand::ChooseOne( ... )
+	template<typename T>
+	T Rand::ChooseOne( std::vector<T> choices )
 	{
 		return choices[ RndInt( 0, choices->Length - 1 ) ];
 	}
 
-template<typename T>
+	template<typename T>
 	std::vector<T> Rand::Choose( std::vector<T> &list, int n )
 	{
 		std::vector<T> chosen = std::vector<T>( list );

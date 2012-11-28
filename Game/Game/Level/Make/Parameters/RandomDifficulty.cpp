@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	int RndDifficulty::ChoosePaths( const std::shared_ptr<PieceSeedData> &data )
 	{
-		float JumpDifficulty = data->MyUpgrades1[ Upgrade_JUMP ];
+		float JumpDifficulty = data->MyUpgrades1->Get( Upgrade_JUMP );
 
 		double p = data->getRnd()->Rnd->NextDouble();
 		if ( p < .75f + .25f *.1f * JumpDifficulty )
@@ -53,8 +53,8 @@ namespace CloudberryKingdom
 	void RndDifficulty::IntToDifficulty( const std::shared_ptr<PieceSeedData> &Seed, const std::shared_ptr<TileSet> &TileType )
 	{
 		ZeroUpgrades( Seed->MyUpgrades1 );
-		Seed->MyUpgrades1[ Upgrade_FIRE_SPINNER ] = 10;
-		Seed->MyUpgrades1[ Upgrade_GENERAL ] = 10;
+		Seed->MyUpgrades1->Get( Upgrade_FIRE_SPINNER ) = 10;
+		Seed->MyUpgrades1->Get( Upgrade_GENERAL ) = 10;
 		Seed->MyUpgrades1->CalcGenData( Seed->MyGenData->gen1, Seed->Style );
 
 		ZeroUpgrades( Seed->MyUpgrades2 );

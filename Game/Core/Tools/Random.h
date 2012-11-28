@@ -96,9 +96,7 @@ namespace CloudberryKingdom
 		/// Returns a randomly chosen item from the items given
 		/// </summary>
 		template<typename T>
-//ORIGINAL LINE: public T ChooseOne<T>(params T[] choices)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		T ChooseOne( ... );
+		T ChooseOne( std::vector<T> choices );
 
 		/// <summary>
 		/// Choose n elements from a list.

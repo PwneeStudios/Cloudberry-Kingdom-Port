@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float lvl = PieceSeed->MyUpgrades1[ Upgrade_PENDULUM ];
+		float lvl = PieceSeed->MyUpgrades1->Get( Upgrade_PENDULUM );
 
 		Size = Param( PieceSeed );
 		Size.SetVal( 230 - ( 230 - 50 ) / 10 * u[ Upgrade_PENDULUM ] );
@@ -68,7 +68,7 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Pendulum parameters
-		std::shared_ptr<Pendulum_Parameters> Params = static_cast<Pendulum_Parameters*>( level->Style_FIND_PARAMS( Pendulum_AutoGen::getInstance() ) );
+		std::shared_ptr<Pendulum_Parameters> Params = static_cast<Pendulum_Parameters*>( level->Style->FindParams( Pendulum_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 40 );
 		Vector2 offset = Vector2( 0, -300 );

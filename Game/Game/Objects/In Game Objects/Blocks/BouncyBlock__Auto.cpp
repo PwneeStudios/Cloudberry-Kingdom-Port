@@ -81,7 +81,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 	{
 		AutoGen::PreFill_1( level, BL, TR );
 
-		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( level->Style_FIND_PARAMS( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( level->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );
@@ -113,7 +113,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get BouncyBlock parameters
-		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( piece->Style_FIND_PARAMS( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( piece->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 
 		std::shared_ptr<BouncyBlock> bblock;
 		float Width = Params->Size.GetVal( pos );

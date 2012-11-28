@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	const std::shared_ptr<BlockEmitter_Parameters> &MovingPlatform::getMyParams() const
 	{
-		return static_cast<BlockEmitter_Parameters*>( getCore()->MyLevel->Style_FIND_PARAMS(BlockEmitter_AutoGen::getInstance()) );
+		return static_cast<BlockEmitter_Parameters*>( getCore()->MyLevel->Style->FindParams(BlockEmitter_AutoGen::getInstance()) );
 	}
 
 	bool MovingPlatform::PermissionToUse()

@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	LevelSeedData::StandardInitHelper::StandardInitHelper( const std::shared_ptr<Lambda_2<PieceSeedData*, Upgrades*> > &CustomDiff )
+	LevelSeedData::StandardInitHelper::StandardInitHelper( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData>, std::shared_ptr<Upgrades> > > &CustomDiff )
 	{
 		this->CustomDiff = CustomDiff;
 	}
@@ -187,7 +187,7 @@ bool LevelSeedData::NoDoublePaths = true;
 		float Height = 0;
 
 		std::shared_ptr<Level> level = 0;
-		for ( std::vector<PieceSeedData*>::const_iterator Piece = PieceSeeds.begin(); Piece != PieceSeeds.end(); ++Piece )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator Piece = PieceSeeds.begin(); Piece != PieceSeeds.end(); ++Piece )
 		{
 			if ( ( *Piece )->Ladder != Level.LadderType_NONE )
 			{
@@ -274,7 +274,7 @@ bool LevelSeedData::NoDoublePaths = true;
 				Tools::DrawBoxes = true;
 
 				level->MainEmitter = std::make_shared<ParticleEmitter>( 1000 );
-				for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+				for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 					( *bob )->SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
 				level->SetToWatchMake = true;
 				NewLevel = level;

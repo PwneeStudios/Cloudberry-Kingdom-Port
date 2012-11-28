@@ -53,7 +53,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 
 	std::shared_ptr<ConveyorBlock_Parameters> ConveyorBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return static_cast<ConveyorBlock_Parameters*>( level->Style_FIND_PARAMS( ConveyorBlock_AutoGen::getInstance() ) );
+		return static_cast<ConveyorBlock_Parameters*>( level->Style->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> ConveyorBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )

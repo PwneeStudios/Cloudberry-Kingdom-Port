@@ -73,7 +73,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get FallingBlock parameters
-		std::shared_ptr<FallingBlock_Parameters> Params = static_cast<FallingBlock_Parameters*>( level->Style_FIND_PARAMS( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> Params = static_cast<FallingBlock_Parameters*>( level->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
 
 		std::shared_ptr<FallingBlock> fblock;
 		float Width = Params->Width.GetVal( pos );

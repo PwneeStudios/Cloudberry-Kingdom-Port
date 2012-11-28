@@ -74,6 +74,11 @@ namespace CloudberryKingdom
 		return TileSets::NameLookup[ name ];
 	}*/
 
+	std::shared_ptr<TileSet> TileSet::Get( const std::wstring &name )
+	{
+		return TileSets::NameLookup[ name ];
+	}
+
 	TileSet::TileSet()
 	{
 		InitializeInstanceFields();

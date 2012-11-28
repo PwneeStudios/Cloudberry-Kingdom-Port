@@ -130,6 +130,22 @@ class IAsyncResult;
 class KeyboardState { };
 template<class T> class LinkedListNode;
 class MouseState { };
+
+class Mutex
+{
+
+public:
+
+	void Lock()
+	{
+	}
+
+	void Unlock()
+	{
+	}
+
+};
+
 class Object;
 class PreparingDeviceSettingsEventArgs;
 

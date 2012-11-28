@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float MovingBlockLevel = PieceSeed->MyUpgrades1[ Upgrade_MOVING_BLOCK ];
+		float MovingBlockLevel = PieceSeed->MyUpgrades1->Get( Upgrade_MOVING_BLOCK );
 
 		Aspect = AspectType_SQUARE;
 
@@ -140,7 +140,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get MovingBlock parameters
-		std::shared_ptr<MovingBlock_Parameters> Params = static_cast<MovingBlock_Parameters*>( level->Style_FIND_PARAMS( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> Params = static_cast<MovingBlock_Parameters*>( level->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 0 );
 		switch ( Params->Aspect )

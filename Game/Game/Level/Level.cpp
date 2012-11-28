@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 
 	void Level::Stage1RndFillLambda::Apply( Vector2 pos )
 	{
-		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( level->Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		std::vector<float> Weights = std::vector<float>( Generators::WeightedPreFill_1_Gens.size() );
 
 		float MaxWeight = 0;
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 
 			if ( gen != NormalBlock_AutoGen::getInstance() )
 			{
-				float weight = level->Style_FIND_PARAMS( gen )->FillWeight.GetVal( pos );
+				float weight = level->Style->FindParams( gen )->FillWeight.GetVal( pos );
 
 				Weights[ i ] = weight;
 				MaxWeight = __max( MaxWeight, weight );
@@ -304,7 +304,7 @@ namespace CloudberryKingdom
 	void Level::CleanupCoins( Vector2 BL, Vector2 TR )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( Style_FIND_PARAMS( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( Style->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoCleanup )
 			return;
@@ -1863,7 +1863,7 @@ int Step1, Level::Step2 = 0;
 		float Left;
 		Left = MaxLeft;
 
-		std::shared_ptr<NormalBlock_Parameters> BlockParams = static_cast<NormalBlock_Parameters*>( Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> BlockParams = static_cast<NormalBlock_Parameters*>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( !BlockParams->DoInitialPlats )
 			CurMakeData->InitialPlats = false;
 		if ( !BlockParams->DoFinalPlats )
