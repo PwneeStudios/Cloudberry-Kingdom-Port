@@ -65,14 +65,14 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::shared_ptr<EzTexture> DefaultTexture;
 
-		std::vector<EzTexture*> TextureList;
-		std::map<std::wstring, std::vector<EzTexture*> > TextureListByFolder;
+		std::vector<std::shared_ptr<EzTexture> > TextureList;
+		std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > > TextureListByFolder;
 
-		std::map<std::wstring, AnimationData_Texture*> AnimationDict;
+		std::map<std::wstring, std::shared_ptr<AnimationData_Texture> > AnimationDict;
 		void Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name );
 
 
-		std::map<std::wstring, EzTexture*> PathDict, NameDict, BigNameDict;
+		std::map<std::wstring, std::shared_ptr<EzTexture> > PathDict, NameDict, BigNameDict;
 		void Add( const std::shared_ptr<PackedTexture> &packed );
 
 

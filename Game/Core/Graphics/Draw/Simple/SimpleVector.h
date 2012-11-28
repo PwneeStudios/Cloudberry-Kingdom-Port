@@ -3,9 +3,6 @@
 
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 	class SimpleVector
@@ -14,6 +11,8 @@ namespace CloudberryKingdom
 		AnimationData AnimData;
 		MyOwnVertexFormat Vertex;
 		Vector2 Pos;
+
+		SimpleVector();
 
 		void RotateRight();
 

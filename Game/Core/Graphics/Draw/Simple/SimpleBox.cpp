@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -54,11 +51,11 @@ namespace CloudberryKingdom
 	{
 		Animated = true;
 
-		BL.Pos = box->BL.Pos;
-		TR.Pos = box->TR.Pos;
+		BL.Pos = box->BL->Pos;
+		TR.Pos = box->TR->Pos;
 
-		BL.AnimData = box->BL.AnimData;
-		TR.AnimData = box->TR.AnimData;
+		BL.AnimData = box->BL->AnimData;
+		TR.AnimData = box->TR->AnimData;
 	}
 
 	void SimpleBox::CopyUpdate( std::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift )

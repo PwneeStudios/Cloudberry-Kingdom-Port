@@ -7,6 +7,10 @@
 namespace CloudberryKingdom
 {
 
+	MyOwnVertexFormat::MyOwnVertexFormat()
+	{
+	}
+
 	MyOwnVertexFormat::MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color )
 	{
 		this->xy = XY;

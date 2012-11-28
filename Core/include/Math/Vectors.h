@@ -111,7 +111,7 @@ public:
 		return Vector2( X / k, Y / k );
 	}
 
-	Vector2 operator / ( const Vector2 &a )
+	Vector2 operator / ( const Vector2 &a ) const
 	{
 		return Vector2( X / a.X, Y / a.Y );
 	}

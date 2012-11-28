@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -69,7 +66,7 @@ namespace CloudberryKingdom
 		{
 			t += TextureAnim->Anims[ anim ].Data.size();
 			if ( t < 0 )
-				t = TextureAnim->Anims[ anim ].Data.size() - 1;
+				t = static_cast<float>( TextureAnim->Anims[ anim ].Data.size() ) - 1;
 		}
 
 		std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, t );
@@ -96,7 +93,9 @@ namespace CloudberryKingdom
 		v3.Release();
 
 		MyEffect.reset();
-		getMyTexture().reset();
+		
+		//getMyTexture().reset();
+		_MyTexture.reset();
 	}
 
 	SimpleQuad::SimpleQuad( SimpleQuad &quad )
@@ -146,15 +145,15 @@ namespace CloudberryKingdom
 
 	SimpleQuad::SimpleQuad( const std::shared_ptr<Quad> &quad )
 	{
-		Name = quad.Name;
+		Name = quad->Name;
 
 		Animated = true;
-		TextureAnim = quad.TextureAnim;
+		TextureAnim = quad->TextureAnim;
 
 		Hide = false;
 
 		MySetColor = quad->MyColor;
-		PremultipliedColor = quad.PremultipliedColor;
+		PremultipliedColor = quad->PremultipliedColor;
 		BlendAddRatio = 0;
 
 		uv0 = quad->Vertices[ 0 ].uv;
@@ -179,7 +178,7 @@ namespace CloudberryKingdom
 
 		PreCalc0 = PreCalc1 = PreCalc2 = PreCalc3 = Vector2();
 
-		MyEffect = quad.MyEffect;
+		MyEffect = quad->MyEffect;
 		_MyTexture.reset();
 		ExtraTexture1 = ExtraTexture2 = 0;
 
@@ -188,7 +187,9 @@ namespace CloudberryKingdom
 		UseGlobalIllumination = true;
 		Illumination = 1;
 
-		t = anim = 0;
+		anim = 0;
+		t = 0;
+
 		Playing = false;
 		speed = 1;
 
@@ -279,12 +280,12 @@ namespace CloudberryKingdom
 		return v2.Vertex.xy.Y;
 	}
 
-	const float &SimpleQuad::getWidth() const
+	const float SimpleQuad::getWidth() const
 	{
 		return getRight() - getLeft();
 	}
 
-	const float &SimpleQuad::getHeight() const
+	const float SimpleQuad::getHeight() const
 	{
 		return getTop() - getBottom();
 	}
@@ -357,7 +358,7 @@ namespace CloudberryKingdom
 		v3.Vertex.uv = hold;
 	}
 
-	const Vector2 &SimpleQuad::getUV_Offset() const
+	const Vector2 SimpleQuad::getUV_Offset() const
 	{
 		if ( _MyTexture->FromPacked )
 			return v0.Vertex.uv / Vector2( _MyTexture->TR.X - _MyTexture->BL.X, _MyTexture->BL.Y - _MyTexture->TR.Y );
@@ -370,7 +371,7 @@ namespace CloudberryKingdom
 		UVFromBounds_2( value, value + getUV_Repeat() );
 	}
 
-	const Vector2 &SimpleQuad::getUV_Repeat() const
+	const Vector2 SimpleQuad::getUV_Repeat() const
 	{
 		if ( _MyTexture->FromPacked )
 			return ( v3.Vertex.uv - v0.Vertex.uv ) / Vector2( _MyTexture->TR.X - _MyTexture->BL.X, _MyTexture->BL.Y - _MyTexture->TR.Y );

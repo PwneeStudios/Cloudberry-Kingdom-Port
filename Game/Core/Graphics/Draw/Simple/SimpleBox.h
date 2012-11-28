@@ -5,15 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBox;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class SimpleBox
 	{
 	public:

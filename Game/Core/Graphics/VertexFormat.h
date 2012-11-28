@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 		Vector2 uv;
 		Color TheColor;
 
+		MyOwnVertexFormat();
+
 		MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color );
 
 		MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color, Vector3 depth );
