@@ -11,14 +11,18 @@ namespace CloudberryKingdom
 		Released = true;
 
 		if ( Quads.size() > 0 )
-			for ( int i = 0; i < Quads.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Quads.size() ); i++ )
 				Quads[ i ].Release();
 			//foreach (SimpleQuad quad in Quads)
 				//quad.Release();
 		if ( Boxes.size() > 0 )
 			for ( std::vector<CloudberryKingdom::SimpleBox*>::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
 				( *box )->Release();
-		AnimQueue.clear();
+
+		//AnimQueue.clear();
+		std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+		std::swap( AnimQueue, empty );
+		
 		LastAnimEntry.reset();
 		AnimLength.clear();
 		AnimName.clear();
@@ -46,8 +50,7 @@ namespace CloudberryKingdom
 	{
 		for ( int i = 0; i < Quads.size(); i++ )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( Quads[ i ].Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
+			if ( CompareIgnoreCase( Quads[ i ].Name, name ) == 0 )
 				return i;
 		}
 
@@ -80,7 +83,7 @@ namespace CloudberryKingdom
 
 		if ( !BoxesOnly )
 		{
-			Quads = std::vector<SimpleQuad>( obj->Quads.size() );
+			Quads = std::vector<std::shared_ptr<SimpleQuad> >( obj->Quads.size() );
 			for ( int i = 0; i < obj->Quads.size(); i++ )
 				Quads[ i ] = SimpleQuad( obj->Quads[ i ] );
 		}
@@ -89,7 +92,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < obj->Boxes.size(); i++ )
 			Boxes[ i ] = std::make_shared<SimpleBox>( obj->Boxes[ i ] );
 
-		AnimQueue = std::queue<AnimQueueEntry*>();
+		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
 		std::vector<AnimQueueEntry*> array_Renamed = obj->AnimQueue.ToArray();
 		if ( array_Renamed.size() > 0 )
 		{
@@ -107,7 +110,8 @@ namespace CloudberryKingdom
 		if ( DeepCopy )
 		{
 			AnimLength = std::vector<int>( 50 );
-			obj->AnimLength.CopyTo( AnimLength, 0 );
+			AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
+			//obj->AnimLength.CopyTo( AnimLength, 0 );
 			AnimSpeed = std::vector<float>( 50 );
 			obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
 			AnimName = std::vector<std::wstring*>( 50 );

@@ -42,14 +42,14 @@ namespace CloudberryKingdom
 	class SimpleObject
 	{
 	public:
-		std::vector<SimpleQuad> Quads;
-		std::vector<SimpleBox*> Boxes;
+		std::vector<std::shared_ptr<SimpleQuad> > Quads;
+		std::vector<std::shared_ptr<SimpleBox> > Boxes;
 		BasePoint Base;
 
 		bool xFlip, yFlip, CenterFlipOnBox;
 		Vector2 FlipCenter;
 
-		std::queue<AnimQueueEntry*> AnimQueue;
+		std::queue<std::shared_ptr<AnimQueueEntry> > AnimQueue;
 		std::shared_ptr<AnimQueueEntry> LastAnimEntry;
 		std::vector<int> AnimLength;
 		std::vector<std::wstring> AnimName;
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		int anim, OldAnim;
 		float t, OldT, StartT;
 
-		std::vector<EzEffect*> MyEffects;
+		std::vector<std::shared_ptr<EzEffect> > MyEffects;
 
 		bool Released;
 
