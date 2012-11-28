@@ -39,6 +39,11 @@ public:
 	{
 		return 0;
 	}
+
+	unsigned char PeekChar()
+	{
+		return 0;
+	}
 };
 
 #endif

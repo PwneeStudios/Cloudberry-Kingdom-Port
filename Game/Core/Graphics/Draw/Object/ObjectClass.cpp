@@ -1,15 +1,11 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
 int ObjectClass::ObjectClassVersionNumber = 54;
 
-	const bool &ObjectClass::getDonePlaying() const
+	bool ObjectClass::getDonePlaying() const
 	{
 		return AnimQueue.empty();
 	}
@@ -17,26 +13,29 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	void ObjectClass::Release()
 	{
 		if ( ObjectRenderTarget != 0 && OriginalRenderTarget )
-			delete ObjectRenderTarget;
+			ObjectRenderTarget.reset();
+			//delete ObjectRenderTarget;
 
 		ContainedQuad->Release();
 		ParentQuad->Release();
 
 		if ( QuadList.size() > 0 )
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
 			( *quad )->Release();
 		}
 		QuadList.clear();
 
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 			( *box )->Release();
 		BoxList.clear();
 
 		QuadList.clear();
 		BoxList.clear();
 
-		AnimQueue.clear();
+		std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+		std::swap( AnimQueue, empty );
+//		AnimQueue.clear();
 		AnimLength.clear();
 		AnimName.clear();
 		AnimSpeed.clear();
@@ -66,38 +65,39 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		writer->Write( VersionNumber );
 
 		// Anim data
-		writer->Write( AnimLength.size() );
-		for ( int i = 0; i < AnimLength.size(); i++ )
+		writer->Write( static_cast<int>( AnimLength.size() ) );
+		for ( size_t i = 0; i < AnimLength.size(); i++ )
 			writer->Write( AnimLength[ i ] );
 
-		writer->Write( AnimName.size() );
-		for ( int i = 0; i < AnimName.size(); i++ )
+		writer->Write( static_cast<int>( AnimName.size() ) );
+		for ( size_t i = 0; i < AnimName.size(); i++ )
 			writer->Write( AnimName[ i ] );
 
-		writer->Write( AnimSpeed.size() );
-		for ( int i = 0; i < AnimSpeed.size(); i++ )
+		writer->Write( static_cast<int>( AnimSpeed.size() ) );
+		for ( size_t i = 0; i < AnimSpeed.size(); i++ )
 			writer->Write( AnimSpeed[ i ] );
 
 		// Write number of quads and their type
-		writer->Write( QuadList.size() );
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		writer->Write( static_cast<int>( QuadList.size() ) );
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
-			if ( dynamic_cast<Quad*>( *quad ) != 0 )
+			if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
 				writer->Write( 0 );
 			else
 				writer->Write( 1 );
 		}
 
 		// Write each quad's data
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
 			( *quad )->Write( writer );
 		}
 
 		// Boxes
-		writer->Write( BoxList.size() );
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
-			( *box )->Write( writer, this );
+		writer->Write( static_cast<int>( BoxList.size() ) );
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+			( *box )->Write( writer, this->shared_from_this() );
+		// FIXME: Maybe shared from this will be broken.
 	}
 
 	void ObjectClass::ReadFile( const std::shared_ptr<EzReader> &reader )
@@ -121,7 +121,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 			AnimLength[ i ] = reader->ReadInt32();
 
 		length = reader->ReadInt32();
-		AnimName = std::vector<std::wstring*>( length );
+		AnimName = std::vector<std::wstring>( length );
 		for ( int i = 0; i < length; i++ )
 			AnimName[ i ] = reader->ReadString();
 
@@ -148,7 +148,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		}
 
 		// Load the quad data
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
 			( *quad )->Read( reader, EffectWad, TextureWad, VersionNumber );
 		}
@@ -158,7 +158,8 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		for ( int i = 0; i < n; i++ )
 		{
 			std::shared_ptr<ObjectBox> NewBox = std::make_shared<ObjectBox>();
-			NewBox->Read( reader, this, VersionNumber );
+			// FIXME: Shared pointer from this?
+			NewBox->Read( reader, this->shared_from_this(), VersionNumber );
 			AddBox( NewBox );
 		}
 
@@ -175,7 +176,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	std::vector<ObjectVector*> ObjectClass::GetObjectVectors()
 	{
 		std::vector<ObjectVector*> L = std::vector<ObjectVector*>();
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 			L.AddRange( ( *quad )->GetObjectVectors() );
 		return L;
 	}
@@ -187,12 +188,12 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 			return;
 
 		if ( MyEffects.empty() )
-			MyEffects = std::vector<EzEffect*>();
+			MyEffects = std::vector<std::shared_ptr<EzEffect> >();
 		else
 			MyEffects.clear();
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-			if ( !std::find( MyEffects.begin(), MyEffects.end(), (*quad)->MyEffect ) != MyEffects.end() )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			if ( std::find( MyEffects.begin(), MyEffects.end(), (*quad)->MyEffect ) == MyEffects.end() )
 				MyEffects.push_back( ( *quad )->MyEffect );
 	}
 
@@ -200,7 +201,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	{
 		Vector2 BL = Vector2( 10000000, 10000000 );
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
 			BL = Vector2::Min( BL, ( *quad )->BL() );
 		}
@@ -212,7 +213,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	{
 		Vector2 TR = Vector2( -10000000, -10000000 );
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
 			TR = Vector2::Max( TR, ( *quad )->TR() );
 		}
@@ -244,9 +245,9 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		LastAnimEntry = NewEntry;
 	}
 
-	void ObjectClass::ImportAnimData( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<BaseQuad*> &SourceQuads, std::vector<std::wstring> &SourceAnims )
+	void ObjectClass::ImportAnimData( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims )
 	{
-		for ( std::vector<BaseQuad*>::const_iterator SourceQuad = SourceQuads.begin(); SourceQuad != SourceQuads.end(); ++SourceQuad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator SourceQuad = SourceQuads.begin(); SourceQuad != SourceQuads.end(); ++SourceQuad )
 		{
 			// Find the corresponding quad
 			std::shared_ptr<BaseQuad> quad = FindQuad( ( *SourceQuad )->Name );
@@ -265,9 +266,9 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		}
 	}
 
-	void ObjectClass::ImportAnimDataShallow( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<BaseQuad*> &SourceQuads, std::vector<std::wstring> &SourceAnims )
+	void ObjectClass::ImportAnimDataShallow( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims )
 	{
-		for ( std::vector<BaseQuad*>::const_iterator SourceQuad = SourceQuads.begin(); SourceQuad != SourceQuads.end(); ++SourceQuad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator SourceQuad = SourceQuads.begin(); SourceQuad != SourceQuads.end(); ++SourceQuad )
 		{
 			// Find the corresponding quad
 			std::shared_ptr<BaseQuad> quad = FindQuad( ( *SourceQuad )->Name );
@@ -288,18 +289,16 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 	bool ObjectClass::HasAnim( const std::wstring &name )
 	{
-		for ( int i = 0; i < AnimName.size(); i++ )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( name, AnimName[ i ], StringComparison::OrdinalIgnoreCase ) == 0 )
+		for ( size_t i = 0; i < AnimName.size(); i++ )
+			if ( CompareIgnoreCase( name, AnimName[ i ] ) == 0 )
 				return true;
 		return false;
 	}
 
 	int ObjectClass::FindAnim( const std::wstring &name )
 	{
-		for ( int i = 0; i < AnimName.size(); i++ )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( name, AnimName[ i ], StringComparison::OrdinalIgnoreCase ) == 0 )
+		for ( size_t i = 0; i < AnimName.size(); i++ )
+			if ( CompareIgnoreCase( name, AnimName[ i ] ) == 0 )
 				return i;
 		return 0;
 	}
@@ -339,9 +338,13 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	void ObjectClass::EnqueueAnimation( int _anim, float startT, bool loop, bool clear, bool KeepTransfers, float TransferSpeed )
 	{
 		if ( clear )
-			AnimQueue.clear();
+		{
+			std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+			std::swap( AnimQueue, empty );
+			//AnimQueue.clear();
+		}
 
-		EnqueueTransfer( _anim, startT,.5f * TransferSpeed, loop, KeepTransfers );
+		EnqueueTransfer( _anim, startT, .5f * TransferSpeed, loop, KeepTransfers );
 
 		std::shared_ptr<AnimQueueEntry> NewEntry = std::make_shared<AnimQueueEntry>();
 		NewEntry->anim = _anim;
@@ -379,7 +382,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	{
 		this->t = t;
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 			( *quad )->Calc( anim, t, AnimLength[ anim ], Loop, false );
 	}
 
@@ -420,8 +423,8 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 				if ( AnimQueue.size() > 0 )
 				{
 					std::shared_ptr<AnimQueueEntry> Next = AnimQueue.front();
-					if ( Next_ANIM == anim )
-						Next_START_T = CurAnimQueueEntry->DestT;
+					if ( Next->anim == anim )
+						Next->StartT = CurAnimQueueEntry->DestT;
 				}
 
 				t = 1;
@@ -452,7 +455,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 					}
 					if ( t > AnimLength[ anim ] )
 					{
-						t = AnimLength[ anim ];
+						t = static_cast<float>( AnimLength[ anim ] );
 						AnimQueue.pop();
 					}
 				}
@@ -462,20 +465,20 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		if ( CurAnimQueueEntry->Type == AnimQueueEntryType_PLAY )
 		{
 			if ( !BoxesOnly && QuadList.size() > 0 )
-				for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				{
 					( *quad )->UpdateSpriteAnim = DoSpriteAnim;
 					( *quad )->Calc( anim, t, AnimLength[ anim ], Loop, Linear );
 				}
-			for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+			for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 				( *box )->Calc( anim, t, AnimLength[ anim ], Loop, Linear );
 		}
 		else
 		{
 			if ( !BoxesOnly && QuadList.size() > 0 )
-				for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 					( *quad )->Transfer( anim, CurAnimQueueEntry->DestT, AnimLength[ anim ], CurAnimQueueEntry->Loop, Linear, t );
-			for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+			for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 				( *box )->Transfer( anim, CurAnimQueueEntry->DestT, AnimLength[ anim ], CurAnimQueueEntry->Loop, Linear, t );
 		}
 	}
@@ -483,9 +486,9 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	void ObjectClass::SetHold()
 	{
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				( *quad )->SetHold();
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 			( *box )->SetHold();
 	}
 
@@ -496,10 +499,10 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		{
 			AnimLength[ anim ]--;
 
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
 					( *point )->AnimData.DeleteFrame( anim, frame );
-			for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+			for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
 					( *point )->AnimData.DeleteFrame( anim, frame );
 		}
@@ -513,10 +516,10 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		{
 			AnimLength[ anim ]++;
 
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
 					( *point )->AnimData.InsertFrame( anim, frame );
-			for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+			for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
 					( *point )->AnimData.InsertFrame( anim, frame );
 		}
@@ -525,10 +528,10 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 	void ObjectClass::Record( int anim, int frame, bool UseRelativeCoords )
 	{
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 			( *quad )->Record( anim, frame, UseRelativeCoords );
 
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 			( *box )->Record( anim, frame, UseRelativeCoords );
 	}
 
@@ -541,35 +544,35 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	void ObjectClass::Read_NoTexture( int anim, int frame )
 	{
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				if ( dynamic_cast<Quad*>( *quad ) != 0 )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+				if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
 					( *quad )->UpdateSpriteAnim = false;
 
 		ReadQuadData( anim, frame );
 		ReadBoxData( anim, frame );
 
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				if ( dynamic_cast<Quad*>( *quad ) != 0 )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+				if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
 					( *quad )->UpdateSpriteAnim = DoSpriteAnim;
 	}
 
 	void ObjectClass::ReadQuadData( int anim, int frame )
 	{
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				( *quad )->ReadAnim( anim, frame );
 	}
 
 	void ObjectClass::ReadBoxData( int anim, int frame )
 	{
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 			( *box )->ReadAnim( anim, frame );
 	}
 
 	void ObjectClass::FinishLoading()
 	{
-		FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PresentationParameters, 0, 0, true );
+		FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, 0, 0, true );
 	}
 
 	void ObjectClass::FinishLoading( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height )
@@ -582,7 +585,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		QDrawer = Drawer;
 		ParentQuad->FinishLoading( device, TexWad, EffectWad );
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				( *quad )->FinishLoading( device, TexWad, EffectWad, UseNames );
 
 		if ( Width > 0 && Height > 0 )
@@ -592,7 +595,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	ObjectClass::ObjectClass()
 	{
 		InitializeInstanceFields();
-		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, 0, 0, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
 	}
 
 	ObjectClass::ObjectClass( const std::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
@@ -616,12 +619,20 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 		LoadingRunSpeed = obj->LoadingRunSpeed;
 
-		AnimQueue = std::queue<AnimQueueEntry*>();
-		std::vector<AnimQueueEntry*> array_Renamed = obj->AnimQueue.ToArray();
+		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		while( !QueueCopy.empty() )
+		{
+			array_Renamed.push_back( QueueCopy.front() );
+			QueueCopy.pop();
+		}
+
+		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
 			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
-			for ( int i = 0; i < array_Renamed.size() - 1; i++ )
+			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
 				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			AnimQueue.push( LastAnimEntry );
 		}
@@ -641,13 +652,14 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		// Add quads and boxes            
 		if ( !BoxesOnly )
 		{
-			QuadList = std::vector<BaseQuad*>();
+			QuadList = std::vector<std::shared_ptr<BaseQuad> >();
 
-			for ( std::vector<BaseQuad*>::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
 			{
-				if ( dynamic_cast<Quad*>( *quad ) != 0 )
+				if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
 				{
-					std::shared_ptr<Quad> nquad = std::make_shared<Quad>( static_cast<Quad*>( *quad ), DeepClone );
+					// FIXME: Check static_pointer_cast.
+					std::shared_ptr<Quad> nquad = std::make_shared<Quad>( std::static_pointer_cast<Quad>( *quad ), DeepClone );
 					QuadList.push_back( nquad );
 					nquad->ParentObject = this;
 					if ( ( *quad )->ParentQuad == ( *quad )->ParentObject->ParentQuad )
@@ -657,41 +669,52 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		}
 
 		// Clone boxes
-		BoxList = std::vector<ObjectBox*>();
-		for ( std::vector<ObjectBox*>::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
+		BoxList = std::vector<std::shared_ptr<ObjectBox> >();
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
 			BoxList.push_back( std::make_shared<ObjectBox>( *box, DeepClone ) );
 
 
 		// Make sure pointers match up
 		if ( !BoxesOnly && QuadList.size() > 0 )
 		{
-			for ( int i = 0; i < obj->QuadList.size(); i++ )
+			for ( size_t i = 0; i < obj->QuadList.size(); i++ )
 			{
 				// Preserve Parent-Point relationship (for quads attached to splines)
-				if ( dynamic_cast<Quad*>( obj->QuadList[ i ] ) != 0 )
+				if ( dynamic_cast<Quad*>( obj->QuadList[ i ].get() ) != 0 )
 				{
-					std::shared_ptr<BaseQuad> parent = ( static_cast<Quad*>( obj->QuadList[ i ] ) )->Center->ParentQuad;
+					// FIXME: Check static_pointer_cast.
+					std::shared_ptr<BaseQuad> parent = ( std::static_pointer_cast<Quad>( obj->QuadList[ i ] ) )->Center->ParentQuad;
 					if ( parent != 0 )
 					{
 						if ( parent == obj->ParentQuad )
-							( static_cast<Quad*>( QuadList[ i ] ) )->Center->ParentQuad = ParentQuad;
+							( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = ParentQuad;
 						else
 						{
-							int j = obj->QuadList.find( static_cast<BaseQuad*>( parent ) );
-							( static_cast<Quad*>( QuadList[ i ] ) )->Center->ParentQuad = QuadList[ j ];
+							//int j = obj->QuadList.find( static_cast<BaseQuad*>( parent ) );
+							// FIXME: Check indexing O_O.
+							std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), parent );
+							( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = QuadList[ j - QuadList.begin() ];
 						}
 					}
 				}
 
 				// Preserve Parent-Child quad relationship
 				if ( obj->QuadList[ i ]->ParentQuad != obj->ParentQuad )
-					( static_cast<Quad*>( QuadList[ obj->QuadList.find( obj->QuadList[ i ]->ParentQuad ) ] ) )->AddQuadChild( QuadList[ i ] );
+				{
+					// FIXME: Check indexing here too.
+					std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->QuadList[ i ]->ParentQuad );
+					( std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] ) )->AddQuadChild( QuadList[ i ] );
+				}
 			}
 		}
-		for ( int i = 0; i < obj->BoxList.size(); i++ )
+		for ( size_t i = 0; i < obj->BoxList.size(); i++ )
 		{
 			if ( !BoxesOnly && obj->BoxList[ i ]->BL->ParentQuad != obj->ParentQuad )
-				BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = static_cast<Quad*>( QuadList[ obj->QuadList.find( obj->BoxList[ i ]->BL->ParentQuad ) ] );
+			{
+				// FIXME: Check indexing and pointer cast.
+				std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->BoxList[ i ]->BL->ParentQuad );
+				BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] );
+			}
 			else
 				BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = ParentQuad;
 		}
@@ -703,11 +726,16 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		t = obj->t;
 
 		AnimLength = std::vector<int>( 50 );
-		obj->AnimLength.CopyTo( AnimLength, 0 );
+		//obj->AnimLength.CopyTo( AnimLength, 0 );
+		AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
+
 		AnimSpeed = std::vector<float>( 50 );
-		obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-		AnimName = std::vector<std::wstring*>( 50 );
-		obj->AnimName.CopyTo( AnimName, 0 );
+		//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
+		AnimSpeed.assign( obj->AnimSpeed.begin(), obj->AnimSpeed.end() );
+
+		AnimName = std::vector<std::wstring>( 50 );
+		//obj->AnimName.CopyTo( AnimName, 0 );
+		AnimName.assign( obj->AnimName.begin(), obj->AnimName.end() );
 
 		QDrawer = obj->QDrawer;
 
@@ -719,20 +747,20 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	ObjectClass::ObjectClass( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
 	{
 		InitializeInstanceFields();
-		ObjectClassInit( Drawer, device, device->PresentationParameters, 0, 0, BaseEffect, BaseTexture );
+		ObjectClassInit( Drawer, device, device->PP, 0, 0, BaseEffect, BaseTexture );
 	}
 
 	ObjectClass::ObjectClass( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
 	{
 		InitializeInstanceFields();
-		ObjectClassInit( Drawer, device, device->PresentationParameters, Width, Height, BaseEffect, BaseTexture );
+		ObjectClassInit( Drawer, device, device->PP, Width, Height, BaseEffect, BaseTexture );
 	}
 
 	void ObjectClass::ObjectClassInit( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
 	{
 		VersionNumber = ObjectClassVersionNumber;
 
-		AnimQueue = std::queue<AnimQueueEntry*>();
+		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
 
 		CenterFlipOnBox = true;
 
@@ -741,12 +769,12 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		ParentQuad->MyEffect = BaseEffect;
 		ParentQuad->MyTexture = BaseTexture;
 
-		QuadList = std::vector<BaseQuad*>();
-		BoxList = std::vector<ObjectBox*>();
+		QuadList = std::vector<std::shared_ptr<BaseQuad> >();
+		BoxList = std::vector<std::shared_ptr<ObjectBox> >();
 
 		AnimLength = std::vector<int>( 50 );
 		AnimSpeed = std::vector<float>( 50 );
-		AnimName = std::vector<std::wstring*>( 50 );
+		AnimName = std::vector<std::wstring>( 50 );
 		for ( int i = 0; i < 50; i++ )
 		{
 			AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
@@ -764,7 +792,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	void ObjectClass::MakeRenderTargetUnique( int width, int height )
 	{
 		if ( !OriginalRenderTarget )
-			InitRenderTargets( Tools::Device, Tools::Device->PresentationParameters, width, height );
+			InitRenderTargets( Tools::Device, Tools::Device->PP, width, height );
 	}
 
 	void ObjectClass::InitRenderTargets( const std::shared_ptr<ObjectClass> &obj )
@@ -784,32 +812,23 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		DrawWidth = Width;
 		DrawHeight = Height;
 
-		ObjectRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, RenderTargetUsage::DiscardContents );
+		ObjectRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-		ToTextureRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, RenderTargetUsage::DiscardContents );
-	}
-
-	std::vector<BaseQuad*> ObjectClass::FindQuads( ... )
-	{
-		std::vector<BaseQuad*> list = std::vector<BaseQuad*>();
-		for ( unknown::const_iterator name = names.begin(); name != names.end(); ++name )
-			list.push_back( FindQuad( *name ) );
-		return list;
+		ToTextureRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 	}
 
 	std::shared_ptr<BaseQuad> ObjectClass::FindQuad( const std::wstring &name )
 	{
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *quad )->Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
-				return quad;
+			if ( CompareIgnoreCase( ( *quad )->Name, name ) == 0 )
+				return *quad;
 		}
 
 		return 0;
 	}
 
-	void ObjectClass::AddToNewList( std::vector<BaseQuad*> &NewList, const std::shared_ptr<BaseQuad> &quad )
+	void ObjectClass::AddToNewList( std::vector<std::shared_ptr<BaseQuad> > &NewList, const std::shared_ptr<BaseQuad> &quad )
 	{
 		if ( quad == ParentQuad || std::find( NewList.begin(), NewList.end(), quad ) != NewList.end() )
 			return;
@@ -820,9 +839,9 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 	void ObjectClass::Sort()
 	{
-		std::vector<BaseQuad*> NewList = std::vector<BaseQuad*>();
+		std::vector<std::shared_ptr<BaseQuad> > NewList = std::vector<std::shared_ptr<BaseQuad> >();
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 			AddToNewList( NewList, *quad );
 		QuadList = NewList;
 	}
@@ -852,13 +871,13 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 	void ObjectClass::SetColor( Color color )
 	{
-		for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 			( *quad )->SetColor( color );
 	}
 
 	void ObjectClass::UpdateBoxes()
 	{
-		for ( std::vector<ObjectBox*>::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
+		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
 			( *box )->Update();
 	}
 
@@ -870,7 +889,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 		if ( !BoxesOnly && QuadList.size() > 0 )
 		{
-			for ( std::vector<BaseQuad*>::const_iterator _quad = QuadList.begin(); _quad != QuadList.end(); ++_quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator _quad = QuadList.begin(); _quad != QuadList.end(); ++_quad )
 				( *_quad )->Update();
 		}
 
@@ -910,24 +929,27 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		if ( quad->ParentQuad != 0 )
 			quad->ParentQuad->RemoveQuadChild( quad, false );
 
-		if ( dynamic_cast<Quad*>( quad ) != 0 )
+		if ( dynamic_cast<Quad*>( quad.get() ) != 0 )
 		{
-			std::vector<BaseQuad*> ChildQuads = std::vector<BaseQuad*>( ( static_cast<Quad*>( quad ) )->Children );
-			for ( std::vector<BaseQuad*>::const_iterator child_quad = ChildQuads.begin(); child_quad != ChildQuads.end(); ++child_quad )
-				( static_cast<Quad*>( quad ) )->RemoveQuadChild( *child_quad );
+			// FIXME: Check static_pointer_cast.
+			std::vector<std::shared_ptr<BaseQuad> > ChildQuads = std::vector<std::shared_ptr<BaseQuad> >( ( std::static_pointer_cast<Quad>( quad ) )->Children );
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator child_quad = ChildQuads.begin(); child_quad != ChildQuads.end(); ++child_quad )
+				( std::static_pointer_cast<Quad>( quad ) )->RemoveQuadChild( *child_quad );
 		}
 
-		QuadList.Remove( quad );
+		std::vector<std::shared_ptr<BaseQuad> >::iterator i = std::remove( QuadList.begin(), QuadList.end(), quad );
+		QuadList.erase( i, QuadList.end() );
+		//QuadList.Remove( quad );
 	}
 
 	void ObjectClass::ContainedDraw()
 	{
 		if ( BoxList.size() > 0 )
 		{
-			float scalex = ( BoxList[ 0 ]->TR->Pos->X - BoxList[ 0 ]->BL->Pos->X ) / 2;
-			float scaley = ( BoxList[ 0 ]->TR->Pos->Y - BoxList[ 0 ]->BL->Pos->Y ) / 2;
-			float locx = ( BoxList[ 0 ]->TR->Pos->X + BoxList[ 0 ]->BL->Pos->X ) / 2;
-			float locy = ( BoxList[ 0 ]->TR->Pos->Y + BoxList[ 0 ]->BL->Pos->Y ) / 2;
+			float scalex = ( BoxList[ 0 ]->TR->Pos.X - BoxList[ 0 ]->BL->Pos.X ) / 2;
+			float scaley = ( BoxList[ 0 ]->TR->Pos.Y - BoxList[ 0 ]->BL->Pos.Y ) / 2;
+			float locx = ( BoxList[ 0 ]->TR->Pos.X + BoxList[ 0 ]->BL->Pos.X ) / 2;
+			float locy = ( BoxList[ 0 ]->TR->Pos.Y + BoxList[ 0 ]->BL->Pos.Y ) / 2;
 			if ( xFlip )
 				locx = FlipCenter.X - ( locx - FlipCenter.X );
 			if ( yFlip )
@@ -954,14 +976,14 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 			Update( 0 );
 
 		if ( ( xFlip || yFlip ) && !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
-				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1 : -1, yFlip ? 1 : -1 ) );
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1.f : -1.f, yFlip ? 1.f : -1.f ) );
 		if ( xFlip || yFlip )
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 				( *fx )->FlipCenter->SetValue( FlipCenter );
 
 		if ( !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<BaseQuad*>::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
 				( *quad )->Draw();
 
 		// Extra quad to draw. Pretty fucking leaky hack.
@@ -978,19 +1000,19 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		QDrawer->Flush();
 
 		if ( ( xFlip || yFlip ) && !BoxesOnly && QuadList.size() > 0 )
-			for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 				( *fx )->FlipVector->SetValue( Vector2( -1, -1 ) );
 	}
 
 	std::shared_ptr<SpriteAnim> ObjectClass::AnimToSpriteFrames( int anim, int NumFrames, bool Loop, Vector2 Padding )
 	{
-		return AnimToSpriteFrames( anim, NumFrames, Loop, 0, AnimLength[ anim ], Padding );
+		return AnimToSpriteFrames( anim, NumFrames, Loop, 0, static_cast<float>( AnimLength[ anim ] ), Padding );
 	}
 
 	std::shared_ptr<SpriteAnim> ObjectClass::AnimToSpriteFrames( int anim, int NumFrames, bool Loop, float StartT, float EndT, Vector2 Padding )
 	{
 		std::shared_ptr<SpriteAnim> Sprites = std::make_shared<SpriteAnim>();
-		Sprites->Frames = std::vector<Texture2D*>( NumFrames );
+		Sprites->Frames = std::vector<std::shared_ptr<Texture2D> >( NumFrames );
 
 		if ( NumFrames <= 1 )
 			Sprites->dt = 1;
@@ -1022,26 +1044,26 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 		device->SetRenderTarget( ToTextureRenderTarget );
 		device->Clear( Color::Transparent );
-		for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			( *fx )->effect->CurrentTechnique = ( *fx )->Simplest;
-		float scalex = Padding.X + ( BoxList[ 0 ]->TR->Pos->X - BoxList[ 0 ]->BL->Pos->X ) / 2;
-		float scaley = Padding.Y + ( BoxList[ 0 ]->TR->Pos->Y - BoxList[ 0 ]->BL->Pos->Y ) / 2;
-		float posx = ( BoxList[ 0 ]->TR->Pos->X + BoxList[ 0 ]->BL->Pos->X ) / 2;
-		float posy = ( BoxList[ 0 ]->TR->Pos->Y + BoxList[ 0 ]->BL->Pos->Y ) / 2;
+		float scalex = Padding.X + ( BoxList[ 0 ]->TR->Pos.X - BoxList[ 0 ]->BL->Pos.X ) / 2;
+		float scaley = Padding.Y + ( BoxList[ 0 ]->TR->Pos.Y - BoxList[ 0 ]->BL->Pos.Y ) / 2;
+		float posx = ( BoxList[ 0 ]->TR->Pos.X + BoxList[ 0 ]->BL->Pos.X ) / 2;
+		float posy = ( BoxList[ 0 ]->TR->Pos.Y + BoxList[ 0 ]->BL->Pos.Y ) / 2;
 		if ( xFlip )
 			posx = FlipCenter.X - ( posx - FlipCenter.X );
 		if ( yFlip )
 			posy = FlipCenter.Y - ( posy - FlipCenter.Y );
 
 		EffectWad->SetCameraPosition( Vector4( posx, posy, 1 / scalex, 1 / scaley ) );
-		for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			( *fx )->xCameraAspect->SetValue( 1 );
 		ContainedDraw();
 		device->SetRenderTarget( Tools::DestinationRenderTarget );
 		Tools::Render->ResetViewport();
 
 		EffectWad->SetCameraPosition( HoldCameraPos );
-		for ( std::vector<EzEffect*>::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			( *fx )->xCameraAspect->SetValue( HoldCameraAspect );
 
 		std::shared_ptr<Texture2D> tex = ToTextureRenderTarget;

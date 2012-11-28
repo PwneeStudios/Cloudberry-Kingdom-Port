@@ -32,6 +32,8 @@ class Effect
 
 public:
 
+	std::shared_ptr<class EffectTechnique> CurrentTechnique;
+
 	// FIXME: Implement.
 	std::shared_ptr<class EffectParameter> Parameters( const std::wstring &name )
 	{
@@ -60,6 +62,19 @@ public:
 	{
 	}
 
+	void SetValue( const Vector2 &v )
+	{
+	}
+
+	void SetValue( float v )
+	{
+	}
+
+	float GetValueSingle()
+	{
+		return 0.f;
+	}
+
 };
 
 class EffectTechnique
@@ -70,7 +85,24 @@ class FileStream;
 class Game { };
 class GamePadState { };
 class GameTime;
-class GraphicsDevice;
+
+class GraphicsDevice
+{
+
+public:
+
+	std::shared_ptr<class PresentationParameters> PP;
+
+	void SetRenderTarget( const std::shared_ptr<class RenderTarget2D> &rt )
+	{
+	}
+
+	void Clear( const Color &color)
+	{
+	}
+
+};
+
 class GraphicsDeviceManager;
 class IAsyncResult;
 class KeyboardState { };
@@ -78,9 +110,59 @@ template<class T> class LinkedListNode;
 class MouseState { };
 class Object;
 class PreparingDeviceSettingsEventArgs;
-class PresentationParameters;
+
+class PresentationParameters
+{
+
+public:
+
+	int BackBufferFormat;
+	int DepthStencilFormat;
+	int MultiSampleCount;
+
+};
+
 class Random;
-class RenderTarget2D;
+
+// Can't alphabetize this :(
+class Texture2D
+{
+public:
+
+	int Width;
+
+	int Height;
+
+	Texture2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height )
+	{
+	}
+
+	// FIXME: Implement this.
+	void Dispose() { }
+
+	template<class T>
+	void GetData( std::vector<T> &data )
+	{
+	}
+
+	template<class T>
+	void SetData( std::vector<T> &data )
+	{
+	}
+};
+
+class RenderTarget2D : public Texture2D
+{
+
+public:
+
+	RenderTarget2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height, bool mipmap, int surfaceFormat, int depthFormat, int sampleCount, bool discard ) :
+		Texture2D( device, width, height )
+	{
+	}
+
+};
+
 struct Rectangle { int X; int Y; int Width; int Height; };
 class SamplerState;
 class SignedInEventArgs;
@@ -94,13 +176,6 @@ class StorageDevice;
 class StreamReader;
 class StreamWriter;
 class StringBuilder;
-
-class Texture2D
-{
-public:
-	// FIXME: Implement this.
-	void Dispose() { } 
-};
 
 class Thread;
 template<class A, class B> class Tuple;

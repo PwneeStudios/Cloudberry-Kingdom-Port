@@ -3,57 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectVector;
-}
-
-namespace CloudberryKingdom
-{
-	class BaseQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTextureWad;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class GraphicsDevice;
-			}
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class QuadDrawer;
-}
-
-
 namespace CloudberryKingdom
 {
 	class Quad : public BaseQuad
@@ -95,7 +44,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<ObjectVector> Center, xAxis, yAxis;
 		std::vector<ObjectVector*> Corner;
 
-		std::vector<BaseQuad*> Children;
+		std::vector<std::shared_ptr<BaseQuad> > Children;
 
 		virtual void Release();
 
@@ -187,6 +136,7 @@ namespace CloudberryKingdom
 
 		Vector2 CalcTRBound();
 
+		using BaseQuad::Update;
 		virtual void Update( float Expand );
 
 		virtual void Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v );

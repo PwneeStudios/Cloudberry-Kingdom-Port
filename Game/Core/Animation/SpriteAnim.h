@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	{
 	public:
 		float dt;
-		std::vector<Texture2D*> Frames;
+		std::vector<std::shared_ptr<Texture2D> > Frames;
 		Vector2 Padding;
 
 		void Release();

@@ -10,7 +10,8 @@ namespace CloudberryKingdom
 	public:
 		ObjectDrawOrder MyDrawOrder;
 
-		std::shared_ptr<ObjectClass> ParentObject;
+		// FIXME: Make weak_ptr later.
+		ObjectClass* ParentObject;
 		std::shared_ptr<Quad> ParentQuad;
 
 		std::vector<MyOwnVertexFormat> Vertices;
@@ -56,7 +57,7 @@ namespace CloudberryKingdom
 
 		virtual void Release();
 
-		void Update();
+		virtual void Update();
 		virtual void Update( float Expand );
 
 		virtual void SetHold();

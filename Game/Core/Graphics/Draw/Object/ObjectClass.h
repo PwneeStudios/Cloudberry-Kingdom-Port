@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectClass
+	class ObjectClass : public std::enable_shared_from_this<ObjectClass>
 	{
 	public:
 		float LoadingRunSpeed;
@@ -15,7 +15,6 @@ namespace CloudberryKingdom
 		Vector2 p2_Left;
 		Vector2 p1_Right;
 		Vector2 p2_Right;
-
 
 		static int ObjectClassVersionNumber;
 		int VersionNumber;
@@ -27,7 +26,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<EzEffect> MySkinEffect;
 
 		std::shared_ptr<Quad> ParentQuad;
-		std::vector<BaseQuad*> QuadList;
+		std::vector<std::shared_ptr<BaseQuad> > QuadList;
 
 	private:
 		std::shared_ptr<QuadDrawer> QDrawer;
@@ -40,11 +39,11 @@ namespace CloudberryKingdom
 		int DrawWidth, DrawHeight;
 
 	public:
-		std::vector<EzEffect*> MyEffects;
+		std::vector<std::shared_ptr<EzEffect> > MyEffects;
 
-		const bool &getDonePlaying() const;
+		bool getDonePlaying() const;
 
-		std::queue<AnimQueueEntry*> AnimQueue;
+		std::queue<std::shared_ptr<AnimQueueEntry> > AnimQueue;
 		std::shared_ptr<AnimQueueEntry> LastAnimEntry;
 		std::vector<int> AnimLength;
 		std::vector<std::wstring> AnimName;
@@ -53,7 +52,7 @@ namespace CloudberryKingdom
 		int anim, OldAnim;
 		float t, OldT, StartT;
 
-		std::vector<ObjectBox*> BoxList;
+		std::vector<std::shared_ptr<ObjectBox> > BoxList;
 
 		bool BoxesOnly;
 
@@ -82,9 +81,9 @@ namespace CloudberryKingdom
 		void EnqueueTransfer( int _anim, float _destT, float speed, bool DestLoop );
 		void EnqueueTransfer( int _anim, float _destT, float speed, bool DestLoop, bool KeepTransfers );
 
-		void ImportAnimData( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<BaseQuad*> &SourceQuads, std::vector<std::wstring> &SourceAnims );
+		void ImportAnimData( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
 
-		void ImportAnimDataShallow( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<BaseQuad*> &SourceQuads, std::vector<std::wstring> &SourceAnims );
+		void ImportAnimDataShallow( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
 
 		bool HasAnim( const std::wstring &name );
 		int FindAnim( const std::wstring &name );
@@ -155,13 +154,10 @@ namespace CloudberryKingdom
 		void InitRenderTargets( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height );
 
 	public:
-//ORIGINAL LINE: public List<BaseQuad> FindQuads(params string[] names)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		std::vector<BaseQuad*> FindQuads( ... );
 		std::shared_ptr<BaseQuad> FindQuad( const std::wstring &name );
 
 	private:
-		void AddToNewList( std::vector<BaseQuad*> &NewList, const std::shared_ptr<BaseQuad> &quad );
+		void AddToNewList( std::vector<std::shared_ptr<BaseQuad> > &NewList, const std::shared_ptr<BaseQuad> &quad );
 	public:
 		void Sort();
 

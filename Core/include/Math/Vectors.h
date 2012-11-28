@@ -52,6 +52,16 @@ public:
 		return v;
 	}
 
+	static Vector2 Min( const Vector2 &a, const Vector2 &b )
+	{
+		return Vector2( __min( a.X, b.X ), __min( a.Y, b.Y ) );
+	}
+
+	static Vector2 Max( const Vector2 &a, const Vector2 &b )
+	{
+		return Vector2( __max( a.X, b.X ), __max( a.Y, b.Y ) );
+	}
+
 	Vector2 &operator += ( const Vector2 &a )
 	{
 		X += a.x();

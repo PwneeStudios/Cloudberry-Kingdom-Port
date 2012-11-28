@@ -37,6 +37,7 @@ struct Color
 	}
 
 	static Color White;
+	static Color Transparent;
 };
 
 #endif
