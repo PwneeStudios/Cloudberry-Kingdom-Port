@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		
 		Loading = false;
 		LevelSeed->Loaded->setval( true );
-		LevelSeed->MyGame = std::static_pointer_cast<GameData>( shared_from_this() );
+		LevelSeed->MyGame = shared_from_this();
 
 		MyLevel = MakeEmptyLevel();
 	}
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		level->MyBackground = std::make_shared<RegularBackground>();
 		level->MyBackground->Init( level );
 
-		level->MyGame = std::static_pointer_cast<GameData>( shared_from_this() );
+		level->MyGame =  shared_from_this();
 
 		return level;
 	}

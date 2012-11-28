@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
-	class ActionGameData : public GameData, public std::enable_shared_from_this<ActionGameData>
+	class ActionGameData : public GameData
 	{
 	public:
 		static std::shared_ptr<GameFactory> Factory;

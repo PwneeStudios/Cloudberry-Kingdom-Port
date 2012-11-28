@@ -19,6 +19,11 @@ namespace CloudberryKingdom
 			return dict.size();
 		}
 
+		bool Has( T item )
+		{
+			return dict.find( item ) != dict.end();
+		}
+
 		bool operator []( T item )
 		{
 			return dict.find( item ) != dict.end();

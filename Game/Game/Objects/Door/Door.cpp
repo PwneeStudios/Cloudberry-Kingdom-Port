@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		setOnOpen( setOnEnter( ExtraPhsx = 0 ) );
 	}
 
-	const std::shared_ptr<Lambda_1<Door*> > &Door::getOnOpen() const
+	std::shared_ptr<Lambda_1<Door*> > &Door::getOnOpen() const
 	{
 		return _OnOpen;
 	}

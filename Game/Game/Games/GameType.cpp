@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 
 	float GameData::GetCampaignStatsScoreLambda::Apply( const std::shared_ptr<PlayerData> &p )
 	{
-		return p->CampaignStats->Score;
+		return static_cast<float>( p->CampaignStats->Score );
 	}
 
 	GameData::OpenDoorAndShowBobsLambda::OpenDoorAndShowBobsLambda( const std::shared_ptr<Level> &MyLevel, const std::shared_ptr<Door> &door, const std::shared_ptr<GameData> &game )
@@ -214,9 +214,8 @@ namespace CloudberryKingdom
 
 	void GameData::OpenDoorAndShowBobsLambda::Apply()
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel_->Bobs.begin(); bob != MyLevel_->Bobs.end(); ++bob )
-			( *bob )->Core->Show = false;
+		for ( BobVec::const_iterator bob = MyLevel_->Bobs.begin(); bob != MyLevel_->Bobs.end(); ++bob )
+			( *bob )->getCore()->Show = false;
 
 		Door_->SetLock( false, false, true );
 		Door_->MoveBobs();
@@ -249,15 +248,12 @@ namespace CloudberryKingdom
 	void GameData::DramaticEntryEnterLambda::Apply()
 	{
 		Door_->Shake( 19, 11, true );
-		for ( std::vector<Bob*>::const_iterator bob = Door_->getCore()->MyLevel->Bobs.begin(); bob != Door_->getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Door_->getCore()->MyLevel->Bobs.begin(); bob != Door_->getCore()->MyLevel->Bobs.end(); ++bob )
 		{
 			( *bob )->PlayerObject->EnqueueAnimation( 2, 0, false, true, false, 10 );
-			( *bob )->getCore()->Data->Velocity += DramaticEntryVel;
+			( *bob )->getCore()->Data.Velocity += DramaticEntryVel;
 		}
 	}
-
-std::map<std::wstring, GameFactory*> GameData::FactoryDict = std::map<std::wstring, GameFactory*> { { _T( "normal" ), NormalGameData::Factory } };
-int GameData::DataCounter = 0;
 
 	/*void GameData::KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e )
 	{
@@ -323,7 +319,7 @@ int GameData::DataCounter = 0;
 
 		// Switch to this game (may have been in a sub-game)
 		Tools::CurLevel = MyLevel;
-		Tools::CurGameData = this;
+		Tools::CurGameData = shared_from_this();
 
 		// Fade the music
 		if ( EndMusicOnFinish )
@@ -412,7 +408,7 @@ int GameData::DataCounter = 0;
 		return !SuppressQuickSpawn && !SuppressQuickSpawn_External;
 	}
 
-	const std::shared_ptr<Camera> &GameData::getCam() const
+	const std::shared_ptr<Camera> GameData::getCam() const
 	{
 		if ( MyLevel == 0 )
 			return 0;
@@ -424,7 +420,7 @@ int GameData::DataCounter = 0;
 		return MyLevel->getRnd();
 	}
 
-	const Vector2 &GameData::getCamPos() const
+	const Vector2 GameData::getCamPos() const
 	{
 		if ( MyLevel == 0 )
 			return Vector2();
@@ -460,8 +456,8 @@ int GameData::DataCounter = 0;
 
 	void GameData::RemoveGameObjects( GameObject::Tag tag )
 	{
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
-			if ( ( *obj )->Tags[ tag ] )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+			if ( ( *obj )->Tags->Has( tag ) )
 				( *obj )->Release();
 	}
 
@@ -469,14 +465,14 @@ int GameData::DataCounter = 0;
 	{
 		CoinScoreMultiplier = 1;
 		if ( OnCalculateCoinScoreMultiplier != 0 )
-			OnCalculateCoinScoreMultiplier->Apply( this );
+			OnCalculateCoinScoreMultiplier->Apply( shared_from_this() );
 	}
 
 	void GameData::CalculateScoreMultiplier()
 	{
 		ScoreMultiplier = 1;
 		if ( OnCalculateScoreMultiplier != 0 )
-			OnCalculateScoreMultiplier->Apply( this );
+			OnCalculateScoreMultiplier->Apply( shared_from_this() );
 	}
 
 	void GameData::CheckpointGrabEvent( const std::shared_ptr<ObjectBase> &Checkpoint_Renamed )
@@ -533,17 +529,17 @@ int GameData::DataCounter = 0;
 		getToDo().push_back(std::make_shared<ToDoItem>(std::make_shared<ConvertLambdaToLambdaFuncTrue>(FuncToDo), name, PauseOnPause, RemoveOnReset));
 	}
 
-	const std::vector<ToDoItem*> &GameData::getToDo() const
+	std::vector<std::shared_ptr<ToDoItem> > &GameData::getToDo() const
 	{
 		return CurToDo;
 	}
 
 	void GameData::DoToDoOnResetList()
 	{
-		std::vector<Lambda*> list = std::vector<Lambda*>( ToDoOnReset );
+		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnReset );
 		ToDoOnReset.clear();
 
-		for ( std::vector<Lambda*>::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
@@ -557,9 +553,11 @@ int GameData::CurItemStep = 0;
 		{
 			DoingToDoList = true;
 			NextToDo.clear();
-			NextToDo.AddRange( CurToDo );
+			//NextToDo.AddRange( CurToDo );
+			AddRange( NextToDo, CurToDo );
+
 			CurToDo.clear();
-			for ( std::vector<ToDoItem*>::const_iterator item = NextToDo.begin(); item != NextToDo.end(); ++item )
+			for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator item = NextToDo.begin(); item != NextToDo.end(); ++item )
 			{
 				// Skip deleted items
 				if ( ( *item )->getMarkedForDeletion() )
@@ -589,19 +587,16 @@ int GameData::CurItemStep = 0;
 
 	void GameData::KillToDo( const std::wstring &name )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ToDoItem*>::const_iterator todo = ToDoFindAll( name ).begin(); todo != ToDoFindAll(name).end(); ++todo )
+		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = ToDoFindAll( name ).begin(); todo != ToDoFindAll(name).end(); ++todo )
 			( *todo )->Delete();
 	}
 
-	std::vector<ToDoItem*> GameData::ToDoFindAll( const std::wstring &name )
+	std::vector<std::shared_ptr<ToDoItem> > GameData::ToDoFindAll( const std::wstring &name )
 	{
-		std::vector<ToDoItem*> l = std::vector<ToDoItem*>();
+		std::vector<std::shared_ptr<ToDoItem> > l = std::vector<std::shared_ptr<ToDoItem> >();
 
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ToDoItem*>::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *todo )->Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
+		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+			if ( CompareIgnoreCase( ( *todo )->Name, name ) == 0 )
 				l.push_back( *todo );
 
 		return l;
@@ -623,9 +618,10 @@ int GameData::CurItemStep = 0;
 			MyLevel->Release();
 		MyLevel.reset();
 
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			( *obj )->Release();
-		NewGameObjects = MyGameObjects.clear();
+		NewGameObjects.clear();
+		MyGameObjects.clear();
 
 		if ( FadeColor != 0 )
 			FadeColor->Release();
@@ -674,8 +670,8 @@ int GameData::CurItemStep = 0;
 
 		Loading = false;
 
-		CurToDo = std::vector<ToDoItem*>();
-		NextToDo = std::vector<ToDoItem*>();
+		CurToDo = std::vector<std::shared_ptr<ToDoItem> >();
+		NextToDo = std::vector<std::shared_ptr<ToDoItem> >();
 	}
 
 	void GameData::LockGameObjects( bool Lock )
@@ -683,17 +679,12 @@ int GameData::CurItemStep = 0;
 		// If unlocking add new GameObjects
 		if ( !Lock )
 		{
-			MyGameObjects.AddRange( NewGameObjects );
+			//MyGameObjects.AddRange( NewGameObjects );
+			AddRange( MyGameObjects, NewGameObjects );
 			NewGameObjects.clear();
 		}
 
 		GameObjectsAreLocked = Lock;
-	}
-
-	void GameData::AddGameObject( ... )
-	{
-		for ( unknown::const_iterator obj = list.begin(); obj != list.end(); ++obj )
-			AddGameObject( *obj );
 	}
 
 	void GameData::AddGameObject( const std::shared_ptr<GameObject> &obj )
@@ -706,7 +697,7 @@ int GameData::CurItemStep = 0;
 		if ( MyLevel != 0 )
 			MyLevel->AddObject( obj );
 
-		obj->MyGame = this;
+		obj->MyGame = shared_from_this();
 
 		obj->OnAdd();
 	}
@@ -735,7 +726,7 @@ int GameData::CurItemStep = 0;
 
 		PrevGame = Tools::CurGameData;
 
-		Tools::CurGameData = this;
+		Tools::CurGameData = shared_from_this();
 		Tools::CurLevel = MyLevel;
 	}
 
@@ -750,9 +741,9 @@ bool GameData::LockLevelStart = false;
 		// Remove players that have left
 		if ( MyLevel != 0 && MyLevel->Bobs.size() > 0 )
 		{
-			std::vector<Bob*> NewBobList = std::vector<Bob*>();
+			BobVec NewBobList = BobVec();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			{
 				if ( PlayerManager::Get( static_cast<int>( ( *bob )->MyPlayerIndex ) )->Exists )
 					NewBobList.push_back( *bob );
@@ -782,7 +773,7 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::ReviveAll()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			PlayerManager::RevivePlayer( ( *bob )->MyPlayerIndex );
 	}
 
@@ -814,9 +805,9 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::RevertCheckpoints()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = MyLevel->Objects.begin(); obj != MyLevel->Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = MyLevel->Objects.begin(); obj != MyLevel->Objects.end(); ++obj )
 		{
-			std::shared_ptr<Checkpoint> checkpoint = dynamic_cast<Checkpoint*>( *obj );
+			std::shared_ptr<Checkpoint> checkpoint = std::static_pointer_cast<Checkpoint>( *obj );
 			if ( 0 != checkpoint )
 				checkpoint->Revert();
 		}
@@ -835,15 +826,15 @@ bool GameData::LockLevelStart = false;
 	{
 		MyLevel->PieceAttempts = 0;
 
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			if ( !PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) )
 			{
 				PlayerManager::RevivePlayer( ( *bob )->MyPlayerIndex );
 				( *bob )->Dead = ( *bob )->Dying = false;
 
-				( *bob )->Init( false, ( *bob )->MyPiece->StartData[ ( *bob )->MyPieceIndex ], this );
-				( *bob )->Move( CheckpointBob->getCore()->Data.Position - (*bob)->getCore()->Data->Position );
+				( *bob )->Init( false, ( *bob )->MyPiece->StartData[ ( *bob )->MyPieceIndex ], shared_from_this() );
+				( *bob )->Move( CheckpointBob->getCore()->Data.Position - (*bob)->getCore()->Data.Position );
 
 				ParticleEffects::AddPop( MyLevel, ( *bob )->getCore()->Data->Position, 155 );
 			}
@@ -859,14 +850,14 @@ bool GameData::LockLevelStart = false;
 
 		// Remove marked todo items
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ToDoItem*>::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
 				( *todo )->MarkedForDeletion = true;
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ToDoItem*>::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
+		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
 				( *todo )->MarkedForDeletion = true;
@@ -878,7 +869,7 @@ bool GameData::LockLevelStart = false;
 		FreeReset = false;
 
 		// Revive all players
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			PlayerManager::RevivePlayer( ( *bob )->MyPlayerIndex );
 
 		// Clear the temporary stats
@@ -891,10 +882,10 @@ bool GameData::LockLevelStart = false;
 
 		if ( MyLevel != 0 && MyLevel->Bobs.size() > 0 )
 		{
-			std::vector<Bob*> NewBobList = std::vector<Bob*>();
+			BobVec NewBobList = BobVec();
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			{
 				if ( !PlayerManager::Get( static_cast<int>( ( *bob )->MyPlayerIndex ) )->Exists )
 				{
@@ -966,7 +957,7 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::UpdateBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			( *bob )->Release();
 		MyLevel->Bobs.clear();
 
@@ -1007,7 +998,7 @@ bool GameData::LockLevelStart = false;
 		if ( PauseLevel )
 			return;
 
-		for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			if ( ( *player )->StoredName.length() > 0 && (*player)->getMyGamer() == 0 )
 			{
 				PlayerManager::GetNumPlayers();
@@ -1021,7 +1012,7 @@ bool GameData::LockLevelStart = false;
 	{
 		PauseGame = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			if ( ( *obj )->PauseGame )
 				PauseGame = true;
 
@@ -1032,7 +1023,7 @@ bool GameData::LockLevelStart = false;
 	{
 		PauseLevel = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			if ( ( *obj )->PauseLevel )
 				PauseLevel = true;
 	}
@@ -1041,7 +1032,7 @@ bool GameData::LockLevelStart = false;
 	{
 		SoftPause = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			if ( ( *obj )->SoftPause )
 				SoftPause = true;
 	}
@@ -1061,7 +1052,7 @@ bool GameData::LockLevelStart = false;
 			LockGameObjects( true );
 
 			Tools::StartGUIDraw();
-			for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+			for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			{
 				if ( ( *obj )->getCore()->Released || (*obj)->getCore()->MarkedForDeletion )
 				{
@@ -1084,7 +1075,7 @@ bool GameData::LockLevelStart = false;
 		}
 
 		// Clean GameObjects
-		for ( std::vector<GameObject*>::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->MarkedForDeletion )
 				( *obj )->Release();
@@ -1166,7 +1157,7 @@ bool GameData::LockLevelStart = false;
 			}
 			else
 			{
-				for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+				for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 				{
 					if ( ( *bob )->CharacterSelect2 )
 					{
@@ -1315,10 +1306,10 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::DoToDoOnDeathList()
 	{
-		std::vector<Lambda*> list = std::vector<Lambda*>( ToDoOnDeath );
+		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnDeath );
 		ToDoOnDeath.clear();
 
-		for ( std::vector<Lambda*>::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
@@ -1336,10 +1327,10 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::DoToDoOnDoneDyingList()
 	{
-		std::vector<Lambda*> list = std::vector<Lambda*>( ToDoOnDoneDying );
+		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnDoneDying );
 		ToDoOnDoneDying.clear();
 
-		for ( std::vector<Lambda*>::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
@@ -1356,7 +1347,7 @@ bool GameData::LockLevelStart = false;
 		bool OnePast = false;
 		if ( MyLevel->Bobs.size() > 0 )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+			for ( std::vector<std::shared_ptr<Bob> >::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 				if ( ( *bob )->getCore()->Data->Position.X > x )
 					OnePast = true;
 
@@ -1371,7 +1362,7 @@ bool GameData::LockLevelStart = false;
 		bool AllPast = true;
 		if ( MyLevel->Bobs.size() > 0 )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 				if ( ( *bob )->getCore()->Data->Position.X < x )
 					AllPast = false;
 
@@ -1388,7 +1379,7 @@ bool GameData::LockLevelStart = false;
 
 	const std::shared_ptr<Bob> &GameData::getMvpBob() const
 	{
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			if ( ( *bob )->MyPlayerIndex == getMvp()->MyPlayerIndex )
 				return bob;
 		return MyLevel->Bobs[ 0 ];
@@ -1420,7 +1411,7 @@ bool GameData::LockLevelStart = false;
 			}
 		}
 
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			SetCreatedBobParameters( *bob );
 	}
 
@@ -1457,12 +1448,12 @@ bool GameData::LockLevelStart = false;
 		return Count;
 	}
 
-	void GameData::SetAdditionalBobParameters( std::vector<Bob*> Bobs )
+	void GameData::SetAdditionalBobParameters( BobVec Bobs )
 	{
-		SetAdditionalBobParameters( std::vector<Bob*>( Bobs ) );
+		SetAdditionalBobParameters( BobVec( Bobs ) );
 	}
 
-	void GameData::SetAdditionalBobParameters( std::vector<Bob*> &Bobs )
+	void GameData::SetAdditionalBobParameters( BobVec &Bobs )
 	{
 		// Hide corpses
 		Bob::ShowCorpseAfterExplode = false;
@@ -1473,7 +1464,7 @@ bool GameData::LockLevelStart = false;
 			Bob::ShowCorpseAfterExplode = true;
 
 			// Clear all existing links
-			for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 				if ( ( *bob )->MyBobLinks.size() > 0 )
 					( *bob )->MyBobLinks.clear();
 
@@ -1530,7 +1521,7 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::RemoveLastCoinText()
 	{
-		for ( std::vector<GameObject*>::const_iterator gameobj = MyGameObjects.begin(); gameobj != MyGameObjects.end(); ++gameobj )
+		for ( GameObjVec::const_iterator gameobj = MyGameObjects.begin(); gameobj != MyGameObjects.end(); ++gameobj )
 			if ( ( *gameobj )->getCore()->AddedTimeStamp == MyLevel->CurPhsxStep )
 				( *gameobj )->Release();
 	}
@@ -1611,7 +1602,7 @@ Vector2 GameData::DramaticEntryVel = 0;
 
 	void GameData::MoveAndUpdateBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			( *bob )->getCore()->Data->Velocity = Vector2();
 			( *bob )->getCore()->Data->Acceleration = Vector2();
@@ -1628,14 +1619,14 @@ Vector2 GameData::DramaticEntryVel = 0;
 	void GameData::HideBobs()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			( *bob )->Core->Show = false;
 	}
 
 	void GameData::ShowBobs()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			( *bob )->Core->Show = true;
 	}
 
@@ -1649,7 +1640,6 @@ Vector2 GameData::DramaticEntryVel = 0;
 
 	void GameData::InitializeInstanceFields()
 	{
-		MyDataNumber = DataCounter++;
 		HasLava = false;
 		HasBeenCompleted = false;
 		MyStatGroup = StatGroup_LEVEL;
@@ -1664,21 +1654,21 @@ Vector2 GameData::DramaticEntryVel = 0;
 		AllowQuickJoin = false;
 		DrawObjectText = false;
 		SuppressSongInfo = false;
-		MyGameObjects = std::vector<GameObject*>();
-		NewGameObjects = std::vector<GameObject*>();
+		MyGameObjects = GameObjVec();
+		NewGameObjects = GameObjVec();
 		TakeOnce = false;
 		AlwaysGiveCoinScore = false;
 		CoinScoreMultiplier = 1;
-		OnCalculateCoinScoreMultiplier = std::make_shared<Multicaster_1<GameData*> >();
+		OnCalculateCoinScoreMultiplier = std::make_shared<Multicaster_1<std::shared_ptr<GameData> > >();
 		ScoreMultiplier = 1;
-		OnCalculateScoreMultiplier = std::make_shared<Multicaster_1<GameData*> >();
-		OnCheckpointGrab = std::make_shared<Multicaster_1<ObjectBase*> >();
-		OnCoinGrab = std::make_shared<Multicaster_1<ObjectBase*> >();
-		OnCompleteLevel = std::make_shared<Multicaster_1<Level*> >();
+		OnCalculateScoreMultiplier = std::make_shared<Multicaster_1<std::shared_ptr<GameData> > >();
+		OnCheckpointGrab = std::make_shared<Multicaster_1<std::shared_ptr<ObjectBase> > >();
+		OnCoinGrab = std::make_shared<Multicaster_1<std::shared_ptr<ObjectBase> > >();
+		OnCompleteLevel = std::make_shared<Multicaster_1<std::shared_ptr<Level> > >();
 		OnLevelRetry = std::make_shared<Multicaster>();
 		OnReturnTo = std::make_shared<Multicaster>();
 		OnReturnTo_OneOff = std::make_shared<Multicaster>();
-		ToDoOnReset = std::vector<Lambda*>();
+		ToDoOnReset = std::vector<std::shared_ptr<Lambda> >();
 		DoingToDoList = false;
 		DefaultHeroType = BobPhsxNormal::getInstance();
 		Released = false;
@@ -1692,10 +1682,10 @@ Vector2 GameData::DramaticEntryVel = 0;
 		PhsxCount = 0;
 		ForceLevelZoomBeforeDraw = 0;
 		DoForceZoom = false;
-		ToDoOnDeath = std::vector<Lambda*>();
+		ToDoOnDeath = std::vector<std::shared_ptr<Lambda> >();
 		DoneDyingDistance = 1200;
 		DoneDyingCount = 60;
-		ToDoOnDoneDying = std::vector<Lambda*>();
+		ToDoOnDoneDying = std::vector<std::shared_ptr<Lambda> >();
 		MvpOnly = false;
 		ModdedBlobGrace = false;
 		BlobGraceY = 76;

@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	/// The game class holds the levels and purpose of the level.
 	/// Different purposes are implemented as children classes of the main GameData class.
 	/// </summary>
-	class GameData
+	class GameData : public std::enable_shared_from_this<ActionGameData>
 	{
 	private:
 		class AddScoreLambda : public Lambda
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 			BankType_INFINITE
 		};
 	private:
-		class FindTargetBobLambda : public LambdaFunc_1<Bob*, bool>
+		class FindTargetBobLambda : public LambdaFunc_1<std::shared_ptr<Bob>, bool>
 		{
 		private:
 			std::shared_ptr<Bob> Player;
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class RemoveMarkedLambda : public LambdaFunc_1<GameObject*, bool>
+		class RemoveMarkedLambda : public LambdaFunc_1<std::shared_ptr<GameObject>, bool>
 		{
 		public:
 			RemoveMarkedLambda();
@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class GetCampaignStatsScoreLambda : public LambdaFunc_1<PlayerData*, float>
+		class GetCampaignStatsScoreLambda : public LambdaFunc_1<std::shared_ptr<PlayerData>, float>
 		{
 		public:
 			GetCampaignStatsScoreLambda();
@@ -275,18 +275,7 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 
-		/// <summary>
-		/// Dictionary to get a game factory from a string.
-		/// </summary>
 	public:
-		static std::map<std::wstring, GameFactory*> FactoryDict;
-
-		/// <summary>
-		/// Used in the Background Editor to assign GUID to objects.
-		/// </summary>
-		static int DataCounter;
-		int MyDataNumber;
-
 		/// <summary>
 		/// Whether the game has lava.
 		/// </summary>
@@ -304,7 +293,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Function to be called that makes the game's score screen.
 		/// </summary>
-		std::shared_ptr<LambdaFunc<GameObject*> > MakeScore;
+		std::shared_ptr<LambdaFunc<std::shared_ptr<GameObject> > > MakeScore;
 
 		/// <summary>
 		/// The statistics associated with this game.
@@ -422,7 +411,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Main camera of this game.
 		/// </summary>
-		const std::shared_ptr<Camera> &getCam() const;
+		const std::shared_ptr<Camera> getCam() const;
 
 		/// <summary>
 		/// Random number generator for this game.
@@ -440,7 +429,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The position of the main camera.
 		/// </summary>
-		const Vector2 &getCamPos() const;
+		const Vector2 getCamPos() const;
 
 	private:
 		std::shared_ptr<QuadClass> BlackQuad;
@@ -469,7 +458,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A collection of objects in the game that are not in the level, such as GUIs.
 		/// </summary>
-		std::vector<GameObject*> MyGameObjects, NewGameObjects;
+		GameObjVec MyGameObjects, NewGameObjects;
 
 		/// <summary>
 		/// Remove all GameObjects with a specified tag.
@@ -494,7 +483,7 @@ namespace CloudberryKingdom
 		/// Event handler. Activates when this game recalculates it's coin score multiplier.
 		/// The multiplier is first reset to 1, then each registered callback can modify it.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<GameData*> > OnCalculateCoinScoreMultiplier;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<GameData> > > OnCalculateCoinScoreMultiplier;
 		/// <summary>
 		/// Called at the beginning over every time step to calculate the coin score multiplier
 		/// </summary>
@@ -510,7 +499,7 @@ namespace CloudberryKingdom
 		/// Event handler. Activates when this game recalculates it's score multiplier.
 		/// The multiplier is first reset to 1, then each registered callback can modify it.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<GameData*> > OnCalculateScoreMultiplier;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<GameData>> > OnCalculateScoreMultiplier;
 		/// <summary>
 		/// Called at the beginning over every time step to calculate the score multiplier
 		/// </summary>
@@ -521,7 +510,7 @@ namespace CloudberryKingdom
 		/// Event handler. Activates when a Checkpoint is grabbed. Argument is the IObject that is a Checkpoint.
 		/// </summary>
 	public:
-		std::shared_ptr<Multicaster_1<ObjectBase*> > OnCheckpointGrab;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<ObjectBase> > > OnCheckpointGrab;
 		/// <summary>
 		/// Call this when a Checkpoint is grabbed to activate the Checkpoint grabbed event handler.
 		/// </summary>
@@ -531,7 +520,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Event handler. Activates when a coin is grabbed. Argument is the IObject that is a coin.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<ObjectBase*> > OnCoinGrab;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<ObjectBase> > > OnCoinGrab;
 		/// <summary>
 		/// Call this when a coin is grabbed to activate the coin grabbed event handler.
 		/// </summary>
@@ -540,7 +529,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Event handler. Activates when a level is completed.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<Level*> > OnCompleteLevel;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<Level> > > OnCompleteLevel;
 		/// <summary>
 		/// Call this when level is completed to activate the level complete event handler.
 		/// </summary>
@@ -584,9 +573,9 @@ namespace CloudberryKingdom
 
 		void AddToDo( const std::shared_ptr<Lambda> &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset );
 
-		const std::vector<ToDoItem*> &getToDo() const;
+		std::vector<std::shared_ptr<ToDoItem> > &getToDo() const;
 
-		std::vector<Lambda*> ToDoOnReset;
+		std::vector<std::shared_ptr<Lambda> > ToDoOnReset;
 	private:
 		void DoToDoOnResetList();
 
@@ -604,7 +593,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Find all ToDo items with the given name
 		/// </summary>
-		std::vector<ToDoItem*> ToDoFindAll( const std::wstring &name );
+		std::vector<std::shared_ptr<ToDoItem> > ToDoFindAll( const std::wstring &name );
 
 	private:
 		bool DoingToDoList;
@@ -612,8 +601,8 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Two lists of to do functions, used to allow for the actual ToDo list to have functions that add functions to the list of things to do.
 		/// </summary>
-		std::vector<ToDoItem*> NextToDo;
-		std::vector<ToDoItem*> CurToDo;
+		std::vector<std::shared_ptr<ToDoItem> > NextToDo;
+		std::vector<std::shared_ptr<ToDoItem> > CurToDo;
 
 	public:
 		std::shared_ptr<BobPhsx> DefaultHeroType;
@@ -641,10 +630,6 @@ namespace CloudberryKingdom
 		void LockGameObjects( bool Lock );
 
 	public:
-//ORIGINAL LINE: public void AddGameObject(params GameObject[] list)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void AddGameObject( ... );
-
 		void AddGameObject( const std::shared_ptr<GameObject> &obj );
 
 		bool SkipBackgroundPhsx;
@@ -784,7 +769,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of actions to take immediately after the last player alive dies.
 		/// </summary>
-		std::vector<Lambda*> ToDoOnDeath;
+		std::vector<std::shared_ptr<Lambda> > ToDoOnDeath;
 	private:
 		void DoToDoOnDeathList();
 
@@ -801,7 +786,7 @@ namespace CloudberryKingdom
 
 		virtual void BobDoneDying( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob );
 
-		std::vector<Lambda*> ToDoOnDoneDying;
+		std::vector<std::shared_ptr<Lambda> > ToDoOnDoneDying;
 	private:
 		void DoToDoOnDoneDyingList();
 
@@ -829,8 +814,8 @@ namespace CloudberryKingdom
 		int CreateBob( const std::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j );
 
 	public:
-		void SetAdditionalBobParameters( std::vector<Bob*> Bobs );
-		virtual void SetAdditionalBobParameters( std::vector<Bob*> &Bobs );
+		void SetAdditionalBobParameters( BobVec Bobs );
+		virtual void SetAdditionalBobParameters( BobVec &Bobs );
 
 		static std::shared_ptr<GameData> StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed );
 		static std::shared_ptr<GameData> StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );

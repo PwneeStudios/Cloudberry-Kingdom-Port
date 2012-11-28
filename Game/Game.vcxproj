@@ -96,12 +96,10 @@
     <ClCompile Include="Game\Games\TutorialHelper.cpp" />
     <ClCompile Include="Game\Level\ClosingCircle.cpp" />
     <ClCompile Include="Game\Level\LevelPiece.cpp" />
-    <ClCompile Include="Game\Level\Make\CloudberryKingdom.LevelSeedData.cpp" />
     <ClCompile Include="Game\Level\Make\ComputerRecording.cpp" />
     <ClCompile Include="Game\Level\Make\DifficultyGroups.cpp" />
     <ClCompile Include="Game\Level\Make\DifficultyHelper.cpp" />
     <ClCompile Include="Game\Level\Make\Generators.cpp" />
-    <ClCompile Include="Game\Level\Make\LevelSeedData.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeThing.cpp" />
@@ -465,12 +463,12 @@
     <ClInclude Include="Game\Games\TutorialHelper.h" />
     <ClInclude Include="Game\Level\ClosingCircle.h" />
     <ClInclude Include="Game\Level\LevelPiece.h" />
-    <ClInclude Include="Game\Level\Make\CloudberryKingdom.LevelSeedData.h" />
+    <ClInclude Include="Game\Level\Make\LevelSeedData.h" />
     <ClInclude Include="Game\Level\Make\ComputerRecording.h" />
     <ClInclude Include="Game\Level\Make\DifficultyGroups.h" />
     <ClInclude Include="Game\Level\Make\DifficultyHelper.h" />
     <ClInclude Include="Game\Level\Make\Generators.h" />
-    <ClInclude Include="Game\Level\Make\LevelSeedData.h" />
+    <ClInclude Include="Game\Level\Make\LockableBool.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeThing.h" />

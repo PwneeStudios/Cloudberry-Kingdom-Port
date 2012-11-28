@@ -611,7 +611,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CameraZone> FinalCamZone;
 
-		std::vector<LevelPiece*> LevelPieces;
+		std::vector<std::shared_ptr<LevelPiece> > LevelPieces;
 		std::shared_ptr<LevelPiece> CurPiece;
 
 		std::shared_ptr<ParticleEmitter> MainEmitter;
@@ -629,7 +629,7 @@ namespace CloudberryKingdom
 		bool FreeReset;
 
 		bool ObjectsLocked;
-		std::vector<ObjectBase*> Objects, AddedObjects;
+		ObjectVec Objects, AddedObjects;
 
 		/// <summary>
 		/// Active draw layer. Used while editing a level. This is the layer a new item is placed in.
@@ -662,12 +662,12 @@ namespace CloudberryKingdom
 		static int AfterPostDrawLayer;
 
 	private:
-		std::vector<std::vector<ObjectBase*> > DrawLayer;
+		std::vector<ObjectVec > DrawLayer;
 	public:
-		std::vector<ParticleEmitter*> ParticleEmitters;
+		std::vector<std::shared_ptr<ParticleEmitter> > ParticleEmitters;
 
-		std::vector<BlockBase*> Blocks, AddedBlocks;
-		std::vector<Bob*> Bobs, HoldPlayerBobs;
+		BlockVec Blocks, AddedBlocks;
+		BobVec Bobs, HoldPlayerBobs;
 		Vector2 HoldCamPos;
 
 		bool ShowCoinsInReplay;

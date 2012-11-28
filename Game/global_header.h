@@ -3,6 +3,7 @@
 
 // Jordan's awesome questions to Oleg:
 // Some functions take a List<> and I will sent a "null" instead. In C++ this is now a vector, so I should send an empty list instead?
+// Should we be wrapping vectors in shared_ptr?
 
 // Jordan's unalphebatized shit. Suck it Oleg.
 inline int Sign__RegexMe41315803(int x) { return (x > 0) - (x < 0); }
@@ -11,7 +12,7 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 
 // Things to reh-gecks.
 // Math::Sign and Sign__RegexMe41315803 -> Sign
-
+// ->Data->Position -> ->Data.Position    Also for Velocity and Acceleration
 
 #include "enums.h"
 #include "forward_declarations.h"
@@ -38,6 +39,7 @@ namespace CloudberryKingdom
 	typedef std::vector<std::shared_ptr<Bob> > BobVec;
 	typedef std::vector<std::shared_ptr<ObjectBase> > ObjectVec;
 	typedef std::vector<std::shared_ptr<BlockBase> > BlockVec;
+	typedef std::vector<std::shared_ptr<GameObject> > GameObjVec;
 }
 
 // Core library.
@@ -330,7 +332,7 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Games/Meta Games/StringWorlds/StringWorld_Timed.h"
 #include "Game/Level/ClosingCircle.h"
 #include "Game/Level/LevelPiece.h"
-#include "Game/Level/Make/CloudberryKingdom.LevelSeedData.h"
+#include "Game/Level/Make/LockableBool.h"
 #include "Game/Level/Make/ComputerRecording.h"
 #include "Game/Level/Make/DifficultyGroups.h"
 #include "Game/Level/Make/DifficultyHelper.h"
