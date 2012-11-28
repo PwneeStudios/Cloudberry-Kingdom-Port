@@ -1,12 +1,9 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Matrix &HsvQuad::getMyMatrix() const
+	const Matrix &HsvQuad::getMyMatrix() const
 	{
 		return _MyMatrix;
 	}
@@ -37,13 +34,13 @@ namespace CloudberryKingdom
 		QuadClass::Draw( Update, DrawQuad, DrawShadow );
 	}
 
-	std::shared_ptr<QuadClass> QuadClass::FindQuad( std::vector<QuadClass*> &list, const std::wstring &Name )
+	std::shared_ptr<QuadClass> QuadClass::FindQuad( std::vector<std::shared_ptr<QuadClass> > &list, const std::wstring &Name )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<QuadClass*>::const_iterator quad = list.begin(); quad != list.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = list.begin(); quad != list.end(); ++quad )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *quad )->Name, Name, StringComparison::OrdinalIgnoreCase ) == 0 )
-				return quad;
+			if ( CompareIgnoreCase( ( *quad )->Name, Name) == 0 )
+				return *quad;
 
 		return 0;
 	}
@@ -193,7 +190,7 @@ namespace CloudberryKingdom
 			FancyAngle.reset();
 	}
 
-	const Vector2 &QuadClass::getLightAlpha() const
+	const Vector2 &QuadClass::getLightAlpha()
 	{
 		MakeLightAlpha();
 		return FancyLightAlpha->RelVal;
@@ -221,7 +218,7 @@ namespace CloudberryKingdom
 			FancyPos->RelVal = value;
 	}
 
-	const float &QuadClass::getPosY() const
+	float QuadClass::getPosY() const
 	{
 		return getPos().Y;
 	}
@@ -231,7 +228,7 @@ namespace CloudberryKingdom
 		setPos( Vector2( getPos().X, value ) );
 	}
 
-	const float &QuadClass::getSizeX() const
+	float QuadClass::getSizeX() const
 	{
 		return getSize().X;
 	}
@@ -241,7 +238,7 @@ namespace CloudberryKingdom
 		setSize( Vector2( value, getSize().Y ) );
 	}
 
-	const float &QuadClass::getSizeY() const
+	float QuadClass::getSizeY() const
 	{
 		return getSize().Y;
 	}
@@ -251,7 +248,7 @@ namespace CloudberryKingdom
 		setSize( Vector2( getSize().X, value ) );
 	}
 
-	const Vector2 &QuadClass::getSize() const
+	Vector2 QuadClass::getSize() const
 	{
 		if ( FancyScale == 0 )
 			return Vector2( Base.e1.Length(), Base.e2.Length() );
@@ -269,7 +266,7 @@ namespace CloudberryKingdom
 			FancyScale->RelVal = value;
 	}
 
-	const float &QuadClass::getDegrees() const
+	float QuadClass::getDegrees() const
 	{
 		return CoreMath::Degrees( getAngle() );
 	}
@@ -279,7 +276,7 @@ namespace CloudberryKingdom
 		setAngle( CoreMath::Radians( value ) );
 	}
 
-	const float &QuadClass::getAngle() const
+	float QuadClass::getAngle() const
 	{
 		if ( FancyAngle == 0 )
 			return 0;
@@ -306,7 +303,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		Initialize( 0, false, false );
-		quad->Clone( this );
+		quad->Clone( this->shared_from_this() );
 	}
 
 	QuadClass::QuadClass()
@@ -388,12 +385,12 @@ namespace CloudberryKingdom
 	{
 		quad->Base = Base;
 
-		quad->Quad_Renamed->MyTexture = Quad_Renamed.getMyTexture();
-		quad->Quad_Renamed->ExtraTexture1 = Quad_Renamed.ExtraTexture1;
-		quad->Quad_Renamed->ExtraTexture2 = Quad_Renamed.ExtraTexture2;
-		quad->Quad_Renamed->MyEffect = Quad_Renamed.MyEffect;
+		quad->Quad_Renamed.setMyTexture( Quad_Renamed.getMyTexture() );
+		quad->Quad_Renamed.ExtraTexture1 = Quad_Renamed.ExtraTexture1;
+		quad->Quad_Renamed.ExtraTexture2 = Quad_Renamed.ExtraTexture2;
+		quad->Quad_Renamed.MyEffect = Quad_Renamed.MyEffect;
 
-		quad->Quad_Renamed->SetColor( Quad_Renamed.MySetColor );
+		quad->Quad_Renamed.SetColor( Quad_Renamed.MySetColor );
 	}
 
 	void QuadClass::SetTexture( const std::wstring &Name )
@@ -420,7 +417,8 @@ namespace CloudberryKingdom
 	{
 		if ( Quad_Renamed.getMyTexture() != 0 )
 		{
-			setSize( Vector2( Quad_Renamed.getTexWidth(), Quad_Renamed.getTexHeight() ) );
+			setSize( Vector2( static_cast<float>( Quad_Renamed.getTexWidth() ),
+				static_cast<float>( Quad_Renamed.getTexHeight() ) ) );
 		}
 	}
 
@@ -632,9 +630,9 @@ namespace CloudberryKingdom
 		Quad_Renamed.MultiplyAlpha( alpha );
 	}
 
-	const float &QuadClass::getAlpha() const
+	float QuadClass::getAlpha() const
 	{
-		return Quad_Renamed.MySetColor.A / 255;
+		return Quad_Renamed.MySetColor.A / 255.f;
 	}
 
 	void QuadClass::setAlpha( const float &value )

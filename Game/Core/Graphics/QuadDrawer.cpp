@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Matrix &QuadDrawer::getCurrentMatrix() const
+	const Matrix &QuadDrawer::getCurrentMatrix() const
 	{
 		return _CurrentMatrix;
 	}
@@ -38,20 +38,20 @@ namespace CloudberryKingdom
 		LineQuad.Init();
 
 		WrapWrap = std::make_shared<SamplerState>();
-		WrapWrap->AddressU = TextureAddressMode::Wrap;
-		WrapWrap->AddressV = TextureAddressMode::Wrap;
+		WrapWrap->AddressU = GfxTextureAddressMode_Wrap;
+		WrapWrap->AddressV = GfxTextureAddressMode_Wrap;
 
 		ClampClamp = std::make_shared<SamplerState>();
-		ClampClamp->AddressU = TextureAddressMode::Clamp;
-		ClampClamp->AddressV = TextureAddressMode::Clamp;
+		ClampClamp->AddressU = GfxTextureAddressMode_Clamp;
+		ClampClamp->AddressV = GfxTextureAddressMode_Clamp;
 
 		ClampWrap = std::make_shared<SamplerState>();
-		ClampWrap->AddressU = TextureAddressMode::Clamp;
-		ClampWrap->AddressV = TextureAddressMode::Wrap;
+		ClampWrap->AddressU = GfxTextureAddressMode_Clamp;
+		ClampWrap->AddressV = GfxTextureAddressMode_Wrap;
 
 		WrapClamp = std::make_shared<SamplerState>();
-		WrapClamp->AddressU = TextureAddressMode::Wrap;
-		WrapClamp->AddressV = TextureAddressMode::Clamp;
+		WrapClamp->AddressU = GfxTextureAddressMode_Wrap;
+		WrapClamp->AddressV = GfxTextureAddressMode_Clamp;
 	}
 
 	void QuadDrawer::SetColorMatrix( Matrix m, float signature )
@@ -141,7 +141,12 @@ namespace CloudberryKingdom
 		else
 			Illumination = quad.Illumination;
 
-		if ( i + 6 >= N || CurrentEffect->effect != quad->MyEffect->effect || CurrentTexture->getTex() != quad->MyTexture->getTex() && !quad->MyTexture->FromPacked || CurrentTexture != quad->MyTexture->Packed && quad->MyTexture->FromPacked || CurrentEffect->CurrentIllumination != Illumination )
+		if ( i + 6 >= N || CurrentEffect->effect != quad.MyEffect->effect
+			|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
+			&& !quad.getMyTexture()->FromPacked
+			|| CurrentTexture != quad.getMyTexture()->Packed
+			&& quad.getMyTexture()->FromPacked
+			|| CurrentEffect->CurrentIllumination != Illumination )
 			Flush();
 
 		if ( i == 0 )
@@ -149,8 +154,8 @@ namespace CloudberryKingdom
 			if ( Current_U_Wrap != quad.U_Wrap || Current_V_Wrap != quad.V_Wrap )
 				SetAddressMode( false, false );
 
-			CurrentEffect = quad->MyEffect;
-			CurrentTexture = quad->MyTexture;
+			CurrentEffect = quad.MyEffect;
+			CurrentTexture = quad.getMyTexture();
 
 			if ( CurrentTexture->FromPacked )
 				CurrentTexture = CurrentTexture->Packed;
@@ -178,7 +183,7 @@ namespace CloudberryKingdom
 		if ( quad.Hide )
 			return;
 
-		if ( quad->MyEffect == 0 || quad->MyTexture == 0 )
+		if ( quad.MyEffect == 0 || quad.getMyTexture() == 0 )
 		{
 			Tools::Break();
 			return;
@@ -197,7 +202,15 @@ namespace CloudberryKingdom
 		else
 			Illumination = quad.Illumination;
 
-		if ( i + 6 >= N || i != 0 && ( CurrentEffect->effect != quad->MyEffect->effect || CurrentTexture->getTex() != quad->MyTexture->getTex() && !quad->MyTexture->FromPacked || CurrentTexture != quad->MyTexture->Packed && quad->MyTexture->FromPacked || Current_U_Wrap != quad.U_Wrap || Current_V_Wrap != quad.V_Wrap || CurrentEffect->CurrentIllumination != Illumination ) )
+		if ( i + 6 >= N || i != 0
+			&& ( CurrentEffect->effect != quad.MyEffect->effect
+				|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
+				&& !quad.getMyTexture()->FromPacked
+				|| CurrentTexture != quad.getMyTexture()->Packed
+				&& quad.getMyTexture()->FromPacked
+				|| Current_U_Wrap != quad.U_Wrap
+				|| Current_V_Wrap != quad.V_Wrap
+				|| CurrentEffect->CurrentIllumination != Illumination ) )
 			Flush();
 
 		if ( i == 0 )
@@ -205,8 +218,8 @@ namespace CloudberryKingdom
 			if ( Current_U_Wrap != quad.U_Wrap || Current_V_Wrap != quad.V_Wrap )
 				SetAddressMode( quad.U_Wrap, quad.V_Wrap );
 
-			CurrentEffect = quad->MyEffect;
-			CurrentTexture = quad->MyTexture;
+			CurrentEffect = quad.MyEffect;
+			CurrentTexture = quad.getMyTexture();
 
 			// Set extra textures
 			if ( quad.ExtraTexture1 != 0 )
@@ -226,9 +239,9 @@ namespace CloudberryKingdom
 
 		Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
-	Vertices[ i + 5 ] = Vertices[ i + 1 ];
+		Vertices[ i + 5 ] = Vertices[ i + 1 ];
 		Vertices[ i + 2 ] = quad.v2.Vertex;
-	Vertices[ i + 4 ] = Vertices[ i + 2 ];
+		Vertices[ i + 4 ] = Vertices[ i + 2 ];
 		Vertices[ i + 3 ] = quad.v3.Vertex;
 
 		i += 6;
@@ -318,7 +331,7 @@ namespace CloudberryKingdom
 		{
 			LineQuad.setMyTexture( Tex );
 
-			float r = ( x2 - x1 )->Length() / RepeatWidth;
+			float r = ( x2 - x1 ).Length() / RepeatWidth;
 			if ( Dir == 0 )
 			{
 				LineQuad.v0.Vertex.uv = Vector2( 0, v_shift );
@@ -389,7 +402,7 @@ namespace CloudberryKingdom
 
 
 		// Draw Body
-		float r = ( Mid2 - Mid1 )->Length() / RepeatWidth;
+		float r = ( Mid2 - Mid1 ).Length() / RepeatWidth;
 		if ( Dir == 0 )
 		{
 			LineQuad.v0.Vertex.uv = Vector2( 0, v_shift );
@@ -442,7 +455,7 @@ float QuadDrawer::CurLightSourceFade = 0;
 	{
 		if ( Fade != CurLightSourceFade )
 		{
-			Tools::LightSourceEffect->effect->Parameters[ _T( "Fade" ) ]->SetValue( Fade );
+			Tools::LightSourceEffect->effect->Parameters( _T( "Fade" ) )->SetValue( Fade );
 			CurLightSourceFade = Fade;
 		}
 		DrawSquareDot( x, color, 2 * r, DefaultTexture, Tools::LightSourceEffect );
@@ -539,7 +552,7 @@ float QuadDrawer::CurLightSourceFade = 0;
 	{
 		Vector2 BR = Vector2( TR.X, BL.Y );
 		Vector2 TL = Vector2( BL.X, TR.Y );
-		Vector2 Offset = Vector2( Math::Sign( TR.X - BL.X ) * width / 2, 0 );
+		Vector2 Offset = Vector2( Sign__RegexMe41315803( TR.X - BL.X ) * width / 2, 0 );
 
 		DrawLine( BL - Offset, BR + Offset, color, width );
 		DrawLine( BR, TR, color, width );
@@ -582,7 +595,7 @@ float QuadDrawer::CurLightSourceFade = 0;
 				{
 				CurrentEffect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-				Device->DrawUserPrimitives<MyOwnVertexFormat>( PrimitiveType::TriangleList, Vertices, 0, TrianglesInBuffer );
+				Device->DrawUserPrimitives<MyOwnVertexFormat>( GfxPrimitiveType_TriangleList, Vertices, 0, TrianglesInBuffer );
 				}
 		}
 

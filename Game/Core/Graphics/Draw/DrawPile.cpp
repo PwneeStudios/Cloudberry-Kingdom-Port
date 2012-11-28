@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -81,8 +82,9 @@ namespace CloudberryKingdom
 		if ( name != _T( "" ) )
 			quad->Name = name;
 
-		if ( KeepFancyCenter && quad->FancyPos != 0 && quad->FancyPos->Center != 0 && dynamic_cast<FancyVector2*>( quad->FancyPos->Center ) != 0 )
-			( static_cast<FancyVector2*>( quad->FancyPos->Center ) )->SetCenter( FancyPos, true );
+		if ( KeepFancyCenter && quad->FancyPos != 0 && quad->FancyPos->Center != 0
+			&& std::dynamic_pointer_cast<FancyVector2>( quad->FancyPos->Center ) != 0 )
+			( std::static_pointer_cast<FancyVector2>( quad->FancyPos->Center ) )->SetCenter( FancyPos, true );
 		else
 		{
 			quad->MakeFancyPos();
@@ -96,7 +98,7 @@ namespace CloudberryKingdom
 	{
 		quad->MakeFancyPos();
 		quad->FancyPos->SetCenter( FancyPos, true );
-		MyQuadList.Insert( index, quad );
+		MyQuadList.insert( MyQuadList.begin() + index, quad );
 	}
 
 	void DrawPile::Add( const std::shared_ptr<EzText> &text )
@@ -116,7 +118,8 @@ namespace CloudberryKingdom
 
 	void DrawPile::Remove( const std::shared_ptr<EzText> &text )
 	{
-		MyTextList.Remove( text );
+		//MyTextList.Remove( text );
+		::Remove( MyTextList, text );
 	}
 
 	std::shared_ptr<QuadClass> DrawPile::FindQuad( const std::wstring &Name )
@@ -127,15 +130,15 @@ namespace CloudberryKingdom
 	std::shared_ptr<EzText> DrawPile::FindEzText( const std::wstring &Name )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<EzText*>::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
+		for ( std::vector<std::shared_ptr<EzText> >::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *text )->Name, Name, System::StringComparison::InvariantCultureIgnoreCase ) == 0 )
-				return text;
+			if ( CompareIgnoreCase( ( *text )->Name, Name ) == 0 )
+				return *text;
 
 		return 0;
 	}
 
-	const float &DrawPile::getAlpha() const
+	float DrawPile::getAlpha()
 	{
 		return MyFancyColor->getA();
 	}
@@ -147,7 +150,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::Scale( float scale )
 	{
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 		{
 			( *quad )->setPos( ( *quad )->getPos() * scale );
 			//quad.ShadowOffset *= scale;
@@ -162,7 +165,7 @@ namespace CloudberryKingdom
 			( *quad )->ShadowOffset.X = .5f * ( ( *quad )->ShadowOffset.X + Hold.X - PosShift.X );
 		}
 
-		for ( std::vector<EzText*>::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
+		for ( std::vector<std::shared_ptr<EzText> >::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
 		{
 			( *text )->setPos( ( *text )->getPos() * scale );
 			( *text )->setScale( ( *text )->getScale() * scale );
@@ -173,29 +176,29 @@ namespace CloudberryKingdom
 	{
 		SavedScales = std::vector<Vector2>();
 
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 			SavedScales.push_back( ( *quad )->getSize() );
 
 		SavedPositions = std::vector<Vector2>();
 
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 			SavedPositions.push_back( ( *quad )->getPos() );
 
 		SavedShadowOffsets = std::vector<Vector2>();
 
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 			SavedShadowOffsets.push_back( ( *quad )->ShadowOffset );
 	}
 
 	void DrawPile::RevertScale()
 	{
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 		{
-			( *quad )->setSize( SavedScales[ MyQuadList.find( *quad ) ] );
+			( *quad )->setSize( SavedScales[ IndexOf( MyQuadList, *quad ) ] );
 
-			( *quad )->setPos( SavedPositions[ MyQuadList.find( *quad ) ] );
+			( *quad )->setPos( SavedPositions[ IndexOf( MyQuadList, *quad ) ] );
 
-			( *quad )->ShadowOffset = SavedShadowOffsets[ MyQuadList.find( *quad ) ];
+			( *quad )->ShadowOffset = SavedShadowOffsets[ IndexOf( MyQuadList, *quad ) ];
 			( *quad )->ShadowScale = 1;
 		}
 	}
@@ -233,7 +236,7 @@ namespace CloudberryKingdom
 	{
 		FancyPos->Update();
 
-		for ( std::vector<QuadClass*>::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyQuadList.begin(); quad != MyQuadList.end(); ++quad )
 		{
 			if ( ( *quad )->Layer == Layer )
 			{
@@ -248,7 +251,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::DrawText( int Layer )
 	{
-		for ( std::vector<EzText*>::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
+		for ( std::vector<std::shared_ptr<EzText> >::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
 		{
 			if ( ( *text )->Layer == Layer )
 			{
@@ -316,14 +319,14 @@ std::vector<Vector2> DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, 
 		else
 		{
 			scales = std::vector<Vector2>( BubbleScale.size() );
-			for ( int i = 0; i < BubbleScale.size(); i++ )
+			for ( size_t i = 0; i < BubbleScale.size(); i++ )
 				scales[ i ] = ( BubbleScale[ i ] - Vector2(1) ) * Intensity + Vector2(1);
 		}
 
 		FancyScale->MultiLerp( Length, scales );
 		MyFancyColor->LerpTo( Vector4( 1, 1, 1, 1 ), Length );
 		if ( sound )
-			Tools::CurGameData->WaitThenDo( 2, std::make_shared<WaitThenPop>( this ) );
+			Tools::CurGameData->WaitThenDo( 2, std::make_shared<WaitThenPop>( this->shared_from_this() ) );
 	}
 
 	void DrawPile::BubbleDown( bool sound )
@@ -350,7 +353,7 @@ std::vector<Vector2> DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, 
 	void DrawPile::Jiggle( bool sound, int Length, float Intensity )
 	{
 		std::vector<Vector2> mapped = std::vector<Vector2>( JiggleScale.size() );
-		for ( int i = 0; i < JiggleScale.size(); i++ )
+		for ( size_t i = 0; i < JiggleScale.size(); i++ )
 			mapped[ i ] = ( JiggleScale[ i ] - Vector2(1) ) * Intensity + Vector2(1);
 
 		FancyScale->MultiLerp( Length, mapped );
@@ -362,8 +365,8 @@ std::vector<Vector2> DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, 
 
 	void DrawPile::InitializeInstanceFields()
 	{
-		MyTextList = std::vector<EzText*>();
-		MyQuadList = std::vector<QuadClass*>();
+		MyTextList = std::vector<std::shared_ptr<EzText> >();
+		MyQuadList = std::vector<std::shared_ptr<QuadClass> >();
 		AlphaVel = 0;
 		MyFancyColor = std::make_shared<FancyColor>();
 		Fading = false;

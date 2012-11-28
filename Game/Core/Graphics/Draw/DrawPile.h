@@ -6,7 +6,7 @@
 
 namespace CloudberryKingdom
 {
-	class DrawPile
+	class DrawPile : public std::enable_shared_from_this<DrawPile>
 	{
 	private:
 		class WaitThenPop : public Lambda
@@ -35,8 +35,8 @@ namespace CloudberryKingdom
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 
-		std::vector<EzText*> MyTextList;
-		std::vector<QuadClass*> MyQuadList;
+		std::vector<std::shared_ptr<EzText> > MyTextList;
+		std::vector<std::shared_ptr<QuadClass> > MyQuadList;
 
 		DrawPile();
 
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		float AlphaVel;
 
 		std::shared_ptr<FancyColor> MyFancyColor;
-		const float &getAlpha() const;
+		float getAlpha();
 		void setAlpha( const float &value );
 
 		void Scale( float scale );

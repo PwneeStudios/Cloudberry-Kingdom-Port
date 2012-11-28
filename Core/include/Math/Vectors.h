@@ -96,6 +96,13 @@ public:
 		return *this;
 	}
 
+	Vector2 &operator -= ( const Vector2 &a )
+	{
+		X -= a.X;
+		Y -= a.Y;
+		return *this;
+	}
+
 	Vector2 &operator *= ( float k )
 	{
 		X *= k;
@@ -231,6 +238,11 @@ public:
 	float g() const { return Y; }
 	float b() const { return Z; }
 	float a() const { return W; }
+
+	Vector4 operator * ( const Vector4 &a ) const
+	{
+		return Vector4( X * a.X, Y * a.Y, Z * a.Z, W * a.W );
+	}
 
 	bool operator == ( const Vector4 &a ) const
 	{
