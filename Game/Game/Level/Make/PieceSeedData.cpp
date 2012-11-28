@@ -124,16 +124,16 @@ namespace CloudberryKingdom
 		//MyGenData.gen3 = new LevelGenData();
 		//MyUpgrades1.CalcGenData(MyGenData.gen3);
 
-		Ladder = Level.LadderType_NONE;
+		Ladder = LadderType_NONE;
 	}
 
 	void PieceSeedData::NoBlobs()
 	{
-		MyUpgrades1->Get( Upgrade_FALLING_BLOCK ] = __max( MyUpgrades1[ Upgrade_FALLING_BLOCK ], MyUpgrades1[ Upgrade_FLY_BLOB ) );
+		MyUpgrades1->Get( Upgrade_FALLING_BLOCK ) = __max( MyUpgrades1->Get( Upgrade_FALLING_BLOCK ), MyUpgrades1->Get( Upgrade_FLY_BLOB ) );
 		MyUpgrades1->Get( Upgrade_FLY_BLOB ) = 0;
 
-		MyUpgrades2[ Upgrade_MOVING_BLOCK ] = __max( MyUpgrades2[ Upgrade_MOVING_BLOCK ], MyUpgrades2[ Upgrade_FLY_BLOB ] );
-		MyUpgrades2[ Upgrade_FLY_BLOB ] = 0;
+		MyUpgrades2->Get( Upgrade_MOVING_BLOCK ) = __max( MyUpgrades2->Get( Upgrade_MOVING_BLOCK ), MyUpgrades2->Get( Upgrade_FLY_BLOB ) );
+		MyUpgrades2->Get( Upgrade_FLY_BLOB ) = 0;
 	}
 
 	void PieceSeedData::InitializeInstanceFields()
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		ExtraBlockLength = 0;
 		Paths = -1;
 		LockNumOfPaths = false;
-		ElevatorBoxStyle = BlockEmitter_Parameters::BoxStyle_TOP_ONLY;
+		ElevatorBoxStyle = BoxStyle_TOP_ONLY;
 		MyPieceIndex = -1;
 	}
 }

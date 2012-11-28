@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ] > 0 || PieceSeed->MyUpgrades2[ Upgrade_SPIKEY_LINE ) > 0 )
+		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_LINE ) > 0 )
 			Make = true;
 		else
 			Make = false;

@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		Tunnel = std::make_shared<TunnelFill>();
 		HallwaySpacing = Vector2( 300 - 5 * u[ Upgrade_SPIKEY_GUY ], DifficultyHelper::Interp19( 220, 80, u[ Upgrade_SPIKEY_GUY ] ) );
 
-		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ] > 0 || PieceSeed->MyUpgrades2[ Upgrade_SPIKEY_GUY ) > 0 )
+		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_GUY ) > 0 )
 			DoStage2Fill = true;
 		else
 			DoStage2Fill = false;
