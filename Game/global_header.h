@@ -80,6 +80,10 @@ public:
 	{
 	}
 
+	void SetValue( const Matrix &m )
+	{
+	}
+
 	void SetValue( const std::shared_ptr<class Texture2D> &t )
 	{
 	}
@@ -99,8 +103,29 @@ public:
 
 };
 
+class EffectPass
+{
+
+public:
+
+	void Apply()
+	{
+	}
+
+};
+
 class EffectTechnique
 {
+
+public:
+
+	std::vector<std::shared_ptr<EffectPass> > Passes;
+
+	EffectTechnique()
+	{
+		Passes.resize( 1 );
+	}
+
 };
 
 class FileStream;
@@ -108,18 +133,36 @@ class Game { };
 class GamePadState { };
 class GameTime;
 
+struct Viewport { float X; float Y; float Width; float Height; float MinDepth; float MaxDepth; };
+
 class GraphicsDevice
 {
 
 public:
 
 	std::shared_ptr<class PresentationParameters> PP;
+	std::vector<std::shared_ptr<class SamplerState> > SamplerStates;
+	GfxRasterizerState RasterizerState;
+	GfxBlendState BlendState;
+	GfxDepthStencilState DepthStencilState;
+
+	Viewport VP;
+
+	GraphicsDevice()
+	{
+		SamplerStates.resize( 3 );
+	}
 
 	void SetRenderTarget( const std::shared_ptr<class RenderTarget2D> &rt )
 	{
 	}
 
 	void Clear( const Color &color)
+	{
+	}
+
+	template<class T>
+	void DrawUserPrimitives( GfxPrimitiveType type, const std::vector<T> &vertices, int base, int count)
 	{
 	}
 
@@ -141,6 +184,8 @@ public:
 	int BackBufferFormat;
 	int DepthStencilFormat;
 	int MultiSampleCount;
+	int BackBufferWidth;
+	int BackBufferHeight;
 
 };
 
@@ -198,11 +243,35 @@ public:
 	}
 };
 
-class SamplerState;
+class SamplerState
+{
+
+public:
+
+	GfxTextureAddressMode AddressU;
+	GfxTextureAddressMode AddressV;
+
+	SamplerState()
+	{
+	}
+
+};
+
 class SignedInEventArgs;
 class Song;
 class SoundEffect;
-class SpriteBatch;
+
+class SpriteBatch
+{
+
+public:
+
+	void End()
+	{
+	}
+
+};
+
 class SpriteFont;
 class Stopwatch;
 class StorageContainer;
@@ -215,7 +284,6 @@ class Thread;
 template<class A, class B> class Tuple;
 class Video;
 class VideoPlayer;
-struct Viewport { float X; float Y; float Width; float Height; };
 
 // Cloudberry Kingdom converted files.
 #include "Game/Localization.h"

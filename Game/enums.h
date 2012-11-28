@@ -1056,4 +1056,30 @@ enum Camera_PhsxType
 	Camera_PhsxType_WORLD_MAP
 };
 
+enum GfxRasterizerState
+{
+	GfxRasterizerState_CullNone
+};
+
+enum GfxBlendState
+{
+	GfxBlendState_AlphaBlend
+};
+
+enum GfxDepthStencilState
+{
+	GfxDepthStencilState_DepthRead
+};
+
+enum GfxTextureAddressMode
+{
+	GfxTextureAddressMode_Wrap,
+	GfxTextureAddressMode_Clamp
+};
+
+enum GfxPrimitiveType
+{
+	GfxPrimitiveType_TriangleList
+};
+
 #endif
