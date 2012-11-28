@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 
 	public:
 		std::shared_ptr<ObjectVector> Center, xAxis, yAxis;
-		std::vector<ObjectVector*> Corner;
+		std::vector<std::shared_ptr<ObjectVector> > Corner;
 
 		std::vector<std::shared_ptr<BaseQuad> > Children;
 
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 
 		virtual void RecoverState( int StateIndex );
 #endif
-		std::vector<BaseQuad*> GetAllChildren();
+		std::vector<std::shared_ptr<BaseQuad> > GetAllChildren();
 
 		virtual bool HitTest( Vector2 x );
 
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 		Quad();
 
 
-		const Vector2 &getSize() const;
+		Vector2 getSize() const;
 		void setSize( const Vector2 &value );
 
 		void Scale( Vector2 Stretch );
@@ -145,8 +145,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-
-		virtual void Draw( const std::shared_ptr<QuadDrawer> &Drawer );
+		virtual void Draw( std::shared_ptr<QuadDrawer> &Drawer );
 
 #if defined(EDITOR)
 		void DrawChildren( const std::shared_ptr<QuadDrawer> &Drawer );

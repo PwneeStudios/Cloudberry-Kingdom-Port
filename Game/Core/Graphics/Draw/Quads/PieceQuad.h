@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffect;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-
-namespace CloudberryKingdom
-{
 	class PieceQuadData
 	{
 	public:
@@ -53,24 +32,6 @@ namespace CloudberryKingdom
 		bool Mirror;
 	};
 
-	class PieceQuadGroup : public std::vector<PieceQuad*>
-	{
-	public:
-		PieceQuadGroup();
-
-	private:
-		static std::vector<std::wstring> suffixes;
-	public:
-		void InitPillars( const std::wstring &root );
-		void InitPillars( const std::wstring &root, std::vector<std::wstring&> suffixes );
-
-//ORIGINAL LINE: public void SetCutoffs(params float[] cutoffs)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void SetCutoffs( ... );
-
-		std::shared_ptr<PieceQuad> Get( float width );
-	};
-
 	class PieceQuad
 	{
 	public:
@@ -94,7 +55,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		int Layer;
 
-		static std::map<std::wstring, PieceQuad*> Dict;
+		static std::map<std::wstring, std::shared_ptr<PieceQuad> > Dict;
 
 		static std::shared_ptr<PieceQuad> Get( const std::wstring &name );
 

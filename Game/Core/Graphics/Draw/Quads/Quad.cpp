@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -25,7 +21,7 @@ namespace CloudberryKingdom
 
 	void Quad::UpdatexAxisLambda::Apply( Vector2 NewPos )
 	{
-		float l = ( NewPos - quad->Center->Pos )->Length();
+		float l = ( NewPos - quad->Center->Pos ).Length();
 		Vector2 axis = NewPos - quad->Center->Pos;
 		axis.Normalize();
 		quad->xAxis->Pos = __max( l,.0125f ) * axis + quad->Center->Pos;
@@ -52,7 +48,9 @@ namespace CloudberryKingdom
 		quad->yAxis->Pos *= L;
 		quad->yAxis->Pos += quad->Center->Pos;
 
-		quad->xAxis->Pos = quad->xAxis->Pos - ( quad->yAxis->Pos - quad->Center->Pos ) * Vector2::Dot( quad->xAxis->Pos - quad->Center->Pos, quad->yAxis->Pos - quad->Center->Pos ) / ( quad->yAxis->Pos - quad->Center->Pos )->LengthSquared();
+		float d = Vector2::Dot( quad->xAxis->Pos - quad->Center->Pos, quad->yAxis->Pos - quad->Center->Pos );
+		d /= ( quad->yAxis->Pos - quad->Center->Pos ).LengthSquared();
+		quad->xAxis->Pos = quad->xAxis->Pos - ( d * ( quad->yAxis->Pos - quad->Center->Pos ) );
 		quad->xAxis->Pos = quad->xAxis->Pos - quad->Center->Pos;
 		quad->xAxis->Pos.Normalize();
 		quad->xAxis->Pos *= L;
@@ -79,8 +77,8 @@ namespace CloudberryKingdom
 
 	void Quad::Resize()
 	{
-		float width = ( Corner[ 1 ]->RelPos - Corner[ 0 ]->RelPos )->Length();
-		Vector2 NewSize = Vector2( MyTexture->Width, MyTexture->Height );
+		float width = ( Corner[ 1 ]->RelPos - Corner[ 0 ]->RelPos ).Length();
+		Vector2 NewSize = Vector2( static_cast<float>( MyTexture->Width ), static_cast<float>( MyTexture->Height ) );
 		NewSize *= .5f * width / MyTexture->Width;
 		ScaleCorners( NewSize );
 	}
@@ -100,7 +98,8 @@ namespace CloudberryKingdom
 
 	void Quad::CopyAnim( const std::shared_ptr<BaseQuad> &basequad, int Anim )
 	{
-		std::shared_ptr<Quad> quad = dynamic_cast<Quad*>( basequad );
+		// FIXME: Check dynamic cast.
+		std::shared_ptr<Quad> quad = std::dynamic_pointer_cast<Quad>( basequad );
 		if ( 0 != quad )
 		{
 			Center->CopyAnim( quad->Center, Anim );
@@ -113,7 +112,8 @@ namespace CloudberryKingdom
 
 	void Quad::CopyAnimShallow( const std::shared_ptr<BaseQuad> &basequad, int Anim )
 	{
-		std::shared_ptr<Quad> quad = dynamic_cast<Quad*>( basequad );
+		// FIXME: Check dynamic cast.
+		std::shared_ptr<Quad> quad = std::dynamic_pointer_cast<Quad>( basequad );
 		if ( 0 != quad )
 		{
 			Center->AnimData = quad->Center->AnimData;
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 		xAxis->AnimData.Hold = xAxis->RelPos;
 		yAxis->AnimData.Hold = yAxis->RelPos;
 		for ( int i = 0; i < 4; i++ )
-			Corner[ i ]->AnimData->Hold = Corner[ i ]->RelPos;
+			Corner[ i ]->AnimData.Hold = Corner[ i ]->RelPos;
 	}
 
 	void Quad::ReadAnim( int anim, int frame )
@@ -139,11 +139,11 @@ namespace CloudberryKingdom
 		xAxis->RelPos = xAxis->AnimData.Get( anim, frame );
 		yAxis->RelPos = yAxis->AnimData.Get( anim, frame );
 		for ( int i = 0; i < 4; i++ )
-			Corner[ i ]->RelPos = Corner[ i ]->AnimData->Get( anim, frame );
+			Corner[ i ]->RelPos = Corner[ i ]->AnimData.Get( anim, frame );
 
-		if ( getTextureIsAnimated() && UpdateSpriteAnim && anim < TextureAnim->Anims.size() && TextureAnim->Anims[ anim ].Data.size() > 0 )
+		if ( getTextureIsAnimated() && UpdateSpriteAnim && anim < static_cast<int>( TextureAnim->Anims.size() ) && TextureAnim->Anims[ anim ].Data.size() > 0 )
 		{
-			std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, frame );
+			std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, static_cast<float>( frame ) );
 			MyTexture = data;
 
 			Vertices[ 0 ].uv = Vector2( 0, 0 );
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 			xAxis->AnimData.Set( xAxis->RelPos, anim, frame );
 			yAxis->AnimData.Set( yAxis->RelPos, anim, frame );
 			for ( int i = 0; i < 4; i++ )
-				Corner[ i ]->AnimData->Set( Corner[ i ]->RelPos, anim, frame );
+				Corner[ i ]->AnimData.Set( Corner[ i ]->RelPos, anim, frame );
 		}
 		else
 		{
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 			xAxis->AnimData.Set( xAxis->Pos, anim, frame );
 			yAxis->AnimData.Set( yAxis->Pos, anim, frame );
 			for ( int i = 0; i < 4; i++ )
-				Corner[ i ]->AnimData->Set( Corner[ i ]->Pos, anim, frame );
+				Corner[ i ]->AnimData.Set( Corner[ i ]->Pos, anim, frame );
 		}
 	}
 
@@ -178,13 +178,13 @@ namespace CloudberryKingdom
 		Vector2 Change_axis = CoreMath::CartesianToPolar( axis->RelPos ) - CoreMath::CartesianToPolar( axis->AnimData.Get( anim, frame ) );
 		Change_axis.Y = 1 + Change_axis.Y / axis->AnimData.Get( anim, frame ).Length();
 
-		for ( int _anim = 0; _anim < axis->AnimData.Anims.size(); _anim++ )
+		for ( size_t _anim = 0; _anim < axis->AnimData.Anims.size(); _anim++ )
 		{
 			if ( RecordMode == ChangeMode_SINGLE_ANIM && _anim != anim )
 				continue;
 
 			if ( axis->AnimData.Anims[ _anim ].Data.size() > 0 )
-				for ( int _frame = 0; _frame < axis->AnimData.Anims[ _anim ].Data.size(); _frame++ )
+				for ( size_t _frame = 0; _frame < axis->AnimData.Anims[ _anim ].Data.size(); _frame++ )
 					if ( anim != _anim || frame != _frame )
 					{
 						Vector2 polar = CoreMath::CartesianToPolar( axis->AnimData.Anims[ _anim ].Data[ _frame ] );
@@ -209,13 +209,13 @@ namespace CloudberryKingdom
 	{
 		Vector2 Change_point = ToAxisCoordinates( point->RelPos - point->AnimData.Get( anim, frame ), xAxis->RelPos, yAxis->RelPos );
 
-		for ( int _anim = 0; _anim < point->AnimData.Anims.size(); _anim++ )
+		for ( size_t _anim = 0; _anim < point->AnimData.Anims.size(); _anim++ )
 		{
 			if ( RecordMode == ChangeMode_SINGLE_ANIM && _anim != anim )
 				continue;
 
 			if ( point->AnimData.Anims[ _anim ].Data.size() > 0 )
-				for ( int _frame = 0; _frame < point->AnimData.Anims[ _anim ].Data.size(); _frame++ )
+				for ( size_t _frame = 0; _frame < point->AnimData.Anims[ _anim ].Data.size(); _frame++ )
 					if ( anim != _anim || frame != _frame )
 					{
 						Vector2 v = ToAxisCoordinates( point->AnimData.Get( _anim, _frame ), xAxis->AnimData.Get( _anim, _frame ), yAxis->AnimData.Get( _anim, _frame ) );
@@ -238,13 +238,13 @@ namespace CloudberryKingdom
 
 	void Quad::ShowChildren()
 	{
-		for ( std::vector<BaseQuad*>::const_iterator child = Children.begin(); child != Children.end(); ++child )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
 			( *child )->Show = true;
 	}
 
 	void Quad::HideChildren()
 	{
-		for ( std::vector<BaseQuad*>::const_iterator child = Children.begin(); child != Children.end(); ++child )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
 			( *child )->Show = false;
 	}
 
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 		xAxis->RelPos = xAxis->AnimData.Transfer( anim, DestT, AnimLength, Loop, Linear, t );
 		yAxis->RelPos = yAxis->AnimData.Transfer( anim, DestT, AnimLength, Loop, Linear, t );
 		for ( int i = 0; i < 4; i++ )
-			Corner[ i ]->RelPos = Corner[ i ]->AnimData->Transfer( anim, DestT, AnimLength, Loop, Linear, t );
+			Corner[ i ]->RelPos = Corner[ i ]->AnimData.Transfer( anim, DestT, AnimLength, Loop, Linear, t );
 	}
 
 	void Quad::Calc( int anim, float t, int AnimLength, bool Loop, bool Linear )
@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 			xAxis->RelPos = xAxis->AnimData.Get( anim, frame );
 			yAxis->RelPos = yAxis->AnimData.Get( anim, frame );
 			for ( int i = 0; i < 4; i++ )
-				Corner[ i ]->RelPos = Corner[ i ]->AnimData->Get( anim, frame );
+				Corner[ i ]->RelPos = Corner[ i ]->AnimData.Get( anim, frame );
 		}
 		else
 		{
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 			xAxis->RelPos = xAxis->AnimData.CalcAxis( anim, t, AnimLength, Loop, Linear );
 			yAxis->RelPos = yAxis->AnimData.CalcAxis( anim, t, AnimLength, Loop, Linear );
 			for ( int i = 0; i < 4; i++ )
-				Corner[ i ]->RelPos = Corner[ i ]->AnimData->Calc( anim, t, AnimLength, Loop, Linear );
+				Corner[ i ]->RelPos = Corner[ i ]->AnimData.Calc( anim, t, AnimLength, Loop, Linear );
 		}
 	}
 
@@ -297,7 +297,9 @@ namespace CloudberryKingdom
 		if ( ParentQuad == 0 || ParentQuad == ParentObject->ParentQuad )
 			writer->Write( -1 );
 		else
-			writer->Write( ParentObject->QuadList.find( ParentQuad ) );
+		{
+			writer->Write( IndexOf( ParentObject->QuadList, std::static_pointer_cast<BaseQuad>( ParentQuad ) ) );
+		}
 
 		Center->Write( writer, ParentObject );
 		xAxis->Write( writer, ParentObject );
@@ -326,7 +328,7 @@ namespace CloudberryKingdom
 		if ( ParentQuadInt == -1 )
 			ParentQuad = ParentObject->ParentQuad;
 		else
-			( static_cast<Quad*>( ParentObject->QuadList[ ParentQuadInt ] ) )->AddQuadChild( this );
+			( static_cast<Quad *>( ParentObject->QuadList[ ParentQuadInt ].get() ) )->AddQuadChild( this->shared_from_this() );
 
 		Center->Read( reader, ParentObject );
 		xAxis->Read( reader, ParentObject );
@@ -376,15 +378,16 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	std::vector<BaseQuad*> Quad::GetAllChildren()
+	std::vector<std::shared_ptr<BaseQuad> > Quad::GetAllChildren()
 	{
-		std::vector<BaseQuad*> list = std::vector<BaseQuad*>();
+		std::vector<std::shared_ptr<BaseQuad> > list;
 
-		for ( std::vector<BaseQuad*>::const_iterator quad = Children.begin(); quad != Children.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = Children.begin(); quad != Children.end(); ++quad )
 		{
 			list.push_back( *quad );
-			if ( dynamic_cast<Quad*>( *quad ) != 0 )
-				list.AddRange( ( static_cast<Quad*>( *quad ) )->GetAllChildren() );
+			if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
+				AddRange( list, ( static_cast<Quad*>( ( *quad ).get() ) )->GetAllChildren() );
+				
 		}
 
 		return list;
@@ -400,7 +403,11 @@ namespace CloudberryKingdom
 			Vector2 n = Vector2( -d.Y, d.X );
 
 			float hold = Vector2::Dot( n, x - Vertices[ i ].xy );
-			if ( sign != 0 && Math::Sign( sign ) != Math::Sign( hold ) )
+
+			// FIXME: Check logic.
+			int sign_a = sign > 0 ? 1 : ( sign < 0 ? -1 : 0 );
+			int sign_b = hold > 0 ? 1 : ( hold < 0 ? -1 : 0 );
+			if ( sign != 0 && sign_a != sign_b )
 				SameSign = false;
 			sign = hold;
 		}
@@ -417,7 +424,11 @@ namespace CloudberryKingdom
 			Vector2 n = Vector2( -d.Y, d.X );
 
 			float hold = Vector2::Dot( n, x - Vertices[ i + 1 ].xy );
-			if ( sign != 0 && Math::Sign( sign ) != Math::Sign( hold ) )
+
+			// FIXME: Check logic.
+			int sign_a = sign > 0 ? 1 : ( sign < 0 ? -1 : 0 );
+			int sign_b = hold > 0 ? 1 : ( hold < 0 ? -1 : 0 );
+			if ( sign != 0 && sign_a != sign_b )
 				SameSign = false;
 			sign = hold;
 		}
@@ -454,9 +465,9 @@ namespace CloudberryKingdom
 	{
 		if ( std::find( Children.begin(), Children.end(), child ) != Children.end() )
 		{
-			if ( dynamic_cast<Quad*>( child ) != 0 )
+			if ( dynamic_cast<Quad*>( child.get() ) != 0 )
 			{
-				std::shared_ptr<Quad> child_quad = static_cast<Quad*>( child );
+				std::shared_ptr<Quad> child_quad = std::static_pointer_cast<Quad>( child );
 				child_quad->Center->ParentQuad.reset();
 				child_quad->Center->RelPosFromPos();
 				child_quad->xAxis->ParentQuad.reset();
@@ -473,38 +484,39 @@ namespace CloudberryKingdom
 				if ( AddToRoot )
 					ParentObject->ParentQuad->AddQuadChild( child );
 			}
-
-			Children.Remove( child );
+			
+			//Children.Remove( child );
+			Remove( Children, child );
 		}
 	}
 
 	void Quad::AddQuadChild( const std::shared_ptr<BaseQuad> &child, bool KeepNumericData )
 	{
-		if ( this == child )
+		if ( this == child.get() )
 			return;
 
 		if ( child->ParentQuad != 0 )
 			child->ParentQuad->RemoveQuadChild( child, false );
 
-		if ( dynamic_cast<Quad*>( child ) != 0 )
+		if ( dynamic_cast<Quad*>( child.get() ) != 0 )
 		{
-			std::shared_ptr<Quad> child_quad = static_cast<Quad*>( child );
+			std::shared_ptr<Quad> child_quad = std::static_pointer_cast<Quad>( child );
 
-			if ( std::find( child_quad->GetAllChildren().begin(), child_quad->GetAllChildren().end(), this ) != child_quad->GetAllChildren().end() )
+			if ( std::find( child_quad->GetAllChildren().begin(), child_quad->GetAllChildren().end(), this->shared_from_this() ) != child_quad->GetAllChildren().end() )
 				return;
 
-			child_quad->Center->ParentQuad = this;
+			child_quad->Center->ParentQuad = this->shared_from_this();
 			if ( !KeepNumericData )
 				child_quad->Center->RelPosFromPos();
-			child_quad->xAxis->ParentQuad = this;
+			child_quad->xAxis->ParentQuad = this->shared_from_this();
 			if ( !KeepNumericData )
 				child_quad->xAxis->RelPosFromPos();
-			child_quad->yAxis->ParentQuad = this;
+			child_quad->yAxis->ParentQuad = this->shared_from_this();
 			if ( !KeepNumericData )
 				child_quad->yAxis->RelPosFromPos();
 		}
 
-		child->ParentQuad = this;
+		child->ParentQuad = std::static_pointer_cast<Quad>( this->shared_from_this() );
 
 		Children.push_back( child );
 	}
@@ -540,9 +552,9 @@ namespace CloudberryKingdom
 
 	void Quad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
 	{
-		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( this );
-		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( this );
-		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( this );
+		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>(  this->shared_from_this() ) );
+		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>(  this->shared_from_this() ) );
 
 	#if defined(EDITOR)
 		ParentPoint->ClickEventCallback = ClickOnParentButton;
@@ -560,7 +572,7 @@ namespace CloudberryKingdom
 
 	void Quad::InitVertices()
 	{
-		Children = std::vector<BaseQuad*>();
+		Children = std::vector<std::shared_ptr<BaseQuad> >();
 
 		NumVertices = 4;
 
@@ -572,15 +584,15 @@ namespace CloudberryKingdom
 		Vertices[ 3 ].uv = Vector2( 1, 1 );
 
 		Center = std::make_shared<ObjectVector>();
-		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( this );
+		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 		xAxis = std::make_shared<ObjectVector>();
 		yAxis = std::make_shared<ObjectVector>();
 		xAxis->CenterPoint = Center;
 		yAxis->CenterPoint = Center;
 		xAxis->Move( Vector2( 1, 0 ) );
 		yAxis->Move( Vector2( 0, 1 ) );
-		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( this );
-		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( this );
+		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 
 	#if defined(EDITOR)
 		ParentPoint = std::make_shared<ObjectVector>();
@@ -594,11 +606,11 @@ namespace CloudberryKingdom
 		SetToBeParent = SetToBeChild = false;
 	#endif
 
-		Corner = std::vector<ObjectVector*>( 4 );
+		Corner = std::vector<std::shared_ptr<ObjectVector> >( 4 );
 		for ( int i = 0; i < 4; i++ )
 		{
 			Corner[ i ] = std::make_shared<ObjectVector>();
-			Corner[ i ]->ParentQuad = this;
+			Corner[ i ]->ParentQuad = this->shared_from_this();
 		}
 
 		Corner[ 0 ]->Move( Vector2( -1, 1 ) );
@@ -645,7 +657,7 @@ namespace CloudberryKingdom
 		SetColor( Color( 1, 1, 1 ) );
 	}
 
-	const Vector2 &Quad::getSize() const
+	Vector2 Quad::getSize() const
 	{
 		return Vector2( xAxis->RelPos.Length(), yAxis->RelPos.Length() );
 	}
@@ -766,12 +778,12 @@ namespace CloudberryKingdom
 		Draw( Tools::QDrawer );
 	}
 
-	void Quad::Draw( const std::shared_ptr<QuadDrawer> &Drawer )
+	void Quad::Draw( std::shared_ptr<QuadDrawer> &Drawer )
 	{
 		if ( !Show )
 			return;
 
-		Drawer->DrawQuad( this );
+		Drawer->DrawQuad( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 	}
 
 #if defined(EDITOR)

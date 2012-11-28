@@ -27,7 +27,11 @@ namespace CloudberryKingdom
 		if ( ParentQuad == 0 || ParentQuad == MainObject->ParentQuad )
 			writer->Write( -1 );
 		else
-			writer->Write( MainObject->QuadList.find( ParentQuad ) );
+		{
+			std::vector<std::shared_ptr<BaseQuad> >::iterator i = std::find( MainObject->QuadList.begin(),
+				MainObject->QuadList.end(), ParentQuad );
+			writer->Write( i - MainObject->QuadList.end() );
+		}
 
 		WriteReadTools::WriteVector2( writer, RelPos );
 		WriteReadTools::WriteVector2( writer, Pos );
@@ -88,7 +92,7 @@ namespace CloudberryKingdom
 		AnimData.Init(); // = new AnimationData();
 
 		Pos = Vector2();
-		ModifiedEventCallback = std::make_shared<DefaultCallbackLambda>( this );
+		ModifiedEventCallback = std::make_shared<DefaultCallbackLambda>( this->shared_from_this() );
 
 	#if defined(EDITOR)
 		ClickEventCallback = DefaultClickCallback;
@@ -120,7 +124,7 @@ namespace CloudberryKingdom
 	void ObjectVector::RelPosFromPos()
 	{
 		if ( ParentQuad != 0 )
-			ParentQuad->Set_RelPosFromPos( this );
+			ParentQuad->Set_RelPosFromPos( this->shared_from_this() );
 		else
 		{
 			Vector2 C = Vector2();
@@ -134,7 +138,7 @@ namespace CloudberryKingdom
 	void ObjectVector::PosFromRelPos()
 	{
 		if ( ParentQuad != 0 )
-			ParentQuad->Set_PosFromRelPos( this );
+			ParentQuad->Set_PosFromRelPos( this->shared_from_this() );
 		else
 		{
 			Vector2 C = Vector2();
