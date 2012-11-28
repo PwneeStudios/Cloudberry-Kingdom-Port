@@ -28,10 +28,16 @@ struct Color
 		R( r ), G( g ), B( b ), A( 255 ) { }
 	Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a ) :
 		R( r ), G( g ), B( b ), A( a ) { }
-	Color( const Vector4 &c ) : R( static_cast< unsigned char >( c.X * 255.f ) ),
+	explicit Color( const Vector4 &c ) :
+		R( static_cast< unsigned char >( c.X * 255.f ) ),
 		G( static_cast< unsigned char >( c.Y * 255.f ) ),
 		B( static_cast< unsigned char >( c.Z * 255.f ) ),
 		A( static_cast< unsigned char >( c.W * 255.f ) ) { }
+	Color( float r, float g, float b, float a ) :
+		R( static_cast< unsigned char >( r * 255.f ) ),
+		G( static_cast< unsigned char >( g * 255.f ) ),
+		B( static_cast< unsigned char >( b * 255.f ) ),
+		A( static_cast< unsigned char >( a * 255.f ) ) { }
 
 	Vector4 ToVector4() const
 	{

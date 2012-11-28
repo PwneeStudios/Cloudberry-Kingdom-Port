@@ -96,6 +96,13 @@ public:
 		return *this;
 	}
 
+	Vector2 &operator -= ( const Vector2 &a )
+	{
+		X -= a.X;
+		Y -= a.Y;
+		return *this;
+	}
+
 	Vector2 &operator *= ( float k )
 	{
 		X *= k;

@@ -6,10 +6,10 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass
+	class QuadClass : public std::enable_shared_from_this<QuadClass>
 	{
 	public:
-		static std::shared_ptr<QuadClass> FindQuad( std::vector<QuadClass*> &list, const std::wstring &Name );
+		static std::shared_ptr<QuadClass> FindQuad( std::vector<std::shared_ptr<QuadClass> > &list, const std::wstring &Name );
 
 		bool HitTest( Vector2 pos );
 		bool HitTest( Vector2 pos, Vector2 padding );
@@ -59,25 +59,25 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		const Vector2 &getLightAlpha() const;
+		const Vector2 &getLightAlpha();
 		void setLightAlpha( const Vector2 &value );
 
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
-		const float &getPosY() const;
+		float getPosY() const;
 		void setPosY( const float &value );
 
-		const float &getSizeX() const;
+		float getSizeX() const;
 		void setSizeX( const float &value );
-		const float &getSizeY() const;
+		float getSizeY() const;
 		void setSizeY( const float &value );
-		const Vector2 &getSize() const;
+		Vector2 getSize() const;
 		void setSize( const Vector2 &value );
 
-		const float &getDegrees() const;
+		float getDegrees() const;
 		void setDegrees( const float &value );
 
-		const float &getAngle() const;
+		float getAngle() const;
 		void setAngle( const float &value );
 
 		QuadClass( const std::shared_ptr<Quad> &quad );
@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 
 		void MultiplyAlpha( float alpha );
 
-		const float &getAlpha() const;
+		float getAlpha() const;
 		void setAlpha( const float &value );
 
 	private:
