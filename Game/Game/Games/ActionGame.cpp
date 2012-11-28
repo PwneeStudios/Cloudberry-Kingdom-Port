@@ -1,16 +1,13 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
-
 	std::shared_ptr<GameData> ActionFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return std::make_shared<ActionGameData>( data, MakeInBackground );
 	}
 
-std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFactory>();
+	std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFactory>();
 
 	ActionGameData::ActionGameData()
 	{
@@ -30,10 +27,10 @@ std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFa
 		Seed = LevelSeed;
 
 		AllowQuickJoin = false;
-
+		
 		Loading = false;
 		LevelSeed->Loaded->setval( true );
-		LevelSeed->MyGame = this;
+		LevelSeed->MyGame = std::static_pointer_cast<GameData>( shared_from_this() );
 
 		MyLevel = MakeEmptyLevel();
 	}
@@ -78,7 +75,7 @@ std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFa
 	{
 		std::shared_ptr<Level> level = std::make_shared<Level>();
 		level->setMainCamera( std::make_shared<Camera>() );
-		level->CurPiece = level->StartNewPiece( 0, 0, 4 );
+		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 		level->CurPiece->StartData[ 0 ].Position = Vector2( 0, 0 );
 		level->getMainCamera()->BLCamBound = Vector2(-100000, 0);
 		level->getMainCamera()->TRCamBound = Vector2(100000, 0);
@@ -88,7 +85,7 @@ std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFa
 		level->MyBackground = std::make_shared<RegularBackground>();
 		level->MyBackground->Init( level );
 
-		level->MyGame = this;
+		level->MyGame = std::static_pointer_cast<GameData>( shared_from_this() );
 
 		return level;
 	}

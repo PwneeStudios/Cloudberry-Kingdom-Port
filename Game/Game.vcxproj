@@ -208,7 +208,6 @@
     <ClCompile Include="Game\Objects\Bob\BobLink.cpp" />
     <ClCompile Include="Game\Objects\Door\Door.cpp" />
     <ClCompile Include="Game\Objects\Door\PressNote.cpp" />
-    <ClCompile Include="Game\Objects\Door\Sign.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObject.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\Cheer.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.cpp" />
@@ -270,8 +269,7 @@
     <ClCompile Include="Game\Objects\In Game Objects\Blocks\Pendulum__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Blocks\Wall.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Checkpoint.cpp" />
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.cpp" />
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.cpp" />
+    <ClCompile Include="Game\Level\Level.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Grab\MakeData.cpp" />
@@ -579,7 +577,6 @@
     <ClInclude Include="Game\Objects\Bob\BobLink.h" />
     <ClInclude Include="Game\Objects\Door\Door.h" />
     <ClInclude Include="Game\Objects\Door\PressNote.h" />
-    <ClInclude Include="Game\Objects\Door\Sign.h" />
     <ClInclude Include="Game\Objects\Game Objects\GameObject.h" />
     <ClInclude Include="Game\Objects\Game Objects\GameObjects\Cheer.h" />
     <ClInclude Include="Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.h" />
@@ -641,8 +638,7 @@
     <ClInclude Include="Game\Objects\In Game Objects\Blocks\Pendulum__Auto.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Blocks\Wall.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Checkpoint.h" />
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.h" />
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.h" />
+    <ClInclude Include="Game\Level\Level.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin__Auto.h" />
     <ClInclude Include="Game\Objects\In Game Objects\Grab\MakeData.h" />

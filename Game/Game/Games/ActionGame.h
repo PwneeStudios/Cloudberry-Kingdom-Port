@@ -5,36 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ActionFactory : public GameFactory
 	{
 	public:
 		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
-	class ActionGameData : public GameData
+	class ActionGameData : public GameData, public std::enable_shared_from_this<ActionGameData>
 	{
 	public:
 		static std::shared_ptr<GameFactory> Factory;

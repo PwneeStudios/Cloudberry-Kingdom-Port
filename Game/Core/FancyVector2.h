@@ -5,11 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	class IPos
 	{
 	public:

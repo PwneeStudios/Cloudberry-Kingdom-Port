@@ -2,7 +2,6 @@
 
 namespace CloudberryKingdom
 {
-
 	Vector2 AABox::RealTR()
 	{
 		return Vector2::Max( TR, BL );

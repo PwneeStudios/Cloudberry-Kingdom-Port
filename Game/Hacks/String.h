@@ -2,6 +2,15 @@
 #define _STRING_H_
 
 #include <string>
+#include <algorithm>
+
+inline std::wstring ToLower( const std::wstring &s )
+{
+	std::wstring lower = s;
+	std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+
+	return lower;
+}
 
 inline int CompareIgnoreCase( const std::wstring &s1, const std::wstring &s2)
 {

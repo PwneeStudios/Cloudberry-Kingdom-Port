@@ -1,6 +1,18 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
+// Jordan's awesome questions to Oleg:
+// Some functions take a List<> and I will sent a "null" instead. In C++ this is now a vector, so I should send an empty list instead?
+
+// Jordan's unalphebatized shit. Suck it Oleg.
+inline int Sign__RegexMe41315803(int x) { return (x > 0) - (x < 0); }
+inline int Sign__RegexMe41315803(float x) { return (x > 0) - (x < 0); }
+inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
+
+// Things to reh-gecks.
+// Math::Sign and Sign__RegexMe41315803 -> Sign
+
+
 #include "enums.h"
 #include "forward_declarations.h"
 
@@ -8,6 +20,8 @@
 #include <algorithm>
 #include <list>
 #include <map>
+#define _USE_MATH_DEFINES
+#include "math.h"
 #include <memory>
 #include <queue>
 #include <stack>
@@ -17,6 +31,14 @@
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>
+
+// Syntactic sugar
+namespace CloudberryKingdom
+{
+	typedef std::vector<std::shared_ptr<Bob> > BobVec;
+	typedef std::vector<std::shared_ptr<ObjectBase> > ObjectVec;
+	typedef std::vector<std::shared_ptr<BlockBase> > BlockVec;
+}
 
 // Core library.
 #include <Graphics/Color.h>
@@ -164,7 +186,19 @@ public:
 
 };
 
-struct Rectangle { int X; int Y; int Width; int Height; };
+struct Rectangle
+{
+
+public:
+
+	int X, Y, Width, Height;
+
+	Rectangle( int X, int Y, int Width, int Height ) :
+		X( X ), Y( Y ), Width( Width ), Height( Height )
+	{
+	}
+};
+
 class SamplerState;
 class SignedInEventArgs;
 class Song;
@@ -415,7 +449,6 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Objects/Door/Door.h"
 #include "Game/Objects/Game Objects/GameObjects/GUI_Text.h"
 #include "Game/Objects/Door/PressNote.h"
-#include "Game/Objects/Door/Sign.h"
 #include "Game/Objects/Game Objects/Template_GameObject.h"
 #include "Game/Objects/Game Objects/GameObjects/Cheer.h"
 #include "Game/Objects/Game Objects/GameObjects/CoinScoreMultiplierObject.h"
@@ -470,9 +503,8 @@ struct Viewport { float X; float Y; float Width; float Height; };
 #include "Game/Objects/In Game Objects/Blocks/Pendulum.h"
 #include "Game/Objects/In Game Objects/Blocks/Pendulum__Auto.h"
 #include "Game/Objects/In Game Objects/Grab/Checkpoint.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.BerryBubble.h"
 #include "Game/Objects/In Game Objects/Grab/MakeData.h"
-#include "Game/Objects/In Game Objects/Grab/CloudberryKingdom.Level.h"
+#include "Game/Level/Level.h"
 #include "Game/Objects/In Game Objects/Grab/Coin.h"
 #include "Game/Objects/In Game Objects/Grab/Coin__Auto.h"
 #include "Game/Objects/In Game Objects/Obstacles/BlockEmitter.h"

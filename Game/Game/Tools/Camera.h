@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		PhsxData Data;
 		Vector2 PrevPos, PrevPrevPos;
 
-		const Vector2 &getPos() const;
+		Vector2 getPos();
 		void setPos( const Vector2 &value );
 
 		Vector2 PosToScreenPos( Vector2 pos, float parallax );

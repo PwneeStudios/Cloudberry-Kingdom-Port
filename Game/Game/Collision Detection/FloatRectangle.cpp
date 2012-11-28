@@ -1,7 +1,7 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
-
 	FloatRectangle::FloatRectangle()
 	{
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		return Vector2( TR.X, BL.Y );
 	}
 
-	Microsoft::Xna::Framework::Rectangle FloatRectangle::GetIntRectangle()
+	Rectangle FloatRectangle::GetIntRectangle()
 	{
 		return Rectangle( static_cast<int>( Center.X - Size.X ), static_cast<int>( Center.Y - Size.Y ), 2 * static_cast<int>( Size.X ), 2 * static_cast<int>( Size.Y ) );
 	}

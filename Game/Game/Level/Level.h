@@ -349,8 +349,8 @@ namespace CloudberryKingdom
 		bool SetToWatchMake;
 
 
-		std::shared_ptr<LevelPiece> StartNewPiece( int Length, std::vector<Bob*> Computer );
-		std::shared_ptr<LevelPiece> StartNewPiece( int Length, std::vector<Bob*> Computer, int NumBobs );
+		std::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer );
+		std::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer, int NumBobs );
 
 		void Clone( const std::shared_ptr<Level> &A );
 
@@ -678,7 +678,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<Camera> HoldCamera;
 	public:
 		const std::shared_ptr<Camera> &getMainCamera() const;
-		void setMainCamera( const std::shared_ptr<Camera> &value );
+		void setMainCamera( std::shared_ptr<Camera> &value );
 
 		/// <summary>
 		/// Event handler. Activates when the main camera is set to another camera instance.

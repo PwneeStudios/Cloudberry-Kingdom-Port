@@ -24,6 +24,8 @@ struct Color
 	};
 
 	Color() : R( 0 ), G( 0 ), B( 0 ), A( 0 )  { }
+	Color( unsigned char r, unsigned char g, unsigned char b ) :
+		R( r ), G( g ), B( b ), A( 255 ) { }
 	Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a ) :
 		R( r ), G( g ), B( b ), A( a ) { }
 	Color( const Vector4 &c ) : R( static_cast< unsigned char >( c.X * 255.f ) ),
@@ -41,8 +43,9 @@ struct Color
 		return R == c.R && G == c.G && B == c.B && A == c.A;
 	}
 
-	static Color White;
+	static Color Black;
 	static Color Transparent;
+	static Color White;
 };
 
 #endif

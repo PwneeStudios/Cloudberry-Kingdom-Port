@@ -1,14 +1,9 @@
 #include <global_header.h>
 
-
-
 namespace Forms = System::Windows::Forms;
-
-
 
 namespace CloudberryKingdom
 {
-
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;

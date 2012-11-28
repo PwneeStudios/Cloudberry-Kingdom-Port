@@ -72,6 +72,23 @@ public:
 		return Vector2( __max( a.X, b.X ), __max( a.Y, b.Y ) );
 	}
 
+    /// <summary>
+    /// Whether the vector is less than or equal to another vector in both components
+    /// </summary>
+    bool LE(Vector2 a)
+    {
+        if (X <= a.X && Y <= a.Y) return true;
+        return false;
+    }
+    /// <summary>
+    /// Whether the vector is greater than or equal to another vector in both components
+    /// </summary>
+    bool GE(Vector2 a)
+    {
+        if (X >= a.X && Y >= a.Y) return true;
+        return false;
+    }
+
 	Vector2 &operator += ( const Vector2 &a )
 	{
 		X += a.x();

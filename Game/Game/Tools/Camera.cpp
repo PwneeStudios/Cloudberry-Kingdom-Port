@@ -1,8 +1,9 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
-	const Vector2 &Camera::getPos() const
+	Vector2 Camera::getPos()
 	{
 		return Data.Position;
 	}

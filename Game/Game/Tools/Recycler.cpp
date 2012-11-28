@@ -152,8 +152,6 @@ namespace CloudberryKingdom
 				return std::make_shared<SpikeyLine>( BoxesOnly );
 			case ObjectType_FIRESNAKE:
 				return std::make_shared<Firesnake>( BoxesOnly );
-			case ObjectType_BERRY_BUBBLE:
-				return std::make_shared<BerryBubble>( BoxesOnly );
 
 			case ObjectType_PENDULUM:
 				return std::make_shared<Pendulum>( BoxesOnly );

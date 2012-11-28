@@ -1221,12 +1221,12 @@ namespace CloudberryKingdom
 		return CurMakeData->PieceSeed;
 	}
 
-	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, std::vector<Bob*> Computer )
+	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer )
 	{
 		return StartNewPiece( Length, Computer, 1 );
 	}
 
-	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, std::vector<Bob*> Computer, int NumBobs )
+	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer, int NumBobs )
 	{
 		std::shared_ptr<LevelPiece> NewPiece = std::make_shared<LevelPiece>( Length, this, Computer, NumBobs );
 		LevelPieces.push_back( NewPiece );
@@ -2439,7 +2439,7 @@ int Level::AfterPostDrawLayer = 12;
 		return MyCamera;
 	}
 
-	void Level::setMainCamera( const std::shared_ptr<Camera> &value )
+	void Level::setMainCamera( std::shared_ptr<Camera> &value )
 	{
 		MyCamera = value;
 		MyCamera->MyLevel = this;

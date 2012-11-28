@@ -1,7 +1,7 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
-
 	void Boulder::BoulderTileInfo::InitializeInstanceFields()
 	{
 		Ball = std::make_shared<SpriteInfo>( 0, Vector2(1) );
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Boulder_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_BOULDER;
-		DeathType = Bob::BobDeathType_BOULDER;
+		DeathType = BobDeathType_BOULDER;
 
 		getCore()->ContinuousEnabled = true;
 

@@ -37,11 +37,6 @@ std::vector<float> Challenge_HeroRush2::IconScale = std::vector<float>( tempVect
 		std::shared_ptr<GameData> game = Tools::CurGameData;
 		Vector2 pos = Tools::CurLevel->getFinalDoor()->getPos();
 
-		// Delete the exit sign
-		for ( std::vector<ObjectBase*>::const_iterator obj = Tools::CurLevel->Objects.begin(); obj != Tools::CurLevel->Objects.end(); ++obj )
-			if ( dynamic_cast<Sign*>( *obj ) != 0 )
-				( *obj )->getCore()->MarkedForDeletion = true;
-
 		// Count number of icons needed
 		int Total = 0;
 		if ( spec.basetype != Hero_BaseType_CLASSIC )

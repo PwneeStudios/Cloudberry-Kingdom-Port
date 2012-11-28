@@ -163,7 +163,6 @@ namespace CloudberryKingdom
 	class ProgressBar;
 	class InitialLoadingScreen;
 	class CampaignHelper;
-	class BerryBubble;
 	class DoorIcon;
 	class ConveyorBlock;
 	class Challenge_Escalation;

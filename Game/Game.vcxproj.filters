@@ -453,9 +453,6 @@
     <ClCompile Include="Game\Objects\Door\PressNote.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Objects\Door\Sign.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\End\GameOverPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -631,12 +628,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Checkpoint.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Objects\In Game Objects\Grab\Coin.cpp">
@@ -1086,6 +1077,9 @@
     <ClCompile Include="Game\Objects\In Game Objects\Grab\MakeData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Level\Level.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -1532,9 +1526,6 @@
     <ClInclude Include="Game\Objects\Door\PressNote.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Objects\Door\Sign.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Objects\Game Objects\GameObjects\End\GameOverPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -1710,12 +1701,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Checkpoint.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.BerryBubble.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Objects\In Game Objects\Grab\CloudberryKingdom.Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Objects\In Game Objects\Grab\Coin.h">
@@ -2208,6 +2193,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Level\Level.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

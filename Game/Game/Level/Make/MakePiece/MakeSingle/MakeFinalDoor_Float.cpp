@@ -97,14 +97,6 @@ namespace CloudberryKingdom
 		// Push lava down
 		MyLevel->PushLava( FinalBlock->getBox()->Target->TR.Y - 60 );
 
-		// Add exit sign
-		if ( MyLevel->getInfo()->Doors->ShowSign )
-		{
-			std::shared_ptr<Sign> sign = std::make_shared<Sign>( false, MyLevel );
-			sign->PlaceAt( door->GetTop() );
-			MyLevel->AddObject( sign );
-		}
-
 		// Cleanup
 		FinalBlock.reset();
 	}

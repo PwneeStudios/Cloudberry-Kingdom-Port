@@ -104,11 +104,6 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		Vector2 shift = Vector2( 0, 470 );
 
 		Tools::CurGameData->AddGameObject( std::make_shared<DoorIcon>( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1 ) );
-
-		// Delete the exit sign
-		for ( std::vector<ObjectBase*>::const_iterator obj = Tools::CurLevel->Objects.begin(); obj != Tools::CurLevel->Objects.end(); ++obj )
-			if ( dynamic_cast<Sign*>( *obj ) != 0 )
-				( *obj )->getCore()->MarkedForDeletion = true;
 	}
 
 	void Challenge_HeroRush::AdditionalPreStart()

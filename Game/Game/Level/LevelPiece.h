@@ -5,37 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ComputerRecording;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
 	class LevelPiece
 	{
 	public:
@@ -49,7 +18,6 @@ namespace CloudberryKingdom
 
 		int PieceLength;
 
-//C# TO C++ CONVERTER NOTE: The variable Recording was renamed since it is named the same as a user-defined type:
 		std::vector<ComputerRecording*> Recording_Renamed;
 
 		void Shift( Vector2 shift );

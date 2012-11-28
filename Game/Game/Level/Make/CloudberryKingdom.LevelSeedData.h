@@ -321,7 +321,7 @@ namespace CloudberryKingdom
 
 		std::wstring Name;
 
-		std::shared_ptr<Multicaster_1<Level*> > PostMake;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<Level> > > PostMake;
 
 		/// <summary>
 		/// Adds the default GameObjects to a level.
