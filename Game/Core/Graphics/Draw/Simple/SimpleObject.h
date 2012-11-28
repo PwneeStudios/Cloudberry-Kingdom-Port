@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	class SimpleObject
 	{
 	public:
-		std::vector<std::shared_ptr<SimpleQuad> > Quads;
+		std::vector<SimpleQuad> Quads;
 		std::vector<std::shared_ptr<SimpleBox> > Boxes;
 		BasePoint Base;
 

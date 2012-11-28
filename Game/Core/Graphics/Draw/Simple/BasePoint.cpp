@@ -2,6 +2,10 @@
 
 namespace CloudberryKingdom
 {
+	BasePoint::BasePoint()
+	{
+	}
+
 	BasePoint::BasePoint( float e1x, float e1y, float e2x, float e2y, float ox, float oy )
 	{
 		e1 = Vector2( e1x, e1y );

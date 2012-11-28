@@ -15,6 +15,7 @@
 #include <vector>
 #include <tchar.h>
 
+#include <Hacks/List.h>
 #include <Hacks/String.h>
 
 // Core library.

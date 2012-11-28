@@ -2207,5 +2207,8 @@
     <ClInclude Include="Hacks\String.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hacks\List.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

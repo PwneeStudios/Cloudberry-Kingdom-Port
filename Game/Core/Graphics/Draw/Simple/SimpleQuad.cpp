@@ -98,6 +98,25 @@ namespace CloudberryKingdom
 		_MyTexture.reset();
 	}
 
+	SimpleQuad::SimpleQuad()
+	{
+		Animated = false;
+		t = 0;
+		anim = 0;
+		Playing = false;
+		speed = 0;
+
+		Hide = false;
+
+		BlendAddRatio = 0;
+		
+		U_Wrap = false;
+		V_Wrap = false;
+
+		Illumination = 0;
+		UseGlobalIllumination = false;
+	}
+
 	SimpleQuad::SimpleQuad( SimpleQuad &quad )
 	{
 		Name = quad.Name;

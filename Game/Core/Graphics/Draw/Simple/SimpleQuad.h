@@ -9,7 +9,6 @@ namespace CloudberryKingdom
 	{
 
 	public:
-
 		bool Animated;
 
 		void NextKeyFrame();
@@ -64,6 +63,8 @@ namespace CloudberryKingdom
 		std::wstring Name;
 
 		void Release();
+
+		SimpleQuad();
 
 		SimpleQuad( SimpleQuad &quad );
 
