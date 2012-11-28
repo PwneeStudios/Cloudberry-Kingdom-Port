@@ -1,10 +1,6 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
-// Jordan's awesome questions to Oleg:
-// Some functions take a List<> and I will sent a "null" instead. In C++ this is now a vector, so I should send an empty list instead?
-// Should we be wrapping vectors in shared_ptr?
-
 // Jordan's unalphebatized shit. Suck it Oleg.
 inline int Sign__RegexMe41315803(int x) { return (x > 0) - (x < 0); }
 inline int Sign__RegexMe41315803(float x) { return (x > 0) - (x < 0); }
@@ -13,6 +9,7 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 // Things to reh-gecks.
 // Math::Sign and Sign__RegexMe41315803 -> Sign
 // ->Data->Position -> ->Data.Position    Also for Velocity and Acceleration
+// ->Core->   ->   ->getCore()->
 
 #include "enums.h"
 #include "forward_declarations.h"

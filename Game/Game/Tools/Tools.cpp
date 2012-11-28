@@ -222,12 +222,12 @@ template<typename TKey, typename TValue>
 	return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content\\Art") );
 	}
 
-std::shared_ptr<AftermathData> Tools::CurrentAftermath = 0;
-bool Tools::IsMasochistic = false;
-bool Tools::AutoLoop = false;
-int Tools::AutoLoopDelay = 0;
+	std::shared_ptr<AftermathData> Tools::CurrentAftermath = 0;
+	bool Tools::IsMasochistic = false;
+	bool Tools::AutoLoop = false;
+	int Tools::AutoLoopDelay = 0;
 
-template<typename T>
+	template<typename T>
 	void Tools::Swap( std::shared_ptr<T> &a, std::shared_ptr<T> &b )
 	{
 		T temp = a;
@@ -235,7 +235,7 @@ template<typename T>
 		b = temp;
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	TSource Tools::Find( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
@@ -244,7 +244,7 @@ template<typename TSource>
 		return TSource();
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	std::vector<TSource> Tools::FindAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		std::vector<TSource> newlist = std::vector<TSource>();
@@ -254,7 +254,7 @@ template<typename TSource>
 		return newlist;
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	bool Tools::All( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		bool all = true;
@@ -264,7 +264,7 @@ template<typename TSource>
 		return all;
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	bool Tools::Any( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
@@ -273,7 +273,7 @@ template<typename TSource>
 		return false;
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	void Tools::RemoveAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		int OpenSlot = 0;
@@ -296,7 +296,7 @@ template<typename TSource>
 		list.RemoveRange( OpenSlot, N - OpenSlot );
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	void Tools::RemoveAll( std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_2<TSource, int, bool> > &predicate )
 	{
 		int i = 0;
@@ -321,7 +321,7 @@ template<typename TSource>
 		source.RemoveRange( i, N - i );
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	TSource Tools::ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 	{
 		TSource min = TSource();

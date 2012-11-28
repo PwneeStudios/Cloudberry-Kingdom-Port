@@ -529,7 +529,7 @@ namespace CloudberryKingdom
 		getToDo().push_back(std::make_shared<ToDoItem>(std::make_shared<ConvertLambdaToLambdaFuncTrue>(FuncToDo), name, PauseOnPause, RemoveOnReset));
 	}
 
-	std::vector<std::shared_ptr<ToDoItem> > &GameData::getToDo() const
+	std::vector<std::shared_ptr<ToDoItem> > &GameData::getToDo()
 	{
 		return CurToDo;
 	}
@@ -836,7 +836,7 @@ bool GameData::LockLevelStart = false;
 				( *bob )->Init( false, ( *bob )->MyPiece->StartData[ ( *bob )->MyPieceIndex ], shared_from_this() );
 				( *bob )->Move( CheckpointBob->getCore()->Data.Position - (*bob)->getCore()->Data.Position );
 
-				ParticleEffects::AddPop( MyLevel, ( *bob )->getCore()->Data->Position, 155 );
+				ParticleEffects::AddPop( MyLevel, ( *bob )->getCore()->Data.Position, 155 );
 			}
 		}
 
@@ -849,18 +849,17 @@ bool GameData::LockLevelStart = false;
 			return;
 
 		// Remove marked todo items
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
-				( *todo )->MarkedForDeletion = true;
+				( *todo )->setMarkedForDeletion(true);
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
-				( *todo )->MarkedForDeletion = true;
+				( *todo )->setMarkedForDeletion(true);
 		}
 
 		// Perform additional actions
@@ -889,7 +888,7 @@ bool GameData::LockLevelStart = false;
 			{
 				if ( !PlayerManager::Get( static_cast<int>( ( *bob )->MyPlayerIndex ) )->Exists )
 				{
-					ParticleEffects::AddPop( MyLevel, ( *bob )->Core->Data->Position );
+					ParticleEffects::AddPop( MyLevel, ( *bob )->getCore()->Data.Position );
 					Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
 				}
 				else
@@ -938,9 +937,9 @@ bool GameData::LockLevelStart = false;
 
 		Player->MyPiece = MyLevel->CurPiece;
 
-		int _i = __min( i, MyLevel->CurPiece->StartData.size() - 1 );
+		int _i = __min( i, static_cast<int>( MyLevel->CurPiece->StartData.size() ) - 1 );
 		PhsxData StartData = MyLevel->CurPiece->StartData[ _i ];
-		Player->Init( false, MyLevel->CurPiece->StartData[ 0 ], this );
+		Player->Init( false, MyLevel->CurPiece->StartData[ 0 ], shared_from_this() );
 		std::shared_ptr<Bob> TargetBob = Tools::Find( MyLevel->Bobs, std::make_shared<FindTargetBobLambda>( Player ) );
 
 		if ( TargetBob != 0 )
@@ -1013,7 +1012,7 @@ bool GameData::LockLevelStart = false;
 		PauseGame = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
-			if ( ( *obj )->PauseGame )
+			if ( ( *obj )->getPauseGame() )
 				PauseGame = true;
 
 		PauseGame |= CharacterSelectManager::IsShowing;
@@ -1024,7 +1023,7 @@ bool GameData::LockLevelStart = false;
 		PauseLevel = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
-			if ( ( *obj )->PauseLevel )
+			if ( ( *obj )->getPauseLevel() )
 				PauseLevel = true;
 	}
 
@@ -1033,7 +1032,7 @@ bool GameData::LockLevelStart = false;
 		SoftPause = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
-			if ( ( *obj )->SoftPause )
+			if ( ( *obj )->getSoftPause() )
 				SoftPause = true;
 	}
 
@@ -1195,7 +1194,7 @@ bool GameData::LockLevelStart = false;
 	void GameData::Init()
 	{
 		BlackQuad = std::make_shared<QuadClass>( _T( "White" ) );
-		BlackQuad->Quad_Renamed->SetColor( Color::Black );
+		BlackQuad->Quad_Renamed.SetColor( Color::Black );
 
 		BlackBase.e1 = Vector2( 45, 0 );
 		BlackBase.e2 = Vector2( 0, 45 );
@@ -1277,9 +1276,9 @@ bool GameData::LockLevelStart = false;
 			BlackQuad->FullScreen( getCam() );
 
 			if ( FadeColor == 0 )
-				BlackQuad->Quad_Renamed->SetColor( Color( 0, 0, 0, Tools::FloatToByte( BlackAlpha ) ) );
+				BlackQuad->Quad_Renamed.SetColor( Color( 0, 0, 0, Tools::FloatToByte( BlackAlpha ) ) );
 			else
-				BlackQuad->Quad_Renamed->SetColor( FadeColor->getColor() );
+				BlackQuad->Quad_Renamed.SetColor( FadeColor->getColor() );
 			BlackQuad->Draw();
 			Tools::QDrawer->Flush();
 		}
@@ -1348,7 +1347,7 @@ bool GameData::LockLevelStart = false;
 		if ( MyLevel->Bobs.size() > 0 )
 		{
 			for ( std::vector<std::shared_ptr<Bob> >::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
-				if ( ( *bob )->getCore()->Data->Position.X > x )
+				if ( ( *bob )->getCore()->Data.Position.X > x )
 					OnePast = true;
 
 			return OnePast;
@@ -1363,7 +1362,7 @@ bool GameData::LockLevelStart = false;
 		if ( MyLevel->Bobs.size() > 0 )
 		{
 			for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
-				if ( ( *bob )->getCore()->Data->Position.X < x )
+				if ( ( *bob )->getCore()->Data.Position.X < x )
 					AllPast = false;
 
 			return AllPast;
@@ -1381,7 +1380,7 @@ bool GameData::LockLevelStart = false;
 	{
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			if ( ( *bob )->MyPlayerIndex == getMvp()->MyPlayerIndex )
-				return bob;
+				return ( *bob );
 		return MyLevel->Bobs[ 0 ];
 	}
 
@@ -1448,11 +1447,6 @@ bool GameData::LockLevelStart = false;
 		return Count;
 	}
 
-	void GameData::SetAdditionalBobParameters( BobVec Bobs )
-	{
-		SetAdditionalBobParameters( BobVec( Bobs ) );
-	}
-
 	void GameData::SetAdditionalBobParameters( BobVec &Bobs )
 	{
 		// Hide corpses
@@ -1469,7 +1463,7 @@ bool GameData::LockLevelStart = false;
 					( *bob )->MyBobLinks.clear();
 
 			// Link bobs together
-			for ( int i = 0; i < Bobs.size() - 1; i++ )
+			for ( int i = 0; i < static_cast<int>( Bobs.size() ) - 1; i++ )
 			{
 				std::shared_ptr<BobLink> link = std::make_shared<BobLink>();
 				link->Connect( Bobs[ i ], Bobs[ i + 1 ] );
@@ -1581,8 +1575,8 @@ bool GameData::LockLevelStart = false;
 		CinematicToDo( Wait, std::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, this ) );
 	}
 
-std::vector<int> GameData::DramaticEntryWait = 0;
-Vector2 GameData::DramaticEntryVel = 0;
+	std::vector<int> GameData::DramaticEntryWait;
+	Vector2 GameData::DramaticEntryVel;
 
 	void GameData::SetDramaticEntryParams()
 	{
@@ -1604,8 +1598,8 @@ Vector2 GameData::DramaticEntryVel = 0;
 	{
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
-			( *bob )->getCore()->Data->Velocity = Vector2();
-			( *bob )->getCore()->Data->Acceleration = Vector2();
+			( *bob )->getCore()->Data.Velocity = Vector2();
+			( *bob )->getCore()->Data.Acceleration = Vector2();
 
 			bool HoldShow = ( *bob )->getCore()->Show;
 			( *bob )->getCore()->Show = true;
@@ -1618,16 +1612,14 @@ Vector2 GameData::DramaticEntryVel = 0;
 
 	void GameData::HideBobs()
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
-			( *bob )->Core->Show = false;
+			( *bob )->getCore()->Show = false;
 	}
 
 	void GameData::ShowBobs()
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
-			( *bob )->Core->Show = true;
+			( *bob )->getCore()->Show = true;
 	}
 
 	void GameData::LoadRecording( const std::wstring &RecordingName )

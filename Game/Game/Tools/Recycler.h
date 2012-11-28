@@ -5,16 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
-}
-
-
-#define XBOX
-
-
-
-namespace CloudberryKingdom
-{
 	class RecycleBin
 	{
 	private:

@@ -5,32 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ComputerRecording;
-}
-
-namespace CloudberryKingdom
-{
-	class BobLink;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnimGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-namespace CloudberryKingdom
-{
 	class Recording
 	{
 		/// <summary>
@@ -67,7 +41,7 @@ namespace CloudberryKingdom
 		void Read( const std::shared_ptr<BinaryReader> &reader );
 
 		int NumBobs;
-		std::vector<ComputerRecording*> Recordings;
+		std::vector<std::shared_ptr<ComputerRecording> > Recordings;
 		int Length;
 
 		Vector2 BoxSize;

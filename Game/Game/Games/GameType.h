@@ -573,7 +573,7 @@ namespace CloudberryKingdom
 
 		void AddToDo( const std::shared_ptr<Lambda> &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset );
 
-		std::vector<std::shared_ptr<ToDoItem> > &getToDo() const;
+		std::vector<std::shared_ptr<ToDoItem> > &getToDo();
 
 		std::vector<std::shared_ptr<Lambda> > ToDoOnReset;
 	private:
@@ -814,7 +814,6 @@ namespace CloudberryKingdom
 		int CreateBob( const std::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j );
 
 	public:
-		void SetAdditionalBobParameters( BobVec Bobs );
 		virtual void SetAdditionalBobParameters( BobVec &Bobs );
 
 		static std::shared_ptr<GameData> StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed );
