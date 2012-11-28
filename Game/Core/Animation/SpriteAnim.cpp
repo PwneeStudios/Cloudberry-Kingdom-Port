@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 	}
 
 	// FIXME: This Texture2D * used to be std::shared_ptr<Texture2D>.
-	Texture2D *SpriteAnimGroup::Get( int anim, float t, Vector2 &padding )
+	std::shared_ptr<Texture2D> SpriteAnimGroup::Get( int anim, float t, Vector2 &padding )
 	{
 		if ( SpriteAnims.find( anim ) == SpriteAnims.end() )
 		{

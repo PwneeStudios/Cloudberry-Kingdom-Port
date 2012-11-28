@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
 			const std::shared_ptr<Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
 
-		Texture2D *Get( int anim, float t, Vector2 &padding );
+		std::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
 	};
 
 }
