@@ -1,11 +1,9 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-	const Microsoft::Xna::Framework::Matrix &BaseQuad::getMyMatrix() const
+	const Matrix &BaseQuad::getMyMatrix() const
 	{
 		return _MyMatrix;
 	}
@@ -16,7 +14,7 @@ namespace CloudberryKingdom
 		MyMatrixSignature = ColorHelper::MatrixSignature( _MyMatrix );
 	}
 
-	const bool &BaseQuad::getTextureIsAnimated() const
+	bool BaseQuad::getTextureIsAnimated() const
 	{
 		return TextureAnim != 0 && TextureAnim->Anims.size() > 0;
 	}
@@ -25,10 +23,10 @@ namespace CloudberryKingdom
 	{
 	#if defined(XBOX)
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-		return std::wstring::Compare( this->Name, Name, System::StringComparison::CurrentCultureIgnoreCase ) == 0;
+		return CompareIgnoreCase( this->Name, Name ) == 0;
 	#else
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-		return std::wstring::Compare( this->Name, Name, true ) == 0;
+		return CompareIgnoreCase( this->Name, Name ) == 0;
 	#endif
 	}
 
@@ -51,7 +49,8 @@ namespace CloudberryKingdom
 	{
 		Released = true;
 
-		ParentObject.reset();
+		//ParentObject.reset();
+		ParentObject = 0;
 		ParentQuad.reset();
 		Vertices.clear();
 		MyTexture.reset();
@@ -190,7 +189,7 @@ namespace CloudberryKingdom
 
 	void BaseQuad::OrphanSelf()
 	{
-		ParentQuad->RemoveQuadChild( this );
+		ParentQuad->RemoveQuadChild( this->shared_from_this() );
 	}
 
 	void BaseQuad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad )
@@ -206,11 +205,11 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void BaseQuad::Draw( const std::shared_ptr<QuadDrawer> &QDrawer )
+	void BaseQuad::Draw( std::shared_ptr<QuadDrawer> &QDrawer )
 	{
 	}
 
-	void BaseQuad::DrawExtra( const std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines )
+	void BaseQuad::DrawExtra( std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines )
 	{
 	}
 
@@ -276,7 +275,7 @@ namespace CloudberryKingdom
 
 	void BaseQuad::InitializeInstanceFields()
 	{
-		_MyMatrix = Matrix::Identity;
+		_MyMatrix = Matrix::Identity();
 		UpdateSpriteAnim = true;
 		Show = true;
 #if defined(EDITOR)

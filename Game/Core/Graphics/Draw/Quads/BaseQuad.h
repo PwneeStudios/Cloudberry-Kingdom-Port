@@ -5,13 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class BaseQuad
+	class BaseQuad : public std::enable_shared_from_this<BaseQuad>
 	{
 	public:
 		ObjectDrawOrder MyDrawOrder;
 
-		// FIXME: Make weak_ptr later.
-		ObjectClass* ParentObject;
+		std::shared_ptr<ObjectClass> ParentObject;
 		std::shared_ptr<Quad> ParentQuad;
 
 		std::vector<MyOwnVertexFormat> Vertices;
@@ -34,7 +33,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<AnimationData_Texture> TextureAnim;
 		bool UpdateSpriteAnim;
-		const bool &getTextureIsAnimated() const;
+		bool getTextureIsAnimated() const;
 
 		Color MyColor, PremultipliedColor;
 
@@ -93,8 +92,8 @@ namespace CloudberryKingdom
 		virtual void FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames );
 
 		virtual void Draw();
-		virtual void Draw( const std::shared_ptr<QuadDrawer> &QDrawer );
-		virtual void DrawExtra( const std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines );
+		virtual void Draw( std::shared_ptr<QuadDrawer> &QDrawer );
+		virtual void DrawExtra( std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines );
 		virtual bool HitTest( Vector2 x );
 
 #if defined(EDITOR)

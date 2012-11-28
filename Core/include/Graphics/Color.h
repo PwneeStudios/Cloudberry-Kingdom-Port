@@ -26,6 +26,8 @@ struct Color
 	Color() : R( 0 ), G( 0 ), B( 0 ), A( 0 )  { }
 	Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a ) :
 		R( r ), G( g ), B( b ), A( a ) { }
+	Color( unsigned char r, unsigned char g, unsigned char b ) :
+		R( r ), G( g ), B( b ), A( 255 ) { }
 	Color( const Vector4 &c ) : R( static_cast< unsigned char >( c.X * 255.f ) ),
 		G( static_cast< unsigned char >( c.Y * 255.f ) ),
 		B( static_cast< unsigned char >( c.Z * 255.f ) ),

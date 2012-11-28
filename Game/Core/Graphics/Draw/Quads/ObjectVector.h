@@ -5,17 +5,18 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectVector
+	class ObjectVector : public std::enable_shared_from_this<ObjectVector>
 	{
 	private:
 		class DefaultCallbackLambda : public Lambda_1<Vector2>
 		{
 		private:
 			std::shared_ptr<ObjectVector> v;
+
 		public:
 			DefaultCallbackLambda( const std::shared_ptr<ObjectVector> &v );
 
-			void Apply( Vector2 NewPos );
+			void Apply( Vector2 &NewPos );
 		};
 
 	public:

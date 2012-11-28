@@ -2,59 +2,12 @@
 
 namespace CloudberryKingdom
 {
-
-	PieceQuadGroup::PieceQuadGroup() : List(5)
-	{
-	}
-
-const std::wstring* tempVector[] = { _T( "xxsmall" ), _T( "xsmall" ), _T( "small" ), _T( "smallmedium" ), _T( "medium" ), _T( "large" ), _T( "xlarge" ) };
-std::vector<std::wstring> PieceQuadGroup::suffixes = std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-
-	void PieceQuadGroup::InitPillars( const std::wstring &root )
-	{
-		InitPillars( root, suffixes );
-	}
-
-	void PieceQuadGroup::InitPillars( const std::wstring &root, std::vector<std::wstring&> suffixes )
-	{
-		std::shared_ptr<PieceQuad> c;
-
-		for ( std::vector<std::wstring>::const_iterator suffix = suffixes.begin(); suffix != suffixes.end(); ++suffix )
-		{
-			c = std::make_shared<PieceQuad>();
-			c->Init( 0, Tools::BasicEffect );
-			c->Data.RepeatWidth = 1000;
-			c->Data.RepeatHeight = 2000;
-			c->Center.setTextureName( root + _T( "_" ) + *suffix );
-			c->Data.UV_Multiples = Vector2( 1, 0 );
-
-			Add( c );
-		}
-	}
-
-	void PieceQuadGroup::SetCutoffs( ... )
-	{
-		for ( int i = 0; i < cutoffs->Length; i++ )
-			this->operator[]( i )->Group_CutoffWidth = cutoffs[i];
-	}
-
-	std::shared_ptr<PieceQuad> PieceQuadGroup::Get( float width )
-	{
-		for ( CloudberryKingdom::PieceQuadGroup::const_iterator piece = this->begin(); piece != this->end(); ++piece )
-		{
-			if ( width < ( *piece )->Group_CutoffWidth )
-				return piece;
-		}
-
-		return this->operator[]( this->size() - 1 );
-	}
-
 	void PieceQuad::CalcTexture( int anim, float t )
 	{
 		Center.CalcTexture( anim, t );
 	}
 
-std::map<std::wstring, PieceQuad*> PieceQuad::Dict;
+std::map<std::wstring, std::shared_ptr<PieceQuad> > PieceQuad::Dict;
 
 	std::shared_ptr<PieceQuad> PieceQuad::Get( const std::wstring &name )
 	{
@@ -252,7 +205,7 @@ std::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, PieceQuad::Elev
 			case Orientation_ROTATE_RIGHT:
 				HoldOrientation = MyOrientation;
 				MyOrientation = Orientation_NORMAL;
-				Tools::Swap( Size.X, Size.Y );
+				std::swap( Size.X, Size.Y );
 				CalcQuads( Size );
 				MyOrientation = HoldOrientation;
 
@@ -263,7 +216,7 @@ std::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, PieceQuad::Elev
 			case Orientation_ROTATE_LEFT:
 				HoldOrientation = MyOrientation;
 				MyOrientation = Orientation_NORMAL;
-				Tools::Swap( Size.X, Size.Y );
+				std::swap( Size.X, Size.Y );
 				CalcQuads( Size );
 				MyOrientation = HoldOrientation;
 
