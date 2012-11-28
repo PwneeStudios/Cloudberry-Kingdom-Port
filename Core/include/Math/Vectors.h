@@ -17,7 +17,7 @@ public:
 	Vector2() : X( 0 ), Y( 0 ) { }
 	Vector2( const Vector2 &other ) : X( other.X ), Y( other.Y ) { }
 	Vector2( float x, float y ) : X( x ), Y( y ) { }
-	Vector2( float x ) : X( x ), Y( x ) { }
+	explicit Vector2( float x ) : X( x ), Y( x ) { }
 
 	float x() const { return X; }
 	float y() const { return Y; }
@@ -150,7 +150,7 @@ public:
 	Vector3() : X(0), Y(0), Z(0) { }
 	Vector3( const Vector3 &other ) : X( other.X ), Y( other.Y ), Z( other.Z ) { }
 	Vector3( float x, float y, float z ) : X(x), Y(y), Z(z) { }
-	Vector3( float x ) : X(x), Y(x), Z(x) { }
+	explicit Vector3( float x ) : X(x), Y(x), Z(x) { }
 
 	static Vector3 Lerp( const Vector3 &v1, const Vector3 &v2, float t )
 	{
@@ -201,7 +201,7 @@ public:
 	Vector4() : X( 0 ), Y( 0 ), Z( 0 ), W( 0 ) { }
 	Vector4( const Vector4 &other) : X( other.X ), Y( other.Y ),
 		Z( other.Z ), W( other.W ) { }
-	Vector4( float x ) : X( x ), Y( x ), Z( x ), W( x ) { }
+	explicit Vector4( float x ) : X( x ), Y( x ), Z( x ), W( x ) { }
 	Vector4( float x, float y, float z, float w ) :
 		X( x ), Y( y ), Z( z ), W( w ) { }
 
