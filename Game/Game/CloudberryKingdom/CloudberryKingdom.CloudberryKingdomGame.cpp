@@ -1482,7 +1482,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades2 );
 		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
-		//piece.MyUpgrades2[Upgrade.Cloud] = 10;
+		//piece.MyUpgrades2->Get( Upgrade.Cloud ) = 10;
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
 		piece->Style_MY_INITIAL_PLATS_TYPE = StyleData::InitialPlatsType_DOOR;
