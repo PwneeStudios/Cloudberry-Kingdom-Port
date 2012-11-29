@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -53,7 +50,7 @@ namespace CloudberryKingdom
 		this->MadeOfCode = true;
 		this->MadeOfText = false;
 
-		BackgroundType::AddTemplate( this );
+		BackgroundType::AddTemplate( shared_from_this() );
 	}
 
 	std::shared_ptr<Background> BackgroundTemplate::MakeInstanceOf()
@@ -89,7 +86,7 @@ namespace CloudberryKingdom
 		if ( MyTemplate != 0 )
 		{
 			if ( MyTemplate->MadeOfCode )
-				UseCode( MyTemplate, this );
+				UseCode( MyTemplate, shared_from_this() );
 			else if ( MyTemplate->MadeOfText )
 				Load( MyTemplate->File );
 		}

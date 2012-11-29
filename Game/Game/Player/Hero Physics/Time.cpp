@@ -22,7 +22,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 	BobPhsxTime::BobPhsxTime()
 	{
 		InitializeInstanceFields();
-		Set( this );
+		Set( shared_from_this() );
 	}
 
 	void BobPhsxTime::Set( const std::shared_ptr<BobPhsx> &phsx )

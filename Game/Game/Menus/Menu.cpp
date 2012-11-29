@@ -413,14 +413,14 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		if ( OnStart != 0 && ButtonCheck::State( ControllerButtons_START, getControl() ).Pressed )
 		{
 			ButtonCheck::PreventInput();
-			OnStart->Apply( this );
+			OnStart->Apply( shared_from_this() );
 		}
 
 		// X button action
 		if ( OnX != 0 && ButtonCheck::State( ControllerButtons_X, getControl() ).Pressed )
 		{
 			ButtonCheck::PreventInput();
-			OnX->Apply( this );
+			OnX->Apply( shared_from_this() );
 		}
 
 		// Y button action
@@ -439,7 +439,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			OnA_AutoTimerCount--;
 			if ( OnA_AutoTimerCount == 0 )
 				if ( OnA != 0 )
-					if ( OnA->Apply( this ) )
+					if ( OnA->Apply( shared_from_this() ) )
 						return;
 		}
 
@@ -466,7 +466,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			if ( OnA != 0 && !( CheckForOverride && Items[ CurIndex ]->getOverrideA() ) )
 			{
 				//ButtonCheck.PreventInput();
-				if ( OnA->Apply( this ) )
+				if ( OnA->Apply( shared_from_this() ) )
 					return;
 			}
 		}
@@ -506,7 +506,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 				if ( BackSound != 0 )
 					BackSound->Play();
 
-				if ( OnB->Apply( this ) )
+				if ( OnB->Apply( shared_from_this() ) )
 					return;
 
 				ButtonCheck::PreventInput();

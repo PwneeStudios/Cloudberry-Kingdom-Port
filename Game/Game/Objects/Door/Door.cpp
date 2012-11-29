@@ -61,12 +61,12 @@ namespace CloudberryKingdom
 		_OnOpen = value;
 	}
 
-	const std::shared_ptr<Lambda_1<Door*> > &Door::getOnEnter() const
+	const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &Door::getOnEnter() const
 	{
 		return _OnEnter;
 	}
 
-	void Door::setOnEnter( const std::shared_ptr<Lambda_1<Door*> > &value )
+	void Door::setOnEnter( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value )
 	{
 		_OnEnter = value;
 	}
@@ -240,7 +240,7 @@ namespace CloudberryKingdom
 
 		if ( MyPressNote == 0 )
 		{
-			MyPressNote = std::make_shared<PressNote>( this );
+			MyPressNote = std::make_shared<PressNote>( shared_from_this() );
 			getCore()->MyLevel->MyGame->AddGameObject(MyPressNote);
 		}
 		else
@@ -287,7 +287,7 @@ namespace CloudberryKingdom
 		DoShake();
 
 		if ( ExtraPhsx != 0 )
-			ExtraPhsx->Apply( this );
+			ExtraPhsx->Apply( shared_from_this() );
 	}
 
 	bool Door::OnScreen()
@@ -457,7 +457,7 @@ bool Door::AllowCompControl = false;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Door> DoorA = dynamic_cast<Door*>( A );
+		std::shared_ptr<Door> DoorA = std::static_pointer_cast<Door>( A );
 
 		DoorA->MyQuad->Clone( MyQuad );
 		Locked = DoorA->Locked;

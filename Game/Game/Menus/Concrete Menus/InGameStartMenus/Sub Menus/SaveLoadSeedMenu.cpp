@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 			// Save seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 			item->Name = _T( "Save" );
-			item->setGo( MakeSave( this, player ) );
+			item->setGo( MakeSave( shared_from_this(), player ) );
 			AddItem( item );
 		}
 
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 			// Load seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 			item->Name = _T( "Load" );
-			item->setGo( std::make_shared<LoadProxy>( this ) );
+			item->setGo( std::make_shared<LoadProxy>( shared_from_this() ) );
 			AddItem( item );
 		}
 
@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 			// Copy seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_COPY_TO_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "Copy" );
-			item->setGo( std::make_shared<CopyProxy>( this ) );
+			item->setGo( std::make_shared<CopyProxy>( shared_from_this() ) );
 			AddItem( item );
 		}
 
@@ -121,13 +121,13 @@ namespace CloudberryKingdom
 			// Load seed from string
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_FROM_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "LoadString" );
-			item->setGo( std::make_shared<LoadStringProxy>( this ) );
+			item->setGo( std::make_shared<LoadStringProxy>( shared_from_this() ) );
 			AddItem( item );
 		}
 	#endif
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		SetPosition();
 		MyMenu->SortByHeight();

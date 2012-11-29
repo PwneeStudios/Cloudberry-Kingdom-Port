@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 			return;
 		bool Overlap = Phsx::BoxBoxOverlap( bob->Box, Box );
 		if ( Overlap )
-			MyContainsEvent->Apply( this );
+			MyContainsEvent->Apply( shared_from_this() );
 	}
 
 	void ZoneTrigger::Draw()

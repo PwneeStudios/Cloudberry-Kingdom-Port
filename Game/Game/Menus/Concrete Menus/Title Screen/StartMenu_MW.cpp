@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_MENU, ItemFont ) );
 		Header->ScaleText( 1.3f );

@@ -514,7 +514,7 @@ int MenuItem::ActivatingPlayer = -1;
 	#if defined(PC_VERSION)
 			// Mouse interact
 			if ( SelectThis )
-				MyMenu->SelectItem( this );
+				MyMenu->SelectItem( shared_from_this() );
 	#endif
 			return;
 		}
@@ -548,7 +548,7 @@ int MenuItem::ActivatingPlayer = -1;
 		// Mouse down over the item
 	#if defined(PC_VERSION)
 		if ( OnClick != 0 && ButtonCheck::MouseInUse && Tools::CurMouseDown() && HitTest() )
-			OnClick->Apply( this );
+			OnClick->Apply( shared_from_this() );
 	#endif
 		// Go function
 		if ( Activate && getGo() != 0 )
@@ -558,7 +558,7 @@ int MenuItem::ActivatingPlayer = -1;
 			if ( SelectSound != 0 )
 				SelectSound->Play();
 			getGo()->Apply(this);
-			MyMenu->LastActivatedItem = MyMenu->Items.find( this );
+			MyMenu->LastActivatedItem = MyMenu->Items.find( shared_from_this() );
 			ButtonCheck::PreventInput();
 		}
 	}

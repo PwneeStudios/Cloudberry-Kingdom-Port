@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 		if ( Active )
 		{
 			Active = false;
-			MyGame->WaitThenDo( DelayExit, std::make_shared<ReturnToCallerProxy>( this ) );
+			MyGame->WaitThenDo( DelayExit, std::make_shared<ReturnToCallerProxy>( shared_from_this() ) );
 		}
 		else
 			CkBaseMenu::ReturnToCaller();
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 		Buy( Cost_Watch );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<WatchComputerHelper>( this ) );
+		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<WatchComputerHelper>( shared_from_this() ) );
 	}
 
 	bool HelpMenu::On_ShowPath()
@@ -281,7 +281,7 @@ namespace CloudberryKingdom
 			for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 				if ( dynamic_cast<ShowGuide*>( *obj ) != 0 )
 					( *obj )->Release();
-			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( this ) );
+			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( shared_from_this() ) );
 		}
 	}
 
@@ -293,7 +293,7 @@ namespace CloudberryKingdom
 		Buy( Cost_Path );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<Toggle_ShowPathSetter>( this, true ) );
+		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<Toggle_ShowPathSetter>( shared_from_this(), true ) );
 	}
 
 	bool HelpMenu::On_SlowMo()
@@ -317,7 +317,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			MyGame->AddToDo( std::make_shared<Toggle_SloMoHelper>( this ) );
+			MyGame->AddToDo( std::make_shared<Toggle_SloMoHelper>( shared_from_this() ) );
 		}
 	}
 
@@ -426,7 +426,7 @@ namespace CloudberryKingdom
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -10, 0 ) );
-		item->setGo( Cast::ToItem( std::make_shared<WatchComputerProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<WatchComputerProxy>( shared_from_this() ) ) );
 		ItemPos = Vector2( -1033.333f, 429.4446f );
 		PosAdd = Vector2( 0, -520 );
 		AddItem( item );
@@ -436,13 +436,13 @@ namespace CloudberryKingdom
 		if ( On_ShowPath() )
 		{
 			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_ShowPathProxy>( this );
+			toggle->OnToggle = std::make_shared<Toggle_ShowPathProxy>( shared_from_this() );
 			toggle->Toggle( true );
 		}
 		else
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<ShowPathProxy>( this ) ) );
+			item->setGo( Cast::ToItem( std::make_shared<ShowPathProxy>( shared_from_this() ) ) );
 		}
 		item->Name = _T( "ShowPath" );
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
@@ -455,13 +455,13 @@ namespace CloudberryKingdom
 		if ( On_SlowMo() )
 		{
 			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_SlowMoProxy>( this );
+			toggle->OnToggle = std::make_shared<Toggle_SlowMoProxy>( shared_from_this() );
 			toggle->Toggle( true );
 		}
 		else
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<SlowMoProxy>( this ) ) );
+			item->setGo( Cast::ToItem( std::make_shared<SlowMoProxy>( shared_from_this() ) ) );
 		}
 		item->Name = _T( "SlowMo" );
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
@@ -470,8 +470,8 @@ namespace CloudberryKingdom
 		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ACTIVATE_SLOW_MO );
 		Item_SlowMo = item;
 
-		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
-		MyMenu->OnY = Cast::ToAction( std::make_shared<MenuReturnToCallerProxy>( this ) );
+		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnY = Cast::ToAction( std::make_shared<MenuReturnToCallerProxy>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

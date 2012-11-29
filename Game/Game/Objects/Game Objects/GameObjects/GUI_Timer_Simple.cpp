@@ -22,6 +22,6 @@ namespace CloudberryKingdom
 
 		this->setTime( Time );
 
-		OnTimeExpired->Add( std::make_shared<SimpleOnExpireLambda>( this ) );
+		OnTimeExpired->Add( std::make_shared<SimpleOnExpireLambda>( shared_from_this() ) );
 	}
 }

@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		MyModParams->Apply( level, SeedData );
 
 		// Change data depending on hero type
-		level->DefaultHeroType->ModData( level->CurMakeData, this );
+		level->DefaultHeroType->ModData( level->CurMakeData, shared_from_this() );
 		level->DefaultHeroType->ModLadderPiece( SeedData );
 
 		// Set time type

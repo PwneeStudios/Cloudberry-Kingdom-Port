@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 	void MenuSliderBase::setMyFloat( const std::shared_ptr<WrappedFloat> &value )
 	{
 		_MyFloat = value;
-		_MyFloat->SetCallback = std::make_shared<SetCallbackProxy>( this );
+		_MyFloat->SetCallback = std::make_shared<SetCallbackProxy>( shared_from_this() );
 		SetCallback();
 	}
 

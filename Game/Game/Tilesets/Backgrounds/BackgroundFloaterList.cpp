@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 		BL = c + ( BL - c ) / Parallax;
 
 		for ( std::vector<BackgroundFloater*>::const_iterator Floater = Floaters.begin(); Floater != Floaters.end(); ++Floater )
-			( *Floater )->PhsxStep( this );
+			( *Floater )->PhsxStep( shared_from_this() );
 	}
 
 	void BackgroundFloaterList::Draw()

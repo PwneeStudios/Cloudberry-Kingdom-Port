@@ -189,7 +189,7 @@ int Bob::ImmortalLength = 55;
 			MyCape->MyQuad->Quad_Renamed->MyEffect = scheme.CapeColor.Effect;
 
 			if ( scheme.CapeColor.ModObject != 0 )
-				scheme.CapeColor.ModObject->Apply( this );
+				scheme.CapeColor.ModObject->Apply( shared_from_this() );
 
 			if ( scheme.CapeColor.Clr.A == 0 || scheme.CapeOutlineColor.Clr.A == 0 )
 				ShowCape = false;
@@ -328,7 +328,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 		Box2 = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
 		MyPhsx = std::make_shared<BobPhsx>();
-		MyPhsx->Init( this );
+		MyPhsx->Init( shared_from_this() );
 
 		SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
 	}
@@ -349,7 +349,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 
 		//MakeCape();
 
-		SetColorScheme( PlayerManager::Get( this )->ColorScheme_Renamed );
+		SetColorScheme( PlayerManager::Get( shared_from_this() )->ColorScheme_Renamed );
 
 		MyPhsx->setVel( HoldVel );
 
@@ -365,7 +365,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 		MyPhsx = type->Clone();
 		//MyPhsx = new BobPhsxNormal();
 
-		MyPhsx->Init( this );
+		MyPhsx->Init( shared_from_this() );
 		MakeCape( MyCapeType );
 	}
 
@@ -373,7 +373,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 	{
 		if ( MyCape == 0 && !BoxesOnly && CanHaveCape )
 		{
-			MyCape = std::make_shared<Cape>( this, CapeType, MyPhsx );
+			MyCape = std::make_shared<Cape>( shared_from_this(), CapeType, MyPhsx );
 			MyCape->Reset();
 		}
 	}
@@ -394,7 +394,7 @@ std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVe
 		if ( CharacterSelect2 )
 		{
 			MyPhsx = std::make_shared<BobPhsxCharSelect>();
-			MyPhsx->Init( this );
+			MyPhsx->Init( shared_from_this() );
 			MakeCape( Cape::CapeType_NORMAL );
 		}
 		else
@@ -532,7 +532,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		if ( DoAnim )
 			MyPhsx->Die( DeathType );
 
-		Tools::CurGameData->BobDie( getCore()->MyLevel, this );
+		Tools::CurGameData->BobDie( getCore()->MyLevel, shared_from_this() );
 	}
 
 	const bool &Bob::getCanDie() const
@@ -571,7 +571,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		// if so, officially declare the player dead.
 		if ( !Dead && ( ( IsVisible() && getCore()->Show && getCore()->Data.Position.Y < getCore()->MyLevel->getMainCamera()->BL.Y - getGame()->DoneDyingDistance ) || (!IsVisible() && DeathCount > getGame()->DoneDyingCount) ) )
 		{
-			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, this );
+			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, shared_from_this() );
 			Dead = true;
 		}
 
@@ -1074,7 +1074,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			return;
 
 		if ( block != 0 && Col != ColType_NO_COL )
-			block->Hit( this );
+			block->Hit( shared_from_this() );
 
 		if ( block != 0 && Col != ColType_NO_COL )
 			if ( Col != ColType_TOP )
@@ -1098,7 +1098,7 @@ float Bob::Guide_h = 1 / GuideLength;
 				if ( block != 0 )
 				{
 					block->getBlockCore()->StoodOn = true;
-					block->LandedOn( this );
+					block->LandedOn( shared_from_this() );
 				}
 
 				if ( !TopCol )
@@ -1158,14 +1158,14 @@ float Bob::Guide_h = 1 / GuideLength;
 				{
 					if ( MyPhsx->OnGround && block->getBlockCore()->DoNotPushHard )
 					{
-						block->Smash( this );
+						block->Smash( shared_from_this() );
 						return;
 					}
 
 					MyPhsx->HitHeadOnSomething( block );
 
 					if ( block != 0 )
-						block->HitHeadOn( this );
+						block->HitHeadOn( shared_from_this() );
 
 					if ( OriginalColType == ColType_BOTTOM )
 					{
@@ -1201,7 +1201,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					if ( Col == ColType_LEFT )
 					{
 						if ( block != 0 )
-							block->SideHit( this );
+							block->SideHit( shared_from_this() );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1220,7 +1220,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					if ( Col == ColType_RIGHT )
 					{
 						if ( block != 0 )
-							block->SideHit( this );
+							block->SideHit( shared_from_this() );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1400,7 +1400,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		// Bob connections
 		if ( MyBobLinks.size() > 0 )
 			for ( std::vector<BobLink*>::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
-				( *link )->PhsxStep( this );
+				( *link )->PhsxStep( shared_from_this() );
 
 		if ( Dying )
 		{
@@ -1622,7 +1622,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->MarkedForDeletion && (*obj)->getCore()->Real && (*obj)->getCore()->Active && (*obj)->getCore()->Show )
-				( *obj )->Interact( this );
+				( *obj )->Interact( shared_from_this() );
 		}
 	}
 
@@ -1687,7 +1687,7 @@ float Bob::Guide_h = 1 / GuideLength;
 							if ( !Immortal )
 								Die( BobDeathType_OTHER );
 							else
-								( *block )->Hit( this );
+								( *block )->Hit( shared_from_this() );
 						}
 					}
 				}
@@ -1969,7 +1969,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					//if (block.BlockCore.OnlyCollidesWithLowerLayers && block.Core.DrawLayer <= Core.DrawLayer)
 					//    continue;
 
-					if ( ( *block )->PreDecision( this ) )
+					if ( ( *block )->PreDecision( shared_from_this() ) )
 						continue;
 					if ( !( *block )->getIsActive() )
 						continue;
@@ -1982,11 +1982,11 @@ float Bob::Guide_h = 1 / GuideLength;
 
 					if ( Col != ColType_NO_COL || Overlap )
 					{
-						if ( ( *block )->PostCollidePreDecision( this ) )
+						if ( ( *block )->PostCollidePreDecision( shared_from_this() ) )
 							continue;
 
 						bool Delete = false;
-						( *block )->PostCollideDecision( this, Col, Overlap, Delete );
+						( *block )->PostCollideDecision( shared_from_this(), Col, Overlap, Delete );
 
 						// We're done deciding if we should delete the block or not.
 						// If we should delete it, delete.
@@ -2000,7 +2000,7 @@ float Bob::Guide_h = 1 / GuideLength;
 						{
 							Delete = false;
 
-							( *block )->PostKeep( this, Col, Overlap );
+							( *block )->PostKeep( shared_from_this(), Col, Overlap );
 
 							if ( Col != ColType_NO_COL )
 							{
@@ -2020,7 +2020,7 @@ float Bob::Guide_h = 1 / GuideLength;
 										( *block )->StampAsUsed( CurPhsxStep );
 										MyPhsx->LastUsedStamp = CurPhsxStep;
 
-										( *block )->PostInteractWith( this, Col, Overlap );
+										( *block )->PostInteractWith( shared_from_this(), Col, Overlap );
 										//block.PostCollidePreDecision(this);
 									}
 								}

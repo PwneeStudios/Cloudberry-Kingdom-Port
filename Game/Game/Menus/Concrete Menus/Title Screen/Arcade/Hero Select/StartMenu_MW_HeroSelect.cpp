@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( MyHeroDoll );
 
 		// Options. Menu for PC, graphics only for consoles.
-		Options = std::make_shared<HeroSelectOptions>( this );
+		Options = std::make_shared<HeroSelectOptions>( shared_from_this() );
 		MyGame->AddGameObject( Options );
 	}
 
@@ -164,7 +164,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<MiniMenu> mini = std::make_shared<MiniMenu>();
 		MyMenu = mini;
 
-		MyMenu->OnSelect = std::make_shared<UpdateScoreProxy>( this );
+		MyMenu->OnSelect = std::make_shared<UpdateScoreProxy>( shared_from_this() );
 
 		mini->WrapSelect = false;
 		mini->Shift = Vector2( 0, -135 );
@@ -174,12 +174,12 @@ namespace CloudberryKingdom
 		for ( std::vector<CloudberryKingdom::BobPhsx*>::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
 		{
 			std::shared_ptr<HeroItem> item = std::make_shared<HeroItem>( *phsx );
-			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( this );
+			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
 			AddItem( item );
-			item->setGo( std::make_shared<StartMenuGoLambda>( this ) );
+			item->setGo( std::make_shared<StartMenuGoLambda>( shared_from_this() ) );
 		}
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 		EnsureFancy();
 
 		/// <summary>
@@ -312,7 +312,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( this );
+		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
 		levelmenu->ReturnFunc.reset();
 
 		Call( levelmenu );

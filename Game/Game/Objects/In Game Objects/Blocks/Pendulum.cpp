@@ -245,7 +245,7 @@ namespace CloudberryKingdom
 			if ( MyDraw->MyTemplate != 0 )
 			{
 				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate(this, getRnd(), getInfo()->Pendulums->Group);
-				MyDraw->Init( this, MyDraw->MyTemplate, false );
+				MyDraw->Init( shared_from_this(), MyDraw->MyTemplate, false );
 			}
 	}
 

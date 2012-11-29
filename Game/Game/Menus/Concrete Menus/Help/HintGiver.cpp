@@ -79,14 +79,14 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		Active = true;
 		PauseOnPause = true;
 
-		Hints::CurrentGiver = this;
+		Hints::CurrentGiver =  shared_from_this();
 	}
 
 	void HintGiver::ReleaseBody()
 	{
 		GUI_Panel::ReleaseBody();
 
-		if ( Hints::CurrentGiver == this )
+		if ( Hints::CurrentGiver.get() == this )
 			Hints::CurrentGiver.reset();
 	}
 
@@ -113,7 +113,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		{
 			Hints::IncrQuickSpawnNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_QuickSpawnHelper>( this ) );
+			MyGame->WaitThenDo( 5, std::make_shared<Check_QuickSpawnHelper>( shared_from_this() ) );
 		}
 	}
 
@@ -149,7 +149,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		{
 			Hints::IncrYForHelpNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_YForHelpHelper>( this ) );
+			MyGame->WaitThenDo( 5, std::make_shared<Check_YForHelpHelper>( shared_from_this() ) );
 		}
 	}
 }

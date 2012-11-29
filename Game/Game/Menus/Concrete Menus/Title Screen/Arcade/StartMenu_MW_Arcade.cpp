@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 
 		if ( MyArcadeItem->MyChallenge == Challenge_Escalation::getInstance() || MyArcadeItem->MyChallenge == Challenge_TimeCrisis::getInstance() )
 		{
-			Call( std::make_shared<StartMenu_MW_HeroSelect>( Title, this, MyArcadeItem ) );
+			Call( std::make_shared<StartMenu_MW_HeroSelect>( Title, shared_from_this(), MyArcadeItem ) );
 		}
 		else
 		{
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 			std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
 
 			levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( this );
+			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
 			levelmenu->ReturnFunc.reset();
 
 			Call( levelmenu );
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		 ArcadeMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		SetPos();
 	}

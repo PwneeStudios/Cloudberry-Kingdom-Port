@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 
 	void Waiting::MyPhsxStep()

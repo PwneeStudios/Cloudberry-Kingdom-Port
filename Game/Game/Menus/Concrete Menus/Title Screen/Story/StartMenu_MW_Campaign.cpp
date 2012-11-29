@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		MyMenu->ClearList();
 
@@ -117,31 +117,31 @@ namespace CloudberryKingdom
 		// Chapter 1
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
 		item->Name = _T( "MainCampaign" );
-		item->setGo( std::make_shared<CampaignGoLambda>( this ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 2
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
 		item->Name = _T( "Easy" );
-		item->setGo( std::make_shared<CampaignGoLambda>( this ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 3
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
 		item->Name = _T( "Hard" );
-		item->setGo( std::make_shared<CampaignGoLambda>( this ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 4
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
 		item->Name = _T( "Hardcore" );
-		item->setGo( std::make_shared<CampaignGoLambda>( this ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 5
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
 		item->Name = _T( "Maso" );
-		item->setGo( std::make_shared<CampaignGoLambda>( this ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		//// Cinematics
@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 		Active = false;
 
 		_StartLevel = StartLevel;
-		MyGame->WaitThenDo( 75, std::make_shared<GoLambda>( this ) );
+		MyGame->WaitThenDo( 75, std::make_shared<GoLambda>( shared_from_this() ) );
 	}
 
 	void StartMenu_MW_Campaign::SetPos_NoCinematic()

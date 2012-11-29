@@ -17,6 +17,6 @@ namespace CloudberryKingdom
 		text->MyText->setPos( text->MyText->getPos() + Vector2(0, -110) );
 
 		MyGame->AddGameObject( text );
-		MyGame->WaitThenDo( 0, std::make_shared<AddGameObjectHelper>( this, text ) );
+		MyGame->WaitThenDo( 0, std::make_shared<AddGameObjectHelper>( shared_from_this(), text ) );
 	}
 }

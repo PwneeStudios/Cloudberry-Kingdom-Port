@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 		//ReturnToCallerDelay = 10;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 	}
 
 	void StartMenu_MW_CustomLevel::ReturnToCaller()

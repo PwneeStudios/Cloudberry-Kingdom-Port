@@ -77,13 +77,13 @@ namespace CloudberryKingdom
 		// Save seed
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 		item->Name = _T( "Save" );
-		item->setGo( std::make_shared<SaveProxy>( this ) );
+		item->setGo( std::make_shared<SaveProxy>( shared_from_this() ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -100,14 +100,14 @@ namespace CloudberryKingdom
 
 			// Success!
 			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY );
-			ok->OnOk = std::make_shared<OnOkProxy>( this );
+			ok->OnOk = std::make_shared<OnOkProxy>( shared_from_this() );
 			Call( ok );
 		}
 		else
 		{
 			// Failure!
 			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH );
-			ok->OnOk = std::make_shared<OnOkProxy>( this );
+			ok->OnOk = std::make_shared<OnOkProxy>( shared_from_this() );
 			Call( ok );
 		}
 
@@ -173,8 +173,8 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<SaveSeedAsOnEnterLambda>( this ) );
-		TextBox->OnEscape->Add( std::make_shared<SaveSeedAsOnEscapeLambda>( this ) );
+		TextBox->OnEnter->Add( std::make_shared<SaveSeedAsOnEnterLambda>( shared_from_this() ) );
+		TextBox->OnEscape->Add( std::make_shared<SaveSeedAsOnEscapeLambda>( shared_from_this() ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();

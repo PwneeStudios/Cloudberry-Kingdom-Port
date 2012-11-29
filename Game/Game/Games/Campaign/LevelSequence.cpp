@@ -36,12 +36,12 @@ namespace CloudberryKingdom
 		StartIndex = StartLevel;
 
 		// Create the string world, and add the relevant game objects
-		MyStringWorld = std::make_shared<StringWorldGameData>( std::make_shared<Func>( this, &LevelSequence::GetSeed ) );
+		MyStringWorld = std::make_shared<StringWorldGameData>( std::make_shared<Func>( shared_from_this(), &LevelSequence::GetSeed ) );
 		MyStringWorld->StartLevelMusic.reset();
 
 		// OnLevelBegin preprocessing for each level.
 		//MyStringWorld.OnLevelBegin += OnLevelBegin;
-		MyStringWorld->OnLevelBegin = std::make_shared<OnLevelBeginLambda>( this );
+		MyStringWorld->OnLevelBegin = std::make_shared<OnLevelBeginLambda>( shared_from_this() );
 
 		// Additional preprocessing
 		SetGameParent( MyStringWorld );

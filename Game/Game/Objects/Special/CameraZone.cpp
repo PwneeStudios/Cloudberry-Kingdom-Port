@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 	{
 		ZoneTrigger::Init( center, size );
 
-		MyContainsEvent = std::make_shared<ZoneTriggerLambda>( this );
+		MyContainsEvent = std::make_shared<ZoneTriggerLambda>( shared_from_this() );
 	}
 
 	void CameraZone::PhsxStep()

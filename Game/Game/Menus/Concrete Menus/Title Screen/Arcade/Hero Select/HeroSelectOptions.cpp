@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LEADERBOARD, ItemFont, false, true ) );
 
 		item->Name = _T( "Leaderboard" );
-		item->setGo( Cast::ToItem( std::make_shared<BringLeaderboardProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<BringLeaderboardProxy>( shared_from_this() ) ) );
 		AddItem( item );
 		StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( item );
 
@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopPlayerLevel() );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( this );
+		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
 		levelmenu->ReturnFunc.reset();
 
 		Call( levelmenu );

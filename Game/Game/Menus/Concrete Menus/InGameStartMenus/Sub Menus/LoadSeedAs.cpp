@@ -73,13 +73,13 @@ namespace CloudberryKingdom
 		// Load seed
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 		item->Name = _T( "Load" );
-		item->setGo( std::make_shared<LoadProxy1>( this ) );
+		item->setGo( std::make_shared<LoadProxy1>( shared_from_this() ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -147,8 +147,8 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<LoadSeedAsOnEnterLambda>( this ) );
-		TextBox->OnEscape->Add( std::make_shared<LoadSeedAsBackLambda>( this ) );
+		TextBox->OnEnter->Add( std::make_shared<LoadSeedAsOnEnterLambda>( shared_from_this() ) );
+		TextBox->OnEscape->Add( std::make_shared<LoadSeedAsBackLambda>( shared_from_this() ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();
@@ -162,6 +162,6 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		SavedSeedsGUI::LoadSeed( TextBox->getText(), this );
+		SavedSeedsGUI::LoadSeed( TextBox->getText(), shared_from_this() );
 	}
 }

@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
-				( *info )->SetValue( this, static_cast<int>( ( *info )->GetValue( this ) ) + static_cast<int>( ( *info )->GetValue( stats ) ) );
+				( *info )->SetValue( shared_from_this(), static_cast<int>( ( *info )->GetValue( shared_from_this() ) ) + static_cast<int>( ( *info )->GetValue( stats ) ) );
 		}
 
 		for ( int i = 0; i < DeathsBy.size(); i++ )
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 		for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
-				( *info )->SetValue( this, 0 );
+				( *info )->SetValue( shared_from_this(), 0 );
 		}
 
 		for ( int i = 0; i < DeathsBy.size(); i++ )

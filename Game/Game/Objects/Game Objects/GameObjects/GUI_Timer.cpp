@@ -28,8 +28,8 @@ namespace CloudberryKingdom
 	{
 		GUI_Timer_Base::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( this ) );
-		MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>( this ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
+		MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>( shared_from_this() ) );
 	}
 
 	void GUI_Timer::ReleaseBody()

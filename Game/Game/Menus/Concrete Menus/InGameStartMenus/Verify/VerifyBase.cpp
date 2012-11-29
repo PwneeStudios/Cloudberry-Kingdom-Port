@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( 800, 361 );
 		PosAdd = Vector2( 0, -300 );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Shift everything
 		EnsureFancy();

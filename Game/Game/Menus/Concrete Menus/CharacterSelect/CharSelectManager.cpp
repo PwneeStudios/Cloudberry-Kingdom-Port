@@ -72,7 +72,7 @@ Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f
 		CamPos = std::make_shared<FancyVector2>();
 
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
-		SignedInGamer::SignedIn += std::make_shared<System::EventHandler<SignedInEventArgs*> >( this, &CharacterSelectManager::SignedInGamer_SignedIn );
+		SignedInGamer::SignedIn += std::make_shared<System::EventHandler<SignedInEventArgs*> >( shared_from_this(), &CharacterSelectManager::SignedInGamer_SignedIn );
 	#endif
 	}
 

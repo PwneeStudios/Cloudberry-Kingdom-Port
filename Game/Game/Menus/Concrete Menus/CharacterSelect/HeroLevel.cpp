@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 
 		SetHeroLevel();
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 
 	void HeroLevel::SetHeroLevel()

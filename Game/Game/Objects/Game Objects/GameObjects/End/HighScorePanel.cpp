@@ -94,7 +94,7 @@ std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring
 	{
 		this->Instant = Instant;
 
-		OnOutsideClick = std::make_shared<HighScoreReturnToCallerLambda>( this );
+		OnOutsideClick = std::make_shared<HighScoreReturnToCallerLambda>( shared_from_this() );
 		CheckForOutsideClick = true;
 
 		Constructor( Scores[ 0 ] );
@@ -252,7 +252,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		FontScale *= .89f * 1.16f;
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( std::make_shared<Action_PlayAgainProxy1>( this ) );
+		item->setGo( std::make_shared<Action_PlayAgainProxy1>( shared_from_this() ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
@@ -260,7 +260,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( std::make_shared<Action_DoneProxy1>( this ) );
+		item->setGo( std::make_shared<Action_DoneProxy1>( shared_from_this() ) );
 		AddItem( item );
 	}
 
@@ -277,7 +277,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( this, false ) );
+		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( shared_from_this(), false ) );
 		return;
 	}
 
@@ -286,7 +286,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( this, true ) );
+		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( shared_from_this(), true ) );
 		return;
 	}
 

@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		StringWorldGameData::EOG_StandardDoorAction( door );
 	}
 
-	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( const std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
+	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
 	{
 		this->g = g;
 		this->level = level;
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		StringWorldGameData::DefaultStartLevelMusic( stringworld );
 	}
 
-	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( const std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, const std::shared_ptr<LevelSeedData> &CurLevelSeed )
+	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, const std::shared_ptr<LevelSeedData> &CurLevelSeed )
 	{
 		this->g = g;
 		this->level = level;
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		this->g = g;
 	}
 
-	void StringWorldGameData::FinishLambda::Apply( bool val )
+	void StringWorldGameData::FinishLambda::Apply( const bool &val )
 	{
 		g->Finish( val );
 	}
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		bool Hold_FirstLevelHasBegun = FirstLevelHasBegun;
 		if ( level->MyGame != 0 )
 		{
-			level->MyGame->AddToDo( std::make_shared<StartOfLevelLambda>( this, level, Hold_FirstLevelHasBegun ) );
+			level->MyGame->AddToDo( std::make_shared<StartOfLevelLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, Hold_FirstLevelHasBegun ) );
 
 			level->MyGame->PhsxStepsToDo += 2;
 		}
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 
 		if ( CurLevelIndex > 0 )
 			Wait = CurLevelSeed->WaitLengthToOpenDoor;
-		game->WaitThenDo( Wait, std::make_shared<OpenAndShowLambda>( this, level, door, CurLevelSeed ) );
+		game->WaitThenDo( Wait, std::make_shared<OpenAndShowLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, door, CurLevelSeed ) );
 	}
 
 	void StringWorldGameData::_StartOfLevelDoorAction__OpenAndShow( const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, bool OpenDoorSound )
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 		//Tools.CurLevel = CurLevelSeed.MyGame.MyLevel;
 
 		// Set end of game function
-		Tools::CurGameData->EndGame = std::make_shared<FinishLambda>( this );
+		Tools::CurGameData->EndGame = std::make_shared<FinishLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ) );
 
 		// Add the saved objects
 		for ( GameObjVec::const_iterator obj = ObjectsToSave.begin(); obj != ObjectsToSave.end(); ++obj )
@@ -402,7 +402,7 @@ namespace CloudberryKingdom
 			return;
 
 		// ActionGames immediately switch to next game when they are done.
-		std::shared_ptr<ActionGameData> ActionGame = dynamic_cast<ActionGameData*>( Tools::CurGameData );
+		std::shared_ptr<ActionGameData> ActionGame = std::static_pointer_cast<ActionGameData>( Tools::CurGameData );
 		if ( 0 != ActionGame && ActionGame->Done )
 			TellGameToBringNext( 0, ActionGame );
 
@@ -410,8 +410,7 @@ namespace CloudberryKingdom
 		if ( ( Tools::ShowLoadingScreen || EndLoadingImmediately ) && Tools::CurGameData != CurLevelSeed->MyGame )
 		{
 			// If the level is finished loading, end the loading screen
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-			lock ( CurLevelSeed->Loaded )
+			CurLevelSeed->Loaded->MyMutex.Lock();
 			{
 				if ( CurLevelSeed->Loaded->getval() )
 				{
@@ -422,6 +421,7 @@ namespace CloudberryKingdom
 					SetLevel();
 				}
 			}
+			CurLevelSeed->Loaded->MyMutex.Unlock();
 		}
 		else
 		{
@@ -437,7 +437,7 @@ namespace CloudberryKingdom
 					{
 						LastLevelSeedSet = Tools::CurLevel;
 
-						std::shared_ptr<ILevelConnector> connector = static_cast<ILevelConnector*>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
+						std::shared_ptr<ILevelConnector> connector = std::static_pointer_cast<ILevelConnector>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
 						if ( connector != 0 )
 							connector->setNextLevelSeedData( NextLevelSeed );
 					}
@@ -448,8 +448,7 @@ namespace CloudberryKingdom
 		// If the level is finished loading, end the loading screen
 		if ( !FirstLevelHasLoaded )
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-			lock ( CurLevelSeed->Loaded )
+			CurLevelSeed->Loaded->MyMutex.Lock();
 			{
 				if ( CurLevelSeed->Loaded->getval() )
 				{
@@ -458,6 +457,7 @@ namespace CloudberryKingdom
 					FirstLevelHasLoaded = true;
 				}
 			}
+			CurLevelSeed->Loaded->MyMutex.Unlock();
 		}
 	}
 
@@ -466,7 +466,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	StringWorldGameData::StringWorldGameData( std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > GetSeed )
+	StringWorldGameData::StringWorldGameData( std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > GetSeed )
 	{
 		InitializeInstanceFields();
 		this->GetSeedFunc = GetSeed;
@@ -492,7 +492,7 @@ namespace CloudberryKingdom
 		DrawObjectText = true;
 
 		MyLevel = MakeLevel();
-		MyLevel->MyGame = this;
+		MyLevel->MyGame = shared_from_this();
 
 		AllowQuickJoin = false;
 
@@ -580,7 +580,7 @@ namespace CloudberryKingdom
 
 		WaitingForNext = true;
 
-		game->WaitThenAddToToDo( delay, std::make_shared<StartNextLevelLambda>( this ) );
+		game->WaitThenAddToToDo( delay, std::make_shared<StartNextLevelLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ) ) );
 	}
 
 	void StringWorldGameData::BaseDoorAction( const std::shared_ptr<Door> &door )
@@ -622,8 +622,8 @@ namespace CloudberryKingdom
 		WaitLengthToOpenDoor_FirstLevel = 6;
 		StartLevelMusic = std::make_shared<DefaultStartLevelMusicProxy>();
 		FirstDoorAction = true;
-		OnSwapToFirstLevel = std::make_shared<Multicaster_1<LevelSeedData*> >();
-		OnSwapToLastLevel = std::make_shared<Multicaster_1<LevelSeedData*> >();
+		OnSwapToFirstLevel = std::make_shared<Multicaster_1<std::shared_ptr<LevelSeedData> > >();
+		OnSwapToLastLevel = std::make_shared<Multicaster_1<std::shared_ptr<LevelSeedData> > >();
 		OnSwapToLevel = std::make_shared<Multicaster_1<int> >();
 		FirstLevelSwappedIn = false;
 		EndLoadingImmediately = false;

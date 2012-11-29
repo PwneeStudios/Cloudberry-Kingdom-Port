@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 	void MovingPlatform::OnMarkedForDeletion()
 	{
 		if ( Parent != 0 )
-			Parent->RemovePlatform( this );
+			Parent->RemovePlatform( shared_from_this() );
 
 		if ( !getCore()->DeletedByBob )
 			return;

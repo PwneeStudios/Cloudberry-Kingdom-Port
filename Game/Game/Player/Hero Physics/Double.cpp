@@ -69,6 +69,6 @@ const std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance = std::make_shared<
 
 	BobPhsxDouble::BobPhsxDouble()
 	{
-		Set( this );
+		Set( shared_from_this() );
 	}
 }

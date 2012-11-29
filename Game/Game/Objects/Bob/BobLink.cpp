@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 			bob1->MyBobLinks = std::vector<BobLink*>();
 		if ( bob2->MyBobLinks.empty() )
 			bob2->MyBobLinks = std::vector<BobLink*>();
-		bob1->MyBobLinks.push_back( this );
-		bob2->MyBobLinks.push_back( this );
+		bob1->MyBobLinks.push_back( shared_from_this() );
+		bob2->MyBobLinks.push_back( shared_from_this() );
 	}
 }

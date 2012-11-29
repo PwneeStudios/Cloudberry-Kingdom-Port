@@ -21,13 +21,7 @@ namespace CloudberryKingdom
 
 	bool BaseQuad::Is( const std::wstring &Name )
 	{
-	#if defined(XBOX)
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 		return CompareIgnoreCase( this->Name, Name ) == 0;
-	#else
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-		return CompareIgnoreCase( this->Name, Name ) == 0;
-	#endif
 	}
 
 	void BaseQuad::Clone( const std::shared_ptr<BaseQuad> &quad )
@@ -258,28 +252,10 @@ namespace CloudberryKingdom
 	{
 	}
 
-#if defined(EDITOR)
-	void BaseQuad::ClickOnChildButton()
-	{
-		SetToBeChild = !SetToBeChild;
-	}
-#endif
-
-#if defined(EDITOR)
-	void BaseQuad::ClickOnReleaseButton()
-	{
-		if ( ParentQuad != 0 && ParentQuad != ParentObject->ParentQuad )
-			ParentQuad->RemoveQuadChild( this );
-	}
-#endif
-
 	void BaseQuad::InitializeInstanceFields()
 	{
 		_MyMatrix = Matrix::Identity();
 		UpdateSpriteAnim = true;
 		Show = true;
-#if defined(EDITOR)
-		Expanded = true;
-#endif
 	}
 }

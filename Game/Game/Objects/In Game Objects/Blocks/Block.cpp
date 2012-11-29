@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( this );
+		MyDraw->Init( shared_from_this() );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}

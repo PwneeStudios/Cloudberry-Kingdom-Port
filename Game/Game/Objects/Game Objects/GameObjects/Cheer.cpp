@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 	void Cheer::MyPhsxStep()
 	{
 		if ( !Berry->FancyPos->Playing )
-			MyGame->Recycle->CollectObject( this );
+			MyGame->Recycle->CollectObject( shared_from_this() );
 	}
 
 	void Cheer::InitializeInstanceFields()

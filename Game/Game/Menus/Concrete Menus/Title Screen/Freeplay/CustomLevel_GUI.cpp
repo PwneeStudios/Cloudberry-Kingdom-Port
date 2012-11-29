@@ -285,7 +285,7 @@ Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACT
 		// Custom difficulty
 		if ( IsCustomDifficulty() )
 		{
-			data->Initialize( std::make_shared<StartLevelFromMenuDataInitializeHelper>( this ) );
+			data->Initialize( std::make_shared<StartLevelFromMenuDataInitializeHelper>( shared_from_this() ) );
 		}
 		// Preset difficulty
 		else
@@ -336,7 +336,7 @@ Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACT
 		MyMenu->FancyPos->RelVal += RightPanelCenter;
 
 		// Register for when the created level ends
-		MyGame->OnReturnTo->Add( std::make_shared<OnReturnFromLevelProxy>( this ) );
+		MyGame->OnReturnTo->Add( std::make_shared<OnReturnFromLevelProxy>( shared_from_this() ) );
 
 		SetPos();
 	}
@@ -557,7 +557,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 			LocationList->Pos = Vector2( 200 + LeftJustifyAddX, 828 );
 		else
 			LocationList->Pos = Vector2( 200, 828 );
-		LocationList->OnIndexSelect = std::make_shared<InitOnIndexSelectHelper>( this, LocationList );
+		LocationList->OnIndexSelect = std::make_shared<InitOnIndexSelectHelper>( shared_from_this(), LocationList );
 		LocationList->SetIndex( 0 );
 
 		// Game type
@@ -593,7 +593,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 			GameList->Pos = Vector2( 117 + LeftJustifyAddX, 828 - 222 );
 		else
 			GameList->Pos = Vector2( 117, 828 - 222 );
-		GameList->OnIndexSelect = std::make_shared<InitOnIndexSelect>( this, GameList );
+		GameList->OnIndexSelect = std::make_shared<InitOnIndexSelect>( shared_from_this(), GameList );
 
 		// Hero
 		HeroText = std::make_shared<EzText>( Localization::Words_HERO, ItemFont );
@@ -623,7 +623,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 			HeroList->Pos = Vector2( 117.2227f + LeftJustifyAddX - 150, 828 - 2 * 222 );
 		else
 			HeroList->Pos = Vector2( 117.2227f, 828 - 2 * 222 );
-		HeroList->OnIndexSelect = std::make_shared<HeroList_OnIndexProxy>( this );
+		HeroList->OnIndexSelect = std::make_shared<HeroList_OnIndexProxy>( shared_from_this() );
 		HeroList->SetIndex( 0 );
 
 		// Difficulty
@@ -650,7 +650,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 			DiffList->Pos = Vector2( 242.2246f + LeftJustifyAddX, -73.11105f );
 		else
 			DiffList->Pos = Vector2( 242.2246f, -73.11105f );
-		DiffList->OnIndexSelect = std::make_shared<DiffList_OnIndexProxy>( this );
+		DiffList->OnIndexSelect = std::make_shared<DiffList_OnIndexProxy>( shared_from_this() );
 
 
 		// Length
@@ -666,8 +666,8 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		AddItem( length );
 		length->Pos = Vector2( -283, -556.1017f );
 
-		length->OnSetValue = std::make_shared<InitOnSetValueHelper>( this, length );
-		length->OnSlide = std::make_shared<InitOnSlideHelper>( this, length );
+		length->OnSetValue = std::make_shared<InitOnSetValueHelper>( shared_from_this(), length );
+		length->OnSlide = std::make_shared<InitOnSlideHelper>( shared_from_this(), length );
 
 		// Mini checkpoints
 		MiniCheckpoint = ObjectIcon::CheckpointIcon->Clone( ObjectIcon::IconScale_WIDGET );
@@ -694,9 +694,9 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		AddItem( checkpoints );
 		checkpoints->Pos = checkpoints->SelectedPos = Vector2( 267, -680.549f );
 		checkpoints->Icon->setPos( Vector2( -22.22266f, -41.66666f ) );
-		checkpoints->OnSlide = std::make_shared<InitOnSlideHelper2>( this, length );
+		checkpoints->OnSlide = std::make_shared<InitOnSlideHelper2>( shared_from_this(), length );
 
-		checkpoints->OnSetValue = std::make_shared<InitOnSetValueHelper2>( this, length );
+		checkpoints->OnSetValue = std::make_shared<InitOnSetValueHelper2>( shared_from_this(), length );
 
 		checkpoints->setVal( DesiredNumCheckpoints = 1 );
 		length->setVal( 8000 );
@@ -719,11 +719,11 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		item->Selectable = false;
 		item->Pos = Vector2( 721.8262f, -226.9048f );
 	#endif
-		item->setGo( Cast::ToItem( std::make_shared<BringNextProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<BringNextProxy>( shared_from_this() ) ) );
 		item->ScaleText( .92f );
 
 		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = std::make_shared<InitOnAStartHelper>( this );
+		MyMenu->OnA = std::make_shared<InitOnAStartHelper>( shared_from_this() );
 
 		// Load
 		std::shared_ptr<MenuItem> Load;
@@ -733,7 +733,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		Load = item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Y( 90 ) + _T( " Load" ), ItemFont ) );
 	#endif
 		Load->Name = _T( "Load" );
-		Load->setGo( std::make_shared<BringLoadProxy1>( this ) );
+		Load->setGo( std::make_shared<BringLoadProxy1>( shared_from_this() ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
@@ -753,7 +753,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		item->Name = _T( "Back" );
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( std::make_shared<ReturnToCallerProxy1>( this ) );
+		item->setGo( std::make_shared<ReturnToCallerProxy1>( shared_from_this() ) );
 		item->Pos = item->SelectedPos = Vector2( 922.9375f, -523.8096f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
@@ -767,8 +767,8 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		MyMenu->SelectItem( 0 );
 		GameList->SetIndex( 0 );
 		DiffList->SetIndex( 0 );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
-		MyMenu->OnY = std::make_shared<BringLoadProxy>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnY = std::make_shared<BringLoadProxy>( shared_from_this() );
 	}
 
 	std::shared_ptr<MenuItem> CustomLevel_GUI::AddHeroItem( const std::shared_ptr<BobPhsx> &hero )
@@ -1080,7 +1080,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 
 	void CustomLevel_GUI::BringHero()
 	{
-		HeroGui = std::make_shared<CustomHero_GUI>( this );
+		HeroGui = std::make_shared<CustomHero_GUI>( shared_from_this() );
 		Call( HeroGui, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1088,7 +1088,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 
 	void CustomLevel_GUI::BringUpgrades()
 	{
-		CallingPanel = std::make_shared<PassiveUpgrades_GUI>( PieceSeed, this );
+		CallingPanel = std::make_shared<PassiveUpgrades_GUI>( PieceSeed, shared_from_this() );
 		Call( CallingPanel, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1158,7 +1158,7 @@ bool CustomLevel_GUI::ExitFreeplay = false;
 			std::wstring seed = SeedStringToLoad;
 			SeedStringToLoad = _T( "" );
 
-			SavedSeedsGUI::LoadSeed( seed, this );
+			SavedSeedsGUI::LoadSeed( seed, shared_from_this() );
 			return;
 		}
 

@@ -236,6 +236,6 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		Vector2 FillTR = Vector2( TR.X, y + level->getMainCamera()->GetHeight() / 2 - 350 );
 
 		int Sparsity = static_cast<int>( Params->FloaterSparsity.getVal() );
-		level->Fill( FillBL, FillTR, 225 * Sparsity, 250, std::make_shared<BoulderFillLambda>( level, TR, BL, this ) );
+		level->Fill( FillBL, FillTR, 225 * Sparsity, 250, std::make_shared<BoulderFillLambda>( level, TR, BL, shared_from_this() ) );
 	}
 }

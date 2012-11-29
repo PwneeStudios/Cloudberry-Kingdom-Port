@@ -105,17 +105,17 @@ namespace CloudberryKingdom
 
 		// Yes
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
-		item->setGo( std::make_shared<YesProxy>( this ) );
+		item->setGo( std::make_shared<YesProxy>( shared_from_this() ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->setGo( std::make_shared<NoProxy>( this ) );
+		item->setGo( std::make_shared<NoProxy>( shared_from_this() ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -250,7 +250,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			item->getGo().reset();
 		else
 		{
-			item->setGo( std::make_shared<VerifyPurchaseProxy>( this ) );
+			item->setGo( std::make_shared<VerifyPurchaseProxy>( shared_from_this() ) );
 			item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
 		}
 	}
@@ -293,7 +293,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::CharSelect()
 	{
-		CharacterSelectManager::Start( this );
+		CharacterSelectManager::Start( shared_from_this() );
 	}
 
 	int ShopMenu::HatCompare( const std::shared_ptr<Hat> &h1, const std::shared_ptr<Hat> &h2 )
@@ -317,7 +317,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Header
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) );
@@ -516,7 +516,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Scroll bar
 	#if defined(PC_VERSION)
 		{
-			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), this );
+			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), shared_from_this() );
 			bar->setBarPos( Vector2( -2384.921f, 135 ) );
 			MyGame->AddGameObject( bar );
 			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

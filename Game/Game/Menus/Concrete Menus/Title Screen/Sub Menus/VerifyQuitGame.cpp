@@ -95,13 +95,13 @@ int VerifyQuitGameMenu2::Version = 1;
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
 		item->Name = _T( "No" );
-		item->setGo( std::make_shared<MenuReturnToCallerLambda>( this ) );
+		item->setGo( std::make_shared<MenuReturnToCallerLambda>( shared_from_this() ) );
 		item->AdditionalOnSelect = std::make_shared<InitTextureNameSetter>( Berry, _T( "cb_enthusiastic" ) );
 		item->SelectSound.reset();
 		BackSound.reset();
 		AddItem( item );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

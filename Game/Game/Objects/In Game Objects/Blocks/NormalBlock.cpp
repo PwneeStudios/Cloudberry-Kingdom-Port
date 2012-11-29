@@ -63,9 +63,9 @@ namespace CloudberryKingdom
 		if ( tileset->ProvidesTemplates )
 		{
 			if ( getMyLevel() == 0 )
-				return tileset->GetPieceTemplate( this, 0 );
+				return tileset->GetPieceTemplate( shared_from_this(), 0 );
 			else
-				return tileset->GetPieceTemplate( this, getRnd() );
+				return tileset->GetPieceTemplate( shared_from_this(), getRnd() );
 		}
 
 		if ( tileset->PassableSides )
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( this, GetPieceTemplate(), Invert );
+		MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 		MyBox->Initialize( center, size );
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( this, GetPieceTemplate(), Invert );
+			MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
 
 		Update();
 
@@ -232,7 +232,7 @@ float NormalBlock::TopOnlyHeight = 60;
 		MyBox->Validate();
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( this, GetPieceTemplate(), Invert );
+			MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
 
 		getBlockCore()->StartData.Position = MyBox->Current->Center;
 
@@ -323,7 +323,7 @@ float NormalBlock::TopOnlyHeight = 60;
 
 				if ( getBox()->Current->Size.Y < 170 || getBox()->Current->BL.Y > bob->getCore()->MyLevel->getMainCamera()->TR.Y - 75 )
 				{
-					bob->DeleteObj( this );
+					bob->DeleteObj( shared_from_this() );
 				}
 			}
 

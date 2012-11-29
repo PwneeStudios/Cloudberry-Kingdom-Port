@@ -65,7 +65,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 		if ( 0 == litem )
 			return;
 
-		MyGame->WaitThenDo( CallDelay, std::make_shared<LaunchHelper>( this, litem ), _T( "StartGame" ) );
+		MyGame->WaitThenDo( CallDelay, std::make_shared<LaunchHelper>( shared_from_this(), litem ), _T( "StartGame" ) );
 	}
 
 	bool StartLevelMenu::GameReturn()
@@ -139,7 +139,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 
 		Vector2 shift = Vector2( -200, 40 );
@@ -154,7 +154,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 			std::shared_ptr<LevelItem> item = std::make_shared<LevelItem>( std::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked );
 			if ( !Locked )
-				item->setGo( std::make_shared<LaunchProxy>( this ) );
+				item->setGo( std::make_shared<LaunchProxy>( shared_from_this() ) );
 
 			AddItem( item );
 			item->SelectedPos.X -= 25;

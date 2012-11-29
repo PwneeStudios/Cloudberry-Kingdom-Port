@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 	{
 		this->AttachedMenu = AttachedMenu;
 		this->Parent = Parent;
-		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( this ) );
+		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( shared_from_this() ) );
 
 		Constructor();
 	}

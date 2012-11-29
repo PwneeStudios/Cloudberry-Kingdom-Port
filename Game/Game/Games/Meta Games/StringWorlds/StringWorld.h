@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 			bool Hold_FirstLevelHasBegun;
 
 		public:
-			StartOfLevelLambda( const std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun );
+			StartOfLevelLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun );
 
 			bool Apply();
 		};
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 			std::shared_ptr<Door> door;
 			std::shared_ptr<LevelSeedData> CurLevelSeed;
 		public:
-			OpenAndShowLambda( const std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, const std::shared_ptr<LevelSeedData> &CurLevelSeed );
+			OpenAndShowLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, const std::shared_ptr<LevelSeedData> &CurLevelSeed );
 
 			void Apply();
 		};
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		public:
 			FinishLambda( const std::shared_ptr<StringWorldGameData> &g );
 
-			void Apply( bool val );
+			void Apply( const bool &val );
 		};
 
 	private:
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 
 		StringWorldGameData();
 
-		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed );
+		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > GetSeed );
 
 		std::shared_ptr<Level> MakeLevel();
 

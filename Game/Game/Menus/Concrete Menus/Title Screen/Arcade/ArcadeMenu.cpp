@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		StartLevelMenu::PreviousMenuIndex = item->MenuIndex;
 
 		// Start the game
-		MyGame->PlayGame( std::make_shared<PlayGameProxy>( this ) );
+		MyGame->PlayGame( std::make_shared<PlayGameProxy>( shared_from_this() ) );
 	}
 
 	void ArcadeBaseMenu::PlayGame()
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Header
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
@@ -209,7 +209,7 @@ namespace CloudberryKingdom
 		item->Name = itemname;
 		AddItem( item );
 
-		item->setGo( std::make_shared<GoProxy>( this ) );
+		item->setGo( std::make_shared<GoProxy>( shared_from_this() ) );
 
 		return item;
 	}

@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	{
 		_ExpandOnGo = value;
 		if ( _ExpandOnGo )
-			OnClick = std::make_shared<ExpandProxy1>( this );
+			OnClick = std::make_shared<ExpandProxy1>( shared_from_this() );
 		else
 			OnClick.reset();
 	}
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 	{
 		if ( MyMenuListExpand == 0 || MyMenuListExpand->getCore()->Released )
 		{
-			MyMenuListExpand = std::make_shared<MenuListExpand>( this->Control, this );
+			MyMenuListExpand = std::make_shared<MenuListExpand>( this->Control, shared_from_this() );
 			Tools::CurGameData->AddGameObject( MyMenuListExpand );
 			MyMenu->Active = false;
 

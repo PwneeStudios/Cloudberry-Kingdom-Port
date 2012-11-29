@@ -25,7 +25,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 	BobPhsxInvert::BobPhsxInvert()
 	{
 		InitializeInstanceFields();
-		Set( this );
+		Set( shared_from_this() );
 	}
 
 	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx )

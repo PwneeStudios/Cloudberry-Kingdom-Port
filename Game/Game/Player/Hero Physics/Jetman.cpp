@@ -74,6 +74,6 @@ const std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance = std::make_shared<
 
 	BobPhsxJetman::BobPhsxJetman()
 	{
-		Set( this );
+		Set( shared_from_this() );
 	}
 }

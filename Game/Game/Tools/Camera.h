@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Camera : public IPos
+	class Camera : public IPos, public std::enable_shared_from_this<Camera>
 	{
 	public:
 		/// <summary>

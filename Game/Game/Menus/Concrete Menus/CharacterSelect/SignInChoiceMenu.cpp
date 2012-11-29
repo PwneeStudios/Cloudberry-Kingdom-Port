@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 
 		MakeSignInChoiceMenu();
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 #endif
 
@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		Vector2 pos = Vector2( 0, 0 );
 		float YSpacing = 200;
@@ -135,10 +135,10 @@ namespace CloudberryKingdom
 		MyMenu->SelectItem( 1 );
 
 		MyMenu->Items[ 1 ]->Name = _T( "Yes" );
-		MyMenu->Items[ 1 ]->setGo( std::make_shared<SignInYesLambda>( this ) );
+		MyMenu->Items[ 1 ]->setGo( std::make_shared<SignInYesLambda>( shared_from_this() ) );
 
 		MyMenu->Items[ 2 ]->Name = _T( "No" );
-		MyMenu->Items[ 2 ]->setGo( std::make_shared<SignInNoLambda>( this ) );
+		MyMenu->Items[ 2 ]->setGo( std::make_shared<SignInNoLambda>( shared_from_this() ) );
 
 		MyMenu->MyPieceQuadTemplate.reset();
 

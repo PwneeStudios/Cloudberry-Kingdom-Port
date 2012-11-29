@@ -49,7 +49,7 @@ int Upgrades::MaxBobWidth = 360;
 
 	void Upgrades::CalcGenData( const std::shared_ptr<LevelGenData> &GenData, const std::shared_ptr<StyleData> &Style )
 	{
-		Style_CALCULATE( this );
+		Style_CALCULATE( shared_from_this() );
 
 		float JumpLevel = this->operator[]( Upgrade_JUMP );
 		JumpLevel = 3.75f + .625f * JumpLevel;

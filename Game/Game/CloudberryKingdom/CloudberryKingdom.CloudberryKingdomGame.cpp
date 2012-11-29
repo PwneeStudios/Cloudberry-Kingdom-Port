@@ -186,7 +186,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		InitializeInstanceFields();
 		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );
-		MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( this, &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
+		MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		Tools::GameClass->getContent()->RootDirectory = _T("Content");
 
@@ -431,8 +431,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 	#if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-		SignedInGamer::SignedIn += std::make_shared<EventHandler<SignedInEventArgs*> >( this, &CloudberryKingdomGame::SignedInGamer_SignedIn );
-		SignedInGamer::SignedOut += std::make_shared<EventHandler<SignedOutEventArgs*> >( this, &CloudberryKingdomGame::SignedInGamer_SignedOut );
+		SignedInGamer::SignedIn += std::make_shared<EventHandler<SignedInEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedIn );
+		SignedInGamer::SignedOut += std::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
 	#endif
 
 		MainVideo::StartVideo_CanSkipIfWatched( _T( "LogoSalad" ) );
@@ -1384,12 +1384,12 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 		//data.MyGameFlags.IsDoppleganger = true;
 		//data.MyGameFlags.IsDopplegangerInvert = true;
 
-		data->Initialize( std::make_shared<MakeTestLevelInitializeHelper>( this ) );
+		data->Initialize( std::make_shared<MakeTestLevelInitializeHelper>( shared_from_this() ) );
 
 		// Add Landing Zone
 		//data.PieceSeeds[0].Style.MyInitialPlatsType = StyleData.InitialPlatsType.LandingZone;
 
-		data->PostMake->Add( std::make_shared<TestLevelPostMakeProxy>( this ) );
+		data->PostMake->Add( std::make_shared<TestLevelPostMakeProxy>( shared_from_this() ) );
 
 		//Campaign.CarryPrinces(data);
 

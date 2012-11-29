@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 	//	const int tempVector[] = { 3 };
 	//	Thread::CurrentThread->SetProcessorAffinity( std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
 	//#endif
-	//	Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( this, &NormalGameData::KillThread );
+	//	Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( shared_from_this(), &NormalGameData::KillThread );
 
 		MyLevel = LevelSeed->MakeLevel( shared_from_this() );
 

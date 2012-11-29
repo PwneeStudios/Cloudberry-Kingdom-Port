@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 			{
 				if ( getCore()->MyLevel->PlayMode == 0 )
 				{
-					bob->Die( DeathType, this );
+					bob->Die( DeathType, shared_from_this() );
 					Die();
 				}
 

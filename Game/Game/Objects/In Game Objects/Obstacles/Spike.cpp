@@ -324,7 +324,7 @@ bool Spike::PeakOut = true;
 			if ( Col )
 			{
 				if ( getCore()->MyLevel->PlayMode == 0 )
-					bob->Die( Bob::BobDeathType_SPIKE, this );
+					bob->Die( Bob::BobDeathType_SPIKE, shared_from_this() );
 
 				if ( getCore()->MyLevel->PlayMode != 0 )
 				{

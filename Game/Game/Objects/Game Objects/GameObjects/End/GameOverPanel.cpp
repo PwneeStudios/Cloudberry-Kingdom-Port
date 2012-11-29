@@ -264,7 +264,7 @@ namespace CloudberryKingdom
 		MyMenu->Show = MyMenu->Active = false;
 
 		// Show the menu when the user is done entering their name
-		MyTextBox->OnEnter->Add( std::make_shared<OnEnterLambda>( this ) );
+		MyTextBox->OnEnter->Add( std::make_shared<OnEnterLambda>( shared_from_this() ) );
 	}
 #endif
 
@@ -307,15 +307,15 @@ namespace CloudberryKingdom
 		FontScale *= .89f * 1.16f;
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_PlayAgainProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_PlayAgainProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_ShowHighScoresProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_ShowHighScoresProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_DoneProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_DoneProxy>( shared_from_this() ) ) );
 		AddItem( item );
 	}
 
@@ -333,7 +333,7 @@ namespace CloudberryKingdom
 		Active = false;
 
 		Tools::SongWad->FadeOut();
-		MyGame->WaitThenDo( 36, std::make_shared<Action_DoneHelper>( this ) );
+		MyGame->WaitThenDo( 36, std::make_shared<Action_DoneHelper>( shared_from_this() ) );
 
 		return;
 	}
@@ -345,7 +345,7 @@ namespace CloudberryKingdom
 
 		Tools::SongWad->FadeOut();
 
-		MyGame->WaitThenDo( 36, std::make_shared<Action_PlayAgainHelper>( this ) );
+		MyGame->WaitThenDo( 36, std::make_shared<Action_PlayAgainHelper>( shared_from_this() ) );
 		return;
 	}
 

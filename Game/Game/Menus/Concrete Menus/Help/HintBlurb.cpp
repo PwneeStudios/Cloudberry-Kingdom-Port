@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		// Remove all other hints
 		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
-			if ( *obj == this )
+			if ( ( *obj ).get() == this )
 				continue;
 
 			std::shared_ptr<HintBlurb> blurb = dynamic_cast<HintBlurb*>( *obj );

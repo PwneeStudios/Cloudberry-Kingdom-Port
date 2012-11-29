@@ -526,25 +526,6 @@ namespace CloudberryKingdom
 		AddQuadChild( child, false );
 	}
 
-#if defined(EDITOR)
-	void Quad::ClickOnParentButton()
-	{
-		SetToBeParent = !SetToBeParent;
-
-		if ( SetToBeParent )
-		{
-			for ( std::vector<BaseQuad*>::const_iterator quad = ParentObject->QuadList.begin(); quad != ParentObject->QuadList.end(); ++quad )
-			{
-				if ( ( *quad )->SetToBeChild && quad != this )
-					AddQuadChild( *quad );
-				( *quad )->SetToBeChild = false;
-				if ( dynamic_cast<Quad*>( *quad ) != 0 )
-					( static_cast<Quad*>( *quad ) )->SetToBeParent = false;
-			}
-		}
-	}
-#endif
-
 	void Quad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		FinishLoading( device, TexWad, EffectWad, true );
@@ -553,14 +534,8 @@ namespace CloudberryKingdom
 	void Quad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
 	{
 		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>(  this->shared_from_this() ) );
-		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>(  this->shared_from_this() ) );
-
-	#if defined(EDITOR)
-		ParentPoint->ClickEventCallback = ClickOnParentButton;
-		ChildPoint->ClickEventCallback = ClickOnChildButton;
-		ReleasePoint->ClickEventCallback = ClickOnReleaseButton;
-	#endif
+		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 
 		if ( UseNames )
 		{
@@ -593,18 +568,6 @@ namespace CloudberryKingdom
 		yAxis->Move( Vector2( 0, 1 ) );
 		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-
-	#if defined(EDITOR)
-		ParentPoint = std::make_shared<ObjectVector>();
-		ChildPoint = std::make_shared<ObjectVector>();
-		ReleasePoint = std::make_shared<ObjectVector>();
-		ParentPoint->ParentQuad = this;
-		ChildPoint->ParentQuad = this;
-		ParentPoint->ClickEventCallback = ClickOnParentButton;
-		ChildPoint->ClickEventCallback = ClickOnChildButton;
-		ReleasePoint->ClickEventCallback = ClickOnReleaseButton;
-		SetToBeParent = SetToBeChild = false;
-	#endif
 
 		Corner = std::vector<std::shared_ptr<ObjectVector> >( 4 );
 		for ( int i = 0; i < 4; i++ )

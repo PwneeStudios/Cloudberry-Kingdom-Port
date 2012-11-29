@@ -64,7 +64,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 	BobPhsxMeat::BobPhsxMeat()
 	{
 		InitializeInstanceFields();
-		Set( this );
+		Set( shared_from_this() );
 	}
 
 	void BobPhsxMeat::Init( const std::shared_ptr<Bob> &bob )

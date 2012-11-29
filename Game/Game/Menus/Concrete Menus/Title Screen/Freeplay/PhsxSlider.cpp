@@ -30,7 +30,7 @@ std::shared_ptr<Lambda_1<MenuItem*> > PhsxSlider::Process = 0;
 		setMyFloat( std::make_shared<WrappedFloat>( CustomHero_GUI::HeroPhsxData[ MyType ], BobPhsx::CustomPhsxData::Bounds( type ).MinValue, BobPhsx::CustomPhsxData::Bounds( type ).MaxValue ) );
 								   //CustomHero_GUI.Hero.MyCustomPhsxData[type],
 								   //BobPhsx.CustomPhsxData.Bounds(type).DefaultValue,
-		Process->Apply( this );
+		Process->Apply( shared_from_this() );
 		ScaleText( .33f );
 
 		getMyFloat()->SetCallback = std::make_shared<PhsxDataSetter>(MyType, getMyFloat());

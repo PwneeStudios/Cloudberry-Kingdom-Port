@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		if ( this->Unlockable != 0 )
 			this->Unlockable->AssociatedAward = this;
 
-		Awardments::Awards.push_back( this );
+		Awardments::Awards.push_back( shared_from_this() );
 	}
 
 	int Awardments::CheckpointsStatsLambda::Apply( const std::shared_ptr<PlayerData> &p )

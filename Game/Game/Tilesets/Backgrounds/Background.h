@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		static void Load( const std::wstring &path );
 	};
 
-	class BackgroundTemplate
+	class BackgroundTemplate : public std::enable_shared_from_this<BackgroundTemplate>
 	{
 	public:
 		std::wstring Name;

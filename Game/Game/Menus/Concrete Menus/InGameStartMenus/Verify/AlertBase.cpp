@@ -87,11 +87,11 @@ namespace CloudberryKingdom
 		MyMenu->setControl( getControl() );
 
 		std::shared_ptr<MenuItem> OkItem = std::make_shared<MenuItem>( std::make_shared<EzText>( OkText, ItemFont, true, true ), _T( "Message" ) );
-		OkItem->setGo( Cast::ToItem( std::make_shared<OkProxy>( this ) ) );
+		OkItem->setGo( Cast::ToItem( std::make_shared<OkProxy>( shared_from_this() ) ) );
 		AddItem( OkItem );
 		OkItem->SelectSound.reset();
 
-		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( std::make_shared<OkProxy>( this ) );
+		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( std::make_shared<OkProxy>( shared_from_this() ) );
 
 		EnsureFancy();
 

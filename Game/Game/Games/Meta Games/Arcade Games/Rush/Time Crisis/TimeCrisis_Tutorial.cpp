@@ -20,6 +20,6 @@ namespace CloudberryKingdom
 		//CampaignHelper.AbusiveColor(text2.MyText);
 
 		MyGame->AddGameObject( text );
-		MyGame->WaitThenDo( 0, std::make_shared<AddGameObjectHelper>( this, text ) );
+		MyGame->WaitThenDo( 0, std::make_shared<AddGameObjectHelper>( shared_from_this(), text ) );
 	}
 }

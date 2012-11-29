@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 		else
 			slider->getMyFloat()->SetCallback = std::make_shared<PieceSeedSetter>(this, upgrade, slider);
 
-		slider->AdditionalOnSelect = std::make_shared<AddUpgradeAdditionalOnSelect>( this, slider, upgrade );
+		slider->AdditionalOnSelect = std::make_shared<AddUpgradeAdditionalOnSelect>( shared_from_this(), slider, upgrade );
 		AddItem( slider );
 	}
 
@@ -418,10 +418,10 @@ namespace CloudberryKingdom
 	void CustomUpgrades_GUI::MakeMenu()
 	{
 		MyMenu = std::make_shared<Menu>( false );
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( this ) );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
-		MyMenu->OnX = Cast::ToMenu( std::make_shared<RandomizeProxy>( this ) );
-		MyMenu->OnY = std::make_shared<ZeroProxy>( this );
+		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( shared_from_this() ) );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = Cast::ToMenu( std::make_shared<RandomizeProxy>( shared_from_this() ) );
+		MyMenu->OnY = std::make_shared<ZeroProxy>( shared_from_this() );
 		MyMenu->SelectDelay = 11;
 	}
 
@@ -431,7 +431,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::StartGame()
 	{
-		MyGame->PlayGame( std::make_shared<StartLevelProxy>( this ) );
+		MyGame->PlayGame( std::make_shared<StartLevelProxy>( shared_from_this() ) );
 	}
 
 	void CustomUpgrades_GUI::MakeOptions()
@@ -443,7 +443,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<MenuItem> item;
 		std::shared_ptr<MenuItem> Start = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_START, ItemFont ) );
 		item->Name = _T( "Start" );
-		item->setGo( Cast::ToItem( std::make_shared<GoProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoProxy>( shared_from_this() ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 425.3959f, -99.92095f );
@@ -451,12 +451,12 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
 		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( this ) );
+		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( shared_from_this() ) );
 
 		// Random
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
 		item->Name = _T( "Random" );
-		item->setGo( Cast::ToItem( std::make_shared<RandomizeProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<RandomizeProxy>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 511.8408f, -302.6506f );
@@ -466,7 +466,7 @@ namespace CloudberryKingdom
 		// Zero
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( Cast::ToItem( std::make_shared<ZeroProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ZeroProxy>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 599.1416f, -501.0634f );
@@ -479,7 +479,7 @@ namespace CloudberryKingdom
 		item->getGo().reset();
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( std::make_shared<ItemReturnToCallerProxy>( this ) );
+		item->setGo( std::make_shared<ItemReturnToCallerProxy>( shared_from_this() ) );
 		item->Pos = item->SelectedPos = Vector2( 702.3179f, -689.9683f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;

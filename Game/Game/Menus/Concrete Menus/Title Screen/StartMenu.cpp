@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 	void StartMenu::BringCharacterSelect()
 	{
 		NoBack = true;
-		MyGame->SlideOut_FadeIn( 20, std::make_shared<CharacterSelectProxy>( this ) );
+		MyGame->SlideOut_FadeIn( 20, std::make_shared<CharacterSelectProxy>( shared_from_this() ) );
 	}
 
 	void StartMenu::Show()
@@ -162,8 +162,8 @@ namespace CloudberryKingdom
 	void StartMenu::CharacterSelect()
 	{
 		Hide();
-		CharacterSelectManager::Start( this );
-		CharacterSelectManager::OnDone = std::make_shared<DoneWithCharSelectProxy>( this );
+		CharacterSelectManager::Start( shared_from_this() );
+		CharacterSelectManager::OnDone = std::make_shared<DoneWithCharSelectProxy>( shared_from_this() );
 		CharacterSelectManager::OnBack.reset();
 	}
 
@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
 		Intro->Init();
 		Tools::TheGame->LogoScreenPropUp = false;
-		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( this ) );
+		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( shared_from_this() ) );
 	}
 
 	void StartMenu::MenuGo_Controls( const std::shared_ptr<MenuItem> &item )
@@ -291,7 +291,7 @@ namespace CloudberryKingdom
 		MyMenu->setControl( -2 );
 
 		MyMenu->CheckForOutsideClick = false;
-		MyMenu->OnB = std::make_shared<StartMenuExitLambda>( this );
+		MyMenu->OnB = std::make_shared<StartMenuExitLambda>( shared_from_this() );
 
 		FontScale *= .88f;
 		PosAdd = Vector2( 0, -117 );
@@ -313,14 +313,14 @@ namespace CloudberryKingdom
 		// Arcade
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
 		item->Name = _T( "Arcade" );
-		item->setGo( std::make_shared<StartMenuLambda_Arcade>( this ) );
+		item->setGo( std::make_shared<StartMenuLambda_Arcade>( shared_from_this() ) );
 		AddItem( item );
 
 		// Campaign
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
 		item->Name = _T( "Campaign" );
 		AddItem( item );
-		item->setGo( std::make_shared<StartMenuLambda_Campaign>( this ) );
+		item->setGo( std::make_shared<StartMenuLambda_Campaign>( shared_from_this() ) );
 
 		//// Extra
 		//item = new MenuItem(new EzText("Extras", ItemFont));
@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 		// Free Play
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
 		item->Name = _T( "Freeplay" );
-		item->setGo( std::make_shared<StartMenuLambda_Freeplay>( this ) );
+		item->setGo( std::make_shared<StartMenuLambda_Freeplay>( shared_from_this() ) );
 		AddItem( item );
 
 		//// Jukebox
@@ -343,7 +343,7 @@ namespace CloudberryKingdom
 		// Options
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
 		item->Name = _T( "Options" );
-		item->setGo( std::make_shared<StartMenuLambda_Options>( this ) );
+		item->setGo( std::make_shared<StartMenuLambda_Options>( shared_from_this() ) );
 		AddItem( item );
 
 		// Stats
@@ -354,7 +354,7 @@ namespace CloudberryKingdom
 		// Exit
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
 		item->Name = _T( "Exit" );
-		item->setGo( std::make_shared<StartMenuLambda_Exit>( this ) );
+		item->setGo( std::make_shared<StartMenuLambda_Exit>( shared_from_this() ) );
 		AddItem( item );
 
 		EnsureFancy();
@@ -582,7 +582,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::DoneWithCharSelect()
 	{
-		MyGame->WaitThenDo( 0, std::make_shared<BringNextMenuLambda>( this ) );
+		MyGame->WaitThenDo( 0, std::make_shared<BringNextMenuLambda>( shared_from_this() ) );
 	}
 
 	void StartMenu::BringNextMenu()

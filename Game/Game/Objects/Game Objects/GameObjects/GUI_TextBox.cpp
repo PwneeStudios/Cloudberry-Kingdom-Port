@@ -50,8 +50,8 @@ namespace CloudberryKingdom
 		KeyboardExtension::FreezeInput();
 
 		// FIXME: Reimplement this using something similar.
-		//EventInput::CharEntered += std::make_shared<CharEnteredHandler>( this, &GUI_TextBox::CharEntered );
-		//EventInput::KeyDown += std::make_shared<KeyEventHandler>( this, &GUI_TextBox::KeyDown );
+		//EventInput::CharEntered += std::make_shared<CharEnteredHandler>( shared_from_this(), &GUI_TextBox::CharEntered );
+		//EventInput::KeyDown += std::make_shared<KeyEventHandler>( shared_from_this(), &GUI_TextBox::KeyDown );
 	#endif
 	}
 

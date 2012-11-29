@@ -30,6 +30,6 @@ const std::shared_ptr<BobPhsxScale> BobPhsxScale::instance = std::make_shared<Bo
 
 	BobPhsxScale::BobPhsxScale()
 	{
-		Set( this );
+		Set( shared_from_this() );
 	}
 }

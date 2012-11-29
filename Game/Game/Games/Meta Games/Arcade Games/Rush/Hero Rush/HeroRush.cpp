@@ -96,7 +96,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 	void Challenge_HeroRush::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( this ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
 	}
 
 	void Challenge_HeroRush::MakeExitDoorIcon( int levelindex )
@@ -123,7 +123,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		PreStart_Tutorial( StartIndex > 0 );
 
 		// When a new level is swapped to...
-		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( this ) );
+		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( shared_from_this() ) );
 	}
 
 	void Challenge_HeroRush::OnSwapTo_GUI( int levelindex )

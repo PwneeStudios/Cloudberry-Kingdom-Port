@@ -93,13 +93,13 @@ std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<
 
 		// Fade in
 		FadeIn( .0175f );
-		WaitThenDo( 18, std::make_shared<_InitProxy>( this ) );
+		WaitThenDo( 18, std::make_shared<_InitProxy>( shared_from_this() ) );
 	}
 
 	void TitleGameData_MW::_Init()
 	{
 		// Press Start
-		PressStart = std::make_shared<StartMenu_MW_PressStart>( this );
+		PressStart = std::make_shared<StartMenu_MW_PressStart>( shared_from_this() );
 		AddGameObject( PressStart );
 
 		/*

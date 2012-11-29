@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 
 		MyMenu->OnB.reset();
 
-		MyMenu->OnB = std::make_shared<InitOnBMenuHelper>( this );
+		MyMenu->OnB = std::make_shared<InitOnBMenuHelper>( shared_from_this() );
 
 		ItemPos = Vector2( 0, 0 );
 		PosAdd = Vector2( 0, -168 - 3 );
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 
 			std::shared_ptr<MenuItem> clone = ( *item )->Clone();
 			clone->MyInt = index - 1;
-			clone->AdditionalOnSelect = std::make_shared<OnSelectProxy>( this );
+			clone->AdditionalOnSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
 			AddItem( clone );
 			clone->ScaleText( .85f );
 			Vector2 size = clone->MyText->GetWorldSize();
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 			Width = __max( size.X, Width );
 
 			if ( MyMenuList->AdditionalExpandProcessing != 0 )
-				MyMenuList->AdditionalExpandProcessing->Apply( this, clone );
+				MyMenuList->AdditionalExpandProcessing->Apply( shared_from_this(), clone );
 		}
 
 		// Backdrop

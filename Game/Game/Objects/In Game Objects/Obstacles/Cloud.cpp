@@ -187,9 +187,9 @@ namespace CloudberryKingdom
 				if ( bob->MyPhsx->DynamicLessThan( bob->getCore()->Data.Velocity.Y, 0 ) )
 				{
 					if ( bob->MyPhsx->Gravity > 0 )
-						bob->MyPhsx->LandOnSomething( false, this );
+						bob->MyPhsx->LandOnSomething( false, shared_from_this() );
 					else
-						bob->MyPhsx->HitHeadOnSomething( this );
+						bob->MyPhsx->HitHeadOnSomething( shared_from_this() );
 
 					Displacement += Shiftiness * bob->getCore()->Data.Velocity / 2;
 				}

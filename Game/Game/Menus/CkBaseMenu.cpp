@@ -229,7 +229,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::setRightPanel( const std::shared_ptr<GUI_Panel> &value )
 	{
 		_RightPanel = value;
-		_RightPanel->CopySlideLengths( this );
+		_RightPanel->CopySlideLengths( shared_from_this() );
 	}
 
 	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getRightPanel() const
@@ -240,7 +240,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::setTopPanel( const std::shared_ptr<GUI_Panel> &value )
 	{
 		_TopPanel = value;
-		_TopPanel->CopySlideLengths( this );
+		_TopPanel->CopySlideLengths( shared_from_this() );
 	}
 
 	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getTopPanel() const
@@ -356,7 +356,7 @@ namespace CloudberryKingdom
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Back( 86 ) + _T( " " ) + Localization::WordString( Word ) ) );
 	#endif
 
-		item->setGo( std::make_shared<MakeBackButtonHelper>( this ) );
+		item->setGo( std::make_shared<MakeBackButtonHelper>( shared_from_this() ) );
 		item->Name = _T( "Back" );
 		AddItem( item );
 		item->SelectSound.reset();

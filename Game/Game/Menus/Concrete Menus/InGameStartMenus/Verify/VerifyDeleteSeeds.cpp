@@ -66,17 +66,17 @@ namespace CloudberryKingdom
 
 		// Yes
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont, _T( "Yes" ) ) );
-		item->setGo( std::make_shared<VerifyDeleteYesGoLambda>( this ) );
+		item->setGo( std::make_shared<VerifyDeleteYesGoLambda>( shared_from_this() ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont, _T( "No" ) ) );
-		item->setGo( std::make_shared<VerifyDeleteNoGoLambda>( this ) );
+		item->setGo( std::make_shared<VerifyDeleteNoGoLambda>( shared_from_this() ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<VerifyDeleteOnXLambda>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<VerifyDeleteOnXLambda>( shared_from_this() );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

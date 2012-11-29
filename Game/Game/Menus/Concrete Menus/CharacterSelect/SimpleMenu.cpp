@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::OnAdd();
 
-		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, this );
+		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, shared_from_this() );
 		MyGame->AddGameObject( Arrows );
 	}
 
@@ -233,7 +233,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		// Customize
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) );
 		item->Name = _T( "Custom" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToCustomProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<SimpleToCustomProxy>( shared_from_this() ) ) );
 		ItemPos = Vector2( -523, -174 );
 		PosAdd = Vector2( 0, -220 );
 		AddItem( item );
@@ -247,13 +247,13 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		// Confirm
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
 		item->Name = _T( "Done" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToDoneProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<SimpleToDoneProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Select "Confirm" to start with
 		MyMenu->SelectItem( item );
 
-		MyMenu->OnB = Cast::ToMenu( std::make_shared<SimpleToBackProxy>( this ) );
+		MyMenu->OnB = Cast::ToMenu( std::make_shared<SimpleToBackProxy>( shared_from_this() ) );
 
 		// Backdrop
 		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score_Screen" ), 485 );
@@ -305,7 +305,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		MyMenu->setPos( Vector2( 0, 0 ) );
 		MyPile->setPos( Vector2( 0, 0 ) );
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 #endif
 
@@ -392,7 +392,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 			_t->setScale( 0.66f );
 		}
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 #endif
 

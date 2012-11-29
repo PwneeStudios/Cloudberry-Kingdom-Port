@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 
 		// Fade in and out
 		MyPile->setAlpha( 0 );
-		MyGame->WaitThenDo( InitialDelay, std::make_shared<BringInitialDelayHelper>( this ), _T( "Start lives left bring" ), true, false );
+		MyGame->WaitThenDo( InitialDelay, std::make_shared<BringInitialDelayHelper>( shared_from_this() ), _T( "Start lives left bring" ), true, false );
 	}
 
 	void GUI_LivesLeft::Reset( bool BoxesOnly )
@@ -191,9 +191,9 @@ namespace CloudberryKingdom
 			MyPile->Insert( 0, Black );
 		}
 
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( this ) );
+		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( shared_from_this() ) );
 		//MyGame.ToDoOnDoneDying.Add(OnDoneDying);
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( this ) );
+		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( shared_from_this() ) );
 
 		if ( MyGame->MyLevel != 0 )
 			PreventResetOnLastLife( MyGame->MyLevel );
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnReset()
 	{
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( this ) );
+		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( shared_from_this() ) );
 
 		std::shared_ptr<Level> level = getCore()->MyLevel;
 
@@ -229,13 +229,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDoneDying()
 	{
-		MyGame->ToDoOnDoneDying.push_back( std::make_shared<OnDoneDyingProxy>( this ) );
+		MyGame->ToDoOnDoneDying.push_back( std::make_shared<OnDoneDyingProxy>( shared_from_this() ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( this );
+				OnOutOfLives->Apply( shared_from_this() );
 
 			Release();
 			return;
@@ -244,13 +244,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDeath()
 	{
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( this ) );
+		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( shared_from_this() ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( this );
+				OnOutOfLives->Apply( shared_from_this() );
 
 			Release();
 			return;

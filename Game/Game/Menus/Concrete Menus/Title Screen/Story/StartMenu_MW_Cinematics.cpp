@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		MyMenu->ClearList();
 
@@ -88,37 +88,37 @@ namespace CloudberryKingdom
 		// Chapter 1
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Over the Edge" ), ItemFont ), _T( "Cutscene_1" ) );
 		item->Name = _T( "1" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 2
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Into the Forest" ), ItemFont ), _T( "Cutscene_2" ) );
 		item->Name = _T( "2" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 3
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Woes of a Kidnapper" ), ItemFont ), _T( "Cutscene_3" ) );
 		item->Name = _T( "3" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 4
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Welterweight" ), ItemFont ), _T( "Cutscene_4" ) );
 		item->Name = _T( "4" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 5
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Cloudberry Pie" ), ItemFont ), _T( "Cutscene_5" ) );
 		item->Name = _T( "5" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		// Chapter 6
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "I Always Told You" ), ItemFont ), _T( "Cutscene_6" ) );
 		item->Name = _T( "6" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( this ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
 		AddItem( item );
 
 		MyMenu->SelectItem( 0 );

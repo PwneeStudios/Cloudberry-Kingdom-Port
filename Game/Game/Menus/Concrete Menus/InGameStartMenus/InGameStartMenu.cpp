@@ -182,7 +182,7 @@ bool InGameStartMenu::PreventMenu = false;
 		// Resume
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) );
 		item->Name = _T( "Resume" );
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( shared_from_this() ) ) );
 		item->MyText->setScale( item->MyText->getScale() * 1.1f );
 		item->MySelectedText->setScale( item->MySelectedText->getScale() * 1.1f );
 		AddItem( item );
@@ -192,14 +192,14 @@ bool InGameStartMenu::PreventMenu = false;
 		// Statistics
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) );
 		item->Name = _T( "Stats" );
-		item->setGo( Cast::ToItem( std::make_shared<GoStatsProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoStatsProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// SaveLoadSeed
 		Localization::Words word = Tools::CurLevel->CanLoadLevels ? Localization::Words_SAVE_LOAD : Localization::Words_SAVE_SEED;
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( word, ItemFont ) );
 		item->Name = _T( "SaveLoadSeed" );
-		item->setGo( Cast::ToItem( std::make_shared<GoSaveLoadProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoSaveLoadProxy>( shared_from_this() ) ) );
 		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 		{
 			item->Selectable = false;
@@ -210,13 +210,13 @@ bool InGameStartMenu::PreventMenu = false;
 		// Options
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
 		item->Name = _T( "Options" );
-		item->setGo( Cast::ToItem( std::make_shared<GoOptionsProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoOptionsProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Controls
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
 		item->Name = _T( "Controls" );
-		item->setGo( Cast::ToItem( std::make_shared<GoControlsProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoControlsProxy>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Remove player
@@ -224,7 +224,7 @@ bool InGameStartMenu::PreventMenu = false;
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) );
 			item->Name = _T( "Remove" );
-			item->setGo( Cast::ToItem( std::make_shared<GoRemoveProxy>( this ) ) );
+			item->setGo( Cast::ToItem( std::make_shared<GoRemoveProxy>( shared_from_this() ) ) );
 			AddItem( item );
 			RemoveMe = item;
 		}
@@ -233,7 +233,7 @@ bool InGameStartMenu::PreventMenu = false;
 		MakeExitItem();
 
 		// Button interactions
-		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Shift everything
 		EnsureFancy();
@@ -254,7 +254,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoControls()
 	{
-		MyGame->WaitThenDo( 4, std::make_shared<GoControlsHelper>( this ) );
+		MyGame->WaitThenDo( 4, std::make_shared<GoControlsHelper>( shared_from_this() ) );
 		std::shared_ptr<ControlScreen> screen = std::make_shared<ControlScreen>( getControl() );
 		Call( screen, 22 );
 	}
@@ -353,7 +353,7 @@ bool InGameStartMenu::PreventMenu = false;
 	void InGameStartMenu::MakeExitItem()
 	{
 		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<VerifyExitProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<VerifyExitProxy>( shared_from_this() ) ) );
 
 		AddItem( item );
 	}

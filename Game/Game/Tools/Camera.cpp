@@ -464,7 +464,7 @@ bool Camera::DisableOscillate = false;
 	void Camera::Fixed_PhsxStep()
 	{
 		if ( MyZone != 0 )
-			MyZone->SetZoom( this );
+			MyZone->SetZoom( shared_from_this() );
 
 		if ( FancyPos != 0 )
 			Data.Position = FancyPos->Update();
@@ -480,7 +480,7 @@ bool Camera::DisableOscillate = false;
 		//MyZone.Enforce(this);
 		//float zoom = 0.00072f;
 		//MyZone.Zoom = zoom / .001f;
-		MyZone->SetZoom( this );
+		MyZone->SetZoom( shared_from_this() );
 
 		Vector2 TR, BL;
 		TR = Vector2( -10000000, -10000000 );
@@ -783,7 +783,7 @@ bool Camera::DisableOscillate = false;
 						Target.Y = Pos.Y + BoxSize.Y;
 				}
 
-				MyZone->Enforce( this );
+				MyZone->Enforce( shared_from_this() );
 			}
 		}
 

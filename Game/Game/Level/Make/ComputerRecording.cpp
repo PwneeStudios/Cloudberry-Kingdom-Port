@@ -173,7 +173,7 @@ template<typename T>
 	{
 		if ( IsFromPool )
 		{
-			ToPool( this );
+			ToPool( shared_from_this() );
 			return;
 		}
 

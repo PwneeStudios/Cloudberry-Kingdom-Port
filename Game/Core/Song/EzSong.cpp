@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		MediaPlayer::Play( song );
 
 		if ( DisplayInfo )
-			Tools::SongWad->DisplaySongInfo( this );
+			Tools::SongWad->DisplaySongInfo( shared_from_this() );
 
 		return song->Duration.TotalSeconds;
 	}

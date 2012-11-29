@@ -91,14 +91,14 @@ namespace CloudberryKingdom
 		AddItem( MusicSlider );
 
 		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
-		item->setGo( std::make_shared<InitHideHelper>( this ) );
+		item->setGo( std::make_shared<InitHideHelper>( shared_from_this() ) );
 		item->Name = _T( "Controls" );
 		AddItem( item );
 
 	#if defined(PC_VERSION)
 		// Custom controls
 		std::shared_ptr<MenuItem> mitem = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) );
-		mitem->setGo( std::make_shared<InitCallCustomControlsHelper>( this ) );
+		mitem->setGo( std::make_shared<InitCallCustomControlsHelper>( shared_from_this() ) );
 		mitem->Name = _T( "Custom" );
 		AddItem( mitem );
 
@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 		MakeBackButton();
 		SetPosition();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -196,7 +196,7 @@ namespace CloudberryKingdom
 
 		// Toggle
 		std::shared_ptr<MenuToggle> Toggle = std::make_shared<MenuToggle>( ItemFont );
-		Toggle->OnToggle = std::make_shared<Toggle_BorderlessProxy>( this );
+		Toggle->OnToggle = std::make_shared<Toggle_BorderlessProxy>( shared_from_this() );
 		Toggle->Toggle( Tools::WindowBorder );
 		Toggle->Name = _T( "WindowBorderToggle" );
 		AddItem( Toggle );

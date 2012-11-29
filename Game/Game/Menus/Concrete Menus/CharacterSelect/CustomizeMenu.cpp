@@ -62,13 +62,13 @@ namespace CloudberryKingdom
 		// Make the menu
 		MyMenu = std::make_shared<Menu>( false );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		MakeItems();
 
 		EnsureFancy();
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 
 		SetPos();
 	}
@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Word, ItemFont ) );
 		item->Name = Name;
-		item->setGo( Cast::ToItem( std::make_shared<CreateColorSelectProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<CreateColorSelectProxy>( shared_from_this() ) ) );
 
 		AddItem( item );
 	}
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<MenuItem> back = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ), _T( "Done" ) );
 		AddItem( back );
-		back->setGo( std::make_shared<GoProxy>( this ) );
+		back->setGo( std::make_shared<GoProxy>( shared_from_this() ) );
 	}
 
 	void CustomizeMenu::OnAdd()

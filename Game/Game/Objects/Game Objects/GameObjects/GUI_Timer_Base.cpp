@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 		if ( getTime() == 0 )
 		{
 			if ( OnTimeExpired != 0 )
-				OnTimeExpired->Apply( this );
+				OnTimeExpired->Apply( shared_from_this() );
 
 			return;
 		}

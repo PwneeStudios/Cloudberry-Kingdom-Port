@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Door : public ObjectBase, public ILevelConnector
+	class Door : public ILevelConnector
 	{
 	public:
 		class ShakeLambda : public Lambda
@@ -78,14 +78,14 @@ public:
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnOpen;
 	public:
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &getOnOpen() const;
-		void setOnOpen( const std::shared_ptr<Lambda_1<Door*> > &value );
+		void setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
 
 	private:
-		std::shared_ptr<Lambda_1<Door*> > _OnEnter;
+		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnEnter;
 	public:
-		const std::shared_ptr<Lambda_1<Door*> > &getOnEnter() const;
-		void setOnEnter( const std::shared_ptr<Lambda_1<Door*> > &value );
-		std::shared_ptr<Lambda_1<Door*> > ExtraPhsx;
+		const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &getOnEnter() const;
+		void setOnEnter( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
+		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > ExtraPhsx;
 
 	private:
 		std::shared_ptr<PressNote> MyPressNote;

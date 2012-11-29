@@ -51,13 +51,13 @@ namespace CloudberryKingdom
 			{
 				// On Quoate Met
 				if ( OnQuotaMet != 0 )
-					OnQuotaMet->Apply( this );
+					OnQuotaMet->Apply( shared_from_this() );
 
 				// Emphasize
 				MyPile->BubbleUp( true );
 
 				// Hide
-				MyGame->WaitThenDo( 28, std::make_shared<MyPhsxStepHelper>( this ), _T( "" ), true, true );
+				MyGame->WaitThenDo( 28, std::make_shared<MyPhsxStepHelper>( shared_from_this() ), _T( "" ), true, true );
 
 				//FinalDoor.SetLock(false);
 

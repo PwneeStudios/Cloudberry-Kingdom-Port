@@ -583,7 +583,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 			MyBob->PlayerObject->ParentQuad->setSize( size );
 
 			if ( DoubleJumpModel )
-				BobPhsxDouble::SetDoubleObject( MyBob->PlayerObject, this );
+				BobPhsxDouble::SetDoubleObject( MyBob->PlayerObject, shared_from_this() );
 			if ( JetpackModel )
 				BobPhsxJetman::SetJetmanObject( MyBob->PlayerObject );
 		}

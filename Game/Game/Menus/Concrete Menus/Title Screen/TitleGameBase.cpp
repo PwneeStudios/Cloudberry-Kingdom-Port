@@ -16,7 +16,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		if ( Released )
 			return;
 
-		if ( Tools::WorldMap == this )
+		if ( Tools::WorldMap.get() == this )
 			Tools::WorldMap.reset();
 	}
 

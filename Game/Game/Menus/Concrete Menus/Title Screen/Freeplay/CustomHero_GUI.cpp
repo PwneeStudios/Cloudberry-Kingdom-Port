@@ -140,7 +140,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		PosAdd = Vector2( 0, -93.45f );
 
 		PhsxSlider::Font = ItemFont;
-		PhsxSlider::Process = std::make_shared<AddItemProxy>( this );
+		PhsxSlider::Process = std::make_shared<AddItemProxy>( shared_from_this() );
 
 		AccelSlider = std::make_shared<PhsxSlider>( Localization::Words_ACCELERATION, BobPhsx::CustomData_ACCEL );
 		MaxSpeedSlider = std::make_shared<PhsxSlider>( Localization::Words_MAX_VELOCITY, BobPhsx::CustomData_MAXSPEED );
@@ -201,7 +201,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 			( *bob )->CollectSelf();
 		}
 
-		MyGame->AddToDo( std::make_shared<MoveBlockAndKillProxy>( this ), _T( "MoveOut" ), true, true );
+		MyGame->AddToDo( std::make_shared<MoveBlockAndKillProxy>( shared_from_this() ), _T( "MoveOut" ), true, true );
 	}
 
 	bool CustomHero_GUI::MoveBlockAndKill()
@@ -216,7 +216,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	void CustomHero_GUI::KillBobs()
 	{
-		MyGame->WaitThenDo( 20, std::make_shared<KillBobsHelper>( this ), _T( "RemoveBobs" ), false, true );
+		MyGame->WaitThenDo( 20, std::make_shared<KillBobsHelper>( shared_from_this() ), _T( "RemoveBobs" ), false, true );
 	}
 
 	void CustomHero_GUI::MakeBobPhsx()
@@ -451,7 +451,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( this );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		UpdateSliders();
 
@@ -460,9 +460,9 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::SetListActions()
 	{
-		BaseList->OnIndexSelect = std::make_shared<UpdateBaseHeroProxy>( this );
-		SizeList->OnIndexSelect = std::make_shared<UpdateSizeHeroProxy>( this );
-		JumpList->OnIndexSelect = std::make_shared<UpdateJumpHeroProxy>( this );
+		BaseList->OnIndexSelect = std::make_shared<UpdateBaseHeroProxy>( shared_from_this() );
+		SizeList->OnIndexSelect = std::make_shared<UpdateSizeHeroProxy>( shared_from_this() );
+		JumpList->OnIndexSelect = std::make_shared<UpdateJumpHeroProxy>( shared_from_this() );
 	}
 
 	void CustomHero_GUI::UpdateSliders()
@@ -704,7 +704,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Name = _T( "test" );
 		item->JiggleOnGo = false;
 		AddItem( item );
-		item->setGo( Cast::ToItem( std::make_shared<StartTestProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<StartTestProxy>( shared_from_this() ) ) );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 	#if defined(NOT_PC)
@@ -726,7 +726,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Name = _T( "back" );
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( shared_from_this() ) ) );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 	#if defined(NOT_PC)
@@ -751,13 +751,13 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Selectable = false;
 		MyMenu->OnX = Cast::ToMenu( X->getGo() );
 	#endif
-		item->setGo( Cast::ToItem( std::make_shared<NextProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<NextProxy>( shared_from_this() ) ) );
 
 		// Reset
 		item = ResetButton = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "reset" );
 		AddItem( item );
-		item->setGo( Cast::ToItem( std::make_shared<ResetSlidersProxy>( this ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ResetSlidersProxy>( shared_from_this() ) ) );
 	}
 
 	bool CustomHero_GUI::AdvancedAvailable()
@@ -795,7 +795,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		}
 		else
 		{
-			MyGame->PlayGame( std::make_shared<StartLevelProxy>( this ) );
+			MyGame->PlayGame( std::make_shared<StartLevelProxy>( shared_from_this() ) );
 		}
 	}
 

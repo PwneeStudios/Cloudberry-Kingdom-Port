@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 		MyPile->Add( Text );
 
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 
 	void JoinText::ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed )

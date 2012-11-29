@@ -195,7 +195,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 		{
 			if ( getCore()->MyLevel->PlayMode == 0 )
 			{
-				bob->Die( Bob::BobDeathType_FIRE_SPINNER, this );
+				bob->Die( Bob::BobDeathType_FIRE_SPINNER, shared_from_this() );
 			}
 
 			if ( getCore()->MyLevel->PlayMode == 1 )

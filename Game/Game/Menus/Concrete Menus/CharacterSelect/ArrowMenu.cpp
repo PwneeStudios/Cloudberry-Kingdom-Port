@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		MyMenu->FancyPos->RelVal = Vector2( -62.5f, -15 + 250 );
-		CharacterSelect::Shift( this );
+		CharacterSelect::Shift( shared_from_this() );
 	}
 
 	void ArrowMenu::MyDraw()

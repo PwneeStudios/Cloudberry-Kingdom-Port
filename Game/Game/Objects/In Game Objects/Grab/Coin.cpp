@@ -225,7 +225,7 @@ Vector2 Coin::PosOfLastCoinGrabbed = 0;
 				}
 
 				// Fire the games OnCoinGrab event
-				game->CoinGrabEvent( this );
+				game->CoinGrabEvent( shared_from_this() );
 
 				// Remove the coin permanently if it can only be grabbed once
 				if ( game->TakeOnce )

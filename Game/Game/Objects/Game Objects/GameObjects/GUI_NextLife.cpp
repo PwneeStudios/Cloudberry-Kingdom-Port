@@ -157,7 +157,7 @@ namespace CloudberryKingdom
 	{
 		GameObject::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( this ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
 	}
 
 	void GUI_NextLife::ReleaseBody()

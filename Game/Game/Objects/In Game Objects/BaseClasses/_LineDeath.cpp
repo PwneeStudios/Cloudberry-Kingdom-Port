@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		if ( Phsx::AABoxAndLineCollisionTest( bob->Box2, MyLine ) )
 		{
 			if ( getCore()->MyLevel->PlayMode == 0 )
-				bob->Die( Bob::BobDeathType_LASER, this );
+				bob->Die( Bob::BobDeathType_LASER, shared_from_this() );
 			else
 			{
 				bool col = Phsx::AABoxAndLineCollisionTest_Tiered( MyLine, getCore(), bob, AutoGenSingleton );

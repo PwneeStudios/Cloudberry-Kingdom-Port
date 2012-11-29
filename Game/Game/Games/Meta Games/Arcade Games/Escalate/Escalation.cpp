@@ -110,10 +110,10 @@ const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std
 		Gui_LivesLeft = std::make_shared<GUI_LivesLeft>( GetLives() );
 
 		// Set the time expired function
-		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( this ) );
+		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( shared_from_this() ) );
 
 		// Create the string world, and add the relevant game objects
-		MyStringWorld = std::make_shared<StringWorldEndurance>( std::make_shared<Func>( this, &Challenge_Escalation::GetSeed ), Gui_LivesLeft, 25 );
+		MyStringWorld = std::make_shared<StringWorldEndurance>( std::make_shared<Func>( shared_from_this(), &Challenge_Escalation::GetSeed ), Gui_LivesLeft, 25 );
 
 		Escalation_Tutorial::setWatchedOnce( true );
 		if ( !Escalation_Tutorial::getWatchedOnce() )
@@ -134,7 +134,7 @@ const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std
 
 	void Challenge_Escalation::PreStart_Tutorial()
 	{
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( this ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
 	}
 
 	int Challenge_Escalation::GetLives()
@@ -149,7 +149,7 @@ const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std
 		PreStart_Tutorial();
 
 		// When a new level is swapped to...
-		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( this ) );
+		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( shared_from_this() ) );
 	}
 
 	void Challenge_Escalation::OnSwapTo_GUI( int levelindex )

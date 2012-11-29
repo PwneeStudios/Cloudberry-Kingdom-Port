@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		// Remove other perfect score objects
 		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
-			if ( *obj == this )
+			if ( ( *obj ).get() == this )
 				continue;
 			if ( dynamic_cast<PerfectScoreObject*>( *obj ) != 0 )
 				( *obj )->Release();
@@ -54,8 +54,8 @@ namespace CloudberryKingdom
 
 		Eligible = true;
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( this ) );
-		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( this ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
+		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( shared_from_this() ) );
 
 		OnAdd_GUI();
 	}

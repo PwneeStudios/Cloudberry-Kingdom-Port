@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		spike->SetPeriod( 50 );
 		spike->Offset = count % 2 == 0 ? 0 : 50 / 2;
 
-		spike->SetParentBlock( this );
+		spike->SetParentBlock( shared_from_this() );
 		getCore()->MyLevel->AddObject(spike);
 	}
 

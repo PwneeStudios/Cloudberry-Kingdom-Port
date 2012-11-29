@@ -131,6 +131,6 @@ std::vector<float> Challenge_HeroRush2::IconScale = std::vector<float>( tempVect
 	void Challenge_HeroRush2::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( this ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
 	}
 }

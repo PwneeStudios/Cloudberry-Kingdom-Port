@@ -5,11 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class Background
+	class Background : public std::enable_shared_from_this<Background>
 	{
 	public:
 		static void AddRainLayer( const std::shared_ptr<Background> &b );
-
 
 		static void TurnOnSnow( const std::shared_ptr<Background> &b );
 
@@ -17,18 +16,13 @@ namespace CloudberryKingdom
 
 		static void _code_Forest( const std::shared_ptr<Background> &b );
 
-
 		static void _code_Cloud( const std::shared_ptr<Background> &b );
-
 
 		static void _code_Cave( const std::shared_ptr<Background> &b );
 
-
 		static void _code_Hills( const std::shared_ptr<Background> &b );
 
-
 		static void _code_Castle( const std::shared_ptr<Background> &b );
-
 
 		static void _code_Sea( const std::shared_ptr<Background> &b );
 

@@ -58,16 +58,16 @@ std::vector<Vector2> CharacterSelect::Centers = 0;
 		Center = Centers[ PlayerIndex ];
 		NormalZoomCenter = Center;
 
-		MyDoll = std::make_shared<Doll>( PlayerIndex, this );
-		MyGamerTag = std::make_shared<GamerTag>( PlayerIndex, this );
-		MyHeroLevel = std::make_shared<HeroLevel>( PlayerIndex, this );
+		MyDoll = std::make_shared<Doll>( PlayerIndex, shared_from_this() );
+		MyGamerTag = std::make_shared<GamerTag>( PlayerIndex, shared_from_this() );
+		MyHeroLevel = std::make_shared<HeroLevel>( PlayerIndex, shared_from_this() );
 		game->AddGameObject( MyDoll );
 		game->AddGameObject( MyGamerTag );
 		game->AddGameObject( MyHeroLevel );
 
 		InitColorScheme( PlayerIndex );
 
-		game->AddGameObject( std::make_shared<JoinText>( PlayerIndex, this ) );
+		game->AddGameObject( std::make_shared<JoinText>( PlayerIndex, shared_from_this() ) );
 
 		/*
 		if (QuickJoin)

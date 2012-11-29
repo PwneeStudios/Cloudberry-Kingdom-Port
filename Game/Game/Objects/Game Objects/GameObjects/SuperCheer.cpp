@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < Rows; i++ )
 			AddWave( 24 * i );
 
-		MyGame->Recycle->CollectObject( this );
+		MyGame->Recycle->CollectObject( shared_from_this() );
 	}
 
 	void SuperCheer::AddWave( int Delay )

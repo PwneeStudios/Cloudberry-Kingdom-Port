@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 		Timer = std::make_shared<GUI_Timer>();
 
 		// Set the time expired function
-		Timer->OnTimeExpired->Add( std::make_shared<RushOnTimeExpiredLambda>( this ) );
+		Timer->OnTimeExpired->Add( std::make_shared<RushOnTimeExpiredLambda>( shared_from_this() ) );
 
 		// Create the string world, and add the relevant game objects
 		MyStringWorld = std::make_shared<StringWorldTimed>( getGetSeed(), Timer );

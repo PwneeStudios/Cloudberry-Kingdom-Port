@@ -316,7 +316,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		// Customize
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( std::make_shared<ResetProxy>( this ) );
+		item->setGo( std::make_shared<ResetProxy>( shared_from_this() ) );
 		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
 
 		ItemPos = Vector2( 698.9696f, 892.0638f );
@@ -425,7 +425,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		AddItem( item );
 
 		ButtonCheck::KillSecondary();
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<InitOnButtonHelper>( this );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<InitOnButtonHelper>( shared_from_this() );
 
 		// Shift everything
 		EnsureFancy();

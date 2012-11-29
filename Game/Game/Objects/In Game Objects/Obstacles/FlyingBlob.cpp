@@ -659,7 +659,7 @@ float FlyingBlob::BobXFriction = 1;
 							bob->getCore()->Data.Velocity.Y += VelY * bob->MyPhsx->BlobMod;
 
 						// The player landed on something
-						bob->MyPhsx->LandOnSomething( true, this );
+						bob->MyPhsx->LandOnSomething( true, shared_from_this() );
 					}
 
 					// This code is to modify the player's velocity rather than override it.
@@ -675,7 +675,7 @@ float FlyingBlob::BobXFriction = 1;
 					bob->MyPhsx->MaxJumpAccelMultiple = 1 + .8f * bob->MyPhsx->BlobMod;
 				}
 				else
-					bob->Die( Bob::BobDeathType_BLOB, this );
+					bob->Die( Bob::BobDeathType_BLOB, shared_from_this() );
 			}
 		}
 	}

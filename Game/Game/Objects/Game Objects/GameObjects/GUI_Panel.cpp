@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 
 		SetChildControl( child );
 
-		MyGame->WaitThenDo( Delay, std::make_shared<CallHelper>( this, child ) );
+		MyGame->WaitThenDo( Delay, std::make_shared<CallHelper>( shared_from_this(), child ) );
 
 		Active = false;
 	}

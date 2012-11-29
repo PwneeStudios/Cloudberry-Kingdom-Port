@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::StartLevel( const std::wstring &seedstr )
 	{
-		LoadSeed( seedstr, this );
+		LoadSeed( seedstr, shared_from_this() );
 	}
 
 std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
@@ -235,7 +235,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		// If "No", do not delete any seeds.
 		if ( !choice )
 		{
-			MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( this ) );
+			MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( shared_from_this() ) );
 			return;
 		}
 
@@ -256,7 +256,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 
 		SaveGroup::SaveAll();
 
-		MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( this ) );
+		MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( shared_from_this() ) );
 	}
 
 	void SavedSeedsGUI::Sort()
@@ -290,9 +290,9 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		( static_cast<LongMenu*>( MyMenu ) )->OffsetStep = 30;
 		EnsureFancy();
 		MyMenu->OnA.reset();
-		MyMenu->OnB = std::make_shared<SaveSeedsBackLambda>( this );
-		MyMenu->OnX = std::make_shared<SaveSeedsDeleteLambda>( this );
-		MyMenu->OnY = std::make_shared<SortProxy>( this );
+		MyMenu->OnB = std::make_shared<SaveSeedsBackLambda>( shared_from_this() );
+		MyMenu->OnX = std::make_shared<SaveSeedsDeleteLambda>( shared_from_this() );
+		MyMenu->OnY = std::make_shared<SortProxy>( shared_from_this() );
 		MyMenu->SelectDelay = 11;
 
 		ItemPos = Vector2( 80.5547f, 756.1112f );
@@ -353,7 +353,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		if ( num > 0 )
 		{
 			std::shared_ptr<VerifyDeleteSeeds> verify = std::make_shared<VerifyDeleteSeeds>( getControl(), num );
-			verify->OnSelect->Add( std::make_shared<DoDeletionProxy>( this ) );
+			verify->OnSelect->Add( std::make_shared<DoDeletionProxy>( shared_from_this() ) );
 
 			Call( verify, 0 );
 		}
@@ -449,7 +449,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 
 			// Get name of seed
 			std::shared_ptr<MenuItem> seeditem = std::make_shared<SeedItem>( name, *seed, ItemFont );
-			seeditem->setGo( std::make_shared<StartLevelProxy1>( this, _seed ) );
+			seeditem->setGo( std::make_shared<StartLevelProxy1>( shared_from_this(), _seed ) );
 			AddItem( seeditem );
 		}
 	}
@@ -463,7 +463,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 	//#if PC_VERSION
 		//if (false)
 		{
-			bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), this );
+			bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), shared_from_this() );
 			bar->setBarPos( Vector2( -1860, 102.7778f ) );
 			MyGame->AddGameObject( bar );
 	#if defined(PC_VERSION)

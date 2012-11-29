@@ -217,7 +217,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		setPauseGame( true );
 
 		// Find the initial door
-		std::shared_ptr<Door> door = dynamic_cast<Door*>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
+		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 != door )
 		{
 			for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
@@ -228,9 +228,9 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->WaitThenDo( 20, std::make_shared<StartMusicHelper>() );
 
 		if ( ShowTitle || !HasWatchedOnce || CloudberryKingdomGame::AlwaysGiveTutorials )
-			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( this ) );
+			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( shared_from_this() ) );
 		else
-			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( this ) );
+			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( shared_from_this() ) );
 	}
 
 	void HeroRush_Tutorial::TutorialOrSkip()
@@ -261,7 +261,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<TitleNextTutorialHelper>( this, text ) ) );
+		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<TitleNextTutorialHelper>( shared_from_this(), text ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtDoor()
@@ -281,7 +281,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtDoorNextTutorialHelper>( this, arrow, text ) ) );
+		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtDoorNextTutorialHelper>( shared_from_this(), arrow, text ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtTimer()
@@ -304,7 +304,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->AddGameObject( text2 );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtTimerNextTutorialHelper>( this, arrow, text, text2 ) ) );
+		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtTimerNextTutorialHelper>( shared_from_this(), arrow, text, text2 ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtCoins()
@@ -327,7 +327,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtCoinsNextTutorialHelper>( this, text, arrows ) ) );
+		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtCoinsNextTutorialHelper>( shared_from_this(), text, arrows ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtScore()
@@ -359,7 +359,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtScoreNextTutorialHelper>( this, arrow, text ) ) );
+		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtScoreNextTutorialHelper>( shared_from_this(), arrow, text ) ) );
 	}
 
 	void HeroRush_Tutorial::Ready()
@@ -371,13 +371,13 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		HeroRush->Timer->Show();
 		HeroRush->Timer->PauseOnPause = false; // Start the timer
 
-		MyGame->WaitThenDo( Wait, std::make_shared<ReadyTutorialHelper>( this ) );
+		MyGame->WaitThenDo( Wait, std::make_shared<ReadyTutorialHelper>( shared_from_this() ) );
 	}
 
 	void HeroRush_Tutorial::End()
 	{
 		setPauseGame( false );
-		MyGame->WaitThenDo( 25, std::make_shared<PauseHeroRushTimerHelper>( this ) );
+		MyGame->WaitThenDo( 25, std::make_shared<PauseHeroRushTimerHelper>( shared_from_this() ) );
 
 		Release();
 	}

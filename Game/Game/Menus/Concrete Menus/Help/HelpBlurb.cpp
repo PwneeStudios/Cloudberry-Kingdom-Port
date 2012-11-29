@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Lambda> HelpBlurb::SetText_Action( Localization::Words Word )
 	{
-		return std::make_shared<SetText_ActionHelper>( this, Word );
+		return std::make_shared<SetText_ActionHelper>( shared_from_this(), Word );
 	}
 
 	void HelpBlurb::SetText( Localization::Words Word )
