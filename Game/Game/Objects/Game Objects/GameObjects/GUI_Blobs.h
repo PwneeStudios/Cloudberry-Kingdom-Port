@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		virtual int OutOf();
 
 	public:
-		std::shared_ptr<Lambda_1<GUI_Blobs*> > OnQuotaMet;
+		std::shared_ptr<Lambda_1<std::shared_ptr<GUI_Blobs> > > OnQuotaMet;
 		bool QuotaMet;
 
 	private:

@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	class Challenge_TimeCrisis : public Challenge_HeroRush
 	{
 	private:
-		class OnSwapLambda : public Lambda_1<LevelSeedData*>
+		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
 		private:
 			std::shared_ptr<Challenge_TimeCrisis> ch;

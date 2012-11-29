@@ -68,7 +68,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 
 		NewCloud->getCore()->GenData.RemoveIfUnused = true;
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			NewCloud->getCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddObject( NewCloud );

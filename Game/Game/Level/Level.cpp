@@ -152,7 +152,7 @@ namespace CloudberryKingdom
 
 		float NormalBlockTotal = __max( 0, 3 - MaxWeight / 3 );
 
-		Weights[ Generators::WeightedPreFill_1_Gens.find( NormalBlock_AutoGen::getInstance() ) ] = NParams->CustomWeight ? NParams->FillWeight.GetVal(pos) : NormalBlockTotal * level->Style_MOD_NORMAL_BLOCK_WEIGHT;
+		Weights[ Generators::WeightedPreFill_1_Gens.find( NormalBlock_AutoGen::getInstance() ) ] = NParams->CustomWeight ? NParams->FillWeight.GetVal(pos) : NormalBlockTotal * level->Style->ModNormalBlockWeight;
 
 
 		// Choose a random generator and make a new obstacle with it
@@ -164,7 +164,7 @@ namespace CloudberryKingdom
 			return;
 
 		// Keep new object if it's unused?
-		if ( level->getRnd()->RndFloat(0, 1) < level->CurMakeData->PieceSeed->Style_CHANCE_TO_KEEP_UNUSED && pos.Y > BL.Y + 400 ) // Don't keep unused blocks that are too low
+		if ( level->getRnd()->RndFloat(0, 1) < level->CurMakeData->PieceSeed->Style->ChanceToKeepUnused && pos.Y > BL.Y + 400 ) // Don't keep unused blocks that are too low
 		{
 			NewObj->getCore()->GenData.RemoveIfUnused = false;
 			NewObj->getCore()->GenData.RemoveIfOverlap = true;
@@ -368,14 +368,14 @@ namespace CloudberryKingdom
 		// Find the closest block to pos on first row
 		startblock = static_cast<NormalBlock*>( Tools::ArgMin( Tools::FindAll( Blocks, std::make_shared<FindFirstRowLambda>() ), std::make_shared<ElementDistanceSquared>(pos) ) );
 
-		switch ( Style_MY_INITIAL_PLATS_TYPE )
+		switch ( Style->MyInitialPlatsType )
 		{
 			case StyleData::InitialPlatsType_UP_TILED_FLOOR:
 			case StyleData::InitialPlatsType_DOOR:
 				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, false) );
 
 				// Tiled bottom
-				if ( Style_MY_INITIAL_PLATS_TYPE == StyleData::InitialPlatsType_UP_TILED_FLOOR )
+				if ( Style->MyInitialPlatsType == StyleData::InitialPlatsType_UP_TILED_FLOOR )
 				{
 					for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
 						if ( ( *_block )->getCore() == _T("FirstRow") )
@@ -420,7 +420,7 @@ namespace CloudberryKingdom
 	{
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
-		Style_MOD_NORMAL_BLOCK_WEIGHT = .15f;
+		Style->ModNormalBlockWeight = .15f;
 
 		std::shared_ptr<VerticalData> VStyle = static_cast<VerticalData*>( CurMakeData->PieceSeed->Style );
 		LevelGeometry Geometry = CurMakeData->PieceSeed->GeometryType;
@@ -440,7 +440,7 @@ namespace CloudberryKingdom
 		}
 
 		// Calculate the style parameters
-		CurMakeData->PieceSeed->Style_CALC_GEN_PARAMS( CurMakeData->PieceSeed, shared_from_this() );
+		CurMakeData->PieceSeed->Style->CalcGenParams( CurMakeData->PieceSeed, shared_from_this() );
 
 		// Move camera
 		getMainCamera()->Data.Position = CurMakeData->CamStartPos;
@@ -658,7 +658,7 @@ namespace CloudberryKingdom
 			( *gen )->Cleanup_1( shared_from_this(), BL_Bound, TR_Bound );
 
 		// Overlapping blocks
-		if ( CurMakeData->PieceSeed->Style_REMOVED_UNUSED_OVERLAPPING_BLOCKS )
+		if ( CurMakeData->PieceSeed->Style->RemovedUnusedOverlappingBlocks )
 			BlockOverlapCleanup();
 		Sleep();
 
@@ -1531,7 +1531,7 @@ const float Level::SafetyNetHeight = 124;
 
 		pos += getInfo()->ShiftStartBlock;
 
-		switch ( Style_MY_INITIAL_PLATS_TYPE )
+		switch ( Style->MyInitialPlatsType )
 		{
 			case StyleData::InitialPlatsType_SPACESHIP:
 				return MakeInitial_Spaceship( BL, TR, pos, block );
@@ -1737,9 +1737,9 @@ int Level::CountToSleep = 0;
 
 	void Level::Stage1RndFill( Vector2 BL, Vector2 TR, Vector2 BL_Cutoff, float Sparsity )
 	{
-		Vector2 xstep = Vector2( CurMakeData->PieceSeed->Style_FILLX_STEP * Sparsity, 0 );
+		Vector2 xstep = Vector2( CurMakeData->PieceSeed->Style->FillxStep * Sparsity, 0 );
 		xstep.Y = xstep.X;
-		Fill( BL, TR, xstep, CurMakeData->PieceSeed->Style_FILLY_STEP, std::make_shared<Stage1RndFillLambda>( shared_from_this(), BL, TR, BL_Cutoff ) );
+		Fill( BL, TR, xstep, CurMakeData->PieceSeed->Style->FillyStep, std::make_shared<Stage1RndFillLambda>( shared_from_this(), BL, TR, BL_Cutoff ) );
 	}
 
 	std::shared_ptr<CameraZone> Level::MakeCameraZone()
@@ -1829,7 +1829,7 @@ int Step1, Level::Step2 = 0;
 		std::shared_ptr<SingleData> Style = static_cast<SingleData*>( CurMakeData->PieceSeed->Style );
 
 		// Calculate the style parameters
-		Style_CALC_GEN_PARAMS( CurMakeData->PieceSeed, shared_from_this() );
+		Style->CalcGenParams( CurMakeData->PieceSeed, shared_from_this() );
 
 		// Length padding
 		MaxRight += Style_LENGTH_PADDING;
@@ -1908,7 +1908,7 @@ int Step1, Level::Step2 = 0;
 		std::shared_ptr<MakeThing> MakeFinalPlat = 0;
 		if ( CurMakeData->FinalPlats )
 		{
-			if ( Style_MY_FINAL_PLATS_TYPE == StyleData::FinalPlatsType_DOOR )
+			if ( Style->MyFinalPlatsType == StyleData::FinalPlatsType_DOOR )
 			{
 				if ( DefaultHeroType == BobPhsxRocketbox::getInstance() || std::dynamic_pointer_cast<BobPhsxSpaceship>(DefaultHeroType) != 0 )
 					MakeFinalPlat = std::make_shared<MakeFinalDoor_Float>( shared_from_this() );
@@ -2128,7 +2128,7 @@ int Step1, Level::Step2 = 0;
 			( *gen )->Cleanup_1( shared_from_this(), BL_Bound, TR_Bound );
 
 		// Overlapping blocks
-		if ( Style_REMOVED_UNUSED_OVERLAPPING_BLOCKS )
+		if ( Style->RemovedUnusedOverlappingBlocks )
 			BlockOverlapCleanup();
 		Sleep();
 
@@ -2225,7 +2225,7 @@ int Step1, Level::Step2 = 0;
 				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (*block2)->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (*block2)->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
 					switch ( ( *block )->getCore()->GenData->MyOverlapPreference )
 					{
@@ -2267,7 +2267,7 @@ int Step1, Level::Step2 = 0;
 				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
 					getRecycle()->CollectObject(*block);
 				}
@@ -2284,17 +2284,17 @@ int Step1, Level::Step2 = 0;
 		switch ( makeData->PieceSeed->Paths )
 		{
 			case 1:
-				makeData->PieceSeed->Style_SET_SINGLE_PATH_TYPE( makeData, shared_from_this(), Piece );
+				makeData->PieceSeed->Style->SetSinglePathType( makeData, shared_from_this(), Piece );
 
 				break;
 
 			case 2:
-				makeData->PieceSeed->Style_SET_DOUBE_PATH_TYPE( makeData, shared_from_this(), Piece );
+				makeData->PieceSeed->Style->SetDoubePathType( makeData, shared_from_this(), Piece );
 
 				break;
 
 			case 3:
-				makeData->PieceSeed->Style_SET_TRIPLE_PATH_TYPE( makeData, shared_from_this(), Piece );
+				makeData->PieceSeed->Style->SetTriplePathType( makeData, shared_from_this(), Piece );
 
 				break;
 		}

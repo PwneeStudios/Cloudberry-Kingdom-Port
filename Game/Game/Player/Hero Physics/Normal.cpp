@@ -709,7 +709,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		else
 			BobEdgeJumpLength--;
 
-		if ( getMyLevel()->Style_ALWAYS_EDGE_JUMP )
+		if ( getMyLevel()->Style->AlwaysEdgeJump )
 			BobEdgeJump = 1;
 
 		if ( AutoFallOrJumpLength == 0 )
@@ -842,7 +842,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			MyBob->CurInput.A_Button = false;
 
 
-		if ( getMyLevel()->Style_ALWAYS_EDGE_JUMP )
+		if ( getMyLevel()->Style->AlwaysEdgeJump )
 		{
 			if ( !Jumped )
 				MyBob->CurInput.A_Button = false;
@@ -926,7 +926,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		}
 
 		// Masochistic
-		if ( getMyLevel()->Style_MASOCHISTIC )
+		if ( getMyLevel()->Style->Masochistic )
 		{
 			if ( getPos().Y < TR.Y - 400 && getxVel() > -2 && getPos().X > CurPhsxStep * (4000 / 800) )
 			{
@@ -1056,7 +1056,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 				else
 					RndMoveType = getMyLevel()->getRnd()->Rnd->Next(0, 6);
 
-				if ( getMyLevel()->Style_ALWAYS_CURVY_MOVE )
+				if ( getMyLevel()->Style->AlwaysCurvyMove )
 					RndMoveType = 10;
 			}
 			//RndMoveType = 10; /// DANGER DANGER 

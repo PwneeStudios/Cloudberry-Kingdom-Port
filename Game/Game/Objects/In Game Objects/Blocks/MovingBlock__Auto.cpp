@@ -163,7 +163,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 
 		mblock->Period = static_cast<int>( Params->Period.GetVal( pos ) );
 
-		mblock->Offset = level->Style_GET_OFFSET( mblock->Period, pos, level->Style_PENDULUM_OFFSET_TYPE );
+		mblock->Offset = level->Style->GetOffset( mblock->Period, pos, level->Style->PendulumOffsetType );
 
 
 		float Displacement = Params->Range.GetVal( pos );
@@ -176,7 +176,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		mblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
 		mblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			mblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		Tools::EnsureBounds_X( mblock, TR, BL );

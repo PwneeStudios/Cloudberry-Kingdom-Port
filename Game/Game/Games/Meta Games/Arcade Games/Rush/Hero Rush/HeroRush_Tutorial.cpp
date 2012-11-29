@@ -335,9 +335,9 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		std::shared_ptr<GUI_Score> score = 0;
 		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
-			if ( dynamic_cast<GUI_Score*>( *obj ) != 0 )
+			if ( dynamic_cast<std::shared_ptr<GUI_Score> >( *obj ) != 0 )
 			{
-				score = dynamic_cast<GUI_Score*>( *obj );
+				score = dynamic_cast<std::shared_ptr<GUI_Score> >( *obj );
 				break;
 			}
 		}

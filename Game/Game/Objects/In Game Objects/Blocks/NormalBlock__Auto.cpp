@@ -269,7 +269,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		if ( Style_REMOVE_BLOCK_ON_COL )
 			block->getBlockCore()->GenData.RemoveIfUsed = true;
 
-		if ( Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( Style->RemoveBlockOnOverlap )
 			block->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( block );

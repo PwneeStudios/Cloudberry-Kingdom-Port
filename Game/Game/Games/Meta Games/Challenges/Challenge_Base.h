@@ -43,9 +43,22 @@ public:
 		}
 	};
 
-	class Challenge
+	class Challenge : public std::enable_shared_from_this<Challenge>
 	{
 	protected:
+		class PassGetSeedAsLambda : LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+		{
+
+		private:
+			std::shared_ptr<Challenge> challenge;
+
+		public:
+			PassGetSeedAsLambda( const std::shared_ptr<Challenge> &challenge );
+
+			std::shared_ptr<LevelSeedData> Apply( const int &index );
+
+		};
+
 		class ShowEndScreenProxy : public Lambda
 		{
 		private:

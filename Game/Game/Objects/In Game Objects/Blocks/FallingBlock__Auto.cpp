@@ -96,7 +96,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 			fblock->AngryAccel = Vector2( 0, Params->AngryAccel.GetVal( pos ) / 100 );
 		}
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			fblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( fblock );

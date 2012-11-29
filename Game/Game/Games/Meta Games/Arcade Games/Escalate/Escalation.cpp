@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -82,9 +81,9 @@ namespace CloudberryKingdom
 		Params->FillType = Coin_Parameters::FillTypes_REGULAR;
 	}
 
-const int tempVector[] = { 15, 15, 15, 15, 15 };
-std::vector<int> Challenge_Escalation::NumLives = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std::make_shared<Challenge_Escalation>();
+	const int tempVector[] = { 15, 15, 15, 15, 15 };
+	std::vector<int> Challenge_Escalation::NumLives = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std::make_shared<Challenge_Escalation>();
 
 	const std::shared_ptr<Challenge_Escalation> &Challenge_Escalation::getInstance()
 	{
@@ -110,10 +109,10 @@ const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std
 		Gui_LivesLeft = std::make_shared<GUI_LivesLeft>( GetLives() );
 
 		// Set the time expired function
-		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( shared_from_this() ) );
+		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) ) );
 
 		// Create the string world, and add the relevant game objects
-		MyStringWorld = std::make_shared<StringWorldEndurance>( std::make_shared<Func>( shared_from_this(), &Challenge_Escalation::GetSeed ), Gui_LivesLeft, 25 );
+		MyStringWorld = std::make_shared<StringWorldEndurance>( std::make_shared<PassGetSeedAsLambda>( shared_from_this() ), Gui_LivesLeft, 25 );
 
 		Escalation_Tutorial::setWatchedOnce( true );
 		if ( !Escalation_Tutorial::getWatchedOnce() )
@@ -186,8 +185,8 @@ const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std
 		return seed;
 	}
 
-const std::wstring tempVector2[] = { _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ), _T( "sea" ) };
-std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstring>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+	const std::wstring tempVector2[] = { _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ), _T( "sea" ) };
+	std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstring>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 
 	std::shared_ptr<TileSet> Challenge_Escalation::GetTileSet( int i )
 	{
@@ -219,7 +218,7 @@ std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstr
 		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			// Shorten the initial computer delay
-			( *piece )->Style_COMPUTER_WAIT_LENGTH_RANGE = Vector2( 8, 35 ); //38);
+			( *piece )->Style->ComputerWaitLengthRange = Vector2( 8, 35 ); //38);
 
 			( *piece )->Style->MyModParams->Add( std::make_shared<MakeMyModParamsHelper>() );
 		}

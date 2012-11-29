@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class InGameStartMenu : public CkBaseMenu
 	{
 	private:
-		class MakeListenerHelper : public LambdaFunc_1<Listener*, GUI_Panel*>
+		class MakeListenerHelper : public LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> >
 		{
 		public:
 			std::shared_ptr<GUI_Panel> Apply( const std::shared_ptr<Listener> &listener );
@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 		{
 		private:
 			std::shared_ptr<Listener> listener;
-			std::shared_ptr<LambdaFunc_1<Listener*, GUI_Panel*> > Make;
+			std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > Make;
 
 		public:
-			PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<Listener*, GUI_Panel*> > &Make );
+			PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make );
 
 			void Apply();
 		};
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<GameObject> MakeListener();
 
-		static std::shared_ptr<GameObject> MakeListener_Base( const std::shared_ptr<LambdaFunc_1<Listener*, GUI_Panel*> > &Make );
+		static std::shared_ptr<GameObject> MakeListener_Base( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make );
 
 	protected:
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

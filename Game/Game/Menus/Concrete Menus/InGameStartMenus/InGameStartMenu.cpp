@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		return std::make_shared<InGameStartMenu>( listener->TriggeringPlayerIndex );
 	}
 
-	InGameStartMenu::PreventMenuHelper::PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<Listener*, GUI_Panel*> > &Make )
+	InGameStartMenu::PreventMenuHelper::PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
 	{
 		this->listener = listener;
 		this->Make = Make;
@@ -104,7 +104,7 @@ bool InGameStartMenu::PreventMenu = false;
 		return MakeListener_Base( std::make_shared<MakeListenerHelper>() );
 	}
 
-	std::shared_ptr<GameObject> InGameStartMenu::MakeListener_Base( const std::shared_ptr<LambdaFunc_1<Listener*, GUI_Panel*> > &Make )
+	std::shared_ptr<GameObject> InGameStartMenu::MakeListener_Base( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
 	{
 		std::shared_ptr<Listener> listener = std::make_shared<Listener>();
 		listener->MyButton = ControllerButtons_START;

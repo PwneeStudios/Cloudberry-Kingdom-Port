@@ -376,18 +376,18 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 	{
 		BobPhsx::ModData( makeData, Style );
 
-		Style_MY_INITIAL_PLATS_TYPE = StyleData::InitialPlatsType_SPACESHIP;
+		Style->MyInitialPlatsType = StyleData::InitialPlatsType_SPACESHIP;
 		Style_TOP_SPACE = 0;
 		makeData->SparsityMultiplier = 1.5f;
 
 		Style_BLOCK_FILL_TYPE = StyleData::_BlockFillType_INVERTABLE;
 		Style_OVERLAP_CLEANUP_TYPE = StyleData::_OverlapCleanupType_SOPHISTICATED;
 
-		Style_DOOR_HIT_BOX_PADDING = Vector2( -60, 0 );
+		Style->DoorHitBoxPadding = Vector2( -60, 0 );
 
-		Style_MIN_BLOCK_DIST = 250;
-		Style_REMOVED_UNUSED_OVERLAPPING_BLOCKS = true;
-		Style_REMOVE_BLOCK_ON_OVERLAP = true;
+		Style->MinBlockDist = 250;
+		Style->RemovedUnusedOverlappingBlocks = true;
+		Style->RemoveBlockOnOverlap = true;
 
 		Style_BOTTOM_SPACE = 150;
 		Style_TOP_SPACE = 0;

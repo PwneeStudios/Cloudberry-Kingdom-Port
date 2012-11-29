@@ -1466,7 +1466,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 		piece->Paths = 1;
 		piece->LockNumOfPaths = true;
-		piece->Style_SINGLE_PATH_TYPE = StyleData::_SinglePathType_NORMAL;
+		piece->Style->SinglePathType = StyleData::_SinglePathType_NORMAL;
 
 		/*
 		piece.Paths = 2;
@@ -1478,15 +1478,15 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 		//piece.Style.MyModParams = TestLevelModParams;
 
-		piece->Style_CHANCE_TO_KEEP_UNUSED = 0;
+		piece->Style->ChanceToKeepUnused = 0;
 
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades2 );
 		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
 		//piece.MyUpgrades2->Get( Upgrade.Cloud ) = 10;
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
-		piece->Style_MY_INITIAL_PLATS_TYPE = StyleData::InitialPlatsType_DOOR;
-		piece->Style_MY_FINAL_PLATS_TYPE = StyleData::FinalPlatsType_DOOR;
+		piece->Style->MyInitialPlatsType = StyleData::InitialPlatsType_DOOR;
+		piece->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
 	void CloudberryKingdomGame::__Roughly_Maso( const std::shared_ptr<PieceSeedData> &piece )

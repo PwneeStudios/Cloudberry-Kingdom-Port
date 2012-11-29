@@ -10,9 +10,9 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		NumAngles = PieceSeed->Style_MASOCHISTIC ? 100 : 4;
-		NumPeriods = PieceSeed->Style_MASOCHISTIC ? 2 : 1;
-		NumOffsets = PieceSeed->Style_MASOCHISTIC ? 100 : 16;
+		NumAngles = PieceSeed->Style->Masochistic ? 100 : 4;
+		NumPeriods = PieceSeed->Style->Masochistic ? 2 : 1;
+		NumOffsets = PieceSeed->Style->Masochistic ? 100 : 16;
 
 		KeepUnused = Param( PieceSeed );
 		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 			DoFill = true;
 
 		float v = DifficultyHelper::Interp159( 800, 500, 200, u->Get( Upgrade_FIREBALL ) );
-		if ( PieceSeed->Style_MASOCHISTIC )
+		if ( PieceSeed->Style->Masochistic )
 			v *= .7f;
 
 		BorderFillStep = v;
@@ -108,7 +108,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		}
 
 		float MaxAngle = Params->FireballMaxAngle.GetVal( pos );
-		if ( level->Style_MASOCHISTIC )
+		if ( level->Style->Masochistic )
 			MaxAngle *= 1.25f;
 
 		double Angle = Fireball_AutoGen::GetAngle( MaxAngle, Params->NumAngles, level->getRnd() );
@@ -116,7 +116,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 			Angle += M_PI / 2;
 		emitter->getCore()->StartData.Velocity = CoreMath::AngleToDir(Angle);
 
-		if ( level->Style_MASOCHISTIC )
+		if ( level->Style->Masochistic )
 			emitter->Period = static_cast<int>( .9f * emitter->Period );
 
 		float v = abs( 2 * emitter->getCore()->StartData.Position.Y / (.785f * emitter->Period) );

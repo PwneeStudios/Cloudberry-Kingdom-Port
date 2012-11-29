@@ -84,7 +84,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 		conveyblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
 		conveyblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			conveyblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( conveyblock );

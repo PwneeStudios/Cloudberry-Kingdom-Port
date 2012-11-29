@@ -272,7 +272,7 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::InitializeInstanceFields()
 	{
-		OnOutOfLives = std::make_shared<Multicaster_1<GUI_LivesLeft*> >();
+		OnOutOfLives = std::make_shared<Multicaster_1<std::shared_ptr<GUI_LivesLeft> > >();
 		_NumLives = 2;
 		UseBlackBack = false;
 		PauseOnShow = false;

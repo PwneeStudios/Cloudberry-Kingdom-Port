@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	class GUI_Timer_Simple : public GUI_Timer_Base
 	{
 	private:
-		class SimpleOnExpireLambda : public Lambda_1<GUI_Timer_Base*>
+		class SimpleOnExpireLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
 		{
 		private:
 			std::shared_ptr<GUI_Timer_Simple> timer;

@@ -192,7 +192,7 @@ int BobPhsxWheel::AnimIndex = 0;
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 
-		Style_DOOR_HIT_BOX_PADDING = Vector2( 25, 0 );
+		Style->DoorHitBoxPadding = Vector2( 25, 0 );
 	}
 
 	void BobPhsxWheel::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )

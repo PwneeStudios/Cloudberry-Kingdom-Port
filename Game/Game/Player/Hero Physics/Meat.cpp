@@ -426,7 +426,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		makeData->BlocksAsIs = true;
 
 		// Don't keep anything extra
-		Style_CHANCE_TO_KEEP_UNUSED = 0;
+		Style->ChanceToKeepUnused = 0;
 
 		// Square mblocks, vertical motion
 		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameter>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
@@ -444,7 +444,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		//NParams.CustomWeight = true;
 		//NParams.FillWeight.Val = 1;
 
-		Style_MOD_NORMAL_BLOCK_WEIGHT = 1;
+		Style->ModNormalBlockWeight = 1;
 
 		if ( ModSize )
 		{

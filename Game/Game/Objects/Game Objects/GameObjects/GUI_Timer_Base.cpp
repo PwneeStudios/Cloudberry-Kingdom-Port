@@ -188,7 +188,7 @@ namespace CloudberryKingdom
 		MyString = std::make_shared<StringBuilder>( 50, 50 );
 		AddedOnce = false;
 		Intensity = 1;
-		OnTimeExpired = std::make_shared<Multicaster_1<GUI_Timer_Base*> >();
+		OnTimeExpired = std::make_shared<Multicaster_1<std::shared_ptr<GUI_Timer_Base> > >();
 		CountDownWhileDead = false;
 	}
 }

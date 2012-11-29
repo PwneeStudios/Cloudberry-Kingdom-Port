@@ -130,7 +130,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		bblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
 		bblock->getBlockCore()->GenData.EdgeSafety = Params->EdgeSafety.GetVal(pos) * size.X;
 
-		if ( piece->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( piece->Style->RemoveBlockOnOverlap )
 			bblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( bblock );

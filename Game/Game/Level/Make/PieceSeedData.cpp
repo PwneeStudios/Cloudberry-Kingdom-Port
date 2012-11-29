@@ -66,8 +66,8 @@ namespace CloudberryKingdom
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( std::wstring::Format( _T( "Test close end: {0}" ), TestNumber ) );
 
-		Style_MY_INITIAL_PLATS_TYPE = StyleData::InitialPlatsType_DOOR;
-		Style_MY_FINAL_PLATS_TYPE = StyleData::FinalPlatsType_DOOR;
+		Style->MyInitialPlatsType = StyleData::InitialPlatsType_DOOR;
+		Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
 	const std::shared_ptr<Rand> &PieceSeedData::getRnd() const

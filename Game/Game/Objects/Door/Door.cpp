@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 	void Door::SetDoorType( const std::shared_ptr<TileSet> &TileSetType, const std::shared_ptr<Level> &level )
 	{
 		if ( level != 0 && level->CurMakeData != 0 && level->CurMakeData->PieceSeed != 0 )
-			HitBoxPadding = level->Style_DOOR_HIT_BOX_PADDING;
+			HitBoxPadding = level->Style->DoorHitBoxPadding;
 
 		getCore()->setMyTileSet(TileSetType);
 

@@ -14,7 +14,7 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 // Things to reh-gecks.
 // Math::Sign and Sign__RegexMe41315803 -> Sign
 // ->Core->   ->   ->getCore()->
-// Style_CALC_GEN_PARAMS
+// Style->CalcGenParams
 // dynamic_cast<...*>
 
 #include "enums.h"

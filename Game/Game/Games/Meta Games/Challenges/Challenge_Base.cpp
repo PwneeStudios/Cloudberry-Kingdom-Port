@@ -8,6 +8,16 @@ namespace CloudberryKingdom
 		Retry = false;
 	}
 
+	Challenge::PassGetSeedAsLambda::PassGetSeedAsLambda( const std::shared_ptr<Challenge> &challenge )
+	{
+		this->challenge = challenge;
+	}
+
+	std::shared_ptr<LevelSeedData> Challenge::PassGetSeedAsLambda::Apply( const int &index )
+	{
+		challenge->GetSeed( index );
+	}
+
 	Challenge::ShowEndScreenProxy::ShowEndScreenProxy( const std::shared_ptr<Challenge> &challenge )
 	{
 		this->challenge = challenge;
@@ -18,7 +28,7 @@ namespace CloudberryKingdom
 		challenge->ShowEndScreen();
 	}
 
-std::shared_ptr<BobPhsx> Challenge::ChosenHero = 0;
+	std::shared_ptr<BobPhsx> Challenge::ChosenHero = 0;
 
 	int Challenge::SetGameId()
 	{

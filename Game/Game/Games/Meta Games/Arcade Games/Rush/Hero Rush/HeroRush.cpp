@@ -183,7 +183,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			// Shorten the initial computer delay
-			( *piece )->Style_COMPUTER_WAIT_LENGTH_RANGE = Vector2( 4, 23 );
+			( *piece )->Style->ComputerWaitLengthRange = Vector2( 4, 23 );
 
 			// Only one path
 			( *piece )->Paths = 1;

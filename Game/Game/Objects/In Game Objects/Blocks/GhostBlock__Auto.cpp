@@ -125,7 +125,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			gblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
 			gblock->TimeSafety = Params->TimeSafety.GetVal( pos );
 
-			if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+			if ( level->Style->RemoveBlockOnOverlap )
 				gblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 

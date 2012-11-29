@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 	class Challenge_Escalation : public Challenge
 	{
 	private:
-		class OnOutOfLivesLambda : public Lambda_1<GUI_LivesLeft*>
+		class OnOutOfLivesLambda : public Lambda_1<std::shared_ptr<GUI_LivesLeft> >
 		{
 		private:
 			std::shared_ptr<Challenge> challenge;
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnSwapLambda : public Lambda_1<LevelSeedData*>
+		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
 		private:
 			std::shared_ptr<Challenge_Escalation> ch;

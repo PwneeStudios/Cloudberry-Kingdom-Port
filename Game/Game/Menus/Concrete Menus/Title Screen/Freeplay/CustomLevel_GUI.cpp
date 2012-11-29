@@ -305,7 +305,7 @@ Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACT
 
 		// Dark bottom
 		if ( data->MyGeometry == LevelGeometry_DOWN )
-			data->PieceSeeds[ 0 ]->Style_MY_FINAL_PLATS_TYPE = StyleData::FinalPlatsType_DARK_BOTTOM;
+			data->PieceSeeds[ 0 ]->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DARK_BOTTOM;
 
 		data->PostMake->Add( std::make_shared<StartLevelFromMenDataStandardLoadProxy>( data ) );
 

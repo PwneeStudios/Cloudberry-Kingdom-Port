@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 	class Rush : public Challenge
 	{
 	private:
-		class RushOnTimeExpiredLambda : public Lambda_1<GUI_Timer_Base*>
+		class RushOnTimeExpiredLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
 		{
 		private:
 			std::shared_ptr<Rush> rush;

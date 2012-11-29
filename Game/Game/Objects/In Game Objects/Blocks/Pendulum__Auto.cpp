@@ -89,12 +89,12 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		p->MaxAngle *= .001f;
 		p->CalculateLength();
 
-		p->Offset = level->Style_GET_OFFSET( p->Period, pos, level->Style_PENDULUM_OFFSET_TYPE );
+		p->Offset = level->Style->GetOffset( p->Period, pos, level->Style->PendulumOffsetType );
 
 		p->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
 		p->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			p->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		Tools::EnsureBounds_X( p, TR, BL );

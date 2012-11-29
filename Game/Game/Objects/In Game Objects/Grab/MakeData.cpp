@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		ComputerWaitAtStart = true;
 		ComputerWaitAtStartLength = std::vector<int>( 4 );
-		Vector2 WaitRange = data->Style_COMPUTER_WAIT_LENGTH_RANGE;
+		Vector2 WaitRange = data->Style->ComputerWaitLengthRange;
 		for ( int i = 0; i < 4; i++ )
 			ComputerWaitAtStartLength[ i ] = static_cast<int>( data->getRnd()->RndFloat(WaitRange) );
 		SparsityMultiplier = 1;

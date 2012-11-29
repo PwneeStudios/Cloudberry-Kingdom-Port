@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		std::shared_ptr<Multicaster_1<GUI_LivesLeft*> > OnOutOfLives;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_LivesLeft> > > OnOutOfLives;
 
 	private:
 		int _NumLives;

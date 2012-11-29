@@ -402,7 +402,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		NewBlob->Period = static_cast<int>( Params->Period.GetVal( pos ) );
 
 		//NewBlob.Offset = MyLevel.Rnd.Rnd.Next(0, NewBlob.Period);
-		NewBlob->Offset = level->Style_GET_OFFSET( NewBlob->Period, pos, level->Style_FLYING_BLOB_OFFSET_TYPE );
+		NewBlob->Offset = level->Style->GetOffset( NewBlob->Period, pos, level->Style->FlyingBlobOffsetType );
 
 		float Displacement = Params->Range.GetVal( pos );
 		SetMoveType( NewBlob, Displacement, Params->Motion, level->getRnd() );
@@ -413,7 +413,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		else
 			NewBlob->getCore()->GenData.RemoveIfUnused = true;
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			NewBlob->getCore()->GenData.RemoveIfOverlap = true;
 
 		NewBlob->getCore()->GenData.EdgeSafety = Params->EdgeSafety.GetVal(pos);

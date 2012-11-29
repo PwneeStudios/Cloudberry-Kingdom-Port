@@ -107,7 +107,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 					float Vel = GetVel( Params, Pos );
 
 					bool Bottom = false;
-					switch ( level->Style_ELEVATOR_SWITCH_TYPE )
+					switch ( level->Style->ElevatorSwitchType )
 					{
 						case StyleData::_ElevatorSwitchType_ALL_DOWN:
 							Bottom = true;
@@ -159,7 +159,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 						float Vel = GetVel( Params, Pos );
 
 						bool Left = false;
-						switch ( level->Style_ELEVATOR_SWITCH_TYPE )
+						switch ( level->Style->ElevatorSwitchType )
 						{
 							case StyleData::_ElevatorSwitchType_ALL_DOWN:
 								Left = true;
@@ -233,7 +233,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		bm->MyMoveType = static_cast<MovingPlatform::MoveType>( level->getRnd()->Rnd->Next(0, static_cast<int>(Params->Types.GetVal(Pos))) );
 		bm->Amp = Params->Amp.GetVal( Pos );
 
-		if ( level->Style_REMOVE_BLOCK_ON_OVERLAP )
+		if ( level->Style->RemoveBlockOnOverlap )
 			bm->getCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddObject( bm );
