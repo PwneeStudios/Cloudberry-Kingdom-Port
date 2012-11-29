@@ -143,9 +143,9 @@ bool Escalation_Tutorial::ShowTitle = true;
 
 		if ( HeroRush_Tutorial::ShowTitle || !getWatchedOnce() )
 		//if (ShowTitle || !WatchedOnce)
-			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( shared_from_this()) );
+			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		else
-			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( shared_from_this() ) );
+			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 	}
 
 	void Escalation_Tutorial::TutorialOrSkip()
@@ -156,7 +156,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 
 			int wait = MyGame->DramaticEntry( MyGame->MyLevel->getStartDoor(), 90 );
 			MyGame->MyLevel->SetBack( wait + 90 );
-			MyGame->WaitThenDo( wait, std::make_shared<PreventThingsHelper>( shared_from_this() ) );
+			MyGame->WaitThenDo( wait, std::make_shared<PreventThingsHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		}
 		else
 			Ready();
@@ -176,7 +176,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 			MyGame->AddGameObject( text );
 
 			// On (A) go to next part of the tutorial
-			MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<NextTutorialHelper>( shared_from_this(), text ) ) );
+			MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<NextTutorialHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) ) );
 		}
 		else
 		{
@@ -186,8 +186,8 @@ bool Escalation_Tutorial::ShowTitle = true;
 
 			MyGame->AddGameObject( text );
 
-			MyGame->WaitThenDo( 120, std::make_shared<TextKillHelper>( shared_from_this(), text ) );
-			MyGame->WaitThenDo( 40, std::make_shared<TutorialOrSkipProxy>( shared_from_this() ) );
+			MyGame->WaitThenDo( 120, std::make_shared<TextKillHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) );
+			MyGame->WaitThenDo( 40, std::make_shared<TutorialOrSkipProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		}
 	}
 
@@ -195,7 +195,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 	{
 		int Wait = 5 + 22;
 
-		MyGame->WaitThenDo( Wait, std::make_shared<TutorialHelperReadyGo>( shared_from_this() ) );
+		MyGame->WaitThenDo( Wait, std::make_shared<TutorialHelperReadyGo>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 	}
 
 	void Escalation_Tutorial::End()

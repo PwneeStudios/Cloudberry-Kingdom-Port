@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 			}
 
 			if ( !( *bob )->Dead && !( *bob )->Dying )
-				( *bob )->Die( Bob::BobDeathType_NONE, true, false );
+				( *bob )->Die( BobDeathType_NONE, true, false );
 		}
 
 		// Add the Game Over panel, check for Awardments
@@ -80,10 +80,10 @@ namespace CloudberryKingdom
 		Timer = std::make_shared<GUI_Timer>();
 
 		// Set the time expired function
-		Timer->OnTimeExpired->Add( std::make_shared<RushOnTimeExpiredLambda>( shared_from_this() ) );
+		Timer->OnTimeExpired->Add( std::make_shared<RushOnTimeExpiredLambda>( std::static_pointer_cast<Rush>( shared_from_this() ) ) );
 
 		// Create the string world, and add the relevant game objects
-		MyStringWorld = std::make_shared<StringWorldTimed>( getGetSeed(), Timer );
+		MyStringWorld = std::make_shared<StringWorldTimed>( std::make_shared<PassGetSeedAsLambda>( shared_from_this() ), Timer );
 		MyStringWorld->StartLevelMusic.reset();
 
 		// Start menu

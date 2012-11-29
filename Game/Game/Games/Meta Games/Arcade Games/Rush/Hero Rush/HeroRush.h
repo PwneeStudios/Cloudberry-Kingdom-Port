@@ -5,38 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Challenge_HeroRush : public Rush
 	{
 	private:
@@ -71,7 +39,7 @@ namespace CloudberryKingdom
 		public:
 			AdditionalPreStartOnSwapToLevelHelper( const std::shared_ptr<Challenge_HeroRush> &chr );
 
-			void Apply( int levelindex );
+			void Apply( const int &levelindex );
 		};
 
 	private:
@@ -86,7 +54,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Challenge_HeroRush> &getInstance();
 
-	protected:
+	public:
 		Challenge_HeroRush();
 
 		// The progression of max time and start time for increasing difficulty
@@ -113,7 +81,7 @@ namespace CloudberryKingdom
 		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
 
 	private:
-		static std::vector<BobPhsx*> HeroTypes;
+		static std::vector<std::shared_ptr<BobPhsx> > HeroTypes;
 
 	protected:
 		virtual std::shared_ptr<BobPhsx> GetHero( int i );

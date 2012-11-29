@@ -88,7 +88,7 @@ public:
 		int SetGameId();
 
 	protected:
-		const std::shared_ptr<StringWorldGameData> &getStringWorld() const;
+		const std::shared_ptr<StringWorldGameData> getStringWorld() const;
 
 		/// <summary>
 		/// Get the top score that anyone on this machine has ever gotten.

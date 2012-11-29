@@ -5,33 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Timer_Base;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Timer;
-}
-
-namespace CloudberryKingdom
-{
-	class StringWorldTimed;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Rush : public Challenge
 	{
 	private:

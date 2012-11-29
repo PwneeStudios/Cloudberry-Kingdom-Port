@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<LevelSeedData> Challenge::PassGetSeedAsLambda::Apply( const int &index )
 	{
-		challenge->GetSeed( index );
+		return challenge->GetSeed( index );
 	}
 
 	Challenge::ShowEndScreenProxy::ShowEndScreenProxy( const std::shared_ptr<Challenge> &challenge )
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		return GameId_Score;
 	}
 
-	const std::shared_ptr<StringWorldGameData> &Challenge::getStringWorld() const
+	const std::shared_ptr<StringWorldGameData> Challenge::getStringWorld() const
 	{
 		return std::static_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 	}

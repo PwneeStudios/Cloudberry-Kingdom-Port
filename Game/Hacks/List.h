@@ -38,7 +38,7 @@ inline void CopyFromTo( const std::vector<T> &v1, std::vector<T> &v2 )
 }
 
 template<class T, class Predicate>
-inline void Sort( const std::vector<T> &v, const Predicate &pred )
+inline void Sort( std::vector<T> &v, const Predicate &pred )
 {
 	std::sort( v.begin(), v.end(), pred );
 }

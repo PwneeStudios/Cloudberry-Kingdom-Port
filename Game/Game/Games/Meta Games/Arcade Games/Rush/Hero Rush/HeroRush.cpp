@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 		this->chr = chr;
 	}
 
-	void Challenge_HeroRush::AdditionalPreStartOnSwapToLevelHelper::Apply( int levelindex )
+	void Challenge_HeroRush::AdditionalPreStartOnSwapToLevelHelper::Apply( const int &levelindex )
 	{
 		Awardments::CheckForAward_HeroRush2Unlock( levelindex - chr->StartIndex );
 
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		Params->FillType = Coin_Parameters::FillTypes_RUSH;
 	}
 
-const std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
+	const std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
 
 	const std::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance()
 	{
@@ -76,18 +76,18 @@ const std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance = std::ma
 		MenuName = Name = Localization::Words_HERO_RUSH;
 	}
 
-const int tempVector[] = { 20, 15, 10, 10, 10 };
-std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-const int tempVector2[] = { 15, 12, 10, 10, 10 };
-std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+	const int tempVector[] = { 20, 15, 10, 10, 10 };
+	std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const int tempVector2[] = { 15, 12, 10, 10, 10 };
+	std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 
 	void Challenge_HeroRush::SetTimerProperties( int Difficulty )
 	{
-		Difficulty = __min( Difficulty, MaxTime_ByDifficulty.size() - 1 );
+		Difficulty = __min( Difficulty, static_cast<int>( MaxTime_ByDifficulty.size() ) - 1 );
 
 		Timer->CoinTimeValue = static_cast<int>( 62 * 1.75f );
 
-		if ( Difficulty >= MaxTime_ByDifficulty.size() )
+		if ( Difficulty >= static_cast<int>( MaxTime_ByDifficulty.size() ) )
 			Timer->MaxTime = MaxTime_ByDifficulty[ MaxTime_ByDifficulty.size() - 1 ];
 		else
 			Timer->MaxTime = 62 * ( MaxTime_ByDifficulty[ Difficulty ] + 0 ) - 1;
@@ -96,14 +96,14 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 	void Challenge_HeroRush::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
 	}
 
 	void Challenge_HeroRush::MakeExitDoorIcon( int levelindex )
 	{
 		Vector2 shift = Vector2( 0, 470 );
 
-		Tools::CurGameData->AddGameObject( std::make_shared<DoorIcon>( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1 ) );
+		Tools::CurGameData->AddGameObject( std::make_shared<DoorIcon>( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1.f ) );
 	}
 
 	void Challenge_HeroRush::AdditionalPreStart()
@@ -114,7 +114,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		int Difficulty = ( StartIndex + 1 ) / LevelsPerDifficulty;
 		SetTimerProperties( Difficulty );
 
-		if ( Difficulty >= StartTime_ByDifficulty.size() )
+		if ( Difficulty >= static_cast<int>( StartTime_ByDifficulty.size() ) )
 			Timer->setTime( 62 * StartTime_ByDifficulty[ StartTime_ByDifficulty.size() - 1 ] );
 		else
 			Timer->setTime( 62 * StartTime_ByDifficulty[ Difficulty ] );
@@ -123,7 +123,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		PreStart_Tutorial( StartIndex > 0 );
 
 		// When a new level is swapped to...
-		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( shared_from_this() ) );
+		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( std::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
 	}
 
 	void Challenge_HeroRush::OnSwapTo_GUI( int levelindex )
@@ -139,7 +139,19 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 
 	std::shared_ptr<LevelSeedData> Challenge_HeroRush::GetSeed( int Index )
 	{
-		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), -.5f, 0, 1, 2, 2.5f, 3, 3.5f, 4, 4.5f );
+		std::vector<float> lerp_vec;
+
+		lerp_vec.push_back(-.5f);
+		lerp_vec.push_back(0);
+		lerp_vec.push_back(1);
+		lerp_vec.push_back(2);
+		lerp_vec.push_back(2.5f);
+		lerp_vec.push_back(3);
+		lerp_vec.push_back(3.5f);
+		lerp_vec.push_back(4);
+		lerp_vec.push_back(4.5f);
+
+		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), lerp_vec );
 		std::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
 
 		return seed;
@@ -158,7 +170,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 
 	std::shared_ptr<TileSet> Challenge_HeroRush::GetTileSet( int i )
 	{
-		return tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ];
+		return TileSet::Get( tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ] );
 	}
 
 	std::shared_ptr<LevelSeedData> Challenge_HeroRush::Make( int Index, float Difficulty )
@@ -171,7 +183,7 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 			Length = LevelLength_Short;
 		else
 		{
-			float t = ( ( ( Index + 1 ) % LevelsPerDifficulty ) / 5 + 1 ) / 5;
+			float t = static_cast<float>( ( ( ( Index + 1 ) % LevelsPerDifficulty ) / 5 + 1 ) / 5 );
 			Length = CoreMath::LerpRestrict( LevelLength_Short, LevelLength_Long, t );
 		}
 

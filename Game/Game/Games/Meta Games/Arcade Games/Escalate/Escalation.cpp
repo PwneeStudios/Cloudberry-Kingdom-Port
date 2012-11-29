@@ -179,7 +179,19 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<LevelSeedData> Challenge_Escalation::GetSeed( int Index )
 	{
-		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), -.5f, 0, 1, 2, 2.5f, 3, 3.5f, 4, 4.5f );
+		std::vector<float> lerp_vec;
+
+		lerp_vec.push_back(-.5f);
+		lerp_vec.push_back(0);
+		lerp_vec.push_back(1);
+		lerp_vec.push_back(2);
+		lerp_vec.push_back(2.5f);
+		lerp_vec.push_back(3);
+		lerp_vec.push_back(3.5f);
+		lerp_vec.push_back(4);
+		lerp_vec.push_back(4.5f);
+
+		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), lerp_vec );
 		std::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
 
 		return seed;
@@ -190,7 +202,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> Challenge_Escalation::GetTileSet( int i )
 	{
-		return tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ];
+		return TileSet::Get( tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ] );
 	}
 
 	std::shared_ptr<BobPhsx> Challenge_Escalation::GetHero( int i )

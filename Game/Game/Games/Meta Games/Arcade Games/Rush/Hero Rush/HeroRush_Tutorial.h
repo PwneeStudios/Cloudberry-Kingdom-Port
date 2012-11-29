@@ -153,10 +153,10 @@ namespace CloudberryKingdom
 		private:
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<GUI_Text> text;
-			std::vector<Arrow*> arrows;
+			std::vector<std::shared_ptr<Arrow> > arrows;
 
 		public:
-			PointAtCoinsNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text, std::vector<Arrow*> &arrows );
+			PointAtCoinsNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text, std::vector<std::shared_ptr<Arrow> > &arrows );
 
 			void Apply();
 		};

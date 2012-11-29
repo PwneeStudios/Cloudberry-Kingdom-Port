@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		// Calculate difficulty based on level
 		// t ranges from 0 to 1
-		float t = CoreMath::Restrict( 0, 1, Index / static_cast<float>( LevelMax ) );
+		float t = CoreMath::Restrict( 0.f, 1.f, Index / static_cast<float>( LevelMax ) );
 
 		switch ( CoinControlType )
 		{

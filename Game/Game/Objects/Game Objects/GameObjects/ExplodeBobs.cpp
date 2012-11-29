@@ -78,8 +78,7 @@ namespace CloudberryKingdom
 				if ( ( *bob )->getCore()->Show && ( *bob )->GetPlayerData()->IsAlive )
 					bobs.push_back( *bob );
 			//bobs.Sort( CompareBobs );
-			//Sort( bobs, CompareBobs );
-			std::sort( bobs.begin(), bobs.end(), CompareBobs );
+			Sort( bobs, CompareBobs );
 
 			if ( bobs.empty() )
 				Finish();
