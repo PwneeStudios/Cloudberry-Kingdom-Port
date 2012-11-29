@@ -130,7 +130,34 @@ public:
 
 class FileStream;
 class Game { };
-class GamePadState { };
+
+class GamePadButtons
+{
+
+public:
+
+	ButtonState A;
+	ButtonState B;
+	ButtonState Back;
+	ButtonState BigButton;
+	ButtonState LeftShoulder;
+	ButtonState LeftStick;
+	ButtonState RightShoulder;
+	ButtonState RightStick;
+	ButtonState Start;
+	ButtonState X;
+	ButtonState Y;
+
+};
+
+class GamePadState
+{
+	
+public:
+
+	GamePadButtons Buttons;
+};
+
 class GameTime;
 
 struct Viewport { float X; float Y; float Width; float Height; float MinDepth; float MaxDepth; };
@@ -170,7 +197,18 @@ public:
 
 class GraphicsDeviceManager;
 class IAsyncResult;
-class KeyboardState { };
+
+class KeyboardState
+{
+	
+public:
+
+	bool IsKeyDown( Keys key )
+	{
+		return false;
+	}
+};
+
 template<class T> class LinkedListNode;
 class MouseState { };
 class Object;
@@ -241,6 +279,7 @@ public:
 		X( X ), Y( Y ), Width( Width ), Height( Height )
 	{
 	}
+
 };
 
 class SamplerState

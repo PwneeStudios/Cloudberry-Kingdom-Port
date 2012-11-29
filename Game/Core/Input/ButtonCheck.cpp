@@ -15,7 +15,7 @@ bool KeyboardExtension::Freeze = false;
 		Freeze = false;
 	}
 
-	bool KeyboardExtension::IsKeyDownCustom( KeyboardState keyboard, Keys key )
+	bool KeyboardExtension::IsKeyDownCustom( KeyboardState &keyboard, Keys key )
 	{
 		if ( Freeze )
 			return false;
@@ -51,14 +51,14 @@ bool KeyboardExtension::Freeze = false;
 		_DownCount = std::vector<int>( ControllerButtons_LENGTH );
 	}
 
-std::vector<ButtonStatistics*> ButtonStats::Controller = 0;
+std::vector<std::shared_ptr<ButtonStatistics> > ButtonStats::Controller;
 std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonStats::Init()
 	{
 		if ( Controller.empty() )
 		{
-			Controller = std::vector<ButtonStatistics*>( 4 );
+			Controller = std::vector<std::shared_ptr<ButtonStatistics> >( 4 );
 			All = std::make_shared<ButtonStatistics>();
 
 			for ( int i = 0; i < 4; i++ )
@@ -73,7 +73,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		bool Incr = false;
 		for ( int i = 0; i < 4; i++ )
 		{
-			if ( Tools::GamepadState[ i ].Buttons->A == ButtonState::Pressed )
+			if ( Tools::GamepadState[ i ].Buttons.A == ButtonState_Pressed )
 			{
 				Controller[ i ]->IncrCount( ControllerButtons_A );
 				Incr = true;
@@ -82,10 +82,10 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 				Controller[ i ]->SetCount( ControllerButtons_A, 0 );
 
 			Vector2 dir = ButtonCheck::GetDir( i );
-			Controller[ i ]->IncrCount( ControllerButtons_RIGHT, dir.X > ::7 );
-			Controller[ i ]->IncrCount( ControllerButtons_LEFT, dir.X < -.7f );
-			Controller[ i ]->IncrCount( ControllerButtons_UP, dir.Y > ::7 );
-			Controller[ i ]->IncrCount( ControllerButtons_DOWN, dir.Y < -.7f );
+			Controller[ i ]->IncrCount( ControllerButtons_RIGHT, dir.X > 0.7f );
+			Controller[ i ]->IncrCount( ControllerButtons_LEFT, dir.X < -0.7f );
+			Controller[ i ]->IncrCount( ControllerButtons_UP, dir.Y > 0.7f );
+			Controller[ i ]->IncrCount( ControllerButtons_DOWN, dir.Y < -0.7f );
 		}
 
 		if ( Incr )
@@ -95,7 +95,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		const ControllerButtons tempVector[] = { ControllerButtons_LEFT, ControllerButtons_RIGHT, ControllerButtons_UP, ControllerButtons_DOWN };
 		std::vector<ControllerButtons> buttons = std::vector<ControllerButtons>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( std::vector<CloudberryKingdom::ControllerButtons>::const_iterator button = buttons.begin(); button != buttons.end(); ++button )
+		for ( std::vector<ControllerButtons>::const_iterator button = buttons.begin(); button != buttons.end(); ++button )
 		{
 			Incr = false;
 			for ( int i = 0; i < 4; i++ )
@@ -121,7 +121,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 	void ButtonClass::InitializeInstanceFields()
 	{
 		ControllerButton = ControllerButtons_NONE;
-		KeyboardKey = Keys::None;
+		KeyboardKey = Keys_None;
 		IsKeyboard = true;
 	}
 

@@ -1082,4 +1082,10 @@ enum GfxPrimitiveType
 	GfxPrimitiveType_TriangleList
 };
 
+enum ButtonState
+{
+	ButtonState_Pressed,
+	ButtonState_Released
+};
+
 #endif
