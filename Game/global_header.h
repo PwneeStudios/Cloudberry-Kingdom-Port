@@ -158,6 +158,18 @@ public:
 	GamePadButtons Buttons;
 };
 
+class GamePad
+{
+
+public:
+
+	static GamePadState GetState( PlayerIndex index )
+	{
+		return GamePadState();
+	}
+
+};
+
 class GameTime;
 
 struct Viewport { float X; float Y; float Width; float Height; float MinDepth; float MaxDepth; };
@@ -207,10 +219,51 @@ public:
 	{
 		return false;
 	}
+
+	std::vector<Keys> GetPressedKeys()
+	{
+	}
+
+};
+
+class Keyboard
+{
+
+public:
+
+	static KeyboardState GetState()
+	{
+		return KeyboardState();
+	}
+
 };
 
 template<class T> class LinkedListNode;
-class MouseState { };
+
+class MouseState
+{
+
+public:
+
+	int X;
+	int Y;
+	int ScrollWheelValue;
+
+	ButtonState LeftButton;
+	ButtonState RightButton;
+};
+
+class Mouse
+{
+	
+public:
+
+	static MouseState GetState()
+	{
+		return MouseState();
+	}
+
+};
 
 class Mutex
 {

@@ -175,7 +175,7 @@ public:
 
 //ORIGINAL LINE: public static ButtonData State(int iPlayerIndex, params ControllerButtons[] ButtonList)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static ButtonData State( int iPlayerIndex, ... );
+		static ButtonData State( int iPlayerIndex, const std::vector<ControllerButtons> &ButtonList );
 
 		/// <summary>
 		/// When true it is assumed that at least one player is officially logged in.
