@@ -198,7 +198,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 
 		int Step = level->GetPhsxStep();
 
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
 			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data->Position, Vector2(-200, -240)) )
 				continue;

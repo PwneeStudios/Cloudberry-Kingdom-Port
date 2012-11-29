@@ -447,7 +447,7 @@ namespace CloudberryKingdom
 		getMainCamera()->Update();
 
 		// New bobs
-		std::vector<Bob*> Computers = CurMakeData->MakeBobs( this );
+		BobVec Computers = CurMakeData->MakeBobs( this );
 
 		// New level piece
 		std::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( this, Computers, Length, StartPhsxStep );
@@ -1189,7 +1189,7 @@ namespace CloudberryKingdom
 
 		Bobs.clear();
 		Bobs.AddRange( HoldPlayerBobs );
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			( *bob )->PlayerObject->AnimQueue->clear();
 			( *bob )->PlayerObject->EnqueueAnimation( 0, 0, true );
@@ -1341,7 +1341,7 @@ namespace CloudberryKingdom
 		HaveTimeLimit = false;
 
 		// Prevent additional deaths/replays/resets
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			( *bob )->Immortal = true;
 			( *bob )->ScreenWrap = true;
@@ -1357,7 +1357,7 @@ namespace CloudberryKingdom
 		Finished = true;
 
 		// Prevent additional deaths/replays/resets
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			( *bob )->Immortal = true;
 
 		CanWatchComputer = false;
@@ -1370,7 +1370,7 @@ namespace CloudberryKingdom
 		Finished = false;
 
 		// Prevent additional deaths/replays/resets
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			( *bob )->Immortal = false;
 
 		setPreventReset( false );
@@ -1841,7 +1841,7 @@ int Step1, Level::Step2 = 0;
 		getMainCamera()->Update();
 
 		// New bobs
-		std::vector<Bob*> Computers = CurMakeData->MakeBobs( this );
+		BobVec Computers = CurMakeData->MakeBobs( this );
 
 		// New level piece
 		std::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( this, Computers, Length, StartPhsxStep );
@@ -2097,13 +2097,13 @@ int Step1, Level::Step2 = 0;
 			// Do the above without delegates
 			bool Any;
 			Any = false;
-			for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 				if ( ( *bob )->getCore()->Data->Position.X < MaxRight + EndBuffer )
 					Any = true;
 			if ( !Any )
 				OneFinishedCount += 8;
 			Any = false;
-			for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 				if ( ( *bob )->getCore()->Data->Position.X > MaxRight + EndBuffer - 100 )
 					Any = true;
 			if ( Any )
@@ -2352,7 +2352,7 @@ int Step1, Level::Step2 = 0;
 
 	void Level::CountReset()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			if ( !( *bob )->Dead && !( *bob )->Dying )
 			{
@@ -2490,8 +2490,8 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 
-		Bobs = std::vector<Bob*>();
-		HoldPlayerBobs = std::vector<Bob*>();
+		Bobs = BobVec();
+		HoldPlayerBobs = BobVec();
 
 		setSetToReset( false );
 	}
@@ -2560,7 +2560,7 @@ int Level::AfterPostDrawLayer = 12;
 		ActiveObjectList = Objects.clear();
 
 		if ( Bobs.size() > 0 )
-			for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 				( *bob )->Release();
 		Bobs.clear();
 		DefaultHeroType.reset();
@@ -2722,7 +2722,7 @@ int Level::AfterPostDrawLayer = 12;
 		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			( *obj )->Move( shift );
 
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			( *bob )->Move( shift );
 
 		if ( MoveBackground && MyBackground != 0 )
@@ -2838,7 +2838,7 @@ int Level::AfterPostDrawLayer = 12;
 
 		// Change piece associated with each bob
 		int Count = 0;
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			( *bob )->MyPiece = piece;
 			( *bob )->MyPieceIndex = Count % piece->NumBobs;
@@ -2931,7 +2931,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		// Reset Bobs
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			PhsxData StartData;
 			if ( ( *bob )->MyPiece != 0 )
@@ -3281,7 +3281,7 @@ int Level::AfterPostDrawLayer = 12;
 		if ( !Replay || MainReplayOnly )
 		{
 			if ( MyGame != 0 && MyGame->MyGameFlags.IsTethered )
-			for ( std::vector<Bob*>::const_iterator Player = Bobs.begin(); Player != Bobs.end(); ++Player )
+			for ( BobVec::const_iterator Player = Bobs.begin(); Player != Bobs.end(); ++Player )
 			{
 				if ( ( *Player )->getCore()->DrawLayer == i && (*Player)->MyBobLinks.size() > 0 )
 					for ( std::vector<BobLink*>::const_iterator link = Player->MyBobLinks.begin(); link != Player->MyBobLinks.end(); ++link )
@@ -3289,7 +3289,7 @@ int Level::AfterPostDrawLayer = 12;
 			}
 
 //C# TO C++ CONVERTER NOTE: The variable Bob was renamed since it is named the same as a user-defined type:
-			for ( std::vector<Bob*>::const_iterator Bob_Renamed = Bobs.begin(); Bob_Renamed != Bobs.end(); ++Bob_Renamed )
+			for ( BobVec::const_iterator Bob_Renamed = Bobs.begin(); Bob_Renamed != Bobs.end(); ++Bob_Renamed )
 			{
 				if ( ( *Bob_Renamed )->DrawWithLevel && ( *Bob_Renamed )->getCore()->DrawLayer == i )
 					( *Bob_Renamed )->Draw();
@@ -3363,7 +3363,7 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 
 	void Level::FadeBobLightSourcesIn()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			( *bob )->SetLightSourceToFadeIn();
 	}
 
@@ -3384,7 +3384,7 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 		// Stickmen lighting
 		if ( StickmanLighting )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			{
 				Color c = Color( 1, 1, 1, ( *bob )->LightSourceFade );
 				Tools::QDrawer->DrawLightSource( ( *bob )->getPos(), 670, 5, c ); //new Color(.75f, .75f, .75f, .75f));
@@ -3574,7 +3574,7 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 		level->Objects.clear();
 		level->Blocks.clear();
 
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 			( *bob )->MyRecord.reset();
 		level->LevelPieces.clear();
 		level->Release();
@@ -3803,7 +3803,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 	void Level::UpdateBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 		{
 			( *bob )->PhsxStep();
 			if ( !( *bob )->Cinematic && !( *bob )->ManualAnimAndUpdate )
@@ -3985,7 +3985,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 					int NumAlive = 0;
 					Vector2 Pos = Vector2();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-					for ( std::vector<Bob*>::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+					for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 					{
 						if ( ( *bob )->MyPlayerData->IsAlive )
 						{

@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 
 		// Get rid of old bobs.
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 			( *bob )->Release();
 		MyGame->MyLevel->Bobs.clear();
 

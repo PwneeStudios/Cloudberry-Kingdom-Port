@@ -220,7 +220,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		std::shared_ptr<Door> door = dynamic_cast<Door*>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 != door )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 				( *bob )->getCore()->Show = false;
 		}
 

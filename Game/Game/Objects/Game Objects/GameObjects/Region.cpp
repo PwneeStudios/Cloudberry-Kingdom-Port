@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 			if ( ( *bob )->getCanDie() && Phsx::BoxBoxOverlap((*bob)->Box, Box) )
 				if ( AttachedDoor != 0 )
 				{

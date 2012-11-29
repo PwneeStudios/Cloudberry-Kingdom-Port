@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<Level> level = game->MyLevel;
 
 		// Kill all the players
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
 			if ( ( *bob )->IsVisible() )
 			{

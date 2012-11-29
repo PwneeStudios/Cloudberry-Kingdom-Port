@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Level> MyLevel;
 		int NumBobs;
-		std::vector<Bob*> Computer;
+		BobVec Computer;
 
 		int PieceLength;
 
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		LevelPiece( int Length, const std::shared_ptr<Level> &level, std::vector<Bob*> computer, int numBobs );
+		LevelPiece( int Length, const std::shared_ptr<Level> &level, BobVec computer, int numBobs );
 
 		PhsxData GetLastData();
 		PhsxData GetLastData( int Index );

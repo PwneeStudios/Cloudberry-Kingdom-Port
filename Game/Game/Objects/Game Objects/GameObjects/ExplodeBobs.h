@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 	private:
 		void Finish();
 
-		int CompareBobs( const std::shared_ptr<Bob> &A, const std::shared_ptr<Bob> &B );
+		static int CompareBobs( const std::shared_ptr<Bob> &A, const std::shared_ptr<Bob> &B );
 
 		int Count;
 	public:

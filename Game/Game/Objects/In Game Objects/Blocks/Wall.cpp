@@ -302,7 +302,7 @@ namespace CloudberryKingdom
 		MyBox->SetTarget( MyBox->Target->Center, MyBox->Current->Size );
 
 		MyBox->CalcBounds();
-		for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 			DoInteraction( *bob );
 	}
 

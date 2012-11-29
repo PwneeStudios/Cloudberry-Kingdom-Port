@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		SetTRCamBound = true;
 	}
 
-	std::vector<Bob*> MakeData::MakeBobs( const std::shared_ptr<Level> &level )
+	BobVec MakeData::MakeBobs( const std::shared_ptr<Level> &level )
 	{
 		/*
 		if (level.MySourceGame.MyGameFlags.IsDoppleganger)
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		*/
 
 
-		std::vector<Bob*> Computers = std::vector<Bob*>( NumInitialBobs );
+		BobVec Computers = BobVec( NumInitialBobs );
 
 		level->Bobs.clear();
 		for ( int i = 0; i < NumInitialBobs; i++ )
@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 		return Computers;
 	}
 
-	std::shared_ptr<LevelPiece> MakeData::MakeLevelPiece( const std::shared_ptr<Level> &level, std::vector<Bob*> bobs, int Length, int StartPhsxStep )
+	std::shared_ptr<LevelPiece> MakeData::MakeLevelPiece( const std::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep )
 	{
 		std::shared_ptr<LevelPiece> Piece = level->StartNewPiece( Length, bobs );
 		Piece->MyData = PieceSeed;

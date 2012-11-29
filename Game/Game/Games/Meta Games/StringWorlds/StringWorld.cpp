@@ -141,7 +141,7 @@ namespace CloudberryKingdom
 		OnSwapToLastLevel.reset();
 		StartLevelMusic.reset();
 
-		if ( Tools::WorldMap == this )
+		if ( Tools::WorldMap == shared_from_this() )
 			Tools::WorldMap.reset();
 
 		GameData::Release();
@@ -152,7 +152,7 @@ namespace CloudberryKingdom
 		if ( GetSeedFunc == 0 )
 			return 0;
 		else
-			return GetSeedFunc( Index );
+			return GetSeedFunc->Apply( Index );
 	}
 
 	bool StringWorldGameData::NextIsReady()
@@ -160,11 +160,11 @@ namespace CloudberryKingdom
 		if ( NextLevelSeed == 0 )
 			return false;
 
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( NextLevelSeed->Loaded )
+		NextLevelSeed->Loaded->MyMutex.Lock();
 		{
 			return NextLevelSeed->Loaded->getval();
 		}
+		NextLevelSeed->Loaded->MyMutex.Unlock();
 	}
 
 	void StringWorldGameData::LevelBegin( const std::shared_ptr<Level> &level )
@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 	void StringWorldGameData::BeginningCloseDoor( const std::shared_ptr<Level> &level )
 	{
 		// Find the initial door
-		std::shared_ptr<Door> door = dynamic_cast<Door*>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
+		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 == door )
 			return;
 
@@ -223,7 +223,7 @@ namespace CloudberryKingdom
 			return;
 
 		// Find the initial door
-		std::shared_ptr<Door> door = dynamic_cast<Door*>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
+		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 == door )
 		{
 
@@ -252,11 +252,11 @@ namespace CloudberryKingdom
 
 	bool StringWorldGameData::LevelIsLoaded( const std::shared_ptr<LevelSeedData> &data )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( data->Loaded )
+		data->Loaded->MyMutex.Lock();
 		{
 			return data->Loaded->getval();
 		}
+		data->Loaded->MyMutex.Unlock();
 	}
 
 	void StringWorldGameData::SetLevel()
@@ -268,7 +268,7 @@ namespace CloudberryKingdom
 			{
 				std::shared_ptr<ObjectBase> obj = NextLevelSeed->MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
 
-				std::shared_ptr<Door> door = dynamic_cast<Door*>( obj );
+				std::shared_ptr<Door> door = std::static_pointer_cast<Door>( obj );
 				if ( 0 != door )
 					door->setOnOpen( std::make_shared<EOG_StandardDoorActionProxy>() );
 			}
@@ -278,8 +278,7 @@ namespace CloudberryKingdom
 			NextLevelSeed->MyGame->Reset();
 		}
 
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( NextLevelSeed->Loaded )
+		NextLevelSeed->Loaded->MyMutex.Lock();
 		{
 			// If game hasn't loaded yet, bring loading screen
 			if ( !NextLevelSeed->Loaded->getval() )
@@ -290,16 +289,17 @@ namespace CloudberryKingdom
 				if ( !Tools::ShowLoadingScreen )
 				{
 					Tools::CurLevel = MyLevel;
-					Tools::CurGameData = this;
+					Tools::CurGameData = shared_from_this();
 					Tools::BeginLoadingScreen( true );
 				}
 			}
 			else
 			{
 				SwapToLevel();
-				Tools::WorldMap = this;
+				Tools::WorldMap = shared_from_this();
 			}
 		}
+		NextLevelSeed->Loaded->MyMutex.Unlock();
 	}
 
 	void StringWorldGameData::Finish( bool Replay )
@@ -333,14 +333,15 @@ namespace CloudberryKingdom
 		}
 
 		// Stores the GameObjects in the current game marked as 'PreventRelease'
-		std::vector<GameObject*> ObjectsToSave = std::vector<GameObject*>();
+		GameObjVec ObjectsToSave = GameObjVec();
 
 		if ( CurLevelSeed != 0 && NextLevelSeed != CurLevelSeed )
 		{
-			if ( CurLevelSeed->MyGame->Loading )
-				throw InvalidOperationException( _T( "Swapping from a level that hasn't finished loading!" ) );
+			// FIXME: forget about throwing exceptions?
+			//if ( CurLevelSeed->MyGame->Loading )
+			//	throw InvalidOperationException( _T( "Swapping from a level that hasn't finished loading!" ) );
 
-			for ( std::vector<GameObject*>::const_iterator obj = CurLevelSeed->MyGame->MyGameObjects.begin(); obj != CurLevelSeed->MyGame->MyGameObjects.end(); ++obj )
+			for ( GameObjVec::const_iterator obj = CurLevelSeed->MyGame->MyGameObjects.begin(); obj != CurLevelSeed->MyGame->MyGameObjects.end(); ++obj )
 				if ( ( *obj )->PreventRelease )
 					ObjectsToSave.push_back( *obj );
 
@@ -465,10 +466,10 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	StringWorldGameData::StringWorldGameData( Func<int, LevelSeedData*> GetSeed )
+	StringWorldGameData::StringWorldGameData( std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > GetSeed )
 	{
 		InitializeInstanceFields();
-		this->GetSeedFunc = std::make_shared<Func>( this, &StringWorldGameData::GetSeed );
+		this->GetSeedFunc = GetSeed;
 	}
 
 	std::shared_ptr<Level> StringWorldGameData::MakeLevel()
@@ -523,7 +524,7 @@ namespace CloudberryKingdom
 		Tools::CurrentAftermath = std::make_shared<AftermathData>();
 		Tools::CurrentAftermath->Success = true;
 
-		for ( std::vector<Bob*>::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			( *bob )->CollectSelf();
 
 		//Tools.CurGameData.AddGameObject(new VictoryPanel());

@@ -155,7 +155,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		if ( Step < Params->StartFrame )
 			return;
 
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
 			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data->Position, Vector2(-200, -240)) || level->Style_MASOCHISTIC )
 				continue;

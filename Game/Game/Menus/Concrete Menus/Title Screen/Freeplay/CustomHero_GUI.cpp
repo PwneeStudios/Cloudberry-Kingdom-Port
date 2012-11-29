@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::KillBobsHelper::Apply()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = chGui->MyGame->MyLevel->Bobs.begin(); bob != chGui->MyGame->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = chGui->MyGame->MyLevel->Bobs.begin(); bob != chGui->MyGame->MyLevel->Bobs.end(); ++bob )
 			( *bob )->Die( Bob::BobDeathType_NONE );
 	}
 
@@ -195,7 +195,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		Testing = false;
 		Show();
 
-		for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 		{
 			ParticleEffects::AddPop( MyGame->MyLevel, ( *bob )->getPos() );
 			( *bob )->CollectSelf();
@@ -239,7 +239,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 	{
 		// Remove any previous bobs
 		MyGame->KillToDo( _T( "RemoveBobs" ) );
-		for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 			( *bob )->CollectSelf();
 
 		// Make new bobs
@@ -247,7 +247,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 		// Position bobs
 		Vector2 shift = Vector2( -700, 100 );
-		for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 		{
 			Tools::MoveTo( *bob, MyGame->getCamPos() + shift );
 			shift += Vector2( 100, 20 );

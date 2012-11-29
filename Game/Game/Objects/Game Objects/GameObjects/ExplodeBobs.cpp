@@ -74,10 +74,12 @@ namespace CloudberryKingdom
 		if ( ( Count - InitialDelay ) % Delay == 0 )
 		{
 			BobVec bobs = BobVec();
-			for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
-				if ( ( *bob )->Core->Show && ( *bob )->GetPlayerData()->IsAlive )
+			for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+				if ( ( *bob )->getCore()->Show && ( *bob )->GetPlayerData()->IsAlive )
 					bobs.push_back( *bob );
-			bobs.Sort( CompareBobs );
+			//bobs.Sort( CompareBobs );
+			//Sort( bobs, CompareBobs );
+			std::sort( bobs.begin(), bobs.end(), CompareBobs );
 
 			if ( bobs.empty() )
 				Finish();

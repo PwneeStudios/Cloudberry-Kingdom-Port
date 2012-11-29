@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		StartData.clear();
 	}
 
-	LevelPiece::LevelPiece( int Length, const std::shared_ptr<Level> &level, std::vector<Bob*> computer, int numBobs )
+	LevelPiece::LevelPiece( int Length, const std::shared_ptr<Level> &level, BobVec computer, int numBobs )
 	{
 		NumBobs = 0;
 		if ( computer.size() > 0 )

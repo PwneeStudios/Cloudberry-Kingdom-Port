@@ -1,6 +1,11 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
+// Questions
+// string formatting?
+// List.Sort
+// GameObjVec ObjectsToSave = GameObjVec();
+
 // Jordan's unalphebatized shit. Suck it Oleg.
 inline int Sign__RegexMe41315803(int x) { return (x > 0) - (x < 0); }
 inline int Sign__RegexMe41315803(float x) { return (x > 0) - (x < 0); }
@@ -10,6 +15,7 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 // Math::Sign and Sign__RegexMe41315803 -> Sign
 // ->Data->Position -> ->Data.Position    Also for Velocity and Acceleration
 // ->Core->   ->   ->getCore()->
+// std::vector<GameObject*> GameObjVec
 
 #include "enums.h"
 #include "forward_declarations.h"

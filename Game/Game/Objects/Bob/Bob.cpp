@@ -602,7 +602,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 					if ( getCore()->MyLevel->Bobs.size() > 1 )
 					{
 						std::shared_ptr<Bob> HighestBob = 0;
-						for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+						for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 						{
 							if ( *bob != this && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data->Position.Y > HighestBob->getCore()->Data.Position.Y ) )
 							{

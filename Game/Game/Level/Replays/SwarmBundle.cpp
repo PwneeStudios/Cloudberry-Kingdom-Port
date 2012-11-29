@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		BobLinks = std::vector<BobLink*>();
 		if ( level->MyGame->MyGameFlags.IsTethered )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 				if ( ( *bob )->MyBobLinks.size() > 0 )
 					BobLinks.AddRange( ( *bob )->MyBobLinks );
 
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		AnimGroup = std::vector<SpriteAnimGroup*>( 4 );
 
 		int count = 0;
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
 			AnimGroup[ count ] = std::make_shared<SpriteAnimGroup>();
 			AnimGroup[ count ]->Init( ( *bob )->PlayerObject, ( *bob )->MyPhsx->SpritePadding, std::make_shared<BobToSpritesLambda>( *bob ) );

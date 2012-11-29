@@ -5,32 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Door;
-}
 
-namespace CloudberryKingdom
-{
-	class StringWorldGameData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-
-namespace CloudberryKingdom
-{
 	class EOL_StringWorldDoorActionProxy : public Lambda_1<std::shared_ptr<Door> >
 	{
 	private:

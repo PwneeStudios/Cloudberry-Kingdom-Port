@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 		if ( getCore()->MyLevel->PlayMode == 0 )
 		{
 			Active = getCore()->Active = false;
-			for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 				if ( ( *bob )->getCanDie() )
 					CollisionCheck( *bob );
 		}

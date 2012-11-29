@@ -491,7 +491,7 @@ bool Camera::DisableOscillate = false;
 		int Count = 0;
 		float TotalWeight = 0;
 		Vector2 BobsCenter = Vector2();
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
 			{
@@ -616,7 +616,7 @@ bool Camera::DisableOscillate = false;
 		int Count = 0;
 		float TotalWeight = 0;
 		Vector2 BobsCenter = Vector2();
-		for ( std::vector<Bob*>::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
 			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
 			{

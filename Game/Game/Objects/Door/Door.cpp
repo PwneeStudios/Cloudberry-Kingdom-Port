@@ -165,13 +165,13 @@ namespace CloudberryKingdom
 
 	void Door::HideBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 			( *bob )->getCore()->Show = false;
 	}
 
 	void Door::ShowBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 			( *bob )->getCore()->Show = true;
 	}
 
@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 
 	void Door::MoveBobs()
 	{
-		for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
+		for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 			MoveBobToHere( *bob );
 	}
 

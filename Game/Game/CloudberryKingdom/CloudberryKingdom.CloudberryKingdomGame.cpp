@@ -1130,7 +1130,7 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 		// Turn on/off immortality.
 		if ( Tools::Keyboard.IsKeyDownCustom( Keys::O ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::O ) )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
 				( *bob )->Immortal = !( *bob )->Immortal;
 			}

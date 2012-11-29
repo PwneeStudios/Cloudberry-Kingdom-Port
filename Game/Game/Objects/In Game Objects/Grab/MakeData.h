@@ -75,9 +75,9 @@ namespace CloudberryKingdom
 
 		void Init( const std::shared_ptr<PieceSeedData> &data );
 
-		std::vector<Bob*> MakeBobs( const std::shared_ptr<Level> &level );
+		BobVec MakeBobs( const std::shared_ptr<Level> &level );
 
-		std::shared_ptr<LevelPiece> MakeLevelPiece( const std::shared_ptr<Level> &level, std::vector<Bob*> bobs, int Length, int StartPhsxStep );
+		std::shared_ptr<LevelPiece> MakeLevelPiece( const std::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep );
 
 	private:
 		void InitializeInstanceFields();
