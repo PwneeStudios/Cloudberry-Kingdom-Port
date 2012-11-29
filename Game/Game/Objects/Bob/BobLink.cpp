@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	const bool &BobLink::getInactive() const
 	{
 		// Don't draw the bungee if we are a dead spaceship or if we explode on death and are dead
-		if ( ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode ) || dynamic_cast<BobPhsxSpaceship*>( j->getCore()->MyLevel->DefaultHeroType ) != 0 && (j->Dead || j->Dying || k->Dead || k->Dying) )
+		if ( ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode ) || std::dynamic_pointer_cast<BobPhsxSpaceship>( j->getCore()->MyLevel->DefaultHeroType ) != 0 && (j->Dead || j->Dying || k->Dead || k->Dying) )
 			return true;
 
 		// Don't draw the bungee if one of the players isn't being drawn.

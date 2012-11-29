@@ -63,19 +63,19 @@ namespace CloudberryKingdom
 
 	float DifficultyGroups::HeroDifficultyMod( float Difficulty, const std::shared_ptr<BobPhsx> &hero )
 	{
-		if ( dynamic_cast<BobPhsxBox*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxBox>( hero ) != 0 )
 			return -.235f;
-		if ( dynamic_cast<BobPhsxWheel*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxWheel>( hero ) != 0 )
 			return -.1f;
-		if ( dynamic_cast<BobPhsxRocketbox*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
 			return -.33f;
-		if ( dynamic_cast<BobPhsxSmall*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSmall>( hero ) != 0 )
 			return -.1f;
-		if ( dynamic_cast<BobPhsxSpaceship*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( hero ) != 0 )
 			return -.065f;
-		if ( dynamic_cast<BobPhsxDouble*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxDouble>( hero ) != 0 )
 			return 0;
-		if ( dynamic_cast<BobPhsxBouncy*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxBouncy>( hero ) != 0 )
 			return -0.435f;
 
 		return 0;
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		else if ( piece->GeometryType == LevelGeometry_DOWN )
 			piece->getRnd()->Choose(DownUpgrades)->Apply(piece, Difficulty);
 		// Cart level
-		else if ( dynamic_cast<BobPhsxRocketbox*>( hero ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
 		{
 			if ( Difficulty < .5f )
 				Difficulty -= .8f;

@@ -800,7 +800,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 
 	void Bob::UpdateColors()
 	{
-		if ( dynamic_cast<BobPhsxSpaceship*>( MyObjectType ) != 0 && PlayerObject->QuadList.size() > 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 && PlayerObject->QuadList.size() > 0 )
 		{
 			std::vector<BaseQuad*> ql = PlayerObject->QuadList;
 			if ( ql.size() >= 1 )
@@ -961,7 +961,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			if ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode )
 				return;
 
-			if ( dynamic_cast<BobPhsxSpaceship*>( MyObjectType ) != 0 )
+			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 )
 			{
 				return;
 			}
@@ -1254,7 +1254,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		Box->Current->Size = PlayerObject->BoxList[ 1 ]->Size() / 2;
 		Box2->Current->Size = PlayerObject->BoxList[ 2 ]->Size() / 2;
 
-		if ( getCore()->MyLevel->PlayMode != 0 && dynamic_cast<BobPhsxSpaceship*>(getCore()->MyLevel->DefaultHeroType) != 0 )
+		if ( getCore()->MyLevel->PlayMode != 0 && std::dynamic_pointer_cast<BobPhsxSpaceship>(getCore()->MyLevel->DefaultHeroType) != 0 )
 		{
 			Box->Current->Size *= 1.2f;
 			Box2->Current->Size *= 1.2f;
@@ -1678,7 +1678,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		if ( CanInteract )
 			if ( getCore()->MyLevel->PlayMode != 2 )
 			{
-				if ( dynamic_cast<BobPhsxSpaceship*>( getCore()->MyLevel->DefaultHeroType ) != 0 && getCore()->MyLevel->PlayMode == 0 )
+				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 && getCore()->MyLevel->PlayMode == 0 )
 				{
 					for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 					{

@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 
 	bool BlockBase::PostCollideDecision_Bottom( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( dynamic_cast<BobPhsxMeat*>( bob->MyPhsx ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Bottom_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Bottom_Normal( bob, Col, Overlap );
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 
 	bool BlockBase::PostCollideDecision_Side( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( dynamic_cast<BobPhsxMeat*>( bob->MyPhsx ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Side_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Side_Normal( bob, Col, Overlap );
@@ -384,7 +384,7 @@ namespace CloudberryKingdom
 
 	bool BlockBase::PostCollideDecision_Land( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( dynamic_cast<BobPhsxMeat*>( bob->MyPhsx ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Land_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Land_Normal( bob, Col, Overlap );
@@ -436,7 +436,7 @@ namespace CloudberryKingdom
 
 	void BlockBase::EdgeSafety( const std::shared_ptr<Bob> &bob, bool &Delete )
 	{
-		if ( dynamic_cast<BobPhsxMeat*>( bob->MyPhsx ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return;
 
 		if ( !Delete && !bob->MyPhsx->OnGround )

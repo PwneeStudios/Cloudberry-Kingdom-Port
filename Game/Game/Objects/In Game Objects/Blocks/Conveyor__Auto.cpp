@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		KeepUnused = Param( PieceSeed );
-		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_CONVEYOR ) ) );
 		}

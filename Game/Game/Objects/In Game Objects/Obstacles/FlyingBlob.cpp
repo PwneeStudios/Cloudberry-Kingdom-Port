@@ -636,7 +636,7 @@ float FlyingBlob::BobXFriction = 1;
 
 			if ( DoInteraction && ( UnderFoot || SideHit ) )
 			{
-				if ( dynamic_cast<BobPhsxSpaceship*>( getCore()->MyLevel->DefaultHeroType ) != 0 )
+				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 )
 					UnderFoot = false;
 
 				if ( UnderFoot )

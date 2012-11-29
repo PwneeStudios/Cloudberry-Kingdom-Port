@@ -108,7 +108,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	const std::shared_ptr<BobPhsxNormal> &CustomHero_GUI::getNormalHero() const
 	{
-		return dynamic_cast<BobPhsxNormal*>( Hero );
+		return std::dynamic_pointer_cast<BobPhsxNormal>( Hero );
 	}
 
 	CustomHero_GUI::CustomHero_GUI( const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
@@ -222,7 +222,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 	void CustomHero_GUI::MakeBobPhsx()
 	{
 		// Error check
-		if ( dynamic_cast<BobPhsxSpaceship*>( Base ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( Base ) != 0 )
 		{
 			Jump = BobPhsxNormal::getInstance();
 		}
@@ -559,7 +559,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::UpdateBaseHero()
 	{
-		Base = dynamic_cast<BobPhsx*>( BaseList->getCurObj() );
+		Base = std::dynamic_pointer_cast<BobPhsx>( BaseList->getCurObj() );
 		BaseListIndex = BaseList->ListIndex;
 
 		UpdateSliders();
@@ -567,7 +567,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::UpdateSizeHero()
 	{
-		Size = dynamic_cast<BobPhsx*>( SizeList->getCurObj() );
+		Size = std::dynamic_pointer_cast<BobPhsx>( SizeList->getCurObj() );
 		SizeListIndex = SizeList->ListIndex;
 
 		UpdateSliders();
@@ -575,7 +575,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::UpdateJumpHero()
 	{
-		Jump = dynamic_cast<BobPhsx*>( JumpList->getCurObj() );
+		Jump = std::dynamic_pointer_cast<BobPhsx>( JumpList->getCurObj() );
 		JumpListIndex = JumpList->ListIndex;
 
 		UpdateSliders();
@@ -762,7 +762,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	bool CustomHero_GUI::AdvancedAvailable()
 	{
-		if ( dynamic_cast<BobPhsxSpaceship*>( Base ) != 0 && !( dynamic_cast<BobPhsxScale*>( Size ) != 0 ) )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( Base ) != 0 && !( std::dynamic_pointer_cast<BobPhsxScale>( Size ) != 0 ) )
 			return false;
 		else
 			return true;
@@ -772,13 +772,13 @@ int CustomHero_GUI::JumpListIndex = 0;
 	{
 		MaxFallSpeedSlider->Show = JumpLengthSlider->Show = JumpAccelSlider->Show = FrictionSlider->Show = true;
 
-		DoubleJumpAccelSlider->Show = DoubleJumpLengthSlider->Show = NumJumpsSlider->Show = dynamic_cast<BobPhsxDouble*>( Jump ) != 0 && dynamic_cast<BobPhsxNormal*>( Base ) != 0;
+		DoubleJumpAccelSlider->Show = DoubleJumpLengthSlider->Show = NumJumpsSlider->Show = std::dynamic_pointer_cast<BobPhsxDouble>( Jump ) != 0 && std::dynamic_pointer_cast<BobPhsxNormal>( Base ) != 0;
 
-		JetPackFuelSlider->Show = JetPackSlider->Show = dynamic_cast<BobPhsxJetman*>( Jump ) != 0 && dynamic_cast<BobPhsxNormal*>( Base ) != 0;
+		JetPackFuelSlider->Show = JetPackSlider->Show = std::dynamic_pointer_cast<BobPhsxJetman>( Jump ) != 0 && std::dynamic_pointer_cast<BobPhsxNormal>( Base ) != 0;
 
-		SizeSlider->Show = PhasedSizeSlider->Show = PhasedGravitySlider->Show = PhasePeriodSlider->Show = dynamic_cast<BobPhsxScale*>( Size ) != 0;
+		SizeSlider->Show = PhasedSizeSlider->Show = PhasedGravitySlider->Show = PhasePeriodSlider->Show = std::dynamic_pointer_cast<BobPhsxScale>( Size ) != 0;
 
-		GravitySlider->Show = dynamic_cast<BobPhsxNormal*>( Base ) != 0;
+		GravitySlider->Show = std::dynamic_pointer_cast<BobPhsxNormal>( Base ) != 0;
 	}
 
 	void CustomHero_GUI::Next()

@@ -37,7 +37,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 	{
 		//MustHitGroundToReadyJump = true;
 
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( phsx );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->BobJumpLength = 1;

@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxJetman::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( phsx );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->JetPack = true;
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 		phsx->CapePrototype = Cape::CapeType_NONE;
 
-		if ( dynamic_cast<BobPhsxWheel*>( phsx ) != 0 && 0 != normal )
+		if ( std::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 && 0 != normal )
 		{
 			phsx->JetpackModel = false;
 

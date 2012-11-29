@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::MyPhsxStep();
 
-		std::shared_ptr<BobPhsxCharSelect> DollPhsx = dynamic_cast<BobPhsxCharSelect*>( MyDoll->MyPhsx );
+		std::shared_ptr<BobPhsxCharSelect> DollPhsx = std::dynamic_pointer_cast<BobPhsxCharSelect>( MyDoll->MyPhsx );
 
 		MyDoll->CapeWind = Cape::SineWind( Vector2( -1.25f, -.1f ),.5f,.05f, Tools::t ) *.7f;
 		MyDoll->MyPhsx->OnGround = true;

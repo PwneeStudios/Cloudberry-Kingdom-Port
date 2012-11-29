@@ -273,18 +273,18 @@ int BobPhsx::CustomPhsxData::Length = 16;
 	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( const std::shared_ptr<BobPhsx> &BaseType, const std::shared_ptr<BobPhsx> &Shape, const std::shared_ptr<BobPhsx> &MoveMod, const std::shared_ptr<BobPhsx> &Special )
 	{
 		// Error catch. Spaceship can't be rocketman or double jump
-		if ( dynamic_cast<BobPhsxSpaceship*>( BaseType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( BaseType ) != 0 )
 			MoveMod = BobPhsxNormal::getInstance();
 
 		// Error catch. Invert must be classic, and must be the base class.
-		if ( dynamic_cast<BobPhsxInvert*>( MoveMod ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxInvert>( MoveMod ) != 0 )
 		{
 			BaseType = BobPhsxInvert::getInstance();
 			MoveMod = BobPhsxNormal::getInstance();
 		}
 
 		// Error catch. Time Master must be classic, and must be the base class.
-		if ( dynamic_cast<BobPhsxTime*>( Special ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxTime>( Special ) != 0 )
 		{
 			BaseType = BobPhsxTime::getInstance();
 			Special = BobPhsxNormal::getInstance();
@@ -377,15 +377,15 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		ModCapeSize *= data[ CustomData_SIZE ];
 
 		// Wheelie phsx
-		std::shared_ptr<BobPhsxWheel> wheel = dynamic_cast<BobPhsxWheel*>( this );
+		std::shared_ptr<BobPhsxWheel> wheel = std::dynamic_pointer_cast<BobPhsxWheel>( this );
 		if ( 0 != wheel )
 		{
 			wheel->AngleAcc *= static_cast<float>( pow( data[ CustomData_ACCEL ], 1.5f ) );
 			wheel->MaxAngleSpeed *= data[ CustomData_MAXSPEED ];
 		}
 
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( this );
-		if ( dynamic_cast<BobPhsxNormal*>( normal ) != 0 )
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( this );
+		if ( std::dynamic_pointer_cast<BobPhsxNormal>( normal ) != 0 )
 		{
 			// Normal phsx
 			BobMaxFallSpeed *= data[ CustomData_MAXFALL ];

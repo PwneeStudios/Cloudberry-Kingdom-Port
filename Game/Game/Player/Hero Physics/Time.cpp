@@ -34,7 +34,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 	{
 		phsx->UseGroundSpeed = false;
 
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( phsx );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 		}

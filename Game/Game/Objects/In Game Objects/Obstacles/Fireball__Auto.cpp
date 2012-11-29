@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		NumOffsets = PieceSeed->Style_MASOCHISTIC ? 100 : 16;
 
 		KeepUnused = Param( PieceSeed );
-		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FIREBALL ) ) );
 		}

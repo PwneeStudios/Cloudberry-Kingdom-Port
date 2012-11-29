@@ -56,7 +56,7 @@ int LoadingScreen::MinLoadLength = 0;
 		else
 			type = Tools::CurGameData->DefaultHeroType;
 
-		if ( dynamic_cast<BobPhsxSpaceship*>( type ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 		{
 			TextObject = std::make_shared<EzText>( _T( "?" ), Resources::Font_Grobold42, true, true );
 			CkColorHelper::_x_x_HappyBlueColor( TextObject );
@@ -86,7 +86,7 @@ int LoadingScreen::MinLoadLength = 0;
 						( *quad )->Show = false;
 			}
 
-			if ( dynamic_cast<BobPhsxSpaceship*>( type ) != 0 )
+			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 			{
 				for ( std::vector<BaseQuad*>::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
 					( *quad )->MyDrawOrder = ObjectDrawOrder_WITH_OUTLINE;

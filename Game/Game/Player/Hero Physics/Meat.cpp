@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		phsx->ModInitSize = 1.25f * Vector2( .27f,.27f ) * modsize;
 		phsx->CapePrototype = Cape::CapeType_SMALL;
 
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( phsx );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->BobJumpLength = static_cast<int>( normal->BobJumpLength * 1.5f );

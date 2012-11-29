@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		{
 			for ( std::vector<BobLink*>::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
-				if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
+				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
 					continue;
 				( *link )->Draw( Recordings[ ( *link )->_j ]->GetBoxCenter( Step ), Recordings[ ( *link )->_k ]->GetBoxCenter( Step ) );
 			}
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 				continue;
 			if ( Step < Length - 1 )
 			{
-				if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
+				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 					if ( Step > 0 && !Recordings[ i ]->GetAlive( Step ) )
 					{
 						if ( Recordings[ i ]->GetAlive( Step - 1 ) )
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 				Tools::QDrawer->Flush();
 			}
 			else
-				if ( Step == Length - 1 && !level->ReplayPaused && !( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
+				if ( Step == Length - 1 && !level->ReplayPaused && !( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
 					ParticleEffects::AddPop( level, Recordings[ i ]->GetBoxCenter( Length - 1 ) );
 		}
 	}

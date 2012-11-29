@@ -753,21 +753,21 @@ namespace CloudberryKingdom
 	float Level::SetStepMultiplier( Vector2 &Size, Vector2 &Step )
 	{
 		float StepMultiplier = 1;
-		if ( dynamic_cast<BobPhsxJetman*>( DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxJetman>( DefaultHeroType ) != 0 )
 			StepMultiplier = 3;
-		else if ( dynamic_cast<BobPhsxDouble*>( DefaultHeroType ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxDouble>( DefaultHeroType ) != 0 )
 			StepMultiplier = 1.75f;
-		else if ( dynamic_cast<BobPhsxSmall*>( DefaultHeroType ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxSmall>( DefaultHeroType ) != 0 )
 		{
 			Size = Vector2( 100, 50 );
 			Step = Vector2( 240, 390 );
 			StepMultiplier = 1.5f;
 		}
-		else if ( dynamic_cast<BobPhsxBox*>( DefaultHeroType ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxBox>( DefaultHeroType ) != 0 )
 			StepMultiplier = .7f;
-		else if ( dynamic_cast<BobPhsxBig*>( DefaultHeroType ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxBig>( DefaultHeroType ) != 0 )
 			StepMultiplier = .7f;
-		else if ( dynamic_cast<BobPhsxMeat*>( DefaultHeroType ) != 0 )
+		else if ( std::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
 		{
 			Size = Vector2( 100, 50 );
 			Step = Vector2( 240, 390 );
@@ -1910,7 +1910,7 @@ int Step1, Level::Step2 = 0;
 		{
 			if ( Style_MY_FINAL_PLATS_TYPE == StyleData::FinalPlatsType_DOOR )
 			{
-				if ( DefaultHeroType == BobPhsxRocketbox::getInstance() || dynamic_cast<BobPhsxSpaceship*>(DefaultHeroType) != 0 )
+				if ( DefaultHeroType == BobPhsxRocketbox::getInstance() || std::dynamic_pointer_cast<BobPhsxSpaceship>(DefaultHeroType) != 0 )
 					MakeFinalPlat = std::make_shared<MakeFinalDoor_Float>( shared_from_this() );
 				else
 					MakeFinalPlat = std::make_shared<MakeFinalDoor>( shared_from_this() );

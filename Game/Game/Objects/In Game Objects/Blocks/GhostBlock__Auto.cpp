@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		BoxType = BoxTypes_TOP_ONLY;
 
 		KeepUnused = Param( PieceSeed );
-		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_GHOST_BLOCK ) ) );
 		}

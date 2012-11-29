@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 		phsx->DoubleJumpModel = true;
 
-		std::shared_ptr<BobPhsxNormal> normal = dynamic_cast<BobPhsxNormal*>( phsx );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->JetPack = false;
