@@ -150,12 +150,46 @@ public:
 
 };
 
+class GamePadTriggers
+{
+
+public:
+
+	float Left;
+	float Right;
+
+};
+
+class GamePadDPad
+{
+
+public:
+
+	ButtonState Down;
+	ButtonState Left;
+	ButtonState Right;
+	ButtonState Up;
+
+};
+
+class GamePadThumbSticks
+{
+
+public:
+
+	Vector2 Left;
+	Vector2 Right;
+};
+
 class GamePadState
 {
 	
 public:
 
 	GamePadButtons Buttons;
+	GamePadTriggers Triggers;
+	GamePadDPad DPad;
+	GamePadThumbSticks ThumbSticks;
 };
 
 class GamePad
@@ -222,6 +256,7 @@ public:
 
 	std::vector<Keys> GetPressedKeys()
 	{
+		return std::vector<Keys>();
 	}
 
 };

@@ -459,7 +459,7 @@ bool ButtonCheck::PreLogIn = true;
 		else
 			keyboard = Tools::Keyboard;
 
-		Data.Down = keyboard.IsKeyDownCustom( Key );
+		Data.Down = KeyboardExtension::IsKeyDownCustom( keyboard, Key );
 	#endif
 
 		// Get previous data to calculate Pressed and Released
@@ -656,44 +656,44 @@ bool ButtonCheck::PreLogIn = true;
 		switch ( Button )
 		{
 			case ControllerButtons_START:
-				Data.Down = ( Pad.Buttons->Start == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Start == ButtonState_Pressed );
 				break;
 			case ControllerButtons_BACK:
-				Data.Down = ( Pad.Buttons->Back == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Back == ButtonState_Pressed );
 				break;
 			case ControllerButtons_A:
-				Data.Down = ( Pad.Buttons->A == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.A == ButtonState_Pressed );
 				break;
 			case ControllerButtons_B:
-				Data.Down = ( Pad.Buttons->B == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.B == ButtonState_Pressed );
 				break;
 			case ControllerButtons_X:
-				Data.Down = ( Pad.Buttons->X == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.X == ButtonState_Pressed );
 				break;
 			case ControllerButtons_Y:
-				Data.Down = ( Pad.Buttons->Y == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Y == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LJBUTTON:
-				Data.Down = ( Pad.Buttons->LeftStick == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.LeftStick == ButtonState_Pressed );
 				break;
 			case ControllerButtons_RJBUTTON:
-				Data.Down = ( Pad.Buttons->RightStick == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.RightStick == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LS:
-				Data.Down = ( Pad.Buttons->LeftShoulder == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.LeftShoulder == ButtonState_Pressed );
 				break;
 			case ControllerButtons_RS:
-				Data.Down = ( Pad.Buttons->RightShoulder == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.RightShoulder == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LT:
 			{
-					Data.Down = ( Pad.Triggers.Left > ::5 );
+					Data.Down = ( Pad.Triggers.Left > 0.5f );
 					Data.Squeeze = Pad.Triggers.Left;
 					break;
 			}
 			case ControllerButtons_RT:
 			{
-					Data.Down = ( Pad.Triggers.Right > ::5 );
+					Data.Down = ( Pad.Triggers.Right > 0.5f );
 					Data.Squeeze = Pad.Triggers.Right;
 					break;
 			}
@@ -706,13 +706,13 @@ bool ButtonCheck::PreLogIn = true;
 			case ControllerButtons_DPAD:
 			{
 					Data.Dir = Vector2();
-					if ( Pad.DPad.Right == ButtonState::Pressed )
+					if ( Pad.DPad.Right == ButtonState_Pressed )
 						Data.Dir = Vector2( 1, 0 );
-					if ( Pad.DPad.Up == ButtonState::Pressed )
+					if ( Pad.DPad.Up == ButtonState_Pressed )
 						Data.Dir = Vector2( 0, 1 );
-					if ( Pad.DPad.Left == ButtonState::Pressed )
+					if ( Pad.DPad.Left == ButtonState_Pressed )
 						Data.Dir = Vector2( -1, 0 );
-					if ( Pad.DPad.Down == ButtonState::Pressed )
+					if ( Pad.DPad.Down == ButtonState_Pressed )
 						Data.Dir = Vector2( 0, -1 );
 			}
 				break;
@@ -726,18 +726,18 @@ bool ButtonCheck::PreLogIn = true;
 		if ( Button == ControllerButtons_A )
 		{
 			if ( Prev )
-				Data.Down |= Tools::Mouse.LeftButton == ButtonState::Pressed;
+				Data.Down |= Tools::Mouse.LeftButton == ButtonState_Pressed;
 			else
-				Data.Down |= Tools::PrevMouse.LeftButton == ButtonState::Pressed;
+				Data.Down |= Tools::PrevMouse.LeftButton == ButtonState_Pressed;
 		}
 		else
-			Data.Down |= keyboard.IsKeyDownCustom( key );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, key );
 
 		if ( SecondaryKey != Keys_None )
-			Data.Down |= keyboard.IsKeyDownCustom( SecondaryKey );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, SecondaryKey );
 
 		if ( TertiaryKey != Keys_None )
-			Data.Down |= keyboard.IsKeyDownCustom( TertiaryKey );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, TertiaryKey );
 
 		key = Keys_Escape;
 
@@ -750,10 +750,10 @@ bool ButtonCheck::PreLogIn = true;
 			key = Back_Secondary;
 
 		if ( key != Keys_Escape )
-			Data.Down |= keyboard.IsKeyDownCustom( key );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, key );
 
 		if ( Button == ControllerButtons_A )
-			Data.Down |= keyboard.IsKeyDownCustom( Keys_Enter ) || keyboard.IsKeyDownCustom( Keys_Space );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Enter ) || KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Space );
 	//#else
 	//    Data.Down |= keyboard.IsKeyDownCustom(key);
 	//#endif
@@ -761,21 +761,21 @@ bool ButtonCheck::PreLogIn = true;
 		if ( Button == ControllerButtons_LJ )
 		{
 			Vector2 KeyboardDir = Vector2();
-			if ( keyboard.IsKeyDownCustom( Keys_Left ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Left ) )
 				KeyboardDir.X = -1;
-			if ( keyboard.IsKeyDownCustom( Keys_Right ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Right ) )
 				KeyboardDir.X = 1;
-			if ( keyboard.IsKeyDownCustom( Keys_Up ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Up ) )
 				KeyboardDir.Y = 1;
-			if ( keyboard.IsKeyDownCustom( Keys_Down ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Down ) )
 				KeyboardDir.Y = -1;
-			if ( keyboard.IsKeyDownCustom( Left_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Left_Secondary ) )
 				KeyboardDir.X = -1;
-			if ( keyboard.IsKeyDownCustom( Right_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Right_Secondary ) )
 				KeyboardDir.X = 1;
-			if ( keyboard.IsKeyDownCustom( Up_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Up_Secondary ) )
 				KeyboardDir.Y = 1;
-			if ( keyboard.IsKeyDownCustom( Down_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Down_Secondary ) )
 				KeyboardDir.Y = -1;
 
 			if ( KeyboardDir.LengthSquared() > Data.Dir.LengthSquared() )
