@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		virtual void MyDraw();
 
 	public:
-		std::shared_ptr<Multicaster_1<GUI_Timer_Base*> > OnTimeExpired;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_Timer_Base> > > OnTimeExpired;
 
 		/// <summary>
 		/// When true the timer will continue to count down even when every player is dead.

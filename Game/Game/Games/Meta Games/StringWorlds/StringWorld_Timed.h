@@ -5,54 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Timer_Base;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Score;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Level;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Timer;
-}
-
-namespace CloudberryKingdom
-{
-	class TimerWarning;
-}
-
-namespace CloudberryKingdom
-{
-	class CoinScoreMultiplierObject;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class StringWorldTimed : public StringWorldGameData
 	{
 	private:
-		class StringWorldOnTimerExpiredLambda : public Lambda_1<GUI_Timer_Base*>
+		class StringWorldOnTimerExpiredLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
 		{
 		private:
 			std::shared_ptr<GUI_Score> MyGUI_Score;
@@ -65,7 +21,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnSwapLambda : public Lambda_1<LevelSeedData*>
+		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
 		private:
 			std::shared_ptr<StringWorldTimed> ch;
@@ -85,7 +41,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CoinScoreMultiplierObject> MyCoinScoreMultiplier;
 
 	public:
-		StringWorldTimed( const std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer );
+		StringWorldTimed( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer );
 
 		virtual void Release();
 
