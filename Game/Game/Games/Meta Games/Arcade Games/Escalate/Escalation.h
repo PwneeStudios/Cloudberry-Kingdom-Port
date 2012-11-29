@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnBeginLambda : public LambdaFunc_1<Level*, bool>
+		class OnBeginLambda : public LambdaFunc_1<std::shared_ptr<Level> , bool>
 		{
 		public:
 			OnBeginLambda();
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MakeMyModParamsHelper : public Lambda_2<Level*, PieceSeedData*>
+		class MakeMyModParamsHelper : public Lambda_2<std::shared_ptr<Level> , std::shared_ptr<PieceSeedData> >
 		{
 		public:
 			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );

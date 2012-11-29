@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 	class SavedSeedsGUI : public CkBaseMenu
 	{
 	private:
-		class PostMakeStandardLoadHelper : public Lambda_1<Level*>
+		class PostMakeStandardLoadHelper : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::shared_ptr<LevelSeedData> seed;

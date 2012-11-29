@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 	class CustomLevel_GUI : public CkBaseMenu
 	{
 	private:
-		class StartLevelFromMenDataStandardLoadProxy : public Lambda_1<Level*>
+		class StartLevelFromMenDataStandardLoadProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::shared_ptr<LevelSeedData> data;
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartLevelFromMenuDataInitializeHelper : public Lambda_1<PieceSeedData*>
+		class StartLevelFromMenuDataInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
 		private:
 			std::shared_ptr<CustomLevel_GUI> clGui;
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartLevelEnableLoadProxy : public Lambda_1<Level*>
+		class StartLevelEnableLoadProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::shared_ptr<LevelSeedData> data;

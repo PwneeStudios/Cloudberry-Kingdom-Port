@@ -290,7 +290,7 @@ Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACT
 		// Preset difficulty
 		else
 		{
-			std::shared_ptr<Lambda_1<PieceSeedData*> > custom;
+			std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > custom;
 
 			custom = DifficultyGroups::FixedPieceMod( DiffList->ListIndex - 1, data );
 

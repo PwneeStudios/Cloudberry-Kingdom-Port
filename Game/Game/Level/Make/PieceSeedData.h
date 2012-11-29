@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	public:
 		void CalculateSimple();
 
-		std::shared_ptr<Lambda_1<Level*> > PreStage1, PreStage2;
+		std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > PreStage1, PreStage2;
 
 		std::shared_ptr<AutoGen_Parameters> operator []( const std::shared_ptr<AutoGen> &gen );
 

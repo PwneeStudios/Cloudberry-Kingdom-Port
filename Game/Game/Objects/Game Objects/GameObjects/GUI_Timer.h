@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnCompleteLevelProxy : public Lambda_1<Level*>
+		class OnCompleteLevelProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::shared_ptr<GUI_Timer> timer;

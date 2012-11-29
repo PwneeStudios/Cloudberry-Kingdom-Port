@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MakeTestLevelInitializeHelper : public Lambda_1<PieceSeedData*>
+		class MakeTestLevelInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
 		private:
 			std::shared_ptr<CloudberryKingdomGame> ckg;
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class TestLevelPostMakeProxy : public Lambda_1<Level*>
+		class TestLevelPostMakeProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::shared_ptr<CloudberryKingdomGame> ckg;

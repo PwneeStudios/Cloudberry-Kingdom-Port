@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class FixedPieceModHelper : public Lambda_1<PieceSeedData*>
+		class FixedPieceModHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
 		private:
 			float Difficulty;

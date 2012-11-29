@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnLevelBeginLambda : public LambdaFunc_1<Level*, bool>
+		class OnLevelBeginLambda : public LambdaFunc_1<std::shared_ptr<Level> , bool>
 		{
 		public:
 			OnLevelBeginLambda();
