@@ -642,7 +642,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		CenterFlipOnBox = obj->CenterFlipOnBox;
 
 		ParentQuad = std::make_shared<Quad>( obj->ParentQuad, DeepClone );
-		ParentQuad->ParentObject = this;
+		ParentQuad->ParentObject = shared_from_this();
 		ParentQuad->MyEffect = obj->ParentQuad->MyEffect;
 		ParentQuad->MyTexture = obj->ParentQuad->MyTexture;
 
@@ -661,7 +661,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 					// FIXME: Check static_pointer_cast.
 					std::shared_ptr<Quad> nquad = std::make_shared<Quad>( std::static_pointer_cast<Quad>( *quad ), DeepClone );
 					QuadList.push_back( nquad );
-					nquad->ParentObject = this;
+					nquad->ParentObject = shared_from_this();
 					if ( ( *quad )->ParentQuad == ( *quad )->ParentObject->ParentQuad )
 						ParentQuad->AddQuadChild( nquad );
 				}
@@ -765,7 +765,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		CenterFlipOnBox = true;
 
 		ParentQuad = std::make_shared<Quad>();
-		ParentQuad->ParentObject = this;
+		ParentQuad->ParentObject = shared_from_this();
 		ParentQuad->MyEffect = BaseEffect;
 		ParentQuad->MyTexture = BaseTexture;
 
@@ -919,7 +919,7 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 	{
 		quad->Update();
 		QuadList.push_back( quad );
-		quad->ParentObject = this;
+		quad->ParentObject = shared_from_this();
 		if ( ChangeParent )
 			ParentQuad->AddQuadChild( quad );
 	}

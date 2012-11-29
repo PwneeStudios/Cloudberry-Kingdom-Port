@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 		int Count;
 
 	protected:
-		std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > GetSeedFunc;
+		std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > GetSeedFunc;
 	private:
 		std::shared_ptr<LevelSeedData> NextLevelSeed, CurLevelSeed;
 

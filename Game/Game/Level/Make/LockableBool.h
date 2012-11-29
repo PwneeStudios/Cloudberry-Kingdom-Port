@@ -6,6 +6,8 @@ namespace CloudberryKingdom
 
 	class LockableBool
 	{
+	public:
+		Mutex MyMutex;
 
 	private:
 		bool _val;

@@ -5,49 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Text;
-}
-
-namespace CloudberryKingdom
-{
-	class Listener;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ScreenSaver : public StringWorldGameData
 	{
 	private:
@@ -239,7 +196,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<GUI_Text> PressA;
 
-		const static int &getMandatoryWatchLength();
+		const static int getMandatoryWatchLength();
 	private:
 		static const int MandatoryWatchLength_Initial = 400;
 

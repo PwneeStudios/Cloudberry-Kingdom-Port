@@ -11,28 +11,28 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float MovingBlockLevel = PieceSeed->MyUpgrades1[ Upgrade_MOVING_BLOCK ];
+		float MovingBlockLevel = PieceSeed->MyUpgrades1->Get( Upgrade_MOVING_BLOCK );
 
 		Aspect = AspectType_SQUARE;
 
 		Size = Param( PieceSeed );
-		Size.SetVal( 230 - ( 230 - 50 ) / 10 * u[ Upgrade_MOVING_BLOCK ] );
+		Size.SetVal( 230 - ( 230 - 50 ) / 10 * u->Get( Upgrade_MOVING_BLOCK ) );
 
 		Motion = static_cast<MotionType>( level->getRnd()->Choose(MotionLevel, static_cast<int>(MovingBlockLevel)) );
 
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_MOVING_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_MOVING_BLOCK ) ) );
 		}
 
 		FillWeight = Param( PieceSeed );
-		FillWeight.SetVal( u[ Upgrade_MOVING_BLOCK ] );
+		FillWeight.SetVal( u->Get( Upgrade_MOVING_BLOCK ) );
 
 		Range = Param( PieceSeed );
-		Range.SetVal( DifficultyHelper::Interp( 240, 600,.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_MOVING_BLOCK ] ) ) );
+		Range.SetVal( DifficultyHelper::Interp( 240, 600,.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_MOVING_BLOCK ) ) ) );
 
-		float speed = 280 - 32 * u[ Upgrade_SPEED ] + 40 *.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_MOVING_BLOCK ] );
+		float speed = 280 - 32 * u->Get( Upgrade_SPEED ) + 40 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_MOVING_BLOCK ) );
 		Period = Param( PieceSeed );
 		Period.SetVal( CoreMath::Restrict( 40, 1000, speed ) );
 	}
@@ -140,7 +140,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get MovingBlock parameters
-		std::shared_ptr<MovingBlock_Parameters> Params = static_cast<MovingBlock_Parameters*>( level->Style_FIND_PARAMS( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> Params = static_cast<MovingBlock_Parameters*>( level->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 0 );
 		switch ( Params->Aspect )

@@ -25,11 +25,11 @@ namespace CloudberryKingdom
 		if ( PieceSeed->getu()[ Upgrade_CEILING ] <= 0 )
 			Make = false;
 
-		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u[ Upgrade_CEILING ] ) );
+		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u->Get( Upgrade_CEILING ) ) );
 
-		WidthRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 450, 1450 ), Vector2( 80, 80 ), u[ Upgrade_CEILING ] ) );
+		WidthRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 450, 1450 ), Vector2( 80, 80 ), u->Get( Upgrade_CEILING ) ) );
 
-		BufferSize = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 150, 10, u[ Upgrade_CEILING ] ) );
+		BufferSize = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 150, 10, u->Get( Upgrade_CEILING ) ) );
 	}
 
 	void Ceiling_Parameters::InitializeInstanceFields()
@@ -75,7 +75,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
-		std::shared_ptr<Ceiling_Parameters> Params = static_cast<Ceiling_Parameters*>( level->Style_FIND_PARAMS( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = static_cast<Ceiling_Parameters*>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		float MaxStartY = -100000;
 		for ( int i = 0; i < level->CurMakeData->NumInitialBobs; i++ )
@@ -89,7 +89,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		if ( !level->MyTileSet->HasCeiling )
 			return;
 
-		std::shared_ptr<Ceiling_Parameters> Params = static_cast<Ceiling_Parameters*>( level->Style_FIND_PARAMS( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = static_cast<Ceiling_Parameters*>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

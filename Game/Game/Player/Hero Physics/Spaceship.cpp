@@ -404,7 +404,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		Style_UPPER_SAFETY_NET_OFFSET = -100;
 		Style_LOWER_SAFETY_NET_OFFSET = -200;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = static_cast<GhostBlock_Parameters*>( Style_FIND_PARAMS( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> GhParams = static_cast<GhostBlock_Parameters*>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
 	}
 

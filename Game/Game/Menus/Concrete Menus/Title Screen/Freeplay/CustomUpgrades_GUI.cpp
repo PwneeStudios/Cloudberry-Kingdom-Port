@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::BlockPieceSeedSetter::Apply()
 	{
-		gui->PieceSeed->MyUpgrades1[ upgrade ] = slider->getMyFloat()->MyFloat;
+		gui->PieceSeed->MyUpgrades1->Get( upgrade ) = slider->getMyFloat()->MyFloat;
 
 		// Set the Fallingblock to an O-face when maxed out
 		if ( slider == gui->MyMenu->getCurItem() )
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::PieceSeedSetter::Apply()
 	{
-		gui->PieceSeed->MyUpgrades1[ upgrade ] = slider->getMyFloat()->MyFloat;
+		gui->PieceSeed->MyUpgrades1->Get( upgrade ) = slider->getMyFloat()->MyFloat;
 	}
 
 	CustomUpgrades_GUI::AddUpgradeAdditionalOnSelect::AddUpgradeAdditionalOnSelect( const std::shared_ptr<CustomUpgrades_GUI> &cuGui, const std::shared_ptr<MenuSlider> &slider, Upgrade upgrade )
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 
 	float CustomUpgrades_GUI::UpgradesSliderLambda::Apply()
 	{
-		return cu->PieceSeed->MyUpgrades1[ upgrade ];
+		return cu->PieceSeed->MyUpgrades1->Get( upgrade );
 	}
 
 	CustomUpgrades_GUI::StartLevelProxy::StartLevelProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui )

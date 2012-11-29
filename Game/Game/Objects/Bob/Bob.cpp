@@ -1710,7 +1710,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			}
 			else
 			{
-				std::shared_ptr<Ceiling_Parameters> CeilingParams = static_cast<Ceiling_Parameters*>( getCore()->MyLevel->CurPiece->MyData->Style_FIND_PARAMS(Ceiling_AutoGen::getInstance()) );
+				std::shared_ptr<Ceiling_Parameters> CeilingParams = static_cast<Ceiling_Parameters*>( getCore()->MyLevel->CurPiece->MyData->Style->FindParams(Ceiling_AutoGen::getInstance()) );
 
 				for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 				{

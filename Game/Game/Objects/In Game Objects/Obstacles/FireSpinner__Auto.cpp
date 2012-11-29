@@ -16,29 +16,29 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
-		float FirespinnerLevel = PieceSeed->MyUpgrades1[ Upgrade_FIRE_SPINNER ];
+		float FirespinnerLevel = PieceSeed->MyUpgrades1->Get( Upgrade_FIRE_SPINNER );
 		if ( FirespinnerLevel > 6 )
 			NumOffsets = 8;
 		else
 			NumOffsets = 4;
 
 		BobWidthLevel = Param( PieceSeed );
-		BobWidthLevel.SetVal( u[ Upgrade_FIRE_SPINNER ] );
+		BobWidthLevel.SetVal( u->Get( Upgrade_FIRE_SPINNER ) );
 
 		MinDist = Param( PieceSeed );
-		MinDist.SetVal( DifficultyHelper::Interp159( 650, 270, 110, u[ Upgrade_FIRE_SPINNER ] ) );
+		MinDist.SetVal( DifficultyHelper::Interp159( 650, 270, 110, u->Get( Upgrade_FIRE_SPINNER ) ) );
 
 		Length = Param( PieceSeed );
-		Length.SetVal( 240 + 36 * u[ Upgrade_FIRE_SPINNER ] );
+		Length.SetVal( 240 + 36 * u->Get( Upgrade_FIRE_SPINNER ) );
 
 		Period = Param( PieceSeed );
-		Period.SetVal( __max( 38, 150 + 13 * u[ Upgrade_FIRE_SPINNER ] - 13 * u[ Upgrade_SPEED ] ) );
+		Period.SetVal( __max( 38, 150 + 13 * u->Get( Upgrade_FIRE_SPINNER ) - 13 * u->Get( Upgrade_SPEED ) ) );
 
 		MinDensity = Param( PieceSeed );
-		MinDensity.SetVal( u[ Upgrade_FIRE_SPINNER ] == 0 ? 0 : DifficultyHelper::Interp( 50, 80, u[ Upgrade_FIRE_SPINNER ] ) );
+		MinDensity.SetVal( u->Get( Upgrade_FIRE_SPINNER ) == 0 ? 0 : DifficultyHelper::Interp( 50, 80, u->Get( Upgrade_FIRE_SPINNER ) ) );
 
 		MaxDensity = Param( PieceSeed );
-		MaxDensity.SetVal( u[ Upgrade_FIRE_SPINNER ] == 0 ? 0 : DifficultyHelper::Interp( 50, 150, u[ Upgrade_FIRE_SPINNER ] ) );
+		MaxDensity.SetVal( u->Get( Upgrade_FIRE_SPINNER ) == 0 ? 0 : DifficultyHelper::Interp( 50, 150, u->Get( Upgrade_FIRE_SPINNER ) ) );
 	}
 
 	FireSpinner_AutoGen::Cleanup_2Proxy::Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params )
@@ -78,7 +78,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = static_cast<FireSpinner_Parameters*>( level->Style_FIND_PARAMS( FireSpinner_AutoGen::getInstance() ) );
+		std::shared_ptr<FireSpinner_Parameters> Params = static_cast<FireSpinner_Parameters*>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
 		float SpinnerTopOffset = level->getInfo()->Spinners->TopOffset;
 		float SpinnerBottomOffset = level->getInfo()->Spinners->BottomOffset;
@@ -150,7 +150,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = static_cast<FireSpinner_Parameters*>( level->Style_FIND_PARAMS( FireSpinner_AutoGen::getInstance() ) );
+		std::shared_ptr<FireSpinner_Parameters> Params = static_cast<FireSpinner_Parameters*>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_FIRE_SPINNER, std::make_shared<Cleanup_2Proxy>( Params ), BL, TR );
 	}

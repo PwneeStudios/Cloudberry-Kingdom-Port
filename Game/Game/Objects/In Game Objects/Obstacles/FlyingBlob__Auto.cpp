@@ -13,28 +13,28 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float FlyingBlobLevel = PieceSeed->MyUpgrades1[ Upgrade_FLY_BLOB ];
+		float FlyingBlobLevel = PieceSeed->MyUpgrades1->Get( Upgrade_FLY_BLOB );
 
 		Motion = static_cast<MotionType>( level->getRnd()->Choose(MotionLevel, static_cast<int>(FlyingBlobLevel)) );
 
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_FLY_BLOB ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FLY_BLOB ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_FLY_BLOB ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_FLY_BLOB ) );
 
-		float val = DifficultyHelper::Interp( 40, 500,.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_FLY_BLOB ] ) );
+		float val = DifficultyHelper::Interp( 40, 500,.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_FLY_BLOB ) ) );
 		if ( val < 80 )
 			val = 0;
 		Range = Param( PieceSeed, val );
 
-		float speed = 200 - 20 * u[ Upgrade_SPEED ] + 25 *.5f * ( u[ Upgrade_JUMP ] + u[ Upgrade_FLY_BLOB ] );
+		float speed = 200 - 20 * u->Get( Upgrade_SPEED ) + 25 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_FLY_BLOB ) );
 		Period = Param( PieceSeed, CoreMath::Restrict( 40, 1000, speed ) );
 
 		EdgeSafety = Param( PieceSeed );
-		EdgeSafety.SetVal( __max( 6, DifficultyHelper::Interp( 45, 6, u[ Upgrade_FLY_BLOB ] ) ) );
+		EdgeSafety.SetVal( __max( 6, DifficultyHelper::Interp( 45, 6, u->Get( Upgrade_FLY_BLOB ) ) ) );
 
 		Size = Param( PieceSeed, 1 );
 	}
@@ -133,7 +133,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	void FlyingBlob_AutoGen::Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		BL.X = level->FillBL.X;
 
@@ -174,7 +174,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	void FlyingBlob_AutoGen::CleanupTunnel( const std::shared_ptr<Level> &level )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		std::vector<std::vector<unsigned long long> > GUIDs = Params->TunnelGUIDs;
 		std::vector<std::vector<ObjectBase*> > Blobs = std::vector<std::vector<ObjectBase*> >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
@@ -264,7 +264,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Tunnel )
 			Tunnel( level, BL, TR );
@@ -277,7 +277,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		AutoGen::Cleanup_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		/*if ( Params->Special.Tunnel )
 			CleanupTunnel( level );*/
@@ -392,7 +392,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = static_cast<FlyingBlob_Parameters*>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		// Make the new blob
 		std::shared_ptr<FlyingBlob> NewBlob = static_cast<FlyingBlob*>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );

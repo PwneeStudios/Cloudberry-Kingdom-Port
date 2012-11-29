@@ -11,22 +11,22 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_BOUNCY_BLOCK ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_BOUNCY_BLOCK ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_BOUNCY_BLOCK ) );
 
 		Speed = Param( PieceSeed );
-		Speed_SET_VAL( DifficultyHelper::Interp( 45, 60, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		Speed_SET_VAL( DifficultyHelper::Interp( 45, 60, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		SideDampening = Param( PieceSeed );
-		SideDampening.SetVal( DifficultyHelper::Interp159( .55f,.83f, 1.2f, u[ Upgrade_BOUNCY_BLOCK ] ) );
+		SideDampening.SetVal( DifficultyHelper::Interp159( .55f,.83f, 1.2f, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		Size = Param( PieceSeed );
-		Size.SetVal( __max( 75, 105 - 1.85f * u[ Upgrade_BOUNCY_BLOCK ] ) );
+		Size.SetVal( __max( 75, 105 - 1.85f * u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		EdgeSafety = Param( PieceSeed );
-		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u[ Upgrade_BOUNCY_BLOCK ] ) ) );
+		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u->Get( Upgrade_BOUNCY_BLOCK ) ) ) );
 	}
 
 const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
@@ -81,7 +81,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 	{
 		AutoGen::PreFill_1( level, BL, TR );
 
-		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( level->Style_FIND_PARAMS( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( level->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );
@@ -113,7 +113,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get BouncyBlock parameters
-		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( piece->Style_FIND_PARAMS( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Params = static_cast<BouncyBlock_Parameters*>( piece->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 
 		std::shared_ptr<BouncyBlock> bblock;
 		float Width = Params->Size.GetVal( pos );

@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -78,9 +77,9 @@ namespace CloudberryKingdom
 
 		if ( ss->ForTrailer )
 		{
-			std::vector<Bob*> Bobs = Tools::CurLevel->Bobs;
+			BobVec Bobs = Tools::CurLevel->Bobs;
 			for ( int i = 0; i < 4; i++ )
-				if ( Bobs.size() > i )
+				if ( static_cast<int>( Bobs.size() ) > i )
 					Bobs[ i ]->SetColorScheme( ColorSchemeManager::ColorSchemes[ i ] );
 		}
 
@@ -224,7 +223,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::MultiplayerBlobsMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
 	{
-		std::shared_ptr<FlyingBlob_Parameters> GParams = static_cast<FlyingBlob_Parameters*>( p->Style_FIND_PARAMS( FlyingBlob_AutoGen::getInstance() ) );
+		// ->Style->FindParams
+		std::shared_ptr<FlyingBlob_Parameters> GParams = std::static_pointer_cast<FlyingBlob_Parameters>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 		GParams->KeepUnused.SetVal( ss->MyLevel->getRnd()->RndBool(.5f) ? 0 : ss->MyLevel->getRnd()->RndFloat(0,.06f) );
 		GParams->FillWeight.SetVal( 100 );
 		GParams->Period.SetVal( 115 );
@@ -240,7 +240,7 @@ namespace CloudberryKingdom
 		Difficulty = 4;
 		Paths = 1;
 		FixedHero = BobPhsxNormal::getInstance();
-		FixedTileSet = _T( "sea" );
+		FixedTileSet = TileSet::Get( _T( "sea" ) );
 
 		InitialFadeInSpeed = 1;
 		InitialDarkness = 0;
@@ -257,11 +257,11 @@ namespace CloudberryKingdom
 	{
 		StringWorldGameData::Init();
 
-		Tools::WorldMap = Tools::CurGameData = this;
+		Tools::WorldMap = Tools::CurGameData = shared_from_this();
 		Tools::CurLevel = this->MyLevel;
 	}
 
-	const int &ScreenSaver::getMandatoryWatchLength()
+	const int ScreenSaver::getMandatoryWatchLength()
 	{
 		if ( UserPowers::CanSkipScreensaver )
 			return 0;
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 			return MandatoryWatchLength_Initial;
 	}
 
-int ScreenSaver::InitialDarkness = 30;
+	int ScreenSaver::InitialDarkness = 30;
 
 	ScreenSaver::ScreenSaver()
 	{
@@ -293,7 +293,7 @@ int ScreenSaver::InitialDarkness = 30;
 		Tools::TheGame->LogoScreenPropUp = true;
 		Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
 
-		this->GetSeedFunc = std::make_shared<Func>( this, &ScreenSaver::Make );
+		this->GetSeedFunc = std::make_shared<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( shared_from_this(), &ScreenSaver::Make );
 
 		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>() );
 
@@ -357,7 +357,7 @@ int ScreenSaver::InitialDarkness = 30;
 				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 28, std::make_shared<StartMusicLambda>() );
 			}
 
-			lvl->Bobs[ 0 ]->CapeWind = CoreMath::LerpRestrict( 2.7f, 0, wind_t->getVal() ) * Cape::SineWind(Vector2(-1,.15f),.75f + .3f, 4.5f, lvl->CurPhsxStep);
+			lvl->Bobs[ 0 ]->CapeWind = CoreMath::LerpRestrict( 2.7f, 0.f, wind_t->getVal() ) * Cape::SineWind( Vector2(-1, .15f), .75f + .3f, 4.5f, static_cast<float>( lvl->CurPhsxStep ) );
 
 			std::shared_ptr<Camera> cam = lvl->getMainCamera();
 			cam->UseEffective = true;
@@ -384,8 +384,17 @@ int ScreenSaver::InitialDarkness = 30;
 		std::shared_ptr<BobPhsx> hero = FixedHero;
 		if ( hero == 0 )
 		{
-			const BobPhsx* tempVector[] = { BobPhsxSmall::getInstance(), BobPhsxBig::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxInvert::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxScale::getInstance(), BobPhsxWheel::getInstance(), BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_SMALL, Hero_MoveMod_JETPACK), BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_DOUBLE) };
-			std::vector<BobPhsx*> l = std::vector<BobPhsx*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+			std::vector<std::shared_ptr<BobPhsx> > l;
+			l.push_back( BobPhsxSmall::getInstance() );
+			l.push_back( BobPhsxBig::getInstance() );
+			l.push_back( BobPhsxBouncy::getInstance() );
+			l.push_back( BobPhsxInvert::getInstance() );
+			l.push_back( BobPhsxSpaceship::getInstance() );
+			l.push_back( BobPhsxScale::getInstance() );
+			l.push_back( BobPhsxWheel::getInstance() );
+			l.push_back( BobPhsx::MakeCustom( Hero_BaseType_WHEEL, Hero_Shape_SMALL, Hero_MoveMod_JETPACK ) );
+			l.push_back( BobPhsx::MakeCustom( Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_DOUBLE ) );
+			
 			hero = l[ index % l.size() ];
 		}
 
@@ -394,9 +403,9 @@ int ScreenSaver::InitialDarkness = 30;
 		// Create the LevelSeedData
 		std::shared_ptr<LevelSeedData> data;
 		if ( Difficulty >= 0 )
-			data = RegularLevel::HeroLevel( Difficulty, hero, Length );
+			data = RegularLevel::HeroLevel( static_cast<float>( Difficulty ), hero, Length );
 		else
-			data = RegularLevel::HeroLevel( index % 5, hero, Length );
+			data = RegularLevel::HeroLevel( static_cast<float>( index % 5 ), hero, Length );
 
 		if ( Bungee )
 		{
@@ -404,7 +413,17 @@ int ScreenSaver::InitialDarkness = 30;
 		}
 
 		if ( FixedTileSet == 0 )
-			data->SetTileSet( Tools::GlobalRnd->ChooseOne( _T( "forest" ), _T( "cave" ), _T( "castle" ), _T( "cloud" ), _T( "hills" ), _T( "sea" ) ) );
+		{
+			std::vector<std::wstring> tileset_choices;
+			tileset_choices.push_back( _T( "forest" ) );
+			tileset_choices.push_back( _T( "cave" ) );
+			tileset_choices.push_back( _T( "castle" ) );
+			tileset_choices.push_back( _T( "cloud" ) );
+			tileset_choices.push_back( _T( "hills" ) );
+			tileset_choices.push_back( _T( "sea" ) );
+
+			data->SetTileSet( Tools::GlobalRnd->ChooseOne( tileset_choices ) );
+		}
 		else
 			data->SetTileSet( FixedTileSet );
 
@@ -412,7 +431,7 @@ int ScreenSaver::InitialDarkness = 30;
 		//                                          "sea_rain", "forest_snow", "hills_rain"));
 
 		// Adjust the piece seed data
-		for ( std::vector<PieceSeedData*>::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			if ( First )
 			{
@@ -422,15 +441,15 @@ int ScreenSaver::InitialDarkness = 30;
 			// Shorten the initial computer delay
 			if ( First )
 			{
-				std::shared_ptr<SingleData> style = dynamic_cast<SingleData*>( ( *piece )->Style );
-				style->ComputerWaitLengthRange = Vector2( InitialDelay );
+				std::shared_ptr<SingleData> style = std::dynamic_pointer_cast<SingleData>( ( *piece )->Style );
+				style->ComputerWaitLengthRange = Vector2( static_cast<float>( InitialDelay ) );
 				style->InitialDoorYRange = Vector2( -200 );
 			}
 			else
-				( *piece )->Style_COMPUTER_WAIT_LENGTH_RANGE = Vector2( 0 );
+				( *piece )->Style->ComputerWaitLengthRange = Vector2( 0 );
 
 			// No balls to the wall
-			( *piece )->Style_FUN_RUN = false;
+			( *piece )->Style->FunRun = false;
 
 			// Only one path
 			( *piece )->Paths = Paths;
@@ -446,15 +465,16 @@ int ScreenSaver::InitialDarkness = 30;
 		piece->MyUpgrades2->Zero();
 
 		float Difficulty = 8.25f;
-		piece->MyUpgrades1[ Upgrade_PINKY ] = Difficulty;
-		piece->MyUpgrades1[ Upgrade_SPIKE ] = Difficulty;
-		piece->MyUpgrades1[ Upgrade_SPIKEY_GUY ] = Difficulty;
-		piece->MyUpgrades1[ Upgrade_JUMP ] = 0;
-		piece->MyUpgrades1[ Upgrade_SPEED ] = 9;
-		piece->MyUpgrades1[ Upgrade_CEILING ] = 7;
+		piece->MyUpgrades1->Get( Upgrade_PINKY ) = Difficulty;
+		piece->MyUpgrades1->Get( Upgrade_SPIKE ) = Difficulty;
+		piece->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) = Difficulty;
+		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 0;
+		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 9;
+		piece->MyUpgrades1->Get( Upgrade_CEILING ) = 7;
 
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
-		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		//piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 	}
 
@@ -466,27 +486,27 @@ int ScreenSaver::InitialDarkness = 30;
 
 		if ( index % 2 == 1 )
 		{
-			//piece.MyUpgrades1[Upgrade.Pinky] = 9;
-			//piece.MyUpgrades1[Upgrade.Spike] = 9;
-			//piece.MyUpgrades1[Upgrade.SpikeyGuy] = 9;
-			//piece.MyUpgrades1[Upgrade.Laser] = 9;
-			//piece.MyUpgrades1[Upgrade.SpikeyLine] = 9;
-			//piece.MyUpgrades1[Upgrade.Firesnake] = 4;
-			//piece.MyUpgrades1[Upgrade.FireSpinner] = 9;
-			//piece.MyUpgrades1[Upgrade.MovingBlock] = 7;
-			//piece.MyUpgrades1[Upgrade.GhostBlock] = 8;
-			//piece.MyUpgrades1[Upgrade.Jump] = 2;
-			//piece.MyUpgrades1[Upgrade.Speed] = 9;
-			//piece.MyUpgrades1[Upgrade.Ceiling] = 7;
+			//piece.MyUpgrades1->Get(Upgrade.Pinky) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.Spike) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.SpikeyGuy) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.Laser) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.SpikeyLine) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.Firesnake) = 4;
+			//piece.MyUpgrades1->Get(Upgrade.FireSpinner) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.MovingBlock) = 7;
+			//piece.MyUpgrades1->Get(Upgrade.GhostBlock) = 8;
+			//piece.MyUpgrades1->Get(Upgrade.Jump) = 2;
+			//piece.MyUpgrades1->Get(Upgrade.Speed) = 9;
+			//piece.MyUpgrades1->Get(Upgrade.Ceiling) = 7;
 		}
 
-		piece->MyUpgrades1[ Upgrade_SPIKE ] = 9;
-		piece->MyUpgrades1[ Upgrade_FLY_BLOB ] = 9;
+		piece->MyUpgrades1->Get( Upgrade_SPIKE ) = 9;
+		piece->MyUpgrades1->Get( Upgrade_FLY_BLOB ) = 9;
 		if ( index % 4 == 1 )
-			piece->MyUpgrades1[ Upgrade_FIREBALL ] = 9;
-		piece->MyUpgrades1[ Upgrade_JUMP ] = 1;
-		piece->MyUpgrades1[ Upgrade_SPEED ] = 7;
-		piece->MyUpgrades1[ Upgrade_CEILING ] = 7;
+			piece->MyUpgrades1->Get( Upgrade_FIREBALL ) = 9;
+		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 1;
+		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 7;
+		piece->MyUpgrades1->Get( Upgrade_CEILING ) = 7;
 
 		piece->Style_FUN_RUN = false;
 		piece->Style_PAUSE_TYPE = StyleData::_PauseType_NORMAL;

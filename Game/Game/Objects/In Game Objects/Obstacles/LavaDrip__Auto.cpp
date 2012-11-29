@@ -9,13 +9,13 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_LAVA_DRIP ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_LAVA_DRIP ) );
 
-		LavaDripStep = Param( PieceSeed, u[ Upgrade_LAVA_DRIP ] == 0 ? LavaDripStepCutoff + 1 : DifficultyHelper::Interp159( 1450, 550, 250, u[ Upgrade_LAVA_DRIP ] ) );
+		LavaDripStep = Param( PieceSeed, u->Get( Upgrade_LAVA_DRIP ) == 0 ? LavaDripStepCutoff + 1 : DifficultyHelper::Interp159( 1450, 550, 250, u->Get( Upgrade_LAVA_DRIP ) ) );
 
-		Length = VectorParam( PieceSeed, Vector2( 1400 - 100 * u[ Upgrade_LAVA_DRIP ], 1400 + 80 * u[ Upgrade_LAVA_DRIP ] ) );
+		Length = VectorParam( PieceSeed, Vector2( 1400 - 100 * u->Get( Upgrade_LAVA_DRIP ), 1400 + 80 * u->Get( Upgrade_LAVA_DRIP ) ) );
 
-		Speed = Param( PieceSeed, __min( 3, 1 + .043f * u[ Upgrade_SPEED ] + .017f * u[ Upgrade_LAVA_DRIP ] ) );
+		Speed = Param( PieceSeed, __min( 3, 1 + .043f * u->Get( Upgrade_SPEED ) + .017f * u->Get( Upgrade_LAVA_DRIP ) ) );
 	}
 
 	void LavaDrip_Parameters::InitializeInstanceFields()
@@ -51,7 +51,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		TR += Vector2( 350, 0 );
 
 		// Get LavaDrip parameters
-		std::shared_ptr<LavaDrip_Parameters> Params = static_cast<LavaDrip_Parameters*>( level->Style_FIND_PARAMS( LavaDrip_AutoGen::getInstance() ) );
+		std::shared_ptr<LavaDrip_Parameters> Params = static_cast<LavaDrip_Parameters*>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
 
 		float step = 5;
 

@@ -24,12 +24,13 @@ namespace CloudberryKingdom
 
 	void Upgrades::CopyFrom( const std::shared_ptr<Upgrades> &u )
 	{
-		u->UpgradeLevels.CopyTo( UpgradeLevels, 0 );
+		//u->UpgradeLevels.CopyTo( UpgradeLevels, 0 );
+		CopyFromTo( u->UpgradeLevels, UpgradeLevels);
 	}
 
-	float &Upgrades::operator []( Upgrade upgrade )
+	float &Upgrades::Get( int upgrade )
 	{
-		return UpgradeLevels[ static_cast<int>( upgrade ) ];
+		return UpgradeLevels[ upgrade ];
 	}
 
 //C# TO C++ CONVERTER TODO TASK: You cannot specify separate 'set' logic for indexers in native C++:

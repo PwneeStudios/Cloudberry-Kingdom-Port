@@ -17,17 +17,17 @@ namespace CloudberryKingdom
 		KeepUnused = Param( PieceSeed );
 		if ( dynamic_cast<BobPhsxSpaceship*>( level->DefaultHeroType ) != 0 )
 		{
-			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u[ Upgrade_FIREBALL ] ) );
+			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FIREBALL ) ) );
 		}
 
-		FillWeight = Param( PieceSeed, u[ Upgrade_FIREBALL ] );
+		FillWeight = Param( PieceSeed, u->Get( Upgrade_FIREBALL ) );
 
-		SetVal( SurvivalHallwaySpeed, DifficultyHelper::Interp19( 20, 45, u[ Upgrade_SPEED ] ) );
+		SetVal( SurvivalHallwaySpeed, DifficultyHelper::Interp19( 20, 45, u->Get( Upgrade_SPEED ) ) );
 
-		if ( u[ Upgrade_FIREBALL ] > 0 )
+		if ( u->Get( Upgrade_FIREBALL ) > 0 )
 			DoFill = true;
 
-		float v = DifficultyHelper::Interp159( 800, 500, 200, u[ Upgrade_FIREBALL ] );
+		float v = DifficultyHelper::Interp159( 800, 500, 200, u->Get( Upgrade_FIREBALL ) );
 		if ( PieceSeed->Style_MASOCHISTIC )
 			v *= .7f;
 
@@ -35,19 +35,19 @@ namespace CloudberryKingdom
 
 		// General difficulty
 		BobWidthLevel = Param( PieceSeed );
-		BobWidthLevel.SetVal( u[ Upgrade_FIREBALL ] );
+		BobWidthLevel.SetVal( u->Get( Upgrade_FIREBALL ) );
 
 		FireballMaxAngle = Param( PieceSeed );
-		FireballMaxAngle.SetVal( DifficultyHelper::Interp159( .01f,.3f,.75f, u[ Upgrade_FIREBALL ] ) );
+		FireballMaxAngle.SetVal( DifficultyHelper::Interp159( .01f,.3f,.75f, u->Get( Upgrade_FIREBALL ) ) );
 
 		FireballMinDist = Param( PieceSeed );
-		FireballMinDist.SetVal( DifficultyHelper::Interp159( 700, 340, 120, u[ Upgrade_FIREBALL ] ) );
+		FireballMinDist.SetVal( DifficultyHelper::Interp159( 700, 340, 120, u->Get( Upgrade_FIREBALL ) ) );
 
 		MaxFireballDensity = Param( PieceSeed );
-		MaxFireballDensity.SetVal( 4 * u[ Upgrade_FIREBALL ] );
+		MaxFireballDensity.SetVal( 4 * u->Get( Upgrade_FIREBALL ) );
 
 		Period = Param( PieceSeed );
-		Period.SetVal( DifficultyHelper::InterpRestrict159( 240, 195, 148,.7f * u[ Upgrade_SPEED ] + .3f * u[ Upgrade_FIREBALL ] ) );
+		Period.SetVal( DifficultyHelper::InterpRestrict159( 240, 195, 148,.7f * u->Get( Upgrade_SPEED ) + .3f * u->Get( Upgrade_FIREBALL ) ) );
 	}
 
 	void Fireball_Parameters::InitializeInstanceFields()
@@ -88,7 +88,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get emitter parameters
-		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style_FIND_PARAMS( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Period = static_cast<int>( Params->Period.GetVal( pos ) );
 		int Offset = Params->ChooseOffset( Period, level->getRnd() );
@@ -133,7 +133,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 
 	void Fireball_AutoGen::BorderFill( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style_FIND_PARAMS( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		LevelGeometry Geometry = level->CurMakeData->PieceSeed->GeometryType;
 
@@ -171,7 +171,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 
 	std::shared_ptr<Fireball_Parameters> Fireball_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return static_cast<Fireball_Parameters*>( level->Style_FIND_PARAMS( Fireball_AutoGen::getInstance() ) );
+		return static_cast<Fireball_Parameters*>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
@@ -210,7 +210,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style_FIND_PARAMS( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Length = level->CurPiece->PieceLength;
 
@@ -223,6 +223,6 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style_FIND_PARAMS( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = static_cast<Fireball_Parameters*>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 }

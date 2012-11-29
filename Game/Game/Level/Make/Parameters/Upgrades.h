@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		/// Access the specified upgrade level
 		/// </summary>
 		/// <param name="upgrade">The specified upgrade type</param>
-		float &operator []( Upgrade upgrade );
+		float &Get( int upgrade );
 
 		/// <summary>
 		/// Set every upgrade to level 0

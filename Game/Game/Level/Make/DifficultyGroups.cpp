@@ -124,9 +124,9 @@ namespace CloudberryKingdom
 		}
 
 		// Mod upgrades to test things here
-		//piece.MyUpgrades1[Upgrade.Elevator] = 5;
+		//piece.MyUpgrades1->Get(Upgrade.Elevator) = 5;
 		//piece.MyUpgrades1.CalcGenData(piece.MyGenData.gen1, piece.Style);
-		//piece.MyUpgrades2[Upgrade.Elevator] = 5;
+		//piece.MyUpgrades2->Get( Upgrade.Elevator ) = 5;
 		//piece.MyUpgrades2.CalcGenData(piece.MyGenData.gen1, piece.Style);
 
 		piece->StandardClose();

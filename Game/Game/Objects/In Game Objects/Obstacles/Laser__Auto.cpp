@@ -9,11 +9,11 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_LASER ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_LASER ) );
 
-		LaserStep = Param( PieceSeed, u[ Upgrade_LASER ] == 0 ? LaserStepCutoff + 1 : DifficultyHelper::Interp159( 1450, 400, 60, u[ Upgrade_LASER ] ) );
+		LaserStep = Param( PieceSeed, u->Get( Upgrade_LASER ) == 0 ? LaserStepCutoff + 1 : DifficultyHelper::Interp159( 1450, 400, 60, u->Get( Upgrade_LASER ) ) );
 
-		LaserPeriod = Param( PieceSeed, __max( 70, 200 - 11 * u[ Upgrade_SPEED ] ) );
+		LaserPeriod = Param( PieceSeed, __max( 70, 200 - 11 * u->Get( Upgrade_SPEED ) ) );
 	}
 
 	void Laser_Parameters::InitializeInstanceFields()
@@ -50,7 +50,7 @@ const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<
 		TR += Vector2( 350, 0 );
 
 		// Get Laser parameters
-		std::shared_ptr<Laser_Parameters> Params = static_cast<Laser_Parameters*>( level->Style_FIND_PARAMS( Laser_AutoGen::getInstance() ) );
+		std::shared_ptr<Laser_Parameters> Params = static_cast<Laser_Parameters*>( level->Style->FindParams( Laser_AutoGen::getInstance() ) );
 
 		float step = 5;
 

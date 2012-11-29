@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 	void Challenge_HeroRush::MakeMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
 	{
-		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( p->Style_FIND_PARAMS( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
 		Params->FillType = Coin_Parameters::FillTypes_RUSH;
 	}
 

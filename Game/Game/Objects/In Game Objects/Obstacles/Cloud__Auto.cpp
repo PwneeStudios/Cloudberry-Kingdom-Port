@@ -12,13 +12,13 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		FillWeight = Param( PieceSeed );
-		FillWeight.SetVal( .62f * u[ Upgrade_CLOUD ] );
+		FillWeight.SetVal( .62f * u->Get( Upgrade_CLOUD ) );
 
 		Shiftiness = Param( PieceSeed );
-		Shiftiness.SetVal( 1 + .33f * u[ Upgrade_CLOUD ] );
+		Shiftiness.SetVal( 1 + .33f * u->Get( Upgrade_CLOUD ) );
 
 		Size = Param( PieceSeed );
-		Size.SetVal( 2 - .1f * u[ Upgrade_CLOUD ] );
+		Size.SetVal( 2 - .1f * u->Get( Upgrade_CLOUD ) );
 	}
 
 const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
@@ -57,7 +57,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 		AutoGen::CreateAt( level, pos, BL, TR );
 
 		// Get Cloud parameters
-		std::shared_ptr<Cloud_Parameters> Params = static_cast<Cloud_Parameters*>( level->Style_FIND_PARAMS( Cloud_AutoGen::getInstance() ) );
+		std::shared_ptr<Cloud_Parameters> Params = static_cast<Cloud_Parameters*>( level->Style->FindParams( Cloud_AutoGen::getInstance() ) );
 
 		// Make the new cloud
 		pos += Vector2( level->getRnd()->Rnd->Next(0, 70), level->getRnd()->Rnd->Next(0, 70) );

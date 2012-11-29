@@ -48,7 +48,7 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 
 	void StyleData::Calculate( const std::shared_ptr<Upgrades> &u )
 	{
-		float JumpLevel = u[ Upgrade_JUMP ];
+		float JumpLevel = u->Get( Upgrade_JUMP );
 
 		const float tempVector2[] = { 1, 1, 1, 1 };
 		std::vector<float> PauseTypeRatio = std::vector<float>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );

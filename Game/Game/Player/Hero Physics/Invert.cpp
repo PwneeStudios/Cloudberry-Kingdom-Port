@@ -225,7 +225,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 		makeData->TopLikeBottom_Thin = true;
 		makeData->BlocksAsIs = true;
 
-		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = static_cast<Ceiling_Parameters*>( Style_FIND_PARAMS( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = static_cast<Ceiling_Parameters*>( Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 		Ceiling_Params->Make = false;
 
 		Style_BLOCK_FILL_TYPE = StyleData::_BlockFillType_INVERTABLE;
@@ -233,11 +233,11 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 
 		Style_TOP_SPACE = 50;
 
-		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( Style_FIND_PARAMS( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		if ( MParams->Aspect == MovingBlock_Parameters::AspectType_TALL )
 			MParams->Aspect = MovingBlock_Parameters::AspectType_THIN;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = static_cast<GhostBlock_Parameters*>( Style_FIND_PARAMS( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> GhParams = static_cast<GhostBlock_Parameters*>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
 	}
 

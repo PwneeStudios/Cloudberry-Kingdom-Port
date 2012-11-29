@@ -9,26 +9,26 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		Tunnel = std::make_shared<TunnelFill>();
-		HallwaySpacing = Vector2( 300 - 5 * u[ Upgrade_SPIKEY_GUY ], DifficultyHelper::Interp19( 220, 80, u[ Upgrade_SPIKEY_GUY ] ) );
+		HallwaySpacing = Vector2( 300 - 5 * u->Get( Upgrade_SPIKEY_GUY ), DifficultyHelper::Interp19( 220, 80, u->Get( Upgrade_SPIKEY_GUY ) ) );
 
-		if ( PieceSeed->MyUpgrades1[ Upgrade_SPIKEY_GUY ] > 0 || PieceSeed->MyUpgrades2[ Upgrade_SPIKEY_GUY ] > 0 )
+		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_GUY ) > 0 )
 			DoStage2Fill = true;
 		else
 			DoStage2Fill = false;
 
 		// General difficulty
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_SPIKEY_GUY ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SPIKEY_GUY ) );
 
-		FloaterMinDist = Param( PieceSeed, __max( 80, 800 - 63.5f * u[ Upgrade_SPIKEY_GUY ] ) );
+		FloaterMinDist = Param( PieceSeed, __max( 80, 800 - 63.5f * u->Get( Upgrade_SPIKEY_GUY ) ) );
 
-		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u[ Upgrade_SPEED ] ) );
+		FloaterPeriod = Param( PieceSeed, __max( 84, 274 - 10 * u->Get( Upgrade_SPEED ) ) );
 
-		FloaterPlaceDelay = Param( PieceSeed,.705f * __max( 4.75f, 9 - u[ Upgrade_SPIKEY_GUY ] / 2 ) );
+		FloaterPlaceDelay = Param( PieceSeed,.705f * __max( 4.75f, 9 - u->Get( Upgrade_SPIKEY_GUY ) / 2 ) );
 
-		FloaterMaxAngle = Param( PieceSeed, __min( 750, 30 + 64 * u[ Upgrade_SPIKEY_GUY ] ) );
+		FloaterMaxAngle = Param( PieceSeed, __min( 750, 30 + 64 * u->Get( Upgrade_SPIKEY_GUY ) ) );
 
-		float sparsity = __max( 10, 10 - 0 * u[ Upgrade_SPIKEY_GUY ] );
-		if ( u[ Upgrade_SPIKEY_GUY ] <= 0 )
+		float sparsity = __max( 10, 10 - 0 * u->Get( Upgrade_SPIKEY_GUY ) );
+		if ( u->Get( Upgrade_SPIKEY_GUY ) <= 0 )
 			sparsity = -1;
 
 		FloaterSparsity = Param( PieceSeed, sparsity );
@@ -96,7 +96,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Boulder parameters
-		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style_FIND_PARAMS( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_BOULDER, std::make_shared<Cleanup_2Helper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ) );
 
@@ -106,7 +106,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 
 	void Boulder_AutoGen::Hallway( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style_FIND_PARAMS( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		TR.X += 700;
 
@@ -135,7 +135,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 	std::shared_ptr<ObjectBase> Boulder_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style_FIND_PARAMS( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		// Get the new floater
 		std::shared_ptr<Boulder> NewFloater = static_cast<Boulder*>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
@@ -191,7 +191,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style_FIND_PARAMS( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;
@@ -223,7 +223,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style_FIND_PARAMS( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = static_cast<Boulder_Parameters*>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );

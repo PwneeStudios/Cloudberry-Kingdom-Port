@@ -10,23 +10,23 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		if ( PieceSeed->MyUpgrades1[ Upgrade_FIRESNAKE ] > 0 || PieceSeed->MyUpgrades2[ Upgrade_FIRESNAKE ] > 0 )
+		if ( PieceSeed->MyUpgrades1->Get( Upgrade_FIRESNAKE ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_FIRESNAKE ) > 0 )
 			Make = true;
 		else
 			Make = false;
 
 		// General difficulty
-		float FloaterLevel = PieceSeed->MyUpgrades1[ Upgrade_FIRESNAKE ];
+		float FloaterLevel = PieceSeed->MyUpgrades1->Get( Upgrade_FIRESNAKE );
 		if ( FloaterLevel > 6 )
 			NumOffsets = 8;
 		else
 			NumOffsets = 4;
 
-		BobWidthLevel = Param( PieceSeed, u[ Upgrade_FIRESNAKE ] );
+		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_FIRESNAKE ) );
 
-		Step = Param( PieceSeed, DifficultyHelper::Interp159( 1340, 830, 340, u[ Upgrade_FIRESNAKE ] ) );
+		Step = Param( PieceSeed, DifficultyHelper::Interp159( 1340, 830, 340, u->Get( Upgrade_FIRESNAKE ) ) );
 
-		Period = Param( PieceSeed, DifficultyHelper::Interp( 290, 150, u[ Upgrade_FIRESNAKE ] ) * DifficultyHelper::Interp( 1.7f, 1.0f, u[ Upgrade_SPEED ] ) );
+		Period = Param( PieceSeed, DifficultyHelper::Interp( 290, 150, u->Get( Upgrade_FIRESNAKE ) ) * DifficultyHelper::Interp( 1.7f, 1.0f, u->Get( Upgrade_SPEED ) ) );
 
 		RadiiX = VectorParam( PieceSeed, Vector2( 400, 1000 ) );
 		RadiiY = VectorParam( PieceSeed, Vector2( 1550, 1850 ) );
@@ -59,7 +59,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 
 	std::shared_ptr<Firesnake_Parameters> Firesnake_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return static_cast<Firesnake_Parameters*>( level->Style_FIND_PARAMS( Firesnake_AutoGen::getInstance() ) );
+		return static_cast<Firesnake_Parameters*>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 	}
 
 	void Firesnake_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -172,7 +172,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 	std::shared_ptr<ObjectBase> Firesnake_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<Firesnake_Parameters> Params = static_cast<Firesnake_Parameters*>( level->Style_FIND_PARAMS( Firesnake_AutoGen::getInstance() ) );
+		std::shared_ptr<Firesnake_Parameters> Params = static_cast<Firesnake_Parameters*>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 
 		// Get the new snake
 		std::shared_ptr<Firesnake> NewSnake = static_cast<Firesnake*>( level->getRecycle()->GetObject(ObjectType_FIRESNAKE, true) );
@@ -204,7 +204,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Firesnake_Parameters> Params = static_cast<Firesnake_Parameters*>( level->Style_FIND_PARAMS( Firesnake_AutoGen::getInstance() ) );
+		std::shared_ptr<Firesnake_Parameters> Params = static_cast<Firesnake_Parameters*>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

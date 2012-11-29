@@ -5,143 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class Pendulum;
-}
-
-namespace CloudberryKingdom
-{
-	class LavaDrip;
-}
-
-namespace CloudberryKingdom
-{
-	class Serpent;
-}
-
-namespace CloudberryKingdom
-{
-	class Firesnake;
-}
-
-namespace CloudberryKingdom
-{
-	class Cloud;
-}
-
-namespace CloudberryKingdom
-{
-	class MovingPlatform;
-}
-
-namespace CloudberryKingdom
-{
-	class MovingBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class BouncyBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class FallingBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class GhostBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class FlyingBlob;
-}
-
-namespace CloudberryKingdom
-{
-	class Laser;
-}
-
-namespace CloudberryKingdom
-{
-	class SpikeyLine;
-}
-
-namespace CloudberryKingdom
-{
-	class SpikeyGuy;
-}
-
-namespace CloudberryKingdom
-{
-	class Boulder;
-}
-
-namespace CloudberryKingdom
-{
-	class Spike;
-}
-
-namespace CloudberryKingdom
-{
-	class FireSpinner;
-}
-
-namespace CloudberryKingdom
-{
-	class Fireball;
-}
-
-namespace CloudberryKingdom
-{
-	class Checkpoint;
-}
-
-namespace CloudberryKingdom
-{
-	class Coin;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundTemplate;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class TileInfoBase
 	{
 	public:
@@ -151,7 +14,7 @@ namespace CloudberryKingdom
 	private:
 		void InitializeInstanceFields();
 
-public:
+	public:
 		TileInfoBase()
 		{
 			InitializeInstanceFields();
@@ -166,8 +29,10 @@ public:
 	public:
 		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );
 
-//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
+		//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
 		//operator TileSet*( const std::wstring &name );
+
+		static std::shared_ptr<TileSet> Get( const std::wstring &name );
 
 		std::shared_ptr<TileSetInfo> MyTileSetInfo;
 
@@ -211,9 +76,6 @@ public:
 	public:
 		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd );
 		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, const std::shared_ptr<BlockGroup> &group );
-
-
-
 
 
 		std::shared_ptr<TileSet> StandInType;

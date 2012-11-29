@@ -68,7 +68,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 
 	std::shared_ptr<NormalBlock_Parameters> NormalBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return static_cast<NormalBlock_Parameters*>( level->Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		return static_cast<NormalBlock_Parameters*>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 	}
 
 	void NormalBlock_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -76,7 +76,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = static_cast<NormalBlock_Parameters*>( level->Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> Params = static_cast<NormalBlock_Parameters*>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 
 		if ( Params->MyWall != 0 )
 			MakeWall( level );
@@ -130,7 +130,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = static_cast<NormalBlock_Parameters*>( Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> Params = static_cast<NormalBlock_Parameters*>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return 0;
