@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		level->EndLevel();
 
 		// Special explode
-		for ( std::vector<Bob*>::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( std::vector<std::shared_ptr<Bob> >::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 			ParticleEffects::PiecePopFart( level, ( *bob )->getCore()->Data->Position );
 
 		// Add the Game Over panel, check for Awardments
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 
 	void Challenge_Escalation::MakeMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
 	{
-		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::dynamic_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
 		Params->StartFrame = 90;
 		Params->FillType = Coin_Parameters::FillTypes_REGULAR;
 	}
@@ -208,7 +208,7 @@ std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstr
 		float t = ( ( Index - StartIndex ) % LevelsPerTileset ) / static_cast<float>( LevelsPerTileset - 1 );
 		Length = CoreMath::LerpRestrict( LevelLength_Short, LevelLength_Long, t );
 
-		if ( dynamic_cast<BobPhsxSpaceship*>( hero ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( hero ) != 0 )
 			Length += 2000;
 
 		// Create the LevelSeedData
@@ -216,12 +216,12 @@ std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstr
 		data->SetTileSet( GetTileSet( Index - StartIndex ) );
 
 		// Adjust the piece seed data
-		for ( std::vector<PieceSeedData*>::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			// Shorten the initial computer delay
 			( *piece )->Style_COMPUTER_WAIT_LENGTH_RANGE = Vector2( 8, 35 ); //38);
 
-			( *piece )->Style_MY_MOD_PARAMS->Add( std::make_shared<MakeMyModParamsHelper>() );
+			( *piece )->Style->MyModParams->Add( std::make_shared<MakeMyModParamsHelper>() );
 		}
 
 		return data;

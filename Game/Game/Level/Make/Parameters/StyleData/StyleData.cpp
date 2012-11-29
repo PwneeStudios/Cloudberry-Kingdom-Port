@@ -10,8 +10,8 @@ namespace CloudberryKingdom
 
 	void StyleData::CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level )
 	{
-		GenParams = std::map<AutoGen*, AutoGen_Parameters*>();
-		for ( std::vector<AutoGen*>::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		GenParams = std::map<std::shared_ptr<AutoGen>, std::shared_ptr<AutoGen_Parameters> >();
+		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			GenParams.insert( make_pair( *gen, ( *gen )->SetParameters( SeedData, level ) ) );
 
 		MyModParams->Apply( level, SeedData );
@@ -29,13 +29,13 @@ namespace CloudberryKingdom
 		return GenParams[ gen ];
 	}
 
-	std::shared_ptr<StyleData> StyleData::Clone()
-	{
-		return static_cast<StyleData*>( this->MemberwiseClone() );
-	}
+	//std::shared_ptr<StyleData> StyleData::Clone()
+	//{
+	//	return static_cast<StyleData>( this->MemberwiseClone() );
+	//}
 
-const float tempVector[] = { .7f,.1f,.1f,.1f };
-std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const float tempVector[] = { .7f,.1f,.1f,.1f };
+	std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 	StyleData::StyleData( const std::shared_ptr<Rand> &Rnd )
 	{
@@ -288,9 +288,9 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 
 	void StyleData::SuppressGroundCeiling( const std::shared_ptr<PieceSeedData> &piece )
 	{
-		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = static_cast<Ceiling_Parameters*>( FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = std::dynamic_pointer_cast<Ceiling_Parameters>( FindParams( Ceiling_AutoGen::getInstance() ) );
 		Ceiling_Params->Make = false;
-		std::shared_ptr<NormalBlock_Parameters> NBlock_Params = static_cast<NormalBlock_Parameters*>( FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NBlock_Params = std::dynamic_pointer_cast<NormalBlock_Parameters>( FindParams( NormalBlock_AutoGen::getInstance() ) );
 		NBlock_Params->Make = false;
 	}
 
@@ -298,13 +298,13 @@ std::vector<float> StyleData::_SinglePathRatio = std::vector<float>( tempVector,
 	{
 		SuppressGroundCeiling( piece );
 
-		std::shared_ptr<BouncyBlock_Parameters> Bounce_Params = static_cast<BouncyBlock_Parameters*>( FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Bounce_Params = std::dynamic_pointer_cast<BouncyBlock_Parameters>( FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		Bounce_Params->Special.Hallway = true;
 	}
 
 	void StyleData::InitializeInstanceFields()
 	{
-		MyModParams = std::make_shared<Multicaster_2<Level*, PieceSeedData*> >();
+		MyModParams = std::make_shared<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > >();
 		Zoom = 1;
 		TimeType = Level.TimeTypes_REGULAR;
 		ModNormalBlockWeight = 1;

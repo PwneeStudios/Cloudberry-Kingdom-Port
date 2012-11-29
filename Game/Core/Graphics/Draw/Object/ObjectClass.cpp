@@ -172,16 +172,6 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 		UpdateEffectList();
 	}
 
-#if defined(EDITOR)
-	std::vector<ObjectVector*> ObjectClass::GetObjectVectors()
-	{
-		std::vector<ObjectVector*> L = std::vector<ObjectVector*>();
-		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-			L.AddRange( ( *quad )->GetObjectVectors() );
-		return L;
-	}
-#endif
-
 	void ObjectClass::UpdateEffectList()
 	{
 		if ( QuadList.empty() || QuadList.empty() )

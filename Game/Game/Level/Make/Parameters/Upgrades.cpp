@@ -144,26 +144,26 @@ int Upgrades::MaxBobWidth = 360;
 		GenData[ BehaviorParam_SIT_WEIGHT ] = static_cast<int>( __max( 10, 20 - 4 * JumpLevel ) );
 		GenData[ BehaviorParam_SIT_LENGTH_BASE ] = static_cast<int>( __max( 3, 10 - 1 * JumpLevel ) );
 		GenData[ BehaviorParam_SIT_LENGTH_ADD ] = static_cast<int>( __max( 25, 8 - 1 * JumpLevel ) );
-		if ( Style_PAUSE_TYPE == StyleData::_PauseType_NONE )
+		if ( Style->PauseType == StyleData::_PauseType_NONE )
 		{
 			GenData[ BehaviorParam_SIT_WEIGHT ] = 1;
 			GenData[ BehaviorParam_SIT_LENGTH_BASE ] = 1;
 			GenData[ BehaviorParam_SIT_LENGTH_ADD ] = 1;
 		}
-		if ( Style_PAUSE_TYPE == StyleData::_PauseType_LIMITED )
+		if ( Style->PauseType == StyleData::_PauseType_LIMITED )
 		{
 			GenData[ BehaviorParam_SIT_WEIGHT ] = static_cast<int>( __max( 6, 20 - 5 * JumpLevel ) );
 			GenData[ BehaviorParam_SIT_LENGTH_BASE ] = static_cast<int>( __max( 2, 10 - 1 * JumpLevel ) );
 			GenData[ BehaviorParam_SIT_LENGTH_ADD ] = static_cast<int>( __max( 15, 8 - 1 * JumpLevel ) );
 		}
-		if ( Style_PAUSE_TYPE == StyleData::_PauseType_NORMAL2 )
+		if ( Style->PauseType == StyleData::_PauseType_NORMAL2 )
 		{
 			GenData[ BehaviorParam_SIT_WEIGHT ] = static_cast<int>( __max( 7, 20 - 5 * JumpLevel ) );
 			GenData[ BehaviorParam_SIT_LENGTH_BASE ] = static_cast<int>( __max( 15, 10 - 1 * JumpLevel ) );
 			GenData[ BehaviorParam_SIT_LENGTH_ADD ] = static_cast<int>( __max( 45, 8 - 1 * JumpLevel ) );
 		}
 
-		switch ( Style_MOVE_TYPE_PERIOD )
+		switch ( Style->MoveTypePeriod )
 		{
 			case StyleData::_MoveTypePeriod_INF:
 				GenData[ BehaviorParam_MOVE_TYPE_PERIOD ] = 300;
@@ -199,7 +199,7 @@ int Upgrades::MaxBobWidth = 360;
 		//GenData[DifficultyParam.BigBoxY] = 0;// Math.Max(0, 150 - 20 * this[Upgrade.General]);
 
 		// Fun run
-		if ( Style_FUN_RUN )
+		if ( Style->FunRun )
 		{
 			GenData[ BehaviorParam_FORWARD_LENGTH_BASE ] = __max( 1, GenData[ BehaviorParam_FORWARD_LENGTH_BASE ] / 2 );
 			GenData[ BehaviorParam_FORWARD_LENGTH_ADD ] = __max( 1, GenData[ BehaviorParam_FORWARD_LENGTH_ADD ] / 2 );

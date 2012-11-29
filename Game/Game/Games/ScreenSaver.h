@@ -44,12 +44,24 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnSwapLambda : public Lambda_1<LevelSeedData*>
+		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
 		public:
 			OnSwapLambda();
 
 			void Apply( const std::shared_ptr<LevelSeedData> &data );
+		};
+
+	private:
+		class GetSeedFuncLambdaSS : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+		{
+		private:
+			std::shared_ptr<ScreenSaver> ss;
+
+		public:
+			GetSeedFuncLambdaSS( const std::shared_ptr<ScreenSaver> &ss );
+
+			std::shared_ptr<LevelSeedData> Apply( const int index );
 		};
 
 	private:
@@ -166,7 +178,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MultiplayerBlobsMyModParamsHelper : public Lambda_2<Level*, PieceSeedData*>
+		class MultiplayerBlobsMyModParamsHelper : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
 		{
 		private:
 			std::shared_ptr<ScreenSaver> ss;

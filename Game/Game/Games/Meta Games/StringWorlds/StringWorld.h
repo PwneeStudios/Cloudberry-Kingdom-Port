@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class EOL_StringWorldDoorActionProxy : public Lambda_1<Door*>
+	class EOL_StringWorldDoorActionProxy : public Lambda_1<std::shared_ptr<Door> >
 	{
 	private:
 		std::shared_ptr<StringWorldGameData> gameData;
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		void Apply( const std::shared_ptr<Door> &door );
 	};
 
-	class EOL_StringWorldDoorEndActionProxy : public Lambda_1<Door*>
+	class EOL_StringWorldDoorEndActionProxy : public Lambda_1<std::shared_ptr<Door> >
 	{
 	private:
 		std::shared_ptr<StringWorldGameData> gameData;
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		void Apply( const std::shared_ptr<Door> &door );
 	};
 
-	class EOG_StandardDoorActionProxy : public Lambda_1<Door*>
+	class EOG_StandardDoorActionProxy : public Lambda_1<std::shared_ptr<Door> >
 	{
 	public:
 		void Apply( const std::shared_ptr<Door> &door );
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class DefaultStartLevelMusicProxy : public Lambda_1<StringWorldGameData*>
+		class DefaultStartLevelMusicProxy : public Lambda_1<std::shared_ptr<StringWorldGameData> >
 		{
 		public:
 			void Apply( const std::shared_ptr<StringWorldGameData> &stringworld );
@@ -162,7 +162,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called during LevelBegin, adds relevant GameObjects to the level's game.
 		/// </summary>
-		std::shared_ptr<LambdaFunc_1<Level*, bool> > OnLevelBegin;
+		std::shared_ptr<LambdaFunc_1<std::shared_ptr<Level>, bool> > OnLevelBegin;
 
 		/// <summary>
 		/// How long to wait before opening the initial door on the first level.
@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called at the start of a level to begin music.
 		/// </summary>
-		std::shared_ptr<Lambda_1<StringWorldGameData*> > StartLevelMusic;
+		std::shared_ptr<Lambda_1<std::shared_ptr<StringWorldGameData> > > StartLevelMusic;
 
 		static void DefaultStartLevelMusic( const std::shared_ptr<StringWorldGameData> &stringworld );
 
@@ -211,12 +211,12 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called when the first level is swapped in.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<LevelSeedData*> > OnSwapToFirstLevel;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<LevelSeedData> > > OnSwapToFirstLevel;
 
 		/// <summary>
 		/// Called when the last level is swapped in.
 		/// </summary>
-		std::shared_ptr<Multicaster_1<LevelSeedData*> > OnSwapToLastLevel;
+		std::shared_ptr<Multicaster_1<std::shared_ptr<LevelSeedData> > > OnSwapToLastLevel;
 
 		/// <summary>
 		/// Called when a level is swapped to. The parameter is the current level index.
@@ -247,7 +247,7 @@ namespace CloudberryKingdom
 
 		StringWorldGameData();
 
-		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, LevelSeedData*> > &GetSeed );
+		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed );
 
 		std::shared_ptr<Level> MakeLevel();
 

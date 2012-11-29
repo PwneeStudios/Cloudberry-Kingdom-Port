@@ -160,11 +160,11 @@ namespace CloudberryKingdom
 		/// A callback to modify AutoGen parameters after they have been set
 		/// </summary>
 	public:
-		std::shared_ptr<Multicaster_2<Level*, PieceSeedData*> > MyModParams;
+		std::shared_ptr<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > > MyModParams;
 
 		void Release();
 
-		std::map<AutoGen*, AutoGen_Parameters*> GenParams;
+		std::map<std::shared_ptr<AutoGen>, std::shared_ptr<AutoGen_Parameters> > GenParams;
 		void CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level );
 		std::shared_ptr<AutoGen_Parameters> FindParams( const std::shared_ptr<AutoGen> &gen );
 

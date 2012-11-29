@@ -54,6 +54,16 @@ namespace CloudberryKingdom
 		Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}
 
+	ScreenSaver::GetSeedFuncLambdaSS::GetSeedFuncLambdaSS( const std::shared_ptr<ScreenSaver> &ss )
+	{
+		this->ss = ss;
+	}
+
+	std::shared_ptr<LevelSeedData> ScreenSaver::GetSeedFuncLambdaSS::Apply( const int index )
+	{
+		ss->Make( index );
+	}
+	
 	ScreenSaver::ConstructorOnSwapToLevelHelper::ConstructorOnSwapToLevelHelper( const std::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
@@ -293,11 +303,11 @@ namespace CloudberryKingdom
 		Tools::TheGame->LogoScreenPropUp = true;
 		Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
 
-		this->GetSeedFunc = std::make_shared<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( shared_from_this(), &ScreenSaver::Make );
+		this->GetSeedFunc = std::make_shared<GetSeedFuncLambdaSS>( shared_from_this() );
 
 		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>() );
 
-		OnSwapToLevel->Add( std::make_shared<ConstructorOnSwapToLevelHelper>( this ) );
+		OnSwapToLevel->Add( std::make_shared<ConstructorOnSwapToLevelHelper>( shared_from_this() ) );
 	}
 
 	void ScreenSaver::Release()
@@ -508,21 +518,23 @@ namespace CloudberryKingdom
 		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 7;
 		piece->MyUpgrades1->Get( Upgrade_CEILING ) = 7;
 
-		piece->Style_FUN_RUN = false;
-		piece->Style_PAUSE_TYPE = StyleData::_PauseType_NORMAL;
-		piece->Style_MOVE_TYPE_PERIOD = StyleData::_MoveTypePeriod_NORMAL1;
+		piece->Style->FunRun = false;
+		piece->Style->PauseType = StyleData::_PauseType_NORMAL;
+		piece->Style->MoveTypePeriod = StyleData::_MoveTypePeriod_NORMAL1;
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
-		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		//piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 		piece->Paths = Paths;
 		piece->LockNumOfPaths = true;
 		LevelSeedData::NoDoublePaths = false;
 
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
-		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		//piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
-		piece->Style_MY_MOD_PARAMS->Add( std::make_shared<MultiplayerBlobsMyModParamsHelper>( this ) );
+		piece->Style->MyModParams->Add( std::make_shared<MultiplayerBlobsMyModParamsHelper>( shared_from_this() ) );
 	}
 
 	void ScreenSaver::InitializeInstanceFields()

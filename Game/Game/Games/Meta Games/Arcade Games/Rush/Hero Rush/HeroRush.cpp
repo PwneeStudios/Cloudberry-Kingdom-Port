@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 	void Challenge_HeroRush::MakeMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
 	{
-		std::shared_ptr<Coin_Parameters> Params = static_cast<Coin_Parameters*>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::dynamic_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
 		Params->FillType = Coin_Parameters::FillTypes_RUSH;
 	}
 
@@ -145,16 +145,16 @@ std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( 
 		return seed;
 	}
 
-const BobPhsx* tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
-std::vector<BobPhsx*> Challenge_HeroRush::HeroTypes = std::vector<BobPhsx*>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+	const std::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
+	std::vector<std::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 
 	std::shared_ptr<BobPhsx> Challenge_HeroRush::GetHero( int i )
 	{
 		return HeroTypes[ i % HeroTypes.size() ];
 	}
 
-const std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
-std::vector<std::wstring> Challenge_HeroRush::tilesets = std::vector<std::wstring>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
+	const std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
+	std::vector<std::wstring> Challenge_HeroRush::tilesets = std::vector<std::wstring>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
 
 	std::shared_ptr<TileSet> Challenge_HeroRush::GetTileSet( int i )
 	{
@@ -180,7 +180,7 @@ std::vector<std::wstring> Challenge_HeroRush::tilesets = std::vector<std::wstrin
 		data->SetTileSet( GetTileSet( Index - StartIndex ) );
 
 		// Adjust the piece seed data
-		for ( std::vector<PieceSeedData*>::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			// Shorten the initial computer delay
 			( *piece )->Style_COMPUTER_WAIT_LENGTH_RANGE = Vector2( 4, 23 );
@@ -189,7 +189,7 @@ std::vector<std::wstring> Challenge_HeroRush::tilesets = std::vector<std::wstrin
 			( *piece )->Paths = 1;
 			( *piece )->LockNumOfPaths = true;
 
-			( *piece )->Style_MY_MOD_PARAMS->Add( std::make_shared<MakeMyModParamsHelper>() );
+			( *piece )->Style->MyModParams->Add( std::make_shared<MakeMyModParamsHelper>() );
 		}
 
 		return data;
