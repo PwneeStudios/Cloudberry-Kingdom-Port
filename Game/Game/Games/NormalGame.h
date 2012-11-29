@@ -5,30 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class GameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-namespace CloudberryKingdom
-{
 	class NormalFactory : public GameFactory
 	{
 	public:

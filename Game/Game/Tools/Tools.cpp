@@ -1,10 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-namespace XnaInput = Microsoft::Xna::Framework::Input;
-
-
 namespace CloudberryKingdom
 {
 
@@ -101,13 +96,13 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 		DigitsToString( str, DigitsToAppend );
 	}
 
-template<typename T>
+	template<typename T>
 	T ListExtension::Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd )
 	{
 		return list[ rnd->RndInt( 0, list.size() - 1 ) ];
 	}
 
-template<typename T>
+	template<typename T>
 	T ListExtension::Choose( std::vector<T> &list, const std::shared_ptr<Rand> &rnd )
 	{
 		if ( rnd == 0 )
@@ -117,16 +112,7 @@ template<typename T>
 			return list[ rnd->RndInt( 0, list.size() - 1 ) ];
 	}
 
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-template<typename T, typename S> where T : class where S : class
-	void ListExtension::AddRangeAndConvert( std::vector<T> &list, std::vector<S> &range )
-	{
-		for ( std::vector<S>::const_iterator s = range.begin(); s != range.end(); ++s )
-			list.push_back( dynamic_cast<T*>( *s ) );
-	}
-
-
-template<typename TKey, typename TValue>
+	template<typename TKey, typename TValue>
 	void DictionaryExtension::AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value )
 	{
 		if ( dict.find( key ) != dict.end() )
@@ -1665,7 +1651,8 @@ bool Tools::DebugConvenience = false;
 
 	void Tools::UseInvariantCulture()
 	{
-		Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
+		// FIXME: Find all references of this function and make sure we port the desired behavior.
+		//Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
 	}
 
 	bool Tools::_AllTaken( std::vector<bool> list1, std::vector<bool> list2, int Length )

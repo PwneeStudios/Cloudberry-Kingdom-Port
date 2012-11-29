@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 			MyList.clear();
 		}
 
-		void Add( const std::shared_ptr<Lambda_1<T> > &L )
+		void Add( const std::shared_ptr<Lambda_1<T> > L )
 		{
 			MyList.push_back( L );
 		}

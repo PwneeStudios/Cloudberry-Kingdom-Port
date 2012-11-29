@@ -5,17 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-
-namespace CloudberryKingdom
-{
 	class ExplodeBobs : public GUI_Panel
 	{
 	public:
@@ -25,13 +14,13 @@ namespace CloudberryKingdom
 			Speed_FAST
 		};
 	public:
-		ExplodeBobs( Speed speed );
+		ExplodeBobs( int speed );
 
 	private:
-		Speed MySpeed;
+		int MySpeed;
 
 	public:
-		void SetSpeed( Speed speed );
+		void SetSpeed( int speed );
 
 		std::shared_ptr<Lambda> OnDone;
 	private:

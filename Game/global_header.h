@@ -27,7 +27,9 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 #include <vector>
 #include <tchar.h>
 
+#include <Hacks/Compare.h>
 #include <Hacks/List.h>
+#include <Hacks/Parse.h>
 #include <Hacks/String.h>
 
 // Syntactic sugar
@@ -131,12 +133,18 @@ public:
 class FileReader
 {
 
-}
+public:
+	FileReader( std::wstring path );
+	~FileReader(); // FIXME: make sure to close the file.
+
+	std::wstring ReadLine();
+
+};
 
 class FileWriter
 {
 
-}
+};
 
 class FileStream;
 class Game { };
@@ -434,7 +442,23 @@ class StreamWriter;
 class StringBuilder;
 
 class Thread;
-template<class A, class B> class Tuple;
+
+template<class A, class B>
+class Tuple
+{
+
+public:
+	A Item1;
+	B Item2;
+
+	Tuple( A item1, B item2 )
+	{
+		Item1 = item1;
+		Item2 = item2;
+	}
+
+};
+
 class Video;
 class VideoPlayer;
 

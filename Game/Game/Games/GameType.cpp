@@ -364,32 +364,32 @@ namespace CloudberryKingdom
 		ExecutingPreviousLoadFunction = false;
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f )
+	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ) );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, const std::wstring &Name )
+	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name )
 	{
 		WaitThenDo( WaitLength, f, Name, false, false );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, bool PauseOnPause )
+	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, bool PauseOnPause )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), PauseOnPause, false );
 	}
 
-	void GameData::WaitThenDo_Pausable( int WaitLength, const std::shared_ptr<Lambda> &f )
+	void GameData::WaitThenDo_Pausable( int WaitLength, const std::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), true, false );
 	}
 
-	void GameData::CinematicToDo( int WaitLength, const std::shared_ptr<Lambda> &f )
+	void GameData::CinematicToDo( int WaitLength, const std::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), true, true );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
+	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
 	{
 		if ( WaitLength < 0 )
 			return;
@@ -397,7 +397,7 @@ namespace CloudberryKingdom
 		AddToDo( std::make_shared<WaitThenDoCoversion>( WaitLength, f ), Name, PauseOnPause, RemoveOnReset );
 	}
 
-	void GameData::WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > &f )
+	void GameData::WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > f )
 	{
 		// Create a function that after the specified time will add f to the ToDo list
 		WaitThenDo( WaitLength, std::make_shared<WaitThenAddToToDoLambda>( shared_from_this(), f ) );

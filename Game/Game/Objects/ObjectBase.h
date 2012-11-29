@@ -5,8 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase
+	class ObjectBase : public std::enable_shared_from_this<GameData>
 	{
+
 	public:
 		const std::shared_ptr<GameData> &getGame() const;
 		const std::shared_ptr<Level> &getMyLevel() const;

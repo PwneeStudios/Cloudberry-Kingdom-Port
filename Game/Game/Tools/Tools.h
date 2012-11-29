@@ -85,16 +85,12 @@ namespace CloudberryKingdom
 		/// Add a string representation of a number to a StringBuilder
 		/// </summary>
 	public:
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void Add(this StringBuilder str, Int64 num)
 		static void Add( const std::shared_ptr<StringBuilder> &str, long long num );
 		/// <summary>
 		/// Add a string representation of a number to a StringBuilder
 		/// </summary>
 		/// <param name="MinDigits">The minimum number of digits used in the string.
 		/// The string is padded with zeros to the left if needed.</param>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void Add(this StringBuilder str, Int64 num, int MinDigits)
 		static void Add( const std::shared_ptr<StringBuilder> &str, long long num, int MinDigits );
 	};
 
@@ -105,23 +101,13 @@ namespace CloudberryKingdom
 		/// Returns a single randomly chosen item from the list
 		/// </summary>
 		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static T Choose<T>(this T[] list, Rand rnd)
 		static T Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd );
 
 		/// <summary>
 		/// Choose a random element from the list
 		/// </summary>
 		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static T Choose<T>(this List<T> list, Rand rnd)
 		static T Choose( std::vector<T> &list, const std::shared_ptr<Rand> &rnd );
-
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-		template<typename T, typename S>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void AddRangeAndConvert<T, S>(this List<T> list, List<S> range) where T : class where S : class
-		static void AddRangeAndConvert( std::vector<T> &list, std::vector<S> &range );
 	};
 
 	class DictionaryExtension
@@ -129,8 +115,6 @@ namespace CloudberryKingdom
 	public:
 
 		template<typename TKey, typename TValue>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void AddOrOverwrite<TKey, TValue>(this Dictionary<TKey, TValue> dict, TKey key, TValue value)
 		static void AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value );
 	};
 

@@ -1074,9 +1074,6 @@
     <ClCompile Include="Game\Level\Level.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Level\Make\LevelSeedData.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2193,6 +2190,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Level\Make\LevelSeedData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hacks\Parse.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hacks\Compare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

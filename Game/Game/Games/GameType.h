@@ -3,10 +3,6 @@
 
 #include <global_header.h>
 
-#if defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
 namespace CloudberryKingdom
 {
 
@@ -364,21 +360,21 @@ namespace CloudberryKingdom
 		/// </summary>
 		/// <param name="WaitLength">Number of frames to wait.</param>
 		/// <param name="Func">Function to execute.</param>
-		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f );
+		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f );
 
-		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, const std::wstring &Name );
+		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name );
 
-		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, bool PauseOnPause );
-		void WaitThenDo_Pausable( int WaitLength, const std::shared_ptr<Lambda> &f );
+		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, bool PauseOnPause );
+		void WaitThenDo_Pausable( int WaitLength, const std::shared_ptr<Lambda> f );
 
-		void CinematicToDo( int WaitLength, const std::shared_ptr<Lambda> &f );
+		void CinematicToDo( int WaitLength, const std::shared_ptr<Lambda> f );
 		//public void CinematicToDo(LambdaFunc<bool> f)
 		//{
 		//    AddToDo(f, "", true, true);
 		//}
-		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> &f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset );
+		void WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset );
 
-		void WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > &f );
+		void WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > f );
 
 		GameFlags MyGameFlags;
 

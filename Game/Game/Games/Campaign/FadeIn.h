@@ -3,7 +3,6 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 	class FadeInObject : public GameObject

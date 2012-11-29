@@ -8,28 +8,28 @@ namespace CloudberryKingdom
 	class CampaignSequence : public LevelSequence
 	{
 	private:
-		class PostMakeCampaignProxy : public Lambda_1<Level*>
+		class PostMakeCampaignProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		public:
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
 	private:
-		class OnCoinGrabProxy : public Lambda_1<ObjectBase*>
+		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
 	private:
-		class OnCompleteLevelProxy : public Lambda_1<Level*>
+		class OnCompleteLevelProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		public:
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
 	private:
-		class WatchMovieLambda : public Lambda_1<Level*>
+		class WatchMovieLambda : public Lambda_1<std::shared_ptr<Level> >
 		{
 		private:
 			std::wstring movie;
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class EndActionProxy : public Lambda_1<Level*>
+		class EndActionProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
 		public:
 			void Apply( const std::shared_ptr<Level> &level );
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 	private:
 		std::map<int, int> ChapterStart;
-		std::map<int, Tuple<std::wstring, std::wstring>*> SpecialLevel;
+		std::map<int, std::shared_ptr< Tuple<std::wstring, std::wstring> > > SpecialLevel;
 
 	public:
 		virtual void Start( int Chapter );
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		virtual void MakeSeedList();
 
 	private:
-		static std::shared_ptr<LevelSeedData> MakeActionSeed( const std::shared_ptr<Lambda_1<Level*> > &SeedAction );
+		static std::shared_ptr<LevelSeedData> MakeActionSeed( const std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > SeedAction );
 
 	public:
 		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 
 		static void OnCompleteLevel( const std::shared_ptr<Level> &level );
 
-		static std::shared_ptr<Lambda_1<Level*> > MakeWatchMovieAction( const std::wstring &movie );
+		static std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > MakeWatchMovieAction( const std::wstring &movie );
 
 		static void EndAction( const std::shared_ptr<Level> &level );
 

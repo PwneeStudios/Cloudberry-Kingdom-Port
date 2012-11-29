@@ -37,19 +37,19 @@ namespace CloudberryKingdom
 		MyGame->Black();
 
 		// Find the initial door
-		std::shared_ptr<Door> door = dynamic_cast<Door*>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
+		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 != door )
 		{
-			for ( std::vector<Bob*>::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
+			for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 				( *bob )->getCore()->Show = false;
 		}
 
-		MyGame->WaitThenDo( 1, std::make_shared<ReadyProxy>( this ) );
+		MyGame->WaitThenDo( 1, std::make_shared<ReadyProxy>( shared_from_this() ) );
 	}
 
 	void FadeInObject::Ready()
 	{
-		MyGame->WaitThenDo( 20, std::make_shared<EndProxy>( this ) );
+		MyGame->WaitThenDo( 20, std::make_shared<EndProxy>( shared_from_this() ) );
 	}
 
 	void FadeInObject::End()

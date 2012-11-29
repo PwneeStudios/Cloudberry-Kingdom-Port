@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	ExplodeBobs::ExplodeBobs( Speed speed )
+	ExplodeBobs::ExplodeBobs( int speed )
 	{
 		InitializeInstanceFields();
 		Active = true;
@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		SetSpeed( speed );
 	}
 
-	void ExplodeBobs::SetSpeed( Speed speed )
+	void ExplodeBobs::SetSpeed( int speed )
 	{
 		MySpeed = speed;
 		switch ( MySpeed )
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 
 	int ExplodeBobs::CompareBobs( const std::shared_ptr<Bob> &A, const std::shared_ptr<Bob> &B )
 	{
-		return A->getCore()->Data.Position->X.compare(B->getCore()->Data.Position->X);
+		return Compare(A->getCore()->Data.Position.X, B->getCore()->Data.Position.X);
 	}
 
 	void ExplodeBobs::MyPhsxStep()
@@ -73,8 +73,7 @@ namespace CloudberryKingdom
 		// Afterward blow up a bob periodicially
 		if ( ( Count - InitialDelay ) % Delay == 0 )
 		{
-			std::vector<Bob*> bobs = std::vector<Bob*>();
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
+			BobVec bobs = BobVec();
 			for ( std::vector<Bob*>::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 				if ( ( *bob )->Core->Show && ( *bob )->GetPlayerData()->IsAlive )
 					bobs.push_back( *bob );

@@ -53,20 +53,21 @@ namespace CloudberryKingdom
 		Seeds.push_back( 0 );
 
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( _T( "Content\\Campaign\\CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		//std::shared_ptr<FileStream> stream = File->Open( _T( "Content\\Campaign\\CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		FileReader reader = FileReader( _T( "Content\\Campaign\\CampaignList.txt" ) );
 
 		std::wstring line;
 
 		int level = 1, count = 1;
 
-		line = reader->ReadLine();
+		line = reader.ReadLine();
 		while ( line != _T( "" ) )
 		{
 			line = Tools::RemoveComment_DashStyle( line );
 			if ( line == _T( "" ) || line.length() <= 1 )
 			{
-				line = reader->ReadLine();
+				line = reader.ReadLine();
 				continue;
 			}
 
@@ -83,34 +84,29 @@ namespace CloudberryKingdom
 				data = _T( "" );
 			}
 
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//			switch (identifier)
-//ORIGINAL LINE: case "chapter":
 			if ( identifier == _T( "chapter" ) )
 			{
-					int chapter = int::Parse( data );
-					ChapterStart.AddOrOverwrite( chapter, count );
+					int chapter = ParseInt( data );
+					//ChapterStart.AddOrOverwrite( chapter, count );
+					DictionaryExtension::AddOrOverwrite( ChapterStart, chapter, count );
 
 			}
-//ORIGINAL LINE: case "movie":
 			else if ( identifier == _T( "movie" ) )
 			{
-					SpecialLevel.AddOrOverwrite( count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
 					Seeds.push_back( 0 );
 					count++;
 
 
 			}
-//ORIGINAL LINE: case "end":
 			else if ( identifier == _T( "end" ) )
 			{
-					SpecialLevel.AddOrOverwrite( count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, 0 ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, 0 ) );
 					Seeds.push_back( 0 );
 					count++;
 
 
 			}
-//ORIGINAL LINE: case "seed":
 			else if ( identifier == _T( "seed" ) )
 			{
 					std::wstring seed = data;
@@ -122,14 +118,14 @@ namespace CloudberryKingdom
 
 			}
 
-			line = reader->ReadLine();
+			line = reader.ReadLine();
 		}
 
-		reader->Close();
-		stream->Close();
+		//reader->Close();
+		//stream->Close();
 	}
 
-	std::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const std::shared_ptr<Lambda_1<Level*> > &SeedAction )
+	std::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > SeedAction )
 	{
 		std::shared_ptr<LevelSeedData> seed = std::make_shared<LevelSeedData>();
 		seed->MyGameType = ActionGameData::Factory;
@@ -144,18 +140,15 @@ namespace CloudberryKingdom
 		if ( SpecialLevel.find( Index ) != SpecialLevel.end() )
 		{
 			std::shared_ptr<Tuple<std::wstring, std::wstring> > data = SpecialLevel[ Index ];
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//			switch (data.Item1)
-//ORIGINAL LINE: case "end":
+
 			if ( data->Item1 == _T( "end" ) )
 			{
 					return MakeActionSeed( std::make_shared<EndActionProxy>() );
 
 			}
-//ORIGINAL LINE: case "movie":
 			else if ( data->Item1 == _T( "movie" ) )
 			{
-					std::shared_ptr<Lambda_1<Level*> > temp = MakeWatchMovieAction( data->Item2 );
+					std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > temp = MakeWatchMovieAction( data->Item2 );
 					return MakeActionSeed( temp );
 
 			}
@@ -185,26 +178,26 @@ namespace CloudberryKingdom
 		std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( std::wstring::Format( _T( "{1} {0}" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ) ) );
 		level->MyGame->AddGameObject( title );
 
-		level->MyGame->AddGameObject( std::make_shared<GUI_CampaignScore>(), std::make_shared<GUI_Level>(level->MyLevelSeed->LevelNum) );
+		level->MyGame->AddGameObject( std::make_shared<GUI_CampaignScore>() );
+		level->MyGame->AddGameObject( std::make_shared<GUI_Level>(level->MyLevelSeed->LevelNum) );
 
 		level->MyGame->MyBankType = GameData::BankType_CAMPAIGN;
 	}
 
 	void CampaignSequence::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			( *player )->CampaignCoins++;
 	}
 
 	void CampaignSequence::OnCompleteLevel( const std::shared_ptr<Level> &level )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
 	}
 
-	std::shared_ptr<Lambda_1<Level*> > CampaignSequence::MakeWatchMovieAction( const std::wstring &movie )
+	std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > CampaignSequence::MakeWatchMovieAction( const std::wstring &movie )
 	{
 		return std::make_shared<WatchMovieLambda>( movie );
 	}
@@ -222,6 +215,6 @@ namespace CloudberryKingdom
 	void CampaignSequence::InitializeInstanceFields()
 	{
 		ChapterStart = std::map<int, int>();
-		SpecialLevel = std::map<int, Tuple<std::wstring, std::wstring>*>();
+		SpecialLevel = std::map<int, std::shared_ptr<Tuple<std::wstring, std::wstring> > >();
 	}
 }
