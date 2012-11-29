@@ -466,7 +466,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	StringWorldGameData::StringWorldGameData( std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > GetSeed )
+	StringWorldGameData::StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed )
 	{
 		InitializeInstanceFields();
 		this->GetSeedFunc = GetSeed;

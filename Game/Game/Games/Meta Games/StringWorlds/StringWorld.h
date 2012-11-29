@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 
 		StringWorldGameData();
 
-		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > GetSeed );
+		StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed );
 
 		std::shared_ptr<Level> MakeLevel();
 

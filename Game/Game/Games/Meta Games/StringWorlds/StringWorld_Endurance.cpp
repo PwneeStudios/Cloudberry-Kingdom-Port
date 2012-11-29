@@ -10,11 +10,17 @@ namespace CloudberryKingdom
 
 	void StringWorldEndurance::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
 	{
-		data->MyGame->AddGameObject( ch->Gui_LivesLeft, ch->Gui_NextLife, ch->Gui_Lives, ch->MyCoinScoreMultiplier, std::make_shared<PerfectScoreObject>( false, true ), ch->MyGUI_Score );
+		data->MyGame->AddGameObject( ch->Gui_LivesLeft );
+		data->MyGame->AddGameObject( ch->Gui_NextLife );
+		data->MyGame->AddGameObject( ch->Gui_Lives );
+		data->MyGame->AddGameObject( ch->MyCoinScoreMultiplier );
+		data->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>( false, true ) );
+		data->MyGame->AddGameObject( ch->MyGUI_Score );
 			//, MyGUI_Level
 	}
 
-	StringWorldEndurance::StringWorldEndurance( Func<int, LevelSeedData*> GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife ) : StringWorldGameData( std::make_shared<Func>( shared_from_this(), &StringWorldEndurance::GetSeed ) )
+	StringWorldEndurance::StringWorldEndurance( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife ) :
+		StringWorldGameData( GetSeed )
 	{
 		// Lives
 		this->Gui_LivesLeft = Gui_LivesLeft;
@@ -29,7 +35,7 @@ namespace CloudberryKingdom
 		MyGUI_Level = std::make_shared<GUI_Level>();
 
 		// Add game objects, including 'Perfect' watcher
-		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
+		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );
 	}
 
 	void StringWorldEndurance::Release()
