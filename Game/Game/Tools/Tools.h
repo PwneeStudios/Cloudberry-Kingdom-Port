@@ -311,7 +311,8 @@ static std::wstring SourceTextureDirectory();
 #else
 		static std::wstring SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font );
 #endif
-		static std::vector<GamePadState> GamepadState, *PrevGamepadState;
+		static std::vector<GamePadState> GamepadState;
+		static std::vector<GamePadState> PrevGamepadState;
 
 		/// <summary>
 		/// Return just the file name of a path.

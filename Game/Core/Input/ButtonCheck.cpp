@@ -133,15 +133,17 @@ bool ButtonCheck::PrevMouseInUse = false;
 		// Update controller/keyboard states
 	#if defined(WINDOWS)
 		Tools::Keyboard = Keyboard::GetState();
-		if ( Tools::PrevKeyboard == 0 )
+
+		// FIXME: These are all value types.
+		//if ( Tools::PrevKeyboard == 0 )
 			Tools::PrevKeyboard = Tools::Keyboard;
 
 		Tools::Mouse = Mouse::GetState();
 	#endif
-		Tools::GamepadState[ 0 ] = GamePad::GetState( PlayerIndex::One );
-		Tools::GamepadState[ 1 ] = GamePad::GetState( PlayerIndex::Two );
-		Tools::GamepadState[ 2 ] = GamePad::GetState( PlayerIndex::Three );
-		Tools::GamepadState[ 3 ] = GamePad::GetState( PlayerIndex::Four );
+		Tools::GamepadState[ 0 ] = GamePad::GetState( PlayerIndex_One );
+		Tools::GamepadState[ 1 ] = GamePad::GetState( PlayerIndex_Two );
+		Tools::GamepadState[ 2 ] = GamePad::GetState( PlayerIndex_Three );
+		Tools::GamepadState[ 3 ] = GamePad::GetState( PlayerIndex_Four );
 
 		ButtonStats::Update();
 
@@ -161,30 +163,35 @@ bool ButtonCheck::PrevMouseInUse = false;
 		Tools::DeltaScroll = Tools::Mouse.ScrollWheelValue - Tools::PrevMouse.ScrollWheelValue;
 		if ( Tools::CurLevel != 0 )
 		{
-			Tools::DeltaMouse = Tools::ToWorldCoordinates( Vector2( Tools::Mouse.X, Tools::Mouse.Y ), Tools::CurLevel->getMainCamera() ) - Tools::ToWorldCoordinates(Vector2(Tools::PrevMouse.X, Tools::PrevMouse.Y), Tools::CurLevel->getMainCamera());
+			Tools::DeltaMouse = Tools::ToWorldCoordinates( Vector2( static_cast<float>( Tools::Mouse.X ), static_cast<float>( Tools::Mouse.Y ) ), Tools::CurLevel->getMainCamera() )
+				- Tools::ToWorldCoordinates( Vector2( static_cast<float>( Tools::PrevMouse.X ), static_cast<float>( Tools::PrevMouse.Y ) ), Tools::CurLevel->getMainCamera());
 		}
-		Tools::RawDeltaMouse = Vector2( Tools::Mouse.X, Tools::Mouse.Y ) - Vector2( Tools::PrevMouse.X, Tools::PrevMouse.Y );
+		Tools::RawDeltaMouse = Vector2( static_cast<float>( Tools::Mouse.X ), static_cast<float>( Tools::Mouse.Y ) )
+			- Vector2( static_cast<float>( Tools::PrevMouse.X ), static_cast<float>( Tools::PrevMouse.Y ) );
 
 		Tools::PrevKeyboard = Tools::Keyboard;
 		Tools::PrevMouse = Tools::Mouse;
 
 		// Store the previous states of the Xbox controllers.
 		for ( int i = 0; i < 4; i++ )
-			if ( Tools::PrevGamepadState[ i ] != 0 )
+		{
+			// FIXME: All of these are value types.
+			//if ( Tools::PrevGamepadState[ i ] != 0 )
 				Tools::PrevGamepadState[ i ] = Tools::GamepadState[ i ];
+		}
 	}
 
 #if defined(PC_VERSION)
 	void ButtonCheck::UpdateMouseUse()
 	{
 	#if defined(PC_VERSION)
-		if ( ButtonCheck::AnyKeyboardKey() || (PlayerManager::Players.size() > 0 && PlayerManager::getPlayer() != 0 && ButtonCheck::GetMaxDir(false).Length() > ::3) )
+		if ( ButtonCheck::AnyKeyboardKey() || (PlayerManager::Players.size() > 0 && PlayerManager::getPlayer() != 0 && ButtonCheck::GetMaxDir(false).Length() > 0.3f) )
 	#else
 		if ( ButtonCheck::AnyKeyboardKey() || (PlayerManager::Players.size() > 0 && ButtonCheck::GetMaxDir(true).Length() > ::3) )
 	#endif
 			MouseInUse = false;
 
-		if ( Tools::DeltaMouse != Vector2() || Tools::Mouse.LeftButton == ButtonState::Pressed || Tools::Mouse.RightButton == ButtonState::Pressed )
+		if ( Tools::DeltaMouse != Vector2() || Tools::Mouse.LeftButton == ButtonState_Pressed || Tools::Mouse.RightButton == ButtonState_Pressed )
 			MouseInUse = true;
 
 		PrevMouseInUse = MouseInUse;
@@ -193,34 +200,34 @@ bool ButtonCheck::PrevMouseInUse = false;
 
 	void ButtonCheck::KillSecondary()
 	{
-		Help_KeyboardKey->Set( Keys::None );
-		Quickspawn_KeyboardKey->Set( Keys::None );
-		Start_Secondary = Go_Secondary = Back_Secondary = ReplayPrev_Secondary = ReplayNext_Secondary = SlowMoToggle_Secondary = Left_Secondary = Right_Secondary = Up_Secondary = Down_Secondary = Keys::None;
+		Help_KeyboardKey->Set( Keys_None );
+		Quickspawn_KeyboardKey->Set( Keys_None );
+		Start_Secondary = Go_Secondary = Back_Secondary = ReplayPrev_Secondary = ReplayNext_Secondary = SlowMoToggle_Secondary = Left_Secondary = Right_Secondary = Up_Secondary = Down_Secondary = Keys_None;
 	}
 
 std::shared_ptr<ButtonClass> Quickspawn_KeyboardKey, Help_KeyboardKey, ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
-Keys Start_Secondary, Go_Secondary, Back_Secondary, ReplayPrev_Secondary, ReplayNext_Secondary, ReplayToggle_Secondary, SlowMoToggle_Secondary, Left_Secondary, Right_Secondary, Up_Secondary, ButtonCheck::Down_Secondary = 0;
+Keys Start_Secondary, Go_Secondary, Back_Secondary, ReplayPrev_Secondary, ReplayNext_Secondary, ReplayToggle_Secondary, SlowMoToggle_Secondary, Left_Secondary, Right_Secondary, Up_Secondary, ButtonCheck::Down_Secondary = Keys_None;
 
 	void ButtonCheck::Reset()
 	{
-		QuickReset_KeyboardKey->Set( Keys::F );
-		Quickspawn_KeyboardKey->Set( Keys::Space );
-		Help_KeyboardKey->Set( Keys::Enter );
+		QuickReset_KeyboardKey->Set( Keys_F );
+		Quickspawn_KeyboardKey->Set( Keys_Space );
+		Help_KeyboardKey->Set( Keys_Enter );
 
-		Start_Secondary = Keys::None;
-		Go_Secondary = Keys::None;
-		Back_Secondary = Keys::None;
+		Start_Secondary = Keys_None;
+		Go_Secondary = Keys_None;
+		Back_Secondary = Keys_None;
 
-		ReplayPrev_Secondary = Keys::N;
-		ReplayNext_Secondary = Keys::M;
-		ReplayToggle_Secondary = Keys::L;
+		ReplayPrev_Secondary = Keys_N;
+		ReplayNext_Secondary = Keys_M;
+		ReplayToggle_Secondary = Keys_L;
 
-		SlowMoToggle_Secondary = Keys::C;
+		SlowMoToggle_Secondary = Keys_C;
 
-		Left_Secondary = Keys::A;
-		Right_Secondary = Keys::D;
-		Up_Secondary = Keys::W;
-		Down_Secondary = Keys::S;
+		Left_Secondary = Keys_A;
+		Right_Secondary = Keys_D;
+		Up_Secondary = Keys_W;
+		Down_Secondary = Keys_S;
 	}
 
 float ButtonCheck::ThresholdSensitivity = .715f;
@@ -326,7 +333,7 @@ int ButtonCheck::PreventTimeStamp = 0;
 	bool ButtonCheck::Back( int Control )
 	{
 	#if defined(WINDOWS)
-		if ( ButtonCheck::State( ControllerButtons_B, Control, false ).Pressed || ButtonCheck::State( Keys::Escape ).Pressed || ButtonCheck::State( Keys::Back ).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_B, Control, false ).Pressed || ButtonCheck::State( Keys_Escape ).Pressed || ButtonCheck::State( Keys_Back ).Pressed )
 			return true;
 	#else
 		if ( ButtonCheck::State( ControllerButtons_B, Control, false ).Pressed )
@@ -341,9 +348,9 @@ int ButtonCheck::PreventTimeStamp = 0;
 		ButtonData Data = ButtonData();
 		Data.PressingPlayer = 0;
 	#if defined(WINDOWS)
-		Data.Down = Tools::Keyboard.IsKeyDownCustom( Key );
-		Data.Pressed = Data.Down && !Tools::PrevKeyboard.IsKeyDownCustom( Key );
-		Data.Released = !Data.Down && Tools::PrevKeyboard.IsKeyDownCustom( Key );
+		Data.Down = KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Key );
+		Data.Pressed = Data.Down && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Key );
+		Data.Released = !Data.Down && KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Key );
 	#endif
 		return Data;
 	}
@@ -360,9 +367,9 @@ int ButtonCheck::PreventTimeStamp = 0;
 	{
 		int ValidKeysPressed = 0;
 
-		std::vector<Microsoft::Xna::Framework::Input::Keys> keys = Tools::Keyboard.GetPressedKeys();
-		for ( int i = 0; i < keys.size(); i++ )
-			if ( keys[ i ] != Keys::Left && keys[ i ] != Keys::Right && keys[ i ] != Keys::Up && keys[ i ] != Keys::Down && keys[ i ] != Keys::LeftShift && keys[ i ] != Keys::RightShift && keys[ i ] != Keys::LeftAlt && keys[ i ] != Keys::RightAlt && keys[ i ] != Keys::LeftControl && keys[ i ] != Keys::RightControl && keys[ i ] != Keys::Tab )
+		std::vector<Keys> keys = Tools::Keyboard.GetPressedKeys();
+		for ( size_t i = 0; i < keys.size(); i++ )
+			if ( keys[ i ] != Keys_Left && keys[ i ] != Keys_Right && keys[ i ] != Keys_Up && keys[ i ] != Keys_Down && keys[ i ] != Keys_LeftShift && keys[ i ] != Keys_RightShift && keys[ i ] != Keys_LeftAlt && keys[ i ] != Keys_RightAlt && keys[ i ] != Keys_LeftControl && keys[ i ] != Keys_RightControl && keys[ i ] != Keys_Tab )
 			{
 				ValidKeysPressed++;
 			}
@@ -385,21 +392,24 @@ int ButtonCheck::PreventTimeStamp = 0;
 
 	ButtonData ButtonCheck::AllState( int iPlayerIndex )
 	{
-		return State( iPlayerIndex, ControllerButtons_A, ControllerButtons_B, ControllerButtons_X, ControllerButtons_Y, ControllerButtons_LS, ControllerButtons_RS );
+		static ControllerButtons tempButtons[] = { ControllerButtons_A, ControllerButtons_B, ControllerButtons_X, ControllerButtons_Y, ControllerButtons_LS, ControllerButtons_RS };
+		static std::vector<ControllerButtons> buttons( tempButtons, tempButtons + sizeof( tempButtons ) / sizeof( ControllerButtons ) );
+
+		return State( iPlayerIndex, buttons );
 	}
 
 #if defined(WINDOWS)
 	bool ButtonCheck::KeyboardGo()
 	{
-		return Tools::Keyboard.IsKeyDownCustom( Keys::Enter ) || Tools::Keyboard.IsKeyDownCustom( Keys::Space ) || Tools::Keyboard.IsKeyDownCustom( Go_Secondary );
+		return KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Enter ) || KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Space ) || KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Go_Secondary );
 	}
 #endif
 
-	ButtonData ButtonCheck::State( int iPlayerIndex, ... )
+	ButtonData ButtonCheck::State( int iPlayerIndex, const std::vector<ControllerButtons> &ButtonList )
 	{
 		ButtonData data = ButtonData();
 		data.PressingPlayer = iPlayerIndex;
-		for ( unknown::const_iterator button = ButtonList.begin(); button != ButtonList.end(); ++button )
+		for ( std::vector<ControllerButtons>::const_iterator button = ButtonList.begin(); button != ButtonList.end(); ++button )
 		{
 			ButtonData newdata = State( *button, iPlayerIndex );
 
@@ -429,7 +439,7 @@ bool ButtonCheck::PreLogIn = true;
 	{
 		ButtonData Data = ButtonData();
 		Data.PressingPlayer = 0;
-		if ( Key == Keys::None )
+		if ( Key == Keys_None )
 			return Data;
 
 		if ( PreventNextInput )
@@ -449,7 +459,7 @@ bool ButtonCheck::PreLogIn = true;
 		else
 			keyboard = Tools::Keyboard;
 
-		Data.Down = keyboard.IsKeyDownCustom( Key );
+		Data.Down = KeyboardExtension::IsKeyDownCustom( keyboard, Key );
 	#endif
 
 		// Get previous data to calculate Pressed and Released
@@ -565,19 +575,19 @@ bool ButtonCheck::PreLogIn = true;
 		}
 	#if defined(WINDOWS)
 
-		Keys key = Keys::None;
-		Keys SecondaryKey = Keys::None;
-		Keys TertiaryKey = Keys::None;
+		Keys key = Keys_None;
+		Keys SecondaryKey = Keys_None;
+		Keys TertiaryKey = Keys_None;
 
 		if ( ( SingleOutPlayer && iPlayerIndex == ThisPlayerOnly ) || ( UseKeyboardMapping && ( iPlayerIndex == 0 || PlayerManager::Get( iPlayerIndex )->Exists ) ) )
 		{
 	//#if PC_VERSION
 			if ( Button == ControllerButtons_ENTER )
-				key = Keys::Enter;
+				key = Keys_Enter;
 
 			if ( Button == ControllerButtons_START )
 			{
-				key = Keys::Escape;
+				key = Keys_Escape;
 				TertiaryKey = Start_Secondary;
 			}
 			if ( Button == ControllerButtons_A )
@@ -586,7 +596,7 @@ bool ButtonCheck::PreLogIn = true;
 			}
 			if ( Button == ControllerButtons_B )
 			{
-				key = Keys::Escape;
+				key = Keys_Escape;
 				TertiaryKey = Back_Secondary;
 			}
 			if ( Button == ControllerButtons_X )
@@ -600,17 +610,17 @@ bool ButtonCheck::PreLogIn = true;
 
 
 			if ( Button == ControllerButtons_X ) // Keys.C;
-				key = Keys::None;
+				key = Keys_None;
 			if ( Button == ControllerButtons_Y ) // Keys.V;
-				key = Keys::None;
+				key = Keys_None;
 			if ( Button == ControllerButtons_RT )
-				key = Keys::OemPeriod;
+				key = Keys_OemPeriod;
 			if ( Button == ControllerButtons_LT )
-				key = Keys::OemComma;
+				key = Keys_OemComma;
 			if ( Button == ControllerButtons_LS )
-				key = Keys::A;
+				key = Keys_A;
 			if ( Button == ControllerButtons_RS )
-				key = Keys::D;
+				key = Keys_D;
 	//#else
 	//                if (Button == ControllerButtons.Start) key = Keys.S;
 	//                if (Button == ControllerButtons.Back) key = Keys.Escape;
@@ -623,10 +633,10 @@ bool ButtonCheck::PreLogIn = true;
 	//#endif
 
 			if ( Button == ControllerButtons_START )
-				SecondaryKey = Keys::Back;
+				SecondaryKey = Keys_Back;
 			//if (Button == ControllerButtons.Back) SecondaryKey = Keys.Back;
 			if ( Button == ControllerButtons_B )
-				SecondaryKey = Keys::Back;
+				SecondaryKey = Keys_Back;
 		}
 
 		KeyboardState keyboard;
@@ -646,44 +656,44 @@ bool ButtonCheck::PreLogIn = true;
 		switch ( Button )
 		{
 			case ControllerButtons_START:
-				Data.Down = ( Pad.Buttons->Start == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Start == ButtonState_Pressed );
 				break;
 			case ControllerButtons_BACK:
-				Data.Down = ( Pad.Buttons->Back == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Back == ButtonState_Pressed );
 				break;
 			case ControllerButtons_A:
-				Data.Down = ( Pad.Buttons->A == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.A == ButtonState_Pressed );
 				break;
 			case ControllerButtons_B:
-				Data.Down = ( Pad.Buttons->B == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.B == ButtonState_Pressed );
 				break;
 			case ControllerButtons_X:
-				Data.Down = ( Pad.Buttons->X == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.X == ButtonState_Pressed );
 				break;
 			case ControllerButtons_Y:
-				Data.Down = ( Pad.Buttons->Y == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.Y == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LJBUTTON:
-				Data.Down = ( Pad.Buttons->LeftStick == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.LeftStick == ButtonState_Pressed );
 				break;
 			case ControllerButtons_RJBUTTON:
-				Data.Down = ( Pad.Buttons->RightStick == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.RightStick == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LS:
-				Data.Down = ( Pad.Buttons->LeftShoulder == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.LeftShoulder == ButtonState_Pressed );
 				break;
 			case ControllerButtons_RS:
-				Data.Down = ( Pad.Buttons->RightShoulder == ButtonState::Pressed );
+				Data.Down = ( Pad.Buttons.RightShoulder == ButtonState_Pressed );
 				break;
 			case ControllerButtons_LT:
 			{
-					Data.Down = ( Pad.Triggers.Left > ::5 );
+					Data.Down = ( Pad.Triggers.Left > 0.5f );
 					Data.Squeeze = Pad.Triggers.Left;
 					break;
 			}
 			case ControllerButtons_RT:
 			{
-					Data.Down = ( Pad.Triggers.Right > ::5 );
+					Data.Down = ( Pad.Triggers.Right > 0.5f );
 					Data.Squeeze = Pad.Triggers.Right;
 					break;
 			}
@@ -696,13 +706,13 @@ bool ButtonCheck::PreLogIn = true;
 			case ControllerButtons_DPAD:
 			{
 					Data.Dir = Vector2();
-					if ( Pad.DPad.Right == ButtonState::Pressed )
+					if ( Pad.DPad.Right == ButtonState_Pressed )
 						Data.Dir = Vector2( 1, 0 );
-					if ( Pad.DPad.Up == ButtonState::Pressed )
+					if ( Pad.DPad.Up == ButtonState_Pressed )
 						Data.Dir = Vector2( 0, 1 );
-					if ( Pad.DPad.Left == ButtonState::Pressed )
+					if ( Pad.DPad.Left == ButtonState_Pressed )
 						Data.Dir = Vector2( -1, 0 );
-					if ( Pad.DPad.Down == ButtonState::Pressed )
+					if ( Pad.DPad.Down == ButtonState_Pressed )
 						Data.Dir = Vector2( 0, -1 );
 			}
 				break;
@@ -716,20 +726,20 @@ bool ButtonCheck::PreLogIn = true;
 		if ( Button == ControllerButtons_A )
 		{
 			if ( Prev )
-				Data.Down |= Tools::Mouse.LeftButton == ButtonState::Pressed;
+				Data.Down |= Tools::Mouse.LeftButton == ButtonState_Pressed;
 			else
-				Data.Down |= Tools::PrevMouse.LeftButton == ButtonState::Pressed;
+				Data.Down |= Tools::PrevMouse.LeftButton == ButtonState_Pressed;
 		}
 		else
-			Data.Down |= keyboard.IsKeyDownCustom( key );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, key );
 
-		if ( SecondaryKey != Keys::None )
-			Data.Down |= keyboard.IsKeyDownCustom( SecondaryKey );
+		if ( SecondaryKey != Keys_None )
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, SecondaryKey );
 
-		if ( TertiaryKey != Keys::None )
-			Data.Down |= keyboard.IsKeyDownCustom( TertiaryKey );
+		if ( TertiaryKey != Keys_None )
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, TertiaryKey );
 
-		key = Keys::Escape;
+		key = Keys_Escape;
 
 		//if (Button == ControllerButtons.A) key = Keys.Z;
 		//if (Button == ControllerButtons.B) key = Keys.X;
@@ -739,11 +749,11 @@ bool ButtonCheck::PreLogIn = true;
 		if ( Button == ControllerButtons_B )
 			key = Back_Secondary;
 
-		if ( key != Keys::Escape )
-			Data.Down |= keyboard.IsKeyDownCustom( key );
+		if ( key != Keys_Escape )
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, key );
 
 		if ( Button == ControllerButtons_A )
-			Data.Down |= keyboard.IsKeyDownCustom( Keys::Enter ) || keyboard.IsKeyDownCustom( Keys::Space );
+			Data.Down |= KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Enter ) || KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Space );
 	//#else
 	//    Data.Down |= keyboard.IsKeyDownCustom(key);
 	//#endif
@@ -751,21 +761,21 @@ bool ButtonCheck::PreLogIn = true;
 		if ( Button == ControllerButtons_LJ )
 		{
 			Vector2 KeyboardDir = Vector2();
-			if ( keyboard.IsKeyDownCustom( Keys::Left ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Left ) )
 				KeyboardDir.X = -1;
-			if ( keyboard.IsKeyDownCustom( Keys::Right ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Right ) )
 				KeyboardDir.X = 1;
-			if ( keyboard.IsKeyDownCustom( Keys::Up ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Up ) )
 				KeyboardDir.Y = 1;
-			if ( keyboard.IsKeyDownCustom( Keys::Down ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Keys_Down ) )
 				KeyboardDir.Y = -1;
-			if ( keyboard.IsKeyDownCustom( Left_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Left_Secondary ) )
 				KeyboardDir.X = -1;
-			if ( keyboard.IsKeyDownCustom( Right_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Right_Secondary ) )
 				KeyboardDir.X = 1;
-			if ( keyboard.IsKeyDownCustom( Up_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Up_Secondary ) )
 				KeyboardDir.Y = 1;
-			if ( keyboard.IsKeyDownCustom( Down_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( keyboard, Down_Secondary ) )
 				KeyboardDir.Y = -1;
 
 			if ( KeyboardDir.LengthSquared() > Data.Dir.LengthSquared() )

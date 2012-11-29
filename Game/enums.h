@@ -845,10 +845,10 @@ enum Keys
 
 enum PlayerIndex
 {
-    One = 0,
-    Two = 1,
-    Three = 2,
-    Four = 3
+    PlayerIndex_One = 0,
+    PlayerIndex_Two = 1,
+    PlayerIndex_Three = 2,
+    PlayerIndex_Four = 3
 };
 
 enum StatGroup

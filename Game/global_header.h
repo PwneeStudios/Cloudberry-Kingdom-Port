@@ -160,12 +160,58 @@ public:
 
 };
 
+class GamePadTriggers
+{
+
+public:
+
+	float Left;
+	float Right;
+
+};
+
+class GamePadDPad
+{
+
+public:
+
+	ButtonState Down;
+	ButtonState Left;
+	ButtonState Right;
+	ButtonState Up;
+
+};
+
+class GamePadThumbSticks
+{
+
+public:
+
+	Vector2 Left;
+	Vector2 Right;
+};
+
 class GamePadState
 {
 	
 public:
 
 	GamePadButtons Buttons;
+	GamePadTriggers Triggers;
+	GamePadDPad DPad;
+	GamePadThumbSticks ThumbSticks;
+};
+
+class GamePad
+{
+
+public:
+
+	static GamePadState GetState( PlayerIndex index )
+	{
+		return GamePadState();
+	}
+
 };
 
 class GameTime;
@@ -217,10 +263,52 @@ public:
 	{
 		return false;
 	}
+
+	std::vector<Keys> GetPressedKeys()
+	{
+		return std::vector<Keys>();
+	}
+
+};
+
+class Keyboard
+{
+
+public:
+
+	static KeyboardState GetState()
+	{
+		return KeyboardState();
+	}
+
 };
 
 template<class T> class LinkedListNode;
-class MouseState { };
+
+class MouseState
+{
+
+public:
+
+	int X;
+	int Y;
+	int ScrollWheelValue;
+
+	ButtonState LeftButton;
+	ButtonState RightButton;
+};
+
+class Mouse
+{
+	
+public:
+
+	static MouseState GetState()
+	{
+		return MouseState();
+	}
+
+};
 
 class Mutex
 {
