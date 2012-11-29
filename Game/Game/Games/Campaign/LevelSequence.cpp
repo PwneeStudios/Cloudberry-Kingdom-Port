@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 	bool LevelSequence::OnLevelBegin( const std::shared_ptr<Level> &level )
 	{
-		if ( dynamic_cast<ActionGameData*>( level->MyGame ) != 0 )
+		if ( std::dynamic_pointer_cast<ActionGameData>( level->MyGame ) != 0 )
 			return true;
 
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );

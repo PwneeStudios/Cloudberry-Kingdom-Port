@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 	{
 		if ( Tools::WorldMap != 0 )
 		{
-			std::shared_ptr<StringWorldGameData> stringworld = dynamic_cast<StringWorldGameData*>( Tools::WorldMap );
+			std::shared_ptr<StringWorldGameData> stringworld = std::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 			if ( stringworld != 0 )
 			{
 				door->setOnOpen( std::make_shared<EOL_StringWorldDoorActionProxy>( stringworld ) );

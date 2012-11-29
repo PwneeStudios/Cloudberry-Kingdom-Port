@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class ScoreMultiplierHelper : public Lambda_1<GameData*>
+		class ScoreMultiplierHelper : public Lambda_1<std::shared_ptr<GameData> >
 		{
 		private:
 			float multiplier;

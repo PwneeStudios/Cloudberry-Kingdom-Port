@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class OnCalculateCoinScoreMultiplierProxy : public Lambda_1<GameData*>
+		class OnCalculateCoinScoreMultiplierProxy : public Lambda_1<std::shared_ptr<GameData> >
 		{
 		private:
 			std::shared_ptr<CoinScoreMultiplierObject> csmo;

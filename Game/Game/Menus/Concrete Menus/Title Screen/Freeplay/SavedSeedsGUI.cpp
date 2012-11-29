@@ -155,9 +155,9 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 	{
 		// If the current panel or parent panel is the Freeplay menu,
 		// then directly start the level.
-		FreeplayMenu = dynamic_cast<CustomLevel_GUI*>( panel->Caller );
+		FreeplayMenu = std::dynamic_pointer_cast<CustomLevel_GUI>( panel->Caller );
 		if ( FreeplayMenu == 0 )
-			FreeplayMenu = dynamic_cast<CustomLevel_GUI*>( panel );
+			FreeplayMenu = std::dynamic_pointer_cast<CustomLevel_GUI>( panel );
 		if ( 0 != FreeplayMenu )
 		{
 			LoadFromFreeplayMenu( seedstr, FreeplayMenu );
@@ -165,7 +165,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		else
 		{
 			// Otherwise, if the parent game is Freeplay, then queue Freeplay to load the level.
-			if ( dynamic_cast<TitleGameData*>( Tools::CurGameData->ParentGame ) != 0 )
+			if ( std::dynamic_pointer_cast<TitleGameData>( Tools::CurGameData->ParentGame ) != 0 )
 			{
 				Tools::CurrentAftermath = std::make_shared<AftermathData>();
 				Tools::CurrentAftermath->Success = false;
