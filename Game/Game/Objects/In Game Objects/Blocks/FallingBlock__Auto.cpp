@@ -51,7 +51,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		std::shared_ptr<FallingBlock_Parameters> Params = std::make_shared<FallingBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return static_cast<AutoGen_Parameters*>( Params );
+		return std::static_pointer_cast<AutoGen_Parameter>( Params );
 	}
 
 	void FallingBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -73,7 +73,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get FallingBlock parameters
-		std::shared_ptr<FallingBlock_Parameters> Params = static_cast<FallingBlock_Parameters*>( level->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> Params = std::static_pointer_cast<FallingBlock_Parameter>( level->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
 
 		std::shared_ptr<FallingBlock> fblock;
 		float Width = Params->Width.GetVal( pos );

@@ -1565,17 +1565,17 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 
 		float size = 90;
-		std::shared_ptr<FallingBlock_Parameters> FParams = static_cast<FallingBlock_Parameters*>( p->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> FParams = std::static_pointer_cast<FallingBlock_Parameter>( p->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
 		FParams->Width.SetVal( size );
-		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( p->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameter>( p->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		MParams->Size.SetVal( size );
 		MParams->Aspect = MovingBlock_Parameters::AspectType_SQUARE;
 		MParams->Motion = MovingBlock_Parameters::MotionType_VERTICAL;
-		std::shared_ptr<BouncyBlock_Parameters> BParams = static_cast<BouncyBlock_Parameters*>( p->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> BParams = std::static_pointer_cast<BouncyBlock_Parameter>( p->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		BParams->Size.SetVal( size );
-		std::shared_ptr<FlyingBlob_Parameters> GParams = static_cast<FlyingBlob_Parameters*>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> GParams = std::static_pointer_cast<FlyingBlob_Parameter>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 		//GParams.Counter
-		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( p->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameter>( p->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		//NParams.Make = false;
 
 

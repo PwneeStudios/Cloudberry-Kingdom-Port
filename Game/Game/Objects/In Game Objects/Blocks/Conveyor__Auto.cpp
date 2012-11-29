@@ -38,7 +38,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 		std::shared_ptr<ConveyorBlock_Parameters> Params = std::make_shared<ConveyorBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return static_cast<AutoGen_Parameters*>( Params );
+		return std::static_pointer_cast<AutoGen_Parameter>( Params );
 	}
 
 	void ConveyorBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -53,7 +53,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 
 	std::shared_ptr<ConveyorBlock_Parameters> ConveyorBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return static_cast<ConveyorBlock_Parameters*>( level->Style->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
+		return std::static_pointer_cast<ConveyorBlock_Parameter>( level->Style->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> ConveyorBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )

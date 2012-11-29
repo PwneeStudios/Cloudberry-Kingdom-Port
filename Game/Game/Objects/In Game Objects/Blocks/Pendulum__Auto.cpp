@@ -56,7 +56,7 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		std::shared_ptr<Pendulum_Parameters> Params = std::make_shared<Pendulum_Parameters>();
 		Params->SetParameters( data, level );
 
-		return static_cast<AutoGen_Parameters*>( Params );
+		return std::static_pointer_cast<AutoGen_Parameter>( Params );
 	}
 
 	std::shared_ptr<ObjectBase> Pendulum_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
@@ -68,7 +68,7 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Pendulum parameters
-		std::shared_ptr<Pendulum_Parameters> Params = static_cast<Pendulum_Parameters*>( level->Style->FindParams( Pendulum_AutoGen::getInstance() ) );
+		std::shared_ptr<Pendulum_Parameters> Params = std::static_pointer_cast<Pendulum_Parameter>( level->Style->FindParams( Pendulum_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 40 );
 		Vector2 offset = Vector2( 0, -300 );

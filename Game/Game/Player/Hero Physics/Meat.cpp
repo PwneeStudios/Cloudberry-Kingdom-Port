@@ -429,18 +429,18 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		Style_CHANCE_TO_KEEP_UNUSED = 0;
 
 		// Square mblocks, vertical motion
-		std::shared_ptr<MovingBlock_Parameters> MParams = static_cast<MovingBlock_Parameters*>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameter>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		MParams->Aspect = MovingBlock_Parameters::AspectType_SQUARE;
 		//MParams.Motion = MovingBlock_Parameters.MotionType.Vertical;
 		//MParams.Motion = MovingBlock_Parameters.MotionType.Horizontal;
 		//MParams.Size = size;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = static_cast<GhostBlock_Parameters*>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> GhParams = std::static_pointer_cast<GhostBlock_Parameter>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_LONG;
-		std::shared_ptr<FallingBlock_Parameters> FParams = static_cast<FallingBlock_Parameters*>( Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
-		std::shared_ptr<BouncyBlock_Parameters> BParams = static_cast<BouncyBlock_Parameters*>( Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> FParams = std::static_pointer_cast<FallingBlock_Parameter>( Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> BParams = std::static_pointer_cast<BouncyBlock_Parameter>( Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		//var GParams = (Goomba_Parameters)Style.FindParams(Goomba_AutoGen.Instance);
-		std::shared_ptr<NormalBlock_Parameters> NParams = static_cast<NormalBlock_Parameters*>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameter>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		//NParams.CustomWeight = true;
 		//NParams.FillWeight.Val = 1;
 

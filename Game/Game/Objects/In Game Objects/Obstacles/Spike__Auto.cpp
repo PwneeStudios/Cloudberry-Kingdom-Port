@@ -100,7 +100,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = static_cast<Spike_Parameters*>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
+		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameter>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
 
 		if ( Params->MinSpikeDensity.getVal() <= 0 )
 			return;
@@ -218,7 +218,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = static_cast<Spike_Parameters*>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
+		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameter>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_SPIKE, std::make_shared<SpikeCleanup>( Params ), BL, TR );
 	}

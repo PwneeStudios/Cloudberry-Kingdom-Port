@@ -82,7 +82,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		std::shared_ptr<BlockEmitter_Parameters> Params = std::make_shared<BlockEmitter_Parameters>();
 		Params->SetParameters( data, level );
 
-		return static_cast<AutoGen_Parameters*>( Params );
+		return std::static_pointer_cast<AutoGen_Parameter>( Params );
 	}
 
 	void BlockEmitter_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -90,7 +90,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get BlockEmitter parameters
-		std::shared_ptr<BlockEmitter_Parameters> Params = static_cast<BlockEmitter_Parameters*>( level->Style->FindParams( BlockEmitter_AutoGen::getInstance() ) );
+		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameter>( level->Style->FindParams( BlockEmitter_AutoGen::getInstance() ) );
 
 		Vector2 Pos = BL;
 		int count = 0;
