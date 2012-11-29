@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::FixedPieceSeed( piece, Difficulty, LevelSeed->DefaultHeroType );
 	}
 
-	std::shared_ptr<Lambda_1<PieceSeedData*> > DifficultyGroups::FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed )
+	std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > DifficultyGroups::FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed )
 	{
 		return std::make_shared<FixedPieceModHelper>( Difficulty, LevelSeed );
 	}

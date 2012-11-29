@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		/// Returns a function that modifies a PieceSeed's difficulty
 		/// </summary>
 	public:
-		static std::shared_ptr<Lambda_1<PieceSeedData*> > FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
+		static std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
 
 		static float HeroDifficultyMod( float Difficulty, const std::shared_ptr<BobPhsx> &hero );
 

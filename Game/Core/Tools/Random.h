@@ -4,7 +4,6 @@
 #define _USE_MATH_DEFINES
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 	class Rand

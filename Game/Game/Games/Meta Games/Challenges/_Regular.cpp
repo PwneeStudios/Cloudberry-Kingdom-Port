@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 	{
 		data->setSeed( data->Rnd->Rnd->Next() );
 
-		data->SetTileSet( 0 );
+		data->SetTileSet( std::shared_ptr<TileSet>( 0 ) );
 
 		data->DefaultHeroType = BobPhsxNormal::getInstance();
 	}
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		data->DefaultHeroType = Hero;
 
 		//LevelSeedData.CustomDifficulty custom = DifficultyGroups.FixedPieceMod(Difficulty, data);
-		std::shared_ptr<Lambda_1<PieceSeedData*> > custom = DifficultyGroups::FixedPieceMod( Difficulty, data );
+		std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > custom = DifficultyGroups::FixedPieceMod( Difficulty, data );
 		data->Initialize( NormalGameData::Factory, LevelGeometry_RIGHT, 1, Length, custom );
 
 		return data;

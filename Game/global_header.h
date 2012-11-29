@@ -356,7 +356,17 @@ public:
 
 };
 
-class Random;
+class Random
+{
+
+public:
+	int Next()
+	{
+		// FIXME: get a random number generator!
+		return 0;
+	}
+
+};
 
 // Can't alphabetize this :(
 class Texture2D
