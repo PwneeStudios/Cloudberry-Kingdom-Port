@@ -1619,7 +1619,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		Box->SetTarget( getCore()->Data.Position, Box->Current->Size + Vector2(.0f,.2f) );
 
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->MarkedForDeletion && (*obj)->getCore()->Real && (*obj)->getCore()->Active && (*obj)->getCore()->Show )
 				( *obj )->Interact( this );
@@ -1680,7 +1680,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				if ( dynamic_cast<BobPhsxSpaceship*>( getCore()->MyLevel->DefaultHeroType ) != 0 && getCore()->MyLevel->PlayMode == 0 )
 				{
-					for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
+					for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 					{
 						if ( !( *block )->getCore()->MarkedForDeletion && (*block)->getIsActive() && Phsx::BoxBoxOverlap(Box2, (*block)->getBox()) )
 						{
@@ -1693,7 +1693,7 @@ float Bob::Guide_h = 1 / GuideLength;
 				}
 				else
 				{
-					for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
+					for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 					{
 						if ( ( *block )->getCore()->MarkedForDeletion || !(*block)->getIsActive() || !(*block)->getCore()->Real )
 							continue;
@@ -1712,7 +1712,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				std::shared_ptr<Ceiling_Parameters> CeilingParams = std::static_pointer_cast<Ceiling_Parameter>( getCore()->MyLevel->CurPiece->MyData->Style->FindParams(Ceiling_AutoGen::getInstance()) );
 
-				for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
+				for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 				{
 					if ( ( *block )->getCore()->MarkedForDeletion || !(*block)->getIsActive() || !(*block)->getCore()->Real )
 						continue;
@@ -1902,7 +1902,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 										// Normal blocks delete surrounding blocks when stamped as used
 										if ( ( *block )->getCore()->GenData->DeleteSurroundingOnUse && dynamic_cast<NormalBlock*>(*block) != 0 )
-											for ( std::vector<BlockBase*>::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
+											for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 											{
 												std::shared_ptr<NormalBlock> Normal = dynamic_cast<NormalBlock*>( *nblock );
 												if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
@@ -1915,7 +1915,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 										// Ghost blocks delete surrounding blocks when stamped as used
 										if ( dynamic_cast<GhostBlock*>( *block ) != 0 )
-											for ( std::vector<BlockBase*>::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
+											for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 											{
 												std::shared_ptr<GhostBlock> ghost = dynamic_cast<GhostBlock*>( *gblock );
 												if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
@@ -1961,7 +1961,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				CeilingParams = std::static_pointer_cast<Ceiling_Parameter>( getCore()->GetParams(Ceiling_AutoGen::getInstance()) );
 
-				for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
+				for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 				{
 					if ( MyPhsx->SkipInteraction( *block ) )
 						continue;

@@ -171,7 +171,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		if ( !Params->Make )
 			return;
 
-		for ( std::vector<BlockBase*>::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 		{
 			if ( ( *block )->getCore()->Placed )
 				continue;

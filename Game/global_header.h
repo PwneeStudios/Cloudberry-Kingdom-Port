@@ -15,7 +15,6 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 // Math::Sign and Sign__RegexMe41315803 -> Sign
 // ->Data->Position -> ->Data.Position    Also for Velocity and Acceleration
 // ->Core->   ->   ->getCore()->
-// std::vector<GameObject*> GameObjVec
 
 #include "enums.h"
 #include "forward_declarations.h"

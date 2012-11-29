@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		int Thickness;
 
 		std::vector<std::vector<unsigned long long> > TunnelGUIDs;
-		std::vector<std::vector<ObjectBase*> > TunnelObjs;
+		std::vector<ObjectVec > TunnelObjs;
 
 		TunnelFill();
 

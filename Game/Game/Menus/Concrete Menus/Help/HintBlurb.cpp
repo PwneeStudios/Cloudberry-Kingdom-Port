@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::OnAdd();
 
 		// Remove all other hints
-		for ( std::vector<GameObject*>::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
 			if ( *obj == this )
 				continue;

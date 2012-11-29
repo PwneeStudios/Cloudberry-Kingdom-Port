@@ -787,7 +787,7 @@ namespace CloudberryKingdom
 		/// Gets the objects associated with a list of GUIDs.
 		/// If the object is marked for deletion then null is returned.
 		/// </summary>
-		std::vector<ObjectBase*> GuidToObj( std::vector<unsigned long long> &guids );
+		ObjectVec GuidToObj( std::vector<unsigned long long> &guids );
 
 		/// <summary>
 		/// Gets the object associated with a GUID, even if that object is marked for deletion.
@@ -810,7 +810,7 @@ namespace CloudberryKingdom
 		void Reset_Graphical( bool AdditionalReset );
 		void __Reset( bool BoxesOnly, bool AdditionalReset );
 
-		static std::shared_ptr<ObjectBase> FindParentObjectById( std::vector<ObjectBase*> &ObjectList, const std::shared_ptr<ObjectBase> &obj );
+		static std::shared_ptr<ObjectBase> FindParentObjectById( ObjectVec &ObjectList, const std::shared_ptr<ObjectBase> &obj );
 
 	public:
 		void SynchObject( const std::shared_ptr<ObjectBase> &obj );
@@ -835,7 +835,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void ReAddObject( const std::shared_ptr<ObjectBase> &NewObject );
 
-		std::vector<ObjectBase*> PreRecycleBin;
+		ObjectVec PreRecycleBin;
 
 	private:
 		void EmptyPreRecycleBin();
@@ -921,7 +921,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Get a list of all objects in the level of a given type.
 		/// </summary>
-		std::vector<ObjectBase*> GetObjectList( ObjectType type );
+		ObjectVec GetObjectList( ObjectType type );
 
 	private:
 		static std::shared_ptr<BaseMetric> DefaultMetric;
@@ -934,19 +934,19 @@ namespace CloudberryKingdom
 		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric );
 
-		void Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
+		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		// If MustBeDifferent is set, then only two objects of different types can force a deletion
-		void Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
-		void Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric );
+		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
+		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric );
 
 
 		void Cleanup_xCoord( ObjectType ObjType, float MinDist );
 
 
 	private:
-		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric, bool MustBeDifferent );
+		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric, bool MustBeDifferent );
 
-		void CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, std::vector<ObjectBase*> &ObjList, float MinDist );
+		void CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
 
 	public:
 		void StartPlayerPlay();
@@ -980,7 +980,7 @@ namespace CloudberryKingdom
 	public:
 		TimeTypes TimeType;
 
-		std::vector<ObjectBase*> ActiveObjectList;
+		ObjectVec ActiveObjectList;
 
 	private:
 		void CreateActiveObjectList();

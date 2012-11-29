@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 					StampAsUsed( getCore()->MyLevel->CurPhsxStep );
 
 					// Remove surrounding clouds
-					for ( std::vector<ObjectBase*>::const_iterator cloud = getCore()->MyLevel->Objects.begin(); cloud != getCore()->MyLevel->Objects.end(); ++cloud )
+					for ( ObjectVec::const_iterator cloud = getCore()->MyLevel->Objects.begin(); cloud != getCore()->MyLevel->Objects.end(); ++cloud )
 					{
 //C# TO C++ CONVERTER NOTE: The variable Cloud was renamed since it is named the same as a user-defined type:
 						std::shared_ptr<Cloud> Cloud_Renamed = dynamic_cast<Cloud*>( *cloud );

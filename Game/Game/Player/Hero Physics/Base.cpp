@@ -796,7 +796,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 
 	void BobPhsx::BlockInteractions()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = getMyLevel()->Blocks.begin(); block != getMyLevel()->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = getMyLevel()->Blocks.begin(); block != getMyLevel()->Blocks.end(); ++block )
 		{
 			if ( SkipInteraction( *block ) )
 				continue;

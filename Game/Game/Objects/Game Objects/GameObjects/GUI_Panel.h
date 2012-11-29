@@ -5,31 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class DrawPile;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
 	class GUI_Panel : public GameObject
 	{
 	private:

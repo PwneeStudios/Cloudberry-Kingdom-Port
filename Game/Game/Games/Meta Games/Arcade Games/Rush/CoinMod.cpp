@@ -49,18 +49,18 @@ namespace CloudberryKingdom
 	int CoinMod::ModCoinNumber( const std::shared_ptr<Level> &level, int N )
 	{
 		// Get all coins
-		std::vector<ObjectBase*> coins = level->GetObjectList( ObjectType_COIN );
+		ObjectVec coins = level->GetObjectList( ObjectType_COIN );
 
-		for ( std::vector<ObjectBase*>::const_iterator coin = coins.begin(); coin != coins.end(); ++coin )
+		for ( ObjectVec::const_iterator coin = coins.begin(); coin != coins.end(); ++coin )
 			( *coin )->getCore()->MarkedForDeletion = true;
 
-		std::vector<ObjectBase*> keep = level->getRnd()->Choose(coins, N);
+		ObjectVec keep = level->getRnd()->Choose(coins, N);
 
-		for ( std::vector<ObjectBase*>::const_iterator coin = keep.begin(); coin != keep.end(); ++coin )
+		for ( ObjectVec::const_iterator coin = keep.begin(); coin != keep.end(); ++coin )
 			( *coin )->getCore()->MarkedForDeletion = false;
 
 		int NumCoins = 0;
-		for ( std::vector<ObjectBase*>::const_iterator coin = coins.begin(); coin != coins.end(); ++coin )
+		for ( ObjectVec::const_iterator coin = coins.begin(); coin != coins.end(); ++coin )
 		{
 			if ( ( *coin )->getCore()->MarkedForDeletion )
 				( *coin )->CollectSelf();

@@ -248,7 +248,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 				getCore()->MyLevel->MyGame->GotCheckpoint(bob);
 
 				// Kill other checkpoints
-				for ( std::vector<ObjectBase*>::const_iterator obj = getCore()->MyLevel->Objects.begin(); obj != getCore()->MyLevel->Objects.end(); ++obj )
+				for ( ObjectVec::const_iterator obj = getCore()->MyLevel->Objects.begin(); obj != getCore()->MyLevel->Objects.end(); ++obj )
 				{
 					std::shared_ptr<Checkpoint> checkpoint = dynamic_cast<Checkpoint*>( *obj );
 					if ( 0 != checkpoint )

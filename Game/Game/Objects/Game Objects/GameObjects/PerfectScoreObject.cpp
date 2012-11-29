@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		GUI_Panel::OnAdd();
 
 		// Remove other perfect score objects
-		for ( std::vector<GameObject*>::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
 			if ( *obj == this )
 				continue;

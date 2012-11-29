@@ -343,7 +343,7 @@ int GhostBlock::LengthOfPhaseChange = 35;
 		std::shared_ptr<GhostBlock> block = dynamic_cast<GhostBlock*>( this );
 
 		// Ghost blocks delete surrounding blocks when stamped as used
-		for ( std::vector<BlockBase*>::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
+		for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 		{
 			std::shared_ptr<GhostBlock> ghost = dynamic_cast<GhostBlock*>( *gblock );
 			if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )

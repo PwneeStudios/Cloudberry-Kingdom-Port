@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase : public std::enable_shared_from_this<GameData>
+	class ObjectBase : public std::enable_shared_from_this<ObjectBase>
 	{
 
 	public:

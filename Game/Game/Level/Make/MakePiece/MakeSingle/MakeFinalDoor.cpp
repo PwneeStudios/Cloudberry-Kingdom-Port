@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 	{
 		MakeThing::Phase2();
 
-		std::vector<BlockBase*> _FinalBlocks = Tools::FindAll( MyLevel->Blocks, std::make_shared<FindFinalBlockLambda>() );
+		BlockVec _FinalBlocks = Tools::FindAll( MyLevel->Blocks, std::make_shared<FindFinalBlockLambda>() );
 		FinalBlock = Tools::ArgMax( _FinalBlocks, std::make_shared<BoxTRyLambda>() );
 
 		// If none exist use the lowest block
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 
 	void MakeFinalDoor::InitializeInstanceFields()
 	{
-		FinalBlocks = std::vector<BlockBase*>();
+		FinalBlocks = BlockVec();
 	}
 
 std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda::FindCamZoneLambda_Static = std::make_shared<FindCamZoneLambda>();

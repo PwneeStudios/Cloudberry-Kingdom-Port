@@ -360,7 +360,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		if ( getCore()->MyLevel->PlayMode != 0 )
 			return;
 
-		for ( std::vector<BlockBase*>::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 		{
 			if ( !( *block )->getCore()->MarkedForDeletion && (*block)->getCore()->Real && (*block)->getIsActive() && (*block)->getCore()->Active && Phsx::BoxBoxOverlap(MyBob->Box2, (*block)->getBox()) )
 			{

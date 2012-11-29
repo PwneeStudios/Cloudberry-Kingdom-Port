@@ -177,7 +177,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameter>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		std::vector<std::vector<unsigned long long> > GUIDs = Params->TunnelGUIDs;
-		std::vector<std::vector<ObjectBase*> > Blobs = std::vector<std::vector<ObjectBase*> >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
+		std::vector<ObjectVec > Blobs = std::vector<ObjectVec >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
 
 		for ( int i = 0; i < Blobs.GetLength( 0 ); i++ )
 			for ( int j = 0; j < Blobs.GetLength( 1 ); j++ )

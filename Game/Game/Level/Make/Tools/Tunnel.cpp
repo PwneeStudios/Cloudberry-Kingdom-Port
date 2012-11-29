@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		this->M = M;
 
 		TunnelGUIDs = std::vector<std::vector<unsigned long long> >( N, M );
-		TunnelObjs = std::vector<std::vector<ObjectBase*> >( N, M );
+		TunnelObjs = std::vector<ObjectVec >( N, M );
 	}
 
 	void TunnelFill::SetTunnelObjParameter( const std::shared_ptr<ObjectBase> &obj )
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 	void TunnelFill::CleanupTunnel( const std::shared_ptr<Level> &level )
 	{
 		std::map<unsigned long long, ObjectBase*> ObjDict = std::map<unsigned long long, ObjectBase*>();
-		for ( std::vector<ObjectBase*>::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( !ObjDict.find( ( *obj )->getCore()->MyGuid ) != ObjDict.end() )
 				ObjDict.insert( make_pair( ( *obj )->getCore()->MyGuid, *obj ) );
 

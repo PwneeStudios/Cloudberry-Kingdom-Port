@@ -209,7 +209,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		if ( MyGame == 0 || MyGame->MyLevel == 0 )
 			return true;
 
-		for ( std::vector<BlockBase*>::const_iterator block = MyGame->MyLevel->Blocks.begin(); block != MyGame->MyLevel->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = MyGame->MyLevel->Blocks.begin(); block != MyGame->MyLevel->Blocks.end(); ++block )
 			( *block )->Move( Vector2( 0, -20 ) );
 		return false;
 	}
@@ -260,7 +260,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 	{
 		MyGame->KillToDo( _T( "MoveOut" ) );
 
-		for ( std::vector<BlockBase*>::const_iterator block = MyGame->MyLevel->Blocks.begin(); block != MyGame->MyLevel->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = MyGame->MyLevel->Blocks.begin(); block != MyGame->MyLevel->Blocks.end(); ++block )
 			( *block )->CollectSelf();
 	}
 
@@ -270,7 +270,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 		std::shared_ptr<NormalBlock> block;
 
-		for ( std::vector<BlockBase*>::const_iterator _block = MyGame->MyLevel->Blocks.begin(); _block != MyGame->MyLevel->Blocks.end(); ++_block )
+		for ( BlockVec::const_iterator _block = MyGame->MyLevel->Blocks.begin(); _block != MyGame->MyLevel->Blocks.end(); ++_block )
 			if ( dynamic_cast<NormalBlock*>( *_block ) != 0 )
 				( *_block )->CollectSelf();
 

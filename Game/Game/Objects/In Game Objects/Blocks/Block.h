@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<BlockBase> TopRightNeighbor, TopLeftNeighbor;
 
-		std::vector<ObjectBase*> Objects;
+		ObjectVec Objects;
 
 		virtual void Release();
 

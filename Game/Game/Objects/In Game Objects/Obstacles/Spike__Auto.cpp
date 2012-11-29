@@ -109,7 +109,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 		float SpikeBottomOffset = level->getInfo()->Spikes->BottomOffset;
 		float SpikeSideOffset = level->getInfo()->Spikes->SideOffset;
 
-		for ( std::vector<BlockBase*>::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 		{
 			if ( ( *block )->getCore()->Placed )
 				continue;

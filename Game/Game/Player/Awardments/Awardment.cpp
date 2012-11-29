@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -37,7 +36,7 @@ std::map<int, Awardment*> Awardments::AwardsDict = std::map<int, Awardment*>();
 
 	bool Awardments::MessageOnScreen()
 	{
-		for ( std::vector<GameObject*>::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
 		{
 			if ( dynamic_cast<AwardmentMessage*>( *obj ) != 0 )
 				return true;
@@ -200,7 +199,7 @@ float CurShift, Awardments::Shift = 520;
 			Tools::Warning();
 
 			// Remove all other hints
-			for ( std::vector<GameObject*>::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
+			for ( GameObjVec::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
 			{
 				if ( *obj == msg )
 					continue;

@@ -297,7 +297,7 @@ namespace CloudberryKingdom
 
 		// Add the score
 		std::shared_ptr<ExplodeBobs> explode = std::make_shared<ExplodeBobs>( ExplodeBobs::Speed_REGULAR );
-		door->getCore()->MyLevel->MyGame->AddGameObject(explode);
+		door->getCore()->MyLevel->MyGame->AddGameObject(std::static_pointer_cast<GameObject> ( explode ) );
 		explode->OnDone = std::make_shared<AddScoreLambda>( game, door );
 	}
 

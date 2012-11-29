@@ -312,13 +312,13 @@ namespace CloudberryKingdom
 		// No coins near final doors
 		if ( getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
 		{
-			for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 				if ( dynamic_cast<Coin*>( *obj ) != 0 && ( *obj )->getPos().X > TR.X + 160 )
 					getRecycle()->CollectObject(*obj);
 		}
 		else if ( getPieceSeed()->GeometryType == LevelGeometry_UP )
 		{
-			for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 				if ( dynamic_cast<Coin*>( *obj ) != 0 && ( *obj )->getPos().Y > TR.Y - 280 )
 					getRecycle()->CollectObject(*obj);
 		}
@@ -377,7 +377,7 @@ namespace CloudberryKingdom
 				// Tiled bottom
 				if ( Style_MY_INITIAL_PLATS_TYPE == StyleData::InitialPlatsType_UP_TILED_FLOOR )
 				{
-					for ( std::vector<BlockBase*>::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
+					for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
 						if ( ( *_block )->getCore() == _T("FirstRow") )
 							( *_block )->CollectSelf();
 
@@ -559,7 +559,7 @@ namespace CloudberryKingdom
 		}
 
 		// Set flag when a block on the last row is used.
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore() == _T("LastRow") )
 				( *block )->getCore()->GenData->OnUsed = std::make_shared<EndReachedLambda>(this);
 
@@ -663,14 +663,14 @@ namespace CloudberryKingdom
 		Sleep();
 
 		// Remove unused objects
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( !( *obj )->getCore()->GenData->Used && (*obj)->getCore()->GenData->RemoveIfUnused )
 				getRecycle()->CollectObject(*obj);
 		CleanObjectList();
 		Sleep();
 
 		// Remove unused blocks
-		for ( std::vector<BlockBase*>::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
+		for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
 			if ( !( *_block )->getCore()->GenData->Used && (*_block)->getCore()->GenData->RemoveIfUnused )
 				getRecycle()->CollectObject(*_block);
 		CleanBlockList();
@@ -1235,7 +1235,7 @@ namespace CloudberryKingdom
 
 	void Level::Clone( const std::shared_ptr<Level> &A )
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = A->Blocks.begin(); block != A->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = A->Blocks.begin(); block != A->Blocks.end(); ++block )
 		{
 			std::shared_ptr<BlockBase> DestBlock = static_cast<BlockBase*>( MySourceGame->Recycle->GetObject( ( *block )->getCore()->MyType, false ) );
 			DestBlock->Clone( *block );
@@ -1243,7 +1243,7 @@ namespace CloudberryKingdom
 			AddBlock( DestBlock );
 		}
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = A->Objects.begin(); obj != A->Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = A->Objects.begin(); obj != A->Objects.end(); ++obj )
 		{
 			std::shared_ptr<ObjectBase> DestObj = static_cast<ObjectBase*>( MySourceGame->Recycle->GetObject( ( *obj )->getCore()->MyType, false ) );
 			DestObj->Clone( *obj );
@@ -2133,14 +2133,14 @@ int Step1, Level::Step2 = 0;
 		Sleep();
 
 		// Remove unused objects
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( !( *obj )->getCore()->GenData->Used && (*obj)->getCore()->GenData->RemoveIfUnused )
 				getRecycle()->CollectObject(*obj);
 		CleanObjectList();
 		Sleep();
 
 		// Remove unused blocks
-		for ( std::vector<BlockBase*>::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
+		for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
 			if ( !( *_block )->getCore()->GenData->Used && (*_block)->getCore()->GenData->RemoveIfUnused )
 				getRecycle()->CollectObject(*_block);
 		CleanBlockList();
@@ -2164,16 +2164,16 @@ int Step1, Level::Step2 = 0;
 		Sleep();
 
 		// Limit general density of all obstacles.
-		std::vector<ObjectBase*> ObjsToClean = std::vector<ObjectBase*>();
+		ObjectVec ObjsToClean = ObjectVec();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( ( *obj )->Core->GenData->LimitGeneralDensity )
 				ObjsToClean.push_back( *obj );
 
 		Cleanup( ObjsToClean, std::make_shared<GeneralMinDistLambda>( this ), true, BL_Bound, TR_Bound );
 		Sleep();
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
 			if ( 0 != coin )
@@ -2190,11 +2190,11 @@ int Step1, Level::Step2 = 0;
 
 	void Level::OverlapCleanup()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->GenData->NoBlockOverlap )
 			{
-				for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+				for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 				{
 					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->Core->Data->Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
 						getRecycle()->CollectObject(*obj);
@@ -2213,12 +2213,12 @@ int Step1, Level::Step2 = 0;
 
 	void Level::SpaceshipBlockCleanup()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block2 = Blocks.begin(); block2 != Blocks.end(); ++block2 )
+		for ( BlockVec::const_iterator block2 = Blocks.begin(); block2 != Blocks.end(); ++block2 )
 		{
 			if ( ( *block2 )->getCore()->MarkedForDeletion )
 				continue;
 
-			for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+			for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			{
 				if ( ( *block2 )->getCore()->MarkedForDeletion )
 					break;
@@ -2257,12 +2257,12 @@ int Step1, Level::Step2 = 0;
 
 	void Level::RegularBlockCleanup()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block2 = Blocks.begin(); block2 != Blocks.end(); ++block2 )
+		for ( BlockVec::const_iterator block2 = Blocks.begin(); block2 != Blocks.end(); ++block2 )
 		{
 			if ( ( *block2 )->getCore()->MarkedForDeletion )
 				continue;
 
-			for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+			for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			{
 				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
@@ -2471,10 +2471,10 @@ int Level::AfterPostDrawLayer = 12;
 		if ( !NoParticles )
 			MainEmitter = ParticleEmitter::Pool->Get();
 
-		Blocks = std::vector<BlockBase*>( 2000 );
+		Blocks = BlockVec( 2000 );
 
-		Objects = std::vector<ObjectBase*>( 2000 );
-		AddedObjects = std::vector<ObjectBase*>( 1000 );
+		Objects = ObjectVec( 2000 );
+		AddedObjects = ObjectVec( 1000 );
 		ObjectsLocked = false;
 
 		CreateActiveObjectList();
@@ -2483,7 +2483,7 @@ int Level::AfterPostDrawLayer = 12;
 		for ( int i = 0; i < NumDrawLayers; i++ )
 		{
 			ShowDrawLayer[ i ] = true;
-			DrawLayer[ i ] = std::vector<ObjectBase*>( 300 );
+			DrawLayer[ i ] = ObjectVec( 300 );
 			if ( !NoParticles )
 				ParticleEmitters[ i ] = ParticleEmitter::Pool->Get();
 					//new ParticleEmitter(100);
@@ -2547,12 +2547,12 @@ int Level::AfterPostDrawLayer = 12;
 		MySwarmBundle.reset();
 
 		if ( Blocks.size() > 0 )
-			for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+			for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 				( *block )->Release();
 		Blocks.clear();
 
 		if ( Objects.size() > 0 )
-			for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			{
 				( *obj )->getCore()->MyLevel.reset();
 				( *obj )->Release();
@@ -2595,7 +2595,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	std::shared_ptr<ObjectBase> Level::FindIObject( const std::wstring &Code1 )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( std::wstring::Compare( ( *obj )->getCore()->EditorCode1, Code1, StringComparison::OrdinalIgnoreCase ) == 0 )
 				return obj;
@@ -2663,14 +2663,14 @@ int Level::AfterPostDrawLayer = 12;
 
 		// count number of blocks to save
 		int Num = 0;
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore()->EditHoldable )
 				Num++;
 
 		// record the number
 		writer->Write( Num );
 
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 		{
 			if ( ( *block )->getCore()->EditHoldable )
 			{
@@ -2681,14 +2681,14 @@ int Level::AfterPostDrawLayer = 12;
 
 		// count number of objects to save
 		Num = 0;
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( ( *obj )->getCore()->EditHoldable )
 				Num++;
 
 		// record the number
 		writer->Write( Num );
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->EditHoldable )
 			{
@@ -2716,10 +2716,10 @@ int Level::AfterPostDrawLayer = 12;
 			( *piece )->Shift( shift );
 		}
 
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			( *block )->Move( shift );
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			( *obj )->Move( shift );
 
 		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
@@ -2731,7 +2731,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::KeepCoinsDead()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
 			if ( 0 != coin )
@@ -2810,9 +2810,9 @@ int Level::AfterPostDrawLayer = 12;
 			return obj;
 	}
 
-	std::vector<ObjectBase*> Level::GuidToObj( std::vector<unsigned long long> &guids )
+	ObjectVec Level::GuidToObj( std::vector<unsigned long long> &guids )
 	{
-		std::vector<ObjectBase*> list = std::vector<ObjectBase*>();
+		ObjectVec list = ObjectVec();
 		for ( std::vector<unsigned long long>::const_iterator guid = guids.begin(); guid != guids.end(); ++guid )
 			list.push_back( GuidToObj( *guid ) );
 		return list;
@@ -2958,13 +2958,13 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		// Clean blocks
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore()->RemoveOnReset )
 				getRecycle()->CollectObject(*block);
 		CleanBlockList();
 
 		// Reset blocks
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 		{
 			( *block )->Reset( BoxesOnly );
 			if ( ( *block )->getBlockCore()->Objects->size() > 0 )
@@ -2972,14 +2972,14 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		// Clean objects
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( ( *obj )->getCore()->RemoveOnReset )
 				getRecycle()->CollectObject(*obj);
 		CleanAllObjectLists();
-		std::vector<ObjectBase*> NewObjects = std::vector<ObjectBase*>();
+		ObjectVec NewObjects = ObjectVec();
 
 		// Reset objects
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			( *obj )->Reset( BoxesOnly );
 			std::shared_ptr<ObjectBase> NewObj;
@@ -2998,7 +2998,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		// Recover correct object pointers from GUIDs
-		for ( std::vector<ObjectBase*>::const_iterator obj = NewObjects.begin(); obj != NewObjects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = NewObjects.begin(); obj != NewObjects.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->ParentObject != 0 )
 			{
@@ -3010,9 +3010,9 @@ int Level::AfterPostDrawLayer = 12;
 
 		// Re-add all objects 
 		ClearAllObjectLists();
-		for ( std::vector<ObjectBase*>::const_iterator obj = NewObjects.begin(); obj != NewObjects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = NewObjects.begin(); obj != NewObjects.end(); ++obj )
 			AddObject( *obj, false );
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			ReAddObject( *block );
 
 		SortDrawLayers();
@@ -3041,7 +3041,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	std::shared_ptr<ObjectBase> Level::FindParentObjectById( std::vector<ObjectBase*> &ObjectList, const std::shared_ptr<ObjectBase> &obj )
+	std::shared_ptr<ObjectBase> Level::FindParentObjectById( ObjectVec &ObjectList, const std::shared_ptr<ObjectBase> &obj )
 	{
 		std::shared_ptr<ObjectBase> FoundObj = Tools::Find( ObjectList, std::make_shared<FindGuidLambda>( obj->getCore()->ParentObjId ) );
 
@@ -3165,7 +3165,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::EmptyPreRecycleBin()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = PreRecycleBin.begin(); obj != PreRecycleBin.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = PreRecycleBin.begin(); obj != PreRecycleBin.end(); ++obj )
 		{
 			//if (obj is MovingPlatform && ((MovingPlatform)obj).Parent != null) Tools.Write("!");
 			( *obj )->getCore()->MarkedForDeletion = false;
@@ -3498,27 +3498,27 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 
 	void Level::FinalizeBlocks()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			( *block )->getBlockCore()->Finalized = true;
 	}
 
 	void Level::TagAll( int Tag )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			( *obj )->getCore()->Tag = Tag;
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			( *block )->getCore()->Tag = Tag;
 	}
 
 	void Level::AddLevelBlocks( const std::shared_ptr<Level> &level )
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 			AddBlock( *block );
 	}
 
 	void Level::AddLevelBlocks( const std::shared_ptr<Level> &level, int Tag )
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 			if ( ( *block )->getCore()->Tag == Tag && !(*block)->getCore()->DoNotScrollOut )
 				AddBlock( *block );
 		level->RemoveForeignObjects();
@@ -3531,14 +3531,14 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 
 	void Level::AddLevelObjects( const std::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( IsBetween( ( *obj )->getCore()->Data->Position, p1, p2 ) && !(*obj)->getCore()->DoNotScrollOut )
 				AddObject( *obj, false );
 	}
 
 	void Level::AddLevelObjects( const std::shared_ptr<Level> &level, int Tag )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( ( *obj )->getCore()->Tag == Tag && !(*obj)->getCore()->DoNotScrollOut )
 				AddObject( *obj, false );
 		level->RemoveForeignObjects();
@@ -3588,11 +3588,11 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 		Tools::RemoveAll( Blocks, std::make_shared<RemoveForeignBlockLambda>( this ) );
 	}
 
-	std::vector<ObjectBase*> Level::GetObjectList( ObjectType type )
+	ObjectVec Level::GetObjectList( ObjectType type )
 	{
-		std::vector<ObjectBase*> list = std::vector<ObjectBase*>();
+		ObjectVec list = ObjectVec();
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( ( *obj )->getCore()->MyType == type && !(*obj)->getCore()->MarkedForDeletion )
 				list.push_back( *obj );
 
@@ -3623,27 +3623,27 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 	void Level::Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric )
 	{
-		std::vector<ObjectBase*> CleanupList = GetObjectList( type );
+		ObjectVec CleanupList = GetObjectList( type );
 
 		Cleanup( CleanupList, MinDistFunc, false, BL, TR, metric );
 	}
 
-	void Level::Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, false, BL, TR );
 	}
 
-	void Level::Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, MustBeDifferent, BL, TR, DefaultMetric );
 	}
 
-	void Level::Cleanup( std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric )
+	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric )
 	{
 		if ( ObjList.empty() )
 			return;
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->GenData->EnforceBounds )
 			if ( ( *obj )->getCore()->Data->Position.X > TR.X || (*obj)->getCore()->Data->Position.X < BL.X || (*obj)->getCore()->Data->Position.Y > TR.Y || (*obj)->getCore()->Data->Position.Y < BL.Y )
@@ -3661,9 +3661,9 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 	void Level::Cleanup_xCoord( ObjectType ObjType, float MinDist )
 	{
-		std::vector<ObjectBase*> ObjList = GetObjectList( ObjType );
+		ObjectVec ObjList = GetObjectList( ObjType );
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->MarkedForDeletion )
 				continue;
@@ -3672,9 +3672,9 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		}
 	}
 
-	void Level::CheckAgainst( const std::shared_ptr<ObjectBase> &obj, std::vector<ObjectBase*> &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric, bool MustBeDifferent )
+	void Level::CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric, bool MustBeDifferent )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
+		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
 			if ( !( *obj2 )->getCore()->GenData->LimitDensity )
 				return;
@@ -3713,9 +3713,9 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		}
 	}
 
-	void Level::CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, std::vector<ObjectBase*> &ObjList, float MinDist )
+	void Level::CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist )
 	{
-		for ( std::vector<ObjectBase*>::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
+		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
 			if ( !obj->getCore()->MarkedForDeletion && !(*obj2)->getCore()->MarkedForDeletion && obj != *obj2 )
 			{
@@ -3771,14 +3771,14 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 	void Level::UpdateBlocks()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( !( *block )->getCore()->MarkedForDeletion )
 				( *block )->PhsxStep();
 	}
 
 	void Level::UpdateObjects()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
+		for ( ObjectVec::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
 		{
 			if ( !( *Object )->getCore()->IsGameObject && !(*Object)->getCore()->MarkedForDeletion )
 				( *Object )->PhsxStep();
@@ -3787,14 +3787,14 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 	void Level::UpdateBlocks2()
 	{
-		for ( std::vector<BlockBase*>::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( !( *block )->getCore()->MarkedForDeletion )
 				( *block )->PhsxStep2();
 	}
 
 	void Level::UpdateObjects2()
 	{
-		for ( std::vector<ObjectBase*>::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
+		for ( ObjectVec::const_iterator Object = ActiveObjectList.begin(); Object != ActiveObjectList.end(); ++Object )
 		{
 			if ( !( *Object )->getCore()->MarkedForDeletion )
 				( *Object )->PhsxStep2();
@@ -4022,7 +4022,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 	{
 		if ( BoxesOnly )
 		{
-			ActiveObjectList = std::vector<ObjectBase*>();
+			ActiveObjectList = ObjectVec();
 			ResetActiveObjectList();
 		}
 		else
@@ -4037,7 +4037,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		ActiveObjectList.clear();
 
 		// Keep active all objects that didn't skip their phsx the previous step.
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->SkippedPhsx && !(*obj)->getCore()->MarkedForDeletion )
 			{
@@ -4053,7 +4053,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 		ActiveObjectList.clear();
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			ActiveObjectList.push_back( *obj );
 	}
 
@@ -4069,7 +4069,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 	{
 		NumCoins = 0;
 		TotalCoinScore = 0;
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
 			if ( 0 != coin && !coin->getCore()->MarkedForDeletion )
@@ -4116,12 +4116,12 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		ModZoom = Vector2(1);
 		_UseLighting = false;
 		CurEditorDrawLayer = -1;
-		DrawLayer = std::vector<std::vector<ObjectBase*>*>( NumDrawLayers );
+		DrawLayer = std::vector<ObjectVec*>( NumDrawLayers );
 		ParticleEmitters = std::vector<ParticleEmitter*>( NumDrawLayers );
 		ShowCoinsInReplay = true;
 		OnCameraChange = std::make_shared<Multicaster>();
 		AllowRecording = false;
-		PreRecycleBin = std::vector<ObjectBase*>( 1000 );
+		PreRecycleBin = ObjectVec( 1000 );
 		StickmanLighting = false;
 		BobLightRadius = 700;
 		LightLayer = LightLayers_FRONT_OF_LEVEL;

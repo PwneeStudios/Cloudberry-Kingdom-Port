@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		if ( Objects.empty() )
 			return;
 
-		for ( std::vector<ObjectBase*>::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
+		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( !( *obj )->getCore()->MarkedForDeletion )
 				( *obj )->Draw();
 	}
@@ -139,7 +139,7 @@ namespace CloudberryKingdom
 
 	void BlockData::InitializeInstanceFields()
 	{
-		Objects = std::vector<ObjectBase*>();
+		Objects = ObjectVec();
 	}
 
 	const std::shared_ptr<AABox> &BlockBase::getBox() const

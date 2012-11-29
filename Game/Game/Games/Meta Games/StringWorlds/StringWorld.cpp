@@ -360,7 +360,7 @@ namespace CloudberryKingdom
 		Tools::CurGameData->EndGame = std::make_shared<FinishLambda>( this );
 
 		// Add the saved objects
-		for ( std::vector<GameObject*>::const_iterator obj = ObjectsToSave.begin(); obj != ObjectsToSave.end(); ++obj )
+		for ( GameObjVec::const_iterator obj = ObjectsToSave.begin(); obj != ObjectsToSave.end(); ++obj )
 			Tools::CurGameData->AddGameObject( *obj );
 
 		// Additional processing

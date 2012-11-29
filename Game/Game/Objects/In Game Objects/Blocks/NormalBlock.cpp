@@ -415,7 +415,7 @@ float NormalBlock::TopOnlyHeight = 60;
 
 		// Normal blocks delete surrounding blocks when stamped as used
 		if ( block->getCore()->GenData.DeleteSurroundingOnUse && dynamic_cast<NormalBlock*>(block) != 0 )
-			for ( std::vector<BlockBase*>::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
+			for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 			{
 				std::shared_ptr<NormalBlock> Normal = dynamic_cast<NormalBlock*>( *nblock );
 				if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )

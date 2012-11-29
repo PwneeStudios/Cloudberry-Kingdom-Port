@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		Vector2 FinalPos;
 
 	private:
-		std::vector<BlockBase*> FinalBlocks;
+		BlockVec FinalBlocks;
 
 	public:
 		MakeFinalDoor( const std::shared_ptr<Level> &level );

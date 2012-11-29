@@ -71,7 +71,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		for ( std::vector<std::vector<unsigned long long> >::const_iterator GuidList = Params->Snakes.begin(); GuidList != Params->Snakes.end(); ++GuidList )
 		{
 			// Convert the list to objects
-			std::vector<ObjectBase*> Snake = level->GuidToObj( *GuidList );
+			ObjectVec Snake = level->GuidToObj( *GuidList );
 
 			// Find a deleted element to start with
 			int start = 0;
@@ -107,7 +107,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 			// If no potential heads were found delete everything
 			if ( PotentialHeads.empty() )
 			{
-				for ( std::vector<ObjectBase*>::const_iterator snake = Snake.begin(); snake != Snake.end(); ++snake )
+				for ( ObjectVec::const_iterator snake = Snake.begin(); snake != Snake.end(); ++snake )
 					if ( *snake != 0 )
 						( *snake )->CollectSelf();
 				continue;

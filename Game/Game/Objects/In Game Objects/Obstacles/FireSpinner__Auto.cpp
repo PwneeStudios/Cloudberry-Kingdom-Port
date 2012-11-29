@@ -83,7 +83,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		float SpinnerTopOffset = level->getInfo()->Spinners->TopOffset;
 		float SpinnerBottomOffset = level->getInfo()->Spinners->BottomOffset;
 
-		for ( std::vector<BlockBase*>::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
+		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 		{
 			if ( ( *block )->getCore()->Placed )
 				continue;
