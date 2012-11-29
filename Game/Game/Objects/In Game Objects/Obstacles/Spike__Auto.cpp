@@ -128,7 +128,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 
 			// Add spikes
 			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 110;
-			float density = level->getRnd()->RndFloat(Params->MinSpikeDensity.GetVal((*block)->getCore()->Data->Position), Params->MaxSpikeDensity.GetVal((*block)->getCore()->Data->Position));
+			float density = level->getRnd()->RndFloat(Params->MinSpikeDensity.GetVal((*block)->getCore()->Data.Position), Params->MaxSpikeDensity.GetVal((*block)->getCore()->Data.Position));
 			float average = static_cast<int>( xdif * static_cast<float>( density ) / 2000 );
 			int n = static_cast<int>( average );
 			//if (average < 1) if (Rnd.Rnd.NextDouble() < average) n = 1;

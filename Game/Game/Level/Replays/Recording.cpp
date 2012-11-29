@@ -172,8 +172,8 @@ namespace CloudberryKingdom
 
 			Recordings[ i ]->t[ level->CurPhsxStep ] = level->Bobs[ i ]->PlayerObject->t;
 			Recordings[ i ]->BoxCenter[ level->CurPhsxStep ] = level->Bobs[ i ]->PlayerObject->BoxList[ 0 ]->Center();
-			Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data->Position;
-			Recordings[ i ]->AutoVel[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data->Velocity;
+			Recordings[ i ]->AutoLocs[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Position;
+			Recordings[ i ]->AutoVel[ level->CurPhsxStep ] = level->Bobs[ i ]->getCore()->Data.Velocity;
 			Recordings[ i ]->Input[ level->CurPhsxStep ] = level->Bobs[ i ]->CurInput;
 			Recordings[ i ]->Alive[ level->CurPhsxStep ] = !( level->Bobs[ i ]->Dead || level->Bobs[ i ]->Dying );
 

@@ -493,14 +493,14 @@ bool Camera::DisableOscillate = false;
 		Vector2 BobsCenter = Vector2();
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
-			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
+			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data.Position ) ) || MyLevel->PlayMode != 0 )
 			{
-				Vector2 bpos = ( *bob )->getCore()->Data->Position;
+				Vector2 bpos = ( *bob )->getCore()->Data.Position;
 
 				BobsCenter += bpos;
 
-				TR = Vector2::Max( TR, ( *bob )->getCore()->Data->Position );
-				BL = Vector2::Min( BL, ( *bob )->getCore()->Data->Position );
+				TR = Vector2::Max( TR, ( *bob )->getCore()->Data.Position );
+				BL = Vector2::Min( BL, ( *bob )->getCore()->Data.Position );
 
 				Count++;
 				TotalWeight += ( *bob )->CameraWeight;
@@ -618,18 +618,18 @@ bool Camera::DisableOscillate = false;
 		Vector2 BobsCenter = Vector2();
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 		{
-			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data->Position ) ) || MyLevel->PlayMode != 0 )
+			if ( PlayerManager::IsAlive( ( *bob )->MyPlayerIndex ) && ( *bob )->AffectsCamera && ( !( *bob )->DoNotTrackOffScreen || OnScreen( ( *bob )->getCore()->Data.Position ) ) || MyLevel->PlayMode != 0 )
 			{
 				//MaxPlayerSpeed = Math.Max(MaxPlayerSpeed, bob.Core.Data.Velocity.Length());
-				MaxPlayerSpeed = Vector2::Max( MaxPlayerSpeed, CoreMath::Abs( ( *bob )->getCore()->Data->Velocity ) );
+				MaxPlayerSpeed = Vector2::Max( MaxPlayerSpeed, CoreMath::Abs( ( *bob )->getCore()->Data.Velocity ) );
 
-				BobsCenter += ( *bob )->getCore()->Data->Position;
+				BobsCenter += ( *bob )->getCore()->Data.Position;
 
 				//TR.X = Math.Max(TR.X, bob.Core.Data.Position.X);
 				//TR.Y = Math.Max(TR.Y, bob.Core.Data.Position.Y);
 
-				TR = Vector2::Max( TR, ( *bob )->getCore()->Data->Position );
-				BL = Vector2::Min( BL, ( *bob )->getCore()->Data->Position );
+				TR = Vector2::Max( TR, ( *bob )->getCore()->Data.Position );
+				BL = Vector2::Min( BL, ( *bob )->getCore()->Data.Position );
 
 				Count++;
 				TotalWeight += ( *bob )->CameraWeight;

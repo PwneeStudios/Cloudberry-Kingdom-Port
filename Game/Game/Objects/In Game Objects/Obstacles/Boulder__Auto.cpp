@@ -200,10 +200,10 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 
 		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
-			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data->Position, Vector2(-200, -240)) )
+			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data.Position, Vector2(-200, -240)) )
 				continue;
 
-			Vector2 pos = ( *bob )->getCore()->Data->Position;
+			Vector2 pos = ( *bob )->getCore()->Data.Position;
 			int Delay = static_cast<int>( Params->FloaterPlaceDelay.GetVal( pos ) );
 			if ( Step > 90 && Step % Delay == 0 )
 			{

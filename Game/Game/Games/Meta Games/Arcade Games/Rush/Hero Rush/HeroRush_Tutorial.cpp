@@ -312,7 +312,7 @@ bool HeroRush_Tutorial::ShowTitle = true;
 		std::vector<Arrow*> arrows = std::vector<Arrow*>();
 		for ( ObjectVec::const_iterator coin = MyGame->MyLevel->GetObjectList( ObjectType_COIN ).begin(); coin != MyGame->MyLevel->GetObjectList(ObjectType_COIN).end(); ++coin )
 		{
-			Vector2 coinpos = ( *coin )->getCore()->Data->Position;
+			Vector2 coinpos = ( *coin )->getCore()->Data.Position;
 
 			std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>();
 			arrow->SetScale( 300 );

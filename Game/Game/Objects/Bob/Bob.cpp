@@ -604,7 +604,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 						std::shared_ptr<Bob> HighestBob = 0;
 						for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 						{
-							if ( *bob != this && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data->Position.Y > HighestBob->getCore()->Data.Position.Y ) )
+							if ( *bob != this && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data.Position.Y > HighestBob->getCore()->Data.Position.Y ) )
 							{
 								HighestBob = *bob;
 							}
@@ -1919,7 +1919,7 @@ float Bob::Guide_h = 1 / GuideLength;
 											{
 												std::shared_ptr<GhostBlock> ghost = dynamic_cast<GhostBlock*>( *gblock );
 												if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
-													if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - (*block)->getCore()->Data->Position)->Length() < 200 )
+													if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - (*block)->getCore()->Data.Position)->Length() < 200 )
 													{
 														DeleteObj( ghost );
 														ghost->setIsActive( false );

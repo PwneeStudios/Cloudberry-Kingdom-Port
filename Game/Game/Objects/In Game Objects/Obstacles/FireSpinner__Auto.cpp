@@ -97,7 +97,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 
 			// Add fire spinners
 			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 30;
-			float density = level->getRnd()->RndFloat(Params->MinDensity.GetVal((*block)->getCore()->Data->Position), Params->MaxDensity.GetVal((*block)->getCore()->Data->Position));
+			float density = level->getRnd()->RndFloat(Params->MinDensity.GetVal((*block)->getCore()->Data.Position), Params->MaxDensity.GetVal((*block)->getCore()->Data.Position));
 			float average = static_cast<int>( xdif * density / 2000 );
 			int n = static_cast<int>( average );
 			if ( average < 1 )
@@ -128,9 +128,9 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 					spinner->getCore()->StartData.Position = spinner->getCore()->Data.Position = Vector2(x, y);
 
 					spinner->Orientation = 1;
-					spinner->Radius = Params->Length.GetVal( ( *block )->getCore()->Data->Position );
+					spinner->Radius = Params->Length.GetVal( ( *block )->getCore()->Data.Position );
 
-					int Period = static_cast<int>( Params->Period.GetVal( ( *block )->getCore()->Data->Position ) );
+					int Period = static_cast<int>( Params->Period.GetVal( ( *block )->getCore()->Data.Position ) );
 
 					int NumOffsets = Params->NumOffsets;
 					Period = static_cast<int>( Period / NumOffsets ) * NumOffsets;

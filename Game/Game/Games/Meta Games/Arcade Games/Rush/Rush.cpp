@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		{
 			if ( ( *bob )->IsVisible() )
 			{
-				ParticleEffects::PiecePopFart( level, ( *bob )->getCore()->Data->Position );
+				ParticleEffects::PiecePopFart( level, ( *bob )->getCore()->Data.Position );
 				( *bob )->getCore()->Show = false;
 			}
 

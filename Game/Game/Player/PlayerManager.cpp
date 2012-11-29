@@ -688,7 +688,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 	{
 		bool All = true;
 		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-			All = All && !Tools::CurLevel->getMainCamera()->OnScreen((*bob)->getCore()->Data->Position);
+			All = All && !Tools::CurLevel->getMainCamera()->OnScreen((*bob)->getCore()->Data.Position);
 
 		return All;
 	}

@@ -13,7 +13,6 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 
 // Things to reh-gecks.
 // Math::Sign and Sign__RegexMe41315803 -> Sign
-// ->Data->Position -> ->Data.Position    Also for Velocity and Acceleration
 // ->Core->   ->   ->getCore()->
 // Style_CALC_GEN_PARAMS
 // dynamic_cast<...*>

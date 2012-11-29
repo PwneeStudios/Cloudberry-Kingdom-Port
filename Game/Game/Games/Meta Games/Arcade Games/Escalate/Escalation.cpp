@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		// Special explode
 		for ( std::vector<std::shared_ptr<Bob> >::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
-			ParticleEffects::PiecePopFart( level, ( *bob )->getCore()->Data->Position );
+			ParticleEffects::PiecePopFart( level, ( *bob )->getCore()->Data.Position );
 
 		// Add the Game Over panel, check for Awardments
 		game->WaitThenDo( 50, std::make_shared<ShowEndScreenProxy>( challenge ) );

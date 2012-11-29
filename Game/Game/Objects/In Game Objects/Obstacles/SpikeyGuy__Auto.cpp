@@ -185,7 +185,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 
 			// Add spinners
 			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 30;
-			float density = level->getRnd()->RndFloat(Params->Density.GetVal((*block)->getCore()->Data->Position), Params->Density.GetVal((*block)->getCore()->Data->Position));
+			float density = level->getRnd()->RndFloat(Params->Density.GetVal((*block)->getCore()->Data.Position), Params->Density.GetVal((*block)->getCore()->Data.Position));
 			float average = static_cast<int>( xdif * density / 2000 );
 			int n = static_cast<int>( average );
 			if ( average < 1 )

@@ -2098,13 +2098,13 @@ int Step1, Level::Step2 = 0;
 			bool Any;
 			Any = false;
 			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
-				if ( ( *bob )->getCore()->Data->Position.X < MaxRight + EndBuffer )
+				if ( ( *bob )->getCore()->Data.Position.X < MaxRight + EndBuffer )
 					Any = true;
 			if ( !Any )
 				OneFinishedCount += 8;
 			Any = false;
 			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
-				if ( ( *bob )->getCore()->Data->Position.X > MaxRight + EndBuffer - 100 )
+				if ( ( *bob )->getCore()->Data.Position.X > MaxRight + EndBuffer - 100 )
 					Any = true;
 			if ( Any )
 				OneFinishedCount++;
@@ -2196,7 +2196,7 @@ int Step1, Level::Step2 = 0;
 			{
 				for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 				{
-					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->Core->Data->Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
+					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->Core->Data.Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
 						getRecycle()->CollectObject(*obj);
 				}
 			}
@@ -2225,7 +2225,7 @@ int Step1, Level::Step2 = 0;
 				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (*block2)->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data->Position - (*block2)->getCore()->Data->Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (*block2)->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
 					switch ( ( *block )->getCore()->GenData->MyOverlapPreference )
 					{
@@ -2267,7 +2267,7 @@ int Step1, Level::Step2 = 0;
 				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data->Position - (*block2)->getCore()->Data->Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style_MIN_BLOCK_DIST || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
 					getRecycle()->CollectObject(*block);
 				}
@@ -3531,7 +3531,7 @@ std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempV
 	void Level::AddLevelObjects( const std::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 )
 	{
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
-			if ( IsBetween( ( *obj )->getCore()->Data->Position, p1, p2 ) && !(*obj)->getCore()->DoNotScrollOut )
+			if ( IsBetween( ( *obj )->getCore()->Data.Position, p1, p2 ) && !(*obj)->getCore()->DoNotScrollOut )
 				AddObject( *obj, false );
 	}
 
@@ -3645,7 +3645,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		for ( ObjectVec::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
 		{
 			if ( ( *obj )->getCore()->GenData->EnforceBounds )
-			if ( ( *obj )->getCore()->Data->Position.X > TR.X || (*obj)->getCore()->Data->Position.X < BL.X || (*obj)->getCore()->Data->Position.Y > TR.Y || (*obj)->getCore()->Data->Position.Y < BL.Y )
+			if ( ( *obj )->getCore()->Data.Position.X > TR.X || (*obj)->getCore()->Data.Position.X < BL.X || (*obj)->getCore()->Data.Position.Y > TR.Y || (*obj)->getCore()->Data.Position.Y < BL.Y )
 				getRecycle()->CollectObject(*obj);
 
 			if ( ( *obj )->getCore()->MarkedForDeletion )
@@ -3686,7 +3686,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 			if ( !obj->getCore()->MarkedForDeletion && !(*obj2)->getCore()->MarkedForDeletion && obj != *obj2 && !(MustBeDifferent && obj->getCore()->MyType == (*obj2)->getCore()->MyType) )
 			{
-				Vector2 MinDist = ( MinDistFunc->Apply( obj->getCore()->Data.Position ) + MinDistFunc->Apply((*obj2)->getCore()->Data->Position) ) / 2;
+				Vector2 MinDist = ( MinDistFunc->Apply( obj->getCore()->Data.Position ) + MinDistFunc->Apply((*obj2)->getCore()->Data.Position) ) / 2;
 
 				Vector2 d = metric->Apply( obj, *obj2 );
 
@@ -3811,8 +3811,8 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 			int i = ( *bob )->MyPieceIndex;
 			if ( RecordPosition )
 			{
-				CurPiece->Recording_Renamed[ i ]->AutoLocs[ CurPhsxStep - ( *bob )->IndexOffset ] = ( *bob )->getCore()->Data->Position;
-				CurPiece->Recording_Renamed[ i ]->AutoVel[ CurPhsxStep - ( *bob )->IndexOffset ] = ( *bob )->getCore()->Data->Velocity;
+				CurPiece->Recording_Renamed[ i ]->AutoLocs[ CurPhsxStep - ( *bob )->IndexOffset ] = ( *bob )->getCore()->Data.Position;
+				CurPiece->Recording_Renamed[ i ]->AutoVel[ CurPhsxStep - ( *bob )->IndexOffset ] = ( *bob )->getCore()->Data.Velocity;
 				CurPiece->Recording_Renamed[ i ]->AutoOnGround[ CurPhsxStep - ( *bob )->IndexOffset ] = ( *bob )->MyPhsx->OnGround;
 			}
 			else
@@ -3821,8 +3821,8 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 				{
 					Vector2 IntendedLoc = MySwarmBundle->CurrentSwarm->MainRecord->Recordings[ Bobs.find( *bob ) ]->AutoLocs[ CurPhsxStep ];
 					Vector2 IntendedVel = MySwarmBundle->CurrentSwarm->MainRecord->Recordings[ Bobs.find( *bob ) ]->AutoVel[ CurPhsxStep ];
-					( *bob )->Move( IntendedLoc - ( *bob )->getCore()->Data->Position );
-					( *bob )->getCore()->Data->Velocity = IntendedVel;
+					( *bob )->Move( IntendedLoc - ( *bob )->getCore()->Data.Position );
+					( *bob )->getCore()->Data.Velocity = IntendedVel;
 				}
 
 				if ( ( *bob )->MyPiece != 0 && ( *bob )->MyPiece->Recording_Renamed->size() > 0 && !(*bob)->CharacterSelect_Renamed && !(*bob)->CharacterSelect2 )
@@ -3832,7 +3832,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 						Vector2 a, b;
 						bool A, B;
 						a = ( *bob )->MyPiece->Recording_Renamed[ i ]->AutoLocs[ index ];
-						b = ( *bob )->getCore()->Data->Position;
+						b = ( *bob )->getCore()->Data.Position;
 						A = ( *bob )->MyPiece->Recording_Renamed[ i ]->AutoOnGround[ index ];
 						B = ( *bob )->MyPhsx->OnGround;
 						Vector2 dif = a - b;
@@ -3845,8 +3845,8 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 							if ( a != Vector2() )
 							{
 								//bob.Core.Data.Position = a;
-								( *bob )->Move( a - ( *bob )->getCore()->Data->Position );
-								( *bob )->getCore()->Data->Velocity = (*bob)->MyPiece->Recording_Renamed[ i ]->AutoVel[ index ];
+								( *bob )->Move( a - ( *bob )->getCore()->Data.Position );
+								( *bob )->getCore()->Data.Velocity = (*bob)->MyPiece->Recording_Renamed[ i ]->AutoVel[ index ];
 								//Console.WriteLine("Bob[{0}]---> {1}/{2}:  {3}, {4}, {5}, {6}", Bobs.IndexOf(bob), GetPhsxStep(), bob.MyPiece.PieceLength, a, b, A, B);
 							}
 						}
