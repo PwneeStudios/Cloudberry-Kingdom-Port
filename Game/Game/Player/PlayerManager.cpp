@@ -398,13 +398,13 @@ bool PlayerManager::HaveFirstPlayer = false;
 		return 0;
 	}
 
-int PlayerManager::NumPlayers = 1;
-std::vector<PlayerData*> PlayerManager::Players = 0;
+	int PlayerManager::NumPlayers = 1;
+	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players = 0;
 
-	int PlayerManager::length( std::vector<StringBuilder*> &names )
+	int PlayerManager::length( std::vector<std::shared_ptr<StringBuilder> > &names )
 	{
 		int count = 0;
-		for ( std::vector<StringBuilder*>::const_iterator name = names.begin(); name != names.end(); ++name )
+		for ( std::vector<std::shared_ptr<StringBuilder> >::const_iterator name = names.begin(); name != names.end(); ++name )
 			count += ( *name )->Length;
 		return count;
 	}
@@ -590,10 +590,10 @@ std::vector<PlayerData*> PlayerManager::Players = 0;
 	#endif
 	}
 
-	const std::vector<PlayerData*> &PlayerManager::getExistingPlayers()
+	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getExistingPlayers()
 	{
 		_ExistingPlayers.clear();
-		for ( std::vector<CloudberryKingdom::PlayerData*>::const_iterator data = Players.begin(); data != Players.end(); ++data )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( *data != 0 && ( *data )->Exists )
 				_ExistingPlayers.push_back( *data );
 

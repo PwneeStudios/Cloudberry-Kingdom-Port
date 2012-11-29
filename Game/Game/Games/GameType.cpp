@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		this->gt = gt;
 	}
 
-	void GameData::FinishProxy::Apply( bool Replay )
+	void GameData::FinishProxy::Apply( const bool &Replay )
 	{
 		gt->Finish( Replay );
 	}
@@ -329,7 +329,7 @@ namespace CloudberryKingdom
 		ParentGame->SetToReturnTo( 0 );
 
 		// Release this game
-		ParentGame->AddToDo( std::make_shared<ReleaseThisLambda>( this ) );
+		ParentGame->AddToDo( std::make_shared<ReleaseThisLambda>( shared_from_this() ) );
 
 		// Check if we should replay the current game
 		if ( Replay )
@@ -400,7 +400,7 @@ namespace CloudberryKingdom
 	void GameData::WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > &f )
 	{
 		// Create a function that after the specified time will add f to the ToDo list
-		WaitThenDo( WaitLength, std::make_shared<WaitThenAddToToDoLambda>( this, f ) );
+		WaitThenDo( WaitLength, std::make_shared<WaitThenAddToToDoLambda>( shared_from_this(), f ) );
 	}
 
 	bool GameData::QuickSpawnEnabled()
@@ -436,10 +436,10 @@ namespace CloudberryKingdom
 	void GameData::PartialFade_InAndOut( int Delay, float TargetOpaqueness, int FadeOutLength, int FadeInLength, const std::shared_ptr<Lambda> &OnBlack )
 	{
 		// Wait then screen partially fade to black.
-		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( this, TargetOpaqueness / FadeOutLength ) );
+		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( shared_from_this(), TargetOpaqueness / FadeOutLength ) );
 
 		// Wait for the apex of blackness, trigger the action and fade back in.
-		WaitThenDo( Delay + FadeOutLength, std::make_shared<FadeInAndDoAction>( this, OnBlack, TargetOpaqueness / FadeOutLength, TargetOpaqueness ) );
+		WaitThenDo( Delay + FadeOutLength, std::make_shared<FadeInAndDoAction>( shared_from_this(), OnBlack, TargetOpaqueness / FadeOutLength, TargetOpaqueness ) );
 	}
 
 	void GameData::SlideOut_FadeIn( int Delay, const std::shared_ptr<Lambda> &OnBlack )
@@ -451,7 +451,7 @@ namespace CloudberryKingdom
 		WaitThenDo( Delay, std::make_shared<SlideInLambda>( black ), _T( "SlideOut_FadeIn" ) );
 
 		// Wait for screen to be completely black, then fade in.
-		WaitThenDo( Delay + 17, std::make_shared<FadeInAfterBlack>( black, OnBlack, this ), _T( "SlideOut_FadeIn" ) );
+		WaitThenDo( Delay + 17, std::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), _T( "SlideOut_FadeIn" ) );
 	}
 
 	void GameData::RemoveGameObjects( GameObject::Tag tag )
@@ -657,16 +657,13 @@ int GameData::CurItemStep = 0;
 
 	GameData::GameData()
 	{
-	InitializeInstanceFields();
-	#if defined(DEBUG_OBJDATA)
-		ObjectData::weakg->Add( std::make_shared<WeakReference>( this ) );
-	#endif
+		InitializeInstanceFields();
 
 		CreationTime = Tools::TheGame->DrawCount;
 
 		Recycle = Recycler::GetRecycler();
 
-		EndGame = std::make_shared<FinishProxy>( this );
+		EndGame = std::make_shared<FinishProxy>( shared_from_this() );
 
 		Loading = false;
 
@@ -940,7 +937,7 @@ bool GameData::LockLevelStart = false;
 		int _i = __min( i, static_cast<int>( MyLevel->CurPiece->StartData.size() ) - 1 );
 		PhsxData StartData = MyLevel->CurPiece->StartData[ _i ];
 		Player->Init( false, MyLevel->CurPiece->StartData[ 0 ], shared_from_this() );
-		std::shared_ptr<Bob> TargetBob = Tools::Find( MyLevel->Bobs, std::make_shared<FindTargetBobLambda>( Player ) );
+		std::shared_ptr<Bob> TargetBob = Tools::Find<std::shared_ptr<Bob> >( MyLevel->Bobs, std::make_shared<FindTargetBobLambda>( Player ) );
 
 		if ( TargetBob != 0 )
 			Player->Move( Vector2( 20, 450 ) + TargetBob->getCore()->Data.Position - Player->getCore()->Data.Position );
@@ -1182,7 +1179,7 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::CleanGameObjects()
 	{
-		Tools::RemoveAll( MyGameObjects, std::make_shared<RemoveMarkedLambda>() );
+		Tools::RemoveAll<std::shared_ptr<GameObject> >( MyGameObjects, std::make_shared<RemoveMarkedLambda>() );
 	}
 
 	void GameData::Move( Vector2 shift )
@@ -1231,7 +1228,7 @@ bool GameData::LockLevelStart = false;
 
 	void GameData::FadeToBlack( float FadeOutSpeed, int Delay )
 	{
-		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( this, FadeOutSpeed ) );
+		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( shared_from_this(), FadeOutSpeed ) );
 	}
 
 	void GameData::Draw()
@@ -1371,12 +1368,12 @@ bool GameData::LockLevelStart = false;
 			return false;
 	}
 
-	const std::shared_ptr<PlayerData> &GameData::getMvp() const
+	std::shared_ptr<PlayerData> GameData::getMvp() const
 	{
-		return Tools::ArgMax( PlayerManager::getExistingPlayers(), std::make_shared<GetCampaignStatsScoreLambda>() );
+		return Tools::ArgMax<std::shared_ptr<PlayerData> >( PlayerManager::getExistingPlayers(), std::make_shared<GetCampaignStatsScoreLambda>() );
 	}
 
-	const std::shared_ptr<Bob> &GameData::getMvpBob() const
+	std::shared_ptr<Bob> GameData::getMvpBob() const
 	{
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			if ( ( *bob )->MyPlayerIndex == getMvp()->MyPlayerIndex )
@@ -1572,7 +1569,7 @@ bool GameData::LockLevelStart = false;
 		door->MoveBobs();
 
 		// Open the door and show the bobs
-		CinematicToDo( Wait, std::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, this ) );
+		CinematicToDo( Wait, std::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, shared_from_this() ) );
 	}
 
 	std::vector<int> GameData::DramaticEntryWait;
@@ -1589,7 +1586,7 @@ bool GameData::LockLevelStart = false;
 	{
 		SetDramaticEntryParams();
 
-		WaitThenDo( 1, std::make_shared<DramaticEntryLambda>( this, Wait, door ) );
+		WaitThenDo( 1, std::make_shared<DramaticEntryLambda>( shared_from_this(), Wait, door ) );
 
 		return DramaticEntryWait[ 0 ] + Wait;
 	}

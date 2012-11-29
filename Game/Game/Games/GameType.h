@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	/// The game class holds the levels and purpose of the level.
 	/// Different purposes are implemented as children classes of the main GameData class.
 	/// </summary>
-	class GameData : public std::enable_shared_from_this<ActionGameData>
+	class GameData : public std::enable_shared_from_this<GameData>
 	{
 	private:
 		class AddScoreLambda : public Lambda
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		public:
 			FinishProxy( const std::shared_ptr<GameData> &gt );
 
-			void Apply( bool Replay );
+			void Apply( const bool &Replay );
 		};
 
 	private:
@@ -801,9 +801,9 @@ namespace CloudberryKingdom
 		bool AllPast( float x );
 
 	public:
-		const std::shared_ptr<PlayerData> &getMvp() const;
+		std::shared_ptr<PlayerData> getMvp() const;
 
-		const std::shared_ptr<Bob> &getMvpBob() const;
+		std::shared_ptr<Bob> getMvpBob() const;
 
 	protected:
 		bool MvpOnly;

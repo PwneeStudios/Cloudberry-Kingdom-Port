@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	class LambdaFunc_2
 	{
 	public:
-		virtual OutputType Apply( T1 &t1, T2 &t2 ) = 0;
+		virtual OutputType Apply( const T1 &t1, const T2 &t2 ) = 0;
 	};
 }
 

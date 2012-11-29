@@ -59,9 +59,9 @@ namespace CloudberryKingdom
 		this->ss = ss;
 	}
 
-	std::shared_ptr<LevelSeedData> ScreenSaver::GetSeedFuncLambdaSS::Apply( const int index )
+	std::shared_ptr<LevelSeedData> ScreenSaver::GetSeedFuncLambdaSS::Apply( const int &index )
 	{
-		ss->Make( index );
+		return ss->Make( index );
 	}
 	
 	ScreenSaver::ConstructorOnSwapToLevelHelper::ConstructorOnSwapToLevelHelper( const std::shared_ptr<ScreenSaver> &ss )
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		this->ss = ss;
 	}
 
-	void ScreenSaver::ConstructorOnSwapToLevelHelper::Apply( int index )
+	void ScreenSaver::ConstructorOnSwapToLevelHelper::Apply( const int &index )
 	{
 		// Hide the 'Press A to start' text after the first level
 		if ( index > 0 )
@@ -303,11 +303,11 @@ namespace CloudberryKingdom
 		Tools::TheGame->LogoScreenPropUp = true;
 		Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
 
-		this->GetSeedFunc = std::make_shared<GetSeedFuncLambdaSS>( shared_from_this() );
+		this->GetSeedFunc = std::make_shared<GetSeedFuncLambdaSS>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) );
 
 		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>() );
 
-		OnSwapToLevel->Add( std::make_shared<ConstructorOnSwapToLevelHelper>( shared_from_this() ) );
+		OnSwapToLevel->Add( std::make_shared<ConstructorOnSwapToLevelHelper>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
 	}
 
 	void ScreenSaver::Release()
@@ -534,7 +534,7 @@ namespace CloudberryKingdom
 		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
-		piece->Style->MyModParams->Add( std::make_shared<MultiplayerBlobsMyModParamsHelper>( shared_from_this() ) );
+		piece->Style->MyModParams->Add( std::make_shared<MultiplayerBlobsMyModParamsHelper>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
 	}
 
 	void ScreenSaver::InitializeInstanceFields()

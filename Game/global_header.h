@@ -128,6 +128,16 @@ public:
 
 };
 
+class FileReader
+{
+
+}
+
+class FileWriter
+{
+
+}
+
 class FileStream;
 class Game { };
 

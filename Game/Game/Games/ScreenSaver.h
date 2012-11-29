@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		public:
 			GetSeedFuncLambdaSS( const std::shared_ptr<ScreenSaver> &ss );
 
-			std::shared_ptr<LevelSeedData> Apply( const int index );
+			std::shared_ptr<LevelSeedData> Apply( const int &index );
 		};
 
 	private:
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		public:
 			ConstructorOnSwapToLevelHelper( const std::shared_ptr<ScreenSaver> &ss );
 
-			void Apply( int index );
+			void Apply( const int &index );
 		};
 
 	private:

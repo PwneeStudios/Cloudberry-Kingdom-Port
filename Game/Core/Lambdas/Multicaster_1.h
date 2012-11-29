@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<Lambda_1<T> > > MyList;
 
 	public:
-		void Apply( T t )
+		void Apply( const T &t )
 		{
 			for ( std::vector<std::shared_ptr<Lambda_1<T> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
 				( *L )->Apply( t );

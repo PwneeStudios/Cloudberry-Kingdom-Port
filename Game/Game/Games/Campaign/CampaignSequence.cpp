@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -29,7 +26,7 @@ namespace CloudberryKingdom
 	void CampaignSequence::WatchMovieLambda::Apply( const std::shared_ptr<Level> &level )
 	{
 		MainVideo::StartVideo_CanSkipIfWatched_OrCanSkipAfterXseconds( movie, 1.5f );
-		( static_cast<ActionGameData*>( level->MyGame ) )->Done = true;
+		( std::static_pointer_cast<ActionGameData>( level->MyGame ) )->Done = true;
 	}
 
 	void CampaignSequence::EndActionProxy::Apply( const std::shared_ptr<Level> &level )
@@ -37,7 +34,7 @@ namespace CloudberryKingdom
 		CampaignSequence::EndAction( level );
 	}
 
-const std::shared_ptr<CampaignSequence> CampaignSequence::instance = std::make_shared<CampaignSequence>();
+	const std::shared_ptr<CampaignSequence> CampaignSequence::instance = std::make_shared<CampaignSequence>();
 
 	const std::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
 	{

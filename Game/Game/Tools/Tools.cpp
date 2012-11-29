@@ -326,7 +326,6 @@ template<typename TKey, typename TValue>
 	{
 		TSource min = TSource();
 		float minval = 0;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<TSource>:const_iterator item = source.begin(); item != source.end(); ++item )
 			if ( min == 0 || val->Apply( *item ) < minval )
 			{
@@ -337,12 +336,11 @@ template<typename TKey, typename TValue>
 		return min;
 	}
 
-template<typename TSource>
+	template<typename TSource>
 	TSource Tools::ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 	{
 		TSource max = TSource();
 		float maxval = 0;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
 			if ( max == 0 || val->Apply( *item ) > maxval )
 			{

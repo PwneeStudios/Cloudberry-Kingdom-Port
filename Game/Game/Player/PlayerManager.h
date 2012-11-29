@@ -257,14 +257,14 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players currently existing.
 		/// </summary>
-		const static std::vector<PlayerData*> &getExistingPlayers();
-		static std::vector<PlayerData*> _ExistingPlayers;
+		const static std::vector<std::shared_ptr<PlayerData> > &getExistingPlayers();
+		static std::vector<std::shared_ptr<PlayerData> > _ExistingPlayers;
 
 		/// <summary>
 		/// A list of all players currently alive.
 		/// </summary>
-		const static std::vector<PlayerData*> &getAlivePlayers();
-		static std::vector<PlayerData*> _AlivePlayers;
+		const static std::vector<std::shared_ptr<PlayerData> > &getAlivePlayers();
+		static std::vector<std::shared_ptr<PlayerData> > _AlivePlayers;
 
 #if defined(PC_VERSION)
 		const static std::shared_ptr<PlayerData> &getPlayer();

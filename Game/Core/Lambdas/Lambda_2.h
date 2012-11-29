@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	class Lambda_2
 	{
 	public:
-		virtual void Apply( T1 &t1, T2 &t2 ) = 0;
+		virtual void Apply( const T1 &t1, const T2 &t2 ) = 0;
 	};
 }
 
