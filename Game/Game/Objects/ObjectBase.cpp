@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		if ( getCore()->MarkedForDeletion )
 			return;
 
-		getCore()->getRecycle()->CollectObject(this);
+		getCore()->getRecycle()->CollectObject( shared_from_this() );
 	}
 
 	void ObjectBase::StampAsUsed( int CurPhsxStep )

@@ -237,7 +237,7 @@ float FlyingBlob::BobXFriction = 1;
 	{
 		getCore()->Active = false;
 		if ( DeleteOnDeath )
-			getCore()->getRecycle()->CollectObject(this);
+			getCore()->getRecycle()->CollectObject( shared_from_this() );
 		if ( getCore()->MyLevel->PlayMode != 0 )
 			return;
 
@@ -623,7 +623,7 @@ float FlyingBlob::BobXFriction = 1;
 					Delete = false;
 				if ( Delete )
 				{
-					getCore()->getRecycle()->CollectObject(this);
+					getCore()->getRecycle()->CollectObject( shared_from_this() );
 
 					getCore()->Active = false;
 					DoInteraction = false;

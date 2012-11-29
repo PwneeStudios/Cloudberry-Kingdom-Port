@@ -331,7 +331,7 @@ bool Spike::PeakOut = true;
 					bool col = Phsx::BoxBoxOverlap_Tiered( Box, getCore(), bob, Spike_AutoGen::getInstance() );
 
 					if ( col )
-						getCore()->getRecycle()->CollectObject(this);
+						getCore()->getRecycle()->CollectObject( shared_from_this() );
 				}
 			}
 		}

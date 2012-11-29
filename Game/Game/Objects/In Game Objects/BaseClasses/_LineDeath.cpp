@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 				bool col = Phsx::AABoxAndLineCollisionTest_Tiered( MyLine, getCore(), bob, AutoGenSingleton );
 
 				if ( col )
-					getCore()->getRecycle()->CollectObject(this);
+					getCore()->getRecycle()->CollectObject( shared_from_this() );
 			}
 		}
 	}

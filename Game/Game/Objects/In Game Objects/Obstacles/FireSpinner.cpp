@@ -203,7 +203,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 				bool col = Phsx::AABoxAndLineCollisionTest_Tiered( MyLine, getCore(), bob, FireSpinner_AutoGen::getInstance() );
 
 				if ( col )
-					getCore()->getRecycle()->CollectObject(this);
+					getCore()->getRecycle()->CollectObject( shared_from_this() );
 			}
 		}
 	}

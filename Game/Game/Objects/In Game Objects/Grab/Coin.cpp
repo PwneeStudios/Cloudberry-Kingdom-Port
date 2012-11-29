@@ -229,7 +229,7 @@ Vector2 Coin::PosOfLastCoinGrabbed = 0;
 
 				// Remove the coin permanently if it can only be grabbed once
 				if ( game->TakeOnce )
-					getCore()->getRecycle()->CollectObject(this);
+					getCore()->getRecycle()->CollectObject( shared_from_this() );
 			}
 		}
 	}
