@@ -31,7 +31,7 @@ std::shared_ptr<BobPhsx> Challenge::ChosenHero = 0;
 
 	const std::shared_ptr<StringWorldGameData> &Challenge::getStringWorld() const
 	{
-		return static_cast<StringWorldGameData*>( Tools::WorldMap );
+		return std::static_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 	}
 
 	int Challenge::TopScore()
