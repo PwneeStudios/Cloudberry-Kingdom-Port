@@ -1,18 +1,17 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
-
-	HeroSpec::HeroSpec( int basetype, int shape, int move, int special )
+	
+	HeroSpec::HeroSpec()
 	{
-		this->basetype = static_cast<Hero_BaseType>( basetype );
-		this->shape = static_cast<Hero_Shape>( shape );
-		this->move = static_cast<Hero_MoveMod>( move );
-		this->special = static_cast<Hero_Special>( special );
+		basetype = 0;
+		shape = 0;
+		move = 0;
+		special = 0;
 	}
 
-	HeroSpec::HeroSpec( Hero_BaseType basetype, Hero_Shape shape, Hero_MoveMod move )
+	HeroSpec::HeroSpec( int basetype, int shape, int move )
 	{
 		this->basetype = basetype;
 		this->shape = shape;
@@ -20,7 +19,7 @@ namespace CloudberryKingdom
 		this->special = Hero_Special_CLASSIC;
 	}
 
-	HeroSpec::HeroSpec( Hero_BaseType basetype, Hero_Shape shape, Hero_MoveMod move, Hero_Special special )
+	HeroSpec::HeroSpec( int basetype, int shape, int move, int special )
 	{
 		this->basetype = basetype;
 		this->shape = shape;
@@ -38,10 +37,10 @@ namespace CloudberryKingdom
 		return Format( _T( "{0},{1},{2},{3}" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
 	}
 
-std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );
-std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( _T( "BoxHero_Land" ), 1 );
-std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( _T( "Jetpack" ),.15f );
-int BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( _T( "BoxHero_Land" ), 1 );
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( _T( "Jetpack" ),.15f );
+	int BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
 
 	BobPhsx::CustomPhsxData::DataBounds::DataBounds( float DefaultValue, float MinValue, float MaxValue )
 	{
@@ -55,7 +54,7 @@ int BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
 		_Bounds = std::vector<DataBounds>( Length );
 	}
 
-std::vector<DataBounds> BobPhsx::CustomPhsxData::_Bounds = 0;
+	std::vector<DataBounds> BobPhsx::CustomPhsxData::_Bounds = 0;
 
 	CloudberryKingdom::BobPhsx::CustomPhsxData::DataBounds BobPhsx::CustomPhsxData::Bounds( CustomData type )
 	{
@@ -69,7 +68,7 @@ std::vector<DataBounds> BobPhsx::CustomPhsxData::_Bounds = 0;
 		return _Bounds[ i ];
 	}
 
-bool BobPhsx::CustomPhsxData::BoundsSet = false;
+	bool BobPhsx::CustomPhsxData::BoundsSet = false;
 
 	void BobPhsx::CustomPhsxData::InitBounds()
 	{
@@ -191,7 +190,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return MyBob->getCore()->MyLevel->CurMakeData->PieceSeed->GeometryType;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx( Hero_BaseType BaseType )
+	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Base( int BaseType )
 	{
 		switch ( BaseType )
 		{
@@ -214,7 +213,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx( Hero_Shape Shape )
+	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Shape( int Shape )
 	{
 		switch ( Shape )
 		{
@@ -231,7 +230,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx( Hero_MoveMod MoveMod )
+	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Move( int MoveMod )
 	{
 		switch ( MoveMod )
 		{
@@ -248,7 +247,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx( Hero_Special Special )
+	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Special( int Special )
 	{
 		switch ( Special )
 		{

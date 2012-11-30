@@ -5,53 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_LivesLeft;
-}
 
-namespace CloudberryKingdom
-{
-	class Challenge;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class StringWorldEndurance;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Challenge_Escalation : public Challenge
 	{
 	private:
@@ -127,7 +81,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<GUI_LivesLeft> Gui_LivesLeft;
 
-	protected:
+	public:
 		Challenge_Escalation();
 
 		int i;

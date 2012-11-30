@@ -5,87 +5,19 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectIcon;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectData;
-}
-
-namespace CloudberryKingdom
-{
-	class RichLevelGenData;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class HeroSpec
 	{
 	public:
-		Hero_BaseType basetype;
-		Hero_Shape shape;
-		Hero_MoveMod move;
-		Hero_Special special;
+		int basetype;
+		int shape;
+		int move;
+		int special;
+
+		HeroSpec();
 
 		HeroSpec( int basetype, int shape, int move, int special );
 
-		HeroSpec( Hero_BaseType basetype, Hero_Shape shape, Hero_MoveMod move );
-
-		HeroSpec( Hero_BaseType basetype, Hero_Shape shape, Hero_MoveMod move, Hero_Special special );
+		HeroSpec( int basetype, int shape, int move );
 
 		HeroSpec operator + ( HeroSpec B );
 
@@ -185,13 +117,13 @@ namespace CloudberryKingdom
 		const LevelGeometry &getGeometry() const;
 
 	public:
-		static std::shared_ptr<BobPhsx> GetPhsx( Hero_BaseType BaseType );
+		static std::shared_ptr<BobPhsx> GetPhsx_Base( int BaseType );
 
-		static std::shared_ptr<BobPhsx> GetPhsx( Hero_Shape Shape );
+		static std::shared_ptr<BobPhsx> GetPhsx_Shape( int Shape );
 
-		static std::shared_ptr<BobPhsx> GetPhsx( Hero_MoveMod MoveMod );
+		static std::shared_ptr<BobPhsx> GetPhsx_Move( int MoveMod );
 
-		static std::shared_ptr<BobPhsx> GetPhsx( Hero_Special Special );
+		static std::shared_ptr<BobPhsx> GetPhsx_Special( int Special );
 
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
 

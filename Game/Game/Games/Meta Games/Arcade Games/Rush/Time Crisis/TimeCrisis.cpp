@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -14,7 +13,7 @@ namespace CloudberryKingdom
 		data->MyGame->AddGameObject( std::make_shared<TimeCrisis_Tutorial>( ch ) );
 	}
 
-const std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
+	const std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
 
 	const std::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance()
 	{
@@ -35,6 +34,6 @@ const std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance = std
 	void Challenge_TimeCrisis::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_TimeCrisis>( shared_from_this() ) ) );
 	}
 }

@@ -51,4 +51,10 @@ inline void Sort( std::vector<T> &v, const Predicate &pred )
 	std::sort( v.begin(), v.end(), pred );
 }
 
+template<class T>
+std::vector<T> VecFromArray( T a[] )
+{
+	return std::vector<T>( a, a + sizeof( a ) / sizeof( T ) );
+}
+
 #endif

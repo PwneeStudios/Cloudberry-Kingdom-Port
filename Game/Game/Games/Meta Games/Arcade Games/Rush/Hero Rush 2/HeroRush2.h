@@ -45,6 +45,7 @@ namespace CloudberryKingdom
 
 			void Apply( const std::shared_ptr<LevelSeedData> &data );
 		};
+
 	public:
 		static std::vector<HeroSpec> HeroList;
 
@@ -60,7 +61,8 @@ namespace CloudberryKingdom
 
 	protected:
 		virtual void MakeExitDoorIcon( int levelindex );
-
+	
+	public:
 		Challenge_HeroRush2();
 
 	private:
