@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	/*TileSet::operator TileSet*( const std::wstring &name )
+	/*TileSet::operator std::shared_ptr<TileSet> ( const std::wstring &name )
 	{
 		return TileSets::NameLookup[ name ];
 	}*/

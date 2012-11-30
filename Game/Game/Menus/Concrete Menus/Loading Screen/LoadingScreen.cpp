@@ -1,12 +1,10 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-int LoadingScreen::DefaultMinLoadLength = 85;
-int LoadingScreen::MinLoadLength = 0;
+	int LoadingScreen::DefaultMinLoadLength = 85;
+	int LoadingScreen::MinLoadLength = 0;
 
 	void LoadingScreen::MakeFake()
 	{
@@ -81,14 +79,14 @@ int LoadingScreen::MinLoadLength = 0;
 
 			if ( type == BobPhsxBox::getInstance() )
 			{
-				for ( std::vector<BaseQuad*>::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
+				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
 					if ( ( *quad )->MyDrawOrder == ObjectDrawOrder_WITH_OUTLINE )
 						( *quad )->Show = false;
 			}
 
 			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 			{
-				for ( std::vector<BaseQuad*>::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
+				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
 					( *quad )->MyDrawOrder = ObjectDrawOrder_WITH_OUTLINE;
 			}
 		}

@@ -61,7 +61,7 @@ int Bob::ImmortalLength = 55;
 			MyRecord.reset();
 
 		if ( MyBobLinks.size() > 0 )
-			for ( std::vector<BobLink*>::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
+			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
 				( *link )->Release();
 		MyBobLinks.clear();
 
@@ -118,7 +118,7 @@ int Bob::ImmortalLength = 55;
 			if ( 0 != head )
 				head->Show = false;
 
-			for ( std::vector<BaseQuad*>::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
+			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
 			{
 				if ( ( *quad )->Name->find( _T( "Hat_" ) ) != string::npos )
 				{
@@ -225,8 +225,8 @@ std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
 		return Boxes[ index ];
 	}
 
-const BobPhsx* tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
-std::vector<BobPhsx*> Bob::HeroTypes = std::vector<BobPhsx*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+const std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
+std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
@@ -802,7 +802,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 	{
 		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 && PlayerObject->QuadList.size() > 0 )
 		{
-			std::vector<BaseQuad*> ql = PlayerObject->QuadList;
+			std::vector<std::shared_ptr<BaseQuad> > ql = PlayerObject->QuadList;
 			if ( ql.size() >= 1 )
 				PlayerObject->QuadList[ 1 ]->SetColor( Color::White );
 			if ( ql.size() >= 1 )
@@ -1399,7 +1399,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 		// Bob connections
 		if ( MyBobLinks.size() > 0 )
-			for ( std::vector<BobLink*>::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
+			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
 				( *link )->PhsxStep( shared_from_this() );
 
 		if ( Dying )

@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		BobQuad->Quad_Renamed->MyTexture->Name = _T( "BobQuad" );
 	}
 
-	void SwarmRecord::Draw( int Step, const std::shared_ptr<Level> &level, std::vector<SpriteAnimGroup*> AnimGroup, std::vector<BobLink*> &BobLinks )
+	void SwarmRecord::Draw( int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks )
 	{
 		if ( level->SingleOnly )
 		{

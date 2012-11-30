@@ -66,9 +66,9 @@ namespace CloudberryKingdom
 
 		bool Initialized;
 	private:
-		std::vector<SpriteAnimGroup*> AnimGroup;
+		std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup;
 
-		std::vector<BobLink*> BobLinks;
+		std::vector<std::shared_ptr<BobLink> > BobLinks;
 
 	public:
 		void Release();

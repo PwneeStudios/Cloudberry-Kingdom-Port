@@ -3283,7 +3283,7 @@ int Level::AfterPostDrawLayer = 12;
 			for ( BobVec::const_iterator Player = Bobs.begin(); Player != Bobs.end(); ++Player )
 			{
 				if ( ( *Player )->getCore()->DrawLayer == i && (*Player)->MyBobLinks.size() > 0 )
-					for ( std::vector<BobLink*>::const_iterator link = Player->MyBobLinks.begin(); link != Player->MyBobLinks.end(); ++link )
+					for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = Player->MyBobLinks.begin(); link != Player->MyBobLinks.end(); ++link )
 						( *link )->Draw();
 			}
 

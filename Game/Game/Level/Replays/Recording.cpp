@@ -66,11 +66,11 @@ namespace CloudberryKingdom
 			Recordings[ i ]->Read( reader, Length );
 	}
 
-	void Recording::Draw( const std::shared_ptr<QuadClass> &BobQuad, int Step, const std::shared_ptr<Level> &level, std::vector<SpriteAnimGroup*> AnimGroup, std::vector<BobLink*> &BobLinks )
+	void Recording::Draw( const std::shared_ptr<QuadClass> &BobQuad, int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks )
 	{
 		if ( level->MyGame->MyGameFlags.IsTethered && Step < Length - 1 )
 		{
-			for ( std::vector<BobLink*>::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
+			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
 				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
 					continue;
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 	{
 		this->NumBobs = NumBobs;
 
-		Recordings = std::vector<ComputerRecording*>( NumBobs );
+		Recordings = std::vector<std::shared_ptr<ComputerRecording> >( NumBobs );
 		for ( int i = 0; i < NumBobs; i++ )
 		{
 			Recordings[ i ] = std::make_shared<ComputerRecording>();

@@ -23,13 +23,13 @@ namespace CloudberryKingdom
 		StartData.clear();
 
 		if ( Recording_Renamed.size() > 0 )
-			for ( std::vector<CloudberryKingdom::ComputerRecording*>::const_iterator record = Recording_Renamed.begin(); record != Recording_Renamed.end(); ++record )
+			for ( std::vector<std::shared_ptr<ComputerRecording> >::const_iterator record = Recording_Renamed.begin(); record != Recording_Renamed.end(); ++record )
 				//ComputerRecording.ToPool(record);
 				( *record )->Release();
 		Recording_Renamed.clear();
 
 		if ( Computer.size() > 0 )
-			for ( std::vector<CloudberryKingdom::Bob*>::const_iterator comp = Computer.begin(); comp != Computer.end(); ++comp )
+			for ( std::vector<std::shared_ptr<Bob> >::const_iterator comp = Computer.begin(); comp != Computer.end(); ++comp )
 				( *comp )->Release();
 
 		if ( Computer.size() > 0 )
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		CheckpointShift = std::vector<Vector2>( n );
 		if ( computer.size() > 0 )
 		{
-			Recording_Renamed = std::vector<ComputerRecording*>( NumBobs );
+			Recording_Renamed = std::vector<std::shared_ptr<ComputerRecording> >( NumBobs );
 			for ( int i = 0; i < NumBobs; i++ )
 			{
 				//Recording[i] = new ComputerRecording();

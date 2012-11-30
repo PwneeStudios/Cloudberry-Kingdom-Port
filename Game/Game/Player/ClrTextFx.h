@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A function that may modify the player object.
 		/// </summary>
-		std::shared_ptr<Lambda_1<Bob*> > ModObject;
+		std::shared_ptr<Lambda_1<std::shared_ptr<Bob> > > ModObject;
 
 		std::shared_ptr<EzTexture> PicTexture;
 		Vector2 PicScale;

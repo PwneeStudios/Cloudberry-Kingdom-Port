@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class CloseToStartLambda : public LambdaFunc_1<Bob*, bool>
+		class CloseToStartLambda : public LambdaFunc_1<std::shared_ptr<Bob> , bool>
 		{
 		public:
 			CloseToStartLambda();

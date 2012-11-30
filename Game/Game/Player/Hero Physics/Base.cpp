@@ -551,7 +551,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 
 	std::shared_ptr<BobPhsx> BobPhsx::Clone()
 	{
-		return static_cast<BobPhsx*>( MemberwiseClone() );
+		return std::static_pointer_cast<BobPhsx>( MemberwiseClone() );
 	}
 
 	void BobPhsx::KillJump()
