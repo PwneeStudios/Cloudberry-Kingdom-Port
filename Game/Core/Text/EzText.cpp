@@ -278,56 +278,56 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Back( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_B,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_B,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Go( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::X( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_X,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_X,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Y( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_Y,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_Y,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::LeftRight( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_Dir,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_Dir,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::LeftBumper( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_LB,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_LB,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::RightBumper( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_RB,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_RB,{0},?}}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Jump( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
 	}
 #endif
 

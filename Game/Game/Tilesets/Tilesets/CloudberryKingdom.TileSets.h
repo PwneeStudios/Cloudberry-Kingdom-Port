@@ -38,9 +38,9 @@ namespace CloudberryKingdom
 		static std::shared_ptr<TileSet> None, Random;
 		static std::shared_ptr<TileSet> DefaultTileSet;
 
-		static std::vector<TileSet*> TileList;
-		static std::map<int, TileSet*> GuidLookup;
-		static std::map<std::wstring, TileSet*> NameLookup, PathLookup;
+		static std::vector<std::shared_ptr<TileSet> > TileList;
+		static std::map<int, std::shared_ptr<TileSet> > GuidLookup;
+		static std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, PathLookup;
 
 		static void AddTileSet( const std::shared_ptr<TileSet> &tileset );
 

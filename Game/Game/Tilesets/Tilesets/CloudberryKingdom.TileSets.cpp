@@ -975,9 +975,9 @@ namespace CloudberryKingdom
 
 std::shared_ptr<TileSet> None, TileSets::Random = 0;
 std::shared_ptr<TileSet> TileSets::DefaultTileSet = 0;
-std::vector<TileSet*> TileSets::TileList = std::vector<TileSet*>();
-std::map<int, TileSet*> TileSets::GuidLookup = std::map<int, TileSet*>();
-std::map<std::wstring, TileSet*> NameLookup, TileSets::PathLookup = std::map<std::wstring, TileSet*>();
+std::vector<std::shared_ptr<TileSet> > TileSets::TileList = std::vector<std::shared_ptr<TileSet> >();
+std::map<int, std::shared_ptr<TileSet> > TileSets::GuidLookup = std::map<int, std::shared_ptr<TileSet> >();
+std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLookup = std::map<std::wstring, std::shared_ptr<TileSet> >();
 
 	void TileSets::AddTileSet( const std::shared_ptr<TileSet> &tileset )
 	{
@@ -1090,8 +1090,8 @@ std::map<std::wstring, TileSet*> NameLookup, TileSets::PathLookup = std::map<std
 		TileSets::LoadCode();
 
 		// Freeplay tilesets
-		const TileSet* tempVector3[] = { TileSets::Random, _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
-		CustomLevel_GUI::FreeplayTilesets = std::vector<TileSet*>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+		const std::shared_ptr<TileSet>  tempVector3[] = { TileSets::Random, _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
+		CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 	}
 
 	void TileSets::LoadSpriteEffects()

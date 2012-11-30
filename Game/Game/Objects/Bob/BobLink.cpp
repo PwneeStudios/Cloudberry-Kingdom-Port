@@ -92,9 +92,9 @@ namespace CloudberryKingdom
 		j = bob1;
 		k = bob2;
 		if ( bob1->MyBobLinks.empty() )
-			bob1->MyBobLinks = std::vector<BobLink*>();
+			bob1->MyBobLinks = std::vector<std::shared_ptr<BobLink> >();
 		if ( bob2->MyBobLinks.empty() )
-			bob2->MyBobLinks = std::vector<BobLink*>();
+			bob2->MyBobLinks = std::vector<std::shared_ptr<BobLink> >();
 		bob1->MyBobLinks.push_back( shared_from_this() );
 		bob2->MyBobLinks.push_back( shared_from_this() );
 	}

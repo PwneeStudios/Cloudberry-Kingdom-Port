@@ -55,9 +55,9 @@ namespace CloudberryKingdom
 		// Header
 		std::wstring Text;
 		if ( NumSeeds == 1 )
-			Text = std::wstring::Format( Localization::WordString( Localization::Words_DELETE_SEEDS ), NumSeeds );
+			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS ), NumSeeds );
 		else
-			Text = std::wstring::Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ), NumSeeds );
+			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ), NumSeeds );
 		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, _T( "Header" ) );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );

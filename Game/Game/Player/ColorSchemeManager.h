@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 	class ColorSchemeManager
 	{
 	private:
-		class CapeOnLambda : public Lambda_1<Bob*>
+		class CapeOnLambda : public Lambda_1<std::shared_ptr<Bob> >
 		{
 		public:
 			CapeOnLambda();

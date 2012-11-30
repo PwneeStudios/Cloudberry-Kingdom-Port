@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		this->ssGui = ssGui;
 	}
 
-	void SavedSeedsGUI::DoDeletionProxy::Apply( bool choice )
+	void SavedSeedsGUI::DoDeletionProxy::Apply( const bool &choice )
 	{
 		ssGui->DoDeletion( choice );
 	}

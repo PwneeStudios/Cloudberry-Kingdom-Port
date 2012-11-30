@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -73,12 +71,12 @@ std::map<Language, std::map<Words, std::wstring> > Localization::Text;
 	std::wstring Localization::WordMarkup( Words Word )
 	{
 		int Size = 80;
-		return std::wstring::Format( _T( "{{p{1},?,{0}}}" ), Size, WordToTextureName( Word ) );
+		return Format( _T( "{{p{1},?,{0}}}" ), Size, WordToTextureName( Word ) );
 	}
 
 	std::wstring Localization::WordMarkup( Words Word, int Size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}" ), Size, WordToTextureName( Word ) );
+		return Format( _T( "{{p{1},{0},?}}" ), Size, WordToTextureName( Word ) );
 	}
 
 std::map<Language, LanguageInfo*> Localization::Languages = std::map<Language, LanguageInfo*>( NumLanguages );
@@ -191,7 +189,7 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 //ORIGINAL LINE: case "show":
 			if ( identifier == _T( "show" ) )
 			{
-					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( std::wstring::Format( _T( "Chunk_{0}" ), Index ) );
+					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_{0}" ), Index ) );
 					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, float::Parse( data ), SubtitleTexture ) );
 
 					Index++;

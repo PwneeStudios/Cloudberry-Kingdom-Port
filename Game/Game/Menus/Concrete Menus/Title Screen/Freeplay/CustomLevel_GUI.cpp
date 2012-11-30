@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 
 	bool CustomLevel_GUI::InitOnAStartHelper::Apply( const std::shared_ptr<Menu> &dummy )
 	{
-		clGui->Start.Go::Apply( 0 );
+		clGui->Start->getGo()->Apply( 0 );
 		return true;
 	}
 
@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::InitOnIndexSelectHelper::Apply()
 	{
-		std::shared_ptr<TileSet> tileset = dynamic_cast<TileSet*>( LocationList->getCurObj() );
+		std::shared_ptr<TileSet> tileset = std::dynamic_pointer_cast<TileSet>( LocationList->getCurObj() );
 
 		//Vector2 HoldRelativeSize = Screenshot.GetTextureScaling();
 		//Screenshot.TextureName = tileset.ScreenshotString;
@@ -247,8 +247,8 @@ namespace CloudberryKingdom
 		clGui->BringLoad();
 	}
 
-std::vector<TileSet*> CustomLevel_GUI::FreeplayTilesets = std::vector<TileSet*>();
-std::vector<BobPhsx*> CustomLevel_GUI::FreeplayHeroes = std::vector<BobPhsx*>();
+std::vector<std::shared_ptr<TileSet> > CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >();
+std::vector<std::shared_ptr<BobPhsx> > CustomLevel_GUI::FreeplayHeroes = std::vector<std::shared_ptr<BobPhsx> >();
 bool CustomLevel_GUI::IsMaxLength = false;
 int CustomLevel_GUI::Difficulty = 0;
 Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
@@ -546,7 +546,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		LocationList->Name = _T( "Location" );
 		LocationList->Center = !LeftJustify;
 		LocationList->MyExpandPos = Vector2( -498.1506f, 713.873f );
-		for ( std::vector<TileSet*>::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
+		for ( std::vector<std::shared_ptr<TileSet> >::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *tileset )->NameInGame, ItemFont, false, true ) );
 			SetItemProperties( item );
@@ -606,7 +606,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		HeroList->Name = _T( "Hero" );
 		HeroList->Center = !LeftJustify;
 		HeroList->MyExpandPos = Vector2( -782.1666f, 293.6826f );
-		for ( std::vector<BobPhsx*>::const_iterator hero = FreeplayHeroes.begin(); hero != FreeplayHeroes.end(); ++hero )
+		for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator hero = FreeplayHeroes.begin(); hero != FreeplayHeroes.end(); ++hero )
 			AddHeroItem( *hero );
 
 		// Random
@@ -827,7 +827,7 @@ Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 
 	bool CustomLevel_GUI::IsCustomHero()
 	{
-		return ( static_cast<BobPhsx*>( HeroList->CurMenuItem->MyObject ) ) == 0;
+		return ( std::static_pointer_cast<BobPhsx>( HeroList->CurMenuItem->MyObject ) ) == 0;
 	}
 
 	bool CustomLevel_GUI::IsCustomDifficulty()

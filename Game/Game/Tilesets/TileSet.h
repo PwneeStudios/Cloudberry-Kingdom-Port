@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );
 
 		//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		//operator TileSet*( const std::wstring &name );
+		//operator std::shared_ptr<TileSet> ( const std::wstring &name );
 
 		static std::shared_ptr<TileSet> Get( const std::wstring &name );
 

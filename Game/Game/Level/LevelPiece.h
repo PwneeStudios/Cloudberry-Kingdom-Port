@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 		int PieceLength;
 
-		std::vector<ComputerRecording*> Recording_Renamed;
+		std::vector<std::shared_ptr<ComputerRecording> > Recording_Renamed;
 
 		void Shift( Vector2 shift );
 

@@ -228,7 +228,7 @@ std::shared_ptr<Awardment> Awardments::NoCoinFreeplay = std::make_shared<Awardme
 std::shared_ptr<Awardment> Awardments::AllCoinsAbusiveCastle = std::make_shared<Awardment>( 16, _T( "Ebenezer" ), _T( "Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + _T( "castle." ), Hat::TopHat );
 std::shared_ptr<Awardment> Awardments::NoDeathsNormalCastle = std::make_shared<Awardment>( 17, _T( "Untouchable" ), _T( "Beat an" ) + CampaignHelper::GetName( 2 ) + _T( "castle without dying once." ), Hat::Afro );
 std::shared_ptr<Awardment> Awardments::PerfectEasyCastle = std::make_shared<Awardment>( 18, _T( "Perfection" ), _T( "Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + _T( "castle without dying once. Image is everything." ), Hat::Halo );
-std::shared_ptr<Awardment> Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), std::wstring::Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( 205, 10, 10 ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( 26, 178, 231 ) ), HeroRush2_LevelUnlock ), 0 );
+std::shared_ptr<Awardment> Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( 205, 10, 10 ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( 26, 178, 231 ) ), HeroRush2_LevelUnlock ), 0 );
 
 	void Awardments::Init()
 	{

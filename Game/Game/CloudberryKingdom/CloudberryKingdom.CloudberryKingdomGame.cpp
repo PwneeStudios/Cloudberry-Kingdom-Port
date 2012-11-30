@@ -1085,7 +1085,7 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 		if ( Tools::Keyboard.IsKeyDownCustom( Keys::Z ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::Z ) )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<BobPhsx*>::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
+			for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
 				( *hero )->ResetInfo();
 
 			//Tools.TextureWad.LoadAllDynamic(Tools.GameClass.Content, EzTextureWad.WhatToLoad.Animations);

@@ -119,9 +119,9 @@ namespace CloudberryKingdom
 	{
 		TimeSpan time = TimeSpan( 0, 0, getLifeExpectancy_Frames() / 60 );
 		if ( time.Hours == 0 )
-			return std::wstring::Format( _T( "{0}:{1:00}" ), time.Minutes, time.Seconds );
+			return Format( _T( "{0}:{1:00}" ), time.Minutes, time.Seconds );
 		else
-			return std::wstring::Format( _T( "{0}:{1}:{2:00}" ), time.Hours, time.Minutes, time.Seconds );
+			return Format( _T( "{0}:{1}:{2:00}" ), time.Hours, time.Minutes, time.Seconds );
 	}
 
 	const int &PlayerStats::getLifeExpectancy_Frames() const

@@ -278,8 +278,8 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		static std::vector<TileSet*> FreeplayTilesets;
-		static std::vector<BobPhsx*> FreeplayHeroes;
+		static std::vector<std::shared_ptr<TileSet> > FreeplayTilesets;
+		static std::vector<std::shared_ptr<BobPhsx> > FreeplayHeroes;
 
 		static bool IsMaxLength;
 		static int Difficulty;

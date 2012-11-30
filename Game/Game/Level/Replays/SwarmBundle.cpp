@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		this->bob = bob;
 	}
 
-	void SwarmBundle::BobToSpritesLambda::Apply( std::map<int, SpriteAnim*> &dict, Vector2 pos )
+	void SwarmBundle::BobToSpritesLambda::Apply( const std::map<int, SpriteAnim*> &dict, const Vector2 &pos )
 	{
 		bob->MyPhsx->ToSprites( dict, pos );
 	}
@@ -39,21 +39,21 @@ namespace CloudberryKingdom
 		if ( Initialized )
 			return;
 
-		BobLinks = std::vector<BobLink*>();
+		BobLinks = std::vector<std::shared_ptr<BobLink> >();
 		if ( level->MyGame->MyGameFlags.IsTethered )
 		{
 			for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 				if ( ( *bob )->MyBobLinks.size() > 0 )
 					BobLinks.AddRange( ( *bob )->MyBobLinks );
 
-			for ( std::vector<BobLink*>::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
+			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
 				( *link )->_j = level->Bobs.find( ( *link )->j );
 				( *link )->_k = level->Bobs.find( ( *link )->k );
 			}
 		}
 
-		AnimGroup = std::vector<SpriteAnimGroup*>( 4 );
+		AnimGroup = std::vector<std::shared_ptr<SpriteAnimGroup> >( 4 );
 
 		int count = 0;
 		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )

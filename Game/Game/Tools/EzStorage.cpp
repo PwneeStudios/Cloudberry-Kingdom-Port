@@ -146,7 +146,7 @@ std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 )
 		this->sl = sl;
 	}
 
-	void SaveLoad::LoadLambda::Apply( std::vector<unsigned char> data )
+	void SaveLoad::LoadLambda::Apply( const std::vector<unsigned char> &data )
 	{
 		sl->Deserialize( data );
 		sl->Changed = false;

@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		class InitOnToggleHelper : public Lambda_1<bool>
 		{
 		public:
-			void Apply( bool state );
+			void Apply( const bool &state );
 		};
 
 	private:
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		public:
 			Toggle_BorderlessProxy( const std::shared_ptr<SoundMenu> &sm );
 
-			void Apply( bool state );
+			void Apply( const bool &state );
 		};
 
 	public:

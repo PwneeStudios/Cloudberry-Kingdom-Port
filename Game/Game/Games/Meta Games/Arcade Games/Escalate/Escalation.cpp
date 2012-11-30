@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		this->ce = ce;
 	}
 
-	void Challenge_Escalation::AdditionalPreStartOnSwapToLevelHelper::Apply( int levelindex )
+	void Challenge_Escalation::AdditionalPreStartOnSwapToLevelHelper::Apply( const int &levelindex )
 	{
 		Awardments::CheckForAward_Escalation_Level( levelindex - ce->StartIndex );
 
@@ -112,7 +112,12 @@ namespace CloudberryKingdom
 		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) ) );
 
 		// Create the string world, and add the relevant game objects
-		MyStringWorld = std::make_shared<StringWorldEndurance>( std::make_shared<PassGetSeedAsLambda>( shared_from_this() ), Gui_LivesLeft, 25 );
+		std::shared_ptr<PassGetSeedAsLambda> _GetSeed = std::make_shared<PassGetSeedAsLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) );
+		
+		std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > __GetSeed =
+			std::static_pointer_cast<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( _GetSeed );
+
+		MyStringWorld = std::make_shared<StringWorldEndurance>( __GetSeed, Gui_LivesLeft, 25 );
 
 		Escalation_Tutorial::setWatchedOnce( true );
 		if ( !Escalation_Tutorial::getWatchedOnce() )
@@ -133,7 +138,7 @@ namespace CloudberryKingdom
 
 	void Challenge_Escalation::PreStart_Tutorial()
 	{
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( shared_from_this() ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_Escalation>( shared_from_this() ) ) );
 	}
 
 	int Challenge_Escalation::GetLives()
@@ -148,7 +153,7 @@ namespace CloudberryKingdom
 		PreStart_Tutorial();
 
 		// When a new level is swapped to...
-		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( shared_from_this() ) );
+		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( std::static_pointer_cast<Challenge_Escalation>( shared_from_this() ) ) );
 	}
 
 	void Challenge_Escalation::OnSwapTo_GUI( int levelindex )
@@ -165,7 +170,7 @@ namespace CloudberryKingdom
 		if ( levelindex > StartIndex )
 		{
 			Tools::Warning();
-			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( std::wstring::Format( _T( "{1} {0}" ), levelindex + 1, Localization::WordString( Localization::Words_LEVEL ) ) );
+			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "{1} {0}" ), levelindex + 1, Localization::WordString( Localization::Words_LEVEL ) ) );
 			Tools::CurGameData->AddGameObject( title );
 
 			if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )

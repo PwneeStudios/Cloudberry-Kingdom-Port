@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 
 		SwarmRecord();
 
-		void Draw( int Step, const std::shared_ptr<Level> &level, std::vector<SpriteAnimGroup*> AnimGroup, std::vector<BobLink*> &BobLinks );
+		void Draw( int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks );
 
 		void AddRecord( const std::shared_ptr<Recording> &Record, int Step );
 

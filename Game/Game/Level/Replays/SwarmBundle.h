@@ -49,14 +49,14 @@ namespace CloudberryKingdom
 	class SwarmBundle
 	{
 	private:
-		class BobToSpritesLambda : public Lambda_2<std::map<int, SpriteAnim*>, Vector2>
+		class BobToSpritesLambda : public Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2>
 		{
 		private:
 			std::shared_ptr<Bob> bob;
 		public:
 			BobToSpritesLambda( const std::shared_ptr<Bob> &bob );
 
-			void Apply( std::map<int, SpriteAnim*> &dict, Vector2 pos );
+			void Apply( const std::map<int, std::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos );
 		};
 
 	private:
@@ -66,9 +66,9 @@ namespace CloudberryKingdom
 
 		bool Initialized;
 	private:
-		std::vector<SpriteAnimGroup*> AnimGroup;
+		std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup;
 
-		std::vector<BobLink*> BobLinks;
+		std::vector<std::shared_ptr<BobLink> > BobLinks;
 
 	public:
 		void Release();

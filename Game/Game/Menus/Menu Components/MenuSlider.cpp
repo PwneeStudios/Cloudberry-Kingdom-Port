@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 
 	std::wstring MenuSlider::ToCode( const std::wstring &suffix )
 	{
-		return std::wstring::Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; ((MenuSlider)_item).SliderShift = {6}; }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), Tools::ToCode(SliderShift) );
+		return Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; ((MenuSlider)_item).SliderShift = {6}; }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), Tools::ToCode(SliderShift) );
 	}
 
 	void MenuSlider::DoGrayOut()

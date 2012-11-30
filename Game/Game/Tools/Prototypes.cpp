@@ -56,7 +56,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 				}
 				catch ( ... )
 				{
-					Tools::Log( std::wstring::Format( _T( "Attempting to load a .anim file. Path <{0}> not found." ) ) );
+					Tools::Log( Format( _T( "Attempting to load a .anim file. Path <{0}> not found." ) ) );
 					return;
 				}
 			}
@@ -76,7 +76,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		}
 
 		p->Play = true;
-		for ( std::vector<BaseQuad*>::const_iterator quad = p->QuadList.begin(); quad != p->QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = p->QuadList.begin(); quad != p->QuadList.end(); ++quad )
 			( *quad )->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 
 		std::shared_ptr<CloudberryKingdom::BaseQuad> h = p->FindQuad( _T( "Head" ) );
@@ -163,15 +163,15 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 						int frame = end_frame > start_frame ? start_frame + i : start_frame - i;
 
 						// Get the texture for this frame.
-						std::shared_ptr<EzTexture> texture = Tools::Texture( std::wstring::Format( _T( "{0}_{1}" ), root, frame ) );
+						std::shared_ptr<EzTexture> texture = Tools::Texture( Format( _T( "{0}_{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_0000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_0000{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_000{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_00{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_00{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_0{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_0{1}" ), root, frame ) );
 
 						// Record object quad positions
 						int anim_to_mimick = 0;
@@ -343,7 +343,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj = 0;
 std::shared_ptr<FlyingBlob> Prototypes::goomba = 0;
-std::map<BobPhsx*, Bob*> Prototypes::bob = 0;
+std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> > Prototypes::bob = 0;
 std::shared_ptr<Spike> Prototypes::SpikeObj = 0;
 std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door, GrassDoor, Prototypes::ArrowObj = 0;
 std::shared_ptr<ObjectClass> Prototypes::Hero = 0;
@@ -395,7 +395,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		Prototypes::SpikeObj = std::make_shared<Spike>( Path::Combine( Globals::ContentDirectory, _T( "Objects\\regular_spike.smo" ) ), Tools::EffectWad, Tools::TextureWad );
 
 		// Create all the stickmen hero prototypes
-		bob = std::map<BobPhsx*, Bob*>();
+		bob = std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> >();
 		std::shared_ptr<Bob> NewBob;
 
 		//// Bezier base object
@@ -498,7 +498,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		NewBob = std::make_shared<Bob>( Path::Combine( Globals::ContentDirectory, _T( "Objects\\Spaceship.smo" ) ), Tools::EffectWad, Tools::TextureWad, BobPhsxSpaceship::getInstance(), false );
 		NewBob->MyObjectType = BobPhsxSpaceship::getInstance();
 		NewBob->PlayerObject->ParentQuad->Scale( Vector2( 3.5f, 3.5f ) );
-		for ( std::vector<BaseQuad*>::const_iterator quad = NewBob->PlayerObject->QuadList.begin(); quad != NewBob->PlayerObject->QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = NewBob->PlayerObject->QuadList.begin(); quad != NewBob->PlayerObject->QuadList.end(); ++quad )
 			( *quad )->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 		NewBob->CanHaveCape = false;
 		NewBob->CanHaveHat = false;
@@ -519,7 +519,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		NewBob->IsSpriteBased = false;
 		NewBob->MyObjectType = BobPhsxMeat::getInstance();
 		NewBob->PlayerObject->ParentQuad->Scale( Vector2( 2.75f, 2.75f ) );
-		for ( std::vector<BaseQuad*>::const_iterator quad = NewBob->PlayerObject->QuadList.begin(); quad != NewBob->PlayerObject->QuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = NewBob->PlayerObject->QuadList.begin(); quad != NewBob->PlayerObject->QuadList.end(); ++quad )
 			( *quad )->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 		NewBob->CanHaveCape = true;
 		NewBob->CanHaveHat = true;
@@ -533,10 +533,10 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 
 		// Freeplay Heroes
 		//if (!(CloudberryKingdomGame.StartAsFreeplay && CloudberryKingdomGame.UseNewBob))
-			CustomLevel_GUI::FreeplayHeroes = std::vector<BobPhsx*>( Bob::HeroTypes );
+			CustomLevel_GUI::FreeplayHeroes = std::vector<std::shared_ptr<BobPhsx> >( Bob::HeroTypes );
 
 		// Associate the BobPhsx with each prototype
-		for ( std::vector<BobPhsx*>::const_iterator HeroType = Bob::HeroTypes.begin(); HeroType != Bob::HeroTypes.end(); ++HeroType )
+		for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator HeroType = Bob::HeroTypes.begin(); HeroType != Bob::HeroTypes.end(); ++HeroType )
 			Prototypes::bob[ *HeroType ]->MyHeroType = *HeroType;
 
 		// Place bob

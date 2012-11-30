@@ -5,18 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Challenge_TimeCrisis : public Challenge_HeroRush
 	{
 	private:
@@ -34,9 +22,10 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Challenge_TimeCrisis> &getInstance();
 
-	protected:
+	public:
 		Challenge_TimeCrisis();
 
+	protected:
 		virtual std::shared_ptr<BobPhsx> GetHero( int i );
 
 		virtual void PreStart_Tutorial( bool TemporarySkip );

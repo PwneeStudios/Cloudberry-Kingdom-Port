@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<Quad> Head;
 
 	public:
-		std::vector<BobLink*> MyBobLinks;
+		std::vector<std::shared_ptr<BobLink> > MyBobLinks;
 
 		int SideHitCount;
 
@@ -199,7 +199,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::shared_ptr<AABox> RegularBox2;
 
-		static std::vector<BobPhsx*> HeroTypes;
+		static std::vector<std::shared_ptr<BobPhsx> > HeroTypes;
 
 		/// <summary>
 		/// How many time the bob has popped something without hitting the ground.

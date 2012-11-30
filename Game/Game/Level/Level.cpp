@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		this->level = level;
 	}
 
-	Vector2 Level::MakeVerticalCleanupHelper::Apply( Vector2 pos )
+	Vector2 Level::MakeVerticalCleanupHelper::Apply( const Vector2 &pos )
 	{
 		float dist = level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos );
 		return Vector2( dist, dist );
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		this->Invert = Invert;
 	}
 
-	void Level::SafetyNetLambda::Apply( Vector2 pos )
+	void Level::SafetyNetLambda::Apply( const Vector2 &pos )
 	{
 		if ( Type == StyleData::GroundType_SAFETY_NET )
 		{
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		this->size = size;
 	}
 
-	void Level::MakeInitialLambda::Apply( Vector2 pos )
+	void Level::MakeInitialLambda::Apply( const Vector2 &pos )
 	{
 		level->__block_fromlambda = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		level->__block_fromlambda->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 		this->BL_Cutoff = BL_Cutoff;
 	}
 
-	void Level::Stage1RndFillLambda::Apply( Vector2 pos )
+	void Level::Stage1RndFillLambda::Apply( const Vector2 &pos )
 	{
 		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameter>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		std::vector<float> Weights = std::vector<float>( Generators::WeightedPreFill_1_Gens.size() );
@@ -178,7 +178,7 @@ namespace CloudberryKingdom
 		this->level = level;
 	}
 
-	Vector2 Level::GeneralMinDistLambda::Apply( Vector2 pos )
+	Vector2 Level::GeneralMinDistLambda::Apply( const Vector2 &pos )
 	{
 		float dist = level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos );
 		return Vector2( dist, dist );
@@ -274,7 +274,7 @@ namespace CloudberryKingdom
 		this->c = c;
 	}
 
-	Vector2 Level::ConstLambda::Apply( Vector2 pos )
+	Vector2 Level::ConstLambda::Apply( const Vector2 &pos )
 	{
 		return c;
 	}
@@ -295,7 +295,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Vector2 Level::CleanupCoinsHelper::Apply( Vector2 pos )
+	Vector2 Level::CleanupCoinsHelper::Apply( const Vector2 &pos )
 	{
 		float dist = Params->MinDist.GetVal( pos );
 		return Vector2( dist, dist );
@@ -1822,7 +1822,7 @@ int Step1, Level::Step2 = 0;
 		PREFILL();
 		DEBUG( _T( "Pre stage 1, about to fill" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: {0}" ), TestNumber ) );
 
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
@@ -1974,7 +1974,7 @@ int Step1, Level::Step2 = 0;
 		Pre1 += L'C';
 		DEBUG( _T( "Pre stage 1, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: {0}" ), TestNumber ) );
 
 		PlayMode = 2;
 		RecordPosition = true;
@@ -1994,7 +1994,7 @@ int Step1, Level::Step2 = 0;
 			return false;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test a: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test a: {0}" ), TestNumber ) );
 
 		// Stage 1 Run through
 		Pre1 += L'D';
@@ -2002,7 +2002,7 @@ int Step1, Level::Step2 = 0;
 		Pre2 += L'A';
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test b: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test b: {0}" ), TestNumber ) );
 
 		// Continue making Final Platform
 		if ( MakeFinalPlat != 0 )
@@ -2013,7 +2013,7 @@ int Step1, Level::Step2 = 0;
 		Par += CurPiece->Par;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test c: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test c: {0}" ), TestNumber ) );
 
 		DEBUG( _T( "Done with stage 1 run through, about to cleanup" ) );
 
@@ -2041,7 +2041,7 @@ int Step1, Level::Step2 = 0;
 		Pre2 += L'C';
 		DEBUG( _T( "Pre stage 2, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test d: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test d: {0}" ), TestNumber ) );
 
 		PlayMode = 1;
 		RecordPosition = false;
@@ -3283,7 +3283,7 @@ int Level::AfterPostDrawLayer = 12;
 			for ( BobVec::const_iterator Player = Bobs.begin(); Player != Bobs.end(); ++Player )
 			{
 				if ( ( *Player )->getCore()->DrawLayer == i && (*Player)->MyBobLinks.size() > 0 )
-					for ( std::vector<BobLink*>::const_iterator link = Player->MyBobLinks.begin(); link != Player->MyBobLinks.end(); ++link )
+					for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = Player->MyBobLinks.begin(); link != Player->MyBobLinks.end(); ++link )
 						( *link )->Draw();
 			}
 

@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		public:
 			DoDeletionProxy( const std::shared_ptr<SavedSeedsGUI> &ssGui );
 
-			void Apply( bool choice );
+			void Apply( const bool &choice );
 		};
 
 	private:

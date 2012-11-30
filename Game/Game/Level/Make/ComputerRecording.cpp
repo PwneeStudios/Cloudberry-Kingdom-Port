@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-std::stack<ComputerRecording*> ComputerRecording::Pool = 0;
+	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool = 0;
 
 	void ComputerRecording::FillPool()
 	{
@@ -15,7 +15,7 @@ std::stack<ComputerRecording*> ComputerRecording::Pool = 0;
 
 	void ComputerRecording::InitPool()
 	{
-		Pool = std::stack<ComputerRecording*>();
+		Pool = std::stack<std::shared_ptr<ComputerRecording> >();
 		for ( int i = 0; i < 20; i++ )
 			FillPool();
 	}

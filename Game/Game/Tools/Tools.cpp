@@ -26,7 +26,7 @@ template<typename T> where T : IComparable
 
 	std::wstring Vector2Extension::ToSimpleString( Vector2 v )
 	{
-		return std::wstring::Format( _T( "{0}, {1}" ), v.X, v.Y );
+		return Format( _T( "{0}, {1}" ), v.X, v.Y );
 	}
 
 	bool Vector2Extension::LE( Vector2 v1, Vector2 v2 )
@@ -1022,31 +1022,31 @@ int Tools::WriteObjId = 0;
 				else if ( ( *info )->FieldType == Vector2::typeid )
 				{
 					Vector2 v = static_cast<Vector2>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1}" ), v.X, v.Y );
+					line = Format( _T( "{0} {1}" ), v.X, v.Y );
 				}
 				// Vector3
 				else if ( ( *info )->FieldType == Vector3::typeid )
 				{
 					Vector3 v = static_cast<Vector3>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2}" ), v.X, v.Y, v.Z );
+					line = Format( _T( "{0} {1} {2}" ), v.X, v.Y, v.Z );
 				}
 				// Vector4
 				else if ( ( *info )->FieldType == Vector4::typeid )
 				{
 					Vector4 v = static_cast<Vector4>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3}" ), v.X, v.Y, v.Z, v.W );
+					line = Format( _T( "{0} {1} {2} {3}" ), v.X, v.Y, v.Z, v.W );
 				}
 				// Color
 				else if ( ( *info )->FieldType == Color::typeid )
 				{
 					Color c = static_cast<Color>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3}" ), c.R, c.G, c.B, c.A );
+					line = Format( _T( "{0} {1} {2} {3}" ), c.R, c.G, c.B, c.A );
 				}
 				// bool
 				else if ( ( *info )->FieldType == bool::typeid )
 				{
 					bool b = static_cast<bool>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0}" ), b );
+					line = Format( _T( "{0}" ), b );
 				}
 				// string
 				else if ( ( *info )->FieldType == std::wstring::typeid )
@@ -1076,19 +1076,19 @@ int Tools::WriteObjId = 0;
 				else if ( ( *info )->FieldType == PhsxData::typeid )
 				{
 					PhsxData d = static_cast<PhsxData>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3} {4} {5}" ), d.Position.X, d.Position.Y, d.Velocity.X, d.Velocity.Y, d.Acceleration.X, d.Acceleration.Y );
+					line = Format( _T( "{0} {1} {2} {3} {4} {5}" ), d.Position.X, d.Position.Y, d.Velocity.X, d.Velocity.Y, d.Acceleration.X, d.Acceleration.Y );
 				}
 				// BasePoint
 				else if ( ( *info )->FieldType == BasePoint::typeid )
 				{
 					BasePoint b = static_cast<BasePoint>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3} {4} {5}" ), b.e1.X, b.e1.Y, b.e2.X, b.e2.Y, b.Origin.X, b.Origin.Y );
+					line = Format( _T( "{0} {1} {2} {3} {4} {5}" ), b.e1.X, b.e1.Y, b.e2.X, b.e2.Y, b.Origin.X, b.Origin.Y );
 				}
 				// MyOwnVertexFormat
 				else if ( ( *info )->FieldType == MyOwnVertexFormat::typeid )
 				{
 					MyOwnVertexFormat v = static_cast<MyOwnVertexFormat>( ( *info )->GetValue( obj ) );
-					line = std::wstring::Format( _T( "{0} {1} {2} {3} {4} {5} {6} {7}" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.TheColor.R, v.TheColor.G, v.TheColor.B, v.TheColor.A );
+					line = Format( _T( "{0} {1} {2} {3} {4} {5} {6} {7}" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.TheColor.R, v.TheColor.G, v.TheColor.B, v.TheColor.A );
 				}
 				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 				{
@@ -1123,7 +1123,7 @@ int Tools::WriteObjId = 0;
 				}
 
 				if ( line != _T( "" ) )
-					writer->WriteLine( WhiteSpace + std::wstring::Format( _T( "{0} {1}" ), ( *info )->Name, line ) );
+					writer->WriteLine( WhiteSpace + Format( _T( "{0} {1}" ), ( *info )->Name, line ) );
 			}
 		}
 
@@ -1166,7 +1166,7 @@ int Tools::WriteObjId = 0;
 			var subobject_field = obj->GetType()->GetField(field);
 			if ( subobject_field == 0 )
 			{
-				Tools::Log( std::wstring::Format( _T( "Field {0} not found." ), field ) );
+				Tools::Log( Format( _T( "Field {0} not found." ), field ) );
 				return;
 			}
 
@@ -1174,7 +1174,7 @@ int Tools::WriteObjId = 0;
 			var subobject = subobject_field->GetValue( obj );
 			if ( subobject == 0 )
 			{
-				Tools::Log( std::wstring::Format( _T( "Subfield {0} was a null object and could not be written into." ), field ) );
+				Tools::Log( Format( _T( "Subfield {0} was a null object and could not be written into." ), field ) );
 				return;
 			}
 
@@ -1187,7 +1187,7 @@ int Tools::WriteObjId = 0;
 			var fieldinfo = obj->GetType()->GetField(field);
 			if ( fieldinfo == 0 )
 			{
-				Tools::Log( std::wstring::Format( _T( "Field {0} not found." ), field ) );
+				Tools::Log( Format( _T( "Field {0} not found." ), field ) );
 				return;
 			}
 

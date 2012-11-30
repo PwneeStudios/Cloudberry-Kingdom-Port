@@ -129,7 +129,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 
 	std::wstring ColorScheme::ToString()
 	{
-		return std::wstring::Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor.Name, CapeColor.Name, CapeOutlineColor.Name, HatData->Name, BeardData->Name );
+		return Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor.Name, CapeColor.Name, CapeOutlineColor.Name, HatData->Name, BeardData->Name );
 	}
 
 	int ColorScheme::IndexOf( std::vector<MenuListItem*> &list, ClrTextFx clr )

@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	/*TileSet::operator TileSet*( const std::wstring &name )
+	/*TileSet::operator std::shared_ptr<TileSet> ( const std::wstring &name )
 	{
 		return TileSets::NameLookup[ name ];
 	}*/
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 				}
 				catch ( ... )
 				{
-					Tools::Log( std::wstring::Format( _T( "Attempting to load a .tileset file. Path <{0}> not found." ) ) );
+					Tools::Log( Format( _T( "Attempting to load a .tileset file. Path <{0}> not found." ) ) );
 				}
 			}
 		}
@@ -516,7 +516,7 @@ namespace CloudberryKingdom
 		}
 		catch ( ... )
 		{
-			Tools::Log( std::wstring::Format( _T( "Could not find {0} of width {1} for tileset {2}" ), _T( "block" ), width, Name ) );
+			Tools::Log( Format( _T( "Could not find {0} of width {1} for tileset {2}" ), _T( "block" ), width, Name ) );
 			return 0;
 		}
 	}

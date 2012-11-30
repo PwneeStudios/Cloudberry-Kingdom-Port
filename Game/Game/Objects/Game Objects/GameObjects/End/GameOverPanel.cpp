@@ -197,14 +197,14 @@ namespace CloudberryKingdom
 
 		// 'Levels' text
 		MyPile->Add( std::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, _T( "Level" ) ) );
-		Text = std::make_shared<EzText>( std::wstring::Format( _T( "{0}" ), Levels ), ItemFont );
+		Text = std::make_shared<EzText>( Format( _T( "{0}" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
 		MyPile->Add( Text, _T( "Level" ) );
 
 		// 'Score' text
 		MyPile->Add( std::make_shared<EzText>( Localization::Words_SCORE, ItemFont, _T( "Score" ) ) );
-		Text = std::make_shared<EzText>( std::wstring::Format( _T( "{0}" ), Score ), ItemFont );
+		Text = std::make_shared<EzText>( Format( _T( "{0}" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
 		MyPile->Add( Text, _T( "Score" ) );

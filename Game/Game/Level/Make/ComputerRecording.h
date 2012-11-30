@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 	class ComputerRecording
 	{
 	private:
-		static std::stack<ComputerRecording*> Pool;
+		static std::stack<std::shared_ptr<ComputerRecording> > Pool;
 
 		bool IsFromPool;
 		static void FillPool();

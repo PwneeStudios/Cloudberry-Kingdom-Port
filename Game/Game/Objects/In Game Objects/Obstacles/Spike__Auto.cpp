@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Vector2 Spike_AutoGen::SpikeCleanup::Apply( Vector2 pos )
+	Vector2 Spike_AutoGen::SpikeCleanup::Apply( const Vector2 &pos )
 	{
 		float dist = Params->SpikeMinDist.GetVal( pos );
 		return Vector2( dist, dist );

@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -11,10 +12,10 @@ namespace CloudberryKingdom
 			if ( spos.Y == Pos.Y )
 				spos.Y = -1;
 
-			SelectedPosStr = std::wstring::Format( _T( "_SetSelectedPos({0});" ), Tools::ToCode( spos ) );
+			SelectedPosStr = Format( _T( "_SetSelectedPos({0});" ), Tools::ToCode( spos ) );
 		}
 
-		return std::wstring::Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; {6} }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), SelectedPosStr );
+		return Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; {6} }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), SelectedPosStr );
 	}
 
 	std::shared_ptr<MenuItem> MenuItem::Clone()

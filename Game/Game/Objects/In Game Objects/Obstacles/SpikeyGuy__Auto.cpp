@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Vector2 SpikeyGuy_AutoGen::MinDistHelper::Apply( Vector2 pos )
+	Vector2 SpikeyGuy_AutoGen::MinDistHelper::Apply( const Vector2 &pos )
 	{
 		float dist = Params->FloaterMinDist.GetVal( pos );
 		return Vector2( dist, dist );

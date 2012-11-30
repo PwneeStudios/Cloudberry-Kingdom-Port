@@ -46,70 +46,70 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyQuickspawn_KeyboardKey::Apply( Keys key )
+	void CustomControlsMenu::KeyQuickspawn_KeyboardKey::Apply( const Keys &key )
 	{
 		ButtonCheck::Quickspawn_KeyboardKey->Set( key );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyHelp_KeyboardKey::Apply( Keys key )
+	void CustomControlsMenu::KeyHelp_KeyboardKey::Apply( const Keys &key )
 	{
 		ButtonCheck::Help_KeyboardKey->Set( key );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyLeft_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyLeft_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::Left_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyRight_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyRight_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::Right_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyUp_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyUp_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::Up_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyDown_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyDown_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::Down_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyReplayPrev_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyReplayPrev_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::ReplayPrev_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyReplayNext_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyReplayNext_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::ReplayNext_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeyReplayToggle_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeyReplayToggle_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::ReplayToggle_Secondary = key;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::KeySlowMoToggle_Secondary::Apply( Keys key )
+	void CustomControlsMenu::KeySlowMoToggle_Secondary::Apply( const Keys &key )
 	{
 		ButtonCheck::SlowMoToggle_Secondary = key;
 	}

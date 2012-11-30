@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		public:
 			LoadRezAndKeysLambda();
 
-			void Apply( std::vector<unsigned char> Data );
+			void Apply( const std::vector<unsigned char> &Data );
 		};
 
 	private:

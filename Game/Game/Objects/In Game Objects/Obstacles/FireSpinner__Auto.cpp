@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Vector2 FireSpinner_AutoGen::Cleanup_2Proxy::Apply( Vector2 pos )
+	Vector2 FireSpinner_AutoGen::Cleanup_2Proxy::Apply( const Vector2 &pos )
 	{
 		float dist = Params->MinDist.GetVal( pos );
 		return Vector2( dist, dist );

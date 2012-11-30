@@ -157,8 +157,8 @@ namespace CloudberryKingdom
 		//BobPhsxMeat.Instance =
 		//BobPhsxRocketbox.Instance =
 
-		const BobPhsx* tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
-		std::vector<BobPhsx*> list = std::vector<BobPhsx*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		const std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
+		std::vector<std::shared_ptr<BobPhsx> > list = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 		// Menu
 		std::shared_ptr<MiniMenu> mini = std::make_shared<MiniMenu>();
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		mini->ItemsToShow = 6;
 		FontScale *= .75f;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<CloudberryKingdom::BobPhsx*>::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
+		for ( std::vector<CloudberryKingdom::std::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
 		{
 			std::shared_ptr<HeroItem> item = std::make_shared<HeroItem>( *phsx );
 			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
