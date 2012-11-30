@@ -6,97 +6,78 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getGo()
+	std::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Enter_Key" ) );
 	}
-#endif
 
-#if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getBack()
+	std::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Esc_Key" ) );
 	}
-#endif
 
-#if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getX()
+	std::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
-	return ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
-	//return Tools.TextureWad.FindByName("Xbox_X");
+		return ButtonString::ActualKeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
+		//return Tools.TextureWad.FindByName("Xbox_X");
 	}
-#endif
 
-#if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight()
+	std::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "LeftRight_Key" ) );
 	}
-#endif
 
-#if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper()
+	std::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
 	{
-		return ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary );
+		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayPrev_Secondary );
 	}
-#endif
 
-#if defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper()
+	std::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
 	{
-		return ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary );
+		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayNext_Secondary );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getGo()
+	std::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_A" ) );
 	}
-#endif
 
-#if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getBack()
+	std::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_B" ) );
 	}
-#endif
 
-#if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getX()
+	std::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_X" ) );
 	}
-#endif
 
-#if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftRight()
+	std::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_Dir" ) );
 	}
-#endif
 
-#if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getLeftBumper()
+	std::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_LB" ) );
 	}
-#endif
 
-#if ! defined(PC_VERSION)
-	const std::shared_ptr<EzTexture> &ButtonTexture::getRightBumper()
+	std::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_RB" ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
-std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
+std::map<Keys, std::wstring> ButtonString::KeyToString;
 #endif
 
 #if defined(PC_VERSION)
 	void ButtonString::Init()
 	{
+		using namespace std;
 		KeyToString = std::map<Keys, std::wstring>();
 
 		KeyToString.insert( make_pair( Keys_None, _T( "None" ) ) );
@@ -155,10 +136,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::map<Keys, std::wstring>::const_iterator pair = KeyToString.begin(); pair != KeyToString.end(); ++pair )
 		{
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( str, ( *pair )->Value, true ) == 0 )
+			if ( CompareIgnoreCase( str, ( *pair ).second ) == 0 )
 			{
-				key = ( *pair )->Key;
+				key = ( *pair ).first;
 				return;
 			}
 		}
@@ -178,7 +158,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 			str = _T( "White" );
 		}
 
-		return str;
+		return str
+	}
+
+	std::shared_ptr<EzTexture> ButtonString::ActualKeyToTexture( Keys key )
+	{
+		return Tools::Texture( KeyToTexture( key ) );
 	}
 #endif
 
@@ -199,63 +184,63 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Backspace( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Back ) );
+		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Back ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Enter( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Enter ) );
+		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Enter ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::X( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) );
+		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Y( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) );
+		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::LeftRight( int size )
 	{
-		return std::wstring::Format( _T( "{{pLeftRight_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{{pLeftRight_Key,{0},?}}{{s15,0}}" ), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::LeftBumper( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) );
+		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::RightBumper( int size )
 	{
-		return std::wstring::Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayNext_Secondary ) );
+		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayNext_Secondary ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Up( int size )
 	{
-		return std::wstring::Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Jump( int size )
 	{
-		return std::wstring::Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
 	}
 #endif
 
@@ -272,7 +257,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 			//case Keys.Enter:
 			//    return string.Format("{{pEnter_Key,{0},?}}{{s15,0}}", size * BackScale);
 			default:
-				return std::wstring::Format( _T( "{{p{0},{1},?}}{{s15,0}}" ), ButtonString::KeyToTexture( key ), size );
+				return Format( _T( "{{p{0},{1},?}}{{s15,0}}" ), ButtonString::KeyToTexture( key ), size );
 		}
 	}
 #endif
@@ -280,7 +265,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Go_Controller( int size )
 	{
-		return std::wstring::Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
 	}
 #endif
 
@@ -378,10 +363,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 			return ColorToMarkup( clr, shift ) + bit + ColorToMarkup( Color::White, shift );
 		}
 
-		std::wstring str = std::wstring::Format( _T( "{{c{0},{1},{2},{3}}}" ), clr.R, clr.G, clr.B, clr.A );
+		std::wstring str = Format( _T( "{{c{0},{1},{2},{3}}}" ), clr.R, clr.G, clr.B, clr.A );
 		if ( shift != 0 )
 		{
-			std::wstring shiftstr = std::wstring::Format( _T( "{{s{0},0}}" ), shift );
+			std::wstring shiftstr = Format( _T( "{{s{0},0}}" ), shift );
 			str += shiftstr;
 		}
 
@@ -644,7 +629,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString = 0;
 
 	std::wstring EzText::ColorToCode( Color clr )
 	{
-		return std::wstring::Format( _T( "{{c{0}, {1}, {2}, {3}}}" ), clr.R, clr.G, clr.B, clr.A );
+		return Format( _T( "{{c{0}, {1}, {2}, {3}}}" ), clr.R, clr.G, clr.B, clr.A );
 	}
 
 	void EzText::Parse( const std::wstring &str )

@@ -32,4 +32,10 @@ inline int CompareIgnoreCase( const std::wstring &s1, const std::wstring &s2)
 	return ( it1 == s1.end() ) ? -1 : 1;
 }
 
+inline std::wstring Format( const wchar_t *fmt, ... )
+{
+	// FIXME: Implement this.
+	return _T( "" );
+}
+
 #endif

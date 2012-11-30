@@ -9,19 +9,19 @@ namespace CloudberryKingdom
 	{
 #if defined(PC_VERSION)
 	public:
-		const static std::shared_ptr<EzTexture> &getGo();
-		const static std::shared_ptr<EzTexture> &getBack();
-		const static std::shared_ptr<EzTexture> &getX();
-		const static std::shared_ptr<EzTexture> &getLeftRight();
-		const static std::shared_ptr<EzTexture> &getLeftBumper();
-		const static std::shared_ptr<EzTexture> &getRightBumper();
+		static std::shared_ptr<EzTexture> getGo();
+		static std::shared_ptr<EzTexture> getBack();
+		static std::shared_ptr<EzTexture> getX();
+		static std::shared_ptr<EzTexture> getLeftRight();
+		static std::shared_ptr<EzTexture> getLeftBumper();
+		static std::shared_ptr<EzTexture> getRightBumper();
 #else
-		const static std::shared_ptr<EzTexture> &getGo();
-		const static std::shared_ptr<EzTexture> &getBack();
-		const static std::shared_ptr<EzTexture> &getX();
-		const static std::shared_ptr<EzTexture> &getLeftRight();
-		const static std::shared_ptr<EzTexture> &getLeftBumper();
-		const static std::shared_ptr<EzTexture> &getRightBumper();
+		static std::shared_ptr<EzTexture> getGo();
+		static std::shared_ptr<EzTexture> getBack();
+		static std::shared_ptr<EzTexture> getX();
+		static std::shared_ptr<EzTexture> getLeftRight();
+		static std::shared_ptr<EzTexture> getLeftBumper();
+		static std::shared_ptr<EzTexture> getRightBumper();
 #endif
 	};
 
@@ -35,6 +35,7 @@ namespace CloudberryKingdom
 		static void SetKeyFromString( Keys &key, const std::wstring &str );
 
 		static std::wstring KeyToTexture( Keys key );
+		static std::shared_ptr<EzTexture> ActualKeyToTexture( Keys key );
 
 		// Go/Back small keys
 		//public static string Back(int size) { return string.Format("{{p{1},{0},?}}{{s15,0}}", size, KeyToTexture(ButtonCheck.Back_Secondary)); }

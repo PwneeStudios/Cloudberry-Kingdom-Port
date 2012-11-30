@@ -9,8 +9,6 @@ bool EzSoundWad::SuppressSounds = false;
 	EzSoundWad::EzSoundWad( int MaxInstancesPerSound )
 	{
 		this->MaxInstancesPerSound = MaxInstancesPerSound;
-
-		SoundList = std::vector<EzSound*>();
 	}
 
 	void EzSoundWad::Update()
@@ -21,10 +19,9 @@ bool EzSoundWad::SuppressSounds = false;
 
 	std::shared_ptr<EzSound> EzSoundWad::FindByName( const std::wstring &name )
 	{
-		for ( std::vector<EzSound*>::const_iterator Snd = SoundList.begin(); Snd != SoundList.end(); ++Snd )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *Snd )->Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
-				return Snd;
+		for ( std::vector<std::shared_ptr<EzSound> >::const_iterator Snd = SoundList.begin(); Snd != SoundList.end(); ++Snd )
+		if ( CompareIgnoreCase( ( *Snd )->Name, name ) == 0 )
+				return *Snd;
 
 	#if defined(DEBUG)
 		Tools::Break();

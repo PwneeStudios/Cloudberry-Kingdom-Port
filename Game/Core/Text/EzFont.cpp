@@ -1,17 +1,15 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
 	EzFont::EzFont( const std::wstring &FontName )
 	{
-		Font = Tools::GameClass->getContent()->Load<SpriteFont*>(FontName);
+		Font = Tools::GameClass->getContent()->Load<SpriteFont>(FontName);
 		CharacterSpacing = Font->Spacing;
 
 		//LineSpacing = Font.LineSpacing;
-		LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) )->Y );
+		LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) ).Y );
 	}
 
 	EzFont::EzFont( const std::wstring &FontName, float CharacterSpacing, int LineSpacing )
@@ -42,18 +40,18 @@ namespace CloudberryKingdom
 		this->CharacterSpacing = CharacterSpacing;
 		this->LineSpacing = LineSpacing;
 
-		Font = Tools::GameClass->getContent()->Load<SpriteFont*>(FontName);
+		Font = Tools::GameClass->getContent()->Load<SpriteFont>(FontName);
 		FixFont();
 
 		if ( OutlineFontName.length() > 1 )
 		{
-			OutlineFont = Tools::GameClass->getContent()->Load<SpriteFont*>(OutlineFontName);
+			OutlineFont = Tools::GameClass->getContent()->Load<SpriteFont>(OutlineFontName);
 			OutlineFont->Spacing = CharacterSpacing;
 			OutlineFont->LineSpacing = LineSpacing;
 		}
 		else
 			OutlineFont.reset();
 
-		this->LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) )->Y );
+		this->LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) ).Y );
 	}
 }

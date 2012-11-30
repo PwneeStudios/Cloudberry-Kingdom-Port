@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Audio
-			{
-				class SoundEffect;
-			}
-		}
-	}
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class EzSoundWad
 	{
 		/// <summary>
@@ -34,7 +13,7 @@ namespace CloudberryKingdom
 	public:
 		static bool SuppressSounds;
 
-		std::vector<EzSound*> SoundList;
+		std::vector<std::shared_ptr<EzSound> > SoundList;
 		int MaxInstancesPerSound;
 
 		EzSoundWad( int MaxInstancesPerSound );

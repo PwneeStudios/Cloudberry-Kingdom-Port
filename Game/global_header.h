@@ -53,7 +53,20 @@ namespace CloudberryKingdom
 
 #include "Hacks/BinaryReader.h"
 #include "Hacks/BinaryWriter.h"
-class ContentManager;
+
+class ContentManager
+{
+
+public:
+
+	template<class T>
+	std::shared_ptr<T> Load( const std::wstring &name )
+	{
+		return std::shared_ptr<T>();
+	}
+
+};
+
 struct DateTime { int Time; };
 class DisplayMode;
 
@@ -153,7 +166,17 @@ class FileWriter
 };
 
 class FileStream;
-class Game { };
+class Game
+{
+
+public:
+
+	std::shared_ptr<ContentManager> getContent()
+	{
+		return std::shared_ptr<ContentManager>();
+	}
+
+};
 
 class GamePadButtons
 {
@@ -510,7 +533,21 @@ public:
 
 };
 
-class SpriteFont;
+class SpriteFont
+{
+
+public:
+
+	float Spacing;
+	int LineSpacing;
+
+	Vector2 MeasureString( const std::wstring &text )
+	{
+		return Vector2();
+	}
+
+};
+
 class Stopwatch;
 class StorageContainer;
 class StorageDevice;
