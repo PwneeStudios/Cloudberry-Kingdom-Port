@@ -158,7 +158,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			str = _T( "White" );
 		}
 
-		return str
+		return str;
 	}
 
 	std::shared_ptr<EzTexture> ButtonString::ActualKeyToTexture( Keys key )
@@ -184,14 +184,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Backspace( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Back ) );
+		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys_Back ) );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Enter( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys::Enter ) );
+		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys_Enter ) );
 	}
 #endif
 
@@ -247,18 +247,18 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::KeyStr( Keys key, int size )
 	{
-		if ( key == Keys::Enter || key == Keys::Space )
+		if ( key == Keys_Enter || key == Keys_Space )
 			size = static_cast<int>( 2.0083f * size );
 
-		switch ( key )
-		{
+		//switch ( key )
+		//{
 			//case Keys.Space:
 			//    return string.Format("{{pSpace_Key,{0},?}}{{s15,0}}", size * BackScale);
 			//case Keys.Enter:
 			//    return string.Format("{{pEnter_Key,{0},?}}{{s15,0}}", size * BackScale);
-			default:
-				return Format( _T( "{{p{0},{1},?}}{{s15,0}}" ), ButtonString::KeyToTexture( key ), size );
-		}
+			//default:
+		return Format( _T( "{{p{0},{1},?}}{{s15,0}}" ), ButtonString::KeyToTexture( key ), size );
+		//}
 	}
 #endif
 
@@ -397,17 +397,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	{
 		Bits[ 0 ]->str = text;
 		Bits[ 0 ]->builder_str.reset();
-		TextWidth -= Bits[ 0 ]->size->X;
+		TextWidth -= Bits[ 0 ]->size.X;
 		Bits[ 0 ]->size = MyFont->Font->MeasureString( text );
-		TextWidth += Bits[ 0 ]->size->X;
+		TextWidth += Bits[ 0 ]->size.X;
 	}
 
 	void EzText::SubstituteText( const std::shared_ptr<StringBuilder> &text )
 	{
 		Bits[ 0 ]->builder_str = text;
-		TextWidth -= Bits[ 0 ]->size->X;
-		Bits[ 0 ]->size = MyFont->Font->MeasureString( text );
-		TextWidth += Bits[ 0 ]->size->X;
+		TextWidth -= Bits[ 0 ]->size.X;
+		Bits[ 0 ]->size = MyFont->Font->MeasureString( *text );
+		TextWidth += Bits[ 0 ]->size.X;
 	}
 
 	void EzText::SubstituteText( Localization::Words word )
@@ -641,54 +641,59 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		switch ( c )
 		{
 			case L'p':
-				Parse_Type = ParseData_PIC;
-
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-				std::vector<std::wstring> string_bits = str.Split( L',' );
-
-				Comma1 = str.find( _T( "," ) );
-				Comma2 = str.find( _T( "," ), Comma1 + 1 );
-
-				Parse_PicName = str.substr( 2, Comma1 - 2 );
-				WidthString = string_bits[ 1 ];
-				HeightString = string_bits[ 2 ];
-
-				AsPaint = false;
-				if ( string_bits.size() > 3 )
 				{
-					Parse_PicShift = Vector2( float::Parse( string_bits[ 3 ] ), float::Parse( string_bits[ 4 ] ) ) * Tools::TheGame->Resolution.LineHeightMod;
-					if ( string_bits.size() > 5 )
-						AsPaint = int::Parse( string_bits[ 5 ] ) > 0;
-				}
-				else
-					Parse_PicShift = Vector2();
+					Parse_Type = ParseData_PIC;
 
-				Vector2 size;
-				std::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
-				float ratio = static_cast<float>( texture->Width ) / static_cast<float>( texture->Height );
+	//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
+					std::vector<std::wstring> string_bits; // = str.Split( L',' );
+					Split( str, ',', string_bits );
 
-				// 's' scale the texture
-				if ( WidthString.find( L's' ) != string::npos )
-				{
-					size = Vector2( texture->Width, texture->Height );
-					size *= float::Parse( HeightString );
+					Comma1 = str.find( _T( "," ) );
+					Comma2 = str.find( _T( "," ), Comma1 + 1 );
+
+					Parse_PicName = str.substr( 2, Comma1 - 2 );
+					WidthString = string_bits[ 1 ];
+					HeightString = string_bits[ 2 ];
+
+					AsPaint = false;
+					if ( string_bits.size() > 3 )
+					{
+						Parse_PicShift = Vector2(
+							::Parse<float>( string_bits[ 3 ] ),
+							::Parse<float>( string_bits[ 4 ] )
+						) * Tools::TheGame->Resolution.LineHeightMod;
+						if ( string_bits.size() > 5 )
+							AsPaint = ::Parse<int>( string_bits[ 5 ] ) > 0;
+					}
+					else
+						Parse_PicShift = Vector2();
+
+					Vector2 size;
+					std::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
+					float ratio = static_cast<float>( texture->Width ) / static_cast<float>( texture->Height );
+
+					// 's' scale the texture
+					if ( WidthString.find( L's' ) != std::string::npos )
+					{
+						size = Vector2( static_cast<float>( texture->Width ), static_cast<float>( texture->Height ) );
+						size *= ::Parse<float>( HeightString );
+					}
+					// '?' calculates that number from the texture height/width ratio
+					else if ( WidthString.find( L'?' ) != std::string::npos )
+					{
+						size = Vector2( 0, ::Parse<float>( HeightString ) );
+						size.X = size.Y * ratio;
+					}
+					else if ( HeightString.find( L'?' ) != std::string::npos )
+					{
+						size = Vector2( ::Parse<float>( WidthString ), 0 );
+						size.Y = size.X / ratio;
+					}
+					else
+						size = Vector2( ::Parse<float>( WidthString ), ::Parse<float>( HeightString ) );
+					Parse_PicSize = size * Tools::TheGame->Resolution.LineHeightMod;
 				}
-				// '?' calculates that number from the texture height/width ratio
-				else if ( WidthString.find( L'?' ) != string::npos )
-				{
-					size = Vector2( 0, float::Parse( HeightString ) );
-					size.X = size.Y * ratio;
-				}
-				else if ( HeightString.find( L'?' ) != string::npos )
-				{
-					size = Vector2( float::Parse( WidthString ), 0 );
-					size.Y = size.X / ratio;
-				}
-				else
-					size = Vector2( float::Parse( WidthString ), float::Parse( HeightString ) );
-				Parse_PicSize = size * Tools::TheGame->Resolution.LineHeightMod;
 				break;
-
 			// Blank space
 			case L's':
 				Parse_Type = ParseData_PIC;
@@ -698,7 +703,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 				WidthString = str.substr( 2, Comma1 - 2 );
 				HeightString = str.substr( Comma1 + 1 );
-				Parse_PicSize = Vector2( float::Parse( WidthString ), float::Parse( HeightString ) );
+				Parse_PicSize = Vector2( ::Parse<float>( WidthString ), ::Parse<float>( HeightString ) );
 				Parse_PicSize *= Tools::TheGame->Resolution.LineHeightMod;
 				break;
 
@@ -714,7 +719,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				std::wstring BString = str.substr( Comma2 + 1, Comma3 - 1 - Comma2 );
 				std::wstring AString = str.substr( Comma3 + 1 );
 
-				Parse_Color = Color( unsigned char::Parse( RString ), unsigned char::Parse( GString ), unsigned char::Parse( BString ), unsigned char::Parse( AString ) );
+				Parse_Color = Color(
+					::Parse<unsigned char>( RString ),
+					::Parse<unsigned char>( GString ),
+					::Parse<unsigned char>( BString ),
+					::Parse<unsigned char>( AString )
+				);
 				break;
 		}
 	}
@@ -759,7 +769,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		return EndIndex;
 	}
 
-	Vector2 EzText::StringSize( const std::wstring &str )
+	Vector2 EzText::StringSize( std::wstring str )
 	{
 		MyFont->FixFont();
 
@@ -775,7 +785,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				EndBracketIndex = str.find( _T( "}" ), 0 );
 				std::wstring PicStr = str.substr( BeginBracketIndex, EndBracketIndex - BeginBracketIndex );
 				Parse( PicStr );
-				str = str.erase( BeginBracketIndex, EndBracketIndex - BeginBracketIndex + 1 );
+				//str = str.erase( BeginBracketIndex, EndBracketIndex - BeginBracketIndex + 1 );
+				str.erase( BeginBracketIndex, EndBracketIndex - BeginBracketIndex + 1 );
 
 				if ( Parse_Type == ParseData_PIC )
 				{
@@ -796,12 +807,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		return Size;
 	}
 
-	float EzText::AddLine( const std::wstring &str, float StartX, float StartY, int LineNumber )
+	float EzText::AddLine( std::wstring str, float StartX, float StartY, int LineNumber )
 	{
 		MyFont->FixFont();
 
 		Vector2 loc = Vector2( StartX, 0 );
-		float LineHeight = MyFont->Font->MeasureString( _T( " " ) )->Y;
+		float LineHeight = MyFont->Font->MeasureString( _T( " " ) ).Y;
 		int BeginBracketIndex, EndBracketIndex;
 
 		bool FirstElement = true;
@@ -893,7 +904,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	float EzText::GetWorldWidth( const std::wstring &str )
 	{
-		return getScale() * GetWorldFloat(MyFont->Font->MeasureString(str)->X);
+		return getScale() * GetWorldFloat( MyFont->Font->MeasureString( str ).X );
 	}
 
 	const Vector2 &EzText::getMyCameraZoom() const
@@ -946,7 +957,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( str, 10000, false, false, 1 );
 	}
 
-	void EzText::Init( const std::wstring &str, float Width, bool Centered, bool YCentered, float LineHeightMod )
+	void EzText::Init( std::wstring str, float Width, bool Centered, bool YCentered, float LineHeightMod )
 	{
 		this->LineHeightMod = LineHeightMod;
 		this->Centered = Centered;
@@ -959,8 +970,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		MyColor = Color::White;
 		MyFloatColor = Vector4( 1, 1, 1, 1 );
 
-		Bits = std::vector<EzTextBit*>();
-		Pics = std::vector<EzTextPic*>();
+		Bits = std::vector<std::shared_ptr<EzTextBit> >();
+		Pics = std::vector<std::shared_ptr<EzTextPic> >();
 
 		loc = Vector2();
 		LineHeight = 0;
@@ -999,22 +1010,22 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 		if ( YCentered )
 		{
-			for ( std::vector<EzTextBit*>::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+			for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 				( *bit )->loc.Y -= Height / 2;
-			for ( std::vector<EzTextPic*>::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 				( *pic )->rect.Y -= static_cast<int>( Height / 2 );
 		}
 
 		if ( !Centered )
 		{
-			for ( std::vector<EzTextBit*>::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+			for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 				( *bit )->loc.X += LineSizes[ ( *bit )->LineNumber ].X / 2 * Tools::TheGame->Resolution.LineHeightMod;
-			for ( std::vector<EzTextPic*>::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools.TheGame.Resolution.LineHeightMod);
+			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools.TheGame.Resolution.LineHeightMod);
 				( *pic )->rect.X += static_cast<int>( LineSizes[ ( *pic )->LineNumber ].X / 2 );
 		}
 		else
 		{
-			for ( std::vector<EzTextPic*>::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 				( *pic )->rect.X = static_cast<int>( ( getScale() * (*pic)->rect.X - getPos().X + (*pic)->rect.Width / 2 ) * Tools::TheGame->Resolution.LineHeightMod + getPos().X - (*pic)->rect.Width / 2 );
 		}
 	}
@@ -1122,24 +1133,24 @@ bool EzText::ZoomWithCamera_Override = false;
 		Vector2 Loc = Tools::ToScreenCoordinates( Position, cam, Tools::EffectWad->ModZoom );
 
 		Tools::StartSpriteBatch();
-		for ( std::vector<EzTextBit*>::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+		for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 		{
 			Color textcolor = ColorHelper::PremultiplyAlpha( Color( MyColor.ToVector4() * (*bit)->clr.ToVector4() ) );
 
 			if ( ( *bit )->builder_str != 0 )
-				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->builder_str, getScale() * (*bit)->loc*ZoomMod + Loc, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale()*ZoomMod, SpriteEffects::None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, getScale() * (*bit)->loc*ZoomMod + Loc, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale()*ZoomMod, SpriteEffects_None, 1 );
 			else
-				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * (*bit)->loc * ZoomMod + Loc, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale() * ZoomMod, SpriteEffects::None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * (*bit)->loc * ZoomMod + Loc, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale() * ZoomMod, SpriteEffects_None, 1 );
 		}
 		if ( DrawPics )
-			for ( std::vector<EzTextPic*>::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 			{
 				Color piccolor = PicColor;
 				piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
 
 				piccolor = ColorHelper::PremultiplyAlpha( piccolor );
 
-				Vector2 pos = Loc + getScale() * ZoomMod * Vector2((*pic)->rect.X, (*pic)->rect.Y);
+				Vector2 pos = Loc + getScale() * ZoomMod * Vector2( static_cast<float>( (*pic)->rect.X ), static_cast<float>( (*pic)->rect.Y ) );
 				Vector2 scale = getScale() * ZoomMod * Vector2((*pic)->rect.Width / static_cast<float>((*pic)->tex->Width), (*pic)->rect.Height / static_cast<float>((*pic)->tex->Height));
 
 				if ( ( *pic )->AsPaint )
@@ -1147,7 +1158,7 @@ bool EzText::ZoomWithCamera_Override = false;
 					Tools::Render->EndSpriteBatch();
 					Tools::StartSpriteBatch( true );
 				}
-				Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects::None, 0 );
+				Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects_None, 0 );
 				if ( ( *pic )->AsPaint )
 				{
 					Tools::Render->EndSpriteBatch();
@@ -1166,7 +1177,7 @@ bool EzText::ZoomWithCamera_Override = false;
 
 		Vector2 Loc = _Pos;
 
-		for ( std::vector<EzTextBit*>::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+		for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 		{
 			Vector2 loc, size;
 
@@ -1183,10 +1194,10 @@ bool EzText::ZoomWithCamera_Override = false;
 			BL = Vector2::Min( BL, bit_BL );
 		}
 
-		for ( std::vector<EzTextPic*>::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+		for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 		{
-			Vector2 loc = GetWorldVector( Vector2( ( *pic )->rect.X, ( *pic )->rect.Y ) );
-			Vector2 size = Vector2( ( *pic )->rect.Width, ( *pic )->rect.Height );
+			Vector2 loc = GetWorldVector( Vector2( static_cast<float>( ( *pic )->rect.X ), static_cast<float>( ( *pic )->rect.Y ) ) );
+			Vector2 size = Vector2( static_cast<float>( ( *pic )->rect.Width ), static_cast<float>( ( *pic )->rect.Height ) );
 			size = GetWorldVector( size );
 
 			Vector2 bit_TR = getScale() * loc + Loc;

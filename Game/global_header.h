@@ -527,6 +527,14 @@ class SpriteBatch
 
 public:
 
+	void DrawString( const std::shared_ptr<class SpriteFont> &font, const std::wstring &str, const Vector2 &loc, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
+	{
+	}
+
+	void Draw( const std::shared_ptr<class Texture2D> &texture, const Vector2 &position, Rectangle *rect, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
+	{
+	}
+
 	void End()
 	{
 	}
@@ -553,7 +561,17 @@ class StorageContainer;
 class StorageDevice;
 class StreamReader;
 class StreamWriter;
-class StringBuilder;
+class StringBuilder
+{
+
+public:
+
+	operator std::wstring() const
+	{
+		return _T( "" );
+	}
+
+};
 
 class Thread;
 

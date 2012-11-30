@@ -157,8 +157,8 @@ namespace CloudberryKingdom
 		bool HitTest( Vector2 pos, Vector2 padding );
 
 	private:
-		std::vector<EzTextBit*> Bits;
-		std::vector<EzTextPic*> Pics;
+		std::vector<std::shared_ptr<EzTextBit> > Bits;
+		std::vector<std::shared_ptr<EzTextPic> > Pics;
 
 		/// <summary>
 		/// Replaces the first bit of text, with no reformatting
@@ -283,10 +283,10 @@ namespace CloudberryKingdom
 
 		int GetLineEnd( const std::wstring &str );
 
-		Vector2 StringSize( const std::wstring &str );
+		Vector2 StringSize( std::wstring str );
 
 		Color CurColor;
-		float AddLine( const std::wstring &str, float StartX, float StartY, int LineNumber );
+		float AddLine( std::wstring str, float StartX, float StartY, int LineNumber );
 
 		/// <summary>
 		/// Gets the real world size of the text, accounting for scaling
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 		float LineHeightMod;
 		std::vector<Vector2> LineSizes;
 		void Init( const std::wstring &str );
-		void Init( const std::wstring &str, float Width, bool Centered, bool YCentered, float LineHeightMod );
+		void Init( std::wstring str, float Width, bool Centered, bool YCentered, float LineHeightMod );
 
 	public:
 		void Center();

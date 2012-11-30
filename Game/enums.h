@@ -1094,4 +1094,9 @@ enum MediaState
 	MediaState_Playing
 };
 
+enum SpriteEffects
+{
+	SpriteEffects_None
+};
+
 #endif

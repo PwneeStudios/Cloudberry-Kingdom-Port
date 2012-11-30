@@ -1,8 +1,11 @@
 #ifndef _STRING_H_
 #define _STRING_H_
 
-#include <string>
 #include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <string>
+#include <sstream>
 
 inline std::wstring ToLower( const std::wstring &s )
 {
@@ -36,6 +39,47 @@ inline std::wstring Format( const wchar_t *fmt, ... )
 {
 	// FIXME: Implement this.
 	return _T( "" );
+}
+
+inline void Split( const std::wstring &str, wchar_t c, std::vector<std::wstring> &parts )
+{
+	using namespace std;
+
+	wstringstream wss( str );
+	wstring part;
+	while( getline( wss, part, c ) )
+		parts.push_back( part );
+}
+
+template<class T>
+T Parse( const std::wstring &str )
+{
+	using namespace std;
+	wstringstream wss( str );
+
+	T temp;
+	wss >> temp;
+
+	if( wss.fail() )
+		return T( 0 );
+
+	return temp;
+}
+
+// Specialization for unsigned characters.
+template<>
+unsigned char Parse<unsigned char>( const std::wstring &str )
+{
+	using namespace std;
+	wstringstream wss( str );
+
+	int temp;
+	wss >> temp;
+
+	if( wss.fail() )
+		return 0;
+
+	return static_cast<unsigned char>( temp );
 }
 
 #endif
