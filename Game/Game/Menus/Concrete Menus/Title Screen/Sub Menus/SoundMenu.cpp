@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	void SoundMenu::InitOnToggleHelper::Apply( bool state )
+	void SoundMenu::InitOnToggleHelper::Apply( const bool &state )
 	{
 		PlayerManager::SavePlayerData->ResolutionPreferenceSet = true;
 		Tools::setFullscreen( state );
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		this->sm = sm;
 	}
 
-	void SoundMenu::Toggle_BorderlessProxy::Apply( bool state )
+	void SoundMenu::Toggle_BorderlessProxy::Apply( const bool &state )
 	{
 		sm->Toggle_Borderless( state );
 	}

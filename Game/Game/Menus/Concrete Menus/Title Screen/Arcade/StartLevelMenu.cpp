@@ -96,7 +96,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 		std::vector<std::wstring> names = std::vector<std::wstring*>( Levels.size() );
 
 		for ( int i = 0; i < Levels.size(); i++ )
-			names[ i ] = std::wstring::Format( _T( "{0:00}" ), Levels[ i ] );
+			names[ i ] = Format( _T( "{0:00}" ), Levels[ i ] );
 		//names[i] = string.Format("Level {0}", Levels[i]);
 
 		return names;

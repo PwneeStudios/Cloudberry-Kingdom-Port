@@ -56,7 +56,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 				}
 				catch ( ... )
 				{
-					Tools::Log( std::wstring::Format( _T( "Attempting to load a .anim file. Path <{0}> not found." ) ) );
+					Tools::Log( Format( _T( "Attempting to load a .anim file. Path <{0}> not found." ) ) );
 					return;
 				}
 			}
@@ -163,15 +163,15 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 						int frame = end_frame > start_frame ? start_frame + i : start_frame - i;
 
 						// Get the texture for this frame.
-						std::shared_ptr<EzTexture> texture = Tools::Texture( std::wstring::Format( _T( "{0}_{1}" ), root, frame ) );
+						std::shared_ptr<EzTexture> texture = Tools::Texture( Format( _T( "{0}_{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_0000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_0000{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_000{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_00{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_00{1}" ), root, frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( std::wstring::Format( _T( "{0}_0{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "{0}_0{1}" ), root, frame ) );
 
 						// Record object quad positions
 						int anim_to_mimick = 0;

@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 
 	std::wstring HeroSpec::ToString()
 	{
-		return std::wstring::Format( _T( "{0},{1},{2},{3}" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
+		return Format( _T( "{0},{1},{2},{3}" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
 	}
 
 std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );

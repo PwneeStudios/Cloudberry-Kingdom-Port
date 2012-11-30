@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 
 	std::wstring ScrollBar::CopyToClipboard( const std::wstring &suffix )
 	{
-		return std::wstring::Format( _T( "{0}BarPos = {1}" ), suffix, Tools::ToCode( getBarPos() ) );
+		return Format( _T( "{0}BarPos = {1}" ), suffix, Tools::ToCode( getBarPos() ) );
 	}
 
 	void ScrollBar::ProcessMouseInput( Vector2 shift, bool ShiftDown )

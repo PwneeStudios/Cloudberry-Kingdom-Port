@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 
 	bool CustomLevel_GUI::InitOnAStartHelper::Apply( const std::shared_ptr<Menu> &dummy )
 	{
-		clGui->Start.Go::Apply( 0 );
+		clGui->Start->getGo()->Apply( 0 );
 		return true;
 	}
 

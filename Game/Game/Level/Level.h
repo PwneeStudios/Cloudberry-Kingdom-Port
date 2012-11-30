@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 		public:
 			SafetyNetLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert );
 
-			void Apply( Vector2 pos );
+			void Apply( const Vector2 &pos );
 
 		private:
 			void InitializeInstanceFields();
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 		public:
 			MakeInitialLambda( const std::shared_ptr<Level> &level, Vector2 size );
 
-			void Apply( Vector2 pos );
+			void Apply( const Vector2 &pos );
 		};
 
 	private:
@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 		public:
 			Stage1RndFillLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff );
 
-			void Apply( Vector2 pos );
+			void Apply( const Vector2 &pos );
 		};
 
 	private:

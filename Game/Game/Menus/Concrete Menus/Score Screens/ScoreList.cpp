@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		if ( !score->Fake )
 			RankStr += GetPrefix();
 
-		std::wstring ScoreStr = std::wstring::Format( _T( "{0:n}" ), score );
+		std::wstring ScoreStr = Format( _T( "{0:n}" ), score );
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		return RankStr + score->ToString( Length - RankStr.length() );
 	}

@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		int TestNumber;
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Pre-style: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Pre-style: {0}" ), TestNumber ) );
 
 		FillxStep = 225;
 		FillyStep = 200;
@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 		TriplePathType = static_cast<_TriplePathType>( Rnd->Rnd->Next( 0, _TriplePathType_LENGTH ) );
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Post-style: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Post-style: {0}" ), TestNumber ) );
 	}
 
 	float StyleData::GetSparsity()

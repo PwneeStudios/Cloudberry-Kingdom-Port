@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		this->Params = Params;
 	}
 
-	Vector2 Boulder_AutoGen::Cleanup_2Helper::Apply( Vector2 pos )
+	Vector2 Boulder_AutoGen::Cleanup_2Helper::Apply( const Vector2 &pos )
 	{
 		float dist = Params->FloaterMinDist.GetVal( pos );
 		return Vector2( dist, dist );
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		this->autogen = autogen;
 	}
 
-	void Boulder_AutoGen::BoulderFillLambda::Apply( Vector2 pos )
+	void Boulder_AutoGen::BoulderFillLambda::Apply( const Vector2 &pos )
 	{
 		std::shared_ptr<Boulder> floater = static_cast<Boulder*>( autogen->CreateAt( level, pos ) );
 		Vector2 Padding = Vector2( 200, 375 );

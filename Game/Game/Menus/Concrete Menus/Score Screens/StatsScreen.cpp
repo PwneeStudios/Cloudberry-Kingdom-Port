@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		this->f = f;
 	}
 
-	std::wstring StatsMenu::StringificationWrapper::Apply( int i )
+	std::wstring StatsMenu::StringificationWrapper::Apply( const int &i )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		return f->Apply( i )->ToString();
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsLevels::Apply( int j )
+	int StatsMenu::StatsLevels::Apply( const int &j )
 	{
 		 return Stats[ j ]->Levels;
 	}
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsJumps::Apply( int j )
+	int StatsMenu::StatsJumps::Apply( const int &j )
 	{
 		return Stats[ j ]->Jumps;
 	}
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsScore::Apply( int j )
+	int StatsMenu::StatsScore::Apply( const int &j )
 	{
 		return Stats[ j ]->Score;
 	}
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsCoins::Apply( int j )
+	int StatsMenu::StatsCoins::Apply( const int &j )
 	{
 		return Stats[ j ]->Coins;
 	}
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsTotalCoins::Apply( int j )
+	int StatsMenu::StatsTotalCoins::Apply( const int &j )
 	{
 		return Stats[ j ]->TotalCoins;
 	}
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	std::wstring StatsMenu::StatsCoinPercentGotten::Apply( int j )
+	std::wstring StatsMenu::StatsCoinPercentGotten::Apply( const int &j )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		return Stats[ j ]->getCoinPercentGotten()->ToString() + L'%';
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsBlobs::Apply( int j )
+	int StatsMenu::StatsBlobs::Apply( const int &j )
 	{
 		return Stats[ j ]->Blobs;
 	}
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	int StatsMenu::StatsCheckpoints::Apply( int j )
+	int StatsMenu::StatsCheckpoints::Apply( const int &j )
 	{
 		return Stats[ j ]->Checkpoints;
 	}
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 		this->Stats = Stats;
 	}
 
-	std::wstring StatsMenu::StatsLifeExpectancy::Apply( int j )
+	std::wstring StatsMenu::StatsLifeExpectancy::Apply( const int &j )
 	{
 		return Stats[ j ]->getLifeExpectancy();
 	}
@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 		this->i = i;
 	}
 
-	int StatsMenu::StatsDeathsBy::Apply( int j )
+	int StatsMenu::StatsDeathsBy::Apply( const int &j )
 	{
 		return Stats[ j ]->DeathsBy[ i ];
 	}

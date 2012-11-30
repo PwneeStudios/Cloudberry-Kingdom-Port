@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 
 	std::wstring ScoreEntry::ScoreToString()
 	{
-		return std::wstring::Format( _T( "{0:n0}" ), Score );
+		return Format( _T( "{0:n0}" ), Score );
 	}
 
 	std::wstring ScoreEntry::TimeToString()

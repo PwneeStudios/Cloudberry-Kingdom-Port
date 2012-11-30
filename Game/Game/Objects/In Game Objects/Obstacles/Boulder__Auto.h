@@ -62,7 +62,7 @@ public:
 		public:
 			BoulderFillLambda( const std::shared_ptr<Level> &level, Vector2 TR, Vector2 BL, const std::shared_ptr<Boulder_AutoGen> &autogen );
 
-			void Apply( Vector2 pos );
+			void Apply( const Vector2 &pos );
 		};
 	private:
 		static const std::shared_ptr<Boulder_AutoGen> instance;

@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 		this->hm = hm;
 	}
 
-	void HelpMenu::Toggle_ShowPathProxy::Apply( bool state )
+	void HelpMenu::Toggle_ShowPathProxy::Apply( const bool &state )
 	{
 		hm->Toggle_ShowPath( state );
 	}
@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 		this->hm = hm;
 	}
 
-	void HelpMenu::Toggle_SlowMoProxy::Apply( bool state )
+	void HelpMenu::Toggle_SlowMoProxy::Apply( const bool &state )
 	{
 		hm->Toggle_SlowMo( state );
 	}

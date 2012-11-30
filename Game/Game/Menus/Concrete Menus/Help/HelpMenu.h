@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		public:
 			Toggle_ShowPathProxy( const std::shared_ptr<HelpMenu> &hm );
 
-			void Apply( bool state );
+			void Apply( const bool &state );
 		};
 
 	private:
@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 		public:
 			Toggle_SlowMoProxy( const std::shared_ptr<HelpMenu> &hm );
 
-			void Apply( bool state );
+			void Apply( const bool &state );
 		};
 
 	private:

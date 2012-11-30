@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		int TestNumber;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test close start: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test close start: {0}" ), TestNumber ) );
 
 		MyUpgrades1->CalcGenData( MyGenData->gen1, Style );
 
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( std::wstring::Format( _T( "Test close end: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test close end: {0}" ), TestNumber ) );
 
 		Style->MyInitialPlatsType = StyleData::InitialPlatsType_DOOR;
 		Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;

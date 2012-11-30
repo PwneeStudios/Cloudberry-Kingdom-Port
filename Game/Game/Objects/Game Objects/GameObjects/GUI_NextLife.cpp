@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 	std::wstring GUI_NextLife::ToString()
 	{
 		//string str = string.Format("x{0}/{1}", Coins, Max);
-		std::wstring str = std::wstring::Format( _T( "{0}/{1}" ), getCoins(), Max );
+		std::wstring str = Format( _T( "{0}/{1}" ), getCoins(), Max );
 
 		return str;
 	}

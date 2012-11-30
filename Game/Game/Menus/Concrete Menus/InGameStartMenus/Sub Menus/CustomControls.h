@@ -60,70 +60,70 @@ namespace CloudberryKingdom
 		class KeyQuickspawn_KeyboardKey : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyHelp_KeyboardKey : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyLeft_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyRight_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyUp_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyDown_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyReplayPrev_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyReplayNext_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeyReplayToggle_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:
 		class KeySlowMoToggle_Secondary : public Lambda_1<Keys>
 		{
 		public:
-			void Apply( Keys key );
+			void Apply( const Keys &key );
 		};
 
 	private:

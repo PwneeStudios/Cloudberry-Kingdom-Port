@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		public:
 			AdditionalPreStartOnSwapToLevelHelper( const std::shared_ptr<Challenge_Escalation> &ce );
 
-			void Apply( int levelindex );
+			void Apply( const int &levelindex );
 		};
 
 	private:

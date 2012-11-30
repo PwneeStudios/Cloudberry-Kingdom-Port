@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		public:
 			LoadLambda( const std::shared_ptr<SaveLoad> &sl );
 
-			void Apply( std::vector<unsigned char> data );
+			void Apply( const std::vector<unsigned char> &data );
 		};
 
 	private:

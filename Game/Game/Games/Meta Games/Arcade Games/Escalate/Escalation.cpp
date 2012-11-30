@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		this->ce = ce;
 	}
 
-	void Challenge_Escalation::AdditionalPreStartOnSwapToLevelHelper::Apply( int levelindex )
+	void Challenge_Escalation::AdditionalPreStartOnSwapToLevelHelper::Apply( const int &levelindex )
 	{
 		Awardments::CheckForAward_Escalation_Level( levelindex - ce->StartIndex );
 
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 		if ( levelindex > StartIndex )
 		{
 			Tools::Warning();
-			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( std::wstring::Format( _T( "{1} {0}" ), levelindex + 1, Localization::WordString( Localization::Words_LEVEL ) ) );
+			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "{1} {0}" ), levelindex + 1, Localization::WordString( Localization::Words_LEVEL ) ) );
 			Tools::CurGameData->AddGameObject( title );
 
 			if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )

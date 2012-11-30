@@ -102,7 +102,7 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 	{
 	}
 
-	void PlayerManager::LoadRezAndKeysLambda::Apply( std::vector<unsigned char> Data )
+	void PlayerManager::LoadRezAndKeysLambda::Apply( const std::vector<unsigned char> &Data )
 	{
 		PlayerManager::_LoadRezAndKeys( Data );
 	}
