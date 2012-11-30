@@ -5,32 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	class ParticleEmitter;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class ParticleEmitterBin
 	{
 	private:
-		std::stack<ParticleEmitter*> MyStack;
+		std::vector<std::shared_ptr<ParticleEmitter> > MyStack;
+		Mutex stackLock;
 
 	public:
 		ParticleEmitterBin();
@@ -40,7 +19,7 @@ namespace CloudberryKingdom
 		void ReturnItem( const std::shared_ptr<ParticleEmitter> &item );
 	};
 
-	class ParticleEmitter
+	class ParticleEmitter : public std::enable_shared_from_this<ParticleEmitter>
 	{
 	public:
 		static std::shared_ptr<ParticleEmitterBin> Pool;
@@ -57,7 +36,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Particle> ParticleTemplate;
 
-		std::list<Particle*> Particles;
+		std::list<std::shared_ptr<Particle> > Particles;
 
 		int DisplacementRange;
 		float VelRange;
@@ -90,7 +69,7 @@ namespace CloudberryKingdom
 
 		void Absorb( const std::shared_ptr<ParticleEmitter> &emitter );
 
-		void KillParticle( const std::shared_ptr<LinkedListNode<Particle*> > &node );
+		std::list<std::shared_ptr<Particle> >::iterator KillParticle( const std::list<std::shared_ptr<Particle> >::iterator &node );
 
 		void EmitParticle( const std::shared_ptr<Particle> &p );
 

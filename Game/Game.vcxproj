@@ -362,6 +362,7 @@
     <ClCompile Include="Game\Tools\Unset.cpp" />
     <ClCompile Include="Game\Tools\WrappedFloat.cpp" />
     <ClCompile Include="Game\Video.cpp" />
+    <ClCompile Include="global_header.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="MainClass\XboxPC\MainClass.cpp" />
   </ItemGroup>

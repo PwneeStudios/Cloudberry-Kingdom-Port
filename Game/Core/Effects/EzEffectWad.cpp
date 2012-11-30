@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 
 		Neweffect->Simplest = effect->Techniques( _T( "Simplest" ) );
 
-		Neweffect->MyWad = shared_from_this();
+		Neweffect->MyWad = this;
 
 		EffectList.push_back( Neweffect );
 	}

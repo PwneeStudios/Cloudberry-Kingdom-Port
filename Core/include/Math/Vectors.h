@@ -110,6 +110,13 @@ public:
 		return *this;
 	}
 
+	Vector2 &operator *= ( const Vector2 &a )
+	{
+		X *= a.X;
+		Y *= a.Y;
+		return *this;
+	}
+
 	Vector2 operator + ( const Vector2 &a ) const
 	{
 		return Vector2( X + a.X, Y + a.Y );
@@ -242,6 +249,24 @@ public:
 	Vector4 operator * ( const Vector4 &a ) const
 	{
 		return Vector4( X * a.X, Y * a.Y, Z * a.Z, W * a.W );
+	}
+
+	Vector4 &operator *= ( const Vector4 &a )
+	{
+		X *= a.X;
+		Y *= a.Y;
+		Z *= a.Z;
+		W *= a.W;
+		return *this;
+	}
+
+	Vector4 &operator += ( const Vector4 &a )
+	{
+		X += a.X;
+		Y += a.Y;
+		Z += a.Z;
+		W += a.W;
+		return *this;
 	}
 
 	bool operator == ( const Vector4 &a ) const

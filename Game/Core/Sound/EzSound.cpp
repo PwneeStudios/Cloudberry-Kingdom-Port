@@ -45,6 +45,7 @@ namespace CloudberryKingdom
 		if ( EzSoundWad::SuppressSounds )
 			return;
 
-		sound->Play( volume * Tools::SoundVolume->getVal() * DefaultVolume, CoreMath::Restrict(-1, 1, pitch), CoreMath::Restrict(-1, 1, pan) );
+		sound->Play( volume * Tools::SoundVolume->getVal() * DefaultVolume, CoreMath::RestrictVal(-1.f, 1.f, pitch), CoreMath::RestrictVal(-1.f, 1.f, pan) );
 	}
+
 }

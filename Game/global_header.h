@@ -297,7 +297,58 @@ public:
 
 };
 
-template<class T> class LinkedListNode;
+class Song
+{
+
+public:
+
+	struct
+	{
+		double TotalSeconds;
+	} Duration;
+
+};
+
+class MediaPlayer
+{
+
+public:
+
+	static void Play( const std::shared_ptr<Song> &song )
+	{
+	}
+
+	static void Pause()
+	{
+	}
+
+	static void Resume()
+	{
+	}
+
+	static void Stop()
+	{
+	}
+
+	static MediaState GetState()
+	{
+		return MediaState_Paused;
+	}
+
+	static bool IsRepeating;
+
+};
+
+class SoundEffect
+{
+
+public:
+
+	void Play( float volume, float i, float j )
+	{
+	}
+
+};
 
 class MouseState
 {
@@ -362,6 +413,16 @@ public:
 	int Next()
 	{
 		// FIXME: get a random number generator!
+		return 0;
+	}
+
+	int Next( int low, int high )
+	{
+		return 0;
+	}
+
+	double NextDouble()
+	{
 		return 0;
 	}
 

@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		public:
 			UpdateCenterLambda( const std::shared_ptr<Quad> &quad );
 
-			void Apply( Vector2 NewPos );
+			void Apply( const Vector2 &NewPos );
 		};
 
 	private:
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		public:
 			UpdatexAxisLambda( const std::shared_ptr<Quad> &quad );
 
-			void Apply( Vector2 NewPos );
+			void Apply( const Vector2 &NewPos );
 		};
 
 	private:
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		public:
 			UpdateyAxisLambda( const std::shared_ptr<Quad> &quad );
 
-			void Apply( Vector2 NewPos );
+			void Apply( const Vector2 &NewPos );
 		};
 
 	public:

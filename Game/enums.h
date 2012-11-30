@@ -1088,4 +1088,10 @@ enum ButtonState
 	ButtonState_Released
 };
 
+enum MediaState
+{
+	MediaState_Paused,
+	MediaState_Playing
+};
+
 #endif

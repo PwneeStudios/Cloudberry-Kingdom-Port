@@ -5,38 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSong;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Media
-			{
-				class Song;
-			}
-		}
-	}
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class EzSongWad
 	{
 	public:
@@ -44,8 +12,8 @@ namespace CloudberryKingdom
 		bool Fading;
 		float Fade;
 
-		std::vector<EzSong*> SongList;
-		std::vector<EzSong*> PlayList;
+		std::vector<std::shared_ptr<EzSong> > SongList;
+		std::vector<std::shared_ptr<EzSong> > PlayList;
 
 		int CurIndex;
 
@@ -118,9 +86,9 @@ namespace CloudberryKingdom
 		/// (possibly different than the set play list, if it hasn't been started yet).
 		/// </summary>
 	private:
-		std::vector<EzSong*> CurrentPlayingList;
+		std::vector<std::shared_ptr<EzSong> > CurrentPlayingList;
 
-		bool SamePlayList( std::vector<EzSong*> &list1, std::vector<EzSong*> &list2 );
+		bool SamePlayList( std::vector<std::shared_ptr<EzSong> > &list1, std::vector<std::shared_ptr<EzSong> > &list2 );
 
 		/// <summary>
 		/// Starts the play list if it ISN'T already playing

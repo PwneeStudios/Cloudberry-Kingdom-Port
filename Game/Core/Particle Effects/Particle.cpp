@@ -1,15 +1,14 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	ParticleBin::ParticleBin()
 	{
-		MyStack = std::stack<Particle*>( 1000 );
+		MyStack = std::vector<std::shared_ptr<Particle> >( 1000 );
 
 		for ( int i = 0; i < 1000; i++ )
-			MyStack.push( std::make_shared<Particle>() );
+			MyStack[ i ] = std::make_shared<Particle>();
 	}
 
 	std::shared_ptr<Particle> ParticleBin::Get()
@@ -17,12 +16,17 @@ namespace CloudberryKingdom
 		std::shared_ptr<Particle> item = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MyStack )
+		//lock ( MyStack )
 		{
+			stackLock.Lock();
+
 			if ( MyStack.empty() )
 				return std::make_shared<Particle>();
 
-			item = MyStack.pop();
+			item = MyStack.back();
+			MyStack.pop_back();
+
+			stackLock.Unlock();
 		}
 
 		return item;
@@ -31,9 +35,13 @@ namespace CloudberryKingdom
 	void ParticleBin::ReturnItem( const std::shared_ptr<Particle> &item )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MyStack )
+		//lock ( MyStack )
 		{
-			MyStack.push( item );
+			stackLock.Lock();
+
+			MyStack.push_back( item );
+			
+			stackLock.Unlock();
 		}
 	}
 
@@ -41,7 +49,7 @@ std::shared_ptr<ParticleBin> Particle::Pool = std::make_shared<ParticleBin>();
 
 	void Particle::Recycle()
 	{
-		Pool->ReturnItem( this );
+		Pool->ReturnItem( shared_from_this() );
 	}
 
 	void Particle::Copy( const std::shared_ptr<Particle> &template_Renamed )

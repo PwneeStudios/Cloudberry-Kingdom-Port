@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		public:
 			DefaultCallbackLambda( const std::shared_ptr<ObjectVector> &v );
 
-			void Apply( Vector2 NewPos );
+			void Apply( const Vector2 &NewPos );
 		};
 
 	public:

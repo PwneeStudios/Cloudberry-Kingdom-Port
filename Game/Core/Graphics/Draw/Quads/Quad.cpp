@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		this->quad = quad;
 	}
 
-	void Quad::UpdateCenterLambda::Apply( Vector2 NewPos )
+	void Quad::UpdateCenterLambda::Apply( const Vector2 &NewPos )
 	{
 		quad->Center->Pos = NewPos;
 		quad->Center->RelPosFromPos();
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		this->quad = quad;
 	}
 
-	void Quad::UpdatexAxisLambda::Apply( Vector2 NewPos )
+	void Quad::UpdatexAxisLambda::Apply( const Vector2 &NewPos )
 	{
 		float l = ( NewPos - quad->Center->Pos ).Length();
 		Vector2 axis = NewPos - quad->Center->Pos;
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		this->quad = quad;
 	}
 
-	void Quad::UpdateyAxisLambda::Apply( Vector2 NewPos )
+	void Quad::UpdateyAxisLambda::Apply( const Vector2 &NewPos )
 	{
 		float L = Vector2::Distance( quad->yAxis->Pos, quad->Center->Pos );
 

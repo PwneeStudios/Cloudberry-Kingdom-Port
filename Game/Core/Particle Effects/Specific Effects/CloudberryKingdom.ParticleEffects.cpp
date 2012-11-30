@@ -55,7 +55,6 @@ std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 
 		float intensity = 1;
 
-		int i;
 		for ( int k = 0; k < 14; k++ )
 		{
 			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( CoinExplosionTemplate );
@@ -434,10 +433,10 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity )
 	{
-		PieceOrb( level, style, pos, frame, intensity, 0, Vector2(1), Vector4::One );
+		PieceOrb( level, style, pos, frame, intensity, 0, Vector2(1), Vector4( 1 ) );
 	}
 
-	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, const std::shared_ptr<EzTexture> &texture, Vector2 size, Vector4 color )
+	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, std::shared_ptr<EzTexture> texture, Vector2 size, Vector4 color )
 	{
 		// Number of particles to emit
 		int num = 1;
@@ -449,15 +448,16 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		switch ( style )
 		{
 			case PieceOrbStyle_BIG_RND:
-				num *= 2;
+				{
+					num *= 2;
 
-				float t = 2 - intensity;
-				float s = intensity - 1;
-				vel = s * 130 + t * 60;
-				acc = s * -.182f + t * -.128f;
-				life = static_cast<int>( s * 12.5f + t * 18 );
-				size *= s * 1.3f + t * 1.15f;
-
+					float t = 2 - intensity;
+					float s = intensity - 1;
+					vel = s * 130 + t * 60;
+					acc = s * -.182f + t * -.128f;
+					life = static_cast<int>( s * 12.5f + t * 18 );
+					size *= s * 1.3f + t * 1.15f;
+				}
 				break;
 
 			case PieceOrbStyle_CLOUD:

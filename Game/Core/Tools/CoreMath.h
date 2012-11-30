@@ -83,12 +83,12 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Restrict a value between a min and a max.
 		/// </summary>
-		static float Restrict( float min, float max, float val );
+		static float RestrictVal( float min, float max, float val );
 		static void Restrict( float min, float max, float &val );
 		/// <summary>
 		/// Restrict a value between a min and a max.
 		/// </summary>
-		static int Restrict( int min, int max, int val );
+		static int RestrictVal( int min, int max, int val );
 		static void Restrict( int min, int max, int &val );
 
 		/// <summary>

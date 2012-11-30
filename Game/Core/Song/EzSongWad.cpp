@@ -1,14 +1,13 @@
 ﻿#include <global_header.h>
 
 
-
 namespace CloudberryKingdom
 {
 
 	EzSongWad::EzSongWad()
 	{
 		InitializeInstanceFields();
-		SongList = std::vector<EzSong*>();
+		SongList = std::vector<std::shared_ptr<EzSong> >();
 
 		CurIndex = 0;
 
@@ -16,7 +15,7 @@ namespace CloudberryKingdom
 
 		DefaultCam = std::make_shared<Camera>();
 
-		MediaPlayer->IsRepeating = false;
+		MediaPlayer::IsRepeating = false;
 	}
 
 	void EzSongWad::FadeOut()
@@ -68,7 +67,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::PhsxStep()
 	{
-		if ( Paused && MediaPlayer::State != MediaState::Paused )
+		if ( Paused && MediaPlayer::GetState() != MediaState_Paused )
 			Pause();
 
 		FadePhsx();
@@ -116,7 +115,7 @@ namespace CloudberryKingdom
 	{
 		if ( StartingSong )
 		{
-			if ( MediaPlayer->State == MediaState::Playing )
+			if ( MediaPlayer::GetState() == MediaState_Playing )
 				StartingSong = false;
 			else
 				return;
@@ -144,7 +143,7 @@ namespace CloudberryKingdom
 
 	bool EzSongWad::IsPlaying()
 	{
-		if ( MediaPlayer->State == MediaState::Playing )
+		if ( MediaPlayer::GetState() == MediaState_Playing )
 			return true;
 		else
 			return false;
@@ -152,7 +151,8 @@ namespace CloudberryKingdom
 
 	void EzSongWad::Next( const std::shared_ptr<EzSong> &song )
 	{
-		CurIndex = PlayList.find( song );
+		CurIndex = IndexOf( PlayList, song );
+
 		if ( CurIndex < 0 )
 			CurIndex = 0;
 
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 
 		if ( CurIndex < 0 )
 			CurIndex = PlayList.size() - 1;
-		if ( CurIndex >= PlayList.size() )
+		if ( CurIndex >= static_cast<int>( PlayList.size() ) )
 			CurIndex = 0;
 
 		SetSong( CurIndex );
@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 
 		if ( CurIndex < 0 )
 			CurIndex = PlayList.size() - 1;
-		if ( CurIndex >= PlayList.size() )
+		if ( CurIndex >= static_cast<int>( PlayList.size() ) )
 			CurIndex = 0;
 
 		SetSong( CurIndex );
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::DisposeAllUnused()
 	{
-		for ( std::vector<EzSong*>::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
+		for ( std::vector<std::shared_ptr<EzSong> >::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
 			if ( ( *song )->song != 0 && SongList[ CurIndex ] != *song && !SongList[ CurIndex ]->AlwaysLoaded )
 			{
 				delete ( *song )->song;
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 		CurIndex = 0;
 	}
 
-	bool EzSongWad::SamePlayList( std::vector<EzSong*> &list1, std::vector<EzSong*> &list2 )
+	bool EzSongWad::SamePlayList( std::vector<std::shared_ptr<EzSong> > &list1, std::vector<std::shared_ptr<EzSong> > &list2 )
 	{
 		if ( list1 == list2 )
 			return true;

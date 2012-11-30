@@ -3,10 +3,9 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
-	class EzSong
+	class EzSong : std::enable_shared_from_this<EzSong>
 	{
 	public:
 		std::shared_ptr<Song> song;

@@ -5,33 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class ParticleEmitter;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class ParticleEffects
 	{
 	public:
@@ -99,7 +72,7 @@ namespace CloudberryKingdom
 
 
 		static void PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity );
-		static void PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, const std::shared_ptr<EzTexture> &texture, Vector2 size, Vector4 color );
+		static void PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, std::shared_ptr<EzTexture> texture, Vector2 size, Vector4 color );
 
 		/// <summary>
 		/// Create an explosion of pieces at the specified location, plus a fart sound.

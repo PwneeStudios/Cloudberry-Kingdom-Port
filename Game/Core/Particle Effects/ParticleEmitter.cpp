@@ -7,9 +7,9 @@ namespace CloudberryKingdom
 	ParticleEmitterBin::ParticleEmitterBin()
 	{
 		const int capacity = 20;
-		MyStack = std::stack<ParticleEmitter*>( capacity );
+		MyStack = std::vector<std::shared_ptr<ParticleEmitter> >( capacity );
 		for ( int i = 0; i < capacity; ++i )
-			MyStack.push( std::make_shared<ParticleEmitter>( 300 ) );
+			MyStack[i] = std::make_shared<ParticleEmitter>( 300 );
 	}
 
 	std::shared_ptr<ParticleEmitter> ParticleEmitterBin::Get()
@@ -17,12 +17,17 @@ namespace CloudberryKingdom
 		std::shared_ptr<ParticleEmitter> item = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MyStack )
+		//lock ( MyStack )
 		{
+			stackLock.Lock();
+
 			if ( MyStack.empty() )
 				return std::make_shared<ParticleEmitter>( 300 );
 
-			item = MyStack.pop();
+			item = MyStack.back();
+			MyStack.pop_back();
+
+			stackLock.Unlock();
 		}
 
 		return item;
@@ -31,9 +36,13 @@ namespace CloudberryKingdom
 	void ParticleEmitterBin::ReturnItem( const std::shared_ptr<ParticleEmitter> &item )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MyStack )
+		//lock ( MyStack )
 		{
-			MyStack.push( item );
+			stackLock.Lock();
+
+			MyStack.push_back( item );
+
+			stackLock.Unlock();
 		}
 	}
 
@@ -53,7 +62,7 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 	{
 		MyLevel.reset();
 		Clean();
-		Pool->ReturnItem( this );
+		Pool->ReturnItem( shared_from_this() );
 	}
 
 	ParticleEmitter::ParticleEmitter( int Capacity )
@@ -67,7 +76,7 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 
 		Count = Index = 0;
 
-		Particles = std::list<Particle*>();
+		Particles = std::list<std::shared_ptr<Particle> >();
 
 		MyTexture = Tools::TextureWad->TextureList[ 0 ];
 
@@ -86,22 +95,23 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 
 	void ParticleEmitter::Clean()
 	{
-		for ( std::list<Particle*>::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			( *p )->Recycle();
 		Particles.clear();
 	}
 
 	void ParticleEmitter::Absorb( const std::shared_ptr<ParticleEmitter> &emitter )
 	{
-		for ( std::list<Particle*>::const_iterator p = emitter->Particles.begin(); p != emitter->Particles.end(); ++p )
+		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = emitter->Particles.begin(); p != emitter->Particles.end(); ++p )
 			Particles.push_back( *p );
 		emitter->Particles.clear();
 	}
 
-	void ParticleEmitter::KillParticle( const std::shared_ptr<LinkedListNode<Particle*> > &node )
+	std::list<std::shared_ptr<Particle> >::iterator ParticleEmitter::KillParticle( const std::list<std::shared_ptr<Particle> >::iterator &node )
 	{
-		Particles.remove( node );
-		node->Value.Recycle();
+		std::shared_ptr<Particle> p = *node;
+		p->Recycle();
+		return Particles.erase( node );
 	}
 
 	void ParticleEmitter::EmitParticle( const std::shared_ptr<Particle> &p )
@@ -116,8 +126,8 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 
 		Particles.push_back( p );
 
-		if ( Particles.size() > TotalCapacity )
-			KillParticle( Particles.First );
+		if ( static_cast<int>( Particles.size() ) > TotalCapacity )
+			KillParticle( Particles.begin() );
 
 		return p;
 	}
@@ -127,21 +137,21 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 		if ( Tools::Render->UsingSpriteBatch )
 			Tools::Render->EndSpriteBatch();
 
-		for ( std::list<Particle*>::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			( *p )->Draw();
 		Tools::QDrawer->Flush();
 	}
 
 	void ParticleEmitter::Unfreeze( int code )
 	{
-		for ( std::list<Particle*>::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			if ( ( *p )->Code == code )
 				( *p )->Frozen = false;
 	}
 
 	void ParticleEmitter::RestrictedUpdate( int code )
 	{
-		for ( std::list<Particle*>::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			if ( ( *p )->Code == code )
 				( *p )->Phsx( Tools::CurLevel->getMainCamera() );
 	}
@@ -150,21 +160,24 @@ std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<Par
 	{
 		UpdateStep();
 
+		// FIXME: Check update loop logic.
+
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var node = Particles.First;
-		while ( node != 0 )
+		std::list<std::shared_ptr<Particle> >::iterator node = Particles.begin();
+		while ( node != Particles.end() )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var p = node->Value;
+			std::shared_ptr<Particle> &p = *node;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var next = node->Next;
+			//var next = node->Next;
 
 			if ( p->Life > 0 ) // && p.MyColor.W > 0)
+			{
 				p->Phsx( Tools::CurLevel->getMainCamera() );
+				++node;
+			}
 			else
-				KillParticle( node );
-
-			node = next;
+				node = KillParticle( node );
 		}
 	}
 }

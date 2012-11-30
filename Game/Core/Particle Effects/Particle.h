@@ -5,22 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class ParticleBin
 	{
 	private:
-		std::stack<Particle*> MyStack;
+		std::vector<std::shared_ptr<Particle> > MyStack;
+		Mutex stackLock;
 
 	public:
 		ParticleBin();
@@ -30,7 +19,7 @@ namespace CloudberryKingdom
 		void ReturnItem( const std::shared_ptr<Particle> &item );
 	};
 
-	class Particle
+	class Particle : public std::enable_shared_from_this<Particle>
 	{
 	public:
 		static std::shared_ptr<ParticleBin> Pool;

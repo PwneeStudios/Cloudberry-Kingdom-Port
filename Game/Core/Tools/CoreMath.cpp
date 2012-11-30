@@ -236,7 +236,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		return val;
 	}
 
-	float CoreMath::Restrict( float min, float max, float val )
+	float CoreMath::RestrictVal( float min, float max, float val )
 	{
 		if ( val > max )
 			val = max;
@@ -248,10 +248,10 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	void CoreMath::Restrict( float min, float max, float &val )
 	{
-		val = Restrict( min, max, val );
+		val = RestrictVal( min, max, val );
 	}
 
-	int CoreMath::Restrict( int min, int max, int val )
+	int CoreMath::RestrictVal( int min, int max, int val )
 	{
 		if ( val > max )
 			val = max;
@@ -263,7 +263,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	void CoreMath::Restrict( int min, int max, int &val )
 	{
-		val = Restrict( min, max, val );
+		val = RestrictVal( min, max, val );
 	}
 
 	float CoreMath::MultiLerpRestrict( float t, const std::vector<float> &values )
