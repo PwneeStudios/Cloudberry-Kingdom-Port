@@ -95,8 +95,8 @@ namespace CloudberryKingdom
 
 		void Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		/*void Clean( array_Renamed<ObjectBase*, 2> *array_Renamed );
-		void Clean( array_Renamed<ObjectBase*, 2> *array_Renamed, int i, int j );
+		/*void Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed );
+		void Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j );
 		void CleanupTunnel( const std::shared_ptr<Level> &level );*/
 
 	public:

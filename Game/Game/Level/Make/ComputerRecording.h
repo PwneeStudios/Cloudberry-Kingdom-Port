@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 
 		std::vector<BobInput> Input;
 		std::vector<int> AutoJump;
-		std::vector<Vector2> AutoLocs, *AutoVel, *BoxCenter;
+		std::vector<Vector2> AutoLocs, AutoVel, BoxCenter;
 		std::vector<bool> AutoOnGround;
 		std::vector<unsigned char> Anim;
 		std::vector<float> t;

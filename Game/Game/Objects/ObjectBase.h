@@ -133,18 +133,6 @@ namespace CloudberryKingdom
 		void Init();
 	};
 
-	class BlockExtension
-	{
-	public:
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void StampAsFullyUsed(this BlockBase block, int CurPhsxStep)
-		static void StampAsFullyUsed( const std::shared_ptr<BlockBase> &block, int CurPhsxStep );
-
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static void Stretch(this BlockBase block, Side side, float amount)
-		static void Stretch( const std::shared_ptr<BlockBase> &block, Side side, float amount );
-	};
-
 	class ObjectData
 	{
 	public:

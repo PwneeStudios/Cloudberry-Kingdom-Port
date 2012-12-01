@@ -42,11 +42,11 @@ namespace CloudberryKingdom
 		public:
 			MinDistHelper( const std::shared_ptr<SpikeyGuy_Parameters> &Params );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:
-		class SpikeyGuyCleanupMetricLambda : public LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2>
+		class SpikeyGuyCleanupMetricLambda : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
 		{
 		public:
 			SpikeyGuyCleanupMetricLambda();

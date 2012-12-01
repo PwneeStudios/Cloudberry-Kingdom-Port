@@ -56,7 +56,7 @@ std::map<int, Awardment*> Awardments::AwardsDict = std::map<int, Awardment*>();
 	void Awardments::CheckForAward_HoldForward()
 	{
 		bool Ran = false;
-		for ( std::vector<PlayerData*>::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
 		{
 			std::shared_ptr<PlayerStats> stats = ( *p )->GetStats( StatGroup_LEVEL );
 			float ratio = stats->FinalTimeSpentNotMoving / static_cast<float>( stats->FinalTimeSpent );
@@ -189,7 +189,7 @@ float CurShift, Awardments::Shift = 520;
 		if ( PlayerManager::NotAllAwarded( award ) )
 		{
 			// Give the award to each player
-			for ( std::vector<PlayerData*>::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+			for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
 				( *p )->Awardments_Renamed += award->Guid;
 
 			// Show a note saying the reward was given

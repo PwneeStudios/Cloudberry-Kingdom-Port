@@ -155,7 +155,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		}
 	}
 
-	/*void FlyingBlob_AutoGen::Clean( array_Renamed<ObjectBase*, 2> *array_Renamed )
+	/*void FlyingBlob_AutoGen::Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed )
 	{
 		for ( int i = 0; i < array_Renamed.GetLength( 0 ); i++ )
 			for ( int j = 0; j < array_Renamed.GetLength( 1 ); j++ )
@@ -163,7 +163,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 					array_Renamed[ i ][ j ] = 0;
 	}
 
-	void FlyingBlob_AutoGen::Clean( array_Renamed<ObjectBase*, 2> *array_Renamed, int i, int j )
+	void FlyingBlob_AutoGen::Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j )
 	{
 		if ( array_Renamed[ i ][ j ] == 0 )
 			return;

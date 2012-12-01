@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	class CoinScoreMultiplierObject : public GameObject
 	{
 	private:
-		class OnCoinGrabProxy : public Lambda_1<ObjectBase*>
+		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
 		private:
 			std::shared_ptr<CoinScoreMultiplierObject> csmo;

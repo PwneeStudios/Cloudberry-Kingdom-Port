@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Generators> &getInstance();
 
-		static std::vector<AutoGen*> Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, WeightedPreFill_1_Gens;
+		static std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, WeightedPreFill_1_Gens;
 
 	private:
 		Generators();

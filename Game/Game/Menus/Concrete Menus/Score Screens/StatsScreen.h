@@ -16,128 +16,128 @@ namespace CloudberryKingdom
 		public:
 			StringificationWrapper( const std::shared_ptr<LambdaFunc_1<int, int> > &f );
 
-			std::wstring Apply( int i );
+			std::wstring Apply( const int &i );
 		};
 
 	private:
 		class StatsLevels : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsLevels( std::vector<PlayerStats*> Stats );
+			StatsLevels( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsJumps : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsJumps( std::vector<PlayerStats*> Stats );
+			StatsJumps( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsScore : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsScore( std::vector<PlayerStats*> Stats );
+			StatsScore( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsCoins : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsCoins( std::vector<PlayerStats*> Stats );
+			StatsCoins( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsTotalCoins : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsTotalCoins( std::vector<PlayerStats*> Stats );
+			StatsTotalCoins( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsCoinPercentGotten : public LambdaFunc_1<int, std::wstring>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsCoinPercentGotten( std::vector<PlayerStats*> Stats );
+			StatsCoinPercentGotten( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			std::wstring Apply( int j );
+			std::wstring Apply( const int &j );
 		};
 
 	private:
 		class StatsBlobs : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsBlobs( std::vector<PlayerStats*> Stats );
+			StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsCheckpoints : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsCheckpoints( std::vector<PlayerStats*> Stats );
+			StatsCheckpoints( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
 		class StatsLifeExpectancy : public LambdaFunc_1<int, std::wstring>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 
 		public:
-			StatsLifeExpectancy( std::vector<PlayerStats*> Stats );
+			StatsLifeExpectancy( std::vector<std::shared_ptr<PlayerStats> > Stats );
 
-			std::wstring Apply( int j );
+			std::wstring Apply( const int &j );
 		};
 
 	private:
 		class StatsDeathsBy : public LambdaFunc_1<int, int>
 		{
 		private:
-			std::vector<PlayerStats*> Stats;
+			std::vector<std::shared_ptr<PlayerStats> > Stats;
 			int i;
 
 		public:
-			StatsDeathsBy( std::vector<PlayerStats*> Stats, int i );
+			StatsDeathsBy( std::vector<std::shared_ptr<PlayerStats> > Stats, int i );
 
-			int Apply( int j );
+			int Apply( const int &j );
 		};
 
 	private:
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 
 		int n;
 		float HeaderPos;
-		std::vector<PlayerStats*> Stats;
+		std::vector<std::shared_ptr<PlayerStats> > Stats;
 	public:
 		StatsMenu( StatGroup group );
 

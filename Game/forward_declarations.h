@@ -363,7 +363,7 @@ namespace CloudberryKingdom
 	class MenuListAll;
 	class HighScorePanel;
 	class CoinScoreMultiplierObject;
-	class Sign;
+	//class Sign;
 	class SaveLoadSeedMenu;
 	class ScreenSaver;
 	class BobPhsxRocketbox;

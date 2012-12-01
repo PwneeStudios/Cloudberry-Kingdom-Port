@@ -57,4 +57,10 @@ std::vector<T> VecFromArray( T a[] )
 	return std::vector<T>( a, a + sizeof( a ) / sizeof( T ) );
 }
 
+template<class T>
+void Insert( std::vector<T> v, int index, T a )
+{
+	v.insert( v.begin() + index, a );
+}
+
 #endif

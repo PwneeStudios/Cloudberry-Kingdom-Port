@@ -411,7 +411,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 
 	std::wstring PlayerManager::GetGroupGamerTag( int MaxLength )
 	{
-		std::vector<PlayerData*> players = getLoggedInPlayers();
+		std::vector<std::shared_ptr<PlayerData> > players = getLoggedInPlayers();
 		if ( players.empty() )
 			players = getExistingPlayers();
 
@@ -420,7 +420,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 
 		// Get a list of all names
 		std::vector<StringBuilder*> names = std::vector<StringBuilder*>();
-		for ( std::vector<PlayerData*>::const_iterator player = players.begin(); player != players.end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
 			names.push_back( std::make_shared<StringBuilder>( ( *player )->GetName() ) );
 
 		// Remove one character from the longest name until the total length is small enough
@@ -457,7 +457,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 	int PlayerManager::MaxPlayerHighScore( int GameId )
 	{
 		int max = 0;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			max = __max( max, ( *player )->GetHighScore( GameId ) );
 
 		return max;
@@ -517,7 +517,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 			return;
 
 		// Give the hat to each player
-		for ( std::vector<PlayerData*>::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
 			( *p )->Purchases += buyable->GetGuid();
 
 		SavePlayerData->Changed = true;
@@ -531,7 +531,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 	int PlayerManager::GetGameScore()
 	{
 		int score = 0;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			score += ( *player )->GetGameScore();
 
 		return score;
@@ -540,16 +540,16 @@ bool PlayerManager::HaveFirstPlayer = false;
 	int PlayerManager::GetGameScore_WithTemporary()
 	{
 		int score = 0;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			score += ( *player )->GetGameScore() + (*player)->TempStats->Score;
 
 		return score;
 	}
 
-	int PlayerManager::PlayerSum( const std::shared_ptr<LambdaFunc_1<PlayerData*, int> > &f )
+	int PlayerManager::PlayerSum( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f )
 	{
 		int sum = 0;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 		{
 			if ( *player != 0 )
 				sum += f->Apply( *player );
@@ -558,10 +558,10 @@ bool PlayerManager::HaveFirstPlayer = false;
 		return sum;
 	}
 
-	int PlayerManager::PlayerMax( const std::shared_ptr<LambdaFunc_1<PlayerData*, int> > &f )
+	int PlayerManager::PlayerMax( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f )
 	{
 		int max = int::MinValue;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 		{
 			if ( *player != 0 )
 				max = __max( max, f->Apply( *player ) );
@@ -573,13 +573,13 @@ bool PlayerManager::HaveFirstPlayer = false;
 	int PlayerManager::GetLevelCoins()
 	{
 		int coins = 0;
-		for ( std::vector<PlayerData*>::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			coins += ( *player )->GetLevelCoins();
 
 		return coins;
 	}
 
-	const std::vector<PlayerData*> &PlayerManager::getLoggedInPlayers()
+	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getLoggedInPlayers()
 	{
 	#if defined(PC_VERSION)
 		return getExistingPlayers();
@@ -600,19 +600,19 @@ bool PlayerManager::HaveFirstPlayer = false;
 		return _ExistingPlayers;
 	}
 
-std::vector<PlayerData*> PlayerManager::_ExistingPlayers = std::vector<PlayerData*>();
+	std::vector<std::shared_ptr<PlayerData> > PlayerManager::_ExistingPlayers = std::vector<std::shared_ptr<PlayerData> >();
 
-	const std::vector<PlayerData*> &PlayerManager::getAlivePlayers()
+	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getAlivePlayers()
 	{
 		_AlivePlayers.clear();
-		for ( std::vector<CloudberryKingdom::PlayerData*>::const_iterator data = Players.begin(); data != Players.end(); ++data )
+		for ( std::vector<CloudberryKingdom::std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( ( *data )->Exists && ( *data )->IsAlive )
 				_AlivePlayers.push_back( *data );
 
 		return _AlivePlayers;
 	}
 
-std::vector<PlayerData*> PlayerManager::_AlivePlayers = std::vector<PlayerData*>();
+	std::vector<std::shared_ptr<PlayerData> > PlayerManager::_AlivePlayers = std::vector<std::shared_ptr<PlayerData> >();
 
 #if defined(PC_VERSION)
 	const std::shared_ptr<PlayerData> &PlayerManager::getPlayer()
@@ -736,7 +736,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 		_DefaultName = PlayerManager::RandomNames.Choose( Tools::GlobalRnd );
 	#endif
 
-		Players = std::vector<PlayerData*>( 4 );
+		Players = std::vector<std::shared_ptr<PlayerData> >( 4 );
 		ColorSchemeManager::InitColorSchemes();
 
 		// Player templates

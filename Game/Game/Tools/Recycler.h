@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	private:
 		ObjectType MyType;
-		std::stack<ObjectBase*> FullObject, BoxObject;
+		std::stack<std::shared_ptr<ObjectBase> > FullObject, BoxObject;
 
 	public:
 		void Release();

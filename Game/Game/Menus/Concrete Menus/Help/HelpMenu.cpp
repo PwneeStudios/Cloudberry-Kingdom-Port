@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		{
 			case GameData::BankType_CAMPAIGN:
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::vector<PlayerData*>::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+				for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
 					( *p )->CampaignCoins = __max( ( *p )->CampaignCoins - Cost, 0 );
 				break;
 

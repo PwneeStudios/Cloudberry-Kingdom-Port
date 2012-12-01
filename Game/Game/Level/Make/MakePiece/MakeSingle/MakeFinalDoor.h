@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 	class MakeFinalDoor : public MakeThing
 	{
 	private:
-		class VanillaFillEndPieceLambda : public Lambda_1<BlockBase*>
+		class VanillaFillEndPieceLambda : public Lambda_1<std::shared_ptr<BlockBase> >
 		{
 		public:
 			VanillaFillEndPieceLambda();
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class ModBlockLambda : public Lambda_1<BlockBase*>
+		class ModBlockLambda : public Lambda_1<std::shared_ptr<BlockBase> >
 		{
 		private:
 			std::shared_ptr<MakeFinalDoor> mfd;
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class FindFinalBlockLambda : public LambdaFunc_1<BlockBase*, bool>
+		class FindFinalBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		public:
 			FindFinalBlockLambda();
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class BoxTRyLambda : public LambdaFunc_1<BlockBase*, float>
+		class BoxTRyLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
 		public:
 			BoxTRyLambda();
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 	};
 
-	class FindCamZoneLambda : public LambdaFunc_1<ObjectBase*, bool>
+	class FindCamZoneLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 	{
 	public:
 		static std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda_Static;

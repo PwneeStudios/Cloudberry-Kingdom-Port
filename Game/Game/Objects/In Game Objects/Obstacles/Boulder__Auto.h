@@ -48,7 +48,7 @@ public:
 		public:
 			Cleanup_2Helper( const std::shared_ptr<Boulder_Parameters> &Params );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:

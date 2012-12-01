@@ -456,4 +456,31 @@ namespace CloudberryKingdom
 	void BlockBase::PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 	}
+
+	void BlockBase::StampAsFullyUsed( int CurPhsxStep )
+	{
+		StampAsUsed( CurPhsxStep );
+		getBlockCore()->NonTopUsed = true;
+	}
+
+	void BlockBase::Stretch( Side side, float amount )
+	{
+		getBox()->CalcBounds();
+		switch ( side )
+		{
+			case Side_RIGHT:
+				Extend( side, getBox()->GetTR().X + amount );
+				break;
+			case Side_LEFT:
+				Extend( side, getBox()->GetBL().X + amount );
+				break;
+			case Side_TOP:
+				Extend( side, getBox()->GetTR().Y + amount );
+				break;
+			case Side_BOTTOM:
+				Extend( side, getBox()->GetBL().Y + amount );
+				break;
+		}
+	}
+
 }

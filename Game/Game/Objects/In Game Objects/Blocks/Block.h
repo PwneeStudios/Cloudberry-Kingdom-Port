@@ -211,31 +211,11 @@ public:
 	public:
 		virtual void PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 		virtual void PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+
+		// These were extension methods
+		void StampAsFullyUsed( int CurPhsxStep );
+		void Stretch( Side side, float amount );
 	};
-
-	/*
-	public interface Block : ObjectBase
-	{
-	    AABox Box { get; }
-	    bool IsActive { get; set; }
-	    BlockData BlockCore { get; }
-
-	    void Extend(Side side, float pos);
-
-	    void LandedOn(Bob bob);
-	    void HitHeadOn(Bob bob);
-	    void Smash(Bob bob);
-	    void SideHit(Bob bob);
-	    void Hit(Bob bob);
-
-	    bool PreDecision(Bob bob);
-
-	    bool PostCollidePreDecision(Bob bob);
-	    void PostCollideDecision(Bob bob, ref ColType Col, ref bool Overlap, ref bool Delete);
-	    void PostKeep(Bob bob, ref ColType Col, ref bool Overlap);
-	    void PostInteractWith(Bob bob);
-	}*/
 }
-
 
 #endif	//#ifndef BLOCK

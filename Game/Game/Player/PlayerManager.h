@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerIntLambda : public LambdaFunc_1<PlayerData*, int>
+	class PlayerIntLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , int>
 	{
 	public:
 		PlayerIntLambda();
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class AnyAwardmentLambda : public LambdaFunc_1<PlayerData*, bool>
+		class AnyAwardmentLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
 		private:
 			std::shared_ptr<Awardment> award;
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class AnyBoughtLambda : public LambdaFunc_1<PlayerData*, bool>
+		class AnyBoughtLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
 		private:
 			std::shared_ptr<Buyable> item;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class NotAllAwardedLambda : public LambdaFunc_1<PlayerData*, bool>
+		class NotAllAwardedLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
 		private:
 			std::shared_ptr<Awardment> award;
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class ExistingPlayerFindLambda : public LambdaFunc_1<PlayerData*, bool>
+		class ExistingPlayerFindLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
 		public:
 			ExistingPlayerFindLambda();
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		static int GetFirstPlayer();
 
 		static int NumPlayers;
-		static std::vector<PlayerData*> Players;
+		static std::vector<std::shared_ptr<PlayerData> > Players;
 
 	private:
 		static int length( std::vector<StringBuilder*> &names );
@@ -238,9 +238,9 @@ namespace CloudberryKingdom
 		/// </summary>
 		static int GetGameScore_WithTemporary();
 
-		static int PlayerSum( const std::shared_ptr<LambdaFunc_1<PlayerData*, int> > &f );
+		static int PlayerSum( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f );
 
-		static int PlayerMax( const std::shared_ptr<LambdaFunc_1<PlayerData*, int> > &f );
+		static int PlayerMax( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f );
 
 		/// <summary>
 		/// Returns the total coins gotten in a level by all players.
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players that exist and are logged in.
 		/// </summary>
-		const static std::vector<PlayerData*> &getLoggedInPlayers();
+		const static std::vector<std::shared_ptr<PlayerData> > &getLoggedInPlayers();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 #endif

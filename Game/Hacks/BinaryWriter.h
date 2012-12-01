@@ -9,6 +9,15 @@ class BinaryWriter
 
 public:
 
+	BinaryWriter( std::wstring path )
+	{
+		// C# Binary Writer takes a stream in the constructor, but we always have a string made from a file.
+	}
+
+	~BinaryWriter()
+	{
+	}
+
 	void Write( const unsigned char *buffer, int offset, int length )
 	{
 		// FIXME: Implement this.

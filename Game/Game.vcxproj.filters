@@ -2201,5 +2201,8 @@
     <ClInclude Include="Hacks\Compare.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Hacks\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

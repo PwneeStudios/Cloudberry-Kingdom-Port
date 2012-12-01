@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		return f->Apply( i )->ToString();
 	}
 
-	StatsMenu::StatsLevels::StatsLevels( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsLevels::StatsLevels( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		 return Stats[ j ]->Levels;
 	}
 
-	StatsMenu::StatsJumps::StatsJumps( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsJumps::StatsJumps( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Jumps;
 	}
 
-	StatsMenu::StatsScore::StatsScore( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsScore::StatsScore( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Score;
 	}
 
-	StatsMenu::StatsCoins::StatsCoins( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsCoins::StatsCoins( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Coins;
 	}
 
-	StatsMenu::StatsTotalCoins::StatsTotalCoins( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsTotalCoins::StatsTotalCoins( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->TotalCoins;
 	}
 
-	StatsMenu::StatsCoinPercentGotten::StatsCoinPercentGotten( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsCoinPercentGotten::StatsCoinPercentGotten( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->getCoinPercentGotten()->ToString() + L'%';
 	}
 
-	StatsMenu::StatsBlobs::StatsBlobs( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsBlobs::StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Blobs;
 	}
 
-	StatsMenu::StatsCheckpoints::StatsCheckpoints( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsCheckpoints::StatsCheckpoints( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Checkpoints;
 	}
 
-	StatsMenu::StatsLifeExpectancy::StatsLifeExpectancy( std::vector<PlayerStats*> Stats )
+	StatsMenu::StatsLifeExpectancy::StatsLifeExpectancy( std::vector<std::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->getLifeExpectancy();
 	}
 
-	StatsMenu::StatsDeathsBy::StatsDeathsBy( std::vector<PlayerStats*> Stats, int i )
+	StatsMenu::StatsDeathsBy::StatsDeathsBy( std::vector<std::shared_ptr<PlayerStats> > Stats, int i )
 	{
 		this->Stats = Stats;
 		this->i = i;
@@ -429,6 +429,6 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 	void StatsMenu::InitializeInstanceFields()
 	{
 		HeaderPos = -1595;
-		Stats = std::vector<PlayerStats*>( 4 );
+		Stats = std::vector<std::shared_ptr<PlayerStats> >( 4 );
 	}
 }

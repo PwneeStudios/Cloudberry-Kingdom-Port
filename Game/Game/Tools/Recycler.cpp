@@ -7,11 +7,11 @@ namespace CloudberryKingdom
 
 	void RecycleBin::Release()
 	{
-		for ( std::stack<ObjectBase*>::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
+		for ( std::stack<std::shared_ptr<ObjectBase> >::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 
-		for ( std::stack<ObjectBase*>::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
+		for ( std::stack<std::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 	}
@@ -20,8 +20,8 @@ namespace CloudberryKingdom
 	{
 		MyType = type;
 
-		FullObject = std::stack<ObjectBase*>();
-		BoxObject = std::stack<ObjectBase*>();
+		FullObject = std::stack<std::shared_ptr<ObjectBase> >();
+		BoxObject = std::stack<std::shared_ptr<ObjectBase> >();
 	}
 
 	std::shared_ptr<ObjectBase> RecycleBin::GetObject( bool BoxesOnly )

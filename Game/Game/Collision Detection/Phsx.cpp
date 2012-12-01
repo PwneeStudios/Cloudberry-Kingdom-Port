@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 		float d1 = Vector2::Dot( p1 - LC1, n1 );
 		float d2 = Vector2::Dot( p2 - LT1, n2 );
 
-		if ( Sign__RegexMe41315803( d1 ) != Sign__RegexMe41315803( d2 ) )
+		if ( Sign( d1 ) != Sign( d2 ) )
 		{
 			float n = Vector2::Dot( p1 - LC1, t1 );
 			if ( n > 0 && n < Length )
@@ -122,14 +122,14 @@ namespace CloudberryKingdom
 
 	bool Phsx::LineAndHorizontalLineCollisionTest( float y, float x1, float x2, Line &L )
 	{
-		if ( Sign__RegexMe41315803( L.p1.Y - y ) == Sign__RegexMe41315803( L.p2.Y - y ) )
+		if ( Sign( L.p1.Y - y ) == Sign( L.p2.Y - y ) )
 			return false;
 
 		float t = ( y - L.p2.Y ) / ( L.p1.Y - L.p2.Y );
 		if ( t < 0 || t > 1 )
 			return false;
 		float x = t * L.p1.X + ( 1 - t ) * L.p2.X;
-		if ( Sign__RegexMe41315803( x - x1 ) == Sign__RegexMe41315803( x - x2 ) )
+		if ( Sign( x - x1 ) == Sign( x - x2 ) )
 			return false;
 
 		return true;
@@ -137,14 +137,14 @@ namespace CloudberryKingdom
 
 	bool Phsx::LineAndVerticalLineCollisionTest( float x, float y1, float y2, Line &L )
 	{
-		if ( Sign__RegexMe41315803( L.p1.X - x ) == Sign__RegexMe41315803( L.p2.X - x ) )
+		if ( Sign( L.p1.X - x ) == Sign( L.p2.X - x ) )
 			return false;
 
 		float t = ( x - L.p2.X ) / ( L.p1.X - L.p2.X );
 		if ( t < 0 || t > 1 )
 			return false;
 		float y = t * L.p1.Y + ( 1 - t ) * L.p2.Y;
-		if ( Sign__RegexMe41315803( y - y1 ) == Sign__RegexMe41315803( y - y2 ) )
+		if ( Sign( y - y1 ) == Sign( y - y2 ) )
 			return false;
 
 		return true;
@@ -220,8 +220,8 @@ namespace CloudberryKingdom
 	{
 		int CurrentSign, TargetSign;
 
-		CurrentSign = Sign__RegexMe41315803( ACy - BCy );
-		TargetSign = Sign__RegexMe41315803( ATy - BTy );
+		CurrentSign = Sign( ACy - BCy );
+		TargetSign = Sign( ATy - BTy );
 		if ( CurrentSign != TargetSign || CurrentSign == 0 && TargetSign == 0 )
 		{
 			if ( __max( ACx2, ATx2 ) < __max( BCx1, BTx1 ) )
