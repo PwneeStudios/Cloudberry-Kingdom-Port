@@ -228,10 +228,10 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = std::static_pointer_cast<Ceiling_Parameter>( Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 		Ceiling_Params->Make = false;
 
-		Style_BLOCK_FILL_TYPE = StyleData::_BlockFillType_INVERTABLE;
-		Style_OVERLAP_CLEANUP_TYPE = StyleData::_OverlapCleanupType_SOPHISTICATED;
+		Style->BlockFillType = StyleData::_BlockFillType_INVERTABLE;
+		Style->OverlapCleanupType = StyleData::_OverlapCleanupType_SOPHISTICATED;
 
-		Style_TOP_SPACE = 50;
+		Style->TopSpace = 50;
 
 		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameter>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		if ( MParams->Aspect == MovingBlock_Parameters::AspectType_TALL )
@@ -245,7 +245,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 	{
 		BobPhsxNormal::ModLadderPiece( piece );
 
-		piece->ElevatorBoxStyle = BlockEmitter_Parameters::BoxStyle_FULL_BOX;
+		piece->ElevatorBoxStyle = BoxStyle_FULL_BOX;
 	}
 
 	bool BobPhsxInvert::IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )

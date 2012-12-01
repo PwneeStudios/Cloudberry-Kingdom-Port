@@ -140,7 +140,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		Vector2 offset = Vector2();
 
 		bool EnsureBoundsAfter = true;
-		switch ( Style_BLOCK_FILL_TYPE )
+		switch ( Style->BlockFillType )
 		{
 			case StyleData::_BlockFillType_REGULAR:
 				size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)) );
@@ -266,7 +266,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				block->Move( Vector2( TR.X + 250 - CurTrX, 0 ) );
 		}
 
-		if ( Style_REMOVE_BLOCK_ON_COL )
+		if ( Style->RemoveBlockOnCol )
 			block->getBlockCore()->GenData.RemoveIfUsed = true;
 
 		if ( Style->RemoveBlockOnOverlap )

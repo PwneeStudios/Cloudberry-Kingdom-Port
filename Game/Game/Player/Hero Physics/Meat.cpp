@@ -422,7 +422,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		float size = 90;
 		bool ModSize = false;
 
-		Style_BLOCK_FILL_TYPE = StyleData::_BlockFillType_SIDEWAYS;
+		Style->BlockFillType = StyleData::_BlockFillType_SIDEWAYS;
 		makeData->BlocksAsIs = true;
 
 		// Don't keep anything extra

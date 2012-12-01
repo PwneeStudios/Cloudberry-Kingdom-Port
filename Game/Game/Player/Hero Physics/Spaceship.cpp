@@ -377,11 +377,11 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		BobPhsx::ModData( makeData, Style );
 
 		Style->MyInitialPlatsType = StyleData::InitialPlatsType_SPACESHIP;
-		Style_TOP_SPACE = 0;
+		Style->TopSpace = 0;
 		makeData->SparsityMultiplier = 1.5f;
 
-		Style_BLOCK_FILL_TYPE = StyleData::_BlockFillType_INVERTABLE;
-		Style_OVERLAP_CLEANUP_TYPE = StyleData::_OverlapCleanupType_SOPHISTICATED;
+		Style->BlockFillType = StyleData::_BlockFillType_INVERTABLE;
+		Style->OverlapCleanupType = StyleData::_OverlapCleanupType_SOPHISTICATED;
 
 		Style->DoorHitBoxPadding = Vector2( -60, 0 );
 
@@ -389,20 +389,20 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		Style->RemovedUnusedOverlappingBlocks = true;
 		Style->RemoveBlockOnOverlap = true;
 
-		Style_BOTTOM_SPACE = 150;
-		Style_TOP_SPACE = 0;
+		Style->BottomSpace = 150;
+		Style->TopSpace = 0;
 
-		Style_SAFE_START_PADDING = 400;
-		Style_SAFE_END_PADDING = -1000;
-		Style_LENGTH_PADDING = 1200;
-		Style_AUTO_OPEN_DOOR = true;
+		Style->SafeStartPadding = 400;
+		Style->SafeEndPadding = -1000;
+		Style->LengthPadding = 1200;
+		Style->AutoOpenDoor = true;
 
 		makeData->TopLikeBottom = true;
 
-		Style_MY_GROUND_TYPE = StyleData::GroundType_VIRGIN_USED;
-		Style_MY_TOP_TYPE = StyleData::GroundType_INVERTED_USED;
-		Style_UPPER_SAFETY_NET_OFFSET = -100;
-		Style_LOWER_SAFETY_NET_OFFSET = -200;
+		Style->MyGroundType = StyleData::GroundType_VIRGIN_USED;
+		Style->MyTopType = StyleData::GroundType_INVERTED_USED;
+		Style->UpperSafetyNetOffset = -100;
+		Style->LowerSafetyNetOffset = -200;
 
 		std::shared_ptr<GhostBlock_Parameters> GhParams = std::static_pointer_cast<GhostBlock_Parameter>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
@@ -412,7 +412,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 	{
 		 BobPhsx::ModLadderPiece( piece );
 
-		piece->ElevatorBoxStyle = BlockEmitter_Parameters::BoxStyle_FULL_BOX;
+		piece->ElevatorBoxStyle = BoxStyle_FULL_BOX;
 	}
 
 	void BobPhsxSpaceship::InitializeInstanceFields()

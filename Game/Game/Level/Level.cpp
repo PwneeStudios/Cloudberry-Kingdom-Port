@@ -1558,7 +1558,7 @@ const float Level::SafetyNetHeight = 124;
 					block->Extend( Side_LEFT, block->getBox()->BL.X + 30 );
 
 				// Randomize height of start
-				block->Extend( Side_TOP, block->getBox()->TR.Y + getRnd()->RndFloat(Style_INITIAL_DOOR_YRANGE) + 0 );
+				block->Extend( Side_TOP, block->getBox()->TR.Y + getRnd()->RndFloat(Style->InitialDoorYRange) + 0 );
 
 				AddBlock( block );
 
@@ -1832,8 +1832,8 @@ int Step1, Level::Step2 = 0;
 		Style->CalcGenParams( CurMakeData->PieceSeed, shared_from_this() );
 
 		// Length padding
-		MaxRight += Style_LENGTH_PADDING;
-		CurMakeData->PieceSeed->End.X += Style_LENGTH_PADDING;
+		MaxRight += Style->LengthPadding;
+		CurMakeData->PieceSeed->End.X += Style->LengthPadding;
 		this->MaxRight = MaxRight;
 
 		// Move camera
@@ -1870,7 +1870,7 @@ int Step1, Level::Step2 = 0;
 			CurMakeData->FinalPlats = false;
 
 		// Initial platform
-		if ( CurMakeData->InitialPlats && Style_MAKE_INITIAL_PLATS )
+		if ( CurMakeData->InitialPlats && Style->MakeInitialPlats )
 		{
 			BL_Cutoff = Vector2( MaxLeft, getMainCamera()->BL.Y );
 			Left = MakeInitialPlats( Vector2( MaxLeft - 10, getMainCamera()->BL.Y + 50 ), Vector2(MaxRight, getMainCamera()->TR.Y - 50), Style );
@@ -1888,18 +1888,18 @@ int Step1, Level::Step2 = 0;
 		{
 			VoidHeight = 40;
 			std::shared_ptr<LavaBlock> lblock = std::static_pointer_cast<LavaBlock>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
-			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 800) + Style_LOWER_SAFETY_NET_OFFSET, MaxLeft - 1000, MaxRight + 1000, 5000 );
+			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 800) + Style->LowerSafetyNetOffset, MaxLeft - 1000, MaxRight + 1000, 5000 );
 			lblock->StampAsUsed( 0 );
 			AddBlock( lblock );
 		}
 
 		// Invert phsx safety blocks
 		if ( CurMakeData->TopLikeBottom )
-			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style_LOWER_SAFETY_NET_OFFSET + 1000 + Style_UPPER_SAFETY_NET_OFFSET ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style_LOWER_SAFETY_NET_OFFSET + 1000), Vector2(SafetyWidth, 500), 2 * SafetyWidth + ExtraSpace, Style_MY_TOP_TYPE );
+			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style->LowerSafetyNetOffset + 1000 + Style->UpperSafetyNetOffset ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style->LowerSafetyNetOffset + 1000), Vector2(SafetyWidth, 500), 2 * SafetyWidth + ExtraSpace, Style->MyTopType );
 		else if ( CurMakeData->TopLikeBottom_Thin )
-			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style_LOWER_SAFETY_NET_OFFSET + 1000 + Style_UPPER_SAFETY_NET_OFFSET ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style_LOWER_SAFETY_NET_OFFSET + 1000), Vector2(100, 500), 2 * 150 + 50, Style_MY_TOP_TYPE );
+			Stage1SafetyNet( Vector2( MaxLeft - 7500, getMainCamera()->TR.Y - VoidHeight - 215 - Style->LowerSafetyNetOffset + 1000 + Style->UpperSafetyNetOffset ), Vector2(MaxRight + 1500, getMainCamera()->TR.Y - VoidHeight - 65 - Style->LowerSafetyNetOffset + 1000), Vector2(100, 500), 2 * 150 + 50, Style->MyTopType );
 
-		LastSafetyBlock = Stage1SafetyNet( Vector2( MaxLeft, getMainCamera()->BL.Y + VoidHeight + 65 + Style_LOWER_SAFETY_NET_OFFSET ), Vector2(MaxRight + 500, getMainCamera()->BL.Y + VoidHeight + 215 + Style_LOWER_SAFETY_NET_OFFSET), Vector2(SafetyWidth, 200 + CurMakeData->PieceSeed->ExtraBlockLength), 2*SafetyWidth + ExtraSpace, Style_MY_GROUND_TYPE );
+		LastSafetyBlock = Stage1SafetyNet( Vector2( MaxLeft, getMainCamera()->BL.Y + VoidHeight + 65 + Style->LowerSafetyNetOffset ), Vector2(MaxRight + 500, getMainCamera()->BL.Y + VoidHeight + 215 + Style->LowerSafetyNetOffset), Vector2(SafetyWidth, 200 + CurMakeData->PieceSeed->ExtraBlockLength), 2*SafetyWidth + ExtraSpace, Style->MyGroundType );
 
 		Sleep();
 
@@ -1925,13 +1925,13 @@ int Step1, Level::Step2 = 0;
 
 
 		// Pre Fill #1
-		FillBL = Vector2( Left + Style_SAFE_START_PADDING, getMainCamera()->BL.Y + 150 + VoidHeight );
+		FillBL = Vector2( Left + Style->SafeStartPadding, getMainCamera()->BL.Y + 150 + VoidHeight );
 
-		Vector2 BL_Bound = Vector2( MaxLeft + 100 + Style_SAFE_START_PADDING, getMainCamera()->BL.Y ); //MainCamera.BLCamBound.Y - 1000);
-		Vector2 TR_Bound = Vector2( MaxRight - 400 + Style_SAFE_END_PADDING, getMainCamera()->TR.Y ); // MainCamera.TRCamBound.Y + 1000);
+		Vector2 BL_Bound = Vector2( MaxLeft + 100 + Style->SafeStartPadding, getMainCamera()->BL.Y ); //MainCamera.BLCamBound.Y - 1000);
+		Vector2 TR_Bound = Vector2( MaxRight - 400 + Style->SafeEndPadding, getMainCamera()->TR.Y ); // MainCamera.TRCamBound.Y + 1000);
 
-		Fill_BL = Vector2( Left, getMainCamera()->BL.Y + Style_BOTTOM_SPACE );
-		Fill_TR = Vector2( MaxRight + 100, getMainCamera()->TR.Y - Style_TOP_SPACE );
+		Fill_BL = Vector2( Left, getMainCamera()->BL.Y + Style->BottomSpace );
+		Fill_TR = Vector2( MaxRight + 100, getMainCamera()->TR.Y - Style->TopSpace );
 		for ( std::vector<AutoGen*>::const_iterator gen = Generators::PreFill_1_Gens.begin(); gen != Generators::PreFill_1_Gens.end(); ++gen )
 		{
 			//gen.PreFill_1(this, BL_Bound, TR_Bound);
@@ -1947,9 +1947,9 @@ int Step1, Level::Step2 = 0;
 		// Stage 1 Random fill
 		if ( BlockParams->DoStage1Fill )
 		{
-			BL_Cutoff = Vector2( Left + Style_SAFE_START_PADDING, getMainCamera()->BL.Y );
-			Fill_BL = Vector2( Left + Style_SAFE_START_PADDING, getMainCamera()->BL.Y + Style_BOTTOM_SPACE );
-			Fill_TR = Vector2( MaxRight + 100 + Style_SAFE_END_PADDING, getMainCamera()->TR.Y - Style_TOP_SPACE );
+			BL_Cutoff = Vector2( Left + Style->SafeStartPadding, getMainCamera()->BL.Y );
+			Fill_BL = Vector2( Left + Style->SafeStartPadding, getMainCamera()->BL.Y + Style->BottomSpace );
+			Fill_TR = Vector2( MaxRight + 100 + Style->SafeEndPadding, getMainCamera()->TR.Y - Style->TopSpace );
 			Stage1RndFill( Fill_BL, Fill_TR, BL_Cutoff, 1 * CurMakeData->SparsityMultiplier );
 
 			// Add a row at the very bottom, just to be safe.
@@ -2081,7 +2081,7 @@ int Step1, Level::Step2 = 0;
 		// Door properties
 		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
 		if ( 0 != door )
-			door->AutoOpen = Style_AUTO_OPEN_DOOR;
+			door->AutoOpen = Style->AutoOpenDoor;
 
 		return false;
 	}
@@ -2205,7 +2205,7 @@ int Step1, Level::Step2 = 0;
 
 	void Level::BlockOverlapCleanup()
 	{
-		if ( Style_OVERLAP_CLEANUP_TYPE == StyleData::_OverlapCleanupType_REGULAR )
+		if ( Style->OverlapCleanupType == StyleData::_OverlapCleanupType_REGULAR )
 			RegularBlockCleanup();
 		else
 			SpaceshipBlockCleanup();
