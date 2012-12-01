@@ -190,7 +190,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 			{
 				if ( Blobs[ i ][ j ] == 0 )
 					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData->Used )
+				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( Blobs[ i ][ j - 1 ] == 0 )
@@ -219,7 +219,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 			{
 				if ( Blobs[ i ][ j ] == 0 )
 					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData->Used )
+				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( j - 1 >= 0 && Blobs[ i ][ j - 1 ] == 0 )
@@ -247,7 +247,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 			{
 				if ( Blobs[ i ][ j ] == 0 )
 					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData->Used )
+				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( Blobs[ i - 1 ][ j ] == 0 && Blobs[ i + 1 ][ j ] == 0 && Blobs[ i ][ j - 1 ] == 0 )

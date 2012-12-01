@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( TunnelObjs[ i ][ j - 1 ] == 0 )
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( j - 1 >= 0 && TunnelObjs[ i ][ j - 1 ] == 0 )
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( TunnelObjs[ i - 1 ][ j ] == 0 && TunnelObjs[ i + 1 ][ j ] == 0 && TunnelObjs[ i ][ j - 1 ] == 0 )

@@ -115,9 +115,9 @@ namespace CloudberryKingdom
 	{
 		level->__block_fromlambda = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		level->__block_fromlambda->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
-		level->__block_fromlambda->getCore()->GenData->RemoveIfUnused = true;
+		level->__block_fromlambda->getCore()->GenData.RemoveIfUnused = true;
 		level->__block_fromlambda->getBlockCore()->BlobsOnTop = false;
-		level->__block_fromlambda->getCore()->GenData->AlwaysLandOn = true;
+		level->__block_fromlambda->getCore()->GenData.AlwaysLandOn = true;
 		level->AddBlock( level->__block_fromlambda );
 	}
 
@@ -561,7 +561,7 @@ namespace CloudberryKingdom
 		// Set flag when a block on the last row is used.
 		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore() == _T("LastRow") )
-				( *block )->getCore()->GenData->OnUsed = std::make_shared<EndReachedLambda>(this);
+				( *block )->getCore()->GenData.OnUsed = std::make_shared<EndReachedLambda>(this);
 
 		// Initial platform
 		if ( CurMakeData->InitialPlats && VStyle->MakeInitialPlats )
@@ -664,14 +664,14 @@ namespace CloudberryKingdom
 
 		// Remove unused objects
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-			if ( !( *obj )->getCore()->GenData->Used && (*obj)->getCore()->GenData->RemoveIfUnused )
+			if ( !( *obj )->getCore()->GenData.Used && (*obj)->getCore()->GenData.RemoveIfUnused )
 				getRecycle()->CollectObject(*obj);
 		CleanObjectList();
 		Sleep();
 
 		// Remove unused blocks
 		for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
-			if ( !( *_block )->getCore()->GenData->Used && (*_block)->getCore()->GenData->RemoveIfUnused )
+			if ( !( *_block )->getCore()->GenData.Used && (*_block)->getCore()->GenData.RemoveIfUnused )
 				getRecycle()->CollectObject(*_block);
 		CleanBlockList();
 		CleanDrawLayers();
@@ -2134,14 +2134,14 @@ int Step1, Level::Step2 = 0;
 
 		// Remove unused objects
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-			if ( !( *obj )->getCore()->GenData->Used && (*obj)->getCore()->GenData->RemoveIfUnused )
+			if ( !( *obj )->getCore()->GenData.Used && (*obj)->getCore()->GenData.RemoveIfUnused )
 				getRecycle()->CollectObject(*obj);
 		CleanObjectList();
 		Sleep();
 
 		// Remove unused blocks
 		for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
-			if ( !( *_block )->getCore()->GenData->Used && (*_block)->getCore()->GenData->RemoveIfUnused )
+			if ( !( *_block )->getCore()->GenData.Used && (*_block)->getCore()->GenData.RemoveIfUnused )
 				getRecycle()->CollectObject(*_block);
 		CleanBlockList();
 		CleanDrawLayers();
@@ -2167,7 +2167,7 @@ int Step1, Level::Step2 = 0;
 		ObjectVec ObjsToClean = ObjectVec();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-			if ( ( *obj )->getCore()->GenData->LimitGeneralDensity )
+			if ( ( *obj )->getCore()->GenData.LimitGeneralDensity )
 				ObjsToClean.push_back( *obj );
 
 		Cleanup( ObjsToClean, std::make_shared<GeneralMinDistLambda>( shared_from_this() ), true, BL_Bound, TR_Bound );
@@ -2192,11 +2192,11 @@ int Step1, Level::Step2 = 0;
 	{
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			if ( ( *obj )->getCore()->GenData->NoBlockOverlap )
+			if ( ( *obj )->getCore()->GenData.NoBlockOverlap )
 			{
 				for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 				{
-					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->getCore()->Data.Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
+					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->getCore()->Data.Position, (*block)->getBox(), (*obj)->getCore()->GenData.OverlapWidth) )
 						getRecycle()->CollectObject(*obj);
 				}
 			}
@@ -2222,12 +2222,12 @@ int Step1, Level::Step2 = 0;
 			{
 				if ( ( *block2 )->getCore()->MarkedForDeletion )
 					break;
-				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
+				if ( ( *block )->getCore()->GenData.Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (*block2)->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData.RemoveIfOverlap && (*block2)->getCore()->GenData.RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
-					switch ( ( *block )->getCore()->GenData->MyOverlapPreference )
+					switch ( ( *block )->getCore()->GenData.MyOverlapPreference )
 					{
 						case GenerationData::OverlapPreference_REMOVE_HIGHER_THAN_ME:
 							if ( ( *block2 )->getBox()->Target.TR::Y > (*block)->getBox()->Target.TR::Y )
@@ -2264,10 +2264,10 @@ int Step1, Level::Step2 = 0;
 
 			for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			{
-				if ( ( *block )->getCore()->GenData->Used || (*block)->getCore()->MarkedForDeletion )
+				if ( ( *block )->getCore()->GenData.Used || (*block)->getCore()->MarkedForDeletion )
 					continue;
 
-				if ( *block != *block2 && ( *block )->getCore()->GenData->RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
+				if ( *block != *block2 && ( *block )->getCore()->GenData.RemoveIfOverlap && (((*block)->getCore()->Data.Position - (*block2)->getCore()->Data.Position)->Length() < CurMakeData->PieceSeed->Style->MinBlockDist || Phsx::BoxBoxOverlap((*block)->getBox(), (*block2)->getBox())) )
 				{
 					getRecycle()->CollectObject(*block);
 				}
@@ -2990,7 +2990,7 @@ int Level::AfterPostDrawLayer = 12;
 				NewObj->Clone( *obj );
 				NewObj->getCore()->BoxesOnly = BoxesOnly;
 
-				( *obj )->getCore()->GenData->OnMarkedForDeletion.reset();
+				( *obj )->getCore()->GenData.OnMarkedForDeletion.reset();
 				getRecycle()->CollectObject(*obj, false);
 			}
 			NewObjects.push_back( NewObj );
@@ -3644,14 +3644,14 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 
 		for ( ObjectVec::const_iterator obj = ObjList.begin(); obj != ObjList.end(); ++obj )
 		{
-			if ( ( *obj )->getCore()->GenData->EnforceBounds )
+			if ( ( *obj )->getCore()->GenData.EnforceBounds )
 			if ( ( *obj )->getCore()->Data.Position.X > TR.X || (*obj)->getCore()->Data.Position.X < BL.X || (*obj)->getCore()->Data.Position.Y > TR.Y || (*obj)->getCore()->Data.Position.Y < BL.Y )
 				getRecycle()->CollectObject(*obj);
 
 			if ( ( *obj )->getCore()->MarkedForDeletion )
 				continue;
 
-			if ( !( *obj )->getCore()->GenData->LimitDensity )
+			if ( !( *obj )->getCore()->GenData.LimitDensity )
 				continue;
 
 			CheckAgainst( *obj, ObjList, MinDistFunc, metric, MustBeDifferent );
@@ -3675,7 +3675,7 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 	{
 		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
-			if ( !( *obj2 )->getCore()->GenData->LimitDensity )
+			if ( !( *obj2 )->getCore()->GenData.LimitDensity )
 				return;
 
 			if ( obj->getCore()->IsAssociatedWith(*obj2) )
@@ -3694,11 +3694,11 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 				{
 					int Choice = 0; // 0 -> Remove first object, 1 -> Remove second object
 
-					if ( obj->getCore()->GenData.KeepIfUnused && (*obj2)->getCore()->GenData->KeepIfUnused )
+					if ( obj->getCore()->GenData.KeepIfUnused && (*obj2)->getCore()->GenData.KeepIfUnused )
 						return;
 					else if ( obj->getCore()->GenData.KeepIfUnused )
 						Choice = 1;
-					else if ( ( *obj2 )->getCore()->GenData->KeepIfUnused )
+					else if ( ( *obj2 )->getCore()->GenData.KeepIfUnused )
 						Choice = 0;
 					else if ( getRnd()->Rnd->NextDouble() > ::5 )
 						Choice = 1;
@@ -3724,11 +3724,11 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 				{
 					int Choice = 0; // 0 -> Remove first object, 1 -> Remove second object
 
-					if ( obj->getCore()->GenData.KeepIfUnused && (*obj2)->getCore()->GenData->KeepIfUnused )
+					if ( obj->getCore()->GenData.KeepIfUnused && (*obj2)->getCore()->GenData.KeepIfUnused )
 						return;
 					else if ( obj->getCore()->GenData.KeepIfUnused )
 						Choice = 1;
-					else if ( ( *obj2 )->getCore()->GenData->KeepIfUnused )
+					else if ( ( *obj2 )->getCore()->GenData.KeepIfUnused )
 						Choice = 0;
 					else if ( getRnd()->Rnd->NextDouble() > ::5 )
 						Choice = 1;

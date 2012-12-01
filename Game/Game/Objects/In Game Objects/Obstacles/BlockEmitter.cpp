@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	void BlockEmitter::OnUsed()
 	{
 		for ( std::vector<MovingPlatform*>::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
-			( *platform )->getCore()->GenData->Used = true;
+			( *platform )->getCore()->GenData.Used = true;
 	}
 
 	void BlockEmitter::OnMarkedForDeletion()

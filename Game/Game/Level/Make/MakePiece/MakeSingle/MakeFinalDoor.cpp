@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		float NewRight = MyLevel->VanillaFill( BL, TR, 400, Spacing, std::make_shared<VanillaFillEndPieceLambda>(), std::make_shared<ModBlockLambda>(this) );
 
 		// Make lowest block a safety (we'll place the door here if no other block is used)
-		FinalBlocks[ 0 ]->getCore()->GenData->KeepIfUnused = true;
+		FinalBlocks[ 0 ]->getCore()->GenData.KeepIfUnused = true;
 		FinalBlocks[ 0 ]->getBlockCore()->NonTopUsed = true;
 
 		// New style end blocks
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if ( FinalBlocks[ 0 ]->getCore()->GenData->KeepIfUnused && !FinalBlocks[ 0 ]->getCore()->GenData->Used )
+			if ( FinalBlocks[ 0 ]->getCore()->GenData.KeepIfUnused && !FinalBlocks[ 0 ]->getCore()->GenData.Used )
 				FinalBlocks[ 0 ]->CollectSelf();
 		}
 

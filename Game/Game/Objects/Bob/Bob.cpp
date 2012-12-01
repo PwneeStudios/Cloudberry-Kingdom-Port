@@ -1755,7 +1755,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 					ColType Col = Phsx::CollisionTest( Box, ( *block )->getBox() );
 					bool Overlap;
-					if ( !( *block )->getBox()->TopOnly || (*block)->getCore()->GenData->RemoveIfOverlap )
+					if ( !( *block )->getBox()->TopOnly || (*block)->getCore()->GenData.RemoveIfOverlap )
 						Overlap = Phsx::BoxBoxOverlap( Box, ( *block )->getBox() );
 					else
 						Overlap = false;
@@ -1816,7 +1816,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 						if ( MakeTopOnly && ( *block )->getBlockCore()->DeleteIfTopOnly )
 						{
-							if ( ( *block )->getCore()->GenData->Used )
+							if ( ( *block )->getCore()->GenData.Used )
 								MakeTopOnly = Delete = false;
 							else
 								Delete = true;
@@ -1833,7 +1833,7 @@ float Bob::Guide_h = 1 / GuideLength;
 						// Don't land on the very edge of the block
 						if ( !Delete && !MyPhsx->OnGround )
 						{
-							float Safety = ( *block )->getBlockCore()->GenData->EdgeSafety;
+							float Safety = ( *block )->getBlockCore()->GenData.EdgeSafety;
 							if ( Box->BL.X > ( *block )->getBox()->TR->X - Safety || Box->TR.X < (*block)->getBox()->BL->X + Safety )
 							{
 								Delete = true;
@@ -1843,20 +1843,20 @@ float Bob::Guide_h = 1 / GuideLength;
 						// Don't land on a block that says not to
 						bool DesiresDeletion = false;
 						{
-							if ( ( *block )->getCore()->GenData->TemporaryNoLandZone || !(*block)->getCore()->GenData->Used && !(*block)->PermissionToUse() )
+							if ( ( *block )->getCore()->GenData.TemporaryNoLandZone || !(*block)->getCore()->GenData.Used && !(*block)->PermissionToUse() )
 								DesiresDeletion = Delete = true;
 						}
 
 
-						if ( ( *block )->getCore()->GenData->Used )
+						if ( ( *block )->getCore()->GenData.Used )
 							Delete = false;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData->AlwaysLandOn && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
+						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysLandOn && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
 							Delete = false;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData->AlwaysLandOn_Reluctantly && WantsToLand_Reluctant && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
+						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysLandOn_Reluctantly && WantsToLand_Reluctant && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
 							Delete = false;
-						if ( Overlap && ( *block )->getCore()->GenData->RemoveIfOverlap )
+						if ( Overlap && ( *block )->getCore()->GenData.RemoveIfOverlap )
 							Delete = true;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData->AlwaysUse && !(*block)->getCore()->MarkedForDeletion )
+						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysUse && !(*block)->getCore()->MarkedForDeletion )
 							Delete = false;
 
 						// Shift bottom of block if necessary
@@ -1892,7 +1892,7 @@ float Bob::Guide_h = 1 / GuideLength;
 								// We changed the blocks property, so Bob may no longer be on a collision course with it. Check to see if he is before marking block as used.
 								if ( !( *block )->getBox()->TopOnly || Col == ColType_TOP )
 								{
-									if ( ( *block )->getCore()->GenData->RemoveIfUsed )
+									if ( ( *block )->getCore()->GenData.RemoveIfUsed )
 										Delete = true;
 
 									if ( !Delete )
@@ -1901,7 +1901,7 @@ float Bob::Guide_h = 1 / GuideLength;
 										( *block )->StampAsUsed( CurPhsxStep );
 
 										// Normal blocks delete surrounding blocks when stamped as used
-										if ( ( *block )->getCore()->GenData->DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(*block) != 0 )
+										if ( ( *block )->getCore()->GenData.DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(*block) != 0 )
 											for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 											{
 												std::shared_ptr<NormalBlock> Normal = std::dynamic_pointer_cast<NormalBlock>( *nblock );
@@ -1930,7 +1930,7 @@ float Bob::Guide_h = 1 / GuideLength;
 							}
 
 							Delete = false;
-							if ( ( *block )->getCore()->GenData->RemoveIfOverlap )
+							if ( ( *block )->getCore()->GenData.RemoveIfOverlap )
 							{
 								if ( Phsx::BoxBoxOverlap( Box, ( *block )->getBox() ) )
 									Delete = true;
@@ -1977,7 +1977,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					// Collision check
 					ColType Col = Phsx::CollisionTest( Box, ( *block )->getBox() );
 					bool Overlap = false;
-					if ( !( *block )->getBox()->TopOnly || (*block)->getCore()->GenData->RemoveIfOverlap )
+					if ( !( *block )->getBox()->TopOnly || (*block)->getCore()->GenData.RemoveIfOverlap )
 						Overlap = Phsx::BoxBoxOverlap( Box, ( *block )->getBox() );
 
 					if ( Col != ColType_NO_COL || Overlap )
@@ -2007,7 +2007,7 @@ float Bob::Guide_h = 1 / GuideLength;
 								// We changed the blocks property, so Bob may no longer be on a collision course with it. Check to see if he is before marking block as used.
 								if ( !( *block )->getBox()->TopOnly || Col == ColType_TOP )
 								{
-									if ( ( *block )->getCore()->GenData->RemoveIfUsed )
+									if ( ( *block )->getCore()->GenData.RemoveIfUsed )
 										Delete = true;
 
 									if ( !Delete )
