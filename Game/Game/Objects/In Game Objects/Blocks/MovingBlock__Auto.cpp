@@ -158,7 +158,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 
 		Vector2 offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
 
-		std::shared_ptr<MovingBlock> mblock = static_cast<MovingBlock*>( level->getRecycle()->GetObject(ObjectType_MOVING_BLOCK, true) );
+		std::shared_ptr<MovingBlock> mblock = std::static_pointer_cast<MovingBlock>( level->getRecycle()->GetObject(ObjectType_MOVING_BLOCK, true) );
 		mblock->Init( pos + offset, size, level );
 
 		mblock->Period = static_cast<int>( Params->Period.GetVal( pos ) );

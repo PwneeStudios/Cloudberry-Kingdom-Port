@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<ConveyorBlock> BlockA = dynamic_cast<ConveyorBlock*>( A );
+		std::shared_ptr<ConveyorBlock> BlockA = std::dynamic_pointer_cast<ConveyorBlock>( A );
 
 		Speed = BlockA->Speed;
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size );

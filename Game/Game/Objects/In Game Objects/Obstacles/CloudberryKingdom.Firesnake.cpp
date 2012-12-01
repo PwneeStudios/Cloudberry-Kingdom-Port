@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Firesnake> FiresnakeA = dynamic_cast<Firesnake*>( A );
+		std::shared_ptr<Firesnake> FiresnakeA = std::dynamic_pointer_cast<Firesnake>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		Size = FiresnakeA->Size;

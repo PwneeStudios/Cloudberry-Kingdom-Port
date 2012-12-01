@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::IsShowGuidLambda::Apply( const std::shared_ptr<GameObject> &obj )
 	{
-		return dynamic_cast<ShowGuide*>( obj ) != 0;
+		return std::dynamic_pointer_cast<ShowGuide>( obj ) != 0;
 	}
 
 	HelpMenu::IsSlowMoLambda::IsSlowMoLambda()
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::IsSlowMoLambda::Apply( const std::shared_ptr<GameObject> &obj )
 	{
-		return dynamic_cast<SlowMo*>( obj ) != 0;
+		return std::dynamic_pointer_cast<SlowMo>( obj ) != 0;
 	}
 
 	HelpMenu::Toggle_ShowPathHelper::Toggle_ShowPathHelper( const std::shared_ptr<HelpMenu> &hm )
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 	{
 		for ( GameObjVec::const_iterator go = hm->MyGame->MyGameObjects.begin(); go != hm->MyGame->MyGameObjects.end(); ++go )
 		{
-			if ( dynamic_cast<ShowGuide*>( *go ) != 0 )
+			if ( std::dynamic_pointer_cast<ShowGuide>( *go ) != 0 )
 				( *go )->Release();
 		}
 	}
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::Toggle_SloMoHelperPredicate::Apply( const std::shared_ptr<GameObject> &match )
 	{
-		return dynamic_cast<SlowMo*>( match ) != 0;
+		return std::dynamic_pointer_cast<SlowMo>( match ) != 0;
 	}
 
 	HelpMenu::Toggle_SloMoHelper::Toggle_SloMoHelper( const std::shared_ptr<HelpMenu> &hm )
@@ -279,7 +279,7 @@ namespace CloudberryKingdom
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
-				if ( dynamic_cast<ShowGuide*>( *obj ) != 0 )
+				if ( std::dynamic_pointer_cast<ShowGuide>( *obj ) != 0 )
 					( *obj )->Release();
 			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( shared_from_this() ) );
 		}

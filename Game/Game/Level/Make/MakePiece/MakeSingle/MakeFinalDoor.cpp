@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = static_cast<CameraZone*>( Tools::Find( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 500;
 

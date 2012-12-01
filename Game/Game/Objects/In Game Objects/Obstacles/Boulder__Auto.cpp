@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 
 	void Boulder_AutoGen::BoulderFillLambda::Apply( const Vector2 &pos )
 	{
-		std::shared_ptr<Boulder> floater = static_cast<Boulder*>( autogen->CreateAt( level, pos ) );
+		std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( autogen->CreateAt( level, pos ) );
 		Vector2 Padding = Vector2( 200, 375 );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
@@ -123,7 +123,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		{
 			Vector2 pos = Spacing * Vector2( i, j ) + BL;
 
-			std::shared_ptr<Boulder> floater = static_cast<Boulder*>( CreateAt( level, pos ) );
+			std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( CreateAt( level, pos ) );
 			floater->Offset = 0;
 			floater->getCore()->GenData.KeepIfUnused = true;
 			floater->getCore()->GenData.EnforceBounds = false;
@@ -138,7 +138,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<Boulder> NewFloater = static_cast<Boulder*>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
+		std::shared_ptr<Boulder> NewFloater = std::static_pointer_cast<Boulder>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
 		NewFloater->Init( pos, level );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
@@ -207,7 +207,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 			int Delay = static_cast<int>( Params->FloaterPlaceDelay.GetVal( pos ) );
 			if ( Step > 90 && Step % Delay == 0 )
 			{
-				std::shared_ptr<Boulder> floater = static_cast<Boulder*>( CreateAt( level, CalcPos( *bob, BL, TR, level->getRnd() ) ) );
+				std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( CreateAt( level, CalcPos( *bob, BL, TR, level->getRnd() ) ) );
 				Vector2 Padding = Vector2( 200, 375 );
 
 				if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )

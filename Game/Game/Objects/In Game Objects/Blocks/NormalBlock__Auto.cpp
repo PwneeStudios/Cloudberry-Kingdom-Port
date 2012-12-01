@@ -103,7 +103,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		if ( !Params->Make )
 			return 0;
 
-		std::shared_ptr<NormalBlock> block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		std::shared_ptr<NormalBlock> block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		std::shared_ptr<BlockData> core = block->getBlockCore();
 		block->Init( pos, Vector2( 50, 50 ), level->getMyTileSetInfo() );
 
@@ -152,7 +152,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
 
-				block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( pos + offset, size, level->getMyTileSetInfo() );
 				block->Extend( Side_BOTTOM, block->getBox()->BL.Y - level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -166,7 +166,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
 
-				block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( pos + offset, size, level->getMyTileSetInfo() );
 				block->MakeTopOnly();
 
@@ -184,7 +184,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
 
-					block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_BOTTOM, block->getBox()->BL.Y - level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -201,7 +201,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
 
-					block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_TOP, block->getBox()->TR.Y + level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -220,7 +220,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 
 					offset = Vector2( level->getRnd()->Rnd->Next(0, 0) - size.X, level->getRnd()->Rnd->Next(0, 0) );
 
-					block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_RIGHT;
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_LEFT, block->getBox()->BL.X - level->CurMakeData->PieceSeed->ExtraBlockLength );
@@ -231,7 +231,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 
 					offset = Vector2( level->getRnd()->Rnd->Next(0, 0) + size.X, level->getRnd()->Rnd->Next(0, 0) );
 
-					block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_LEFT;
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_RIGHT, block->getBox()->TR.X + level->CurMakeData->PieceSeed->ExtraBlockLength );

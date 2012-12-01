@@ -893,7 +893,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 					if ( info->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 					{
 						WasReadable = true;
-						std::shared_ptr<IReadWrite> rw = static_cast<IReadWrite*>( info->GetValue( obj ) );
+						std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( info->GetValue( obj ) );
 						rw->Read( reader );
 						info->SetValue( obj, rw );
 					}
@@ -905,7 +905,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 						{
 							WasReadable = true;
 
-							std::shared_ptr<System::Collections::IList> list = dynamic_cast<System::Collections::IList*>( info->GetValue( obj ) );
+							std::shared_ptr<System::Collections::IList> list = std::dynamic_pointer_cast<System::Collections::IList>( info->GetValue( obj ) );
 
 							std::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
 							if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
@@ -974,8 +974,8 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 
 					std::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
 					//ReadFields(newobj, reader);
-					if ( dynamic_cast<IReadWrite*>( newobj ) != 0 )
-						( static_cast<IReadWrite*>( newobj ) )->Read( reader );
+					if ( std::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
+						( std::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
 					else
 						ReadFields( newobj, reader );
 					list->Add( newobj );
@@ -1055,7 +1055,7 @@ int Tools::WriteObjId = 0;
 				// EzTexture
 				else if ( ( *info )->FieldType == EzTexture::typeid )
 				{
-					std::shared_ptr<EzTexture> texture = static_cast<EzTexture*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<EzTexture> texture = std::static_pointer_cast<EzTexture>( ( *info )->GetValue( obj ) );
 					if ( texture == 0 )
 						continue;
 					else
@@ -1065,7 +1065,7 @@ int Tools::WriteObjId = 0;
 				// EzEffect
 				else if ( ( *info )->FieldType == EzEffect::typeid )
 				{
-					std::shared_ptr<EzEffect> effect = static_cast<EzEffect*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<EzEffect> effect = std::static_pointer_cast<EzEffect>( ( *info )->GetValue( obj ) );
 					if ( effect == 0 )
 						continue;
 					else
@@ -1092,7 +1092,7 @@ int Tools::WriteObjId = 0;
 				}
 				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 				{
-					std::shared_ptr<IReadWrite> rw = static_cast<IReadWrite*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( ( *info )->GetValue( obj ) );
 					writer->WriteLine( WhiteSpace + ( *info )->Name );
 					rw->Write( writer );
 					writer->WriteLine( WhiteSpace + _T( "End" ) );

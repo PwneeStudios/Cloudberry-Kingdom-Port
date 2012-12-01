@@ -98,7 +98,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 
 	void Fireball_AutoGen::inner( const std::shared_ptr<Fireball_Parameters> &Params, const std::shared_ptr<Level> &level, Vector2 pos, int i, LevelGeometry Geometry )
 	{
-		std::shared_ptr<Fireball> emitter = static_cast<Fireball*>( CreateAt( level, pos ) );
+		std::shared_ptr<Fireball> emitter = std::static_pointer_cast<Fireball>( CreateAt( level, pos ) );
 
 		float Speed = ( i == 0 ? 1 : -1 );
 
@@ -178,7 +178,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 	{
 		std::shared_ptr<Fireball_Parameters> Params = GetParams( level );
 
-		std::shared_ptr<Fireball> emitter = static_cast<Fireball*>( level->getRecycle()->GetObject(ObjectType_FIREBALL, true) );
+		std::shared_ptr<Fireball> emitter = std::static_pointer_cast<Fireball>( level->getRecycle()->GetObject(ObjectType_FIREBALL, true) );
 
 		emitter->Init( PhsxData(), level );
 

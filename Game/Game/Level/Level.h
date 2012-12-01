@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		public:
 			MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:

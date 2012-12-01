@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::BringLeaderboard()
 	{
-		std::shared_ptr<HeroItem> item = dynamic_cast<HeroItem*>( HeroSelect->MyMenu->getCurItem() );
+		std::shared_ptr<HeroItem> item = std::dynamic_pointer_cast<HeroItem>( HeroSelect->MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
 

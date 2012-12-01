@@ -1070,11 +1070,11 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 			// Make blocks in the current level reset their art to reflect possible changes in the reloaded tileset info.
 			for ( BlockVec::const_iterator block = Tools::CurLevel->Blocks.begin(); block != Tools::CurLevel->Blocks.end(); ++block )
 			{
-				std::shared_ptr<NormalBlock> nblock = dynamic_cast<NormalBlock*>( *block );
+				std::shared_ptr<NormalBlock> nblock = std::dynamic_pointer_cast<NormalBlock>( *block );
 				if ( 0 != nblock )
 					nblock->ResetPieces();
 
-				std::shared_ptr<MovingBlock> mblock = dynamic_cast<MovingBlock*>( *block );
+				std::shared_ptr<MovingBlock> mblock = std::dynamic_pointer_cast<MovingBlock>( *block );
 				if ( 0 != mblock )
 					mblock->ResetPieces();
 			}

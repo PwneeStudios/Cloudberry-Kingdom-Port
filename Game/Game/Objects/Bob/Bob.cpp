@@ -122,7 +122,7 @@ int Bob::ImmortalLength = 55;
 			{
 				if ( ( *quad )->Name->find( _T( "Hat_" ) ) != string::npos )
 				{
-					std::shared_ptr<Quad> _Quad = dynamic_cast<Quad*>( *quad );
+					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 					if ( std::wstring::Compare( ( *quad )->Name, scheme.HatData->QuadName, StringComparison::OrdinalIgnoreCase ) == 0 )
 					{
@@ -141,7 +141,7 @@ int Bob::ImmortalLength = 55;
 
 				if ( ( *quad )->Name->find( _T( "Facial_" ) ) != string::npos )
 				{
-					std::shared_ptr<Quad> _Quad = dynamic_cast<Quad*>( *quad );
+					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 					if ( !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && string::Compare( ( *quad )->Name, scheme.BeardData->QuadName, StringComparison::OrdinalIgnoreCase ) == 0 )
 					{
@@ -1013,7 +1013,7 @@ float Bob::Guide_h = 1 / GuideLength;
 				else
 				{
 					PlayerObject->Update( 0 );
-					std::shared_ptr<Quad> w = static_cast<Quad*>( PlayerObject->FindQuad( _T( "Wheel" ) ) );
+					std::shared_ptr<Quad> w = std::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Wheel" ) ) );
 					std::shared_ptr<CloudberryKingdom::Quad> p = PlayerObject->ParentQuad;
 					Vector2 hold = p->Center->Pos;
 
@@ -1300,7 +1300,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			temp = std::make_shared<ObjectVector>();
 
 		if ( Head == 0 )
-			Head = static_cast<Quad*>( PlayerObject->FindQuad( _T( "Head" ) ) );
+			Head = std::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Head" ) ) );
 		temp->Pos = Head->Center->Pos;
 
 		if ( MyPhsx->Ducking )
@@ -1740,12 +1740,12 @@ float Bob::Guide_h = 1 / GuideLength;
 					}
 
 					// For lava blocks...
-					if ( dynamic_cast<LavaBlock*>( *block ) != 0 )
+					if ( std::dynamic_pointer_cast<LavaBlock>( *block ) != 0 )
 					{
 						// If the computer gets close, move the lava block down
 						if ( Box->Current->TR.X > ( *block )->getBox()->Current->BL->X && Box->Current->BL.X < (*block)->getBox()->Current->TR->X )
 						{
-							getCore()->MyLevel->PushLava(Box->Target->BL.Y - 60, dynamic_cast<LavaBlock*>(*block));
+							getCore()->MyLevel->PushLava(Box->Target->BL.Y - 60, std::dynamic_pointer_cast<LavaBlock>(*block));
 						}
 						continue;
 					}
@@ -1788,7 +1788,7 @@ float Bob::Guide_h = 1 / GuideLength;
 						if ( Col == ColType_BOTTOM )
 							Delete = true;
 						//if (CurPhsxStep < 2) Delete = true;
-						if ( Overlap && Col == ColType_NO_COL && !( *block )->getBox()->TopOnly && !(dynamic_cast<NormalBlock*>(*block) != 0 && !(*block)->getBlockCore()->NonTopUsed) )
+						if ( Overlap && Col == ColType_NO_COL && !( *block )->getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>(*block) != 0 && !(*block)->getBlockCore()->NonTopUsed) )
 							Delete = true;
 						if ( ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP )
 							MakeTopOnly = true;
@@ -1801,7 +1801,7 @@ float Bob::Guide_h = 1 / GuideLength;
 							//MakeTopOnly = false;
 							//Delete = true;
 						}
-						if ( ( *block )->getBlockCore()->NonTopUsed || !(dynamic_cast<NormalBlock*>(*block) != 0) )
+						if ( ( *block )->getBlockCore()->NonTopUsed || !(std::dynamic_pointer_cast<NormalBlock>(*block) != 0) )
 							if ( MakeTopOnly )
 							{
 								MakeTopOnly = false;
@@ -1825,7 +1825,7 @@ float Bob::Guide_h = 1 / GuideLength;
 						if ( MakeTopOnly )
 						{
 							( *block )->Extend( Side_BOTTOM, __max( ( *block )->getBox()->Current->BL->Y, __max(Box->Target->TR.Y, Box->Current->TR.Y) + CeilingParams->BufferSize.GetVal(getCore()->Data.Position) ) );
-							( static_cast<NormalBlock*>( *block ) )->CheckHeight();
+							( std::static_pointer_cast<NormalBlock>( *block ) )->CheckHeight();
 							if ( Col != ColType_TOP )
 								Col = ColType_NO_COL;
 						}
@@ -1864,10 +1864,10 @@ float Bob::Guide_h = 1 / GuideLength;
 						{
 							float NewBottom = __max( ( *block )->getBox()->Current->BL->Y, __max(Box->Target->TR.Y, Box->Current->TR.Y) + CeilingParams->BufferSize.GetVal(getCore()->Data.Position) );
 
-							if ( dynamic_cast<NormalBlock*>( *block ) != 0 && ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP && !( *block )->getBlockCore()->NonTopUsed )
+							if ( std::dynamic_pointer_cast<NormalBlock>( *block ) != 0 && ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP && !( *block )->getBlockCore()->NonTopUsed )
 							{
 								( *block )->Extend( Side_BOTTOM, NewBottom );
-								( static_cast<NormalBlock*>( *block ) )->CheckHeight();
+								( std::static_pointer_cast<NormalBlock>( *block ) )->CheckHeight();
 							}
 
 							// Delete the box if it was made TopOnly but TopOnly is not allowed for this block
@@ -1901,10 +1901,10 @@ float Bob::Guide_h = 1 / GuideLength;
 										( *block )->StampAsUsed( CurPhsxStep );
 
 										// Normal blocks delete surrounding blocks when stamped as used
-										if ( ( *block )->getCore()->GenData->DeleteSurroundingOnUse && dynamic_cast<NormalBlock*>(*block) != 0 )
+										if ( ( *block )->getCore()->GenData->DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(*block) != 0 )
 											for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 											{
-												std::shared_ptr<NormalBlock> Normal = dynamic_cast<NormalBlock*>( *nblock );
+												std::shared_ptr<NormalBlock> Normal = std::dynamic_pointer_cast<NormalBlock>( *nblock );
 												if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
 													if ( !Normal->getCore()->GenData.Used && abs(Normal->getBox()->Current->TR.Y - (*block)->getBox()->TR->Y) < 15 && !(Normal->getBox()->Current->TR.X < (*block)->getBox()->Current->BL->X - 350 || Normal->getBox()->Current->BL.X > (*block)->getBox()->Current->TR->X + 350) )
 													{
@@ -1914,10 +1914,10 @@ float Bob::Guide_h = 1 / GuideLength;
 											}
 
 										// Ghost blocks delete surrounding blocks when stamped as used
-										if ( dynamic_cast<GhostBlock*>( *block ) != 0 )
+										if ( std::dynamic_pointer_cast<GhostBlock>( *block ) != 0 )
 											for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 											{
-												std::shared_ptr<GhostBlock> ghost = dynamic_cast<GhostBlock*>( *gblock );
+												std::shared_ptr<GhostBlock> ghost = std::dynamic_pointer_cast<GhostBlock>( *gblock );
 												if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
 													if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - (*block)->getCore()->Data.Position)->Length() < 200 )
 													{

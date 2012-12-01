@@ -86,7 +86,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		q->MyEffect = Tools::BasicEffect;
 		q->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 		q->SetColor( Color::White );
-		std::shared_ptr<Quad> _quad = dynamic_cast<Quad*>( q );
+		std::shared_ptr<Quad> _quad = std::dynamic_pointer_cast<Quad>( q );
 		q->TextureAnim = std::make_shared<AnimationData_Texture>();
 		q->TextureAnim->Anims = std::vector<OneAnim_Texture>( 20 );
 
@@ -504,7 +504,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		NewBob->CanHaveHat = false;
 		NewBob->PlayerObject->ParentQuad->MyEffect = Tools::BasicEffect;
 
-		std::shared_ptr<Quad> spaceship = static_cast<Quad*>( NewBob->PlayerObject->QuadList[ 1 ] );
+		std::shared_ptr<Quad> spaceship = std::static_pointer_cast<Quad>( NewBob->PlayerObject->QuadList[ 1 ] );
 		spaceship->MyTexture = Tools::Texture( _T( "Spaceship_Paper" ) );
 		spaceship->Resize();
 		NewBob->PlayerObject->QuadList[ 2 ]->Show = false;

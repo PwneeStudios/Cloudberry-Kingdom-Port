@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::Emit( int offset )
 	{
-		std::shared_ptr<MovingPlatform> block = static_cast<MovingPlatform*>( getCore()->getRecycle()->GetObject(ObjectType_MOVING_PLATFORM, getCore()->BoxesOnly) );
+		std::shared_ptr<MovingPlatform> block = std::static_pointer_cast<MovingPlatform>( getCore()->getRecycle()->GetObject(ObjectType_MOVING_PLATFORM, getCore()->BoxesOnly) );
 
 		block->Parent = this;
 		block->Init( EmitData.Position, Size, getMyLevel(), MyBoxStyle );
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<BlockEmitter> EmitterA = dynamic_cast<BlockEmitter*>( A );
+		std::shared_ptr<BlockEmitter> EmitterA = std::dynamic_pointer_cast<BlockEmitter>( A );
 		Init( A->getPos(), A->getMyLevel(), EmitterA->MyBoxStyle );
 
 		EmitData = EmitterA->EmitData;

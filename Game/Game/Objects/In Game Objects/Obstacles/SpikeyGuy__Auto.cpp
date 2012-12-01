@@ -48,8 +48,8 @@ namespace CloudberryKingdom
 
 	Vector2 SpikeyGuy_AutoGen::SpikeyGuyCleanupMetricLambda::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
 	{
-		std::shared_ptr<SpikeyGuy> floater_A = dynamic_cast<SpikeyGuy*>( A );
-		std::shared_ptr<SpikeyGuy> floater_B = dynamic_cast<SpikeyGuy*>( B );
+		std::shared_ptr<SpikeyGuy> floater_A = std::dynamic_pointer_cast<SpikeyGuy>( A );
+		std::shared_ptr<SpikeyGuy> floater_B = std::dynamic_pointer_cast<SpikeyGuy>( B );
 		return CoreMath::Abs( floater_A->PivotPoint - floater_B->PivotPoint );
 	}
 
@@ -89,7 +89,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<SpikeyGuy> NewFloater = static_cast<SpikeyGuy*>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
+		std::shared_ptr<SpikeyGuy> NewFloater = std::static_pointer_cast<SpikeyGuy>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
 		NewFloater->Length = 650;
 		NewFloater->Init( pos, level );
 
@@ -112,7 +112,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 	{
 		for ( int j = 0; j < Num; j++ )
 		{
-			std::shared_ptr<SpikeyGuy> floater = static_cast<SpikeyGuy*>( CreateAt( level, Center ) );
+			std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Center ) );
 
 			floater->Period = 3 * floater->Period / 2;
 			floater->Offset = static_cast<int>( j * ( static_cast<float>( floater->Period ) / Num ) );
@@ -211,7 +211,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )
 						continue;
 
-					std::shared_ptr<SpikeyGuy> floater = static_cast<SpikeyGuy*>( CreateAt( level, Vector2( x, y ) ) );
+					std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Vector2( x, y ) ) );
 
 					floater->SetParentBlock( *block );
 

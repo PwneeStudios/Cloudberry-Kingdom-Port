@@ -94,7 +94,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 			pos = Params->SnapToGrid( pos );
 
 		// Get the new Coin
-		std::shared_ptr<Coin> NewCoin = static_cast<Coin*>( level->getRecycle()->GetObject(ObjectType_COIN, true) );
+		std::shared_ptr<Coin> NewCoin = std::static_pointer_cast<Coin>( level->getRecycle()->GetObject(ObjectType_COIN, true) );
 
 		NewCoin->getCore()->GenData.Used = true;
 		NewCoin->getCore()->GenData.LimitGeneralDensity = false;
@@ -167,12 +167,12 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 			{
 				case Coin_Parameters::FillTypes_REGULAR:
 					if ( Params->Regular_ReadyToPlace( level, *bob, Step ) )
-						coin = static_cast<Coin*>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
+						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
 					break;
 
 				case Coin_Parameters::FillTypes_RUSH:
 					if ( Step % 15 == 0 )
-						coin = static_cast<Coin*>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
+						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
 					break;
 
 				case Coin_Parameters::FillTypes_COIN_GRAB:
@@ -181,9 +181,9 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 						Params->CoinPlaced = true;
 						( *bob )->LastPlacedCoin = ( *bob )->getPos();
 
-						coin = static_cast<Coin*>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_HIGH ) ) );
-						coin = static_cast<Coin*>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_CENTER ), false ) );
-						coin = static_cast<Coin*>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_LOW ), false ) );
+						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_HIGH ) ) );
+						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_CENTER ), false ) );
+						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_LOW ), false ) );
 					}
 					break;
 

@@ -397,7 +397,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 
 		// Scroll bar
 	#if defined(PC_VERSION)
-		bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), shared_from_this() );
+		bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), shared_from_this() );
 		bar->setBarPos( BarPos );
 		MyGame->AddGameObject( bar );
 		MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

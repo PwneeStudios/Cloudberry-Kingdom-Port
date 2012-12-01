@@ -75,7 +75,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 
 		speed *= -1; //level.Rnd.RndBit();
 
-		std::shared_ptr<ConveyorBlock> conveyblock = static_cast<ConveyorBlock*>( level->getRecycle()->GetObject(ObjectType_CONVEYOR_BLOCK, false) );
+		std::shared_ptr<ConveyorBlock> conveyblock = std::static_pointer_cast<ConveyorBlock>( level->getRecycle()->GetObject(ObjectType_CONVEYOR_BLOCK, false) );
 		conveyblock->Init( pos, size );
 		conveyblock->Speed = speed;
 

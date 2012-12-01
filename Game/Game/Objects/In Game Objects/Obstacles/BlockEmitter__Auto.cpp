@@ -101,7 +101,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 			{
 				if ( Params->Dist.GetVal( Pos ) < Params->StepCutoff )
 				{
-					std::shared_ptr<BlockEmitter> bm = static_cast<BlockEmitter*>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+					std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 					bm->Init( Pos, level, level->CurMakeData->PieceSeed->ElevatorBoxStyle );
 
 					float Vel = GetVel( Params, Pos );
@@ -154,7 +154,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 
 					if ( DistAdd < Params->StepCutoff )
 					{
-						std::shared_ptr<BlockEmitter> bm = static_cast<BlockEmitter*>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+						std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 
 						float Vel = GetVel( Params, Pos );
 

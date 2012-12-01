@@ -139,7 +139,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 			{
 				//if (xdif > 15)
 			{
-					std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+					std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 					spike->Init( Vector2(), level );
 
 					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 55;
@@ -186,7 +186,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 						if ( y < ( *block )->getBox()->TR->Y - level->getInfo()->ObstacleCutoff )
 							continue;
 
-						std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+						std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 						spike->Init( Vector2(), level );
 
 						if ( level->getRnd()->Rnd->Next(0, 2) == 0 )

@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 
 	void MovingBlock::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<MovingBlock> BlockA = dynamic_cast<MovingBlock*>( A );
+		std::shared_ptr<MovingBlock> BlockA = std::dynamic_pointer_cast<MovingBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel() );
 

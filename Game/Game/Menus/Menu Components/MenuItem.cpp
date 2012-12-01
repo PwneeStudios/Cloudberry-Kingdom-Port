@@ -348,15 +348,15 @@ namespace CloudberryKingdom
 	void MenuItem::DoGrayOut()
 	{
 		MyText->MyFloatColor.W = .5f;
-		if ( Icon != 0 && dynamic_cast<PictureIcon*>( Icon ) != 0 )
-			( static_cast<PictureIcon*>( Icon ) )->IconQuad->setAlpha( .5f );
+		if ( Icon != 0 && std::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
+			( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( .5f );
 	}
 
 	void MenuItem::DoDeGrayOut()
 	{
 		MyText->MyFloatColor.W = 1;
-		if ( Icon != 0 && dynamic_cast<PictureIcon*>( Icon ) != 0 )
-			( static_cast<PictureIcon*>( Icon ) )->IconQuad->setAlpha( 1 );
+		if ( Icon != 0 && std::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
+			( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( 1 );
 	}
 
 	void MenuItem::setInclude( const bool &value )

@@ -76,7 +76,7 @@ const std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_sha
 				// Create 2 serpents in this location, with offset perios.
 				for ( int i = 0; i < num; i++ )
 				{
-					std::shared_ptr<Serpent> serpent = static_cast<Serpent*>( level->getRecycle()->GetObject(ObjectType_SERPENT, true) );
+					std::shared_ptr<Serpent> serpent = std::static_pointer_cast<Serpent>( level->getRecycle()->GetObject(ObjectType_SERPENT, true) );
 					serpent->Init( loc, level );
 
 					serpent->SetPeriod( period );

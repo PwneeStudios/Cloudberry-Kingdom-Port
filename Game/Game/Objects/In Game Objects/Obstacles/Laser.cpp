@@ -209,7 +209,7 @@ namespace CloudberryKingdom
 		getCore()->Clone(A->getCore());
 		getCore()->WakeUpRequirements = true;
 
-		std::shared_ptr<Laser> LaserA = dynamic_cast<Laser*>( A );
+		std::shared_ptr<Laser> LaserA = std::dynamic_pointer_cast<Laser>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		SetLine( LaserA->p1, LaserA->p2 );

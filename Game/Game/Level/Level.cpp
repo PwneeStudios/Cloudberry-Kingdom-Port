@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 
 	float Level::ElementDistanceSquared::Apply( const std::shared_ptr<BlockBase> &element )
 	{
-		return ( element->getCore()->Data.Position - pos )->LengthSquared();
+		return ( element->getCore()->Data.Position - pos ).LengthSquared();
 	}
 
 	Level::FindFirstRowLambda::FindFirstRowLambda()
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 	bool Level::FindFirstRowLambda::Apply( const std::shared_ptr<BlockBase> &match )
 	{
-		return match->getCore() == _T("FirstRow");
+		return match->getCore()->IsCalled( _T( "FirstRow" ) );
 	}
 
 	Level::MakeVerticalCleanupHelper::MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level )
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 	Vector2 Level::MakeVerticalCleanupHelper::Apply( const Vector2 &pos )
 	{
-		float dist = level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos );
+		float dist = static_cast<float>( level->CurMakeData->GenData->Get( DifficultyParam_GENERAL_MIN_DIST, pos ) );
 		return Vector2( dist, dist );
 	}
 
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<NormalBlock> block;
 
-		block = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		block->getCore()->AlwaysBoxesOnly = BoxesOnly;
 		block->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
 		block->getCore()->GenData.RemoveIfUnused = true;
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 
 	void Level::MakeInitialLambda::Apply( const Vector2 &pos )
 	{
-		level->__block_fromlambda = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		level->__block_fromlambda = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		level->__block_fromlambda->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
 		level->__block_fromlambda->Core->GenData->RemoveIfUnused = true;
 		level->__block_fromlambda->BlockCore->BlobsOnTop = false;
@@ -199,7 +199,7 @@ namespace CloudberryKingdom
 
 	bool Level::IsLavaLambda::Apply( const std::shared_ptr<BlockBase> &block )
 	{
-		return dynamic_cast<LavaBlock*>( block ) != 0;
+		return std::dynamic_pointer_cast<LavaBlock>( block ) != 0;
 	}
 
 	Level::FindGuidLambda::FindGuidLambda( unsigned long long guid )
@@ -313,13 +313,13 @@ namespace CloudberryKingdom
 		if ( getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
 		{
 			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-				if ( dynamic_cast<Coin*>( *obj ) != 0 && ( *obj )->getPos().X > TR.X + 160 )
+				if ( std::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().X > TR.X + 160 )
 					getRecycle()->CollectObject(*obj);
 		}
 		else if ( getPieceSeed()->GeometryType == LevelGeometry_UP )
 		{
 			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-				if ( dynamic_cast<Coin*>( *obj ) != 0 && ( *obj )->getPos().Y > TR.Y - 280 )
+				if ( std::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().Y > TR.Y - 280 )
 					getRecycle()->CollectObject(*obj);
 		}
 
@@ -333,7 +333,7 @@ namespace CloudberryKingdom
 		Size.Y += 900;
 		Size = Vector2::Max( Size, getMainCamera()->GetSize() );
 
-		std::shared_ptr<CameraZone> CamZone = static_cast<CameraZone*>( MySourceGame->Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
+		std::shared_ptr<CameraZone> CamZone = std::static_pointer_cast<CameraZone>( MySourceGame->Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
 		CamZone->Init( ( CurMakeData->PieceSeed->Start + CurMakeData->PieceSeed->End ) / 2, Size );
 		CamZone->Start = CurMakeData->PieceSeed->Start;
 		//CamZone.End = CurMakeData.PieceSeed.End;
@@ -366,13 +366,13 @@ namespace CloudberryKingdom
 		std::shared_ptr<NormalBlock> block = 0, startblock = 0;
 
 		// Find the closest block to pos on first row
-		startblock = static_cast<NormalBlock*>( Tools::ArgMin( Tools::FindAll( Blocks, std::make_shared<FindFirstRowLambda>() ), std::make_shared<ElementDistanceSquared>(pos) ) );
+		startblock = std::static_pointer_cast<NormalBlock>( Tools::ArgMin( Tools::FindAll( Blocks, std::make_shared<FindFirstRowLambda>() ), std::make_shared<ElementDistanceSquared>(pos) ) );
 
 		switch ( Style->MyInitialPlatsType )
 		{
 			case StyleData::InitialPlatsType_UP_TILED_FLOOR:
 			case StyleData::InitialPlatsType_DOOR:
-				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, false) );
+				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, false) );
 
 				// Tiled bottom
 				if ( Style->MyInitialPlatsType == StyleData::InitialPlatsType_UP_TILED_FLOOR )
@@ -422,7 +422,7 @@ namespace CloudberryKingdom
 		InitMakeData( CurMakeData );
 		Style->ModNormalBlockWeight = .15f;
 
-		std::shared_ptr<VerticalData> VStyle = static_cast<VerticalData*>( CurMakeData->PieceSeed->Style );
+		std::shared_ptr<VerticalData> VStyle = std::static_pointer_cast<VerticalData>( CurMakeData->PieceSeed->Style );
 		LevelGeometry Geometry = CurMakeData->PieceSeed->GeometryType;
 
 		// Shift start position up for down levels
@@ -517,7 +517,7 @@ namespace CloudberryKingdom
 			bool ShouldBreak = false;
 			for ( _pos.Y = BL_Bound.Y; ; )
 			{
-				std::shared_ptr<NormalBlock> block = static_cast<NormalBlock*>( NormalBlock_AutoGen::getInstance()->CreateAt(this, _pos) );
+				std::shared_ptr<NormalBlock> block = std::static_pointer_cast<NormalBlock>( NormalBlock_AutoGen::getInstance()->CreateAt(this, _pos) );
 
 				block->Init( _pos, Size, getMyTileSetInfo() );
 				block->MakeTopOnly();
@@ -778,7 +778,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<NormalBlock> Level::MakePillarBack( Vector2 p1, Vector2 p2 )
 	{
-		std::shared_ptr<NormalBlock> doo = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		std::shared_ptr<NormalBlock> doo = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		doo->Init( ( p1 + p2 ) / 2, Vector2( 350, abs( p2.Y - p1.Y ) / 2 ), getMyTileSetInfo() );
 
 		AddBlock( doo );
@@ -839,7 +839,7 @@ namespace CloudberryKingdom
 				while ( y < LeftCenter.Y + getMainCamera()->GetHeight() / 2 - 400 )
 				{
 					std::shared_ptr<BouncyBlock> bouncy;
-					bouncy = static_cast<BouncyBlock*>( MySourceGame->Recycle->GetObject( ObjectType_BOUNCY_BLOCK, false ) );
+					bouncy = std::static_pointer_cast<BouncyBlock>( MySourceGame->Recycle->GetObject( ObjectType_BOUNCY_BLOCK, false ) );
 					bouncy->Init( Vector2( LeftCenter.X, y ), Vector2( 220, 220 ), 70, shared_from_this() );
 					bouncy->getCore()->DrawLayer = 9;
 
@@ -855,7 +855,7 @@ namespace CloudberryKingdom
 				break;
 
 			case LadderType_FINAL_PLAT:
-				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X );
 				block->Extend( Side_RIGHT, LeftCenter.X + 5000 );
@@ -866,7 +866,7 @@ namespace CloudberryKingdom
 
 
 				// Camera zone
-				FinalCamZone = CamZone = static_cast<CameraZone*>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
+				FinalCamZone = CamZone = std::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
 				CamZone->Init( block->getBox()->Current->Center + Vector2(700, 500), block->getBox()->Current->Size / 3 + Vector2(0, getMainCamera()->GetHeight() / 2 + 1000) );
 				CamZone->Start = LeftCenter - Vector2( 100000, 0 );
 				CamZone->End = CamZone->Start;
@@ -876,7 +876,7 @@ namespace CloudberryKingdom
 
 
 				// Stop block, to prevent Bob from running off edge
-				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X + 4400 );
 				block->Extend( Side_RIGHT, LeftCenter.X + 4500 );
@@ -894,7 +894,7 @@ namespace CloudberryKingdom
 				pos = Center - Vector2( 0, getMainCamera()->GetHeight() / 2 );
 				while ( pos.Y < Center.Y + getMainCamera()->GetHeight() / 2 )
 				{
-					block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBox()->TopOnly = true;
 					block->Init( pos, Size, getMyTileSetInfo() );
 
@@ -919,7 +919,7 @@ namespace CloudberryKingdom
 				int Count = 0;
 				while ( pos.Y < Center.Y + getMainCamera()->GetHeight() / 2 )
 				{
-					block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBox()->TopOnly = true;
 					if ( Count % 2 == 0 )
 						block->Init( pos + offset, Size, getMyTileSetInfo() );
@@ -942,7 +942,7 @@ namespace CloudberryKingdom
 			case LadderType_SIMPLE_MOVING:
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
-				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center;
 				bm->EmitData.Velocity = Vector2( 0, 6 );
@@ -963,7 +963,7 @@ namespace CloudberryKingdom
 				// Left emitter                    
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
-				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(-175, 0);
 				bm->EmitData.Velocity = Vector2( 0, 6 );
@@ -981,7 +981,7 @@ namespace CloudberryKingdom
 				// Right emitter
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, getMainCamera()->GetHeight() / 2 + 250 );
 
-				bm = static_cast<BlockEmitter*>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(175, 0);
 				bm->EmitData.Velocity = Vector2( 0, -6 );
@@ -1237,7 +1237,7 @@ namespace CloudberryKingdom
 	{
 		for ( BlockVec::const_iterator block = A->Blocks.begin(); block != A->Blocks.end(); ++block )
 		{
-			std::shared_ptr<BlockBase> DestBlock = static_cast<BlockBase*>( MySourceGame->Recycle->GetObject( ( *block )->getCore()->MyType, false ) );
+			std::shared_ptr<BlockBase> DestBlock = std::static_pointer_cast<BlockBase>( MySourceGame->Recycle->GetObject( ( *block )->getCore()->MyType, false ) );
 			DestBlock->Clone( *block );
 
 			AddBlock( DestBlock );
@@ -1245,7 +1245,7 @@ namespace CloudberryKingdom
 
 		for ( ObjectVec::const_iterator obj = A->Objects.begin(); obj != A->Objects.end(); ++obj )
 		{
-			std::shared_ptr<ObjectBase> DestObj = static_cast<ObjectBase*>( MySourceGame->Recycle->GetObject( ( *obj )->getCore()->MyType, false ) );
+			std::shared_ptr<ObjectBase> DestObj = std::static_pointer_cast<ObjectBase>( MySourceGame->Recycle->GetObject( ( *obj )->getCore()->MyType, false ) );
 			DestObj->Clone( *obj );
 
 			AddObject( DestObj );
@@ -1467,7 +1467,7 @@ const float Level::SafetyNetHeight = 124;
 		}
 
 		// Add a backdrop block that the door opens into
-		std::shared_ptr<NormalBlock> backblock = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		std::shared_ptr<NormalBlock> backblock = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		MadeBackBlock = backblock;
 		backblock->Clone( block );
 
@@ -1540,7 +1540,7 @@ const float Level::SafetyNetHeight = 124;
 				size.X += 100;
 				pos.X -= 50;
 
-				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
 				// New style end blocks
 				if ( MyTileSet->FixedWidths )
@@ -1592,7 +1592,7 @@ const float Level::SafetyNetHeight = 124;
 		std::shared_ptr<NormalBlock> nblock;
 		Vector2 Pos = BL;
 		size = Vector2( 2200, 200 );
-		nblock = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		nblock = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		nblock->getCore()->setMyTileSet(MyTileSet);
 		nblock->Init( Pos, size, getMyTileSetInfo() );
 		nblock->Extend( Side_BOTTOM, getMainCamera()->BL.Y - 300 );
@@ -1653,7 +1653,7 @@ const float Level::SafetyNetHeight = 124;
 		{
 			while ( Pos.Y < TR.Y )
 			{
-				block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
 				if ( PreInit != 0 )
 					PreInit->Apply( block );
@@ -1695,7 +1695,7 @@ const float Level::SafetyNetHeight = 124;
 		std::shared_ptr<NormalBlock> block = 0;
 		while ( Pos.X < TR.X )
 		{
-			block = static_cast<NormalBlock*>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 			block->Init( Pos + Vector2( width, getRnd()->RndFloat(200, 1000) ), Vector2(getRnd()->RndFloat(width / 2, width), 200), getMyTileSetInfo() );
 			block->Extend( Side_BOTTOM, BL.Y - 300 );
 
@@ -1751,7 +1751,7 @@ int Level::CountToSleep = 0;
 	{
 		std::shared_ptr<PieceSeedData> s = CurMakeData->PieceSeed;
 
-		std::shared_ptr<CameraZone> CamZone = static_cast<CameraZone*>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
+		std::shared_ptr<CameraZone> CamZone = std::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
 		CamZone->Init( ( s->Start + s->End ) / 2, Size );
 		CamZone->Start = s->Start + s->CamZoneStartAdd;
 		CamZone->End = s->End + s->CamZoneEndAdd;
@@ -1826,7 +1826,7 @@ int Step1, Level::Step2 = 0;
 
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
-		std::shared_ptr<SingleData> Style = static_cast<SingleData*>( CurMakeData->PieceSeed->Style );
+		std::shared_ptr<SingleData> Style = std::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
 
 		// Calculate the style parameters
 		Style->CalcGenParams( CurMakeData->PieceSeed, shared_from_this() );
@@ -1887,7 +1887,7 @@ int Step1, Level::Step2 = 0;
 		if ( MySourceGame->HasLava )
 		{
 			VoidHeight = 40;
-			std::shared_ptr<LavaBlock> lblock = static_cast<LavaBlock*>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
+			std::shared_ptr<LavaBlock> lblock = std::static_pointer_cast<LavaBlock>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
 			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 800) + Style_LOWER_SAFETY_NET_OFFSET, MaxLeft - 1000, MaxRight + 1000, 5000 );
 			lblock->StampAsUsed( 0 );
 			AddBlock( lblock );
@@ -2122,7 +2122,7 @@ int Step1, Level::Step2 = 0;
 
 	void Level::Stage1Cleanup( Vector2 BL_Bound, Vector2 TR_Bound )
 	{
-		std::shared_ptr<SingleData> Style = static_cast<SingleData*>( CurMakeData->PieceSeed->Style );
+		std::shared_ptr<SingleData> Style = std::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
 
 		for ( std::vector<AutoGen*>::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			( *gen )->Cleanup_1( shared_from_this(), BL_Bound, TR_Bound );
@@ -2175,7 +2175,7 @@ int Step1, Level::Step2 = 0;
 
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
+			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin )
 				if ( coin->getCore()->AddedTimeStamp > LastStep )
 					getRecycle()->CollectObject(coin);
@@ -2390,7 +2390,7 @@ int Step1, Level::Step2 = 0;
 		std::shared_ptr<BlockBase> lava = Tools::Find( Blocks, std::make_shared<IsLavaLambda>() );
 
 		if ( 0 != lava )
-			PushLava( y, dynamic_cast<LavaBlock*>( lava ) );
+			PushLava( y, std::dynamic_pointer_cast<LavaBlock>( lava ) );
 	}
 
 	void Level::PushLava( float y, const std::shared_ptr<LavaBlock> &lava )
@@ -2732,7 +2732,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
+			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin )
 			{
 				if ( !coin->getCore()->Active )
@@ -3123,7 +3123,7 @@ int Level::AfterPostDrawLayer = 12;
 
 		if ( NewObject->getCore()->DrawLayer >= 0 )
 		{
-			if ( NewObject->getCore()->ParentBlock == 0 || dynamic_cast<NormalBlock*>(NewObject->getCore()->ParentBlock) != 0 || NewObject->getCore()->DoNotDrawWithParent )
+			if ( NewObject->getCore()->ParentBlock == 0 || std::dynamic_pointer_cast<NormalBlock>(NewObject->getCore()->ParentBlock) != 0 || NewObject->getCore()->DoNotDrawWithParent )
 			{
 				DrawLayer[ NewObject->getCore()->DrawLayer ].push_back(NewObject);
 			}
@@ -4070,14 +4070,14 @@ std::shared_ptr<BaseMetric> Level::DefaultMetric = std::make_shared<BaseMetric>(
 		TotalCoinScore = 0;
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = dynamic_cast<Coin*>( *obj );
+			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin && !coin->getCore()->MarkedForDeletion )
 			{
 				NumCoins++;
 				TotalCoinScore += coin->MyScoreValue;
 			}
 
-			std::shared_ptr<FlyingBlob> blob = dynamic_cast<FlyingBlob*>( *obj );
+			std::shared_ptr<FlyingBlob> blob = std::dynamic_pointer_cast<FlyingBlob>( *obj );
 			if ( 0 != blob )
 			{
 				NumBlobs++;

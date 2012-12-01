@@ -38,7 +38,7 @@ std::map<int, Awardment*> Awardments::AwardsDict = std::map<int, Awardment*>();
 	{
 		for ( GameObjVec::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
 		{
-			if ( dynamic_cast<AwardmentMessage*>( *obj ) != 0 )
+			if ( std::dynamic_pointer_cast<AwardmentMessage>( *obj ) != 0 )
 				return true;
 		}
 
@@ -204,7 +204,7 @@ float CurShift, Awardments::Shift = 520;
 				if ( *obj == msg )
 					continue;
 
-				std::shared_ptr<AwardmentMessage> _msg = dynamic_cast<AwardmentMessage*>( *obj );
+				std::shared_ptr<AwardmentMessage> _msg = std::dynamic_pointer_cast<AwardmentMessage>( *obj );
 				if ( 0 != _msg )
 					_msg->MyPile->setPos( _msg->MyPile->getPos() + Vector2(0, Shift) );
 			}

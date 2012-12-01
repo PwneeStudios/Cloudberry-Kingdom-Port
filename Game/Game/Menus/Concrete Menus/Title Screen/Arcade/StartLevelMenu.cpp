@@ -61,7 +61,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 	void StartLevelMenu::Launch( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<LevelItem> litem = dynamic_cast<LevelItem*>( item );
+		std::shared_ptr<LevelItem> litem = std::dynamic_pointer_cast<LevelItem>( item );
 		if ( 0 == litem )
 			return;
 

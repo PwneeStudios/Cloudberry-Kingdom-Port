@@ -61,7 +61,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 
 		// Make the new cloud
 		pos += Vector2( level->getRnd()->Rnd->Next(0, 70), level->getRnd()->Rnd->Next(0, 70) );
-		std::shared_ptr<Cloud> NewCloud = static_cast<Cloud*>( level->MySourceGame->Recycle->GetObject( ObjectType_CLOUD, true ) );
+		std::shared_ptr<Cloud> NewCloud = std::static_pointer_cast<Cloud>( level->MySourceGame->Recycle->GetObject( ObjectType_CLOUD, true ) );
 
 		NewCloud->Shiftiness = Params->Shiftiness.GetVal( pos );
 		NewCloud->Init( pos, level );

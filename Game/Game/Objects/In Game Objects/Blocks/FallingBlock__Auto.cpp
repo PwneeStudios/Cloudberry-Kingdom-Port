@@ -80,7 +80,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		Vector2 size = Vector2( Width, Width );
 		Vector2 offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
 
-		fblock = static_cast<FallingBlock*>( level->getRecycle()->GetObject(ObjectType_FALLING_BLOCK, true) );
+		fblock = std::static_pointer_cast<FallingBlock>( level->getRecycle()->GetObject(ObjectType_FALLING_BLOCK, true) );
 		int Life = static_cast<int>( Params->Delay.GetVal( pos ) );
 		fblock->Init( pos + offset, size, Life, level );
 		fblock->getBlockCore()->BlobsOnTop = true;

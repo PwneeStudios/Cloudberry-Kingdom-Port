@@ -308,7 +308,7 @@ int FallingBlock::ResetTimerLength = 12;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<FallingBlock> BlockA = dynamic_cast<FallingBlock*>( A );
+		std::shared_ptr<FallingBlock> BlockA = std::dynamic_pointer_cast<FallingBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->StartLife, BlockA->getMyLevel() );
 

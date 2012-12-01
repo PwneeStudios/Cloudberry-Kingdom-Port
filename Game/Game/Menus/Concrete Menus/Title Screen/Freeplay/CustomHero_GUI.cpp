@@ -177,7 +177,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 		Testing = true;
 
-		std::shared_ptr<StartMenu_MW_CustomLevel> custom = dynamic_cast<StartMenu_MW_CustomLevel*>( CustomLevel );
+		std::shared_ptr<StartMenu_MW_CustomLevel> custom = std::dynamic_pointer_cast<StartMenu_MW_CustomLevel>( CustomLevel );
 		custom->Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_NONE );
 	}
 
@@ -189,7 +189,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	void CustomHero_GUI::EndTest()
 	{
-		std::shared_ptr<StartMenu_MW_CustomLevel> custom = dynamic_cast<StartMenu_MW_CustomLevel*>( CustomLevel );
+		std::shared_ptr<StartMenu_MW_CustomLevel> custom = std::dynamic_pointer_cast<StartMenu_MW_CustomLevel>( CustomLevel );
 		custom->Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
 
 		Testing = false;
@@ -271,15 +271,15 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		std::shared_ptr<NormalBlock> block;
 
 		for ( BlockVec::const_iterator _block = MyGame->MyLevel->Blocks.begin(); _block != MyGame->MyLevel->Blocks.end(); ++_block )
-			if ( dynamic_cast<NormalBlock*>( *_block ) != 0 )
+			if ( std::dynamic_pointer_cast<NormalBlock>( *_block ) != 0 )
 				( *_block )->CollectSelf();
 
-		block = static_cast<NormalBlock*>( MyGame->Recycle->GetObject( ObjectType_NORMAL_BLOCK, false ) );
+		block = std::static_pointer_cast<NormalBlock>( MyGame->Recycle->GetObject( ObjectType_NORMAL_BLOCK, false ) );
 		block->Init( Vector2( -1000, -3100 ), Vector2( 1100, 2500 ), MyGame->MyLevel->getMyTileSetInfo() );
 		block->MyBox->TopOnly = false;
 		MyGame->MyLevel->AddBlock( block );
 
-		block = static_cast<NormalBlock*>( MyGame->Recycle->GetObject( ObjectType_NORMAL_BLOCK, false ) );
+		block = std::static_pointer_cast<NormalBlock>( MyGame->Recycle->GetObject( ObjectType_NORMAL_BLOCK, false ) );
 		block->Init( Vector2( 1050, -2950 ), Vector2( 1000, 2500 ), MyGame->MyLevel->getMyTileSetInfo() );
 		block->MyBox->TopOnly = false;
 		MyGame->MyLevel->AddBlock( block );
@@ -326,7 +326,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 	{
 		CkBaseMenu::AddItem( item );
 
-		std::shared_ptr<MenuList> list = dynamic_cast<MenuList*>( item );
+		std::shared_ptr<MenuList> list = std::dynamic_pointer_cast<MenuList>( item );
 		if ( 0 != list )
 		{
 			list->SetIndex( 0 );
@@ -811,7 +811,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<PhsxSlider> slider = dynamic_cast<PhsxSlider*>( *item );
+			std::shared_ptr<PhsxSlider> slider = std::dynamic_pointer_cast<PhsxSlider>( *item );
 			if ( 0 != slider )
 				slider->Reset();
 		}

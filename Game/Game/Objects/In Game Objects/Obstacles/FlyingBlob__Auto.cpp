@@ -81,7 +81,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	{
 		for ( int j = 0; j < Num; j++ )
 		{
-			std::shared_ptr<FlyingBlob> blob = static_cast<FlyingBlob*>( CreateAt( level, Center ) );
+			std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, Center ) );
 
 			blob->SetColor( FlyingBlob::BlobColor_BLUE );
 
@@ -147,7 +147,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		{
 			for ( int j = 0; j < M; j++ )
 			{
-				std::shared_ptr<FlyingBlob> blob = static_cast<FlyingBlob*>( CreateAt( level, BL + Vector2( i, j ) * Step ) );
+				std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, BL + Vector2( i, j ) * Step ) );
 				SetTunnelBlobParameter( blob, Params, level->getRnd() );
 
 				Params->TunnelGUIDs[ i ][ j ] = blob->getCore()->MyGuid;
@@ -360,7 +360,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<FlyingBlob> NewBlob = static_cast<FlyingBlob*>( BasicCreateAt( level, pos ) );
+		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
 
 		TR.X += 200;
 		Tools::EnsureBounds_X( NewBlob, TR, BL );
@@ -378,7 +378,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	{
 		AutoGen::CreateAt( level, pos );
 
-		std::shared_ptr<FlyingBlob> NewBlob = static_cast<FlyingBlob*>( BasicCreateAt( level, pos ) );
+		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
 
 		level->AddObject( NewBlob );
 
@@ -395,7 +395,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameter>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		// Make the new blob
-		std::shared_ptr<FlyingBlob> NewBlob = static_cast<FlyingBlob*>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );
+		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );
 		NewBlob->Init( pos, level );
 
 		NewBlob->getCore()->Data.Position = NewBlob->getCore()->StartData.Position = pos;

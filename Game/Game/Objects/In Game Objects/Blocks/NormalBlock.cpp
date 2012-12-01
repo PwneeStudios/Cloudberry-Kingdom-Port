@@ -276,7 +276,7 @@ float NormalBlock::TopOnlyHeight = 60;
 
 	void NormalBlock::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<NormalBlock> BlockA = dynamic_cast<NormalBlock*>( A );
+		std::shared_ptr<NormalBlock> BlockA = std::dynamic_pointer_cast<NormalBlock>( A );
 		getBlockCore()->Clone(A->getCore());
 
 		if ( BlockA == 0 )
@@ -346,7 +346,7 @@ float NormalBlock::TopOnlyHeight = 60;
 
 	void NormalBlock::PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
 	{
-		Block_PostCollideDecision( dynamic_cast<BlockBase*>( this ), bob, Col, Overlap, Delete );
+		Block_PostCollideDecision( std::dynamic_pointer_cast<BlockBase>( this ), bob, Col, Overlap, Delete );
 		BlockBase::PostCollideDecision( bob, Col, Overlap, Delete );
 	}
 
@@ -374,7 +374,7 @@ float NormalBlock::TopOnlyHeight = 60;
 			// If we've used something besides the top of the block already,
 			// or this tileset doesn't allow for top only blocks,
 			// then make sure we don't make the block top only.
-			if ( block->getBlockCore()->NonTopUsed || !(dynamic_cast<NormalBlock*>(block) != 0) || !block->getInfo()->AllowTopOnlyBlocks )
+			if ( block->getBlockCore()->NonTopUsed || !(std::dynamic_pointer_cast<NormalBlock>(block) != 0) || !block->getInfo()->AllowTopOnlyBlocks )
 			{
 				if ( MakeTopOnly )
 				{
@@ -396,7 +396,7 @@ float NormalBlock::TopOnlyHeight = 60;
 			if ( MakeTopOnly )
 			{
 				block->Extend( Side_BOTTOM, __max( block->getBox()->Current->BL.Y, __max(bob->Box->Target->TR.Y, bob->Box->Current->TR.Y) + bob->CeilingParams->BufferSize.GetVal(bob->getCore()->Data.Position) ) );
-				( static_cast<NormalBlock*>( block ) )->CheckHeight();
+				( std::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
 				if ( Col != ColType_TOP )
 					Col = ColType_NO_COL;
 			}
@@ -407,17 +407,17 @@ float NormalBlock::TopOnlyHeight = 60;
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = static_cast<BlockBase*>( this );
+		std::shared_ptr<BlockBase> block = std::static_pointer_cast<BlockBase>( this );
 
 		// Draw block upside down if Bob used it upside down.
 		if ( Col == ColType_BOTTOM && bob->MyPhsx->Gravity < 0 )
 			getBlockCore()->CeilingDraw = true;
 
 		// Normal blocks delete surrounding blocks when stamped as used
-		if ( block->getCore()->GenData.DeleteSurroundingOnUse && dynamic_cast<NormalBlock*>(block) != 0 )
+		if ( block->getCore()->GenData.DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(block) != 0 )
 			for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 			{
-				std::shared_ptr<NormalBlock> Normal = dynamic_cast<NormalBlock*>( *nblock );
+				std::shared_ptr<NormalBlock> Normal = std::dynamic_pointer_cast<NormalBlock>( *nblock );
 				if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
 					if ( !Normal->getCore()->GenData.Used && abs(Normal->getBox()->Current->TR.Y - block->getBox()->TR.Y) < 15 && !(Normal->getBox()->Current->TR.X < block->getBox()->Current->BL.X - 350 || Normal->getBox()->Current->BL.X > block->getBox()->Current->TR.X + 350) )
 					{
@@ -431,19 +431,19 @@ float NormalBlock::TopOnlyHeight = 60;
 	{
 		BlockBase::PostKeep( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = static_cast<NormalBlock*>( this );
+		std::shared_ptr<BlockBase> block = std::static_pointer_cast<NormalBlock>( this );
 
 		if ( !block->getCore()->GenData.NoBottomShift )
 		{
 			// Shift bottom of block if necessary
-			if ( dynamic_cast<NormalBlock*>( block ) != 0 && !block->getBlockCore()->DeleteIfTopOnly )
+			if ( std::dynamic_pointer_cast<NormalBlock>( block ) != 0 && !block->getBlockCore()->DeleteIfTopOnly )
 			{
 				float NewBottom = __max( block->getBox()->Current->BL.Y, __max(getBox()->Target->TR.Y, getBox()->Current->TR.Y) + bob->CeilingParams->BufferSize.GetVal(getCore()->Data.Position) );
 
 				if ( ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP && !block->getBlockCore()->NonTopUsed )
 				{
 					block->Extend( Side_BOTTOM, NewBottom );
-					( static_cast<NormalBlock*>( block ) )->CheckHeight();
+					( std::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
 				}
 			}
 		}

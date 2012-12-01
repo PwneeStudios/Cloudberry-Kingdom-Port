@@ -320,7 +320,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 		icon->HitPadding = HitPadding;
 
-		return static_cast<ObjectIcon*>( icon );
+		return std::static_pointer_cast<ObjectIcon>( icon );
 	}
 
 	void PictureIcon::SetScale( float Ratio )

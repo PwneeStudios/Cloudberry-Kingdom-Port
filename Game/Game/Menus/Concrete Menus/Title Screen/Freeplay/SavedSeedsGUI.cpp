@@ -208,7 +208,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		int count = 0;
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<SeedItem> seeditem = dynamic_cast<SeedItem*>( *item );
+			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 != seeditem && seeditem->MarkedForDeletion )
 				count++;
 		}
@@ -221,7 +221,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		if ( !Active )
 			return true;
 
-		std::shared_ptr<SeedItem> seeditem = dynamic_cast<SeedItem*>( MyMenu->getCurItem() );
+		std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( MyMenu->getCurItem() );
 		if ( 0 != seeditem )
 			seeditem->ToggleDeletion();
 
@@ -245,7 +245,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		// Save seeds not marked for deletion.
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<SeedItem> seeditem = dynamic_cast<SeedItem*>( *item );
+			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 == seeditem )
 				continue;
 			if ( seeditem->MarkedForDeletion )
@@ -287,7 +287,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		MyMenu = std::make_shared<LongMenu>();
 		MyMenu->FixedToCamera = false;
 		MyMenu->WrapSelect = false;
-		( static_cast<LongMenu*>( MyMenu ) )->OffsetStep = 30;
+		( std::static_pointer_cast<LongMenu>( MyMenu ) )->OffsetStep = 30;
 		EnsureFancy();
 		MyMenu->OnA.reset();
 		MyMenu->OnB = std::make_shared<SaveSeedsBackLambda>( shared_from_this() );
@@ -463,7 +463,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 	//#if PC_VERSION
 		//if (false)
 		{
-			bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), shared_from_this() );
+			bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), shared_from_this() );
 			bar->setBarPos( Vector2( -1860, 102.7778f ) );
 			MyGame->AddGameObject( bar );
 	#if defined(PC_VERSION)

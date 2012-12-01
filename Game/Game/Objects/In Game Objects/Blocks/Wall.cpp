@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 	void Wall::MakeSpike( int count, float pos )
 	{
-		std::shared_ptr<Spike> spike = static_cast<Spike*>( getCore()->MyLevel->getRecycle()->GetObject(ObjectType_SPIKE, false) );
+		std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( getCore()->MyLevel->getRecycle()->GetObject(ObjectType_SPIKE, false) );
 		spike->Init( Vector2(), getMyLevel() );
 
 		if ( Horizontal )
@@ -358,7 +358,7 @@ namespace CloudberryKingdom
 
 	void Wall::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<Wall> BlockA = dynamic_cast<Wall*>( A );
+		std::shared_ptr<Wall> BlockA = std::dynamic_pointer_cast<Wall>( A );
 
 		Init();
 

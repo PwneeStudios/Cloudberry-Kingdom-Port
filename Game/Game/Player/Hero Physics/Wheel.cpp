@@ -128,7 +128,7 @@ int BobPhsxWheel::AnimIndex = 0;
 
 	void BobPhsxWheel::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
-		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && dynamic_cast<BlockBase*>(ObjectLandedOn) != 0 && !PrevOnGround )
+		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && std::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
 			LandSound->Play( .47f );
 		BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 	}

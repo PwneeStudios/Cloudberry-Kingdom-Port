@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 	void LavaDrip::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
-		std::shared_ptr<LavaDrip> LavaDripA = dynamic_cast<LavaDrip*>( A );
+		std::shared_ptr<LavaDrip> LavaDripA = std::dynamic_pointer_cast<LavaDrip>( A );
 
 		BoxSize = LavaDripA->BoxSize;
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );

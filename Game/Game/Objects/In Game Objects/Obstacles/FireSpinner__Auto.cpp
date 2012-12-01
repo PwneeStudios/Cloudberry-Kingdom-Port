@@ -124,7 +124,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 
 					std::shared_ptr<FireSpinner> spinner;
 
-					spinner = static_cast<FireSpinner*>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
+					spinner = std::static_pointer_cast<FireSpinner>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
 					spinner->getCore()->StartData.Position = spinner->getCore()->Data.Position = Vector2(x, y);
 
 					spinner->Orientation = 1;

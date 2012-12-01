@@ -334,10 +334,10 @@ namespace CloudberryKingdom
 
 		bool ContainsCode( const std::wstring &code );
 
-		bool operator == ( const std::wstring &str );
+		//bool operator == ( const std::wstring &str );
+		//bool operator != ( const std::wstring &str );
 
-		bool operator != ( const std::wstring &str );
-
+		bool IsCalled ( const std::wstring &str );
 
 		virtual void Init();
 

@@ -68,9 +68,9 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		while ( x < TR.X )
 		{
 			std::shared_ptr<BouncyBlock> block;
-			block = static_cast<BouncyBlock*>( CreateAt( level, Vector2( x, TR.Y - 300 ) ) );
+			block = std::static_pointer_cast<BouncyBlock>( CreateAt( level, Vector2( x, TR.Y - 300 ) ) );
 			SetHallwaysBlockProperties( block, level );
-			block = static_cast<BouncyBlock*>( CreateAt( level, Vector2( x, BL.Y + 300 ) ) );
+			block = std::static_pointer_cast<BouncyBlock>( CreateAt( level, Vector2( x, BL.Y + 300 ) ) );
 			SetHallwaysBlockProperties( block, level );
 
 			x += 2 * block->getBox()->Current->Size.X;
@@ -122,7 +122,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		float speed = Params->Speed_GET_VAL( pos );
 		float SideDampening = Params->SideDampening.GetVal( pos );
 
-		bblock = static_cast<BouncyBlock*>( level->getRecycle()->GetObject(ObjectType_BOUNCY_BLOCK, true) );
+		bblock = std::static_pointer_cast<BouncyBlock>( level->getRecycle()->GetObject(ObjectType_BOUNCY_BLOCK, true) );
 		bblock->Init( pos + offset, size, speed, level );
 		bblock->SideDampening = SideDampening;
 		bblock->getBlockCore()->BlobsOnTop = true;

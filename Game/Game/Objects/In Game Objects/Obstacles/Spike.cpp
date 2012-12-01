@@ -351,7 +351,7 @@ bool Spike::PeakOut = true;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Spike> SpikeA = dynamic_cast<Spike*>( A );
+		std::shared_ptr<Spike> SpikeA = std::dynamic_pointer_cast<Spike>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		SetDir( SpikeA->Dir );

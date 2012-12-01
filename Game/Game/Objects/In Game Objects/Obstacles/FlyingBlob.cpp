@@ -700,7 +700,7 @@ float FlyingBlob::BobXFriction = 1;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<FlyingBlob> GoombaA = dynamic_cast<FlyingBlob*>( A );
+		std::shared_ptr<FlyingBlob> GoombaA = std::dynamic_pointer_cast<FlyingBlob>( A );
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );
 
 		MyMoveType = GoombaA->MyMoveType;

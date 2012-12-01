@@ -109,7 +109,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			if ( i == 1 )
 				offset = Vector2( 50, 0 );
 
-			gblock = static_cast<GhostBlock*>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
+			gblock = std::static_pointer_cast<GhostBlock>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
 
 			// Box type
 			if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )

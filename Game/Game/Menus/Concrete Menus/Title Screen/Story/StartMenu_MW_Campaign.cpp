@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<CampaignChapterItem> c_item = dynamic_cast<CampaignChapterItem*>( item );
+		std::shared_ptr<CampaignChapterItem> c_item = std::dynamic_pointer_cast<CampaignChapterItem>( item );
 		if ( 0 == c_item )
 			return;
 

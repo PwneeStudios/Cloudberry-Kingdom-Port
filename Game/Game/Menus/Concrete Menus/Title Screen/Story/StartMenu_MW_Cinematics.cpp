@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Cinematics::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<CinematicsLevelItem> c_item = dynamic_cast<CinematicsLevelItem*>( item );
+		std::shared_ptr<CinematicsLevelItem> c_item = std::dynamic_pointer_cast<CinematicsLevelItem>( item );
 		if ( 0 == c_item )
 			return;
 

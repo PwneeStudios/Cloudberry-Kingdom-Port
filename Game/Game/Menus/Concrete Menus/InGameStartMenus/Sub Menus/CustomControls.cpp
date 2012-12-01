@@ -217,7 +217,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		// Before we exit make sure secondary keys match up to what the user just specified.
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<ControlItem> citem = dynamic_cast<ControlItem*>( *item );
+			std::shared_ptr<ControlItem> citem = std::dynamic_pointer_cast<ControlItem>( *item );
 			if ( 0 != citem )
 				citem->SetSecondaryKey->Apply( citem->MyKey );
 		}
@@ -250,7 +250,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		CkBaseMenu::AddItem( item );
 
 		// Add the associated quad
-		std::shared_ptr<ControlItem> citem = dynamic_cast<ControlItem*>( item );
+		std::shared_ptr<ControlItem> citem = std::dynamic_pointer_cast<ControlItem>( item );
 		if ( 0 == citem )
 			return;
 
@@ -299,7 +299,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<ControlItem> c = dynamic_cast<ControlItem*>( *item );
+			std::shared_ptr<ControlItem> c = std::dynamic_pointer_cast<ControlItem>( *item );
 			if ( 0 == c )
 				continue;
 
@@ -568,7 +568,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		if ( !Active || MyMenu == 0 || MyMenu->Released )
 			return;
 
-		std::shared_ptr<ControlItem> item = dynamic_cast<ControlItem*>( MyMenu->getCurItem() );
+		std::shared_ptr<ControlItem> item = std::dynamic_pointer_cast<ControlItem>( MyMenu->getCurItem() );
 		if ( 0 != item )
 		{
 			for ( std::map<Keys, std::wstring>::const_iterator key = ButtonString::KeyToString.begin(); key != ButtonString::KeyToString.end(); ++key )

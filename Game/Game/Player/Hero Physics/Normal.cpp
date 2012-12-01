@@ -513,7 +513,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 	{
 		BobPhsx::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 
-		if ( LandSound != 0 && MyBob->getCore()->MyLevel->PlayMode == 0 && dynamic_cast<BlockBase*>(ObjectLandedOn) != 0 && !PrevOnGround )
+		if ( LandSound != 0 && MyBob->getCore()->MyLevel->PlayMode == 0 && std::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
 			PlayLandSound();
 
 		ReadyToJump = ReadyToJump || MakeReadyToJump;
@@ -526,10 +526,10 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		CurJump = 1;
 		JetPackCount = 0;
 
-		if ( dynamic_cast<FlyingBlob*>( ObjectLandedOn ) != 0 )
+		if ( std::dynamic_pointer_cast<FlyingBlob>( ObjectLandedOn ) != 0 )
 			FallingCount = -4;
 
-		if ( dynamic_cast<BouncyBlock*>( ObjectLandedOn ) != 0 )
+		if ( std::dynamic_pointer_cast<BouncyBlock>( ObjectLandedOn ) != 0 )
 		{
 			FallingCount = -1;
 			ReadyToJump = false;
@@ -575,7 +575,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		else
 			TurnCountdown--;
 
-		std::shared_ptr<BlockBase> block = dynamic_cast<BlockBase*>( ObjectLandedOn );
+		std::shared_ptr<BlockBase> block = std::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
 		if ( 0 != block )
 			SafetyBlock = block;
 
@@ -869,7 +869,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			if ( getPos().Y < MyBob->TargetPosition.Y - MaxDip )
 				MyBob->CurInput.A_Button = true;
 		}
-		std::shared_ptr<BlockBase> block = dynamic_cast<BlockBase*>( ObjectLandedOn );
+		std::shared_ptr<BlockBase> block = std::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
 		if ( 0 != block && ( OnGround || FallingCount < BobFallDelay ) && ( BobEdgeJump == 1 || block->getCore()->GenData.EdgeJumpOnly ) )
 		{
 			MyBob->Box->CalcBounds();

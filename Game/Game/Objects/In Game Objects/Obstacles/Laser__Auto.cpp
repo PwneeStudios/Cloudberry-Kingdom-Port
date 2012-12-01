@@ -68,7 +68,7 @@ const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<
 
 			if ( step < Params->LaserStepCutoff )
 			{
-				std::shared_ptr<Laser> laser = static_cast<Laser*>( level->getRecycle()->GetObject(ObjectType_LASER, true) );
+				std::shared_ptr<Laser> laser = std::static_pointer_cast<Laser>( level->getRecycle()->GetObject(ObjectType_LASER, true) );
 				laser->Init( Vector2(), level );
 
 				laser->getCore()->Data.Position = loc;

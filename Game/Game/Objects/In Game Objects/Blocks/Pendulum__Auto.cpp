@@ -73,7 +73,7 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 40 );
 		Vector2 offset = Vector2( 0, -300 );
 
-		std::shared_ptr<Pendulum> p = static_cast<Pendulum*>( level->getRecycle()->GetObject(ObjectType_PENDULUM, true) );
+		std::shared_ptr<Pendulum> p = std::static_pointer_cast<Pendulum>( level->getRecycle()->GetObject(ObjectType_PENDULUM, true) );
 		p->Init( pos + offset, size, level );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )

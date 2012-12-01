@@ -444,14 +444,19 @@ unsigned long long ObjectData::NextId = 0;
 		return ( EditorCode1.compare( code ) == 0 || EditorCode2.compare( code ) == 0 || EditorCode3.compare( code ) == 0 );
 	}
 
-	bool ObjectData::operator == ( const std::wstring &str )
-	{
-		return this->EditorCode1.compare( str ) == 0;
-	}
+	//bool ObjectData::operator == ( const std::wstring &str )
+	//{
+	//	return this->EditorCode1.compare( str ) == 0;
+	//}
 
-	bool ObjectData::operator != ( const std::wstring &str )
+	//bool ObjectData::operator != ( const std::wstring &str )
+	//{
+	//	return !( this == str );
+	//}
+
+	bool ObjectData::IsCalled( const std::wstring &str )
 	{
-		return !( this == str );
+		return EditorCode1.compare( str ) == 0;
 	}
 
 	void ObjectData::Init()
