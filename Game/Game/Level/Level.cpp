@@ -115,9 +115,9 @@ namespace CloudberryKingdom
 	{
 		level->__block_fromlambda = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		level->__block_fromlambda->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
-		level->__block_fromlambda->Core->GenData->RemoveIfUnused = true;
-		level->__block_fromlambda->BlockCore->BlobsOnTop = false;
-		level->__block_fromlambda->Core->GenData->AlwaysLandOn = true;
+		level->__block_fromlambda->getCore()->GenData->RemoveIfUnused = true;
+		level->__block_fromlambda->getBlockCore()->BlobsOnTop = false;
+		level->__block_fromlambda->getCore()->GenData->AlwaysLandOn = true;
 		level->AddBlock( level->__block_fromlambda );
 	}
 
@@ -2167,7 +2167,7 @@ int Step1, Level::Step2 = 0;
 		ObjectVec ObjsToClean = ObjectVec();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-			if ( ( *obj )->Core->GenData->LimitGeneralDensity )
+			if ( ( *obj )->getCore()->GenData->LimitGeneralDensity )
 				ObjsToClean.push_back( *obj );
 
 		Cleanup( ObjsToClean, std::make_shared<GeneralMinDistLambda>( shared_from_this() ), true, BL_Bound, TR_Bound );
@@ -2196,7 +2196,7 @@ int Step1, Level::Step2 = 0;
 			{
 				for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 				{
-					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->Core->Data.Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
+					if ( ( *block )->getBlockCore()->RemoveOverlappingObjects && block != (*obj)->getCore()->ParentBlock && Phsx::PointAndAABoxCollisionTest((*obj)->getCore()->Data.Position, (*block)->getBox(), (*obj)->getCore()->GenData->OverlapWidth) )
 						getRecycle()->CollectObject(*obj);
 				}
 			}
@@ -2657,7 +2657,7 @@ int Level::AfterPostDrawLayer = 12;
 		for ( int i = 0; i < NumDrawLayers; i++ )
 		{
 			for ( int j = 0; j < DrawLayer[ i ].size(); j++ )
-				DrawLayer[ i ][ j ]->Core->DrawSubLayer = j;
+				DrawLayer[ i ][ j ]->getCore()->DrawSubLayer = j;
 		}
 
 		// count number of blocks to save

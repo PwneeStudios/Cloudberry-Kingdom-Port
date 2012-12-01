@@ -46,13 +46,13 @@ namespace CloudberryKingdom
 		{
 			// Create the block
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var block = FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			std::shared_ptr<BlockBase> block = FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
-			block->BlockCore->EndPiece = true;
+			block->getBlockCore()->EndPiece = true;
 			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( -130, -600 ), Vector2( 400, 400 ), MyLevel->getMyTileSetInfo() );
 
-			block->Core->DrawLayer = 0;
-			block->Core->Real = false;
+			block->getCore()->DrawLayer = 0;
+			block->getCore()->Real = false;
 		}
 		// Old style end blocks
 		else
