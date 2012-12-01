@@ -67,7 +67,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		std::shared_ptr<Coin_Parameters> Params = std::make_shared<Coin_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void Coin_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -76,7 +76,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		level->CleanupCoins( BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameter>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
@@ -87,7 +87,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, bool NewOffset )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameter>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
 
 		// Snap the coins to a grid
 		if ( Params->Grid )
@@ -145,7 +145,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameter>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;

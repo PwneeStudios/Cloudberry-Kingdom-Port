@@ -88,7 +88,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		std::shared_ptr<Boulder_Parameters> Params = std::make_shared<Boulder_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void Boulder_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -96,7 +96,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Boulder parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_BOULDER, std::make_shared<Cleanup_2Helper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ) );
 
@@ -106,7 +106,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 
 	void Boulder_AutoGen::Hallway( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		TR.X += 700;
 
@@ -135,7 +135,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 	std::shared_ptr<ObjectBase> Boulder_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		// Get the new floater
 		std::shared_ptr<Boulder> NewFloater = std::static_pointer_cast<Boulder>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
@@ -191,7 +191,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;
@@ -223,7 +223,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameter>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
+		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->Style->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );

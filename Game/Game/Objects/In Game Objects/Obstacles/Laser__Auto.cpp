@@ -39,7 +39,7 @@ const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<
 		std::shared_ptr<Laser_Parameters> Params = std::make_shared<Laser_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void Laser_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -50,7 +50,7 @@ const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<
 		TR += Vector2( 350, 0 );
 
 		// Get Laser parameters
-		std::shared_ptr<Laser_Parameters> Params = std::static_pointer_cast<Laser_Parameter>( level->Style->FindParams( Laser_AutoGen::getInstance() ) );
+		std::shared_ptr<Laser_Parameters> Params = std::static_pointer_cast<Laser_Parameters>( level->Style->FindParams( Laser_AutoGen::getInstance() ) );
 
 		float step = 5;
 

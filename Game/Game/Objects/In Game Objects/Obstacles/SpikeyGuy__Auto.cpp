@@ -70,7 +70,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		std::shared_ptr<SpikeyGuy_Parameters> Params = std::make_shared<SpikeyGuy_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void SpikeyGuy_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -78,7 +78,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_SPIKEY_GUY, std::make_shared<MinDistHelper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ), std::make_shared<SpikeyGuyCleanupMetricLambda>() );
 	}
@@ -86,7 +86,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 	std::shared_ptr<ObjectBase> SpikeyGuy_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		// Get the new floater
 		std::shared_ptr<SpikeyGuy> NewFloater = std::static_pointer_cast<SpikeyGuy>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
@@ -161,7 +161,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Rockwheel )
 			Rockwheel( level, BL, TR );

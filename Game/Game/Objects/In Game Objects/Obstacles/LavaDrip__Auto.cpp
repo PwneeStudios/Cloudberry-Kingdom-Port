@@ -40,7 +40,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		std::shared_ptr<LavaDrip_Parameters> Params = std::make_shared<LavaDrip_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void LavaDrip_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -51,7 +51,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		TR += Vector2( 350, 0 );
 
 		// Get LavaDrip parameters
-		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameter>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
+		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameters>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
 
 		float step = 5;
 

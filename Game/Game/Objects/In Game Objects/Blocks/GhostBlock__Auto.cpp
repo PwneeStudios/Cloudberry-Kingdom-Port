@@ -65,7 +65,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 		std::shared_ptr<GhostBlock_Parameters> Params = std::make_shared<GhostBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void GhostBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -87,7 +87,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get GhostBlock parameters
-		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameter>( level->Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameters>( level->Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 
 		int InLength = static_cast<int>( Params->InLength.GetVal( pos ) );
 		int OutLength = static_cast<int>( Params->OutLength.GetVal( pos ) );

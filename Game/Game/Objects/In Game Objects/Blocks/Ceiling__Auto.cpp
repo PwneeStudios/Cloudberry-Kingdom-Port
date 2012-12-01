@@ -54,7 +54,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		std::shared_ptr<Ceiling_Parameters> Params = std::make_shared<Ceiling_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void Ceiling_AutoGen::MakeLongCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -75,7 +75,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameter>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		float MaxStartY = -100000;
 		for ( int i = 0; i < level->CurMakeData->NumInitialBobs; i++ )
@@ -89,7 +89,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		if ( !level->MyTileSet->HasCeiling )
 			return;
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameter>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

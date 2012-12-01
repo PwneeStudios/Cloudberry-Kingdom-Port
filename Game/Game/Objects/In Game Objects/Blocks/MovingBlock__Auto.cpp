@@ -67,7 +67,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		std::shared_ptr<MovingBlock_Parameters> Params = std::make_shared<MovingBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void MovingBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -140,7 +140,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get MovingBlock parameters
-		std::shared_ptr<MovingBlock_Parameters> Params = std::static_pointer_cast<MovingBlock_Parameter>( level->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> Params = std::static_pointer_cast<MovingBlock_Parameters>( level->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 0 );
 		switch ( Params->Aspect )

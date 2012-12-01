@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 
 	void Level::Stage1RndFillLambda::Apply( const Vector2 &pos )
 	{
-		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameter>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameters>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		std::vector<float> Weights = std::vector<float>( Generators::WeightedPreFill_1_Gens.size() );
 
 		float MaxWeight = 0;
@@ -304,7 +304,7 @@ namespace CloudberryKingdom
 	void Level::CleanupCoins( Vector2 BL, Vector2 TR )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameter>( Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( Style->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoCleanup )
 			return;
@@ -597,7 +597,7 @@ namespace CloudberryKingdom
 
 
 		// Stage 1 fill
-		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameter>( VStyle->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameters>( VStyle->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( BlockParams->DoStage1Fill )
 		{
 			//Fill_BL = BL_Bound + new Vector2(400, 0);
@@ -1863,7 +1863,7 @@ int Step1, Level::Step2 = 0;
 		float Left;
 		Left = MaxLeft;
 
-		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameter>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( !BlockParams->DoInitialPlats )
 			CurMakeData->InitialPlats = false;
 		if ( !BlockParams->DoFinalPlats )
