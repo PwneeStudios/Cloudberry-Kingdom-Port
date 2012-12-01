@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		if ( Recording_Renamed.empty() )
 			return;
 
-		for ( int i = 0; i < Recording_Renamed.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Recording_Renamed.size() ); i++ )
 			if ( Recording_Renamed[ i ] != 0 )
 				Recording_Renamed[ i ]->Shift( shift );
 	}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 				( *comp )->Release();
 
 		if ( Computer.size() > 0 )
-		for ( int i = 0; i < Computer.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Computer.size() ); i++ )
 			Computer[ i ]->getCore()->MyLevel.reset();
 		Computer.clear();
 
