@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		MyStyle = static_cast<Style>( level->getRnd()->getRndEnum()<Style>() );
 
-		if ( PieceSeed->getu()[ Upgrade_CEILING ] <= 0 )
+		if ( PieceSeed->getu()->Get( Upgrade_CEILING ) <= 0 )
 			Make = false;
 
 		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u->Get( Upgrade_CEILING ) ) );

@@ -3,14 +3,14 @@
 namespace CloudberryKingdom
 {
 
-const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
+	const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
 
 	const std::shared_ptr<Generators> &Generators::getInstance()
 	{
 		return instance;
 	}
 
-	std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens = 0;
+	std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
 
 	Generators::Generators()
 	{
@@ -61,6 +61,6 @@ const std::shared_ptr<Generators> Generators::instance = std::make_shared<Genera
 
 	int Generators::IndexOf( const std::shared_ptr<AutoGen> &gen )
 	{
-		return Gens.find( gen );
+		return ::IndexOf( Gens, gen );
 	}
 }

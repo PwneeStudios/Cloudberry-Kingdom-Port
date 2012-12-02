@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 		static std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, WeightedPreFill_1_Gens;
 
-	private:
+	public:
 		Generators();
 
 	public:

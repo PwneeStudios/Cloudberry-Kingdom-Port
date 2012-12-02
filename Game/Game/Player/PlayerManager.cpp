@@ -415,7 +415,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 		if ( players.empty() )
 			players = getExistingPlayers();
 
-		int N = players.size();
+		int N = static_cast<int>( players.size() );
 		int CharLength = MaxLength - ( N - 1 ); // The max number of characters, exlucing slashes
 
 		// Get a list of all names
@@ -434,7 +434,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 		// Concatenate the names together
 		std::wstring GroupTag = _T( "" );
 		//foreach (StringBuilder str in names)
-		for ( int i = 0; i < names.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( names.size() ); i++ )
 		{
 			std::shared_ptr<StringBuilder> str = names[ i ];
 			std::shared_ptr<PlayerData> player = players[ i ];

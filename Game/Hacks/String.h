@@ -4,6 +4,12 @@
 #include <string>
 #include <algorithm>
 
+int GetHashCode( const std::wstring &s )
+{
+	// FIXME
+	return 0;
+}
+
 inline std::wstring ToLower( const std::wstring &s )
 {
 	std::wstring lower = s;
@@ -36,6 +42,29 @@ inline std::wstring Format( const wchar_t *fmt, ... )
 {
 	// FIXME: Implement this.
 	return _T( "" );
+}
+
+std::vector<std::wstring> &Split( const std::wstring &s, wchar_t delim, std::vector<std::wstring> &elems )
+{
+    std::wstringstream ss(s);
+    std::wstring item;
+    while(std::getline(ss, item, delim)) {
+        elems.push_back(item);
+    }
+    return elems;
+}
+
+
+std::vector<std::wstring> Split( const std::wstring &s, wchar_t delim )
+{
+    std::vector<std::wstring> elems;
+    return Split(s, delim, elems);
+}
+
+std::wstring ToLower( const std::wstring &s )
+{
+	// FIXME: Implement
+	return s;
 }
 
 #endif

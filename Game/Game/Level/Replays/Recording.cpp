@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 
 	void Recording::ConvertToSuperSparse()
 	{
-		for ( int i = 0; i < Recordings.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Recordings.size() ); i++ )
 		{
 			Recordings[ i ]->ConvertToSuperSparse();
 		}
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 	void Recording::Release()
 	{
 		if ( Recordings.size() > 0 )
-		for ( int i = 0; i < Recordings.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Recordings.size() ); i++ )
 		{
 			Recordings[ i ]->Release();
 		}

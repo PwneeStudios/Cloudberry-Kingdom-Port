@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 	{
 		NumBobs = 0;
 		if ( computer.size() > 0 )
-			NumBobs = computer.size();
+			NumBobs = static_cast<int>( computer.size() );
 		else
 			NumBobs = numBobs;
 

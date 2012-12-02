@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float lvl = PieceSeed->getu()[ Upgrade_SPIKE ];
+		float lvl = PieceSeed->getu()->Get( Upgrade_SPIKE );
 
 		// General difficulty
 		int MinNumOffsets = 1;

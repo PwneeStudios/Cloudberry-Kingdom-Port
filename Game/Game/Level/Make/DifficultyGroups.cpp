@@ -19,16 +19,21 @@ namespace CloudberryKingdom
 		else
 			val = CoreMath::SpecialLerpRestrict( static_cast<float>( Values[ 3 ] ), static_cast<float>( Values[ 4 ] ), d - 3 );
 
-		Piece->getu()[ MyUpgrade ] = val;
+		Piece->getu()->Get( MyUpgrade ) = val;
 	}
 
-	DifficultyGroups::UpgradeSequenceSingle::UpgradeSequenceSingle( Upgrade MyUpgrade, ... )
+	DifficultyGroups::UpgradeSequenceSingle::UpgradeSequenceSingle( Upgrade MyUpgrade, float v0, float v1, float v2, float v3, float v4 )
 	{
 		this->MyUpgrade = MyUpgrade;
 
 		Values = std::vector<double>( 5 );
-		for ( int i = 0; i < 5; i++ )
-			Values[ i ] = values[ i ];
+		//for ( int i = 0; i < 5; i++ )
+		//	Values[ i ] = values[ i ];
+		Values[ 0 ] = v0;
+		Values[ 1 ] = v1;
+		Values[ 2 ] = v2;
+		Values[ 3 ] = v3;
+		Values[ 4 ] = v4;
 	}
 
 	void DifficultyGroups::UpgradeSequence::Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty )

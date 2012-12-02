@@ -5,24 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class BobInput;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-
-namespace CloudberryKingdom
-{
-	class ComputerRecording
+	class ComputerRecording : public std::enable_shared_from_this<ComputerRecording>
 	{
 	private:
 		static std::stack<std::shared_ptr<ComputerRecording> > Pool;

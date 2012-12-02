@@ -100,6 +100,8 @@
     <ClCompile Include="Game\Level\Make\DifficultyGroups.cpp" />
     <ClCompile Include="Game\Level\Make\DifficultyHelper.cpp" />
     <ClCompile Include="Game\Level\Make\Generators.cpp" />
+    <ClCompile Include="Game\Level\Make\LevelSeedData.cpp" />
+    <ClCompile Include="Game\Level\Make\LockableBool.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeThing.cpp" />

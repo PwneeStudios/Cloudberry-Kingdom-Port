@@ -14,7 +14,7 @@ template<typename T> where T : IComparable
 	{
 		T max = list[ 0 ];
 		int index = 0;
-		for ( int i = 1; i < list.size(); i++ )
+		for ( int i = 1; i < static_cast<int>( list.size() ); i++ )
 			if ( list[ i ]->compare( max ) > 0 )
 			{
 				max = list[ i ];
@@ -264,7 +264,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	{
 		int OpenSlot = 0;
 		int i = 0;
-		int N = list.size();
+		int N = static_cast<int>( list.size() );
 
 		while ( i < N )
 		{
@@ -287,7 +287,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	{
 		int i = 0;
 		int j = 0;
-		int N = source.size();
+		int N = static_cast<int>( source.size() );
 		while ( i < N )
 		{
 			while ( j < N && predicate->Apply( source[ j ], j ) )
@@ -765,7 +765,7 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 		if ( IncludeSubdirectories )
 		{
 			std::vector<std::wstring> dir = Directory::GetDirectories( path );
-			for ( int i = 0; i < dir.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( dir.size() ); i++ )
 				files.AddRange( GetFiles( dir[ i ], IncludeSubdirectories ) );
 		}
 
@@ -1133,7 +1133,7 @@ int Tools::WriteObjId = 0;
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
 	{
 		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
-		for ( int i = 0; i < Bits.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( keywords->Contains( Bits[ i ] ) )
 				dict->Add( Bits[ i ], i );
 		return dict;
@@ -1142,7 +1142,7 @@ int Tools::WriteObjId = 0;
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
 	{
 		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
-		for ( int i = 0; i < Bits.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( std::find( keywords.begin(), keywords.end(), Bits[ i ] ) != keywords.end() )
 				dict->Add( Bits[ i ], i );
 		return dict;
@@ -1631,7 +1631,7 @@ bool Tools::DebugConvenience = false;
 	std::vector<Vector2> Tools::FloatArrayToVectorArray_y( std::vector<float> v )
 	{
 		std::vector<Vector2> vec = std::vector<Vector2>( v.size() );
-		for ( int i = 0; i < v.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( v.size() ); i++ )
 			vec[ i ] = Vector2( 0, v[ i ] );
 		return vec;
 	}
@@ -1639,7 +1639,7 @@ bool Tools::DebugConvenience = false;
 	bool Tools::IncrementsContainsSum( std::vector<int> Incr, int S )
 	{
 		int Sum = 0;
-		for ( int i = 0; i < Incr.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Incr.size() ); i++ )
 		{
 			Sum += Incr[ i ];
 			if ( Sum == S )

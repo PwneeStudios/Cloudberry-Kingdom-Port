@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -41,17 +38,17 @@ namespace CloudberryKingdom
 
 	void Upgrades::Zero()
 	{
-		for ( int i = 0; i < UpgradeLevels.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( UpgradeLevels.size() ); i++ )
 			UpgradeLevels[ i ] = 0;
 	}
 
-int Upgrades::MaxBobWidth = 360;
+	int Upgrades::MaxBobWidth = 360;
 
 	void Upgrades::CalcGenData( const std::shared_ptr<LevelGenData> &GenData, const std::shared_ptr<StyleData> &Style )
 	{
-		Style_CALCULATE( shared_from_this() );
+		Style->Calculate( shared_from_this() );
 
-		float JumpLevel = this->operator[]( Upgrade_JUMP );
+		float JumpLevel = Get( Upgrade_JUMP );
 		JumpLevel = 3.75f + .625f * JumpLevel;
 
 		// Jump

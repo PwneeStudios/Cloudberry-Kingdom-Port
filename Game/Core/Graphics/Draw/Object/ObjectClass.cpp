@@ -66,15 +66,15 @@ int ObjectClass::ObjectClassVersionNumber = 54;
 
 		// Anim data
 		writer->Write( static_cast<int>( AnimLength.size() ) );
-		for ( size_t i = 0; i < AnimLength.size(); i++ )
+		for ( size_t i = 0; i < static_cast<int>( AnimLength.size() ); i++ )
 			writer->Write( AnimLength[ i ] );
 
 		writer->Write( static_cast<int>( AnimName.size() ) );
-		for ( size_t i = 0; i < AnimName.size(); i++ )
+		for ( size_t i = 0; i < static_cast<int>( AnimName.size() ); i++ )
 			writer->Write( AnimName[ i ] );
 
 		writer->Write( static_cast<int>( AnimSpeed.size() ) );
-		for ( size_t i = 0; i < AnimSpeed.size(); i++ )
+		for ( size_t i = 0; i < static_cast<int>( AnimSpeed.size() ); i++ )
 			writer->Write( AnimSpeed[ i ] );
 
 		// Write number of quads and their type

@@ -1031,7 +1031,7 @@ namespace CloudberryKingdom
 
 	void Level::SetReplay()
 	{
-		int NumBobs = Bobs.size();
+		int NumBobs = static_cast<int>( Bobs.size() );
 		Bobs.clear();
 		//for (int i = 0; i < CurrentRecording.NumBobs; i++)
 		for ( int i = 0; i < NumBobs; i++ )
@@ -3068,7 +3068,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		/*int i = DrawLayer[ obj->getCore()->DrawLayer ].find( obj ) + 1;*/
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ] , obj ) + 1;
-		int N = DrawLayer[ obj->getCore()->DrawLayer ].size();
+		int N = static_cast<int>( DrawLayer[ obj->getCore()->DrawLayer ].size() );
 		if ( i >= N )
 			i = N - 1;
 		Remove( DrawLayer[ obj->getCore()->DrawLayer ], obj );
@@ -3078,7 +3078,7 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::MoveToTopOfDrawLayer( const std::shared_ptr<ObjectBase> &obj )
 	{
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ], obj );
-		int N = DrawLayer[ obj->getCore()->DrawLayer ].size();
+		int N = static_cast<int>( DrawLayer[ obj->getCore()->DrawLayer ].size() );
 		if ( i == N - 1 )
 			return;
 
@@ -3089,7 +3089,7 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::MoveDownOneSublayer( const std::shared_ptr<ObjectBase> &obj )
 	{
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ], obj ) - 1;
-		int N = DrawLayer[ obj->getCore()->DrawLayer ].size();
+		int N = static_cast<int>( DrawLayer[ obj->getCore()->DrawLayer ].size() );
 		if ( i < 0 )
 			i = 0;
 		Remove( DrawLayer[ obj->getCore()->DrawLayer ], obj );

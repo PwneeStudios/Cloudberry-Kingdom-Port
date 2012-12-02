@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		TimeSafety.SetVal( __max( 0, DifficultyHelper::Interp( 1, 0, u->Get( Upgrade_GHOST_BLOCK ) ) ) );
 
 		// Masochistic
-		if ( PieceSeed->getu()[ Upgrade_GHOST_BLOCK ] == 10 )
+		if ( PieceSeed->getu()->Get( Upgrade_GHOST_BLOCK ) == 10 )
 			Masochistic = true;
 	}
 
