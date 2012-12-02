@@ -1,13 +1,7 @@
-﻿#ifndef RANDOM
-#define RANDOM
+﻿#ifndef _RANDOM_H
+#define _RANDOM_H
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
 
 namespace CloudberryKingdom
 {
@@ -19,7 +13,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxRandom> instance;
 	public:
-		const static std::shared_ptr<BobPhsxRandom> &getInstance() const;
+		static std::shared_ptr<BobPhsxRandom> &getInstance();
 
 		static std::shared_ptr<BobPhsx> ChooseHeroType();
 

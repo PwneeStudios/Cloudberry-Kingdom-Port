@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 			// Create a dummy block
 			int width = 400;
 			FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( width ), MyLevel->getMyTileSetInfo() );
+			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( static_cast<float>( width ) ), MyLevel->getMyTileSetInfo() );
 			FinalBlock->getCore()->setMyTileSet(MyLevel->MyTileSet);
 		}
 	}
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find<std::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 420;
 

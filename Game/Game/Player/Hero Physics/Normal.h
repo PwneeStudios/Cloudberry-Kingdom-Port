@@ -5,33 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class RichLevelGenData;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnim;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxNormal : public BobPhsx
 	{
 		// Singleton

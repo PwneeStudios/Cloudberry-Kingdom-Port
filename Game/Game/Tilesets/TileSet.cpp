@@ -258,18 +258,18 @@ namespace CloudberryKingdom
 						std::shared_ptr<AnimationData_Texture> sprite_anim = 0;
 						if ( dict->ContainsKey( _T( "frames" ) ) )
 						{
-							int start_frame = int::Parse( bits[ dict[ _T( "frames" ) ] + 1 ] );
+							int start_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 1 ] );
 							int end_frame;
 							if ( bits[ dict[ _T( "frames" ) ] + 2 ][ 0 ] == L't' )
-								end_frame = int::Parse( bits[ dict[ _T( "frames" ) ] + 3 ] );
+								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 3 ] );
 							else
-								end_frame = int::Parse( bits[ dict[ _T( "frames" ) ] + 2 ] );
+								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 2 ] );
 							sprite_anim = std::make_shared<AnimationData_Texture>( file, start_frame, end_frame );
 						}
 
 						if ( dict->ContainsKey( _T( "frame_length" ) ) )
 						{
-							int frame_length = int::Parse( bits[ dict[ _T( "frame_length" ) ] + 1 ] );
+							int frame_length = ParseInt( bits[ dict[ _T( "frame_length" ) ] + 1 ] );
 							sprite_anim->Anims[ 0 ].Speed = 1 / frame_length;
 						}
 
@@ -364,7 +364,7 @@ namespace CloudberryKingdom
 	{
 		// Get the block width
 		std::shared_ptr<std::wstring> num_str = first.substr( first.find( _T( "_" ) ) + 1 );
-		int width = int::Parse( num_str );
+		int width = ParseInt( num_str );
 
 		// Get the rest of the information
 		std::shared_ptr<CloudberryKingdom::PieceQuad> piecequad = ParseBlockLine( width, bits );
@@ -429,32 +429,32 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "box_height":
 			else if ( bits[ i ] == _T( "box_height" ) )
 			{
-					c->BoxHeight = 2 * float::Parse( bits[ i + 1 ] );
+					c->BoxHeight = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "width":
 			else if ( bits[ i ] == _T( "width" ) )
 			{
-					c->Data.RepeatWidth = 2 * float::Parse( bits[ i + 1 ] );
+					c->Data.RepeatWidth = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "height":
 			else if ( bits[ i ] == _T( "height" ) )
 			{
-					c->Data.RepeatHeight = 2 * float::Parse( bits[ i + 1 ] );
+					c->Data.RepeatHeight = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "left":
 			else if ( bits[ i ] == _T( "left" ) )
 			{
-					c->Data.Center_BL_Shift.X = float::Parse( bits[ i + 1 ] );
+					c->Data.Center_BL_Shift.X = ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "right":
 			else if ( bits[ i ] == _T( "right" ) )
 			{
-					c->Data.Center_TR_Shift.X = float::Parse( bits[ i + 1 ] );
+					c->Data.Center_TR_Shift.X = ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "top":
 			else if ( bits[ i ] == _T( "top" ) )
 			{
-					float shift = float::Parse( bits[ i + 1 ] );
+					float shift = ParseFloat( bits[ i + 1 ] );
 					c->Data.Center_TR_Shift.Y = shift;
 					c->Data.Center_BL_Shift.Y = shift;
 			}

@@ -546,7 +546,7 @@ namespace CloudberryKingdom
 			{
 				try
 				{
-					setSeed( int::Parse( data ) );
+					setSeed( ParseInt( data ) );
 				}
 				catch ( ... )
 				{
@@ -571,7 +571,7 @@ namespace CloudberryKingdom
 			{
 				try
 				{
-					MyGeometry = static_cast<LevelGeometry>( int::Parse( data ) );
+					MyGeometry = static_cast<LevelGeometry>( ParseInt( data ) );
 				}
 				catch ( ... )
 				{
@@ -617,7 +617,7 @@ namespace CloudberryKingdom
 			{
 					try
 					{
-						NumPieces = int::Parse( data );
+						NumPieces = ParseInt( data );
 						NumPieces = CoreMath::Restrict( 1, 5, NumPieces );
 					}
 					catch ( ... )
@@ -630,7 +630,7 @@ namespace CloudberryKingdom
 			{
 					try
 					{
-						Length = int::Parse( data );
+						Length = ParseInt( data );
 						Length = CoreMath::Restrict( 2000, 50000, Length );
 						PieceLength = Length;
 					}
@@ -667,14 +667,14 @@ namespace CloudberryKingdom
 			// Level number
 			else if ( ToLower( identifier ) == LevelFlag )
 			{
-					LevelNum = int::Parse( data );
+					LevelNum = ParseInt( data );
 			}
 			// Weather intensity
 			else if ( ToLower( identifier ) == WeatherIntensityFlag )
 			{
 					try
 					{
-						WeatherIntensity = float::Parse( data );
+						WeatherIntensity = ParseFloat( data );
 					}
 					catch ( ... )
 					{
@@ -686,7 +686,7 @@ namespace CloudberryKingdom
 			{
 					try
 					{
-						WaitLengthToOpenDoor = int::Parse( data );
+						WaitLengthToOpenDoor = ParseInt( data );
 					}
 					catch ( ... )
 					{
@@ -717,12 +717,12 @@ namespace CloudberryKingdom
 		}
 
 		// Error catch.
-		if ( dynamic_cast<BobPhsxMeat*>( DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_UP;
 			NumPieces = 1;
 		}
-		if ( dynamic_cast<BobPhsxRocketbox*>( DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_RIGHT;
 			NumPieces = 1;
@@ -760,41 +760,39 @@ namespace CloudberryKingdom
 		// Geometry
 		std::wstring geometry = _T( "" );
 		if ( MyGeometry != LevelGeometry_RIGHT )
-			geometry = _T( "geo:" ) + static_cast<int>( MyGeometry ) + _T( ";" );
+			geometry = Format( _T( "geo:{0};" ), + static_cast<int>( MyGeometry ) );
 
 		// Hero
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		std::wstring hero = _T( "h:" ) + DefaultHeroType->Specification.ToString() + _T(";");
+		std::wstring hero = Format( _T( "h:{0};" ), DefaultHeroType->Specification.ToString() );
 
 		// Custom phsx
 		std::wstring customphsx = _T( "" );
 		if ( DefaultHeroType->CustomPhsx )
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 			customphsx = DefaultHeroType->MyCustomPhsxData.ToString();
 
 		// Tileset
-		std::wstring tileset = _T( "t:" ) + MyTileSet->Name + _T( ";" );
+		std::wstring tileset = Format( _T( "t:{0};" ), MyTileSet->Name );
 
 		// Pieces
-		std::wstring pieces = _T( "n:" ) + NumPieces + _T( ";" );
+		std::wstring pieces = Format( _T( "n:{0};" ), NumPieces );
 
 		// Length
-		std::wstring length = _T( "l:" ) + StringConverterHelper::toString( Length ) + _T( ";" );
+		std::wstring length = Format( _T( "l:{0};" ), StringConverterHelper::toString( Length ) );
 
 		// Upgrades
 		std::wstring upgrades = _T( "" );
-		for ( std::vector<PieceSeedData*>::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
 		{
-			if ( ( *p )->Ladder != Level.LadderType_NONE )
+			if ( ( *p )->Ladder != LadderType_NONE )
 				continue;
 
 			upgrades += _T( "u:" );
 
 			std::vector<float> upgrade_levels = ( *p )->MyUpgrades1->UpgradeLevels;
-			for ( int i = 0; i < upgrade_levels.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( upgrade_levels.size() ); i++ )
 			{
 				upgrades += StringConverterHelper::toString( upgrade_levels[ i ] );
-				if ( i + 1 < upgrade_levels.size() )
+				if ( i + 1 < static_cast<int>( upgrade_levels.size() ) )
 					upgrades += _T( "," );
 			}
 			upgrades += _T( ";" );
@@ -814,14 +812,13 @@ namespace CloudberryKingdom
 	{
 		// Break the data up by commas
 		int index = CoreMath::Restrict( 0, UpgradeStrs.size() - 1, piece->MyPieceIndex );
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		std::vector<std::wstring> terms = UpgradeStrs[ index ].Split( L',' );
+		std::vector<std::wstring> terms = Split( UpgradeStrs[ index ], L',' );
 
 		// Try and load the data into the upgrade array.
 		try
 		{
-			for ( int i = 0; i < terms.size(); i++ )
-				piece->MyUpgrades1->UpgradeLevels[ i ] = float::Parse( terms[ i ] );
+			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
+				piece->MyUpgrades1->UpgradeLevels[ i ] = ParseFloat( terms[ i ] );
 		}
 		catch ( ... )
 		{
@@ -841,20 +838,20 @@ namespace CloudberryKingdom
 
 		int Bias = static_cast<int>( 75 - static_cast<unsigned int>( PieceHash ) % 50 );
 
-		for ( int i = 0; i < piece->MyUpgrades1->UpgradeLevels.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( piece->MyUpgrades1->UpgradeLevels.size() ); i++ )
 		{
 			int n1 = PieceHash | ( 2 + 8 + 32 + 128 + 512 );
 			int n2 = PieceHash | ( 1 + 4 + 16 + 64 + 256 );
 
 			int value = 0;
-			if ( ( n1 * n2 + static_cast<int>( exp( i ) ) ) % 100 > Bias )
+			if ( ( n1 * n2 + static_cast<int>( exp( static_cast<double>( i ) ) ) ) % 100 > Bias )
 				value = ( n1 + n1 * n2 ) % 10;
 
 			piece->MyUpgrades1->UpgradeLevels[ i ] = CoreMath::Restrict( 0, 10, value );
 		}
 
 		piece->MyUpgrades1->Get( Upgrade_CONVEYOR ) = 0;
-	piece->MyUpgrades1->Get( Upgrade_FIRESNAKE ) = piece->MyUpgrades1->Get( Upgrade_CONVEYOR );
+		piece->MyUpgrades1->Get( Upgrade_FIRESNAKE ) = piece->MyUpgrades1->Get( Upgrade_CONVEYOR );
 
 		piece->StandardClose();
 	}
@@ -866,8 +863,7 @@ namespace CloudberryKingdom
 
 		for ( int i = 0; i < Length; i++ )
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var value = i * PieceHash * PieceHash + PieceHash + i * i;
+			int value = i * PieceHash * PieceHash + PieceHash + i * i;
 
 			vals[ i ] = CoreMath::Restrict( BobPhsx::CustomPhsxData::Bounds( i ).MinValue, BobPhsx::CustomPhsxData::Bounds( i ).MaxValue, value );
 			vals[ i ] = CoreMath::Restrict( 0, 1, value );
@@ -903,14 +899,17 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::AddGameObjects_Default( const std::shared_ptr<Level> &level, bool global, bool ShowMultiplier )
 	{
-		level->MyGame->AddGameObject( std::make_shared<HintGiver>(), HelpMenu::MakeListener(), std::make_shared<PerfectScoreObject>(global, ShowMultiplier) );
+		level->MyGame->AddGameObject( std::make_shared<HintGiver>() );
+		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
+		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, ShowMultiplier) );
 
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 	}
 
 	void LevelSeedData::AddGameObjects_BareBones( const std::shared_ptr<Level> &level, bool global )
 	{
-		level->MyGame->AddGameObject( InGameStartMenu::MakeListener(), std::make_shared<PerfectScoreObject>(global, true) );
+		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
+		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, true) );
 	}
 
 	void LevelSeedData::BOL_StartMusic()
@@ -938,7 +937,7 @@ namespace CloudberryKingdom
 		if ( StartMusic )
 			level->MyGame->WaitThenDo( 8, std::make_shared<BOL_StartMusicProxy>() );
 
-		std::shared_ptr<ILevelConnector> door = static_cast<ILevelConnector*>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
+		std::shared_ptr<ILevelConnector> door = std::static_pointer_cast<ILevelConnector>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
 		door->setOnOpen( std::make_shared<EOL_DoorActionProxy>() );
 
 		level->StartRecording();
@@ -964,7 +963,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::SetTileSet( const std::wstring &name )
 	{
 		if ( name == _T( "" ) )
-			SetTileSet( static_cast<TileSet*>( 0 ) );
+			SetTileSet( name );
 		else
 			SetTileSet( TileSets::NameLookup[ name ] );
 	}
@@ -982,7 +981,7 @@ namespace CloudberryKingdom
 		MyGame.reset();
 
 		ReleasePieces();
-		PieceSeeds = std::vector<PieceSeedData*>();
+		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
 	}
 
 	void LevelSeedData::Release()
@@ -997,7 +996,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::ReleasePieces()
 	{
 		if ( PieceSeeds.size() > 0 )
-			for ( std::vector<PieceSeedData*>::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
+			for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
 				( *data )->Release();
 		PieceSeeds.clear();
 	}
@@ -1039,12 +1038,12 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::BaseInit()
 	{
-		PieceSeeds = std::vector<PieceSeedData*>();
+		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
 
 		Loaded = std::make_shared<LockableBool>();
 	}
 
-	void LevelSeedData::PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		this->MyGameType = Type;
 		this->Difficulty = Difficulty;
@@ -1061,8 +1060,9 @@ namespace CloudberryKingdom
 		if ( MyGameType == ActionGameData::Factory )
 			return;
 
-		if ( Length == 0 )
-			throw ( std::exception( _T( "Invalid length. PreInitialize may not have been called." ) ) );
+		// FIXME: Implement exceptions?
+		//if ( Length == 0 )
+		//	throw ( std::exception( _T( "Invalid length. PreInitialize may not have been called." ) ) );
 
 		Initialize( MyGameType, MyGeometry, NumPieces, Length, MyCustomDifficulty );
 	}
@@ -1072,7 +1072,7 @@ namespace CloudberryKingdom
 		int TestNumber;
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Pre-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Pre-sanitize: {0}" ), TestNumber ) );
 
 		// Convert random tileset to an actual randomly chosen tileset
 		// use global RND.
@@ -1094,28 +1094,28 @@ namespace CloudberryKingdom
 		// No spaceships or carts on vertical levels
 		if ( MyGeometry == LevelGeometry_UP || MyGeometry == LevelGeometry_DOWN )
 		{
-			if ( dynamic_cast<BobPhsxSpaceship*>( DefaultHeroType ) != 0 )
+			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxDouble::getInstance();
-			else if ( dynamic_cast<BobPhsxRocketbox*>( DefaultHeroType ) != 0 )
+			else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxJetman::getInstance();
 		}
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Post-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Post-sanitize: {0}" ), TestNumber ) );
 	}
 
-	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<PieceSeedData*, Upgrades*> > &CustomDiff )
+	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData> , std::shared_ptr<Upgrades> > > &CustomDiff )
 	{
 		Initialize( std::make_shared<StandardInitHelper>( CustomDiff ) );
 
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::Initialize( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialize( MyGameType, MyGeometry, NumPieces, PieceLength, CustomDiff );
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialized = true;
 
@@ -1141,7 +1141,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void LevelSeedData::InitNormal( bool Place, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::InitNormal( bool Place, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		std::shared_ptr<PieceSeedData> Piece;
 
@@ -1155,9 +1155,9 @@ namespace CloudberryKingdom
 
 			if ( Place )
 			{
-				Piece->Style_JUMP_TYPE = StyleData::_JumpType_ALWAYS;
+				Piece->Style->JumpType = StyleData::_JumpType_ALWAYS;
 
-				Piece->Style_MY_MOD_PARAMS->Add( std::make_shared<InitNormalMyModParamsHelper>() );
+				Piece->Style->MyModParams->Add( std::make_shared<InitNormalMyModParamsHelper>() );
 			}
 
 			if ( CustomDiff != 0 )
@@ -1203,7 +1203,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void LevelSeedData::InitPlace( const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::InitPlace( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		InitNormal( true, CustomDiff );
 	}
@@ -1224,7 +1224,8 @@ namespace CloudberryKingdom
 		std::shared_ptr<Level> NewLevel = std::make_shared<Level>();
 		NewLevel->MySourceGame = game;
 		NewLevel->DefaultHeroType = DefaultHeroType;
-		std::shared_ptr<Camera> cam = NewLevel->setMainCamera( std::make_shared<Camera>() );
+		NewLevel->setMainCamera( std::make_shared<Camera>() );
+		std::shared_ptr<Camera> cam = NewLevel->getMainCamera();
 		cam->Update();
 
 		// Set background and tileset
@@ -1242,7 +1243,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameData> LevelSeedData::Create( bool MakeInBackground )
 	{
-		std::shared_ptr<GameData> game = MyGameType->Make( this, MakeInBackground );
+		std::shared_ptr<GameData> game = MyGameType->Make( shared_from_this(), MakeInBackground );
 		game->EndMusicOnFinish = !NoMusicStart;
 
 		return game;
@@ -1265,7 +1266,7 @@ namespace CloudberryKingdom
 		NoDefaultMake = false;
 		NoMusicStart = false;
 		Name = _T( "" );
-		PostMake = std::make_shared<Multicaster_1<Level*> >();
+		PostMake = std::make_shared<Multicaster_1<std::shared_ptr<Level> > >();
 		ReleaseWhenLoaded = false;
 		LoadingBegun = false;
 		MyGeometry = LevelGeometry_RIGHT;

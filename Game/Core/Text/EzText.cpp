@@ -656,9 +656,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				AsPaint = false;
 				if ( string_bits.size() > 3 )
 				{
-					Parse_PicShift = Vector2( float::Parse( string_bits[ 3 ] ), float::Parse( string_bits[ 4 ] ) ) * Tools::TheGame->Resolution.LineHeightMod;
+					Parse_PicShift = Vector2( ParseFloat( string_bits[ 3 ] ), ParseFloat( string_bits[ 4 ] ) ) * Tools::TheGame->Resolution.LineHeightMod;
 					if ( string_bits.size() > 5 )
-						AsPaint = int::Parse( string_bits[ 5 ] ) > 0;
+						AsPaint = ParseInt( string_bits[ 5 ] ) > 0;
 				}
 				else
 					Parse_PicShift = Vector2();
@@ -671,21 +671,21 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				if ( WidthString.find( L's' ) != string::npos )
 				{
 					size = Vector2( texture->Width, texture->Height );
-					size *= float::Parse( HeightString );
+					size *= ParseFloat( HeightString );
 				}
 				// '?' calculates that number from the texture height/width ratio
 				else if ( WidthString.find( L'?' ) != string::npos )
 				{
-					size = Vector2( 0, float::Parse( HeightString ) );
+					size = Vector2( 0, ParseFloat( HeightString ) );
 					size.X = size.Y * ratio;
 				}
 				else if ( HeightString.find( L'?' ) != string::npos )
 				{
-					size = Vector2( float::Parse( WidthString ), 0 );
+					size = Vector2( ParseFloat( WidthString ), 0 );
 					size.Y = size.X / ratio;
 				}
 				else
-					size = Vector2( float::Parse( WidthString ), float::Parse( HeightString ) );
+					size = Vector2( ParseFloat( WidthString ), ParseFloat( HeightString ) );
 				Parse_PicSize = size * Tools::TheGame->Resolution.LineHeightMod;
 				break;
 
@@ -698,7 +698,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 				WidthString = str.substr( 2, Comma1 - 2 );
 				HeightString = str.substr( Comma1 + 1 );
-				Parse_PicSize = Vector2( float::Parse( WidthString ), float::Parse( HeightString ) );
+				Parse_PicSize = Vector2( ParseFloat( WidthString ), ParseFloat( HeightString ) );
 				Parse_PicSize *= Tools::TheGame->Resolution.LineHeightMod;
 				break;
 

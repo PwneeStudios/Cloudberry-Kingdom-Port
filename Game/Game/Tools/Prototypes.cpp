@@ -133,8 +133,8 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 					// Name, file, start frame, end frame
 					std::wstring root = bits[ 1 ];
-					int start_frame = int::Parse( bits[ 2 ] );
-					int end_frame = int::Parse( bits[ 3 ] );
+					int start_frame = ParseInt( bits[ 2 ] );
+					int end_frame = ParseInt( bits[ 3 ] );
 
 					// Speed or frame length
 					bool _use_speed = false;
@@ -142,11 +142,11 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 					float speed = 1;
 					if ( bits[ 4 ] == _T( "speed" ) )
 					{
-						speed = float::Parse( bits[ 5 ] );
+						speed = ParseFloat( bits[ 5 ] );
 						_use_speed = true;
 					}
 					else
-						frame_length = int::Parse( bits[ 4 ] );
+						frame_length = ParseInt( bits[ 4 ] );
 
 					// Reverse
 					bool reverse = false;
@@ -240,7 +240,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 //ORIGINAL LINE: case "Scale":
 				if ( bits[ 0 ] == _T( "Scale" ) )
 				{
-						scale = float::Parse( bits[ 1 ] );
+						scale = ParseFloat( bits[ 1 ] );
 
 				}
 //ORIGINAL LINE: case "Shift":

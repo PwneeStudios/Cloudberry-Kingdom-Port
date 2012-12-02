@@ -3,36 +3,10 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ILevelConnector;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-namespace CloudberryKingdom
-{
-	class MakeFinalDoor : public MakeThing
+	class MakeFinalDoor : public MakeThing, public std::enable_shared_from_this<MakeFinalDoor>
 	{
 	private:
 		class VanillaFillEndPieceLambda : public Lambda_1<std::shared_ptr<BlockBase> >

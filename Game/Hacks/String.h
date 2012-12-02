@@ -61,10 +61,4 @@ std::vector<std::wstring> Split( const std::wstring &s, wchar_t delim )
     return Split(s, delim, elems);
 }
 
-std::wstring ToLower( const std::wstring &s )
-{
-	// FIXME: Implement
-	return s;
-}
-
 #endif

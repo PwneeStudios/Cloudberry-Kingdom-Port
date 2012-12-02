@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -32,9 +33,9 @@ namespace CloudberryKingdom
 
 		// Find a final block that was used by the computer.
 		if ( MyLevel->CurMakeData->PieceSeed->GeometryType == LevelGeometry_DOWN )
-			FinalBlock = Tools::ArgMin( Tools::FindAll( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
+			FinalBlock = Tools::ArgMin<std::shared_ptr<BlockBase> >( Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
 		else
-			FinalBlock = Tools::ArgMax( Tools::FindAll( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
+			FinalBlock = Tools::ArgMax<std::shared_ptr<BlockBase> >( Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
 
 		FinalPos = FinalBlock->getCore()->Data.Position;
 
@@ -47,7 +48,7 @@ namespace CloudberryKingdom
 			for ( int j = MyLevel->LastStep - 1; j > 0; j-- )
 			{
 				Vector2 BobPos = MyLevel->CurPiece->Recording_Renamed[ i ]->AutoLocs[ j ];
-				float Dist = ( BobPos - FinalPos )->Length();
+				float Dist = ( BobPos - FinalPos ).Length();
 
 				if ( Closest == -1 || Dist < Closest )
 				{

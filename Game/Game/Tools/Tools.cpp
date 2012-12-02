@@ -1194,10 +1194,10 @@ int Tools::WriteObjId = 0;
 
 			// int
 			if ( fieldinfo->FieldType == int::typeid )
-				fieldinfo->SetValue( obj, int::Parse( Bits[ 1 ] ) );
+				fieldinfo->SetValue( obj, ParseInt( Bits[ 1 ] ) );
 			// float
 			if ( fieldinfo->FieldType == float::typeid )
-				fieldinfo->SetValue( obj, float::Parse( Bits[ 1 ] ) );
+				fieldinfo->SetValue( obj, ParseFloat( Bits[ 1 ] ) );
 			// Vector2
 			else if ( fieldinfo->FieldType == Vector2::typeid )
 				fieldinfo->SetValue( obj, ParseToVector2( Bits[ 1 ], Bits[ 2 ] ) );
@@ -1265,8 +1265,8 @@ int Tools::WriteObjId = 0;
 	{
 		Vector2 Vec = Vector2();
 
-		Vec.X = float::Parse( bit1 );
-		Vec.Y = float::Parse( bit2 );
+		Vec.X = ParseFloat( bit1 );
+		Vec.Y = ParseFloat( bit2 );
 
 		return Vec;
 	}
@@ -1275,10 +1275,10 @@ int Tools::WriteObjId = 0;
 	{
 		Vector4 Vec = Vector4();
 
-		Vec.X = float::Parse( bit1 );
-		Vec.Y = float::Parse( bit2 );
-		Vec.Z = float::Parse( bit3 );
-		Vec.W = float::Parse( bit4 );
+		Vec.X = ParseFloat( bit1 );
+		Vec.Y = ParseFloat( bit2 );
+		Vec.Z = ParseFloat( bit3 );
+		Vec.W = ParseFloat( bit4 );
 
 		return Vec;
 	}
@@ -1287,12 +1287,12 @@ int Tools::WriteObjId = 0;
 	{
 		PhsxData data = PhsxData();
 
-		data.Position.X = float::Parse( bit1 );
-		data.Position.Y = float::Parse( bit2 );
-		data.Velocity.X = float::Parse( bit3 );
-		data.Velocity.Y = float::Parse( bit4 );
-		data.Acceleration.X = float::Parse( bit5 );
-		data.Acceleration.Y = float::Parse( bit6 );
+		data.Position.X = ParseFloat( bit1 );
+		data.Position.Y = ParseFloat( bit2 );
+		data.Velocity.X = ParseFloat( bit3 );
+		data.Velocity.Y = ParseFloat( bit4 );
+		data.Acceleration.X = ParseFloat( bit5 );
+		data.Acceleration.Y = ParseFloat( bit6 );
 
 		return data;
 	}
@@ -1301,12 +1301,12 @@ int Tools::WriteObjId = 0;
 	{
 		BasePoint b = BasePoint();
 
-		b.e1.X = float::Parse( bit1 );
-		b.e1.Y = float::Parse( bit2 );
-		b.e2.X = float::Parse( bit3 );
-		b.e2.Y = float::Parse( bit4 );
-		b.Origin.X = float::Parse( bit5 );
-		b.Origin.Y = float::Parse( bit6 );
+		b.e1.X = ParseFloat( bit1 );
+		b.e1.Y = ParseFloat( bit2 );
+		b.e2.X = ParseFloat( bit3 );
+		b.e2.Y = ParseFloat( bit4 );
+		b.Origin.X = ParseFloat( bit5 );
+		b.Origin.Y = ParseFloat( bit6 );
 
 		return b;
 	}
@@ -1315,11 +1315,11 @@ int Tools::WriteObjId = 0;
 	{
 		MyOwnVertexFormat b = MyOwnVertexFormat();
 
-		b.xy.X = float::Parse( bit1 );
-		b.xy.Y = float::Parse( bit2 );
+		b.xy.X = ParseFloat( bit1 );
+		b.xy.Y = ParseFloat( bit2 );
 
-		b.uv.X = float::Parse( bit3 );
-		b.uv.Y = float::Parse( bit4 );
+		b.uv.X = ParseFloat( bit3 );
+		b.uv.Y = ParseFloat( bit4 );
 
 		b.TheColor.R = unsigned char::Parse( bit5 );
 		b.TheColor.G = unsigned char::Parse( bit6 );
@@ -1337,8 +1337,8 @@ int Tools::WriteObjId = 0;
 		std::wstring Component1, Component2;
 		Component1 = str.substr( 0, CommaIndex );
 		Component2 = str.substr( CommaIndex + 1, str.length() - CommaIndex - 1 );
-		Vec.X = float::Parse( Component1 );
-		Vec.Y = float::Parse( Component2 );
+		Vec.X = ParseFloat( Component1 );
+		Vec.Y = ParseFloat( Component2 );
 
 		return Vec;
 	}
@@ -1380,7 +1380,7 @@ int Tools::WriteObjId = 0;
 		Component1 = str.substr( 0, LineIndex );
 		Component2 = str.substr( LineIndex + 1, str.length() - LineIndex - 1 );
 
-		return NewSound( ParseToFileName( Component1 ), float::Parse( Component2 ) );
+		return NewSound( ParseToFileName( Component1 ), ParseFloat( Component2 ) );
 	}
 
 	std::shared_ptr<EzSound> Tools::NewSound( const std::wstring &name, float volume )
