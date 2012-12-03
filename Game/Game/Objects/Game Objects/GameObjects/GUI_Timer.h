@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class GUI_Timer : public GUI_Timer_Base
 	{
 	private:
-		class OnCoinGrabProxy : public Lambda_1<ObjectBase*>
+		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
 		private:
 			std::shared_ptr<GUI_Timer> timer;

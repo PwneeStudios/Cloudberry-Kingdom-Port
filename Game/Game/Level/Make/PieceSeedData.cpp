@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		MyUpgrades1->CalcGenData( MyGenData->gen1, Style );
 
 		RndDifficulty::ZeroUpgrades( MyUpgrades2 );
-		MyUpgrades1->UpgradeLevels.CopyTo( MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( MyUpgrades1->UpgradeLevels, MyUpgrades2->UpgradeLevels );
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 	}
 
@@ -23,9 +23,7 @@ namespace CloudberryKingdom
 
 	void PieceSeedData::Release()
 	{
-		if ( Style != 0 )
-			Style_RELEASE();
-			Style_SMARTPOINTERRESET();
+		if ( Style != 0 ) Style->Release(); Style.reset();
 		PieceSeed.reset();
 		MyGenData.reset();
 		MyLevelSeed.reset();
@@ -60,7 +58,7 @@ namespace CloudberryKingdom
 		MyUpgrades1->CalcGenData( MyGenData->gen1, Style );
 
 		RndDifficulty::ZeroUpgrades( MyUpgrades2 );
-		MyUpgrades1->UpgradeLevels.CopyTo( MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( MyUpgrades1->UpgradeLevels, MyUpgrades2->UpgradeLevels );
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 
 		TestNumber = getRnd()->RndInt(0, 1000);

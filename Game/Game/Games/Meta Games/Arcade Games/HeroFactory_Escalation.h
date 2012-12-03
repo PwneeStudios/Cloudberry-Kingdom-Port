@@ -5,13 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Challenge_HeroFactoryEscalation : public Challenge_Escalation
 	{
 	public:
@@ -22,9 +15,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Challenge_HeroFactoryEscalation> &getInstance();
 
-	protected:
 		Challenge_HeroFactoryEscalation();
 
+	protected:
 		virtual std::shared_ptr<BobPhsx> GetHero( int i );
 	};
 }

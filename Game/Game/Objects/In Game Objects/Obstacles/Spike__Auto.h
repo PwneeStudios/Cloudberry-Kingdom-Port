@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		public:
 			SpikeCleanup( const std::shared_ptr<Spike_Parameters> &Params );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 	private:
 		static const std::shared_ptr<Spike_AutoGen> instance;

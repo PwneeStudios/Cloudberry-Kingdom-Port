@@ -224,32 +224,6 @@ namespace CloudberryKingdom
 		NoMakingTopOnly = false;
 	}
 
-	void BlockExtension::StampAsFullyUsed( const std::shared_ptr<BlockBase> &block, int CurPhsxStep )
-	{
-		block->StampAsUsed( CurPhsxStep );
-		block->getBlockCore()->NonTopUsed = true;
-	}
-
-	void BlockExtension::Stretch( const std::shared_ptr<BlockBase> &block, Side side, float amount )
-	{
-		block->getBox()->CalcBounds();
-		switch ( side )
-		{
-			case Side_RIGHT:
-				block->Extend( side, block->getBox()->GetTR().X + amount );
-				break;
-			case Side_LEFT:
-				block->Extend( side, block->getBox()->GetBL().X + amount );
-				break;
-			case Side_TOP:
-				block->Extend( side, block->getBox()->GetTR().Y + amount );
-				break;
-			case Side_BOTTOM:
-				block->Extend( side, block->getBox()->GetBL().Y + amount );
-				break;
-		}
-	}
-
 	void ObjectData::AssociatedObjData::Zero()
 	{
 		Guid = 0;
@@ -444,14 +418,19 @@ unsigned long long ObjectData::NextId = 0;
 		return ( EditorCode1.compare( code ) == 0 || EditorCode2.compare( code ) == 0 || EditorCode3.compare( code ) == 0 );
 	}
 
-	bool ObjectData::operator == ( const std::wstring &str )
-	{
-		return this->EditorCode1.compare( str ) == 0;
-	}
+	//bool ObjectData::operator == ( const std::wstring &str )
+	//{
+	//	return this->EditorCode1.compare( str ) == 0;
+	//}
 
-	bool ObjectData::operator != ( const std::wstring &str )
+	//bool ObjectData::operator != ( const std::wstring &str )
+	//{
+	//	return !( this == str );
+	//}
+
+	bool ObjectData::IsCalled( const std::wstring &str )
 	{
-		return !( this == str );
+		return EditorCode1.compare( str ) == 0;
 	}
 
 	void ObjectData::Init()

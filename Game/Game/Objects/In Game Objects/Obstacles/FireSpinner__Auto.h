@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		public:
 			Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:

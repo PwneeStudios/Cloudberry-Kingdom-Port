@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class Level
+	class Level : public std::enable_shared_from_this<Level>
 	{
 	private:
-		class ElementDistanceSquared : public LambdaFunc_1<BlockBase*, float>
+		class ElementDistanceSquared : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
 		private:
 			Vector2 pos;
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class FindFirstRowLambda : public LambdaFunc_1<BlockBase*, bool>
+		class FindFirstRowLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		public:
 			FindFirstRowLambda();
@@ -37,11 +37,11 @@ namespace CloudberryKingdom
 		public:
 			MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:
-		class FindLimitGeneralDensityLambda : public LambdaFunc_1<ObjectBase*, bool>
+		class FindLimitGeneralDensityLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
 		public:
 			FindLimitGeneralDensityLambda();
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 		public:
 			GeneralMinDistLambda( const std::shared_ptr<Level> &level );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class IsLavaLambda : public LambdaFunc_1<BlockBase*, bool>
+		class IsLavaLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		public:
 			IsLavaLambda();
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class FindGuidLambda : public LambdaFunc_1<ObjectBase*, bool>
+		class FindGuidLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
 		private:
 			unsigned long long guid;
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class CleanObjectListLambda : public LambdaFunc_1<ObjectBase*, bool>
+		class CleanObjectListLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
 		public:
 			CleanObjectListLambda();
@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class CleanDrawLayerLambda : public LambdaFunc_1<ObjectBase*, bool>
+		class CleanDrawLayerLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
 		private:
 			int layer;
@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class CleanBlockListLambda : public LambdaFunc_1<BlockBase*, bool>
+		class CleanBlockListLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		public:
 			CleanBlockListLambda();
@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 			LightLayers_FRONT_OF_EVERYTHING
 		};
 	private:
-		class RemoveForeignLambda : public LambdaFunc_1<ObjectBase*, bool>
+		class RemoveForeignLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
 		private:
 			std::shared_ptr<Level> level;
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class RemoveForeignBlockLambda : public LambdaFunc_1<BlockBase*, bool>
+		class RemoveForeignBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		private:
 			std::shared_ptr<Level> level;
@@ -211,7 +211,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		class BaseMetric : public LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2>
+		class BaseMetric : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
 		{
 		public:
 			BaseMetric();
@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		public:
 			ConstLambda( Vector2 c );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	private:
@@ -251,7 +251,7 @@ namespace CloudberryKingdom
 		public:
 			CleanupCoinsHelper( const std::shared_ptr<Coin_Parameters> &Params );
 
-			Vector2 Apply( Vector2 pos );
+			Vector2 Apply( const Vector2 &pos );
 		};
 
 	public:
@@ -296,7 +296,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether a replay is available to be watched.
 		/// </summary>
-		const bool &getReplayAvailable() const;
+		const bool getReplayAvailable() const;
 
 		std::shared_ptr<SwarmBundle> MySwarmBundle;
 		std::shared_ptr<Recording> CurrentRecording;
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
 
 	public:
 		float VanillaFill( Vector2 BL, Vector2 TR, float width );
-		float VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const std::shared_ptr<Lambda_1<BlockBase*> > &PreInit, const std::shared_ptr<Lambda_1<BlockBase*> > &PostInit );
+		float VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PreInit, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PostInit );
 
 		float RandomBlocks( Vector2 BL, Vector2 TR, std::shared_ptr<MakeData> &makeData );
 
@@ -488,14 +488,14 @@ namespace CloudberryKingdom
 
 
 	public:
-		const std::shared_ptr<Recycler> &getRecycle() const;
+		const std::shared_ptr<Recycler> getRecycle() const;
 
 		std::wstring Name;
 
 	private:
 		std::shared_ptr<Rand> _PrivateRnd;
 	public:
-		const std::shared_ptr<Rand> &getRnd() const;
+		const std::shared_ptr<Rand> &getRnd();
 
 		bool SuppressSounds;
 
@@ -704,17 +704,17 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Get the final door of this level (the exit).
 		/// </summary>
-		const std::shared_ptr<Door> &getFinalDoor() const;
+		const std::shared_ptr<Door> getFinalDoor() const;
 
 		/// <summary>
 		/// Get the first door of this level (the entrance).
 		/// </summary>
-		const std::shared_ptr<Door> &getStartDoor() const;
+		const std::shared_ptr<Door> getStartDoor() const;
 
 		/// <summary>
 		/// Find an object in this level by its code number.
 		/// </summary>
-		std::shared_ptr<ObjectBase> FindIObject( const std::wstring &Code1 );
+		const std::shared_ptr<ObjectBase> FindIObject( const std::wstring &Code1 ) const;
 
 		int GetPhsxStep();
 		float GetIndependentPhsxStep();
@@ -932,19 +932,19 @@ namespace CloudberryKingdom
 
 		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc );
 		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
-		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric );
+		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric );
 
 		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		// If MustBeDifferent is set, then only two objects of different types can force a deletion
 		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
-		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric );
+		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric );
 
 
 		void Cleanup_xCoord( ObjectType ObjType, float MinDist );
 
 
 	private:
-		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<ObjectBase*, ObjectBase*, Vector2> > &metric, bool MustBeDifferent );
+		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
 
 		void CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
 

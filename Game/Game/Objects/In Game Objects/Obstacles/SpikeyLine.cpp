@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<SpikeyLine> FloaterA = dynamic_cast<SpikeyLine*>( A );
+		std::shared_ptr<SpikeyLine> FloaterA = std::dynamic_pointer_cast<SpikeyLine>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Period = FloaterA->Period;

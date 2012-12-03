@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	const std::shared_ptr<BlockEmitter_Parameters> &MovingPlatform::getMyParams() const
 	{
-		return std::static_pointer_cast<BlockEmitter_Parameter>( getCore()->MyLevel->Style->FindParams(BlockEmitter_AutoGen::getInstance()) );
+		return std::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->Style->FindParams(BlockEmitter_AutoGen::getInstance()) );
 	}
 
 	bool MovingPlatform::PermissionToUse()
@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 
 	void MovingPlatform::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<MovingPlatform> BlockA = dynamic_cast<MovingPlatform*>( A );
+		std::shared_ptr<MovingPlatform> BlockA = std::dynamic_pointer_cast<MovingPlatform>( A );
 		getBlockCore()->Clone(A->getCore());
 
 		Parent = BlockA->Parent;

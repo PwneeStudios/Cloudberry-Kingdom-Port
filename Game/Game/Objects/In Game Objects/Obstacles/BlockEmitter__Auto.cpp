@@ -82,7 +82,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		std::shared_ptr<BlockEmitter_Parameters> Params = std::make_shared<BlockEmitter_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void BlockEmitter_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -90,7 +90,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get BlockEmitter parameters
-		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameter>( level->Style->FindParams( BlockEmitter_AutoGen::getInstance() ) );
+		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameters>( level->Style->FindParams( BlockEmitter_AutoGen::getInstance() ) );
 
 		Vector2 Pos = BL;
 		int count = 0;
@@ -101,7 +101,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 			{
 				if ( Params->Dist.GetVal( Pos ) < Params->StepCutoff )
 				{
-					std::shared_ptr<BlockEmitter> bm = static_cast<BlockEmitter*>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+					std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 					bm->Init( Pos, level, level->CurMakeData->PieceSeed->ElevatorBoxStyle );
 
 					float Vel = GetVel( Params, Pos );
@@ -154,7 +154,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 
 					if ( DistAdd < Params->StepCutoff )
 					{
-						std::shared_ptr<BlockEmitter> bm = static_cast<BlockEmitter*>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+						std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 
 						float Vel = GetVel( Params, Pos );
 

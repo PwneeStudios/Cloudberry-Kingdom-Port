@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool = 0;
+	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool = std::stack<std::shared_ptr<ComputerRecording> >();
 
 	void ComputerRecording::FillPool()
 	{
@@ -25,7 +25,8 @@ namespace CloudberryKingdom
 		if ( Pool.empty() )
 			FillPool();
 
-		std::shared_ptr<ComputerRecording> popped = Pool.pop();
+		std::shared_ptr<ComputerRecording> popped = Pool.top();
+		Pool.pop();
 		popped->Clean();
 
 		return popped;
@@ -41,11 +42,11 @@ namespace CloudberryKingdom
 		if ( AutoLocs.empty() )
 			return;
 
-		for ( int i = 0; i < AutoLocs.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( AutoLocs.size() ); i++ )
 			AutoLocs[ i ] += shift;
 	}
 
-int ComputerRecording::PareDivider = 4;
+	int ComputerRecording::PareDivider = 4;
 
 	void ComputerRecording::Write( const std::shared_ptr<BinaryWriter> &writer, int Length )
 	{
@@ -71,23 +72,23 @@ int ComputerRecording::PareDivider = 4;
 
 	void ComputerRecording::Clean()
 	{
-		for ( int i = 0; i < Input.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Input.size() ); i++ )
 			Input[ i ].Clean();
-		for ( int i = 0; i < AutoJump.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( AutoJump.size() ); i++ )
 			AutoJump[ i ] = 0;
-		for ( int i = 0; i < AutoLocs.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( AutoLocs.size() ); i++ )
 			AutoLocs[ i ] = Vector2();
-		for ( int i = 0; i < AutoVel.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( AutoVel.size() ); i++ )
 			AutoVel[ i ] = Vector2();
-		for ( int i = 0; i < BoxCenter.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( BoxCenter.size() ); i++ )
 			BoxCenter[ i ] = Vector2();
-		for ( int i = 0; i < AutoOnGround.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( AutoOnGround.size() ); i++ )
 			AutoOnGround[ i ] = false;
-		for ( int i = 0; i < Anim.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Anim.size() ); i++ )
 			Anim[ i ] = 0;
-		for ( int i = 0; i < t.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( t.size() ); i++ )
 			t[ i ] = 0;
-		for ( int i = 0; i < Alive.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Alive.size() ); i++ )
 			Alive[ i ] = false;
 	}
 
@@ -126,7 +127,7 @@ int ComputerRecording::PareDivider = 4;
 
 			int i1 = Step / PareDivider;
 			int i2 = i1 + 1;
-			if ( i2 >= BoxCenter.size() )
+			if ( i2 >= static_cast<int>( BoxCenter.size() ) )
 				i2 = i1;
 
 			Vector2 p1 = BoxCenter[ i1 ];
@@ -137,10 +138,10 @@ int ComputerRecording::PareDivider = 4;
 		}
 	}
 
-template<typename T>
+	template<typename T>
 	std::vector<T> ComputerRecording::PareDown( std::vector<T> SourceArray )
 	{
-		int n = SourceArray.size();
+		int n = static_cast<int>( SourceArray.size() );
 		int m = n / PareDivider;
 		std::vector<T> ParedArray = std::vector<T>( m );
 

@@ -5,24 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class BobInput;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-
-namespace CloudberryKingdom
-{
-	class ComputerRecording
+	class ComputerRecording : public std::enable_shared_from_this<ComputerRecording>
 	{
 	private:
 		static std::stack<std::shared_ptr<ComputerRecording> > Pool;
@@ -44,7 +27,7 @@ namespace CloudberryKingdom
 
 		std::vector<BobInput> Input;
 		std::vector<int> AutoJump;
-		std::vector<Vector2> AutoLocs, *AutoVel, *BoxCenter;
+		std::vector<Vector2> AutoLocs, AutoVel, BoxCenter;
 		std::vector<bool> AutoOnGround;
 		std::vector<unsigned char> Anim;
 		std::vector<float> t;

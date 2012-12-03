@@ -128,7 +128,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 	void ScoreDatabase::Add( const std::shared_ptr<ScoreEntry> &score )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			( *player )->AddHighScore( score );
 
 		EnsureList( score->GameId );

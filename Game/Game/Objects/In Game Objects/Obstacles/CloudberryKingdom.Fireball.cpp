@@ -391,7 +391,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Fireball> FireballA = dynamic_cast<Fireball*>( A );
+		std::shared_ptr<Fireball> FireballA = std::dynamic_pointer_cast<Fireball>( A );
 
 		Radius = FireballA->Radius;
 		Period = FireballA->Period;

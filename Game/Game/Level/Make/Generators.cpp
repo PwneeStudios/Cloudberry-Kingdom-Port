@@ -1,27 +1,24 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
-const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
+	const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
 
 	const std::shared_ptr<Generators> &Generators::getInstance()
 	{
 		return instance;
 	}
 
-std::vector<AutoGen*> Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens = 0;
+	std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
 
 	Generators::Generators()
 	{
-		Gens = std::vector<AutoGen*>();
-		PreFill_1_Gens = std::vector<AutoGen*>();
-		PreFill_2_Gens = std::vector<AutoGen*>();
-		ActiveFill_1_Gens = std::vector<AutoGen*>();
-		WeightedPreFill_1_Gens = std::vector<AutoGen*>();
+		Gens = std::vector<std::shared_ptr<AutoGen> >();
+		PreFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
+		PreFill_2_Gens = std::vector<std::shared_ptr<AutoGen> >();
+		ActiveFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
+		WeightedPreFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
 
 		AddGenerator( NormalBlock_AutoGen::getInstance() );
 		AddGenerator( Ceiling_AutoGen::getInstance() );
@@ -64,6 +61,6 @@ std::vector<AutoGen*> Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, G
 
 	int Generators::IndexOf( const std::shared_ptr<AutoGen> &gen )
 	{
-		return Gens.find( gen );
+		return ::IndexOf( Gens, gen );
 	}
 }

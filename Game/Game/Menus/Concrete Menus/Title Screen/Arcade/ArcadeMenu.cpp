@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 	{
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<Awardment> award = dynamic_cast<Awardment*>( ( *item )->MyObject );
+			std::shared_ptr<Awardment> award = std::dynamic_pointer_cast<Awardment>( ( *item )->MyObject );
 			if ( 0 != award && !PlayerManager::Awarded( award ) && !CloudberryKingdomGame::UnlockAll )
 			{
 				( *item )->MyText->MyFloatColor = ( Color( 255, 100, 100 ) ).ToVector4();

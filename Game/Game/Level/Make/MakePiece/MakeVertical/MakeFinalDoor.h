@@ -23,14 +23,14 @@ namespace CloudberryKingdom
 	class MakeFinalDoorVertical : public MakeThing
 	{
 	private:
-		class ElementPositionProjectY : public LambdaFunc_1<BlockBase*, float>
+		class ElementPositionProjectY : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
 		public:
 			float Apply( const std::shared_ptr<BlockBase> &element );
 		};
 
 	private:
-		class MatchUsedLambda : public LambdaFunc_1<BlockBase*, bool>
+		class MatchUsedLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
 		public:
 			MatchUsedLambda();

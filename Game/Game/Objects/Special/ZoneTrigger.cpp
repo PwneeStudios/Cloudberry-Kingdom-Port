@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<ZoneTrigger> TriggerA = dynamic_cast<ZoneTrigger*>( A );
+		std::shared_ptr<ZoneTrigger> TriggerA = std::dynamic_pointer_cast<ZoneTrigger>( A );
 		Box->Initialize( TriggerA->Box.Current->Center, TriggerA->Box.Current->Size );
 		MyContainsEvent = TriggerA->MyContainsEvent;
 	}

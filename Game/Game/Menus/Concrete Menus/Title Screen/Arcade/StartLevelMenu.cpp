@@ -61,7 +61,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 	void StartLevelMenu::Launch( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<LevelItem> litem = dynamic_cast<LevelItem*>( item );
+		std::shared_ptr<LevelItem> litem = std::dynamic_pointer_cast<LevelItem>( item );
 		if ( 0 == litem )
 			return;
 
@@ -95,7 +95,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 	{
 		std::vector<std::wstring> names = std::vector<std::wstring*>( Levels.size() );
 
-		for ( int i = 0; i < Levels.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
 			names[ i ] = Format( _T( "{0:00}" ), Levels[ i ] );
 		//names[i] = string.Format("Level {0}", Levels[i]);
 
@@ -115,7 +115,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 		// Allow user to choose amongst any start level in the array Levels,
 		// assuming they have previously gotten to that level.
 		IndexCutoff = 1;
-		for ( int i = 0; i < Levels.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
 			if ( HighestLevel >= Levels[ i ] || CloudberryKingdomGame::UnlockAll )
 				IndexCutoff = i + 1;
 
@@ -146,7 +146,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 		std::vector<std::wstring> Names = GetNames();
 
-		for ( int i = 0; i < Names.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Names.size() ); i++ )
 		{
 			int StartLevel = Levels[ i ];
 			int MenuIndex = i;

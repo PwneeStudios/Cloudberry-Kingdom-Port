@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Box_Duck_0000" ) ), Color::White, DefaultIconWidth * 1.35f );
-		( static_cast<PictureIcon*>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( 0,.0485f ) );
+		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( 0,.0485f ) );
 	}
 
 const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhsxBox>();
@@ -102,7 +102,7 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		{
 			std::shared_ptr<CloudberryKingdom::ObjectClass> p = MyBob->PlayerObject;
 			p->DrawExtraQuad = true;
-			p->ExtraQuadToDraw = static_cast<Quad*>( p->FindQuad( _T( "MainQuad" ) ) );
+			p->ExtraQuadToDraw = std::static_pointer_cast<Quad>( p->FindQuad( _T( "MainQuad" ) ) );
 			p->ExtraQuadToDrawTexture = Tools::Texture( _T( "BoxAlone" ) );
 		}
 		else

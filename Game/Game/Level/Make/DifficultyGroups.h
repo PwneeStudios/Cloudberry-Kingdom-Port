@@ -18,9 +18,7 @@ namespace CloudberryKingdom
 		public:
 			std::vector<double> Values;
 
-//ORIGINAL LINE: public UpgradeSequenceSingle(Upgrade MyUpgrade, params double[] values)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-			UpgradeSequenceSingle( Upgrade MyUpgrade, ... );
+			UpgradeSequenceSingle( Upgrade MyUpgrade, float v0, float v1, float v2, float v3, float v4 );
 		};
 
 	public:

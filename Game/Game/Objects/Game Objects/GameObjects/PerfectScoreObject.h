@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 	class PerfectScoreObject : public GUI_Panel
 	{
 	private:
-		class OnCoinGrabProxy : public Lambda_1<ObjectBase*>
+		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
 		private:
 			std::shared_ptr<PerfectScoreObject> pso;

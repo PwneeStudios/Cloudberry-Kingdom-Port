@@ -7,6 +7,12 @@
 #include <string>
 #include <sstream>
 
+int GetHashCode( const std::wstring &s )
+{
+	// FIXME
+	return 0;
+}
+
 inline std::wstring ToLower( const std::wstring &s )
 {
 	std::wstring lower = s;
@@ -41,16 +47,6 @@ inline std::wstring Format( const wchar_t *fmt, ... )
 	return _T( "" );
 }
 
-inline void Split( const std::wstring &str, wchar_t c, std::vector<std::wstring> &parts )
-{
-	using namespace std;
-
-	wstringstream wss( str );
-	wstring part;
-	while( getline( wss, part, c ) )
-		parts.push_back( part );
-}
-
 template<class T>
 T Parse( const std::wstring &str )
 {
@@ -80,6 +76,24 @@ unsigned char Parse<unsigned char>( const std::wstring &str )
 		return 0;
 
 	return static_cast<unsigned char>( temp );
+}
+
+inline std::vector<std::wstring> &Split( const std::wstring &s, wchar_t delim, std::vector<std::wstring> &elems )
+{
+    std::wstringstream ss( s );
+    std::wstring item;
+
+    while( std::getline( ss, item, delim ) )
+        elems.push_back( item );
+
+    return elems;
+}
+
+
+inline std::vector<std::wstring> Split( const std::wstring &s, wchar_t delim )
+{
+    std::vector<std::wstring> elems;
+    return Split( s, delim, elems );
 }
 
 #endif

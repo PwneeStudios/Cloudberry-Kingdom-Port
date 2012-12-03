@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 				float LeftIntensity = CoreMath::Restrict( .4f,.4f, t );
 				float RightIntensity = CoreMath::Restrict( .1f,.3f, t );
 
-				for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getAlivePlayers().begin(); player != PlayerManager::getAlivePlayers().end(); ++player )
+				for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getAlivePlayers().begin(); player != PlayerManager::getAlivePlayers().end(); ++player )
 					Tools::SetVibration( ( *player )->MyPlayerIndex, LeftIntensity, LeftIntensity, 30 );
 	#endif
 			}

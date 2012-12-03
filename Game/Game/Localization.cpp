@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		this->MyTexture = MyTexture;
 	}
 
-std::map<Language, std::map<Words, std::wstring> > Localization::Text;
+	std::map<Language, std::map<Words, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
 	{
@@ -190,7 +190,7 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 			if ( identifier == _T( "show" ) )
 			{
 					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_{0}" ), Index ) );
-					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, float::Parse( data ), SubtitleTexture ) );
+					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, ParseFloat( data ), SubtitleTexture ) );
 
 					Index++;
 
@@ -199,7 +199,7 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 //ORIGINAL LINE: case "hide":
 			else if ( identifier == _T( "hide" ) )
 			{
-					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, float::Parse( data ), 0 ) );
+					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), 0 ) );
 			}
 
 			line = reader->ReadLine();

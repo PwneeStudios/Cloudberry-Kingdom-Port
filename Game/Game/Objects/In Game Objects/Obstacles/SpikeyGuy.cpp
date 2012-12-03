@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	{
 		_CircleDeath::OnAttachedToBlock();
 
-		if ( dynamic_cast<NormalBlock*>( getCore()->ParentBlock ) != 0 )
+		if ( std::dynamic_pointer_cast<NormalBlock>( getCore()->ParentBlock ) != 0 )
 			return;
 		else
 		{
@@ -178,7 +178,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<SpikeyGuy> FloaterA = dynamic_cast<SpikeyGuy*>( A );
+		std::shared_ptr<SpikeyGuy> FloaterA = std::dynamic_pointer_cast<SpikeyGuy>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Angle = FloaterA->Angle;

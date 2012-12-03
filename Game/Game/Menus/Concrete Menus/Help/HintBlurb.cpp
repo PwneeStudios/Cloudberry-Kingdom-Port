@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 			if ( ( *obj ).get() == this )
 				continue;
 
-			std::shared_ptr<HintBlurb> blurb = dynamic_cast<HintBlurb*>( *obj );
+			std::shared_ptr<HintBlurb> blurb = std::dynamic_pointer_cast<HintBlurb>( *obj );
 			if ( 0 != blurb )
 				blurb->Kill();
 		}

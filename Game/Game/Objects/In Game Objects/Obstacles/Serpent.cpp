@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 		getCore()->Clone(A->getCore());
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );
 
-		std::shared_ptr<Serpent> SerpentA = dynamic_cast<Serpent*>( A );
+		std::shared_ptr<Serpent> SerpentA = std::dynamic_pointer_cast<Serpent>( A );
 
 		Offset = SerpentA->Offset;
 		UpT = SerpentA->UpT;

@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		MyStyle = static_cast<Style>( level->getRnd()->getRndEnum()<Style>() );
 
-		if ( PieceSeed->getu()[ Upgrade_CEILING ] <= 0 )
+		if ( PieceSeed->getu()->Get( Upgrade_CEILING ) <= 0 )
 			Make = false;
 
 		HeightRange = VectorParam( PieceSeed, DifficultyHelper::InterpRestrict19( Vector2( 100, 900 ), Vector2( 500, 1300 ), u->Get( Upgrade_CEILING ) ) );
@@ -54,12 +54,12 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		std::shared_ptr<Ceiling_Parameters> Params = std::make_shared<Ceiling_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void Ceiling_AutoGen::MakeLongCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<NormalBlock> cblock = static_cast<NormalBlock*>( level->getRecycle()->GetObject( ObjectType_NORMAL_BLOCK, true ) );
+		std::shared_ptr<NormalBlock> cblock = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject( ObjectType_NORMAL_BLOCK, true ) );
 		Vector2 size = TR - BL + Vector2( 4000, 0 );
 		Vector2 pos = ( TR + BL ) / 2 + Vector2( 0, 500 );
 		cblock->Init( pos, size, level->getMyTileSetInfo() );
@@ -75,7 +75,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameter>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		float MaxStartY = -100000;
 		for ( int i = 0; i < level->CurMakeData->NumInitialBobs; i++ )
@@ -89,7 +89,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		if ( !level->MyTileSet->HasCeiling )
 			return;
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameter>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;
@@ -101,7 +101,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		{
 			Vector2 size = Vector2( Params->WidthRange.RndFloat( Pos, level->getRnd() ), Params->HeightRange.RndFloat(Pos, level->getRnd()) );
 
-			cblock = static_cast<NormalBlock*>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			cblock = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 			cblock->Init( Vector2(), size, level->getMyTileSetInfo() );
 			size = cblock->getBox()->Current->Size;
 

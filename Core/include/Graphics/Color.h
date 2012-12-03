@@ -33,6 +33,11 @@ struct Color
 		G( static_cast< unsigned char >( c.Y * 255.f ) ),
 		B( static_cast< unsigned char >( c.Z * 255.f ) ),
 		A( static_cast< unsigned char >( c.W * 255.f ) ) { }
+	Color( float r, float g, float b ) :
+		R( static_cast< unsigned char >( r * 255.f ) ),
+		G( static_cast< unsigned char >( g * 255.f ) ),
+		B( static_cast< unsigned char >( b * 255.f ) ),
+		A( 255 ) { }
 	Color( float r, float g, float b, float a ) :
 		R( static_cast< unsigned char >( r * 255.f ) ),
 		G( static_cast< unsigned char >( g * 255.f ) ),

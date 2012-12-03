@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		Swarms.clear();
 
 		if ( AnimGroup.size() > 0 )
-			for ( int i = 0; i < AnimGroup.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( AnimGroup.size() ); i++ )
 				if ( AnimGroup[ i ] != 0 )
 					AnimGroup[ i ]->Release();
 		AnimGroup.clear();
@@ -82,18 +82,18 @@ namespace CloudberryKingdom
 
 	const int &SwarmBundle::getSwarmIndex() const
 	{
-		return Swarms.find( CurrentSwarm );
+		return IndexOf( Swarms, CurrentSwarm );
 	}
 
 	const int &SwarmBundle::getNumSwarms() const
 	{
-		return Swarms.size();
+		return static_cast<int>( Swarms.size() );
 	}
 
 	bool SwarmBundle::GetNextSwarm( const std::shared_ptr<Level> &level )
 	{
 		int i = getSwarmIndex() + 1;
-		if ( i < Swarms.size() )
+		if ( i < static_cast<int>( Swarms.size() ) )
 		{
 			SetSwarm( level, i );
 

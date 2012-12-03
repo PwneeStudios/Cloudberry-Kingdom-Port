@@ -114,7 +114,7 @@ std::vector<Vector2> CharacterSelect::Centers = 0;
 			std::vector<MenuListItem*> list = std::vector<MenuListItem*>( ItemList[ i ].capacity() );
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			for ( std::vector::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
-				if ( PlayerManager::BoughtOrFree( static_cast<Buyable*>( ( *item )->obj ) ) )
+				if ( PlayerManager::BoughtOrFree( std::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
 					list.push_back( *item );
 
 			ItemIndex[ i ] = ItemList[ i ].find( list.Choose( Tools::GlobalRnd ) );

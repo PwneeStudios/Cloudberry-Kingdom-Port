@@ -261,7 +261,7 @@ Vector2 Coin::DrawGrace = Vector2( 50, 50 );
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Coin> CoinA = dynamic_cast<Coin*>( A );
+		std::shared_ptr<Coin> CoinA = std::dynamic_pointer_cast<Coin>( A );
 
 		Box->SetTarget( CoinA->Box->Target->Center, CoinA->Box->Target->Size );
 		Box->SetCurrent( CoinA->Box->Current->Center, CoinA->Box->Current->Size );

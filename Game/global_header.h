@@ -7,15 +7,12 @@
 // GameObjVec ObjectsToSave = GameObjVec();
 
 // Jordan's unalphebatized shit. Suck it Oleg.
-inline int Sign__RegexMe41315803(int x) { return (x > 0) - (x < 0); }
-inline int Sign__RegexMe41315803(float x) { return (x > 0) - (x < 0); }
-inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
+inline int Sign(int x) { return (x > 0) - (x < 0); }
+inline int Sign(float x) { return (x > 0) - (x < 0); }
+inline int Sign(double x) { return (x > 0) - (x < 0); }
 
 // Things to reh-gecks.
-// Math::Sign and Sign__RegexMe41315803 -> Sign
-// ->Core->   ->   ->getCore()->
-// Style->CalcGenParams
-// dynamic_cast<...*>
+// Math::Sign and Sign -> Sign
 
 #include "enums.h"
 #include "forward_declarations.h"
@@ -37,6 +34,7 @@ inline int Sign__RegexMe41315803(double x) { return (x > 0) - (x < 0); }
 #include <Hacks/List.h>
 #include <Hacks/Parse.h>
 #include <Hacks/String.h>
+#include <Hacks/Queue.h>
 
 // Syntactic sugar
 namespace CloudberryKingdom
@@ -162,6 +160,10 @@ public:
 
 class FileWriter
 {
+
+public:
+	FileWriter( std::wstring path );
+	~FileWriter(); // FIXME: make sure to close the file.
 
 };
 
@@ -362,6 +364,26 @@ public:
 
 };
 
+// Note: some of these may not be needed. Check C# Lambda-port to see.
+class Path
+{
+
+public:
+	
+	static std::wstring Combine( std::wstring Path, std::wstring Subpath );
+	static std::wstring GetDirectoryName( std::wstring Path );
+
+};
+class Directory
+{
+
+public:
+	
+	static std::wstring GetCurrentDirectory( );
+
+};
+
+
 class SoundEffect
 {
 
@@ -497,6 +519,7 @@ public:
 
 	int X, Y, Width, Height;
 
+	Rectangle() : X( 0 ), Y( 0 ), Width( 0 ), Height( 0 ) { }
 	Rectangle( int X, int Y, int Width, int Height ) :
 		X( X ), Y( Y ), Width( Width ), Height( Height )
 	{

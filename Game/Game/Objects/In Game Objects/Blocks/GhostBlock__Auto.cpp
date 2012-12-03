@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		TimeSafety.SetVal( __max( 0, DifficultyHelper::Interp( 1, 0, u->Get( Upgrade_GHOST_BLOCK ) ) ) );
 
 		// Masochistic
-		if ( PieceSeed->getu()[ Upgrade_GHOST_BLOCK ] == 10 )
+		if ( PieceSeed->getu()->Get( Upgrade_GHOST_BLOCK ) == 10 )
 			Masochistic = true;
 	}
 
@@ -65,7 +65,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 		std::shared_ptr<GhostBlock_Parameters> Params = std::make_shared<GhostBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void GhostBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -87,7 +87,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get GhostBlock parameters
-		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameter>( level->Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameters>( level->Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 
 		int InLength = static_cast<int>( Params->InLength.GetVal( pos ) );
 		int OutLength = static_cast<int>( Params->OutLength.GetVal( pos ) );
@@ -109,7 +109,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			if ( i == 1 )
 				offset = Vector2( 50, 0 );
 
-			gblock = static_cast<GhostBlock*>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
+			gblock = std::static_pointer_cast<GhostBlock>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
 
 			// Box type
 			if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )

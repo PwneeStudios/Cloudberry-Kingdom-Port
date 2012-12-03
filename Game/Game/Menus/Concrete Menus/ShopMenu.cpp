@@ -153,7 +153,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::VerifyPurchase( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = dynamic_cast<Buyable*>( item->MyObject );
+		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
 		int Price = buyable->GetPrice();
 		if ( PlayerManager::CombinedBank() >= Price )
 			Call( std::make_shared<VerifyPurchaseMenu>( -1, buyable ), 6 );
@@ -220,7 +220,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::SetItem( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = dynamic_cast<Buyable*>( item->MyObject );
+		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
 
 		bool Sold = PlayerManager::Bought( buyable );
 
@@ -257,14 +257,14 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	std::wstring ShopMenu::GetString( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = dynamic_cast<Buyable*>( item->MyObject );
+		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
 		return GetString( buyable );
 	}
 
 	std::wstring ShopMenu::GetString( const std::shared_ptr<Buyable> &buyable )
 	{
 		std::wstring pic;
-		std::shared_ptr<Hat> hat = dynamic_cast<Hat*>( buyable );
+		std::shared_ptr<Hat> hat = std::dynamic_pointer_cast<Hat>( buyable );
 		if ( 0 != hat )
 		{
 			float width;
@@ -383,7 +383,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			bool found = false;
 			for ( std::vector<MenuListItem*>::const_iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
 			{
-				if ( clr.Guid == ( static_cast<Buyable*>( ( *match )->obj ) )->GetGuid() )
+				if ( clr.Guid == ( std::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
 				{
 					found = true;
 					break;
@@ -516,7 +516,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Scroll bar
 	#if defined(PC_VERSION)
 		{
-			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( static_cast<LongMenu*>( MyMenu ), shared_from_this() );
+			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), shared_from_this() );
 			bar->setBarPos( Vector2( -2384.921f, 135 ) );
 			MyGame->AddGameObject( bar );
 			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

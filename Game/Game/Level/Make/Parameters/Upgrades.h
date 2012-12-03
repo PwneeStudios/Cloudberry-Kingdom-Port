@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 {
 	// Stores the level of each obstacles
 	// CalcGenData translates this into actual parameters
-	class Upgrades
+	class Upgrades : public std::enable_shared_from_this<Upgrades>
 	{
 	public:
 		std::vector<float> UpgradeLevels;

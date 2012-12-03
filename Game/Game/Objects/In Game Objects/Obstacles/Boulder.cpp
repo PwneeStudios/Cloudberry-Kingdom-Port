@@ -253,7 +253,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Boulder> FloaterA = dynamic_cast<Boulder*>( A );
+		std::shared_ptr<Boulder> FloaterA = std::dynamic_pointer_cast<Boulder>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Angle = FloaterA->Angle;

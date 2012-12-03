@@ -40,7 +40,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		std::shared_ptr<LavaDrip_Parameters> Params = std::make_shared<LavaDrip_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void LavaDrip_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -51,7 +51,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		TR += Vector2( 350, 0 );
 
 		// Get LavaDrip parameters
-		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameter>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
+		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameters>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
 
 		float step = 5;
 
@@ -70,7 +70,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 			if ( step < Params->LavaDripStepCutoff )
 			{
 //C# TO C++ CONVERTER NOTE: The variable LavaDrip was renamed since it is named the same as a user-defined type:
-				std::shared_ptr<LavaDrip> LavaDrip_Renamed = static_cast<LavaDrip*>( level->getRecycle()->GetObject(ObjectType_LAVA_DRIP, true) );
+				std::shared_ptr<LavaDrip> LavaDrip_Renamed = std::static_pointer_cast<LavaDrip>( level->getRecycle()->GetObject(ObjectType_LAVA_DRIP, true) );
 				LavaDrip_Renamed->BoxSize.Y = Params->Length.RndFloat( loc, level->getRnd() );
 				LavaDrip_Renamed->Init( loc, level );
 

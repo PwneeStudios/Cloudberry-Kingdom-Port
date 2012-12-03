@@ -265,7 +265,7 @@ namespace CloudberryKingdom
 
 	void Pendulum::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<Pendulum> BlockA = dynamic_cast<Pendulum*>( A );
+		std::shared_ptr<Pendulum> BlockA = std::dynamic_pointer_cast<Pendulum>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel() );
 

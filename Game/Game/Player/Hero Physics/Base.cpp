@@ -156,7 +156,7 @@ int BobPhsx::CustomPhsxData::Length = 16;
 		{
 			for ( int i = 0; i < terms.size(); i++ )
 			{
-				float v = float::Parse( terms[ i ] );
+				float v = ParseFloat( terms[ i ] );
 				data[ i ] = CoreMath::Restrict( Bounds( i ).MinValue, Bounds( i ).MaxValue, v );
 			}
 		}
@@ -324,10 +324,10 @@ int BobPhsx::CustomPhsxData::Length = 16;
 
 		try
 		{
-			_BaseType = int::Parse( BaseType );
-			_Shape = int::Parse( Shape );
-			_MoveMod = int::Parse( MoveMod );
-			_Special = int::Parse( Special );
+			_BaseType = ParseInt( BaseType );
+			_Shape = ParseInt( Shape );
+			_MoveMod = ParseInt( MoveMod );
+			_Special = ParseInt( Special );
 		}
 		catch ( ... )
 		{

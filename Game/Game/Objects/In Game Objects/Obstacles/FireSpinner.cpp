@@ -213,7 +213,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 		getCore()->Clone(A->getCore());
 		getCore()->WakeUpRequirements = true;
 
-		std::shared_ptr<FireSpinner> SpinnerA = dynamic_cast<FireSpinner*>( A );
+		std::shared_ptr<FireSpinner> SpinnerA = std::dynamic_pointer_cast<FireSpinner>( A );
 		Init( SpinnerA->getPos(), SpinnerA->getMyLevel() );
 
 		Radius = SpinnerA->Radius;

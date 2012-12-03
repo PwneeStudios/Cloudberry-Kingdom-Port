@@ -340,12 +340,12 @@ int GhostBlock::LengthOfPhaseChange = 35;
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<GhostBlock> block = dynamic_cast<GhostBlock*>( this );
+		std::shared_ptr<GhostBlock> block = std::dynamic_pointer_cast<GhostBlock>( this );
 
 		// Ghost blocks delete surrounding blocks when stamped as used
 		for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 		{
-			std::shared_ptr<GhostBlock> ghost = dynamic_cast<GhostBlock*>( *gblock );
+			std::shared_ptr<GhostBlock> ghost = std::dynamic_pointer_cast<GhostBlock>( *gblock );
 			if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
 				if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - block->getCore()->Data.Position)->Length() < 200 )
 				{
@@ -359,7 +359,7 @@ int GhostBlock::LengthOfPhaseChange = 35;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<GhostBlock> BlockA = dynamic_cast<GhostBlock*>( A );
+		std::shared_ptr<GhostBlock> BlockA = std::dynamic_pointer_cast<GhostBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, A->getMyLevel() );
 		MyBox->TopOnly = BlockA->MyBox->TopOnly;

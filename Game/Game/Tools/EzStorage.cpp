@@ -63,7 +63,7 @@ std::vector<SaveLoad*> SaveGroup::ThingsToSave = std::vector<SaveLoad*>();
 
 	#if defined(NOT_PC)
 		// Save each player's info
-		for ( std::vector<PlayerData*>::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
 		{
 			Incr();
 			( *player )->ContainerName = _T( "Gamers" );

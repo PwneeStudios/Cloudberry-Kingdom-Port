@@ -1077,6 +1077,12 @@
     <ClCompile Include="global_header.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Level\Make\LevelSeedData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Level\Make\LockableBool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2199,6 +2205,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\Compare.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Hacks\Queue.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

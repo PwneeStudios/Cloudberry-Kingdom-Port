@@ -48,8 +48,8 @@ namespace CloudberryKingdom
 
 	Vector2 SpikeyGuy_AutoGen::SpikeyGuyCleanupMetricLambda::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
 	{
-		std::shared_ptr<SpikeyGuy> floater_A = dynamic_cast<SpikeyGuy*>( A );
-		std::shared_ptr<SpikeyGuy> floater_B = dynamic_cast<SpikeyGuy*>( B );
+		std::shared_ptr<SpikeyGuy> floater_A = std::dynamic_pointer_cast<SpikeyGuy>( A );
+		std::shared_ptr<SpikeyGuy> floater_B = std::dynamic_pointer_cast<SpikeyGuy>( B );
 		return CoreMath::Abs( floater_A->PivotPoint - floater_B->PivotPoint );
 	}
 
@@ -70,7 +70,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		std::shared_ptr<SpikeyGuy_Parameters> Params = std::make_shared<SpikeyGuy_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void SpikeyGuy_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -78,7 +78,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_SPIKEY_GUY, std::make_shared<MinDistHelper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ), std::make_shared<SpikeyGuyCleanupMetricLambda>() );
 	}
@@ -86,10 +86,10 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 	std::shared_ptr<ObjectBase> SpikeyGuy_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<SpikeyGuy> NewFloater = static_cast<SpikeyGuy*>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
+		std::shared_ptr<SpikeyGuy> NewFloater = std::static_pointer_cast<SpikeyGuy>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
 		NewFloater->Length = 650;
 		NewFloater->Init( pos, level );
 
@@ -112,7 +112,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 	{
 		for ( int j = 0; j < Num; j++ )
 		{
-			std::shared_ptr<SpikeyGuy> floater = static_cast<SpikeyGuy*>( CreateAt( level, Center ) );
+			std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Center ) );
 
 			floater->Period = 3 * floater->Period / 2;
 			floater->Offset = static_cast<int>( j * ( static_cast<float>( floater->Period ) / Num ) );
@@ -161,7 +161,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameter>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->Style->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Rockwheel )
 			Rockwheel( level, BL, TR );
@@ -211,7 +211,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )
 						continue;
 
-					std::shared_ptr<SpikeyGuy> floater = static_cast<SpikeyGuy*>( CreateAt( level, Vector2( x, y ) ) );
+					std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Vector2( x, y ) ) );
 
 					floater->SetParentBlock( *block );
 

@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -29,7 +28,7 @@ namespace CloudberryKingdom
 
 	bool MakeFinalDoor::FindFinalBlockLambda::Apply( const std::shared_ptr<BlockBase> &block )
 	{
-		return block->getCore()->GenData.Used && block->getCore() == _T("FinalBlock");
+		return block->getCore()->GenData.Used && block->getCore()->IsCalled( _T("FinalBlock") );
 	}
 
 	MakeFinalDoor::BoxTRyLambda::BoxTRyLambda()
@@ -65,25 +64,25 @@ namespace CloudberryKingdom
 		float Spacing = 200;
 		Vector2 TR = Vector2( MyLevel->MaxRight + 1000, MyLevel->getMainCamera()->TR.Y - 850 );
 
-		float NewRight = MyLevel->VanillaFill( BL, TR, 400, Spacing, std::make_shared<VanillaFillEndPieceLambda>(), std::make_shared<ModBlockLambda>(this) );
+		float NewRight = MyLevel->VanillaFill( BL, TR, 400, Spacing, std::make_shared<VanillaFillEndPieceLambda>(), std::make_shared<ModBlockLambda>( shared_from_this() ) );
 
 		// Make lowest block a safety (we'll place the door here if no other block is used)
-		FinalBlocks[ 0 ]->getCore()->GenData->KeepIfUnused = true;
+		FinalBlocks[ 0 ]->getCore()->GenData.KeepIfUnused = true;
 		FinalBlocks[ 0 ]->getBlockCore()->NonTopUsed = true;
 
 		// New style end blocks
 		if ( MyLevel->MyTileSet->FixedWidths )
 		{
-			MyLevel->LastSafetyBlock->Extend( Side_RIGHT, FinalBlocks[ 0 ]->getBox()->BL->X - 50 );
+			MyLevel->LastSafetyBlock->Extend( Side_RIGHT, FinalBlocks[ 0 ]->getBox()->BL.X - 50 );
 		}
 		// Old style end blocks
 		else
 		{
 			// Extend lowest block to match up with safety net (or extend safety net instead)
-			if ( MyLevel->LastSafetyBlock != 0 && MyLevel->LastSafetyBlock->getBox()->TR.X + 50 < FinalBlocks[ 0 ]->getBox()->BL->X )
+			if ( MyLevel->LastSafetyBlock != 0 && MyLevel->LastSafetyBlock->getBox()->TR.X + 50 < FinalBlocks[ 0 ]->getBox()->BL.X )
 				FinalBlocks[ 0 ]->Extend( Side_LEFT, MyLevel->LastSafetyBlock->getBox()->TR.X + 50 );
 			else
-				MyLevel->LastSafetyBlock->Extend( Side_RIGHT, FinalBlocks[ 0 ]->getBox()->BL->X - 50 );
+				MyLevel->LastSafetyBlock->Extend( Side_RIGHT, FinalBlocks[ 0 ]->getBox()->BL.X - 50 );
 		}
 	}
 
@@ -108,8 +107,8 @@ namespace CloudberryKingdom
 	{
 		MakeThing::Phase2();
 
-		BlockVec _FinalBlocks = Tools::FindAll( MyLevel->Blocks, std::make_shared<FindFinalBlockLambda>() );
-		FinalBlock = Tools::ArgMax( _FinalBlocks, std::make_shared<BoxTRyLambda>() );
+		BlockVec _FinalBlocks = Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<FindFinalBlockLambda>() );
+		FinalBlock = Tools::ArgMax<std::shared_ptr<BlockBase> >( _FinalBlocks, std::make_shared<BoxTRyLambda>() );
 
 		// If none exist use the lowest block
 		if ( FinalBlock == 0 )
@@ -119,7 +118,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if ( FinalBlocks[ 0 ]->getCore()->GenData->KeepIfUnused && !FinalBlocks[ 0 ]->getCore()->GenData->Used )
+			if ( FinalBlocks[ 0 ]->getCore()->GenData.KeepIfUnused && !FinalBlocks[ 0 ]->getCore()->GenData.Used )
 				FinalBlocks[ 0 ]->CollectSelf();
 		}
 
@@ -134,7 +133,7 @@ namespace CloudberryKingdom
 			for ( int j = MyLevel->LastStep - 1; j > 0; j-- )
 			{
 				Vector2 BobPos = MyLevel->CurPiece->Recording_Renamed[ i ]->AutoLocs[ j ];
-				float Dist = ( BobPos - FinalPos )->Length();
+				float Dist = ( BobPos - FinalPos ).Length();
 
 				if ( Closest == -1 || Dist < Closest )
 				{
@@ -198,7 +197,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = static_cast<CameraZone*>( Tools::Find( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find<std::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 500;
 

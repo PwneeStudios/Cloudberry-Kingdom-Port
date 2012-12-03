@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 
 	void TunnelFill::CleanupTunnel( const std::shared_ptr<Level> &level )
 	{
-		std::map<unsigned long long, ObjectBase*> ObjDict = std::map<unsigned long long, ObjectBase*>();
+		std::map<unsigned long long, std::shared_ptr<ObjectBase> > ObjDict = std::map<unsigned long long, std::shared_ptr<ObjectBase> >();
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( !ObjDict.find( ( *obj )->getCore()->MyGuid ) != ObjDict.end() )
 				ObjDict.insert( make_pair( ( *obj )->getCore()->MyGuid, *obj ) );
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( TunnelObjs[ i ][ j - 1 ] == 0 )
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( j - 1 >= 0 && TunnelObjs[ i ][ j - 1 ] == 0 )
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 			{
 				if ( TunnelObjs[ i ][ j ] == 0 )
 					continue;
-				if ( TunnelObjs[ i ][ j ]->getCore()->GenData->Used )
+				if ( TunnelObjs[ i ][ j ]->getCore()->GenData.Used )
 					continue;
 
 				if ( TunnelObjs[ i - 1 ][ j ] == 0 && TunnelObjs[ i + 1 ][ j ] == 0 && TunnelObjs[ i ][ j - 1 ] == 0 )

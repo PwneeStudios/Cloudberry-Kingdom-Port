@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 	{
 		ObjectData::Clone( A );
 
-		std::shared_ptr<BlockData> BlockDataA = dynamic_cast<BlockData*>( A );
+		std::shared_ptr<BlockData> BlockDataA = std::dynamic_pointer_cast<BlockData>( A );
 		if ( BlockDataA == 0 )
 			throw ( std::exception( _T( "Can't copy block data from object data" ) ) );
 
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 	BlockBase::BlockBase()
 	{
 		BlockCoreData = std::make_shared<BlockData>();
-		CoreData = dynamic_cast<ObjectData*>( getBlockCore() );
+		CoreData = std::dynamic_pointer_cast<ObjectData>( getBlockCore() );
 	}
 
 	void BlockBase::Release()
@@ -299,7 +299,7 @@ namespace CloudberryKingdom
 			//if (Box.TR.Y < bob.Box.BL.Y + 20) return true;
 
 
-			if ( dynamic_cast<BouncyBlock*>( this ) != 0 )
+			if ( std::dynamic_pointer_cast<BouncyBlock>( this ) != 0 )
 				return true;
 
 			//BobPhsxMeat meat = (BobPhsxMeat)bob.MyPhsx;
@@ -352,12 +352,12 @@ namespace CloudberryKingdom
 
 	bool BlockBase::PostCollideDecision_Land_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		std::shared_ptr<BobPhsxMeat> meat = static_cast<BobPhsxMeat*>( bob->MyPhsx );
+		std::shared_ptr<BobPhsxMeat> meat = std::static_pointer_cast<BobPhsxMeat>( bob->MyPhsx );
 
 		if ( meat->WantToLandOnTop && Col == ColType_TOP )
 			return false;
 
-		if ( dynamic_cast<BouncyBlock*>( this ) != 0 )
+		if ( std::dynamic_pointer_cast<BouncyBlock>( this ) != 0 )
 			return false;
 
 		if ( Col == ColType_TOP )
@@ -410,7 +410,7 @@ namespace CloudberryKingdom
 		Delete |= PostCollideDecision_Side( bob, Col, Overlap );
 
 		// ???
-		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(dynamic_cast<NormalBlock*>(this) != 0 && !getBlockCore()->NonTopUsed) )
+		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>(this) != 0 && !getBlockCore()->NonTopUsed) )
 			Delete = true;
 
 		// Don't land on the very edge of the block
@@ -418,7 +418,7 @@ namespace CloudberryKingdom
 
 		// Don't land on a block that says not to
 		bool DesiresDeletion = false;
-		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(static_cast<BlockBase*>(this))->PermissionToUse() )
+		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(std::static_pointer_cast<BlockBase>(this))->PermissionToUse() )
 			DesiresDeletion = Delete = true;
 
 		if ( getCore()->GenData.Used )
@@ -456,4 +456,31 @@ namespace CloudberryKingdom
 	void BlockBase::PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 	}
+
+	void BlockBase::StampAsFullyUsed( int CurPhsxStep )
+	{
+		StampAsUsed( CurPhsxStep );
+		getBlockCore()->NonTopUsed = true;
+	}
+
+	void BlockBase::Stretch( Side side, float amount )
+	{
+		getBox()->CalcBounds();
+		switch ( side )
+		{
+			case Side_RIGHT:
+				Extend( side, getBox()->GetTR().X + amount );
+				break;
+			case Side_LEFT:
+				Extend( side, getBox()->GetBL().X + amount );
+				break;
+			case Side_TOP:
+				Extend( side, getBox()->GetTR().Y + amount );
+				break;
+			case Side_BOTTOM:
+				Extend( side, getBox()->GetBL().Y + amount );
+				break;
+		}
+	}
+
 }

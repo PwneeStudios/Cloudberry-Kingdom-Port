@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		NameTemplate = _T( "bouncey bounce" );
 
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
-		( static_cast<PictureIcon*>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( 0, -.035f ) );
+		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( 0, -.035f ) );
 	}
 
 const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<BobPhsxBouncy>();

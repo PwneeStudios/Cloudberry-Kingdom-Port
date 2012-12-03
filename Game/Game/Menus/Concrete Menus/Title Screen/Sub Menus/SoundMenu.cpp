@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 	void SoundMenu::InitOnConfirmedIndexSelect::Apply()
 	{
 		PlayerManager::SavePlayerData->ResolutionPreferenceSet = true;
-		ResolutionGroup::Use( dynamic_cast<DisplayMode*>( FsRezList->getCurObj() ) );
+		ResolutionGroup::Use( std::dynamic_pointer_cast<DisplayMode>( FsRezList->getCurObj() ) );
 		SaveGroup::SaveAll();
 		PlayerManager::SaveRezAndKeys();
 	}
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 			_item->MyText->setScale( 0.72f );
 			_item->MySelectedText->setScale( 0.72f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
-			( static_cast<MenuSlider*>( _item ) )->SliderShift = Vector2( 1611.11f, -152.7778f );
+			( std::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1611.11f, -152.7778f );
 		}
 		_item = MyMenu->FindItemByName( _T( "Music" ) );
 		if ( _item != 0 )
@@ -244,7 +244,7 @@ namespace CloudberryKingdom
 			_item->MyText->setScale( 0.72f );
 			_item->MySelectedText->setScale( 0.72f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
-			( static_cast<MenuSlider*>( _item ) )->SliderShift = Vector2( 1552.777f, -150.0001f );
+			( std::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1552.777f, -150.0001f );
 		}
 		_item = MyMenu->FindItemByName( _T( "Controls" ) );
 		if ( _item != 0 )

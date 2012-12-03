@@ -64,7 +64,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		level->CurPiece->CamStartPos = Center;
 
 		// Camera Zone
-		CamZone = static_cast<CameraZone*>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
+		CamZone = std::static_pointer_cast<CameraZone>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
 		CamZone->Init( Vector2(), Vector2( 100000, 100000 ) );
 		CamZone->Start = Center;
 		CamZone->End = Center;

@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Arcade::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		MyArcadeItem = dynamic_cast<ArcadeItem*>( item );
+		MyArcadeItem = std::dynamic_pointer_cast<ArcadeItem>( item );
 		if ( MyArcadeItem->Locked )
 			return;
 

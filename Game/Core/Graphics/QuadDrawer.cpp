@@ -552,7 +552,7 @@ float QuadDrawer::CurLightSourceFade = 0;
 	{
 		Vector2 BR = Vector2( TR.X, BL.Y );
 		Vector2 TL = Vector2( BL.X, TR.Y );
-		Vector2 Offset = Vector2( Sign__RegexMe41315803( TR.X - BL.X ) * width / 2, 0 );
+		Vector2 Offset = Vector2( Sign( TR.X - BL.X ) * width / 2, 0 );
 
 		DrawLine( BL - Offset, BR + Offset, color, width );
 		DrawLine( BR, TR, color, width );

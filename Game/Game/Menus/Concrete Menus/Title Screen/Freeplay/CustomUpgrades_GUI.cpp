@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		// Set the Fallingblock to an O-face when maxed out
 		if ( slider == gui->MyMenu->getCurItem() )
 		{
-			std::shared_ptr<PictureIcon> pic = dynamic_cast<PictureIcon*>( gui->BigIcon );
+			std::shared_ptr<PictureIcon> pic = std::dynamic_pointer_cast<PictureIcon>( gui->BigIcon );
 			if ( slider->getMyFloat()->getVal() > 7.6f )
 				pic->IconQuad->setTextureName( _T( "fblock_castle_3" ) );
 			else if ( slider->getMyFloat()->getVal() > 3.2f )
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 	{
 		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<MenuSlider> slider = dynamic_cast<MenuSlider*>( *item );
+			std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 			if ( 0 != slider )
 				slider->getMyFloat()->setVal(0);
 		}
@@ -229,7 +229,7 @@ namespace CloudberryKingdom
 		{
 			for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
-				std::shared_ptr<MenuSlider> slider = dynamic_cast<MenuSlider*>( *item );
+				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )
 					slider->getMyFloat()->setVal(static_cast<float>(pow(getMyLevel()->getRnd()->RndFloat(0, 9),.9f)));
 			}
@@ -238,7 +238,7 @@ namespace CloudberryKingdom
 		{
 			for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
-				std::shared_ptr<MenuSlider> slider = dynamic_cast<MenuSlider*>( *item );
+				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )
 				{
 					float ChanceToZero = .1f;

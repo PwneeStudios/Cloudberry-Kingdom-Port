@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		{
 			if ( ( *obj ).get() == this )
 				continue;
-			if ( dynamic_cast<PerfectScoreObject*>( *obj ) != 0 )
+			if ( std::dynamic_pointer_cast<PerfectScoreObject>( *obj ) != 0 )
 				( *obj )->Release();
 		}
 

@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		float lvl = PieceSeed->getu()[ Upgrade_SPIKE ];
+		float lvl = PieceSeed->getu()->Get( Upgrade_SPIKE );
 
 		// General difficulty
 		int MinNumOffsets = 1;
@@ -100,7 +100,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameter>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
+		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameters>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
 
 		if ( Params->MinSpikeDensity.getVal() <= 0 )
 			return;
@@ -139,7 +139,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 			{
 				//if (xdif > 15)
 			{
-					std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+					std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 					spike->Init( Vector2(), level );
 
 					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 55;
@@ -186,7 +186,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 						if ( y < ( *block )->getBox()->TR->Y - level->getInfo()->ObstacleCutoff )
 							continue;
 
-						std::shared_ptr<Spike> spike = static_cast<Spike*>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+						std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 						spike->Init( Vector2(), level );
 
 						if ( level->getRnd()->Rnd->Next(0, 2) == 0 )
@@ -218,7 +218,7 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameter>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
+		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameters>( level->Style->FindParams( Spike_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_SPIKE, std::make_shared<SpikeCleanup>( Params ), BL, TR );
 	}

@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -29,8 +30,8 @@ namespace CloudberryKingdom
 		MyCamera = camera;
 
 		Circle = std::make_shared<QuadClass>();
-		Circle->Quad_Renamed->MyEffect = Tools::EffectWad->FindByName( _T( "Circle" ) );
-		Circle->Quad_Renamed->MyTexture = Tools::TextureWad->FindByName( _T( "White" ) );
+		Circle->Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( _T( "Circle" ) );
+		Circle->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
 
 		//Circle.TextureName = "Star";
 		//Circle.TextureName = "SpikeBlob";

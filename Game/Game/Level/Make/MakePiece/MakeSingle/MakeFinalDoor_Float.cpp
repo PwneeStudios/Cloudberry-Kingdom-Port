@@ -46,21 +46,21 @@ namespace CloudberryKingdom
 		{
 			// Create the block
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var block = FinalBlock = static_cast<NormalBlock*>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			std::shared_ptr<BlockBase> block = FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
-			block->BlockCore->EndPiece = true;
-			( static_cast<NormalBlock*>( FinalBlock ) )->Init( FinalPos + Vector2( -130, -600 ), Vector2( 400, 400 ), MyLevel->getMyTileSetInfo() );
+			block->getBlockCore()->EndPiece = true;
+			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( -130, -600 ), Vector2( 400, 400 ), MyLevel->getMyTileSetInfo() );
 
-			block->Core->DrawLayer = 0;
-			block->Core->Real = false;
+			block->getCore()->DrawLayer = 0;
+			block->getCore()->Real = false;
 		}
 		// Old style end blocks
 		else
 		{
 			// Create a dummy block
 			int width = 400;
-			FinalBlock = static_cast<NormalBlock*>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-			( static_cast<NormalBlock*>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( width ), MyLevel->getMyTileSetInfo() );
+			FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( static_cast<float>( width ) ), MyLevel->getMyTileSetInfo() );
 			FinalBlock->getCore()->setMyTileSet(MyLevel->MyTileSet);
 		}
 	}
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = static_cast<CameraZone*>( Tools::Find( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find<std::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 420;
 

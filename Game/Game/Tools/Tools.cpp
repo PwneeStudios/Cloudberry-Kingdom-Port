@@ -14,7 +14,7 @@ template<typename T> where T : IComparable
 	{
 		T max = list[ 0 ];
 		int index = 0;
-		for ( int i = 1; i < list.size(); i++ )
+		for ( int i = 1; i < static_cast<int>( list.size() ); i++ )
 			if ( list[ i ]->compare( max ) > 0 )
 			{
 				max = list[ i ];
@@ -264,7 +264,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	{
 		int OpenSlot = 0;
 		int i = 0;
-		int N = list.size();
+		int N = static_cast<int>( list.size() );
 
 		while ( i < N )
 		{
@@ -287,7 +287,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	{
 		int i = 0;
 		int j = 0;
-		int N = source.size();
+		int N = static_cast<int>( source.size() );
 		while ( i < N )
 		{
 			while ( j < N && predicate->Apply( source[ j ], j ) )
@@ -765,7 +765,7 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 		if ( IncludeSubdirectories )
 		{
 			std::vector<std::wstring> dir = Directory::GetDirectories( path );
-			for ( int i = 0; i < dir.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( dir.size() ); i++ )
 				files.AddRange( GetFiles( dir[ i ], IncludeSubdirectories ) );
 		}
 
@@ -893,7 +893,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 					if ( info->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 					{
 						WasReadable = true;
-						std::shared_ptr<IReadWrite> rw = static_cast<IReadWrite*>( info->GetValue( obj ) );
+						std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( info->GetValue( obj ) );
 						rw->Read( reader );
 						info->SetValue( obj, rw );
 					}
@@ -905,7 +905,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 						{
 							WasReadable = true;
 
-							std::shared_ptr<System::Collections::IList> list = dynamic_cast<System::Collections::IList*>( info->GetValue( obj ) );
+							std::shared_ptr<System::Collections::IList> list = std::dynamic_pointer_cast<System::Collections::IList>( info->GetValue( obj ) );
 
 							std::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
 							if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
@@ -974,8 +974,8 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 
 					std::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
 					//ReadFields(newobj, reader);
-					if ( dynamic_cast<IReadWrite*>( newobj ) != 0 )
-						( static_cast<IReadWrite*>( newobj ) )->Read( reader );
+					if ( std::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
+						( std::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
 					else
 						ReadFields( newobj, reader );
 					list->Add( newobj );
@@ -1055,7 +1055,7 @@ int Tools::WriteObjId = 0;
 				// EzTexture
 				else if ( ( *info )->FieldType == EzTexture::typeid )
 				{
-					std::shared_ptr<EzTexture> texture = static_cast<EzTexture*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<EzTexture> texture = std::static_pointer_cast<EzTexture>( ( *info )->GetValue( obj ) );
 					if ( texture == 0 )
 						continue;
 					else
@@ -1065,7 +1065,7 @@ int Tools::WriteObjId = 0;
 				// EzEffect
 				else if ( ( *info )->FieldType == EzEffect::typeid )
 				{
-					std::shared_ptr<EzEffect> effect = static_cast<EzEffect*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<EzEffect> effect = std::static_pointer_cast<EzEffect>( ( *info )->GetValue( obj ) );
 					if ( effect == 0 )
 						continue;
 					else
@@ -1092,7 +1092,7 @@ int Tools::WriteObjId = 0;
 				}
 				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 				{
-					std::shared_ptr<IReadWrite> rw = static_cast<IReadWrite*>( ( *info )->GetValue( obj ) );
+					std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( ( *info )->GetValue( obj ) );
 					writer->WriteLine( WhiteSpace + ( *info )->Name );
 					rw->Write( writer );
 					writer->WriteLine( WhiteSpace + _T( "End" ) );
@@ -1133,7 +1133,7 @@ int Tools::WriteObjId = 0;
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
 	{
 		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
-		for ( int i = 0; i < Bits.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( keywords->Contains( Bits[ i ] ) )
 				dict->Add( Bits[ i ], i );
 		return dict;
@@ -1142,7 +1142,7 @@ int Tools::WriteObjId = 0;
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
 	{
 		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
-		for ( int i = 0; i < Bits.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( std::find( keywords.begin(), keywords.end(), Bits[ i ] ) != keywords.end() )
 				dict->Add( Bits[ i ], i );
 		return dict;
@@ -1194,10 +1194,10 @@ int Tools::WriteObjId = 0;
 
 			// int
 			if ( fieldinfo->FieldType == int::typeid )
-				fieldinfo->SetValue( obj, int::Parse( Bits[ 1 ] ) );
+				fieldinfo->SetValue( obj, ParseInt( Bits[ 1 ] ) );
 			// float
 			if ( fieldinfo->FieldType == float::typeid )
-				fieldinfo->SetValue( obj, float::Parse( Bits[ 1 ] ) );
+				fieldinfo->SetValue( obj, ParseFloat( Bits[ 1 ] ) );
 			// Vector2
 			else if ( fieldinfo->FieldType == Vector2::typeid )
 				fieldinfo->SetValue( obj, ParseToVector2( Bits[ 1 ], Bits[ 2 ] ) );
@@ -1265,8 +1265,8 @@ int Tools::WriteObjId = 0;
 	{
 		Vector2 Vec = Vector2();
 
-		Vec.X = float::Parse( bit1 );
-		Vec.Y = float::Parse( bit2 );
+		Vec.X = ParseFloat( bit1 );
+		Vec.Y = ParseFloat( bit2 );
 
 		return Vec;
 	}
@@ -1275,10 +1275,10 @@ int Tools::WriteObjId = 0;
 	{
 		Vector4 Vec = Vector4();
 
-		Vec.X = float::Parse( bit1 );
-		Vec.Y = float::Parse( bit2 );
-		Vec.Z = float::Parse( bit3 );
-		Vec.W = float::Parse( bit4 );
+		Vec.X = ParseFloat( bit1 );
+		Vec.Y = ParseFloat( bit2 );
+		Vec.Z = ParseFloat( bit3 );
+		Vec.W = ParseFloat( bit4 );
 
 		return Vec;
 	}
@@ -1287,12 +1287,12 @@ int Tools::WriteObjId = 0;
 	{
 		PhsxData data = PhsxData();
 
-		data.Position.X = float::Parse( bit1 );
-		data.Position.Y = float::Parse( bit2 );
-		data.Velocity.X = float::Parse( bit3 );
-		data.Velocity.Y = float::Parse( bit4 );
-		data.Acceleration.X = float::Parse( bit5 );
-		data.Acceleration.Y = float::Parse( bit6 );
+		data.Position.X = ParseFloat( bit1 );
+		data.Position.Y = ParseFloat( bit2 );
+		data.Velocity.X = ParseFloat( bit3 );
+		data.Velocity.Y = ParseFloat( bit4 );
+		data.Acceleration.X = ParseFloat( bit5 );
+		data.Acceleration.Y = ParseFloat( bit6 );
 
 		return data;
 	}
@@ -1301,12 +1301,12 @@ int Tools::WriteObjId = 0;
 	{
 		BasePoint b = BasePoint();
 
-		b.e1.X = float::Parse( bit1 );
-		b.e1.Y = float::Parse( bit2 );
-		b.e2.X = float::Parse( bit3 );
-		b.e2.Y = float::Parse( bit4 );
-		b.Origin.X = float::Parse( bit5 );
-		b.Origin.Y = float::Parse( bit6 );
+		b.e1.X = ParseFloat( bit1 );
+		b.e1.Y = ParseFloat( bit2 );
+		b.e2.X = ParseFloat( bit3 );
+		b.e2.Y = ParseFloat( bit4 );
+		b.Origin.X = ParseFloat( bit5 );
+		b.Origin.Y = ParseFloat( bit6 );
 
 		return b;
 	}
@@ -1315,11 +1315,11 @@ int Tools::WriteObjId = 0;
 	{
 		MyOwnVertexFormat b = MyOwnVertexFormat();
 
-		b.xy.X = float::Parse( bit1 );
-		b.xy.Y = float::Parse( bit2 );
+		b.xy.X = ParseFloat( bit1 );
+		b.xy.Y = ParseFloat( bit2 );
 
-		b.uv.X = float::Parse( bit3 );
-		b.uv.Y = float::Parse( bit4 );
+		b.uv.X = ParseFloat( bit3 );
+		b.uv.Y = ParseFloat( bit4 );
 
 		b.TheColor.R = unsigned char::Parse( bit5 );
 		b.TheColor.G = unsigned char::Parse( bit6 );
@@ -1337,8 +1337,8 @@ int Tools::WriteObjId = 0;
 		std::wstring Component1, Component2;
 		Component1 = str.substr( 0, CommaIndex );
 		Component2 = str.substr( CommaIndex + 1, str.length() - CommaIndex - 1 );
-		Vec.X = float::Parse( Component1 );
-		Vec.Y = float::Parse( Component2 );
+		Vec.X = ParseFloat( Component1 );
+		Vec.Y = ParseFloat( Component2 );
 
 		return Vec;
 	}
@@ -1380,7 +1380,7 @@ int Tools::WriteObjId = 0;
 		Component1 = str.substr( 0, LineIndex );
 		Component2 = str.substr( LineIndex + 1, str.length() - LineIndex - 1 );
 
-		return NewSound( ParseToFileName( Component1 ), float::Parse( Component2 ) );
+		return NewSound( ParseToFileName( Component1 ), ParseFloat( Component2 ) );
 	}
 
 	std::shared_ptr<EzSound> Tools::NewSound( const std::wstring &name, float volume )
@@ -1631,7 +1631,7 @@ bool Tools::DebugConvenience = false;
 	std::vector<Vector2> Tools::FloatArrayToVectorArray_y( std::vector<float> v )
 	{
 		std::vector<Vector2> vec = std::vector<Vector2>( v.size() );
-		for ( int i = 0; i < v.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( v.size() ); i++ )
 			vec[ i ] = Vector2( 0, v[ i ] );
 		return vec;
 	}
@@ -1639,7 +1639,7 @@ bool Tools::DebugConvenience = false;
 	bool Tools::IncrementsContainsSum( std::vector<int> Incr, int S )
 	{
 		int Sum = 0;
-		for ( int i = 0; i < Incr.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Incr.size() ); i++ )
 		{
 			Sum += Incr[ i ];
 			if ( Sum == S )

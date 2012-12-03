@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 
 	void CameraZone::ZoneTriggerLambda::Apply( const std::shared_ptr<ZoneTrigger> &trig )
 	{
-		std::shared_ptr<CameraZone> CamZone = dynamic_cast<CameraZone*>( trig );
+		std::shared_ptr<CameraZone> CamZone = std::dynamic_pointer_cast<CameraZone>( trig );
 
 		std::shared_ptr<Camera> cam = CamZone->getCore()->MyLevel->getMainCamera();
 		if ( cam->ZoneLocked || cam->MyPhsxType == Camera_PhsxType_FIXED )
@@ -173,7 +173,7 @@ namespace CloudberryKingdom
 	{
 		ZoneTrigger::Clone( A );
 
-		std::shared_ptr<CameraZone> ZoneA = dynamic_cast<CameraZone*>( A );
+		std::shared_ptr<CameraZone> ZoneA = std::dynamic_pointer_cast<CameraZone>( A );
 
 		Start = ZoneA->Start;
 		End = ZoneA->End;

@@ -131,20 +131,20 @@ namespace CloudberryKingdom
 		p->MyUpgrades1->CalcGenData( p->MyGenData->gen1, p->Style );
 
 		RndDifficulty::ZeroUpgrades( p->MyUpgrades2 );
-		p->MyUpgrades1->UpgradeLevels.CopyTo( p->MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( p->MyUpgrades1->UpgradeLevels, p->MyUpgrades2->UpgradeLevels );
 		p->MyUpgrades2->CalcGenData( p->MyGenData->gen2, p->Style );
 
-		p->Style_MY_INITIAL_PLATS_TYPE = StyleData::InitialPlatsType_DOOR;
-		p->Style_MY_FINAL_PLATS_TYPE = StyleData::FinalPlatsType_DOOR;
+		p->Style->MyInitialPlatsType = StyleData::InitialPlatsType_DOOR;
+		p->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
 	void LevelSeedData::InitNormalMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
 	{
-		p->Style_FILLX_STEP *= 3.1f;
-		p->Style_FILLY_STEP *= 1.7f;
+		p->Style->FillxStep *= 3.1f;
+		p->Style->FillyStep *= 1.7f;
 	}
 
-bool LevelSeedData::NoDoublePaths = true;
+	bool LevelSeedData::NoDoublePaths = true;
 
 	std::shared_ptr<Level> LevelSeedData::MakeLevel( const std::shared_ptr<GameData> &game )
 	{
@@ -182,18 +182,18 @@ bool LevelSeedData::NoDoublePaths = true;
 		if ( !NewLevel->MyBackground->AllowLava )
 			game->HasLava = false;
 
-		NewLevel->MyLevelSeed = this;
+		NewLevel->MyLevelSeed = shared_from_this();
 
 		float Height = 0;
 
 		std::shared_ptr<Level> level = 0;
 		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator Piece = PieceSeeds.begin(); Piece != PieceSeeds.end(); ++Piece )
 		{
-			if ( ( *Piece )->Ladder != Level.LadderType_NONE )
+			if ( ( *Piece )->Ladder != LadderType_NONE )
 			{
 				NewLevel->MakeLadder( *Piece );
 
-				if ( PieceSeeds.find( *Piece ) == 0 )
+				if ( IndexOf( PieceSeeds, *Piece ) == 0 )
 					cam->BLCamBound = cam->Data.Position;
 
 				continue;
@@ -201,7 +201,7 @@ bool LevelSeedData::NoDoublePaths = true;
 
 			// Ensure that there are no blobs on a single path, multiplayer level
 			if ( ( *Piece )->Paths == 1 && !( *Piece )->LockNumOfPaths )
-			if ( PlayerManager::GetNumPlayers() > 1 && (*Piece)->MyUpgrades1[ Upgrade_FLY_BLOB ] > 0 )
+			if ( PlayerManager::GetNumPlayers() > 1 && (*Piece)->MyUpgrades1->Get( Upgrade_FLY_BLOB ) > 0 )
 			{
 				( *Piece )->Paths = 2;
 			}
@@ -224,7 +224,7 @@ bool LevelSeedData::NoDoublePaths = true;
 
 			level = std::make_shared<Level>( true );
 			level->MySourceGame = game;
-			level->MyLevelSeed = this;
+			level->MyLevelSeed = shared_from_this();
 			level->MyTileSet = NewLevel->MyTileSet;
 			level->DefaultHeroType = NewLevel->DefaultHeroType;
 			level->setMainCamera( std::make_shared<Camera>() );
@@ -234,10 +234,10 @@ bool LevelSeedData::NoDoublePaths = true;
 
 
 			std::shared_ptr<MakeData> makeData = std::make_shared<MakeData>();
-			makeData->LevelSeed = this;
+			makeData->LevelSeed = shared_from_this();
 			makeData->PieceSeed = *Piece;
 			makeData->GenData = ( *Piece )->MyGenData;
-			makeData->Index = PieceSeeds.find( *Piece );
+			makeData->Index = IndexOf( PieceSeeds, *Piece );
 			makeData->OutOf = PieceSeeds.size();
 
 			int ReturnEarly = SetReturnEarly( *Piece );
@@ -286,22 +286,22 @@ bool LevelSeedData::NoDoublePaths = true;
 				return NewLevel;
 			}
 
-			if ( PieceSeeds.find( *Piece ) == 0 )
+			if ( IndexOf( PieceSeeds, *Piece ) == 0 )
 				NewLevel->getMainCamera()->BLCamBound = level->getMainCamera()->BLCamBound;
 
 
 			level->ResetAll( false );
 
 			// Add checkpoints
-			if ( ( *Piece )->CheckpointsAtStart && !( *Piece )->Style_SUPPRESS_CHECKPOINTS )
+			if ( ( *Piece )->CheckpointsAtStart && !( *Piece )->Style->SuppressCheckpoints )
 			{
 				for ( int i = 0; i < level->LevelPieces[ 0 ]->NumBobs; i++ )
 				{
-					std::shared_ptr<Checkpoint> checkpoint = static_cast<Checkpoint*>( game->Recycle->GetObject( ObjectType_CHECKPOINT, false ) );
+					std::shared_ptr<Checkpoint> checkpoint = std::static_pointer_cast<Checkpoint>( game->Recycle->GetObject( ObjectType_CHECKPOINT, false ) );
 					checkpoint->Init( level );
 
 					PhsxData data = level->LevelPieces[ 0 ]->StartData[ i ];
-					data.Position.X = level->LevelPieces[ 0 ]->StartData[ 0 ]->Position.X;
+					data.Position.X = level->LevelPieces[ 0 ]->StartData[ 0 ].Position.X;
 					data.Position += level->LevelPieces[ 0 ]->CheckpointShift[ i ];
 
 					checkpoint->getCore()->StartData = checkpoint->getCore()->Data = data;
@@ -327,7 +327,7 @@ bool LevelSeedData::NoDoublePaths = true;
 			NewLevel->AbsorbLevel( level );
 
 			// Absorb the new level's time type
-			if ( level->TimeType != Level.TimeTypes_REGULAR )
+			if ( level->TimeType != TimeTypes_REGULAR )
 				NewLevel->TimeType = level->TimeType;
 
 			NewLevel->Par += level->Par; // Add the level's par to the big level's par
@@ -337,19 +337,17 @@ bool LevelSeedData::NoDoublePaths = true;
 		}
 
 		// Cleanup lava
-		std::vector<BlockBase*> Lavas = std::vector<BlockBase*>();
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BlockBase*>::const_iterator block = NewLevel->Blocks.begin(); block != NewLevel->Blocks.end(); ++block )
-			if ( ( *block )->Core->MyType == ObjectType_LAVA_BLOCK )
+		BlockVec Lavas = BlockVec();
+		for ( BlockVec::const_iterator block = NewLevel->Blocks.begin(); block != NewLevel->Blocks.end(); ++block )
+			if ( ( *block )->getCore()->MyType == ObjectType_LAVA_BLOCK )
 				Lavas.push_back( *block );
 
 		if ( Lavas.size() > 0 )
 		{
 			// Find the lowest watermark
 			std::shared_ptr<BlockBase> Lowest = 0;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<BlockBase*>::const_iterator lava = Lavas.begin(); lava != Lavas.end(); ++lava )
-				if ( Lowest == 0 || ( *lava )->Box.TR::Y < Lowest->getBox()->TR.Y )
+			for ( BlockVec::const_iterator lava = Lavas.begin(); lava != Lavas.end(); ++lava )
+				if ( Lowest == 0 || ( *lava )->getBox()->TR.Y < Lowest->getBox()->TR.Y )
 					Lowest = *lava;
 
 			// Extend left and right to cover whole level
@@ -362,8 +360,7 @@ bool LevelSeedData::NoDoublePaths = true;
 				Lowest->CollectSelf();
 
 			// Remove extra lava blocks
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<BlockBase*>::const_iterator lava = Lavas.begin(); lava != Lavas.end(); ++lava )
+			for ( BlockVec::const_iterator lava = Lavas.begin(); lava != Lavas.end(); ++lava )
 				if ( *lava != Lowest )
 					( *lava )->CollectSelf();
 		}
@@ -385,7 +382,7 @@ bool LevelSeedData::NoDoublePaths = true;
 		NewLevel->MyBackground->Init( NewLevel );
 	}
 
-int LevelSeedData::ForcedReturnEarly = 0;
+	int LevelSeedData::ForcedReturnEarly = 0;
 
 	int LevelSeedData::SetReturnEarly( const std::shared_ptr<PieceSeedData> &Piece )
 	{
@@ -394,15 +391,15 @@ int LevelSeedData::ForcedReturnEarly = 0;
 		return ReturnEarly;
 	}
 
-const std::wstring LevelSeedData::WallFlag = _T( "wall" );
-const std::wstring LevelSeedData::FadeInFlag = _T( "fadein" );
-const std::wstring LevelSeedData::FadeOutFlag = _T( "fadeout" );
-const std::wstring LevelSeedData::WeatherIntensityFlag = _T( "weather" );
-const std::wstring LevelSeedData::NoStartDoorFlag = _T( "nostartdoor" );
-const std::wstring LevelSeedData::LevelFlag = _T( "level" );
-const std::wstring LevelSeedData::WaitLengthToOpenDoorString = _T( "opendoor" );
-const std::wstring LevelSeedData::OpenDoorSoundFlag = _T( "opendoorsound" );
-const std::wstring LevelSeedData::SongString = _T( "song" );
+	const std::wstring LevelSeedData::WallFlag = _T( "wall" );
+	const std::wstring LevelSeedData::FadeInFlag = _T( "fadein" );
+	const std::wstring LevelSeedData::FadeOutFlag = _T( "fadeout" );
+	const std::wstring LevelSeedData::WeatherIntensityFlag = _T( "weather" );
+	const std::wstring LevelSeedData::NoStartDoorFlag = _T( "nostartdoor" );
+	const std::wstring LevelSeedData::LevelFlag = _T( "level" );
+	const std::wstring LevelSeedData::WaitLengthToOpenDoorString = _T( "opendoor" );
+	const std::wstring LevelSeedData::OpenDoorSoundFlag = _T( "opendoorsound" );
+	const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::ProcessSpecial()
 	{
@@ -411,7 +408,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 			std::shared_ptr<PieceSeedData> p = PieceSeeds[ 0 ];
 			//p.Style.ComputerWaitLengthRange = new Vector2(4, 23);
 
-			p->Style_MY_MOD_PARAMS->Add( std::make_shared<_HasWall_ProcessProxy>() );
+			p->Style->MyModParams->Add( std::make_shared<_HasWall_ProcessProxy>() );
 		}
 
 		if ( NoStartDoor )
@@ -439,7 +436,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::_HasWall_Process( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &piece )
 	{
-		std::shared_ptr<NormalBlock_Parameters> Params = static_cast<NormalBlock_Parameters*>( piece->Style_FIND_PARAMS( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( piece->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		std::shared_ptr<Wall> wall = Params->SetWall( LevelGeometry_RIGHT );
 		wall->Space = 20;
 		wall->MyBufferType = Wall::BufferType_SPACE;
@@ -470,8 +467,8 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::_FadeOut_Process( const std::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<StringWorldGameData> stringworld = dynamic_cast<StringWorldGameData*>( Tools::WorldMap );
-		std::shared_ptr<Door> door = dynamic_cast<Door*>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
+		std::shared_ptr<StringWorldGameData> stringworld = std::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
+		std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
 
 		if ( 0 != stringworld && 0 != door )
 		{
@@ -481,14 +478,14 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::DefaultRead( const std::wstring &str )
 	{
-		int i = abs( str.GetHashCode() );
+		int i = abs( GetHashCode(str) );
 
 		// Length
 		Length = PieceLength = static_cast<int>( ( static_cast<unsigned int>( i * 997 ) ) % 7000 + 5000 );
 
 		// Tileset
 		i /= 2;
-		std::shared_ptr<std::vector<void*> > tilesets = TileSets::NameLookup.Keys::ToList();
+		//std::shared_ptr<std::vector<std::shared_ptr<BackgroundTemplate> > > tilesets = TileSets::NameLookup.Keys::ToList();
 		std::shared_ptr<TileSet> tileset = CustomLevel_GUI::FreeplayTilesets[ ( i + 23 ) % CustomLevel_GUI::FreeplayTilesets.size() ];
 		if ( tileset == TileSets::Random )
 			tileset = CustomLevel_GUI::FreeplayTilesets[ ( i + 2323 ) % CustomLevel_GUI::FreeplayTilesets.size() ];
@@ -516,20 +513,20 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		PieceHash = i * getSeed();
 	}
 
-	void LevelSeedData::ReadString( const std::wstring &str )
+	void LevelSeedData::ReadString( std::wstring str )
 	{
 		DefaultRead( str );
 		UpgradeStrs.clear();
 
 		str = Tools::RemoveComment_SlashStyle( str );
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		std::vector<std::wstring> bits = str.Split( L';' );
 
-		for ( int i = 0; i < bits.size(); i++ )
+		std::vector<std::wstring> bits = Split( str, L';' );
+
+		for ( int i = 0; i < static_cast<int>( bits.size() ); i++ )
 		{
 			std::wstring identifier, data;
 
-			int index = bits[ i ]->find( _T( ":" ) );
+			int index = bits[ i ].find( _T( ":" ) );
 
 			if ( index <= 0 )
 			{
@@ -538,26 +535,26 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 			}
 			else
 			{
-				identifier = bits[ i ]->substr( 0, index );
-				data = bits[ i ]->substr( index + 1 );
+				identifier = bits[ i ].substr( 0, index );
+				data = bits[ i ].substr( index + 1 );
 			}
 
 			std::vector<std::wstring> terms;
 
 			// Seed [This must come first]
-			if ( identifier.ToLower() == _T("s") )
+			if ( ToLower( identifier ) == _T("s") )
 			{
 				try
 				{
-					setSeed( int::Parse( data ) );
+					setSeed( ParseInt( data ) );
 				}
 				catch ( ... )
 				{
-					setSeed( data.GetHashCode() );
+					setSeed( GetHashCode(data) );
 				}
 			}
 			// Game type
-			else if ( identifier.ToLower() == _T("g") )
+			else if ( ToLower( identifier ) == _T("g") )
 			{
 				MyGameType = NormalGameData::Factory;
 				//try
@@ -570,11 +567,11 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 				//}
 			}
 			// Geometry
-			else if ( identifier.ToLower() == _T("geo") )
+			else if ( ToLower( identifier ) == _T("geo") )
 			{
 				try
 				{
-					MyGeometry = static_cast<LevelGeometry>( int::Parse( data ) );
+					MyGeometry = static_cast<LevelGeometry>( ParseInt( data ) );
 				}
 				catch ( ... )
 				{
@@ -582,24 +579,23 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 				}
 			}
 			// Hero [This must come before "ph:"]
-			else if ( identifier.ToLower() == _T("h") )
+			else if ( ToLower( identifier ) == _T("h") )
 			{
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-					terms = data.Split( L',' );
+					terms = Split( data, L',' );
 					if ( terms.size() == 4 )
 						DefaultHeroType = BobPhsx::MakeCustom( terms[ 0 ], terms[ 1 ], terms[ 2 ], terms[ 3 ] );
 					else
 						DefaultHeroType = BobPhsxNormal::getInstance();
 			}
 			// Custom physics [This must come after "h:"]
-			else if ( identifier.ToLower() == _T("ph") )
+			else if ( ToLower( identifier ) == _T("ph") )
 			{
 					BobPhsx::CustomPhsxData custom = BobPhsx::CustomPhsxData();
 					custom.Init( data );
 					DefaultHeroType->SetCustomPhsx( custom );
 			}
 			// Tileset
-			else if ( identifier.ToLower() == _T("t") )
+			else if ( ToLower( identifier ) == _T("t") )
 			{
 					MyTileSet.reset();
 					if ( data.length() > 0 )
@@ -617,11 +613,11 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 						SetTileSet( _T( "castle" ) );
 			}
 			// Number of pieces
-			else if ( identifier.ToLower() == _T("n") )
+			else if ( ToLower( identifier ) == _T("n") )
 			{
 					try
 					{
-						NumPieces = int::Parse( data );
+						NumPieces = ParseInt( data );
 						NumPieces = CoreMath::Restrict( 1, 5, NumPieces );
 					}
 					catch ( ... )
@@ -630,11 +626,11 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 					}
 			}
 			// Length
-			else if ( identifier.ToLower() == _T("l") )
+			else if ( ToLower( identifier ) == _T("l") )
 			{
 					try
 					{
-						Length = int::Parse( data );
+						Length = ParseInt( data );
 						Length = CoreMath::Restrict( 2000, 50000, Length );
 						PieceLength = Length;
 					}
@@ -644,41 +640,41 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 					}
 			}
 			// Upgrades
-			else if ( identifier.ToLower() == _T("u") )
+			else if ( ToLower( identifier ) == _T("u") )
 			{
 					UpgradeStrs.push_back( data );
 			}
 			// Wall
-			else if ( identifier.ToLower() == WallFlag )
+			else if ( ToLower( identifier ) == WallFlag )
 			{
 					HasWall = true;
 			}
 			// Fade In
-			else if ( identifier.ToLower() == FadeInFlag )
+			else if ( ToLower( identifier ) == FadeInFlag )
 			{
 					FadeIn = true;
 			}
 			// Fade Out
-			else if ( identifier.ToLower() == FadeOutFlag )
+			else if ( ToLower( identifier ) == FadeOutFlag )
 			{
 					FadeOut = true;
 			}
 			// No start door
-			else if ( identifier.ToLower() == NoStartDoorFlag )
+			else if ( ToLower( identifier ) == NoStartDoorFlag )
 			{
 					NoStartDoor = true;
 			}
 			// Level number
-			else if ( identifier.ToLower() == LevelFlag )
+			else if ( ToLower( identifier ) == LevelFlag )
 			{
-					LevelNum = int::Parse( data );
+					LevelNum = ParseInt( data );
 			}
 			// Weather intensity
-			else if ( identifier.ToLower() == WeatherIntensityFlag )
+			else if ( ToLower( identifier ) == WeatherIntensityFlag )
 			{
 					try
 					{
-						WeatherIntensity = float::Parse( data );
+						WeatherIntensity = ParseFloat( data );
 					}
 					catch ( ... )
 					{
@@ -686,11 +682,11 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 					}
 			}
 			// Wait length to open door
-			else if ( identifier.ToLower() == WaitLengthToOpenDoorString )
+			else if ( ToLower( identifier ) == WaitLengthToOpenDoorString )
 			{
 					try
 					{
-						WaitLengthToOpenDoor = int::Parse( data );
+						WaitLengthToOpenDoor = ParseInt( data );
 					}
 					catch ( ... )
 					{
@@ -698,7 +694,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 					}
 			}
 			// Song to play at beginning of level
-			else if ( identifier.ToLower() == SongString )
+			else if ( ToLower( identifier ) == SongString )
 			{
 					try
 					{
@@ -710,7 +706,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 					}
 			}
 			// Open door sound
-			else if ( identifier.ToLower() == OpenDoorSoundFlag )
+			else if ( ToLower( identifier ) == OpenDoorSoundFlag )
 			{
 					OpenDoorSound = true;
 
@@ -721,12 +717,12 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		}
 
 		// Error catch.
-		if ( dynamic_cast<BobPhsxMeat*>( DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_UP;
 			NumPieces = 1;
 		}
-		if ( dynamic_cast<BobPhsxRocketbox*>( DefaultHeroType ) != 0 )
+		if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_RIGHT;
 			NumPieces = 1;
@@ -764,41 +760,39 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		// Geometry
 		std::wstring geometry = _T( "" );
 		if ( MyGeometry != LevelGeometry_RIGHT )
-			geometry = _T( "geo:" ) + static_cast<int>( MyGeometry ) + _T( ";" );
+			geometry = Format( _T( "geo:{0};" ), + static_cast<int>( MyGeometry ) );
 
 		// Hero
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		std::wstring hero = _T( "h:" ) + DefaultHeroType->Specification.ToString() + _T(";");
+		std::wstring hero = Format( _T( "h:{0};" ), DefaultHeroType->Specification.ToString() );
 
 		// Custom phsx
 		std::wstring customphsx = _T( "" );
 		if ( DefaultHeroType->CustomPhsx )
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 			customphsx = DefaultHeroType->MyCustomPhsxData.ToString();
 
 		// Tileset
-		std::wstring tileset = _T( "t:" ) + MyTileSet->Name + _T( ";" );
+		std::wstring tileset = Format( _T( "t:{0};" ), MyTileSet->Name );
 
 		// Pieces
-		std::wstring pieces = _T( "n:" ) + NumPieces + _T( ";" );
+		std::wstring pieces = Format( _T( "n:{0};" ), NumPieces );
 
 		// Length
-		std::wstring length = _T( "l:" ) + StringConverterHelper::toString( Length ) + _T( ";" );
+		std::wstring length = Format( _T( "l:{0};" ), StringConverterHelper::toString( Length ) );
 
 		// Upgrades
 		std::wstring upgrades = _T( "" );
-		for ( std::vector<PieceSeedData*>::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
+		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
 		{
-			if ( ( *p )->Ladder != Level.LadderType_NONE )
+			if ( ( *p )->Ladder != LadderType_NONE )
 				continue;
 
 			upgrades += _T( "u:" );
 
 			std::vector<float> upgrade_levels = ( *p )->MyUpgrades1->UpgradeLevels;
-			for ( int i = 0; i < upgrade_levels.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( upgrade_levels.size() ); i++ )
 			{
 				upgrades += StringConverterHelper::toString( upgrade_levels[ i ] );
-				if ( i + 1 < upgrade_levels.size() )
+				if ( i + 1 < static_cast<int>( upgrade_levels.size() ) )
 					upgrades += _T( "," );
 			}
 			upgrades += _T( ";" );
@@ -818,14 +812,13 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 	{
 		// Break the data up by commas
 		int index = CoreMath::Restrict( 0, UpgradeStrs.size() - 1, piece->MyPieceIndex );
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		std::vector<std::wstring> terms = UpgradeStrs[ index ].Split( L',' );
+		std::vector<std::wstring> terms = Split( UpgradeStrs[ index ], L',' );
 
 		// Try and load the data into the upgrade array.
 		try
 		{
-			for ( int i = 0; i < terms.size(); i++ )
-				piece->MyUpgrades1->UpgradeLevels[ i ] = float::Parse( terms[ i ] );
+			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
+				piece->MyUpgrades1->UpgradeLevels[ i ] = ParseFloat( terms[ i ] );
 		}
 		catch ( ... )
 		{
@@ -845,20 +838,20 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 		int Bias = static_cast<int>( 75 - static_cast<unsigned int>( PieceHash ) % 50 );
 
-		for ( int i = 0; i < piece->MyUpgrades1->UpgradeLevels.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( piece->MyUpgrades1->UpgradeLevels.size() ); i++ )
 		{
 			int n1 = PieceHash | ( 2 + 8 + 32 + 128 + 512 );
 			int n2 = PieceHash | ( 1 + 4 + 16 + 64 + 256 );
 
 			int value = 0;
-			if ( ( n1 * n2 + static_cast<int>( exp( i ) ) ) % 100 > Bias )
+			if ( ( n1 * n2 + static_cast<int>( exp( static_cast<double>( i ) ) ) ) % 100 > Bias )
 				value = ( n1 + n1 * n2 ) % 10;
 
 			piece->MyUpgrades1->UpgradeLevels[ i ] = CoreMath::Restrict( 0, 10, value );
 		}
 
-		piece->MyUpgrades1[ Upgrade_CONVEYOR ] = 0;
-	piece->MyUpgrades1[ Upgrade_FIRESNAKE ] = piece->MyUpgrades1[ Upgrade_CONVEYOR ];
+		piece->MyUpgrades1->Get( Upgrade_CONVEYOR ) = 0;
+		piece->MyUpgrades1->Get( Upgrade_FIRESNAKE ) = piece->MyUpgrades1->Get( Upgrade_CONVEYOR );
 
 		piece->StandardClose();
 	}
@@ -870,8 +863,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 		for ( int i = 0; i < Length; i++ )
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var value = i * PieceHash * PieceHash + PieceHash + i * i;
+			int value = i * PieceHash * PieceHash + PieceHash + i * i;
 
 			vals[ i ] = CoreMath::Restrict( BobPhsx::CustomPhsxData::Bounds( i ).MinValue, BobPhsx::CustomPhsxData::Bounds( i ).MaxValue, value );
 			vals[ i ] = CoreMath::Restrict( 0, 1, value );
@@ -907,14 +899,17 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::AddGameObjects_Default( const std::shared_ptr<Level> &level, bool global, bool ShowMultiplier )
 	{
-		level->MyGame->AddGameObject( std::make_shared<HintGiver>(), HelpMenu::MakeListener(), std::make_shared<PerfectScoreObject>(global, ShowMultiplier) );
+		level->MyGame->AddGameObject( std::make_shared<HintGiver>() );
+		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
+		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, ShowMultiplier) );
 
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 	}
 
 	void LevelSeedData::AddGameObjects_BareBones( const std::shared_ptr<Level> &level, bool global )
 	{
-		level->MyGame->AddGameObject( InGameStartMenu::MakeListener(), std::make_shared<PerfectScoreObject>(global, true) );
+		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
+		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, true) );
 	}
 
 	void LevelSeedData::BOL_StartMusic()
@@ -942,7 +937,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		if ( StartMusic )
 			level->MyGame->WaitThenDo( 8, std::make_shared<BOL_StartMusicProxy>() );
 
-		std::shared_ptr<ILevelConnector> door = static_cast<ILevelConnector*>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
+		std::shared_ptr<ILevelConnector> door = std::static_pointer_cast<ILevelConnector>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
 		door->setOnOpen( std::make_shared<EOL_DoorActionProxy>() );
 
 		level->StartRecording();
@@ -968,7 +963,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 	void LevelSeedData::SetTileSet( const std::wstring &name )
 	{
 		if ( name == _T( "" ) )
-			SetTileSet( static_cast<TileSet*>( 0 ) );
+			SetTileSet( name );
 		else
 			SetTileSet( TileSets::NameLookup[ name ] );
 	}
@@ -986,7 +981,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		MyGame.reset();
 
 		ReleasePieces();
-		PieceSeeds = std::vector<PieceSeedData*>();
+		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
 	}
 
 	void LevelSeedData::Release()
@@ -1001,7 +996,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 	void LevelSeedData::ReleasePieces()
 	{
 		if ( PieceSeeds.size() > 0 )
-			for ( std::vector<PieceSeedData*>::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
+			for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
 				( *data )->Release();
 		PieceSeeds.clear();
 	}
@@ -1043,12 +1038,12 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	void LevelSeedData::BaseInit()
 	{
-		PieceSeeds = std::vector<PieceSeedData*>();
+		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
 
 		Loaded = std::make_shared<LockableBool>();
 	}
 
-	void LevelSeedData::PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		this->MyGameType = Type;
 		this->Difficulty = Difficulty;
@@ -1065,8 +1060,9 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		if ( MyGameType == ActionGameData::Factory )
 			return;
 
-		if ( Length == 0 )
-			throw ( std::exception( _T( "Invalid length. PreInitialize may not have been called." ) ) );
+		// FIXME: Implement exceptions?
+		//if ( Length == 0 )
+		//	throw ( std::exception( _T( "Invalid length. PreInitialize may not have been called." ) ) );
 
 		Initialize( MyGameType, MyGeometry, NumPieces, Length, MyCustomDifficulty );
 	}
@@ -1076,7 +1072,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		int TestNumber;
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Pre-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Pre-sanitize: {0}" ), TestNumber ) );
 
 		// Convert random tileset to an actual randomly chosen tileset
 		// use global RND.
@@ -1098,28 +1094,28 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		// No spaceships or carts on vertical levels
 		if ( MyGeometry == LevelGeometry_UP || MyGeometry == LevelGeometry_DOWN )
 		{
-			if ( dynamic_cast<BobPhsxSpaceship*>( DefaultHeroType ) != 0 )
+			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxDouble::getInstance();
-			else if ( dynamic_cast<BobPhsxRocketbox*>( DefaultHeroType ) != 0 )
+			else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxJetman::getInstance();
 		}
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( std::wstring::Format( _T( "Post-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Post-sanitize: {0}" ), TestNumber ) );
 	}
 
-	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<PieceSeedData*, Upgrades*> > &CustomDiff )
+	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData> , std::shared_ptr<Upgrades> > > &CustomDiff )
 	{
 		Initialize( std::make_shared<StandardInitHelper>( CustomDiff ) );
 
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::Initialize( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialize( MyGameType, MyGeometry, NumPieces, PieceLength, CustomDiff );
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialized = true;
 
@@ -1137,7 +1133,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	float LevelSeedData::CalcPieceLength( const std::shared_ptr<PieceSeedData> &data )
 	{
-		if ( data->Style_MY_INITIAL_PLATS_TYPE == StyleData::InitialPlatsType_LANDING_ZONE )
+		if ( data->Style->MyInitialPlatsType == StyleData::InitialPlatsType_LANDING_ZONE )
 		{
 			return 3000;
 		}
@@ -1145,7 +1141,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		return 0;
 	}
 
-	void LevelSeedData::InitNormal( bool Place, const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::InitNormal( bool Place, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		std::shared_ptr<PieceSeedData> Piece;
 
@@ -1159,9 +1155,9 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 			if ( Place )
 			{
-				Piece->Style_JUMP_TYPE = StyleData::_JumpType_ALWAYS;
+				Piece->Style->JumpType = StyleData::_JumpType_ALWAYS;
 
-				Piece->Style_MY_MOD_PARAMS->Add( std::make_shared<InitNormalMyModParamsHelper>() );
+				Piece->Style->MyModParams->Add( std::make_shared<InitNormalMyModParamsHelper>() );
 			}
 
 			if ( CustomDiff != 0 )
@@ -1207,7 +1203,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		}
 	}
 
-	void LevelSeedData::InitPlace( const std::shared_ptr<Lambda_1<PieceSeedData*> > &CustomDiff )
+	void LevelSeedData::InitPlace( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		InitNormal( true, CustomDiff );
 	}
@@ -1228,7 +1224,8 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		std::shared_ptr<Level> NewLevel = std::make_shared<Level>();
 		NewLevel->MySourceGame = game;
 		NewLevel->DefaultHeroType = DefaultHeroType;
-		std::shared_ptr<Camera> cam = NewLevel->setMainCamera( std::make_shared<Camera>() );
+		NewLevel->setMainCamera( std::make_shared<Camera>() );
+		std::shared_ptr<Camera> cam = NewLevel->getMainCamera();
 		cam->Update();
 
 		// Set background and tileset
@@ -1246,7 +1243,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 
 	std::shared_ptr<GameData> LevelSeedData::Create( bool MakeInBackground )
 	{
-		std::shared_ptr<GameData> game = MyGameType->Make( this, MakeInBackground );
+		std::shared_ptr<GameData> game = MyGameType->Make( shared_from_this(), MakeInBackground );
 		game->EndMusicOnFinish = !NoMusicStart;
 
 		return game;
@@ -1269,7 +1266,7 @@ const std::wstring LevelSeedData::SongString = _T( "song" );
 		NoDefaultMake = false;
 		NoMusicStart = false;
 		Name = _T( "" );
-		PostMake = std::make_shared<Multicaster_1<Level*> >();
+		PostMake = std::make_shared<Multicaster_1<std::shared_ptr<Level> > >();
 		ReleaseWhenLoaded = false;
 		LoadingBegun = false;
 		MyGeometry = LevelGeometry_RIGHT;

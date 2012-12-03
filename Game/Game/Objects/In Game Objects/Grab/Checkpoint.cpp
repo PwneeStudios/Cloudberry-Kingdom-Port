@@ -250,7 +250,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 				// Kill other checkpoints
 				for ( ObjectVec::const_iterator obj = getCore()->MyLevel->Objects.begin(); obj != getCore()->MyLevel->Objects.end(); ++obj )
 				{
-					std::shared_ptr<Checkpoint> checkpoint = dynamic_cast<Checkpoint*>( *obj );
+					std::shared_ptr<Checkpoint> checkpoint = std::dynamic_pointer_cast<Checkpoint>( *obj );
 					if ( 0 != checkpoint )
 						if ( checkpoint->MyPiece == MyPiece )
 							checkpoint->Die();
@@ -316,7 +316,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Checkpoint> CheckpointA = dynamic_cast<Checkpoint*>( A );
+		std::shared_ptr<Checkpoint> CheckpointA = std::dynamic_pointer_cast<Checkpoint>( A );
 
 		GhostFaded = CheckpointA->GhostFaded;
 		Taken = CheckpointA->Taken;

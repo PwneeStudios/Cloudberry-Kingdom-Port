@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	class LevelSeedData
+	class LevelSeedData : public std::enable_shared_from_this<LevelSeedData>
 	{
 
 	private:
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Read in parameters from a string.
 		/// </summary>
-		void ReadString( const std::wstring &str );
+		void ReadString( std::wstring str );
 
 		virtual std::wstring ToString();
 

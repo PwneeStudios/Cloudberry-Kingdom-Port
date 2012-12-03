@@ -54,12 +54,12 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		std::shared_ptr<Firesnake_Parameters> Params = std::make_shared<Firesnake_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	std::shared_ptr<Firesnake_Parameters> Firesnake_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<Firesnake_Parameter>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
+		return std::static_pointer_cast<Firesnake_Parameters>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 	}
 
 	void Firesnake_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -159,7 +159,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		float periodstep = Period / n;
 		for ( int i = 0; i < n; i++ )
 		{
-			std::shared_ptr<Firesnake> snake = static_cast<Firesnake*>( CreateAt( level, pos ) );
+			std::shared_ptr<Firesnake> snake = std::static_pointer_cast<Firesnake>( CreateAt( level, pos ) );
 			snake->Offset = static_cast<int>( i * periodstep );
 			snake->Radii = Radii;
 
@@ -172,10 +172,10 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 	std::shared_ptr<ObjectBase> Firesnake_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<Firesnake_Parameters> Params = std::static_pointer_cast<Firesnake_Parameter>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
+		std::shared_ptr<Firesnake_Parameters> Params = std::static_pointer_cast<Firesnake_Parameters>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 
 		// Get the new snake
-		std::shared_ptr<Firesnake> NewSnake = static_cast<Firesnake*>( level->getRecycle()->GetObject(ObjectType_FIRESNAKE, true) );
+		std::shared_ptr<Firesnake> NewSnake = std::static_pointer_cast<Firesnake>( level->getRecycle()->GetObject(ObjectType_FIRESNAKE, true) );
 
 		//if (level.Rnd.RndBool())
 		//    pos.Y = level.FillBL.Y - 300;
@@ -204,7 +204,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Firesnake_Parameters> Params = std::static_pointer_cast<Firesnake_Parameter>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
+		std::shared_ptr<Firesnake_Parameters> Params = std::static_pointer_cast<Firesnake_Parameters>( level->Style->FindParams( Firesnake_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

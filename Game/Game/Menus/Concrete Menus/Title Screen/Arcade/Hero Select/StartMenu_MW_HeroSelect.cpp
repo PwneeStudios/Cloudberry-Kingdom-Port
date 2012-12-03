@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::OnSelect()
 	{
-		std::shared_ptr<HeroItem> item = dynamic_cast<HeroItem*>( MyMenu->getCurItem() );
+		std::shared_ptr<HeroItem> item = std::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
 
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::UpdateScore()
 	{
-		std::shared_ptr<HeroItem> item = dynamic_cast<HeroItem*>( MyMenu->getCurItem() );
+		std::shared_ptr<HeroItem> item = std::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
 

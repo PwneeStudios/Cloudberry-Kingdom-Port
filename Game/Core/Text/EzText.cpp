@@ -343,7 +343,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b, int shift, const std::wstring &bit )
 	{
-		return ColorToMarkup( Color( r, g, b ), shift, bit );
+		return ColorToMarkup( Color( static_cast<unsigned char>( r ), static_cast<unsigned char>( g ), static_cast<unsigned char>( b ) ), shift, bit );
 	}
 
 	std::wstring EzText::ColorToMarkup( Color clr )

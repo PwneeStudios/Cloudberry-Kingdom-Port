@@ -70,7 +70,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		std::shared_ptr<FireSpinner_Parameters> Params = std::make_shared<FireSpinner_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameter>( Params );
+		return std::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
 	void FireSpinner_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -78,7 +78,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameter>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
+		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameters>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
 		float SpinnerTopOffset = level->getInfo()->Spinners->TopOffset;
 		float SpinnerBottomOffset = level->getInfo()->Spinners->BottomOffset;
@@ -124,7 +124,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 
 					std::shared_ptr<FireSpinner> spinner;
 
-					spinner = static_cast<FireSpinner*>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
+					spinner = std::static_pointer_cast<FireSpinner>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
 					spinner->getCore()->StartData.Position = spinner->getCore()->Data.Position = Vector2(x, y);
 
 					spinner->Orientation = 1;
@@ -150,7 +150,7 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameter>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
+		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameters>( level->Style->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
 		level->Cleanup( ObjectType_FIRE_SPINNER, std::make_shared<Cleanup_2Proxy>( Params ), BL, TR );
 	}

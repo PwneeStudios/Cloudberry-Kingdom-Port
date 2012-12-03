@@ -162,7 +162,7 @@ namespace CloudberryKingdom
 					for ( ObjectVec::const_iterator cloud = getCore()->MyLevel->Objects.begin(); cloud != getCore()->MyLevel->Objects.end(); ++cloud )
 					{
 //C# TO C++ CONVERTER NOTE: The variable Cloud was renamed since it is named the same as a user-defined type:
-						std::shared_ptr<Cloud> Cloud_Renamed = dynamic_cast<Cloud*>( *cloud );
+						std::shared_ptr<Cloud> Cloud_Renamed = std::dynamic_pointer_cast<Cloud>( *cloud );
 						if ( 0 != Cloud_Renamed )
 							if ( !Cloud_Renamed->getCore()->GenData.Used && (Cloud_Renamed->getCore()->Data.Position - getCore()->Data.Position)->Length() < 2.35f * Box->Current->Size.X )
 							{
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Cloud> CloudA = dynamic_cast<Cloud*>( A );
+		std::shared_ptr<Cloud> CloudA = std::dynamic_pointer_cast<Cloud>( A );
 
 		Shiftiness = CloudA->Shiftiness;
 		Size = CloudA->Size;
