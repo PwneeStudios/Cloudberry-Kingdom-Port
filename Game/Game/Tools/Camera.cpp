@@ -28,9 +28,9 @@ namespace CloudberryKingdom
 		_Zoom = value;
 	}
 
-	const Vector2 &Camera::getScreenSize() const
+	Vector2 Camera::getScreenSize() const
 	{
-		return 2 * Vector2( ScreenWidth, ScreenHeight );
+		return 2 * Vector2( static_cast<float>( ScreenWidth ), static_cast<float>( ScreenHeight ) );
 	}
 
 	void Camera::Release()
@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 	Camera::Camera()
 	{
 		InitializeInstanceFields();
-		Init( Tools::Device->PresentationParameters->BackBufferWidth, Tools::Device->PresentationParameters->BackBufferHeight );
+		Init( Tools::Device->PP->BackBufferWidth, Tools::Device->PP->BackBufferHeight );
 	}
 
 	Camera::Camera( int width, int height )
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 		Data.Position = Vector2( 0, 0 );
 		setZoom( Vector2( .001f,.001f ) );
 	ShakingSaveZoom = getZoom();
-		Offset = Vector2( width / 2, height / 2 );
+		Offset = Vector2( width / 2.f, height / 2.f );
 		AspectRatio = static_cast<float>( ScreenWidth ) / static_cast<float>( ScreenHeight );
 	}
 
@@ -373,7 +373,7 @@ bool Camera::DisableOscillate = false;
 		if ( SpeedVel != 0 )
 		{
 			float dif = TargetSpeed - Speed;
-			Speed += __min( SpeedVel, abs( dif ) ) * Math::Sign( dif );
+			Speed += __min( SpeedVel, abs( dif ) ) * Sign( dif );
 		}
 
 		switch ( MyPhsxType )
@@ -453,9 +453,9 @@ bool Camera::DisableOscillate = false;
 	{
 		if ( NewType != MyPhsxType )
 		{
-			switch ( NewType )
+			/*switch ( NewType )
 			{
-			}
+			}*/
 
 			MyPhsxType = NewType;
 		}
@@ -504,7 +504,7 @@ bool Camera::DisableOscillate = false;
 
 				Count++;
 				TotalWeight += ( *bob )->CameraWeight;
-				( *bob )->CameraWeight = CoreMath::Restrict( 0, 1, ( *bob )->CameraWeight + ( *bob )->CameraWeightSpeed );
+				( *bob )->CameraWeight = CoreMath::RestrictVal( 0.f, 1.f, ( *bob )->CameraWeight + ( *bob )->CameraWeightSpeed );
 			}
 		}
 
@@ -525,14 +525,14 @@ bool Camera::DisableOscillate = false;
 		if ( pos.Y < Target.Y - ScreenHeight * ratio.Y )
 			Target.Y -= ScreenHeight * ratio2.Y;
 
-		Target.X = CoreMath::Restrict( MyZone->Start.X, MyZone->End.X, Target.X );
-		Target.Y = CoreMath::Restrict( MyZone->Start.Y, MyZone->End.Y, Target.Y );
+		Target.X = CoreMath::RestrictVal( MyZone->Start.X, MyZone->End.X, Target.X );
+		Target.Y = CoreMath::RestrictVal( MyZone->Start.Y, MyZone->End.Y, Target.Y );
 
 		Vector2 CurMaxSpeed = Vector2::Max( Vector2( Speed ), 1.05f * MaxPlayerSpeed );
 
 		CurMaxSpeed = Vector2( 60 );
-		Data.Position.X += Math::Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
-		Data.Position.Y += Math::Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
+		Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
+		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
 
 		Update();
 	}
@@ -633,7 +633,7 @@ bool Camera::DisableOscillate = false;
 
 				Count++;
 				TotalWeight += ( *bob )->CameraWeight;
-				( *bob )->CameraWeight = CoreMath::Restrict( 0, 1, ( *bob )->CameraWeight + ( *bob )->CameraWeightSpeed );
+				( *bob )->CameraWeight = CoreMath::RestrictVal( 0.f, 1.f, ( *bob )->CameraWeight + ( *bob )->CameraWeightSpeed );
 			}
 		}
 
@@ -797,13 +797,13 @@ bool Camera::DisableOscillate = false;
 		{
 			float Retard = 1;
 			if ( MyZone != 0 && Data.Position.X > MyZone->End.X )
-				Retard = CoreMath::LerpRestrict( 1, 0, ( Data.Position.X - MyZone->End.X ) / 200 );
-			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 15 ), Math::Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
+				Retard = CoreMath::LerpRestrict( 1.f, 0.f, ( Data.Position.X - MyZone->End.X ) / 200 );
+			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 15 ), Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
 		}
 		else
-			Data.Position.X += Math::Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
+			Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
 
-		Data.Position.Y += Math::Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
+		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
 
 
 		Update();

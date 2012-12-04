@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		std::wstring FileName;
 
 	private:
-		std::shared_ptr<FileStream> stream;
+		//std::shared_ptr<FileStream> stream;
 	public:
 		std::shared_ptr<BinaryReader> reader;
 

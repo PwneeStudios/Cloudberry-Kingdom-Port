@@ -117,6 +117,13 @@ public:
 		return *this;
 	}
 
+	Vector2 &operator /= ( float k )
+	{
+		X /= k;
+		Y /= k;
+		return *this;
+	}
+
 	Vector2 operator + ( const Vector2 &a ) const
 	{
 		return Vector2( X + a.X, Y + a.Y );

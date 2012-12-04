@@ -593,8 +593,36 @@ public:
 };
 
 class Stopwatch;
-class StorageContainer;
-class StorageDevice;
+class StorageContainer
+{
+
+public:
+
+	bool FileExists( const std::wstring &name )
+	{
+		return false;
+	}
+
+	void DeleteFile( const std::wstring &name )
+	{
+		
+	}
+
+	std::shared_ptr<BinaryWriter> CreateFile( const std::wstring &name )
+	{
+		return std::shared_ptr<BinaryWriter>();
+	}
+};
+
+class StorageDevice
+{
+
+public:
+
+	bool IsConnected;
+
+};
+
 class StreamReader;
 class StreamWriter;
 class StringBuilder
@@ -609,7 +637,15 @@ public:
 
 };
 
-class Thread;
+class Thread
+{
+
+public:
+
+	static void Delay( int msec )
+	{
+	}
+};
 
 template<class A, class B>
 class Tuple
