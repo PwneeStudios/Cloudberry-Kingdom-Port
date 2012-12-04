@@ -660,7 +660,7 @@ namespace CloudberryKingdom
 
 		if ( Fading )
 		{
-			setAlpha( CoreMath::Restrict( MinAlpha, MaxAlpha, getAlpha() + FadeSpeed ) );
+			setAlpha( CoreMath::RestrictVal( MinAlpha, MaxAlpha, getAlpha() + FadeSpeed ) );
 		}
 
 		if ( FancyLightAlpha != 0 )

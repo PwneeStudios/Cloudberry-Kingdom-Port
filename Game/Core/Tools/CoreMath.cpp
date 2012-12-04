@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -91,19 +88,19 @@ namespace CloudberryKingdom
 
 	int CoreMath::Minutes( int frames )
 	{
-		float Remainder = frames - 60 * 60 * 62 * Hours( frames );
+		float Remainder = frames - 60.f * 60 * 62 * Hours( frames );
 		return static_cast<int>( Remainder / ( 60 * 62 ) );
 	}
 
 	int CoreMath::Seconds( int frames )
 	{
-		float Remainder = frames - 60 * 60 * 62 * Hours( frames ) - 60 * 62 * Minutes( frames );
+		float Remainder = frames - 60.f * 60 * 62 * Hours( frames ) - 60 * 62 * Minutes( frames );
 		return static_cast<int>( Remainder / 62 );
 	}
 
 	int CoreMath::Milliseconds( int frames )
 	{
-		float Remainder = frames - 60 * 60 * 62 * Hours( frames ) - 60 * 62 * Minutes( frames ) - 62 * Seconds( frames );
+		float Remainder = frames - 60.f * 60 * 62 * Hours( frames ) - 60 * 62 * Minutes( frames ) - 62 * Seconds( frames );
 		return static_cast<int>( 100 * Remainder / 62 );
 	}
 
@@ -127,7 +124,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 	float CoreMath::AngleDist( float a1, float a2 )
 	{
 		float dist = abs( a1 - a2 );
-		dist = dist % 360;
+		dist = fmod( dist, 360.f );
 		return __min( dist, 360 - dist );
 	}
 
@@ -174,16 +171,16 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	Vector2 CoreMath::Sign( Vector2 v )
 	{
-		return Vector2( Math::Sign( v.X ), Math::Sign( v.Y ) );
+		return Vector2( static_cast<float>( ::Sign( v.X ) ), static_cast<float>( ::Sign( v.Y ) ) );
 	}
 
-	float CoreMath::Max( ... )
+	/*float CoreMath::Max( ... )
 	{
 		float max = vals[ 0 ];
 		for ( int i = 1; i < vals->Length; i++ )
 			max = __max( max, vals[ i ] );
 		return max;
-	}
+	}*/
 
 	void CoreMath::MaxAndMin( Vector2 &p1, Vector2 &p2, Vector2 &Max, Vector2 &Min )
 	{
@@ -230,8 +227,8 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	Vector2 CoreMath::Restrict( float min, float max, Vector2 val )
 	{
-		val.X = Restrict( min, max, val.X );
-		val.Y = Restrict( min, max, val.Y );
+		val.X = RestrictVal( min, max, val.X );
+		val.Y = RestrictVal( min, max, val.Y );
 
 		return val;
 	}
@@ -304,7 +301,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::LerpRestrict( float v1, float v2, float t )
 	{
-		return Lerp( v1, v2, CoreMath::Restrict( 0, 1, t ) );
+		return Lerp( v1, v2, CoreMath::RestrictVal( 0.f, 1.f, t ) );
 	}
 
 	float CoreMath::Lerp( float v1, float v2, float t )
@@ -331,7 +328,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::SpecialLerpRestrict( float v1, float v2, float t )
 	{
-		return SpecialLerp( v1, v2, CoreMath::Restrict( 0, 1, t ) );
+		return SpecialLerp( v1, v2, CoreMath::RestrictVal( 0.f, 1.f, t ) );
 	}
 
 	float CoreMath::Lerp( Vector2 g1, Vector2 g2, float t )
@@ -359,12 +356,12 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		int frame = static_cast<int>( _t );
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v1 = frame > 0 ? keyframes[ frame - 1 ] : keyframes[ 0 ];
+		float v1 = frame > 0 ? keyframes[ frame - 1 ] : keyframes[ 0 ];
 		float v2 = keyframes[ frame ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v3 = frame + 1 < keyframes.size() ? keyframes[ frame + 1 ] : keyframes[ keyframes.size() - 1 ];
+		float v3 = ( frame + 1 ) < static_cast<int>( keyframes.size() ) ? keyframes[ frame + 1 ] : keyframes[ keyframes.size() - 1 ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v4 = frame + 2 < keyframes.size() ? keyframes[ frame + 2 ] : keyframes[ keyframes.size() - 1 ];
+		float v4 = ( frame + 2 ) < static_cast<int>( keyframes.size() ) ? keyframes[ frame + 2 ] : keyframes[ keyframes.size() - 1 ];
 
 		//return Vector2.CatmullRom(v1, v2, v3, v4, _t - frame);
 		//return Vector2.Hermite(v2, v2 - v1, v3, v4 - v3, _t - frame);
@@ -382,12 +379,12 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 		int frame = static_cast<int>( _t );
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v1 = frame > 0 ? keyframes[ frame - 1 ] : keyframes[ 0 ];
+		Vector2 v1 = ( frame > 0 ) ? keyframes[ frame - 1 ] : keyframes[ 0 ];
 		Vector2 v2 = keyframes[ frame ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v3 = frame + 1 < keyframes.size() ? keyframes[ frame + 1 ] : keyframes[ keyframes.size() - 1 ];
+		Vector2 v3 = ( frame + 1 ) < static_cast<int>( keyframes.size() ) ? keyframes[ frame + 1 ] : keyframes[ keyframes.size() - 1 ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var v4 = frame + 2 < keyframes.size() ? keyframes[ frame + 2 ] : keyframes[ keyframes.size() - 1 ];
+		Vector2 v4 = ( frame + 2 ) < static_cast<int>( keyframes.size() ) ? keyframes[ frame + 2 ] : keyframes[ keyframes.size() - 1 ];
 
 		//return Vector2.CatmullRom(v1, v2, v3, v4, _t - frame);
 		//return Vector2.Hermite(v2, v2 - v1, v3, v4 - v3, _t - frame);

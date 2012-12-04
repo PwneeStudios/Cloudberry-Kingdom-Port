@@ -63,4 +63,13 @@ void Insert( std::vector<T> v, int index, T a )
 	v.insert( v.begin() + index, a );
 }
 
+template<class T>
+T Sum( std::vector<T> v )
+{
+	T s = T( 0 );
+	for( std::vector<T>::iterator i = v.begin(); i != v.end(); ++i )
+		s += *i;
+	return s;
+}
+
 #endif

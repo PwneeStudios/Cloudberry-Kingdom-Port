@@ -251,6 +251,11 @@ public:
 		return Vector4( X * a.X, Y * a.Y, Z * a.Z, W * a.W );
 	}
 
+	Vector4 operator * ( float k ) const
+	{
+		return Vector4( X * k, Y * k, Z * k, W * k );
+	}
+
 	Vector4 &operator *= ( const Vector4 &a )
 	{
 		X *= a.X;
@@ -291,6 +296,23 @@ public:
 	float M31, M32, M33, M34;
 	float M41, M42, M43, M44;
 
+	Matrix()
+	{
+		memset( &M11, 0, sizeof( Matrix ) );
+	}
+
+	// FIXME: Might need to transpose this.
+	Matrix( float m11, float m12, float m13, float m14,
+			float m21, float m22, float m23, float m24,
+			float m31, float m32, float m33, float m34,
+			float m41, float m42, float m43, float m44 ) :
+		M11( m11 ), M12( m12 ), M13( m13 ), M14( m14 ),
+		M21( m21 ), M22( m22 ), M23( m23 ), M24( m24 ),
+		M31( m31 ), M32( m32 ), M33( m33 ), M34( m34 ),
+		M41( m41 ), M42( m42 ), M43( m43 ), M44( m44 )
+	{
+	}
+
 	static Matrix Identity()
 	{
 		Matrix m;
@@ -299,6 +321,26 @@ public:
 		return m;
 	}
 
+	const Matrix operator * ( float s ) const
+	{
+		return Matrix( M11 * s, M12 * s, M13 * s, M14 * s,
+					   M21 * s, M22 * s, M23 * s, M24 * s,
+					   M31 * s, M32 * s, M33 * s, M34 * s,
+					   M41 * s, M42 * s, M43 * s, M44 * s );
+	}
+
+	const Matrix operator + ( const Matrix &m ) const
+	{
+		return Matrix( M11 + m.M11, M12 + m.M12, M13 + m.M13, M14 + m.M14,
+					   M21 + m.M21, M22 + m.M22, M23 + m.M23, M24 + m.M24,
+					   M31 + m.M31, M32 + m.M32, M33 + m.M33, M34 + m.M34,
+					   M41 + m.M41, M42 + m.M42, M43 + m.M43, M44 + m.M44 );
+	}
 };
+
+static const Matrix operator * ( float s, const Matrix &m )
+{
+	return m * s;
+}
 
 #endif

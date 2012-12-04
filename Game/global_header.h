@@ -455,6 +455,14 @@ class Random
 {
 
 public:
+	Random()
+	{
+	}
+
+	Random( int seed )
+	{
+	}
+
 	int Next()
 	{
 		// FIXME: get a random number generator!

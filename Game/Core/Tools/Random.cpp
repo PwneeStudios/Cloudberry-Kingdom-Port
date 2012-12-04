@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 
 	int Rand::RndBit()
 	{
-		if ( Rnd->NextDouble() > ::5 )
+		if ( Rnd->NextDouble() > 0.5 )
 			return 1;
 		else
 			return -1;
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 
 	int Rand::RndInt( int a, int b )
 	{
-		return static_cast<int>( __min( b, RndFloat( a, b + 1 ) ) );
+		return static_cast<int>( __min( b, RndFloat( static_cast<float>( a ), b + 1.f ) ) );
 	}
 
 	float Rand::RndFloat()
@@ -93,11 +93,11 @@ namespace CloudberryKingdom
 	}
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-template<typename T> where T : class
+/*template<typename T>
 	int Rand::RndEnum()
 	{
 		return RndInt( 0, Tools->Length<T>() - 1 );
-	}
+	}*/
 
 template<typename T>
 	void Rand::Scramble( std::vector<T> &list )
@@ -199,7 +199,7 @@ template<typename T>
 	int Rand::Choose( std::vector<int> LevelCutoff, int Level_Renamed )
 	{
 		std::vector<float> Weights = std::vector<float>( LevelCutoff.size() );
-		for ( int i = 0; i < LevelCutoff.size(); i++ )
+		for ( size_t i = 0; i < LevelCutoff.size(); i++ )
 		{
 			if ( Level_Renamed >= LevelCutoff[ i ] )
 				Weights[ i ] = 1;
@@ -212,9 +212,9 @@ template<typename T>
 
 	int Rand::Choose( std::vector<float> Weights )
 	{
-		double rnd = Rnd->NextDouble() * Weights.Sum() *.999f; // .98f;
+		double rnd = Rnd->NextDouble() * Sum( Weights ) *.999f; // .98f;
 		float AddedWeight = 0;
-		for ( int i = 0; i < Weights.size(); i++ )
+		for ( size_t i = 0; i < Weights.size(); i++ )
 		{
 			AddedWeight += Weights[ i ];
 			if ( rnd < AddedWeight )

@@ -617,7 +617,7 @@ namespace CloudberryKingdom
 
 		InitVertices();
 
-		SetColor( Color( 1, 1, 1 ) );
+		SetColor( Color( 1.f, 1.f, 1.f ) );
 	}
 
 	Vector2 Quad::getSize() const

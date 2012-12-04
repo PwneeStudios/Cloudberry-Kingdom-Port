@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		static Vector2 Sign( Vector2 v );
 //ORIGINAL LINE: public static float Max(params float[] vals)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static float Max( ... );
+		//static float Max( ... );
 		/// <summary>
 		/// Take in two vectors and find both the max and the min.
 		/// </summary>

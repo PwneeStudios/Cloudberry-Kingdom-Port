@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	Microsoft::Xna::Framework::Color ColorHelper::GrayColor( float val )
+	Color ColorHelper::GrayColor( float val )
 	{
 		return Color( Gray( val ) );
 	}
@@ -20,9 +20,9 @@ Matrix ColorHelper::transform_red = Matrix( 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 
 Matrix ColorHelper::transform_green = Matrix( 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1 );
 Matrix ColorHelper::transform_blue = Matrix( 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1 );
 
-	Microsoft::Xna::Framework::Matrix ColorHelper::LinearColorTransform( float angle )
+	Matrix ColorHelper::LinearColorTransform( float angle )
 	{
-		float s = ( ( angle % 360 + 360 ) % 360 ) / 120;
+		float s = fmod( ( fmod( angle, 360.f ) + 360.f ), 360.f ) / 120.f;
 
 		if ( s < 1 )
 		{
@@ -40,12 +40,12 @@ Matrix ColorHelper::transform_blue = Matrix( 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0,
 		}
 	}
 
-	Microsoft::Xna::Framework::Matrix ColorHelper::PureColor( Color color )
+	Matrix ColorHelper::PureColor( Color color )
 	{
 		return Matrix( 0, 0, 0, color.R, 0, 0, 0, color.G, 0, 0, 0, color.B, 0, 0, 0, 1 );
 	}
 
-	Microsoft::Xna::Framework::Matrix ColorHelper::HsvTransform( float V, float S, float H )
+	Matrix ColorHelper::HsvTransform( float V, float S, float H )
 	{
 		float a = CoreMath::Radians( H );
 		float U = static_cast<float>( cos( a ) ), W = static_cast<float>( sin( a ) );
@@ -58,12 +58,12 @@ Matrix ColorHelper::transform_blue = Matrix( 0, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 0,
 		return m.M11 + m.M22 + m.M33;
 	}
 
-	Microsoft::Xna::Framework::Color ColorHelper::PremultiplyAlpha( Color color )
+	Color ColorHelper::PremultiplyAlpha( Color color )
 	{
-		return Color( color.R, color.G, color.B ) * ( color.A / 255 );
+		return Color( color.R, color.G, color.B ) * ( color.A / 255.f );
 	}
 
-	Microsoft::Xna::Framework::Color ColorHelper::PremultiplyAlpha( Color color, float BlendAddRatio )
+	Color ColorHelper::PremultiplyAlpha( Color color, float BlendAddRatio )
 	{
 		Color NewColor = PremultiplyAlpha( color );
 		NewColor.A = static_cast<unsigned char>( NewColor.A * ( 1 - BlendAddRatio ) );
