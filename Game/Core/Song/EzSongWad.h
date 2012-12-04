@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Set the play list and start playing it.
 		/// </summary>
-		void SetPlayList( std::vector<EzSong*> &songs );
+		void SetPlayList( std::vector<std::shared_ptr<EzSong> > &songs );
 		void SetPlayList( const std::wstring &name );
 
 		/// <summary>

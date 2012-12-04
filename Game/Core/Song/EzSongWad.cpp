@@ -188,8 +188,10 @@ namespace CloudberryKingdom
 		for ( std::vector<std::shared_ptr<EzSong> >::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
 			if ( ( *song )->song != 0 && SongList[ CurIndex ] != *song && !SongList[ CurIndex ]->AlwaysLoaded )
 			{
-				delete ( *song )->song;
-				( *song )->song.reset();
+				/*delete ( *song )->song;
+				( *song )->song.reset();*/
+				// FIXME: No deleting.
+				song = SongList.erase( song );
 			}
 	}
 
@@ -198,9 +200,9 @@ namespace CloudberryKingdom
 		PlayList = Tools::GlobalRnd->Shuffle( PlayList );
 	}
 
-	void EzSongWad::SetPlayList( std::vector<EzSong*> &songs )
+	void EzSongWad::SetPlayList( std::vector<std::shared_ptr<EzSong> > &songs )
 	{
-		PlayList = std::vector<EzSong*>( songs );
+		PlayList = std::vector<std::shared_ptr<EzSong> >( songs );
 	}
 
 	void EzSongWad::SetPlayList( const std::wstring &name )
@@ -210,7 +212,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::SetPlayList( const std::shared_ptr<EzSong> &song )
 	{
-		std::vector<EzSong*> list = std::vector<EzSong*>();
+		std::vector<std::shared_ptr<EzSong> > list;
 		list.push_back( song );
 
 		SetPlayList( list );
@@ -269,12 +271,12 @@ namespace CloudberryKingdom
 
 	void EzSongWad::SetSong( const std::wstring &name )
 	{
-		SetSong( PlayList.find( FindByName( name ) ) );
+		SetSong( IndexOf( PlayList, FindByName( name ) ) );
 	}
 
 	void EzSongWad::SetSong( const std::shared_ptr<EzSong> &song )
 	{
-		SetSong( PlayList.find( song ) );
+		SetSong( IndexOf( PlayList, song ) );
 	}
 
 	void EzSongWad::SetSong( int Index )
@@ -301,7 +303,7 @@ namespace CloudberryKingdom
 	void EzSongWad::Play( int Index, bool DisplayInfo )
 	{
 		if ( PlayList[ CurIndex ]->song == 0 )
-			PlayList[ CurIndex ]->song = Tools::GameClass->getContent()->Load<Song*>(_T("Music\\") + PlayList[ CurIndex ]->FileName);
+			PlayList[ CurIndex ]->song = Tools::GameClass->getContent()->Load<Song>(_T("Music\\") + PlayList[ CurIndex ]->FileName);
 
 		Elapsed = 0;
 		Duration = PlayList[ CurIndex ]->Play( DisplayInfo );
@@ -309,10 +311,10 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<EzSong> EzSongWad::FindByName( const std::wstring &name )
 	{
-		for ( std::vector<EzSong*>::const_iterator Sng = SongList.begin(); Sng != SongList.end(); ++Sng )
+		for ( std::vector<std::shared_ptr<EzSong> >::const_iterator Sng = SongList.begin(); Sng != SongList.end(); ++Sng )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-			if ( std::wstring::Compare( ( *Sng )->Name, name, StringComparison::OrdinalIgnoreCase ) == 0 )
-				return Sng;
+			if ( CompareIgnoreCase( ( *Sng )->Name, name ) == 0 )
+				return *Sng;
 
 	#if defined(DEBUG)
 		Tools::Break();
@@ -389,7 +391,7 @@ namespace CloudberryKingdom
 		Paused = false;
 		Duration = 0;
 		Elapsed = 0;
-		CurrentPlayingList = 0;
+		CurrentPlayingList = std::vector<std::shared_ptr<EzSong> >();
 		SuppressNextInfoDisplay = false;
 	}
 }

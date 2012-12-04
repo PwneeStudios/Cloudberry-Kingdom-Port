@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class EzSong : std::enable_shared_from_this<EzSong>
+	class EzSong : public std::enable_shared_from_this<EzSong>
 	{
 	public:
 		std::shared_ptr<Song> song;
