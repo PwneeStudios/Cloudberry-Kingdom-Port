@@ -48,8 +48,7 @@
     <ClCompile Include="Core\Song\EzSongWad.cpp" />
     <ClCompile Include="Core\Sound\EzSound.cpp" />
     <ClCompile Include="Core\Sound\EzSoundWad.cpp" />
-    <ClCompile Include="Core\Texture\CloudberryKingdom.EzTextureWad.cpp" />
-    <ClCompile Include="Core\Texture\CoreEngine.EzTextureWad.cpp" />
+    <ClCompile Include="Core\Texture\EzTextureWad.cpp" />
     <ClCompile Include="Core\Texture\EzTexture.cpp" />
     <ClCompile Include="Core\Texture\PackedTexture.cpp" />
     <ClCompile Include="Core\Texture\TextureOrAnim.cpp" />
@@ -414,8 +413,7 @@
     <ClInclude Include="Core\Song\EzSongWad.h" />
     <ClInclude Include="Core\Sound\EzSound.h" />
     <ClInclude Include="Core\Sound\EzSoundWad.h" />
-    <ClInclude Include="Core\Texture\CloudberryKingdom.EzTextureWad.h" />
-    <ClInclude Include="Core\Texture\CoreEngine.EzTextureWad.h" />
+    <ClInclude Include="Core\Texture\EzTextureWad.h" />
     <ClInclude Include="Core\Texture\EzTexture.h" />
     <ClInclude Include="Core\Texture\PackedTexture.h" />
     <ClInclude Include="Core\Texture\TextureOrAnim.h" />

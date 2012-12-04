@@ -146,6 +146,7 @@ namespace CloudberryKingdom
 	class StartLevelMenu;
 	class ListSelectPanel;
 	class SpaceshipLevel;
+	class SubTexture;
 	class PackedTexture;
 	class SubTexture;
 	class InstancePlusName;

@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		_Tex = value;
 	}
 
-	const float &EzTexture::getAspectRatio() const
+	float EzTexture::getAspectRatio() const
 	{
 		return static_cast<float>( Width ) / static_cast<float>( Height );
 	}
@@ -37,7 +37,7 @@ std::shared_ptr<Game> EzTexture::game = 0;
 	{
 		if ( _Tex == 0 && Path != _T( "" ) )
 		{
-			_Tex = Tools::GameClass->getContent()->Load<Texture2D*>(Path);
+			_Tex = Tools::GameClass->getContent()->Load<Texture2D>(Path);
 			Width = _Tex->Width;
 			Height = _Tex->Height;
 		}

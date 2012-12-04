@@ -15,12 +15,13 @@ namespace CloudberryKingdom
 
 	void EzTextureWad::Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name )
 	{
-		AnimationDict.AddOrOverwrite( name, anim );
+		//AnimationDict.AddOrOverwrite( name, anim );
+		AnimationDict[ name ] = anim;
 	}
 
 	void EzTextureWad::Add( const std::shared_ptr<PackedTexture> &packed )
 	{
-		for ( std::vector<SubTexture*>::const_iterator sub = packed->SubTextures.begin(); sub != packed->SubTextures.end(); ++sub )
+		for ( std::vector<SubTexture>::const_iterator sub = packed->SubTextures.begin(); sub != packed->SubTextures.end(); ++sub )
 		{
 			std::shared_ptr<EzTexture> texture = FindByName( ( *sub ).name );
 			texture->FromPacked = true;
@@ -35,24 +36,24 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		const int Size = 2000;
 
-		TextureList = std::vector<EzTexture*>( Size );
-		TextureListByFolder = std::map<std::wstring, std::vector<EzTexture*> >( Size );
+		TextureList = std::vector<std::shared_ptr<EzTexture> >( Size );
+		TextureListByFolder = std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > >();
 
-		AnimationDict = std::map<std::wstring, AnimationData_Texture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		AnimationDict = std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator>();
 
-		PathDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
-		NameDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
-		BigNameDict = std::map<std::wstring, EzTexture*>( Size, StringComparer::CurrentCultureIgnoreCase );
+		PathDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
+		NameDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
+		BigNameDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
 	}
 
 	void EzTextureWad::LoadFolder( const std::shared_ptr<ContentManager> &Content, const std::wstring &Folder )
 	{
-		for ( std::vector<EzTexture*>::const_iterator Tex = TextureListByFolder[ Folder ].begin(); Tex != TextureListByFolder[ Folder ].end(); ++Tex )
+		for ( std::vector<std::shared_ptr<EzTexture> >::const_iterator Tex = TextureListByFolder[ Folder ].begin(); Tex != TextureListByFolder[ Folder ].end(); ++Tex )
 		{
 			// If texture hasn't been loaded yet, load it
 			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
 			{
-				( *Tex )->setTex( Content->Load<Texture2D*>( ( *Tex )->Path ) );
+				( *Tex )->setTex( Content->Load<Texture2D>( ( *Tex )->Path ) );
 				( *Tex )->Width = ( *Tex )->getTex()->Width;
 				( *Tex )->Height = ( *Tex )->getTex()->Height;
 
@@ -77,7 +78,7 @@ namespace CloudberryKingdom
 	std::shared_ptr<EzTexture> EzTextureWad::FindByPathOrName( const std::wstring &path )
 	{
 		// Look for the texture with the full path
-		std::shared_ptr<CloudberryKingdom::EzTexture> PathTexture = FindByName( path );
+		std::shared_ptr<EzTexture> PathTexture = FindByName( path );
 
 		// If nothing but white was found
 		if ( PathTexture == 0 || PathTexture == TextureList[ 0 ] )

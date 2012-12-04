@@ -1011,12 +1011,6 @@
     <ClCompile Include="Core\Text\EzText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Texture\CloudberryKingdom.EzTextureWad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Texture\CoreEngine.EzTextureWad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Texture\EzTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1081,6 +1075,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Level\Make\LockableBool.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\Texture\EzTextureWad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2111,12 +2108,6 @@
     <ClInclude Include="Core\Text\EzText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Core\Texture\CloudberryKingdom.EzTextureWad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\Texture\CoreEngine.EzTextureWad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Core\Texture\EzTexture.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2208,6 +2199,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\Queue.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\Texture\EzTextureWad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

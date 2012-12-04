@@ -1,57 +1,7 @@
-﻿#ifndef CLOUDBERRYKINGDOM_EZTEXTUREWAD
-#define CLOUDBERRYKINGDOM_EZTEXTUREWAD
+﻿#ifndef COREENGINE
+#define COREENGINE
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class TextureOrAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class AnimationData_Texture;
-}
-
-namespace CloudberryKingdom
-{
-	class PackedTexture;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Content
-			{
-				class ContentManager;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class Texture2D;
-			}
-		}
-	}
-}
-
-
 
 namespace CloudberryKingdom
 {
@@ -68,15 +18,15 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<EzTexture> > TextureList;
 		std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > > TextureListByFolder;
 
-		std::map<std::wstring, std::shared_ptr<AnimationData_Texture> > AnimationDict;
+		std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator> AnimationDict;
 		void Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name );
 
 
-		std::map<std::wstring, std::shared_ptr<EzTexture> > PathDict, NameDict, BigNameDict;
+		std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator> PathDict, NameDict, BigNameDict;
 		void Add( const std::shared_ptr<PackedTexture> &packed );
 
 
-		std::map<std::wstring, PackedTexture*> PackedDict;
+		std::map<std::wstring, std::shared_ptr<PackedTexture> > PackedDict;
 
 		EzTextureWad();
 
@@ -109,4 +59,4 @@ namespace CloudberryKingdom
 }
 
 
-#endif	//#ifndef CLOUDBERRYKINGDOM_EZTEXTUREWAD
+#endif	//#ifndef COREENGINE

@@ -5,22 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture;
-}
-
-
-namespace CloudberryKingdom
-{
-	class PackedTexture
+	class SubTexture
 	{
 	public:
-		class SubTexture
-		{
-		public:
-			std::wstring name;
-			Vector2 BL, TR;
-		};
+		std::wstring name;
+		Vector2 BL, TR;
+	};
 
+	class PackedTexture
+	{
 	public:
 		std::shared_ptr<EzTexture> MyTexture;
 

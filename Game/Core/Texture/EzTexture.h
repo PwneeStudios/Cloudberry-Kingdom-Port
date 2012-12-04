@@ -3,32 +3,6 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			namespace Graphics
-			{
-				class Texture2D;
-			}
-		}
-	}
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Game;
-		}
-	}
-}
-
-
 namespace CloudberryKingdom
 {
 	class EzTexture
@@ -42,7 +16,7 @@ namespace CloudberryKingdom
 		const std::shared_ptr<Texture2D> &getTex() const;
 		void setTex( const std::shared_ptr<Texture2D> &value );
 
-		const float &getAspectRatio() const;
+		float getAspectRatio() const;
 
 		std::wstring Path, Name;
 
