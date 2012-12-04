@@ -43,10 +43,14 @@ inline int CompareIgnoreCase( const std::wstring &s1, const std::wstring &s2)
 
 class IgnoreCaseComparator
 {
+
+public:
+
 	bool operator() ( const std::wstring &lhs, const std::wstring &rhs ) const
 	{
 		return CompareIgnoreCase( lhs, rhs ) < 0;
 	}
+
 };
 
 inline std::wstring Format( const wchar_t *fmt, ... )

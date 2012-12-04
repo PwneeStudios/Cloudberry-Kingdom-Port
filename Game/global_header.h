@@ -489,6 +489,11 @@ public:
 	// FIXME: Implement this.
 	void Dispose() { }
 
+	bool IsDisposed()
+	{
+		return false;
+	}
+
 	template<class T>
 	void GetData( std::vector<T> &data )
 	{
