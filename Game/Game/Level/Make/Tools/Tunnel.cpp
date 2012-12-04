@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -45,15 +42,15 @@ namespace CloudberryKingdom
 	{
 		std::map<unsigned long long, std::shared_ptr<ObjectBase> > ObjDict = std::map<unsigned long long, std::shared_ptr<ObjectBase> >();
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
-			if ( !ObjDict.find( ( *obj )->getCore()->MyGuid ) != ObjDict.end() )
-				ObjDict.insert( make_pair( ( *obj )->getCore()->MyGuid, *obj ) );
+			if ( ObjDict.find( ( *obj )->getCore()->MyGuid ) == ObjDict.end() )
+				ObjDict.insert( std::make_pair( ( *obj )->getCore()->MyGuid, *obj ) );
 
 		// Convert GUIDs to IObjects
 		for ( int i = 0; i < N; i++ )
 			for ( int j = 0; j < M; j++ )
 			{
 				if ( ObjDict.find( TunnelGUIDs[ i ][ j ] ) != ObjDict.end() )
-					TunnelObjs[ i ][ j ] = ObjDict[ TunnelGUIDs[ i, j ] ];
+					TunnelObjs[ i ][ j ] = ObjDict[ TunnelGUIDs[ i ][ j ] ];
 				else
 					TunnelObjs[ i ][ j ] = 0;
 				//TunnelObjs[i, j] = level.LookupGUID(TunnelGUIDs[i, j]);

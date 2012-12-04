@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class OneScreenData : public StyleData
 	{
 	public:
@@ -26,6 +18,5 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 	};
 }
-
 
 #endif	//#ifndef ONESCREENDATA

@@ -5,8 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class StyleData
+
+	class StyleData : public std::enable_shared_from_this<StyleData>
 	{
+
 	public:
 		enum FinalPlatsType
 		{

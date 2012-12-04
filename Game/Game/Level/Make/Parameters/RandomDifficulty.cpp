@@ -1,8 +1,5 @@
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -24,7 +21,7 @@ namespace CloudberryKingdom
 		//if (Difficulty < 30)
 		//    return Level.LadderType.Simple2;
 		//else
-			return Level.LadderType_DOUBLE_MOVING;
+			return LadderType_DOUBLE_MOVING;
 	}
 
 	void RndDifficulty::ZeroUpgrades( const std::shared_ptr<Upgrades> &upgrades )
@@ -58,7 +55,8 @@ namespace CloudberryKingdom
 		Seed->MyUpgrades1->CalcGenData( Seed->MyGenData->gen1, Seed->Style );
 
 		ZeroUpgrades( Seed->MyUpgrades2 );
-		Seed->MyUpgrades1->UpgradeLevels.CopyTo( Seed->MyUpgrades2->UpgradeLevels, 0 );
+		/*Seed->MyUpgrades1->UpgradeLevels.CopyTo( Seed->MyUpgrades2->UpgradeLevels, 0 );*/
+		CopyFromTo( Seed->MyUpgrades1->UpgradeLevels, Seed->MyUpgrades2->UpgradeLevels );
 		Seed->MyUpgrades2->CalcGenData( Seed->MyGenData->gen2, Seed->Style );
 
 		/*

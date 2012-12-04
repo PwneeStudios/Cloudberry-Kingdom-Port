@@ -1,9 +1,8 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
+
 	VectorParam::VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed )
 	{
 		X = Param( PieceSeed );
@@ -15,7 +14,7 @@ namespace CloudberryKingdom
 		X = Param( PieceSeed );
 		Y = Param( PieceSeed );
 
-		if ( v != 0 )
+		if ( v != Vector2(0) )
 			SetVal( v );
 	}
 

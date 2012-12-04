@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -12,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		GenParams = std::map<std::shared_ptr<AutoGen>, std::shared_ptr<AutoGen_Parameters> >();
 		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
-			GenParams.insert( make_pair( *gen, ( *gen )->SetParameters( SeedData, level ) ) );
+			GenParams.insert( std::make_pair( *gen, ( *gen )->SetParameters( SeedData, level ) ) );
 
 		MyModParams->Apply( level, SeedData );
 
@@ -306,7 +307,7 @@ namespace CloudberryKingdom
 	{
 		MyModParams = std::make_shared<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > >();
 		Zoom = 1;
-		TimeType = Level.TimeTypes_REGULAR;
+		TimeType = TimeTypes_REGULAR;
 		ModNormalBlockWeight = 1;
 		ComputerWaitLengthRange = Vector2( 15, 36 );
 		DoorHitBoxPadding = Vector2();
