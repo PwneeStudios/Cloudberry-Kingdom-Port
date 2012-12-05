@@ -64,6 +64,7 @@ struct Color
 	static Color Transparent;
 	static Color White;
 
+	static Color Red;
 	static Color LightSeaGreen;
 	static Color BlueViolet;
 	static Color Fuchsia;
