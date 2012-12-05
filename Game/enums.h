@@ -109,6 +109,7 @@ enum DifficultyParam
 	DifficultyParam_EDGE_SAFETY, // How close to the edge of a block the computer can land on
 	DifficultyParam_APEX_WAIT, // How long after the apex of a jump should we wait before potentially landing on something?
 	DifficultyParam_FILL_SPARSITY,
+	DifficultyParam_LENGTH
 };
 
 enum BehaviorParam
@@ -891,7 +892,8 @@ enum ObjectType
 	ObjectType_DOOR,
 	ObjectType_WALL,
 	ObjectType_ZONE_TRIGGER,
-	ObjectType_CAMERA_ZONE
+	ObjectType_CAMERA_ZONE,
+	ObjectType_LENGTH
 };
 
 // Would be nice to get rid of this, and just rely on ...__AutoGen.instances, and have dictionaries with instances as keys
@@ -920,7 +922,8 @@ enum Upgrade
 	Upgrade_GENERAL,
 	Upgrade_SPEED,
 	Upgrade_JUMP,
-	Upgrade_CEILING
+	Upgrade_CEILING,
+	Upgrade_LENGTH
 };
 
 enum LadderType

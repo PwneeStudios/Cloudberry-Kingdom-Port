@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		const Vector2 &getZoom() const;
 		void setZoom( const Vector2 &value );
 
-		const Vector2 &getScreenSize() const;
+		Vector2 getScreenSize() const;
 
 		Vector2 Offset;
 		int ScreenWidth, ScreenHeight;

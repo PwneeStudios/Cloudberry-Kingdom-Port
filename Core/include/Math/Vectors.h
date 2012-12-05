@@ -2,6 +2,8 @@
 #define _VECTORS_H_
 
 #include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 /**
  * 2-vector.
@@ -114,6 +116,13 @@ public:
 	{
 		X *= a.X;
 		Y *= a.Y;
+		return *this;
+	}
+
+	Vector2 &operator /= ( float k )
+	{
+		X /= k;
+		Y /= k;
 		return *this;
 	}
 

@@ -9,6 +9,14 @@ class BinaryReader
 
 public:
 
+	BinaryReader( const std::wstring &path )
+	{
+	}
+
+	void Close()
+	{
+	}
+
 	int ReadInt32()
 	{
 		// FIXME: Implement this.

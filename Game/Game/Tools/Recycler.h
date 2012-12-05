@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	private:
 		ObjectType MyType;
-		std::stack<std::shared_ptr<ObjectBase> > FullObject, BoxObject;
+		std::vector<std::shared_ptr<ObjectBase> > FullObject, BoxObject;
 
 	public:
 		void Release();
@@ -32,7 +32,8 @@ namespace CloudberryKingdom
 	{
 	private:
 		static int MetaCount;
-		static std::stack<Recycler*> MetaBin;
+		static std::vector<std::shared_ptr<Recycler> > MetaBin;
+		static Mutex MetaBinLock;
 	public:
 		static std::shared_ptr<Recycler> GetRecycler();
 		static void ReturnRecycler( const std::shared_ptr<Recycler> &recycler );
@@ -40,7 +41,7 @@ namespace CloudberryKingdom
 
 		//Dictionary<ObjectType, RecycleBin> Bins;
 	private:
-		std::vector<RecycleBin*> Bins;
+		std::vector<std::shared_ptr<RecycleBin> > Bins;
 
 	public:
 		Recycler();

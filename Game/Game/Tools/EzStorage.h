@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class SaveGroup
 	{
 	private:
-		static std::vector<SaveLoad*> ThingsToSave;
+		static std::vector<std::shared_ptr<SaveLoad> > ThingsToSave;
 
 	public:
 		static void Initialize();
@@ -47,15 +47,17 @@ namespace CloudberryKingdom
 
 	private:
 		static std::shared_ptr<WrappedInt> Count;
+		static Mutex CountLock;
+
 		static void Incr();
 	public:
 		static void Decr();
 	};
 
-	class SaveLoad
+	class SaveLoad : public std::enable_shared_from_this<SaveLoad>
 	{
 	private:
-		class SaveLambda : public Lambda_1<BinaryWriter*>
+		class SaveLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
 		{
 		private:
 			std::shared_ptr<SaveLoad> sl;
@@ -134,13 +136,14 @@ public:
 	private:
 		static std::shared_ptr<StorageDevice> Device;
 		static std::shared_ptr<WrappedBool> InUse;
+		static Mutex InUseLock;
 
 	public:
 		static bool DeviceOK();
 
 		static void GetDevice();
 
-		static void Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic, const std::shared_ptr<Lambda> &Fail );
+		static void Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::shared_ptr<BinaryWriter> > > &SaveLogic, const std::shared_ptr<Lambda> &Fail );
 
 	private:
 		static void SaveToContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic );

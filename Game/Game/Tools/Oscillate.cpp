@@ -55,7 +55,7 @@ std::vector<float> OscillateParams::JiggleScale = std::vector<float>( tempVector
 
 		float target = base_value + max_addition * 0;
 
-		if ( Count >= 7 * JiggleScale.size() )
+		if ( Count >= 7 * static_cast<int>( JiggleScale.size() ) )
 		{
 			scale = TargetJiggleScale;
 			Done = true;
@@ -84,7 +84,7 @@ std::vector<float> OscillateParams::JiggleScale = std::vector<float>( tempVector
 				Count++;
 				if ( UseGlobalCount )
 					Count = Tools::TheGame->PhsxCount;
-				scale = Oscillate::GetScale_Oscillate( Count, w, base_value, max_addition );
+				scale = Oscillate::GetScale_Oscillate( static_cast<float>( Count ), w, base_value, max_addition );
 				break;
 
 			case OscillateParams::Type_GET_BIG:

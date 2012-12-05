@@ -231,10 +231,10 @@ static std::wstring SourceTextureDirectory();
 		static int DeltaScroll;
 		static bool MouseInWindow;
 
-		const static Vector2 &getMousePos();
+		static Vector2 getMousePos();
 		static void setMousePos( const Vector2 &value );
 
-		const static bool &getFullscreen();
+		static bool getFullscreen();
 		static void setFullscreen( const bool &value );
 
 		/// <summary>
@@ -291,7 +291,7 @@ static std::wstring SourceTextureDirectory();
 		static bool CntrlDown();
 
 		static std::wstring RemoveAfter( const std::wstring &s, const std::wstring &occurence );
-		static std::wstring SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font );
+		static std::wstring SantitizeOneLineString( std::wstring s, const std::shared_ptr<EzFont> &font );
 #else
 		static std::wstring SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font );
 #endif
@@ -306,7 +306,7 @@ static std::wstring SourceTextureDirectory();
 		/// <summary>
 		/// Return just the first folder of the path.
 		/// </summary>
-		static std::wstring FirstFolder( const std::wstring &path, const std::wstring &ignore );
+		static std::wstring FirstFolder( std::wstring path, const std::wstring &ignore );
 
 		static std::shared_ptr<EzTexture> Texture( const std::wstring &name );
 		static std::shared_ptr<EzSound> Sound( const std::wstring &name );

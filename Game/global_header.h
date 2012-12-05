@@ -19,6 +19,7 @@ inline int Sign(double x) { return (x > 0) - (x < 0); }
 
 // System includes.
 #include <algorithm>
+#include <cassert>
 #include <list>
 #include <map>
 #define _USE_MATH_DEFINES
@@ -65,8 +66,19 @@ public:
 
 };
 
-struct DateTime { int Time; };
-class DisplayMode;
+struct DateTime
+{
+	int Time;
+
+	static DateTime Now()
+	{
+		return DateTime();
+	}
+};
+
+class DisplayMode
+{
+};
 
 class Effect
 {
@@ -167,7 +179,6 @@ public:
 
 };
 
-class FileStream;
 class Game
 {
 
@@ -290,7 +301,20 @@ public:
 
 };
 
-class GraphicsDeviceManager;
+class GraphicsDeviceManager
+{
+
+public:
+
+	bool IsFullScreen;
+	int PreferredBackBufferWidth;
+	int PreferredBackBufferHeight;
+
+	void ToggleFullScreen()
+	{
+	}
+};
+
 class IAsyncResult;
 
 class KeyboardState
@@ -374,12 +398,20 @@ public:
 	static std::wstring GetDirectoryName( std::wstring Path );
 
 };
+
 class Directory
 {
 
 public:
 	
-	static std::wstring GetCurrentDirectory( );
+	static std::wstring GetCurrentDirectory( )
+	{
+	}
+
+	static std::vector<std::wstring> GetFiles( const std::wstring &path )
+	{
+		return std::vector<std::wstring>();
+	}
 
 };
 
@@ -412,6 +444,10 @@ class Mouse
 {
 	
 public:
+
+	static void SetPosition( int x, int y )
+	{
+	}
 
 	static MouseState GetState()
 	{
@@ -477,6 +513,31 @@ public:
 	double NextDouble()
 	{
 		return 0;
+	}
+
+};
+
+class Stopwatch
+{
+
+public:
+	
+	struct
+	{
+		float TotalSeconds;
+	} Elapsed;
+
+	Stopwatch()
+	{
+		Elapsed.TotalSeconds = 0;
+	}
+
+	void Start()
+	{
+	}
+
+	void Stop()
+	{
 	}
 
 };
@@ -593,9 +654,75 @@ public:
 };
 
 class Stopwatch;
-class StorageContainer;
-class StorageDevice;
-class StreamReader;
+class StorageContainer
+{
+
+public:
+
+	bool FileExists( const std::wstring &name )
+	{
+		return false;
+	}
+
+	void DeleteFile( const std::wstring &name )
+	{
+		
+	}
+
+	std::shared_ptr<BinaryWriter> CreateFile( const std::wstring &name )
+	{
+		return std::shared_ptr<BinaryWriter>();
+	}
+};
+
+class StorageDevice
+{
+
+public:
+
+	bool IsConnected;
+
+};
+
+class Stream
+{
+	
+public:
+
+	void Close()
+	{
+	}
+
+};
+
+
+class FileStream : public Stream
+{
+
+
+};
+
+class StreamReader
+{
+
+public:
+
+	StreamReader( const Stream &s )
+	{
+	}
+
+	StreamReader( const std::shared_ptr<Stream> &s )
+	{
+	}
+
+	std::wstring ReadLine()
+	{
+		return _T( "" );
+	}
+
+	void Close();
+};
+
 class StreamWriter;
 class StringBuilder
 {
@@ -607,9 +734,26 @@ public:
 		return _T( "" );
 	}
 
+	void Append( const wchar_t &c )
+	{
+	}
+
 };
 
-class Thread;
+class Thread
+{
+
+public:
+
+	static void Delay( int msec )
+	{
+	}
+
+	static void SpinWait( int times )
+	{
+	}
+
+};
 
 template<class A, class B>
 class Tuple

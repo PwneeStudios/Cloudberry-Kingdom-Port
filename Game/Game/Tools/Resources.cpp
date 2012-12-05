@@ -1,11 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -16,8 +10,8 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 
 	void Resources::FontLoad()
 	{
-		Resources::Font_Grobold42 = std::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline" ), -50, 40 );
-		Resources::Font_Grobold42_2 = std::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline2" ), -50, 40 );
+		Resources::Font_Grobold42 = std::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline" ), -50.f, 40 );
+		Resources::Font_Grobold42_2 = std::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline2" ), -50.f, 40 );
 
 		Resources::LilFont = std::make_shared<EzFont>( _T( "Fonts/LilFont" ) );
 
@@ -27,27 +21,27 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 	void Resources::LoadInfo()
 	{
 		Tools::Write( _T( "Starting to load info..." ) );
-		std::shared_ptr<System::Diagnostics::Stopwatch> t = std::make_shared<System::Diagnostics::Stopwatch>();
+		std::shared_ptr<Stopwatch> t = std::make_shared<Stopwatch>();
 		t->Start();
 
 		std::shared_ptr<PieceQuad> c;
 
 		// Moving block
-		c = PieceQuad->MovingBlock_Renamed = std::make_shared<PieceQuad>();
-		c->Center.setMyTexture( _T( "blue_small" ) );
+		c = PieceQuad::MovingBlock_Renamed = std::make_shared<PieceQuad>();
+		c->Center.setMyTexture( Tools::TextureWad->FindByName( _T( "blue_small" ) ) );
 
 		// Falling block
 		std::shared_ptr<AnimationData_Texture> Fall = std::make_shared<AnimationData_Texture>( _T( "FallingBlock" ), 1, 4 );
-		PieceQuad->FallingBlock_Renamed = std::make_shared<PieceQuad>();
-		PieceQuad::FallingBlock_Renamed::Center.SetTextureAnim( Fall );
+		PieceQuad::FallingBlock_Renamed = std::make_shared<PieceQuad>();
+		PieceQuad::FallingBlock_Renamed->Center.SetTextureAnim( Fall );
 		PieceQuad::FallGroup = std::make_shared<BlockGroup>();
 		PieceQuad::FallGroup->Add( 100, PieceQuad::FallingBlock_Renamed );
 		PieceQuad::FallGroup->SortWidths();
 
 		// Bouncy block
 		std::shared_ptr<AnimationData_Texture> Bouncy = std::make_shared<AnimationData_Texture>( _T( "BouncyBlock" ), 1, 2 );
-		PieceQuad->BouncyBlock_Renamed = std::make_shared<PieceQuad>();
-		PieceQuad::BouncyBlock_Renamed::Center.SetTextureAnim( Bouncy );
+		PieceQuad::BouncyBlock_Renamed = std::make_shared<PieceQuad>();
+		PieceQuad::BouncyBlock_Renamed->Center.SetTextureAnim( Bouncy );
 		PieceQuad::BouncyGroup = std::make_shared<BlockGroup>();
 		PieceQuad::BouncyGroup->Add( 100, PieceQuad::BouncyBlock_Renamed );
 		PieceQuad::BouncyGroup->SortWidths();
@@ -60,7 +54,7 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 		// Elevator
 		PieceQuad::Elevator = std::make_shared<PieceQuad>();
 		PieceQuad::Elevator->Center.Set( _T( "palette" ) );
-		PieceQuad::Elevator->Center.SetColor( Color( 210, 210, 210 ) );
+		PieceQuad::Elevator->Center.SetColor( Color( unsigned char( 210 ), unsigned char( 210 ), unsigned char( 210 ) ) );
 		PieceQuad::ElevatorGroup = std::make_shared<BlockGroup>();
 		PieceQuad::ElevatorGroup->Add( 100, PieceQuad::Elevator );
 		PieceQuad::ElevatorGroup->SortWidths();
@@ -106,9 +100,9 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 			if ( extension == _T( "xnb" ) )
 			{
 				if ( CreateNewWad )
-					Tools::SongWad->AddSong( Tools::GameClass->getContent()->Load<Song*>(_T("Music\\") + name), name );
+					Tools::SongWad->AddSong( Tools::GameClass->getContent()->Load<Song>(_T("Music\\") + name), name );
 				else
-					Tools::SongWad->FindByName( name )->song = Tools::GameClass->getContent()->Load<Song*>(_T("Music\\") + name);
+					Tools::SongWad->FindByName( name )->song = Tools::GameClass->getContent()->Load<Song>(_T("Music\\") + name);
 			}
 
 			ResourceLoadedCountRef->MyFloat++;
@@ -152,14 +146,18 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 		Tools::Song_WritersBlock->Volume = 1;
 
 		// Create the standard playlist
-		Tools::SongList_Standard.AddRange( Tools::SongWad->SongList );
-		Tools::SongList_Standard.Remove( Tools::Song_Happy );
-		Tools::SongList_Standard.Remove( Tools::Song_140mph );
+		//Tools::SongList_Standard.AddRange( Tools::SongWad->SongList );
+		AddRange( Tools::SongList_Standard, Tools::SongWad->SongList );
+		//Tools::SongList_Standard.Remove( Tools::Song_Happy );
+		Remove( Tools::SongList_Standard, Tools::Song_Happy );
+		//Tools::SongList_Standard.Remove( Tools::Song_140mph );
+		Remove( Tools::SongList_Standard, Tools::Song_140mph );
 	}
 
 	void Resources::LoadSound( bool CreateNewWad )
 	{
-		std::shared_ptr<ContentManager> manager = std::make_shared<ContentManager>( Tools::GameClass->getContent()->ServiceProvider, Tools::GameClass->getContent()->RootDirectory );
+		// FIXME: Implement more generic way of loading this.
+		/*std::shared_ptr<ContentManager> manager = std::make_shared<ContentManager>( Tools::GameClass->getContent()->ServiceProvider, Tools::GameClass->getContent()->RootDirectory );
 
 		if ( CreateNewWad )
 		{
@@ -205,7 +203,7 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 			delete Tools::SoundContentManager;
 		}
 
-		Tools::SoundContentManager = manager;
+		Tools::SoundContentManager = manager;*/
 	}
 
 	void Resources::LoadAssets( bool CreateNewWads )
@@ -243,7 +241,8 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 
 	void Resources::LoadResources()
 	{
-		LoadThread = ThreadHelper::EasyThread( 5, _T( "LoadThread" ), std::make_shared<Action>( &_LoadThread ) );
+		// FIXME: Load resources in other thread.
+		//LoadThread = ThreadHelper::EasyThread( 5, _T( "LoadThread" ), std::make_shared<Action>( &_LoadThread ) );
 	}
 
 std::shared_ptr<Thread> Resources::LoadThread = 0;
@@ -252,7 +251,7 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 	{
 		std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
-		Tools::Write( Format( _T( "Load thread starts at {0}" ), DateTime::Now ) );
+		Tools::Write( Format( _T( "Load thread starts at {0}" ), DateTime::Now() ) );
 
 		Thread::SpinWait( 100 );
 
@@ -285,7 +284,7 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 		LoadInfo();
 		TileSets::Init();
 
-		Fireball::InitRenderTargets( Ck->MyGraphicsDevice, Ck->MyGraphicsDevice->PresentationParameters, 300, 200 );
+		Fireball::InitRenderTargets( Ck->MyGraphicsDevice, Ck->MyGraphicsDevice->PP, 300, 200 );
 
 		ParticleEffects::Init();
 
@@ -294,14 +293,14 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 	#if defined(PC_VERSION)
 		// Mouse pointer
 		Ck->MousePointer = std::make_shared<QuadClass>();
-		Ck->MousePointer->Quad_Renamed->MyTexture = Tools::TextureWad->FindByName( _T( "Hand_Open" ) );
+		Ck->MousePointer->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Hand_Open" ) ) );
 		Ck->MousePointer->ScaleYToMatchRatio( 70 );
 
 		// Mouse back icon
 		Ck->MouseBack = std::make_shared<QuadClass>();
-		Ck->MouseBack->Quad_Renamed->MyTexture = Tools::TextureWad->FindByName( _T( "charmenu_larrow_1" ) );
+		Ck->MouseBack->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "charmenu_larrow_1" ) ) );
 		Ck->MouseBack->ScaleYToMatchRatio( 40 );
-		Ck->MouseBack->Quad_Renamed->SetColor( Color( 255, 150, 150, 100 ) );
+		Ck->MouseBack->Quad_Renamed.SetColor( Color( unsigned char( 255 ), unsigned char( 150 ), unsigned char( 150 ), unsigned char( 100 ) ) );
 	#endif
 
 		Prototypes::LoadObjects();

@@ -108,4 +108,13 @@ inline std::vector<std::wstring> Split( const std::wstring &s, wchar_t delim )
     return Split( s, delim, elems );
 }
 
+inline void Replace( std::wstring &s, wchar_t x, wchar_t y )
+{
+	for( std::wstring::iterator i = s.begin(); i != s.end(); ++i )
+	{
+		if( *i == x )
+			*i = y;
+	}
+}
+
 #endif

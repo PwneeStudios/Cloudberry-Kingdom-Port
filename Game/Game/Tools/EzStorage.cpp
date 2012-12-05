@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-std::vector<SaveLoad*> SaveGroup::ThingsToSave = std::vector<SaveLoad*>();
+std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
 
 	void SaveGroup::Initialize()
 	{
@@ -35,13 +35,17 @@ std::vector<SaveLoad*> SaveGroup::ThingsToSave = std::vector<SaveLoad*>();
 		while ( true )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-			lock ( Count )
+			//lock ( Count )
 			{
+				CountLock.Lock();
+
 				if ( Count->MyInt == 0 )
 					return;
+
+				CountLock.Unlock();
 			}
 
-			delay( 1 );
+			Thread::Delay( 1 );
 		}
 	}
 
@@ -52,7 +56,7 @@ std::vector<SaveLoad*> SaveGroup::ThingsToSave = std::vector<SaveLoad*>();
 
 	void SaveGroup::SaveAll()
 	{
-		for ( std::vector<SaveLoad*>::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
+		for ( std::vector<std::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
 			//if (!(ThingToSave is ScoreList)) Tools.Write("!");
 
@@ -90,7 +94,7 @@ std::vector<SaveLoad*> SaveGroup::ThingsToSave = std::vector<SaveLoad*>();
 
 	void SaveGroup::LoadAll()
 	{
-		for ( std::vector<SaveLoad*>::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
+		for ( std::vector<std::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{
 			Incr();
 			( *ThingToLoad )->Load();
@@ -103,18 +107,26 @@ std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 )
 	void SaveGroup::Incr()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( Count )
+		//lock ( Count )
 		{
+			CountLock.Lock();
+
 			Count->MyInt++;
+
+			CountLock.Unlock();
 		}
 	}
 
 	void SaveGroup::Decr()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( Count )
+		//lock ( Count )
 		{
+			CountLock.Lock();
+
 			Count->MyInt--;
+
+			CountLock.Unlock();
 		}
 	}
 
@@ -182,7 +194,7 @@ std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 )
 	{
 		if ( Changed || AlwaysSave )
 		{
-			EzStorage::Save( getActualContainerName(), FileName, std::make_shared<SaveLambda>(this), std::make_shared<SaveFailLambda>(this) );
+			EzStorage::Save( getActualContainerName(), FileName, std::make_shared<SaveLambda>( shared_from_this() ), std::make_shared<SaveFailLambda>( shared_from_this() ) );
 		}
 		else
 			SaveGroup::Decr();
@@ -190,7 +202,7 @@ std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 )
 
 	void SaveLoad::Load()
 	{
-		EzStorage::Load( getActualContainerName(), FileName, std::make_shared<LoadLambda>(this), std::make_shared<LoadFailLambda>(this) );
+		EzStorage::Load( getActualContainerName(), FileName, std::make_shared<LoadLambda>( shared_from_this() ), std::make_shared<LoadFailLambda>( shared_from_this() ) );
 	}
 
 	void SaveLoad::Serialize( const std::shared_ptr<BinaryWriter> &writer )
@@ -221,15 +233,16 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 
 	void EzStorage::GetDevice()
 	{
-		std::shared_ptr<IAsyncResult> result = StorageDevice::BeginShowSelector( 0, 0 );
+		// FIXME: Implement this.
+		/*std::shared_ptr<IAsyncResult> result = StorageDevice::BeginShowSelector( 0, 0 );
 		result->AsyncWaitHandle->WaitOne();
 
 		Device = StorageDevice::EndShowSelector( result );
 
-		result->AsyncWaitHandle->Close();
+		result->AsyncWaitHandle->Close();*/
 	}
 
-	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic, const std::shared_ptr<Lambda> &Fail )
+	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::shared_ptr<BinaryWriter> > > &SaveLogic, const std::shared_ptr<Lambda> &Fail )
 	{
 		if ( !DeviceOK() )
 			GetDevice();
@@ -245,7 +258,7 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		int count = 0;
 		while ( InUse->MyBool && count++ < 100 )
 		{
-			delay( 1 );
+			Thread::Delay( 1 );
 		}
 		if ( InUse->MyBool )
 		{
@@ -255,16 +268,20 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( InUse )
+		//lock ( InUse )
 		{
+			InUseLock.Lock();
+
 			InUse->MyBool = true;
+
+			InUseLock.Unlock();
 		}
 
 		// Device is hooked up and ready for us to save to
 
 		// Open a container
-//C# TO C++ CONVERTER TODO TASK: Lambda expressions and anonymous methods are not converted to native C++ unless the option to convert to C++11 lambdas is selected:
-		std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
+		// FIXME: Implement this.
+		/*std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
 		{
 			if ( !ContainerResult::IsCompleted )
 			{
@@ -277,7 +294,7 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			if ( SaveLogic != 0 )
 				SaveToContainer( container, FileName, SaveLogic );
 		}
-	   , 0);
+	   , 0);*/
 	}
 
 	void EzStorage::SaveToContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic )
@@ -287,8 +304,10 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			// Delete it so that we can create one fresh.
 			container->DeleteFile( FileName );
 
+		// FIXME: Implement this.
+
 		// Create the file.
-		std::shared_ptr<Stream> stream = container->CreateFile( FileName );
+		/*std::shared_ptr<Stream> stream = container->CreateFile( FileName );
 
 		// Save the data
 		if ( SaveLogic != 0 )
@@ -302,12 +321,16 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		stream->Close();
 
 		// Dispose the container, to commit changes.
-		delete container;
+		delete container;*/
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( InUse )
+		//lock ( InUse )
 		{
+			InUseLock.Lock();
+
 			InUse->MyBool = false;
+
+			InUseLock.Unlock();
 		}
 	}
 
@@ -327,7 +350,7 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		int count = 0;
 		while ( InUse->MyBool && count++ < 100 )
 		{
-			delay( 1 );
+			Thread::Delay( 1 );
 		}
 		if ( InUse->MyBool )
 		{
@@ -337,16 +360,21 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( InUse )
+		//lock ( InUse )
 		{
+			InUseLock.Lock();
+
 			InUse->MyBool = true;
+
+			InUseLock.Unlock();
 		}
 
 		// Device is hooked up and ready for us to load from
 
 		// Open a container
-//C# TO C++ CONVERTER TODO TASK: Lambda expressions and anonymous methods are not converted to native C++ unless the option to convert to C++11 lambdas is selected:
-		std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
+
+		// FIXME: Implement this.
+		/*std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
 				//if (Fail != null) Fail(); return;
 		{
 			if ( !ContainerResult::IsCompleted )
@@ -360,7 +388,7 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			if ( LoadLogic != 0 )
 				LoadFromContainer( container, FileName, LoadLogic, Fail );
 		}
-	   , 0);
+	   , 0);*/
 	}
 
 	void EzStorage::LoadFromContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const std::shared_ptr<Lambda> &FailLogic )
@@ -368,12 +396,17 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 		// Fallback action if file doesn't exist
 		if ( !container->FileExists( FileName ) )
 		{
-			delete container;
+			// FIXME: Should never delete things.
+			//delete container;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-			lock ( InUse )
+			//lock ( InUse )
 			{
+				InUseLock.Lock();
+
 				InUse->MyBool = false;
+
+				InUseLock.Unlock();
 			}
 
 			if ( FailLogic != 0 )
@@ -382,8 +415,10 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			return;
 		}
 
+		// FIXME: Implement this.
+
 		// Load and process the data
-		if ( LoadLogic != 0 )
+		/*if ( LoadLogic != 0 )
 		{
 			try
 			{
@@ -397,15 +432,19 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			{
 				FailLogic->Apply();
 			}
-		}
+		}*/
 
 		// Dispose the container, to commit changes.
-		delete container;
+		//delete container;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( InUse )
+		//lock ( InUse )
 		{
+			InUseLock.Lock();
+
 			InUse->MyBool = false;
+
+			InUseLock.Unlock();
 		}
 	}
 }
