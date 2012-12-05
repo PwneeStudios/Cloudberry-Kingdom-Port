@@ -51,12 +51,12 @@ namespace CloudberryKingdom
 		static void AddScheme( ColorScheme scheme, bool ValidComputerScheme );
 
 	public:
-		static std::vector<MenuListItem*> HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, OutlineList;
+		static std::vector<std::shared_ptr<MenuListItem> > HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, OutlineList;
 
-		static std::vector<Hat*> HatInfo;
-		static std::vector<Hat*> BeardInfo;
+		static std::vector<std::shared_ptr<Hat> > HatInfo;
+		static std::vector<std::shared_ptr<Hat> > BeardInfo;
 
-		static std::vector<MenuListItem*> ClrList;
+		static std::vector<std::shared_ptr<MenuListItem> > ClrList;
 
 		static ClrTextFx None;
 
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 	public:
 		static void InitColorSchemes();
 
-		static std::vector<MenuListItem*> MakeUnique( std::vector<MenuListItem*> &list );
+		static std::vector<std::shared_ptr<MenuListItem> > MakeUnique( std::vector<std::shared_ptr<MenuListItem> > &list );
 	};
 }
 

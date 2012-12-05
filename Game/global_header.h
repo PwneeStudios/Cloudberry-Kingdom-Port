@@ -856,6 +856,9 @@ class VideoPlayer;
 #include "Game/Menus/CkBaseMenu.h"
 #include "Game/Menus/Concrete Menus/InGameStartMenus/Verify/VerifyBase.h"
 
+#include "Game/Player/Buyable.h"
+#include "Game/Player/ClrTextFx.h"
+
 #include "Game/Games/GameType.h"
 #include "Game/Games/ActionGame.h"
 #include "Game/Games/CampaignHelper.h"
@@ -995,8 +998,6 @@ class VideoPlayer;
 #include "Game/Objects/IBounded.h"
 #include "Game/Objects/Icon.h"
 #include "Game/Objects/IPrepareToDraw.h"
-#include "Game/Player/Buyable.h"
-#include "Game/Player/ClrTextFx.h"
 #include "Game/Player/ColorScheme.h"
 #include "Game/Objects/Bob/BobInput.h"
 #include "Game/Objects/Bob/Bob.h"

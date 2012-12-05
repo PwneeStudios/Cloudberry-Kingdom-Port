@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LongMenu;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuSlider;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ScrollBar : public CkBaseMenu
 	{
 	private:
@@ -64,8 +46,6 @@ namespace CloudberryKingdom
 		std::shared_ptr<GUI_Panel> Parent;
 
 	public:
-		virtual std::wstring CopyToClipboard( const std::wstring &suffix );
-
 		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
 
 	protected:

@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -14,7 +12,7 @@ namespace CloudberryKingdom
 
 	ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
 	{
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = Parent;
 		this->MySimple = MySimple;
@@ -63,7 +61,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		MyMenu->FancyPos->RelVal = Vector2( -62.5f, -15 + 250 );
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void ArrowMenu::MyDraw()

@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
@@ -17,13 +13,13 @@ namespace CloudberryKingdom
 		cs->Randomize();
 	}
 
-	const std::shared_ptr<PlayerData> &CharacterSelect::getPlayer() const
+	const std::shared_ptr<PlayerData> CharacterSelect::getPlayer() const
 	{
 		return PlayerManager::Get( PlayerIndex );
 	}
 
-float CharacterSelect::Width = 0;
-std::vector<Vector2> CharacterSelect::Centers = 0;
+	float CharacterSelect::Width = 0;
+	std::vector<Vector2> CharacterSelect::Centers;
 
 	void CharacterSelect::InitCenters()
 	{
@@ -111,9 +107,9 @@ std::vector<Vector2> CharacterSelect::Centers = 0;
 			if ( i == 1 || i == 2 )
 				continue;
 
-			std::vector<MenuListItem*> list = std::vector<MenuListItem*>( ItemList[ i ].capacity() );
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
+			std::vector<std::shared_ptr<MenuListItem> > list = std::vector<std::shared_ptr<MenuListItem> >( ItemList[ i ].capacity() );
+
+			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
 				if ( PlayerManager::BoughtOrFree( std::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
 					list.push_back( *item );
 
@@ -206,11 +202,11 @@ std::vector<Vector2> CharacterSelect::Centers = 0;
 		CopyIndicesFromColorScheme();
 	}
 
-	int CharacterSelect::FindIndex( std::vector<MenuListItem*> &list, ClrTextFx obj )
+	int CharacterSelect::FindIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx obj )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuListItem*>::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
 			if ( ( static_cast<ClrTextFx>( ( *item )->obj ) ).Guid == obj.Guid )
 				return index;
@@ -245,8 +241,8 @@ std::vector<Vector2> CharacterSelect::Centers = 0;
 		MyState = SelectState_BEGINNING;
 		Join = false;
 		ItemIndex = std::vector<int>( 5 );
-		const std::vector<MenuListItem*> tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
-		std::vector<std::vector<MenuListItem*> > temp_ItemList = std::vector<std::vector<MenuListItem*> >( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+		const std::vector<std::shared_ptr<MenuListItem> > tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
+		std::vector<std::vector<std::shared_ptr<MenuListItem> > > temp_ItemList = std::vector<std::vector<std::shared_ptr<MenuListItem> > >( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_ItemList ) / sizeof( temp_ItemList[ 0 ] ); element++ )
 			ItemList[ element ] = temp_ItemList[ element ];
 		HoldCapeIndex = 1;

@@ -76,10 +76,10 @@ namespace CloudberryKingdom
 #endif
 
 	public:
-		static std::shared_ptr<Set<Hat*> > AvailableHats;
+		static std::shared_ptr<Set<std::shared_ptr<Hat> > > AvailableHats;
 		static void UpdateAvailableHats();
 
-		static std::shared_ptr<Set<Hat*> > AvailableBeards;
+		static std::shared_ptr<Set<std::shared_ptr<Hat> > > AvailableBeards;
 	private:
 		static void UpdateAvailableBeards();
 

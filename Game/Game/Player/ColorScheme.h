@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class MenuListItem
 	{
 	public:
-		std::shared_ptr<Object> obj;
+		std::shared_ptr<void> obj;
 		Localization::Words word;
 
 		MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word );
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 	class ColorScheme
 	{
 	private:
-		class FindColorLambda : public LambdaFunc_1<MenuListItem*, bool>
+		class FindColorLambda : public LambdaFunc_1<std::shared_ptr<MenuListItem> , bool>
 		{
 		private:
 			Localization::Words word;
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class FindHatLambda : public LambdaFunc_1<Hat*, bool>
+		class FindHatLambda : public LambdaFunc_1<std::shared_ptr<Hat> , bool>
 		{
 		private:
 			Localization::Words word;
@@ -87,9 +87,9 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 
 	private:
-		int IndexOf( std::vector<MenuListItem*> &list, ClrTextFx clr );
+		int IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr );
 
-		int IndexOf( std::vector<Hat*> &list, const std::shared_ptr<Hat> &hat );
+		int IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat );
 
 
 	public:

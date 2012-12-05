@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -35,11 +33,6 @@ namespace CloudberryKingdom
 		return sb->SliderGet();
 	}
 
-	std::wstring ScrollBar::CopyToClipboard( const std::wstring &suffix )
-	{
-		return Format( _T( "{0}BarPos = {1}" ), suffix, Tools::ToCode( getBarPos() ) );
-	}
-
 	void ScrollBar::ProcessMouseInput( Vector2 shift, bool ShiftDown )
 	{
 		setBarPos( getBarPos() + shift );
@@ -57,7 +50,7 @@ namespace CloudberryKingdom
 	{
 		this->AttachedMenu = AttachedMenu;
 		this->Parent = Parent;
-		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( shared_from_this() ) );
+		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );
 
 		Constructor();
 	}
@@ -78,7 +71,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		slider = std::make_shared<MenuScrollBar>();
-		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f,.72f) );
+		slider->setSliderBackSize( Vector2(1.15f,.72f) * slider->getSliderBackSize() );
 		slider->CustomEndPoints = true;
 		slider->CustomStart = Vector2( 0, -800 );
 		slider->CustomEnd = Vector2( 0, 800 );
@@ -90,11 +83,11 @@ namespace CloudberryKingdom
 		slider->Slider->ScaleYToMatchRatio( 90 );
 		slider->SliderBack->setTextureName( _T( "Chain_Tile" ) );
 		slider->TabOffset = Vector2( 0, 28 );
-		slider->setMyFloat( std::make_shared<WrappedFloat>( 0, 0, 9 ) );
+		slider->setMyFloat( std::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
 
 		Height = AttachedMenu->Height();
-		slider->getMyFloat()->GetCallback = std::make_shared<SliderGetLambda>(this);
-		slider->getMyFloat()->SetCallback = std::make_shared<SliderSetProxy>(this);
+		slider->getMyFloat()->GetCallback = std::make_shared<SliderGetLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) );
+		slider->getMyFloat()->SetCallback = std::make_shared<SliderSetProxy>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) );
 		slider->getMyFloat()->MaxVal = Height;
 		slider->getMyFloat()->MinVal = 0;
 

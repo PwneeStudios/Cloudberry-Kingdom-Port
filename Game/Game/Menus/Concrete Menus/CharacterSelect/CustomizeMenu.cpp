@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_HAT, MyCharacterSelect, MyMenu->CurIndex );
 			ClrSelect = list;
 
-			for ( CloudberryKingdom::Set<Hat*>::const_iterator hat = CharacterSelectManager::AvailableHats->begin(); hat != CharacterSelectManager::AvailableHats->end(); ++hat )
+			for ( CloudberryKingdom::Set<std::shared_ptr<Hat> >::const_iterator hat = CharacterSelectManager::AvailableHats->begin(); hat != CharacterSelectManager::AvailableHats->end(); ++hat )
 			{
 				int hat_index = ColorSchemeManager::HatInfo.find( *hat );
 				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *hat )->Name, Resources::Font_Grobold42, false, true ) );
@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_BEARD, MyCharacterSelect, MyMenu->CurIndex );
 			ClrSelect = list;
 
-			for ( CloudberryKingdom::Set<Hat*>::const_iterator beard = CharacterSelectManager::AvailableBeards->begin(); beard != CharacterSelectManager::AvailableBeards->end(); ++beard )
+			for ( CloudberryKingdom::Set<std::shared_ptr<Hat> >::const_iterator beard = CharacterSelectManager::AvailableBeards->begin(); beard != CharacterSelectManager::AvailableBeards->end(); ++beard )
 			{
 				int beard_index = ColorSchemeManager::BeardInfo.find( *beard );
 				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *beard )->Name, Resources::Font_Grobold42, false, true ) );

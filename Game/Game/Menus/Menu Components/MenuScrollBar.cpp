@@ -15,8 +15,8 @@ namespace CloudberryKingdom
 		Normal = Tools::TextureWad->FindByName( _T( "BouncyBlock1" ) );
 		Held = Tools::TextureWad->FindByName( _T( "BouncyBlock2" ) );
 
-		EndQuad = std::make_shared<QuadClass>( _T( "Joint" ), 85, true );
-		StartQuad = std::make_shared<QuadClass>( _T( "Joint" ), 85, true );
+		EndQuad = std::make_shared<QuadClass>( _T( "Joint" ), 85.f, true );
+		StartQuad = std::make_shared<QuadClass>( _T( "Joint" ), 85.f, true );
 	}
 
 	void MenuScrollBar::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		if ( !Text )
 		{
 	#if defined(PC_VERSION)
-			if ( Selected && Tools::Mouse.LeftButton == ButtonState::ButtonState_Pressed )
+			if ( Selected && Tools::Mouse.LeftButton == ButtonState_Pressed )
 				Slider->Quad_Renamed.setMyTexture( Held );
 			else
 				Slider->Quad_Renamed.setMyTexture( Normal );
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 				Slider->Quad_Renamed->MyTexture = Normal;
 	#endif
 
-			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 85, 0, 0 );
+			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 85, 0, 0.f );
 						//new Color(255, 255, 255, 215),
 			StartQuad->setPos( Start );
 			EndQuad->setPos( End );

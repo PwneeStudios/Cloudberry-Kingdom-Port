@@ -89,31 +89,31 @@ Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f
 	}
 #endif
 
-std::shared_ptr<Set<Hat*> > CharacterSelectManager::AvailableHats = 0;
+std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHats = 0;
 
 	void CharacterSelectManager::UpdateAvailableHats()
 	{
 		UpdateAvailableBeards();
 
 		// Determine which hats are availabe
-		AvailableHats = std::make_shared<Set<Hat*> >();
-		for ( std::vector<Hat*>::const_iterator hat = ColorSchemeManager::HatInfo.begin(); hat != ColorSchemeManager::HatInfo.end(); ++hat )
+		AvailableHats = std::make_shared<Set<std::shared_ptr<Hat> > >();
+		for ( std::vector<std::shared_ptr<Hat> >::const_iterator hat = ColorSchemeManager::HatInfo.begin(); hat != ColorSchemeManager::HatInfo.end(); ++hat )
 			if ( *hat == Hat::None || ( *hat )->AssociatedAward == 0 && PlayerManager::Bought( *hat ) || ( *hat )->AssociatedAward != 0 && PlayerManager::Awarded( ( *hat )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
-				AvailableHats += *hat;
+				AvailableHats->Add( *hat );
 	}
 
-std::shared_ptr<Set<Hat*> > CharacterSelectManager::AvailableBeards = 0;
+	std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableBeards = 0;
 
 	void CharacterSelectManager::UpdateAvailableBeards()
 	{
 		// Determine which Beards are availabe
-		AvailableBeards = std::make_shared<Set<Hat*> >();
-		for ( std::vector<Hat*>::const_iterator Beard = ColorSchemeManager::BeardInfo.begin(); Beard != ColorSchemeManager::BeardInfo.end(); ++Beard )
+		AvailableBeards = std::make_shared<Set<std::shared_ptr<Hat> > >();
+		for ( std::vector<std::shared_ptr<Hat> >::const_iterator Beard = ColorSchemeManager::BeardInfo.begin(); Beard != ColorSchemeManager::BeardInfo.end(); ++Beard )
 			if ( *Beard == Hat::None || ( *Beard )->AssociatedAward == 0 && PlayerManager::Bought( *Beard ) || ( *Beard )->AssociatedAward != 0 && PlayerManager::Awarded( ( *Beard )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
-				AvailableBeards += *Beard;
+				AvailableBeards->Add( *Beard );
 	}
 
-std::shared_ptr<CharSelectBackdrop> CharacterSelectManager::Backdrop = 0;
+	std::shared_ptr<CharSelectBackdrop> CharacterSelectManager::Backdrop = 0;
 
 	void CharacterSelectManager::Start( const std::shared_ptr<GUI_Panel> &Parent )
 	{

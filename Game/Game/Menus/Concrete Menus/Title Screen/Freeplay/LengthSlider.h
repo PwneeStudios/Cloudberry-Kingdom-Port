@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class ProgressBar;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class LengthSlider : public MenuSliderBase
 	{
 	public:
@@ -38,9 +20,9 @@ namespace CloudberryKingdom
 		virtual void InitializeSlider();
 
 	public:
-		const virtual Vector2 &getBL() const;
-		const virtual Vector2 &getTR() const;
-		const virtual Vector2 &getSlider_TR() const;
+		const virtual Vector2 getBL() const;
+		const virtual Vector2 getTR() const;
+		const virtual Vector2 getSlider_TR() const;
 
 		virtual void SetCallback();
 

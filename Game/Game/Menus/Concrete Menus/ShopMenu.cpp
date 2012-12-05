@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -76,7 +75,7 @@ namespace CloudberryKingdom
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1246.031f, 691.4683f ) );
 		Backdrop->setPos( Vector2( 1086.013f, 352.7779f ) );
-		Backdrop->Quad_Renamed->SetColor( Color( 215, 215, 215, 255 ) );
+		Backdrop->Quad_Renamed.SetColor( bColor( 215, 215, 215, 255 ) );
 	}
 
 	void VerifyPurchaseMenu::Init()
@@ -105,17 +104,17 @@ namespace CloudberryKingdom
 
 		// Yes
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
-		item->setGo( std::make_shared<YesProxy>( shared_from_this() ) );
+		item->setGo( std::make_shared<YesProxy>( std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->setGo( std::make_shared<NoProxy>( shared_from_this() ) );
+		item->setGo( std::make_shared<NoProxy>( std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -194,7 +193,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		SetBankAmount();
 	}
 
-	std::wstring ShopMenu::ClrString( ClrTextFx data )
+	std::wstring ShopMenu::ClrString( std::shared_ptr<ClrTextFx> data )
 	{
 		std::shared_ptr<EzTexture> texture;
 		int width = 100, height = 96;
@@ -203,13 +202,13 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		std::wstring offset = Format( _T( "{0},{1}" ), Offset.X, -Offset.Y );
 
 		std::wstring pic;
-		if ( data.PicTexture != 0 )
+		if ( data->PicTexture != 0 )
 		{
-			texture = data.PicTexture;
+			texture = data->PicTexture;
 		}
 		else
 		{
-			texture = data.Texture;
+			texture = data->Texture;
 			offset += _T( ",1" ); // Use paint effect
 		}
 
@@ -233,8 +232,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		if ( Sold )
 			postfix = _T( "  {c255,100,100,255}Sold!" );
 		else
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-			postfix = _T( "  {pCoinBlue,80,?}x " ) + buyable->GetPrice()->ToString();
+			postfix = Format(_T( "  {pCoinBlue,80,?}x {0}" ), buyable->GetPrice() );
 
 		// Replace text and reset item properties
 		std::shared_ptr<EzText> Text = std::make_shared<EzText>( pic + postfix, ItemFont );
@@ -247,11 +245,11 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		// Action
 		if ( Sold )
-			item->getGo().reset();
+			item->_Go.reset();
 		else
 		{
-			item->setGo( std::make_shared<VerifyPurchaseProxy>( shared_from_this() ) );
-			item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+			item->setGo( std::make_shared<VerifyPurchaseProxy>( std::static_pointer_cast<ShopMenu>( shared_from_this() ) ) );
+			item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 		}
 	}
 
@@ -271,14 +269,14 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			Vector2 Offset;
 			std::wstring offset;
 
-			width = static_cast<int>( 100 * hat->HatPicScale.X );
+			width = static_cast<float>( static_cast<int>( 100 * hat->HatPicScale.X ) );
 			Offset = hat->HatPicShift * 100;
 			offset = Format( _T( "{0},{1}" ), Offset.X, -Offset.Y );
 			pic = _T( "{p" ) + hat->GetTexture()->Name + _T(",") + StringConverterHelper::toString(width) + _T(",?,") + offset + _T("}");
 		}
 		else
 		{
-			ClrTextFx clr = static_cast<ClrTextFx>( buyable );
+			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( buyable );
 			pic = ShopMenu::ClrString( clr );
 		}
 		return pic;
@@ -293,17 +291,17 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::CharSelect()
 	{
-		CharacterSelectManager::Start( shared_from_this() );
+		CharacterSelectManager::Start( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	int ShopMenu::HatCompare( const std::shared_ptr<Hat> &h1, const std::shared_ptr<Hat> &h2 )
 	{
-		return h1->Price.compare( h2->Price );
+		return Compare( h1->Price, h2->Price );
 	}
 
 	ShopMenu::ShopMenu()
 	{
-		ActiveShop = this;
+		ActiveShop = std::static_pointer_cast<ShopMenu>( shared_from_this() );
 
 		MyPile = std::make_shared<DrawPile>();
 
@@ -317,7 +315,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) );
@@ -333,13 +331,13 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		// Format the list of hats into a menu
 		std::shared_ptr<MenuItem> item;
-		std::vector<Hat*> hats = std::vector<Hat*>( ColorSchemeManager::HatInfo );
-		hats.Sort( HatCompare );
+		std::vector<std::shared_ptr<Hat> > hats = std::vector<std::shared_ptr<Hat> >( ColorSchemeManager::HatInfo );
+		Sort( hats, HatCompare );
 
 		//foreach (Hat hat in ColorSchemeManager.HatInfo)
-		for ( std::vector<Hat*>::const_iterator hat = hats.begin(); hat != hats.end(); ++hat )
+		for ( std::vector<std::shared_ptr<Hat> >::const_iterator hat = hats.begin(); hat != hats.end(); ++hat )
 		{
-			if ( ( *hat )->AssociatedAward != 0 || ( *hat )->GetTexture() == 0 || hat == Hat::None )
+			if ( ( *hat )->AssociatedAward != 0 || ( *hat )->GetTexture() == 0 || ( *hat ).get() == Hat::None.get() )
 				continue;
 
 			//item = new MenuItem(new EzText(pic + postfix, ItemFont));
@@ -355,15 +353,15 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Header
 		MakeHeader( Header, _T( "Skins" ) );
 
-		for ( std::vector<MenuListItem*>::const_iterator clr_item = ColorSchemeManager::ColorList.begin(); clr_item != ColorSchemeManager::ColorList.end(); ++clr_item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::ColorList.begin(); clr_item != ColorSchemeManager::ColorList.end(); ++clr_item )
 		{
-			ClrTextFx clr = static_cast<ClrTextFx>( ( *clr_item )->obj );
+			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
 
-			if ( clr.Price <= 0 )
+			if ( clr->Price <= 0 )
 				continue;
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
-			item->MyObject = clr;
+			item->MyObject = std::static_pointer_cast<void>( clr );
 
 			AddItem( item );
 			SetItem( item );
@@ -376,14 +374,14 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Header
 		MakeHeader( Header, _T( "Capes" ) );
 
-		for ( std::vector<MenuListItem*>::const_iterator clr_item = ColorSchemeManager::CapeColorList.begin(); clr_item != ColorSchemeManager::CapeColorList.end(); ++clr_item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::CapeColorList.begin(); clr_item != ColorSchemeManager::CapeColorList.end(); ++clr_item )
 		{
-			ClrTextFx clr = static_cast<ClrTextFx>( ( *clr_item )->obj );
+			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
 
 			bool found = false;
-			for ( std::vector<MenuListItem*>::const_iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
+			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
 			{
-				if ( clr.Guid == ( std::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
+				if ( clr->Guid == ( std::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
 				{
 					found = true;
 					break;
@@ -393,7 +391,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( found )
 				continue;
 
-			if ( clr.Price <= 0 )
+			if ( clr->Price <= 0 )
 				continue;
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
@@ -416,7 +414,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		MakeRest();
 	}
 
-	void ShopMenu::MakeHeader( const std::shared_ptr<MenuItem> &Header, const std::wstring &str )
+	void ShopMenu::MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str )
 	{
 		Header = std::make_shared<MenuItem>( std::make_shared<EzText>( str, Resources::Font_Grobold42_2 ) );
 		MyMenu->Add( Header );
@@ -516,7 +514,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Scroll bar
 	#if defined(PC_VERSION)
 		{
-			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), shared_from_this() );
+			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 			bar->setBarPos( Vector2( -2384.921f, 135 ) );
 			MyGame->AddGameObject( bar );
 			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );
