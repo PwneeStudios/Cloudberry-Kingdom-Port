@@ -330,6 +330,15 @@ public:
 		return m;
 	}
 
+	static Matrix CreateScale( float x, float y, float z )
+	{
+		Matrix m = Identity();
+		m.M11 = x;
+		m.M22 = y;
+		m.M33 = z;
+		return m;
+	}
+
 	const Matrix operator * ( float s ) const
 	{
 		return Matrix( M11 * s, M12 * s, M13 * s, M14 * s,

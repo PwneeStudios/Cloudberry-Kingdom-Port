@@ -9,3 +9,4 @@ Color Color::LightSeaGreen( unsigned char( 32 ), unsigned char( 178 ), unsigned 
 Color Color::BlueViolet( unsigned char( 138 ), unsigned char( 43 ), unsigned char( 226 ), unsigned char( 255 ) );
 Color Color::Fuchsia( unsigned char( 255 ), unsigned char( 0 ), unsigned char( 255 ), unsigned char( 255 ) );
 Color Color::Gainsboro( unsigned char( 220 ), unsigned char( 220 ), unsigned char( 220 ), unsigned char( 255 ) );
+Color Color::Azure( unsigned char( 240 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );

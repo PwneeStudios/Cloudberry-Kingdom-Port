@@ -284,7 +284,9 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 			}
 		}
 
-		list.RemoveRange( OpenSlot, N - OpenSlot );
+		// FIXME: Check if this is isomorphic.
+		//list.RemoveRange( OpenSlot, N - OpenSlot );
+		list.erase( list.begin() + OpenSlot, list.end() );
 	}
 
 	template<typename TSource>
@@ -820,7 +822,7 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 		HslGreenEffect = EffectWad->FindByName( _T( "Hsl_Green" ) );
 		WindowEffect = EffectWad->FindByName( _T( "Window" ) );
 
-		PaintEffect_SpriteBatch = Content->Load<Effect*>( _T( "Effects\\Paint_SpriteBatch" ) );
+		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Effects\\Paint_SpriteBatch" ) );
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )
@@ -1560,12 +1562,12 @@ float Tools::HoldIllumination = 0;
 
 			if ( AsPaint )
 			{
-				PaintEffect_SpriteBatch->Parameters[ _T( "xTexture" ) ]->SetValue( Tools::TextureWad->FindByName( _T( "PaintSplotch" ) )->getTex() );
+				PaintEffect_SpriteBatch->Parameters( _T( "xTexture" ) )->SetValue( Tools::TextureWad->FindByName( _T( "PaintSplotch" ) )->getTex() );
 				//PaintEffect_SpriteBatch.Parameters["SceneTexture"].SetValue(Tools.TextureWad.FindByName("PaintSplotch").Tex); 
-				Tools::Render->MySpriteBatch->Begin( SpriteSortMode::Immediate, BlendState::AlphaBlend, SamplerState::LinearClamp, DepthStencilState::None, RasterizerState::CullCounterClockwise, Tools::PaintEffect_SpriteBatch, Matrix::CreateScale( scale, scale, 1 ) );
+				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, Tools::PaintEffect_SpriteBatch, Matrix::CreateScale( scale, scale, 1 ) );
 			}
 			else
-				Tools::Render->MySpriteBatch->Begin( SpriteSortMode::Immediate, BlendState::AlphaBlend, SamplerState::LinearClamp, DepthStencilState::None, RasterizerState::CullCounterClockwise, 0, Matrix::CreateScale( scale, scale, 1 ) );
+				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, 0, Matrix::CreateScale( scale, scale, 1 ) );
 
 			Tools::Render->UsingSpriteBatch = true;
 		}
@@ -1575,12 +1577,12 @@ float Tools::HoldIllumination = 0;
 	{
 		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2(1) );
 
-		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2(), Vector2( .5f,.5f ), SpriteEffects::None, 0 );
+		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2(), Vector2( .5f,.5f ), SpriteEffects_None, 0 );
 	}
 
 	void Tools::SetDefaultEffectParams( float AspectRatio )
 	{
-		for ( std::vector<EzEffect*>::const_iterator fx = EffectWad->EffectList.begin(); fx != EffectWad->EffectList.end(); ++fx )
+		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = EffectWad->EffectList.begin(); fx != EffectWad->EffectList.end(); ++fx )
 		{
 			( *fx )->xCameraAspect->SetValue( AspectRatio );
 			( *fx )->effect->CurrentTechnique = ( *fx )->Simplest;
@@ -1606,8 +1608,8 @@ float Tools::HoldIllumination = 0;
 	//colorm = HsvTransform(.95f, 1.3f, 0) * LinearColorTransform(240); // Red
 	//colorm = HsvTransform(1.25f, 1.3f, 0) * LinearColorTransform(305); // Yellow
 
-		HslGreenEffect->effect->Parameters[ _T( "ColorMatrix" ) ]->SetValue( colorm );
-		HslEffect->effect->Parameters[ _T( "ColorMatrix" ) ]->SetValue( colorm );
+		HslGreenEffect->effect->Parameters( _T( "ColorMatrix" ) )->SetValue( colorm );
+		HslEffect->effect->Parameters( _T( "ColorMatrix" ) )->SetValue( colorm );
 
 		//colorm = HsvTransform(1f, 1f, 30) * 
 		//        new Matrix(.6f, .6f, .6f, 0,
@@ -1626,12 +1628,12 @@ bool Tools::ShowNums = false;
 	void Tools::ModNums()
 	{
 	#if defined(WINDOWS)
-		if ( ButtonCheck::State( XnaInput::Keys::D1 ).Down )
-			Num_0_to_360 = CoreMath::Restrict( 0, 360, Num_0_to_360 + .1f * Tools::DeltaMouse.X );
-		if ( ButtonCheck::State( XnaInput::Keys::D2 ).Down )
-			Num_0_to_2 = CoreMath::Restrict( 0, 2, Num_0_to_2 + .001f * Tools::DeltaMouse.X );
+		if ( ButtonCheck::State( Keys_D1 ).Down )
+			Num_0_to_360 = CoreMath::RestrictVal( 0.f, 360.f, Num_0_to_360 + .1f * Tools::DeltaMouse.X );
+		if ( ButtonCheck::State( Keys_D2 ).Down )
+			Num_0_to_2 = CoreMath::RestrictVal( 0.f, 2.f, Num_0_to_2 + .001f * Tools::DeltaMouse.X );
 
-		if ( ButtonCheck::State( XnaInput::Keys::D1 ).Down || ButtonCheck::State( XnaInput::Keys::D2 ).Down )
+		if ( ButtonCheck::State( Keys_D1 ).Down || ButtonCheck::State( Keys_D2 ).Down )
 			ShowNums = true;
 	#endif
 	}
@@ -1644,7 +1646,7 @@ bool Tools::DebugConvenience = false;
 			return;
 
 		VibrateTimes[ static_cast<int>( Index ) ] = Duration;
-		XnaInput::GamePad::SetVibration( Index, LeftMotor, RightMotor );
+		GamePad::SetVibration( Index, LeftMotor, RightMotor );
 	}
 
 	void Tools::UpdateVibrations()
@@ -1709,12 +1711,12 @@ bool Tools::DebugConvenience = false;
 
 	void Tools::EnsureBounds_X( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
 	{
-		float TR_Bound = obj->TR_Bound()->X;
+		float TR_Bound = obj->TR_Bound().X;
 		if ( TR_Bound > TR.X )
 			obj->MoveToBounded( Vector2( TR.X - TR_Bound, 0 ) );
 		else
 		{
-			float BL_Bound = obj->BL_Bound()->X;
+			float BL_Bound = obj->BL_Bound().X;
 			if ( BL_Bound < BL.X )
 				obj->MoveToBounded( Vector2( BL.X - BL_Bound, 0 ) );
 		}
@@ -1722,12 +1724,12 @@ bool Tools::DebugConvenience = false;
 
 	void Tools::EnsureBounds_Y( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
 	{
-		float TR_Bound = obj->TR_Bound()->Y;
+		float TR_Bound = obj->TR_Bound().Y;
 		if ( TR_Bound > TR.Y )
 			obj->MoveToBounded( Vector2( 0, TR.Y - TR_Bound ) );
 		else
 		{
-			float BL_Bound = obj->BL_Bound()->Y;
+			float BL_Bound = obj->BL_Bound().Y;
 			if ( BL_Bound < BL.Y )
 				obj->MoveToBounded( Vector2( 0, BL.Y - BL_Bound ) );
 		}

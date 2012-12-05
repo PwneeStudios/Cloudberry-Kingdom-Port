@@ -1061,7 +1061,8 @@ enum Camera_PhsxType
 
 enum GfxRasterizerState
 {
-	GfxRasterizerState_CullNone
+	GfxRasterizerState_CullNone,
+	GfxRasterizerState_CullCounterClockwise
 };
 
 enum GfxBlendState
@@ -1071,6 +1072,7 @@ enum GfxBlendState
 
 enum GfxDepthStencilState
 {
+	GfxDepthStencilState_None,
 	GfxDepthStencilState_DepthRead
 };
 
@@ -1083,6 +1085,16 @@ enum GfxTextureAddressMode
 enum GfxPrimitiveType
 {
 	GfxPrimitiveType_TriangleList
+};
+
+enum GfxSamplerState
+{
+	GfxSamplerState_LinearClamp
+};
+
+enum SpriteSortMode
+{
+	SpriteSortMode_Immediate
 };
 
 enum ButtonState

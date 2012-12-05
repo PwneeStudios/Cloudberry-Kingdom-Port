@@ -262,9 +262,15 @@ public:
 		return GamePadState();
 	}
 
+	static void SetVibration( PlayerIndex index, float left, float right )
+	{
+	}
+
 };
 
-class GameTime;
+class GameTime
+{
+};
 
 struct Viewport { float X; float Y; float Width; float Height; float MinDepth; float MaxDepth; };
 
@@ -406,8 +412,9 @@ class Directory
 
 public:
 	
-	static std::wstring GetCurrentDirectory( )
+	static std::wstring GetCurrentDirectory()
 	{
+		return std::wstring();
 	}
 
 	static std::vector<std::wstring> GetFiles( const std::wstring &path )
@@ -636,6 +643,10 @@ public:
 	}
 
 	void Draw( const std::shared_ptr<class Texture2D> &texture, const Vector2 &position, Rectangle *rect, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
+	{
+	}
+
+	void Begin( SpriteSortMode ssm, GfxBlendState bs, GfxSamplerState ss, GfxDepthStencilState dss, GfxRasterizerState rs, const std::shared_ptr<Effect> &effect, const Matrix &transform )
 	{
 	}
 

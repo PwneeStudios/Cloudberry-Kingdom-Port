@@ -69,6 +69,7 @@ struct Color
 	static Color BlueViolet;
 	static Color Fuchsia;
 	static Color Gainsboro;
+	static Color Azure;
 };
 
 Color bColor( unsigned char R, unsigned char G, unsigned char B )
