@@ -3,48 +3,6 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceQuad;
-}
-
-
-
 
 namespace CloudberryKingdom
 {
@@ -63,7 +21,7 @@ namespace CloudberryKingdom
 		};
 
 	protected:
-		class ReturnToCallerProxy1 : public Lambda_1<MenuItem*>
+		class ReturnToCallerProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CkBaseMenu> cbm;
@@ -75,7 +33,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MakeBackButtonHelper : public Lambda_1<MenuItem*>
+		class MakeBackButtonHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CkBaseMenu> bm;

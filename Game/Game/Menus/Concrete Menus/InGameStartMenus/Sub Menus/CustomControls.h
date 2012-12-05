@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 	class CustomControlsMenu : public CkBaseMenu
 	{
 	private:
-		class ResetProxy : public Lambda_1<MenuItem*>
+		class ResetProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CustomControlsMenu> ccm;
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class InitOnButtonHelper : public LambdaFunc_1<Menu*, bool>
+		class InitOnButtonHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<CustomControlsMenu> ccm;

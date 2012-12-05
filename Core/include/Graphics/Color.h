@@ -63,6 +63,18 @@ struct Color
 	static Color Black;
 	static Color Transparent;
 	static Color White;
+	static Color Red;
 };
+
+Color bColor( unsigned char R, unsigned char G, unsigned char B )
+{
+	return Color(R, G, B, 255);
+}
+
+Color bColor( unsigned char R, unsigned char G, unsigned char B, unsigned char A )
+{
+	return Color(R, G, B, A);
+}
+
 
 #endif

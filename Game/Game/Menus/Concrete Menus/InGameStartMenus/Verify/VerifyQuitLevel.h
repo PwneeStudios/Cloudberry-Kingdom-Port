@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 	class VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
 	private:
-		class VerifyQuitOkLambda : public Lambda_1<MenuItem*>
+		class VerifyQuitOkLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		public:
 			VerifyQuitOkLambda();

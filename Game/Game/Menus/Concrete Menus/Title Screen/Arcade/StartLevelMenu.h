@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class LaunchProxy : public Lambda_1<MenuItem*>
+		class LaunchProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartLevelMenu> slm;

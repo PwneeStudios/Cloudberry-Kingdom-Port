@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 	//public delegate void MenuItemGo(MenuItem item);
-	class MenuItem
+	class MenuItem : public std::enable_shared_from_this<MenuItem>
 	{
 	public:
 		int Code;
@@ -17,10 +17,8 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// An associated object to store extra info.
 		/// </summary>
-		std::shared_ptr<Object> MyObject;
+		std::shared_ptr<void> MyObject;
 		int MyInt;
-
-		virtual std::wstring ToCode( const std::wstring &suffix );
 
 		std::shared_ptr<MenuItem> Clone();
 
@@ -64,13 +62,13 @@ namespace CloudberryKingdom
 		int TextWidth;
 		std::shared_ptr<EzText> MyText, MySelectedText;
 
-		std::shared_ptr<Lambda_1<MenuItem*> > OnClick;
+		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > OnClick;
 
-	private:
-		std::shared_ptr<Lambda_1<MenuItem*> > _Go;
 	public:
-		void setGo( const std::shared_ptr<Lambda_1<MenuItem*> > &value );
-		const std::shared_ptr<Lambda_1<MenuItem*> > &getGo() const;
+		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > _Go;
+	public:
+		void setGo( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &value );
+		const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &getGo() const;
 
 		std::shared_ptr<Lambda> AdditionalOnSelect;
 
@@ -94,7 +92,7 @@ namespace CloudberryKingdom
 		Vector4 MySelectedColor, MyColor;
 		std::shared_ptr<EzFont> MySelectedFont, MyFont;
 
-		const std::wstring &getMyString() const;
+		const std::wstring getMyString() const;
 
 		int MyDrawLayer;
 
@@ -138,7 +136,7 @@ namespace CloudberryKingdom
 
 	public:
 		void setFixedToCamera( const bool &value );
-		const bool &getFixedToCamera() const;
+		const bool getFixedToCamera() const;
 
 		void SetTextSelection( bool Selected );
 
@@ -150,7 +148,7 @@ namespace CloudberryKingdom
 		/// True when the item is on the screen.
 		/// </summary>
 	protected:
-		const bool &getOnScreen() const;
+		const bool getOnScreen() const;
 
 	public:
 		void DrawText( const std::shared_ptr<Camera> &cam, bool Selected );

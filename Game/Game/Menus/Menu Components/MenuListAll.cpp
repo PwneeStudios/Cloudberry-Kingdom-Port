@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -40,7 +39,7 @@ namespace CloudberryKingdom
 
 		bool hit = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuItem*>::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
 		{
 			if ( ( *item )->HitTest( pos, padding ) )
 			{
@@ -105,13 +104,13 @@ namespace CloudberryKingdom
 
 		float Shift = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuItem*>::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
 		{
 			// The unselected text of the current menu item may not ever have been drawn,
 			// so update its CameraZoom manually
-			( *item )->MyText->MyCameraZoom = getMyCameraZoom();
+			( *item )->MyText->setMyCameraZoom( getMyCameraZoom() );
 
-			( *item )->Icon->FancyPos->RelVal->X = Shift;
+			( *item )->Icon->FancyPos->RelVal.X = Shift;
 
 			( *item )->MyMenu = MyMenu;
 
@@ -124,7 +123,7 @@ namespace CloudberryKingdom
 			//        icon.IconQuad.Quad.SetColor(ColorHelper.GrayColor(.8f));
 			//}
 
-			( *item )->Draw( Text, cam, Selected && item == CurMenuItem );
+			( *item )->Draw( Text, cam, Selected && ( *item ).get() == CurMenuItem.get() );
 
 			Shift += ShiftAmount;
 		}

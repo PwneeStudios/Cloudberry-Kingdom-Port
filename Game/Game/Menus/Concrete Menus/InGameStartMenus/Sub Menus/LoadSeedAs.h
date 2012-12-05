@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class LoadProxy1 : public Lambda_1<MenuItem*>
+		class LoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<LoadSeedAs> lsa;

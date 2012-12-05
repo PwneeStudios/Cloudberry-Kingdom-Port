@@ -3,21 +3,6 @@
 namespace CloudberryKingdom
 {
 
-	std::wstring MenuItem::ToCode( const std::wstring &suffix )
-	{
-		std::wstring SelectedPosStr = _T( "" );
-		if ( SelectedPos != Pos )
-		{
-			Vector2 spos = SelectedPos;
-			if ( spos.Y == Pos.Y )
-				spos.Y = -1;
-
-			SelectedPosStr = Format( _T( "_SetSelectedPos({0});" ), Tools::ToCode( spos ) );
-		}
-
-		return Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; {6} }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), SelectedPosStr );
-	}
-
 	std::shared_ptr<MenuItem> MenuItem::Clone()
 	{
 		std::shared_ptr<MenuItem> clone = std::make_shared<MenuItem>( MyText->Clone(), MySelectedText->Clone() );
@@ -71,14 +56,14 @@ namespace CloudberryKingdom
 		MySelectedText->SubstituteText( text );
 	}
 
-	void MenuItem::setGo( const std::shared_ptr<Lambda_1<MenuItem*> > &value )
+	void MenuItem::setGo( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &value )
 	{
 		_Go = value;
 		if ( _Go != 0 )
 			setOverrideA( true );
 	}
 
-	const std::shared_ptr<Lambda_1<MenuItem*> > &MenuItem::getGo() const
+	const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &MenuItem::getGo() const
 	{
 		return _Go;
 	}
@@ -95,7 +80,7 @@ namespace CloudberryKingdom
 		//    Tools.Write("");
 	}
 
-	const std::wstring &MenuItem::getMyString() const
+	const std::wstring MenuItem::getMyString() const
 	{
 		if ( MyText == 0 )
 			return _T( "" );
@@ -115,7 +100,7 @@ namespace CloudberryKingdom
 			MySelectedText->Release();
 			MySelectedText.reset();
 
-		getGo().reset();
+		_Go.reset();
 	}
 
 	void MenuItem::SetFade( bool Fade )
@@ -153,8 +138,8 @@ namespace CloudberryKingdom
 
 	void MenuItem::SetToDefaultColors()
 	{
-		MySelectedColor = ( Color( 255, 255, 255, 255 ) ).ToVector4();
-		MyColor = ( Color( 220, 220, 220, 200 ) ).ToVector4();
+		MySelectedColor = ( bColor( 255, 255, 255, 255 ) ).ToVector4();
+		MyColor = ( bColor( 220, 220, 220, 200 ) ).ToVector4();
 
 		MySelectedFont = Resources::Font_Grobold42;
 		MyFont = Resources::Font_Grobold42;
@@ -225,7 +210,7 @@ namespace CloudberryKingdom
 			MySelectedText->FixedToCamera = value;
 	}
 
-	const bool &MenuItem::getFixedToCamera() const
+	const bool MenuItem::getFixedToCamera() const
 	{
 		if ( MyText != 0 )
 			return MyText->FixedToCamera;
@@ -259,7 +244,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	const bool &MenuItem::getOnScreen() const
+	const bool MenuItem::getOnScreen() const
 	{
 		if ( getFixedToCamera() )
 			return true;
@@ -558,8 +543,8 @@ int MenuItem::ActivatingPlayer = -1;
 
 			if ( SelectSound != 0 )
 				SelectSound->Play();
-			getGo()->Apply(this);
-			MyMenu->LastActivatedItem = MyMenu->Items.find( shared_from_this() );
+			getGo()->Apply( shared_from_this() );
+			MyMenu->LastActivatedItem = IndexOf( MyMenu->Items, shared_from_this() );
 			ButtonCheck::PreventInput();
 		}
 	}

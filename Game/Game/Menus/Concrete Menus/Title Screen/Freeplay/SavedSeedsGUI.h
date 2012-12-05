@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class SaveSeedsDeleteLambda : public LambdaFunc_1<Menu*, bool>
+		class SaveSeedsDeleteLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<SavedSeedsGUI> gui;
@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class SaveSeedsBackLambda : public LambdaFunc_1<Menu*, bool>
+		class SaveSeedsBackLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<SavedSeedsGUI> gui;
@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartLevelProxy1 : public Lambda_1<MenuItem*>
+		class StartLevelProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SavedSeedsGUI> ssGui;

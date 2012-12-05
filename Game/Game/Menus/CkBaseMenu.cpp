@@ -1,7 +1,6 @@
 #include <global_header.h>
 
 
-
 namespace CloudberryKingdom
 {
 
@@ -39,7 +38,7 @@ namespace CloudberryKingdom
 	{
 		// Make the dark back
 		DarkBack = std::make_shared<QuadClass>( _T( "White" ) );
-		DarkBack->Quad_Renamed->SetColor( ColorHelper::GrayColor( .25f ) );
+		DarkBack->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
 		DarkBack->setAlpha( 0 );
 		DarkBack->Fade( .1f );
 		DarkBack->MaxAlpha = .5f;
@@ -72,7 +71,7 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::SetTextProperties( const std::shared_ptr<EzText> &text )
 	{
-		text->MyFloatColor = ( Color( 184, 231, 231 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 184, 231, 231 ) ).ToVector4();
 
 		text->setScale( FontScale );
 
@@ -83,7 +82,7 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::SetSelectedTextProperties( const std::shared_ptr<EzText> &text )
 	{
-		text->MyFloatColor = ( Color( 246, 214, 33 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 246, 214, 33 ) ).ToVector4();
 		//text.MyFloatColor = new Color(50, 220, 50).ToVector4();
 
 		text->setScale( FontScale );
@@ -204,7 +203,7 @@ namespace CloudberryKingdom
 				return;
 			GUI_Panel::Show();
 			this->SlideOut( PresetPos_LEFT, 0 );
-			this->SlideIn();
+			GUI_Panel::SlideIn();
 		}
 		else
 			GUI_Panel::OnReturnTo();
@@ -229,7 +228,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::setRightPanel( const std::shared_ptr<GUI_Panel> &value )
 	{
 		_RightPanel = value;
-		_RightPanel->CopySlideLengths( shared_from_this() );
+		_RightPanel->CopySlideLengths( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getRightPanel() const
@@ -240,7 +239,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::setTopPanel( const std::shared_ptr<GUI_Panel> &value )
 	{
 		_TopPanel = value;
-		_TopPanel->CopySlideLengths( shared_from_this() );
+		_TopPanel->CopySlideLengths( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getTopPanel() const
@@ -281,7 +280,7 @@ namespace CloudberryKingdom
 
 		this->SlideOut( SlideInFrom, 0 );
 
-		this->SlideIn();
+		GUI_Panel::SlideIn();
 	}
 
 	void CkBaseMenu::SlideIn( int Frames )
@@ -334,7 +333,7 @@ namespace CloudberryKingdom
 		GUI_Panel::Hide();
 
 		if ( frames == -1 )
-			this->SlideOut( pos );
+			GUI_Panel::SlideOut( pos );
 		else
 			this->SlideOut( pos, frames );
 	}
@@ -356,7 +355,7 @@ namespace CloudberryKingdom
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Back( 86 ) + _T( " " ) + Localization::WordString( Word ) ) );
 	#endif
 
-		item->setGo( std::make_shared<MakeBackButtonHelper>( shared_from_this() ) );
+		item->setGo( std::make_shared<MakeBackButtonHelper>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
 		item->Name = _T( "Back" );
 		AddItem( item );
 		item->SelectSound.reset();

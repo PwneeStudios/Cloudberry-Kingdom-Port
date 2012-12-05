@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	class VerifyDeleteSeeds : public VerifyBaseMenu
 	{
 	private:
-		class VerifyDeleteYesGoLambda : public Lambda_1<MenuItem*>
+		class VerifyDeleteYesGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<VerifyDeleteSeeds> vds;
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class VerifyDeleteOnXLambda : public LambdaFunc_1<Menu*, bool>
+		class VerifyDeleteOnXLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<VerifyDeleteSeeds> vds;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class VerifyDeleteNoGoLambda : public Lambda_1<MenuItem*>
+		class VerifyDeleteNoGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<VerifyDeleteSeeds> vds;

@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -36,7 +34,7 @@ namespace CloudberryKingdom
 
 	float LongMenu::Height()
 	{
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			( *item )->UpdatePos();
 
 		int HoldIndex = CurIndex;
@@ -75,20 +73,20 @@ namespace CloudberryKingdom
 		//if (Items[CurIndex].UnaffectedByScroll) return;
 		std::shared_ptr<MenuItem> LastItem = Items[ 0 ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			if ( !( *item )->UnaffectedByScroll && ( *item )->Selectable )
 				LastItem = *item;
 		//LastItem = Items[Items.Count - 1];
 
 
 		// Scroll menu as needed
-		if ( Items[ CurIndex ]->MyText->getPos()->Y < Tools::CurLevel->getMainCamera()->getPos().Y + 300 )
+		if ( Items[ CurIndex ]->MyText->getPos().Y < Tools::CurLevel->getMainCamera()->getPos().Y + 300 )
 		{
 			FancyPos->setRelValY( FancyPos->getRelValY() + OffsetStep );
 			if ( LastItem->Pos.Y + FancyPos->RelVal.Y > -Tools::getCurCamera()->GetHeight() / 2 + MaxBottomSpace )
 				FancyPos->setRelValY( -LastItem->Pos.Y - Tools::getCurCamera()->GetHeight() / 2 + MaxBottomSpace );
 		}
-		if ( Items[ CurIndex ]->MyText->getPos()->Y > Tools::CurLevel->getMainCamera()->getPos().Y - 300 )
+		if ( Items[ CurIndex ]->MyText->getPos().Y > Tools::CurLevel->getMainCamera()->getPos().Y - 300 )
 			FancyPos->setRelValY( FancyPos->getRelValY() - OffsetStep );
 
 		if ( FancyPos->RelVal.Y < 0 )

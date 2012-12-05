@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 			Next_FREEPLAY
 		};
 	private:
-		class StartMenuLambda_Campaign : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Campaign : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuLambda_Arcade : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Arcade : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuLambda_Freeplay : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Freeplay : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuLambda_Controls : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Controls : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuLambda_Options : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Options : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuLambda_Exit : public Lambda_1<MenuItem*>
+		class StartMenuLambda_Exit : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuExitLambda : public LambdaFunc_1<Menu*, bool>
+		class StartMenuExitLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<StartMenu> sm;

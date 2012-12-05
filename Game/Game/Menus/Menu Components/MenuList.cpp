@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -16,8 +15,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> MenuList::GetViewables()
 	{
-		const std::wstring* tempVector[] = { _T( "RightArrowOffset" ), _T( "LeftArrowOffset" ), _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		const std::wstring tempVector[] = { _T( "RightArrowOffset" ), _T( "LeftArrowOffset" ), _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ) };
+		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 	}
 
 	const bool &MenuList::getExpandOnGo() const
@@ -72,22 +71,22 @@ namespace CloudberryKingdom
 	{
 		MenuItem::FadeIn();
 
-		LeftArrow->Quad_Renamed->SetColor( Color( 1, 1, 1, 1 ) );
-		RightArrow->Quad_Renamed->SetColor( Color( 1, 1, 1, 1 ) );
+		LeftArrow->Quad_Renamed.SetColor( Color( 1.f, 1.f, 1.f, 1.f ) );
+		RightArrow->Quad_Renamed.SetColor( Color( 1.f, 1.f, 1.f, 1.f ) );
 	}
 
 	void MenuList::FadeOut()
 	{
 		MenuItem::FadeOut();
 
-		LeftArrow->Quad_Renamed->SetColor( Color( 1, 1, 1,.3f ) );
-		RightArrow->Quad_Renamed->SetColor( Color( 1, 1, 1,.3f ) );
+		LeftArrow->Quad_Renamed.SetColor( Color( 1, 1, 1,.3f ) );
+		RightArrow->Quad_Renamed.SetColor( Color( 1, 1, 1,.3f ) );
 	}
 
 	MenuList::MenuList()
 	{
 		InitializeInstanceFields();
-		MyList = std::vector<MenuItem*>();
+		MyList = std::vector<std::shared_ptr<MenuItem> >();
 
 		MenuItem::Init( 0, 0 );
 
@@ -106,25 +105,25 @@ namespace CloudberryKingdom
 		Vector2 Size;
 
 		RightArrow = std::make_shared<QuadClass>();
-		RightArrow->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::MenuRightArrow_Texture;
+		RightArrow->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuRightArrow_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Size;
 		RightArrow->Base.e1 *= Size.X;
 		RightArrow->Base.e2 *= Size.Y;
 
 		LeftArrow = std::make_shared<QuadClass>();
-		LeftArrow->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::MenuLeftArrow_Texture;
+		LeftArrow->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuLeftArrow_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Size;
 		LeftArrow->Base.e1 *= Size.X;
 		LeftArrow->Base.e2 *= Size.Y;
 
 		RightArrow_Selected = std::make_shared<QuadClass>();
-		RightArrow_Selected->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture;
+		RightArrow_Selected->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
 		RightArrow_Selected->Base.e1 *= Size.X;
 		RightArrow_Selected->Base.e2 *= Size.Y;
 
 		LeftArrow_Selected = std::make_shared<QuadClass>();
-		LeftArrow_Selected->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture;
+		LeftArrow_Selected->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
 		LeftArrow_Selected->Base.e1 *= Size.X;
 		LeftArrow_Selected->Base.e2 *= Size.Y;
@@ -143,7 +142,7 @@ namespace CloudberryKingdom
 	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj )
 	{
 		MyList.push_back( item );
-		ObjDict.insert( make_pair( item, obj ) );
+		ObjDict.insert( std::make_pair( item, obj ) );
 	}
 
 	std::shared_ptr<MenuItem> MenuList::GetListItem()
@@ -151,17 +150,17 @@ namespace CloudberryKingdom
 		return MyList[ ListIndex ];
 	}
 
-	const std::shared_ptr<Object> &MenuList::getCurObj() const
+	const std::shared_ptr<void> &MenuList::getCurObj() const
 	{
 		return ObjDict[ CurMenuItem ];
 	}
 
-	const bool &MenuList::getOnFirstIndex() const
+	const bool MenuList::getOnFirstIndex() const
 	{
 		return ListIndex == 0 && !DoIndexWrapping;
 	}
 
-	const bool &MenuList::getOnLastIndex() const
+	const bool MenuList::getOnLastIndex() const
 	{
 		return ListIndex == MyList.size() - 1 && !DoIndexWrapping;
 	}
@@ -173,7 +172,7 @@ namespace CloudberryKingdom
 
 	void MenuList::SetSelectedItem( const std::shared_ptr<MenuItem> &item )
 	{
-		SetIndex( MyList.find( item ) );
+		SetIndex( IndexOf( MyList, item ) );
 	}
 
 	void MenuList::SetIndex( int NewIndex )
@@ -182,7 +181,7 @@ namespace CloudberryKingdom
 		{
 			if ( NewIndex < 0 )
 				NewIndex = MyList.size() - 1;
-			if ( NewIndex >= MyList.size() )
+			if ( NewIndex >= static_cast<int>( MyList.size() ) )
 				NewIndex = 0;
 		}
 		else
@@ -306,7 +305,7 @@ namespace CloudberryKingdom
 				float Sensitivity = ButtonCheck::ThresholdSensitivity;
 				if ( abs( Dir.X ) > Sensitivity )
 				{
-					IncrementIndex( Math::Sign( Dir.X ) );
+					IncrementIndex( ::Sign( Dir.X ) );
 				}
 			}
 		}
@@ -420,7 +419,7 @@ namespace CloudberryKingdom
 		ListPadding = Vector2( 65, 0 );
 		TotalPadding = Vector2();
 #endif
-		ObjDict = std::map<MenuItem*, void*>();
+		ObjDict = std::map<std::shared_ptr<MenuItem>, std::shared_ptr<void> >();
 		DoIndexWrapping = true;
 		LastIncrDir = 0;
 		ClickForNextItem = true;

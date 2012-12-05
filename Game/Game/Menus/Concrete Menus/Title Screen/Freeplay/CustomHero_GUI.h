@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class AddItemProxy : public Lambda_1<MenuItem*>
+		class AddItemProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CustomHero_GUI> chGui;

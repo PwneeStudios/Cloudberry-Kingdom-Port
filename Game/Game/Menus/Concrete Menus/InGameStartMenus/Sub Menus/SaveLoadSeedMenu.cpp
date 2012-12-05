@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	std::shared_ptr<Lambda_1<MenuItem*> > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
 	{
 		return std::make_shared<MakeSaveHelper>( panel, player );
 	}
@@ -321,7 +321,7 @@ namespace CloudberryKingdom
 #endif
 
 #if ! defined(WINDOWS)
-	std::shared_ptr<Lambda_1<MenuItem*> > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
 	{
 		return std::make_shared<SaveLoadSeedsMakeSaveLambda>( player );
 	}

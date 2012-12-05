@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	}
 
 std::shared_ptr<EzFont> PhsxSlider::Font = 0;
-std::shared_ptr<Lambda_1<MenuItem*> > PhsxSlider::Process = 0;
+std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
 
 	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( std::make_shared<EzText>( word, Font ) )
 	{

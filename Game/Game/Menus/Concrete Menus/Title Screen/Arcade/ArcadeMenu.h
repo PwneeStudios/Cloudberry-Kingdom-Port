@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 	class ArcadeMenu : public ArcadeBaseMenu
 	{
 	private:
-		class GoProxy : public Lambda_1<MenuItem*>
+		class GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ArcadeMenu> am;

@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		};
 
 	protected:
-		class ItemReturnToCallerProxy : public Lambda_1<MenuItem*>
+		class ItemReturnToCallerProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<GUI_Panel> guiPanel;
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		};
 
 	protected:
-		class MenuReturnToCallerProxy : public Lambda_1<Menu*>
+		class MenuReturnToCallerProxy : public Lambda_1<std::shared_ptr<Menu> >
 		{
 		private:
 			std::shared_ptr<GUI_Panel> guiPanel;
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		class MenuReturnToCallerLambda : public Lambda_1<MenuItem*>
+		class MenuReturnToCallerLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<GUI_Panel> panel;
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		class MenuReturnToCallerLambdaFunc : public LambdaFunc_1<Menu*, bool>
+		class MenuReturnToCallerLambdaFunc : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<GUI_Panel> panel;
