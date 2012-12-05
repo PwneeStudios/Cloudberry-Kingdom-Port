@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	public:
 		std::shared_ptr<Level> MyLevel;
 
-		std::vector<BackgroundFloaterList*> Lists;
+		std::vector<std::shared_ptr<BackgroundFloaterList> > Lists;
 
 		BackgroundCollection( const std::shared_ptr<Level> &level );
 
