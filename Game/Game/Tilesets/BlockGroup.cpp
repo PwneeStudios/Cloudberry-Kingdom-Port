@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	BlockGroup::BlockGroup()
 	{
-		Dict = std::map<int, std::vector<PieceQuad*> >();
+		Dict = std::map<int, std::vector<std::shared_ptr<PieceQuad> > >();
 	}
 
 	void BlockGroup::Add( const std::shared_ptr<PieceQuad> &piece )
@@ -15,27 +15,28 @@ namespace CloudberryKingdom
 
 	void BlockGroup::Add( int width, const std::shared_ptr<PieceQuad> &piece )
 	{
-		if ( !Dict.find( width ) != Dict.end() )
-			Dict.insert( make_pair( width, std::vector<PieceQuad*>() ) );
+		if ( Dict.find( width ) == Dict.end() )
+			Dict.insert( std::make_pair( width, std::vector<std::shared_ptr<PieceQuad> >() ) );
 
 		Dict[ width ].push_back( piece );
 	}
 
 	std::shared_ptr<PieceQuad> BlockGroup::Choose( int width )
 	{
-		return Dict[ SnapWidthUp( width ) ][ 0 ];
+		return Dict[ SnapWidthUp( static_cast<float>( width ) ) ][ 0 ];
 	}
 
 	std::shared_ptr<PieceQuad> BlockGroup::Choose( int width, const std::shared_ptr<Rand> &rnd )
 	{
-		return Dict[ width ].Choose( rnd );
+		return ListExtension::Choose( Dict[ width ], rnd );
 	}
 
 	void BlockGroup::SortWidths()
 	{
-		std::shared_ptr<std::vector<void*> > list = Dict.Keys::ToList();
-		list->Sort();
-		Widths = list->ToArray();
+		// FIXME: Check for isomorphic implementation.
+		Widths.clear();
+		GetKeys( Dict, Widths );
+		std::sort( Widths.begin(), Widths.end() );
 	}
 
 	int BlockGroup::SnapWidthUp( float width )
@@ -45,7 +46,7 @@ namespace CloudberryKingdom
 
 	void BlockGroup::SnapWidthUp( Vector2 &size )
 	{
-		size.X = SnapWidthUp( size.X, Widths );
+		size.X = static_cast<float>( SnapWidthUp( size.X, Widths ) );
 	}
 
 	int BlockGroup::SnapWidthUp( float width, std::vector<int> Widths )
@@ -56,7 +57,7 @@ namespace CloudberryKingdom
 		int int_width = 0;
 
 		int_width = Widths[ Widths.size() - 1 ];
-		for ( int i = 0; i < Widths.size(); i++ )
+		for ( size_t i = 0; i < Widths.size(); i++ )
 		{
 			if ( width < Widths[ i ] )
 			{
@@ -65,7 +66,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		width = int_width;
+		width = static_cast<float>( int_width );
 
 		return int_width;
 	}

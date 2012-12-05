@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		MainRecord.reset();
 		
 		// Release all recordings in Records
-		for ( std::vector<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+		for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 			( *record )->Release();
 
 		Records.clear();
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	SwarmRecord::SwarmRecord()
 	{
 		InitializeInstanceFields();
-		Records = std::vector<std::shared_ptr<Recording> >();
+		Records = std::list<std::shared_ptr<Recording> >();
 
 		BobQuad = std::make_shared<QuadClass>();
 		BobQuad->Base.e1 *= 100;
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			for ( std::vector<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+			for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 				( *record )->Draw( BobQuad, Step, level, AnimGroup, BobLinks );
 		}
 	}
@@ -49,11 +49,12 @@ namespace CloudberryKingdom
 		if ( static_cast<int>( Records.size() ) >= MaxRecords )
 		{
 			/*std::shared_ptr<Recording> DevectordRecord = Records.pop();*/
-			std::shared_ptr<Recording> DevectordRecord = PopBack( Records );
+			std::shared_ptr<Recording> DevectordRecord = Records.front();
+			Records.pop_front();
 			DevectordRecord->Release();
 		}
 
-		for ( std::vector<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+		for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 			if ( *record != MainRecord )
 				( *record )->ConvertToSuperSparse();
 

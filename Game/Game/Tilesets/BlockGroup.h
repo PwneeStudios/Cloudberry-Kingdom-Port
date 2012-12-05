@@ -5,22 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class Rand;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class BlockGroup
 	{
 	public:
-		std::map<int, std::vector<PieceQuad*> > Dict;
+		std::map<int, std::vector<std::shared_ptr<PieceQuad> > > Dict;
 		std::vector<int> Widths;
 
 		BlockGroup();
