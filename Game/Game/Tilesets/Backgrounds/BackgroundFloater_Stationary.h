@@ -5,18 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class BackgroundFloaterList;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class BackgroundFloater_Stationary : public BackgroundFloater
 	{
 	public:
