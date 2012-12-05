@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class ResolutionGroup
 	{
 	public:
-		//static std::shared_ptr<DisplayMode> LastSetMode;
+		static std::shared_ptr<DisplayMode> LastSetMode;
 
 		static IntVector2 SafeResolution( int width, int height );
 

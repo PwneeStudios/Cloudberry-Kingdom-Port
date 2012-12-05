@@ -76,7 +76,9 @@ struct DateTime
 	}
 };
 
-class DisplayMode;
+class DisplayMode
+{
+};
 
 class Effect
 {
@@ -299,7 +301,20 @@ public:
 
 };
 
-class GraphicsDeviceManager;
+class GraphicsDeviceManager
+{
+
+public:
+
+	bool IsFullScreen;
+	int PreferredBackBufferWidth;
+	int PreferredBackBufferHeight;
+
+	void ToggleFullScreen()
+	{
+	}
+};
+
 class IAsyncResult;
 
 class KeyboardState
@@ -429,6 +444,10 @@ class Mouse
 {
 	
 public:
+
+	static void SetPosition( int x, int y )
+	{
+	}
 
 	static MouseState GetState()
 	{
@@ -713,6 +732,10 @@ public:
 	operator std::wstring() const
 	{
 		return _T( "" );
+	}
+
+	void Append( const wchar_t &c )
+	{
 	}
 
 };

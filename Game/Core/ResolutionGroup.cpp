@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-//std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
+std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 
 	IntVector2 ResolutionGroup::SafeResolution( int width, int height )
 	{

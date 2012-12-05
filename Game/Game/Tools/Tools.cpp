@@ -5,11 +5,14 @@ namespace CloudberryKingdom
 
 	std::wstring StringExtension::Capitalize( const std::wstring &s )
 	{
-		return toupper( s[ 0 ] ) + s.substr( 1 );
+		std::wstringstream wss;
+		wss << wchar_t( ::toupper( s[ 0 ] ) );
+		wss << s.substr( 1 );
+		return wss.str();
 	}
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-template<typename T> where T : IComparable
+template<typename T>
 	int Vector2Extension::IndexMax( std::vector<T> list )
 	{
 		T max = list[ 0 ];
@@ -65,7 +68,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	void StringBuilderExtension::DigitsToString( const std::shared_ptr<StringBuilder> &str, int NumDigits )
 	{
 		for ( int i = NumDigits - 1; i >= 0; i-- )
-			str->Append( digit_char[ digits[ i ] ] );
+			str->Append( digit_char[ static_cast<unsigned int>( digits[ i ] ) ] );
 	}
 
 	void StringBuilderExtension::Add( const std::shared_ptr<StringBuilder> &str, long long num )
@@ -85,8 +88,8 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 
 		for ( int i = max_digits - 1; i >= 0; i-- )
 		{
-			double pow = pow( 10, i );
-			long long _pow = static_cast<long long>( Math::Round( pow ) );
+			double Pow = pow( 10.0, i );
+			long long _pow = static_cast<long long>( floor( Pow + 0.5 ) );
 			long long digit = num / _pow;
 			digits[ i ] = digit;
 			num -= _pow * digit;
@@ -140,11 +143,13 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 
 	void Tools::Log( const std::wstring &dump )
 	{
-		std::shared_ptr<System::IO::FileStream> stream = File->Open( _T( "dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		// FIXME: Implement log.
+
+		/*std::shared_ptr<System::IO::FileStream> stream = File->Open( _T( "dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
 		std::shared_ptr<StreamWriter> writer = std::make_shared<StreamWriter>( stream );
 		writer->Write( dump );
 		writer->Close();
-		stream->Close();
+		stream->Close();*/
 	}
 
 	void Tools::Nothing()
@@ -341,12 +346,13 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 	{
 		std::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		/*std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		reader->Close();
-		stream->Close();
+		//stream->Close();
 
 		SourceObject->ConvertForSimple();
 
@@ -407,19 +413,22 @@ std::shared_ptr<Camera> Tools::DummyCamera = 0;
 std::shared_ptr<GameData> WorldMap, Tools::TitleGame = 0;
 const int tempVector4[] = { 0, 0, 0, 0 };
 std::vector<int> Tools::VibrateTimes = std::vector<int>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
-int Tools::DifficultyTypes = Tools::GetValues<DifficultyParam>()->Count();
+//int Tools::DifficultyTypes = Tools::GetValues<DifficultyParam>()->Count();
+int Tools::DifficultyTypes = DifficultyParam_LENGTH;
 int Tools::StyleTypes = 8;
-int Tools::UpgradeTypes = Tools::GetValues<Upgrade>()->Count();
+//int Tools::UpgradeTypes = Tools::GetValues<Upgrade>()->Count();
+int Tools::UpgradeTypes = Upgrade_LENGTH;
+
 #if defined(WINDOWS)
-Microsoft::Xna::Framework::Input::KeyboardState Keyboard, Tools::PrevKeyboard = 0;
+KeyboardState Keyboard, Tools::PrevKeyboard;
 #endif
 
 #if defined(WINDOWS)
-Microsoft::Xna::Framework::Input::MouseState Mouse, Tools::PrevMouse = 0;
+MouseState Mouse, Tools::PrevMouse;
 #endif
 
 #if defined(WINDOWS)
-Vector2 DeltaMouse, Tools::RawDeltaMouse = 0;
+Vector2 DeltaMouse, Tools::RawDeltaMouse;
 #endif
 
 #if defined(WINDOWS)
@@ -431,21 +440,21 @@ bool Tools::MouseInWindow = false;
 #endif
 
 #if defined(WINDOWS)
-	const Vector2 &Tools::getMousePos()
+	Vector2 Tools::getMousePos()
 	{
-		return Vector2( Mouse.X, Mouse.Y ) / Tools::Render->SpriteScaling;
+		return Vector2( static_cast<float>( Mouse.X ), static_cast<float>( Mouse.Y ) ) / Tools::Render->SpriteScaling;
 	}
 #endif
 
 #if defined(WINDOWS)
 	void Tools::setMousePos( const Vector2 &value )
 	{
-		XnaInput::Mouse::SetPosition( static_cast<int>( value.X * Tools::Render->SpriteScaling ), static_cast<int>( value.Y * Tools::Render->SpriteScaling ) );
+		Mouse::SetPosition( static_cast<int>( value.X * Tools::Render->SpriteScaling ), static_cast<int>( value.Y * Tools::Render->SpriteScaling ) );
 	}
 #endif
 
 #if defined(WINDOWS)
-	const bool &Tools::getFullscreen()
+	bool Tools::getFullscreen()
 	{
 		return TheGame->MyGraphicsDeviceManager->IsFullScreen;
 	}
@@ -479,14 +488,14 @@ bool Tools::MouseInWindow = false;
 #if defined(WINDOWS)
 	bool Tools::CurMouseDown()
 	{
-		return Mouse.LeftButton == XnaInput::ButtonState::Pressed;
+		return Mouse.LeftButton == ButtonState_Pressed;
 	}
 #endif
 
 #if defined(WINDOWS)
 	bool Tools::PrevMouseDown()
 	{
-		return PrevMouse.LeftButton == XnaInput::ButtonState::Pressed;
+		return PrevMouse.LeftButton == ButtonState_Pressed;
 	}
 #endif
 
@@ -521,14 +530,14 @@ bool Tools::MouseInWindow = false;
 #if defined(WINDOWS)
 	bool Tools::CurRightMouseDown()
 	{
-		return Mouse.RightButton == XnaInput::ButtonState::Pressed;
+		return Mouse.RightButton == ButtonState_Pressed;
 	}
 #endif
 
 #if defined(WINDOWS)
 	bool Tools::PrevRightMouseDown()
 	{
-		return PrevMouse.RightButton == XnaInput::ButtonState::Pressed;
+		return PrevMouse.RightButton == ButtonState_Pressed;
 	}
 #endif
 
@@ -571,31 +580,35 @@ bool Tools::MouseInWindow = false;
 #if defined(WINDOWS)
 	std::wstring Tools::RemoveAfter( const std::wstring &s, const std::wstring &occurence )
 	{
-		if ( s.find( occurence ) != string::npos )
-			s = s.erase( s.find( occurence ) );
+		std::wstring cpy( s );
+		if ( cpy.find( occurence ) != std::string::npos )
+			cpy.erase( s.find( occurence ) );
 		return s;
 	}
 #endif
 
 #if defined(WINDOWS)
-	std::wstring Tools::SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font )
+	std::wstring Tools::SantitizeOneLineString( std::wstring s, const std::shared_ptr<EzFont> &font )
 	{
 		s = RemoveAfter( s, _T( "\n" ) );
 		s = RemoveAfter( s, _T( "\t" ) );
 
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Replace' method:
-		s = s.Replace( _T( "{" ), _T( " " ) );
+		//s = s.Replace( _T( "{" ), _T( " " ) );
+		Replace( s, '{', ' ' );
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Replace' method:
-		s = s.Replace( _T( "}" ), _T( " " ) );
+		//s = s.Replace( _T( "}" ), _T( " " ) );
+		Replace( s, '}', ' ' );
 
-		try
+		// FIXME: Re-enable this logic.
+		/*try
 		{
 			font->Font->MeasureString( s );
 		}
 		catch ( ... )
 		{
 			s = _T( "Invalid" );
-		}
+		}*/
 
 		return s;
 	}
@@ -608,7 +621,8 @@ bool Tools::MouseInWindow = false;
 	}
 #endif
 
-std::vector<Microsoft::Xna::Framework::Input::GamePadState> GamepadState, *Tools::PrevGamepadState = 0;
+std::vector<GamePadState> Tools::GamepadState;
+std::vector<GamePadState> Tools::PrevGamepadState;
 
 	std::wstring Tools::StripPath( const std::wstring &file )
 	{
@@ -619,7 +633,7 @@ std::vector<Microsoft::Xna::Framework::Input::GamePadState> GamepadState, *Tools
 			return file.substr( LastSlash + 1 );
 	}
 
-	std::wstring Tools::FirstFolder( const std::wstring &path, const std::wstring &ignore )
+	std::wstring Tools::FirstFolder( std::wstring path, const std::wstring &ignore )
 	{
 		int i = path.find( ignore );
 		if ( i >= 0 )
@@ -650,7 +664,10 @@ std::vector<Microsoft::Xna::Framework::Input::GamePadState> GamepadState, *Tools
 	void Tools::Pop( int Pitch )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		Sound( _T( "Pop_" ) + CoreMath::Restrict( 1, 3, Pitch ).ToString() )->Play();
+		std::wstringstream wss;
+		wss << _T( "Pop_" );
+		wss << CoreMath::RestrictVal( 1, 3, Pitch );
+		Sound( wss.str() )->Play();
 	}
 
 std::shared_ptr<GameTime> Tools::gameTime = 0;
