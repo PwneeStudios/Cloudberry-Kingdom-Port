@@ -12,13 +12,13 @@ namespace CloudberryKingdom
 
 	t->Name = _T( "cloud" );
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_cloud_50" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_cloud_100" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_cloud_150" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_cloud_250" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_cloud_300" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_cloud_600" ), -15, 15, 3 ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_cloud_1000" ), -15, 15, 3 ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_cloud_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_cloud_100" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_cloud_150" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_cloud_250" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_cloud_300" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_cloud_600" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_cloud_1000" ), -15.f, 15.f, 3.f ) );
 
 	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -550, 135, 1450 ) );
 	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -15, 670, 1450 ) );
@@ -90,40 +90,40 @@ namespace CloudberryKingdom
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "spike_cloud" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "spike_cloud" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_cloud_1" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_cloud_1" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
 
-	info->Boulders->Ball->Sprite = _T( "floater_spikey_cloud" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_cloud" ) );
 	info->Boulders->Ball->Size = Vector2( 150, -1 );
 	info->Boulders->Radius = 120;
-	info->Boulders->Chain->Sprite = _T( "cloud_chain" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "cloud_chain" ) );
 	info->Boulders->Chain->Width = 55;
 	info->Boulders->Chain->RepeatWidth = 1900;
 
-	info->Boulders->Ball->Sprite = _T( "Floater_Boulder_Cloud" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Boulder_Cloud" ) );
 	info->Boulders->Ball->Size = Vector2( 200, -1 );
 	info->Boulders->Radius = 140;
-	info->Boulders->Chain->Sprite = _T( "Floater_Rope_Cloud" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "Floater_Rope_Cloud" ) );
 	info->Boulders->Chain->RepeatWidth = 1900;
 	info->Boulders->Chain->Width = 55;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_spikey_cloud" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_cloud" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 8 );
 	info->SpikeyGuys->Base->Sprite.reset();
 	info->SpikeyGuys->Rotate = true;
 	info->SpikeyGuys->Radius = 114;
 	info->SpikeyGuys->RotateOffset = -1.57f;
-	info->SpikeyGuys->Chain->Sprite = _T( "cloud_chain" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "cloud_chain" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Cloud" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Cloud" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, 12 );
 	info->SpikeyLines->Radius = 100;
@@ -131,16 +131,16 @@ namespace CloudberryKingdom
 	info->SpikeyLines->RotateSpeed = .05f;
 
 	sprite_anim( _T( "blob_cloud" ), _T( "blob_cloud" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_cloud" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_cloud" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = _T( "BlobGoo5" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo5" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_cloud" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_cloud" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 104 );
 
-	info->Coins->Sprite->Sprite = _T( "coin_blue" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "coin_blue" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -155,8 +155,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> TileSets::Load_Castle()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Castle" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Castle" ) );
+		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -189,109 +189,109 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 100, 0 );
 
 	sprite_anim( _T( "door_castle" ), _T( "door_castle" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_castle" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_castle" ) );
 	info->Doors->Sprite->Size = Vector2( 450, 250 );
 	info->Doors->Sprite->Offset = Vector2( -210, 35 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 	info->Doors->SizePadding = Vector2( 10, 0 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_castle_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_castle_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4635 );
 	info->Walls->Sprite->Size = Vector2( 1300, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4815 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_Castle_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_Castle_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Castle_3" );
-	info->LavaDrips->Icon->Sprite = _T( "Flow_Icon_Castle" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_Castle_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_Castle_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Castle_3" ) );
+	info->LavaDrips->Icon->Sprite = TextureOrAnim::Get( _T( "Flow_Icon_Castle" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Castle" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Castle" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
 	info->Lasers->Tint_Full = Vector4( 1, 1, 1,.95f );
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
-	info->Lasers->Icon->Sprite = _T( "Icon_Laser" );
+	info->Lasers->Icon->Sprite = TextureOrAnim::Get( _T( "Icon_Laser" ) );
 
 	sprite_anim( _T( "fblock_castle" ), _T( "fblock_castle" ), 1, 3, 2 );
 	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 103, _T( "fblock_castle" ), -3, 3, 2 ) );
-	info->FallingBlocks->Icon->Sprite = _T( "fblock_castle" );
+	info->FallingBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "fblock_castle" ) );
 	info->FallingBlocks->Icon->Size = Vector2( 40, -1 );
 
 	sprite_anim( _T( "Bouncy_castle" ), _T( "Bouncy_castle" ), 1, 3, 2 );
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_castle" ), -6, 6, 13 ) );
-	info->BouncyBlocks->Icon->Sprite = _T( "Bouncy_Castle" );
+	info->BouncyBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "Bouncy_Castle" ) );
 
 	sprite_anim( _T( "flame_castle" ), _T( "firespinner_flame_castle_v1" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_castle" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_castle" ) );
 	info->Spinners->Flame->Size = Vector2( 45, -1 );
 	info->Spinners->Rotate = false;
 	info->Spinners->RotateStep = .13f;
-	info->Spinners->Base->Sprite = _T( "firespinner_base_castle_2" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_base_castle_2" ) );
 	info->Spinners->Base->Size = Vector2( 90, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -25 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 55;
-	info->Spinners->Icon->Sprite = _T( "Icon_FireSpinner" );
+	info->Spinners->Icon->Sprite = TextureOrAnim::Get( _T( "Icon_FireSpinner" ) );
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_castle" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_castle" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
-	info->GhostBlocks->Icon->Sprite = _T( "Ghostblock_Castle" );
+	info->GhostBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "Ghostblock_Castle" ) );
 	info->GhostBlocks->Icon->Size = Vector2( 40, -1 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_castle_190" ), -1, 1, 25 ) );
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_castle_135" ), -1, 1, 25 ) );
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_castle_80" ), -1, 1, 5 ) );
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_castle_40" ), -1, 1, 5 ) );
-	info->MovingBlocks->Icon->Sprite = _T( "MovingBlock_Castle_40" );
+	info->MovingBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "MovingBlock_Castle_40" ) );
 	info->MovingBlocks->Icon->Size = Vector2( 40, -1 );
 	info->MovingBlocks->Icon_Big = std::make_shared<SpriteInfo>( 0 );
-	info->MovingBlocks->Icon_Big->Sprite = _T( "MovingBlock_Castle_135" );
+	info->MovingBlocks->Icon_Big->Sprite = TextureOrAnim::Get( _T( "MovingBlock_Castle_135" ) );
 	info->MovingBlocks->Icon_Big->Size = Vector2( 40, -1 );
 
 	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1, 1, 1 ) );
 	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1, 1, 1 ) );
 	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1, 1, 1 ) );
 	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1, 1, 1 ) );
-	info->Elevators->Icon->Sprite = _T( "Elevator_Castle_80" );
+	info->Elevators->Icon->Sprite = TextureOrAnim::Get( _T( "Elevator_Castle_80" ) );
 
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1, 1, 1 ) );
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1, 1, 1 ) );
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1, 1, 1 ) );
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1, 1, 1 ) );
 	//info.Pendulums.Icon.Sprite = "Elevator_Castle_80";
-	info->Pendulums->Icon->Sprite = _T( "Pendulum_Icon_Castle" );
+	info->Pendulums->Icon->Sprite = TextureOrAnim::Get( _T( "Pendulum_Icon_Castle" ) );
 
 	sprite_anim( _T( "Serpent_Castle" ), _T( "Serpent_Castle" ), 1, 2, 8 );
 	//sprite_anim("Serpent_Castle", "SerpentHead_Castle", 1, 2, 8);
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Castle" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Castle" ) );
 	sprite_anim( _T( "Serpent_Fish_Castle" ), _T( "Serpent_Fish_Castle" ), 1, 2, 5 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Castle" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Castle" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
-	info->Serpents->Icon->Sprite = _T( "SerpentHead_Castle_1" );
+	info->Serpents->Icon->Sprite = TextureOrAnim::Get( _T( "SerpentHead_Castle_1" ) );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "spike_castle" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "spike_castle" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_castle" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_castle" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
-	info->Spikes->Icon->Sprite = _T( "Spike_Castle" );
+	info->Spikes->Icon->Sprite = TextureOrAnim::Get( _T( "Spike_Castle" ) );
 	info->Spikes->Icon->Size = Vector2( 25, -1 );
 
-	info->Boulders->Ball->Sprite = _T( "Floater_Spikey_castle_v1" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_castle_v1" ) );
 	info->Boulders->Ball->Size = Vector2( 150, -1 );
 	info->Boulders->Radius = 106;
-	info->Boulders->Chain->Sprite = _T( "floater_chain_castle" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_castle" ) );
 	info->Boulders->Chain->Width = 55;
 	info->Boulders->Chain->RepeatWidth = 1900;
-	info->Boulders->Icon->Sprite = _T( "Floater_Spikey_Castle_v1" );
+	info->Boulders->Icon->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Castle_v1" ) );
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_buzzsaw_yellow_castle" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_buzzsaw_yellow_castle" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 190, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 0 );
 	info->SpikeyGuys->Base->Sprite.reset();
@@ -299,33 +299,33 @@ namespace CloudberryKingdom
 	info->SpikeyGuys->RotateSpeed = -.15f;
 	info->SpikeyGuys->Radius = 130;
 	info->SpikeyGuys->RotateOffset = -1.57f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_castle" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_castle" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
-	info->SpikeyGuys->Icon->Sprite = _T( "Floater_Buzzsaw_Yellow_Castle" );
+	info->SpikeyGuys->Icon->Sprite = TextureOrAnim::Get( _T( "Floater_Buzzsaw_Yellow_Castle" ) );
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Castle_v2" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Castle_v2" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, 12 );
 	info->SpikeyLines->Radius = 100;
 	info->SpikeyLines->Rotate = true;
 	info->SpikeyLines->RotateSpeed = .05f;
-	info->SpikeyLines->Icon->Sprite = _T( "Floater_Spikey_Castle_v2" );
+	info->SpikeyLines->Icon->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Castle_v2" ) );
 
 	sprite_anim( _T( "blob_castle" ), _T( "blob_castle_v1" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_castle" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_castle" ) );
 	info->Blobs->Body->Size = Vector2( 137, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = _T( "BlobGoo5" );
-	info->Blobs->Icon->Sprite = _T( "Blob_Castle" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo5" ) );
+	info->Blobs->Icon->Sprite = TextureOrAnim::Get( _T( "Blob_Castle" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_castle" );
-	info->Clouds->Icon->Sprite = _T( "Cloud_Castle" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_castle" ) );
+	info->Clouds->Icon->Sprite = TextureOrAnim::Get( _T( "Cloud_Castle" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 355 );
-	info->Fireballs->Icon->Sprite = _T( "Icon_Fireball" );
+	info->Fireballs->Icon->Sprite = TextureOrAnim::Get( _T( "Icon_Fireball" ) );
 
-	info->Coins->Sprite->Sprite = _T( "coin_blue" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "coin_blue" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -341,8 +341,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> TileSets::Load_Sea()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Sea" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Sea" ) );
+		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -363,21 +363,21 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 320, 0 );
 
 	sprite_anim( _T( "door_sea" ), _T( "door_sea" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_sea" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_sea" ) );
 	info->Doors->Sprite->Size = Vector2( 270, -1 );
 	info->Doors->Sprite->Offset = Vector2( -140, 38 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_sea_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_sea_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4550 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_Sea_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_Sea_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Sea_3" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_Sea_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_Sea_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Sea_3" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Sea" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Sea" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
@@ -391,17 +391,17 @@ namespace CloudberryKingdom
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_sea" ), -6, 6, 13 ) );
 
 	sprite_anim( _T( "flame_Sea" ), _T( "firespinner_flame_Sea" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_Sea" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_Sea" ) );
 	info->Spinners->Flame->Size = Vector2( 45, -1 );
 	info->Spinners->Rotate = false;
 	info->Spinners->RotateStep = .13f;
-	info->Spinners->Base->Sprite = _T( "firespinner_gear_dkpurp" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_gear_dkpurp" ) );
 	info->Spinners->Base->Size = Vector2( 90, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -25 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 55;
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_sea" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_sea" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_sea_190" ), -1, 1, 12 ) );
@@ -420,41 +420,41 @@ namespace CloudberryKingdom
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Sea_190" ), -1, 1, 1 ) );
 
 	sprite_anim( _T( "Serpent_Sea" ), _T( "Serpent_Sea" ), 1, 2, 8 );
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Sea" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Sea" ) );
 	sprite_anim( _T( "Serpent_Fish_Sea" ), _T( "Serpent_Fish_Sea" ), 1, 2, 5 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Sea" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Sea" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "Spike_Sea_2" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "Spike_Sea_2" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_sea_1" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_sea_1" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
 
 	info->Boulders->Ball->Size = Vector2( 170, -1 );
 	info->Boulders->Radius = 120;
-	info->Boulders->Ball->Sprite = _T( "Floater_Boulder_Cloud" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Boulder_Cloud" ) );
 	info->Boulders->Ball->Size = Vector2( 200, -1 );
 	info->Boulders->Radius = 140;
-	info->Boulders->Chain->Sprite = _T( "Floater_Rope_Cloud" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "Floater_Rope_Cloud" ) );
 	info->Boulders->Chain->RepeatWidth = 1900;
 	info->Boulders->Chain->Width = 55;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "Floater_Spikey_Sea" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Sea" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 170, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 9 );
 	info->SpikeyGuys->Base->Sprite.reset();
 	info->SpikeyGuys->Rotate = true;
 	info->SpikeyGuys->Radius = 124;
 	info->SpikeyGuys->RotateOffset = -1.95f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_sea" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_sea" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Sea" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Sea" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, 12 );
 	info->SpikeyLines->Radius = 100;
@@ -462,17 +462,17 @@ namespace CloudberryKingdom
 	info->SpikeyLines->RotateSpeed = .05f;
 
 	sprite_anim( _T( "blob_sea" ), _T( "blob_sea" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_sea" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_sea" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = _T( "BlobGoo5" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo5" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_sea" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_sea" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 132 );
 
 	//info.Coins.Sprite.Sprite = "coin_blue";
-	info->Coins->Sprite->Sprite = _T( "CoinShimmer" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -488,8 +488,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> TileSets::Load_Hills()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Hills" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Hills" ) );
+		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -510,21 +510,21 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 200, 0 );
 
 	sprite_anim( _T( "door_hills" ), _T( "door_hills" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_hills" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_hills" ) );
 	info->Doors->Sprite->Size = Vector2( 305, -1 );
 	info->Doors->Sprite->Offset = Vector2( -140, 33 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_hills_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_hills_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4615 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_cave_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_cave_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Cave_3" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_cave_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_cave_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Cave_3" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Hills" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Hills" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
@@ -538,17 +538,17 @@ namespace CloudberryKingdom
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_hills" ), -15, 15, 13 ) );
 
 	sprite_anim( _T( "flame_Hills" ), _T( "firespinner_flame_Hills" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_Hills" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_Hills" ) );
 	info->Spinners->Flame->Size = Vector2( 45, -1 );
 	info->Spinners->Rotate = false;
 	info->Spinners->RotateStep = .13f;
-	info->Spinners->Base->Sprite = _T( "firespinner_base_hills" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_base_hills" ) );
 	info->Spinners->Base->Size = Vector2( 90, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -25 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 55;
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_hills" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_hills" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_hills_190" ), -1, 1, 7 ) );
@@ -567,39 +567,39 @@ namespace CloudberryKingdom
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Hills_190" ), -1, 1, 1 ) );
 
 	sprite_anim( _T( "Serpent_Hills" ), _T( "Serpent_Castle" ), 1, 2, 5 );
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Hills" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Hills" ) );
 	sprite_anim( _T( "Serpent_Fish_Hills" ), _T( "Serpent_Fish_Castle" ), 1, 2, 8 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Hills" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Hills" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "spike_hills" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "spike_hills" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_hills_1" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_hills_1" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
 
-	info->Boulders->Ball->Sprite = _T( "floater_boulder_hills" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "floater_boulder_hills" ) );
 	info->Boulders->Ball->Size = Vector2( 200, -1 );
 	info->Boulders->Radius = 140;
-	info->Boulders->Chain->Sprite = _T( "floater_rope_hills" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "floater_rope_hills" ) );
 	info->Boulders->Chain->Width = 55;
 	info->Boulders->Chain->RepeatWidth = 1900;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_spikey_hills" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_hills" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 8 );
 	info->SpikeyGuys->Base->Sprite.reset();
 	info->SpikeyGuys->Rotate = true;
 	info->SpikeyGuys->Radius = 116;
 	info->SpikeyGuys->RotateOffset = -1.57f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_hills" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_hills" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Hills" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Hills" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, 12 );
 	info->SpikeyLines->Radius = 100;
@@ -607,16 +607,16 @@ namespace CloudberryKingdom
 	info->SpikeyLines->RotateSpeed = .05f;
 
 	sprite_anim( _T( "blob_hills" ), _T( "blob_hills" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_hills" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_hills" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = _T( "BlobGoo5" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo5" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_hills" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_hills" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 0 );
 
-	info->Coins->Sprite->Sprite = _T( "coin_blue" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "coin_blue" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -631,8 +631,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> TileSets::Load_Forest()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Forest" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Forest" ) );
+		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -653,21 +653,21 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 50, 0 );
 
 	sprite_anim( _T( "door_forest" ), _T( "door_forest" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_forest" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_forest" ) );
 	info->Doors->Sprite->Size = Vector2( 296, -1 );
 	info->Doors->Sprite->Offset = Vector2( -140, 35 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_forest_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_forest_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4650 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_Sea_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_Sea_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Sea_3" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_Sea_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_Sea_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Sea_3" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Forest" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Forest" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
@@ -681,17 +681,17 @@ namespace CloudberryKingdom
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_Forest" ), -6, 6, 13 ) );
 
 	sprite_anim( _T( "flame_forest" ), _T( "firespinner_flame_forest" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_forest" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_forest" ) );
 	info->Spinners->Flame->Size = Vector2( 47, -1 );
 	info->Spinners->Rotate = false;
-	info->Spinners->Base->Sprite = _T( "firespinner_base_forest_1" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_base_forest_1" ) );
 	info->Spinners->Base->Size = Vector2( 75, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -45 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 45;
 	info->Spinners->TopOffset = -40;
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_forest_1" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_forest_1" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_forest_190_v2" ), -1, 1, 1 ) );
@@ -711,39 +711,39 @@ namespace CloudberryKingdom
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Forest_190" ), -1, 1, 1 ) );
 
 	sprite_anim( _T( "Serpent_Forest" ), _T( "Serpent_Forest" ), 1, 2, 8 );
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Forest" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Forest" ) );
 	sprite_anim( _T( "Serpent_Fish_Forest" ), _T( "Serpent_Fish_Forest" ), 1, 2, 5 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Forest" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Forest" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "spike_forest" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "spike_forest" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_forest_1" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_forest_1" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
 
-	info->Boulders->Ball->Sprite = _T( "floater_spikey_forest" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_forest" ) );
 	info->Boulders->Ball->Size = Vector2( 160, -1 );
 	info->Boulders->Radius = 120;
-	info->Boulders->Chain->Sprite = _T( "floater_chain_forest" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_forest" ) );
 	info->Boulders->Chain->Width = 55;
 	info->Boulders->Chain->RepeatWidth = 1900;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_spikey_forest" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_forest" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, -22 );
 	info->SpikeyGuys->Base->Sprite.reset();
 	info->SpikeyGuys->Rotate = true;
 	info->SpikeyGuys->Radius = 130;
 	info->SpikeyGuys->RotateOffset = .05f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_forest" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_forest" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_buzzsaw_forest" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_buzzsaw_forest" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 230, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 0 );
 	info->SpikeyGuys->Base->Sprite.reset();
@@ -751,11 +751,11 @@ namespace CloudberryKingdom
 	info->SpikeyGuys->RotateSpeed = -.15f;
 	info->SpikeyGuys->Radius = 130;
 	info->SpikeyGuys->RotateOffset = -1.57f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_forest" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_forest" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Forest" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Forest" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, -10 );
 	info->SpikeyLines->Radius = 100;
@@ -763,15 +763,15 @@ namespace CloudberryKingdom
 	info->SpikeyLines->RotateSpeed = .05f;
 
 	sprite_anim( _T( "blob_forest" ), _T( "blob_forest" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_forest" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_forest" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
-	info->Blobs->GooSprite = _T( "BlobGoo3" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo3" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_forest" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_forest" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 192.5f );
 
-	info->Coins->Sprite->Sprite = _T( "coin_blue" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "coin_blue" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -787,8 +787,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<TileSet> TileSets::Load_Cave()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Cave" ) );
-		std::shared_ptr<CloudberryKingdom::TileSet::TileSetInfo> info = t->MyTileSetInfo;
+		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Cave" ) );
+		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -835,22 +835,22 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 300, 0 );
 
 	sprite_anim( _T( "door_cave" ), _T( "door_cave" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_cave" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_cave" ) );
 	info->Doors->Sprite->Size = Vector2( 500, -1 );
 	info->Doors->Sprite->Offset = Vector2( -250, 135 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 	info->Doors->SizePadding = Vector2( 25, 0 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_cave_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_cave_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4550 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_cave_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_cave_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Cave_3" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_cave_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_cave_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Cave_3" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Cave" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Cave" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
@@ -864,17 +864,17 @@ namespace CloudberryKingdom
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_cave" ), -6, 6, 13 ) );
 
 	sprite_anim( _T( "flame_cave" ), _T( "firespinner_flame_cloud" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_cave" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_cave" ) );
 	info->Spinners->Flame->Size = Vector2( 45, -1 );
 	info->Spinners->Rotate = false;
 	info->Spinners->RotateStep = .13f;
-	info->Spinners->Base->Sprite = _T( "firespinner_base_cloud" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_base_cloud" ) );
 	info->Spinners->Base->Size = Vector2( 90, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -25 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 55;
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_cave" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_cave" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_cave_190" ), -1, 1, 7 ) );
@@ -897,44 +897,44 @@ namespace CloudberryKingdom
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cave_190" ), -1, 1, 1 ) );
 
 	sprite_anim( _T( "Serpent_Cave" ), _T( "Serpent_Cloud" ), 1, 2, 8 );
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Cave" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Cave" ) );
 	sprite_anim( _T( "Serpent_Fish_Cave" ), _T( "Serpent_Fish_Cloud" ), 1, 2, 5 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Cave" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Cave" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_cave" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_cave" ) );
 
-	info->Spikes->Spike_Renamed->Sprite = _T( "spike_cave" );
+	info->Spikes->Spike_Renamed->Sprite = TextureOrAnim::Get( _T( "spike_cave" ) );
 	info->Spikes->Spike_Renamed->Size = Vector2( 38, -1 );
 	info->Spikes->Spike_Renamed->Offset = Vector2( 0, 1 );
 	info->Spikes->Spike_Renamed->RelativeOffset = true;
-	info->Spikes->Base->Sprite = _T( "spike_base_cave_1" );
+	info->Spikes->Base->Sprite = TextureOrAnim::Get( _T( "spike_base_cave_1" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
 
-	info->Boulders->Ball->Sprite = _T( "floater_spikey_cave" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_cave" ) );
 	info->Boulders->Ball->Size = Vector2( 150, -1 );
 	info->Boulders->Radius = 120;
-	info->Boulders->Chain->Sprite = _T( "floater_chain_cave" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_cave" ) );
 	info->Boulders->Chain->Width = 55;
 	info->Boulders->Chain->RepeatWidth = 1900;
 
-	info->Boulders->Ball->Sprite = _T( "Floater_Boulder_Cloud" );
+	info->Boulders->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Boulder_Cloud" ) );
 	info->Boulders->Ball->Size = Vector2( 200, -1 );
 	info->Boulders->Radius = 140;
-	info->Boulders->Chain->Sprite = _T( "Floater_Rope_Cave" );
+	info->Boulders->Chain->Sprite = TextureOrAnim::Get( _T( "Floater_Rope_Cave" ) );
 	info->Boulders->Chain->RepeatWidth = 1900;
 	info->Boulders->Chain->Width = 55;
 
-	info->SpikeyGuys->Ball->Sprite = _T( "floater_spikey_cave" );
+	info->SpikeyGuys->Ball->Sprite = TextureOrAnim::Get( _T( "floater_spikey_cave" ) );
 	info->SpikeyGuys->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyGuys->Ball->Offset = Vector2( 0, 8 );
 	info->SpikeyGuys->Base->Sprite.reset();
 	info->SpikeyGuys->Rotate = true;
 	info->SpikeyGuys->Radius = 116;
 	info->SpikeyGuys->RotateOffset = -1.57f;
-	info->SpikeyGuys->Chain->Sprite = _T( "floater_chain_cave" );
+	info->SpikeyGuys->Chain->Sprite = TextureOrAnim::Get( _T( "floater_chain_cave" ) );
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 
@@ -942,7 +942,7 @@ namespace CloudberryKingdom
 	//info.Orbs.Ball.Size = new Vector2(200, -1);
 	//info.Orbs.Radius = 140;
 
-	info->SpikeyLines->Ball->Sprite = _T( "Floater_Spikey_Cave" );
+	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( _T( "Floater_Spikey_Cave" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
 	info->SpikeyLines->Ball->Offset = Vector2( -8, 12 );
 	info->SpikeyLines->Radius = 100;
@@ -950,16 +950,16 @@ namespace CloudberryKingdom
 	info->SpikeyLines->RotateSpeed = .05f;
 
 	sprite_anim( _T( "blob_cave" ), _T( "blob_cave" ), 1, 4, 2 );
-	info->Blobs->Body->Sprite = _T( "blob_cave" );
+	info->Blobs->Body->Sprite = TextureOrAnim::Get( _T( "blob_cave" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = _T( "BlobGoo5" );
+	info->Blobs->GooSprite = TextureOrAnim::Get( _T( "BlobGoo5" ) );
 
-	info->Clouds->Sprite->Sprite = _T( "cloud_cave" );
+	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( _T( "cloud_cave" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 104 );
 
-	info->Coins->Sprite->Sprite = _T( "coin_blue" );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( _T( "coin_blue" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -983,16 +983,21 @@ std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLook
 	{
 		TileList.push_back( tileset );
 
+		// FIXME: These used to be AddOrOverwrite.
+
 		// Add the tileset to the Guid lookup
-		GuidLookup.AddOrOverwrite( tileset->Guid, tileset );
+		GuidLookup[ tileset->Guid ] = tileset;
+		//GuidLookup.AddOrOverwrite( tileset->Guid, tileset );
 
 		// Add the tileset to the Name lookup
-		NameLookup.AddOrOverwrite( tileset->Name, tileset );
+		NameLookup[ tileset->Name ] = tileset;
+		//NameLookup.AddOrOverwrite( tileset->Name, tileset );
 
 		// Add the tileset to the Path lookup
 		if ( tileset->MyPath.length() > 0 )
 		{
-			PathLookup.AddOrOverwrite( tileset->MyPath, tileset );
+			PathLookup[ tileset->MyPath ] = tileset;
+			//PathLookup.AddOrOverwrite( tileset->MyPath, tileset );
 		}
 	}
 
@@ -1049,7 +1054,7 @@ std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLook
 		sprite_anim = std::make_shared<AnimationData_Texture>( texture_root, start_frame, end_frame );
 
 		// Set speed based on how long each frame is.
-		sprite_anim->Anims[ 0 ].Speed = 1 / frame_length;
+		sprite_anim->Anims[ 0 ].Speed = 1.f / frame_length;
 
 		// Add new sprite animation to the texture wad.
 		Tools::TextureWad->Add( sprite_anim, name );
@@ -1069,8 +1074,9 @@ std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLook
 		info->ScreenshotString = _T( "Screenshot_Random" );
 		info->HasCeiling = true;
 		info->FlexibleHeight = false;
-		const Upgrade tempVector[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_SPIKE };
-		info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
+		Upgrade tempVector[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_SPIKE };
+		AddRange<Upgrade>( info->ObstacleUpgrades, VecFromArray( tempVector ) );
+		//info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
 
 		// Random
 		Random = info = std::make_shared<TileSet>();
@@ -1080,8 +1086,9 @@ std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLook
 		AddTileSet( info );
 		info->MyBackgroundType = BackgroundType::Random;
 		info->ScreenshotString = _T( "Screenshot_Random" );
-		const Upgrade tempVector2[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_FIREBALL, Upgrade_PINKY };
-		info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) ) );
+		Upgrade tempVector2[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_FIREBALL, Upgrade_PINKY };
+		AddRange( info->ObstacleUpgrades, VecFromArray( tempVector2 ) );
+		//info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) ) );
 
 		// Sprite effects
 		LoadSpriteEffects();
@@ -1090,7 +1097,15 @@ std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLook
 		TileSets::LoadCode();
 
 		// Freeplay tilesets
-		const std::shared_ptr<TileSet>  tempVector3[] = { TileSets::Random, _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
+		const std::shared_ptr<TileSet>  tempVector3[] = {
+			TileSets::Random,
+			TileSet::Get( _T( "sea" ) ),
+			TileSet::Get( _T( "hills" ) ),
+			TileSet::Get( _T( "forest" ) ),
+			TileSet::Get( _T( "cloud" ) ),
+			TileSet::Get( _T( "cave" ) ),
+			TileSet::Get( _T( "castle" ) )
+		};
 		CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 	}
 
