@@ -26,12 +26,18 @@ namespace CloudberryKingdom
 			return dict.find( item ) != dict.end();
 		}
 
-		std::shared_ptr<Set<T> > operator + ( T item )
-		{
-			if ( !this->dict.find( item ) != this->dict.end() )
-				this->dict.insert( make_pair( item, true ) );
+		//std::shared_ptr<Set<T> > operator + ( T item )
+		//{
+		//	if ( !this->dict.find( item ) != this->dict.end() )
+		//		this->dict.insert( make_pair( item, true ) );
 
-			return this;
+		//	return this;
+		//}
+
+		void Add( const T &item )
+		{
+			if ( dict.find( item ) == this->dict.end() )
+				dict.insert( std::make_pair( item, true ) );
 		}
 
 		/*std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()

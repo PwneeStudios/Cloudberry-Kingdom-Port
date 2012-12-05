@@ -164,7 +164,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		int DesiredLength = 35;
 		float y_spacing = 120;
 		Vector2 pos = Vector2( -973, 322 );
-		for ( std::vector<ScoreEntry*>::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end(); ++score )
+		for ( std::vector<std::shared_ptr<ScoreEntry> >::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end(); ++score )
 		{
 			Text = std::make_shared<EzText>( MyScoreList->ScoreString( *score, DesiredLength ), Resources::Font_Grobold42 );
 			SetHeaderProperties( Text );

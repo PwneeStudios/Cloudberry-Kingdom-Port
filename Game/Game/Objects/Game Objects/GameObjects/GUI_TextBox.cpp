@@ -314,7 +314,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e )
+	/*void GUI_TextBox::CharEntered( const std::shared_ptr<void> &o, const std::shared_ptr<CharacterEventArgs> &e )
 	{
 		if ( !Active )
 			return;
@@ -363,7 +363,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e )
+	/*void GUI_TextBox::KeyDown( const std::shared_ptr<void> &o, const std::shared_ptr<KeyEventArgs> &e )
 	{
 		if ( !Active )
 			return;

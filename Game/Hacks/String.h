@@ -59,6 +59,13 @@ inline std::wstring Format( const wchar_t *fmt, ... )
 	return _T( "" );
 }
 
+// FIXME: Do not understand why format doesn't take a wstring like this method (Used in VerifyDeleteSeed.cpp, other Format wouldn't compile)
+//inline std::wstring Format( std::wstring s, ... )
+//{
+//	// FIXME: Implement this. 
+//	return _T( "" );
+//}
+
 template<class T>
 T Parse( const std::wstring &str )
 {

@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class SaveLoadSeedMenu : public VerifyBaseMenu
 	{
+#if defined(WINDOWS)
 	private:
 		class MakeSaveHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
@@ -19,7 +20,7 @@ namespace CloudberryKingdom
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
-
+#else
 	private:
 		class SaveLoadSeedsMakeSaveLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
@@ -30,6 +31,7 @@ namespace CloudberryKingdom
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
+#endif
 
 	private:
 		class LoadProxy : public Lambda_1<std::shared_ptr<MenuItem> >

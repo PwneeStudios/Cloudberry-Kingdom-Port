@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -53,7 +54,7 @@ namespace CloudberryKingdom
 
 	void AlertBaseMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500, true );
+		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		Backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( Backdrop );
 	}
@@ -78,7 +79,7 @@ namespace CloudberryKingdom
 		// Make the backdrop
 		MakeBackdrop();
 
-		std::shared_ptr<EzText> message = std::make_shared<EzText>( Message, ItemFont, 700, true, true );
+		std::shared_ptr<EzText> message = std::make_shared<EzText>( Message, ItemFont, 700.f, true, true );
 		message->Name = _T( "Message" );
 		MyPile->Add( message );
 
@@ -87,11 +88,11 @@ namespace CloudberryKingdom
 		MyMenu->setControl( getControl() );
 
 		std::shared_ptr<MenuItem> OkItem = std::make_shared<MenuItem>( std::make_shared<EzText>( OkText, ItemFont, true, true ), _T( "Message" ) );
-		OkItem->setGo( Cast::ToItem( std::make_shared<OkProxy>( shared_from_this() ) ) );
+		OkItem->setGo( Cast::ToItem( std::make_shared<OkProxy>( std::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) ) );
 		AddItem( OkItem );
 		OkItem->SelectSound.reset();
 
-		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( std::make_shared<OkProxy>( shared_from_this() ) );
+		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( std::make_shared<OkProxy>( std::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) );
 
 		EnsureFancy();
 

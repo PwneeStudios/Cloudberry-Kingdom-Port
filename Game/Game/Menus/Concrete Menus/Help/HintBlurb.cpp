@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -22,7 +20,7 @@ namespace CloudberryKingdom
 
 	void HintBlurb::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( 0, true, false );
+		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true, false );
 		Backdrop->setTextureName( _T( "WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1250, 138 ) );
 		Backdrop->setPos( Vector2( 0, 0 ) );
@@ -69,7 +67,7 @@ namespace CloudberryKingdom
 		MyPile->MyTextList.clear();
 
 		// Add the new text
-		Text = std::make_shared<EzText>( text, ItemFont, 1800, false, false,.575f );
+		Text = std::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
 		Text->setScale( Text->getScale() * .74f );
 
 		MyPile->Add( Text );
@@ -107,7 +105,7 @@ namespace CloudberryKingdom
 
 	bool HintBlurb::ShouldDie()
 	{
-		return ButtonCheck::AllState( -1 ).Down && Step > 95 || ButtonCheck::GetDir( -1 ).Length() > ::5 && Step > 140 || ButtonCheck::State(ControllerButtons_B, -2).Pressed;
+		return ButtonCheck::AllState( -1 ).Down && Step > 95 || ButtonCheck::GetDir( -1 ).Length() > .5f && Step > 140 || ButtonCheck::State(ControllerButtons_B, -2).Pressed;
 	}
 
 	void HintBlurb::Kill()

@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	{
 		MinLoading += extra_wait;
 
-		HintText = std::make_shared<EzText>( hint, Resources::Font_Grobold42, 10000, true, true );
+		HintText = std::make_shared<EzText>( hint, Resources::Font_Grobold42, 10000.f, true, true );
 		HintText->setScale( HintText->getScale() * .6125f );
 		CkColorHelper::_x_x_HappyBlueColor( HintText );
 		//HintText.OutlineColor = Color.Purple.ToVector4();
@@ -29,11 +29,11 @@ namespace CloudberryKingdom
 		BackgroundQuad->SetToDefault();
 
 		BackgroundQuad->Set( _T( "LoadingStrip" ) );
-		BackgroundQuad->Quad_Renamed->SetColor( Color::Gray );
+		BackgroundQuad->Quad_Renamed.SetColor( Color::Gray );
 
 		BlackQuad = std::make_shared<QuadClass>();
 		BlackQuad->SetToDefault();
-		BlackQuad->Quad_Renamed->SetColor( Color( 0, 0, 0, 0 ) );
+		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 0 ) );
 
 		LoadingText = std::make_shared<EzText>( Localization::Words_LOADING, Resources::Font_Grobold42, true, true );
 		LoadingText->setScale( LoadingText->getScale() * .445f );
@@ -68,8 +68,8 @@ namespace CloudberryKingdom
 
 			Vector2 size = CenterObject->BoxList[ 0 ]->Size();
 			float ratio = size.Y / size.X;
-			int width = Tools::TheGame->Resolution.Bob_Renamed::X;
-			CenterObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PresentationParameters, width, static_cast<int>( width * ratio ) ); //Tools.Device.PresentationParameters.BackBufferWidth / 4, Tools.Device.PresentationParameters.BackBufferHeight / 4);
+			int width = Tools::TheGame->Resolution.Bob_Renamed.X;
+			CenterObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, width, static_cast<int>( width * ratio ) ); //Tools.Device.PresentationParameters.BackBufferWidth / 4, Tools.Device.PresentationParameters.BackBufferHeight / 4);
 
 			//CenterObject.FinishLoading(Tools.QDrawer, Tools.Device, Tools.TextureWad, Tools.EffectWad, Tools.Device.PresentationParameters, 400, 550);
 			CenterObject->ParentQuad->Scale( Vector2( 1.35f, 1.35f ) );
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 			if ( FadeAlpha > 1.2f )
 				Tools::ShowLoadingScreen = false;
 		}
-		BlackQuad->Quad_Renamed->SetColor( Color( 0, 0, 0, FadeAlpha ) );
+		BlackQuad->Quad_Renamed.SetColor( Color( 0.f, 0.f, 0.f, FadeAlpha ) );
 
 		if ( CenterObject != 0 )
 		{

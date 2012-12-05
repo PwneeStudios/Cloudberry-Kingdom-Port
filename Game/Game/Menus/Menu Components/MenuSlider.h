@@ -5,31 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class MenuSlider : public MenuSliderBase
 	{
 	public:
-		virtual std::vector<std::wstring> GetViewables();
-
-		virtual std::wstring ToCode( const std::wstring &suffix );
-
 		Vector2 SliderShift, TabOffset;
 
 		std::shared_ptr<QuadClass> SliderBack, Slider, StartQuad, EndQuad;
@@ -47,10 +25,10 @@ namespace CloudberryKingdom
 		virtual void InitializeSlider();
 
 	public:
-		const Vector2 &getSliderBackSize() const;
+		const Vector2 getSliderBackSize() const;
 		void setSliderBackSize( const Vector2 &value );
 
-		const Vector2 &getSliderSize() const;
+		const Vector2 getSliderSize() const;
 		void setSliderSize( const Vector2 &value );
 
 		virtual float Height();

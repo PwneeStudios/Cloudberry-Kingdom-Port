@@ -5,22 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	class WrappedFloat;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// The base class for all derived MenuSlider classes
 	/// </summary>
@@ -49,7 +33,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::shared_ptr<Lambda> OnSetValue;
 
-		const bool &getIsMaxed() const;
+		const bool getIsMaxed() const;
 
 	protected:
 		void Slide();
@@ -58,11 +42,11 @@ namespace CloudberryKingdom
 		int DelayToSlideSound;
 		int DelayToSlideSoundCount;
 
-		const virtual Vector2 &getBL() const;
-		const virtual Vector2 &getTR() const;
-		const virtual Vector2 &getSlider_TR() const;
+		const virtual Vector2 getBL() const;
+		const virtual Vector2 getTR() const;
+		const virtual Vector2 getSlider_TR() const;
 
-		const float &getVal() const;
+		const float getVal() const;
 		void setVal( const float &value );
 
 		std::shared_ptr<WrappedFloat> _MyFloat;

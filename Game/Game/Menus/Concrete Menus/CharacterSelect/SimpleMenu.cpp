@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -61,7 +62,7 @@ namespace CloudberryKingdom
 
 	SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
 	{
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = Parent;
 
@@ -72,7 +73,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::OnAdd();
 
-		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, shared_from_this() );
+		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) );
 		MyGame->AddGameObject( Arrows );
 	}
 
@@ -80,13 +81,13 @@ int SimpleMenuBase::NoMoveDuration = 20;
 
 	void SimpleMenuBase::SimpleToCustom()
 	{
-		Call( std::make_shared<CustomizeMenu>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( std::make_shared<CustomizeMenu>( getControl(), MyCharacterSelect ) );
 		Hide();
 	}
 
 	void SimpleMenuBase::SimpleToDone()
 	{
-		Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
 		Hide();
 	}
 
@@ -120,7 +121,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		do
 		{
 			i++;
-			if ( i >= ColorSchemeManager::ColorSchemes.size() )
+			if ( i >= static_cast<int>( ColorSchemeManager::ColorSchemes.size() ) )
 			{
 				if ( MyCharacterSelect->HasCustom() )
 					i = -1;
@@ -204,9 +205,9 @@ int SimpleMenuBase::NoMoveDuration = 20;
 	void SimpleMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
 	{
 		item->MySelectedText->setScale( FontScale );
-	item->MyText->setScale( item->MySelectedText->getScale() );
+		item->MyText->setScale( item->MySelectedText->getScale() );
 
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 	}
 #endif
 
@@ -233,7 +234,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		// Customize
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) );
 		item->Name = _T( "Custom" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToCustomProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<SimpleToCustomProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		ItemPos = Vector2( -523, -174 );
 		PosAdd = Vector2( 0, -220 );
 		AddItem( item );
@@ -247,17 +248,17 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		// Confirm
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
 		item->Name = _T( "Done" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToDoneProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<SimpleToDoneProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Select "Confirm" to start with
 		MyMenu->SelectItem( item );
 
-		MyMenu->OnB = Cast::ToMenu( std::make_shared<SimpleToBackProxy>( shared_from_this() ) );
+		MyMenu->OnB = Cast::ToMenu( std::make_shared<SimpleToBackProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score_Screen" ), 485 );
-		backdrop = std::make_shared<QuadClass>( 0, true, false );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score_Screen" ), 485.f );
+		backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true, false );
 		backdrop->setTextureName( _T( "Score_Screen" ) );
 		backdrop->ScaleYToMatchRatio( 485 );
 
@@ -305,7 +306,7 @@ int SimpleMenuBase::NoMoveDuration = 20;
 		MyMenu->setPos( Vector2( 0, 0 ) );
 		MyPile->setPos( Vector2( 0, 0 ) );
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 #endif
 

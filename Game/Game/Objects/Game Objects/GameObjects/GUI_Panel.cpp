@@ -65,8 +65,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_Panel::GetViewables()
 	{
-		const std::wstring* tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		const std::shared_ptr<std::wstring>  tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
+		return std::vector<std::shared_ptr<std::wstring> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 	}
 
 	void GUI_Panel::setControl( const int &value )

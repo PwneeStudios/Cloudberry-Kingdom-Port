@@ -221,7 +221,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	std::vector<std::wstring> PictureIcon::GetViewables()
 	{
-		return std::vector<std::wstring*> ();
+		return std::vector<std::shared_ptr<std::wstring> > ();
 	}
 
 	PictureIcon::PictureIcon( const std::shared_ptr<SpriteInfo> &info )
@@ -365,7 +365,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	std::vector<std::wstring> CustomHoverIcon::GetViewables()
 	{
-		return std::vector<std::wstring*> ();
+		return std::vector<std::shared_ptr<std::wstring> > ();
 	}
 
 	CustomHoverIcon::CustomHoverIcon()

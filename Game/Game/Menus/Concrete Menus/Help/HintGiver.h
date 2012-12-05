@@ -64,9 +64,9 @@ namespace CloudberryKingdom
 	public:
 		void Check_QuickSpawn();
 
-		const static std::wstring &getQuickSpawnHint();
+		const static std::wstring getQuickSpawnHint();
 
-		const static std::wstring &getPowerupHint();
+		const static std::wstring getPowerupHint();
 
 		void Check_YForHelp();
 	};

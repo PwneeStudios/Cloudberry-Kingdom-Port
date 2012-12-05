@@ -1,20 +1,7 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
-
-	std::vector<std::wstring> MenuSlider::GetViewables()
-	{
-		const std::wstring* tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ) };
-		return std::vector<std::wstring*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	}
-
-	std::wstring MenuSlider::ToCode( const std::wstring &suffix )
-	{
-		return Format( _T( "_item = {0}FindItemByName(\"{1}\"); if (_item != null) {{ _item.SetPos = {2}; _item.MyText.Scale = {3}f; _item.MySelectedText.Scale = {4}f; _item.SelectIconOffset = {5}; ((MenuSlider)_item).SliderShift = {6}; }}" ), suffix, Name, Tools::ToCode( Pos ), MyText->getScale(), MySelectedText->getScale(), Tools::ToCode(SelectIconOffset), Tools::ToCode(SliderShift) );
-	}
 
 	void MenuSlider::DoGrayOut()
 	{
@@ -63,19 +50,19 @@ namespace CloudberryKingdom
 	#endif
 
 		SliderBack = std::make_shared<QuadClass>();
-		SliderBack->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::SliderBack_Texture;
+		SliderBack->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::SliderBack_Texture );
 		Vector2 Size = Vector2( 250, 35 ) * 1.35f;
 		SliderBack->Base.e1 *= Size.X;
 		SliderBack->Base.e2 *= Size.Y;
 
 		Slider = std::make_shared<QuadClass>();
-		Slider->Quad_Renamed->MyTexture = Menu::DefaultMenuInfo::Slider_Texture;
+		Slider->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::Slider_Texture );
 		Size = Vector2( 28, 55 ) * 1.35f;
 		Slider->Base.e1 *= Size.X;
 		Slider->Base.e2 *= Size.Y;
 	}
 
-	const Vector2 &MenuSlider::getSliderBackSize() const
+	const Vector2 MenuSlider::getSliderBackSize() const
 	{
 		return SliderBack->Base.GetScale();
 	}
@@ -85,7 +72,7 @@ namespace CloudberryKingdom
 		SliderBack->Base.SetScale( value );
 	}
 
-	const Vector2 &MenuSlider::getSliderSize() const
+	const Vector2 MenuSlider::getSliderSize() const
 	{
 		return Slider->Base.GetScale();
 	}

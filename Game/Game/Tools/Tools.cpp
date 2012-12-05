@@ -174,7 +174,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 #endif
 	}
 
-	void Tools::Write( const std::shared_ptr<Object> &obj )
+	void Tools::Write( const std::shared_ptr<void> &obj )
 	{
 #if defined(DEBUG)
 	std::cout << obj << std::endl;
@@ -903,7 +903,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 		return GetBitsFromLine( reader->ReadLine() );
 	}
 
-	/*std::shared_ptr<Object> Tools::ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader )
+	/*std::shared_ptr<void> Tools::ReadFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamReader> &reader )
 	{
 		std::shared_ptr<std::wstring> line = reader->ReadLine();
 		while ( line != 0 )
@@ -1004,7 +1004,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 					else
 						constructor = itemType->GetConstructor( Type_EMPTY_TYPES );
 
-					std::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
+					std::shared_ptr<void> newobj = constructor->Invoke( Type_EMPTY_TYPES );
 					//ReadFields(newobj, reader);
 					if ( std::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
 						( std::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
@@ -1031,7 +1031,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 int Tools::WriteRecursiveDepth = 0;
 int Tools::WriteObjId = 0;
 
-	/*void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
+	/*void Tools::WriteFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
 	{
 		WriteRecursiveDepth++;
 		std::wstring WhiteSpace = _T( "" );
@@ -1179,95 +1179,6 @@ int Tools::WriteObjId = 0;
 				dict[ Bits[ i ] ] = i;
 		return dict;
 	}
-
-/*	void Tools::ReadLineToObj( std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits )
-	{
-		ReadLineToObj( obj, Bits[ 0 ], Bits );
-	}
-
-	void Tools::ReadLineToObj( std::shared_ptr<void> &obj, std::wstring field, std::vector<std::wstring> &Bits )
-	{
-		// If field name has a period in it, resolve recursively.
-		int period = field.find( _T( "." ) );
-		if ( period > 0 )
-		{
-			std::wstring subfield = field.substr( period + 1 );
-			field = field.substr( 0, period );
-
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var subobject_field = obj->GetType()->GetField(field);
-			if ( subobject_field == 0 )
-			{
-				Tools::Log( Format( _T( "Field {0} not found." ), field ) );
-				return;
-			}
-
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var subobject = subobject_field->GetValue( obj );
-			if ( subobject == 0 )
-			{
-				Tools::Log( Format( _T( "Subfield {0} was a null object and could not be written into." ), field ) );
-				return;
-			}
-
-			ReadLineToObj( subobject, subfield, Bits );
-		}
-		// otherwise parse the input into the given field.
-		else
-		{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			var fieldinfo = obj->GetType()->GetField(field);
-			if ( fieldinfo == 0 )
-			{
-				Tools::Log( Format( _T( "Field {0} not found." ), field ) );
-				return;
-			}
-
-
-			// int
-			if ( fieldinfo->FieldType == int::typeid )
-				fieldinfo->SetValue( obj, ParseInt( Bits[ 1 ] ) );
-			// float
-			if ( fieldinfo->FieldType == float::typeid )
-				fieldinfo->SetValue( obj, ParseFloat( Bits[ 1 ] ) );
-			// Vector2
-			else if ( fieldinfo->FieldType == Vector2::typeid )
-				fieldinfo->SetValue( obj, ParseToVector2( Bits[ 1 ], Bits[ 2 ] ) );
-			// Vector4
-			else if ( fieldinfo->FieldType == Vector4::typeid )
-				fieldinfo->SetValue( obj, ParseToVector4( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ] ) );
-			// Color
-			else if ( fieldinfo->FieldType == Color::typeid )
-				fieldinfo->SetValue( obj, ParseToColor( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ] ) );
-			// bool
-			else if ( fieldinfo->FieldType == bool::typeid )
-				fieldinfo->SetValue( obj, bool::Parse( Bits[ 1 ] ) );
-			// EzTexture
-			else if ( fieldinfo->FieldType == EzTexture::typeid )
-				fieldinfo->SetValue( obj, Tools::TextureWad->FindByName( Bits[ 1 ] ) );
-			// EzEffect
-			else if ( fieldinfo->FieldType == EzEffect::typeid )
-				fieldinfo->SetValue( obj, Tools::EffectWad->FindByName( Bits[ 1 ] ) );
-			// TextureOrAnim
-			else if ( fieldinfo->FieldType == TextureOrAnim::typeid )
-				fieldinfo->SetValue( obj, Tools::TextureWad->FindTextureOrAnim( Bits[ 1 ] ) );
-			// string
-			else if ( fieldinfo->FieldType == std::wstring::typeid )
-				if ( Bits.size() == 1 )
-					fieldinfo->SetValue( obj, _T( "" ) );
-				else
-					fieldinfo->SetValue( obj, Bits[ 1 ] );
-			// PhsxData
-			else if ( fieldinfo->FieldType == PhsxData::typeid )
-				fieldinfo->SetValue( obj, Tools::ParseToPhsxData( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ], Bits[ 5 ], Bits[ 6 ] ) );
-			// BasePoint
-			else if ( fieldinfo->FieldType == BasePoint::typeid )
-				fieldinfo->SetValue( obj, Tools::ParseToBasePoint( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ], Bits[ 5 ], Bits[ 6 ] ) );
-			// MyOwnVertexFormat
-			else if ( fieldinfo->FieldType == MyOwnVertexFormat::typeid )
-				fieldinfo->SetValue( obj, Tools::ParseToMyOwnVertexFormat( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ], Bits[ 5 ], Bits[ 6 ], Bits[ 7 ], Bits[ 8 ] ) );
-		}
-	}*/
 
 	bool Tools::BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit )
 	{

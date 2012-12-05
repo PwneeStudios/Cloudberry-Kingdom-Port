@@ -808,7 +808,6 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::ResetSliders()
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
 			std::shared_ptr<PhsxSlider> slider = std::dynamic_pointer_cast<PhsxSlider>( *item );

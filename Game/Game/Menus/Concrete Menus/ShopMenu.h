@@ -5,38 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class Buyable;
-}
-
-namespace CloudberryKingdom
-{
-	class ScrollBar;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Hat;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class VerifyPurchaseMenu : public VerifyBaseMenu
 	{
 	private:
@@ -141,7 +109,7 @@ namespace CloudberryKingdom
 		void UpdateAll();
 
 	private:
-		static std::wstring ClrString( ClrTextFx data );
+		static std::wstring ClrString( std::shared_ptr<ClrTextFx> data );
 
 		void SetItem( const std::shared_ptr<MenuItem> &item );
 
@@ -161,7 +129,7 @@ namespace CloudberryKingdom
 		ShopMenu();
 
 	private:
-		void MakeHeader( const std::shared_ptr<MenuItem> &Header, const std::wstring &str );
+		void MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str );
 
 
 		void MakeRest();

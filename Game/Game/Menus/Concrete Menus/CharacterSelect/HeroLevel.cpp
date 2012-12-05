@@ -1,16 +1,12 @@
 ﻿#include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
 	HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	{
 		InitializeInstanceFields();
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;
 
@@ -38,7 +34,7 @@ namespace CloudberryKingdom
 
 		SetHeroLevel();
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void HeroLevel::SetHeroLevel()

@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -53,7 +51,7 @@ namespace CloudberryKingdom
 		int FindIndex = 0;
 		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
 		{
-			if ( static_cast<int>( ( *item )->MyObject ) == index )
+			if ( *std::static_pointer_cast<int>( ( *item )->MyObject ) == index )
 				break;
 			FindIndex++;
 		}
@@ -66,7 +64,7 @@ namespace CloudberryKingdom
 
 	int ListSelectPanel::GetAssociatedIndex()
 	{
-		return static_cast<int>( MyList->getCurObj() );
+		return *std::static_pointer_cast<int>( MyList->getCurObj() );
 	}
 
 	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
@@ -99,32 +97,32 @@ namespace CloudberryKingdom
 		MyMenu = std::make_shared<Menu>( false );
 		EnsureFancy();
 
-		MyMenu->OnB = Cast::ToMenu( std::make_shared<BackProxy>( shared_from_this() ) );
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<SelectProxy>( shared_from_this() ) );
+		MyMenu->OnB = Cast::ToMenu( std::make_shared<BackProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
+		MyMenu->OnA = Cast::ToMenu( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 
 		MyList = std::make_shared<MenuList>();
 		MyList->Name = _T( "list" );
 		MyList->Center = true;
-		MyList->OnIndexSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
-		MyList->setGo( Cast::ToItem( std::make_shared<SelectProxy>( shared_from_this() ) ) );
+		MyList->OnIndexSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) );
+		MyList->setGo( Cast::ToItem( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) );
 		MyMenu->Add( MyList );
 
 		//var Done = new MenuItem(new EzText("Use", ItemFont));
 		std::shared_ptr<MenuItem> Done = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_USE, ItemFont ) );
 		Done->Name = _T( "Done" );
-		Done->setGo( Cast::ToItem( std::make_shared<SelectProxy>( shared_from_this() ) ) );
+		Done->setGo( Cast::ToItem( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( Done );
 
 		//var BackButton = new MenuItem(new EzText("{pBackArrow2,80,?}", ItemFont));
 		//var BackButton = new MenuItem(new EzText("Cancel", ItemFont));
 		std::shared_ptr<MenuItem> BackButton = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) );
 		BackButton->Name = _T( "Cancel" );
-		BackButton->setGo( Cast::ToItem( std::make_shared<BackProxy>( shared_from_this() ) ) );
+		BackButton->setGo( Cast::ToItem( std::make_shared<BackProxy>( std::static_pointer_cast<ListSelectPanel>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( BackButton );
 
 		MyPile->Add( std::make_shared<EzText>( Header, Resources::Font_Grobold42, true ), _T( "Header" ) );
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void ListSelectPanel::OnAdd()

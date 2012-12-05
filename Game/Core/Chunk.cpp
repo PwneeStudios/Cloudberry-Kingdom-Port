@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		_Current.reset();
 	}
 
-	const std::shared_ptr<Object> &ChunkEnumerator::getIEnumerator_Current() const
+	const std::shared_ptr<void> &ChunkEnumerator::getIEnumerator_Current() const
 	{
 		return getCurrent();
 	}

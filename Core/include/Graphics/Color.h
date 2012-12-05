@@ -60,16 +60,17 @@ struct Color
 		return R == c.R && G == c.G && B == c.B && A == c.A;
 	}
 
+	static Color Azure;
 	static Color Black;
-	static Color Transparent;
-	static Color White;
-
-	static Color Red;
-	static Color LightSeaGreen;
 	static Color BlueViolet;
 	static Color Fuchsia;
 	static Color Gainsboro;
-	static Color Azure;
+	static Color Gray;
+	static Color LightSeaGreen;
+	static Color Red;
+	static Color SkyBlue;
+	static Color Transparent;
+	static Color White;
 };
 
 Color bColor( unsigned char R, unsigned char G, unsigned char B )

@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -43,7 +41,7 @@ namespace CloudberryKingdom
 
 	void SaveSeedAs::SaveSeedAsOnEnterLambda::Apply()
 	{
-		if ( ssa->TextBox->Text->Length <= 0 )
+		if ( ssa->TextBox->getText().length() <= 0 )
 			return;
 
 		ssa->Save( 0 );
@@ -77,13 +75,13 @@ namespace CloudberryKingdom
 		// Save seed
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 		item->Name = _T( "Save" );
-		item->setGo( std::make_shared<SaveProxy>( shared_from_this() ) );
+		item->setGo( std::make_shared<SaveProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -100,15 +98,15 @@ namespace CloudberryKingdom
 
 			// Success!
 			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY );
-			ok->OnOk = std::make_shared<OnOkProxy>( shared_from_this() );
-			Call( ok );
+			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
+			GUI_Panel::Call( ok );
 		}
 		else
 		{
 			// Failure!
 			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH );
-			ok->OnOk = std::make_shared<OnOkProxy>( shared_from_this() );
-			Call( ok );
+			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
+			GUI_Panel::Call( ok );
 		}
 
 		Hide( PresetPos_LEFT );
@@ -173,8 +171,8 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<SaveSeedAsOnEnterLambda>( shared_from_this() ) );
-		TextBox->OnEscape->Add( std::make_shared<SaveSeedAsOnEscapeLambda>( shared_from_this() ) );
+		TextBox->OnEnter->Add( std::make_shared<SaveSeedAsOnEnterLambda>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEscape->Add( std::make_shared<SaveSeedAsOnEscapeLambda>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();

@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -12,7 +10,7 @@ namespace CloudberryKingdom
 
 	void LoadSeedAs::LoadSeedAsOnEnterLambda::Apply()
 	{
-		SavedSeedsGUI::LoadSeed( lsa->TextBox->Text, lsa );
+		SavedSeedsGUI::LoadSeed( lsa->TextBox->getText(), lsa );
 		lsa->Active = false;
 		lsa->ReturnToCaller();
 	}
@@ -73,13 +71,13 @@ namespace CloudberryKingdom
 		// Load seed
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 		item->Name = _T( "Load" );
-		item->setGo( std::make_shared<LoadProxy1>( shared_from_this() ) );
+		item->setGo( std::make_shared<LoadProxy1>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -131,7 +129,7 @@ namespace CloudberryKingdom
 	#if defined(WINDOWS)
 		try
 		{
-			clipboard = System::Windows::Forms::Clipboard::GetText();
+			clipboard = Clipboard::GetText();
 		}
 		catch ( ... )
 		{
@@ -147,8 +145,8 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<LoadSeedAsOnEnterLambda>( shared_from_this() ) );
-		TextBox->OnEscape->Add( std::make_shared<LoadSeedAsBackLambda>( shared_from_this() ) );
+		TextBox->OnEnter->Add( std::make_shared<LoadSeedAsOnEnterLambda>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEscape->Add( std::make_shared<LoadSeedAsBackLambda>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();
@@ -162,6 +160,6 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		SavedSeedsGUI::LoadSeed( TextBox->getText(), shared_from_this() );
+		SavedSeedsGUI::LoadSeed( TextBox->getText(), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 }

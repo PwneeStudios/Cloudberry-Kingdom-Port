@@ -5,57 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class GamerTag;
-}
-
-namespace CloudberryKingdom
-{
-	class HeroLevel;
-}
-
-namespace CloudberryKingdom
-{
-	class Doll;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuListItem;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
-
-namespace CloudberryKingdom
-{
-	class CharacterSelect
+	class CharacterSelect : public std::enable_shared_from_this<CharacterSelect>
 	{
 	public:
 		class RandomizeProxy : public Lambda
@@ -91,10 +41,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<Doll> MyDoll;
 
 		int PlayerIndex;
-		const std::shared_ptr<PlayerData> &getPlayer() const;
+		const std::shared_ptr<PlayerData> getPlayer() const;
 
 		std::vector<int> ItemIndex;
-		std::vector<std::vector<MenuListItem*> > ItemList;
+		std::vector<std::vector<std::shared_ptr<MenuListItem> > > ItemList;
 
 	private:
 		Vector2 Center, NormalZoomCenter;
@@ -126,7 +76,7 @@ namespace CloudberryKingdom
 		void SetIndex( int i );
 
 	private:
-		int FindIndex( std::vector<MenuListItem*> &list, ClrTextFx obj );
+		int FindIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx obj );
 
 		/// <summary>
 		/// Find the indices that would reproduce the current color scheme.

@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 	CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
 	{
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = Parent;
 
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	{
 		item->MySelectedText->setScale( FontScale );
 	item->MyText->setScale( item->MySelectedText->getScale() );
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 
 		item->SelectIconOffset = Vector2( 0, -160 );
 	}
@@ -62,13 +62,13 @@ namespace CloudberryKingdom
 		// Make the menu
 		MyMenu = std::make_shared<Menu>( false );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MakeItems();
 
 		EnsureFancy();
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPos();
 	}
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 
 	void CustomizeMenu::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
 		Hide();
 	}
 
@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Word, ItemFont ) );
 		item->Name = Name;
-		item->setGo( Cast::ToItem( std::make_shared<CreateColorSelectProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<CreateColorSelectProxy>( std::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) ) );
 
 		AddItem( item );
 	}
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<MenuItem> back = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ), _T( "Done" ) );
 		AddItem( back );
-		back->setGo( std::make_shared<GoProxy>( shared_from_this() ) );
+		back->setGo( std::make_shared<GoProxy>( std::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) );
 	}
 
 	void CustomizeMenu::OnAdd()
@@ -186,14 +186,16 @@ namespace CloudberryKingdom
 			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_HAT, MyCharacterSelect, MyMenu->CurIndex );
 			ClrSelect = list;
 
-			for ( CloudberryKingdom::Set<Hat*>::const_iterator hat = CharacterSelectManager::AvailableHats->begin(); hat != CharacterSelectManager::AvailableHats->end(); ++hat )
+			for ( std::map<std::shared_ptr<Hat>, bool >::const_iterator hat = CharacterSelectManager::AvailableHats->dict.begin(); hat != CharacterSelectManager::AvailableHats->dict.end(); ++hat )
+			/*for ( Set<std::shared_ptr<Hat> >::const_iterator hat = CharacterSelectManager::AvailableHats->begin(); hat != CharacterSelectManager::AvailableHats->end(); ++hat )*/
 			{
-				int hat_index = ColorSchemeManager::HatInfo.find( *hat );
-				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *hat )->Name, Resources::Font_Grobold42, false, true ) );
+				int hat_index = IndexOf( ColorSchemeManager::HatInfo, hat->first );
+				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( hat->first->Name, Resources::Font_Grobold42, false, true ) );
 				item->ScaleText( .375f );
-				item->MyObject = hat_index;
+				item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( hat_index ) );
 
-				list->MyList->AddItem( item, hat_index );
+				//list->MyList->AddItem( item, hat_index );
+				list->MyList->AddItem( item, item->MyObject );
 			}
 			ClrSelect->MyPile->setPos( AmountShifted );
 		ClrSelect->MyMenu->setPos( ClrSelect->MyPile->getPos() );
@@ -204,14 +206,15 @@ namespace CloudberryKingdom
 			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_BEARD, MyCharacterSelect, MyMenu->CurIndex );
 			ClrSelect = list;
 
-			for ( CloudberryKingdom::Set<Hat*>::const_iterator beard = CharacterSelectManager::AvailableBeards->begin(); beard != CharacterSelectManager::AvailableBeards->end(); ++beard )
+			for ( std::map<std::shared_ptr<Hat>, bool >::const_iterator beard = CharacterSelectManager::AvailableBeards->dict.begin(); beard != CharacterSelectManager::AvailableBeards->dict.end(); ++beard )
+			//for ( CloudberryKingdom::Set<std::shared_ptr<Hat> >::const_iterator beard = CharacterSelectManager::AvailableBeards->begin(); beard != CharacterSelectManager::AvailableBeards->end(); ++beard )
 			{
-				int beard_index = ColorSchemeManager::BeardInfo.find( *beard );
-				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *beard )->Name, Resources::Font_Grobold42, false, true ) );
+				int beard_index = IndexOf( ColorSchemeManager::BeardInfo, beard->first );
+				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( beard->first->Name, Resources::Font_Grobold42, false, true ) );
 				item->ScaleText( .375f );
-				item->MyObject = beard_index;
+				item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( beard_index ) );
 
-				list->MyList->AddItem( item, beard_index );
+				list->MyList->AddItem( item, item->MyObject );
 			}
 			ClrSelect->MyPile->setPos( AmountShifted );
 		ClrSelect->MyMenu->setPos( ClrSelect->MyPile->getPos() );
@@ -219,32 +222,32 @@ namespace CloudberryKingdom
 		// Make the color select
 		else
 		{
-			std::vector list = MyCharacterSelect->ItemList[ MyMenu->CurIndex ];
+			std::vector<std::shared_ptr<MenuListItem> > list = MyCharacterSelect->ItemList[ MyMenu->CurIndex ];
 			std::shared_ptr<ListSelectPanel> select = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_COLOR, MyCharacterSelect, MyMenu->CurIndex );
 			ClrSelect = select;
 
-			for ( std::vector::const_iterator item = list.begin(); item != list.end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 			{
-				ClrTextFx data = static_cast<ClrTextFx>( ( *item )->obj );
+				std::shared_ptr<ClrTextFx> data = std::static_pointer_cast<ClrTextFx>( ( *item )->obj );
 
 				// Check if color is available
 				if ( !CloudberryKingdomGame::UnlockAll )
-					if ( data.Price > 0 && !PlayerManager::Bought( data ) )
+					if ( data->Price > 0 && !PlayerManager::Bought( data ) )
 						continue;
 
-				int clr_index = list.find( *item );
-				std::shared_ptr<MenuItem> _item = std::make_shared<MenuItem>( std::make_shared<EzText>( data.Name, Resources::Font_Grobold42, false, true ) );
+				int clr_index = IndexOf( list, *item );
+				std::shared_ptr<MenuItem> _item = std::make_shared<MenuItem>( std::make_shared<EzText>( data->Name, Resources::Font_Grobold42, false, true ) );
 				_item->ScaleText( .375f );
-				_item->MyObject = clr_index;
+				_item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( clr_index ) );
 
-				select->MyList->AddItem( _item, clr_index );
+				select->MyList->AddItem( _item, _item->MyObject );
 			}
 		}
 
 		// Set the index of the list
 		ClrSelect->SetIndexViaAssociated( MyCharacterSelect->ItemIndex[ MyMenu->CurIndex ] );
 
-		Call( ClrSelect );
+		GUI_Panel::Call( ClrSelect );
 		Hide();
 	}
 

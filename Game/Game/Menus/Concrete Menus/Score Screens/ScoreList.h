@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 
 		std::wstring GetPrefix();
 
-		std::vector<ScoreEntry*> Scores;
+		std::vector<std::shared_ptr<ScoreEntry> > Scores;
 
 		ScoreList();
 		ScoreList( int DefaultValue );

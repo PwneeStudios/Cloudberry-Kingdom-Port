@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -12,7 +13,7 @@ namespace CloudberryKingdom
 		Msb->SetCallback();
 	}
 
-	const bool &MenuSliderBase::getIsMaxed() const
+	const bool MenuSliderBase::getIsMaxed() const
 	{
 		return getMyFloat()->getVal() == getMyFloat()->MaxVal;
 	}
@@ -23,22 +24,22 @@ namespace CloudberryKingdom
 			OnSlide->Apply();
 	}
 
-	const Vector2 &MenuSliderBase::getBL() const
+	const Vector2 MenuSliderBase::getBL() const
 	{
 		return Vector2();
 	}
 
-	const Vector2 &MenuSliderBase::getTR() const
+	const Vector2 MenuSliderBase::getTR() const
 	{
 		return Vector2();
 	}
 
-	const Vector2 &MenuSliderBase::getSlider_TR() const
+	const Vector2 MenuSliderBase::getSlider_TR() const
 	{
 		return Vector2();
 	}
 
-	const float &MenuSliderBase::getVal() const
+	const float MenuSliderBase::getVal() const
 	{
 		return getMyFloat()->getVal();
 	}
@@ -58,7 +59,7 @@ namespace CloudberryKingdom
 	void MenuSliderBase::setMyFloat( const std::shared_ptr<WrappedFloat> &value )
 	{
 		_MyFloat = value;
-		_MyFloat->SetCallback = std::make_shared<SetCallbackProxy>( shared_from_this() );
+		_MyFloat->SetCallback = std::make_shared<SetCallbackProxy>( std::static_pointer_cast<MenuSliderBase>( shared_from_this() ) );
 		SetCallback();
 	}
 
@@ -169,7 +170,7 @@ namespace CloudberryKingdom
 		float length = tangent.Length();
 		float t = Vector2::Dot( dif, tangent ) / ( length * length );
 
-		t = CoreMath::Restrict( 0, 1, t );
+		t = CoreMath::RestrictVal( 0.f, 1.f, t );
 
 		getMyFloat()->setVal((1 - t) * getMyFloat()->MinVal + t * getMyFloat()->MaxVal);
 
@@ -223,7 +224,7 @@ namespace CloudberryKingdom
 				float Sensitivty = ButtonCheck::ThresholdSensitivity;
 				if ( abs( Dir.X ) > Sensitivty )
 				{
-					getMyFloat()->setVal(static_cast<int>(getMyFloat()->getVal()) + Math::Sign(Dir.X));
+					getMyFloat()->setVal( static_cast<float>( static_cast<int>( getMyFloat()->getVal() ) + ::Sign( Dir.X ) ) );
 					Slide();
 
 					DelayCount = SelectDelay;
@@ -232,7 +233,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if ( abs( Dir.X ) > ::5 )
+			if ( abs( Dir.X ) > .5f )
 			{
 				getMyFloat()->setVal(getMyFloat()->getVal() + Dir.X * Speed);
 				Slide();
@@ -240,7 +241,7 @@ namespace CloudberryKingdom
 				Speed = Acceleration * MaxSlideSpeed + ( 1 - Acceleration ) * Speed;
 			}
 
-			if ( abs( Dir.X ) < .5f || Math::Sign( Dir.X ) != Math::Sign( PrevDir.X ) )
+			if ( abs( Dir.X ) < .5f || ::Sign( Dir.X ) != ::Sign( PrevDir.X ) )
 				Speed = InitialSlideSpeed;
 		}
 

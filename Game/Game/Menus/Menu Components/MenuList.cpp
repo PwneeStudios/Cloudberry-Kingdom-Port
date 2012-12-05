@@ -139,7 +139,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj )
+	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<void> &obj )
 	{
 		MyList.push_back( item );
 		ObjDict.insert( std::make_pair( item, obj ) );

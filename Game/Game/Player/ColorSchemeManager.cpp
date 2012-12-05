@@ -31,10 +31,10 @@ std::vector<ColorScheme> ColorSchemes, ColorSchemeManager::ComputerColorSchemes 
 			ComputerColorSchemes.push_back( scheme );
 	}
 
-std::vector<MenuListItem*> HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, ColorSchemeManager::OutlineList = 0;
-std::vector<Hat*> ColorSchemeManager::HatInfo = 0;
-std::vector<Hat*> ColorSchemeManager::BeardInfo = 0;
-std::vector<MenuListItem*> ColorSchemeManager::ClrList = 0;
+std::vector<std::shared_ptr<MenuListItem> > HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, ColorSchemeManager::OutlineList = 0;
+std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo = 0;
+std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo = 0;
+std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList = 0;
 ClrTextFx ColorSchemeManager::None = 0;
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
@@ -57,18 +57,18 @@ ClrTextFx ColorSchemeManager::None = 0;
 
 	void ColorSchemeManager::InitColorSchemes()
 	{
-		ColorList = std::vector<MenuListItem*>();
-		CapeColorList = std::vector<MenuListItem*>();
-		CapeOutlineColorList = std::vector<MenuListItem*>();
-		HatList = std::vector<MenuListItem*>();
-		TextureList = std::vector<MenuListItem*>();
-		OutlineList = std::vector<MenuListItem*>();
+		ColorList = std::vector<std::shared_ptr<MenuListItem> >();
+		CapeColorList = std::vector<std::shared_ptr<MenuListItem> >();
+		CapeOutlineColorList = std::vector<std::shared_ptr<MenuListItem> >();
+		HatList = std::vector<std::shared_ptr<MenuListItem> >();
+		TextureList = std::vector<std::shared_ptr<MenuListItem> >();
+		OutlineList = std::vector<std::shared_ptr<MenuListItem> >();
 
 		ColorSchemes = std::vector<ColorScheme>();
 		ComputerColorSchemes = std::vector<ColorScheme>();
 
-		HatInfo = std::vector<Hat*>();
-		BeardInfo = std::vector<Hat*>();
+		HatInfo = std::vector<std::shared_ptr<Hat> >();
+		BeardInfo = std::vector<std::shared_ptr<Hat> >();
 
 		// Fill the beard list
 		std::shared_ptr<Hat> beard;
@@ -519,7 +519,7 @@ ClrTextFx ColorSchemeManager::None = 0;
 		OutlineList.push_back( NoTexture );
 
 		// Fill the cape outline list
-		for ( std::vector<MenuListItem*>::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
 			Color clr = ( static_cast<ClrTextFx>( ( *item )->obj ) ).Clr;
 			Color color = Color( clr.ToVector3() *.8f );
@@ -553,8 +553,8 @@ ClrTextFx ColorSchemeManager::None = 0;
 		//CapeColorList.Add(new MenuListItem(fx, "AngryCape"));
 
 		// Wings and cape mod functions
-		std::vector<MenuListItem*> NewCapeList = std::vector<MenuListItem*>();
-		for ( std::vector<MenuListItem*>::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
+		std::vector<std::shared_ptr<MenuListItem> > NewCapeList = std::vector<std::shared_ptr<MenuListItem> >();
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
 			cape = static_cast<ClrTextFx>( ( *item )->obj );
 			cape.ModObject = CapeOn;
@@ -563,8 +563,8 @@ ClrTextFx ColorSchemeManager::None = 0;
 		CapeColorList = NewCapeList;
 
 		// Combine all colors
-		std::vector<MenuListItem*> temp;
-		temp = std::vector<MenuListItem*>();
+		std::vector<std::shared_ptr<MenuListItem> > temp;
+		temp = std::vector<std::shared_ptr<MenuListItem> >();
 		temp.AddRange( ColorList );
 		temp.AddRange( CapeColorList );
 		temp.AddRange( CapeOutlineColorList );
@@ -581,12 +581,12 @@ ClrTextFx ColorSchemeManager::None = 0;
 		AddScheme( ColorScheme( Localization::Words_RED, Localization::Words_NONE, Localization::Words_NONE, Localization::Words_ANTLERS, Localization::Words_VANDYKE ), false );
 	}
 
-	std::vector<MenuListItem*> ColorSchemeManager::MakeUnique( std::vector<MenuListItem*> &list )
+	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::MakeUnique( std::vector<std::shared_ptr<MenuListItem> > &list )
 	{
 		std::shared_ptr<Set<int> > guids = std::make_shared<Set<int> >();
-		std::vector<MenuListItem*> uniques = std::vector<MenuListItem*>();
+		std::vector<std::shared_ptr<MenuListItem> > uniques = std::vector<std::shared_ptr<MenuListItem> >();
 
-		for ( std::vector<MenuListItem*>::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
 			int guid = ( static_cast<ClrTextFx>( ( *item )->obj ) ).Guid;
 

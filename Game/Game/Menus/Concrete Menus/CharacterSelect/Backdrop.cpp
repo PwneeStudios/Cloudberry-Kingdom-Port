@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -43,7 +41,7 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
 
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "CharSelect" ), 1778 );
+		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "CharSelect" ), 1778.f );
 		MyPile->Add( Backdrop, _T( "Backdrop" ) );
 
 		//var Backdrop = new QuadClass("CharSelect_Backdrop", 1778);

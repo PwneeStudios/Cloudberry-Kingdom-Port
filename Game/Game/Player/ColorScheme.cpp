@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	MenuListItem::MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word )
+	MenuListItem::MenuListItem( const std::shared_ptr<void> &obj, Localization::Words word )
 	{
 		this->obj = obj;
 		this->word = word;
@@ -132,11 +132,11 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 		return Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor.Name, CapeColor.Name, CapeOutlineColor.Name, HatData->Name, BeardData->Name );
 	}
 
-	int ColorScheme::IndexOf( std::vector<MenuListItem*> &list, ClrTextFx clr )
+	int ColorScheme::IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuListItem*>::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
 			if ( static_cast<ClrTextFx>( ( *item )->obj ) == clr )
 				return index;
@@ -145,11 +145,11 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 		return -1;
 	}
 
-	int ColorScheme::IndexOf( std::vector<Hat*> &list, const std::shared_ptr<Hat> &hat )
+	int ColorScheme::IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<Hat*>::const_iterator _hat = list.begin(); _hat != list.end(); ++_hat )
+		for ( std::vector<std::shared_ptr<Hat> >::const_iterator _hat = list.begin(); _hat != list.end(); ++_hat )
 		{
 			if ( *_hat == hat )
 				return index;

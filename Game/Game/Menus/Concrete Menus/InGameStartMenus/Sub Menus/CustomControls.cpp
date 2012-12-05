@@ -4,12 +4,12 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	ControlItem::ControlItem( Localization::Words description, Keys key ) : MenuItem( std::make_shared<EzText>( description, Resources::Font_Grobold42, 2000, false, false,.65f ) )
+	ControlItem::ControlItem( Localization::Words description, Keys key ) : MenuItem( std::make_shared<EzText>( description, Resources::Font_Grobold42, 2000.f, false, false, .65f ) )
 	{
 		MyKey = key;
-		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 72 );
+		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 72.f );
 		//MyQuad.Quad.SetColor(CustomControlsMenu.SecondaryKeyColor);
-		MyQuad->Quad_Renamed->SetColor( Color( 240,240,240 ) );
+		MyQuad->Quad_Renamed.SetColor( bColor( 240, 240, 240 ) );
 		SetKey( MyKey );
 	}
 #endif
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
+	Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 #endif
 
 #if defined(PC_VERSION)
@@ -268,7 +268,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500, true );
+		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1376.984f, 1077.035f ) );
 		Backdrop->setPos( Vector2( -18.6521f, -10.31725f ) );
@@ -316,8 +316,8 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		// Customize
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( std::make_shared<ResetProxy>( shared_from_this() ) );
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->setGo( std::make_shared<ResetProxy>( std::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 
 		ItemPos = Vector2( 698.9696f, 892.0638f );
 		item->UnaffectedByScroll = true;
@@ -425,7 +425,7 @@ Color CustomControlsMenu::SecondaryKeyColor = Color::SkyBlue;
 		AddItem( item );
 
 		ButtonCheck::KillSecondary();
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<InitOnButtonHelper>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<InitOnButtonHelper>( std::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) );
 
 		// Shift everything
 		EnsureFancy();

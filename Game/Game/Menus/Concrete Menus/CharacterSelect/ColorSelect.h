@@ -5,19 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MenuList;
-}
-
-namespace CloudberryKingdom
-{
-	class CharacterSelect;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ListSelectPanel : public CkBaseMenu
 	{
 	private:

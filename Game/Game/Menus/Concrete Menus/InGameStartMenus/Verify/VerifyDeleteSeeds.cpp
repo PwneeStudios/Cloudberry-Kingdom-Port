@@ -55,28 +55,28 @@ namespace CloudberryKingdom
 		// Header
 		std::wstring Text;
 		if ( NumSeeds == 1 )
-			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS ), NumSeeds );
+			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS ).c_str(), NumSeeds );
 		else
-			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ), NumSeeds );
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, _T( "Header" ) );
+			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ).c_str(), NumSeeds );
+		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( _T( "Header" ) ) );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 		HeaderText->setPos( HeaderPos );
 
 
 		// Yes
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont, _T( "Yes" ) ) );
-		item->setGo( std::make_shared<VerifyDeleteYesGoLambda>( shared_from_this() ) );
+		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( _T( "Yes" ) ) ) );
+		item->setGo( std::make_shared<VerifyDeleteYesGoLambda>( std::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont, _T( "No" ) ) );
-		item->setGo( std::make_shared<VerifyDeleteNoGoLambda>( shared_from_this() ) );
+		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( _T( "No" ) ) ) );
+		item->setGo( std::make_shared<VerifyDeleteNoGoLambda>( std::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<VerifyDeleteOnXLambda>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<VerifyDeleteOnXLambda>( std::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
