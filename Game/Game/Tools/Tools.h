@@ -333,7 +333,7 @@ static std::wstring SourceTextureDirectory();
 		static int DrawCount, PhsxCount;
 
 		static std::shared_ptr<EzSong> Song_140mph, Song_Happy, Song_BlueChair, Song_Ripcurl, Song_Evidence, Song_GetaGrip, Song_House, Song_Nero, Song_FatInFire, Song_Heavens, Song_TidyUp, Song_WritersBlock;
-		static std::vector<EzSong*> SongList_Standard;
+		static std::vector<std::shared_ptr<EzSong> > SongList_Standard;
 
 		static bool FreeCam;
 		static bool DrawBoxes;

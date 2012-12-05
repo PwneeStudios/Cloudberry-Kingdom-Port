@@ -22,14 +22,14 @@ namespace CloudberryKingdom
 	class SpriteAnimGroup
 	{
 	public:
-		std::map<int, SpriteAnim*> SpriteAnims;
+		std::map<int, std::shared_ptr<SpriteAnim> > SpriteAnims;
 
 		void Release();
 
 		SpriteAnimGroup();
 
 		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
-			const std::shared_ptr<Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc );
+			std::shared_ptr<Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2> > SpriteFunc );
 
 		std::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
 	};

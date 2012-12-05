@@ -3,64 +3,24 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class SwarmRecord;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnimGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class BobLink;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
 
 namespace CloudberryKingdom
 {
 	class SwarmBundle
 	{
 	private:
-		class BobToSpritesLambda : public Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2>
+		class BobToSpritesLambda : public Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2>
 		{
 		private:
 			std::shared_ptr<Bob> bob;
 		public:
 			BobToSpritesLambda( const std::shared_ptr<Bob> &bob );
 
-			void Apply( const std::map<int, std::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos );
+			void Apply( const std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > > &dict, const Vector2 &pos );
 		};
 
 	private:
-		std::vector<SwarmRecord*> Swarms;
+		std::vector<std::shared_ptr<SwarmRecord> > Swarms;
 	public:
 		std::shared_ptr<SwarmRecord> CurrentSwarm;
 
@@ -79,9 +39,9 @@ namespace CloudberryKingdom
 
 		void SetSwarm( const std::shared_ptr<Level> &level, int i );
 
-		const int &getSwarmIndex() const;
+		const int getSwarmIndex() const;
 
-		const int &getNumSwarms() const;
+		const int getNumSwarms() const;
 
 		bool GetNextSwarm( const std::shared_ptr<Level> &level );
 

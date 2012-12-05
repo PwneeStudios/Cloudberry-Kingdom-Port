@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -48,25 +49,25 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 
 		// Backrop
-		std::shared_ptr<QuadClass> backdrop2 = std::make_shared<QuadClass>( _T( "White" ), 1500 );
-		backdrop2->Quad_Renamed->SetColor( ColorHelper::GrayColor( .1f ) );
+		std::shared_ptr<QuadClass> backdrop2 = std::make_shared<QuadClass>( _T( "White" ), 1500.f );
+		backdrop2->Quad_Renamed.SetColor( ColorHelper::GrayColor( .1f ) );
 		backdrop2->setAlpha( .45f );
 		MyPile->Add( backdrop2, _T( "Backdrop2" ) );
 
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "White" ), 1500 );
-		backdrop->Quad_Renamed->SetColor( ColorHelper::GrayColor( .25f ) );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "White" ), 1500.f );
+		backdrop->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
 		backdrop->setAlpha( .35f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 
 		Vector2 AdditionalAdd = Vector2();
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 140, _T("Button_Go") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 140.f, static_cast<std::wstring>( _T("Button_Go") ) ) );
 		Play = std::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->Name = _T( "Play" );
 		SetGrayHeaderProperties( Play );
 	#else
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_Go") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, _T("Button_Go") ) );
 		Play = std::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->MyFloatColor = ( Color( 67, 198, 48, 255 ) ).ToVector4();
 		Play->Name = _T( "Play" );
@@ -75,12 +76,12 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 140, _T("Button_Back") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 140.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
 		End = std::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->Name = _T( "Back" );
 		SetGrayHeaderProperties( End );
 	#else
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 85, _T("Button_Back") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
 		End = std::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->MyFloatColor = ( Color( 239, 41, 41, 255 ) ).ToVector4();
 		End->Name = _T( "Back" );
@@ -89,7 +90,7 @@ namespace CloudberryKingdom
 
 		if ( Type == ReplayGUIType_REPLAY )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 90, _T("Button_X") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
 			Toggle = std::make_shared<EzText>( Localization::Words_SINGLE, ItemFont, true );
 			Toggle->Name = _T( "Toggle" );
 	#if defined(PC_VERSION)
@@ -101,26 +102,26 @@ namespace CloudberryKingdom
 			SetToggleText();
 		}
 
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85, _T("Button_LR") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85.f, static_cast<std::wstring>( _T("Button_LR") ) ) );
 		Speed = std::make_shared<EzText>( Localization::Words_SPEED, ItemFont );
-		Speed_NAME = _T( "Speed" );
+		Speed->Name = _T( "Speed" );
 		SetGrayHeaderProperties( Speed );
 
 		if ( Type == ReplayGUIType_COMPUTER )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85, _T("Button_LB") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
 			LB = std::make_shared<EzText>( Localization::Words_RESET, ItemFont, true );
 			LB->Name = _T( "Reset" );
 			SetGrayHeaderProperties( LB );
 		}
 		else
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85, _T("Button_LB") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
 			LB = std::make_shared<EzText>( Localization::Words_PREVIOUS, ItemFont, true );
 			LB->Name = _T( "Prev" );
 			SetGrayHeaderProperties( LB );
 
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85, _T("Button_RB") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85.f, static_cast<std::wstring>( _T("Button_RB") ) ) );
 			RB = std::make_shared<EzText>( Localization::Words_NEXT, ItemFont, true );
 			RB->Name = _T( "Next" );
 			SetGrayHeaderProperties( RB );
@@ -129,14 +130,14 @@ namespace CloudberryKingdom
 
 		BigPaused = std::make_shared<QuadClass>();
 		BigPaused->SetToDefault();
-		BigPaused->Quad_Renamed->MyTexture = Tools::TextureWad->FindByName( _T( "Replay_GUI\\Paused" ) );
+		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Replay_GUI\\Paused" ) ) );
 		BigPaused->ScaleYToMatchRatio( 355 );
 		MyPile->Add( BigPaused );
 		BigPaused->setPos( Vector2( 1210.557f, 791.1111f ) );
 
 		BigEnd = std::make_shared<QuadClass>();
 		BigEnd->SetToDefault();
-		BigEnd->Quad_Renamed->MyTexture = Tools::TextureWad->FindByName( _T( "Replay_GUI\\End" ) );
+		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Replay_GUI\\End" ) ) );
 		BigEnd->ScaleYToMatchRatio( 255 );
 		BigPaused->ScaleYToMatchRatio( 300 );
 		MyPile->Add( BigEnd );
@@ -351,23 +352,23 @@ namespace CloudberryKingdom
 			case 0:
 				StepControl = true; // Start step control
 				Tools::setPhsxSpeed( 1 );
-				Speed_SUBSTITUTE_TEXT( _T( "x 0" ) );
+				Speed->SubstituteText( _T( "x 0" ) );
 				break;
 			case 1:
 				Tools::setPhsxSpeed( 0 );
-				Speed_SUBSTITUTE_TEXT( _T( "x .5" ) );
+				Speed->SubstituteText( _T( "x .5" ) );
 				break;
 			case 2:
 				Tools::setPhsxSpeed( 1 );
-				Speed_SUBSTITUTE_TEXT( _T( "x 1" ) );
+				Speed->SubstituteText( _T( "x 1" ) );
 				break;
 			case 3:
 				Tools::setPhsxSpeed( 2 );
-				Speed_SUBSTITUTE_TEXT( _T( "x 2" ) );
+				Speed->SubstituteText( _T( "x 2" ) );
 				break;
 			case 4:
 				Tools::setPhsxSpeed( 3 );
-				Speed_SUBSTITUTE_TEXT( _T( "x 4" ) );
+				Speed->SubstituteText( _T( "x 4" ) );
 				break;
 		}
 
@@ -432,7 +433,7 @@ namespace CloudberryKingdom
 		}
 
 		float Dir = ButtonCheck::State( ControllerButtons_LJ, -1 ).Dir.X;
-		if ( PrevDir != Math::Sign( Dir ) )
+		if ( PrevDir != ::Sign( Dir ) )
 			Delay = 0;
 		if ( Delay == 0 )
 		{
@@ -450,7 +451,7 @@ namespace CloudberryKingdom
 
 			if ( Change )
 			{
-				SpeedVal = CoreMath::Restrict( 0, 4, SpeedVal );
+				SpeedVal = CoreMath::RestrictVal( 0, 4, SpeedVal );
 
 				//if (SpeedVal == 1) Delay = 30;
 				//else if (SpeedVal == 2) Delay = 30;
@@ -470,7 +471,7 @@ namespace CloudberryKingdom
 		{
 			Delay--;
 		}
-		PrevDir = Math::Sign( Dir );
+		PrevDir = ::Sign( Dir );
 
 		// Switch between swarm and single view (Toggle)
 		if ( Type == ReplayGUIType_REPLAY )
@@ -486,7 +487,7 @@ namespace CloudberryKingdom
 		// End the replay
 		bool EndReplay = false;
 	#if defined(PC_VERSION)
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys_Escape ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Escape ) )
 			EndReplay = true;
 	#endif
 

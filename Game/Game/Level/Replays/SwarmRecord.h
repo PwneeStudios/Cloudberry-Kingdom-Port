@@ -3,36 +3,6 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class LevelPiece;
-}
-
-namespace CloudberryKingdom
-{
-	class Recording;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class BobLink;
-}
-
-namespace CloudberryKingdom
-{
-	class SpriteAnimGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
 
 namespace CloudberryKingdom
 {
@@ -41,7 +11,7 @@ namespace CloudberryKingdom
 	public:
 		std::shared_ptr<LevelPiece> MyLevelPiece;
 
-		std::queue<Recording*> Records;
+		std::vector<std::shared_ptr<Recording> > Records;
 		std::shared_ptr<Recording> MainRecord;
 #if defined(XBOX)
 	private:
