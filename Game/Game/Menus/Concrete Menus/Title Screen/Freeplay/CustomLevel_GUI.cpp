@@ -388,14 +388,14 @@ Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACT
 	void CustomLevel_GUI::AnyHero()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuItem*>::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
 			( *item )->Selectable = true;
 	}
 
 	void CustomLevel_GUI::UpHero_ModShown()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<MenuItem*>::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
 		{
 			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( ( *item )->MyObject ) != 0 || std::dynamic_pointer_cast<BobPhsxRocketbox>( ( *item )->MyObject ) != 0 )
 				( *item )->Selectable = false;

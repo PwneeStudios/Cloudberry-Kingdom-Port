@@ -206,7 +206,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 	int SavedSeedsGUI::NumSeedsToDelete()
 	{
 		int count = 0;
-		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
 			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 != seeditem && seeditem->MarkedForDeletion )
@@ -243,7 +243,7 @@ std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 		player->MySavedSeeds->SeedStrings.clear();
 
 		// Save seeds not marked for deletion.
-		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
 			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 == seeditem )

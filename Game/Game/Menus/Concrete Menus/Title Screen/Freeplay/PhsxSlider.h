@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		virtual std::vector<std::wstring> GetViewables();
 
 		static std::shared_ptr<EzFont> Font;
-		static std::shared_ptr<Lambda_1<MenuItem*> > Process;
+		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > Process;
 
 	private:
 		BobPhsx::CustomData MyType;

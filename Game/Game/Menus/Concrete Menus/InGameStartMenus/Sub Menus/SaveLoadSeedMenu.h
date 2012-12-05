@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class SaveLoadSeedMenu : public VerifyBaseMenu
 	{
 	private:
-		class MakeSaveHelper : public Lambda_1<MenuItem*>
+		class MakeSaveHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<GUI_Panel> panel;
@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class SaveLoadSeedsMakeSaveLambda : public Lambda_1<MenuItem*>
+		class SaveLoadSeedsMakeSaveLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<PlayerData> player;
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class LoadProxy : public Lambda_1<MenuItem*>
+		class LoadProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class CopyProxy : public Lambda_1<MenuItem*>
+		class CopyProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class LoadStringProxy : public Lambda_1<MenuItem*>
+		class LoadStringProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
@@ -84,14 +84,14 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	public:
-		static std::shared_ptr<Lambda_1<MenuItem*> > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
+		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 
 	private:
 		std::shared_ptr<IAsyncResult> kyar;
 		static void Save( const std::shared_ptr<MenuItem> &_item, const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 #else
 	public:
-		static std::shared_ptr<Lambda_1<MenuItem*> > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
+		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 
 	private:
 		static std::shared_ptr<IAsyncResult> kyar;

@@ -8,19 +8,19 @@ namespace CloudberryKingdom
 	class Cast
 	{
 	private:
-		class ToMenuHelper1 : public LambdaFunc_1<Menu*, bool>
+		class ToMenuHelper1 : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
-			std::shared_ptr<Lambda_1<MenuItem*> > a;
+			std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > a;
 
 		public:
-			ToMenuHelper1( const std::shared_ptr<Lambda_1<MenuItem*> > &a );
+			ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
 
 			bool Apply( const std::shared_ptr<Menu> &dummy );
 		};
 
 	private:
-		class LambdaWrapper : public Lambda_1<MenuItem*>
+		class LambdaWrapper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<Lambda> a;
@@ -35,16 +35,16 @@ namespace CloudberryKingdom
 		class Lambda_1Wrapper : public Lambda
 		{
 		private:
-			std::shared_ptr<Lambda_1<Menu*> > a;
+			std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > a;
 
 		public:
-			Lambda_1Wrapper( const std::shared_ptr<Lambda_1<Menu*> > &a );
+			Lambda_1Wrapper( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
 
 			void Apply();
 		};
 
 	private:
-		class ToMenuHelper : public LambdaFunc_1<Menu*, bool>
+		class ToMenuHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<Lambda> a;
@@ -56,19 +56,19 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		static std::shared_ptr<LambdaFunc_1<Menu*, bool> > ToMenu( const std::shared_ptr<Lambda> &a );
+		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda> &a );
 
-		static std::shared_ptr<LambdaFunc_1<Menu*, bool> > ToMenu( const std::shared_ptr<Lambda_1<MenuItem*> > &a );
+		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
 
-		static std::shared_ptr<Lambda_1<MenuItem*> > ToItem( const std::shared_ptr<Lambda> &a );
+		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > ToItem( const std::shared_ptr<Lambda> &a );
 
-		static std::shared_ptr<Lambda> ToAction( const std::shared_ptr<Lambda_1<Menu*> > &a );
+		static std::shared_ptr<Lambda> ToAction( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
 	};
 
-	class Menu
+	class Menu : public std::enable_shared_from_this<Menu>
 	{
 	private:
-		class FindItemByNameLambda : public LambdaFunc_1<MenuItem*, bool>
+		class FindItemByNameLambda : public LambdaFunc_1<std::shared_ptr<MenuItem> , bool>
 		{
 		private:
 			std::wstring name;
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class DefaultOnBProxy : public LambdaFunc_1<Menu*, bool>
+		class DefaultOnBProxy : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		public:
 			bool Apply( const std::shared_ptr<Menu> &menu );
@@ -154,10 +154,10 @@ namespace CloudberryKingdom
 		const int &getControl() const;
 		void setControl( const int &value );
 
-		std::vector<MenuItem*> Items;
+		std::vector<std::shared_ptr<MenuItem> > Items;
 		int CurIndex;
 
-		const std::shared_ptr<MenuItem> &getCurItem() const;
+		const std::shared_ptr<MenuItem> getCurItem() const;
 
 		int SelectDelay;
 	private:
@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 		/// Called when the player presses (B) while the menu is active.
 		/// Should return true if the menu phsx step should be ended immediately after executing the delegate.
 		/// </summary>
-		std::shared_ptr<LambdaFunc_1<Menu*, bool> > OnA, OnB, OnX, OnStart;
+		std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > OnA, OnB, OnX, OnStart;
 		std::shared_ptr<Lambda> OnSelect, OnY;
 
 		Vector2 TR, BL;
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		/// The index of the item to be drawn as selected
 		/// </summary>
 	private:
-		const int &getApparentCurIndex() const;
+		const int getApparentCurIndex() const;
 
 		Vector2 _MyCameraZoom;
 		/// <summary>

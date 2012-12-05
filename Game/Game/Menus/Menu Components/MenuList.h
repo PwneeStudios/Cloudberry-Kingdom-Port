@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class MenuList : public MenuItem
 	{
 	private:
-		class ExpandProxy1 : public Lambda_1<MenuItem*>
+		class ExpandProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<MenuList> ml;
@@ -30,10 +30,10 @@ namespace CloudberryKingdom
 	public:
 		std::shared_ptr<MenuListExpand> MyMenuListExpand;
 		Vector2 MyExpandPos;
-		std::shared_ptr<Lambda_2<MenuListExpand*, MenuItem*> > AdditionalExpandProcessing;
+		std::shared_ptr<Lambda_2<std::shared_ptr<MenuListExpand>, std::shared_ptr<MenuItem> > > AdditionalExpandProcessing;
 		void Expand();
 
-		std::vector<MenuItem*> MyList;
+		std::vector<std::shared_ptr<MenuItem> > MyList;
 		int ListIndex;
 
 	private:
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		virtual float Width();
 
 	private:
-		std::map<MenuItem*, void*> ObjDict;
+		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<void> > ObjDict;
 	public:
 		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
 
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The object associated with the currently selected MenuItem
 		/// </summary>
-		const std::shared_ptr<Object> &getCurObj() const;
+		const std::shared_ptr<void> &getCurObj() const;
 
 		/// <summary>
 		/// When true the list's index will wrap if too large or too small.
@@ -96,8 +96,8 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool DoIndexWrapping;
 
-		const bool &getOnFirstIndex() const;
-		const bool &getOnLastIndex() const;
+		const bool getOnFirstIndex() const;
+		const bool getOnLastIndex() const;
 
 		bool ValidIndex( int index );
 

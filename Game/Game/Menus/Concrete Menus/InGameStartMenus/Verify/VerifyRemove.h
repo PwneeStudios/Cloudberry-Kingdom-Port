@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	class VerifyRemoveMenu : public VerifyBaseMenu
 	{
 	private:
-		class VerifyRemoveYesLambda : public Lambda_1<MenuItem*>
+		class VerifyRemoveYesLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<VerifyRemoveMenu> vrm;

@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class StartMenuGoLambda : public Lambda_1<MenuItem*>
+		class StartMenuGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu_MW_HeroSelect> hs;

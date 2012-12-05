@@ -1,11 +1,9 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-	const int &MiniMenu::getBottomItem() const
+	const int MiniMenu::getBottomItem() const
 	{
 		return TopItem + ItemsToShow - 1;
 	}
@@ -56,13 +54,13 @@ namespace CloudberryKingdom
 		// Draw item text
 		for ( int i = TopItem; i <= getBottomItem(); i++ )
 		{
-			if ( i >= Items.size() )
+			if ( i >= static_cast<int>( Items.size() ) )
 				break;
 
 			std::shared_ptr<MenuItem> item = Items[ i ];
 
 			item->setSetPos( Vector2() );
-			item->PosOffset = getPos() + Shift * (i - TopItem);
+			item->PosOffset = getPos() + Shift * static_cast<float>(i - TopItem);
 
 			item->Draw( true, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(item) );
 		}

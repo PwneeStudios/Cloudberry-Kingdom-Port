@@ -3,8 +3,6 @@
 
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 	class MiniMenu : public Menu
@@ -13,7 +11,7 @@ namespace CloudberryKingdom
 		int ItemsToShow;
 	private:
 		int TopItem;
-		const int &getBottomItem() const;
+		const int getBottomItem() const;
 		void setBottomItem( const int &value );
 
 	public:

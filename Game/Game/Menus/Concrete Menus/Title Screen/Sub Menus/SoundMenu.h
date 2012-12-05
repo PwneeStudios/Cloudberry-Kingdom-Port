@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class InitHideHelper : public Lambda_1<MenuItem*>
+		class InitHideHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SoundMenu> sm;
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class InitCallCustomControlsHelper : public Lambda_1<MenuItem*>
+		class InitCallCustomControlsHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SoundMenu> sm;

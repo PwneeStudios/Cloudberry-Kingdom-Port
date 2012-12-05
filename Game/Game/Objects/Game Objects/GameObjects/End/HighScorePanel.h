@@ -3,28 +3,6 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class ScoreList;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
 
 namespace CloudberryKingdom
 {
@@ -55,7 +33,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class Action_DoneProxy1 : public Lambda_1<MenuItem*>
+		class Action_DoneProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<HighScorePanel> hsp;
@@ -67,7 +45,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class Action_PlayAgainProxy1 : public Lambda_1<MenuItem*>
+		class Action_PlayAgainProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<HighScorePanel> hsp;

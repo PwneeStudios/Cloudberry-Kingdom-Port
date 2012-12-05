@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -33,10 +30,10 @@ namespace CloudberryKingdom
 		if ( !Text )
 		{
 	#if defined(PC_VERSION)
-			if ( Selected && Tools::Mouse.LeftButton == ButtonState::Pressed )
-				Slider->Quad_Renamed->MyTexture = Held;
+			if ( Selected && Tools::Mouse.LeftButton == ButtonState::ButtonState_Pressed )
+				Slider->Quad_Renamed.setMyTexture( Held );
 			else
-				Slider->Quad_Renamed->MyTexture = Normal;
+				Slider->Quad_Renamed.setMyTexture( Normal );
 	#else
 			if ( Selected )
 				Slider->Quad_Renamed->MyTexture = Held;
@@ -44,7 +41,7 @@ namespace CloudberryKingdom
 				Slider->Quad_Renamed->MyTexture = Normal;
 	#endif
 
-			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, Color( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed->MyTexture, Tools::BasicEffect, 85, 0, 0 );
+			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 85, 0, 0 );
 						//new Color(255, 255, 255, 215),
 			StartQuad->setPos( Start );
 			EndQuad->setPos( End );

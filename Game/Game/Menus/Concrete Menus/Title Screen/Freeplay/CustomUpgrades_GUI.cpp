@@ -215,7 +215,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::Zero()
 	{
-		for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
 			std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 			if ( 0 != slider )
@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 	{
 		if ( getMyLevel()->getRnd()->RndFloat() < .25f )
 		{
-			for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
 				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )
@@ -236,7 +236,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			for ( std::vector<MenuItem*>::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
 				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )

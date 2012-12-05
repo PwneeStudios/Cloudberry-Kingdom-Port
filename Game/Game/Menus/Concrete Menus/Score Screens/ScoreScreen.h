@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MenuGo_NewLevelProxy : public Lambda_1<MenuItem*>
+		class MenuGo_NewLevelProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ScoreScreen> ss;
@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MenuGo_ContinueProxy : public Lambda_1<MenuItem*>
+		class MenuGo_ContinueProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ScoreScreen> ss;
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MenuGo_WatchReplayProxy : public Lambda_1<MenuItem*>
+		class MenuGo_WatchReplayProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ScoreScreen> ss;
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class MenuGo_SaveProxy : public Lambda_1<MenuItem*>
+		class MenuGo_SaveProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ScoreScreen> ss;

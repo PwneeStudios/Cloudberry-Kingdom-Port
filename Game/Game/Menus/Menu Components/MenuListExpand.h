@@ -5,26 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuList;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
 	class MenuListExpand : public CkBaseMenu
 	{
 	private:
@@ -40,7 +20,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class InitOnBMenuHelper : public LambdaFunc_1<Menu*, bool>
+		class InitOnBMenuHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<MenuListExpand> mle;

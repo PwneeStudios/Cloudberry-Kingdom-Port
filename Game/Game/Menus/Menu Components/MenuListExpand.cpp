@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -48,11 +49,11 @@ namespace CloudberryKingdom
 		//base.SetItemProperties(item);
 
 		item->MySelectedText->setScale( FontScale );
-	item->MyText->setScale( item->MySelectedText->getScale() );
+		item->MyText->setScale( item->MySelectedText->getScale() );
 
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 
-		item->getGo().reset();
+		item->_Go.reset();
 
 	#if defined(PC_VERSION)
 			item->Padding += Vector2( 0, 35 );
@@ -93,7 +94,7 @@ namespace CloudberryKingdom
 
 		MyMenu->OnB.reset();
 
-		MyMenu->OnB = std::make_shared<InitOnBMenuHelper>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<InitOnBMenuHelper>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
 
 		ItemPos = Vector2( 0, 0 );
 		PosAdd = Vector2( 0, -168 - 3 );
@@ -102,7 +103,7 @@ namespace CloudberryKingdom
 
 		float Width = 0;
 		int index = 0;
-		for ( std::vector<MenuItem*>::const_iterator item = MyMenuList->MyList.begin(); item != MyMenuList->MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenuList->MyList.begin(); item != MyMenuList->MyList.end(); ++item )
 		{
 			index++;
 
@@ -111,7 +112,7 @@ namespace CloudberryKingdom
 
 			std::shared_ptr<MenuItem> clone = ( *item )->Clone();
 			clone->MyInt = index - 1;
-			clone->AdditionalOnSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
+			clone->AdditionalOnSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
 			AddItem( clone );
 			clone->ScaleText( .85f );
 			Vector2 size = clone->MyText->GetWorldSize();
@@ -119,17 +120,17 @@ namespace CloudberryKingdom
 			Width = __max( size.X, Width );
 
 			if ( MyMenuList->AdditionalExpandProcessing != 0 )
-				MyMenuList->AdditionalExpandProcessing->Apply( shared_from_this(), clone );
+				MyMenuList->AdditionalExpandProcessing->Apply( std::static_pointer_cast<MenuListExpand>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) ), clone );
 		}
 
 		// Backdrop
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen_grey" ), 482 );
+		backdrop = std::make_shared<QuadClass>( _T( "score_screen_grey" ), 482.f );
 		//backdrop.Size = backdrop.Size * new Vector2(1f, 2.03f);
 		MyMenu->CalcBounds();
 		float Height = ( MyMenu->TR.Y - MyMenu->BL.Y ) / 2;
 		backdrop->setSize( Vector2( Width / 2 + 88, Height + 70 ) );
 		DefaultBackdropSize = backdrop->getSize();
-		backdrop->Quad_Renamed->RotateUV();
+		backdrop->Quad_Renamed.RotateUV();
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( Width / 2, ( MyMenu->TR.Y + MyMenu->BL.Y ) / 2 ) );

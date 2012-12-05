@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class InitOnAStartHelper : public LambdaFunc_1<Menu*, bool>
+		class InitOnAStartHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
 		private:
 			std::shared_ptr<CustomLevel_GUI> clGui;
@@ -266,7 +266,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class BringLoadProxy1 : public Lambda_1<MenuItem*>
+		class BringLoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CustomLevel_GUI> clGui;

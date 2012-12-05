@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	class SaveSeedAs : public VerifyBaseMenu
 	{
 	private:
-		class SaveProxy : public Lambda_1<MenuItem*>
+		class SaveProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SaveSeedAs> ssa;

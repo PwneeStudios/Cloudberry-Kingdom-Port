@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class YesProxy : public Lambda_1<MenuItem*>
+		class YesProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<VerifyPurchaseMenu> vpm;
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class NoProxy : public Lambda_1<MenuItem*>
+		class NoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<VerifyPurchaseMenu> vpm;
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 	class ShopMenu : public CkBaseMenu
 	{
 	private:
-		class VerifyPurchaseProxy : public Lambda_1<MenuItem*>
+		class VerifyPurchaseProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<ShopMenu> sm;

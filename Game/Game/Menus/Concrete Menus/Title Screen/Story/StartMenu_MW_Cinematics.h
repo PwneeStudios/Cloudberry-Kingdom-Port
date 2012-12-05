@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	class StartMenu_MW_Cinematics : public StartMenu
 	{
 	private:
-		class CinematicsGoLambda : public Lambda_1<MenuItem*>
+		class CinematicsGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<StartMenu_MW_Cinematics> cine;

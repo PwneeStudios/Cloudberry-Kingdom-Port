@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 	void ListSelectPanel::SetIndexViaAssociated( int index )
 	{
 		int FindIndex = 0;
-		for ( std::vector<MenuItem*>::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
 		{
 			if ( static_cast<int>( ( *item )->MyObject ) == index )
 				break;

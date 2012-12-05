@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	class SignInMenu : public CkBaseMenu
 	{
 	private:
-		class SignInNoLambda : public Lambda_1<MenuItem*>
+		class SignInNoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SignInMenu> sim;
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class SignInYesLambda : public Lambda_1<MenuItem*>
+		class SignInYesLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<SignInMenu> sim;

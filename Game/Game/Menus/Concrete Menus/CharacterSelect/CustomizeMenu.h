@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 	class CustomizeMenu : public CkBaseMenu
 	{
 	private:
-		class GoProxy : public Lambda_1<MenuItem*>
+		class GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
 		private:
 			std::shared_ptr<CustomizeMenu> cm;

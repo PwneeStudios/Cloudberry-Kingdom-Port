@@ -1,12 +1,9 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
-	Cast::ToMenuHelper1::ToMenuHelper1( const std::shared_ptr<Lambda_1<MenuItem*> > &a )
+	Cast::ToMenuHelper1::ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a )
 	{
 		this->a = a;
 	}
@@ -27,7 +24,7 @@ namespace CloudberryKingdom
 		a->Apply();
 	}
 
-	Cast::Lambda_1Wrapper::Lambda_1Wrapper( const std::shared_ptr<Lambda_1<Menu*> > &a )
+	Cast::Lambda_1Wrapper::Lambda_1Wrapper( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a )
 	{
 		this->a = a;
 	}
@@ -48,22 +45,22 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	std::shared_ptr<LambdaFunc_1<Menu*, bool> > Cast::ToMenu( const std::shared_ptr<Lambda> &a )
+	std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > Cast::ToMenu( const std::shared_ptr<Lambda> &a )
 	{
 		return std::make_shared<ToMenuHelper>( a );
 	}
 
-	std::shared_ptr<LambdaFunc_1<Menu*, bool> > Cast::ToMenu( const std::shared_ptr<Lambda_1<MenuItem*> > &a )
+	std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > Cast::ToMenu( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a )
 	{
 		return std::make_shared<ToMenuHelper1>( a );
 	}
 
-	std::shared_ptr<Lambda_1<MenuItem*> > Cast::ToItem( const std::shared_ptr<Lambda> &a )
+	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > Cast::ToItem( const std::shared_ptr<Lambda> &a )
 	{
 		return std::make_shared<LambdaWrapper>( a );
 	}
 
-	std::shared_ptr<Lambda> Cast::ToAction( const std::shared_ptr<Lambda_1<Menu*> > &a )
+	std::shared_ptr<Lambda> Cast::ToAction( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a )
 	{
 		return std::make_shared<Lambda_1Wrapper>( a );
 	}
@@ -83,10 +80,10 @@ namespace CloudberryKingdom
 		return Menu::DefaultOnB( menu );
 	}
 
-Vector4 Menu::DefaultMenuInfo::SelectedNextColor = ( Color( 100, 250, 100, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::SelectedBackColor = ( Color( 250, 100, 100, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::UnselectedNextColor = ( Color( 40, 180, 40, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::UnselectedBackColor = ( Color( 180, 40, 40, 255 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::SelectedNextColor = ( bColor( 100, 250, 100, 255 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::SelectedBackColor = ( bColor( 250, 100, 100, 255 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::UnselectedNextColor = ( bColor( 40, 180, 40, 255 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::UnselectedBackColor = ( bColor( 180, 40, 40, 255 ) ).ToVector4();
 std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( _T( "Menu_Hover" ),.7f );
 std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( _T( "Menu_Select" ),.6f );
 std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( _T( "Menu_Tick" ),.3f );
@@ -98,13 +95,13 @@ std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Texture = Tools:
 Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Offset = Vector2( 20, -14 );
 Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Offset = Vector2( -20, -14 );
 Vector2 Menu::DefaultMenuInfo::MenuArrow_Size = Vector2( 45, 45 );
-Vector4 Menu::DefaultMenuInfo::MenuArrow_Color = ( Color( 255, 255, 255, 255 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::MenuArrow_Color = ( bColor( 255, 255, 255, 255 ) ).ToVector4();
 std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture = Tools::Texture( _T( "ListRightArrow" ) );
 std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
 Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset = Vector2( 20, -14 );
 Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset = Vector2( -20, -14 );
 Vector2 Menu::DefaultMenuInfo::MenuArrow_Selected_Size = Vector2( 45, 45 );
-Vector4 Menu::DefaultMenuInfo::MenuArrow_Selected_Color = ( Color( 255, 255, 255, 0 ) ).ToVector4();
+Vector4 Menu::DefaultMenuInfo::MenuArrow_Selected_Color = ( bColor( 255, 255, 255, 0 ) ).ToVector4();
 std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::SliderBack_Texture = Tools::Texture( _T( "menuslider_bar" ) );
 Vector2 Menu::DefaultMenuInfo::SliderBack_Size = Vector2( 250, 35 );
 std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::Slider_Texture = Tools::Texture( _T( "menuslider_slider" ) );
@@ -114,7 +111,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
 	std::shared_ptr<MenuItem> Menu::FindItemByName( const std::wstring &name )
 	{
-		return Tools::Find( Items, std::make_shared<FindItemByNameLambda>( name ) );
+		return Tools::Find<std::shared_ptr<MenuItem> >( Items, std::make_shared<FindItemByNameLambda>( name ) );
 	}
 
 	const Vector2 &Menu::getPos() const
@@ -137,7 +134,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		_Control = value;
 	}
 
-	const std::shared_ptr<MenuItem> &Menu::getCurItem() const
+	const std::shared_ptr<MenuItem> Menu::getCurItem() const
 	{
 		if ( Items.empty() )
 			return 0;
@@ -168,7 +165,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		ParentMenu.reset();
 
 		if ( Items.size() > 0 )
-			for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 				( *item )->Release();
 		Items.clear();
 
@@ -180,7 +177,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 	void Menu::ClearList()
 	{
 		if ( Items.size() > 0 )
-			for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 				( *item )->Release();
 		Items.clear();
 	}
@@ -210,7 +207,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
 		setControl( -1 );
 
-		Items = std::vector<MenuItem*>();
+		Items = std::vector<std::shared_ptr<MenuItem> >();
 		CurIndex = 0;
 
 		OnB = std::make_shared<DefaultOnBProxy>();
@@ -230,7 +227,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 	{
 		HasSelectedThisStep = true;
 
-		int Index = Items.find( item );
+		int Index = IndexOf( Items, item );
 		if ( CurIndex != Index )
 		{
 			SelectItem( Index );
@@ -243,7 +240,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
 		// If no items are selectable, return
 		bool All = true;
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			if ( ( *item )->Selectable )
 				All = false;
 		if ( All )
@@ -254,7 +251,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			UpDownSound->Play();
 
 //C# TO C++ CONVERTER NOTE: The variable Sign was renamed since it is named the same as a user-defined type:
-		int Sign_Renamed = Math::Sign( Index - CurIndex );
+		int Sign_Renamed = ::Sign( Index - CurIndex );
 		if ( Sign_Renamed == 0 )
 			Sign_Renamed = 1;
 
@@ -265,13 +262,13 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			{
 				CurIndex = Index = Items.size() - 1;
 			}
-			if ( Index >= Items.size() )
+			if ( Index >= static_cast<int>( Items.size() ) )
 			{
 				CurIndex = Index = 0;
 			}
 		}
 		else
-			Index = __max( 0, __min( Items.size() - 1, Index ) );
+			Index = __max( 0, __min( static_cast<int>( Items.size() ) - 1, Index ) );
 
 
 		if ( Items[ Index ]->Selectable && Items[ Index ]->Show )
@@ -291,7 +288,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 				{
 					if ( Index < 0 )
 						Index = Items.size() - 1;
-					if ( Index >= Items.size() )
+					if ( Index >= static_cast<int>( Items.size() ) )
 						Index = 0;
 				}
 				else
@@ -301,7 +298,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 						Index = CurIndex;
 						break;
 					}
-					if ( Index >= Items.size() ) // Index = Items.Count; CurIndex = Items.Count + 1; }
+					if ( Index >= static_cast<int>( Items.size() ) ) // Index = Items.Count; CurIndex = Items.Count + 1; }
 					{
 						Index = CurIndex;
 						break;
@@ -348,7 +345,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		Vector2 MousePos = Tools::MouseGUIPos( getMyCameraZoom() );
 
 		bool Hit = false;
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			Hit |= ( *item )->HitTest( MousePos, HitPadding );
 
 		return Hit;
@@ -518,7 +515,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			return;
 		}
 
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PhsxStep( *item == Items[ CurIndex ] && ( !NoneSelected || AlwaysSelected ) );
 			if ( Released )
@@ -583,7 +580,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 	void Menu::ArrangeItems( float Spacing, Vector2 Center )
 	{
 		Vector2 Pos = Center;
-		for ( int i = 0; i < Items.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( Items.size() ); i++ )
 		{
 			Pos.Y -= Spacing + Items[ i ]->Height() / 2;
 
@@ -593,7 +590,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		}
 
 		float Height = Center.Y - Pos.Y;
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			( *item )->Pos.Y += Height / 2;
 	}
 
@@ -622,7 +619,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		TR = Vector2( -100000, -100000 );
 		BL = Vector2( 100000, 100000 );
 
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			Vector2 Size = ( *item )->Size();
 			TR = Vector2::Max( TR, ( *item )->Pos + Size / 2 );
@@ -632,12 +629,12 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
 	int Menu::SortByHeightMethod( const std::shared_ptr<MenuItem> &item1, const std::shared_ptr<MenuItem> &item2 )
 	{
-		return -item1->Pos.Y.compare( item2->Pos.Y );
+		return Compare( -item1->Pos.Y, item2->Pos.Y );
 	}
 
 	void Menu::SortByHeight()
 	{
-		Items.Sort( SortByHeightMethod );
+		Sort( Items, SortByHeightMethod );
 	}
 
 	void Menu::ResetPieces()
@@ -678,17 +675,17 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		int SelectedIndex = getApparentCurIndex();
 
 		// Draw item text backdrops
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
-			if ( SelectedIndex < 0 || item != Items[ SelectedIndex ] )
+			if ( SelectedIndex < 0 || ( *item ).get() != Items[ SelectedIndex ].get() )
 				( *item )->DrawBackdrop( false );
 		}
 		if ( SelectedIndex >= 0 && Items.size() > 0 )
 			Items[ SelectedIndex ]->DrawBackdrop( true );
 
 		// Draw item non-text
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
 			( *item )->Draw( false, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(*item) );
@@ -708,7 +705,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			return;
 
 		CurDrawLayer = 1;
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->Draw( false, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(*item) );
 		}
@@ -732,7 +729,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		CurDrawLayer = Layer;
 
 		// Draw item text
-		for ( std::vector<MenuItem*>::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
 			if ( ( *item )->UnaffectedByScroll )
@@ -759,7 +756,7 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 			return false;
 	}
 
-	const int &Menu::getApparentCurIndex() const
+	const int Menu::getApparentCurIndex() const
 	{
 		if ( !NoneSelected )
 			return CurIndex;
@@ -804,10 +801,10 @@ Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 		item->SlideSound = SlideSound;
 		item->ListScrollSound = ListScrollSound;
 
-		item->MyMenu = this;
+		item->MyMenu = shared_from_this();
 		item->setFixedToCamera( FixedToCamera );
 		item->Control = getControl();
-		Items.Insert( index, item );
+		Insert( Items, index, item );
 	}
 
 	void Menu::InitializeInstanceFields()
