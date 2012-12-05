@@ -423,6 +423,8 @@ public:
 
 	static bool IsRepeating;
 
+	static float Volume;
+
 };
 
 // Note: some of these may not be needed. Check C# Lambda-port to see.
@@ -446,6 +448,11 @@ public:
 	}
 
 	static std::vector<std::wstring> GetFiles( const std::wstring &path )
+	{
+		return std::vector<std::wstring>();
+	}
+
+	static std::vector<std::wstring> GetDirectories( const std::wstring &path )
 	{
 		return std::vector<std::wstring>();
 	}
