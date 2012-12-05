@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
 
-	private:
+	public:
 		static std::vector<Vector2> x1_name;
 		static std::vector<Vector2> x2_name;
 		static std::vector<Vector2> x3_name;

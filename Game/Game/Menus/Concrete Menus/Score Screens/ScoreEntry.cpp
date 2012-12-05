@@ -1,11 +1,9 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-	const std::wstring &ScoreEntry::getDefaultName()
+	const std::wstring ScoreEntry::getDefaultName()
 	{
 		return PlayerManager::GetGroupGamerTag( 18 );
 	}
@@ -23,7 +21,7 @@ namespace CloudberryKingdom
 		this->Fake = true;
 	}
 
-	ScoreEntry::ScoreEntry( const std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date )
+	ScoreEntry::ScoreEntry( std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date )
 	{
 		InitializeInstanceFields();
 		if ( GamerTag_Renamed == _T( "" ) )
@@ -103,7 +101,7 @@ namespace CloudberryKingdom
 
 	std::wstring ScoreEntry::ScoreToString()
 	{
-		return Format( _T( "{0:n0}" ), Score );
+		return ::Format( _T( "{0:n0}" ), Score );
 	}
 
 	std::wstring ScoreEntry::TimeToString()
@@ -124,26 +122,25 @@ namespace CloudberryKingdom
 	std::wstring ScoreEntry::ToString( int Length )
 	{
 		std::wstring score = _ToString();
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		std::wstring tag = GamerTag_Renamed.ToString();
+		std::wstring tag = GamerTag_Renamed;
 
 		int NumDots = Length - score.length() - tag.length();
 		if ( NumDots < 0 )
 			NumDots = 0;
 
 		for ( int i = 0; i < NumDots; i++ )
-			score += _T( "." );
+			score.append( _T( "." ) );
 		return score + tag;
 	}
 
-	std::wstring ScoreEntry::DottedScore( const std::wstring &root, int score, int Length, int MinDots )
+	std::wstring ScoreEntry::DottedScore( std::wstring root, int score, int Length, int MinDots )
 	{
 		std::wstring scorestr = StringConverterHelper::toString( score );
 
-		int NumDots = __max( MinDots, Length - scorestr.length() - root.length() );
+		int NumDots = __max( MinDots, Length - static_cast<int>( scorestr.length() - root.length() ) );
 
 		for ( int i = 0; i < NumDots; i++ )
-			root += _T( "." );
+			root.append( _T( "." ) );
 		return root + scorestr;
 	}
 

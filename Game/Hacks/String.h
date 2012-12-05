@@ -124,4 +124,18 @@ inline void Replace( std::wstring &s, wchar_t x, wchar_t y )
 	}
 }
 
+//std::wstring operator += ( std::wstring &LHS, const std::wstring &RHS )
+//{
+//	LHS.append( RHS );
+//	return LHS;
+//}
+//
+//std::wstring operator + ( const std::wstring &s1, const std::wstring &s2 )
+//{
+//	std::wstring sum = s1;
+//	::operator+=( sum, s2 );
+//
+//	return sum;
+//}
+
 #endif

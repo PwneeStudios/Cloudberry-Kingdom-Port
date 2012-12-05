@@ -43,13 +43,18 @@ namespace CloudberryKingdom
 
 	void ScoreDatabase::Deserialize( std::vector<unsigned char> Data )
 	{
-		for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
+		//for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
+		Chunks chunks = Chunks(Data);
+		chunks.StartGettingChunks();
+		while( chunks.HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks.GetChunk();
+			//switch ( ( *chunk )->Type )
+			switch ( chunk->Type )
 			{
 				case 1000:
 					std::shared_ptr<ScoreEntry> score = std::make_shared<ScoreEntry>();
-					score->ReadChunk_1000( *chunk );
+					score->ReadChunk_1000( chunk );
 					Add( score );
 					break;
 			}
@@ -74,7 +79,7 @@ namespace CloudberryKingdom
 
 		int Count = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector::const_iterator score = Scores.begin(); score != Scores.end(); ++score )
+		for ( std::vector<ScoreEntry>::const_iterator score = Scores.begin(); score != Scores.end(); ++score )
 		{
 			ScoreList_Renamed->Add( *score );
 			Count++;

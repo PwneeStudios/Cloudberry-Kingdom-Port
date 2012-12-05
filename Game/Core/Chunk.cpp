@@ -14,80 +14,41 @@ namespace CloudberryKingdom
 		this->Data = Data;
 	}
 
-	/*std::shared_ptr<IEnumerator<Chunk*> > Chunks::GetEnumerator()
+	void Chunks::StartGettingChunks()
 	{
-		return std::make_shared<ChunkEnumerator>( Data );
+		_Position = 0;
 	}
 
-	std::shared_ptr<IEnumerator> Chunks::IEnumerable_GetEnumerator()
+	const bool Chunks::HasChunk()
 	{
-		return std::make_shared<ChunkEnumerator>( Data );
-	}*/
-
-	/*ChunkEnumerator::ChunkEnumerator( std::vector<unsigned char> Data )
-	{
-		InitializeInstanceFields();
-		this->Data = Data;
-		DataLength = Data.size();
-	}
-
-	ChunkEnumerator::ChunkEnumerator( std::vector<unsigned char> Data, int Start, int DataLength )
-	{
-		InitializeInstanceFields();
-		this->Data = Data;
-		this->Position = Start;
-		this->DataLength = DataLength;
-	}
-
-	const std::shared_ptr<Chunk> &ChunkEnumerator::getCurrent() const
-	{
-		return _Current;
-	}
-
-	bool ChunkEnumerator::MoveNext()
-	{
-		if ( Position >= DataLength )
+		if ( _Position >= static_cast<int>( Data.size() ) )
 			return false;
+		else
+			return true;
+	}
 
-		int Type = BitConverter::ToInt32( Data, Position );
-		int Length = BitConverter::ToInt32( Data, Position + 4 );
+	const std::shared_ptr<Chunk> Chunks::GetChunk()
+	{
+		//int Type = BitConverter::ToInt32( Data, _Position );
+		//int Length = BitConverter::ToInt32( Data, _Position + 4 );
+		int Type = *reinterpret_cast<int*>( &Data[_Position] );
+		int Length = *reinterpret_cast<int*>( &Data[_Position + 4] );
 
-		if ( Type < 0 )
-			throw std::exception( _T( "Chunk type must be non-negative. Are you loading a non-chunked file?" ) );
-		if ( Length <= 0 )
-			throw std::exception( _T( "Chunk length must be strictly positive. Are you loading a non-chunked file?" ) );
+		// FIXME: Implement exceptions?
+		//if ( Type < 0 )
+		//	throw std::exception( _T( "Chunk type must be non-negative. Are you loading a non-chunked file?" ) );
+		//if ( Length <= 0 )
+		//	throw std::exception( _T( "Chunk length must be strictly positive. Are you loading a non-chunked file?" ) );
 
-		_Current = std::make_shared<Chunk>( Length );
-		_Current->Copy( Data, Position, Length );
+		std::shared_ptr<Chunk> _Current = std::make_shared<Chunk>( Length );
+		_Current->Copy( Data.data(), _Position, Length );
 		_Current->Type = Type;
 		_Current->Length = Length;
 
-		Position += Length;
+		_Position += Length;
 
-		return true;
+		return _Current;
 	}
-
-	void ChunkEnumerator::Reset()
-	{
-		Position = 0;
-		_Current.reset();
-	}
-
-	const std::shared_ptr<void> &ChunkEnumerator::getIEnumerator_Current() const
-	{
-		return getCurrent();
-	}
-
-	ChunkEnumerator::~ChunkEnumerator()
-	{
-		InitializeInstanceFields();
-		return;
-	}
-
-	void ChunkEnumerator::InitializeInstanceFields()
-	{
-		Position = 0;
-	}*/
 
 	Chunk::Chunk()
 	{
@@ -106,16 +67,6 @@ namespace CloudberryKingdom
 		Buffer = std::vector<unsigned char>( Capacity );
 		Length = Capacity;
 	}
-
-	/*std::shared_ptr<IEnumerator<Chunk*> > Chunk::GetEnumerator()
-	{
-		return std::make_shared<ChunkEnumerator>( Buffer, 8, Length );
-	}
-
-	std::shared_ptr<IEnumerator> Chunk::IEnumerable_GetEnumerator()
-	{
-		return std::make_shared<ChunkEnumerator>( Buffer, 8, Length );
-	}*/
 
 	void Chunk::Expand()
 	{

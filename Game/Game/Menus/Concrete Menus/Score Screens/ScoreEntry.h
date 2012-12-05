@@ -5,11 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Chunk;
-}
-
-namespace CloudberryKingdom
-{
 	class ScoreEntry
 	{
 	public:
@@ -21,12 +16,10 @@ namespace CloudberryKingdom
 			Format_TIME
 		};
 	public:
-		const static std::wstring &getDefaultName();
+		const static std::wstring getDefaultName();
 
 		int GameId;
-//C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		int Value, Score, Level_Renamed, Attempts, Time, Date;
-//C# TO C++ CONVERTER NOTE: The variable GamerTag was renamed since it is named the same as a user-defined type:
 		std::wstring GamerTag_Renamed;
 		bool Fake;
 
@@ -34,9 +27,7 @@ namespace CloudberryKingdom
 
 		ScoreEntry( int Score );
 
-//C# TO C++ CONVERTER NOTE: The parameter GamerTag was renamed since it is named the same as a user-defined type:
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
-		ScoreEntry( const std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date );
+		ScoreEntry( std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date );
 
 		void WriteChunk_1000( const std::shared_ptr<BinaryWriter> &writer );
 
@@ -67,7 +58,7 @@ namespace CloudberryKingdom
 		/// <param name="Length">The desired length of the string</param>
 		/// <param name="MinDots">The minimum number of dots seperating the root from the score</param>
 		/// <returns></returns>
-		static std::wstring DottedScore( const std::wstring &root, int score, int Length, int MinDots );
+		static std::wstring DottedScore( std::wstring root, int score, int Length, int MinDots );
 
 	private:
 		void InitializeInstanceFields();
