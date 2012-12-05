@@ -27,21 +27,21 @@ namespace CloudberryKingdom
 	info->ShiftStartBlock = Vector2( 120, 0 );
 
 	sprite_anim( _T( "door_cloud" ), _T( "door_cloud" ), 1, 2, 2 );
-	info->Doors->Sprite->Sprite = _T( "door_cloud" );
+	info->Doors->Sprite->Sprite = TextureOrAnim::Get( _T( "door_cloud" ) );
 	info->Doors->Sprite->Size = Vector2( 275, -1 );
 	info->Doors->Sprite->Offset = Vector2( -140, 7 );
 	info->Doors->ShiftStart = Vector2( 0, 190 );
 
-	info->Walls->Sprite->Sprite = _T( "pillar_cloud_1000" );
+	info->Walls->Sprite->Sprite = TextureOrAnim::Get( _T( "pillar_cloud_1000" ) );
 	info->Walls->Sprite->Size = Vector2( 1500, -1 );
 	info->Walls->Sprite->Offset = Vector2( 0, 4573 );
 	info->Walls->Sprite->Degrees = -90;
 
-	info->LavaDrips->Line_Renamed->End1 = _T( "Flow_cave_1" );
-	info->LavaDrips->Line_Renamed->Sprite = _T( "Flow_cave_2" );
-	info->LavaDrips->Line_Renamed->End2 = _T( "Flow_Cave_3" );
+	info->LavaDrips->Line_Renamed->End1 = TextureOrAnim::Get( _T( "Flow_cave_1" ) );
+	info->LavaDrips->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Flow_cave_2" ) );
+	info->LavaDrips->Line_Renamed->End2 = TextureOrAnim::Get( _T( "Flow_Cave_3" ) );
 
-	info->Lasers->Line_Renamed->Sprite = _T( "Laser_Cloud" );
+	info->Lasers->Line_Renamed->Sprite = TextureOrAnim::Get( _T( "Laser_Cloud" ) );
 	info->Lasers->Line_Renamed->RepeatWidth = 135;
 	info->Lasers->Line_Renamed->Dir = 0;
 	info->Lasers->Scale = 1;
@@ -55,17 +55,17 @@ namespace CloudberryKingdom
 	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_cloud" ), -6, 6, 13 ) );
 
 	sprite_anim( _T( "flame_cloud" ), _T( "firespinner_flame_cloud" ), 1, 4, 6 );
-	info->Spinners->Flame->Sprite = _T( "flame_cloud" );
+	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_cloud" ) );
 	info->Spinners->Flame->Size = Vector2( 45, -1 );
 	info->Spinners->Rotate = false;
 	info->Spinners->RotateStep = .13f;
-	info->Spinners->Base->Sprite = _T( "firespinner_base_cloud" );
+	info->Spinners->Base->Sprite = TextureOrAnim::Get( _T( "firespinner_base_cloud" ) );
 	info->Spinners->Base->Size = Vector2( 90, -1 );
 	info->Spinners->Base->Offset = Vector2( 0, -25 );
 	info->Spinners->SegmentSpacing = 65;
 	info->Spinners->SpaceFromBase = 55;
 
-	info->GhostBlocks->Sprite = _T( "ghostblock_cloud" );
+	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_cloud" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
 	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_cloud_190" ), -4, 13, 10 ) );
@@ -84,9 +84,9 @@ namespace CloudberryKingdom
 	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cloud_190" ), -1, 1, 1 ) );
 
 	sprite_anim( _T( "Serpent_Cloud" ), _T( "Serpent_Cloud" ), 1, 2, 8 );
-	info->Serpents->Serpent_Renamed->Sprite = _T( "Serpent_Cloud" );
+	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Cloud" ) );
 	sprite_anim( _T( "Serpent_Fish_Cloud" ), _T( "Serpent_Fish_Cloud" ), 1, 2, 5 );
-	info->Serpents->Fish->Sprite = _T( "Serpent_Fish_Cloud" );
+	info->Serpents->Fish->Sprite = TextureOrAnim::Get( _T( "Serpent_Fish_Cloud" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
 
