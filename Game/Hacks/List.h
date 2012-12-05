@@ -72,4 +72,13 @@ T Sum( std::vector<T> v )
 	return s;
 }
 
+template<class T>
+T PopBack( std::vector<T> v )
+{
+	T item = v[ v.size() - 1 ];
+	v.erase( v.begin() + v.size() - 1 );
+
+	return item;
+}
+
 #endif

@@ -24,11 +24,14 @@ namespace CloudberryKingdom
 
 		// Now write to file
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
-		std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
-		Write( writer );
-		writer->Close();
-		stream->Close();
+		//std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
+		//std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
+		{
+			std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( fullpath );
+			Write( writer );
+		}
+		//writer->Close();
+		//stream->Close();
 	}
 
 	void Recording::Load( const std::wstring &file )
@@ -40,11 +43,12 @@ namespace CloudberryKingdom
 
 		// Now read the file
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		//std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( fullpath );
 		Read( reader );
-		reader->Close();
-		stream->Close();
+		//reader->Close();
+		//stream->Close();
 	}
 
 	void Recording::Write( const std::shared_ptr<BinaryWriter> &writer )
@@ -80,7 +84,7 @@ namespace CloudberryKingdom
 
 		for ( int i = 0; i < NumBobs; i++ )
 		{
-			if ( i >= level->Bobs.size() )
+			if ( i >= static_cast<int>( level->Bobs.size() ) )
 				continue;
 			if ( Step < Length - 1 )
 			{
@@ -99,7 +103,7 @@ namespace CloudberryKingdom
 				if ( anim > 200 )
 					continue;
 
-				BobQuad->Quad_Renamed->MyTexture->Tex = AnimGroup[ i ]->Get( anim, Recordings[ i ]->Gett( Step ), padding );
+				BobQuad->Quad_Renamed.getMyTexture()->setTex( AnimGroup[ i ]->Get( anim, Recordings[ i ]->Gett( Step ), padding ) );
 
 				BobQuad->Base.e1 = Vector2( BoxSize.X + padding.X, 0 );
 				BobQuad->Base.e2 = Vector2( 0, BoxSize.Y + padding.Y );
@@ -165,7 +169,7 @@ namespace CloudberryKingdom
 		Length = level->CurPhsxStep;
 		for ( int i = 0; i < NumBobs; i++ )
 		{
-			if ( i >= level->Bobs.size() )
+			if ( i >= static_cast<int>( level->Bobs.size() ) )
 				continue;
 
 			Recordings[ i ]->Anim[ level->CurPhsxStep ] = static_cast<unsigned char>( level->Bobs[ i ]->PlayerObject->anim );

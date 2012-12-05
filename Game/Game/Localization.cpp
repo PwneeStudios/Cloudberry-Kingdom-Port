@@ -16,7 +16,8 @@ namespace CloudberryKingdom
 		this->MyTexture = MyTexture;
 	}
 
-	std::map<Language, std::map<Words, std::wstring> > Localization::Text;
+	//std::map<Language, std::map<Words, std::wstring> > Localization::Text;
+	std::map<int, std::map<int, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
 	{
@@ -24,9 +25,12 @@ namespace CloudberryKingdom
 			return;
 
 		// Create new dictionaries for each language
-		Text = std::map<Language, std::map<Words, std::wstring> >();
+		//Text = std::map<Language, std::map<Words, std::wstring> >();
+		//for ( int i = 0; i < NumLanguages; i++ )
+		//	Text.insert( make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
+		Text = std::map<int, std::map<Words, std::wstring> >();
 		for ( int i = 0; i < NumLanguages; i++ )
-			Text.insert( make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
+			Text.insert( make_pair( i, std::map<Words, std::wstring>() ) );
 
 		// Open the giant translation file
 		Tools::UseInvariantCulture();

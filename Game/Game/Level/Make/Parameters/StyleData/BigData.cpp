@@ -11,4 +11,5 @@ namespace CloudberryKingdom
 	{
 		StyleData::Randomize();
 	}
+
 }

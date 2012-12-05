@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -7,7 +8,7 @@ namespace CloudberryKingdom
 		this->bob = bob;
 	}
 
-	void SwarmBundle::BobToSpritesLambda::Apply( const std::map<int, SpriteAnim*> &dict, const Vector2 &pos )
+	void SwarmBundle::BobToSpritesLambda::Apply( const std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > > &dict, const Vector2 &pos )
 	{
 		bob->MyPhsx->ToSprites( dict, pos );
 	}
@@ -16,7 +17,7 @@ namespace CloudberryKingdom
 	{
 		BobLinks.clear();
 
-		for ( std::vector<SwarmRecord*>::const_iterator swarm = Swarms.begin(); swarm != Swarms.end(); ++swarm )
+		for ( std::vector<std::shared_ptr<SwarmRecord> >::const_iterator swarm = Swarms.begin(); swarm != Swarms.end(); ++swarm )
 			( *swarm )->Release();
 		Swarms.clear();
 
@@ -31,7 +32,7 @@ namespace CloudberryKingdom
 	{
 		Initialized = false;
 
-		Swarms = std::vector<SwarmRecord*>();
+		Swarms = std::vector<std::shared_ptr<SwarmRecord> >();
 	}
 
 	void SwarmBundle::Init( const std::shared_ptr<Level> &level )
@@ -44,12 +45,12 @@ namespace CloudberryKingdom
 		{
 			for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 				if ( ( *bob )->MyBobLinks.size() > 0 )
-					BobLinks.AddRange( ( *bob )->MyBobLinks );
+					AddRange( BobLinks, ( *bob )->MyBobLinks );
 
 			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
-				( *link )->_j = level->Bobs.find( ( *link )->j );
-				( *link )->_k = level->Bobs.find( ( *link )->k );
+				( *link )->_j = IndexOf( level->Bobs, ( *link )->j );
+				( *link )->_k = IndexOf( level->Bobs, ( *link )->k );
 			}
 		}
 
@@ -67,25 +68,25 @@ namespace CloudberryKingdom
 
 	void SwarmBundle::SetSwarm( const std::shared_ptr<Level> &level, int i )
 	{
-		i = CoreMath::Restrict( 0, Swarms.size() - 1, i );
+		i = CoreMath::RestrictVal( 0, Swarms.size() - 1, i );
 
 		CurrentSwarm = Swarms[ i ];
 		level->CurPiece = CurrentSwarm->MyLevelPiece;
 
 		for ( int j = 0; j < CurrentSwarm->MainRecord->NumBobs; j++ )
 		{
-			if ( j >= level->Bobs.size() )
+			if ( j >= static_cast<int>( level->Bobs.size() ) )
 				continue;
 			level->Bobs[ j ]->MyRecord = CurrentSwarm->MainRecord->Recordings[ j ];
 		}
 	}
 
-	const int &SwarmBundle::getSwarmIndex() const
+	const int SwarmBundle::getSwarmIndex() const
 	{
 		return IndexOf( Swarms, CurrentSwarm );
 	}
 
-	const int &SwarmBundle::getNumSwarms() const
+	const int SwarmBundle::getNumSwarms() const
 	{
 		return static_cast<int>( Swarms.size() );
 	}

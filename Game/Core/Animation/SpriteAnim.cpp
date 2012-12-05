@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void SpriteAnimGroup::Release()
 	{
-		for ( std::map<int, SpriteAnim*>::iterator anim = SpriteAnims.begin(); anim != SpriteAnims.end(); ++anim )
+		for ( std::map<int, std::shared_ptr<SpriteAnim> >::iterator anim = SpriteAnims.begin(); anim != SpriteAnims.end(); ++anim )
 			anim->second->Release();
 
 		SpriteAnims.clear();
@@ -13,11 +13,11 @@ namespace CloudberryKingdom
 
 	SpriteAnimGroup::SpriteAnimGroup()
 	{
-		SpriteAnims = std::map<int, SpriteAnim*>();
+		SpriteAnims = std::map<int, std::shared_ptr<SpriteAnim> >();
 	}
 
 	void SpriteAnimGroup::Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
-		const std::shared_ptr<Lambda_2<std::map<int, SpriteAnim*>, Vector2> > &SpriteFunc )
+		std::shared_ptr<Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2> > SpriteFunc )
 	{
 		// Make sure stickman is oriented correctly            
 		Obj->xFlip = false;
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 		SpriteFunc->Apply( SpriteAnims, Padding );
 
-		for ( std::map<int, SpriteAnim*>::const_iterator sprite = SpriteAnims.begin(); sprite != SpriteAnims.end(); ++sprite )
+		for ( std::map<int, std::shared_ptr<SpriteAnim> >::const_iterator sprite = SpriteAnims.begin(); sprite != SpriteAnims.end(); ++sprite )
 			sprite->second->Padding = Padding;
 	}
 

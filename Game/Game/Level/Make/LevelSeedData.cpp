@@ -424,7 +424,7 @@ namespace CloudberryKingdom
 			PostMake->Add( std::make_shared<_SetWeather_ProcessProxy>() );
 
 		if ( MySong != 0 )
-			PostMake->Add( std::make_shared<_StartSongProxy>( this ) );
+			PostMake->Add( std::make_shared<_StartSongProxy>( shared_from_this() ) );
 	}
 
 	void LevelSeedData::_StartSong( const std::shared_ptr<Level> &level )
@@ -618,7 +618,7 @@ namespace CloudberryKingdom
 					try
 					{
 						NumPieces = ParseInt( data );
-						NumPieces = CoreMath::Restrict( 1, 5, NumPieces );
+						NumPieces = CoreMath::RestrictVal( 1, 5, NumPieces );
 					}
 					catch ( ... )
 					{
@@ -631,7 +631,7 @@ namespace CloudberryKingdom
 					try
 					{
 						Length = ParseInt( data );
-						Length = CoreMath::Restrict( 2000, 50000, Length );
+						Length = CoreMath::RestrictVal( 2000, 50000, Length );
 						PieceLength = Length;
 					}
 					catch ( ... )
@@ -732,11 +732,11 @@ namespace CloudberryKingdom
 		if ( UpgradeStrs.empty() )
 		{
 			UpgradeStrs.push_back( _T( "" ) );
-			Initialize( std::make_shared<ModPieceViaHashProxy>( this ) );
+			Initialize( std::make_shared<ModPieceViaHashProxy>( shared_from_this() ) );
 		}
 		else
 		{
-			Initialize( std::make_shared<ModPieceViaStringProxy>( this ) );
+			Initialize( std::make_shared<ModPieceViaStringProxy>( shared_from_this() ) );
 		}
 
 		ProcessSpecial();
@@ -811,7 +811,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::ModPieceViaString( const std::shared_ptr<PieceSeedData> &piece )
 	{
 		// Break the data up by commas
-		int index = CoreMath::Restrict( 0, UpgradeStrs.size() - 1, piece->MyPieceIndex );
+		int index = CoreMath::RestrictVal( 0, UpgradeStrs.size() - 1, piece->MyPieceIndex );
 		std::vector<std::wstring> terms = Split( UpgradeStrs[ index ], L',' );
 
 		// Try and load the data into the upgrade array.
@@ -847,7 +847,7 @@ namespace CloudberryKingdom
 			if ( ( n1 * n2 + static_cast<int>( exp( static_cast<double>( i ) ) ) ) % 100 > Bias )
 				value = ( n1 + n1 * n2 ) % 10;
 
-			piece->MyUpgrades1->UpgradeLevels[ i ] = CoreMath::Restrict( 0, 10, value );
+			piece->MyUpgrades1->UpgradeLevels[ i ] = static_cast<float>( CoreMath::RestrictVal( 0, 10, value ) );
 		}
 
 		piece->MyUpgrades1->Get( Upgrade_CONVEYOR ) = 0;
@@ -865,8 +865,8 @@ namespace CloudberryKingdom
 		{
 			int value = i * PieceHash * PieceHash + PieceHash + i * i;
 
-			vals[ i ] = CoreMath::Restrict( BobPhsx::CustomPhsxData::Bounds( i ).MinValue, BobPhsx::CustomPhsxData::Bounds( i ).MaxValue, value );
-			vals[ i ] = CoreMath::Restrict( 0, 1, value );
+			vals[ i ] = CoreMath::RestrictVal( BobPhsx::CustomPhsxData::Bounds( i ).MinValue, BobPhsx::CustomPhsxData::Bounds( i ).MaxValue, static_cast<float>( value ) );
+			vals[ i ] = static_cast<float>( CoreMath::RestrictVal( 0, 1, value ) );
 		}
 
 		Hero->MyCustomPhsxData.Init( vals );
@@ -1149,7 +1149,7 @@ namespace CloudberryKingdom
 
 		for ( int i = 0; i < NumPieces; i++ )
 		{
-			Piece = std::make_shared<PieceSeedData>( i, MyGeometry, this );
+			Piece = std::make_shared<PieceSeedData>( i, MyGeometry, shared_from_this() );
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades1 );
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades2 );
 
@@ -1193,7 +1193,7 @@ namespace CloudberryKingdom
 
 			if ( i < NumPieces - 1 )
 			{
-				Piece = std::make_shared<PieceSeedData>( this );
+				Piece = std::make_shared<PieceSeedData>( shared_from_this() );
 				Piece->Start = Pos;
 				Piece->Ladder = RndDifficulty::ChooseLadder( Difficulty );
 				Pos += Level::GetLadderSize( Piece->Ladder );

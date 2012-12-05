@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void DownData::CalculateKeepUnused( float JumpLevel )
 	{
-	{
+		{
 			float MaxChance = .05f;
 			float chance = MaxChance - .1f * ( MaxChance - 0 ) * JumpLevel;
 			ChanceToKeepUnused = Rnd->RndFloat( 0, chance );
@@ -21,4 +21,5 @@ namespace CloudberryKingdom
 	{
 		VerticalData::Randomize();
 	}
+
 }

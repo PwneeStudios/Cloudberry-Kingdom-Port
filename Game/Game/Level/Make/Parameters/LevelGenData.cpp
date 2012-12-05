@@ -107,7 +107,6 @@ namespace CloudberryKingdom
 		Difficulty[ static_cast<int>( DifficultyParam_MIN_DROP ) ] = 200;
 		Difficulty[ static_cast<int>( DifficultyParam_MAX_DROP ) ] = 900;
 
-
 		const int tempVector[] = { 4, 5, 20, 20, 5, 10, 2, 2, 2, 2, 2, 20, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
 		BehaviorParams = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 	}
