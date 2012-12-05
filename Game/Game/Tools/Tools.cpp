@@ -709,9 +709,9 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 	void Tools::LoadBasicArt( const std::shared_ptr<ContentManager> &Content )
 	{
 		TextureWad = std::make_shared<EzTextureWad>();
-		TextureWad->AddTexture( Content->Load<Texture2D*>( _T( "White" ) ), _T( "White" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D*>( _T( "Circle" ) ), _T( "Circle" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D*>( _T( "Smooth" ) ), _T( "Smooth" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "White" ) ), _T( "White" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Circle" ) ), _T( "Circle" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Smooth" ) ), _T( "Smooth" ) );
 
 		TextureWad->DefaultTexture = TextureWad->TextureList[ 0 ];
 	}
@@ -777,16 +777,20 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 	std::vector<std::wstring> Tools::GetFiles( const std::wstring &path, bool IncludeSubdirectories )
 	{
 		std::vector<std::wstring> files = std::vector<std::wstring>();
-		files.AddRange( Directory::GetFiles( path ) );
+		//files.AddRange( Directory::GetFiles( path ) );
+		AddRange( files, Directory::GetFiles( path ) );
 
 		if ( IncludeSubdirectories )
 		{
 			std::vector<std::wstring> dir = Directory::GetDirectories( path );
 			for ( int i = 0; i < static_cast<int>( dir.size() ); i++ )
-				files.AddRange( GetFiles( dir[ i ], IncludeSubdirectories ) );
+			{
+				AddRange( files, GetFiles( dir[ i ], IncludeSubdirectories ) );
+				//files.AddRange( GetFiles( dir[ i ], IncludeSubdirectories ) );
+			}
 		}
 
-		return files.ToArray();
+		return files;
 	}
 
 	void Tools::LoadEffects( const std::shared_ptr<ContentManager> &Content, bool CreateNewWad )
@@ -794,19 +798,19 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 		if ( CreateNewWad )
 			EffectWad = std::make_shared<EzEffectWad>();
 
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\BasicEffect" ) ), _T( "Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\NoTexture" ) ), _T( "NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Circle" ) ), _T( "Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Shell" ) ), _T( "Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\FireballEffect" ) ), _T( "Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Paint" ) ), _T( "Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Lava" ) ), _T( "Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\LightMap" ) ), _T( "LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\LightSource" ) ), _T( "LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\BwEffect" ) ), _T( "BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Hsl_Green" ) ), _T( "Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Hsl" ) ), _T( "Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect*>( _T( "Effects\\Window" ) ), _T( "Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\BasicEffect" ) ), _T( "Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\NoTexture" ) ), _T( "NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Circle" ) ), _T( "Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Shell" ) ), _T( "Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\FireballEffect" ) ), _T( "Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Paint" ) ), _T( "Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Lava" ) ), _T( "Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\LightMap" ) ), _T( "LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\LightSource" ) ), _T( "LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\BwEffect" ) ), _T( "BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Hsl_Green" ) ), _T( "Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Hsl" ) ), _T( "Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Window" ) ), _T( "Window" ) );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -833,8 +837,8 @@ float Tools::CurVolume = -1;
 			NewVolume = 0;
 		if ( NewVolume != CurVolume )
 		{
-			MediaPlayer->Volume = NewVolume;
-		CurVolume = MediaPlayer::Volume;
+			MediaPlayer::Volume = NewVolume;
+			CurVolume = MediaPlayer::Volume;
 		}
 	}
 
@@ -871,14 +875,23 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 		Tools::ShowLoadingScreen = false;
 	}
 
-	std::vector<std::wstring> Tools::GetBitsFromLine( const std::wstring &line )
+	std::vector<std::wstring> Tools::GetBitsFromLine( std::wstring line )
 	{
 		line = Tools::RemoveComment_SlashStyle( line );
 
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		std::shared_ptr<std::vector<void*> > bits = line.Split( L' ', L'\t' )->ToList();
+		//std::shared_ptr<std::vector<void*> > bits = line.Split( L' ', L'\t' )->ToList();
+		
+		// FIXME: Fix this monstrosity.
+		std::vector<std::wstring> temp_bits = Split( line, L' ' );
+		std::vector<std::wstring> bits;
+		for( std::vector<std::wstring>::iterator i = temp_bits.begin(); i != temp_bits.end(); ++i )
+		{
+			std::vector<std::wstring> more_bits = Split( *i, L'\t' );
+			AddRange( bits, more_bits );
+		}
 
-		Tools::RemoveAll( bits, std::make_shared<RemoveBitsLambda>() );
+		Tools::RemoveAll( bits, std::static_pointer_cast<LambdaFunc_1<std::wstring, bool> >( std::make_shared<RemoveBitsLambda>() ) );
 
 		return bits;
 	}
@@ -1147,36 +1160,36 @@ int Tools::WriteObjId = 0;
 		WriteRecursiveDepth--;
 	}*/
 
-	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
+	/*std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
 	{
-		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
+		std::map<std::wstring, int> dict;
 		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( keywords->Contains( Bits[ i ] ) )
 				dict->Add( Bits[ i ], i );
 		return dict;
-	}
+	}*/
 
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
 	{
-		std::shared_ptr<std::map<std::wstring, int> > dict = std::map<std::wstring, int>();
+		std::map<std::wstring, int> dict;
 		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
 			if ( std::find( keywords.begin(), keywords.end(), Bits[ i ] ) != keywords.end() )
-				dict->Add( Bits[ i ], i );
+				dict[ Bits[ i ] ] = i;
 		return dict;
 	}
 
-	void Tools::ReadLineToObj( const std::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits )
+/*	void Tools::ReadLineToObj( std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits )
 	{
 		ReadLineToObj( obj, Bits[ 0 ], Bits );
 	}
 
-	void Tools::ReadLineToObj( std::shared_ptr<Object> &obj, const std::wstring &field, std::vector<std::wstring> &Bits )
+	void Tools::ReadLineToObj( std::shared_ptr<void> &obj, std::wstring field, std::vector<std::wstring> &Bits )
 	{
 		// If field name has a period in it, resolve recursively.
 		int period = field.find( _T( "." ) );
 		if ( period > 0 )
 		{
-			std::shared_ptr<std::wstring> subfield = field.substr( period + 1 );
+			std::wstring subfield = field.substr( period + 1 );
 			field = field.substr( 0, period );
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
@@ -1252,7 +1265,7 @@ int Tools::WriteObjId = 0;
 			else if ( fieldinfo->FieldType == MyOwnVertexFormat::typeid )
 				fieldinfo->SetValue( obj, Tools::ParseToMyOwnVertexFormat( Bits[ 1 ], Bits[ 2 ], Bits[ 3 ], Bits[ 4 ], Bits[ 5 ], Bits[ 6 ], Bits[ 7 ], Bits[ 8 ] ) );
 		}
-	}
+	}*/
 
 	bool Tools::BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit )
 	{
@@ -1264,18 +1277,20 @@ int Tools::WriteObjId = 0;
 
 	std::wstring Tools::RemoveComment_SlashStyle( const std::wstring &str )
 	{
+		std::wstring ws;
 		int CommentIndex = str.find( _T( "//" ) );
 		if ( CommentIndex >= 0 )
-			str = str.substr( 0, CommentIndex );
-		return str;
+			ws = str.substr( 0, CommentIndex );
+		return ws;
 	}
 
 	std::wstring Tools::RemoveComment_DashStyle( const std::wstring &str )
 	{
+		std::wstring ws;
 		int CommentIndex = str.find( _T( "--" ) );
 		if ( CommentIndex >= 0 )
-			str = str.substr( 0, CommentIndex );
-		return str;
+			ws = str.substr( 0, CommentIndex );
+		return ws;
 	}
 
 	Vector2 Tools::ParseToVector2( const std::wstring &bit1, const std::wstring &bit2 )
@@ -1338,10 +1353,10 @@ int Tools::WriteObjId = 0;
 		b.uv.X = ParseFloat( bit3 );
 		b.uv.Y = ParseFloat( bit4 );
 
-		b.TheColor.R = unsigned char::Parse( bit5 );
-		b.TheColor.G = unsigned char::Parse( bit6 );
-		b.TheColor.B = unsigned char::Parse( bit7 );
-		b.TheColor.A = unsigned char::Parse( bit8 );
+		b.TheColor.R = Parse<unsigned char>( bit5 );
+		b.TheColor.G = Parse<unsigned char>( bit6 );
+		b.TheColor.B = Parse<unsigned char>( bit7 );
+		b.TheColor.A = Parse<unsigned char>( bit8 );
 
 		return b;
 	}
@@ -1360,19 +1375,19 @@ int Tools::WriteObjId = 0;
 		return Vec;
 	}
 
-	Microsoft::Xna::Framework::Color Tools::ParseToColor( const std::wstring &bit1, const std::wstring &bit2, const std::wstring &bit3, const std::wstring &bit4 )
+	Color Tools::ParseToColor( const std::wstring &bit1, const std::wstring &bit2, const std::wstring &bit3, const std::wstring &bit4 )
 	{
 		Color c = Color::White;
 
-		c.R = unsigned char::Parse( bit1 );
-		c.G = unsigned char::Parse( bit2 );
-		c.B = unsigned char::Parse( bit3 );
-		c.A = unsigned char::Parse( bit4 );
+		c.R = Parse<unsigned char>( bit1 );
+		c.G = Parse<unsigned char>( bit2 );
+		c.B = Parse<unsigned char>( bit3 );
+		c.A = Parse<unsigned char>( bit4 );
 
 		return c;
 	}
 
-	Microsoft::Xna::Framework::Color Tools::ParseToColor( const std::wstring &str )
+	Color Tools::ParseToColor( const std::wstring &str )
 	{
 		int CommaIndex = str.find( _T( "," ) );
 		int CommaIndex2 = str.find( _T( "," ), CommaIndex + 1 );
@@ -1384,7 +1399,7 @@ int Tools::WriteObjId = 0;
 		Component3 = str.substr( CommaIndex2 + 1, CommaIndex3 - CommaIndex2 - 1 );
 		Component4 = str.substr( CommaIndex3 + 1, str.length() - CommaIndex3 - 1 );
 
-		Color clr = Color( unsigned char::Parse( Component1 ), unsigned char::Parse( Component2 ), unsigned char::Parse( Component3 ), unsigned char::Parse( Component4 ) );
+		Color clr = Color( Parse<unsigned char>( Component1 ), Parse<unsigned char>( Component2 ), Parse<unsigned char>( Component3 ), Parse<unsigned char>( Component4 ) );
 
 		return clr;
 	}

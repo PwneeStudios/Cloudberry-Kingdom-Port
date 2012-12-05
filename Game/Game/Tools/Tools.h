@@ -390,7 +390,7 @@ static std::wstring SourceTextureDirectory();
 		/// <summary>
 		/// Parses a string, stripping comments, and returning the sequence of bits it contains (separated strings).
 		/// </summary>
-		static std::vector<std::wstring> GetBitsFromLine( const std::wstring &line );
+		static std::vector<std::wstring> GetBitsFromLine( std::wstring line );
 
 
 
@@ -420,12 +420,11 @@ static std::wstring SourceTextureDirectory();
 	public:
 //ORIGINAL LINE: public static Dictionary<string, int> GetLocations(List<string> Bits, params string[] keywords)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
+		//static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
 		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
 
-		static void ReadLineToObj( const std::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits );
-		static void ReadLineToObj( std::shared_ptr<Object> &obj, const std::wstring &field, std::vector<std::wstring> &Bits );
-
+		/*static void ReadLineToObj( std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits );
+		static void ReadLineToObj( std::shared_ptr<void> &obj, std::wstring field, std::vector<std::wstring> &Bits );*/
 		static bool BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit );
 
 		static std::wstring RemoveComment_SlashStyle( const std::wstring &str );
