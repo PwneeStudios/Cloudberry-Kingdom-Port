@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<QuadClass> MyQuad;
 		Keys MyKey;
 		std::shared_ptr<Lambda_1<Keys> > SetSecondaryKey;
-		std::shared_ptr<Lambda_1<ControlItem*> > Reset;
+		std::shared_ptr<Lambda_1<std::shared_ptr<ControlItem> > > Reset;
 
 		ControlItem( Localization::Words description, Keys key );
 
@@ -127,70 +127,70 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class ResetQuickspawn_KeyboardKey : public Lambda_1<ControlItem*>
+		class ResetQuickspawn_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetHelp_KeyboardKey : public Lambda_1<ControlItem*>
+		class ResetHelp_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetLeft_Secondary : public Lambda_1<ControlItem*>
+		class ResetLeft_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetRight_Secondary : public Lambda_1<ControlItem*>
+		class ResetRight_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetUp_Secondary : public Lambda_1<ControlItem*>
+		class ResetUp_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetDown_Secondary : public Lambda_1<ControlItem*>
+		class ResetDown_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetReplayPrev_Secondary : public Lambda_1<ControlItem*>
+		class ResetReplayPrev_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetReplayNext_Secondary : public Lambda_1<ControlItem*>
+		class ResetReplayNext_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetReplayToggle_Secondary : public Lambda_1<ControlItem*>
+		class ResetReplayToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
 	private:
-		class ResetSlowMoToggle_Secondary : public Lambda_1<ControlItem*>
+		class ResetSlowMoToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
 		public:
 			void Apply( const std::shared_ptr<ControlItem> &_item );

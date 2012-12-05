@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	MenuListItem::MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word )
+	MenuListItem::MenuListItem( const std::shared_ptr<void> &obj, Localization::Words word )
 	{
 		this->obj = obj;
 		this->word = word;

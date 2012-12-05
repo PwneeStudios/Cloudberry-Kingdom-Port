@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		static int Capacity;
 
 	private:
-		static std::map<int, std::vector<ScoreEntry*> > Games;
+		static std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > Games;
 
 	public:
 		static void Initialize();
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		/// Return the score with the smallest value.
 		/// </summary>
 	private:
-		static std::shared_ptr<ScoreEntry> Max( std::vector<ScoreEntry*> &Scores );
+		static std::shared_ptr<ScoreEntry> Max( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 
 	public:
 		static std::shared_ptr<ScoreEntry> Max( int GameId );
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Return the score with the smallest value.
 		/// </summary>
-		static std::shared_ptr<ScoreEntry> Min( std::vector<ScoreEntry*> &Scores );
+		static std::shared_ptr<ScoreEntry> Min( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 
 		static std::shared_ptr<ScoreEntry> Min( int GameId );
 
@@ -74,14 +74,14 @@ namespace CloudberryKingdom
 		/// Remove excess entries, if the list is over capacity.
 		/// </summary>
 	private:
-		static void TrimExcess( std::vector<ScoreEntry*> &Scores );
+		static void TrimExcess( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 
 		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
 
 		/// <summary>
 		/// Sort the list by value.
 		/// </summary>
-		static void Sort( std::vector<ScoreEntry*> &Scores );
+		static void Sort( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 	};
 }
 

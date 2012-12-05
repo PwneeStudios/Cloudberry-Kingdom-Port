@@ -5,25 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
 
-namespace CloudberryKingdom
-{
-	class CharacterSelect;
-}
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
-
-namespace CloudberryKingdom
-{
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	class SignInMenu : public CkBaseMenu
 	{

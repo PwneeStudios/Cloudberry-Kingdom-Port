@@ -255,7 +255,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	/*void GameData::KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e )
+	/*void GameData::KillThread( const std::shared_ptr<void> &sender, const std::shared_ptr<System::EventArgs> &e )
 	{
 		std::shared_ptr<Thread> MakeThread = Thread::CurrentThread;
 		if ( MakeThread != 0 )

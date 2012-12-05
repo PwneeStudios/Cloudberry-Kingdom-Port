@@ -5,11 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
-}
-
-namespace CloudberryKingdom
-{
 	class HelpBlurb : public CkBaseMenu
 	{
 	private:

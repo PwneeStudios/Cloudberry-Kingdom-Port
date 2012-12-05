@@ -93,7 +93,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 	std::vector<std::wstring> StartLevelMenu::GetNames()
 	{
-		std::vector<std::wstring> names = std::vector<std::wstring*>( Levels.size() );
+		std::vector<std::wstring> names = std::vector<std::shared_ptr<std::wstring> >( Levels.size() );
 
 		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
 			names[ i ] = Format( _T( "{0:00}" ), Levels[ i ] );

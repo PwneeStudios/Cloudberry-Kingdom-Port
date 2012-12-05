@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -12,7 +13,7 @@ namespace CloudberryKingdom
 		return Outline->getTR();
 	}
 
-	const Vector2 &ProgressBar::getCurrent_TR() const
+	const Vector2 ProgressBar::getCurrent_TR() const
 	{
 		return Vector2( getFull_BL().X + (getFull_TR().X - getFull_BL().X) * PercentDone / 100, getFull_TR().Y );
 	}
@@ -100,8 +101,8 @@ namespace CloudberryKingdom
 				break;
 
 			case BarType_REVEAL:
-				Fill->Quad_Renamed->v1->Vertex->uv->X = PercentDone / 100;
-				Fill->Quad_Renamed->v3->Vertex->uv->X = PercentDone / 100;
+				Fill->Quad_Renamed.v1.Vertex.uv.X = PercentDone / 100;
+				Fill->Quad_Renamed.v3.Vertex.uv.X = PercentDone / 100;
 
 				break;
 		}
@@ -127,7 +128,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		this->ResourceCount = ResourceCount;
 
-		Whinney = Content->Load<SoundEffect*>( _T( "Whinney" ) );
+		Whinney = Content->Load<SoundEffect>( _T( "Whinney" ) );
 
 		Tools::TextureWad->FindOrLoad( Content, _T( "Art\\LoadScreen_Initial\\LoadOutline" ) );
 		Tools::TextureWad->FindOrLoad( Content, _T( "Art\\LoadScreen_Initial\\LoadFill" ) );
@@ -141,8 +142,8 @@ namespace CloudberryKingdom
 		MyProgressBar = std::make_shared<ProgressBar>();
 		MyProgressBar->setPos( Vector2( 900, -400 ) );
 
-		BlackQuad = std::make_shared<QuadClass>( _T( "White" ), 1400 );
-		BlackQuad->Quad_Renamed->SetColor( Color( 0, 0, 0, 255 ) );
+		BlackQuad = std::make_shared<QuadClass>( _T( "White" ), 1400.f );
+		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 255 ) );
 		BlackQuad->setAlpha( 0 );
 		BlackQuad->Layer = 1;
 		MyPile->Add( BlackQuad );
@@ -164,7 +165,7 @@ int InitialLoadingScreen::TotalResources = 805;
 		{
 			ResourceCount->MyFloat += .5f;
 			if ( Accelerate )
-				ResourceCount->MyFloat = CoreMath::Restrict( 0, TotalResources, ResourceCount->MyFloat + .033f * ( TotalResources ) );
+				ResourceCount->MyFloat = CoreMath::RestrictVal( 0.f, static_cast<float>( TotalResources ), ResourceCount->MyFloat + .033f * ( TotalResources ) );
 		}
 
 		// Fade

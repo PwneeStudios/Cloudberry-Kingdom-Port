@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	{
 		InitializeInstanceFields();
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT);
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;
 
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 
 		if ( MyDoll != 0 )
 		{
-			MyDoll->getCore()->MyLevel->Bobs.Remove(MyDoll);
+			Remove( MyDoll->getCore()->MyLevel->Bobs, MyDoll );
 			MyDoll->Release();
 			MyDoll.reset();
 		}
@@ -75,13 +75,12 @@ namespace CloudberryKingdom
 		MyDoll->SetColorScheme( MyCharacterSelect->getPlayer()->ColorScheme_Renamed );
 	}
 
-	int Doll::FindClrIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr )
+	int Doll::FindClrIndex( std::vector<std::shared_ptr<MenuListItem> > &list, std::shared_ptr<ClrTextFx> clr )
 	{
 		int Index = 0;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( static_cast<ClrTextFx>( ( *item )->obj ) == clr )
+			if ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
 				return Index;
 			Index++;
 		}
@@ -91,7 +90,6 @@ namespace CloudberryKingdom
 	int Doll::FindHatIndex( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat )
 	{
 		int Index = 0;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<Hat> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
 			if ( *item == hat )
@@ -101,7 +99,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void Doll::GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<std::shared_ptr<MenuListItem> >&> ItemList )
+	void Doll::GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<std::shared_ptr<MenuListItem> > > &ItemList )
 	{
 		ItemIndex[ 0 ] = FindClrIndex( ItemList[ 0 ], MyDoll->MyColorScheme.SkinColor );
 

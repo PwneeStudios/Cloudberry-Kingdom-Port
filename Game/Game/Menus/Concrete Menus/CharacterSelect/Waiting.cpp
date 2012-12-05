@@ -1,12 +1,11 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	Waiting::Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	{
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;
 
@@ -35,7 +34,7 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void Waiting::MyPhsxStep()

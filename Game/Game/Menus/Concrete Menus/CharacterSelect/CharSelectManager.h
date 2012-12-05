@@ -24,8 +24,8 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 
-	private:
-		class NullLambda : public LambdaFunc_1<CharacterSelect*, bool>
+	public:
+		class NullLambda : public LambdaFunc_1<std::shared_ptr<CharacterSelect> , bool>
 		{
 		public:
 			NullLambda();
@@ -45,14 +45,12 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<GUI_Panel> ParentPanel;
 
-		virtual std::vector<std::wstring> GetViewables();
-
 	private:
 		static const std::shared_ptr<CharacterSelectManager> instance;
 	public:
 		const static std::shared_ptr<CharacterSelectManager> &getInstance();
 
-		static std::vector<CharacterSelect*> CharSelect;
+		static std::vector<std::shared_ptr<CharacterSelect> > CharSelect;
 		static bool IsShowing;
 
 	private:
@@ -71,7 +69,7 @@ namespace CloudberryKingdom
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 	private:
-		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
+		void SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e );
 
 #endif
 

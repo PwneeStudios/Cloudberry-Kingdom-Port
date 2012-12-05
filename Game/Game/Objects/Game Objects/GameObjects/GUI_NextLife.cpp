@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_NextLife::GetViewables()
 	{
-		return std::vector<std::wstring*> ();
+		return std::vector<std::shared_ptr<std::wstring> > ();
 	}
 
 	const int &GUI_NextLife::getCoins() const

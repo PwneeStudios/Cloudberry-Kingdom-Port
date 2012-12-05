@@ -55,12 +55,12 @@ namespace CloudberryKingdom
 		void UpdateColorScheme();
 
 	private:
-		int FindClrIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr );
+		int FindClrIndex( std::vector<std::shared_ptr<MenuListItem> > &list, std::shared_ptr<ClrTextFx> clr );
 
 		int FindHatIndex( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat );
 
 	public:
-		void GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<std::shared_ptr<MenuListItem> >&> ItemList );
+		void GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<std::shared_ptr<MenuListItem> > > &ItemList );
 
 	protected:
 		virtual void MyPhsxStep();

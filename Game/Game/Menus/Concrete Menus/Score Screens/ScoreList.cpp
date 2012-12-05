@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		this->DefaultValue = DefaultValue;
 		this->Capacity = Capacity;
 
-		Scores = std::vector<ScoreEntry*>( Capacity );
+		Scores = std::vector<std::shared_ptr<ScoreEntry> >( Capacity );
 
 		for ( int i = 0; i < Capacity; i++ )
 			Scores.push_back( std::make_shared<ScoreEntry>( DefaultValue ) );

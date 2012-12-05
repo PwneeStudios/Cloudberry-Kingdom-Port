@@ -1,15 +1,11 @@
 ﻿#include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
 	JoinText::JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	{
-		this->Tags += Tag_CHAR_SELECT;
+		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;
 
@@ -38,19 +34,19 @@ namespace CloudberryKingdom
 		// Press A to join
 		Tools::Warning();
 	#if defined(PC_VERSION)
-		Text = std::make_shared<EzText>( _T( "Press\n" ) + ButtonString::Go_Controller( 89 ) + _T( "\nto join!" ), Resources::Font_Grobold42, 1000, true, true,.65f );
+		Text = std::make_shared<EzText>( _T( "Press\n" ) + ButtonString::Go_Controller( 89 ) + _T( "\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
 	#else
 		Text = std::make_shared<EzText>( _T( "Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
 	#endif
 		Text->setScale( .7765f );
 
 		Text->ShadowOffset = Vector2( 7.5f, 7.5f );
-		Text->ShadowColor = Color( 30, 30, 30 );
+		Text->ShadowColor = bColor( 30, 30, 30 );
 		Text->ColorizePics = true;
 
 		MyPile->Add( Text );
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void JoinText::ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed )
@@ -105,7 +101,7 @@ namespace CloudberryKingdom
 			else
 				Call( std::make_shared<SignInMenu>( getControl(), MyCharacterSelect ) );
 	#else
-			Call( std::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
+			GUI_Panel::Call( std::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
 	#endif
 			Hide();
 		}

@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
@@ -223,10 +219,10 @@ namespace CloudberryKingdom
 	}
 #endif
 
+#if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	void SignInMenu::InitializeInstanceFields()
 	{
-#if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN)) && defined(XBOX) || defined(XBOX_SIGNIN)
 		GamerGuideUp = false;
-#endif
 	}
+#endif
 }

@@ -1,12 +1,9 @@
 #include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
+#if defined(WINDOWS)
 	SaveLoadSeedMenu::MakeSaveHelper::MakeSaveHelper( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
 	{
 		this->panel = panel;
@@ -17,7 +14,7 @@ namespace CloudberryKingdom
 	{
 		SaveLoadSeedMenu::Save( _item, panel, player );
 	}
-
+#else
 	SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::SaveLoadSeedsMakeSaveLambda( const std::shared_ptr<PlayerData> &player )
 	{
 		this->player = player;
@@ -27,6 +24,7 @@ namespace CloudberryKingdom
 	{
 		SaveLoadSeedMenu::Save( item, player );
 	}
+#endif
 
 	SaveLoadSeedMenu::LoadProxy::LoadProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
@@ -93,7 +91,7 @@ namespace CloudberryKingdom
 			// Save seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 			item->Name = _T( "Save" );
-			item->setGo( MakeSave( shared_from_this(), player ) );
+			item->setGo( MakeSave( std::static_pointer_cast<GUI_Panel>( shared_from_this() ), player ) );
 			AddItem( item );
 		}
 
@@ -102,7 +100,7 @@ namespace CloudberryKingdom
 			// Load seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 			item->Name = _T( "Load" );
-			item->setGo( std::make_shared<LoadProxy>( shared_from_this() ) );
+			item->setGo( std::make_shared<LoadProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 
@@ -112,7 +110,7 @@ namespace CloudberryKingdom
 			// Copy seed
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_COPY_TO_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "Copy" );
-			item->setGo( std::make_shared<CopyProxy>( shared_from_this() ) );
+			item->setGo( std::make_shared<CopyProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 
@@ -121,13 +119,13 @@ namespace CloudberryKingdom
 			// Load seed from string
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_FROM_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "LoadString" );
-			item->setGo( std::make_shared<LoadStringProxy>( shared_from_this() ) );
+			item->setGo( std::make_shared<LoadStringProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 	#endif
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -373,9 +371,8 @@ std::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 #if defined(WINDOWS)
 	void SaveLoadSeedMenu::Copy( const std::shared_ptr<MenuItem> &_item )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		std::wstring seed = Tools::CurLevel->MyLevelSeed->ToString();
-		System::Windows::Forms::Clipboard::SetText( seed );
+		Clipboard::SetText( seed );
 	}
 #endif
 

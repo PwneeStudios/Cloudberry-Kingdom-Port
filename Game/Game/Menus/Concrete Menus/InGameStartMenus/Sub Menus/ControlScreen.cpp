@@ -1,8 +1,5 @@
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -16,9 +13,9 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	std::shared_ptr<QuadClass> ControlScreen::MakeQuad( Keys key )
 	{
-		std::shared_ptr<QuadClass> quad = std::make_shared<QuadClass>( ButtonString::KeyToTexture( key ), 90 );
+		std::shared_ptr<QuadClass> quad = std::make_shared<QuadClass>( ButtonString::KeyToTexture( key ), 90.f );
 		MyPile->Add( quad );
-		quad->Quad_Renamed->SetColor( CustomControlsMenu::SecondaryKeyColor );
+		quad->Quad_Renamed.SetColor( CustomControlsMenu::SecondaryKeyColor );
 		return quad;
 	}
 #endif
@@ -38,7 +35,7 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
 
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500, true );
+		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		Backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( Backdrop );
 

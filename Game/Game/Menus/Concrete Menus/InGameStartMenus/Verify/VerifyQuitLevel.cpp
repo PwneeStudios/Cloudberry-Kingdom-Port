@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -47,11 +45,11 @@ namespace CloudberryKingdom
 
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->Name = _T( "No" );
 		AddItem( item );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 	void CharacterSelectManager::SignInGamerLambda::Apply()
 	{
-		int index = static_cast<int>( e->Gamer->PlayerIndex );
+		int index = static_cast<int>( e->Gamer.MyPlayerIndex );
 		std::shared_ptr<CharacterSelect> select = CharSelect[ index ];
 		if ( select != 0 )
 		{
@@ -43,29 +43,24 @@ namespace CloudberryKingdom
 		CharacterSelectManager::AfterFinished();
 	}
 
-std::shared_ptr<Lambda> OnBack, CharacterSelectManager::OnDone = 0;
-std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel = 0;
+	std::shared_ptr<Lambda> OnBack, CharacterSelectManager::OnDone = 0;
+	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel = 0;
 
-	std::vector<std::wstring> CharacterSelectManager::GetViewables()
-	{
-		return std::vector<std::wstring*> ();
-	}
-
-const std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
+	const std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
 
 	const std::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
 	{
 		return instance;
 	}
 
-const CharacterSelect* tempVector[] = { 0, 0, 0, 0 };
-std::vector<CharacterSelect*> CharacterSelectManager::CharSelect = std::vector<CharacterSelect*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-bool CharacterSelectManager::IsShowing = false;
-std::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;
-std::shared_ptr<EzText> CharacterSelectManager::ChooseYourHero_Text = 0;
-bool CharacterSelectManager::Show_ChooseYourHero = false;
-int CharacterSelectManager::ChooseYourHero_LerpLength = 100;
-Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f );
+	const std::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
+	std::vector<std::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = std::vector<std::shared_ptr<CharacterSelect> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	bool CharacterSelectManager::IsShowing = false;
+	std::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;
+	std::shared_ptr<EzText> CharacterSelectManager::ChooseYourHero_Text = 0;
+	bool CharacterSelectManager::Show_ChooseYourHero = false;
+	int CharacterSelectManager::ChooseYourHero_LerpLength = 100;
+	Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f );
 
 	CharacterSelectManager::CharacterSelectManager()
 	{
@@ -77,7 +72,7 @@ Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f
 	}
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	void CharacterSelectManager::SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e )
+	void CharacterSelectManager::SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e )
 	{
 		if ( CharSelect.empty() )
 			return;
@@ -214,13 +209,13 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 
 	bool CharacterSelectManager::AllNull()
 	{
-		return Tools::All( CharSelect, NullLambda_static );
+		return Tools::All<std::shared_ptr<CharacterSelect> >( CharSelect, NullLambda_static );
 	}
 
-std::shared_ptr<NullLambda> CharacterSelectManager::NullLambda_static = std::make_shared<NullLambda>();
-int CharacterSelectManager::DrawLayer = 10;
-float CharacterSelectManager::BobZoom = 2.6f;
-float CharacterSelectManager::ZoomMod = 1.1f;
+	std::shared_ptr<CharacterSelectManager::NullLambda> CharacterSelectManager::NullLambda_static = std::make_shared<CharacterSelectManager::NullLambda>();
+	int CharacterSelectManager::DrawLayer = 10;
+	float CharacterSelectManager::BobZoom = 2.6f;
+	float CharacterSelectManager::ZoomMod = 1.1f;
 
 	void CharacterSelectManager::Draw()
 	{

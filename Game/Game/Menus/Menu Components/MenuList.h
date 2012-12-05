@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 	private:
 		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<void> > ObjDict;
 	public:
-		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
+		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<void> &obj );
 
 		std::shared_ptr<MenuItem> GetListItem();
 

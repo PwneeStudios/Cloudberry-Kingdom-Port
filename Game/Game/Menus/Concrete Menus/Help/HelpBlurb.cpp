@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -36,7 +37,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Lambda> HelpBlurb::SetText_Action( Localization::Words Word )
 	{
-		return std::make_shared<SetText_ActionHelper>( shared_from_this(), Word );
+		return std::make_shared<SetText_ActionHelper>( std::static_pointer_cast<HelpBlurb>( shared_from_this() ), Word );
 	}
 
 	void HelpBlurb::SetText( Localization::Words Word )
@@ -45,7 +46,7 @@ namespace CloudberryKingdom
 		MyPile->MyTextList.clear();
 
 		// Add the new text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Word, ItemFont, 800, false, false,.575f );
+		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Word, ItemFont, 800.f, false, false, .575f );
 		Text->setPos( Vector2( -139.4445f, 536.1113f ) );
 		Text->setScale( Text->getScale() * .74f );
 		MyPile->Add( Text );

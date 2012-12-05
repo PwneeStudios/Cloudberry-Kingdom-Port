@@ -1,11 +1,9 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-int Hints::YForHelpNum = 0;
+	int Hints::YForHelpNum = 0;
 
 	void Hints::SetYForHelpNum( int val )
 	{
@@ -19,7 +17,7 @@ int Hints::YForHelpNum = 0;
 		PlayerManager::SavePlayerData->Changed = true;
 	}
 
-int Hints::QuickSpawnNum = 0;
+	int Hints::QuickSpawnNum = 0;
 
 	void Hints::SetQuickSpawnNum( int val )
 	{
@@ -33,7 +31,7 @@ int Hints::QuickSpawnNum = 0;
 		PlayerManager::SavePlayerData->Changed = true;
 	}
 
-std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
+	std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 
 	HintGiver::Check_QuickSpawnHelper::Check_QuickSpawnHelper( const std::shared_ptr<HintGiver> &hg )
 	{
@@ -79,7 +77,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		Active = true;
 		PauseOnPause = true;
 
-		Hints::CurrentGiver =  shared_from_this();
+		Hints::CurrentGiver =  std::static_pointer_cast<HintGiver>( shared_from_this() );
 	}
 
 	void HintGiver::ReleaseBody()
@@ -113,27 +111,27 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		{
 			Hints::IncrQuickSpawnNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_QuickSpawnHelper>( shared_from_this() ) );
+			MyGame->WaitThenDo( 5, std::make_shared<Check_QuickSpawnHelper>( std::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
 		}
 	}
 
-	const std::wstring &HintGiver::getQuickSpawnHint()
+	const std::wstring HintGiver::getQuickSpawnHint()
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)
-		return _T( "Hold " ) + ButtonString::LeftBumper( 85 ) + _T( " and " ) + ButtonString::RightBumper( 85 ) + _T( " to respawn quickly!" );
+		return Format( _T( "Hold {0} and {1} to respawn quickly!" ), ButtonString::LeftBumper( 85 ), ButtonString::RightBumper( 85 ) );
 	#else
-		return _T( "Press " ) + ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ) + _T( " or " ) + ButtonString::KeyStr( Keys_Space, 85 ) + _T( " to respawn quickly!" );
+		return Format( _T( "Press {0} or {1} or to respawn quickly!" ), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ), ButtonString::KeyStr( Keys_Space, 85 ) );
 	#endif
 	}
 
-	const std::wstring &HintGiver::getPowerupHint()
+	const std::wstring HintGiver::getPowerupHint()
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)
-		return _T( "Press " ) + ButtonString::Y( 85 ) + _T( " for powerups!" );
+		return Format( _T( "Press {0} for powerups!" ), ButtonString::Y( 85 ) );
 	#else
-		return _T( "Press " ) + ButtonString::Y( 85 ) + _T( " or " ) + ButtonString::KeyStr( Microsoft::Xna::Framework::Input::Keys::Enter, 85 ) + _T( " for powerups!" );
+		return Format( _T( "Press {0} or {1} for powerups!" ), ButtonString::Y( 85 ), ButtonString::KeyStr( Keys_Enter, 85 ) );
 	#endif
 	}
 
@@ -149,7 +147,7 @@ std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 		{
 			Hints::IncrYForHelpNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_YForHelpHelper>( shared_from_this() ) );
+			MyGame->WaitThenDo( 5, std::make_shared<Check_YForHelpHelper>( std::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
 		}
 	}
 }

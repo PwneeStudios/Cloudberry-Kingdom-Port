@@ -5,8 +5,10 @@
 
 namespace CloudberryKingdom
 {
+
 	class SlowMo : public GUI_Panel
 	{
+
 	public:
 		SlowMo();
 
@@ -21,8 +23,9 @@ namespace CloudberryKingdom
 
 	private:
 		void InitializeInstanceFields();
-	};
-}
 
+	};
+
+}
 
 #endif	//#ifndef SLOWMO

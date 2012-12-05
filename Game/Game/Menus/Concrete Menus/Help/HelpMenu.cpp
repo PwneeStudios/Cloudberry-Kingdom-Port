@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::IsSlowMoLambda::Apply( const std::shared_ptr<GameObject> &obj )
 	{
-		return std::dynamic_pointer_cast<SlowMo>( obj ) != 0;
+		return std::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( obj ) != 0;
 	}
 
 	HelpMenu::Toggle_ShowPathHelper::Toggle_ShowPathHelper( const std::shared_ptr<HelpMenu> &hm )
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 
 	bool HelpMenu::Toggle_SloMoHelperPredicate::Apply( const std::shared_ptr<GameObject> &match )
 	{
-		return std::dynamic_pointer_cast<SlowMo>( match ) != 0;
+		return std::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( match ) != 0;
 	}
 
 	HelpMenu::Toggle_SloMoHelper::Toggle_SloMoHelper( const std::shared_ptr<HelpMenu> &hm )
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 
 	void HelpMenu::Toggle_SloMoHelper::Apply()
 	{
-		Tools::RemoveAll( hm->MyGame->MyGameObjects, std::make_shared<Toggle_SloMoHelperPredicate>() );
+		Tools::RemoveAll<std::shared_ptr<GameObject> >( hm->MyGame->MyGameObjects, std::make_shared<Toggle_SloMoHelperPredicate>() );
 	}
 
 	HelpMenu::Toggle_SlowMoProxy::Toggle_SlowMoProxy( const std::shared_ptr<HelpMenu> &hm )
@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 		if ( Active )
 		{
 			Active = false;
-			MyGame->WaitThenDo( DelayExit, std::make_shared<ReturnToCallerProxy>( shared_from_this() ) );
+			MyGame->WaitThenDo( DelayExit, std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 		else
 			CkBaseMenu::ReturnToCaller();
@@ -250,12 +250,12 @@ namespace CloudberryKingdom
 		Buy( Cost_Watch );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<WatchComputerHelper>( shared_from_this() ) );
+		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<WatchComputerHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 	}
 
 	bool HelpMenu::On_ShowPath()
 	{
-		return Tools::Any( Tools::CurGameData->MyGameObjects, std::make_shared<IsShowGuidLambda>() );
+		return Tools::Any<std::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, std::make_shared<IsShowGuidLambda>() );
 	}
 
 	bool HelpMenu::Allowed_ShowPath()
@@ -277,11 +277,10 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 				if ( std::dynamic_pointer_cast<ShowGuide>( *obj ) != 0 )
 					( *obj )->Release();
-			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( shared_from_this() ) );
+			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 	}
 
@@ -293,12 +292,12 @@ namespace CloudberryKingdom
 		Buy( Cost_Path );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<Toggle_ShowPathSetter>( shared_from_this(), true ) );
+		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<Toggle_ShowPathSetter>( std::static_pointer_cast<HelpMenu>( shared_from_this() ), true ) );
 	}
 
 	bool HelpMenu::On_SlowMo()
 	{
-		return Tools::Any( Tools::CurGameData->MyGameObjects, std::make_shared<IsSlowMoLambda>() );
+		return Tools::Any<std::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, std::make_shared<IsSlowMoLambda>() );
 	}
 
 	bool HelpMenu::Allowed_SlowMo()
@@ -310,14 +309,14 @@ namespace CloudberryKingdom
 	{
 		if ( state )
 		{
-			std::shared_ptr<CloudberryKingdom::SlowMo> slowmo = std::make_shared<SlowMo>();
+			std::shared_ptr<CloudberryKingdom::SlowMo> slowmo = std::make_shared<CloudberryKingdom::SlowMo>();
 			slowmo->setControl( getControl() );
 
 			MyGame->AddGameObject( slowmo );
 		}
 		else
 		{
-			MyGame->AddToDo( std::make_shared<Toggle_SloMoHelper>( shared_from_this() ) );
+			MyGame->AddToDo( std::make_shared<Toggle_SloMoHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 	}
 
@@ -375,25 +374,24 @@ namespace CloudberryKingdom
 		MakeDarkBack();
 
 		// Make the left backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500 );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 		backdrop->setPos( Vector2( -1777.778f, 30.55557f ) );
 
 		// Coin
-//C# TO C++ CONVERTER NOTE: The variable Coin was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<QuadClass> Coin_Renamed = std::make_shared<QuadClass>( _T( "Coin_Blue" ), 90, true );
+		std::shared_ptr<QuadClass> Coin_Renamed = std::make_shared<QuadClass>( _T( "Coin_Blue" ), 90.f, true );
 		Coin_Renamed->setPos( Vector2( -873.1558f, 770.5778f ) );
 		MyPile->Add( Coin_Renamed, _T( "Coin" ) );
 
-		CoinsText = std::make_shared<EzText>( _T( "x" ), Resources::Font_Grobold42, 450, false, true );
+		CoinsText = std::make_shared<EzText>( _T( "x" ), Resources::Font_Grobold42, 450.f, false, true );
 		CoinsText->Name = _T( "Coins" );
 		CoinsText->setScale( .8f );
 		CoinsText->setPos( Vector2( -910.2224f, 717.3333f ) );
-		CoinsText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		CoinsText->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		CoinsText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		CoinsText->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 
 		CoinsText->ShadowOffset = Vector2( -11, 11 );
-		CoinsText->ShadowColor = Color( 65, 65, 65, 160 );
+		CoinsText->ShadowColor = bColor( 65, 65, 65, 160 );
 		CoinsText->PicShadow = false;
 		MyPile->Add( CoinsText );
 		SetCoins( Bank() );
@@ -426,7 +424,7 @@ namespace CloudberryKingdom
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -10, 0 ) );
-		item->setGo( Cast::ToItem( std::make_shared<WatchComputerProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<WatchComputerProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		ItemPos = Vector2( -1033.333f, 429.4446f );
 		PosAdd = Vector2( 0, -520 );
 		AddItem( item );
@@ -436,13 +434,13 @@ namespace CloudberryKingdom
 		if ( On_ShowPath() )
 		{
 			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_ShowPathProxy>( shared_from_this() );
+			toggle->OnToggle = std::make_shared<Toggle_ShowPathProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) );
 			toggle->Toggle( true );
 		}
 		else
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<ShowPathProxy>( shared_from_this() ) ) );
+			item->setGo( Cast::ToItem( std::make_shared<ShowPathProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = _T( "ShowPath" );
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
@@ -455,13 +453,13 @@ namespace CloudberryKingdom
 		if ( On_SlowMo() )
 		{
 			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_SlowMoProxy>( shared_from_this() );
+			toggle->OnToggle = std::make_shared<Toggle_SlowMoProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ));
 			toggle->Toggle( true );
 		}
 		else
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<SlowMoProxy>( shared_from_this() ) ) );
+			item->setGo( Cast::ToItem( std::make_shared<SlowMoProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = _T( "SlowMo" );
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
@@ -470,8 +468,8 @@ namespace CloudberryKingdom
 		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ACTIVATE_SLOW_MO );
 		Item_SlowMo = item;
 
-		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
-		MyMenu->OnY = Cast::ToAction( std::make_shared<MenuReturnToCallerProxy>( shared_from_this() ) );
+		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnY = Cast::ToAction( std::make_shared<MenuReturnToCallerProxy>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -560,7 +558,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( Frames );
 	}
 
-	void HelpMenu::SlideOut_RightPanel( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void HelpMenu::SlideOut_RightPanel( GUI_Panel::PresetPos Preset, int Frames )
 	{
 		CkBaseMenu::SlideOut_RightPanel( Preset, Frames );
 	}

@@ -1,23 +1,21 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<ScoreDatabase> ScoreDatabase::Instance = 0;
-int ScoreDatabase::MostRecentScoreDate = 0;
+	std::shared_ptr<ScoreDatabase> ScoreDatabase::Instance = 0;
+	int ScoreDatabase::MostRecentScoreDate = 0;
 
 	int ScoreDatabase::CurrentDate()
 	{
-		TimeSpan t = ( DateTime::Now - DateTime( 2000, 1, 1 ) );
+		TimeSpan t = ( DateTime::Now() - DateTime( 2000, 1, 1 ) );
 		int minutes = static_cast<int>( t.TotalMinutes );
 
 		return minutes;
 	}
 
-int ScoreDatabase::Capacity = 20;
-std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
+	int ScoreDatabase::Capacity = 20;
+	std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > ScoreDatabase::Games;
 
 	void ScoreDatabase::Initialize()
 	{
@@ -33,16 +31,14 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 
 	void ScoreDatabase::Serialize( const std::shared_ptr<BinaryWriter> &writer )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::map<int, std::vector<ScoreEntry*> >::const_iterator list = Games.begin(); list != Games.end(); ++list )
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( unknown::const_iterator score = list->Value.begin(); score != list->Value.end(); ++score )
+		for ( std::map<int, std::vector<std::shared_ptr<ScoreEntry> > >::const_iterator list = Games.begin(); list != Games.end(); ++list )
+			for ( std::vector<std::shared_ptr<ScoreEntry> >::const_iterator score = list->second.begin(); score != list->second.end(); ++score )
 				( *score )->WriteChunk_1000( writer );
 	}
 
 	void ScoreDatabase::FailLoad()
 	{
-		Games = std::map<int, std::vector<ScoreEntry*> >();
+		Games = std::map<int, std::vector<std::shared_ptr<ScoreEntry> > >();
 	}
 
 	void ScoreDatabase::Deserialize( std::vector<unsigned char> Data )
@@ -65,7 +61,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 		if ( Games.find( Game ) != Games.end() )
 			return;
 
-		Games[ Game ] = std::vector<ScoreEntry*>();
+		Games[ Game ] = std::vector<std::shared_ptr<ScoreEntry> >();
 	}
 
 	std::shared_ptr<ScoreList> ScoreDatabase::GetList( int Game )
@@ -74,7 +70,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 
 //C# TO C++ CONVERTER NOTE: The variable ScoreList was renamed since it is named the same as a user-defined type:
 		std::shared_ptr<ScoreList> ScoreList_Renamed = std::make_shared<ScoreList>( 10, 0 );
-		std::vector<ScoreEntry*> Scores = Games[ Game ];
+		std::vector<std::shared_ptr<ScoreEntry> > Scores = Games[ Game ];
 
 		int Count = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
@@ -93,11 +89,11 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 	{
 		EnsureList( Game );
 
-		std::vector<ScoreEntry*> Scores = Games[ Game ];
+		std::vector<std::shared_ptr<ScoreEntry> > Scores = Games[ Game ];
 		return Scores.size() < Capacity || Score > Min(Scores)->Value || Min(Scores)->Fake;
 	}
 
-	std::shared_ptr<ScoreEntry> ScoreDatabase::Max( std::vector<ScoreEntry*> &Scores )
+	std::shared_ptr<ScoreEntry> ScoreDatabase::Max( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
 		if ( Scores.empty() )
 			return std::make_shared<ScoreEntry>( 0 );
@@ -111,7 +107,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 		return Max( Games[ GameId ] );
 	}
 
-	std::shared_ptr<ScoreEntry> ScoreDatabase::Min( std::vector<ScoreEntry*> &Scores )
+	std::shared_ptr<ScoreEntry> ScoreDatabase::Min( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
 		if ( Scores.empty() )
 			return std::make_shared<ScoreEntry>( 0 );
@@ -136,7 +132,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 		if ( !Qualifies( score->GameId, score->Value ) )
 			return;
 
-		std::vector<ScoreEntry*> list = Games[ score->GameId ];
+		std::vector<std::shared_ptr<ScoreEntry> > list = Games[ score->GameId ];
 
 		list.push_back( score );
 		Sort( list );
@@ -146,7 +142,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 		Instance->Changed = true;
 	}
 
-	void ScoreDatabase::TrimExcess( std::vector<ScoreEntry*> &Scores )
+	void ScoreDatabase::TrimExcess( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
 		if ( Scores.size() > Capacity )
 			Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
@@ -157,7 +153,7 @@ std::map<int, std::vector<ScoreEntry*> > ScoreDatabase::Games = 0;
 		return score2->Value - score1->Value;
 	}
 
-	void ScoreDatabase::Sort( std::vector<ScoreEntry*> &Scores )
+	void ScoreDatabase::Sort( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
 		Scores.Sort( ScoreCompare );
 	}

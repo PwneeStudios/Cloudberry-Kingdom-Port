@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 		const Vector2 &getFull_BL() const;
 		const Vector2 &getFull_TR() const;
-		const Vector2 &getCurrent_TR() const;
+		const Vector2 getCurrent_TR() const;
 
 		std::shared_ptr<DrawPile> MyPile;
 

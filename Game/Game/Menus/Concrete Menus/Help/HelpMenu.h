@@ -5,42 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Listener;
-}
-
-namespace CloudberryKingdom
-{
-	class GameObject;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class HelpBlurb;
-}
-
-
-namespace CloudberryKingdom
-{
 	class HelpMenu : public CkBaseMenu
 	{
 	private:
@@ -92,7 +56,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class IsShowGuidLambda : public LambdaFunc_1<GameObject*, bool>
+		class IsShowGuidLambda : public LambdaFunc_1<std::shared_ptr<GameObject> , bool>
 		{
 		public:
 			IsShowGuidLambda();
@@ -101,7 +65,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class IsSlowMoLambda : public LambdaFunc_1<GameObject*, bool>
+		class IsSlowMoLambda : public LambdaFunc_1<std::shared_ptr<GameObject> , bool>
 		{
 		public:
 			IsSlowMoLambda();
@@ -159,7 +123,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class Toggle_SloMoHelperPredicate : public LambdaFunc_1<GameObject*, bool>
+		class Toggle_SloMoHelperPredicate : public LambdaFunc_1<std::shared_ptr<GameObject> , bool>
 		{
 		public:
 			bool Apply( const std::shared_ptr<GameObject> &match );
@@ -276,7 +240,7 @@ namespace CloudberryKingdom
 		virtual void SlideIn( int Frames );
 
 	protected:
-		virtual void SlideOut_RightPanel( const std::shared_ptr<PresetPos> &Preset, int Frames );
+		virtual void SlideOut_RightPanel( GUI_Panel::PresetPos Preset, int Frames );
 
 	private:
 		void InitializeInstanceFields();

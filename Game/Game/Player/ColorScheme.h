@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<void> obj;
 		Localization::Words word;
 
-		MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word );
+		MenuListItem( const std::shared_ptr<void> &obj, Localization::Words word );
 	};
 
 	class Hat : public Buyable
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 
 		void ReadChunk_0( const std::shared_ptr<Chunk> &chunk );
 
-		ClrTextFx SkinColor, CapeColor, CapeOutlineColor;
+		std::shared_ptr<ClrTextFx> SkinColor, CapeColor, CapeOutlineColor;
 		std::shared_ptr<Hat> HatData, BeardData;
 
 		void Init();

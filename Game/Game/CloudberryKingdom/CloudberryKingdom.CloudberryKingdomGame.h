@@ -161,16 +161,16 @@ namespace CloudberryKingdom
 		CloudberryKingdomGame();
 
 	private:
-		void graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e );
+		void graphics_PreparingDeviceSettings( const std::shared_ptr<void> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e );
 
 	public:
 		void Initialize();
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	private:
-		void SignedInGamer_SignedOut( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedOutEventArgs> &e );
+		void SignedInGamer_SignedOut( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedOutEventArgs> &e );
 
-		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
+		void SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e );
 #endif
 
 	public:

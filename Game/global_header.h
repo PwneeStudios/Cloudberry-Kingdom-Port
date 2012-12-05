@@ -53,6 +53,15 @@ namespace CloudberryKingdom
 #include "Hacks/BinaryReader.h"
 #include "Hacks/BinaryWriter.h"
 
+class Clipboard
+{
+
+public:
+	static std::wstring GetText();
+	static void SetText( std::wstring text );
+
+};
+
 class ContentManager
 {
 
@@ -66,15 +75,43 @@ public:
 
 };
 
+struct TimeSpan
+{
+
+public:
+	float TotalMinutes;
+
+	TimeSpan()
+	{
+		TotalMinutes = 0;
+	}
+
+};
+
 struct DateTime
 {
+
+public:
 	int Time;
+
+	DateTime( int year, int month, int day )
+	{
+	}
 
 	static DateTime Now()
 	{
-		return DateTime();
+		// FIXME: return the current date
+		return DateTime(0, 0, 0);
 	}
+
 };
+
+static TimeSpan operator - ( DateTime dt1, DateTime dt2 )
+{
+	// FIXME: Implement
+	return TimeSpan();
+}
+
 
 class DisplayMode
 {
@@ -615,7 +652,25 @@ public:
 
 };
 
-class SignedInEventArgs;
+
+// FIXME: SignedInGamer and SignedInEventArgs uses the Xbox XNA gamer concept.
+class SignedInGamer
+{
+
+public:
+	PlayerIndex MyPlayerIndex;
+
+};
+
+class SignedInEventArgs
+{
+
+public:
+	SignedInGamer Gamer;
+
+};
+
+
 class Song;
 class SoundEffect;
 
@@ -936,9 +991,6 @@ class VideoPlayer;
 #include "Game/Menus/Concrete Menus/Help/HelpBlurb.h"
 #include "Game/Tools/EzStorage.h"
 #include "Game/Player/PlayerManager.h"
-#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
-#include "Game/Menus/Concrete Menus/Help/HintBlurb.h"
-#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
 #include "Game/Menus/Concrete Menus/InGameStartMenus/InGameStartMenu.h"
 #include "Game/Menus/Menu Components/MenuItem.h"
 #include "Game/Menus/Concrete Menus/InGameStartMenus/Sub Menus/ControlScreen.h"
@@ -1030,6 +1082,11 @@ class VideoPlayer;
 #include "Game/Objects/Game Objects/GameObjects/Region.h"
 #include "Game/Objects/Game Objects/GameObjects/Rumble.h"
 #include "Game/Objects/Game Objects/GameObjects/SlowMo.h"
+
+#include "Game/Menus/Concrete Menus/Help/HelpMenu.h"
+#include "Game/Menus/Concrete Menus/Help/HintBlurb.h"
+#include "Game/Menus/Concrete Menus/Help/HintGiver.h"
+
 #include "Game/Objects/Game Objects/GameObjects/SuperCheer.h"
 #include "Game/Objects/Game Objects/GameObjects/TimerWarning.h"
 #include "Game/Objects/Game Objects/GameObjects/End/GameOverPanel.h"

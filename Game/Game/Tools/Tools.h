@@ -141,7 +141,7 @@ namespace CloudberryKingdom
 		static void LevelIsFinished();
 
 static void Break();
-static void Write( const std::shared_ptr<Object> &obj );
+static void Write( const std::shared_ptr<void> &obj );
 //ORIGINAL LINE: public static void Write(string str, params object[] objs)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 static void Write( const std::wstring &str, ... );
@@ -397,7 +397,7 @@ static std::wstring SourceTextureDirectory();
 		static std::vector<std::wstring> GetBitsFromReader( const std::shared_ptr<StreamReader> &reader );
 
 
-		//static std::shared_ptr<Object> ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader );
+		//static std::shared_ptr<void> ReadFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamReader> &reader );
 
 	private:
 		//static void ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType );
@@ -406,12 +406,12 @@ static std::wstring SourceTextureDirectory();
 	public:
 //ORIGINAL LINE: public static void WriteFields(object obj, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		//static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
+		//static void WriteFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
 
 	public:
 //ORIGINAL LINE: public static void WriteFieldsToCode(object obj, string prefix, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static void WriteFieldsToCode( const std::shared_ptr<Object> &obj, const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer, ... );
+		static void WriteFieldsToCode( const std::shared_ptr<void> &obj, const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer, ... );
 	private:
 		static int GetObjId();
 		static std::wstring ObjName( int id );
@@ -423,8 +423,8 @@ static std::wstring SourceTextureDirectory();
 		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
 		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
 
-		static void ReadLineToObj( const std::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits );
-		static void ReadLineToObj( std::shared_ptr<Object> &obj, const std::wstring &field, std::vector<std::wstring> &Bits );
+		static void ReadLineToObj( const std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits );
+		static void ReadLineToObj( std::shared_ptr<void> &obj, const std::wstring &field, std::vector<std::wstring> &Bits );
 
 		static bool BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit );
 

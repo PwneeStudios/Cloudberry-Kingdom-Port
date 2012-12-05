@@ -181,10 +181,10 @@ std::shared_ptr<EzFont> Resources::LilFont = 0;
 			if ( extension == _T( "xnb" ) )
 			{
 				if ( CreateNewWad )
-					Tools::SoundWad->AddSound( manager->Load<SoundEffect*>( _T( "Sound\\" ) + name ), name );
+					Tools::SoundWad->AddSound( manager->Load<std::shared_ptr<SoundEffect> >( _T( "Sound\\" ) + name ), name );
 				else
 				{
-					std::shared_ptr<SoundEffect> NewSound = manager->Load<SoundEffect*>( _T( "Sound\\" ) + name );
+					std::shared_ptr<SoundEffect> NewSound = manager->Load<std::shared_ptr<SoundEffect> >( _T( "Sound\\" ) + name );
 
 					std::shared_ptr<EzSound> CurSound = Tools::SoundWad->FindByName( name );
 					for ( std::vector<EzSound*>::const_iterator ezsound = Tools::PrivateSoundWad->SoundList.begin(); ezsound != Tools::PrivateSoundWad->SoundList.end(); ++ezsound )

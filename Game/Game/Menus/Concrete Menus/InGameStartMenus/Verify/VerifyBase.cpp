@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -42,7 +43,7 @@ namespace CloudberryKingdom
 
 	void VerifyBaseMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500, true );
+		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		Backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( Backdrop );
 		Backdrop->setPos( Vector2( 1181.251f, 241.6668f ) );
@@ -76,7 +77,7 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( 800, 361 );
 		PosAdd = Vector2( 0, -300 );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Shift everything
 		EnsureFancy();
