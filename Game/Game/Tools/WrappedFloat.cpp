@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -16,7 +13,7 @@ namespace CloudberryKingdom
 		MyInt = val;
 	}
 
-	const float &WrappedFloat::getVal() const
+	const float &WrappedFloat::getVal()
 	{
 		if ( GetCallback != 0 )
 			MyFloat = GetCallback->Apply();
@@ -50,17 +47,17 @@ namespace CloudberryKingdom
 			SetCallback->Apply();
 	}
 
-	const float &WrappedFloat::getSpread() const
+	float WrappedFloat::getSpread() const
 	{
 		return MaxVal - MinVal;
 	}
 
-	const float &WrappedFloat::getRatio() const
+	float WrappedFloat::getRatio()
 	{
 		return ( getVal() - MinVal ) / getSpread();
 	}
 
-	const float &WrappedFloat::getPercent() const
+	float WrappedFloat::getPercent()
 	{
 		return 100 * getRatio();
 	}
@@ -72,7 +69,7 @@ namespace CloudberryKingdom
 
 	void WrappedFloat::InitializeInstanceFields()
 	{
-		MinVal = float::MinValue;
-		MaxVal = float::MaxValue;
+		MinVal = FLT_MIN;
+		MaxVal = FLT_MAX;
 	}
 }

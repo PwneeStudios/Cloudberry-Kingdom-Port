@@ -423,14 +423,9 @@ static std::wstring SourceTextureDirectory();
 		//static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
 		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
 
-<<<<<<< HEAD
-		static void ReadLineToObj( const std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits );
-		static void ReadLineToObj( std::shared_ptr<void> &obj, const std::wstring &field, std::vector<std::wstring> &Bits );
-
-=======
 		/*static void ReadLineToObj( std::shared_ptr<void> &obj, std::vector<std::wstring> &Bits );
 		static void ReadLineToObj( std::shared_ptr<void> &obj, std::wstring field, std::vector<std::wstring> &Bits );*/
->>>>>>> d605f92a21198de193fca2be23200347fdc48be8
+
 		static bool BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit );
 
 		static std::wstring RemoveComment_SlashStyle( const std::wstring &str );

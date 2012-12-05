@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		float MyFloat;
 		float MinVal, MaxVal;
 
-		const float &getVal() const;
+		const float &getVal();
 		void setVal( const float &value );
 
 		std::shared_ptr<Lambda> SetCallback;
@@ -40,9 +40,9 @@ namespace CloudberryKingdom
 
 		void Set( float val );
 
-		const float &getSpread() const;
-		const float &getRatio() const;
-		const float &getPercent() const;
+		float getSpread() const;
+		float getRatio();
+		float getPercent();
 
 		void Release();
 
