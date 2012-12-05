@@ -12,16 +12,17 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 	{
 		//if (!path.Contains("double")) return;
 		//if (path.Contains("double")) return;
-		if ( !path.find( _T( "bob_v2_trimmed" ) ) != string::npos )
+		if ( !path.find( _T( "bob_v2_trimmed" ) ) != std::string::npos )
 			return;
 
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> rstream = File->Open( _T( "Content\\Objects\\TigarBob.smo" ), FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> rreader = std::make_shared<BinaryReader>( rstream, Encoding::UTF8 );
-		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
+		/*std::shared_ptr<FileStream> rstream = File->Open( _T( "Content\\Objects\\TigarBob.smo" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		std::shared_ptr<BinaryReader> rreader = std::make_shared<BinaryReader>( rstream, Encoding::UTF8 );*/
+		std::shared_ptr<BinaryReader> rreader = std::make_shared<BinaryReader>( _T( "Content\\Objects\\TigarBob.smo" ) );
+		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
 		obj->ReadFile( rreader, Tools::EffectWad, Tools::TextureWad );
 		rreader->Close();
-		rstream->Close();
+		//rstream->Close();
 
 		LoadAnimObj = obj;
 
@@ -36,7 +37,8 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		Tools::UseInvariantCulture();
 		std::shared_ptr<FileStream> stream = 0;
 		std::wstring original_path = path;
-		try
+		// FIXME: Find actual path.
+		/*try
 		{
 			stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
 		}
@@ -60,7 +62,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 					return;
 				}
 			}
-		}
+		}*/
 
 		std::shared_ptr<ObjectClass> p;
 		if ( BrandNew )
@@ -90,23 +92,23 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		q->TextureAnim = std::make_shared<AnimationData_Texture>();
 		q->TextureAnim->Anims = std::vector<OneAnim_Texture>( 20 );
 
-		std::shared_ptr<std::map<std::wstring, int> > ToAnim = std::map<std::wstring, int>();
-		ToAnim->Add( _T( "Stand" ), 0 );
-		ToAnim->Add( _T( "Run" ), 1 );
-		ToAnim->Add( _T( "Jump" ), 2 );
-		ToAnim->Add( _T( "DoubleJump" ), 29 );
-		ToAnim->Add( _T( "Fall" ), 3 );
-		ToAnim->Add( _T( "Duck" ), 4 );
-		ToAnim->Add( _T( "Turn" ), 5 );
+		std::shared_ptr<std::map<std::wstring, int> > ToAnim = std::make_shared<std::map<std::wstring, int> >();
+		(*ToAnim)[ _T( "Stand" ) ] = 0;
+		(*ToAnim)[ _T( "Run" ) ] = 1;
+		(*ToAnim)[ _T( "Jump" ) ] = 2;
+		(*ToAnim)[ _T( "DoubleJump" ) ] = 29;
+		(*ToAnim)[ _T( "Fall" ) ] = 3;
+		(*ToAnim)[ _T( "Duck" ) ] = 4;
+		(*ToAnim)[ _T( "Turn" ) ] = 5;
 
-		ToAnim->Add( _T( "Wheel" ), 25 );
-		ToAnim->Add( _T( "Bouncy" ), 24 );
-		ToAnim->Add( _T( "Jump2" ), 29 );
-		ToAnim->Add( _T( "Flip" ), 16 );
-		ToAnim->Add( _T( "Wave" ), 13 );
-		ToAnim->Add( _T( "Box_Stand" ), 6 );
-		ToAnim->Add( _T( "Box_Jump" ), 7 );
-		ToAnim->Add( _T( "Box_Duck" ), 8 );
+		(*ToAnim)[ _T( "Wheel" ) ] = 25;
+		(*ToAnim)[ _T( "Bouncy" ) ] = 24;
+		(*ToAnim)[ _T( "Jump2" ) ] = 29;
+		(*ToAnim)[ _T( "Flip" ) ] = 16;
+		(*ToAnim)[ _T( "Wave" ) ] = 13;
+		(*ToAnim)[ _T( "Box_Stand" ) ] = 6;
+		(*ToAnim)[ _T( "Box_Jump" ) ] = 7;
+		(*ToAnim)[ _T( "Box_Duck" ) ] = 8;
 
 		LoadAnimObj = p;
 
@@ -124,12 +126,12 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 			if ( bits.size() > 1 )
 			{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				var name = bits[ 0 ];
+				std::wstring name = bits[ 0 ];
 
 				// Try to load line as an animation
-				if ( ToAnim->ContainsKey( name ) )
+				if ( ToAnim->find( name ) != ToAnim->end() )
 				{
-					int anim = ToAnim[ name ];
+					int anim = (*ToAnim)[ name ];
 
 					// Name, file, start frame, end frame
 					std::wstring root = bits[ 1 ];
@@ -232,7 +234,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 					if ( _use_speed )
 						p->AnimSpeed[ anim ] = speed;
 					else
-						p->AnimSpeed[ anim ] = 1 / frame_length;
+						p->AnimSpeed[ anim ] = 1.f / frame_length;
 				}
 				else
 //C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
@@ -288,7 +290,8 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		if ( Tools::CurLevel != 0 && Tools::CurLevel->Bobs.size() > 0 ) // && Tools.CurLevel.DefaultHeroType == BobPhsxNormal.Instance)
 		{
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject = std::make_shared<ObjectClass>( p, false, false );
-			Tools::CurLevel->Bobs[ 0 ]->PlayerObject->AnimQueue->clear();
+			std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+			std::swap( Tools::CurLevel->Bobs[ 0 ]->PlayerObject->AnimQueue, empty );
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject->EnqueueAnimation( 0, 0, true );
 			//Tools.CurLevel.Bobs[0].MyPhsx.Prototype.PlayerObject = p;
 			//BobPhsxNormal.Instance.Prototype.PlayerObject = p;
@@ -333,7 +336,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 	std::shared_ptr<ObjectClass> Prototypes::MakeObj()
 	{
-		std::shared_ptr<std::wstring> path = _T( "Objects\\SpriteHeroTemplate.smo" );
+		std::wstring path = _T( "Objects\\SpriteHeroTemplate.smo" );
 		//var path = "Objects\\stickman.smo";
 		path = Path::Combine( Globals::ContentDirectory, path );
 
@@ -343,7 +346,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj = 0;
 std::shared_ptr<FlyingBlob> Prototypes::goomba = 0;
-std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> > Prototypes::bob = 0;
+std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> > Prototypes::bob;
 std::shared_ptr<Spike> Prototypes::SpikeObj = 0;
 std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door, GrassDoor, Prototypes::ArrowObj = 0;
 std::shared_ptr<ObjectClass> Prototypes::Hero = 0;
@@ -353,12 +356,13 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 	{
 		std::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		/*std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
-		stream->Close();
+		//stream->Close();
 
 		SourceObject->ConvertForSimple();
 		return std::make_shared<SimpleObject>( SourceObject );
@@ -368,12 +372,13 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 	{
 		std::shared_ptr<ObjectClass> obj;
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		/*std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
 		obj->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
-		stream->Close();
+		//stream->Close();
 
 		return obj;
 	}
@@ -418,35 +423,35 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 
 		// Classic Bob
 		BobPhsxNormal::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxNormal::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxNormal::getInstance(), NewBob ) );
 
 		// Invert
 		BobPhsxInvert::getInstance()->Prototype = BobPhsxNormal::getInstance()->Prototype;
-		bob.insert( make_pair( BobPhsxInvert::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxInvert::getInstance(), NewBob ) );
 
 		// Time
 		BobPhsxTime::getInstance()->Prototype = BobPhsxNormal::getInstance()->Prototype;
-		bob.insert( make_pair( BobPhsxTime::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxTime::getInstance(), NewBob ) );
 
 		// Tiny Bob
 		BobPhsxSmall::getInstance()->Prototype = BobPhsxNormal::getInstance()->Prototype;
-		bob.insert( make_pair( BobPhsxSmall::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxSmall::getInstance(), NewBob ) );
 
 		// Big
 		BobPhsxBig::getInstance()->Prototype = BobPhsxNormal::getInstance()->Prototype;
-		bob.insert( make_pair( BobPhsxBig::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxBig::getInstance(), NewBob ) );
 
 		// Phase
 		BobPhsxScale::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxScale::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxScale::getInstance(), NewBob ) );
 
 		// Double Jump
 		BobPhsxDouble::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxDouble::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxDouble::getInstance(), NewBob ) );
 
 		// Rocket
 		BobPhsxJetman::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxJetman::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxJetman::getInstance(), NewBob ) );
 
 		// Bouncy
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
@@ -456,7 +461,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 			NewBob->PlayerObject->FindQuad( _T( "Bouncy" ) )->Show = true;
 
 		BobPhsxBouncy::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxBouncy::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxBouncy::getInstance(), NewBob ) );
 
 		// Wheelie
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
@@ -466,7 +471,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 			NewBob->PlayerObject->FindQuad( _T( "Wheel" ) )->Show = true;
 
 		BobPhsxWheel::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxWheel::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxWheel::getInstance(), NewBob ) );
 
 		// Hero in a Box
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
@@ -480,7 +485,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		}
 
 		BobPhsxBox::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxBox::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxBox::getInstance(), NewBob ) );
 
 		// Rocketbox
 		NewBob = std::make_shared<Bob>( BobPhsxBox::getInstance(), false );
@@ -492,7 +497,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		}
 
 		BobPhsxRocketbox::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxRocketbox::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxRocketbox::getInstance(), NewBob ) );
 
 		// Spaceship 
 		NewBob = std::make_shared<Bob>( Path::Combine( Globals::ContentDirectory, _T( "Objects\\Spaceship.smo" ) ), Tools::EffectWad, Tools::TextureWad, BobPhsxSpaceship::getInstance(), false );
@@ -511,7 +516,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 
 
 		BobPhsxSpaceship::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxSpaceship::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxSpaceship::getInstance(), NewBob ) );
 
 
 		// Meat
@@ -528,7 +533,7 @@ std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
 		NewBob->PlayerObject->QuadList[ 1 ]->SetTexture( _T( "FallingBlock1" ), Tools::TextureWad );
 
 		BobPhsxMeat::getInstance()->Prototype = NewBob;
-		bob.insert( make_pair( BobPhsxMeat::getInstance(), NewBob ) );
+		bob.insert( std::make_pair( BobPhsxMeat::getInstance(), NewBob ) );
 
 
 		// Freeplay Heroes

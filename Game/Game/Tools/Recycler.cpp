@@ -7,11 +7,11 @@ namespace CloudberryKingdom
 
 	void RecycleBin::Release()
 	{
-		for ( std::stack<std::shared_ptr<ObjectBase> >::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
+		for ( std::vector<std::shared_ptr<ObjectBase> >::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 
-		for ( std::stack<std::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
+		for ( std::vector<std::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 	}
@@ -20,8 +20,8 @@ namespace CloudberryKingdom
 	{
 		MyType = type;
 
-		FullObject = std::stack<std::shared_ptr<ObjectBase> >();
-		BoxObject = std::stack<std::shared_ptr<ObjectBase> >();
+		/*FullObject = std::stack<std::shared_ptr<ObjectBase> >();
+		BoxObject = std::stack<std::shared_ptr<ObjectBase> >();*/
 	}
 
 	std::shared_ptr<ObjectBase> RecycleBin::GetObject( bool BoxesOnly )
@@ -51,13 +51,17 @@ namespace CloudberryKingdom
 			if ( BoxesOnly )
 			{
 				if ( BoxObject.size() > 0 )
-					obj = BoxObject.pop();
+				{
+					obj = BoxObject.back();
+					BoxObject.pop_back();
+				}
 			}
 			else
 			{
 				if ( FullObject.size() > 0 )
 				{
-					obj = FullObject.pop();
+					obj = FullObject.back();
+					FullObject.pop_back();
 				}
 			}
 
@@ -91,12 +95,12 @@ namespace CloudberryKingdom
 		//lock (this)
 		{
 			if ( obj->getCore()->BoxesOnly )
-				BoxObject.push( obj );
+				BoxObject.push_back( obj );
 			else
 			{
 	//                    if (FullObject.Contains(obj))
 	  //                      Console.WriteLine("@@@@@@ Double recyled!");
-				FullObject.push( obj );
+				FullObject.push_back( obj );
 			}
 		}
 	}
@@ -162,25 +166,31 @@ namespace CloudberryKingdom
 
 			default:
 				return 0;
-				throw ( std::exception( _T( "No type found for desired object" ) ) );
+				assert( !"No type found for desired object" );
+				//throw ( std::exception( _T( "No type found for desired object" ) ) );
 		}
 	}
 
 int Recycler::MetaCount = 0;
-std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
+std::vector<std::shared_ptr<Recycler> > Recycler::MetaBin;
 
 	std::shared_ptr<Recycler> Recycler::GetRecycler()
 	{
 		std::shared_ptr<Recycler> bin = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MetaBin )
+		//lock ( MetaBin )
 		{
+			MetaBinLock.Lock();
+
 			MetaCount++;
 			if ( MetaBin.empty() )
 				return std::make_shared<Recycler>();
 
-			bin = MetaBin.pop();
+			bin = MetaBin.back();
+			MetaBin.pop_back();
+
+			MetaBinLock.Unlock();
 		}
 
 		return bin;
@@ -190,21 +200,29 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 	{
 		recycler->Empty();
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MetaBin )
+		//lock ( MetaBin )
 		{
+			MetaBinLock.Lock();
+
 			MetaCount--;
-			MetaBin.push( recycler );
+			MetaBin.push_back( recycler );
+
+			MetaBinLock.Unlock();
 		}
 	}
 
 	void Recycler::DumpMetaBin()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
-		lock ( MetaBin )
+		//lock ( MetaBin )
 		{
-			for ( std::stack<Recycler*>::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
+			MetaBinLock.Lock();
+
+			for ( std::vector<std::shared_ptr<Recycler> >::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
 				( *recycler )->Empty( false );
-			GC::Collect();
+			//GC::Collect();
+
+			MetaBinLock.Unlock();
 		}
 	}
 
@@ -216,8 +234,8 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 	void Recycler::Init()
 	{
 		//Bins = new Dictionary<ObjectType, RecycleBin>();
-		int N = Tools::GetValues<ObjectType>()->Count(); //Enum.GetValues(typeof(ObjectType)).Length;
-		Bins = std::vector<RecycleBin*>( N );
+		int N = ObjectType_LENGTH; //Tools::GetValues<ObjectType>()->Count(); //Enum.GetValues(typeof(ObjectType)).Length;
+		Bins = std::vector<std::shared_ptr<RecycleBin> >( N );
 	}
 
 	std::shared_ptr<ObjectBase> Recycler::GetNewObject( ObjectType type, bool BoxesOnly )
@@ -296,7 +314,7 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 
 		// Collect associate objects
 		if ( CollectAssociates && obj->getCore()->Associations.size() > 0 )
-			for ( int i = 0; i < obj->getCore()->Associations.size(); i++ )
+			for ( size_t i = 0; i < obj->getCore()->Associations.size(); i++ )
 				if ( obj->getCore()->Associations[ i ].Guid > 0 )
 				{
 					std::shared_ptr<ObjectBase> _obj = obj->getCore()->MyLevel->LookupGUID(obj->getCore()->Associations[ i ].Guid);
@@ -311,7 +329,7 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 					{
 						if ( _obj->getCore()->Associations.size() > 0 )
 						{
-							for ( int j = 0; j < _obj->getCore()->Associations.size(); j++ )
+							for ( size_t j = 0; j < _obj->getCore()->Associations.size(); j++ )
 								if ( _obj->getCore()->Associations[ j ].Guid == obj->getCore()->MyGuid )
 									_obj->getCore()->Associations[ j ].Guid = 0;
 						}
@@ -326,13 +344,14 @@ std::stack<Recycler*> Recycler::MetaBin = std::stack<Recycler*>();
 
 	void Recycler::Empty( bool DoGC )
 	{
-		for ( int i = 0; i < Bins.size(); i++ )
+		for ( size_t i = 0; i < Bins.size(); i++ )
 			if ( Bins[ i ] != 0 )
 				Bins[ i ]->Release();
 
 		Init();
 
-		if ( DoGC )
-			GC::Collect();
+		// FIXME: No GC.
+		/*if ( DoGC )
+			GC::Collect();*/
 	}
 }

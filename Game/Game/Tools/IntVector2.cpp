@@ -42,6 +42,6 @@ namespace CloudberryKingdom
 
 	IntVector2::operator Vector2()
 	{
-		return Vector2( this->X, this->Y );
+		return Vector2( static_cast<float>( this->X ), static_cast<float>( this->Y ) );
 	}
 }

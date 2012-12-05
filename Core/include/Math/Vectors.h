@@ -2,6 +2,8 @@
 #define _VECTORS_H_
 
 #include <cmath>
+#include <cstdlib>
+#include <cstring>
 
 /**
  * 2-vector.

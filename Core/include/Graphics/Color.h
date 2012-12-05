@@ -63,6 +63,11 @@ struct Color
 	static Color Black;
 	static Color Transparent;
 	static Color White;
+
+	static Color LightSeaGreen;
+	static Color BlueViolet;
+	static Color Fuchsia;
+	static Color Gainsboro;
 };
 
 #endif

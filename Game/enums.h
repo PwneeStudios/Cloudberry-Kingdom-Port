@@ -891,7 +891,8 @@ enum ObjectType
 	ObjectType_DOOR,
 	ObjectType_WALL,
 	ObjectType_ZONE_TRIGGER,
-	ObjectType_CAMERA_ZONE
+	ObjectType_CAMERA_ZONE,
+	ObjectType_LENGTH
 };
 
 // Would be nice to get rid of this, and just rely on ...__AutoGen.instances, and have dictionaries with instances as keys

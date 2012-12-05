@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class WrappedBool;
-}
-
-namespace CloudberryKingdom
-{
-	class WrappedFloat;
-}
-
-namespace CloudberryKingdom
-{
-	class EzFont;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class Resources
 	{
 		/// <summary>

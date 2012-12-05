@@ -5,40 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FlyingBlob;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class Spike;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleObject;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class Prototypes
 	{
 	private:
