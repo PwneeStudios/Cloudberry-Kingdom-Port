@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Stores a tile set's information, including what obstacles are allowed.
 	/// </summary>
-	class TileSet
+	class TileSet : public Object
 	{
 	public:
 		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );

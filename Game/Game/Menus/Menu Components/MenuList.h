@@ -79,16 +79,16 @@ namespace CloudberryKingdom
 		virtual float Width();
 
 	private:
-		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<void> > ObjDict;
+		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<Object> > ObjDict;
 	public:
-		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<void> &obj );
+		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
 
 		std::shared_ptr<MenuItem> GetListItem();
 
 		/// <summary>
 		/// The object associated with the currently selected MenuItem
 		/// </summary>
-		const std::shared_ptr<void> &getCurObj() const;
+		const std::shared_ptr<Object> &getCurObj() const;
 
 		/// <summary>
 		/// When true the list's index will wrap if too large or too small.

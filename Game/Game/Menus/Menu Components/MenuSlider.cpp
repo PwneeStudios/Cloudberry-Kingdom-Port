@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		Slider->Base.e2 *= Size.Y;
 	}
 
-	const Vector2 MenuSlider::getSliderBackSize() const
+	Vector2 MenuSlider::getSliderBackSize() const
 	{
 		return SliderBack->Base.GetScale();
 	}
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		SliderBack->Base.SetScale( value );
 	}
 
-	const Vector2 MenuSlider::getSliderSize() const
+	Vector2 MenuSlider::getSliderSize() const
 	{
 		return Slider->Base.GetScale();
 	}

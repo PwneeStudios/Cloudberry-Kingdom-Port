@@ -43,7 +43,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 		if ( !getCore()->BoxesOnly )
 		{
 			MyQuad->Set( getInfo()->Spinners->Flame );
-			MyQuad->Quad_Renamed->UseGlobalIllumination = false;
+			MyQuad->Quad_Renamed.UseGlobalIllumination = false;
 
 			MyBaseQuad->Set( getInfo()->Spinners->Base );
 		}
@@ -112,7 +112,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 	void FireSpinner::DrawGraphics()
 	{
 		// Draw base
-		if ( MyBaseQuad->Quad_Renamed->_MyTexture != 0 )
+		if ( MyBaseQuad->Quad_Renamed._MyTexture != 0 )
 		{
 			MyBaseQuad->setPos( getPos() );
 			MyBaseQuad->Draw();
@@ -156,8 +156,8 @@ bool FireSpinner::RandomMiniOrientation = true;
 		 * */
 
 		// Tweening animation
-		bool HoldPlaying = MyQuad->Quad_Renamed->Playing;
-		MyQuad->Quad_Renamed->Playing = false;
+		bool HoldPlaying = MyQuad->Quad_Renamed.Playing;
+		MyQuad->Quad_Renamed.Playing = false;
 		for ( int i = 0; i < Balls; i++ )
 		{
 			float t = static_cast<float>( i ) / static_cast<float>( Balls - 1 );
@@ -165,7 +165,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 
 			if ( HoldPlaying && i == 0 )
 			{
-				MyQuad->Quad_Renamed->UpdateTextureAnim();
+				MyQuad->Quad_Renamed.UpdateTextureAnim();
 			}
 
 			MyQuad->setAlpha( 1 );
@@ -173,14 +173,14 @@ bool FireSpinner::RandomMiniOrientation = true;
 
 			if ( HoldPlaying && i > 0 )
 			{
-				MyQuad->Quad_Renamed->Playing = false;
-				MyQuad->Quad_Renamed->NextKeyFrame();
+				MyQuad->Quad_Renamed.Playing = false;
+				MyQuad->Quad_Renamed.NextKeyFrame();
 			}
 
-			MyQuad->setAlpha( MyQuad->Quad_Renamed->t - static_cast<int>( MyQuad->Quad_Renamed->t ) );
+			MyQuad->setAlpha( MyQuad->Quad_Renamed.t - static_cast<int>( MyQuad->Quad_Renamed.t ) );
 			MyQuad->Draw();
 		}
-		MyQuad->Quad_Renamed->Playing = HoldPlaying;
+		MyQuad->Quad_Renamed.Playing = HoldPlaying;
 	}
 
 	void FireSpinner::Move( Vector2 shift )

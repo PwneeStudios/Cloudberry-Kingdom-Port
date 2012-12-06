@@ -5,23 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Hat;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Awardment
 	{
 	public:

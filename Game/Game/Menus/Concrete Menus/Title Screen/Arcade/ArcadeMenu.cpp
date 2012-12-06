@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -48,7 +46,7 @@ namespace CloudberryKingdom
 		StartLevelMenu::PreviousMenuIndex = item->MenuIndex;
 
 		// Start the game
-		MyGame->PlayGame( std::make_shared<PlayGameProxy>( shared_from_this() ) );
+		MyGame->PlayGame( std::make_shared<PlayGameProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) ) );
 	}
 
 	void ArcadeBaseMenu::PlayGame()
@@ -99,8 +97,8 @@ namespace CloudberryKingdom
 			std::shared_ptr<Awardment> award = std::dynamic_pointer_cast<Awardment>( ( *item )->MyObject );
 			if ( 0 != award && !PlayerManager::Awarded( award ) && !CloudberryKingdomGame::UnlockAll )
 			{
-				( *item )->MyText->MyFloatColor = ( Color( 255, 100, 100 ) ).ToVector4();
-				( *item )->MySelectedText->MyFloatColor = ( Color( 255, 160, 160 ) ).ToVector4();
+				( *item )->MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
+				( *item )->MySelectedText->MyFloatColor = ( bColor( 255, 160, 160 ) ).ToVector4();
 			}
 			else
 			{
@@ -135,7 +133,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
@@ -167,7 +165,7 @@ namespace CloudberryKingdom
 		// Backdrop
 		std::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500 );
+		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
 		if ( Long )
 			backdrop->setSizeY( backdrop->getSizeY() * 1.02f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
@@ -209,7 +207,7 @@ namespace CloudberryKingdom
 		item->Name = itemname;
 		AddItem( item );
 
-		item->setGo( std::make_shared<GoProxy>( shared_from_this() ) );
+		item->setGo( std::make_shared<GoProxy>( std::static_pointer_cast<ArcadeMenu>( shared_from_this() ) ) );
 
 		return item;
 	}

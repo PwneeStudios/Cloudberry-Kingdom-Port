@@ -139,7 +139,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<void> &obj )
+	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj )
 	{
 		MyList.push_back( item );
 		ObjDict.insert( std::make_pair( item, obj ) );
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 		return MyList[ ListIndex ];
 	}
 
-	const std::shared_ptr<void> &MenuList::getCurObj() const
+	const std::shared_ptr<Object> &MenuList::getCurObj() const
 	{
 		return ObjDict[ CurMenuItem ];
 	}
@@ -419,7 +419,7 @@ namespace CloudberryKingdom
 		ListPadding = Vector2( 65, 0 );
 		TotalPadding = Vector2();
 #endif
-		ObjDict = std::map<std::shared_ptr<MenuItem>, std::shared_ptr<void> >();
+		ObjDict = std::map<std::shared_ptr<MenuItem>, std::shared_ptr<Object> >();
 		DoIndexWrapping = true;
 		LastIncrDir = 0;
 		ClickForNextItem = true;

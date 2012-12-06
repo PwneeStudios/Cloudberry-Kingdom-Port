@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		if ( !BoxesOnly )
 		{
 			MyQuad = std::make_shared<QuadClass>();
-			MyQuad->Quad_Renamed->U_Wrap = true;
+			MyQuad->Quad_Renamed.U_Wrap = true;
 			MyQuad->setTextureName( _T( "Conveyor" ) );
 
 			LeftEnd = std::make_shared<QuadClass>();
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	void ConveyorBlock::SetUV()
 	{
 		float repeats = Size.X / texture_size.X;
-		MyQuad->Quad_Renamed->UVFromBounds( Vector2( repeats + u_offset, 1 ), Vector2( 0 + u_offset, 0 ) );
+		MyQuad->Quad_Renamed.UVFromBounds( Vector2( repeats + u_offset, 1 ), Vector2( 0 + u_offset, 0 ) );
 	}
 
 	void ConveyorBlock::Init( Vector2 center, Vector2 size )

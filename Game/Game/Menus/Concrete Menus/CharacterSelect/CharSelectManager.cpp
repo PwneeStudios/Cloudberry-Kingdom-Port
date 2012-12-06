@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 	}
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	void CharacterSelectManager::SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e )
+	void CharacterSelectManager::SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e )
 	{
 		if ( CharSelect.empty() )
 			return;

@@ -1,19 +1,6 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
-// Questions
-// string formatting?
-// List.Sort
-// GameObjVec ObjectsToSave = GameObjVec();
-
-// Jordan's unalphebatized shit. Suck it Oleg.
-inline int Sign(int x) { return (x > 0) - (x < 0); }
-inline int Sign(float x) { return (x > 0) - (x < 0); }
-inline int Sign(double x) { return (x > 0) - (x < 0); }
-
-// Things to reh-gecks.
-// Math::Sign and Sign -> Sign
-
 #include "enums.h"
 #include "forward_declarations.h"
 
@@ -45,6 +32,60 @@ namespace CloudberryKingdom
 	typedef std::vector<std::shared_ptr<BlockBase> > BlockVec;
 	typedef std::vector<std::shared_ptr<GameObject> > GameObjVec;
 }
+
+// Jordan's unalphebatized shit. Suck it Oleg.
+inline int Sign(int x) { return (x > 0) - (x < 0); }
+inline int Sign(float x) { return (x > 0) - (x < 0); }
+inline int Sign(double x) { return (x > 0) - (x < 0); }
+
+/// Increment an enumeration variable by one.
+template<typename E>
+inline void Incr( E &e )
+{
+	e = static_cast<E>( static_cast<int>( e ) + 1 );
+}
+
+class Object
+{
+
+public:
+	virtual ~Object()
+	{
+	}
+
+};
+
+template<class T>
+class WrappedValue : public Object
+{
+
+public:
+	T MyValue;
+
+	WrappedValue( T value ) : MyValue( value )
+	{
+	}
+
+};
+
+template<class T>
+inline T Unbox( std::shared_ptr<Object> o )
+{
+	return ( *std::static_pointer_cast<WrappedValue<T> >( o ).get() ).MyValue;
+}
+
+template<class T>
+inline std::shared_ptr<Object> MakeSmartObject( T t )
+{
+	return std::static_pointer_cast<Object>( std::make_shared<WrappedValue<T> >( t ) );
+}
+
+template<class T>
+inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
+{
+	return std::static_pointer_cast<Object>( ptr );
+}
+
 
 // Core library.
 #include <Graphics/Color.h>

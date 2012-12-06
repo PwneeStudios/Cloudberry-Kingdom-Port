@@ -29,11 +29,11 @@ namespace CloudberryKingdom
 							State_SCENE_KOBBLER_BLUR
 		};
 	public:
-		virtual void Hide( const std::shared_ptr<PresetPos> &pos, int frames );
+		virtual void Hide( const PresetPos &pos, int frames );
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames );
+		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 		virtual void OnAdd();
 

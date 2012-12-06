@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( true );
 	}
 
-	void HintBlurb::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void HintBlurb::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		if ( Frames == 0 )
 			return;

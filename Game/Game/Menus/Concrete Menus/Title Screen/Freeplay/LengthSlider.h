@@ -8,6 +8,9 @@ namespace CloudberryKingdom
 	class LengthSlider : public MenuSliderBase
 	{
 	public:
+		using MenuItem::Draw;
+
+	public:
 		LengthSlider();
 		LengthSlider( const std::shared_ptr<EzText> &Text );
 		LengthSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );

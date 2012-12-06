@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -93,7 +92,7 @@ namespace CloudberryKingdom
 	void CustomUpgrades_GUI::AddUpgradeAdditionalOnSelect::Apply()
 	{
 		cuGui->TopText->SubstituteText( slider->Icon->DisplayText );
-		cuGui->TopText->Pos = Vector2( 761 + 280, -46 + 771 );
+		cuGui->TopText->setPos( Vector2( 761 + 280, -46 + 771 ) );
 		cuGui->TopText->Center();
 
 		cuGui->BigIcon = ObjectIcon::CreateIcon( upgrade, true );
@@ -159,7 +158,7 @@ namespace CloudberryKingdom
 	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
 		InitializeInstanceFields();
-		CustomLevel->CallingPanel = this;
+		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 
 		this->PieceSeed = PieceSeed;
 		this->CustomLevel = CustomLevel;
@@ -187,24 +186,24 @@ namespace CloudberryKingdom
 	void CustomUpgrades_GUI::AddUpgrade( Upgrade upgrade )
 	{
 		std::shared_ptr<MenuSlider> slider = std::make_shared<MenuSlider>( std::make_shared<EzText>( _T( "" ), ItemFont ) );
-		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f,.72f) *.975f * ScaleList );
+		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f, .72f) * .975f * ScaleList );
 		slider->SetIcon( ObjectIcon::CreateIcon( upgrade ) );
 		slider->Icon->SetScale( .6f * ScaleList );
-		slider->setMyFloat( std::make_shared<WrappedFloat>( 0, 0, 9 ) );
+		slider->setMyFloat( std::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
 		slider->InitialSlideSpeed *= 9;
 		slider->MaxSlideSpeed *= 9;
 		slider->Icon->setPos( slider->Icon->getPos() + Vector2(110, -123.5f) );
-		slider->getMyFloat()->GetCallback = std::make_shared<UpgradesSliderLambda>(this, upgrade);
+		slider->getMyFloat()->GetCallback = std::make_shared<UpgradesSliderLambda>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade );
 
 		// Keep the PieceSeed up to date when the slider changes
 		if ( upgrade == Upgrade_FALLING_BLOCK )
 		{
-			slider->getMyFloat()->SetCallback = std::make_shared<BlockPieceSeedSetter>(this, upgrade, slider);
+			slider->getMyFloat()->SetCallback = std::make_shared<BlockPieceSeedSetter>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
 		}
 		else
-			slider->getMyFloat()->SetCallback = std::make_shared<PieceSeedSetter>(this, upgrade, slider);
+			slider->getMyFloat()->SetCallback = std::make_shared<PieceSeedSetter>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
 
-		slider->AdditionalOnSelect = std::make_shared<AddUpgradeAdditionalOnSelect>( shared_from_this(), slider, upgrade );
+		slider->AdditionalOnSelect = std::make_shared<AddUpgradeAdditionalOnSelect>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), slider, upgrade );
 		AddItem( slider );
 	}
 
@@ -290,7 +289,7 @@ namespace CloudberryKingdom
 		// Backdrop
 		std::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500, true );
+		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 		backdrop->setSize( Vector2( 1682.54f, 1107.681f ) );
@@ -418,10 +417,10 @@ namespace CloudberryKingdom
 	void CustomUpgrades_GUI::MakeMenu()
 	{
 		MyMenu = std::make_shared<Menu>( false );
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( shared_from_this() ) );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
-		MyMenu->OnX = Cast::ToMenu( std::make_shared<RandomizeProxy>( shared_from_this() ) );
-		MyMenu->OnY = std::make_shared<ZeroProxy>( shared_from_this() );
+		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = Cast::ToMenu( std::make_shared<RandomizeProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyMenu->OnY = std::make_shared<ZeroProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) );
 		MyMenu->SelectDelay = 11;
 	}
 
@@ -431,7 +430,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::StartGame()
 	{
-		MyGame->PlayGame( std::make_shared<StartLevelProxy>( shared_from_this() ) );
+		MyGame->PlayGame( std::make_shared<StartLevelProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
 	}
 
 	void CustomUpgrades_GUI::MakeOptions()
@@ -443,7 +442,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<MenuItem> item;
 		std::shared_ptr<MenuItem> Start = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_START, ItemFont ) );
 		item->Name = _T( "Start" );
-		item->setGo( Cast::ToItem( std::make_shared<GoProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 425.3959f, -99.92095f );
@@ -451,35 +450,35 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
 		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( shared_from_this() ) );
+		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
 
 		// Random
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
 		item->Name = _T( "Random" );
-		item->setGo( Cast::ToItem( std::make_shared<RandomizeProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<RandomizeProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 511.8408f, -302.6506f );
-		item->MyText->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4() *.93f;
-		item->MySelectedText->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4() *.93f;
+		item->MySelectedText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4();
 
 		// Zero
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( Cast::ToItem( std::make_shared<ZeroProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ZeroProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 599.1416f, -501.0634f );
-		item->MyText->MyFloatColor = ( Color( 235, 255, 80 ) ).ToVector4() *.93f;
-		item->MySelectedText->MyFloatColor = ( Color( 235, 255, 80 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4() *.93f;
+		item->MySelectedText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4();
 
 		// Back
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		item->Name = _T( "Back" );
-		item->getGo().reset();
+		item->_Go.reset();
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( std::make_shared<ItemReturnToCallerProxy>( shared_from_this() ) );
+		item->setGo( std::make_shared<ItemReturnToCallerProxy>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->Pos = item->SelectedPos = Vector2( 702.3179f, -689.9683f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;

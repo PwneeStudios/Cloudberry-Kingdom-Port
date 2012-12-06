@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 	void LavaBlock::SetUV()
 	{
 		float repeats = Size.X / TextureSize.X;
-		MyQuad->Quad_Renamed->UVFromBounds( Vector2( repeats + u_offset, 1 ), Vector2( 0 + u_offset, 0 ) );
+		MyQuad->Quad_Renamed.UVFromBounds( Vector2( repeats + u_offset, 1 ), Vector2( 0 + u_offset, 0 ) );
 	}
 
 	void LavaBlock::Init( float top, float left, float right, float depth )

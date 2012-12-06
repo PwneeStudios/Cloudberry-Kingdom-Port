@@ -5,80 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class LengthSlider;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuList;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectIcon;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuSliderBase;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	class CustomHero_GUI;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class CustomLevel_GUI : public CkBaseMenu
 	{
+	public:
+		using GUI_Panel::SlideOut;
+		using GUI_Panel::SlideIn;
+
 	private:
 		class StartLevelFromMenDataStandardLoadProxy : public Lambda_1<std::shared_ptr<Level> >
 		{

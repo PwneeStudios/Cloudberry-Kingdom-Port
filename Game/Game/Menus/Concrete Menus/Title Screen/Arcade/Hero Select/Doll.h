@@ -1,31 +1,7 @@
-﻿#ifndef DOLL
-#define DOLL
+﻿#ifndef DOLL_H
+#define DOLL_H
 
 #include <global_header.h>
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-
-#if defined(PC_VERSION)
-#elif defined(XBOX) || defined(XBOX_SIGNIN)
-
-#endif
-
-
 
 namespace CloudberryKingdom
 {

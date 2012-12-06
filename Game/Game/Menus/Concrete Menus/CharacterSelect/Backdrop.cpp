@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void CharSelectBackdrop::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void CharSelectBackdrop::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		if ( Frames != 0 )
 			Frames = 20;

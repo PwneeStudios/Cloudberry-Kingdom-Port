@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -17,7 +15,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_PressStart::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_PressStart::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		CkBaseMenu::SlideOut( Preset, 0 );
 	}
@@ -45,7 +43,7 @@ namespace CloudberryKingdom
 		Text = std::make_shared<EzText>( Localization::Words_PRESS_START, Resources::Font_Grobold42, true );
 		//Text = new EzText(Localization.Words.PressStart, ItemFont);
 
-		Text->MyFloatColor = ( Color( 226, 10, 83 ) ).ToVector4();
+		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();
 		Text->OutlineColor = Color::Black.ToVector4();
 		MyPile->Add( Text );
 
@@ -81,7 +79,7 @@ namespace CloudberryKingdom
 			DelayToAllowInput = 10;
 
 			//Tools.Nothing();
-			Call( std::make_shared<StartMenu_MW>( Title ) );
+			GUI_Panel::Call( std::make_shared<StartMenu_MW>( Title ) );
 			Hide();
 		}
 	}
@@ -92,7 +90,7 @@ namespace CloudberryKingdom
 			return;
 
 		float s = CoreMath::Periodic( .85f, 1, 3, Tools::t );
-		Text->MyFloatColor = ( Color( static_cast<int>( 226 * s ), 10, 83 ) ).ToVector4();
+		Text->MyFloatColor = ( bColor( static_cast<int>( 226 * s ), 10, 83 ) ).ToVector4();
 
 		Text->setScale( CoreMath::Periodic( .818668f,.838668f, 3, Tools::t ) *.8f );
 

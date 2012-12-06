@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -29,7 +30,7 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::SlideIn( 0 );
 	}
 
-	void HeroSelectOptions::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void HeroSelectOptions::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		ArcadeBaseMenu::SlideOut( Preset, 0 );
 	}
@@ -105,11 +106,11 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		std::shared_ptr<MenuItem> item;
 
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 80, _T("Button_X") ) );
+		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( _T("Button_X") ) ) );
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LEADERBOARD, ItemFont, false, true ) );
 
 		item->Name = _T( "Leaderboard" );
-		item->setGo( Cast::ToItem( std::make_shared<BringLeaderboardProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<BringLeaderboardProxy>( std::static_pointer_cast<HeroSelectOptions>( shared_from_this() ) ) ) );
 		AddItem( item );
 		StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( item );
 
@@ -172,7 +173,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopPlayerLevel() );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
+		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
 		levelmenu->ReturnFunc.reset();
 
 		Call( levelmenu );

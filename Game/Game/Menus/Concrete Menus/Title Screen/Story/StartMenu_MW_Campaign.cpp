@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Campaign::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_Campaign::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}

@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 
 	void TimerWarning::SetAlpha( float alpha )
 	{
-		Fullscreen->Quad_Renamed->SetColor( Vector4( .8f,.4f,.4f, alpha ) );
+		Fullscreen->Quad_Renamed.SetColor( Vector4( .8f,.4f,.4f, alpha ) );
 	}
 
 	void TimerWarning::InitializeInstanceFields()

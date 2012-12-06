@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-#if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-
-#endif
-
 namespace CloudberryKingdom
 {
 
@@ -20,7 +16,7 @@ namespace CloudberryKingdom
 
 		if ( MyDoll != 0 )
 		{
-			MyDoll->getCore()->MyLevel->Bobs.Remove(MyDoll);
+			Remove( MyDoll->getCore()->MyLevel->Bobs, MyDoll );
 			MyDoll->Release();
 			MyDoll.reset();
 		}
@@ -50,9 +46,8 @@ namespace CloudberryKingdom
 
 	void HeroDoll::MakeHeroDoll( const std::shared_ptr<BobPhsx> &hero )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var current_bob = MyGame->MyLevel->Bobs.empty() ? 0 : MyGame->MyLevel->Bobs[ 0 ];
-		std::shared_ptr<CloudberryKingdom::FancyVector2> current_pos = current_bob == 0 ? Vector2() : current_bob->Pos;
+		std::shared_ptr<Bob> current_bob = MyGame->MyLevel->Bobs.empty() ? 0 : MyGame->MyLevel->Bobs[ 0 ];
+		Vector2 current_pos = current_bob == 0 ? Vector2() : current_bob->getPos();
 
 		// Grab cape
 		std::shared_ptr<Cape> PrevCape = 0;
@@ -63,7 +58,6 @@ namespace CloudberryKingdom
 		}
 
 		// Get rid of old bobs.
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 			( *bob )->Release();
 		MyGame->MyLevel->Bobs.clear();

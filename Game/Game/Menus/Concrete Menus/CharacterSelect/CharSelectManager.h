@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 	private:
-		void SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e );
+		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
 
 #endif
 

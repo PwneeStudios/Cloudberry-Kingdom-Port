@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -22,7 +20,7 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringNextMenu();
 
-		Hide();
+		GUI_Panel::Hide();
 	}
 
 	StartMenu_MW::StartMenu_MW( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu()
@@ -37,7 +35,7 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}
@@ -46,21 +44,21 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringCampaign();
 
-		Call( std::make_shared<StartMenu_MW_Campaign>( Title ) );
+		GUI_Panel::Call( std::make_shared<StartMenu_MW_Campaign>( Title ) );
 	}
 
 	void StartMenu_MW::BringArcade()
 	{
 		StartMenu::BringArcade();
 
-		Call( std::make_shared<StartMenu_MW_Arcade>( Title ) );
+		GUI_Panel::Call( std::make_shared<StartMenu_MW_Arcade>( Title ) );
 	}
 
 	void StartMenu_MW::BringFreeplay()
 	{
 		StartMenu::BringFreeplay();
 
-		Call( std::make_shared<StartMenu_MW_CustomLevel>( Title ) );
+		GUI_Panel::Call( std::make_shared<StartMenu_MW_CustomLevel>( Title ) );
 	}
 
 	void StartMenu_MW::SetItemProperties( const std::shared_ptr<MenuItem> &item )
@@ -88,7 +86,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_MENU, ItemFont ) );
 		Header->ScaleText( 1.3f );
@@ -115,7 +113,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW::SmallBlackBox()
 	{
 		BackBox->setTextureName( _T( "White" ) );
-		BackBox->Quad_Renamed->SetColor( ColorHelper::Gray( .1f ) );
+		BackBox->Quad_Renamed.SetColor( ColorHelper::Gray( .1f ) );
 		BackBox->setAlpha( .73f );
 
 		std::shared_ptr<MenuItem> _item;

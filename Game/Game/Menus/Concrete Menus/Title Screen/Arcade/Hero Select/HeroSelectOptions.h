@@ -5,23 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_HeroSelect;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
 	class HeroSelectOptions : public ArcadeBaseMenu
 	{
+	public:
+		using GUI_Panel::Call;
+
 	private:
 		class BringLeaderboardProxy : public Lambda
 		{
@@ -44,7 +32,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames );
+		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	protected:
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );

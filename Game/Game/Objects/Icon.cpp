@@ -229,12 +229,12 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->Set( info );
 
-		IconQuad->Quad_Renamed->Playing = false;
+		IconQuad->Quad_Renamed.Playing = false;
 
-		if ( IconQuad->Quad_Renamed->TextureAnim == 0 )
-			IconTexture = IconQuad->Quad_Renamed->MyTexture;
+		if ( IconQuad->Quad_Renamed.TextureAnim == 0 )
+			IconTexture = IconQuad->Quad_Renamed.MyTexture;
 		else
-			IconTexture = IconQuad->Quad_Renamed->TextureAnim->Anims[ 0 ]->Data[ 0 ];
+			IconTexture = IconQuad->Quad_Renamed.TextureAnim->Anims[ 0 ]->Data[ 0 ];
 
 		this->DisplayText = Localization::Words_NONE;
 		this->NormalWidth = 161 * 1.31f * info->Size.X / 62;
@@ -271,7 +271,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->SetToDefault();
-		IconQuad->Quad_Renamed->MyTexture = IconTexture;
+		IconQuad->Quad_Renamed.MyTexture = IconTexture;
 		IconQuad->ScaleYToMatchRatio( Width );
 
 		IconQuad->Shadow = true;
@@ -298,9 +298,9 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		ObjectIcon::Fade( fade );
 
 		if ( fade )
-			IconQuad->Quad_Renamed->SetColor( Color( 100, 100, 100 ) );
+			IconQuad->Quad_Renamed.SetColor( Color( 100, 100, 100 ) );
 		else
-			IconQuad->Quad_Renamed->SetColor( Color::White );
+			IconQuad->Quad_Renamed.SetColor( Color::White );
 	}
 
 	std::shared_ptr<ObjectIcon> PictureIcon::Clone( IconScale ScaleType )
@@ -313,10 +313,10 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 		std::shared_ptr<PictureIcon> icon = std::make_shared<PictureIcon>( IconTexture, BarColor, width );
 		icon->DisplayText = DisplayText;
-		icon->IconQuad->Quad_Renamed->v0 = IconQuad->Quad_Renamed->v0;
-		icon->IconQuad->Quad_Renamed->v1 = IconQuad->Quad_Renamed->v1;
-		icon->IconQuad->Quad_Renamed->v2 = IconQuad->Quad_Renamed->v2;
-		icon->IconQuad->Quad_Renamed->v3 = IconQuad->Quad_Renamed->v3;
+		icon->IconQuad->Quad_Renamed.v0 = IconQuad->Quad_Renamed.v0;
+		icon->IconQuad->Quad_Renamed.v1 = IconQuad->Quad_Renamed.v1;
+		icon->IconQuad->Quad_Renamed.v2 = IconQuad->Quad_Renamed.v2;
+		icon->IconQuad->Quad_Renamed.v3 = IconQuad->Quad_Renamed.v3;
 
 		icon->HitPadding = HitPadding;
 

@@ -1,9 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -18,7 +14,7 @@ namespace CloudberryKingdom
 		//MyPile.FadeIn(.1f);
 	}
 
-	void StartMenu_MW_Exit::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_Exit::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		VerifyQuitGameMenu2::SlideOut( Preset, 0 );
 	}

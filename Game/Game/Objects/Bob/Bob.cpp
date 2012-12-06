@@ -185,8 +185,8 @@ int Bob::ImmortalLength = 55;
 				MyCape->setMyOutlineColor( scheme.CapeOutlineColor.Clr );
 			}
 
-			MyCape->MyQuad->Quad_Renamed->MyTexture = scheme.CapeColor.Texture;
-			MyCape->MyQuad->Quad_Renamed->MyEffect = scheme.CapeColor.Effect;
+			MyCape->MyQuad->Quad_Renamed.MyTexture = scheme.CapeColor.Texture;
+			MyCape->MyQuad->Quad_Renamed.MyEffect = scheme.CapeColor.Effect;
 
 			if ( scheme.CapeColor.ModObject != 0 )
 				scheme.CapeColor.ModObject->Apply( shared_from_this() );
@@ -841,7 +841,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			Vector2 Size = Vector2( 100 - 50 * Guide_h * i );
 			//Vector2 Size = new Vector2(40);
 
-			GuideQuad->Quad_Renamed->SetColor( Color( 0, 0, 0, 1 - Guide_h * i ) );
+			GuideQuad->Quad_Renamed.SetColor( Color( 0, 0, 0, 1 - Guide_h * i ) );
 			GuideQuad->setSize( Size * 1.15f );
 
 			GuideQuad->setPos( Loc[ Step ] );
@@ -851,7 +851,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			Color c = MyColorScheme.SkinColor.Clr;
 			c.A = static_cast<unsigned char>( 255 * ( 1 - Guide_h * i ) );
 			//GuideQuad.Quad.SetColor(new Color(0f, 1f, 0f, 1f - Guide_h * i));
-			GuideQuad->Quad_Renamed->SetColor( c );
+			GuideQuad->Quad_Renamed.SetColor( c );
 			GuideQuad->setSize( Size );
 
 			GuideQuad->setPos( Loc[ Step ] );
@@ -863,7 +863,7 @@ float Bob::Guide_h = 1 / GuideLength;
 	{
 			Vector2 Size = Vector2( 15 );
 
-			GuideQuad->Quad_Renamed->SetColor( Color::PowderBlue );
+			GuideQuad->Quad_Renamed.SetColor( Color::PowderBlue );
 			//GuideQuad.Quad.SetColor(Color.Black);
 			//GuideQuad.Quad.SetColor(new Color(0,255,0,150));
 			GuideQuad->setSize( Size );
@@ -919,7 +919,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			Rocket = std::make_shared<QuadClass>( _T( "Castle_Jet_Pack" ) );
 			//Rocket = new QuadClass("RocketPack");
 			Rocket->FancyAngle = std::make_shared<FancyVector2>();
-			Rocket->Quad_Renamed->MyEffect = Tools::HslEffect;
+			Rocket->Quad_Renamed.MyEffect = Tools::HslEffect;
 			Rocket->setDegrees( -20 );
 		}
 		else
@@ -932,11 +932,11 @@ float Bob::Guide_h = 1 / GuideLength;
 			Rocket->Draw();
 
 			Rocket->setDegrees( 33 );
-			Rocket->Quad_Renamed->MirrorUV_Horizontal();
+			Rocket->Quad_Renamed.MirrorUV_Horizontal();
 			Rocket->ScaleYToMatchRatio( PlayerObject->ParentQuad->getSize().X * scale );
 			Rocket->setPos( getPos() + Vector2(93, 20) * GetScale() );
 			Rocket->Draw();
-			Rocket->Quad_Renamed->MirrorUV_Horizontal();
+			Rocket->Quad_Renamed.MirrorUV_Horizontal();
 		}
 	}
 

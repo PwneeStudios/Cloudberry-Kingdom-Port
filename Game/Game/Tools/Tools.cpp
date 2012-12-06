@@ -174,7 +174,7 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 #endif
 	}
 
-	void Tools::Write( const std::shared_ptr<void> &obj )
+	void Tools::Write( const std::shared_ptr<Object> &obj )
 	{
 #if defined(DEBUG)
 	std::cout << obj << std::endl;
@@ -903,7 +903,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 		return GetBitsFromLine( reader->ReadLine() );
 	}
 
-	/*std::shared_ptr<void> Tools::ReadFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamReader> &reader )
+	/*std::shared_ptr<Object> Tools::ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader )
 	{
 		std::shared_ptr<std::wstring> line = reader->ReadLine();
 		while ( line != 0 )
@@ -1004,7 +1004,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 					else
 						constructor = itemType->GetConstructor( Type_EMPTY_TYPES );
 
-					std::shared_ptr<void> newobj = constructor->Invoke( Type_EMPTY_TYPES );
+					std::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
 					//ReadFields(newobj, reader);
 					if ( std::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
 						( std::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
@@ -1031,7 +1031,7 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 int Tools::WriteRecursiveDepth = 0;
 int Tools::WriteObjId = 0;
 
-	/*void Tools::WriteFields( const std::shared_ptr<void> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
+	/*void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
 	{
 		WriteRecursiveDepth++;
 		std::wstring WhiteSpace = _T( "" );

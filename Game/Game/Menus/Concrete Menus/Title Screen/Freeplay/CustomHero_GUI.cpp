@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -30,7 +31,7 @@ namespace CloudberryKingdom
 	void CustomHero_GUI::KillBobsHelper::Apply()
 	{
 		for ( BobVec::const_iterator bob = chGui->MyGame->MyLevel->Bobs.begin(); bob != chGui->MyGame->MyLevel->Bobs.end(); ++bob )
-			( *bob )->Die( Bob::BobDeathType_NONE );
+			( *bob )->Die( BobDeathType_NONE );
 	}
 
 	CustomHero_GUI::AddItemProxy::AddItemProxy( const std::shared_ptr<CustomHero_GUI> &chGui )
@@ -103,10 +104,10 @@ namespace CloudberryKingdom
 		chGui->ResetSliders();
 	}
 
-BobPhsx::CustomPhsxData CustomHero_GUI::HeroPhsxData = 0;
-std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
+	BobPhsx::CustomPhsxData CustomHero_GUI::HeroPhsxData;
+	std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
-	const std::shared_ptr<BobPhsxNormal> &CustomHero_GUI::getNormalHero() const
+	const std::shared_ptr<BobPhsxNormal> CustomHero_GUI::getNormalHero() const
 	{
 		return std::dynamic_pointer_cast<BobPhsxNormal>( Hero );
 	}
@@ -116,7 +117,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		InitializeInstanceFields();
 		this->CustomLevel = CustomLevel;
 
-		CustomLevel->CallingPanel = this;
+		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
 	void CustomHero_GUI::OnAdd()
@@ -140,7 +141,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 		PosAdd = Vector2( 0, -93.45f );
 
 		PhsxSlider::Font = ItemFont;
-		PhsxSlider::Process = std::make_shared<AddItemProxy>( shared_from_this() );
+		PhsxSlider::Process = std::make_shared<AddItemProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) );
 
 		AccelSlider = std::make_shared<PhsxSlider>( Localization::Words_ACCELERATION, BobPhsx::CustomData_ACCEL );
 		MaxSpeedSlider = std::make_shared<PhsxSlider>( Localization::Words_MAX_VELOCITY, BobPhsx::CustomData_MAXSPEED );
@@ -201,7 +202,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 			( *bob )->CollectSelf();
 		}
 
-		MyGame->AddToDo( std::make_shared<MoveBlockAndKillProxy>( shared_from_this() ), _T( "MoveOut" ), true, true );
+		MyGame->AddToDo( std::make_shared<MoveBlockAndKillProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), _T( "MoveOut" ), true, true );
 	}
 
 	bool CustomHero_GUI::MoveBlockAndKill()
@@ -216,7 +217,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	void CustomHero_GUI::KillBobs()
 	{
-		MyGame->WaitThenDo( 20, std::make_shared<KillBobsHelper>( shared_from_this() ), _T( "RemoveBobs" ), false, true );
+		MyGame->WaitThenDo( 20, std::make_shared<KillBobsHelper>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), _T( "RemoveBobs" ), false, true );
 	}
 
 	void CustomHero_GUI::MakeBobPhsx()
@@ -266,7 +267,7 @@ std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	void CustomHero_GUI::CreateGround()
 	{
-		MyGame->MyLevel->MyTileSet = _T( "castle" );
+		MyGame->MyLevel->MyTileSet = TileSet::Get( _T( "castle" ) );
 
 		std::shared_ptr<NormalBlock> block;
 
@@ -375,7 +376,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		MyPile->Add( HeaderText );
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500, true );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( backdrop );
 
@@ -389,9 +390,9 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 		BaseList = MakeList();
 		BaseList->Name = _T( "base" );
-		for ( IEnumerable<T*>::const_iterator _hero = Tools::GetValues<Hero_BaseType>()->begin(); _hero != Tools::GetValues<Hero_BaseType>()->end(); ++_hero )
+		for ( Hero_BaseType _hero = static_cast<Hero_BaseType>( 0 ); _hero != Hero_BaseType_LENGTH; Incr( _hero ) )
 		{
-			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx( *_hero );
+			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Base( _hero );
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
 			SetListItemProperties( item );
@@ -407,9 +408,9 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 		JumpList = MakeList();
 		JumpList->Name = _T( "jump" );
-		for ( IEnumerable<T*>::const_iterator _hero = Tools::GetValues<Hero_MoveMod>()->begin(); _hero != Tools::GetValues<Hero_MoveMod>()->end(); ++_hero )
+		for ( Hero_MoveMod _hero = static_cast<Hero_MoveMod>( 0 ); _hero != Hero_MoveMod_LENGTH; Incr( _hero ) )
 		{
-			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx( *_hero );
+			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Move( _hero );
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
 			SetListItemProperties( item );
@@ -425,9 +426,10 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 		SizeList = MakeList();
 		SizeList->Name = _T( "size" );
-		for ( IEnumerable<T*>::const_iterator _hero = Tools::GetValues<Hero_Shape>()->begin(); _hero != Tools::GetValues<Hero_Shape>()->end(); ++_hero )
+		for ( Hero_Shape _hero = static_cast<Hero_Shape>( 0 ); _hero < Hero_Shape_LENGTH; Incr( _hero ) )
+		//for ( IEnumerable<T*>::const_iterator _hero = Tools::GetValues<Hero_Shape>()->begin(); _hero != Tools::GetValues<Hero_Shape>()->end(); ++_hero )
 		{
-			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx( *_hero );
+			std::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Shape( _hero );
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
 			SetListItemProperties( item );
@@ -451,7 +453,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		UpdateSliders();
 
@@ -460,9 +462,9 @@ int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::SetListActions()
 	{
-		BaseList->OnIndexSelect = std::make_shared<UpdateBaseHeroProxy>( shared_from_this() );
-		SizeList->OnIndexSelect = std::make_shared<UpdateSizeHeroProxy>( shared_from_this() );
-		JumpList->OnIndexSelect = std::make_shared<UpdateJumpHeroProxy>( shared_from_this() );
+		BaseList->OnIndexSelect = std::make_shared<UpdateBaseHeroProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) );
+		SizeList->OnIndexSelect = std::make_shared<UpdateSizeHeroProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) );
+		JumpList->OnIndexSelect = std::make_shared<UpdateJumpHeroProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) );
 	}
 
 	void CustomHero_GUI::UpdateSliders()
@@ -696,7 +698,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		// Start
 		if ( WithButtonPics )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_A") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( _T("Button_A") ) ) );
 			A = Start = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_TEST, ItemFont ) );
 		}
 		else
@@ -704,7 +706,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Name = _T( "test" );
 		item->JiggleOnGo = false;
 		AddItem( item );
-		item->setGo( Cast::ToItem( std::make_shared<StartTestProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<StartTestProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 	#if defined(NOT_PC)
@@ -718,7 +720,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		// Back
 		if ( WithButtonPics )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 90, _T("Button_B") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( _T("Button_B") ) ) );
 			B = Back = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		}
 		else
@@ -726,7 +728,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Name = _T( "back" );
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 	#if defined(NOT_PC)
@@ -736,7 +738,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		// Continue
 		if ( WithButtonPics )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 90, _T("Button_X") ) );
+			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
 			X = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) );
 		}
 		else
@@ -745,19 +747,19 @@ int CustomHero_GUI::JumpListIndex = 0;
 		item->Name = _T( "continue" );
 		AddItem( item );
 		item->SelectSound.reset();
-		item->MyText->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4() *.93f;
-		item->MySelectedText->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4() *.93f;
+		item->MySelectedText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4();
 	#if defined(NOT_PC)
 		item->Selectable = false;
 		MyMenu->OnX = Cast::ToMenu( X->getGo() );
 	#endif
-		item->setGo( Cast::ToItem( std::make_shared<NextProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<NextProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 
 		// Reset
 		item = ResetButton = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "reset" );
 		AddItem( item );
-		item->setGo( Cast::ToItem( std::make_shared<ResetSlidersProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<ResetSlidersProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
 	}
 
 	bool CustomHero_GUI::AdvancedAvailable()
@@ -795,7 +797,7 @@ int CustomHero_GUI::JumpListIndex = 0;
 		}
 		else
 		{
-			MyGame->PlayGame( std::make_shared<StartLevelProxy>( shared_from_this() ) );
+			MyGame->PlayGame( std::make_shared<StartLevelProxy>( std::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) );
 		}
 	}
 

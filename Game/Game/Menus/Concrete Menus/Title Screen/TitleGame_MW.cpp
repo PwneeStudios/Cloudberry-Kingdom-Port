@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -17,7 +18,7 @@ namespace CloudberryKingdom
 		tgdmw->_Init();
 	}
 
-std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<TitleGameData_MW_Factory>();
+	std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<TitleGameData_MW_Factory>();
 
 	void TitleGameData_MW::Release()
 	{
@@ -48,7 +49,7 @@ std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<
 
 		level->TimeLimit = -1;
 
-		level->CurPiece = level->StartNewPiece( 0, 0, 4 );
+		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 
 		Vector2 Center = Vector2( 0, 0 );
 
@@ -75,7 +76,7 @@ std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<
 
 		Tools::CurGameType = TitleGameData::Factory;
 
-		Tools::TitleGame = this;
+		Tools::TitleGame = shared_from_this();
 
 		// Backdrop
 		BackPanel = std::make_shared<StartMenu_MW_Backpanel>();
@@ -93,13 +94,13 @@ std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<
 
 		// Fade in
 		FadeIn( .0175f );
-		WaitThenDo( 18, std::make_shared<_InitProxy>( shared_from_this() ) );
+		WaitThenDo( 18, std::make_shared<_InitProxy>( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
 	}
 
 	void TitleGameData_MW::_Init()
 	{
 		// Press Start
-		PressStart = std::make_shared<StartMenu_MW_PressStart>( shared_from_this() );
+		PressStart = std::make_shared<StartMenu_MW_PressStart>( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) );
 		AddGameObject( PressStart );
 
 		/*

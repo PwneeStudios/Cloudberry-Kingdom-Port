@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( true );
 	}
 
-	void AwardmentMessage::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void AwardmentMessage::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		if ( Frames == 0 )
 			return;

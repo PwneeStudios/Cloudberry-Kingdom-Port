@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Awardment;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class AwardmentMessage : public CkBaseMenu
 	{
 	protected:
@@ -37,7 +19,7 @@ namespace CloudberryKingdom
 	public:
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames );
+		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	protected:
 		std::shared_ptr<EzText> Text;

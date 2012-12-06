@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		{
 			if ( !getBlockCore()->BoxesOnly )
 			{
-				MyQuad->Quad_Renamed->U_Wrap = true;
+				MyQuad->Quad_Renamed.U_Wrap = true;
 
 				MyQuad->Draw();
 				Tools::QDrawer->Flush();
