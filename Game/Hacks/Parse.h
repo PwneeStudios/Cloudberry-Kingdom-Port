@@ -4,6 +4,14 @@
 #include <sstream>
 
 
+template <typename T>
+std::wstring ToString( const T &t )
+{
+	std::wstringstream wss;
+	wss << t;
+	return wss.str();
+}
+
 inline std::wstring ToString( const int i )
 {
 	using namespace std;

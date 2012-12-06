@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		_Bounds = std::vector<DataBounds>( Length );
 	}
 
-	std::vector<DataBounds> BobPhsx::CustomPhsxData::_Bounds = 0;
+	std::vector<BobPhsx::CustomPhsxData::DataBounds> BobPhsx::CustomPhsxData::_Bounds;
 
 	CloudberryKingdom::BobPhsx::CustomPhsxData::DataBounds BobPhsx::CustomPhsxData::Bounds( CustomData type )
 	{
@@ -132,9 +132,9 @@ namespace CloudberryKingdom
 	{
 		std::wstring str = _T( "ph:" );
 
-		for ( int i = 0; i < data.size(); i++ )
+		for ( size_t i = 0; i < data.size(); i++ )
 		{
-			str += data[ i ];
+			str += ::ToString( data[ i ] );
 			if ( i + 1 < data.size() )
 				str += _T( "," );
 		}
@@ -147,22 +147,22 @@ namespace CloudberryKingdom
 	{
 		// Break the data up by commas
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		std::vector<std::wstring> terms = str.Split( L',' );
+		std::vector<std::wstring> terms = Split( str, L',' );
 
 		Init();
 
 		// Try and load the data into the array.
 		try
 		{
-			for ( int i = 0; i < terms.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
 			{
 				float v = ParseFloat( terms[ i ] );
-				data[ i ] = CoreMath::Restrict( Bounds( i ).MinValue, Bounds( i ).MaxValue, v );
+				data[ i ] = CoreMath::RestrictVal( Bounds( i ).MinValue, Bounds( i ).MaxValue, v );
 			}
 		}
 		catch ( ... )
 		{
-			for ( int i = 0; i < data.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( data.size() ); i++ )
 				data[ i ] = Bounds( i ).DefaultValue;
 		}
 	}
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		return MakeCustom( spec.basetype, spec.shape, spec.move );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( const std::shared_ptr<BobPhsx> &BaseType, const std::shared_ptr<BobPhsx> &Shape, const std::shared_ptr<BobPhsx> &MoveMod, const std::shared_ptr<BobPhsx> &Special )
+	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( std::shared_ptr<BobPhsx> BaseType, const std::shared_ptr<BobPhsx> &Shape, std::shared_ptr<BobPhsx> MoveMod, std::shared_ptr<BobPhsx> Special )
 	{
 		// Error catch. Spaceship can't be rocketman or double jump
 		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( BaseType ) != 0 )
@@ -334,10 +334,10 @@ namespace CloudberryKingdom
 			_BaseType = _Shape = _MoveMod = _Special = 0;
 		}
 
-		_BaseType = CoreMath::Restrict( 0, Hero_BaseType_LENGTH - 1, _BaseType );
-		_Shape = CoreMath::Restrict( 0, Hero_Shape_LENGTH - 1, _Shape );
-		_MoveMod = CoreMath::Restrict( 0, Hero_MoveMod_LENGTH - 1, _MoveMod );
-		_Special = CoreMath::Restrict( 0, Hero_Special_LENGTH - 1, _Special );
+		_BaseType = CoreMath::RestrictVal( 0, Hero_BaseType_LENGTH - 1, _BaseType );
+		_Shape = CoreMath::RestrictVal( 0, Hero_Shape_LENGTH - 1, _Shape );
+		_MoveMod = CoreMath::RestrictVal( 0, Hero_MoveMod_LENGTH - 1, _MoveMod );
+		_Special = CoreMath::RestrictVal( 0, Hero_Special_LENGTH - 1, _Special );
 
 		//return MakeCustom(_BaseType, _Shape, _MoveMod);
 		return MakeCustom( _BaseType, _Shape, _MoveMod, _Special );
@@ -355,12 +355,12 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod )
 	{
-		return MakeCustom( GetPhsx( BaseType ), GetPhsx( Shape ), GetPhsx( MoveMod ), BobPhsxNormal::getInstance() );
+		return MakeCustom( GetPhsx_Base( BaseType ), GetPhsx_Shape( Shape ), GetPhsx_Move( MoveMod ), BobPhsxNormal::getInstance() );
 	}
 
 	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod, Hero_Special Special )
 	{
-		return MakeCustom( GetPhsx( BaseType ), GetPhsx( Shape ), GetPhsx( MoveMod ), GetPhsx( Special ) );
+		return MakeCustom( GetPhsx_Base( BaseType ), GetPhsx_Shape( Shape ), GetPhsx_Move( MoveMod ), GetPhsx_Special( Special ) );
 	}
 
 	void BobPhsx::SetCustomPhsx( CustomPhsxData data )
@@ -376,14 +376,14 @@ namespace CloudberryKingdom
 		ModCapeSize *= data[ CustomData_SIZE ];
 
 		// Wheelie phsx
-		std::shared_ptr<BobPhsxWheel> wheel = std::dynamic_pointer_cast<BobPhsxWheel>( this );
+		std::shared_ptr<BobPhsxWheel> wheel = std::dynamic_pointer_cast<BobPhsxWheel>( shared_from_this() );
 		if ( 0 != wheel )
 		{
 			wheel->AngleAcc *= static_cast<float>( pow( data[ CustomData_ACCEL ], 1.5f ) );
 			wheel->MaxAngleSpeed *= data[ CustomData_MAXSPEED ];
 		}
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( this );
+		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( shared_from_this() );
 		if ( std::dynamic_pointer_cast<BobPhsxNormal>( normal ) != 0 )
 		{
 			// Normal phsx
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 
 			normal->BobJumpLength = static_cast<int>( normal->BobJumpLength * data[ CustomData_JUMPLENGTH ] );
 			normal->BobJumpLength2 = static_cast<int>( normal->BobJumpLength2 * data[ CustomData_JUMPLENGTH2 ] );
-			normal->SetAccels( normal->BobJumpLength );
+			normal->SetAccels( static_cast<float>( normal->BobJumpLength ) );
 			normal->BobJumpAccel *= data[ CustomData_JUMPACCEL ];
 			normal->BobJumpAccel2 *= data[ CustomData_JUMPACCEL2 ];
 
@@ -462,7 +462,7 @@ namespace CloudberryKingdom
 		MyBob->getCore()->Data.Position = value;
 	}
 
-	const Vector2 &BobPhsx::getApparentVelocity() const
+	Vector2 BobPhsx::getApparentVelocity() const
 	{
 		return getVel() + Vector2(GroundSpeed, 0);
 	}
@@ -513,7 +513,7 @@ namespace CloudberryKingdom
 
 	bool BobPhsx::DynamicLessThan( float val1, float val2 )
 	{
-		return Gravity > 0 ? val1 <val2 : val1*> -val2;
+		return Gravity > 0 ? ( val1 < val2 ) : ( val1 > -val2 );
 	}
 
 	bool BobPhsx::DynamicGreaterThan( float val1, float val2 )
@@ -521,7 +521,7 @@ namespace CloudberryKingdom
 		return Gravity > 0 ? val1 > val2 : val1 < -val2;
 	}
 
-	const bool &BobPhsx::getSticky() const
+	bool BobPhsx::getSticky() const
 	{
 		return !OverrideSticky;
 	}
@@ -600,7 +600,7 @@ namespace CloudberryKingdom
 
 	void BobPhsx::OscillatePhsx()
 	{
-		float t = MyBob->getCore()->GetPhsxStep();
+		float t = static_cast<float>( MyBob->getCore()->GetPhsxStep() );
 		float scale = CoreMath::Periodic( OscillateSize1, OscillateSize2, 30 * OscillatePeriod, t, 90 );
 		ScaledFactor = scale;
 
@@ -669,7 +669,7 @@ namespace CloudberryKingdom
 
 	void BobPhsx::PhsxStep2()
 	{
-		if ( Math::Sign( MyBob->PrevInput.xVec.X ) == Math::Sign( MyBob->CurInput.xVec.X ) && Math::Sign( MyBob->CurInput.xVec.X ) != 0 )
+		if ( Sign( MyBob->PrevInput.xVec.X ) == Sign( MyBob->CurInput.xVec.X ) && Sign( MyBob->CurInput.xVec.X ) != 0 )
 			SameInputDirectionCount++;
 		else
 			SameInputDirectionCount = 0;
