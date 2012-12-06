@@ -23,9 +23,9 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<EzText> Title;
 		if ( award->Unlockable == 0 )
-			Title = std::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42_2, 1800, false, false,.575f );
+			Title = std::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		else
-			Title = std::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800, false, false,.575f );
+			Title = std::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		Title->setPos( Vector2( -1726.192f, 369.0475f ) );
 		Title->setScale( Title->getScale() * .79f );
 		MyPile->Add( Title );
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 	void AwardmentMessage::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( 0, true, false );
+		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
 		Backdrop->setTextureName( _T( "WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1750, 284.8255f ) );
 		Backdrop->setPos( Vector2( -11.9043f, 59.52365f ) );
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		MyPile->MyTextList.clear();
 
 		// Add the new text
-		Text = std::make_shared<EzText>( text, ItemFont, 1800, false, false,.575f );
+		Text = std::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
 
 		if ( award->Unlockable == 0 )
 		{
