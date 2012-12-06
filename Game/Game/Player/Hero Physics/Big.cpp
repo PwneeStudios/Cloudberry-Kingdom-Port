@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		else
 			phsx->ModInitSize = Vector2( 1.7f, 1.4f );
 
-		phsx->CapePrototype = Cape::CapeType_NORMAL;
+		phsx->CapePrototype = CapeType_NORMAL;
 		phsx->CapeOffset += Vector2( 0, -20 );
 
 		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
