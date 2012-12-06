@@ -464,23 +464,23 @@ ClrTextFx ColorSchemeManager::None;
 		//colorm = HsvTransform(1.25f, 1.3f, 0) * LinearColorTransform(305); // Yellow
 
 		// Fill the skin color list
-		ColorList.push_back( _i( 3500, 0, Color( 1, 1, 1 ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_WHITE ) ); // 0
+		ColorList.push_back( _i( 3500, 0, Color( unsigned char( 1 ), unsigned char( 1 ), unsigned char( 1 ) ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_WHITE ) ); // 0
 		ColorList.push_back( _i( 3501, 0, Color::Silver, ColorHelper::HsvTransform( .85f, 0, 0 ), Localization::Words_SILVER ) ); // 1
 		ColorList.push_back( _i( 3502, 0, Color::Gray, ColorHelper::HsvTransform( .525f, 0, 0 ), Localization::Words_GRAY ) ); // 2
-		ColorList.push_back( _i( 3503, 0, Color( 0, 0, 0 ), Color( 50, 50, 50 ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_BLACK ) ); // 3
+		ColorList.push_back( _i( 3503, 0, Color( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ) ), Color( unsigned char( 50 ), unsigned char( 50 ), unsigned char( 50 ) ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_BLACK ) ); // 3
 
 		ColorList.push_back( _i( 3504, 0, Color::Cyan, ColorHelper::LinearColorTransform( 45 ), Localization::Words_CYAN ) ); // 4
-		ColorList.push_back( _i( 3505, 0, Color( 0, 0, 1 ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_BLUE ) ); // 5
+		ColorList.push_back( _i( 3505, 0, Color( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 1 ) ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_BLUE ) ); // 5
 		ColorList.push_back( _i( 3506, 0, Color::DarkBlue, ColorHelper::LinearColorTransform( 80 ), Localization::Words_TEAL ) ); // 6
 		ColorList.push_back( _i( 3507, 0, Color::Indigo, ColorHelper::HsvTransform( .8f, 1.3f, 225 ), Localization::Words_INDIGO ) ); // 7
 		ColorList.push_back( _i( 3508, 0, Color::Purple, ColorHelper::HsvTransform( .85f, 1.1f, 205 ), Localization::Words_PURPLE ) ); // 8
 		ColorList.push_back( _i( 3509, 0, Color::Brown, ColorHelper::HsvTransform( 1, 1, 80 ), Localization::Words_BROWN ) ); // 9
-		ColorList.push_back( _i( 3510, 0, Color( 1, 0, 0 ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_RED ) ); // 10
+		ColorList.push_back( _i( 3510, 0, Color( unsigned char( 1 ), unsigned char( 0 ), unsigned char( 0 ) ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_RED ) ); // 10
 		ColorList.push_back( _i( 3511, 0, Color::HotPink, ColorHelper::HsvTransform( 1.3f, 1.2f, 200 ), Localization::Words_HOT_PINK ) ); // 11
 		ColorList.push_back( _i( 3512, 0, Color( 1,.6f, 0 ),ColorHelper::HsvTransform( .9f, 1.3f, 110 ), Localization::Words_ORANGE ) ); // 12
 		ColorList.push_back( _i( 3513, 0, Color::Gold, ColorHelper::HsvTransform( 1.3f, 1.2f, 100 ), Localization::Words_GOLD ) ); // 13
 		ColorList.push_back( _i( 3514, 0, Color::Yellow, ColorHelper::HsvTransform( 1.5f, 1.5f, 100 ), Localization::Words_YELLOW ) ); // 14
-		ColorList.push_back( _i( 3515, 0, Color( 0, 1, 0 ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_GREEN ) ); // 15
+		ColorList.push_back( _i( 3515, 0, Color( unsigned char( 0 ), unsigned char( 1 ), unsigned char( 0 ) ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_GREEN ) ); // 15
 		ColorList.push_back( _i( 3516, 0, Color::LimeGreen, ColorHelper::HsvTransform( 1.25f, 1.35f, 0 ), Localization::Words_LIME_GREEN ) ); // 16
 		ColorList.push_back( _i( 3517, 0, Color::ForestGreen, ColorHelper::HsvTransform( .75f,.8f, 0 ), Localization::Words_FOREST_GREEN ) ); // 17
 
@@ -509,20 +509,22 @@ ClrTextFx ColorSchemeManager::None;
 
 		// Fill the cape color list
 		ClrTextFx cape;
-		None = ClrTextFx( 3525, 0, Color( 1, 1, 1, 0 ), Matrix::Identity );
+		None = ClrTextFx( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
 		None.Name = Localization::Words_NONE;
 		CapeColorList.push_back( std::make_shared<MenuListItem>( None, Localization::Words_NONE ) );
-		CapeColorList.AddRange( ColorList );
+		//CapeColorList.AddRange( ColorList );
+		AddRange( CapeColorList, ColorList );
 
 		// Fill the outline color list
-		OutlineList.AddRange( CapeColorList );
+		//OutlineList.AddRange( CapeColorList );
+		AddRange( OutlineList, CapeColorList );
 		OutlineList.push_back( NoTexture );
 
 		// Fill the cape outline list
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
 			Color clr = ( static_cast<ClrTextFx>( ( *item )->obj ) ).Clr;
-			Color color = Color( clr.ToVector3() *.8f );
+			Color color = Color( clr.ToVector3() * .8f );
 			color.A = clr.A;
 			ClrTextFx capeoutline = static_cast<ClrTextFx>( ( *item )->obj );
 			capeoutline.Clr = color;
@@ -530,9 +532,12 @@ ClrTextFx ColorSchemeManager::None;
 		}
 
 		// Add textures to skin color list and cape color list
-		ColorList.AddRange( TextureList );
-		CapeColorList.AddRange( TextureList );
-		CapeColorList.Remove( NoTexture );
+		//ColorList.AddRange( TextureList );
+		AddRange( ColorList, TextureList );
+		//CapeColorList.AddRange( TextureList );
+		AddRange( CapeColorList, TextureList );
+		//CapeColorList.Remove( NoTexture );
+		Remove( CapeColorList, NoTexture );
 
 		ClrTextFx fx;
 		Vector2 fx_scale = Vector2( .875f, 1.195f ) *.98f;

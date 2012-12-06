@@ -309,10 +309,18 @@ class Matrix
 
 public:
 
-	float M11, M12, M13, M14;
-	float M21, M22, M23, M24;
-	float M31, M32, M33, M34;
-	float M41, M42, M43, M44;
+	union
+	{
+		struct
+		{
+			float M11, M12, M13, M14;
+			float M21, M22, M23, M24;
+			float M31, M32, M33, M34;
+			float M41, M42, M43, M44;
+		};
+
+		float M[16];
+	};
 
 	Matrix()
 	{
@@ -362,6 +370,12 @@ public:
 					   M21 + m.M21, M22 + m.M22, M23 + m.M23, M24 + m.M24,
 					   M31 + m.M31, M32 + m.M32, M33 + m.M33, M34 + m.M34,
 					   M41 + m.M41, M42 + m.M42, M43 + m.M43, M44 + m.M44 );
+	}
+
+	const Matrix operator * ( const Matrix &m ) const
+	{
+		// FIXME: Implement this.
+		return Matrix::Identity();
 	}
 };
 
