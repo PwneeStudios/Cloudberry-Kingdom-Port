@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -78,7 +79,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 		Taken = false;
 		ResetTakenAnim();
 
-		MyObject->SetColor( Color( 1, 1, 1, 1 ) );
+		MyObject->SetColor( Color( 1.f, 1.f, 1.f, 1.f ) );
 	}
 
 	void Checkpoint::ResetTakenAnim()
@@ -96,7 +97,7 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 		if ( getCore()->MyLevel->PlayMode != 0 )
 			return;
 
-		getGame()->CheckpointGrabEvent(this);
+		getGame()->CheckpointGrabEvent( shared_from_this() );
 
 		getInfo()->Checkpoints->MySound->Play();
 	}
@@ -265,8 +266,8 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 		{
 			if ( !GhostFaded )
 			{
-				MyQuad.SetColor( Color( 255, 255, 255, 90 ) );
-				MyObject->SetColor( Color( 255, 255, 255, 90 ) );
+				MyQuad.SetColor( bColor( 255, 255, 255, 90 ) );
+				MyObject->SetColor( bColor( 255, 255, 255, 90 ) );
 				GhostFaded = true;
 			}
 		}
@@ -274,8 +275,8 @@ std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 		{
 			if ( GhostFaded )
 			{
-				MyQuad.SetColor( Color( 255, 255, 255, 255 ) );
-				MyObject->SetColor( Color( 255, 255, 255, 255 ) );
+				MyQuad.SetColor( bColor( 255, 255, 255, 255 ) );
+				MyObject->SetColor( bColor( 255, 255, 255, 255 ) );
 				GhostFaded = false;
 			}
 

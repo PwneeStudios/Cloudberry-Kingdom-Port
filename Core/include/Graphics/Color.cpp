@@ -2,7 +2,8 @@
 
 Color Color::Azure( unsigned char( 240 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
 Color Color::Black( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ) );
-Color Color::BlueViolet( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ), unsigned char( 255 ) );
+Color Color::Bisque( unsigned char( 255 ), unsigned char( 228 ), unsigned char( 196 ), unsigned char( 255 ) );
+Color Color::Blue( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ), unsigned char( 255 ) );
 Color Color::BlueViolet( unsigned char( 138 ), unsigned char( 43 ), unsigned char( 226 ), unsigned char( 255 ) );
 Color Color::Brown( unsigned char( 165 ), unsigned char( 42 ), unsigned char( 42 ), unsigned char( 255 ) );
 Color Color::Cyan( unsigned char( 0 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );

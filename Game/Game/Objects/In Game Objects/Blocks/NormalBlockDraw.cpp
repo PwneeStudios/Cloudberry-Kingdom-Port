@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -42,14 +40,14 @@ namespace CloudberryKingdom
 		MyBlock.reset();
 	}
 
-Vector2 NormalBlockDraw::ModCeilingSize = Vector2( 25, 0 );
+	Vector2 NormalBlockDraw::ModCeilingSize = Vector2( 25, 0 );
 
 	void NormalBlockDraw::Init( const std::shared_ptr<BlockBase> &block )
 	{
 		Init( block, 0, false );
 	}
 
-	void NormalBlockDraw::Init( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<PieceQuad> &template_Renamed, bool Invert )
+	void NormalBlockDraw::Init( const std::shared_ptr<BlockBase> &block, std::shared_ptr<PieceQuad> template_Renamed, bool Invert )
 	{
 		if ( MyTemplate != 0 )
 			template_Renamed = MyTemplate;

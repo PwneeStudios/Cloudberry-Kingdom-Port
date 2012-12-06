@@ -1,12 +1,11 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	void Wall::WallTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( 0 );
+		Sprite = std::shared_ptr<SpriteInfo>();
 	}
 
 	std::shared_ptr<Wall> Wall::MakeWall( LevelGeometry geometry )
@@ -93,7 +92,7 @@ namespace CloudberryKingdom
 		spike->SetPeriod( 50 );
 		spike->Offset = count % 2 == 0 ? 0 : 50 / 2;
 
-		spike->SetParentBlock( shared_from_this() );
+		spike->SetParentBlock( std::static_pointer_cast<BlockBase>( shared_from_this() ) );
 		getCore()->MyLevel->AddObject(spike);
 	}
 
@@ -117,7 +116,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		MyBox = std::make_shared<AABox>();
-		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 100, true );
+		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 100.f, true );
 
 		MakeNew();
 
@@ -139,12 +138,12 @@ namespace CloudberryKingdom
 		if ( Horizontal )
 		{
 			size = Vector2( 2000 * 3, 2000 );
-			center = -Vector2( size.X, 0 );
+			center = -1 * Vector2( size.X, 0 );
 		}
 		else
 		{
 			size = Vector2( 2000, 2000 * 3 );
-			center = -Vector2( 0, size.Y );
+			center = -1 * Vector2( 0, size.Y );
 		}
 
 		MyBox->Initialize( center, size );
@@ -225,9 +224,9 @@ namespace CloudberryKingdom
 			return getCore()->Data.Position;
 
 		if ( Horizontal )
-			getCore()->Data.Velocity.X = CoreMath::Restrict(0, Speed, getCore()->Data.Velocity.X + Accel);
+			getCore()->Data.Velocity.X = CoreMath::RestrictVal(0.f, Speed, getCore()->Data.Velocity.X + Accel);
 		else
-			getCore()->Data.Velocity.Y = CoreMath::Restrict(0, Speed, getCore()->Data.Velocity.Y + Accel);
+			getCore()->Data.Velocity.Y = CoreMath::RestrictVal(0.f, Speed, getCore()->Data.Velocity.Y + Accel);
 
 		if ( getPos().X > getCam()->getPos().X - 5350 )
 		{
@@ -274,7 +273,7 @@ namespace CloudberryKingdom
 				{
 					dif += Space;
 					if ( dif > 0 )
-						MoveBack( -difvec );
+						MoveBack( -1 * difvec );
 				}
 				break;
 		}
@@ -293,7 +292,7 @@ namespace CloudberryKingdom
 		Active = true;
 
 		if ( !getCore()->Held )
-			getCore()->Data.Position = CalcPosition(getCore()->GetPhsxStep());
+			getCore()->Data.Position = CalcPosition( static_cast<float>( getCore()->GetPhsxStep() ) );
 
 		MyBox->Target->Center = getCore()->Data.Position + Offset;
 

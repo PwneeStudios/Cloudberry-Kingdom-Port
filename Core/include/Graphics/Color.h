@@ -78,6 +78,7 @@ struct Color
 
 	static Color Azure;
 	static Color Black;
+	static Color Bisque;
 	static Color Blue;
 	static Color BlueViolet;
 	static Color Brown;

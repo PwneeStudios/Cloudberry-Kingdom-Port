@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -63,9 +62,9 @@ namespace CloudberryKingdom
 		if ( tileset->ProvidesTemplates )
 		{
 			if ( getMyLevel() == 0 )
-				return tileset->GetPieceTemplate( shared_from_this(), 0 );
+				return tileset->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), 0 );
 			else
-				return tileset->GetPieceTemplate( shared_from_this(), getRnd() );
+				return tileset->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd() );
 		}
 
 		if ( tileset->PassableSides )
@@ -84,7 +83,7 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
+		MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}
@@ -115,7 +114,7 @@ namespace CloudberryKingdom
 		MyBox->Initialize( center, size );
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
+			MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		Update();
 
@@ -232,7 +231,7 @@ float NormalBlock::TopOnlyHeight = 60;
 		MyBox->Validate();
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( shared_from_this(), GetPieceTemplate(), Invert );
+			MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		getBlockCore()->StartData.Position = MyBox->Current->Center;
 
@@ -266,8 +265,8 @@ float NormalBlock::TopOnlyHeight = 60;
 
 			if ( getCore()->Encased )
 			{
-				MyBox->DrawFilled( Tools::QDrawer, Color( 100, 100, 200, 100 ) );
-				MyBox->Draw( Tools::QDrawer, Color( 120, 120, 240, 150 ), 18, true );
+				MyBox->DrawFilled( Tools::QDrawer, bColor( 100, 100, 200, 100 ) );
+				MyBox->Draw( Tools::QDrawer, bColor( 120, 120, 240, 150 ), 18, true );
 			}
 
 			getBlockCore()->Draw();
@@ -346,7 +345,7 @@ float NormalBlock::TopOnlyHeight = 60;
 
 	void NormalBlock::PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
 	{
-		Block_PostCollideDecision( std::dynamic_pointer_cast<BlockBase>( this ), bob, Col, Overlap, Delete );
+		Block_PostCollideDecision( std::dynamic_pointer_cast<BlockBase>( shared_from_this() ), bob, Col, Overlap, Delete );
 		BlockBase::PostCollideDecision( bob, Col, Overlap, Delete );
 	}
 
@@ -407,7 +406,7 @@ float NormalBlock::TopOnlyHeight = 60;
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = std::static_pointer_cast<BlockBase>( this );
+		std::shared_ptr<BlockBase> block = std::static_pointer_cast<BlockBase>( shared_from_this() );
 
 		// Draw block upside down if Bob used it upside down.
 		if ( Col == ColType_BOTTOM && bob->MyPhsx->Gravity < 0 )
@@ -431,7 +430,7 @@ float NormalBlock::TopOnlyHeight = 60;
 	{
 		BlockBase::PostKeep( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = std::static_pointer_cast<NormalBlock>( this );
+		std::shared_ptr<BlockBase> block = std::static_pointer_cast<NormalBlock>( shared_from_this() );
 
 		if ( !block->getCore()->GenData.NoBottomShift )
 		{

@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -15,7 +13,7 @@ namespace CloudberryKingdom
 
 	bool Coin_Parameters::Regular_ReadyToPlace( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob, int Step )
 	{
-		return ( Step % Regular_Period == Regular_Offset && Step / 50 % Regular_Period2 == Regular_Offset2 && ( Step / 90 ) % level->Bobs.size() == level->Bobs.find(bob) );
+		return ( Step % Regular_Period == Regular_Offset && Step / 50 % Regular_Period2 == Regular_Offset2 && ( Step / 90 ) % level->Bobs.size() == IndexOf( level->Bobs, bob) );
 	}
 
 	void Coin_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )

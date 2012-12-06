@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -143,11 +141,13 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		switch ( Style->BlockFillType )
 		{
 			case StyleData::_BlockFillType_REGULAR:
-				size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)) );
+				size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos) ),
+							    static_cast<float>( GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ) );
 				if ( -2 * size.Y + pos.Y < BL.Y - 100 )
 					size.Y = ( pos.Y - BL.Y + 100 ) / 2;
 
-				offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
+				offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+								  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
 
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
@@ -161,7 +161,8 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				break;
 
 			case StyleData::_BlockFillType_TOP_ONLY:
-				size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), 50 );
+				size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos) ),
+								static_cast<float>( GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), 50 ) );
 
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
@@ -175,11 +176,13 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 			case StyleData::_BlockFillType_INVERTABLE:
 				if ( pos.Y < level->getMainCamera()->getPos().Y - 0 )
 				{
-					size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)) );
+					size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos) ) ),
+									static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ) );
 					if ( -2 * size.Y + pos.Y < BL.Y - 100 )
 						size.Y = ( pos.Y - BL.Y + 100 ) / 2;
 
-					offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
+					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
 
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
@@ -192,11 +195,13 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				}
 				else
 				{
-					size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)) );
+					size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos) ) ),
+								    static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ) );
 					if ( 2 * size.Y + pos.Y > TR.Y + 100 )
 						size.Y = ( TR.Y - pos.Y + 100 ) / 2;
 
-					offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) + size.Y );
+					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) + size.Y ) );
 
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
@@ -216,9 +221,11 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 			case StyleData::_BlockFillType_SIDEWAYS:
 				if ( pos.X < level->getMainCamera()->getPos().X - 0 )
 				{
-					size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)) );
+					size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ),
+									static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos) ) ) );
 
-					offset = Vector2( level->getRnd()->Rnd->Next(0, 0) - size.X, level->getRnd()->Rnd->Next(0, 0) );
+					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.X ),
+									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ) );
 
 					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_RIGHT;
@@ -227,9 +234,11 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 				}
 				else
 				{
-					size = Vector2( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)) );
+					size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ),
+									static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos) ) ) );
 
-					offset = Vector2( level->getRnd()->Rnd->Next(0, 0) + size.X, level->getRnd()->Rnd->Next(0, 0) );
+					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) + size.X ),
+									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ) );
 
 					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_LEFT;
@@ -250,7 +259,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 			block->getBlockCore()->BlobsOnTop = false;
 
 
-		block->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+		block->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 
 		if ( level->CurMakeData->BlocksAsIs )
 		{

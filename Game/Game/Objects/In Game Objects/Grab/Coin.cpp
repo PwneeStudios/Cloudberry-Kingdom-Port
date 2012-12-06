@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -22,9 +21,9 @@ namespace CloudberryKingdom
 
 	void Coin::CoinTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( _T( "CoinShimmer" ), Vector2( 105, -1 ) );
+		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "CoinShimmer" ) ), Vector2( 105.f, -1.f ) );
 		BoxSize = Vector2( 52.5f, 65 );
-		Color = Color( 255, 255, 255, 255 );
+		Color = bColor( 255, 255, 255, 255 );
 		ShowEffect = true;
 		ShowText = true;
 		ShowCoin = true;
@@ -66,7 +65,7 @@ namespace CloudberryKingdom
 		getCore()->BoxesOnly = BoxesOnly;
 	}
 
-Vector2 Coin::PosOfLastCoinGrabbed = 0;
+	Vector2 Coin::PosOfLastCoinGrabbed = Vector2();
 
 	void Coin::Die()
 	{

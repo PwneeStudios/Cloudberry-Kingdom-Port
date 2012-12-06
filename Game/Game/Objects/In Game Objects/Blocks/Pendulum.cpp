@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -76,7 +75,7 @@ namespace CloudberryKingdom
 
 	void Pendulum::CalculateLength()
 	{
-		Length = ( getCore()->StartData.Position - PivotPoint )->Length();
+		Length = ( getCore()->StartData.Position - PivotPoint ).Length();
 	}
 
 	void Pendulum::Move( Vector2 shift )
@@ -123,9 +122,9 @@ namespace CloudberryKingdom
 		return Vector2.Lerp(Top, Bottom, s);
 		*/
 
-		switch ( MoveType )
+		//switch ( MoveType )
 		{
-			default:
+			//default:
 				CorrespondingAngle = MaxAngle * static_cast<float>( cos( 2 * M_PI * t ) );
 
 				// Horizontal
@@ -244,8 +243,8 @@ namespace CloudberryKingdom
 		if ( getInfo()->Pendulums->Group != 0 )
 			if ( MyDraw->MyTemplate != 0 )
 			{
-				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate(this, getRnd(), getInfo()->Pendulums->Group);
-				MyDraw->Init( shared_from_this(), MyDraw->MyTemplate, false );
+				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->Pendulums->Group);
+				MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
 			}
 	}
 

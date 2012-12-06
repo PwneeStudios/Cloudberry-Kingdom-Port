@@ -14,6 +14,13 @@ namespace CloudberryKingdom
 		class BobMove
 		{
 		public:
+			BobMove()
+			{
+				MaxTargetY = MinTargetY = 0;
+				Copy = 0;
+				InvertDirX = false;
+			}
+
 			float MaxTargetY, MinTargetY;
 
 			int Copy;
@@ -86,7 +93,7 @@ namespace CloudberryKingdom
 
 		bool CanInteract;
 
-		BobMove MoveData;
+		std::shared_ptr<BobMove> MoveData;
 
 		int Count_ButtonA;
 		BobInput CurInput, PrevInput;

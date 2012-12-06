@@ -5,8 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class MakeData
+
+	class MakeData : public std::enable_shared_from_this<MakeData>
 	{
+
 	public:
 		Vector2 TRBobMoveZone, BLBobMoveZone;
 
@@ -36,7 +38,7 @@ namespace CloudberryKingdom
 		Vector2 CamStartPos;
 		std::vector<PhsxData> Start;
 		std::vector<Vector2> CheckpointShift;
-		std::vector<Bob::BobMove> MoveData;
+		std::vector<std::shared_ptr<Bob::BobMove> > MoveData;
 
 		bool InitialPlats, InitialCamZone, FinalPlats;
 		bool SkinnyStart;

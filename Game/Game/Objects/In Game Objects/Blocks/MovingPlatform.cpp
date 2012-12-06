@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		Group = PieceQuad::ElevatorGroup;
 	}
 
-	const std::shared_ptr<BlockEmitter_Parameters> &MovingPlatform::getMyParams() const
+	const std::shared_ptr<BlockEmitter_Parameters> MovingPlatform::getMyParams() const
 	{
 		return std::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->getStyle()->FindParams(BlockEmitter_AutoGen::getInstance()) );
 	}
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 	void MovingPlatform::OnMarkedForDeletion()
 	{
 		if ( Parent != 0 )
-			Parent->RemovePlatform( shared_from_this() );
+			Parent->RemovePlatform( std::static_pointer_cast<MovingPlatform>( shared_from_this() ) );
 
 		if ( !getCore()->DeletedByBob )
 			return;

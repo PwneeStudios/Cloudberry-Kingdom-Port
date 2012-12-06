@@ -3,19 +3,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class NormalBlockDraw
 	{
 	public:
@@ -44,7 +31,7 @@ namespace CloudberryKingdom
 
 		static Vector2 ModCeilingSize;
 		void Init( const std::shared_ptr<BlockBase> &block );
-		void Init( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<PieceQuad> &template_Renamed, bool Invert );
+		void Init( const std::shared_ptr<BlockBase> &block, std::shared_ptr<PieceQuad> template_Renamed, bool Invert );
 
 		void Update();
 

@@ -24,13 +24,13 @@ namespace CloudberryKingdom
 
 		Start = std::vector<PhsxData>( N );
 		CheckpointShift = std::vector<Vector2>( N );
-		MoveData = std::vector<Bob::BobMove*>( N );
+		MoveData = std::vector<std::shared_ptr<Bob::BobMove> >( N );
 		for ( int i = 0; i < N; i++ )
 		{
 			Start[ i ] = PhsxData();
 			CheckpointShift[ i ] = Vector2();
-			MoveData[ i ] = Bob::BobMove();
-			MoveData[ i ].Init();
+			MoveData[ i ] = std::make_shared<Bob::BobMove>();
+			MoveData[ i ]->Init();
 		}
 		CamStartPos = Vector2();
 
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 			Computers[ i ] = std::make_shared<Bob>( level->DefaultHeroType, true );
 
 			level->AddBob( Computers[ i ] );
-			Sleep();
+			/*Sleep()*/;
 		}
 
 		for ( int i = 0; i < NumInitialBobs; i++ )
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 			Computers[ i ]->ComputerWaitAtStartLength = ComputerWaitAtStartLength[ i ];
 			Computers[ i ]->MoveData = MoveData[ i ];
 
-			Sleep();
+			//Sleep();
 		}
 
 		return Computers;
@@ -86,14 +86,14 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<LevelPiece> Piece = level->StartNewPiece( Length, bobs );
 		Piece->MyData = PieceSeed;
-		Piece->MyMakeData = this;
+		Piece->MyMakeData = shared_from_this();
 		for ( int i = 0; i < NumInitialBobs; i++ )
 		{
 			bobs[ i ]->MyPiece = Piece;
 			Piece->StartData[ i ] = Start[ i ];
 			Piece->CheckpointShift[ i ] = CheckpointShift[ i ];
 			bobs[ i ]->IndexOffset = StartPhsxStep;
-			Sleep();
+			//Sleep();
 		}
 
 		Piece->StartPhsxStep = StartPhsxStep;

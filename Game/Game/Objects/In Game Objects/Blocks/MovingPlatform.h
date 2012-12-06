@@ -4,32 +4,6 @@
 #define _USE_MATH_DEFINES
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	class BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockEmitter;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
 
 namespace CloudberryKingdom
 {
@@ -67,7 +41,7 @@ public:
 		std::shared_ptr<BlockEmitter> Parent;
 
 	private:
-		const std::shared_ptr<BlockEmitter_Parameters> &getMyParams() const;
+		const std::shared_ptr<BlockEmitter_Parameters> getMyParams() const;
 
 	public:
 		virtual bool PermissionToUse();

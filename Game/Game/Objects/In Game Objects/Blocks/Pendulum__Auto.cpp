@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -26,7 +27,7 @@ namespace CloudberryKingdom
 
 		float speed = 300 - 30 * u->Get( Upgrade_SPEED ) + 45 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_PENDULUM ) );
 		Period = Param( PieceSeed );
-		Period.SetVal( CoreMath::Restrict( 40, 1000, speed ) );
+		Period.SetVal( CoreMath::RestrictVal( 40.f, 1000.f, speed ) );
 
 		MaxAngle = Param( PieceSeed, __min( 750, 30 + 64 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_PENDULUM ) ) ) );
 	}
@@ -39,7 +40,7 @@ namespace CloudberryKingdom
 			MotionLevel[ element ] = temp_MotionLevel[ element ];
 	}
 
-const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();
+	const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();
 
 	const std::shared_ptr<Pendulum_AutoGen> &Pendulum_AutoGen::getInstance()
 	{
@@ -85,14 +86,14 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		}
 
 		p->Period = static_cast<int>( Params->Period.GetVal( pos ) );
-		p->MaxAngle = static_cast<int>( Params->MaxAngle.GetVal( pos ) );
+		p->MaxAngle = static_cast<float>( static_cast<int>( Params->MaxAngle.GetVal( pos ) ) );
 		p->MaxAngle *= .001f;
 		p->CalculateLength();
 
 		p->Offset = level->getStyle()->GetOffset( p->Period, pos, level->getStyle()->PendulumOffsetType );
 
 		p->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
-		p->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+		p->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 
 		if ( level->getStyle()->RemoveBlockOnOverlap )
 			p->getBlockCore()->GenData.RemoveIfOverlap = true;
