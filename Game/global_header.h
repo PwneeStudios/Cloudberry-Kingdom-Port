@@ -121,10 +121,24 @@ struct TimeSpan
 
 public:
 	float TotalMinutes;
+	int Hours;
+	int Minutes;
+	int Seconds;
 
-	TimeSpan()
+	TimeSpan() :
+		TotalMinutes( 0 ),
+		Hours( 0 ),
+		Minutes( 0 ),
+		Seconds( 0 )
 	{
-		TotalMinutes = 0;
+	}
+
+	TimeSpan( int hours, int minutes, int seconds) :
+		TotalMinutes( hours * 60.f + minutes + seconds / 60.f ),
+		Hours( hours ),
+		Minutes( minutes ),
+		Seconds( seconds )
+	{
 	}
 
 };

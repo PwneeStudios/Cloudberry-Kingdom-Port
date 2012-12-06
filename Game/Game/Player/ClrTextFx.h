@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	class ClrTextFx : public Buyable
+	class ClrTextFx : public Buyable, public Object
 	{
 	public:
 		int Guid, Price;
@@ -43,6 +43,8 @@ namespace CloudberryKingdom
 		Matrix M;
 
 		static std::vector<ClrTextFx> FullList;
+
+		ClrTextFx();
 
 		ClrTextFx( int Guid, int Price, Color color, Matrix M );
 

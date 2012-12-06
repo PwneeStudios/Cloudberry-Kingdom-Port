@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		chunk->WriteSingle( 8, Jumps );
 		chunk->WriteSingle( 10, TimeAlive );
 
-		for ( int i = 0; i < DeathsBy.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( DeathsBy.size() ); i++ )
 			WriteDeathChunk_9( chunk, i );
 
 		chunk->Finish( writer );
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 			DeathsBy[ i ] = 0;
 	}
 
-	const std::wstring &PlayerStats::getLifeExpectancy() const
+	std::wstring PlayerStats::getLifeExpectancy() const
 	{
 		TimeSpan time = TimeSpan( 0, 0, getLifeExpectancy_Frames() / 60 );
 		if ( time.Hours == 0 )
@@ -124,20 +124,20 @@ namespace CloudberryKingdom
 			return Format( _T( "{0}:{1}:{2:00}" ), time.Hours, time.Minutes, time.Seconds );
 	}
 
-	const int &PlayerStats::getLifeExpectancy_Frames() const
+	int PlayerStats::getLifeExpectancy_Frames() const
 	{
-		if ( DeathsBy[ static_cast<int>( Bob::BobDeathType_TOTAL ) ] <= 0 )
+		if ( DeathsBy[ static_cast<int>( BobDeathType_TOTAL ) ] <= 0 )
 			return TimeAlive;
 		else
-			return static_cast<int>( static_cast<float>( TimeAlive ) / static_cast<float>( 1 + DeathsBy[ static_cast<int>( Bob::BobDeathType_TOTAL ) ] ) );
+			return static_cast<int>( static_cast<float>( TimeAlive ) / static_cast<float>( 1 + DeathsBy[ static_cast<int>( BobDeathType_TOTAL ) ] ) );
 	}
 
-	const int &PlayerStats::getTotalDeaths() const
+	int PlayerStats::getTotalDeaths() const
 	{
-		return DeathsBy[ static_cast<int>( Bob::BobDeathType_TOTAL ) ];
+		return DeathsBy[ static_cast<int>( BobDeathType_TOTAL ) ];
 	}
 
-	const int &PlayerStats::getCoinPercentGotten() const
+	int PlayerStats::getCoinPercentGotten() const
 	{
 		if ( TotalCoins == 0 )
 			return 100;

@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Awardment
+	class Awardment : public std::enable_shared_from_this<Awardment>
 	{
 	public:
 		std::wstring Name, Description;
@@ -39,8 +39,8 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		static std::vector<Awardment*> Awards;
-		static std::map<int, Awardment*> AwardsDict;
+		static std::vector<std::shared_ptr<Awardment> > Awards;
+		static std::map<int, std::shared_ptr<Awardment> > AwardsDict;
 
 		/// <summary>
 		/// Whether there is an awardment message on the screen currently.
@@ -101,10 +101,10 @@ namespace CloudberryKingdom
 		static float CurShift, Shift;
 		static void GiveAward( const std::shared_ptr<Awardment> &award );
 
-	private:
-		static std::wstring BeatStr;
 	public:
-		static std::vector<Awardment*> BeatCampaign;
+		static std::wstring BeatStr;
+	
+		static std::vector<std::shared_ptr<Awardment> > BeatCampaign;
 		static std::shared_ptr<Awardment> JumpAlot;
 
 		static std::shared_ptr<Awardment> HoldForwardFreeplay;

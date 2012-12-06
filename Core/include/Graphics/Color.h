@@ -54,6 +54,11 @@ struct Color
 		return Vector4( R / 255.f, G / 255.f, B / 255.f, A / 255.f );
 	}
 
+	Vector3 ToVector3() const
+	{
+		return Vector3( R / 255.f, G / 255.f, B / 255.f );
+	}
+
 	Color operator * ( float s ) const
 	{
 		Vector4 c = ToVector4();
@@ -64,18 +69,35 @@ struct Color
 	{
 		return R == c.R && G == c.G && B == c.B && A == c.A;
 	}
+	
+	bool operator != ( const Color &c ) const
+	{
+		return !( *this == c );
+	}
+
 
 	static Color Azure;
 	static Color Black;
 	static Color BlueViolet;
+	static Color Brown;
+	static Color Cyan;
+	static Color DarkBlue;
+	static Color ForestGreen;
 	static Color Fuchsia;
 	static Color Gainsboro;
+	static Color Gold;
 	static Color Gray;
+	static Color HotPink;
+	static Color Indigo;
 	static Color LightSeaGreen;
+	static Color LimeGreen;
+	static Color Purple;
 	static Color Red;
+	static Color Silver;
 	static Color SkyBlue;
 	static Color Transparent;
 	static Color White;
+	static Color Yellow;
 };
 
 Color bColor( unsigned char R, unsigned char G, unsigned char B )

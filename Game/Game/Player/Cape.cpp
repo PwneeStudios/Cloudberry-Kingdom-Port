@@ -16,10 +16,10 @@ namespace CloudberryKingdom
 
 	void Cape::Copy( const std::shared_ptr<Cape> &cape )
 	{
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 			Nodes[ i ] = cape->Nodes[ i ];
 
-		for ( int i = 0; i < Links.size(); i++ )
+		for ( size_t i = 0; i < Links.size(); i++ )
 			Links[ i ] = cape->Links[ i ];
 	}
 
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		SetColor( value );
 	}
 
-	const Microsoft::Xna::Framework::Color &Cape::getMyColor() const
+	const Color &Cape::getMyColor() const
 	{
 		return _MyColor;
 	}
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		SetOutlineColor( value );
 	}
 
-	const Microsoft::Xna::Framework::Color &Cape::getMyOutlineColor() const
+	const Color &Cape::getMyOutlineColor() const
 	{
 		return _MyOutlineColor;
 	}
@@ -75,8 +75,8 @@ namespace CloudberryKingdom
 
 		int count = 0;
 		// Triangles
-		float h2 = 1 / Sections;
-		float h1 = 1 / HorizontalSections;
+		float h2 = 1.f / Sections;
+		float h1 = 1.f / HorizontalSections;
 		for ( int i = Sections - 1; i >= 0; i-- )
 		{
 			for ( int j = 0; j < HorizontalSections; j++ )
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 
 	void Cape::Move( Vector2 Shift )
 	{
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 		{
 			Nodes[ i ].Data.Position += Shift;
 		}
@@ -116,19 +116,19 @@ namespace CloudberryKingdom
 
 	void Cape::ModVel_Add( Vector2 Mod )
 	{
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 			Nodes[ i ].Data.Velocity += Mod;
 	}
 
 	void Cape::ModVel_Mult( Vector2 Mod )
 	{
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 			Nodes[ i ].Data.Velocity *= Mod;
 	}
 
 	void Cape::Reset()
 	{
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 		{
 			Nodes[ i ].Data = Nodes[ i ].StartData;
 			Nodes[ i ].Data.Position += AnchorPoint[ 0 ];
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		for ( int i = 0; i < Nodes.size(); i++ )
+		for ( size_t i = 0; i < Nodes.size(); i++ )
 		{
 			Nodes[ i ].StartData = Nodes[ i ].Data;
 			Nodes[ i ].Weight = Weight;
@@ -230,8 +230,8 @@ namespace CloudberryKingdom
 
 		int count = 0;
 		// Triangles
-		float h2 = 1 / Sections;
-		float h1 = 1 / HorizontalSections;
+		float h2 = 1.f / Sections;
+		float h1 = 1.f / HorizontalSections;
 		for ( int i = 0; i < Sections; i++ )
 		{
 			for ( int j = 0; j < HorizontalSections; j++ )
@@ -260,7 +260,7 @@ namespace CloudberryKingdom
 
 		count = 0;
 		// Links
-		for ( int i = 0; i < Links.size(); i++ )
+		for ( size_t i = 0; i < Links.size(); i++ )
 			Links[ i ].Init();
 
 		// Vertical
@@ -342,7 +342,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		for ( int i = 0; i < Links.size(); i++ )
+		for ( size_t i = 0; i < Links.size(); i++ )
 		{
 			int j = Links[ i ].j;
 			int k = Links[ i ].k;
@@ -366,11 +366,11 @@ namespace CloudberryKingdom
 
 		LastPhsxUpdate = CurStep;
 
-		setMyColor( MyBob->MyColorScheme.CapeColor.Clr );
+		setMyColor( MyBob->MyColorScheme.CapeColor->Clr );
 
 		for ( int J = 0; J < PhsxSteps; J++ )
 		{
-			for ( int i = 0; i < Nodes.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Nodes.size() ); i++ )
 			{
 				if ( Nodes[ i ].AnchorIndex >= 0 )
 				{
@@ -379,8 +379,8 @@ namespace CloudberryKingdom
 				else
 				{
 					// Integrate
-					Nodes[ i ].Data.Position += ( Nodes[ i ].Data.Velocity + 0*Wind ) / PhsxSteps;
-					Nodes[ i ].Data.Velocity += GravityScale * Gravity / PhsxSteps + Wind;
+					Nodes[ i ].Data.Position += ( Nodes[ i ].Data.Velocity + 0.f*Wind ) / static_cast<float>( PhsxSteps );
+					Nodes[ i ].Data.Velocity += GravityScale * Gravity / static_cast<float>( PhsxSteps ) + Wind;
 					Nodes[ i ].Data.Velocity *= static_cast<float>( pow( Retard / ( 1 + Nodes[ i ].Data.Velocity.LengthSquared() / 1500 ), 1 / PhsxSteps ) );
 
 					// Check if we are below the ground
@@ -392,7 +392,7 @@ namespace CloudberryKingdom
 				}
 			}
 
-			for ( int i = 0; i < Links.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Links.size() ); i++ )
 			{
 				int j = Links[ i ].j;
 				int k = Links[ i ].k;
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
 					F *= -Links[ i ].a_out * ( l - L );
 				if ( l > L )
 					F *= -Links[ i ].a_in * ( l - L );
-				F /= PhsxSteps;
+				F /= static_cast<float>( PhsxSteps );
 				Nodes[ j ].Data.Velocity += F / Nodes[ j ].Weight;
 				Nodes[ k ].Data.Velocity -= F / Nodes[ j ].Weight;
 			}
@@ -434,8 +434,8 @@ namespace CloudberryKingdom
 	{
 		int count = 0;
 		// Triangles
-		float h2 = 1 / Sections;
-		float h1 = 1 / HorizontalSections;
+		float h2 = 1.f / Sections;
+		float h1 = 1.f / HorizontalSections;
 		for ( int i = Sections - 1; i >= 0; i-- )
 		{
 			for ( int j = 0; j < HorizontalSections; j++ )
@@ -457,7 +457,7 @@ namespace CloudberryKingdom
 		}
 
 		if ( DoScaling )
-			for ( int i = 0; i < Vertices.size(); i++ )
+			for ( size_t i = 0; i < Vertices.size(); i++ )
 				ApplyScaling( Vertices[ i ].xy );
 	}
 
@@ -476,13 +476,13 @@ namespace CloudberryKingdom
 			Effect->SetCameraParameters();
 
 
-		Effect->xTexture->SetValue( MyQuad->Quad_Renamed.MyTexture->Tex );
+		Effect->xTexture->SetValue( MyQuad->Quad_Renamed.getMyTexture()->getTex() );
 		Effect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
 
 		//Tools.QDrawer.SetAddressMode(true, true);
 		Tools::QDrawer->SetAddressMode( false, false );
 
-		Tools::Device->DrawUserPrimitives( PrimitiveType::TriangleList, Vertices, 0, NumTriangles );
+		Tools::Device->DrawUserPrimitives( GfxPrimitiveType_TriangleList, Vertices, 0, NumTriangles );
 
 		Tools::QDrawer->Flush();
 
@@ -493,7 +493,7 @@ namespace CloudberryKingdom
 			width *= Scale.X;
 
 		if ( DrawLines )
-			for ( int i = 0; i < Links.size(); i++ )
+			for ( size_t i = 0; i < Links.size(); i++ )
 			{
 				if ( Links[ i ].Show )
 				{
@@ -513,7 +513,7 @@ namespace CloudberryKingdom
 			}
 
 		if ( DrawNodes )
-			for ( int i = 0; i < Nodes.size(); i++ )
+			for ( size_t i = 0; i < Nodes.size(); i++ )
 			{
 				if ( Nodes[ i ].Show )
 				{

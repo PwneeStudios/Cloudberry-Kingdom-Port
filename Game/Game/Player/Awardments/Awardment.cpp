@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		this->Guid = Guid;
 
 		if ( this->Unlockable != 0 )
-			this->Unlockable->AssociatedAward = this;
+			this->Unlockable->AssociatedAward = shared_from_this();
 
 		Awardments::Awards.push_back( shared_from_this() );
 	}
@@ -31,8 +31,8 @@ namespace CloudberryKingdom
 		return p->GetStats( StatGroup_LEVEL )->TotalCoins;
 	}
 
-std::vector<Awardment*> Awardments::Awards = std::vector<Awardment*>();
-std::map<int, Awardment*> Awardments::AwardsDict = std::map<int, Awardment*>();
+std::vector<std::shared_ptr<Awardment> > Awardments::Awards;
+std::map<int, std::shared_ptr<Awardment> > Awardments::AwardsDict;
 
 	bool Awardments::MessageOnScreen()
 	{
@@ -190,7 +190,7 @@ float CurShift, Awardments::Shift = 520;
 		{
 			// Give the award to each player
 			for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
-				( *p )->Awardments_Renamed += award->Guid;
+				( *p )->Awardments_Renamed->Add( award->Guid );
 
 			// Show a note saying the reward was given
 			std::shared_ptr<AwardmentMessage> msg = std::make_shared<AwardmentMessage>( award );
@@ -214,25 +214,25 @@ float CurShift, Awardments::Shift = 520;
 	}
 
 std::wstring Awardments::BeatStr = _T( "Beat a classic castle\non" );
-const Awardment* tempVector[] = { 0, std::make_shared<Awardment>( 1, _T( "Italian Plumbing" ), BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), std::make_shared<Awardment>( 2, _T( "Bubbly Bop" ), BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), std::make_shared<Awardment>( 3, _T( "Ghouls n' stickmen" ), BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), std::make_shared<Awardment>( 4, _T( "Gosu Master" ), BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
-std::vector<Awardment*> Awardments::BeatCampaign = std::vector<Awardment*>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+std::shared_ptr<Awardment> tempVector[] = { std::shared_ptr<Awardment>(), std::make_shared<Awardment>( 1, _T( "Italian Plumbing" ), Awardments::BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), std::make_shared<Awardment>( 2, _T( "Bubbly Bop" ), Awardments::BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), std::make_shared<Awardment>( 3, _T( "Ghouls n' stickmen" ), Awardments::BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), std::make_shared<Awardment>( 4, _T( "Gosu Master" ), Awardments::BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
+std::vector<std::shared_ptr<Awardment> > Awardments::BeatCampaign = std::vector<std::shared_ptr<Awardment> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 std::shared_ptr<Awardment> Awardments::JumpAlot = std::make_shared<Awardment>( 5, _T( "Jumple-upagus" ), _T( "Jump " ) + StringConverterHelper::toString( LotsOfJumps ) + _T( " times." ), Hat::Bubble );
-std::shared_ptr<Awardment> Awardments::HoldForwardFreeplay = std::make_shared<Awardment>( 6, _T( "White Rabbit" ), _T( "Beat a max length " ) + CampaignHelper::GetName( 2 ) + _T( "level, always holding forward. Classic hero. No checkpoints." ), Hat::Cloud_Renamed );
-std::shared_ptr<Awardment> Awardments::HeroRush_Score = std::make_shared<Awardment>( 7, _T( "Locked IN" ), _T( "Score " ) + HeroRushScore + _T( " points in Hero Rush." ), Hat::FallingBlockHead );
+std::shared_ptr<Awardment> Awardments::HoldForwardFreeplay = std::make_shared<Awardment>( 6, _T( "White Rabbit" ), std::wstring( _T( "Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( _T( "level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
+std::shared_ptr<Awardment> Awardments::HeroRush_Score = std::make_shared<Awardment>( 7, _T( "Locked IN" ), std::wstring( _T( "Score " ) ) + ToString( HeroRushScore ) + std::wstring( _T( " points in Hero Rush." ) ), Hat::FallingBlockHead );
 std::shared_ptr<Awardment> Awardments::Escalation_Levels = std::make_shared<Awardment>( 8, _T( "Iron Man" ), _T( "Beat 26.2 levels in Escalation." ), Hat::FireHead );
-std::shared_ptr<Awardment> Awardments::FastCampaign2 = std::make_shared<Awardment>( 10, _T( "Minute man" ), _T( "Beat an" ) + CampaignHelper::GetName( 3 ) + _T( "castle in under " ) + StringConverterHelper::toString( FastCampaign_Minutes ) + _T( " minutes." ), Hat::Pink );
-std::shared_ptr<Awardment> Awardments::HeroRush2_Score = std::make_shared<Awardment>( 12, _T( "Jack of all sticks" ), _T( "Score " ) + HeroRush2Score + _T( " points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ), Hat::Fedora );
-std::shared_ptr<Awardment> Awardments::PartiallyInvisibleCampaign = std::make_shared<Awardment>( 13, _T( "I HAVE NO FEET" ), _T( "Beat an" ) + CampaignHelper::GetName( 3 ) + _T( "castle while invisible. Cape and hat recommended." ), Hat::Ghost );
+std::shared_ptr<Awardment> Awardments::FastCampaign2 = std::make_shared<Awardment>( 10, _T( "Minute man" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle in under " ) ) + StringConverterHelper::toString( FastCampaign_Minutes ) + std::wstring( _T( " minutes." ) ), Hat::Pink );
+std::shared_ptr<Awardment> Awardments::HeroRush2_Score = std::make_shared<Awardment>( 12, _T( "Jack of all sticks" ), std::wstring( _T( "Score " ) ) + ToString( HeroRush2Score ) + std::wstring( _T( " points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ) ), Hat::Fedora );
+std::shared_ptr<Awardment> Awardments::PartiallyInvisibleCampaign = std::make_shared<Awardment>( 13, _T( "I HAVE NO FEET" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle while invisible. Cape and hat recommended." ) ), Hat::Ghost );
 std::shared_ptr<Awardment> Awardments::TotallyInvisibleCampaign = std::make_shared<Awardment>( 14, _T( "Mind Games" ), _T( "Beat a" ) + CampaignHelper::GetName( 1 ) + _T( "castle while invisible, with no hat and no cape." ), Hat::Brain );
 std::shared_ptr<Awardment> Awardments::NoCoinFreeplay = std::make_shared<Awardment>( 15, _T( "Chromotephobia" ), _T( "Beat a max length " ) + CampaignHelper::GetName( 2 ) + _T( "level without grabbing a single coin. Classic hero. No checkpoints." ), Hat::CheckpointHead );
 std::shared_ptr<Awardment> Awardments::AllCoinsAbusiveCastle = std::make_shared<Awardment>( 16, _T( "Ebenezer" ), _T( "Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + _T( "castle." ), Hat::TopHat );
 std::shared_ptr<Awardment> Awardments::NoDeathsNormalCastle = std::make_shared<Awardment>( 17, _T( "Untouchable" ), _T( "Beat an" ) + CampaignHelper::GetName( 2 ) + _T( "castle without dying once." ), Hat::Afro );
 std::shared_ptr<Awardment> Awardments::PerfectEasyCastle = std::make_shared<Awardment>( 18, _T( "Perfection" ), _T( "Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + _T( "castle without dying once. Image is everything." ), Hat::Halo );
-std::shared_ptr<Awardment> Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( 205, 10, 10 ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( 26, 178, 231 ) ), HeroRush2_LevelUnlock ), 0 );
+std::shared_ptr<Awardment> Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( unsigned char( 205 ), unsigned char( 10 ), unsigned char( 10 ) ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( unsigned char( 26 ), unsigned char( 178 ), unsigned char( 231 ) ) ), HeroRush2_LevelUnlock ), std::shared_ptr<Hat>() );
 
 	void Awardments::Init()
 	{
-		for ( std::vector<Awardment*>::const_iterator award = Awards.begin(); award != Awards.end(); ++award )
-			AwardsDict.insert( make_pair( ( *award )->Guid, *award ) );
+		for ( std::vector<std::shared_ptr<Awardment> >::const_iterator award = Awards.begin(); award != Awards.end(); ++award )
+			AwardsDict.insert( std::make_pair( ( *award )->Guid, *award ) );
 	}
 }

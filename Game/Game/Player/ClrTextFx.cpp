@@ -24,6 +24,13 @@ namespace CloudberryKingdom
 
 std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
+	ClrTextFx::ClrTextFx() :
+		Guid( 0 ),
+		Price( 0 ),
+		UsePaintTexture( true )
+	{
+	}
+
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, Matrix M )
 	{
 		this->M = M;
@@ -84,7 +91,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -102,7 +109,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -120,7 +127,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -138,7 +145,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::shared_ptr<EzTexture> &PicTexture )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -156,7 +163,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::wstring &PicTextureName )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -174,7 +181,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -193,7 +200,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture, Color DetailColor, const std::shared_ptr<EzEffect> &effect )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
@@ -212,7 +219,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor, const std::wstring &effect )
 	{
-		this->M = Matrix::Identity;
+		this->M = Matrix::Identity();
 
 		this->Guid = Guid;
 		this->Price = Price;
