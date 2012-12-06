@@ -35,22 +35,22 @@ std::vector<std::shared_ptr<MenuListItem> > HatList, ColorList, CapeColorList, C
 std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
 std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
 std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
-ClrTextFx ColorSchemeManager::None;
+std::shared_ptr<ClrTextFx> ColorSchemeManager::None = std::make_shared<ClrTextFx>();
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
 	{
-		return std::make_shared<MenuListItem>( ClrTextFx( Guid, Price, Clr, M, Name ), Name );
+		return std::make_shared<MenuListItem>( std::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name ), Name );
 	}
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Color HighlightClr, Matrix M, Localization::Words Name )
 	{
-		return std::make_shared<MenuListItem>( ClrTextFx( Guid, Price, Clr, HighlightClr, M, Name ), Name );
+		return std::make_shared<MenuListItem>( std::make_shared<ClrTextFx>( Guid, Price, Clr, HighlightClr, M, Name ), Name );
 	}
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, const std::shared_ptr<EzEffect> &Effect, Localization::Words Name )
 	{
-		ClrTextFx ctf = ClrTextFx( Guid, Price, Clr, M, Name );
-		ctf.Effect = Effect;
+		std::shared_ptr<ClrTextFx> ctf = std::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name );
+		ctf->Effect = Effect;
 
 		return std::make_shared<MenuListItem>( ctf, Name );
 	}
@@ -440,7 +440,9 @@ ClrTextFx ColorSchemeManager::None;
 			HatInfo.push_back( hat );
 
 		for ( int i = 0; i < static_cast<int>( HatInfo.size() ); i++ )
-			HatList.push_back( std::make_shared<MenuListItem>( i, Localization::Words_NONE ) );
+			HatList.push_back( std::make_shared<MenuListItem>( 
+				std::static_pointer_cast<Object>( std::make_shared<WrappedValue<int> >( i ) ),
+				Localization::Words_NONE ) );
 
 
 		//hat = new Hat("Hat_Cattails", true, false);
@@ -508,9 +510,9 @@ ClrTextFx ColorSchemeManager::None;
 
 
 		// Fill the cape color list
-		ClrTextFx cape;
-		None = ClrTextFx( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
-		None.Name = Localization::Words_NONE;
+		std::shared_ptr<ClrTextFx> cape;
+		None = std::make_shared<ClrTextFx>( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
+		None->Name = Localization::Words_NONE;
 		CapeColorList.push_back( std::make_shared<MenuListItem>( None, Localization::Words_NONE ) );
 		//CapeColorList.AddRange( ColorList );
 		AddRange( CapeColorList, ColorList );
@@ -521,13 +523,14 @@ ClrTextFx ColorSchemeManager::None;
 		OutlineList.push_back( NoTexture );
 
 		// Fill the cape outline list
+		// FIXME: This could be wrong.  capeoutline used to be a struct and was passed around by value.
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
-			Color clr = ( static_cast<ClrTextFx>( ( *item )->obj ) ).Clr;
+			Color clr = ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Clr;
 			Color color = Color( clr.ToVector3() * .8f );
 			color.A = clr.A;
-			ClrTextFx capeoutline = static_cast<ClrTextFx>( ( *item )->obj );
-			capeoutline.Clr = color;
+			std::shared_ptr<ClrTextFx> capeoutline = std::static_pointer_cast<ClrTextFx>( ( *item )->obj );
+			capeoutline->Clr = color;
 			CapeOutlineColorList.push_back( std::make_shared<MenuListItem>( capeoutline, ( *item )->word ) );
 		}
 
@@ -561,8 +564,8 @@ ClrTextFx ColorSchemeManager::None;
 		std::vector<std::shared_ptr<MenuListItem> > NewCapeList = std::vector<std::shared_ptr<MenuListItem> >();
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
-			cape = static_cast<ClrTextFx>( ( *item )->obj );
-			cape.ModObject = CapeOn;
+			cape = std::static_pointer_cast<ClrTextFx>( ( *item )->obj );
+			cape->ModObject = CapeOn;
 			NewCapeList.push_back( std::make_shared<MenuListItem>( cape, ( *item )->word ) );
 		}
 		CapeColorList = NewCapeList;
@@ -570,10 +573,14 @@ ClrTextFx ColorSchemeManager::None;
 		// Combine all colors
 		std::vector<std::shared_ptr<MenuListItem> > temp;
 		temp = std::vector<std::shared_ptr<MenuListItem> >();
-		temp.AddRange( ColorList );
-		temp.AddRange( CapeColorList );
-		temp.AddRange( CapeOutlineColorList );
-		temp.AddRange( OutlineList );
+		//temp.AddRange( ColorList );
+		AddRange( temp, ColorList );
+		//temp.AddRange( CapeColorList );
+		AddRange( temp, CapeColorList );
+		//temp.AddRange( CapeOutlineColorList );
+		AddRange( temp, CapeOutlineColorList );
+		//temp.AddRange( OutlineList );
+		AddRange( temp, OutlineList );
 		ClrList = MakeUnique( temp );
 
 		// Create the default color schemes
@@ -593,7 +600,7 @@ ClrTextFx ColorSchemeManager::None;
 
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			int guid = ( static_cast<ClrTextFx>( ( *item )->obj ) ).Guid;
+			int guid = ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid;
 
 			if ( guids->Contains( guid ) )
 				continue;

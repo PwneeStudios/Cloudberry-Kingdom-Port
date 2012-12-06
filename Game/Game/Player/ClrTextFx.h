@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	class ClrTextFx : public Buyable
+	class ClrTextFx : public Buyable, public Object
 	{
 	public:
 		int Guid, Price;

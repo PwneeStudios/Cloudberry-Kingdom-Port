@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 		static std::vector<std::shared_ptr<MenuListItem> > ClrList;
 
-		static ClrTextFx None;
+		static std::shared_ptr<ClrTextFx> None;
 
 	private:
 		static std::shared_ptr<MenuListItem> _i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name );
