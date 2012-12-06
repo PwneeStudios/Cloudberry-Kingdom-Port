@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		int RndThrustType;
 
 	public:
-		const virtual bool &getSticky() const;
+		virtual bool getSticky() const;
 
 		int BobFallDelay;
 		float XFriction, BobXDunkFriction;

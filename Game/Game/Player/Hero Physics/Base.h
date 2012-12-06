@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 	};
 
-	class BobPhsx : public Object
+	class BobPhsx : public Object, public std::enable_shared_from_this<BobPhsx>
 	{
 	public:
 		class DefaultInfo
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<BobPhsx> MakeCustom( HeroSpec spec );
 
-		static std::shared_ptr<BobPhsx> MakeCustom( const std::shared_ptr<BobPhsx> &BaseType, const std::shared_ptr<BobPhsx> &Shape, const std::shared_ptr<BobPhsx> &MoveMod, const std::shared_ptr<BobPhsx> &Special );
+		static std::shared_ptr<BobPhsx> MakeCustom( std::shared_ptr<BobPhsx> BaseType, const std::shared_ptr<BobPhsx> &Shape, std::shared_ptr<BobPhsx> MoveMod, std::shared_ptr<BobPhsx> Special );
 
 		static std::shared_ptr<BobPhsx> MakeCustom( const std::wstring &BaseType, const std::wstring &Shape, const std::wstring &MoveMod, const std::wstring &Special );
 
@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
-		const Vector2 &getApparentVelocity() const;
+		Vector2 getApparentVelocity() const;
 		const Vector2 &getVel() const;
 		void setVel( const Vector2 &value );
 		const float &getxVel() const;
@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 
 		bool DynamicGreaterThan( float val1, float val2 );
 
-		const virtual bool &getSticky() const;
+		virtual bool getSticky() const;
 
 		bool OverrideSticky;
 		float MaxJumpAccelMultiple, JumpAccelModifier;
