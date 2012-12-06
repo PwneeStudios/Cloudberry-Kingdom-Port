@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -9,8 +10,7 @@ namespace CloudberryKingdom
 
 	std::wstring StatsMenu::StringificationWrapper::Apply( const int &i )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		return f->Apply( i )->ToString();
+		return ToString( f->Apply( i ) );
 	}
 
 	StatsMenu::StatsLevels::StatsLevels( std::vector<std::shared_ptr<PlayerStats> > Stats )
@@ -70,8 +70,7 @@ namespace CloudberryKingdom
 
 	std::wstring StatsMenu::StatsCoinPercentGotten::Apply( const int &j )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		return Stats[ j ]->getCoinPercentGotten()->ToString() + L'%';
+		return Format( _T( "{0}%" ), Stats[ j ]->getCoinPercentGotten() );
 	}
 
 	StatsMenu::StatsBlobs::StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats )
@@ -144,26 +143,26 @@ namespace CloudberryKingdom
 		text->setScale( FontScale *.9f );
 	}
 
-const Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
-std::vector<Vector2> StatsMenu::x1_name = std::vector<Vector2>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-const Vector2 tempVector2[] = { Vector2( 1217, -147 ), Vector2( 2056, -147 ) };
-std::vector<Vector2> StatsMenu::x2_name = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-const Vector2 tempVector3[] = { Vector2( 1225, -295 ), Vector2( 1624, -127.3015f ), Vector2( 2116, -295 ) };
-std::vector<Vector2> StatsMenu::x3_name = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
-const Vector2 tempVector4[] = { Vector2( 1090, -295 ), Vector2( 1445, -127.3015f ), Vector2( 1800, -295 ), Vector2( 2155, -127.3015f ) };
-std::vector<Vector2> StatsMenu::x4_name = std::vector<Vector2>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
-const float tempVector5[] = { 1920 };
-std::vector<float> StatsMenu::x1 = std::vector<float>( tempVector5, tempVector5 + sizeof( tempVector5 ) / sizeof( tempVector5[ 0 ] ) );
-const float tempVector6[] = { 1722.699f, 2454.445f };
-std::vector<float> StatsMenu::x2 = std::vector<float>( tempVector6, tempVector6 + sizeof( tempVector6 ) / sizeof( tempVector6[ 0 ] ) );
-const float tempVector7[] = { 1650, 2075, 2505 };
-std::vector<float> StatsMenu::x3 = std::vector<float>( tempVector7, tempVector7 + sizeof( tempVector7 ) / sizeof( tempVector7[ 0 ] ) );
-const float tempVector8[] = { 1550, 1905, 2260, 2615 };
-std::vector<float> StatsMenu::x4 = std::vector<float>( tempVector8, tempVector8 + sizeof( tempVector8 ) / sizeof( tempVector8[ 0 ] ) );
-const std::vector<float> tempVector9[] = { 0, x1, x2, x3, x4 };
-std::vector<std::vector<float> > StatsMenu::x = std::vector<std::vector<float> >( tempVector9, tempVector9 + sizeof( tempVector9 ) / sizeof( tempVector9[ 0 ] ) );
-const std::vector<Vector2> tempVector10[] = { 0, x1_name, x2_name, x3_name, x4_name };
-std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector<Vector2> >( tempVector10, tempVector10 + sizeof( tempVector10 ) / sizeof( tempVector10[ 0 ] ) );
+	const Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
+	std::vector<Vector2> StatsMenu::x1_name = std::vector<Vector2>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const Vector2 tempVector2[] = { Vector2( 1217, -147 ), Vector2( 2056, -147 ) };
+	std::vector<Vector2> StatsMenu::x2_name = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+	const Vector2 tempVector3[] = { Vector2( 1225, -295 ), Vector2( 1624, -127.3015f ), Vector2( 2116, -295 ) };
+	std::vector<Vector2> StatsMenu::x3_name = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+	const Vector2 tempVector4[] = { Vector2( 1090, -295 ), Vector2( 1445, -127.3015f ), Vector2( 1800, -295 ), Vector2( 2155, -127.3015f ) };
+	std::vector<Vector2> StatsMenu::x4_name = std::vector<Vector2>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
+	const float tempVector5[] = { 1920 };
+	std::vector<float> StatsMenu::x1 = std::vector<float>( tempVector5, tempVector5 + sizeof( tempVector5 ) / sizeof( tempVector5[ 0 ] ) );
+	const float tempVector6[] = { 1722.699f, 2454.445f };
+	std::vector<float> StatsMenu::x2 = std::vector<float>( tempVector6, tempVector6 + sizeof( tempVector6 ) / sizeof( tempVector6[ 0 ] ) );
+	const float tempVector7[] = { 1650, 2075, 2505 };
+	std::vector<float> StatsMenu::x3 = std::vector<float>( tempVector7, tempVector7 + sizeof( tempVector7 ) / sizeof( tempVector7[ 0 ] ) );
+	const float tempVector8[] = { 1550, 1905, 2260, 2615 };
+	std::vector<float> StatsMenu::x4 = std::vector<float>( tempVector8, tempVector8 + sizeof( tempVector8 ) / sizeof( tempVector8[ 0 ] ) );
+	const std::vector<float> tempVector9[] = { std::vector<float>(), StatsMenu::x1, StatsMenu::x2, StatsMenu::x3, StatsMenu::x4 };
+	std::vector<std::vector<float> > StatsMenu::x = std::vector<std::vector<float> >( tempVector9, tempVector9 + sizeof( tempVector9 ) / sizeof( tempVector9[ 0 ] ) );
+	const std::vector<Vector2> tempVector10[] = { std::vector<Vector2>(), StatsMenu::x1_name, StatsMenu::x2_name, StatsMenu::x3_name, StatsMenu::x4_name };
+	std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector<Vector2> >( tempVector10, tempVector10 + sizeof( tempVector10 ) / sizeof( tempVector10[ 0 ] ) );
 
 	std::shared_ptr<MenuItem> StatsMenu::AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, int> > &f )
 	{
@@ -180,8 +179,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 		{
 			if ( PlayerManager::Get( j )->Exists )
 			{
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-				std::wstring val = f->Apply( j )->ToString();
+				std::wstring val = f->Apply( j );
 
 				Text = std::make_shared<EzText>( val, ItemFont, false, true );
 				Text->Layer = 1;
@@ -238,7 +236,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MakeBack();
 
@@ -334,7 +332,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 		int NumDeathTypes = BobDeathType_TOTAL;
 		for ( int i = 1; i < NumDeathTypes; i++ )
 		{
-			Bob::BobDeathType type = static_cast<Bob::BobDeathType>( i );
+			BobDeathType type = static_cast<BobDeathType>( i );
 
 			if ( Bob::BobDeathNames.find( type ) != Bob::BobDeathNames.end() )
 			{
@@ -397,7 +395,7 @@ std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector
 
 		// Scroll bar
 	#if defined(PC_VERSION)
-		bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), shared_from_this() );
+		bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 		bar->setBarPos( BarPos );
 		MyGame->AddGameObject( bar );
 		MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

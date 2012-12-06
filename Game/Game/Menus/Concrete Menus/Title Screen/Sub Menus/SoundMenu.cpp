@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -116,11 +114,11 @@ namespace CloudberryKingdom
 		int CurRez = 0;
 
 		// Get viable resolutions
-		std::vector<DisplayMode*> modes = std::vector<DisplayMode*>();
-		for ( Microsoft::Xna::Framework::Graphics::DisplayModeCollection::const_iterator mode = GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.begin(); mode != GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.end(); ++mode )
+		std::vector<std::shared_ptr<DisplayMode> > modes = std::vector<std::shared_ptr<DisplayMode> >();
+		for ( DisplayModeCollection::const_iterator mode = GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.begin(); mode != GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.end(); ++mode )
 		{
 			bool Any = false;
-			for ( std::vector<DisplayMode*>::const_iterator existing = modes.begin(); existing != modes.end(); ++existing )
+			for ( std::vector<std::shared_ptr<DisplayMode> >::const_iterator existing = modes.begin(); existing != modes.end(); ++existing )
 			{
 				if ( ( *existing )->Width == ( *mode )->Width && ( *existing )->Height == ( *mode )->Height )
 					Any = true;
@@ -134,7 +132,6 @@ namespace CloudberryKingdom
 
 		// Add resolutions to the current list
 		bool found = false;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<DisplayMode*>::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
 			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;

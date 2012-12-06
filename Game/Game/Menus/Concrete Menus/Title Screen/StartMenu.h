@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		virtual void Hide( const std::shared_ptr<PresetPos> &pos, int frames );
+		virtual void Hide( const PresetPos &pos, int frames );
 
 		Next MyNextMenu;
 

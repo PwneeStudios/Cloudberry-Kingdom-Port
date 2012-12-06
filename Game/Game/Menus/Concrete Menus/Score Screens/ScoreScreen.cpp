@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -134,9 +132,10 @@ namespace CloudberryKingdom
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_KEEP_SETTINGS, ItemFont ) );
 			item->Name = _T( "Continue" );
-			item->setGo( std::make_shared<MenuGo_NewLevelProxy>( shared_from_this() ) );
+			item->setGo( std::make_shared<MenuGo_NewLevelProxy>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			AddItem( item );
-			item->MyText->setScale(item->MySelectedText->setScale(item->MyText->setScale(item->MySelectedText->getScale() * 1.3f));
+			item->MySelectedText->setScale( item->MySelectedText->getScale() * 1.3f );
+			item->MyText->setScale( item->MySelectedText->getScale() );
 			item->Shift( Vector2( -86, 65 ) );
 			item->SelectedPos.X += 6;
 
@@ -144,7 +143,7 @@ namespace CloudberryKingdom
 			{
 				item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont ) );
 				item->Name = _T( "Replay" );
-				item->setGo( std::make_shared<MenuGo_WatchReplayProxy>( shared_from_this() ) );
+				item->setGo( std::make_shared<MenuGo_WatchReplayProxy>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
 			}
 
@@ -152,19 +151,19 @@ namespace CloudberryKingdom
 			{
 				item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVED_SEEDS, ItemFont ) );
 				item->Name = _T( "Save" );
-				item->setGo( std::make_shared<MenuGo_SaveProxy>( shared_from_this() ) );
+				item->setGo( std::make_shared<MenuGo_SaveProxy>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
 			}
 
 			MakeBackButton( Localization::Words_BACK_TO_FREEPLAY );
-			MyMenu->OnB = Cast::ToMenu( std::make_shared<MenuGo_ContinueProxy>( shared_from_this() ) );
+			MyMenu->OnB = Cast::ToMenu( std::make_shared<MenuGo_ContinueProxy>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 
 			EnsureFancy();
 			MyMenu->FancyPos->RelVal = Vector2( 869.0476f, -241.6667f );
 		}
 		else
 		{
-			std::shared_ptr<QuadClass> ContinueButton = std::make_shared<QuadClass>( ButtonTexture::getGo(), 90, false );
+			std::shared_ptr<QuadClass> ContinueButton = std::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, false );
 			ContinueButton->Name = _T( "GoButton" );
 			MyPile->Add( ContinueButton );
 			ContinueButton->setPos( Vector2( 180, -477.7778f ) + ShiftAll );
@@ -178,7 +177,7 @@ namespace CloudberryKingdom
 
 			if ( MyGame->MyLevel->getReplayAvailable() )
 			{
-				std::shared_ptr<QuadClass> XButton = std::make_shared<QuadClass>( ButtonTexture::getX(), 90, false );
+				std::shared_ptr<QuadClass> XButton = std::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, false );
 				XButton->Name = _T( "XButton" );
 				MyPile->Add( XButton );
 				XButton->setPos( Vector2( 180, -325.3333f ) + ShiftAll );
@@ -186,7 +185,7 @@ namespace CloudberryKingdom
 				std::shared_ptr<EzText> ReplayText = std::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont );
 				SetHeaderProperties( ReplayText );
 				ReplayText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
-				ReplayText->MyFloatColor = ( Color( 184, 231, 231 ) ).ToVector4();
+				ReplayText->MyFloatColor = ( bColor( 184, 231, 231 ) ).ToVector4();
 				MyPile->Add( ReplayText );
 				ReplayText->setPos( Vector2( 180, -325.3333f ) + ShiftAll );
 			}
@@ -384,9 +383,9 @@ bool ScoreScreen::UseZoomIn = true;
 		int Blobs = PlayerManager::PlayerSum( std::make_shared<VariableBlobsLambda>( MyStatGroup ) );
 		int BlobTotal = PlayerManager::PlayerMax( std::make_shared<VariableTotalBlobsLambda>( MyStatGroup ) );
 
-		MyPile->Add( std::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, _T( "Coins" ) ) );
-		MyPile->Add( std::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, _T( "Blobs" ) ) );
-		MyPile->Add( std::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, _T( "Deaths" ) ) );
+		MyPile->Add( std::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, std::wstring( _T( "Coins" ) ) ) );
+		MyPile->Add( std::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( _T( "Blobs" ) ) ) );
+		MyPile->Add( std::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( _T( "Deaths" ) ) ) );
 
 		// Awardments
 		Awardments::CheckForAward_HoldForward();
@@ -398,7 +397,7 @@ bool ScoreScreen::UseZoomIn = true;
 		SetPos();
 		MyMenu->SortByHeight();
 
-		MyGame->WaitThenDo( DelayPhsx, std::make_shared<OnAddHelper>( shared_from_this() ) );
+		MyGame->WaitThenDo( DelayPhsx, std::make_shared<OnAddHelper>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 	}
 
 	void ScoreScreen::MyDraw()
@@ -458,33 +457,33 @@ bool ScoreScreen::UseZoomIn = true;
 
 	void ScoreScreen::MenuGo_NewLevel( const std::shared_ptr<MenuItem> &item )
 	{
-		SlideOut( PresetPos_LEFT );
+		GUI_Panel::SlideOut( PresetPos_LEFT );
 
 		Active = false;
 
 		Tools::SongWad->FadeOut();
 
-		MyGame->WaitThenDo( 36, std::make_shared<ScoreScreenEndGameHelper>( shared_from_this(), true ) );
+		MyGame->WaitThenDo( 36, std::make_shared<ScoreScreenEndGameHelper>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ), true ) );
 		return;
 	}
 
 	void ScoreScreen::MenuGo_Continue( const std::shared_ptr<MenuItem> &item )
 	{
-		SlideOut( PresetPos_LEFT );
+		GUI_Panel::SlideOut( PresetPos_LEFT );
 
-		MyGame->WaitThenDo( SlideOutLength + 2, std::make_shared<ScoreScreenEndGameHelper>( shared_from_this(), false ) );
+		MyGame->WaitThenDo( SlideOutLength + 2, std::make_shared<ScoreScreenEndGameHelper>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ), false ) );
 	}
 
 	bool ScoreScreen::MenuGo_ExitFreeplay( const std::shared_ptr<Menu> &menu )
 	{
-		SlideOut( PresetPos_LEFT );
+		GUI_Panel::SlideOut( PresetPos_LEFT );
 
 		if ( MyGame->ParentGame != 0 )
 		{
 			CustomLevel_GUI::ExitFreeplay = true;
 		}
 
-		MyGame->WaitThenDo( SlideOutLength + 2, std::make_shared<ScoreScreenEndGameHelper>( shared_from_this(), false ) );
+		MyGame->WaitThenDo( SlideOutLength + 2, std::make_shared<ScoreScreenEndGameHelper>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ), false ) );
 
 		return true;
 	}
@@ -500,7 +499,7 @@ bool ScoreScreen::UseZoomIn = true;
 		{
 			Active = false;
 
-			MyGame->WaitThenDo( 35, std::make_shared<MenuGo_WatchReplayHelper>( shared_from_this() ) );
+			MyGame->WaitThenDo( 35, std::make_shared<MenuGo_WatchReplayHelper>( std::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 		}
 		else
 		{
@@ -511,7 +510,7 @@ bool ScoreScreen::UseZoomIn = true;
 	void ScoreScreen::MenuGo_Save( const std::shared_ptr<MenuItem> &item )
 	{
 		std::shared_ptr<PlayerData> player = MenuItem::GetActivatingPlayerData();
-		SaveLoadSeedMenu::MakeSave( shared_from_this(), player )->Apply( item );
+		SaveLoadSeedMenu::MakeSave( std::static_pointer_cast<SaveLoadSeedMenu>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ), player )->Apply( item );
 		Hide( PresetPos_LEFT );
 	}
 
@@ -539,7 +538,7 @@ bool ScoreScreen::UseZoomIn = true;
 			if ( level->CanWatchReplay && ButtonCheck::State( ControllerButtons_X, -1 ).Pressed )
 				WatchReplay = true;
 	#if defined(PC_VERSION)
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys_Escape ) || Tools::PrevKeyboard.IsKeyDownCustom( Keys_Escape ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Escape ) || KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Escape ) )
 			WatchReplay = false;
 	#endif
 

@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<BobPhsx> Hero;
 	private:
-		const std::shared_ptr<BobPhsxNormal> &getNormalHero() const;
+		const std::shared_ptr<BobPhsxNormal> getNormalHero() const;
 
 	protected:
 		std::shared_ptr<CustomLevel_GUI> CustomLevel;

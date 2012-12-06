@@ -1,11 +1,9 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-	void StartMenu_MW_Backpanel::Hide( const std::shared_ptr<PresetPos> &pos, int frames )
+	void StartMenu_MW_Backpanel::Hide( const PresetPos &pos, int frames )
 	{
 		CkBaseMenu::Hide( pos, frames );
 		ButtonCheck::PreLogIn = false;
@@ -16,7 +14,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Backpanel::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_Backpanel::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		//base.SlideOut(Preset, 0);
 		CkBaseMenu::SlideOut( Preset, Frames );
@@ -42,31 +40,31 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		Scene = std::make_shared<QuadClass>( _T( "Title_Screen" ), 1778 );
+		Scene = std::make_shared<QuadClass>( _T( "Title_Screen" ), 1778.f );
 		MyPile->Add( Scene, _T( "Scene" ) );
 
-		Title = std::make_shared<QuadClass>( _T( "Title" ), 1778 );
+		Title = std::make_shared<QuadClass>( _T( "Title" ), 1778.f );
 		//MyPile.Add(Title, "Title");
 
-		Title_Trim = std::make_shared<QuadClass>( _T( "Title_Trim" ), 1778 * 783 / 1280 );
+		Title_Trim = std::make_shared<QuadClass>( _T( "Title_Trim" ), 1778 * 783 / 1280.f );
 		MyPile->Add( Title_Trim, _T( "Title_Trim" ) );
 
-		Scene_NoBob_Blur = std::make_shared<QuadClass>( _T( "Title_NoBob_Blur" ), 1778 );
+		Scene_NoBob_Blur = std::make_shared<QuadClass>( _T( "Title_NoBob_Blur" ), 1778.f );
 		MyPile->Add( Scene_NoBob_Blur, _T( "Scene_NoBob_Blur" ) );
 
-		Scene_NoBob_Brighten = std::make_shared<QuadClass>( _T( "Title_NoBob_Brighten" ), 1778 );
+		Scene_NoBob_Brighten = std::make_shared<QuadClass>( _T( "Title_NoBob_Brighten" ), 1778.f );
 		MyPile->Add( Scene_NoBob_Brighten, _T( "Scene_NoBob_Brighten" ) );
 
-		Scene_Blur = std::make_shared<QuadClass>( _T( "Title_Blur" ), 1778 );
+		Scene_Blur = std::make_shared<QuadClass>( _T( "Title_Blur" ), 1778.f );
 		MyPile->Add( Scene_Blur, _T( "Scene_Blur" ) );
 
-		Scene_Princess = std::make_shared<QuadClass>( _T( "Scene_Princess" ), 1778 );
+		Scene_Princess = std::make_shared<QuadClass>( _T( "Scene_Princess" ), 1778.f );
 		MyPile->Add( Scene_Princess, _T( "Scene_Princess" ) );
 
-		Scene_Kobbler = std::make_shared<QuadClass>( _T( "Scene_Kobbler" ), 1778 );
+		Scene_Kobbler = std::make_shared<QuadClass>( _T( "Scene_Kobbler" ), 1778.f );
 		MyPile->Add( Scene_Kobbler, _T( "Scene_Kobbler" ) );
 
-		Scene_Kobbler_Blur = std::make_shared<QuadClass>( _T( "Scene_Kobbler_Blur" ), 1778 );
+		Scene_Kobbler_Blur = std::make_shared<QuadClass>( _T( "Scene_Kobbler_Blur" ), 1778.f );
 		MyPile->Add( Scene_Kobbler_Blur, _T( "Scene_Kobbler_Blur" ) );
 
 		BlackBox();
@@ -74,7 +72,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Backpanel::SetState( State state )
 	{
-		for ( std::vector<QuadClass*>::const_iterator quad = MyPile->MyQuadList.begin(); quad != MyPile->MyQuadList.end(); ++quad )
+		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyPile->MyQuadList.begin(); quad != MyPile->MyQuadList.end(); ++quad )
 		{
 			( *quad )->ResetFade();
 			( *quad )->Show = false;
@@ -235,12 +233,12 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Backpanel::MyDraw()
 	{
 		// Fade to black/from black for blurred background
-		float black = Scene_Blur->Quad_Renamed->MySetColor->R / 255;
+		float black = Scene_Blur->Quad_Renamed.MySetColor.R / 255.f;
 		if ( MyState == State_SCENE_BLUR_DARK )
-			black = CoreMath::Restrict( .7f, 1, black - .33f );
+			black = CoreMath::RestrictVal( .7f, 1.f, black - .33f );
 		else
-			black = CoreMath::Restrict( .7f, 1, black + .33f );
-		Scene_Blur->Quad_Renamed->SetColor( ColorHelper::Gray( black ) );
+			black = CoreMath::RestrictVal( .7f, 1.f, black + .33f );
+		Scene_Blur->Quad_Renamed.SetColor( ColorHelper::Gray( black ) );
 
 		// Oscillate title color
 		if ( Title->Show )
@@ -251,7 +249,7 @@ namespace CloudberryKingdom
 
 			Vector4 c1 = Vector4( 0 );
 			Vector4 c2 = Vector4( 1 );
-			Title->Quad_Renamed->SetColor( Vector4::Lerp( c1, c2, t ) );
+			Title->Quad_Renamed.SetColor( Vector4::Lerp( c1, c2, t ) );
 		}
 
 		CkBaseMenu::MyDraw();

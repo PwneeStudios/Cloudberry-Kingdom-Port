@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		Adjective = _T( "double jump" );
 
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( -.3f,.085f ) );
+		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
 	}
 
 const std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance = std::make_shared<BobPhsxDouble>();

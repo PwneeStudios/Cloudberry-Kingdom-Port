@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 		bool HasLava;
 
 	protected:
-		//void KillThread( const std::shared_ptr<void> &sender, const std::shared_ptr<System::EventArgs> &e );
+		//void KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e );
 
 		/// <summary>
 		/// True when a single player has successfully navigated the level.

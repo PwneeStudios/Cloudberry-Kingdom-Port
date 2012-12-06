@@ -101,13 +101,13 @@ namespace CloudberryKingdom
 		getCore()->setMyTileSet(TileSetType);
 
 		std::shared_ptr<CloudberryKingdom::Door::DoorTileInfo> info = TileSetType->MyTileSetInfo->Doors;
-		MyQuad->Quad_Renamed->Init();
+		MyQuad->Quad_Renamed.Init();
 
 		if ( Mirror )
 		{
 			info->Sprite->Offset.X *= -1;
 			MyQuad->Set( info->Sprite );
-			MyQuad->Quad_Renamed->MirrorUV_Horizontal();
+			MyQuad->Quad_Renamed.MirrorUV_Horizontal();
 			info->Sprite->Offset.X *= -1;
 		}
 		else
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		ShiftBottom = info->ShiftBottom;
 		DoorSize = info->CollisionSize;
 
-		MyQuad->Quad_Renamed->Playing = false;
+		MyQuad->Quad_Renamed.Playing = false;
 
 		SetObjectState();
 	}
@@ -155,11 +155,11 @@ namespace CloudberryKingdom
 
 		if ( Locked )
 		{
-			MyQuad->Quad_Renamed->CalcTexture( 0, 1 );
+			MyQuad->Quad_Renamed.CalcTexture( 0, 1 );
 		}
 		else
 		{
-			MyQuad->Quad_Renamed->CalcTexture( 0, 0 );
+			MyQuad->Quad_Renamed.CalcTexture( 0, 0 );
 		}
 	}
 

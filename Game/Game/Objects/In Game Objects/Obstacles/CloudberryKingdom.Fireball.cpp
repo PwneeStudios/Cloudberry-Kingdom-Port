@@ -315,7 +315,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 				if ( !getCore()->BoxesOnly )
 				{
 					MyQuad->setSize( Vector2( 195 ) );
-					MyQuad->Quad_Renamed->MyTexture = FireballTexture;
+					MyQuad->Quad_Renamed.MyTexture = FireballTexture;
 					MyQuad->Set( level->getInfo()->Fireballs->Sprite );
 					MyQuad->Show = true;
 				}
@@ -370,7 +370,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 		// Point forward
 		MyQuad->PointxAxisTo( -getCore()->Data.Velocity );
 
-		MyQuad->Quad_Renamed->MyEffect = Tools::HslEffect;
+		MyQuad->Quad_Renamed.MyEffect = Tools::HslEffect;
 
 		// Shift forward
 		Vector2 dir = getCore()->Data.Velocity;

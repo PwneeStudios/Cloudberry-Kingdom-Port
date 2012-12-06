@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -16,7 +14,7 @@ namespace CloudberryKingdom
 		ArcadeMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Arcade::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_Arcade::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		ArcadeMenu::SlideOut( Preset, 0 );
 	}
@@ -41,7 +39,7 @@ namespace CloudberryKingdom
 
 		if ( MyArcadeItem->MyChallenge == Challenge_Escalation::getInstance() || MyArcadeItem->MyChallenge == Challenge_TimeCrisis::getInstance() )
 		{
-			Call( std::make_shared<StartMenu_MW_HeroSelect>( Title, shared_from_this(), MyArcadeItem ) );
+			GUI_Panel::Call( std::make_shared<StartMenu_MW_HeroSelect>( Title, std::static_pointer_cast<ArcadeMenu>( shared_from_this() ), MyArcadeItem ) );
 		}
 		else
 		{
@@ -49,10 +47,10 @@ namespace CloudberryKingdom
 			std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
 
 			levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
+			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
 			levelmenu->ReturnFunc.reset();
 
-			Call( levelmenu );
+			GUI_Panel::Call( levelmenu );
 		}
 
 		Hide();
@@ -68,7 +66,7 @@ namespace CloudberryKingdom
 		 ArcadeMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPos();
 	}

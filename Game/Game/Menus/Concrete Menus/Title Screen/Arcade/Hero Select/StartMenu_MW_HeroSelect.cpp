@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -85,7 +86,7 @@ namespace CloudberryKingdom
 			Options->SlideIn( 0 );
 	}
 
-	void StartMenu_MW_HeroSelect::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_HeroSelect::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		ArcadeBaseMenu::SlideOut( Preset, 0 );
 
@@ -121,7 +122,7 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( MyHeroDoll );
 
 		// Options. Menu for PC, graphics only for consoles.
-		Options = std::make_shared<HeroSelectOptions>( shared_from_this() );
+		Options = std::make_shared<HeroSelectOptions>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 		MyGame->AddGameObject( Options );
 	}
 
@@ -164,22 +165,22 @@ namespace CloudberryKingdom
 		std::shared_ptr<MiniMenu> mini = std::make_shared<MiniMenu>();
 		MyMenu = mini;
 
-		MyMenu->OnSelect = std::make_shared<UpdateScoreProxy>( shared_from_this() );
+		MyMenu->OnSelect = std::make_shared<UpdateScoreProxy>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 
 		mini->WrapSelect = false;
 		mini->Shift = Vector2( 0, -135 );
 		mini->ItemsToShow = 6;
 		FontScale *= .75f;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<CloudberryKingdom::std::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
+
+		for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
 		{
 			std::shared_ptr<HeroItem> item = std::make_shared<HeroItem>( *phsx );
-			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( shared_from_this() );
+			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 			AddItem( item );
-			item->setGo( std::make_shared<StartMenuGoLambda>( shared_from_this() ) );
+			item->setGo( std::make_shared<StartMenuGoLambda>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
 		}
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 		EnsureFancy();
 
 		/// <summary>
@@ -312,7 +313,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( shared_from_this() );
+		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
 		levelmenu->ReturnFunc.reset();
 
 		Call( levelmenu );

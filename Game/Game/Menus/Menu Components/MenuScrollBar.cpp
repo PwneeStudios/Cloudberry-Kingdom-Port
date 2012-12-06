@@ -36,9 +36,9 @@ namespace CloudberryKingdom
 				Slider->Quad_Renamed.setMyTexture( Normal );
 	#else
 			if ( Selected )
-				Slider->Quad_Renamed->MyTexture = Held;
+				Slider->Quad_Renamed.MyTexture = Held;
 			else
-				Slider->Quad_Renamed->MyTexture = Normal;
+				Slider->Quad_Renamed.MyTexture = Normal;
 	#endif
 
 			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 85, 0, 0.f );

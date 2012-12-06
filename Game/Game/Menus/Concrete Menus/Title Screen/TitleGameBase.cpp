@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -7,7 +8,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFactory>();
+	std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFactory>();
 
 	void TitleGameData::Release()
 	{
@@ -36,7 +37,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 	{
 		GameData::SetToReturnTo( code );
 
-		Tools::WorldMap = this;
+		Tools::WorldMap = shared_from_this();
 	}
 
 	void TitleGameData::ReturnTo( int code )
@@ -54,7 +55,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 
 		level->TimeLimit = -1;
 
-		level->CurPiece = level->StartNewPiece( 0, 0, 4 );
+		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 
 		Vector2 Center = Vector2( 1000, 0 );
 
@@ -73,7 +74,7 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		level->getMainCamera()->MyZone = CamZone;
 
 		// Initialize the background
-		level->MyTileSet = _T( "forest" );
+		level->MyTileSet = TileSet::Get( _T( "forest" ) );
 		//level.MyBackground = Background.Get("KobblerPie");
 		level->MyBackground = Background::Get( _T( "forest" ) );
 		//level.MyBackground = Background.Get("forest_snow");
@@ -88,10 +89,10 @@ std::shared_ptr<GameFactory> TitleGameData::Factory = std::make_shared<TitleFact
 		GameData::Init();
 
 		Tools::CurLevel = MyLevel = MakeLevel();
-		Tools::WorldMap = Tools::CurGameData = MyLevel->MyGame = this;
+		Tools::WorldMap = Tools::CurGameData = MyLevel->MyGame = shared_from_this();
 		Tools::CurGameType = TitleGameData::Factory;
 
-		Tools::TitleGame = this;
+		Tools::TitleGame = shared_from_this();
 
 		MyLevel->PlayMode = 0;
 		MyLevel->ResetAll( false );

@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
 
 	public:
-		std::shared_ptr<Lambda_1<LevelItem*> > StartFunc;
+		std::shared_ptr<Lambda_1<std::shared_ptr<LevelItem> > > StartFunc;
 		std::shared_ptr<Lambda> ReturnFunc;
 
 	protected:

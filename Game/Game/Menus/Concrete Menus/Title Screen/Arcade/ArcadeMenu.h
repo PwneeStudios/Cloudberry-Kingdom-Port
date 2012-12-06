@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		};
 
 	protected:
-		class StartFuncProxy : public Lambda_1<LevelItem*>
+		class StartFuncProxy : public Lambda_1<std::shared_ptr<LevelItem> >
 		{
 		private:
 			std::shared_ptr<ArcadeBaseMenu> abm;

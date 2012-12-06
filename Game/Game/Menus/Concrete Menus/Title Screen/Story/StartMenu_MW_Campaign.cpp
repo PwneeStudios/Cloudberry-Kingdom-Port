@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -67,15 +65,15 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Campaign::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_Campaign::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}
 
 	void StartMenu_MW_Campaign::SetText( const std::shared_ptr<EzText> &text )
 	{
-		text->MyFloatColor = ( Color( 34, 214, 47 ) ).ToVector4();
-		text->OutlineColor = ( Color( 0, 0, 0, 0 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 34, 214, 47 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 0, 0, 0, 0 ) ).ToVector4();
 	}
 
 	void StartMenu_MW_Campaign::SetItemProperties( const std::shared_ptr<MenuItem> &item )
@@ -85,8 +83,8 @@ namespace CloudberryKingdom
 		SetText( item->MyText );
 
 		item->MySelectedText->Shadow = item->MyText->Shadow = false;
-		item->MySelectedText->MyFloatColor = ( Color( 73, 255, 86 ) ).ToVector4();
-		item->MySelectedText->OutlineColor = ( Color( 0, 0, 0, 0 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 73, 255, 86 ) ).ToVector4();
+		item->MySelectedText->OutlineColor = ( bColor( 0, 0, 0, 0 ) ).ToVector4();
 
 		//item.MyOscillateParams.Set(1f, 1.01f, .005f);
 	}
@@ -101,7 +99,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MyMenu->ClearList();
 
@@ -117,31 +115,31 @@ namespace CloudberryKingdom
 		// Chapter 1
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
 		item->Name = _T( "MainCampaign" );
-		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
 		item->Name = _T( "Easy" );
-		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
 		item->Name = _T( "Hard" );
-		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
 		item->Name = _T( "Hardcore" );
-		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
 		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
 		item->Name = _T( "Maso" );
-		item->setGo( std::make_shared<CampaignGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		//// Cinematics
@@ -186,7 +184,7 @@ namespace CloudberryKingdom
 		Active = false;
 
 		_StartLevel = StartLevel;
-		MyGame->WaitThenDo( 75, std::make_shared<GoLambda>( shared_from_this() ) );
+		MyGame->WaitThenDo( 75, std::make_shared<GoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 	}
 
 	void StartMenu_MW_Campaign::SetPos_NoCinematic()

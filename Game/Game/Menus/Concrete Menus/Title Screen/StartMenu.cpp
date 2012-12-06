@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -116,7 +114,7 @@ namespace CloudberryKingdom
 		sm->BringNextMenu();
 	}
 
-	void StartMenu::Hide( const std::shared_ptr<PresetPos> &pos, int frames )
+	void StartMenu::Hide( const PresetPos &pos, int frames )
 	{
 		CkBaseMenu::Hide( pos, frames );
 		ButtonCheck::PreLogIn = false;
@@ -145,7 +143,7 @@ namespace CloudberryKingdom
 	void StartMenu::BringCharacterSelect()
 	{
 		NoBack = true;
-		MyGame->SlideOut_FadeIn( 20, std::make_shared<CharacterSelectProxy>( shared_from_this() ) );
+		MyGame->SlideOut_FadeIn( 20, std::make_shared<CharacterSelectProxy>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
 	void StartMenu::Show()
@@ -161,9 +159,9 @@ namespace CloudberryKingdom
 
 	void StartMenu::CharacterSelect()
 	{
-		Hide();
-		CharacterSelectManager::Start( shared_from_this() );
-		CharacterSelectManager::OnDone = std::make_shared<DoneWithCharSelectProxy>( shared_from_this() );
+		GUI_Panel::Hide();
+		CharacterSelectManager::Start( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelectManager::OnDone = std::make_shared<DoneWithCharSelectProxy>( std::static_pointer_cast<StartMenu>( shared_from_this() ) );
 		CharacterSelectManager::OnBack.reset();
 	}
 
@@ -172,7 +170,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
 		Intro->Init();
 		Tools::TheGame->LogoScreenPropUp = false;
-		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( shared_from_this() ) );
+		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
 	void StartMenu::MenuGo_Controls( const std::shared_ptr<MenuItem> &item )
@@ -238,8 +236,8 @@ namespace CloudberryKingdom
 		if ( text == 0 )
 			return;
 
-		text->OutlineColor = ( Color( 0, 0, 0, outline ? 255 : 0 ) ).ToVector4();
-		text->MyFloatColor = ( Color( 34, 214, 47 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 0, 0, 0, outline ? 255 : 0 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 34, 214, 47 ) ).ToVector4();
 	}
 
 	void StartMenu::SetSelectedText_Green( const std::shared_ptr<EzText> &text, bool outline )
@@ -247,8 +245,8 @@ namespace CloudberryKingdom
 		if ( text == 0 )
 			return;
 
-		text->OutlineColor = ( Color( 0, 0, 0, outline ? 255 : 0 ) ).ToVector4();
-		text->MyFloatColor = ( Color( 65, 255, 100 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 0, 0, 0, outline ? 255 : 0 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 65, 255, 100 ) ).ToVector4();
 	}
 
 	void StartMenu::SetItemProperties_Green( const std::shared_ptr<MenuItem> &item, bool outline )
@@ -261,10 +259,10 @@ namespace CloudberryKingdom
 	{
 		if ( item->MyText == 0 )
 			return;
-		item->MyText->OutlineColor = ( Color( 191, 191, 191 ) ).ToVector4();
-		item->MyText->MyFloatColor = ( Color( 175, 8, 64 ) ).ToVector4();
-		item->MySelectedText->OutlineColor = ( Color( 205, 205, 205 ) ).ToVector4();
-		item->MySelectedText->MyFloatColor = ( Color( 242, 12, 85 ) ).ToVector4();
+		item->MyText->OutlineColor = ( bColor( 191, 191, 191 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 175, 8, 64 ) ).ToVector4();
+		item->MySelectedText->OutlineColor = ( bColor( 205, 205, 205 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 242, 12, 85 ) ).ToVector4();
 	}
 
 	void StartMenu::OnAdd()
@@ -291,7 +289,7 @@ namespace CloudberryKingdom
 		MyMenu->setControl( -2 );
 
 		MyMenu->CheckForOutsideClick = false;
-		MyMenu->OnB = std::make_shared<StartMenuExitLambda>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<StartMenuExitLambda>( std::static_pointer_cast<StartMenu>( shared_from_this() ) );
 
 		FontScale *= .88f;
 		PosAdd = Vector2( 0, -117 );
@@ -313,14 +311,14 @@ namespace CloudberryKingdom
 		// Arcade
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
 		item->Name = _T( "Arcade" );
-		item->setGo( std::make_shared<StartMenuLambda_Arcade>( shared_from_this() ) );
+		item->setGo( std::make_shared<StartMenuLambda_Arcade>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Campaign
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
 		item->Name = _T( "Campaign" );
 		AddItem( item );
-		item->setGo( std::make_shared<StartMenuLambda_Campaign>( shared_from_this() ) );
+		item->setGo( std::make_shared<StartMenuLambda_Campaign>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 
 		//// Extra
 		//item = new MenuItem(new EzText("Extras", ItemFont));
@@ -331,7 +329,7 @@ namespace CloudberryKingdom
 		// Free Play
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
 		item->Name = _T( "Freeplay" );
-		item->setGo( std::make_shared<StartMenuLambda_Freeplay>( shared_from_this() ) );
+		item->setGo( std::make_shared<StartMenuLambda_Freeplay>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		//// Jukebox
@@ -343,7 +341,7 @@ namespace CloudberryKingdom
 		// Options
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
 		item->Name = _T( "Options" );
-		item->setGo( std::make_shared<StartMenuLambda_Options>( shared_from_this() ) );
+		item->setGo( std::make_shared<StartMenuLambda_Options>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Stats
@@ -354,7 +352,7 @@ namespace CloudberryKingdom
 		// Exit
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
 		item->Name = _T( "Exit" );
-		item->setGo( std::make_shared<StartMenuLambda_Exit>( shared_from_this() ) );
+		item->setGo( std::make_shared<StartMenuLambda_Exit>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		EnsureFancy();
@@ -582,7 +580,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::DoneWithCharSelect()
 	{
-		MyGame->WaitThenDo( 0, std::make_shared<BringNextMenuLambda>( shared_from_this() ) );
+		MyGame->WaitThenDo( 0, std::make_shared<BringNextMenuLambda>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
 	void StartMenu::BringNextMenu()

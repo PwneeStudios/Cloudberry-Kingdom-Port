@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		Adjective = _T( "jetman" );
 
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( -.25f, -.01f ) );
+		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.25f, -.01f ) );
 	}
 
 const std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance = std::make_shared<BobPhsxJetman>();

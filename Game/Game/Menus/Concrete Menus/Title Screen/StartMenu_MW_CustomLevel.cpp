@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -18,7 +16,7 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::SlideIn( Frames );
 	}
 
-	void StartMenu_MW_CustomLevel::SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames )
+	void StartMenu_MW_CustomLevel::SlideOut( const PresetPos &Preset, int Frames )
 	{
 		//base.SlideOut(Preset, 0);
 		CustomLevel_GUI::SlideOut( Preset, Frames );
@@ -42,7 +40,7 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 		//ReturnToCallerDelay = 10;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void StartMenu_MW_CustomLevel::ReturnToCaller()

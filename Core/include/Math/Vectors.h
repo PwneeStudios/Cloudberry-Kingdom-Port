@@ -255,6 +255,16 @@ public:
 	float b() const { return Z; }
 	float a() const { return W; }
 
+	static Vector4 Lerp( const Vector4 &a, const Vector4 &b, float t )
+	{
+		return a * ( 1 - t ) + b * t;
+	}
+
+	Vector4 operator + ( const Vector4 &a ) const
+	{
+		return Vector4( X + a.X, Y + a.Y, Z + a.Z, W + a.W );
+	}
+
 	Vector4 operator * ( const Vector4 &a ) const
 	{
 		return Vector4( X * a.X, Y * a.Y, Z * a.Z, W * a.W );

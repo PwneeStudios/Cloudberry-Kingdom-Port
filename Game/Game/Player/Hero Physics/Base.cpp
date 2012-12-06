@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		_Bounds[ static_cast<int>( CustomData_FRICTION ) ] = DataBounds( 1, 0, 3 );
 	}
 
-int BobPhsx::CustomPhsxData::Length = 16;
+	int BobPhsx::CustomPhsxData::Length = 16;
 
 	void BobPhsx::CustomPhsxData::Init()
 	{
@@ -104,28 +104,28 @@ int BobPhsx::CustomPhsxData::Length = 16;
 			data[ i ] = _Bounds[ i ].DefaultValue;
 	}
 
-	void BobPhsx::CustomPhsxData::Init( ... )
+	void BobPhsx::CustomPhsxData::Init( std::vector<float> vals )
 	{
 		data = std::vector<float>( Length );
 
-		Tools::Assert( vals->Length == data.size() );
+		Tools::Assert( vals.size() == data.size() );
 
-		*this->operator[]( CustomData_GRAVITY ) = vals[0];
-		*this->operator[]( CustomData_ACCEL ) = vals[1];
-		*this->operator[]( CustomData_MAXSPEED ) = vals[2];
-		*this->operator[]( CustomData_MAXFALL ) = vals[3];
-		*this->operator[]( CustomData_JUMPLENGTH ) = vals[4];
-		*this->operator[]( CustomData_JUMPLENGTH2 ) = vals[5];
-		*this->operator[]( CustomData_JUMPACCEL ) = vals[6];
-		*this->operator[]( CustomData_JUMPACCEL ) = vals[7];
-		*this->operator[]( CustomData_JETPACKACCEL ) = vals[8];
-		*this->operator[]( CustomData_JETPACKFUEL ) = vals[9];
-		*this->operator[]( CustomData_NUMJUMPS ) = vals[10];
-		*this->operator[]( CustomData_SIZE ) = vals[11];
-		*this->operator[]( CustomData_SIZE2 ) = vals[12];
-		*this->operator[]( CustomData_GRAVITY2 ) = vals[13];
-		*this->operator[]( CustomData_PHASEPERIOD ) = vals[14];
-		*this->operator[]( CustomData_FRICTION ) = vals[15];
+		this->operator[]( CustomData_GRAVITY ) = vals[0];
+		this->operator[]( CustomData_ACCEL ) = vals[1];
+		this->operator[]( CustomData_MAXSPEED ) = vals[2];
+		this->operator[]( CustomData_MAXFALL ) = vals[3];
+		this->operator[]( CustomData_JUMPLENGTH ) = vals[4];
+		this->operator[]( CustomData_JUMPLENGTH2 ) = vals[5];
+		this->operator[]( CustomData_JUMPACCEL ) = vals[6];
+		this->operator[]( CustomData_JUMPACCEL ) = vals[7];
+		this->operator[]( CustomData_JETPACKACCEL ) = vals[8];
+		this->operator[]( CustomData_JETPACKFUEL ) = vals[9];
+		this->operator[]( CustomData_NUMJUMPS ) = vals[10];
+		this->operator[]( CustomData_SIZE ) = vals[11];
+		this->operator[]( CustomData_SIZE2 ) = vals[12];
+		this->operator[]( CustomData_GRAVITY2 ) = vals[13];
+		this->operator[]( CustomData_PHASEPERIOD ) = vals[14];
+		this->operator[]( CustomData_FRICTION ) = vals[15];
 	}
 
 	std::wstring BobPhsx::CustomPhsxData::ToString()

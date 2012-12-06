@@ -8,10 +8,10 @@ namespace CloudberryKingdom
 	class MenuListItem
 	{
 	public:
-		std::shared_ptr<void> obj;
+		std::shared_ptr<Object> obj;
 		Localization::Words word;
 
-		MenuListItem( const std::shared_ptr<void> &obj, Localization::Words word );
+		MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word );
 	};
 
 	class Hat : public Buyable

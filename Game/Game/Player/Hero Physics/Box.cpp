@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Box_Duck_0000" ) ), Color::White, DefaultIconWidth * 1.35f );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed->Shift( Vector2( 0,.0485f ) );
+		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0,.0485f ) );
 	}
 
 const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhsxBox>();

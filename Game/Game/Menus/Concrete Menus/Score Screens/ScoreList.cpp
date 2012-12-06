@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -62,10 +60,10 @@ namespace CloudberryKingdom
 
 	bool ScoreList::Qualifies( const std::shared_ptr<ScoreEntry> &Entry )
 	{
-		return Scores.size() < Capacity || Entry->Value > getBottom();
+		return static_cast<int>( Scores.size() ) < Capacity || Entry->Value > getBottom();
 	}
 
-	const int &ScoreList::getBottom() const
+	const int ScoreList::getBottom() const
 	{
 		if ( Scores.empty() )
 			return 0;
@@ -79,7 +77,7 @@ namespace CloudberryKingdom
 	{
 		score->MyFormat = MyFormat;
 
-		int Rank = Scores.find( score ) + 1;
+		int Rank = IndexOf( Scores, score ) + 1;
 		std::wstring RankStr = StringConverterHelper::toString( Rank ) + _T( ". " );
 
 		while ( RankStr.length() < 4 )
@@ -89,7 +87,6 @@ namespace CloudberryKingdom
 			RankStr += GetPrefix();
 
 		std::wstring ScoreStr = Format( _T( "{0:n}" ), score );
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		return RankStr + score->ToString( Length - RankStr.length() );
 	}
 
@@ -106,8 +103,9 @@ namespace CloudberryKingdom
 
 	void ScoreList::TrimExcess()
 	{
-		if ( Scores.size() > Capacity )
-			Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
+		// FIXME: I think this is useless, so I commented it out.
+		//if ( Scores.size() > Capacity )
+		//	Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
 	}
 
 	int ScoreList::ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 )
@@ -117,7 +115,7 @@ namespace CloudberryKingdom
 
 	void ScoreList::Sort()
 	{
-		Scores.Sort( ScoreCompare );
+		::Sort( Scores, ScoreCompare );
 	}
 
 	void ScoreList::InitializeInstanceFields()

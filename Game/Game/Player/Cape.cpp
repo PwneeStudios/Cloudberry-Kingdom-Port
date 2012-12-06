@@ -470,13 +470,13 @@ namespace CloudberryKingdom
 	{
 		Tools::QDrawer->Flush();
 
-		std::shared_ptr<EzEffect> Effect = MyQuad->Quad_Renamed->MyEffect;
+		std::shared_ptr<EzEffect> Effect = MyQuad->Quad_Renamed.MyEffect;
 
 		if ( !Effect->IsUpToDate )
 			Effect->SetCameraParameters();
 
 
-		Effect->xTexture->SetValue( MyQuad->Quad_Renamed->MyTexture->Tex );
+		Effect->xTexture->SetValue( MyQuad->Quad_Renamed.MyTexture->Tex );
 		Effect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
 
 		//Tools.QDrawer.SetAddressMode(true, true);

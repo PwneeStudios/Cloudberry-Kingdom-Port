@@ -25,10 +25,10 @@ namespace CloudberryKingdom
 		virtual void InitializeSlider();
 
 	public:
-		const Vector2 getSliderBackSize() const;
+		Vector2 getSliderBackSize() const;
 		void setSliderBackSize( const Vector2 &value );
 
-		const Vector2 getSliderSize() const;
+		Vector2 getSliderSize() const;
 		void setSliderSize( const Vector2 &value );
 
 		virtual float Height();

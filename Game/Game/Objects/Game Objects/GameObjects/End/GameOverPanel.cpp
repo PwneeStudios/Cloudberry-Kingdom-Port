@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 
 		// Make the backdrop
 		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score\\Score_Screen" ), 1440 );
-		backdrop->Quad_Renamed->SetColor( Color( 220, 220, 220 ) );
+		backdrop->Quad_Renamed.SetColor( Color( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 

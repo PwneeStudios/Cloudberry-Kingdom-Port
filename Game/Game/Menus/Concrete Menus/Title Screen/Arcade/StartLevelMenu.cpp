@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -9,8 +10,8 @@ namespace CloudberryKingdom
 
 		if ( Locked )
 		{
-			MyText->MyFloatColor = ( Color( 255, 100, 100 ) ).ToVector4();
-			MySelectedText->MyFloatColor = ( Color( 255, 160, 160 ) ).ToVector4();
+			MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
+			MySelectedText->MyFloatColor = ( bColor( 255, 160, 160 ) ).ToVector4();
 		}
 	}
 
@@ -48,7 +49,7 @@ namespace CloudberryKingdom
 		slm->Launch( item );
 	}
 
-int StartLevelMenu::PreviousMenuIndex = 0;
+	int StartLevelMenu::PreviousMenuIndex = 0;
 
 	void StartLevelMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
 	{
@@ -65,7 +66,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 		if ( 0 == litem )
 			return;
 
-		MyGame->WaitThenDo( CallDelay, std::make_shared<LaunchHelper>( shared_from_this(), litem ), _T( "StartGame" ) );
+		MyGame->WaitThenDo( CallDelay, std::make_shared<LaunchHelper>( std::static_pointer_cast<StartLevelMenu>( shared_from_this() ), litem ), _T( "StartGame" ) );
 	}
 
 	bool StartLevelMenu::GameReturn()
@@ -93,7 +94,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 	std::vector<std::wstring> StartLevelMenu::GetNames()
 	{
-		std::vector<std::wstring> names = std::vector<std::shared_ptr<std::wstring> >( Levels.size() );
+		std::vector<std::wstring> names = std::vector<std::wstring>( Levels.size() );
 
 		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
 			names[ i ] = Format( _T( "{0:00}" ), Levels[ i ] );
@@ -139,7 +140,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 
 		Vector2 shift = Vector2( -200, 40 );
@@ -154,7 +155,7 @@ int StartLevelMenu::PreviousMenuIndex = 0;
 
 			std::shared_ptr<LevelItem> item = std::make_shared<LevelItem>( std::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked );
 			if ( !Locked )
-				item->setGo( std::make_shared<LaunchProxy>( shared_from_this() ) );
+				item->setGo( std::make_shared<LaunchProxy>( std::static_pointer_cast<StartLevelMenu>( shared_from_this() ) ) );
 
 			AddItem( item );
 			item->SelectedPos.X -= 25;

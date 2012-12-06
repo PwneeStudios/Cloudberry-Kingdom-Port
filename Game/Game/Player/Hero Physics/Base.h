@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 	};
 
-	class BobPhsx
+	class BobPhsx : public Object
 	{
 	public:
 		class DefaultInfo
@@ -90,9 +90,7 @@ namespace CloudberryKingdom
 
 			void Init();
 
-//ORIGINAL LINE: public void Init(params float[] vals)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-			void Init( ... );
+			void Init( std::vector<float> vals );
 
 			virtual std::wstring ToString();
 

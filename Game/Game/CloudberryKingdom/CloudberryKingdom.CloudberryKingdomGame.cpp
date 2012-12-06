@@ -130,7 +130,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		while ( stack->Count > 0 )
 		{
-			std::shared_ptr<void> arg = stack->Pop();
+			std::shared_ptr<Object> arg = stack->Pop();
 
 //C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
 //			switch (arg)
@@ -193,7 +193,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Tools::TheGame = this;
 	}
 
-	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const std::shared_ptr<void> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e )
+	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e )
 	{
 		//graphics.PreferMultiSampling = false;
 		//graphics.MyGraphicsDevice.PresentationParameters.MultiSampleCount = 16;
@@ -342,7 +342,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	}
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void CloudberryKingdomGame::SignedInGamer_SignedOut( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedOutEventArgs> &e )
+	void CloudberryKingdomGame::SignedInGamer_SignedOut( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedOutEventArgs> &e )
 	{
 		SaveGroup::SaveAll();
 
@@ -352,7 +352,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void CloudberryKingdomGame::SignedInGamer_SignedIn( const std::shared_ptr<void> &sender, const std::shared_ptr<SignedInEventArgs> &e )
+	void CloudberryKingdomGame::SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e )
 	{
 		int Index = static_cast<int>( e->Gamer->PlayerIndex );
 		std::wstring Name = e->Gamer->Gamertag;

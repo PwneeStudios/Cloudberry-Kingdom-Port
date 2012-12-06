@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 		{
 			std::shared_ptr<QuadClass> Black = std::make_shared<QuadClass>( _T( "White" ), 1 );
 			Black->FullScreen( MyGame->getCam() );
-			Black->Quad_Renamed->SetColor( Color::Black );
+			Black->Quad_Renamed.SetColor( Color::Black );
 			Black->Scale( 2 );
 			MyPile->Insert( 0, Black );
 		}

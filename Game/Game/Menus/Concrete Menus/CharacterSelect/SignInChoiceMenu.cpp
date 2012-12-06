@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 		MyMenu->SelectIcon->ShadowOffset = Vector2( 7.5f, 7.5f );
 		MyMenu->SelectIcon->ShadowColor = Color( 30, 30, 30 );
 		MyMenu->SelectIcon->Scale( 90 );
-		MyMenu->SelectIcon->Quad_Renamed->MyTexture = ButtonTexture::getGo();
+		MyMenu->SelectIcon->Quad_Renamed.MyTexture = ButtonTexture::getGo();
 
 		MyMenu->FixedToCamera = false;
 

@@ -12,8 +12,15 @@ namespace CloudberryKingdom
 
 	private:
 		std::vector<unsigned char> Data;
+
+		int _Position;
+
 	public:
 		Chunks( std::vector<unsigned char> Data );
+
+		void StartGettingChunks();
+		const bool HasChunk();
+		const std::shared_ptr<Chunk> GetChunk();
 
 		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
@@ -41,7 +48,7 @@ namespace CloudberryKingdom
 
 		void Reset();
 
-		const std::shared_ptr<void> &getIEnumerator_Current() = IEnumerator::Current::get const;
+		const std::shared_ptr<Object> &getIEnumerator_Current() = IEnumerator::Current::get const;
 
 		~ChunkEnumerator();
 

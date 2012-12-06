@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// An associated object to store extra info.
 		/// </summary>
-		std::shared_ptr<void> MyObject;
+		std::shared_ptr<Object> MyObject;
 		int MyInt;
 
 		std::shared_ptr<MenuItem> Clone();

@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const std::shared_ptr<PresetPos> &Preset, int Frames );
+		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	protected:
 		virtual void BringCampaign();

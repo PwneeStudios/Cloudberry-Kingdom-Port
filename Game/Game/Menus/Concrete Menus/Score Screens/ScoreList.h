@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreEntry;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ScoreList
 	{
 	public:
@@ -43,7 +35,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Get the value of the bottom score
 		/// </summary>
-		const int &getBottom() const;
+		const int getBottom() const;
 
 		std::wstring ScoreString( const std::shared_ptr<ScoreEntry> &score, int Length );
 
