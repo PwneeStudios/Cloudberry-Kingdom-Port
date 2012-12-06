@@ -99,14 +99,14 @@ std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( 
 		DigitsToString( str, DigitsToAppend );
 	}
 
-	template<typename T>
+	/*template<typename T>
 	T ListExtension::Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd )
 	{
 		return list[ rnd->RndInt( 0, list.size() - 1 ) ];
-	}
+	}*/
 
 	template<typename T>
-	T ListExtension::Choose( std::vector<T> &list, const std::shared_ptr<Rand> &rnd )
+	T ListExtension::Choose( const std::vector<T> &list, const std::shared_ptr<Rand> &rnd )
 	{
 		if ( rnd == 0 )
 			return list[ 0 ];

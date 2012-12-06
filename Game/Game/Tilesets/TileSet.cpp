@@ -5,13 +5,13 @@ namespace CloudberryKingdom
 
 	void TileInfoBase::InitializeInstanceFields()
 	{
-		Icon = std::make_shared<SpriteInfo>( 0, Vector2( 50, -1 ) );
+		Icon = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 50, -1 ) );
 		Icon_Big = 0;
 	}
 
 	std::shared_ptr<TileInfoBase> TileSet::UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile )
 	{
-		std::shared_ptr<TileSet::TileSetInfo> info = tile->MyTileSetInfo;
+		std::shared_ptr<TileSetInfo> info = tile->MyTileSetInfo;
 
 		switch ( upgrade )
 		{
@@ -88,19 +88,19 @@ namespace CloudberryKingdom
 	std::shared_ptr<TileSet> TileSet::SetName( const std::wstring &Name )
 	{
 		this->Name = Name;
-		return this;
+		return shared_from_this();
 	}
 
 	std::shared_ptr<TileSet> TileSet::SetNameInGame( Localization::Words Name )
 	{
 		this->NameInGame = Name;
-		return this;
+		return shared_from_this();
 	}
 
 	std::shared_ptr<TileSet> TileSet::SetBackground( const std::wstring &background )
 	{
 		MyBackgroundType = BackgroundType::NameLookup[ background ];
-		return this;
+		return shared_from_this();
 	}
 
 	void TileSet::MakeNew()
@@ -137,7 +137,7 @@ namespace CloudberryKingdom
 
 		MyBackgroundType = BackgroundType::Random;
 
-		CoinScoreColor = Color( 220, 255, 255 );
+		CoinScoreColor = Color( unsigned char( 220 ), unsigned char( 255 ), unsigned char( 255 ) );
 	}
 
 	void TileSet::Read( const std::wstring &path )
@@ -149,7 +149,10 @@ namespace CloudberryKingdom
 		Tools::UseInvariantCulture();
 		std::shared_ptr<FileStream> stream = 0;
 		std::wstring original_path = path;
-		try
+
+		// FIXME: Rewrite this thing.
+
+		/*try
 		{
 			stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
 		}
@@ -172,7 +175,7 @@ namespace CloudberryKingdom
 					Tools::Log( Format( _T( "Attempting to load a .tileset file. Path <{0}> not found." ) ) );
 				}
 			}
-		}
+		}*/
 
 
 		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
@@ -187,57 +190,67 @@ namespace CloudberryKingdom
 			if ( bits.size() > 1 )
 			{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				var first = bits[ 0 ];
+				std::wstring first = bits[ 0 ];
 
 				// Is it a pillar?
-				if ( first->Contains( _T( "Pillar_" ) ) )
+				//if ( first->Contains( _T( "Pillar_" ) ) )
+				if ( first.find( _T( "Pillar_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, Pillars );
 				}
 				// Is it a platform?
-				else if ( first->Contains( _T( "Platform_" ) ) )
+				//else if ( first->Contains( _T( "Platform_" ) ) )
+				else if ( first.find( _T( "Platform_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, Platforms );
 				}
 				// Is it a ceiling?
-				else if ( first->Contains( _T( "Ceiling_" ) ) )
+				//else if ( first->Contains( _T( "Ceiling_" ) ) )
+				else if ( first.find( _T( "Ceiling_" ) ) != std::string::npos )
 				{
 					HasCeiling = true;
 					std::shared_ptr<CloudberryKingdom::PieceQuad> pq = ParseBlock( bits, first, Ceilings );
 					pq->Data.BottomFlush = true;
 				}
 				// Is it a start piece?
-				if ( first->Contains( _T( "Start_" ) ) )
+				//if ( first->Contains( _T( "Start_" ) ) )
+				if ( first.find( _T( "Start_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, StartBlock );
 				}
 				// Is it an end piece?
-				if ( first->Contains( _T( "End_" ) ) )
+				//if ( first->Contains( _T( "End_" ) ) )
+				if ( first.find( _T( "End_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, EndBlock );
 				}
 				// Is it a moving block?
-				else if ( first->Contains( _T( "MovingBlock_" ) ) )
+				//else if ( first->Contains( _T( "MovingBlock_" ) ) )
+				else if ( first.find( _T( "MovingBlock_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, MyTileSetInfo->MovingBlocks->Group );
 				}
 				// Is it an elevator block?
-				else if ( first->Contains( _T( "Elevator_" ) ) )
+				//else if ( first->Contains( _T( "Elevator_" ) ) )
+				else if ( first.find( _T( "Elevator_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, MyTileSetInfo->Elevators->Group );
 				}
 				// Is it a pendulum block?
-				else if ( first->Contains( _T( "Pendulum_" ) ) )
+				//else if ( first->Contains( _T( "Pendulum_" ) ) )
+				else if ( first.find( _T( "Pendulum_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, MyTileSetInfo->Pendulums->Group );
 				}
 				// Is it a falling block?
-				else if ( first->Contains( _T( "FallingBlock_" ) ) )
+				//else if ( first->Contains( _T( "FallingBlock_" ) ) )
+				else if ( first.find( _T( "FallingBlock_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, MyTileSetInfo->FallingBlocks->Group );
 				}
 				// Is it a bouncy block?
-				else if ( first->Contains( _T( "BouncyBlock_" ) ) )
+				//else if ( first->Contains( _T( "BouncyBlock_" ) ) )
+				else if ( first.find( _T( "BouncyBlock_" ) ) != std::string::npos )
 				{
 					ParseBlock( bits, first, MyTileSetInfo->BouncyBlocks->Group );
 				}
@@ -248,15 +261,17 @@ namespace CloudberryKingdom
 					if ( first == _T( "sprite_anim" ) )
 					{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						var dict = Tools::GetLocations( bits, _T( "name" ), _T( "file" ), _T( "size" ), _T( "frames" ), _T( "frame_length" ), _T( "reverse_at_end" ) );
+						std::wstring names[] = { _T( "name" ), _T( "file" ), _T( "size" ), _T( "frames" ), _T( "frame_length" ), _T( "reverse_at_end" ) };
+						std::vector<std::wstring> locations = VecFromArray( names );
+						std::map<std::wstring, int> dict = Tools::GetLocations( bits, locations );
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						var name = bits[ dict[ _T( "name" ) ] + 1 ];
+						std::wstring name = bits[ dict[ _T( "name" ) ] + 1 ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						var file = bits[ dict[ _T( "file" ) ] + 1 ];
+						std::wstring file = bits[ dict[ _T( "file" ) ] + 1 ];
 
 						std::shared_ptr<AnimationData_Texture> sprite_anim = 0;
-						if ( dict->ContainsKey( _T( "frames" ) ) )
+						if ( dict.find( _T( "frames" ) ) != dict.end() )
 						{
 							int start_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 1 ] );
 							int end_frame;
@@ -267,10 +282,10 @@ namespace CloudberryKingdom
 							sprite_anim = std::make_shared<AnimationData_Texture>( file, start_frame, end_frame );
 						}
 
-						if ( dict->ContainsKey( _T( "frame_length" ) ) )
+						if ( dict.find( _T( "frame_length" ) ) != dict.end() )
 						{
 							int frame_length = ParseInt( bits[ dict[ _T( "frame_length" ) ] + 1 ] );
-							sprite_anim->Anims[ 0 ].Speed = 1 / frame_length;
+							sprite_anim->Anims[ 0 ].Speed = 1.f / frame_length;
 						}
 
 						Tools::TextureWad->Add( sprite_anim, name );
@@ -302,7 +317,8 @@ namespace CloudberryKingdom
 					}
 					else
 					{
-						Tools::ReadLineToObj( MyTileSetInfo, bits );
+						// FIXME: This function no longer exists.
+						//Tools::ReadLineToObj( MyTileSetInfo, bits );
 					}
 			}
 
@@ -363,7 +379,7 @@ namespace CloudberryKingdom
 	std::shared_ptr<PieceQuad> TileSet::ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const std::shared_ptr<BlockGroup> &group )
 	{
 		// Get the block width
-		std::shared_ptr<std::wstring> num_str = first.substr( first.find( _T( "_" ) ) + 1 );
+		std::wstring num_str = first.substr( first.find( _T( "_" ) ) + 1 );
 		int width = ParseInt( num_str );
 
 		// Get the rest of the information
@@ -412,7 +428,7 @@ namespace CloudberryKingdom
 		int tex_width = c->Center.getTexWidth();
 		int tex_height = c->Center.getTexHeight();
 
-		for ( int i = 2; i < bits.size(); i++ )
+		for ( size_t i = 2; i < bits.size(); i++ )
 		{
 //C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
 //			switch (bits[i])
@@ -473,7 +489,7 @@ namespace CloudberryKingdom
 		return GetPieceTemplate( block, rnd, 0 );
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, const std::shared_ptr<BlockGroup> &group )
+	std::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, std::shared_ptr<BlockGroup> group )
 	{
 		if ( group == 0 )
 		{
@@ -526,6 +542,6 @@ namespace CloudberryKingdom
 		StandInType = TileSets::None;
 		ObstacleUpgrades = std::vector<Upgrade>();
 		Tint = Vector4( 1 );
-		CoinScoreColor = Color( 220, 255, 255 );
+		CoinScoreColor = Color( unsigned char( 220 ), unsigned char( 255 ), unsigned char( 255 ) );
 	}
 }

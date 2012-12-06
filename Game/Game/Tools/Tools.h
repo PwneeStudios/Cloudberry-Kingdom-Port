@@ -100,14 +100,14 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Returns a single randomly chosen item from the list
 		/// </summary>
-		template<typename T>
-		static T Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd );
+		/*template<typename T>
+		static T Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd );*/
 
 		/// <summary>
 		/// Choose a random element from the list
 		/// </summary>
 		template<typename T>
-		static T Choose( std::vector<T> &list, const std::shared_ptr<Rand> &rnd );
+		static T Choose( const std::vector<T> &list, const std::shared_ptr<Rand> &rnd );
 	};
 
 	class DictionaryExtension

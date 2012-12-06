@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		this->RepeatWidth = Width * static_cast<float>( Body->MyTexture->Height ) / static_cast<float>( Body->MyTexture->Width );
 
 		this->Dir = 0;
-		this->Tint = Vector4::One;
+		this->Tint = Vector4( 1 );
 		this->BlendAddRatio = 0;
 	}
 
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		this->Width = Width;
 		this->RepeatWidth = RepeatWidth;
 		this->Dir = 0;
-		this->Tint = Vector4::One;
+		this->Tint = Vector4( 1 );
 		this->BlendAddRatio = 0;
 	}
 
@@ -101,6 +101,6 @@ namespace CloudberryKingdom
 	void SpriteInfo::InitializeInstanceFields()
 	{
 		Degrees = 0;
-		ColorMatrix = Matrix::Identity;
+		ColorMatrix = Matrix::Identity();
 	}
 }

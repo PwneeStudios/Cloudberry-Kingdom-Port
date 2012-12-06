@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -47,7 +44,7 @@ namespace CloudberryKingdom
 	void BackgroundFloater::Reset()
 	{
 		Data.Position = StartData.Position;
-		MyQuad->Quad_Renamed->UV_Offset = uv_offset;
+		MyQuad->Quad_Renamed.setUV_Offset( uv_offset );
 
 		InitialUpdate();
 	}
@@ -103,23 +100,23 @@ namespace CloudberryKingdom
 		MyQuad->UpdateShift_Precalc();
 
 		// If we are repeating more than once, or have UV speed, use texture wrapping.
-		MyQuad->Quad_Renamed->U_Wrap = MyQuad->Quad_Renamed->V_Wrap = false;
-		if ( uv_speed.X != 0 || MyQuad->Quad_Renamed->UV_Repeat->X > 1 )
-			MyQuad->Quad_Renamed->U_Wrap = true;
-		if ( uv_speed.Y != 0 || MyQuad->Quad_Renamed->UV_Repeat->Y > 1 )
-			MyQuad->Quad_Renamed->V_Wrap = true;
+		MyQuad->Quad_Renamed.U_Wrap = MyQuad->Quad_Renamed.V_Wrap = false;
+		if ( uv_speed.X != 0 || MyQuad->Quad_Renamed.getUV_Repeat().X > 1 )
+			MyQuad->Quad_Renamed.U_Wrap = true;
+		if ( uv_speed.Y != 0 || MyQuad->Quad_Renamed.getUV_Repeat().Y > 1 )
+			MyQuad->Quad_Renamed.V_Wrap = true;
 	}
 
 	void BackgroundFloater::PhsxStep( const std::shared_ptr<BackgroundFloaterList> &list )
 	{
-		MyQuad->Quad_Renamed->UV_Phsx( uv_speed );
+		MyQuad->Quad_Renamed.UV_Phsx( uv_speed );
 
 		Data.Position += Data.Velocity;
 
-		if ( MyQuad->Quad_Renamed->Right < list->BL.X - 100 )
-			Data.Position.X = list->TR.X + MyQuad->Quad_Renamed->Width / 2 + 50;
-		else if ( MyQuad->Quad_Renamed->Left > list->TR.X + 100 )
-			Data.Position.X = list->BL.X - MyQuad->Quad_Renamed->Width / 2 - 50;
+		if ( MyQuad->Quad_Renamed.getRight() < list->BL.X - 100 )
+			Data.Position.X = list->TR.X + MyQuad->Quad_Renamed.getWidth() / 2 + 50;
+		else if ( MyQuad->Quad_Renamed.getLeft() > list->TR.X + 100 )
+			Data.Position.X = list->BL.X - MyQuad->Quad_Renamed.getHeight() / 2 - 50;
 
 		MyQuad->Base.Origin = Data.Position;
 		//if (MyQuad.TextureName.Contains("chan"))

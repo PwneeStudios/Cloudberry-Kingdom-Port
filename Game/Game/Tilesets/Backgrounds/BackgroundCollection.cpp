@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -10,14 +7,14 @@ namespace CloudberryKingdom
 	{
 		MyLevel = level;
 
-		Lists = std::vector<BackgroundFloaterList*>();
+		//Lists = std::vector<std::shared_ptr<BackgroundFloaterList> >();
 	}
 
 	void BackgroundCollection::Release()
 	{
 		MyLevel.reset();
 
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->Release();
 	}
 
@@ -27,7 +24,7 @@ namespace CloudberryKingdom
 			return;
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->Reset();
 	}
 
@@ -35,19 +32,19 @@ namespace CloudberryKingdom
 	{
 		MyLevel = level;
 
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->SetLevel( level );
 	}
 
 	void BackgroundCollection::SetBackground( const std::shared_ptr<Background> &b )
 	{
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->SetBackground( b );
 	}
 
 	void BackgroundCollection::Move( Vector2 shift )
 	{
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->Move( shift );
 	}
 
@@ -58,19 +55,19 @@ namespace CloudberryKingdom
 
 	void BackgroundCollection::Clear( const std::shared_ptr<FloatRectangle> &Area )
 	{
-		for ( int i = 0; i < Lists.size(); i++ )
+		for ( size_t i = 0; i < Lists.size(); i++ )
 			Lists[ i ]->Clear( Area );
 	}
 
 	void BackgroundCollection::Absorb( const std::shared_ptr<BackgroundCollection> &collection )
 	{
-		for ( int i = 0; i < Lists.size(); i++ )
+		for ( size_t i = 0; i < Lists.size(); i++ )
 			Lists[ i ]->Absorb( collection->Lists[ i ] );
 	}
 
 	void BackgroundCollection::DrawLayer( int Layer )
 	{
-		if ( Layer < Lists.size() )
+		if ( Layer < static_cast<int>( Lists.size() ) )
 			Lists[ Layer ]->Draw();
 	}
 
@@ -91,7 +88,7 @@ namespace CloudberryKingdom
 
 	void BackgroundCollection::Draw( float CamMod, bool Foreground )
 	{
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			if ( ( *list )->Foreground == Foreground )
 				( *list )->Draw( CamMod );
 
@@ -100,7 +97,7 @@ namespace CloudberryKingdom
 
 	void BackgroundCollection::PhsxStep()
 	{
-		for ( std::vector<BackgroundFloaterList*>::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->PhsxStep();
 	}
 

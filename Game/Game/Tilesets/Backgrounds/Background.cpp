@@ -8,8 +8,11 @@ namespace CloudberryKingdom
 
 	void BackgroundType::AddTemplate( const std::shared_ptr<BackgroundTemplate> &template_Renamed )
 	{
-		NameLookup.AddOrOverwrite( template_Renamed->Name, template_Renamed );
-		PathLookup.AddOrOverwrite( template_Renamed->File, template_Renamed );
+		// FIXME: These used to be AddOrOverwrite.
+		NameLookup[ template_Renamed->Name ] = template_Renamed;
+		PathLookup[ template_Renamed->File ] = template_Renamed;
+		//NameLookup.AddOrOverwrite( template_Renamed->Name, template_Renamed );
+		//PathLookup.AddOrOverwrite( template_Renamed->File, template_Renamed );
 	}
 
 	void BackgroundType::Load( const std::wstring &path )
@@ -56,7 +59,7 @@ namespace CloudberryKingdom
 	std::shared_ptr<Background> BackgroundTemplate::MakeInstanceOf()
 	{
 		std::shared_ptr<RegularBackground> b = std::make_shared<RegularBackground>();
-		b->MyTemplate = this;
+		b->MyTemplate = shared_from_this();
 
 		if ( MadeOfCode || File == _T( "" ) )
 			return b;

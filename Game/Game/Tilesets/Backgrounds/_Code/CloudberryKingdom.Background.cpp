@@ -11,25 +11,25 @@ namespace CloudberryKingdom
 		__46->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__47->Name = _T( "Rain" );
-		__47->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__47->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Rain" ) );
-		__47->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 158 );
-		__47->MyQuad->Quad_Renamed->PremultipliedColor = Color( 157, 157, 157, 91 );
-		__47->MyQuad->Quad_Renamed->BlendAddRatio = 0.42f;
-		__47->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -2697.719f, 1436.633f ), Vector2( 0, 0 ), Color( 157, 157, 157, 91 ) );
-		__47->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Rain" ) );
+		__47->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 158 ) );
+		__47->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 157 ), unsigned char( 157 ), unsigned char( 157 ), unsigned char( 91 ) );
+		__47->MyQuad->Quad_Renamed.BlendAddRatio = 0.42f;
+		__47->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -2697.719f, 1436.633f ), Vector2( 0, 0 ), Color( unsigned char( 157 ), unsigned char( 157 ), unsigned char( 157 ), unsigned char( 91 ) ) );
+		__47->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__47->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 46939.48f, 1436.633f ), Vector2( 18.00215f, 0 ), Color( 157, 157, 157, 91 ) );
-		__47->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__47->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, 1436.633f ), Vector2( 18.00215f, 0 ), Color( unsigned char( 157 ), unsigned char( 157 ), unsigned char( 157 ), unsigned char( 91 ) ) );
+		__47->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__47->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -2697.719f, -1321.049f ), Vector2( 0, 0.9999274f ), Color( 157, 157, 157, 91 ) );
-		__47->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__47->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -2697.719f, -1321.049f ), Vector2( 0, 0.9999274f ), Color( unsigned char( 157 ), unsigned char( 157 ), unsigned char( 157 ), unsigned char( 91 ) ) );
+		__47->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__47->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 46939.48f, -1321.049f ), Vector2( 18.00215f, 0.9999274f ), Color( 157, 157, 157, 91 ) );
-		__47->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__47->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, -1321.049f ), Vector2( 18.00215f, 0.9999274f ), Color( unsigned char( 157 ), unsigned char( 157 ), unsigned char( 157 ), unsigned char( 91 ) ) );
+		__47->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__47->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__47->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__47->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__47->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__47->MyQuad->Base = BasePoint( 24818.6f, 0, 0, 1378.841f, 22120.88f, 57.79195f );
 
@@ -48,16 +48,18 @@ namespace CloudberryKingdom
 	void Background::TurnOnSnow( const std::shared_ptr<Background> &b )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
+			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = true;
 	}
 
 	void Background::TurnOffSnow( const std::shared_ptr<Background> &b )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
+			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = false;
 	}
 
@@ -72,13 +74,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "forest_sky" );
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_sky" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_sky" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__2->MyQuad->Base = BasePoint( 492237.9f, 0, 0, 104122.2f, 135500.6f, 165.7959f );
 
@@ -98,13 +100,13 @@ namespace CloudberryKingdom
 		__3->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "forest_backhills_trim" );
-		__4->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__4->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__4->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__4->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backhills_trim" ) );
-		__4->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__4->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backhills_trim" ) );
+		__4->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__4->MyQuad->Base = BasePoint( 32099.83f, 0, 0, 7674.079f, 3356.908f, 7187.623f );
 
@@ -116,13 +118,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "forest_backhills_p2_trim" );
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backhills_p2_trim" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backhills_p2_trim" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__5->MyQuad->Base = BasePoint( 32339.81f, 0, 0, 7936.709f, 44613.05f, 7009.296f );
 
@@ -142,13 +144,13 @@ namespace CloudberryKingdom
 		__6->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "forest_mid_trim" );
-		__7->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__7->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__7->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__7->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_mid_trim" ) );
-		__7->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_mid_trim" ) );
+		__7->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__7->MyQuad->Base = BasePoint( 16162.06f, 0, 0, 3841.054f, 4111.627f, 1395.922f );
 
@@ -160,25 +162,25 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "forest_mid_p2_trim" );
-		__8->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( 20274.01f, 4238.568f ), Vector2( 0, 0 ), Color( 255, 255, 255, 255 ) );
-		__8->MyQuad->Quad_Renamed->v0->Pos = Vector2( -0.724421f, 1.089628f );
+		__8->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 20274.01f, 4238.568f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__8->MyQuad->Quad_Renamed.v0.Pos = Vector2( -0.724421f, 1.089628f );
 
-		__8->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 52735.53f, 4238.568f ), Vector2( 1, 0 ), Color( 255, 255, 255, 255 ) );
-		__8->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1.275579f, 1.089628f );
+		__8->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 52735.53f, 4238.568f ), Vector2( 1, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__8->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1.275579f, 1.089628f );
 
-		__8->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( 20274.01f, -2491.818f ), Vector2( 0, 1 ), Color( 255, 255, 255, 255 ) );
-		__8->MyQuad->Quad_Renamed->v2->Pos = Vector2( -0.724421f, -0.9103726f );
+		__8->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( 20274.01f, -2491.818f ), Vector2( 0, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__8->MyQuad->Quad_Renamed.v2.Pos = Vector2( -0.724421f, -0.9103726f );
 
-		__8->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 52735.53f, -2491.818f ), Vector2( 1, 1 ), Color( 255, 255, 255, 255 ) );
-		__8->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1.275579f, -0.9103726f );
+		__8->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 52735.53f, -2491.818f ), Vector2( 1, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__8->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1.275579f, -0.9103726f );
 
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_mid_p2_trim" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_mid_p2_trim" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__8->MyQuad->Base = BasePoint( 16230.76f, 0, 0, 3365.192f, 32031.91f, 571.7605f );
 
@@ -198,25 +200,25 @@ namespace CloudberryKingdom
 		__9->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "forest_clouds" );
-		__10->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -26948.33f, 5153.887f ), Vector2( 0.9800779f, 0 ), Color( 255, 255, 255, 255 ) );
-		__10->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__10->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -26948.33f, 5153.887f ), Vector2( 0.9800779f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__10->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__10->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 162881.6f, 5153.887f ), Vector2( 3.979689f, 0 ), Color( 255, 255, 255, 255 ) );
-		__10->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__10->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 162881.6f, 5153.887f ), Vector2( 3.979689f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__10->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__10->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -26948.33f, -2755.695f ), Vector2( 0.9800779f, 1 ), Color( 255, 255, 255, 255 ) );
-		__10->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__10->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -26948.33f, -2755.695f ), Vector2( 0.9800779f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__10->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__10->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 162881.6f, -2755.695f ), Vector2( 3.979689f, 1 ), Color( 255, 255, 255, 255 ) );
-		__10->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__10->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 162881.6f, -2755.695f ), Vector2( 3.979689f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__10->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_clouds" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_clouds" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__10->MyQuad->Base = BasePoint( 94914.98f, 0, 0, 3954.791f, 67966.65f, 1199.096f );
 
@@ -236,13 +238,13 @@ namespace CloudberryKingdom
 		__11->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "forest_backtrees_p1_0" );
-		__12->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__12->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__12->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__12->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
-		__12->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
+		__12->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__12->MyQuad->Base = BasePoint( 10096.42f, 0, 0, 3263.351f, -1550.031f, -1179.254f );
 
@@ -254,13 +256,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "forest_backtrees_p2_0" );
-		__13->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
-		__13->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
+		__13->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__13->MyQuad->Base = BasePoint( 10576.94f, 0, 0, 3263.351f, 19061.51f, -1282.274f );
 
@@ -272,13 +274,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "forest_backtrees_p1_0" );
-		__14->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
-		__14->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
+		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__14->MyQuad->Base = BasePoint( 10072.41f, 0, 0, 3255.594f, 34797.7f, -1059.907f );
 
@@ -290,13 +292,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "forest_backtrees_p2_0" );
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__15->MyQuad->Base = BasePoint( 10551.8f, 0, 0, 3255.594f, 35277.09f, -1059.907f );
 
@@ -316,25 +318,25 @@ namespace CloudberryKingdom
 		__16->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "Snow" );
-		__17->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -16817, 4586.932f ), 1 * Vector2( 21.61522f, -10.28082f ), Color( 88, 88, 88, 88 ) );
-		__17->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__17->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -16817, 4586.932f ), 1 * Vector2( 21.61522f, -10.28082f ), Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) ) );
+		__17->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__17->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 310331.8f, 4586.932f ), 1 * Vector2( 41.61494f, -10.28082f ), Color( 88, 88, 88, 88 ) );
-		__17->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__17->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 310331.8f, 4586.932f ), 1 * Vector2( 41.61494f, -10.28082f ), Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) ) );
+		__17->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__17->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -16817, -4614.128f ), 1 * Vector2( 21.61522f, -9.277841f ), Color( 88, 88, 88, 88 ) );
-		__17->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__17->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -16817, -4614.128f ), 1 * Vector2( 21.61522f, -9.277841f ), Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) ) );
+		__17->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__17->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 310331.8f, -4614.128f ), 1 * Vector2( 41.61494f, -9.277841f ), Color( 88, 88, 88, 88 ) );
-		__17->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__17->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 310331.8f, -4614.128f ), 1 * Vector2( 41.61494f, -9.277841f ), Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) ) );
+		__17->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__17->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__17->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Snow" ) );
-		__17->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 89 );
-		__17->MyQuad->Quad_Renamed->PremultipliedColor = Color( 88, 88, 88, 88 );
-		__17->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__17->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 89 ) );
+		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) );
+		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 		__17->MyQuad->setAlpha( .7f );
 
 		__17->MyQuad->Base = BasePoint( 163574.4f, 0, 0, 4600.53f, 146757.4f, -13.5979f );
@@ -355,13 +357,13 @@ namespace CloudberryKingdom
 		__18->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "forest_foretrees_p1_0" );
-		__19->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__19->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
-		__19->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__19->MyQuad->Base = BasePoint( 4487.996f, 0, 0, 1898.676f, 2154.271f, -47.44482f );
 
@@ -373,13 +375,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "forest_foretrees_p2_0" );
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__20->MyQuad->Base = BasePoint( 4487.996f, 0, 0, 1898.676f, 11130.26f, -47.44482f );
 
@@ -391,13 +393,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "forest_foretrees_p1_0" );
-		__21->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
-		__21->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__21->MyQuad->Base = BasePoint( 4441.479f, 0, 0, 1878.997f, 19630.17f, -49.1123f );
 
@@ -409,13 +411,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "forest_foretrees_p2_0" );
-		__22->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
-		__22->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__22->MyQuad->Base = BasePoint( 4441.479f, 0, 0, 1878.997f, 28513.13f, -49.1123f );
 
@@ -427,13 +429,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "forest_foretrees_p1_0" );
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__23->MyQuad->Base = BasePoint( 4441.479f, 0, 0, 1878.997f, 32126.74f, -92.27881f );
 
@@ -445,13 +447,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "forest_foretrees_p2_0" );
-		__24->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
-		__24->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__24->MyQuad->Base = BasePoint( 4441.479f, 0, 0, 1878.997f, 32126.74f, -92.27881f );
 
@@ -471,25 +473,25 @@ namespace CloudberryKingdom
 		__25->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "Snow" );
-		__26->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -37182.87f, 1486.698f ), Vector2( 4.900445f, -4.900445f ), Color( 195, 195, 195, 195 ) );
-		__26->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__26->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -37182.87f, 1486.698f ), Vector2( 4.900445f, -4.900445f ), Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) ) );
+		__26->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__26->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 68532.89f, 1486.698f ), Vector2( 24.8849f, -4.900445f ), Color( 195, 195, 195, 195 ) );
-		__26->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__26->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 68532.89f, 1486.698f ), Vector2( 24.8849f, -4.900445f ), Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) ) );
+		__26->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__26->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -37182.87f, -1486.698f ), Vector2( 4.900445f, -3.900311f ), Color( 195, 195, 195, 195 ) );
-		__26->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__26->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -37182.87f, -1486.698f ), Vector2( 4.900445f, -3.900311f ), Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) ) );
+		__26->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__26->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 68532.89f, -1486.698f ), Vector2( 24.8849f, -3.900311f ), Color( 195, 195, 195, 195 ) );
-		__26->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__26->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 68532.89f, -1486.698f ), Vector2( 24.8849f, -3.900311f ), Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) ) );
+		__26->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__26->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__26->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__26->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__26->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Snow" ) );
-		__26->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 196 );
-		__26->MyQuad->Quad_Renamed->PremultipliedColor = Color( 195, 195, 195, 195 );
-		__26->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__26->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__26->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 196 ) );
+		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) );
+		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__26->MyQuad->Base = BasePoint( 52857.88f, 0, 0, 1486.698f, 15675.01f, 0 );
 
@@ -501,25 +503,25 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "Snow" );
-		__27->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -4499.879f, 1865.506f ), Vector2( 6.533891f, -7.513808f ), Color( 223, 223, 223, 223 ) );
-		__27->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__27->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4499.879f, 1865.506f ), Vector2( 6.533891f, -7.513808f ), Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) ) );
+		__27->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__27->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 118981.7f, 1865.506f ), Vector2( 26.55114f, -7.513808f ), Color( 223, 223, 223, 223 ) );
-		__27->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__27->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 118981.7f, 1865.506f ), Vector2( 26.55114f, -7.513808f ), Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) ) );
+		__27->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__27->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -4499.879f, -1605.93f ), Vector2( 6.533891f, -6.514019f ), Color( 223, 223, 223, 223 ) );
-		__27->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__27->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -4499.879f, -1605.93f ), Vector2( 6.533891f, -6.514019f ), Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) ) );
+		__27->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__27->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 118981.7f, -1605.93f ), Vector2( 26.55114f, -6.514019f ), Color( 223, 223, 223, 223 ) );
-		__27->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__27->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 118981.7f, -1605.93f ), Vector2( 26.55114f, -6.514019f ), Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) ) );
+		__27->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__27->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__27->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Snow" ) );
-		__27->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 224 );
-		__27->MyQuad->Quad_Renamed->PremultipliedColor = Color( 223, 223, 223, 223 );
-		__27->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__27->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 224 ) );
+		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) );
+		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__27->MyQuad->Base = BasePoint( 61740.77f, 0, 0, 1735.718f, 57240.89f, 129.7882f );
 
@@ -551,13 +553,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "cloud_castle_layer5" );
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer5" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer5" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__2->MyQuad->Base = BasePoint( 23579.31f, 0, 0, 10479.69f, 5485.83f, -9.382813f );
 
@@ -569,13 +571,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "cloud_castle_layer5" );
-		__3->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer5_p2" ) );
-		__3->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer5_p2" ) );
+		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__3->MyQuad->Base = BasePoint( 23579.31f, 0, 0, 10479.69f, 52644.45f, -9.382813f );
 
@@ -595,13 +597,13 @@ namespace CloudberryKingdom
 		__4->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "cloud_castle_layer4" );
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer4" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__5->MyQuad->Base = BasePoint( 13583.82f, 0, 0, 6025.19f, 3683.155f, -164.6855f );
 
@@ -613,13 +615,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "cloud_castle_layer4" );
-		__6->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__6->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer4_p2" ) );
-		__6->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__6->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__6->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4_p2" ) );
+		__6->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__6->MyQuad->Base = BasePoint( 13583.82f, 0, 0, 6025.19f, 30850.79f, -164.6855f );
 
@@ -639,13 +641,13 @@ namespace CloudberryKingdom
 		__7->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "cloud_cloud_layer3_1" );
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_1" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_1" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__8->MyQuad->Base = BasePoint( 1440, 0, 0, 813.913f, -7449.813f, 713.1904f );
 
@@ -657,13 +659,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "cloud_cloud_layer3_2" );
-		__9->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__9->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_2" ) );
-		__9->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__9->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__9->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_2" ) );
+		__9->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__9->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__9->MyQuad->Base = BasePoint( 1440, 0, 0, 872.7272f, -2406.215f, 935.2354f );
 
@@ -675,13 +677,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "cloud_cloud_layer3_3" );
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_3" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_3" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__10->MyQuad->Base = BasePoint( 1440, 0, 0, 804.7058f, 2447.061f, 205.6582f );
 
@@ -693,13 +695,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "cloud_cloud_layer3_4" );
-		__11->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__11->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_4" ) );
-		__11->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__11->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__11->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_4" ) );
+		__11->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__11->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__11->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__11->MyQuad->Base = BasePoint( 1440, 0, 0, 854.9999f, 5904.623f, 78.77539f );
 
@@ -711,13 +713,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "cloud_cloud_layer3_5" );
-		__12->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__12->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_5" ) );
-		__12->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__12->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__12->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_5" ) );
+		__12->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__12->MyQuad->Base = BasePoint( 1440, 0, 0, 606.8827f, 9330.461f, 522.8662f );
 
@@ -729,13 +731,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "cloud_cloud_layer3_6" );
-		__13->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_6" ) );
-		__13->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_6" ) );
+		__13->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__13->MyQuad->Base = BasePoint( 1440, 0, 0, 1008, 12312.21f, 15.33398f );
 
@@ -755,13 +757,13 @@ namespace CloudberryKingdom
 		__14->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "cloud_castle_layer3_1" );
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__15->MyQuad->Base = BasePoint( 1619.587f, 0, 0, 1574.057f, -3419.336f, -1515.219f );
 
@@ -773,13 +775,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "cloud_castle_layer3_2" );
-		__16->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
-		__16->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__16->MyQuad->Base = BasePoint( 1090.909f, 0, 0, 1556.735f, 6745.723f, -1731.496f );
 
@@ -791,13 +793,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "cloud_castle_layer3_3" );
-		__17->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
-		__17->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
+		__17->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__17->MyQuad->Base = BasePoint( 1114.938f, 0, 0, 2341.099f, 10662.76f, -1642.704f );
 
@@ -809,13 +811,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "cloud_castle_layer3_1" );
-		__18->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
-		__18->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__18->MyQuad->Base = BasePoint( 1619.587f, 0, 0, 1574.057f, 18973.14f, -1646.107f );
 
@@ -827,13 +829,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "cloud_castle_layer3_2" );
-		__19->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
-		__19->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__19->MyQuad->Base = BasePoint( 1090.909f, 0, 0, 1556.735f, 24460.43f, -1646.107f );
 
@@ -845,13 +847,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "cloud_castle_layer3_3" );
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__20->MyQuad->Base = BasePoint( 1114.938f, 0, 0, 2341.099f, 27066.12f, -1891.348f );
 
@@ -871,13 +873,13 @@ namespace CloudberryKingdom
 		__21->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "cloud_cloud_layer2_1" );
-		__22->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
-		__22->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__22->MyQuad->Base = BasePoint( 4429.467f, 0, 0, 1100.83f, 1758.984f, 54.01685f );
 
@@ -889,13 +891,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "cloud_cloud_layer2_1" );
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__23->MyQuad->Base = BasePoint( 4429.467f, 0, 0, 1100.83f, 15294.52f, 3.80072f );
 
@@ -907,13 +909,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "cloud_cloud_layer2_1" );
-		__24->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
-		__24->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__24->MyQuad->Base = BasePoint( 4429.467f, 0, 0, 1100.83f, 26639.14f, -429.751f );
 
@@ -925,13 +927,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "cloud_cloud_layer2_1" );
-		__25->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
-		__25->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__25->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__25->MyQuad->Base = BasePoint( 4429.467f, 0, 0, 1100.83f, 38561.82f, -502.0099f );
 
@@ -951,13 +953,13 @@ namespace CloudberryKingdom
 		__26->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "cloud_castle_layer2_1" );
-		__27->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
-		__27->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__27->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__27->MyQuad->Base = BasePoint( 1350.048f, 0, 0, 2798.974f, -2574.793f, -1026.896f );
 
@@ -969,13 +971,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "cloud_castle_layer2_2" );
-		__28->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
-		__28->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__28->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__28->MyQuad->Base = BasePoint( 1415.46f, 0, 0, 2348.253f, 4617.543f, -726.7338f );
 
@@ -987,13 +989,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "cloud_castle_layer2_3" );
-		__29->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
-		__29->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
+		__29->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__29->MyQuad->Base = BasePoint( 1256.856f, 0, 0, 2094.533f, 13222.73f, -543.1658f );
 
@@ -1005,13 +1007,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "cloud_castle_layer2_1" );
-		__30->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
-		__30->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__30->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__30->MyQuad->Base = BasePoint( 1350.048f, 0, 0, 2798.974f, 17024.4f, -1760.757f );
 
@@ -1023,13 +1025,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "cloud_castle_layer2_2" );
-		__31->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__31->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
-		__31->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__31->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__31->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__31->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__31->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__31->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__31->MyQuad->Base = BasePoint( 1415.46f, 0, 0, 2348.253f, 21905.47f, -1027.331f );
 
@@ -1041,13 +1043,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "cloud_castle_layer2_3" );
-		__32->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
-		__32->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
+		__32->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__32->MyQuad->Base = BasePoint( 1590.616f, 0, 0, 2662.089f, 29651.78f, -1127.46f );
 
@@ -1059,13 +1061,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "cloud_castle_layer2_1" );
-		__33->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
-		__33->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__33->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__33->MyQuad->Base = BasePoint( 882.7829f, 0, 0, 1830.22f, 33324.57f, -2302.971f );
 
@@ -1077,13 +1079,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "cloud_castle_layer2_2" );
-		__34->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
-		__34->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__34->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__34->MyQuad->Base = BasePoint( 1415.46f, 0, 0, 2348.253f, 37953.88f, -2136.087f );
 
@@ -1103,13 +1105,13 @@ namespace CloudberryKingdom
 		__35->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "cloud_cloud_layer1_1" );
-		__36->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__36->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
-		__36->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__36->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__36->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
+		__36->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__36->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__36->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__36->MyQuad->Base = BasePoint( 1286.25f, 0, 0, 706.0881f, -106.0938f, -291.884f );
 
@@ -1121,13 +1123,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "cloud_cloud_layer1_2" );
-		__37->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__37->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
-		__37->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__37->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__37->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
+		__37->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__37->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__37->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__37->MyQuad->Base = BasePoint( 1153.097f, 0, 0, 600.9785f, 4506.916f, -181.2072f );
 
@@ -1139,13 +1141,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "cloud_cloud_layer1_3" );
-		__38->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__38->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
-		__38->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__38->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__38->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
+		__38->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__38->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__38->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__38->MyQuad->Base = BasePoint( 1163.339f, 0, 0, 451.3339f, 7103.76f, -501.3638f );
 
@@ -1157,13 +1159,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__39->Name = _T( "cloud_cloud_layer1_4" );
-		__39->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__39->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
-		__39->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__39->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__39->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__39->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__39->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
+		__39->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__39->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__39->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__39->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__39->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__39->MyQuad->Base = BasePoint( 978.9733f, 0, 0, 644.0235f, 10113.27f, -203.6833f );
 
@@ -1175,13 +1177,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "cloud_cloud_layer1_1" );
-		__40->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__40->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
-		__40->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__40->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__40->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
+		__40->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__40->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__40->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__40->MyQuad->Base = BasePoint( 1286.25f, 0, 0, 706.0881f, 14141.27f, -125.3017f );
 
@@ -1193,13 +1195,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "cloud_cloud_layer1_2" );
-		__41->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__41->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
-		__41->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__41->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__41->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
+		__41->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__41->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__41->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__41->MyQuad->Base = BasePoint( 1153.097f, 0, 0, 600.9785f, 17429.04f, -327.6263f );
 
@@ -1211,13 +1213,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "cloud_cloud_layer1_3" );
-		__42->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__42->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
-		__42->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__42->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__42->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
+		__42->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__42->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__42->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__42->MyQuad->Base = BasePoint( 1163.339f, 0, 0, 451.3339f, 20784.25f, -445.6487f );
 
@@ -1229,13 +1231,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "cloud_cloud_layer1_4" );
-		__43->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__43->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
-		__43->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__43->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__43->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
+		__43->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__43->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__43->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__43->MyQuad->Base = BasePoint( 978.9733f, 0, 0, 644.0235f, 24527.25f, 110.7433f );
 
@@ -1255,13 +1257,13 @@ namespace CloudberryKingdom
 		__44->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "cloud_castle_layer1" );
-		__45->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__45->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cloud_castle_layer1" ) );
-		__45->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__45->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__45->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer1" ) );
+		__45->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__45->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__45->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__45->MyQuad->Base = BasePoint( 1231.156f, 0, 0, 2231.931f, 761.7891f, 296.3109f );
 
@@ -1293,13 +1295,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "cave_backdrop_p1_0" );
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__2->MyQuad->Base = BasePoint( 10952.22f, 0, 0, 4632.95f, -14739.01f, 157.4063f );
 
@@ -1311,13 +1313,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "cave_backdrop_p2_0" );
-		__3->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__3->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
-		__3->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
+		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__3->MyQuad->Base = BasePoint( 10952.22f, 0, 0, 4632.95f, 7165.438f, 157.4063f );
 
@@ -1329,13 +1331,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "cave_backdrop_p1_1" );
-		__4->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__4->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__4->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__4->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
-		__4->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__4->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
+		__4->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__4->MyQuad->Base = BasePoint( 10952.22f, 0, 0, 4632.95f, 29069.88f, 157.4063f );
 
@@ -1347,13 +1349,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "cave_backdrop_p2_1" );
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__5->MyQuad->Base = BasePoint( 10952.22f, 0, 0, 4632.95f, 50974.33f, 157.4063f );
 
@@ -1373,13 +1375,13 @@ namespace CloudberryKingdom
 		__6->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "cave_top_2_p1_0" );
-		__7->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__7->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__7->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__7->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_2" ) );
-		__7->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2" ) );
+		__7->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__7->MyQuad->Base = BasePoint( 7364.382f, 0, 0, 3116.508f, -9290.906f, 81.43799f );
 
@@ -1391,13 +1393,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "cave_top_2_p2_0" );
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__8->MyQuad->Base = BasePoint( 7364.382f, 0, 0, 3116.508f, 5437.859f, 81.43799f );
 
@@ -1409,13 +1411,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "cave_top_2_p1_1" );
-		__9->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__9->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__9->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__9->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_2" ) );
-		__9->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__9->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2" ) );
+		__9->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__9->MyQuad->Base = BasePoint( 7364.382f, 0, 0, 3116.508f, 20166.62f, 81.43799f );
 
@@ -1427,13 +1429,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "cave_top_2_p2_1" );
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__10->MyQuad->Base = BasePoint( 7364.382f, 0, 0, 3116.508f, 34895.39f, 81.43799f );
 
@@ -1453,13 +1455,13 @@ namespace CloudberryKingdom
 		__11->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "cave_bottom_2_p1" );
-		__12->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__12->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__12->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__12->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
-		__12->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__12->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__12->MyQuad->Base = BasePoint( 4499.655f, 0, 0, 1242.685f, -2566.051f, -1868.793f );
 
@@ -1471,13 +1473,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "cave_bottom_2_p2" );
-		__13->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
-		__13->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
+		__13->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__13->MyQuad->Base = BasePoint( 4745.988f, 0, 0, 2350.854f, 8166.965f, -813.0869f );
 
@@ -1489,13 +1491,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "cave_bottom_2_p1" );
-		__14->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
-		__14->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__14->MyQuad->Base = BasePoint( 4499.655f, 0, 0, 1242.685f, 19126.95f, -1801.052f );
 
@@ -1507,13 +1509,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "cave_bottom_2_p2" );
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__15->MyQuad->Base = BasePoint( 4745.988f, 0, 0, 2350.854f, 29756.15f, -843.8784f );
 
@@ -1525,13 +1527,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "cave_bottom_2_p1" );
-		__16->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__16->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
-		__16->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__16->MyQuad->Base = BasePoint( 4499.655f, 0, 0, 1242.685f, 40610.07f, -1603.306f );
 
@@ -1551,13 +1553,13 @@ namespace CloudberryKingdom
 		__17->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "cave_bottom_1_p2_trim1" );
-		__18->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__18->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
-		__18->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__18->MyQuad->Base = BasePoint( 1193.933f, 0, 0, 964.7405f, 2967.173f, -1099.445f );
 
@@ -1569,13 +1571,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "cave_bottom_1_p2_trim2" );
-		__19->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__19->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
-		__19->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__19->MyQuad->Base = BasePoint( 3174.72f, 0, 0, 1819.886f, 8139.643f, -271.6292f );
 
@@ -1587,13 +1589,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "cave_bottom_1_trim1" );
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__20->MyQuad->Base = BasePoint( 798.1164f, 0, 0, 1067.863f, -7564.104f, -1065.574f );
 
@@ -1605,13 +1607,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "cave_bottom_1_trim2" );
-		__21->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
-		__21->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__21->MyQuad->Base = BasePoint( 1169.693f, 0, 0, 558.5469f, -3669.087f, -1468.35f );
 
@@ -1623,13 +1625,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "cave_bottom_1_p2_trim1" );
-		__22->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
-		__22->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__22->MyQuad->Base = BasePoint( 1193.933f, 0, 0, 964.7405f, 23295.67f, -1171.816f );
 
@@ -1641,13 +1643,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "cave_bottom_1_p2_trim2" );
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__23->MyQuad->Base = BasePoint( 3174.72f, 0, 0, 1819.886f, 28381.08f, -351.9041f );
 
@@ -1659,13 +1661,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "cave_bottom_1_trim1" );
-		__24->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
-		__24->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__24->MyQuad->Base = BasePoint( 798.1164f, 0, 0, 1067.863f, 12685.62f, -1074.208f );
 
@@ -1677,25 +1679,25 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "cave_bottom_1_trim2" );
-		__25->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -998.902f ), Vector2( 0, 0 ), Color( 255, 255, 255, 255 ) );
-		__25->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1.1347f, 0.9736457f );
+		__25->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -998.902f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__25->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.1347f, 0.9736457f );
 
-		__25->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 17699.71f, -998.902f ), Vector2( 1, 0 ), Color( 255, 255, 255, 255 ) );
-		__25->MyQuad->Quad_Renamed->v1->Pos = Vector2( 0.8653001f, 0.9736457f );
+		__25->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 17699.71f, -998.902f ), Vector2( 1, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__25->MyQuad->Quad_Renamed.v1.Pos = Vector2( 0.8653001f, 0.9736457f );
 
-		__25->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -2115.996f ), Vector2( 0, 1 ), Color( 255, 255, 255, 255 ) );
-		__25->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1.1347f, -1.026354f );
+		__25->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -2115.996f ), Vector2( 0, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__25->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1.1347f, -1.026354f );
 
-		__25->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 17699.71f, -2115.996f ), Vector2( 1, 1 ), Color( 255, 255, 255, 255 ) );
-		__25->MyQuad->Quad_Renamed->v3->Pos = Vector2( 0.8653001f, -1.026354f );
+		__25->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 17699.71f, -2115.996f ), Vector2( 1, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__25->MyQuad->Quad_Renamed.v3.Pos = Vector2( 0.8653001f, -1.026354f );
 
-		__25->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__25->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
-		__25->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
+		__25->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__25->MyQuad->Base = BasePoint( 1169.693f, 0, 0, 558.5469f, 16687.57f, -1542.729f );
 
@@ -1715,13 +1717,13 @@ namespace CloudberryKingdom
 		__26->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "cave_top_1_p1_0" );
-		__27->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__27->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_1" ) );
-		__27->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1" ) );
+		__27->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__27->MyQuad->Base = BasePoint( 4329.43f, 0, 0, 1832.563f, -2258.242f, 30.32861f );
 
@@ -1733,13 +1735,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "cave_top_1_p2_0" );
-		__28->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__28->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
-		__28->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
+		__28->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__28->MyQuad->Base = BasePoint( 4329.43f, 0, 0, 1832.563f, 6400.621f, 30.32861f );
 
@@ -1751,13 +1753,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "cave_top_1_p1_1" );
-		__29->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__29->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_1" ) );
-		__29->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1" ) );
+		__29->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__29->MyQuad->Base = BasePoint( 4329.43f, 0, 0, 1832.563f, 15059.48f, 30.32861f );
 
@@ -1769,13 +1771,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "cave_top_1_p2_1" );
-		__30->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__30->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
-		__30->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
+		__30->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__30->MyQuad->Base = BasePoint( 4329.43f, 0, 0, 1832.563f, 23718.34f, 30.32861f );
 
@@ -1795,13 +1797,13 @@ namespace CloudberryKingdom
 		__31->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "cave_lightshafts_p1_0" );
-		__32->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__32->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
-		__32->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
+		__32->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__32->MyQuad->Base = BasePoint( 3582.637f, 0, 0, 1516.46f, 2142.867f, -1.561279f );
 
@@ -1813,13 +1815,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "cave_lightshafts_p2_0" );
-		__33->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__33->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
-		__33->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
+		__33->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__33->MyQuad->Base = BasePoint( 3582.637f, 0, 0, 1516.46f, 9308.145f, -1.561279f );
 
@@ -1831,13 +1833,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "cave_lightshafts_p1_1" );
-		__34->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__34->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
-		__34->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
+		__34->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__34->MyQuad->Base = BasePoint( 3582.637f, 0, 0, 1516.46f, 16473.42f, -1.561279f );
 
@@ -1849,13 +1851,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "cave_lightshafts_p2_1" );
-		__35->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__35->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__35->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__35->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
-		__35->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__35->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
+		__35->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__35->MyQuad->Base = BasePoint( 3582.637f, 0, 0, 1516.46f, 23638.69f, -1.561279f );
 
@@ -1887,13 +1889,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "hills_backdrop_p1_0" );
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backdrop" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backdrop" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__2->MyQuad->Base = BasePoint( 81277.7f, 0, 0, 34106.41f, -4469.054f, 784.0586f );
 
@@ -1905,13 +1907,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "hills_backdrop_p2_0" );
-		__3->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__3->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backdrop_p2" ) );
-		__3->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backdrop_p2" ) );
+		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__3->MyQuad->Base = BasePoint( 81277.7f, 0, 0, 34106.41f, 158086.3f, 784.0586f );
 
@@ -1931,13 +1933,13 @@ namespace CloudberryKingdom
 		__4->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "hills_backcastles_trim" );
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backcastles_trim" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backcastles_trim" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__5->MyQuad->Base = BasePoint( 19649.94f, 0, 0, 6075.512f, 3557.881f, 4444.444f );
 
@@ -1949,13 +1951,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "hills_backcastles_p2_trim" );
-		__6->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__6->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__6->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__6->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backcastles_p2_trim" ) );
-		__6->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backcastles_p2_trim" ) );
+		__6->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__6->MyQuad->Base = BasePoint( 21693.85f, 0, 0, 6280.27f, 44884.28f, 4316.639f );
 
@@ -1975,13 +1977,13 @@ namespace CloudberryKingdom
 		__7->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "hills_backhills_p1_0" );
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__8->MyQuad->Base = BasePoint( 10593.01f, 0, 0, 4445.094f, 2926.976f, 102.2695f );
 
@@ -1993,13 +1995,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "hills_backhills_p2_0" );
-		__9->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__9->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__9->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__9->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
-		__9->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__9->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
+		__9->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__9->MyQuad->Base = BasePoint( 10593.01f, 0, 0, 4445.094f, 24113, 102.2695f );
 
@@ -2011,13 +2013,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "hills_backhills_p1_0" );
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__10->MyQuad->Base = BasePoint( 10593.01f, 0, 0, 4445.094f, 39921.59f, 451.0566f );
 
@@ -2029,13 +2031,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "hills_backhills_p2_0" );
-		__11->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__11->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__11->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__11->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
-		__11->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__11->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__11->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
+		__11->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__11->MyQuad->Base = BasePoint( 10593.01f, 0, 0, 4445.094f, 61107.63f, 451.0566f );
 
@@ -2055,13 +2057,13 @@ namespace CloudberryKingdom
 		__12->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "hills_backhills2_trim" );
-		__13->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
-		__13->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
+		__13->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__13->MyQuad->Base = BasePoint( 5887, 0, 0, 1970.189f, 4186.129f, -1231.915f );
 
@@ -2073,25 +2075,25 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "hills_backhills2_p2_trim" );
-		__14->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -192.9017f ), Vector2( 0, 0 ), Color( 255, 255, 255, 255 ) );
-		__14->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1.000975f, 0.9990253f );
+		__14->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -192.9017f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__14->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.000975f, 0.9990253f );
 
-		__14->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 25706.37f, -192.9017f ), Vector2( 1, 0 ), Color( 255, 255, 255, 255 ) );
-		__14->MyQuad->Quad_Renamed->v1->Pos = Vector2( 0.999025f, 0.9990253f );
+		__14->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 25706.37f, -192.9017f ), Vector2( 1, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__14->MyQuad->Quad_Renamed.v1.Pos = Vector2( 0.999025f, 0.9990253f );
 
-		__14->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -3209.26f ), Vector2( 0, 1 ), Color( 255, 255, 255, 255 ) );
-		__14->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1.000975f, -1.000975f );
+		__14->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -3209.26f ), Vector2( 0, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__14->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1.000975f, -1.000975f );
 
-		__14->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 25706.37f, -3209.26f ), Vector2( 1, 1 ), Color( 255, 255, 255, 255 ) );
-		__14->MyQuad->Quad_Renamed->v3->Pos = Vector2( 0.999025f, -1.000975f );
+		__14->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 25706.37f, -3209.26f ), Vector2( 1, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__14->MyQuad->Quad_Renamed.v3.Pos = Vector2( 0.999025f, -1.000975f );
 
-		__14->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
-		__14->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
+		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__14->MyQuad->Base = BasePoint( 7820.432f, 0, 0, 1508.179f, 17893.56f, -1699.611f );
 
@@ -2103,13 +2105,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "hills_backhills2_trim" );
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__15->MyQuad->Base = BasePoint( 5887, 0, 0, 1970.189f, 32150.93f, -1535.743f );
 
@@ -2121,13 +2123,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "hills_backhills2_p2_trim" );
-		__16->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__16->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
-		__16->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__16->MyQuad->Base = BasePoint( 7820.432f, 0, 0, 1508.179f, 45858.36f, -1998.595f );
 
@@ -2147,25 +2149,25 @@ namespace CloudberryKingdom
 		__17->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "hills_clouds" );
-		__18->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -4171.699f, 2314.271f ), Vector2( 0.7512081f, 0 ), Color( 255, 255, 255, 255 ) );
-		__18->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__18->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4171.699f, 2314.271f ), Vector2( 0.7512081f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__18->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__18->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 40964.18f, 2314.271f ), Vector2( 3.749899f, 0 ), Color( 255, 255, 255, 255 ) );
-		__18->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__18->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 40964.18f, 2314.271f ), Vector2( 3.749899f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__18->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__18->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -4171.699f, -1292.736f ), Vector2( 0.7512081f, 1 ), Color( 255, 255, 255, 255 ) );
-		__18->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__18->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -4171.699f, -1292.736f ), Vector2( 0.7512081f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__18->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__18->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 40964.18f, -1292.736f ), Vector2( 3.749899f, 1 ), Color( 255, 255, 255, 255 ) );
-		__18->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__18->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 40964.18f, -1292.736f ), Vector2( 3.749899f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__18->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__18->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__18->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_clouds" ) );
-		__18->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_clouds" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__18->MyQuad->Base = BasePoint( 22567.94f, 0, 0, 1803.504f, 18396.24f, 510.7676f );
 
@@ -2185,13 +2187,13 @@ namespace CloudberryKingdom
 		__19->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "hills_hill1" );
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hill1" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__20->MyQuad->Base = BasePoint( 5711.815f, 0, 0, 1410.282f, 8635.98f, -926.418f );
 
@@ -2203,13 +2205,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "hills_hillandtree" );
-		__21->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
-		__21->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__21->MyQuad->Base = BasePoint( 5250.666f, 0, 0, 1960.848f, 34.27734f, -34.0918f );
 
@@ -2221,13 +2223,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "hills_hillandtree" );
-		__22->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
-		__22->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__22->MyQuad->Base = BasePoint( 5250.666f, 0, 0, 1960.848f, 17604.08f, -34.0918f );
 
@@ -2239,13 +2241,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "hills_hill2" );
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hill2" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill2" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__23->MyQuad->Base = BasePoint( 4082.421f, 0, 0, 1469.273f, 10419.8f, -1173.33f );
 
@@ -2257,13 +2259,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "hills_hill1" );
-		__24->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hill1" ) );
-		__24->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__24->MyQuad->Base = BasePoint( 5711.815f, 0, 0, 1410.282f, 27956.91f, -438.7754f );
 
@@ -2275,13 +2277,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "hills_hillandtree" );
-		__25->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__25->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
-		__25->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__25->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__25->MyQuad->Base = BasePoint( 5250.666f, 0, 0, 1960.848f, 34432.56f, -336.752f );
 
@@ -2293,13 +2295,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "hills_hill1" );
-		__26->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__26->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__26->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__26->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_hill1" ) );
-		__26->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__26->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__26->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__26->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__26->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__26->MyQuad->Base = BasePoint( 5711.815f, 0, 0, 1410.282f, 43620.78f, -565.0293f );
 
@@ -2319,13 +2321,13 @@ namespace CloudberryKingdom
 		__27->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "hills_plants_1" );
-		__28->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__28->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
-		__28->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__28->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__28->MyQuad->Base = BasePoint( 646.1251f, 0, 0, 486.9349f, -8483.381f, -959.5684f );
 
@@ -2337,13 +2339,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "hills_plants_2" );
-		__29->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__29->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
-		__29->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__29->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__29->MyQuad->Base = BasePoint( 974.2943f, 0, 0, 843.0762f, -6522.574f, -951.364f );
 
@@ -2355,13 +2357,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "hills_plants_3" );
-		__30->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__30->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
-		__30->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__30->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__30->MyQuad->Base = BasePoint( 892.2518f, 0, 0, 804.9318f, -4241.8f, -1058.019f );
 
@@ -2373,13 +2375,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "hills_plants_4" );
-		__31->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__31->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__31->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__31->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
-		__31->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__31->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__31->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__31->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__31->MyQuad->Base = BasePoint( 957.8854f, 0, 0, 524.0001f, -2026.664f, -1213.899f );
 
@@ -2391,13 +2393,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "hills_plants_5" );
-		__32->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__32->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
-		__32->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__32->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__32->MyQuad->Base = BasePoint( 695.9648f, 0, 0, 565.1686f, -4.105469f, -1058.24f );
 
@@ -2409,13 +2411,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "hills_plants_6" );
-		__33->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__33->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
-		__33->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__33->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__33->MyQuad->Base = BasePoint( 1266.809f, 0, 0, 1009.208f, 2359.654f, -917.8555f );
 
@@ -2427,13 +2429,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "hills_plants_1" );
-		__34->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__34->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
-		__34->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__34->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__34->MyQuad->Base = BasePoint( 646.1251f, 0, 0, 486.9349f, 4476.271f, -1029.628f );
 
@@ -2445,13 +2447,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "hills_plants_2" );
-		__35->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__35->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__35->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__35->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
-		__35->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__35->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__35->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__35->MyQuad->Base = BasePoint( 974.2943f, 0, 0, 843.0762f, 6329.44f, -981.4927f );
 
@@ -2463,13 +2465,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "hills_plants_3" );
-		__36->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__36->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__36->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__36->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
-		__36->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__36->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__36->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__36->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__36->MyQuad->Base = BasePoint( 892.2518f, 0, 0, 804.9318f, 8591.752f, -933.3588f );
 
@@ -2481,13 +2483,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "hills_plants_4" );
-		__37->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__37->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__37->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__37->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
-		__37->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__37->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__37->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__37->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__37->MyQuad->Base = BasePoint( 957.8854f, 0, 0, 524.0001f, 10830, -1125.896f );
 
@@ -2499,13 +2501,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "hills_plants_5" );
-		__38->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__38->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__38->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__38->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
-		__38->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__38->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__38->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__38->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__38->MyQuad->Base = BasePoint( 695.9648f, 0, 0, 565.1686f, 13020.1f, -1053.695f );
 
@@ -2517,13 +2519,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__39->Name = _T( "hills_plants_6" );
-		__39->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__39->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__39->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__39->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
-		__39->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__39->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__39->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__39->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__39->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__39->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__39->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__39->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__39->MyQuad->Base = BasePoint( 1266.809f, 0, 0, 1009.208f, 15234.28f, -933.358f );
 
@@ -2535,13 +2537,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "hills_plants_1" );
-		__40->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__40->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__40->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__40->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
-		__40->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__40->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__40->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__40->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__40->MyQuad->Base = BasePoint( 646.1251f, 0, 0, 486.9349f, 17219.33f, -986.3066f );
 
@@ -2553,13 +2555,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "hills_plants_2" );
-		__41->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__41->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__41->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__41->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
-		__41->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__41->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__41->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__41->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__41->MyQuad->Base = BasePoint( 974.2943f, 0, 0, 843.0762f, 19203.91f, -1006.042f );
 
@@ -2571,13 +2573,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "hills_plants_3" );
-		__42->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__42->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__42->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__42->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
-		__42->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__42->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__42->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__42->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__42->MyQuad->Base = BasePoint( 892.2518f, 0, 0, 804.9318f, 21566.81f, -1132.153f );
 
@@ -2589,13 +2591,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "hills_plants_4" );
-		__43->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__43->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__43->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__43->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
-		__43->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__43->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__43->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__43->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__43->MyQuad->Base = BasePoint( 957.8854f, 0, 0, 524.0001f, 23854.63f, -1173.068f );
 
@@ -2607,13 +2609,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__44->Name = _T( "hills_plants_5" );
-		__44->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__44->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__44->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__44->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
-		__44->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__44->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__44->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__44->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__44->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__44->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__44->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__44->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__44->MyQuad->Base = BasePoint( 695.9648f, 0, 0, 565.1686f, 25828.14f, -1124.934f );
 
@@ -2625,13 +2627,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "hills_plants_6" );
-		__45->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__45->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__45->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
-		__45->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
-		__45->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->BlendAddRatio = 0;
+		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__45->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__45->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__45->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__45->MyQuad->Base = BasePoint( 1266.809f, 0, 0, 1009.208f, 28090.46f, -860.1955f );
 
@@ -2663,13 +2665,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "castle_wall" );
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_wall" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__2->MyQuad->Base = BasePoint( 8090.417f, 0, 0, 3422.704f, 0, 0 );
 
@@ -2681,13 +2683,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "castle_wall_p2" );
-		__3->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
-		__3->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
+		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__3->MyQuad->Base = BasePoint( 8090.417f, 0, 0, 3422.704f, 16180.76f, 0.06445313f );
 
@@ -2699,13 +2701,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "castle_wall" );
-		__4->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__4->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_wall" ) );
-		__4->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__4->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__4->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__4->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
+		__4->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__4->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__4->MyQuad->Base = BasePoint( 8090.417f, 0, 0, 3422.704f, 32361.51f, -0.03735352f );
 
@@ -2717,13 +2719,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "castle_wall_p2" );
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__5->MyQuad->Base = BasePoint( 8090.417f, 0, 0, 3422.704f, 48542.02f, 0.08365631f );
 
@@ -2735,13 +2737,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "Castle_Window_Left_Frame" );
-		__6->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__6->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
-		__6->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__6->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__6->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
+		__6->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
+		__6->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
 
 		__6->MyQuad->Base = BasePoint( 821.9902f, 0, 0, 1827.779f, 1229.637f, -119.3635f );
 
@@ -2753,13 +2755,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "Castle_Window_Center_Frame" );
-		__7->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__7->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
-		__7->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__7->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__7->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
+		__7->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
+		__7->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
 
 		__7->MyQuad->Base = BasePoint( 1069.899f, 0, 0, 2655.173f, 3022.709f, -70.24944f );
 
@@ -2771,13 +2773,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "Castle_Window_Right_Frame" );
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
 
 		__8->MyQuad->Base = BasePoint( 868.2858f, 0, 0, 1843.033f, 4746.968f, -156.1684f );
 
@@ -2789,13 +2791,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "Castle_Window_Left_Frame" );
-		__9->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__9->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
-		__9->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__9->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__9->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__9->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
+		__9->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
+		__9->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__9->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__9->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
 
 		__9->MyQuad->Base = BasePoint( 821.9902f, 0, 0, 1827.779f, 10648.15f, -214.8148f );
 
@@ -2807,13 +2809,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "Castle_Window_Center_Frame" );
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
 
 		__10->MyQuad->Base = BasePoint( 1069.899f, 0, 0, 2655.173f, 12472.22f, -112.9629f );
 
@@ -2825,13 +2827,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "Castle_Window_Right_Frame" );
-		__11->MyQuad->Quad_Renamed->MyEffect = Tools::WindowEffect;
-		__11->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
-		__11->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__11->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__11->MyQuad->Quad_Renamed->ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__11->MyQuad->Quad_Renamed->ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
+		__11->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
+		__11->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__11->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
+		__11->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
 
 		__11->MyQuad->Base = BasePoint( 868.2858f, 0, 0, 1843.033f, 14259.26f, -279.6296f );
 
@@ -2851,13 +2853,13 @@ namespace CloudberryKingdom
 		__12->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "castle_pillar" );
-		__13->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__13->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__13->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__13->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__13->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__13->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, -432.9412f, -40.13337f );
 
@@ -2869,13 +2871,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "castle_pillar" );
-		__14->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__14->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__14->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 6537.952f, -69.89888f );
 
@@ -2887,13 +2889,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "castle_pillar" );
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__15->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 8990.559f, -131.1371f );
 
@@ -2905,13 +2907,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "castle_pillar" );
-		__16->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__16->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__16->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, -2508.168f, -225.2005f );
 
@@ -2923,13 +2925,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "castle_pillar" );
-		__17->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__17->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__17->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__17->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, -7470.558f, -152.276f );
 
@@ -2941,13 +2943,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "castle_pillar" );
-		__18->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__18->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__18->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 15948.25f, 6.882294f );
 
@@ -2959,13 +2961,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "castle_pillar" );
-		__19->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__19->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__19->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 18275.31f, -203.903f );
 
@@ -2977,13 +2979,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "castle_pillar" );
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__20->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 25510.57f, -232.6846f );
 
@@ -2995,13 +2997,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "castle_pillar" );
-		__21->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_pillar" ) );
-		__21->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__21->MyQuad->Base = BasePoint( 851.4517f, 0, 0, 3055.162f, 28404.66f, -225.4594f );
 
@@ -3021,13 +3023,13 @@ namespace CloudberryKingdom
 		__22->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "castle_chandelier_far" );
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__23->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, -12552.62f, 2073.532f );
 
@@ -3039,13 +3041,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "castle_chandelier_far" );
-		__24->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__24->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__24->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__24->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__24->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, -9512.358f, 2305.82f );
 
@@ -3057,13 +3059,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "castle_chandelier_far" );
-		__25->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__25->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__25->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__25->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__25->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__25->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, -6887.27f, 2162.044f );
 
@@ -3075,13 +3077,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "castle_chandelier_far" );
-		__26->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__26->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__26->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__26->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__26->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__26->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__26->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__26->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__26->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__26->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, -3205.039f, 2042.446f );
 
@@ -3093,13 +3095,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "castle_chandelier_far" );
-		__27->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__27->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__27->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__27->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__27->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__27->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, -849.4259f, 1762.513f );
 
@@ -3111,13 +3113,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "castle_chandelier_far" );
-		__28->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__28->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__28->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__28->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__28->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__28->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 1569.904f, 1935.758f );
 
@@ -3129,13 +3131,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "castle_chandelier_far" );
-		__29->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__29->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__29->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__29->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__29->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__29->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 3734.492f, 1787.61f );
 
@@ -3147,13 +3149,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "castle_chandelier_far" );
-		__30->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__30->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__30->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__30->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__30->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__30->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 6327.063f, 1954.761f );
 
@@ -3165,13 +3167,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "castle_chandelier_far" );
-		__31->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__31->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__31->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__31->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__31->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__31->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__31->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__31->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__31->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__31->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 8253.275f, 1765.66f );
 
@@ -3183,13 +3185,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "castle_chandelier_far" );
-		__32->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__32->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__32->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__32->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__32->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__32->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 10659.29f, 2202.28f );
 
@@ -3201,13 +3203,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "castle_chandelier_far" );
-		__33->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__33->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__33->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__33->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__33->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__33->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 12939.41f, 1861.483f );
 
@@ -3219,13 +3221,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "castle_chandelier_far" );
-		__34->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__34->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__34->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__34->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__34->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__34->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 14887.88f, 2277.576f );
 
@@ -3237,13 +3239,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "castle_chandelier_far" );
-		__35->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__35->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__35->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__35->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__35->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__35->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__35->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__35->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__35->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 16950.35f, 1941.349f );
 
@@ -3255,13 +3257,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "castle_chandelier_far" );
-		__36->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__36->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__36->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__36->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__36->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__36->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__36->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__36->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__36->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__36->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 19168.29f, 2669.889f );
 
@@ -3273,13 +3275,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "castle_chandelier_far" );
-		__37->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__37->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__37->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__37->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__37->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__37->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__37->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__37->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__37->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__37->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 21178.94f, 1858.435f );
 
@@ -3291,13 +3293,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "castle_chandelier_far" );
-		__38->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__38->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
-		__38->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__38->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__38->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__38->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__38->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__38->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__38->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__38->MyQuad->Base = BasePoint( 619.2842f, 0, 0, 2095.021f, 24296.85f, 1994.823f );
 
@@ -3317,13 +3319,13 @@ namespace CloudberryKingdom
 		__39->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "castle_chandelier_close" );
-		__40->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__40->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__40->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__40->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__40->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__40->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__40->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__40->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__40->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__40->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 3612.716f, 1209.252f );
 
@@ -3335,13 +3337,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "castle_chandelier_close" );
-		__41->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__41->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__41->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__41->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__41->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__41->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__41->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__41->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__41->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__41->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, -652.3344f, 1221.809f );
 
@@ -3353,13 +3355,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "castle_chandelier_close" );
-		__42->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__42->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__42->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__42->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__42->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__42->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__42->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__42->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__42->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__42->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 7568.055f, 1272.035f );
 
@@ -3371,13 +3373,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "castle_chandelier_close" );
-		__43->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__43->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__43->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__43->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__43->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__43->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__43->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__43->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__43->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__43->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 12490.26f, 1238.551f );
 
@@ -3389,13 +3391,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__44->Name = _T( "castle_chandelier_close" );
-		__44->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__44->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__44->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__44->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__44->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__44->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__44->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__44->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__44->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__44->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__44->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__44->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__44->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, -4636.972f, 1288.777f );
 
@@ -3407,13 +3409,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "castle_chandelier_close" );
-		__45->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__45->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__45->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__45->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__45->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__45->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__45->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__45->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__45->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__45->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, -9182.47f, 1196.696f );
 
@@ -3425,13 +3427,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __46 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__46->Name = _T( "castle_chandelier_close" );
-		__46->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__46->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__46->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__46->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__46->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__46->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__46->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__46->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__46->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__46->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__46->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__46->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__46->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__46->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__46->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 16752.85f, 1337.078f );
 
@@ -3443,13 +3445,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__47->Name = _T( "castle_chandelier_close" );
-		__47->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__47->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__47->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__47->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__47->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__47->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__47->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__47->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__47->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__47->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__47->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__47->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__47->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 20212.56f, 1004.161f );
 
@@ -3461,13 +3463,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __48 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__48->Name = _T( "castle_chandelier_close" );
-		__48->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__48->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
-		__48->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__48->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__48->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__48->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__48->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__48->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__48->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__48->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__48->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__48->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__48->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__48->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__48->MyQuad->Base = BasePoint( 928.205f, 0, 0, 790.1899f, 23463.48f, 1307.482f );
 
@@ -3499,13 +3501,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "sea_backdrop_p1_0" );
-		__2->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_backdrop" ) );
-		__2->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__2->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__2->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop" ) );
+		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__2->MyQuad->Base = BasePoint( 40199, 0, 0, 17007.27f, -3333.766f, 0 );
 
@@ -3517,13 +3519,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "sea_backdrop_p2_0" );
-		__3->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_backdrop_p2" ) );
-		__3->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__3->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__3->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop_p2" ) );
+		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__3->MyQuad->Base = BasePoint( 40199, 0, 0, 17007.27f, 77064.25f, 0 );
 
@@ -3543,13 +3545,13 @@ namespace CloudberryKingdom
 		__4->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "sea_behind_water_1" );
-		__5->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_behind_water_1" ) );
-		__5->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__5->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__5->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_1" ) );
+		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__5->MyQuad->Base = BasePoint( 2439.164f, 0, 0, 5446.352f, -13367.37f, -754.4899f );
 
@@ -3561,13 +3563,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "sea_behind_water_3" );
-		__6->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
-		__6->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__6->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__6->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__6->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__6->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
+		__6->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__6->MyQuad->Base = BasePoint( 8032.311f, 0, 0, 2956.627f, 1839.004f, -3958.902f );
 
@@ -3579,13 +3581,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "sea_behind_water_2" );
-		__7->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_behind_water_2" ) );
-		__7->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__7->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__7->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__7->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__7->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_2" ) );
+		__7->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__7->MyQuad->Base = BasePoint( 3021.783f, 0, 0, 4421.52f, 14889.68f, -2327.567f );
 
@@ -3597,13 +3599,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "sea_behind_water_3" );
-		__8->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
-		__8->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__8->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__8->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
+		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__8->MyQuad->Base = BasePoint( 8032.311f, 0, 0, 2956.627f, 33263.91f, -4019.146f );
 
@@ -3623,13 +3625,13 @@ namespace CloudberryKingdom
 		__9->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "sea_seamonster" );
-		__10->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_seamonster" ) );
-		__10->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__10->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__10->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_seamonster" ) );
+		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__10->MyQuad->Base = BasePoint( 1440, 0, 0, 817.7778f, 4668.237f, -2436.043f );
 
@@ -3649,25 +3651,25 @@ namespace CloudberryKingdom
 		__11->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "sea_clouds" );
-		__12->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_clouds" ) );
-		__12->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__12->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__12->MyQuad->Quad_Renamed->v0->Vertex = MyOwnVertexFormat( Vector2( -9694.891f, 3457.797f ), Vector2( 1.241851f, 0 ), Color( 255, 255, 255, 255 ) );
-		__12->MyQuad->Quad_Renamed->v0->Pos = Vector2( -1, 1 );
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_clouds" ) );
+		__12->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__12->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, 3457.797f ), Vector2( 1.241851f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__12->MyQuad->Quad_Renamed->v1->Vertex = MyOwnVertexFormat( Vector2( 47179.37f, 3457.797f ), Vector2( 3.242014f, 0 ), Color( 255, 255, 255, 255 ) );
-		__12->MyQuad->Quad_Renamed->v1->Pos = Vector2( 1, 1 );
+		__12->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, 3457.797f ), Vector2( 3.242014f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__12->MyQuad->Quad_Renamed->v2->Vertex = MyOwnVertexFormat( Vector2( -9694.891f, -3651.485f ), Vector2( 1.241851f, 1 ), Color( 255, 255, 255, 255 ) );
-		__12->MyQuad->Quad_Renamed->v2->Pos = Vector2( -1, -1 );
+		__12->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, -3651.485f ), Vector2( 1.241851f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__12->MyQuad->Quad_Renamed->v3->Vertex = MyOwnVertexFormat( Vector2( 47179.37f, -3651.485f ), Vector2( 3.242014f, 1 ), Color( 255, 255, 255, 255 ) );
-		__12->MyQuad->Quad_Renamed->v3->Pos = Vector2( 1, -1 );
+		__12->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, -3651.485f ), Vector2( 3.242014f, 1 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
-		__12->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__12->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__12->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__12->MyQuad->Base = BasePoint( 28437.13f, 0, 0, 3554.641f, 18742.24f, -96.84418f );
 
@@ -3687,13 +3689,13 @@ namespace CloudberryKingdom
 		__13->Fixed = false;
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "sea_water_1" );
-		__14->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_water_1" ) );
-		__14->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__14->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__14->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__14->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_1" ) );
+		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__14->MyQuad->Base = BasePoint( 7761.776f, 0, 0, 557.1197f, 1360.16f, -2833.725f );
 
@@ -3705,13 +3707,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "sea_water_2" );
-		__15->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_water_2" ) );
-		__15->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__15->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__15->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_2" ) );
+		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__15->MyQuad->Base = BasePoint( 7761.776f, 0, 0, 557.1197f, 16882.17f, -2834.259f );
 
@@ -3723,13 +3725,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "sea_rock_1" );
-		__16->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
-		__16->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__16->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__16->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__16->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__16->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 644.2549f, -1623.055f );
 
@@ -3741,13 +3743,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "sea_rock_2" );
-		__17->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
-		__17->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__17->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__17->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__17->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
+		__17->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__17->MyQuad->Base = BasePoint( 1200, 0, 0, 1008.589f, 10703.01f, -2166.667f );
 
@@ -3759,13 +3761,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "sea_rock_3" );
-		__18->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_3" ) );
-		__18->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__18->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__18->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__18->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_3" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__18->MyQuad->Base = BasePoint( 3412.958f, 0, 0, 3211.681f, -3843.269f, -342.5923f );
 
@@ -3777,13 +3779,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "sea_rock_4" );
-		__19->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
-		__19->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__19->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__19->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__19->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__19->MyQuad->Base = BasePoint( 220.506f, 0, 0, 162.2992f, 9069.232f, -2839.639f );
 
@@ -3795,13 +3797,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "sea_rock_5" );
-		__20->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_5" ) );
-		__20->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__20->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__20->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__20->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_5" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__20->MyQuad->Base = BasePoint( 2536.874f, 0, 0, 1736.723f, 14098.87f, -1460.87f );
 
@@ -3813,13 +3815,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "sea_rock_1" );
-		__21->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
-		__21->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__21->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__21->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__21->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__21->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 6594.551f, -1877.636f );
 
@@ -3831,13 +3833,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "sea_rock_2" );
-		__22->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
-		__22->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__22->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__22->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__22->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__22->MyQuad->Base = BasePoint( 1200, 0, 0, 1008.589f, 18768.2f, -2215.924f );
 
@@ -3849,13 +3851,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "sea_rock_4" );
-		__23->MyQuad->Quad_Renamed->_MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
-		__23->MyQuad->Quad_Renamed->MySetColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->PremultipliedColor = Color( 255, 255, 255, 255 );
-		__23->MyQuad->Quad_Renamed->BlendAddRatio = 0;
-		__23->MyQuad->Quad_Renamed->MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed->ExtraTexture1 = 0;
-		__23->MyQuad->Quad_Renamed->ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__23->MyQuad->Base = BasePoint( 220.506f, 0, 0, 162.2992f, 4206.418f, -2972.248f );
 
@@ -3922,7 +3924,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Background> Background::Get( const std::shared_ptr<BackgroundTemplate> &Type )
 	{
-		return Type_MAKE_INSTANCE_OF();
+		return Type->MakeInstanceOf();
 	}
 
 	Background::Background()
@@ -3990,22 +3992,22 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 
 		if ( GreenScreen )
 		{
-			TestQuad->Quad_Renamed->SetColor( Color( Vector3( 0, 1, 0 ) * 1 ) );
+			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 0, 1, 0 ) ) );
 			TestQuad->setTextureName( _T( "White" ) );
 			TestQuad->FullScreen( Cam );
 		}
 		else
 		{
-			TestQuad->Quad_Renamed->SetColor( Color( Vector3( 1, 1, 1 ) * 1 ) );
+			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 1, 1, 1 ) ) );
 
 			if ( TestTexture == 0 )
 			{
 				//TestTexture = Tools.Texture("BGPlain");
 				TestTexture = Tools::Texture( _T( "11 hill_4" ) );
 			}
-			TestQuad->Quad_Renamed->MyTexture = TestTexture;
+			TestQuad->Quad_Renamed.setMyTexture( TestTexture );
 
-			TestQuad->Quad_Renamed->SetColor( ColorHelper::GrayColor( .825f ) );
+			TestQuad->Quad_Renamed.SetColor( ColorHelper::GrayColor( .825f ) );
 			TestQuad->FullScreen( Cam );
 			TestQuad->ScaleXToMatchRatio();
 		}
@@ -4027,66 +4029,68 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 	void Background::DimAll( float dim )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator c = MyCollection->Lists.begin(); c != MyCollection->Lists.end(); ++c )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator c = MyCollection->Lists.begin(); c != MyCollection->Lists.end(); ++c )
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( unknown::const_iterator fl = c->Floaters.begin(); fl != c->Floaters.end(); ++fl )
+			for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator fl = ( *c )->Floaters.begin(); fl != ( *c )->Floaters.end(); ++fl )
 			{
-				Vector4 clr = ( *fl )->MyQuad->Quad->MySetColor->ToVector4();
+				Vector4 clr = ( *fl )->MyQuad->Quad_Renamed.MySetColor.ToVector4();
 				clr *= dim;
-				clr.W = ( *fl )->MyQuad->Quad->MySetColor->ToVector4()->W;
-				( *fl )->MyQuad->Quad->SetColor( clr );
+				clr.W = ( *fl )->MyQuad->Quad_Renamed.MySetColor.ToVector4().W;
+				( *fl )->MyQuad->Quad_Renamed.SetColor( clr );
 			}
 	}
 
 	void Background::Save( const std::wstring &path )
 	{
-		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		// FIXME: Implement this; maybe?
+		/*std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
 		std::shared_ptr<StreamWriter> writer = std::make_shared<StreamWriter>( stream );
 
 		Write( writer );
 
 		writer->Close();
-		stream->Close();
+		stream->Close();*/
 	}
 
 	void Background::Load( const std::wstring &path )
 	{
-		Tools::UseInvariantCulture();
+		// FIXME: Implement this; maybe?
+		/*Tools::UseInvariantCulture();
 		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
 		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
 
 		Read( reader );
 
 		reader->Close();
-		stream->Close();
+		stream->Close();*/
 	}
 
 	void Background::SetWeatherIntensity( float Intensity )
 	{
 		// Mod snow
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
+			if ( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( unknown::const_iterator f = l->Floaters.begin(); f != l->Floaters.end(); ++f )
+				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
-					( *f )->MyQuad->Alpha *= Intensity;
+					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;
 				}
 			}
 
 		// Mod rain
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloaterList*>::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Rain" ) ) )
+		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
+			if ( ( *l )->Name.find( _T( "Rain" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( unknown::const_iterator f = l->Floaters.begin(); f != l->Floaters.end(); ++f )
+				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
-					( *f )->MyQuad->Alpha *= Intensity;
+					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;
 				}
 			}

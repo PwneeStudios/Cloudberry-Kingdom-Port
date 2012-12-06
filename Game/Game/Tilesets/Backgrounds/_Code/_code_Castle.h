@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Background;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class Background_Castle : public BackgroundTemplate
 	{
 	public:

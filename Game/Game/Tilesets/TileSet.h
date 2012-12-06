@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Stores a tile set's information, including what obstacles are allowed.
 	/// </summary>
-	class TileSet : public Object
+	class TileSet : public Object, public std::enable_shared_from_this<TileSet>
 	{
 	public:
 		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 
 	public:
 		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd );
-		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, const std::shared_ptr<BlockGroup> &group );
+		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, std::shared_ptr<BlockGroup> group );
 
 
 		std::shared_ptr<TileSet> StandInType;

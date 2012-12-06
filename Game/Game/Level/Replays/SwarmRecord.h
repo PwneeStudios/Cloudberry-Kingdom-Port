@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 	public:
 		std::shared_ptr<LevelPiece> MyLevelPiece;
 
-		std::vector<std::shared_ptr<Recording> > Records;
+		std::list<std::shared_ptr<Recording> > Records;
 		std::shared_ptr<Recording> MainRecord;
 #if defined(XBOX)
 	private:

@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundFloaterList
+	class BackgroundFloaterList : public std::enable_shared_from_this<BackgroundFloaterList>
 	{
 	private:
-		class ClearBackgroundListLambda : public LambdaFunc_1<BackgroundFloater*, bool>
+		class ClearBackgroundListLambda : public LambdaFunc_1<std::shared_ptr<BackgroundFloater>, bool>
 		{
 		private:
 			std::shared_ptr<FloatRectangle> Area;
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 #endif
 
 		std::shared_ptr<Level> MyLevel;
-		std::vector<BackgroundFloater*> Floaters;
+		std::vector<std::shared_ptr<BackgroundFloater> > Floaters;
 
 		float Parallax;
 

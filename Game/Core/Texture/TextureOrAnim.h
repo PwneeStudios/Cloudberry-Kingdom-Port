@@ -5,17 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class AnimationData_Texture;
-}
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// Wraps either an EzTexture or an AnimationData_Texture.
 	/// The purpose of this class is to let a quad's texture be easily replaced by an animation, without additional fuss.
@@ -35,10 +24,10 @@ namespace CloudberryKingdom
 		void Set( const std::wstring &name );
 
 //C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		std::shared_ptr<TextureOrAnim> TextureOrAnimOperatorProxy( const std::shared_ptr<EzTexture> &texture );
+		static std::shared_ptr<TextureOrAnim> Get( const std::shared_ptr<EzTexture> &texture );
 
 //C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		std::shared_ptr<TextureOrAnim> TextureOrAnimOperatorProxy( const std::wstring &name );
+		static std::shared_ptr<TextureOrAnim> Get( const std::wstring &name );
 
 	private:
 		void InitializeInstanceFields();

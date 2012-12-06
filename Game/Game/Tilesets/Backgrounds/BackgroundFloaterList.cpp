@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -32,7 +29,7 @@ namespace CloudberryKingdom
 			return;
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->Reset();
 	}
 
@@ -42,21 +39,21 @@ namespace CloudberryKingdom
 		this->Parallax = Parallax;
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->ChangeParallax( PrevParallax, Parallax );
 	}
 
 	BackgroundFloaterList::BackgroundFloaterList()
 	{
 		InitializeInstanceFields();
-		Floaters = std::vector<BackgroundFloater*>();
+		//Floaters = std::vector<std::shared_ptr<BackgroundFloater> >();
 	}
 
 	void BackgroundFloaterList::Release()
 	{
 		MyLevel.reset();
 
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->Release();
 	}
 
@@ -64,19 +61,19 @@ namespace CloudberryKingdom
 	{
 		MyLevel = level;
 
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->SetLevel( level );
 	}
 
 	void BackgroundFloaterList::SetBackground( const std::shared_ptr<Background> &Background_Renamed )
 	{
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->SetBackground( Background_Renamed );
 	}
 
 	void BackgroundFloaterList::Move( Vector2 shift )
 	{
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = Floaters.begin(); floater != Floaters.end(); ++floater )
 			( *floater )->Move( shift );
 	}
 
@@ -87,15 +84,16 @@ namespace CloudberryKingdom
 
 	void BackgroundFloaterList::Clear( const std::shared_ptr<FloatRectangle> &Area )
 	{
-		Tools::RemoveAll( Floaters, std::make_shared<ClearBackgroundListLambda>( Area ) );
+		Tools::RemoveAll( Floaters, std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<BackgroundFloater>, bool> >( std::make_shared<ClearBackgroundListLambda>( Area ) ) );
 	}
 
 	void BackgroundFloaterList::Absorb( const std::shared_ptr<BackgroundFloaterList> &list )
 	{
-		for ( std::vector<BackgroundFloater*>::const_iterator floater = list->Floaters.begin(); floater != list->Floaters.end(); ++floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator floater = list->Floaters.begin(); floater != list->Floaters.end(); ++floater )
 			( *floater )->SetLevel( MyLevel );
 
-		Floaters.AddRange( list->Floaters );
+		//Floaters.AddRange( list->Floaters );
+		AddRange( Floaters, list->Floaters );
 	}
 
 	void BackgroundFloaterList::PhsxStep()
@@ -107,7 +105,7 @@ namespace CloudberryKingdom
 		TR = c + ( TR - c ) / Parallax;
 		BL = c + ( BL - c ) / Parallax;
 
-		for ( std::vector<BackgroundFloater*>::const_iterator Floater = Floaters.begin(); Floater != Floaters.end(); ++Floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator Floater = Floaters.begin(); Floater != Floaters.end(); ++Floater )
 			( *Floater )->PhsxStep( shared_from_this() );
 	}
 
@@ -130,7 +128,7 @@ namespace CloudberryKingdom
 
 		Cam->SetVertexZoom( Parallax * CamMod );
 
-		for ( std::vector<BackgroundFloater*>::const_iterator Floater = Floaters.begin(); Floater != Floaters.end(); ++Floater )
+		for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator Floater = Floaters.begin(); Floater != Floaters.end(); ++Floater )
 			( *Floater )->Draw();
 	}
 

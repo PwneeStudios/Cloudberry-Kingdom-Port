@@ -284,6 +284,15 @@ public:
 		return *this;
 	}
 
+	Vector4 &operator *= ( float k )
+	{
+		X *= k;
+		Y *= k;
+		Z *= k;
+		W *= k;
+		return *this;
+	}
+
 	Vector4 &operator += ( const Vector4 &a )
 	{
 		X += a.X;
