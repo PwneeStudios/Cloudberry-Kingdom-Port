@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -15,12 +16,12 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> PhsxSlider::GetViewables()
 	{
-		const std::shared_ptr<std::wstring>  tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ), _T( "!MenuToAddTo" ) };
-		return std::vector<std::shared_ptr<std::wstring> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		const std::wstring tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ), _T( "!MenuToAddTo" ) };
+		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 	}
 
-std::shared_ptr<EzFont> PhsxSlider::Font = 0;
-std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
+	std::shared_ptr<EzFont> PhsxSlider::Font = 0;
+	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
 
 	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( std::make_shared<EzText>( word, Font ) )
 	{

@@ -158,6 +158,10 @@ class DisplayMode
 {
 };
 
+class DisplayModeCollection
+{
+};
+
 class Effect
 {
 

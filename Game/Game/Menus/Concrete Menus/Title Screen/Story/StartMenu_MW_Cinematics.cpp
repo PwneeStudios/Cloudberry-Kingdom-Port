@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -45,8 +43,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Cinematics::SetText( const std::shared_ptr<EzText> &text )
 	{
-		text->MyFloatColor = ( Color( 34, 214, 47 ) ).ToVector4();
-		text->OutlineColor = ( Color( 0, 0, 0, 0 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 34, 214, 47 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 0, 0, 0, 0 ) ).ToVector4();
 	}
 
 	void StartMenu_MW_Cinematics::SetItemProperties( const std::shared_ptr<MenuItem> &item )
@@ -56,8 +54,8 @@ namespace CloudberryKingdom
 		SetText( item->MyText );
 
 		item->MySelectedText->Shadow = item->MyText->Shadow = false;
-		item->MySelectedText->MyFloatColor = ( Color( 73, 255, 86 ) ).ToVector4();
-		item->MySelectedText->OutlineColor = ( Color( 0, 0, 0, 0 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 73, 255, 86 ) ).ToVector4();
+		item->MySelectedText->OutlineColor = ( bColor( 0, 0, 0, 0 ) ).ToVector4();
 
 		item->MyOscillateParams.Set( 1, 1.01f,.005f );
 	}
@@ -72,7 +70,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MyMenu->ClearList();
 
@@ -88,37 +86,37 @@ namespace CloudberryKingdom
 		// Chapter 1
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Over the Edge" ), ItemFont ), _T( "Cutscene_1" ) );
 		item->Name = _T( "1" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Into the Forest" ), ItemFont ), _T( "Cutscene_2" ) );
 		item->Name = _T( "2" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Woes of a Kidnapper" ), ItemFont ), _T( "Cutscene_3" ) );
 		item->Name = _T( "3" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Welterweight" ), ItemFont ), _T( "Cutscene_4" ) );
 		item->Name = _T( "4" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "Cloudberry Pie" ), ItemFont ), _T( "Cutscene_5" ) );
 		item->Name = _T( "5" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ));
 		AddItem( item );
 
 		// Chapter 6
 		item = std::make_shared<CinematicsLevelItem>( std::make_shared<EzText>( _T( "I Always Told You" ), ItemFont ), _T( "Cutscene_6" ) );
 		item->Name = _T( "6" );
-		item->setGo( std::make_shared<CinematicsGoLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<CinematicsGoLambda>( std::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		MyMenu->SelectItem( 0 );

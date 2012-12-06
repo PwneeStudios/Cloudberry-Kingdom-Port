@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -30,29 +29,29 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		BL_HitPadding = Vector2( 200, 30 );
 	#endif
-		LengthBar = std::make_shared<ProgressBar>( _T( "Length" ), _T( "LengthBack" ), 850 );
+		LengthBar = std::make_shared<ProgressBar>( _T( "Length" ), _T( "LengthBack" ), 850.f );
 		LengthBar->MyType = ProgressBar::BarType_REVEAL;
 
 		LengthBar->Outline->Shadow = false;
 		LengthBar->MyPile->MyOscillateParams.Set( 2,.99f,.05f );
 
-		setMyFloat( std::make_shared<WrappedFloat>( 8000, 3000, 15000 ) );
+		setMyFloat( std::make_shared<WrappedFloat>( 8000.f, 3000.f, 15000.f ) );
 		PerceivedMin = 500;
 		InitialSlideSpeed = 120;
 		MaxSlideSpeed = 550;
 	}
 
-	const Vector2 &LengthSlider::getBL() const
+	const Vector2 LengthSlider::getBL() const
 	{
 		return LengthBar->getFull_BL();
 	}
 
-	const Vector2 &LengthSlider::getTR() const
+	const Vector2 LengthSlider::getTR() const
 	{
 		return LengthBar->getFull_TR();
 	}
 
-	const Vector2 &LengthSlider::getSlider_TR() const
+	const Vector2 LengthSlider::getSlider_TR() const
 	{
 		return LengthBar->getCurrent_TR();
 	}
