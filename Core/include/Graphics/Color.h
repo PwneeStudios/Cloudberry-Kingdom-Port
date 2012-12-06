@@ -69,6 +69,12 @@ struct Color
 	{
 		return R == c.R && G == c.G && B == c.B && A == c.A;
 	}
+	
+	bool operator != ( const Color &c ) const
+	{
+		return !( *this == c );
+	}
+
 
 	static Color Azure;
 	static Color Black;

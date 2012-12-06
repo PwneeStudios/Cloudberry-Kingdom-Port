@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 
 	private:
-		int IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr );
+		int IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr );
 
 		int IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat );
 

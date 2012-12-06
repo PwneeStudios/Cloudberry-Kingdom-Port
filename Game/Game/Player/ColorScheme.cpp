@@ -129,16 +129,16 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 
 	std::wstring ColorScheme::ToString()
 	{
-		return Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor.Name, CapeColor.Name, CapeOutlineColor.Name, HatData->Name, BeardData->Name );
+		return Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor->Name, CapeColor->Name, CapeOutlineColor->Name, HatData->Name, BeardData->Name );
 	}
 
-	int ColorScheme::IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx clr )
+	int ColorScheme::IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( static_cast<ClrTextFx>( ( *item )->obj ) == clr )
+			if ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
 				return index;
 			index++;
 		}
@@ -163,7 +163,7 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
 		chunk->Type = 0;
 
-		ClrTextFx clr;
+		std::shared_ptr<ClrTextFx> clr;
 
 		chunk->Write( abs( IndexOf( ColorSchemeManager::BeardInfo, BeardData ) ) );
 
@@ -198,31 +198,31 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 		try
 		{
 			index = chunk->ReadInt();
-			SkinColor = static_cast<ClrTextFx>( ColorSchemeManager::ColorList[ index ]->obj );
+			SkinColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			SkinColor = static_cast<ClrTextFx>( ColorSchemeManager::ColorList[ 0 ]->obj );
+			SkinColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ 0 ]->obj );
 		}
 
 		try
 		{
 			index = chunk->ReadInt();
-			CapeColor = static_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ index ]->obj );
+			CapeColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			CapeColor = static_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ 0 ]->obj );
+			CapeColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ 0 ]->obj );
 		}
 
 		try
 		{
 			index = chunk->ReadInt();
-			CapeOutlineColor = static_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ index ]->obj );
+			CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			CapeOutlineColor = static_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ 0 ]->obj );
+			CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ 0 ]->obj );
 		}
 
 		try
@@ -244,11 +244,16 @@ std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
 
 	ColorScheme::ColorScheme( Localization::Words skincolor, Localization::Words capecolor, Localization::Words capeoutlinecolor, Localization::Words hatname, Localization::Words beardname )
 	{
-		SkinColor = static_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::ColorList, std::make_shared<FindColorLambda>( skincolor ) )->obj );
-		CapeColor = static_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeColorList, std::make_shared<FindColorLambda>( capecolor ) )->obj );
-		CapeOutlineColor = static_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeOutlineColorList, std::make_shared<FindColorLambda>( capeoutlinecolor ) )->obj );
-		HatData = Tools::Find( ColorSchemeManager::HatInfo, std::make_shared<FindHatLambda>( hatname ) );
-		BeardData = Tools::Find( ColorSchemeManager::BeardInfo, std::make_shared<FindHatLambda>( beardname ) );
+		SkinColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::ColorList,
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( skincolor ) ) )->obj );
+		CapeColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeColorList,
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( capecolor ) ) )->obj );
+		CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeOutlineColorList,
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( capeoutlinecolor ) ) )->obj );
+		HatData = Tools::Find( ColorSchemeManager::HatInfo,
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<Hat>, bool> >( std::make_shared<FindHatLambda>( hatname ) ) );
+		BeardData = Tools::Find( ColorSchemeManager::BeardInfo,
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<Hat>, bool> >( std::make_shared<FindHatLambda>( beardname ) ) );
 
 		if ( HatData == 0 )
 			HatData = Hat::None;
