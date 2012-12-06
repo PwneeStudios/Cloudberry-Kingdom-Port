@@ -44,6 +44,8 @@ namespace CloudberryKingdom
 
 		static std::vector<ClrTextFx> FullList;
 
+		ClrTextFx();
+
 		ClrTextFx( int Guid, int Price, Color color, Matrix M );
 
 		ClrTextFx( int Guid, int Price, Color color, Matrix M, Localization::Words Name );

@@ -24,6 +24,13 @@ namespace CloudberryKingdom
 
 std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
+	ClrTextFx::ClrTextFx() :
+		Guid( 0 ),
+		Price( 0 ),
+		UsePaintTexture( true )
+	{
+	}
+
 	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, Matrix M )
 	{
 		this->M = M;

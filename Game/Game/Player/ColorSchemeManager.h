@@ -5,41 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
+	class CapeOnLambda : public Lambda_1<std::shared_ptr<Bob> >
+	{
+	public:
+		CapeOnLambda();
 
-namespace CloudberryKingdom
-{
-	class MenuListItem;
-}
+		void Apply( const std::shared_ptr<Bob> &bob );
+	};
 
-namespace CloudberryKingdom
-{
-	class Hat;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffect;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ColorSchemeManager
 	{
-	private:
-		class CapeOnLambda : public Lambda_1<std::shared_ptr<Bob> >
-		{
-		public:
-			CapeOnLambda();
-
-			void Apply( const std::shared_ptr<Bob> &bob );
-		};
-
 	private:
 		static std::shared_ptr<CapeOnLambda> CapeOn;
 

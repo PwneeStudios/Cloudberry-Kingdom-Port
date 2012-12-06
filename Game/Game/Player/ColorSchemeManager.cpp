@@ -4,11 +4,11 @@
 namespace CloudberryKingdom
 {
 
-	ColorSchemeManager::CapeOnLambda::CapeOnLambda()
+	CapeOnLambda::CapeOnLambda()
 	{
 	}
 
-	void ColorSchemeManager::CapeOnLambda::Apply( const std::shared_ptr<Bob> &bob )
+	void CapeOnLambda::Apply( const std::shared_ptr<Bob> &bob )
 	{
 		bob->ShowCape = false;
 
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 	}
 
 std::shared_ptr<CapeOnLambda> ColorSchemeManager::CapeOn = std::make_shared<CapeOnLambda>();
-std::vector<ColorScheme> ColorSchemes, ColorSchemeManager::ComputerColorSchemes = 0;
+std::vector<ColorScheme> ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
 
 	void ColorSchemeManager::AddScheme( ColorScheme scheme, bool ValidComputerScheme )
 	{
@@ -31,11 +31,11 @@ std::vector<ColorScheme> ColorSchemes, ColorSchemeManager::ComputerColorSchemes 
 			ComputerColorSchemes.push_back( scheme );
 	}
 
-std::vector<std::shared_ptr<MenuListItem> > HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, ColorSchemeManager::OutlineList = 0;
-std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo = 0;
-std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo = 0;
-std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList = 0;
-ClrTextFx ColorSchemeManager::None = 0;
+std::vector<std::shared_ptr<MenuListItem> > HatList, ColorList, CapeColorList, CapeOutlineColorList, TextureList, ColorSchemeManager::OutlineList;
+std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
+std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
+std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
+ClrTextFx ColorSchemeManager::None;
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
 	{
@@ -364,7 +364,7 @@ ClrTextFx ColorSchemeManager::None = 0;
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat->Arrow_Renamed = hat = std::make_shared<Hat>( _T( "Hat_Arrow" ) );
+		Hat::Arrow_Renamed = hat = std::make_shared<Hat>( _T( "Hat_Arrow" ) );
 		hat->Name = Localization::Words_ARROW_THROUGH_HEAD;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 10;
@@ -439,7 +439,7 @@ ClrTextFx ColorSchemeManager::None = 0;
 			hat->HatPicScale *= ScaleNew * 1.145f;
 			HatInfo.push_back( hat );
 
-		for ( int i = 0; i < HatInfo.size(); i++ )
+		for ( int i = 0; i < static_cast<int>( HatInfo.size() ); i++ )
 			HatList.push_back( std::make_shared<MenuListItem>( i, Localization::Words_NONE ) );
 
 

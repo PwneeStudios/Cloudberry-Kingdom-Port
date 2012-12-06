@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class PlayerStats
+	class PlayerStats : std::enable_shared_from_this<PlayerStats>
 	{
 		#pragma region WriteRead
 	public:
@@ -49,12 +49,12 @@ namespace CloudberryKingdom
 		int FinalTimeSpentNotMoving, FinalTimeSpent;
 
 		#pragma region DerivedStats
-		const std::wstring &getLifeExpectancy() const;
+		std::wstring getLifeExpectancy() const;
 
-		const int &getLifeExpectancy_Frames() const;
+		int getLifeExpectancy_Frames() const;
 
-		const int &getTotalDeaths() const;
-		const int &getCoinPercentGotten() const;
+		int getTotalDeaths() const;
+		int getCoinPercentGotten() const;
 		#pragma endregion
 
 		PlayerStats();
