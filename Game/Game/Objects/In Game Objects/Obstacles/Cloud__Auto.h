@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Cloud_AutoGen> &getInstance();
 
-	private:
+	public:
 		Cloud_AutoGen();
 
 	public:

@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -17,7 +18,7 @@ namespace CloudberryKingdom
 		FillWeight = Param( PieceSeed, u->Get( Upgrade_BOUNCY_BLOCK ) );
 
 		Speed = Param( PieceSeed );
-		Speed_SET_VAL( DifficultyHelper::Interp( 45, 60, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
+		Speed.SetVal( DifficultyHelper::Interp( 45, 60, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
 
 		SideDampening = Param( PieceSeed );
 		SideDampening.SetVal( DifficultyHelper::Interp159( .55f,.83f, 1.2f, u->Get( Upgrade_BOUNCY_BLOCK ) ) );
@@ -29,7 +30,7 @@ namespace CloudberryKingdom
 		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u->Get( Upgrade_BOUNCY_BLOCK ) ) ) );
 	}
 
-const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
+	const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
 
 	const std::shared_ptr<BouncyBlock_AutoGen> &BouncyBlock_AutoGen::getInstance()
 	{
@@ -81,7 +82,7 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 	{
 		AutoGen::PreFill_1( level, BL, TR );
 
-		std::shared_ptr<BouncyBlock_Parameters> Params = std::static_pointer_cast<BouncyBlock_Parameters>( level->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<BouncyBlock_Parameters> Params = std::static_pointer_cast<BouncyBlock_Parameters>( level->getStyle()->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );
@@ -118,8 +119,9 @@ const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::
 		std::shared_ptr<BouncyBlock> bblock;
 		float Width = Params->Size.GetVal( pos );
 		Vector2 size = Vector2( Width, Width );
-		Vector2 offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
-		float speed = Params->Speed_GET_VAL( pos );
+		Vector2 offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+								  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
+		float speed = Params->Speed.GetVal( pos );
 		float SideDampening = Params->SideDampening.GetVal( pos );
 
 		bblock = std::static_pointer_cast<BouncyBlock>( level->getRecycle()->GetObject(ObjectType_BOUNCY_BLOCK, true) );

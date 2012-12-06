@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		Delay.SetVal( __max( 60, 120 - 6 * u->Get( Upgrade_SPEED ) ) );
 
 		Speed = Param( PieceSeed );
-		Speed_SET_VAL( DifficultyHelper::Interp19( 5.6f, 16, u->Get( Upgrade_SPEED ) ) );
+		Speed.SetVal( DifficultyHelper::Interp19( 5.6f, 16, u->Get( Upgrade_SPEED ) ) );
 
 		Width = Param( PieceSeed, DifficultyHelper::Interp159( 150, 120, 75, u->Get( Upgrade_ELEVATOR ) ) );
 
@@ -90,7 +90,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get BlockEmitter parameters
-		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameters>( level->Style->FindParams( BlockEmitter_AutoGen::getInstance() ) );
+		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameters>( level->getStyle()->FindParams( BlockEmitter_AutoGen::getInstance() ) );
 
 		Vector2 Pos = BL;
 		int count = 0;
@@ -107,7 +107,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 					float Vel = GetVel( Params, Pos );
 
 					bool Bottom = false;
-					switch ( level->Style->ElevatorSwitchType )
+					switch ( level->getStyle()->ElevatorSwitchType )
 					{
 						case StyleData::_ElevatorSwitchType_ALL_DOWN:
 							Bottom = true;
@@ -159,7 +159,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 						float Vel = GetVel( Params, Pos );
 
 						bool Left = false;
-						switch ( level->Style->ElevatorSwitchType )
+						switch ( level->getStyle()->ElevatorSwitchType )
 						{
 							case StyleData::_ElevatorSwitchType_ALL_DOWN:
 								Left = true;
@@ -202,7 +202,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 	{
 		//float SpeedAdd = Params.SpeedAdd.GetVal(Pos);
 
-		float Vel = Params->Speed_GET_VAL( Pos ) + 0;
+		float Vel = Params->Speed.GetVal( Pos ) + 0;
 		//Tools.ChooseOne(SpeedAdd, 0, -SpeedAdd);
 
 		//MyLevel.Rnd.RndFloat(-Params.SpeedAdd.GetVal(Pos),
@@ -233,7 +233,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 		bm->MyMoveType = static_cast<MovingPlatform::MoveType>( level->getRnd()->Rnd->Next(0, static_cast<int>(Params->Types.GetVal(Pos))) );
 		bm->Amp = Params->Amp.GetVal( Pos );
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			bm->getCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddObject( bm );

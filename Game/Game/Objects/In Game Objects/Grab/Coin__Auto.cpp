@@ -76,7 +76,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		level->CleanupCoins( BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
@@ -87,7 +87,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, bool NewOffset )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 
 		// Snap the coins to a grid
 		if ( Params->Grid )
@@ -145,7 +145,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;
@@ -157,7 +157,7 @@ const std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Co
 
 		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
-			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data.Position, Vector2(-200, -240)) || level->Style->Masochistic )
+			if ( !level->getMainCamera()->OnScreen((*bob)->getCore()->Data.Position, Vector2(-200, -240)) || level->getStyle()->Masochistic )
 				continue;
 
 			Vector2 pos = ( *bob )->getCore()->Data.Position;

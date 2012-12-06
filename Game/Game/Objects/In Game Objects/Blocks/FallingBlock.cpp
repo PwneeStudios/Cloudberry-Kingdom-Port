@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -12,7 +13,7 @@ namespace CloudberryKingdom
 		Group = PieceQuad::FallGroup;
 	}
 
-int FallingBlock::ResetTimerLength = 12;
+	int FallingBlock::ResetTimerLength = 12;
 
 	void FallingBlock::MakeNew()
 	{
@@ -176,7 +177,8 @@ int FallingBlock::ResetTimerLength = 12;
 			if ( getCore()->MyLevel->GetPhsxStep() % 2 == 0 )
 				if ( Life > 0 )
 				{
-					Offset = Vector2( getMyLevel()->getRnd()->Rnd->Next(-10, 10), getMyLevel()->getRnd()->Rnd->Next(-10, 10) );
+					Offset = Vector2( static_cast<float>( getMyLevel()->getRnd()->Rnd->Next(-10, 10) ),
+									  static_cast<float>( getMyLevel()->getRnd()->Rnd->Next(-10, 10) ) );
 				}
 		}
 		else

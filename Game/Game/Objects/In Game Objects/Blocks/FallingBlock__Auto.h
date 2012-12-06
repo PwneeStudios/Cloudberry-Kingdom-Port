@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<FallingBlock_AutoGen> &getInstance();
 
-	private:
+	public:
 		FallingBlock_AutoGen();
 
 	public:

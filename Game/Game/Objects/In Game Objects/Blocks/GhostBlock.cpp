@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -133,7 +132,7 @@ float GhostBlock::TallScale = 1.45f;
 			MyObject->PlayUpdate( MyAnimSpeed * getCore()->getIndependentDeltaT() );
 	}
 
-	const int &GhostBlock::getPeriod() const
+	const int GhostBlock::getPeriod() const
 	{
 		return InLength + OutLength;
 	}
@@ -340,14 +339,14 @@ int GhostBlock::LengthOfPhaseChange = 35;
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<GhostBlock> block = std::dynamic_pointer_cast<GhostBlock>( this );
+		std::shared_ptr<GhostBlock> block = std::dynamic_pointer_cast<GhostBlock>( shared_from_this() );
 
 		// Ghost blocks delete surrounding blocks when stamped as used
 		for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 		{
 			std::shared_ptr<GhostBlock> ghost = std::dynamic_pointer_cast<GhostBlock>( *gblock );
 			if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
-				if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - block->getCore()->Data.Position)->Length() < 200 )
+				if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - block->getCore()->Data.Position).Length() < 200 )
 				{
 					bob->DeleteObj( ghost );
 					ghost->setIsActive( false );

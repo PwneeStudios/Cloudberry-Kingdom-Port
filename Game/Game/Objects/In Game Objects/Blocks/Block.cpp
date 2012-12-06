@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -77,8 +74,9 @@ namespace CloudberryKingdom
 		ObjectData::Clone( A );
 
 		std::shared_ptr<BlockData> BlockDataA = std::dynamic_pointer_cast<BlockData>( A );
-		if ( BlockDataA == 0 )
-			throw ( std::exception( _T( "Can't copy block data from object data" ) ) );
+		// FIXME: Implement exceptions?
+		//if ( BlockDataA == 0 )
+		//	throw ( std::exception( _T( "Can't copy block data from object data" ) ) );
 
 		Safe = BlockDataA->Safe;
 
@@ -104,7 +102,7 @@ namespace CloudberryKingdom
 		Layer = BlockDataA->Layer;
 
 		Objects.clear();
-		Objects.AddRange( BlockDataA->Objects );
+		AddRange( Objects, BlockDataA->Objects );
 	}
 
 	void BlockData::Write( const std::shared_ptr<BinaryWriter> &writer )
@@ -134,7 +132,7 @@ namespace CloudberryKingdom
 
 		OnlyCollidesWithLowerLayers = reader->ReadBoolean();
 
-		Layer = reader->ReadInt32();
+		Layer = static_cast<float>( reader->ReadInt32() );
 	}
 
 	void BlockData::InitializeInstanceFields()
@@ -199,7 +197,7 @@ namespace CloudberryKingdom
 		if ( level->MyTileSet->FixedWidths )
 			group->SnapWidthUp( size );
 		MyBox->Initialize( center, size );
-		MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate(this, level->getRnd(), group);
+		MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), level->getRnd(), group);
 
 		getCore()->Data.Position = getBlockCore()->Data.Position = getBlockCore()->StartData.Position = center;
 
@@ -212,7 +210,7 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( shared_from_this() );
+		MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ) );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}
@@ -299,7 +297,7 @@ namespace CloudberryKingdom
 			//if (Box.TR.Y < bob.Box.BL.Y + 20) return true;
 
 
-			if ( std::dynamic_pointer_cast<BouncyBlock>( this ) != 0 )
+			if ( std::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
 				return true;
 
 			//BobPhsxMeat meat = (BobPhsxMeat)bob.MyPhsx;
@@ -357,7 +355,7 @@ namespace CloudberryKingdom
 		if ( meat->WantToLandOnTop && Col == ColType_TOP )
 			return false;
 
-		if ( std::dynamic_pointer_cast<BouncyBlock>( this ) != 0 )
+		if ( std::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
 			return false;
 
 		if ( Col == ColType_TOP )
@@ -410,7 +408,7 @@ namespace CloudberryKingdom
 		Delete |= PostCollideDecision_Side( bob, Col, Overlap );
 
 		// ???
-		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>(this) != 0 && !getBlockCore()->NonTopUsed) )
+		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>( shared_from_this() ) != 0 && !getBlockCore()->NonTopUsed) )
 			Delete = true;
 
 		// Don't land on the very edge of the block
@@ -418,7 +416,7 @@ namespace CloudberryKingdom
 
 		// Don't land on a block that says not to
 		bool DesiresDeletion = false;
-		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(std::static_pointer_cast<BlockBase>(this))->PermissionToUse() )
+		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(std::static_pointer_cast<BlockBase>( shared_from_this() ) )->PermissionToUse() )
 			DesiresDeletion = Delete = true;
 
 		if ( getCore()->GenData.Used )

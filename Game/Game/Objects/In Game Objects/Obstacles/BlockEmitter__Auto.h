@@ -43,7 +43,7 @@ public:
 	public:
 		const static std::shared_ptr<BlockEmitter_AutoGen> &getInstance();
 
-	private:
+	public:
 		BlockEmitter_AutoGen();
 
 	public:

@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -20,7 +21,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		MyStyle = static_cast<Style>( level->getRnd()->getRndEnum()<Style>() );
+		MyStyle = static_cast<Style>( level->getRnd()->RndInt(0, Ceiling_Parameters::Style_LENGTH ) );
 
 		if ( PieceSeed->getu()->Get( Upgrade_CEILING ) <= 0 )
 			Make = false;
@@ -75,7 +76,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->getStyle()->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		float MaxStartY = -100000;
 		for ( int i = 0; i < level->CurMakeData->NumInitialBobs; i++ )
@@ -89,7 +90,7 @@ const std::shared_ptr<Ceiling_AutoGen> Ceiling_AutoGen::instance = std::make_sha
 		if ( !level->MyTileSet->HasCeiling )
 			return;
 
-		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		std::shared_ptr<Ceiling_Parameters> Params = std::static_pointer_cast<Ceiling_Parameters>( level->getStyle()->FindParams( Ceiling_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

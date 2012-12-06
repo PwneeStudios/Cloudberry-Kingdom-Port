@@ -53,7 +53,7 @@ public:
 	public:
 		const static std::shared_ptr<MovingBlock_AutoGen> &getInstance();
 
-	private:
+	public:
 		MovingBlock_AutoGen();
 
 	public:

@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<SpikeyGuy_AutoGen> &getInstance();
 
-	protected:
+	public:
 		SpikeyGuy_AutoGen();
 
 	public:

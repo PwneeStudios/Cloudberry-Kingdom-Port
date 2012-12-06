@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -34,7 +32,7 @@ namespace CloudberryKingdom
 
 		float speed = 280 - 32 * u->Get( Upgrade_SPEED ) + 40 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_MOVING_BLOCK ) );
 		Period = Param( PieceSeed );
-		Period.SetVal( CoreMath::Restrict( 40, 1000, speed ) );
+		Period.SetVal( CoreMath::RestrictVal( 40.f, 1000.f, speed ) );
 	}
 
 	void MovingBlock_Parameters::InitializeInstanceFields()
@@ -96,7 +94,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 
 			case MovingBlock_Parameters::MotionType_CROSS:
 				mblock->MoveType = MovingBlockMoveType_LINE;
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					mblock->Displacement = Vector2( Displacement,.5f * Displacement );
 				else
 					mblock->Displacement = Vector2( -Displacement,.5f * Displacement );
@@ -109,21 +107,21 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 				break;
 
 			case MovingBlock_Parameters::MotionType_AA:
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_VERTICAL, Rnd );
 				else
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_HORIZONTAL, Rnd );
 				break;
 
 			case MovingBlock_Parameters::MotionType_STRAIGHT:
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_CROSS, Rnd );
 				else
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_AA, Rnd );
 				break;
 
 			case MovingBlock_Parameters::MotionType_ALL:
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_STRAIGHT, Rnd );
 				else
 					SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_CIRLCES, Rnd );
@@ -140,7 +138,7 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get MovingBlock parameters
-		std::shared_ptr<MovingBlock_Parameters> Params = std::static_pointer_cast<MovingBlock_Parameters>( level->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<MovingBlock_Parameters> Params = std::static_pointer_cast<MovingBlock_Parameters>( level->getStyle()->FindParams( MovingBlock_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 0 );
 		switch ( Params->Aspect )
@@ -156,14 +154,15 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 				break;
 		}
 
-		Vector2 offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
+		Vector2 offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+								  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
 
 		std::shared_ptr<MovingBlock> mblock = std::static_pointer_cast<MovingBlock>( level->getRecycle()->GetObject(ObjectType_MOVING_BLOCK, true) );
 		mblock->Init( pos + offset, size, level );
 
 		mblock->Period = static_cast<int>( Params->Period.GetVal( pos ) );
 
-		mblock->Offset = level->Style->GetOffset( mblock->Period, pos, level->Style->PendulumOffsetType );
+		mblock->Offset = level->getStyle()->GetOffset( mblock->Period, pos, level->getStyle()->PendulumOffsetType );
 
 
 		float Displacement = Params->Range.GetVal( pos );
@@ -174,9 +173,9 @@ const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::
 			SetMoveType( mblock, Displacement, MovingBlock_Parameters::MotionType_HORIZONTAL, level->getRnd() );
 
 		mblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
-		mblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+		mblock->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			mblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		Tools::EnsureBounds_X( mblock, TR, BL );

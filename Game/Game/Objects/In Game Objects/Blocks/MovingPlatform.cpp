@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -11,7 +10,7 @@ namespace CloudberryKingdom
 
 	const std::shared_ptr<BlockEmitter_Parameters> &MovingPlatform::getMyParams() const
 	{
-		return std::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->Style->FindParams(BlockEmitter_AutoGen::getInstance()) );
+		return std::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->getStyle()->FindParams(BlockEmitter_AutoGen::getInstance()) );
 	}
 
 	bool MovingPlatform::PermissionToUse()
@@ -93,7 +92,7 @@ namespace CloudberryKingdom
 	{
 		MyBoxStyle = boxstyle;
 
-		if ( boxstyle == BlockEmitter_Parameters::BoxStyle_FULL_BOX )
+		if ( boxstyle == BoxStyle_FULL_BOX )
 			getBox()->TopOnly = false;
 
 		//// Not TopOnly if hero is a spaceship.
@@ -159,7 +158,7 @@ namespace CloudberryKingdom
 		float t = static_cast<float>( Step ) / Period;
 
 		//MyBox.Target.Center = MyBox.Current.Center + CoreData.Data.Velocity;
-		MyBox->Target->Center = getCore()->StartData.Position + Step * getBlockCore()->Data.Velocity;
+		MyBox->Target->Center = getCore()->StartData.Position + static_cast<float>( Step ) * getBlockCore()->Data.Velocity;
 
 		switch ( MyMoveType )
 		{

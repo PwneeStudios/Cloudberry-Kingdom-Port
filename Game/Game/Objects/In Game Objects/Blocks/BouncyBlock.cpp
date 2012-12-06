@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -99,7 +98,7 @@ namespace CloudberryKingdom
 
 	void BouncyBlock::SideHit( const std::shared_ptr<Bob> &bob )
 	{
-		Offset = Vector2( Math::Sign( bob->getCore()->Data.Position.X - getCore()->Data.Position.X ), 0 );
+		Offset = Vector2( ::Sign( bob->getCore()->Data.Position.X - getCore()->Data.Position.X ), 0.f );
 		bob->MyPhsx->Forced( Offset );
 
 		Snap( bob );
@@ -180,7 +179,7 @@ namespace CloudberryKingdom
 		// Update the block's apparent center according to attached objects
 		getBlockCore()->UseCustomCenterAsParent = true;
 		getBlockCore()->CustomCenterAsParent = getBox()->Target->Center + Offset;
-		getBlockCore()->OffsetMultAsParent = Vector2(1) + Vector2::Divide(SizeOffset, getBox()->Current->Size);
+		getBlockCore()->OffsetMultAsParent = Vector2(1) + SizeOffset / getBox()->Current->Size;
 
 		if ( SizeOffset.X < .1f && State == BouncyBlockState_SUPER_STIFF )
 			SetState( BouncyBlockState_REGULAR );

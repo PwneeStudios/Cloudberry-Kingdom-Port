@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<FireSpinner_AutoGen> &getInstance();
 
-	private:
+	public:
 		FireSpinner_AutoGen();
 
 	public:

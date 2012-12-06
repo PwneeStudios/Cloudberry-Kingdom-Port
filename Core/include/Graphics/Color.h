@@ -93,11 +93,14 @@ struct Color
 	static Color Indigo;
 	static Color LightSeaGreen;
 	static Color LimeGreen;
+	static Color Orange;
+	static Color Olive;
 	static Color PowderBlue;
 	static Color Purple;
 	static Color Red;
 	static Color Silver;
 	static Color SkyBlue;
+	static Color SpringGreen;
 	static Color Transparent;
 	static Color White;
 	static Color WhiteSmoke;

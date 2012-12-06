@@ -46,7 +46,7 @@ public:
 	public:
 		const static std::shared_ptr<Laser_AutoGen> &getInstance();
 
-	private:
+	public:
 		Laser_AutoGen();
 
 	public:

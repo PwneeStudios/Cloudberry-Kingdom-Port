@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance();
 
-	private:
+	public:
 		FlyingBlob_AutoGen();
 
 	public:

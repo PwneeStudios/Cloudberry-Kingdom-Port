@@ -104,7 +104,7 @@ public:
 	public:
 		const static std::shared_ptr<Coin_AutoGen> &getInstance();
 
-	private:
+	public:
 		Coin_AutoGen();
 
 	public:

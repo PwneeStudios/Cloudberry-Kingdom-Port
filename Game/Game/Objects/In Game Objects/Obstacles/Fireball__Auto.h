@@ -43,7 +43,7 @@ public:
 	public:
 		const static std::shared_ptr<Fireball_AutoGen> &getInstance();
 
-	private:
+	public:
 		Fireball_AutoGen();
 
 	public:

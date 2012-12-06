@@ -126,6 +126,11 @@ public:
 		return *this;
 	}
 
+	Vector2 operator / ( const Vector2 &a )
+	{
+		return Vector2( X / a.X, Y / a.Y );
+	}
+
 	Vector2 operator + ( const Vector2 &a ) const
 	{
 		return Vector2( X + a.X, Y + a.Y );
@@ -313,6 +318,12 @@ public:
 	}
 
 };
+
+inline Vector4 operator * ( float k, const Vector4 &a )
+{
+	return a * k;
+}
+
 
 class Matrix
 {

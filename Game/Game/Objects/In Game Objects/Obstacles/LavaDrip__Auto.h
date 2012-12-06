@@ -46,7 +46,7 @@ public:
 	public:
 		const static std::shared_ptr<LavaDrip_AutoGen> &getInstance();
 
-	private:
+	public:
 		LavaDrip_AutoGen();
 
 	public:

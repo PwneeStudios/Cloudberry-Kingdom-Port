@@ -51,7 +51,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 		TR += Vector2( 350, 0 );
 
 		// Get LavaDrip parameters
-		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameters>( level->Style->FindParams( LavaDrip_AutoGen::getInstance() ) );
+		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameters>( level->getStyle()->FindParams( LavaDrip_AutoGen::getInstance() ) );
 
 		float step = 5;
 
@@ -74,7 +74,7 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 				LavaDrip_Renamed->BoxSize.Y = Params->Length.RndFloat( loc, level->getRnd() );
 				LavaDrip_Renamed->Init( loc, level );
 
-				int speed = static_cast<int>( Params->Speed_GET_VAL( loc ) );
+				int speed = static_cast<int>( Params->Speed.GetVal( loc ) );
 				LavaDrip_Renamed->SetPeriod( speed );
 
 				LavaDrip_Renamed->Offset = level->getRnd()->Rnd->Next(LavaDrip_Renamed->Period);

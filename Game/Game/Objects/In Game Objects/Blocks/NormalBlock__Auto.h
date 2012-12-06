@@ -44,7 +44,7 @@ public:
 	public:
 		const static std::shared_ptr<NormalBlock_AutoGen> &getInstance();
 
-	private:
+	public:
 		NormalBlock_AutoGen();
 
 	public:

@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<SpikeyLine_AutoGen> &getInstance();
 
-	private:
+	public:
 		SpikeyLine_AutoGen();
 
 	public:

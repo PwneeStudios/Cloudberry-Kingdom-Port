@@ -51,7 +51,7 @@ const std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_sha
 		TR += Vector2( 350, 0 );
 
 		// Get Serpent parameters
-		std::shared_ptr<Serpent_Parameters> Params = std::static_pointer_cast<Serpent_Parameters>( level->Style->FindParams( Serpent_AutoGen::getInstance() ) );
+		std::shared_ptr<Serpent_Parameters> Params = std::static_pointer_cast<Serpent_Parameters>( level->getStyle()->FindParams( Serpent_AutoGen::getInstance() ) );
 
 		float step = 5;
 

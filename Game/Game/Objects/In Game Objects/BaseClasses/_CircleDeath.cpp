@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -53,7 +52,7 @@ namespace CloudberryKingdom
 
 	void _CircleDeath::DrawBoxes()
 	{
-		Circle->Draw( Color( 50, 50, 255, 120 ) );
+		Circle->Draw( bColor( 50, 50, 255, 120 ) );
 	}
 
 	void _CircleDeath::Move( Vector2 shift )

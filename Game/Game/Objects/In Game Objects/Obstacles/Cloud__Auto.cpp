@@ -57,7 +57,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 		AutoGen::CreateAt( level, pos, BL, TR );
 
 		// Get Cloud parameters
-		std::shared_ptr<Cloud_Parameters> Params = std::static_pointer_cast<Cloud_Parameters>( level->Style->FindParams( Cloud_AutoGen::getInstance() ) );
+		std::shared_ptr<Cloud_Parameters> Params = std::static_pointer_cast<Cloud_Parameters>( level->getStyle()->FindParams( Cloud_AutoGen::getInstance() ) );
 
 		// Make the new cloud
 		pos += Vector2( level->getRnd()->Rnd->Next(0, 70), level->getRnd()->Rnd->Next(0, 70) );
@@ -68,7 +68,7 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 
 		NewCloud->getCore()->GenData.RemoveIfUnused = true;
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			NewCloud->getCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddObject( NewCloud );

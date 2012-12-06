@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 {
 	class Rand
 	{
+
 	public:
 		int MySeed;
 		Rand( int seed );

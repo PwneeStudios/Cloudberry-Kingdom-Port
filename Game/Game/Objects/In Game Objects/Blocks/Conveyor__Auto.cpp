@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -21,7 +22,7 @@ namespace CloudberryKingdom
 		Width = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 240, 60, u->Get( Upgrade_CONVEYOR ) ) );
 	}
 
-const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
+	const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
 
 	const std::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance()
 	{
@@ -53,7 +54,7 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 
 	std::shared_ptr<ConveyorBlock_Parameters> ConveyorBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<ConveyorBlock_Parameters>( level->Style->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
+		return std::static_pointer_cast<ConveyorBlock_Parameters>( level->getStyle()->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> ConveyorBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
@@ -69,9 +70,9 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 
 		int Width = static_cast<int>( Params->Width.GetVal( pos ) );
 		float Height = 60;
-		Vector2 size = Vector2( Width, Height );
+		Vector2 size = Vector2( static_cast<float>( Width ), static_cast<float>( Height ) );
 		//float speed = Params.Speed.GetVal(pos);
-		float speed = .35f * Params->Speed_GET_VAL( pos );
+		float speed = .35f * Params->Speed.GetVal( pos );
 
 		speed *= -1; //level.Rnd.RndBit();
 
@@ -82,9 +83,9 @@ const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = s
 		conveyblock->getBlockCore()->BlobsOnTop = true;
 
 		conveyblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
-		conveyblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+		conveyblock->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			conveyblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( conveyblock );

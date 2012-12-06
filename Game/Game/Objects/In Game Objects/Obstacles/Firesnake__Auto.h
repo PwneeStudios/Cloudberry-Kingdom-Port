@@ -40,7 +40,7 @@ public:
 	public:
 		const static std::shared_ptr<Firesnake_AutoGen> &getInstance();
 
-	private:
+	public:
 		Firesnake_AutoGen();
 
 	public:

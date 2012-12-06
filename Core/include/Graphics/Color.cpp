@@ -17,10 +17,13 @@ Color Color::HotPink( unsigned char( 255 ), unsigned char( 105 ), unsigned char(
 Color Color::Indigo( unsigned char( 75 ), unsigned char( 0 ), unsigned char( 130 ), unsigned char( 255 ) );
 Color Color::LightSeaGreen( unsigned char( 32 ), unsigned char( 178 ), unsigned char( 170 ), unsigned char( 255 ) );
 Color Color::LimeGreen( unsigned char( 50 ), unsigned char( 205 ), unsigned char( 0 ), unsigned char( 255 ) );
+Color Color::Olive( unsigned char( 128 ), unsigned char( 128 ), unsigned char( 0 ), unsigned char( 255 ) );
+Color Color::Orange( unsigned char( 255 ), unsigned char( 165 ), unsigned char( 0 ), unsigned char( 255 ) );
 Color Color::PowderBlue( unsigned char( 176 ), unsigned char( 224 ), unsigned char( 230 ), unsigned char( 255 ) );
 Color Color::Purple( unsigned char( 128 ), unsigned char( 0 ), unsigned char( 128 ), unsigned char( 255 ) );
 Color Color::Red( unsigned char( 255 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ) );
 Color Color::SkyBlue( unsigned char( 135 ), unsigned char( 206 ), unsigned char( 235 ), unsigned char( 255 ) );
+Color Color::SpringGreen( unsigned char( 0 ), unsigned char( 255 ), unsigned char( 127 ), unsigned char( 255 ) );
 Color Color::Transparent( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ) );
 Color Color::White( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
 Color Color::WhiteSmoke( unsigned char( 245 ), unsigned char( 245 ), unsigned char( 245 ), unsigned char( 255 ) );

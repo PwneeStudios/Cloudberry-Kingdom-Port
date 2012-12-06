@@ -5,32 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	class BouncyBlock;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class BouncyBlock_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -57,7 +31,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BouncyBlock_AutoGen> &getInstance();
 
-	private:
+	public:
 		BouncyBlock_AutoGen();
 
 	public:

@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -63,8 +62,8 @@ namespace CloudberryKingdom
 		{
 			if ( MyDraw->MyTemplate != 0 )
 			{
-				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate(this, getRnd(), getInfo()->MovingBlocks->Group);
-				MyDraw->Init( shared_from_this(), MyDraw->MyTemplate, false );
+				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->MovingBlocks->Group);
+				MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
 			}
 		}
 	}

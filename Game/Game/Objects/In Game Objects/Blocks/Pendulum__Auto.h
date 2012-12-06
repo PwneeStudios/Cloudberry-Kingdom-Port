@@ -43,7 +43,7 @@ public:
 	public:
 		const static std::shared_ptr<Pendulum_AutoGen> &getInstance();
 
-	private:
+	public:
 		Pendulum_AutoGen();
 
 	public:

@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<Spike_AutoGen> &getInstance();
 
-	private:
+	public:
 		Spike_AutoGen();
 
 	public:

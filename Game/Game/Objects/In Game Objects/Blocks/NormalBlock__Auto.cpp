@@ -68,7 +68,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 
 	std::shared_ptr<NormalBlock_Parameters> NormalBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<NormalBlock_Parameters>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		return std::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
 	}
 
 	void NormalBlock_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
@@ -76,7 +76,7 @@ const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( level->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
 
 		if ( Params->MyWall != 0 )
 			MakeWall( level );

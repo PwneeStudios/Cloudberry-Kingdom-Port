@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -87,12 +88,12 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get GhostBlock parameters
-		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameters>( level->Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameters>( level->getStyle()->FindParams( GhostBlock_AutoGen::getInstance() ) );
 
 		int InLength = static_cast<int>( Params->InLength.GetVal( pos ) );
 		int OutLength = static_cast<int>( Params->OutLength.GetVal( pos ) );
 		int Period = InLength + OutLength;
-		int Offset = level->getRnd()->Rnd->Next(Period);
+		int Offset = level->getRnd()->Rnd->Next( Period );
 
 		std::shared_ptr<GhostBlock> gblock = 0;
 		int NumGhosts = 1; // Number of ghosts to create
@@ -103,7 +104,7 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			Offset = ( Offset + i * Period / NumGhosts ) % Period;
 
 			int Width = static_cast<int>( Params->Width.GetVal( pos ) );
-			Vector2 size = Vector2( Width, Width );
+			Vector2 size = Vector2( static_cast<float>( Width ), static_cast<float>( Width ) );
 			//Vector2 offset = new Vector2(MyLevel.Rnd.Rnd.Next(-60, 0), MyLevel.Rnd.Rnd.Next(-60, 0) - size.Y);
 			Vector2 offset = Vector2();
 			if ( i == 1 )
@@ -122,10 +123,10 @@ const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::ma
 			gblock->getBlockCore()->BlobsOnTop = false;
 
 			gblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
-			gblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+			gblock->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 			gblock->TimeSafety = Params->TimeSafety.GetVal( pos );
 
-			if ( level->Style->RemoveBlockOnOverlap )
+			if ( level->getStyle()->RemoveBlockOnOverlap )
 				gblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 

@@ -133,7 +133,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	void FlyingBlob_AutoGen::Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		BL.X = level->FillBL.X;
 
@@ -174,7 +174,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 	void FlyingBlob_AutoGen::CleanupTunnel( const std::shared_ptr<Level> &level )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		std::vector<std::vector<unsigned long long> > GUIDs = Params->TunnelGUIDs;
 		std::vector<ObjectVec > Blobs = std::vector<ObjectVec >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
@@ -264,7 +264,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Tunnel )
 			Tunnel( level, BL, TR );
@@ -277,7 +277,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		AutoGen::Cleanup_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		/*if ( Params->Special.Tunnel )
 			CleanupTunnel( level );*/
@@ -392,7 +392,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		// Make the new blob
 		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );
@@ -402,7 +402,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		NewBlob->Period = static_cast<int>( Params->Period.GetVal( pos ) );
 
 		//NewBlob.Offset = MyLevel.Rnd.Rnd.Next(0, NewBlob.Period);
-		NewBlob->Offset = level->Style->GetOffset( NewBlob->Period, pos, level->Style->FlyingBlobOffsetType );
+		NewBlob->Offset = level->getStyle()->GetOffset( NewBlob->Period, pos, level->getStyle()->FlyingBlobOffsetType );
 
 		float Displacement = Params->Range.GetVal( pos );
 		SetMoveType( NewBlob, Displacement, Params->Motion, level->getRnd() );
@@ -413,7 +413,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		else
 			NewBlob->getCore()->GenData.RemoveIfUnused = true;
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			NewBlob->getCore()->GenData.RemoveIfOverlap = true;
 
 		NewBlob->getCore()->GenData.EdgeSafety = Params->EdgeSafety.GetVal(pos);

@@ -68,7 +68,7 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Pendulum parameters
-		std::shared_ptr<Pendulum_Parameters> Params = std::static_pointer_cast<Pendulum_Parameters>( level->Style->FindParams( Pendulum_AutoGen::getInstance() ) );
+		std::shared_ptr<Pendulum_Parameters> Params = std::static_pointer_cast<Pendulum_Parameters>( level->getStyle()->FindParams( Pendulum_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 40 );
 		Vector2 offset = Vector2( 0, -300 );
@@ -89,12 +89,12 @@ const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_s
 		p->MaxAngle *= .001f;
 		p->CalculateLength();
 
-		p->Offset = level->Style->GetOffset( p->Period, pos, level->Style->PendulumOffsetType );
+		p->Offset = level->getStyle()->GetOffset( p->Period, pos, level->getStyle()->PendulumOffsetType );
 
 		p->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
 		p->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			p->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		Tools::EnsureBounds_X( p, TR, BL );

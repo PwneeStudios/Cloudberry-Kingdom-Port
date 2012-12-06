@@ -69,7 +69,7 @@ public:
 	public:
 		const static std::shared_ptr<Boulder_AutoGen> &getInstance();
 
-	private:
+	public:
 		Boulder_AutoGen();
 
 	public:

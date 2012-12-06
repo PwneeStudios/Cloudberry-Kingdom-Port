@@ -45,7 +45,7 @@ public:
 	public:
 		const static std::shared_ptr<Serpent_AutoGen> &getInstance();
 
-	private:
+	public:
 		Serpent_AutoGen();
 
 	public:

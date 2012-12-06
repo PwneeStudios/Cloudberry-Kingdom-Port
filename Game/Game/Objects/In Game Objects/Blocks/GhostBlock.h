@@ -5,40 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class TextureOrAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleObject;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class GhostBlock : public BlockBase
 	{
+
 	public:
 		class GhostBlockTileInfo : public TileInfoBase
 		{
@@ -50,7 +19,7 @@ namespace CloudberryKingdom
 		private:
 			void InitializeInstanceFields();
 
-public:
+	public:
 			GhostBlockTileInfo()
 			{
 				InitializeInstanceFields();
@@ -102,7 +71,7 @@ public:
 
 		void AnimStep();
 
-		const int &getPeriod() const;
+		const int getPeriod() const;
 
 		/// <summary>
 		/// Gets the Ghosts current step in its periodic cycle,

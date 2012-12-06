@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
 	class Ceiling_Parameters : public AutoGen_Parameters
 	{
 	public:
@@ -28,7 +13,8 @@ namespace CloudberryKingdom
 			Style_NORMAL,
 			Style_SKIP_ONE,
 			Style_SPARSE,
-			Style_RANDOM
+			Style_RANDOM,
+			Style_LENGTH
 		};
 	public:
 		class _Special
@@ -79,7 +65,7 @@ public:
 	public:
 		const static std::shared_ptr<Ceiling_AutoGen> &getInstance();
 
-	private:
+	public:
 		Ceiling_AutoGen();
 
 	public:

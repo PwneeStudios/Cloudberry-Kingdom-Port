@@ -88,7 +88,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get emitter parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Period = static_cast<int>( Params->Period.GetVal( pos ) );
 		int Offset = Params->ChooseOffset( Period, level->getRnd() );
@@ -108,7 +108,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		}
 
 		float MaxAngle = Params->FireballMaxAngle.GetVal( pos );
-		if ( level->Style->Masochistic )
+		if ( level->getStyle()->Masochistic )
 			MaxAngle *= 1.25f;
 
 		double Angle = Fireball_AutoGen::GetAngle( MaxAngle, Params->NumAngles, level->getRnd() );
@@ -116,7 +116,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 			Angle += M_PI / 2;
 		emitter->getCore()->StartData.Velocity = CoreMath::AngleToDir(Angle);
 
-		if ( level->Style->Masochistic )
+		if ( level->getStyle()->Masochistic )
 			emitter->Period = static_cast<int>( .9f * emitter->Period );
 
 		float v = abs( 2 * emitter->getCore()->StartData.Position.Y / (.785f * emitter->Period) );
@@ -133,7 +133,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 
 	void Fireball_AutoGen::BorderFill( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		LevelGeometry Geometry = level->CurMakeData->PieceSeed->GeometryType;
 
@@ -171,7 +171,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 
 	std::shared_ptr<Fireball_Parameters> Fireball_AutoGen::GetParams( const std::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<Fireball_Parameters>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
+		return std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 
 	std::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
@@ -210,7 +210,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Length = level->CurPiece->PieceLength;
 
@@ -223,6 +223,6 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->Style->FindParams( Fireball_AutoGen::getInstance() ) );
+		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 }

@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<ConveyorBlock_AutoGen> &getInstance();
 
-	private:
+	public:
 		ConveyorBlock_AutoGen();
 
 	public:

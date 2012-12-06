@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -73,12 +74,13 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get FallingBlock parameters
-		std::shared_ptr<FallingBlock_Parameters> Params = std::static_pointer_cast<FallingBlock_Parameters>( level->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		std::shared_ptr<FallingBlock_Parameters> Params = std::static_pointer_cast<FallingBlock_Parameters>( level->getStyle()->FindParams( FallingBlock_AutoGen::getInstance() ) );
 
 		std::shared_ptr<FallingBlock> fblock;
 		float Width = Params->Width.GetVal( pos );
 		Vector2 size = Vector2( Width, Width );
-		Vector2 offset = Vector2( level->getRnd()->Rnd->Next(0, 0), level->getRnd()->Rnd->Next(0, 0) - size.Y );
+		Vector2 offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
+								  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
 
 		fblock = std::static_pointer_cast<FallingBlock>( level->getRecycle()->GetObject(ObjectType_FALLING_BLOCK, true) );
 		int Life = static_cast<int>( Params->Delay.GetVal( pos ) );
@@ -86,7 +88,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 		fblock->getBlockCore()->BlobsOnTop = true;
 
 		fblock->getBlockCore()->Decide_RemoveIfUnused(Params->KeepUnused.GetVal(pos), level->getRnd());
-		fblock->getBlockCore()->GenData.EdgeSafety = GenData->Get(DifficultyParam_EDGE_SAFETY, pos);
+		fblock->getBlockCore()->GenData.EdgeSafety = static_cast<float>( GenData->Get(DifficultyParam_EDGE_SAFETY, pos) );
 
 		if ( level->getRnd()->Rnd->NextDouble() < Params->AngryRatio.GetVal(pos) / 100 )
 		{
@@ -96,7 +98,7 @@ const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std
 			fblock->AngryAccel = Vector2( 0, Params->AngryAccel.GetVal( pos ) / 100 );
 		}
 
-		if ( level->Style->RemoveBlockOnOverlap )
+		if ( level->getStyle()->RemoveBlockOnOverlap )
 			fblock->getBlockCore()->GenData.RemoveIfOverlap = true;
 
 		level->AddBlock( fblock );

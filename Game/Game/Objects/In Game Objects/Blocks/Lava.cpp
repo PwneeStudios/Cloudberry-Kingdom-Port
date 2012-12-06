@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -94,7 +95,7 @@ namespace CloudberryKingdom
 		float h = MyBox->TR.Y;
 
 		if ( bob->Box->BL.Y < h - 40 )
-			bob->Die( Bob::BobDeathType_LAVA );
+			bob->Die( BobDeathType_LAVA );
 	}
 
 	void LavaBlock::PhsxStep()
@@ -186,7 +187,7 @@ namespace CloudberryKingdom
 		// If the computer gets close, move the lava block down
 		if ( bob->Box->Current->TR.X > getBox()->Current->BL.X && bob->Box->Current->BL.X < getBox()->Current->TR.X )
 		{
-			bob->getCore()->MyLevel->PushLava(bob->Box->Target->BL.Y - 60, this);
+			bob->getCore()->MyLevel->PushLava( bob->Box->Target->BL.Y - 60, std::static_pointer_cast<LavaBlock>( shared_from_this() ) );
 		}
 
 		return true;

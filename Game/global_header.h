@@ -629,6 +629,11 @@ public:
 		return 0;
 	}
 
+	int Next( int high )
+	{
+		return Next( 0, high );
+	}
+
 	double NextDouble()
 	{
 		return 0;
