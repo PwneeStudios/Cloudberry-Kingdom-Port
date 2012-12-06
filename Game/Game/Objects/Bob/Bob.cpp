@@ -89,10 +89,10 @@ int Bob::ImmortalLength = 55;
 		PlayerObject = std::make_shared<ObjectClass>( obj, BoxesOnly, false );
 		Vector2 size = PlayerObject->BoxList[ 0 ]->Size();
 		float ratio = size.Y / size.X;
-		int width = Tools::TheGame->Resolution.Bob_Renamed::X;
+		int width = Tools::TheGame->Resolution.Bob_Renamed.X;
 
 		//PlayerObject.FinishLoading();
-		PlayerObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PresentationParameters, width, static_cast<int>( width * ratio ), false );
+		PlayerObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, width, static_cast<int>( width * ratio ), false );
 
 		Head.reset();
 	}
@@ -119,11 +119,10 @@ int Bob::ImmortalLength = 55;
 
 			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
 			{
-				if ( ( *quad )->Name->find( _T( "Hat_" ) ) != string::npos )
+				if ( Contains( ( *quad )->Name, _T( "Hat_" ) ) )
 				{
 					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-					if ( std::wstring::Compare( ( *quad )->Name, scheme.HatData->QuadName, StringComparison::OrdinalIgnoreCase ) == 0 )
+					if ( CompareIgnoreCase( ( *quad )->Name, scheme.HatData->QuadName ) == 0 )
 					{
 						( *quad )->Show = scheme.HatData->DrawSelf;
 
@@ -138,11 +137,11 @@ int Bob::ImmortalLength = 55;
 					}
 				}
 
-				if ( ( *quad )->Name->find( _T( "Facial_" ) ) != string::npos )
+				if ( Contains( ( *quad )->Name, _T( "Facial_" ) ) )
 				{
 					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
-					if ( !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && string::Compare( ( *quad )->Name, scheme.BeardData->QuadName, StringComparison::OrdinalIgnoreCase ) == 0 )
+
+					if ( !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && CompareIgnoreCase( ( *quad )->Name, scheme.BeardData->QuadName ) == 0 )
 					{
 						( *quad )->Show = scheme.BeardData->DrawSelf;
 
@@ -163,34 +162,36 @@ int Bob::ImmortalLength = 55;
 		std::shared_ptr<CloudberryKingdom::BaseQuad> q = PlayerObject->FindQuad( _T( "MainQuad" ) );
 		if ( q != 0 )
 		{
-			q->setMyMatrix( scheme.SkinColor.M );
+			q->setMyMatrix( scheme.SkinColor->M );
 
 			std::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( _T( "Wings_Front" ) );
 			if ( wf != 0 )
-				wf->setMyMatrix( scheme.SkinColor.M );
+				wf->setMyMatrix( scheme.SkinColor->M );
 			std::shared_ptr<CloudberryKingdom::BaseQuad> wb = PlayerObject->FindQuad( _T( "Wings_Back" ) );
 			if ( wb != 0 )
-				wb->setMyMatrix( scheme.SkinColor.M );
+				wb->setMyMatrix( scheme.SkinColor->M );
 		}
 
 		if ( MyCape != 0 )
 		{
-			if ( scheme.CapeColor.Clr.A == 0 || scheme.CapeOutlineColor.Clr.A == 0 )
+			if ( scheme.CapeColor->Clr.A == 0 || scheme.CapeOutlineColor->Clr.A == 0 )
+			{
 				MyCape->setMyOutlineColor( Color::Transparent );
-			MyCape->setMyColor( MyCape->getMyOutlineColor() );
+				MyCape->setMyColor( MyCape->getMyOutlineColor() );
+			}
 			else
 			{
-				MyCape->setMyColor( scheme.CapeColor.Clr );
-				MyCape->setMyOutlineColor( scheme.CapeOutlineColor.Clr );
+				MyCape->setMyColor( scheme.CapeColor->Clr );
+				MyCape->setMyOutlineColor( scheme.CapeOutlineColor->Clr );
 			}
 
-			MyCape->MyQuad->Quad_Renamed.MyTexture = scheme.CapeColor.Texture;
-			MyCape->MyQuad->Quad_Renamed.MyEffect = scheme.CapeColor.Effect;
+			MyCape->MyQuad->Quad_Renamed.setMyTexture( scheme.CapeColor->Texture );
+			MyCape->MyQuad->Quad_Renamed.MyEffect = scheme.CapeColor->Effect;
 
-			if ( scheme.CapeColor.ModObject != 0 )
-				scheme.CapeColor.ModObject->Apply( shared_from_this() );
+			if ( scheme.CapeColor->ModObject != 0 )
+				scheme.CapeColor->ModObject->Apply( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
-			if ( scheme.CapeColor.Clr.A == 0 || scheme.CapeOutlineColor.Clr.A == 0 )
+			if ( scheme.CapeColor->Clr.A == 0 || scheme.CapeOutlineColor->Clr.A == 0 )
 				ShowCape = false;
 		}
 
@@ -204,9 +205,9 @@ int Bob::ImmortalLength = 55;
 		ControlFunc.reset();
 	}
 
-std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
+	std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
 
-	const std::shared_ptr<PlayerData> &Bob::getMyPlayerData() const
+	const std::shared_ptr<PlayerData> Bob::getMyPlayerData() const
 	{
 		return PlayerManager::Get( MyPlayerIndex );
 	}
@@ -220,12 +221,12 @@ std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
 
 	std::shared_ptr<AABox> Bob::GetBox( int DifficultyLevel )
 	{
-		int index = CoreMath::Restrict( 0, Boxes.size() - 1, DifficultyLevel );
+		int index = CoreMath::RestrictVal( 0, Boxes.size() - 1, DifficultyLevel );
 		return Boxes[ index ];
 	}
 
-const std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
-std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const std::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
+	std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
@@ -663,7 +664,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 
 		if ( pad.IsConnected )
 		{
-			if ( pad.Buttons->A == ButtonState::Pressed )
+			if ( pad.Buttons.A == ButtonState::Pressed )
 			{
 				CurInput.A_Button = true;
 			}
@@ -1605,7 +1606,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			// Create list of boxes
 			if ( Boxes.empty() )
 			{
-				Boxes = std::vector<AABox*>();
+				Boxes = std::vector<std::shared_ptr<AABox> >();
 				for ( int i = 0; i <= NumBoxes; i++ )
 					Boxes.push_back( std::make_shared<AABox>( Vector2(), Vector2(1) ) );
 			}

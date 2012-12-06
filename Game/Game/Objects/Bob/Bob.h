@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<EzSound> JumpSound_Default, DieSound_Default;
 
 		PlayerIndex MyPlayerIndex;
-		const std::shared_ptr<PlayerData> &getMyPlayerData() const;
+		const std::shared_ptr<PlayerData> getMyPlayerData() const;
 
 
 		bool TryPastTop;
@@ -188,7 +188,7 @@ namespace CloudberryKingdom
 		/// A list of boxes to allow for different difficulty levels for different obstacles.
 		/// </summary>
 	private:
-		std::vector<AABox*> Boxes;
+		std::vector<std::shared_ptr<AABox> > Boxes;
 		int NumBoxes;
 
 	public:

@@ -21,6 +21,11 @@ inline std::wstring ToLower( const std::wstring &s )
 	return lower;
 }
 
+inline bool Contains( const std::wstring big_string, const std::wstring inside_string )
+{
+	return big_string.find( inside_string ) != std::wstring::npos;
+}
+
 inline int CompareIgnoreCase( const std::wstring &s1, const std::wstring &s2)
 {
 	std::wstring::const_iterator it1, it2;
