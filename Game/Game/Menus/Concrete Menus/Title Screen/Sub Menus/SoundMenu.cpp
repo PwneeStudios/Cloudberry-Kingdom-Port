@@ -89,14 +89,14 @@ namespace CloudberryKingdom
 		AddItem( MusicSlider );
 
 		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
-		item->setGo( std::make_shared<InitHideHelper>( shared_from_this() ) );
+		item->setGo( std::make_shared<InitHideHelper>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		item->Name = _T( "Controls" );
 		AddItem( item );
 
 	#if defined(PC_VERSION)
 		// Custom controls
 		std::shared_ptr<MenuItem> mitem = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) );
-		mitem->setGo( std::make_shared<InitCallCustomControlsHelper>( shared_from_this() ) );
+		mitem->setGo( std::make_shared<InitCallCustomControlsHelper>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		mitem->Name = _T( "Custom" );
 		AddItem( mitem );
 
@@ -114,31 +114,17 @@ namespace CloudberryKingdom
 		int CurRez = 0;
 
 		// Get viable resolutions
-		std::vector<std::shared_ptr<DisplayMode> > modes = std::vector<std::shared_ptr<DisplayMode> >();
-		for ( DisplayModeCollection::const_iterator mode = GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.begin(); mode != GraphicsAdapter::DefaultAdapter->SupportedDisplayModes.end(); ++mode )
-		{
-			bool Any = false;
-			for ( std::vector<std::shared_ptr<DisplayMode> >::const_iterator existing = modes.begin(); existing != modes.end(); ++existing )
-			{
-				if ( ( *existing )->Width == ( *mode )->Width && ( *existing )->Height == ( *mode )->Height )
-					Any = true;
-			}
-
-			if ( Any )
-				continue;
-			else
-				modes.push_back( *mode );
-		}
+		std::vector<std::shared_ptr<DisplayMode> > modes = GetSupportedDisplayModes();
 
 		// Add resolutions to the current list
 		bool found = false;
-		for ( std::vector<DisplayMode*>::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
+		for ( std::vector<std::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
 			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;
 			Tools::Write( str );
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( str, ItemFont, false, true ) );
 			SetItemProperties( item );
-			FsRezList->AddItem( item, *mode );
+			FsRezList->AddItem( item, MakeSmartObject( *mode ) );
 
 			if ( ( *mode )->Width == Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferWidth && ( *mode )->Height == Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferHeight )
 			{
@@ -174,7 +160,7 @@ namespace CloudberryKingdom
 		MakeBackButton();
 		SetPosition();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -193,7 +179,7 @@ namespace CloudberryKingdom
 
 		// Toggle
 		std::shared_ptr<MenuToggle> Toggle = std::make_shared<MenuToggle>( ItemFont );
-		Toggle->OnToggle = std::make_shared<Toggle_BorderlessProxy>( shared_from_this() );
+		Toggle->OnToggle = std::make_shared<Toggle_BorderlessProxy>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) );
 		Toggle->Toggle( Tools::WindowBorder );
 		Toggle->Name = _T( "WindowBorderToggle" );
 		AddItem( Toggle );

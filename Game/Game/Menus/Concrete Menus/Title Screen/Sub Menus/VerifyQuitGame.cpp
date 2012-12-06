@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -20,16 +18,14 @@ namespace CloudberryKingdom
 	{
 	}
 
-int VerifyQuitGameMenu2::Version = 1;
-
 	void VerifyQuitGameMenu2::MakeBackdrop()
 	{
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( 0, true, false );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
 		backdrop->setTextureName( _T( "Backplate_1230x740" ) );
 		backdrop->ScaleYToMatchRatio( 1000 );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 
-		Berry = std::make_shared<QuadClass>( 0, true, false );
+		Berry = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
 		Berry->setTextureName( _T( "cb_crying" ) );
 		MyPile->Add( Berry, _T( "Berry" ) );
 
@@ -80,10 +76,8 @@ int VerifyQuitGameMenu2::Version = 1;
 		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Localization::Words_EXIT_GAME, ItemFont );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
-		if ( Version_Renamed == 0 )
-			HeaderText->setPos( Vector2( -915.4741f, 967.5232f ) );
-		if ( Version_Renamed == 1 )
-			HeaderText->setPos( Vector2( -701.1883f, 816.7295f ) );
+
+		HeaderText->setPos( Vector2( -701.1883f, 816.7295f ) );
 
 		// Yes
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
@@ -95,13 +89,13 @@ int VerifyQuitGameMenu2::Version = 1;
 		// No
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
 		item->Name = _T( "No" );
-		item->setGo( std::make_shared<MenuReturnToCallerLambda>( shared_from_this() ) );
+		item->setGo( std::make_shared<MenuReturnToCallerLambda>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->AdditionalOnSelect = std::make_shared<InitTextureNameSetter>( Berry, _T( "cb_enthusiastic" ) );
 		item->SelectSound.reset();
 		BackSound.reset();
 		AddItem( item );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );

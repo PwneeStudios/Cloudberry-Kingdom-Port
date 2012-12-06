@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class VerifyQuitGameMenu2 : public VerifyBaseMenu
 	{
 	private:
@@ -40,10 +22,6 @@ namespace CloudberryKingdom
 
 	public:
 		VerifyQuitGameMenu2( int Control );
-
-		//public static int Version = 0;
-//C# TO C++ CONVERTER NOTE: The variable Version was renamed since it is named the same as a user-defined type:
-		static int Version_Renamed;
 
 	private:
 		std::shared_ptr<QuadClass> Berry;

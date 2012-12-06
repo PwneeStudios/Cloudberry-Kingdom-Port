@@ -154,13 +154,20 @@ static TimeSpan operator - ( DateTime dt1, DateTime dt2 )
 }
 
 
-class DisplayMode
+class DisplayMode : public Object
 {
+
+public:
+	int Width, Height;
+
 };
 
-class DisplayModeCollection
+/// Gets all supported display modes for the running machine.
+std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
 {
-};
+	// FIXME: Implement.
+	return std::vector<std::shared_ptr<DisplayMode> >();
+}
 
 class Effect
 {
