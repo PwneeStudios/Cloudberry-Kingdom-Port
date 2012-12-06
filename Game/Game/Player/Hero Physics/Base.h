@@ -65,6 +65,7 @@ namespace CloudberryKingdom
 			{
 			public:
 				float DefaultValue, MinValue, MaxValue;
+				DataBounds() : DefaultValue( 0 ), MinValue( 0 ), MaxValue( 0 ) { }
 				DataBounds( float DefaultValue, float MinValue, float MaxValue );
 			};
 

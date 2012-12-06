@@ -550,7 +550,80 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<BobPhsx> BobPhsx::Clone()
 	{
-		return std::static_pointer_cast<BobPhsx>( MemberwiseClone() );
+		// FIXME: Verify MemberwiseClone() behavior.
+
+		std::shared_ptr<BobPhsx> newBob = std::make_shared<BobPhsx>();
+		newBob->CustomPhsx = CustomPhsx;
+		newBob->MyCustomPhsxData = MyCustomPhsxData;
+		newBob->Specification = Specification;
+		newBob->Name = Name;
+		newBob->Id = Id;
+		newBob->Adjective = Adjective;
+		newBob->NameTemplate = NameTemplate;
+		newBob->Icon = Icon;
+		newBob->DefaultIconWidth = DefaultIconWidth;
+		newBob->Prototype = Prototype;
+		newBob->CapePrototype = CapePrototype;
+		newBob->CapeOffset = CapeOffset;
+		newBob->CapeOffset_Ducking = CapeOffset_Ducking;
+		newBob->CapeGravity = CapeGravity;
+		newBob->ModCapeSize = ModCapeSize;
+		newBob->DollCamZoomMod = DollCamZoomMod;
+		newBob->HeroDollShift = HeroDollShift;
+		newBob->SingletonInitialized = SingletonInitialized;
+		newBob->MyBob = MyBob;
+		newBob->BlobMod = BlobMod;
+		newBob->Ducking = Ducking;
+		newBob->DuckingCount = DuckingCount;
+		newBob->MustHitGroundToReadyJump = MustHitGroundToReadyJump;
+		newBob->MaxSpeed = MaxSpeed;
+		newBob->XAccel = XAccel;
+		newBob->Gravity = Gravity;
+		newBob->ForceDown = ForceDown;
+		newBob->BobMaxFallSpeed = BobMaxFallSpeed;
+		newBob->OnGround = OnGround;
+		newBob->PrevOnGround = PrevOnGround;
+		newBob->Jumped = Jumped;
+		newBob->AirTime = AirTime;
+		newBob->UseGroundSpeed = UseGroundSpeed;
+		newBob->JumpStartPos = JumpStartPos;
+		newBob->ApexReached = ApexReached;
+		newBob->OverrideSticky = OverrideSticky;
+		newBob->MaxJumpAccelMultiple = MaxJumpAccelMultiple;
+		newBob->JumpAccelModifier = JumpAccelModifier;
+		newBob->JumpLengthModifier = JumpLengthModifier;
+		newBob->SpritePadding = SpritePadding;
+		newBob->DisableJumpCount = DisableJumpCount;
+		newBob->ModInitSize = ModInitSize;
+		newBob->DoubleJumpModel = DoubleJumpModel;
+		newBob->JetpackModel = JetpackModel;
+		newBob->ThrustType = ThrustType;
+		newBob->GroundSpeed = GroundSpeed;
+		newBob->Oscillate_Renamed = Oscillate_Renamed;
+		newBob->ExplosionScale = ExplosionScale;
+		newBob->RunAnimSpeed = RunAnimSpeed;
+		newBob->ScaledFactor = ScaledFactor;
+		newBob->OscillateSize1 = OscillateSize1;
+		newBob->OscillateSize2 = OscillateSize2;
+		newBob->OscillatePeriod = OscillatePeriod;
+		newBob->OscillateGravity1 = OscillateGravity1;
+		newBob->OscillateGravity2 = OscillateGravity2;
+		newBob->ReverseDirectionBoost = ReverseDirectionBoost;
+		newBob->DoFastTakeOff = DoFastTakeOff;
+		newBob->ReverseDirectionBoostMod = ReverseDirectionBoostMod;
+		newBob->FricMod = FricMod;
+		newBob->AccelMod = AccelMod;
+		newBob->IceRun = IceRun;
+		newBob->PrevVel = PrevVel;
+		newBob->PrevPos = PrevPos;
+		newBob->SameInputDirectionCount = SameInputDirectionCount;
+		newBob->FirstPhsxStep = FirstPhsxStep;
+		newBob->ObjectLandedOn = ObjectLandedOn;
+		newBob->LastUsedStamp = LastUsedStamp;
+		newBob->PlacedJump = PlacedJump;
+		newBob->NextJumpIsPlacedJump = NextJumpIsPlacedJump;
+
+		return newBob;
 	}
 
 	void BobPhsx::KillJump()
@@ -700,9 +773,9 @@ namespace CloudberryKingdom
 
 		// Copy another bob's input
 		//if (MyBob.MyPieceIndex > 0 && MyBob.MoveData.Copy >= 0)
-		if ( MyBob->MoveData.Copy >= 0 )
+		if ( MyBob->MoveData->Copy >= 0 )
 		{
-			MyBob->CurInput = MyBob->getCore()->MyLevel->Bobs[ MyBob->MoveData.Copy ]->CurInput;
+			MyBob->CurInput = MyBob->getCore()->MyLevel->Bobs[ MyBob->MoveData->Copy ]->CurInput;
 		}
 
 		// Stay left of lowest bob
@@ -725,7 +798,7 @@ namespace CloudberryKingdom
 		if ( MyBob->CurInput.xVec.X < 0 )
 			MyBob->PlayerObject->xFlip = true;
 
-		if ( MyBob->MoveData.InvertDirX && MyBob->CurInput.xVec.X != 0 )
+		if ( MyBob->MoveData->InvertDirX && MyBob->CurInput.xVec.X != 0 )
 			MyBob->PlayerObject->xFlip = !MyBob->PlayerObject->xFlip;
 
 		return HoldFlip != MyBob->PlayerObject->xFlip;
