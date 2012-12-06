@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -24,7 +23,7 @@ namespace CloudberryKingdom
 		MaxForce = 5.15f;
 	}
 
-	const bool &BobLink::getInactive() const
+	const bool BobLink::getInactive() const
 	{
 		// Don't draw the bungee if we are a dead spaceship or if we explode on death and are dead
 		if ( ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode ) || std::dynamic_pointer_cast<BobPhsxSpaceship>( j->getCore()->MyLevel->DefaultHeroType ) != 0 && (j->Dead || j->Dying || k->Dead || k->Dying) )
@@ -55,7 +54,7 @@ namespace CloudberryKingdom
 		if ( getInactive() )
 			return;
 
-		float Length = ( j->getCore()->Data.Position - k->getCore()->Data.Position )->Length();
+		float Length = ( j->getCore()->Data.Position - k->getCore()->Data.Position ).Length();
 
 		Vector2 Tangent = ( j->getCore()->Data.Position - k->getCore()->Data.Position );
 
@@ -70,7 +69,7 @@ namespace CloudberryKingdom
 		else
 			Force = a_in * ( Length - L );
 		if ( abs( Force ) > MaxForce )
-			Force = Math::Sign( Force ) * MaxForce;
+			Force = ::Sign( Force ) * MaxForce;
 
 		Vector2 Bottom = Vector2::Min( j->getCore()->Data.Position, k->getCore()->Data.Position );
 		if ( bob->getCore()->Data.Position.Y > Bottom.Y )

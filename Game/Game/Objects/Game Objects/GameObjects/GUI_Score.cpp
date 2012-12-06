@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -108,10 +106,10 @@ namespace CloudberryKingdom
 
 			font = Resources::Font_Grobold42;
 			scale = .5f;
-			c = Color( 228, 0, 69 );
+			c = bColor( 228, 0, 69 );
 			o = Color::White;
 
-			ScoreText = std::make_shared<EzText>( ToString(), font, 950, false, true );
+			ScoreText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
 			ScoreText->setScale( scale );
 			ScoreText->setPos( Vector2( 381.4434f, 85.55492f ) );
 			ScoreText->MyFloatColor = c.ToVector4();

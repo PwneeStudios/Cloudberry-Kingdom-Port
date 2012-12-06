@@ -204,7 +204,7 @@ public:
 		/// before showing a note that explains how to open the door.
 		/// </summary>
 	private:
-		const int &getDelayToShowNote() const;
+		const int getDelayToShowNote() const;
 
 		/// <summary> This length is used only for the first time a player opens a door. </summary>
 		int _DelayToShowNote_First;

@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -17,7 +15,7 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_NextLife::GetViewables()
 	{
-		return std::vector<std::shared_ptr<std::wstring> > ();
+		return std::vector<std::wstring>();
 	}
 
 	const int &GUI_NextLife::getCoins() const
@@ -53,8 +51,8 @@ namespace CloudberryKingdom
 		std::shared_ptr<TextFloat> text = std::make_shared<TextFloat>( Localization::Words_EXTRA_LIFE, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
 		text->MyText->setScale( text->MyText->getScale() * 1.33f );
 		text->getCore()->DrawLayer = 8;
-		text->MyText->MyFloatColor = ( Color( 0, 195, 17 ) ).ToVector4();
-		text->MyText->OutlineColor = ( Color( 0, 80, 8 ) ).ToVector4();
+		text->MyText->MyFloatColor = ( bColor( 0, 195, 17 ) ).ToVector4();
+		text->MyText->OutlineColor = ( bColor( 0, 80, 8 ) ).ToVector4();
 		getCore()->MyLevel->MyGame->AddGameObject(text);
 	}
 
@@ -106,17 +104,16 @@ namespace CloudberryKingdom
 			font = Resources::Font_Grobold42;
 			coin = _T( "coin_blue" );
 			scale = .55f;
-			c = Color( 228, 0, 69 );
+			c = bColor( 228, 0, 69 );
 			o = Color::White;
 		}
 
-		CoinsText = std::make_shared<EzText>( ToString(), font, 450, false, true );
+		CoinsText = std::make_shared<EzText>( ToString(), font, 450.f, false, true );
 		CoinsText->Name = _T( "coin" );
 		CoinsText->setScale( scale );
 		CoinsText->MyFloatColor = c.ToVector4();
 		CoinsText->OutlineColor = o.ToVector4();
 
-//C# TO C++ CONVERTER NOTE: The variable Coin was renamed since it is named the same as a user-defined type:
 		std::shared_ptr<QuadClass> Coin_Renamed = std::make_shared<QuadClass>();
 		Coin_Renamed->Name = _T( "coin" );
 		Coin_Renamed->SetToDefault();
@@ -157,7 +154,7 @@ namespace CloudberryKingdom
 	{
 		GameObject::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<GUI_NextLife>( shared_from_this() ) ) );
 	}
 
 	void GUI_NextLife::ReleaseBody()

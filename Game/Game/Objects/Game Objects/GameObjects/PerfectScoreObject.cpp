@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -54,8 +55,8 @@ namespace CloudberryKingdom
 
 		Eligible = true;
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
-		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( shared_from_this() ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
+		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( std::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
 
 		OnAdd_GUI();
 	}
@@ -198,12 +199,12 @@ int PerfectScoreObject::GlobalBonus = 0;
 		Init_GUI();
 	}
 
-	const float &PerfectScoreObject::getMultiplier() const
+	const float PerfectScoreObject::getMultiplier() const
 	{
 		if ( MyGame == 0 )
-			return getNextBonus() / getBaseBonus();
+			return static_cast<float>( getNextBonus() / getBaseBonus() );
 		else
-			return MyGame->ScoreMultiplier * getNextBonus() / getBaseBonus();
+			return static_cast<float>( MyGame->ScoreMultiplier * getNextBonus() / getBaseBonus() );
 	}
 
 	void PerfectScoreObject::MyPhsxStep()
@@ -263,10 +264,10 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 		font = Resources::Font_Grobold42;
 		scale = .666f;
-		c = Color( 228, 0, 69 );
+		c = bColor( 228, 0, 69 );
 		o = Color::White;
 
-		Text = std::make_shared<EzText>( ToString(), font, 950, false, true );
+		Text = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
 		Text->setScale( scale );
 		Text->setPos( Vector2( 0, 0 ) );
 		Text->MyFloatColor = c.ToVector4();

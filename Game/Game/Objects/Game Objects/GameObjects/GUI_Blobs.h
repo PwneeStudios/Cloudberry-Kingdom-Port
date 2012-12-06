@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 
 		virtual void Show();
 
-		const Vector2 &getApparentPos() const;
+		const Vector2 getApparentPos() const;
 
 	private:
 		std::shared_ptr<QuadClass> Blob;

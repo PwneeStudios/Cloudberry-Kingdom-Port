@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -124,11 +122,11 @@ namespace CloudberryKingdom
 		{
 			font = Resources::Font_Grobold42;
 			scale = .55f;
-			c = Color( 228, 0, 69 );
+			c = bColor( 228, 0, 69 );
 			o = Color::White;
 		}
 
-		LevelText = std::make_shared<EzText>( ToString(), font, 950, false, true );
+		LevelText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
 		LevelText->setScale( scale );
 		LevelText->MyFloatColor = c.ToVector4();
 		LevelText->OutlineColor = o.ToVector4();

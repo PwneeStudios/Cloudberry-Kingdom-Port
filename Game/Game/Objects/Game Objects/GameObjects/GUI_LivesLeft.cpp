@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -102,17 +103,17 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		MyPile->Add( std::make_shared<QuadClass>( _T( "Bob_Stand_0001" ), 130, true ), _T( "Bob" ) );
+		MyPile->Add( std::make_shared<QuadClass>( _T( "Bob_Stand_0001" ), 130.f, true ), _T( "Bob" ) );
 
-		LivesLeftText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 450, false, true );
+		LivesLeftText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 450.f, false, true );
 		LivesLeftText->Name = _T( "Text" );
 		LivesLeftText->setScale( .53f );
 		LivesLeftText->setPos( Vector2( 187, -16 ) );
-		LivesLeftText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		LivesLeftText->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		LivesLeftText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		LivesLeftText->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 
 		LivesLeftText->ShadowOffset = Vector2( -11, 11 );
-		LivesLeftText->ShadowColor = Color( 65, 65, 65, 160 );
+		LivesLeftText->ShadowColor = bColor( 65, 65, 65, 160 );
 		LivesLeftText->PicShadow = false;
 		MyPile->Add( LivesLeftText );
 
@@ -166,7 +167,7 @@ namespace CloudberryKingdom
 
 		// Fade in and out
 		MyPile->setAlpha( 0 );
-		MyGame->WaitThenDo( InitialDelay, std::make_shared<BringInitialDelayHelper>( shared_from_this() ), _T( "Start lives left bring" ), true, false );
+		MyGame->WaitThenDo( InitialDelay, std::make_shared<BringInitialDelayHelper>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ), _T( "Start lives left bring" ), true, false );
 	}
 
 	void GUI_LivesLeft::Reset( bool BoxesOnly )
@@ -184,16 +185,16 @@ namespace CloudberryKingdom
 		// Black background
 		if ( UseBlackBack )
 		{
-			std::shared_ptr<QuadClass> Black = std::make_shared<QuadClass>( _T( "White" ), 1 );
+			std::shared_ptr<QuadClass> Black = std::make_shared<QuadClass>( _T( "White" ), 1.f );
 			Black->FullScreen( MyGame->getCam() );
 			Black->Quad_Renamed.SetColor( Color::Black );
 			Black->Scale( 2 );
 			MyPile->Insert( 0, Black );
 		}
 
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( shared_from_this() ) );
+		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 		//MyGame.ToDoOnDoneDying.Add(OnDoneDying);
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( shared_from_this() ) );
+		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( MyGame->MyLevel != 0 )
 			PreventResetOnLastLife( MyGame->MyLevel );
@@ -201,7 +202,7 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnReset()
 	{
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( shared_from_this() ) );
+		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		std::shared_ptr<Level> level = getCore()->MyLevel;
 
@@ -229,13 +230,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDoneDying()
 	{
-		MyGame->ToDoOnDoneDying.push_back( std::make_shared<OnDoneDyingProxy>( shared_from_this() ) );
+		MyGame->ToDoOnDoneDying.push_back( std::make_shared<OnDoneDyingProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( shared_from_this() );
+				OnOutOfLives->Apply( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
 
 			Release();
 			return;
@@ -244,13 +245,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDeath()
 	{
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( shared_from_this() ) );
+		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( shared_from_this() );
+				OnOutOfLives->Apply( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
 
 			Release();
 			return;

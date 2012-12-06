@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -27,11 +26,11 @@ const float PressNote::TextScale = .555f / .7f *.8f;
 		getCore()->ParentObject = Parent;
 
 		std::shared_ptr<QuadClass> backdrop;
-		backdrop = std::make_shared<QuadClass>( _T( "Cloud1" ), 300, true );
+		backdrop = std::make_shared<QuadClass>( _T( "Cloud1" ), 300.f, true );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( -189.0432f, -27.00623f ) );
 		backdrop->setSize( Vector2( 303.8582f, 157.471f ) );
-		backdrop = std::make_shared<QuadClass>( _T( "Cloud1" ), 300, true );
+		backdrop = std::make_shared<QuadClass>( _T( "Cloud1" ), 300.f, true );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 106.59253f, -69.44446f ) );
 		backdrop->setSize( Vector2( 288.4258f, 149.755f ) );

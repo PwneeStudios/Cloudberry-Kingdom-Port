@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -58,15 +56,15 @@ namespace CloudberryKingdom
 		text->setScale( text->getScale() * scale );
 
 		//// Happy Blue
-		//text.MyFloatColor = new Color(26, 188, 241).ToVector4();
-		//text.OutlineColor = new Color(255, 255, 255).ToVector4();
+		//text.MyFloatColor = new bColor(26, 188, 241).ToVector4();
+		//text.OutlineColor = new bColor(255, 255, 255).ToVector4();
 
 		// Red
 		CkColorHelper::_x_x_Red( text );
 
 		text->Shadow = true;
 		text->ShadowOffset = Vector2( 10.5f, 10.5f );
-		text->ShadowColor = Color( 30, 30, 30 );
+		text->ShadowColor = bColor( 30, 30, 30 );
 	}
 
 	void MultiplierUp::MyPhsxStep()
@@ -77,7 +75,7 @@ namespace CloudberryKingdom
 
 		// Make sure we're on top
 		if ( !getCore()->Released && getCore()->MyLevel != 0 )
-			getCore()->MyLevel->MoveToTopOfDrawLayer(this);
+			getCore()->MyLevel->MoveToTopOfDrawLayer( shared_from_this() );
 
 		// Do nothing if this is permanent
 		if ( Perma )

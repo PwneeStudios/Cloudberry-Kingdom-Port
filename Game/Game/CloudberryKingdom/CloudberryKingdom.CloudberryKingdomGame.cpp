@@ -1,9 +1,12 @@
 #include <global_header.h>
 
-namespace Forms = System::Windows::Forms;
-
 namespace CloudberryKingdom
 {
+	void CloudberryKingdomGame::StaticIntializer_NoDependence()
+	{
+		Bob::StaticInitializer();
+	}
+
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
@@ -184,6 +187,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	CloudberryKingdomGame::CloudberryKingdomGame()
 	{
+		StaticIntializer_NoDependence();
+
 		InitializeInstanceFields();
 		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );
 		MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );

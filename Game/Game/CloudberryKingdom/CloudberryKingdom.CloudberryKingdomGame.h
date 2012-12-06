@@ -8,6 +8,10 @@ namespace CloudberryKingdom
 	class CloudberryKingdomGame
 	{
 	public:
+		void StaticIntializer_NoDependence();
+
+
+	public:
 		class ExitProxy : public Lambda
 		{
 		private:

@@ -46,59 +46,6 @@ template<typename T>
 		return false;
 	}
 
-std::vector<long long> StringBuilderExtension::digits = std::vector<long long>( max_digits );
-
-	void StringBuilderExtension::ClearDigits()
-	{
-		for ( int i = 0; i < max_digits; i++ )
-			digits[ i ] = 0;
-	}
-
-	int StringBuilderExtension::LastDigit()
-	{
-		for ( int i = max_digits - 1; i >= 0; i-- )
-			if ( digits[ i ] > 0 )
-				return i;
-		return 0;
-	}
-
-const wchar_t tempVector[] = { L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9' };
-std::vector<wchar_t> StringBuilderExtension::digit_char = std::vector<wchar_t>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-
-	void StringBuilderExtension::DigitsToString( const std::shared_ptr<StringBuilder> &str, int NumDigits )
-	{
-		for ( int i = NumDigits - 1; i >= 0; i-- )
-			str->Append( digit_char[ static_cast<unsigned int>( digits[ i ] ) ] );
-	}
-
-	void StringBuilderExtension::Add( const std::shared_ptr<StringBuilder> &str, long long num )
-	{
-		Add( str, num, 1 );
-	}
-
-	void StringBuilderExtension::Add( const std::shared_ptr<StringBuilder> &str, long long num, int MinDigits )
-	{
-		if ( num < 0 )
-		{
-			str->Append( L'-' );
-			num *= -1;
-		}
-
-		ClearDigits();
-
-		for ( int i = max_digits - 1; i >= 0; i-- )
-		{
-			double Pow = pow( 10.0, i );
-			long long _pow = static_cast<long long>( floor( Pow + 0.5 ) );
-			long long digit = num / _pow;
-			digits[ i ] = digit;
-			num -= _pow * digit;
-		}
-
-		int DigitsToAppend = __max( LastDigit() + 1, MinDigits );
-		DigitsToString( str, DigitsToAppend );
-	}
-
 	/*template<typename T>
 	T ListExtension::Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd )
 	{

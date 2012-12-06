@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -15,26 +14,26 @@ namespace CloudberryKingdom
 		UpdateTimerText();
 	}
 
-	const int &GUI_Timer_Base::getMinutes() const
+	const int GUI_Timer_Base::getMinutes() const
 	{
 		return static_cast<int>( getTime() / (60 * 62) );
 	}
 
-	const int &GUI_Timer_Base::getSeconds() const
+	const int GUI_Timer_Base::getSeconds() const
 	{
 		return static_cast<int>( ( getTime() - 60 * 62 * getMinutes() ) / 62 );
 	}
 
-	const int &GUI_Timer_Base::getMilliseconds() const
+	const int GUI_Timer_Base::getMilliseconds() const
 	{
-		float Remainder = getTime() - 60 * 62 * getMinutes() - 62 * getSeconds();
+		float Remainder = getTime() - 60.f * 62.f * getMinutes() - 62.f * getSeconds();
 
 		return static_cast<int>( 100 * Remainder / 62 );
 	}
 
 	std::shared_ptr<StringBuilder> GUI_Timer_Base::BuildString()
 	{
-		MyString->Length = 0;
+		MyString->setLength( 0 );
 
 		if ( getMinutes() > 0 )
 		{
@@ -91,7 +90,7 @@ namespace CloudberryKingdom
 		GUI_Panel::ReleaseBody();
 	}
 
-	const Vector2 &GUI_Timer_Base::getApparentPos() const
+	const Vector2 GUI_Timer_Base::getApparentPos() const
 	{
 		return TimerText->FancyPos->AbsVal + TimerText->GetWorldSize() / 2;
 	}
@@ -132,12 +131,11 @@ namespace CloudberryKingdom
 		{
 			font = Resources::Font_Grobold42;
 			scale = .75f;
-			c = Color( 228, 0, 69 );
+			c = bColor( 228, 0, 69 );
 			o = Color::White;
 		}
 
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		TimerText = std::make_shared<EzText>( BuildString()->ToString(), font, 450, true, true );
+		TimerText = std::make_shared<EzText>( BuildString()->ToString(), font, 450.f, true, true );
 		TimerText->setScale( scale );
 		TimerText->MyFloatColor = c.ToVector4();
 		TimerText->OutlineColor = o.ToVector4();
@@ -170,7 +168,7 @@ namespace CloudberryKingdom
 		if ( getTime() == 0 )
 		{
 			if ( OnTimeExpired != 0 )
-				OnTimeExpired->Apply( shared_from_this() );
+				OnTimeExpired->Apply( std::static_pointer_cast<GUI_Timer_Base>( shared_from_this() ) );
 
 			return;
 		}

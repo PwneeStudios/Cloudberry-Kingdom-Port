@@ -42,58 +42,6 @@ namespace CloudberryKingdom
 		static bool GE( Vector2 v1, Vector2 v2 );
 	};
 
-	/// <summary>
-	/// This extension to the StringBuilder class allows garbage free concatenation
-	/// of string representations of integers.
-	/// </summary>
-	class StringBuilderExtension
-	{
-		/// <summary>
-		/// The maximum number of digits an integer can be
-		/// </summary>
-	private:
-		static const int max_digits = 15;
-
-		/// <summary>
-		/// A working array to store digits of an integer
-		/// </summary>
-		static std::vector<long long> digits;
-
-		/// <summary>
-		/// Clear the working array to allow for a new number to be constructed
-		/// </summary>
-		static void ClearDigits();
-
-		/// <summary>
-		/// Returns the index of the last digit of the number being constructed
-		/// </summary>
-		/// <returns></returns>
-		static int LastDigit();
-
-		/// <summary>
-		/// The characters associated with each possible digit
-		/// </summary>
-		static std::vector<wchar_t> digit_char;
-
-		/// <summary>
-		/// Takes the digits from a number (already stored in a work array)
-		/// and adds them to a StringBuilder
-		/// </summary>
-		static void DigitsToString( const std::shared_ptr<StringBuilder> &str, int NumDigits );
-
-		/// <summary>
-		/// Add a string representation of a number to a StringBuilder
-		/// </summary>
-	public:
-		static void Add( const std::shared_ptr<StringBuilder> &str, long long num );
-		/// <summary>
-		/// Add a string representation of a number to a StringBuilder
-		/// </summary>
-		/// <param name="MinDigits">The minimum number of digits used in the string.
-		/// The string is padded with zeros to the left if needed.</param>
-		static void Add( const std::shared_ptr<StringBuilder> &str, long long num, int MinDigits );
-	};
-
 	class ListExtension
 	{
 	public:

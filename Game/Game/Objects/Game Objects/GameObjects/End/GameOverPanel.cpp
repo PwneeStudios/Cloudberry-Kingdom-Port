@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -67,7 +68,7 @@ namespace CloudberryKingdom
 	void GameOverPanel::OnEnterLambda::Apply()
 	{
 		// Use the entered text as the GamerTag
-		gop->HighScoreEntry->GamerTag = gop->HighLevelEntry->GamerTag = gop->MyTextBox->Text;
+		gop->HighScoreEntry->GamerTag_Renamed = gop->HighLevelEntry->GamerTag_Renamed = gop->MyTextBox->getText();
 
 		// Add the high score
 		gop->AddScore();
@@ -170,7 +171,7 @@ namespace CloudberryKingdom
 		// Initially hide the score screen
 		this->SlideOut( PresetPos_TOP, 0 );
 
-		MyGame->WaitThenDo( Awardments::AwardDelay(), std::make_shared<OnAddHelper>(this) );
+		MyGame->WaitThenDo( Awardments::AwardDelay(), std::make_shared<OnAddHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 	}
 
 	void GameOverPanel::Create()
@@ -178,16 +179,16 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 
 		// Make the backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score\\Score_Screen" ), 1440 );
-		backdrop->Quad_Renamed.SetColor( Color( 220, 220, 220 ) );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score\\Score_Screen" ), 1440.f );
+		backdrop->Quad_Renamed.SetColor( bColor( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'Game Over' text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_GAME_OVER, Resources::Font_Grobold42_2, 1450, false, true,.6f );
+		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_GAME_OVER, Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
 		Text->setScale( 1 );
-		Text->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		Text->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		Text->setPos( Vector2( -675.6388f, 575.4443f ) );
 		MyPile->Add( Text, _T( "Header" ) );
 		//Text.Shadow = true;
@@ -196,14 +197,14 @@ namespace CloudberryKingdom
 
 
 		// 'Levels' text
-		MyPile->Add( std::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, _T( "Level" ) ) );
+		MyPile->Add( std::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( _T( "Level" ) ) ) );
 		Text = std::make_shared<EzText>( Format( _T( "{0}" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
 		MyPile->Add( Text, _T( "Level" ) );
 
 		// 'Score' text
-		MyPile->Add( std::make_shared<EzText>( Localization::Words_SCORE, ItemFont, _T( "Score" ) ) );
+		MyPile->Add( std::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( _T( "Score" ) ) ) );
 		Text = std::make_shared<EzText>( Format( _T( "{0}" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
@@ -264,7 +265,7 @@ namespace CloudberryKingdom
 		MyMenu->Show = MyMenu->Active = false;
 
 		// Show the menu when the user is done entering their name
-		MyTextBox->OnEnter->Add( std::make_shared<OnEnterLambda>( shared_from_this() ) );
+		MyTextBox->OnEnter->Add( std::make_shared<OnEnterLambda>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 	}
 #endif
 
@@ -287,7 +288,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
-		text->MyFloatColor = ( Color( 255, 254, 252 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 255, 254, 252 ) ).ToVector4();
 		//text.MyFloatColor = new Color(255, 232, 77).ToVector4();
 		text->setScale( text->getScale() * 1.48f );
 
@@ -307,15 +308,15 @@ namespace CloudberryKingdom
 		FontScale *= .89f * 1.16f;
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_PlayAgainProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_PlayAgainProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_ShowHighScoresProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_ShowHighScoresProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_DoneProxy>( shared_from_this() ) ) );
+		item->setGo( Cast::ToItem( std::make_shared<Action_DoneProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 	}
 
@@ -323,8 +324,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::SetItemProperties( item );
 
-		item->MyText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 	}
 
 	void GameOverPanel::Action_Done()
@@ -333,7 +334,7 @@ namespace CloudberryKingdom
 		Active = false;
 
 		Tools::SongWad->FadeOut();
-		MyGame->WaitThenDo( 36, std::make_shared<Action_DoneHelper>( shared_from_this() ) );
+		MyGame->WaitThenDo( 36, std::make_shared<Action_DoneHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 
 		return;
 	}
@@ -345,7 +346,7 @@ namespace CloudberryKingdom
 
 		Tools::SongWad->FadeOut();
 
-		MyGame->WaitThenDo( 36, std::make_shared<Action_PlayAgainHelper>( shared_from_this() ) );
+		MyGame->WaitThenDo( 36, std::make_shared<Action_PlayAgainHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 		return;
 	}
 

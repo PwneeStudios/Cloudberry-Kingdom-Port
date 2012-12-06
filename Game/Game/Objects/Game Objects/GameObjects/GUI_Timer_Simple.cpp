@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -22,6 +21,6 @@ namespace CloudberryKingdom
 
 		this->setTime( Time );
 
-		OnTimeExpired->Add( std::make_shared<SimpleOnExpireLambda>( shared_from_this() ) );
+		OnTimeExpired->Add( std::make_shared<SimpleOnExpireLambda>( std::static_pointer_cast<GUI_Timer_Simple>( shared_from_this() ) ) );
 	}
 }

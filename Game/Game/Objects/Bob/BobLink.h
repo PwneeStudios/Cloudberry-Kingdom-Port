@@ -5,15 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
 
-
-
-namespace CloudberryKingdom
-{
-	class BobLink
+	class BobLink : public std::enable_shared_from_this<BobLink>
 	{
+
 	public:
 		int _j, _k;
 		std::shared_ptr<Bob> j, k;
@@ -23,7 +18,7 @@ namespace CloudberryKingdom
 
 		BobLink();
 
-		const bool &getInactive() const;
+		const bool getInactive() const;
 
 		void Draw();
 

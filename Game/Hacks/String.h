@@ -16,7 +16,7 @@ int GetHashCode( const std::wstring &s )
 inline std::wstring ToLower( const std::wstring &s )
 {
 	std::wstring lower = s;
-	std::transform(lower.begin(), lower.end(), lower.begin(), ::tolower);
+	std::transform( lower.begin(), lower.end(), lower.begin(), ::tolower );
 
 	return lower;
 }

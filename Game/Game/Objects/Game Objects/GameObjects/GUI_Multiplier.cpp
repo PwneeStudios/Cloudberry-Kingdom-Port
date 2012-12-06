@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -99,20 +97,20 @@ namespace CloudberryKingdom
 		{
 			font = Resources::Font_Grobold42;
 			scale = .5f;
-			c = Color( 228, 0, 69 );
+			c = bColor( 228, 0, 69 );
 			o = Color::White;
 		}
 
 		if ( Style == 0 )
 		{
-			MultiplierText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 950, false, true );
+			MultiplierText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 950.f, false, true );
 			MultiplierText->setScale( .95f );
 			MultiplierText->setPos( Vector2( 187, 130 ) );
-			MultiplierText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
+			MultiplierText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		}
 		else if ( Style == 1 )
 		{
-			MultiplierText = std::make_shared<EzText>( ToString(), font, 950, false, true );
+			MultiplierText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
 			MultiplierText->setScale( scale );
 			MultiplierText->setPos( Vector2( 381.4434f, 85.55492f ) );
 			MultiplierText->MyFloatColor = c.ToVector4();

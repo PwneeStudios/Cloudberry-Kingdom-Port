@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -51,7 +49,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::ReleaseBody();
 
 		if ( Panels.size() > 0 )
-			for ( int i = 0; i < Panels.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Panels.size() ); i++ )
 				Panels[ i ]->Release();
 		Panels.clear();
 	}
@@ -75,48 +73,45 @@ namespace CloudberryKingdom
 		SlideIn();
 	}
 
-const std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
-std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	const std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
+	std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
-	HighScorePanel::HighScorePanel( ... )
+	HighScorePanel::HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
 		InitializeInstanceFields();
-		MultiInit( false, Scores );
+		MultiInit( false, scorelist, levellist );
 	}
 
-	HighScorePanel::HighScorePanel( bool Instant, ... )
+	HighScorePanel::HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
 		InitializeInstanceFields();
-		MultiInit( Instant, Scores );
+		MultiInit( Instant, scorelist, levellist );
 	}
 
-	void HighScorePanel::MultiInit( bool Instant, ... )
+	void HighScorePanel::MultiInit( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
 		this->Instant = Instant;
 
-		OnOutsideClick = std::make_shared<HighScoreReturnToCallerLambda>( shared_from_this() );
+		OnOutsideClick = std::make_shared<HighScoreReturnToCallerLambda>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) );
 		CheckForOutsideClick = true;
 
-		Constructor( Scores[ 0 ] );
+		Constructor( scorelist );
 
-		Panels = std::vector<HighScorePanel*>( Scores->Length );
+		Panels = std::vector<std::shared_ptr<HighScorePanel> >( 2 );
 
-		Panels[ 0 ] = this;
+		Panels[ 0 ] = std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 		Panels[ 0 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
-		for ( int i = 1; i < Scores->Length; i++ )
-		{
-			Panels[ i ] = std::make_shared<HighScorePanel>( Scores[ i ] );
-			Panels[ i ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
-		}
+		Panels[ 1 ] = std::make_shared<HighScorePanel>( levellist );
+		Panels[ 1 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
-		for ( int i = 0; i < Scores->Length; i++ )
+		for ( int i = 0; i < 2; i++ )
 			Panels[ i ]->MakeSwapText();
 	}
 
 	void HighScorePanel::SwapPanels()
 	{
-		for ( int i = 0; i < Panels.size() - 1; i++ )
+		for ( int i = 0; i < static_cast<int>( Panels.size() ) - 1; i++ )
 			Tools::Swap( Panels[ i ]->MyPile, Panels[ i + 1 ]->MyPile );
 
 		MyPile->Jiggle( true, 8,.3f );
@@ -134,15 +129,15 @@ std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring
 		CkBaseMenu::OnAdd();
 	}
 
-Vector4 HighScorePanel::ScoreColor = ( Color( 255, 255, 255 ) ).ToVector4();
-Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4();
+	Vector4 HighScorePanel::ScoreColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+	Vector4 HighScorePanel::CurrentScoreColor = ( bColor( 22, 22, 222 ) ).ToVector4();
 
 	void HighScorePanel::Create()
 	{
 		MyPile = std::make_shared<DrawPile>();
 
 		// Make the backdrop
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500, true );
+		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500.f, true );
 		Backdrop->setDegrees( 90 );
 		Backdrop->setTextureName( _T( "Score\\Score_Screen_grey" ) );
 
@@ -150,10 +145,10 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		Backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'High Score' text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( MyScoreList->GetHeader(), Resources::Font_Grobold42_2, 1450, false, true,.6f );
+		std::shared_ptr<EzText> Text = std::make_shared<EzText>( MyScoreList->GetHeader(), Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
 		Text->setScale( .8f );
-		Text->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		Text->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		Text->setPos( Vector2( -675.6388f, 585 ) );
 		MyPile->Add( Text, _T( "Header" ) );
 		Text->Shadow = false;
@@ -218,8 +213,8 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		if ( SwapText != 0 )
 		{
 			SwapText->setScale( .8f );
-			SwapText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-			SwapText->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+			SwapText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+			SwapText->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 
 			MyPile->Add( SwapText );
 			SwapText->ShadowColor = Color( .36f,.36f,.36f,.86f );
@@ -231,9 +226,9 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
-		text->MyFloatColor = ( Color( 255, 254, 252 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 255, 254, 252 ) ).ToVector4();
 
-		text->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		text->setScale( text->getScale() * 1.48f );
 
 		text->Shadow = false;
@@ -252,15 +247,15 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		FontScale *= .89f * 1.16f;
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( std::make_shared<Action_PlayAgainProxy1>( shared_from_this() ) );
+		item->setGo( std::make_shared<Action_PlayAgainProxy1>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
-		item->getGo().reset();
+		item->_Go.reset();
 		AddItem( item );
 
 		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( std::make_shared<Action_DoneProxy1>( shared_from_this() ) );
+		item->setGo( std::make_shared<Action_DoneProxy1>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 	}
 
@@ -268,8 +263,8 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 	{
 		CkBaseMenu::SetItemProperties( item );
 
-		item->MyText->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		item->MySelectedText->MyFloatColor = ( Color( 50, 220, 50 ) ).ToVector4();
+		item->MyText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 	}
 
 	void HighScorePanel::Action_Done()
@@ -277,7 +272,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( shared_from_this(), false ) );
+		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ), false ) );
 		return;
 	}
 
@@ -286,7 +281,7 @@ Vector4 HighScorePanel::CurrentScoreColor = ( Color( 22, 22, 222 ) ).ToVector4()
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( shared_from_this(), true ) );
+		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ), true ) );
 		return;
 	}
 

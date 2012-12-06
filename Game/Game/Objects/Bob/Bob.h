@@ -8,6 +8,9 @@ namespace CloudberryKingdom
 	class Bob : public ObjectBase
 	{
 	public:
+		static void StaticInitializer();
+
+	public:
 		class BobMove
 		{
 		public:
@@ -273,13 +276,13 @@ namespace CloudberryKingdom
 		/// Whether we can kill the current player.
 		/// The player must be player controlled and not already dead.
 		/// </summary>
-		const bool &getCanDie() const;
+		const bool getCanDie() const;
 
 		/// <summary>
 		/// Whether we can finish a current level.
 		/// The player must be player controlled and not already dead.
 		/// </summary>
-		const bool &getCanFinish() const;
+		const bool getCanFinish() const;
 
 		void DyingPhsxStep();
 

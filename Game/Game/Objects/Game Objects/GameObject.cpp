@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -29,7 +27,7 @@ namespace CloudberryKingdom
 	{
 		if ( MyGame == 0 )
 			if ( getCore()->MyLevel->MyGame != 0 )
-				getCore()->MyLevel->MyGame->WaitThenDo(0, std::make_shared<AddGameObjectToCoreHelper>(this));
+				getCore()->MyLevel->MyGame->WaitThenDo(0, std::make_shared<AddGameObjectToCoreHelper>( std::static_pointer_cast<GameObject>( shared_from_this() ) ) );
 
 		return MyGame == 0;
 	}
@@ -197,7 +195,7 @@ namespace CloudberryKingdom
 		AffectGamePause();
 
 		if ( getCore()->MyLevel != 0 )
-			getCore()->MyLevel->OnCameraChange->Add(std::make_shared<OnCameraChangeProxy>(this));
+			getCore()->MyLevel->OnCameraChange->Add(std::make_shared<OnCameraChangeProxy>( std::static_pointer_cast<GameObject>( shared_from_this() ) ) );
 	}
 
 	void GameObject::OnCameraChange()

@@ -39,10 +39,10 @@ namespace CloudberryKingdom
 
 		ResetMultiplier();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
-		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( shared_from_this() ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
+		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
 
-		MyGame->OnCalculateCoinScoreMultiplier->Add( std::make_shared<OnCalculateCoinScoreMultiplierProxy>( shared_from_this() ) );
+		MyGame->OnCalculateCoinScoreMultiplier->Add( std::make_shared<OnCalculateCoinScoreMultiplierProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
 	}
 
 	void CoinScoreMultiplierObject::ReleaseBody()

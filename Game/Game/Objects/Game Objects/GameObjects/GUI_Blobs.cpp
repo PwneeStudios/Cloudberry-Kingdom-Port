@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -51,13 +50,13 @@ namespace CloudberryKingdom
 			{
 				// On Quoate Met
 				if ( OnQuotaMet != 0 )
-					OnQuotaMet->Apply( shared_from_this() );
+					OnQuotaMet->Apply( std::static_pointer_cast<GUI_Blobs>( shared_from_this() ) );
 
 				// Emphasize
 				MyPile->BubbleUp( true );
 
 				// Hide
-				MyGame->WaitThenDo( 28, std::make_shared<MyPhsxStepHelper>( shared_from_this() ), _T( "" ), true, true );
+				MyGame->WaitThenDo( 28, std::make_shared<MyPhsxStepHelper>( std::static_pointer_cast<GUI_BlobQuota>( shared_from_this() ) ), _T( "" ), true, true );
 
 				//FinalDoor.SetLock(false);
 
@@ -84,7 +83,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<StringBuilder> GUI_Blobs::BuildString()
 	{
-		MyString->Length = 0;
+		MyString->setLength( 0 );
 
 		MyString->Add( Blobs, 1 );
 		MyString->Append( L'/' );
@@ -130,7 +129,7 @@ namespace CloudberryKingdom
 		SlideIn( 50 );
 	}
 
-	const Vector2 &GUI_Blobs::getApparentPos() const
+	const Vector2 GUI_Blobs::getApparentPos() const
 	{
 		return Text->FancyPos->AbsVal + Text->GetWorldSize() / 2;
 	}
@@ -163,20 +162,20 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<QuadClass> cloud = std::make_shared<QuadClass>( _T( "Cloud1" ), 150, true );
+		std::shared_ptr<QuadClass> cloud = std::make_shared<QuadClass>( _T( "Cloud1" ), 150.f, true );
 		cloud->setPos( Vector2( 193.0659f, -22.74048f ) );
 		cloud->setSize( Vector2( 465.5865f, 259.2372f ) );
 		MyPile->Add( cloud );
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		Text = std::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42_2, 450, false, false );
+		Text = std::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42_2, 450.f, false, false );
 		Text->setScale( .55f );
 		Text->setPos( Vector2( 0.3707275f, 73.3901f ) );
-		Text->MyFloatColor = ( Color( 255, 255, 255 ) ).ToVector4();
-		Text->OutlineColor = ( Color( 0, 0, 0 ) ).ToVector4();
+		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
+		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Blob = std::make_shared<QuadClass>( _T( "Score\\Blob" ), 150, true );
+		Blob = std::make_shared<QuadClass>( _T( "Score\\Blob" ), 150.f, true );
 		Blob->setPos( Vector2( -26.84131f, 11.98175f ) );
 		Blob->setSize( Vector2( 122.2223f, 193.6508f ) );
 		Blob->ScaleXToMatchRatio();

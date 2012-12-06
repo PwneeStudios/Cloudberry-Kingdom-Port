@@ -3,11 +3,14 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
+
 	class HighScorePanel : public CkBaseMenu
 	{
+	public:
+		using GUI_Panel::SlideIn;
+
 	private:
 		class HighScoreReturnToCallerLambda : public Lambda
 		{
@@ -73,18 +76,12 @@ namespace CloudberryKingdom
 
 	private:
 		static std::vector<std::wstring> TextureName;
-		std::vector<HighScorePanel*> Panels;
+		std::vector<std::shared_ptr<HighScorePanel> > Panels;
 
 	public:
-//ORIGINAL LINE: public HighScorePanel(params ScoreList[] Scores)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		HighScorePanel( ... );
-//ORIGINAL LINE: public HighScorePanel(bool Instant, params ScoreList[] Scores)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		HighScorePanel( bool Instant, ... );
-//ORIGINAL LINE: public void MultiInit(bool Instant, params ScoreList[] Scores)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		void MultiInit( bool Instant, ... );
+		HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
+		HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
+		void MultiInit( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
 
 	private:
 		void SwapPanels();

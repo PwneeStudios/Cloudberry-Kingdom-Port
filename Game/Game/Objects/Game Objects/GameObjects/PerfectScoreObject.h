@@ -5,16 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// This object tracks a player's action.
 	/// When a level is finished without dying and with every coin grabbed, a bonus is given.
@@ -138,7 +128,7 @@ namespace CloudberryKingdom
 		bool ShowMultiplier;
 		PerfectScoreObject( bool Global, bool ShowMultiplier );
 
-		const float &getMultiplier() const;
+		const float getMultiplier() const;
 
 	protected:
 		virtual void MyPhsxStep();

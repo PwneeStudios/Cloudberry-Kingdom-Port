@@ -20,4 +20,5 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<Level> level = getCore()->MyLevel;
 	}
+
 }

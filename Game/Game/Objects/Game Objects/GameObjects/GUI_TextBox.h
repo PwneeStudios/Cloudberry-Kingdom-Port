@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 	private:
-		void Init( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
+		void Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 		int SelectIndex_Start, SelectIndex_End;
 
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		void UpdateSelectQuad();
 
 	protected:
-		virtual std::shared_ptr<EzText> MakeText( const std::wstring &text, bool centered, const std::shared_ptr<EzFont> &font );
+		virtual std::shared_ptr<EzText> MakeText( std::wstring text, bool centered, const std::shared_ptr<EzFont> &font );
 
 	public:
 		int MaxLength;
@@ -106,9 +106,9 @@ namespace CloudberryKingdom
 		virtual void Enter();
 
 	protected:
-		const int &getLength() const;
+		const int getLength() const;
 	public:
-		const std::wstring &getText() const;
+		const std::wstring getText() const;
 		void setText( const std::wstring &value );
 
 	private:

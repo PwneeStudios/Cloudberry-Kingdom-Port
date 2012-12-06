@@ -48,7 +48,9 @@ namespace CloudberryKingdom
 		InteractingBob.reset();
 		MyBackblock.reset();
 
-		setOnOpen( setOnEnter( ExtraPhsx = 0 ) );
+		_OnOpen.reset();
+		_OnEnter.reset();
+		ExtraPhsx.reset();
 	}
 
 	std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &Door::getOnOpen() const
@@ -96,7 +98,7 @@ namespace CloudberryKingdom
 	void Door::SetDoorType( const std::shared_ptr<TileSet> &TileSetType, const std::shared_ptr<Level> &level )
 	{
 		if ( level != 0 && level->CurMakeData != 0 && level->CurMakeData->PieceSeed != 0 )
-			HitBoxPadding = level->Style->DoorHitBoxPadding;
+			HitBoxPadding = level->getStyle()->DoorHitBoxPadding;
 
 		getCore()->setMyTileSet(TileSetType);
 
@@ -273,7 +275,9 @@ namespace CloudberryKingdom
 			if ( step % 2 == 0 )
 			{
 				setPos( save );
-				setPos( getPos() + Vector2(getMyLevel()->getRnd()->Rnd->Next(-ShakeIntensity, ShakeIntensity), getMyLevel()->getRnd()->Rnd->Next(-ShakeIntensity, ShakeIntensity)) );
+				setPos( getPos() + Vector2(
+					static_cast<float>( getMyLevel()->getRnd()->Rnd->Next( -ShakeIntensity, ShakeIntensity ) ),
+					static_cast<float>( getMyLevel()->getRnd()->Rnd->Next( -ShakeIntensity, ShakeIntensity ) ) ) );
 			}
 
 			ShakeStep--;
@@ -287,7 +291,7 @@ namespace CloudberryKingdom
 		DoShake();
 
 		if ( ExtraPhsx != 0 )
-			ExtraPhsx->Apply( shared_from_this() );
+			ExtraPhsx->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
 	}
 
 	bool Door::OnScreen()
@@ -375,7 +379,7 @@ namespace CloudberryKingdom
 		NearCount = 0;
 	}
 
-	const int &Door::getDelayToShowNote() const
+	const int Door::getDelayToShowNote() const
 	{
 		if ( NoNote )
 			return 100000;
@@ -388,8 +392,8 @@ namespace CloudberryKingdom
 			return _DelayToShowNote_Nth;
 	}
 
-int Door::DoorOperated = 0;
-bool Door::AllowCompControl = false;
+	int Door::DoorOperated = 0;
+	bool Door::AllowCompControl = false;
 
 	void Door::Interact( const std::shared_ptr<Bob> &bob )
 	{
@@ -405,7 +409,7 @@ bool Door::AllowCompControl = false;
 		float scale = bob->GetScale().X;
 
 		float x_pad = DoorSize.X + HitBoxPadding.X + getInfo()->Doors->SizePadding.X + 22 + .018f * bob->Box->Current->Size.X + __max(0, 36 * (scale - 1));
-		x_pad = CoreMath::Restrict( abs( bob->getCore()->Data.Velocity.X * 1.3f ), 500, x_pad );
+		x_pad = CoreMath::RestrictVal( abs( bob->getCore()->Data.Velocity.X * 1.3f ), 500.f, x_pad );
 		float y_pad = DoorSize.Y + HitBoxPadding.Y + getInfo()->Doors->SizePadding.X + 50 + __max(0, 80 * (scale - 1));
 
 		bool InteractedWith = false;
@@ -417,7 +421,7 @@ bool Door::AllowCompControl = false;
 				MakeNote();
 
 	#if defined(WINDOWS)
-			if ( ButtonCheck::State( ControllerButtons_X, static_cast<int>( bob->MyPlayerIndex ) ).Down || ( bob->CurInput.xVec.Y > ::85 && bob->GetPlayerData()->KeyboardUsedLast ) || AutoOpen )
+			if ( ButtonCheck::State( ControllerButtons_X, static_cast<int>( bob->MyPlayerIndex ) ).Down || ( bob->CurInput.xVec.Y > .85f && bob->GetPlayerData()->KeyboardUsedLast ) || AutoOpen )
 	#else
 			if ( ButtonCheck::State( ControllerButtons_X, bob->MyPlayerIndex ).Down || AutoOpen )
 	#endif
@@ -428,7 +432,7 @@ bool Door::AllowCompControl = false;
 		}
 		else
 		{
-			NearCount = CoreMath::Restrict( 0, 30, NearCount );
+			NearCount = CoreMath::RestrictVal( 0, 30, NearCount );
 			NearCount--;
 		}
 
@@ -438,7 +442,7 @@ bool Door::AllowCompControl = false;
 
 	void Door::Do()
 	{
-		getOnOpen()->Apply(this);
+		getOnOpen()->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
 	}
 
 	void Door::HaveBobUseDoor( const std::shared_ptr<Bob> &bob )
@@ -448,14 +452,14 @@ bool Door::AllowCompControl = false;
 
 		if ( !TemporaryBlock )
 		{
-			getOnOpen()->Apply(this);
+			getOnOpen()->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
 			DoorOperated++;
 		}
 	}
 
 	void Door::Clone( const std::shared_ptr<ObjectBase> &A )
 	{
-		getCore()->Clone(A->getCore());
+		getCore()->Clone( A->getCore() );
 
 		std::shared_ptr<Door> DoorA = std::static_pointer_cast<Door>( A );
 

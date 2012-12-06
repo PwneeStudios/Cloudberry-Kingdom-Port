@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 
 		Vector2 dir = ButtonCheck::GetDir( -1 );
 
-		if ( Tools::TheGame->DrawCount % 7 == 0 && abs( dir.Y ) > ::5 )
+		if ( Tools::TheGame->DrawCount % 7 == 0 && abs( dir.Y ) > .5f )
 		{
 			if ( dir.Y > 0 )
 				setText( getText().substr(0, getLength() - 1) + IncrChar(c) );
@@ -182,7 +182,7 @@ namespace CloudberryKingdom
 	{
 		Clear();
 
-		std::wstring clipboard = System::Windows::Forms::Clipboard::GetText();
+		std::wstring clipboard = Clipboard::GetText();
 
 		clipboard = Tools::SantitizeOneLineString( clipboard, Resources::LilFont );
 
@@ -194,14 +194,13 @@ namespace CloudberryKingdom
 	void GUI_TextBox::Copy()
 	{
 		if ( getText() != _T("") && getText().length() > 0 )
-			System::Windows::Forms::Clipboard::SetText( getText() );
+			Clipboard::SetText( getText() );
 	}
 #endif
 
 	wchar_t GUI_TextBox::IncrChar( wchar_t c )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var _c = static_cast<int>( c ) + 1;
+		int _c = static_cast<int>( c ) + 1;
 		if ( _c > ( int )L'z' )
 			return L'A';
 		return static_cast<wchar_t>( _c );
@@ -209,8 +208,7 @@ namespace CloudberryKingdom
 
 	wchar_t GUI_TextBox::DecrChar( wchar_t c )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var _c = static_cast<int>( c ) - 1;
+		int _c = static_cast<int>( c ) - 1;
 		if ( _c < static_cast<int>( L'A' ) )
 			return L'z';
 		return static_cast<wchar_t>( _c );
@@ -228,7 +226,7 @@ namespace CloudberryKingdom
 		Init( InitialText, pos, scale, fontscale );
 	}
 
-	void GUI_TextBox::Init( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale )
+	void GUI_TextBox::Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale )
 	{
 		InitialText = Tools::SantitizeOneLineString( InitialText, Resources::LilFont );
 
@@ -238,7 +236,7 @@ namespace CloudberryKingdom
 		MyText->setScale( MyText->getScale() * fontscale );
 
 		// Backdrop
-		Backdrop = std::make_shared<QuadClass>( 0, true, false );
+		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
 		Backdrop->setTextureName( _T( "score_screen" ) );
 		Backdrop->setSize( Vector2( 640.4763f, 138.0953f ) * scale );
 
@@ -248,7 +246,7 @@ namespace CloudberryKingdom
 		// Caret
 		//var font = Resources.Font_Grobold42;
 		std::shared_ptr<CloudberryKingdom::EzFont> font = Resources::LilFont;
-		Caret = std::make_shared<EzText>( _T( "_" ), font, 1000, false, true,.575f );
+		Caret = std::make_shared<EzText>( _T( "_" ), font, 1000.f, false, true,.575f );
 		Caret->MyFloatColor = Color::Black.ToVector4();
 		Caret->setPos( MyText->getPos() );
 		Caret->setScale( Caret->getScale() * fontscale );
@@ -256,9 +254,9 @@ namespace CloudberryKingdom
 		MyPile->Add( Caret );
 
 		// Select quad
-		SelectQuad = std::make_shared<QuadClass>( 0, true, false );
+		SelectQuad = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
 		SelectQuad->setTextureName( _T( "White" ) );
-		SelectQuad->Quad_Renamed.SetColor( Color( 255, 255, 255, 125 ) );
+		SelectQuad->Quad_Renamed.SetColor( bColor( 255, 255, 255, 125 ) );
 		SelectQuad->setSize( Vector2( 100, 100 * scale.Y ) );
 		SelectQuad->Layer = 0;
 
@@ -290,7 +288,11 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::DeleteSelected()
 	{
-		setText( getText().erase(SelectIndex_Start, SelectIndex_End - SelectIndex_Start) );
+		/*setText( getText().erase( SelectIndex_Start, SelectIndex_End - SelectIndex_Start) );*/
+		
+		std::wstring s = getText();
+		s.substr(0, SelectIndex_Start ) + s.substr( SelectIndex_End );
+		
 		Unselect();
 	}
 
@@ -303,9 +305,9 @@ namespace CloudberryKingdom
 		SelectQuad->setLeft( MyText->getPos().X + pos );
 	}
 
-	std::shared_ptr<EzText> GUI_TextBox::MakeText( const std::wstring &text, bool centered, const std::shared_ptr<EzFont> &font )
+	std::shared_ptr<EzText> GUI_TextBox::MakeText( std::wstring text, bool centered, const std::shared_ptr<EzFont> &font )
 	{
-		std::shared_ptr<EzText> eztext = std::make_shared<EzText>( text, font, 1000, centered, true,.575f );
+		std::shared_ptr<EzText> eztext = std::make_shared<EzText>( text, font, 1000.f, centered, true,.575f );
 		eztext->MyFloatColor = Color::Black.ToVector4();
 		eztext->OutlineColor = Color::Transparent.ToVector4();
 
@@ -406,12 +408,12 @@ namespace CloudberryKingdom
 			OnEnter->Apply();
 	}
 
-	const int &GUI_TextBox::getLength() const
+	const int GUI_TextBox::getLength() const
 	{
 		return getText().length();
 	}
 
-	const std::wstring &GUI_TextBox::getText() const
+	const std::wstring GUI_TextBox::getText() const
 	{
 		return MyText->FirstString();
 	}

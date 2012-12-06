@@ -17,11 +17,11 @@ namespace CloudberryKingdom
 		const int &getTime() const;
 		void setTime( const int &value );
 
-		const int &getMinutes() const;
+		const int getMinutes() const;
 
-		const int &getSeconds() const;
+		const int getSeconds() const;
 
-		const int &getMilliseconds() const;
+		const int getMilliseconds() const;
 
 	private:
 		std::shared_ptr<StringBuilder> MyString;
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		virtual void ReleaseBody();
 
 	public:
-		const Vector2 &getApparentPos() const;
+		const Vector2 getApparentPos() const;
 
 	private:
 		std::shared_ptr<EzText> TimerText;

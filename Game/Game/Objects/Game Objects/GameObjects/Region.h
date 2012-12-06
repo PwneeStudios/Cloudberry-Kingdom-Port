@@ -5,18 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class Door;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Region : public GUI_Panel
 	{
 	public:

@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -42,7 +40,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<NewHero> NewHero::HeroTitle( const std::wstring &str )
 	{
-		std::shared_ptr<NewHero> title = std::make_shared<NewHero>( str, Vector2( 150, -130 ), 1, false );
+		std::shared_ptr<NewHero> title = std::make_shared<NewHero>( str, Vector2( 150, -130 ), 1.f, false );
 		title->SlideInLength = 55;
 
 		return title;
@@ -65,12 +63,12 @@ namespace CloudberryKingdom
 		text = std::make_shared<EzText>( str, Resources::Font_Grobold42, true, true );
 		text->setScale( text->getScale() * scale );
 
-		text->MyFloatColor = ( Color( 26, 188, 241 ) ).ToVector4();
-		text->OutlineColor = ( Color( 255, 255, 255 ) ).ToVector4();
+		text->MyFloatColor = ( bColor( 26, 188, 241 ) ).ToVector4();
+		text->OutlineColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 
 		text->Shadow = true;
 		text->ShadowOffset = Vector2( 10.5f, 10.5f );
-		text->ShadowColor = Color( 30, 30, 30 );
+		text->ShadowColor = bColor( 30, 30, 30 );
 	}
 
 	void NewHero::MyPhsxStep()
@@ -81,7 +79,7 @@ namespace CloudberryKingdom
 
 		// Make sure we're on top
 		if ( !getCore()->Released && getCore()->MyLevel != 0 )
-			getCore()->MyLevel->MoveToTopOfDrawLayer(this);
+			getCore()->MyLevel->MoveToTopOfDrawLayer( shared_from_this() );
 
 		// Do nothing if this is permanent
 		if ( Perma )

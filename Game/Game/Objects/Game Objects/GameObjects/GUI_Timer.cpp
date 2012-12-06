@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -28,8 +27,8 @@ namespace CloudberryKingdom
 	{
 		GUI_Timer_Base::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( shared_from_this() ) );
-		MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>( shared_from_this() ) );
+		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
+		MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>( std::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
 	}
 
 	void GUI_Timer::ReleaseBody()
@@ -50,7 +49,7 @@ namespace CloudberryKingdom
 	void GUI_Timer::OnCompleteLevel( const std::shared_ptr<Level> &level )
 	{
 		MinLevelStartTimeValue = 124;
-		setTime( CoreMath::Restrict( MinLevelStartTimeValue, MaxTime, getTime() ) );
+		setTime( CoreMath::RestrictVal( MinLevelStartTimeValue, MaxTime, getTime() ) );
 	}
 
 	void GUI_Timer::InitializeInstanceFields()

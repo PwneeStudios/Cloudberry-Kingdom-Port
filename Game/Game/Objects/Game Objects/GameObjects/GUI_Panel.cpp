@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -65,8 +66,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_Panel::GetViewables()
 	{
-		const std::shared_ptr<std::wstring>  tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
-		return std::vector<std::shared_ptr<std::wstring> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		const std::wstring tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
+		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 	}
 
 	void GUI_Panel::setControl( const int &value )
@@ -79,26 +80,6 @@ namespace CloudberryKingdom
 	const int &GUI_Panel::getControl() const
 	{
 		return _Control;
-	}
-
-	std::wstring GUI_Panel::CopyToClipboard( const std::wstring &suffix )
-	{
-		std::wstring s = _T( "" );
-
-		if ( MyMenu != 0 )
-			s += MyMenu->CopyToClipboard( _T( "MyMenu." ) ) + _T( "\n" );
-		if ( MyPile != 0 )
-			s += MyPile->CopyToClipboard( _T( "MyPile." ) );
-
-		return s;
-	}
-
-	void GUI_Panel::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		if ( MyMenu != 0 )
-			MyMenu->ProcessMouseInput( shift, ShiftDown );
-		if ( MyPile != 0 )
-			MyPile->ProcessMouseInput( shift, ShiftDown );
 	}
 
 	void GUI_Panel::Shift( Vector2 shift )
@@ -154,11 +135,11 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::Call( const std::shared_ptr<GUI_Panel> &child, int Delay )
 	{
-		child->Caller = this;
+		child->Caller = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 
 		SetChildControl( child );
 
-		MyGame->WaitThenDo( Delay, std::make_shared<CallHelper>( shared_from_this(), child ) );
+		MyGame->WaitThenDo( Delay, std::make_shared<CallHelper>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ), child ) );
 
 		Active = false;
 	}

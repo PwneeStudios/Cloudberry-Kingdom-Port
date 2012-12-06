@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_LivesLeft;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// A GUI element that tells the player how many lives they have, while they play.
 	/// </summary>
@@ -52,7 +34,7 @@ namespace CloudberryKingdom
 
 		virtual void Show();
 
-		const Vector2 &getApparentPos() const;
+		const Vector2 getApparentPos() const;
 
 	private:
 //C# TO C++ CONVERTER NOTE: The variable Bob was renamed since it is named the same as a user-defined type:

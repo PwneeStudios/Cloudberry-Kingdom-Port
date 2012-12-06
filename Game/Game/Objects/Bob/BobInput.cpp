@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -23,4 +22,5 @@ namespace CloudberryKingdom
 		B_Button = reader->ReadBoolean();
 		xVec = reader->ReadVector2();
 	}
+
 }

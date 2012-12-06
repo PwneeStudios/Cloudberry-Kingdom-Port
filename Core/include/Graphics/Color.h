@@ -78,6 +78,7 @@ struct Color
 
 	static Color Azure;
 	static Color Black;
+	static Color Blue;
 	static Color BlueViolet;
 	static Color Brown;
 	static Color Cyan;
@@ -87,16 +88,19 @@ struct Color
 	static Color Gainsboro;
 	static Color Gold;
 	static Color Gray;
+	static Color Green;
 	static Color HotPink;
 	static Color Indigo;
 	static Color LightSeaGreen;
 	static Color LimeGreen;
+	static Color PowderBlue;
 	static Color Purple;
 	static Color Red;
 	static Color Silver;
 	static Color SkyBlue;
 	static Color Transparent;
 	static Color White;
+	static Color WhiteSmoke;
 	static Color Yellow;
 };
 

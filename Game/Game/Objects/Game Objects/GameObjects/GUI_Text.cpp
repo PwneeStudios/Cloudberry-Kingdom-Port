@@ -1,6 +1,5 @@
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -98,12 +97,12 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<EzText> GUI_Text::MakeText( Localization::Words word, bool centered, const std::shared_ptr<EzFont> &font )
 	{
-		return std::make_shared<EzText>( word, font, 1900, true, true,.575f );
+		return std::make_shared<EzText>( word, font, 1900.f, true, true, .575f );
 	}
 
 	std::shared_ptr<EzText> GUI_Text::MakeText( const std::wstring &text, bool centered, const std::shared_ptr<EzFont> &font )
 	{
-		return std::make_shared<EzText>( text, font, 1900, true, true,.575f );
+		return std::make_shared<EzText>( text, font, 1900.f, true, true, .575f );
 	}
 
 	void GUI_Text::Kill()

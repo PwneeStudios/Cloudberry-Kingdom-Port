@@ -5,33 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreList;
-}
-
-namespace CloudberryKingdom
-{
-	class GUI_TextBox;
-}
-
-namespace CloudberryKingdom
-{
-	class ScoreEntry;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
 	class GameOverPanel : public CkBaseMenu
 	{
+	
+	public:
+		using GUI_Panel::Call;
+	
 	private:
 		class MenuActiveHelper : public Lambda
 		{

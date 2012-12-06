@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		Active = true;
 		PauseOnPause = true;
 
-		Tags += GameObject::Tag_REMOVE_ON_LEVEL_FINISH;
+		Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
 	}
 
 	void SlowMo::ReleaseBody()

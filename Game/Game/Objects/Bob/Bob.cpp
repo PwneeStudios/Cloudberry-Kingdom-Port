@@ -3,6 +3,29 @@
 namespace CloudberryKingdom
 {
 
+	void Bob::StaticInitializer()
+	{
+		typedef std::pair<BobDeathType, Localization::Words> DeathNamePair;
+		Bob::BobDeathNames = std::map<BobDeathType, Localization::Words>();
+		
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_NONE, Localization::Words_NONE ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIREBALL, Localization::Words_FIREBALL ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIRE_SPINNER, Localization::Words_FIRESPINNER ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BOULDER, Localization::Words_BOULDER ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKEY_GUY, Localization::Words_SPIKEY_GUY ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKE, Localization::Words_SPIKE ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALL, Localization::Words_FALLING ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA, Localization::Words_LAVA ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BLOB, Localization::Words_FLYING_BLOBS ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LASER, Localization::Words_LASER ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA_FLOW, Localization::Words_SLUDGE ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALLING_SPIKE, Localization::Words_FALLING_SPIKEY ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TIME, Localization::Words_TIME_LIMIT ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LEFT_BEHIND, Localization::Words_LEFT_BEHIND ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_OTHER, Localization::Words_OTHER ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TOTAL, Localization::Words_TOTAL ) );
+	}
+
 	void Bob::BobMove::Init()
 	{
 		MaxTargetY = 600;
@@ -282,18 +305,21 @@ int Bob::ImmortalLength = 55;
 	void Bob::LoadFromFile( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType )
 	{
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 
 		Vector2 size = Vector2( 1, 2 );
 		float ratio = size.Y / size.X;
-		int width = Tools::TheGame->Resolution.Bob_Renamed::X;
+		int width = Tools::TheGame->Resolution.Bob_Renamed.X;
 		int height = static_cast<int>( width * ratio );
 
-		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PresentationParameters, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		obj->ReadFile( reader, EffectWad, TextureWad );
+		
+		//reader->Close();
+		//stream->Close();
 		reader->Close();
-		stream->Close();
 
 		obj->ParentQuad->Scale( Vector2( 260, 260 ) );
 
@@ -328,7 +354,7 @@ int Bob::ImmortalLength = 55;
 		Box2 = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
 		MyPhsx = std::make_shared<BobPhsx>();
-		MyPhsx->Init( shared_from_this() );
+		MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
 	}
@@ -349,7 +375,7 @@ int Bob::ImmortalLength = 55;
 
 		//MakeCape();
 
-		SetColorScheme( PlayerManager::Get( shared_from_this() )->ColorScheme_Renamed );
+		SetColorScheme( PlayerManager::Get( std::static_pointer_cast<Bob>( shared_from_this() ) )->ColorScheme_Renamed );
 
 		MyPhsx->setVel( HoldVel );
 
@@ -360,12 +386,12 @@ int Bob::ImmortalLength = 55;
 
 	void Bob::SetHeroPhsx( const std::shared_ptr<BobPhsx> &type )
 	{
-		MyCapeType = Cape::CapeType_NORMAL;
+		MyCapeType = CapeType_NORMAL;
 
 		MyPhsx = type->Clone();
 		//MyPhsx = new BobPhsxNormal();
 
-		MyPhsx->Init( shared_from_this() );
+		MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
 		MakeCape( MyCapeType );
 	}
 
@@ -373,7 +399,7 @@ int Bob::ImmortalLength = 55;
 	{
 		if ( MyCape == 0 && !BoxesOnly && CanHaveCape )
 		{
-			MyCape = std::make_shared<Cape>( shared_from_this(), CapeType, MyPhsx );
+			MyCape = std::make_shared<Cape>( std::static_pointer_cast<Bob>( shared_from_this() ), CapeType, MyPhsx );
 			MyCape->Reset();
 		}
 	}
@@ -394,8 +420,8 @@ int Bob::ImmortalLength = 55;
 		if ( CharacterSelect2 )
 		{
 			MyPhsx = std::make_shared<BobPhsxCharSelect>();
-			MyPhsx->Init( shared_from_this() );
-			MakeCape( Cape::CapeType_NORMAL );
+			MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
+			MakeCape( CapeType_NORMAL );
 		}
 		else
 			SetHeroPhsx( type );
@@ -420,9 +446,9 @@ int Bob::ImmortalLength = 55;
 			PlayerObject->FinishLoading();
 			Vector2 size = PlayerObject->BoxList[ 0 ]->Size();
 			float ratio = size.Y / size.X;
-			int width = Tools::TheGame->Resolution.Bob_Renamed::X;
+			int width = Tools::TheGame->Resolution.Bob_Renamed.X;
 			int height = static_cast<int>( width * ratio );
-			PlayerObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PresentationParameters, width, height );
+			PlayerObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, width, height );
 		}
 
 		PlayerObject->Read( 0, 0 );
@@ -478,8 +504,6 @@ int Bob::ImmortalLength = 55;
 		return PlayerManager::Get( static_cast<int>( MyPlayerIndex ) )->TempStats;
 	}
 
-std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDeathType, Localization::Words> { { BobDeathType_NONE, Localization::Words_NONE }, { BobDeathType_FIREBALL, Localization::Words_FIREBALL }, { BobDeathType_FIRE_SPINNER, Localization::Words_FIRESPINNER }, { BobDeathType_BOULDER, Localization::Words_BOULDER }, { BobDeathType_SPIKEY_GUY, Localization::Words_SPIKEY_GUY }, { BobDeathType_SPIKE, Localization::Words_SPIKE }, { BobDeathType_FALL, Localization::Words_FALLING }, { BobDeathType_LAVA, Localization::Words_LAVA }, { BobDeathType_BLOB, Localization::Words_FLYING_BLOBS }, { BobDeathType_LASER, Localization::Words_LASER }, { BobDeathType_LAVA_FLOW, Localization::Words_SLUDGE }, { BobDeathType_FALLING_SPIKE, Localization::Words_FALLING_SPIKEY }, { BobDeathType_TIME, Localization::Words_TIME_LIMIT }, { BobDeathType_LEFT_BEHIND, Localization::Words_LEFT_BEHIND }, { BobDeathType_OTHER, Localization::Words_OTHER }, { BobDeathType_TOTAL, Localization::Words_TOTAL } };
-
 	void Bob::Die( BobDeathType DeathType, bool ForceDeath, bool DoAnim )
 	{
 		Die( DeathType, 0, ForceDeath, DoAnim );
@@ -532,15 +556,15 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		if ( DoAnim )
 			MyPhsx->Die( DeathType );
 
-		Tools::CurGameData->BobDie( getCore()->MyLevel, shared_from_this() );
+		Tools::CurGameData->BobDie( getCore()->MyLevel, std::static_pointer_cast<Bob>( shared_from_this() ) );
 	}
 
-	const bool &Bob::getCanDie() const
+	const bool Bob::getCanDie() const
 	{
 		return !Immortal && !Dead && !Dying && getCore()->MyLevel->PlayMode == 0 && !getCore()->MyLevel->Watching;
 	}
 
-	const bool &Bob::getCanFinish() const
+	const bool Bob::getCanFinish() const
 	{
 		return !Dead && !Dying && getCore()->MyLevel->PlayMode == 0 && !getCore()->MyLevel->Watching;
 	}
@@ -571,7 +595,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		// if so, officially declare the player dead.
 		if ( !Dead && ( ( IsVisible() && getCore()->Show && getCore()->Data.Position.Y < getCore()->MyLevel->getMainCamera()->BL.Y - getGame()->DoneDyingDistance ) || (!IsVisible() && DeathCount > getGame()->DoneDyingCount) ) )
 		{
-			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, shared_from_this() );
+			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, std::static_pointer_cast<Bob>( shared_from_this() ) );
 			Dead = true;
 		}
 
@@ -604,7 +628,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 						std::shared_ptr<Bob> HighestBob = 0;
 						for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 						{
-							if ( *bob != this && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data.Position.Y > HighestBob->getCore()->Data.Position.Y ) )
+							if ( *bob != shared_from_this() && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data.Position.Y > HighestBob->getCore()->Data.Position.Y ) )
 							{
 								HighestBob = *bob;
 							}
@@ -664,7 +688,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 
 		if ( pad.IsConnected )
 		{
-			if ( pad.Buttons.A == ButtonState::Pressed )
+			if ( pad.Buttons.A == ButtonState_Pressed )
 			{
 				CurInput.A_Button = true;
 			}
@@ -672,22 +696,22 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 				CurInput.A_Button = false;
 
 			CurInput.xVec.X = CurInput.xVec.Y = 0;
-			if ( abs( pad.ThumbSticks.Left.X ) > ::15 )
+			if ( abs( pad.ThumbSticks.Left.X ) > .15f )
 				CurInput.xVec.X = pad.ThumbSticks.Left.X;
-			if ( abs( pad.ThumbSticks.Left.Y ) > ::15 )
+			if ( abs( pad.ThumbSticks.Left.Y ) > .15f )
 				CurInput.xVec.Y = pad.ThumbSticks.Left.Y;
 
-			if ( pad.DPad.Right == ButtonState::Pressed )
+			if ( pad.DPad.Right == ButtonState_Pressed )
 				CurInput.xVec.X = 1;
-			if ( pad.DPad.Left == ButtonState::Pressed )
+			if ( pad.DPad.Left == ButtonState_Pressed )
 				CurInput.xVec.X = -1;
-			if ( pad.DPad.Up == ButtonState::Pressed )
+			if ( pad.DPad.Up == ButtonState_Pressed )
 				CurInput.xVec.Y = 1;
-			if ( pad.DPad.Down == ButtonState::Pressed )
+			if ( pad.DPad.Down == ButtonState_Pressed )
 				CurInput.xVec.Y = -1;
 
 
-			CurInput.B_Button = ( pad.Buttons->LeftShoulder == ButtonState::Pressed || pad.Buttons->RightShoulder == ButtonState::Pressed );
+			CurInput.B_Button = ( pad.Buttons.LeftShoulder == ButtonState_Pressed || pad.Buttons.RightShoulder == ButtonState_Pressed );
 			//PrevB_Button = (Tools.prevPadState[(int)MyPlayerIndex].Buttons.A == ButtonState.Pressed);
 		}
 	//#endif
@@ -697,27 +721,27 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 
 		//if (MyPlayerIndex == PlayerIndex.One)
 		{
-			CurInput.A_Button |= Tools::Keyboard.IsKeyDownCustom( Keys_Up );
-			CurInput.A_Button |= Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Up_Secondary );
+			CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up );
+			CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary );
 			KeyboardDir.X = KeyboardDir.Y = 0;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Up ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up ) )
 				KeyboardDir.Y = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Down ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Down ) )
 				KeyboardDir.Y = -1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Right ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Right ) )
 				KeyboardDir.X = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Left ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Left ) )
 				KeyboardDir.X = -1;
-			if ( Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Left_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Left_Secondary ) )
 				KeyboardDir.X = -1;
-			if ( Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Right_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Right_Secondary ) )
 				KeyboardDir.X = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Up_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary ) )
 				KeyboardDir.Y = 1;
-			if ( Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Down_Secondary ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Down_Secondary ) )
 				KeyboardDir.Y = -1;
 			//CurInput.B_Button |= Tools.keybState.IsKeyDownCustom(Keys.C);
-			CurInput.B_Button |= Tools::Keyboard.IsKeyDownCustom( ButtonCheck::Back_Secondary );
+			CurInput.B_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Back_Secondary );
 		}
 
 		//if (MyPlayerIndex == PlayerIndex.Two)
@@ -743,7 +767,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 	{
 		if ( getCore()->MyLevel->Replay )
 		{
-			if ( Step < MyRecord->Input.size() )
+			if ( Step < static_cast<int>( MyRecord->Input.size() ) )
 				CurInput = MyRecord->Input[ Step ];
 
 			return;
@@ -806,7 +830,7 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 			if ( ql.size() >= 1 )
 				PlayerObject->QuadList[ 1 ]->SetColor( Color::White );
 			if ( ql.size() >= 1 )
-				PlayerObject->QuadList[ 1 ]->setMyMatrix( MyColorScheme.SkinColor.M );
+				PlayerObject->QuadList[ 1 ]->setMyMatrix( MyColorScheme.SkinColor->M );
 			if ( ql.size() >= 1 )
 				PlayerObject->QuadList[ 1 ]->MyEffect = Tools::HslGreenEffect;
 			if ( ql.size() >= 0 )
@@ -816,8 +840,8 @@ std::map<BobDeathType, Localization::Words> Bob::BobDeathNames = std::map<BobDea
 		}
 	}
 
-bool Bob::GuideActivated = false;
-std::shared_ptr<QuadClass> Bob::GuideQuad = 0;
+	bool Bob::GuideActivated = false;
+	std::shared_ptr<QuadClass> Bob::GuideQuad = 0;
 
 	void Bob::InitGuideQuad()
 	{
@@ -829,12 +853,12 @@ std::shared_ptr<QuadClass> Bob::GuideQuad = 0;
 		GuideQuad->setSize( Vector2( 100, 100 ) );
 	}
 
-int Bob::GuideLength = 8;
-float Bob::Guide_h = 1 / GuideLength;
+	int Bob::GuideLength = 8;
+	float Bob::Guide_h = 1.f / GuideLength;
 
 	void Bob::DrawGuidePiece( int Step, std::vector<Vector2> Loc, int i )
 	{
-		if ( Loc.size() > Step )
+		if ( static_cast<int>( Loc.size() ) > Step )
 		{
 			InitGuideQuad();
 
@@ -848,7 +872,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			GuideQuad->Draw();
 
 
-			Color c = MyColorScheme.SkinColor.Clr;
+			Color c = MyColorScheme.SkinColor->Clr;
 			c.A = static_cast<unsigned char>( 255 * ( 1 - Guide_h * i ) );
 			//GuideQuad.Quad.SetColor(new Color(0f, 1f, 0f, 1f - Guide_h * i));
 			GuideQuad->Quad_Renamed.SetColor( c );
@@ -861,12 +885,12 @@ float Bob::Guide_h = 1 / GuideLength;
 
 	void Bob::InitSectionDraw()
 	{
-			Vector2 Size = Vector2( 15 );
+		Vector2 Size = Vector2( 15 );
 
-			GuideQuad->Quad_Renamed.SetColor( Color::PowderBlue );
-			//GuideQuad.Quad.SetColor(Color.Black);
-			//GuideQuad.Quad.SetColor(new Color(0,255,0,150));
-			GuideQuad->setSize( Size );
+		GuideQuad->Quad_Renamed.SetColor( Color::PowderBlue );
+		//GuideQuad.Quad.SetColor(Color.Black);
+		//GuideQuad.Quad.SetColor(new Color(0,255,0,150));
+		GuideQuad->setSize( Size );
 	}
 
 	void Bob::DrawSection( int Step, std::vector<Vector2> Loc )
@@ -877,7 +901,7 @@ float Bob::Guide_h = 1 / GuideLength;
 
 	void Bob::DrawGuide()
 	{
-		if ( MyPiece != 0 && MyPiece->Recording_Renamed->size() > 0 && MyPiece->Recording_Renamed->size() > MyPieceIndex )
+		if ( MyPiece != 0 && static_cast<int>( MyPiece->Recording_Renamed.size() ) > 0 && static_cast<int>( MyPiece->Recording_Renamed.size() ) > MyPieceIndex )
 		{
 			int Step = getCore()->MyLevel->GetPhsxStep();
 			Step = __max( 0, Step - 2 );
@@ -983,7 +1007,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			{
 				FadingIn = false;
 				Fade = 1;
-				PlayerObject->ContainedQuad->SetColor( Color( 1, 1, 1, 1 ) );
+				PlayerObject->ContainedQuad->SetColor( Color( 1.f, 1.f, 1.f, 1.f ) );
 			}
 
 			if ( MyCape != 0 )
@@ -1018,8 +1042,8 @@ float Bob::Guide_h = 1 / GuideLength;
 					Vector2 hold = p->Center->Pos;
 
 					float D = 116.6666f * p->getSize().Y / 260;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-					var d = D * CoreMath::AngleToDir( PlayerObject->ContainedQuadAngle + 1.57 );
+
+					Vector2 d = D * CoreMath::AngleToDir( PlayerObject->ContainedQuadAngle + 1.57 );
 					Vector2 move = Vector2( 0, D ) - d;
 					PlayerObject->ParentQuad->Center->Move( move + p->Center->Pos );
 
@@ -1074,7 +1098,7 @@ float Bob::Guide_h = 1 / GuideLength;
 			return;
 
 		if ( block != 0 && Col != ColType_NO_COL )
-			block->Hit( shared_from_this() );
+			block->Hit( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		if ( block != 0 && Col != ColType_NO_COL )
 			if ( Col != ColType_TOP )
@@ -1098,7 +1122,7 @@ float Bob::Guide_h = 1 / GuideLength;
 				if ( block != 0 )
 				{
 					block->getBlockCore()->StoodOn = true;
-					block->LandedOn( shared_from_this() );
+					block->LandedOn( std::static_pointer_cast<Bob>( shared_from_this() ) );
 				}
 
 				if ( !TopCol )
@@ -1158,14 +1182,14 @@ float Bob::Guide_h = 1 / GuideLength;
 				{
 					if ( MyPhsx->OnGround && block->getBlockCore()->DoNotPushHard )
 					{
-						block->Smash( shared_from_this() );
+						block->Smash( std::static_pointer_cast<Bob>( shared_from_this() ) );
 						return;
 					}
 
 					MyPhsx->HitHeadOnSomething( block );
 
 					if ( block != 0 )
-						block->HitHeadOn( shared_from_this() );
+						block->HitHeadOn( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 					if ( OriginalColType == ColType_BOTTOM )
 					{
@@ -1201,7 +1225,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					if ( Col == ColType_LEFT )
 					{
 						if ( block != 0 )
-							block->SideHit( shared_from_this() );
+							block->SideHit( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1220,7 +1244,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					if ( Col == ColType_RIGHT )
 					{
 						if ( block != 0 )
-							block->SideHit( shared_from_this() );
+							block->SideHit( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1331,7 +1355,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		}
 		//MyCape.AnchorPoint[0].X += .1f * (Core.Data.Velocity).X;
 		Vector2 CheatShift = Vector2(); //new Vector2(.15f, .35f) * Core.Data.Velocity;
-		float l = ( vel - 2*AdditionalWind )->Length();
+		float l = ( vel - 2*AdditionalWind ).Length();
 		if ( l > 15 )
 		{
 			CheatShift = ( vel - 1*AdditionalWind );
@@ -1386,7 +1410,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		{
 			ImmortalCountDown--;
 			if ( ImmortalCountDown < ImmortalLength - 15 )
-			if ( abs( CurInput.xVec.X ) > ::5 || CurInput.A_Button )
+			if ( abs( CurInput.xVec.X ) > .5f || CurInput.A_Button )
 				ImmortalCountDown = 0;
 		}
 
@@ -1400,7 +1424,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		// Bob connections
 		if ( MyBobLinks.size() > 0 )
 			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
-				( *link )->PhsxStep( shared_from_this() );
+				( *link )->PhsxStep( std::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		if ( Dying )
 		{
@@ -1622,7 +1646,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->MarkedForDeletion && (*obj)->getCore()->Real && (*obj)->getCore()->Active && (*obj)->getCore()->Show )
-				( *obj )->Interact( shared_from_this() );
+				( *obj )->Interact( std::static_pointer_cast<Bob>( shared_from_this() ) );
 		}
 	}
 
@@ -1661,286 +1685,7 @@ float Bob::Guide_h = 1 / GuideLength;
 		//OldBlockInteractions();
 		NewBlockInteractions();
 	}
-
-	void Bob::OldBlockInteractions()
-	{
-		int CurPhsxStep = getCore()->MyLevel->CurPhsxStep;
-
-		GroundSpeed = 0;
-
-		SideHitCount--;
-		if ( SideHitCount < 0 )
-			SideHitCount = 0;
-
-		MyPhsx->ResetJumpModifiers();
-
-		BottomCol = TopCol = false;
-		if ( CanInteract )
-			if ( getCore()->MyLevel->PlayMode != 2 )
-			{
-				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 && getCore()->MyLevel->PlayMode == 0 )
-				{
-					for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
-					{
-						if ( !( *block )->getCore()->MarkedForDeletion && (*block)->getIsActive() && Phsx::BoxBoxOverlap(Box2, (*block)->getBox()) )
-						{
-							if ( !Immortal )
-								Die( BobDeathType_OTHER );
-							else
-								( *block )->Hit( shared_from_this() );
-						}
-					}
-				}
-				else
-				{
-					for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
-					{
-						if ( ( *block )->getCore()->MarkedForDeletion || !(*block)->getIsActive() || !(*block)->getCore()->Real )
-							continue;
-						if ( ( *block )->getBlockCore()->OnlyCollidesWithLowerLayers && (*block)->getCore()->DrawLayer <= getCore()->DrawLayer )
-							continue;
-
-						ColType Col = Phsx::CollisionTest( Box, ( *block )->getBox() );
-						if ( Col != ColType_NO_COL )
-						{
-							InteractWithBlock( ( *block )->getBox(), *block, Col );
-						}
-					}
-				}
-			}
-			else
-			{
-				std::shared_ptr<Ceiling_Parameters> CeilingParams = std::static_pointer_cast<Ceiling_Parameters>( getCore()->MyLevel->CurPiece->MyData->Style->FindParams(Ceiling_AutoGen::getInstance()) );
-
-				for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
-				{
-					if ( ( *block )->getCore()->MarkedForDeletion || !(*block)->getIsActive() || !(*block)->getCore()->Real )
-						continue;
-					if ( ( *block )->getBlockCore()->OnlyCollidesWithLowerLayers && (*block)->getCore()->DrawLayer <= getCore()->DrawLayer )
-						continue;
-
-					if ( ( *block )->getBlockCore()->Ceiling )
-					{
-						if ( getCore()->Data.Position.X > (*block)->getBox()->Current->BL->X - 100 && getCore()->Data.Position.X < (*block)->getBox()->Current->TR->X + 100 )
-						{
-							float NewBottom = ( *block )->getBox()->Current->BL->Y;
-							// If ceiling has a left neighbor make sure we aren't too close to it
-							if ( ( *block )->getBlockCore()->TopLeftNeighbor != 0 )
-							{
-								if ( NewBottom > ( *block )->getBlockCore()->TopLeftNeighbor->Box.Current->BL->Y - 100 )
-									NewBottom = __max( NewBottom, ( *block )->getBlockCore()->TopLeftNeighbor->Box.Current->BL->Y + 120 );
-							}
-							( *block )->Extend( Side_BOTTOM, __max( NewBottom, __max( Box->Target->TR.Y, Box->Current->TR.Y ) + CeilingParams->BufferSize.GetVal( getCore()->Data.Position ) ) );
-							if ( ( *block )->getBox()->Current->Size->Y < 170 || (*block)->getBox()->Current->BL->Y > getCore()->MyLevel->getMainCamera()->TR.Y - 75 )
-							{
-								DeleteObj( *block );
-							}
-						}
-						continue;
-					}
-
-					// For lava blocks...
-					if ( std::dynamic_pointer_cast<LavaBlock>( *block ) != 0 )
-					{
-						// If the computer gets close, move the lava block down
-						if ( Box->Current->TR.X > ( *block )->getBox()->Current->BL->X && Box->Current->BL.X < (*block)->getBox()->Current->TR->X )
-						{
-							getCore()->MyLevel->PushLava(Box->Target->BL.Y - 60, std::dynamic_pointer_cast<LavaBlock>(*block));
-						}
-						continue;
-					}
-
-					if ( !( *block )->getIsActive() )
-						continue;
-
-					ColType Col = Phsx::CollisionTest( Box, ( *block )->getBox() );
-					bool Overlap;
-					if ( !( *block )->getBox()->TopOnly || (*block)->getCore()->GenData.RemoveIfOverlap )
-						Overlap = Phsx::BoxBoxOverlap( Box, ( *block )->getBox() );
-					else
-						Overlap = false;
-					if ( Col != ColType_NO_COL || Overlap )
-					{
-						if ( ( *block )->getBlockCore()->Ceiling )
-						{
-							( *block )->Extend( Side_BOTTOM, __max( ( *block )->getBox()->Current->BL->Y, __max(Box->Target->TR.Y, Box->Current->TR.Y) + CeilingParams->BufferSize.GetVal(getCore()->Data.Position) ) );
-							continue;
-						}
-
-						//if (Col != ColType.Top) Tools.Write("");
-
-						bool Delete = false;
-						bool MakeTopOnly = false;
-						if ( SaveNoBlock )
-							Delete = true;
-						if ( BottomCol && Col == ColType_TOP )
-							Delete = true;
-						//if (Col == ColType.Top && Core.Data.Position.Y > TargetPosition.Y) Delete = true;
-						if ( Col == ColType_TOP && WantsToLand == false )
-							Delete = true;
-						if ( Col == ColType_BOTTOM && getCore()->Data.Position.Y < TargetPosition.Y )
-							Delete = true;
-						if ( Col == ColType_LEFT || Col == ColType_RIGHT ) // Delete = true;
-							MakeTopOnly = true;
-						if ( TopCol && Col == ColType_BOTTOM )
-							Delete = true;
-						//if (block is MovingBlock2 && Col == ColType.Bottom) Delete = true;
-						if ( Col == ColType_BOTTOM )
-							Delete = true;
-						//if (CurPhsxStep < 2) Delete = true;
-						if ( Overlap && Col == ColType_NO_COL && !( *block )->getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>(*block) != 0 && !(*block)->getBlockCore()->NonTopUsed) )
-							Delete = true;
-						if ( ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP )
-							MakeTopOnly = true;
-						if ( ( Col == ColType_LEFT || Col == ColType_RIGHT ) && Col != ColType_TOP )
-						{
-							if ( Box->Current->TR.Y < ( *block )->getBox()->Current->TR->Y )
-								MakeTopOnly = true;
-							else
-								MakeTopOnly = true;
-							//MakeTopOnly = false;
-							//Delete = true;
-						}
-						if ( ( *block )->getBlockCore()->NonTopUsed || !(std::dynamic_pointer_cast<NormalBlock>(*block) != 0) )
-							if ( MakeTopOnly )
-							{
-								MakeTopOnly = false;
-								Delete = true;
-							}
-
-						// Do not allow for TopOnly blocks
-						// NOTE: Wanted to have this uncommented, but needed to comment it
-						// out in order for final door blocks to work right
-						// (otherwise a block might be used and made not-toponly and block the computer)
-						//if (MakeTopOnly) { MakeTopOnly = false; Delete = true; }
-
-						if ( MakeTopOnly && ( *block )->getBlockCore()->DeleteIfTopOnly )
-						{
-							if ( ( *block )->getCore()->GenData.Used )
-								MakeTopOnly = Delete = false;
-							else
-								Delete = true;
-						}
-
-						if ( MakeTopOnly )
-						{
-							( *block )->Extend( Side_BOTTOM, __max( ( *block )->getBox()->Current->BL->Y, __max(Box->Target->TR.Y, Box->Current->TR.Y) + CeilingParams->BufferSize.GetVal(getCore()->Data.Position) ) );
-							( std::static_pointer_cast<NormalBlock>( *block ) )->CheckHeight();
-							if ( Col != ColType_TOP )
-								Col = ColType_NO_COL;
-						}
-
-						// Don't land on the very edge of the block
-						if ( !Delete && !MyPhsx->OnGround )
-						{
-							float Safety = ( *block )->getBlockCore()->GenData.EdgeSafety;
-							if ( Box->BL.X > ( *block )->getBox()->TR->X - Safety || Box->TR.X < (*block)->getBox()->BL->X + Safety )
-							{
-								Delete = true;
-							}
-						}
-
-						// Don't land on a block that says not to
-						bool DesiresDeletion = false;
-						{
-							if ( ( *block )->getCore()->GenData.TemporaryNoLandZone || !(*block)->getCore()->GenData.Used && !(*block)->PermissionToUse() )
-								DesiresDeletion = Delete = true;
-						}
-
-
-						if ( ( *block )->getCore()->GenData.Used )
-							Delete = false;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysLandOn && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
-							Delete = false;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysLandOn_Reluctantly && WantsToLand_Reluctant && !(*block)->getCore()->MarkedForDeletion && Col == ColType_TOP )
-							Delete = false;
-						if ( Overlap && ( *block )->getCore()->GenData.RemoveIfOverlap )
-							Delete = true;
-						if ( !DesiresDeletion && ( *block )->getCore()->GenData.AlwaysUse && !(*block)->getCore()->MarkedForDeletion )
-							Delete = false;
-
-						// Shift bottom of block if necessary
-						if ( !Delete && !( *block )->getBlockCore()->DeleteIfTopOnly )
-						{
-							float NewBottom = __max( ( *block )->getBox()->Current->BL->Y, __max(Box->Target->TR.Y, Box->Current->TR.Y) + CeilingParams->BufferSize.GetVal(getCore()->Data.Position) );
-
-							if ( std::dynamic_pointer_cast<NormalBlock>( *block ) != 0 && ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP && !( *block )->getBlockCore()->NonTopUsed )
-							{
-								( *block )->Extend( Side_BOTTOM, NewBottom );
-								( std::static_pointer_cast<NormalBlock>( *block ) )->CheckHeight();
-							}
-
-							// Delete the box if it was made TopOnly but TopOnly is not allowed for this block
-							if ( ( *block )->getBox()->TopOnly && (*block)->getBlockCore()->DeleteIfTopOnly )
-								Delete = true;
-						}
-
-						// We're done deciding if we should delete the block or not.
-						// If we should delete it, delete.
-						if ( Delete )
-						{
-							DeleteObj( *block );
-							( *block )->setIsActive( false );
-						}
-						// Otherwise keep it and interact with it
-						else
-						{
-							Delete = false;
-
-							if ( Col != ColType_NO_COL )
-							{
-								// We changed the blocks property, so Bob may no longer be on a collision course with it. Check to see if he is before marking block as used.
-								if ( !( *block )->getBox()->TopOnly || Col == ColType_TOP )
-								{
-									if ( ( *block )->getCore()->GenData.RemoveIfUsed )
-										Delete = true;
-
-									if ( !Delete )
-									{
-										InteractWithBlock( ( *block )->getBox(), *block, Col );
-										( *block )->StampAsUsed( CurPhsxStep );
-
-										// Normal blocks delete surrounding blocks when stamped as used
-										if ( ( *block )->getCore()->GenData.DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(*block) != 0 )
-											for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
-											{
-												std::shared_ptr<NormalBlock> Normal = std::dynamic_pointer_cast<NormalBlock>( *nblock );
-												if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
-													if ( !Normal->getCore()->GenData.Used && abs(Normal->getBox()->Current->TR.Y - (*block)->getBox()->TR->Y) < 15 && !(Normal->getBox()->Current->TR.X < (*block)->getBox()->Current->BL->X - 350 || Normal->getBox()->Current->BL.X > (*block)->getBox()->Current->TR->X + 350) )
-													{
-														DeleteObj( Normal );
-														Normal->setIsActive( false );
-													}
-											}
-
-										// Ghost blocks delete surrounding blocks when stamped as used
-										if ( std::dynamic_pointer_cast<GhostBlock>( *block ) != 0 )
-											for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
-											{
-												std::shared_ptr<GhostBlock> ghost = std::dynamic_pointer_cast<GhostBlock>( *gblock );
-												if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
-													if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - (*block)->getCore()->Data.Position)->Length() < 200 )
-													{
-														DeleteObj( ghost );
-														ghost->setIsActive( false );
-													}
-											}
-									}
-								}
-							}
-
-							Delete = false;
-							if ( ( *block )->getCore()->GenData.RemoveIfOverlap )
-							{
-								if ( Phsx::BoxBoxOverlap( Box, ( *block )->getBox() ) )
-									Delete = true;
-							}
-						}
-					}
-				}
-			}
-	}
-
+	
 	void Bob::NewBlockInteractions()
 	{
 		int CurPhsxStep = getCore()->MyLevel->CurPhsxStep;
@@ -1969,7 +1714,7 @@ float Bob::Guide_h = 1 / GuideLength;
 					//if (block.BlockCore.OnlyCollidesWithLowerLayers && block.Core.DrawLayer <= Core.DrawLayer)
 					//    continue;
 
-					if ( ( *block )->PreDecision( shared_from_this() ) )
+					if ( ( *block )->PreDecision( std::static_pointer_cast<Bob>( shared_from_this() ) ) )
 						continue;
 					if ( !( *block )->getIsActive() )
 						continue;
@@ -1982,11 +1727,11 @@ float Bob::Guide_h = 1 / GuideLength;
 
 					if ( Col != ColType_NO_COL || Overlap )
 					{
-						if ( ( *block )->PostCollidePreDecision( shared_from_this() ) )
+						if ( ( *block )->PostCollidePreDecision( std::static_pointer_cast<Bob>( shared_from_this() ) ) )
 							continue;
 
 						bool Delete = false;
-						( *block )->PostCollideDecision( shared_from_this(), Col, Overlap, Delete );
+						( *block )->PostCollideDecision( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap, Delete );
 
 						// We're done deciding if we should delete the block or not.
 						// If we should delete it, delete.
@@ -2000,7 +1745,7 @@ float Bob::Guide_h = 1 / GuideLength;
 						{
 							Delete = false;
 
-							( *block )->PostKeep( shared_from_this(), Col, Overlap );
+							( *block )->PostKeep( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
 
 							if ( Col != ColType_NO_COL )
 							{
@@ -2020,7 +1765,7 @@ float Bob::Guide_h = 1 / GuideLength;
 										( *block )->StampAsUsed( CurPhsxStep );
 										MyPhsx->LastUsedStamp = CurPhsxStep;
 
-										( *block )->PostInteractWith( shared_from_this(), Col, Overlap );
+										( *block )->PostInteractWith( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
 										//block.PostCollidePreDecision(this);
 									}
 								}
