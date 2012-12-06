@@ -49,7 +49,8 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = true;
 	}
 
@@ -57,7 +58,8 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = false;
 	}
 
@@ -3922,7 +3924,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Background> Background::Get( const std::shared_ptr<BackgroundTemplate> &Type )
 	{
-		return Type_MAKE_INSTANCE_OF();
+		return Type->MakeInstanceOf();
 	}
 
 	Background::Background()
@@ -3990,20 +3992,20 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 
 		if ( GreenScreen )
 		{
-			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 0, 1, 0 ) * 1 ) );
+			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 0, 1, 0 ) ) );
 			TestQuad->setTextureName( _T( "White" ) );
 			TestQuad->FullScreen( Cam );
 		}
 		else
 		{
-			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 1, 1, 1 ) * 1 ) );
+			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 1, 1, 1 ) ) );
 
 			if ( TestTexture == 0 )
 			{
 				//TestTexture = Tools.Texture("BGPlain");
 				TestTexture = Tools::Texture( _T( "11 hill_4" ) );
 			}
-			TestQuad->Quad_Renamed.MyTexture = TestTexture;
+			TestQuad->Quad_Renamed.setMyTexture( TestTexture );
 
 			TestQuad->Quad_Renamed.SetColor( ColorHelper::GrayColor( .825f ) );
 			TestQuad->FullScreen( Cam );
@@ -4029,36 +4031,38 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator c = MyCollection->Lists.begin(); c != MyCollection->Lists.end(); ++c )
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( unknown::const_iterator fl = c->Floaters.begin(); fl != c->Floaters.end(); ++fl )
+			for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator fl = ( *c )->Floaters.begin(); fl != ( *c )->Floaters.end(); ++fl )
 			{
-				Vector4 clr = ( *fl )->MyQuad->Quad->MySetColor->ToVector4();
+				Vector4 clr = ( *fl )->MyQuad->Quad_Renamed.MySetColor.ToVector4();
 				clr *= dim;
-				clr.W = ( *fl )->MyQuad->Quad->MySetColor->ToVector4()->W;
-				( *fl )->MyQuad->Quad->SetColor( clr );
+				clr.W = ( *fl )->MyQuad->Quad_Renamed.MySetColor.ToVector4().W;
+				( *fl )->MyQuad->Quad_Renamed.SetColor( clr );
 			}
 	}
 
 	void Background::Save( const std::wstring &path )
 	{
-		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		// FIXME: Implement this; maybe?
+		/*std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
 		std::shared_ptr<StreamWriter> writer = std::make_shared<StreamWriter>( stream );
 
 		Write( writer );
 
 		writer->Close();
-		stream->Close();
+		stream->Close();*/
 	}
 
 	void Background::Load( const std::wstring &path )
 	{
-		Tools::UseInvariantCulture();
+		// FIXME: Implement this; maybe?
+		/*Tools::UseInvariantCulture();
 		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
 		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
 
 		Read( reader );
 
 		reader->Close();
-		stream->Close();
+		stream->Close();*/
 	}
 
 	void Background::SetWeatherIntensity( float Intensity )
@@ -4066,13 +4070,13 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 		// Mod snow
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
+			if ( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( unknown::const_iterator f = l->Floaters.begin(); f != l->Floaters.end(); ++f )
+				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
-					( *f )->MyQuad->Alpha *= Intensity;
+					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;
 				}
 			}
@@ -4080,13 +4084,13 @@ std::shared_ptr<EzTexture> Background::TestTexture = 0;
 		// Mod rain
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name->Contains( _T( "Rain" ) ) )
+			if ( ( *l )->Name.find( _T( "Rain" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( unknown::const_iterator f = l->Floaters.begin(); f != l->Floaters.end(); ++f )
+				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
-					( *f )->MyQuad->Alpha *= Intensity;
+					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;
 				}
 			}
