@@ -5,17 +5,17 @@ namespace CloudberryKingdom
 
 	void Fireball::FireballTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( 0, Vector2( 72, -1 ) );
+		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72, -1 ) );
 	}
 
-std::shared_ptr<Particle> ExplodeTemplate, Fireball::EmitterTemplate = 0;
-std::shared_ptr<EzSound> Fireball::ExplodeSound = 0;
-float Fireball::t = 0;
-std::shared_ptr<Quad> Fireball::ShadeQuad = 0;
-std::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, Fireball::BaseFireballTexture = 0;
-std::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
-int DrawWidth, Fireball::DrawHeight = 0;
-std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emitter_Emitter = 0;
+	std::shared_ptr<Particle> ExplodeTemplate, Fireball::EmitterTemplate = 0;
+	std::shared_ptr<EzSound> Fireball::ExplodeSound = 0;
+	float Fireball::t = 0;
+	std::shared_ptr<Quad> Fireball::ShadeQuad = 0;
+	std::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, Fireball::BaseFireballTexture = 0;
+	std::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
+	int DrawWidth, Fireball::DrawHeight = 0;
+	std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emitter_Emitter = 0;
 
 	void Fireball::PreInit()
 	{
@@ -37,13 +37,11 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 	{
 		DrawWidth = Width;
 		DrawHeight = Height;
-		FireballRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, RenderTargetUsage::DiscardContents );
+		FireballRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
+		FlameRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-
-		FlameRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, RenderTargetUsage::DiscardContents );
-
-		EmitterRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, RenderTargetUsage::DiscardContents );
+		EmitterRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
 
 		ShadeQuad = std::make_shared<Quad>();
@@ -228,7 +226,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 	{
 		std::shared_ptr<Rand> Rnd = Tools::GlobalRnd;
 
-		int i;
+		//int i;
 		for ( int k = 0; k < 20; k++ )
 		{
 			std::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( ExplodeTemplate );
@@ -253,7 +251,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 
 		getCore()->MyType = ObjectType_FIREBALL;
 		AutoGenSingleton = Fireball_AutoGen::getInstance();
-		DeathType = Bob::BobDeathType_FIREBALL;
+		DeathType = BobDeathType_FIREBALL;
 
 		PhsxCutoff_Playing = Vector2( 10000 );
 		PhsxCutoff_BoxesOnly = Vector2( 10000 );
@@ -315,7 +313,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 				if ( !getCore()->BoxesOnly )
 				{
 					MyQuad->setSize( Vector2( 195 ) );
-					MyQuad->Quad_Renamed.MyTexture = FireballTexture;
+					MyQuad->Quad_Renamed.setMyTexture( FireballTexture );
 					MyQuad->Set( level->getInfo()->Fireballs->Sprite );
 					MyQuad->Show = true;
 				}
@@ -327,7 +325,9 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 	{
 		//if (!Alive) Tools.Write("!");
 
-		float Step = ( getCore()->MyLevel->IndependentPhsxStep - Offset + Period ) % Period;
+		// FIXME: check fmod is doing same as modular arithmetic
+		//float Step = ( getCore()->MyLevel->IndependentPhsxStep - Offset + Period ) % Period;
+		float Step = fmodf( getCore()->MyLevel->IndependentPhsxStep - Offset + Period, static_cast<float>( Period ) );
 
 		if ( PrevStep > Step )
 			Alive = true;
@@ -368,7 +368,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 			return;
 
 		// Point forward
-		MyQuad->PointxAxisTo( -getCore()->Data.Velocity );
+		MyQuad->PointxAxisTo( -1 * getCore()->Data.Velocity );
 
 		MyQuad->Quad_Renamed.MyEffect = Tools::HslEffect;
 
@@ -384,7 +384,7 @@ std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emit
 
 	void Fireball::DrawBoxes()
 	{
-		Circle->Draw( Color( 50, 50, 255, 220 ) );
+		Circle->Draw( bColor( 50, 50, 255, 220 ) );
 	}
 
 	void Fireball::Clone( const std::shared_ptr<ObjectBase> &A )

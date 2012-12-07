@@ -93,6 +93,7 @@ struct Color
 	static Color HotPink;
 	static Color Indigo;
 	static Color LightSeaGreen;
+	static Color LightSlateGray;
 	static Color LimeGreen;
 	static Color Orange;
 	static Color Olive;

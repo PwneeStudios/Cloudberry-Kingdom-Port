@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class MovingPlatform;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BlockEmitter : public ObjectBase
 	{
 	public:
@@ -30,7 +12,7 @@ namespace CloudberryKingdom
 		float Amp;
 
 	private:
-		std::vector<MovingPlatform*> Platforms;
+		std::vector<std::shared_ptr<MovingPlatform> > Platforms;
 
 	public:
 		virtual void Release();

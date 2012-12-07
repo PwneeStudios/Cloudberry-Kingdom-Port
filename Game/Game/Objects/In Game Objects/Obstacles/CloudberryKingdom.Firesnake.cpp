@@ -1,12 +1,11 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	void Firesnake::FiresnakeTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2(), Color::White );
+		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320 ), Vector2(), Color::White );
 	}
 
 	void Firesnake::MakeNew()
@@ -15,7 +14,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Firesnake_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_FIRESNAKE;
-		DeathType = Bob::BobDeathType_FIRESNAKE;
+		DeathType = BobDeathType_FIRESNAKE;
 
 		PhsxCutoff_Playing = Vector2( 400 );
 		PhsxCutoff_BoxesOnly = Vector2( -100, 400 );

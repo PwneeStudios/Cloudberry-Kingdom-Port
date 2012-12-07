@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		MyStyle = static_cast<Style>( level->getRnd()->RndInt(0, Ceiling_Parameters::Style_LENGTH ) );
+		MyStyle = static_cast<Style>( level->getRnd()->RndInt(0, Ceiling_Parameters::Style_LENGTH - 1 ) );
 
 		if ( PieceSeed->getu()->Get( Upgrade_CEILING ) <= 0 )
 			Make = false;

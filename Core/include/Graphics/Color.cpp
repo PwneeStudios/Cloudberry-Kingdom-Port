@@ -17,6 +17,7 @@ Color Color::Green( unsigned char( 0 ), unsigned char( 255 ), unsigned char( 0 )
 Color Color::HotPink( unsigned char( 255 ), unsigned char( 105 ), unsigned char( 180 ), unsigned char( 255 ) );
 Color Color::Indigo( unsigned char( 75 ), unsigned char( 0 ), unsigned char( 130 ), unsigned char( 255 ) );
 Color Color::LightSeaGreen( unsigned char( 32 ), unsigned char( 178 ), unsigned char( 170 ), unsigned char( 255 ) );
+Color Color::LightSlateGreen( unsigned char( 119 ), unsigned char( 136 ), unsigned char( 153 ), unsigned char( 255 ) );
 Color Color::LimeGreen( unsigned char( 50 ), unsigned char( 205 ), unsigned char( 0 ), unsigned char( 255 ) );
 Color Color::Olive( unsigned char( 128 ), unsigned char( 128 ), unsigned char( 0 ), unsigned char( 255 ) );
 Color Color::Orange( unsigned char( 255 ), unsigned char( 165 ), unsigned char( 0 ), unsigned char( 255 ) );

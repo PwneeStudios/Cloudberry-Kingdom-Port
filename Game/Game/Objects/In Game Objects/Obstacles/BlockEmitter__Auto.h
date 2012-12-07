@@ -5,14 +5,18 @@
 
 namespace CloudberryKingdom
 {
+
 	class BlockEmitter_Parameters : public AutoGen_Parameters
 	{
+
 	public:
 		enum Style
 		{
 			Style_FULL,
-			Style_SEPARATED
+			Style_SEPARATED,
+			Style_LENGTH
 		};
+
 	public:
 		Style MyStyle;
 

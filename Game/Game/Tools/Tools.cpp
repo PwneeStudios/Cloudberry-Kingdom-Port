@@ -570,8 +570,8 @@ bool Tools::MouseInWindow = false;
 	}
 #endif
 
-std::vector<GamePadState> Tools::GamepadState;
-std::vector<GamePadState> Tools::PrevGamepadState;
+	std::vector<GamePadState> Tools::GamepadState;
+	std::vector<GamePadState> Tools::PrevGamepadState;
 
 	std::wstring Tools::StripPath( const std::wstring &file )
 	{

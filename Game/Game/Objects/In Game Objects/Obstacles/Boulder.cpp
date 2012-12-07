@@ -4,9 +4,10 @@ namespace CloudberryKingdom
 {
 	void Boulder::BoulderTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( 0, Vector2(1) );
+		Ball = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1) );
 		Radius = 120;
-		Chain = std::make_shared<LineSpriteInfo>( _T( "chain_tile" ), 44, 63, 0, ( Color( 255, 255, 255, 210 ) ).ToVector4(),.2f );
+		
+		Chain = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "chain_tile" ) ), 44, 63, 0, ( bColor( 255, 255, 255, 210 ) ).ToVector4(), .2f );
 	}
 
 	void Boulder::OnAttachedToBlock()
@@ -220,14 +221,14 @@ namespace CloudberryKingdom
 
 	void Boulder::DrawBoxes()
 	{
-		Tools::QDrawer->DrawLine( PivotPoint, getCore()->Data.Position, Color(255, 255, 255, 215), 20 );
+		Tools::QDrawer->DrawLine( PivotPoint, getCore()->Data.Position, bColor(255, 255, 255, 215), 20 );
 
 		Circle->Draw( Color::LightSlateGray );
 	}
 
 	void Boulder::CalculateLength()
 	{
-		Length = ( getCore()->StartData.Position - PivotPoint )->Length();
+		Length = ( getCore()->StartData.Position - PivotPoint ).Length();
 	}
 
 	void Boulder::Move( Vector2 shift )
