@@ -6,12 +6,12 @@
 #include <vector>
 
 template<class T>
-inline int Clear( const std::queue<T> &v )
+void Clear( std::queue<T> &v )
 {
 	using namespace std;
 
-	queue<shared_ptr<AnimQueueEntry> > empty;
-	swap( AnimQueue, empty );
+	queue<T> empty;
+	swap( v, empty );
 }
 
 #endif

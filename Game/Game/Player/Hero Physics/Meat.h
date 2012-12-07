@@ -5,47 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class RichLevelGenData;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxMeat : public BobPhsxNormal
 	{
 	public:
@@ -100,7 +59,7 @@ namespace CloudberryKingdom
 	private:
 		float SideToDir( ColType side );
 
-		const float &getStickyDir() const;
+		float getStickyDir();
 
 	public:
 		virtual void PhsxStep();

@@ -1,7 +1,7 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
-
 	void BobPhsxInvert::InitSingleton()
 	{
 		BobPhsxNormal::InitSingleton();
@@ -114,7 +114,7 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 	{
 		BobPhsxNormal::Forced( Dir );
 
-		if ( Math::Sign( Dir.Y ) == Math::Sign( Gravity ) )
+		if ( Sign( Dir.Y ) == Sign( Gravity ) )
 			Invert();
 	}
 
@@ -205,9 +205,9 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 			Count = getMyLevel()->getRnd()->RndInt(30, 60);
 
 			if ( getPos().Y > getCam()->getPos().Y )
-				MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY;
+				MyBob->TargetPosition.Y = MyBob->MoveData->MinTargetY;
 			else
-				MyBob->TargetPosition.Y = MyBob->MoveData.MaxTargetY - getMyLevel()->getRnd()->RndFloat(400, 900);
+				MyBob->TargetPosition.Y = MyBob->MoveData->MaxTargetY - getMyLevel()->getRnd()->RndFloat(400, 900);
 		}
 		else
 			Count--;

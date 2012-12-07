@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Quad;
-}
-
-namespace CloudberryKingdom
-{
 	class BobPhsxRocketbox : public BobPhsxBox
 	{
 		// Singleton

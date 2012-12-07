@@ -5,19 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxDouble : public BobPhsxNormal
 	{
 	public:

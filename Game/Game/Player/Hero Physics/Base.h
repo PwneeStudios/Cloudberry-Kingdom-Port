@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 SpritePadding;
 
-		virtual void ToSprites( const std::shared_ptr< std::map<int, std::shared_ptr<SpriteAnim> > > &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( const std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 		virtual void Release();
 

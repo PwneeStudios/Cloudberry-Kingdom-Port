@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -14,7 +12,7 @@ namespace CloudberryKingdom
 			normal->NumJumps = 1;
 		}
 
-		phsx->CapePrototype = Cape::CapeType_NONE;
+		phsx->CapePrototype = CapeType_NONE;
 
 		if ( std::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 && 0 != normal )
 		{

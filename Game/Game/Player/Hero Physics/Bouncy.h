@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxBouncy : public BobPhsxNormal
 	{
 		// Singleton

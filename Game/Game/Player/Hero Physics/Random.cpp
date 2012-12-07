@@ -13,14 +13,16 @@ namespace CloudberryKingdom
 
 const std::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance = std::make_shared<BobPhsxRandom>();
 
-	const std::shared_ptr<BobPhsxRandom> &BobPhsxRandom::getInstance() const
+	const std::shared_ptr<BobPhsxRandom> &BobPhsxRandom::getInstance()
 	{
 		return instance;
 	}
 
 	std::shared_ptr<BobPhsx> BobPhsxRandom::ChooseHeroType()
 	{
-		return Tools::GlobalRnd->Choose( Bob::HeroTypes );
+		// FIXME: Check isomorphism.
+		return Tools::GlobalRnd->ChooseOne( Bob::HeroTypes );
+		//return Tools::GlobalRnd->Choose( Bob::HeroTypes );
 	}
 
 	BobPhsxRandom::BobPhsxRandom()

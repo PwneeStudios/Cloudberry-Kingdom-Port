@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		int RndThrustType;
 
 	public:
-		virtual bool getSticky() const;
+		virtual bool getSticky();
 
 		int BobFallDelay;
 		float XFriction, BobXDunkFriction;
@@ -138,9 +138,9 @@ namespace CloudberryKingdom
 	public:
 		virtual void UpdateReadyToJump();
 
-		const bool &getCanJump() const;
+		bool getCanJump() const;
 
-		const bool &getExternalPreventJump() const;
+		bool getExternalPreventJump() const;
 
 		virtual void Jump();
 
@@ -226,7 +226,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 	public:
 		virtual void Die( BobDeathType DeathType );
 
-		virtual void ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 		virtual void DollInitialize();
 

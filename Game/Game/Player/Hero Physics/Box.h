@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Bob;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class BobPhsxBox : public BobPhsxNormal
 	{
 		// Singleton

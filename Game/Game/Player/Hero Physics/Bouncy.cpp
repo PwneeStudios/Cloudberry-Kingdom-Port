@@ -114,7 +114,8 @@ const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<
 	{
 		if ( !InitializedAnim )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 24, 0, false );
 			MyBob->PlayerObject->DequeueTransfers();
 
@@ -124,7 +125,8 @@ const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<
 		//if (MyBob.Core.Data.Velocity.Y > 10f && !OnGround && StartJumpAnim)
 		if ( ShouldStartJumpAnim() )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 24, 0, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= .85f;

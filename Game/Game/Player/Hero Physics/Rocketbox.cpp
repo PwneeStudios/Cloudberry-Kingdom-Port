@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -41,7 +42,7 @@ const std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance = std::make_s
 		BobPhsxBox::SideHit( side, block );
 
 		if ( MyBob->getCanDie() )
-			MyBob->Die( Bob::BobDeathType_OTHER );
+			MyBob->Die( BobDeathType_OTHER );
 	}
 
 	void BobPhsxRocketbox::DefaultValues()

@@ -69,7 +69,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 		{
 			if ( BehaviorLength == 0 )
 			{
-				if ( getMyLevel()->getRnd()->RndFloat() > ::7 )
+				if ( getMyLevel()->getRnd()->RndFloat() > 0.7f )
 				{
 					CurBehavior = Behavior_PAUSE;
 					BehaviorLength = getMyLevel()->getRnd()->RndInt(5, 10);
@@ -100,7 +100,7 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 
-		Style_TIME_TYPE = Level.TimeTypes_X_SYNC;
+		Style->TimeType = TimeTypes_X_SYNC;
 	}
 
 	void BobPhsxTime::InitializeInstanceFields()

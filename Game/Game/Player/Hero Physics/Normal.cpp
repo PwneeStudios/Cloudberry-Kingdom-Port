@@ -23,7 +23,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		return instance;
 	}
 
-	const bool &BobPhsxNormal::getSticky() const
+	bool BobPhsxNormal::getSticky()
 	{
 		if ( Jumped || NoStickPeriod > 0 )
 		//if (JumpCount > 0 || Jumped || StartJumpAnim)
@@ -121,7 +121,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 	{
 		BobPhsx::Init( bob );
 
-		Offset = int::MinValue;
+		Offset = INT_MIN;
 
 		StartJumpAnim = false;
 
@@ -135,7 +135,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		CurJump = 0;
 
 		bob->MyCapeType = CapePrototype;
-		if ( CapePrototype == Cape::CapeType_NONE )
+		if ( CapePrototype == CapeType_NONE )
 			bob->CanHaveCape = false;
 	}
 
@@ -145,7 +145,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		if ( flipped && MyBob->PlayerObject->DestinationAnim() == 1 )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 1, 0, true );
 			MyBob->PlayerObject->DequeueTransfers();
 		}
@@ -224,7 +225,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Rocketman thrust
 		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && JetPack && Thrusting )
 		{
-			Vector2 Mod = Vector2( MyBob->PlayerObject->xFlip ? - 1 : 1, 1 ) * MyBob->PlayerObject->ParentQuad->getSize() / Vector2(260);
+			Vector2 Mod = Vector2( MyBob->PlayerObject->xFlip ? -1.f : 1.f, 1 ) * MyBob->PlayerObject->ParentQuad->getSize() / Vector2(260.f);
 
 			int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
 
@@ -264,12 +265,12 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			ReadyToThrust = false;
 	}
 
-	const bool &BobPhsxNormal::getCanJump() const
+	bool BobPhsxNormal::getCanJump() const
 	{
 		return ReadyToJump && getyVel() < MaxVerticalSpeed_Jump && (OnGround || FallingCount < BobFallDelay || CurJump < NumJumps && JumpDelayCount <= 0 && CurJump > 0);
 	}
 
-	const bool &BobPhsxNormal::getExternalPreventJump() const
+	bool BobPhsxNormal::getExternalPreventJump() const
 	{
 		return DisableJumpCount > 0;
 	}
@@ -360,7 +361,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		{
 			float max = getyVel() + JumpAccelModifier * speed;
 			float min = MaxJumpAccelMultiple * speed;
-			setyVel( CoreMath::Restrict( min, max, getyVel() ) );
+			setyVel( CoreMath::RestrictVal( min, max, getyVel() ) );
 		}
 		else
 			setyVel( JumpAccelModifier * speed );
@@ -396,7 +397,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			if ( DoFastTakeOff && getxVel() < 0 && getxVel() > -MaxSpeed / 10 )
 				setxVel( -MaxSpeed / 10 );
 		}
-		if ( MyBob->CurInput.xVec.X > ::15 && getxVel() < MaxSpeed )
+		if ( MyBob->CurInput.xVec.X > 0.15f && getxVel() < MaxSpeed )
 		{
 			if ( getxVel() >= 0 )
 				setxVel( getxVel() + accel * MyBob->CurInput.xVec.X );
@@ -425,13 +426,13 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			else
 			{
 				float Prev_xVel = getxVel();
-				setxVel( getxVel() - Math::Sign(getxVel()) * 7 / 4 * fric );
+				setxVel( getxVel() - Sign(getxVel()) * 7 / 4 * fric );
 
 				if ( !Ducking )
 				{
 					// If we were above max speed do not reduce below max speed this frame if xVec.x > 0
 					if ( abs( Prev_xVel ) >= MaxSpeed && abs( getxVel() ) < MaxSpeed )
-						setxVel( Math::Sign( getxVel() ) * MaxSpeed *.999f );
+						setxVel( Sign( getxVel() ) * MaxSpeed *.999f );
 				}
 			}
 		}
@@ -486,7 +487,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			//if (yVel < -BobMaxFallSpeed && Gravity < 0)
 			//    yVel -= Gravity;
 
-			if ( Math::Sign( HoldVel ) != Math::Sign( getyVel() ) )
+			if ( Sign( HoldVel ) != Sign( getyVel() ) )
 			{
 				if ( MyBob->OnApexReached != 0 )
 					MyBob->OnApexReached->Apply();
@@ -590,7 +591,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		else
 			Dir = 0;
 
-		MyBob->CurInput.xVec.X = Dir;
+		MyBob->CurInput.xVec.X = static_cast<float>( Dir );
 	}
 
 	void BobPhsxNormal::GenerateInput_Vertical( int CurPhsxStep )
@@ -640,7 +641,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		if ( getPos().X < cam->BL.X + SoftBound && Dir == -1 )
 			TurnCountdown -= 2;
 
-		MyBob->CurInput.xVec.X = Dir;
+		MyBob->CurInput.xVec.X = static_cast<float>( Dir );
 
 		// Decide if the computer should want to land or not
 		if ( getGeometry() == LevelGeometry_UP )
@@ -709,7 +710,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		else
 			BobEdgeJumpLength--;
 
-		if ( getMyLevel()->Style->AlwaysEdgeJump )
+		if ( getMyLevel()->getStyle()->AlwaysEdgeJump )
 			BobEdgeJump = 1;
 
 		if ( AutoFallOrJumpLength == 0 )
@@ -790,7 +791,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		if ( AutoMoveType == 1 )
 		{
-			MyBob->CurInput.xVec.X = AutoDir;
+			MyBob->CurInput.xVec.X = static_cast<float>( AutoDir );
 
 			// Get rid of spastic computer
 			//if (AutoDirLength_SetTo < 5)
@@ -805,10 +806,10 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		if ( Gravity > 0 )
 		{
-			if ( getPos().Y > MyBob->MoveData.MaxTargetY && OnGround || getPos().Y > MyBob->MoveData.MaxTargetY + 250 || getPos().Y > MyBob->TargetPosition.Y - 150 && JumpDelayCount < 2 && CurJump > 0 )
+			if ( getPos().Y > MyBob->MoveData->MaxTargetY && OnGround || getPos().Y > MyBob->MoveData->MaxTargetY + 250 || getPos().Y > MyBob->TargetPosition.Y - 150 && JumpDelayCount < 2 && CurJump > 0 )
 				MyBob->CurInput.A_Button = false;
 		}
-		if ( getPos().Y < MyBob->MoveData.MinTargetY && AutoFallOrJump > 0 )
+		if ( getPos().Y < MyBob->MoveData->MinTargetY && AutoFallOrJump > 0 )
 		{
 			MyBob->CurInput.A_Button = true;
 		}
@@ -842,7 +843,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			MyBob->CurInput.A_Button = false;
 
 
-		if ( getMyLevel()->Style->AlwaysEdgeJump )
+		if ( getMyLevel()->getStyle()->AlwaysEdgeJump )
 		{
 			if ( !Jumped )
 				MyBob->CurInput.A_Button = false;
@@ -875,8 +876,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			MyBob->Box->CalcBounds();
 			float bobx = MyBob->Box->BL.X;
 			float blockx = block->getBox()->TR.X;
-			float DistancePast = getGenData()->Get(DifficultyParam_DISTANCE_PAST, getPos()); //5;
-			float DistancePast_NoJump = getGenData()->Get(DifficultyParam_DISTANCE_PAST_NO_JUMP, getPos()); //500;
+			float DistancePast = static_cast<float>( getGenData()->Get(DifficultyParam_DISTANCE_PAST, getPos()) ); //5;
+			float DistancePast_NoJump = static_cast<float>( getGenData()->Get(DifficultyParam_DISTANCE_PAST_NO_JUMP, getPos()) ); //500;
 			if ( bobx > blockx + DistancePast || bobx >= blockx - 20 && FallingCount >= BobFallDelay - 2 )
 				MyBob->CurInput.A_Button = true;
 			else if ( bobx > blockx - DistancePast_NoJump )
@@ -926,7 +927,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		}
 
 		// Masochistic
-		if ( getMyLevel()->Style->Masochistic )
+		if ( getMyLevel()->getStyle()->Masochistic )
 		{
 			if ( getPos().Y < TR.Y - 400 && getxVel() > -2 && getPos().X > CurPhsxStep * (4000 / 800) )
 			{
@@ -1039,9 +1040,9 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 	void BobPhsxNormal::SetTarget( const std::shared_ptr<RichLevelGenData> &GenData )
 	{
 			int Period = GenData->Get( BehaviorParam_MOVE_TYPE_PERIOD, getPos() );
-			float InnerPeriod = GenData->Get( BehaviorParam_MOVE_TYPE_INNER_PERIOD, getPos() );
-			float MinTargetY = MyBob->MoveData.MinTargetY;
-			float MaxTargetY = MyBob->MoveData.MaxTargetY;
+			float InnerPeriod = static_cast<float>( GenData->Get( BehaviorParam_MOVE_TYPE_INNER_PERIOD, getPos() ) );
+			float MinTargetY = MyBob->MoveData->MinTargetY;
+			float MaxTargetY = MyBob->MoveData->MaxTargetY;
 
 			float t = 0;
 			int Step = MyBob->getCore()->MyLevel->GetPhsxStep() + Offset;
@@ -1056,7 +1057,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 				else
 					RndMoveType = getMyLevel()->getRnd()->Rnd->Next(0, 6);
 
-				if ( getMyLevel()->Style->AlwaysCurvyMove )
+				if ( getMyLevel()->getStyle()->AlwaysCurvyMove )
 					RndMoveType = 10;
 			}
 			//RndMoveType = 10; /// DANGER DANGER 
@@ -1120,7 +1121,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 					break;
 			}
 			if ( RndMoveType < 6 )
-				MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY + t * ( MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
+				MyBob->TargetPosition.Y = MyBob->MoveData->MinTargetY + t * ( MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
 
 			if ( AllowTypeSwitching && MyBob->getCore()->MyLevel->GetPhsxStep() % Period == 0 )
 				RndMoveType = getMyLevel()->getRnd()->Rnd->Next(0, 7);
@@ -1137,7 +1138,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 	void BobPhsxNormal::GenerateInput( int CurPhsxStep )
 	{
 		// Initialize the offset value if it hasn't been set yet
-		if ( Offset == int::MinValue )
+		if ( Offset == INT_MIN )
 			Offset = getMyLevel()->getRnd()->Rnd->Next(0, 300);
 
 		BobPhsx::GenerateInput( CurPhsxStep );
@@ -1192,7 +1193,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		if ( !InitializedAnim )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			InitializedAnim = true;
 			MyBob->PlayerObject->EnqueueAnimation( 0, 0, false );
 			MyBob->PlayerObject->DequeueTransfers();
@@ -1202,7 +1204,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Falling animation
 		if ( !OnGround && !Ducking && !Jumped && MyBob->PlayerObject->DestinationAnim() != 3 && abs(getxVel()) < 4 && DynamicLessThan(getyVel(), -15) )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 3, 0, true );
 			MyBob->PlayerObject->AnimQueue.front()->AnimSpeed *= .7f;
 		}
@@ -1218,7 +1221,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Ducking animation
 		if ( Ducking && MyBob->PlayerObject->DestinationAnim() != 4 )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 4, 0, false );
 			MyBob->PlayerObject->AnimQueue.front()->AnimSpeed *= 12;
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= 2.5f;
@@ -1226,7 +1230,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Reverse ducking animation
 		if ( !Ducking && MyBob->PlayerObject->DestinationAnim() == 4 )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			if ( getyVel() > 0 )
 				MyBob->PlayerObject->EnqueueAnimation( 2, 0.3f, false );
 			else
@@ -1241,7 +1246,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 			{
 			{
 					int HoldDest = MyBob->PlayerObject->DestinationAnim();
-					MyBob->PlayerObject->AnimQueue.clear();
+					Clear( MyBob->PlayerObject->AnimQueue );
+					//MyBob->PlayerObject->AnimQueue.clear();
 					MyBob->PlayerObject->EnqueueAnimation( 0, 0, true );
 					MyBob->PlayerObject->AnimQueue.front()->AnimSpeed *= 20;
 					if ( HoldDest == 1 )
@@ -1253,8 +1259,9 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		if ( !Ducking )
 			if ( ( abs( getxVel() ) >= 1 && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
 			{
-			{
-					MyBob->PlayerObject->AnimQueue.clear();
+				{
+					Clear( MyBob->PlayerObject->AnimQueue );
+					//MyBob->PlayerObject->AnimQueue.clear();
 
 					if ( OnGround )
 					{
@@ -1276,7 +1283,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 					speed = .002f;
 				}
 
-				MyBob->PlayerObject->AnimQueue.clear();
+				Clear( MyBob->PlayerObject->AnimQueue );
+				//MyBob->PlayerObject->AnimQueue.clear();
 				MyBob->PlayerObject->EnqueueAnimation( anim, 0.3f, false );
 				MyBob->PlayerObject->DequeueTransfers();
 				MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= speed;
@@ -1287,7 +1295,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		if ( !Ducking )
 			if ( DynamicLessThan( getyVel(), -.1f ) && !OnGround && MyBob->PlayerObject->anim == 2 && MyBob->PlayerObject->LastAnimEntry->AnimSpeed > 0 )
 			{
-				MyBob->PlayerObject->AnimQueue.clear();
+				Clear( MyBob->PlayerObject->AnimQueue );
+				//MyBob->PlayerObject->AnimQueue.clear();
 				MyBob->PlayerObject->EnqueueAnimation( 2,.9f, false );
 				MyBob->PlayerObject->DequeueTransfers();
 				MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= -1;
@@ -1315,7 +1324,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Falling animation
 		if ( !OnGround && !Ducking && MyBob->PlayerObject->DestinationAnim() != 3 && DynamicLessThan(getyVel(), -15) )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 3, 0, false );
 			MyBob->PlayerObject->DequeueTransfers();
 		}
@@ -1331,7 +1341,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		// Ducking animation
 		if ( Ducking && MyBob->PlayerObject->DestinationAnim() != 4 )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( 4, 1, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= 2.5f;
@@ -1341,7 +1352,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		{
 			MyBob->PlayerObject->DoSpriteAnim = false;
 
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			if ( getyVel() > 0 )
 			{
 				MyBob->PlayerObject->Read( 2, 1 );
@@ -1366,7 +1378,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 				if ( !( IceRun && SameInputDirectionCount > 0 && OnGround ) )
 				{
 					int HoldDest = MyBob->PlayerObject->DestinationAnim();
-					MyBob->PlayerObject->AnimQueue.clear();
+					Clear( MyBob->PlayerObject->AnimQueue );
+					//MyBob->PlayerObject->AnimQueue.clear();
 					MyBob->PlayerObject->EnqueueAnimation( 0, 1, true );
 
 					MyBob->PlayerObject->DequeueTransfers();
@@ -1379,7 +1392,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		if ( !Ducking )
 		{
 			// Slide
-			if ( !IceRun && abs( getxVel() ) >= .35f && OnGround && Math::Sign(MyBob->CurInput.xVec.X) != Math::Sign(getxVel()) && abs(MyBob->CurInput.xVec.X) > ::35 )
+			if ( !IceRun && abs( getxVel() ) >= .35f && OnGround && Sign(MyBob->CurInput.xVec.X) != Sign(getxVel()) && abs(MyBob->CurInput.xVec.X) > 0.35f )
 			{
 				if ( MyBob->PlayerObject->DestinationAnim() != 5 )
 				{
@@ -1391,8 +1404,9 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 			if ( ( ( abs( getxVel() ) >= .35f && !IceRun || SameInputDirectionCount > 0 && IceRun ) && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
 			{
-			{
-					MyBob->PlayerObject->AnimQueue.clear();
+				{
+					Clear( MyBob->PlayerObject->AnimQueue );
+					//MyBob->PlayerObject->AnimQueue.clear();
 
 					if ( OnGround )
 					{
@@ -1415,7 +1429,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 					speed = 1.2f;
 				}
 
-				MyBob->PlayerObject->AnimQueue.clear();
+				Clear( MyBob->PlayerObject->AnimQueue );
+				//MyBob->PlayerObject->AnimQueue.clear();
 				MyBob->PlayerObject->EnqueueAnimation( anim, 0, false );
 				MyBob->PlayerObject->DequeueTransfers();
 				MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= speed;
@@ -1483,7 +1498,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 					//Dir.Y = Math.Abs(Dir.Y);
 					//if (Dir.Y < .1f) Dir.Y = .1f;
 
-					Vector2 Dir = Vector2( Math::Sign( getPos().X - MyBob->KillingObject->getCore()->Data.Position.X ), 1 );
+					Vector2 Dir = Vector2( static_cast<float>( Sign( getPos().X - MyBob->KillingObject->getCore()->Data.Position.X ) ), 1 );
 
 					setVel( Dir * 40 );
 					setAcc( Vector2( 0, -1.9f ) );
@@ -1512,7 +1527,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) )->Play( .4f );
 	}
 
-	void BobPhsxNormal::Die( Bob::BobDeathType DeathType )
+	void BobPhsxNormal::Die( BobDeathType DeathType )
 	{
 		BobPhsx::Die( DeathType );
 
@@ -1525,7 +1540,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		SetDeathVel( DeathType );
 
-		obj->AnimQueue.clear();
+		Clear( obj->AnimQueue );
+		//obj->AnimQueue.clear();
 		obj->EnqueueAnimation( 5, 0, false, true );
 		//obj.EnqueueAnimation("ToPieces", 0, false, true);
 		//obj.EnqueueAnimation("ToPieces", 0, false, true);
@@ -1537,16 +1553,16 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		return;
 	}
 
-	void BobPhsxNormal::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxNormal::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 		BobPhsx::ToSprites( SpriteAnims, Padding );
 
 		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
-		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
-		SpriteAnims.insert( make_pair( 1, Obj->AnimToSpriteFrames( 1, 1, true, 1, 1, Padding ) ) );
-		SpriteAnims.insert( make_pair( 2, Obj->AnimToSpriteFrames( 2, 1, false, 1, 1, Padding ) ) );
-		SpriteAnims.insert( make_pair( 4, Obj->AnimToSpriteFrames( 4, 1, false, 1, 1, Padding ) ) );
-		SpriteAnims.insert( make_pair( 5, Obj->AnimToSpriteFrames( 5, 1, false, 1, 1, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 1, Obj->AnimToSpriteFrames( 1, 1, true, 1, 1, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 2, Obj->AnimToSpriteFrames( 2, 1, false, 1, 1, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 4, Obj->AnimToSpriteFrames( 4, 1, false, 1, 1, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 5, Obj->AnimToSpriteFrames( 5, 1, false, 1, 1, Padding ) ) );
 	}
 
 	void BobPhsxNormal::DollInitialize()

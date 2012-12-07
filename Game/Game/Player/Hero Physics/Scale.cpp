@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	{
 		phsx->Oscillate_Renamed = true;
 		phsx->ForceDown = -7.5f;
-		phsx->CapePrototype = Cape::CapeType_NORMAL;
+		phsx->CapePrototype = CapeType_NORMAL;
 
 		phsx->DollCamZoomMod = .535f;
 	}

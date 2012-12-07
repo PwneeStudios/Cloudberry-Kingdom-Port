@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -78,19 +77,19 @@ int BobPhsxWheel::AnimIndex = 0;
 	            float AngleFriction = .5f * AngleAcc;
 	            */
 		float xVec = MyBob->CurInput.xVec.X;
-		int xVecSign = Math::Sign( xVec );
+		int xVecSign = Sign( xVec );
 
-		if ( abs( xVec ) > ::2 )
+		if ( abs( xVec ) > 0.2f )
 		{
 			// Faster acc if we are trying to reverse directions
-			if ( Math::Sign( xVec ) != Math::Sign( AngleSpeed ) )
+			if ( Sign( xVec ) != Sign( AngleSpeed ) )
 				_AngleAcc *= 1.65f;
 			AngleSpeed += _AngleAcc * MyBob->CurInput.xVec.X;
 		}
 		else
 		{
 			// Friction
-			AngleSpeed -= AngleFriction * Math::Sign( AngleSpeed );
+			AngleSpeed -= AngleFriction * Sign( AngleSpeed );
 			if ( abs( AngleSpeed ) < AngleFriction * 1.2f )
 				AngleSpeed = 0;
 		}
@@ -167,7 +166,7 @@ int BobPhsxWheel::AnimIndex = 0;
 	{
 		BobPhsxNormal::SideHit( side, block );
 
-		if ( abs( AngleSpeed ) > ::5 * MaxAngleSpeed )
+		if ( abs( AngleSpeed ) > 0.5f * MaxAngleSpeed )
 		{
 			if ( side == ColType_LEFT )
 				MyBob->getCore()->Data.Velocity.Y += .15f * (AngleToDist(AngleSpeed) - MyBob->getCore()->Data.Velocity.Y);
@@ -195,10 +194,10 @@ int BobPhsxWheel::AnimIndex = 0;
 		Style->DoorHitBoxPadding = Vector2( 25, 0 );
 	}
 
-	void BobPhsxWheel::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxWheel::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
-		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( AnimIndex, 1, false, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( AnimIndex, 1, false, Padding ) ) );
 	}
 
 	void BobPhsxWheel::InitializeInstanceFields()

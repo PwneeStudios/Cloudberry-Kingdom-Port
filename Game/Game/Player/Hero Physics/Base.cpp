@@ -532,7 +532,7 @@ namespace CloudberryKingdom
 		MaxJumpAccelMultiple = JumpAccelModifier = JumpLengthModifier = 1;
 	}
 
-	void BobPhsx::ToSprites( const std::shared_ptr< std::map<int, std::shared_ptr<SpriteAnim> > > &SpriteAnims, Vector2 Padding )
+	void BobPhsx::ToSprites( const std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 	}
 

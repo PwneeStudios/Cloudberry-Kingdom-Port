@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	private:
 		static const std::shared_ptr<BobPhsxRandom> instance;
 	public:
-		static std::shared_ptr<BobPhsxRandom> &getInstance();
+		static const std::shared_ptr<BobPhsxRandom> &getInstance();
 
 		static std::shared_ptr<BobPhsx> ChooseHeroType();
 

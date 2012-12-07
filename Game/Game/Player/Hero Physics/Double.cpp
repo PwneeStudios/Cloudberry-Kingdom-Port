@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -16,7 +14,7 @@ namespace CloudberryKingdom
 			normal->NumJumps = 2;
 		}
 
-		phsx->CapePrototype = Cape::CapeType_NONE;
+		phsx->CapePrototype = CapeType_NONE;
 	}
 
 	void BobPhsxDouble::SetDoubleObject( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<BobPhsx> &phsx )

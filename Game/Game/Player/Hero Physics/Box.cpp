@@ -144,7 +144,8 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		{
 			if ( !InitializedAnim )
 			{
-				MyBob->PlayerObject->AnimQueue.clear();
+				Clear( MyBob->PlayerObject->AnimQueue );
+				//MyBob->PlayerObject->AnimQueue.clear();
 				InitializedAnim = true;
 			}
 			MyBob->PlayerObject->EnqueueAnimation( StandAnim, 0, true );
@@ -153,7 +154,8 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 
 		if ( ShouldStartJumpAnim() )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( JumpAnim, 0.3f, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= .85f;
@@ -165,7 +167,8 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		int DuckAnim = 8;
 		if ( Ducking && MyBob->PlayerObject->DestinationAnim() != DuckAnim )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( DuckAnim, 1, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= 2.5f;
@@ -175,7 +178,8 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		{
 			//MyBob.PlayerObject.DoSpriteAnim = false;
 
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			if ( getyVel() > 0 )
 				MyBob->PlayerObject->EnqueueAnimation( 6,.8f, false );
 			else
@@ -187,7 +191,8 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		if ( !Ducking )
 		if ( MyBob->getCore()->Data.Velocity.Y < -.1f && !OnGround && MyBob->PlayerObject->anim == JumpAnim && MyBob->PlayerObject->LastAnimEntry->AnimSpeed > 0 )
 		{
-			MyBob->PlayerObject->AnimQueue.clear();
+			Clear( MyBob->PlayerObject->AnimQueue );
+			//MyBob->PlayerObject->AnimQueue.clear();
 			MyBob->PlayerObject->EnqueueAnimation( JumpAnim,.9f, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= -1;

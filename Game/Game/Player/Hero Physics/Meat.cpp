@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	void BobPhsxMeat::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
 	{
 		phsx->ModInitSize = 1.25f * Vector2( .27f,.27f ) * modsize;
-		phsx->CapePrototype = Cape::CapeType_SMALL;
+		phsx->CapePrototype = CapeType_SMALL;
 
 		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
@@ -74,7 +74,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		WallJumpCount = StepsSinceSide = StepsOnSide = 0;
 		CanWallJump = false;
 
-		Target = Vector2( float::MinValue, float::MinValue );
+		Target = Vector2( FLT_MIN, FLT_MIN );
 	}
 
 	void BobPhsxMeat::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
@@ -164,7 +164,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		}
 	}
 
-	const float &BobPhsxMeat::getStickyDir() const
+	float BobPhsxMeat::getStickyDir()
 	{
 		return SideToDir( StickySide );
 	}
@@ -174,7 +174,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		// Additional wall jumping phsx
 		if ( WallJumpCount > 0 )
 		{
-			if ( !MyBob->CurInput.A_Button || abs( MyBob->CurInput.xVec.X ) > ::3 && Math::Sign( MyBob->CurInput.xVec.X ) == getStickyDir() )
+			if ( !MyBob->CurInput.A_Button || abs( MyBob->CurInput.xVec.X ) > 0.3f && Sign( MyBob->CurInput.xVec.X ) == getStickyDir() )
 				WallJumpCount = 0;
 			else
 			{
@@ -221,7 +221,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 
 			if ( StickySide == ColType_RIGHT && MyBob->CurInput.xVec.X < -.3f )
 				IsStuck = false;
-			if ( StickySide == ColType_LEFT && MyBob->CurInput.xVec.X > ::3 )
+			if ( StickySide == ColType_LEFT && MyBob->CurInput.xVec.X > 0.3f )
 				IsStuck = false;
 		}
 
@@ -282,7 +282,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 			Target = Vector2( getMyLevel()->getRnd()->RndFloat(getCam()->BL.X + 600, getCam()->TR.X - 600),.5f * (getPos().Y + getMyLevel()->getRnd()->RndFloat(-400, 3000) + AlwaysForward.Y) );
 		}
 
-		PrefferedDir.X = Math::Sign( Target.X - getPos().X );
+		PrefferedDir.X = static_cast<float>( Sign( Target.X - getPos().X ) );
 		//if (MyLevel.Rnd.RndBool())
 		//    Target = new Vector2(Cam.TR.X, 100000);
 		//else
@@ -316,7 +316,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 
 		// Move right/left if target is to our right/left.
 		if ( getPos().Y > getMyLevel()->Fill_TR.Y + 65 )
-			MyBob->CurInput.xVec.X = Math::Sign( Target.X - getPos().X );
+			MyBob->CurInput.xVec.X = static_cast<float>( Sign( Target.X - getPos().X ) );
 		else
 			MyBob->CurInput.xVec.X = PrefferedDir.X;
 
@@ -370,7 +370,7 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 
 			//if (Pos.X > Cam.TR.X - 900 ||
 			//    Pos.X < Cam.BL.X + 900)
-			MyBob->CurInput.xVec.X = Math::Sign( Target.X - getPos().X );
+			MyBob->CurInput.xVec.X = static_cast<float>( Sign( Target.X - getPos().X ) );
 		}
 
 		// Don't wall jump if we are going up fast

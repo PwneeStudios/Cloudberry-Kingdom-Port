@@ -65,7 +65,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		//MyBob.Core.Data.Velocity.X += 2.8f;
 		MyBob->getCore()->Data.Velocity.X += 2.3f;
 
-		if ( MyBob->CurInput.xVec.Length() > ::2 )
+		if ( MyBob->CurInput.xVec.Length() > 0.2f )
 		{
 			MyBob->getCore()->Data.Velocity += XAccel * MyBob->CurInput.xVec;
 
@@ -85,7 +85,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		BobPhsx::SideHit( side, block );
 
 		if ( getMyLevel()->PlayMode == 0 && !MyBob->Immortal )
-			MyBob->Die( Bob::BobDeathType_OTHER );
+			MyBob->Die( BobDeathType_OTHER );
 	}
 
 	void BobPhsxSpaceship::PhsxStep2()
@@ -184,24 +184,24 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		AutoDirLength--;
 
 		if ( AutoMoveType == 1 )
-			MyBob->CurInput.xVec.Y = AutoDir;
+			MyBob->CurInput.xVec.Y = static_cast<float>( AutoDir );
 
 
 		float RetardFactor = .01f * MyBob->getCore()->MyLevel->CurMakeData->GenData->Get(DifficultyParam_JUMPING_SPEED_RETARD_FACTOR, MyBob->getCore()->Data.Position);
 		if ( MyBob->getCore()->Data.Velocity.Y > RetardFactor * MaxSpeed )
 			MyBob->CurInput.xVec.Y = 0;
 
-		MyBob->CurInput.xVec.Y *= __min( 1, static_cast<float>( cos( MyBob->getCore()->MyLevel->GetPhsxStep() / 65 ) ) + 1.35f );
+		MyBob->CurInput.xVec.Y *= __min( 1, static_cast<float>( cosf( MyBob->getCore()->MyLevel->GetPhsxStep() / 65.f ) ) + 1.35f );
 
 		float t = 0;
 		if ( RndMoveType == 0 )
-			t = ( static_cast<float>( cos( MyBob->getCore()->MyLevel->GetPhsxStep() / 40 ) ) + 1 ) / 2;
+			t = ( static_cast<float>( cosf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 1 )
-			t = ( static_cast<float>( sin( MyBob->getCore()->MyLevel->GetPhsxStep() / 40 ) ) + 1 ) / 2;
+			t = ( static_cast<float>( sinf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 2 )
-			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120 );
+			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
-		MyBob->TargetPosition.X = MyBob->MoveData.MinTargetY - 160 + t * ( 200 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
+		MyBob->TargetPosition.X = MyBob->MoveData->MinTargetY - 160 + t * ( 200 + MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
 		//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
 
 		if ( MyBob->getCore()->Data.Position.X < MyBob->TargetPosition.X )
@@ -282,24 +282,24 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		AutoDirLength--;
 
 		if ( AutoMoveType == 1 )
-			MyBob->CurInput.xVec.X = AutoDir;
+			MyBob->CurInput.xVec.X = static_cast<float>( AutoDir );
 
 
 		float RetardFactor = .01f * MyBob->getCore()->MyLevel->CurMakeData->GenData->Get(DifficultyParam_JUMPING_SPEED_RETARD_FACTOR, MyBob->getCore()->Data.Position);
 		if ( !OnGround && MyBob->getCore()->Data.Velocity.X > RetardFactor * MaxSpeed )
 			MyBob->CurInput.xVec.X = 0;
 
-		MyBob->CurInput.xVec.X *= __min( 1, static_cast<float>( cos( MyBob->getCore()->MyLevel->GetPhsxStep() / 65 ) ) + 1.35f );
+		MyBob->CurInput.xVec.X *= __min( 1, static_cast<float>( cosf( MyBob->getCore()->MyLevel->GetPhsxStep() / 65.f ) ) + 1.35f );
 
 		float t = 0;
 		if ( RndMoveType == 0 )
-			t = ( static_cast<float>( cos( MyBob->getCore()->MyLevel->GetPhsxStep() / 40 ) ) + 1 ) / 2;
+			t = ( static_cast<float>( cosf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 1 )
-			t = ( static_cast<float>( sin( MyBob->getCore()->MyLevel->GetPhsxStep() / 40 ) ) + 1 ) / 2;
+			t = ( static_cast<float>( sinf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 2 )
-			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120 );
+			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
-		MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY - 200 + t * ( -90 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
+		MyBob->TargetPosition.Y = MyBob->MoveData->MinTargetY - 200 + t * ( -90 + MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
 				//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
 
 		if ( MyBob->getCore()->Data.Position.Y < MyBob->TargetPosition.Y )
@@ -339,10 +339,10 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		BobPhsx::AnimStep();
 	}
 
-	void BobPhsxSpaceship::ToSprites( std::map<int, SpriteAnim*> &SpriteAnims, Vector2 Padding )
+	void BobPhsxSpaceship::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
-		SpriteAnims.insert( make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
+		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
 	}
 
 	void BobPhsxSpaceship::Die( BobDeathType DeathType )
@@ -365,7 +365,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 			if ( !( *block )->getCore()->MarkedForDeletion && (*block)->getCore()->Real && (*block)->getIsActive() && (*block)->getCore()->Active && Phsx::BoxBoxOverlap(MyBob->Box2, (*block)->getBox()) )
 			{
 				if ( !MyBob->Immortal )
-					MyBob->Die( Bob::BobDeathType_OTHER );
+					MyBob->Die( BobDeathType_OTHER );
 				else
 					( *block )->Hit( MyBob );
 			}
