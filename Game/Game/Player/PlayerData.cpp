@@ -35,11 +35,11 @@ namespace CloudberryKingdom
 			HighScore->second->WriteChunk_1000( writer );
 
 		// Awardments
-		for ( CloudberryKingdom::Set<int>::const_iterator guid = Awardments_Renamed->begin(); guid != Awardments_Renamed->end(); ++guid )
+		for ( std::map<int, bool>::const_iterator guid = Awardments_Renamed->dict.begin(); guid != Awardments_Renamed->dict.end(); ++guid )
 			Chunk::WriteSingle( writer, 2, ColorSchemeIndex );
 
 		// Purchases
-		for ( CloudberryKingdom::Set<int>::const_iterator guid = Purchases->begin(); guid != Purchases->end(); ++guid )
+		for ( std::map<int, bool>::const_iterator guid = Purchases->dict.begin(); guid != Purchases->dict.end(); ++guid )
 			Chunk::WriteSingle( writer, 3, ColorSchemeIndex );
 
 		// Stats
@@ -63,18 +63,22 @@ namespace CloudberryKingdom
 
 	void PlayerData::Deserialize( std::vector<unsigned char> Data )
 	{
-		for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		chunks->StartGettingChunks();
+		while( chunks->HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+
+			switch ( chunk->Type )
 			{
 				// Color scheme
 				case 0:
-					CustomColorScheme.ReadChunk_0( *chunk );
+					CustomColorScheme.ReadChunk_0( chunk );
 					ColorScheme_Renamed = CustomColorScheme;
 					break;
 
 				case 1:
-					( *chunk )->ReadSingle( ColorSchemeIndex );
+					chunk->ReadSingle( ColorSchemeIndex );
 
 					if ( ColorSchemeIndex == Unset::Int )
 						ColorSchemeIndex = 0;
@@ -85,37 +89,39 @@ namespace CloudberryKingdom
 
 				// High Scores
 				case 1000:
-					std::shared_ptr<ScoreEntry> score = std::make_shared<ScoreEntry>();
-					score->ReadChunk_1000( *chunk );
-					AddHighScore( score );
+					{
+						std::shared_ptr<ScoreEntry> score = std::make_shared<ScoreEntry>();
+						score->ReadChunk_1000( chunk );
+						AddHighScore( score );
+					}
 					break;
 
 				// Awardments
 				case 2:
-					Awardments_Renamed += ( *chunk )->ReadInt();
+					Awardments_Renamed->Add( chunk->ReadInt() );
 					break;
 
 				// Purchases
 				case 3:
-					Purchases += ( *chunk )->ReadInt();
+					Purchases->Add( chunk->ReadInt() );
 					break;
 
 				// Stats
 				case 4:
-					LifetimeStats->ReadChunk_4( *chunk );
+					LifetimeStats->ReadChunk_4( chunk );
 					break;
 
 				// Saved Seeds
 				case 5:
-					MySavedSeeds->ReadChunk_5( *chunk );
+					MySavedSeeds->ReadChunk_5( chunk );
 					break;
 
 				// Campaign (Chunks 100 and up)
 				case 100:
-					CampaignCoins = ( *chunk )->ReadInt();
+					CampaignCoins = chunk->ReadInt();
 					break;
 				case 101:
-					CampaignLevel = ( *chunk )->ReadInt();
+					CampaignLevel = chunk->ReadInt();
 					break;
 			}
 		}
@@ -134,7 +140,9 @@ namespace CloudberryKingdom
 		if ( HighScores.find( score->GameId ) != HighScores.end() && score->Value < HighScores[ score->GameId ]->Value )
 			return;
 
-		HighScores.AddOrOverwrite( score->GameId, score );
+		// FIXME: This was AddOrOverwrite.
+		//HighScores.AddOrOverwrite( score->GameId, score );
+		HighScores[ score->GameId ] = score;
 
 		// Mark this object as changed, so that it will be saved to disk.
 		Changed = true;
@@ -167,25 +175,45 @@ namespace CloudberryKingdom
 	std::shared_ptr<PlayerStats> PlayerData::GetSummedStats( StatGroup group )
 	{
 		if ( group == StatGroup_LIFETIME )
-			return SumStats( StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME, StatGroup_LIFETIME );
+		{
+			static StatGroup groups[] = { StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME, StatGroup_LIFETIME };
+			static std::vector<StatGroup> vecGroups( VecFromArray( groups ) );
+			return SumStats( vecGroups );
+		}
 		if ( group == StatGroup_CAMPAIGN )
-			return SumStats( StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME, StatGroup_CAMPAIGN );
+		{
+			static StatGroup groups[] = { StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME, StatGroup_CAMPAIGN };
+			static std::vector<StatGroup> vecGroups( VecFromArray( groups ) );
+			return SumStats( vecGroups );
+		}
 		if ( group == StatGroup_GAME )
-			return SumStats( StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME );
+		{
+			static StatGroup groups[] = { StatGroup_TEMP, StatGroup_LEVEL, StatGroup_GAME };
+			static std::vector<StatGroup> vecGroups( VecFromArray( groups ) );
+			return SumStats( vecGroups );
+		}
 		if ( group == StatGroup_LEVEL )
-			return SumStats( StatGroup_TEMP, StatGroup_LEVEL );
+		{
+			static StatGroup groups[] = { StatGroup_TEMP, StatGroup_LEVEL };
+			static std::vector<StatGroup> vecGroups( VecFromArray( groups ) );
+			return SumStats( vecGroups );
+		}
 		if ( group == StatGroup_TEMP )
-			return SumStats( StatGroup_TEMP );
+		{
+			static StatGroup groups[] = { StatGroup_TEMP };
+			static std::vector<StatGroup> vecGroups( VecFromArray( groups ) );
+			return SumStats( vecGroups );
+		}
 
 		return 0;
 	}
 
-	std::shared_ptr<PlayerStats> PlayerData::SumStats( ... )
+	std::shared_ptr<PlayerStats> PlayerData::SumStats( const std::vector<StatGroup> &group )
 	{
 		std::shared_ptr<PlayerStats> StatSum = std::make_shared<PlayerStats>();
 
 		StatSum->Clean();
-		for ( unknown::const_iterator g = group.begin(); g != group.end(); ++g )
+		for ( std::vector<StatGroup>::const_iterator g = group.begin(); g != group.end(); ++g )
 			StatSum->Absorb( GetStats( *g ) );
 
 		return StatSum;
@@ -230,7 +258,7 @@ namespace CloudberryKingdom
 
 	Vector4 PlayerData::GetTextColor()
 	{
-		Vector4 clr = ColorScheme_Renamed.SkinColor.DetailColor.ToVector4();
+		Vector4 clr = ColorScheme_Renamed.SkinColor->DetailColor.ToVector4();
 		if ( clr.W == 0 )
 			clr = Vector4( 1, 1, 1, 1 );
 		return clr;

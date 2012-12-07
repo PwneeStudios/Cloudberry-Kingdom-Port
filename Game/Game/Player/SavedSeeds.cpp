@@ -1,9 +1,5 @@
 #include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -18,9 +14,9 @@ namespace CloudberryKingdom
 
 	bool SavedSeeds::IsSeedValue( const std::wstring &seed )
 	{
-		if ( !seed.find( _T( ";" ) ) != string::npos )
+		if ( !seed.find( _T( ";" ) ) != std::wstring::npos )
 			return false;
-		if ( !seed.find( _T( ":" ) ) != string::npos )
+		if ( !seed.find( _T( ":" ) ) != std::wstring::npos )
 			return false;
 		return true;
 	}
@@ -38,12 +34,17 @@ namespace CloudberryKingdom
 
 	void SavedSeeds::ReadChunk_5( const std::shared_ptr<Chunk> &ParentChunk )
 	{
-		for ( CloudberryKingdom::Chunk::const_iterator chunk = ParentChunk->begin(); chunk != ParentChunk->end(); ++chunk )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
+		chunks->StartGettingChunks();
+
+		while( chunks->HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+
+			switch ( chunk->Type )
 			{
 				case 0:
-					SeedStrings.push_back( ( *chunk )->ReadString() );
+					SeedStrings.push_back( chunk->ReadString() );
 					break;
 			}
 		}

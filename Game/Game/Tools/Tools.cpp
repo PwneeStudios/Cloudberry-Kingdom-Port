@@ -203,7 +203,7 @@ template<typename T>
 	}
 
 	template<typename TSource>
-	bool Tools::Any( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+	bool Tools::Any( const std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 	{
 		for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 			if ( predicate->Apply( *obj ) )

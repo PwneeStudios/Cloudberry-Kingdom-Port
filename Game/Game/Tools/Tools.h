@@ -120,7 +120,7 @@ static std::wstring SourceTextureDirectory();
 		static bool All( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
 
 		template<typename TSource>
-		static bool Any( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static bool Any( const std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
 
 		template<typename TSource>
 		static void RemoveAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );

@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether the user can skip a movie.
 		/// </summary>
-		static std::shared_ptr<CloudberryKingdom::Set<std::wstring> > WatchedVideo;
+		static Set<std::wstring> WatchedVideo;
 
 		/// <summary>
 		/// Set the value of a variable and make sure the variable is persisted to disk.
@@ -53,17 +53,21 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 	};
 
+	class RezData
+	{
+	public:
+		bool Custom, Fullscreen;
+		int Width, Height;
+
+		RezData() : Custom( false ), Fullscreen( false ), Width( 0 ), Height( 0 ) { }
+	};
+
 	class PlayerManager
 	{
 	public:
-		class RezData
-		{
-		public:
-			bool Custom, Fullscreen;
-			int Width, Height;
-		};
+		
 	private:
-		class SaveRezAndKeysLambda : public Lambda_1<BinaryWriter*>
+		class SaveRezAndKeysLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
 		{
 		public:
 			SaveRezAndKeysLambda();
@@ -81,7 +85,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		class GetGroupGamerTagNameLength : public LambdaFunc_1<StringBuilder*, float>
+		class GetGroupGamerTagNameLength : public LambdaFunc_1<std::shared_ptr<StringBuilder>, float>
 		{
 		public:
 			float Apply( const std::shared_ptr<StringBuilder> &name );
@@ -128,6 +132,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
+#if defined(XBOX) || defined(XBOX_SIGNIN)
 		class ExistingPlayerFindLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
 		public:
@@ -135,6 +140,8 @@ namespace CloudberryKingdom
 
 			bool Apply( const std::shared_ptr<PlayerData> &player );
 		};
+#endif
+
 #if defined(PC_VERSION) || defined(WINDOWS)
 #endif
 #if defined(PC_VERSION)
@@ -188,7 +195,7 @@ namespace CloudberryKingdom
 		static std::vector<std::shared_ptr<PlayerData> > Players;
 
 	private:
-		static int length( std::vector<StringBuilder*> &names );
+		static int length( std::vector<std::shared_ptr<StringBuilder> > &names );
 
 		/// <summary>
 		/// Return a string representing the names of all players playing

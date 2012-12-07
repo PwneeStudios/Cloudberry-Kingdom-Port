@@ -9,14 +9,16 @@ namespace CloudberryKingdom
 	{
 	public:
 		static std::shared_ptr<Chunks> Get( std::vector<unsigned char> Data );
+		static std::shared_ptr<Chunks> Get( std::shared_ptr<Chunk> Chunk );
 
 	private:
 		std::vector<unsigned char> Data;
 
 		int _Position;
+		int _StartPosition;
 
 	public:
-		Chunks( std::vector<unsigned char> Data );
+		Chunks( std::vector<unsigned char> Data, int offset );
 
 		void StartGettingChunks();
 		const bool HasChunk();
@@ -62,7 +64,7 @@ namespace CloudberryKingdom
 		int Type;
 		int Length;
 
-	private:
+	public:
 		std::vector<unsigned char> Buffer;
 		int Position;
 

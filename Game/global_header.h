@@ -875,6 +875,10 @@ class StringBuilder
 
 public:
 
+	StringBuilder( const std::wstring &str )
+	{
+	}
+
 	StringBuilder( int Capacity, int MaxCapacity )
 	{
 		// FIXME
@@ -896,10 +900,19 @@ public:
 		// FIXME: this should affect the string. length == 0 should make the string equal to "".
 	}
 
+	int getLength()
+	{
+		return 0;
+	}
+
 	std::wstring ToString()
 	{
 		return _T( "" );
 		// FIXME: implement
+	}
+
+	void Remove( int offset, int length )
+	{
 	}
 
 	/// <summary>
