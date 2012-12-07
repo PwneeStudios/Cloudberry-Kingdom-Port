@@ -3,6 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	PassGetSeedAsLambda_LevelSequence::PassGetSeedAsLambda_LevelSequence( const std::shared_ptr<LevelSequence> &ls )
+	{
+		this->ls = ls;
+	}
+
+	std::shared_ptr<LevelSeedData> PassGetSeedAsLambda_LevelSequence::Apply( const int &index )
+	{
+		return ls->GetSeed( index );
+	}
+
 	LevelSequence::OnLevelBeginLambda::OnLevelBeginLambda( const std::shared_ptr<LevelSequence> &ls )
 	{
 		this->ls = ls;
@@ -36,12 +46,12 @@ namespace CloudberryKingdom
 		StartIndex = StartLevel;
 
 		// Create the string world, and add the relevant game objects
-		std::shared_ptr<PassGetSeedAsLambda> _GetSeed = std::make_shared<PassGetSeedAsLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) );
+		std::shared_ptr<PassGetSeedAsLambda_LevelSequence> _GetSeed = std::make_shared<PassGetSeedAsLambda_LevelSequence>( shared_from_this() );
 
 		std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > __GetSeed =
 			std::static_pointer_cast<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( _GetSeed );
 
-		MyStringWorld = std::make_shared<StringWorldGameData>( std::make_shared<Func>( shared_from_this(), &LevelSequence::GetSeed ) );
+		MyStringWorld = std::make_shared<StringWorldGameData>( __GetSeed );
 		MyStringWorld->StartLevelMusic.reset();
 
 		// OnLevelBegin preprocessing for each level.

@@ -5,7 +5,21 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSequence
+
+	class PassGetSeedAsLambda_LevelSequence : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+	{
+
+	private:
+		std::shared_ptr<LevelSequence> ls;
+
+	public:
+		PassGetSeedAsLambda_LevelSequence( const std::shared_ptr<LevelSequence> &ls);
+
+		std::shared_ptr<LevelSeedData> Apply( const int &index );
+
+	};
+
+	class LevelSequence : public std::enable_shared_from_this<LevelSequence>
 	{
 	private:
 		class OnLevelBeginLambda : public LambdaFunc_1<std::shared_ptr<Level> , bool>

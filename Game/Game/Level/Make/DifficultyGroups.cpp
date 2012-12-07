@@ -42,12 +42,185 @@ namespace CloudberryKingdom
 			( *upgrade ).Apply( Piece, Difficulty );
 	}
 
-	DifficultyGroups::UpgradeSequence::UpgradeSequence( ... )
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+		DifficultyGroups::UpgradeSequenceSingle s6,
+		DifficultyGroups::UpgradeSequenceSingle s7,
+		DifficultyGroups::UpgradeSequenceSingle s8,
+		DifficultyGroups::UpgradeSequenceSingle s9,
+		DifficultyGroups::UpgradeSequenceSingle s10
+	)
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
-		for ( int i = 0; i < Upgrades->Length; i++ )
-			UpgradeList.push_back( Upgrades[ i ] );
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+		UpgradeList.push_back( s6 );
+		UpgradeList.push_back( s7 );
+		UpgradeList.push_back( s8 );
+		UpgradeList.push_back( s9 );
+		UpgradeList.push_back( s10 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+		DifficultyGroups::UpgradeSequenceSingle s6,
+		DifficultyGroups::UpgradeSequenceSingle s7,
+		DifficultyGroups::UpgradeSequenceSingle s8,
+		DifficultyGroups::UpgradeSequenceSingle s9,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+		UpgradeList.push_back( s6 );
+		UpgradeList.push_back( s7 );
+		UpgradeList.push_back( s8 );
+		UpgradeList.push_back( s9 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+		DifficultyGroups::UpgradeSequenceSingle s6,
+		DifficultyGroups::UpgradeSequenceSingle s7,
+		DifficultyGroups::UpgradeSequenceSingle s8,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+		UpgradeList.push_back( s6 );
+		UpgradeList.push_back( s7 );
+		UpgradeList.push_back( s8 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+		DifficultyGroups::UpgradeSequenceSingle s6,
+		DifficultyGroups::UpgradeSequenceSingle s7,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+		UpgradeList.push_back( s6 );
+		UpgradeList.push_back( s7 );
+	}
+
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+		DifficultyGroups::UpgradeSequenceSingle s6,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+		UpgradeList.push_back( s6 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+		DifficultyGroups::UpgradeSequenceSingle s5,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+		UpgradeList.push_back( s5 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+		DifficultyGroups::UpgradeSequenceSingle s4,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+		UpgradeList.push_back( s4 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+		DifficultyGroups::UpgradeSequenceSingle s3,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+		UpgradeList.push_back( s3 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+		DifficultyGroups::UpgradeSequenceSingle s2,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
+		UpgradeList.push_back( s2 );
+	}
+
+	DifficultyGroups::UpgradeSequence::UpgradeSequence(
+		DifficultyGroups::UpgradeSequenceSingle s1,
+	)
+	{
+		UpgradeList = std::vector<UpgradeSequenceSingle>();
+
+		UpgradeList.push_back( s1 );
 	}
 
 	DifficultyGroups::FixedPieceModHelper::FixedPieceModHelper( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed )
