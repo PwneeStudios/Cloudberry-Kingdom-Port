@@ -184,13 +184,14 @@ template<typename T>
 		return chosen;
 	}
 
-template<typename T>
-	T Rand::Choose( std::vector<T> list )
-	{
-		return Choose( std::vector<T>( list ), 1 )[ 0 ];
-	}
+	// Redundant: C# code had a method for Lists and Arrays, which both got converted to std::vectors in C++.
+	//template<typename T>
+	//T Rand::Choose( std::vector<T> list )
+	//{
+	//	return Choose( std::vector<T>( list ), 1 )[ 0 ];
+	//}
 
-template<typename T>
+	template<typename T>
 	T Rand::Choose( std::vector<T> &list )
 	{
 		return Choose( list, 1 )[ 0 ];
