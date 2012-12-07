@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -12,7 +9,7 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 	{
 		//if (!path.Contains("double")) return;
 		//if (path.Contains("double")) return;
-		if ( !path.find( _T( "bob_v2_trimmed" ) ) != std::string::npos )
+		if ( path.find( _T( "bob_v2_trimmed" ) ) == std::string::npos )
 			return;
 
 		Tools::UseInvariantCulture();

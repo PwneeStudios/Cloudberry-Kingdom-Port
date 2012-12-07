@@ -562,7 +562,7 @@ namespace CloudberryKingdom
 		// Set flag when a block on the last row is used.
 		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore()->IsCalled( _T("LastRow") ) )
-				( *block )->getCore()->GenData.OnUsed = std::make_shared<EndReachedLambda>(this);
+				( *block )->getCore()->GenData.OnUsed = std::make_shared<EndReachedLambda>( shared_from_this() );
 
 		// Initial platform
 		if ( CurMakeData->InitialPlats && VStyle->MakeInitialPlats )

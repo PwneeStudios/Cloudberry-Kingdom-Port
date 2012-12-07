@@ -44,11 +44,11 @@ namespace CloudberryKingdom
 	void ScoreDatabase::Deserialize( std::vector<unsigned char> Data )
 	{
 		//for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
-		Chunks chunks = Chunks(Data);
-		chunks.StartGettingChunks();
-		while( chunks.HasChunk() )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		chunks->StartGettingChunks();
+		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks.GetChunk();
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
 			//switch ( ( *chunk )->Type )
 			switch ( chunk->Type )
 			{
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 
 		int Count = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<ScoreEntry>::const_iterator score = Scores.begin(); score != Scores.end(); ++score )
+		for ( std::vector<std::shared_ptr<ScoreEntry> >::const_iterator score = Scores.begin(); score != Scores.end(); ++score )
 		{
 			ScoreList_Renamed->Add( *score );
 			Count++;
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 		EnsureList( Game );
 
 		std::vector<std::shared_ptr<ScoreEntry> > Scores = Games[ Game ];
-		return Scores.size() < Capacity || Score > Min(Scores)->Value || Min(Scores)->Fake;
+		return static_cast<int>( Scores.size() ) < Capacity || Score > Min(Scores)->Value || Min(Scores)->Fake;
 	}
 
 	std::shared_ptr<ScoreEntry> ScoreDatabase::Max( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
@@ -149,8 +149,10 @@ namespace CloudberryKingdom
 
 	void ScoreDatabase::TrimExcess( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
-		if ( Scores.size() > Capacity )
-			Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
+		// FIXME: Logic problem?
+		if ( static_cast<int>( Scores.size() ) > Capacity )
+			Scores.erase( Scores.begin() + Scores.size() - Capacity, Scores.end() );
+			//Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
 	}
 
 	int ScoreDatabase::ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 )
@@ -160,6 +162,7 @@ namespace CloudberryKingdom
 
 	void ScoreDatabase::Sort( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
-		Scores.Sort( ScoreCompare );
+		//Scores.Sort( ScoreCompare );
+		Sort( Scores );
 	}
 }

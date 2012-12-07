@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 				int hat_index = IndexOf( ColorSchemeManager::HatInfo, hat->first );
 				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( hat->first->Name, Resources::Font_Grobold42, false, true ) );
 				item->ScaleText( .375f );
-				item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( hat_index ) );
+				item->MyObject = std::static_pointer_cast<Object>( std::make_shared<WrappedInt>( hat_index ) );
 
 				//list->MyList->AddItem( item, hat_index );
 				list->MyList->AddItem( item, item->MyObject );

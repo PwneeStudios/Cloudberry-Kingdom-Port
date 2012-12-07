@@ -342,7 +342,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 			//item = new MenuItem(new EzText(pic + postfix, ItemFont));
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
-			item->MyObject = *hat;
+			item->MyObject = std::static_pointer_cast<Object>( *hat );
 
 			AddItem( item );
 			SetItem( item );
@@ -361,7 +361,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 				continue;
 
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
-			item->MyObject = std::static_pointer_cast<void>( clr );
+			item->MyObject = std::static_pointer_cast<Object>( clr );
 
 			AddItem( item );
 			SetItem( item );
