@@ -1067,7 +1067,8 @@ enum GfxRasterizerState
 
 enum GfxBlendState
 {
-	GfxBlendState_AlphaBlend
+	GfxBlendState_AlphaBlend,
+	GfxBlendState_Additive
 };
 
 enum GfxDepthStencilState

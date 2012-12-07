@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class XnaGameClass : public Game
+	class XnaGameClass : public Game, public std::enable_shared_from_this<XnaGameClass>
 	{
 	private:
 		std::shared_ptr<CloudberryKingdomGame> MyGame;
@@ -13,7 +13,9 @@ namespace CloudberryKingdom
 	public:
 		XnaGameClass();
 
-	protected:
+		virtual bool getIsActive();
+		virtual void setIsMouseVisible( bool visible );
+
 		virtual void Initialize();
 
 		virtual void LoadContent();
@@ -23,6 +25,8 @@ namespace CloudberryKingdom
 		virtual void Update( const std::shared_ptr<GameTime> &gameTime );
 
 		virtual void Draw( const std::shared_ptr<GameTime> &gameTime );
+
+		virtual void Exit();
 
 #if defined(WINDOWS)
 	public:

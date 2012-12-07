@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 	}
 
 Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
-std::vector<std::wstring> CloudberryKingdomGame::args = _T( "" );
+
 bool CloudberryKingdomGame::StartAsBackgroundEditor = false;
 bool CloudberryKingdomGame::StartAsTestLevel = false;
 bool CloudberryKingdomGame::StartAsBobAnimationTest = false;
@@ -109,7 +109,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Tools::GameClass->Exit();
 	}
 
-	void CloudberryKingdomGame::ProcessArgs( std::vector<std::wstring&> args )
+	void CloudberryKingdomGame::ProcessArgs( std::vector<std::wstring> &args )
 	{
 	#if defined(DEBUG)
 		// Artifically simulate different command line arguments.
@@ -121,68 +121,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 		//args = new string[] { "test_all" }; AlwaysSkipDynamicArt = false;
 
-		LoadDynamic = true;
-		AlwaysSkipDynamicArt = false;
-
-
-		CloudberryKingdomGame::args = args;
-
-		std::shared_ptr<std::vector<std::wstring> > list = std::vector<std::wstring>( args );
-		list->Reverse();
-		std::shared_ptr<std::stack<std::wstring> > stack = std::stack<std::wstring>( list );
-
-		while ( stack->Count > 0 )
-		{
-			std::shared_ptr<Object> arg = stack->Pop();
-
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//			switch (arg)
-//ORIGINAL LINE: case "background_editor":
-			if ( arg == _T( "background_editor" ) )
-			{
-					StartAsBackgroundEditor = true;
-					LoadDynamic = true;
-			}
-//ORIGINAL LINE: case "test_level":
-			else if ( arg == _T( "test_level" ) )
-			{
-					StartAsTestLevel = true;
-					LoadDynamic = true;
-			}
-//ORIGINAL LINE: case "test_bob_animation":
-			else if ( arg == _T( "test_bob_animation" ) )
-			{
-					StartAsBobAnimationTest = true;
-					LoadDynamic = false;
-			}
-//ORIGINAL LINE: case "test_all":
-			else if ( arg == _T( "test_all" ) )
-			{
-					ShowSongInfo = false;
-					UseNewBob = true;
-					StartAsFreeplay = true;
-					LoadDynamic = true;
-			}
-//ORIGINAL LINE: case "test_all_old_bob":
-			else if ( arg == _T( "test_all_old_bob" ) )
-			{
-					ShowSongInfo = false;
-					StartAsFreeplay = true;
-					LoadDynamic = true;
-
-			}
-//ORIGINAL LINE: case "mod_root":
-			else if ( arg == _T( "mod_root" ) )
-			{
-					LoadDynamic = true;
-					if ( stack->Count > 0 )
-						ModRoot = stack->Pop();
-
-			}
-			else
-			{
-			}
-		}
+		LoadDynamic = false;
+		AlwaysSkipDynamicArt = true;
 	}
 
 	CloudberryKingdomGame::CloudberryKingdomGame()
@@ -191,11 +131,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		InitializeInstanceFields();
 		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );
-		MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
+		//MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		Tools::GameClass->getContent()->RootDirectory = _T("Content");
 
-		Tools::TheGame = this;
+		Tools::TheGame = shared_from_this();
 	}
 
 	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e )
@@ -209,9 +149,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::Initialize()
 	{
-	#if defined(WINDOWS)
-		EventInput::Initialize( Tools::GameClass->getWindow() );
-	#endif
+	//#if defined(WINDOWS)
+	//	EventInput::Initialize( Tools::GameClass->getWindow() );
+	//#endif
 		Globals::ContentDirectory = Tools::GameClass->getContent()->RootDirectory;
 
 		Tools::LoadEffects( Tools::GameClass->getContent(), true );
@@ -239,7 +179,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#if defined(PC_VERSION)
 		// The PC version let's the player specify resolution, key mapping, and so on.
 		// Try to load these now.
-		PlayerManager::RezData rez;
+		RezData rez;
 
 		//PlayerManager.SavePlayerData = new _SavePlayerData();
 		//PlayerManager.SavePlayerData.ContainerName = "PlayerData";
@@ -253,7 +193,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 		catch ( ... )
 		{
-			rez = PlayerManager::RezData();
+			rez = RezData();
 			rez.Custom = false;
 		}
 	#elif defined(WINDOWS)
@@ -289,7 +229,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		MyGraphicsDeviceManager->PreferredBackBufferWidth = Resolution.Backbuffer.X;
 		MyGraphicsDeviceManager->PreferredBackBufferHeight = Resolution.Backbuffer.Y;
-		MyGraphicsDeviceManager->SynchronizeWithVerticalRetrace = true;
+		// FIXME: We want to synchronize with the vertical retrace. Important!
+		//MyGraphicsDeviceManager->SynchronizeWithVerticalRetrace = true;
 
 		// Set the actual graphics device,
 		// based on the resolution preferences established above.
@@ -307,8 +248,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 		else
 		{
-			MyGraphicsDeviceManager->PreferredBackBufferWidth = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Width;
-			MyGraphicsDeviceManager->PreferredBackBufferHeight = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Height;
+			// FIXME: This should grab the preferred resolution for the game.
+			//MyGraphicsDeviceManager->PreferredBackBufferWidth = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Width;
+			//MyGraphicsDeviceManager->PreferredBackBufferHeight = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Height;
 			MyGraphicsDeviceManager->IsFullScreen = false;
 		}
 	#if defined(DEBUG) || defined(INCLUDE_EDITOR)
@@ -377,7 +319,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//BenchmarkLoadSize();
 		//Tools.Warning();
 
-		MyGraphicsDevice = MyGraphicsDeviceManager->GraphicsDevice;
+		MyGraphicsDevice = MyGraphicsDeviceManager->MyGraphicsDevice;
 
 		Tools::LoadBasicArt( Tools::GameClass->getContent() );
 
@@ -394,8 +336,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>( MyGraphicsDevice );
 
-		ScreenWidth = MyGraphicsDevice->PresentationParameters->BackBufferWidth;
-		ScreenHeight = MyGraphicsDevice->PresentationParameters->BackBufferHeight;
+		ScreenWidth = MyGraphicsDevice->PP->BackBufferWidth;
+		ScreenHeight = MyGraphicsDevice->PP->BackBufferHeight;
 
 		MainCamera = std::make_shared<Camera>( ScreenWidth, ScreenHeight );
 
@@ -411,7 +353,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		BobPhsx::CustomPhsxData::InitStatic();
 
 		// Load saved files
-		Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
+		// FIXME: Need to make sure when we read strings we do it invariantly across cultures.
+		//Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
 		SaveGroup::Initialize();
 
 		// Localization
@@ -432,7 +375,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Resources::LoadResources();
 
 	#if defined(WINDOWS)
-		delay( 2 );
+		// FIXME: Small delay/sleep.
+		//delay( 2 );
 	#endif
 
 	#if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
@@ -506,7 +450,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 		// Do game update.
-		if ( !Tools::StepControl || ( Tools::Keyboard.IsKeyDownCustom( Keys_Enter ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys_Enter ) ) )
+		if ( !Tools::StepControl || ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Enter ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Enter ) ) )
 		{
 			DoGameDataPhsx();
 		}
@@ -537,7 +481,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		// Should implement a GameObject that marshalls quickspawns instead.
 		Tools::Warning();
 
-		if ( !KeyboardExtension::Freeze && Tools::CurLevel->ResetEnabled() && Tools::Keyboard.IsKeyDownCustom(ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey) && !Tools::PrevKeyboard.IsKeyDownCustom(ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey) )
+		if ( !KeyboardExtension::Freeze && Tools::CurLevel->ResetEnabled() && KeyboardExtension::IsKeyDownCustom(Tools::Keyboard, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey) )
 			DoQuickSpawn();
 	}
 #endif
@@ -551,7 +495,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		{
 			if ( PlayerManager::Get( i )->Exists )
 			{
-				if ( Tools::GamepadState[ i ].Buttons->LeftShoulder == ButtonState::Pressed && Tools::GamepadState[ i ].Buttons->RightShoulder == ButtonState::Pressed && ( Tools::PrevGamepadState[ i ].Buttons::LeftShoulder != ButtonState::Pressed || Tools::PrevGamepadState[ i ].Buttons::RightShoulder != ButtonState::Pressed ) )
+				if ( Tools::GamepadState[ i ].Buttons.LeftShoulder == ButtonState_Pressed && Tools::GamepadState[ i ].Buttons.RightShoulder == ButtonState_Pressed && ( Tools::PrevGamepadState[ i ].Buttons.LeftShoulder != ButtonState_Pressed || Tools::PrevGamepadState[ i ].Buttons.RightShoulder != ButtonState_Pressed ) )
 					ShortReset = true;
 			}
 		}
@@ -563,7 +507,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			{
 				if ( PlayerManager::Get( i )->Exists && PlayerManager::Get( i )->IsAlive )
 				{
-					if ( Tools::GamepadState[ i ].Buttons::LeftShoulder != ButtonState::Pressed && Tools::GamepadState[ i ].Buttons::RightShoulder != ButtonState::Pressed )
+					if ( Tools::GamepadState[ i ].Buttons.LeftShoulder != ButtonState_Pressed && Tools::GamepadState[ i ].Buttons.RightShoulder != ButtonState_Pressed )
 						ShortReset = false;
 				}
 			}
@@ -614,11 +558,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#if defined(DEBUG_OBJDATA)
 		ObjectData::UpdateWeak();
 	#endif
-		DeltaT = gameTime->ElapsedGameTime.TotalSeconds;
+		DeltaT = gameTime->ElapsedGameTime.getTotalSeconds();
 
 		// Accelerate asset loading
-		if ( LogoScreenUp )
-			Resources::LoadThread->Join( 1 );
+		//if ( LogoScreenUp )
+		//	Resources::LoadThread->Join( 1 );
 
 		// Prepare to draw
 		Tools::DrawCount++;
@@ -717,7 +661,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( Tools::SongWad != 0 )
 			Tools::SongWad->PhsxStep();
 
-		fps = .3f * fps + .7f * ( 1000 / static_cast<float>( __max( .00000231f, gameTime->ElapsedGameTime.TotalMilliseconds ) ) );
+		fps = .3f * fps + .7f * ( 1000 / static_cast<float>( __max( .00000231f, gameTime->ElapsedGameTime.getTotalMilliseconds() ) ) );
 
 		// Determine how many phsx steps to take
 		int Reps = 0;
@@ -745,7 +689,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		DrawCount++;
 
 		// Update fps
-		float new_t = static_cast<float>( gameTime->TotalGameTime.TotalSeconds );
+		float new_t = static_cast<float>( gameTime->TotalGameTime.getTotalSeconds() );
 		Tools::dt = new_t - Tools::t;
 		Tools::t = new_t;
 	}
@@ -753,7 +697,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	bool CloudberryKingdomGame::SetupToRender()
 	{
 		// Set the viewport to the whole screen
-		MyGraphicsDevice->Viewport = Viewport { X = 0, Y = 0, Width = MyGraphicsDevice->PresentationParameters->BackBufferWidth, Height = MyGraphicsDevice->PresentationParameters->BackBufferHeight, MinDepth = 0, MaxDepth = 1 };
+		MyGraphicsDevice->VP = Viewport( 0.f, 0.f, static_cast<float>( MyGraphicsDevice->PP->BackBufferWidth ), static_cast<float>( MyGraphicsDevice->PP->BackBufferHeight ), 0.f, 1.f );
 
 		// Clear whole screen to black
 		MyGraphicsDevice->Clear( Color::Black );
@@ -767,7 +711,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Tools::Render->MakeInnerViewport();
 		MyGraphicsDevice->Clear( Color::Black );
 
-		MyGraphicsDevice->Viewport = Tools::Render->MainViewport;
+		MyGraphicsDevice->VP = Tools::Render->MainViewport;
 
 		// Default camera
 		Vector4 cameraPos = Vector4( MainCamera->Data.Position.X, MainCamera->Data.Position.Y, MainCamera->getZoom().X, MainCamera->getZoom().Y ); //.001f, .001f);
@@ -793,11 +737,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			if ( !Tools::CurGameData->Loading && Tools::CurLevel->PlayMode == 0 && Tools::CurGameData != 0 && !Tools::CurGameData->Loading && ( !Tools::CurGameData->PauseGame || CharacterSelectManager::IsShowing ) )
 			{
 				// Compute fireballs textures
-				MyGraphicsDevice->BlendState = BlendState::Additive;
+				MyGraphicsDevice->BlendState = GfxBlendState_Additive;
 				Fireball::DrawFireballTexture( MyGraphicsDevice, Tools::EffectWad );
 				Fireball::DrawEmitterTexture( MyGraphicsDevice, Tools::EffectWad );
 
-				MyGraphicsDevice->BlendState = BlendState::AlphaBlend;
+				MyGraphicsDevice->BlendState = GfxBlendState_AlphaBlend;
 			}
 		}
 	}
@@ -890,9 +834,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		long long Tiles = Stop();
 
 		Start();
-		Fireball::InitRenderTargets( MyGraphicsDevice, MyGraphicsDevice->PresentationParameters, 300, 200 );
+		Fireball::InitRenderTargets( MyGraphicsDevice, MyGraphicsDevice->PP, 300, 200 );
 		ParticleEffects::Init();
-//C# TO C++ CONVERTER NOTE: The variable Particle was renamed since it is named the same as a user-defined type:
+
 		long long Particle_Renamed = Stop();
 
 		Start();
@@ -931,7 +875,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		std::cout << _T( "Load menus     " ) << LoadMenus << std::endl;
 		std::cout << _T( "Load rest      " ) << LoadRest << std::endl;
 		std::cout << _T( "Load tiles     " ) << Tiles << std::endl;
-		std::cout << _T( "Load particles " ) << Particle << std::endl;
+		//std::cout << _T( "Load particles " ) << Particle << std::endl;
 		std::cout << _T( "Load players   " ) << Players << std::endl;
 		std::cout << _T( "Load saves     " ) << LoadSaves << std::endl;
 		std::cout << _T( "Load Protos    " ) << Protos << std::endl;
@@ -942,11 +886,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		std::cout << _T( "" ) << std::endl;
 	}
 
-std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch = 0;
+	std::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;
 
 	void CloudberryKingdomGame::Start()
 	{
-		stopwatch = std::make_shared<System::Diagnostics::Stopwatch>();
+		stopwatch = std::make_shared<Stopwatch>();
 		stopwatch->Start();
 	}
 
@@ -956,11 +900,11 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 		return stopwatch->ElapsedTicks;
 	}
 
-std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch2 = 0;
+	std::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch2 = 0;
 
 	void CloudberryKingdomGame::Start2()
 	{
-		stopwatch2 = std::make_shared<System::Diagnostics::Stopwatch>();
+		stopwatch2 = std::make_shared<Stopwatch>();
 		stopwatch2->Start();
 	}
 
@@ -974,7 +918,7 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 	{
 		std::cout << Tools::GameClass->getContent()->RootDirectory << std::endl;
 
-		Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Environments\\Snow"));
+		Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Snow"));
 
 
 		long long big = 0;
@@ -983,20 +927,20 @@ std::shared_ptr<System::Diagnostics::Stopwatch> CloudberryKingdomGame::stopwatch
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0001"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0002"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0003"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0004"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0001"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0002"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0003"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0004"));
 		}
 		small = Stop();
 
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Environments\\Castle\\Pillars\\Pillar_Castle_1000"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Environments\\Cave\\Pillars\\Pillar_Cave_1000"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Environments\\Cloud\\Pillars\\Pillar_Cloud_1000"));
-			Tools::GameClass->getContent()->Load<Texture*>(_T("Art\\Environments\\Forest\\Pillars\\Pillar_Forest_1000"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Castle\\Pillars\\Pillar_Castle_1000"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Cave\\Pillars\\Pillar_Cave_1000"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Cloud\\Pillars\\Pillar_Cloud_1000"));
+			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Forest\\Pillars\\Pillar_Forest_1000"));
 		}
 		big = Stop();
 

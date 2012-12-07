@@ -155,6 +155,16 @@ public:
 	{
 	}
 
+	float getTotalSeconds()
+	{
+		return TotalMinutes * 60.f;
+	}
+
+	float getTotalMilliseconds()
+	{
+		return getTotalSeconds() * 1000.f;
+	}
+
 };
 
 struct DateTime
@@ -401,9 +411,30 @@ public:
 
 class GameTime
 {
+
+public:
+	// FIXME: WTF do these do?
+	TimeSpan ElapsedGameTime;
+	TimeSpan TotalGameTime;
+
 };
 
-struct Viewport { float X; float Y; float Width; float Height; float MinDepth; float MaxDepth; };
+struct Viewport
+{
+
+	float X; float Y; float Width; float Height; float MinDepth; float MaxDepth;
+
+	Viewport()
+	{
+		X = Y = Width = Height = MinDepth = MaxDepth = 0;
+	}
+
+	Viewport( float _X, float _Y, float _Width, float _Height, float _MinDepth, float _MaxDepth ) :
+		X ( _X ), Y ( _Y ), Width ( _Width ), Height ( _Height ), MinDepth ( _MinDepth ), MaxDepth ( _MaxDepth )
+	{
+	}
+
+};
 
 class GraphicsDevice
 {
@@ -443,12 +474,19 @@ class GraphicsDeviceManager
 
 public:
 
+	std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
+
 	bool IsFullScreen;
 	int PreferredBackBufferWidth;
 	int PreferredBackBufferHeight;
 
 	void ToggleFullScreen()
 	{
+	}
+
+	void ApplyChanges()
+	{
+		// After settings have been changed, this function propogates the changes to the device.
 	}
 };
 
@@ -674,7 +712,9 @@ class Stopwatch
 {
 
 public:
-	
+
+	long long ElapsedTicks;
+
 	struct
 	{
 		float TotalSeconds;
@@ -682,6 +722,7 @@ public:
 
 	Stopwatch()
 	{
+		ElapsedTicks = 0;
 		Elapsed.TotalSeconds = 0;
 	}
 

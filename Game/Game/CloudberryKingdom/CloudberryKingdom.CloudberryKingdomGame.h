@@ -5,8 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class CloudberryKingdomGame
+
+	class CloudberryKingdomGame : public std::enable_shared_from_this<CloudberryKingdomGame>
 	{
+
 	public:
 		void StaticIntializer_NoDependence();
 
@@ -160,7 +162,7 @@ namespace CloudberryKingdom
 		/// This is used to load different tools, such as the background editor, instead of the main game.
 		/// </summary>
 		/// <param name="args"></param>
-		static void ProcessArgs( std::vector<std::wstring&> args );
+		static void ProcessArgs( std::vector<std::wstring> &args );
 
 		CloudberryKingdomGame();
 
@@ -247,7 +249,6 @@ namespace CloudberryKingdom
 
 		double DeltaT;
 
-		bool RunningSlowly;
 		void Update();
 
 		/// <summary>

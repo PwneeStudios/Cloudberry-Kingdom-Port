@@ -1,12 +1,9 @@
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
-	void MainClass::Main( std::vector<std::wstring&> args )
+	void MainClass::Main( std::vector<std::wstring> args )
 	{
 		CloudberryKingdomGame::ProcessArgs( args );
 
