@@ -44,12 +44,12 @@ namespace CloudberryKingdom
 				( *bob )->getCore()->Show = false;
 		}
 
-		MyGame->WaitThenDo( 1, std::make_shared<ReadyProxy>( shared_from_this() ) );
+		MyGame->WaitThenDo( 1, std::make_shared<ReadyProxy>( std::static_pointer_cast<FadeInObject>( shared_from_this() ) ) );
 	}
 
 	void FadeInObject::Ready()
 	{
-		MyGame->WaitThenDo( 20, std::make_shared<EndProxy>( shared_from_this() ) );
+		MyGame->WaitThenDo( 20, std::make_shared<EndProxy>( std::static_pointer_cast<FadeInObject>( shared_from_this() ) ) );
 	}
 
 	void FadeInObject::End()

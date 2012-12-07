@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		AnimGroup = std::vector<std::shared_ptr<SpriteAnimGroup> >( 4 );
 
 		int count = 0;
-		for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
+		for ( BobVec::iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 		{
 			AnimGroup[ count ] = std::make_shared<SpriteAnimGroup>();
 			AnimGroup[ count ]->Init( ( *bob )->PlayerObject, ( *bob )->MyPhsx->SpritePadding, std::make_shared<BobToSpritesLambda>( *bob ) );

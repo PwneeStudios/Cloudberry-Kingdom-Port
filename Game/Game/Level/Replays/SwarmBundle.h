@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	{
 
 	private:
-		class BobToSpritesLambda : public Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2>
+		class BobToSpritesLambda : public Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2>
 		{
 		private:
 			std::shared_ptr<Bob> bob;

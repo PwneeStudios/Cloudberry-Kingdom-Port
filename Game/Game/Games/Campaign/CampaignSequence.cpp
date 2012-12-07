@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == _T( "end" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, 0 ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, _T( "" ) ) );
 					Seeds.push_back( 0 );
 					count++;
 

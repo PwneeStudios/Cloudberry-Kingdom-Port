@@ -5,8 +5,10 @@
 
 namespace CloudberryKingdom
 {
+
 	class CampaignSequence : public LevelSequence
 	{
+
 	private:
 		class PostMakeCampaignProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
@@ -46,9 +48,8 @@ namespace CloudberryKingdom
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		static const std::shared_ptr<CampaignSequence> instance;
 	public:
+		static const std::shared_ptr<CampaignSequence> instance;
 		const static std::shared_ptr<CampaignSequence> &getInstance();
 
 	private:
@@ -78,7 +79,7 @@ namespace CloudberryKingdom
 
 		static void EndAction( const std::shared_ptr<Level> &level );
 
-	protected:
+	public:
 		CampaignSequence();
 
 	private:
