@@ -201,7 +201,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		if ( RndMoveType == 2 )
 			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
-		MyBob->TargetPosition.X = MyBob->MoveData->MinTargetY - 160 + t * ( 200 + MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
+		MyBob->TargetPosition.X = MyBob->MoveData.MinTargetY - 160 + t * ( 200 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
 		//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
 
 		if ( MyBob->getCore()->Data.Position.X < MyBob->TargetPosition.X )
@@ -299,7 +299,7 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		if ( RndMoveType == 2 )
 			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
-		MyBob->TargetPosition.Y = MyBob->MoveData->MinTargetY - 200 + t * ( -90 + MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
+		MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY - 200 + t * ( -90 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
 				//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
 
 		if ( MyBob->getCore()->Data.Position.Y < MyBob->TargetPosition.Y )

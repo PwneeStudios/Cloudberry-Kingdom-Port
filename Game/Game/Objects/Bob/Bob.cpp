@@ -1507,7 +1507,7 @@ int Bob::ImmortalLength = 55;
 		}
 
 		// Phsyics update
-		if ( MoveData->InvertDirX )
+		if ( MoveData.InvertDirX )
 			CurInput.xVec.X *= -1;
 		float Windx = Wind.X;
 		if ( MyPhsx->OnGround )
@@ -1516,7 +1516,7 @@ int Bob::ImmortalLength = 55;
 		MyPhsx->PhsxStep();
 		getCore()->Data.Velocity.X += Windx;
 		MyPhsx->CopyPrev();
-		if ( MoveData->InvertDirX )
+		if ( MoveData.InvertDirX )
 			CurInput.xVec.X *= -1;
 
 		// Collision with screen boundary

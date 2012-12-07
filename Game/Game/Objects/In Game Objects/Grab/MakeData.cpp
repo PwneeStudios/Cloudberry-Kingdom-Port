@@ -24,13 +24,12 @@ namespace CloudberryKingdom
 
 		Start = std::vector<PhsxData>( N );
 		CheckpointShift = std::vector<Vector2>( N );
-		MoveData = std::vector<std::shared_ptr<Bob::BobMove> >( N );
+		MoveData = std::vector<Bob::BobMove>( N );
 		for ( int i = 0; i < N; i++ )
 		{
 			Start[ i ] = PhsxData();
 			CheckpointShift[ i ] = Vector2();
-			MoveData[ i ] = std::make_shared<Bob::BobMove>();
-			MoveData[ i ]->Init();
+			MoveData[ i ].Init();
 		}
 		CamStartPos = Vector2();
 

@@ -806,10 +806,10 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 
 		if ( Gravity > 0 )
 		{
-			if ( getPos().Y > MyBob->MoveData->MaxTargetY && OnGround || getPos().Y > MyBob->MoveData->MaxTargetY + 250 || getPos().Y > MyBob->TargetPosition.Y - 150 && JumpDelayCount < 2 && CurJump > 0 )
+			if ( getPos().Y > MyBob->MoveData.MaxTargetY && OnGround || getPos().Y > MyBob->MoveData.MaxTargetY + 250 || getPos().Y > MyBob->TargetPosition.Y - 150 && JumpDelayCount < 2 && CurJump > 0 )
 				MyBob->CurInput.A_Button = false;
 		}
-		if ( getPos().Y < MyBob->MoveData->MinTargetY && AutoFallOrJump > 0 )
+		if ( getPos().Y < MyBob->MoveData.MinTargetY && AutoFallOrJump > 0 )
 		{
 			MyBob->CurInput.A_Button = true;
 		}
@@ -1041,8 +1041,8 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 	{
 			int Period = GenData->Get( BehaviorParam_MOVE_TYPE_PERIOD, getPos() );
 			float InnerPeriod = static_cast<float>( GenData->Get( BehaviorParam_MOVE_TYPE_INNER_PERIOD, getPos() ) );
-			float MinTargetY = MyBob->MoveData->MinTargetY;
-			float MaxTargetY = MyBob->MoveData->MaxTargetY;
+			float MinTargetY = MyBob->MoveData.MinTargetY;
+			float MaxTargetY = MyBob->MoveData.MaxTargetY;
 
 			float t = 0;
 			int Step = MyBob->getCore()->MyLevel->GetPhsxStep() + Offset;
@@ -1121,7 +1121,7 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 					break;
 			}
 			if ( RndMoveType < 6 )
-				MyBob->TargetPosition.Y = MyBob->MoveData->MinTargetY + t * ( MyBob->MoveData->MaxTargetY - MyBob->MoveData->MinTargetY );
+				MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY + t * ( MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
 
 			if ( AllowTypeSwitching && MyBob->getCore()->MyLevel->GetPhsxStep() % Period == 0 )
 				RndMoveType = getMyLevel()->getRnd()->Rnd->Next(0, 7);

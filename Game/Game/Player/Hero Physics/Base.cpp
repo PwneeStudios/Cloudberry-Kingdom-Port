@@ -773,9 +773,9 @@ namespace CloudberryKingdom
 
 		// Copy another bob's input
 		//if (MyBob.MyPieceIndex > 0 && MyBob.MoveData.Copy >= 0)
-		if ( MyBob->MoveData->Copy >= 0 )
+		if ( MyBob->MoveData.Copy >= 0 )
 		{
-			MyBob->CurInput = MyBob->getCore()->MyLevel->Bobs[ MyBob->MoveData->Copy ]->CurInput;
+			MyBob->CurInput = MyBob->getCore()->MyLevel->Bobs[ MyBob->MoveData.Copy ]->CurInput;
 		}
 
 		// Stay left of lowest bob
@@ -798,7 +798,7 @@ namespace CloudberryKingdom
 		if ( MyBob->CurInput.xVec.X < 0 )
 			MyBob->PlayerObject->xFlip = true;
 
-		if ( MyBob->MoveData->InvertDirX && MyBob->CurInput.xVec.X != 0 )
+		if ( MyBob->MoveData.InvertDirX && MyBob->CurInput.xVec.X != 0 )
 			MyBob->PlayerObject->xFlip = !MyBob->PlayerObject->xFlip;
 
 		return HoldFlip != MyBob->PlayerObject->xFlip;

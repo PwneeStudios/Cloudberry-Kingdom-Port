@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		Vector2 CamStartPos;
 		std::vector<PhsxData> Start;
 		std::vector<Vector2> CheckpointShift;
-		std::vector<std::shared_ptr<Bob::BobMove> > MoveData;
+		std::vector<Bob::BobMove> MoveData;
 
 		bool InitialPlats, InitialCamZone, FinalPlats;
 		bool SkinnyStart;

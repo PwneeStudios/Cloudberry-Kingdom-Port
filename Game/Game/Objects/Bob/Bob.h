@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 
 		bool CanInteract;
 
-		std::shared_ptr<BobMove> MoveData;
+		BobMove MoveData;
 
 		int Count_ButtonA;
 		BobInput CurInput, PrevInput;
