@@ -836,6 +836,10 @@ class SpriteBatch
 
 public:
 
+	SpriteBatch()
+	{
+	}
+
 	void DrawString( const std::shared_ptr<class SpriteFont> &font, const std::wstring &str, const Vector2 &loc, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
 	{
 	}

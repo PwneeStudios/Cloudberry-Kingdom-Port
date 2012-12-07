@@ -130,7 +130,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		StaticIntializer_NoDependence();
 
 		InitializeInstanceFields();
-		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );
+		/*MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );*/
+		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>();
+
+		// FIXME: This is an event that hooks in to whenever the game has to prepare a device (usually after losing it). Do we need this?
 		//MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		Tools::GameClass->getContent()->RootDirectory = _T("Content");
@@ -334,7 +337,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		LogoScreenUp = true;
 
-		Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>( MyGraphicsDevice );
+
+		/*Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>( MyGraphicsDevice );*/
+		Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>();
 
 		ScreenWidth = MyGraphicsDevice->PP->BackBufferWidth;
 		ScreenHeight = MyGraphicsDevice->PP->BackBufferHeight;
@@ -916,9 +921,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::BenchmarkLoadSize()
 	{
-		std::cout << Tools::GameClass->getContent()->RootDirectory << std::endl;
+		std::wcout << Tools::GameClass->getContent()->RootDirectory << std::endl;
 
-		Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Snow"));
+		Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Snow"));
 
 
 		long long big = 0;
@@ -927,20 +932,20 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0001"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0002"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0003"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0004"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0001"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0002"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0003"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0004"));
 		}
 		small = Stop();
 
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Castle\\Pillars\\Pillar_Castle_1000"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Cave\\Pillars\\Pillar_Cave_1000"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Cloud\\Pillars\\Pillar_Cloud_1000"));
-			Tools::GameClass->getContent()->Load<Texture>(_T("Art\\Environments\\Forest\\Pillars\\Pillar_Forest_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Castle\\Pillars\\Pillar_Castle_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Cave\\Pillars\\Pillar_Cave_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Cloud\\Pillars\\Pillar_Cloud_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Forest\\Pillars\\Pillar_Forest_1000"));
 		}
 		big = Stop();
 
@@ -1151,21 +1156,21 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	}
 #endif
 
-std::wstring CloudberryKingdomGame::debugstring = _T( "" );
+	std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 	void CloudberryKingdomGame::DrawDebugInfo()
 	{
 		Tools::StartSpriteBatch();
 
-		if ( Tools::ShowNums )
-		{
-			std::wstring nums = Tools::Num_0_to_2 + _T( "\n\n" ) + Tools::Num_0_to_360;
+		//if ( Tools::ShowNums )
+		//{
+		//	std::wstring nums = Tools::Num_0_to_2 + _T( "\n\n" ) + Tools::Num_0_to_360;
 
-			Tools::StartSpriteBatch();
-			Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, nums, Vector2( 0, 100 ), Color::Orange, 0, Vector2(),.4f, SpriteEffects::None, 0 );
-			Tools::Render->EndSpriteBatch();
-			return;
-		}
+		//	Tools::StartSpriteBatch();
+		//	Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, nums, Vector2( 0, 100 ), Color::Orange, 0, Vector2(),.4f, SpriteEffects::None, 0 );
+		//	Tools::Render->EndSpriteBatch();
+		//	return;
+		//}
 
 	#if defined(WINDOWS)
 		// Grace period for falling
@@ -1225,8 +1230,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 
 		//str = string.Format("{0,-5} {1,-5} {2,-5} {3,-5} {4,-5}", Level.Pre1, Level.Step1, Level.Pre2, Level.Step2, Level.Post);
 
-
-		Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, str, Vector2( 0, 100 ), Color::Orange, 0, Vector2(), 1, SpriteEffects::None, 0 );
+		Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, str, Vector2( 0, 100 ), Color::Orange, 0, Vector2(), Vector2(1), SpriteEffects_None, 0 );
 		Tools::Render->EndSpriteBatch();
 	}
 
@@ -1234,7 +1238,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 	{
 		std::shared_ptr<Level> level = std::make_shared<Level>();
 		level->setMainCamera( std::make_shared<Camera>() );
-		level->CurPiece = level->StartNewPiece( 0, 0, 4 );
+		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 		level->CurPiece->StartData[ 0 ].Position = Vector2( 0, 0 );
 		level->getMainCamera()->BLCamBound = Vector2(-100000, 0);
 		level->getMainCamera()->TRCamBound = Vector2(100000, 0);
@@ -1430,7 +1434,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 		piece->Style->ChanceToKeepUnused = 0;
 
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades2 );
-		piece->MyUpgrades1->UpgradeLevels.CopyTo( piece->MyUpgrades2->UpgradeLevels, 0 );
+		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		//piece.MyUpgrades2->Get( Upgrade.Cloud ) = 10;
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
@@ -1626,7 +1630,7 @@ std::wstring CloudberryKingdomGame::debugstring = _T( "" );
 		FirstInactiveFrame = true;
 		FirstActiveFrame = true;
 		DeltaT = 0;
-		RunningSlowly = false;
+		//RunningSlowly = false;
 		ShowFPS = false;
 		MainString = std::make_shared<StringBuilder>( 100, 100 );
 		DoInnerLogoPhsx = true;
