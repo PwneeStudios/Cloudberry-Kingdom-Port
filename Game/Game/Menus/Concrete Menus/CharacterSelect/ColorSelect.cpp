@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		int FindIndex = 0;
 		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
 		{
-			if ( *std::static_pointer_cast<int>( ( *item )->MyObject ) == index )
+			if ( std::static_pointer_cast<WrappedInt>( ( *item )->MyObject )->MyInt == index )
 				break;
 			FindIndex++;
 		}

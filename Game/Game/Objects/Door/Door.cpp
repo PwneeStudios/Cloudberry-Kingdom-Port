@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &Door::getOnOpen() const
 	{
-		return _OnOpen;
+		return std::static_pointer_cast<Lambda_1<std::shared_ptr<Door> > >( _OnOpen );
 	}
 
 	void Door::setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value )

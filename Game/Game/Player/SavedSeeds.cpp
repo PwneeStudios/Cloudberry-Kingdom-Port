@@ -14,9 +14,9 @@ namespace CloudberryKingdom
 
 	bool SavedSeeds::IsSeedValue( const std::wstring &seed )
 	{
-		if ( !seed.find( _T( ";" ) ) != std::wstring::npos )
+		if ( seed.find( _T( ";" ) ) == std::wstring::npos )
 			return false;
-		if ( !seed.find( _T( ":" ) ) != std::wstring::npos )
+		if ( seed.find( _T( ":" ) ) == std::wstring::npos )
 			return false;
 		return true;
 	}
