@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+	
 	class ObjectBase : public std::enable_shared_from_this<ObjectBase>
 	{
 
@@ -21,7 +22,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<ObjectData> CoreData;
 	public:
 		const std::shared_ptr<ObjectData> &getCore() const;
-		const std::shared_ptr<TileSetInfo> &getInfo() const;
+		const std::shared_ptr<TileSetInfo> getInfo() const;
 
 		ObjectBase();
 
@@ -146,7 +147,7 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		const std::shared_ptr<Recycler> &getRecycle() const;
+		const std::shared_ptr<Recycler> getRecycle() const;
 
 		/// <summary>
 		/// Whether this object belongs to a level in the middle of level generation

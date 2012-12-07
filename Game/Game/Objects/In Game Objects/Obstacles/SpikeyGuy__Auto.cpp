@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -134,7 +135,7 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 		{
 			int Num = 10;
 			for ( int k = 0; k < 2; k++ )
-				Circle( level, Center, 160 * i, Num, k % 2 == 0 ? 1 : -1 );
+				Circle( level, Center, 160.f * i, Num, k % 2 == 0 ? 1 : -1 );
 		}
 	}
 
@@ -184,9 +185,9 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 				continue;
 
 			// Add spinners
-			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 30;
+			float xdif = ( *block )->getBox()->Current->TR.X - (*block)->getBox()->Current->BL.X - 30;
 			float density = level->getRnd()->RndFloat(Params->Density.GetVal((*block)->getCore()->Data.Position), Params->Density.GetVal((*block)->getCore()->Data.Position));
-			float average = static_cast<int>( xdif * density / 2000 );
+			float average = static_cast<float>( static_cast<int>( xdif * density / 2000 ) );
 			int n = static_cast<int>( average );
 			if ( average < 1 )
 				if ( level->getRnd()->Rnd->NextDouble() < average )
@@ -196,16 +197,16 @@ const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make
 			{
 				if ( xdif > 0 )
 				{
-					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 35;
+					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target->BL.X + 35;
 					float y;
 
 					if ( ( *block )->getBlockCore()->BlobsOnTop )
 					{
-						y = ( *block )->getBox()->Target.TR::Y - 80 + 50;
+						y = ( *block )->getBox()->Target->TR.Y - 80 + 50;
 					}
 					else
 					{
-						y = ( *block )->getBox()->Target.BL::Y + 80 - 50;
+						y = ( *block )->getBox()->Target->BL.Y + 80 - 50;
 					}
 
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )

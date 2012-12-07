@@ -23,6 +23,18 @@ public:
 		return 0xdeadbeef;
 	}
 
+	int ReadUInt32()
+	{
+		// FIXME: Implement this.
+		return 0xdeadbeef;
+	}
+
+	int ReadUInt64()
+	{
+		// FIXME: Implement this.
+		return 0xdeadbeef;
+	}
+
 	std::wstring ReadString()
 	{
 		return std::wstring();

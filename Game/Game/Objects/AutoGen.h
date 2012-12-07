@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters
+	class AutoGen_Parameters : public std::enable_shared_from_this<AutoGen_Parameters>
 	{
 		/// <summary>
 		/// Whether to intelligently spread out the period offsets of placed obstacles
@@ -94,7 +94,7 @@ public:
 		}
 	};
 
-	class AutoGen
+	class AutoGen : public std::enable_shared_from_this<AutoGen>
 	{
 	public:
 		virtual std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );

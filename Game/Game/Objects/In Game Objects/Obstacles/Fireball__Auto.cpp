@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -100,7 +99,7 @@ const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_s
 	{
 		std::shared_ptr<Fireball> emitter = std::static_pointer_cast<Fireball>( CreateAt( level, pos ) );
 
-		float Speed = ( i == 0 ? 1 : -1 );
+		float Speed = ( i == 0.f ? 1.f : -1.f );
 
 		if ( Params->Arc )
 		{

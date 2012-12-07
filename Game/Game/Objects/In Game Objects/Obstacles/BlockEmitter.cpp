@@ -1,6 +1,5 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
@@ -13,7 +12,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::OnUsed()
 	{
-		for ( std::vector<MovingPlatform*>::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
+		for ( std::vector<std::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
 			( *platform )->getCore()->GenData.Used = true;
 	}
 
@@ -23,7 +22,7 @@ namespace CloudberryKingdom
 			return;
 
 		// Delete all children platforms
-		for ( std::vector<MovingPlatform*>::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
+		for ( std::vector<std::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
 		{
 			( *platform )->Parent.reset(); // Make sure we destroy this connection to prevent an infinite recursion
 			( *platform )->CollectSelf();
@@ -82,7 +81,7 @@ namespace CloudberryKingdom
 	{
 		std::shared_ptr<MovingPlatform> block = std::static_pointer_cast<MovingPlatform>( getCore()->getRecycle()->GetObject(ObjectType_MOVING_PLATFORM, getCore()->BoxesOnly) );
 
-		block->Parent = this;
+		block->Parent = std::static_pointer_cast<BlockEmitter>( shared_from_this() );
 		block->Init( EmitData.Position, Size, getMyLevel(), MyBoxStyle );
 
 		if ( GiveLayer )
@@ -127,7 +126,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::RemovePlatform( const std::shared_ptr<MovingPlatform> &platform )
 	{
-		Platforms.Remove( platform );
+		Remove( Platforms, platform );
 	}
 
 	void BlockEmitter::PhsxStep()
@@ -188,7 +187,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::InitializeInstanceFields()
 	{
-		Platforms = std::vector<MovingPlatform*>();
+		Platforms = std::vector<std::shared_ptr<MovingPlatform> >();
 		DoPreEmit = true;
 		SetToPreEmit = false;
 		GiveCustomRange = false;

@@ -1,15 +1,12 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	void Serpent::SerpentTileInfo::InitializeInstanceFields()
 	{
-		Serpent_Renamed = std::make_shared<SpriteInfo>( _T( "Serpent" ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
-		Fish = std::make_shared<SpriteInfo>( _T( "Fish_1" ), Vector2( 35, -1 ) );
+		Serpent_Renamed = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Serpent" ) ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
+		Fish = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Fish_1" ) ), Vector2( 35, -1 ) );
 		BoxSize = Vector2( 90, 1000 );
 	}
 
@@ -19,7 +16,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Serpent_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_SERPENT;
-		DeathType = Bob::BobDeathType_NONE;
+		DeathType = BobDeathType_NONE;
 		getCore()->DrawLayer = 8;
 
 		PhsxCutoff_Playing = Vector2( 200, 4000 );
@@ -100,7 +97,7 @@ namespace CloudberryKingdom
 
 		Exposed = true;
 
-		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, UpT + DownT + WaitT1 + WaitT2 ) );
+		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, static_cast<float>( UpT + DownT + WaitT1 + WaitT2 ) ) );
 
 		float s = 0, s_fish = 0;
 

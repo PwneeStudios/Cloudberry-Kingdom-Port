@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -8,7 +9,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		MyStyle = static_cast<Style>( level->getRnd()->getRndEnum()<Style>() );
+		MyStyle = static_cast<Style>( level->getRnd()->RndInt( 0, BlockEmitter_Parameters::Style_LENGTH - 1 ) );
 
 		FillWeight = Param( PieceSeed,.5f * u->Get( Upgrade_ELEVATOR ) );
 
@@ -119,7 +120,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 							Bottom = count % 2 == 0;
 							break;
 						case StyleData::_ElevatorSwitchType_RANDOM:
-							Bottom = level->getRnd()->Rnd->NextDouble() > ::5;
+							Bottom = level->getRnd()->Rnd->NextDouble() > .5f;
 							break;
 					}
 
@@ -171,7 +172,7 @@ const std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std
 								Left = count % 2 == 0;
 								break;
 							case StyleData::_ElevatorSwitchType_RANDOM:
-								Left = level->getRnd()->Rnd->NextDouble() > ::5;
+								Left = level->getRnd()->Rnd->NextDouble() > .5f;
 								break;
 						}
 

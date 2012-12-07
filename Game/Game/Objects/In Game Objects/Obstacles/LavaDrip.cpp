@@ -1,15 +1,12 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	void LavaDrip::LavaDripTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = std::make_shared<LineSpriteInfo>( _T( "Lava_Drip_1" ), _T( "Lava_Drip_2" ), _T( "Lava_Drip_3" ), 440 );
-		BoxSize = Vector2( 118, 1300 );
+		Line_Renamed = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Lava_Drip_1" ) ), TextureOrAnim::Get( _T( "Lava_Drip_2" ) ), TextureOrAnim::Get( _T( "Lava_Drip_3" ) ), 440.f );
+		BoxSize = Vector2( 118.f, 1300.f );
 	}
 
 	void LavaDrip::MakeNew()
@@ -18,7 +15,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = LavaDrip_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_LAVA_DRIP;
-		DeathType = Bob::BobDeathType_LAVA_FLOW;
+		DeathType = BobDeathType_LAVA_FLOW;
 		getCore()->DrawLayer = 8;
 
 		PhsxCutoff_Playing = Vector2( 200, 4000 );
@@ -83,11 +80,11 @@ namespace CloudberryKingdom
 
 		Exposed = true;
 
-		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, DownT + WaitT + PeakT ) );
+		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, static_cast<float>( DownT + WaitT + PeakT ) ) );
 
 		float s = 0;
 		if ( t < PeakT )
-			s = CoreMath::FancyLerp( t / PeakT, KeyFrames_Peak ).Y * KeyFrames_Down[ 0 ]->Y;
+			s = CoreMath::FancyLerp( t / PeakT, KeyFrames_Peak ).Y * KeyFrames_Down[ 0 ].Y;
 		else if ( t < PeakT + DownT )
 			s = CoreMath::FancyLerp( ( t - PeakT ) / static_cast<float>( DownT ), KeyFrames_Down ).Y;
 		else

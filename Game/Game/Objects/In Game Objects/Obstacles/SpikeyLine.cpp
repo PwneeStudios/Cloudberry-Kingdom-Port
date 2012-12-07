@@ -1,10 +1,11 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
 	void SpikeyLine::SpikeyLineTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( 0, Vector2(1) );
+		Ball = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
 		Radius = 120;
 		Rotate = false;
 		RotateOffset = 0;
@@ -17,7 +18,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Boulder_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_SPIKEY_LINE;
-		DeathType = Bob::BobDeathType_FALLING_SPIKE;
+		DeathType = BobDeathType_FALLING_SPIKE;
 
 		getCore()->ContinuousEnabled = true;
 

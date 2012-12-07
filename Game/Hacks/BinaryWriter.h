@@ -27,6 +27,14 @@ public:
 	{
 	}
 
+	void Write( unsigned int i )
+	{
+	}
+
+	void Write( unsigned long long i )
+	{
+	}
+
 	void Write( const Vector2 &v )
 	{
 	}

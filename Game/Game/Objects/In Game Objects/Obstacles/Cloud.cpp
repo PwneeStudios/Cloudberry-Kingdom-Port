@@ -1,10 +1,11 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
 	void Cloud::CloudTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( Tools::Texture( _T( "Cloud1" ) ), Vector2( 250, 180 ), Vector2( 0, -50 ), Color( 1, 1, 1,.95f ) );
+		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "Cloud1" ) ) ), Vector2( 250.f, 180.f ), Vector2( 0.f, -50.f ), Color( 1.f, 1.f, 1.f, .95f ) );
 		BoxSize = Vector2( 180, 50 );
 	}
 
@@ -161,10 +162,9 @@ namespace CloudberryKingdom
 					// Remove surrounding clouds
 					for ( ObjectVec::const_iterator cloud = getCore()->MyLevel->Objects.begin(); cloud != getCore()->MyLevel->Objects.end(); ++cloud )
 					{
-//C# TO C++ CONVERTER NOTE: The variable Cloud was renamed since it is named the same as a user-defined type:
 						std::shared_ptr<Cloud> Cloud_Renamed = std::dynamic_pointer_cast<Cloud>( *cloud );
 						if ( 0 != Cloud_Renamed )
-							if ( !Cloud_Renamed->getCore()->GenData.Used && (Cloud_Renamed->getCore()->Data.Position - getCore()->Data.Position)->Length() < 2.35f * Box->Current->Size.X )
+							if ( !Cloud_Renamed->getCore()->GenData.Used && (Cloud_Renamed->getCore()->Data.Position - getCore()->Data.Position).Length() < 2.35f * Box->Current->Size.X )
 							{
 								getCore()->getRecycle()->CollectObject(Cloud_Renamed);
 								( *cloud )->getCore()->Active = false;

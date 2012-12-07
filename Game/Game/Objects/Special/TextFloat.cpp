@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -13,9 +11,9 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = pos;
 		getCore()->Data.Velocity = Vector2(0, 8);
 
-		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000, true, true );
+		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
 		MyText->setScale( .5f );
-		MyText->MyFloatColor = ( Color( 228, 0, 69 ) ).ToVector4();
+		MyText->MyFloatColor = ( bColor( 228, 0, 69 ) ).ToVector4();
 		MyText->OutlineColor = Color::White.ToVector4();
 
 		MyText->ZoomWithCam = true;
@@ -29,9 +27,9 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = pos;
 		getCore()->Data.Velocity = Vector2(0, 8);
 
-		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000, true, true );
+		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
 		MyText->setScale( .5f );
-		MyText->MyFloatColor = ( Color( 228, 0, 69 ) ).ToVector4();
+		MyText->MyFloatColor = ( bColor( 228, 0, 69 ) ).ToVector4();
 		MyText->OutlineColor = Color::White.ToVector4();
 
 		MyText->ZoomWithCam = true;

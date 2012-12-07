@@ -71,11 +71,12 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 		for ( std::vector<std::vector<unsigned long long> >::const_iterator GuidList = Params->Snakes.begin(); GuidList != Params->Snakes.end(); ++GuidList )
 		{
 			// Convert the list to objects
-			ObjectVec Snake = level->GuidToObj( *GuidList );
+			std::vector<unsigned long long> v = *GuidList;
+			ObjectVec Snake = level->GuidToObj( v );
 
 			// Find a deleted element to start with
 			int start = 0;
-			for ( int i = 0; i < Snake.size(); i++ )
+			for ( int i = 0; i < static_cast<int>( Snake.size() ); i++ )
 				if ( Snake[ i ] == 0 )
 				{
 					start = i + 1;
@@ -86,7 +87,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 			std::vector<int> PotentialHeads = std::vector<int>();
 
 			int count = 0;
-			for ( int j = 0; j < Snake.size(); j++ )
+			for ( int j = 0; j < static_cast<int>( Snake.size() ); j++ )
 			{
 				int i = ( j + start ) % Snake.size();
 
@@ -100,7 +101,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 				else
 					count++;
 
-				if ( count > Snake.size() / 2 )
+				if ( count > static_cast<int>( Snake.size() ) / 2 )
 					PotentialHeads.push_back( i );
 			}
 
@@ -114,11 +115,12 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 			}
 
 			// Choose a head
-			int head = PotentialHeads.Choose( level->getRnd() );
+			/*int head = PotentialHeads.Choose( level->getRnd() );*/
+			int head = ListExtension::Choose( PotentialHeads, level->getRnd() );
 
 			// Find the end of the chain
 			int l = 0;
-			for ( l = 0; l < Snake.size() / 2; l++ )
+			for ( l = 0; l < static_cast<int>( Snake.size() ) / 2; l++ )
 			{
 				int i = ( head - l + Snake.size() ) % Snake.size();
 
@@ -127,7 +129,7 @@ const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make
 			}
 
 			// Delete the rest
-			while ( l < Snake.size() )
+			while ( l < static_cast<int>( Snake.size() ) )
 			{
 				int i = ( head - l + Snake.size() ) % Snake.size();
 

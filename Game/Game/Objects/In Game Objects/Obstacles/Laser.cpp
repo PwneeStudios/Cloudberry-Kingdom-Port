@@ -1,13 +1,12 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	void Laser::LaserTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = std::make_shared<LineSpriteInfo>( _T( "Laser" ), 100, 60, 1, Vector4::One );
-		Tint_Full = Vector4( 1, 1, 1,.95f );
+		Line_Renamed = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Laser" ) ), 100.f, 60.f, 1, Vector4( 1.f ) );
+		Tint_Full = Vector4( 1.f, 1.f, 1.f, .95f );
 		Tint_Half = Vector4( 1,.5f,.5f,.4f );
 		Scale = 1;
 	}
@@ -18,7 +17,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = Laser_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_LASER;
-		DeathType = Bob::BobDeathType_LASER;
+		DeathType = BobDeathType_LASER;
 
 		PhsxCutoff_Playing = Vector2( 500 );
 		PhsxCutoff_BoxesOnly = Vector2( -100 );
@@ -88,8 +87,8 @@ namespace CloudberryKingdom
 		if ( AlwaysOn )
 		{
 			MyState = LaserState_ON;
-			float TargetState = CoreMath::PeriodicCentered( .86f, 1, 70, getCore()->MyLevel->CurPhsxStep );
-			StateChange += .02f * Math::Sign( TargetState - StateChange );
+			float TargetState = CoreMath::PeriodicCentered( .86f, 1.f, 70.f, static_cast<float>( getCore()->MyLevel->CurPhsxStep ) );
+			StateChange += .02f * ::Sign( TargetState - StateChange );
 			if ( StateChange > 1 )
 				StateChange = 1;
 		}
@@ -97,14 +96,14 @@ namespace CloudberryKingdom
 		{
 			MyState = LaserState_OFF;
 			float TargetState = 0;
-			StateChange += .02f * Math::Sign( TargetState - StateChange );
+			StateChange += .02f * ::Sign( TargetState - StateChange );
 			if ( StateChange < 0 )
 				StateChange = 0;
 		}
 		else
 		{
 			//int Step = CoreMath.Modulo(Core.MyLevel.GetPhsxStep() + Offset, Period);
-			float Step = CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, Period );
+			float Step = CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, static_cast<float>( Period ) );
 			if ( Step < WarnDuration )
 			{
 				MyState = LaserState_WARN;
@@ -223,6 +222,6 @@ namespace CloudberryKingdom
 		WarnDuration = LaserA->WarnDuration;
 		Duration = LaserA->Duration;
 
-		MyLine.SkipEdge = LaserA->MyLine->SkipEdge;
+		MyLine.SkipEdge = LaserA->MyLine.SkipEdge;
 	}
 }

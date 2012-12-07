@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -21,7 +19,7 @@ namespace CloudberryKingdom
 		Size.SetVal( 2 - .1f * u->Get( Upgrade_CLOUD ) );
 	}
 
-const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
+	const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
 
 	const std::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance()
 	{
@@ -60,7 +58,8 @@ const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<
 		std::shared_ptr<Cloud_Parameters> Params = std::static_pointer_cast<Cloud_Parameters>( level->getStyle()->FindParams( Cloud_AutoGen::getInstance() ) );
 
 		// Make the new cloud
-		pos += Vector2( level->getRnd()->Rnd->Next(0, 70), level->getRnd()->Rnd->Next(0, 70) );
+		pos += Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 70) ),
+						static_cast<float>( level->getRnd()->Rnd->Next(0, 70) ) );
 		std::shared_ptr<Cloud> NewCloud = std::static_pointer_cast<Cloud>( level->MySourceGame->Recycle->GetObject( ObjectType_CLOUD, true ) );
 
 		NewCloud->Shiftiness = Params->Shiftiness.GetVal( pos );

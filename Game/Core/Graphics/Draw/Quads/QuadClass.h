@@ -214,6 +214,11 @@ namespace CloudberryKingdom
 
 	class HsvQuad : public QuadClass
 	{
+
+	public:
+		using QuadClass::Set;
+		using QuadClass::Draw;
+
 		/// <summary>
 		/// Color rotation matrix.
 		/// </summary>
@@ -231,6 +236,7 @@ namespace CloudberryKingdom
 		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );
 
 		virtual void Draw( bool Update, bool DrawQuad, bool DrawShadow );
+
 	};
 }
 

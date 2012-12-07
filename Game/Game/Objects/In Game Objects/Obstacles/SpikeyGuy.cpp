@@ -1,12 +1,13 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
 	void SpikeyGuy::SpikeyGuyTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( _T( "EmitterTexture" ), Vector2( 320 ), Vector2(), Color::White );
-		Base = std::make_shared<SpriteInfo>( _T( "Joint" ), Vector2( 50, -1 ), Vector2(), Color::White );
-		Chain = std::make_shared<LineSpriteInfo>( _T( "Chain_Tile" ), 44, 63 );
+		Ball = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
+		Base = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Joint" ) ), Vector2( 50.f, -1.f ), Vector2(), Color::White );
+		Chain = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Chain_Tile" ) ), 44.f, 63.f );
 		Radius = 200;
 		Rotate = false;
 		RotateOffset = 0;
@@ -33,7 +34,7 @@ namespace CloudberryKingdom
 
 		AutoGenSingleton = SpikeyGuy_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_SPIKEY_GUY;
-		DeathType = Bob::BobDeathType_SPIKEY_GUY;
+		DeathType = BobDeathType_SPIKEY_GUY;
 
 		getCore()->ContinuousEnabled = true;
 
@@ -104,7 +105,7 @@ namespace CloudberryKingdom
 		}
 		getCore()->SkippedPhsx = false;
 
-		float Step = CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, Period );
+		float Step = CoreMath::Modulo( getCore()->MyLevel->GetIndependentPhsxStep() + Offset, static_cast<float>( Period ) );
 		float t = Dir * static_cast<float>( Step ) / static_cast<float>( Period );
 
 		setPos( GetPos( t ) );
@@ -159,11 +160,11 @@ namespace CloudberryKingdom
 		}
 		else if ( getCore()->MyLevel->CurrentDrawLayer == getCore()->DrawLayer2 )
 		{
-			Tools::QDrawer->DrawLine( PivotPoint, getCore()->Data.Position, Color(255, 255, 255, 215), 20 );
+			Tools::QDrawer->DrawLine( PivotPoint, getCore()->Data.Position, bColor(255, 255, 255, 215), 20 );
 		}
 		else if ( getCore()->MyLevel->CurrentDrawLayer == getCore()->DrawLayer3 )
 		{
-			Circle->Draw( Color( 50, 50, 255, 220 ) );
+			Circle->Draw( bColor( 50, 50, 255, 220 ) );
 		}
 	}
 

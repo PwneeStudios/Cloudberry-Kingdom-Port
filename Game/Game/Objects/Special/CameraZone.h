@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class CameraZone : public ZoneTrigger
 	{
 	private:
-		class ZoneTriggerLambda : public Lambda_1<ZoneTrigger*>
+		class ZoneTriggerLambda : public Lambda_1<std::shared_ptr<ZoneTrigger> >
 		{
 		private:
 			std::shared_ptr<CameraZone> zt;

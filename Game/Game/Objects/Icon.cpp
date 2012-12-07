@@ -1,11 +1,12 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, ObjectIcon::SlowMoIcon = 0;
-std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, ObjectIcon::CustomHoverIcon = 0;
-std::map<Upgrade, ObjectIcon*> ObjectIcon::UpgradeIcons = 0;
-std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
+	//std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, ObjectIcon::SlowMoIcon = 0;
+	//std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, ObjectIcon::CustomHoverIcon = 0;
+	//std::map<Upgrade, std::shared_ptr<ObjectIcon> > ObjectIcon::UpgradeIcons;
+	//std::map<ObjectType, std::shared_ptr<ObjectIcon> > ObjectIcon::ObjIcons;
 
 	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade )
 	{
@@ -18,7 +19,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 			return UpgradeIcons[ upgrade ]->Clone();
 		else
 		{
-			std::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, _T( "castle" ) );
+			std::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, TileSet::Get( _T( "castle" ) ) );
 
 			std::shared_ptr<PictureIcon> icon;
 			if ( big && info->Icon_Big != 0 )
@@ -99,7 +100,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	void ObjectIcon::InitIcons()
 	{
-		UpgradeIcons = std::map<Upgrade, ObjectIcon*>();
+		UpgradeIcons = std::map<Upgrade, std::shared_ptr<ObjectIcon> >();
 
 		float StandardWidth = 161 * 1.31f;
 		//UpgradeIcons.Add(Upgrade.BouncyBlock, new PictureIcon("Bouncy blocks", "Icon_BouncyBlock1", Color.Lime, StandardWidth*.555f));
@@ -118,11 +119,11 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		//UpgradeIcons.Add(Upgrade.Firesnake, new PictureIcon("Firesnake", "Icon_Firesnake", Color.Orange, StandardWidth * .905f));
 		//UpgradeIcons.Add(Upgrade.SpikeyLine, new PictureIcon("Spikey line", "Icon_SpikeyLine", Color.Orange, StandardWidth * .905f));
 
-		UpgradeIcons.insert( make_pair( Upgrade_JUMP, std::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, _T( "Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
-		UpgradeIcons.insert( make_pair( Upgrade_SPEED, std::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
-		UpgradeIcons.insert( make_pair( Upgrade_CEILING, std::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, std::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, _T( "Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, std::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, std::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
 
-		ObjIcons = std::map<ObjectType, ObjectIcon*>();
+		ObjIcons = std::map<ObjectType, std::shared_ptr<ObjectIcon> >();
 		//ObjIcons.Add(ObjectType.FallingBlock, UpgradeIcons[Upgrade.FallingBlock]);
 		//ObjIcons.Add(ObjectType.MovingBlock, UpgradeIcons[Upgrade.MovingBlock]);
 		//ObjIcons.Add(ObjectType.GhostBlock, UpgradeIcons[Upgrade.GhostBlock]);
@@ -133,17 +134,17 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		//UncheckedIcon = new PictureIcon("Uncheck", Color.Lime, StandardWidth * .85f);
 
 		//CheckpointIcon = new PictureIcon("Icon_Checkpoint", Color.Lime, StandardWidth * .85f);
-		CheckpointIcon = std::make_shared<PictureIcon>( _T( "Icon_Checkpoint_v2" ), Color::Lime, StandardWidth *.85f );
+		CheckpointIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Icon_Checkpoint_v2" ) ), Color::Lime, StandardWidth *.85f );
 		//RandomIcon = new PictureIcon("Unknown", Color.Lime, StandardWidth * 1.2f);
-		RandomIcon = std::make_shared<PictureIcon>( _T( "HeroIcon_Random" ), Color::Lime, StandardWidth * 1.08f );
-		CustomIcon = std::make_shared<PictureIcon>( _T( "HeroIcon_Custom" ), Color::Lime, StandardWidth * 1.45f );
+		RandomIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Random" ) ), Color::Lime, StandardWidth * 1.08f );
+		CustomIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Custom" ) ), Color::Lime, StandardWidth * 1.45f );
 
 		//RobotIcon = new PictureIcon("Robot", Color.Lime, StandardWidth * .75f);
 		//PathIcon = new PictureIcon("Path", Color.Lime, StandardWidth * .75f);
 		//SlowMoIcon = new PictureIcon("SlowMo", Color.Lime, StandardWidth * .75f);
-		RobotIcon = std::make_shared<PictureIcon>( _T( "Powerup_Computer" ), Color::Lime, StandardWidth *.75f );
-		PathIcon = std::make_shared<PictureIcon>( _T( "Powerup_Path" ), Color::Lime, StandardWidth *.75f );
-		SlowMoIcon = std::make_shared<PictureIcon>( _T( "Powerup_SlowMo" ), Color::Lime, StandardWidth *.75f );
+		RobotIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Computer" ) ), Color::Lime, StandardWidth *.75f );
+		PathIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Path" ) ), Color::Lime, StandardWidth *.75f );
+		SlowMoIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_SlowMo" ) ), Color::Lime, StandardWidth *.75f );
 	}
 
 	const Vector2 &ObjectIcon::getPos() const
@@ -161,7 +162,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		InitializeInstanceFields();
 		MyOscillateParams.Set( 2, 1.02f,.215f );
 
-		Backdrop = std::make_shared<QuadClass>( 0, true );
+		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true );
 		Backdrop->SetToDefault();
 		Backdrop->setTextureName( _T( "Icon_Backdrop" ) );
 		Backdrop->ScaleYToMatchRatio( 210 );
@@ -221,7 +222,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	std::vector<std::wstring> PictureIcon::GetViewables()
 	{
-		return std::vector<std::shared_ptr<std::wstring> > ();
+		return std::vector<std::wstring> ();
 	}
 
 	PictureIcon::PictureIcon( const std::shared_ptr<SpriteInfo> &info )
@@ -232,9 +233,9 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		IconQuad->Quad_Renamed.Playing = false;
 
 		if ( IconQuad->Quad_Renamed.TextureAnim == 0 )
-			IconTexture = IconQuad->Quad_Renamed.MyTexture;
+			IconTexture = IconQuad->Quad_Renamed.getMyTexture();
 		else
-			IconTexture = IconQuad->Quad_Renamed.TextureAnim->Anims[ 0 ]->Data[ 0 ];
+			IconTexture = IconQuad->Quad_Renamed.TextureAnim->Anims[ 0 ].Data[ 0 ];
 
 		this->DisplayText = Localization::Words_NONE;
 		this->NormalWidth = 161 * 1.31f * info->Size.X / 62;
@@ -271,7 +272,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->SetToDefault();
-		IconQuad->Quad_Renamed.MyTexture = IconTexture;
+		IconQuad->Quad_Renamed.setMyTexture( IconTexture );
 		IconQuad->ScaleYToMatchRatio( Width );
 
 		IconQuad->Shadow = true;
@@ -298,7 +299,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 		ObjectIcon::Fade( fade );
 
 		if ( fade )
-			IconQuad->Quad_Renamed.SetColor( Color( 100, 100, 100 ) );
+			IconQuad->Quad_Renamed.SetColor( bColor( 100, 100, 100 ) );
 		else
 			IconQuad->Quad_Renamed.SetColor( Color::White );
 	}
@@ -365,7 +366,7 @@ std::map<ObjectType, ObjectIcon*> ObjectIcon::ObjIcons = 0;
 
 	std::vector<std::wstring> CustomHoverIcon::GetViewables()
 	{
-		return std::vector<std::shared_ptr<std::wstring> > ();
+		return std::vector<std::wstring> ();
 	}
 
 	CustomHoverIcon::CustomHoverIcon()

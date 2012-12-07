@@ -1,15 +1,12 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	void Spike::SpikeTileInfo::InitializeInstanceFields()
 	{
-		Spike_Renamed = std::make_shared<SpriteInfo>( 0 );
-		Base = std::make_shared<SpriteInfo>( 0 );
+		Spike_Renamed = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
+		Base = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
 		PeakHeight = .2f;
 		TopOffset = 2;
 		BottomOffset = 2;
@@ -17,7 +14,7 @@ namespace CloudberryKingdom
 		ObjectSize = Vector2( 575, 535 );
 	}
 
-bool Spike::PeakOut = true;
+	bool Spike::PeakOut = true;
 
 	void Spike::SetPeriod( int Period )
 	{
@@ -135,13 +132,15 @@ bool Spike::PeakOut = true;
 	{
 		std::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 
 		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
+		//reader->Close();
+		//stream->Close();
 		reader->Close();
-		stream->Close();
 
 		SourceObject->ConvertForSimple();
 		MyObject = std::make_shared<SimpleObject>( SourceObject );
@@ -223,7 +222,7 @@ bool Spike::PeakOut = true;
 
 		float AnimSpeed = 0;
 
-		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, UpT + DownT + WaitT1 + WaitT2 ) );
+		float t = static_cast<float>( CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, static_cast<float>( UpT + DownT + WaitT1 + WaitT2 ) ) );
 		if ( t < UpT )
 			MyObject->t = PeakHeight + ( 1 - PeakHeight ) * t / static_cast<float>( UpT );
 		else if ( t < UpT + WaitT1 )
@@ -324,7 +323,7 @@ bool Spike::PeakOut = true;
 			if ( Col )
 			{
 				if ( getCore()->MyLevel->PlayMode == 0 )
-					bob->Die( Bob::BobDeathType_SPIKE, shared_from_this() );
+					bob->Die( BobDeathType_SPIKE, shared_from_this() );
 
 				if ( getCore()->MyLevel->PlayMode != 0 )
 				{
@@ -340,7 +339,7 @@ bool Spike::PeakOut = true;
 	void Spike::CloneBoxObject( const std::shared_ptr<SimpleObject> &SimpleObjA, const std::shared_ptr<SimpleObject> &SimpleObjB )
 	{
 		SimpleObjA->Base = SimpleObjB->Base;
-		for ( int i = 0; i < SimpleObjA->Boxes.size(); i++ )
+		for ( int i = 0; i < static_cast<float>( SimpleObjA->Boxes.size() ); i++ )
 		{
 			SimpleObjA->Boxes[ i ]->TR = SimpleObjB->Boxes[ i ]->TR;
 			SimpleObjA->Boxes[ i ]->BL = SimpleObjB->Boxes[ i ]->BL;

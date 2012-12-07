@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -121,7 +122,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		for ( int i = 0; i < N; i++ )
 		for ( int j = 0; j < M; j++ )
 		{
-			Vector2 pos = Spacing * Vector2( i, j ) + BL;
+			Vector2 pos = Spacing * Vector2( static_cast<float>( i ), static_cast<float>( j ) ) + BL;
 
 			std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( CreateAt( level, pos ) );
 			floater->Offset = 0;
@@ -152,7 +153,7 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 
 		NewFloater->Period = static_cast<int>( Params->FloaterPeriod.GetVal( pos ) );
 		NewFloater->Offset = level->getRnd()->Rnd->Next(0, NewFloater->Period);
-		NewFloater->MaxAngle = static_cast<int>( Params->FloaterMaxAngle.GetVal( pos ) );
+		NewFloater->MaxAngle = static_cast<float>( static_cast<int>( Params->FloaterMaxAngle.GetVal( pos ) ) );
 		NewFloater->MaxAngle *= .001f;
 		NewFloater->CalculateLength();
 
@@ -236,6 +237,6 @@ const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_sha
 		Vector2 FillTR = Vector2( TR.X, y + level->getMainCamera()->GetHeight() / 2 - 350 );
 
 		int Sparsity = static_cast<int>( Params->FloaterSparsity.getVal() );
-		level->Fill( FillBL, FillTR, 225 * Sparsity, 250, std::make_shared<BoulderFillLambda>( level, TR, BL, shared_from_this() ) );
+		level->Fill( FillBL, FillTR, 225.f * Sparsity, 250.f, std::make_shared<BoulderFillLambda>( level, TR, BL, std::static_pointer_cast<Boulder_AutoGen>( shared_from_this() ) ) );
 	}
 }

@@ -1,13 +1,12 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 
 	void FireSpinner::FireSpinnerTileInfo::InitializeInstanceFields()
 	{
 		Flame = std::make_shared<SpriteInfo>( Tools::Texture( _T( "small flame" ) ), Vector2( 72, 72 ), Vector2(), Color::White );
-		Base = std::make_shared<SpriteInfo>( 0, Vector2( 72, 72 ), Vector2(), Color::White );
+		Base = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72.f, 72.f ), Vector2(), Color::White );
 		SegmentSpacing = 53;
 		SpaceFromBase = 0;
 		Rotate = true;
@@ -16,7 +15,7 @@ namespace CloudberryKingdom
 		BottomOffset = 80;
 	}
 
-bool FireSpinner::RandomMiniOrientation = true;
+	bool FireSpinner::RandomMiniOrientation = true;
 
 	void FireSpinner::MakeNew()
 	{
@@ -24,7 +23,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 
 		AutoGenSingleton = FireSpinner_AutoGen::getInstance();
 		getCore()->MyType = ObjectType_FIRE_SPINNER;
-		DeathType = Bob::BobDeathType_FIRE_SPINNER;
+		DeathType = BobDeathType_FIRE_SPINNER;
 		getCore()->DrawLayer = 3;
 
 		PhsxCutoff_Playing = Vector2( 1000, 1000 );
@@ -195,7 +194,7 @@ bool FireSpinner::RandomMiniOrientation = true;
 		{
 			if ( getCore()->MyLevel->PlayMode == 0 )
 			{
-				bob->Die( Bob::BobDeathType_FIRE_SPINNER, shared_from_this() );
+				bob->Die( BobDeathType_FIRE_SPINNER, shared_from_this() );
 			}
 
 			if ( getCore()->MyLevel->PlayMode == 1 )
@@ -224,6 +223,6 @@ bool FireSpinner::RandomMiniOrientation = true;
 
 		Angle = SpinnerA->Angle;
 
-		MyLine.SkipEdge = SpinnerA->MyLine->SkipEdge;
+		MyLine.SkipEdge = SpinnerA->MyLine.SkipEdge;
 	}
 }

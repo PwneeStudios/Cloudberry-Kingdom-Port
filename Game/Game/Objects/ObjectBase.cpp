@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -41,7 +38,7 @@ namespace CloudberryKingdom
 		return CoreData;
 	}
 
-	const std::shared_ptr<TileSetInfo> &ObjectBase::getInfo() const
+	const std::shared_ptr<TileSetInfo> ObjectBase::getInfo() const
 	{
 		if ( CoreData->MyLevel == 0 )
 			return 0;
@@ -58,8 +55,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->StartData.Position = getCore()->Data.Position = pos;
 
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		var tile = getCore()->setMyTileSet(level->MyTileSet);
+		getCore()->setMyTileSet( level->MyTileSet );
 		Tools::Assert( getCore()->getMyTileSet() != 0 );
 	}
 
@@ -231,7 +227,7 @@ namespace CloudberryKingdom
 		UseWhenUsed = false;
 	}
 
-	const std::shared_ptr<Recycler> &ObjectData::getRecycle() const
+	const std::shared_ptr<Recycler> ObjectData::getRecycle() const
 	{
 		if ( MyLevel != 0 )
 			return MyLevel->getRecycle();
@@ -266,7 +262,7 @@ namespace CloudberryKingdom
 		return MyLevel->CurPiece->MyData->Style->FindParams( singleton );
 	}
 
-unsigned long long ObjectData::NextId = 0;
+	unsigned long long ObjectData::NextId = 0;
 
 	unsigned long long ObjectData::GetId()
 	{
@@ -286,31 +282,31 @@ unsigned long long ObjectData::NextId = 0;
 			InteractingPlayer = getInteractingBob()->GetPlayerData();
 	}
 
-	void ObjectData::AddAssociation( bool DeleteWhenDeleted, bool UseWhenUsed, ... )
-	{
-		for ( unknown::const_iterator obj = objs.begin(); obj != objs.end(); ++obj )
-			for ( unknown::const_iterator _obj = objs.begin(); _obj != objs.end(); ++_obj )
-				if ( *obj != *_obj )
-					( *obj )->getCore()->AddAssociate(*_obj, DeleteWhenDeleted, UseWhenUsed);
-	}
+	//void ObjectData::AddAssociation( bool DeleteWhenDeleted, bool UseWhenUsed, ... )
+	//{
+	//	for ( unknown::const_iterator obj = objs.begin(); obj != objs.end(); ++obj )
+	//		for ( unknown::const_iterator _obj = objs.begin(); _obj != objs.end(); ++_obj )
+	//			if ( *obj != *_obj )
+	//				( *obj )->getCore()->AddAssociate(*_obj, DeleteWhenDeleted, UseWhenUsed);
+	//}
 
-	void ObjectData::AddAssociate( const std::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed )
-	{
-		int FreeIndex = 0;
-		if ( Associations.empty() )
-		{
-			Associations = std::vector<AssociatedObjData>( 5 );
-			for ( int i = 0; i < 5; i++ )
-				Associations[ i ].Zero();
-		}
-		else
-			while ( Associations[ FreeIndex ].Guid != 0 )
-				FreeIndex++;
+	//void ObjectData::AddAssociate( const std::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed )
+	//{
+	//	int FreeIndex = 0;
+	//	if ( Associations.empty() )
+	//	{
+	//		Associations = std::vector<AssociatedObjData>( 5 );
+	//		for ( int i = 0; i < 5; i++ )
+	//			Associations[ i ].Zero();
+	//	}
+	//	else
+	//		while ( Associations[ FreeIndex ].Guid != 0 )
+	//			FreeIndex++;
 
-		Associations[ FreeIndex ].Guid = obj->getCore()->MyGuid;
-		Associations[ FreeIndex ].DeleteWhenDeleted = DeleteWhenDeleted;
-		Associations[ FreeIndex ].UseWhenUsed = UseWhenUsed;
-	}
+	//	Associations[ FreeIndex ].Guid = obj->getCore()->MyGuid;
+	//	Associations[ FreeIndex ].DeleteWhenDeleted = DeleteWhenDeleted;
+	//	Associations[ FreeIndex ].UseWhenUsed = UseWhenUsed;
+	//}
 
 	bool ObjectData::IsAssociatedWith( const std::shared_ptr<ObjectBase> &obj )
 	{
@@ -329,19 +325,18 @@ unsigned long long ObjectData::NextId = 0;
 
 	int ObjectData::GetAssociatedIndex( const std::shared_ptr<ObjectBase> &obj )
 	{
-		for ( int i = 0; i < Associations.size(); i++ )
+		for ( int i = 0; i < static_cast<float>( Associations.size() ); i++ )
 			if ( Associations[ i ].Guid == obj->getCore()->MyGuid )
 				return i;
 
 		return -1;
 	}
 
-	CloudberryKingdom::ObjectData::AssociatedObjData ObjectData::GetAssociationData( const std::shared_ptr<ObjectBase> &obj )
+	ObjectData::AssociatedObjData ObjectData::GetAssociationData( const std::shared_ptr<ObjectBase> &obj )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<CloudberryKingdom::ObjectData::AssociatedObjData>::const_iterator objdata = Associations.begin(); objdata != Associations.end(); ++objdata )
-			if ( ( *objdata )->Guid == obj->getCore()->MyGuid )
-				return objdata;
+		for ( std::vector<ObjectData::AssociatedObjData>::const_iterator objdata = Associations.begin(); objdata != Associations.end(); ++objdata )
+			if ( ( *objdata ).Guid == obj->getCore()->MyGuid )
+				return ( *objdata );
 		return Associations[ Associations.size() - 1 ];
 	}
 
@@ -365,7 +360,7 @@ unsigned long long ObjectData::NextId = 0;
 		GenData.Release();
 
 		InteractingPlayer.reset();
-		getInteractingBob().reset();
+		_InteractingBob.reset();
 	}
 
 	void ObjectData::SetParentObj( const std::shared_ptr<ObjectBase> &obj )
@@ -499,15 +494,15 @@ unsigned long long ObjectData::NextId = 0;
 		if ( A->EditorCode1 == _T( "" ) )
 			EditorCode1 = _T( "" );
 		else
-			EditorCode1 = std::wstring::Copy( A->EditorCode1 );
+			EditorCode1 = A->EditorCode1;
 		if ( A->EditorCode2 == _T( "" ) )
 			EditorCode2 = _T( "" );
 		else
-			EditorCode2 = std::wstring::Copy( A->EditorCode2 );
+			EditorCode2 = A->EditorCode2;
 		if ( A->EditorCode3 == _T( "" ) )
 			EditorCode3 = _T( "" );
 		else
-			EditorCode3 = std::wstring::Copy( A->EditorCode3 );
+			EditorCode3 = A->EditorCode3;
 
 		MyGuid = A->MyGuid;
 		ParentObjId = A->ParentObjId;
@@ -516,7 +511,7 @@ unsigned long long ObjectData::NextId = 0;
 		if ( A->Associations.size() > 0 )
 		{
 			Associations = std::vector<AssociatedObjData>( A->Associations.size() );
-			A->Associations.CopyTo( Associations, 0 );
+			CopyFromTo( A->Associations, Associations );
 		}
 		else
 			Associations.clear();

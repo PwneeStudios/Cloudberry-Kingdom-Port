@@ -1,7 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
@@ -56,7 +54,7 @@ namespace CloudberryKingdom
 	{
 		PointToPos = pos;
 		CoreMath::PointxAxisTo( MyObject->Base, getCore()->Data.Position - PointToPos );
-		MyObject->Base.e2 *= MyOrientation;
+		MyObject->Base.e2 *= static_cast<float>( MyOrientation );
 	}
 
 	void Arrow::Update()

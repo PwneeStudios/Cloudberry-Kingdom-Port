@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	class ZoneTrigger : public ObjectBase
 	{
 	public:
-		std::shared_ptr<Lambda_1<ZoneTrigger*> > MyContainsEvent;
+		std::shared_ptr<Lambda_1<std::shared_ptr<ZoneTrigger> > > MyContainsEvent;
 
 	private:
 		std::shared_ptr<AABox> Box;

@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -23,7 +24,7 @@ namespace CloudberryKingdom
 		LavaDripStepCutoff = 1499;
 	}
 
-const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
+	const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
 
 	const std::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance()
 	{
@@ -69,13 +70,12 @@ const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_s
 
 			if ( step < Params->LavaDripStepCutoff )
 			{
-//C# TO C++ CONVERTER NOTE: The variable LavaDrip was renamed since it is named the same as a user-defined type:
 				std::shared_ptr<LavaDrip> LavaDrip_Renamed = std::static_pointer_cast<LavaDrip>( level->getRecycle()->GetObject(ObjectType_LAVA_DRIP, true) );
 				LavaDrip_Renamed->BoxSize.Y = Params->Length.RndFloat( loc, level->getRnd() );
 				LavaDrip_Renamed->Init( loc, level );
 
 				int speed = static_cast<int>( Params->Speed.GetVal( loc ) );
-				LavaDrip_Renamed->SetPeriod( speed );
+				LavaDrip_Renamed->SetPeriod( static_cast<float>( speed ) );
 
 				LavaDrip_Renamed->Offset = level->getRnd()->Rnd->Next(LavaDrip_Renamed->Period);
 

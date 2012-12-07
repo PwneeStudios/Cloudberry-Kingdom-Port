@@ -1,4 +1,5 @@
 #include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -45,7 +46,7 @@ namespace CloudberryKingdom
 			return;
 		bool Overlap = Phsx::BoxBoxOverlap( bob->Box, Box );
 		if ( Overlap )
-			MyContainsEvent->Apply( shared_from_this() );
+			MyContainsEvent->Apply( std::static_pointer_cast<ZoneTrigger>( shared_from_this() ) );
 	}
 
 	void ZoneTrigger::Draw()
@@ -59,7 +60,7 @@ namespace CloudberryKingdom
 		getCore()->Clone(A->getCore());
 
 		std::shared_ptr<ZoneTrigger> TriggerA = std::dynamic_pointer_cast<ZoneTrigger>( A );
-		Box->Initialize( TriggerA->Box.Current->Center, TriggerA->Box.Current->Size );
+		Box->Initialize( TriggerA->Box->Current->Center, TriggerA->Box->Current->Size );
 		MyContainsEvent = TriggerA->MyContainsEvent;
 	}
 }
