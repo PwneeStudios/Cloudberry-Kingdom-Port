@@ -103,14 +103,23 @@ public:
 
 };
 
+class GameServiceContainer
+{
+};
+
 class ContentManager
 {
 
 public:
 
-	ContentManager( std::wstring ContentRootDirectory )
+	ContentManager( const std::wstring &ContentRootDirectory ) :
+		RootDirectory( ContentRootDirectory )
 	{
-		RootDirectory = ContentRootDirectory;
+	}
+
+	ContentManager( const std::shared_ptr<GameServiceContainer> &container, const std::wstring &root ) :
+		RootDirectory( root )
+	{
 	}
 
 	template<class T>
@@ -135,6 +144,7 @@ struct TimeSpan
 
 public:
 	float TotalMinutes;
+	float TotalSeconds;
 	int Hours;
 	int Minutes;
 	int Seconds;
@@ -172,6 +182,10 @@ struct DateTime
 
 public:
 	int Time;
+
+	DateTime() : Time( 0 )
+	{
+	}
 
 	DateTime( int year, int month, int day )
 	{
@@ -328,6 +342,10 @@ public:
 		return std::shared_ptr<ContentManager>();
 	}
 
+	std::shared_ptr<GameServiceContainer> getServices()
+	{
+		return std::shared_ptr<GameServiceContainer>();
+	}
 };
 
 class GamePadButtons
@@ -1066,8 +1084,30 @@ public:
 
 };
 
-class Video;
-class VideoPlayer;
+class Video
+{
+public:
+
+	TimeSpan Duration;
+};
+
+class VideoPlayer
+{
+public:
+
+	bool IsLooped;
+
+	VideoPlayer() : IsLooped( false ) { }
+
+	void Play( const std::shared_ptr<Video> &video )
+	{
+	}
+
+	std::shared_ptr<Texture2D> GetTexture()
+	{
+		return std::shared_ptr<Texture2D>();
+	}
+};
 
 // Cloudberry Kingdom converted files.
 #include "Game/Localization.h"
