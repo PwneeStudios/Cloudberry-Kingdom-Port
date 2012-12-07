@@ -78,6 +78,8 @@ namespace CloudberryKingdom
 
 		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
 
+		static bool ScoreCompareStrictWeak( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
+
 		/// <summary>
 		/// Sort the list by value.
 		/// </summary>

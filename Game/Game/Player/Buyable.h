@@ -4,7 +4,7 @@
 namespace CloudberryKingdom
 {
 
-	class Buyable
+	class Buyable : public Object
 	{
 
 	public:

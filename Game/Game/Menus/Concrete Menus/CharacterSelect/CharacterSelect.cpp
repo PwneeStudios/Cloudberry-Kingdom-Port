@@ -109,17 +109,17 @@ namespace CloudberryKingdom
 
 			std::vector<std::shared_ptr<MenuListItem> > list = std::vector<std::shared_ptr<MenuListItem> >( ItemList[ i ].capacity() );
 
-			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
+			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
 				if ( PlayerManager::BoughtOrFree( std::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
 					list.push_back( *item );
 
-			ItemIndex[ i ] = ItemList[ i ].find( list.Choose( Tools::GlobalRnd ) );
+			ItemIndex[ i ] = IndexOf( ItemList[ i ], ListExtension::Choose( list, Tools::GlobalRnd ) );
 		}
 
 		std::shared_ptr<Hat> hat = CharacterSelectManager::AvailableHats->Choose( Tools::GlobalRnd );
 		std::shared_ptr<Hat> beard = CharacterSelectManager::AvailableBeards->Choose( Tools::GlobalRnd );
-		ItemIndex[ 1 ] = ColorSchemeManager::BeardInfo.find( beard );
-		ItemIndex[ 2 ] = ColorSchemeManager::HatInfo.find( hat );
+		ItemIndex[ 1 ] = IndexOf( ColorSchemeManager::BeardInfo, beard );
+		ItemIndex[ 2 ] = IndexOf( ColorSchemeManager::HatInfo, hat );
 
 		Customize_UpdateColors();
 
@@ -130,42 +130,42 @@ namespace CloudberryKingdom
 
 	void CharacterSelect::Customize_UpdateColors()
 	{
-		bool ShowingCape = getPlayer()->ColorScheme_Renamed->CapeColor->Clr->A > 0 || getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Clr->A > 0;
+		bool ShowingCape = getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A > 0 || getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A > 0;
 
-		getPlayer()->ColorScheme_Renamed->SkinColor = static_cast<ClrTextFx>(ItemList[ 0 ][ ItemIndex[ 0 ] ]->obj);
-		getPlayer()->ColorScheme_Renamed->BeardData = ColorSchemeManager::BeardInfo[ ItemIndex[ 1 ] ];
-		getPlayer()->ColorScheme_Renamed->HatData = ColorSchemeManager::HatInfo[ ItemIndex[ 2 ] ];
-		getPlayer()->ColorScheme_Renamed->CapeColor = static_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
-		getPlayer()->ColorScheme_Renamed->CapeOutlineColor = static_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.SkinColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 0 ][ ItemIndex[ 0 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.BeardData = ColorSchemeManager::BeardInfo[ ItemIndex[ 1 ] ];
+		getPlayer()->ColorScheme_Renamed.HatData = ColorSchemeManager::HatInfo[ ItemIndex[ 2 ] ];
+		getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 
 		// If the cape has gone from not-shown to shown,
 		// make sure both the cape color and cape outline color aren't invisible.
-		if ( !ShowingCape && ( getPlayer()->ColorScheme_Renamed->CapeColor->Clr->A > 0 || getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Clr->A > 0 ) )
+		if ( !ShowingCape && ( getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A > 0 || getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A > 0 ) )
 		{
-			if ( getPlayer()->ColorScheme_Renamed->CapeColor->Equals(ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed->CapeColor->Clr->A == 0 )
+			if ( getPlayer()->ColorScheme_Renamed.CapeColor->Equals(*ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A == 0 )
 			{
 				ItemIndex[ 3 ] = HoldCapeIndex;
-				getPlayer()->ColorScheme_Renamed->CapeColor = static_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+				getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
 			}
-			if ( getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Equals(ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Clr->A == 0 )
+			if ( getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Equals(*ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A == 0 )
 			{
 				ItemIndex[ 4 ] = HoldCapeOutlineIndex;
-				getPlayer()->ColorScheme_Renamed->CapeOutlineColor = static_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+				getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 			}
 		}
 
 		// If the outline color is null, set the cape color to null and vis a versa
-		if ( getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Equals(ColorSchemeManager::None) && getPlayer()->ColorScheme_Renamed->CapeColor->Clr->A > 0 )
+		if ( getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Equals(*ColorSchemeManager::None) && getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A > 0 )
 		{
 			HoldCapeIndex = ItemIndex[ 3 ];
 			ItemIndex[ 3 ] = 0;
-			getPlayer()->ColorScheme_Renamed->CapeColor = static_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+			getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
 		}
-		if ( getPlayer()->ColorScheme_Renamed->CapeColor->Equals(ColorSchemeManager::None) && getPlayer()->ColorScheme_Renamed->CapeOutlineColor->Clr->A > 0 )
+		if ( getPlayer()->ColorScheme_Renamed.CapeColor->Equals(*ColorSchemeManager::None) && getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A > 0 )
 		{
 			HoldCapeOutlineIndex = ItemIndex[ 4 ];
 			ItemIndex[ 4 ] = 0;
-			getPlayer()->ColorScheme_Renamed->CapeOutlineColor = static_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+			getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 		}
 
 		MyDoll->UpdateColorScheme();
@@ -173,7 +173,7 @@ namespace CloudberryKingdom
 
 	bool CharacterSelect::HasCustom()
 	{
-		return getPlayer()->CustomColorScheme.SkinColor.Effect != 0;
+		return getPlayer()->CustomColorScheme.SkinColor->Effect != 0;
 	}
 
 	bool CharacterSelect::AvailableColorScheme( ColorScheme scheme )
@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			getPlayer()->ColorSchemeIndex = CoreMath::Restrict(0, ColorSchemeManager::ColorSchemes.size() - 1, getPlayer()->ColorSchemeIndex);
+			getPlayer()->ColorSchemeIndex = CoreMath::RestrictVal(0, ColorSchemeManager::ColorSchemes.size() - 1, getPlayer()->ColorSchemeIndex);
 
 			getPlayer()->ColorScheme_Renamed = ColorSchemeManager::ColorSchemes[ getPlayer()->ColorSchemeIndex ];
 			MyDoll->MyDoll->SetColorScheme( getPlayer()->ColorScheme_Renamed );
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( ( static_cast<ClrTextFx>( ( *item )->obj ) ).Guid == obj.Guid )
+			if ( ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid == obj.Guid )
 				return index;
 			index++;
 		}
@@ -217,11 +217,11 @@ namespace CloudberryKingdom
 
 	void CharacterSelect::CopyIndicesFromColorScheme()
 	{
-		ItemIndex[ 0 ] = FindIndex( ItemList[ 0 ], getPlayer()->ColorScheme_Renamed->SkinColor );
-		ItemIndex[ 1 ] = ColorSchemeManager::BeardInfo.find( getPlayer()->ColorScheme_Renamed->BeardData );
-		ItemIndex[ 2 ] = ColorSchemeManager::HatInfo.find( getPlayer()->ColorScheme_Renamed->HatData );
-		ItemIndex[ 3 ] = FindIndex( ItemList[ 3 ], getPlayer()->ColorScheme_Renamed->CapeColor );
-		ItemIndex[ 4 ] = FindIndex( ItemList[ 4 ], getPlayer()->ColorScheme_Renamed->CapeOutlineColor );
+		ItemIndex[ 0 ] = FindIndex( ItemList[ 0 ], *getPlayer()->ColorScheme_Renamed.SkinColor );
+		ItemIndex[ 1 ] = IndexOf( ColorSchemeManager::BeardInfo, getPlayer()->ColorScheme_Renamed.BeardData );
+		ItemIndex[ 2 ] = IndexOf( ColorSchemeManager::HatInfo, getPlayer()->ColorScheme_Renamed.HatData );
+		ItemIndex[ 3 ] = FindIndex( ItemList[ 3 ], *getPlayer()->ColorScheme_Renamed.CapeColor );
+		ItemIndex[ 4 ] = FindIndex( ItemList[ 4 ], *getPlayer()->ColorScheme_Renamed.CapeOutlineColor );
 
 		for ( int i = 0; i <= 4; i++ )
 			if ( ItemIndex[ i ] < 0 )

@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 				int beard_index = IndexOf( ColorSchemeManager::BeardInfo, beard->first );
 				std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( beard->first->Name, Resources::Font_Grobold42, false, true ) );
 				item->ScaleText( .375f );
-				item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( beard_index ) );
+				item->MyObject = std::static_pointer_cast<Object>( std::make_shared<WrappedInt>( beard_index ) );
 
 				list->MyList->AddItem( item, item->MyObject );
 			}
@@ -238,7 +238,7 @@ namespace CloudberryKingdom
 				int clr_index = IndexOf( list, *item );
 				std::shared_ptr<MenuItem> _item = std::make_shared<MenuItem>( std::make_shared<EzText>( data->Name, Resources::Font_Grobold42, false, true ) );
 				_item->ScaleText( .375f );
-				_item->MyObject = std::static_pointer_cast<void>( std::make_shared<int>( clr_index ) );
+				_item->MyObject = std::static_pointer_cast<Object>( std::make_shared<WrappedInt>( clr_index ) );
 
 				select->MyList->AddItem( _item, _item->MyObject );
 			}

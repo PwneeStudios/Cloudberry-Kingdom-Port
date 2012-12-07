@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		return Price;
 	}
 
-	bool ClrTextFx::Equals( ClrTextFx a )
+	bool ClrTextFx::Equals( const ClrTextFx &a )
 	{
 		if ( a.Name == Name )
 			return true;

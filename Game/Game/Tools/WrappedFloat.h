@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		WrappedBool( bool val );
 	};
 
-	class WrappedInt
+	class WrappedInt : public Object
 	{
 	public:
 		int MyInt;

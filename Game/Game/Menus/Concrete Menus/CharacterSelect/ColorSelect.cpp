@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 
 	int ListSelectPanel::GetAssociatedIndex()
 	{
-		return *std::static_pointer_cast<int>( MyList->getCurObj() );
+		return std::static_pointer_cast<WrappedInt>( MyList->getCurObj() )->MyInt;
 	}
 
 	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )

@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 
 	void VerifyPurchaseMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500, true );
+		Backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1246.031f, 691.4683f ) );
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 
 		std::wstring postfix = _T( "{pCoinBlue,80,?}x " ) + StringConverterHelper::toString( Cost );
 		std::wstring Text = _T( "Buy  " ) + pic + _T( "\n    for " ) + postfix + _T( "?" );
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, 1000, false, false,.8f );
+		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, 1000.f, false, false, .8f );
 		HeaderText->setScale( HeaderText->getScale() * .85f );
 		//SetHeaderProperties(HeaderText);
 		MyPile->Add( HeaderText );
@@ -379,7 +379,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
 
 			bool found = false;
-			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
+			for ( std::vector<std::shared_ptr<MenuListItem> >::iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
 			{
 				if ( clr->Guid == ( std::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
 				{
@@ -436,13 +436,13 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		//MyPile.Add(backdrop);
 		//backdrop.Pos = new Vector2(3009.921265f, -111.1109f) + new Vector2(-297.6191f, 15.87299f);
 
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500, true );
+		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
 		backdrop->setPos( Vector2( 869.0458f, -35.71438f ) );
 
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500, true );
+		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
@@ -461,7 +461,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		BankAmount = std::make_shared<EzText>( _T( "xx" ), Resources::Font_Grobold42 );
 		BankAmount->setScale( BankAmount->getScale() * .935f );
 		MyPile->Add( BankAmount );
-		BankAmount->setPos( Vector2( 855, 877.5f ) );
+		BankAmount->setPos( Vector2( 855.f, 877.5f ) );
 		SetBankAmount();
 
 		EnsureFancy();
@@ -474,7 +474,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 	{
 		std::shared_ptr<MenuItem> item;
 
-		ItemPos = Vector2( -1257.38f, -5900 );
+		ItemPos = Vector2( -1257.38f, -5900.f );
 
 	//#if PC_VERSION
 	//            // Customize

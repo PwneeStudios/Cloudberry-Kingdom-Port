@@ -77,7 +77,7 @@ public:
 	private:
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnOpen;
 	public:
-		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &getOnOpen() const;
+		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > getOnOpen() const;
 		void setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
 
 	private:

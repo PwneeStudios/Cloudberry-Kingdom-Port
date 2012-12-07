@@ -51,8 +51,12 @@ namespace CloudberryKingdom
 
 		T Choose( const std::shared_ptr<Rand> &Rnd )
 		{
+			// FIXME: Please don't do this -_-
 			int i = Rnd->RndInt( 0, dict.size() - 1 );
-			return dict.ElementAt( i )->Key;
+			std::map<T, bool>::iterator itr = dict.begin();
+			while( i > 0 )
+				++itr;
+			return itr->first;
 		}
 
 		bool Contains( T item )

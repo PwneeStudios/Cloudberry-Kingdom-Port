@@ -23,7 +23,7 @@ int main( int argc, char *argv[] )
 
 	theLog.AddListener( stdLog );
 
-	CloudberryKingdom game;
+	CloudberryKingdomWrapper game;
 	Core core( game );
 
 	int result = core.Run();

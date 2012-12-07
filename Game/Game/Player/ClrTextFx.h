@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	class ClrTextFx : public Buyable, public Object
+	class ClrTextFx : public Buyable
 	{
 	public:
 		int Guid, Price;
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 
 		bool UsePaintTexture;
 
-		bool Equals( ClrTextFx a );
+		bool Equals( const ClrTextFx &a );
 
 		/// <summary>
 		/// This color is used instead of a texture in situations where the texture can't be applied.

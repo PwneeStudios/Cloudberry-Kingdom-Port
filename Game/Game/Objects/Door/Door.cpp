@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 
 	void Door::DoorTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( 0 );
+		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>( 0 ) );
 		Show = true;
 		SizePadding = Vector2();
 		ShiftBottom = Vector2();
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		CollisionSize = Vector2( 100, 200 );
 		DoorOpen = Tools::NewSound( _T( "Door_Opening" ), 1 );
 		DoorClose = Tools::NewSound( _T( "Door_Slamming" ), 1 );
-		Sign_Renamed = std::make_shared<SpriteInfo>( _T( "Sign_Off" ), Vector2( 275, -1 ) );
+		Sign_Renamed = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Sign_Off" ) ), Vector2( 275, -1 ) );
 		ShowSign = false;
 	}
 
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		ExtraPhsx.reset();
 	}
 
-	std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &Door::getOnOpen() const
+	std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > Door::getOnOpen() const
 	{
 		return std::static_pointer_cast<Lambda_1<std::shared_ptr<Door> > >( _OnOpen );
 	}
@@ -242,7 +242,7 @@ namespace CloudberryKingdom
 
 		if ( MyPressNote == 0 )
 		{
-			MyPressNote = std::make_shared<PressNote>( shared_from_this() );
+			MyPressNote = std::make_shared<PressNote>( std::static_pointer_cast<Door>( shared_from_this() ) );
 			getCore()->MyLevel->MyGame->AddGameObject(MyPressNote);
 		}
 		else

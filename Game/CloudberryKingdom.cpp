@@ -1,6 +1,6 @@
-#include "CloudberryKingdom.h"
+#include "global_header.h"
 
-#include <Content/Texture.h>
+/*#include <Content/Texture.h>
 #include <Content/Wad.h>
 #include <Core.h>
 #include <cstdlib>
@@ -8,7 +8,7 @@
 #include <Graphics/TextDrawer.h>
 #include <Graphics/Types.h>
 #include <Utility/Log.h>
-#include <vector>
+#include <vector>*/
 
 //#include <cafe/pad.h>
 
@@ -20,16 +20,18 @@
 
 void CloudberryKingdomWrapper::Initialize()
 {
-	std::vector< std::string > paths;
+	/*std::vector< std::string > paths;
 
 	for( size_t i = 0; i < paths.size(); ++i )
-		CONTENT->Load< Texture >( paths[ i ] );
+		CONTENT->Load< Texture >( paths[ i ] );*/
 
 	/*PADInit();
 	WPADInit();
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );*/
+
+	std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> game = std::make_shared<CloudberryKingdom::CloudberryKingdomGame>();
 }
 
 void CloudberryKingdomWrapper::Update()
@@ -83,7 +85,7 @@ void CloudberryKingdomWrapper::Update()
 			textPos += Vector2( 0, 10 );
 	}*/
 
-	Vector2 textPos( 0 );
+	/*Vector2 textPos( 0 );
 
 	ResourcePtr< Texture > texture = CONTENT->Load< Texture >( "Art/Bob/Bob_Trimmed/Bob_Run_0001.png" );
 	ResourcePtr< Texture > background = CONTENT->Load< Texture >( "Art/Title/Title_Screen.png" );
@@ -109,5 +111,5 @@ void CloudberryKingdomWrapper::Update()
 	quad.Diffuse = title;
 	QUAD_DRAWER->Draw( quad );
 
-	TEXT_DRAWER->Draw( "Game Over", textPos );
+	TEXT_DRAWER->Draw( "Game Over", textPos );*/
 }

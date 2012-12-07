@@ -160,9 +160,14 @@ namespace CloudberryKingdom
 		return score2->Value - score1->Value;
 	}
 
+	bool ScoreDatabase::ScoreCompareStrictWeak( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 )
+	{
+		return ScoreCompare( score1, score2 ) < 0;
+	}
+
 	void ScoreDatabase::Sort( std::vector<std::shared_ptr<ScoreEntry> > &Scores )
 	{
 		//Scores.Sort( ScoreCompare );
-		Sort( Scores );
+		::Sort( Scores, ScoreDatabase::ScoreCompareStrictWeak );
 	}
 }

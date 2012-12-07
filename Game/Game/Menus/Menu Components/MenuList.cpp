@@ -28,7 +28,11 @@ namespace CloudberryKingdom
 	{
 		_ExpandOnGo = value;
 		if ( _ExpandOnGo )
-			OnClick = std::make_shared<ExpandProxy1>( shared_from_this() );
+			OnClick = std::static_pointer_cast<Lambda_1<std::shared_ptr<MenuItem> > >(
+				std::make_shared<ExpandProxy1>(
+					std::static_pointer_cast<MenuList>( shared_from_this() )
+				)
+			);
 		else
 			OnClick.reset();
 	}
@@ -37,7 +41,9 @@ namespace CloudberryKingdom
 	{
 		if ( MyMenuListExpand == 0 || MyMenuListExpand->getCore()->Released )
 		{
-			MyMenuListExpand = std::make_shared<MenuListExpand>( this->Control, shared_from_this() );
+			MyMenuListExpand = std::make_shared<MenuListExpand>( this->Control,
+				std::static_pointer_cast<MenuList>( shared_from_this() )
+			);
 			Tools::CurGameData->AddGameObject( MyMenuListExpand );
 			MyMenu->Active = false;
 
@@ -152,7 +158,7 @@ namespace CloudberryKingdom
 
 	const std::shared_ptr<Object> &MenuList::getCurObj() const
 	{
-		return ObjDict[ CurMenuItem ];
+		return ObjDict.at( CurMenuItem );
 	}
 
 	const bool MenuList::getOnFirstIndex() const
