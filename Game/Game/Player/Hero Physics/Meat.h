@@ -21,6 +21,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BobPhsxMeat> &getInstance();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxMeat> &bob );
+
 		// Instancable class
 		BobPhsxMeat();
 

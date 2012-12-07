@@ -24,6 +24,24 @@ const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxBouncy::Clone()
+	{
+		std::shared_ptr<BobPhsxBouncy> newBob = std::make_shared<BobPhsxBouncy>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxBouncy::CopyTo( const std::shared_ptr<BobPhsxBouncy> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->InitializedAnim = InitializedAnim;
+		bob->SuperBounce = SuperBounce;
+		bob->SuperBounceGraceCount = SuperBounceGraceCount;
+		bob->SuperBounceGrace = SuperBounceGrace;
+	}
+
+
 	BobPhsxBouncy::BobPhsxBouncy()
 	{
 		InitializeInstanceFields();

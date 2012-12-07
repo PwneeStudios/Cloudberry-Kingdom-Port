@@ -17,6 +17,9 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<BobPhsx> ChooseHeroType();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxRandom> &bob );
+
 		// Instancable class
 		BobPhsxRandom();
 	};

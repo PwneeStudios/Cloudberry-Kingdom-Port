@@ -22,6 +22,24 @@ const std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance = std::make_shared<Bo
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxWheel::Clone()
+	{
+		std::shared_ptr<BobPhsxWheel> newBob = std::make_shared<BobPhsxWheel>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxWheel::CopyTo( const std::shared_ptr<BobPhsxWheel> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->LandSound = LandSound;
+		bob->AngleSpeed = AngleSpeed;
+		bob->MaxAngleSpeed = MaxAngleSpeed;
+		bob->AngleAcc = AngleAcc;
+	}
+
+
 	BobPhsxWheel::BobPhsxWheel()
 	{
 		InitializeInstanceFields();

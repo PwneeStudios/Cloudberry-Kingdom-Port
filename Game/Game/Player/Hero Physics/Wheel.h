@@ -15,6 +15,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BobPhsxWheel> &getInstance();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxWheel> &bob );
+
 		// Instancable class
 	private:
 		std::shared_ptr<EzSound> LandSound;

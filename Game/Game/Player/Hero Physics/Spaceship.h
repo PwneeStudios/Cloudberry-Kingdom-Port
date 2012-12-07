@@ -18,6 +18,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BobPhsxSpaceship> &getInstance();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxSpaceship> &bob );
+
 		// Instancable class
 	private:
 		int AutoMoveLength, AutoMoveType, AutoStrafeLength;

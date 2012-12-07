@@ -25,6 +25,18 @@ const std::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance = std::make_shared<
 		//return Tools::GlobalRnd->Choose( Bob::HeroTypes );
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxRandom::Clone()
+	{
+		std::shared_ptr<BobPhsxRandom> newBob = std::make_shared<BobPhsxRandom>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxRandom::CopyTo( const std::shared_ptr<BobPhsxRandom> &bob )
+	{
+		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) ); 
+	}
+
 	BobPhsxRandom::BobPhsxRandom()
 	{
 	}

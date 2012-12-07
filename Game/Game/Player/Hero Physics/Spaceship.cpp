@@ -26,6 +26,27 @@ const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_s
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxSpaceship::Clone()
+	{
+		std::shared_ptr<BobPhsxSpaceship> newBob = std::make_shared<BobPhsxSpaceship>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxSpaceship::CopyTo( const std::shared_ptr<BobPhsxSpaceship> &bob )
+	{
+		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) );
+
+		bob->AutoMoveLength = AutoMoveLength;
+		bob->AutoMoveType = AutoMoveType;
+		bob->AutoStrafeLength = AutoStrafeLength;
+		bob->AutoDirLength = AutoDirLength;
+		bob->AutoDir = AutoDir;
+
+		bob->RndMoveType = RndMoveType;
+		bob->Dir = Dir;
+	}
+
 	BobPhsxSpaceship::BobPhsxSpaceship()
 	{
 		InitializeInstanceFields();
