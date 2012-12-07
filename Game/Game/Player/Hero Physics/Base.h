@@ -246,6 +246,7 @@ namespace CloudberryKingdom
 		BobPhsx();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsx> &bob );
 
 		virtual void KillJump();
 

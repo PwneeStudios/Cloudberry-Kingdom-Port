@@ -25,6 +25,23 @@ const std::shared_ptr<BobPhsxBox> BobPhsxBox::instance = std::make_shared<BobPhs
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxBox::Clone()
+	{
+		std::shared_ptr<BobPhsxBox> newBob = std::make_shared<BobPhsxBox>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxBox::CopyTo( const std::shared_ptr<BobPhsxBox> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->InitializedAnim = InitializedAnim;
+		bob->StandAnim = StandAnim;
+		bob->JumpAnim = JumpAnim;
+		bob->DuckAnim = DuckAnim;
+	}
+
 	BobPhsxBox::BobPhsxBox()
 	{
 		InitializeInstanceFields();

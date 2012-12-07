@@ -15,6 +15,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BobPhsxBox> &getInstance();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxBox> &bob );
+
 		// Instancable class
 	private:
 		bool InitializedAnim;

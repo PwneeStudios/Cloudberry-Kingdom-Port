@@ -23,6 +23,90 @@ const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxNormal::Clone()
+	{
+		std::shared_ptr<BobPhsxNormal> newBob = std::make_shared<BobPhsxNormal>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxNormal::CopyTo( const std::shared_ptr<BobPhsxNormal> &bob )
+	{
+		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) );
+
+		bob->InitializedAnim = InitializedAnim;
+		bob->LandSound = LandSound;
+		bob->DoubleJump = DoubleJump;
+		bob->ThrustSound = ThrustSound;
+		bob->ThrustSoundDelay = ThrustSoundDelay;
+		bob->ThrustSoundCount = ThrustSoundCount;
+		bob->RndMoveType = RndMoveType;
+		bob->Offset = Offset;
+		bob->RndThrustType = RndThrustType;
+		bob->BobFallDelay = BobFallDelay;
+		bob->XFriction = XFriction;
+		bob->BobXDunkFriction = BobXDunkFriction;
+		bob->BobJumpLength = BobJumpLength;
+		bob->BobJumpLengthDucking = BobJumpLengthDucking;
+		bob->BobInitialJumpSpeed = BobInitialJumpSpeed;
+		bob->BobInitialJumpSpeedDucking = BobInitialJumpSpeedDucking;
+		bob->BobJumpAccel2 = BobJumpAccel2;
+		bob->BobJumpLength2 = BobJumpLength2;
+		bob->BobJumpLengthDucking2 = BobJumpLengthDucking2;
+		bob->BobInitialJumpSpeed2 = BobInitialJumpSpeed2;
+		bob->BobInitialJumpSpeedDucking2 = BobInitialJumpSpeedDucking2;
+		bob->BobJumpAccel = BobJumpAccel;
+		bob->BobEdgeJump = BobEdgeJump;
+		bob->BobEdgeJumpLength = BobEdgeJumpLength;
+		bob->JetPackAccel = JetPackAccel;
+		bob->Thrusting = Thrusting;
+		bob->ReadyToThrust = ReadyToThrust;
+		bob->StartedJump = StartedJump;
+		bob->_JumpCount = _JumpCount;
+		bob->FallingCount = FallingCount;
+		bob->ReadyToJump = ReadyToJump;
+		bob->ApexY = ApexY;
+		bob->CountSinceApex = CountSinceApex;
+		bob->AutoMoveLength = AutoMoveLength;
+		bob->AutoMoveType = AutoMoveType;
+		bob->AutoStrafeLength = AutoStrafeLength;
+		bob->AutoSetToJumpLength = AutoSetToJumpLength;
+		bob->AutoSetToJumpType = AutoSetToJumpType;
+		bob->AutoDirLength = AutoDirLength;
+		bob->AutoDir = AutoDir;
+		bob->AutoDirLength_SetTo = AutoDirLength_SetTo;
+		bob->AutoFallOrJumpLength = AutoFallOrJumpLength;
+		bob->AutoFallOrJump = AutoFallOrJump;
+		bob->NumJumps = NumJumps;
+		bob->CurJump = CurJump;
+		bob->JumpDelay = JumpDelay;
+		bob->JumpDelayCount = JumpDelayCount;
+		bob->JetPack = JetPack;
+		bob->JetPackLength = JetPackLength;
+		bob->JetPackCushion = JetPackCushion;
+		bob->JetPackCount = JetPackCount;
+		bob->MaxVerticalSpeed_Jump = MaxVerticalSpeed_Jump;
+		bob->MaxVerticalSpeed_Thrust = MaxVerticalSpeed_Thrust;
+		bob->StartJumpAnim = StartJumpAnim;
+		bob->ThrustPos1 = ThrustPos1;
+		bob->ThrustDir1 = ThrustDir1;
+		bob->ThrustPos_Duck = ThrustPos_Duck;
+		bob->ThrustDir_Duck = ThrustDir_Duck;
+		bob->ThrustPos2 = ThrustPos2;
+		bob->ThrustDir2 = ThrustDir2;
+		bob->AutoAllowComputerToJumpOnLand = AutoAllowComputerToJumpOnLand;
+		bob->NoStickPeriod = NoStickPeriod;
+		bob->SafetyBlock = SafetyBlock;
+		bob->JumpCountdown = JumpCountdown;
+		bob->TurnCountdown = TurnCountdown;
+		bob->Dir = Dir;
+		bob->MinHeightAttained = MinHeightAttained;
+		bob->MinGroundHeightAttained = MinGroundHeightAttained;
+		bob->Up = Up;
+		bob->ForcedJumpDamping = ForcedJumpDamping;
+	}
+
+
 	bool BobPhsxNormal::getSticky()
 	{
 		if ( Jumped || NoStickPeriod > 0 )

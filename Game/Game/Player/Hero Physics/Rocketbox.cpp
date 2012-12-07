@@ -21,6 +21,23 @@ const std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance = std::make_s
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxRocketbox::Clone()
+	{
+		std::shared_ptr<BobPhsxRocketbox> newBob = std::make_shared<BobPhsxRocketbox>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxRocketbox::CopyTo( const std::shared_ptr<BobPhsxRocketbox> &bob )
+	{
+		BobPhsxBox::CopyTo( std::static_pointer_cast<BobPhsxBox>( bob ) );
+
+		bob->LeftWheel = LeftWheel;
+		bob->RightWheel = RightWheel;
+		bob->WheelAngle = WheelAngle;
+	}
+
+
 	BobPhsxRocketbox::BobPhsxRocketbox()
 	{
 		InitializeInstanceFields();

@@ -61,6 +61,39 @@ const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobP
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxMeat::Clone()
+	{
+		std::shared_ptr<BobPhsxMeat> newBob = std::make_shared<BobPhsxMeat>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxMeat::CopyTo( const std::shared_ptr<BobPhsxMeat> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->LastJumpWasSticky = LastJumpWasSticky;
+		bob->StepsSinceSide = StepsSinceSide;
+		bob->StepsOnSide = StepsOnSide;
+		bob->StickyDuration = StickyDuration;
+		bob->StickySide = StickySide;
+		bob->LastStickyBlock = LastStickyBlock;
+		bob->IsStuck = IsStuck;
+		bob->CanWallJump = CanWallJump;
+		bob->WallJumpCount = WallJumpCount;
+		bob->StickyGracePeriod = StickyGracePeriod;
+		bob->Max_yVel_ForWallJump = Max_yVel_ForWallJump;
+		bob->SideJumpLength = SideJumpLength;
+		bob->SideJumpStr = SideJumpStr;
+		bob->PrefferedDir = PrefferedDir;
+		bob->WantToLandOnTop = WantToLandOnTop;
+		bob->Target = Target;
+		bob->AlwaysForward = AlwaysForward;
+		bob->StraightUpDuration = StraightUpDuration;
+		bob->yVelCutoff = yVelCutoff;
+
+	}
+
 	BobPhsxMeat::BobPhsxMeat()
 	{
 		InitializeInstanceFields();

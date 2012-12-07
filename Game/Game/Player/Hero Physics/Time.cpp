@@ -19,6 +19,21 @@ const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobP
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxTime::Clone()
+	{
+		std::shared_ptr<BobPhsxTime> newBob = std::make_shared<BobPhsxTime>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsxTime>( newBob );
+	}
+
+	void BobPhsxTime::CopyTo( const std::shared_ptr<BobPhsxTime> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->CurBehavior = CurBehavior;
+		bob->BehaviorLength = BehaviorLength;
+	}
+
 	BobPhsxTime::BobPhsxTime()
 	{
 		InitializeInstanceFields();

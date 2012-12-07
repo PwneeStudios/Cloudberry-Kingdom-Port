@@ -22,6 +22,22 @@ const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<
 		return instance;
 	}
 
+	std::shared_ptr<BobPhsx> BobPhsxInvert::Clone()
+	{
+		std::shared_ptr<BobPhsxInvert> newBob = std::make_shared<BobPhsxInvert>();
+		CopyTo( newBob );
+		return std::static_pointer_cast<BobPhsx>( newBob );
+	}
+
+	void BobPhsxInvert::CopyTo( const std::shared_ptr<BobPhsxInvert> &bob )
+	{
+		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+
+		bob->CurBehavior = CurBehavior;
+		bob->BehaviorLength = BehaviorLength;
+		bob->Count = Count;
+	}
+
 	BobPhsxInvert::BobPhsxInvert()
 	{
 		InitializeInstanceFields();

@@ -21,6 +21,9 @@ namespace CloudberryKingdom
 	public:
 		const static std::shared_ptr<BobPhsxTime> &getInstance();
 
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxTime> &bob );
+
 		// Instancable class
 		BobPhsxTime();
 
