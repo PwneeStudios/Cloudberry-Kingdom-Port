@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		public:
 			std::vector<double> Values;
 
-			UpgradeSequenceSingle( Upgrade MyUpgrade, float v0, float v1, float v2, float v3, float v4 );
+			UpgradeSequenceSingle( Upgrade MyUpgrade, double v0, double v1, double v2, double v3, double v4 );
 		};
 
 	public:
@@ -30,9 +30,72 @@ namespace CloudberryKingdom
 		private:
 			std::vector<UpgradeSequenceSingle> UpgradeList;
 		public:
-//ORIGINAL LINE: public UpgradeSequence(params UpgradeSequenceSingle[] Upgrades)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-			UpgradeSequence( ... );
+
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5,
+				DifficultyGroups::UpgradeSequenceSingle s6,
+				DifficultyGroups::UpgradeSequenceSingle s7,
+				DifficultyGroups::UpgradeSequenceSingle s8,
+				DifficultyGroups::UpgradeSequenceSingle s9,
+				DifficultyGroups::UpgradeSequenceSingle s10 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5,
+				DifficultyGroups::UpgradeSequenceSingle s6,
+				DifficultyGroups::UpgradeSequenceSingle s7,
+				DifficultyGroups::UpgradeSequenceSingle s8,
+				DifficultyGroups::UpgradeSequenceSingle s9 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5,
+				DifficultyGroups::UpgradeSequenceSingle s6,
+				DifficultyGroups::UpgradeSequenceSingle s7,
+				DifficultyGroups::UpgradeSequenceSingle s8 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5,
+				DifficultyGroups::UpgradeSequenceSingle s6,
+				DifficultyGroups::UpgradeSequenceSingle s7 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5,
+				DifficultyGroups::UpgradeSequenceSingle s6 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4,
+				DifficultyGroups::UpgradeSequenceSingle s5 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3,
+				DifficultyGroups::UpgradeSequenceSingle s4 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2,
+				DifficultyGroups::UpgradeSequenceSingle s3 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1,
+				DifficultyGroups::UpgradeSequenceSingle s2 );
+			DifficultyGroups::UpgradeSequence::UpgradeSequence(
+				DifficultyGroups::UpgradeSequenceSingle s1 );
 		};
 
 	private:

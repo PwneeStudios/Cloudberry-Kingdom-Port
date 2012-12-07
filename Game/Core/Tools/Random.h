@@ -103,8 +103,8 @@ namespace CloudberryKingdom
 		/// </summary>
 		template<typename T>
 		std::vector<T> Choose( std::vector<T> &list, int n );
-		template<typename T>
-		T Choose( std::vector<T> list );
+		//template<typename T>
+		//T Choose( std::vector<T> list );
 		template<typename T>
 		T Choose( std::vector<T> &list );
 

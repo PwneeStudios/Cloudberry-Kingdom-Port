@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		Piece->getu()->Get( MyUpgrade ) = val;
 	}
 
-	DifficultyGroups::UpgradeSequenceSingle::UpgradeSequenceSingle( Upgrade MyUpgrade, float v0, float v1, float v2, float v3, float v4 )
+	DifficultyGroups::UpgradeSequenceSingle::UpgradeSequenceSingle( Upgrade MyUpgrade, double v0, double v1, double v2, double v3, double v4 )
 	{
 		this->MyUpgrade = MyUpgrade;
 
@@ -38,8 +38,10 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::UpgradeSequence::Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty )
 	{
-		for ( std::vector<UpgradeSequenceSingle>::const_iterator upgrade = UpgradeList.begin(); upgrade != UpgradeList.end(); ++upgrade )
+		for ( std::vector<UpgradeSequenceSingle>::iterator upgrade = UpgradeList.begin(); upgrade != UpgradeList.end(); ++upgrade )
+		{
 			( *upgrade ).Apply( Piece, Difficulty );
+		}
 	}
 
 	DifficultyGroups::UpgradeSequence::UpgradeSequence(
@@ -52,8 +54,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s7,
 		DifficultyGroups::UpgradeSequenceSingle s8,
 		DifficultyGroups::UpgradeSequenceSingle s9,
-		DifficultyGroups::UpgradeSequenceSingle s10
-	)
+		DifficultyGroups::UpgradeSequenceSingle s10 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -78,8 +79,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s6,
 		DifficultyGroups::UpgradeSequenceSingle s7,
 		DifficultyGroups::UpgradeSequenceSingle s8,
-		DifficultyGroups::UpgradeSequenceSingle s9,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s9 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -102,8 +102,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s5,
 		DifficultyGroups::UpgradeSequenceSingle s6,
 		DifficultyGroups::UpgradeSequenceSingle s7,
-		DifficultyGroups::UpgradeSequenceSingle s8,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s8 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -124,8 +123,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s4,
 		DifficultyGroups::UpgradeSequenceSingle s5,
 		DifficultyGroups::UpgradeSequenceSingle s6,
-		DifficultyGroups::UpgradeSequenceSingle s7,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s7 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -145,8 +143,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s3,
 		DifficultyGroups::UpgradeSequenceSingle s4,
 		DifficultyGroups::UpgradeSequenceSingle s5,
-		DifficultyGroups::UpgradeSequenceSingle s6,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s6 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -163,8 +160,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s2,
 		DifficultyGroups::UpgradeSequenceSingle s3,
 		DifficultyGroups::UpgradeSequenceSingle s4,
-		DifficultyGroups::UpgradeSequenceSingle s5,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s5 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -179,8 +175,7 @@ namespace CloudberryKingdom
 		DifficultyGroups::UpgradeSequenceSingle s1,
 		DifficultyGroups::UpgradeSequenceSingle s2,
 		DifficultyGroups::UpgradeSequenceSingle s3,
-		DifficultyGroups::UpgradeSequenceSingle s4,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s4 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -193,8 +188,7 @@ namespace CloudberryKingdom
 	DifficultyGroups::UpgradeSequence::UpgradeSequence(
 		DifficultyGroups::UpgradeSequenceSingle s1,
 		DifficultyGroups::UpgradeSequenceSingle s2,
-		DifficultyGroups::UpgradeSequenceSingle s3,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s3 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -205,8 +199,7 @@ namespace CloudberryKingdom
 
 	DifficultyGroups::UpgradeSequence::UpgradeSequence(
 		DifficultyGroups::UpgradeSequenceSingle s1,
-		DifficultyGroups::UpgradeSequenceSingle s2,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s2 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -215,8 +208,7 @@ namespace CloudberryKingdom
 	}
 
 	DifficultyGroups::UpgradeSequence::UpgradeSequence(
-		DifficultyGroups::UpgradeSequenceSingle s1,
-	)
+		DifficultyGroups::UpgradeSequenceSingle s1 )
 	{
 		UpgradeList = std::vector<UpgradeSequenceSingle>();
 
@@ -265,10 +257,10 @@ namespace CloudberryKingdom
 
 		// Up level
 		if ( piece->GeometryType == LevelGeometry_UP )
-			piece->getRnd()->Choose(UpUpgrades)->Apply(piece, Difficulty);
+			piece->getRnd()->Choose( UpUpgrades ).Apply(piece, Difficulty);
 		// Down level
 		else if ( piece->GeometryType == LevelGeometry_DOWN )
-			piece->getRnd()->Choose(DownUpgrades)->Apply(piece, Difficulty);
+			piece->getRnd()->Choose(DownUpgrades).Apply(piece, Difficulty);
 		// Cart level
 		else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
 		{
@@ -277,7 +269,7 @@ namespace CloudberryKingdom
 			else
 				Difficulty -= 1.35f;
 
-			piece->getRnd()->Choose(CartUpgrades)->Apply(piece, Difficulty);
+			piece->getRnd()->Choose(CartUpgrades).Apply(piece, Difficulty);
 		}
 		// Generic hero level
 		else
@@ -287,16 +279,16 @@ namespace CloudberryKingdom
 			switch ( static_cast<int>( Difficulty ) )
 			{
 				case 0:
-					piece->getRnd()->Choose(EasyUpgrades)->Apply(piece, Difficulty);
+					piece->getRnd()->Choose(EasyUpgrades).Apply(piece, Difficulty);
 					break;
 				case 1:
-					piece->getRnd()->Choose(NormalUpgrades)->Apply(piece, Difficulty);
+					piece->getRnd()->Choose(NormalUpgrades).Apply(piece, Difficulty);
 					break;
 				case 2:
-					piece->getRnd()->Choose(AbusiveUpgrades)->Apply(piece, Difficulty);
+					piece->getRnd()->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
 					break;
 				default:
-					piece->getRnd()->Choose(HardcoreUpgrades)->Apply(piece, Difficulty);
+					piece->getRnd()->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
 					break;
 			}
 		}
@@ -331,7 +323,7 @@ namespace CloudberryKingdom
 		MakeDownUpgrades();
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::UpUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::UpUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeUpUpgrades()
 	{
@@ -342,7 +334,7 @@ std::vector<UpgradeSequence> DifficultyGroups::UpUpgrades = std::vector<UpgradeS
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_JUMP, 0, 3, 5, 7.5, 8 ), UpgradeSequenceSingle( Upgrade_SPEED, 0, 3, 5, 8.5, 15 ) ) );
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::DownUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::DownUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeDownUpgrades()
 	{
@@ -353,7 +345,7 @@ std::vector<UpgradeSequence> DifficultyGroups::DownUpgrades = std::vector<Upgrad
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_JUMP, 0, 3, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, 0, 3, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, 0, 1, 2, 5, 7.3 ) ) );
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::CartUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::CartUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeCartUpgrades()
 	{
@@ -371,7 +363,7 @@ std::vector<UpgradeSequence> DifficultyGroups::CartUpgrades = std::vector<Upgrad
 			//new UpgradeSequenceSingle(Upgrade.MovingBlock, 1, 2, 3, 6, 9),
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::EasyUpgrades = 0;
+	//std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::EasyUpgrades = 0;
 
 	void DifficultyGroups::MakeEasyUpgrades()
 	{
@@ -420,12 +412,12 @@ std::vector<UpgradeSequence> DifficultyGroups::EasyUpgrades = 0;
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, 1, 1.5, 2.5, 4, 8 ), UpgradeSequenceSingle( Upgrade_PINKY, 1, 2, 3.5, 6, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3, 4, 9, 10 ), UpgradeSequenceSingle( Upgrade_CEILING, 1, 2, 4, 7, 10 ) ) );
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::NormalUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::NormalUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeNormalUpgrades()
 	{
 		std::vector<UpgradeSequence> f = NormalUpgrades;
-		f.AddRange( EasyUpgrades );
+		AddRange( f, EasyUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, -1, 4.8, 7.5, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, 0, 6, 9, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, 2, 2, 6, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, 2, 2, 6, 10 ), UpgradeSequenceSingle( Upgrade_BOUNCY_BLOCK, -1, 2, 2, 4, 10 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, 2, 2, 4, 10 ), UpgradeSequenceSingle( Upgrade_SPIKE, -1, 2, 2, 9, 10 ) ) );
 
@@ -488,12 +480,12 @@ std::vector<UpgradeSequence> DifficultyGroups::NormalUpgrades = std::vector<Upgr
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_BOUNCY_BLOCK, -1, 2, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, 2, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_SPIKE, -1, 2, 4, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, 0, 0, 6, 10 ), UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, 0, 0, 4, 10 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, -1, 0, 0, 3, 6 ) ) );
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::AbusiveUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::AbusiveUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeAbusiveUpgrades()
 	{
 		std::vector<UpgradeSequence> f = AbusiveUpgrades;
-		f.AddRange( NormalUpgrades );
+		AddRange( f, NormalUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, -1, -1, 4, 6, 9 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, 4, 6, 9 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, -1, 4, 4, 4 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, -1, 3, 4, 4 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, -1, 4, 4, 4 ), UpgradeSequenceSingle( Upgrade_PINKY, -1, -1, 2, 4, 7 ), UpgradeSequenceSingle( Upgrade_LASER, -1, -1, 2, 4, 5.5 ) ) );
 
@@ -506,12 +498,12 @@ std::vector<UpgradeSequence> DifficultyGroups::AbusiveUpgrades = std::vector<Upg
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, -1, 2, 5, 9 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, -1, 2, 2, 2 ), UpgradeSequenceSingle( Upgrade_LASER, -1, -1, 2, 4, 6 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, -1, 2, 7, 9 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, 6, 8, 9 ), UpgradeSequenceSingle( Upgrade_CEILING, -1, -1, 4, 7, 10 ) ) );
 	}
 
-std::vector<UpgradeSequence> DifficultyGroups::HardcoreUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::HardcoreUpgrades = std::vector<UpgradeSequence>();
 
 	void DifficultyGroups::MakeHardcoreUpgrades()
 	{
 		std::vector<UpgradeSequence> f = HardcoreUpgrades;
-		f.AddRange( AbusiveUpgrades );
+		AddRange( f, AbusiveUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, -1, -1, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, -1, 5, 8 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, -1, -1, 2, 2 ) ) );
 	}
