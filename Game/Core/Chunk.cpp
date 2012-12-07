@@ -6,17 +6,23 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<Chunks> Chunks::Get( std::vector<unsigned char> Data )
 	{
-		return std::make_shared<Chunks>( Data );
+		return std::make_shared<Chunks>( Data, 0 );
 	}
 
-	Chunks::Chunks( std::vector<unsigned char> Data )
+	std::shared_ptr<Chunks> Chunks::Get( std::shared_ptr<Chunk> Chunk )
+	{
+		return std::make_shared<Chunks>( Chunk->Buffer, 8 );
+	}
+
+	Chunks::Chunks( std::vector<unsigned char> Data, int offset ) :
+		_StartPosition( offset )
 	{
 		this->Data = Data;
 	}
 
 	void Chunks::StartGettingChunks()
 	{
-		_Position = 0;
+		_Position = _StartPosition;
 	}
 
 	const bool Chunks::HasChunk()

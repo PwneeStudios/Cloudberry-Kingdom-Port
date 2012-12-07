@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class PlayerStats : std::enable_shared_from_this<PlayerStats>
+	class PlayerStats : public std::enable_shared_from_this<PlayerStats>
 	{
 		#pragma region WriteRead
 	public:

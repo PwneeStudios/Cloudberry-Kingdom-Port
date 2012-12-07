@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	}
 
 bool UserPowers::CanSkipScreensaver = false;
-std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo = std::make_shared<Set<std::wstring> >();
+Set<std::wstring> UserPowers::WatchedVideo;
 
 	void UserPowers::Set( bool &variable, bool value )
 	{
@@ -51,34 +51,40 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 
 		// Save the names of videos the user has already watched.
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( CloudberryKingdom::Set<std::wstring>::const_iterator video = UserPowers::WatchedVideo->begin(); video != UserPowers::WatchedVideo->end(); ++video )
-			Chunk::WriteSingle( writer, 5, *video );
+		for ( std::map<std::wstring, bool>::const_iterator video = UserPowers::WatchedVideo.dict.begin(); video != UserPowers::WatchedVideo.dict.end(); ++video )
+			Chunk::WriteSingle( writer, 5, video->first );
+		// FIXME: Make sure we need to save the names rather than boolean values.
 	}
 
 	void _SavePlayerData::Deserialize( std::vector<unsigned char> Data )
 	{
-		for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		chunks->StartGettingChunks();
+
+		while( chunks->HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+
+			switch ( chunk->Type )
 			{
 				case 0:
-					( *chunk )->ReadSingle( UserPowers::CanSkipScreensaver );
+					chunk->ReadSingle( UserPowers::CanSkipScreensaver );
 					break;
 				case 1:
-					( *chunk )->ReadSingle( HeroRush_Tutorial::HasWatchedOnce );
+					chunk->ReadSingle( HeroRush_Tutorial::HasWatchedOnce );
 					break;
 				case 2:
-					( *chunk )->ReadSingle( Hints::QuickSpawnNum );
+					chunk->ReadSingle( Hints::QuickSpawnNum );
 					break;
 				case 3:
-					( *chunk )->ReadSingle( Hints::YForHelpNum );
+					chunk->ReadSingle( Hints::YForHelpNum );
 					break;
 
 				// Load the names of videos the user has already watched.
 				case 5:
 					std::wstring VideoName = _T( "" );
-					( *chunk )->ReadSingle( VideoName );
-					UserPowers::WatchedVideo += VideoName;
+					chunk->ReadSingle( VideoName );
+					UserPowers::WatchedVideo.Add( VideoName );
 					break;
 			}
 		}
@@ -109,7 +115,7 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 
 	float PlayerManager::GetGroupGamerTagNameLength::Apply( const std::shared_ptr<StringBuilder> &name )
 	{
-		return name->Length;
+		return static_cast<float>( name->getLength() );
 	}
 
 	PlayerManager::AnyAwardmentLambda::AnyAwardmentLambda( const std::shared_ptr<Awardment> &award )
@@ -119,7 +125,8 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 
 	bool PlayerManager::AnyAwardmentLambda::Apply( const std::shared_ptr<PlayerData> &player )
 	{
-		return player->Awardments_Renamed[ award->Guid ];
+		// FIXME: This used to be [] operator.
+		return player->Awardments_Renamed->Has( award->Guid );
 	}
 
 	PlayerManager::AnyBoughtLambda::AnyBoughtLambda( const std::shared_ptr<Buyable> &item )
@@ -129,7 +136,7 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 
 	bool PlayerManager::AnyBoughtLambda::Apply( const std::shared_ptr<PlayerData> &player )
 	{
-		return player->Purchases[ item->GetGuid() ];
+		return player->Purchases->Has( item->GetGuid() );
 	}
 
 	int PlayerManager::BankLambda::Apply( const std::shared_ptr<PlayerData> &p )
@@ -144,9 +151,10 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 
 	bool PlayerManager::NotAllAwardedLambda::Apply( const std::shared_ptr<PlayerData> &player )
 	{
-		return !player->Awardments_Renamed[ award->Guid ];
+		return !player->Awardments_Renamed->Has( award->Guid );
 	}
 
+#if defined(XBOX) || defined(XBOX_SIGNIN)
 	PlayerManager::ExistingPlayerFindLambda::ExistingPlayerFindLambda()
 	{
 	}
@@ -155,11 +163,12 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 	{
 		return player->getMyGamer() != 0 || player->StoredName.length() > 0;
 	}
+#endif
 
 #if defined(PC_VERSION)
 	void PlayerManager::SaveRezAndKeys()
 	{
-		EzStorage::Save( _T( "Settings" ), _T( "Custom" ), std::make_shared<SaveRezAndKeysLambda>(), 0 );
+		EzStorage::Save( _T( "Settings" ), _T( "Custom" ), std::static_pointer_cast<Lambda_1<std::shared_ptr<BinaryWriter> > >( std::make_shared<SaveRezAndKeysLambda>() ), 0 );
 	}
 #endif
 
@@ -209,11 +218,11 @@ std::shared_ptr<CloudberryKingdom::Set<std::wstring> > UserPowers::WatchedVideo 
 #endif
 
 #if defined(PC_VERSION)
-RezData PlayerManager::d = 0;
+RezData PlayerManager::d;
 #endif
 
 #if defined(PC_VERSION)
-	CloudberryKingdom::PlayerManager::RezData PlayerManager::LoadRezAndKeys()
+	RezData PlayerManager::LoadRezAndKeys()
 	{
 		EzStorage::Load( _T( "Settings" ), _T( "Custom" ), std::make_shared<LoadRezAndKeysLambda>(), 0 );
 
@@ -226,78 +235,83 @@ RezData PlayerManager::d = 0;
 	{
 		d = RezData();
 
-		for ( CloudberryKingdom::Chunks::const_iterator chunk = Chunks::Get( Data )->begin(); chunk != Chunks::Get(Data)->end(); ++chunk )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		chunks->StartGettingChunks();
+
+		while( chunks->HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+
+			switch ( chunk->Type )
 			{
 				case 0:
-					( *chunk )->ReadSingle( d.Custom );
+					chunk->ReadSingle( d.Custom );
 					break;
 
 				// Fullscreen
 				case 1:
-					( *chunk )->ReadSingle( d.Fullscreen );
+					chunk->ReadSingle( d.Fullscreen );
 					break;
 
 				// Resolution
 				case 2:
-					( *chunk )->ReadSingle( d.Width );
+					chunk->ReadSingle( d.Width );
 					break;
 				case 3:
-					( *chunk )->ReadSingle( d.Height );
+					chunk->ReadSingle( d.Height );
 					break;
 
 				// Secondary keys
 				case 4:
-					( *chunk )->ReadSingle( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
+					chunk->ReadSingle( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
 					break;
 				case 5:
-					( *chunk )->ReadSingle( ButtonCheck::Start_Secondary );
+					chunk->ReadSingle( ButtonCheck::Start_Secondary );
 					break;
 				case 6:
-					( *chunk )->ReadSingle( ButtonCheck::Go_Secondary );
+					chunk->ReadSingle( ButtonCheck::Go_Secondary );
 					break;
 				case 7:
-					( *chunk )->ReadSingle( ButtonCheck::Back_Secondary );
+					chunk->ReadSingle( ButtonCheck::Back_Secondary );
 					break;
 				case 8:
-					( *chunk )->ReadSingle( ButtonCheck::ReplayPrev_Secondary );
+					chunk->ReadSingle( ButtonCheck::ReplayPrev_Secondary );
 					break;
 				case 9:
-					( *chunk )->ReadSingle( ButtonCheck::ReplayNext_Secondary );
+					chunk->ReadSingle( ButtonCheck::ReplayNext_Secondary );
 					break;
 				case 10:
-					( *chunk )->ReadSingle( ButtonCheck::SlowMoToggle_Secondary );
+					chunk->ReadSingle( ButtonCheck::SlowMoToggle_Secondary );
 					break;
 				case 11:
-					( *chunk )->ReadSingle( ButtonCheck::Left_Secondary );
+					chunk->ReadSingle( ButtonCheck::Left_Secondary );
 					break;
 				case 12:
-					( *chunk )->ReadSingle( ButtonCheck::Right_Secondary );
+					chunk->ReadSingle( ButtonCheck::Right_Secondary );
 					break;
 				case 13:
-					( *chunk )->ReadSingle( ButtonCheck::Up_Secondary );
+					chunk->ReadSingle( ButtonCheck::Up_Secondary );
 					break;
 				case 14:
-					( *chunk )->ReadSingle( ButtonCheck::Down_Secondary );
+					chunk->ReadSingle( ButtonCheck::Down_Secondary );
 					break;
 
 				// Volume
 				case 15:
-					Tools::MusicVolume->setVal( ( *chunk )->ReadFloat() );
+					Tools::MusicVolume->setVal( chunk->ReadFloat() );
 					break;
 				case 16:
-					Tools::SoundVolume->setVal( ( *chunk )->ReadFloat() );
+					Tools::SoundVolume->setVal( chunk->ReadFloat() );
 					break;
 
 				// Fixed time step setting
 				case 17:
-					( *chunk )->ReadSingle( Tools::FixedTimeStep );
+					chunk->ReadSingle( Tools::FixedTimeStep );
 					break;
 
 				// Bordered window
 				case 18:
-					( *chunk )->ReadSingle( Tools::WindowBorder );
+					chunk->ReadSingle( Tools::WindowBorder );
 					break;
 			}
 		}
@@ -399,13 +413,13 @@ bool PlayerManager::HaveFirstPlayer = false;
 	}
 
 	int PlayerManager::NumPlayers = 1;
-	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players = 0;
+	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players;
 
 	int PlayerManager::length( std::vector<std::shared_ptr<StringBuilder> > &names )
 	{
 		int count = 0;
 		for ( std::vector<std::shared_ptr<StringBuilder> >::const_iterator name = names.begin(); name != names.end(); ++name )
-			count += ( *name )->Length;
+			count += ( *name )->getLength();
 		return count;
 	}
 
@@ -419,7 +433,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 		int CharLength = MaxLength - ( N - 1 ); // The max number of characters, exlucing slashes
 
 		// Get a list of all names
-		std::vector<StringBuilder*> names = std::vector<StringBuilder*>();
+		std::vector<std::shared_ptr<StringBuilder> > names;
 		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
 			names.push_back( std::make_shared<StringBuilder>( ( *player )->GetName() ) );
 
@@ -427,8 +441,9 @@ bool PlayerManager::HaveFirstPlayer = false;
 		std::shared_ptr<GetGroupGamerTagNameLength> groupNameLengthGetter = std::make_shared<GetGroupGamerTagNameLength>();
 		while ( length( names ) > CharLength )
 		{
-			std::shared_ptr<StringBuilder> str = Tools::ArgMax( names, groupNameLengthGetter );
-			str->Remove( str->Length - 1, 1 );
+			std::shared_ptr<StringBuilder> str = Tools::ArgMax( names, 
+				std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<StringBuilder>, float> >( groupNameLengthGetter ) );
+			str->Remove( str->getLength() - 1, 1 );
 		}
 
 		// Concatenate the names together
@@ -465,12 +480,14 @@ bool PlayerManager::HaveFirstPlayer = false;
 
 	bool PlayerManager::Awarded( const std::shared_ptr<Awardment> &award )
 	{
-		return Tools::Any( getExistingPlayers(), std::make_shared<AnyAwardmentLambda>(award) );
+		return Tools::Any( getExistingPlayers(),
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<AnyAwardmentLambda>(award) ) );
 	}
 
 	bool PlayerManager::Bought( const std::shared_ptr<Buyable> &item )
 	{
-		return Tools::Any( getExistingPlayers(), std::make_shared<AnyBoughtLambda>(item) );
+		return Tools::Any( getExistingPlayers(),
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<AnyBoughtLambda>(item) ) );
 	}
 
 	bool PlayerManager::BoughtOrFree( const std::shared_ptr<Buyable> &item )
@@ -518,14 +535,15 @@ bool PlayerManager::HaveFirstPlayer = false;
 
 		// Give the hat to each player
 		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
-			( *p )->Purchases += buyable->GetGuid();
+			( *p )->Purchases->Add( buyable->GetGuid() );
 
 		SavePlayerData->Changed = true;
 	}
 
 	bool PlayerManager::NotAllAwarded( const std::shared_ptr<Awardment> &award )
 	{
-		return Tools::Any( getExistingPlayers(), std::make_shared<NotAllAwardedLambda>(award) );
+		return Tools::Any( getExistingPlayers(),
+			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<NotAllAwardedLambda>(award) ) );
 	}
 
 	int PlayerManager::GetGameScore()
@@ -560,7 +578,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 
 	int PlayerManager::PlayerMax( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f )
 	{
-		int max = int::MinValue;
+		int max = INT_MIN;
 		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 		{
 			if ( *player != 0 )
@@ -605,7 +623,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getAlivePlayers()
 	{
 		_AlivePlayers.clear();
-		for ( std::vector<CloudberryKingdom::std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
+		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( ( *data )->Exists && ( *data )->IsAlive )
 				_AlivePlayers.push_back( *data );
 
@@ -657,7 +675,7 @@ int Score_Blobs, Score_Coins, Score_Attempts, PlayerManager::Score_Time = 0;
 
 				Score_Coins += stats->Coins;
 				Score_Blobs += stats->Blobs;
-				Score_Attempts += stats->DeathsBy[ static_cast<int>( Bob::BobDeathType_TOTAL ) ];
+				Score_Attempts += stats->DeathsBy[ static_cast<int>( BobDeathType_TOTAL ) ];
 				Score_Time = __max( Score_Time, stats->TimeAlive );
 			}
 	}
@@ -706,7 +724,9 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 			if ( Players[ i ]->MyPlayerIndex == PIndex )
 				return i;
 
-		throw ( std::exception( _T( "PlayerIndex not found!" ) ) );
+		return -1;
+		// FIXME: No exceptions!
+		//throw ( std::exception( _T( "PlayerIndex not found!" ) ) );
 	}
 
 	void PlayerManager::KillPlayer( PlayerIndex PIndex )
@@ -733,7 +753,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 	void PlayerManager::Init()
 	{
 	#if defined(PC_VERSION)
-		_DefaultName = PlayerManager::RandomNames.Choose( Tools::GlobalRnd );
+		_DefaultName = ListExtension::Choose( PlayerManager::RandomNames, Tools::GlobalRnd );
 	#endif
 
 		Players = std::vector<std::shared_ptr<PlayerData> >( 4 );

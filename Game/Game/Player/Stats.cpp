@@ -29,43 +29,48 @@ namespace CloudberryKingdom
 
 	void PlayerStats::ReadChunk_4( const std::shared_ptr<Chunk> &ParentChunk )
 	{
-		for ( CloudberryKingdom::Chunk::const_iterator chunk = ParentChunk->begin(); chunk != ParentChunk->end(); ++chunk )
+		std::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
+		chunks->StartGettingChunks();
+
+		while( chunks->HasChunk() )
 		{
-			switch ( ( *chunk )->Type )
+			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+
+			switch ( chunk->Type )
 			{
 				case 0:
-					( *chunk )->ReadSingle( Score );
+					chunk->ReadSingle( Score );
 					break;
 				case 1:
-					( *chunk )->ReadSingle( Coins );
+					chunk->ReadSingle( Coins );
 					break;
 				case 2:
-					( *chunk )->ReadSingle( Blobs );
+					chunk->ReadSingle( Blobs );
 					break;
 				case 3:
-					( *chunk )->ReadSingle( CoinsSpentAtShop );
+					chunk->ReadSingle( CoinsSpentAtShop );
 					break;
 				case 4:
-					( *chunk )->ReadSingle( TotalCoins );
+					chunk->ReadSingle( TotalCoins );
 					break;
 				case 5:
-					( *chunk )->ReadSingle( TotalBlobs );
+					chunk->ReadSingle( TotalBlobs );
 					break;
 				case 6:
-					( *chunk )->ReadSingle( Levels );
+					chunk->ReadSingle( Levels );
 					break;
 				case 7:
-					( *chunk )->ReadSingle( Checkpoints );
+					chunk->ReadSingle( Checkpoints );
 					break;
 				case 8:
-					( *chunk )->ReadSingle( Jumps );
+					chunk->ReadSingle( Jumps );
 					break;
 				case 10:
-					( *chunk )->ReadSingle( TimeAlive );
+					chunk->ReadSingle( TimeAlive );
 					break;
 
 				case 9:
-					ReadDeathChunk_9( *chunk );
+					ReadDeathChunk_9( chunk );
 					break;
 			}
 		}
@@ -79,39 +84,77 @@ namespace CloudberryKingdom
 		chunk->Write( Index );
 		chunk->Write( DeathsBy[ Index ] );
 
-		chunk->Finish( ParentChunk );
+		chunk->Finish( *ParentChunk.get() );
 	}
 
 	void PlayerStats::ReadDeathChunk_9( const std::shared_ptr<Chunk> &chunk )
 	{
 		int Index = chunk->ReadInt();
-		if ( Index >= 0 && Index < DeathsBy.size() )
+		if ( Index >= 0 && Index < static_cast<int>( DeathsBy.size() ) )
 			DeathsBy[ Index ] = chunk->ReadInt();
 	}
 
 	std::shared_ptr<PlayerStats> PlayerStats::Absorb( const std::shared_ptr<PlayerStats> &stats )
 	{
-		for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
+		/*for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
 				( *info )->SetValue( shared_from_this(), static_cast<int>( ( *info )->GetValue( shared_from_this() ) ) + static_cast<int>( ( *info )->GetValue( stats ) ) );
-		}
+		}*/
 
-		for ( int i = 0; i < DeathsBy.size(); i++ )
+		// FIXME: Check to make sure it does the same thing.
+		Score += stats->Score;
+		Coins += stats->Coins;
+		Blobs += stats->Blobs;
+		CoinsSpentAtShop += stats->CoinsSpentAtShop;
+
+		TotalCoins += stats->TotalCoins;
+		TotalBlobs += stats->TotalBlobs;
+
+		Levels += stats->Levels;
+		Checkpoints += stats->Checkpoints;
+		Jumps += stats->Jumps;
+		Berries += stats->Berries;
+
+		TimeAlive += stats->TimeAlive;
+
+		FinalTimeSpentNotMoving += stats->FinalTimeSpentNotMoving;
+		FinalTimeSpent += stats->FinalTimeSpent;
+
+		for ( size_t i = 0; i < DeathsBy.size(); i++ )
 			DeathsBy[ i ] += stats->DeathsBy[ i ];
 
-		return this;
+		return shared_from_this();
 	}
 
 	void PlayerStats::Clean()
 	{
-		for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
+		/*for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
 				( *info )->SetValue( shared_from_this(), 0 );
-		}
+		}*/
 
-		for ( int i = 0; i < DeathsBy.size(); i++ )
+		// FIXME: Check to make sure it does the same thing.
+		Score = 0;
+		Coins = 0;
+		Blobs = 0;
+		CoinsSpentAtShop = 0;
+
+		TotalCoins = 0;
+		TotalBlobs = 0;
+
+		Levels = 0;
+		Checkpoints = 0;
+		Jumps = 0;
+		Berries = 0;
+
+		TimeAlive = 0;
+
+		FinalTimeSpentNotMoving = 0;
+		FinalTimeSpent = 0;
+
+		for ( size_t i = 0; i < DeathsBy.size(); i++ )
 			DeathsBy[ i ] = 0;
 	}
 

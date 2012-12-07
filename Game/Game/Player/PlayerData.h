@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 	private:
 //ORIGINAL LINE: PlayerStats SumStats(params StatGroup[] group)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		std::shared_ptr<PlayerStats> SumStats( ... );
+		std::shared_ptr<PlayerStats> SumStats( const std::vector<StatGroup> &group );
 
 		/// <summary>
 		/// Get the the players current score for the game,
