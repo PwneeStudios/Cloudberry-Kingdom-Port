@@ -13,7 +13,8 @@ namespace CloudberryKingdom
 		{
 			OffsetStyles_RND,
 			OffsetStyles_SAW_TOOTH,
-			OffsetStyles_SINE
+			OffsetStyles_SINE,
+			OffsetStyles_LENGTH
 		};
 	public:
 		Param SpikeMinDist, MinSpikeDensity, MaxSpikeDensity, SpikePeriod;

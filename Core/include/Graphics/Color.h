@@ -95,6 +95,7 @@ struct Color
 	static Color LightSeaGreen;
 	static Color LightSlateGray;
 	static Color LimeGreen;
+	static Color Lime;
 	static Color Orange;
 	static Color Olive;
 	static Color PowderBlue;

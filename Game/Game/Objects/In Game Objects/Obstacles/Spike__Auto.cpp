@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -23,7 +24,7 @@ namespace CloudberryKingdom
 				MaxNumOffsets = 8;
 		NumOffsets = level->getRnd()->RndInt(MinNumOffsets, MaxNumOffsets);
 
-		OffsetStyle = static_cast<OffsetStyles>( level->getRnd()->getRndEnum()<OffsetStyles>() );
+		OffsetStyle = static_cast<OffsetStyles>( level->getRnd()->Rnd->Next( 0, OffsetStyles_LENGTH ) );
 
 		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SPIKE ) );
 
@@ -127,9 +128,9 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 
 
 			// Add spikes
-			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 110;
+			float xdif = ( *block )->getBox()->Current->TR.X - (*block)->getBox()->Current->BL.X - 110;
 			float density = level->getRnd()->RndFloat(Params->MinSpikeDensity.GetVal((*block)->getCore()->Data.Position), Params->MaxSpikeDensity.GetVal((*block)->getCore()->Data.Position));
-			float average = static_cast<int>( xdif * static_cast<float>( density ) / 2000 );
+			float average = static_cast<float>( static_cast<int>( xdif * static_cast<float>( density ) / 2000 ) );
 			int n = static_cast<int>( average );
 			//if (average < 1) if (Rnd.Rnd.NextDouble() < average) n = 1;
 			if ( average < 2 )
@@ -142,17 +143,17 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 					std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 					spike->Init( Vector2(), level );
 
-					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 55;
+					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target->BL.X + 55;
 					float y;
 
 					if ( ( *block )->getBlockCore()->BlobsOnTop )
 					{
-						y = ( *block )->getBox()->Target.TR::Y + SpikeTopOffset;
+						y = ( *block )->getBox()->Target->TR.Y + SpikeTopOffset;
 						spike->SetDir( 0 );
 					}
 					else
 					{
-						y = ( *block )->getBox()->Target.BL::Y - SpikeBottomOffset;
+						y = ( *block )->getBox()->Target->BL.Y - SpikeBottomOffset;
 						spike->SetDir( 2 );
 					}
 
@@ -168,8 +169,8 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 
 			if ( !( *block )->getBox()->TopOnly )
 			{
-				float ydif = ( *block )->getBox()->Current->TR->Y - (*block)->getBox()->Current->BL->Y - 110;
-				average = static_cast<int>( ydif * static_cast<float>( density ) / 2000 );
+				float ydif = ( *block )->getBox()->Current->TR.Y - (*block)->getBox()->Current->BL.Y - 110;
+				average = static_cast<float>( static_cast<int>( ydif * static_cast<float>( density ) / 2000 ) );
 				n = static_cast<int>( average );
 				if ( average < 1 )
 					if ( level->getRnd()->Rnd->NextDouble() < average )
@@ -180,10 +181,10 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 					// Side spikes
 					if ( ydif > 15 )
 					{
-						float y = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * ydif + (*block)->getBox()->Target.BL::Y + 55;
+						float y = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * ydif + (*block)->getBox()->Target->BL.Y + 55;
 						float x;
 
-						if ( y < ( *block )->getBox()->TR->Y - level->getInfo()->ObstacleCutoff )
+						if ( y < ( *block )->getBox()->TR.Y - level->getInfo()->ObstacleCutoff )
 							continue;
 
 						std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
@@ -191,13 +192,13 @@ const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<
 
 						if ( level->getRnd()->Rnd->Next(0, 2) == 0 )
 						{
-							x = ( *block )->getBox()->Target.TR::X + SpikeSideOffset;
+							x = ( *block )->getBox()->Target->TR.X + SpikeSideOffset;
 							spike->SetDir( 3 );
 							y -= 25;
 						}
 						else
 						{
-							x = ( *block )->getBox()->Target.BL::X - SpikeSideOffset;
+							x = ( *block )->getBox()->Target->BL.X - SpikeSideOffset;
 							spike->SetDir( 1 );
 						}
 

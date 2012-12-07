@@ -23,8 +23,8 @@ namespace CloudberryKingdom
 		static std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, CustomHoverIcon_Renamed;
 		//public static ObjectIcon UncheckedIcon, CheckIcon
 
-		static std::map<Upgrade, ObjectIcon*> UpgradeIcons;
-		static std::map<ObjectType, ObjectIcon*> ObjIcons;
+		static std::map<Upgrade, std::shared_ptr<ObjectIcon> > UpgradeIcons;
+		static std::map<ObjectType, std::shared_ptr<ObjectIcon> > ObjIcons;
 
 		static std::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade );
 		static std::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade, bool big );

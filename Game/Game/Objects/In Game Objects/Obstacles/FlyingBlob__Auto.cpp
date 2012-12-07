@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -31,7 +32,7 @@ namespace CloudberryKingdom
 		Range = Param( PieceSeed, val );
 
 		float speed = 200 - 20 * u->Get( Upgrade_SPEED ) + 25 *.5f * ( u->Get( Upgrade_JUMP ) + u->Get( Upgrade_FLY_BLOB ) );
-		Period = Param( PieceSeed, CoreMath::Restrict( 40, 1000, speed ) );
+		Period = Param( PieceSeed, CoreMath::RestrictVal( 40.f, 1000.f, speed ) );
 
 		EdgeSafety = Param( PieceSeed );
 		EdgeSafety.SetVal( __max( 6, DifficultyHelper::Interp( 45, 6, u->Get( Upgrade_FLY_BLOB ) ) ) );
@@ -110,7 +111,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		float mod = 1.2f;
 		for ( int i = 7; i <= 19; i += 3 )
 		{
-			Circle( level, Center, 160 * i, Num, 1, mod );
+			Circle( level, Center, 160.f * i, Num, 1, mod );
 			mod += .2f;
 		}
 
@@ -147,7 +148,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 		{
 			for ( int j = 0; j < M; j++ )
 			{
-				std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, BL + Vector2( i, j ) * Step ) );
+				std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, BL + Vector2( static_cast<float>( i ), static_cast<float>( j ) ) * Step ) );
 				SetTunnelBlobParameter( blob, Params, level->getRnd() );
 
 				Params->TunnelGUIDs[ i ][ j ] = blob->getCore()->MyGuid;
@@ -309,7 +310,7 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 
 			case FlyingBlob_Parameters::MotionType_CROSS:
 				fblob->MyMoveType = FlyingBlob::PrescribedMoveType_LINE;
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					fblob->Displacement = Vector2( Displacement,.5f * Displacement );
 				else
 					fblob->Displacement = Vector2( -Displacement,.5f * Displacement );
@@ -322,14 +323,14 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 				break;
 
 			case FlyingBlob_Parameters::MotionType_AA:
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_VERTICAL, Rnd );
 				else
 					SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_HORIZONTAL, Rnd );
 				break;
 
 			case FlyingBlob_Parameters::MotionType_STRAIGHT:
-				if ( Rnd->Rnd->NextDouble() > ::5 )
+				if ( Rnd->Rnd->NextDouble() > .5f )
 					SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_CROSS, Rnd );
 				else
 					SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_AA, Rnd );
@@ -343,11 +344,11 @@ const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::ma
 
 			case FlyingBlob_Parameters::MotionType_ALL:
 				double rnd = Rnd->Rnd->NextDouble();
-				if ( rnd > ::66666 )
+				if ( rnd > .66666f )
 					SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_STRAIGHT, Rnd );
 				else
 				{
-					if ( rnd > ::33333 )
+					if ( rnd > .33333f )
 						SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_CIRLCES, Rnd );
 					else
 						SetMoveType( fblob, Displacement, FlyingBlob_Parameters::MotionType_HEART, Rnd );

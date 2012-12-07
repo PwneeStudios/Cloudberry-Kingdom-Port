@@ -6,8 +6,10 @@ namespace CloudberryKingdom
 	template<typename T>
 	class Lambda_1
 	{
+
 	public:
 		virtual void Apply( const T &t ) = 0;
+
 	};
 }
 

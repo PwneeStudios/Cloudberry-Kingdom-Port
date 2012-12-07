@@ -1,24 +1,21 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
 	void FlyingBlob::FlyingBlobTileInfo::InitializeInstanceFields()
 	{
-		Body = std::make_shared<SpriteInfo>( 0, Vector2(1), Vector2(), Color::White );
+		Body = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f), Vector2(), Color::White );
 		ObjectSize = Vector2( 616.05f, 616.05f );
 		GooSprite = 0;
 	}
 
-std::shared_ptr<Particle> FlyingBlob::BlobGooTemplate = 0;
-std::shared_ptr<EzSound> FlyingBlob::SquishSound = 0;
-const float tempVector[] = { 2, 0 };
-std::vector<float> FlyingBlob::BobMaxSpeed = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-float FlyingBlob::BobXAccel = .53f;
-float FlyingBlob::BobXFriction = 1;
+	std::shared_ptr<Particle> FlyingBlob::BlobGooTemplate = 0;
+	std::shared_ptr<EzSound> FlyingBlob::SquishSound = 0;
+	const float tempVector[] = { 2, 0 };
+	std::vector<float> FlyingBlob::BobMaxSpeed = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	float FlyingBlob::BobXAccel = .53f;
+	float FlyingBlob::BobXFriction = 1;
 
 	void FlyingBlob::SetColor( BlobColor color )
 	{
@@ -170,7 +167,7 @@ float FlyingBlob::BobXFriction = 1;
 
 	void FlyingBlob::SetAnimation()
 	{
-		MyObject->AnimQueue.clear();
+		Clear( MyObject->AnimQueue );
 		MyObject->Read( 0, 0 );
 		MyObject->Play = true;
 		MyObject->Loop = true;
@@ -203,13 +200,16 @@ float FlyingBlob::BobXFriction = 1;
 
 		std::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 
 		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
+		
+		//reader->Close();
+		//stream->Close();
 		reader->Close();
-		stream->Close();
 
 		SourceObject->ConvertForSimple();
 		MyObject = std::make_shared<SimpleObject>( SourceObject );
@@ -303,9 +303,9 @@ float FlyingBlob::BobXFriction = 1;
 			else
 			{
 				if ( abs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
-					getCore()->Data.Velocity.X -= Math::Sign(getCore()->Data.Velocity.X) * BobXFriction;
+					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * BobXFriction;
 				else
-					getCore()->Data.Velocity.X -= Math::Sign(getCore()->Data.Velocity.X) * 7 / 4 * BobXFriction;
+					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7 / 4 * BobXFriction;
 			}
 		}
 	}
@@ -342,11 +342,12 @@ float FlyingBlob::BobXFriction = 1;
 
 	void FlyingBlob::UpdatePos()
 	{
+		float Step = 0;
+
 		switch ( MyPhsxType )
 		{
 			case PhsxType_PRESCRIBED:
-				//int Step = CoreMath.Modulo(Core.GetPhsxStep() + Offset, Period);
-				float Step = CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, static_cast<float>(Period) );
+				Step = CoreMath::Modulo( getCore()->GetIndependentPhsxStep() + Offset, static_cast<float>(Period) );
 
 				if ( !getCore()->Held )
 					getCore()->Data.Position = CalcPosition(static_cast<float>(Step) / Period);
@@ -675,7 +676,7 @@ float FlyingBlob::BobXFriction = 1;
 					bob->MyPhsx->MaxJumpAccelMultiple = 1 + .8f * bob->MyPhsx->BlobMod;
 				}
 				else
-					bob->Die( Bob::BobDeathType_BLOB, shared_from_this() );
+					bob->Die( BobDeathType_BLOB, shared_from_this() );
 			}
 		}
 	}
@@ -690,7 +691,7 @@ float FlyingBlob::BobXFriction = 1;
 		MyObject->Read( 0, 0 );
 		MyObject->Play = true;
 		MyObject->Loop = true;
-		MyObject->AnimQueue.clear();
+		Clear( MyObject->AnimQueue );
 		MyObject->EnqueueAnimation( 0, static_cast<float>( getMyLevel()->getRnd()->Rnd->NextDouble() ) * 1.5f, true );
 		MyObject->DequeueTransfers();
 		MyObject->Update();

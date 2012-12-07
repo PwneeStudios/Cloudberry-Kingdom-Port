@@ -1,4 +1,5 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
 
@@ -96,9 +97,9 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 				continue;
 
 			// Add fire spinners
-			float xdif = ( *block )->getBox()->Current->TR->X - (*block)->getBox()->Current->BL->X - 30;
+			float xdif = ( *block )->getBox()->Current->TR.X - (*block)->getBox()->Current->BL.X - 30;
 			float density = level->getRnd()->RndFloat(Params->MinDensity.GetVal((*block)->getCore()->Data.Position), Params->MaxDensity.GetVal((*block)->getCore()->Data.Position));
-			float average = static_cast<int>( xdif * density / 2000 );
+			float average = static_cast<float>( static_cast<int>( xdif * density / 2000 ) );
 			int n = static_cast<int>( average );
 			if ( average < 1 )
 				if ( level->getRnd()->Rnd->NextDouble() < average )
@@ -108,15 +109,15 @@ const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::
 			{
 				if ( xdif > 0 )
 				{
-					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target.BL::X + 35;
+					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target->BL.X + 35;
 					float y;
 					if ( ( *block )->getBlockCore()->BlobsOnTop )
 					{
-						y = ( *block )->getBox()->Target.TR::Y + SpinnerTopOffset;
+						y = ( *block )->getBox()->Target->TR.Y + SpinnerTopOffset;
 					}
 					else
 					{
-						y = ( *block )->getBox()->Target.BL::Y + SpinnerBottomOffset;
+						y = ( *block )->getBox()->Target->BL.Y + SpinnerBottomOffset;
 					}
 
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )

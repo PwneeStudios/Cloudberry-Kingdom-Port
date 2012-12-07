@@ -1,8 +1,5 @@
 ﻿#include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 
@@ -27,7 +24,8 @@ namespace CloudberryKingdom
 
 	void TextList::SetIndex( int index )
 	{
-		ContinuousIndex = Index = index;
+		Index = index;
+		ContinuousIndex = static_cast<float>( Index );
 	}
 
 	void TextList::PhsxStep()
@@ -44,10 +42,10 @@ namespace CloudberryKingdom
 
 		for ( int i = Index - 2; i <= Index + 2; i++ )
 		{
-			if ( i >= 0 && i < Text.size() )
+			if ( i >= 0 && i < static_cast<int>( Text.size() ) )
 			{
 				Text[ i ]->_Pos = getCore()->Data.Position - (i - ContinuousIndex) * Vector2(0, 100);
-				Text[ i ]->MyFloatColor->W = Alpha *.5f * ( 2 - abs( i - ContinuousIndex ) );
+				Text[ i ]->MyFloatColor.W = Alpha *.5f * ( 2 - abs( i - ContinuousIndex ) );
 				Text[ i ]->Draw( MyCam, false );
 			}
 		}
@@ -57,7 +55,7 @@ namespace CloudberryKingdom
 	void TextList::ShiftUp()
 	{
 		Index++;
-		if ( Index >= Text.size() )
+		if ( Index >= static_cast<int>( Text.size() ) )
 			Index = Text.size() - 1;
 	}
 
