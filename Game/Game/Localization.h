@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	class Localization
 	{
 	public:
@@ -20,16 +21,6 @@ namespace CloudberryKingdom
 			Language_RUSSIAN,
 			Language_KOREAN,
 			Language_CHINESE
-		};
-
-	public:
-		class LanguageInfo
-		{
-		public:
-			Language MyLanguage;
-			std::wstring MyDirectory;
-
-			LanguageInfo( Language MyLanguage, const std::wstring &MyDirectory );
 		};
 
 	public:
@@ -361,7 +352,7 @@ namespace CloudberryKingdom
 		static std::wstring WordMarkup( Words Word, int Size );
 
 		static const int NumLanguages = 10;
-		static std::map<Language, LanguageInfo*> Languages;
+		static std::map<Language, std::shared_ptr<LanguageInfo> > Languages;
 
 	private:
 		static std::shared_ptr<ContentManager> Content;
@@ -377,13 +368,25 @@ namespace CloudberryKingdom
 		static void ReadSubtitleInfo( const std::wstring &VideoName );
 
 	public:
-		static std::vector<SubtitleAction*> GetSubtitles( const std::wstring &VideoName );
+		static std::vector<std::shared_ptr<SubtitleAction> > GetSubtitles( const std::wstring &VideoName );
 
 	private:
-		static std::vector<SubtitleAction*> Subtitles;
+		static std::vector<std::shared_ptr<SubtitleAction> > Subtitles;
 
 		static void ReadSubtitles( const std::wstring &path );
 	};
+
+	class LanguageInfo
+	{
+
+	public:
+		Localization::Language MyLanguage;
+		std::wstring MyDirectory;
+
+		LanguageInfo( Localization::Language MyLanguage, const std::wstring &MyDirectory );
+
+	};
+
 }
 
 

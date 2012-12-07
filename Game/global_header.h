@@ -108,11 +108,25 @@ class ContentManager
 
 public:
 
+	ContentManager( std::wstring ContentRootDirectory )
+	{
+		RootDirectory = ContentRootDirectory;
+	}
+
 	template<class T>
 	std::shared_ptr<T> Load( const std::wstring &name )
 	{
+		// FIXME
 		return std::shared_ptr<T>();
 	}
+
+	void Unload(  )
+	{
+		// FIXME
+	}
+
+	// FIXME: set equal to something
+	std::wstring RootDirectory;
 
 };
 
@@ -258,6 +272,18 @@ public:
 	EffectTechnique()
 	{
 		Passes.resize( 1 );
+	}
+
+};
+
+class File
+{
+
+public:
+	static bool Exists( std::wstring path )
+	{
+		// FIXME
+		return true;
 	}
 
 };
@@ -501,14 +527,17 @@ public:
 
 };
 
-// Note: some of these may not be needed. Check C# Lambda-port to see.
 class Path
 {
 
 public:
 	
 	static std::wstring Combine( std::wstring Path, std::wstring Subpath );
+	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2 );
+	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2, std::wstring Subpath3 );
+	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2, std::wstring Subpath3, std::wstring Subpath4 );
 	static std::wstring GetDirectoryName( std::wstring Path );
+	static std::wstring RootDirection;
 
 };
 

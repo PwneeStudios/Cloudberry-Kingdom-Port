@@ -321,12 +321,12 @@ float Tools::_VolumeFade = 0;
 		UpdateVolume();
 	}
 
-float Tools::CurSongVolume = 0;
-std::shared_ptr<WrappedFloat> SoundVolume, Tools::MusicVolume = 0;
-bool Tools::FixedTimeStep = false;
-bool Tools::WindowBorder = true;
-std::shared_ptr<XnaGameClass> Tools::GameClass = 0;
-std::shared_ptr<CloudberryKingdomGame> Tools::TheGame = 0;
+	float Tools::CurSongVolume = 0;
+	std::shared_ptr<WrappedFloat> SoundVolume, Tools::MusicVolume = 0;
+	bool Tools::FixedTimeStep = false;
+	bool Tools::WindowBorder = true;
+	std::shared_ptr<XnaGameClass> Tools::GameClass = 0;
+	std::shared_ptr<CloudberryKingdomGame> Tools::TheGame = 0;
 
 	const Version &Tools::getGameVersion()
 	{

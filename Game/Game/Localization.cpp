@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	Localization::LanguageInfo::LanguageInfo( Language MyLanguage, const std::wstring &MyDirectory )
+	LanguageInfo::LanguageInfo( Localization::Language MyLanguage, const std::wstring &MyDirectory )
 	{
 		this->MyLanguage = MyLanguage;
 		this->MyDirectory = MyDirectory;
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	}
 
 	//std::map<Language, std::map<Words, std::wstring> > Localization::Text;
-	std::map<int, std::map<int, std::wstring> > Localization::Text;
+	//std::map<int, std::map<int, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
 	{
@@ -27,15 +27,16 @@ namespace CloudberryKingdom
 		// Create new dictionaries for each language
 		//Text = std::map<Language, std::map<Words, std::wstring> >();
 		//for ( int i = 0; i < NumLanguages; i++ )
-		//	Text.insert( make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
-		Text = std::map<int, std::map<Words, std::wstring> >();
+		//	Text.insert( std::make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
+		Text = std::map<Language, std::map<Words, std::wstring> >();
 		for ( int i = 0; i < NumLanguages; i++ )
-			Text.insert( make_pair( i, std::map<Words, std::wstring>() ) );
+			Text.insert( std::make_pair( i, std::map<Words, std::wstring>() ) );
 
 		// Open the giant translation file
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		//std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		std::shared_ptr<FileReader> reader = std::make_shared<FileReader>( path );
 
 		std::wstring line;
 
@@ -46,18 +47,17 @@ namespace CloudberryKingdom
 		while ( line != _T( "" ) )
 		{
 			//var bits = line.Split('|');
-//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-			std::vector<std::wstring> bits = line.Split( L'\t' );
+			std::vector<std::wstring> bits = Split( line, L'\t' );
 
 			for ( int i = 0; i < NumLanguages; i++ )
-				Text[ static_cast<Language>( i ) ].insert( make_pair( static_cast<Words>( LineCount ), bits[ i + 2 ] ) );
+				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i + 2 ] ) );
 
 			line = reader->ReadLine();
 			LineCount++;
 		}
 
-		reader->Close();
-		stream->Close();
+		//reader->Close();
+		//stream->Close();
 	}
 
 	std::wstring Localization::WordString( Words Word )
@@ -83,9 +83,8 @@ namespace CloudberryKingdom
 		return Format( _T( "{{p{1},{0},?}}" ), Size, WordToTextureName( Word ) );
 	}
 
-std::map<Language, LanguageInfo*> Localization::Languages = std::map<Language, LanguageInfo*>( NumLanguages );
-std::shared_ptr<ContentManager> Localization::Content = 0;
-std::shared_ptr<LanguageInfo> Localization::CurrentLanguage = 0;
+	// FIXME: preinitialize the map with a fixed size?
+	//std::map<Localization::Language, std::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, std::shared_ptr<LanguageInfo> >( NumLanguages );
 
 	void Localization::SetLanguage( Language SelectedLanguage )
 	{
@@ -116,18 +115,19 @@ std::shared_ptr<LanguageInfo> Localization::CurrentLanguage = 0;
 
 	void Localization::Initialize()
 	{
-		Content = std::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(_T("Content"), _T("Localization")) );
+		/*Content = std::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(_T("Content"), _T("Localization")) );*/
+		Content = std::make_shared<ContentManager>( Path::Combine(_T("Content"), _T("Localization")) );
 
-		Languages.insert( make_pair( Language_CHINESE, std::make_shared<LanguageInfo>( Language_CHINESE, _T( "Chinese" ) ) ) );
-		Languages.insert( make_pair( Language_ENGLISH, std::make_shared<LanguageInfo>( Language_ENGLISH, _T( "English" ) ) ) );
-		Languages.insert( make_pair( Language_FRENCH, std::make_shared<LanguageInfo>( Language_FRENCH, _T( "French" ) ) ) );
-		Languages.insert( make_pair( Language_GERMAN, std::make_shared<LanguageInfo>( Language_GERMAN, _T( "German" ) ) ) );
-		Languages.insert( make_pair( Language_ITALIAN, std::make_shared<LanguageInfo>( Language_ITALIAN, _T( "Italian" ) ) ) );
-		Languages.insert( make_pair( Language_JAPANESE, std::make_shared<LanguageInfo>( Language_JAPANESE, _T( "Japanese" ) ) ) );
-		Languages.insert( make_pair( Language_KOREAN, std::make_shared<LanguageInfo>( Language_KOREAN, _T( "Korean" ) ) ) );
-		Languages.insert( make_pair( Language_PORTUGUESE, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Portuguese" ) ) ) );
-		Languages.insert( make_pair( Language_RUSSIAN, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Russian" ) ) ) );
-		Languages.insert( make_pair( Language_SPANISH, std::make_shared<LanguageInfo>( Language_SPANISH, _T( "English" ) ) ) );
+		Languages.insert( std::make_pair( Language_CHINESE, std::make_shared<LanguageInfo>( Language_CHINESE, _T( "Chinese" ) ) ) );
+		Languages.insert( std::make_pair( Language_ENGLISH, std::make_shared<LanguageInfo>( Language_ENGLISH, _T( "English" ) ) ) );
+		Languages.insert( std::make_pair( Language_FRENCH, std::make_shared<LanguageInfo>( Language_FRENCH, _T( "French" ) ) ) );
+		Languages.insert( std::make_pair( Language_GERMAN, std::make_shared<LanguageInfo>( Language_GERMAN, _T( "German" ) ) ) );
+		Languages.insert( std::make_pair( Language_ITALIAN, std::make_shared<LanguageInfo>( Language_ITALIAN, _T( "Italian" ) ) ) );
+		Languages.insert( std::make_pair( Language_JAPANESE, std::make_shared<LanguageInfo>( Language_JAPANESE, _T( "Japanese" ) ) ) );
+		Languages.insert( std::make_pair( Language_KOREAN, std::make_shared<LanguageInfo>( Language_KOREAN, _T( "Korean" ) ) ) );
+		Languages.insert( std::make_pair( Language_PORTUGUESE, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Portuguese" ) ) ) );
+		Languages.insert( std::make_pair( Language_RUSSIAN, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Russian" ) ) ) );
+		Languages.insert( std::make_pair( Language_SPANISH, std::make_shared<LanguageInfo>( Language_SPANISH, _T( "English" ) ) ) );
 
 		std::wstring path = Path::Combine( Content->RootDirectory, _T( "Localization.tsv" ) );
 		ReadTranslationGrid( path );
@@ -140,7 +140,7 @@ std::shared_ptr<LanguageInfo> Localization::CurrentLanguage = 0;
 		ReadSubtitles( path );
 	}
 
-	std::vector<SubtitleAction*> Localization::GetSubtitles( const std::wstring &VideoName )
+	std::vector<std::shared_ptr<SubtitleAction> > Localization::GetSubtitles( const std::wstring &VideoName )
 	{
 		Subtitles.clear();
 		ReadSubtitleInfo( VideoName );
@@ -148,18 +148,17 @@ std::shared_ptr<LanguageInfo> Localization::CurrentLanguage = 0;
 		return Subtitles;
 	}
 
-std::vector<SubtitleAction*> Localization::Subtitles = 0;
-
 	void Localization::ReadSubtitles( const std::wstring &path )
 	{
 		if ( !File::Exists( path ) )
 			return;
 
-		Subtitles = std::vector<SubtitleAction*>( 50 );
+		Subtitles = std::vector<std::shared_ptr<SubtitleAction> >( 50 );
 
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		//std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		std::shared_ptr<FileReader> reader = std::make_shared<FileReader>( path );
 
 		std::wstring line;
 
@@ -188,9 +187,6 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 				data = _T( "" );
 			}
 
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//			switch (identifier)
-//ORIGINAL LINE: case "show":
 			if ( identifier == _T( "show" ) )
 			{
 					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_{0}" ), Index ) );
@@ -200,7 +196,6 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 
 
 			}
-//ORIGINAL LINE: case "hide":
 			else if ( identifier == _T( "hide" ) )
 			{
 					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), 0 ) );
@@ -209,7 +204,7 @@ std::vector<SubtitleAction*> Localization::Subtitles = 0;
 			line = reader->ReadLine();
 		}
 
-		reader->Close();
-		stream->Close();
+		//reader->Close();
+		//stream->Close();
 	}
 }
