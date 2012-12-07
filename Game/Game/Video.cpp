@@ -12,7 +12,7 @@ double MainVideo::Duration = 0;
 DateTime MainVideo::StartTime = 0;
 bool MainVideo::CanSkip = false;
 float MainVideo::LengthUntilUserCanSkip = 0;
-std::vector<Localization::SubtitleAction*> MainVideo::Subtitles = 0;
+std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles = 0;
 int MainVideo::SubtitleIndex = 0;
 std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
 
@@ -113,12 +113,12 @@ bool MainVideo::Paused = false;
 		if ( SubtitleIndex >= Subtitles.size() )
 			return;
 
-		std::shared_ptr<Localization::SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
+		std::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
 		if ( ElapsedTime() > NextSubtitle->Time )
 		{
 			switch ( NextSubtitle->MyAction )
 			{
-				case Localization::SubtitleAction::ActionType_SHOW:
+				case SubtitleAction::ActionType_SHOW:
 					SubtitleQuad->Show = true;
 					SubtitleQuad->Quad_Renamed->MyTexture = NextSubtitle->MyTexture;
 					SubtitleQuad->ScaleToTextureSize();
@@ -127,7 +127,7 @@ bool MainVideo::Paused = false;
 					SubtitleQuad->setPos( Vector2( 0, -700 - SubtitleQuad->Quad_Renamed->Height / 2 ) );
 					break;
 
-				case Localization::SubtitleAction::ActionType_HIDE:
+				case SubtitleAction::ActionType_HIDE:
 					SubtitleQuad->Show = false;
 					break;
 			}

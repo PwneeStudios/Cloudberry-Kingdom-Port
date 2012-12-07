@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		this->MyDirectory = MyDirectory;
 	}
 
-	Localization::SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture )
+	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture )
 	{
 		this->MyAction = MyAction;
 		this->Time = Time;
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		//	Text.insert( std::make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
 		Text = std::map<Language, std::map<Words, std::wstring> >();
 		for ( int i = 0; i < NumLanguages; i++ )
-			Text.insert( std::make_pair( i, std::map<Words, std::wstring>() ) );
+			Text.insert( std::make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
 
 		// Open the giant translation file
 		Tools::UseInvariantCulture();
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == _T( "hide" ) )
 			{
-					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), 0 ) );
+					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), std::shared_ptr<EzTexture>() ) );
 			}
 
 			line = reader->ReadLine();

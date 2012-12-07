@@ -24,28 +24,6 @@ namespace CloudberryKingdom
 		};
 
 	public:
-		class SubtitleAction
-		{
-		public:
-			enum ActionType
-			{
-				ActionType_SHOW,
-				ActionType_HIDE
-			};
-			/// <summary>
-			/// The time the action happens, in seconds.
-			/// </summary>
-		public:
-			float Time;
-
-			ActionType MyAction;
-
-			std::shared_ptr<EzTexture> MyTexture;
-
-			SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture );
-		};
-
-	public:
 		enum Words
 		{
 			Words_IDENTIFIER,
@@ -384,6 +362,29 @@ namespace CloudberryKingdom
 		std::wstring MyDirectory;
 
 		LanguageInfo( Localization::Language MyLanguage, const std::wstring &MyDirectory );
+
+	};
+
+	class SubtitleAction
+	{
+
+	public:
+		enum ActionType
+		{
+			ActionType_SHOW,
+			ActionType_HIDE
+		};
+		/// <summary>
+		/// The time the action happens, in seconds.
+		/// </summary>
+	public:
+		float Time;
+
+		ActionType MyAction;
+
+		std::shared_ptr<EzTexture> MyTexture;
+
+		SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture );
 
 	};
 

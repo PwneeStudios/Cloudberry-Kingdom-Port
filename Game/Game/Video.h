@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		static bool CanSkip;
 		static float LengthUntilUserCanSkip;
 
-		static std::vector<Localization::SubtitleAction*> Subtitles;
+		static std::vector<std::shared_ptr<SubtitleAction> > Subtitles;
 		static int SubtitleIndex;
 		static std::shared_ptr<QuadClass> SubtitleQuad;
 
