@@ -9,10 +9,10 @@ std::shared_ptr<Video> MainVideo::CurrentVideo = 0;
 std::shared_ptr<VideoPlayer> MainVideo::VPlayer = 0;
 std::shared_ptr<EzTexture> MainVideo::VEZTexture = std::make_shared<EzTexture>();
 double MainVideo::Duration = 0;
-DateTime MainVideo::StartTime = 0;
+DateTime MainVideo::StartTime;
 bool MainVideo::CanSkip = false;
 float MainVideo::LengthUntilUserCanSkip = 0;
-std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles = 0;
+std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
 int MainVideo::SubtitleIndex = 0;
 std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
 
@@ -46,26 +46,26 @@ std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>
 		CanSkip = CanSkipVideo;
 		LengthUntilUserCanSkip = LengthUntilCanSkip;
 
-		UserPowers::WatchedVideo += MovieName;
+		UserPowers::WatchedVideo.Add( MovieName );
 		UserPowers::SetToSave();
 
 		Playing = true;
 		Cleaned = false;
 
 		//CurrentVideo = Tools.GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
-		CurrentVideo = Content->Load<Video*>( Path::Combine( _T( "Movies" ), MovieName ) );
+		CurrentVideo = Content->Load<Video>( Path::Combine( _T( "Movies" ), MovieName ) );
 
 		VPlayer = std::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
 		VPlayer->Play( CurrentVideo );
 
 		Duration = CurrentVideo->Duration.TotalSeconds;
-		StartTime = DateTime::Now;
+		StartTime = DateTime::Now();
 	}
 
 	double MainVideo::ElapsedTime()
 	{
-		return ( DateTime::Now - StartTime )->TotalSeconds;
+		return ( DateTime::Now() - StartTime ).TotalSeconds;
 	}
 
 bool MainVideo::Paused = false;
@@ -89,7 +89,7 @@ bool MainVideo::Paused = false;
 	//#endif
 
 		// End the video if the user presses a key
-		if ( CanSkip && PlayerManager::Players.size() > 0 && ElapsedTime() > ::3 || ElapsedTime() > LengthUntilUserCanSkip )
+		if ( CanSkip && PlayerManager::Players.size() > 0 && ElapsedTime() > 0.3f || ElapsedTime() > LengthUntilUserCanSkip )
 		{
 			// Update songs
 			if ( Tools::SongWad != 0 )
@@ -110,7 +110,7 @@ bool MainVideo::Paused = false;
 		SubtitleQuad->Draw();
 		Tools::QDrawer->Flush();
 
-		if ( SubtitleIndex >= Subtitles.size() )
+		if ( SubtitleIndex >= static_cast<int>( Subtitles.size() ) )
 			return;
 
 		std::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
@@ -120,11 +120,11 @@ bool MainVideo::Paused = false;
 			{
 				case SubtitleAction::ActionType_SHOW:
 					SubtitleQuad->Show = true;
-					SubtitleQuad->Quad_Renamed->MyTexture = NextSubtitle->MyTexture;
+					SubtitleQuad->Quad_Renamed.setMyTexture( NextSubtitle->MyTexture );
 					SubtitleQuad->ScaleToTextureSize();
 					SubtitleQuad->Scale( 1.445f );
 					SubtitleQuad->Update();
-					SubtitleQuad->setPos( Vector2( 0, -700 - SubtitleQuad->Quad_Renamed->Height / 2 ) );
+					SubtitleQuad->setPos( Vector2( 0, -700.f - SubtitleQuad->Quad_Renamed.getHeight() / 2.f ) );
 					break;
 
 				case SubtitleAction::ActionType_HIDE:
@@ -182,7 +182,8 @@ bool MainVideo::Cleaned = true;
 		if ( Cleaned )
 			return;
 
-		delete VPlayer;
+		// FIXME: No deleting.
+		//delete VPlayer;
 		CurrentVideo.reset();
 
 		Cleaned = true;
