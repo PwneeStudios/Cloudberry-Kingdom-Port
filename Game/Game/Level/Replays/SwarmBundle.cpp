@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		this->bob = bob;
 	}
 
-	void SwarmBundle::BobToSpritesLambda::Apply( const std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > > &dict, const Vector2 &pos )
+	void SwarmBundle::BobToSpritesLambda::Apply( const std::map<int, std::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos )
 	{
 		bob->MyPhsx->ToSprites( dict, pos );
 	}

@@ -6,8 +6,10 @@
 
 namespace CloudberryKingdom
 {
+
 	class SwarmBundle
 	{
+
 	private:
 		class BobToSpritesLambda : public Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2>
 		{
@@ -16,7 +18,7 @@ namespace CloudberryKingdom
 		public:
 			BobToSpritesLambda( const std::shared_ptr<Bob> &bob );
 
-			void Apply( const std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > > &dict, const Vector2 &pos );
+			void Apply( const std::map<int, std::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos );
 		};
 
 	private:

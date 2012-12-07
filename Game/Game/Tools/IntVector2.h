@@ -6,6 +6,12 @@ namespace CloudberryKingdom
 	{
 	public:
 		int X, Y;
+
+		IntVector2()
+		{
+			X = Y = 0;
+		}
+
 		IntVector2( int X, int Y );
 		IntVector2( float X, float Y );
 		IntVector2( Vector2 v );

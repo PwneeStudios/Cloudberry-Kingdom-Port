@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 
 	void BouncyBlock::SideHit( const std::shared_ptr<Bob> &bob )
 	{
-		Offset = Vector2( ::Sign( bob->getCore()->Data.Position.X - getCore()->Data.Position.X ), 0.f );
+		Offset = Vector2( static_cast<float>( ::Sign( bob->getCore()->Data.Position.X - getCore()->Data.Position.X ) ), 0.f );
 		bob->MyPhsx->Forced( Offset );
 
 		Snap( bob );

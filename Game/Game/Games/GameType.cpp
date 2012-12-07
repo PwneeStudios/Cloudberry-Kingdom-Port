@@ -1432,9 +1432,9 @@ bool GameData::LockLevelStart = false;
 		// Check for invisible color scheme
 		bool PartiallyInvisible = false, TotallyInvisible = false;
 		ColorScheme scheme = PlayerManager::Get( i )->ColorScheme_Renamed;
-		if ( scheme.SkinColor.Clr.A == 0 )
+		if ( scheme.SkinColor->Clr.A == 0 )
 			PartiallyInvisible = true;
-		if ( PartiallyInvisible && ( scheme.HatData == Hat::None || scheme.HatData == Hat::NoHead ) && ( scheme.CapeColor.Clr.A == 0 && scheme.CapeOutlineColor.Clr.A == 0 ) )
+		if ( PartiallyInvisible && ( scheme.HatData == Hat::None || scheme.HatData == Hat::NoHead ) && ( scheme.CapeColor->Clr.A == 0 && scheme.CapeOutlineColor->Clr.A == 0 ) )
 			TotallyInvisible = true;
 
 		if ( !PartiallyInvisible )

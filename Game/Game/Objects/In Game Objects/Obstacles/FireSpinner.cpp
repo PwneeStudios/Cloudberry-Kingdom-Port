@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void FireSpinner::FireSpinnerTileInfo::InitializeInstanceFields()
 	{
-		Flame = std::make_shared<SpriteInfo>( Tools::Texture( _T( "small flame" ) ), Vector2( 72, 72 ), Vector2(), Color::White );
+		Flame = std::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "small flame" ) ) ), Vector2( 72.f, 72.f ), Vector2(), Color::White );
 		Base = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72.f, 72.f ), Vector2(), Color::White );
 		SegmentSpacing = 53;
 		SpaceFromBase = 0;

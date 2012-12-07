@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 		{
 			Tools::AutoLoopDelay++;
 			if ( Tools::AutoLoopDelay == 20 || Tools::AutoLoopDelay == 40 )
-				for ( std::vector<EzSound*>::const_iterator snd = Tools::SoundWad->SoundList.begin(); snd != Tools::SoundWad->SoundList.end(); ++snd )
+				for ( std::vector<std::shared_ptr<EzSound> >::const_iterator snd = Tools::SoundWad->SoundList.begin(); snd != Tools::SoundWad->SoundList.end(); ++snd )
 					( *snd )->Play();
 			if ( Tools::AutoLoopDelay > 60 )
 			{

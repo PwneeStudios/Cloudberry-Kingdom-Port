@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 	float DifficultyHelper::InterpRestrict19( float Level1Val, float Level9Val, float level )
 	{
-		level = CoreMath::Restrict( 1, 9, level );
+		level = CoreMath::RestrictVal( 1.f, 9.f, level );
 		return Interp19( Level1Val, Level9Val, level );
 	}
 
@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 
 	Vector2 DifficultyHelper::InterpRestrict19( Vector2 Level1Val, Vector2 Level9Val, float level )
 	{
-		level = CoreMath::Restrict( 1, 9, level );
+		level = CoreMath::RestrictVal( 1.f, 9.f, level );
 		return Interp19( Level1Val, Level9Val, level );
 	}
 
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 	float DifficultyHelper::InterpRestrict159( float Level1Val, float Level5Val, float Level9Val, float level )
 	{
-		level = CoreMath::Restrict( 1, 9, level );
+		level = CoreMath::RestrictVal( 1.f, 9.f, level );
 		return Interp159( Level1Val, Level5Val, Level9Val, level );
 	}
 

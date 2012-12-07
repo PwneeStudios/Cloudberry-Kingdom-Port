@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	}
 
 	void SpriteAnimGroup::Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
-		std::shared_ptr<Lambda_2<std::shared_ptr<std::map<int, std::shared_ptr<SpriteAnim> > >, Vector2> > SpriteFunc )
+		std::shared_ptr<Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2> > SpriteFunc )
 	{
 		// Make sure stickman is oriented correctly            
 		Obj->xFlip = false;
