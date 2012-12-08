@@ -6,12 +6,13 @@ namespace CloudberryKingdom
 	class MakeThing
 	{
 	public:
-		MakeThing();
+		MakeThing() { }
+		virtual ~MakeThing() { }
 
-		virtual void Phase1();
-		virtual void Phase2();
-		virtual void Phase3();
-		virtual void Cleanup();
+		virtual void Phase1() { }
+		virtual void Phase2() { }
+		virtual void Phase3() { }
+		virtual void Cleanup() { }
 	};
 }
 

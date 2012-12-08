@@ -126,12 +126,6 @@
     <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeDarkBottom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Level\Make\MakePiece\MakeThing.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Level\Make\Parameters\StyleData\BigData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -285,9 +279,6 @@
     <ClCompile Include="Game\Menus\Concrete Menus\InGameStartMenus\InGameStartMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Menus\Concrete Menus\Loading Screen\ILoadingScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Menus\Concrete Menus\Loading Screen\Loading.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -307,9 +298,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Menus\Concrete Menus\Score Screens\StatsScreen.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\Doll.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.cpp">
@@ -726,13 +714,7 @@
     <ClCompile Include="Game\Objects\AutoGen.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Objects\IBounded.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Objects\Icon.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Objects\IPrepareToDraw.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Objects\ObjectBase.cpp">
@@ -772,9 +754,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Player\Hero Physics\Normal.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game\Player\Hero Physics\Random.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Player\Hero Physics\Rocketbox.cpp">
@@ -981,9 +960,6 @@
     <ClCompile Include="Core\Input\ButtonCheck.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\Lambdas\Multicaster.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\Particle Effects\Specific Effects\CloudberryKingdom.ParticleEffects.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1027,9 +1003,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Tools\Random.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Core\Tools\Set.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Chunk.cpp">
@@ -1078,6 +1051,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Core\Texture\EzTextureWad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Player\Hero Physics\BobPhsxRandom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -1380,9 +1362,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Menus\Concrete Menus\Score Screens\StatsScreen.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\Doll.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.h">
@@ -1847,9 +1826,6 @@
     <ClInclude Include="Game\Player\Hero Physics\Normal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Player\Hero Physics\Random.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Player\Hero Physics\Rocketbox.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2202,6 +2178,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\Texture\EzTextureWad.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Player\Hero Physics\BobPhsxRandom.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
