@@ -316,8 +316,8 @@ RezData PlayerManager::d;
 	}
 #endif
 
-bool PartiallyInvisible, PlayerManager::TotallyInvisible = false;
-int PlayerManager::_CoinsSpent = 0;
+	bool PlayerManager::PartiallyInvisible = false, PlayerManager::TotallyInvisible = false;
+	int PlayerManager::_CoinsSpent = 0;
 
 	const int &PlayerManager::getCoinsSpent()
 	{

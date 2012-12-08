@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class TileSet;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class TileSets
 	{
 	private:

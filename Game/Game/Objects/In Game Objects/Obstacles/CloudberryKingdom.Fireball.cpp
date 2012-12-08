@@ -8,14 +8,14 @@ namespace CloudberryKingdom
 		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72, -1 ) );
 	}
 
-	std::shared_ptr<Particle> ExplodeTemplate, Fireball::EmitterTemplate = 0;
-	std::shared_ptr<EzSound> Fireball::ExplodeSound = 0;
+	std::shared_ptr<Particle> Fireball::ExplodeTemplate, Fireball::EmitterTemplate;
+	std::shared_ptr<EzSound> Fireball::ExplodeSound;
 	float Fireball::t = 0;
 	std::shared_ptr<Quad> Fireball::ShadeQuad = 0;
-	std::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, Fireball::BaseFireballTexture = 0;
-	std::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
-	int DrawWidth, Fireball::DrawHeight = 0;
-	std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Fireball::Emitter_Emitter = 0;
+	std::shared_ptr<EzTexture> Fireball::FireballTexture, Fireball::FlameTexture, Fireball::EmitterTexture, Fireball::BaseFireballTexture;
+	std::shared_ptr<RenderTarget2D> Fireball::FireballRenderTarget, Fireball::FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
+	int Fireball::DrawWidth = 0, Fireball::DrawHeight = 0;
+	std::shared_ptr<ParticleEmitter> Fireball::Fireball_Emitter, Fireball::Flame_Emitter, Fireball::Emitter_Emitter;
 
 	void Fireball::PreInit()
 	{

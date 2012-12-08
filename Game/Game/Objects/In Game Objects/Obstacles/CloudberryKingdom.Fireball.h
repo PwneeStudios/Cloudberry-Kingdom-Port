@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		private:
 			void InitializeInstanceFields();
 
-public:
+	public:
 			FireballTileInfo()
 			{
 				InitializeInstanceFields();

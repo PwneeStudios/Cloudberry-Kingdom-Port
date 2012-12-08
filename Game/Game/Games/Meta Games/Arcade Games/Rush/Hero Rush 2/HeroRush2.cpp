@@ -22,14 +22,19 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
-	const Vector2 IconPos[][3] =
-	{
-		{ Vector2( 240, 400 ), Vector2(),			Vector2() },
-		{ Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2() },
-		{ Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2( 10, 512 ) }
-	};
+	Vector2 __IconPos1[] = { Vector2( 240, 400 ), Vector2(),		      Vector2() };
+	Vector2 __IconPos2[] = { Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2() };
+	Vector2 __IconPos3[] = { Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2( 10, 512 ) };
+	std::vector<Vector2> _IconPos1 = VecFromArray( __IconPos1 );
+	std::vector<Vector2> _IconPos2 = VecFromArray( __IconPos2 );
+	std::vector<Vector2> _IconPos3 = VecFromArray( __IconPos3 );
+	std::vector<Vector2> _IconPos[] = { _IconPos1, _IconPos2, _IconPos3 };
 
-	const float IconScale[] = { .8f,.8f,.8f };
+	std::vector<std::vector<Vector2> > Challenge_HeroRush2::IconPos = VecFromArray( _IconPos );
+
+
+	float _IconScale[] = { .8f,.8f,.8f };
+	std::vector<float> Challenge_HeroRush2::IconScale = VecFromArray( _IconScale );
 
 	void Challenge_HeroRush2::MakeExitDoorIcon( int levelindex )
 	{

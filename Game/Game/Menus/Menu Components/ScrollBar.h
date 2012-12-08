@@ -45,9 +45,6 @@ namespace CloudberryKingdom
 		std::shared_ptr<LongMenu> AttachedMenu;
 		std::shared_ptr<GUI_Panel> Parent;
 
-	public:
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
-
 	protected:
 		virtual void ReleaseBody();
 

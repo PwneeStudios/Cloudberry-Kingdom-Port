@@ -5,12 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class AutoGen;
-}
-namespace CloudberryKingdom
-{
+
 	class Generators
 	{
+
 	private:
 		static const std::shared_ptr<Generators> instance;
 	public:
@@ -25,7 +23,9 @@ namespace CloudberryKingdom
 		static void AddGenerator( const std::shared_ptr<AutoGen> &gen );
 
 		static int IndexOf( const std::shared_ptr<AutoGen> &gen );
+
 	};
+
 }
 
 

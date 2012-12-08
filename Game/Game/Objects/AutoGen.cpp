@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-bool AutoGen_Parameters::IntelliSpread = true;
+	bool AutoGen_Parameters::IntelliSpread = true;
 
 	int AutoGen_Parameters::ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd )
 	{

@@ -973,11 +973,11 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-std::shared_ptr<TileSet> None, TileSets::Random = 0;
-std::shared_ptr<TileSet> TileSets::DefaultTileSet = 0;
-std::vector<std::shared_ptr<TileSet> > TileSets::TileList = std::vector<std::shared_ptr<TileSet> >();
-std::map<int, std::shared_ptr<TileSet> > TileSets::GuidLookup = std::map<int, std::shared_ptr<TileSet> >();
-std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, TileSets::PathLookup = std::map<std::wstring, std::shared_ptr<TileSet> >();
+	std::shared_ptr<TileSet> TileSets::None, TileSets::Random;
+	std::shared_ptr<TileSet> TileSets::DefaultTileSet;
+	std::vector<std::shared_ptr<TileSet> > TileSets::TileList;
+	std::map<int, std::shared_ptr<TileSet> > TileSets::GuidLookup;
+	std::map<std::wstring, std::shared_ptr<TileSet> > TileSets::NameLookup, TileSets::PathLookup;
 
 	void TileSets::AddTileSet( const std::shared_ptr<TileSet> &tileset )
 	{

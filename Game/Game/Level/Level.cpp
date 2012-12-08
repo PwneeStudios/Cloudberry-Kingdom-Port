@@ -1810,8 +1810,8 @@ bool Level::dodebug = false;
 		}
 	}
 
-std::wstring Pre1, Pre2, Level::Post = _T( "" );
-int Step1, Level::Step2 = 0;
+	std::wstring Level::Pre1 = _T( "" ), Level::Pre2 = _T( "" ), Level::Post = _T( "" );
+	int Level::Step1 = 0, Level::Step2 = 0;
 
 	bool Level::MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData )
 	{

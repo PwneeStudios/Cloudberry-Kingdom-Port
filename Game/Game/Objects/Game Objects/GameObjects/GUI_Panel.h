@@ -98,10 +98,6 @@ namespace CloudberryKingdom
 		std::shared_ptr<Menu> MyMenu;
 		std::shared_ptr<DrawPile> MyPile;
 
-		virtual std::wstring CopyToClipboard( const std::wstring &suffix );
-
-		virtual void ProcessMouseInput( Vector2 shift, bool ShiftDown );
-
 		/// <summary>
 		/// The accumulation of all shifts
 		/// </summary>

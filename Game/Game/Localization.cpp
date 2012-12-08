@@ -16,8 +16,10 @@ namespace CloudberryKingdom
 		this->MyTexture = MyTexture;
 	}
 
-	//std::map<Language, std::map<Words, std::wstring> > Localization::Text;
-	//std::map<int, std::map<int, std::wstring> > Localization::Text;
+	const int Localization::NumLanguages = 10;
+	std::map<Localization::Language, std::shared_ptr<LanguageInfo> > Localization::Languages;
+	std::shared_ptr<LanguageInfo> Localization::CurrentLanguage;
+	std::map<Localization::Language, std::map<Localization::Words, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
 	{

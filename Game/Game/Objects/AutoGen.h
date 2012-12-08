@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class AutoGen_Parameters : public std::enable_shared_from_this<AutoGen_Parameters>
 	{
 		/// <summary>

@@ -1,11 +1,12 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
 
-std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
+	std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 );
+	Mutex SaveGroup::CountLock;
+
+	std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
 
 	void SaveGroup::Initialize()
 	{
@@ -101,8 +102,6 @@ std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
 			Wait();
 		}
 	}
-
-std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 );
 
 	void SaveGroup::Incr()
 	{
@@ -447,4 +446,7 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			InUseLock.Unlock();
 		}
 	}
+
+	Mutex EzStorage::InUseLock;
+
 }

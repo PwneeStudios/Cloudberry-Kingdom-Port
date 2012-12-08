@@ -329,7 +329,7 @@ namespace CloudberryKingdom
 
 		static std::wstring WordMarkup( Words Word, int Size );
 
-		static const int NumLanguages = 10;
+		static const int NumLanguages;
 		static std::map<Language, std::shared_ptr<LanguageInfo> > Languages;
 
 	private:

@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
-	std::vector<std::shared_ptr<AutoGen> > Gens, PreFill_1_Gens, PreFill_2_Gens, ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
+	std::vector<std::shared_ptr<AutoGen> > Generators::Gens, Generators::PreFill_1_Gens, Generators::PreFill_2_Gens, Generators::ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
 
 	Generators::Generators()
 	{

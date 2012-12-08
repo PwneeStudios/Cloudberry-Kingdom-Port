@@ -88,17 +88,21 @@ namespace CloudberryKingdom
 			else
 				dict.insert( std::make_pair( key, value ) );
 		}
+
 	};
 
 	class Tools
 	{
+
 	private:
 		class RemoveBitsLambda : public LambdaFunc_1<std::wstring, bool>
 		{
+
 		public:
 			RemoveBitsLambda();
 
 			bool Apply( const std::wstring &bit );
+
 		};
 
 	public:

@@ -33,11 +33,6 @@ namespace CloudberryKingdom
 		return sb->SliderGet();
 	}
 
-	void ScrollBar::ProcessMouseInput( Vector2 shift, bool ShiftDown )
-	{
-		setBarPos( getBarPos() + shift );
-	}
-
 	void ScrollBar::ReleaseBody()
 	{
 		CkBaseMenu::ReleaseBody();
