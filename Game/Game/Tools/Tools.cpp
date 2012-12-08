@@ -322,7 +322,7 @@ float Tools::_VolumeFade = 0;
 	}
 
 	float Tools::CurSongVolume = 0;
-	std::shared_ptr<WrappedFloat> SoundVolume, Tools::MusicVolume = 0;
+	std::shared_ptr<WrappedFloat> Tools::SoundVolume, Tools::MusicVolume = 0;
 	bool Tools::FixedTimeStep = false;
 	bool Tools::WindowBorder = true;
 	std::shared_ptr<XnaGameClass> Tools::GameClass = 0;
@@ -359,7 +359,7 @@ std::shared_ptr<Camera> Tools::DummyCamera = 0;
 			return CurLevel->getMainCamera();
 	}
 
-std::shared_ptr<GameData> WorldMap, Tools::TitleGame = 0;
+std::shared_ptr<GameData> Tools::WorldMap, Tools::TitleGame;
 const int tempVector4[] = { 0, 0, 0, 0 };
 std::vector<int> Tools::VibrateTimes = std::vector<int>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
 //int Tools::DifficultyTypes = Tools::GetValues<DifficultyParam>()->Count();
@@ -369,15 +369,15 @@ int Tools::StyleTypes = 8;
 int Tools::UpgradeTypes = Upgrade_LENGTH;
 
 #if defined(WINDOWS)
-KeyboardState Keyboard, Tools::PrevKeyboard;
+KeyboardState Tools::Keyboard, Tools::PrevKeyboard;
 #endif
 
 #if defined(WINDOWS)
-MouseState Mouse, Tools::PrevMouse;
+MouseState Tools::Mouse, Tools::PrevMouse;
 #endif
 
 #if defined(WINDOWS)
-Vector2 DeltaMouse, Tools::RawDeltaMouse;
+Vector2 Tools::DeltaMouse, Tools::RawDeltaMouse;
 #endif
 
 #if defined(WINDOWS)
@@ -622,19 +622,19 @@ bool Tools::MouseInWindow = false;
 std::shared_ptr<GameTime> Tools::gameTime = 0;
 std::shared_ptr<Rand> Tools::GlobalRnd = std::make_shared<Rand>( 0 );
 std::shared_ptr<EzEffectWad> Tools::EffectWad = 0;
-std::shared_ptr<EzEffect> BasicEffect, NoTexture, CircleEffect, LightSourceEffect, HslEffect, HslGreenEffect, Tools::WindowEffect = 0;
+std::shared_ptr<EzEffect> Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
 std::shared_ptr<Effect> Tools::PaintEffect_SpriteBatch = 0;
 std::shared_ptr<EzTextureWad> Tools::TextureWad = 0;
 std::shared_ptr<ContentManager> Tools::SoundContentManager = 0;
-std::shared_ptr<EzSoundWad> SoundWad, Tools::PrivateSoundWad = 0;
+std::shared_ptr<EzSoundWad> Tools::SoundWad, Tools::PrivateSoundWad = 0;
 std::shared_ptr<EzSongWad> Tools::SongWad = 0;
 std::shared_ptr<QuadDrawer> Tools::QDrawer = 0;
 std::shared_ptr<MainRender> Tools::Render = 0;
 std::shared_ptr<GraphicsDevice> Tools::Device = 0;
 std::shared_ptr<RenderTarget2D> Tools::DestinationRenderTarget = 0;
-float t, Tools::dt = 0;
-int DrawCount, Tools::PhsxCount = 0;
-std::shared_ptr<EzSong> Song_140mph, Song_Happy, Song_BlueChair, Song_Ripcurl, Song_Evidence, Song_GetaGrip, Song_House, Song_Nero, Song_FatInFire, Song_Heavens, Song_TidyUp, Tools::Song_WritersBlock = 0;
+float Tools::t = 0, Tools::dt = 0;
+int Tools::DrawCount = 0, Tools::PhsxCount = 0;
+std::shared_ptr<EzSong> Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
 std::vector<std::shared_ptr<EzSong> > Tools::SongList_Standard = std::vector<std::shared_ptr<EzSong> >();
 bool Tools::FreeCam = false;
 bool Tools::DrawBoxes = false;

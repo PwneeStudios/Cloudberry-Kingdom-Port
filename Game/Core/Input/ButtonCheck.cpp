@@ -205,8 +205,8 @@ bool ButtonCheck::PrevMouseInUse = false;
 		Start_Secondary = Go_Secondary = Back_Secondary = ReplayPrev_Secondary = ReplayNext_Secondary = SlowMoToggle_Secondary = Left_Secondary = Right_Secondary = Up_Secondary = Down_Secondary = Keys_None;
 	}
 
-std::shared_ptr<ButtonClass> Quickspawn_KeyboardKey, Help_KeyboardKey, ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
-Keys Start_Secondary, Go_Secondary, Back_Secondary, ReplayPrev_Secondary, ReplayNext_Secondary, ReplayToggle_Secondary, SlowMoToggle_Secondary, Left_Secondary, Right_Secondary, Up_Secondary, ButtonCheck::Down_Secondary = Keys_None;
+std::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
+Keys ButtonCheck::Start_Secondary = Keys_None, ButtonCheck::Go_Secondary = Keys_None, ButtonCheck::Back_Secondary = Keys_None, ButtonCheck::ReplayPrev_Secondary = Keys_None, ButtonCheck::ReplayNext_Secondary = Keys_None, ButtonCheck::ReplayToggle_Secondary = Keys_None, ButtonCheck::SlowMoToggle_Secondary = Keys_None, ButtonCheck::Left_Secondary = Keys_None, ButtonCheck::Right_Secondary = Keys_None, ButtonCheck::Up_Secondary = Keys_None, ButtonCheck::Down_Secondary = Keys_None;
 
 	void ButtonCheck::Reset()
 	{
