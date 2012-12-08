@@ -98,8 +98,8 @@ class Clipboard
 {
 
 public:
-	static std::wstring GetText();
-	static void SetText( std::wstring text );
+	static std::wstring GetText() { }
+	static void SetText( std::wstring text ) { }
 
 };
 
@@ -316,10 +316,10 @@ class FileReader
 {
 
 public:
-	FileReader( std::wstring path );
-	~FileReader(); // FIXME: make sure to close the file.
+	FileReader( std::wstring path ) { }
+	~FileReader() { } // FIXME: make sure to close the file.
 
-	std::wstring ReadLine();
+	std::wstring ReadLine() { return _T( "" ); }
 
 };
 
@@ -327,8 +327,8 @@ class FileWriter
 {
 
 public:
-	FileWriter( std::wstring path );
-	~FileWriter(); // FIXME: make sure to close the file.
+	FileWriter( std::wstring path ) { }
+	~FileWriter() { } // FIXME: make sure to close the file.
 
 };
 
@@ -588,11 +588,11 @@ class Path
 
 public:
 	
-	static std::wstring Combine( std::wstring Path, std::wstring Subpath );
-	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2 );
-	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2, std::wstring Subpath3 );
-	static std::wstring Combine( std::wstring Path, std::wstring Subpath1, std::wstring Subpath2, std::wstring Subpath3, std::wstring Subpath4 );
-	static std::wstring GetDirectoryName( std::wstring Path );
+	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath ) { return _T( "" ); }
+	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath1, const std::wstring &Subpath2 ) { return _T( "" ); }
+	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath1, const std::wstring &Subpath2, const std::wstring &Subpath3 ) { return _T( "" ); }
+	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath1, const std::wstring &Subpath2, const std::wstring &Subpath3, const std::wstring &Subpath4 ) { return _T( "" ); }
+	static std::wstring GetDirectoryName( const std::wstring &Path ) { return _T( "" ); }
 	static std::wstring RootDirection;
 
 };
@@ -958,7 +958,7 @@ public:
 		return _T( "" );
 	}
 
-	void Close();
+	void Close() { }
 };
 
 class StreamWriter;
@@ -1020,13 +1020,13 @@ public:
 	/// <summary>
 	/// Clear the working array to allow for a new number to be constructed
 	/// </summary>
-	void ClearDigits();
+	void ClearDigits() { }
 	
 	/// <summary>
 	/// Returns the index of the last digit of the number being constructed
 	/// </summary>
 	/// <returns></returns>
-	int LastDigit();
+	int LastDigit() { };
 
 	/// <summary>
 	/// The characters associated with each possible digit
@@ -1037,19 +1037,19 @@ public:
 	/// Takes the digits from a number (already stored in a work array)
 	/// and adds them to a StringBuilder
 	/// </summary>
-	void DigitsToString( int NumDigits );
+	void DigitsToString( int NumDigits ) { }
 
 	/// <summary>
 	/// Add a string representation of a number to a StringBuilder
 	/// </summary>
-	void Add( long long num );
+	void Add( long long num ) { }
 
 	/// <summary>
 	/// Add a string representation of a number to a StringBuilder
 	/// </summary>
 	/// <param name="MinDigits">The minimum number of digits used in the string.
 	/// The string is padded with zeros to the left if needed.</param>
-	void Add( long long num, int MinDigits );
+	void Add( long long num, int MinDigits ) { }
 
 };
 

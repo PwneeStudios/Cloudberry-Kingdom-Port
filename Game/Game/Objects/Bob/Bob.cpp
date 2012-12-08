@@ -3,6 +3,7 @@
 namespace CloudberryKingdom
 {
 
+	std::map<BobDeathType, Localization::Words> Bob::BobDeathNames;
 	void Bob::StaticInitializer()
 	{
 		typedef std::pair<BobDeathType, Localization::Words> DeathNamePair;
@@ -228,7 +229,7 @@ int Bob::ImmortalLength = 55;
 		ControlFunc.reset();
 	}
 
-	std::shared_ptr<EzSound> JumpSound_Default, Bob::DieSound_Default = 0;
+	std::shared_ptr<EzSound> Bob::JumpSound_Default, Bob::DieSound_Default = 0;
 
 	const std::shared_ptr<PlayerData> Bob::getMyPlayerData() const
 	{

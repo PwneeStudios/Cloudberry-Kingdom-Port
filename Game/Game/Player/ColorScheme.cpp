@@ -19,9 +19,9 @@ namespace CloudberryKingdom
 		return Price;
 	}
 
-	int Cheap, Mid, Hat::Expensive = 1000;
-	std::shared_ptr<Hat> None, Viking, Fedora, Afro, Halo, Ghost, CheckpointHead, FallingBlockHead, BlobHead, MovingBlockHead, SpikeyHead, FallingBlock3Head, Pink, Bubble, FireHead, Horns, Cloud, NoHead, TopHat, Knight, Toad, BubbleBobble, Brain, Gosu, RobinHood, Rasta, Pumpkin, BunnyEars, Pirate, Miner, Glasses, Antlers, Arrow, Bag, Cone, Pope, Rice, Santa, Sombrero, Tiki, Hat::Wizard = 0;
-	std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Hat::Mustache = 0;
+	int Hat::Cheap, Hat::Mid, Hat::Expensive = 1000;
+	std::shared_ptr<Hat> Hat::None, Hat::Viking, Hat::Fedora, Hat::Afro, Hat::Halo, Hat::Ghost, Hat::CheckpointHead, Hat::FallingBlockHead, Hat::BlobHead, Hat::MovingBlockHead, Hat::SpikeyHead, Hat::FallingBlock3Head, Hat::Pink, Hat::Bubble, Hat::FireHead, Hat::Horns, Hat::Cloud, Hat::NoHead, Hat::TopHat, Hat::Knight, Hat::Toad, Hat::BubbleBobble, Hat::Brain, Hat::Gosu, Hat::RobinHood, Hat::Rasta, Hat::Pumpkin, Hat::BunnyEars, Hat::Pirate, Hat::Miner, Hat::Glasses, Hat::Antlers, Hat::Arrow, Hat::Bag, Hat::Cone, Hat::Pope, Hat::Rice, Hat::Santa, Hat::Sombrero, Hat::Tiki, Hat::Wizard;
+	std::shared_ptr<Hat> Hat::Vandyke, Hat::Beard, Hat::BigBeard, Hat::Goatee, Hat::Mustache;
 
 	std::shared_ptr<EzTexture> Hat::GetTexture()
 	{
