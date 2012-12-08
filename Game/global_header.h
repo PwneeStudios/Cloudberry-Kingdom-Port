@@ -675,7 +675,7 @@ public:
 
 };
 
-class Object;
+//class Object;
 class PreparingDeviceSettingsEventArgs;
 
 class PresentationParameters

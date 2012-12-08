@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 		template<typename T>
 		T ChooseOne( std::vector<T> choices )
 		{
-			return choices[ RndInt( 0, choices->Length - 1 ) ];
+			return choices[ RndInt( 0, static_cast<int>( choices.size() ) - 1 ) ];
 		}
 
 		/// <summary>
