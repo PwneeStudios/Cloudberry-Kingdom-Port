@@ -99,31 +99,6 @@ namespace CloudberryKingdom
 		return RndInt( 0, Tools->Length<T>() - 1 );
 	}*/
 
-template<typename T>
-	void Rand::Scramble( std::vector<T> &list )
-	{
-		for ( int i = 0; i < list.size(); i++ )
-		{
-			int j = RndInt( 0, list.size() - 1 );
-
-			T temp = list[ i ];
-			list[ i ] = list[ j ];
-			list[ j ] = temp;
-		}
-	}
-
-template<typename T>
-	T Rand::RandomItem( std::vector<T> list )
-	{
-		return list[ RndInt( 0, list.size() - 1 ) ];
-	}
-
-template<typename T>
-	T Rand::RandomItem( std::vector<T> &list )
-	{
-		return list[ RndInt( 0, list.size() - 1 ) ];
-	}
-
 	std::vector<int> Rand::RndIndex( int Length, int NumIndices, std::vector<bool> Valid )
 	{
 		std::vector<int> Indices = std::vector<int>( NumIndices );
@@ -151,51 +126,12 @@ template<typename T>
 		return Indices;
 	}
 
-	template<typename T>
-	std::vector<T> Rand::Shuffle( std::vector<T> &list )
-	{
-		std::vector<T> shuffled = std::vector<T>();
-		std::vector<T> copy = std::vector<T>( list );
-
-		for ( int i = 0; i < list.size(); i++ )
-		{
-			// Choose an element to add to the shuffled list
-			int Index = RndInt( 0, copy.size() - 1 );
-			shuffled.push_back( copy[ Index ] );
-			copy.Remove( copy[ Index ] );
-		}
-
-		return shuffled;
-	}
-
-	template<typename T>
-	T Rand::ChooseOne( std::vector<T> choices )
-	{
-		return choices[ RndInt( 0, choices->Length - 1 ) ];
-	}
-
-	template<typename T>
-	std::vector<T> Rand::Choose( std::vector<T> &list, int n )
-	{
-		std::vector<T> chosen = std::vector<T>( list );
-		for ( int i = 0; i < list.size() - n; i++ )
-			chosen.RemoveAt( RndInt( 0, chosen.size() - 1 ) );
-
-		return chosen;
-	}
-
 	// Redundant: C# code had a method for Lists and Arrays, which both got converted to std::vectors in C++.
 	//template<typename T>
 	//T Rand::Choose( std::vector<T> list )
 	//{
 	//	return Choose( std::vector<T>( list ), 1 )[ 0 ];
 	//}
-
-	template<typename T>
-	T Rand::Choose( std::vector<T> &list )
-	{
-		return Choose( list, 1 )[ 0 ];
-	}
 
 	int Rand::Choose( std::vector<int> LevelCutoff, int Level_Renamed )
 	{
