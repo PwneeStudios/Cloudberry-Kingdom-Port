@@ -5,18 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Timer;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class CoinMod
 	{
 	public:

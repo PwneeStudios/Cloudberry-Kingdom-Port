@@ -21,6 +21,14 @@ namespace CloudberryKingdom
 
 		HeroSpec operator + ( HeroSpec B );
 
+		bool operator == ( const HeroSpec &B ) const
+		{
+			return basetype == B.basetype &&
+				   shape == B.shape &&
+				   move == B.move &&
+				   special == B.special;
+		}
+
 		virtual std::wstring ToString();
 	};
 

@@ -77,12 +77,29 @@ namespace CloudberryKingdom
 		/// <typeparam name="T"></typeparam>
 		/// <param name="list"></param>
 		template<typename T>
-		void Scramble( std::vector<T> &list );
+		void Scramble( std::vector<T> &list )
+		{
+			for ( int i = 0; i < static_cast<int>( list.size() ); i++ )
+			{
+				int j = RndInt( 0, static_cast<int>( list.size() ) - 1 );
+
+				T temp = list[ i ];
+				list[ i ] = list[ j ];
+				list[ j ] = temp;
+			}
+		}
 
 		template<typename T>
-		T RandomItem( std::vector<T> list );
+		T RandomItem( std::vector<T> list )
+		{
+			return list[ RndInt( 0, static_cast<int>( list.size() ) - 1 ) ];
+		}
+
 		template<typename T>
-		T RandomItem( std::vector<T> &list );
+		T RandomItem( std::vector<T> &list )
+		{
+			return list[ RndInt( 0, static_cast<int>( list.size() ) - 1 ) ];
+		}
 
 		std::vector<int> RndIndex( int Length, int NumIndices, std::vector<bool> Valid );
 
@@ -90,26 +107,53 @@ namespace CloudberryKingdom
 		/// Creates a new list with the same elements in a shuffled order;
 		/// </summary>
 		template<typename T>
-		std::vector<T> Shuffle( std::vector<T> &list );
+		std::vector<T> Shuffle( std::vector<T> &list )
+		{
+			std::vector<T> shuffled = std::vector<T>();
+			std::vector<T> copy = std::vector<T>( list );
+
+			for ( int i = 0; i < static_cast<int>( list.size() ); i++ )
+			{
+				// Choose an element to add to the shuffled list
+				int Index = RndInt( 0, static_cast<int>( copy.size() ) - 1 );
+				shuffled.push_back( copy[ Index ] );
+				/*copy.Remove( copy[ Index ] );*/
+				Remove( copy, copy[ Index ] );
+			}
+
+			return shuffled;
+		}
 
 		/// <summary>
 		/// Returns a randomly chosen item from the items given
 		/// </summary>
 		template<typename T>
-		T ChooseOne( std::vector<T> choices );
+		T ChooseOne( std::vector<T> choices )
+		{
+			return choices[ RndInt( 0, choices->Length - 1 ) ];
+		}
 
 		/// <summary>
 		/// Choose n elements from a list.
 		/// </summary>
 		template<typename T>
-		std::vector<T> Choose( std::vector<T> &list, int n );
-		//template<typename T>
-		//T Choose( std::vector<T> list );
+		std::vector<T> Choose( std::vector<T> &list, int n )
+		{
+			std::vector<T> chosen = std::vector<T>( list );
+			for ( int i = 0; i < static_cast<int>( list.size() ) - n; i++ )
+				/*chosen.RemoveAt( RndInt( 0, static_cast<int>( chosen.size() ) - 1 ) );*/
+				chosen.erase( chosen.begin() + RndInt( 0, static_cast<int>( chosen.size() ) - 1 ) );
+
+			return chosen;
+		}
+
 		template<typename T>
-		T Choose( std::vector<T> &list );
+		T Choose( std::vector<T> &list )
+		{
+			return Choose( list, 1 )[ 0 ];
+		}
 
 
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		int Choose( std::vector<int> LevelCutoff, int Level_Renamed );
 
 		int Choose( std::vector<float> Weights );

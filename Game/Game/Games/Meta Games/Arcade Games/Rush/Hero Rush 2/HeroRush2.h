@@ -5,34 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class HeroSpec;
-}
-
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Vector2;
-		}
-	}
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class Challenge_HeroRush2 : public Challenge_HeroRush
 	{
 	private:

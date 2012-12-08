@@ -27,15 +27,7 @@ template<class T>
 inline void Remove( std::vector<T> &v, const T &o )
 {
 	using namespace std;
-	vector<T>::iterator i = std::remove( v.begin(), v.end(), o );
-	v.erase( i, v.end() );
-}
-
-template<class T>
-inline void Remove( std::list<T> &v, const T &o )
-{
-	using namespace std;
-	vector<T>::iterator i = std::remove( v.begin(), v.end(), o );
+	vector<T>::iterator i = remove( v.begin(), v.end(), o );
 	v.erase( i, v.end() );
 }
 
