@@ -1,7 +1,5 @@
 #include <global_header.h>
 
-
-
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
 
 #endif
@@ -18,8 +16,8 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-bool UserPowers::CanSkipScreensaver = false;
-Set<std::wstring> UserPowers::WatchedVideo;
+	bool UserPowers::CanSkipScreensaver = false;
+	Set<std::wstring> UserPowers::WatchedVideo;
 
 	void UserPowers::Set( bool &variable, bool value )
 	{
@@ -654,7 +652,7 @@ bool PlayerManager::HaveFirstPlayer = false;
 		return Players[ static_cast<int>( bob->MyPlayerIndex ) ];
 	}
 
-int Score_Blobs, Score_Coins, Score_Attempts, PlayerManager::Score_Time = 0;
+	int PlayerManager::Score_Blobs = 0, PlayerManager::Score_Coins = 0, PlayerManager::Score_Attempts = 0, PlayerManager::Score_Time = 0;
 
 	void PlayerManager::CalcScore( StatGroup group )
 	{

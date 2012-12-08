@@ -3,10 +3,10 @@
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
-std::shared_ptr<WrappedFloat> Resources::ResourceLoadedCountRef = 0;
-std::shared_ptr<EzFont> Font_Grobold42, Resources::Font_Grobold42_2 = 0;
-std::shared_ptr<EzFont> Resources::LilFont = 0;
+	std::shared_ptr<WrappedBool> Resources::LoadingResources = 0;
+	std::shared_ptr<WrappedFloat> Resources::ResourceLoadedCountRef = 0;
+	std::shared_ptr<EzFont> Resources::Font_Grobold42, Resources::Font_Grobold42_2 = 0;
+	std::shared_ptr<EzFont> Resources::LilFont = 0;
 
 	void Resources::FontLoad()
 	{

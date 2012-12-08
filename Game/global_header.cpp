@@ -1,7 +1,5 @@
 #include "global_header.h"
 
-bool MediaPlayer::IsRepeating = false;
-
 /// <summary>
 /// String Builder
 /// </summary>
@@ -56,3 +54,6 @@ void StringBuilder::Add( long long num, int MinDigits )
 	DigitsToString( DigitsToAppend );
 }
 
+// FIXME: Move to MediaPlayer.cpp. If we ever aren't lazy fucks.
+bool MediaPlayer::IsRepeating = false;
+float MediaPlayer::Volume = 1;

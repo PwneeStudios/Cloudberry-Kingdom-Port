@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+
+
 namespace CloudberryKingdom
 {
 	class StringExtension
@@ -16,11 +18,20 @@ namespace CloudberryKingdom
 	class Vector2Extension
 	{
 	public:
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
 		template<typename T>
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static int IndexMax<T>(this T[] list) where T : IComparable
-		static int IndexMax( std::vector<T> list );
+		static int IndexMax( std::vector<T> list )
+		{
+			T max = list[ 0 ];
+			int index = 0;
+			for ( int i = 1; i < static_cast<int>( list.size() ); i++ )
+				if ( list[ i ]->compare( max ) > 0 )
+				{
+					max = list[ i ];
+					index = i;
+				}
+
+			return index;
+		}
 
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static string ToSimpleString(this Vector2 v)
@@ -55,7 +66,14 @@ namespace CloudberryKingdom
 		/// Choose a random element from the list
 		/// </summary>
 		template<typename T>
-		static T Choose( const std::vector<T> &list, const std::shared_ptr<Rand> &rnd );
+		static T Choose( const std::vector<T> &list, const std::shared_ptr<Rand> &rnd )
+		{
+			if ( rnd == 0 )
+				return list[ 0 ];
+			else
+			//if (list == null || list.Count == 0) return null;
+				return list[ rnd->RndInt( 0, list.size() - 1 ) ];
+		}
 	};
 
 	class DictionaryExtension
@@ -63,7 +81,13 @@ namespace CloudberryKingdom
 	public:
 
 		template<typename TKey, typename TValue>
-		static void AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value );
+		static void AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value )
+		{
+			if ( dict.find( key ) != dict.end() )
+				dict[ key ] = value;
+			else
+				dict.insert( std::make_pair( key, value ) );
+		}
 	};
 
 	class Tools
@@ -88,16 +112,14 @@ namespace CloudberryKingdom
 
 		static void LevelIsFinished();
 
-static void Break();
-static void Write( const std::shared_ptr<Object> &obj );
-//ORIGINAL LINE: public static void Write(string str, params object[] objs)
-//C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-static void Write( const std::wstring &str, ... );
+		static void Break();
+		static void Write( const std::shared_ptr<Object> &obj );
+		static void Write( const std::wstring &str, ... );
 
-static std::wstring DefaultObjectDirectory();
-static std::wstring DefaultDynamicDirectory();
+		static std::wstring DefaultObjectDirectory();
+		static std::wstring DefaultDynamicDirectory();
 
-static std::wstring SourceTextureDirectory();
+		static std::wstring SourceTextureDirectory();
 
 		static std::shared_ptr<AftermathData> CurrentAftermath;
 
@@ -108,34 +130,130 @@ static std::wstring SourceTextureDirectory();
 		static int AutoLoopDelay;
 
 		template<typename T>
-		static void Swap( std::shared_ptr<T> &a, std::shared_ptr<T> &b );
+		static void Swap( T &a, T &b )
+		{
+			T temp = a;
+			a = b;
+			b = temp;
+		}
 
 		template<typename TSource>
-		static TSource Find( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static TSource Find( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		{
+			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+				if ( predicate->Apply( *obj ) )
+					return ( *obj );
+			return TSource();
+		}
 
 		template<typename TSource>
-		static std::vector<TSource> FindAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static std::vector<TSource> FindAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		{
+			std::vector<TSource> newlist = std::vector<TSource>();
+			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+				if ( predicate->Apply( *obj ) )
+					newlist.push_back( *obj );
+			return newlist;
+		}
 
 		template<typename TSource>
-		static bool All( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static bool All( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		{
+			bool all = true;
+			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+				if ( !predicate->Apply( *obj ) )
+					all = false;
+			return all;
+		}
 
 		template<typename TSource>
-		static bool Any( const std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static bool Any( const std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		{
+			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+				if ( predicate->Apply( *obj ) )
+					return true;
+			return false;
+		}
 
 		template<typename TSource>
-		static void RemoveAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate );
+		static void RemoveAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		{
+			int OpenSlot = 0;
+			int i = 0;
+			int N = static_cast<int>( list.size() );
+
+			while ( i < N )
+			{
+				if ( predicate->Apply( list[ i ] ) )
+					i++;
+				else
+				{
+					list[ OpenSlot ] = list[ i ];
+
+					i++;
+					OpenSlot++;
+				}
+			}
+
+			// FIXME: Check if this is isomorphic.
+			//list.RemoveRange( OpenSlot, N - OpenSlot );
+			list.erase( list.begin() + OpenSlot, list.end() );
+		}
+
 		template<typename TSource>
-		static void RemoveAll( std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_2<TSource, int, bool> > &predicate );
-		/// <summary>
-		/// Return the smallest element.
-		/// </summary>
+		static void RemoveAll( std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_2<TSource, int, bool> > &predicate )
+		{
+			int i = 0;
+			int j = 0;
+			int N = static_cast<int>( source.size() );
+			while ( i < N )
+			{
+				while ( j < N && predicate->Apply( source[ j ], j ) )
+					j++;
+
+				if ( j == N )
+					break;
+
+				source[ i ] = source[ j ];
+				i++;
+				j++;
+			}
+
+			if ( i == N )
+				return;
+
+			source.RemoveRange( i, N - i );
+		}
+
 		template<typename TSource>
-		static TSource ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
-		/// <summary>
-		/// Return the largest element.
-		/// </summary>
+		static TSource ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+		{
+			TSource min = TSource();
+			float minval = 0;
+			for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
+				if ( min == 0 || val->Apply( *item ) < minval )
+				{
+					minval = val->Apply( *item );
+					min = *item;
+				}
+
+			return min;
+		}
+
 		template<typename TSource>
-		static TSource ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val );
+		static TSource ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+		{
+			TSource max = TSource();
+			float maxval = 0;
+			for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
+				if ( max == 0 || val->Apply( *item ) > maxval )
+				{
+					maxval = val->Apply( *item );
+					max = *item;
+				}
+
+			return max;
+		}
 
 		static std::shared_ptr<SimpleObject> LoadSimpleObject( const std::wstring &file );
 
