@@ -38,7 +38,6 @@
     <ClCompile Include="Core\Graphics\QuadDrawer.cpp" />
     <ClCompile Include="Core\Graphics\VertexFormat.cpp" />
     <ClCompile Include="Core\Input\ButtonCheck.cpp" />
-    <ClCompile Include="Core\Lambdas\Multicaster.cpp" />
     <ClCompile Include="Core\Particle Effects\Particle.cpp" />
     <ClCompile Include="Core\Particle Effects\ParticleEmitter.cpp" />
     <ClCompile Include="Core\Particle Effects\Specific Effects\CloudberryKingdom.ParticleEffects.cpp" />
@@ -57,7 +56,6 @@
     <ClCompile Include="Core\Tools\ColorHelper.cpp" />
     <ClCompile Include="Core\Tools\CoreMath.cpp" />
     <ClCompile Include="Core\Tools\Random.cpp" />
-    <ClCompile Include="Core\Tools\Set.cpp" />
     <ClCompile Include="Core\Version.cpp" />
     <ClCompile Include="Core\WriteReadTools.cpp" />
     <ClCompile Include="Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.cpp" />
@@ -103,9 +101,8 @@
     <ClCompile Include="Game\Level\Make\LockableBool.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeSingle\MakeFinalDoor_Float.cpp" />
-    <ClCompile Include="Game\Level\Make\MakePiece\MakeThing.cpp" />
     <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeDarkBottom.cpp" />
-    <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor.cpp" />
+    <ClCompile Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.cpp" />
     <ClCompile Include="Game\Level\Make\Parameters\LevelGenData.cpp" />
     <ClCompile Include="Game\Level\Make\Parameters\Param.cpp" />
     <ClCompile Include="Game\Level\Make\Parameters\PresetDifficulties.cpp" />
@@ -153,7 +150,6 @@
     <ClCompile Include="Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyDeleteSeeds.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyQuitLevel.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\InGameStartMenus\Verify\VerifyRemove.cpp" />
-    <ClCompile Include="Game\Menus\Concrete Menus\Loading Screen\ILoadingScreen.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Loading Screen\Loading.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Loading Screen\LoadingScreen.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Score Screens\ScoreDatabase.cpp" />
@@ -163,7 +159,7 @@
     <ClCompile Include="Game\Menus\Concrete Menus\Score Screens\StatsScreen.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\ShopMenu.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\ArcadeMenu.cpp" />
-    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\Doll.cpp" />
+    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\StartMenu_MW_HeroSelect.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Arcade\StartLevelMenu.cpp" />
@@ -239,7 +235,6 @@
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\SuperCheer.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\TimerWarning.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\Template_GameObject.cpp" />
-    <ClCompile Include="Game\Objects\IBounded.cpp" />
     <ClCompile Include="Game\Objects\Icon.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\BaseClasses\_BoxDeath.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\BaseClasses\_CircleDeath.cpp" />
@@ -298,7 +293,6 @@
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\SpikeyLine.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\SpikeyLine__Auto.cpp" />
     <ClCompile Include="Game\Objects\In Game Objects\Obstacles\Spike__Auto.cpp" />
-    <ClCompile Include="Game\Objects\IPrepareToDraw.cpp" />
     <ClCompile Include="Game\Objects\ObjectBase.cpp" />
     <ClCompile Include="Game\Objects\Special\Arrow.cpp" />
     <ClCompile Include="Game\Objects\Special\CameraZone.cpp" />
@@ -321,7 +315,7 @@
     <ClCompile Include="Game\Player\Hero Physics\Jetman.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Meat.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Normal.cpp" />
-    <ClCompile Include="Game\Player\Hero Physics\Random.cpp" />
+    <ClCompile Include="Game\Player\Hero Physics\BobPhsxRandom.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Rocketbox.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Scale.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Small.cpp" />
@@ -423,6 +417,7 @@
     <ClInclude Include="Core\Tools\CoreMath.h" />
     <ClInclude Include="Core\Tools\Random.h" />
     <ClInclude Include="Core\Tools\Set.h" />
+    <ClInclude Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h" />
     <ClInclude Include="Hacks\Compare.h" />
     <ClInclude Include="Hacks\List.h" />
     <ClInclude Include="Hacks\Parse.h" />
@@ -535,7 +530,7 @@
     <ClInclude Include="Game\Menus\Concrete Menus\Score Screens\StatsScreen.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\ShopMenu.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\ArcadeMenu.h" />
-    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\Doll.h" />
+    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroDoll.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\HeroSelectOptions.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\Hero Select\StartMenu_MW_HeroSelect.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\Arcade\StartLevelMenu.h" />
@@ -694,7 +689,7 @@
     <ClInclude Include="Game\Player\Hero Physics\Jetman.h" />
     <ClInclude Include="Game\Player\Hero Physics\Meat.h" />
     <ClInclude Include="Game\Player\Hero Physics\Normal.h" />
-    <ClInclude Include="Game\Player\Hero Physics\Random.h" />
+    <ClInclude Include="Game\Player\Hero Physics\BobPhsxRandom.h" />
     <ClInclude Include="Game\Player\Hero Physics\Rocketbox.h" />
     <ClInclude Include="Game\Player\Hero Physics\Scale.h" />
     <ClInclude Include="Game\Player\Hero Physics\Small.h" />

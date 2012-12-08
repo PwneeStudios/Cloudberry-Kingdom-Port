@@ -215,7 +215,7 @@ public:
 };
 
 /// Gets all supported display modes for the running machine.
-std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
+inline std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
 {
 	// FIXME: Implement.
 	return std::vector<std::shared_ptr<DisplayMode> >();
@@ -1233,7 +1233,7 @@ public:
 #include "Game/Level/Make/MakePiece/MakeThing.h"
 #include "Game/Level/Make/MakePiece/MakeSingle/MakeFinalDoor.h"
 #include "Game/Level/Make/MakePiece/MakeSingle/MakeFinalDoor_Float.h"
-#include "Game/Level/Make/MakePiece/MakeVertical/MakeFinalDoor.h"
+#include "Game/Level/Make/MakePiece/MakeVertical/MakeFinalDoor_Vertical.h"
 #include "Game/Level/Make/MakePiece/MakeVertical/MakeDarkBottom.h"
 #include "Game/Level/Make/Parameters/LevelGenData.h"
 #include "Game/Level/Make/Parameters/Param.h"
@@ -1306,7 +1306,7 @@ public:
 #include "Game/Menus/Concrete Menus/Title Screen/Arcade/ArcadeMenu.h"
 #include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartLevelMenu.h"
 #include "Game/Menus/Concrete Menus/Title Screen/Arcade/StartMenu_MW_Arcade.h"
-#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/Doll.h"
+#include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/HeroDoll.h"
 #include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/HeroSelectOptions.h"
 #include "Game/Menus/Concrete Menus/Title Screen/Arcade/Hero Select/StartMenu_MW_HeroSelect.h"
 #include "Game/Player/Hero Physics/Base.h"
@@ -1447,7 +1447,7 @@ public:
 #include "Game/Player/Hero Physics/Invert.h"
 #include "Game/Player/Hero Physics/Jetman.h"
 #include "Game/Player/Hero Physics/Meat.h"
-#include "Game/Player/Hero Physics/Random.h"
+#include "Game/Player/Hero Physics/BobPhsxRandom.h"
 #include "Game/Player/Hero Physics/Rocketbox.h"
 #include "Game/Player/Hero Physics/Scale.h"
 #include "Game/Player/Hero Physics/Small.h"
