@@ -110,12 +110,12 @@ struct Color
 	static Color Yellow;
 };
 
-Color bColor( unsigned char R, unsigned char G, unsigned char B )
+inline Color bColor( unsigned char R, unsigned char G, unsigned char B )
 {
 	return Color(R, G, B, 255);
 }
 
-Color bColor( unsigned char R, unsigned char G, unsigned char B, unsigned char A )
+inline Color bColor( unsigned char R, unsigned char G, unsigned char B, unsigned char A )
 {
 	return Color(R, G, B, A);
 }

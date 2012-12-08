@@ -215,7 +215,7 @@ public:
 };
 
 /// Gets all supported display modes for the running machine.
-std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
+inline std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
 {
 	// FIXME: Implement.
 	return std::vector<std::shared_ptr<DisplayMode> >();
@@ -675,7 +675,7 @@ public:
 
 };
 
-class Object;
+//class Object;
 class PreparingDeviceSettingsEventArgs;
 
 class PresentationParameters

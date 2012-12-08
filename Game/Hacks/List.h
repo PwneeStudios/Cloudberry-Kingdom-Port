@@ -6,7 +6,7 @@
 #include <vector>
 
 template<class T>
-inline int IndexOf( const std::vector<T> &v, const T &o )
+int IndexOf( const std::vector<T> &v, const T &o )
 {
 	using namespace std;
 
@@ -15,7 +15,7 @@ inline int IndexOf( const std::vector<T> &v, const T &o )
 }
 
 template<class T>
-inline void AddRange( std::vector<T> &dst, const std::vector<T> &src )
+void AddRange( std::vector<T> &dst, const std::vector<T> &src )
 {
 	using namespace std;
 	vector<T>::const_iterator i;
@@ -24,7 +24,7 @@ inline void AddRange( std::vector<T> &dst, const std::vector<T> &src )
 }
 
 template<class T>
-inline void Remove( std::vector<T> &v, const T &o )
+void Remove( std::vector<T> &v, const T &o )
 {
 	using namespace std;
 	vector<T>::iterator i = std::remove( v.begin(), v.end(), o );
@@ -32,7 +32,7 @@ inline void Remove( std::vector<T> &v, const T &o )
 }
 
 template<class T>
-inline void Remove( std::list<T> &v, const T &o )
+void Remove( std::list<T> &v, const T &o )
 {
 	using namespace std;
 	vector<T>::iterator i = std::remove( v.begin(), v.end(), o );
@@ -40,13 +40,13 @@ inline void Remove( std::list<T> &v, const T &o )
 }
 
 template<class T>
-inline void CopyFromTo( const std::vector<T> &v1, std::vector<T> &v2 )
+void CopyFromTo( const std::vector<T> &v1, std::vector<T> &v2 )
 {
 	v2.assign( v1.begin(), v1.end() );
 }
 
 template<class T, class Predicate>
-inline void Sort( std::vector<T> &v, const Predicate &pred )
+void Sort( std::vector<T> &v, const Predicate &pred )
 {
 	std::sort( v.begin(), v.end(), pred );
 }

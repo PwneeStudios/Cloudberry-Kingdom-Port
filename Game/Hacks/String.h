@@ -7,7 +7,7 @@
 #include <string>
 #include <sstream>
 
-int GetHashCode( const std::wstring &s )
+inline int GetHashCode( const std::wstring &s )
 {
 	// FIXME
 	return 0;
@@ -88,7 +88,7 @@ T Parse( const std::wstring &str )
 
 // Specialization for unsigned characters.
 template<>
-unsigned char Parse<unsigned char>( const std::wstring &str )
+inline unsigned char Parse<unsigned char>( const std::wstring &str )
 {
 	using namespace std;
 	wstringstream wss( str );
