@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 			if ( dict.find( key ) != dict.end() )
 				dict[ key ] = value;
 			else
-				dict.insert( make_pair( key, value ) );
+				dict.insert( std::make_pair( key, value ) );
 		}
 	};
 
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 		static int AutoLoopDelay;
 
 		template<typename T>
-		static void Swap( std::shared_ptr<T> &a, std::shared_ptr<T> &b )
+		static void Swap( T &a, T &b )
 		{
 			T temp = a;
 			a = b;
@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 		{
 			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
-					return obj;
+					return ( *obj );
 			return TSource();
 		}
 
@@ -230,7 +230,7 @@ namespace CloudberryKingdom
 		{
 			TSource min = TSource();
 			float minval = 0;
-			for ( std::vector<TSource>:const_iterator item = source.begin(); item != source.end(); ++item )
+			for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
 				if ( min == 0 || val->Apply( *item ) < minval )
 				{
 					minval = val->Apply( *item );

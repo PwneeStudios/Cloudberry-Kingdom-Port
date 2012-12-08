@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	}
 
 	int Hat::Cheap, Hat::Mid, Hat::Expensive = 1000;
-	std::shared_ptr<Hat> Hat::None, Hat::Viking, Hat::Fedora, Hat::Afro, Hat::Halo, Hat::Ghost, Hat::CheckpointHead, Hat::FallingBlockHead, Hat::BlobHead, Hat::MovingBlockHead, Hat::SpikeyHead, Hat::FallingBlock3Head, Hat::Pink, Hat::Bubble, Hat::FireHead, Hat::Horns, Hat::Cloud, Hat::NoHead, Hat::TopHat, Hat::Knight, Hat::Toad, Hat::BubbleBobble, Hat::Brain, Hat::Gosu, Hat::RobinHood, Hat::Rasta, Hat::Pumpkin, Hat::BunnyEars, Hat::Pirate, Hat::Miner, Hat::Glasses, Hat::Antlers, Hat::Arrow, Hat::Bag, Hat::Cone, Hat::Pope, Hat::Rice, Hat::Santa, Hat::Sombrero, Hat::Tiki, Hat::Wizard;
+	std::shared_ptr<Hat> Hat::None, Hat::Viking, Hat::Fedora, Hat::Afro, Hat::Halo, Hat::Ghost, Hat::CheckpointHead, Hat::FallingBlockHead, Hat::BlobHead, Hat::MovingBlockHead, Hat::SpikeyHead, Hat::FallingBlock3Head, Hat::Pink, Hat::Bubble, Hat::FireHead, Hat::Horns, Hat::Cloud_Renamed, Hat::NoHead, Hat::TopHat, Hat::Knight, Hat::Toad, Hat::BubbleBobble, Hat::Brain, Hat::Gosu, Hat::RobinHood, Hat::Rasta, Hat::Pumpkin, Hat::BunnyEars, Hat::Pirate, Hat::Miner, Hat::Glasses, Hat::Antlers, Hat::Arrow_Renamed, Hat::Bag, Hat::Cone, Hat::Pope, Hat::Rice, Hat::Santa, Hat::Sombrero, Hat::Tiki, Hat::Wizard;
 	std::shared_ptr<Hat> Hat::Vandyke, Hat::Beard, Hat::BigBeard, Hat::Goatee, Hat::Mustache;
 
 	std::shared_ptr<EzTexture> Hat::GetTexture()
