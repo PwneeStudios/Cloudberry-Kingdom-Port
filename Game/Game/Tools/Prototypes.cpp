@@ -343,7 +343,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj;
 	std::shared_ptr<FlyingBlob> Prototypes::goomba;
-	std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > Prototypes;
+	std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > Prototypes::bob;
 	std::shared_ptr<Spike> Prototypes::SpikeObj;
 	std::shared_ptr<SimpleObject> Prototypes::GhostBlockObj, Prototypes::CheckpointObj, Prototypes::Door_Renamed, Prototypes::GrassDoor, Prototypes::ArrowObj;
 	std::shared_ptr<ObjectClass> Prototypes::Hero;

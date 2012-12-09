@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	public:
 		static std::shared_ptr<FlyingBlob> FlyingBlobObj;
 		static std::shared_ptr<FlyingBlob> goomba;
-		static std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> > bob;
+		static std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > bob;
 		static std::shared_ptr<Spike> SpikeObj;
 //C# TO C++ CONVERTER NOTE: The variable Door was renamed since it is named the same as a user-defined type:
 		static std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door_Renamed, GrassDoor, ArrowObj;
