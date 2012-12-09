@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
+	std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 
 	void Prototypes::LoadAnimation( const std::wstring &path )
 	{
@@ -341,13 +341,13 @@ std::shared_ptr<ObjectClass> Prototypes::LoadAnimObj = 0;
 		return obj;
 	}
 
-std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj = 0;
-std::shared_ptr<FlyingBlob> Prototypes::goomba = 0;
-std::map<std::shared_ptr<BobPhsx> , std::shared_ptr<Bob> > Prototypes::bob;
-std::shared_ptr<Spike> Prototypes::SpikeObj = 0;
-std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door, GrassDoor, Prototypes::ArrowObj = 0;
-std::shared_ptr<ObjectClass> Prototypes::Hero = 0;
-std::shared_ptr<ObjectClass> Prototypes::PlaceBob = 0;
+	std::shared_ptr<FlyingBlob> Prototypes::FlyingBlobObj;
+	std::shared_ptr<FlyingBlob> Prototypes::goomba;
+	std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > Prototypes;
+	std::shared_ptr<Spike> Prototypes::SpikeObj;
+	std::shared_ptr<SimpleObject> Prototypes::GhostBlockObj, Prototypes::CheckpointObj, Prototypes::Door_Renamed, Prototypes::GrassDoor, Prototypes::ArrowObj;
+	std::shared_ptr<ObjectClass> Prototypes::Hero;
+	std::shared_ptr<ObjectClass> Prototypes::PlaceBob;
 
 	std::shared_ptr<SimpleObject> Prototypes::LoadSimple( const std::wstring &file )
 	{

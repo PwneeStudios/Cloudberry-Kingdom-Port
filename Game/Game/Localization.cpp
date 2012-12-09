@@ -16,6 +16,9 @@ namespace CloudberryKingdom
 		this->MyTexture = MyTexture;
 	}
 
+	std::shared_ptr<ContentManager> Localization::Content;
+	std::vector<std::shared_ptr<SubtitleAction> > Localization::Subtitles;
+
 	const int Localization::NumLanguages = 10;
 	std::map<Localization::Language, std::shared_ptr<LanguageInfo> > Localization::Languages;
 	std::shared_ptr<LanguageInfo> Localization::CurrentLanguage;

@@ -25,6 +25,7 @@ Color Color::Orange( unsigned char( 255 ), unsigned char( 165 ), unsigned char( 
 Color Color::PowderBlue( unsigned char( 176 ), unsigned char( 224 ), unsigned char( 230 ), unsigned char( 255 ) );
 Color Color::Purple( unsigned char( 128 ), unsigned char( 0 ), unsigned char( 128 ), unsigned char( 255 ) );
 Color Color::Red( unsigned char( 255 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ) );
+Color Color::Silver( unsigned char( 192 ), unsigned char( 192 ), unsigned char( 192 ), unsigned char( 255 ) );
 Color Color::SkyBlue( unsigned char( 135 ), unsigned char( 206 ), unsigned char( 235 ), unsigned char( 255 ) );
 Color Color::SpringGreen( unsigned char( 0 ), unsigned char( 255 ), unsigned char( 127 ), unsigned char( 255 ) );
 Color Color::Transparent( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ) );

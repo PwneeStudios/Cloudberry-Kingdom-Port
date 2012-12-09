@@ -1,9 +1,9 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
+
+	Mutex Recycler::MetaBinLock;
 
 	void RecycleBin::Release()
 	{

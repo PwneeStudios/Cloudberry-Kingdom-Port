@@ -323,7 +323,7 @@ namespace CloudberryKingdom
 		MakeDownUpgrades();
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::UpUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::UpUpgrades;
 
 	void DifficultyGroups::MakeUpUpgrades()
 	{
@@ -334,7 +334,7 @@ namespace CloudberryKingdom
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_JUMP, 0, 3, 5, 7.5, 8 ), UpgradeSequenceSingle( Upgrade_SPEED, 0, 3, 5, 8.5, 15 ) ) );
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::DownUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::DownUpgrades;
 
 	void DifficultyGroups::MakeDownUpgrades()
 	{
@@ -345,7 +345,7 @@ namespace CloudberryKingdom
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_JUMP, 0, 3, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, 0, 3, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, 0, 1, 2, 5, 7.3 ) ) );
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::CartUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::CartUpgrades;
 
 	void DifficultyGroups::MakeCartUpgrades()
 	{
@@ -363,7 +363,7 @@ namespace CloudberryKingdom
 			//new UpgradeSequenceSingle(Upgrade.MovingBlock, 1, 2, 3, 6, 9),
 	}
 
-	//std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::EasyUpgrades = 0;
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::EasyUpgrades;
 
 	void DifficultyGroups::MakeEasyUpgrades()
 	{
@@ -412,7 +412,7 @@ namespace CloudberryKingdom
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, 1, 1.5, 2.5, 4, 8 ), UpgradeSequenceSingle( Upgrade_PINKY, 1, 2, 3.5, 6, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3, 4, 9, 10 ), UpgradeSequenceSingle( Upgrade_CEILING, 1, 2, 4, 7, 10 ) ) );
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::NormalUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::NormalUpgrades;
 
 	void DifficultyGroups::MakeNormalUpgrades()
 	{
@@ -480,7 +480,7 @@ namespace CloudberryKingdom
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_BOUNCY_BLOCK, -1, 2, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, 2, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_SPIKE, -1, 2, 4, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, 0, 0, 6, 10 ), UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, 0, 0, 4, 10 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, -1, 0, 0, 3, 6 ) ) );
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::AbusiveUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::AbusiveUpgrades;
 
 	void DifficultyGroups::MakeAbusiveUpgrades()
 	{
@@ -498,7 +498,7 @@ namespace CloudberryKingdom
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, -1, 2, 5, 9 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, -1, 2, 2, 2 ), UpgradeSequenceSingle( Upgrade_LASER, -1, -1, 2, 4, 6 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, -1, 2, 7, 9 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, 6, 8, 9 ), UpgradeSequenceSingle( Upgrade_CEILING, -1, -1, 4, 7, 10 ) ) );
 	}
 
-	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::HardcoreUpgrades = std::vector<UpgradeSequence>();
+	std::vector<DifficultyGroups::UpgradeSequence> DifficultyGroups::HardcoreUpgrades;
 
 	void DifficultyGroups::MakeHardcoreUpgrades()
 	{

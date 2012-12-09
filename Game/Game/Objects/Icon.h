@@ -19,7 +19,6 @@ namespace CloudberryKingdom
 		bool Flipped;
 
 		static std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, SlowMoIcon;
-//C# TO C++ CONVERTER NOTE: The variable CustomHoverIcon was renamed since it is named the same as a user-defined type:
 		static std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, CustomHoverIcon_Renamed;
 		//public static ObjectIcon UncheckedIcon, CheckIcon
 

@@ -43,8 +43,8 @@ namespace CloudberryKingdom
 		CharacterSelectManager::AfterFinished();
 	}
 
-	std::shared_ptr<Lambda> OnBack, CharacterSelectManager::OnDone = 0;
-	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel = 0;
+	std::shared_ptr<Lambda> CharacterSelectManager::OnBack, CharacterSelectManager::OnDone;
+	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel;
 
 	const std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
 
