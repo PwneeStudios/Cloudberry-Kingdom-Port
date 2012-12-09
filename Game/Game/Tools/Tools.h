@@ -94,6 +94,9 @@ namespace CloudberryKingdom
 	class Tools
 	{
 
+	public:
+		static void InitializeStatics();
+
 	private:
 		class RemoveBitsLambda : public LambdaFunc_1<std::wstring, bool>
 		{

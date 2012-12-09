@@ -3,24 +3,13 @@
 
 #include <global_header.h>
 
-namespace Microsoft
-{
-	namespace Xna
-	{
-		namespace Framework
-		{
-			class Color;
-		}
-	}
-}
-
-
-
-
 namespace CloudberryKingdom
 {
 	class Globals
 	{
+	public:
+		static void InitializeStatics();
+
 	public:
 		enum Upgrade
 		{

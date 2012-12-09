@@ -3,6 +3,49 @@
 namespace CloudberryKingdom
 {
 
+	void ButtonCheck::InitializeStatics()
+	{
+		ButtonCheck::MouseInUse = false;
+		ButtonCheck::PrevMouseInUse = false;
+
+		ButtonCheck::Quickspawn_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
+		ButtonCheck::Start_Secondary = Keys_None;
+		ButtonCheck::Go_Secondary = Keys_None;
+		ButtonCheck::Back_Secondary = Keys_None;
+		ButtonCheck::ReplayPrev_Secondary = Keys_None;
+		ButtonCheck::ReplayNext_Secondary = Keys_None;
+		ButtonCheck::ReplayToggle_Secondary = Keys_None;
+		ButtonCheck::SlowMoToggle_Secondary = Keys_None;
+		ButtonCheck::Left_Secondary = Keys_None;
+		ButtonCheck::Right_Secondary = Keys_None;
+		ButtonCheck::Up_Secondary = Keys_None;
+		ButtonCheck::Down_Secondary = Keys_None;
+
+		ButtonCheck::ThresholdSensitivity = .715f;
+
+		ButtonCheck::PreventNextInput = false;
+		ButtonCheck::PreventTimeStamp = 0;
+
+		ButtonCheck::PreLogIn = true;
+	}
+
+	// Statics
+	bool ButtonCheck::MouseInUse;
+	bool ButtonCheck::PrevMouseInUse;
+
+	std::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey;
+	Keys ButtonCheck::Start_Secondary, ButtonCheck::Go_Secondary, ButtonCheck::Back_Secondary, ButtonCheck::ReplayPrev_Secondary, ButtonCheck::ReplayNext_Secondary, ButtonCheck::ReplayToggle_Secondary, ButtonCheck::SlowMoToggle_Secondary, ButtonCheck::Left_Secondary, ButtonCheck::Right_Secondary, ButtonCheck::Up_Secondary, ButtonCheck::Down_Secondary;
+
+	float ButtonCheck::ThresholdSensitivity;
+
+	bool ButtonCheck::PreventNextInput;
+	int ButtonCheck::PreventTimeStamp;
+
+	bool ButtonCheck::PreLogIn;
+
+
+
+
 bool KeyboardExtension::Freeze = false;
 
 	void KeyboardExtension::FreezeInput()
@@ -125,9 +168,6 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		IsKeyboard = true;
 	}
 
-bool ButtonCheck::MouseInUse = false;
-bool ButtonCheck::PrevMouseInUse = false;
-
 	void ButtonCheck::UpdateControllerAndKeyboard_StartOfStep()
 	{
 		// Update controller/keyboard states
@@ -205,9 +245,6 @@ bool ButtonCheck::PrevMouseInUse = false;
 		Start_Secondary = Go_Secondary = Back_Secondary = ReplayPrev_Secondary = ReplayNext_Secondary = SlowMoToggle_Secondary = Left_Secondary = Right_Secondary = Up_Secondary = Down_Secondary = Keys_None;
 	}
 
-std::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
-Keys ButtonCheck::Start_Secondary = Keys_None, ButtonCheck::Go_Secondary = Keys_None, ButtonCheck::Back_Secondary = Keys_None, ButtonCheck::ReplayPrev_Secondary = Keys_None, ButtonCheck::ReplayNext_Secondary = Keys_None, ButtonCheck::ReplayToggle_Secondary = Keys_None, ButtonCheck::SlowMoToggle_Secondary = Keys_None, ButtonCheck::Left_Secondary = Keys_None, ButtonCheck::Right_Secondary = Keys_None, ButtonCheck::Up_Secondary = Keys_None, ButtonCheck::Down_Secondary = Keys_None;
-
 	void ButtonCheck::Reset()
 	{
 		QuickReset_KeyboardKey->Set( Keys_F );
@@ -229,8 +266,6 @@ Keys ButtonCheck::Start_Secondary = Keys_None, ButtonCheck::Go_Secondary = Keys_
 		Up_Secondary = Keys_W;
 		Down_Secondary = Keys_S;
 	}
-
-float ButtonCheck::ThresholdSensitivity = .715f;
 
 	int ButtonCheck::Direction( Vector2 Dir )
 	{
@@ -316,9 +351,6 @@ float ButtonCheck::ThresholdSensitivity = .715f;
 
 		return Dir;
 	}
-
-bool ButtonCheck::PreventNextInput = false;
-int ButtonCheck::PreventTimeStamp = 0;
 
 	void ButtonCheck::PreventInput()
 	{
@@ -421,8 +453,6 @@ int ButtonCheck::PreventTimeStamp = 0;
 
 		return data;
 	}
-
-bool ButtonCheck::PreLogIn = true;
 
 	ButtonData ButtonCheck::State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
 	{

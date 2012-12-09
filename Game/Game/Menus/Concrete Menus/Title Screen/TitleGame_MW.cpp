@@ -3,6 +3,11 @@
 namespace CloudberryKingdom
 {
 
+	void TitleGameData_MW::InitializeStatics()
+	{
+		TitleGameData_MW::Factory = std::make_shared<TitleGameData_MW_Factory>();
+	}
+
 	std::shared_ptr<GameData> TitleGameData_MW_Factory::Make()
 	{
 		return std::make_shared<TitleGameData_MW>();
@@ -18,7 +23,7 @@ namespace CloudberryKingdom
 		tgdmw->_Init();
 	}
 
-	std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory = std::make_shared<TitleGameData_MW_Factory>();
+	std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory;
 
 	void TitleGameData_MW::Release()
 	{

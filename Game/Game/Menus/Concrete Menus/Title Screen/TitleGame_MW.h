@@ -7,12 +7,19 @@ namespace CloudberryKingdom
 {
 	class TitleGameData_MW_Factory : public SimpleGameFactory
 	{
+
 	public:
 		virtual std::shared_ptr<GameData> Make();
+
 	};
 
 	class TitleGameData_MW : public TitleGameData
 	{
+	
+	public:
+		static void InitializeStatics();
+
+
 	private:
 		class _InitProxy : public Lambda
 		{

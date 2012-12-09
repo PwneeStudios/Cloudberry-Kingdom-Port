@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class ComputerRecording : public std::enable_shared_from_this<ComputerRecording>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::stack<std::shared_ptr<ComputerRecording> > Pool;
 

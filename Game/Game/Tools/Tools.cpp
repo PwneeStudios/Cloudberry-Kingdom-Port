@@ -3,6 +3,203 @@
 namespace CloudberryKingdom
 {
 
+	void Tools::InitializeStatics()
+	{
+		Tools::CurrentAftermath = 0;
+		Tools::IsMasochistic = false;
+		Tools::AutoLoop = false;
+		Tools::AutoLoopDelay = 0;
+		Tools::_VolumeFade = 0;
+
+		Tools::CurSongVolume = 0;
+		Tools::SoundVolume, Tools::MusicVolume = 0;
+		Tools::FixedTimeStep = false;
+		Tools::WindowBorder = true;
+		Tools::GameClass = 0;
+		Tools::TheGame = 0;
+
+		std::wstring tempVector2[] = { _T( "A" ), _T( "B" ), _T( "X" ), _T( "Y" ), _T( "RS" ), _T( "LS" ), _T( "RT" ), _T( "LT" ), _T( "RJ" ), _T( "RJ" ), _T( "LJ" ), _T( "LJ" ), _T( "DPad" ), _T( "Start" ) };
+		Tools::ButtonNames = VecFromArray( tempVector2 );
+		std::wstring tempVector3[] = { _T( "right" ), _T( "up" ), _T( "left" ), _T( "down" ) };
+		Tools::DirNames = VecFromArray( tempVector3 );
+		Tools::CurGameType = 0;
+		Tools::CurGameData = 0;
+		Tools::CurLevel = 0;
+		Tools::DummyCamera = 0;
+
+		Tools::WorldMap, Tools::TitleGame;
+		int tempVector4[] = { 0, 0, 0, 0 };
+		Tools::VibrateTimes = VecFromArray( tempVector4 );
+		Tools::DifficultyTypes = DifficultyParam_LENGTH;
+		Tools::StyleTypes = 8;
+		Tools::UpgradeTypes = Upgrade_LENGTH;
+
+		#if defined(WINDOWS)
+		Tools::Keyboard, Tools::PrevKeyboard;
+		#endif
+
+		#if defined(WINDOWS)
+		Tools::Mouse, Tools::PrevMouse;
+		#endif
+
+		#if defined(WINDOWS)
+		Tools::DeltaMouse, Tools::RawDeltaMouse;
+		#endif
+
+		#if defined(WINDOWS)
+		Tools::DeltaScroll = 0;
+		#endif
+
+		#if defined(WINDOWS)
+		Tools::MouseInWindow = false;
+		#endif
+
+		Tools::GamepadState;
+		Tools::PrevGamepadState;
+
+		Tools::gameTime = 0;
+		Tools::GlobalRnd = std::make_shared<Rand>( 0 );
+		Tools::EffectWad = 0;
+		Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
+		Tools::PaintEffect_SpriteBatch = 0;
+		Tools::TextureWad = 0;
+		Tools::SoundContentManager = 0;
+		Tools::SoundWad, Tools::PrivateSoundWad = 0;
+		Tools::SongWad = 0;
+		Tools::QDrawer = 0;
+		Tools::Render = 0;
+		Tools::Device = 0;
+		Tools::DestinationRenderTarget = 0;
+		Tools::t = 0;
+		Tools::dt = 0;
+		Tools::DrawCount = 0;
+		Tools::PhsxCount = 0;
+		Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
+		Tools::SongList_Standard = std::vector<std::shared_ptr<EzSong> >();
+		Tools::FreeCam = false;
+		Tools::DrawBoxes = false;
+		Tools::DrawGraphics = true;
+		Tools::StepControl = false;
+		Tools::_PhsxSpeed = 1;
+	
+		Tools::ShowLoadingScreen = false;
+		Tools::CurrentLoadingScreen = 0;
+
+		Tools::CurVolume = -1;
+	
+		Tools::KillMusicOnLoadingScreen = true;
+		Tools::DoNotKillMusicOnNextLoadingscreen = false;
+
+		Tools::WriteRecursiveDepth = 0;
+		Tools::WriteObjId = 0;
+
+		Tools::GUIDraws = 0;
+		Tools::HoldIllumination = 0;
+
+		Tools::Num_0_to_360 = 0;
+		Tools::Num_0_to_2 = 0;
+		Tools::ShowNums = false;
+
+		Tools::DebugConvenience = false;
+	}
+
+	// Static variables
+	std::shared_ptr<AftermathData> Tools::CurrentAftermath;
+	bool Tools::IsMasochistic;
+	bool Tools::AutoLoop;
+	int Tools::AutoLoopDelay;
+	float Tools::_VolumeFade;
+
+	float Tools::CurSongVolume;
+	std::shared_ptr<WrappedFloat> Tools::SoundVolume, Tools::MusicVolume;
+	bool Tools::FixedTimeStep;
+	bool Tools::WindowBorder;
+	std::shared_ptr<XnaGameClass> Tools::GameClass;
+	std::shared_ptr<CloudberryKingdomGame> Tools::TheGame;
+
+	std::vector<std::wstring> Tools::ButtonNames;
+	std::vector<std::wstring> Tools::DirNames;
+	std::shared_ptr<GameFactory> Tools::CurGameType;
+	std::shared_ptr<GameData> Tools::CurGameData;
+	std::shared_ptr<Level> Tools::CurLevel;
+	std::shared_ptr<Camera> Tools::DummyCamera;
+
+	std::shared_ptr<GameData> Tools::WorldMap, Tools::TitleGame;
+	std::vector<int> Tools::VibrateTimes;
+	int Tools::DifficultyTypes;
+	int Tools::StyleTypes;
+	int Tools::UpgradeTypes;
+
+	#if defined(WINDOWS)
+	KeyboardState Tools::Keyboard, Tools::PrevKeyboard;
+	#endif
+
+	#if defined(WINDOWS)
+	MouseState Tools::Mouse, Tools::PrevMouse;
+	#endif
+
+	#if defined(WINDOWS)
+	Vector2 Tools::DeltaMouse, Tools::RawDeltaMouse;
+	#endif
+
+	#if defined(WINDOWS)
+	int Tools::DeltaScroll;
+	#endif
+
+	#if defined(WINDOWS)
+	bool Tools::MouseInWindow;
+	#endif
+
+	std::vector<GamePadState> Tools::GamepadState;
+	std::vector<GamePadState> Tools::PrevGamepadState;
+
+	std::shared_ptr<GameTime> Tools::gameTime;
+	std::shared_ptr<Rand> Tools::GlobalRnd;
+	std::shared_ptr<EzEffectWad> Tools::EffectWad;
+	std::shared_ptr<EzEffect> Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
+	std::shared_ptr<Effect> Tools::PaintEffect_SpriteBatch;
+	std::shared_ptr<EzTextureWad> Tools::TextureWad;
+	std::shared_ptr<ContentManager> Tools::SoundContentManager;
+	std::shared_ptr<EzSoundWad> Tools::SoundWad, Tools::PrivateSoundWad;
+	std::shared_ptr<EzSongWad> Tools::SongWad;
+	std::shared_ptr<QuadDrawer> Tools::QDrawer;
+	std::shared_ptr<MainRender> Tools::Render;
+	std::shared_ptr<GraphicsDevice> Tools::Device;
+	std::shared_ptr<RenderTarget2D> Tools::DestinationRenderTarget;
+	float Tools::t;
+	float Tools::dt;
+	int Tools::DrawCount;
+	int Tools::PhsxCount;
+	std::shared_ptr<EzSong> Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
+	std::vector<std::shared_ptr<EzSong> > Tools::SongList_Standard;
+	bool Tools::FreeCam;
+	bool Tools::DrawBoxes;
+	bool Tools::DrawGraphics;
+	bool Tools::StepControl;
+	int Tools::_PhsxSpeed;
+	
+	bool Tools::ShowLoadingScreen;
+	std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen;
+
+	float Tools::CurVolume;
+	
+	bool Tools::KillMusicOnLoadingScreen;
+	bool Tools::DoNotKillMusicOnNextLoadingscreen;
+
+	int Tools::WriteRecursiveDepth;
+	int Tools::WriteObjId;
+
+	int Tools::GUIDraws;
+	float Tools::HoldIllumination;
+
+	float Tools::Num_0_to_360;
+	float Tools::Num_0_to_2;
+	bool Tools::ShowNums;
+
+	bool Tools::DebugConvenience;
+
+
+
 	std::wstring StringExtension::Capitalize( const std::wstring &s )
 	{
 		std::wstringstream wss;
@@ -29,12 +226,6 @@ namespace CloudberryKingdom
 			return true;
 		return false;
 	}
-
-	/*template<typename T>
-	T ListExtension::Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd )
-	{
-		return list[ rnd->RndInt( 0, list.size() - 1 ) ];
-	}*/
 
 	Tools::RemoveBitsLambda::RemoveBitsLambda()
 	{
@@ -112,23 +303,18 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::DefaultObjectDirectory()
 	{
-	return Path::Combine( Globals::ContentDirectory, _T( "Objects" ) );
+		return Path::Combine( Globals::ContentDirectory, _T( "Objects" ) );
 	}
 
 	std::wstring Tools::DefaultDynamicDirectory()
 	{
-	return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, _T("DynamicLoad")) );
+		return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, _T("DynamicLoad")) );
 	}
 
 	std::wstring Tools::SourceTextureDirectory()
 	{
-	return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content\\Art") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content\\Art") );
 	}
-
-	std::shared_ptr<AftermathData> Tools::CurrentAftermath = 0;
-	bool Tools::IsMasochistic = false;
-	bool Tools::AutoLoop = false;
-	int Tools::AutoLoopDelay = 0;
 
 	std::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
 	{
@@ -147,8 +333,6 @@ namespace CloudberryKingdom
 		return std::make_shared<SimpleObject>( SourceObject );
 	}
 
-float Tools::_VolumeFade = 0;
-
 	const float &Tools::getVolumeFade()
 	{
 		return _VolumeFade;
@@ -160,13 +344,6 @@ float Tools::_VolumeFade = 0;
 		UpdateVolume();
 	}
 
-	float Tools::CurSongVolume = 0;
-	std::shared_ptr<WrappedFloat> Tools::SoundVolume, Tools::MusicVolume = 0;
-	bool Tools::FixedTimeStep = false;
-	bool Tools::WindowBorder = true;
-	std::shared_ptr<XnaGameClass> Tools::GameClass = 0;
-	std::shared_ptr<CloudberryKingdomGame> Tools::TheGame = 0;
-
 	const Version &Tools::getGameVersion()
 	{
 		return CloudberryKingdomGame::GameVersion;
@@ -176,15 +353,6 @@ float Tools::_VolumeFade = 0;
 	{
 		TheGame->ToDo->Add( todo );
 	}
-
-const std::wstring tempVector2[] = { _T( "A" ), _T( "B" ), _T( "X" ), _T( "Y" ), _T( "RS" ), _T( "LS" ), _T( "RT" ), _T( "LT" ), _T( "RJ" ), _T( "RJ" ), _T( "LJ" ), _T( "LJ" ), _T( "DPad" ), _T( "Start" ) };
-std::vector<std::wstring> Tools::ButtonNames = std::vector<std::wstring>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-const std::wstring tempVector3[] = { _T( "right" ), _T( "up" ), _T( "left" ), _T( "down" ) };
-std::vector<std::wstring> Tools::DirNames = std::vector<std::wstring>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
-std::shared_ptr<GameFactory> Tools::CurGameType = 0;
-std::shared_ptr<GameData> Tools::CurGameData = 0;
-std::shared_ptr<Level> Tools::CurLevel = 0;
-std::shared_ptr<Camera> Tools::DummyCamera = 0;
 
 	const std::shared_ptr<Camera> &Tools::getCurCamera()
 	{
@@ -197,35 +365,6 @@ std::shared_ptr<Camera> Tools::DummyCamera = 0;
 		else
 			return CurLevel->getMainCamera();
 	}
-
-std::shared_ptr<GameData> Tools::WorldMap, Tools::TitleGame;
-const int tempVector4[] = { 0, 0, 0, 0 };
-std::vector<int> Tools::VibrateTimes = std::vector<int>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
-//int Tools::DifficultyTypes = Tools::GetValues<DifficultyParam>()->Count();
-int Tools::DifficultyTypes = DifficultyParam_LENGTH;
-int Tools::StyleTypes = 8;
-//int Tools::UpgradeTypes = Tools::GetValues<Upgrade>()->Count();
-int Tools::UpgradeTypes = Upgrade_LENGTH;
-
-#if defined(WINDOWS)
-KeyboardState Tools::Keyboard, Tools::PrevKeyboard;
-#endif
-
-#if defined(WINDOWS)
-MouseState Tools::Mouse, Tools::PrevMouse;
-#endif
-
-#if defined(WINDOWS)
-Vector2 Tools::DeltaMouse, Tools::RawDeltaMouse;
-#endif
-
-#if defined(WINDOWS)
-int Tools::DeltaScroll = 0;
-#endif
-
-#if defined(WINDOWS)
-bool Tools::MouseInWindow = false;
-#endif
 
 #if defined(WINDOWS)
 	Vector2 Tools::getMousePos()
@@ -409,9 +548,6 @@ bool Tools::MouseInWindow = false;
 	}
 #endif
 
-	std::vector<GamePadState> Tools::GamepadState;
-	std::vector<GamePadState> Tools::PrevGamepadState;
-
 	std::wstring Tools::StripPath( const std::wstring &file )
 	{
 		int LastSlash = file.rfind( _T( "\\" ) );
@@ -458,29 +594,6 @@ bool Tools::MouseInWindow = false;
 		Sound( wss.str() )->Play();
 	}
 
-std::shared_ptr<GameTime> Tools::gameTime = 0;
-std::shared_ptr<Rand> Tools::GlobalRnd = std::make_shared<Rand>( 0 );
-std::shared_ptr<EzEffectWad> Tools::EffectWad = 0;
-std::shared_ptr<EzEffect> Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
-std::shared_ptr<Effect> Tools::PaintEffect_SpriteBatch = 0;
-std::shared_ptr<EzTextureWad> Tools::TextureWad = 0;
-std::shared_ptr<ContentManager> Tools::SoundContentManager = 0;
-std::shared_ptr<EzSoundWad> Tools::SoundWad, Tools::PrivateSoundWad = 0;
-std::shared_ptr<EzSongWad> Tools::SongWad = 0;
-std::shared_ptr<QuadDrawer> Tools::QDrawer = 0;
-std::shared_ptr<MainRender> Tools::Render = 0;
-std::shared_ptr<GraphicsDevice> Tools::Device = 0;
-std::shared_ptr<RenderTarget2D> Tools::DestinationRenderTarget = 0;
-float Tools::t = 0, Tools::dt = 0;
-int Tools::DrawCount = 0, Tools::PhsxCount = 0;
-std::shared_ptr<EzSong> Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
-std::vector<std::shared_ptr<EzSong> > Tools::SongList_Standard = std::vector<std::shared_ptr<EzSong> >();
-bool Tools::FreeCam = false;
-bool Tools::DrawBoxes = false;
-bool Tools::DrawGraphics = true;
-bool Tools::StepControl = false;
-int Tools::_PhsxSpeed = 1;
-
 	const int &Tools::getPhsxSpeed()
 	{
 		return _PhsxSpeed;
@@ -490,9 +603,6 @@ int Tools::_PhsxSpeed = 1;
 	{
 		_PhsxSpeed = value;
 	}
-
-bool Tools::ShowLoadingScreen = false;
-std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 
 	void Tools::LoadBasicArt( const std::shared_ptr<ContentManager> &Content )
 	{
@@ -616,8 +726,6 @@ std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen = 0;
 		return ( TR.X - BL.X ) * ( TR.Y - BL.Y );
 	}
 
-float Tools::CurVolume = -1;
-
 	void Tools::UpdateVolume()
 	{
 		float NewVolume = Tools::MusicVolume->getVal() * Tools::getVolumeFade() * Tools::CurSongVolume;
@@ -629,9 +737,6 @@ float Tools::CurVolume = -1;
 			CurVolume = MediaPlayer::Volume;
 		}
 	}
-
-bool Tools::KillMusicOnLoadingScreen = true;
-bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 
 	void Tools::BeginLoadingScreen( bool KillMusic )
 	{
@@ -813,9 +918,6 @@ bool Tools::DoNotKillMusicOnNextLoadingscreen = false;
 			}
 		}
 	}*/
-
-int Tools::WriteRecursiveDepth = 0;
-int Tools::WriteObjId = 0;
 
 	/*void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
 	{
@@ -1212,9 +1314,6 @@ int Tools::WriteObjId = 0;
 		return pos;
 	}
 
-int Tools::GUIDraws = 0;
-float Tools::HoldIllumination = 0;
-
 	void Tools::StartGUIDraw()
 	{
 		GUIDraws++;
@@ -1318,10 +1417,6 @@ float Tools::HoldIllumination = 0;
 		//colorm = HsvTransform(1f, 1f, 200);
 	}
 
-float Tools::Num_0_to_360 = 0;
-float Tools::Num_0_to_2 = 0;
-bool Tools::ShowNums = false;
-
 	void Tools::ModNums()
 	{
 	#if defined(WINDOWS)
@@ -1334,8 +1429,6 @@ bool Tools::ShowNums = false;
 			ShowNums = true;
 	#endif
 	}
-
-bool Tools::DebugConvenience = false;
 
 	void Tools::SetVibration( PlayerIndex Index, float LeftMotor, float RightMotor, int Duration )
 	{

@@ -3,7 +3,6 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 	class KeyboardExtension
@@ -13,8 +12,6 @@ namespace CloudberryKingdom
 		static void FreezeInput();
 		static void UnfreezeInput();
 
-//C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
-//ORIGINAL LINE: public static bool IsKeyDownCustom(this KeyboardState keyboard, Keys key)
 		static bool IsKeyDownCustom( KeyboardState &keyboard, Keys key );
 	};
 
@@ -78,8 +75,6 @@ public:
 		}
 	};
 
-	
-
 	class ButtonData
 	{
 	public:
@@ -90,12 +85,16 @@ public:
 		float Squeeze;
 		int PressingPlayer;
 	};
+
 	class ButtonCheck
 	{
+	public:
+		static void InitializeStatics();
+
+	public:
 		/// <summary>
 		/// Whether the user is using the mouse. False when the mouse hasn't been used since the arrow keys.
 		/// </summary>
-	public:
 		static bool MouseInUse;
 		static bool PrevMouseInUse;
 

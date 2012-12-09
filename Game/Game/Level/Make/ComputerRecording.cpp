@@ -3,7 +3,15 @@
 namespace CloudberryKingdom
 {
 
-	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool = std::stack<std::shared_ptr<ComputerRecording> >();
+	void ComputerRecording::InitializeStatics()
+	{
+		ComputerRecording::Pool = std::stack<std::shared_ptr<ComputerRecording> >();
+		ComputerRecording::PareDivider = 4;
+	}
+
+	// Statics
+	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool;
+	int ComputerRecording::PareDivider;
 
 	void ComputerRecording::FillPool()
 	{
@@ -45,8 +53,6 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < static_cast<int>( AutoLocs.size() ); i++ )
 			AutoLocs[ i ] += shift;
 	}
-
-	int ComputerRecording::PareDivider = 4;
 
 	void ComputerRecording::Write( const std::shared_ptr<BinaryWriter> &writer, int Length )
 	{
