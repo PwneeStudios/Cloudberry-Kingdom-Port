@@ -87,12 +87,12 @@ namespace CloudberryKingdom
 	std::wstring Localization::WordMarkup( Words Word )
 	{
 		int Size = 80;
-		return Format( _T( "{{p{1},?,{0}}}" ), Size, WordToTextureName( Word ) );
+		return Format( _T( "{p%ls,?,%d}" ), WordToTextureName( Word ).c_str(), Size );
 	}
 
 	std::wstring Localization::WordMarkup( Words Word, int Size )
 	{
-		return Format( _T( "{{p{1},{0},?}}" ), Size, WordToTextureName( Word ) );
+		return Format( _T( "{p%ls,%d,?}" ), WordToTextureName( Word ).c_str(), Size );
 	}
 
 	// FIXME: preinitialize the map with a fixed size?
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 
 			if ( identifier == _T( "show" ) )
 			{
-					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_{0}" ), Index ) );
+					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_%d" ), Index ) );
 					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, ParseFloat( data ), SubtitleTexture ) );
 
 					Index++;

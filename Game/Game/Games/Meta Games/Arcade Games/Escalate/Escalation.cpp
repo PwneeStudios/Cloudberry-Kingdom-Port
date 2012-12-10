@@ -188,7 +188,7 @@ namespace CloudberryKingdom
 		if ( levelindex > StartIndex )
 		{
 			Tools::Warning();
-			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "{1} {0}" ), levelindex + 1, Localization::WordString( Localization::Words_LEVEL ) ) );
+			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_LEVEL ).c_str(), levelindex + 1 ) );
 			Tools::CurGameData->AddGameObject( title );
 
 			if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )

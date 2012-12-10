@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 		std::vector<std::wstring> names = std::vector<std::wstring>( Levels.size() );
 
 		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
-			names[ i ] = Format( _T( "{0:00}" ), Levels[ i ] );
+			names[ i ] = Format( _T( "%02d" ), Levels[ i ] );
 		//names[i] = string.Format("Level {0}", Levels[i]);
 
 		return names;

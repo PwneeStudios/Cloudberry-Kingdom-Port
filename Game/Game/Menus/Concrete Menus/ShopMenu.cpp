@@ -202,7 +202,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		int width = 100, height = 96;
 
 		Vector2 Offset = Vector2();
-		std::wstring offset = Format( _T( "{0},{1}" ), Offset.X, -Offset.Y );
+		std::wstring offset = Format( _T( "%f,%f" ), Offset.X, -Offset.Y );
 
 		std::wstring pic;
 		if ( data->PicTexture != 0 )
@@ -235,7 +235,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		if ( Sold )
 			postfix = _T( "  {c255,100,100,255}Sold!" );
 		else
-			postfix = Format(_T( "  {pCoinBlue,80,?}x {0}" ), buyable->GetPrice() );
+			postfix = Format(_T( "  {pCoinBlue,80,?}x %d" ), buyable->GetPrice() );
 
 		// Replace text and reset item properties
 		std::shared_ptr<EzText> Text = std::make_shared<EzText>( pic + postfix, ItemFont );
@@ -274,7 +274,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 			width = static_cast<float>( static_cast<int>( 100 * hat->HatPicScale.X ) );
 			Offset = hat->HatPicShift * 100;
-			offset = Format( _T( "{0},{1}" ), Offset.X, -Offset.Y );
+			offset = Format( _T( "%f,%f" ), Offset.X, -Offset.Y );
 			pic = _T( "{p" ) + hat->GetTexture()->Name + _T(",") + StringConverterHelper::toString(width) + _T(",?,") + offset + _T("}");
 		}
 		else

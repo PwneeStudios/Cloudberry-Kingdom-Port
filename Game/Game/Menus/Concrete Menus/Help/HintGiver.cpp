@@ -119,9 +119,9 @@ namespace CloudberryKingdom
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)
-		return Format( _T( "Hold {0} and {1} to respawn quickly!" ), ButtonString::LeftBumper( 85 ), ButtonString::RightBumper( 85 ) );
+		return Format( _T( "Hold %ls and %ls to respawn quickly!" ), ButtonString::LeftBumper( 85 ).c_str(), ButtonString::RightBumper( 85 ).c_str() );
 	#else
-		return Format( _T( "Press {0} or {1} or to respawn quickly!" ), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ), ButtonString::KeyStr( Keys_Space, 85 ) );
+		return Format( _T( "Press %ls or %ls to respawn quickly!" ), ButtonString::KeyStr( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey, 85 ).c_str(), ButtonString::KeyStr( Keys_Space, 85 ).c_str() );
 	#endif
 	}
 
@@ -129,9 +129,9 @@ namespace CloudberryKingdom
 	{
 		Tools::Warning();
 	#if defined(NOT_PC)
-		return Format( _T( "Press {0} for powerups!" ), ButtonString::Y( 85 ) );
+		return Format( _T( "Press %ls for powerups!" ), ButtonString::Y( 85 ).c_str() );
 	#else
-		return Format( _T( "Press {0} or {1} for powerups!" ), ButtonString::Y( 85 ), ButtonString::KeyStr( Keys_Enter, 85 ) );
+		return Format( _T( "Press %ls or %ls for powerups!" ), ButtonString::Y( 85 ).c_str(), ButtonString::KeyStr( Keys_Enter, 85 ).c_str() );
 	#endif
 	}
 

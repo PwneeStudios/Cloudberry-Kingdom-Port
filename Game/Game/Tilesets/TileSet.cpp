@@ -538,7 +538,7 @@ namespace CloudberryKingdom
 		}
 		catch ( ... )
 		{
-			Tools::Log( Format( _T( "Could not find {0} of width {1} for tileset {2}" ), _T( "block" ), width, Name ) );
+			Tools::Log( Format( _T( "Could not find %ls of width %f for tileset %ls" ), _T( "block" ), width, Name.c_str() ) );
 			return 0;
 		}
 	}

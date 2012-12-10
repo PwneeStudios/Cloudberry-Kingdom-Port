@@ -61,7 +61,8 @@ namespace CloudberryKingdom
 		int mi = Milliseconds( frames );
 
 		//return string.Format("{0:0}h:{1:00}m:{2:00}.{3:00}", h, m, s, mi);
-		return Format( _T( "{0:0}:{1:00}:{2:00}.{3:00}" ), h, m, s, mi );
+		//return Format( _T( "{0:0}:{1:00}:{2:00}.{3:00}" ), h, m, s, mi );
+		return Format( _T( "%d:%02d:%02d.%03d" ), h, m, s, mi );
 	}
 
 	std::wstring CoreMath::ShortTime( int frames )
@@ -72,13 +73,13 @@ namespace CloudberryKingdom
 		int mi = Milliseconds( frames );
 
 		if ( h > 0 )
-			return Format( _T( "{0:0}:{1:00}:{2:00}.{3:00}" ), h, m, s, mi );
+			return Format( _T( "%d:%02d:%02d.%03d" ), h, m, s, mi );
 		else if ( m > 0 )
-			return Format( _T( "{1:0}:{2:00}" ), h, m, s, mi );
+			return Format( _T( "%d:%02d" ), m, s );
 		else if ( s > 10 )
-			return Format( _T( "{2:0}.{3:0}" ), h, m, s, mi / 10 );
+			return Format( _T( "%d.%d" ), s, mi / 10 );
 		else
-			return Format( _T( "{2:0}.{3:00}" ), h, m, s, mi );
+			return Format( _T( "%d.%02d" ), s, mi );
 	}
 
 	int CoreMath::Hours( int frames )

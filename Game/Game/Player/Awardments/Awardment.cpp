@@ -31,7 +31,13 @@ namespace CloudberryKingdom
 		Awardments::AllCoinsAbusiveCastle = std::make_shared<Awardment>( 16, _T( "Ebenezer" ), _T( "Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + _T( "castle." ), Hat::TopHat );
 		Awardments::NoDeathsNormalCastle = std::make_shared<Awardment>( 17, _T( "Untouchable" ), _T( "Beat an" ) + CampaignHelper::GetName( 2 ) + _T( "castle without dying once." ), Hat::Afro );
 		Awardments::PerfectEasyCastle = std::make_shared<Awardment>( 18, _T( "Perfection" ), _T( "Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + _T( "castle without dying once. Image is everything." ), Hat::Halo );
-		Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( unsigned char( 205 ), unsigned char( 10 ), unsigned char( 10 ) ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( unsigned char( 26 ), unsigned char( 178 ), unsigned char( 231 ) ) ), HeroRush2_LevelUnlock ), std::shared_ptr<Hat>() );
+		Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ),
+			Format( _T( "%lsRequired:%ls\n   Level %d in %lsHero Rush" ),
+			EzText::ColorToMarkup( Color( unsigned char( 205 ), unsigned char( 10 ), unsigned char( 10 ) ) ).c_str(),
+				EzText::ColorToMarkup( Color::White ).c_str(),
+				HeroRush2_LevelUnlock,
+				EzText::ColorToMarkup( Color( unsigned char( 26 ), unsigned char( 178 ), unsigned char( 231 ) ) ).c_str() ),
+			std::shared_ptr<Hat>() );
 	}
 
 	// Statics

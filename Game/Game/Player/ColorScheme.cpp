@@ -137,7 +137,7 @@ namespace CloudberryKingdom
 
 	std::wstring ColorScheme::ToString()
 	{
-		return Format( _T( "\"{0}\", \"{1}\", \"{2}\", \"{3}\", \"{4}\"" ), SkinColor->Name, CapeColor->Name, CapeOutlineColor->Name, HatData->Name, BeardData->Name );
+		return Format( _T( "\"%d\", \"%d\", \"%d\", \"%d\", \"%d\"" ), SkinColor->Name, CapeColor->Name, CapeOutlineColor->Name, HatData->Name, BeardData->Name );
 	}
 
 	int ColorScheme::IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr )
