@@ -40,6 +40,9 @@ namespace CloudberryKingdom
 		{
 
 		public:
+			static void InitializeStatics();
+
+		public:
 			static std::shared_ptr<EzSound> DoubleJump_Sound;
 			static std::shared_ptr<EzSound> BobBoxJump_Sound;
 			static std::shared_ptr<EzSound> BobJetpack_Sound;

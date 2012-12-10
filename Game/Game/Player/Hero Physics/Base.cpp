@@ -5,7 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	
+
+	void BobPhsx::DefaultInfo::InitializeStatics()
+	{
+		BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );
+		BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( _T( "BoxHero_Land" ), 1 );
+		BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( _T( "Jetpack" ),.15f );
+		BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
+	}
+
+	// Statics
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound;
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound;
+	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound;
+	int BobPhsx::DefaultInfo::BobJetpack_SoundDelay;
+
+
 	HeroSpec::HeroSpec()
 	{
 		basetype = 0;
@@ -39,11 +54,6 @@ namespace CloudberryKingdom
 	{
 		return Format( _T( "{0},{1},{2},{3}" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
 	}
-
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( _T( "BoxHero_Land" ), 1 );
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( _T( "Jetpack" ),.15f );
-	int BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
 
 	BobPhsx::CustomPhsxData::DataBounds::DataBounds( float DefaultValue, float MinValue, float MaxValue )
 	{

@@ -66,6 +66,7 @@ namespace CloudberryKingdom
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
 	{
+		BobPhsx::DefaultInfo::InitializeStatics();
 		GameData::InitializeStatics();
 		TitleGameData::InitializeStatics();
 		Recycler::InitializeStatics();
