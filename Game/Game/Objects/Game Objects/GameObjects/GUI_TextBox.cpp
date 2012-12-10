@@ -1,5 +1,6 @@
 #include <global_header.h>
 
+#include "Hacks/Queue.h"
 #include "Hacks/Clipboard.h"
 
 namespace CloudberryKingdom

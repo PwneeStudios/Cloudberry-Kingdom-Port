@@ -18,12 +18,6 @@
 #include <vector>
 #include <tchar.h>
 
-#include <Hacks/Compare.h>
-#include <Hacks/List.h>
-#include <Hacks/Parse.h>
-#include <Hacks/String.h>
-#include <Hacks/Queue.h>
-
 // Syntactic sugar
 namespace CloudberryKingdom
 {
@@ -38,7 +32,7 @@ inline int Sign(int x) { return (x > 0) - (x < 0); }
 inline int Sign(float x) { return (x > 0) - (x < 0); }
 inline int Sign(double x) { return (x > 0) - (x < 0); }
 
-/// Increment an enumeration variable by one.
+// Increment an enumeration variable by one.
 template<typename E>
 inline void Incr( E &e )
 {
@@ -90,67 +84,6 @@ inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
 // Core library.
 #include <Graphics/Color.h>
 #include <Math/Vectors.h>
-
-/*
-#include "Hacks/NET/BinaryReader.h"
-#include "Hacks/NET/File.h"
-#include "Hacks/NET/Random.h"
-#include "Hacks/NET/StreamWriter.h"
-#include "Hacks/NET/Tuple.h"
-#include "Hacks/NET/BinaryWriter.h"
-#include "Hacks/NET/FileStream.h"
-#include "Hacks/NET/Stopwatch.h"
-#include "Hacks/NET/StringBuilder.h"
-#include "Hacks/NET/DateTime.h"
-#include "Hacks/NET/IAsyncResult.h"
-#include "Hacks/NET/Stream.h"
-#include "Hacks/NET/Thread.h"
-#include "Hacks/NET/Directory.h"
-#include "Hacks/NET/Path.h"
-#include "Hacks/NET/StreamReader.h"
-#include "Hacks/NET/TimeSpan.h"
-
-#include "Hacks/XNA/ContentManager.h"
-#include "Hacks/XNA/GameServiceContainer.h"
-#include "Hacks/XNA/SamplerState.h"
-#include "Hacks/XNA/DisplayMode.h"
-#include "Hacks/XNA/GameTime.h"
-#include "Hacks/XNA/SignedInEventArgs.h"
-#include "Hacks/XNA/Effect.h"
-#include "Hacks/XNA/GraphicsDevice.h"
-#include "Hacks/XNA/SignedInGamer.h"
-#include "Hacks/XNA/EffectParameter.h"
-#include "Hacks/XNA/GraphicsDeviceManager.h"
-#include "Hacks/XNA/Song.h"
-#include "Hacks/XNA/EffectPass.h"
-#include "Hacks/XNA/Keyboard.h"
-#include "Hacks/XNA/SoundEffect.h"
-#include "Hacks/XNA/EffectTechnique.h"
-#include "Hacks/XNA/KeyboardState.h"
-#include "Hacks/XNA/SpriteBatch.h"
-#include "Hacks/XNA/Game.h"
-#include "Hacks/XNA/MediaPlayer.h"
-#include "Hacks/XNA/SpriteFont.h"
-#include "Hacks/XNA/GamePad.h"
-#include "Hacks/XNA/Mouse.h"
-#include "Hacks/XNA/StorageContainer.h"
-#include "Hacks/XNA/GamePadButtons.h"
-#include "Hacks/XNA/MouseState.h"
-#include "Hacks/XNA/StorageDevice.h"
-#include "Hacks/XNA/GamePadDPad.h"
-#include "Hacks/XNA/PreparingDeviceSettingsEventArgs.h"
-#include "Hacks/XNA/Texture2D.h"
-#include "Hacks/XNA/GamePadState.h"
-#include "Hacks/XNA/PresentationParameters.h"
-#include "Hacks/XNA/Video.h"
-#include "Hacks/XNA/GamePadThumbSticks.h"
-#include "Hacks/XNA/Rectangle.h"
-#include "Hacks/XNA/VideoPlayer.h"
-#include "Hacks/XNA/GamePadTriggers.h"
-#include "Hacks/XNA/RenderTarget2D.h"
-#include "Hacks/XNA/Viewport.h"
-*/
-
 
 // Cloudberry Kingdom converted files.
 #include "Game/Localization.h"

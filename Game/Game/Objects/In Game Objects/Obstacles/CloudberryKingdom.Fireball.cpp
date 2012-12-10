@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/Queue.h"
+
 #include "Hacks/XNA/Effect.h"
 #include "Hacks/XNA/EffectTechnique.h"
 

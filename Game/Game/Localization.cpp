@@ -1,5 +1,8 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/String.h"
+#include "Hacks/Parse.h"
+
 #include "Hacks/NET/File.h"
 #include "Hacks/NET/Path.h"
 #include "Hacks/FileReader.h"

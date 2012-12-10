@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/List.h"
+
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
 
 #endif

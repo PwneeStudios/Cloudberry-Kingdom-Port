@@ -3,6 +3,7 @@
 
 #include <sstream>
 
+#include "Hacks/NET/DateTime.h"
 
 template <typename T>
 std::wstring ToString( const T &t )
@@ -12,18 +13,26 @@ std::wstring ToString( const T &t )
 	return wss.str();
 }
 
-inline std::wstring ToString( const int i )
+template <>
+inline std::wstring ToString<DateTime>( const DateTime &dt )
 {
-	using namespace std;
-
-	std::wstring s;
-	wstringstream converter;
-
-	converter << i;
-	s = converter.str();
-
-	return s;
+	// FIXME: implement
+	return _T( "" );
 }
+
+//template <typename T>
+//inline std::wstring ToString( const T i )
+//{
+//	using namespace std;
+//
+//	std::wstring s;
+//	wstringstream converter;
+//
+//	converter << i;
+//	s = converter.str();
+//
+//	return s;
+//}
 
 inline int ParseInt( const std::wstring &s )
 {

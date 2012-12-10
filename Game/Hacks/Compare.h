@@ -1,8 +1,6 @@
 #ifndef _COMPARE_H_
 #define _COMPARE_H_
 
-#include <sstream>
-
 template<class T>
 int Compare( const T a, const T b )
 {

@@ -1,6 +1,8 @@
 #ifndef _DATETIME_H_
 #define _DATETIME_H_
 
+#include "Hacks/NET/TimeSpan.h"
+
 struct DateTime
 {
 

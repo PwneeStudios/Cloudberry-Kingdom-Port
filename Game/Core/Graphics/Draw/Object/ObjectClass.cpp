@@ -1,5 +1,8 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/Queue.h"
+#include "Hacks/String.h"
+
 namespace CloudberryKingdom
 {
 

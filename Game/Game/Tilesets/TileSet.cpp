@@ -1,5 +1,9 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/List.h"
+#include "Hacks/String.h"
+#include "Hacks/Parse.h"
+
 #include "Hacks/NET/FileStream.h"
 
 namespace CloudberryKingdom

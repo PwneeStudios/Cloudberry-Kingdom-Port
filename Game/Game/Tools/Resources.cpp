@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/List.h"
+
 #include "Hacks/NET/Path.h"
 #include "Hacks/NET/Directory.h"
 

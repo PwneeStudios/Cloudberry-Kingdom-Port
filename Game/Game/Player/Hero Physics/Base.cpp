@@ -1,5 +1,8 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/String.h"
+#include "Hacks/Parse.h"
+
 namespace CloudberryKingdom
 {
 	

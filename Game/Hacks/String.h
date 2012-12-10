@@ -7,6 +7,8 @@
 #include <string>
 #include <sstream>
 
+#include "Hacks/Parse.h"
+
 inline int GetHashCode( const std::wstring &s )
 {
 	// FIXME
@@ -58,10 +60,104 @@ public:
 
 };
 
-inline std::wstring Format( const wchar_t *fmt, ... )
+//inline std::wstring Format( const wchar_t *fmt, ... )
+//{
+//	// FIXME: Implement this.
+//	return _T( "" );
+//}
+
+template<class T1>
+inline std::wstring Format( std::wstring s, T1 t1 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+
+	return Format( s, params );
+}
+
+template<class T1, class T2>
+inline std::wstring Format( std::wstring s, T1 t1, T2 t2 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+	params.push_back( ToString( t2 ) );
+
+	return Format( s, params );
+}
+
+template<class T1, class T2, class T3>
+inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+	params.push_back( ToString( t2 ) );
+	params.push_back( ToString( t3 ) );
+
+	return Format( s, params );
+}
+
+template<class T1, class T2, class T3, class T4>
+inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3, T4 t4 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+	params.push_back( ToString( t2 ) );
+	params.push_back( ToString( t3 ) );
+	params.push_back( ToString( t4 ) );
+
+	return Format( s, params );
+}
+
+template<class T1, class T2, class T3, class T4, class T5>
+inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+	params.push_back( ToString( t2 ) );
+	params.push_back( ToString( t3 ) );
+	params.push_back( ToString( t4 ) );
+	params.push_back( ToString( t5 ) );
+
+	return Format( s, params );
+}
+
+template<class T1, class T2, class T3, class T4, class T5, class T6>
+inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T6 t6 )
+{
+	std::vector<std::wstring> params;
+	params.push_back( ToString( t1 ) );
+	params.push_back( ToString( t2 ) );
+	params.push_back( ToString( t3 ) );
+	params.push_back( ToString( t4 ) );
+	params.push_back( ToString( t5 ) );
+	params.push_back( ToString( t6 ) );
+
+	return Format( s, params );
+}
+
+inline std::wstring Format( std::wstring s, std::vector<std::wstring> params )
 {
 	// FIXME: Implement this.
 	return _T( "" );
+
+	//using namespace std;
+
+	//for (size_t i = 0; i < s.length(); i++)
+	//{
+	//	if ( s[i] == '{' )
+	//	{
+	//		if ( s[i + 1] == '{' )
+	//			continue;
+	//		else
+
+	//	}
+	//}
+
+	//wstringstream sstream;
+
+	//sstream << t1;
+
+	//return sstream.str();
 }
 
 // FIXME: Do not understand why format doesn't take a wstring like this method (Used in VerifyDeleteSeed.cpp, other Format wouldn't compile)

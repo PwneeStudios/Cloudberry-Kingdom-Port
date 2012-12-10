@@ -1,6 +1,8 @@
 #ifndef _GRAPHICSDEVICE_H_
 #define _GRAPHICSDEVICE_H_
 
+#include "Hacks/Queue.h"
+
 #include "Hacks/XNA/Viewport.h"
 
 class GraphicsDevice
