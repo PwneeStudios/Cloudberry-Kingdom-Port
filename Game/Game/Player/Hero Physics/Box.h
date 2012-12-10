@@ -5,28 +5,28 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxBox : public BobPhsxNormal
+	struct BobPhsxBox : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxBox> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxBox> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxBox> &bob );
 
-		// Instancable class
-	private:
+		// Instancable struct
+	
 		bool InitializedAnim;
 
-	public:
+	
 		BobPhsxBox();
 
 		virtual void DefaultValues();
@@ -35,24 +35,24 @@ namespace CloudberryKingdom
 
 		virtual void DuckingPhsx();
 
-	protected:
+	
 		virtual void ParentDoXAccel();
-	public:
+	
 		virtual void DoXAccel();
 
-	protected:
+	
 		virtual void ParentGenerateInput( int CurPhsxStep );
-	public:
+	
 		virtual void GenerateInput( int CurPhsxStep );
 
-	private:
+	
 		int StandAnim, JumpAnim, DuckAnim;
 		//int StandAnim = 0, JumpAnim = 2, DuckAnim = 3;
 
-	public:
+	
 		virtual void AnimStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

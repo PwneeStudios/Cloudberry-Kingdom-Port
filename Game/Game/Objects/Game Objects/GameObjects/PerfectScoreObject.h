@@ -10,29 +10,29 @@ namespace CloudberryKingdom
 	/// When a level is finished without dying and with every coin grabbed, a bonus is given.
 	/// Doing this multiple times increases the bonus.
 	/// </summary>
-	class PerfectScoreObject : public GUI_Panel
+	struct PerfectScoreObject : public GUI_Panel
 	{
 
 
-	private:
-		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+	
+		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
-		private:
+		
 			std::shared_ptr<PerfectScoreObject> pso;
 
-		public:
+		
 			OnCoinGrabProxy( const std::shared_ptr<PerfectScoreObject> &pso );
 
 			void Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class OnLevelRetryProxy : public Lambda
+	
+		struct OnLevelRetryProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<PerfectScoreObject> pso;
 
-		public:
+		
 			OnLevelRetryProxy( const std::shared_ptr<PerfectScoreObject> &pso );
 
 			void Apply();
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether the players are eligible for the bonus.
 		/// </summary>
-	private:
+	
 		bool Eligible;
 
 		/// <summary>
@@ -51,16 +51,16 @@ namespace CloudberryKingdom
 		void setObtained( const bool &value );
 		bool _Obtained;
 
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
 		/// <summary>
 		/// The base value for the perfect bonus.
 		/// </summary>
-	public:
+	
 		const int &getBaseBonus() const;
 		void setBaseBonus( const int &value );
 		int _BaseBonus;
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The value the next perfect bonus is worth.
 		/// </summary>
-	private:
+	
 		const int &getNextBonus() const;
 		void setNextBonus( const int &value );
 		int _NextBonus;
@@ -92,13 +92,13 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Every time a coin is grabbed check to see if it was the last coin on the level.
 		/// </summary>
-	public:
+	
 		void OnCoinGrab( const std::shared_ptr<ObjectBase> &obj );
 
 		/// <summary>
 		/// The value of the current bonus, factoring in score multipliers the current game might have.
 		/// </summary>
-	private:
+	
 		int BonusValue();
 
 		/// <summary>
@@ -109,21 +109,21 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// If true the player can not get the bonus on this level once they have died once.
 		/// </summary>
-	public:
+	
 		bool IneligibleOnDeath;
 
-	private:
+	
 		int Count;
 		/// <summary>
 		/// When the players die reset the multiplier
 		/// </summary>
-	public:
+	
 		void OnLevelRetry();
 
-	private:
+	
 		void ResetMultiplier();
 
-	public:
+	
 		static bool GlobalObtained;
 		static int GlobalBonus;
 		bool Global;
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 
 		const float getMultiplier() const;
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
 
@@ -143,10 +143,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Return a string representation of the score
 		/// </summary>
-	public:
+	
 		virtual std::wstring ToString();
 
-	private:
+	
 		bool AddedOnce;
 		void OnAdd_GUI();
 
@@ -155,11 +155,11 @@ namespace CloudberryKingdom
 
 		void Init_GUI();
 
-	protected:
+	
 		virtual void MyDraw();
 		#pragma endregion
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

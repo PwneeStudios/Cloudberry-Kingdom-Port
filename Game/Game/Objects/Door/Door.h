@@ -5,26 +5,26 @@
 
 namespace CloudberryKingdom
 {
-	class Door : public ILevelConnector
+	struct Door : public ILevelConnector
 	{
-	public:
-		class ShakeLambda : public Lambda
+	
+		struct ShakeLambda : public Lambda
 		{
-		private:
+		
 			int Length_, Intensity_;
 			bool Sound_;
 			std::shared_ptr<Door> Door_;
 
-		public:
+		
 			ShakeLambda( const std::shared_ptr<Door> &door, int Length, int Intensity, bool Sound );
 
 			void Apply();
 		};
 
-	public:
-		class DoorTileInfo : public TileInfoBase
+	
+		struct DoorTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 			bool Show;
 
@@ -41,19 +41,19 @@ namespace CloudberryKingdom
 			std::shared_ptr<SpriteInfo> Sign_Renamed;
 			bool ShowSign;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			DoorTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		std::shared_ptr<LevelSeedData> _NextLevelSeedData;
-	public:
+	
 		const std::shared_ptr<LevelSeedData> &getNextLevelSeedData() const;
 		void setNextLevelSeedData( const std::shared_ptr<LevelSeedData> &value );
 
@@ -66,31 +66,31 @@ public:
 		/// <summary>
 		/// Block the door immediately after a Bob appears in it, so that the player doesn't accidently go back through.
 		/// </summary>
-	private:
+	
 		bool TemporaryBlock;
 
-	public:
+	
 		bool Locked;
 
 		std::shared_ptr<QuadClass> MyQuad;
 
-	private:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnOpen;
-	public:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > getOnOpen() const;
 		void setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
 
-	private:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnEnter;
-	public:
+	
 		const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &getOnEnter() const;
 		void setOnEnter( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
 		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > ExtraPhsx;
 
-	private:
+	
 		std::shared_ptr<PressNote> MyPressNote;
 
-	public:
+	
 		virtual void MakeNew();
 
 		Vector2 ShiftStart;
@@ -99,13 +99,13 @@ public:
 
 		bool Mirror;
 
-	private:
+	
 		Vector2 HitBoxPadding;
 
 		/// <summary>
 		/// Sets the door to a default type associated with the given tile set.
 		/// </summary>
-	public:
+	
 		void SetDoorType( const std::shared_ptr<TileSet> &TileSetType, const std::shared_ptr<Level> &level );
 
 		Door( bool BoxesOnly );
@@ -117,10 +117,10 @@ public:
 		/// <summary>
 		/// Update the graphical display of the door to reflect whether it's locked or unlocked.
 		/// </summary>
-	private:
+	
 		void SetObjectState();
 
-	public:
+	
 		void HideBobs();
 
 		void ShowBobs();
@@ -138,24 +138,24 @@ public:
 
 		void KillNote();
 
-	private:
+	
 		int ShakeStep, ShakeIntensity;
-	public:
+	
 		void Shake( int Length, int Intensity, bool Sound );
 
-	private:
+	
 		void DoShake();
 
 		int step;
 		bool shake;
 		Vector2 save;
-	public:
+	
 		virtual void PhsxStep();
 
-	private:
+	
 		bool OnScreen();
 
-	public:
+	
 		virtual void Draw();
 
 		/// <summary>
@@ -191,10 +191,10 @@ public:
 		/// <summary>
 		/// How long a player has been near enough to the door to open it.
 		/// </summary>
-	private:
+	
 		int NearCount;
 
-	public:
+	
 		void ClearNote();
 
 		bool NoNote;
@@ -203,7 +203,7 @@ public:
 		/// How many frames to wait while the player is close to the door
 		/// before showing a note that explains how to open the door.
 		/// </summary>
-	private:
+	
 		const int getDelayToShowNote() const;
 
 		/// <summary> This length is used only for the first time a player opens a door. </summary>
@@ -218,7 +218,7 @@ public:
 		/// </summary>
 		static int DoorOperated;
 
-	public:
+	
 		bool UsedOnce;
 
 		/// <summary>
@@ -239,7 +239,7 @@ public:
 
 		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

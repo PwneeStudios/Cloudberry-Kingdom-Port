@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class LevelPiece
+	struct LevelPiece
 	{
-	public:
+	
 		int Par;
 
 		int StartPhsxStep, DelayStart;

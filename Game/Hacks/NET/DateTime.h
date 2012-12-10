@@ -6,7 +6,7 @@
 struct DateTime
 {
 
-public:
+
 	int Time;
 
 	DateTime() : Time( 0 )

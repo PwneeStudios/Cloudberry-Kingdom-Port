@@ -5,49 +5,49 @@
 
 namespace CloudberryKingdom
 {
-	class RecycleBin
+	struct RecycleBin
 	{
-	private:
+	
 		ObjectType MyType;
 		std::vector<std::shared_ptr<ObjectBase> > FullObject, BoxObject;
 
-	public:
+	
 		void Release();
 
 		RecycleBin( ObjectType type );
 
 		std::shared_ptr<ObjectBase> GetObject( bool BoxesOnly );
-	private:
+	
 		std::shared_ptr<ObjectBase> GetObject_BoxesOnly();
 		std::shared_ptr<ObjectBase> GetObject_Graphical();
 		std::shared_ptr<ObjectBase> __GetObject( bool BoxesOnly );
 
-	public:
+	
 		void CollectObject( const std::shared_ptr<ObjectBase> &obj );
 
 		std::shared_ptr<ObjectBase> NewObject( bool BoxesOnly );
 	};
 
-	class Recycler
+	struct Recycler
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		static int MetaCount;
 		static std::vector<std::shared_ptr<Recycler> > MetaBin;
 		static Mutex MetaBinLock;
-	public:
+	
 		static std::shared_ptr<Recycler> GetRecycler();
 		static void ReturnRecycler( const std::shared_ptr<Recycler> &recycler );
 		static void DumpMetaBin();
 
 		//Dictionary<ObjectType, RecycleBin> Bins;
-	private:
+	
 		std::vector<std::shared_ptr<RecycleBin> > Bins;
 
-	public:
+	
 		Recycler();
 
 		void Init();

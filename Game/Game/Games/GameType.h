@@ -6,12 +6,12 @@
 namespace CloudberryKingdom
 {
 
-	class GameFlags
+	struct GameFlags
 	{
 		/// <summary>
 		/// Whether the game has the players tethered
 		/// </summary>
-	public:
+	
 		bool IsTethered;
 
 		/// <summary>
@@ -28,203 +28,203 @@ namespace CloudberryKingdom
 	};
 
 	/// <summary>
-	/// This is the main super-class of the engine.
+	/// This is the main super-struct of the engine.
 	/// Whenever a player is playing, they are in a 'Game'.
-	/// A Game consists of at least one level (a Level class instance),
+	/// A Game consists of at least one level (a Level struct instance),
 	/// as well as some goal or purpose: getting to a door, collecting coins, surviving, or building a level, etc.
-	/// The game class holds the levels and purpose of the level.
-	/// Different purposes are implemented as children classes of the main GameData class.
+	/// The game struct holds the levels and purpose of the level.
+	/// Different purposes are implemented as children classes of the main GameData struct.
 	/// </summary>
-	class GameData : public std::enable_shared_from_this<GameData>
+	struct GameData : public std::enable_shared_from_this<GameData>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class AddScoreLambda : public Lambda
+	
+		struct AddScoreLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game;
 			std::shared_ptr<Door> door;
 
-		public:
+		
 			AddScoreLambda( const std::shared_ptr<GameData> &game, const std::shared_ptr<Door> &door );
 
 			void Apply();
 		};
 
-	private:
-		class FinishProxy : public Lambda_1<bool>
+	
+		struct FinishProxy : public Lambda_1<bool>
 		{
-		private:
+		
 			std::shared_ptr<GameData> gt;
 
-		public:
+		
 			FinishProxy( const std::shared_ptr<GameData> &gt );
 
 			void Apply( const bool &Replay );
 		};
 
-	private:
-		class PlayWorldMapMusicLambda : public Lambda
+	
+		struct PlayWorldMapMusicLambda : public Lambda
 		{
-		public:
+		
 			PlayWorldMapMusicLambda();
 
 			void Apply();
 		};
 
-	private:
-		class PlayAgainLambda : public Lambda
+	
+		struct PlayAgainLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> parentgame;
-		public:
+		
 			PlayAgainLambda( const std::shared_ptr<GameData> &parentgame );
 
 			void Apply();
 		};
 
-	private:
-		class ReleaseThisLambda : public Lambda
+	
+		struct ReleaseThisLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game;
 
-		public:
+		
 			ReleaseThisLambda( const std::shared_ptr<GameData> &game );
 
 			void Apply();
 		};
 
-	private:
-		class WaitThenDoCoversion : public LambdaFunc<bool>
+	
+		struct WaitThenDoCoversion : public LambdaFunc<bool>
 		{
-		private:
+		
 			int WaitLength_, Count_;
 			std::shared_ptr<Lambda> f_;
 
-		public:
+		
 			WaitThenDoCoversion( int WaitLength, const std::shared_ptr<Lambda> &f );
 
 			bool Apply();
 		};
 
-	private:
-		class WaitThenAddToToDoLambda : public Lambda
+	
+		struct WaitThenAddToToDoLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game;
 			std::shared_ptr<LambdaFunc<bool> > f;
 
-		public:
+		
 			WaitThenAddToToDoLambda( const std::shared_ptr<GameData> &game, const std::shared_ptr<LambdaFunc<bool> > &f );
 
 			void Apply();
 		};
 
-	private:
-		class FadeInAndDoAction : public Lambda
+	
+		struct FadeInAndDoAction : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game;
 			std::shared_ptr<Lambda> OnBlack;
 			float speed;
 			float TargetOpaqueness;
 
-		public:
+		
 			FadeInAndDoAction( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &OnBlack, float speed, float TargetOpaqueness );
 
 			void Apply();
 		};
 
-	private:
-		class SlideInLambda : public Lambda
+	
+		struct SlideInLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu_MW_Black> black;
 
-		public:
+		
 			SlideInLambda( const std::shared_ptr<StartMenu_MW_Black> &black );
 
 			void Apply();
 		};
 
-	private:
-		class FadeInAfterBlack : public Lambda
+	
+		struct FadeInAfterBlack : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu_MW_Black> black;
 			std::shared_ptr<Lambda> OnBlack;
 			std::shared_ptr<GameData> game;
 
-		public:
+		
 			FadeInAfterBlack( const std::shared_ptr<StartMenu_MW_Black> &black, const std::shared_ptr<Lambda> &OnBlack, const std::shared_ptr<GameData> &game );
 
 			void Apply();
 		};
 
-	private:
-		class ConvertLambdaToLambdaFuncTrue : public LambdaFunc<bool>
+	
+		struct ConvertLambdaToLambdaFuncTrue : public LambdaFunc<bool>
 		{
-		private:
+		
 			std::shared_ptr<Lambda> f_;
-		public:
+		
 			ConvertLambdaToLambdaFuncTrue( const std::shared_ptr<Lambda> &f );
 
 			bool Apply();
 		};
 
-	public:
+	
 		enum BankType
 		{
 			BankType_CAMPAIGN,
 			BankType_INFINITE
 		};
-	private:
-		class FindTargetBobLambda : public LambdaFunc_1<std::shared_ptr<Bob>, bool>
+	
+		struct FindTargetBobLambda : public LambdaFunc_1<std::shared_ptr<Bob>, bool>
 		{
-		private:
+		
 			std::shared_ptr<Bob> Player;
-		public:
+		
 			FindTargetBobLambda( const std::shared_ptr<Bob> &Player );
 
 			bool Apply( const std::shared_ptr<Bob> &bob );
 		};
 
-	private:
-		class RemoveMarkedLambda : public LambdaFunc_1<std::shared_ptr<GameObject>, bool>
+	
+		struct RemoveMarkedLambda : public LambdaFunc_1<std::shared_ptr<GameObject>, bool>
 		{
-		public:
+		
 			RemoveMarkedLambda();
 
 			bool Apply( const std::shared_ptr<GameObject> &obj );
 		};
 
-	private:
-		class FadeToBlackLambda : public Lambda
+	
+		struct FadeToBlackLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game_;
 			float FadeOutSpeed_;
 
-		public:
+		
 			FadeToBlackLambda( const std::shared_ptr<GameData> &game, float FadeOutSpeed );
 
 			void Apply();
 		};
 
-	private:
-		class GetCampaignStatsScoreLambda : public LambdaFunc_1<std::shared_ptr<PlayerData>, float>
+	
+		struct GetCampaignStatsScoreLambda : public LambdaFunc_1<std::shared_ptr<PlayerData>, float>
 		{
-		public:
+		
 			GetCampaignStatsScoreLambda();
 
 			float Apply( const std::shared_ptr<PlayerData> &p );
 		};
 
-	public:
+	
 		enum DeathTime
 		{
 			DeathTime_FOREVER,
@@ -235,59 +235,59 @@ namespace CloudberryKingdom
 			DeathTime_SUPER_FAST
 		};
 
-	private:
-		class OpenDoorAndShowBobsLambda : public Lambda
+	
+		struct OpenDoorAndShowBobsLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Level> MyLevel_;
 			std::shared_ptr<Door> Door_;
 			std::shared_ptr<GameData> Game_;
 
-		public:
+		
 			OpenDoorAndShowBobsLambda( const std::shared_ptr<Level> &MyLevel, const std::shared_ptr<Door> &door, const std::shared_ptr<GameData> &game );
 
 			void Apply();
 		};
 
-	private:
-		class DramaticEntryLambda : public Lambda
+	
+		struct DramaticEntryLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> Game_;
 			int Wait_;
 			std::shared_ptr<Door> Door_;
 
-		public:
+		
 			DramaticEntryLambda( const std::shared_ptr<GameData> &game, int Wait, const std::shared_ptr<Door> &door );
 
 			void Apply();
 		};
 
-	private:
-		class DramaticEntryEnterLambda : public Lambda
+	
+		struct DramaticEntryEnterLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Door> Door_;
 
-		public:
+		
 			DramaticEntryEnterLambda( const std::shared_ptr<Door> &door );
 
 			void Apply();
 		};
 
-	public:
+	
 		/// <summary>
 		/// Whether the game has lava.
 		/// </summary>
 		bool HasLava;
 
-	protected:
+	
 		//void KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e );
 
 		/// <summary>
 		/// True when a single player has successfully navigated the level.
 		/// </summary>
-	public:
+	
 		bool HasBeenCompleted;
 
 		/// <summary>
@@ -342,10 +342,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The previous action fed to PlayGame (typically a call to load a game)
 		/// </summary>
-	private:
+	
 		std::shared_ptr<Lambda> PreviousLoadFunction;
 
-	public:
+	
 		void ClearPreviousLoadFunction();
 
 		/// <summary>
@@ -388,7 +388,7 @@ namespace CloudberryKingdom
 
 		/// <summary>
 		/// If true the player can not quick spawn.
-		/// Use the External bool if suppressing quickspawn from outside the game class.
+		/// Use the External bool if suppressing quickspawn from outside the game struct.
 		/// </summary>
 		bool SuppressQuickSpawn, SuppressQuickSpawn_External;
 
@@ -431,13 +431,13 @@ namespace CloudberryKingdom
 		/// </summary>
 		const Vector2 getCamPos() const;
 
-	private:
+	
 		std::shared_ptr<QuadClass> BlackQuad;
 		BasePoint BlackBase;
-	protected:
+	
 		float BlackAlpha, FadeOutSpeed, FadeInSpeed;
 		bool FadingToBlack, FadingIn;
-	public:
+	
 		std::shared_ptr<FancyColor> FadeColor;
 
 		bool IsFading();
@@ -487,13 +487,13 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called at the beginning over every time step to calculate the coin score multiplier
 		/// </summary>
-	private:
+	
 		void CalculateCoinScoreMultiplier();
 
 		/// <summary>
 		/// Values added to a player's score are multiplied by this value.
 		/// </summary>
-	public:
+	
 		float ScoreMultiplier;
 		/// <summary>
 		/// Event handler. Activates when this game recalculates it's score multiplier.
@@ -503,13 +503,13 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called at the beginning over every time step to calculate the score multiplier
 		/// </summary>
-	private:
+	
 		void CalculateScoreMultiplier();
 
 		/// <summary>
 		/// Event handler. Activates when a Checkpoint is grabbed. Argument is the IObject that is a Checkpoint.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Multicaster_1<std::shared_ptr<ObjectBase> > > OnCheckpointGrab;
 		/// <summary>
 		/// Call this when a Checkpoint is grabbed to activate the Checkpoint grabbed event handler.
@@ -576,18 +576,18 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<ToDoItem> > &getToDo();
 
 		std::vector<std::shared_ptr<Lambda> > ToDoOnReset;
-	private:
+	
 		void DoToDoOnResetList();
 
-	public:
+	
 		static int CurItemStep;
-	private:
+	
 		void DoToDoList();
 
 		/// <summary>
 		/// Remove all ToDo items with the given name
 		/// </summary>
-	public:
+	
 		void KillToDo( const std::wstring &name );
 
 		/// <summary>
@@ -595,7 +595,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::vector<std::shared_ptr<ToDoItem> > ToDoFindAll( const std::wstring &name );
 
-	private:
+	
 		bool DoingToDoList;
 
 		/// <summary>
@@ -604,7 +604,7 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<ToDoItem> > NextToDo;
 		std::vector<std::shared_ptr<ToDoItem> > CurToDo;
 
-	public:
+	
 		std::shared_ptr<BobPhsx> DefaultHeroType;
 
 		bool Released;
@@ -621,7 +621,7 @@ namespace CloudberryKingdom
 		int CreationTime;
 		GameData();
 
-	private:
+	
 		bool GameObjectsAreLocked;
 		/// <summary>
 		/// Lock or unlock the GameObject list
@@ -629,21 +629,21 @@ namespace CloudberryKingdom
 		/// <param name="Lock"></param>
 		void LockGameObjects( bool Lock );
 
-	public:
+	
 		void AddGameObject( const std::shared_ptr<GameObject> &obj );
 
 		bool SkipBackgroundPhsx;
 		virtual void BackgroundPhsx();
 
-	private:
+	
 		int SetToReturnToCode;
 
 		bool _IsSetToReturnTo;
 		const bool &getIsSetToReturnTo() const;
 		void setIsSetToReturnTo( const bool &value );
-	protected:
+	
 		std::shared_ptr<GameData> PrevGame;
-	public:
+	
 		virtual void SetToReturnTo( int code );
 
 		static bool LockLevelStart;
@@ -683,13 +683,13 @@ namespace CloudberryKingdom
 		void QuickJoinPhsx();
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	private:
+	
 		void UpdateSignedInPlayers();
 #endif
 		/// <summary>
 		/// Whether the game is paused or not.
 		/// </summary>
-	public:
+	
 		bool PauseGame;
 
 		virtual void UpdateGamePause();
@@ -722,10 +722,10 @@ namespace CloudberryKingdom
 		int PhsxCount;
 		virtual void PhsxStep();
 
-	private:
+	
 		void CleanGameObjects();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Init();
@@ -758,10 +758,10 @@ namespace CloudberryKingdom
 		bool DoForceZoom;
 		float ForceTargetZoom;
 
-	private:
+	
 		void CalculateForceZoom();
 
-	public:
+	
 		virtual void PostDraw();
 
 		virtual void BobDie( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob );
@@ -770,13 +770,13 @@ namespace CloudberryKingdom
 		/// A list of actions to take immediately after the last player alive dies.
 		/// </summary>
 		std::vector<std::shared_ptr<Lambda> > ToDoOnDeath;
-	private:
+	
 		void DoToDoOnDeathList();
 
 		/// <summary>
 		/// How far below the screen a dead player must drop before being officially dead.
 		/// </summary>
-	public:
+	
 		float DoneDyingDistance;
 
 		/// <summary>
@@ -787,33 +787,33 @@ namespace CloudberryKingdom
 		virtual void BobDoneDying( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob );
 
 		std::vector<std::shared_ptr<Lambda> > ToDoOnDoneDying;
-	private:
+	
 		void DoToDoOnDoneDyingList();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	public:
+	
 		virtual void OnSignOut( const std::shared_ptr<SignedOutEventArgs> &e );
 #endif
 
-	protected:
+	
 		bool OnePast( float x );
 
 		bool AllPast( float x );
 
-	public:
+	
 		std::shared_ptr<PlayerData> getMvp() const;
 
 		std::shared_ptr<Bob> getMvpBob() const;
 
-	protected:
+	
 		bool MvpOnly;
-	public:
+	
 		virtual void MakeBobs( const std::shared_ptr<Level> &level );
 
-	private:
+	
 		int CreateBob( const std::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j );
 
-	public:
+	
 		virtual void SetAdditionalBobParameters( BobVec &Bobs );
 
 		static std::shared_ptr<GameData> StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed );
@@ -837,40 +837,40 @@ namespace CloudberryKingdom
 		virtual void EnterFrom( const std::shared_ptr<Door> &door );
 		virtual void EnterFrom( const std::shared_ptr<Door> &door, int Wait );
 
-	private:
+	
 		static std::vector<int> DramaticEntryWait;
 		static Vector2 DramaticEntryVel;
 		void SetDramaticEntryParams();
-	public:
+	
 		virtual int DramaticEntry( const std::shared_ptr<Door> &door, int Wait );
 
-	private:
+	
 		void MoveAndUpdateBobs();
 
-	public:
+	
 		void HideBobs();
 
 		void ShowBobs();
 		#pragma endregion
 
 		#pragma region Helper functions for making trailer
-	protected:
+	
 		void LoadRecording( const std::wstring &RecordingName );
 		#pragma endregion
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class GameFactory
+	struct GameFactory
 	{
-	public:
+	
 		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
-	class SimpleGameFactory
+	struct SimpleGameFactory
 	{
-	public:
+	
 		virtual std::shared_ptr<GameData> Make();
 	};
 

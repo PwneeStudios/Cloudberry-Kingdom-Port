@@ -5,19 +5,19 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class Camera;
+	struct Camera;
 }
 
 namespace CloudberryKingdom
 {
-	class TextList : public ObjectBase
+	struct TextList : public ObjectBase
 	{
-	public:
+	
 		virtual void Release();
 
 		std::vector<EzText*> Text;

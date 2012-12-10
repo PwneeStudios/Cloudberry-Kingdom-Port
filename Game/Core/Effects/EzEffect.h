@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class EzEffect
+	struct EzEffect
 	{
-	public:
+	
 		// FIXME: Pointer to the parent; should be weak_ptr.
 		EzEffectWad *MyWad;
 
@@ -35,10 +35,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<EzTexture> ExtraTexture2;
 		void SetExtraTexture2( const std::shared_ptr<EzTexture> &texture );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		EzEffect()
 		{
 			InitializeInstanceFields();

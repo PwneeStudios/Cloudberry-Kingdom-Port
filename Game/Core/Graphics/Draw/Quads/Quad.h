@@ -8,42 +8,42 @@
 
 namespace CloudberryKingdom
 {
-	class Quad : public BaseQuad
+	struct Quad : public BaseQuad
 	{
-	private:
-		class UpdateCenterLambda : public Lambda_1<Vector2>
+	
+		struct UpdateCenterLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Quad> quad;
-		public:
+		
 			UpdateCenterLambda( const std::shared_ptr<Quad> &quad );
 
 			void Apply( const Vector2 &NewPos );
 		};
 
-	private:
-		class UpdatexAxisLambda : public Lambda_1<Vector2>
+	
+		struct UpdatexAxisLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Quad> quad;
-		public:
+		
 			UpdatexAxisLambda( const std::shared_ptr<Quad> &quad );
 
 			void Apply( const Vector2 &NewPos );
 		};
 
-	private:
-		class UpdateyAxisLambda : public Lambda_1<Vector2>
+	
+		struct UpdateyAxisLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Quad> quad;
-		public:
+		
 			UpdateyAxisLambda( const std::shared_ptr<Quad> &quad );
 
 			void Apply( const Vector2 &NewPos );
 		};
 
-	public:
+	
 		std::shared_ptr<ObjectVector> Center, xAxis, yAxis;
 		std::vector<std::shared_ptr<ObjectVector> > Corner;
 
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 
 		virtual void Record( int anim, int frame, bool UseRelativeCoords );
 
-	private:
+	
 		void ModifyAxis( const std::shared_ptr<ObjectVector> &axis, int anim, int frame, ChangeMode RecordMode );
 
 		Vector2 ToAxisCoordinates( Vector2 v, Vector2 xAxisPos, Vector2 yAxisPos );
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 
 		void ModifyPoint( const std::shared_ptr<ObjectVector> &point, int anim, int frame, ChangeMode RecordMode );
 
-	public:
+	
 		void ModifyAllRecords( int anim, int frame, ChangeMode RecordMode );
 
 		void ShowChildren();
@@ -117,10 +117,10 @@ namespace CloudberryKingdom
 		virtual void FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad );
 		virtual void FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames );
 
-	private:
+	
 		void InitVertices();
 
-	public:
+	
 		void ScaleCorners( Vector2 size );
 
 		Quad( const std::shared_ptr<Quad> &quad, bool DeepClone );

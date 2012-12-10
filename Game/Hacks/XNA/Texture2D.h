@@ -3,9 +3,9 @@
 
 #include "Hacks/XNA/GraphicsDevice.h"
 
-class Texture2D
+struct Texture2D
 {
-public:
+
 
 	int Width;
 

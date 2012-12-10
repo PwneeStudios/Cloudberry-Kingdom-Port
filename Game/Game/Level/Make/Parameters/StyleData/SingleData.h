@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 
@@ -13,16 +13,16 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class SingleData : public StyleData
+	struct SingleData : public StyleData
 	{
-	public:
+	
 		Vector2 InitialDoorYRange;
 
 		SingleData( const std::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

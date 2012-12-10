@@ -6,21 +6,21 @@
 namespace CloudberryKingdom
 {
 
-	class StyleData : public std::enable_shared_from_this<StyleData>
+	struct StyleData : public std::enable_shared_from_this<StyleData>
 	{
 
-	public:
+	
 		enum FinalPlatsType
 		{
 			FinalPlatsType_DOOR,
 			FinalPlatsType_DARK_BOTTOM
 		};
-	public:
+	
 		enum FinalDoorStyle
 		{
 			FinalDoorStyle_NORMAL
 		};
-	public:
+	
 		enum InitialPlatsType
 		{
 			InitialPlatsType_NORMAL,
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 			InitialPlatsType_SPACESHIP,
 			InitialPlatsType_UP_TILED_FLOOR
 		};
-	public:
+	
 		enum GroundType
 		{
 			GroundType_NONE,
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 			GroundType_VIRGIN_USED,
 			GroundType_INVERT_SAFETY_NET
 		};
-	public:
+	
 		enum _BlockFillType
 		{
 			_BlockFillType_REGULAR,
@@ -48,20 +48,20 @@ namespace CloudberryKingdom
 			_BlockFillType_INVERTABLE,
 			_BlockFillType_SIDEWAYS
 		};
-	public:
+	
 		enum _OverlapCleanupType
 		{
 			_OverlapCleanupType_REGULAR,
 			_OverlapCleanupType_SOPHISTICATED
 		};
-	public:
+	
 		enum _SparsityType
 		{
 			_SparsityType_REGULAR,
 			_SparsityType_LIL_SPARSE,
 			_SparsityType_VERY_SPARSE
 		};
-	public:
+	
 		enum _MoveTypePeriod
 		{
 			_MoveTypePeriod_INF,
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 			_MoveTypePeriod_NORMAL2,
 			_MoveTypePeriod_LENGTH
 		};
-	public:
+	
 		enum _MoveTypeInnerPeriod
 		{
 			_MoveTypeInnerPeriod_LONG,
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 			_MoveTypeInnerPeriod_NORMAL,
 			_MoveTypeInnerPeriod_LENGTH
 		};
-	public:
+	
 		enum _PauseType
 		{
 			_PauseType_NONE,
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 			_PauseType_NORMAL2,
 			_PauseType_LENGTH
 		};
-	public:
+	
 		enum _ReverseType
 		{
 			_ReverseType_NONE,
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 			_ReverseType_NORMAL3,
 			_ReverseType_LENGTH
 		};
-	public:
+	
 		enum _JumpType
 		{
 			_JumpType_ALWAYS,
@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 			_JumpType_NORMAL2,
 			_JumpType_LENGTH
 		};
-	public:
+	
 		enum _ElevatorSwitchType
 		{
 			_ElevatorSwitchType_RANDOM,
@@ -113,21 +113,21 @@ namespace CloudberryKingdom
 			_ElevatorSwitchType_ALL_UP,
 			_ElevatorSwitchType_ALL_DOWN
 		};
-	public:
+	
 		enum _OffsetType
 		{
 			_OffsetType_RANDOM,
 			_OffsetType_ALL_SAME,
 			_OffsetType_SPATIALLY_PERIODIC
 		};
-	public:
+	
 		enum _FillType
 		{
 			_FillType_RND,
 			_FillType_HALFN_HALF,
 			_FillType_PURE
 		};
-	public:
+	
 		enum _SinglePathType
 		{
 			_SinglePathType_NORMAL,
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 			_SinglePathType_MID,
 			_SinglePathType_HIGH
 		};
-	public:
+	
 		enum _DoublePathType
 		{
 			_DoublePathType_SEPARATED,
@@ -143,14 +143,14 @@ namespace CloudberryKingdom
 			_DoublePathType_INDEPENDENT,
 			_DoublePathType_LENGTH
 		};
-	public:
+	
 		enum _TriplePathType
 		{
 			_TriplePathType_SEPARATED,
 			_TriplePathType_INDEPENDENT,
 			_TriplePathType_LENGTH
 		};
-	public:
+	
 		enum _StartType
 		{
 			_StartType_TOP,
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A callback to modify AutoGen parameters after they have been set
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > > MyModParams;
 
 		void Release();
@@ -225,18 +225,18 @@ namespace CloudberryKingdom
 		bool RemoveBlockOnOverlap;
 		float MinBlockDist;
 
-	private:
+	
 		std::vector<float> BlockFillTypeRatio;
-	public:
+	
 		_BlockFillType BlockFillType;
 
 		_OverlapCleanupType OverlapCleanupType;
 
 
-	private:
+	
 		std::vector<float> Sparsity;
 		std::vector<float> SparsityTypeRatio;
-	public:
+	
 		_SparsityType SparsityType;
 
 		/// <summary>
@@ -257,21 +257,21 @@ namespace CloudberryKingdom
 		_JumpType JumpType;
 
 		_ElevatorSwitchType ElevatorSwitchType;
-	private:
+	
 		std::vector<float> ElevatorSwitchTypeRatio;
 
-	public:
+	
 		_OffsetType PendulumOffsetType, FlyingBlobOffsetType;
-	private:
+	
 		std::vector<float> OffsetTypeRatio;
 
 		std::vector<float> FillTypeRatio;
-	public:
+	
 		_FillType FillType;
 
-	private:
+	
 		static std::vector<float> _SinglePathRatio;
-	public:
+	
 		_SinglePathType SinglePathType;
 		_DoublePathType DoublePathType;
 		_TriplePathType TriplePathType;
@@ -291,19 +291,19 @@ namespace CloudberryKingdom
 
 		void Calculate( const std::shared_ptr<Upgrades> &u );
 
-	protected:
+	
 		virtual void CalculateKeepUnused( float JumpLevel );
 
-	public:
+	
 		virtual void Randomize();
 
 		float GetSparsity();
 
 		int GetOffset( int Period, Vector2 pos, _OffsetType Type );
-	private:
+	
 		void SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const std::shared_ptr<PieceSeedData> &Piece );
 
-	public:
+	
 		void SetSinglePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
 
 		void SetDoubePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
@@ -314,7 +314,7 @@ namespace CloudberryKingdom
 
 		void SetToMake_BouncyHallway( const std::shared_ptr<PieceSeedData> &piece );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class WriteReadTools
+	struct WriteReadTools
 	{
-	public:
+	
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static Vector2 ReadVector2(this BinaryReader reader)
 		static Vector2 ReadVector2( const std::shared_ptr<BinaryReader> &reader );

@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Timer_Base : public GUI_Panel
+	struct GUI_Timer_Base : public GUI_Panel
 	{
-	private:
+	
 		int _Time;
 
 		/// <summary>
 		/// The time in number of frames
 		/// </summary> 
-	public:
+	
 		const int &getTime() const;
 		void setTime( const int &value );
 
@@ -23,19 +23,19 @@ namespace CloudberryKingdom
 
 		const int getMilliseconds() const;
 
-	private:
+	
 		std::shared_ptr<StringBuilder> MyString;
 
 		/// <summary>
 		/// Return a string representation of the time
 		/// </summary>
 		/// <returns></returns>
-	public:
+	
 		std::shared_ptr<StringBuilder> BuildString();
 
-	private:
+	
 		bool AddedOnce;
-	public:
+	
 		virtual void OnAdd();
 
 		virtual void Hide();
@@ -45,23 +45,23 @@ namespace CloudberryKingdom
 
 		void ShowInstant();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	public:
+	
 		const Vector2 getApparentPos() const;
 
-	private:
+	
 		std::shared_ptr<EzText> TimerText;
 		void UpdateTimerText();
 
-	public:
+	
 		GUI_Timer_Base();
 
-	protected:
+	
 		virtual void MyDraw();
 
-	public:
+	
 		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_Timer_Base> > > OnTimeExpired;
 
 		/// <summary>
@@ -69,10 +69,10 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool CountDownWhileDead;
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

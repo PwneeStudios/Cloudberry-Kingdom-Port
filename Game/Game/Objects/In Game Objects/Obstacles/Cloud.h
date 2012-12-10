@@ -6,56 +6,56 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class Cloud : public _Obstacle
+	struct Cloud : public _Obstacle
 	{
-	public:
-		class CloudTileInfo : public TileInfoBase
+	
+		struct CloudTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 			Vector2 BoxSize;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			CloudTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		Vector2 Displacement;
 		float Shiftiness;
 		Vector2 Size;
@@ -67,28 +67,28 @@ public:
 		Cloud();
 		Cloud( bool BoxesOnly );
 
-	private:
+	
 		int PeriodOffset;
 
-	public:
+	
 		virtual void MakeNew();
 
 		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
 
 		virtual void Construct( bool BoxesOnly );
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		virtual void PhsxStep2();
 
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Interact( const std::shared_ptr<Bob> &bob );
@@ -100,7 +100,7 @@ public:
 		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
 		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

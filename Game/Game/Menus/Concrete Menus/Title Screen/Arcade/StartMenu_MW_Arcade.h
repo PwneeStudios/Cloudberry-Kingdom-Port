@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class TitleGameData_MW;
+	struct TitleGameData_MW;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 
@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_Arcade : public ArcadeMenu
+	struct StartMenu_MW_Arcade : public ArcadeMenu
 	{
-	public:
+	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_Arcade( const std::shared_ptr<TitleGameData_MW> &Title );
 
@@ -28,17 +28,17 @@ namespace CloudberryKingdom
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
-	protected:
+	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void Go( const std::shared_ptr<MenuItem> &item );
 
 		virtual void OnAdd();
 
 		virtual void Init();
 
-	private:
+	
 		void SetPos();
 	};
 }

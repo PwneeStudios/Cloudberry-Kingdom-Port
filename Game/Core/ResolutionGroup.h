@@ -7,9 +7,9 @@
 
 namespace CloudberryKingdom
 {
-	class ResolutionGroup
+	struct ResolutionGroup
 	{
-	public:
+	
 		ResolutionGroup();
 
 		static std::shared_ptr<DisplayMode> LastSetMode;

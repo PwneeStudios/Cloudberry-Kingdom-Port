@@ -3,10 +3,10 @@
 
 #include "Hacks/NET/TimeSpan.h"
 
-class Video
+struct Video
 {
 
-public:
+
 
 	TimeSpan Duration;
 

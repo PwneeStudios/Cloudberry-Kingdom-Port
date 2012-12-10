@@ -5,13 +5,13 @@
 
 #include "Hacks/XNA/Viewport.h"
 
-class GraphicsDevice
+struct GraphicsDevice
 {
 
-public:
 
-	std::shared_ptr<class PresentationParameters> PP;
-	std::vector<std::shared_ptr<class SamplerState> > SamplerStates;
+
+	std::shared_ptr<struct PresentationParameters> PP;
+	std::vector<std::shared_ptr<struct SamplerState> > SamplerStates;
 	GfxRasterizerState RasterizerState;
 	GfxBlendState BlendState;
 	GfxDepthStencilState DepthStencilState;
@@ -23,7 +23,7 @@ public:
 		SamplerStates.resize( 3 );
 	}
 
-	void SetRenderTarget( const std::shared_ptr<class RenderTarget2D> &rt )
+	void SetRenderTarget( const std::shared_ptr<struct RenderTarget2D> &rt )
 	{
 	}
 

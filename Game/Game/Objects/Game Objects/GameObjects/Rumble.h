@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class Rumble : public GUI_Panel
+	struct Rumble : public GUI_Panel
 	{
-	public:
+	
 		Rumble();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
 		virtual void MyPhsxStep();

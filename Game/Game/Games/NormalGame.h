@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class NormalFactory : public GameFactory
+	struct NormalFactory : public GameFactory
 	{
-	public:
+	
 		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
-	class NormalGameData : public GameData
+	struct NormalGameData : public GameData
 	{
-	public:
+	
 		virtual void SetCreatedBobParameters( const std::shared_ptr<Bob> &bob );
 
 		virtual void SetAdditionalLevelParameters();
@@ -26,13 +26,13 @@ namespace CloudberryKingdom
 
 		virtual void Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
-	private:
+	
 		std::shared_ptr<LevelSeedData> _MakeThreadLevelSeed;
 		bool _MakeThreadMakeInBackground;
 		void _MakeThreadFunc();
 
 
-	public:
+	
 		virtual void PhsxStep();
 
 		virtual void PostDraw();

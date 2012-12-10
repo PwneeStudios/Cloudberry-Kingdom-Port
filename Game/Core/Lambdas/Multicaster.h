@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class Multicaster : public Lambda
+	struct Multicaster : public Lambda
 	{
-	private:
+	
 		std::vector<std::shared_ptr<Lambda> > MyList;
 
-	public:
+	
 		void Apply()
 		{
 			for ( std::vector<std::shared_ptr<Lambda> >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )

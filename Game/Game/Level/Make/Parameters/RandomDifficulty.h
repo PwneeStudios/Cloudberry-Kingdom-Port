@@ -5,23 +5,23 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Upgrades;
+	struct Upgrades;
 }
 
 namespace CloudberryKingdom
 {
-	class TileSet;
+	struct TileSet;
 }
 namespace CloudberryKingdom
 {
-	class RndDifficulty
+	struct RndDifficulty
 	{
-	public:
+	
 		static int ChoosePaths( const std::shared_ptr<PieceSeedData> &data );
 
 		static LadderType ChooseLadder( int Difficulty );

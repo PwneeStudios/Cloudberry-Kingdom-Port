@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class EzSoundWad
+	struct EzSoundWad
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		/// <summary>
 		/// When true all new sounds to be played are suppressed.
 		/// </summary>

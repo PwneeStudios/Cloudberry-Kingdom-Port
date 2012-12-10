@@ -6,49 +6,49 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Timer;
+	struct GUI_Timer;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 
 namespace CloudberryKingdom
 {
-	class TimerWarning : public GameObject
+	struct TimerWarning : public GameObject
 	{
-	public:
+	
 		std::shared_ptr<GUI_Timer> MyTimer;
-	private:
+	
 		std::shared_ptr<QuadClass> Fullscreen;
 
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	public:
+	
 		TimerWarning();
 
-	private:
+	
 		float t;
-	protected:
+	
 		virtual void MyDraw();
 
 		//int Threshhold = 62 * 3;
-	private:
+	
 		int Threshhold;
 		int SubThreshholdCount;
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void SetAlpha( float alpha );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

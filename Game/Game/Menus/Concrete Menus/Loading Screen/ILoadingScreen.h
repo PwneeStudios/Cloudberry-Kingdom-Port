@@ -3,7 +3,7 @@
 
 namespace CloudberryKingdom
 {
-	class Camera;
+	struct Camera;
 }
 
 
@@ -11,9 +11,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class ILoadingScreen
+	struct ILoadingScreen
 	{
-	public:
+	
 		virtual void AddHint( const std::wstring &hint, int extra_wait ) = 0;
 
 		virtual void Start() = 0;

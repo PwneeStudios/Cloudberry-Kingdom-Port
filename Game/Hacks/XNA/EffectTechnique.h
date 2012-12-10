@@ -3,10 +3,10 @@
 
 #include "Hacks/XNA/EffectPass.h"
 
-class EffectTechnique
+struct EffectTechnique
 {
 
-public:
+
 
 	std::vector<std::shared_ptr<EffectPass> > Passes;
 

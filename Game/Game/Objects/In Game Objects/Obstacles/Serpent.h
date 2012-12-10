@@ -5,48 +5,48 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class Serpent : public _BoxDeath
+	struct Serpent : public _BoxDeath
 	{
-	public:
-		class SerpentTileInfo : public TileInfoBase
+	
+		struct SerpentTileInfo : public TileInfoBase
 		{
-		public:
+		
 //C# TO C++ CONVERTER NOTE: The variable Serpent was renamed since it is named the same as a user-defined type:
 			std::shared_ptr<SpriteInfo> Serpent_Renamed;
 			std::shared_ptr<SpriteInfo> Fish;
 			Vector2 BoxSize;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			SerpentTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		std::shared_ptr<QuadClass> MyQuad, MyFish;
 
 		int Offset, UpT, DownT, WaitT1, WaitT2;
@@ -63,17 +63,17 @@ public:
 
 		void SetPeriod( int Period );
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		void AnimStep();
 		void AnimStep( bool Skip );
 
-	protected:
+	
 		virtual void DrawGraphics();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Reset( bool BoxesOnly );

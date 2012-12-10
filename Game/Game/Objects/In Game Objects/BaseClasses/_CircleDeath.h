@@ -5,17 +5,17 @@
 
 namespace CloudberryKingdom
 {
-	class CircleBox;
+	struct CircleBox;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -23,13 +23,13 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class _CircleDeath : public _Death
+	struct _CircleDeath : public _Death
 	{
-	protected:
+	
 		std::shared_ptr<CircleBox> Circle;
 		float Radius;
 
-	public:
+	
 		virtual void MakeNew();
 
 		_CircleDeath();
@@ -39,12 +39,12 @@ namespace CloudberryKingdom
 
 		virtual void Scale( float scale );
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Interact( const std::shared_ptr<Bob> &bob );

@@ -6,15 +6,15 @@
 
 namespace CloudberryKingdom
 {
-	class Spike : public _BoxDeath
+	struct Spike : public _BoxDeath
 	{
 
-	public: static void InitializeStatics();
+	 static void InitializeStatics();
 
-	public:
-		class SpikeTileInfo : public TileInfoBase
+	
+		struct SpikeTileInfo : public TileInfoBase
 		{
-		public:
+		
 //C# TO C++ CONVERTER NOTE: The variable Spike was renamed since it is named the same as a user-defined type:
 			std::shared_ptr<SpriteInfo> Spike_Renamed;
 			std::shared_ptr<SpriteInfo> Base;
@@ -25,20 +25,20 @@ namespace CloudberryKingdom
 
 			Vector2 ObjectSize;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			SpikeTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		static bool PeakOut;
 
-	public:
+	
 		std::shared_ptr<SimpleObject> MyObject;
 
 		std::shared_ptr<QuadClass> MyQuad, MyBaseQuad;
@@ -54,9 +54,9 @@ public:
 
 		virtual void MakeNew();
 
-	private:
+	
 		float SetHeight;
-	public:
+	
 		virtual void Init( Vector2 Pos, const std::shared_ptr<Level> &level );
 
 		Spike( bool BoxesOnly );
@@ -65,9 +65,9 @@ public:
 
 		void SetDir( int dir );
 
-	private:
+	
 		Vector2 unit;
-	public:
+	
 		void SetAngle( float Ang );
 
 
@@ -83,12 +83,12 @@ public:
 
 		void UpdateObject();
 
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Reset( bool BoxesOnly );

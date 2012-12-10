@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerData : public SaveLoad
+	struct PlayerData : public SaveLoad
 	{
-	public:
+	
 		std::shared_ptr<SavedSeeds> MySavedSeeds;
 
 		PlayerIndex MyPlayerIndex;
@@ -23,13 +23,13 @@ namespace CloudberryKingdom
 
 		int MyIndex;
 
-	private:
+	
 		int RandomNameIndex;
 
 		/// <summary>
 		/// If this player data is or was associated with a gamer tag, this is the name of the gamer tag.
 		/// </summary>
-	public:
+	
 		std::wstring StoredName;
 
 		/// <summary>
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		PlayerData();
 
 		#pragma region WriteRead
-	protected:
+	
 		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
 
 		virtual void FailLoad();
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		virtual void Deserialize( std::vector<unsigned char> Data );
 		#pragma endregion
 
-	public:
+	
 		int GetHighScore( int GameId );
 
 		void AddHighScore( const std::shared_ptr<ScoreEntry> &score );
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<PlayerStats> GetSummedStats( StatGroup group );
 
-	private:
+	
 //ORIGINAL LINE: PlayerStats SumStats(params StatGroup[] group)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		std::shared_ptr<PlayerStats> SumStats( const std::vector<StatGroup> &group );
@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		/// Get the the players current score for the game,
 		/// adding up the current level's score with the current game score.
 		/// </summary>
-	public:
+	
 		int GetGameScore();
 
 		/// <summary>
@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 
 		void Init();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

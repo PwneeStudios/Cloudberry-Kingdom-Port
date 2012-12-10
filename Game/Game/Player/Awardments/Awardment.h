@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class Awardment : public std::enable_shared_from_this<Awardment>
+	struct Awardment : public std::enable_shared_from_this<Awardment>
 	{
 
-	public:
+	
 		std::wstring Name, Description;
 		std::shared_ptr<Hat> Unlockable;
 		int Guid;
@@ -17,34 +17,34 @@ namespace CloudberryKingdom
 
 	};
 
-	class Awardments
+	struct Awardments
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class CheckpointsStatsLambda : public PlayerIntLambda
+	
+		struct CheckpointsStatsLambda : public PlayerIntLambda
 		{
-		public:
+		
 			virtual int Apply( const std::shared_ptr<PlayerData> &p );
 		};
 
-	private:
-		class CoinsStatsLambda : public PlayerIntLambda
+	
+		struct CoinsStatsLambda : public PlayerIntLambda
 		{
-		public:
+		
 			virtual int Apply( const std::shared_ptr<PlayerData> &p );
 		};
 
-	private:
-		class TotalCoinsStatsLambda : public PlayerIntLambda
+	
+		struct TotalCoinsStatsLambda : public PlayerIntLambda
 		{
-		public:
+		
 			virtual int Apply( const std::shared_ptr<PlayerData> &p );
 		};
 
-	public:
+	
 		static std::vector<std::shared_ptr<Awardment> > Awards;
 		static std::map<int, std::shared_ptr<Awardment> > AwardsDict;
 
@@ -64,19 +64,19 @@ namespace CloudberryKingdom
 
 		static void CheckForAward_NoCoins();
 
-	private:
+	
 		static int HeroRushScore;
-	public:
+	
 		static void CheckForAward_HeroRush_Score( int Score );
 
-	private:
+	
 		static int HeroRush2Score;
-	public:
+	
 		static void CheckForAward_HeroRush2_Score( int Score );
 
-	private:
+	
 		static int HeroRush2_LevelUnlock;
-	public:
+	
 //C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		static void CheckForAward_HeroRush2Unlock( int Level_Renamed );
 
@@ -86,9 +86,9 @@ namespace CloudberryKingdom
 		static void CheckForAward_BeatCampaign( int Index );
 
 		//static int FastCampaign_Minutes = 5;
-	private:
+	
 		static int FastCampaign_Minutes;
-	public:
+	
 		static void CheckForAward_FastCampaign( int Index );
 
 		static void CheckForAward_EbenezerAbusiveCastle( int Index );
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		static float CurShift, Shift;
 		static void GiveAward( const std::shared_ptr<Awardment> &award );
 
-	public:
+	
 		static std::wstring BeatStr;
 	
 		static std::vector<std::shared_ptr<Awardment> > BeatCampaign;

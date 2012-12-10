@@ -8,9 +8,9 @@
 namespace CloudberryKingdom
 {
 
-	class SpriteAnim
+	struct SpriteAnim
 	{
-	public:
+	
 		float dt;
 		std::vector<std::shared_ptr<Texture2D> > Frames;
 		Vector2 Padding;
@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Should be replaced. Right now this is used for drawing the players in the replays, but replays should instead be reusing the same draw code for the player as the normal draw code.
 	/// </summary>
-	class SpriteAnimGroup
+	struct SpriteAnimGroup
 	{
-	public:
+	
 		std::map<int, std::shared_ptr<SpriteAnim> > SpriteAnims;
 
 		void Release();

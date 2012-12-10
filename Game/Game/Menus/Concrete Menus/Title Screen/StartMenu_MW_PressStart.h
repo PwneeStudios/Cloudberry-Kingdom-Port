@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class TitleGameData_MW;
+	struct TitleGameData_MW;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_PressStart : public CkBaseMenu
+	struct StartMenu_MW_PressStart : public CkBaseMenu
 	{
-	public:
+	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title );
 
@@ -30,27 +30,27 @@ namespace CloudberryKingdom
 
 		virtual void OnAdd();
 
-	private:
+	
 		std::shared_ptr<EzText> Text;
 		int DelayToAllowInput;
-	public:
+	
 		virtual void Init();
 
-	private:
+	
 		void SetPos();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		float t;
-	protected:
+	
 		virtual void MyDraw();
 
-	public:
+	
 		virtual void OnReturnTo();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

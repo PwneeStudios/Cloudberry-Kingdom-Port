@@ -3,9 +3,9 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda
+	struct Lambda
 	{
-	public:
+	
 		virtual void Apply() = 0;
 	};
 }

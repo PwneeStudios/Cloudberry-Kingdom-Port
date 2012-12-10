@@ -5,57 +5,57 @@
 
 namespace CloudberryKingdom
 {
-	class Cast
+	struct Cast
 	{
-	private:
-		class ToMenuHelper1 : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct ToMenuHelper1 : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > a;
 
-		public:
+		
 			ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
 
 			bool Apply( const std::shared_ptr<Menu> &dummy );
 		};
 
-	private:
-		class LambdaWrapper : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct LambdaWrapper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<Lambda> a;
 
-		public:
+		
 			LambdaWrapper( const std::shared_ptr<Lambda> &a );
 
 			void Apply( const std::shared_ptr<MenuItem> &dummy );
 		};
 
-	private:
-		class Lambda_1Wrapper : public Lambda
+	
+		struct Lambda_1Wrapper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > a;
 
-		public:
+		
 			Lambda_1Wrapper( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
 
 			void Apply();
 		};
 
-	private:
-		class ToMenuHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct ToMenuHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Lambda> a;
 
-		public:
+		
 			ToMenuHelper( const std::shared_ptr<Lambda> &a );
 
 			bool Apply( const std::shared_ptr<Menu> &dummy );
 		};
 
-	public:
+	
 		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda> &a );
 
 		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
@@ -65,30 +65,30 @@ namespace CloudberryKingdom
 		static std::shared_ptr<Lambda> ToAction( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
 	};
 
-	class Menu : public std::enable_shared_from_this<Menu>
+	struct Menu : public std::enable_shared_from_this<Menu>
 	{
-	private:
-		class FindItemByNameLambda : public LambdaFunc_1<std::shared_ptr<MenuItem> , bool>
+	
+		struct FindItemByNameLambda : public LambdaFunc_1<std::shared_ptr<MenuItem> , bool>
 		{
-		private:
+		
 			std::wstring name;
-		public:
+		
 			FindItemByNameLambda( const std::wstring &name );
 
 			bool Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class DefaultOnBProxy : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct DefaultOnBProxy : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		public:
+		
 			bool Apply( const std::shared_ptr<Menu> &menu );
 		};
 
-	public:
-		class DefaultMenuInfo
+	
+		struct DefaultMenuInfo
 		{
-		public:
+		
 			static Vector4 SelectedNextColor;
 			static Vector4 SelectedBackColor;
 			static Vector4 UnselectedNextColor;
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 			static Vector2 Slider_Size;
 		};
 
-	public:
+	
 
 		std::shared_ptr<MenuItem> FindItemByName( const std::wstring &name );
 
@@ -148,9 +148,9 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Menu> ParentMenu;
 
-	private:
+	
 		int _Control;
-	public:
+	
 		const int &getControl() const;
 		void setControl( const int &value );
 
@@ -160,11 +160,11 @@ namespace CloudberryKingdom
 		const std::shared_ptr<MenuItem> getCurItem() const;
 
 		int SelectDelay;
-	private:
+	
 		int DelayCount;
 		int MotionCount;
 
-	public:
+	
 		std::shared_ptr<PieceQuad> MyPieceQuad, MyPieceQuadTemplate;
 		std::shared_ptr<PieceQuad> MyPieceQuad2, MyPieceQuadTemplate2;
 		Vector2 BackdropShift;
@@ -192,10 +192,10 @@ namespace CloudberryKingdom
 		Menu();
 		Menu( bool FixedToCamera );
 
-	protected:
+	
 		void Init();
 
-	public:
+	
 		static bool DefaultOnB( const std::shared_ptr<Menu> &menu );
 
 		bool HasSelectedThisStep;
@@ -236,13 +236,13 @@ namespace CloudberryKingdom
 		/// The index of the last item to be activated.
 		/// </summary>
 		int LastActivatedItem;
-	private:
+	
 		int ActiveTimeStamp;
 
 		/// <summary>
 		/// When false all Phsx associated with the menu is paused.
 		/// </summary>
-	public:
+	
 		bool Active;
 
 		/// <summary>
@@ -261,17 +261,17 @@ namespace CloudberryKingdom
 		/// </summary>
 		std::shared_ptr<LambdaFunc<bool> > AdditionalCheckForOutsideClick;
 
-	private:
+	
 		bool CheckForBackFromOutsideClick();
 
 #if defined(PC_VERSION)
-	public:
+	
 		bool HitTest();
 		bool HitTest( Vector2 HitPadding );
 #endif
-	private:
+	
 		bool outside;
-	public:
+	
 		virtual void PhsxStep();
 
 		void ArrangeItems( float Spacing, Vector2 Center );
@@ -282,10 +282,10 @@ namespace CloudberryKingdom
 
 		void CalcBounds();
 
-	private:
+	
 		static int SortByHeightMethod( const std::shared_ptr<MenuItem> &item1, const std::shared_ptr<MenuItem> &item2 );
 
-	public:
+	
 		void SortByHeight();
 
 		void ResetPieces();
@@ -299,20 +299,20 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether an item should be drawn as selected or not.
 		/// </summary>
-	protected:
+	
 		bool DrawItemAsSelected( const std::shared_ptr<MenuItem> &item );
 
 		/// <summary>
 		/// The index of the item to be drawn as selected
 		/// </summary>
-	private:
+	
 		const int getApparentCurIndex() const;
 
 		Vector2 _MyCameraZoom;
 		/// <summary>
 		/// The value of the camera zoom the last time this menu was drawn
 		/// </summary>
-	public:
+	
 		const Vector2 &getMyCameraZoom() const;
 		void setMyCameraZoom( const Vector2 &value );
 
@@ -325,7 +325,7 @@ namespace CloudberryKingdom
 		void Add( const std::shared_ptr<MenuItem> &item );
 		void Add( const std::shared_ptr<MenuItem> &item, int index );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

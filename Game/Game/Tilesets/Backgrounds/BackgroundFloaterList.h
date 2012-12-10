@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundFloaterList : public std::enable_shared_from_this<BackgroundFloaterList>
+	struct BackgroundFloaterList : public std::enable_shared_from_this<BackgroundFloaterList>
 	{
-	private:
-		class ClearBackgroundListLambda : public LambdaFunc_1<std::shared_ptr<BackgroundFloater>, bool>
+	
+		struct ClearBackgroundListLambda : public LambdaFunc_1<std::shared_ptr<BackgroundFloater>, bool>
 		{
-		private:
+		
 			std::shared_ptr<FloatRectangle> Area;
-		public:
+		
 			ClearBackgroundListLambda( const std::shared_ptr<FloatRectangle> &Area );
 
 			bool Apply( const std::shared_ptr<BackgroundFloater> &floater );
 		};
 
-	public:
+	
 		std::wstring Name;
 
 		bool Foreground;
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 		bool DoPreDraw;
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

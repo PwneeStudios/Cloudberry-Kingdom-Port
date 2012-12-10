@@ -9,9 +9,9 @@
 
 namespace CloudberryKingdom
 {
-	class CoreMath
+	struct CoreMath
 	{
-	public:
+	
 		static int Modulo( int n, int p );
 		static float Modulo( float n, float p );
 		static float ZigZag( float period, float t );

@@ -4,7 +4,7 @@
 struct Rectangle
 {
 
-public:
+
 
 	int X, Y, Width, Height;
 

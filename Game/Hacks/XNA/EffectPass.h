@@ -1,10 +1,10 @@
 #ifndef _EFFECTPASS_H_
 #define _EFFECTPASS_H_
 
-class EffectPass
+struct EffectPass
 {
 
-public:
+
 
 	void Apply()
 	{

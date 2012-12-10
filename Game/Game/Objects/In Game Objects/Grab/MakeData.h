@@ -6,10 +6,10 @@
 namespace CloudberryKingdom
 {
 
-	class MakeData : public std::enable_shared_from_this<MakeData>
+	struct MakeData : public std::enable_shared_from_this<MakeData>
 	{
 
-	public:
+	
 		Vector2 TRBobMoveZone, BLBobMoveZone;
 
 		std::shared_ptr<RichLevelGenData> GenData;
@@ -81,10 +81,10 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<LevelPiece> MakeLevelPiece( const std::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-	public:
+	
 		MakeData()
 		{
 			InitializeInstanceFields();

@@ -4,10 +4,10 @@
 #include <Math/Vectors.h>
 #include <string>
 
-class BinaryWriter
+struct BinaryWriter
 {
 
-public:
+
 
 	BinaryWriter( std::wstring path )
 	{

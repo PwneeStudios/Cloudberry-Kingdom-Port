@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class MainClass
+	struct MainClass
 	{
 		/// <summary>
 		/// The main entry point for the application.

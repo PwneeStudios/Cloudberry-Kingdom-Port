@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class Background : public std::enable_shared_from_this<Background>
+	struct Background : public std::enable_shared_from_this<Background>
 	{
-	public:
+	
 		static void AddRainLayer( const std::shared_ptr<Background> &b );
 
 		static void TurnOnSnow( const std::shared_ptr<Background> &b );
@@ -79,9 +79,9 @@ namespace CloudberryKingdom
 		virtual void Clear( const std::shared_ptr<FloatRectangle> &Area );
 
 		static bool GreenScreen;
-	private:
+	
 		static std::shared_ptr<QuadClass> TestQuad;
-	public:
+	
 		static std::shared_ptr<EzTexture> TestTexture;
 
 		static void DrawTest();
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 
 		void SetWeatherIntensity( float Intensity );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

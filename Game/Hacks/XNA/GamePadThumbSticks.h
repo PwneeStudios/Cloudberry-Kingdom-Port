@@ -1,10 +1,10 @@
 #ifndef _GAMEPADTHUMBSTICKS_H_
 #define _GAMEPADTHUMBSTICKS_H_
 
-class GamePadThumbSticks
+struct GamePadThumbSticks
 {
 
-public:
+
 
 	Vector2 Left;
 	Vector2 Right;

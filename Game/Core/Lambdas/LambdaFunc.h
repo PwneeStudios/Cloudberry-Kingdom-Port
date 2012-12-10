@@ -4,9 +4,9 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	class LambdaFunc
+	struct LambdaFunc
 	{
-	public:
+	
 		virtual T Apply() = 0;
 	};
 }

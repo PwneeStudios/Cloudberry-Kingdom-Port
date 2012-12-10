@@ -5,21 +5,21 @@
 
 namespace CloudberryKingdom
 {
-	class FallingBlock : public BlockBase
+	struct FallingBlock : public BlockBase
 	{
-	public:
-		class FallingBlockTileInfo : public TileInfoBase
+	
+		struct FallingBlockTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 
 			FallingBlockTileInfo();
 
-		private:
+		
 			void InitializeInstanceFields();
 		};
 
-	public:
+	
 		bool TouchedOnce, HitGround;
 
 		bool Thwomp;
@@ -29,14 +29,14 @@ namespace CloudberryKingdom
 		int StartLife, Life;
 		//public int StartLife { get { return _StartLife; } set { _StartLife = value; if (value > 20) Console.WriteLine("!");  } }
 
-	private:
+	
 		FallingBlockState State;
 		bool EmittedExplosion;
-	public:
+	
 		Vector2 Offset;
-	private:
+	
 		int ResetTimer;
-	public:
+	
 		static int ResetTimerLength;
 
 		virtual void MakeNew();

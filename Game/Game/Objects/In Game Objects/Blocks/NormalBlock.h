@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class NormalBlock : public BlockBase
+	struct NormalBlock : public BlockBase
 	{
 
-	public:
+	
 		bool Invert;
 
 		std::shared_ptr<BlockBase> HoldBlock;
@@ -23,20 +23,20 @@ namespace CloudberryKingdom
 
 		NormalBlock( bool BoxesOnly );
 
-	private:
+	
 		std::shared_ptr<PieceQuad> GetPieceTemplate();
 
 		std::shared_ptr<PieceQuad> GetPieceTemplate( float width );
 
-	public:
+	
 		virtual void ResetPieces();
 
 		void Init( Vector2 center, Vector2 size, const std::shared_ptr<TileSet> &tile );
 
-	private:
+	
 		static float TopOnlyHeight;
 
-	public:
+	
 		void CheckHeight();
 
 		void MakeTopOnly();
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 
 		virtual void PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

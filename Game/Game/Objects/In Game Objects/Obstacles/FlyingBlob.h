@@ -6,33 +6,33 @@
 
 namespace CloudberryKingdom
 {
-	class FlyingBlob : public _Obstacle, public IBound
+	struct FlyingBlob : public _Obstacle, public IBound
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
-		class FlyingBlobTileInfo : public TileInfoBase
+	
+		struct FlyingBlobTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Body;
 
 			Vector2 ObjectSize;
 
 			std::shared_ptr<TextureOrAnim> GooSprite;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-		public:
+		
 			FlyingBlobTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		enum BlobColor
 		{
 			BlobColor_GREEN,
@@ -41,13 +41,13 @@ namespace CloudberryKingdom
 			BlobColor_GREY,
 			BlobColor_GOLD
 		};
-	public:
+	
 		enum PhsxType
 		{
 			PhsxType_PRESCRIBED,
 			PhsxType_TO_TARGET
 		};
-	public:
+	
 		enum PrescribedMoveType
 		{
 			PrescribedMoveType_LINE,
@@ -55,11 +55,11 @@ namespace CloudberryKingdom
 			PrescribedMoveType_STAR
 		};
 
-	private:
+	
 		static std::shared_ptr<Particle> BlobGooTemplate;
 		static std::shared_ptr<EzSound> SquishSound;
 
-	public:
+	
 		int Period, Offset;
 		Vector2 Displacement;
 
@@ -78,12 +78,12 @@ namespace CloudberryKingdom
 
 		BlobColor MyColor;
 
-	private:
+	
 		static std::vector<float> BobMaxSpeed;
 		static float BobXAccel;
 		static float BobXFriction;
 
-	public:
+	
 		std::shared_ptr<SimpleObject> MyObject;
 		std::shared_ptr<QuadClass> MyQuad;
 		float MyAnimSpeed;
@@ -106,16 +106,16 @@ namespace CloudberryKingdom
 
 		bool NeverSkip;
 
-	private:
+	
 		std::shared_ptr<Bob> KillingBob;
 
-	public:
+	
 		void SetColor( BlobColor color );
 
-	private:
+	
 		static std::shared_ptr<EzTexture> GetGooTexture( BlobColor color );
 
-	public:
+	
 		virtual void MakeNew();
 
 		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
@@ -141,28 +141,28 @@ namespace CloudberryKingdom
 		Vector2 CalcPosition( float t );
 
 
-	private:
+	
 		void UpdatePos();
 
-	public:
+	
 		virtual void PhsxStep();
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		virtual void PhsxStep2();
 
 		void AnimStep();
 
 		void UpdateObject();
 
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		void MoveToBounded( Vector2 shift );
 
 		virtual void Move( Vector2 shift );
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 
 		void SetStandardTargetParams();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

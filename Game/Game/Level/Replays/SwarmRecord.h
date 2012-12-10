@@ -6,15 +6,15 @@
 
 namespace CloudberryKingdom
 {
-	class SwarmRecord
+	struct SwarmRecord
 	{
-	public:
+	
 		std::shared_ptr<LevelPiece> MyLevelPiece;
 
 		std::list<std::shared_ptr<Recording> > Records;
 		std::shared_ptr<Recording> MainRecord;
 #if defined(XBOX)
-	private:
+	
 		int MaxRecords;
 #else
 		int MaxRecords;
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<QuadClass> BobQuad;
 
-	public:
+	
 		void Release();
 
 		SwarmRecord();
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 		void AddRecord( const std::shared_ptr<Recording> &Record, int Step );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

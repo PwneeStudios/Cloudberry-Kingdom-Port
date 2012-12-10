@@ -6,37 +6,37 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class LineSpriteInfo;
+	struct LineSpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class SpikeyGuy : public _CircleDeath
+	struct SpikeyGuy : public _CircleDeath
 	{
-	public:
-		class SpikeyGuyTileInfo : public TileInfoBase
+	
+		struct SpikeyGuyTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Ball;
 			std::shared_ptr<SpriteInfo> Base;
 
@@ -47,27 +47,27 @@ namespace CloudberryKingdom
 			bool Rotate;
 			float RotateOffset, RotateSpeed;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			SpikeyGuyTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		float Angle, MaxAngle, Length;
 		int Period, Offset;
 		Vector2 PivotPoint;
 
 		int Dir;
 
-	private:
+	
 		std::shared_ptr<QuadClass> Anchor, Head;
 
-	public:
+	
 		virtual void OnAttachedToBlock();
 
 		virtual void MakeNew();
@@ -83,27 +83,27 @@ public:
 		/// </summary>
 		/// <param name="t">The parametric time variable, t = (Step + Offset) / Period</param>
 		/// <returns></returns>
-	private:
+	
 		float CorrespondingAngle;
 		Vector2 GetPos( float t );
 
-	public:
+	
 		virtual void PhsxStep();
 
 
-	private:
+	
 		bool OffScreen;
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

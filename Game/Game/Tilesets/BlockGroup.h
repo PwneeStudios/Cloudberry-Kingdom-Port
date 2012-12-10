@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup
+	struct BlockGroup
 	{
-	public:
+	
 		std::map<int, std::vector<std::shared_ptr<PieceQuad> > > Dict;
 		std::vector<int> Widths;
 

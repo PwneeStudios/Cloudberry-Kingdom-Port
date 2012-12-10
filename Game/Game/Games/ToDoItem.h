@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class ToDoItem
+	struct ToDoItem
 	{
-	public:
+	
 		std::shared_ptr<LambdaFunc<bool> > MyFunc;
 		std::wstring Name;
 
@@ -18,13 +18,13 @@ namespace CloudberryKingdom
 		/// </summary>
 		const bool &getMarkedForDeletion() const;
 		void setMarkedForDeletion( const bool &value );
-	private:
+	
 		bool _MarkedForDeltion;
 
 		/// <summary>
 		/// Whether the item pauses when the game is paused.
 		/// </summary>
-	public:
+	
 		bool PauseOnPause;
 
 		bool RemoveOnReset;
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Delete();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

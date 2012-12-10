@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class Background_Castle : public BackgroundTemplate
+	struct Background_Castle : public BackgroundTemplate
 	{
-	public:
+	
 		Background_Castle( const std::wstring &Name );
 
 		virtual void Code( const std::shared_ptr<Background> &b );

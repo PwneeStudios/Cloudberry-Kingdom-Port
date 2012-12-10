@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundFloater_Stationary : public BackgroundFloater
+	struct BackgroundFloater_Stationary : public BackgroundFloater
 	{
-	public:
+	
 		BackgroundFloater_Stationary( const std::shared_ptr<Level> &level );
 
 		virtual void PhsxStep( const std::shared_ptr<BackgroundFloaterList> &list );

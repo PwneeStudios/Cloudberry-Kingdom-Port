@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture
+	struct EzTexture
 	{
-	public:
+	
 		int Width, Height;
 
-	private:
+	
 		std::shared_ptr<Texture2D> _Tex;
-	public:
+	
 		const std::shared_ptr<Texture2D> &getTex() const;
 		void setTex( const std::shared_ptr<Texture2D> &value );
 
@@ -51,10 +51,10 @@ namespace CloudberryKingdom
 
 		virtual std::wstring ToString();
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		EzTexture()
 		{
 			InitializeInstanceFields();

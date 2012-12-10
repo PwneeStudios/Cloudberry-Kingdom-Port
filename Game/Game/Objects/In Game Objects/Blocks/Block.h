@@ -5,54 +5,54 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 namespace CloudberryKingdom
 {
-	class BlockBase;
+	struct BlockBase;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectData;
+	struct ObjectData;
 }
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
+	struct BlockGroup;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class NormalBlockDraw;
+	struct NormalBlockDraw;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class BlockData : public ObjectData
+	struct BlockData : public ObjectData
 	{
-	public:
+	
 		void Decide_RemoveIfUnused( float ChanceToKeep, const std::shared_ptr<Rand> &Rnd );
 
 		bool Safe;
@@ -143,19 +143,19 @@ namespace CloudberryKingdom
 
 		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		BlockData()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class BlockBase : public ObjectBase
+	struct BlockBase : public ObjectBase
 	{
-	public:
+	
 		std::shared_ptr<AABox> MyBox;
 		const std::shared_ptr<AABox> &getBox() const;
 
@@ -163,9 +163,9 @@ public:
 		const bool &getIsActive() const;
 		void setIsActive( const bool &value );
 
-	protected:
+	
 		std::shared_ptr<BlockData> BlockCoreData;
-	public:
+	
 		const std::shared_ptr<BlockData> &getBlockCore() const;
 
 		BlockBase();
@@ -205,10 +205,10 @@ public:
 
 		virtual void PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete );
 
-	private:
+	
 		void EdgeSafety( const std::shared_ptr<Bob> &bob, bool &Delete );
 
-	public:
+	
 		virtual void PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 		virtual void PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 

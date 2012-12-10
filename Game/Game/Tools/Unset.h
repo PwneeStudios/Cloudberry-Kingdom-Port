@@ -3,10 +3,10 @@
 
 namespace CloudberryKingdom
 {
-	class Unset
+	struct Unset
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		static int Int;

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class TileSets
+	struct TileSets
 	{
-	private:
+	
 		static std::shared_ptr<TileSet> Load_Cloud();
 
 
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<TileSet> Load_Cave();
 
 
-	public:
+	
 		static std::shared_ptr<TileSet> None, Random;
 		static std::shared_ptr<TileSet> DefaultTileSet;
 
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		static void LoadCode();
 
 		static void LoadTileSet( const std::wstring &path );
-	private:
+	
 		static std::shared_ptr<TileSet> GetOrMakeTileset( const std::wstring &path );
 
 		/// <summary>
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		static void sprite_anim( const std::wstring &name, const std::wstring &texture_root, int start_frame, int end_frame, int frame_length );
 		static void sprite_anim( const std::wstring &name, const std::wstring &texture_root, int start_frame, int end_frame, int frame_length, bool reverse_at_end );
 
-	public:
+	
 		static void Init();
 
 		static void LoadSpriteEffects();

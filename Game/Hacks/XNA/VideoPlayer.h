@@ -1,10 +1,10 @@
 #ifndef _VIDEOPLAYER_H_
 #define _VIDEOPLAYER_H_
 
-class VideoPlayer
+struct VideoPlayer
 {
 
-public:
+
 
 	bool IsLooped;
 

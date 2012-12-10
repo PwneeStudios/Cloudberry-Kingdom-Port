@@ -6,17 +6,17 @@
 namespace CloudberryKingdom
 {
 	/// <summary>
-	/// The base class for all derived MenuSlider classes
+	/// The base struct for all derived MenuSlider classes
 	/// </summary>
-	class MenuSliderBase : public MenuItem
+	struct MenuSliderBase : public MenuItem
 	{
-	private:
-		class SetCallbackProxy : public Lambda
+	
+		struct SetCallbackProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<MenuSliderBase> Msb;
 
-		public:
+		
 			SetCallbackProxy( const std::shared_ptr<MenuSliderBase> &msb );
 
 			void Apply();
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called when the user explicitly manipulates the slider.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Lambda> OnSlide;
 
 		/// <summary>
@@ -35,10 +35,10 @@ namespace CloudberryKingdom
 
 		const bool getIsMaxed() const;
 
-	protected:
+	
 		void Slide();
 
-	public:
+	
 		int DelayToSlideSound;
 		int DelayToSlideSoundCount;
 
@@ -56,27 +56,27 @@ namespace CloudberryKingdom
 		float InitialSlideSpeed;
 		float MaxSlideSpeed;
 		float Acceleration;
-	private:
+	
 		float Speed;
 
-	public:
+	
 		bool Discrete;
-	private:
+	
 		static const int SelectDelay = 8;
 		int DelayCount;
 
-	public:
+	
 		MenuSliderBase();
 
 		MenuSliderBase( const std::shared_ptr<EzText> &Text );
 		MenuSliderBase( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
 
-	private:
+	
 		std::wstring BaseString;
-	protected:
+	
 		virtual void InitializeSlider();
 
-	public:
+	
 		virtual void SetCallback();
 
 		virtual void Release();
@@ -86,32 +86,32 @@ namespace CloudberryKingdom
 		virtual bool HitTest( Vector2 pos, Vector2 padding );
 #endif
 
-	protected:
+	
 		Vector2 Start, End;
 		virtual void CalcEndPoints();
 
-	public:
+	
 		virtual std::wstring ToString();
 
-	private:
+	
 		bool ShowText;
 		void UpdateText();
 
-	public:
+	
 		void SetToShowText();
 
 		bool Inverted;
 #if defined(PC_VERSION)
-	protected:
+	
 		virtual void PC_OnLeftMouseDown();
 #endif
 
-	private:
+	
 		Vector2 PrevDir;
-	public:
+	
 		virtual void PhsxStep( bool Selected );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

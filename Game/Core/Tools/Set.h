@@ -6,9 +6,9 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	class Set// : public IEnumerable, public IEnumerable<T>
+	struct Set// : public IEnumerable, public IEnumerable<T>
 	{
-	public:
+	
 		std::map<T, bool> dict;
 
 		const int &getCount() const
@@ -68,13 +68,13 @@ namespace CloudberryKingdom
 		}
 
 
-	private:
+	
 		void InitializeInstanceFields()
 		{
 			dict = std::map<T, bool>();
 		}
 
-public:
+
 		Set()
 		{
 			InitializeInstanceFields();

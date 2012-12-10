@@ -288,14 +288,14 @@ namespace CloudberryKingdom
 		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( BaseType ) != 0 )
 			MoveMod = BobPhsxNormal::getInstance();
 
-		// Error catch. Invert must be classic, and must be the base class.
+		// Error catch. Invert must be classic, and must be the base struct.
 		if ( std::dynamic_pointer_cast<BobPhsxInvert>( MoveMod ) != 0 )
 		{
 			BaseType = BobPhsxInvert::getInstance();
 			MoveMod = BobPhsxNormal::getInstance();
 		}
 
-		// Error catch. Time Master must be classic, and must be the base class.
+		// Error catch. Time Master must be classic, and must be the base struct.
 		if ( std::dynamic_pointer_cast<BobPhsxTime>( Special ) != 0 )
 		{
 			BaseType = BobPhsxTime::getInstance();

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class Ceiling_Parameters : public AutoGen_Parameters
+	struct Ceiling_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		enum Style
 		{
 			Style_NORMAL,
@@ -16,13 +16,13 @@ namespace CloudberryKingdom
 			Style_RANDOM,
 			Style_LENGTH
 		};
-	public:
-		class _Special
+	
+		struct _Special
 		{
 			/// <summary>
 			/// One straight cement block for the ceiling.
 			/// </summary>
-		public:
+		
 			bool CementCeiling;
 
 			/// <summary>
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether to make the ceiling or not.
 		/// </summary>
-	public:
+	
 		bool Make;
 
 		Param BufferSize;
@@ -48,27 +48,27 @@ namespace CloudberryKingdom
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Ceiling_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Ceiling_AutoGen : public AutoGen
+	struct Ceiling_AutoGen : public AutoGen
 	{
-	private:
+	
 		static const std::shared_ptr<Ceiling_AutoGen> instance;
-	public:
+	
 		const static std::shared_ptr<Ceiling_AutoGen> &getInstance();
 
-	public:
+	
 		Ceiling_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void MakeLongCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

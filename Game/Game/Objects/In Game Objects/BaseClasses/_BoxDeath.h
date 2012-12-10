@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -28,11 +28,11 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class _BoxDeath : public _Death
+	struct _BoxDeath : public _Death
 	{
-	protected:
+	
 		std::shared_ptr<AABox> Box;
-	public:
+	
 		Vector2 BoxSize;
 
 		virtual void MakeNew();
@@ -48,20 +48,20 @@ namespace CloudberryKingdom
 
 		virtual void Scale( float scale );
 
-	protected:
+	
 		void TargetPos();
 
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		virtual void PhsxStep2();
 
 		virtual void OnMarkedForDeletion();
 
-	protected:
+	
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Interact( const std::shared_ptr<Bob> &bob );

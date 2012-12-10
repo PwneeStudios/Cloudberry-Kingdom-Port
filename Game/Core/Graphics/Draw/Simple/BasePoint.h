@@ -3,9 +3,9 @@
 
 namespace CloudberryKingdom
 {
-	class BasePoint
+	struct BasePoint
 	{
-	public:
+	
 		Vector2 Origin, e1, e2;
 
 		BasePoint();

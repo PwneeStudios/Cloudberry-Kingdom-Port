@@ -5,28 +5,28 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class EzFont;
+	struct EzFont;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class GUI_Text : public GUI_Panel
+	struct GUI_Text : public GUI_Panel
 	{
-	public:
+	
 		enum Style
 		{
 			Style_BUBBLE,
 			Style_FADE,
 			Style_NONE
 		};
-	public:
+	
 		Style MyStyle;
 
 		std::shared_ptr<EzText> MyText;
@@ -50,12 +50,12 @@ namespace CloudberryKingdom
 
 		void Init( const std::wstring &text, Vector2 pos, bool centered, Style style, const std::shared_ptr<EzFont> &font );
 
-	protected:
+	
 		virtual std::shared_ptr<EzText> MakeText( Localization::Words word, bool centered, const std::shared_ptr<EzFont> &font );
 
 		virtual std::shared_ptr<EzText> MakeText( const std::wstring &text, bool centered, const std::shared_ptr<EzFont> &font );
 
-	public:
+	
 		void Kill();
 		void Kill( bool sound );
 
@@ -66,14 +66,14 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER NOTE: The variable Oscillate was renamed since it is named the same as a user-defined type:
 		bool Oscillate_Renamed;
-	protected:
+	
 		float OscillationHeight; // 4.65f;
 		float OscillationSpeed;
 		virtual void MyPhsxStep();
 
 		virtual void MyDraw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

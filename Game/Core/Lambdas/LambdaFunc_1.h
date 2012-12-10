@@ -4,9 +4,9 @@
 namespace CloudberryKingdom
 {
 	template<typename T, typename OutputType>
-	class LambdaFunc_1
+	struct LambdaFunc_1
 	{
-	public:
+	
 		virtual OutputType Apply( const T &t ) = 0;
 	};
 }

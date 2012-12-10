@@ -6,53 +6,53 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class Firesnake : public _CircleDeath
+	struct Firesnake : public _CircleDeath
 	{
-	public:
-		class FiresnakeTileInfo : public TileInfoBase
+	
+		struct FiresnakeTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			FiresnakeTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		std::shared_ptr<QuadClass> MyQuad;
 
-	private:
+	
 		Vector2 Size;
 
-	public:
+	
 		Vector2 Orbit;
 		Vector2 Radii;
 		int Period, Offset;
@@ -65,10 +65,10 @@ public:
 
 		virtual void PhsxStep();
 
-	protected:
+	
 		virtual void DrawGraphics();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Reset( bool BoxesOnly );

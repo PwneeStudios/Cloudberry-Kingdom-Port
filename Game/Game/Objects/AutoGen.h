@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters : public std::enable_shared_from_this<AutoGen_Parameters>
+	struct AutoGen_Parameters : public std::enable_shared_from_this<AutoGen_Parameters>
 	{
 		/// <summary>
 		/// Whether to intelligently spread out the period offsets of placed obstacles
 		/// </summary>
-	public:
+	
 		int ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd );
 
 		int EnforceOffset( int offset, int period );
@@ -61,19 +61,19 @@ namespace CloudberryKingdom
 
 		void SetVal( int &val, int newval );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		AutoGen_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class AutoGen : public std::enable_shared_from_this<AutoGen>
+	struct AutoGen : public std::enable_shared_from_this<AutoGen>
 	{
-	public:
+	
 		virtual std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		virtual std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );

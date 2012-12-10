@@ -8,24 +8,24 @@
 
 namespace CloudberryKingdom
 {
-	class EzEffectWad
+	struct EzEffectWad
 	{
-	public:
+	
 		Vector2 ModZoom;
 
 		typedef std::vector<std::shared_ptr<EzEffect> > EffectVec;
 		EffectVec EffectList;
 
-	private:
+	
 		Vector4 _CameraPosition;
-	public:
+	
 		const Vector4 &getCameraPosition() const;
 		void setCameraPosition( const Vector4 &value );
 		void SetCameraPosition( Vector4 CameraPosition );
 
-	private:
+	
 		Vector4 HoldCamPos;
-	public:
+	
 		void SetDefaultZoom();
 
 		void ResetCameraPos();
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 
 		void AddEffect( const std::shared_ptr<Effect> &effect, const std::wstring &Name );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

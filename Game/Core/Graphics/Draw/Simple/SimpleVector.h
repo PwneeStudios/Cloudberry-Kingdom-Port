@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class SimpleVector
+	struct SimpleVector
 	{
-	public:
+	
 		AnimationData AnimData;
 		MyOwnVertexFormat Vertex;
 		Vector2 Pos;

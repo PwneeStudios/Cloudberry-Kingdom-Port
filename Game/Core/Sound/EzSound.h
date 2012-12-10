@@ -7,18 +7,18 @@
 
 namespace CloudberryKingdom
 {
-	class EzSound
+	struct EzSound
 	{
-	public:
+	
 		std::shared_ptr<SoundEffect> sound;
 		std::wstring Name;
 		int MaxInstances;
 		float DefaultVolume;
 		int DelayTillNextSoundCanPlay;
-	private:
+	
 		int LastPlayedStamp;
 
-	public:
+	
 		EzSound();
 
 		void Play();

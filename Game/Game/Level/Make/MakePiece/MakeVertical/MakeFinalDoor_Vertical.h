@@ -5,31 +5,31 @@
 
 namespace CloudberryKingdom
 {
-	class MakeFinalDoorVertical : public MakeThing
+	struct MakeFinalDoorVertical : public MakeThing
 	{
-	private:
-		class ElementPositionProjectY : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
+	
+		struct ElementPositionProjectY : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
-		public:
+		
 			float Apply( const std::shared_ptr<BlockBase> &element );
 		};
 
-	private:
-		class MatchUsedLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct MatchUsedLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		public:
+		
 			MatchUsedLambda();
 
 			bool Apply( const std::shared_ptr<BlockBase> &match );
 		};
 
-	protected:
+	
 		std::shared_ptr<Level> MyLevel;
 
 		/// <summary>
 		/// The block on which the final door rests on.
 		/// </summary>
-	private:
+	
 		std::shared_ptr<BlockBase> FinalBlock;
 
 		/// <summary>
@@ -37,16 +37,16 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 FinalPos;
 
-	public:
+	
 		MakeFinalDoorVertical( const std::shared_ptr<Level> &level );
 
 		virtual void Phase1();
 
 		virtual void Phase2();
 
-	protected:
+	
 		std::shared_ptr<Door> MadeDoor;
-	public:
+	
 		virtual void Phase3();
 
 		virtual void Cleanup();

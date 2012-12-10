@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass : public std::enable_shared_from_this<QuadClass>
+	struct QuadClass : public std::enable_shared_from_this<QuadClass>
 	{
-	public:
+	
 		static std::shared_ptr<QuadClass> FindQuad( std::vector<std::shared_ptr<QuadClass> > &list, const std::wstring &Name );
 
 		bool HitTest( Vector2 pos );
@@ -184,10 +184,10 @@ namespace CloudberryKingdom
 		float getAlpha() const;
 		void setAlpha( const float &value );
 
-	private:
+	
 		bool Fading;
 		float FadeSpeed;
-	public:
+	
 		void Fade( float speed );
 
 		void ResetFade();
@@ -210,29 +210,29 @@ namespace CloudberryKingdom
 		void Write( const std::shared_ptr<BinaryWriter> &writer );
 		void Read( const std::shared_ptr<BinaryReader> &reader );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class HsvQuad : public QuadClass
+	struct HsvQuad : public QuadClass
 	{
 
-	public:
+	
 		using QuadClass::Set;
 		using QuadClass::Draw;
 
 		/// <summary>
 		/// Color rotation matrix.
 		/// </summary>
-	public:
+	
 		const Matrix &getMyMatrix() const;
 
 		void setMyMatrix( const Matrix &value );
-	private:
+	
 		Matrix _MyMatrix;
 		float _MyMatrixSignature;
 
-	public:
+	
 		HsvQuad();
 
 		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );

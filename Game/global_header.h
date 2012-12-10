@@ -39,10 +39,10 @@ inline void Incr( E &e )
 	e = static_cast<E>( static_cast<int>( e ) + 1 );
 }
 
-class Object
+struct Object
 {
 
-public:
+
 	virtual ~Object()
 	{
 	}
@@ -50,10 +50,10 @@ public:
 };
 
 template<class T>
-class WrappedValue : public Object
+struct WrappedValue : public Object
 {
 
-public:
+
 	T MyValue;
 
 	WrappedValue( T value ) : MyValue( value )

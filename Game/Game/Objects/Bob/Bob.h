@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class Bob : public ObjectBase
+	struct Bob : public ObjectBase
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
-		class BobMove
+	
+		struct BobMove
 		{
-		public:
+		
 			BobMove()
 			{
 				MaxTargetY = MinTargetY = 0;
@@ -34,15 +34,15 @@ namespace CloudberryKingdom
 			void Init();
 		};
 
-	public:
+	
 		float LightSourceFade, LightSourceFadeVel;
 		void ResetLightSourceFade();
 		void SetLightSourceToFade();
 		void SetLightSourceToFadeIn();
-	private:
+	
 		void DoLightSourceFade();
 
-	public:
+	
 		bool Dopple;
 		Vector2 LastPlacedCoin;
 
@@ -83,11 +83,11 @@ namespace CloudberryKingdom
 		bool ShowCape;
 		Color InsideColor;
 
-	private:
+	
 		std::shared_ptr<ObjectVector> temp;
 		std::shared_ptr<Quad> Head;
 
-	public:
+	
 		std::vector<std::shared_ptr<BobLink> > MyBobLinks;
 
 		int SideHitCount;
@@ -183,10 +183,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<ObjectClass> PlayerObject;
 
 		std::shared_ptr<BlockBase> LastCeiling;
-	private:
+	
 		Vector2 LastCoinPos;
 
-	public:
+	
 		int MinFall, MinDrop;
 
 		bool MakingLava, MakingCeiling;
@@ -198,11 +198,11 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of boxes to allow for different difficulty levels for different obstacles.
 		/// </summary>
-	private:
+	
 		std::vector<std::shared_ptr<AABox> > Boxes;
 		int NumBoxes;
 
-	public:
+	
 		std::shared_ptr<AABox> GetBox( int DifficultyLevel );
 
 		/// <summary>
@@ -223,11 +223,11 @@ namespace CloudberryKingdom
 		Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad );
 		Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
 		Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
-	private:
+	
 		void LoadFromFile( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType );
 		void _Load( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType );
 
-	public:
+	
 		void SwitchHero( const std::shared_ptr<BobPhsx> &hero );
 
 		/// <summary>
@@ -262,10 +262,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The number of frames since the player has died.
 		/// </summary>
-	private:
+	
 		int DeathCount;
 
-	public:
+	
 		std::shared_ptr<ObjectBase> KillingObject;
 		static std::map<BobDeathType, Localization::Words> BobDeathNames;
 
@@ -301,10 +301,10 @@ namespace CloudberryKingdom
 
 		void GetRecordedInput( int Step );
 
-	private:
+	
 		void RecordInput( int Step );
 
-	public:
+	
 		void AnimStep();
 
 		/// <summary>
@@ -324,7 +324,7 @@ namespace CloudberryKingdom
 		void UpdateColors();
 
 		static bool GuideActivated;
-	private:
+	
 		static std::shared_ptr<QuadClass> GuideQuad;
 		void InitGuideQuad();
 
@@ -340,17 +340,17 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether the player is visible on the screen.
 		/// </summary>
-	public:
+	
 		bool IsVisible();
 
-	private:
+	
 		std::shared_ptr<QuadClass> Rocket;
-	public:
+	
 		Vector2 RocketOffset;
-	private:
+	
 		void DrawTheRocket();
 
-	public:
+	
 		Vector2 GetScale();
 
 		virtual void Draw();
@@ -359,10 +359,10 @@ namespace CloudberryKingdom
 
 		void InteractWithBlock( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block, ColType Col );
 
-	private:
+	
 		void UpdateGroundSpeed( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
 
-	public:
+	
 		void InitBoxesForCollisionDetect();
 
 		void UpdateCape();
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Calculate all interactions between the player and every IObject in the level.
 		/// </summary>
-	private:
+	
 		void ObjectInteractions();
 
 		/// <summary>
@@ -389,21 +389,21 @@ namespace CloudberryKingdom
 		/// </summary>
 		void UpdateBoxList();
 
-	public:
+	
 		void DeleteObj( const std::shared_ptr<ObjectBase> &obj );
 
 		std::shared_ptr<Ceiling_Parameters> CeilingParams;
 		/// <summary>
 		/// Calculate all interactions between the player and every Block in the level.
 		/// </summary>
-	private:
+	
 		void BlockInteractions();
 
 		void OldBlockInteractions();
 
 		void NewBlockInteractions();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

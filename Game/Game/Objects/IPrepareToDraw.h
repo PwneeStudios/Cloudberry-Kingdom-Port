@@ -6,12 +6,12 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Interface for an object that requires preparation before drawing
 	/// <\summary>
-	class IPrepareToDraw
+	struct IPrepareToDraw
 	{
 		/// <summary>
 		/// Prepares the object to be drawn
 		/// </summary>
-	public:
+	
 		virtual void PrepareToDraw() = 0;
 	};
 }

@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class NewHero : public GUI_Panel
+	struct NewHero : public GUI_Panel
 	{
-	public:
+	
 		virtual void OnAdd();
 
 		std::shared_ptr<EzText> text;
@@ -24,15 +24,15 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<NewHero> HeroTitle( const std::wstring &str );
 
-	private:
+	
 		bool Perma;
 		void Init( const std::wstring &str, Vector2 shift, float scale, bool perma );
 
 		int Count;
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

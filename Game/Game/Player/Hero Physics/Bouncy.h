@@ -5,28 +5,28 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxBouncy : public BobPhsxNormal
+	struct BobPhsxBouncy : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxBouncy> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxBouncy> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxBouncy> &bob );
 
-		// Instancable class
-	private:
+		// Instancable struct
+	
 		bool InitializedAnim;
 
-	public:
+	
 		BobPhsxBouncy();
 
 		virtual void Init( const std::shared_ptr<Bob> &bob );
@@ -38,16 +38,16 @@ namespace CloudberryKingdom
 		virtual void UpdateReadyToJump();
 
 		//float FakeVel = 0;
-	private:
+	
 		float SuperBounce;
 		int SuperBounceGraceCount;
 		int SuperBounceGrace;
-	public:
+	
 		virtual void Jump();
 
 		virtual void AnimStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

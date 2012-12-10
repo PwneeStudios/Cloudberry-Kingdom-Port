@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class CharacterSelect;
+	struct CharacterSelect;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -24,26 +24,26 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class HeroLevel : public CkBaseMenu
+	struct HeroLevel : public CkBaseMenu
 	{
-	private:
+	
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
-	public:
+	
 		HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		std::shared_ptr<EzText> Text;
-	public:
+	
 		virtual void Init();
 
 		bool ShowHeroLevel;
-	private:
+	
 		void SetHeroLevel();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

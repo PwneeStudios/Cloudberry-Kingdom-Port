@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class TileSetInfo
+	struct TileSetInfo
 	{
-	public:
+	
 		float ScaleAll, ScaleAllBlocks, ScaleAllObjects;
 
 		bool AllowLava;
@@ -45,10 +45,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<Coin::CoinTileInfo> Coins;
 		std::shared_ptr<Door::DoorTileInfo> Doors;
 
-	private:
+	
 		void InitializeInstanceFields();
 
-	public:
+	
 		TileSetInfo()
 		{
 			InitializeInstanceFields();

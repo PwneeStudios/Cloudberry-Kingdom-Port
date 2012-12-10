@@ -62,6 +62,10 @@ namespace CloudberryKingdom
 		FlyingBlob::InitializeStatics();
 		ObjectData::InitializeStatics();
 		Spike::InitializeStatics();
+
+
+
+
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
@@ -86,6 +90,46 @@ namespace CloudberryKingdom
 		Challenge_HeroRush2::InitializeStatics();
 		MainVideo::InitializeStatics();
 		ActionGameData::InitializeStatics();
+
+		// Menu::DefaultMenuInfo
+		Menu::DefaultMenuInfo::SelectedNextColor = ( bColor( 100, 250, 100, 255 ) ).ToVector4();
+		Menu::DefaultMenuInfo::SelectedBackColor = ( bColor( 250, 100, 100, 255 ) ).ToVector4();
+		Menu::DefaultMenuInfo::UnselectedNextColor = ( bColor( 40, 180, 40, 255 ) ).ToVector4();
+		Menu::DefaultMenuInfo::UnselectedBackColor = ( bColor( 180, 40, 40, 255 ) ).ToVector4();
+		Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( _T( "Menu_Hover" ),.7f );
+		Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( _T( "Menu_Select" ),.6f );
+		Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( _T( "Menu_Tick" ),.3f );
+		Menu::DefaultMenuInfo::Menu_ListScroll_Sound = Tools::NewSound( _T( "Menu_Hover" ),.5f );
+		Menu::DefaultMenuInfo::Menu_Back_Sound = Tools::NewSound( _T( "Menu_Back" ),.8f );
+		Menu::DefaultMenuInfo::Menu_Slide_SoundDelay = 8;
+		Menu::DefaultMenuInfo::MenuRightArrow_Texture = Tools::Texture( _T( "ListRightArrow" ) );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
+		Menu::DefaultMenuInfo::MenuRightArrow_Offset = Vector2( 20, -14 );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Offset = Vector2( -20, -14 );
+		Menu::DefaultMenuInfo::MenuArrow_Size = Vector2( 45, 45 );
+		Menu::DefaultMenuInfo::MenuArrow_Color = ( bColor( 255, 255, 255, 255 ) ).ToVector4();
+		Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture = Tools::Texture( _T( "ListRightArrow" ) );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
+		Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset = Vector2( 20, -14 );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset = Vector2( -20, -14 );
+		Menu::DefaultMenuInfo::MenuArrow_Selected_Size = Vector2( 45, 45 );
+		Menu::DefaultMenuInfo::MenuArrow_Selected_Color = ( bColor( 255, 255, 255, 0 ) ).ToVector4();
+		Menu::DefaultMenuInfo::SliderBack_Texture = Tools::Texture( _T( "menuslider_bar" ) );
+		Menu::DefaultMenuInfo::SliderBack_Size = Vector2( 250, 35 );
+		Menu::DefaultMenuInfo::Slider_Texture = Tools::Texture( _T( "menuslider_slider" ) );
+		Menu::DefaultMenuInfo::Slider_StartPos = Vector2( -210, 0 );
+		Menu::DefaultMenuInfo::Slider_EndPos = Vector2( 210, 0 );
+		Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
+
+		// Background
+		Background::GreenScreen = false;
+		Background::TestQuad = std::make_shared<QuadClass>();
+		Background::TestTexture = 0;
+
+		// Challenge_HeroRush2
+		Challenge_HeroRush2::HeroList = std::vector<HeroSpec>( 100 );
+		Challenge_HeroRush2::instance = std::make_shared<Challenge_HeroRush2>();
+
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )

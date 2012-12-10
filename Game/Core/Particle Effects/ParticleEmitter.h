@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class ParticleEmitterBin
+	struct ParticleEmitterBin
 	{
 
-	private:
+	
 		std::vector<std::shared_ptr<ParticleEmitter> > MyStack;
 		Mutex stackLock;
 
-	public:
+	
 		ParticleEmitterBin();
 
 		std::shared_ptr<ParticleEmitter> Get();
@@ -20,13 +20,13 @@ namespace CloudberryKingdom
 		void ReturnItem( const std::shared_ptr<ParticleEmitter> &item );
 	};
 
-	class ParticleEmitter : public std::enable_shared_from_this<ParticleEmitter>
+	struct ParticleEmitter : public std::enable_shared_from_this<ParticleEmitter>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		static std::shared_ptr<ParticleEmitterBin> Pool;
 
 		std::shared_ptr<EzTexture> MyTexture;
@@ -34,9 +34,9 @@ namespace CloudberryKingdom
 		Vector2 Position;
 		int Delay;
 		int Amount;
-	private:
+	
 		int Count;
-	public:
+	
 		int Index;
 
 		std::shared_ptr<Particle> ParticleTemplate;
@@ -54,22 +54,22 @@ namespace CloudberryKingdom
 
 		int LastActiveStep; // Tracks the last RealTime step the emitter was active
 		bool IsActive();
-	private:
+	
 		void UpdateStep();
 
-	public:
+	
 		void Release();
 
 		int TotalCapacity;
 		ParticleEmitter( int Capacity );
 
-	private:
+	
 		void Init( int capacity );
 
 		/// <summary>
 		/// Clear all particles.
 		/// </summary>
-	public:
+	
 		void Clean();
 
 		void Absorb( const std::shared_ptr<ParticleEmitter> &emitter );

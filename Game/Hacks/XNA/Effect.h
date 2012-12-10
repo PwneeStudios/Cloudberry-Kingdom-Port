@@ -4,21 +4,21 @@
 #include "Hacks/XNA/EffectParameter.h"
 #include "Hacks/XNA/EffectTechnique.h"
 
-class Effect
+struct Effect
 {
 
-public:
 
-	std::shared_ptr<class EffectTechnique> CurrentTechnique;
+
+	std::shared_ptr<struct EffectTechnique> CurrentTechnique;
 
 	// FIXME: Implement.
-	std::shared_ptr<class EffectParameter> Parameters( const std::wstring &name )
+	std::shared_ptr<struct EffectParameter> Parameters( const std::wstring &name )
 	{
 		return 0;
 	}
 
 	// FIXME: Implement.
-	std::shared_ptr<class EffectTechnique> Techniques( const std::wstring &name )
+	std::shared_ptr<struct EffectTechnique> Techniques( const std::wstring &name )
 	{
 		return 0;
 	}

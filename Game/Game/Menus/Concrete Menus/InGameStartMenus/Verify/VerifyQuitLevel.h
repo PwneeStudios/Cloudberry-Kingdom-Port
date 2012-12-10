@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 
@@ -13,24 +13,24 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class VerifyQuitLevelMenu : public VerifyBaseMenu
+	struct VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
-	private:
-		class VerifyQuitOkLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct VerifyQuitOkLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		public:
+		
 			VerifyQuitOkLambda();
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	public:
+	
 		VerifyQuitLevelMenu( bool CallBaseConstructor );
 		VerifyQuitLevelMenu( int Control );
 
 		virtual void Init();
 
-	private:
+	
 		void SetPos();
 	};
 }

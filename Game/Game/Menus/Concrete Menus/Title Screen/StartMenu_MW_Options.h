@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_Options : public SoundMenu
+	struct StartMenu_MW_Options : public SoundMenu
 	{
-	public:
+	
 		StartMenu_MW_Options( int Control, bool Centered );
 
 		virtual void SlideIn( int Frames );

@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreEntry
+	struct ScoreEntry
 	{
 
-	public:
+	
 		enum Format
 		{
 			Format_SCORE,
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 			Format_ATTEMPTS,
 			Format_TIME
 		};
-	public:
+	
 		const static std::wstring getDefaultName();
 
 		int GameId;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 
 		std::wstring _ToString( Format format );
 
-	private:
+	
 		std::wstring ScoreToString();
 
 		std::wstring TimeToString();
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 		std::wstring LevelToString();
 
-	public:
+	
 		std::wstring ToString( int Length );
 
 		/// <summary>
@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		/// <returns></returns>
 		static std::wstring DottedScore( std::wstring root, int score, int Length, int MinDots );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

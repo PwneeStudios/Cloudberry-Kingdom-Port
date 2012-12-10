@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class GUI_Level : public GUI_Panel
+	struct GUI_Level : public GUI_Panel
 	{
-	public:
+	
 		Localization::Words Prefix;
 
 		/// <summary>
@@ -23,48 +23,48 @@ namespace CloudberryKingdom
 		/// </summary>
 		virtual std::wstring ToString();
 
-	private:
+	
 		bool DoSlideIn;
 
 		bool AddedOnce;
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		int Level_Renamed;
-	public:
+	
 //C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		void SetLevel( int Level_Renamed );
 
 		std::shared_ptr<EzText> LevelText;
-	protected:
+	
 		void UpdateLevelText();
 
-	public:
+	
 		GUI_Level();
 		GUI_Level( bool SlideIn );
 
 		GUI_Level( int LevelNum );
 
-	private:
+	
 		void DoInit( bool SlideIn );
 
-	protected:
+	
 		virtual void MyDraw();
 
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class GUI_CampaignLevel : public GUI_Level
+	struct GUI_CampaignLevel : public GUI_Level
 	{
-	public:
+	
 		GUI_CampaignLevel();
 
 		virtual void OnAdd();

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundCollection
+	struct BackgroundCollection
 	{
-	public:
+	
 		std::shared_ptr<Level> MyLevel;
 
 		std::vector<std::shared_ptr<BackgroundFloaterList> > Lists;

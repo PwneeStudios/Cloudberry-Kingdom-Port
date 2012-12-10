@@ -5,42 +5,42 @@
 
 namespace CloudberryKingdom
 {
-	class LineSpriteInfo;
+	struct LineSpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class LavaDrip : public _BoxDeath
+	struct LavaDrip : public _BoxDeath
 	{
-	public:
-		class LavaDripTileInfo : public TileInfoBase
+	
+		struct LavaDripTileInfo : public TileInfoBase
 		{
-		public:
+		
 //C# TO C++ CONVERTER NOTE: The variable Line was renamed since it is named the same as a user-defined type:
 			std::shared_ptr<LineSpriteInfo> Line_Renamed;
 			Vector2 BoxSize;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			LavaDripTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		int Offset, DownT, WaitT, PeakT;
 
 		Vector2 Start, End;
@@ -56,17 +56,17 @@ public:
 		int Period;
 		void SetPeriod( float speed );
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		void AnimStep();
 		void AnimStep( bool Skip );
 
-	protected:
+	
 		virtual void DrawGraphics();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		virtual void Reset( bool BoxesOnly );

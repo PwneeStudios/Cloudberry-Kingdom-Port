@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class EzSongWad
+	struct EzSongWad
 	{
-	public:
+	
 		bool PlayNext, PlayerControl, DisplayInfo;
 		bool Fading;
 		float Fade;
@@ -21,10 +21,10 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<EzText> SongInfoText;
 		bool DisplayingInfo;
-	private:
+	
 		std::shared_ptr<Camera> DefaultCam;
 
-	public:
+	
 		EzSongWad();
 
 		void FadeOut();
@@ -42,19 +42,19 @@ namespace CloudberryKingdom
 
 		void PhsxStep();
 
-	private:
+	
 		void FadePhsx();
 
 		void DisplayPhsx();
 
-	public:
+	
 		void UpdateElapsedTime();
 
-	private:
+	
 		double Duration, Elapsed;
 		void CheckForNext();
 
-	public:
+	
 		bool IsPlaying();
 
 		void Next( const std::shared_ptr<EzSong> &song );
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		/// The play list currently playing
 		/// (possibly different than the set play list, if it hasn't been started yet).
 		/// </summary>
-	private:
+	
 		std::vector<std::shared_ptr<EzSong> > CurrentPlayingList;
 
 		bool SamePlayList( std::vector<std::shared_ptr<EzSong> > &list1, std::vector<std::shared_ptr<EzSong> > &list2 );
@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Starts the play list if it ISN'T already playing
 		/// </summary>
-	public:
+	
 		void Start( bool PlayNext );
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 
 		void LoopSong( const std::shared_ptr<EzSong> &song );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerIntLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , int>
+	struct PlayerIntLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , int>
 	{
-	public:
+	
 		PlayerIntLambda();
 
 		virtual int Apply( const std::shared_ptr<PlayerData> &p );
 	};
 
-	class UserPowers
+	struct UserPowers
 	{
 		/// <summary>
 		/// Whether the user can skip the beginning of the screen saver.
 		/// </summary>
-	public:
+	
 		static bool CanSkipScreensaver;
 
 		/// <summary>
@@ -34,9 +34,9 @@ namespace CloudberryKingdom
 		static void SetToSave();
 	};
 
-	class _SavePlayerData : public SaveLoad
+	struct _SavePlayerData : public SaveLoad
 	{
-	public:
+	
 		_SavePlayerData();
 
 		/// <summary>
@@ -44,100 +44,100 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool ResolutionPreferenceSet;
 
-	protected:
+	
 		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
 
 		virtual void Deserialize( std::vector<unsigned char> Data );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class RezData
+	struct RezData
 	{
-	public:
+	
 		bool Custom, Fullscreen;
 		int Width, Height;
 
 		RezData() : Custom( false ), Fullscreen( false ), Width( 0 ), Height( 0 ) { }
 	};
 
-	class PlayerManager
+	struct PlayerManager
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class SaveRezAndKeysLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
+	
+		struct SaveRezAndKeysLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
 		{
-		public:
+		
 			SaveRezAndKeysLambda();
 
 			void Apply( const std::shared_ptr<BinaryWriter> &writer );
 		};
 
-	private:
-		class LoadRezAndKeysLambda : public Lambda_1<std::vector<unsigned char> >
+	
+		struct LoadRezAndKeysLambda : public Lambda_1<std::vector<unsigned char> >
 		{
-		public:
+		
 			LoadRezAndKeysLambda();
 
 			void Apply( const std::vector<unsigned char> &Data );
 		};
 
-	private:
-		class GetGroupGamerTagNameLength : public LambdaFunc_1<std::shared_ptr<StringBuilder>, float>
+	
+		struct GetGroupGamerTagNameLength : public LambdaFunc_1<std::shared_ptr<StringBuilder>, float>
 		{
-		public:
+		
 			float Apply( const std::shared_ptr<StringBuilder> &name );
 		};
 
-	private:
-		class AnyAwardmentLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+	
+		struct AnyAwardmentLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Awardment> award;
-		public:
+		
 			AnyAwardmentLambda( const std::shared_ptr<Awardment> &award );
 
 			bool Apply( const std::shared_ptr<PlayerData> &player );
 		};
 
-	private:
-		class AnyBoughtLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+	
+		struct AnyBoughtLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Buyable> item;
-		public:
+		
 			AnyBoughtLambda( const std::shared_ptr<Buyable> &item );
 
 			bool Apply( const std::shared_ptr<PlayerData> &player );
 		};
 
-	private:
-		class BankLambda : public PlayerIntLambda
+	
+		struct BankLambda : public PlayerIntLambda
 		{
-		public:
+		
 			virtual int Apply( const std::shared_ptr<PlayerData> &p );
 		};
 
-	private:
-		class NotAllAwardedLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+	
+		struct NotAllAwardedLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Awardment> award;
-		public:
+		
 			NotAllAwardedLambda( const std::shared_ptr<Awardment> &award );
 
 			bool Apply( const std::shared_ptr<PlayerData> &player );
 		};
 
-	private:
+	
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-		class ExistingPlayerFindLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+		struct ExistingPlayerFindLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
 		{
-		public:
+		
 			ExistingPlayerFindLambda();
 
 			bool Apply( const std::shared_ptr<PlayerData> &player );
@@ -147,33 +147,33 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION) || defined(WINDOWS)
 #endif
 #if defined(PC_VERSION)
-	public:
+	
 		static void SaveRezAndKeys();
 
-	private:
+	
 		static void _SaveRezAndKeys( const std::shared_ptr<BinaryWriter> &writer );
 
 		static RezData d;
-	public:
+	
 		static RezData LoadRezAndKeys();
 
-	private:
+	
 		static void _LoadRezAndKeys( std::vector<unsigned char> Data );
 #endif
-	public:
+	
 		static bool PartiallyInvisible, TotallyInvisible;
 
-	private:
+	
 		static int _CoinsSpent;
-	public:
+	
 		const static int &getCoinsSpent();
 		static void setCoinsSpent( const int &value );
 
 		static std::shared_ptr<_SavePlayerData> SavePlayerData;
 #if defined(PC_VERSION)
-	private:
+	
 		static std::wstring _DefaultName;
-	public:
+	
 		const static std::wstring &getDefaultName();
 		static void setDefaultName( const std::wstring &value );
 #endif
@@ -196,14 +196,14 @@ namespace CloudberryKingdom
 		static int NumPlayers;
 		static std::vector<std::shared_ptr<PlayerData> > Players;
 
-	private:
+	
 		static int length( std::vector<std::shared_ptr<StringBuilder> > &names );
 
 		/// <summary>
 		/// Return a string representing the names of all players playing
 		/// </summary>
 		/// <returns></returns>
-	public:
+	
 		static std::wstring GetGroupGamerTag( int MaxLength );
 
 		static int MaxPlayerHighScore( int GameId );

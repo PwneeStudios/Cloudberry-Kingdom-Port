@@ -1,10 +1,10 @@
 #ifndef _THREAD_H_
 #define _THREAD_H_
 
-class Thread
+struct Thread
 {
 
-public:
+
 
 	static void Delay( int msec )
 	{

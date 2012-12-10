@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		//getWindow()->Title = _T("Cloudberry Kingdom ");
 		// FIXME: Set the title of the window to "Cloudberry Kingdom "
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Initialize();
 	}
 
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 	{
 		MyGame->LoadContent();
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::LoadContent();
 	}
 
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 
 		MyGame->Update();
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Update( gameTime );
 	}
 
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 	{
 		MyGame->Draw( gameTime );
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Draw( gameTime );
 	}
 

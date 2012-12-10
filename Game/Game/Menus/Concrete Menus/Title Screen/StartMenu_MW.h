@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 namespace CloudberryKingdom
 {
-	class TitleGameData_MW;
+	struct TitleGameData_MW;
 }
 
 namespace CloudberryKingdom
 {
-	class Menu;
+	struct Menu;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 
@@ -28,14 +28,14 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW : public StartMenu
+	struct StartMenu_MW : public StartMenu
 	{
-	protected:
+	
 		virtual void MenuGo_Options( const std::shared_ptr<MenuItem> &item );
 
 		virtual void Exit();
 
-	public:
+	
 		virtual void BringNextMenu();
 
 		std::shared_ptr<TitleGameData_MW> Title;
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
-	protected:
+	
 		virtual void BringCampaign();
 
 		virtual void BringArcade();
@@ -54,14 +54,14 @@ namespace CloudberryKingdom
 
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void OnAdd();
 
 		virtual bool MenuReturnToCaller( const std::shared_ptr<Menu> &menu );
 
 		virtual void Init();
 
-	private:
+	
 		std::shared_ptr<QuadClass> BackBox;
 
 		void BlackBox();

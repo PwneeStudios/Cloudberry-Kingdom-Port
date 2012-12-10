@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerData;
+	struct PlayerData;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 namespace CloudberryKingdom
 {
-	class TitleGameData_MW;
+	struct TitleGameData_MW;
 }
 
 
@@ -28,51 +28,51 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class CampaignChapterItem : public MenuItem
+	struct CampaignChapterItem : public MenuItem
 	{
-	private:
-		class CampaignLevelsLambda : public PlayerIntLambda
+	
+		struct CampaignLevelsLambda : public PlayerIntLambda
 		{
-		public:
+		
 			CampaignLevelsLambda();
 
 			virtual int Apply( const std::shared_ptr<PlayerData> &p );
 		};
-	public:
+	
 		int Chapter;
 
 		CampaignChapterItem( const std::shared_ptr<EzText> &Text, int Chapter );
 
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class StartMenu_MW_Campaign : public StartMenu
+	struct StartMenu_MW_Campaign : public StartMenu
 	{
-	private:
-		class CampaignGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct CampaignGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu_MW_Campaign> cine;
-		public:
+		
 			CampaignGoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &cine );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class GoLambda : public Lambda
+	
+		struct GoLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu_MW_Campaign> sm;
-		public:
+		
 			GoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &sm );
 
 			void Apply();
 		};
 
-	public:
+	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_Campaign( const std::shared_ptr<TitleGameData_MW> &Title );
 
@@ -80,22 +80,22 @@ namespace CloudberryKingdom
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
-	protected:
+	
 		void SetText( const std::shared_ptr<EzText> &text );
 
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void OnAdd();
 
 		virtual void Init();
 
-	protected:
+	
 		virtual void CreateMenu();
 
 		void MakeHeader();
 
-	private:
+	
 		void Go( const std::shared_ptr<MenuItem> &item );
 
 		int _StartLevel;

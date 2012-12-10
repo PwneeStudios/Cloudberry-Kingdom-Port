@@ -6,10 +6,10 @@
 /**
  * Cloudberry Kingdom game.
  */
-class CloudberryKingdomWrapper : public GameLoop
+struct CloudberryKingdomWrapper : public GameLoop
 {
 	
-public:
+
 
 	/**
 	 * @see GameLoop::Initialize

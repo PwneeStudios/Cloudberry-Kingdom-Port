@@ -5,18 +5,18 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxRandom : public BobPhsx
+	struct BobPhsxRandom : public BobPhsx
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	protected:
+	
 		// Singleton
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxRandom> instance;
-	public:
+	
 		static const std::shared_ptr<BobPhsxRandom> &getInstance();
 
 		static std::shared_ptr<BobPhsx> ChooseHeroType();
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxRandom> &bob );
 
-		// Instancable class
+		// Instancable struct
 		BobPhsxRandom();
 	};
 }

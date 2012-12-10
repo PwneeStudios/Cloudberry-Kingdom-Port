@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class CapeNode
+	struct CapeNode
 	{
-	public:
+	
 		PhsxData Data, StartData;
 		int AnchorIndex;
 		Vector2 AnchorOffset;
@@ -17,9 +17,9 @@ namespace CloudberryKingdom
 		bool Show;
 	};
 
-	class CapeLink
+	struct CapeLink
 	{
-	public:
+	
 		int j, k;
 		float L, a_in, a_out;
 		bool Show;
@@ -27,9 +27,9 @@ namespace CloudberryKingdom
 		void Init();
 	};
 
-	class Cape
+	struct Cape
 	{
-	public:
+	
 		static Vector2 SineWind( Vector2 Dir, float NormalIntensity, float Period, float t );
 
 		std::shared_ptr<Bob> MyBob;
@@ -60,15 +60,15 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<QuadClass> MyQuad;
 
-	private:
+	
 		int Sections, HorizontalSections;
 		float MaxForce;
-	public:
+	
 		int PhsxSteps;
 		float strength_in;
-	private:
+	
 		float strength_out;
-	public:
+	
 		float Retard;
 		Vector2 Gravity;
 		bool GroundCollision;
@@ -77,10 +77,10 @@ namespace CloudberryKingdom
 
 		Vector2 Wind;
 
-	private:
+	
 		bool DrawLines, DrawNodes;
 
-	public:
+	
 		Vector2 p1_Left, p2_Left;
 		Vector2 p1_Right, p2_Right;
 
@@ -98,9 +98,9 @@ namespace CloudberryKingdom
 
 		void Reset();
 
-	private:
+	
 		float CapeThickness;
-	public:
+	
 		CapeType MyType;
 
 //C# TO C++ CONVERTER NOTE: The parameter Phsx was renamed since it is named the same as a user-defined type:
@@ -108,15 +108,15 @@ namespace CloudberryKingdom
 
 		void PhsxStep();
 
-	private:
+	
 		void UpdateTriangles();
 
 		void ApplyScaling( Vector2 &v );
 
-	public:
+	
 		void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -7,10 +7,10 @@
 
 namespace CloudberryKingdom
 {
-	class ButtonTexture
+	struct ButtonTexture
 	{
 #if defined(PC_VERSION)
-	public:
+	
 		static std::shared_ptr<EzTexture> getGo();
 		static std::shared_ptr<EzTexture> getBack();
 		static std::shared_ptr<EzTexture> getX();
@@ -27,10 +27,10 @@ namespace CloudberryKingdom
 #endif
 	};
 
-	class ButtonString
+	struct ButtonString
 	{
 #if defined(PC_VERSION)
-	public:
+	
 		static std::map<Keys, std::wstring> KeyToString;
 		static void Init();
 
@@ -102,45 +102,45 @@ namespace CloudberryKingdom
 #endif
 	};
 
-	class EzText
+	struct EzText
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class EzTextBit
+	
+		struct EzTextBit
 		{
-		public:
+		
 			int LineNumber;
 			std::wstring str;
 			std::shared_ptr<StringBuilder> builder_str;
 			Vector2 loc, size;
 			Color clr;
 		};
-	private:
-		class EzTextPic
+	
+		struct EzTextPic
 		{
-		public:
+		
 			int LineNumber;
 			std::shared_ptr<EzTexture> tex;
 			Rectangle rect;
 			Vector2 size;
 			bool AsPaint;
 		};
-	public:
+	
 		enum Style
 		{
 			Style_NORMAL,
 			Style_FADING_OFF
 		};
-	private:
+	
 		enum ParseData
 		{
 			ParseData_PIC,
 			ParseData_COLOR
 		};
-	public:
+	
 
 		static std::wstring ColorToMarkup( int r, int g, int b );
 		static std::wstring ColorToMarkup( int r, int g, int b, int shift );
@@ -162,14 +162,14 @@ namespace CloudberryKingdom
 		bool HitTest( Vector2 pos );
 		bool HitTest( Vector2 pos, Vector2 padding );
 
-	private:
+	
 		std::vector<std::shared_ptr<EzTextBit> > Bits;
 		std::vector<std::shared_ptr<EzTextPic> > Pics;
 
 		/// <summary>
 		/// Replaces the first bit of text, with no reformatting
 		/// </summary>
-	public:
+	
 		void SubstituteText( const std::wstring &text );
 		void SubstituteText( const std::shared_ptr<StringBuilder> &text );
 		void SubstituteText( Localization::Words word );
@@ -193,14 +193,14 @@ namespace CloudberryKingdom
 		bool FixedToCamera;
 
 		bool ColorizePics;
-	private:
+	
 		Color PicColor;
 
-	public:
+	
 		std::shared_ptr<EzFont> MyFont;
-	private:
+	
 		Color MyColor;
-	public:
+	
 		Vector4 MyFloatColor;
 
 		Vector2 TR, BL;
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
 		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
 
-	private:
+	
 		Vector2 loc;
 		float LineHeight;
 		void CheckForLineEnd( Vector2 TextSize );
@@ -275,10 +275,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Returns the text code to generate the given color, of the form "{c r,g,b,a}"
 		/// </summary>
-	public:
+	
 		static std::wstring ColorToCode( Color clr );
 
-	private:
+	
 		std::wstring Parse_PicName;
 		Vector2 Parse_PicSize;
 		Vector2 Parse_PicShift;
@@ -297,7 +297,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Gets the real world size of the text, accounting for scaling
 		/// </summary>
-	public:
+	
 		Vector2 GetWorldSize();
 
 		/// <summary>
@@ -312,16 +312,16 @@ namespace CloudberryKingdom
 
 		float GetWorldWidth( const std::wstring &str );
 
-	private:
+	
 		Vector2 _MyCameraZoom;
 		/// <summary>
 		/// The value of the camera zoom the last time this EzText was drawn
 		/// </summary>
-	public:
+	
 		const Vector2 &getMyCameraZoom() const;
 		void setMyCameraZoom( const Vector2 &value );
 
-	private:
+	
 		Vector2 GetWorldVector( Vector2 v );
 		float GetWorldFloat( float interval );
 
@@ -329,7 +329,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Converts a length from screen units to world units
 		/// </summary>
-	public:
+	
 		static float GetWorldFloat( float interval, Vector2 zoom );
 
 		/// <summary>
@@ -342,19 +342,19 @@ namespace CloudberryKingdom
 		/// </summary>
 		static Vector2 GetGUIVector( Vector2 v );
 
-	private:
+	
 		float LineHeightMod;
 		std::vector<Vector2> LineSizes;
 		void Init( const std::wstring &str );
 		void Init( std::wstring str, float Width, bool Centered, bool YCentered, float LineHeightMod );
 
-	public:
+	
 		void Center();
 
-	private:
+	
 		Vector2 JustificationShift;
 
-	public:
+	
 		bool Show;
 		void Draw( const std::shared_ptr<Camera> &cam );
 		virtual void Draw( const std::shared_ptr<Camera> &cam, bool EndBatch );
@@ -367,7 +367,7 @@ namespace CloudberryKingdom
 
 		void CalcBounds();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

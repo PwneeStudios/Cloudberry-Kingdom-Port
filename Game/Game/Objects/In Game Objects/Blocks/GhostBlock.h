@@ -5,31 +5,31 @@
 
 namespace CloudberryKingdom
 {
-	class GhostBlock : public BlockBase
+	struct GhostBlock : public BlockBase
 	{
 
-	public:
-		class GhostBlockTileInfo : public TileInfoBase
+	
+		struct GhostBlockTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 			std::shared_ptr<TextureOrAnim> Sprite;
 			Vector2 Shift;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-	public:
+	
 			GhostBlockTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		std::shared_ptr<SimpleObject> MyObject;
 
-	private:
+	
 		GhostBlockState State;
 
 		/// <summary>
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		float StateChange;
 
-	public:
+	
 		float MyAnimSpeed;
 
 		int InLength, OutLength, Offset;
@@ -57,10 +57,10 @@ namespace CloudberryKingdom
 		void SetState( GhostBlockState NewState );
 		void SetState( GhostBlockState NewState, bool ForceSet );
 
-	private:
+	
 		void SetAnimation();
 
-	public:
+	
 		GhostBlock( bool BoxesOnly );
 
 		static float TallScale;

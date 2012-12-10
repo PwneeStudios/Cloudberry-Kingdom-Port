@@ -2,9 +2,9 @@
 #define INTVECTOR2
 namespace CloudberryKingdom
 {
-	class IntVector2
+	struct IntVector2
 	{
-	public:
+	
 		int X, Y;
 
 		IntVector2()

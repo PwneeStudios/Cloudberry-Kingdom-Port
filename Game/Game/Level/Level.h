@@ -5,65 +5,65 @@
 
 namespace CloudberryKingdom
 {
-	class Level : public std::enable_shared_from_this<Level>
+	struct Level : public std::enable_shared_from_this<Level>
 	{
-	private:
-		class ElementDistanceSquared : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
+	
+		struct ElementDistanceSquared : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
-		private:
+		
 			Vector2 pos;
 
-		public:
+		
 			ElementDistanceSquared( Vector2 pos );
 
 			float Apply( const std::shared_ptr<BlockBase> &element );
 		};
 
-	private:
-		class FindFirstRowLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct FindFirstRowLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		public:
+		
 			FindFirstRowLambda();
 
 			bool Apply( const std::shared_ptr<BlockBase> &match );
 		};
 
-	private:
-		class MakeVerticalCleanupHelper : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct MakeVerticalCleanupHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
 
-		public:
+		
 			MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
-	private:
-		class FindLimitGeneralDensityLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	
+		struct FindLimitGeneralDensityLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
-		public:
+		
 			FindLimitGeneralDensityLambda();
 
 			bool Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class EndReachedLambda : public Lambda
+	
+		struct EndReachedLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
-		public:
+		
 			EndReachedLambda( const std::shared_ptr<Level> &level );
 
 			void Apply();
 		};
 
-	private:
-		class SafetyNetLambda : public Lambda_1<Vector2>
+	
+		struct SafetyNetLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
 			Vector2 BL;
 			Vector2 TR;
@@ -77,184 +77,184 @@ namespace CloudberryKingdom
 			bool InvertDraw;
 			bool Invert;
 
-		public:
+		
 			SafetyNetLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert );
 
 			void Apply( const Vector2 &pos );
 
-		private:
+		
 			void InitializeInstanceFields();
 		};
 
-	private:
-		class MakeInitialLambda : public Lambda_1<Vector2>
+	
+		struct MakeInitialLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
 			Vector2 size;
-		public:
+		
 			MakeInitialLambda( const std::shared_ptr<Level> &level, Vector2 size );
 
 			void Apply( const Vector2 &pos );
 		};
 
-	private:
-		class Stage1RndFillLambda : public Lambda_1<Vector2>
+	
+		struct Stage1RndFillLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
 			Vector2 BL;
 			Vector2 TR;
 			Vector2 BL_Cutoff;
 
-		public:
+		
 			Stage1RndFillLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff );
 
 			void Apply( const Vector2 &pos );
 		};
 
-	private:
-		class GeneralMinDistLambda : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct GeneralMinDistLambda : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
-		public:
+		
 			GeneralMinDistLambda( const std::shared_ptr<Level> &level );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
-	private:
-		class CloseToStartLambda : public LambdaFunc_1<std::shared_ptr<Bob> , bool>
+	
+		struct CloseToStartLambda : public LambdaFunc_1<std::shared_ptr<Bob> , bool>
 		{
-		public:
+		
 			CloseToStartLambda();
 
 			bool Apply( const std::shared_ptr<Bob> &bob );
 		};
 
-	private:
-		class IsLavaLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct IsLavaLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		public:
+		
 			IsLavaLambda();
 
 			bool Apply( const std::shared_ptr<BlockBase> &block );
 		};
 
-	private:
-		class FindGuidLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	
+		struct FindGuidLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
-		private:
+		
 			unsigned long long guid;
-		public:
+		
 			FindGuidLambda( unsigned long long guid );
 
 			bool Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class CleanObjectListLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	
+		struct CleanObjectListLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
-		public:
+		
 			CleanObjectListLambda();
 
 			bool Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class CleanDrawLayerLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	
+		struct CleanDrawLayerLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
-		private:
+		
 			int layer;
-		public:
+		
 			CleanDrawLayerLambda( int layer );
 
 			bool Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class CleanBlockListLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct CleanBlockListLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		public:
+		
 			CleanBlockListLambda();
 
 			bool Apply( const std::shared_ptr<BlockBase> &obj );
 		};
 
-	public:
+	
 		enum LightLayers
 		{
 			LightLayers_FRONT_OF_LEVEL,
 			LightLayers_FRONT_OF_EVERYTHING
 		};
-	private:
-		class RemoveForeignLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	
+		struct RemoveForeignLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
-		public:
+		
 			RemoveForeignLambda( const std::shared_ptr<Level> &level );
 
 			bool Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class RemoveForeignBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct RemoveForeignBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
-		public:
+		
 			RemoveForeignBlockLambda( const std::shared_ptr<Level> &level );
 
 			bool Apply( const std::shared_ptr<BlockBase> &obj );
 		};
 
-	public:
-		class BaseMetric : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
+	
+		struct BaseMetric : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
 		{
-		public:
+		
 			BaseMetric();
 
 			Vector2 Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B );
 		};
-	private:
-		class ConstLambda : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct ConstLambda : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			Vector2 c;
-		public:
+		
 			ConstLambda( Vector2 c );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
-	private:
-		class SetBackLambda : public Lambda
+	
+		struct SetBackLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Level> level;
 			int Steps;
 
-		public:
+		
 			SetBackLambda( const std::shared_ptr<Level> &level, int Steps );
 
 			void Apply();
 		};
 
-	private:
-		class CleanupCoinsHelper : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct CleanupCoinsHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Coin_Parameters> Params;
 
-		public:
+		
 			CleanupCoinsHelper( const std::shared_ptr<Coin_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
-	public:
+	
 		void CleanupCoins( Vector2 BL, Vector2 TR );
 
 
@@ -272,18 +272,18 @@ namespace CloudberryKingdom
 		/// </summary>
 		float MakeVerticalInitialPlats( const std::shared_ptr<StyleData> &Style );
 
-	private:
+	
 		bool EndReached;
-	public:
+	
 		bool MakeVertical( int Length, float Height, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData );
 
-	private:
+	
 		float SetStepMultiplier( Vector2 &Size, Vector2 &Step );
 
 		std::shared_ptr<NormalBlock> MakePillarBack( Vector2 p1, Vector2 p2 );
 
 
-	public:
+	
 		void CleanupFireSpinners( Vector2 BL, Vector2 TR );
 		void AutoFireSpinners();
 
@@ -302,18 +302,18 @@ namespace CloudberryKingdom
 		std::shared_ptr<Recording> CurrentRecording;
 //C# TO C++ CONVERTER NOTE: The variable Recording was renamed since it is named the same as a user-defined type:
 		bool Recording_Renamed;
-	private:
+	
 		std::shared_ptr<ReplayGUI> MyReplayGUI;
 
-	public:
+	
 		bool SingleOnly;
 
 		bool NoCameraChange;
-	private:
+	
 		void SaveCamera();
 		void RestoreCamera();
 
-	public:
+	
 		void SetReplay();
 
 		void WatchReplay( bool SaveCurInfo );
@@ -399,10 +399,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset );
 		std::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset, bool LayeredDoor );
 
-	private:
+	
 		void SetBackblockProperties( const std::shared_ptr<NormalBlock> &backblock );
 
-	public:
+	
 		static void SpreadStartPositions( const std::shared_ptr<LevelPiece> &piece, const std::shared_ptr<MakeData> &make, Vector2 pos, Vector2 SpanPer );
 
 		/// <summary>
@@ -410,7 +410,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		float MakeInitialPlats( Vector2 BL, Vector2 TR, const std::shared_ptr<SingleData> &Style );
 
-	private:
+	
 		float MakeInitial_LandingZone( Vector2 &BL, Vector2 &TR, Vector2 &size );
 
 		float MakeInitial_Spaceship( Vector2 &BL, Vector2 &TR, Vector2 &pos, std::shared_ptr<NormalBlock> &block );
@@ -419,18 +419,18 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<NormalBlock> __block_fromlambda;
 
-	public:
+	
 		float VanillaFill( Vector2 BL, Vector2 TR, float width );
 		float VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PreInit, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PostInit );
 
 		float RandomBlocks( Vector2 BL, Vector2 TR, std::shared_ptr<MakeData> &makeData );
 
-	private:
+	
 		static int CountToSleep;
 		static void Sleep();
 		static void CheckToSleep();
 
-	public:
+	
 		void Stage1RndFill( Vector2 BL, Vector2 TR, Vector2 BL_Cutoff, float Sparsity );
 
 
@@ -449,12 +449,12 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 Fill_TR, Fill_BL;
 
-	private:
+	
 		static bool showdebug;
 		static bool dodebug;
 		void DEBUG( const std::wstring &str );
 
-	public:
+	
 		void PREFILL();
 
 		static std::wstring Pre1, Pre2, Post;
@@ -464,7 +464,7 @@ namespace CloudberryKingdom
 		int LastStep;
 		bool MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData );
 
-	private:
+	
 		void Stage1( Vector2 BL_Bound, Vector2 TR_Bound, int Length );
 
 		void Stage1Cleanup( Vector2 BL_Bound, Vector2 TR_Bound );
@@ -473,12 +473,12 @@ namespace CloudberryKingdom
 
 		void Stage2Cleanup( Vector2 BL_Bound, Vector2 TR_Bound );
 
-	public:
+	
 		void OverlapCleanup();
 
 		void BlockOverlapCleanup();
 
-	private:
+	
 		void SpaceshipBlockCleanup();
 
 		void RegularBlockCleanup();
@@ -487,14 +487,14 @@ namespace CloudberryKingdom
 		void InitMakeData( const std::shared_ptr<MakeData> &makeData );
 
 
-	public:
+	
 		const std::shared_ptr<Recycler> getRecycle() const;
 
 		std::wstring Name;
 
-	private:
+	
 		std::shared_ptr<Rand> _PrivateRnd;
-	public:
+	
 		const std::shared_ptr<Rand> &getRnd();
 
 		bool SuppressSounds;
@@ -524,7 +524,7 @@ namespace CloudberryKingdom
 
 		/// <summary>
 		/// If true the player can watch the computer replay.
-		/// Use the External bool if suppressing watch from outside the level class.
+		/// Use the External bool if suppressing watch from outside the level struct.
 		/// </summary>
 		bool CanWatchComputer;
 
@@ -547,9 +547,9 @@ namespace CloudberryKingdom
 
 		bool CanWatchReplay;
 
-	private:
+	
 		bool _PreventReset;
-	public:
+	
 		const bool &getPreventReset() const;
 		void setPreventReset( const bool &value );
 
@@ -580,25 +580,25 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Checks the current time limit. If it is almost up a timer is added to the GUI.
 		/// </summary>
-	private:
+	
 		void CheckTimeLimit();
 
 		/// <summary>
 		/// Holds the LevelSeedData that generated this level.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<LevelSeedData> MyLevelSeed;
 
 		Vector2 ModZoom;
 
-	private:
+	
 		std::shared_ptr<EzTexture> LightTexture;
 		std::shared_ptr<RenderTarget2D> LightRenderTarget;
-	public:
+	
 		std::shared_ptr<ClosingCircle> Circle;
-	private:
+	
 		std::shared_ptr<QuadClass> LightQuad;
-	public:
+	
 		bool _UseLighting;
 
 		std::shared_ptr<Background> MyBackground;
@@ -642,13 +642,13 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// This is the layer the player replays are drawn on.
 		/// </summary>
-	private:
+	
 		static const int ReplayDrawLayer = 6;
 
 		/// <summary>
 		/// This is the layer drawn immediately after the last particles.
 		/// </summary>
-	public:
+	
 		static int AfterParticlesDrawLayer;
 
 		/// <summary>
@@ -657,13 +657,13 @@ namespace CloudberryKingdom
 		static int LastInLevelDrawLayer;
 
 		/// <summary>
-		/// This draw layer is drawn after the Game class's post draw method.
+		/// This draw layer is drawn after the Game struct's post draw method.
 		/// </summary>
 		static int AfterPostDrawLayer;
 
-	private:
+	
 		std::vector<ObjectVec > DrawLayer;
-	public:
+	
 		std::vector<std::shared_ptr<ParticleEmitter> > ParticleEmitters;
 
 		BlockVec Blocks, AddedBlocks;
@@ -674,9 +674,9 @@ namespace CloudberryKingdom
 		bool Watching, Replay, SuppressCheckpoints, GhostCheckpoints, MainReplayOnly, ReplayPaused;
 
 		std::shared_ptr<Camera> MyCamera;
-	private:
+	
 		std::shared_ptr<Camera> HoldCamera;
-	public:
+	
 		const std::shared_ptr<Camera> &getMainCamera() const;
 		void setMainCamera( std::shared_ptr<Camera> &value );
 
@@ -695,10 +695,10 @@ namespace CloudberryKingdom
 		Level();
 		Level( bool ShowParticles );
 
-	private:
+	
 		void Init( bool NoParticles );
 
-	public:
+	
 		void Release();
 
 		/// <summary>
@@ -738,12 +738,12 @@ namespace CloudberryKingdom
 		/// <param name="Bin">Whether the file is saved to the bin or the original project content directory.</param>
 		void Save( const std::wstring &file, bool Bin );
 
-	private:
+	
 		static int DrawLayerSortFunc( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B );
 
 		void SortDrawLayers();
 
-	public:
+	
 		void Write( const std::shared_ptr<BinaryWriter> &writer );
 
 		void Move( Vector2 shift );
@@ -759,10 +759,10 @@ namespace CloudberryKingdom
 
 		void StopRecording();
 
-	private:
+	
 		void PrepareBundleToAddRecording();
 
-	public:
+	
 		void AddCurRecording();
 
 		/// <summary>
@@ -798,21 +798,21 @@ namespace CloudberryKingdom
 		void SetCurrentPiece( int LevelPieceIndex );
 		void SetCurrentPiece( const std::shared_ptr<LevelPiece> &piece );
 
-	private:
+	
 		void NonLambdaReset();
 
-	public:
+	
 		bool BoxesOnly;
 		void ResetAll( bool BoxesOnly );
 		void ResetAll( bool BoxesOnly, bool AdditionalReset );
-	private:
+	
 		void Reset_BoxesOnly( bool AdditionalReset );
 		void Reset_Graphical( bool AdditionalReset );
 		void __Reset( bool BoxesOnly, bool AdditionalReset );
 
 		static std::shared_ptr<ObjectBase> FindParentObjectById( ObjectVec &ObjectList, const std::shared_ptr<ObjectBase> &obj );
 
-	public:
+	
 		void SynchObject( const std::shared_ptr<ObjectBase> &obj );
 
 		void MoveUpOneSublayer( const std::shared_ptr<ObjectBase> &obj );
@@ -837,10 +837,10 @@ namespace CloudberryKingdom
 
 		ObjectVec PreRecycleBin;
 
-	private:
+	
 		void EmptyPreRecycleBin();
 
-	public:
+	
 		void CleanAllObjectLists();
 
 		void ClearAllObjectLists();
@@ -877,21 +877,21 @@ namespace CloudberryKingdom
 		void InitializeLighting();
 
 
-	private:
+	
 		float BobLightRadius; //670
 		static std::vector<float> BobLightRadiusByDifficulty;
-	public:
+	
 		void SetBobLightRadius( int Difficulty );
 
 		void FadeBobLightSourcesIn();
 
 		LightLayers LightLayer;
-	private:
+	
 		void PrepareLighting();
 
 		void DrawLighting();
 
-	public:
+	
 		void Draw();
 		void Draw( bool DrawAll );
 		void Draw( bool DrawAll, int StartLayer, int EndLayer );
@@ -923,10 +923,10 @@ namespace CloudberryKingdom
 		/// </summary>
 		ObjectVec GetObjectList( ObjectType type );
 
-	private:
+	
 		static std::shared_ptr<BaseMetric> DefaultMetric;
 
-	public:
+	
 		void Cleanup( ObjectType type, Vector2 v );
 		void Cleanup( ObjectType type, Vector2 v, Vector2 BL, Vector2 TR );
 
@@ -943,15 +943,15 @@ namespace CloudberryKingdom
 		void Cleanup_xCoord( ObjectType ObjType, float MinDist );
 
 
-	private:
+	
 		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
 
 		void CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
 
-	public:
+	
 		void StartPlayerPlay();
 
-	private:
+	
 		void EvolveParticles();
 
 		void UpdateBlocks();
@@ -964,25 +964,25 @@ namespace CloudberryKingdom
 
 		void UpdateBobs();
 
-	public:
+	
 		void PhsxStep( bool NotDrawing );
 		void PhsxStep( bool NotDrawing, bool GUIPhsx );
 
-	private:
+	
 		void SetIndependentStep();
 
-	public:
+	
 		bool IndependentStepSetOnce;
 		float IndependentPhsxStep, IndependentDeltaT;
-	private:
+	
 		float Prev;
 
-	public:
+	
 		TimeTypes TimeType;
 
 		ObjectVec ActiveObjectList;
 
-	private:
+	
 		void CreateActiveObjectList();
 
 		void UpdateActiveObjectList();
@@ -993,14 +993,14 @@ namespace CloudberryKingdom
 		void ResetActiveObjectList();
 
 
-	public:
+	
 		bool IsBetween( Vector2 Point, Vector2 p1, Vector2 p2 );
 
 		void CountCoinsAndBlobs();
 
 		void SetBack( int Steps );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class ProgressBar
+	struct ProgressBar
 	{
-	public:
+	
 		enum BarType
 		{
 			BarType_SCALE,
 			BarType_REVEAL
 		};
-	public:
+	
 		BarType MyType;
 
 		const Vector2 &getFull_BL() const;
@@ -32,10 +32,10 @@ namespace CloudberryKingdom
 
 		ProgressBar();
 
-	private:
+	
 		void Initialize();
 
-	public:
+	
 		void InitStandardBar();
 
 		ProgressBar( const std::wstring &FillName, const std::wstring &OutlineName, float Width );
@@ -48,20 +48,20 @@ namespace CloudberryKingdom
 
 		void Draw( bool Selected );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class InitialLoadingScreen
+	struct InitialLoadingScreen
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		bool IsDone;
 
-	private:
+	
 		std::shared_ptr<SoundEffect> Whinney;
 
 		std::shared_ptr<DrawPile> MyPile;
@@ -72,24 +72,24 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<QuadClass> BlackQuad, Splash;
 
-	public:
+	
 		InitialLoadingScreen( const std::shared_ptr<ContentManager> &Content, const std::shared_ptr<WrappedFloat> &ResourceCount );
 
 		static int TotalResources;
 
 		bool Accelerate;
-	private:
+	
 		int DoneCount;
-	public:
+	
 		void PhsxStep();
 
-	private:
+	
 		static const bool NoShow = true;
 
-	public:
+	
 		void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

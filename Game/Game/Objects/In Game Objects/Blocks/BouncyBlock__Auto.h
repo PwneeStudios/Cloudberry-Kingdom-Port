@@ -5,18 +5,18 @@
 
 namespace CloudberryKingdom
 {
-	class BouncyBlock_Parameters : public AutoGen_Parameters
+	struct BouncyBlock_Parameters : public AutoGen_Parameters
 	{
-	public:
-		class _Special
+	
+		struct _Special
 		{
 			/// <summary>
 			/// A special fill type. Creates a ceiling and ground of bouncy blocks.
 			/// </summary>
-		public:
+		
 			bool Hallway;
 		};
-	public:
+	
 		Param Speed, Size, SideDampening, KeepUnused, EdgeSafety;
 
 		_Special Special;
@@ -24,24 +24,24 @@ namespace CloudberryKingdom
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 	};
 
-	class BouncyBlock_AutoGen : public AutoGen
+	struct BouncyBlock_AutoGen : public AutoGen
 	{
-	private:
+	
 		static const std::shared_ptr<BouncyBlock_AutoGen> instance;
-	public:
+	
 		const static std::shared_ptr<BouncyBlock_AutoGen> &getInstance();
 
-	public:
+	
 		BouncyBlock_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void SetHallwaysBlockProperties( const std::shared_ptr<BouncyBlock> &block, const std::shared_ptr<Level> &level );
 		void Hallway( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-	public:
+	
 		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

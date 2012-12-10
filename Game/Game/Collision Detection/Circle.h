@@ -5,27 +5,27 @@
 
 namespace CloudberryKingdom
 {
-	class AutoGen;
+	struct AutoGen;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectData;
+	struct ObjectData;
 }
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class FloatRectangle;
+	struct FloatRectangle;
 }
 
 
@@ -34,20 +34,20 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class CircleBox
+	struct CircleBox
 	{
-	public:
+	
 		bool Invalidated;
 
 		Vector2 BL, TR;
-	private:
+	
 		Vector2 _Center;
-	public:
+	
 		const Vector2 &getCenter() const;
 		void setCenter( const Vector2 &value );
-	private:
+	
 		float _Radius;
-	public:
+	
 		const float &getRadius() const;
 		void setRadius( const float &value );
 

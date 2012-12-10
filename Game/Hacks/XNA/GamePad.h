@@ -1,10 +1,10 @@
 #ifndef _GAMEPAD_H_
 #define _GAMEPAD_H_
 
-class GamePad
+struct GamePad
 {
 
-public:
+
 
 	static GamePadState GetState( PlayerIndex index )
 	{

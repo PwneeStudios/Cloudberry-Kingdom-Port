@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 
@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_Backpanel : public CkBaseMenu
+	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
-	public:
+	
 		enum State
 		{
 			State_NONE,
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 							State_SCENE_KOBBLER,
 							State_SCENE_KOBBLER_BLUR
 		};
-	public:
+	
 		virtual void Hide( const PresetPos &pos, int frames );
 
 		virtual void SlideIn( int Frames );
@@ -39,32 +39,32 @@ namespace CloudberryKingdom
 
 		void InitialZoomIn();
 
-	private:
+	
 		std::shared_ptr<QuadClass> Scene, Title, Title_Trim, Scene_NoBob_Blur, Scene_Blur, Scene_Princess, Scene_NoBob_Brighten, Scene_Kobbler, Scene_Kobbler_Blur;
-	public:
+	
 		virtual void Init();
 
 		void SetState( State state );
-	private:
+	
 		State MyState;
 
 		void BlackBox();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		float t;
-	protected:
+	
 		virtual void MyDraw();
 
-	public:
+	
 		virtual void OnReturnTo();
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		StartMenu_MW_Backpanel()
 		{
 			InitializeInstanceFields();

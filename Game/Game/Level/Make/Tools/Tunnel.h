@@ -5,21 +5,21 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 namespace CloudberryKingdom
 {
-	class TunnelFill
+	struct TunnelFill
 	{
 		/// <summary>
 		/// Whether the tunnel has a ceiling.
 		/// </summary>
-	public:
+	
 		bool TunnelCeiling;
 		bool TunnelFloor;
 
@@ -32,22 +32,22 @@ namespace CloudberryKingdom
 
 		TunnelFill();
 
-	private:
+	
 		int N, M;
-	public:
+	
 		void Init( int N, int M );
 
-	private:
+	
 		void SetTunnelObjParameter( const std::shared_ptr<ObjectBase> &obj );
 
 		void Clean();
 
 		void Clean( int i, int j );
 
-	public:
+	
 		void CleanupTunnel( const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

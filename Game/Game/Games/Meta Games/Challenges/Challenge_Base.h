@@ -5,96 +5,96 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
+	struct BobPhsx;
 }
 
 namespace CloudberryKingdom
 {
-	class StringWorldGameData;
+	struct StringWorldGameData;
 }
 
 namespace CloudberryKingdom
 {
-	class GameData;
+	struct GameData;
 }
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
+	struct LevelSeedData;
 }
 
 
 namespace CloudberryKingdom
 {
-	class AftermathData
+	struct AftermathData
 	{
-	public:
+	
 		bool Success;
 		bool EarlyExit;
 		bool Retry;
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		AftermathData()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Challenge : public std::enable_shared_from_this<Challenge>
+	struct Challenge : public std::enable_shared_from_this<Challenge>
 	{
 
-	protected:
-		class PassGetSeedAsLambda : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+	
+		struct PassGetSeedAsLambda : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
 		{
 
-		private:
+		
 			std::shared_ptr<Challenge> challenge;
 
-		public:
+		
 			PassGetSeedAsLambda( const std::shared_ptr<Challenge> &challenge );
 
 			std::shared_ptr<LevelSeedData> Apply( const int &index );
 
 		};
 
-		class ShowEndScreenProxy : public Lambda
+		struct ShowEndScreenProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<Challenge> challenge;
 
-		public:
+		
 			ShowEndScreenProxy( const std::shared_ptr<Challenge> &challenge );
 
 			void Apply();
 		};
 
-	public:
+	
 		static std::shared_ptr<BobPhsx> ChosenHero;
-	private:
+	
 		static const int LevelMask = 10000;
 
-	public:
+	
 		std::vector<int> StartLevels;
 
 		Localization::Words Name, MenuName;
 
 		int GameId_Score, GameId_Level;
-	protected:
+	
 		int GameTypeId;
 
-	public:
+	
 		int SetGameId();
 
-	protected:
+	
 		const std::shared_ptr<StringWorldGameData> getStringWorld() const;
 
 		/// <summary>
 		/// Get the top score that anyone on this machine has ever gotten.
 		/// </summary>
-	public:
+	
 		int TopScore();
 
 		/// <summary>
@@ -112,13 +112,13 @@ public:
 		/// </summary>
 		int TopPlayerLevel();
 
-	protected:
+	
 		virtual void ShowEndScreen();
 
 		/// <summary>
 		/// If true then this meta-game is not part of the campaign.
 		/// </summary>
-	public:
+	
 		bool NonCampaign;
 		virtual void Start( int Difficulty );
 
@@ -132,16 +132,16 @@ public:
 		/// </summary>
 		void Aftermath();
 
-	protected:
+	
 		virtual void SetGameParent( const std::shared_ptr<GameData> &game );
 
-	public:
+	
 		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index ) = 0;
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Challenge()
 		{
 			InitializeInstanceFields();

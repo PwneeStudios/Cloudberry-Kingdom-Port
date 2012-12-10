@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class LongMenu : public Menu
+	struct LongMenu : public Menu
 	{
-	public:
+	
 		float Offset;
 		float OffsetStep;
 
@@ -20,15 +20,15 @@ namespace CloudberryKingdom
 
 		float Height();
 
-	private:
+	
 		void SuperScroll();
 
-	public:
+	
 		void FastScroll();
 
 		void Scroll();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

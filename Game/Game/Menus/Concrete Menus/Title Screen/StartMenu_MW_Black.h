@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 
@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_Black : public CkBaseMenu
+	struct StartMenu_MW_Black : public CkBaseMenu
 	{
-	public:
+	
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
@@ -24,21 +24,21 @@ namespace CloudberryKingdom
 
 		StartMenu_MW_Black();
 
-	private:
+	
 		std::shared_ptr<QuadClass> Black;
-	public:
+	
 		virtual void Init();
 
-	private:
+	
 		void BlackBox();
 
-	public:
+	
 		void SlideFromRight();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	public:
+	
 		virtual void OnReturnTo();
 	};
 }

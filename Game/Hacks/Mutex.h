@@ -1,10 +1,10 @@
 #ifndef _MUTEX_H_
 #define _MUTEX_H_
 
-class Mutex
+struct Mutex
 {
 
-public:
+
 
 	void Lock()
 	{

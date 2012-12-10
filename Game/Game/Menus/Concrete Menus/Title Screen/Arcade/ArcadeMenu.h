@@ -5,27 +5,27 @@
 
 namespace CloudberryKingdom
 {
-	class Challenge;
+	struct Challenge;
 }
 
 namespace CloudberryKingdom
 {
-	class Awardment;
+	struct Awardment;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class LevelItem;
+	struct LevelItem;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 
@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class ArcadeItem : public MenuItem
+	struct ArcadeItem : public MenuItem
 	{
-	public:
+	
 		std::shared_ptr<Challenge> MyChallenge;
 		std::shared_ptr<Awardment> MyPrereq;
 		bool Locked;
@@ -43,93 +43,93 @@ namespace CloudberryKingdom
 		ArcadeItem( const std::shared_ptr<EzText> &Text, const std::shared_ptr<Challenge> &MyChallenge, const std::shared_ptr<Awardment> &MyPrereq );
 	};
 
-	class ArcadeBaseMenu : public CkBaseMenu
+	struct ArcadeBaseMenu : public CkBaseMenu
 	{
-	private:
-		class PlayGameProxy : public Lambda
+	
+		struct PlayGameProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<ArcadeBaseMenu> abm;
 
-		public:
+		
 			PlayGameProxy( const std::shared_ptr<ArcadeBaseMenu> &abm );
 
 			void Apply();
 		};
 
-	protected:
-		class StartFuncProxy : public Lambda_1<std::shared_ptr<LevelItem> >
+	
+		struct StartFuncProxy : public Lambda_1<std::shared_ptr<LevelItem> >
 		{
-		private:
+		
 			std::shared_ptr<ArcadeBaseMenu> abm;
 
-		public:
+		
 			StartFuncProxy( const std::shared_ptr<ArcadeBaseMenu> &abm );
 
 			void Apply( const std::shared_ptr<LevelItem> &levelitem );
 		};
 
-	public:
+	
 		std::shared_ptr<LevelItem> SelectedItem;
 		std::shared_ptr<ArcadeItem> MyArcadeItem;
 
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void StartFunc( const std::shared_ptr<LevelItem> &item );
 
 		virtual void PlayGame();
 
-	public:
+	
 		virtual void Release();
 	};
 
 
-	class ArcadeMenu : public ArcadeBaseMenu
+	struct ArcadeMenu : public ArcadeBaseMenu
 	{
-	private:
-		class GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<ArcadeMenu> am;
 
-		public:
+		
 			GoProxy( const std::shared_ptr<ArcadeMenu> &am );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
+	
 		bool Long;
 
-	protected:
+	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void OnReturnTo();
 
-	private:
+	
 		void SetLockColors();
 
-	public:
+	
 		ArcadeMenu();
 
 		virtual void Init();
 
-	private:
+	
 		void SetParams();
 
 		Vector2 GetGoalPos();
 
 		std::shared_ptr<MenuItem> AddChallenge( const std::shared_ptr<Challenge> &challenge, const std::shared_ptr<Awardment> &prereq, const std::shared_ptr<Awardment> &goal, const std::wstring &itemname );
 
-	public:
+	
 		virtual void Go( const std::shared_ptr<MenuItem> &item );
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

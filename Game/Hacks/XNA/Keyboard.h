@@ -1,10 +1,10 @@
 #ifndef _KEYBOARD_H_
 #define _KEYBOARD_H_
 
-class Keyboard
+struct Keyboard
 {
 
-public:
+
 
 	static KeyboardState GetState()
 	{

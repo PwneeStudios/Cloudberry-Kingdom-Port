@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectIcon
+	struct ObjectIcon
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		enum IconScale
 		{
 			IconScale_WIDGET,
 			IconScale_FULL,
 			IconScale_NEARLY_FULL
 		};
-	public:
+	
 
 		bool Flipped;
 
@@ -70,13 +70,13 @@ namespace CloudberryKingdom
 		virtual bool HitTest( Vector2 pos );
 #endif
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class PictureIcon : public ObjectIcon
+	struct PictureIcon : public ObjectIcon
 	{
-	public:
+	
 		virtual std::vector<std::wstring> GetViewables();
 
 		std::shared_ptr<QuadClass> IconQuad;
@@ -91,10 +91,10 @@ namespace CloudberryKingdom
 		PictureIcon( const std::wstring &IconTextureString, Color BarColor, float Width );
 		PictureIcon( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
 
-	private:
+	
 		void Init( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
 
-	public:
+	
 		virtual void SetShadow( Color color );
 
 		virtual void SetShadow( bool Shadow );
@@ -113,9 +113,9 @@ namespace CloudberryKingdom
 #endif
 	};
 
-	class CustomHoverIcon : public ObjectIcon
+	struct CustomHoverIcon : public ObjectIcon
 	{
-	public:
+	
 		virtual std::vector<std::wstring> GetViewables();
 
 		std::shared_ptr<QuadClass> GearQuad, YQuad;

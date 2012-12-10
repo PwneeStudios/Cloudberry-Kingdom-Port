@@ -5,19 +5,19 @@
 
 namespace CloudberryKingdom
 {
-	class Prototypes
+	struct Prototypes
 	{
-	private:
+	
 		static std::shared_ptr<ObjectClass> LoadAnimObj;
-	public:
+	
 		static void LoadAnimation( const std::wstring &path );
 
-	private:
+	
 		static void SetTigarLoaded( const std::shared_ptr<ObjectClass> &obj );
 
 		static std::shared_ptr<ObjectClass> MakeObj();
 
-	public:
+	
 		static std::shared_ptr<FlyingBlob> FlyingBlobObj;
 		static std::shared_ptr<FlyingBlob> goomba;
 		static std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > bob;

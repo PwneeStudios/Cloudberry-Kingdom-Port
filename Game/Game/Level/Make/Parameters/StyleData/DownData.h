@@ -5,18 +5,18 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 
 namespace CloudberryKingdom
 {
-	class DownData : public VerticalData
+	struct DownData : public VerticalData
 	{
-	protected:
+	
 		virtual void CalculateKeepUnused( float JumpLevel );
 
-	public:
+	
 		DownData( const std::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();

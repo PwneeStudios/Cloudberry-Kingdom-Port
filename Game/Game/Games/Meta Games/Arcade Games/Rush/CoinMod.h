@@ -5,18 +5,18 @@
 
 namespace CloudberryKingdom
 {
-	class CoinMod
+	struct CoinMod
 	{
-	public:
+	
 		enum CoinControlTypes
 		{
 			CoinControlTypes_MOD_NUMBER,
 			CoinControlTypes_MOD_VALUE
 		};
 
-	private:
+	
 		std::shared_ptr<GUI_Timer> MyTimer;
-	public:
+	
 		CoinMod( const std::shared_ptr<GUI_Timer> &Timer );
 
 		/// <summary>
@@ -32,18 +32,18 @@ namespace CloudberryKingdom
 		/// </summary>
 		void CoinControl( const std::shared_ptr<Level> &level, int Index );
 
-	private:
+	
 		void CoinControl_ModValue( const std::shared_ptr<Level> &level, float t );
 
 		//public float ParMultiplier_Start = 1.85f, ParMultiplier_End = 1f;
-	public:
+	
 		float ParMultiplier_Start, ParMultiplier_End;
-	private:
+	
 		void CoinControl_ModNumber( const std::shared_ptr<Level> &level, float t );
 
 		int ModCoinNumber( const std::shared_ptr<Level> &level, int N );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

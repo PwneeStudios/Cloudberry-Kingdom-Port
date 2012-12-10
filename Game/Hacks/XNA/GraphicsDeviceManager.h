@@ -1,10 +1,10 @@
 #ifndef _GRAPHICSDEVICEMANAGER_H_
 #define _GRAPHICSDEVICEMANAGER_H_
 
-class GraphicsDeviceManager
+struct GraphicsDeviceManager
 {
 
-public:
+
 
 	std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
 

@@ -6,13 +6,13 @@
 namespace CloudberryKingdom
 {
 	//public delegate void MenuItemGo(MenuItem item);
-	class MenuItem : public std::enable_shared_from_this<MenuItem>
+	struct MenuItem : public std::enable_shared_from_this<MenuItem>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		int Code;
 		std::wstring Name;
 
@@ -68,9 +68,9 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > OnClick;
 
-	public:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > _Go;
-	public:
+	
 		void setGo( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &value );
 		const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &getGo() const;
 
@@ -79,17 +79,17 @@ namespace CloudberryKingdom
 		int Control;
 
 		bool Selectable, FadedOut;
-	protected:
+	
 		bool Selected;
 
 		/// <summary>
 		/// The previous value of Selected
 		/// </summary>
-	private:
+	
 		bool PrevSelected;
 
 		bool _OverrideA;
-	public:
+	
 		const bool &getOverrideA() const;
 		void setOverrideA( const bool &value );
 
@@ -112,10 +112,10 @@ namespace CloudberryKingdom
 
 		MenuItem();
 
-	private:
+	
 		void SetToDefaultColors();
 
-	public:
+	
 		virtual Vector2 Size();
 
 		virtual float Height();
@@ -135,10 +135,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The new style initialization function. User provides the EzText for both selected and unselected.
 		/// </summary>
-	protected:
+	
 		virtual void Init( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
 
-	public:
+	
 		void setFixedToCamera( const bool &value );
 		const bool getFixedToCamera() const;
 
@@ -151,10 +151,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// True when the item is on the screen.
 		/// </summary>
-	protected:
+	
 		const bool getOnScreen() const;
 
-	public:
+	
 		void DrawText( const std::shared_ptr<Camera> &cam, bool Selected );
 
 		bool GrayOutOnUnselectable;
@@ -177,12 +177,12 @@ namespace CloudberryKingdom
 
 		void OnSelect();
 
-	private:
+	
 		Vector2 _MyCameraZoom;
 		/// <summary>
 		/// The value of the camera zoom the last time this EzText was drawn
 		/// </summary>
-	public:
+	
 		const Vector2 &getMyCameraZoom() const;
 		void setMyCameraZoom( const Vector2 &value );
 
@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void DoActivationAnimation();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

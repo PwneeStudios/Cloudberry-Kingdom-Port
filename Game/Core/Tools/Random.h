@@ -9,10 +9,10 @@
 
 namespace CloudberryKingdom
 {
-	class Rand
+	struct Rand
 	{
 
-	public:
+	
 		int MySeed;
 		Rand( int seed );
 
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		int RandomSnap( int Range, int SnapPoints );
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ template equivalent to generic constraints:
-		/*template<typename T> where T : class
+		/*template<typename T> where T : struct
 		int RndEnum();*/
 
 		/// <summary>

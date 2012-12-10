@@ -5,35 +5,35 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreDatabase : public SaveLoad
+	struct ScoreDatabase : public SaveLoad
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		static std::shared_ptr<ScoreDatabase> Instance;
 
-	public:
+	
 		static int MostRecentScoreDate;
 		static int CurrentDate();
 
 		static int Capacity;
 
-	private:
+	
 		static std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > Games;
 
-	public:
+	
 		static void Initialize();
 
 		#pragma region SaveLoad
-	protected:
+	
 		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
 		virtual void FailLoad();
 		virtual void Deserialize( std::vector<unsigned char> Data );
 		#pragma endregion
 
-	public:
+	
 		static void EnsureList( int Game );
 
 		static std::shared_ptr<ScoreList> GetList( int Game );
@@ -46,10 +46,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Return the score with the smallest value.
 		/// </summary>
-	private:
+	
 		static std::shared_ptr<ScoreEntry> Max( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 
-	public:
+	
 		static std::shared_ptr<ScoreEntry> Max( int GameId );
 
 		/// <summary>
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Remove excess entries, if the list is over capacity.
 		/// </summary>
-	private:
+	
 		static void TrimExcess( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
 
 		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );

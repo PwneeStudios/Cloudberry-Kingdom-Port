@@ -3,10 +3,10 @@
 
 #include "Hacks/XNA/GameServiceContainer.h"
 
-class ContentManager
+struct ContentManager
 {
 
-public:
+
 
 	ContentManager( const std::wstring &ContentRootDirectory ) :
 		RootDirectory( ContentRootDirectory )

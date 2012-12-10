@@ -5,32 +5,32 @@
 
 namespace CloudberryKingdom
 {
-	class SimpleBox;
+	struct SimpleBox;
 }
 
 namespace CloudberryKingdom
 {
-	class AnimQueueEntry;
+	struct AnimQueueEntry;
 }
 
 namespace CloudberryKingdom
 {
-	class EzEffect;
+	struct EzEffect;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectClass;
+	struct ObjectClass;
 }
 
 namespace CloudberryKingdom
 {
-	class EzEffectWad;
+	struct EzEffectWad;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadDrawer;
+	struct QuadDrawer;
 }
 
 
@@ -39,9 +39,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class SimpleObject
+	struct SimpleObject
 	{
-	public:
+	
 		std::vector<SimpleQuad> Quads;
 		std::vector<std::shared_ptr<SimpleBox> > Boxes;
 		BasePoint Base;
@@ -79,10 +79,10 @@ namespace CloudberryKingdom
 		void SetColor( Color color );
 
 		SimpleObject( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly );
-	private:
+	
 		void Constructor( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy );
 
-	public:
+	
 		SimpleObject( const std::shared_ptr<ObjectClass> &obj );
 
 		Vector2 GetBoxCenter( int i );

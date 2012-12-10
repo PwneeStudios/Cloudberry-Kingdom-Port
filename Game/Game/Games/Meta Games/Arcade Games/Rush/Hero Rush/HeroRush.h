@@ -5,106 +5,106 @@
 
 namespace CloudberryKingdom
 {
-	class Challenge_HeroRush : public Rush
+	struct Challenge_HeroRush : public Rush
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+	
+		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<Challenge_HeroRush> ch;
-		public:
+		
 			OnSwapLambda( const std::shared_ptr<Challenge_HeroRush> &ch );
 
 			void Apply( const std::shared_ptr<LevelSeedData> &data );
 		};
 
-	private:
-		class ScoreMultiplierHelper : public Lambda_1<std::shared_ptr<GameData> >
+	
+		struct ScoreMultiplierHelper : public Lambda_1<std::shared_ptr<GameData> >
 		{
-		private:
+		
 			float multiplier;
 
-		public:
+		
 			ScoreMultiplierHelper( float multiplier );
 
 			void Apply( const std::shared_ptr<GameData> &game );
 		};
 
-	private:
-		class AdditionalPreStartOnSwapToLevelHelper : public Lambda_1<int>
+	
+		struct AdditionalPreStartOnSwapToLevelHelper : public Lambda_1<int>
 		{
-		private:
+		
 			std::shared_ptr<Challenge_HeroRush> chr;
 
-		public:
+		
 			AdditionalPreStartOnSwapToLevelHelper( const std::shared_ptr<Challenge_HeroRush> &chr );
 
 			void Apply( const int &levelindex );
 		};
 
-	private:
-		class MakeMyModParamsHelper : public Lambda_2<std::shared_ptr<Level> , std::shared_ptr<PieceSeedData> >
+	
+		struct MakeMyModParamsHelper : public Lambda_2<std::shared_ptr<Level> , std::shared_ptr<PieceSeedData> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );
 		};
 
-	private:
+	
 		static std::shared_ptr<Challenge_HeroRush> instance;
-	public:
+	
 		const static std::shared_ptr<Challenge_HeroRush> &getInstance();
 
-	public:
+	
 		Challenge_HeroRush();
 
 		// The progression of max time and start time for increasing difficulty
-	private:
+	
 		static std::vector<int> MaxTime_ByDifficulty;
 		static std::vector<int> StartTime_ByDifficulty;
 
 		void SetTimerProperties( int Difficulty );
 
-	protected:
+	
 		virtual void PreStart_Tutorial( bool TemporarySkip );
 
 		virtual void MakeExitDoorIcon( int levelindex );
 
-	private:
+	
 		int LevelsPerDifficulty;
-	protected:
+	
 		virtual void AdditionalPreStart();
 
-	private:
+	
 		void OnSwapTo_GUI( int levelindex );
 
-	public:
+	
 		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
 
-	private:
+	
 		static std::vector<std::shared_ptr<BobPhsx> > HeroTypes;
 
-	protected:
+	
 		virtual std::shared_ptr<BobPhsx> GetHero( int i );
 
-	private:
+	
 		int LevelsPerTileset;
 		static std::vector<std::wstring> tilesets;
 		//static string[] tilesets = { "hills", "forest", "cloud", "cave", "castle", "sea" };
 
-	protected:
+	
 		virtual std::shared_ptr<TileSet> GetTileSet( int i );
 
-	private:
+	
 		int LevelLength_Short;
 		int LevelLength_Long;
-	protected:
+	
 		virtual std::shared_ptr<LevelSeedData> Make( int Index, float Difficulty );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

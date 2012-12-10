@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 namespace CloudberryKingdom
 {
-	class Menu;
+	struct Menu;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class GUI_Panel;
+	struct GUI_Panel;
 }
 
 
@@ -28,146 +28,146 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class StartMenu : public CkBaseMenu
+	struct StartMenu : public CkBaseMenu
 	{
-	public:
+	
 		enum Next
 		{
 			Next_CAMPAIGN,
 			Next_ARCADE,
 			Next_FREEPLAY
 		};
-	private:
-		class StartMenuLambda_Campaign : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Campaign : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Campaign( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class StartMenuLambda_Arcade : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Arcade : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Arcade( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class StartMenuLambda_Freeplay : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Freeplay : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Freeplay( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class CharacterSelectProxy : public Lambda
+	
+		struct CharacterSelectProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> startMenu;
 
-		public:
+		
 			CharacterSelectProxy( const std::shared_ptr<StartMenu> &startMenu );
 
 			void Apply();
 		};
 
-	private:
-		class MenuGo_ScreenSaverHelper : public Lambda
+	
+		struct MenuGo_ScreenSaverHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
 
-		public:
+		
 			MenuGo_ScreenSaverHelper( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply();
 		};
 
-	private:
-		class StartMenuLambda_Controls : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Controls : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Controls( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class StartMenuLambda_Options : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Options : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Options( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class StartMenuLambda_Exit : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct StartMenuLambda_Exit : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuLambda_Exit( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	private:
-		class StartMenuExitLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct StartMenuExitLambda : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
-		public:
+		
 			StartMenuExitLambda( const std::shared_ptr<StartMenu> &sm );
 
 			bool Apply( const std::shared_ptr<Menu> &menu );
 		};
 
-	private:
-		class DoneWithCharSelectProxy : public Lambda
+	
+		struct DoneWithCharSelectProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
 
-		public:
+		
 			DoneWithCharSelectProxy( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply();
 		};
 
-	private:
-		class BringNextMenuLambda : public Lambda
+	
+		struct BringNextMenuLambda : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<StartMenu> sm;
 
-		public:
+		
 			BringNextMenuLambda( const std::shared_ptr<StartMenu> &sm );
 
 			void Apply();
 		};
 
-	public:
+	
 		virtual void Hide( const PresetPos &pos, int frames );
 
 		Next MyNextMenu;
 
-	protected:
+	
 		virtual void MenuGo_Campaign( const std::shared_ptr<MenuItem> &item );
 
 		virtual void MenuGo_Arcade( const std::shared_ptr<MenuItem> &item );
@@ -181,12 +181,12 @@ namespace CloudberryKingdom
 
 		virtual void BringCharacterSelect();
 
-	public:
+	
 		virtual void Show();
 
 		virtual void ReturnToCaller();
 
-	protected:
+	
 		virtual void CharacterSelect();
 
 		virtual void MenuGo_ScreenSaver( const std::shared_ptr<MenuItem> &item );
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 
 		virtual void Exit();
 
-	public:
+	
 		StartMenu();
 
 		///// <summary>
@@ -211,10 +211,10 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-	protected:
+	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		static void SetText_Green( const std::shared_ptr<EzText> &text, bool outline );
 
 		static void SetSelectedText_Green( const std::shared_ptr<EzText> &text, bool outline );
@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
-	private:
+	
 		static void GrayItem( const std::shared_ptr<MenuItem> &item );
 
 		void MakeMenu();
@@ -240,28 +240,28 @@ namespace CloudberryKingdom
 
 		void Title3();
 
-	protected:
+	
 		virtual void SetChildControl( const std::shared_ptr<GUI_Panel> &child );
 
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void DoneWithCharSelect();
 
-	public:
+	
 		virtual void BringNextMenu();
 
-	protected:
+	
 		virtual void BringCampaign();
 
 		virtual void BringArcade();
 
 		virtual void BringFreeplay();
 
-	public:
+	
 		virtual void OnReturnTo();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -1,10 +1,10 @@
 #ifndef _PRESENTATIONPARAMETERS_H_
 #define _PRESENTATIONPARAMETERS_H_
 
-class PresentationParameters
+struct PresentationParameters
 {
 
-public:
+
 
 	int BackBufferFormat;
 	int DepthStencilFormat;

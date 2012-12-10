@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class SubTexture
+	struct SubTexture
 	{
-	public:
+	
 		std::wstring name;
 		Vector2 BL, TR;
 	};
 
-	class PackedTexture
+	struct PackedTexture
 	{
-	public:
+	
 		std::shared_ptr<EzTexture> MyTexture;
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 		void Add( const std::wstring &name, float x1, float y1, float x2, float y2 );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

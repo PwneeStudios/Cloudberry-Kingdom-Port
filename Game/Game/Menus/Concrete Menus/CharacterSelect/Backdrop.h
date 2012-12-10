@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 
@@ -13,24 +13,24 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class CharSelectBackdrop : public CkBaseMenu
+	struct CharSelectBackdrop : public CkBaseMenu
 	{
-	public:
+	
 		CharSelectBackdrop();
 
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
-	protected:
+	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void OnAdd();
 
 		virtual void Init();
 
-	private:
+	
 		void SetPos();
 	};
 }

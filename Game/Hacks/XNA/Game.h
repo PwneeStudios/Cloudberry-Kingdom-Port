@@ -1,10 +1,10 @@
 #ifndef _XNAGAME_H_
 #define _XNAGAME_H_
 
-class Game
+struct Game
 {
 
-public:
+
 
 	std::shared_ptr<ContentManager> getContent()
 	{

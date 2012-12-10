@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class TileInfoBase
+	struct TileInfoBase
 	{
-	public:
+	
 		std::shared_ptr<SpriteInfo> Icon;
 		std::shared_ptr<SpriteInfo> Icon_Big;
 
-	private:
+	
 		void InitializeInstanceFields();
 
-	public:
+	
 		TileInfoBase()
 		{
 			InitializeInstanceFields();
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Stores a tile set's information, including what obstacles are allowed.
 	/// </summary>
-	class TileSet : public Object, public std::enable_shared_from_this<TileSet>
+	struct TileSet : public Object, public std::enable_shared_from_this<TileSet>
 	{
-	public:
+	
 		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );
 
 		//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
@@ -68,12 +68,12 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<PieceQuad> ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const std::shared_ptr<BlockGroup> &group );
 
-	private:
+	
 		std::shared_ptr<PieceQuad> ParseBlockLine( int width, std::vector<std::wstring> &bits );
 
 		void ParseExtraBlockInfo( const std::shared_ptr<PieceQuad> &c, int width, std::vector<std::wstring> &bits );
 
-	public:
+	
 		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd );
 		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, std::shared_ptr<BlockGroup> group );
 
@@ -103,12 +103,12 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool PassableSides;
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
 	/// <summary>
-	/// Static class tracking all tile sets and their information.
+	/// Static struct tracking all tile sets and their information.
 	/// </summary>
 }
 

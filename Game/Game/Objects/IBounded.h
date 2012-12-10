@@ -8,13 +8,13 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Interface for specifying the physical extent of an object
 	/// <\summary>
-	class IBound
+	struct IBound
 	{
 		/// <summary>
 		/// Returns the TR bound
 		/// </summary>
 		/// <returns></returns>
-	public:
+	
 		virtual Vector2 TR_Bound() = 0;
 
 		/// <summary>

@@ -1,6 +1,6 @@
 #ifndef _PREPARINGDEVICESETTINGSEVENTARGS_H_
 #define _PREPARINGDEVICESETTINGSEVENTARGS_H_
 
-class PreparingDeviceSettingsEventArgs;
+struct PreparingDeviceSettingsEventArgs;
 
 #endif

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class DifficultyHelper
+	struct DifficultyHelper
 	{
-	public:
+	
 		static float Interp( float Level1Val, float Level10Val, float level );
 		static float InterpRestrict19( float Level1Val, float Level9Val, float level );
 		static float Interp19( float Level1Val, float Level9Val, float level );

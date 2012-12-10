@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class HeroSpec
+	struct HeroSpec
 	{
-	public:
+	
 		int basetype;
 		int shape;
 		int move;
@@ -32,17 +32,17 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 	};
 
-	class BobPhsx : public Object, public std::enable_shared_from_this<BobPhsx>
+	struct BobPhsx : public Object, public std::enable_shared_from_this<BobPhsx>
 	{
 
-	public:
-		class DefaultInfo
+	
+		struct DefaultInfo
 		{
 
-		public:
+		
 			static void InitializeStatics();
 
-		public:
+		
 			static std::shared_ptr<EzSound> DoubleJump_Sound;
 			static std::shared_ptr<EzSound> BobBoxJump_Sound;
 			static std::shared_ptr<EzSound> BobJetpack_Sound;
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 		};
 
-	public:
+	
 		enum CustomData
 		{
 			CustomData_GRAVITY,
@@ -71,36 +71,36 @@ namespace CloudberryKingdom
 			CustomData_FRICTION
 		};
 
-	public:
-		class CustomPhsxData
+	
+		struct CustomPhsxData
 		{
-		public:
-			class DataBounds
+		
+			struct DataBounds
 			{
-			public:
+			
 				float DefaultValue, MinValue, MaxValue;
 				DataBounds() : DefaultValue( 0 ), MinValue( 0 ), MaxValue( 0 ) { }
 				DataBounds( float DefaultValue, float MinValue, float MaxValue );
 			};
 
-		public:
+		
 			static void InitStatic();
 
-		private:
+		
 			static std::vector<DataBounds> _Bounds;
-		public:
+		
 			static DataBounds Bounds( CustomData type );
 			static DataBounds Bounds( int i );
 
-		private:
+		
 			static bool BoundsSet;
-		public:
+		
 			static void InitBounds();
 
-		private:
+		
 			std::vector<float> data;
 
-		public:
+		
 			static int Length;
 
 			void Init();
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 			float &operator []( CustomData type );
 		};
 
-	public:
+	
 		enum RocketThrustType
 		{
 			RocketThrustType_NONE,
@@ -122,14 +122,14 @@ namespace CloudberryKingdom
 			RocketThrustType_DOUBLE
 		};
 #if defined(DEBUG)
-	public:
+	
 		void ResetInfo();
 #endif
 
-	protected:
+	
 		const LevelGeometry &getGeometry() const;
 
-	public:
+	
 		static std::shared_ptr<BobPhsx> GetPhsx_Base( int BaseType );
 
 		static std::shared_ptr<BobPhsx> GetPhsx_Shape( int Shape );
@@ -169,10 +169,10 @@ namespace CloudberryKingdom
 		std::wstring Adjective;
 		std::wstring NameTemplate;
 		std::shared_ptr<ObjectIcon> Icon;
-	protected:
+	
 		float DefaultIconWidth;
 
-	public:
+	
 		std::shared_ptr<Bob> Prototype;
 		CapeType CapePrototype;
 		Vector2 CapeOffset;
@@ -183,12 +183,12 @@ namespace CloudberryKingdom
 
 		Vector2 HeroDollShift;
 
-	private:
+	
 		bool SingletonInitialized;
-	protected:
+	
 		virtual void InitSingleton();
 
-	public:
+	
 		std::shared_ptr<Bob> MyBob;
 		const std::shared_ptr<ObjectClass> &getObj() const;
 
@@ -271,9 +271,9 @@ namespace CloudberryKingdom
 
 		virtual void DampForcedJump();
 
-	protected:
+	
 		int DisableJumpCount;
-	public:
+	
 		virtual void DisableJump( int Length );
 
 		Vector2 ModInitSize;
@@ -282,25 +282,25 @@ namespace CloudberryKingdom
 		RocketThrustType ThrustType;
 		virtual void Init( const std::shared_ptr<Bob> &bob );
 
-	private:
+	
 		float GroundSpeed;
-	public:
+	
 		virtual void Integrate();
 
 //C# TO C++ CONVERTER NOTE: The variable Oscillate was renamed since it is named the same as a user-defined type:
 		bool Oscillate_Renamed;
-	protected:
+	
 		float ExplosionScale;
 		float RunAnimSpeed;
-	public:
+	
 		float ScaledFactor;
 
 		float OscillateSize1, OscillateSize2, OscillatePeriod;
 		float OscillateGravity1, OscillateGravity2;
-	private:
+	
 		void OscillatePhsx();
 
-	public:
+	
 		float ReverseDirectionBoost;
 
 		// Ice parameters
@@ -310,11 +310,11 @@ namespace CloudberryKingdom
 		float AccelMod;
 		bool IceRun;
 
-	private:
+	
 		void SetIceParams();
 
 
-	public:
+	
 		Vector2 PrevVel, PrevPos;
 		virtual void PhsxStep();
 
@@ -333,10 +333,10 @@ namespace CloudberryKingdom
 		/// Additional checks that should be performed at the end of the GenerateInput function.
 		/// Typically these are things that are uniform across all BobPhsx types.
 		/// </summary>
-	protected:
+	
 		void AdditionalGenerateInputChecks( int CurPhsxStep );
 
-	public:
+	
 		virtual bool CheckFor_xFlip();
 
 		std::shared_ptr<ObjectBase> ObjectLandedOn;
@@ -347,10 +347,10 @@ namespace CloudberryKingdom
 
 		virtual void AnimStep();
 
-	protected:
+	
 		void CheckForAnimDone();
 
-	public:
+	
 		virtual void IncrementJumpCounter();
 
 		int LastUsedStamp;
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		virtual void DollInitialize();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

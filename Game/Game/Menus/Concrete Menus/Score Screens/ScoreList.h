@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreList
+	struct ScoreList
 	{
-	public:
+	
 		int Capacity;
 
 		ScoreEntry::Format MyFormat;
@@ -23,13 +23,13 @@ namespace CloudberryKingdom
 		ScoreList( int Capacity, int DefaultValue );
 
 		int DefaultValue;
-	private:
+	
 		void Init( int Capacity, int DefaultValue );
 
 		/// <summary>
 		/// Whether the given score qualifies for the high score list
 		/// </summary>
-	public:
+	
 		bool Qualifies( const std::shared_ptr<ScoreEntry> &Entry );
 
 		/// <summary>
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Remove excess entries, if the list is over capacity.
 		/// </summary>
-	private:
+	
 		void TrimExcess();
 
 		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Sort();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

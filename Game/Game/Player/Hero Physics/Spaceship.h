@@ -5,34 +5,34 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxSpaceship : public BobPhsx
+	struct BobPhsxSpaceship : public BobPhsx
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		static float KeepUnused( float UpgradeLevel );
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	public:
+	
 		static std::shared_ptr<BobPhsxSpaceship> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxSpaceship> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxSpaceship> &bob );
 
-		// Instancable class
-	private:
+		// Instancable struct
+	
 		int AutoMoveLength, AutoMoveType, AutoStrafeLength;
 		int AutoDirLength, AutoDir;
 
 		int RndMoveType;
 
-	public:
+	
 		BobPhsxSpaceship();
 
 		virtual void DefaultValues();
@@ -53,17 +53,17 @@ namespace CloudberryKingdom
 
 		virtual void HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit );
 
-	private:
+	
 		int Dir;
-	public:
+	
 		void GenerateInput_Vertical( int CurPhsxStep );
 
 		virtual void GenerateInput( int CurPhsxStep );
 
-	private:
+	
 		void GenerateInput_Right( int CurPhsxStep );
 
-	public:
+	
 		virtual void AnimStep();
 
 		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 
 		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

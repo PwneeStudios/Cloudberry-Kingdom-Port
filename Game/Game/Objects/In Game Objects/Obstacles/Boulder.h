@@ -6,60 +6,60 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class LineSpriteInfo;
+	struct LineSpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class Boulder : public _CircleDeath, public IBound
+	struct Boulder : public _CircleDeath, public IBound
 	{
-	public:
+	
 		enum PivotLocationTypes
 		{
 			PivotLocationTypes_TOP_BOTTOM,
 			PivotLocationTypes_LEFT_RIGHT
 		};
-	public:
-		class BoulderTileInfo : public TileInfoBase
+	
+		struct BoulderTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Ball;
 
 			float Radius;
 
 			std::shared_ptr<LineSpriteInfo> Chain;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			BoulderTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		std::shared_ptr<QuadClass> MyQuad;
 
 		float Angle, MaxAngle, Length;
@@ -72,10 +72,10 @@ public:
 
 		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void SetLayers();
 
-	public:
+	
 		Boulder( bool BoxesOnly );
 
 		Vector2 TR_Bound();
@@ -93,21 +93,21 @@ public:
 		/// </summary>
 		/// <param name="t">The parametric time variable, t = (Step + Offset) / Period</param>
 		/// <returns></returns>
-	private:
+	
 		float CorrespondingAngle;
 		Vector2 GetPos( float t );
 
-	public:
+	
 		virtual void PhsxStep();
 
-	private:
+	
 		bool OffScreen;
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		void CalculateLength();
 
 		virtual void Move( Vector2 shift );
@@ -118,7 +118,7 @@ public:
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

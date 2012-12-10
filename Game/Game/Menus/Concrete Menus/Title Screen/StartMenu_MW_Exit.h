@@ -9,9 +9,9 @@
 
 namespace CloudberryKingdom
 {
-	class StartMenu_MW_Exit : public VerifyQuitGameMenu2
+	struct StartMenu_MW_Exit : public VerifyQuitGameMenu2
 	{
-	public:
+	
 		StartMenu_MW_Exit( int Control );
 
 		virtual void SlideIn( int Frames );

@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class Globals
+	struct Globals
 	{
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		enum Upgrade
 		{
 			Upgrade_FIREBALL,
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 			Upgrade_JUMP,
 			Upgrade_CEILING
 		};
-	public:
+	
 		static std::wstring ContentDirectory;
 
 		static std::vector<Color> OnOffBlockColors;

@@ -7,9 +7,9 @@
 
 namespace CloudberryKingdom
 {
-	class EzSong : public std::enable_shared_from_this<EzSong>
+	struct EzSong : public std::enable_shared_from_this<EzSong>
 	{
-	public:
+	
 		std::shared_ptr<Song> song;
 		std::wstring Name, SongName, ArtistName, FileName;
 		bool Enabled, AlwaysLoaded;
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		double Play( bool DisplayInfo );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

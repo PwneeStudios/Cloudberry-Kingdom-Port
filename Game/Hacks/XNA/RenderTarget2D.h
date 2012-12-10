@@ -4,10 +4,10 @@
 #include "Hacks/XNA/Texture2D.h"
 #include "Hacks/XNA/GraphicsDevice.h"
 
-class RenderTarget2D : public Texture2D
+struct RenderTarget2D : public Texture2D
 {
 
-public:
+
 
 	RenderTarget2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height, bool mipmap, int surfaceFormat, int depthFormat, int sampleCount, bool discard ) :
 		Texture2D( device, width, height )

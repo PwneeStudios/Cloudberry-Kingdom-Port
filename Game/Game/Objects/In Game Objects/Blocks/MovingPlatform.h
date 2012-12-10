@@ -7,31 +7,31 @@
 
 namespace CloudberryKingdom
 {
-	class MovingPlatform : public BlockBase
+	struct MovingPlatform : public BlockBase
 	{
-	public:
-		class ElevatorTileInfo : public TileInfoBase
+	
+		struct ElevatorTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			ElevatorTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		enum MoveType
 		{
 			MoveType_NORMAL,
 			MoveType_SINE
 		};
-	public:
+	
 		MoveType MyMoveType;
 		float Amp;
 		int Offset;
@@ -40,10 +40,10 @@ public:
 
 		std::shared_ptr<BlockEmitter> Parent;
 
-	private:
+	
 		const std::shared_ptr<BlockEmitter_Parameters> getMyParams() const;
 
-	public:
+	
 		virtual bool PermissionToUse();
 
 		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
@@ -57,9 +57,9 @@ public:
 
 		MovingPlatform( bool BoxesOnly );
 
-	private:
+	
 		BoxStyle MyBoxStyle;
-	public:
+	
 		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BoxStyle boxstyle );
 
 

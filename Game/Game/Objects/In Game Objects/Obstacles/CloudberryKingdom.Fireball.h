@@ -5,38 +5,38 @@
 
 namespace CloudberryKingdom
 {
-	class Fireball : public _CircleDeath
+	struct Fireball : public _CircleDeath
 	{
-	public:
-		class FireballTileInfo : public TileInfoBase
+	
+		struct FireballTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-	public:
+	
 			FireballTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		static std::shared_ptr<Particle> ExplodeTemplate, EmitterTemplate;
-	public:
+	
 		static std::shared_ptr<EzSound> ExplodeSound;
-	private:
+	
 		static float t;
 
 		static std::shared_ptr<Quad> ShadeQuad;
-	public:
+	
 		static std::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, BaseFireballTexture;
-	private:
+	
 		static std::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, EmitterRenderTarget;
 		static int DrawWidth, DrawHeight;
-	public:
+	
 		static std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Emitter_Emitter;
 
 		static void PreInit();
@@ -57,10 +57,10 @@ namespace CloudberryKingdom
 
 		int Period, Offset;
 
-	private:
+	
 		bool Alive;
 
-	public:
+	
 		virtual void MakeNew();
 
 		virtual void Die();
@@ -69,22 +69,22 @@ namespace CloudberryKingdom
 
 		void Init( PhsxData data, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		float PrevStep;
 		Vector2 GetPos();
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		virtual void Interact( const std::shared_ptr<Bob> &bob );
 
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 	};
 }

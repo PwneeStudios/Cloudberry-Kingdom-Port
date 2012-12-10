@@ -7,9 +7,9 @@
 
 namespace CloudberryKingdom
 {
-	class EzFont
+	struct EzFont
 	{
-	public:
+	
 		std::shared_ptr<SpriteFont> Font, OutlineFont;
 		float CharacterSpacing;
 		int LineSpacing;
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 
 		void FixFont();
 
-	private:
+	
 		void Initialize( const std::wstring &FontName, const std::wstring &OutlineFontName, float CharacterSpacing, int LineSpacing );
 	};
 }

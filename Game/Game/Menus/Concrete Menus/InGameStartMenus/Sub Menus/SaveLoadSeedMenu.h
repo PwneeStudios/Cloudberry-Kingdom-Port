@@ -7,97 +7,97 @@
 
 namespace CloudberryKingdom
 {
-	class SaveLoadSeedMenu : public VerifyBaseMenu
+	struct SaveLoadSeedMenu : public VerifyBaseMenu
 	{
 #if defined(WINDOWS)
-	private:
-		class MakeSaveHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct MakeSaveHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<GUI_Panel> panel;
 			std::shared_ptr<PlayerData> player;
 
-		public:
+		
 			MakeSaveHelper( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 #else
-	private:
-		class SaveLoadSeedsMakeSaveLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct SaveLoadSeedsMakeSaveLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<PlayerData> player;
-		public:
+		
 			SaveLoadSeedsMakeSaveLambda( const std::shared_ptr<PlayerData> &player );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 #endif
 
-	private:
-		class LoadProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct LoadProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
 
-		public:
+		
 			LoadProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 
-	private:
-		class CopyProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct CopyProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
 
-		public:
+		
 			CopyProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 
-	private:
-		class LoadStringProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct LoadStringProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<SaveLoadSeedMenu> slsm;
 
-		public:
+		
 			LoadStringProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 
-	public:
+	
 		SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave );
 
-	private:
+	
 		bool CanLoad, CanSave;
 
 		std::shared_ptr<PlayerData> player;
 
 		std::shared_ptr<EzText> HeaderText;
-	public:
+	
 		virtual void Init();
 
-	private:
+	
 		void SetPosition();
 
 #if defined(WINDOWS)
-	public:
+	
 		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 
-	private:
+	
 		std::shared_ptr<IAsyncResult> kyar;
 		static void Save( const std::shared_ptr<MenuItem> &_item, const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 #else
-	public:
+	
 		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player );
 
-	private:
+	
 		static std::shared_ptr<IAsyncResult> kyar;
 		static std::shared_ptr<PlayerData> _player;
 		static void Save( const std::shared_ptr<MenuItem> &_item, const std::shared_ptr<PlayerData> &activeplayer );
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 
 		void LoadString( const std::shared_ptr<MenuItem> &_item );
 
-	public:
+	
 		virtual void OnAdd();
 	};
 }

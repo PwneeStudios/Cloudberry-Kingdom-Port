@@ -5,21 +5,21 @@
 
 namespace CloudberryKingdom
 {
-	class Challenge_TimeCrisis;
+	struct Challenge_TimeCrisis;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class TimeCrisis_Tutorial : public HeroRush_Tutorial
+	struct TimeCrisis_Tutorial : public HeroRush_Tutorial
 	{
-	private:
+	
 		std::shared_ptr<Challenge_TimeCrisis> TimeCrisis;
-	public:
+	
 		TimeCrisis_Tutorial( const std::shared_ptr<Challenge_TimeCrisis> &TimeCrisis );
 
-	protected:
+	
 		virtual void Title();
 	};
 }

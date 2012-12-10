@@ -2,10 +2,10 @@
 #define _TUPLE_H_
 
 template<class A, class B>
-class Tuple
+struct Tuple
 {
 
-public:
+
 	A Item1;
 	B Item2;
 

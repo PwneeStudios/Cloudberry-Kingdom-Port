@@ -5,17 +5,17 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 namespace CloudberryKingdom
 {
-	class TitleGameData_MW;
+	struct TitleGameData_MW;
 }
 
 
@@ -23,31 +23,31 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class CinematicsLevelItem : public MenuItem
+	struct CinematicsLevelItem : public MenuItem
 	{
-	public:
+	
 		std::wstring Movie;
 
 		CinematicsLevelItem( const std::shared_ptr<EzText> &Text, const std::wstring &Movie );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class StartMenu_MW_Cinematics : public StartMenu
+	struct StartMenu_MW_Cinematics : public StartMenu
 	{
-	private:
-		class CinematicsGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct CinematicsGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<StartMenu_MW_Cinematics> cine;
-		public:
+		
 			CinematicsGoLambda( const std::shared_ptr<StartMenu_MW_Cinematics> &cine );
 
 			void Apply( const std::shared_ptr<MenuItem> &item );
 		};
 
-	public:
+	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_Cinematics( const std::shared_ptr<TitleGameData_MW> &Title );
 
@@ -55,25 +55,25 @@ namespace CloudberryKingdom
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
-	protected:
+	
 		void SetText( const std::shared_ptr<EzText> &text );
 
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		virtual void OnAdd();
 
 		virtual void Init();
 
-	protected:
+	
 		virtual void CreateMenu();
 
 		void MakeHeader();
 
-	public:
+	
 		void Go( const std::shared_ptr<MenuItem> &item );
 
-	private:
+	
 		void SetPos();
 	};
 }

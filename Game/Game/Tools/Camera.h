@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class Camera : public IPos, public std::enable_shared_from_this<Camera>
+	struct Camera : public IPos, public std::enable_shared_from_this<Camera>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		/// <summary>
 		/// When true the camera uses its EffectivePos and EffectiveZoom when drawing.
 		/// The camera's TR, BL, width, and height are unaffected and are updated normally.
@@ -55,9 +55,9 @@ namespace CloudberryKingdom
 
 		float Speed, SpeedVel, TargetSpeed;
 		Vector2 Target;
-	private:
+	
 		Vector2 _Zoom;
-	public:
+	
 		const Vector2 &getZoom() const;
 		void setZoom( const Vector2 &value );
 
@@ -90,9 +90,9 @@ namespace CloudberryKingdom
 
 		float GetWidth();
 
-	private:
+	
 		int LastUpdate;
-	public:
+	
 		void Update();
 
 		Camera();
@@ -104,9 +104,9 @@ namespace CloudberryKingdom
 		Camera( const std::shared_ptr<Camera> &cam );
 
 		Vector2 ShakeOffset, OscillateOffset;
-	private:
+	
 		int ShakeCount, ShakeLength;
-	public:
+	
 		void StartShake();
 		void StartShake( float Intensity );
 		void StartShake( float Intensity, int Length );
@@ -120,10 +120,10 @@ namespace CloudberryKingdom
 		bool OnScreen( Vector2 bl, Vector2 tr, float GraceSize );
 
 
-	private:
+	
 		Vector4 GetVertex();
 
-	public:
+	
 		void SetVertexCamera();
 
 		void SetVertexZoom( float factor );
@@ -141,9 +141,9 @@ namespace CloudberryKingdom
 		static bool DisableOscillate;
 
 		Camera_PhsxType MyPhsxType;
-	private:
+	
 		float t;
-	public:
+	
 		void PhsxStep();
 
 		void SetPhsxType( Camera_PhsxType NewType );
@@ -160,7 +160,7 @@ namespace CloudberryKingdom
 		/// <param name="Pos"></param>
 		/// <param name="BoxSize"></param>
 		/// <param name="BoxShift"></param>
-	private:
+	
 		Vector2 BoxLimit_X( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift );
 
 		/// <summary>
@@ -176,11 +176,11 @@ namespace CloudberryKingdom
 		Vector2 BoxLimitDown( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift );
 		Vector2 BoxLimitUp( Vector2 Pos, Vector2 BoxCenter, Vector2 BoxSize, Vector2 BoxShift );
 
-	public:
+	
 		bool MovingCamera;
 		void SideLevel_PhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }
