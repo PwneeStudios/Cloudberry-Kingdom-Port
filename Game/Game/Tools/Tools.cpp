@@ -1,5 +1,11 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/NET/Path.h"
+#include "Hacks/NET/Directory.h"
+#include "Hacks/XNA/GamePad.h"
+#include "Hacks/XNA/MediaPlayer.h"
+#include "Hacks/XNA/Mouse.h"
+
 namespace CloudberryKingdom
 {
 

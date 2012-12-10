@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/ContentManager.h"
+
 namespace CloudberryKingdom
 {
 

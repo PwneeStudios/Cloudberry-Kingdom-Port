@@ -1,6 +1,8 @@
 #ifndef LEVELSEEDDATA
 #define LEVELSEEDDATA
 
+#include "Hacks/Mutex.h"
+
 namespace CloudberryKingdom
 {
 

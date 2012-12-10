@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/Effect.h"
+#include "Hacks/XNA/EffectParameter.h"
+
 namespace CloudberryKingdom
 {
 	class EzEffectWad

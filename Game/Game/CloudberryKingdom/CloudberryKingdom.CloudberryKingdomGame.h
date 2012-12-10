@@ -3,6 +3,13 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/GraphicsDevice.h"
+#include "Hacks/XNA/GraphicsDeviceManager.h"
+#include "Hacks/XNA/PreparingDeviceSettingsEventArgs.h"
+#include "Hacks/XNA/GameTime.h"
+#include "Hacks/NET/Stopwatch.h"
+#include "Hacks/NET/StringBuilder.h"
+
 namespace CloudberryKingdom
 {
 

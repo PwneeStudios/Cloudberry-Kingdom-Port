@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/Mutex.h"
+
 namespace CloudberryKingdom
 {
 	class ParticleBin

@@ -2,7 +2,10 @@
 #define RANDOM
 
 #define _USE_MATH_DEFINES
+
 #include <global_header.h>
+
+#include "Hacks/NET/Random.h"
 
 namespace CloudberryKingdom
 {

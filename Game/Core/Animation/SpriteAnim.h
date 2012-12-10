@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/Texture2D.h"
+
 namespace CloudberryKingdom
 {
 

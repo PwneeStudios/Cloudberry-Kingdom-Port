@@ -1,5 +1,9 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/NET/File.h"
+#include "Hacks/NET/Path.h"
+#include "Hacks/FileReader.h"
+
 namespace CloudberryKingdom
 {
 

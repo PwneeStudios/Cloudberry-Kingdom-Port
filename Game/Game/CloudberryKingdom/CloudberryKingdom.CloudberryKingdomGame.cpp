@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include "Hacks/XNA/MediaPlayer.h"
+
 namespace CloudberryKingdom
 {
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()

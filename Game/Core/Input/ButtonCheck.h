@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/KeyboardState.h"
+
 namespace CloudberryKingdom
 {
 	class KeyboardExtension

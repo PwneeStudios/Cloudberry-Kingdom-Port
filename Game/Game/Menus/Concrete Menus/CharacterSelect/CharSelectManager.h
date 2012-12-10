@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/SignedInEventArgs.h"
+
 namespace CloudberryKingdom
 {
 	class CharacterSelectManager

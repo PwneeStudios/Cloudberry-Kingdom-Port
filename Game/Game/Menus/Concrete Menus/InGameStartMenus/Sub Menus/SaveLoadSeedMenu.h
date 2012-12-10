@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/NET/IAsyncResult.h"
+
 namespace CloudberryKingdom
 {
 	class SaveLoadSeedMenu : public VerifyBaseMenu

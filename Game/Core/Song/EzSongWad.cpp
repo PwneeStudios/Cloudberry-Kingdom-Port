@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/XNA/MediaPlayer.h"
 
 namespace CloudberryKingdom
 {

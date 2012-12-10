@@ -1,5 +1,9 @@
 ﻿#include <global_header.h>
 
+#include "Hacks/XNA/Keyboard.h"
+#include "Hacks/XNA/Mouse.h"
+#include "Hacks/XNA/GamePad.h"
+
 namespace CloudberryKingdom
 {
 

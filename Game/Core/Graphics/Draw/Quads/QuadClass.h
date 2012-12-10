@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/NET/BinaryWriter.h"
+#include "Hacks/NET/BinaryReader.h"
 
 namespace CloudberryKingdom
 {

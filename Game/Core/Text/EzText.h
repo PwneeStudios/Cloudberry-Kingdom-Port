@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/NET/StringBuilder.h"
+
 namespace CloudberryKingdom
 {
 	class ButtonTexture

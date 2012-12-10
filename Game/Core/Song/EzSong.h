@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/Song.h"
+
 namespace CloudberryKingdom
 {
 	class EzSong : public std::enable_shared_from_this<EzSong>

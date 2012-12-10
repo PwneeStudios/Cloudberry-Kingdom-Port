@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Hacks/NET/BinaryWriter.h"
+#include "Hacks/NET/BinaryReader.h"
+
 namespace CloudberryKingdom
 {
 	class BaseQuad : public std::enable_shared_from_this<BaseQuad>

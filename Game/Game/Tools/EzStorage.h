@@ -3,6 +3,11 @@
 
 #include <global_header.h>
 
+#include "Hacks/NET/TimeSpan.h"
+
+#include "Hacks/XNA/StorageDevice.h"
+#include "Hacks/XNA/StorageContainer.h"
+
 namespace CloudberryKingdom
 {
 	class SaveGroup

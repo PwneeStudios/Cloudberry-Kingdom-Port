@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/DisplayMode.h"
+
 namespace CloudberryKingdom
 {
 	class ResolutionGroup

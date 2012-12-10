@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Hacks/XNA/Game.h"
+
 namespace CloudberryKingdom
 {
 	class XnaGameClass : public Game, public std::enable_shared_from_this<XnaGameClass>

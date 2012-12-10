@@ -3,7 +3,10 @@
 
 #include <global_header.h>
 
-
+#include "Hacks/XNA/MouseState.h"
+#include "Hacks/XNA/GamePadState.h"
+#include "Hacks/NET/StreamReader.h"
+#include "Hacks/NET/StreamWriter.h"
 
 namespace CloudberryKingdom
 {
