@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	float MainVideo::LengthUntilUserCanSkip;
 	std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
 	int MainVideo::SubtitleIndex;
-	std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
+	std::shared_ptr<QuadClass> MainVideo::SubtitleQuad;
 
 
 	void MainVideo::StartVideo_CanSkipIfWatched( const std::wstring &MovieName )

@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	void InitializeStatics()
+	void MenuItem::InitializeStatics()
 	{
 		MenuItem::ActivatingPlayer = -1;
 	}

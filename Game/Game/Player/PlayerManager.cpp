@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	RezData PlayerManager::d;
 #endif
-	bool PlayerManager::PartiallyInvisible;
+	bool PlayerManager::PartiallyInvisible, PlayerManager::TotallyInvisible;
 	int PlayerManager::_CoinsSpent;
 
 	std::shared_ptr<_SavePlayerData> PlayerManager::SavePlayerData;

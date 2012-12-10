@@ -40,24 +40,23 @@ namespace CloudberryKingdom
 	int Awardments::HeroRush2Score = 500000;
 	int Awardments::HeroRush2_LevelUnlock = 35;
 	int Awardments::FastCampaign_Minutes = 20;
-	float CurShift, Awardments::Shift = 520;
+	float Awardments::CurShift, Awardments::Shift = 520;
 
-	std::wstring Awardments::BeatStr = _T( "Beat a classic castle\non" );
-	std::shared_ptr<Awardment> tempVector[] = { std::shared_ptr<Awardment>(), std::make_shared<Awardment>( 1, _T( "Italian Plumbing" ), Awardments::BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), std::make_shared<Awardment>( 2, _T( "Bubbly Bop" ), Awardments::BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), std::make_shared<Awardment>( 3, _T( "Ghouls n' stickmen" ), Awardments::BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), std::make_shared<Awardment>( 4, _T( "Gosu Master" ), Awardments::BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
-	std::vector<std::shared_ptr<Awardment> > Awardments::BeatCampaign = std::vector<std::shared_ptr<Awardment> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	std::shared_ptr<Awardment> Awardments::JumpAlot = std::make_shared<Awardment>( 5, _T( "Jumple-upagus" ), _T( "Jump " ) + StringConverterHelper::toString( LotsOfJumps ) + _T( " times." ), Hat::Bubble );
-	std::shared_ptr<Awardment> Awardments::HoldForwardFreeplay = std::make_shared<Awardment>( 6, _T( "White Rabbit" ), std::wstring( _T( "Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( _T( "level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
-	std::shared_ptr<Awardment> Awardments::HeroRush_Score = std::make_shared<Awardment>( 7, _T( "Locked IN" ), std::wstring( _T( "Score " ) ) + ToString( HeroRushScore ) + std::wstring( _T( " points in Hero Rush." ) ), Hat::FallingBlockHead );
-	std::shared_ptr<Awardment> Awardments::Escalation_Levels = std::make_shared<Awardment>( 8, _T( "Iron Man" ), _T( "Beat 26.2 levels in Escalation." ), Hat::FireHead );
-	std::shared_ptr<Awardment> Awardments::FastCampaign2 = std::make_shared<Awardment>( 10, _T( "Minute man" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle in under " ) ) + StringConverterHelper::toString( FastCampaign_Minutes ) + std::wstring( _T( " minutes." ) ), Hat::Pink );
-	std::shared_ptr<Awardment> Awardments::HeroRush2_Score = std::make_shared<Awardment>( 12, _T( "Jack of all sticks" ), std::wstring( _T( "Score " ) ) + ToString( HeroRush2Score ) + std::wstring( _T( " points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ) ), Hat::Fedora );
-	std::shared_ptr<Awardment> Awardments::PartiallyInvisibleCampaign = std::make_shared<Awardment>( 13, _T( "I HAVE NO FEET" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle while invisible. Cape and hat recommended." ) ), Hat::Ghost );
-	std::shared_ptr<Awardment> Awardments::TotallyInvisibleCampaign = std::make_shared<Awardment>( 14, _T( "Mind Games" ), _T( "Beat a" ) + CampaignHelper::GetName( 1 ) + _T( "castle while invisible, with no hat and no cape." ), Hat::Brain );
-	std::shared_ptr<Awardment> Awardments::NoCoinFreeplay = std::make_shared<Awardment>( 15, _T( "Chromotephobia" ), _T( "Beat a max length " ) + CampaignHelper::GetName( 2 ) + _T( "level without grabbing a single coin. Classic hero. No checkpoints." ), Hat::CheckpointHead );
-	std::shared_ptr<Awardment> Awardments::AllCoinsAbusiveCastle = std::make_shared<Awardment>( 16, _T( "Ebenezer" ), _T( "Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + _T( "castle." ), Hat::TopHat );
-	std::shared_ptr<Awardment> Awardments::NoDeathsNormalCastle = std::make_shared<Awardment>( 17, _T( "Untouchable" ), _T( "Beat an" ) + CampaignHelper::GetName( 2 ) + _T( "castle without dying once." ), Hat::Afro );
-	std::shared_ptr<Awardment> Awardments::PerfectEasyCastle = std::make_shared<Awardment>( 18, _T( "Perfection" ), _T( "Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + _T( "castle without dying once. Image is everything." ), Hat::Halo );
-	std::shared_ptr<Awardment> Awardments::UnlockHeroRush2 = std::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ), Format( _T( "{0}Required:{1}\n   Level {3} in {2}Hero Rush" ), EzText::ColorToMarkup( Color( unsigned char( 205 ), unsigned char( 10 ), unsigned char( 10 ) ) ), EzText::ColorToMarkup( Color::White ), EzText::ColorToMarkup( Color( unsigned char( 26 ), unsigned char( 178 ), unsigned char( 231 ) ) ), HeroRush2_LevelUnlock ), std::shared_ptr<Hat>() );
+	std::wstring Awardments::BeatStr;
+	std::vector<std::shared_ptr<Awardment> > Awardments::BeatCampaign;
+	std::shared_ptr<Awardment> Awardments::JumpAlot;
+	std::shared_ptr<Awardment> Awardments::HoldForwardFreeplay;
+	std::shared_ptr<Awardment> Awardments::HeroRush_Score;
+	std::shared_ptr<Awardment> Awardments::Escalation_Levels;
+	std::shared_ptr<Awardment> Awardments::FastCampaign2;
+	std::shared_ptr<Awardment> Awardments::HeroRush2_Score;
+	std::shared_ptr<Awardment> Awardments::PartiallyInvisibleCampaign;
+	std::shared_ptr<Awardment> Awardments::TotallyInvisibleCampaign;
+	std::shared_ptr<Awardment> Awardments::NoCoinFreeplay;
+	std::shared_ptr<Awardment> Awardments::AllCoinsAbusiveCastle;
+	std::shared_ptr<Awardment> Awardments::NoDeathsNormalCastle;
+	std::shared_ptr<Awardment> Awardments::PerfectEasyCastle;
+	std::shared_ptr<Awardment> Awardments::UnlockHeroRush2;
 
 
 
