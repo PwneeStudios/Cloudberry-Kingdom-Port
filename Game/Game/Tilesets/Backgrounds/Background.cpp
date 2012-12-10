@@ -3,22 +3,25 @@
 namespace CloudberryKingdom
 {
 
-	std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > BackgroundType::NameLookup, BackgroundType::PathLookup;
-	std::shared_ptr<BackgroundTemplate>
-		BackgroundType::None = std::make_shared<BackgroundTemplate>(),
-		BackgroundType::Random = std::make_shared<BackgroundTemplate>(),
+	void BackgroundType::InitializeStatics()
+	{
+		BackgroundType::None = std::make_shared<BackgroundTemplate>();
+		BackgroundType::Random = std::make_shared<BackgroundTemplate>();
 		
-		BackgroundType::_Sea = std::make_shared<Background_Castle>( _T( "sea" ) ),
-		BackgroundType::_Sea_Rain = std::make_shared<Background_Castle>( _T( "sea_rain" ) ),
-		BackgroundType::_Hills = std::make_shared<Background_Castle>( _T( "hills" ) ),
-		BackgroundType::_Hills_Rain = std::make_shared<Background_Castle>( _T( "hills_rain" ) ),
-		BackgroundType::_Forest = std::make_shared<Background_Castle>( _T( "forest" ) ),
-		BackgroundType::_Forest_Rain = std::make_shared<Background_Castle>( _T( "forest_snow" ) ),
-		BackgroundType::_Cloud = std::make_shared<Background_Castle>( _T( "cloud" ) ),
-		BackgroundType::_Cloud_Rain = std::make_shared<Background_Castle>( _T( "cloud_rain" ) ),
-		BackgroundType::_Cave = std::make_shared<Background_Castle>( _T( "cave" ) ),
+		BackgroundType::_Sea = std::make_shared<Background_Castle>( _T( "sea" ) );
+		BackgroundType::_Sea_Rain = std::make_shared<Background_Castle>( _T( "sea_rain" ) );
+		BackgroundType::_Hills = std::make_shared<Background_Castle>( _T( "hills" ) );
+		BackgroundType::_Hills_Rain = std::make_shared<Background_Castle>( _T( "hills_rain" ) );
+		BackgroundType::_Forest = std::make_shared<Background_Castle>( _T( "forest" ) );
+		BackgroundType::_Forest_Rain = std::make_shared<Background_Castle>( _T( "forest_snow" ) );
+		BackgroundType::_Cloud = std::make_shared<Background_Castle>( _T( "cloud" ) );
+		BackgroundType::_Cloud_Rain = std::make_shared<Background_Castle>( _T( "cloud_rain" ) );
+		BackgroundType::_Cave = std::make_shared<Background_Castle>( _T( "cave" ) );
 		BackgroundType::_Castle = std::make_shared<Background_Castle>( _T( "castle" ) );
+	}
 
+	std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > BackgroundType::NameLookup, BackgroundType::PathLookup;
+	std::shared_ptr<BackgroundTemplate> BackgroundType::None, BackgroundType::Random, BackgroundType::_Sea, BackgroundType::_Sea_Rain, BackgroundType::_Hills, BackgroundType::_Hills_Rain, BackgroundType::_Forest, BackgroundType::_Forest_Rain, BackgroundType::_Cloud, BackgroundType::_Cloud_Rain, BackgroundType::_Cave, BackgroundType::_Castle;
 
 	void BackgroundType::AddTemplate( const std::shared_ptr<BackgroundTemplate> &template_Renamed )
 	{

@@ -5,23 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class CharacterSelect;
-}
-
-namespace CloudberryKingdom
-{
-	class ArrowMenu;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
 	class SimpleMenuBase : public CkBaseMenu
 	{
+
+	public:
+		static void InitializeStatics();
+
 	protected:
 		class SimpleToCustomProxy : public Lambda
 		{

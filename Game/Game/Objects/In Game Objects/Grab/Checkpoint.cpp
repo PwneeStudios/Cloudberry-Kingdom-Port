@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void Checkpoint::InitializeStatics()
+	{
+		Checkpoint::MySound = 0;
+	}
+
+	// Statics
+	std::shared_ptr<EzSound> Checkpoint::MySound;
+
+
 	Checkpoint::CheckpointTileInfo::CheckpointTileInfo()
 	{
 		InitializeInstanceFields();
@@ -32,8 +41,6 @@ namespace CloudberryKingdom
 
 		MyPiece.reset();
 	}
-
-std::shared_ptr<EzSound> Checkpoint::MySound = 0;
 
 	void Checkpoint::MakeNew()
 	{

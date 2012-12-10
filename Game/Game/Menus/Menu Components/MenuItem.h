@@ -8,6 +8,10 @@ namespace CloudberryKingdom
 	//public delegate void MenuItemGo(MenuItem item);
 	class MenuItem : public std::enable_shared_from_this<MenuItem>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		int Code;
 		std::wstring Name;

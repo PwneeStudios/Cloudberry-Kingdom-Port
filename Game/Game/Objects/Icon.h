@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class ObjectIcon
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		enum IconScale
 		{

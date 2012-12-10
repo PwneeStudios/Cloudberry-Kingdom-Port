@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void InitializeStatics()
+	{
+		MenuItem::ActivatingPlayer = -1;
+	}
+
+	// Statics
+	int MenuItem::ActivatingPlayer;
+
+
 	std::shared_ptr<MenuItem> MenuItem::Clone()
 	{
 		std::shared_ptr<MenuItem> clone = std::make_shared<MenuItem>( MyText->Clone(), MySelectedText->Clone() );
@@ -458,8 +467,6 @@ namespace CloudberryKingdom
 		return ColWithIcon && Icon != 0 && Icon->HitTest( pos ) || MyText->HitTest( pos, Padding + padding );
 	}
 #endif
-
-int MenuItem::ActivatingPlayer = -1;
 
 	std::shared_ptr<PlayerData> MenuItem::GetActivatingPlayerData()
 	{

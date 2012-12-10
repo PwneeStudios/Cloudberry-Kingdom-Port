@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class CustomLevel_GUI : public CkBaseMenu
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;

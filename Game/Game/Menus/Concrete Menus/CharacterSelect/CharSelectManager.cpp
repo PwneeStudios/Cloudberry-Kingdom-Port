@@ -9,6 +9,18 @@
 namespace CloudberryKingdom
 {
 
+	void CharacterSelectManager::InitializeStatics()
+	{
+		CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
+	}
+
+	// Statics
+	std::shared_ptr<Lambda> CharacterSelectManager::OnBack, CharacterSelectManager::OnDone;
+	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel;
+	std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance;
+
+
+
 	CharacterSelectManager::SignInGamerLambda::SignInGamerLambda( const std::shared_ptr<SignedInEventArgs> &e )
 	{
 		this->e = e;
@@ -42,11 +54,6 @@ namespace CloudberryKingdom
 	{
 		CharacterSelectManager::AfterFinished();
 	}
-
-	std::shared_ptr<Lambda> CharacterSelectManager::OnBack, CharacterSelectManager::OnDone;
-	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel;
-
-	const std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
 
 	const std::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
 	{

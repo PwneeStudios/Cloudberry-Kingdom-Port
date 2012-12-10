@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class ParticleEmitterBin
 	{
+
 	private:
 		std::vector<std::shared_ptr<ParticleEmitter> > MyStack;
 		Mutex stackLock;
@@ -21,6 +22,10 @@ namespace CloudberryKingdom
 
 	class ParticleEmitter : public std::enable_shared_from_this<ParticleEmitter>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static std::shared_ptr<ParticleEmitterBin> Pool;
 

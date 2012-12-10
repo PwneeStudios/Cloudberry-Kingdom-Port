@@ -7,16 +7,22 @@ namespace CloudberryKingdom
 {
 	class Awardment : public std::enable_shared_from_this<Awardment>
 	{
+
 	public:
 		std::wstring Name, Description;
 		std::shared_ptr<Hat> Unlockable;
 		int Guid;
 
 		Awardment( int Guid, const std::wstring &Name, const std::wstring &Description, const std::shared_ptr<Hat> &Unlockable );
+
 	};
 
 	class Awardments
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class CheckpointsStatsLambda : public PlayerIntLambda
 		{

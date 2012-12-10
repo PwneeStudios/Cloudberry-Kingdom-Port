@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void Camera::InitializeStatics()
+	{
+		Camera::DisableOscillate = false;
+	}
+
+	// Statics
+	bool Camera::DisableOscillate;
+
+
 	Vector2 Camera::getPos()
 	{
 		return Data.Position;
@@ -350,8 +359,6 @@ namespace CloudberryKingdom
 		//return Data.Position - PrevPos;
 		return PrevPos - PrevPrevPos;
 	}
-
-bool Camera::DisableOscillate = false;
 
 	void Camera::PhsxStep()
 	{

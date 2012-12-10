@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void InitialLoadingScreen::InitializeStatics()
+	{
+		InitialLoadingScreen::TotalResources = 805;
+	}
+
+	// Statics
+	int InitialLoadingScreen::TotalResources;
+
+
 	const Vector2 &ProgressBar::getFull_BL() const
 	{
 		return Outline->getBL();
@@ -148,8 +157,6 @@ namespace CloudberryKingdom
 		BlackQuad->Layer = 1;
 		MyPile->Add( BlackQuad );
 	}
-
-int InitialLoadingScreen::TotalResources = 805;
 
 	void InitialLoadingScreen::PhsxStep()
 	{

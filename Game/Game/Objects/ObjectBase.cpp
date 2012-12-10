@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void ObjectData::InitializeStatics()
+	{
+		ObjectData::NextId = 0;
+	}
+
+	// Statics
+	unsigned long long ObjectData::NextId;
+
+
 	const std::shared_ptr<GameData> &ObjectBase::getGame() const
 	{
 		return getCore()->MyLevel->MyGame;
@@ -261,8 +270,6 @@ namespace CloudberryKingdom
 	{
 		return MyLevel->CurPiece->MyData->Style->FindParams( singleton );
 	}
-
-	unsigned long long ObjectData::NextId = 0;
 
 	unsigned long long ObjectData::GetId()
 	{

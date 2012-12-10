@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class PieceQuadData
 	{
+
 	public:
 		Vector2 Center_BL_Shift;
 		Vector2 Center_TR_Shift;
@@ -34,6 +35,10 @@ namespace CloudberryKingdom
 
 	class PieceQuad
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		enum Orientation
 		{

@@ -10,8 +10,8 @@ namespace CloudberryKingdom
 	{
 
 	public:
-		void StaticIntializer_NoDependence();
-
+		static void StaticIntializer_NoDependence();
+		static void StaticIntializer_AfterResourcesLoad();
 
 	public:
 		class ExitProxy : public Lambda

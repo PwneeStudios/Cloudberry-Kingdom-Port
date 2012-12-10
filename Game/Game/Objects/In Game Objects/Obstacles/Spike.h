@@ -6,48 +6,11 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleObject;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTextureWad;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	class Spike : public _BoxDeath
 	{
+
+	public: static void InitializeStatics();
+
 	public:
 		class SpikeTileInfo : public TileInfoBase
 		{

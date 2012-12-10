@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void SimpleMenuBase::InitializeStatics()
+	{
+		SimpleMenuBase::NoMoveDuration = 20;
+	}
+
+	// Statics
+	int SimpleMenuBase::NoMoveDuration;
+
+
 	SimpleMenuBase::SimpleToCustomProxy::SimpleToCustomProxy( const std::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
@@ -76,8 +85,6 @@ namespace CloudberryKingdom
 		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) );
 		MyGame->AddGameObject( Arrows );
 	}
-
-int SimpleMenuBase::NoMoveDuration = 20;
 
 	void SimpleMenuBase::SimpleToCustom()
 	{

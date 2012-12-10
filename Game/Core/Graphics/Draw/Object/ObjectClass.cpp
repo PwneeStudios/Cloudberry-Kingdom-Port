@@ -3,7 +3,12 @@
 namespace CloudberryKingdom
 {
 
-int ObjectClass::ObjectClassVersionNumber = 54;
+	void ObjectClass::InitializeStatics()
+	{
+		ObjectClass::ObjectClassVersionNumber = 54;
+	}
+
+	int ObjectClass::ObjectClassVersionNumber;
 
 	bool ObjectClass::getDonePlaying() const
 	{

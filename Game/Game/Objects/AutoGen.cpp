@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	bool AutoGen_Parameters::IntelliSpread = true;
+	const bool IntelliSpread = true;
 
 	int AutoGen_Parameters::ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd )
 	{
-		if ( AutoGen_Parameters::IntelliSpread )
+		if ( IntelliSpread )
 			return Counter++ % NumOffsets * Period / NumOffsets;
 		else
 			return Rnd->Rnd->Next( 0, NumOffsets ) * Period / NumOffsets;

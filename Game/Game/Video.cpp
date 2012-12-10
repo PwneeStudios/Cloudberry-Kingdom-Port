@@ -3,18 +3,36 @@
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<ContentManager> MainVideo::Content = 0;
-bool MainVideo::Playing = false;
-std::shared_ptr<Video> MainVideo::CurrentVideo = 0;
-std::shared_ptr<VideoPlayer> MainVideo::VPlayer = 0;
-std::shared_ptr<EzTexture> MainVideo::VEZTexture = std::make_shared<EzTexture>();
-double MainVideo::Duration = 0;
-DateTime MainVideo::StartTime;
-bool MainVideo::CanSkip = false;
-float MainVideo::LengthUntilUserCanSkip = 0;
-std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
-int MainVideo::SubtitleIndex = 0;
-std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
+	void MainVideo::InitializeStatics()
+	{
+		MainVideo::Content = 0;
+		MainVideo::Playing = false;
+		MainVideo::CurrentVideo = 0;
+		MainVideo::VPlayer = 0;
+		MainVideo::VEZTexture = std::make_shared<EzTexture>();
+		MainVideo::Duration = 0;
+		MainVideo::StartTime;
+		MainVideo::CanSkip = false;
+		MainVideo::LengthUntilUserCanSkip = 0;
+		MainVideo::Subtitles;
+		MainVideo::SubtitleIndex = 0;
+		MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
+	}
+
+	// Statics
+	std::shared_ptr<ContentManager> MainVideo::Content;
+	bool MainVideo::Playing;
+	std::shared_ptr<Video> MainVideo::CurrentVideo;
+	std::shared_ptr<VideoPlayer> MainVideo::VPlayer;
+	std::shared_ptr<EzTexture> MainVideo::VEZTexture;
+	double MainVideo::Duration;
+	DateTime MainVideo::StartTime;
+	bool MainVideo::CanSkip;
+	float MainVideo::LengthUntilUserCanSkip;
+	std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
+	int MainVideo::SubtitleIndex;
+	std::shared_ptr<QuadClass> MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
+
 
 	void MainVideo::StartVideo_CanSkipIfWatched( const std::wstring &MovieName )
 	{

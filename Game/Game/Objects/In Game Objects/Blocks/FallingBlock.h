@@ -5,27 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class FallingBlock : public BlockBase
 	{
 	public:

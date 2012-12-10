@@ -3,7 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	void Recycler::InitializeStatics()
+	{
+		Recycler::MetaCount = 0;
+	}
+
+	// Statics
+	int Recycler::MetaCount;
+	std::vector<std::shared_ptr<Recycler> > Recycler::MetaBin;
 	Mutex Recycler::MetaBinLock;
+
 
 	void RecycleBin::Release()
 	{
@@ -170,9 +179,6 @@ namespace CloudberryKingdom
 				//throw ( std::exception( _T( "No type found for desired object" ) ) );
 		}
 	}
-
-int Recycler::MetaCount = 0;
-std::vector<std::shared_ptr<Recycler> > Recycler::MetaBin;
 
 	std::shared_ptr<Recycler> Recycler::GetRecycler()
 	{

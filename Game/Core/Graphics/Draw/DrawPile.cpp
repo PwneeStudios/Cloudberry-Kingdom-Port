@@ -3,6 +3,20 @@
 namespace CloudberryKingdom
 {
 
+	void DrawPile::InitializeStatics()
+	{
+		Vector2 tempVector2[] = { Vector2( 0.001f ), Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
+		DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+
+		Vector2 tempVector3[] = { Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
+		DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+	}
+
+	// Statics
+	std::vector<Vector2> DrawPile::BubbleScale;
+	std::vector<Vector2> DrawPile::JiggleScale;
+
+
 	DrawPile::WaitThenPop::WaitThenPop( const std::shared_ptr<DrawPile> &MyDrawPile )
 	{
 		MyDrawPile_ = MyDrawPile;
@@ -303,9 +317,6 @@ namespace CloudberryKingdom
 		FadeOut( 1 / 20 );
 	}
 
-const Vector2 tempVector2[] = { Vector2( 0.001f ), Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
-std::vector<Vector2> DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-
 	void DrawPile::BubbleUp( bool sound )
 	{
 		BubbleUp( sound, 5, 1 );
@@ -341,9 +352,6 @@ std::vector<Vector2> DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, 
 		if ( sound )
 			Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
 	}
-
-const Vector2 tempVector3[] = { Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
-std::vector<Vector2> DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 
 	void DrawPile::Jiggle( bool sound )
 	{

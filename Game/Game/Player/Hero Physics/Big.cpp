@@ -1,9 +1,16 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
+
+	void BobPhsxBig::InitializeStatics()
+	{
+		BobPhsxBig::instance = std::make_shared<BobPhsxBig>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxBig> BobPhsxBig::instance;
+
 
 	void BobPhsxBig::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
@@ -37,8 +44,6 @@ namespace CloudberryKingdom
 
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
 	}
-
-const std::shared_ptr<BobPhsxBig> BobPhsxBig::instance = std::make_shared<BobPhsxBig>();
 
 	const std::shared_ptr<BobPhsxBig> &BobPhsxBig::getInstance()
 	{

@@ -5,49 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class FancyVector2;
-}
-
-namespace CloudberryKingdom
-{
-	class Menu;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ScoreScreen : public CkBaseMenu
 	{
 	private:

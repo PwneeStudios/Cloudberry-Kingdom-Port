@@ -3,8 +3,17 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<ScoreDatabase> ScoreDatabase::Instance = 0;
-	int ScoreDatabase::MostRecentScoreDate = 0;
+	void ScoreDatabase::InitializeStatics()
+	{
+		ScoreDatabase::MostRecentScoreDate = 0;
+		ScoreDatabase::Capacity = 20;
+	}
+
+	// Statics
+	std::shared_ptr<ScoreDatabase> ScoreDatabase::Instance;
+	int ScoreDatabase::MostRecentScoreDate;
+	int ScoreDatabase::Capacity;
+	std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > ScoreDatabase::Games;
 
 	int ScoreDatabase::CurrentDate()
 	{
@@ -13,9 +22,6 @@ namespace CloudberryKingdom
 
 		return minutes;
 	}
-
-	int ScoreDatabase::Capacity = 20;
-	std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > ScoreDatabase::Games;
 
 	void ScoreDatabase::Initialize()
 	{

@@ -3,19 +3,28 @@
 namespace CloudberryKingdom
 {
 
+	void FlyingBlob::InitializeStatics()
+	{
+		float tempVector[] = { 2, 0 };
+		FlyingBlob::BobMaxSpeed = VecFromArray( tempVector );
+		FlyingBlob::BobXAccel = .53f;
+		FlyingBlob::BobXFriction = 1;
+	}
+
+	// Statics
+	std::shared_ptr<Particle> FlyingBlob::BlobGooTemplate;
+	std::shared_ptr<EzSound> FlyingBlob::SquishSound;
+	std::vector<float> FlyingBlob::BobMaxSpeed;
+	float FlyingBlob::BobXAccel;
+	float FlyingBlob::BobXFriction;
+
+
 	void FlyingBlob::FlyingBlobTileInfo::InitializeInstanceFields()
 	{
 		Body = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f), Vector2(), Color::White );
 		ObjectSize = Vector2( 616.05f, 616.05f );
 		GooSprite = 0;
 	}
-
-	std::shared_ptr<Particle> FlyingBlob::BlobGooTemplate = 0;
-	std::shared_ptr<EzSound> FlyingBlob::SquishSound = 0;
-	const float tempVector[] = { 2, 0 };
-	std::vector<float> FlyingBlob::BobMaxSpeed = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	float FlyingBlob::BobXAccel = .53f;
-	float FlyingBlob::BobXFriction = 1;
 
 	void FlyingBlob::SetColor( BlobColor color )
 	{

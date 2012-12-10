@@ -4,6 +4,15 @@
 namespace CloudberryKingdom
 {
 
+	void ParticleEmitter::InitializeStatics()
+	{
+		ParticleEmitter::Pool = std::make_shared<ParticleEmitterBin>();
+	}
+	
+	// Statis
+	std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool;
+
+
 	ParticleEmitterBin::ParticleEmitterBin()
 	{
 		const int capacity = 20;
@@ -45,8 +54,6 @@ namespace CloudberryKingdom
 			stackLock.Unlock();
 		}
 	}
-
-std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool = std::make_shared<ParticleEmitterBin>();
 
 	bool ParticleEmitter::IsActive()
 	{

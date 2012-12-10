@@ -136,6 +136,10 @@ namespace CloudberryKingdom
 
 	class ObjectData
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		class AssociatedObjData
 		{

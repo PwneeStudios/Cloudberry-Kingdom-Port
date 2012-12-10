@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class Camera : public IPos, public std::enable_shared_from_this<Camera>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		/// <summary>
 		/// When true the camera uses its EffectivePos and EffectiveZoom when drawing.

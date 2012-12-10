@@ -3,6 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxWheel::InitializeStatics()
+	{
+		BobPhsxWheel::instance = std::make_shared<BobPhsxWheel>();
+		BobPhsxWheel::AnimIndex = 0;
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance;
+	int BobPhsxWheel::AnimIndex;
+
 	void BobPhsxWheel::InitSingleton()
 	{
 		BobPhsxNormal::InitSingleton();
@@ -14,8 +24,6 @@ namespace CloudberryKingdom
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
 	}
-
-const std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance = std::make_shared<BobPhsxWheel>();
 
 	const std::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance()
 	{
@@ -58,8 +66,6 @@ const std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance = std::make_shared<Bo
 
 		SpritePadding = Vector2( 90, 0 );
 	}
-
-int BobPhsxWheel::AnimIndex = 0;
 
 	void BobPhsxWheel::Init( const std::shared_ptr<Bob> &bob )
 	{

@@ -7,8 +7,9 @@ namespace CloudberryKingdom
 {
 	class Bob : public ObjectBase
 	{
+
 	public:
-		static void StaticInitializer();
+		static void InitializeStatics();
 
 	public:
 		class BobMove

@@ -34,14 +34,17 @@ namespace CloudberryKingdom
 
 	class BobPhsx : public Object, public std::enable_shared_from_this<BobPhsx>
 	{
+
 	public:
 		class DefaultInfo
 		{
+
 		public:
 			static std::shared_ptr<EzSound> DoubleJump_Sound;
 			static std::shared_ptr<EzSound> BobBoxJump_Sound;
 			static std::shared_ptr<EzSound> BobJetpack_Sound;
 			static int BobJetpack_SoundDelay;
+
 		};
 
 	public:

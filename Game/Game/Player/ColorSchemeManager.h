@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	class CapeOnLambda : public Lambda_1<std::shared_ptr<Bob> >
 	{
 	public:
@@ -15,6 +16,10 @@ namespace CloudberryKingdom
 
 	class ColorSchemeManager
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::shared_ptr<CapeOnLambda> CapeOn;
 

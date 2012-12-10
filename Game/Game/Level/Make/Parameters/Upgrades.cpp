@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void Upgrades::InitializeStatics()
+	{
+		Upgrades::MaxBobWidth = 360;
+	}
+
+	// Statics
+	int Upgrades::MaxBobWidth;
+
+
 	Upgrades::Upgrades()
 	{
 		Initialize();
@@ -41,8 +50,6 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < static_cast<int>( UpgradeLevels.size() ); i++ )
 			UpgradeLevels[ i ] = 0;
 	}
-
-	int Upgrades::MaxBobWidth = 360;
 
 	void Upgrades::CalcGenData( const std::shared_ptr<LevelGenData> &GenData, const std::shared_ptr<StyleData> &Style )
 	{

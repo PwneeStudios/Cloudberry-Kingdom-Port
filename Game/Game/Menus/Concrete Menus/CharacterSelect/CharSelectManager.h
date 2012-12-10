@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class CharacterSelectManager
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class SignInGamerLambda : public Lambda
 		{
@@ -46,7 +50,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<GUI_Panel> ParentPanel;
 
 	private:
-		static const std::shared_ptr<CharacterSelectManager> instance;
+		static std::shared_ptr<CharacterSelectManager> instance;
 	public:
 		const static std::shared_ptr<CharacterSelectManager> &getInstance();
 

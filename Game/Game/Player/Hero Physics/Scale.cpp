@@ -1,6 +1,15 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
+
+	void BobPhsxScale::InitializeStatics()
+	{
+		BobPhsxScale::instance = std::make_shared<BobPhsxScale>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxScale> BobPhsxScale::instance;
 
 	void BobPhsxScale::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
@@ -20,8 +29,6 @@ namespace CloudberryKingdom
 		Adjective = _T( "phasing" );
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Phase" ) ), Color::White, 1.1f * DefaultIconWidth );
 	}
-
-const std::shared_ptr<BobPhsxScale> BobPhsxScale::instance = std::make_shared<BobPhsxScale>();
 
 	const std::shared_ptr<BobPhsxScale> &BobPhsxScale::getInstance()
 	{

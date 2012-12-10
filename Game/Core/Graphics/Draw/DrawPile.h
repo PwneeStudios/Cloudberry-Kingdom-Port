@@ -3,11 +3,14 @@
 
 #include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
 	class DrawPile : public std::enable_shared_from_this<DrawPile>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class WaitThenPop : public Lambda
 		{
@@ -108,8 +111,10 @@ namespace CloudberryKingdom
 		int MyPopPitch;
 		void BubbleDown( bool sound );
 		void BubbleDown( bool sound, int Length );
+	
 	private:
 		static std::vector<Vector2> JiggleScale;
+
 	public:
 		void Jiggle( bool sound );
 		void Jiggle( bool sound, int Length, float Intensity );

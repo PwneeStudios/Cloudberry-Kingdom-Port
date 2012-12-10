@@ -2,6 +2,14 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxMeat::InitializeStatics()
+	{
+		BobPhsxMeat::instance = std::make_shared<BobPhsxMeat>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance;
+
 	void BobPhsxMeat::Release()
 	{
 		BobPhsxNormal::Release();
@@ -53,8 +61,6 @@ namespace CloudberryKingdom
 		Adjective = _T( "Meat" );
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Meat" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
-
-const std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance = std::make_shared<BobPhsxMeat>();
 
 	const std::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance()
 	{

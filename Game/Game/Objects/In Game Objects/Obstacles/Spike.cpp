@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void Spike::InitializeStatics()
+	{
+		Spike::PeakOut = true;
+	}
+
+	// Statics
+	bool Spike::PeakOut;
+
+
 	void Spike::SpikeTileInfo::InitializeInstanceFields()
 	{
 		Spike_Renamed = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
@@ -13,8 +22,6 @@ namespace CloudberryKingdom
 		SideOffset = 2;
 		ObjectSize = Vector2( 575, 535 );
 	}
-
-	bool Spike::PeakOut = true;
 
 	void Spike::SetPeriod( int Period )
 	{

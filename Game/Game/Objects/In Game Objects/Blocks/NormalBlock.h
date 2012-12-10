@@ -5,35 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	class PieceQuad;
-}
-
-namespace CloudberryKingdom
-{
-	class TileSet;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class NormalBlock : public BlockBase
 	{
+
 	public:
 		bool Invert;
 

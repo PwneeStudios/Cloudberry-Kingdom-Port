@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class BobPhsxTime : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		enum Behavior
 		{
@@ -16,8 +20,8 @@ namespace CloudberryKingdom
 		// Singleton
 	protected:
 		virtual void InitSingleton();
-	private:
-		static const std::shared_ptr<BobPhsxTime> instance;
+	public:
+		static std::shared_ptr<BobPhsxTime> instance;
 	public:
 		const static std::shared_ptr<BobPhsxTime> &getInstance();
 

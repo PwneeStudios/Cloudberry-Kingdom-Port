@@ -7,10 +7,14 @@ namespace CloudberryKingdom
 {
 	class EzSoundWad
 	{
+
+	public:
+		static void InitializeStatics();
+
+	public:
 		/// <summary>
 		/// When true all new sounds to be played are suppressed.
 		/// </summary>
-	public:
 		static bool SuppressSounds;
 
 		std::vector<std::shared_ptr<EzSound> > SoundList;

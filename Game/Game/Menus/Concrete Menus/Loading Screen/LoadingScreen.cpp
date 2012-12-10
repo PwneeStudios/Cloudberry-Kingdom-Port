@@ -3,8 +3,16 @@
 namespace CloudberryKingdom
 {
 
-	int LoadingScreen::DefaultMinLoadLength = 85;
-	int LoadingScreen::MinLoadLength = 0;
+	void LoadingScreen::InitializeStatics()
+	{
+		LoadingScreen::DefaultMinLoadLength = 85;
+		LoadingScreen::MinLoadLength = 0;
+	}
+
+	// Statics
+	int LoadingScreen::DefaultMinLoadLength;
+	int LoadingScreen::MinLoadLength;
+
 
 	void LoadingScreen::MakeFake()
 	{

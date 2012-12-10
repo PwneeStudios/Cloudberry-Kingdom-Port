@@ -4,6 +4,30 @@
 namespace CloudberryKingdom
 {
 
+	void CustomLevel_GUI::InitializeStatics()
+	{
+		CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >();
+		CustomLevel_GUI::FreeplayHeroes = std::vector<std::shared_ptr<BobPhsx> >();
+		CustomLevel_GUI::IsMaxLength = false;
+		CustomLevel_GUI::Difficulty = 0;
+		CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
+		CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
+		CustomLevel_GUI::SeedStringToLoad = _T( "" );
+		CustomLevel_GUI::ExitFreeplay = false;
+	}
+
+	// Statics
+	std::vector<std::shared_ptr<TileSet> > CustomLevel_GUI::FreeplayTilesets;
+	std::vector<std::shared_ptr<BobPhsx> > CustomLevel_GUI::FreeplayHeroes;
+	bool CustomLevel_GUI::IsMaxLength;
+	int CustomLevel_GUI::Difficulty;
+	Localization::Words CustomLevel_GUI::CustomHeroString;
+	Vector2 CustomLevel_GUI::RightPanelCenter;
+	std::wstring CustomLevel_GUI::SeedStringToLoad;
+	bool CustomLevel_GUI::ExitFreeplay;
+
+
+
 	CustomLevel_GUI::StartLevelFromMenDataStandardLoadProxy::StartLevelFromMenDataStandardLoadProxy( const std::shared_ptr<LevelSeedData> &data )
 	{
 		this->data = data;
@@ -247,12 +271,6 @@ namespace CloudberryKingdom
 		clGui->BringLoad();
 	}
 
-	std::vector<std::shared_ptr<TileSet> > CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >();
-	std::vector<std::shared_ptr<BobPhsx> > CustomLevel_GUI::FreeplayHeroes = std::vector<std::shared_ptr<BobPhsx> >();
-	bool CustomLevel_GUI::IsMaxLength = false;
-	int CustomLevel_GUI::Difficulty = 0;
-	Localization::Words CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
-
 	CustomLevel_GUI::CustomLevel_GUI()
 	{
 		InitializeInstanceFields();
@@ -480,8 +498,6 @@ namespace CloudberryKingdom
 		SelectNormal();
 		ShowCheckpoints( false );
 	}
-
-	Vector2 CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 
 	void CustomLevel_GUI::Init()
 	{
@@ -1149,9 +1165,6 @@ namespace CloudberryKingdom
 			MiniCheckpoint->Draw( false );
 		}
 	}
-
-	std::wstring CustomLevel_GUI::SeedStringToLoad = 0;
-	bool CustomLevel_GUI::ExitFreeplay = false;
 
 	void CustomLevel_GUI::MyPhsxStep()
 	{

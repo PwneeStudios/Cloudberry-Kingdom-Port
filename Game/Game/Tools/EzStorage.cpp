@@ -3,10 +3,29 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<WrappedInt> SaveGroup::Count = std::make_shared<WrappedInt>( 0 );
-	Mutex SaveGroup::CountLock;
+	void SaveGroup::InitializeStatics()
+	{
+		SaveGroup::Count = std::make_shared<WrappedInt>( 0 );
+	}
 
+	// Statics
+	std::shared_ptr<WrappedInt> SaveGroup::Count;
+	Mutex SaveGroup::CountLock;
 	std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
+
+
+	void EzStorage::InitializeStatics()
+	{
+		EzStorage::InUseLock;
+		EzStorage::Device = 0;
+		EzStorage::InUse = std::make_shared<WrappedBool>( false );
+	}
+
+	// Statics
+	Mutex EzStorage::InUseLock;
+	std::shared_ptr<StorageDevice> EzStorage::Device;
+	std::shared_ptr<WrappedBool> EzStorage::InUse;
+
 
 	void SaveGroup::Initialize()
 	{
@@ -221,9 +240,6 @@ namespace CloudberryKingdom
 		AlwaysSave = false;
 		Changed = false;
 	}
-
-std::shared_ptr<StorageDevice> EzStorage::Device = 0;
-std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( false );
 
 	bool EzStorage::DeviceOK()
 	{
@@ -446,7 +462,4 @@ std::shared_ptr<WrappedBool> EzStorage::InUse = std::make_shared<WrappedBool>( f
 			InUseLock.Unlock();
 		}
 	}
-
-	Mutex EzStorage::InUseLock;
-
 }

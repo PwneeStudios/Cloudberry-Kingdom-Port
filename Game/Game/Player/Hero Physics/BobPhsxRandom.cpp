@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxRandom::InitializeStatics()
+	{
+		BobPhsxRandom::instance = std::make_shared<BobPhsxRandom>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance;
+
+
 	void BobPhsxRandom::InitSingleton()
 	{
 		BobPhsx::InitSingleton();
@@ -10,8 +19,6 @@ namespace CloudberryKingdom
 		Name = Localization::Words_RANDOM;
 		Icon = ObjectIcon::RandomIcon;
 	}
-
-const std::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance = std::make_shared<BobPhsxRandom>();
 
 	const std::shared_ptr<BobPhsxRandom> &BobPhsxRandom::getInstance()
 	{

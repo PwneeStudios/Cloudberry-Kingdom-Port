@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class BobPhsxMeat : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		virtual void Release();
 
@@ -17,7 +21,7 @@ namespace CloudberryKingdom
 	protected:
 		virtual void InitSingleton();
 	private:
-		static const std::shared_ptr<BobPhsxMeat> instance;
+		static std::shared_ptr<BobPhsxMeat> instance;
 	public:
 		const static std::shared_ptr<BobPhsxMeat> &getInstance();
 

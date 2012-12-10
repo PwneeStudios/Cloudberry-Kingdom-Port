@@ -5,31 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	class GameFactory;
-}
-
-namespace CloudberryKingdom
-{
-	class CameraZone;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
 	class TitleFactory : public GameFactory
 	{
 	public:
@@ -38,6 +13,10 @@ namespace CloudberryKingdom
 
 	class TitleGameData : public GameData
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static std::shared_ptr<GameFactory> Factory;
 

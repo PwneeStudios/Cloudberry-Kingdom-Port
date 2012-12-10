@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void EzText::InitializeStatics()
+	{
+		EzText::ZoomWithCamera_Override = false;
+	}
+
+	// Statics
+	bool EzText::ZoomWithCamera_Override;
+
+
 #if defined(PC_VERSION)
 	std::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
@@ -1106,8 +1115,6 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		if ( ParentAlpha != 1 )
 			Alpha = HoldAlpha;
 	}
-
-bool EzText::ZoomWithCamera_Override = false;
 
 	void EzText::_Draw( const std::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const std::shared_ptr<SpriteFont> &font, Vector4 color )
 	{

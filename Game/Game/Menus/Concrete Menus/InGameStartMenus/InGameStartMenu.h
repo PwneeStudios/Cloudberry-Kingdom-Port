@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class InGameStartMenu : public CkBaseMenu
 	{
+
 	private:
 		class MakeListenerHelper : public LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> >
 		{

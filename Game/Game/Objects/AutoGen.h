@@ -11,8 +11,6 @@ namespace CloudberryKingdom
 		/// Whether to intelligently spread out the period offsets of placed obstacles
 		/// </summary>
 	public:
-		static bool IntelliSpread;
-
 		int ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd );
 
 		int EnforceOffset( int offset, int period );

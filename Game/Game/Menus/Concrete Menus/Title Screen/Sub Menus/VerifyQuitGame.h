@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class VerifyQuitGameMenu2 : public VerifyBaseMenu
 	{
+
 	private:
 		class InitTextureNameSetter : public Lambda
 		{

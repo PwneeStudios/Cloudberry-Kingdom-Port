@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class BackgroundType
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
 

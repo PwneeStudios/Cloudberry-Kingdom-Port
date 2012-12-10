@@ -7,6 +7,53 @@
 namespace CloudberryKingdom
 {
 
+	void PlayerManager::InitializeStatics()
+	{
+		PlayerManager::PartiallyInvisible = false, PlayerManager::TotallyInvisible = false;
+		PlayerManager::_CoinsSpent = 0;
+
+		PlayerManager::SavePlayerData = 0;
+
+#if defined(PC_VERSION)
+		PlayerManager::_DefaultName = _T( "" );
+#endif
+
+		std::wstring tempVector[] = { _T( "Honky Tonk" ), _T( "Bosco" ), _T( "Nuh Guck" ), _T( "Short-shorts" ), _T( "Itsy-bitsy" ), _T( "Low Ball" ), _T( "Cowboy Stu" ), _T( "Capsaicin" ), _T( "Hoity-toity" ), _T( "Ram Bam" ), _T( "King Kong" ), _T( "Upsilon" ), _T( "Omega" ), _T( "Peristaltic Pump" ), _T( "Jeebers" ), _T( "Sugar Cane" ), _T( "See-Saw" ), _T( "Ink Blot" ), _T( "Glottal Stop" ), _T( "Olive Oil" ), _T( "Cod Fish" ), _T( "Flax" ), _T( "Tahini" ), _T( "Cotton Ball" ), _T( "Sweet Justice" ), _T( "Ham Sandwich" ), _T( "Liverwurst" ), _T( "Cumulus" ), _T( "Oyster" ), _T( "Klein" ), _T( "Hippopotamus" ), _T( "Bonobo" ), _T( "Homo Erectus" ), _T( "Australopithecine" ), _T( "Quetzalcoatl" ), _T( "Balogna" ), _T( "Ceraunoscopy" ), _T( "Shirley" ), _T( "Susie" ), _T( "Sally" ), _T( "Sue" ), _T( "Tyrannosaur" ), _T( "Stick Man Chu" ), _T( "Paragon" ), _T( "Woodchuck" ), _T( "Laissez Faire" ), _T( "Ipso Facto" ), _T( "Leviticus" ), _T( "Berrylicious" ), _T( "Elderberry" ), _T( "Currant" ), _T( "Blackberry" ), _T( "Blueberry" ), _T( "Strawberry" ), _T( "Gooseberry" ), _T( "Honeysuckle" ), _T( "Nannyberry" ), _T( "Hackberry" ), _T( "Boysenberry" ), _T( "Cloudberry" ), _T( "Thimbleberry" ), _T( "Huckleberry" ), _T( "Bilberry" ), _T( "Bearberry" ), _T( "Mulberry" ), _T( "Wolfberry" ), _T( "Raisin" ), _T( "Samson" ) };
+		PlayerManager::RandomNames = VecFromArray( tempVector );
+		PlayerManager::FirstPlayer = 0;
+		PlayerManager::HaveFirstPlayer = false;
+
+		PlayerManager::NumPlayers = 1;
+		PlayerManager::Players;
+
+		PlayerManager::Score_Blobs = 0, PlayerManager::Score_Coins = 0, PlayerManager::Score_Attempts = 0, PlayerManager::Score_Time = 0;
+	}
+
+	// Statics
+#if defined(PC_VERSION)
+	RezData PlayerManager::d;
+#endif
+	bool PlayerManager::PartiallyInvisible;
+	int PlayerManager::_CoinsSpent;
+
+	std::shared_ptr<_SavePlayerData> PlayerManager::SavePlayerData;
+
+#if defined(PC_VERSION)
+	std::wstring PlayerManager::_DefaultName;
+#endif
+
+	std::vector<std::wstring> PlayerManager::RandomNames;
+	int PlayerManager::FirstPlayer;
+	bool PlayerManager::HaveFirstPlayer;
+
+	int PlayerManager::NumPlayers;
+	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players;
+
+	int PlayerManager::Score_Blobs, PlayerManager::Score_Coins, PlayerManager::Score_Attempts, PlayerManager::Score_Time;
+
+
+
+
 	PlayerIntLambda::PlayerIntLambda()
 	{
 	}
@@ -216,10 +263,6 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-RezData PlayerManager::d;
-#endif
-
-#if defined(PC_VERSION)
 	RezData PlayerManager::LoadRezAndKeys()
 	{
 		EzStorage::Load( _T( "Settings" ), _T( "Custom" ), std::make_shared<LoadRezAndKeysLambda>(), 0 );
@@ -316,9 +359,6 @@ RezData PlayerManager::d;
 	}
 #endif
 
-	bool PlayerManager::PartiallyInvisible = false, PlayerManager::TotallyInvisible = false;
-	int PlayerManager::_CoinsSpent = 0;
-
 	const int &PlayerManager::getCoinsSpent()
 	{
 		return _CoinsSpent;
@@ -328,11 +368,6 @@ RezData PlayerManager::d;
 	{
 		_CoinsSpent = value;
 	}
-
-std::shared_ptr<_SavePlayerData> PlayerManager::SavePlayerData = 0;
-#if defined(PC_VERSION)
-std::wstring PlayerManager::_DefaultName = _T( "" );
-#endif
 
 #if defined(PC_VERSION)
 	const std::wstring &PlayerManager::getDefaultName()
@@ -384,11 +419,6 @@ std::wstring PlayerManager::_DefaultName = _T( "" );
 		}
 	}
 
-const std::wstring tempVector[] = { _T( "Honky Tonk" ), _T( "Bosco" ), _T( "Nuh Guck" ), _T( "Short-shorts" ), _T( "Itsy-bitsy" ), _T( "Low Ball" ), _T( "Cowboy Stu" ), _T( "Capsaicin" ), _T( "Hoity-toity" ), _T( "Ram Bam" ), _T( "King Kong" ), _T( "Upsilon" ), _T( "Omega" ), _T( "Peristaltic Pump" ), _T( "Jeebers" ), _T( "Sugar Cane" ), _T( "See-Saw" ), _T( "Ink Blot" ), _T( "Glottal Stop" ), _T( "Olive Oil" ), _T( "Cod Fish" ), _T( "Flax" ), _T( "Tahini" ), _T( "Cotton Ball" ), _T( "Sweet Justice" ), _T( "Ham Sandwich" ), _T( "Liverwurst" ), _T( "Cumulus" ), _T( "Oyster" ), _T( "Klein" ), _T( "Hippopotamus" ), _T( "Bonobo" ), _T( "Homo Erectus" ), _T( "Australopithecine" ), _T( "Quetzalcoatl" ), _T( "Balogna" ), _T( "Ceraunoscopy" ), _T( "Shirley" ), _T( "Susie" ), _T( "Sally" ), _T( "Sue" ), _T( "Tyrannosaur" ), _T( "Stick Man Chu" ), _T( "Paragon" ), _T( "Woodchuck" ), _T( "Laissez Faire" ), _T( "Ipso Facto" ), _T( "Leviticus" ), _T( "Berrylicious" ), _T( "Elderberry" ), _T( "Currant" ), _T( "Blackberry" ), _T( "Blueberry" ), _T( "Strawberry" ), _T( "Gooseberry" ), _T( "Honeysuckle" ), _T( "Nannyberry" ), _T( "Hackberry" ), _T( "Boysenberry" ), _T( "Cloudberry" ), _T( "Thimbleberry" ), _T( "Huckleberry" ), _T( "Bilberry" ), _T( "Bearberry" ), _T( "Mulberry" ), _T( "Wolfberry" ), _T( "Raisin" ), _T( "Samson" ) };
-std::vector<std::wstring> PlayerManager::RandomNames = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-int PlayerManager::FirstPlayer = 0;
-bool PlayerManager::HaveFirstPlayer = false;
-
 	int PlayerManager::GetFirstPlayer()
 	{
 		HaveFirstPlayer = true;
@@ -409,9 +439,6 @@ bool PlayerManager::HaveFirstPlayer = false;
 		HaveFirstPlayer = false;
 		return 0;
 	}
-
-	int PlayerManager::NumPlayers = 1;
-	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players;
 
 	int PlayerManager::length( std::vector<std::shared_ptr<StringBuilder> > &names )
 	{
@@ -651,8 +678,6 @@ bool PlayerManager::HaveFirstPlayer = false;
 	{
 		return Players[ static_cast<int>( bob->MyPlayerIndex ) ];
 	}
-
-	int PlayerManager::Score_Blobs = 0, PlayerManager::Score_Coins = 0, PlayerManager::Score_Attempts = 0, PlayerManager::Score_Time = 0;
 
 	void PlayerManager::CalcScore( StatGroup group )
 	{

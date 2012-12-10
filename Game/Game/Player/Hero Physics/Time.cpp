@@ -1,6 +1,16 @@
 ﻿#include <global_header.h>
+
 namespace CloudberryKingdom
 {
+
+	void BobPhsxTime::InitializeStatics()
+	{
+		BobPhsxTime::instance = std::make_shared<BobPhsxTime>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxTime> BobPhsxTime::instance;
+
 
 	void BobPhsxTime::InitSingleton()
 	{
@@ -11,8 +21,6 @@ namespace CloudberryKingdom
 		Adjective = _T( "Chrono" );
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Classic" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
-
-const std::shared_ptr<BobPhsxTime> BobPhsxTime::instance = std::make_shared<BobPhsxTime>();
 
 	const std::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance()
 	{

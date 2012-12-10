@@ -54,6 +54,10 @@ namespace CloudberryKingdom
 
 	class InitialLoadingScreen
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		bool IsDone;
 

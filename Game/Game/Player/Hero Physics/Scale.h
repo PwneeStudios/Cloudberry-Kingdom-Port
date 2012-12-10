@@ -7,14 +7,18 @@ namespace CloudberryKingdom
 {
 	class BobPhsxScale : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
 
 		// Singleton
 	protected:
 		virtual void InitSingleton();
-	private:
-		static const std::shared_ptr<BobPhsxScale> instance;
+	public:
+		static std::shared_ptr<BobPhsxScale> instance;
 	public:
 		const static std::shared_ptr<BobPhsxScale> &getInstance();
 

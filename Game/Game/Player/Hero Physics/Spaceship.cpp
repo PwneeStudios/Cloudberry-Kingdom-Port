@@ -1,8 +1,15 @@
 ﻿#include <global_header.h>
 
-
 namespace CloudberryKingdom
 {
+
+	void BobPhsxSpaceship::InitializeStatics()
+	{
+		BobPhsxSpaceship::instance = std::make_shared<BobPhsxSpaceship>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance;
 
 	float BobPhsxSpaceship::KeepUnused( float UpgradeLevel )
 	{
@@ -18,8 +25,6 @@ namespace CloudberryKingdom
 		NameTemplate = _T( "spaceship" );
 		Icon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
 	}
-
-const std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance = std::make_shared<BobPhsxSpaceship>();
 
 	const std::shared_ptr<BobPhsxSpaceship> &BobPhsxSpaceship::getInstance()
 	{

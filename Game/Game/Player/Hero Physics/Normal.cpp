@@ -4,6 +4,14 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxNormal::InitializeStatics()
+	{
+		BobPhsxNormal::instance = std::make_shared<BobPhsxNormal>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance;
+
 	void BobPhsxNormal::InitSingleton()
 	{
 		BobPhsx::InitSingleton();
@@ -15,8 +23,6 @@ namespace CloudberryKingdom
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * 1.1f);
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
 	}
-
-const std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance = std::make_shared<BobPhsxNormal>();
 
 	const std::shared_ptr<BobPhsxNormal> &BobPhsxNormal::getInstance()
 	{

@@ -3,10 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	void ObjectIcon::InitializeStatics()
+	{
+	}
+
+	// Statics
 	std::shared_ptr<ObjectIcon> ObjectIcon::RobotIcon, ObjectIcon::PathIcon, ObjectIcon::SlowMoIcon;
 	std::shared_ptr<ObjectIcon> ObjectIcon::CheckpointIcon, ObjectIcon::RandomIcon, ObjectIcon::CustomIcon, ObjectIcon::CustomHoverIcon_Renamed;
 	std::map<Upgrade, std::shared_ptr<ObjectIcon> > ObjectIcon::UpgradeIcons;
 	std::map<ObjectType, std::shared_ptr<ObjectIcon> > ObjectIcon::ObjIcons;
+
 
 	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade )
 	{

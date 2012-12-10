@@ -3,6 +3,14 @@
 namespace CloudberryKingdom
 {
 
+	void Challenge_TimeCrisis::InitializeStatics()
+	{
+		Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
+	}
+
+	// Statics
+	std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance;
+
 	Challenge_TimeCrisis::OnSwapLambda::OnSwapLambda( const std::shared_ptr<Challenge_TimeCrisis> &ch )
 	{
 		this->ch = ch;
@@ -12,8 +20,6 @@ namespace CloudberryKingdom
 	{
 		data->MyGame->AddGameObject( std::make_shared<TimeCrisis_Tutorial>( ch ) );
 	}
-
-	const std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
 
 	const std::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance()
 	{

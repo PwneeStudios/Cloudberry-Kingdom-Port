@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class BobPhsxJetman : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
 
@@ -16,7 +20,7 @@ namespace CloudberryKingdom
 	protected:
 		virtual void InitSingleton();
 	private:
-		static const std::shared_ptr<BobPhsxJetman> instance;
+		static std::shared_ptr<BobPhsxJetman> instance;
 	public:
 		const static std::shared_ptr<BobPhsxJetman> &getInstance();
 

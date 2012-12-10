@@ -7,14 +7,18 @@ namespace CloudberryKingdom
 {
 	class BobPhsxSpaceship : public BobPhsx
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static float KeepUnused( float UpgradeLevel );
 
 		// Singleton
 	protected:
 		virtual void InitSingleton();
-	private:
-		static const std::shared_ptr<BobPhsxSpaceship> instance;
+	public:
+		static std::shared_ptr<BobPhsxSpaceship> instance;
 	public:
 		const static std::shared_ptr<BobPhsxSpaceship> &getInstance();
 

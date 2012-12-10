@@ -102,6 +102,10 @@ namespace CloudberryKingdom
 
 	class EzText
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class EzTextBit
 		{

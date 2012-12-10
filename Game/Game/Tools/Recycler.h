@@ -30,6 +30,10 @@ namespace CloudberryKingdom
 
 	class Recycler
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static int MetaCount;
 		static std::vector<std::shared_ptr<Recycler> > MetaBin;

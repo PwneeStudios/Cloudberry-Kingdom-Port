@@ -16,6 +16,10 @@ namespace CloudberryKingdom
 
 	class Hat : public Buyable
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		int GetGuid();
 		int GetPrice();

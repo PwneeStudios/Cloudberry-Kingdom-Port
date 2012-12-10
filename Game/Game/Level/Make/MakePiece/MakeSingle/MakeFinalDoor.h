@@ -84,6 +84,10 @@ namespace CloudberryKingdom
 
 	class FindCamZoneLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda_Static;
 

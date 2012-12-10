@@ -2,6 +2,16 @@
 
 namespace CloudberryKingdom
 {
+
+	void BobPhsxInvert::InitializeStatics()
+	{
+		BobPhsxInvert::instance = std::make_shared<BobPhsxInvert>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance;
+
+
 	void BobPhsxInvert::InitSingleton()
 	{
 		BobPhsxNormal::InitSingleton();
@@ -14,8 +24,6 @@ namespace CloudberryKingdom
 
 		HeroDollShift = Vector2( 0, 100 );
 	}
-
-const std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance = std::make_shared<BobPhsxInvert>();
 
 	const std::shared_ptr<BobPhsxInvert> &BobPhsxInvert::getInstance()
 	{

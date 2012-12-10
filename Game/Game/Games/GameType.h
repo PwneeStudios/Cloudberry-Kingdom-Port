@@ -37,6 +37,10 @@ namespace CloudberryKingdom
 	/// </summary>
 	class GameData : public std::enable_shared_from_this<GameData>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class AddScoreLambda : public Lambda
 		{

@@ -6,73 +6,12 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class TextureOrAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleObject;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTexture;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	class EzTextureWad;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	class FlyingBlob : public _Obstacle, public IBound
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		class FlyingBlobTileInfo : public TileInfoBase
 		{
@@ -86,7 +25,7 @@ namespace CloudberryKingdom
 		private:
 			void InitializeInstanceFields();
 
-public:
+		public:
 			FlyingBlobTileInfo()
 			{
 				InitializeInstanceFields();

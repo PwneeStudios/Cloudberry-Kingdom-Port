@@ -1,9 +1,16 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
+
+	void BobPhsxBouncy::InitializeStatics()
+	{
+		BobPhsxBouncy::instance = std::make_shared<BobPhsxBouncy>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance;
+
 
 	void BobPhsxBouncy::InitSingleton()
 	{
@@ -16,8 +23,6 @@ namespace CloudberryKingdom
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
 		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.035f ) );
 	}
-
-const std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance = std::make_shared<BobPhsxBouncy>();
 
 	const std::shared_ptr<BobPhsxBouncy> &BobPhsxBouncy::getInstance()
 	{

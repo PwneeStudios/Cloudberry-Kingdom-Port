@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void Particle::InitializeStatics()
+	{
+		Particle::Pool = std::make_shared<ParticleBin>();
+	}
+
+	// Statics
+	std::shared_ptr<ParticleBin> Particle::Pool;
+
+
 	ParticleBin::ParticleBin()
 	{
 		MyStack = std::vector<std::shared_ptr<Particle> >( 1000 );
@@ -44,8 +53,6 @@ namespace CloudberryKingdom
 			stackLock.Unlock();
 		}
 	}
-
-std::shared_ptr<ParticleBin> Particle::Pool = std::make_shared<ParticleBin>();
 
 	void Particle::Recycle()
 	{

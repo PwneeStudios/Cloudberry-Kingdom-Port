@@ -210,7 +210,13 @@ namespace CloudberryKingdom
 		FinalBlocks = BlockVec();
 	}
 
-std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda::FindCamZoneLambda_Static = std::make_shared<FindCamZoneLambda>();
+	void FindCamZoneLambda::InitializeStatics()
+	{
+		FindCamZoneLambda::FindCamZoneLambda_Static = std::make_shared<FindCamZoneLambda>();
+	}
+
+	// Statics
+	std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda::FindCamZoneLambda_Static;
 
 	FindCamZoneLambda::FindCamZoneLambda()
 	{

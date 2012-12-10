@@ -3,6 +3,14 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxRocketbox::InitializeStatics()
+	{
+		BobPhsxRocketbox::instance = std::make_shared<BobPhsxRocketbox>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance;
+
 	void BobPhsxRocketbox::InitSingleton()
 	{
 		BobPhsxBox::InitSingleton();
@@ -13,8 +21,6 @@ namespace CloudberryKingdom
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
 		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.485f ) );
 	}
-
-const std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance = std::make_shared<BobPhsxRocketbox>();
 
 	const std::shared_ptr<BobPhsxRocketbox> &BobPhsxRocketbox::getInstance()
 	{

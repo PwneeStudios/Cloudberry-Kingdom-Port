@@ -5,19 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class LevelGenData;
-}
-
-namespace CloudberryKingdom
-{
-	class StyleData;
-}
-namespace CloudberryKingdom
-{
 	// Stores the level of each obstacles
 	// CalcGenData translates this into actual parameters
 	class Upgrades : public std::enable_shared_from_this<Upgrades>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		std::vector<float> UpgradeLevels;
 

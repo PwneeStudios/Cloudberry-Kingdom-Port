@@ -3,6 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	void CharacterSelect::InitializeStatics()
+	{
+		CharacterSelect::Width = 0;
+	}
+	
+	// Statics
+	float CharacterSelect::Width;
+	std::vector<Vector2> CharacterSelect::Centers;
+
+
 	CharacterSelect::RandomizeProxy::RandomizeProxy( const std::shared_ptr<CharacterSelect> &cs )
 	{
 		this->cs = cs;
@@ -18,14 +28,11 @@ namespace CloudberryKingdom
 		return PlayerManager::Get( PlayerIndex );
 	}
 
-	float CharacterSelect::Width = 0;
-	std::vector<Vector2> CharacterSelect::Centers;
-
 	void CharacterSelect::InitCenters()
 	{
 		Vector2 Spacing = Vector2( 880, 0 );
-		const Vector2 tempVector[] = { -1.5f * Spacing, -.5f * Spacing,.5f * Spacing, 1.5f * Spacing };
-		Centers = std::vector<Vector2>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		Vector2 tempVector[] = { -1.5f * Spacing, -.5f * Spacing,.5f * Spacing, 1.5f * Spacing };
+		Centers = VecFromArray( tempVector );
 	}
 
 	void CharacterSelect::Shift( const std::shared_ptr<GUI_Panel> &panel )

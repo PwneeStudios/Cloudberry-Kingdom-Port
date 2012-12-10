@@ -5,21 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class ScoreEntry;
-}
-
-namespace CloudberryKingdom
-{
-	class ScoreList;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class ScoreDatabase : public SaveLoad
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::shared_ptr<ScoreDatabase> Instance;
 

@@ -3,7 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	const std::shared_ptr<Generators> Generators::instance = std::make_shared<Generators>();
+	void Generators::InitializeStatics()
+	{
+		Generators::instance = std::make_shared<Generators>();
+	}
+
+	// Statics
+	std::shared_ptr<Generators> Generators::instance;
+
 
 	const std::shared_ptr<Generators> &Generators::getInstance()
 	{

@@ -2,6 +2,7 @@
 
 namespace CloudberryKingdom
 {
+
 	void MakeData::Release()
 	{
 		LevelSeed.reset();

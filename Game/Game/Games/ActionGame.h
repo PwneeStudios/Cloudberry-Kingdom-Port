@@ -13,6 +13,10 @@ namespace CloudberryKingdom
 
 	class ActionGameData : public GameData
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static std::shared_ptr<GameFactory> Factory;
 

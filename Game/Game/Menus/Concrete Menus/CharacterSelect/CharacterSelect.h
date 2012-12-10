@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class CharacterSelect : public std::enable_shared_from_this<CharacterSelect>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		class RandomizeProxy : public Lambda
 		{

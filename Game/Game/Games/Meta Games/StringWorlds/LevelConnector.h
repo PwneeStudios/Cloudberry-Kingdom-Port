@@ -10,6 +10,10 @@ namespace CloudberryKingdom
 	/// </summary>
 	class LevelConnector
 	{
+
+	public:
+		static void InitializeStatics();
+
 		/// <summary> The object core string code for an end of level object level connector. </summary>
 	public:
 		static std::wstring EndOfLevelCode;

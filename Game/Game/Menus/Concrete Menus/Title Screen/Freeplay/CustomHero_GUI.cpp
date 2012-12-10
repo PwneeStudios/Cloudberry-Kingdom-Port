@@ -3,6 +3,25 @@
 namespace CloudberryKingdom
 {
 
+	void CustomHero_GUI::InitializeStatics()
+	{
+		CustomHero_GUI::Hero = 0;
+
+		CustomHero_GUI::BaseListIndex = 0;
+		CustomHero_GUI::SizeListIndex = 0;
+		CustomHero_GUI::JumpListIndex = 0;
+	}
+
+	// Statics
+	BobPhsx::CustomPhsxData CustomHero_GUI::HeroPhsxData;
+	std::shared_ptr<BobPhsx> CustomHero_GUI::Hero;
+
+	int CustomHero_GUI::BaseListIndex;
+	int CustomHero_GUI::SizeListIndex;
+	int CustomHero_GUI::JumpListIndex;
+
+
+
 	CustomHero_GUI::StartTestProxy::StartTestProxy( const std::shared_ptr<CustomHero_GUI> &chGui )
 	{
 		this->chGui = chGui;
@@ -103,9 +122,6 @@ namespace CloudberryKingdom
 	{
 		chGui->ResetSliders();
 	}
-
-	BobPhsx::CustomPhsxData CustomHero_GUI::HeroPhsxData;
-	std::shared_ptr<BobPhsx> CustomHero_GUI::Hero = 0;
 
 	const std::shared_ptr<BobPhsxNormal> CustomHero_GUI::getNormalHero() const
 	{
@@ -338,10 +354,6 @@ namespace CloudberryKingdom
 	{
 		SetItemProperties( item );
 	}
-
-int CustomHero_GUI::BaseListIndex = 0;
-int CustomHero_GUI::SizeListIndex = 0;
-int CustomHero_GUI::JumpListIndex = 0;
 
 	void CustomHero_GUI::Init()
 	{

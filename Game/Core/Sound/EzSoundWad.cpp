@@ -4,7 +4,14 @@
 namespace CloudberryKingdom
 {
 
-bool EzSoundWad::SuppressSounds = false;
+	void EzSoundWad::InitializeStatics()
+	{
+		EzSoundWad::SuppressSounds = false;
+	}
+
+	// Statics
+	bool EzSoundWad::SuppressSounds;
+
 
 	EzSoundWad::EzSoundWad( int MaxInstancesPerSound )
 	{

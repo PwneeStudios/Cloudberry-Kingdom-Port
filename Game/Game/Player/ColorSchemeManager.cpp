@@ -4,6 +4,25 @@
 namespace CloudberryKingdom
 {
 
+	void ColorSchemeManager::InitializeStatics()
+	{
+		ColorSchemeManager::ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
+
+		ColorSchemeManager::None = std::make_shared<ClrTextFx>();
+	}
+
+	// Statics
+	std::shared_ptr<CapeOnLambda> ColorSchemeManager::CapeOn;
+	std::vector<ColorScheme> ColorSchemeManager::ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
+
+	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::HatList, ColorSchemeManager::ColorList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList, ColorSchemeManager::TextureList, ColorSchemeManager::OutlineList;
+	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
+	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
+	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
+	std::shared_ptr<ClrTextFx> ColorSchemeManager::None;
+
+
+
 	CapeOnLambda::CapeOnLambda()
 	{
 	}
@@ -21,21 +40,12 @@ namespace CloudberryKingdom
 		bob->ShowCape = true;
 	}
 
-	std::shared_ptr<CapeOnLambda> ColorSchemeManager::CapeOn = std::make_shared<CapeOnLambda>();
-	std::vector<ColorScheme> ColorSchemeManager::ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
-
 	void ColorSchemeManager::AddScheme( ColorScheme scheme, bool ValidComputerScheme )
 	{
 		ColorSchemes.push_back( scheme );
 		if ( ValidComputerScheme )
 			ComputerColorSchemes.push_back( scheme );
 	}
-
-	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::HatList, ColorSchemeManager::ColorList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList, ColorSchemeManager::TextureList, ColorSchemeManager::OutlineList;
-	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
-	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
-	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
-	std::shared_ptr<ClrTextFx> ColorSchemeManager::None = std::make_shared<ClrTextFx>();
 
 	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
 	{

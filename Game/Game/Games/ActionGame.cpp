@@ -2,12 +2,20 @@
 
 namespace CloudberryKingdom
 {
+
+	void ActionGameData::InitializeStatics()
+	{
+		ActionGameData::Factory = std::make_shared<ActionFactory>();
+	}
+
+	// Statics
+	std::shared_ptr<GameFactory> ActionGameData::Factory;
+
+
 	std::shared_ptr<GameData> ActionFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return std::make_shared<ActionGameData>( data, MakeInBackground );
 	}
-
-	std::shared_ptr<GameFactory> ActionGameData::Factory = std::make_shared<ActionFactory>();
 
 	ActionGameData::ActionGameData()
 	{

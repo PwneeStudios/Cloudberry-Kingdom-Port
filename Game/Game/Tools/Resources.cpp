@@ -313,5 +313,7 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 		Tools::Write( _T( "Loading done!" ) );
 
 		Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
+
+		CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad();
 	}
 }

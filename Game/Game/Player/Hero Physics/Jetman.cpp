@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxJetman::InitializeStatics()
+	{
+		BobPhsxJetman::instance = std::make_shared<BobPhsxJetman>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance;
+
+
 	void BobPhsxJetman::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
 		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
@@ -62,8 +71,6 @@ namespace CloudberryKingdom
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
 		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.25f, -.01f ) );
 	}
-
-const std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance = std::make_shared<BobPhsxJetman>();
 
 	const std::shared_ptr<BobPhsxJetman> &BobPhsxJetman::getInstance()
 	{

@@ -8,6 +8,10 @@ namespace CloudberryKingdom
 
 	class Challenge_Escalation : public Challenge
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class OnOutOfLivesLambda : public Lambda_1<std::shared_ptr<GUI_LivesLeft> >
 		{
@@ -75,7 +79,7 @@ namespace CloudberryKingdom
 	private:
 		static std::vector<int> NumLives;
 
-		static const std::shared_ptr<Challenge_Escalation> instance;
+		static std::shared_ptr<Challenge_Escalation> instance;
 	public:
 		const static std::shared_ptr<Challenge_Escalation> &getInstance();
 

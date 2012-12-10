@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void QuadDrawer::InitializeStatics()
+	{
+		QuadDrawer::CurLightSourceFade = 0;
+	}
+
+	// Statics
+	float QuadDrawer::CurLightSourceFade;
+
+
 	const Matrix &QuadDrawer::getCurrentMatrix() const
 	{
 		return _CurrentMatrix;
@@ -448,8 +457,6 @@ namespace CloudberryKingdom
 	{
 		DrawSquareDot( x, color, 2 * r, DefaultTexture, Tools::CircleEffect );
 	}
-
-float QuadDrawer::CurLightSourceFade = 0;
 
 	void QuadDrawer::DrawLightSource( Vector2 x, float r, float Fade, Color color )
 	{

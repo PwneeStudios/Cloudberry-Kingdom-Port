@@ -6,34 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class FireSpinner : public _LineDeath
 	{
 	public:

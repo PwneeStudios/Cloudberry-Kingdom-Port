@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class BobPhsxInvert : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		enum Behavior
 		{
@@ -17,7 +21,7 @@ namespace CloudberryKingdom
 	protected:
 		virtual void InitSingleton();
 	private:
-		static const std::shared_ptr<BobPhsxInvert> instance;
+		static std::shared_ptr<BobPhsxInvert> instance;
 	public:
 		const static std::shared_ptr<BobPhsxInvert> &getInstance();
 

@@ -5,31 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class Camera;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	class LoadingScreen : public ILoadingScreen
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		static int DefaultMinLoadLength;
 		static int MinLoadLength;

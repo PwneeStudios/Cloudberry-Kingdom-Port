@@ -3,6 +3,33 @@
 namespace CloudberryKingdom
 {
 
+	void Challenge_HeroRush::InitializeStatics()
+	{
+		Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
+
+		int tempVector[] = { 20, 15, 10, 10, 10 };
+		Challenge_HeroRush::MaxTime_ByDifficulty = VecFromArray( tempVector );
+		int tempVector2[] = { 15, 12, 10, 10, 10 };
+		Challenge_HeroRush::StartTime_ByDifficulty = VecFromArray( tempVector2 );
+
+		std::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
+		Challenge_HeroRush::HeroTypes = VecFromArray( tempVector3 );
+
+		std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
+		Challenge_HeroRush::tilesets = VecFromArray( tempVector4 );
+	}
+
+	// Statics
+	std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance;
+
+	std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty;
+	std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty;
+
+	std::vector<std::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes;
+	std::vector<std::wstring> Challenge_HeroRush::tilesets;
+
+
+
 	Challenge_HeroRush::OnSwapLambda::OnSwapLambda( const std::shared_ptr<Challenge_HeroRush> &ch )
 	{
 		this->ch = ch;
@@ -61,8 +88,6 @@ namespace CloudberryKingdom
 		Params->FillType = Coin_Parameters::FillTypes_RUSH;
 	}
 
-	const std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
-
 	const std::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance()
 	{
 		return instance;
@@ -74,11 +99,6 @@ namespace CloudberryKingdom
 		GameTypeId = 1;
 		MenuName = Name = Localization::Words_HERO_RUSH;
 	}
-
-	const int tempVector[] = { 20, 15, 10, 10, 10 };
-	std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	const int tempVector2[] = { 15, 12, 10, 10, 10 };
-	std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty = std::vector<int>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 
 	void Challenge_HeroRush::SetTimerProperties( int Difficulty )
 	{
@@ -156,16 +176,10 @@ namespace CloudberryKingdom
 		return seed;
 	}
 
-	const std::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
-	std::vector<std::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
-
 	std::shared_ptr<BobPhsx> Challenge_HeroRush::GetHero( int i )
 	{
 		return HeroTypes[ i % HeroTypes.size() ];
 	}
-
-	const std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
-	std::vector<std::wstring> Challenge_HeroRush::tilesets = std::vector<std::wstring>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
 
 	std::shared_ptr<TileSet> Challenge_HeroRush::GetTileSet( int i )
 	{

@@ -3,6 +3,19 @@
 namespace CloudberryKingdom
 {
 
+	void GameData::InitializeStatics()
+	{
+		GameData::CurItemStep = 0;
+		GameData::LockLevelStart = false;
+	}
+
+	// Statics
+	int GameData::CurItemStep;
+	bool GameData::LockLevelStart;
+	std::vector<int> GameData::DramaticEntryWait;
+	Vector2 GameData::DramaticEntryVel;
+
+
 	std::shared_ptr<GameData> GameFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return 0;
@@ -545,8 +558,6 @@ namespace CloudberryKingdom
 		list.clear();
 	}
 
-int GameData::CurItemStep = 0;
-
 	void GameData::DoToDoList()
 	{
 		if ( CurToDo.size() > 0 )
@@ -726,8 +737,6 @@ int GameData::CurItemStep = 0;
 		Tools::CurGameData = shared_from_this();
 		Tools::CurLevel = MyLevel;
 	}
-
-bool GameData::LockLevelStart = false;
 
 	void GameData::ReturnTo( int code )
 	{
@@ -1572,13 +1581,10 @@ bool GameData::LockLevelStart = false;
 		CinematicToDo( Wait, std::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, shared_from_this() ) );
 	}
 
-	std::vector<int> GameData::DramaticEntryWait;
-	Vector2 GameData::DramaticEntryVel;
-
 	void GameData::SetDramaticEntryParams()
 	{
-		const int tempVector[] = { 172, 30, 90, 163 };
-		DramaticEntryWait = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		int tempVector[] = { 172, 30, 90, 163 };
+		DramaticEntryWait = VecFromArray( tempVector );
 		DramaticEntryVel = Vector2( 0, 2 );
 	}
 

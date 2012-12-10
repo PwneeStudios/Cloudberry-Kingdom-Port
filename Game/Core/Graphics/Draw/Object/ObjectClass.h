@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class ObjectClass : public std::enable_shared_from_this<ObjectClass>
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		float LoadingRunSpeed;
 

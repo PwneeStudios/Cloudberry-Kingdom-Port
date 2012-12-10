@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class ScoreEntry
 	{
+
 	public:
 		enum Format
 		{

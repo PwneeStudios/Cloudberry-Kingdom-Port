@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class MainVideo
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::shared_ptr<ContentManager> Content;
 

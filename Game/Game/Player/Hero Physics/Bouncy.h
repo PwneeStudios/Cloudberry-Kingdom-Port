@@ -7,11 +7,15 @@ namespace CloudberryKingdom
 {
 	class BobPhsxBouncy : public BobPhsxNormal
 	{
+
+	public:
+		static void InitializeStatics();
+
 		// Singleton
 	protected:
 		virtual void InitSingleton();
 	private:
-		static const std::shared_ptr<BobPhsxBouncy> instance;
+		static std::shared_ptr<BobPhsxBouncy> instance;
 	public:
 		const static std::shared_ptr<BobPhsxBouncy> &getInstance();
 

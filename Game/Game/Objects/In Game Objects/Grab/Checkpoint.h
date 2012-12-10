@@ -5,54 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class TextureOrAnim;
-}
-
-namespace CloudberryKingdom
-{
-	class EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	class Particle;
-}
-
-namespace CloudberryKingdom
-{
-	class AABox;
-}
-
-namespace CloudberryKingdom
-{
-	class SimpleObject;
-}
-
-namespace CloudberryKingdom
-{
-	class LevelPiece;
-}
-
-namespace CloudberryKingdom
-{
-	class Level;
-}
-
-namespace CloudberryKingdom
-{
-	class Bob;
-}
-
-namespace CloudberryKingdom
-{
-	class ObjectBase;
-}
-
-
-namespace CloudberryKingdom
-{
 	class Checkpoint : public ObjectBase
 	{
+
+	public:
+		static void InitializeStatics();
+
 	public:
 		class CheckpointTileInfo : public TileInfoBase
 		{

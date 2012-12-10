@@ -3,6 +3,26 @@
 namespace CloudberryKingdom
 {
 
+	void Challenge_Escalation::InitializeStatics()
+	{
+		int tempVector[] = { 15, 15, 15, 15, 15 };
+		Challenge_Escalation::NumLives = VecFromArray( tempVector );
+		
+		Challenge_Escalation::instance = std::make_shared<Challenge_Escalation>();
+
+		std::wstring tempVector2[] = { _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ), _T( "sea" ) };
+		Challenge_Escalation::tilesets = VecFromArray( tempVector2 );
+	}
+
+	// Statics
+	std::vector<int> Challenge_Escalation::NumLives;
+
+	std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance;
+
+	std::vector<std::wstring> Challenge_Escalation::tilesets;
+
+
+
 	Challenge_Escalation::OnOutOfLivesLambda::OnOutOfLivesLambda( const std::shared_ptr<Challenge> &challenge )
 	{
 		this->challenge = challenge;
@@ -80,10 +100,6 @@ namespace CloudberryKingdom
 		Params->StartFrame = 90;
 		Params->FillType = Coin_Parameters::FillTypes_REGULAR;
 	}
-
-	const int tempVector[] = { 15, 15, 15, 15, 15 };
-	std::vector<int> Challenge_Escalation::NumLives = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	const std::shared_ptr<Challenge_Escalation> Challenge_Escalation::instance = std::make_shared<Challenge_Escalation>();
 
 	const std::shared_ptr<Challenge_Escalation> &Challenge_Escalation::getInstance()
 	{
@@ -201,9 +217,6 @@ namespace CloudberryKingdom
 
 		return seed;
 	}
-
-	const std::wstring tempVector2[] = { _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ), _T( "sea" ) };
-	std::vector<std::wstring> Challenge_Escalation::tilesets = std::vector<std::wstring>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
 
 	std::shared_ptr<TileSet> Challenge_Escalation::GetTileSet( int i )
 	{

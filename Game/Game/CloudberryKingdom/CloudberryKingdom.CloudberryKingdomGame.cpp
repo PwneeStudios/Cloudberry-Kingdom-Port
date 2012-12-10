@@ -4,7 +4,82 @@ namespace CloudberryKingdom
 {
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
 	{
-		Bob::StaticInitializer();
+		TitleGameData_MW::InitializeStatics();
+		Tools::InitializeStatics();
+		Globals::InitializeStatics();
+		ButtonCheck::InitializeStatics();
+		PlayerManager::InitializeStatics();
+		ComputerRecording::InitializeStatics();
+		QuadDrawer::InitializeStatics();
+		Camera::InitializeStatics();
+		EzSoundWad::InitializeStatics();
+		ColorSchemeManager::InitializeStatics();
+		Hat::InitializeStatics();
+		Unset::InitializeStatics();
+		EzStorage::InitializeStatics();
+		SaveGroup::InitializeStatics();
+		ScoreDatabase::InitializeStatics();
+		HeroRush_Tutorial::InitializeStatics();
+		InitialLoadingScreen::InitializeStatics();
+		DrawPile::InitializeStatics();
+		CharacterSelectManager::InitializeStatics();
+		PieceQuad::InitializeStatics();
+		BackgroundType::InitializeStatics();
+		CustomLevel_GUI::InitializeStatics();
+		Particle::InitializeStatics();
+		ParticleEmitter::InitializeStatics();
+		Awardments::InitializeStatics();
+		CampaignHelper::InitializeStatics();
+		EzText::InitializeStatics();
+
+		Bob::InitializeStatics();
+
+		ObjectIcon::InitializeStatics();
+
+		BobPhsxNormal::InitializeStatics();
+		BobPhsxBig::InitializeStatics();
+		BobPhsxRandom::InitializeStatics();
+		BobPhsxBouncy::InitializeStatics();
+		BobPhsxBox::InitializeStatics();
+		BobPhsxDouble::InitializeStatics();
+		BobPhsxInvert::InitializeStatics();
+		BobPhsxJetman::InitializeStatics();
+		BobPhsxMeat::InitializeStatics();
+		BobPhsxRocketbox::InitializeStatics();
+		BobPhsxScale::InitializeStatics();
+		BobPhsxSmall::InitializeStatics();
+		BobPhsxSpaceship::InitializeStatics();
+		BobPhsxTime::InitializeStatics();
+		BobPhsxWheel::InitializeStatics();
+
+		ObjectClass::InitializeStatics();
+
+		FlyingBlob::InitializeStatics();
+		ObjectData::InitializeStatics();
+		Spike::InitializeStatics();
+	}
+
+	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
+	{
+		GameData::InitializeStatics();
+		TitleGameData::InitializeStatics();
+		Recycler::InitializeStatics();
+		MenuItem::InitializeStatics();
+		CharacterSelect::InitializeStatics();
+		SimpleMenuBase::InitializeStatics();
+		CustomHero_GUI::InitializeStatics();
+		Upgrades::InitializeStatics();
+		LoadingScreen::InitializeStatics();
+		LevelConnector::InitializeStatics();
+		Generators::InitializeStatics();
+		FindCamZoneLambda::InitializeStatics();
+		Checkpoint::InitializeStatics();
+		Challenge_Escalation::InitializeStatics();
+		Challenge_TimeCrisis::InitializeStatics();
+		Challenge_HeroRush::InitializeStatics();
+		Challenge_HeroRush2::InitializeStatics();
+		MainVideo::InitializeStatics();
+		ActionGameData::InitializeStatics();
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
@@ -127,7 +202,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	CloudberryKingdomGame::CloudberryKingdomGame()
 	{
-		StaticIntializer_NoDependence();
+		CloudberryKingdomGame::StaticIntializer_NoDependence();
 
 		InitializeInstanceFields();
 		/*MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );*/

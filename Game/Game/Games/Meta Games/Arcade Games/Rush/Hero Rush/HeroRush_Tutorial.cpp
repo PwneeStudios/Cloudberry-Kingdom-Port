@@ -4,6 +4,19 @@
 namespace CloudberryKingdom
 {
 
+	void HeroRush_Tutorial::InitializeStatics()
+	{
+		HeroRush_Tutorial::HasWatchedOnce = false;
+		HeroRush_Tutorial::TemporarySkip = false;
+		HeroRush_Tutorial::ShowTitle = true;
+	}
+
+	// Statics
+	bool HeroRush_Tutorial::HasWatchedOnce;
+	bool HeroRush_Tutorial::TemporarySkip;
+	bool HeroRush_Tutorial::ShowTitle;
+
+
 	void HeroRush_Tutorial::StartMusicHelper::Apply()
 	{
 		Tools::SongWad->SuppressNextInfoDisplay = true;
@@ -191,16 +204,11 @@ namespace CloudberryKingdom
 		hrt->End();
 	}
 
-bool HeroRush_Tutorial::HasWatchedOnce = false;
-
 	void HeroRush_Tutorial::WatchedOnce()
 	{
 		HasWatchedOnce = true;
 		PlayerManager::SavePlayerData->Changed = true;
 	}
-
-bool HeroRush_Tutorial::TemporarySkip = false;
-bool HeroRush_Tutorial::ShowTitle = true;
 
 	HeroRush_Tutorial::HeroRush_Tutorial( const std::shared_ptr<Challenge_HeroRush> &HeroRush )
 	{

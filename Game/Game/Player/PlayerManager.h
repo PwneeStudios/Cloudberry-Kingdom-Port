@@ -64,8 +64,10 @@ namespace CloudberryKingdom
 
 	class PlayerManager
 	{
+
 	public:
-		
+		static void InitializeStatics();
+
 	private:
 		class SaveRezAndKeysLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
 		{

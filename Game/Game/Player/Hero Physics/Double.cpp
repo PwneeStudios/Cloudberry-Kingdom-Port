@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	void BobPhsxDouble::InitializeStatics()
+	{
+		BobPhsxDouble::instance = std::make_shared<BobPhsxDouble>();
+	}
+
+	// Statics
+	std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance;
+
+
 	void BobPhsxDouble::Set( const std::shared_ptr<BobPhsx> &phsx )
 	{
 		phsx->DoubleJumpModel = true;
@@ -57,8 +66,6 @@ namespace CloudberryKingdom
 		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
 		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
 	}
-
-const std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance = std::make_shared<BobPhsxDouble>();
 
 	const std::shared_ptr<BobPhsxDouble> &BobPhsxDouble::getInstance()
 	{

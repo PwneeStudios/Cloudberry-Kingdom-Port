@@ -2,20 +2,26 @@
 
 namespace CloudberryKingdom
 {
+
+	void PieceQuad::InitializeStatics()
+	{
+	}
+
+	// Statics
+	std::map<std::wstring, std::shared_ptr<PieceQuad> > PieceQuad::Dict;
+	std::shared_ptr<PieceQuad> PieceQuad::MovingBlock_Renamed, PieceQuad::FallingBlock_Renamed, PieceQuad::BouncyBlock_Renamed, PieceQuad::Elevator;
+	std::shared_ptr<BlockGroup> PieceQuad::FallGroup, PieceQuad::BouncyGroup, PieceQuad::MovingGroup, PieceQuad::ElevatorGroup;
+
+
 	void PieceQuad::CalcTexture( int anim, float t )
 	{
 		Center.CalcTexture( anim, t );
 	}
 
-	std::map<std::wstring, std::shared_ptr<PieceQuad> > PieceQuad::Dict;
-
 	std::shared_ptr<PieceQuad> PieceQuad::Get( const std::wstring &name )
 	{
 		return Dict[ name ];
 	}
-
-	std::shared_ptr<PieceQuad> PieceQuad::MovingBlock_Renamed, PieceQuad::FallingBlock_Renamed, PieceQuad::BouncyBlock_Renamed, PieceQuad::Elevator = 0;
-	std::shared_ptr<BlockGroup> PieceQuad::FallGroup, PieceQuad::BouncyGroup, PieceQuad::MovingGroup, PieceQuad::ElevatorGroup = 0;
 
 	void PieceQuad::Clone( const std::shared_ptr<PieceQuad> &PieceQuadA )
 	{

@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class Challenge_HeroRush : public Rush
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
@@ -50,7 +54,7 @@ namespace CloudberryKingdom
 		};
 
 	private:
-		static const std::shared_ptr<Challenge_HeroRush> instance;
+		static std::shared_ptr<Challenge_HeroRush> instance;
 	public:
 		const static std::shared_ptr<Challenge_HeroRush> &getInstance();
 

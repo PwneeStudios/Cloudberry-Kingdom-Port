@@ -9,8 +9,11 @@ namespace CloudberryKingdom
 	class Generators
 	{
 
+	public:
+		static void InitializeStatics();
+
 	private:
-		static const std::shared_ptr<Generators> instance;
+		static std::shared_ptr<Generators> instance;
 	public:
 		const static std::shared_ptr<Generators> &getInstance();
 

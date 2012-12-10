@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class SaveGroup
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::vector<std::shared_ptr<SaveLoad> > ThingsToSave;
 
@@ -133,6 +137,10 @@ public:
 
 	class EzStorage
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		static std::shared_ptr<StorageDevice> Device;
 		static std::shared_ptr<WrappedBool> InUse;

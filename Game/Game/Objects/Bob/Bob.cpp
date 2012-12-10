@@ -3,8 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	std::map<BobDeathType, Localization::Words> Bob::BobDeathNames;
-	void Bob::StaticInitializer()
+	void Bob::InitializeStatics()
 	{
 		typedef std::pair<BobDeathType, Localization::Words> DeathNamePair;
 		Bob::BobDeathNames = std::map<BobDeathType, Localization::Words>();
@@ -25,7 +24,38 @@ namespace CloudberryKingdom
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LEFT_BEHIND, Localization::Words_LEFT_BEHIND ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_OTHER, Localization::Words_OTHER ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TOTAL, Localization::Words_TOTAL ) );
+
+		Bob::AllExplode = true;
+		Bob::ShowCorpseAfterExplode = false;
+		Bob::ImmortalLength = 55;
+
+		Bob::JumpSound_Default, Bob::DieSound_Default = 0;
+		std::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
+		Bob::HeroTypes = VecFromArray( tempVector );
+
+		Bob::GuideActivated = false;
+		Bob::GuideQuad = 0;
+
+		Bob::GuideLength = 8;
+		Bob::Guide_h = 1.f / GuideLength;
 	}
+
+	// Statics
+	std::map<BobDeathType, Localization::Words> Bob::BobDeathNames;
+	bool Bob::AllExplode;
+	bool Bob::ShowCorpseAfterExplode;
+	int Bob::ImmortalLength;
+
+	std::shared_ptr<EzSound> Bob::JumpSound_Default, Bob::DieSound_Default;
+	std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes;
+
+	bool Bob::GuideActivated;
+	std::shared_ptr<QuadClass> Bob::GuideQuad;
+
+	int Bob::GuideLength;
+	float Bob::Guide_h;
+
+
 
 	void Bob::BobMove::Init()
 	{
@@ -58,16 +88,11 @@ namespace CloudberryKingdom
 		CoreMath::Restrict( 0, 1, LightSourceFade );
 	}
 
-bool Bob::AllExplode = true;
-bool Bob::ShowCorpseAfterExplode = false;
-
 	void Bob::SetToFadeIn()
 	{
 		FadingIn = true;
 		Fade = 0;
 	}
-
-int Bob::ImmortalLength = 55;
 
 	void Bob::Release()
 	{
@@ -229,8 +254,6 @@ int Bob::ImmortalLength = 55;
 		ControlFunc.reset();
 	}
 
-	std::shared_ptr<EzSound> Bob::JumpSound_Default, Bob::DieSound_Default = 0;
-
 	const std::shared_ptr<PlayerData> Bob::getMyPlayerData() const
 	{
 		return PlayerManager::Get( MyPlayerIndex );
@@ -248,9 +271,6 @@ int Bob::ImmortalLength = 55;
 		int index = CoreMath::RestrictVal( 0, Boxes.size() - 1, DifficultyLevel );
 		return Boxes[ index ];
 	}
-
-	const std::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
-	std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
@@ -841,9 +861,6 @@ int Bob::ImmortalLength = 55;
 		}
 	}
 
-	bool Bob::GuideActivated = false;
-	std::shared_ptr<QuadClass> Bob::GuideQuad = 0;
-
 	void Bob::InitGuideQuad()
 	{
 		if ( GuideQuad != 0 )
@@ -853,9 +870,6 @@ int Bob::ImmortalLength = 55;
 		GuideQuad->setEffectName( _T( "Circle" ) );
 		GuideQuad->setSize( Vector2( 100, 100 ) );
 	}
-
-	int Bob::GuideLength = 8;
-	float Bob::Guide_h = 1.f / GuideLength;
 
 	void Bob::DrawGuidePiece( int Step, std::vector<Vector2> Loc, int i )
 	{

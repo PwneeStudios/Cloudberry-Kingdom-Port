@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 {
 	class LengthSlider : public MenuSliderBase
 	{
+
 	public:
 		using MenuItem::Draw;
 

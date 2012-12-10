@@ -7,6 +7,10 @@ namespace CloudberryKingdom
 {
 	class QuadDrawer
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		std::shared_ptr<GraphicsDevice> Device;
 

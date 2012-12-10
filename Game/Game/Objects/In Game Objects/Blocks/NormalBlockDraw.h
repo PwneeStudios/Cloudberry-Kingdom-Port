@@ -5,6 +5,7 @@ namespace CloudberryKingdom
 {
 	class NormalBlockDraw
 	{
+
 	public:
 		bool Shadow;
 		Vector2 ShadowOffset;

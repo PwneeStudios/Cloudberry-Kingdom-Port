@@ -5,43 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	class BobPhsxNormal;
-}
-
-namespace CloudberryKingdom
-{
-	class CustomLevel_GUI;
-}
-
-namespace CloudberryKingdom
-{
-	class PhsxSlider;
-}
-
-namespace CloudberryKingdom
-{
-	class EzText;
-}
-
-namespace CloudberryKingdom
-{
-	class MenuList;
-}
-
-namespace CloudberryKingdom
-{
 	class CustomHero_GUI : public CkBaseMenu
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class StartTestProxy : public Lambda
 		{

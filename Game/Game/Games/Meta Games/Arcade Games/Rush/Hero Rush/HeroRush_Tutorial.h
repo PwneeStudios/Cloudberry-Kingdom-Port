@@ -5,25 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Text;
-}
-
-namespace CloudberryKingdom
-{
-	class Arrow;
-}
-
-namespace CloudberryKingdom
-{
-	class Challenge_HeroRush;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	class HeroRush_Tutorial : public GameObject
 	{
+
+	public:
+		static void InitializeStatics();
+
 	private:
 		class StartMusicHelper : public Lambda
 		{
