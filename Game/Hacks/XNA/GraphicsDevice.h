@@ -1,14 +1,15 @@
 #ifndef _GRAPHICSDEVICE_H_
 #define _GRAPHICSDEVICE_H_
 
-#include "Hacks/Queue.h"
+#include <enums.h>
 
+#include <Graphics/Color.h>
+
+#include "Hacks/Queue.h"
 #include "Hacks/XNA/Viewport.h"
 
 struct GraphicsDevice
 {
-
-
 
 	std::shared_ptr<struct PresentationParameters> PP;
 	std::vector<std::shared_ptr<struct SamplerState> > SamplerStates;

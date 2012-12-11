@@ -358,6 +358,8 @@
     <ClCompile Include="Game\Tools\WrappedFloat.cpp" />
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
+    <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
+    <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
   </ItemGroup>
   <ItemGroup>

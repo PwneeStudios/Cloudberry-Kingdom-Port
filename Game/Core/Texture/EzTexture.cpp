@@ -18,20 +18,6 @@ namespace CloudberryKingdom
 		return static_cast<float>( Width ) / static_cast<float>( Height );
 	}
 
-#if defined(EDITOR)
-std::shared_ptr<Game> EzTexture::game = 0;
-#endif
-
-#if defined(EDITOR)
-	bool EzTexture::Load()
-	{
-		if ( getTex() == 0 && Path != _T("") )
-			setTex( game->Content->Load<Texture2D*>( Path ) );
-
-		return getTex() != 0;
-	}
-#endif
-
 #if ! defined(EDITOR)
 	bool EzTexture::Load()
 	{

@@ -128,7 +128,8 @@ namespace CloudberryKingdom
 		Background::TestTexture = 0;
 
 		// Challenge_HeroRush2
-		Challenge_HeroRush2::HeroList = std::vector<HeroSpec>( 100 );
+		Challenge_HeroRush2::HeroList = std::vector<HeroSpec>( );
+		Challenge_HeroRush2::HeroList.reserve( 100 );
 		Challenge_HeroRush2::instance = std::make_shared<Challenge_HeroRush2>();
 
 	}

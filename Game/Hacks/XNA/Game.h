@@ -1,6 +1,7 @@
 #ifndef _XNAGAME_H_
 #define _XNAGAME_H_
 
+
 struct Game
 {
 

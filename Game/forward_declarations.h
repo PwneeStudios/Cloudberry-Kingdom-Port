@@ -1,5 +1,5 @@
-#ifndef _FORWARD_DECLARATIONS_H_
-#define _FORWARD_DECLARATIONS_H_
+#ifndef _FORWARD_DECLARATIONS_CK_H_
+#define _FORWARD_DECLARATIONS_CK_H_
 
 namespace CloudberryKingdom
 {

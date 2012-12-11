@@ -38,7 +38,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		const int Size = 2000;
 
-		TextureList = std::vector<std::shared_ptr<EzTexture> >( Size );
+		TextureList = std::vector<std::shared_ptr<EzTexture> >();
+		TextureList.reserve( Size );
 		TextureListByFolder = std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > >();
 
 		AnimationDict = std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator>();

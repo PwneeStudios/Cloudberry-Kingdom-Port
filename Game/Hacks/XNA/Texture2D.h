@@ -6,22 +6,16 @@
 struct Texture2D
 {
 
-
 	int Width;
 
 	int Height;
 
-	Texture2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height )
-	{
-	}
+	Texture2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height );
 
 	// FIXME: Implement this.
-	void Dispose() { }
+	void Dispose();
 
-	bool IsDisposed()
-	{
-		return false;
-	}
+	bool IsDisposed();
 
 	template<class T>
 	void GetData( std::vector<T> &data )
