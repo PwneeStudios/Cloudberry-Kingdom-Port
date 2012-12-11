@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	struct NormalBlock_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<NormalBlock_AutoGen> instance;
+		static std::shared_ptr<NormalBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<NormalBlock_AutoGen> &getInstance();
 

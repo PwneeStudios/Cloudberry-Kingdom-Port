@@ -101,7 +101,6 @@ inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
 #include "Game/Tools/Oscillate.h"
 #include "Core/Animation/AnimationData_Vector.h"
 #include "Core/Animation/AnimationData_Integer.h"
-#include "CloudberryKingdom.h"
 #include "stringconverter.h"
 #include "Core/Chunk.h"
 #include "Core/FancyVector2.h"
@@ -148,7 +147,6 @@ inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
 #include "Core/Tools/Random.h"
 #include "Core/Tools/Set.h"
 #include "Game/Video.h"
-#include "Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h"
 #include "Game/Collision Detection/AABox.h"
 #include "Game/Collision Detection/Circle.h"
 #include "Game/Collision Detection/FloatRectangle.h"
@@ -455,8 +453,6 @@ inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
 #include "Game/Tools/Tools.h"
 #include "Game/Tools/Unset.h"
 #include "Game/Tools/WrappedFloat.h"
-#include "MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h"
-#include "MainClass/XboxPC/MainClass.h"
 
 #include "Game/Tilesets/TileSetInfo.h"
 

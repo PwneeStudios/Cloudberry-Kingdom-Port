@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 			BobPos_REGULAR
 		};
 	
-		static const std::shared_ptr<Coin_AutoGen> instance;
+		static std::shared_ptr<Coin_AutoGen> instance;
 	
 		const static std::shared_ptr<Coin_AutoGen> &getInstance();
 

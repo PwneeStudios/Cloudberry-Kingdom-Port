@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 	struct FlyingBlob_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<FlyingBlob_AutoGen> instance;
+		static std::shared_ptr<FlyingBlob_AutoGen> instance;
 	
 		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance();
 

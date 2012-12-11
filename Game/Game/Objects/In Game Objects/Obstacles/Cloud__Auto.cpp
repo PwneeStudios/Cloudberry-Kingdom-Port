@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		Size.SetVal( 2 - .1f * u->Get( Upgrade_CLOUD ) );
 	}
 
-	const std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
+	std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
 
 	const std::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance()
 	{

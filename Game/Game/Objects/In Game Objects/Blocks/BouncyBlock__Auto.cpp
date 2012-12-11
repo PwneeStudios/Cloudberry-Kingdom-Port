@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		EdgeSafety.SetVal( __max( .01f, DifficultyHelper::Interp159( .4f,.3f,.05f, u->Get( Upgrade_BOUNCY_BLOCK ) ) ) );
 	}
 
-	const std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
+	std::shared_ptr<BouncyBlock_AutoGen> BouncyBlock_AutoGen::instance = std::make_shared<BouncyBlock_AutoGen>();
 
 	const std::shared_ptr<BouncyBlock_AutoGen> &BouncyBlock_AutoGen::getInstance()
 	{

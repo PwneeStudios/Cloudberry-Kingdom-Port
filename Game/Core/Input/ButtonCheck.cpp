@@ -4,6 +4,8 @@
 #include "Hacks/XNA/Mouse.h"
 #include "Hacks/XNA/GamePad.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

@@ -5,8 +5,11 @@
 
 #include "Hacks/XNA/MouseState.h"
 #include "Hacks/XNA/GamePadState.h"
+#include "Hacks/XNA/GameTime.h"
 #include "Hacks/NET/StreamReader.h"
 #include "Hacks/NET/StreamWriter.h"
+
+#include <MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h>
 
 namespace CloudberryKingdom
 {

@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	struct ConveyorBlock_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<ConveyorBlock_AutoGen> instance;
+		static std::shared_ptr<ConveyorBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<ConveyorBlock_AutoGen> &getInstance();
 

@@ -5,6 +5,8 @@
 
 #include "Hacks/XNA/MediaPlayer.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
@@ -32,9 +34,14 @@ namespace CloudberryKingdom
 		BackgroundType::InitializeStatics();
 		CustomLevel_GUI::InitializeStatics();
 		Particle::InitializeStatics();
-		ParticleEmitter::InitializeStatics();
+		
+		CampaignHelper::InitializeStatics();		
+	}
+
+	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
+	{
 		Awardments::InitializeStatics();
-		CampaignHelper::InitializeStatics();
+		
 		EzText::InitializeStatics();
 
 		Bob::InitializeStatics();
@@ -63,13 +70,7 @@ namespace CloudberryKingdom
 		ObjectData::InitializeStatics();
 		Spike::InitializeStatics();
 
-
-
-
-	}
-
-	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
-	{
+		ParticleEmitter::InitializeStatics();
 		BobPhsx::DefaultInfo::InitializeStatics();
 		GameData::InitializeStatics();
 		TitleGameData::InitializeStatics();
@@ -252,6 +253,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	CloudberryKingdomGame::CloudberryKingdomGame()
 	{
+		//Tools::GameClass = std::make_shared<XnaGameClass>();
+
 		CloudberryKingdomGame::StaticIntializer_NoDependence();
 
 		InitializeInstanceFields();
@@ -261,9 +264,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		// FIXME: This is an event that hooks in to whenever the game has to prepare a device (usually after losing it). Do we need this?
 		//MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
-		Tools::GameClass->getContent()->RootDirectory = _T("Content");
-
-		Tools::TheGame = shared_from_this();
+		// Pull these out, so they aren't inside the constructor.
+		//Tools::GameClass->getContent()->RootDirectory = _T("Content");
+		//Tools::TheGame = shared_from_this();
 	}
 
 	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e )

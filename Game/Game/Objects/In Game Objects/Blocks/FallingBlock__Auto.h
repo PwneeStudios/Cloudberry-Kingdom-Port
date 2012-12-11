@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	struct FallingBlock_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<FallingBlock_AutoGen> instance;
+		static std::shared_ptr<FallingBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<FallingBlock_AutoGen> &getInstance();
 

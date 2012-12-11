@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 	struct Serpent_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Serpent_AutoGen> instance;
+		static std::shared_ptr<Serpent_AutoGen> instance;
 	
 		const static std::shared_ptr<Serpent_AutoGen> &getInstance();
 

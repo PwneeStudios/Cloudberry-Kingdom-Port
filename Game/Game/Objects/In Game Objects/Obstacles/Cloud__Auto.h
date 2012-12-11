@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 	struct Cloud_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Cloud_AutoGen> instance;
+		static std::shared_ptr<Cloud_AutoGen> instance;
 	
 		const static std::shared_ptr<Cloud_AutoGen> &getInstance();
 

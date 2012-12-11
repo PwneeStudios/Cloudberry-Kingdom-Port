@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		SurvivalHallwaySpeed = Unset::Float;
 	}
 
-const std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<Fireball_AutoGen>();
+std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<Fireball_AutoGen>();
 
 	const std::shared_ptr<Fireball_AutoGen> &Fireball_AutoGen::getInstance()
 	{

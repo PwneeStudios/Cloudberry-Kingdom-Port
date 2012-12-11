@@ -3,6 +3,8 @@
 #include "Hacks/Queue.h"
 #include "Hacks/Clipboard.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

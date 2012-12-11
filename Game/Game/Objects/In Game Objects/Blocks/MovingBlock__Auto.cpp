@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 			AspectTypeRatio[ element ] = temp_AspectTypeRatio[ element ];
 	}
 
-const std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_shared<MovingBlock_AutoGen>();
+std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_shared<MovingBlock_AutoGen>();
 
 	const std::shared_ptr<MovingBlock_AutoGen> &MovingBlock_AutoGen::getInstance()
 	{

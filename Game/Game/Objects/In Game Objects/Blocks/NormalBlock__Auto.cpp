@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		DoFinalPlats = true;
 	}
 
-const std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_shared<NormalBlock_AutoGen>();
+std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_shared<NormalBlock_AutoGen>();
 
 	const std::shared_ptr<NormalBlock_AutoGen> &NormalBlock_AutoGen::getInstance()
 	{

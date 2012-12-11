@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 	struct Ceiling_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Ceiling_AutoGen> instance;
+		static std::shared_ptr<Ceiling_AutoGen> instance;
 	
 		const static std::shared_ptr<Ceiling_AutoGen> &getInstance();
 

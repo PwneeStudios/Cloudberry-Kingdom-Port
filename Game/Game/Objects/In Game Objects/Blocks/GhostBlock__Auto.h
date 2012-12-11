@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 	
-		static const std::shared_ptr<GhostBlock_AutoGen> instance;
+		static std::shared_ptr<GhostBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<GhostBlock_AutoGen> &getInstance();
 

@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	struct Laser_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Laser_AutoGen> instance;
+		static std::shared_ptr<Laser_AutoGen> instance;
 	
 		const static std::shared_ptr<Laser_AutoGen> &getInstance();
 

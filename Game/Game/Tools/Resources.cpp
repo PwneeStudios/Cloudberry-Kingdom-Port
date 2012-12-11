@@ -5,6 +5,8 @@
 #include "Hacks/NET/Path.h"
 #include "Hacks/NET/Directory.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

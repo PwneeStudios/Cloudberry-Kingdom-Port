@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		AngrySpeed.SetVal( 4 * u->Get( Upgrade_FALLING_BLOCK ) );
 	}
 
-const std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std::make_shared<FallingBlock_AutoGen>();
+std::shared_ptr<FallingBlock_AutoGen> FallingBlock_AutoGen::instance = std::make_shared<FallingBlock_AutoGen>();
 
 	const std::shared_ptr<FallingBlock_AutoGen> &FallingBlock_AutoGen::getInstance()
 	{

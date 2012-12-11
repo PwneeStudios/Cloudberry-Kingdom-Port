@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<BobPhsx> FactoryHero;
 
 	
-		static const std::shared_ptr<Challenge_HeroFactoryEscalation> instance;
+		static std::shared_ptr<Challenge_HeroFactoryEscalation> instance;
 	
 		const static std::shared_ptr<Challenge_HeroFactoryEscalation> &getInstance();
 

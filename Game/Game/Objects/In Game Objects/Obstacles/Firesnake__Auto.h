@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	struct Firesnake_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Firesnake_AutoGen> instance;
+		static std::shared_ptr<Firesnake_AutoGen> instance;
 	
 		const static std::shared_ptr<Firesnake_AutoGen> &getInstance();
 

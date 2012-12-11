@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		block->ModOffset( level->getRnd()->RndInt(static_cast<int>(.25f * max), static_cast<int>(.75f * max)) );
 	}
 
-const std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_shared<GhostBlock_AutoGen>();
+std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_shared<GhostBlock_AutoGen>();
 
 	const std::shared_ptr<GhostBlock_AutoGen> &GhostBlock_AutoGen::getInstance()
 	{

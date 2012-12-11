@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		static const std::shared_ptr<SpikeyGuy_AutoGen> instance;
+		static std::shared_ptr<SpikeyGuy_AutoGen> instance;
 	
 		const static std::shared_ptr<SpikeyGuy_AutoGen> &getInstance();
 

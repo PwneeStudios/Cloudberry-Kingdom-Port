@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	struct Pendulum_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Pendulum_AutoGen> instance;
+		static std::shared_ptr<Pendulum_AutoGen> instance;
 	
 		const static std::shared_ptr<Pendulum_AutoGen> &getInstance();
 

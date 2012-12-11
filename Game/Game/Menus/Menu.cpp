@@ -3,6 +3,8 @@
 #include "Hacks/List.h"
 #include "Hacks/Compare.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

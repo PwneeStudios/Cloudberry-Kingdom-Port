@@ -2,6 +2,8 @@
 
 #include "Hacks/Queue.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

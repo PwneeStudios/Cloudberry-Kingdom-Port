@@ -1,18 +1,24 @@
 #include <global_header.h>
 
+#include "CloudberryKingdom.XnaGameClass.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
 	XnaGameClass::XnaGameClass()
 	{
-		Tools::GameClass = shared_from_this();
+		Content = std::make_shared<ContentManager>( _T( "Content" ) );
+
+		//Tools::GameClass = shared_from_this();
 		MyGame = std::make_shared<CloudberryKingdomGame>();
+		Tools::TheGame = MyGame;
 
 	#if defined(PC_VERSION)
 	#elif defined(XBOX) || defined(XBOX_SIGNIN)
 		getComponents()->Add(std::make_shared<GamerServicesComponent>(this));
 	#endif
-		getContent()->RootDirectory = _T("Content");
 	}
 
 	bool XnaGameClass::getIsActive()

@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 			void Apply( const Vector2 &pos );
 		};
 	
-		static const std::shared_ptr<Boulder_AutoGen> instance;
+		static std::shared_ptr<Boulder_AutoGen> instance;
 	
 		const static std::shared_ptr<Boulder_AutoGen> &getInstance();
 

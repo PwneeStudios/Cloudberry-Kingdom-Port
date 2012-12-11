@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		static const std::shared_ptr<CampaignSequence> instance;
+		static std::shared_ptr<CampaignSequence> instance;
 		const static std::shared_ptr<CampaignSequence> &getInstance();
 
 	

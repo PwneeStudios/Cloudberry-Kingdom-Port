@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		return CoreMath::Abs( floater_A->PivotPoint - floater_B->PivotPoint );
 	}
 
-const std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_shared<SpikeyGuy_AutoGen>();
+std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_shared<SpikeyGuy_AutoGen>();
 
 	const std::shared_ptr<SpikeyGuy_AutoGen> &SpikeyGuy_AutoGen::getInstance()
 	{

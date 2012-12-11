@@ -1,5 +1,8 @@
 #include "global_header.h"
 
+#include "CloudberryKingdom.h"
+#include "MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h"
+
 /*#include <Content/Texture.h>
 #include <Content/Wad.h>
 #include <Core.h>
@@ -31,7 +34,13 @@ void CloudberryKingdomWrapper::Initialize()
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );*/
 
-	std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> game = std::make_shared<CloudberryKingdom::CloudberryKingdomGame>();
+	//std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> game = std::make_shared<CloudberryKingdom::CloudberryKingdomGame>();
+	game = std::make_shared<CloudberryKingdom::XnaGameClass>();
+
+	//Tools::GameClass->getContent()->RootDirectory = _T("Content");
+	CloudberryKingdom::Tools::GameClass = game;
+
+	game->LoadContent();
 }
 
 void CloudberryKingdomWrapper::Update()

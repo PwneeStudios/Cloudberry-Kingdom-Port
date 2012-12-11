@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		static std::vector<HeroSpec> HeroList;
 
 	
-		static const std::shared_ptr<Challenge_HeroRush2> instance;
+		static std::shared_ptr<Challenge_HeroRush2> instance;
 	
 		const static std::shared_ptr<Challenge_HeroRush2> &getInstance();
 

@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 	struct BlockEmitter_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<BlockEmitter_AutoGen> instance;
+		static std::shared_ptr<BlockEmitter_AutoGen> instance;
 	
 		const static std::shared_ptr<BlockEmitter_AutoGen> &getInstance();
 

@@ -1029,9 +1029,6 @@
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainClass\XboxPC\MainClass.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Tilesets\TileSetInfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2127,9 +2124,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="MainClass\XboxPC\MainClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="forward_declarations.h">

@@ -2,6 +2,8 @@
 
 #include "Hacks/String.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -342,12 +344,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b )
 	{
-		return ColorToMarkup( r, g, b, 0, 0 );
+		return ColorToMarkup( r, g, b, 0, _T( "" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b, int shift )
 	{
-		return ColorToMarkup( r, g, b, shift, 0 );
+		return ColorToMarkup( r, g, b, shift, _T( "" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b, int shift, const std::wstring &bit )
@@ -357,12 +359,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToMarkup( Color clr )
 	{
-		return ColorToMarkup( clr, 0, 0 );
+		return ColorToMarkup( clr, 0, _T( "" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( Color clr, int shift )
 	{
-		return ColorToMarkup( clr, shift, 0 );
+		return ColorToMarkup( clr, shift, _T( "" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( Color clr, int shift, const std::wstring &bit )

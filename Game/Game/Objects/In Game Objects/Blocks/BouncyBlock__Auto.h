@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	struct BouncyBlock_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<BouncyBlock_AutoGen> instance;
+		static std::shared_ptr<BouncyBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<BouncyBlock_AutoGen> &getInstance();
 

@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 	struct SpikeyLine_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<SpikeyLine_AutoGen> instance;
+		static std::shared_ptr<SpikeyLine_AutoGen> instance;
 	
 		const static std::shared_ptr<SpikeyLine_AutoGen> &getInstance();
 

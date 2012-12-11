@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 	struct MovingBlock_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<MovingBlock_AutoGen> instance;
+		static std::shared_ptr<MovingBlock_AutoGen> instance;
 	
 		const static std::shared_ptr<MovingBlock_AutoGen> &getInstance();
 

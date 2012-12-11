@@ -11,11 +11,11 @@ namespace CloudberryKingdom
 	{
 	
 		std::shared_ptr<CloudberryKingdomGame> MyGame;
-
 	
 		XnaGameClass();
 
 		virtual bool getIsActive();
+
 		virtual void setIsMouseVisible( bool visible );
 
 		virtual void Initialize();

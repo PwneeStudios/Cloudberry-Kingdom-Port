@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		Width = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 240, 60, u->Get( Upgrade_CONVEYOR ) ) );
 	}
 
-	const std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
+	std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
 
 	const std::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance()
 	{

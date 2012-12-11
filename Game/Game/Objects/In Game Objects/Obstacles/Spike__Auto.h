@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 			Vector2 Apply( const Vector2 &pos );
 		};
 	
-		static const std::shared_ptr<Spike_AutoGen> instance;
+		static std::shared_ptr<Spike_AutoGen> instance;
 	
 		const static std::shared_ptr<Spike_AutoGen> &getInstance();
 

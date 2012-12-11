@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	struct LavaDrip_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<LavaDrip_AutoGen> instance;
+		static std::shared_ptr<LavaDrip_AutoGen> instance;
 	
 		const static std::shared_ptr<LavaDrip_AutoGen> &getInstance();
 

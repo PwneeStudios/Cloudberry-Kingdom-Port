@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	struct Fireball_AutoGen : public AutoGen
 	{
 	
-		static const std::shared_ptr<Fireball_AutoGen> instance;
+		static std::shared_ptr<Fireball_AutoGen> instance;
 	
 		const static std::shared_ptr<Fireball_AutoGen> &getInstance();
 
