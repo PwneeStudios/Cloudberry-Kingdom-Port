@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 	FancyColor::FancyColor()
 	{
 		InitializeInstanceFields();
-		Init( getColor().White );
+		Init( Color::White );
 	}
 
 	FancyColor::FancyColor( Color color )

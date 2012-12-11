@@ -40,6 +40,7 @@ void CloudberryKingdomWrapper::Initialize()
 	//Tools::GameClass->getContent()->RootDirectory = _T("Content");
 	CloudberryKingdom::Tools::GameClass = game;
 
+	game->Initialize();
 	game->LoadContent();
 }
 

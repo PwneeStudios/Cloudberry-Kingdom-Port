@@ -1,41 +1,40 @@
 #ifndef _GRAPHICSDEVICE_H_
 #define _GRAPHICSDEVICE_H_
 
+#include <memory>
+#include <vector>
+
 #include <enums.h>
 
-#include <Graphics/Color.h>
+#include <Core/Graphics/VertexFormat.h>
 
-#include "Hacks/Queue.h"
-#include "Hacks/XNA/Viewport.h"
+#include "Viewport.h"
+
+struct PresentationParameters;
+struct SamplerState;
+struct RenderTarget2D;
 
 struct GraphicsDevice
 {
 
-	std::shared_ptr<struct PresentationParameters> PP;
-	std::vector<std::shared_ptr<struct SamplerState> > SamplerStates;
+	std::shared_ptr<PresentationParameters> PP;
+	std::vector<std::shared_ptr<SamplerState> > SamplerStates;
 	GfxRasterizerState RasterizerState;
 	GfxBlendState BlendState;
 	GfxDepthStencilState DepthStencilState;
 
 	Viewport VP;
 
-	GraphicsDevice()
-	{
-		SamplerStates.resize( 3 );
-	}
+	GraphicsDevice();
 
-	void SetRenderTarget( const std::shared_ptr<struct RenderTarget2D> &rt )
-	{
-	}
+	void SetRenderTarget( const std::shared_ptr<RenderTarget2D> &rt );
 
-	void Clear( const Color &color)
-	{
-	}
+	void Clear( const Color &color);
 
-	template<class T>
-	void DrawUserPrimitives( GfxPrimitiveType type, const std::vector<T> &vertices, int base, int count)
-	{
-	}
+	////template<class T>
+	////void DrawUserPrimitives( GfxPrimitiveType type, const std::vector<T> &vertices, int base, int count);
+
+	void DrawUserPrimitives( GfxPrimitiveType type, const std::vector<CloudberryKingdom::MyOwnVertexFormat> &vertices, int base, int count);
 
 };
 

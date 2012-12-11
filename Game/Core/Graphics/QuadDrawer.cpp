@@ -604,7 +604,8 @@ namespace CloudberryKingdom
 				{
 				CurrentEffect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-				Device->DrawUserPrimitives<MyOwnVertexFormat>( GfxPrimitiveType_TriangleList, Vertices, 0, TrianglesInBuffer );
+				/*Device->DrawUserPrimitives<MyOwnVertexFormat>( GfxPrimitiveType_TriangleList, Vertices, 0, TrianglesInBuffer );*/
+				Device->DrawUserPrimitives( GfxPrimitiveType_TriangleList, Vertices, 0, TrianglesInBuffer );
 				}
 		}
 

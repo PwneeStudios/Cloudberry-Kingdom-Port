@@ -10,6 +10,10 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <ResourceList\Resources_Art.h>
+#include <ResourceList\Resources_Music.h>
+#include <ResourceList\Resources_Sound.h>
+
 namespace CloudberryKingdom
 {
 
@@ -93,27 +97,17 @@ namespace CloudberryKingdom
 
 		Tools::SongWad->PlayerControl = Tools::SongWad->DisplayInfo = true;
 
-		std::wstring path = Path::Combine( Globals::ContentDirectory, _T( "Music" ) );
-		std::vector<std::wstring> files = Directory::GetFiles( path );
+		std::vector<std::wstring> files = MusicList();
 
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
 		{
 			int i = ( *file ).find( _T( "Music" ) ) + 5 + 1;
-			if ( i < 0 )
-				continue;
 			int j = ( *file ).find( _T( "." ), i );
-			if ( j <= i )
-				continue;
-			std::wstring name = ( *file ).substr( i, j - i );
-			std::wstring extension = ( *file ).substr( j + 1 );
 
-			if ( extension == _T( "xnb" ) )
-			{
-				if ( CreateNewWad )
-					Tools::SongWad->AddSong( Tools::GameClass->getContent()->Load<Song>(_T("Music\\") + name), name );
-				else
-					Tools::SongWad->FindByName( name )->song = Tools::GameClass->getContent()->Load<Song>(_T("Music\\") + name);
-			}
+			std::wstring name = ( *file ).substr( i, j - i );
+
+			if ( CreateNewWad )
+				Tools::SongWad->AddSong( Tools::GameClass->getContent()->Load<Song>( *file ), name );
 
 			ResourceLoadedCountRef->MyFloat++;
 		}
@@ -166,6 +160,27 @@ namespace CloudberryKingdom
 
 	void Resources::LoadSound( bool CreateNewWad )
 	{
+
+		std::shared_ptr<ContentManager> manager = std::make_shared<ContentManager>( Tools::GameClass->getContent()->RootDirectory );
+
+		if ( CreateNewWad )
+		{
+			Tools::SoundWad = std::make_shared<EzSoundWad>( 4 );
+			Tools::PrivateSoundWad = std::make_shared<EzSoundWad>( 4 );
+		}
+
+		std::vector<std::wstring> files = SoundList();
+
+		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
+		{
+			int i = ( *file ).find( _T( "Sound" ) ) + 5 + 1;
+			int j = ( *file ).find( _T( "." ), i );
+
+			std::wstring name = ( *file ).substr( i, j - i );
+
+			Tools::SoundWad->AddSound( manager->Load<SoundEffect>( *file ), name );
+		}
+
 		// FIXME: Implement more generic way of loading this.
 		/*std::shared_ptr<ContentManager> manager = std::make_shared<ContentManager>( Tools::GameClass->getContent()->ServiceProvider, Tools::GameClass->getContent()->RootDirectory );
 
@@ -237,16 +252,20 @@ namespace CloudberryKingdom
 
 	void Resources::PreloadArt()
 	{
-		std::wstring path = Path::Combine( Globals::ContentDirectory, _T( "Art" ) );
-		std::vector<std::wstring> files = Tools::GetFiles( path, true );
+		//std::wstring path = Path::Combine( Globals::ContentDirectory, _T( "Art" ) );
+		//std::vector<std::wstring> files = Tools::GetFiles( path, true );
+		//for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
+		//{
+		//	if ( Tools::GetFileExt( path, *file ) == _T( "xnb" ) )
+		//	{
+		//		Tools::TextureWad->AddTexture( 0, _T( "Art\\" ) + Tools::GetFileName( path, *file ) );
+		//	}
+		//}
+
+		std::vector<std::wstring> files = ArtList();
 
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
-		{
-			if ( Tools::GetFileExt( path, *file ) == _T( "xnb" ) )
-			{
-				Tools::TextureWad->AddTexture( 0, _T( "Art\\" ) + Tools::GetFileName( path, *file ) );
-			}
-		}
+			Tools::TextureWad->AddTexture( 0, *file );
 	}
 
 	void Resources::LoadResources()

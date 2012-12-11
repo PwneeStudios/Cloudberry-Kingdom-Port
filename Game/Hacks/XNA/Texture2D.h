@@ -1,7 +1,10 @@
 #ifndef _TEXTURE2D_H_
 #define _TEXTURE2D_H_
 
-#include "Hacks/XNA/GraphicsDevice.h"
+#include <memory>
+#include <vector>
+
+struct GraphicsDevice;
 
 struct Texture2D
 {

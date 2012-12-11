@@ -4,13 +4,17 @@
 struct PresentationParameters
 {
 
-
-
 	int BackBufferFormat;
 	int DepthStencilFormat;
 	int MultiSampleCount;
 	int BackBufferWidth;
 	int BackBufferHeight;
+
+	PresentationParameters()
+	{
+		BackBufferFormat = DepthStencilFormat = MultiSampleCount = 0;
+		BackBufferWidth = BackBufferHeight = 0;
+	}
 
 };
 

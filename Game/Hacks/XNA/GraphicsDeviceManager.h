@@ -1,10 +1,12 @@
 #ifndef _GRAPHICSDEVICEMANAGER_H_
 #define _GRAPHICSDEVICEMANAGER_H_
 
+#include <memory>
+
+struct GraphicsDevice;
+
 struct GraphicsDeviceManager
 {
-
-
 
 	std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
 
@@ -12,14 +14,12 @@ struct GraphicsDeviceManager
 	int PreferredBackBufferWidth;
 	int PreferredBackBufferHeight;
 
-	void ToggleFullScreen()
-	{
-	}
+	GraphicsDeviceManager();
 
-	void ApplyChanges()
-	{
-		// After settings have been changed, this function propogates the changes to the device.
-	}
+	void ToggleFullScreen();
+
+	void ApplyChanges();
+
 };
 
 #endif

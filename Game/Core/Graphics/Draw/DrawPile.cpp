@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad )
 	{
-		Add( quad, false, 0 );
+		Add( quad, false, _T( "" ) );
 	}
 
 	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad, const std::wstring &name )
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter )
 	{
-		Add( quad, KeepFancyCenter, 0 );
+		Add( quad, KeepFancyCenter, _T( "" ) );
 	}
 
 	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name )
@@ -147,9 +147,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<EzText> DrawPile::FindEzText( const std::wstring &Name )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<std::shared_ptr<EzText> >::const_iterator text = MyTextList.begin(); text != MyTextList.end(); ++text )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *text )->Name, Name ) == 0 )
 				return *text;
 

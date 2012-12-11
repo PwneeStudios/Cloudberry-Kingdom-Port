@@ -359,6 +359,8 @@
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
+    <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
+    <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
   </ItemGroup>
@@ -736,6 +738,9 @@
     <ClInclude Include="Hacks\NET\BinaryReader.h" />
     <ClInclude Include="Hacks\NET\BinaryWriter.h" />
     <ClInclude Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h" />
+    <ClInclude Include="ResourceList\Resources_Art.h" />
+    <ClInclude Include="ResourceList\Resources_Music.h" />
+    <ClInclude Include="ResourceList\Resources_Sound.h" />
     <ClInclude Include="stringconverter.h" />
     <ClInclude Include="Hacks\Clipboard.h" />
     <ClInclude Include="Hacks\XNA\ContentManager.h" />

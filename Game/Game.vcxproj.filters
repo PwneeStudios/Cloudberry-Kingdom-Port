@@ -1065,6 +1065,12 @@
     <ClCompile Include="Hacks\XNA\Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2361,6 +2367,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\NET\TimeSpan.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceList\Resources_Art.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceList\Resources_Music.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceList\Resources_Sound.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
