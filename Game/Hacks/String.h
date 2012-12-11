@@ -136,7 +136,7 @@ inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T
 	return Format( s, params );
 }*/
 
-inline std::wstring Format( wchar_t *format, ... )
+inline std::wstring Format( const wchar_t *format, ... )
 {
 	wchar_t buffer[512];
 

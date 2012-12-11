@@ -3,8 +3,6 @@
 
 #include <global_header.h>
 
-#include "Hacks/String.h"
-
 namespace CloudberryKingdom
 {
 	class EzTextureWad
@@ -20,11 +18,15 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<EzTexture> > TextureList;
 		std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > > TextureListByFolder;
 
-		std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator> AnimationDict;
+		// FIME:
+		//std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator> AnimationDict;
+		std::map<std::wstring, std::shared_ptr<AnimationData_Texture> > AnimationDict;
 		void Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name );
 
 
-		std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator> PathDict, NameDict, BigNameDict;
+		// FIXME:
+		//std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator> PathDict, NameDict, BigNameDict;
+		std::map<std::wstring, std::shared_ptr<EzTexture> > PathDict, NameDict, BigNameDict;
 		void Add( const std::shared_ptr<PackedTexture> &packed );
 
 
