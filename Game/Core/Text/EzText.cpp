@@ -195,63 +195,63 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Backspace( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys_Back ) );
+		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Back ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Enter( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s70,0}}" ), size, KeyToTexture( Keys_Enter ) );
+		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Enter ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::X( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) );
+		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Y( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) );
+		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::LeftRight( int size )
 	{
-		return Format( _T( "{{pLeftRight_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{pLeftRight_Key,%d,?}{s15,0}" ), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::LeftBumper( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) );
+		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::ReplayPrev_Secondary ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::RightBumper( int size )
 	{
-		return Format( _T( "{{p{1},{0},?}}{{s15,0}}" ), size, KeyToTexture( ButtonCheck::ReplayNext_Secondary ) );
+		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::ReplayNext_Secondary ).c_str(), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Up( int size )
 	{
-		return Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{pUp_Key,%d,?}{s15,0}" ), size );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Jump( int size )
 	{
-		return Format( _T( "{{pUp_Key,{0},?}}{{s15,0}}" ), size );
+		return Format( _T( "{pUp_Key,%d,?}{s15,0}" ), size );
 	}
 #endif
 
@@ -268,7 +268,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			//case Keys.Enter:
 			//    return string.Format("{{pEnter_Key,{0},?}}{{s15,0}}", size * BackScale);
 			//default:
-		return Format( _T( "{{p{0},{1},?}}{{s15,0}}" ), ButtonString::KeyToTexture( key ), size );
+		return Format( _T( "{p%ls,%d,?}{s15,0}" ), ButtonString::KeyToTexture( key ).c_str(), size );
 		//}
 	}
 #endif
@@ -276,7 +276,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Go_Controller( int size )
 	{
-		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{pXbox_A,%d,?}" ), size );
 	}
 #endif
 
@@ -289,56 +289,56 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Back( int size )
 	{
-		return Format( _T( "{{pXbox_B,{0},?}}" ), size );
+		return Format( _T( "{pXbox_B,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Go( int size )
 	{
-		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{pXbox_A,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::X( int size )
 	{
-		return Format( _T( "{{pXbox_X,{0},?}}" ), size );
+		return Format( _T( "{pXbox_X,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Y( int size )
 	{
-		return Format( _T( "{{pXbox_Y,{0},?}}" ), size );
+		return Format( _T( "{pXbox_Y,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::LeftRight( int size )
 	{
-		return Format( _T( "{{pXbox_Dir,{0},?}}" ), size );
+		return Format( _T( "{pXbox_Dir,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::LeftBumper( int size )
 	{
-		return Format( _T( "{{pXbox_LB,{0},?}}" ), size );
+		return Format( _T( "{pXbox_LB,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::RightBumper( int size )
 	{
-		return Format( _T( "{{pXbox_RB,{0},?}}" ), size );
+		return Format( _T( "{pXbox_RB,%d,?}" ), size );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
 	std::wstring ButtonString::Jump( int size )
 	{
-		return Format( _T( "{{pXbox_A,{0},?}}" ), size );
+		return Format( _T( "{pXbox_A,%d,?}" ), size );
 	}
 #endif
 
@@ -374,10 +374,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			return ColorToMarkup( clr, shift ) + bit + ColorToMarkup( Color::White, shift );
 		}
 
-		std::wstring str = Format( _T( "{{c{0},{1},{2},{3}}}" ), clr.R, clr.G, clr.B, clr.A );
+		std::wstring str = Format( _T( "{c%hhu,%hhu,%hhu,%hhu}" ), clr.R, clr.G, clr.B, clr.A );
 		if ( shift != 0 )
 		{
-			std::wstring shiftstr = Format( _T( "{{s{0},0}}" ), shift );
+			std::wstring shiftstr = Format( _T( "{s%d,0}" ), shift );
 			str += shiftstr;
 		}
 
@@ -640,7 +640,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToCode( Color clr )
 	{
-		return Format( _T( "{{c{0}, {1}, {2}, {3}}}" ), clr.R, clr.G, clr.B, clr.A );
+		return Format( _T( "{c%hhu, %hhu, %hhu, %hhu}" ), clr.R, clr.G, clr.B, clr.A );
 	}
 
 	void EzText::Parse( const std::wstring &str )

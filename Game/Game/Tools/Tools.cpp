@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 
 	std::wstring Vector2Extension::ToSimpleString( Vector2 v )
 	{
-		return Format( _T( "{0}, {1}" ), v.X, v.Y );
+		return Format( _T( "%f, %f" ), v.X, v.Y );
 	}
 
 	bool Vector2Extension::LE( Vector2 v1, Vector2 v2 )

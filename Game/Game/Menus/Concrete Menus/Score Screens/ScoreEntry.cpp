@@ -101,7 +101,8 @@ namespace CloudberryKingdom
 
 	std::wstring ScoreEntry::ScoreToString()
 	{
-		return ::Format( _T( "{0:n0}" ), Score );
+		// FIXME: return ::Format( _T( "{0:n0}" ), Score );
+		return FormatWithSeparators( Score );
 	}
 
 	std::wstring ScoreEntry::TimeToString()

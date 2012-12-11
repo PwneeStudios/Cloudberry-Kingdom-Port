@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 
 	std::wstring HeroSpec::ToString()
 	{
-		return Format( _T( "{0},{1},{2},{3}" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
+		return Format( _T( "%d,%d,%d,%d" ), static_cast<int>( basetype ), static_cast<int>( shape ), static_cast<int>( move ), static_cast<int>( special ) );
 	}
 
 	BobPhsx::CustomPhsxData::DataBounds::DataBounds( float DefaultValue, float MinValue, float MaxValue )

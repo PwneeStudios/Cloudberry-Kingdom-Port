@@ -1837,7 +1837,7 @@ bool Level::dodebug = false;
 		PREFILL();
 		DEBUG( _T( "Pre stage 1, about to fill" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
 
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
@@ -1989,7 +1989,7 @@ bool Level::dodebug = false;
 		Pre1 += L'C';
 		DEBUG( _T( "Pre stage 1, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
 
 		PlayMode = 2;
 		RecordPosition = true;
@@ -2009,7 +2009,7 @@ bool Level::dodebug = false;
 			return false;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test a: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test a: %d" ), TestNumber ) );
 
 		// Stage 1 Run through
 		Pre1 += L'D';
@@ -2017,7 +2017,7 @@ bool Level::dodebug = false;
 		Pre2 += L'A';
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test b: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test b: %d" ), TestNumber ) );
 
 		// Continue making Final Platform
 		if ( MakeFinalPlat != 0 )
@@ -2028,7 +2028,7 @@ bool Level::dodebug = false;
 		Par += CurPiece->Par;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test c: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test c: %d" ), TestNumber ) );
 
 		DEBUG( _T( "Done with stage 1 run through, about to cleanup" ) );
 
@@ -2056,7 +2056,7 @@ bool Level::dodebug = false;
 		Pre2 += L'C';
 		DEBUG( _T( "Pre stage 2, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test d: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test d: %d" ), TestNumber ) );
 
 		PlayMode = 1;
 		RecordPosition = false;

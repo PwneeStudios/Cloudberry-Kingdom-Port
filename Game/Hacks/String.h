@@ -2,6 +2,7 @@
 #define _STRING_H_
 
 #include <algorithm>
+#include <cstdarg>
 #include <iostream>
 #include <iterator>
 #include <string>
@@ -66,7 +67,7 @@ struct IgnoreCaseComparator
 //	return _T( "" );
 //}
 
-template<class T1>
+/*template<class T1>
 inline std::wstring Format( std::wstring s, T1 t1 )
 {
 	std::vector<std::wstring> params;
@@ -133,32 +134,28 @@ inline std::wstring Format( std::wstring s, T1 t1, T2 t2, T3 t3, T4 t4, T5 t5, T
 	params.push_back( ToString( t6 ) );
 
 	return Format( s, params );
-}
+}*/
 
-inline std::wstring Format( std::wstring s, std::vector<std::wstring> params )
+inline std::wstring Format( wchar_t *format, ... )
 {
-	// FIXME: Implement this.
-	return _T( "" );
+	wchar_t buffer[512];
 
-	//using namespace std;
+	va_list args;
+	va_start( args, format );
+	vswprintf( buffer, sizeof( buffer ) / sizeof( wchar_t ), format, args );
+	va_end( args );
 
-	//for (size_t i = 0; i < s.length(); i++)
-	//{
-	//	if ( s[i] == '{' )
-	//	{
-	//		if ( s[i + 1] == '{' )
-	//			continue;
-	//		else
-
-	//	}
-	//}
-
-	//wstringstream sstream;
-
-	//sstream << t1;
-
-	//return sstream.str();
+	return std::wstring( buffer );
 }
+
+inline std::wstring FormatWithSeparators( int i )
+{
+	std::wstringstream wss;
+	wss.imbue( std::locale( "en_US.UTF-8" ) );
+	wss << i;
+	return wss.str();
+}
+
 
 // FIXME: Do not understand why format doesn't take a wstring like this method (Used in VerifyDeleteSeed.cpp, other Format wouldn't compile)
 //inline std::wstring Format( std::wstring s, ... )

@@ -258,7 +258,8 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 	{
 		std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
-		Tools::Write( Format( _T( "Load thread starts at {0}" ), DateTime::Now() ) );
+		Tools::Write( Format( _T( "Load thread starts ... NOW!" ) ) );
+		//Tools::Write( Format( _T( "Load thread starts at {0}" ), DateTime::Now() ) );
 
 		Thread::SpinWait( 100 );
 
@@ -319,7 +320,8 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 		LoadingResources->MyBool = false;
 		Tools::Write( _T( "Loading done!" ) );
 
-		Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
+		//Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
+		Tools::Write( Format( _T( "Load thread done ... NOW!" ) ) );
 
 		CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad();
 	}

@@ -88,7 +88,8 @@ namespace CloudberryKingdom
 		if ( !score->Fake )
 			RankStr += GetPrefix();
 
-		std::wstring ScoreStr = Format( _T( "{0:n}" ), score );
+		//std::wstring ScoreStr = Format( _T( "{0:n}" ), score );
+		std::wstring ScoreStr = FormatWithSeparators( score->Score );
 		return RankStr + score->ToString( Length - RankStr.length() );
 	}
 

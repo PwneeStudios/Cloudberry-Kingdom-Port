@@ -764,10 +764,10 @@ namespace CloudberryKingdom
 		// Geometry
 		std::wstring geometry = _T( "" );
 		if ( MyGeometry != LevelGeometry_RIGHT )
-			geometry = Format( _T( "geo:{0};" ), + static_cast<int>( MyGeometry ) );
+			geometry = Format( _T( "geo:%d;" ), + static_cast<int>( MyGeometry ) );
 
 		// Hero
-		std::wstring hero = Format( _T( "h:{0};" ), DefaultHeroType->Specification.ToString() );
+		std::wstring hero = Format( _T( "h:%ls;" ), DefaultHeroType->Specification.ToString().c_str() );
 
 		// Custom phsx
 		std::wstring customphsx = _T( "" );
@@ -775,13 +775,13 @@ namespace CloudberryKingdom
 			customphsx = DefaultHeroType->MyCustomPhsxData.ToString();
 
 		// Tileset
-		std::wstring tileset = Format( _T( "t:{0};" ), MyTileSet->Name );
+		std::wstring tileset = Format( _T( "t:%ls;" ), MyTileSet->Name.c_str() );
 
 		// Pieces
-		std::wstring pieces = Format( _T( "n:{0};" ), NumPieces );
+		std::wstring pieces = Format( _T( "n:%d;" ), NumPieces );
 
 		// Length
-		std::wstring length = Format( _T( "l:{0};" ), StringConverterHelper::toString( Length ) );
+		std::wstring length = Format( _T( "l:%ls;" ), StringConverterHelper::toString( Length ).c_str() );
 
 		// Upgrades
 		std::wstring upgrades = _T( "" );
@@ -1076,7 +1076,7 @@ namespace CloudberryKingdom
 		int TestNumber;
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( Format( _T( "Pre-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Pre-sanitize: %d" ), TestNumber ) );
 
 		// Convert random tileset to an actual randomly chosen tileset
 		// use global RND.
@@ -1105,7 +1105,7 @@ namespace CloudberryKingdom
 		}
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( Format( _T( "Post-sanitize: {0}" ), TestNumber ) );
+		Tools::Write( Format( _T( "Post-sanitize: %d" ), TestNumber ) );
 	}
 
 	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData> , std::shared_ptr<Upgrades> > > &CustomDiff )

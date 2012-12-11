@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 			else if ( identifier == _T( "seed" ) )
 			{
 					std::wstring seed = data;
-					seed += Format( _T( "level:{0};" ), level );
+					seed += Format( _T( "level:%d;" ), level );
 
 					Seeds.push_back( seed );
 					count++;
@@ -178,7 +178,7 @@ namespace CloudberryKingdom
 		level->MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>() );
 		level->MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>() );
 
-		std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "{1} {0}" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ) ) );
+		std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) );
 		level->MyGame->AddGameObject( title );
 
 		level->MyGame->AddGameObject( std::make_shared<GUI_CampaignScore>() );

@@ -168,15 +168,15 @@ namespace CloudberryKingdom
 						int frame = end_frame > start_frame ? start_frame + i : start_frame - i;
 
 						// Get the texture for this frame.
-						std::shared_ptr<EzTexture> texture = Tools::Texture( Format( _T( "{0}_{1}" ), root, frame ) );
+						std::shared_ptr<EzTexture> texture = Tools::Texture( Format( _T( "%ls_%d" ), root.c_str(), frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( Format( _T( "{0}_0000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "%ls_0000%d" ), root.c_str(), frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( Format( _T( "{0}_000{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "%ls_000%d" ), root.c_str(), frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( Format( _T( "{0}_00{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "%ls_00%d" ), root.c_str(), frame ) );
 						if ( texture == Tools::TextureWad->DefaultTexture )
-							texture = Tools::Texture( Format( _T( "{0}_0{1}" ), root, frame ) );
+							texture = Tools::Texture( Format( _T( "%ls_0%d" ), root.c_str(), frame ) );
 
 						// Record object quad positions
 						int anim_to_mimick = 0;

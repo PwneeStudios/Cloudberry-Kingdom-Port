@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 	std::wstring StatsMenu::StatsCoinPercentGotten::Apply( const int &j )
 	{
-		return Format( _T( "{0}%" ), Stats[ j ]->getCoinPercentGotten() );
+		return Format( _T( "%d%%" ), Stats[ j ]->getCoinPercentGotten() );
 	}
 
 	StatsMenu::StatsBlobs::StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats )
