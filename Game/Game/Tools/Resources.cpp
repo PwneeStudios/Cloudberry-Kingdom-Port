@@ -1,9 +1,12 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/List.h"
+#include <Hacks/List.h>
+#include <Hacks/String.h>
 
-#include "Hacks/NET/Path.h"
-#include "Hacks/NET/Directory.h"
+#include <Hacks/NET/Path.h>
+#include <Hacks/NET/Directory.h>
+
+#include <iostream>
 
 namespace CloudberryKingdom
 {
@@ -258,8 +261,8 @@ std::shared_ptr<Thread> Resources::LoadThread = 0;
 
 		Tools::Write( Format( _T( "Load thread starts ... NOW!" ) ) );
 		//Tools::Write( Format( _T( "Load thread starts at {0}" ), DateTime::Now() ) );
-
-		Thread::SpinWait( 100 );
+		
+		//Thread::SpinWait( 100 );
 
 		Tools::Write( _T( "Start" ) );
 

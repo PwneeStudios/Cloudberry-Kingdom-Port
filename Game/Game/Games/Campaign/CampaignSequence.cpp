@@ -1,7 +1,8 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/Parse.h"
-#include "Hacks/FileReader.h"
+#include <Hacks/Parse.h>
+#include <Hacks/FileReader.h>
+#include <Hacks/String.h>
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,8 @@
 #include <global_header.h>
 
-#include "Hacks/List.h"
-#include "Hacks/Compare.h"
+#include <Hacks/List.h>
+#include <Hacks/Compare.h>
+#include <Hacks/String.h>
 
 namespace CloudberryKingdom
 {
