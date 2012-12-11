@@ -5,22 +5,25 @@
 
 #include "Hacks/XNA/MouseState.h"
 #include "Hacks/XNA/GamePadState.h"
+#include "Hacks/XNA/GameTime.h"
 #include "Hacks/NET/StreamReader.h"
 #include "Hacks/NET/StreamWriter.h"
 
+#include <MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h>
+
 namespace CloudberryKingdom
 {
-	class StringExtension
+	struct StringExtension
 	{
-	public:
+	
 //C# TO C++ CONVERTER TODO TASK: Extension methods are not available in C++:
 //ORIGINAL LINE: public static string Capitalize(this string s)
 		static std::wstring Capitalize( const std::wstring &s );
 	};
 
-	class Vector2Extension
+	struct Vector2Extension
 	{
-	public:
+	
 		template<typename T>
 		static int IndexMax( std::vector<T> list )
 		{
@@ -56,9 +59,9 @@ namespace CloudberryKingdom
 		static bool GE( Vector2 v1, Vector2 v2 );
 	};
 
-	class ListExtension
+	struct ListExtension
 	{
-	public:
+	
 		/// <summary>
 		/// Returns a single randomly chosen item from the list
 		/// </summary>
@@ -79,9 +82,9 @@ namespace CloudberryKingdom
 		}
 	};
 
-	class DictionaryExtension
+	struct DictionaryExtension
 	{
-	public:
+	
 
 		template<typename TKey, typename TValue>
 		static void AddOrOverwrite( std::map<TKey, TValue> &dict, TKey key, TValue value )
@@ -94,24 +97,24 @@ namespace CloudberryKingdom
 
 	};
 
-	class Tools
+	struct Tools
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class RemoveBitsLambda : public LambdaFunc_1<std::wstring, bool>
+	
+		struct RemoveBitsLambda : public LambdaFunc_1<std::wstring, bool>
 		{
 
-		public:
+		
 			RemoveBitsLambda();
 
 			bool Apply( const std::wstring &bit );
 
 		};
 
-	public:
+	
 		static void Assert( bool MustBeTrue );
 
 		static void Log( const std::wstring &dump );
@@ -267,9 +270,9 @@ namespace CloudberryKingdom
 
 		static std::shared_ptr<SimpleObject> LoadSimpleObject( const std::wstring &file );
 
-	private:
+	
 		static float _VolumeFade;
-	public:
+	
 		const static float &getVolumeFade();
 		static void setVolumeFade( const float &value );
 
@@ -415,9 +418,9 @@ namespace CloudberryKingdom
 		static bool DrawBoxes;
 		static bool DrawGraphics;
 		static bool StepControl;
-	private:
+	
 		static int _PhsxSpeed;
-	public:
+	
 		const static int &getPhsxSpeed();
 		static void setPhsxSpeed( const int &value );
 
@@ -475,25 +478,25 @@ namespace CloudberryKingdom
 
 		//static std::shared_ptr<Object> ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader );
 
-	private:
+	
 		//static void ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType );
 		static int WriteRecursiveDepth;
 		static int WriteObjId;
-	public:
+	
 //ORIGINAL LINE: public static void WriteFields(object obj, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		//static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
 
-	public:
+	
 //ORIGINAL LINE: public static void WriteFieldsToCode(object obj, string prefix, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		static void WriteFieldsToCode( const std::shared_ptr<Object> &obj, const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer, ... );
-	private:
+	
 		static int GetObjId();
 		static std::wstring ObjName( int id );
 		static std::wstring GetObjName();
 
-	public:
+	
 //ORIGINAL LINE: public static Dictionary<string, int> GetLocations(List<string> Bits, params string[] keywords)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		//static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
@@ -587,14 +590,14 @@ namespace CloudberryKingdom
 		/// Incremented when StartGUIDraw is called.
 		/// Decremented when EndGUIDraw is called.
 		/// </summary>
-	private:
+	
 		static int GUIDraws;
 
 		static float HoldIllumination;
 		/// <summary>
 		/// Call before drawing GUI elements unaffected by the camera.
 		/// </summary>
-	public:
+	
 		static void StartGUIDraw();
 
 		/// <summary>

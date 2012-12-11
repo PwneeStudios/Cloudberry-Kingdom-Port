@@ -6,10 +6,10 @@
 namespace CloudberryKingdom
 {
 
-	class BobLink : public std::enable_shared_from_this<BobLink>
+	struct BobLink : public std::enable_shared_from_this<BobLink>
 	{
 
-	public:
+	
 		int _j, _k;
 		std::shared_ptr<Bob> j, k;
 		float L, a_in, a_out, MaxForce;

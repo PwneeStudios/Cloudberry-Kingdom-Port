@@ -1,10 +1,10 @@
 #ifndef _STOPWATCH_H_
 #define _STOPWATCH_H_
 
-class Stopwatch
+struct Stopwatch
 {
 
-public:
+
 
 	long long ElapsedTicks;
 

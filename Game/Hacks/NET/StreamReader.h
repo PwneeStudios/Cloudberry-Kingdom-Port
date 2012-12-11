@@ -3,10 +3,10 @@
 
 #include "Hacks/NET/Stream.h"
 
-class StreamReader
+struct StreamReader
 {
 
-public:
+
 
 	StreamReader( const Stream &s )
 	{

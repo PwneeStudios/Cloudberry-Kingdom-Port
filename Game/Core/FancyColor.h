@@ -5,11 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	class FancyColor
+	struct FancyColor
 	{
-	private:
+	
 		std::shared_ptr<FancyVector2> clr1, clr2;
-	public:
+	
 		float getA();
 		Color getColor();
 		void setColor( const Color &value );
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 
 		FancyColor( Color color );
 
-	private:
+	
 		void Init( Color color );
 
 		void CreateVectors();
@@ -29,16 +29,16 @@ namespace CloudberryKingdom
 		static Vector2 Pair1( Vector4 v );
 		static Vector2 Pair2( Vector4 v );
 
-	public:
+	
 		Color GetDest();
 
 		void ToAndBack( Vector4 End, int Frames );
 		void ToAndBack( Vector4 Start, Vector4 End, int Frames );
 
-	private:
+	
 		LerpStyle DefaultLerpStyle;
 
-	public:
+	
 		void LerpTo( Vector4 End, int Frames );
 		void LerpTo( Vector4 End, int Frames, LerpStyle Style );
 		void LerpTo( Vector4 Start, Vector4 End, int Frames );
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 
 		Color Update();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

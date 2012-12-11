@@ -9,19 +9,19 @@
 
 namespace CloudberryKingdom
 {
-	class MainVideo
+	struct MainVideo
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		static std::shared_ptr<ContentManager> Content;
 
-	public:
+	
 		static bool Playing;
 
-	private:
+	
 		static std::shared_ptr<Video> CurrentVideo;
 		static std::shared_ptr<VideoPlayer> VPlayer;
 
@@ -37,12 +37,12 @@ namespace CloudberryKingdom
 		static int SubtitleIndex;
 		static std::shared_ptr<QuadClass> SubtitleQuad;
 
-	public:
+	
 		static void StartVideo_CanSkipIfWatched( const std::wstring &MovieName );
 
 		static void StartVideo_CanSkipIfWatched_OrCanSkipAfterXseconds( const std::wstring &MovieName, float LengthUntilCanSkip );
 
-	private:
+	
 		static void StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip );
 
 		/// <summary>
@@ -56,12 +56,12 @@ namespace CloudberryKingdom
 
 		static void Subtitle();
 
-	public:
+	
 		static bool Draw();
 
-	private:
+	
 		static bool Cleaned;
-	public:
+	
 		static void Finish();
 	};
 }

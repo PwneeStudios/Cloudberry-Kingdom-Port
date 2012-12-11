@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class BlockEmitter : public ObjectBase
+	struct BlockEmitter : public ObjectBase
 	{
-	public:
+	
 		MovingPlatform::MoveType MyMoveType;
 		float Amp;
 
-	private:
+	
 		std::vector<std::shared_ptr<MovingPlatform> > Platforms;
 
-	public:
+	
 		virtual void Release();
 
 		bool AlwaysOn, Active;
@@ -41,22 +41,22 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// When true the emitter will PreEmit on the next phsx step
 		/// </summary>
-	private:
+	
 		bool SetToPreEmit;
 
-	public:
+	
 		virtual void Reset( bool BoxesOnly );
 
-	private:
+	
 		void PreEmit();
 
-	public:
+	
 		bool GiveCustomRange;
 		bool GiveLayer;
-	private:
+	
 		void Emit( int offset );
 
-	public:
+	
 		void AddPlatform( const std::shared_ptr<MovingPlatform> &platform );
 
 		void RemovePlatform( const std::shared_ptr<MovingPlatform> &platform );
@@ -65,14 +65,14 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-	private:
+	
 		BoxStyle MyBoxStyle;
-	public:
+	
 		void Init( Vector2 pos, const std::shared_ptr<Level> &level, BoxStyle MyBoxStyle );
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

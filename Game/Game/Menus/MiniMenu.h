@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class MiniMenu : public Menu
+	struct MiniMenu : public Menu
 	{
-	public:
+	
 		int ItemsToShow;
-	private:
+	
 		int TopItem;
 		const int getBottomItem() const;
 		void setBottomItem( const int &value );
 
-	public:
+	
 		MiniMenu();
 
 		virtual void SelectItem( int Index );
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		Vector2 Shift;
 		virtual void DrawText( int Layer );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

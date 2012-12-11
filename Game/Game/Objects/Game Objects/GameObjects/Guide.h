@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class ShowGuide : public GUI_Panel
+	struct ShowGuide : public GUI_Panel
 	{
-	public:
+	
 		ShowGuide();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
 		virtual void MyPhsxStep();

@@ -5,30 +5,30 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxTime : public BobPhsxNormal
+	struct BobPhsxTime : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		enum Behavior
 		{
 			Behavior_PAUSE,
 			Behavior_REGULAR
 		};
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	public:
+	
 		static std::shared_ptr<BobPhsxTime> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxTime> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxTime> &bob );
 
-		// Instancable class
+		// Instancable struct
 		BobPhsxTime();
 
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
@@ -40,15 +40,15 @@ namespace CloudberryKingdom
 
 		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
 
-	private:
+	
 		Behavior CurBehavior;
 		int BehaviorLength;
-	public:
+	
 		virtual void GenerateInput( int CurPhsxStep );
 
 		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

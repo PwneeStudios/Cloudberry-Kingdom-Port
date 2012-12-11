@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class OscillateParams
+	struct OscillateParams
 	{
-	public:
+	
 		enum Type
 		{
 			Type_NONE,
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 			Type_JIGGLE
 		};
 
-	public:
+	
 		Type MyType;
 		void SetType( Type type );
 		void SetType( Type type, bool DoReset );
@@ -34,15 +34,15 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Dummy variable for internal use.
 		/// </summary>
-	private:
+	
 		float scale;
 
-	public:
+	
 		void Set( float w, float base_value, float max_addition );
 
-	private:
+	
 		float TargetJiggleScale;
-	public:
+	
 		void Reset();
 
 		/// <summary>
@@ -52,19 +52,19 @@ namespace CloudberryKingdom
 		bool Done;
 
 		//static float[] JiggleScale = { 1.25f, .9f, 1.08f, 1f };
-	private:
+	
 		static std::vector<float> JiggleScale;
 		float JigglePhsx();
 
 		float GetScale_GetBig( float speed );
 
-	public:
+	
 		float GetScale();
 	};
 
-	class Oscillate
+	struct Oscillate
 	{
-	public:
+	
 		static float GetAngle( float Step, float w );
 
 		static float GetScale_Oscillate( float Step, float w, float base_value, float max_addition );

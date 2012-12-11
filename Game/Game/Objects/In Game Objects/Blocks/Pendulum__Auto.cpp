@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 			MotionLevel[ element ] = temp_MotionLevel[ element ];
 	}
 
-	const std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();
+	std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();
 
 	const std::shared_ptr<Pendulum_AutoGen> &Pendulum_AutoGen::getInstance()
 	{

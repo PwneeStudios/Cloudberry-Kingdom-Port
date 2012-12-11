@@ -6,17 +6,17 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
+	struct BlockGroup;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -25,21 +25,21 @@ namespace CloudberryKingdom
 namespace CloudberryKingdom
 {
 	
-	class MovingBlock : public BlockBase, public IBound
+	struct MovingBlock : public BlockBase, public IBound
 	{
-	public:
-		class MovingBlockTileInfo : public TileInfoBase
+	
+		struct MovingBlockTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 
 			MovingBlockTileInfo();
 
-		private:
+		
 			void InitializeInstanceFields();
 		};
 
-	public:
+	
 		MovingBlockMoveType MoveType;
 		int Period, Offset;
 		Vector2 Displacement;
@@ -62,10 +62,10 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-	private:
+	
 		Vector2 CalcPosition( float t );
 
-	public:
+	
 		virtual void PhsxStep();
 
 		virtual void Draw();

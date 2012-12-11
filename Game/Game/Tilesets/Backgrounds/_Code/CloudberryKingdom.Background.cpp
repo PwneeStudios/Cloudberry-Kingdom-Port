@@ -4,6 +4,11 @@
 
 namespace CloudberryKingdom
 {
+	
+	// Statics
+	bool Background::GreenScreen;
+	std::shared_ptr<QuadClass> Background::TestQuad;
+	std::shared_ptr<EzTexture> Background::TestTexture;
 
 	void Background::AddRainLayer( const std::shared_ptr<Background> &b )
 	{
@@ -3983,10 +3988,6 @@ namespace CloudberryKingdom
 		if ( MyCollection != 0 )
 			MyCollection->Clear( Area );
 	}
-
-bool Background::GreenScreen = false;
-std::shared_ptr<QuadClass> Background::TestQuad = std::make_shared<QuadClass>();
-std::shared_ptr<EzTexture> Background::TestTexture = 0;
 
 	void Background::DrawTest()
 	{

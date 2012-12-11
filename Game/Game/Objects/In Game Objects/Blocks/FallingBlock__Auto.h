@@ -5,45 +5,45 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters;
+	struct AutoGen_Parameters;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class FallingBlock_Parameters : public AutoGen_Parameters
+	struct FallingBlock_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		Param Delay, Width, AngryRatio, AngrySpeed, AngryAccel, KeepUnused;
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 	};
 
-	class FallingBlock_AutoGen : public AutoGen
+	struct FallingBlock_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<FallingBlock_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<FallingBlock_AutoGen> instance;
+	
 		const static std::shared_ptr<FallingBlock_AutoGen> &getInstance();
 
-	public:
+	
 		FallingBlock_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

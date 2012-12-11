@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace Microsoft
@@ -19,27 +19,27 @@ namespace Microsoft
 	{
 		namespace Framework
 		{
-			class Vector2;
+			struct Vector2;
 		}
 	}
 }
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters;
+	struct AutoGen_Parameters;
 }
 
 namespace CloudberryKingdom
 {
-	class ParamInfo
+	struct ParamInfo
 	{
-	public:
+	
 		float MinValue, MaxValue, DefaultValue;
 
 		ParamInfo( float MinValue, float MaxValue, float DefaultValue );
 	};
 
-	class FireSpinner_Parameters : public AutoGen_Parameters
+	struct FireSpinner_Parameters : public AutoGen_Parameters
 	{
 		/*
 		public enum DirectionStyle { Homogenous, Random, HorizontalSplit, VerticalSplit };
@@ -72,35 +72,35 @@ namespace CloudberryKingdom
         public static ParamInfo _NumOffsets = new ParamInfo(1, 32, 4, c_NumOffsets, "Number of period offsets");
         static float c_NumOffsets(Upgrades u) { if (u[Upgrade.FireSpinner] > 6) return 8; else return 4; }
         */
-	public:
+	
 		Param MinDist, MinDensity, MaxDensity, Length, Period;
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 	};
 
-	class FireSpinner_AutoGen : public AutoGen
+	struct FireSpinner_AutoGen : public AutoGen
 	{
-	private:
-		class Cleanup_2Proxy : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct Cleanup_2Proxy : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			std::shared_ptr<FireSpinner_Parameters> Params;
 
-		public:
+		
 			Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
-	private:
-		static const std::shared_ptr<FireSpinner_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<FireSpinner_AutoGen> instance;
+	
 		const static std::shared_ptr<FireSpinner_AutoGen> &getInstance();
 
-	public:
+	
 		FireSpinner_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

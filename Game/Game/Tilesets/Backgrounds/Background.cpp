@@ -9,15 +9,34 @@ namespace CloudberryKingdom
 		BackgroundType::Random = std::make_shared<BackgroundTemplate>();
 		
 		BackgroundType::_Sea = std::make_shared<Background_Castle>( _T( "sea" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Sea->shared_from_this() );
+
 		BackgroundType::_Sea_Rain = std::make_shared<Background_Castle>( _T( "sea_rain" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Sea_Rain ->shared_from_this() );
+
 		BackgroundType::_Hills = std::make_shared<Background_Castle>( _T( "hills" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Hills->shared_from_this() );
+
 		BackgroundType::_Hills_Rain = std::make_shared<Background_Castle>( _T( "hills_rain" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Hills_Rain->shared_from_this() );
+
 		BackgroundType::_Forest = std::make_shared<Background_Castle>( _T( "forest" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Forest->shared_from_this() );
+
 		BackgroundType::_Forest_Rain = std::make_shared<Background_Castle>( _T( "forest_snow" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Forest_Rain->shared_from_this() );
+
 		BackgroundType::_Cloud = std::make_shared<Background_Castle>( _T( "cloud" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Cloud->shared_from_this() );
+
 		BackgroundType::_Cloud_Rain = std::make_shared<Background_Castle>( _T( "cloud_rain" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Cloud_Rain->shared_from_this() );
+
 		BackgroundType::_Cave = std::make_shared<Background_Castle>( _T( "cave" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Cave->shared_from_this() );
+
 		BackgroundType::_Castle = std::make_shared<Background_Castle>( _T( "castle" ) );
+		BackgroundType::AddTemplate( BackgroundType::_Castle->shared_from_this() );
 	}
 
 	std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > BackgroundType::NameLookup, BackgroundType::PathLookup;
@@ -70,7 +89,7 @@ namespace CloudberryKingdom
 		this->MadeOfCode = true;
 		this->MadeOfText = false;
 
-		BackgroundType::AddTemplate( shared_from_this() );
+		//BackgroundType::AddTemplate( shared_from_this() );
 	}
 
 	std::shared_ptr<Background> BackgroundTemplate::MakeInstanceOf()

@@ -6,16 +6,16 @@
 namespace CloudberryKingdom
 {
 	/// <summary>
-	/// A singleton class to store data about LevelConnectors.
+	/// A singleton struct to store data about LevelConnectors.
 	/// </summary>
-	class LevelConnector
+	struct LevelConnector
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		/// <summary> The object core string code for an end of level object level connector. </summary>
-	public:
+	
 		static std::wstring EndOfLevelCode;
 
 		/// <summary> The object core string code for a start of level object level connector. </summary>
@@ -25,9 +25,9 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Implemented by IObjects that connect levels together.
 	/// </summary>
-	class ILevelConnector : public ObjectBase
+	struct ILevelConnector : public ObjectBase
 	{
-	public:
+	
 		virtual const std::shared_ptr<LevelSeedData> &getNextLevelSeedData() const = 0;
 		virtual void setNextLevelSeedData( const std::shared_ptr<LevelSeedData> &value ) = 0;
 		virtual std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > getOnOpen() const = 0;

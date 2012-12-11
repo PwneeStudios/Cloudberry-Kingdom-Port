@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
 namespace CloudberryKingdom
 {
-	class ConveyorBlock : public BlockBase
+	struct ConveyorBlock : public BlockBase
 	{
-	public:
+	
 		std::shared_ptr<QuadClass> MyQuad, LeftEnd, RightEnd;
 
 		virtual void MakeNew();
@@ -28,13 +28,13 @@ namespace CloudberryKingdom
 		ConveyorBlock( bool BoxesOnly );
 
 		float Speed;
-	private:
+	
 		float u_offset;
 		Vector2 texture_size;
 		void SetUV();
 
 		Vector2 Size;
-	public:
+	
 		void Init( Vector2 center, Vector2 size );
 
 		virtual void Reset( bool BoxesOnly );
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

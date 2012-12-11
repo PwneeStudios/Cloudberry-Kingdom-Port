@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class SimpleBox
+	struct SimpleBox
 	{
-	public:
+	
 		bool Animated;
 		SimpleVector BL, TR;
 

@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class ColorHelper
+	struct ColorHelper
 	{
-	public:
+	
 		static Color GrayColor( float val );
 		static Vector4 Gray( float val );
 
-	private:
+	
 		static Matrix transform_red;
 
 		static Matrix transform_green;
 
 		static Matrix transform_blue;
 
-	public:
+	
 		static Matrix LinearColorTransform( float angle );
 
 		static Matrix PureColor( Color color );

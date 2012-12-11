@@ -8,6 +8,8 @@
 
 #include <iostream>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

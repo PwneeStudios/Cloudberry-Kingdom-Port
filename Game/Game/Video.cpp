@@ -2,6 +2,8 @@
 
 #include "Hacks/NET/Path.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -60,7 +62,7 @@ namespace CloudberryKingdom
 
 		if ( Content == 0 )
 		{
-			Content = std::make_shared<ContentManager>( Tools::GameClass->getServices(), _T("Content") );
+			Content = std::make_shared<ContentManager>( _T("Content") );
 		}
 
 		CanSkip = CanSkipVideo;

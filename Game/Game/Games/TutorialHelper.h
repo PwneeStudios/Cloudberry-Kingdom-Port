@@ -5,51 +5,51 @@
 
 namespace CloudberryKingdom
 {
-	class GUI_Text;
+	struct GUI_Text;
 }
 
 namespace CloudberryKingdom
 {
-	class GameData;
+	struct GameData;
 }
 
 namespace CloudberryKingdom
 {
-	class Lambda;
+	struct Lambda;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class TutorialHelper
+	struct TutorialHelper
 	{
-	private:
-		class TextKillerHelper : public Lambda
+	
+		struct TextKillerHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			TextKillerHelper( const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	private:
-		class ReadyGo_GoProxy : public Lambda
+	
+		struct ReadyGo_GoProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> game;
 			std::shared_ptr<Lambda> End;
 
-		public:
+		
 			ReadyGo_GoProxy( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End );
 
 			void Apply();
 		};
 
-	public:
+	
 		static Vector2 ReadyGoPos;
 		static void ReadyGo( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End );
 

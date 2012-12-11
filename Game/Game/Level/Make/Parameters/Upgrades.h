@@ -7,24 +7,24 @@ namespace CloudberryKingdom
 {
 	// Stores the level of each obstacles
 	// CalcGenData translates this into actual parameters
-	class Upgrades : public std::enable_shared_from_this<Upgrades>
+	struct Upgrades : public std::enable_shared_from_this<Upgrades>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		std::vector<float> UpgradeLevels;
 
 		Upgrades();
 
 		Upgrades( const std::shared_ptr<Upgrades> &u );
 
-	private:
+	
 		void Initialize();
 
 
-	public:
+	
 		void CopyFrom( const std::shared_ptr<Upgrades> &u );
 
 		/// <summary>

@@ -5,33 +5,33 @@
 
 namespace CloudberryKingdom
 {
-	class GameObject : public ObjectBase
+	struct GameObject : public ObjectBase
 	{
-	public:
+	
 		enum Tag
 		{
 			Tag_REMOVE_ON_LEVEL_FINISH,
 			Tag_CHAR_SELECT
 		};
-	private:
-		class OnCameraChangeProxy : public Lambda
+	
+		struct OnCameraChangeProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameObject> go;
 
-		public:
+		
 			OnCameraChangeProxy( const std::shared_ptr<GameObject> &go );
 
 			void Apply();
 		};
 
-	public:
-		class AddGameObjectToCoreHelper : public Lambda
+	
+		struct AddGameObjectToCoreHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameObject> obj;
 
-		public:
+		
 			AddGameObjectToCoreHelper( const std::shared_ptr<GameObject> &obj );
 
 			void Apply();
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		/// Tries to add the game object to the game object's level's game.
 		/// Returns true if failed.
 		/// </summary>
-	public:
+	
 		bool AttemptToReAdd();
 
 		std::shared_ptr<Set<Tag> > Tags;
@@ -59,27 +59,27 @@ namespace CloudberryKingdom
 		void setSoftPause( const bool &value );
 
 		const bool &getSoftPause() const;
-	private:
+	
 		bool _SoftPause;
 
 		/// <summary>
 		/// Whether to pause the game
 		/// </summary>
-	public:
+	
 		void setPauseGame( const bool &value );
 
 		const bool &getPauseGame() const;
-	private:
+	
 		bool _PauseGame;
 
 		/// <summary>
 		/// Whether to pause the level.
 		/// </summary>
-	public:
+	
 		void setPauseLevel( const bool &value );
 
 		const bool &getPauseLevel() const;
-	private:
+	
 		bool _PauseLevel;
 
 		/// <summary>
@@ -97,19 +97,19 @@ namespace CloudberryKingdom
 		/// </summary>
 		void AffectLevelPause();
 
-	public:
+	
 		void ForceRelease();
 
 		virtual void Release();
 
 		std::shared_ptr<Multicaster> OnRelease;
-	protected:
+	
 		virtual void ReleaseBody();
 
 		/// <summary>
 		/// The GameData this GameObject belongs to.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<GameData> MyGame;
 
 		virtual void MakeNew();
@@ -135,20 +135,20 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-	protected:
+	
 		virtual void MyDraw();
 
-	public:
+	
 		int SkipPhsx;
 		void PhsxStep();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
 		/// <summary>
 		/// Called immediately after this GameObject is added to a GameData.
 		/// </summary>
-	public:
+	
 		virtual void OnAdd();
 
 
@@ -157,7 +157,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		virtual void OnCameraChange();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

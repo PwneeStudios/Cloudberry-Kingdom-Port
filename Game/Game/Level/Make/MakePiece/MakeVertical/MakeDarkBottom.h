@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class MakeDarkBottom : public MakeFinalDoorVertical
+	struct MakeDarkBottom : public MakeFinalDoorVertical
 	{
-	public:
+	
 		MakeDarkBottom( const std::shared_ptr<Level> &level );
 
 		virtual void Phase3();

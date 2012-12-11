@@ -5,30 +5,30 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxInvert : public BobPhsxNormal
+	struct BobPhsxInvert : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		enum Behavior
 		{
 			Behavior_PAUSE,
 			Behavior_REGULAR
 		};
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxInvert> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxInvert> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxInvert> &bob );
 
-		// Instancable class
+		// Instancable struct
 		BobPhsxInvert();
 
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
@@ -40,10 +40,10 @@ namespace CloudberryKingdom
 
 		virtual void UpdateReadyToJump();
 
-	protected:
+	
 		virtual void DoJump();
 
-	public:
+	
 		void Invert();
 
 		virtual void Forced( Vector2 Dir );
@@ -54,20 +54,20 @@ namespace CloudberryKingdom
 
 		virtual bool ShouldStartJumpAnim();
 
-	private:
+	
 		Behavior CurBehavior;
 		int BehaviorLength;
-	public:
+	
 		virtual void GenerateInput( int CurPhsxStep );
 
-	private:
+	
 		int Count;
-	protected:
+	
 		virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 
 		virtual void PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData );
 
-	public:
+	
 		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
 
 		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 
 		virtual void DollInitialize();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

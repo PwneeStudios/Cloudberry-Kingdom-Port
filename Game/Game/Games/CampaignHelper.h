@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class CampaignHelper
+	struct CampaignHelper
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		static std::wstring GetName( int difficulty );

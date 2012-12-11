@@ -1,10 +1,10 @@
 #ifndef _MOUSESTATE_H_
 #define _MOUSESTATE_H_
 
-class MouseState
+struct MouseState
 {
 
-public:
+
 
 	int X;
 	int Y;

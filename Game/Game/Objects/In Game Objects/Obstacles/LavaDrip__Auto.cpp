@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		LavaDripStepCutoff = 1499;
 	}
 
-	const std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
+	std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
 
 	const std::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance()
 	{

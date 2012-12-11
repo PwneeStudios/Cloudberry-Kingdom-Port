@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class Recording
+	struct Recording
 	{
 		/// <summary>
 		/// The file this recording was loaded from.
 		/// </summary>
-	public:
+	
 		std::wstring SourceFile;
 
 		/// <summary>

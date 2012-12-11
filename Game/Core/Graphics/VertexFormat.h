@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class MyOwnVertexFormat// : public IVertexType //, IReadWrite
+	struct MyOwnVertexFormat// : public IVertexType //, IReadWrite
 	{
-	public:
+	
 		Vector2 xy;
 		Vector2 uv;
 		Color TheColor;

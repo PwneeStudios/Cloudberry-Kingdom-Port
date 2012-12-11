@@ -5,24 +5,24 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxBig : public BobPhsxNormal
+	struct BobPhsxBig : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxBig> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxBig> &getInstance();
 
-		// Instancable class
+		// Instancable struct
 		BobPhsxBig();
 	};
 }

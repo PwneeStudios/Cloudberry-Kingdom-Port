@@ -8,19 +8,19 @@
 
 namespace CloudberryKingdom
 {
-	class Chunks /*: public IEnumerable<Chunk*>*/
+	struct Chunks /*: public IEnumerable<Chunk*>*/
 	{
-	public:
+	
 		static std::shared_ptr<Chunks> Get( std::vector<unsigned char> Data );
 		static std::shared_ptr<Chunks> Get( std::shared_ptr<Chunk> Chunk );
 
-	private:
+	
 		std::vector<unsigned char> Data;
 
 		int _Position;
 		int _StartPosition;
 
-	public:
+	
 		Chunks( std::vector<unsigned char> Data, int offset );
 
 		void StartGettingChunks();
@@ -32,21 +32,21 @@ namespace CloudberryKingdom
 		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
 	};
 
-	/*class ChunkEnumerator : public IEnumerator<Chunk*>
+	/*struct ChunkEnumerator : public IEnumerator<Chunk*>
 	{
-	private:
+	
 		std::vector<unsigned char> Data;
 		int Position;
 		int DataLength;
 
-	public:
+	
 		ChunkEnumerator( std::vector<unsigned char> Data );
 
 		ChunkEnumerator( std::vector<unsigned char> Data, int Start, int DataLength );
 
-	private:
+	
 		std::shared_ptr<Chunk> _Current;
-	public:
+	
 		const std::shared_ptr<Chunk> &getCurrent() const;
 
 		bool MoveNext();
@@ -57,29 +57,29 @@ namespace CloudberryKingdom
 
 		~ChunkEnumerator();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};*/
 
-	class Chunk /*: public IEnumerable<Chunk*>*/
+	struct Chunk /*: public IEnumerable<Chunk*>*/
 	{
-	public:
+	
 		int Type;
 		int Length;
 
-	public:
+	
 		std::vector<unsigned char> Buffer;
 		int Position;
 
-	public:
+	
 		Chunk();
 
 		Chunk( int Capacity );
 
-	private:
+	
 		void Initialize( int Capacity );
 
-	public:
+	
 		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
 		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
@@ -89,17 +89,17 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Expand();
 
-	private:
+	
 		void SetTypeAndLength();
 
-	public:
+	
 		void Finish( const std::shared_ptr<BinaryWriter> &writer );
 		void Finish( Chunk &ParentChunk );
 
-	private:
+	
 		void EnsureRoom( int Size );
 
-	public:
+	
 		void Write( const unsigned char *data, int length );
 		void Write( const unsigned char *data, int startIndex, int length );
 
@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 		void WriteSingle( int type, float val );
 		void WriteSingle( int type, const std::wstring &val );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -5,31 +5,31 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxNormal : public BobPhsx
+	struct BobPhsxNormal : public BobPhsx
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	private:
+	
 		static std::shared_ptr<BobPhsxNormal> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxNormal> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxNormal> &bob );
 
-		// Instancable class
-	private:
+		// Instancable struct
+	
 		bool InitializedAnim;
 
 
-	protected:
+	
 		std::shared_ptr<EzSound> LandSound;
-	private:
+	
 		std::shared_ptr<EzSound> DoubleJump;
 		std::shared_ptr<EzSound> ThrustSound;
 		int ThrustSoundDelay;
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		int RndMoveType, Offset;
 		int RndThrustType;
 
-	public:
+	
 		virtual bool getSticky();
 
 		int BobFallDelay;
@@ -78,27 +78,27 @@ namespace CloudberryKingdom
 		/// </summary>
 		int CountSinceApex;
 
-	private:
+	
 		int AutoMoveLength, AutoMoveType, AutoStrafeLength, AutoSetToJumpLength, AutoSetToJumpType;
 		int AutoDirLength, AutoDir, AutoDirLength_SetTo;
 		int AutoFallOrJumpLength, AutoFallOrJump;
 
-	public:
+	
 		int NumJumps;
-	protected:
+	
 		int CurJump;
-	private:
+	
 		int JumpDelay;
 		int JumpDelayCount;
 		//static int ComputerJumpDelay = 55;
 
-	public:
+	
 		bool JetPack;
 		int JetPackLength;
 		int JetPackCushion;
 
 		/// <summary> The number of frames the jetpack has been activated, since last touchdown </summary>
-	private:
+	
 		int JetPackCount;
 
 		/// <summary> Y velocity must be less than this to jump </summary>
@@ -107,12 +107,12 @@ namespace CloudberryKingdom
 		/// <summary> Y velocity must be less than this thrust with the jetpack </summary>
 		float MaxVerticalSpeed_Thrust;
 
-	protected:
+	
 		bool StartJumpAnim;
 
 
 
-	public:
+	
 		BobPhsxNormal();
 
 		BobPhsxNormal( int NumJumps, bool JetPack );
@@ -140,9 +140,9 @@ namespace CloudberryKingdom
 		virtual void PhsxStep2();
 
 
-	protected:
+	
 		bool AutoAllowComputerToJumpOnLand;
-	public:
+	
 		virtual void UpdateReadyToJump();
 
 		bool getCanJump() const;
@@ -155,12 +155,12 @@ namespace CloudberryKingdom
 		/// For this many frames Bob will not stick to blocks
 		/// (so that he can successfully jump off of fast upward moving blocks)
 		/// </summary>
-	private:
+	
 		int NoStickPeriod;
-	protected:
+	
 		virtual void DoJump();
 
-	public:
+	
 		virtual float GetXAccel();
 
 		virtual void DoXAccel();
@@ -177,11 +177,11 @@ namespace CloudberryKingdom
 
 
 		// Survival variables
-	private:
+	
 		std::shared_ptr<BlockBase> SafetyBlock;
 		int JumpCountdown, TurnCountdown, Dir;
 
-	public:
+	
 		void GenerateInput_Survival( int CurPhsxStep );
 
 		float MinHeightAttained, MinGroundHeightAttained;
@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 
 
 		/// <summary> When true Bob aims to go as high as possible </summary>
-	private:
+	
 		bool Up;
 
 		void GenerateInput_Right( int CurPhsxStep );
@@ -197,13 +197,13 @@ namespace CloudberryKingdom
 
 
 void HighThrusts( int CurPhsxStep );
-protected:
+
 virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 
 		virtual void PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData );
 
 
-	public:
+	
 		virtual void GenerateInput( int CurPhsxStep );
 
 		float ForcedJumpDamping;
@@ -213,7 +213,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 
 		virtual void AnimStep();
 
-	protected:
+	
 		void BezierAnimStep();
 
 		virtual void SpriteAnimStep();
@@ -221,23 +221,23 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 		/// <summary>
 		/// Whether we should start playing the jump animation.
 		/// </summary>
-	public:
+	
 		virtual bool ShouldStartJumpAnim();
 
 		virtual void SetDeathVel( BobDeathType DeathType );
 
 
-	protected:
+	
 		void Explode();
 
-	public:
+	
 		virtual void Die( BobDeathType DeathType );
 
 		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 		virtual void DollInitialize();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -1,18 +1,24 @@
 #include <global_header.h>
 
+#include "CloudberryKingdom.XnaGameClass.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
 	XnaGameClass::XnaGameClass()
 	{
-		Tools::GameClass = shared_from_this();
+		Content = std::make_shared<ContentManager>( _T( "Content" ) );
+
+		//Tools::GameClass = shared_from_this();
 		MyGame = std::make_shared<CloudberryKingdomGame>();
+		Tools::TheGame = MyGame;
 
 	#if defined(PC_VERSION)
 	#elif defined(XBOX) || defined(XBOX_SIGNIN)
 		getComponents()->Add(std::make_shared<GamerServicesComponent>(this));
 	#endif
-		getContent()->RootDirectory = _T("Content");
 	}
 
 	bool XnaGameClass::getIsActive()
@@ -33,7 +39,7 @@ namespace CloudberryKingdom
 		//getWindow()->Title = _T("Cloudberry Kingdom ");
 		// FIXME: Set the title of the window to "Cloudberry Kingdom "
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Initialize();
 	}
 
@@ -41,7 +47,7 @@ namespace CloudberryKingdom
 	{
 		MyGame->LoadContent();
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::LoadContent();
 	}
 
@@ -56,7 +62,7 @@ namespace CloudberryKingdom
 
 		MyGame->Update();
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Update( gameTime );
 	}
 
@@ -64,7 +70,7 @@ namespace CloudberryKingdom
 	{
 		MyGame->Draw( gameTime );
 
-		// This called the XNA base game class method. Should not be needed.
+		// This called the XNA base game struct method. Should not be needed.
 		//Game::Draw( gameTime );
 	}
 

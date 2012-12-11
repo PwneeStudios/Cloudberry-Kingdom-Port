@@ -6,9 +6,9 @@
 namespace CloudberryKingdom
 {
 
-	class ClrTextFx : public Buyable
+	struct ClrTextFx : public Buyable
 	{
-	public:
+	
 		int Guid, Price;
 		int GetGuid();
 		int GetPrice();

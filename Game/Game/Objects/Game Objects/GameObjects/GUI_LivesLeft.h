@@ -9,86 +9,86 @@ namespace CloudberryKingdom
 	/// A GUI element that tracks how many lives are left.
 	/// Element also shows how many lives are left, displayed after all players die and the level resets.
 	/// </summary>
-	class GUI_LivesLeft : public GUI_Panel
+	struct GUI_LivesLeft : public GUI_Panel
 	{
-	private:
-		class BringStartDelayHelper : public Lambda
+	
+		struct BringStartDelayHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			BringStartDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	private:
-		class BringShowLengthHelper : public Lambda
+	
+		struct BringShowLengthHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			BringShowLengthHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	private:
-		class BringInitialDelayHelper : public Lambda
+	
+		struct BringInitialDelayHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			BringInitialDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	private:
-		class OnResetProxy : public Lambda
+	
+		struct OnResetProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			OnResetProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	private:
-		class OnDoneDyingProxy : public Lambda
+	
+		struct OnDoneDyingProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			OnDoneDyingProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	private:
-		class OnDeathProxy : public Lambda
+	
+		struct OnDeathProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GUI_LivesLeft> guiLl;
 
-		public:
+		
 			OnDeathProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
-	public:
+	
 		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_LivesLeft> > > OnOutOfLives;
 
-	private:
+	
 		int _NumLives;
-	public:
+	
 		const int &getNumLives() const;
 		void setNumLives( const int &value );
 
@@ -97,14 +97,14 @@ namespace CloudberryKingdom
 		/// </summary>
 		virtual std::wstring ToString();
 
-	private:
+	
 		std::shared_ptr<EzText> LivesLeftText;
 		void UpdateLivesLeftText();
 
-	public:
+	
 		GUI_LivesLeft( int Lives );
 
-	private:
+	
 		void SetPos();
 
 		bool UseBlackBack;
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 		void SetParams();
 
 		bool PauseOnShow;
-	public:
+	
 		void Bring();
 
 
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 
 		virtual void OnAdd();
 
-	private:
+	
 		int LastLife;
 		void OnReset();
 
@@ -131,12 +131,12 @@ namespace CloudberryKingdom
 
 		void OnDeath();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
 		virtual void MyDraw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

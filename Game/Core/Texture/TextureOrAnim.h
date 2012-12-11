@@ -7,12 +7,12 @@ namespace CloudberryKingdom
 {
 	/// <summary>
 	/// Wraps either an EzTexture or an AnimationData_Texture.
-	/// The purpose of this class is to let a quad's texture be easily replaced by an animation, without additional fuss.
-	/// Would be better to implement this functionality with inheritance, with EzTexture and AnimationData_Texture inheriting from a base class.
+	/// The purpose of this struct is to let a quad's texture be easily replaced by an animation, without additional fuss.
+	/// Would be better to implement this functionality with inheritance, with EzTexture and AnimationData_Texture inheriting from a base struct.
 	/// </summary>
-	class TextureOrAnim
+	struct TextureOrAnim
 	{
-	public:
+	
 		std::shared_ptr<EzTexture> MyTexture;
 		std::shared_ptr<AnimationData_Texture> MyAnim;
 		bool IsAnim;
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<TextureOrAnim> Get( const std::shared_ptr<EzTexture> &texture );
 		static std::shared_ptr<TextureOrAnim> Get( const std::wstring &name );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

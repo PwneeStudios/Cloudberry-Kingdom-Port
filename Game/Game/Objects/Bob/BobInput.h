@@ -4,9 +4,9 @@
 
 namespace CloudberryKingdom
 {
-	class BobInput
+	struct BobInput
 	{
-	public:
+	
 		bool A_Button, B_Button;
 		Vector2 xVec;
 

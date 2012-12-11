@@ -6,61 +6,61 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class EzSound;
+	struct EzSound;
 }
 
 namespace CloudberryKingdom
 {
-	class Particle;
+	struct Particle;
 }
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class GameData;
+	struct GameData;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class Coin : public ObjectBase
+	struct Coin : public ObjectBase
 	{
-	public:
+	
 		enum CoinType
 		{
 			CoinType_BLUE,
 			CoinType_RED
 		};
-	public:
-		class CoinTileInfo : public TileInfoBase
+	
+		struct CoinTileInfo : public TileInfoBase
 		{
 			//public SpriteInfo Sprite = new SpriteInfo("CoinBlue2", new Vector2(105, -1));
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 
 			Vector2 BoxSize;
@@ -72,11 +72,11 @@ namespace CloudberryKingdom
 			std::shared_ptr<Particle> DieTemplate;
 			CoinTileInfo();
 
-		private:
+		
 			void InitializeInstanceFields();
 		};
 
-	public:
+	
 		bool Touched;
 
 		std::shared_ptr<AABox> Box;
@@ -93,23 +93,23 @@ namespace CloudberryKingdom
 		static Vector2 PosOfLastCoinGrabbed;
 		void Die();
 
-	private:
+	
 		const std::shared_ptr<GameData> &getMyGame() const;
 
-	public:
+	
 		int CalcScoreValue();
 
 		CoinType MyType;
 
 		void SetType( CoinType type );
 
-	private:
+	
 		bool AlwaysActive;
-	public:
+	
 		int Offset, Period;
-	private:
+	
 		Vector2 Radii;
-	public:
+	
 		Vector2 GetPos();
 
 		virtual void PhsxStep();
@@ -122,14 +122,14 @@ namespace CloudberryKingdom
 
 		virtual void Interact( const std::shared_ptr<Bob> &bob );
 
-	private:
+	
 		static Vector2 DrawGrace;
-	public:
+	
 		virtual void Draw();
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

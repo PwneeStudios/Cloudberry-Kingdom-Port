@@ -5,30 +5,30 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
+	struct Lambda;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class AlertBaseMenu : public CkBaseMenu
+	struct AlertBaseMenu : public CkBaseMenu
 	{
-	private:
-		class OkProxy : public Lambda
+	
+		struct OkProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<AlertBaseMenu> abm;
 
-		public:
+		
 			OkProxy( const std::shared_ptr<AlertBaseMenu> &abm );
 
 			void Apply();
@@ -37,29 +37,29 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called when the user presses OK.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Lambda> OnOk;
 
-	protected:
+	
 		void Ok();
 
 		virtual void ReleaseBody();
 
-	public:
+	
 		AlertBaseMenu();
 
-	private:
+	
 		Localization::Words Message, OkText;
-	public:
+	
 		AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText );
 
 		AlertBaseMenu( bool CallBaseConstructor );
 
-	protected:
+	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
 
 		std::shared_ptr<QuadClass> Backdrop;
-	public:
+	
 		virtual void MakeBackdrop();
 
 		virtual void Init();

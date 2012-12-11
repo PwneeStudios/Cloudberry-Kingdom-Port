@@ -3,15 +3,15 @@
 
 namespace CloudberryKingdom
 {
-	class Upgrades;
+	struct Upgrades;
 }
 
 
 namespace CloudberryKingdom
 {
-	class PresetUpgrades
+	struct PresetUpgrades
 	{
-	public:
+	
 		static std::shared_ptr<Upgrades> GetUpgrade1();
 
 		static std::shared_ptr<Upgrades> GetUpgrade2();

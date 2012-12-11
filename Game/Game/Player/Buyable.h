@@ -4,10 +4,10 @@
 namespace CloudberryKingdom
 {
 
-	class Buyable : public Object
+	struct Buyable : public Object
 	{
 
-	public:
+	
 		virtual ~Buyable() { }
 
 		virtual int GetGuid() = 0;

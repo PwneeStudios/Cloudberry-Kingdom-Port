@@ -1,10 +1,10 @@
 #ifndef _STRINGBUILDER_H_
 #define _STRINGBUILDER_H_
 
-class StringBuilder
+struct StringBuilder
 {
 
-public:
+
 
 	StringBuilder( const std::wstring &str )
 	{

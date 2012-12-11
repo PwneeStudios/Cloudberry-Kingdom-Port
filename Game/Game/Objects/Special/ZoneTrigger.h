@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class ZoneTrigger : public ObjectBase
+	struct ZoneTrigger : public ObjectBase
 	{
-	public:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<ZoneTrigger> > > MyContainsEvent;
 
-	private:
+	
 		std::shared_ptr<AABox> Box;
 
-	public:
+	
 		virtual void MakeNew();
 
 		ZoneTrigger();

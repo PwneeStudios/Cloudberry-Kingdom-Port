@@ -5,17 +5,17 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundFloater
+	struct BackgroundFloater
 	{
-	private:
+	
 		float _SpinVelocity;
-	public:
+	
 		const float &getSpinVelocity() const;
 		void setSpinVelocity( const float &value );
 
-	private:
+	
 		std::shared_ptr<Level> MyLevel;
-	public:
+	
 		std::wstring Name;
 
 		std::shared_ptr<QuadClass> MyQuad;
@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

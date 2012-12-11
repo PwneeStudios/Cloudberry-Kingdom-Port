@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		Snakes = std::vector<std::vector<unsigned long long> >();
 	}
 
-const std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make_shared<Firesnake_AutoGen>();
+std::shared_ptr<Firesnake_AutoGen> Firesnake_AutoGen::instance = std::make_shared<Firesnake_AutoGen>();
 
 	const std::shared_ptr<Firesnake_AutoGen> &Firesnake_AutoGen::getInstance()
 	{

@@ -6,22 +6,22 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
+	struct BlockGroup;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -29,25 +29,25 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class Pendulum : public BlockBase, public IBound
+	struct Pendulum : public BlockBase, public IBound
 	{
-	public:
-		class PendulumTileInfo : public TileInfoBase
+	
+		struct PendulumTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			PendulumTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		PendulumMoveType MoveType;
 
 		float Angle, MaxAngle, Length;
@@ -75,11 +75,11 @@ public:
 		virtual void Reset( bool BoxesOnly );
 
 		float AddAngle;
-	private:
+	
 		float CorrespondingAngle;
 		Vector2 CalcPosition( float t );
 
-	public:
+	
 		float MyTime;
 		virtual void PhsxStep();
 
@@ -93,7 +93,7 @@ public:
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

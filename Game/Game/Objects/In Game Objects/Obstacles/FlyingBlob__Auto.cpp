@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		TunnelMotionType = MotionType_HORIZONTAL;
 	}
 
-const std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_shared<FlyingBlob_AutoGen>();
+std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_shared<FlyingBlob_AutoGen>();
 
 	const std::shared_ptr<FlyingBlob_AutoGen> &FlyingBlob_AutoGen::getInstance()
 	{

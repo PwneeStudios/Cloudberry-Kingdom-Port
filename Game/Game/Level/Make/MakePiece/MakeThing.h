@@ -3,9 +3,9 @@
 
 namespace CloudberryKingdom
 {
-	class MakeThing
+	struct MakeThing
 	{
-	public:
+	
 		MakeThing() { }
 		virtual ~MakeThing() { }
 

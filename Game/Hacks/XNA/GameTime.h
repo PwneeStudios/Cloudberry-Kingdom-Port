@@ -3,10 +3,10 @@
 
 #include "Hacks/NET/TimeSpan.h"
 
-class GameTime
+struct GameTime
 {
 
-public:
+
 	// FIXME: WTF do these do?
 	TimeSpan ElapsedGameTime;
 	TimeSpan TotalGameTime;

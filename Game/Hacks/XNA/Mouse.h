@@ -1,10 +1,10 @@
 #ifndef _MOUSE_H_
 #define _MOUSE_H_
 
-class Mouse
+struct Mouse
 {
 	
-public:
+
 
 	static void SetPosition( int x, int y )
 	{

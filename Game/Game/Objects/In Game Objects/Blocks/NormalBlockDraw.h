@@ -3,10 +3,10 @@
 
 namespace CloudberryKingdom
 {
-	class NormalBlockDraw
+	struct NormalBlockDraw
 	{
 
-	public:
+	
 		bool Shadow;
 		Vector2 ShadowOffset;
 		Color ShadowColor;
@@ -14,10 +14,10 @@ namespace CloudberryKingdom
 		Color Tint;
 
 		std::shared_ptr<PieceQuad> MyPieces, MyTemplate;
-	private:
+	
 		std::shared_ptr<BlockBase> MyBlock;
 
-	public:
+	
 		NormalBlockDraw();
 
 		void MakeNew();
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 
 		void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

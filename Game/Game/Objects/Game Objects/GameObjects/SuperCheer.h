@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class GameData;
+	struct GameData;
 }
 
 
@@ -13,29 +13,29 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class SuperCheer : public GameObject
+	struct SuperCheer : public GameObject
 	{
-	private:
-		class CheerHelper : public Lambda
+	
+		struct CheerHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<GameData> mygame;
 			Vector2 pos;
 
-		public:
+		
 			CheerHelper( const std::shared_ptr<GameData> &mygame, Vector2 pos );
 
 			void Apply();
 		};
 
-	private:
+	
 		int Rows;
-	public:
+	
 		SuperCheer( int Rows );
 
 		virtual void OnAdd();
 
-	private:
+	
 		void AddWave( int Delay );
 	};
 }

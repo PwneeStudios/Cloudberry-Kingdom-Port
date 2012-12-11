@@ -4,7 +4,7 @@
 struct TimeSpan
 {
 
-public:
+
 	float TotalMinutes;
 	float TotalSeconds;
 	int Hours;

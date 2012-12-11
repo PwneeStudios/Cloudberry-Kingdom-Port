@@ -6,10 +6,10 @@
 namespace CloudberryKingdom
 {
 	
-	class ObjectBase : public std::enable_shared_from_this<ObjectBase>
+	struct ObjectBase : public std::enable_shared_from_this<ObjectBase>
 	{
 
-	public:
+	
 		const std::shared_ptr<GameData> &getGame() const;
 		const std::shared_ptr<Level> &getMyLevel() const;
 		const std::shared_ptr<Camera> &getCam() const;
@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 
-	protected:
+	
 		std::shared_ptr<ObjectData> CoreData;
-	public:
+	
 		const std::shared_ptr<ObjectData> &getCore() const;
 		const std::shared_ptr<TileSetInfo> getInfo() const;
 
@@ -57,9 +57,9 @@ namespace CloudberryKingdom
 		virtual bool PreDecision( const std::shared_ptr<Bob> &bob );
 	};
 
-	class GenerationData
+	struct GenerationData
 	{
-	public:
+	
 		enum OverlapPreference
 		{
 			OverlapPreference_REMOVE_LOWER_THAN_ME,
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Prevents an obstacle from being deleted if it is unused, including in object cleanup phase due to crowding.
 		/// </summary>
-	public:
+	
 		bool KeepIfUnused;
 
 		/// <summary>
@@ -134,23 +134,23 @@ namespace CloudberryKingdom
 		void Init();
 	};
 
-	class ObjectData
+	struct ObjectData
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
-		class AssociatedObjData
+	
+		struct AssociatedObjData
 		{
-		public:
+		
 			unsigned long long Guid;
 			bool DeleteWhenDeleted, UseWhenUsed;
 
 			void Zero();
 		};
 
-	public:
+	
 		const std::shared_ptr<Recycler> getRecycle() const;
 
 		/// <summary>
@@ -168,9 +168,9 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool WakeUpRequirements;
 
-	private:
+	
 		std::shared_ptr<TileSet> _TileSet;
-	public:
+	
 		const std::shared_ptr<TileSet> &getMyTileSet() const;
 		void setMyTileSet( const std::shared_ptr<TileSet> &value );
 
@@ -340,10 +340,10 @@ namespace CloudberryKingdom
 
 		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		ObjectData()
 		{
 			InitializeInstanceFields();

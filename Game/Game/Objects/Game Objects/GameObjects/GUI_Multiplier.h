@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -13,25 +13,25 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class GUI_Multiplier : public GUI_Panel
+	struct GUI_Multiplier : public GUI_Panel
 	{
 		/// <summary>
 		/// Return a string representation of the Multiplier
 		/// </summary>
-	public:
+	
 		virtual std::wstring ToString();
 
-	private:
+	
 		bool AddedOnce;
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
 		virtual int GetMultiplier();
 
-	private:
+	
 		int Multiplier;
 		void SetMultiplier( int Multiplier );
 
@@ -39,19 +39,19 @@ namespace CloudberryKingdom
 		void UpdateMultiplierText();
 
 		bool DoSlideIn;
-	public:
+	
 		GUI_Multiplier( int Style );
 		GUI_Multiplier( int Style, bool SlideIn );
 
-	private:
+	
 		void DoInit( int Style, bool SlideIn );
 
-	protected:
+	
 		virtual void MyDraw();
 
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

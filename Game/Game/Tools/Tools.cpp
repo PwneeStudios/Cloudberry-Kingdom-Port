@@ -10,6 +10,8 @@
 #include "Hacks/XNA/MediaPlayer.h"
 #include "Hacks/XNA/Mouse.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

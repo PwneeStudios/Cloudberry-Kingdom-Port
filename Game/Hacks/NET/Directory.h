@@ -1,10 +1,10 @@
 #ifndef _DIRECTORY_H_
 #define _DIRECTORY_H_
 
-class Directory
+struct Directory
 {
 
-public:
+
 	
 	static std::wstring GetCurrentDirectory()
 	{

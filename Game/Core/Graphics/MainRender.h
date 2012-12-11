@@ -5,11 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	class MainRender
+	struct MainRender
 	{
-	private:
+	
 		std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
-	public:
+	
 		float SpriteScaling;
 
 		Viewport MainViewport;
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void EndSpriteBatch();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

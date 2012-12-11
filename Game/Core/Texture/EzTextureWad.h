@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class EzTextureWad
+	struct EzTextureWad
 	{
-	public:
+	
 		std::shared_ptr<TextureOrAnim> FindTextureOrAnim( const std::wstring &name );
 
 		/// <summary>
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<EzTexture> AddTexture_Fast( const std::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &LowerPath, const std::wstring &BigName, const std::wstring &Folder );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

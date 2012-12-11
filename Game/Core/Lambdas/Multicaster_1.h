@@ -6,12 +6,12 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	class Multicaster_1 : public Lambda_1<T>
+	struct Multicaster_1 : public Lambda_1<T>
 	{
-	private:
+	
 		std::vector<std::shared_ptr<Lambda_1<T> > > MyList;
 
-	public:
+	
 		void Apply( const T &t )
 		{
 			for ( std::vector<std::shared_ptr<Lambda_1<T> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
@@ -28,13 +28,13 @@ namespace CloudberryKingdom
 			MyList.push_back( L );
 		}
 
-	private:
+	
 		void InitializeInstanceFields()
 		{
 			MyList = std::vector<std::shared_ptr<Lambda_1<T> > >();
 		}
 
-public:
+
 		Multicaster_1()
 		{
 			InitializeInstanceFields();

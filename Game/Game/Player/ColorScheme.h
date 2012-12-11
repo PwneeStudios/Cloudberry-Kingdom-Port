@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class MenuListItem
+	struct MenuListItem
 	{
-	public:
+	
 		std::shared_ptr<Object> obj;
 		Localization::Words word;
 
 		MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word );
 	};
 
-	class Hat : public Buyable
+	struct Hat : public Buyable
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		int GetGuid();
 		int GetPrice();
 
@@ -57,44 +57,44 @@ namespace CloudberryKingdom
 
 		Hat( const std::wstring &QuadName, bool DrawHead, bool DrawSelf );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class ColorScheme
+	struct ColorScheme
 	{
-	private:
-		class FindColorLambda : public LambdaFunc_1<std::shared_ptr<MenuListItem> , bool>
+	
+		struct FindColorLambda : public LambdaFunc_1<std::shared_ptr<MenuListItem> , bool>
 		{
-		private:
+		
 			Localization::Words word;
-		public:
+		
 			FindColorLambda( Localization::Words word );
 
 			bool Apply( const std::shared_ptr<MenuListItem> &item );
 		};
 
-	private:
-		class FindHatLambda : public LambdaFunc_1<std::shared_ptr<Hat> , bool>
+	
+		struct FindHatLambda : public LambdaFunc_1<std::shared_ptr<Hat> , bool>
 		{
-		private:
+		
 			Localization::Words word;
-		public:
+		
 			FindHatLambda( Localization::Words word );
 
 			bool Apply( const std::shared_ptr<Hat> &item );
 		};
 
-	public:
+	
 		virtual std::wstring ToString();
 
-	private:
+	
 		int IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr );
 
 		int IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat );
 
 
-	public:
+	
 		void WriteChunk_0( const std::shared_ptr<BinaryWriter> &writer );
 
 		void ReadChunk_0( const std::shared_ptr<Chunk> &chunk );

@@ -1,10 +1,10 @@
 #ifndef _GAMEPADDPAD_H_
 #define _GAMEPADDPAD_H_
 
-class GamePadDPad
+struct GamePadDPad
 {
 
-public:
+
 
 	ButtonState Down;
 	ButtonState Left;

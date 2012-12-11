@@ -1,10 +1,10 @@
 #ifndef _SPRITEFONT_H_
 #define _SPRITEFONT_H_
 
-class SpriteFont
+struct SpriteFont
 {
 
-public:
+
 
 	float Spacing;
 	int LineSpacing;

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class NormalBlock_Parameters : public AutoGen_Parameters
+	struct NormalBlock_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		Param KeepUnused;
 
 		/// <summary>
@@ -27,35 +27,35 @@ namespace CloudberryKingdom
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		NormalBlock_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class NormalBlock_AutoGen : public AutoGen
+	struct NormalBlock_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<NormalBlock_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<NormalBlock_AutoGen> instance;
+	
 		const static std::shared_ptr<NormalBlock_AutoGen> &getInstance();
 
-	public:
+	
 		NormalBlock_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void MakeWall( const std::shared_ptr<Level> &level );
 
 		std::shared_ptr<NormalBlock_Parameters> GetParams( const std::shared_ptr<Level> &level );
 
-	public:
+	
 		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

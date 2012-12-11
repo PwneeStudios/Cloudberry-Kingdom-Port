@@ -13,50 +13,50 @@
 namespace CloudberryKingdom
 {
 
-	class CloudberryKingdomGame : public std::enable_shared_from_this<CloudberryKingdomGame>
+	struct CloudberryKingdomGame : public std::enable_shared_from_this<CloudberryKingdomGame>
 	{
 
-	public:
+	
 		static void StaticIntializer_NoDependence();
 		static void StaticIntializer_AfterResourcesLoad();
 
-	public:
-		class ExitProxy : public Lambda
+	
+		struct ExitProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CloudberryKingdomGame> ckg;
 
-		public:
+		
 			ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg );
 
 			void Apply();
 		};
 
-	private:
-		class UpdateVolumeProxy : public Lambda
+	
+		struct UpdateVolumeProxy : public Lambda
 		{
-		public:
+		
 			void Apply();
 		};
 
-	private:
-		class MakeTestLevelInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct MakeTestLevelInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<CloudberryKingdomGame> ckg;
 
-		public:
+		
 			MakeTestLevelInitializeHelper( const std::shared_ptr<CloudberryKingdomGame> &ckg );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &piece );
 		};
 
-	private:
-		class TestLevelPostMakeProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct TestLevelPostMakeProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		private:
+		
 			std::shared_ptr<CloudberryKingdomGame> ckg;
-		public:
+		
 			TestLevelPostMakeProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg );
 
 			void Apply( const std::shared_ptr<Level> &level );
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		/// MinorVersion increases with substantial change.
 		/// SubVersion increases with any pushed change.
 		/// </summary>
-	public:
+	
 		static Version GameVersion;
 
 		/// <summary>
@@ -108,9 +108,9 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 		std::shared_ptr<QuadClass> MousePointer, MouseBack;
-	private:
+	
 		bool _DrawMouseBackIcon;
-	public:
+	
 		const bool &getDrawMouseBackIcon() const;
 		void setDrawMouseBackIcon( const bool &value );
 #endif
@@ -125,13 +125,13 @@ namespace CloudberryKingdom
 		static bool SimpleAiColors;
 #endif
 
-	private:
+	
 		bool LogoScreenUp;
 
 		/// <summary>
 		/// When true the initial loading screen is drawn even after loading is finished
 		/// </summary>
-	public:
+	
 		bool LogoScreenPropUp;
 
 		/// <summary>
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
 		std::shared_ptr<GraphicsDeviceManager> MyGraphicsDeviceManager;
 
-	private:
+	
 		int ScreenWidth, ScreenHeight;
 
 		std::shared_ptr<Camera> MainCamera;
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 //			}
 //		}
 
-	public:
+	
 		void Exit();
 
 		/// <summary>
@@ -173,26 +173,26 @@ namespace CloudberryKingdom
 
 		CloudberryKingdomGame();
 
-	private:
+	
 		void graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e );
 
-	public:
+	
 		void Initialize();
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	private:
+	
 		void SignedInGamer_SignedOut( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedOutEventArgs> &e );
 
 		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
 #endif
 
-	public:
+	
 		void LoadContent();
 
-	protected:
+	
 		void UnloadContent();
 
-	private:
+	
 		void DoQuickSpawn();
 
 		/// <summary>
@@ -208,17 +208,17 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of actions to perform. Each time an action is peformed it is removed from the list.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Multicaster> ToDo;
 
-	private:
+	
 		void DoToDoList();
 
-	protected:
+	
 		void PhsxStep();
 
 #if defined(WINDOWS)
-	private:
+	
 		void CheckForQuickSpawn_PC();
 #endif
 
@@ -228,20 +228,20 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether the mouse should be allowed to be shown, usually only when a menu is active.
 		/// </summary>
-	public:
+	
 		bool ShowMouse;
 
 		/// <summary>
 		/// Draw the mouse cursor.
 		/// </summary>
-	private:
+	
 		void MouseDraw();
 #endif
 
 		/// <summary>
 		/// Whether a song was playing prior to the game window going inactive
 		/// </summary>
-	public:
+	
 		bool MediaPlaying_HoldState;
 
 		/// <summary>
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Non-game drawing, such as debug info and tool drawing.
 		/// </summary>
-	private:
+	
 		void DrawExtra();
 
 		/// <summary>
@@ -337,9 +337,9 @@ namespace CloudberryKingdom
 		bool DebugModePhsx();
 #endif
 
-	public:
+	
 		static std::wstring debugstring;
-	private:
+	
 		std::shared_ptr<StringBuilder> MainString;
 
 		/// <summary>
@@ -366,7 +366,7 @@ namespace CloudberryKingdom
 		bool DoInnerLogoPhsx;
 		void LogoPhsx();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

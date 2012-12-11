@@ -5,23 +5,23 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
 namespace CloudberryKingdom
 {
-	class LavaBlock_Castle : public LavaBlock
+	struct LavaBlock_Castle : public LavaBlock
 	{
-	public:
+	
 		LavaBlock_Castle( bool BoxesOnly );
 
 		virtual void MakeNew();
 
-	protected:
+	
 		virtual void SetQuad( Vector2 center, Vector2 size );
 
-	public:
+	
 		virtual void PhsxStep();
 
 		virtual void Draw();

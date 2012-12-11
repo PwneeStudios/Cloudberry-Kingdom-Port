@@ -5,71 +5,71 @@
 
 namespace CloudberryKingdom
 {
-	class SoundMenu : public VerifyBaseMenu
+	struct SoundMenu : public VerifyBaseMenu
 	{
-	private:
-		class InitOnToggleHelper : public Lambda_1<bool>
+	
+		struct InitOnToggleHelper : public Lambda_1<bool>
 		{
-		public:
+		
 			void Apply( const bool &state );
 		};
 
-	private:
-		class InitHideHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct InitHideHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<SoundMenu> sm;
 
-		public:
+		
 			InitHideHelper( const std::shared_ptr<SoundMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 
-	private:
-		class InitCallCustomControlsHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct InitCallCustomControlsHelper : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<SoundMenu> sm;
 
-		public:
+		
 			InitCallCustomControlsHelper( const std::shared_ptr<SoundMenu> &sm );
 
 			void Apply( const std::shared_ptr<MenuItem> &menuitem );
 		};
 
-	private:
-		class InitOnConfirmedIndexSelect : public Lambda
+	
+		struct InitOnConfirmedIndexSelect : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<MenuList> FsRezList;
 
-		public:
+		
 			InitOnConfirmedIndexSelect( const std::shared_ptr<MenuList> &FsRezList );
 
 			void Apply();
 		};
-	private:
-		class Toggle_BorderlessProxy : public Lambda_1<bool>
+	
+		struct Toggle_BorderlessProxy : public Lambda_1<bool>
 		{
-		private:
+		
 			std::shared_ptr<SoundMenu> sm;
 
-		public:
+		
 			Toggle_BorderlessProxy( const std::shared_ptr<SoundMenu> &sm );
 
 			void Apply( const bool &state );
 		};
 
-	public:
+	
 		SoundMenu( int Control );
 
 #if defined(PC_VERSION)
 #endif
 
-	private:
+	
 		std::shared_ptr<EzText> HeaderText;
-	public:
+	
 		virtual void Init();
 
 #if defined(PC_VERSION)
@@ -100,19 +100,19 @@ namespace CloudberryKingdom
 		//    PlayerManager.SaveRezAndKeys();
 		//}
 
-	private:
+	
 		void AddToggle_Borderless();
 
 		void Toggle_Borderless( bool state );
 #endif
 
-	public:
+	
 		virtual bool MenuReturnToCaller( const std::shared_ptr<Menu> &menu );
 
-	private:
+	
 		void SetPosition();
 
-	public:
+	
 		virtual void OnAdd();
 	};
 }

@@ -1,10 +1,10 @@
 #ifndef _STORAGECONTAINER_H_
 #define _STORAGECONTAINER_H_
 
-class StorageContainer
+struct StorageContainer
 {
 
-public:
+
 
 	bool FileExists( const std::wstring &name )
 	{

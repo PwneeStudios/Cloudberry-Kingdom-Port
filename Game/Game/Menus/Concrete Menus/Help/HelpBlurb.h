@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class HelpBlurb : public CkBaseMenu
+	struct HelpBlurb : public CkBaseMenu
 	{
-	private:
-		class SetText_ActionHelper : public Lambda
+	
+		struct SetText_ActionHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HelpBlurb> hb;
 			Localization::Words Word;
 
-		public:
+		
 			SetText_ActionHelper( const std::shared_ptr<HelpBlurb> &hb, Localization::Words Word );
 
 			void Apply();
 		};
 
-	public:
+	
 		HelpBlurb();
 
 		virtual void Init();

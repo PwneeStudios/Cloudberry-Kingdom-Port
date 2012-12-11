@@ -1,10 +1,10 @@
 #ifndef _PATH_H_
 #define _PATH_H_
 
-class Path
+struct Path
 {
 
-public:
+
 	
 	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath ) { return _T( "" ); }
 	static std::wstring Combine( const std::wstring &Path, const std::wstring &Subpath1, const std::wstring &Subpath2 ) { return _T( "" ); }

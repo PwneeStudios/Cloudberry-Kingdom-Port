@@ -5,32 +5,32 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class SpikeyLine : public _CircleDeath, public IBound
+	struct SpikeyLine : public _CircleDeath, public IBound
 	{
-	public:
-		class SpikeyLineTileInfo : public TileInfoBase
+	
+		struct SpikeyLineTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Ball;
 
 			float Radius;
@@ -38,24 +38,24 @@ namespace CloudberryKingdom
 			bool Rotate;
 			float RotateOffset, RotateSpeed;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			SpikeyLineTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	public:
+	
 		int Period, Offset;
 		Vector2 p1, p2;
 
-	private:
+	
 		std::shared_ptr<QuadClass> Head;
 
-	public:
+	
 		virtual void MakeNew();
 
 		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
@@ -72,12 +72,12 @@ public:
 		virtual void PhsxStep();
 
 
-	private:
+	
 		bool OffScreen;
-	protected:
+	
 		virtual void DrawGraphics();
 
-	public:
+	
 		virtual void Move( Vector2 shift );
 
 		Vector2 TR_Bound();
@@ -88,7 +88,7 @@ public:
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

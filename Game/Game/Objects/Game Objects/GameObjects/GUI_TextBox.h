@@ -6,33 +6,33 @@
 namespace CloudberryKingdom
 {
 
-	class GUI_TextBox : public GUI_Text
+	struct GUI_TextBox : public GUI_Text
 	{
 		/// <summary>
 		/// Event handler. Activated when the the user presses Enter while the textbox has focus.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<Multicaster> OnEnter;
 		std::shared_ptr<Multicaster> OnEscape;
 
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		bool HasFocus;
-	public:
+	
 		void GetFocus();
 
 		void ReleaseFocus();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	public:
+	
 		bool Canceled;
-	private:
+	
 		void Cancel();
 
 		void GamepadInteract();
@@ -49,12 +49,12 @@ namespace CloudberryKingdom
 		std::shared_ptr<QuadClass> Backdrop, SelectQuad;
 		std::shared_ptr<EzText> Caret;
 
-	public:
+	
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos );
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
-	private:
+	
 		void Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 		int SelectIndex_Start, SelectIndex_End;
@@ -69,15 +69,15 @@ namespace CloudberryKingdom
 
 		void UpdateSelectQuad();
 
-	protected:
+	
 		virtual std::shared_ptr<EzText> MakeText( std::wstring text, bool centered, const std::shared_ptr<EzFont> &font );
 
-	public:
+	
 		int MaxLength;
 		bool LimitLength;
 
 #if defined(WINDOWS)
-	private:
+	
 		// FIXME: Related to removal of TextInput.
 		//void CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e );
 
@@ -89,10 +89,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// If true the text is recentered every time it is changed
 		/// </summary>
-	public:
+	
 		bool DoRecenter;
 
-	private:
+	
 		void Recenter();
 
 #if defined(WINDOWS)
@@ -102,23 +102,23 @@ namespace CloudberryKingdom
 
 		void Backspace();
 
-	public:
+	
 		virtual void Enter();
 
-	protected:
+	
 		const int getLength() const;
-	public:
+	
 		const std::wstring getText() const;
 		void setText( const std::wstring &value );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
 #if defined(PC_VERSION)
-	class GUI_EnterName : public GUI_TextBox
+	struct GUI_EnterName : public GUI_TextBox
 	{
-	public:
+	
 		GUI_EnterName();
 
 		virtual void Enter();

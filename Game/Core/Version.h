@@ -3,10 +3,10 @@
 
 namespace CloudberryKingdom
 {
-	class Version
+	struct Version
 	{
 
-	public:
+	
 
 		int MajorVersion, MinorVersion, SubVersion;
 		Version( int Major, int Minor, int Sub );

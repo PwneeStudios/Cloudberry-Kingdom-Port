@@ -5,61 +5,61 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class GameData;
+	struct GameData;
 }
 
 
 namespace CloudberryKingdom
 {
-	class CoinScoreMultiplierObject : public GameObject
+	struct CoinScoreMultiplierObject : public GameObject
 	{
-	private:
-		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+	
+		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
-		private:
+		
 			std::shared_ptr<CoinScoreMultiplierObject> csmo;
-		public:
+		
 			OnCoinGrabProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
 			void Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	private:
-		class OnLevelRetryProxy : public Lambda
+	
+		struct OnLevelRetryProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CoinScoreMultiplierObject> csmo;
-		public:
+		
 			OnLevelRetryProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
 			void Apply();
 		};
 
-	private:
-		class OnCalculateCoinScoreMultiplierProxy : public Lambda_1<std::shared_ptr<GameData> >
+	
+		struct OnCalculateCoinScoreMultiplierProxy : public Lambda_1<std::shared_ptr<GameData> >
 		{
-		private:
+		
 			std::shared_ptr<CoinScoreMultiplierObject> csmo;
-		public:
+		
 			OnCalculateCoinScoreMultiplierProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
 			void Apply( const std::shared_ptr<GameData> &obj );
 		};
 
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		float _CoinScoreMultiplier;
-	public:
+	
 		const float &getCoinScoreMultiplier() const;
 		void setCoinScoreMultiplier( const float &value );
 
@@ -82,13 +82,13 @@ namespace CloudberryKingdom
 		/// </summary>
 		void OnLevelRetry();
 
-	private:
+	
 		void ResetMultiplier();
 
-	public:
+	
 		CoinScoreMultiplierObject();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

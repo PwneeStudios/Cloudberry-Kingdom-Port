@@ -3,13 +3,18 @@
 
 #include <GameLoop.h>
 
+#include <forward_declarations.h>
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <MainClass/XboxPC/CloudberryKingdom.XnaGameClass.h>
+
 /**
  * Cloudberry Kingdom game.
  */
-class CloudberryKingdomWrapper : public GameLoop
+struct CloudberryKingdomWrapper : public GameLoop
 {
 	
-public:
+	std::shared_ptr<CloudberryKingdom::XnaGameClass> game;
 
 	/**
 	 * @see GameLoop::Initialize

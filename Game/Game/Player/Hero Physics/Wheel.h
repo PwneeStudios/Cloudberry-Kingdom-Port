@@ -5,37 +5,37 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsxWheel : public BobPhsxNormal
+	struct BobPhsxWheel : public BobPhsxNormal
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
 		// Singleton
-	protected:
+	
 		virtual void InitSingleton();
-	public:
+	
 		static std::shared_ptr<BobPhsxWheel> instance;
-	public:
+	
 		const static std::shared_ptr<BobPhsxWheel> &getInstance();
 
 		virtual std::shared_ptr<BobPhsx> Clone();
 		void CopyTo( const std::shared_ptr<BobPhsxWheel> &bob );
 
-		// Instancable class
-	private:
+		// Instancable struct
+	
 		std::shared_ptr<EzSound> LandSound;
 
 		float AngleSpeed;
 
-	public:
+	
 		BobPhsxWheel();
 
 		virtual void DefaultValues();
 
-	private:
+	
 		static int AnimIndex;
-	public:
+	
 		virtual void Init( const std::shared_ptr<Bob> &bob );
 
 		virtual void DuckingPhsx();
@@ -43,11 +43,11 @@ namespace CloudberryKingdom
 		float MaxAngleSpeed, AngleAcc;
 		virtual void DoXAccel();
 
-	private:
+	
 		float AngleToDist( float Angle );
 
 
-	public:
+	
 		virtual float RetardxVec();
 
 		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 
 		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

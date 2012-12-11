@@ -8,9 +8,9 @@
 namespace CloudberryKingdom
 {
 
-	class Localization
+	struct Localization
 	{
-	public:
+	
 		enum Language
 		{
 			Language_ENGLISH,
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 			Language_CHINESE
 		};
 
-	public:
+	
 		enum Words
 		{
 			Words_IDENTIFIER,
@@ -317,12 +317,12 @@ namespace CloudberryKingdom
 			Words_POWERUP_NOTE
 		};
 
-	private:
+	
 		static std::map<Language, std::map<Words, std::wstring> > Text;
 
 		static void ReadTranslationGrid( const std::wstring &path );
 
-	public:
+	
 		static std::wstring WordString( Words Word );
 
 		static std::wstring WordToTextureName( Words Word );
@@ -334,32 +334,32 @@ namespace CloudberryKingdom
 		static const int NumLanguages;
 		static std::map<Language, std::shared_ptr<LanguageInfo> > Languages;
 
-	private:
+	
 		static std::shared_ptr<ContentManager> Content;
 
-	public:
+	
 		static std::shared_ptr<LanguageInfo> CurrentLanguage;
 
 		static void SetLanguage( Language SelectedLanguage );
 
-	private:
+	
 		static void Initialize();
 
 		static void ReadSubtitleInfo( const std::wstring &VideoName );
 
-	public:
+	
 		static std::vector<std::shared_ptr<SubtitleAction> > GetSubtitles( const std::wstring &VideoName );
 
-	private:
+	
 		static std::vector<std::shared_ptr<SubtitleAction> > Subtitles;
 
 		static void ReadSubtitles( const std::wstring &path );
 	};
 
-	class LanguageInfo
+	struct LanguageInfo
 	{
 
-	public:
+	
 		Localization::Language MyLanguage;
 		std::wstring MyDirectory;
 
@@ -367,10 +367,10 @@ namespace CloudberryKingdom
 
 	};
 
-	class SubtitleAction
+	struct SubtitleAction
 	{
 
-	public:
+	
 		enum ActionType
 		{
 			ActionType_SHOW,
@@ -379,7 +379,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The time the action happens, in seconds.
 		/// </summary>
-	public:
+	
 		float Time;
 
 		ActionType MyAction;

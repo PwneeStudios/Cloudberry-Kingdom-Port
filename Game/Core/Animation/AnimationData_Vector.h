@@ -8,18 +8,18 @@
 
 namespace CloudberryKingdom
 {
-	class OneAnim
+	struct OneAnim
 	{
-	public:
+	
 		std::vector<Vector2> Data;
 	};
 
-	class AnimationData
+	struct AnimationData
 	{
 		/// <summary>
 		/// If false, only changing values are recorded
 		/// </summary>
-	public:
+	
 		static bool RecordAll;
 
 		std::vector<OneAnim> Anims;
@@ -56,9 +56,9 @@ namespace CloudberryKingdom
 
 		Vector2 Calc( int anim, float t, int Length, bool Loop, bool Linear );
 
-	private:
+	
 		Vector3 VecAndLength( Vector2 v );
-	public:
+	
 		Vector2 CalcAxis( int anim, float t, int Length, bool Loop, bool Linear );
 	};
 }

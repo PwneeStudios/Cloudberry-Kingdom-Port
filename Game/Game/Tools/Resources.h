@@ -7,18 +7,18 @@
 
 namespace CloudberryKingdom
 {
-	class Resources
+	struct Resources
 	{
 		/// <summary>
 		/// True when we are still loading resources during the game's initial load.
-		/// This is wrapped in a class so that it can be used as a lock.
+		/// This is wrapped in a struct so that it can be used as a lock.
 		/// </summary>
-	public:
+	
 		static std::shared_ptr<WrappedBool> LoadingResources;
 
 		/// <summary>
 		/// Tracks how many resources have been loaded.
-		/// This is wrapped in a class so that it can be used as a lock.
+		/// This is wrapped in a struct so that it can be used as a lock.
 		/// </summary>
 		static std::shared_ptr<WrappedFloat> ResourceLoadedCountRef;
 
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Load the necessary fonts.
 		/// </summary>
-	private:
+	
 		static void FontLoad();
 
 		static void LoadInfo();
@@ -37,17 +37,17 @@ namespace CloudberryKingdom
 
 		static void LoadSound( bool CreateNewWad );
 
-	public:
+	
 		static void LoadAssets( bool CreateNewWads );
 
-	private:
+	
 		static void PreloadArt();
 
-	public:
+	
 		static void LoadResources();
 
 		static std::shared_ptr<Thread> LoadThread;
-	private:
+	
 		static void _LoadThread();
 	};
 }

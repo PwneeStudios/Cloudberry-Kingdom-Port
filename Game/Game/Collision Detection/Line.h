@@ -2,14 +2,14 @@
 #define LINE
 namespace CloudberryKingdom
 {
-	class Line
+	struct Line
 	{
-	public:
+	
 		Vector2 p1, p2;
 	};
-	class MovingLine
+	struct MovingLine
 	{
-	public:
+	
 		Line Current, Target;
 		Vector2 TR, BL;
 		bool Invalidated;

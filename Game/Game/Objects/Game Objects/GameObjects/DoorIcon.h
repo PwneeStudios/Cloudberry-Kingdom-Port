@@ -5,24 +5,24 @@
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
+	struct BobPhsx;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectIcon;
+	struct ObjectIcon;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class DoorIcon : public GUI_Panel
+	struct DoorIcon : public GUI_Panel
 	{
-	private:
+	
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		int Level_Renamed;
-	public:
+	
 //C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		DoorIcon( int Level_Renamed );
 
@@ -31,9 +31,9 @@ namespace CloudberryKingdom
 		std::wstring s;
 		Upgrade upgrade;
 		std::shared_ptr<BobPhsx> hero;
-	private:
+	
 		std::shared_ptr<ObjectIcon> icon;
-	public:
+	
 		void SetIcon( const std::shared_ptr<BobPhsx> &hero );
 		void SetIcon( Upgrade upgrade );
 		void SetIcon( IconType type );
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		void Kill();
 		void Kill( bool sound );
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
 		virtual void MyDraw();

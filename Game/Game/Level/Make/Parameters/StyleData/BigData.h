@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 
 namespace CloudberryKingdom
 {
-	class BigData : public StyleData
+	struct BigData : public StyleData
 	{
-	public:
+	
 		BigData( const std::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();

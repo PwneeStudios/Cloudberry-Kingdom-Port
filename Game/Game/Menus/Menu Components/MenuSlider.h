@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class MenuSlider : public MenuSliderBase
+	struct MenuSlider : public MenuSliderBase
 	{
-	public:
+	
 		Vector2 SliderShift, TabOffset;
 
 		std::shared_ptr<QuadClass> SliderBack, Slider, StartQuad, EndQuad;
@@ -21,10 +21,10 @@ namespace CloudberryKingdom
 		MenuSlider( const std::shared_ptr<EzText> &Text );
 		MenuSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
 
-	protected:
+	
 		virtual void InitializeSlider();
 
-	public:
+	
 		Vector2 getSliderBackSize() const;
 		void setSliderBackSize( const Vector2 &value );
 
@@ -35,21 +35,21 @@ namespace CloudberryKingdom
 
 		virtual float Width();
 
-	protected:
+	
 		virtual void CalcEndPoints();
 
-	public:
+	
 		bool CustomEndPoints;
 		Vector2 CustomStart, CustomEnd;
 
-	private:
+	
 		Vector2 RelStart, RelEnd;
 		void CalcRelEndPoints();
 
-	public:
+	
 		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

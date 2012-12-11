@@ -5,31 +5,31 @@
 
 namespace CloudberryKingdom
 {
-	class DifficultyGroups
+	struct DifficultyGroups
 	{
-	public:
-		class UpgradeSequenceSingle
+	
+		struct UpgradeSequenceSingle
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty );
 
-		private:
+		
 			Upgrade MyUpgrade;
-		public:
+		
 			std::vector<double> Values;
 
 			UpgradeSequenceSingle( Upgrade MyUpgrade, double v0, double v1, double v2, double v3, double v4 );
 		};
 
-	public:
-		class UpgradeSequence
+	
+		struct UpgradeSequence
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty );
 
-		private:
+		
 			std::vector<UpgradeSequenceSingle> UpgradeList;
-		public:
+		
 
 			DifficultyGroups::UpgradeSequence::UpgradeSequence(
 				DifficultyGroups::UpgradeSequenceSingle s1,
@@ -98,14 +98,14 @@ namespace CloudberryKingdom
 				DifficultyGroups::UpgradeSequenceSingle s1 );
 		};
 
-	private:
-		class FixedPieceModHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct FixedPieceModHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			float Difficulty;
 			std::shared_ptr<LevelSeedData> LevelSeed;
 
-		public:
+		
 			FixedPieceModHelper( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &piece );
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Returns a function that modifies a PieceSeed's difficulty
 		/// </summary>
-	public:
+	
 		static std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
 
 		static float HeroDifficultyMod( float Difficulty, const std::shared_ptr<BobPhsx> &hero );
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		static void FixedPieceSeed( const std::shared_ptr<PieceSeedData> &piece, float Difficulty, const std::shared_ptr<BobPhsx> &hero );
 
-	private:
+	
 		static void InitFixedUpgrades();
 
 		static std::vector<UpgradeSequence> UpUpgrades;

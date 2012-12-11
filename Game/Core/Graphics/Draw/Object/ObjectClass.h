@@ -12,13 +12,13 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectClass : public std::enable_shared_from_this<ObjectClass>
+	struct ObjectClass : public std::enable_shared_from_this<ObjectClass>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		float LoadingRunSpeed;
 
 		float CapeThickness;
@@ -39,17 +39,17 @@ namespace CloudberryKingdom
 		std::shared_ptr<Quad> ParentQuad;
 		std::vector<std::shared_ptr<BaseQuad> > QuadList;
 
-	private:
+	
 		std::shared_ptr<QuadDrawer> QDrawer;
-	public:
+	
 		bool xFlip, yFlip, CenterFlipOnBox;
 		Vector2 FlipCenter;
 
-	private:
+	
 		std::shared_ptr<RenderTarget2D> ObjectRenderTarget, ToTextureRenderTarget;
 		int DrawWidth, DrawHeight;
 
-	public:
+	
 		std::vector<std::shared_ptr<EzEffect> > MyEffects;
 
 		bool getDonePlaying() const;
@@ -159,17 +159,17 @@ namespace CloudberryKingdom
 		void MakeRenderTargetUnique( int width, int height );
 
 		bool OriginalRenderTarget;
-	private:
+	
 		void InitRenderTargets( const std::shared_ptr<ObjectClass> &obj );
 
 		void InitRenderTargets( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height );
 
-	public:
+	
 		std::shared_ptr<BaseQuad> FindQuad( const std::wstring &name );
 
-	private:
+	
 		void AddToNewList( std::vector<std::shared_ptr<BaseQuad> > &NewList, const std::shared_ptr<BaseQuad> &quad );
-	public:
+	
 		void Sort();
 
 		/// <summary>
@@ -223,7 +223,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Texture2D> DrawToTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad, Vector2 Padding );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

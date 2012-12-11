@@ -5,32 +5,32 @@
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 
 namespace CloudberryKingdom
 {
-	class VerticalData : public StyleData
+	struct VerticalData : public StyleData
 	{
-	public:
+	
 		enum VisualStyles
 		{
 			VisualStyles_PILLAR,
 			VisualStyles_CASTLE
 		};
-	public:
+	
 		VerticalData( const std::shared_ptr<Rand> &Rnd );
 
 		VisualStyles VisualStyle;
 	};
 
-	class UpData : public VerticalData
+	struct UpData : public VerticalData
 	{
-	protected:
+	
 		virtual void CalculateKeepUnused( float JumpLevel );
 
-	public:
+	
 		UpData( const std::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();

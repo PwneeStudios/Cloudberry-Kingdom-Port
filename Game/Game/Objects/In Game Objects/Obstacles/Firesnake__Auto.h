@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class Firesnake_Parameters : public AutoGen_Parameters
+	struct Firesnake_Parameters : public AutoGen_Parameters
 	{
-	public:
-		class _Special
+	
+		struct _Special
 		{
 		};
-	public:
+	
 		Param Step, Period;
 		VectorParam RadiiX, RadiiY;
 
@@ -23,27 +23,27 @@ namespace CloudberryKingdom
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Firesnake_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Firesnake_AutoGen : public AutoGen
+	struct Firesnake_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<Firesnake_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Firesnake_AutoGen> instance;
+	
 		const static std::shared_ptr<Firesnake_AutoGen> &getInstance();
 
-	public:
+	
 		Firesnake_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		std::shared_ptr<Firesnake_Parameters> GetParams( const std::shared_ptr<Level> &level );

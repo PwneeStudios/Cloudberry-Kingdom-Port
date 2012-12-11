@@ -5,29 +5,29 @@
 
 namespace CloudberryKingdom
 {
-	class MenuList : public MenuItem
+	struct MenuList : public MenuItem
 	{
-	private:
-		class ExpandProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct ExpandProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<MenuList> ml;
 
-		public:
+		
 			ExpandProxy1( const std::shared_ptr<MenuList> &ml );
 
 			void Apply( const std::shared_ptr<MenuItem> &dummy );
 		};
 
-	public:
+	
 		virtual std::vector<std::wstring> GetViewables();
 
 		const bool &getExpandOnGo() const;
 		void setExpandOnGo( const bool &value );
-	private:
+	
 		bool _ExpandOnGo;
 
-	public:
+	
 		std::shared_ptr<MenuListExpand> MyMenuListExpand;
 		Vector2 MyExpandPos;
 		std::shared_ptr<Lambda_2<std::shared_ptr<MenuListExpand>, std::shared_ptr<MenuItem> > > AdditionalExpandProcessing;
@@ -36,11 +36,11 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<MenuItem> > MyList;
 		int ListIndex;
 
-	private:
+	
 		static const int SelectDelay = 12;
 		int DelayCount;
 
-	public:
+	
 		std::shared_ptr<QuadClass> RightArrow, LeftArrow;
 		std::shared_ptr<QuadClass> RightArrow_Selected, LeftArrow_Selected;
 
@@ -57,10 +57,10 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 		//Vector2 ListPadding = new Vector2(65, 0);
-	private:
+	
 		Vector2 ListPadding;
 		Vector2 TotalPadding;
-	public:
+	
 		virtual bool HitTest( Vector2 pos, Vector2 padding );
 #endif
 
@@ -70,17 +70,17 @@ namespace CloudberryKingdom
 
 		MenuList();
 
-	private:
+	
 		void InitializeArrows();
 
-	public:
+	
 		virtual float Height();
 
 		virtual float Width();
 
-	private:
+	
 		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<Object> > ObjDict;
-	public:
+	
 		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
 
 		std::shared_ptr<MenuItem> GetListItem();
@@ -106,12 +106,12 @@ namespace CloudberryKingdom
 
 		virtual void SetIndex( int NewIndex );
 
-	private:
+	
 		int LastIncrDir;
 		void IncrementIndex( int Increment );
 
 #if defined(WINDOWS)
-	public:
+	
 		std::shared_ptr<QuadClass> GetSelectedArrow();
 #endif
 
@@ -120,15 +120,15 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool ClickForNextItem;
 
-	private:
+	
 		bool HoldSelected;
-	public:
+	
 		virtual void PhsxStep( bool Selected );
 
 		bool Center;
 		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

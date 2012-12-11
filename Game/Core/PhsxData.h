@@ -3,9 +3,9 @@
 
 namespace CloudberryKingdom
 {
-	class PhsxData
+	struct PhsxData
 	{
-	public:
+	
 		Vector2 Position, Velocity, Acceleration;
 
 		PhsxData() { }

@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class BaseQuad : public std::enable_shared_from_this<BaseQuad>
+	struct BaseQuad : public std::enable_shared_from_this<BaseQuad>
 	{
-	public:
+	
 		ObjectDrawOrder MyDrawOrder;
 
 		std::shared_ptr<ObjectClass> ParentObject;
@@ -26,9 +26,9 @@ namespace CloudberryKingdom
 
 		void setMyMatrix( const Matrix &value );
 
-	private:
+	
 		Matrix _MyMatrix;
-	public:
+	
 		float MyMatrixSignature;
 
 		std::shared_ptr<EzTexture> MyTexture;
@@ -117,10 +117,10 @@ namespace CloudberryKingdom
 		void ClickOnReleaseButton();
 #endif
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		BaseQuad()
 		{
 			InitializeInstanceFields();

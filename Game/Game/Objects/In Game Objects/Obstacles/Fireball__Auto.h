@@ -6,9 +6,9 @@
 
 namespace CloudberryKingdom
 {
-	class Fireball_Parameters : public AutoGen_Parameters
+	struct Fireball_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		Param FireballMaxAngle, FireballMinDist, MaxFireballDensity, Period;
 		Param KeepUnused;
 
@@ -26,37 +26,37 @@ namespace CloudberryKingdom
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Fireball_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Fireball_AutoGen : public AutoGen
+	struct Fireball_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<Fireball_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Fireball_AutoGen> instance;
+	
 		const static std::shared_ptr<Fireball_AutoGen> &getInstance();
 
-	public:
+	
 		Fireball_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 
-	private:
+	
 		void inner( const std::shared_ptr<Fireball_Parameters> &Params, const std::shared_ptr<Level> &level, Vector2 pos, int i, LevelGeometry Geometry );
 
 		void BorderFill( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-	public:
+	
 		std::shared_ptr<Fireball_Parameters> GetParams( const std::shared_ptr<Level> &level );
 
 		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );

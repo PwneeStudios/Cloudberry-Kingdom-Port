@@ -5,6 +5,8 @@
 
 #include "Hacks/XNA/MediaPlayer.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

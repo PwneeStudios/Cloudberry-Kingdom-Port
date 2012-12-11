@@ -5,17 +5,17 @@
 
 namespace CloudberryKingdom
 {
-	class LineSpriteInfo;
+	struct LineSpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -29,12 +29,12 @@ namespace CloudberryKingdom
 		LaserState_WARN,
 		LaserState_ON
 	};
-	class Laser : public _LineDeath, public IBound
+	struct Laser : public _LineDeath, public IBound
 	{
-	public:
-		class LaserTileInfo : public TileInfoBase
+	
+		struct LaserTileInfo : public TileInfoBase
 		{
-		public:
+		
 //C# TO C++ CONVERTER NOTE: The variable Line was renamed since it is named the same as a user-defined type:
 			std::shared_ptr<LineSpriteInfo> Line_Renamed;
 
@@ -42,21 +42,21 @@ namespace CloudberryKingdom
 			Vector4 Tint_Half;
 			float Scale;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			LaserTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		LaserState MyState;
 		float StateChange;
 
-	public:
+	
 		bool AlwaysOn, AlwaysOff;
 		int Offset, Period, Duration, WarnDuration;
 
@@ -71,23 +71,23 @@ public:
 		/// </summary>
 		void SetLine( Vector2 p1, Vector2 p2 );
 
-	private:
+	
 		Vector2 BL, TR;
-	public:
+	
 		Vector2 TR_Bound();
 		Vector2 BL_Bound();
 
-	protected:
+	
 		virtual void ActivePhsxStep();
 
-	public:
+	
 		float SmallerWidth;
-	protected:
+	
 		virtual void DrawGraphics();
 
 		virtual void DrawBoxes();
 
-	public:
+	
 		void MoveToBounded( Vector2 shift );
 
 		virtual void Move( Vector2 shift );

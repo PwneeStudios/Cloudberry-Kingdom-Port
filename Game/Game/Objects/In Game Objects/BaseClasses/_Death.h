@@ -7,15 +7,15 @@
 
 namespace CloudberryKingdom
 {
-	class _Death : public _Obstacle
+	struct _Death : public _Obstacle
 	{
-	protected:
+	
 		BobDeathType DeathType;
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		_Death()
 		{
 			InitializeInstanceFields();

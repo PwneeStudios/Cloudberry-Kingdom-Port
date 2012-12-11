@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class SpriteInfo;
+	struct SpriteInfo;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
@@ -28,53 +28,53 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class Wall : public BlockBase
+	struct Wall : public BlockBase
 	{
-	public:
+	
 		enum BufferType
 		{
 			BufferType_PUSH,
 			BufferType_SPACE
 		};
-	public:
-		class WallTileInfo : public TileInfoBase
+	
+		struct WallTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<SpriteInfo> Sprite;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			WallTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		bool Horizontal;
-	public:
+	
 		static std::shared_ptr<Wall> MakeWall( LevelGeometry geometry );
 
-	private:
+	
 		bool Spiked;
-	public:
+	
 		void Spikify();
 
-	private:
+	
 		void MakeSpike( int count, float pos );
 
-	public:
+	
 		float Speed;
 		float Accel;
 		int InitialDelay;
 
 		virtual void MakeNew();
 
-	private:
+	
 		std::shared_ptr<QuadClass> MyQuad;
-	public:
+	
 		Wall( bool BoxesOnly );
 
 		virtual void ResetPieces();
@@ -88,7 +88,7 @@ public:
 
 		virtual void Reset( bool BoxesOnly );
 
-	private:
+	
 		float ShakeIntensity, CurShakeIntensity;
 		float MinShakeIntensity;
 		float ShakeLength;
@@ -97,7 +97,7 @@ public:
 
 		Vector2 CalcPosition( float t );
 
-	public:
+	
 		BufferType MyBufferType;
 		float Space;
 
@@ -115,7 +115,7 @@ public:
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

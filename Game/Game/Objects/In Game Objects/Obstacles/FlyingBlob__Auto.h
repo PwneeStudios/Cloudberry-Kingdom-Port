@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class FlyingBlob_Parameters : public AutoGen_Parameters
+	struct FlyingBlob_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		enum MotionType
 		{
 			MotionType_VERTICAL,
@@ -19,13 +19,13 @@ namespace CloudberryKingdom
 			MotionType_HEART,
 			MotionType_ALL
 		};
-	public:
-		class _Special
+	
+		struct _Special
 		{
 			/// <summary>
 			/// A special fill type. Creates a tunnel of flying blobs.
 			/// </summary>
-		public:
+		
 			bool Tunnel;
 
 			/// <summary>
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 			/// </summary>
 			bool Pinwheel;
 		};
-	public:
+	
 		Param Range, Period, KeepUnused, Size;
 
 		/// <summary>
@@ -67,24 +67,24 @@ namespace CloudberryKingdom
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class FlyingBlob_AutoGen : public AutoGen
+	struct FlyingBlob_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<FlyingBlob_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<FlyingBlob_AutoGen> instance;
+	
 		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance();
 
-	public:
+	
 		FlyingBlob_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir );
 		void Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir, float ModPeriod );
 
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 		void Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j );
 		void CleanupTunnel( const std::shared_ptr<Level> &level );*/
 
-	public:
+	
 		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 		void Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
 
-	private:
+	
 		std::shared_ptr<ObjectBase> BasicCreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
 	};
 }

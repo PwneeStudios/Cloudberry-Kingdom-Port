@@ -5,15 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	class IPos
+	struct IPos
 	{
-	public:
+	
 		virtual Vector2 getPos() = 0;
 	};
 
-	class FancyVector2 : public IPos
+	struct FancyVector2 : public IPos
 	{
-	public:
+	
 
 		AnimationData AnimData;
 
@@ -102,12 +102,12 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		void MultiLerp( int Frames, const std::vector<Vector2> Positions );
 
-	private:
+	
 //ORIGINAL LINE: void MultiLerp(int Frames, bool Reverse, params Vector2[] Positions)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		void MultiLerp( int Frames, bool Reverse, const std::vector<Vector2> Positions );
 
-	public:
+	
 		static const LerpStyle DefaultLerpStyle;
 		//public const LerpStyle DefaultLerpStyle = LerpStyle.DecayNoOvershoot;
 
@@ -126,14 +126,14 @@ namespace CloudberryKingdom
 
 		bool UpdateOnPause;
 		bool UpdateWithGame;
-	private:
+	
 		int GetCurStep();
 
-	public:
+	
 		Vector2 Update();
 		Vector2 Update( Vector2 Scale );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

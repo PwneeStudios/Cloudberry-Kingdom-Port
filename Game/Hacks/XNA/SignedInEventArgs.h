@@ -3,10 +3,10 @@
 
 #include "Hacks/XNA/SignedInGamer.h"
 
-class SignedInEventArgs
+struct SignedInEventArgs
 {
 
-public:
+
 	SignedInGamer Gamer;
 
 };

@@ -1,5 +1,5 @@
-#include <CloudberryKingdom.h>
 #include <Core.h>
+#include <CloudberryKingdom.h>
 
 #include <iostream>
 #include <Utility/Log.h>

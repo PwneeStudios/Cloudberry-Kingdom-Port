@@ -4,10 +4,10 @@
 #include <Math/Vectors.h>
 #include <string>
 
-class BinaryReader
+struct BinaryReader
 {
 
-public:
+
 
 	BinaryReader( const std::wstring &path )
 	{

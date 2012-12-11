@@ -5,24 +5,24 @@
 
 namespace CloudberryKingdom
 {
-	class Lambda;
+	struct Lambda;
 }
 
 namespace CloudberryKingdom
 {
-	class ButtonClass;
+	struct ButtonClass;
 }
 namespace CloudberryKingdom
 {
-	class Listener : public GUI_Panel
+	struct Listener : public GUI_Panel
 	{
-	public:
+	
 		enum Type
 		{
 			Type_ON_DOWN,
 			Type_ON_PRESSED
 		};
-	public:
+	
 		Listener();
 
 		Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action );
@@ -41,10 +41,10 @@ namespace CloudberryKingdom
 
 		ControllerButtons MyButton;
 		std::shared_ptr<ButtonClass> MyButton2;
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

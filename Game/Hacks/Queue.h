@@ -2,8 +2,7 @@
 #define _QUEUE_H_
 
 #include <algorithm>
-#include <cstring>
-#include <vector>
+#include <queue>
 
 template<class T>
 void Clear( std::queue<T> &v )

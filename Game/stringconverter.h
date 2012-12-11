@@ -3,17 +3,17 @@
 
 //----------------------------------------------------------------------------------------
 //	Copyright © 2004 - 2012 Tangible Software Solutions Inc.
-//	This class can be used by anyone provided that the copyright notice remains intact.
+//	This struct can be used by anyone provided that the copyright notice remains intact.
 //
-//	This class is used to replace some conversions to or from strings.
+//	This struct is used to replace some conversions to or from strings.
 //----------------------------------------------------------------------------------------
 #include <global_header.h>
 
 #include <sstream>
 
-class StringConverterHelper
+struct StringConverterHelper
 {
-public:
+
 	template<typename T>
 	static std::wstring toString(const T &subject)
 	{

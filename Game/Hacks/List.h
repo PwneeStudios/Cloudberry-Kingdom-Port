@@ -43,10 +43,12 @@ void Sort( std::vector<T> &v, const Predicate &pred )
 	std::sort( v.begin(), v.end(), pred );
 }
 
-template<class T>
-std::vector<T> VecFromArray( T a[] )
+template<class T, size_t N>
+std::vector<T> VecFromArray( T (&a)[N] )
 {
-	return std::vector<T>( a, a + sizeof( a ) / sizeof( T ) );
+	//return std::vector<T>( a, a + sizeof( a ) / sizeof( T ) );
+	//return std::vector<T>( a, a + sizeof( a ) / sizeof( a[0] ) );
+	return std::vector<T>( a, a + N );
 }
 
 template<class T>

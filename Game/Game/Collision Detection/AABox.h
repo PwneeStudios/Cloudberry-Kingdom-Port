@@ -3,20 +3,20 @@
 
 namespace CloudberryKingdom
 {
-	class FloatRectangle;
+	struct FloatRectangle;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadDrawer;
+	struct QuadDrawer;
 }
 
 
 namespace CloudberryKingdom
 {
-	class AABox
+	struct AABox
 	{
-	public:
+	
 		bool Invalidated;
 
 		Vector2 BL, TR;

@@ -5,28 +5,28 @@
 
 namespace CloudberryKingdom
 {
-	class Chunk;
+	struct Chunk;
 }
 
 
 namespace CloudberryKingdom
 {
-	class PlayerStats : public std::enable_shared_from_this<PlayerStats>
+	struct PlayerStats : public std::enable_shared_from_this<PlayerStats>
 	{
 		#pragma region WriteRead
-	public:
+	
 		void WriteChunk_4( const std::shared_ptr<BinaryWriter> &writer );
 
 		void ReadChunk_4( const std::shared_ptr<Chunk> &ParentChunk );
 
-	private:
+	
 		void WriteDeathChunk_9( const std::shared_ptr<Chunk> &ParentChunk, int Index );
 
 		void ReadDeathChunk_9( const std::shared_ptr<Chunk> &chunk );
 		#pragma endregion
 
 		#pragma region Persistent Stats
-	public:
+	
 		int Score, Coins, Blobs, CoinsSpentAtShop;
 		int TotalCoins, TotalBlobs;
 

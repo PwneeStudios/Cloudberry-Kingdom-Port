@@ -1,10 +1,10 @@
 #ifndef _MEDIAPLAYER_H_
 #define _MEDIAPLAYER_H_
 
-class MediaPlayer
+struct MediaPlayer
 {
 
-public:
+
 
 	static void Play( const std::shared_ptr<Song> &song )
 	{

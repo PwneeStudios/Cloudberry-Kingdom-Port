@@ -1,10 +1,10 @@
 #ifndef _KEYBOARDSTATE_H_
 #define _KEYBOARDSTATE_H_
 
-class KeyboardState
+struct KeyboardState
 {
 	
-public:
+
 
 	bool IsKeyDown( Keys key )
 	{

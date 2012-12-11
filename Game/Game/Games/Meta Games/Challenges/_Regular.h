@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class LevelSeedData;
+	struct LevelSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class BobPhsx;
+	struct BobPhsx;
 }
 
 
 namespace CloudberryKingdom
 {
-	class RegularLevel
+	struct RegularLevel
 	{
-	private:
+	
 		RegularLevel();
 
 		static void StandardInit( const std::shared_ptr<LevelSeedData> &data );
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		// -------------------------
 		// Fixed upgrade lists
 		// -------------------------
-	public:
+	
 		static std::shared_ptr<LevelSeedData> HeroLevel( float Difficulty, const std::shared_ptr<BobPhsx> &Hero, int Length );
 	};
 }

@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		return Vector2( dist, dist );
 	}
 
-const std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_shared<FireSpinner_AutoGen>();
+std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_shared<FireSpinner_AutoGen>();
 
 	const std::shared_ptr<FireSpinner_AutoGen> &FireSpinner_AutoGen::getInstance()
 	{

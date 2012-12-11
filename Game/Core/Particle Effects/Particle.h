@@ -7,14 +7,14 @@
 
 namespace CloudberryKingdom
 {
-	class ParticleBin
+	struct ParticleBin
 	{
 
-	private:
+	
 		std::vector<std::shared_ptr<Particle> > MyStack;
 		Mutex stackLock;
 
-	public:
+	
 		ParticleBin();
 
 		std::shared_ptr<Particle> Get();
@@ -23,13 +23,13 @@ namespace CloudberryKingdom
 
 	};
 
-	class Particle : public std::enable_shared_from_this<Particle>
+	struct Particle : public std::enable_shared_from_this<Particle>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		static std::shared_ptr<ParticleBin> Pool;
 
 		void Recycle();

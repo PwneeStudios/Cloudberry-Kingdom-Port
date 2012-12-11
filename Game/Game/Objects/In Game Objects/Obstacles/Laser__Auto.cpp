@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		LaserStepCutoff = 1499;
 	}
 
-const std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_AutoGen>();
+std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_AutoGen>();
 
 	const std::shared_ptr<Laser_AutoGen> &Laser_AutoGen::getInstance()
 	{

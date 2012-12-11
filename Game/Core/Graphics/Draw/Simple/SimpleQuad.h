@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class SimpleQuad
+	struct SimpleQuad
 	{
 
-	public:
+	
 		bool Animated;
 
 		void NextKeyFrame();
@@ -29,12 +29,12 @@ namespace CloudberryKingdom
 		bool UseGlobalIllumination;
 		float Illumination;
 
-	private:
+	
 		Vector2 uv0, uv1, uv2, uv3;
 
 		Vector2 PreCalc0, PreCalc1, PreCalc2, PreCalc3;
 
-	public:
+	
 		SimpleVector v0, v1, v2, v3;
 		std::shared_ptr<EzEffect> MyEffect;
 
@@ -52,10 +52,10 @@ namespace CloudberryKingdom
 
 		void CalcTexture( int anim, float frame );
 
-	private:
+	
 		void map( Vector2 &base_uv, Vector2 &new_uv, Vector2 &bl, Vector2 &tr );
 
-	public:
+	
 		bool Hide;
 
 		bool U_Wrap, V_Wrap;
@@ -125,14 +125,14 @@ namespace CloudberryKingdom
 
 		void DefaultCorners();
 
-	private:
+	
 		bool IsDefault();
 
 		/// <summary>
 		/// Shift the quad's absolute vertex coordinates. Does not effect normal coordinates.
 		/// </summary>
 		/// <param name="shift"></param>
-	public:
+	
 		void UpdatedShift( Vector2 shift );
 
 		/// <summary>

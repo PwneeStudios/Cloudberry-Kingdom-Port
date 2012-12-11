@@ -5,6 +5,8 @@
 #include "Hacks/XNA/Effect.h"
 #include "Hacks/XNA/EffectTechnique.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

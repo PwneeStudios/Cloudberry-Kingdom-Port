@@ -5,31 +5,31 @@
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 namespace CloudberryKingdom
 {
-	class Menu;
+	struct Menu;
 }
 
 
 namespace CloudberryKingdom
 {
 #if defined(PC_VERSION)
-	class ControlItem : public MenuItem
+	struct ControlItem : public MenuItem
 	{
-	public:
+	
 		std::shared_ptr<QuadClass> MyQuad;
 		Keys MyKey;
 		std::shared_ptr<Lambda_1<Keys> > SetSecondaryKey;
@@ -42,213 +42,213 @@ namespace CloudberryKingdom
 		void SetQuad();
 	};
 
-	class CustomControlsMenu : public CkBaseMenu
+	struct CustomControlsMenu : public CkBaseMenu
 	{
-	private:
-		class ResetProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct ResetProxy : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<CustomControlsMenu> ccm;
 
-		public:
+		
 			ResetProxy( const std::shared_ptr<CustomControlsMenu> &ccm );
 
 			void Apply( const std::shared_ptr<MenuItem> &_item );
 		};
 
-	private:
-		class KeyQuickspawn_KeyboardKey : public Lambda_1<Keys>
+	
+		struct KeyQuickspawn_KeyboardKey : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyHelp_KeyboardKey : public Lambda_1<Keys>
+	
+		struct KeyHelp_KeyboardKey : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyLeft_Secondary : public Lambda_1<Keys>
+	
+		struct KeyLeft_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyRight_Secondary : public Lambda_1<Keys>
+	
+		struct KeyRight_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyUp_Secondary : public Lambda_1<Keys>
+	
+		struct KeyUp_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyDown_Secondary : public Lambda_1<Keys>
+	
+		struct KeyDown_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyReplayPrev_Secondary : public Lambda_1<Keys>
+	
+		struct KeyReplayPrev_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyReplayNext_Secondary : public Lambda_1<Keys>
+	
+		struct KeyReplayNext_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeyReplayToggle_Secondary : public Lambda_1<Keys>
+	
+		struct KeyReplayToggle_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class KeySlowMoToggle_Secondary : public Lambda_1<Keys>
+	
+		struct KeySlowMoToggle_Secondary : public Lambda_1<Keys>
 		{
-		public:
+		
 			void Apply( const Keys &key );
 		};
 
-	private:
-		class ResetQuickspawn_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetQuickspawn_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetHelp_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetHelp_KeyboardKey : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetLeft_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetLeft_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetRight_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetRight_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetUp_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetUp_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetDown_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetDown_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetReplayPrev_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetReplayPrev_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetReplayNext_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetReplayNext_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetReplayToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetReplayToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class ResetSlowMoToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
+	
+		struct ResetSlowMoToggle_Secondary : public Lambda_1<std::shared_ptr<ControlItem> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<ControlItem> &_item );
 		};
 
-	private:
-		class InitOnButtonHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct InitOnButtonHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		private:
+		
 			std::shared_ptr<CustomControlsMenu> ccm;
 
-		public:
+		
 			InitOnButtonHelper( const std::shared_ptr<CustomControlsMenu> &ccm );
 
 			bool Apply( const std::shared_ptr<Menu> &_m );
 		};
 
-	public:
+	
 		static Color SecondaryKeyColor;
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		void Save();
 
-	protected:
+	
 		virtual void SetTextProperties( const std::shared_ptr<EzText> &text );
 
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
 		virtual void AddItem( const std::shared_ptr<MenuItem> &item );
 
-	public:
+	
 		CustomControlsMenu();
 
-	protected:
+	
 		std::shared_ptr<QuadClass> Backdrop;
-	public:
+	
 		virtual void MakeBackdrop();
 
 		void MakeInstructions();
 
-	private:
+	
 		void Reset( const std::shared_ptr<MenuItem> &_item );
 
 		void MakeBack();
 
 
 
-	public:
+	
 		virtual void Init();
 
-	private:
+	
 		void SetPos();
 
 		void ItemSetup();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 	};
 #endif

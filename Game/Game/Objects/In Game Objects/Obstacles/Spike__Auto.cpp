@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		return Vector2( dist, dist );
 	}
 
-const std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_AutoGen>();
+std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_AutoGen>();
 
 	const std::shared_ptr<Spike_AutoGen> &Spike_AutoGen::getInstance()
 	{

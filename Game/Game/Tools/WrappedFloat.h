@@ -5,25 +5,25 @@
 
 namespace CloudberryKingdom
 {
-	class WrappedBool
+	struct WrappedBool
 	{
-	public:
+	
 		bool MyBool;
 
 		WrappedBool( bool val );
 	};
 
-	class WrappedInt : public Object
+	struct WrappedInt : public Object
 	{
-	public:
+	
 		int MyInt;
 
 		WrappedInt( int val );
 	};
 
-	class WrappedFloat
+	struct WrappedFloat
 	{
-	public:
+	
 		float MyFloat;
 		float MinVal, MaxVal;
 
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 
 		void Release();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -8,21 +8,21 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectVector : public std::enable_shared_from_this<ObjectVector>
+	struct ObjectVector : public std::enable_shared_from_this<ObjectVector>
 	{
-	private:
-		class DefaultCallbackLambda : public Lambda_1<Vector2>
+	
+		struct DefaultCallbackLambda : public Lambda_1<Vector2>
 		{
-		private:
+		
 			std::shared_ptr<ObjectVector> v;
 
-		public:
+		
 			DefaultCallbackLambda( const std::shared_ptr<ObjectVector> &v );
 
 			void Apply( const Vector2 &NewPos );
 		};
 
-	public:
+	
 		AnimationData AnimData;
 
 		Vector2 Pos, RelPos;
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 
 		void PosFromRelPos();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

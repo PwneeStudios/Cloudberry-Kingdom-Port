@@ -5,215 +5,215 @@
 
 namespace CloudberryKingdom
 {
-	class CustomLevel_GUI : public CkBaseMenu
+	struct CustomLevel_GUI : public CkBaseMenu
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
 
-	private:
-		class StartLevelFromMenDataStandardLoadProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct StartLevelFromMenDataStandardLoadProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		private:
+		
 			std::shared_ptr<LevelSeedData> data;
 
-		public:
+		
 			StartLevelFromMenDataStandardLoadProxy( const std::shared_ptr<LevelSeedData> &data );
 
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class StartLevelFromMenuDataInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct StartLevelFromMenuDataInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			StartLevelFromMenuDataInitializeHelper( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &piece );
 		};
 
-	private:
-		class StartLevelEnableLoadProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct StartLevelEnableLoadProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		private:
+		
 			std::shared_ptr<LevelSeedData> data;
 
-		public:
+		
 			StartLevelEnableLoadProxy( const std::shared_ptr<LevelSeedData> &data );
 
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class OnReturnFromLevelProxy : public Lambda
+	
+		struct OnReturnFromLevelProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			OnReturnFromLevelProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnSetValueHelper : public Lambda
+	
+		struct InitOnSetValueHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<LengthSlider> length;
 
-		public:
+		
 			InitOnSetValueHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnSlideHelper : public Lambda
+	
+		struct InitOnSlideHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<LengthSlider> length;
 
-		public:
+		
 			InitOnSlideHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnSlideHelper2 : public Lambda
+	
+		struct InitOnSlideHelper2 : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<LengthSlider> length;
 
-		public:
+		
 			InitOnSlideHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnSetValueHelper2 : public Lambda
+	
+		struct InitOnSetValueHelper2 : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<LengthSlider> length;
 
-		public:
+		
 			InitOnSetValueHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnAStartHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+	
+		struct InitOnAStartHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			InitOnAStartHelper( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			bool Apply( const std::shared_ptr<Menu> &dummy );
 		};
 
-	private:
-		class InitOnIndexSelectHelper : public Lambda
+	
+		struct InitOnIndexSelectHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<MenuList> LocationList;
 
-		public:
+		
 			InitOnIndexSelectHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &LocationList );
 
 			void Apply();
 		};
 
-	private:
-		class InitOnIndexSelect : public Lambda
+	
+		struct InitOnIndexSelect : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 			std::shared_ptr<MenuList> GameList;
 
-		public:
+		
 			InitOnIndexSelect( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &GameList );
 
 			void Apply();
 		};
 
-	private:
-		class DiffList_OnIndexProxy : public Lambda
+	
+		struct DiffList_OnIndexProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			DiffList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
-	private:
-		class HeroList_OnIndexProxy : public Lambda
+	
+		struct HeroList_OnIndexProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			HeroList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
-	private:
-		class BringNextProxy : public Lambda
+	
+		struct BringNextProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			BringNextProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
-	private:
-		class BringLoadProxy : public Lambda
+	
+		struct BringLoadProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			BringLoadProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
-	private:
-		class BringLoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+	
+		struct BringLoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
 		{
-		private:
+		
 			std::shared_ptr<CustomLevel_GUI> clGui;
 
-		public:
+		
 			BringLoadProxy1( const std::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply( const std::shared_ptr<MenuItem> &dummy );
 		};
 
-	public:
+	
 		static std::vector<std::shared_ptr<TileSet> > FreeplayTilesets;
 		static std::vector<std::shared_ptr<BobPhsx> > FreeplayHeroes;
 
@@ -228,10 +228,10 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<ObjectIcon> HeroIcon, MiniCheckpoint;
 
-	private:
+	
 		static Localization::Words CustomHeroString;
 
-	public:
+	
 		CustomLevel_GUI();
 
 		void StartLevelFromMenuData();
@@ -240,10 +240,10 @@ namespace CloudberryKingdom
 
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		void OnReturnFromLevel();
 
 		void AnyHero();
@@ -277,10 +277,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<MenuItem> Start;
 		std::shared_ptr<MenuList> HeroList, DiffList;
 		std::shared_ptr<EzText> HeroText, CheckpointsText;
-	public:
+	
 		virtual void Init();
 
-	private:
+	
 		std::shared_ptr<MenuItem> AddHeroItem( const std::shared_ptr<BobPhsx> &hero );
 
 		void DiffList_OnIndex();
@@ -291,12 +291,12 @@ namespace CloudberryKingdom
 
 		bool IsCustomHero();
 
-	public:
+	
 		bool IsCustomDifficulty();
 
 		void SetPos();
 
-	private:
+	
 		void SelectUpLevel();
 
 		void SelectDownLevel();
@@ -304,16 +304,16 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The panel that actually starts the level, when it is started.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<GUI_Panel> CallingPanel;
 
-	private:
+	
 		void BringNext();
 
-	public:
+	
 		virtual void Show();
 
-	private:
+	
 		std::shared_ptr<CustomHero_GUI> HeroGui;
 		void BringHero();
 
@@ -321,23 +321,23 @@ namespace CloudberryKingdom
 
 		void BringLoad();
 
-	public:
+	
 		virtual void OnReturnTo();
 
-	private:
+	
 		int DesiredNumCheckpoints;
 		float DesiredLength;
 		int DesiredHeroIndex;
-	protected:
+	
 		virtual void MyDraw();
 
-	public:
+	
 		static std::wstring SeedStringToLoad;
 		static bool ExitFreeplay;
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

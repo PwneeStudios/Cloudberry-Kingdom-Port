@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class BackgroundType
+	struct BackgroundType
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		static std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
 
 		static std::shared_ptr<BackgroundTemplate> None, Random, _Sea, _Sea_Rain, _Hills, _Hills_Rain, _Forest, _Forest_Rain, _Cloud, _Cloud_Rain, _Cave, _Castle;
@@ -32,9 +32,9 @@ namespace CloudberryKingdom
 		static void Load( const std::wstring &path );
 	};
 
-	class BackgroundTemplate : public std::enable_shared_from_this<BackgroundTemplate>
+	struct BackgroundTemplate : public std::enable_shared_from_this<BackgroundTemplate>
 	{
-	public:
+	
 		std::wstring Name;
 		bool MadeOfCode;
 		bool MadeOfText;
@@ -48,13 +48,13 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Background> MakeInstanceOf();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class RegularBackground : public Background
+	struct RegularBackground : public Background
 	{
-	public:
+	
 		std::shared_ptr<BackgroundTemplate> MyTemplate;
 
 		RegularBackground();
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 
 		virtual void DrawForeground();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 

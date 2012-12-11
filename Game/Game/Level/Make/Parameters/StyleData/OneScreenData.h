@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class OneScreenData : public StyleData
+	struct OneScreenData : public StyleData
 	{
-	public:
+	
 		Vector2 CamShift;
 
 		OneScreenData( const std::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

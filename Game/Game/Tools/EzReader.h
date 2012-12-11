@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class EzReader
+	struct EzReader
 	{
-	public:
+	
 		std::wstring FileName;
 
-	private:
+	
 		//std::shared_ptr<FileStream> stream;
-	public:
+	
 		std::shared_ptr<BinaryReader> reader;
 
 		EzReader( const std::wstring &FileName );

@@ -5,32 +5,32 @@
 
 namespace CloudberryKingdom
 {
-	class CharacterSelect : public std::enable_shared_from_this<CharacterSelect>
+	struct CharacterSelect : public std::enable_shared_from_this<CharacterSelect>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
-		class RandomizeProxy : public Lambda
+	
+		struct RandomizeProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<CharacterSelect> cs;
 
-		public:
+		
 			RandomizeProxy( const std::shared_ptr<CharacterSelect> &cs );
 
 			void Apply();
 		};
 
-	public:
+	
 		enum SelectState
 		{
 			SelectState_BEGINNING,
 			SelectState_SELECTING,
 			SelectState_WAITING
 		};
-	public:
+	
 		SelectState MyState;
 
 		bool Join;
@@ -50,10 +50,10 @@ namespace CloudberryKingdom
 		std::vector<int> ItemIndex;
 		std::vector<std::vector<std::shared_ptr<MenuListItem> > > ItemList;
 
-	private:
+	
 		Vector2 Center, NormalZoomCenter;
 
-	public:
+	
 		static float Width;
 		static std::vector<Vector2> Centers;
 		void InitCenters();
@@ -68,9 +68,9 @@ namespace CloudberryKingdom
 
 		void Randomize();
 
-	private:
+	
 		int HoldCapeIndex, HoldCapeOutlineIndex;
-	public:
+	
 		void Customize_UpdateColors();
 
 		bool HasCustom();
@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 
 		void SetIndex( int i );
 
-	private:
+	
 		int FindIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx obj );
 
 		/// <summary>
@@ -87,12 +87,12 @@ namespace CloudberryKingdom
 		/// </summary>
 		void CopyIndicesFromColorScheme();
 
-	public:
+	
 		void PhsxStep();
 
 		void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

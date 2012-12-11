@@ -5,43 +5,43 @@
 
 namespace CloudberryKingdom
 {
-	class FadeInObject : public GameObject
+	struct FadeInObject : public GameObject
 	{
-	private:
-		class ReadyProxy : public Lambda
+	
+		struct ReadyProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<FadeInObject> fio;
 
-		public:
+		
 			ReadyProxy( const std::shared_ptr<FadeInObject> &fio );
 
 			void Apply();
 		};
 
-	private:
-		class EndProxy : public Lambda
+	
+		struct EndProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<FadeInObject> fio;
 
-		public:
+		
 			EndProxy( const std::shared_ptr<FadeInObject> &fio );
 
 			void Apply();
 		};
 
-	public:
+	
 		FadeInObject();
 
 		virtual void OnAdd();
 
-	private:
+	
 		void Ready();
 
 		void End();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 	};
 }

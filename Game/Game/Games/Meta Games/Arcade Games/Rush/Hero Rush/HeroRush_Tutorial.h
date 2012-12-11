@@ -5,206 +5,206 @@
 
 namespace CloudberryKingdom
 {
-	class HeroRush_Tutorial : public GameObject
+	struct HeroRush_Tutorial : public GameObject
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class StartMusicHelper : public Lambda
+	
+		struct StartMusicHelper : public Lambda
 		{
-		public:
+		
 			void Apply();
 		};
 
-	private:
-		class TutorialOrSkipProxy : public Lambda
+	
+		struct TutorialOrSkipProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> tutorial;
 
-		public:
+		
 			TutorialOrSkipProxy( const std::shared_ptr<HeroRush_Tutorial> &tutorial );
 
 			void Apply();
 		};
 
-	private:
-		class ListenerHelper : public Lambda
+	
+		struct ListenerHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> tutorial;
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			ListenerHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	public:
-		class AddGameObjectHelper : public Lambda
+	
+		struct AddGameObjectHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> tutorial;
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			AddGameObjectHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	private:
-		class TitleProxy : public Lambda
+	
+		struct TitleProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			TitleProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class TitleNextTutorialHelper : public Lambda
+	
+		struct TitleNextTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			TitleNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	private:
-		class HeroRushTimerShowHelper : public Lambda
+	
+		struct HeroRushTimerShowHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			HeroRushTimerShowHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class PointAtDoorNextTutorialHelper : public Lambda
+	
+		struct PointAtDoorNextTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<Arrow> arrow;
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			PointAtDoorNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	private:
-		class PointAtTimerProxy : public Lambda
+	
+		struct PointAtTimerProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			PointAtTimerProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class PointAtTimerNextTutorialHelper : public Lambda
+	
+		struct PointAtTimerNextTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<Arrow> arrow;
 			std::shared_ptr<GUI_Text> text;
 			std::shared_ptr<GUI_Text> text2;
 
-		public:
+		
 			PointAtTimerNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text, const std::shared_ptr<GUI_Text> &text2 );
 
 			void Apply();
 		};
 
-	private:
-		class PointAtCoinsNextTutorialHelper : public Lambda
+	
+		struct PointAtCoinsNextTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<GUI_Text> text;
 			std::vector<std::shared_ptr<Arrow> > arrows;
 
-		public:
+		
 			PointAtCoinsNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text, std::vector<std::shared_ptr<Arrow> > &arrows );
 
 			void Apply();
 		};
 
-	private:
-		class PointAtScoreNextTutorialHelper : public Lambda
+	
+		struct PointAtScoreNextTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 			std::shared_ptr<Arrow> arrow;
 			std::shared_ptr<GUI_Text> text;
 
-		public:
+		
 			PointAtScoreNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
 
-	private:
-		class ReadyProxy : public Lambda
+	
+		struct ReadyProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			ReadyProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class ReadyTutorialHelper : public Lambda
+	
+		struct ReadyTutorialHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			ReadyTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class PauseHeroRushTimerHelper : public Lambda
+	
+		struct PauseHeroRushTimerHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			PauseHeroRushTimerHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
 
-	private:
-		class EndProxy : public Lambda
+	
+		struct EndProxy : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<HeroRush_Tutorial> hrt;
 
-		public:
+		
 			EndProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
@@ -213,7 +213,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether the Hero Rush introduction has been watched before.
 		/// </summary>
-	public:
+	
 		static bool HasWatchedOnce;
 		static void WatchedOnce();
 
@@ -228,26 +228,26 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Whether text makes a popping sound when we kill it
 		/// </summary>
-	protected:
+	
 		bool SoundOnKill;
 
-	private:
+	
 		std::shared_ptr<Challenge_HeroRush> HeroRush;
-	public:
+	
 		HeroRush_Tutorial( const std::shared_ptr<Challenge_HeroRush> &HeroRush );
 
 		virtual void OnAdd();
 
-	protected:
+	
 		void TutorialOrSkip();
 
-	private:
+	
 		void StartTutorial();
 
-	protected:
+	
 		virtual void Title();
 
-	private:
+	
 		void PointAtDoor();
 
 		void PointAtTimer();
@@ -260,10 +260,10 @@ namespace CloudberryKingdom
 
 		void End();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData
+	struct PieceSeedData
 	{
 		/// <summary>
 		/// Uses the upgrade data inMyUpgrades1 to calculate the level gen data.
 		/// </summary>
-	public:
+	
 		void CalculateSimple();
 
 		std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > PreStage1, PreStage2;
@@ -61,23 +61,23 @@ namespace CloudberryKingdom
 
 		void StandardClose();
 
-	private:
+	
 		std::shared_ptr<LevelSeedData> MyLevelSeed;
-	public:
+	
 		const std::shared_ptr<Rand> &getRnd() const;
 
 		PieceSeedData( const std::shared_ptr<LevelSeedData> &LevelSeed );
 
 		PieceSeedData( int Index, LevelGeometry Type, const std::shared_ptr<LevelSeedData> &LevelSeed );
 
-	private:
+	
 		void Init( LevelGeometry Type );
 
 
-	public:
+	
 		void NoBlobs();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

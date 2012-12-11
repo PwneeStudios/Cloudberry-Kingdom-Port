@@ -6,9 +6,9 @@
 
 namespace CloudberryKingdom
 {
-	class Spike_Parameters : public AutoGen_Parameters
+	struct Spike_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		enum OffsetStyles
 		{
 			OffsetStyles_RND,
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 			OffsetStyles_SINE,
 			OffsetStyles_LENGTH
 		};
-	public:
+	
 		Param SpikeMinDist, MinSpikeDensity, MaxSpikeDensity, SpikePeriod;
 
 		OffsetStyles OffsetStyle;
@@ -30,28 +30,28 @@ namespace CloudberryKingdom
 		void SetPeriod( const std::shared_ptr<Spike> &spike, const std::shared_ptr<Rand> &Rnd );
 	};
 
-	class Spike_AutoGen : public AutoGen
+	struct Spike_AutoGen : public AutoGen
 	{
-	private:
-		class SpikeCleanup : public LambdaFunc_1<Vector2, Vector2>
+	
+		struct SpikeCleanup : public LambdaFunc_1<Vector2, Vector2>
 		{
-		private:
+		
 			std::shared_ptr<Spike_Parameters> Params;
 
-		public:
+		
 			SpikeCleanup( const std::shared_ptr<Spike_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
-	private:
-		static const std::shared_ptr<Spike_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Spike_AutoGen> instance;
+	
 		const static std::shared_ptr<Spike_AutoGen> &getInstance();
 
-	public:
+	
 		Spike_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

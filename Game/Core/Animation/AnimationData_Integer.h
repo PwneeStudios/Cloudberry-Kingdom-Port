@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class EzTexture;
+	struct EzTexture;
 }
 
 
 namespace CloudberryKingdom
 {
-	class OneAnim_Texture
+	struct OneAnim_Texture
 	{
-	public:
+	
 		std::vector<std::shared_ptr<EzTexture> > Data;
 		float Speed;
 	};
 
-	class AnimationData_Texture
+	struct AnimationData_Texture
 	{
-	public:
+	
 		std::vector<OneAnim_Texture> Anims;
 
 		AnimationData_Texture();
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<EzTexture> Calc( int anim, float t );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

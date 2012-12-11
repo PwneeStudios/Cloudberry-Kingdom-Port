@@ -6,193 +6,193 @@
 namespace CloudberryKingdom
 {
 
-	class LevelSeedData : public std::enable_shared_from_this<LevelSeedData>
+	struct LevelSeedData : public std::enable_shared_from_this<LevelSeedData>
 	{
 
-	private:
-		class _StartSongProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct _StartSongProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		private:
+		
 			std::shared_ptr<LevelSeedData> lsd;
 
-		public:
+		
 			_StartSongProxy( const std::shared_ptr<LevelSeedData> &lsd );
 
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class _HasWall_ProcessProxy : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
+	
+		struct _HasWall_ProcessProxy : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &piece );
 		};
 
-	private:
-		class _SetWeather_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct _SetWeather_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class _NoStartDoorProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct _NoStartDoorProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class _FadeIn_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct _FadeIn_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class EOL_StringWorldDoorEndAction_WithFadeProxy : public Lambda_1<std::shared_ptr<Door> >
+	
+		struct EOL_StringWorldDoorEndAction_WithFadeProxy : public Lambda_1<std::shared_ptr<Door> >
 		{
-		private:
+		
 			std::shared_ptr<StringWorldGameData> gameData;
 
-		public:
+		
 			EOL_StringWorldDoorEndAction_WithFadeProxy( const std::shared_ptr<StringWorldGameData> &gameData );
 
 			void Apply( const std::shared_ptr<Door> &door );
 		};
 
-	private:
-		class _FadeOut_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct _FadeOut_ProcessProxy : public Lambda_1<std::shared_ptr<Level> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level );
 		};
 
-	private:
-		class ModPieceViaStringProxy : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct ModPieceViaStringProxy : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<LevelSeedData> lsd;
 
-		public:
+		
 			ModPieceViaStringProxy( const std::shared_ptr<LevelSeedData> &lsd );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &piece );
 		};
 
-	private:
-		class ModPieceViaHashProxy : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct ModPieceViaHashProxy : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<LevelSeedData> lsd;
 
-		public:
+		
 			ModPieceViaHashProxy( const std::shared_ptr<LevelSeedData> &lsd );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &piece );
 		};
 
-	private:
-		class SetToStartSongHelper : public Lambda
+	
+		struct SetToStartSongHelper : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<EzSong> song;
 
-		public:
+		
 			SetToStartSongHelper( const std::shared_ptr<EzSong> &song );
 
 			void Apply();
 		};
 
-	private:
-		class SetToStartSongPostMakeHelper : public Lambda_1<std::shared_ptr<Level> >
+	
+		struct SetToStartSongPostMakeHelper : public Lambda_1<std::shared_ptr<Level> >
 		{
-		private:
+		
 			int delay;
 			std::shared_ptr<Lambda> songHelper;
 
-		public:
+		
 			SetToStartSongPostMakeHelper( int delay, const std::shared_ptr<Lambda> &songHelper );
 
 			void Apply( const std::shared_ptr<Level> &lvl );
 		};
 
-	private:
-		class BOL_StartMusicProxy : public Lambda
+	
+		struct BOL_StartMusicProxy : public Lambda
 		{
-		public:
+		
 			void Apply();
 		};
 
-	private:
-		class ScoreScreenLambda : public LambdaFunc<std::shared_ptr<GameObject> >
+	
+		struct ScoreScreenLambda : public LambdaFunc<std::shared_ptr<GameObject> >
 		{
-		private:
+		
 			StatGroup stats;
 			std::shared_ptr<Level> level;
 
-		public:
+		
 			ScoreScreenLambda( StatGroup stats, const std::shared_ptr<Level> &level );
 
 			std::shared_ptr<GameObject> Apply();
 		};
 
-	private:
-		class EOL_DoorActionProxy : public Lambda_1<std::shared_ptr<Door> >
+	
+		struct EOL_DoorActionProxy : public Lambda_1<std::shared_ptr<Door> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Door> &door );
 		};
 
-	private:
-		class PostMake_StringWorldStandardHelper : public Lambda
+	
+		struct PostMake_StringWorldStandardHelper : public Lambda
 		{
-		public:
+		
 			void Apply();
 		};
 
-	public:
+	
 		enum LavaMakeTypes
 		{
 			LavaMakeTypes_ALWAYS_MAKE,
 			LavaMakeTypes_NEVER_MAKE,
 			LavaMakeTypes_RANDOM
 		};
-	private:
-		class StandardInitHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+	
+		struct StandardInitHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData>, std::shared_ptr<Upgrades> > > CustomDiff;
 
-		public:
+		
 			StandardInitHelper( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData>, std::shared_ptr<Upgrades> > > &CustomDiff );
 
 			void Apply( const std::shared_ptr<PieceSeedData> &p );
 		};
 
-	private:
-		class InitNormalMyModParamsHelper : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
+	
+		struct InitNormalMyModParamsHelper : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
 		{
-		public:
+		
 			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );
 		};
 
-	public:
+	
 		static bool NoDoublePaths;
 
 		std::shared_ptr<Level> MakeLevel( const std::shared_ptr<GameData> &game );
 		std::shared_ptr<Level> MakeLevel( bool MakeBackground, const std::shared_ptr<GameData> &game );
 
-	private:
+	
 		void MakeTheBackground( const std::shared_ptr<Level> &NewLevel, float Height );
 
-	public:
+	
 		static int ForcedReturnEarly;
-	private:
+	
 		int SetReturnEarly( const std::shared_ptr<PieceSeedData> &Piece );
 
 
-	public:
+	
 		bool Saveable;
 
 		/// <summary>
@@ -200,53 +200,53 @@ namespace CloudberryKingdom
 		/// </summary>
 		#pragma region Special flags
 		bool HasWall;
-	private:
+	
 		static const std::wstring WallFlag;
-	public:
+	
 		bool FadeIn;
-	private:
+	
 		static const std::wstring FadeInFlag;
-	public:
+	
 		bool FadeOut;
-	private:
+	
 		static const std::wstring FadeOutFlag;
-	public:
+	
 		float WeatherIntensity;
-	private:
+	
 		static const std::wstring WeatherIntensityFlag;
-	public:
+	
 		bool NoStartDoor;
-	private:
+	
 		static const std::wstring NoStartDoorFlag;
-	public:
+	
 		int LevelNum;
-	private:
+	
 		static const std::wstring LevelFlag;
 
 		/// <summary>
 		/// How long to wait before opening the initial door.
 		/// </summary>
-	public:
+	
 		int WaitLengthToOpenDoor;
-	private:
+	
 		static const std::wstring WaitLengthToOpenDoorString;
-	public:
+	
 		bool OpenDoorSound;
-	private:
+	
 		static const std::wstring OpenDoorSoundFlag;
 
 		/// <summary>
 		/// Song to play when this level starts. Regular sound track will resume on completion.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<EzSong> MySong;
-	private:
+	
 		static const std::wstring SongString;
 
-	public:
+	
 		void ProcessSpecial();
 
-	private:
+	
 		void _StartSong( const std::shared_ptr<Level> &level );
 
 		static void _HasWall_Process( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &piece );
@@ -263,7 +263,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Set default parameters for this LevelSeedData assuming we are about to read in parameters from a string.
 		/// </summary>
-	public:
+	
 		void DefaultRead( const std::wstring &str );
 
 		/// <summary>
@@ -276,7 +276,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// While reading in parameters from a string, the portion of the string storing upgrade data is stored in this string.
 		/// </summary>
-	private:
+	
 		std::vector<std::wstring> UpgradeStrs;
 
 		/// <summary>
@@ -295,7 +295,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		void RandomHero( const std::shared_ptr<BobPhsx> &Hero, int Hash );
 
-	public:
+	
 		std::wstring SuggestedName();
 
 		static std::wstring GetNameFromSeedStr( const std::wstring &seed );
@@ -405,28 +405,28 @@ namespace CloudberryKingdom
 
 		LevelSeedData();
 
-	private:
+	
 		void BaseInit();
 
-	public:
+	
 		int Difficulty, NumPieces, Length;
-	private:
+	
 		std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > MyCustomDifficulty;
-	public:
+	
 		void PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff );
 
-	private:
+	
 		bool Initialized;
-	public:
+	
 		void Init();
 
 		/// <summary>
 		/// Prevent unreasonable or dangerous parameter combinations.
 		/// </summary>
-	private:
+	
 		void Sanitize();
 
-	public:
+	
 		void StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData>, std::shared_ptr<Upgrades> > > &CustomDiff );
 		void Initialize( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff );
 		void Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff );
@@ -437,14 +437,14 @@ namespace CloudberryKingdom
 
 		void InitPlace( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff );
 
-	private:
+	
 		std::shared_ptr<Level> MakeNewLevel( const std::shared_ptr<GameData> &game );
 
-	public:
+	
 		std::shared_ptr<GameData> Create();
 		std::shared_ptr<GameData> Create( bool MakeInBackground );
 
-	private:
+	
 		void InitializeInstanceFields();
 
 	};

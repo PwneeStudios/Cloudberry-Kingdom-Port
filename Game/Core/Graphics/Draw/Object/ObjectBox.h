@@ -8,9 +8,9 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBox
+	struct ObjectBox
 	{
-	public:
+	
 		std::shared_ptr<ObjectVector> BL, TR;
 
 		std::wstring Name;
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 
 		void DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, Color clr );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

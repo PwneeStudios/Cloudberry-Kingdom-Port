@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class StringWorldEndurance : public StringWorldGameData
+	struct StringWorldEndurance : public StringWorldGameData
 	{
-	private:
-		class OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+	
+		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
 		{
-		private:
+		
 			std::shared_ptr<StringWorldEndurance> ch;
-		public:
+		
 			OnSwapLambda( const std::shared_ptr<StringWorldEndurance> &ch );
 
 			void Apply( const std::shared_ptr<LevelSeedData> &data );
 		};
 
-	private:
+	
 		std::shared_ptr<GUI_Score> MyGUI_Score;
 		std::shared_ptr<GUI_Level> MyGUI_Level;
 
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<GUI_NextLife> Gui_NextLife;
 		std::shared_ptr<CoinScoreMultiplierObject> MyCoinScoreMultiplier;
 
-	public:
+	
 		StringWorldEndurance( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife );
 
 		virtual void Release();

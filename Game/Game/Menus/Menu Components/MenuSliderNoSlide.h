@@ -5,21 +5,21 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
 namespace CloudberryKingdom
 {
-	class MenuSliderNoSlide : public MenuSliderBase
+	struct MenuSliderNoSlide : public MenuSliderBase
 	{
-	public:
+	
 		MenuSliderNoSlide( const std::shared_ptr<EzText> &Text );
 
 		MenuSliderNoSlide( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
 
 #if defined(PC_VERSION)
-	protected:
+	
 		virtual void PC_OnLeftMouseDown();
 #endif
 	};

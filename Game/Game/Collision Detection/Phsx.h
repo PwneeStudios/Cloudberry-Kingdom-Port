@@ -5,39 +5,39 @@
 
 namespace CloudberryKingdom
 {
-	class AutoGen;
+	struct AutoGen;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class AABox;
+	struct AABox;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectData;
+	struct ObjectData;
 }
 
 namespace CloudberryKingdom
 {
-	class colData
+	struct colData
 	{
-	public:
+	
 		bool Collision;
 		float Location;
 	};
 
-	class Phsx
+	struct Phsx
 	{
 		/// <summary>
 		/// Return true if a point is in a box specified by BL and TR.
 		/// </summary>
-	public:
+	
 		static bool Inside( Vector2 p, Vector2 BL, Vector2 TR );
 
 		static bool Inside( Vector2 p, Vector2 BL, Vector2 TR, Vector2 padding );

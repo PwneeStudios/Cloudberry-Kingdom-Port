@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	class AnimQueueEntry
+	struct AnimQueueEntry
 	{
-	public:
+	
 		AnimQueueEntryType Type;
 		float AnimSpeed, StartT, EndT, DestT;
 		bool Loop;

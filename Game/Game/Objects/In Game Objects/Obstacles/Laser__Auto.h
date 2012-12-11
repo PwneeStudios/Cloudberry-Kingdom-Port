@@ -5,51 +5,51 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters;
+	struct AutoGen_Parameters;
 }
 
 
 namespace CloudberryKingdom
 {
-	class Laser_Parameters : public AutoGen_Parameters
+	struct Laser_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		float LaserStepCutoff;
 		Param LaserStep, LaserPeriod;
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Laser_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Laser_AutoGen : public AutoGen
+	struct Laser_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<Laser_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Laser_AutoGen> instance;
+	
 		const static std::shared_ptr<Laser_AutoGen> &getInstance();
 
-	public:
+	
 		Laser_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

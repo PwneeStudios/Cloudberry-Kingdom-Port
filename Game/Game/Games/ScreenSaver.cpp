@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 

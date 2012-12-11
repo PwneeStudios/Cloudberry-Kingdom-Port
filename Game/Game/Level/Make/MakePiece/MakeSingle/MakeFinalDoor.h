@@ -6,53 +6,53 @@
 
 namespace CloudberryKingdom
 {
-	class MakeFinalDoor : public MakeThing, public std::enable_shared_from_this<MakeFinalDoor>
+	struct MakeFinalDoor : public MakeThing, public std::enable_shared_from_this<MakeFinalDoor>
 	{
-	private:
-		class VanillaFillEndPieceLambda : public Lambda_1<std::shared_ptr<BlockBase> >
+	
+		struct VanillaFillEndPieceLambda : public Lambda_1<std::shared_ptr<BlockBase> >
 		{
-		public:
+		
 			VanillaFillEndPieceLambda();
 
 			void Apply( const std::shared_ptr<BlockBase> &block );
 		};
 
-	private:
-		class ModBlockLambda : public Lambda_1<std::shared_ptr<BlockBase> >
+	
+		struct ModBlockLambda : public Lambda_1<std::shared_ptr<BlockBase> >
 		{
-		private:
+		
 			std::shared_ptr<MakeFinalDoor> mfd;
-		public:
+		
 			ModBlockLambda( const std::shared_ptr<MakeFinalDoor> &mfd );
 
 			void Apply( const std::shared_ptr<BlockBase> &block );
 		};
 
-	private:
-		class FindFinalBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+	
+		struct FindFinalBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
 		{
-		public:
+		
 			FindFinalBlockLambda();
 
 			bool Apply( const std::shared_ptr<BlockBase> &block );
 		};
 
-	private:
-		class BoxTRyLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
+	
+		struct BoxTRyLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
 		{
-		public:
+		
 			BoxTRyLambda();
 
 			float Apply( const std::shared_ptr<BlockBase> &block );
 		};
 
-	private:
+	
 		std::shared_ptr<Level> MyLevel;
 
 		/// <summary>
 		/// The block on which the final door rests on.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<BlockBase> FinalBlock;
 
 		/// <summary>
@@ -60,10 +60,10 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 FinalPos;
 
-	private:
+	
 		BlockVec FinalBlocks;
 
-	public:
+	
 		MakeFinalDoor( const std::shared_ptr<Level> &level );
 
 		virtual void Phase1();
@@ -78,17 +78,17 @@ namespace CloudberryKingdom
 
 		static void SetFinalDoor( const std::shared_ptr<Door> &door, const std::shared_ptr<Level> &level, Vector2 FinalPos );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
-	class FindCamZoneLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+	struct FindCamZoneLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		static std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda_Static;
 
 		FindCamZoneLambda();

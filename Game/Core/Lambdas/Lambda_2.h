@@ -4,9 +4,9 @@
 namespace CloudberryKingdom
 {
 	template<typename T1, typename T2>
-	class Lambda_2
+	struct Lambda_2
 	{
-	public:
+	
 		virtual void Apply( const T1 &t1, const T2 &t2 ) = 0;
 	};
 }

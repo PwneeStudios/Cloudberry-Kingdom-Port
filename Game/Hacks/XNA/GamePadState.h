@@ -6,10 +6,10 @@
 #include "Hacks/XNA/GamePadDPad.h"
 #include "Hacks/XNA/GamePadThumbSticks.h"
 
-class GamePadState
+struct GamePadState
 {
 	
-public:
+
 
 	bool IsConnected;
 

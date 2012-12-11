@@ -1,10 +1,10 @@
 #ifndef _EFFECTPARAMETERS_H_
 #define _EFFECTPARAMETERS_H_
 
-class EffectParameter
+struct EffectParameter
 {
 
-public:
+
 
 	// FIXME: Implement everything.
 	void SetValue( const Vector4 &v )
@@ -15,7 +15,7 @@ public:
 	{
 	}
 
-	void SetValue( const std::shared_ptr<class Texture2D> &t )
+	void SetValue( const std::shared_ptr<struct Texture2D> &t )
 	{
 	}
 

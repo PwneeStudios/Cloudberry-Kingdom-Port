@@ -5,16 +5,16 @@
 
 namespace CloudberryKingdom
 {
-	class Checkpoint : public ObjectBase
+	struct Checkpoint : public ObjectBase
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
-		class CheckpointTileInfo : public TileInfoBase
+	
+		struct CheckpointTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<TextureOrAnim> Sprite;
 			Vector2 Size;
 			Vector2 TextureSize;
@@ -24,22 +24,22 @@ namespace CloudberryKingdom
 			std::shared_ptr<Particle> DieTemplate;
 			CheckpointTileInfo();
 
-		private:
+		
 			void InitializeInstanceFields();
 		};
 
-	public:
+	
 		virtual void Release();
 
 		bool Taken, TakenAnimFinished;
-	private:
+	
 		bool GhostFaded;
 
 		float Taken_Scale, Taken_Alpha;
 
 		static std::shared_ptr<EzSound> MySound;
 
-	public:
+	
 		bool SkipPhsx;
 
 		bool Touched;
@@ -57,16 +57,16 @@ namespace CloudberryKingdom
 
 		Checkpoint();
 
-	private:
+	
 		void SetAnimation();
 
-	public:
+	
 		void Revert();
 
-	private:
+	
 		void ResetTakenAnim();
 
-	public:
+	
 		void Die();
 
 		void Init( const std::shared_ptr<Level> &level );

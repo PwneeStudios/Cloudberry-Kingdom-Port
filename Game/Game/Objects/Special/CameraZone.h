@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class CameraZone : public ZoneTrigger
+	struct CameraZone : public ZoneTrigger
 	{
-	private:
-		class ZoneTriggerLambda : public Lambda_1<std::shared_ptr<ZoneTrigger> >
+	
+		struct ZoneTriggerLambda : public Lambda_1<std::shared_ptr<ZoneTrigger> >
 		{
-		private:
+		
 			std::shared_ptr<CameraZone> zt;
-		public:
+		
 			ZoneTriggerLambda( const std::shared_ptr<CameraZone> &zt );
 
 			void Apply( const std::shared_ptr<ZoneTrigger> &trig );
 		};
 
-	public:
+	
 		bool Activated;
 		bool SnapNext;
 

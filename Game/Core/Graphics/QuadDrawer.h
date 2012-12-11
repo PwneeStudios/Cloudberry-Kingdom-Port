@@ -5,20 +5,20 @@
 
 namespace CloudberryKingdom
 {
-	class QuadDrawer
+	struct QuadDrawer
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
+	
 		std::shared_ptr<GraphicsDevice> Device;
 
-	public:
+	
 		std::shared_ptr<EzEffect> DefaultEffect;
 		std::shared_ptr<EzTexture> DefaultTexture;
 
-	private:
+	
 		std::shared_ptr<EzEffect> CurrentEffect;
 		std::shared_ptr<EzTexture> CurrentTexture;
 
@@ -29,34 +29,34 @@ namespace CloudberryKingdom
 
 		void setCurrentMatrix( const Matrix &value );
 		Matrix _CurrentMatrix;
-	public:
+	
 		float CurrentMatrixSignature;
 
-	private:
+	
 		bool Current_U_Wrap, Current_V_Wrap;
 
-	public:
+	
 		std::vector<MyOwnVertexFormat> Vertices;
 		int N;
 		int TrianglesInBuffer;
-	private:
+	
 		int i;
 
 		SimpleQuad LineQuad;
 
 		std::shared_ptr<SamplerState> WrapWrap, ClampWrap, WrapClamp, ClampClamp;
 
-	public:
+	
 		const float &getGlobalIllumination() const;
 		void setGlobalIllumination( const float &value );
-	private:
+	
 		float _GlobalIllumination;
 		float Illumination;
 
 		//float CurrentIllumination = 1f;
 		//public void InvalidateIllumination() { CurrentIllumination = -1; }
 
-	public:
+	
 		QuadDrawer( const std::shared_ptr<GraphicsDevice> &device, int n );
 
 		void SetColorMatrix( Matrix m, float signature );
@@ -65,10 +65,10 @@ namespace CloudberryKingdom
 
 		void SetInitialState();
 
-	private:
+	
 		void SetSamplerState();
 
-	public:
+	
 		void SetAddressMode( bool U_Wrap, bool V_Wrap );
 
 		void DrawQuad_Particle( SimpleQuad &quad );
@@ -89,9 +89,9 @@ namespace CloudberryKingdom
 
 		void DrawCircle( Vector2 x, float r, Color color );
 
-	private:
+	
 		static float CurLightSourceFade;
-	public:
+	
 		void DrawLightSource( Vector2 x, float r, float Fade, Color color );
 
 		void DrawSquareDot( Vector2 x, Color color, float width );
@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 
 		void Flush();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

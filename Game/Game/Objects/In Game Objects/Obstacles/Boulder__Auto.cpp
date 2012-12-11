@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 			Tools::EnsureBounds_Y( floater, TR - Padding, BL + Padding );
 	}
 
-const std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Boulder_AutoGen>();
+std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Boulder_AutoGen>();
 
 	const std::shared_ptr<Boulder_AutoGen> &Boulder_AutoGen::getInstance()
 	{

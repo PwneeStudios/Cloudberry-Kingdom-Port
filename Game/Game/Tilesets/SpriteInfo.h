@@ -3,15 +3,15 @@
 
 namespace CloudberryKingdom
 {
-	class TextureOrAnim;
+	struct TextureOrAnim;
 }
 
 
 namespace CloudberryKingdom
 {
-	class LineSpriteInfo
+	struct LineSpriteInfo
 	{
-	public:
+	
 		bool Wrap;
 
 		std::shared_ptr<TextureOrAnim> Sprite;
@@ -31,16 +31,16 @@ namespace CloudberryKingdom
 
 		LineSpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth, int Dir, Vector4 Tint, float BlendAddRatio );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 
 	/// <summary>
 	/// Struct for holding information about a sprite.
 	/// </summary>
-	class SpriteInfo
+	struct SpriteInfo
 	{
-	public:
+	
 		std::shared_ptr<TextureOrAnim> Sprite;
 		Vector2 Size, Offset;
 		Color Tint;
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 
 		SpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size, Vector2 Offset, Color Tint, bool RelativeOffset );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

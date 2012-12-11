@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	class SpikeyLine_Parameters : public AutoGen_Parameters
+	struct SpikeyLine_Parameters : public AutoGen_Parameters
 	{
-	public:
-		class _Special
+	
+		struct _Special
 		{
 		};
-	public:
+	
 		Param LineStep, LinePeriod;
 		bool Make;
 
@@ -22,17 +22,17 @@ namespace CloudberryKingdom
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 	};
 
-	class SpikeyLine_AutoGen : public AutoGen
+	struct SpikeyLine_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<SpikeyLine_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<SpikeyLine_AutoGen> instance;
+	
 		const static std::shared_ptr<SpikeyLine_AutoGen> &getInstance();
 
-	public:
+	
 		SpikeyLine_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

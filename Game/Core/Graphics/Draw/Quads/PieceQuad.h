@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	class PieceQuadData
+	struct PieceQuadData
 	{
 
-	public:
+	
 		Vector2 Center_BL_Shift;
 		Vector2 Center_TR_Shift;
 
@@ -33,13 +33,13 @@ namespace CloudberryKingdom
 		bool Mirror;
 	};
 
-	class PieceQuad
+	struct PieceQuad
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		enum Orientation
 		{
 			Orientation_NORMAL,
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 			Orientation_ROTATE_LEFT
 		};
 		// Some pillar info
-	public:
+	
 		float BoxHeight;
 
 		void CalcTexture( int anim, float t );
@@ -95,16 +95,16 @@ namespace CloudberryKingdom
 
 		PieceQuad( int width, const std::wstring &texture, float left, float right, float top );
 		PieceQuad( int width, const std::wstring &texture, float left, float right, float top, bool upside_down );
-	private:
+	
 		void _Constructor( int width, const std::wstring &texture, float left, float right, float top, bool upside_down );
 
-	public:
+	
 		PieceQuad();
 
-	private:
+	
 		void InitAll();
 
-	public:
+	
 		void SetAlpha( float Alpha );
 
 		void SetColor( Color color );
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 
 		void Draw();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

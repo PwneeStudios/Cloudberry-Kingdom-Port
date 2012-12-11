@@ -358,8 +358,9 @@
     <ClCompile Include="Game\Tools\WrappedFloat.cpp" />
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
+    <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
+    <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
-    <ClCompile Include="MainClass\XboxPC\MainClass.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h" />
@@ -735,7 +736,6 @@
     <ClInclude Include="Hacks\NET\BinaryReader.h" />
     <ClInclude Include="Hacks\NET\BinaryWriter.h" />
     <ClInclude Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h" />
-    <ClInclude Include="MainClass\XboxPC\MainClass.h" />
     <ClInclude Include="stringconverter.h" />
     <ClInclude Include="Hacks\Clipboard.h" />
     <ClInclude Include="Hacks\XNA\ContentManager.h" />

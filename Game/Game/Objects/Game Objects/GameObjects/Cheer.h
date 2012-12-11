@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class DrawPile;
+	struct DrawPile;
 }
 
 namespace CloudberryKingdom
 {
-	class QuadClass;
+	struct QuadClass;
 }
 
 
@@ -18,23 +18,23 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class Cheer : public GameObject
+	struct Cheer : public GameObject
 	{
-	private:
+	
 		std::shared_ptr<DrawPile> MyPile;
 
-	public:
+	
 		std::shared_ptr<QuadClass> Berry;
 		Cheer();
 
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void MyDraw();
 
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

@@ -5,37 +5,37 @@
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class BlockBase;
+	struct BlockBase;
 }
 
 namespace CloudberryKingdom
 {
-	class ILevelConnector;
+	struct ILevelConnector;
 }
 
 namespace CloudberryKingdom
 {
-	class Door;
+	struct Door;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class MakeFinalDoor_Float : public MakeThing
+	struct MakeFinalDoor_Float : public MakeThing
 	{
-	private:
+	
 		std::shared_ptr<Level> MyLevel;
 
 		/// <summary>
 		/// The block on which the final door rests on.
 		/// </summary>
-	public:
+	
 		std::shared_ptr<BlockBase> FinalBlock;
 
 		/// <summary>

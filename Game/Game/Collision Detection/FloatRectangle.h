@@ -4,9 +4,9 @@
 #include <global_header.h>
 namespace CloudberryKingdom
 {
-	class FloatRectangle
+	struct FloatRectangle
 	{
-	public:
+	
 		Vector2 TR, BL, Center, Size;
 
 		FloatRectangle();

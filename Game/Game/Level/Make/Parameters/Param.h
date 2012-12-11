@@ -3,12 +3,12 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Rand;
+	struct Rand;
 }
 
 
@@ -16,14 +16,14 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class Param
+	struct Param
 	{
-	private:
+	
 		std::shared_ptr<PieceSeedData> PieceSeed;
 		float val1, val2;
 		bool val1_IsSet, val2_IsSet;
 
-	public:
+	
 		const float &getVal() const;
 		void setVal( const float &value );
 
@@ -72,9 +72,9 @@ namespace CloudberryKingdom
 		//}
 	};
 
-	class VectorParam
+	struct VectorParam
 	{
-	public:
+	
 		Param X, Y;
 
 		VectorParam() { }

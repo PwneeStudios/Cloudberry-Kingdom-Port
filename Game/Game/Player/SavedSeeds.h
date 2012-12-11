@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	class Chunk;
+	struct Chunk;
 }
 
 namespace CloudberryKingdom
 {
-	class SavedSeeds
+	struct SavedSeeds
 	{
-	public:
+	
 		std::vector<std::wstring> SeedStrings;
 
 		void SaveSeed( const std::wstring &seed, const std::wstring &name );
@@ -31,10 +31,10 @@ namespace CloudberryKingdom
 		void ReadChunk_5( const std::shared_ptr<Chunk> &ParentChunk );
 		#pragma endregion
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		SavedSeeds()
 		{
 			InitializeInstanceFields();

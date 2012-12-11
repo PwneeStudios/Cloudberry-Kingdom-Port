@@ -3,12 +3,12 @@
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 namespace CloudberryKingdom
 {
-	class MenuItem;
+	struct MenuItem;
 }
 
 
@@ -16,9 +16,9 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class CkColorHelper
+	struct CkColorHelper
 	{
-	public:
+	
 		static void RegularColor( const std::shared_ptr<EzText> &name );
 
 		static void _x_x_MasochisticColor( const std::shared_ptr<EzText> &name );

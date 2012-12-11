@@ -5,25 +5,25 @@
 
 namespace CloudberryKingdom
 {
-	class Cloud_Parameters : public AutoGen_Parameters
+	struct Cloud_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		Param Size, Shiftiness;
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 	};
 
-	class Cloud_AutoGen : public AutoGen
+	struct Cloud_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<Cloud_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Cloud_AutoGen> instance;
+	
 		const static std::shared_ptr<Cloud_AutoGen> &getInstance();
 
-	public:
+	
 		Cloud_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

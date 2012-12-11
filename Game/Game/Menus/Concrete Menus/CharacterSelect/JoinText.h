@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	class CharacterSelect;
+	struct CharacterSelect;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -24,28 +24,28 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class JoinText : public CkBaseMenu
+	struct JoinText : public CkBaseMenu
 	{
-	private:
+	
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
-	public:
+	
 		JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
-	protected:
+	
 		virtual void ReleaseBody();
 
-	private:
+	
 		std::shared_ptr<EzText> Text;
-	public:
+	
 		virtual void Init();
 
 //C# TO C++ CONVERTER NOTE: The parameter GamerTag was renamed since it is named the same as a user-defined type:
 		static void ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed );
 
-	private:
+	
 		void SetGamerTag();
 
-	protected:
+	
 		virtual void MyPhsxStep();
 	};
 }

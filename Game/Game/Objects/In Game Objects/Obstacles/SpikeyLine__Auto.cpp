@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		LinePeriod = Param( PieceSeed, __max( 70, 200 - 11 * u->Get( Upgrade_SPEED ) ) );
 	}
 
-const std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_shared<SpikeyLine_AutoGen>();
+std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_shared<SpikeyLine_AutoGen>();
 
 	const std::shared_ptr<SpikeyLine_AutoGen> &SpikeyLine_AutoGen::getInstance()
 	{

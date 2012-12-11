@@ -5,50 +5,50 @@
 
 namespace CloudberryKingdom
 {
-	class PieceSeedData;
+	struct PieceSeedData;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class AutoGen_Parameters;
+	struct AutoGen_Parameters;
 }
 
 namespace CloudberryKingdom
 {
-	class Serpent_Parameters : public AutoGen_Parameters
+	struct Serpent_Parameters : public AutoGen_Parameters
 	{
-	public:
+	
 		float SerpentStepCutoff;
 		Param SerpentStep, SerpentPeriod, NumToMake;
 
 		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		Serpent_Parameters()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class Serpent_AutoGen : public AutoGen
+	struct Serpent_AutoGen : public AutoGen
 	{
-	private:
-		static const std::shared_ptr<Serpent_AutoGen> instance;
-	public:
+	
+		static std::shared_ptr<Serpent_AutoGen> instance;
+	
 		const static std::shared_ptr<Serpent_AutoGen> &getInstance();
 
-	public:
+	
 		Serpent_AutoGen();
 
-	public:
+	
 		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );

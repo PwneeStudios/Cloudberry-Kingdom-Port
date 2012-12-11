@@ -1,10 +1,10 @@
 #ifndef _DISPLAYMODE_H_
 #define _DISPLAYMODE_H_
 
-class DisplayMode : public Object
+struct DisplayMode : public Object
 {
 
-public:
+
 	int Width, Height;
 
 };

@@ -5,30 +5,30 @@
 
 namespace CloudberryKingdom
 {
-	class ParticleEffects
+	struct ParticleEffects
 	{
-	public:
+	
 		enum PieceOrbStyle
 		{
 			PieceOrbStyle_BIG_RND,
 			PieceOrbStyle_CLOUD,
 			PieceOrbStyle_FIRE
 		};
-	public:
+	
 		static std::shared_ptr<Particle> CoinExplosionTemplate;
 
 		static void Init_CoinExplosion();
 
-	private:
+	
 		static void SetRandomCoin( const std::shared_ptr<Particle> &p );
 
-	public:
+	
 		static void CoinExplosion( const std::shared_ptr<Level> &level, Vector2 pos );
 
 
 		static std::shared_ptr<Particle> SingleAnimatedParticle( Vector2 Pos, Vector2 Size, PhsxData Data, const std::shared_ptr<EzTexture> &Texture );
 
-	private:
+	
 		static std::shared_ptr<Particle> DustCloudTemplate;
 		static std::shared_ptr<EzSound> DustCloudSound;
 
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		static std::shared_ptr<Particle> PieceExplosionTemplate;
 		static std::shared_ptr<Particle> CoalesceTemplate;
 
-	public:
+	
 		static void Init();
 
 		static void Init_Coalesce();
@@ -61,10 +61,10 @@ namespace CloudberryKingdom
 		static void Flame( const std::shared_ptr<Level> &level, Vector2 pos, int frame, float intensity, int life, bool ModFade );
 		static void Flame( const std::shared_ptr<ParticleEmitter> &emitter, Vector2 pos, int frame, float intensity, int life, bool ModFade );
 
-	private:
+	
 		static void SetRandomPiece( const std::shared_ptr<Particle> &p );
 
-	public:
+	
 		static void Coalesce( const std::shared_ptr<Level> &level, Vector2 pos );
 		static void Coalesce( const std::shared_ptr<Level> &level, Vector2 pos, int PadLife );
 
@@ -79,14 +79,14 @@ namespace CloudberryKingdom
 		/// </summary>
 		static void PiecePopFart( const std::shared_ptr<Level> &level, Vector2 pos );
 
-	private:
+	
 		static std::shared_ptr<Particle> PopTemplate;
-	public:
+	
 		static void AddPop( const std::shared_ptr<Level> &level, Vector2 pos );
 		static void AddPop( const std::shared_ptr<Level> &level, Vector2 pos, float size );
 		static void AddPop( const std::shared_ptr<Level> &level, Vector2 pos, float size, const std::shared_ptr<EzTexture> &tex );
 
-	private:
+	
 		static void Init_Pop();
 	};
 }

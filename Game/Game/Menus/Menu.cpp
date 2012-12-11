@@ -3,8 +3,40 @@
 #include "Hacks/List.h"
 #include "Hacks/Compare.h"
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
+
+	// Statics
+	Vector4 Menu::DefaultMenuInfo::SelectedNextColor;
+	Vector4 Menu::DefaultMenuInfo::SelectedBackColor;
+	Vector4 Menu::DefaultMenuInfo::UnselectedNextColor;
+	Vector4 Menu::DefaultMenuInfo::UnselectedBackColor;
+	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound;
+	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound;
+	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound;
+	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_ListScroll_Sound;
+	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Back_Sound;
+	int Menu::DefaultMenuInfo::Menu_Slide_SoundDelay;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Texture;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Texture;
+	Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Offset;
+	Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Offset;
+	Vector2 Menu::DefaultMenuInfo::MenuArrow_Size;
+	Vector4 Menu::DefaultMenuInfo::MenuArrow_Color;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture;
+	Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset;
+	Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset;
+	Vector2 Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
+	Vector4 Menu::DefaultMenuInfo::MenuArrow_Selected_Color;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::SliderBack_Texture;
+	Vector2 Menu::DefaultMenuInfo::SliderBack_Size;
+	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::Slider_Texture;
+	Vector2 Menu::DefaultMenuInfo::Slider_StartPos;
+	Vector2 Menu::DefaultMenuInfo::Slider_EndPos;
+	Vector2 Menu::DefaultMenuInfo::Slider_Size;
 
 	Cast::ToMenuHelper1::ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a )
 	{
@@ -82,35 +114,6 @@ namespace CloudberryKingdom
 	{
 		return Menu::DefaultOnB( menu );
 	}
-
-Vector4 Menu::DefaultMenuInfo::SelectedNextColor = ( bColor( 100, 250, 100, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::SelectedBackColor = ( bColor( 250, 100, 100, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::UnselectedNextColor = ( bColor( 40, 180, 40, 255 ) ).ToVector4();
-Vector4 Menu::DefaultMenuInfo::UnselectedBackColor = ( bColor( 180, 40, 40, 255 ) ).ToVector4();
-std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( _T( "Menu_Hover" ),.7f );
-std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( _T( "Menu_Select" ),.6f );
-std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( _T( "Menu_Tick" ),.3f );
-std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_ListScroll_Sound = Tools::NewSound( _T( "Menu_Hover" ),.5f );
-std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Back_Sound = Tools::NewSound( _T( "Menu_Back" ),.8f );
-int Menu::DefaultMenuInfo::Menu_Slide_SoundDelay = 8;
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Texture = Tools::Texture( _T( "ListRightArrow" ) );
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
-Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Offset = Vector2( 20, -14 );
-Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Offset = Vector2( -20, -14 );
-Vector2 Menu::DefaultMenuInfo::MenuArrow_Size = Vector2( 45, 45 );
-Vector4 Menu::DefaultMenuInfo::MenuArrow_Color = ( bColor( 255, 255, 255, 255 ) ).ToVector4();
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture = Tools::Texture( _T( "ListRightArrow" ) );
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
-Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset = Vector2( 20, -14 );
-Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset = Vector2( -20, -14 );
-Vector2 Menu::DefaultMenuInfo::MenuArrow_Selected_Size = Vector2( 45, 45 );
-Vector4 Menu::DefaultMenuInfo::MenuArrow_Selected_Color = ( bColor( 255, 255, 255, 0 ) ).ToVector4();
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::SliderBack_Texture = Tools::Texture( _T( "menuslider_bar" ) );
-Vector2 Menu::DefaultMenuInfo::SliderBack_Size = Vector2( 250, 35 );
-std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::Slider_Texture = Tools::Texture( _T( "menuslider_slider" ) );
-Vector2 Menu::DefaultMenuInfo::Slider_StartPos = Vector2( -210, 0 );
-Vector2 Menu::DefaultMenuInfo::Slider_EndPos = Vector2( 210, 0 );
-Vector2 Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
 
 	std::shared_ptr<MenuItem> Menu::FindItemByName( const std::wstring &name )
 	{

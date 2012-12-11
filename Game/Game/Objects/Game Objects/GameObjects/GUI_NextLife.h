@@ -5,22 +5,22 @@
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 namespace CloudberryKingdom
 {
-	class DrawPile;
+	struct DrawPile;
 }
 
 namespace CloudberryKingdom
 {
-	class GUI_LivesLeft;
+	struct GUI_LivesLeft;
 }
 
 namespace CloudberryKingdom
 {
-	class EzText;
+	struct EzText;
 }
 
 
@@ -28,26 +28,26 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	class GUI_NextLife : public GameObject
+	struct GUI_NextLife : public GameObject
 	{
-	private:
-		class OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+	
+		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
-		private:
+		
 			std::shared_ptr<GUI_NextLife> guiNl;
 
-		public:
+		
 			OnCoinGrabProxy( const std::shared_ptr<GUI_NextLife> &guiNl );
 
 			void Apply( const std::shared_ptr<ObjectBase> &obj );
 		};
 
-	public:
+	
 		virtual std::vector<std::wstring> GetViewables();
 
 		std::shared_ptr<DrawPile> MyPile;
 
-	private:
+	
 //C# TO C++ CONVERTER NOTE: The variable GUI_Lives was renamed since it is named the same as a user-defined type:
 		std::shared_ptr<GUI_LivesLeft> GUI_Lives_Renamed;
 
@@ -55,44 +55,44 @@ namespace CloudberryKingdom
 
 		int _Coins;
 		// The time in number of frames
-	public:
+	
 		const int &getCoins() const;
 		void setCoins( const int &value );
 
-	private:
+	
 		void GiveLife();
 
 		/// <summary>
 		/// Return a string representation of the coins grabbed.
 		/// </summary>
 		/// <returns></returns>
-	public:
+	
 		virtual std::wstring ToString();
 
 		void OnCoinGrab( const std::shared_ptr<ObjectBase> &obj );
 
-	private:
+	
 		std::shared_ptr<EzText> CoinsText;
 		void UpdateCoinsText();
 
-	public:
+	
 //C# TO C++ CONVERTER NOTE: The parameter GUI_Lives was renamed since it is named the same as a user-defined type:
 		GUI_NextLife( int CoinsToNextLife, const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
 
-	private:
+	
 		void SetPos();
 
-	public:
+	
 		virtual void OnAdd();
 
-	protected:
+	
 		virtual void ReleaseBody();
 
 		virtual void MyDraw();
 
 		virtual void MyPhsxStep();
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

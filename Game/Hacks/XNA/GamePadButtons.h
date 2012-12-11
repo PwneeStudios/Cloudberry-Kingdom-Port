@@ -1,10 +1,10 @@
 #ifndef _GAMEPADBUTTONS_H_
 #define _GAMEPADBUTTONS_H_
 
-class GamePadButtons
+struct GamePadButtons
 {
 
-public:
+
 
 	ButtonState A;
 	ButtonState B;

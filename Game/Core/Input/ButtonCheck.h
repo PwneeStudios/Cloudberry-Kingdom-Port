@@ -7,9 +7,9 @@
 
 namespace CloudberryKingdom
 {
-	class KeyboardExtension
+	struct KeyboardExtension
 	{
-	public:
+	
 		static bool Freeze;
 		static void FreezeInput();
 		static void UnfreezeInput();
@@ -17,12 +17,12 @@ namespace CloudberryKingdom
 		static bool IsKeyDownCustom( KeyboardState &keyboard, Keys key );
 	};
 
-	class ButtonStatistics
+	struct ButtonStatistics
 	{
-	private:
+	
 		std::vector<int> _DownCount;
 
-	public:
+	
 		int DownCount( ControllerButtons button );
 
 		/// <summary>
@@ -34,32 +34,32 @@ namespace CloudberryKingdom
 
 		void SetCount( ControllerButtons button, int count );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		ButtonStatistics()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class ButtonStats
+	struct ButtonStats
 	{
-	public:
+	
 		static std::vector<std::shared_ptr<ButtonStatistics> > Controller;
 		static std::shared_ptr<ButtonStatistics> All;
 
-	private:
+	
 		static void Init();
 
-	public:
+	
 		static void Update();
 	};
 
-	class ButtonClass
+	struct ButtonClass
 	{
-	public:
+	
 		ControllerButtons ControllerButton;
 		Keys KeyboardKey;
 		bool IsKeyboard;
@@ -67,19 +67,19 @@ public:
 		void Set( Keys key );
 		void Set( ControllerButtons key );
 
-	private:
+	
 		void InitializeInstanceFields();
 
-public:
+
 		ButtonClass()
 		{
 			InitializeInstanceFields();
 		}
 	};
 
-	class ButtonData
+	struct ButtonData
 	{
-	public:
+	
 		bool Down;
 		bool Pressed;
 		bool Released;
@@ -88,12 +88,12 @@ public:
 		int PressingPlayer;
 	};
 
-	class ButtonCheck
+	struct ButtonCheck
 	{
-	public:
+	
 		static void InitializeStatics();
 
-	public:
+	
 		/// <summary>
 		/// Whether the user is using the mouse. False when the mouse hasn't been used since the arrow keys.
 		/// </summary>
@@ -123,10 +123,10 @@ public:
 		ControllerButtons MyButton1, MyButton2;
 		int MyPlayerIndex;
 		MashType MyType;
-	private:
+	
 		ButtonData Current, Previous;
 
-	public:
+	
 		int GapCount, GapAllowance;
 		int Dir;
 
@@ -185,20 +185,20 @@ public:
 		static bool PreLogIn;
 
 		static ButtonData State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex );
-	private:
+	
 		static ButtonData GetState( Keys Key, bool Prev );
 
 
 
 
-	public:
+	
 		static ButtonData State( ControllerButtons Button, PlayerIndex Index );
 		static ButtonData State( ControllerButtons Button, int iPlayerIndex );
 		static ButtonData State( ControllerButtons Button, int iPlayerIndex, bool UseKeyboardMapping );
-	private:
+	
 		static ButtonData GetState( ControllerButtons Button, int iPlayerIndex, bool Prev, bool UseKeyboardMapping );
 
-	public:
+	
 		ButtonCheck();
 
 		std::wstring GetString();

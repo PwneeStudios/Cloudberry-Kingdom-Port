@@ -6,9 +6,9 @@
 namespace CloudberryKingdom
 {
 
-	class RichLevelGenData
+	struct RichLevelGenData
 	{
-	public:
+	
 
 		std::shared_ptr<LevelGenData> gen1, gen2;
 		Vector2 p1, p2;
@@ -22,9 +22,9 @@ namespace CloudberryKingdom
 		int Get( BehaviorParam type, Vector2 pos );
 	};
 
-	class LevelGenData
+	struct LevelGenData
 	{
-	public:
+	
 		std::vector<int> Difficulty;
 		std::vector<int> BehaviorParams;
 

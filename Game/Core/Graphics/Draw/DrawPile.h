@@ -5,30 +5,30 @@
 
 namespace CloudberryKingdom
 {
-	class DrawPile : public std::enable_shared_from_this<DrawPile>
+	struct DrawPile : public std::enable_shared_from_this<DrawPile>
 	{
 
-	public:
+	
 		static void InitializeStatics();
 
-	private:
-		class WaitThenPop : public Lambda
+	
+		struct WaitThenPop : public Lambda
 		{
-		private:
+		
 			std::shared_ptr<DrawPile> MyDrawPile_;
-		public:
+		
 			WaitThenPop( const std::shared_ptr<DrawPile> &MyDrawPile );
 
 			void Apply();
 		};
 
-	private:
-		class WaitThenPop2 : public Lambda
+	
+		struct WaitThenPop2 : public Lambda
 		{
-		public:
+		
 			void Apply();
 		};
-	public:
+	
 
 		std::shared_ptr<FancyVector2> FancyScale;
 		const Vector2 &getSize() const;
@@ -72,9 +72,9 @@ namespace CloudberryKingdom
 
 		void Scale( float scale );
 
-	private:
+	
 		std::vector<Vector2> SavedScales, SavedPositions, SavedShadowOffsets;
-	public:
+	
 		void SaveScale();
 
 		void RevertScale();
@@ -95,10 +95,10 @@ namespace CloudberryKingdom
 		float FadeSpeed;
 		void FadeIn( float speed );
 		void FadeOut( float speed );
-	private:
+	
 		void Fade();
 
-	public:
+	
 		void BubbleDownAndFade( bool sound );
 
 		static std::vector<Vector2> BubbleScale;
@@ -112,15 +112,15 @@ namespace CloudberryKingdom
 		void BubbleDown( bool sound );
 		void BubbleDown( bool sound, int Length );
 	
-	private:
+	
 		static std::vector<Vector2> JiggleScale;
 
-	public:
+	
 		void Jiggle( bool sound );
 		void Jiggle( bool sound, int Length, float Intensity );
 
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }

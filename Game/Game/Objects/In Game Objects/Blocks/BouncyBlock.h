@@ -5,62 +5,62 @@
 
 namespace CloudberryKingdom
 {
-	class BlockGroup;
+	struct BlockGroup;
 }
 
 namespace CloudberryKingdom
 {
-	class EzSound;
+	struct EzSound;
 }
 
 namespace CloudberryKingdom
 {
-	class Level;
+	struct Level;
 }
 
 namespace CloudberryKingdom
 {
-	class Bob;
+	struct Bob;
 }
 
 namespace CloudberryKingdom
 {
-	class ObjectBase;
+	struct ObjectBase;
 }
 
 
 
 namespace CloudberryKingdom
 {
-	class BouncyBlock : public BlockBase
+	struct BouncyBlock : public BlockBase
 	{
-	public:
-		class BouncyBlockTileInfo : public TileInfoBase
+	
+		struct BouncyBlockTileInfo : public TileInfoBase
 		{
-		public:
+		
 			std::shared_ptr<BlockGroup> Group;
 			std::shared_ptr<EzSound> BounceSound;
 
-		private:
+		
 			void InitializeInstanceFields();
 
-public:
+
 			BouncyBlockTileInfo()
 			{
 				InitializeInstanceFields();
 			}
 		};
 
-	private:
+	
 		BouncyBlockState State;
-	public:
+	
 		Vector2 Offset, SizeOffset;
 		float speed;
 
-	private:
+	
 		int TouchedCountdown;
 
-	public:
+	
 		virtual void MakeNew();
 
 		void SetState( BouncyBlockState NewState );
@@ -71,10 +71,10 @@ public:
 		void Init( Vector2 center, Vector2 size, float speed, const std::shared_ptr<Level> &level );
 
 		float SideDampening;
-	private:
+	
 		void Snap( const std::shared_ptr<Bob> &bob );
 
-	public:
+	
 		virtual void SideHit( const std::shared_ptr<Bob> &bob );
 
 		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
@@ -97,7 +97,7 @@ public:
 
 		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
 
-	private:
+	
 		void InitializeInstanceFields();
 	};
 }
