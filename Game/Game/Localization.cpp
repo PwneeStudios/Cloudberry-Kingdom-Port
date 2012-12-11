@@ -165,7 +165,8 @@ namespace CloudberryKingdom
 		if ( !File::Exists( path ) )
 			return;
 
-		Subtitles = std::vector<std::shared_ptr<SubtitleAction> >( 50 );
+		Subtitles = std::vector<std::shared_ptr<SubtitleAction> >();
+		Subtitles.reserve( 50 );
 
 		Tools::UseInvariantCulture();
 		//std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );

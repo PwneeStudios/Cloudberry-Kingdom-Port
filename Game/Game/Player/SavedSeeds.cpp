@@ -52,6 +52,7 @@ namespace CloudberryKingdom
 
 	void SavedSeeds::InitializeInstanceFields()
 	{
-		SeedStrings = std::vector<std::wstring>( 50 );
+		SeedStrings = std::vector<std::wstring>();
+		SeedStrings.reserve( 50 );
 	}
 }

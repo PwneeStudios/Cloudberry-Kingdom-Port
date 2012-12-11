@@ -98,6 +98,7 @@ namespace CloudberryKingdom
 
 	void LevelSequence::InitializeInstanceFields()
 	{
-		Seeds = std::vector<std::wstring>( 600 );
+		Seeds = std::vector<std::wstring>( );
+		Seeds.reserve( 600 );
 	}
 }
