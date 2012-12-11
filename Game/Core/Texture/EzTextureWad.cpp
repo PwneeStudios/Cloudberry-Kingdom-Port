@@ -42,11 +42,11 @@ namespace CloudberryKingdom
 		TextureList.reserve( Size );
 		TextureListByFolder = std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > >();
 
-		AnimationDict = std::map<std::wstring, std::shared_ptr<AnimationData_Texture>, IgnoreCaseComparator>();
+		AnimationDict = std::map<std::wstring, std::shared_ptr<AnimationData_Texture> >();
 
-		PathDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
-		NameDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
-		BigNameDict = std::map<std::wstring, std::shared_ptr<EzTexture>, IgnoreCaseComparator>();
+		PathDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
+		NameDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
+		BigNameDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
 	}
 
 	void EzTextureWad::LoadFolder( const std::shared_ptr<ContentManager> &Content, const std::wstring &Folder )

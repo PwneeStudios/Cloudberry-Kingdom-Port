@@ -8,11 +8,15 @@ struct Thread
 
 	static void Delay( int msec )
 	{
+
 	}
 
+	// Deemed useless.
+	/*
 	static void SpinWait( int times )
 	{
 	}
+	*/
 
 };
 

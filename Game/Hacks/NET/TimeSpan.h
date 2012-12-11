@@ -13,6 +13,7 @@ struct TimeSpan
 
 	TimeSpan() :
 		TotalMinutes( 0 ),
+		TotalSeconds( 0 ),
 		Hours( 0 ),
 		Minutes( 0 ),
 		Seconds( 0 )
@@ -21,6 +22,7 @@ struct TimeSpan
 
 	TimeSpan( int hours, int minutes, int seconds) :
 		TotalMinutes( hours * 60.f + minutes + seconds / 60.f ),
+		TotalSeconds( hours * 3600.f + minutes * 60.f + seconds ),
 		Hours( hours ),
 		Minutes( minutes ),
 		Seconds( seconds )
