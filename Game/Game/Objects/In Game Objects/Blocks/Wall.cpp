@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Wall::WallTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::shared_ptr<SpriteInfo>();
+		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
 	}
 
 	std::shared_ptr<Wall> Wall::MakeWall( LevelGeometry geometry )
