@@ -16,6 +16,25 @@ class File
 
 public:
 
+	virtual ~File() { }
+
+	/// Read data from file.
+	/**
+	 * @param buffer Output buffer.
+	 * @param length Number of bytes to read.
+	 * @return Number of bytes that were read.
+	 */
+	virtual size_t Read( char *buffer, size_t length ) = 0;
+
+	/// Peek a character.
+	virtual int Peek() = 0;
+
+	/// Is the file open?
+	virtual bool IsOpen() = 0;
+
+	/// Have we reached the end of file?
+	virtual bool IsEOF() = 0;
+
 	/// Read a file into a string.
 	/**
 	 * @param path Path to file.

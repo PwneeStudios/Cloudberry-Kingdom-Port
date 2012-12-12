@@ -17,7 +17,7 @@ template <>
 inline std::wstring ToString<DateTime>( const DateTime &dt )
 {
 	// FIXME: implement
-	return _T( "" );
+	return L"";
 }
 
 //template <typename T>

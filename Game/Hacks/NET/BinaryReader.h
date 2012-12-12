@@ -2,68 +2,39 @@
 #define _BINARY_READER_H_
 
 #include <Math/Vectors.h>
+#include <memory>
 #include <string>
+
+// Forward declarations.
+class File;
 
 struct BinaryReader
 {
 
+	std::shared_ptr<File> file_;
 
+	BinaryReader( const std::wstring &path );
 
-	BinaryReader( const std::wstring &path )
-	{
-	}
+	void Close();
 
-	void Close()
-	{
-	}
+	int ReadInt32();
 
-	int ReadInt32()
-	{
-		// FIXME: Implement this.
-		return 0xdeadbeef;
-	}
+	unsigned int ReadUInt32();
 
-	int ReadUInt32()
-	{
-		// FIXME: Implement this.
-		return 0xdeadbeef;
-	}
+	unsigned long ReadUInt64();
 
-	int ReadUInt64()
-	{
-		// FIXME: Implement this.
-		return 0xdeadbeef;
-	}
+	std::wstring ReadString();
 
-	std::wstring ReadString()
-	{
-		return std::wstring();
-	}
+	Vector2 ReadVector2();
 
-	Vector2 ReadVector2()
-	{
-		return Vector2();
-	}
+	bool ReadBoolean();
 
-	bool ReadBoolean()
-	{
-		return false;
-	}
+	float ReadSingle();
 
-	float ReadSingle()
-	{
-		return 0;
-	}
+	unsigned char ReadByte();
 
-	unsigned char ReadByte()
-	{
-		return 0;
-	}
+	unsigned char PeekChar();
 
-	unsigned char PeekChar()
-	{
-		return 0;
-	}
 };
 
 #endif

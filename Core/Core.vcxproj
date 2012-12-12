@@ -27,6 +27,8 @@
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Content\File.h" />
+    <ClInclude Include="include\Content\FilesystemPc.h" />
+    <ClInclude Include="include\Content\Filesystem.h" />
     <ClInclude Include="include\Content\Font.h" />
     <ClInclude Include="include\Content\Resource.h" />
     <ClInclude Include="include\Content\ResourcePtr.h" />
@@ -69,13 +71,15 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
-    <ClCompile Include="include\Graphics\Color.cpp" />
+    <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Architecture\SchedulerPc.cpp" />
     <ClCompile Include="src\Architecture\SchedulerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Content\File.cpp" />
+    <ClCompile Include="src\Content\Filesystem.cpp" />
+    <ClCompile Include="src\Content\FilesystemPc.cpp" />
     <ClCompile Include="src\Content\Font.cpp" />
     <ClCompile Include="src\Content\TexturePc.cpp" />
     <ClCompile Include="src\Content\TextureWiiU.cpp">

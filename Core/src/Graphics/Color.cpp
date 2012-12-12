@@ -1,4 +1,4 @@
-#include "Color.h"
+#include <Graphics/Color.h>
 
 Color Color::Azure( unsigned char( 240 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
 Color Color::Black( unsigned char( 0 ), unsigned char( 0 ), unsigned char( 0 ), unsigned char( 255 ) );

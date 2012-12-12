@@ -2,13 +2,34 @@
 #define _STRING_H_
 
 #include <algorithm>
+#include <codecvt>
 #include <cstdarg>
 #include <iostream>
 #include <iterator>
 #include <string>
 #include <sstream>
+#include <vector>
 
-#include "Hacks/Parse.h"
+#include "Parse.h"
+
+// FIXME: Portability issues.
+std::wstring Utf8ToWstring( const std::string& str )
+{
+   std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
+   return myconv.from_bytes( str );
+}
+
+std::wstring BytesToWstring( const char *start, const char *end )
+{
+   std::wstring_convert<std::codecvt_utf8<wchar_t> > myconv;
+   return myconv.from_bytes( start, end );
+}
+
+std::string WstringToUtf8( const std::wstring& str )
+{
+   std::wstring_convert<std::codecvt_utf8<wchar_t>> myconv;
+   return myconv.to_bytes( str );
+}
 
 inline int GetHashCode( const std::wstring &s )
 {

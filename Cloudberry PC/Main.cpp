@@ -4,6 +4,9 @@
 #include <iostream>
 #include <Utility/Log.h>
 
+#include <Content/File.h>
+#include <Content/Filesystem.h>
+
 class StdOutLog : public LogListener
 {
 	
@@ -18,6 +21,9 @@ public:
 
 int main( int argc, char *argv[] )
 {
+	Filesystem *fs = new Filesystem();
+	std::shared_ptr<File> f = FILESYSTEM.Open( "C:/Users/Oleg/Desktop/Test.cpp" );
+
 	StdOutLog stdLog;
 	Log theLog;
 
