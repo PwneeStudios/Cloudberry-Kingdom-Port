@@ -5,10 +5,9 @@
 
 #include <Hacks/String.h>
 
-BinaryReader::BinaryReader( const std::wstring &path )
+BinaryReader::BinaryReader( const std::wstring &path ) :
+	file_( FILESYSTEM.Open( WstringToUtf8( path ) ) )
 {
-	file_ = FILESYSTEM.Open( WstringToUtf8( path ) );
-
 	assert( file_->IsOpen() );
 }
 

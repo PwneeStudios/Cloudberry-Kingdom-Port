@@ -1072,9 +1072,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hacks\NET\BinaryReader.cpp">
-	  <Filter>Source Files</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="MasterHack.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hacks\NET\BinaryWriter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

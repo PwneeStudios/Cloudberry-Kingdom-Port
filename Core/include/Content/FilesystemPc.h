@@ -28,7 +28,7 @@ public:
 	/**
 	 * @see Filesystem::Open()
 	 */
-	std::shared_ptr<File> Open( const std::string &path );
+	std::shared_ptr<File> Open( const std::string &path, bool write );
 
 };
 
