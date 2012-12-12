@@ -6,6 +6,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -930,6 +932,7 @@ namespace CloudberryKingdom
 
 		//Bob Player = new Bob(Prototypes.bob[MyLevel.DefaultHeroType], false);
 		std::shared_ptr<Bob> Player = std::make_shared<Bob>( MyLevel->DefaultHeroType, false );
+		Bob_PostConstruct( Player, MyLevel->DefaultHeroType, false );
 
 		Player->MyPlayerIndex = PlayerManager::Get( i )->MyPlayerIndex;
 		MyLevel->AddBob( Player );
@@ -1429,6 +1432,7 @@ namespace CloudberryKingdom
 	int GameData::CreateBob( const std::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j )
 	{
 		std::shared_ptr<Bob> Player = std::make_shared<Bob>( level->DefaultHeroType, false );
+		Bob_PostConstruct( Player, level->DefaultHeroType, false );
 
 		Player->MyPlayerIndex = PlayerManager::Get( i )->MyPlayerIndex;
 		MyLevel->AddBob( Player );

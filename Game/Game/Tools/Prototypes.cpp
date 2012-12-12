@@ -466,6 +466,7 @@ namespace CloudberryKingdom
 
 		// Bouncy
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
+		Bob_PostConstruct( NewBob, BobPhsxNormal::getInstance(), false );
 		NewBob->MyObjectType = BobPhsxBouncy::getInstance();
 		NewBob->CanHaveCape = true;
 		if ( !NewBob->IsSpriteBased )
@@ -476,6 +477,7 @@ namespace CloudberryKingdom
 
 		// Wheelie
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
+		Bob_PostConstruct( NewBob, BobPhsxNormal::getInstance(), false );
 		NewBob->MyObjectType = BobPhsxWheel::getInstance();
 		NewBob->CanHaveCape = false;
 		if ( !NewBob->IsSpriteBased )
@@ -486,6 +488,7 @@ namespace CloudberryKingdom
 
 		// Hero in a Box
 		NewBob = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
+		Bob_PostConstruct( NewBob, BobPhsxNormal::getInstance(), false );
 		NewBob->MyObjectType = BobPhsxBox::getInstance();
 		if ( !NewBob->IsSpriteBased )
 		{
@@ -500,6 +503,7 @@ namespace CloudberryKingdom
 
 		// Rocketbox
 		NewBob = std::make_shared<Bob>( BobPhsxBox::getInstance(), false );
+		Bob_PostConstruct( NewBob, BobPhsxBox::getInstance(), false );
 		NewBob->MyObjectType = BobPhsxBox::getInstance();
 		if ( !NewBob->IsSpriteBased )
 		{

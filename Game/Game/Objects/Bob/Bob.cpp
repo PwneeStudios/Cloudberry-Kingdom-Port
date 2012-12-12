@@ -307,9 +307,9 @@ namespace CloudberryKingdom
 		Box = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 1 ]->Size() / 2 );
 		Box2 = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
-		SetHeroPhsx( MyHeroType );
-
-		SetColorScheme( bob->MyColorScheme );
+		// Pulled out to avoid using shared_from_this inside constructor.
+		//SetHeroPhsx( MyHeroType );
+		//SetColorScheme( bob->MyColorScheme );
 	}
 
 	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad )

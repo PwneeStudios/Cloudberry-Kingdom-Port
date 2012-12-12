@@ -10,6 +10,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 	Level::ElementDistanceSquared::ElementDistanceSquared( Vector2 pos )
@@ -1051,6 +1053,7 @@ namespace CloudberryKingdom
 
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
 			std::shared_ptr<Bob> Comp = std::make_shared<Bob>( DefaultHeroType, false );
+			Bob_PostConstruct( Comp, DefaultHeroType, false );
 			Comp->SetColorScheme( PlayerManager::Get( i )->ColorScheme_Renamed );
 
 			//Comp.MyRecord = CurrentRecording.Recordings[i];
@@ -1146,6 +1149,7 @@ namespace CloudberryKingdom
 		{
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
 			std::shared_ptr<Bob> Comp = std::make_shared<Bob>( DefaultHeroType, false );
+			Bob_PostConstruct( Comp, DefaultHeroType, false );
 
 			Comp->MyPiece = CurPiece;
 			Comp->MyPieceIndex = i;

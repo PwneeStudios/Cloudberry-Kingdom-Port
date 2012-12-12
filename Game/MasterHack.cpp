@@ -7,6 +7,12 @@
 namespace CloudberryKingdom
 {
 
+	void Bob_PostConstruct( const std::shared_ptr<Bob> &This, const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
+	{
+		This->SetHeroPhsx( This->MyHeroType );
+		This->SetColorScheme( This->MyHeroType->Prototype->MyColorScheme );
+	}
+
 	void Awardment_PostConstruct( const std::shared_ptr<Awardment> &This )
 	{
 		if ( This->Unlockable != 0 )

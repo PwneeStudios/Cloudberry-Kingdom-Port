@@ -1,5 +1,7 @@
 #include "global_header.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -63,6 +65,7 @@ namespace CloudberryKingdom
 		{
 			//Computers[i] = new Bob(Prototypes.bob[level.DefaultHeroType], true);
 			Computers[ i ] = std::make_shared<Bob>( level->DefaultHeroType, true );
+			Bob_PostConstruct( Computers[i], level->DefaultHeroType, true );
 
 			level->AddBob( Computers[ i ] );
 			/*Sleep()*/;

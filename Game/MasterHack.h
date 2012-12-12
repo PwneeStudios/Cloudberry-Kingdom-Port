@@ -11,6 +11,8 @@ struct PresentationParameters;
 namespace CloudberryKingdom
 {
 
+	void Bob_PostConstruct( const std::shared_ptr<Bob> &This, const std::shared_ptr<BobPhsx> &type, bool boxesOnly );
+
 	void Awardment_PostConstruct( const std::shared_ptr<Awardment> &This );
 
 	void Quad_PostConstruct( const std::shared_ptr<Quad> &This, const std::shared_ptr<Quad> &quad, bool DeepClone );

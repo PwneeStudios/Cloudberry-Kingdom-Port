@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <MasterHack.h>
+
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
 
 #endif
@@ -51,6 +53,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		MyDoll = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
+		Bob_PostConstruct( MyDoll, BobPhsxNormal::getInstance(), false );
 		MyDoll->MyPlayerIndex = MyCharacterSelect->getPlayer()->MyPlayerIndex;
 		MyDoll->MyPiece = Tools::CurLevel->CurPiece;
 		MyDoll->MyPieceIndex = MyCharacterSelect->PlayerIndex;

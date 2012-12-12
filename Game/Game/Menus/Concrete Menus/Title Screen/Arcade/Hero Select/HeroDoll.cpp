@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -69,6 +71,7 @@ namespace CloudberryKingdom
 
 		// Make doll
 		MyDoll = std::make_shared<Bob>( hero, false );
+		Bob_PostConstruct( MyDoll, hero, false );
 		MyDoll->MyPlayerIndex = player->MyPlayerIndex;
 		MyDoll->MyPiece = Tools::CurLevel->CurPiece;
 		MyDoll->CharacterSelect_Renamed = true;
