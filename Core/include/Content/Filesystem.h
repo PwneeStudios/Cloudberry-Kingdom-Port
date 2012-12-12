@@ -41,11 +41,12 @@ public:
 	/// Open a file for reading.
 	/**
 	 * @param path Path to file.
+	 * @param write Should the file be open to writing?
 	 * @return File interface.
 	 */
-	std::shared_ptr<File> Open( const std::string &path )
+	std::shared_ptr<File> Open( const std::string &path, bool write = false )
 	{
-		return impl_.Open( path );
+		return impl_.Open( path, write );
 	}
 
 	/// Get core singleton.

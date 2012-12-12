@@ -22,8 +22,9 @@ private:
 
 public:
 
-	FilePc( const std::string &path ) :
-		fs_( path, std::ios_base::in | std::ios_base::binary )
+	FilePc( const std::string &path, bool write ) :
+		fs_( path, std::ios_base::in | std::ios_base::binary
+			| ( write ? std::ios_base::out | std::ios_base::trunc : 0 ) )
 	{
 	}
 
@@ -37,11 +38,27 @@ public:
 		return static_cast< size_t >( fs_.tellg() - start );
 	}
 
+	/**
+	 * @see File::Write()
+	 */
+	size_t Write( const char *buffer, size_t length )
+	{
+		std::streamoff start = fs_.tellp();
+		fs_.write( buffer, length );
+		return static_cast< size_t >( fs_.tellp() - start );
+	}
+
+	/**
+	 * @see File::Peek()
+	 */
 	int Peek()
 	{
 		return fs_.peek();
 	}
 
+	/**
+	 * @see File::IsOpen()
+	 */
 	bool IsOpen()
 	{
 		return fs_.is_open();
@@ -61,7 +78,7 @@ FilesystemPc::FilesystemPc()
 {
 }
 
-std::shared_ptr<File> FilesystemPc::Open( const std::string &path )
+std::shared_ptr<File> FilesystemPc::Open( const std::string &path, bool write )
 {
-	return std::static_pointer_cast<File>( std::make_shared<FilePc>( path ) );
+	return std::static_pointer_cast<File>( std::make_shared<FilePc>( path, write ) );
 }

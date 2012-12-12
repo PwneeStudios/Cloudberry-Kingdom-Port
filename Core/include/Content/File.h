@@ -26,6 +26,14 @@ public:
 	 */
 	virtual size_t Read( char *buffer, size_t length ) = 0;
 
+	/// Write data to file.
+	/**
+	 * @param buffer Input buffer.
+	 * @param length Number of bytes to write.
+	 * @return Number of bytes written.
+	 */
+	virtual size_t Write( const char *buffer, size_t length ) = 0;
+
 	/// Peek a character.
 	virtual int Peek() = 0;
 

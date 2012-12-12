@@ -20,10 +20,10 @@ public:
 
 int main( int argc, char *argv[] )
 {
+	Filesystem filesystem;
+
 	StdOutLog stdLog;
 	Log theLog;
-
-	Filesystem filesystem;
 
 	theLog.AddListener( stdLog );
 
