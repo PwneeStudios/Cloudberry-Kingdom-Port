@@ -139,8 +139,8 @@ namespace CloudberryKingdom
 
 		Whinney = Content->Load<SoundEffect>( _T( "Whinney" ) );
 
-		Tools::TextureWad->FindOrLoad( Content, _T( "Art\\LoadScreen_Initial\\LoadOutline" ) );
-		Tools::TextureWad->FindOrLoad( Content, _T( "Art\\LoadScreen_Initial\\LoadFill" ) );
+		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadOutline" ) );
+		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadFill" ) );
 
 		MyPile = std::make_shared<DrawPile>();
 

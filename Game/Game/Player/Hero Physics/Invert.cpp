@@ -49,7 +49,8 @@ namespace CloudberryKingdom
 	BobPhsxInvert::BobPhsxInvert()
 	{
 		InitializeInstanceFields();
-		Set( shared_from_this() );
+		// Pulled out to avoid using shared_from_this inside constructor.
+		//Set( shared_from_this() );
 	}
 
 	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx )

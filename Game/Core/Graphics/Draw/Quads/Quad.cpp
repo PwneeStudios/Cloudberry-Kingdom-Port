@@ -504,7 +504,8 @@ namespace CloudberryKingdom
 		{
 			std::shared_ptr<Quad> child_quad = std::static_pointer_cast<Quad>( child );
 
-			if ( std::find( child_quad->GetAllChildren().begin(), child_quad->GetAllChildren().end(), this->shared_from_this() ) != child_quad->GetAllChildren().end() )
+			std::vector<std::shared_ptr<BaseQuad> > allchildren = child_quad->GetAllChildren();
+			if ( std::find( allchildren.begin(), allchildren.end(), this->shared_from_this() ) != allchildren.end() )
 				return;
 
 			child_quad->Center->ParentQuad = this->shared_from_this();

@@ -315,14 +315,16 @@ namespace CloudberryKingdom
 	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad )
 	{
 		InitializeInstanceFields();
-		LoadFromFile( file, EffectWad, TextureWad, BobPhsxNormal::getInstance() );
+		// Pulled out to avoid using shared_from_this inside constructor.
+		//LoadFromFile( file, EffectWad, TextureWad, BobPhsxNormal::getInstance() );
 	}
 
 	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats )
 	{
 		InitializeInstanceFields();
 		CanHaveHat = AllowHats;
-		LoadFromFile( file, EffectWad, TextureWad, MyHeroType );
+		// Pulled out to avoid using shared_from_this inside constructor.
+		//LoadFromFile( file, EffectWad, TextureWad, MyHeroType );
 	}
 
 	Bob::Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats )

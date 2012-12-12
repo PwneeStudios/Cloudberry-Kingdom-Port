@@ -327,7 +327,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::SourceTextureDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content\\Art") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Art") );
 	}
 
 	std::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
@@ -565,7 +565,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::StripPath( const std::wstring &file )
 	{
-		int LastSlash = file.rfind( _T( "\\" ) );
+		int LastSlash = file.rfind( _T( "/" ) );
 		if ( LastSlash < 0 )
 			return file;
 		else
@@ -578,7 +578,7 @@ namespace CloudberryKingdom
 		if ( i >= 0 )
 			path = path.substr( i + ignore.length() );
 
-		int FirstSlash = path.find( _T( "\\" ) );
+		int FirstSlash = path.find( _T( "/" ) );
 		if ( FirstSlash < 0 )
 			return path;
 		else
@@ -631,7 +631,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::GetFileName( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "\\" ) );
+		int i = FilePath.rfind( _T( "/" ) );
 		int j = FilePath.find( _T( "." ), i );
 		if ( j < 0 )
 			j = FilePath.length();
@@ -643,7 +643,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::GetFileNamePlusExtension( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "\\" ) );
+		int i = FilePath.rfind( _T( "/" ) );
 		int n = FilePath.length();
 		if ( i < 0 )
 			return FilePath.substr( 0, n - 1 );
@@ -653,12 +653,12 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::GetFileBigName( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "\\" ) );
+		int i = FilePath.rfind( _T( "/" ) );
 		if ( i < 0 )
 			return FilePath;
 
 		std::wstring Path = FilePath.substr( 0, i );
-		i = Path.rfind( _T( "\\" ) );
+		i = Path.rfind( _T( "/" ) );
 
 		if ( i < 0 )
 			return FilePath;
@@ -711,19 +711,19 @@ namespace CloudberryKingdom
 		if ( CreateNewWad )
 			EffectWad = std::make_shared<EzEffectWad>();
 
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\BasicEffect" ) ), _T( "Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\NoTexture" ) ), _T( "NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Circle" ) ), _T( "Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Shell" ) ), _T( "Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\FireballEffect" ) ), _T( "Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Paint" ) ), _T( "Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Lava" ) ), _T( "Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\LightMap" ) ), _T( "LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\LightSource" ) ), _T( "LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\BwEffect" ) ), _T( "BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Hsl_Green" ) ), _T( "Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Hsl" ) ), _T( "Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects\\Window" ) ), _T( "Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BasicEffect" ) ), _T( "Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/NoTexture" ) ), _T( "NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Circle" ) ), _T( "Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Shell" ) ), _T( "Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/FireballEffect" ) ), _T( "Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Paint" ) ), _T( "Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Lava" ) ), _T( "Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightMap" ) ), _T( "LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightSource" ) ), _T( "LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BwEffect" ) ), _T( "BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl_Green" ) ), _T( "Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl" ) ), _T( "Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Window" ) ), _T( "Window" ) );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -733,7 +733,7 @@ namespace CloudberryKingdom
 		HslGreenEffect = EffectWad->FindByName( _T( "Hsl_Green" ) );
 		WindowEffect = EffectWad->FindByName( _T( "Window" ) );
 
-		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Effects\\Paint_SpriteBatch" ) );
+		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Effects/Paint_SpriteBatch" ) );
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )

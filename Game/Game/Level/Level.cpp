@@ -2635,7 +2635,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	std::wstring Level::SourceLevelDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content\\Levels") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Levels") );
 	}
 
 	void Level::Save( const std::wstring &file, bool Bin )

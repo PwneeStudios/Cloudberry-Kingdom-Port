@@ -34,7 +34,8 @@ void Remove( std::vector<T> &v, const T &o )
 template<class T>
 void CopyFromTo( const std::vector<T> &v1, std::vector<T> &v2 )
 {
-	v2.assign( v1.begin(), v1.end() );
+	//v2.assign( v1.begin(), v1.end() );
+	std::copy( v1.begin(), v1.end(), v2.begin() );
 }
 
 template<class T, class Predicate>

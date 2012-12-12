@@ -139,7 +139,7 @@ namespace CloudberryKingdom
 		// Make the backdrop
 		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500.f, true );
 		Backdrop->setDegrees( 90 );
-		Backdrop->setTextureName( _T( "Score\\Score_Screen_grey" ) );
+		Backdrop->setTextureName( _T( "Score/Score_Screen_grey" ) );
 
 		MyPile->Add( Backdrop, _T( "Backdrop" ) );
 		Backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );

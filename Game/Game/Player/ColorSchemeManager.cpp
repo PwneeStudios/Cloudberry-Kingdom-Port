@@ -505,12 +505,12 @@ namespace CloudberryKingdom
 		// Fill the textured skin list
 		/*
 		TextureList.Add(new MenuListItem(new ClrTextFx(3518, 1500, Color.White, "pillar_xlarge", Color.Gray), "Stone Skin"));     // 0
-		TextureList.Add(new MenuListItem(new ClrTextFx(3519, 1000, Color.White, "Skins\\Rainbow", Color.Red), "Rainbow Skin"));  // 1
-		TextureList.Add(new MenuListItem(new ClrTextFx(3520, 1000, Color.White, "Skins\\Tiger", Color.Orange), "Tiger Skin"));      // 2
+		TextureList.Add(new MenuListItem(new ClrTextFx(3519, 1000, Color.White, "Skins/Rainbow", Color.Red), "Rainbow Skin"));  // 1
+		TextureList.Add(new MenuListItem(new ClrTextFx(3520, 1000, Color.White, "Skins/Tiger", Color.Orange), "Tiger Skin"));      // 2
 		TextureList.Add(new MenuListItem(new ClrTextFx(3521, 1000, new Color(1, 1, 1, .66f),
-		                                "Skins\\Water", Color.LightBlue, "WaterBob"), "Aqua Skin"));                     // 3
-		TextureList.Add(new MenuListItem(new ClrTextFx(3522, 1000, Color.White, "Skins\\Stars2", Color.DarkBlue), "Star Skin"));      // 4
-		TextureList.Add(new MenuListItem(new ClrTextFx(3523, 1000, Color.White, "Skins\\Fractal1", Color.Cyan, "WaterBob"),
+		                                "Skins/Water", Color.LightBlue, "WaterBob"), "Aqua Skin"));                     // 3
+		TextureList.Add(new MenuListItem(new ClrTextFx(3522, 1000, Color.White, "Skins/Stars2", Color.DarkBlue), "Star Skin"));      // 4
+		TextureList.Add(new MenuListItem(new ClrTextFx(3523, 1000, Color.White, "Skins/Fractal1", Color.Cyan, "WaterBob"),
 		                                "Psychadelic Skin"));                                           // 5
 	
 		 */
@@ -566,7 +566,7 @@ namespace CloudberryKingdom
 		//fx.PicScale = fx_scale;
 		//CapeColorList.Add(new MenuListItem(fx, "ScreamingCape"));
 
-		//fx = new ClrTextFx(3528, 500, Color.White, "Capes\\FallingBlock4Cape", false, "FallingBlock4");
+		//fx = new ClrTextFx(3528, 500, Color.White, "Capes/FallingBlock4Cape", false, "FallingBlock4");
 		//fx.Name = "Anger;
 		//fx.PicScale = fx_scale * new Vector2(1.022f, 1.028f);
 		//CapeColorList.Add(new MenuListItem(fx, "AngryCape"));

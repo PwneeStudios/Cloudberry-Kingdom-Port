@@ -50,21 +50,41 @@ namespace CloudberryKingdom
 
 		ObjectIcon::InitializeStatics();
 
+		BobPhsx::DefaultInfo::InitializeStatics();
+
 		BobPhsxNormal::InitializeStatics();
 		BobPhsxBig::InitializeStatics();
+		BobPhsxBig::getInstance()->Set( BobPhsxBig::getInstance() );
+
 		BobPhsxRandom::InitializeStatics();
 		BobPhsxBouncy::InitializeStatics();
 		BobPhsxBox::InitializeStatics();
+		
 		BobPhsxDouble::InitializeStatics();
+		BobPhsxDouble::getInstance()->Set( BobPhsxDouble::getInstance() );
+
 		BobPhsxInvert::InitializeStatics();
+		BobPhsxInvert::getInstance()->Set( BobPhsxInvert::getInstance() );
+
 		BobPhsxJetman::InitializeStatics();
+		BobPhsxJetman::getInstance()->Set( BobPhsxJetman::getInstance() );
+
 		BobPhsxMeat::InitializeStatics();
+		BobPhsxMeat::getInstance()->Set( BobPhsxMeat::getInstance() );
+
 		BobPhsxRocketbox::InitializeStatics();
 		BobPhsxScale::InitializeStatics();
+		BobPhsxScale::getInstance()->Set( BobPhsxScale::getInstance() );
+
 		BobPhsxSmall::InitializeStatics();
+		BobPhsxSmall::getInstance()->Set( BobPhsxSmall::getInstance() );
+
 		BobPhsxSpaceship::InitializeStatics();
 		BobPhsxTime::InitializeStatics();
+		BobPhsxTime::getInstance()->Set( BobPhsxTime::getInstance() );
+
 		BobPhsxWheel::InitializeStatics();
+
 
 		ObjectClass::InitializeStatics();
 
@@ -73,7 +93,7 @@ namespace CloudberryKingdom
 		Spike::InitializeStatics();
 
 		ParticleEmitter::InitializeStatics();
-		BobPhsx::DefaultInfo::InitializeStatics();
+		
 		GameData::InitializeStatics();
 		TitleGameData::InitializeStatics();
 		Recycler::InitializeStatics();
@@ -1054,7 +1074,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		std::wcout << Tools::GameClass->getContent()->RootDirectory << std::endl;
 
-		Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Snow"));
+		Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Snow"));
 
 
 		long long big = 0;
@@ -1063,20 +1083,20 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0001"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0002"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0003"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Bob\\Classic\\v1\\Stand\\Bob_Stand_0004"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0001"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0002"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0003"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0004"));
 		}
 		small = Stop();
 
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Castle\\Pillars\\Pillar_Castle_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Cave\\Pillars\\Pillar_Cave_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Cloud\\Pillars\\Pillar_Cloud_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art\\Environments\\Forest\\Pillars\\Pillar_Forest_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Castle/Pillars/Pillar_Castle_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cave/Pillars/Pillar_Cave_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cloud/Pillars/Pillar_Cloud_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Forest/Pillars/Pillar_Forest_1000"));
 		}
 		big = Stop();
 

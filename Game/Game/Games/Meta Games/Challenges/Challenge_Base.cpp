@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -98,10 +100,9 @@ namespace CloudberryKingdom
 
 	void Challenge::InitializeInstanceFields()
 	{
-		const int tempVector[] = { 1, 50, 100, 150 };
-		std::vector<int> temp_StartLevels = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_StartLevels ) / sizeof( temp_StartLevels[ 0 ] ); element++ )
-			StartLevels[ element ] = temp_StartLevels[ element ];
+		int tempVector[] = { 1, 50, 100, 150 };
+		StartLevels = VecFromArray( tempVector );
+
 		NonCampaign = true;
 	}
 }

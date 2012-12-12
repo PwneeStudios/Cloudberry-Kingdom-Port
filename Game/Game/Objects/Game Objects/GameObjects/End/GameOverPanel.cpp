@@ -181,7 +181,7 @@ namespace CloudberryKingdom
 		MyPile = std::make_shared<DrawPile>();
 
 		// Make the backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score\\Score_Screen" ), 1440.f );
+		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score/Score_Screen" ), 1440.f );
 		backdrop->Quad_Renamed.SetColor( bColor( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );

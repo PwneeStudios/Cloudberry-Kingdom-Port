@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks/List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -137,7 +139,8 @@ bool AnimationData::RecordAll = false;
 		{
 			std::vector<OneAnim> NewAnims = std::vector<OneAnim>( anim + 1 );
 			//Anims.CopyTo( NewAnims, 0 );
-			NewAnims.assign( Anims.begin(), Anims.end() );
+			//NewAnims.assign( Anims.begin(), Anims.end() );
+			CopyFromTo( Anims, NewAnims );
 			Anims = NewAnims;
 		}
 

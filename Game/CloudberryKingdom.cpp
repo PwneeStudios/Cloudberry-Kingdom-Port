@@ -34,13 +34,13 @@ void CloudberryKingdomWrapper::Initialize()
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );*/
 
-	/*game = std::make_shared<CloudberryKingdom::XnaGameClass>();
+	game = std::make_shared<CloudberryKingdom::XnaGameClass>();
 
 	//Tools::GameClass->getContent()->RootDirectory = _T("Content");
 	CloudberryKingdom::Tools::GameClass = game;
 
 	game->Initialize();
-	game->LoadContent();*/
+	game->LoadContent();
 }
 
 void CloudberryKingdomWrapper::Update()

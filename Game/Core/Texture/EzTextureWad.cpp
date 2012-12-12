@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		if ( PathTexture == 0 || PathTexture == TextureList[ 0 ] )
 		{
 			// Get the name from the path
-			int i = path.rfind( _T( "\\" ) );
+			int i = path.rfind( _T( "/" ) );
 
 			// If the name is the path, return what we found
 			if ( i <= 0 )
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<EzTexture> EzTextureWad::Find( const std::wstring &name )
 	{
-		if ( name.find( _T( "\\" ) ) != std::string::npos && BigNameDict.find( name ) != BigNameDict.end() )
+		if ( name.find( _T( "/" ) ) != std::string::npos && BigNameDict.find( name ) != BigNameDict.end() )
 			return BigNameDict[ name ];
 		else if ( PathDict.find( name ) != PathDict.end() )
 			return PathDict[ name ];
@@ -211,7 +211,7 @@ namespace CloudberryKingdom
 			BigNameDict[ToLower( Tools::GetFileBigName( NewTex->Path ) ) ]= NewTex;
 
 			// Add to folder
-			std::wstring folder = Tools::FirstFolder( Name, _T( "Art\\" ) );
+			std::wstring folder = Tools::FirstFolder( Name, _T( "Art/" ) );
 			if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
 				TextureListByFolder.insert( make_pair( folder, std::vector<std::shared_ptr<EzTexture> >() ) );
 			TextureListByFolder[ folder ].push_back( NewTex );

@@ -57,9 +57,9 @@ namespace CloudberryKingdom
 		Seeds.push_back( 0 );
 
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( _T( "Content\\Campaign\\CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		//std::shared_ptr<FileStream> stream = File->Open( _T( "Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
 		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
-		FileReader reader = FileReader( _T( "Content\\Campaign\\CampaignList.txt" ) );
+		FileReader reader = FileReader( _T( "Content/Campaign/CampaignList.txt" ) );
 
 		std::wstring line;
 

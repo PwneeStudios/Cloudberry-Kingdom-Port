@@ -2,8 +2,18 @@
 
 #include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
+
+	void Awardment_PostConstruct( const std::shared_ptr<Awardment> &This )
+	{
+		if ( This->Unlockable != 0 )
+			This->Unlockable->AssociatedAward = This->shared_from_this();
+
+		Awardments::Awards.push_back( This->shared_from_this() );
+	}
 
 	void Quad_PostConstruct( const std::shared_ptr<Quad> &This, const std::shared_ptr<Quad> &quad, bool DeepClone )
 	{
@@ -148,10 +158,8 @@ namespace CloudberryKingdom
 							( std::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->ParentQuad;
 						else
 						{
-							//int j = obj->QuadList.find( static_cast<BaseQuad*>( parent ) );
-							// FIXME: Check indexing O_O.
-							std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), parent );
-							( std::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->QuadList[ j - This->QuadList.begin() ];
+							int j = IndexOf( obj->QuadList, parent );
+							( std::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->QuadList[ j ];
 						}
 					}
 				}
@@ -159,9 +167,9 @@ namespace CloudberryKingdom
 				// Preserve Parent-Child quad relationship
 				if ( obj->QuadList[ i ]->ParentQuad != obj->ParentQuad )
 				{
-					// FIXME: Check indexing here too.
-					std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->QuadList[ i ]->ParentQuad );
-					( std::static_pointer_cast<Quad>( This->QuadList[ j - This->QuadList.begin() ] ) )->AddQuadChild( This->QuadList[ i ] );
+					//((Quad)QuadList[obj.QuadList.IndexOf(obj.QuadList[i].ParentQuad)]).AddQuadChild(QuadList[i]);
+					//((Quad)                               QuadList[obj.QuadList.IndexOf(                                obj.QuadList[i].ParentQuad)]).          AddQuadChild(QuadList[i]);
+					( std::static_pointer_cast<Quad>( This->QuadList[ IndexOf<std::shared_ptr<BaseQuad> >( obj->QuadList, obj->QuadList[ i ]->ParentQuad ) ] ) )->AddQuadChild( This->QuadList[ i ] );
 				}
 			}
 		}
@@ -169,9 +177,9 @@ namespace CloudberryKingdom
 		{
 			if ( !This->BoxesOnly && obj->BoxList[ i ]->BL->ParentQuad != obj->ParentQuad )
 			{
-				// FIXME: Check indexing and pointer cast.
-				std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->BoxList[ i ]->BL->ParentQuad );
-				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( This->QuadList[ j - This->QuadList.begin() ] );
+				//BoxList[i].TR.ParentQuad = BoxList[i].BL.ParentQuad = (Quad)QuadList[obj.QuadList.IndexOf(obj.BoxList[i].BL.ParentQuad)];
+				//    BoxList[i].TR.ParentQuad	   =       BoxList[i].BL.ParentQuad     = (Quad)							    QuadList[obj.QuadList.IndexOf(obj.BoxList[i].BL.ParentQuad)];
+				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( This->QuadList[ IndexOf( obj->QuadList, obj->BoxList[ i ]->BL->ParentQuad ) ] );
 			}
 			else
 				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = This->ParentQuad;

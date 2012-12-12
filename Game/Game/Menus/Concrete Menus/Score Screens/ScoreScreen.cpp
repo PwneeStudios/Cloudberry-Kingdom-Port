@@ -243,7 +243,7 @@ bool ScoreScreen::AsMenu = true;
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 
-		LevelCleared = std::make_shared<QuadClass>( _T( "Score\\LevelCleared" ), _T( "Header" ) );
+		LevelCleared = std::make_shared<QuadClass>( _T( "Score/LevelCleared" ), _T( "Header" ) );
 		LevelCleared->Scale( .9f );
 		MyPile->Add( LevelCleared );
 		LevelCleared->setPos( Vector2( 10, 655 ) + ShiftAll );

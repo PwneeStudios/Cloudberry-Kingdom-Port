@@ -407,7 +407,7 @@ namespace CloudberryKingdom
 		MyPile->Jiggle( true );
 
 		// Change the backdrop color
-		Backdrop->setTextureName( _T( "Score\\Score_Screen_grey" ) );
+		Backdrop->setTextureName( _T( "Score/Score_Screen_grey" ) );
 
 		if ( OnEnter != 0 )
 			OnEnter->Apply();

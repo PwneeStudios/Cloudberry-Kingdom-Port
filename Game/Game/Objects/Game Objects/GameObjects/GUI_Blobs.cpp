@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Blob = std::make_shared<QuadClass>( _T( "Score\\Blob" ), 150.f, true );
+		Blob = std::make_shared<QuadClass>( _T( "Score/Blob" ), 150.f, true );
 		Blob->setPos( Vector2( -26.84131f, 11.98175f ) );
 		Blob->setSize( Vector2( 122.2223f, 193.6508f ) );
 		Blob->ScaleXToMatchRatio();

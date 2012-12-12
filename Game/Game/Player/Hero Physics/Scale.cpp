@@ -37,6 +37,7 @@ namespace CloudberryKingdom
 
 	BobPhsxScale::BobPhsxScale()
 	{
-		Set( shared_from_this() );
+		// Pulled out to avoid using shared_from_this inside constructor.
+		//Set( shared_from_this() );
 	}
 }
