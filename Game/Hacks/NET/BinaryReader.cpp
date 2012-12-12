@@ -8,6 +8,8 @@
 BinaryReader::BinaryReader( const std::wstring &path )
 {
 	file_ = FILESYSTEM.Open( WstringToUtf8( path ) );
+
+	assert( file_->IsOpen() );
 }
 
 void BinaryReader::Close()
@@ -17,22 +19,23 @@ void BinaryReader::Close()
 int BinaryReader::ReadInt32()
 {
 	int t;
-	file_->Read( reinterpret_cast<char *>( &t ), sizeof( int ) );
+	file_->Read( reinterpret_cast<char *>( &t ), 4 );
 	return t;
 }
 
 unsigned int BinaryReader::ReadUInt32()
 {
 	unsigned int t;
-	file_->Read( reinterpret_cast<char *>( &t ), sizeof( unsigned int ) );
+	file_->Read( reinterpret_cast<char *>( &t ), 4 );
 	return t;
 }
 
+// FIXME: This may actually need to return a 64 bit unsigned integer.
 unsigned long BinaryReader::ReadUInt64()
 {
-	unsigned long t;
-	file_->Read( reinterpret_cast<char *>( &t ), sizeof( unsigned long ) );
-	return t;
+	unsigned long long t;
+	file_->Read( reinterpret_cast<char *>( &t ), 8 );
+	return static_cast<unsigned long>( t );
 }
 
 std::wstring BinaryReader::ReadString()
@@ -80,7 +83,7 @@ bool BinaryReader::ReadBoolean()
 float BinaryReader::ReadSingle()
 {
 	float f;
-	file_->Read( reinterpret_cast<char *>( &f ), sizeof( float ) );
+	file_->Read( reinterpret_cast<char *>( &f ), 4 );
 	return f;
 }
 

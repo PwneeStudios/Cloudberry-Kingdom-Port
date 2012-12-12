@@ -36,6 +36,8 @@ private:
 
 public:
 
+	Filesystem() { }
+
 	/// Open a file for reading.
 	/**
 	 * @param path Path to file.
