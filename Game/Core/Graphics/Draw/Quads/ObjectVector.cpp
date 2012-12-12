@@ -92,34 +92,16 @@ namespace CloudberryKingdom
 		AnimData.Init(); // = new AnimationData();
 
 		Pos = Vector2();
-		ModifiedEventCallback = std::make_shared<DefaultCallbackLambda>( this->shared_from_this() );
-
-	#if defined(EDITOR)
-		ClickEventCallback = DefaultClickCallback;
-	#endif
+		//ModifiedEventCallback = std::make_shared<DefaultCallbackLambda>( this->shared_from_this() );
 
 		CenterPoint.reset();
 	}
-
-#if defined(EDITOR)
-	void ObjectVector::Click()
-	{
-		if ( ClickEventCallback != 0 )
-			ClickEventCallback();
-	}
-#endif
 
 	void ObjectVector::Move( Vector2 NewPos )
 	{
 		if ( ModifiedEventCallback != 0 )
 			ModifiedEventCallback->Apply( NewPos );
 	}
-
-#if defined(EDITOR)
-	void ObjectVector::DefaultClickCallback()
-	{
-	}
-#endif
 
 	void ObjectVector::RelPosFromPos()
 	{

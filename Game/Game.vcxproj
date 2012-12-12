@@ -363,6 +363,7 @@
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
+    <ClCompile Include="MasterHack.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h" />
@@ -738,6 +739,7 @@
     <ClInclude Include="Hacks\NET\BinaryReader.h" />
     <ClInclude Include="Hacks\NET\BinaryWriter.h" />
     <ClInclude Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.h" />
+    <ClInclude Include="MasterHack.h" />
     <ClInclude Include="ResourceList\Resources_Art.h" />
     <ClInclude Include="ResourceList\Resources_Music.h" />
     <ClInclude Include="ResourceList\Resources_Sound.h" />

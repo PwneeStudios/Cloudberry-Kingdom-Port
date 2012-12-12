@@ -561,9 +561,12 @@ namespace CloudberryKingdom
 		Vertices[ 3 ].uv = Vector2( 1, 1 );
 
 		Center = std::make_shared<ObjectVector>();
+		Center->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( Center->shared_from_this() );
 		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
 		xAxis = std::make_shared<ObjectVector>();
+		xAxis->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( xAxis->shared_from_this() );
 		yAxis = std::make_shared<ObjectVector>();
+		yAxis->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( yAxis->shared_from_this() );
 		xAxis->CenterPoint = Center;
 		yAxis->CenterPoint = Center;
 		xAxis->Move( Vector2( 1, 0 ) );
@@ -575,6 +578,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < 4; i++ )
 		{
 			Corner[ i ] = std::make_shared<ObjectVector>();
+			Corner[ i ]->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( Corner[ i ]->shared_from_this() );
 			Corner[ i ]->ParentQuad = this->shared_from_this();
 		}
 
@@ -601,25 +605,26 @@ namespace CloudberryKingdom
 		else
 			TextureAnim = quad->TextureAnim;
 
-		InitVertices();
+		// Commented out and moved to MasterHack::Quad_PostConstruct
+		//InitVertices();
 
-		quad->Center->Clone( Center, DeepClone );
-		quad->xAxis->Clone( xAxis, DeepClone );
-		quad->yAxis->Clone( yAxis, DeepClone );
-		for ( int i = 0; i < 4; i++ )
-			quad->Corner[ i ]->Clone( Corner[ i ], DeepClone );
+		//quad->Center->Clone( Center, DeepClone );
+		//quad->xAxis->Clone( xAxis, DeepClone );
+		//quad->yAxis->Clone( yAxis, DeepClone );
+		//for ( int i = 0; i < 4; i++ )
+		//	quad->Corner[ i ]->Clone( Corner[ i ], DeepClone );
 
-		for ( int i = 0; i < NumVertices; i++ )
-			Vertices[ i ] = quad->Vertices[ i ];
+		//for ( int i = 0; i < NumVertices; i++ )
+		//	Vertices[ i ] = quad->Vertices[ i ];
 	}
 
 	Quad::Quad()
 	{
 		Name = _T( "Quad" );
 
-		InitVertices();
-
-		SetColor( Color( 1.f, 1.f, 1.f ) );
+		// Commented out and moved inline every time this constructor is called.
+		//InitVertices();
+		//SetColor( Color( 1.f, 1.f, 1.f ) );
 	}
 
 	Vector2 Quad::getSize() const

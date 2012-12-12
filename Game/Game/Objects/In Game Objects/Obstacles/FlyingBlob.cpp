@@ -3,6 +3,8 @@
 #include "Hacks/List.h"
 #include "Hacks/Queue.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -217,6 +219,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 
 		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		
 		//reader->Close();

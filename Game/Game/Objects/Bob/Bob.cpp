@@ -5,6 +5,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -141,6 +143,8 @@ namespace CloudberryKingdom
 			PlayerObject->Release();
 
 		PlayerObject = std::make_shared<ObjectClass>( obj, BoxesOnly, false );
+		ObjectClass_PostConstruct_3params( PlayerObject, obj, BoxesOnly, false );
+
 		Vector2 size = PlayerObject->BoxList[ 0 ]->Size();
 		float ratio = size.Y / size.X;
 		int width = Tools::TheGame->Resolution.Bob_Renamed.X;
@@ -341,6 +345,8 @@ namespace CloudberryKingdom
 		int height = static_cast<int>( width * ratio );
 
 		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+
 		obj->ReadFile( reader, EffectWad, TextureWad );
 		
 		//reader->Close();
@@ -468,6 +474,7 @@ namespace CloudberryKingdom
 		if ( PlayerObject == 0 )
 		{
 			PlayerObject = std::make_shared<ObjectClass>( type->Prototype->PlayerObject, BoxesOnly, false );
+			ObjectClass_PostConstruct_3params( PlayerObject, type->Prototype->PlayerObject, BoxesOnly, false );
 
 			PlayerObject->FinishLoading();
 			Vector2 size = PlayerObject->BoxList[ 0 ]->Size();
@@ -1341,7 +1348,10 @@ namespace CloudberryKingdom
 
 		// Set the anchor point
 		if ( temp == 0 )
+		{
 			temp = std::make_shared<ObjectVector>();
+			temp->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( temp->shared_from_this() );
+		}
 
 		if ( Head == 0 )
 			Head = std::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Head" ) ) );

@@ -80,8 +80,10 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		BL = std::make_shared<ObjectVector>();
+		BL->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
 		box->BL->Clone( BL, DeepClone );
 		TR = std::make_shared<ObjectVector>();
+		TR->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
 		box->TR->Clone( TR, DeepClone );
 
 		Show = box->Show;
@@ -92,7 +94,9 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		BL = std::make_shared<ObjectVector>();
+		BL->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
 		TR = std::make_shared<ObjectVector>();
+		TR->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
 
 		Name = _T( "Box" );
 	}
