@@ -272,6 +272,7 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Load resources in other thread.
 		//LoadThread = ThreadHelper::EasyThread( 5, _T( "LoadThread" ), std::make_shared<Action>( &_LoadThread ) );
+		_LoadThread();
 	}
 
 std::shared_ptr<Thread> Resources::LoadThread = 0;

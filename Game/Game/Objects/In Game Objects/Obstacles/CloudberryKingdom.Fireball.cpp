@@ -52,6 +52,8 @@ namespace CloudberryKingdom
 
 
 		ShadeQuad = std::make_shared<Quad>();
+		ShadeQuad->InitVertices();
+		ShadeQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
 		ShadeQuad->MyEffect = Tools::EffectWad->FindByName( _T( "Fireball" ) );
 		ShadeQuad->MyTexture = Tools::TextureWad->FindByName( _T( "White" ) );
 		ShadeQuad->Scale( Vector2( 210 * 1.15f, 55 * 1.15f ) );

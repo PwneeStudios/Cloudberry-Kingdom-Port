@@ -12,6 +12,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -336,6 +338,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		reader->Close();
 		//stream->Close();

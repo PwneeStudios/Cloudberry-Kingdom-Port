@@ -2,6 +2,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -75,6 +77,7 @@ namespace CloudberryKingdom
 		else
 		{
 			CenterObject = std::make_shared<ObjectClass>( type->Prototype->PlayerObject, false, false );
+			ObjectClass_PostConstruct_3params( CenterObject, type->Prototype->PlayerObject, false, false );
 
 			Vector2 size = CenterObject->BoxList[ 0 ]->Size();
 			float ratio = size.Y / size.X;

@@ -6,6 +6,8 @@
 #include "Hacks/NET/FileStream.h"
 #include "Hacks/NET/Path.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -23,6 +25,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<BinaryReader> rreader = std::make_shared<BinaryReader>( rstream, Encoding::UTF8 );*/
 		std::shared_ptr<BinaryReader> rreader = std::make_shared<BinaryReader>( _T( "Content\\Objects\\TigarBob.smo" ) );
 		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
 		obj->ReadFile( rreader, Tools::EffectWad, Tools::TextureWad );
 		rreader->Close();
 		//rstream->Close();
@@ -293,6 +296,7 @@ namespace CloudberryKingdom
 		if ( Tools::CurLevel != 0 && Tools::CurLevel->Bobs.size() > 0 ) // && Tools.CurLevel.DefaultHeroType == BobPhsxNormal.Instance)
 		{
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject = std::make_shared<ObjectClass>( p, false, false );
+			ObjectClass_PostConstruct_3params( Tools::CurLevel->Bobs[ 0 ]->PlayerObject, p, false, false );
 			std::queue<std::shared_ptr<AnimQueueEntry> > empty;
 			std::swap( Tools::CurLevel->Bobs[ 0 ]->PlayerObject->AnimQueue, empty );
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject->EnqueueAnimation( 0, 0, true );
@@ -363,6 +367,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
 		//stream->Close();
@@ -379,6 +384,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
 		obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
 		obj->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
 		//stream->Close();

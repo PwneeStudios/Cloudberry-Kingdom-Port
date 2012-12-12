@@ -3,6 +3,8 @@
 #include "Hacks/Queue.h"
 #include "Hacks/String.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -149,6 +151,9 @@ namespace CloudberryKingdom
 			if ( QuadType == 0 )
 			{
 				std::shared_ptr<Quad> NewQuad = std::make_shared<Quad>();
+				NewQuad->InitVertices();
+				NewQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
+
 				AddQuad( NewQuad );
 			}
 			else
@@ -598,148 +603,151 @@ namespace CloudberryKingdom
 
 	ObjectClass::ObjectClass( const std::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
 	{
-		InitializeInstanceFields();
-		LoadingRunSpeed = obj->LoadingRunSpeed;
+		// Pulled out into ObjectClass_PostConstruct_3params
+		//InitializeInstanceFields();
+		//LoadingRunSpeed = obj->LoadingRunSpeed;
 
-		CapeThickness = obj->CapeThickness;
-		p1_Left = obj->p1_Left;
-		p2_Left = obj->p2_Left;
-		p1_Right = obj->p1_Right;
-		p2_Right = obj->p2_Right;
-
-
-
-		Linear = obj->Linear;
-
-		VersionNumber = obj->VersionNumber;
-
-		BoxesOnly = _BoxesOnly;
-
-		LoadingRunSpeed = obj->LoadingRunSpeed;
-
-		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
-		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
-		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
-		while( !QueueCopy.empty() )
-		{
-			array_Renamed.push_back( QueueCopy.front() );
-			QueueCopy.pop();
-		}
-
-		// FIXME: Make sure make_shared actually copies the object.
-		if ( array_Renamed.size() > 0 )
-		{
-			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
-			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
-				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
-			AnimQueue.push( LastAnimEntry );
-		}
+		//CapeThickness = obj->CapeThickness;
+		//p1_Left = obj->p1_Left;
+		//p2_Left = obj->p2_Left;
+		//p1_Right = obj->p1_Right;
+		//p2_Right = obj->p2_Right;
 
 
 
-		CenterFlipOnBox = obj->CenterFlipOnBox;
+		//Linear = obj->Linear;
 
-		ParentQuad = std::make_shared<Quad>( obj->ParentQuad, DeepClone );
-		ParentQuad->ParentObject = shared_from_this();
-		ParentQuad->MyEffect = obj->ParentQuad->MyEffect;
-		ParentQuad->MyTexture = obj->ParentQuad->MyTexture;
+		//VersionNumber = obj->VersionNumber;
 
-		MySkinTexture = obj->MySkinTexture;
-		MySkinEffect = obj->MySkinEffect;
+		//BoxesOnly = _BoxesOnly;
 
-		// Add quads and boxes            
-		if ( !BoxesOnly )
-		{
-			QuadList = std::vector<std::shared_ptr<BaseQuad> >();
+		//LoadingRunSpeed = obj->LoadingRunSpeed;
 
-			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
-			{
-				if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
-				{
-					// FIXME: Check static_pointer_cast.
-					std::shared_ptr<Quad> nquad = std::make_shared<Quad>( std::static_pointer_cast<Quad>( *quad ), DeepClone );
-					QuadList.push_back( nquad );
-					nquad->ParentObject = shared_from_this();
-					if ( ( *quad )->ParentQuad == ( *quad )->ParentObject->ParentQuad )
-						ParentQuad->AddQuadChild( nquad );
-				}
-			}
-		}
+		//AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		//std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		//std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		//while( !QueueCopy.empty() )
+		//{
+		//	array_Renamed.push_back( QueueCopy.front() );
+		//	QueueCopy.pop();
+		//}
 
-		// Clone boxes
-		BoxList = std::vector<std::shared_ptr<ObjectBox> >();
-		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
-			BoxList.push_back( std::make_shared<ObjectBox>( *box, DeepClone ) );
+		//// FIXME: Make sure make_shared actually copies the object.
+		//if ( array_Renamed.size() > 0 )
+		//{
+		//	LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
+		//	for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
+		//		AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
+		//	AnimQueue.push( LastAnimEntry );
+		//}
 
 
-		// Make sure pointers match up
-		if ( !BoxesOnly && QuadList.size() > 0 )
-		{
-			for ( size_t i = 0; i < obj->QuadList.size(); i++ )
-			{
-				// Preserve Parent-Point relationship (for quads attached to splines)
-				if ( dynamic_cast<Quad*>( obj->QuadList[ i ].get() ) != 0 )
-				{
-					// FIXME: Check static_pointer_cast.
-					std::shared_ptr<BaseQuad> parent = ( std::static_pointer_cast<Quad>( obj->QuadList[ i ] ) )->Center->ParentQuad;
-					if ( parent != 0 )
-					{
-						if ( parent == obj->ParentQuad )
-							( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = ParentQuad;
-						else
-						{
-							//int j = obj->QuadList.find( static_cast<BaseQuad*>( parent ) );
-							// FIXME: Check indexing O_O.
-							std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), parent );
-							( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = QuadList[ j - QuadList.begin() ];
-						}
-					}
-				}
 
-				// Preserve Parent-Child quad relationship
-				if ( obj->QuadList[ i ]->ParentQuad != obj->ParentQuad )
-				{
-					// FIXME: Check indexing here too.
-					std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->QuadList[ i ]->ParentQuad );
-					( std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] ) )->AddQuadChild( QuadList[ i ] );
-				}
-			}
-		}
-		for ( size_t i = 0; i < obj->BoxList.size(); i++ )
-		{
-			if ( !BoxesOnly && obj->BoxList[ i ]->BL->ParentQuad != obj->ParentQuad )
-			{
-				// FIXME: Check indexing and pointer cast.
-				std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->BoxList[ i ]->BL->ParentQuad );
-				BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] );
-			}
-			else
-				BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = ParentQuad;
-		}
+		//CenterFlipOnBox = obj->CenterFlipOnBox;
+
+		//ParentQuad = std::make_shared<Quad>( obj->ParentQuad, DeepClone );
+		//Quad_PostConstruct( ParentQuad, obj->ParentQuad, DeepClone );
+		//ParentQuad->ParentObject = shared_from_this();
+		//ParentQuad->MyEffect = obj->ParentQuad->MyEffect;
+		//ParentQuad->MyTexture = obj->ParentQuad->MyTexture;
+
+		//MySkinTexture = obj->MySkinTexture;
+		//MySkinEffect = obj->MySkinEffect;
+
+		//// Add quads and boxes            
+		//if ( !BoxesOnly )
+		//{
+		//	QuadList = std::vector<std::shared_ptr<BaseQuad> >();
+
+		//	for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
+		//	{
+		//		if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
+		//		{
+		//			// FIXME: Check static_pointer_cast.
+		//			std::shared_ptr<Quad> nquad = std::make_shared<Quad>( std::static_pointer_cast<Quad>( *quad ), DeepClone );
+		//			Quad_PostConstruct( nquad, std::static_pointer_cast<Quad>( *quad ), DeepClone );
+		//			QuadList.push_back( nquad );
+		//			nquad->ParentObject = shared_from_this();
+		//			if ( ( *quad )->ParentQuad == ( *quad )->ParentObject->ParentQuad )
+		//				ParentQuad->AddQuadChild( nquad );
+		//		}
+		//	}
+		//}
+
+		//// Clone boxes
+		//BoxList = std::vector<std::shared_ptr<ObjectBox> >();
+		//for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
+		//	BoxList.push_back( std::make_shared<ObjectBox>( *box, DeepClone ) );
 
 
-		Play = obj->Play;
-		Loop = obj->Loop;
-		anim = obj->anim;
-		t = obj->t;
+		//// Make sure pointers match up
+		//if ( !BoxesOnly && QuadList.size() > 0 )
+		//{
+		//	for ( size_t i = 0; i < obj->QuadList.size(); i++ )
+		//	{
+		//		// Preserve Parent-Point relationship (for quads attached to splines)
+		//		if ( dynamic_cast<Quad*>( obj->QuadList[ i ].get() ) != 0 )
+		//		{
+		//			// FIXME: Check static_pointer_cast.
+		//			std::shared_ptr<BaseQuad> parent = ( std::static_pointer_cast<Quad>( obj->QuadList[ i ] ) )->Center->ParentQuad;
+		//			if ( parent != 0 )
+		//			{
+		//				if ( parent == obj->ParentQuad )
+		//					( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = ParentQuad;
+		//				else
+		//				{
+		//					//int j = obj->QuadList.find( static_cast<BaseQuad*>( parent ) );
+		//					// FIXME: Check indexing O_O.
+		//					std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), parent );
+		//					( std::static_pointer_cast<Quad>( QuadList[ i ] ) )->Center->ParentQuad = QuadList[ j - QuadList.begin() ];
+		//				}
+		//			}
+		//		}
 
-		AnimLength = std::vector<int>( 50 );
-		//obj->AnimLength.CopyTo( AnimLength, 0 );
-		AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
+		//		// Preserve Parent-Child quad relationship
+		//		if ( obj->QuadList[ i ]->ParentQuad != obj->ParentQuad )
+		//		{
+		//			// FIXME: Check indexing here too.
+		//			std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->QuadList[ i ]->ParentQuad );
+		//			( std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] ) )->AddQuadChild( QuadList[ i ] );
+		//		}
+		//	}
+		//}
+		//for ( size_t i = 0; i < obj->BoxList.size(); i++ )
+		//{
+		//	if ( !BoxesOnly && obj->BoxList[ i ]->BL->ParentQuad != obj->ParentQuad )
+		//	{
+		//		// FIXME: Check indexing and pointer cast.
+		//		std::vector<std::shared_ptr<BaseQuad> >::iterator j = std::find( obj->QuadList.begin(), obj->QuadList.end(), obj->BoxList[ i ]->BL->ParentQuad );
+		//		BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( QuadList[ j - QuadList.begin() ] );
+		//	}
+		//	else
+		//		BoxList[ i ]->TR->ParentQuad = BoxList[ i ]->BL->ParentQuad = ParentQuad;
+		//}
 
-		AnimSpeed = std::vector<float>( 50 );
-		//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-		AnimSpeed.assign( obj->AnimSpeed.begin(), obj->AnimSpeed.end() );
 
-		AnimName = std::vector<std::wstring>( 50 );
-		//obj->AnimName.CopyTo( AnimName, 0 );
-		AnimName.assign( obj->AnimName.begin(), obj->AnimName.end() );
+		//Play = obj->Play;
+		//Loop = obj->Loop;
+		//anim = obj->anim;
+		//t = obj->t;
 
-		QDrawer = obj->QDrawer;
+		//AnimLength = std::vector<int>( 50 );
+		////obj->AnimLength.CopyTo( AnimLength, 0 );
+		//AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
 
-		InitRenderTargets( obj );
+		//AnimSpeed = std::vector<float>( 50 );
+		////obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
+		//AnimSpeed.assign( obj->AnimSpeed.begin(), obj->AnimSpeed.end() );
 
-		UpdateEffectList();
+		//AnimName = std::vector<std::wstring>( 50 );
+		////obj->AnimName.CopyTo( AnimName, 0 );
+		//AnimName.assign( obj->AnimName.begin(), obj->AnimName.end() );
+
+		//QDrawer = obj->QDrawer;
+
+		//InitRenderTargets( obj );
+
+		//UpdateEffectList();
 	}
 
 	ObjectClass::ObjectClass( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
@@ -756,35 +764,38 @@ namespace CloudberryKingdom
 
 	void ObjectClass::ObjectClassInit( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
 	{
-		VersionNumber = ObjectClassVersionNumber;
+		// Commented out and moved to MasterHack::Object_PostConstruct
+		//VersionNumber = ObjectClassVersionNumber;
 
-		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		//AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
 
-		CenterFlipOnBox = true;
+		//CenterFlipOnBox = true;
 
-		ParentQuad = std::make_shared<Quad>();
-		ParentQuad->ParentObject = shared_from_this();
-		ParentQuad->MyEffect = BaseEffect;
-		ParentQuad->MyTexture = BaseTexture;
+		//ParentQuad = std::make_shared<Quad>();
+		//ParentQuad->InitVertices();
+		//ParentQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
+		//ParentQuad->ParentObject = shared_from_this();
+		//ParentQuad->MyEffect = BaseEffect;
+		//ParentQuad->MyTexture = BaseTexture;
 
-		QuadList = std::vector<std::shared_ptr<BaseQuad> >();
-		BoxList = std::vector<std::shared_ptr<ObjectBox> >();
+		//QuadList = std::vector<std::shared_ptr<BaseQuad> >();
+		//BoxList = std::vector<std::shared_ptr<ObjectBox> >();
 
-		AnimLength = std::vector<int>( 50 );
-		AnimSpeed = std::vector<float>( 50 );
-		AnimName = std::vector<std::wstring>( 50 );
-		for ( int i = 0; i < 50; i++ )
-		{
-			AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
-			AnimSpeed[ i ] = 1;
-		}
+		//AnimLength = std::vector<int>( 50 );
+		//AnimSpeed = std::vector<float>( 50 );
+		//AnimName = std::vector<std::wstring>( 50 );
+		//for ( int i = 0; i < 50; i++ )
+		//{
+		//	AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
+		//	AnimSpeed[ i ] = 1;
+		//}
 
-		QDrawer = Drawer;
+		//QDrawer = Drawer;
 
-		if ( Height > 0 && Width > 0 )
-			InitRenderTargets( device, pp, Width, Height );
+		//if ( Height > 0 && Width > 0 )
+		//	InitRenderTargets( device, pp, Width, Height );
 
-		UpdateEffectList();
+		//UpdateEffectList();
 	}
 
 	void ObjectClass::MakeRenderTargetUnique( int width, int height )
@@ -1085,6 +1096,8 @@ namespace CloudberryKingdom
 		p2_Right = Vector2( 27, 0 );
 		ContainedQuadAngle = 0;
 		ContainedQuad = std::make_shared<Quad>();
+		ContainedQuad->InitVertices();
+		ContainedQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
 		DoSpriteAnim = true;
 		OriginalRenderTarget = true;
 		ExtraQuadToDraw = 0;
