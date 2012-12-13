@@ -164,7 +164,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
 		int Price = buyable->GetPrice();
 		if ( PlayerManager::CombinedBank() >= Price )
-			Call( std::make_shared<VerifyPurchaseMenu>( -1, buyable ), 6 );
+			Call( MakeMagic( VerifyPurchaseMenu, ( -1, buyable ) ), 6 );
 		else
 			Tools::Sound( _T( "Menu_Tick" ) )->Play();
 	}
@@ -424,6 +424,8 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		MyMenu->SelectItem( 3 );
 
 		MakeRest();
+
+		return std::static_pointer_cast<ShopMenu>( shared_from_this() );
 	}
 
 	void ShopMenu::MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str )
@@ -526,7 +528,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Scroll bar
 	#if defined(PC_VERSION)
 		{
-			std::shared_ptr<ScrollBar> bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+			std::shared_ptr<ScrollBar> bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 			bar->setBarPos( Vector2( -2384.921f, 135 ) );
 			MyGame->AddGameObject( bar );
 			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

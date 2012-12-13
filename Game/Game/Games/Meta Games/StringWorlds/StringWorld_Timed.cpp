@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		data->MyGame->AddGameObject( ch->MyGUI_Score );
 		data->MyGame->AddGameObject( ch->MyGUI_Level );
 		data->MyGame->AddGameObject( ch->MyCoinScoreMultiplier );
-		data->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>( false, true ) );
+		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true ) ) );
 	}
 
 	StringWorldTimed::StringWorldTimed( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer ) :

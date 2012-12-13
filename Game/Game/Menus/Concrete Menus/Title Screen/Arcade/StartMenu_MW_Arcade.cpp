@@ -44,12 +44,12 @@ namespace CloudberryKingdom
 
 		if ( MyArcadeItem->MyChallenge == Challenge_Escalation::getInstance() || MyArcadeItem->MyChallenge == Challenge_TimeCrisis::getInstance() )
 		{
-			GUI_Panel::Call( std::make_shared<StartMenu_MW_HeroSelect>( Title, std::static_pointer_cast<ArcadeMenu>( shared_from_this() ), MyArcadeItem ) );
+			GUI_Panel::Call( MakeMagic( StartMenu_MW_HeroSelect, ( Title, std::static_pointer_cast<ArcadeMenu>( shared_from_this() ), MyArcadeItem ) ) );
 		}
 		else
 		{
 			Challenge::ChosenHero.reset();
-			std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
+			std::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
 
 			levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
 			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );

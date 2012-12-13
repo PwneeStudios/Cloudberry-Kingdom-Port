@@ -65,6 +65,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		MyGUI_Lives = GUI_Lives_Renamed;
 		Constructor();
+
+		return std::static_pointer_cast<GUI_Lives>( shared_from_this() );
 	}
 
 	void GUI_Lives::Init()

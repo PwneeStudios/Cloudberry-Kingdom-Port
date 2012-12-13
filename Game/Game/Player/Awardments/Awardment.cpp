@@ -268,7 +268,7 @@ namespace CloudberryKingdom
 				( *p )->Awardments_Renamed->Add( award->Guid );
 
 			// Show a note saying the reward was given
-			std::shared_ptr<AwardmentMessage> msg = std::make_shared<AwardmentMessage>( award );
+			std::shared_ptr<AwardmentMessage> msg = MakeMagic( AwardmentMessage, ( award ) );
 			// Don't add any awardments!
 			//Tools.CurGameData.AddGameObject(msg);
 			Tools::Warning();

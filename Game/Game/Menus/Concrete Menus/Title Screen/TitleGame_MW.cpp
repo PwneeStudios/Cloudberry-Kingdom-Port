@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		Tools::TitleGame = shared_from_this();
 
 		// Backdrop
-		BackPanel = std::make_shared<StartMenu_MW_Backpanel>();
+		BackPanel = MakeMagic( StartMenu_MW_Backpanel, () );
 		AddGameObject( BackPanel );
 		BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE );
 		BackPanel->InitialZoomIn();
@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 	void TitleGameData_MW::_Init()
 	{
 		// Press Start
-		PressStart = std::make_shared<StartMenu_MW_PressStart>( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) );
+		PressStart = MakeMagic( StartMenu_MW_PressStart, ( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
 		AddGameObject( PressStart );
 
 		/*

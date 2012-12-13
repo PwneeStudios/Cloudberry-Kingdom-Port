@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 	void Challenge::ShowEndScreen()
 	{
-		std::shared_ptr<GameOverPanel> MyGameOverPanel = std::make_shared<GameOverPanel>( GameId_Score, GameId_Level );
+		std::shared_ptr<GameOverPanel> MyGameOverPanel = MakeMagic( GameOverPanel, ( GameId_Score, GameId_Level ) );
 		MyGameOverPanel->Levels = getStringWorld()->CurLevelIndex + 1;
 
 		Tools::CurGameData->AddGameObject( MyGameOverPanel );

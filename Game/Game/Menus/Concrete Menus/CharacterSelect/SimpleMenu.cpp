@@ -88,19 +88,19 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::OnAdd();
 
-		Arrows = std::make_shared<ArrowMenu>( getControl(), MyCharacterSelect, std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) );
+		Arrows = MakeMagic( ArrowMenu, ( getControl(), MyCharacterSelect, std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
 		MyGame->AddGameObject( Arrows );
 	}
 
 	void SimpleMenuBase::SimpleToCustom()
 	{
-		GUI_Panel::Call( std::make_shared<CustomizeMenu>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( MakeMagic( CustomizeMenu, ( getControl(), MyCharacterSelect ) ) );
 		Hide();
 	}
 
 	void SimpleMenuBase::SimpleToDone()
 	{
-		GUI_Panel::Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect ) ) );
 		Hide();
 	}
 

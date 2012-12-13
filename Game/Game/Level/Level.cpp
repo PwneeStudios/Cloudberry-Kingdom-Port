@@ -2425,7 +2425,7 @@ bool Level::dodebug = false;
 			return;
 
 		if ( CurPhsxStep == TimeLimit - TimeLimitTimerLength )
-			MyGame->AddGameObject( std::make_shared<GUI_Timer_Simple>( TimeLimitTimerLength ) );
+			MyGame->AddGameObject( MakeMagic( GUI_Timer_Simple, ( TimeLimitTimerLength ) ) );
 	}
 
 	const std::shared_ptr<TileSet> &Level::getMyTileSetInfo() const

@@ -63,16 +63,16 @@ namespace CloudberryKingdom
 		Center = Centers[ PlayerIndex ];
 		NormalZoomCenter = Center;
 
-		MyDoll = std::make_shared<Doll>( PlayerIndex, shared_from_this() );
-		MyGamerTag = std::make_shared<GamerTag>( PlayerIndex, shared_from_this() );
-		MyHeroLevel = std::make_shared<HeroLevel>( PlayerIndex, shared_from_this() );
+		MyDoll = MakeMagic( Doll, ( PlayerIndex, shared_from_this() ) );
+		MyGamerTag = MakeMagic( GamerTag, ( PlayerIndex, shared_from_this() ) );
+		MyHeroLevel = MakeMagic( HeroLevel, ( PlayerIndex, shared_from_this() ) );
 		game->AddGameObject( MyDoll );
 		game->AddGameObject( MyGamerTag );
 		game->AddGameObject( MyHeroLevel );
 
 		InitColorScheme( PlayerIndex );
 
-		game->AddGameObject( std::make_shared<JoinText>( PlayerIndex, shared_from_this() ) );
+		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, shared_from_this() ) ) );
 
 		/*
 		if (QuickJoin)

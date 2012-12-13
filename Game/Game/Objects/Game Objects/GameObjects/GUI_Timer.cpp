@@ -65,5 +65,7 @@ namespace CloudberryKingdom
 		GUI_Timer_Base::GUI_Timer_Base_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<GUI_Timer>( shared_from_this() );
 	}
 }

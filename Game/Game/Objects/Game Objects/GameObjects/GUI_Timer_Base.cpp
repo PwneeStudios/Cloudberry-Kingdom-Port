@@ -144,6 +144,8 @@ namespace CloudberryKingdom
 		TimerText->OutlineColor = o.ToVector4();
 
 		MyPile->Add( TimerText );
+
+		return std::static_pointer_cast<GUI_Timer_Base>( shared_from_this() );
 	}
 
 	void GUI_Timer_Base::MyDraw()

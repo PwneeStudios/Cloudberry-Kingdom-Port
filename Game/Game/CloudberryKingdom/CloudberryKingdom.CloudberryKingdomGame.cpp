@@ -1515,7 +1515,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		level->StartRecording();
 
-		level->MyGame->AddGameObject( std::make_shared<HintGiver>() );
+		level->MyGame->AddGameObject( MakeMagic( HintGiver, () ) );
 		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 

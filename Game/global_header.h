@@ -19,6 +19,9 @@
 #include <tchar.h>
 
 // Syntactic sugar
+#define MakeMagic( classname, params ) \
+	std::make_shared<classname> params -> classname##_Construct params
+
 namespace CloudberryKingdom
 {
 	typedef std::vector<std::shared_ptr<Bob> > BobVec;

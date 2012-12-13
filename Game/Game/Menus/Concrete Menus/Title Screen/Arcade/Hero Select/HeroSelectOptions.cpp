@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CloudberryKingdom::ScoreList> MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
 		MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
 
-		std::shared_ptr<HighScorePanel> panel = std::make_shared<HighScorePanel>( true, MyHighScoreList, MyHighLevelList );
+		std::shared_ptr<HighScorePanel> panel = MakeMagic( HighScorePanel, ( true, MyHighScoreList, MyHighLevelList ) );
 		panel->NoDelays();
 		HeroSelect->Call( panel );
 		HeroSelect->Hide();
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopPlayerLevel() );
+		std::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopPlayerLevel() ) );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
 		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );

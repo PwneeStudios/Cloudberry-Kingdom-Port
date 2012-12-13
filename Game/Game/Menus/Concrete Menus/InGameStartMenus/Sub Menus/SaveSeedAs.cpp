@@ -100,14 +100,14 @@ namespace CloudberryKingdom
 			Player->MySavedSeeds->SaveSeed( Tools::CurLevel->MyLevelSeed->ToString(), TextBox->getText() );
 
 			// Success!
-			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY );
+			std::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY ) );
 			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}
 		else
 		{
 			// Failure!
-			std::shared_ptr<AlertBaseMenu> ok = std::make_shared<AlertBaseMenu>( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH );
+			std::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH ) );
 			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::OnAdd();
 
-		TextBox = std::make_shared<GUI_TextBox>( Tools::CurLevel->MyLevelSeed->SuggestedName(), Vector2(), Vector2(1.85f,.65f),.95f );
+		TextBox = MakeMagic( GUI_TextBox, ( Tools::CurLevel->MyLevelSeed->SuggestedName(), Vector2(), Vector2(1.85f,.65f),.95f ) );
 		TextBox->MaxLength = 50;
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );

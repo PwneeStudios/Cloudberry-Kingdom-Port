@@ -55,26 +55,26 @@ namespace CloudberryKingdom
 		// Make the icons
 		if ( Total == 0 )
 		{
-			game->AddGameObject( std::make_shared<DoorIcon>( BobPhsxNormal::getInstance(), pos + IconPos[ 0 ][ 0 ], IconScale[ 0 ] ) );
+			game->AddGameObject( MakeMagic( DoorIcon, ( BobPhsxNormal::getInstance(), pos + IconPos[ 0 ][ 0 ], IconScale[ 0 ] ) ) );
 			return;
 		}
 
 		int Count = 0;
 		if ( spec.basetype != Hero_BaseType_CLASSIC )
 		{
-			game->AddGameObject( std::make_shared<DoorIcon>( BobPhsx::GetPhsx_Base( spec.basetype ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) );
+			game->AddGameObject( MakeMagic( DoorIcon, ( BobPhsx::GetPhsx_Base( spec.basetype ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) ) );
 			Count++;
 		}
 
 		if ( spec.move != Hero_MoveMod_CLASSIC )
 		{
-			game->AddGameObject( std::make_shared<DoorIcon>( BobPhsx::GetPhsx_Move( spec.move ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) );
+			game->AddGameObject( MakeMagic( DoorIcon, ( BobPhsx::GetPhsx_Move( spec.move ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) ) );
 			Count++;
 		}
 
 		if ( spec.shape != Hero_Shape_CLASSIC )
 		{
-			game->AddGameObject( std::make_shared<DoorIcon>( BobPhsx::GetPhsx_Shape( spec.shape ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) );
+			game->AddGameObject( MakeMagic( DoorIcon, ( BobPhsx::GetPhsx_Shape( spec.shape ), pos + IconPos[ Total - 1 ][ Count ], IconScale[ Total - 1 ] ) ) );
 			Count++;
 		}
 	}

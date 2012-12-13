@@ -1107,7 +1107,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::BringHero()
 	{
-		HeroGui = std::make_shared<CustomHero_GUI>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		HeroGui = MakeMagic( CustomHero_GUI, ( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		Call( HeroGui, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1115,7 +1115,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::BringUpgrades()
 	{
-		CallingPanel = std::make_shared<PassiveUpgrades_GUI>( PieceSeed, std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		CallingPanel = MakeMagic( PassiveUpgrades_GUI, ( PieceSeed, std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		Call( CallingPanel, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1126,7 +1126,7 @@ namespace CloudberryKingdom
 		// Create the load menu
 		//SavedSeedsGUI LoadMenu = new SavedSeedsGUI();
 		//Call(LoadMenu, 0);
-		std::shared_ptr<SaveLoadSeedMenu> menu = std::make_shared<SaveLoadSeedMenu>( MenuItem::ActivatingPlayer, true, false );
+		std::shared_ptr<SaveLoadSeedMenu> menu = MakeMagic( SaveLoadSeedMenu, ( MenuItem::ActivatingPlayer, true, false ) );
 		Call( menu, 0 );
 
 		Hide( PresetPos_LEFT );

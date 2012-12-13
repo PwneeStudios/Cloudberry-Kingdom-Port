@@ -16,6 +16,8 @@ namespace CloudberryKingdom
 
 		PreventRelease = false;
 		UpdateAfterLevelFinish = true;
+
+		return std::static_pointer_cast<GUI_CampaignScore>( shared_from_this() );
 	}
 
 	int GUI_CampaignScore::GetScore()
@@ -83,6 +85,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( false );
+
+		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
 	GUI_Score::GUI_Score( bool SlideIn ) { }
@@ -92,6 +96,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( SlideIn );
+
+		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
 	void GUI_Score::DoInit( bool SlideIn )

@@ -33,6 +33,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
+
+		return std::static_pointer_cast<NewHero>( shared_from_this() );
 	}
 
 	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
@@ -42,11 +44,13 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( str, shift, scale, perma );
+
+		return std::static_pointer_cast<NewHero>( shared_from_this() );
 	}
 
 	std::shared_ptr<NewHero> NewHero::HeroTitle( const std::wstring &str )
 	{
-		std::shared_ptr<NewHero> title = std::make_shared<NewHero>( str, Vector2( 150, -130 ), 1.f, false );
+		std::shared_ptr<NewHero> title = MakeMagic( NewHero, ( str, Vector2( 150, -130 ), 1.f, false ) );
 		title->SlideInLength = 55;
 
 		return title;

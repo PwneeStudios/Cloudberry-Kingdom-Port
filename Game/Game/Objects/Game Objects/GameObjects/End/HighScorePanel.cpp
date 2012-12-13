@@ -61,6 +61,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Constructor( Scores );
+
+		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
 	void HighScorePanel::Constructor( const std::shared_ptr<ScoreList> &Scores )
@@ -86,6 +88,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		MultiInit( false, scorelist, levellist );
+
+		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
 	HighScorePanel::HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) { }
@@ -95,6 +99,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		MultiInit( Instant, scorelist, levellist );
+
+		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
 	void HighScorePanel::MultiInit( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
@@ -111,7 +117,7 @@ namespace CloudberryKingdom
 		Panels[ 0 ] = std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 		Panels[ 0 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
-		Panels[ 1 ] = std::make_shared<HighScorePanel>( levellist );
+		Panels[ 1 ] = MakeMagic( HighScorePanel, ( levellist ) );
 		Panels[ 1 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
 		for ( int i = 0; i < 2; i++ )

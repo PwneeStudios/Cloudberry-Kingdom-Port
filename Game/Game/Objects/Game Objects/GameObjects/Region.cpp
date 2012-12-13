@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( pos, size );
+
+		return std::static_pointer_cast<Region>( shared_from_this() );
 	}
 
 	void Region::Init( const Vector2 &pos, const Vector2 &size )

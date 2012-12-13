@@ -124,7 +124,7 @@ namespace CloudberryKingdom
 	{
 		Vector2 shift = Vector2( 0, 470 );
 
-		Tools::CurGameData->AddGameObject( std::make_shared<DoorIcon>( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1.f ) );
+		Tools::CurGameData->AddGameObject( MakeMagic( DoorIcon, ( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1.f ) ) );
 	}
 
 	void Challenge_HeroRush::AdditionalPreStart()
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 	{
 		// Multiplier increase text
 		if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )
-			Tools::CurGameData->AddGameObject( std::make_shared<MultiplierUp>() );
+			Tools::CurGameData->AddGameObject( MakeMagic( MultiplierUp, () ) );
 
 		// Cheering berries (20, 40, 60, ...)
 		if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 && levelindex != StartIndex )

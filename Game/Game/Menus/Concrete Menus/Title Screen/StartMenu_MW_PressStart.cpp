@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 			DelayToAllowInput = 10;
 
 			//Tools.Nothing();
-			GUI_Panel::Call( std::make_shared<StartMenu_MW>( Title ) );
+			GUI_Panel::Call( MakeMagic( StartMenu_MW, ( Title ) ) );
 			Hide();
 		}
 	}

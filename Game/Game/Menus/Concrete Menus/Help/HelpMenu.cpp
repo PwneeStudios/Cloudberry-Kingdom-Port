@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<Level> level = Tools::CurLevel;
 		if ( !level->Replay && !level->Watching && !level->Finished && !level->PreventHelp )
-			listener->Call( std::make_shared<HelpMenu>() );
+			listener->Call( MakeMagic( HelpMenu, () ) );
 	}
 
 	HelpMenu::ReturnToCallerProxy::ReturnToCallerProxy( const std::shared_ptr<HelpMenu> &hm )
@@ -213,7 +213,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameObject> HelpMenu::MakeListener()
 	{
-		std::shared_ptr<Listener> listener = std::make_shared<Listener>();
+		std::shared_ptr<Listener> listener = MakeMagic( Listener, () );
 		//listener.MyType = Listener.Type.OnDown;
 		listener->MyButton = ControllerButtons_Y;
 		listener->MyButton2 = ButtonCheck::Help_KeyboardKey;
@@ -369,7 +369,7 @@ namespace CloudberryKingdom
 
 		MyPile = std::make_shared<DrawPile>();
 
-		setRightPanel( Blurb = std::make_shared<HelpBlurb>() );
+		setRightPanel( Blurb = MakeMagic( HelpBlurb, () ) );
 
 		this->CallDelay = 3;
 		this->setSlideLength( 14 );

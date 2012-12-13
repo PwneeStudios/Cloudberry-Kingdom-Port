@@ -502,7 +502,7 @@ bool ScoreScreen::UseZoomIn = true;
 
 	void ScoreScreen::MenuGo_Stats( const std::shared_ptr<MenuItem> &item )
 	{
-		Call( std::make_shared<StatsMenu>( MyStatGroup ), 19 );
+		Call( MakeMagic( StatsMenu, ( MyStatGroup ), 19 ) );
 	}
 
 	void ScoreScreen::MenuGo_WatchReplay( const std::shared_ptr<MenuItem> &item )

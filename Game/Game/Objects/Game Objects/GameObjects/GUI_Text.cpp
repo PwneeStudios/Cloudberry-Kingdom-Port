@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		Vector2 pos1 = Vector2( -23, -23 );
 		Vector2 pos2 = Vector2( 23, 23 );
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( word, pos1, style );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( word, pos1, style ) );
 		text->FixedToCamera = true;
 
 		text->MyPile->FancyPos->LerpTo( pos1, pos2, 70, LerpStyle_LINEAR );
@@ -28,6 +28,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( word, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, bool centered ) { }
@@ -37,6 +39,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( word, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, Style style ) { }
@@ -46,6 +50,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( word, pos, true, style, Resources::Font_Grobold42 );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos ) { }
@@ -55,6 +61,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( text, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered ) { }
@@ -64,6 +72,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font ) { }
@@ -73,6 +83,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, font );
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
 	void GUI_Text::Init( Localization::Words word, Vector2 pos, bool centered, Style style, const std::shared_ptr<EzFont> &font )

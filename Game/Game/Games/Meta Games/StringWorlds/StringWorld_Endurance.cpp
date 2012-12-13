@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		data->MyGame->AddGameObject( ch->Gui_NextLife );
 		data->MyGame->AddGameObject( ch->Gui_Lives );
 		data->MyGame->AddGameObject( ch->MyCoinScoreMultiplier );
-		data->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>( false, true ) );
+		data->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, ( false, true ) ) );
 		data->MyGame->AddGameObject( ch->MyGUI_Score );
 			//, MyGUI_Level
 	}

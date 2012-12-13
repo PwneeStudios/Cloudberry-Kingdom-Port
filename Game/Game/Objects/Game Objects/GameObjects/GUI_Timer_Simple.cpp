@@ -25,5 +25,7 @@ namespace CloudberryKingdom
 		this->setTime( Time );
 
 		OnTimeExpired->Add( std::make_shared<SimpleOnExpireLambda>( std::static_pointer_cast<GUI_Timer_Simple>( shared_from_this() ) ) );
+
+		return std::static_pointer_cast<GUI_Timer_Simple>( shared_from_this() );
 	}
 }

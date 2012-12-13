@@ -20,6 +20,8 @@ namespace CloudberryKingdom
 		Text->setPos( Vector2( -579.365f, 253.9681f ) );
 		Text->setScale( Text->getScale() * .7f );
 		MyPile->Add( Text );
+
+		return std::static_pointer_cast<GUI_EnterName>( shared_from_this() );
 	}
 #endif
 
@@ -224,7 +226,11 @@ namespace CloudberryKingdom
 	}
 
 	GUI_TextBox::GUI_TextBox() { }
-	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct() { }
+	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct()
+	{
+		GUI_Text::GUI_Text_Construct();
+		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
+	}
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) : GUI_Text( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false )
 	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) { }
@@ -234,6 +240,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( InitialText, pos, Vector2(1), 1 );
+
+		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont )
@@ -244,6 +252,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( InitialText, pos, scale, fontscale );
+
+		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
 	void GUI_TextBox::Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale )

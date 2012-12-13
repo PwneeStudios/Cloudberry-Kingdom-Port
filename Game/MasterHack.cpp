@@ -286,15 +286,15 @@ namespace CloudberryKingdom
 
 		// Lives
 		This->Gui_LivesLeft = Gui_LivesLeft;
-		This->Gui_Lives = std::make_shared<GUI_Lives>( Gui_LivesLeft );
+		This->Gui_Lives = MakeMagic( GUI_Lives, Gui_LivesLeft );
 		This->Gui_NextLife = std::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
 
 		// Coin score multiplier
 		This->MyCoinScoreMultiplier = std::make_shared<CoinScoreMultiplierObject>();
 
 		// Level and Score
-		This->MyGUI_Score = std::make_shared<GUI_Score>();
-		This->MyGUI_Level = std::make_shared<GUI_Level>();
+		This->MyGUI_Score = MakeMagic( GUI_Score, () ) ;
+		This->MyGUI_Level = MakeMagic( GUI_Level, () );
 
 		// Add game objects, including 'Perfect' watcher
 		This->OnSwapToFirstLevel->Add( std::make_shared<StringWorldEndurance::OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( This->shared_from_this() ) ) );
@@ -309,8 +309,8 @@ namespace CloudberryKingdom
 		This->Warning = std::make_shared<TimerWarning>();
 		This->Warning->MyTimer = Timer;
 
-		This->MyGUI_Score = std::make_shared<GUI_Score>();
-		This->MyGUI_Level = std::make_shared<GUI_Level>();
+		This->MyGUI_Score = MakeMagic( GUI_Score, () );
+		This->MyGUI_Level = MakeMagic( GUI_Level, () );
 
 		Timer->OnTimeExpired->Add( std::make_shared<StringWorldTimed::StringWorldOnTimerExpiredLambda>( This->MyGUI_Score, This->MyGUI_Level ) );
 

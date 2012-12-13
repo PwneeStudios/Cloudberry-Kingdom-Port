@@ -10,9 +10,6 @@ namespace CloudberryKingdom
 		
 		using GUI_Panel::Call;
 	
-		std::shared_ptr<GameOverPanel> GameOverPanel_Construct();
-		std::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
-
 		struct MenuActiveHelper : public Lambda
 		{
 		
@@ -192,6 +189,9 @@ namespace CloudberryKingdom
 	
 		GameOverPanel();
 		GameOverPanel( int GameId_Score, int GameId_Level );
+
+		std::shared_ptr<GameOverPanel> GameOverPanel_Construct();
+		std::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
 
 	
 		virtual void MyDraw();

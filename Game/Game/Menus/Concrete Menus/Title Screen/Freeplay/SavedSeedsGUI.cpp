@@ -356,7 +356,7 @@ namespace CloudberryKingdom
 		int num = NumSeedsToDelete();
 		if ( num > 0 )
 		{
-			std::shared_ptr<VerifyDeleteSeeds> verify = std::make_shared<VerifyDeleteSeeds>( getControl(), num );
+			std::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num ) );
 			verify->OnSelect->Add( std::make_shared<DoDeletionProxy>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
 			Call( verify, 0 );
@@ -467,7 +467,7 @@ namespace CloudberryKingdom
 	//#if PC_VERSION
 		//if (false)
 		{
-			bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+			bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 			bar->setBarPos( Vector2( -1860, 102.7778f ) );
 			MyGame->AddGameObject( bar );
 	#if defined(PC_VERSION)

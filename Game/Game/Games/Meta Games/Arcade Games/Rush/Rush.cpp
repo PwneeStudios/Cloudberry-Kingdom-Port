@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		StartIndex = StartLevel;
 
 		// Create the timer
-		Timer = std::make_shared<GUI_Timer>();
+		Timer = MakeMagic( GUI_Timer, () );
 
 		// Set the time expired function
 		Timer->OnTimeExpired->Add( std::make_shared<RushOnTimeExpiredLambda>( std::static_pointer_cast<Rush>( shared_from_this() ) ) );

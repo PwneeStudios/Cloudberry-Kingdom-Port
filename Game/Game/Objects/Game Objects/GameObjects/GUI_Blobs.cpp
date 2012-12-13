@@ -144,6 +144,8 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::GUI_Panel_Construct();
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<GUI_Blobs>( shared_from_this() );
 	}
 
 	void GUI_Blobs::Init()

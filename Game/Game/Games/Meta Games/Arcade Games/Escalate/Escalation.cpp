@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		i = StartIndex = StartLevel;
 
 		// Create the lives counter
-		Gui_LivesLeft = std::make_shared<GUI_LivesLeft>( GetLives() );
+		Gui_LivesLeft = MakeMagic( GUI_LivesLeft, ( GetLives() ) );
 
 		// Set the time expired function
 		Gui_LivesLeft->OnOutOfLives->Add( std::make_shared<OnOutOfLivesLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) ) );
@@ -182,7 +182,7 @@ namespace CloudberryKingdom
 	{
 		// Multiplier increase text
 		if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )
-			Tools::CurGameData->AddGameObject( std::make_shared<MultiplierUp>() );
+			Tools::CurGameData->AddGameObject( MakeMagic( MultiplierUp, () ) );
 
 		// Mod number of coins
 
@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 		if ( levelindex > StartIndex )
 		{
 			Tools::Warning();
-			std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_LEVEL ).c_str(), levelindex + 1 ) );
+			std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_LEVEL ).c_str(), levelindex + 1 ) ) );
 			Tools::CurGameData->AddGameObject( title );
 
 			if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )

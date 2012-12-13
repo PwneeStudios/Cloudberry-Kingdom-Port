@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 	void SoundMenu::InitHideHelper::Apply( const std::shared_ptr<MenuItem> &_item )
 	{
 		sm->Hide();
-		sm->Call( std::make_shared<ControlScreen>( sm->getControl() ), 10 );
+		sm->Call( MakeMagic( ControlScreen, ( sm->getControl() ) ), 10 );
 	}
 
 	SoundMenu::InitCallCustomControlsHelper::InitCallCustomControlsHelper( const std::shared_ptr<SoundMenu> &sm )
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 	void SoundMenu::InitCallCustomControlsHelper::Apply( const std::shared_ptr<MenuItem> &menuitem )
 	{
-		sm->Call( std::make_shared<CustomControlsMenu>(), 10 );
+		sm->Call( MakeMagic( CustomControlsMenu, () ), 10 );
 	}
 
 	SoundMenu::InitOnConfirmedIndexSelect::InitOnConfirmedIndexSelect( const std::shared_ptr<MenuList> &FsRezList )

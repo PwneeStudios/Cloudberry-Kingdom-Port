@@ -103,11 +103,11 @@ namespace CloudberryKingdom
 		{
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
 			if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )
-				Call( std::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
+				Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
 			else
-				Call( std::make_shared<SignInMenu>( getControl(), MyCharacterSelect ) );
+				Call( MakeMagic( SignInMenu, ( getControl(), MyCharacterSelect ) ) );
 	#else
-			GUI_Panel::Call( std::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
+			GUI_Panel::Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
 	#endif
 			Hide();
 		}

@@ -34,6 +34,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( Vector2(), 1, false );
+
+		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
 	}
 
 	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) { }
@@ -43,6 +45,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( shift, scale, perma );
+
+		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
 	}
 
 	void MultiplierUp::Init( Vector2 shift, float scale, bool perma )

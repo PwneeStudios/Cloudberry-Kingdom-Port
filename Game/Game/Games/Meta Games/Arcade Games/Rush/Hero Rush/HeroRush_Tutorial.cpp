@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 	void HeroRush_Tutorial::AddGameObjectHelper::Apply()
 	{
 		// On (A) go to next part of the tutorial
-		tutorial->MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<ListenerHelper>( tutorial, text ) ) );
+		tutorial->MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<ListenerHelper>( tutorial, text ) ) ) );
 	}
 
 	HeroRush_Tutorial::TitleProxy::TitleProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt )
@@ -270,7 +270,7 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<TitleNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<TitleNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtDoor()
@@ -286,11 +286,11 @@ namespace CloudberryKingdom
 		arrow->PointTo( endpos );
 		MyGame->AddGameObject( arrow );
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_GET_TO_THE_EXIT, arrow->getCore()->Data.Position + Vector2(-200, 400) );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_TO_THE_EXIT, arrow->getCore()->Data.Position + Vector2(-200, 400) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtDoorNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtDoorNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtTimer()
@@ -305,15 +305,15 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( arrow );
 
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_SECONDS_ON_THE_CLOCK, arrow->getCore()->Data.Position + Vector2(830, -130) );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SECONDS_ON_THE_CLOCK, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
 
-		std::shared_ptr<GUI_Text> text2 = std::make_shared<GUI_Text>( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) );
+		std::shared_ptr<GUI_Text> text2 = MakeMagic( GUI_Text, ( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) ) );
 
 		MyGame->AddGameObject( text );
 		MyGame->AddGameObject( text2 );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtTimerNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, text2 ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtTimerNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, text2 ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtCoins()
@@ -332,11 +332,11 @@ namespace CloudberryKingdom
 			arrows.push_back( arrow );
 		}
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_COINS_ADD_SECONDS, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_COINS_ADD_SECONDS, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtCoinsNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text, arrows ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtCoinsNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text, arrows ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtScore()
@@ -364,11 +364,11 @@ namespace CloudberryKingdom
 		arrow->PointTo( scorepos );
 		MyGame->AddGameObject( arrow );
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_GET_AHIGH_SCORE, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_AHIGH_SCORE, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<PointAtScoreNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtScoreNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::Ready()

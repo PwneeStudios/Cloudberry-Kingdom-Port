@@ -2,6 +2,7 @@
 
 namespace CloudberryKingdom
 {
+
 	void Boulder::BoulderTileInfo::InitializeInstanceFields()
 	{
 		Ball = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f) );

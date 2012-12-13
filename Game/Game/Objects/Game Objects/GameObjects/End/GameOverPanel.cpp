@@ -253,7 +253,7 @@ namespace CloudberryKingdom
 			return;
 
 		// Make the text box to allow the player to enter their name
-		MyTextBox = std::make_shared<GUI_EnterName>();
+		MyTextBox = MakeMagic( GUI_EnterName, () );
 		MyTextBox->Active = false; // Keep inactive until parent GUI_Panel says it's OK to take input.
 		MyTextBox->AutoDraw = false;
 		MyGame->AddGameObject( MyTextBox );
@@ -355,7 +355,7 @@ namespace CloudberryKingdom
 	void GameOverPanel::Action_ShowHighScores()
 	{
 		Hide( PresetPos_BOTTOM );
-		Call( std::make_shared<HighScorePanel>( MyHighScoreList, MyHighLevelList ) );
+		Call( MakeMagic( HighScorePanel, ( MyHighScoreList, MyHighLevelList ) ) );
 	}
 
 	GameOverPanel::GameOverPanel() { }
@@ -364,6 +364,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) { }
@@ -380,6 +382,8 @@ namespace CloudberryKingdom
 
 		MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
 		MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
+
+		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	void GameOverPanel::MyDraw()

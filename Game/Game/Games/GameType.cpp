@@ -317,7 +317,7 @@ namespace CloudberryKingdom
 		door->InteractingBob->getCore()->Show = false;
 
 		// Add the score
-		std::shared_ptr<ExplodeBobs> explode = std::make_shared<ExplodeBobs>( ExplodeBobs::Speed_REGULAR );
+		std::shared_ptr<ExplodeBobs> explode = MakeMagic( ExplodeBobs, ( ExplodeBobs::Speed_REGULAR ) );
 		door->getCore()->MyLevel->MyGame->AddGameObject(std::static_pointer_cast<GameObject> ( explode ) );
 		explode->OnDone = std::make_shared<AddScoreLambda>( game, door );
 	}
@@ -465,7 +465,7 @@ namespace CloudberryKingdom
 
 	void GameData::SlideOut_FadeIn( int Delay, const std::shared_ptr<Lambda> &OnBlack )
 	{
-		std::shared_ptr<StartMenu_MW_Black> black = std::make_shared<StartMenu_MW_Black>();
+		std::shared_ptr<StartMenu_MW_Black> black = MakeMagic( StartMenu_MW_Black, () );
 		AddGameObject( black );
 
 		// Wait then screen swipe to black.

@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 
 		this->Level_Renamed = Level_Renamed;
 		Init( StringConverterHelper::toString( Level_Renamed ) );
+
+		return std::static_pointer_cast<DoorIcon>( shared_from_this() );
 	}
 
 	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) { }
@@ -25,6 +27,8 @@ namespace CloudberryKingdom
 		icon->SetScale( Scale );
 
 		getCore()->DrawLayer = 2;
+
+		return std::static_pointer_cast<DoorIcon>( shared_from_this() );
 	}
 
 	void DoorIcon::SetIcon( const std::shared_ptr<BobPhsx> &hero )
