@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 		This->UpdateEffectList();
 	}
 
-	void GameData_Construct( const std::shared_ptr<GameData> &This )
+	std::shared_ptr<GameData> GameData_Construct( const std::shared_ptr<GameData> &This )
 	{
 		This->InitializeInstanceFields();
 
@@ -232,61 +232,75 @@ namespace CloudberryKingdom
 
 		This->CurToDo = std::vector<std::shared_ptr<ToDoItem> >();
 		This->NextToDo = std::vector<std::shared_ptr<ToDoItem> >();
+
+		return This;
 	}
 
-	void ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This )
+	std::shared_ptr<ActionGameData> ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
+
+		return This;
 	}
 
 	
-	void ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	std::shared_ptr<ActionGameData> ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->Init( LevelSeed, MakeInBackground );
+
+		return This;
 	}
 
-	void NormalGameData_Construct( const std::shared_ptr<NormalGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	std::shared_ptr<NormalGameData> NormalGameData_Construct( const std::shared_ptr<NormalGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
 		This->Init( LevelSeed, MakeInBackground );
+
+		return This;
 	}
 
-	void StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This )
+	std::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
+
+		return This;
 	}
 
-	void StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed )
+	std::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->GetSeedFunc = GetSeed;
+
+		return This;
 	}
 
-	void ScreenSaver_Construct( const std::shared_ptr<ScreenSaver> &This )
+	std::shared_ptr<ScreenSaver> ScreenSaver_Construct( const std::shared_ptr<ScreenSaver> &This )
 	{
 		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->Constructor();
+
+		return This;
 	}
 
-	void StringWorldEndurance_Construct( const std::shared_ptr<StringWorldEndurance> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife )
+	std::shared_ptr<StringWorldEndurance> StringWorldEndurance_Construct( const std::shared_ptr<StringWorldEndurance> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife )
 	{
 		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
 
 		// Lives
 		This->Gui_LivesLeft = Gui_LivesLeft;
-		This->Gui_Lives = MakeMagic( GUI_Lives, Gui_LivesLeft );
+		This->Gui_Lives = MakeMagic( GUI_Lives, ( Gui_LivesLeft ) );
 		This->Gui_NextLife = std::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
 
 		// Coin score multiplier
@@ -298,9 +312,11 @@ namespace CloudberryKingdom
 
 		// Add game objects, including 'Perfect' watcher
 		This->OnSwapToFirstLevel->Add( std::make_shared<StringWorldEndurance::OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( This->shared_from_this() ) ) );
+
+		return This;
 	}
 
-	void StringWorldTimed_Construct( const std::shared_ptr<StringWorldTimed> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer )
+	std::shared_ptr<StringWorldTimed> StringWorldTimed_Construct( const std::shared_ptr<StringWorldTimed> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer )
 	{
 		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
 
@@ -319,9 +335,11 @@ namespace CloudberryKingdom
 
 		// Add 'Perfect' watcher
 		This->OnSwapToFirstLevel->Add( std::make_shared<StringWorldTimed::OnSwapLambda>( std::static_pointer_cast<StringWorldTimed>( This->shared_from_this() ) ) );
+
+		return This;
 	}
 
-	void TitleGameData_Construct( const std::shared_ptr<TitleGameData> &This )
+	std::shared_ptr<TitleGameData> TitleGameData_Construct( const std::shared_ptr<TitleGameData> &This )
 	{
 		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
 
@@ -333,10 +351,14 @@ namespace CloudberryKingdom
 
 		Tools::CurGameData->SuppressQuickSpawn = true;
 		Tools::CurGameData->SuppressSongInfo = true;
+
+		return This;
 	}
 
-	void TitleGameData_MW_Construct( const std::shared_ptr<TitleGameData_MW> &This )
+	std::shared_ptr<TitleGameData_MW> TitleGameData_MW_Construct( const std::shared_ptr<TitleGameData_MW> &This )
 	{
 		TitleGameData_Construct( std::static_pointer_cast<TitleGameData>( This ) );
+
+		return This;
 	}
 }
