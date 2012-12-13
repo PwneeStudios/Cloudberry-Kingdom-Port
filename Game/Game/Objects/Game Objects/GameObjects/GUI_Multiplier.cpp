@@ -61,6 +61,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( Style, false );
+
+		return std::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
 	}
 
 	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) { }
@@ -70,6 +72,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( Style, SlideIn );
+
+		return std::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
 	}
 
 	void GUI_Multiplier::DoInit( int Style, bool SlideIn )

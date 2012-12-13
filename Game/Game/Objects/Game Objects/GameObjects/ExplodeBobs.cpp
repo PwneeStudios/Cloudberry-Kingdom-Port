@@ -16,6 +16,8 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 
 		SetSpeed( speed );
+
+		return std::static_pointer_cast<ExplodeBobs>( shared_from_this() );
 	}
 
 	void ExplodeBobs::SetSpeed( int speed )

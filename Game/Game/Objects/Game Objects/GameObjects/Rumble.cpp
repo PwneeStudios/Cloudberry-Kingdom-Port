@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 
 		Active = true;
 		PauseOnPause = true;
+
+		return std::static_pointer_cast<Rumble>( shared_from_this() );
 	}
 
 	void Rumble::ReleaseBody()

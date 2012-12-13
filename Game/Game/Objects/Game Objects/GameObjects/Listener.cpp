@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 		Active = true;
 		PauseOnPause = true;
 		getCore()->Show = false;
+
+		return std::static_pointer_cast<Listener>( shared_from_this() );
 	}
 
 	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) { }
@@ -35,6 +37,8 @@ namespace CloudberryKingdom
 		MyAction = action;
 
 		setControl( -1 );
+
+		return std::static_pointer_cast<Listener>( shared_from_this() );
 	}
 
 	void Listener::Activate()

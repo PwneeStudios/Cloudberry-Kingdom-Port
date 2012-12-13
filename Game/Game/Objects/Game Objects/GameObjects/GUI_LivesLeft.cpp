@@ -124,6 +124,8 @@ namespace CloudberryKingdom
 
 		// Hide initially
 		MyPile->setAlpha( 0 );
+
+		return std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() );
 	}
 
 	void GUI_LivesLeft::SetPos()

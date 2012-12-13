@@ -422,6 +422,8 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		MyMenu->SelectItem( 3 );
 
 		MakeRest();
+
+		return std::static_pointer_cast<ShopMenu>( shared_from_this() );
 	}
 
 	void ShopMenu::MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str )

@@ -34,6 +34,7 @@ namespace CloudberryKingdom
 		Title->setScale( Title->getScale() * .79f );
 		MyPile->Add( Title );
 
+		return std::static_pointer_cast<AwardmentMessage>( shared_from_this() );
 	}
 
 	void AwardmentMessage::MakeBackdrop()

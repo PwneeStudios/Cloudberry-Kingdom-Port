@@ -34,6 +34,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
+
+		return std::static_pointer_cast<LevelTitle>( shared_from_this() );
 	}
 
 	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
@@ -43,6 +45,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		Init( str, shift, scale, perma );
+
+		return std::static_pointer_cast<LevelTitle>( shared_from_this() );
 	}
 
 	std::shared_ptr<LevelTitle> LevelTitle::HeroTitle( const std::wstring &str )

@@ -45,6 +45,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		this->MyMenuList = MyMenuList;
 		Constructor();
+
+		return std::static_pointer_cast<MenuListExpand>( shared_from_this() );
 	}
 
 	void MenuListExpand::SetItemProperties( const std::shared_ptr<MenuItem> &item )

@@ -169,6 +169,8 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		Constructor();
+
+		return std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
 	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) { }
@@ -177,6 +179,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		if ( CallBaseConstructor )
 			Constructor();
+
+		return std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
 	void GUI_Panel::Constructor()

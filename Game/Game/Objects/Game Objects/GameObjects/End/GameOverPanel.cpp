@@ -364,6 +364,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) { }
@@ -380,6 +382,8 @@ namespace CloudberryKingdom
 
 		MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
 		MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
+
+		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	void GameOverPanel::MyDraw()

@@ -202,6 +202,8 @@ int PerfectScoreObject::GlobalBonus = 0;
 		this->ShowMultiplier = ShowMultiplier;
 
 		Init_GUI();
+
+		return std::static_pointer_cast<PerfectScoreObject>( shared_from_this() );
 	}
 
 	const float PerfectScoreObject::getMultiplier() const

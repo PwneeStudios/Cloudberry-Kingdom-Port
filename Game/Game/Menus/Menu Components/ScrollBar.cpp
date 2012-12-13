@@ -51,6 +51,8 @@ namespace CloudberryKingdom
 		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );
 
 		Constructor();
+
+		return std::static_pointer_cast<ScrollBar>( shared_from_this() );
 	}
 
 	void ScrollBar::Init()

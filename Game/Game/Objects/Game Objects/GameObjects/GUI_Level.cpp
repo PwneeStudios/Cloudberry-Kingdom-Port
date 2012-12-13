@@ -11,6 +11,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel::GUI_CampaignLevel_Construct()
 	{
 		GUI_Level::GUI_Level_Construct( false );
+
+		return std::static_pointer_cast<GUI_CampaignLevel>( shared_from_this() );
 	}
 
 	void GUI_CampaignLevel::OnAdd()
@@ -82,6 +84,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( false );
+
+		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	GUI_Level::GUI_Level( bool SlideIn )  { }
@@ -91,6 +95,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		DoInit( SlideIn );
+
+		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	GUI_Level::GUI_Level( int LevelNum ) { }
@@ -103,6 +109,8 @@ namespace CloudberryKingdom
 		PreventRelease = false;
 
 		SetLevel( LevelNum );
+
+		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	void GUI_Level::DoInit( bool SlideIn )
