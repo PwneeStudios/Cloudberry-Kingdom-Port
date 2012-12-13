@@ -5,29 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
 
-namespace CloudberryKingdom
-{
-	struct PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	struct GUI_TextBox;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct SaveSeedAs : public VerifyBaseMenu
 	{
 	
@@ -77,6 +55,7 @@ namespace CloudberryKingdom
 		};
 	
 		SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
+		void SaveSeedAs_Constructor( int Control, const std::shared_ptr<PlayerData> &Player );
 
 	
 		std::shared_ptr<PlayerData> Player;

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ScoreDatabase : public SaveLoad
 	{
-
 	
 		static void InitializeStatics();
 

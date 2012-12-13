@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	ControlScreen::ControlScreen( int Control ) : CkBaseMenu( false )
+	ControlScreen::ControlScreen( int Control ) : CkBaseMenu( false ) { }
+	void ControlScreen::ControlScreen_Construct( int Control )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->setControl( Control );
 
 		Constructor();

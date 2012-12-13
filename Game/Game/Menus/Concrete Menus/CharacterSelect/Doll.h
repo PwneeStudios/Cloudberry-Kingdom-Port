@@ -3,54 +3,28 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	struct CharacterSelect;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuListItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct Hat;
-}
-
-
-
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)
 
 #endif
 
-
-
 namespace CloudberryKingdom
 {
+
 	struct Doll : public CkBaseMenu
 	{
 	
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-
+		void Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
-
 	
 		std::shared_ptr<Bob> MyDoll;
 		virtual void Init();
-
 	
 		void MakeDoll();
-
 	
 		void UpdateColorScheme();
 

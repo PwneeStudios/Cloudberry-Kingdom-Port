@@ -5,21 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	struct PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
+	
 	struct GUI_Score : public GUI_Panel
 	{
+
 		/// <summary>
 		/// Return a string representation of the score
 		/// </summary>
@@ -46,7 +35,9 @@ namespace CloudberryKingdom
 		bool DoSlideIn;
 	
 		GUI_Score();
+		void GUI_Score_Construct();
 		GUI_Score( bool SlideIn );
+		void GUI_Score_Construct( bool SlideIn );
 
 	
 		void DoInit( bool SlideIn );
@@ -71,7 +62,7 @@ namespace CloudberryKingdom
 		};
 	
 		GUI_CampaignScore();
-
+		void GUI_CampaignScore_Construct();
 	
 		virtual int GetScore();
 

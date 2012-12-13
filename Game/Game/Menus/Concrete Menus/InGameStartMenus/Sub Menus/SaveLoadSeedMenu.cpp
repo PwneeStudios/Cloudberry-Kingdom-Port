@@ -58,8 +58,11 @@ namespace CloudberryKingdom
 		slsm->LoadString( _item );
 	}
 
-	SaveLoadSeedMenu::SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave ) : VerifyBaseMenu( false )
+	SaveLoadSeedMenu::SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave ) : VerifyBaseMenu( false ) { }
+	void SaveLoadSeedMenu::SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->CallToLeft = true;
 		this->setControl( Control );
 		FixedToCamera = true;

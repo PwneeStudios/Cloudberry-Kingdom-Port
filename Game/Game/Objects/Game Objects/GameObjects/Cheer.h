@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Cheer : public GameObject
 	{
 	
@@ -24,6 +25,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

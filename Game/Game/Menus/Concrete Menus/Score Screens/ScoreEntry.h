@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ScoreEntry
 	{
 
-	
 		enum Format
 		{
 			Format_SCORE,

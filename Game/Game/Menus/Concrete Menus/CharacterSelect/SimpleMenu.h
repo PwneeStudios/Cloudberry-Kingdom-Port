@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct SimpleMenuBase : public CkBaseMenu
 	{
-
 	
 		static void InitializeStatics();
 
@@ -81,6 +81,7 @@ namespace CloudberryKingdom
 
 	
 		SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		void SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
 
 		virtual void OnAdd();
 

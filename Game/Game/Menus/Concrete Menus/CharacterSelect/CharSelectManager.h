@@ -7,12 +7,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct CharacterSelectManager
 	{
-
 	
 		static void InitializeStatics();
-
 	
 		struct SignInGamerLambda : public Lambda
 		{

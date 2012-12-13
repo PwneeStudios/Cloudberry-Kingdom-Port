@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct HelpMenu : public CkBaseMenu
 	{
 	
@@ -184,6 +185,7 @@ namespace CloudberryKingdom
 
 	
 		HelpMenu();
+		void HelpMenu_Construct();
 
 		static std::shared_ptr<GameObject> MakeListener();
 

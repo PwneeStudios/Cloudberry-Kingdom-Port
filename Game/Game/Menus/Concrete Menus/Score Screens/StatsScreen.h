@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct StatsMenu : public CkBaseMenu
 	{
 	
@@ -186,6 +187,7 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<PlayerStats> > Stats;
 	
 		StatsMenu( StatGroup group );
+		void StatsMenu_Construct( StatGroup group );
 
 
 	

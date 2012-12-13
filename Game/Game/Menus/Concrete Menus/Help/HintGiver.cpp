@@ -74,8 +74,11 @@ namespace CloudberryKingdom
 		hg->Call( hint );
 	}
 
-	HintGiver::HintGiver()
+	HintGiver::HintGiver() { }
+	void HintGiver::HintGiver_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		Active = true;
 		PauseOnPause = true;
 

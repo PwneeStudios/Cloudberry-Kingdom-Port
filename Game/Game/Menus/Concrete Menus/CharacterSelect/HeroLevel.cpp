@@ -3,8 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	//HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	void HeroLevel::HeroLevel_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) 
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		InitializeInstanceFields();
 		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );

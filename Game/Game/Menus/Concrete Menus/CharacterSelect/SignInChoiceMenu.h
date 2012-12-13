@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-
+		void SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
 

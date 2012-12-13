@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 	void GUI_CampaignLevel::GUI_CampaignLevel_Construct()
 	{
-		GUI_Level::GUI_Level_Construct();
+		GUI_Level::GUI_Level_Construct( false );
 	}
 
 	void GUI_CampaignLevel::OnAdd()
@@ -78,6 +78,8 @@ namespace CloudberryKingdom
 	GUI_Level::GUI_Level() { }
 	void GUI_Level::GUI_Level_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( false );
 	}
@@ -85,6 +87,8 @@ namespace CloudberryKingdom
 	GUI_Level::GUI_Level( bool SlideIn )  { }
 	void GUI_Level::GUI_Level_Construct( bool SlideIn )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( SlideIn );
 	}
@@ -92,6 +96,8 @@ namespace CloudberryKingdom
 	GUI_Level::GUI_Level( int LevelNum ) { }
 	void GUI_Level::GUI_Level_Construct( int LevelNum )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( false );
 		PreventRelease = false;

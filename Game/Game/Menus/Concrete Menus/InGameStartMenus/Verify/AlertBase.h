@@ -5,21 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct Lambda;
-}
 
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
 	struct AlertBaseMenu : public CkBaseMenu
 	{
 	
@@ -47,13 +33,16 @@ namespace CloudberryKingdom
 
 	
 		AlertBaseMenu();
+		void AlertBaseMenu_Construct();
 
 	
 		Localization::Words Message, OkText;
 	
 		AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText );
+		void AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText );
 
 		AlertBaseMenu( bool CallBaseConstructor );
+		void AlertBaseMenu_Construct( bool CallBaseConstructor );
 
 	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

@@ -19,8 +19,10 @@ namespace CloudberryKingdom
 		vrm->ReturnToCaller();
 	}
 
-	VerifyRemoveMenu::VerifyRemoveMenu( int Control ) : VerifyBaseMenu( Control )
+	VerifyRemoveMenu::VerifyRemoveMenu( int Control ) : VerifyBaseMenu( Control ) { }
+	void VerifyRemoveMenu::VerifyRemoveMenu_Construct( int Control )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}
 
 	void VerifyRemoveMenu::Init()

@@ -7,6 +7,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct SaveLoadSeedMenu : public VerifyBaseMenu
 	{
 #if defined(WINDOWS)
@@ -73,6 +74,7 @@ namespace CloudberryKingdom
 
 	
 		SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave );
+		void SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave );
 
 	
 		bool CanLoad, CanSave;

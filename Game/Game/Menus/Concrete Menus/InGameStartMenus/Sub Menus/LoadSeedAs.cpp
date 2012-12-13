@@ -38,8 +38,11 @@ namespace CloudberryKingdom
 		lsa->Load( _item );
 	}
 
-	LoadSeedAs::LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false )
+	LoadSeedAs::LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
+	LoadSeedAs::LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->setControl( Control );
 		this->Player = Player;
 		FixedToCamera = true;

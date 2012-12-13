@@ -67,8 +67,12 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<WrappedInt>( MyList->getCurObj() )->MyInt;
 	}
 
-	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
+	//ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
+	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) { }
+	void ListSelectPanel::ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->MyCharacterSelect = Parent;
 		this->ClrSelectIndex = ClrSelectIndex;
 		this->setControl( Control );

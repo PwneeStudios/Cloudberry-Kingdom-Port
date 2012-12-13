@@ -21,38 +21,56 @@ namespace CloudberryKingdom
 		return text;
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos )
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos ) { }
+	void GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( word, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, bool centered )
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, bool centered ) { }
+	void GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( word, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, Style style )
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, Style style ) { }
+	void GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( word, pos, true, style, Resources::Font_Grobold42 );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos )
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos ) { }
+	void GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( text, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered )
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered ) { }
+	void GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font )
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font ) { }
+	void GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, font );
 	}

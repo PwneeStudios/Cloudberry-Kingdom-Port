@@ -16,12 +16,16 @@ namespace CloudberryKingdom
 		Tools::CurGameData->EndGame->Apply( false );
 	}
 
-	VerifyQuitLevelMenu::VerifyQuitLevelMenu( bool CallBaseConstructor ) : VerifyBaseMenu( CallBaseConstructor )
+	VerifyQuitLevelMenu::VerifyQuitLevelMenu( bool CallBaseConstructor ) : VerifyBaseMenu( CallBaseConstructor ) { }
+	void VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( CallBaseConstructor );
 	}
 
-	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control )
+	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control ) { }
+	void VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}
 
 	void VerifyQuitLevelMenu::Init()

@@ -5,10 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
-namespace CloudberryKingdom
-{
+
 	struct ControlScreen : public CkBaseMenu
 	{
 	
@@ -16,6 +13,7 @@ namespace CloudberryKingdom
 
 	
 		ControlScreen( int Control );
+		void ControlScreen_Construct( int Control );
 
 #if defined(PC_VERSION)
 	

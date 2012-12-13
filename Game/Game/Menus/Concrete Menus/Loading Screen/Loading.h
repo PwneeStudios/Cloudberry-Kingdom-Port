@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ProgressBar
 	{
 	
@@ -54,13 +55,10 @@ namespace CloudberryKingdom
 
 	struct InitialLoadingScreen
 	{
-
 	
 		static void InitializeStatics();
-
 	
 		bool IsDone;
-
 	
 		std::shared_ptr<SoundEffect> Whinney;
 

@@ -23,14 +23,10 @@ namespace CloudberryKingdom
 	
 		virtual void OnAdd();
 
-	
 		virtual void ReleaseBody();
-
 	
-//C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		int Level_Renamed;
 	
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		void SetLevel( int Level_Renamed );
 
 		std::shared_ptr<EzText> LevelText;

@@ -5,14 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
 
-
-
-
-namespace CloudberryKingdom
-{
 	struct VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
 	
@@ -26,7 +19,9 @@ namespace CloudberryKingdom
 
 	
 		VerifyQuitLevelMenu( bool CallBaseConstructor );
+		void VerifyQuitLevelMenu_Construct( bool CallBaseConstructor );
 		VerifyQuitLevelMenu( int Control );
+		void VerifyQuitLevelMenu_Construct( int Control );
 
 		virtual void Init();
 

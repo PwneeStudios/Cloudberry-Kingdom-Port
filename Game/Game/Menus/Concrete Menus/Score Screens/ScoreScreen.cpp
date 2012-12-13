@@ -194,13 +194,19 @@ namespace CloudberryKingdom
 		}
 	}
 
-	ScoreScreen::ScoreScreen( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor )
+	ScoreScreen::ScoreScreen( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
+	void ScoreScreen::ScoreScreen_Construct( bool CallBaseConstructor )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
+
 		InitializeInstanceFields();
 	}
 
-	ScoreScreen::ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game ) : CkBaseMenu( false )
+	ScoreScreen::ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game ) : CkBaseMenu( false ) { }
+	void ScoreScreen::ScoreScreen_Construct( StatGroup group, const std::shared_ptr<GameData> &game )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		InitializeInstanceFields();
 		MyGame = game;
 		MyStatGroup = group;

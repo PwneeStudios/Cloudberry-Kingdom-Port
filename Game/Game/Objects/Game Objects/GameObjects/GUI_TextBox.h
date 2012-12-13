@@ -50,9 +50,14 @@ namespace CloudberryKingdom
 		std::shared_ptr<EzText> Caret;
 
 	
+		GUI_TextBox();
+		void GUI_TextBox_Construct();
+
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos );
+		void GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos );
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
+		void GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 	
 		void Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale );
@@ -118,10 +123,12 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	struct GUI_EnterName : public GUI_TextBox
 	{
-	
+
 		GUI_EnterName();
+		void GUI_EnterName_Construct();
 
 		virtual void Enter();
+
 	};
 #endif
 }

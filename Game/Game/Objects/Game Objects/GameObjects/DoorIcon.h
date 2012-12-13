@@ -5,13 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct DoorIcon : public GUI_Panel
 	{
 	
-//C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		int Level_Renamed;
 	
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		DoorIcon( int Level_Renamed );
 		void DoorIcon_Construct( int Level_Renamed );
 

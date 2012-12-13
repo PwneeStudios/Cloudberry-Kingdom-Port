@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	struct DrawPile;
-}
-
-namespace CloudberryKingdom
-{
-	struct GUI_LivesLeft;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct GUI_NextLife : public GameObject
 	{
 	

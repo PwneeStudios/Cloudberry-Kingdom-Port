@@ -39,8 +39,11 @@ namespace CloudberryKingdom
 		vds->ReturnToCaller();
 	}
 
-	VerifyDeleteSeeds::VerifyDeleteSeeds( int Control, int NumSeeds ) : VerifyBaseMenu( false )
+	VerifyDeleteSeeds::VerifyDeleteSeeds( int Control, int NumSeeds ) : VerifyBaseMenu( false ) { }
+	void VerifyDeleteSeeds::VerifyDeleteSeeds_Construct( int Control, int NumSeeds )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->NumSeeds = NumSeeds;
 		this->setControl( Control );
 

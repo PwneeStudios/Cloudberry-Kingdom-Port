@@ -47,8 +47,11 @@ namespace CloudberryKingdom
 		ssa->Save( 0 );
 	}
 
-	SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false )
+	SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
+	void SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->setControl( Control );
 		this->Player = Player;
 		FixedToCamera = true;

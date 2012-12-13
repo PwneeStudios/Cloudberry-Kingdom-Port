@@ -5,12 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct LoadingScreen : public ILoadingScreen
 	{
-
 	
 		static void InitializeStatics();
-
 	
 		static int DefaultMinLoadLength;
 		static int MinLoadLength;

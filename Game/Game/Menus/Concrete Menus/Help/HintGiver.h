@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct HintGiver;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct Hints
 	{
 	
@@ -55,6 +47,7 @@ namespace CloudberryKingdom
 
 	
 		HintGiver();
+		void HintGiver_Construct();
 
 	
 		virtual void ReleaseBody();

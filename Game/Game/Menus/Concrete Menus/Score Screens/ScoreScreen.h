@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ScoreScreen : public CkBaseMenu
 	{
 	
@@ -145,9 +146,10 @@ namespace CloudberryKingdom
 		int DelayPhsx;
 
 		ScoreScreen( bool CallBaseConstructor );
+		void ScoreScreen_Construct( bool CallBaseConstructor );
 
 		ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game );
-
+		void ScoreScreen_Construct( StatGroup group, const std::shared_ptr<GameData> &game );
 	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 
