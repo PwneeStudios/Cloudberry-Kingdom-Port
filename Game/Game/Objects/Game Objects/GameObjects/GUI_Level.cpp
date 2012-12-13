@@ -3,8 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	GUI_CampaignLevel::GUI_CampaignLevel() : GUI_Level(false)
+	//GUI_CampaignLevel::GUI_CampaignLevel() : GUI_Level(false)
+	GUI_CampaignLevel::GUI_CampaignLevel()
 	{
+	}
+
+	void GUI_CampaignLevel::GUI_CampaignLevel_Construct()
+	{
+		GUI_Level::GUI_Level_Construct();
 	}
 
 	void GUI_CampaignLevel::OnAdd()
@@ -69,19 +75,22 @@ namespace CloudberryKingdom
 		LevelText->SubstituteText( ToString() );
 	}
 
-	GUI_Level::GUI_Level()
+	GUI_Level::GUI_Level() { }
+	void GUI_Level::GUI_Level_Construct()
 	{
 		InitializeInstanceFields();
 		DoInit( false );
 	}
 
-	GUI_Level::GUI_Level( bool SlideIn )
+	GUI_Level::GUI_Level( bool SlideIn )  { }
+	void GUI_Level::GUI_Level_Construct( bool SlideIn )
 	{
 		InitializeInstanceFields();
 		DoInit( SlideIn );
 	}
 
-	GUI_Level::GUI_Level( int LevelNum )
+	GUI_Level::GUI_Level( int LevelNum ) { }
+	void GUI_Level::GUI_Level_Construct( int LevelNum )
 	{
 		InitializeInstanceFields();
 		DoInit( false );

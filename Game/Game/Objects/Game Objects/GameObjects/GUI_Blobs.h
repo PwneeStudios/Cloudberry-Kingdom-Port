@@ -48,6 +48,7 @@ namespace CloudberryKingdom
 
 	
 		GUI_Blobs();
+		void GUI_Blobs_Construct();
 
 		virtual void Init();
 

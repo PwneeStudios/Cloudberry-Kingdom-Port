@@ -5,13 +5,15 @@
 namespace CloudberryKingdom
 {
 
-	DoorIcon::DoorIcon( int Level_Renamed )
+	DoorIcon::DoorIcon( int Level_Renamed ) { }
+	void DoorIcon::DoorIcon_Construct( int Level_Renamed )
 	{
 		this->Level_Renamed = Level_Renamed;
 		Init( StringConverterHelper::toString( Level_Renamed ) );
 	}
 
-	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale )
+	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) { }
+	void DoorIcon::DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale )
 	{
 		Init( _T( "" ) );
 		SetIcon( PhsxType );

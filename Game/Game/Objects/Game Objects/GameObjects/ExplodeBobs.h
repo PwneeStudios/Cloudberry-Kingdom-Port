@@ -15,6 +15,7 @@ namespace CloudberryKingdom
 		};
 	
 		ExplodeBobs( int speed );
+		void ExplodeBobs_Construct( int speed );
 
 	
 		int MySpeed;

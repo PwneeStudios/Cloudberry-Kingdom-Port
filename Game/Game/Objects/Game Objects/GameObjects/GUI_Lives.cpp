@@ -56,8 +56,12 @@ namespace CloudberryKingdom
 		Text->SubstituteText( BuildString() );
 	}
 
-	GUI_Lives::GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed ) : GUI_Panel( false )
+	//GUI_Lives::GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed ) : GUI_Panel( false )
+	GUI_Lives::GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed ) { }
+	void GUI_Lives::GUI_Lives_Construct( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed )
 	{
+		GUI_Panel::GUI_Panel_Construct( false );
+
 		InitializeInstanceFields();
 		MyGUI_Lives = GUI_Lives_Renamed;
 		Constructor();

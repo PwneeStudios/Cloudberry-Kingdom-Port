@@ -5,19 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct DrawPile;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct Cheer : public GameObject
 	{
 	

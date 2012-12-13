@@ -5,18 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectIcon;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	struct DoorIcon : public GUI_Panel
 	{
 	
@@ -25,8 +13,10 @@ namespace CloudberryKingdom
 	
 //C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
 		DoorIcon( int Level_Renamed );
+		void DoorIcon_Construct( int Level_Renamed );
 
 		DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
+		void DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
 
 		std::wstring s;
 		Upgrade upgrade;

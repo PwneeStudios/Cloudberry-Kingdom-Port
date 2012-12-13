@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	/// <summary>
 	/// A GUI element that tracks how many lives are left.
 	/// Element also shows how many lives are left, displayed after all players die and the level resets.
@@ -103,6 +104,7 @@ namespace CloudberryKingdom
 
 	
 		GUI_LivesLeft( int Lives );
+		void GUI_LivesLeft_Construct( int Lives );
 
 	
 		void SetPos();

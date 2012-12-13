@@ -5,17 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	struct GameData;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct CoinScoreMultiplierObject : public GameObject
 	{
 	

@@ -54,13 +54,15 @@ namespace CloudberryKingdom
 		MultiplierText->SubstituteText( ToString() );
 	}
 
-	GUI_Multiplier::GUI_Multiplier( int Style )
+	GUI_Multiplier::GUI_Multiplier( int Style ) { }
+	void GUI_Multiplier::GUI_Multiplier_Construct( int Style )
 	{
 		InitializeInstanceFields();
 		DoInit( Style, false );
 	}
 
-	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn )
+	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) { }
+	void GUI_Multiplier::GUI_Multiplier_Construct( int Style, bool SlideIn )
 	{
 		InitializeInstanceFields();
 		DoInit( Style, SlideIn );

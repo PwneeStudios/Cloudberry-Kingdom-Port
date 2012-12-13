@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct GUI_Multiplier : public GUI_Panel
 	{
 		/// <summary>
@@ -41,7 +33,9 @@ namespace CloudberryKingdom
 		bool DoSlideIn;
 	
 		GUI_Multiplier( int Style );
+		void GUI_Multiplier_Construct( int Style );
 		GUI_Multiplier( int Style, bool SlideIn );
+		void GUI_Multiplier_Construct( int Style, bool SlideIn );
 
 	
 		void DoInit( int Style, bool SlideIn );

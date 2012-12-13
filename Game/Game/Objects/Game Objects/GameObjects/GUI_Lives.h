@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	/// <summary>
 	/// A GUI element that tells the player how many lives they have, while they play.
 	/// </summary>
@@ -45,6 +46,7 @@ namespace CloudberryKingdom
 	
 //C# TO C++ CONVERTER NOTE: The parameter GUI_Lives was renamed since it is named the same as a user-defined type:
 		GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
+		void GUI_Lives_Construct( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
 
 		virtual void Init();
 
