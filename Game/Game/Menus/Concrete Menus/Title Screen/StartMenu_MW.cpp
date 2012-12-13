@@ -26,6 +26,8 @@ namespace CloudberryKingdom
 	StartMenu_MW::StartMenu_MW( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu() { }
 	void StartMenu_MW::StartMenu_MW_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
+		StartMenu::StartMenu_Construct();
+
 		this->Title = Title;
 	}
 
