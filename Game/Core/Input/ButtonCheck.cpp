@@ -543,6 +543,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		iPlayerIndex = 0;
 	#endif
 		ButtonData Data = ButtonData();
+
 		Data.PressingPlayer = iPlayerIndex;
 		if ( Button == ControllerButtons_NONE )
 			return Data;

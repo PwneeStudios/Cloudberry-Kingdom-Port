@@ -4115,6 +4115,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::InitializeInstanceFields()
 	{
+		LevelReleased = false;
 		EndReached = false;
 		SingleOnly = false;
 		NoCameraChange = false;

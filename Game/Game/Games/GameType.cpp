@@ -1647,6 +1647,8 @@ namespace CloudberryKingdom
 
 	void GameData::InitializeInstanceFields()
 	{
+		_IsSetToReturnTo = false;
+
 		HasLava = false;
 		HasBeenCompleted = false;
 		MyStatGroup = StatGroup_LEVEL;
