@@ -86,6 +86,16 @@ namespace CloudberryKingdom
 		Vector2 Dir;
 		float Squeeze;
 		int PressingPlayer;
+
+		ButtonData() :
+			Down( false ),
+			Pressed( false ),
+			Released( false ),
+			Squeeze( 0 ),
+			PressingPlayer( 0 )
+		{
+		}
+
 	};
 
 	struct ButtonCheck
