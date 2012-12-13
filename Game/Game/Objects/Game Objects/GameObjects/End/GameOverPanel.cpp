@@ -358,12 +358,14 @@ namespace CloudberryKingdom
 		Call( std::make_shared<HighScorePanel>( MyHighScoreList, MyHighLevelList ) );
 	}
 
-	GameOverPanel::GameOverPanel()
+	GameOverPanel::GameOverPanel() { }
+	void GameOverPanel::GameOverPanel_Construct()
 	{
 		InitializeInstanceFields();
 	}
 
-	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level )
+	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) { }
+	void GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
 	{
 		InitializeInstanceFields();
 		this->GameId_Score = GameId_Score;

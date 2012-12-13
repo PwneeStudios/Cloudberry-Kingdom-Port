@@ -5,14 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
 
-
-
-
-namespace CloudberryKingdom
-{
 	struct GUI_Level : public GUI_Panel
 	{
 	
@@ -46,9 +39,12 @@ namespace CloudberryKingdom
 
 	
 		GUI_Level();
+		void GUI_Level_Construct();
 		GUI_Level( bool SlideIn );
+		void GUI_Level_Construct( bool SlideIn );
 
 		GUI_Level( int LevelNum );
+		void GUI_Level_Construct( int LevelNum );
 
 	
 		void DoInit( bool SlideIn );
@@ -66,6 +62,7 @@ namespace CloudberryKingdom
 	{
 	
 		GUI_CampaignLevel();
+		void GUI_CampaignLevel_Construct();
 
 		virtual void OnAdd();
 

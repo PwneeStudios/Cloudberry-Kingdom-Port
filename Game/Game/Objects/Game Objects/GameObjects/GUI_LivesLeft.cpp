@@ -90,7 +90,8 @@ namespace CloudberryKingdom
 		LivesLeftText->SubstituteText( ToString() );
 	}
 
-	GUI_LivesLeft::GUI_LivesLeft( int Lives )
+	GUI_LivesLeft::GUI_LivesLeft( int Lives ) { }
+	void GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
 	{
 		InitializeInstanceFields();
 		SetParams();

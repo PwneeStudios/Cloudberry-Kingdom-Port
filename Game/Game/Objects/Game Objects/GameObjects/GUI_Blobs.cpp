@@ -139,7 +139,8 @@ namespace CloudberryKingdom
 		Text->SubstituteText( BuildString() );
 	}
 
-	GUI_Blobs::GUI_Blobs()
+	GUI_Blobs::GUI_Blobs() { }
+	void GUI_Blobs::GUI_Blobs_Construct()
 	{
 		InitializeInstanceFields();
 	}

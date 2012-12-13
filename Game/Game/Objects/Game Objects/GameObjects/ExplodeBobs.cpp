@@ -6,7 +6,8 @@
 namespace CloudberryKingdom
 {
 
-	ExplodeBobs::ExplodeBobs( int speed )
+	ExplodeBobs::ExplodeBobs( int speed ) { }
+	void ExplodeBobs::ExplodeBobs_Construct( int speed )
 	{
 		InitializeInstanceFields();
 		Active = true;
