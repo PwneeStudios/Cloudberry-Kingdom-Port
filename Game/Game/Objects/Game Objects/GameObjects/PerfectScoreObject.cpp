@@ -176,7 +176,8 @@ namespace CloudberryKingdom
 bool PerfectScoreObject::GlobalObtained = false;
 int PerfectScoreObject::GlobalBonus = 0;
 
-	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier )
+	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier ) { }
+	void PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
 	{
 		// Object is carried over through multiple levels, so prevent it from being released.
 		InitializeInstanceFields();

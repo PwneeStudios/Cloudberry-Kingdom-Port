@@ -27,13 +27,15 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	MultiplierUp::MultiplierUp()
+	MultiplierUp::MultiplierUp() { }
+	void MultiplierUp::MultiplierUp_Construct()
 	{
 		InitializeInstanceFields();
 		Init( Vector2(), 1, false );
 	}
 
-	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma )
+	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) { }
+	void MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
 		InitializeInstanceFields();
 		Init( shift, scale, perma );

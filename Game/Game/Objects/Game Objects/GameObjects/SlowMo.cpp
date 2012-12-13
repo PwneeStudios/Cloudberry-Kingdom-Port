@@ -3,7 +3,8 @@
 namespace CloudberryKingdom
 {
 
-	SlowMo::SlowMo()
+	SlowMo::SlowMo() {}
+	void SlowMo::SlowMo_Construct()
 	{
 		InitializeInstanceFields();
 		Active = true;

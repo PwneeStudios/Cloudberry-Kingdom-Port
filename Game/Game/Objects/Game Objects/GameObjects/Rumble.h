@@ -9,6 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		Rumble();
+		void Rumble_Construct();
 
 	
 		virtual void ReleaseBody();

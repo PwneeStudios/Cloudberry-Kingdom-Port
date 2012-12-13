@@ -3,7 +3,8 @@
 namespace CloudberryKingdom
 {
 
-	Rumble::Rumble()
+	Rumble::Rumble() { }
+	void Rumble::Rumble_Construct()
 	{
 		Active = true;
 		PauseOnPause = true;

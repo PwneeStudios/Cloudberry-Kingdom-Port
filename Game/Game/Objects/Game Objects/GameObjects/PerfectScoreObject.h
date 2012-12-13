@@ -13,8 +13,6 @@ namespace CloudberryKingdom
 	struct PerfectScoreObject : public GUI_Panel
 	{
 
-
-	
 		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
 		{
 		
@@ -129,6 +127,7 @@ namespace CloudberryKingdom
 		bool Global;
 		bool ShowMultiplier;
 		PerfectScoreObject( bool Global, bool ShowMultiplier );
+		void PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
 
 		const float getMultiplier() const;
 

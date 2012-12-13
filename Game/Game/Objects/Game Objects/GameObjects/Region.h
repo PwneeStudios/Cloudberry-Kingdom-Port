@@ -8,12 +8,12 @@ namespace CloudberryKingdom
 	struct Region : public GUI_Panel
 	{
 	
-		Region( Vector2 pos, Vector2 size );
-
+		Region( const Vector2 &pos, const Vector2 &size );
+		void Region_Construct( const Vector2 &pos, const Vector2 &size );
 	
 		std::shared_ptr<AABox> Box;
 	
-		void Init( Vector2 pos, Vector2 size );
+		void Init( const Vector2 &pos, const Vector2 &size );
 
 		std::shared_ptr<Door> AttachedDoor;
 	

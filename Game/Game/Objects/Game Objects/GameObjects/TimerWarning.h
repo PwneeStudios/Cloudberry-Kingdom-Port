@@ -6,17 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct GUI_Timer;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct TimerWarning : public GameObject
 	{
 	

@@ -26,13 +26,15 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	NewHero::NewHero( const std::wstring &str )
+	NewHero::NewHero( const std::wstring &str ) { }
+	void NewHero::NewHero_Construct( const std::wstring &str )
 	{
 		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
 	}
 
-	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
+	void NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		InitializeInstanceFields();
 		Init( str, shift, scale, perma );

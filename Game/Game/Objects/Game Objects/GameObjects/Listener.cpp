@@ -3,7 +3,8 @@
 namespace CloudberryKingdom
 {
 
-	Listener::Listener()
+	Listener::Listener() { }
+	void Listener::Listener_Construct()
 	{
 		InitializeInstanceFields();
 		Active = true;
@@ -11,7 +12,8 @@ namespace CloudberryKingdom
 		getCore()->Show = false;
 	}
 
-	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action )
+	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) { }
+	void Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
 	{
 		InitializeInstanceFields();
 		if ( button == ControllerButtons_A )

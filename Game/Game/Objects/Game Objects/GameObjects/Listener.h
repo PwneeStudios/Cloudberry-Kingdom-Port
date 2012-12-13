@@ -5,18 +5,9 @@
 
 namespace CloudberryKingdom
 {
-	struct Lambda;
-}
-
-namespace CloudberryKingdom
-{
-	struct ButtonClass;
-}
-namespace CloudberryKingdom
-{
 	struct Listener : public GUI_Panel
 	{
-	
+
 		enum Type
 		{
 			Type_ON_DOWN,
@@ -24,8 +15,9 @@ namespace CloudberryKingdom
 		};
 	
 		Listener();
-
+		void Listener_Construct();
 		Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action );
+		void Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action );
 
 		Type MyType;
 

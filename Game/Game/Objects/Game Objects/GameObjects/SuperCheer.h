@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct GameData;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct SuperCheer : public GameObject
 	{
 	

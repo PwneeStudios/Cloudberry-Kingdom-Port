@@ -3,12 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	Region::Region( Vector2 pos, Vector2 size )
+	Region::Region( const Vector2 &pos, const Vector2 &size ) { }
+	void Region::Region_Construct( const Vector2 &pos, const Vector2 &size )
 	{
 		Init( pos, size );
 	}
 
-	void Region::Init( Vector2 pos, Vector2 size )
+	void Region::Init( const Vector2 &pos, const Vector2 &size )
 	{
 		FixedToCamera = false;
 		getCore()->DrawLayer = 9;
