@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = MyCharacterSelect;
 
 		Constructor();
+
+		return std::static_pointer_cast<HeroLevel>( shared_from_this() );
 	}
 
 	void HeroLevel::ReleaseBody()

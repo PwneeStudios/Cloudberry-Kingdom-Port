@@ -36,6 +36,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu::ArcadeBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
+
+		return std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() );
 	}
 
 	void ArcadeBaseMenu::OnAdd()
@@ -121,6 +123,8 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<ArcadeMenu>( shared_from_this() );
 	}
 
 	void ArcadeMenu::Init()

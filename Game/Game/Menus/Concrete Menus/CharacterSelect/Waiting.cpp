@@ -14,6 +14,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = MyCharacterSelect;
 
 		Constructor();
+
+		return std::static_pointer_cast<Waiting>( shared_from_this() );
 	}
 
 	void Waiting::ReleaseBody()

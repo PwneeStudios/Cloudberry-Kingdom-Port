@@ -11,6 +11,8 @@ namespace CloudberryKingdom
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<ControlScreen>( shared_from_this() );
 	}
 
 #if defined(PC_VERSION)

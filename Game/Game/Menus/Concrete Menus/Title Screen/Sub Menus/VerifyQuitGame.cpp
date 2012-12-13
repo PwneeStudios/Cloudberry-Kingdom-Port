@@ -20,6 +20,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<VerifyQuitGameMenu2> VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+		
+		return std::static_pointer_cast<VerifyQuitGameMenu2>( shared_from_this() );
 	}
 
 	void VerifyQuitGameMenu2::MakeBackdrop()

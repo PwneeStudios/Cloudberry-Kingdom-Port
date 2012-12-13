@@ -211,6 +211,8 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 )
 			Tools::TheGame->LoadingScreen_Renamed->IsDone = true;
+
+		return std::static_pointer_cast<StartMenu>( shared_from_this() );
 	}
 
 	void StartMenu::SlideIn( int Frames )

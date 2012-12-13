@@ -130,6 +130,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<SavedSeedsGUI> SavedSeedsGUI::SavedSeedsGUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
+
+		return std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
 	}
 
 	void SavedSeedsGUI::SetHeaderProperties( const std::shared_ptr<EzText> &text )

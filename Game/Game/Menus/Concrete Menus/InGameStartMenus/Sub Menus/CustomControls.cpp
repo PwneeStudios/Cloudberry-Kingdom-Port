@@ -264,6 +264,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<CustomControlsMenu> CustomControlsMenu::CustomControlsMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
+
+		return std::static_pointer_cast<CustomControlsMenu>( shared_from_this() );
 	}
 #endif
 

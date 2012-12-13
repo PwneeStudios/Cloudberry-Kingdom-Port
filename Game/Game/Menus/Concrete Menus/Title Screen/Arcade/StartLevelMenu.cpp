@@ -112,6 +112,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
 
 	StartLevelMenu::StartLevelMenu( int HighestLevel ) { }
@@ -130,6 +132,8 @@ namespace CloudberryKingdom
 				IndexCutoff = i + 1;
 
 		Initialize();
+
+		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
 
 	void StartLevelMenu::Initialize()

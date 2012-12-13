@@ -369,6 +369,8 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 
 		SetPos();
+
+		return std::static_pointer_cast<StatsMenu>( shared_from_this() );
 	}
 
 	void StatsMenu::SetPos()

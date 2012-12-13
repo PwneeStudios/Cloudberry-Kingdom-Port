@@ -271,5 +271,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<StartMenu_MW_Backpanel>( shared_from_this() );
 	}
 }

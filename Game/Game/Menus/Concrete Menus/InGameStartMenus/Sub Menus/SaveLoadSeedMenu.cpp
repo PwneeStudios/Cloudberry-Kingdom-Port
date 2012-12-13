@@ -71,6 +71,8 @@ namespace CloudberryKingdom
 		this->CanSave = CanSave;
 
 		Constructor();
+
+		return std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() );
 	}
 
 	void SaveLoadSeedMenu::Init()

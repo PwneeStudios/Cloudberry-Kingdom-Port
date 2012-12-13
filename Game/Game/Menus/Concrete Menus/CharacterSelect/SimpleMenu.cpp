@@ -80,6 +80,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = Parent;
 
 		Constructor();
+
+		return std::static_pointer_cast<SimpleMenuBase>( shared_from_this() );
 	}
 
 	void SimpleMenuBase::OnAdd()

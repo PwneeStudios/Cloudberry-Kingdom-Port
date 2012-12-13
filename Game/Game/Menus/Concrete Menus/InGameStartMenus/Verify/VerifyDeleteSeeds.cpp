@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() );
 	}
 
 	void VerifyDeleteSeeds::Init()

@@ -207,6 +207,8 @@ namespace CloudberryKingdom
 		// Note that help was used, so that no hint is given about it
 		InitializeInstanceFields();
 		Hints::SetYForHelpNum( 999 );
+
+		return std::static_pointer_cast<HelpMenu>( shared_from_this() );
 	}
 
 	std::shared_ptr<GameObject> HelpMenu::MakeListener()

@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<HeroDoll>( shared_from_this() );
 	}
 
 	void HeroDoll::ReleaseBody()

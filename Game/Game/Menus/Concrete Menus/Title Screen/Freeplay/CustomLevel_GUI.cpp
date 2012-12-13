@@ -287,6 +287,8 @@ namespace CloudberryKingdom
 
 		SeedStringToLoad = _T( "" );
 		ExitFreeplay = false;
+
+		return std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() );
 	}
 
 	void CustomLevel_GUI::StartLevelFromMenuData()

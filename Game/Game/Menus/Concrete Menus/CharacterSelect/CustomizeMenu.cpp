@@ -45,6 +45,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = Parent;
 
 		Constructor();
+
+		return std::static_pointer_cast<CustomizeMenu>( shared_from_this() );
 	}
 
 	void CustomizeMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )

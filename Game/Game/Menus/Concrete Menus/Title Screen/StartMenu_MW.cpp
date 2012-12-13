@@ -29,6 +29,8 @@ namespace CloudberryKingdom
 		StartMenu::StartMenu_Construct();
 
 		this->Title = Title;
+
+		return std::static_pointer_cast<StartMenu_MW>( shared_from_this() );
 	}
 
 	void StartMenu_MW::SlideIn( int Frames )

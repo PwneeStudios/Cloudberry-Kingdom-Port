@@ -82,6 +82,8 @@ namespace CloudberryKingdom
 		HoldIndex = MyCharacterSelect->ItemIndex[ ClrSelectIndex ];
 
 		Constructor();
+
+		return std::static_pointer_cast<ListSelectPanel>( shared_from_this() );
 	}
 
 	void ListSelectPanel::OnSelect()

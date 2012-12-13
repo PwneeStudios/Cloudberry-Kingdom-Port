@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = MyCharacterSelect;
 
 		Constructor();
+
+		return std::static_pointer_cast<Doll>( shared_from_this() );
 	}
 
 	void Doll::ReleaseBody()

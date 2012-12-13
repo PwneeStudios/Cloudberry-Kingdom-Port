@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 		this->Title = Title;
 		this->Arcade = Arcade;
 		this->MyArcadeItem = MyArcadeItem;
+
+		return std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() );
 	}
 
 	void StartMenu_MW_HeroSelect::Release()

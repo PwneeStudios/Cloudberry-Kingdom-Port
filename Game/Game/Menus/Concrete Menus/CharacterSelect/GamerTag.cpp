@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = MyCharacterSelect;
 
 		Constructor();
+
+		return std::static_pointer_cast<GamerTag>( shared_from_this() );
 	}
 
 	void GamerTag::ReleaseBody()

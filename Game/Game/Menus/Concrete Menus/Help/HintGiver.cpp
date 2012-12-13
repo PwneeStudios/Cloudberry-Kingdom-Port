@@ -83,6 +83,8 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 
 		Hints::CurrentGiver =  std::static_pointer_cast<HintGiver>( shared_from_this() );
+
+		return std::static_pointer_cast<HintGiver>( shared_from_this() );
 	}
 
 	void HintGiver::ReleaseBody()

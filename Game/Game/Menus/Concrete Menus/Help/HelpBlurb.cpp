@@ -29,6 +29,8 @@ namespace CloudberryKingdom
 
 		Berry->setPos( Vector2( 1422, -468 ) );
 		MyPile->Add( Berry );
+
+		return std::static_pointer_cast<HelpBlurb>( shared_from_this() );
 	}
 
 	void HelpBlurb::Init()

@@ -22,6 +22,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}
 
 	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false ) { }
@@ -33,6 +35,8 @@ namespace CloudberryKingdom
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}
 
 	VerifyBaseMenu::VerifyBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
@@ -41,6 +45,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}
 
 	void VerifyBaseMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )

@@ -57,6 +57,8 @@ namespace CloudberryKingdom
 		this->MyCharacterSelect = MyCharacterSelect;
 
 		Constructor();
+
+		return std::static_pointer_cast<SignInMenu>( shared_from_this() );
 	}
 #endif
 

@@ -20,12 +20,16 @@ namespace CloudberryKingdom
 	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( CallBaseConstructor );
+
+		return std::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
 
 	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control ) { }
 	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+
+		return std::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
 
 	void VerifyQuitLevelMenu::Init()

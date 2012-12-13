@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 
 		InitializeInstanceFields();
 		this->Title = Title;
+
+		return std::static_pointer_cast<StartMenu_MW_PressStart>( shared_from_this() );
 	}
 
 	void StartMenu_MW_PressStart::SlideIn( int Frames )

@@ -19,6 +19,8 @@ namespace CloudberryKingdom
 		MakeBackdrop();
 
 		SetText( _T( "Hold {pXbox_A,85,?} to jump higher!" ) );
+
+		return std::static_pointer_cast<HintBlurb>( shared_from_this() );
 	}
 
 	void HintBlurb::MakeBackdrop()

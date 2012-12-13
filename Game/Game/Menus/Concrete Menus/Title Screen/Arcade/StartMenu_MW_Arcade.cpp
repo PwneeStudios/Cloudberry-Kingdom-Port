@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 		ArcadeMenu::ArcadeMenu_Construct();
 
 		this->Title = Title;
+
+		return std::static_pointer_cast<StartMenu_MW_Arcade>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Arcade::SlideIn( int Frames )

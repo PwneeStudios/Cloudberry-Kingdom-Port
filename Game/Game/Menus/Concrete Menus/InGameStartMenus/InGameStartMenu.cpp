@@ -101,6 +101,8 @@ bool InGameStartMenu::PreventMenu = false;
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<InGameStartMenu>( shared_from_this() );
 	}
 
 	std::shared_ptr<GameObject> InGameStartMenu::MakeListener()

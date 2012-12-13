@@ -68,6 +68,8 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 
 		Constructor();
+
+		return std::static_pointer_cast<SoundMenu>( shared_from_this() );
 	}
 
 	void SoundMenu::Init()

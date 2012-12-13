@@ -32,6 +32,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
+
+		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
 	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText ) : CkBaseMenu( false ) { }
@@ -50,6 +52,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
+
+		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
 	void AlertBaseMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )

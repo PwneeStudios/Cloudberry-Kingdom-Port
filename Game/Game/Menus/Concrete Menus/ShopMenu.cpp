@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 		this->setControl( Control );
 
 		Constructor();
+
+		return std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() );
 	}
 
 	void VerifyPurchaseMenu::Yes( const std::shared_ptr<MenuItem> &item )

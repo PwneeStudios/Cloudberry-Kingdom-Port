@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 		SoundMenu::SoundMenu_Construct( Control );
 
 		CallDelay = ReturnToCallerDelay = 0;
+
+		return std::static_pointer_cast<StartMenu_MW_Options>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Options::SlideIn( int Frames )

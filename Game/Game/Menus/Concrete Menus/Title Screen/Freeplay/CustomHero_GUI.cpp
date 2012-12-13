@@ -137,6 +137,8 @@ namespace CloudberryKingdom
 		this->CustomLevel = CustomLevel;
 
 		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
+
+		return std::static_pointer_cast<CustomHero_GUI>( shared_from_this() );
 	}
 
 	void CustomHero_GUI::OnAdd()

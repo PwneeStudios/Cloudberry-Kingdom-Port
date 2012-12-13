@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 		//Core.DrawLayer += 1;
+
+		return std::static_pointer_cast<CharSelectBackdrop>( shared_from_this() );
 	}
 
 	void CharSelectBackdrop::SlideIn( int Frames )

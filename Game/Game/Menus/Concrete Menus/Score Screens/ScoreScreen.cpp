@@ -200,6 +200,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 
 		InitializeInstanceFields();
+
+		return std::static_pointer_cast<ScoreScreen>( shared_from_this() );
 	}
 
 	ScoreScreen::ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game ) : CkBaseMenu( false ) { }
@@ -213,6 +215,8 @@ namespace CloudberryKingdom
 		FontScale = .6f;
 
 		Constructor();
+
+		return std::static_pointer_cast<ScoreScreen>( shared_from_this() );
 	}
 
 	void ScoreScreen::SetItemProperties( const std::shared_ptr<MenuItem> &item )

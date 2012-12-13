@@ -24,6 +24,8 @@ namespace CloudberryKingdom
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		getCore()->DrawLayer++;
+
+		return std::static_pointer_cast<StartMenu_MW_Black>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Black::Init()

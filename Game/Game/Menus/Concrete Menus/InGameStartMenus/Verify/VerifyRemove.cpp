@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 	std::shared_ptr<VerifyRemoveMenu> VerifyRemoveMenu::VerifyRemoveMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+
+		return std::static_pointer_cast<VerifyRemoveMenu>( shared_from_this() );
 	}
 
 	void VerifyRemoveMenu::Init()

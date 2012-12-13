@@ -19,6 +19,8 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
 		this->HeroSelect = HeroSelect;
+
+		return std::static_pointer_cast<HeroSelectOptions>( shared_from_this() );
 	}
 
 	void HeroSelectOptions::Release()
