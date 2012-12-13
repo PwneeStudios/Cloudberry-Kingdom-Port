@@ -312,12 +312,12 @@ namespace CloudberryKingdom
 
 		// Save object
 	#if defined(DEBUG)
-		Tools::UseInvariantCulture();
+		/*Tools::UseInvariantCulture();
 		std::shared_ptr<FileStream> fstream = File->Open( _T( "C:/Users/Ezra/Desktop/TigarBob.smo" ), FileMode::Create, FileAccess::Write, FileShare::None );
 		std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( fstream, Encoding::UTF8 );
 		p->Write( writer );
 		writer->Close();
-		fstream->Close();
+		fstream->Close();*/
 	#endif
 	}
 

@@ -1259,7 +1259,7 @@ namespace CloudberryKingdom
 	#if defined(DEBUG)
 		//CloudberryKingdomGame.debugstring = string.Format("{0}, {1}", JumpDelayCount, MyBob.CurInput.A_Button);
 		//CloudberryKingdomGame.debugstring = string.Format("{0}, {1}", Pos.X, CurPhsxStep);
-		CloudberryKingdomGame::debugstring = StringConverterHelper::toString( RndThrustType );
+		//CloudberryKingdomGame::debugstring = StringConverterHelper::toString( RndThrustType );
 	#endif
 	}
 
