@@ -57,6 +57,7 @@ namespace CloudberryKingdom
 
 	
 		GUI_Timer_Base();
+		void GUI_Timer_Base_Construct();
 
 	
 		virtual void MyDraw();

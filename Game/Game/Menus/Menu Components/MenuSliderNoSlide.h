@@ -5,12 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct MenuSliderNoSlide : public MenuSliderBase
 	{
 	

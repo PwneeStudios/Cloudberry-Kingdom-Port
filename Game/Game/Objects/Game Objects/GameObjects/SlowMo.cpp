@@ -6,6 +6,8 @@ namespace CloudberryKingdom
 	SlowMo::SlowMo() {}
 	void SlowMo::SlowMo_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Active = true;
 		PauseOnPause = true;

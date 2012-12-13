@@ -50,6 +50,7 @@ namespace CloudberryKingdom
 
 	
 		ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent );
+		void ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent );
 
 	
 		std::shared_ptr<MenuSlider> slider;

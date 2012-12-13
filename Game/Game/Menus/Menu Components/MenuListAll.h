@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct DrawPile;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct Camera;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct Brackets
 	{
 	

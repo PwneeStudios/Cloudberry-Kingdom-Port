@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	ShowGuide::ShowGuide()
+	ShowGuide::ShowGuide() {}
+	void ShowGuide::ShowGuide_Costruct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		Bob::GuideActivated = true;
 
 		Active = true;

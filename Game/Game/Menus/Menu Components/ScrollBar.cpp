@@ -41,8 +41,11 @@ namespace CloudberryKingdom
 		Parent.reset();
 	}
 
-	ScrollBar::ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent ) : CkBaseMenu( false )
+	ScrollBar::ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent ) : CkBaseMenu( false ) { }
+	void ScrollBar::ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->AttachedMenu = AttachedMenu;
 		this->Parent = Parent;
 		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );

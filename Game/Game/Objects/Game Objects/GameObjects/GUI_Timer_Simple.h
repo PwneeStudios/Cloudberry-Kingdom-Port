@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct GUI_Timer_Base;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	/// <summary>
 	/// A simple timer. The timer is removed on level resets, and removes itself when the timer expires.
 	/// </summary>
@@ -31,6 +23,7 @@ namespace CloudberryKingdom
 
 	
 		GUI_Timer_Simple( int Time );
+		void GUI_Timer_Simple_Construct( int Time );
 
 		//void OnExpire(GUI_Timer_Base timer)
 		//{

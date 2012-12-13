@@ -6,6 +6,8 @@ namespace CloudberryKingdom
 	Region::Region( const Vector2 &pos, const Vector2 &size ) { }
 	void Region::Region_Construct( const Vector2 &pos, const Vector2 &size )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		Init( pos, size );
 	}
 

@@ -30,6 +30,8 @@ namespace CloudberryKingdom
 	MultiplierUp::MultiplierUp() { }
 	void MultiplierUp::MultiplierUp_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( Vector2(), 1, false );
 	}
@@ -37,6 +39,8 @@ namespace CloudberryKingdom
 	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) { }
 	void MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( shift, scale, perma );
 	}

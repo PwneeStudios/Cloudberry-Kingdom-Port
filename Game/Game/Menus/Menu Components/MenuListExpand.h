@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<MenuList> MyMenuList;
 	
 		MenuListExpand( int Control, const std::shared_ptr<MenuList> &MyMenuList );
-
+		void MenuListExpand_Construct( int Control, const std::shared_ptr<MenuList> &MyMenuList );
 	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
 

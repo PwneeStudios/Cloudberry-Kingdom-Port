@@ -6,6 +6,8 @@ namespace CloudberryKingdom
 	Rumble::Rumble() { }
 	void Rumble::Rumble_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		Active = true;
 		PauseOnPause = true;
 	}

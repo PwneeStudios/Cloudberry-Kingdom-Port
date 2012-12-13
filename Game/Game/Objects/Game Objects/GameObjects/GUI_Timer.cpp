@@ -58,4 +58,12 @@ namespace CloudberryKingdom
 		MinLevelStartTimeValue = 62 + 31;
 		MaxTime = 60;
 	}
+
+	GUI_Timer::GUI_Timer() { }
+	void GUI_Timer::GUI_Timer_Construct()
+	{
+		GUI_Timer_Base::GUI_Timer_Base_Construct();
+
+		InitializeInstanceFields();
+	}
 }

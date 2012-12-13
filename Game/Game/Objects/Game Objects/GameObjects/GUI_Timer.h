@@ -49,10 +49,8 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		GUI_Timer()
-		{
-			InitializeInstanceFields();
-		}
+		GUI_Timer();
+		void GUI_Timer_Construct();
 	};
 }
 

@@ -27,14 +27,20 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	LevelTitle::LevelTitle( const std::wstring &str )
+	LevelTitle::LevelTitle( const std::wstring &str ) { }
+	void LevelTitle::LevelTitle_Construct( const std::wstring &str )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
 	}
 
-	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
+	void LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( str, shift, scale, perma );
 	}

@@ -14,8 +14,11 @@ namespace CloudberryKingdom
 		timer->ReleaseWhenDone = true;
 	}
 
-	GUI_Timer_Simple::GUI_Timer_Simple( int Time )
+	GUI_Timer_Simple::GUI_Timer_Simple( int Time ) { }
+	void GUI_Timer_Simple::GUI_Timer_Simple_Construct( int Time )
 	{
+		GUI_Timer_Base::GUI_Timer_Base_Construct();
+
 		PreventRelease = false;
 		getCore()->RemoveOnReset = true;
 

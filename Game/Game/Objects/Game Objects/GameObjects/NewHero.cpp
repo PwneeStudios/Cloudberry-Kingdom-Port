@@ -29,6 +29,8 @@ namespace CloudberryKingdom
 	NewHero::NewHero( const std::wstring &str ) { }
 	void NewHero::NewHero_Construct( const std::wstring &str )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
 	}
@@ -36,6 +38,8 @@ namespace CloudberryKingdom
 	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
 	void NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Init( str, shift, scale, perma );
 	}

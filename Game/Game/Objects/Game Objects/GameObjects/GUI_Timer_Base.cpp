@@ -100,8 +100,11 @@ namespace CloudberryKingdom
 		TimerText->SubstituteText( BuildString() );
 	}
 
-	GUI_Timer_Base::GUI_Timer_Base()
+	GUI_Timer_Base::GUI_Timer_Base() { }
+	void GUI_Timer_Base::GUI_Timer_Base_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
