@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 
 	
 		HelpMenu();
-		void HelpMenu_Construct();
+		std::shared_ptr<HelpMenu> HelpMenu_Construct();
 
 		static std::shared_ptr<GameObject> MakeListener();
 

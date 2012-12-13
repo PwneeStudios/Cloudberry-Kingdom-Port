@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		void Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		std::shared_ptr<Doll> Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
 	

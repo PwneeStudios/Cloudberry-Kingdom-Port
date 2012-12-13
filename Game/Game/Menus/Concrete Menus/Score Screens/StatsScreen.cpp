@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 	}
 
 	StatsMenu::StatsMenu( StatGroup group ) { }
-	void StatsMenu::StatsMenu_Construct( StatGroup group )
+	std::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

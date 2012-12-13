@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 	}
 
 	StartMenu::StartMenu() { }
-	void StartMenu::StartMenu_Construct()
+	std::shared_ptr<StartMenu> StartMenu::StartMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

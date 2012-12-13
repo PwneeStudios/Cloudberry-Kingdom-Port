@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 	}
 
 	HintGiver::HintGiver() { }
-	void HintGiver::HintGiver_Construct()
+	std::shared_ptr<HintGiver> HintGiver::HintGiver_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

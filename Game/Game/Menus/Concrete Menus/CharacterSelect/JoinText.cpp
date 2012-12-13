@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	//JoinText::JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	JoinText::JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	void JoinText::JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	std::shared_ptr<JoinText> JoinText::JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

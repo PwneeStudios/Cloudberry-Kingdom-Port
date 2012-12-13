@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	}
 
 	HelpBlurb::HelpBlurb() { }
-	void HelpBlurb::HelpBlurb_Construct()
+	std::shared_ptr<HelpBlurb> HelpBlurb::HelpBlurb_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyDeleteSeeds::VerifyDeleteSeeds( int Control, int NumSeeds ) : VerifyBaseMenu( false ) { }
-	void VerifyDeleteSeeds::VerifyDeleteSeeds_Construct( int Control, int NumSeeds )
+	std::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds::VerifyDeleteSeeds_Construct( int Control, int NumSeeds )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 

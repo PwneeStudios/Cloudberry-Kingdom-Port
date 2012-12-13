@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 		};
 	
 		SavedSeedsGUI();
-		void SavedSeedsGUI_Construct();
+		std::shared_ptr<SavedSeedsGUI> SavedSeedsGUI_Construct();
 
 	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

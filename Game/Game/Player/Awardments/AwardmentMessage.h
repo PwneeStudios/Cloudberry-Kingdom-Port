@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 
 	
 		AwardmentMessage( const std::shared_ptr<Awardment> &award );
-		void AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award );
+		std::shared_ptr<AwardmentMessage> AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award );
 
 	
 		virtual void MakeBackdrop();

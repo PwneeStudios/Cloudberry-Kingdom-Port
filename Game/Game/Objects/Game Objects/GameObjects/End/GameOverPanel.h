@@ -189,8 +189,9 @@ namespace CloudberryKingdom
 	
 		GameOverPanel();
 		GameOverPanel( int GameId_Score, int GameId_Level );
-		void GameOverPanel_Construct();
-		void GameOverPanel_Construct( int GameId_Score, int GameId_Level );
+
+		std::shared_ptr<GameOverPanel> GameOverPanel_Construct();
+		std::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
 
 	
 		virtual void MyDraw();

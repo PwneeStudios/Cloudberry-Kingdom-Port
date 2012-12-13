@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 	
 		HighScorePanel( const std::shared_ptr<ScoreList> &Scores );
-		void HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores );
+		std::shared_ptr<HighScorePanel> HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores );
 
 	
 		bool Instant;
@@ -81,9 +81,9 @@ namespace CloudberryKingdom
 
 	
 		HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
-		void HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
+		std::shared_ptr<HighScorePanel> HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
 		HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
-		void HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
+		std::shared_ptr<HighScorePanel> HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
 		void MultiInit( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist );
 
 	

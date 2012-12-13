@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		virtual void OnAdd();
 
 		StartMenu_MW_Black();
-		void StartMenu_MW_Black_Construct();
+		std::shared_ptr<StartMenu_MW_Black> StartMenu_MW_Black_Construct();
 
 	
 		std::shared_ptr<QuadClass> Black;

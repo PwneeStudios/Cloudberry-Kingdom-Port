@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 
 	
 		ControlScreen( int Control );
-		void ControlScreen_Construct( int Control );
+		std::shared_ptr<ControlScreen> ControlScreen_Construct( int Control );
 
 #if defined(PC_VERSION)
 	

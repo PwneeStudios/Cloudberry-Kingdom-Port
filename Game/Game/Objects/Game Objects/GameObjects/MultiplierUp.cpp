@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	}
 
 	MultiplierUp::MultiplierUp() { }
-	void MultiplierUp::MultiplierUp_Construct()
+	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	}
 
 	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) { }
-	void MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
+	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

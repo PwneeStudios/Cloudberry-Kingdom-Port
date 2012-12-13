@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 	}
 
 	SavedSeedsGUI::SavedSeedsGUI() { }
-	void SavedSeedsGUI::SavedSeedsGUI_Construct()
+	std::shared_ptr<SavedSeedsGUI> SavedSeedsGUI::SavedSeedsGUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 	}

@@ -168,9 +168,9 @@ namespace CloudberryKingdom
 		static int DefaultMenuLayer;
 
 		CkBaseMenu();
-		void CkBaseMenu_Construct();
+		std::shared_ptr<CkBaseMenu> CkBaseMenu_Construct();
 		CkBaseMenu( bool CallBaseConstructor );
-		void CkBaseMenu_Construct( bool CallBaseConstructor );
+		std::shared_ptr<CkBaseMenu> CkBaseMenu_Construct( bool CallBaseConstructor );
 
 		virtual void Draw();
 

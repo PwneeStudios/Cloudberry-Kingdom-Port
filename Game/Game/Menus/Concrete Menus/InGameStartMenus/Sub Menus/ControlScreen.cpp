@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	ControlScreen::ControlScreen( int Control ) : CkBaseMenu( false ) { }
-	void ControlScreen::ControlScreen_Construct( int Control )
+	std::shared_ptr<ControlScreen> ControlScreen::ControlScreen_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

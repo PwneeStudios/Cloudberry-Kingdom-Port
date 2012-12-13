@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyRemoveMenu::VerifyRemoveMenu( int Control ) : VerifyBaseMenu( Control ) { }
-	void VerifyRemoveMenu::VerifyRemoveMenu_Construct( int Control )
+	std::shared_ptr<VerifyRemoveMenu> VerifyRemoveMenu::VerifyRemoveMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}

@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		void HeroLevel_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		std::shared_ptr<HeroLevel> HeroLevel_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 	
 		virtual void ReleaseBody();

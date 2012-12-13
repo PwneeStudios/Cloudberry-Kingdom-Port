@@ -15,9 +15,9 @@ namespace CloudberryKingdom
 		};
 	
 		Listener();
-		void Listener_Construct();
+		std::shared_ptr<Listener> Listener_Construct();
 		Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action );
-		void Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action );
+		std::shared_ptr<Listener> Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action );
 
 		Type MyType;
 

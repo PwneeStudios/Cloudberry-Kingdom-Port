@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		bool Global;
 		bool ShowMultiplier;
 		PerfectScoreObject( bool Global, bool ShowMultiplier );
-		void PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
+		std::shared_ptr<PerfectScoreObject> PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
 
 		const float getMultiplier() const;
 

@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 
 	
 		HelpBlurb();
-		void HelpBlurb_Construct();
+		std::shared_ptr<HelpBlurb> HelpBlurb_Construct();
 
 		virtual void Init();
 

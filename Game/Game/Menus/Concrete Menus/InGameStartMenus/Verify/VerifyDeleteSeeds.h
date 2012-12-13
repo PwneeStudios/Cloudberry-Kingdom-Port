@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		int NumSeeds;
 	
 		VerifyDeleteSeeds( int Control, int NumSeeds );
-		void VerifyDeleteSeeds_Construct( int Control, int NumSeeds );
+		std::shared_ptr<VerifyDeleteSeeds> VerifyDeleteSeeds_Construct( int Control, int NumSeeds );
 
 		virtual void Init();
 

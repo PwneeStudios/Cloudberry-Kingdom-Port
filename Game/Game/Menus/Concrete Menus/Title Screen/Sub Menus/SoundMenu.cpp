@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 	}
 
 	SoundMenu::SoundMenu( int Control ) : VerifyBaseMenu( false ) { }
-	void SoundMenu::SoundMenu_Construct( int Control )
+	std::shared_ptr<SoundMenu> SoundMenu::SoundMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 

@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 
 	
 		StartMenu_MW_HeroSelect( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
-		void StartMenu_MW_HeroSelect_Construct( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
+		std::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect_Construct( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
 
 		virtual void Release();
 

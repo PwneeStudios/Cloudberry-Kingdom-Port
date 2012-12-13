@@ -80,9 +80,9 @@ namespace CloudberryKingdom
 
 		int HighestLevel;
 		StartLevelMenu();
-		void StartLevelMenu_Construct();
+		std::shared_ptr<StartLevelMenu> StartLevelMenu_Construct();
 		StartLevelMenu( int HighestLevel );
-		void StartLevelMenu_Construct( int HighestLevel );
+		std::shared_ptr<StartLevelMenu> StartLevelMenu_Construct( int HighestLevel );
 
 		int IndexCutoff;
 

@@ -185,10 +185,10 @@ namespace CloudberryKingdom
 		std::shared_ptr<FancyVector2> Pos;
 
 		GUI_Panel();
-		void GUI_Panel_Construct();
+		std::shared_ptr<GUI_Panel> GUI_Panel_Construct();
 
 		GUI_Panel( bool CallBaseConstructor );
-		void GUI_Panel_Construct( bool CallBaseConstructor );
+		std::shared_ptr<GUI_Panel> GUI_Panel_Construct( bool CallBaseConstructor );
 
 		virtual void Constructor();
 

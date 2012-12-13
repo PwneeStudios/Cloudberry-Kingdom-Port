@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	{
 	
 		CharSelectBackdrop();
-		void CharSelectBackdrop_Construct();
+		std::shared_ptr<CharSelectBackdrop> CharSelectBackdrop_Construct();
 
 		virtual void SlideIn( int Frames );
 

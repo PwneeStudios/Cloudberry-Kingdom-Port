@@ -165,14 +165,14 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Panel::GUI_Panel() { }
-	void GUI_Panel::GUI_Panel_Construct()
+	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct()
 	{
 		InitializeInstanceFields();
 		Constructor();
 	}
 
 	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) { }
-	void GUI_Panel::GUI_Panel_Construct( bool CallBaseConstructor )
+	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct( bool CallBaseConstructor )
 	{
 		InitializeInstanceFields();
 		if ( CallBaseConstructor )

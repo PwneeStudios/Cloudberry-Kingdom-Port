@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 
 	
 		CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent );
-		void CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		std::shared_ptr<CustomizeMenu> CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
 
 	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );

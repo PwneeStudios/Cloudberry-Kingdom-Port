@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 		std::vector<std::shared_ptr<PlayerStats> > Stats;
 	
 		StatsMenu( StatGroup group );
-		void StatsMenu_Construct( StatGroup group );
+		std::shared_ptr<StatsMenu> StatsMenu_Construct( StatGroup group );
 
 
 	

@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 bool InGameStartMenu::PreventMenu = false;
 
 	//InGameStartMenu::InGameStartMenu( int Control ) : CkBaseMenu( false )
-	void InGameStartMenu::InGameStartMenu_Construct( int Control )
+	std::shared_ptr<InGameStartMenu> InGameStartMenu::InGameStartMenu_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 	}
 
 	StartLevelMenu::StartLevelMenu() { }
-	void StartLevelMenu::StartLevelMenu_Construct()
+	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 	}
 
 	StartLevelMenu::StartLevelMenu( int HighestLevel ) { }
-	void StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
+	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

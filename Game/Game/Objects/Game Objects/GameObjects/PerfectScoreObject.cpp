@@ -177,7 +177,7 @@ bool PerfectScoreObject::GlobalObtained = false;
 int PerfectScoreObject::GlobalBonus = 0;
 
 	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier ) { }
-	void PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
+	std::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

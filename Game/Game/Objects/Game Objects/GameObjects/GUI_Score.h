@@ -35,9 +35,9 @@ namespace CloudberryKingdom
 		bool DoSlideIn;
 	
 		GUI_Score();
-		void GUI_Score_Construct();
+		std::shared_ptr<GUI_Score> GUI_Score_Construct();
 		GUI_Score( bool SlideIn );
-		void GUI_Score_Construct( bool SlideIn );
+		std::shared_ptr<GUI_Score> GUI_Score_Construct( bool SlideIn );
 
 	
 		void DoInit( bool SlideIn );
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		};
 	
 		GUI_CampaignScore();
-		void GUI_CampaignScore_Construct();
+		std::shared_ptr<GUI_CampaignScore> GUI_CampaignScore_Construct();
 	
 		virtual int GetScore();
 

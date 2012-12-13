@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		void GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		std::shared_ptr<GamerTag> GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 	
 		virtual void ReleaseBody();

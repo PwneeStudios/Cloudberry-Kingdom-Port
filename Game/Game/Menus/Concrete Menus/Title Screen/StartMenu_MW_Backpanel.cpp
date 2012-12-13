@@ -266,7 +266,7 @@ namespace CloudberryKingdom
 	}
 
 	StartMenu_MW_Backpanel::StartMenu_MW_Backpanel() { }
-	void StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
+	std::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

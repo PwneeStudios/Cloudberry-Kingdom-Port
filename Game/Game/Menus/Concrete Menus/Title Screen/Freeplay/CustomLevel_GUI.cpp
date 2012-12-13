@@ -273,7 +273,7 @@ namespace CloudberryKingdom
 	}
 
 	CustomLevel_GUI::CustomLevel_GUI() { }
-	void CustomLevel_GUI::CustomLevel_GUI_Construct()
+	std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI::CustomLevel_GUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

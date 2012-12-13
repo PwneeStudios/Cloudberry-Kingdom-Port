@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 		std::shared_ptr<EzText> text;
 	
 		MultiplierUp();
-		void MultiplierUp_Construct();
+		std::shared_ptr<MultiplierUp> MultiplierUp_Construct();
 		MultiplierUp( Vector2 shift, float scale, bool perma );
-		void MultiplierUp_Construct( Vector2 shift, float scale, bool perma );
+		std::shared_ptr<MultiplierUp> MultiplierUp_Construct( Vector2 shift, float scale, bool perma );
 
 	
 		bool Perma;

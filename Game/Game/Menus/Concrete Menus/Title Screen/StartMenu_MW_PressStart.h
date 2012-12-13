@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title );
-		void StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
+		std::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 
