@@ -626,7 +626,7 @@ namespace CloudberryKingdom
 		//        nblock.MakeTopOnly();
 		//}
 
-		DEBUG( _T( "Pre stage 1, about to reset" ) );
+		DEBUGMsg( _T( "Pre stage 1, about to reset" ) );
 
 		PlayMode = 2;
 		RecordPosition = true;
@@ -1797,7 +1797,7 @@ int Level::CountToSleep = 0;
 bool Level::showdebug = false;
 bool Level::dodebug = false;
 
-	void Level::DEBUG( const std::wstring &str )
+	void Level::DEBUGMsg( const std::wstring &str )
 	{
 	#if defined(DEBUG)
 		if ( !showdebug || !dodebug )
@@ -1839,7 +1839,7 @@ bool Level::dodebug = false;
 		this->MaxRight = MaxRight;
 
 		PREFILL();
-		DEBUG( _T( "Pre stage 1, about to fill" ) );
+		DEBUGMsg( _T( "Pre stage 1, about to fill" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
 
@@ -1991,7 +1991,7 @@ bool Level::dodebug = false;
 		}
 
 		Pre1 += L'C';
-		DEBUG( _T( "Pre stage 1, about to reset" ) );
+		DEBUGMsg( _T( "Pre stage 1, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
 
@@ -2002,7 +2002,7 @@ bool Level::dodebug = false;
 			getPieceSeed()->PreStage1->Apply( shared_from_this() );
 		ResetAll( true );
 
-		DEBUG( _T( "Pre stage 1, about to run through" ) );
+		DEBUGMsg( _T( "Pre stage 1, about to run through" ) );
 
 		// Set special Bob parameters
 		MySourceGame->SetAdditionalBobParameters( Computers );
@@ -2034,7 +2034,7 @@ bool Level::dodebug = false;
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test c: %d" ), TestNumber ) );
 
-		DEBUG( _T( "Done with stage 1 run through, about to cleanup" ) );
+		DEBUGMsg( _T( "Done with stage 1 run through, about to cleanup" ) );
 
 		// Stage 1 Cleanup
 		Stage1Cleanup( BL_Bound, TR_Bound );
@@ -2043,7 +2043,7 @@ bool Level::dodebug = false;
 		CurPiece->PieceLength = LastStep - StartPhsxStep;
 
 
-		DEBUG( _T( "Pre stage 2, about to fill" ) );
+		DEBUGMsg( _T( "Pre stage 2, about to fill" ) );
 
 
 		// Pre Fill #2
@@ -2058,7 +2058,7 @@ bool Level::dodebug = false;
 		FinalizeBlocks();
 
 		Pre2 += L'C';
-		DEBUG( _T( "Pre stage 2, about to reset" ) );
+		DEBUGMsg( _T( "Pre stage 2, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test d: %d" ), TestNumber ) );
 
@@ -2074,14 +2074,14 @@ bool Level::dodebug = false;
 		if ( ReturnEarly == 2 )
 			return false;
 
-		DEBUG( _T( "Pre stage 2, about to run through" ) );
+		DEBUGMsg( _T( "Pre stage 2, about to run through" ) );
 		Pre2 += L'D';
 
 		// Stage 2 Run through
 		Stage2();
 		Post += L'A';
 
-		DEBUG( _T( "Done with stage 2 run through, about to cleanup" ) );
+		DEBUGMsg( _T( "Done with stage 2 run through, about to cleanup" ) );
 		showdebug = true;
 
 		// Stage 2 Cleanup

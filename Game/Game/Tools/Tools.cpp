@@ -298,14 +298,21 @@ namespace CloudberryKingdom
 #endif
 	}
 
-	void Tools::Write( const std::wstring &str, ... )
+	void Tools::Write( const wchar_t *str, ... )
 	{
 #if defined(DEBUG)
 #if defined(WINDOWS)
-	if ( objs->Length == 0 )
+		va_list args;
+		va_start( args, str );
+		vwprintf( str, args );
+		va_end( args );
+		
+		wprintf( L"\n" );
+
+	/*if ( objs->Length == 0 )
 		std::cout << str << std::endl;
 	else
-		std::cout << std::endl;
+		std::cout << std::endl;*/
 #else
 	if ( objs->Length == 0 )
 		System::Diagnostics::Debug::WriteLine( str );

@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <MasterHack.h>
 
 namespace CloudberryKingdom
 {
@@ -46,10 +47,6 @@ namespace CloudberryKingdom
 		
 		EzText::InitializeStatics();
 
-		Bob::InitializeStatics();
-
-		ObjectIcon::InitializeStatics();
-
 		BobPhsx::DefaultInfo::InitializeStatics();
 
 		BobPhsxNormal::InitializeStatics();
@@ -85,6 +82,9 @@ namespace CloudberryKingdom
 
 		BobPhsxWheel::InitializeStatics();
 
+		Bob::InitializeStatics();
+
+		ObjectIcon::InitializeStatics();
 
 		ObjectClass::InitializeStatics();
 
@@ -540,7 +540,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		SignedInGamer::SignedOut += std::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
 	#endif
 
-		MainVideo::StartVideo_CanSkipIfWatched( _T( "LogoSalad" ) );
+		// FIXME: Start videos later.
+		//MainVideo::StartVideo_CanSkipIfWatched( _T( "LogoSalad" ) );
 	}
 
 	void CloudberryKingdomGame::UnloadContent()
@@ -1400,6 +1401,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		level->MyBackground->Init( level );
 
 		Tools::CurGameData = level->MyGame = std::make_shared<GameData>();
+		GameData_Construct( level->MyGame );
+
 		Tools::CurGameData->MyLevel = Tools::CurLevel = level;
 	}
 
@@ -1760,6 +1763,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#else
 				// Start at Screen Saver
 				std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+				ScreenSaver_Construct( Intro );
 				Intro->Init();
 				return;
 	#endif

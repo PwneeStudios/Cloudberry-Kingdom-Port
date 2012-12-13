@@ -1,11 +1,15 @@
 #include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	std::shared_ptr<GameData> NormalFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
-		return std::static_pointer_cast<GameData>( std::make_shared<NormalGameData>( data, MakeInBackground ) );
+		std::shared_ptr<NormalGameData> temp = std::make_shared<NormalGameData>( data, MakeInBackground );
+		NormalGameData_Construct( temp, data, MakeInBackground );
+		return std::static_pointer_cast<GameData>( temp );
 	}
 
 	void NormalGameData::SetCreatedBobParameters( const std::shared_ptr<Bob> &bob )
@@ -24,11 +28,13 @@ namespace CloudberryKingdom
 
 	NormalGameData::NormalGameData()
 	{
+		assert( !"Should not be called." );
 	}
 
 	NormalGameData::NormalGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
-		Init( LevelSeed, MakeInBackground );
+		// Now in NormalGameData_Construct.
+		// Init( LevelSeed, MakeInBackground );
 	}
 
 	void NormalGameData::Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )

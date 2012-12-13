@@ -111,7 +111,8 @@ namespace CloudberryKingdom
 
 		CurrentLanguage = Languages[ SelectedLanguage ];
 
-		std::wstring path = Path::Combine( Content->RootDirectory, _T( "Subtitles" ), CurrentLanguage->MyDirectory );
+		// FIXME: Load subtitles another way.
+		/*std::wstring path = Path::Combine( Content->RootDirectory, _T( "Subtitles" ), CurrentLanguage->MyDirectory );
 		std::vector<std::wstring> files = Tools::GetFiles( path, false );
 
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
@@ -122,7 +123,7 @@ namespace CloudberryKingdom
 				std::shared_ptr<CloudberryKingdom::EzTexture> texture = Tools::TextureWad->AddTexture( 0, Tools::GetFileName( _T( "Content" ), *file ) );
 				texture->Load();
 			}
-		}
+		}*/
 	}
 
 	void Localization::Initialize()

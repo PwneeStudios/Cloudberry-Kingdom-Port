@@ -32,14 +32,16 @@ namespace CloudberryKingdom
 
 	TitleGameData::TitleGameData()
 	{
-		InitializeInstanceFields();
+		// See TitleGameData_Construct.
+
+		/*InitializeInstanceFields();
 		LockLevelStart = false;
 		SuppressQuickSpawn = true;
 
 		Init();
 
 		Tools::CurGameData->SuppressQuickSpawn = true;
-		Tools::CurGameData->SuppressSongInfo = true;
+		Tools::CurGameData->SuppressSongInfo = true;*/
 	}
 
 	void TitleGameData::SetToReturnTo( int code )

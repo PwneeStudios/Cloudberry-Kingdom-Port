@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <MasterHack.h>
 
 namespace CloudberryKingdom
 {
@@ -170,6 +171,7 @@ namespace CloudberryKingdom
 	void StartMenu::MenuGo_ScreenSaver( const std::shared_ptr<MenuItem> &item )
 	{
 		std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+		ScreenSaver_Construct( Intro );
 		Intro->Init();
 		Tools::TheGame->LogoScreenPropUp = false;
 		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );

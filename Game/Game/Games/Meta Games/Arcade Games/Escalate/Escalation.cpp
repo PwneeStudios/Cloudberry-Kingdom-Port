@@ -3,6 +3,8 @@
 #include <Hacks/List.h>
 #include <Hacks/String.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -137,6 +139,7 @@ namespace CloudberryKingdom
 			std::static_pointer_cast<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( _GetSeed );
 
 		MyStringWorld = std::make_shared<StringWorldEndurance>( __GetSeed, Gui_LivesLeft, 25 );
+		StringWorldEndurance_Construct( MyStringWorld, __GetSeed, Gui_LivesLeft, 25 );
 
 		Escalation_Tutorial::setWatchedOnce( true );
 		if ( !Escalation_Tutorial::getWatchedOnce() )

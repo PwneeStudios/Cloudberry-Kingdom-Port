@@ -21,6 +21,8 @@
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
 }*/
 
+static std::shared_ptr<GameTime> gt = std::make_shared<GameTime>();
+
 void CloudberryKingdomWrapper::Initialize()
 {
 	/*std::vector< std::string > paths;
@@ -41,10 +43,18 @@ void CloudberryKingdomWrapper::Initialize()
 
 	game->Initialize();
 	game->LoadContent();
+
+	gt->ElapsedGameTime.TotalSeconds = 0.016f;
+	gt->TotalGameTime = TimeSpan( 0, 0, 0 );
 }
 
 void CloudberryKingdomWrapper::Update()
 {
+	game->Update( gt );
+	game->Draw( gt );
+
+	gt->TotalGameTime.TotalSeconds += gt->ElapsedGameTime.TotalSeconds;
+
 	/*PADStatus status[ PAD_MAX_CONTROLLERS ];
 	memset( status, 0, sizeof( status ) );
 

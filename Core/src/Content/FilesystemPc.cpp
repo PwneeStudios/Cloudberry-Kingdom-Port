@@ -49,6 +49,16 @@ public:
 	}
 
 	/**
+	 * @see File::ReadLine()
+	 */
+	std::string ReadLine()
+	{
+		std::string buffer;
+		std::getline( fs_, buffer );
+		return buffer;
+	}
+	
+	/**
 	 * @see File::Peek()
 	 */
 	int Peek()

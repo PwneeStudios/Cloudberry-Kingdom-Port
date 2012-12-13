@@ -33,7 +33,9 @@ namespace CloudberryKingdom
 	StringWorldTimed::StringWorldTimed( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer ) :
 		StringWorldGameData( GetSeed )
 	{
-		MyGUI_Timer = Timer;
+		// See StringWorldTimed_Construct.
+
+		/*MyGUI_Timer = Timer;
 
 		Warning = std::make_shared<TimerWarning>();
 		Warning->MyTimer = Timer;
@@ -47,7 +49,7 @@ namespace CloudberryKingdom
 		MyCoinScoreMultiplier = std::make_shared<CoinScoreMultiplierObject>();
 
 		// Add 'Perfect' watcher
-		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldTimed>( shared_from_this() ) ) );
+		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldTimed>( shared_from_this() ) ) );*/
 	}
 
 	void StringWorldTimed::Release()

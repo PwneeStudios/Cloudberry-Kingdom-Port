@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -52,6 +54,8 @@ namespace CloudberryKingdom
 			std::static_pointer_cast<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > >( _GetSeed );
 
 		MyStringWorld = std::make_shared<StringWorldGameData>( __GetSeed );
+		StringWorldGameData_Construct( MyStringWorld, __GetSeed );
+
 		MyStringWorld->StartLevelMusic.reset();
 
 		// OnLevelBegin preprocessing for each level.

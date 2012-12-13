@@ -676,7 +676,9 @@ namespace CloudberryKingdom
 
 	GameData::GameData()
 	{
-		InitializeInstanceFields();
+		// This is now in GameData_Construct.  We welcome our C overlords.
+
+		/*InitializeInstanceFields();
 
 		CreationTime = Tools::TheGame->DrawCount;
 
@@ -687,7 +689,7 @@ namespace CloudberryKingdom
 		Loading = false;
 
 		CurToDo = std::vector<std::shared_ptr<ToDoItem> >();
-		NextToDo = std::vector<std::shared_ptr<ToDoItem> >();
+		NextToDo = std::vector<std::shared_ptr<ToDoItem> >();*/
 	}
 
 	void GameData::LockGameObjects( bool Lock )

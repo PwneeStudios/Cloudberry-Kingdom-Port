@@ -329,7 +329,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeUpUpgrades()
 	{
-		std::vector<UpgradeSequence> f = UpUpgrades;
+		std::vector<UpgradeSequence> &f = UpUpgrades;
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ) ) );
 
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeDownUpgrades()
 	{
-		std::vector<UpgradeSequence> f = DownUpgrades;
+		std::vector<UpgradeSequence> &f = DownUpgrades;
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FLY_BLOB, 0, 2, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, 1, 3.5, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_JUMP, 0, 3, 5, 7.5, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, 0, 3, 4, 7, 10 ), UpgradeSequenceSingle( Upgrade_LASER, 0, 1, 2, 5, 7.3 ) ) );
 
@@ -351,7 +351,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeCartUpgrades()
 	{
-		std::vector<UpgradeSequence> f = CartUpgrades;
+		std::vector<UpgradeSequence> &f = CartUpgrades;
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, 0, 1, 2, 3, 4 ), UpgradeSequenceSingle( Upgrade_SPEED, 1, 2, 3, 4, 5 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 2, 3, 6, 9 ), UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, 1, 3, 7, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, 0, 2, 3.6, 7, 9 ), UpgradeSequenceSingle( Upgrade_LASER, 1, 3, 6, 7, 8.5 ) ) );
 			//new UpgradeSequenceSingle(Upgrade.MovingBlock, 1, 2, 3, 6, 9),
@@ -369,7 +369,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeEasyUpgrades()
 	{
-		std::vector<UpgradeSequence> f = EasyUpgrades;
+		std::vector<UpgradeSequence> &f = EasyUpgrades;
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, 2, 5, 5, 5, 5 ), UpgradeSequenceSingle( Upgrade_SPEED, 1, 2, 3, 5, 11 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, 1, 1, 2.2, 3, 3 ), UpgradeSequenceSingle( Upgrade_FALLING_BLOCK, 1, 1, 2.2, 3, 3 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, 1, 1, 2.2, 2.2, 2.2 ), UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, 1, 3, 5, 7, 9 ), UpgradeSequenceSingle( Upgrade_SPIKEY_LINE, 0, 3, 5, 7, 9 ) ) );
 
@@ -418,7 +418,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeNormalUpgrades()
 	{
-		std::vector<UpgradeSequence> f = NormalUpgrades;
+		std::vector<UpgradeSequence> &f = NormalUpgrades;
 		AddRange( f, EasyUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, -1, 4.8, 7.5, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, 0, 6, 9, 10 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, 2, 2, 6, 10 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, 2, 2, 6, 10 ), UpgradeSequenceSingle( Upgrade_BOUNCY_BLOCK, -1, 2, 2, 4, 10 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, 2, 2, 4, 10 ), UpgradeSequenceSingle( Upgrade_SPIKE, -1, 2, 2, 9, 10 ) ) );
@@ -486,7 +486,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeAbusiveUpgrades()
 	{
-		std::vector<UpgradeSequence> f = AbusiveUpgrades;
+		std::vector<UpgradeSequence> &f = AbusiveUpgrades;
 		AddRange( f, NormalUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_JUMP, -1, -1, 4, 6, 9 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, 4, 6, 9 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, -1, 4, 4, 4 ), UpgradeSequenceSingle( Upgrade_GHOST_BLOCK, -1, -1, 3, 4, 4 ), UpgradeSequenceSingle( Upgrade_FLY_BLOB, -1, -1, 4, 4, 4 ), UpgradeSequenceSingle( Upgrade_PINKY, -1, -1, 2, 4, 7 ), UpgradeSequenceSingle( Upgrade_LASER, -1, -1, 2, 4, 5.5 ) ) );
@@ -504,7 +504,7 @@ namespace CloudberryKingdom
 
 	void DifficultyGroups::MakeHardcoreUpgrades()
 	{
-		std::vector<UpgradeSequence> f = HardcoreUpgrades;
+		std::vector<UpgradeSequence> &f = HardcoreUpgrades;
 		AddRange( f, AbusiveUpgrades );
 
 		f.push_back( UpgradeSequence( UpgradeSequenceSingle( Upgrade_FIRE_SPINNER, -1, -1, -1, 9, 10 ), UpgradeSequenceSingle( Upgrade_SPEED, -1, -1, -1, 5, 8 ), UpgradeSequenceSingle( Upgrade_MOVING_BLOCK, -1, -1, -1, 2, 2 ) ) );

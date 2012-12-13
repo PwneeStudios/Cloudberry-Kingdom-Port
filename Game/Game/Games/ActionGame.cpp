@@ -3,6 +3,7 @@
 #include "Hacks/Queue.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <MasterHack.h>
 
 namespace CloudberryKingdom
 {
@@ -18,18 +19,24 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameData> ActionFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
-		return std::make_shared<ActionGameData>( data, MakeInBackground );
+		std::shared_ptr<ActionGameData> temp = std::make_shared<ActionGameData>( data, MakeInBackground );
+		ActionGameData_Construct( temp, data, MakeInBackground );
+		return temp;
 	}
 
 	ActionGameData::ActionGameData()
 	{
-		InitializeInstanceFields();
+		// See ActionGameData_Construct.
+
+		// InitializeInstanceFields();
 	}
 
 	ActionGameData::ActionGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
-		InitializeInstanceFields();
-		Init( LevelSeed, MakeInBackground );
+		// See ActionGameData_Construct.
+
+		/*InitializeInstanceFields();
+		Init( LevelSeed, MakeInBackground );*/
 	}
 
 	void ActionGameData::Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )

@@ -358,6 +358,7 @@
     <ClCompile Include="Game\Tools\WrappedFloat.cpp" />
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
+    <ClCompile Include="Hacks\FileReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryWriter.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
@@ -843,7 +844,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>GAME;WINDOWS;PC;PC_VERSION;WIN32;UNICODE;_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;GAME;WINDOWS;PC;PC_VERSION;WIN32;UNICODE;_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
     </ClCompile>

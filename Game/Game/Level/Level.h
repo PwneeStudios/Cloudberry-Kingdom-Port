@@ -452,7 +452,7 @@ namespace CloudberryKingdom
 	
 		static bool showdebug;
 		static bool dodebug;
-		void DEBUG( const std::wstring &str );
+		void DEBUGMsg( const std::wstring &str );
 
 	
 		void PREFILL();

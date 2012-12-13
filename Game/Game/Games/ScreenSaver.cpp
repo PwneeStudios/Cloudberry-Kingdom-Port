@@ -287,17 +287,20 @@ namespace CloudberryKingdom
 
 	ScreenSaver::ScreenSaver()
 	{
-		InitializeInstanceFields();
-		Constructor();
+		// See ScreenSaver_Construct.
+
+		/*InitializeInstanceFields();
+		Constructor();*/
 	}
 
 	ScreenSaver::ScreenSaver( bool ForTrailer )
 	{
-		InitializeInstanceFields();
+		assert( !"Should not be called." );
+		/*InitializeInstanceFields();
 		this->ForTrailer = ForTrailer;
 		if ( ForTrailer )
 			ForTrailerParams();
-		Constructor();
+		Constructor();*/
 	}
 
 	void ScreenSaver::Constructor()

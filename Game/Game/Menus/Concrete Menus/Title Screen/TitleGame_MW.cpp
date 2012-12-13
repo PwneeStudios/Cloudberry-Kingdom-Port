@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -10,7 +12,9 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameData> TitleGameData_MW_Factory::Make()
 	{
-		return std::make_shared<TitleGameData_MW>();
+		std::shared_ptr<TitleGameData_MW> temp = std::make_shared<TitleGameData_MW>();
+		TitleGameData_MW_Construct( temp );
+		return std::static_pointer_cast<GameData>( temp );
 	}
 
 	TitleGameData_MW::_InitProxy::_InitProxy( const std::shared_ptr<TitleGameData_MW> &tgdmw )
@@ -32,6 +36,7 @@ namespace CloudberryKingdom
 
 	TitleGameData_MW::TitleGameData_MW() : TitleGameData()
 	{
+		// See TitleGameData_MW_Construct.
 	}
 
 	void TitleGameData_MW::SetToReturnTo( int code )

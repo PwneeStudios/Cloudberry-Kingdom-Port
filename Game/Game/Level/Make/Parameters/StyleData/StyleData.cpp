@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include <Hacks/List.h>
 #include <Hacks/String.h>
 
 namespace CloudberryKingdom
@@ -320,32 +321,46 @@ namespace CloudberryKingdom
 		SafeEndPadding = 0;
 		LengthPadding = 0;
 		AutoOpenDoor = false;
-		const float tempVector3[] = { 1, 0 };
-		std::vector<float> temp_BlockFillTypeRatio = std::vector<float>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+
+		float tempVector3[] = { 1, 0 };
+		/*std::vector<float> temp_BlockFillTypeRatio = std::vector<float>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_BlockFillTypeRatio ) / sizeof( temp_BlockFillTypeRatio[ 0 ] ); element++ )
-			BlockFillTypeRatio[ element ] = temp_BlockFillTypeRatio[ element ];
-		const float tempVector4[] = { 1, 1.5f, 2, 4 };
-		std::vector<float> temp_Sparsity = std::vector<float>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
+			BlockFillTypeRatio[ element ] = temp_BlockFillTypeRatio[ element ];*/
+		BlockFillTypeRatio = VecFromArray( tempVector3 );
+
+		float tempVector4[] = { 1, 1.5f, 2, 4 };
+		/*std::vector<float> temp_Sparsity = std::vector<float>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_Sparsity ) / sizeof( temp_Sparsity[ 0 ] ); element++ )
-			Sparsity[ element ] = temp_Sparsity[ element ];
-		const float tempVector5[] = { .5f,.35f,.1f,.05f };
-		std::vector<float> temp_SparsityTypeRatio = std::vector<float>( tempVector5, tempVector5 + sizeof( tempVector5 ) / sizeof( tempVector5[ 0 ] ) );
+			Sparsity[ element ] = temp_Sparsity[ element ];*/
+		Sparsity = VecFromArray( tempVector4 );
+
+		float tempVector5[] = { .5f,.35f,.1f,.05f };
+		/*std::vector<float> temp_SparsityTypeRatio = std::vector<float>( tempVector5, tempVector5 + sizeof( tempVector5 ) / sizeof( tempVector5[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_SparsityTypeRatio ) / sizeof( temp_SparsityTypeRatio[ 0 ] ); element++ )
-			SparsityTypeRatio[ element ] = temp_SparsityTypeRatio[ element ];
+			SparsityTypeRatio[ element ] = temp_SparsityTypeRatio[ element ];*/
+		SparsityTypeRatio = VecFromArray( tempVector5 );
+
 		AlwaysCurvyMove = false;
 		AlwaysEdgeJump = false;
-		const float tempVector6[] = { .35f,.5f,.1f,.05f };
-		std::vector<float> temp_ElevatorSwitchTypeRatio = std::vector<float>( tempVector6, tempVector6 + sizeof( tempVector6 ) / sizeof( tempVector6[ 0 ] ) );
+
+		float tempVector6[] = { .35f,.5f,.1f,.05f };
+		/*std::vector<float> temp_ElevatorSwitchTypeRatio = std::vector<float>( tempVector6, tempVector6 + sizeof( tempVector6 ) / sizeof( tempVector6[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_ElevatorSwitchTypeRatio ) / sizeof( temp_ElevatorSwitchTypeRatio[ 0 ] ); element++ )
-			ElevatorSwitchTypeRatio[ element ] = temp_ElevatorSwitchTypeRatio[ element ];
-		const float tempVector7[] = { .7f,.25f,.05f };
-		std::vector<float> temp_OffsetTypeRatio = std::vector<float>( tempVector7, tempVector7 + sizeof( tempVector7 ) / sizeof( tempVector7[ 0 ] ) );
+			ElevatorSwitchTypeRatio[ element ] = temp_ElevatorSwitchTypeRatio[ element ];*/
+		ElevatorSwitchTypeRatio = VecFromArray( tempVector6 );
+
+		float tempVector7[] = { .7f,.25f,.05f };
+		/*std::vector<float> temp_OffsetTypeRatio = std::vector<float>( tempVector7, tempVector7 + sizeof( tempVector7 ) / sizeof( tempVector7[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_OffsetTypeRatio ) / sizeof( temp_OffsetTypeRatio[ 0 ] ); element++ )
-			OffsetTypeRatio[ element ] = temp_OffsetTypeRatio[ element ];
-		const float tempVector8[] = { .7f,.25f,.05f };
-		std::vector<float> temp_FillTypeRatio = std::vector<float>( tempVector8, tempVector8 + sizeof( tempVector8 ) / sizeof( tempVector8[ 0 ] ) );
+			OffsetTypeRatio[ element ] = temp_OffsetTypeRatio[ element ];*/
+		OffsetTypeRatio = VecFromArray( tempVector7 );
+
+		float tempVector8[] = { .7f,.25f,.05f };
+		/*std::vector<float> temp_FillTypeRatio = std::vector<float>( tempVector8, tempVector8 + sizeof( tempVector8 ) / sizeof( tempVector8[ 0 ] ) );
 		for ( int element = 0; element < sizeof( temp_FillTypeRatio ) / sizeof( temp_FillTypeRatio[ 0 ] ); element++ )
-			FillTypeRatio[ element ] = temp_FillTypeRatio[ element ];
+			FillTypeRatio[ element ] = temp_FillTypeRatio[ element ];*/
+		FillTypeRatio = VecFromArray( tempVector8 );
+
 		FunRun = true;
 		Masochistic = false;
 	}

@@ -22,8 +22,10 @@ namespace CloudberryKingdom
 	StringWorldEndurance::StringWorldEndurance( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife ) :
 		StringWorldGameData( GetSeed )
 	{
+		// StringWorldEndurance_Construct.
+
 		// Lives
-		this->Gui_LivesLeft = Gui_LivesLeft;
+		/*this->Gui_LivesLeft = Gui_LivesLeft;
 		Gui_Lives = std::make_shared<GUI_Lives>( Gui_LivesLeft );
 		Gui_NextLife = std::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
 
@@ -35,7 +37,7 @@ namespace CloudberryKingdom
 		MyGUI_Level = std::make_shared<GUI_Level>();
 
 		// Add game objects, including 'Perfect' watcher
-		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );
+		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );*/
 	}
 
 	void StringWorldEndurance::Release()

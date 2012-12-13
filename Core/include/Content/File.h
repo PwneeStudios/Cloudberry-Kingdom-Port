@@ -34,6 +34,12 @@ public:
 	 */
 	virtual size_t Write( const char *buffer, size_t length ) = 0;
 
+	/// Read a line from the file.
+	/**
+	 * @return Next line from the file.
+	 */
+	virtual std::string ReadLine() = 0;
+
 	/// Peek a character.
 	virtual int Peek() = 0;
 

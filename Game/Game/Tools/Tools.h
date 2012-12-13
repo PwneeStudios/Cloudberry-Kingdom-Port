@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 
 		static void Break();
 		static void Write( const std::shared_ptr<Object> &obj );
-		static void Write( const std::wstring &str, ... );
+		static void Write( const wchar_t *str, ... );
 
 		static std::wstring DefaultObjectDirectory();
 		static std::wstring DefaultDynamicDirectory();

@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -83,6 +85,7 @@ namespace CloudberryKingdom
 
 		// Create the string world, and add the relevant game objects
 		MyStringWorld = std::make_shared<StringWorldTimed>( std::make_shared<PassGetSeedAsLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) ), Timer );
+		StringWorldTimed_Construct( MyStringWorld, std::make_shared<PassGetSeedAsLambda>( std::static_pointer_cast<Challenge>( shared_from_this() ) ), Timer );
 		MyStringWorld->StartLevelMusic.reset();
 
 		// Start menu

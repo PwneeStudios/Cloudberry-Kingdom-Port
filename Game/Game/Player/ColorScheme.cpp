@@ -253,6 +253,9 @@ namespace CloudberryKingdom
 
 	ColorScheme::ColorScheme()
 	{
+		SkinColor = std::make_shared<ClrTextFx>();
+		CapeColor = std::make_shared<ClrTextFx>();
+		CapeOutlineColor = std::make_shared<ClrTextFx>();
 		HatData = Hat::None;
 		BeardData = Hat::Vandyke;
 	}
