@@ -5,27 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
 
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct Menu;
-}
-
-
-namespace CloudberryKingdom
-{
 #if defined(PC_VERSION)
 	struct ControlItem : public MenuItem
 	{
@@ -225,6 +205,7 @@ namespace CloudberryKingdom
 
 	
 		CustomControlsMenu();
+		void CustomControlsMenu_Construct();
 
 	
 		std::shared_ptr<QuadClass> Backdrop;

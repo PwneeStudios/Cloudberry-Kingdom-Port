@@ -34,8 +34,12 @@ namespace CloudberryKingdom
 		MyCharacterSelect.reset();
 	}
 
-	CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
+	//CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
+	CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) { }
+	void CustomizeMenu::CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = Parent;

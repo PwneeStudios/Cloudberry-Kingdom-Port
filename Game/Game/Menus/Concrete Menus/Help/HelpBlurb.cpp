@@ -14,8 +14,11 @@ namespace CloudberryKingdom
 		hb->SetText( Word );
 	}
 
-	HelpBlurb::HelpBlurb()
+	HelpBlurb::HelpBlurb() { }
+	void HelpBlurb::HelpBlurb_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		MyPile = std::make_shared<DrawPile>();
 
 		std::shared_ptr<QuadClass> Berry = std::make_shared<QuadClass>();

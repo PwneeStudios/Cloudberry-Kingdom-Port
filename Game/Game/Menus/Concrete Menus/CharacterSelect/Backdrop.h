@@ -5,18 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
 
-
-
-
-namespace CloudberryKingdom
-{
 	struct CharSelectBackdrop : public CkBaseMenu
 	{
 	
 		CharSelectBackdrop();
+		void CharSelectBackdrop_Construct();
 
 		virtual void SlideIn( int Frames );
 

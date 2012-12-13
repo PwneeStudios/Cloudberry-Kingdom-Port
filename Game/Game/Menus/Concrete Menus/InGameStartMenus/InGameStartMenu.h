@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct InGameStartMenu : public CkBaseMenu
 	{
-
 	
 		struct MakeListenerHelper : public LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> >
 		{
@@ -116,6 +116,7 @@ namespace CloudberryKingdom
 		static bool PreventMenu;
 
 		InGameStartMenu( int Control );
+		void InGameStartMenu_Construct( int Control );
 
 		static std::shared_ptr<GameObject> MakeListener();
 

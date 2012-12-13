@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ListSelectPanel : public CkBaseMenu
 	{
 	
@@ -65,6 +66,7 @@ namespace CloudberryKingdom
 
 	
 		ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
+		void ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
 
 	
 		void OnSelect();

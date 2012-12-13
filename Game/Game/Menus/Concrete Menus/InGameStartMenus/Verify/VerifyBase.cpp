@@ -16,21 +16,30 @@ namespace CloudberryKingdom
 		OnSelect.reset();
 	}
 
-	VerifyBaseMenu::VerifyBaseMenu()
+	VerifyBaseMenu::VerifyBaseMenu() { }
+	void VerifyBaseMenu::VerifyBaseMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 	}
 
-	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false )
+	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false ) { }
+	void VerifyBaseMenu::VerifyBaseMenu_Construct( int Control )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		InitializeInstanceFields();
 		this->setControl( Control );
 
 		Constructor();
 	}
 
-	VerifyBaseMenu::VerifyBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor )
+	VerifyBaseMenu::VerifyBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
+	void VerifyBaseMenu::VerifyBaseMenu_Construct( bool CallBaseConstructor )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
+
 		InitializeInstanceFields();
 	}
 

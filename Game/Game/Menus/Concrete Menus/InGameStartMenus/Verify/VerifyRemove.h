@@ -5,12 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct VerifyRemoveMenu : public VerifyBaseMenu
 	{
 	
@@ -25,6 +19,7 @@ namespace CloudberryKingdom
 		};
 	
 		VerifyRemoveMenu( int Control );
+		void VerifyRemoveMenu_Construct( int Control );
 
 		virtual void Init();
 

@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	ExplodeBobs::ExplodeBobs( int speed ) { }
 	void ExplodeBobs::ExplodeBobs_Construct( int speed )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		Active = true;
 		PauseOnPause = true;

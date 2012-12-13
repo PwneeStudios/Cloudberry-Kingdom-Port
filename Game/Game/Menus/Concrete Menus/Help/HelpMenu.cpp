@@ -199,8 +199,11 @@ namespace CloudberryKingdom
 		item->MyText->PicShadow = item->MySelectedText->PicShadow = false;
 	}
 
-	HelpMenu::HelpMenu()
+	HelpMenu::HelpMenu() { }
+	void HelpMenu::HelpMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		// Note that help was used, so that no hint is given about it
 		InitializeInstanceFields();
 		Hints::SetYForHelpNum( 999 );

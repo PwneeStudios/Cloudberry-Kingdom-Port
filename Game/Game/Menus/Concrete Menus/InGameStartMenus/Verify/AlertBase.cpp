@@ -28,12 +28,17 @@ namespace CloudberryKingdom
 		OnOk.reset();
 	}
 
-	AlertBaseMenu::AlertBaseMenu()
+	AlertBaseMenu::AlertBaseMenu() { }
+	void AlertBaseMenu::AlertBaseMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
 	}
 
-	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText ) : CkBaseMenu( false )
+	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText ) : CkBaseMenu( false ) { }
+	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->setControl( Control );
 		this->Message = Message;
 		this->OkText = OkText;
@@ -41,8 +46,10 @@ namespace CloudberryKingdom
 		Constructor();
 	}
 
-	AlertBaseMenu::AlertBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor )
+	AlertBaseMenu::AlertBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
+	void AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 	}
 
 	void AlertBaseMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )

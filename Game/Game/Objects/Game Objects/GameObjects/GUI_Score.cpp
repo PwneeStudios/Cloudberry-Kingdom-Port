@@ -8,8 +8,12 @@ namespace CloudberryKingdom
 		return p->RunningCampaignScore();
 	}
 
-	GUI_CampaignScore::GUI_CampaignScore() : GUI_Score(false)
+	//GUI_CampaignScore::GUI_CampaignScore() : GUI_Score(false)
+	GUI_CampaignScore::GUI_CampaignScore() { }
+	void GUI_CampaignScore::GUI_CampaignScore_Construct()
 	{
+		GUI_Score::GUI_Score_Construct( false );
+
 		PreventRelease = false;
 		UpdateAfterLevelFinish = true;
 	}
@@ -72,14 +76,20 @@ namespace CloudberryKingdom
 		ScoreText->SubstituteText( ToString() );
 	}
 
-	GUI_Score::GUI_Score()
+	GUI_Score::GUI_Score() { }
+	void GUI_Score::GUI_Score_Construct()
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( false );
 	}
 
-	GUI_Score::GUI_Score( bool SlideIn )
+	GUI_Score::GUI_Score( bool SlideIn ) { }
+	void GUI_Score::GUI_Score_Construct( bool SlideIn )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( SlideIn );
 	}

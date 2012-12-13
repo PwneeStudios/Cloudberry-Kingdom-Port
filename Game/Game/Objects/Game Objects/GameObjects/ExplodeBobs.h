@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ExplodeBobs : public GUI_Panel
 	{
 	

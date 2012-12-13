@@ -361,12 +361,16 @@ namespace CloudberryKingdom
 	GameOverPanel::GameOverPanel() { }
 	void GameOverPanel::GameOverPanel_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 	}
 
 	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) { }
 	void GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		this->GameId_Score = GameId_Score;
 		this->GameId_Level = GameId_Level;

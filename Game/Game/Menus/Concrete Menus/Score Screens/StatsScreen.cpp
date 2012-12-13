@@ -215,8 +215,11 @@ namespace CloudberryKingdom
 		CategoryDelays();
 	}
 
-	StatsMenu::StatsMenu( StatGroup group )
+	StatsMenu::StatsMenu( StatGroup group ) { }
+	void StatsMenu::StatsMenu_Construct( StatGroup group )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		n = PlayerManager::GetNumPlayers();
 

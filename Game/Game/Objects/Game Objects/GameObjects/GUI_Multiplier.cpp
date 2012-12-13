@@ -57,6 +57,8 @@ namespace CloudberryKingdom
 	GUI_Multiplier::GUI_Multiplier( int Style ) { }
 	void GUI_Multiplier::GUI_Multiplier_Construct( int Style )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( Style, false );
 	}
@@ -64,6 +66,8 @@ namespace CloudberryKingdom
 	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) { }
 	void GUI_Multiplier::GUI_Multiplier_Construct( int Style, bool SlideIn )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		DoInit( Style, SlideIn );
 	}

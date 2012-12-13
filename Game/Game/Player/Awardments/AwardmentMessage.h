@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct AwardmentMessage : public CkBaseMenu
 	{
 	
@@ -12,6 +13,7 @@ namespace CloudberryKingdom
 
 	
 		AwardmentMessage( const std::shared_ptr<Awardment> &award );
+		void AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award );
 
 	
 		virtual void MakeBackdrop();

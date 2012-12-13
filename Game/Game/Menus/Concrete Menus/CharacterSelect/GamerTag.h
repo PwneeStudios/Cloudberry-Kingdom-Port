@@ -3,33 +3,21 @@
 
 #include <global_header.h>
 
-namespace CloudberryKingdom
-{
-	struct CharacterSelect;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)
 
 #endif
 
-
-
 namespace CloudberryKingdom
 {
+
 	struct GamerTag : public CkBaseMenu
 	{
 	
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		void GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 	
 		virtual void ReleaseBody();

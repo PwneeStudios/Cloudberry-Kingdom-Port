@@ -93,6 +93,8 @@ namespace CloudberryKingdom
 	GUI_LivesLeft::GUI_LivesLeft( int Lives ) { }
 	void GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
 	{
+		GUI_Panel::GUI_Panel_Construct();
+
 		InitializeInstanceFields();
 		SetParams();
 

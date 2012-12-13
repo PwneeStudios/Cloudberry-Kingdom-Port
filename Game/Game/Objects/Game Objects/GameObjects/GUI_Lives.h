@@ -37,14 +37,11 @@ namespace CloudberryKingdom
 
 		const Vector2 getApparentPos() const;
 
-	
-//C# TO C++ CONVERTER NOTE: The variable Bob was renamed since it is named the same as a user-defined type:
+
 		std::shared_ptr<QuadClass> Bob_Renamed;
 		std::shared_ptr<EzText> Text;
 		void UpdateLivesText();
-
 	
-//C# TO C++ CONVERTER NOTE: The parameter GUI_Lives was renamed since it is named the same as a user-defined type:
 		GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
 		void GUI_Lives_Construct( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
 

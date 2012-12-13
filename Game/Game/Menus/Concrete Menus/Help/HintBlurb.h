@@ -5,19 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
 
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct HintBlurb : public CkBaseMenu
 	{
 	
@@ -25,6 +13,7 @@ namespace CloudberryKingdom
 
 	
 		HintBlurb();
+		void HintBlurb_Construct();
 
 	
 		virtual void MakeBackdrop();

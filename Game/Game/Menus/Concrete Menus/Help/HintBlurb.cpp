@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	HintBlurb::HintBlurb()
+	HintBlurb::HintBlurb() { }
+	void HintBlurb::HintBlurb_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		PauseOnPause = false;
 		setPauseLevel( false );

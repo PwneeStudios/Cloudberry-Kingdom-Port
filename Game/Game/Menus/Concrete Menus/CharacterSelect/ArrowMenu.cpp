@@ -10,8 +10,12 @@ namespace CloudberryKingdom
 		MyCharacterSelect.reset();
 	}
 
-	ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
+	//ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
+	ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) { }
+	void ArrowMenu::ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = Parent;

@@ -5,29 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
 
-namespace CloudberryKingdom
-{
-	struct PlayerData;
-}
-
-namespace CloudberryKingdom
-{
-	struct GUI_TextBox;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct LoadSeedAs : public VerifyBaseMenu
 	{
 	
@@ -66,6 +44,7 @@ namespace CloudberryKingdom
 
 	
 		LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
+		void LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
 
 	
 		std::shared_ptr<PlayerData> Player;

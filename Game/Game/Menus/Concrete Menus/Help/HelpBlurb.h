@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct HelpBlurb : public CkBaseMenu
 	{
 	
@@ -22,6 +23,7 @@ namespace CloudberryKingdom
 
 	
 		HelpBlurb();
+		void HelpBlurb_Construct();
 
 		virtual void Init();
 

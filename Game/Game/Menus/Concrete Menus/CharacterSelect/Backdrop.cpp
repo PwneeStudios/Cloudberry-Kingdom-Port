@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	CharSelectBackdrop::CharSelectBackdrop() : CkBaseMenu()
+	//CharSelectBackdrop::CharSelectBackdrop() : CkBaseMenu()
+	CharSelectBackdrop::CharSelectBackdrop() { }
+	void CharSelectBackdrop::CharSelectBackdrop_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
 		//Core.DrawLayer += 1;
 	}
 

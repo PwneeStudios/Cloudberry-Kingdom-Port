@@ -5,19 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct CharacterSelect;
-}
 
-namespace CloudberryKingdom
-{
-	struct SimpleMenuBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct ArrowMenu : public CkBaseMenu
 	{
 	
@@ -29,6 +17,7 @@ namespace CloudberryKingdom
 	
 		std::shared_ptr<SimpleMenuBase> MySimple;
 		ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple );
+		void ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple );
 
 		virtual void Init();
 

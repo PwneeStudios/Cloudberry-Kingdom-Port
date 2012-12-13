@@ -5,8 +5,12 @@
 namespace CloudberryKingdom
 {
 
-	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award )
+	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award ) { }
+	void AwardmentMessage::AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award )
 	{
+
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		getCore()->DrawLayer += 2;
 
@@ -29,6 +33,7 @@ namespace CloudberryKingdom
 		Title->setPos( Vector2( -1726.192f, 369.0475f ) );
 		Title->setScale( Title->getScale() * .79f );
 		MyPile->Add( Title );
+
 	}
 
 	void AwardmentMessage::MakeBackdrop()

@@ -21,10 +21,13 @@ namespace CloudberryKingdom
 
 	
 		VerifyBaseMenu();
+		void VerifyBaseMenu_Construct();
 
 		VerifyBaseMenu( int Control );
+		void VerifyBaseMenu_Construct( int Control );
 
 		VerifyBaseMenu( bool CallBaseConstructor );
+		void VerifyBaseMenu_Construct( bool CallBaseConstructor );
 
 	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

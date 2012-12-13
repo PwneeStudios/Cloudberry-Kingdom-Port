@@ -3,14 +3,7 @@
 
 namespace CloudberryKingdom
 {
-	struct Camera;
-}
 
-
-
-
-namespace CloudberryKingdom
-{
 	struct ILoadingScreen
 	{
 	
@@ -23,7 +16,9 @@ namespace CloudberryKingdom
 		virtual void Draw( const std::shared_ptr<Camera> &cam ) = 0;
 
 		virtual void MakeFake() = 0;
+
 	};
+
 }
 
 

@@ -260,8 +260,10 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	CustomControlsMenu::CustomControlsMenu()
+	CustomControlsMenu::CustomControlsMenu() { }
+	void CustomControlsMenu::CustomControlsMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
 	}
 #endif
 
