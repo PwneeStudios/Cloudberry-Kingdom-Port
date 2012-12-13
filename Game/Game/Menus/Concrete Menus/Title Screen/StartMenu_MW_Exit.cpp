@@ -4,11 +4,13 @@ namespace CloudberryKingdom
 {
 
 	StartMenu_MW_Exit::StartMenu_MW_Exit( int Control ) : VerifyQuitGameMenu2( Control ) { }
-	void StartMenu_MW_Exit_Construct( int Control )
+	std::shared_ptr<StartMenu_MW_Exit> StartMenu_MW_Exit::StartMenu_MW_Exit_Construct( int Control )
 	{
 		VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( Control );
 
 		CallDelay = ReturnToCallerDelay = 0;
+
+		return std::static_pointer_cast<StartMenu_MW_Exit>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Exit::SlideIn( int Frames )

@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	}
 
 	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText ) : CkBaseMenu( false ) { }
-	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText )
+	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -46,6 +46,8 @@ namespace CloudberryKingdom
 		this->OkText = OkText;
 
 		Constructor();
+
+		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
 	AlertBaseMenu::AlertBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }

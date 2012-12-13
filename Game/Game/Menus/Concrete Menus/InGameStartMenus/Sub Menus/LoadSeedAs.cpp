@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	}
 
 	LoadSeedAs::LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
-	LoadSeedAs::LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
+	std::shared_ptr<LoadSeedAs> LoadSeedAs::LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 
 		Constructor();
+
+		return std::static_pointer_cast<LoadSeedAs>( shared_from_this() );
 	}
 
 	void LoadSeedAs::Init()

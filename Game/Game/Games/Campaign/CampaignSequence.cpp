@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		level->MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>() );
 		level->MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>() );
 
-		std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) );
+		std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
 		level->MyGame->AddGameObject( title );
 
 		level->MyGame->AddGameObject( MakeMagic( GUI_CampaignScore, () ) );

@@ -21,6 +21,16 @@ namespace CloudberryKingdom
 		return text;
 	}
 
+	GUI_Text::GUI_Text() { }
+	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct()
+	{
+		GUI_Panel::GUI_Panel_Construct();
+
+		InitializeInstanceFields();
+
+		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
+	}
+
 	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos ) { }
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos )
 	{

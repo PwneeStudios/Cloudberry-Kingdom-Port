@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 	}
 
 	SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
-	void SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player )
+	std::shared_ptr<SaveSeedAs> SaveSeedAs::SaveSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -57,6 +57,8 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 
 		Constructor();
+
+		return std::static_pointer_cast<SaveSeedAs>( shared_from_this() );
 	}
 
 	void SaveSeedAs::Init()

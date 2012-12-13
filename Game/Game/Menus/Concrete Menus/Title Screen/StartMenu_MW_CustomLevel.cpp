@@ -4,11 +4,13 @@ namespace CloudberryKingdom
 {
 
 	StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel( const std::shared_ptr<TitleGameData_MW> &Title ) : CustomLevel_GUI() { }
-	void StartMenu_MW_CustomLevel_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	std::shared_ptr<StartMenu_MW_CustomLevel> StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
 		CustomLevel_GUI::CustomLevel_GUI_Construct();
 
 		this->Title = Title;
+
+		return std::static_pointer_cast<StartMenu_MW_CustomLevel>( shared_from_this() );
 	}
 
 	void StartMenu_MW_CustomLevel::SlideIn( int Frames )

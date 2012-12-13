@@ -120,6 +120,7 @@ namespace CloudberryKingdom
 	{
 	
 		SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		std::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
 
 	
 		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );

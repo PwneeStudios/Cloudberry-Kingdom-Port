@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		};
 	
 		SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
-		void SaveSeedAs_Constructor( int Control, const std::shared_ptr<PlayerData> &Player );
+		std::shared_ptr<SaveSeedAs> SaveSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
 
 	
 		std::shared_ptr<PlayerData> Player;

@@ -209,8 +209,12 @@ namespace CloudberryKingdom
 	}
 
 #if defined(PC_VERSION)
-	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent )
+	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
+	std::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
 	{
+		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
+
+		return std::static_pointer_cast<SimpleMenu>( shared_from_this() );
 	}
 #endif
 
@@ -324,8 +328,12 @@ namespace CloudberryKingdom
 #endif
 
 #if ! defined(PC_VERSION)
-	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent )
+	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
+	std::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
 	{
+		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
+
+		return std::static_pointer_cast<SimpleMenu>( shared_from_this() );
 	}
 #endif
 

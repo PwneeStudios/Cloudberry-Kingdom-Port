@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 
 		Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
+
+		return std::static_pointer_cast<SlowMo>( shared_from_this() );
 	}
 
 	void SlowMo::ReleaseBody()
