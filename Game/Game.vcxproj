@@ -362,6 +362,7 @@
     <ClCompile Include="Hacks\NET\BinaryReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryWriter.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
+    <ClCompile Include="Hacks\XNA\GamePad.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Hacks\XNA\Texture2D.cpp" />

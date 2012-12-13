@@ -4,10 +4,10 @@
 struct GamePadTriggers
 {
 
-
-
 	float Left;
 	float Right;
+
+	GamePadTriggers() : Left( 0 ), Right( 0 ) { }
 
 };
 

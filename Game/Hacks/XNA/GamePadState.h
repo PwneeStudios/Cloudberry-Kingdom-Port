@@ -8,15 +8,14 @@
 
 struct GamePadState
 {
-	
-
-
 	bool IsConnected;
 
 	GamePadButtons Buttons;
 	GamePadTriggers Triggers;
 	GamePadDPad DPad;
 	GamePadThumbSticks ThumbSticks;
+
+	GamePadState() : IsConnected( false ) { }
 };
 
 #endif
