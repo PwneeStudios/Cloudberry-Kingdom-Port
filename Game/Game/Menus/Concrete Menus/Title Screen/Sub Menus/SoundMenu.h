@@ -63,6 +63,7 @@ namespace CloudberryKingdom
 
 	
 		SoundMenu( int Control );
+		void SoundMenu_Construct( int Control );
 
 #if defined(PC_VERSION)
 #endif

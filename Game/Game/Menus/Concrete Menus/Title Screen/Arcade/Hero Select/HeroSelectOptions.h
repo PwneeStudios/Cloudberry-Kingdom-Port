@@ -27,6 +27,7 @@ namespace CloudberryKingdom
 
 	
 		HeroSelectOptions( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
+		void HeroSelectOptions_Construct( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
 
 		virtual void Release();
 

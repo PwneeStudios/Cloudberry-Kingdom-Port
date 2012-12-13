@@ -33,6 +33,11 @@ namespace CloudberryKingdom
 		abm->StartFunc( levelitem );
 	}
 
+	void ArcadeBaseMenu::ArcadeBaseMenu_Construct()
+	{
+		CkBaseMenu::CkBaseMenu_Construct();
+	}
+
 	void ArcadeBaseMenu::OnAdd()
 	{
 		CkBaseMenu::OnAdd();
@@ -110,8 +115,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	ArcadeMenu::ArcadeMenu()
+	ArcadeMenu::ArcadeMenu() { }
+	void ArcadeMenu::ArcadeMenu_Construct()
 	{
+		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
+
 		InitializeInstanceFields();
 	}
 

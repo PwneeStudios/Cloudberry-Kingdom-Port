@@ -13,8 +13,11 @@ namespace CloudberryKingdom
 		hso->BringLeaderboard();
 	}
 
-	HeroSelectOptions::HeroSelectOptions( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect ) : ArcadeBaseMenu()
+	HeroSelectOptions::HeroSelectOptions( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect ) : ArcadeBaseMenu() { }
+	void HeroSelectOptions::HeroSelectOptions_Construct( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect )
 	{
+		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
+
 		this->HeroSelect = HeroSelect;
 	}
 

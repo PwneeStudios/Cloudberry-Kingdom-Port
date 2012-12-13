@@ -3,16 +3,13 @@
 
 #include <global_header.h>
 
-
-
-
-
 namespace CloudberryKingdom
 {
 	struct StartMenu_MW_Exit : public VerifyQuitGameMenu2
 	{
 	
 		StartMenu_MW_Exit( int Control );
+		void StartMenu_MW_Exit_Construct( int Control );
 
 		virtual void SlideIn( int Frames );
 

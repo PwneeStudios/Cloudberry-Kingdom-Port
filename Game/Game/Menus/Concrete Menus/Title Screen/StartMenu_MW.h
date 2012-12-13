@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct TitleGameData_MW;
-}
-
-namespace CloudberryKingdom
-{
-	struct Menu;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct StartMenu_MW : public StartMenu
 	{
 	
@@ -40,6 +17,7 @@ namespace CloudberryKingdom
 
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW( const std::shared_ptr<TitleGameData_MW> &Title );
+		void StartMenu_MW_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 

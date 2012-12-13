@@ -24,8 +24,11 @@ namespace CloudberryKingdom
 		cine->Go( item );
 	}
 
-	StartMenu_MW_Cinematics::StartMenu_MW_Cinematics( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu()
+	StartMenu_MW_Cinematics::StartMenu_MW_Cinematics( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu() { }
+	void StartMenu_MW_Cinematics::StartMenu_MW_Cinematics_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
+		StartMenu::StartMenu_Construct();
+
 		this->Title = Title;
 	}
 

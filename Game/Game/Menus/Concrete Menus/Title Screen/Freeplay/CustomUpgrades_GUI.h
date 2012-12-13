@@ -5,39 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct CustomLevel_GUI;
-}
-
-namespace CloudberryKingdom
-{
-	struct PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuSlider;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectIcon;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 
 	struct CustomUpgrades_GUI : public CkBaseMenu
 	{
@@ -152,6 +119,7 @@ namespace CloudberryKingdom
 
 	
 		CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		void CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual void OnAdd();
 
@@ -207,6 +175,7 @@ namespace CloudberryKingdom
 	{
 	
 		AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		void AggressiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual std::vector<Upgrade> GetUpgradeList();
 
@@ -220,6 +189,7 @@ namespace CloudberryKingdom
 	{
 	
 		PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		void PassiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual std::vector<Upgrade> GetUpgradeList();
 

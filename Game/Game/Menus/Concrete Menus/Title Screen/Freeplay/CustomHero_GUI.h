@@ -142,6 +142,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CustomLevel_GUI> CustomLevel;
 	
 		CustomHero_GUI( const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		void CustomHero_GUI_Construct( const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual void OnAdd();
 

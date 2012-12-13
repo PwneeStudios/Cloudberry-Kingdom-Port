@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct StartMenu_MW_Black : public CkBaseMenu
 	{
 	
@@ -23,6 +15,7 @@ namespace CloudberryKingdom
 		virtual void OnAdd();
 
 		StartMenu_MW_Black();
+		void StartMenu_MW_Black_Construct();
 
 	
 		std::shared_ptr<QuadClass> Black;

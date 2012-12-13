@@ -59,8 +59,11 @@ namespace CloudberryKingdom
 		sm->Toggle_Borderless( state );
 	}
 
-	SoundMenu::SoundMenu( int Control ) : VerifyBaseMenu( false )
+	SoundMenu::SoundMenu( int Control ) : VerifyBaseMenu( false ) { }
+	void SoundMenu::SoundMenu_Construct( int Control )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->setControl( Control );
 		FixedToCamera = true;
 

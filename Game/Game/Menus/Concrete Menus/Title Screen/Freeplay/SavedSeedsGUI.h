@@ -5,58 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct LevelSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	struct CustomLevel_GUI;
-}
-
-namespace CloudberryKingdom
-{
-	struct Menu;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzFont;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct ScrollBar;
-}
-
-namespace CloudberryKingdom
-{
-	struct GUI_Panel;
-}
-
-namespace CloudberryKingdom
-{
-	struct PlayerData;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	struct SavedSeedsGUI : public CkBaseMenu
 	{
 	
@@ -184,6 +132,7 @@ namespace CloudberryKingdom
 		};
 	
 		SavedSeedsGUI();
+		void SavedSeedsGUI_Construct();
 
 	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

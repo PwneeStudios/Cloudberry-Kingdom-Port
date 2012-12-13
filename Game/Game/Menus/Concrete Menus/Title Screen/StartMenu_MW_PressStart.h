@@ -5,24 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	struct TitleGameData_MW;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct StartMenu_MW_PressStart : public CkBaseMenu
 	{
 	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title );
+		void StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 

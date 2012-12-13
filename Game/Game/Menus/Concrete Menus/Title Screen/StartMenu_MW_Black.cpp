@@ -18,8 +18,11 @@ namespace CloudberryKingdom
 		CkBaseMenu::OnAdd();
 	}
 
-	StartMenu_MW_Black::StartMenu_MW_Black() : CkBaseMenu()
+	StartMenu_MW_Black::StartMenu_MW_Black() : CkBaseMenu() { }
+	void StartMenu_MW_Black::StartMenu_MW_Black_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		getCore()->DrawLayer++;
 	}
 

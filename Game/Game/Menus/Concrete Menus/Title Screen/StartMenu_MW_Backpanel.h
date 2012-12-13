@@ -5,14 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
 	
@@ -65,10 +57,8 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		StartMenu_MW_Backpanel()
-		{
-			InitializeInstanceFields();
-		}
+		StartMenu_MW_Backpanel();
+		void StartMenu_MW_Backpanel_Construct();
 	};
 }
 

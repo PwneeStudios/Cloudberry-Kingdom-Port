@@ -3,8 +3,10 @@
 namespace CloudberryKingdom
 {
 
-	AggressiveUpgrades_GUI::AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel )
+	AggressiveUpgrades_GUI::AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
+	void AggressiveUpgrades_GUI::AggressiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
+		CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( PieceSeed, CustomLevel );
 	}
 
 	std::vector<Upgrade> AggressiveUpgrades_GUI::GetUpgradeList()
@@ -23,8 +25,10 @@ namespace CloudberryKingdom
 		return Localization::Words_AGGRESSIVE;
 	}
 
-	PassiveUpgrades_GUI::PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel )
+	PassiveUpgrades_GUI::PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
+	void PassiveUpgrades_GUI::PassiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
+		CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( PieceSeed, CustomLevel );
 	}
 
 	std::vector<Upgrade> PassiveUpgrades_GUI::GetUpgradeList()
@@ -155,8 +159,11 @@ namespace CloudberryKingdom
 		cuGui->Go();
 	}
 
-	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
+	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) { }
+	void CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 

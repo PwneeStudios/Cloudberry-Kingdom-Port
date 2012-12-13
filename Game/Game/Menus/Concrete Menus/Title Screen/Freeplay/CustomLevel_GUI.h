@@ -8,7 +8,6 @@ namespace CloudberryKingdom
 	struct CustomLevel_GUI : public CkBaseMenu
 	{
 
-	
 		static void InitializeStatics();
 
 	
@@ -233,6 +232,7 @@ namespace CloudberryKingdom
 
 	
 		CustomLevel_GUI();
+		void CustomLevel_GUI_Construct();
 
 		void StartLevelFromMenuData();
 

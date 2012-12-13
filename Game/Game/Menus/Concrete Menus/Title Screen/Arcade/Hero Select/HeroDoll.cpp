@@ -7,8 +7,11 @@
 namespace CloudberryKingdom
 {
 
-	HeroDoll::HeroDoll( int Control ) : CkBaseMenu( false )
+	HeroDoll::HeroDoll( int Control ) : CkBaseMenu( false ) { }
+	void HeroDoll::HeroDoll_Construct( int Control )
 	{
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
 		this->setControl( Control );
 
 		Constructor();

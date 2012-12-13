@@ -5,46 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct TitleGameData_MW;
-}
-
-namespace CloudberryKingdom
-{
-	struct ArcadeMenu;
-}
-
-namespace CloudberryKingdom
-{
-	struct HeroSelectOptions;
-}
-
-namespace CloudberryKingdom
-{
-	struct ArcadeItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct HeroDoll;
-}
-
-namespace CloudberryKingdom
-{
 	struct HeroItem : public MenuItem
 	{
 	
@@ -103,6 +63,7 @@ namespace CloudberryKingdom
 
 	
 		StartMenu_MW_HeroSelect( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
+		void StartMenu_MW_HeroSelect_Construct( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
 
 		virtual void Release();
 

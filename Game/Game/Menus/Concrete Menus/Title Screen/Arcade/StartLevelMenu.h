@@ -80,7 +80,9 @@ namespace CloudberryKingdom
 
 		int HighestLevel;
 		StartLevelMenu();
+		void StartLevelMenu_Construct();
 		StartLevelMenu( int HighestLevel );
+		void StartLevelMenu_Construct( int HighestLevel );
 
 		int IndexCutoff;
 

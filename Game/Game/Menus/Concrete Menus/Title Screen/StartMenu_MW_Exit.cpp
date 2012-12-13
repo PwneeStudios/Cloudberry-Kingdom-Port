@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_Exit::StartMenu_MW_Exit( int Control ) : VerifyQuitGameMenu2( Control )
+	StartMenu_MW_Exit::StartMenu_MW_Exit( int Control ) : VerifyQuitGameMenu2( Control ) { }
+	void StartMenu_MW_Exit_Construct( int Control )
 	{
+		VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( Control );
+
 		CallDelay = ReturnToCallerDelay = 0;
 	}
 

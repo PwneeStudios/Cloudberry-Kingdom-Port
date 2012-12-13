@@ -5,34 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct Challenge;
-}
-
-namespace CloudberryKingdom
-{
-	struct Awardment;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct LevelItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct ArcadeItem : public MenuItem
 	{
 	
@@ -72,6 +44,8 @@ namespace CloudberryKingdom
 	
 		std::shared_ptr<LevelItem> SelectedItem;
 		std::shared_ptr<ArcadeItem> MyArcadeItem;
+
+		void ArcadeBaseMenu_Construct();
 
 		virtual void OnAdd();
 
@@ -113,6 +87,7 @@ namespace CloudberryKingdom
 
 	
 		ArcadeMenu();
+		void ArcadeMenu_Construct();
 
 		virtual void Init();
 

@@ -128,8 +128,11 @@ namespace CloudberryKingdom
 		return std::dynamic_pointer_cast<BobPhsxNormal>( Hero );
 	}
 
-	CustomHero_GUI::CustomHero_GUI( const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
+	CustomHero_GUI::CustomHero_GUI( const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) { }
+	void CustomHero_GUI::CustomHero_GUI_Construct( const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		this->CustomLevel = CustomLevel;
 

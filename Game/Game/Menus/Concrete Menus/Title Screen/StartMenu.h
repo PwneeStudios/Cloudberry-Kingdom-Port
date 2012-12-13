@@ -5,29 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct Menu;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct GUI_Panel;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct StartMenu : public CkBaseMenu
 	{
 	
@@ -203,6 +180,7 @@ namespace CloudberryKingdom
 
 	
 		StartMenu();
+		void StartMenu_Construct();
 
 		///// <summary>
 		///// When true the menu slides in, rather than bubbles in, when a child menu returns control to it

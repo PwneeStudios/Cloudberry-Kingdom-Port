@@ -9,6 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		StartMenu_MW_Options( int Control, bool Centered );
+		void StartMenu_MW_Options_Construct( int Control, bool Centered );
 
 		virtual void SlideIn( int Frames );
 

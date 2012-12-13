@@ -16,8 +16,10 @@ namespace CloudberryKingdom
 		Berry->setTextureName( textureName );
 	}
 
-	VerifyQuitGameMenu2::VerifyQuitGameMenu2( int Control ) : VerifyBaseMenu( Control )
+	VerifyQuitGameMenu2::VerifyQuitGameMenu2( int Control ) : VerifyBaseMenu( Control ) { }
+	void VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( int Control )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}
 
 	void VerifyQuitGameMenu2::MakeBackdrop()

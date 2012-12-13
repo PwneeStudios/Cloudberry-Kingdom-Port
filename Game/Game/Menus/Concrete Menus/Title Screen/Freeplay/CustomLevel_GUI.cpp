@@ -272,8 +272,11 @@ namespace CloudberryKingdom
 		clGui->BringLoad();
 	}
 
-	CustomLevel_GUI::CustomLevel_GUI()
+	CustomLevel_GUI::CustomLevel_GUI() { }
+	void CustomLevel_GUI::CustomLevel_GUI_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		BobPhsx::CustomPhsxData::InitBounds();
 

@@ -48,6 +48,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<Buyable> buyable;
 		int Cost;
 		VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable );
+		void VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable );
 
 	
 		void Yes( const std::shared_ptr<MenuItem> &item );
@@ -127,7 +128,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<EzText> Bank, BankAmount;
 	
 		ShopMenu();
-
+		void ShopMenu_Construct();
 	
 		void MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str );
 

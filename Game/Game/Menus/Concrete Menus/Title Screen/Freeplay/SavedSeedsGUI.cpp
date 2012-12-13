@@ -126,8 +126,10 @@ namespace CloudberryKingdom
 		return bar->MyMenu->HitTest();
 	}
 
-	SavedSeedsGUI::SavedSeedsGUI()
+	SavedSeedsGUI::SavedSeedsGUI() { }
+	void SavedSeedsGUI::SavedSeedsGUI_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
 	}
 
 	void SavedSeedsGUI::SetHeaderProperties( const std::shared_ptr<EzText> &text )

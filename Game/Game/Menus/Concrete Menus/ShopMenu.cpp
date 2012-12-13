@@ -38,8 +38,11 @@ namespace CloudberryKingdom
 		vpm->No( item );
 	}
 
-	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) : VerifyBaseMenu( false )
+	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) /*: VerifyBaseMenu( false )*/ { }
+	void VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable )
 	{
+		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
+
 		this->buyable = buyable;
 		this->Cost = buyable->GetPrice();
 		this->setControl( Control );
@@ -303,8 +306,11 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		return Compare( h1->Price, h2->Price );
 	}
 
-	ShopMenu::ShopMenu()
+	ShopMenu::ShopMenu() { }
+	void ShopMenu::ShopMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		ActiveShop = std::static_pointer_cast<ShopMenu>( shared_from_this() );
 
 		MyPile = std::make_shared<DrawPile>();

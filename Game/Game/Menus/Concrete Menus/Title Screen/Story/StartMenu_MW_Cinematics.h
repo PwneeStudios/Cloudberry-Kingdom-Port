@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct MenuItem;
-}
-
-namespace CloudberryKingdom
-{
-	struct TitleGameData_MW;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct CinematicsLevelItem : public MenuItem
 	{
 	
@@ -50,6 +32,7 @@ namespace CloudberryKingdom
 	
 		std::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_Cinematics( const std::shared_ptr<TitleGameData_MW> &Title );
+		void StartMenu_MW_Cinematics_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 

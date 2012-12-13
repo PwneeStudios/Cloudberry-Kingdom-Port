@@ -3,8 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title ) : CkBaseMenu()
+	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title ) : CkBaseMenu() { }
+	void StartMenu_MW_PressStart::StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		this->Title = Title;
 	}

@@ -106,13 +106,19 @@ namespace CloudberryKingdom
 		return names;
 	}
 
-	StartLevelMenu::StartLevelMenu()
+	StartLevelMenu::StartLevelMenu() { }
+	void StartLevelMenu::StartLevelMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 	}
 
-	StartLevelMenu::StartLevelMenu( int HighestLevel )
+	StartLevelMenu::StartLevelMenu( int HighestLevel ) { }
+	void StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		this->HighestLevel = HighestLevel;
 

@@ -203,8 +203,11 @@ namespace CloudberryKingdom
 		Call( std::make_shared<VerifyQuitGameMenu2>( getControl() ), 0 );
 	}
 
-	StartMenu::StartMenu()
+	StartMenu::StartMenu() { }
+	void StartMenu::StartMenu_Construct()
 	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
 		InitializeInstanceFields();
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 )
 			Tools::TheGame->LoadingScreen_Renamed->IsDone = true;
