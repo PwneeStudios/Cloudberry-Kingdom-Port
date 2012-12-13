@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 
 	//ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
 	ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) { }
-	void ArrowMenu::ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple )
+	std::shared_ptr<ArrowMenu> ArrowMenu::ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 
 		Constructor();
 		MyMenu->AffectsOutsideMouse = false;
+
+		return std::static_pointer_cast<ArrowMenu>( shared_from_this() );
 	}
 
 	void ArrowMenu::Init()

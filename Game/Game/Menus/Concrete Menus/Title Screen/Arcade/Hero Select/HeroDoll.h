@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		HeroDoll( int Control );
-		void HeroDoll_Construct( int Control );
+		std::shared_ptr<HeroDoll> HeroDoll_Construct( int Control );
 
 	
 		virtual void ReleaseBody();

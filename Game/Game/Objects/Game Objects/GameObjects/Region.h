@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		Region( const Vector2 &pos, const Vector2 &size );
-		void Region_Construct( const Vector2 &pos, const Vector2 &size );
+		std::shared_ptr<Region> Region_Construct( const Vector2 &pos, const Vector2 &size );
 	
 		std::shared_ptr<AABox> Box;
 	

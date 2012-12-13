@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	}
 
 	LevelTitle::LevelTitle( const std::wstring &str ) { }
-	void LevelTitle::LevelTitle_Construct( const std::wstring &str )
+	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	}
 
 	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
-	void LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

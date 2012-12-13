@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	HintBlurb::HintBlurb() { }
-	void HintBlurb::HintBlurb_Construct()
+	std::shared_ptr<HintBlurb> HintBlurb::HintBlurb_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

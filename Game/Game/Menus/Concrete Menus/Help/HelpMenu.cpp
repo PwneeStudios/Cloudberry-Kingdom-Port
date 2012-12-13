@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 	}
 
 	HelpMenu::HelpMenu() { }
-	void HelpMenu::HelpMenu_Construct()
+	std::shared_ptr<HelpMenu> HelpMenu::HelpMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

@@ -17,13 +17,13 @@ namespace CloudberryKingdom
 	}
 
 	VerifyQuitLevelMenu::VerifyQuitLevelMenu( bool CallBaseConstructor ) : VerifyBaseMenu( CallBaseConstructor ) { }
-	void VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
+	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( CallBaseConstructor );
 	}
 
 	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control ) { }
-	void VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
+	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}

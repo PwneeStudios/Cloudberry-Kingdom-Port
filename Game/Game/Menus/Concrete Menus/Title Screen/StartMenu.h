@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 
 	
 		StartMenu();
-		void StartMenu_Construct();
+		std::shared_ptr<StartMenu> StartMenu_Construct();
 
 		///// <summary>
 		///// When true the menu slides in, rather than bubbles in, when a child menu returns control to it

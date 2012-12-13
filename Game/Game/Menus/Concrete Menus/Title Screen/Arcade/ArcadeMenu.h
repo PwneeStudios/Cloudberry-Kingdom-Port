@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<LevelItem> SelectedItem;
 		std::shared_ptr<ArcadeItem> MyArcadeItem;
 
-		void ArcadeBaseMenu_Construct();
+		std::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu_Construct();
 
 		virtual void OnAdd();
 
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 
 	
 		ArcadeMenu();
-		void ArcadeMenu_Construct();
+		std::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
 
 		virtual void Init();
 

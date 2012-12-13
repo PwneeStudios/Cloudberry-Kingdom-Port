@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 {
 
 	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award ) { }
-	void AwardmentMessage::AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award )
+	std::shared_ptr<AwardmentMessage> AwardmentMessage::AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award )
 	{
 
 		CkBaseMenu::CkBaseMenu_Construct();

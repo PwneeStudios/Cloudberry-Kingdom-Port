@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyQuitGameMenu2::VerifyQuitGameMenu2( int Control ) : VerifyBaseMenu( Control ) { }
-	void VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( int Control )
+	std::shared_ptr<VerifyQuitGameMenu2> VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 	}

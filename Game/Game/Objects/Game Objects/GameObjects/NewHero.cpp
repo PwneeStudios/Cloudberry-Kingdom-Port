@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	}
 
 	NewHero::NewHero( const std::wstring &str ) { }
-	void NewHero::NewHero_Construct( const std::wstring &str )
+	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	}
 
 	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
-	void NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

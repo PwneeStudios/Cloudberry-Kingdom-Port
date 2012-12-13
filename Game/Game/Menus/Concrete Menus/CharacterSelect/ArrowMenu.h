@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	
 		std::shared_ptr<SimpleMenuBase> MySimple;
 		ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple );
-		void ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple );
+		std::shared_ptr<ArrowMenu> ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple );
 
 		virtual void Init();
 

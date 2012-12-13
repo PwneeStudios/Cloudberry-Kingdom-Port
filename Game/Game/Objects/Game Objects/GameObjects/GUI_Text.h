@@ -23,25 +23,25 @@ namespace CloudberryKingdom
 		static std::shared_ptr<GUI_Text> SimpleTitle( Localization::Words word, Style style );
 
 		GUI_Text();
-		void GUI_Text_Construct();
+		std::shared_ptr<GUI_Text> GUI_Text_Construct();
 
 		GUI_Text( Localization::Words word, Vector2 pos );
-		void GUI_Text_Construct( Localization::Words word, Vector2 pos );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos );
 
 		GUI_Text( Localization::Words word, Vector2 pos, bool centered );
-		void GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered );
 
 		GUI_Text( Localization::Words word, Vector2 pos, Style style );
-		void GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style );
 
 		GUI_Text( const std::wstring &text, Vector2 pos );
-		void GUI_Text_Construct( const std::wstring &text, Vector2 pos );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos );
 
 		GUI_Text( const std::wstring &text, Vector2 pos, bool centered );
-		void GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered );
 
 		GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font );
-		void GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font );
+		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font );
 
 		void Init( Localization::Words word, Vector2 pos, bool centered, Style style, const std::shared_ptr<EzFont> &font );
 

@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 
 	
 		CustomControlsMenu();
-		void CustomControlsMenu_Construct();
+		std::shared_ptr<CustomControlsMenu> CustomControlsMenu_Construct();
 
 	
 		std::shared_ptr<QuadClass> Backdrop;

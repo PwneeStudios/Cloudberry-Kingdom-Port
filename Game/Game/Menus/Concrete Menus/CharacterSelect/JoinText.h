@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		void JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		std::shared_ptr<JoinText> JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 		virtual void ReleaseBody();
 	

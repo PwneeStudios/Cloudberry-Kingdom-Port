@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	}
 
 	ScrollBar::ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent ) : CkBaseMenu( false ) { }
-	void ScrollBar::ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent )
+	std::shared_ptr<ScrollBar> ScrollBar::ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

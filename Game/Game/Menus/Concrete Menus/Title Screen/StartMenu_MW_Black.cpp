@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	}
 
 	StartMenu_MW_Black::StartMenu_MW_Black() : CkBaseMenu() { }
-	void StartMenu_MW_Black::StartMenu_MW_Black_Construct()
+	std::shared_ptr<StartMenu_MW_Black> StartMenu_MW_Black::StartMenu_MW_Black_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

@@ -391,7 +391,7 @@ std::shared_ptr<PieceQuad> CkBaseMenu::MenuTemplate = 0;
 int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	CkBaseMenu::CkBaseMenu() { }
-	void CkBaseMenu::CkBaseMenu_Construct()
+	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 		InitializeInstanceFields();
@@ -400,7 +400,7 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	/*CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor )*/
 	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) { }
-	void CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
+	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		GUI_Panel::GUI_Panel_Construct( CallBaseConstructor );
 

@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	Listener::Listener() { }
-	void Listener::Listener_Construct()
+	std::shared_ptr<Listener> Listener::Listener_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	}
 
 	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) { }
-	void Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
+	std::shared_ptr<Listener> Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

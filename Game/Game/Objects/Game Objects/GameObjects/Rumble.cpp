@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	Rumble::Rumble() { }
-	void Rumble::Rumble_Construct()
+	std::shared_ptr<Rumble> Rumble::Rumble_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

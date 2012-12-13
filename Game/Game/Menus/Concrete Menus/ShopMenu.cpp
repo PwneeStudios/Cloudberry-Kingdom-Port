@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) /*: VerifyBaseMenu( false )*/ { }
-	void VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable )
+	std::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -307,7 +307,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 	}
 
 	ShopMenu::ShopMenu() { }
-	void ShopMenu::ShopMenu_Construct()
+	std::shared_ptr<ShopMenu> ShopMenu::ShopMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

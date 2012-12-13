@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 
 #if defined(PC_VERSION)
 	CustomControlsMenu::CustomControlsMenu() { }
-	void CustomControlsMenu::CustomControlsMenu_Construct()
+	std::shared_ptr<CustomControlsMenu> CustomControlsMenu::CustomControlsMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 	}

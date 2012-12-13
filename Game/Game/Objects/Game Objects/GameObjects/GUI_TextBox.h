@@ -51,13 +51,13 @@ namespace CloudberryKingdom
 
 	
 		GUI_TextBox();
-		void GUI_TextBox_Construct();
+		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct();
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos );
-		void GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos );
+		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos );
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
-		void GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
+		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 	
 		void Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale );
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 	{
 
 		GUI_EnterName();
-		void GUI_EnterName_Construct();
+		std::shared_ptr<GUI_EnterName> GUI_EnterName_Construct();
 
 		virtual void Enter();
 

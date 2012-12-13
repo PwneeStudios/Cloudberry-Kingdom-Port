@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		int Level_Renamed;
 	
 		DoorIcon( int Level_Renamed );
-		void DoorIcon_Construct( int Level_Renamed );
+		std::shared_ptr<DoorIcon> DoorIcon_Construct( int Level_Renamed );
 
 		DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
-		void DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
+		std::shared_ptr<DoorIcon> DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
 
 		std::wstring s;
 		Upgrade upgrade;

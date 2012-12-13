@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 
 	//CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
 	CustomizeMenu::CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) { }
-	void CustomizeMenu::CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
+	std::shared_ptr<CustomizeMenu> CustomizeMenu::CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

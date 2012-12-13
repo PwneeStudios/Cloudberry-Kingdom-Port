@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		};
 	
 		VerifyRemoveMenu( int Control );
-		void VerifyRemoveMenu_Construct( int Control );
+		std::shared_ptr<VerifyRemoveMenu> VerifyRemoveMenu_Construct( int Control );
 
 		virtual void Init();
 

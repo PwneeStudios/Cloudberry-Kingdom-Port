@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	}
 
 	AlertBaseMenu::AlertBaseMenu() { }
-	void AlertBaseMenu::AlertBaseMenu_Construct()
+	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 	}
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 	}
 
 	AlertBaseMenu::AlertBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
-	void AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
+	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 	}

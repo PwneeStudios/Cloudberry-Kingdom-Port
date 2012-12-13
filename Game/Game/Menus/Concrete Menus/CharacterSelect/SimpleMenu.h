@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 
 	
 		SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent );
-		void SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		std::shared_ptr<SimpleMenuBase> SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
 
 		virtual void OnAdd();
 

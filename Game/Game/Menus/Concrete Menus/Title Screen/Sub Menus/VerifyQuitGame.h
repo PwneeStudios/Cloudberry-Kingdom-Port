@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 
 	
 		VerifyQuitGameMenu2( int Control );
-		void VerifyQuitGameMenu2_Construct( int Control );
+		std::shared_ptr<VerifyQuitGameMenu2> VerifyQuitGameMenu2_Construct( int Control );
 	
 		std::shared_ptr<QuadClass> Berry;
 	

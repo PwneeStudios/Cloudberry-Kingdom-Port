@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Blobs::GUI_Blobs() { }
-	void GUI_Blobs::GUI_Blobs_Construct()
+	std::shared_ptr<GUI_Blobs> GUI_Blobs::GUI_Blobs_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 		InitializeInstanceFields();

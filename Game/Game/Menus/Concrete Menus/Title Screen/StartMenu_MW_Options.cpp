@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	StartMenu_MW_Options::StartMenu_MW_Options( int Control, bool Centered ) : SoundMenu( Control ) { }
-	void StartMenu_MW_Options::StartMenu_MW_Options_Construct( int Control, bool Centered )
+	std::shared_ptr<StartMenu_MW_Options> StartMenu_MW_Options::StartMenu_MW_Options_Construct( int Control, bool Centered )
 	{
 		SoundMenu::SoundMenu_Construct( Control );
 

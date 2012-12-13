@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 
 	
 		GUI_LivesLeft( int Lives );
-		void GUI_LivesLeft_Construct( int Lives );
+		std::shared_ptr<GUI_LivesLeft> GUI_LivesLeft_Construct( int Lives );
 
 	
 		void SetPos();

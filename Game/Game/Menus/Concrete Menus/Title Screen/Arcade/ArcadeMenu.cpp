@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		abm->StartFunc( levelitem );
 	}
 
-	void ArcadeBaseMenu::ArcadeBaseMenu_Construct()
+	std::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu::ArcadeBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 	}
@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 	}
 
 	ArcadeMenu::ArcadeMenu() { }
-	void ArcadeMenu::ArcadeMenu_Construct()
+	std::shared_ptr<ArcadeMenu> ArcadeMenu::ArcadeMenu_Construct()
 	{
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 

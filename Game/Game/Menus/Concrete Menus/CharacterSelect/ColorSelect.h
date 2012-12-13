@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 
 	
 		ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
-		void ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
+		std::shared_ptr<ListSelectPanel> ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex );
 
 	
 		void OnSelect();

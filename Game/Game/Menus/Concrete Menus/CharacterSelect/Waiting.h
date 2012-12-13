@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		std::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
 		Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		void Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		std::shared_ptr<Waiting> Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
 	

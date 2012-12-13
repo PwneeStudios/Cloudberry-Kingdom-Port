@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 {
 
 	HeroDoll::HeroDoll( int Control ) : CkBaseMenu( false ) { }
-	void HeroDoll::HeroDoll_Construct( int Control )
+	std::shared_ptr<HeroDoll> HeroDoll::HeroDoll_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

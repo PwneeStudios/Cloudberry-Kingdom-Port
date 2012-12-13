@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 	//GUI_CampaignScore::GUI_CampaignScore() : GUI_Score(false)
 	GUI_CampaignScore::GUI_CampaignScore() { }
-	void GUI_CampaignScore::GUI_CampaignScore_Construct()
+	std::shared_ptr<GUI_CampaignScore> GUI_CampaignScore::GUI_CampaignScore_Construct()
 	{
 		GUI_Score::GUI_Score_Construct( false );
 
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Score::GUI_Score() { }
-	void GUI_Score::GUI_Score_Construct()
+	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Score::GUI_Score( bool SlideIn ) { }
-	void GUI_Score::GUI_Score_Construct( bool SlideIn )
+	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 

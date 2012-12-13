@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 
 	
 		HintGiver();
-		void HintGiver_Construct();
+		std::shared_ptr<HintGiver> HintGiver_Construct();
 
 	
 		virtual void ReleaseBody();

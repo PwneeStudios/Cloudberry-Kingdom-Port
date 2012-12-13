@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 
 		GUI_Timer();
-		void GUI_Timer_Construct();
+		std::shared_ptr<GUI_Timer> GUI_Timer_Construct();
 	};
 }
 

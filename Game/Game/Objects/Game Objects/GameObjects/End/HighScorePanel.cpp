@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 	}
 
 	HighScorePanel::HighScorePanel( const std::shared_ptr<ScoreList> &Scores ) { }
-	void HighScorePanel::HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores )
+	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 	std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
 
 	HighScorePanel::HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) { }
-	void HighScorePanel::HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
+	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 	}
 
 	HighScorePanel::HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) { }
-	void HighScorePanel::HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
+	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 

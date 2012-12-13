@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyBaseMenu::VerifyBaseMenu() { }
-	void VerifyBaseMenu::VerifyBaseMenu_Construct()
+	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false ) { }
-	void VerifyBaseMenu::VerifyBaseMenu_Construct( int Control )
+	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	}
 
 	VerifyBaseMenu::VerifyBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
-	void VerifyBaseMenu::VerifyBaseMenu_Construct( bool CallBaseConstructor )
+	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 

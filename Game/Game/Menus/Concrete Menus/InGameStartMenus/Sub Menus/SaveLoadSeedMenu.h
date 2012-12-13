@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 
 	
 		SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave );
-		void SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave );
+		std::shared_ptr<SaveLoadSeedMenu> SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave );
 
 	
 		bool CanLoad, CanSave;

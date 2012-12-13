@@ -19,9 +19,9 @@ namespace CloudberryKingdom
 
 	
 		VerifyQuitLevelMenu( bool CallBaseConstructor );
-		void VerifyQuitLevelMenu_Construct( bool CallBaseConstructor );
+		std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( bool CallBaseConstructor );
 		VerifyQuitLevelMenu( int Control );
-		void VerifyQuitLevelMenu_Construct( int Control );
+		std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( int Control );
 
 		virtual void Init();
 

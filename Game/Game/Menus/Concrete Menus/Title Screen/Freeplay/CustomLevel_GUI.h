@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 
 	
 		CustomLevel_GUI();
-		void CustomLevel_GUI_Construct();
+		std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI_Construct();
 
 		void StartLevelFromMenuData();
 

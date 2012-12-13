@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 
 	
 		LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
-		void LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
+		std::shared_ptr<LoadSeedAs> LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
 
 	
 		std::shared_ptr<PlayerData> Player;

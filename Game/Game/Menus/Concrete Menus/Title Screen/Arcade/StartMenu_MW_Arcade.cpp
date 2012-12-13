@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	StartMenu_MW_Arcade::StartMenu_MW_Arcade( const std::shared_ptr<TitleGameData_MW> &Title ) : ArcadeMenu() { }
-	void StartMenu_MW_Arcade::StartMenu_MW_Arcade_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	std::shared_ptr<StartMenu_MW_Arcade> StartMenu_MW_Arcade::StartMenu_MW_Arcade_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
 		ArcadeMenu::ArcadeMenu_Construct();
 

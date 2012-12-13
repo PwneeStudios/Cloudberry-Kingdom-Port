@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	//SignInMenu::SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	SignInMenu::SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	void SignInMenu::SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	std::shared_ptr<SignInMenu> SignInMenu::SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

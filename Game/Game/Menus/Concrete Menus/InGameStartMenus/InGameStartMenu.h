@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 		static bool PreventMenu;
 
 		InGameStartMenu( int Control );
-		void InGameStartMenu_Construct( int Control );
+		std::shared_ptr<InGameStartMenu> InGameStartMenu_Construct( int Control );
 
 		static std::shared_ptr<GameObject> MakeListener();
 

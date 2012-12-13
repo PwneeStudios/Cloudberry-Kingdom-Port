@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 		bool DoSlideIn;
 	
 		GUI_Multiplier( int Style );
-		void GUI_Multiplier_Construct( int Style );
+		std::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style );
 		GUI_Multiplier( int Style, bool SlideIn );
-		void GUI_Multiplier_Construct( int Style, bool SlideIn );
+		std::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style, bool SlideIn );
 
 	
 		void DoInit( int Style, bool SlideIn );

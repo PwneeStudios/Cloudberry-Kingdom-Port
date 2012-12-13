@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	//Waiting::Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
 	Waiting::Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	void Waiting::Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	std::shared_ptr<Waiting> Waiting::Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 

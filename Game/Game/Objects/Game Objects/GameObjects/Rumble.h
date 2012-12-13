@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		Rumble();
-		void Rumble_Construct();
+		std::shared_ptr<Rumble> Rumble_Construct();
 
 	
 		virtual void ReleaseBody();

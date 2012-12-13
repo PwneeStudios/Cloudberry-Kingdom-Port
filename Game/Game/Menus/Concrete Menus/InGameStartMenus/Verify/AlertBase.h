@@ -33,16 +33,16 @@ namespace CloudberryKingdom
 
 	
 		AlertBaseMenu();
-		void AlertBaseMenu_Construct();
+		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct();
 
 	
 		Localization::Words Message, OkText;
 	
 		AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText );
-		void AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText );
+		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText );
 
 		AlertBaseMenu( bool CallBaseConstructor );
-		void AlertBaseMenu_Construct( bool CallBaseConstructor );
+		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( bool CallBaseConstructor );
 
 	
 		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );

@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 
 	
 		HintBlurb();
-		void HintBlurb_Construct();
+		std::shared_ptr<HintBlurb> HintBlurb_Construct();
 
 	
 		virtual void MakeBackdrop();
