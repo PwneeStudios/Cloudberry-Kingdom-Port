@@ -176,7 +176,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 			MyGame->AddGameObject( text );
 
 			// On (A) go to next part of the tutorial
-			MyGame->AddGameObject( std::make_shared<Listener>( ControllerButtons_A, std::make_shared<NextTutorialHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) ) );
+			MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<NextTutorialHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) ) ) );
 		}
 		else
 		{

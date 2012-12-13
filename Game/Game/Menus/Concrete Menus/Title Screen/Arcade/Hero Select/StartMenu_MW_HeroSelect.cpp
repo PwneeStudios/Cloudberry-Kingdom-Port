@@ -121,11 +121,11 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::OnAdd();
 
 		// Hero Doll
-		MyHeroDoll = std::make_shared<HeroDoll>( getControl() );
+		MyHeroDoll = MakeMagic( HeroDoll, ( getControl() ) );
 		MyGame->AddGameObject( MyHeroDoll );
 
 		// Options. Menu for PC, graphics only for consoles.
-		Options = std::make_shared<HeroSelectOptions>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
+		Options = MakeMagic( HeroSelectOptions, ( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
 		MyGame->AddGameObject( Options );
 	}
 
@@ -313,7 +313,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<StartLevelMenu> levelmenu = std::make_shared<StartLevelMenu>( MyArcadeItem->MyChallenge->TopLevel() );
+		std::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
 		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );

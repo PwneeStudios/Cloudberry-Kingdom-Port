@@ -29,7 +29,7 @@ Vector2 TutorialHelper::ReadyGoPos = Vector2( 0, 80 );
 
 	void TutorialHelper::ReadyGo( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End )
 	{
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_READY, ReadyGoPos );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_READY, ReadyGoPos ));
 		text->FixedToCamera = true;
 		game->AddGameObject( text );
 
@@ -39,7 +39,7 @@ Vector2 TutorialHelper::ReadyGoPos = Vector2( 0, 80 );
 
 	void TutorialHelper::ReadyGo_Go( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End )
 	{
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( Localization::Words_GO, ReadyGoPos );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GO, ReadyGoPos ) );
 		text->MyPile->MyPopPitch = 3;
 		text->FixedToCamera = true;
 		game->AddGameObject( text );

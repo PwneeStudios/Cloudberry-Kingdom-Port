@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GUI_Panel> InGameStartMenu::MakeListenerHelper::Apply( const std::shared_ptr<Listener> &listener )
 	{
-		return std::make_shared<InGameStartMenu>( listener->TriggeringPlayerIndex );
+		return MakeMagic( InGameStartMenu, ( listener->TriggeringPlayerIndex ) );
 	}
 
 	InGameStartMenu::PreventMenuHelper::PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
@@ -110,7 +110,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	std::shared_ptr<GameObject> InGameStartMenu::MakeListener_Base( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
 	{
-		std::shared_ptr<Listener> listener = std::make_shared<Listener>();
+		std::shared_ptr<Listener> listener = MakeMagic( Listener, () );
 		listener->MyButton = ControllerButtons_START;
 
 		listener->Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
@@ -250,7 +250,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoRemove()
 	{
-		std::shared_ptr<VerifyRemoveMenu> verify = std::make_shared<VerifyRemoveMenu>( getControl() );
+		std::shared_ptr<VerifyRemoveMenu> verify = MakeMagic( VerifyRemoveMenu, ( getControl() ) );
 		GUI_Panel::Call( verify );
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );
@@ -259,13 +259,13 @@ bool InGameStartMenu::PreventMenu = false;
 	void InGameStartMenu::GoControls()
 	{
 		MyGame->WaitThenDo( 4, std::make_shared<GoControlsHelper>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
-		std::shared_ptr<ControlScreen> screen = std::make_shared<ControlScreen>( getControl() );
+		std::shared_ptr<ControlScreen> screen = MakeMagic( ControlScreen, ( getControl() ) );
 		Call( screen, 22 );
 	}
 
 	void InGameStartMenu::GoOptions()
 	{
-		Call( std::make_shared<SoundMenu>( getControl() ), 0 );
+		Call( MakeMagic( SoundMenu, ( getControl() ) ), 0 );
 
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );
@@ -283,9 +283,9 @@ bool InGameStartMenu::PreventMenu = false;
 	#endif
 		{
 	#if defined(PC_VERSION)
-			Call( std::make_shared<SaveLoadSeedMenu>( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ), 0 );
+			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
 	#else
-			Call( std::make_shared<SaveLoadSeedMenu>( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ), 0 );
+			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
 	#endif
 		}
 		Hide( PresetPos_LEFT );
@@ -295,7 +295,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoStats()
 	{
-		Call( std::make_shared<StatsMenu>( StatGroup_LIFETIME ), 19 );
+		Call( MakeMagic( StatsMenu, ( StatGroup_LIFETIME ) ), 19 );
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );
 	}
@@ -364,7 +364,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::VerifyExit()
 	{
-		Call( std::make_shared<VerifyQuitLevelMenu>( getControl() ), 0 );
+		Call( MakeMagic( VerifyQuitLevelMenu, ( getControl() ) ), 0 );
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );
 	}

@@ -131,9 +131,9 @@ namespace CloudberryKingdom
 		UserPowers::Set( UserPowers::CanSkipScreensaver, true );
 
 	#if defined(PC_VERSION)
-		ss->PressA = std::make_shared<GUI_Text>( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true ) );
 	#else
-		ss->PressA = std::make_shared<GUI_Text>( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true ) );
 	#endif
 		ss->PressA->MyText->setScale( ss->PressA->MyText->getScale() * .68f );
 		ss->PressA->PreventRelease = true;
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::AddListenerLambda::Apply()
 	{
-		ss->PressA_Listener = std::make_shared<Listener>( ControllerButtons_A, std::make_shared<ConstructorPressAListenerHelper>( ss ) );
+		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
 		ss->PressA_Listener->PreventRelease = true;
 		ss->PressA_Listener->setControl( -2 );
 		Tools::CurGameData->AddGameObject( ss->PressA_Listener );

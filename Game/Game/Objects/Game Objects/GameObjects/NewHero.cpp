@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<NewHero> NewHero::HeroTitle( const std::wstring &str )
 	{
-		std::shared_ptr<NewHero> title = std::make_shared<NewHero>( str, Vector2( 150, -130 ), 1.f, false );
+		std::shared_ptr<NewHero> title = MakeMagic( NewHero, ( str, Vector2( 150, -130 ), 1.f, false ) );
 		title->SlideInLength = 55;
 
 		return title;

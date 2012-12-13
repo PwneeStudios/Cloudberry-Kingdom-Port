@@ -401,7 +401,7 @@ namespace CloudberryKingdom
 
 		// Scroll bar
 	#if defined(PC_VERSION)
-		bar = std::make_shared<ScrollBar>( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		bar->setBarPos( BarPos );
 		MyGame->AddGameObject( bar );
 		MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );

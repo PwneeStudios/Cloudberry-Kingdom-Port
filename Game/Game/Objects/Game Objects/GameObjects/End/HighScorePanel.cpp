@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		Panels[ 0 ] = std::static_pointer_cast<HighScorePanel>( shared_from_this() );
 		Panels[ 0 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
-		Panels[ 1 ] = std::make_shared<HighScorePanel>( levellist );
+		Panels[ 1 ] = MakeMagic( HighScorePanel, ( levellist ) );
 		Panels[ 1 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
 		for ( int i = 0; i < 2; i++ )

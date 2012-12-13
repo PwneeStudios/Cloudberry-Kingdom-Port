@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		Vector2 pos1 = Vector2( -23, -23 );
 		Vector2 pos2 = Vector2( 23, 23 );
 
-		std::shared_ptr<GUI_Text> text = std::make_shared<GUI_Text>( word, pos1, style );
+		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( word, pos1, style ) );
 		text->FixedToCamera = true;
 
 		text->MyPile->FancyPos->LerpTo( pos1, pos2, 70, LerpStyle_LINEAR );

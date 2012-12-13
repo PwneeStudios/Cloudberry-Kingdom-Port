@@ -179,17 +179,17 @@ namespace CloudberryKingdom
 
 	void StartMenu::MenuGo_Controls( const std::shared_ptr<MenuItem> &item )
 	{
-		Call( std::make_shared<ControlScreen>( getControl() ), 0 );
+		Call( MakeMagic( ControlScreen, ( getControl() ) ), 0 );
 	}
 
 	void StartMenu::MenuGo_Stats( const std::shared_ptr<MenuItem> &item )
 	{
-		Call( std::make_shared<StatsMenu>( StatGroup_LIFETIME ), 0 );
+		Call( MakeMagic( StatsMenu, ( StatGroup_LIFETIME ) ), 0 );
 	}
 
 	void StartMenu::MenuGo_Options( const std::shared_ptr<MenuItem> &item )
 	{
-		Call( std::make_shared<SoundMenu>( getControl() ), 0 );
+		Call( MakeMagic( SoundMenu, ( getControl() ) ), 0 );
 	}
 
 	void StartMenu::MenuGo_Exit( const std::shared_ptr<MenuItem> &item )
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 	void StartMenu::Exit()
 	{
 		SelectSound.reset();
-		Call( std::make_shared<VerifyQuitGameMenu2>( getControl() ), 0 );
+		Call( MakeMagic( VerifyQuitGameMenu2, ( getControl() ) ), 0 );
 	}
 
 	StartMenu::StartMenu() { }

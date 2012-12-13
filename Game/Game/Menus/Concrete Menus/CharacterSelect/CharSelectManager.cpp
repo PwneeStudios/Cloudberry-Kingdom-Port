@@ -122,7 +122,7 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 		ParentPanel = Parent;
 
 		// Add the backdrop
-		Backdrop = std::make_shared<CharSelectBackdrop>();
+		Backdrop = MakeMagic( CharSelectBackdrop, () );
 		Parent->MyGame->AddGameObject( Backdrop );
 
 		// Start the selects for each player

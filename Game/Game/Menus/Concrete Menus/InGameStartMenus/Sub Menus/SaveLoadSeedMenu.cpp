@@ -369,7 +369,7 @@ std::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 
 	void SaveLoadSeedMenu::Load( const std::shared_ptr<MenuItem> &_item )
 	{
-		std::shared_ptr<SavedSeedsGUI> LoadMenu = std::make_shared<SavedSeedsGUI>();
+		std::shared_ptr<SavedSeedsGUI> LoadMenu = MakeMagic( SavedSeedsGUI, () );
 		Call( LoadMenu, 0 );
 	}
 

@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		float MoveAll = 1450;
 
 		// Add dark bottom region
-		std::shared_ptr<Region> region = std::make_shared<Region>( MadeDoor->getPos() + Vector2(0, 100 - MoveAll), Vector2(5000, 2000) );
+		std::shared_ptr<Region> region = MakeMagic( Region, ( MadeDoor->getPos() + Vector2(0, 100 - MoveAll), Vector2(5000, 2000) ) );
 		region->AttachedDoor = MadeDoor;
 		MyLevel->AddObject( region );
 

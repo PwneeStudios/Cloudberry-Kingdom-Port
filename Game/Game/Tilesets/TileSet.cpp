@@ -395,7 +395,7 @@ namespace CloudberryKingdom
 		return piecequad;
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::ParseBlockLine( int width, std::vector<std::wstring> &bits )
+	std::shared_ptr<PieceQuad> TileSet::ParseBlockLine( int width, std::vector<std::wstring> &bits )f
 	{
 		std::shared_ptr<PieceQuad> c = std::make_shared<PieceQuad>();
 		c->Init( 0, Tools::BasicEffect );

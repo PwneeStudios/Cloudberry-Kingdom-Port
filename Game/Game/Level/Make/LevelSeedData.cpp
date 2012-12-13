@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameObject> LevelSeedData::ScoreScreenLambda::Apply()
 	{
-		return std::make_shared<ScoreScreen>( stats, level->MyGame );
+		return MakeMagic( ScoreScreen, ( stats, level->MyGame ) );
 	}
 
 	void LevelSeedData::EOL_DoorActionProxy::Apply( const std::shared_ptr<Door> &door )
@@ -903,9 +903,9 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::AddGameObjects_Default( const std::shared_ptr<Level> &level, bool global, bool ShowMultiplier )
 	{
-		level->MyGame->AddGameObject( std::make_shared<HintGiver>() );
+		level->MyGame->AddGameObject( MakeMagic( HintGiver, () ) );
 		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
-		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, ShowMultiplier) );
+		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, (global, ShowMultiplier) ) );
 
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 	}
@@ -913,7 +913,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::AddGameObjects_BareBones( const std::shared_ptr<Level> &level, bool global )
 	{
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
-		level->MyGame->AddGameObject( std::make_shared<PerfectScoreObject>(global, true) );
+		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, (global, true) ) );
 	}
 
 	void LevelSeedData::BOL_StartMusic()

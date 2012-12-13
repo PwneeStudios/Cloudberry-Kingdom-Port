@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<LevelTitle> LevelTitle::HeroTitle( const std::wstring &str )
 	{
-		std::shared_ptr<LevelTitle> title = std::make_shared<LevelTitle>( str, Vector2( 150.f, -130.f ), 1.f, false );
+		std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( str, Vector2( 150.f, -130.f ), 1.f, false ) );
 		title->SlideInLength = 55;
 
 		return title;

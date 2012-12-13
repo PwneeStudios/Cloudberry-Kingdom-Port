@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 
 	void PassiveUpgrades_GUI::Go()
 	{
-		std::shared_ptr<AggressiveUpgrades_GUI> UpgradeGui = std::make_shared<AggressiveUpgrades_GUI>( PieceSeed, CustomLevel );
+		std::shared_ptr<AggressiveUpgrades_GUI> UpgradeGui = MakeMagic( AggressiveUpgrades_GUI, ( PieceSeed, CustomLevel ) );
 		Call( UpgradeGui, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;

@@ -141,7 +141,7 @@ namespace CloudberryKingdom
 
 	void CustomizeMenu::Go( const std::shared_ptr<MenuItem> &item )
 	{
-		GUI_Panel::Call( std::make_shared<Waiting>( getControl(), MyCharacterSelect ) );
+		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect ) ) );
 		Hide();
 	}
 
@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 		// Make the hat select
 		if ( MyMenu->CurIndex == 2 )
 		{
-			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_HAT, MyCharacterSelect, MyMenu->CurIndex );
+			std::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_HAT, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = list;
 
 			for ( std::map<std::shared_ptr<Hat>, bool >::const_iterator hat = CharacterSelectManager::AvailableHats->dict.begin(); hat != CharacterSelectManager::AvailableHats->dict.end(); ++hat )
@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 		// Make the beard select
 		else if ( MyMenu->CurIndex == 1 )
 		{
-			std::shared_ptr<ListSelectPanel> list = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_BEARD, MyCharacterSelect, MyMenu->CurIndex );
+			std::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_BEARD, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = list;
 
 			for ( std::map<std::shared_ptr<Hat>, bool >::const_iterator beard = CharacterSelectManager::AvailableBeards->dict.begin(); beard != CharacterSelectManager::AvailableBeards->dict.end(); ++beard )
@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 		else
 		{
 			std::vector<std::shared_ptr<MenuListItem> > list = MyCharacterSelect->ItemList[ MyMenu->CurIndex ];
-			std::shared_ptr<ListSelectPanel> select = std::make_shared<ListSelectPanel>( getControl(), Localization::Words_COLOR, MyCharacterSelect, MyMenu->CurIndex );
+			std::shared_ptr<ListSelectPanel> select = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_COLOR, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = select;
 
 			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )

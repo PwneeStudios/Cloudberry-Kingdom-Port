@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 
 	void HintGiver::Check_QuickSpawnHelper::Apply()
 	{
-		std::shared_ptr<HintBlurb> hint = std::make_shared<HintBlurb>();
+		std::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
 		hint->SetText( HintGiver::getQuickSpawnHint() );
 
 		/*
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		if ( Hints::YForHelpNum > 10 )
 			return;
 
-		std::shared_ptr<HintBlurb> hint = std::make_shared<HintBlurb>();
+		std::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
 		hint->SetText( HintGiver::getPowerupHint() );
 
 		/*

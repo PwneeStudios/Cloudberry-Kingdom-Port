@@ -805,7 +805,7 @@ namespace CloudberryKingdom
 			MakeBobPhsx();
 			CustomLevel->LevelSeed->DefaultHeroType = Hero;
 
-			CustomLevel->CallingPanel = std::make_shared<PassiveUpgrades_GUI>( CustomLevel->PieceSeed, CustomLevel );
+			CustomLevel->CallingPanel = MakeMagic( PassiveUpgrades_GUI, ( CustomLevel->PieceSeed, CustomLevel ) );
 			Call( CustomLevel->CallingPanel, 0 );
 			Hide( PresetPos_LEFT );
 			this->SlideInFrom = PresetPos_LEFT;

@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW::MenuGo_Options( const std::shared_ptr<MenuItem> &item )
 	{
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
-		Call( std::make_shared<StartMenu_MW_Options>( getControl(), true ), 0 );
+		Call( MakeMagic( StartMenu_MW_Options, ( getControl(), true ) ), 0 );
 	}
 
 	void StartMenu_MW::Exit()
@@ -47,14 +47,14 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringCampaign();
 
-		GUI_Panel::Call( std::make_shared<StartMenu_MW_Campaign>( Title ) );
+		GUI_Panel::Call( MakeMagic( StartMenu_MW_Campaign, ( Title ) ) );
 	}
 
 	void StartMenu_MW::BringArcade()
 	{
 		StartMenu::BringArcade();
 
-		GUI_Panel::Call( std::make_shared<StartMenu_MW_Arcade>( Title ) );
+		GUI_Panel::Call( MakeMagic( StartMenu_MW_Arcade, ( Title ) ) );
 	}
 
 	void StartMenu_MW::BringFreeplay()
