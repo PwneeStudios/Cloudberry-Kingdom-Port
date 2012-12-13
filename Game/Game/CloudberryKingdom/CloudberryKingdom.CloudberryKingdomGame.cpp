@@ -154,6 +154,7 @@ namespace CloudberryKingdom
 		Challenge_HeroRush2::HeroList.reserve( 100 );
 		Challenge_HeroRush2::instance = std::make_shared<Challenge_HeroRush2>();
 
+		CloudberryKingdomGame::TitleGameFactory = TitleGameData_MW::Factory;
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
@@ -212,7 +213,7 @@ bool CloudberryKingdomGame::AlwaysSkipDynamicArt = false;
 bool CloudberryKingdomGame::HideGui = false;
 bool CloudberryKingdomGame::HideForeground = false;
 bool CloudberryKingdomGame::UseNewBob = false;
-std::shared_ptr<SimpleGameFactory> CloudberryKingdomGame::TitleGameFactory = TitleGameData_MW::Factory;
+std::shared_ptr<SimpleGameFactory> CloudberryKingdomGame::TitleGameFactory;
 float CloudberryKingdomGame::fps = 0;
 
 #if defined(WINDOWS)
@@ -1113,7 +1114,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( !KeyboardExtension::Freeze )
 		{
 			// Test title screen
-			if ( Tools::Keyboard.IsKeyDown( Keys::G ) && !Tools::PrevKeyboard.IsKeyDown( Keys::G ) )
+			if ( Tools::Keyboard.IsKeyDown( Keys_G ) && !Tools::PrevKeyboard.IsKeyDown( Keys_G ) )
 			{
 				//TitleGameFactory = TitleGameData_Intense.Factory;
 				TitleGameFactory = TitleGameData_MW::Factory;
@@ -1124,7 +1125,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 				return true;
 			}
 
-			if ( Tools::Keyboard.IsKeyDown( Keys::J ) && !Tools::PrevKeyboard.IsKeyDown( Keys::J ) )
+			if ( Tools::Keyboard.IsKeyDown( Keys_J ) && !Tools::PrevKeyboard.IsKeyDown( Keys_J ) )
 			{
 				Tools::CurGameData->FadeToBlack();
 			}
@@ -1136,7 +1137,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//    Awardments.GiveAward(Awardments.UnlockHeroRush2);
 		//}
 
-		if ( !KeyboardExtension::Freeze && Tools::Keyboard.IsKeyDownCustom( Keys::F ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::F ) )
+		if ( !KeyboardExtension::Freeze && KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_F ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_F ) )
 			ShowFPS = !ShowFPS;
 	#endif
 
@@ -1144,13 +1145,13 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( Tools::FreeCam )
 		{
 			Vector2 pos = Tools::CurLevel->getMainCamera()->Data.Position;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Right ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Right ) )
 				pos.X += 130;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Left ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Left ) )
 				pos.X -= 130;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Up ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Up ) )
 				pos.Y += 130;
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::Down ) )
+			if ( Tools::Keyboard.IsKeyDownCustom( Keys_Down ) )
 				pos.Y -= 130;
 			Tools::CurLevel->getMainCamera()->EffectivePos += pos - Tools::CurLevel->getMainCamera()->Data.Position;
 			Tools::CurLevel->getMainCamera()->Data.Position = Tools::CurLevel->getMainCamera()->Target = pos;
@@ -1159,7 +1160,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 		// Reload some dynamic data (tileset info, animation specifications).
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::X ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::X ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_X ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_X ) )
 		{
 	#if defined(INCLUDE_EDITOR)
 			if ( LoadDynamic )
@@ -1188,7 +1189,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 		// Reload ALL dynamic data (tileset info, animation specifications, dynamic art, backgrounds).
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::Z ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::Z ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Z ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Z ) )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
@@ -1211,13 +1212,13 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 		// Turn on a simple green screen background.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::D9 ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::D9 ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D9 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D9 ) )
 			Background::GreenScreen = !Background::GreenScreen;
 
 		Tools::ModNums();
 
 		// Load a test level.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::D5 ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::D5 ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D5 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D5 ) )
 		{
 			GameData::LockLevelStart = false;
 			LevelSeedData::ForcedReturnEarly = 0;
@@ -1226,15 +1227,15 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 
 		// Hide the GUI. Used for video capture.
-		if ( ButtonCheck::State( Keys::D8 ).Pressed )
+		if ( ButtonCheck::State( Keys_D8 ).Pressed )
 			HideGui = !HideGui;
 
 		// Hide the foreground. Used for video capture of backgrounds.
-		if ( ButtonCheck::State( Keys::D7 ).Pressed )
+		if ( ButtonCheck::State( Keys_D7 ).Pressed )
 			HideForeground = !HideForeground;
 
 		// Turn on/off immortality.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::O ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::O ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
 		{
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
@@ -1243,16 +1244,16 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 
 		// Turn on/off graphics.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::Q ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::Q ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Q ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Q ) )
 			Tools::DrawGraphics = !Tools::DrawGraphics;
 		// Turn on/off drawing of collision detection boxes.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::W ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::W ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_W ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_W ) )
 			Tools::DrawBoxes = !Tools::DrawBoxes;
 		// Turn on/off step control. When activated, this allows you to step forward in the game by pressing <Enter>.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::E ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::E ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_E ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_E ) )
 			Tools::StepControl = !Tools::StepControl;
 		// Modify the speed of the game.
-		if ( Tools::Keyboard.IsKeyDownCustom( Keys::R ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::R ) )
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_R ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_R ) )
 		{
 			Tools::IncrPhsxSpeed();
 		}
@@ -1261,7 +1262,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( !KeyboardExtension::Freeze )
 		{
 			// Watch the computer make a level during Stage 1 of construction.
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::D3 ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::D3 ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D3 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D3 ) )
 			{
 				GameData::LockLevelStart = false;
 				LevelSeedData::ForcedReturnEarly = 1;
@@ -1270,7 +1271,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			}
 
 			// Watch the computer make a level during Stage 2 of construction.
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::D4 ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::D4 ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D4 ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D4 ) )
 			{
 				GameData::LockLevelStart = false;
 				LevelSeedData::ForcedReturnEarly = 2;
@@ -1279,19 +1280,19 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			}
 
 			// Zoom in and out.
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::OemComma ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_OemComma ) )
 			{
 				Tools::CurLevel->getMainCamera()->setZoom(Tools::CurLevel->getMainCamera()->getZoom() * .99f);
 				Tools::CurLevel->getMainCamera()->EffectiveZoom *= .99f;
 			}
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::OemPeriod ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_OemPeriod ) )
 			{
 				Tools::CurLevel->getMainCamera()->setZoom(Tools::CurLevel->getMainCamera()->getZoom() / .99f);
 				Tools::CurLevel->getMainCamera()->EffectiveZoom /= .99f;
 			}
 
 			// Turn on/off FreeCam, which allows the user to pan the camera through the level freely.
-			if ( Tools::Keyboard.IsKeyDownCustom( Keys::P ) && !Tools::PrevKeyboard.IsKeyDownCustom( Keys::P ) )
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
 				Tools::FreeCam = !Tools::FreeCam;
 		}
 

@@ -1076,7 +1076,7 @@ namespace CloudberryKingdom
 		int TestNumber;
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( Format( _T( "Pre-sanitize: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Pre-sanitize: %d" ), TestNumber ).c_str() );
 
 		// Convert random tileset to an actual randomly chosen tileset
 		// use global RND.
@@ -1105,7 +1105,7 @@ namespace CloudberryKingdom
 		}
 
 		TestNumber = Rnd->RndInt( 0, 1000 );
-		Tools::Write( Format( _T( "Post-sanitize: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Post-sanitize: %d" ), TestNumber ).c_str() );
 	}
 
 	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData> , std::shared_ptr<Upgrades> > > &CustomDiff )

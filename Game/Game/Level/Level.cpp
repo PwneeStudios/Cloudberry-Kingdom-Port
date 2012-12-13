@@ -1804,7 +1804,7 @@ bool Level::dodebug = false;
 			return;
 
 		CloudberryKingdomGame::debugstring = str;
-		delay( 5000 );
+		//delay( 5000 );
 		CloudberryKingdomGame::debugstring = _T( "DOING" ) + str;
 	#endif
 	}
@@ -1841,7 +1841,7 @@ bool Level::dodebug = false;
 		PREFILL();
 		DEBUGMsg( _T( "Pre stage 1, about to fill" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: %d" ), TestNumber ).c_str() );
 
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
@@ -1993,7 +1993,7 @@ bool Level::dodebug = false;
 		Pre1 += L'C';
 		DEBUGMsg( _T( "Pre stage 1, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test: %d" ), TestNumber ).c_str() );
 
 		PlayMode = 2;
 		RecordPosition = true;
@@ -2013,7 +2013,7 @@ bool Level::dodebug = false;
 			return false;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test a: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test a: %d" ), TestNumber ).c_str() );
 
 		// Stage 1 Run through
 		Pre1 += L'D';
@@ -2021,7 +2021,7 @@ bool Level::dodebug = false;
 		Pre2 += L'A';
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test b: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test b: %d" ), TestNumber ).c_str() );
 
 		// Continue making Final Platform
 		if ( MakeFinalPlat != 0 )
@@ -2032,7 +2032,7 @@ bool Level::dodebug = false;
 		Par += CurPiece->Par;
 
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test c: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test c: %d" ), TestNumber ).c_str() );
 
 		DEBUGMsg( _T( "Done with stage 1 run through, about to cleanup" ) );
 
@@ -2060,7 +2060,7 @@ bool Level::dodebug = false;
 		Pre2 += L'C';
 		DEBUGMsg( _T( "Pre stage 2, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
-		Tools::Write( Format( _T( "Test d: %d" ), TestNumber ) );
+		Tools::Write( Format( _T( "Test d: %d" ), TestNumber ).c_str() );
 
 		PlayMode = 1;
 		RecordPosition = false;
@@ -2490,10 +2490,10 @@ int Level::AfterPostDrawLayer = 12;
 		if ( !NoParticles )
 			MainEmitter = ParticleEmitter::Pool->Get();
 
-		Blocks = BlockVec( 2000 );
+		Blocks.reserve( 2000 );
 
-		Objects = ObjectVec( 2000 );
-		AddedObjects = ObjectVec( 1000 );
+		Objects.reserve( 2000 );
+		AddedObjects.reserve( 1000 );
 		ObjectsLocked = false;
 
 		CreateActiveObjectList();
@@ -2502,7 +2502,7 @@ int Level::AfterPostDrawLayer = 12;
 		for ( int i = 0; i < NumDrawLayers; i++ )
 		{
 			ShowDrawLayer[ i ] = true;
-			DrawLayer[ i ] = ObjectVec( 300 );
+			DrawLayer[ i ].reserve( 300 );
 			if ( !NoParticles )
 				ParticleEmitters[ i ] = ParticleEmitter::Pool->Get();
 					//new ParticleEmitter(100);
@@ -4142,7 +4142,7 @@ int Level::AfterPostDrawLayer = 12;
 		ShowCoinsInReplay = true;
 		OnCameraChange = std::make_shared<Multicaster>();
 		AllowRecording = false;
-		PreRecycleBin = ObjectVec( 1000 );
+		PreRecycleBin.reserve( 1000 );
 		StickmanLighting = false;
 		BobLightRadius = 700;
 		LightLayer = LightLayers_FRONT_OF_LEVEL;
