@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		for ( std::vector<std::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
 			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;
-			Tools::Write( str );
+			Tools::Write( str.c_str() );
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( str, ItemFont, false, true ) );
 			SetItemProperties( item );
 			FsRezList->AddItem( item, MakeSmartObject( *mode ) );
