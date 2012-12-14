@@ -13,6 +13,7 @@ struct EffectTechnique
 	EffectTechnique()
 	{
 		Passes.resize( 1 );
+		Passes[ 0 ] = std::make_shared<EffectPass>();
 	}
 
 };

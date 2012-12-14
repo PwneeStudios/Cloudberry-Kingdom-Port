@@ -11,6 +11,11 @@ struct Effect
 
 	std::shared_ptr<struct EffectTechnique> CurrentTechnique;
 
+	Effect() 
+	{
+		CurrentTechnique = std::make_shared<EffectTechnique>();
+	}
+
 	// FIXME: Implement.
 	std::shared_ptr<struct EffectParameter> Parameters( const std::wstring &name )
 	{
