@@ -10,9 +10,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GamerTag> GamerTag::GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
+		InitializeInstanceFields();
+
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
-		InitializeInstanceFields();
 		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;

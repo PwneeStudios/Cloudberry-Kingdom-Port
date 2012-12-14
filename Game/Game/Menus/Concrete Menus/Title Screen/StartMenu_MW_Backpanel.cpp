@@ -273,9 +273,9 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
 
 		return std::static_pointer_cast<StartMenu_MW_Backpanel>( shared_from_this() );
 	}

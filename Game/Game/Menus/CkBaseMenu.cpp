@@ -400,8 +400,9 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 	}
 	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct()
 	{
-		GUI_Panel::GUI_Panel_Construct();
 		InitializeInstanceFields();
+		GUI_Panel::GUI_Panel_Construct();
+		
 		getCore()->DrawLayer = DefaultMenuLayer;
 
 		return std::static_pointer_cast<CkBaseMenu>( shared_from_this() );
@@ -417,9 +418,9 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 	}
 	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
 	{
-		GUI_Panel::GUI_Panel_Construct( CallBaseConstructor );
-
 		InitializeInstanceFields();
+		GUI_Panel::GUI_Panel_Construct( CallBaseConstructor );
+		
 		getCore()->DrawLayer = DefaultMenuLayer;
 
 		return std::static_pointer_cast<CkBaseMenu>( shared_from_this() );

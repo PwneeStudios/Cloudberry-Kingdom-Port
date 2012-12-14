@@ -44,9 +44,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<MenuListExpand> MenuListExpand::MenuListExpand_Construct( int Control, const std::shared_ptr<MenuList> &MyMenuList )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( false );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( false );
+		
 		this->MyMenuList = MyMenuList;
 		Constructor();
 

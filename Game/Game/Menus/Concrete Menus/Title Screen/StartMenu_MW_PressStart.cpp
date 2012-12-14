@@ -10,9 +10,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart::StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		this->Title = Title;
 
 		return std::static_pointer_cast<StartMenu_MW_PressStart>( shared_from_this() );

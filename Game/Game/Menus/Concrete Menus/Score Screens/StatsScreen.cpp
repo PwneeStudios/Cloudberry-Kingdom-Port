@@ -221,9 +221,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		n = PlayerManager::GetNumPlayers();
 
 		// Grab the stats for each player

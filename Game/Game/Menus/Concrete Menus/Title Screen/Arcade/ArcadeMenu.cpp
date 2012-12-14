@@ -123,9 +123,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<ArcadeMenu> ArcadeMenu::ArcadeMenu_Construct()
 	{
-		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
 		return std::static_pointer_cast<ArcadeMenu>( shared_from_this() );
 	}

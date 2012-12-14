@@ -169,9 +169,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 
 		this->PieceSeed = PieceSeed;
