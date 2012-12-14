@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <includedir>
+        <dir name="Game/"/>
+        <dir name="Core/include/"/>
+    </includedir>
+    <defines>
+        <define name="DEBUG"/>
+        <define name=" GAME"/>
+        <define name=" WINDOWS"/>
+        <define name=" PC"/>
+        <define name=" PC_VERSION"/>
+        <define name=" WIN32"/>
+        <define name=" UNICODE"/>
+        <define name=" _UNICODE"/>
+        <define name=" _DEBUG"/>
+        <define name=" _LIB"/>
+        <define name=""/>
+    </defines>
+    <paths>
+        <dir name="C:/Users/Ezra/Desktop/CloudberryKingdomPort/Cloudberry-Kingdom-Port/Game"/>
+    </paths>
+</project>
