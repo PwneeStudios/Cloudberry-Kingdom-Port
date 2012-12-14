@@ -149,6 +149,9 @@ namespace CloudberryKingdom
 
 	void ScoreEntry::InitializeInstanceFields()
 	{
+		GameId = 0;
+		Value = 0; Score = 0; Level_Renamed = 0; Attempts = 0; Time = 0; Date = 0;
+
 		Fake = false;
 		MyFormat = Format_SCORE;
 	}

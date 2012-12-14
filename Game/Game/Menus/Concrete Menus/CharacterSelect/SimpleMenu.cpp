@@ -70,7 +70,10 @@ namespace CloudberryKingdom
 	}
 
 	//SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
-	SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) { }
+	SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) :
+		NoMoveCount( 0 )
+	{
+	}
 	std::shared_ptr<SimpleMenuBase> SimpleMenuBase::SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

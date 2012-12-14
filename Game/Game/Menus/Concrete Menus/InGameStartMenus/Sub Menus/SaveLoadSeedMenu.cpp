@@ -58,7 +58,12 @@ namespace CloudberryKingdom
 		slsm->LoadString( _item );
 	}
 
-	SaveLoadSeedMenu::SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave ) : VerifyBaseMenu( false ) { }
+	SaveLoadSeedMenu::SaveLoadSeedMenu( int Control, bool CanLoad, bool CanSave ) :
+		VerifyBaseMenu( false ),
+		CanLoad( false ), CanSave( false )
+	{
+	}
+
 	std::shared_ptr<SaveLoadSeedMenu> SaveLoadSeedMenu::SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );

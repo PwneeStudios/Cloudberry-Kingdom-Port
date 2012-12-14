@@ -90,7 +90,14 @@ namespace CloudberryKingdom
 		LivesLeftText->SubstituteText( ToString() );
 	}
 
-	GUI_LivesLeft::GUI_LivesLeft( int Lives ) { }
+	GUI_LivesLeft::GUI_LivesLeft( int Lives ) :
+		_NumLives( 0 ),
+		UseBlackBack( false ),
+		FadeInVel( 0 ), FadeOutVel( 0 ),
+		InitialDelay( 0 ), ShowLength( 0 ), StartDelay( 0 ),
+		LastLife( 0 )
+	{
+	}
 	std::shared_ptr<GUI_LivesLeft> GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
 	{
 		GUI_Panel::GUI_Panel_Construct();

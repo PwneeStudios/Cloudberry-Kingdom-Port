@@ -5,40 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct SimpleBox;
-}
-
-namespace CloudberryKingdom
-{
-	struct AnimQueueEntry;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzEffect;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzEffectWad;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadDrawer;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct SimpleObject
 	{
 	

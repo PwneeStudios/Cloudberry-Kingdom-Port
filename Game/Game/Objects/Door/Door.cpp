@@ -124,7 +124,22 @@ namespace CloudberryKingdom
 		SetObjectState();
 	}
 
-	Door::Door( bool BoxesOnly )
+	Door::Door( bool BoxesOnly ) :
+		SkipPhsx( false ),
+		TemporaryBlock( false ),
+		Locked( false ),
+		Mirror( false ),
+		SuppressSound( false ),
+		ShakeStep( 0 ), ShakeIntensity( 0 ),
+		step( 0 ),
+		shake( false ),
+		NearCount( 0 ),
+		MoveFeet( false ),
+		NoNote( false ),
+		_DelayToShowNote_First( 0 ),
+		_DelayToShowNote_Second( 0 ),
+		_DelayToShowNote_Nth( 0 ),
+		UsedOnce( false )
 	{
 		InitializeInstanceFields();
 		getCore()->BoxesOnly = BoxesOnly;

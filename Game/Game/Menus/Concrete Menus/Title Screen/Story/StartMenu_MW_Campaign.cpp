@@ -53,7 +53,11 @@ namespace CloudberryKingdom
 		CampaignSequence::getInstance()->Start(sm->_StartLevel);
 	}
 
-	StartMenu_MW_Campaign::StartMenu_MW_Campaign( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu() { }
+	StartMenu_MW_Campaign::StartMenu_MW_Campaign( const std::shared_ptr<TitleGameData_MW> &Title ) : 
+		StartMenu(),
+		_StartLevel( 0 )
+	{
+	}
 	std::shared_ptr<StartMenu_MW_Campaign> StartMenu_MW_Campaign::StartMenu_MW_Campaign_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
 		StartMenu::StartMenu_Construct();

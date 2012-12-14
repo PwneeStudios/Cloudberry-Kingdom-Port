@@ -91,7 +91,16 @@ namespace CloudberryKingdom
 		RightArrow->Quad_Renamed.SetColor( Color( 1, 1, 1,.3f ) );
 	}
 
-	MenuList::MenuList()
+	MenuList::MenuList() :
+		ClickForNextItem( false ),
+		DoIndexWrapping( false ),
+		DrawArrowsWhenUnselected( false ),
+		DelayCount( 0 ),
+		ListIndex( 0 ),
+		CustomArrow( false ),
+		LastIncrDir( 0 ),
+		HoldSelected( false ),
+		Center( false )
 	{
 		InitializeInstanceFields();
 		MyList = std::vector<std::shared_ptr<MenuItem> >();

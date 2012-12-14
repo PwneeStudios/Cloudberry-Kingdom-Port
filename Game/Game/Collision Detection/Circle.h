@@ -5,35 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct AutoGen;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectData;
-}
-
-namespace CloudberryKingdom
-{
-	struct AABox;
-}
-
-namespace CloudberryKingdom
-{
-	struct FloatRectangle;
-}
-
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct CircleBox
 	{
 	

@@ -8,7 +8,8 @@
 
 namespace CloudberryKingdom
 {
-	struct EzEffectWad
+
+	struct EzEffectWad : std::enable_shared_from_this<EzEffectWad>
 	{
 	
 		Vector2 ModZoom;

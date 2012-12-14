@@ -6,6 +6,12 @@ namespace CloudberryKingdom
 
 	EzSound::EzSound()
 	{
+		MaxInstances = 0;
+		DefaultVolume = 0;
+		DelayTillNextSoundCanPlay = 0;
+	
+		LastPlayedStamp = 0;
+
 		DelayTillNextSoundCanPlay = 1;
 
 		DefaultVolume = 1;

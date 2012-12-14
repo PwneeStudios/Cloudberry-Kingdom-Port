@@ -265,7 +265,12 @@ namespace CloudberryKingdom
 		t = 0;
 	}
 
-	StartMenu_MW_Backpanel::StartMenu_MW_Backpanel() { }
+	StartMenu_MW_Backpanel::StartMenu_MW_Backpanel() :
+		MyState( static_cast<State>( 0 ) ),
+		t( 0 )
+	{
+	}
+
 	std::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

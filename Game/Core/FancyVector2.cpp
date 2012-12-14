@@ -334,6 +334,10 @@ const LerpStyle FancyVector2::DefaultLerpStyle = LerpStyle_DECAY_PLUS_SMALL_OVER
 
 	void FancyVector2::InitializeInstanceFields()
 	{
+		Speed = 0;
+		TimeStamp = 0;
+		t = 0;
+
 		HoldVecs = std::vector<Vector2>( 5 );
 		code = 0;
 		LastUpdate = INT_MIN;

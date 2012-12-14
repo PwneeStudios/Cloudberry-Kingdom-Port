@@ -39,6 +39,8 @@ namespace CloudberryKingdom
 
 	void EzTexture::InitializeInstanceFields()
 	{
+		Width = 0; Height = 0;
+	
 		FromPacked = false;
 		Dynamic = false;
 		FromCode = false;

@@ -9,7 +9,6 @@ namespace CloudberryKingdom
 	{
 	
 		int Width, Height;
-
 	
 		std::shared_ptr<Texture2D> _Tex;
 	

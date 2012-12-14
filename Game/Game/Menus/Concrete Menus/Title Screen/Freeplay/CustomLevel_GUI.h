@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct CustomLevel_GUI : public CkBaseMenu
 	{
 

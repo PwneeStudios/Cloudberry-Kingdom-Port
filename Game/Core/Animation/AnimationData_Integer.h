@@ -5,17 +5,15 @@
 
 namespace CloudberryKingdom
 {
-	struct EzTexture;
-}
 
-
-namespace CloudberryKingdom
-{
 	struct OneAnim_Texture
 	{
-	
+
 		std::vector<std::shared_ptr<EzTexture> > Data;
 		float Speed;
+
+		OneAnim_Texture();
+
 	};
 
 	struct AnimationData_Texture

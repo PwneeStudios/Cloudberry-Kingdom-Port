@@ -47,6 +47,15 @@ namespace CloudberryKingdom
 
 	LevelPiece::LevelPiece( int Length, const std::shared_ptr<Level> &level, BobVec computer, int numBobs )
 	{
+		Par = 0;
+
+		StartPhsxStep = 0; DelayStart = 0;
+
+		NumBobs = 0;
+
+		PieceLength = 0;
+
+
 		NumBobs = 0;
 		if ( computer.size() > 0 )
 			NumBobs = static_cast<int>( computer.size() );

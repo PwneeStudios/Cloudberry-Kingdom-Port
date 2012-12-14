@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 
 	void AftermathData::InitializeInstanceFields()
 	{
+		Success = false;
+		EarlyExit = false;
 		Retry = false;
 	}
 

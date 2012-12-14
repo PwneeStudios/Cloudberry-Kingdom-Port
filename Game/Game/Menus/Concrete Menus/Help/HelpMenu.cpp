@@ -199,7 +199,12 @@ namespace CloudberryKingdom
 		item->MyText->PicShadow = item->MySelectedText->PicShadow = false;
 	}
 
-	HelpMenu::HelpMenu() { }
+	HelpMenu::HelpMenu() :
+		DelayExit( 0 ),
+		Cost_Watch( 0 ), Cost_Path( 0 ), Cost_Slow( 0 )
+	{
+	}
+
 	std::shared_ptr<HelpMenu> HelpMenu::HelpMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

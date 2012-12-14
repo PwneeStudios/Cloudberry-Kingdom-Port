@@ -358,7 +358,13 @@ namespace CloudberryKingdom
 		Call( MakeMagic( HighScorePanel, ( MyHighScoreList, MyHighLevelList ) ) );
 	}
 
-	GameOverPanel::GameOverPanel() { }
+	GameOverPanel::GameOverPanel() :
+		GameId_Score( 0 ), GameId_Level( 0 ),
+		Score( 0 ), Levels( 0 ), Attempts( 0 ), Time( 0 ), Date( 0 ),
+		DelayPhsx( 0 )
+	{
+	}
+
 	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
@@ -368,7 +374,12 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
-	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) { }
+	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) :
+		GameId_Score( 0 ), GameId_Level( 0 ),
+		Score( 0 ), Levels( 0 ), Attempts( 0 ), Time( 0 ), Date( 0 ),
+		DelayPhsx( 0 )
+	{
+	}
 	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

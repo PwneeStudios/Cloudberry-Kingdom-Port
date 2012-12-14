@@ -6,7 +6,12 @@
 namespace CloudberryKingdom
 {
 
-	ExplodeBobs::ExplodeBobs( int speed ) { }
+	ExplodeBobs::ExplodeBobs( int speed ) :
+		MySpeed( 0 ),
+		Count( 0 ),
+		InitialDelay_MultipleBobs( 0 ), Delay( 0 ), InitialDelay_OneBob( 0 )
+	{
+	}
 	std::shared_ptr<ExplodeBobs> ExplodeBobs::ExplodeBobs_Construct( int speed )
 	{
 		GUI_Panel::GUI_Panel_Construct();

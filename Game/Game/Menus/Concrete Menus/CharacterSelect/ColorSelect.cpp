@@ -68,7 +68,10 @@ namespace CloudberryKingdom
 	}
 
 	//ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
-	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) { }
+	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) :
+			Header( static_cast<Localization::Words>( 0 ), HoldIndex( 0 ), ClrSelectIndex( 0 )
+	{
+	}
 	std::shared_ptr<ListSelectPanel> ListSelectPanel::ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

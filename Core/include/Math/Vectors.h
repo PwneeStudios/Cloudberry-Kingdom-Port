@@ -37,7 +37,7 @@ public:
 
 	Vector2 Normalized() const
 	{
-		float length;
+		float length = Length();
 		return Vector2( X / length, Y / length );
 	}
 

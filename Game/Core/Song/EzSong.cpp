@@ -27,6 +27,10 @@ namespace CloudberryKingdom
 
 	void EzSong::InitializeInstanceFields()
 	{
+		Enabled = false; AlwaysLoaded = false;
+		Volume = 0;
+		DisplayInfo = false;
+
 		DisplayInfo = true;
 	}
 }

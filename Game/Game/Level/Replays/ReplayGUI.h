@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
 	struct ReplayGUI : public CkBaseMenu
 	{
 	

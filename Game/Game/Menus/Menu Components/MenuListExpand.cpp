@@ -37,7 +37,11 @@ namespace CloudberryKingdom
 			MyMenuList->OnConfirmedIndexSelect->Apply();
 	}
 
-	MenuListExpand::MenuListExpand( int Control, const std::shared_ptr<MenuList> &MyMenuList ) /*: CkBaseMenu( false )*/ { }
+	MenuListExpand::MenuListExpand( int Control, const std::shared_ptr<MenuList> &MyMenuList ) :
+		CkBaseMenu( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<MenuListExpand> MenuListExpand::MenuListExpand_Construct( int Control, const std::shared_ptr<MenuList> &MyMenuList )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

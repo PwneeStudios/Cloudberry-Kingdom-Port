@@ -393,6 +393,15 @@ namespace CloudberryKingdom
 
 	void EzSongWad::InitializeInstanceFields()
 	{
+		PlayNext = false; PlayerControl = false; DisplayInfo = false;
+		Fading = false;
+		Fade = 0;
+
+		CurIndex = 0;
+
+		StartingSong = false;
+		DisplayingInfo = false;
+
 		PlayNext = false;
 		Paused = false;
 		Duration = 0;

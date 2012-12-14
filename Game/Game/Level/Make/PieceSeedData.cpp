@@ -140,6 +140,10 @@ namespace CloudberryKingdom
 
 	void PieceSeedData::InitializeInstanceFields()
 	{
+		CheckpointsAtStart = false; InitialCheckpointsHere = false;
+
+		MyPieceIndex = 0;
+
 		GeometryType = LevelGeometry_RIGHT;
 		ZoomType = LevelZoom_NORMAL;
 		ExtraBlockLength = 0;

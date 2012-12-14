@@ -6,11 +6,21 @@ namespace CloudberryKingdom
 const float PressNote::TextScale = .555f / .7f *.8f;
 
 #if defined(PC_VERSION)
-	PressNote::PressNote( const std::shared_ptr<Door> &Parent ) : GUI_Text( _T( "Press " ) + ButtonString::Up( ButtonScale ), Parent->getPos(), true )
+	PressNote::PressNote( const std::shared_ptr<Door> &Parent ) :
+		GUI_Text( _T( "Press " ) + ButtonString::Up( ButtonScale ), Parent->getPos(), true ),
+		Life( 0 ),
+		LifeSpeed( 0 ),
+		DelayToFadeOut( 0 ),
+		Count( 0 )
 
 #endif
 #if ! defined(PC_VERSION)
-	PressNote::PressNote( const std::shared_ptr<Door> &Parent ) : GUI_Text( _T( "Press " ) + ButtonString::X( ButtonScale ), Parent->getPos(), true )
+	PressNote::PressNote( const std::shared_ptr<Door> &Parent ) :
+		GUI_Text( _T( "Press " ) + ButtonString::X( ButtonScale ), Parent->getPos(), true )
+		Life( 0 ),
+		LifeSpeed( 0 ),
+		DelayToFadeOut( 0 ),
+		Count( 0 )
 	#endif
 	{
 		this->Parent = Parent;

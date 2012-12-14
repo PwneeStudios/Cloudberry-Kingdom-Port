@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 	{
 	
 		// FIXME: Pointer to the parent; should be weak_ptr.
-		EzEffectWad *MyWad;
+		std::shared_ptr<EzEffectWad> MyWad;
 
 		std::shared_ptr<Effect> effect;
 		std::wstring Name;

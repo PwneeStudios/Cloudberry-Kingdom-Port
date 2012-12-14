@@ -8,8 +8,10 @@ namespace CloudberryKingdom
 		return p->RunningCampaignScore();
 	}
 
-	//GUI_CampaignScore::GUI_CampaignScore() : GUI_Score(false)
-	GUI_CampaignScore::GUI_CampaignScore() { }
+	GUI_CampaignScore::GUI_CampaignScore() :
+		GUI_Score(false)
+	{
+	}
 	std::shared_ptr<GUI_CampaignScore> GUI_CampaignScore::GUI_CampaignScore_Construct()
 	{
 		GUI_Score::GUI_Score_Construct( false );
@@ -78,7 +80,13 @@ namespace CloudberryKingdom
 		ScoreText->SubstituteText( ToString() );
 	}
 
-	GUI_Score::GUI_Score() { }
+	GUI_Score::GUI_Score() :
+		AddedOnce( false ),
+		Score( 0 ),
+		DoSlideIn( false ),
+		UpdateAfterLevelFinish( false )
+	{
+	}
 	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -89,7 +97,13 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
-	GUI_Score::GUI_Score( bool SlideIn ) { }
+	GUI_Score::GUI_Score( bool SlideIn ) :
+		AddedOnce( false ),
+		Score( 0 ),
+		DoSlideIn( false ),
+		UpdateAfterLevelFinish( false )
+	{
+	}
 	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
 	{
 		GUI_Panel::GUI_Panel_Construct();

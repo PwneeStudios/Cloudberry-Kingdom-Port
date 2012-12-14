@@ -5,37 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	struct BobPhsx;
-}
-
-namespace CloudberryKingdom
-{
-	struct StringWorldGameData;
-}
-
-namespace CloudberryKingdom
-{
-	struct GameData;
-}
-
-namespace CloudberryKingdom
-{
-	struct LevelSeedData;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct AftermathData
 	{
 	
 		bool Success;
 		bool EarlyExit;
 		bool Retry;
-
 	
 		void InitializeInstanceFields();
-
 
 		AftermathData()
 		{

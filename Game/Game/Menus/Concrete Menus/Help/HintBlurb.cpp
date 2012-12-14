@@ -3,7 +3,10 @@
 namespace CloudberryKingdom
 {
 
-	HintBlurb::HintBlurb() { }
+	HintBlurb::HintBlurb() :
+		Step( 0 )
+	{
+	}
 	std::shared_ptr<HintBlurb> HintBlurb::HintBlurb_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

@@ -54,7 +54,12 @@ namespace CloudberryKingdom
 		MultiplierText->SubstituteText( ToString() );
 	}
 
-	GUI_Multiplier::GUI_Multiplier( int Style ) { }
+	GUI_Multiplier::GUI_Multiplier( int Style ) :
+		AddedOnce( false ),
+		Multiplier( 0 ),
+		DoSlideIn( false )
+	{
+	}
 	std::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -65,7 +70,12 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
 	}
 
-	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) { }
+	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) :
+		AddedOnce( false ),
+		Multiplier( 0 ),
+		DoSlideIn( false )
+	{
+	}
 	std::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style, bool SlideIn )
 	{
 		GUI_Panel::GUI_Panel_Construct();

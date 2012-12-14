@@ -75,11 +75,25 @@ namespace CloudberryKingdom
 
 	SimpleObject::SimpleObject( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly )
 	{
+		xFlip = false; yFlip = false; CenterFlipOnBox = false;;
+		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
+		anim = 0; OldAnim = 0;
+		t = 0; OldT = 0; StartT = 0;
+
+		std::vector<std::shared_ptr<EzEffect> > MyEffects;
+
+		bool Released;
+
 		Constructor( obj, BoxesOnly, false );
 	}
 
 	void SimpleObject::Constructor( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy )
 	{
+		xFlip = false; yFlip = false; CenterFlipOnBox = false;;
+		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
+		anim = 0; OldAnim = 0;
+		t = 0; OldT = 0; StartT = 0;
+
 		Base = obj->Base;
 
 		CenterFlipOnBox = obj->CenterFlipOnBox;

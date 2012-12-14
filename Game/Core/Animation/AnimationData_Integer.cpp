@@ -3,6 +3,11 @@
 namespace CloudberryKingdom
 {
 
+	OneAnim_Texture::OneAnim_Texture()
+	{
+		Speed = 0;
+	}
+
 	AnimationData_Texture::AnimationData_Texture()
 	{
 		InitializeInstanceFields();
@@ -308,6 +313,9 @@ namespace CloudberryKingdom
 
 	void AnimationData_Texture::InitializeInstanceFields()
 	{
+		Width = 0;
+		Height = 0;
+
 		LastSetFrame = 0;
 		LastSetAnim = 0;
 	}

@@ -106,7 +106,12 @@ namespace CloudberryKingdom
 		return names;
 	}
 
-	StartLevelMenu::StartLevelMenu() { }
+	StartLevelMenu::StartLevelMenu() :
+		HighestLevel( 0 ),
+		IndexCutoff( 0 )
+	{
+	}
+
 	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
@@ -116,7 +121,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
 
-	StartLevelMenu::StartLevelMenu( int HighestLevel ) { }
+	StartLevelMenu::StartLevelMenu( int HighestLevel ) :
+		HighestLevel( 0 ),
+		IndexCutoff( 0 )
+	{
+	}
 	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

@@ -5,6 +5,7 @@ namespace CloudberryKingdom
 
 	VerticalData::VerticalData( const std::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
 	{
+		VisualStyle = static_cast<VisualStyles>( 0 );
 	}
 
 	void UpData::CalculateKeepUnused( float JumpLevel )

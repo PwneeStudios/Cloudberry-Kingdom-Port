@@ -422,6 +422,8 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	void CkBaseMenu::InitializeInstanceFields()
 	{
+		FontScale = 0;
+	
 		ItemPos = Vector2( -808, 110 );
 		PosAdd = Vector2( 0, -151 ) * 1.181f;
 		ItemFont = Resources::Font_Grobold42;

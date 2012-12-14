@@ -26,12 +26,14 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFactory>();
 
-	NormalGameData::NormalGameData()
+	NormalGameData::NormalGameData() :
+		_MakeThreadMakeInBackground( false )
 	{
 		assert( !"Should not be called." );
 	}
 
-	NormalGameData::NormalGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	NormalGameData::NormalGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
+		_MakeThreadMakeInBackground( false )
 	{
 		// Now in NormalGameData_Construct.
 		// Init( LevelSeed, MakeInBackground );

@@ -37,11 +37,17 @@ namespace CloudberryKingdom
 
 	CircleBox::CircleBox()
 	{
+		Invalidated = false;
+		_Radius = 0;
+
 		MakeNew();
 	}
 
 	CircleBox::CircleBox( Vector2 center, float radius )
 	{
+		Invalidated = false;
+		_Radius = 0;
+
 		Initialize( center, radius );
 	}
 

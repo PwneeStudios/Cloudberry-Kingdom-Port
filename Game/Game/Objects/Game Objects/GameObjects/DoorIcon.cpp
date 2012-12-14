@@ -5,7 +5,11 @@
 namespace CloudberryKingdom
 {
 
-	DoorIcon::DoorIcon( int Level_Renamed ) { }
+	DoorIcon::DoorIcon( int Level_Renamed ) :
+		upgrade( static_cast<Upgrade>( 0 ) ),
+		Level_Renamed( 0 )
+	{
+	}
 	std::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( int Level_Renamed )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -16,7 +20,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<DoorIcon>( shared_from_this() );
 	}
 
-	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) { }
+	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) :
+		upgrade( static_cast<Upgrade>( 0 ) ),
+		Level_Renamed( 0 )
+	{
+	}
 	std::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale )
 	{
 		GUI_Panel::GUI_Panel_Construct();

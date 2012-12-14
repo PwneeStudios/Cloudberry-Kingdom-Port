@@ -281,7 +281,45 @@ namespace CloudberryKingdom
 		return Boxes[ index ];
 	}
 
-	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
+	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly ) :
+		ShowCape( false ),
+		HeldObjectIteration( 0 ),
+		ImmortalCountDown( 0 ),
+		Moved( false ),
+		FadingIn( false ),
+		Fade( 0 ),
+		CanHaveCape( false ), CanHaveHat( false ),
+		SideHitCount( 0 ),
+		CanInteract( false ),
+		Count_ButtonA( 0 ),
+		WantsToLand( false ),
+		WantsToLand_Reluctant( false ),
+		GroundSpeed( 0 ),
+		ComputerWaitAtStart( false ),
+		ComputerWaitAtStartLength( 0 ),
+		SaveNoBlock( false ),
+		PlaceDelay( 0 ),
+		PlaceTimer( 0 ),
+		Immortal( false ), DoNotTrackOffScreen( false ),
+		TopCol( false ), BottomCol( false ),
+		CompControl( false ), CharacterSelect_Renamed( false ), CharacterSelect2( false ), Cinematic( false ), DrawWithLevel( false ), AffectsCamera( false ),
+		IndexOffset( 0 ),
+		ControlCount( 0 ),
+		CodeControl( false ),
+		MyPieceIndex( 0 ),
+		MyPieceIndexOffset( 0 ),
+		Dying( false ), Dead( false ), FlamingCorpse( false ),
+		BoxesOnly( false ),
+		ScreenWrap( false ), ScreenWrapToCenter( false ), CollideWithCamera( false ),
+		MyPlayerIndex( static_cast<PlayerIndex>( 0 ) ),
+		TryPastTop( false ),
+		MinFall( 0 ), MinDrop( 0 ),
+		MakingLava( false ), MakingCeiling( false ),
+		NumBoxes( 0 ),
+		PopModifier( 0 ),
+		IsPlayer( false ),
+		DeathCount( 0 ),
+		CameraWeight( 0 ), CameraWeightSpeed( 0 )
 	{
 		InitializeInstanceFields();
 		MyHeroType = type;
@@ -312,14 +350,90 @@ namespace CloudberryKingdom
 		//SetColorScheme( bob->MyColorScheme );
 	}
 
-	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad )
+	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+		ShowCape( false ),
+		HeldObjectIteration( 0 ),
+		ImmortalCountDown( 0 ),
+		Moved( false ),
+		FadingIn( false ),
+		Fade( 0 ),
+		CanHaveCape( false ), CanHaveHat( false ),
+		SideHitCount( 0 ),
+		CanInteract( false ),
+		Count_ButtonA( 0 ),
+		WantsToLand( false ),
+		WantsToLand_Reluctant( false ),
+		GroundSpeed( 0 ),
+		ComputerWaitAtStart( false ),
+		ComputerWaitAtStartLength( 0 ),
+		SaveNoBlock( false ),
+		PlaceDelay( 0 ),
+		PlaceTimer( 0 ),
+		Immortal( false ), DoNotTrackOffScreen( false ),
+		TopCol( false ), BottomCol( false ),
+		CompControl( false ), CharacterSelect_Renamed( false ), CharacterSelect2( false ), Cinematic( false ), DrawWithLevel( false ), AffectsCamera( false ),
+		IndexOffset( 0 ),
+		ControlCount( 0 ),
+		CodeControl( false ),
+		MyPieceIndex( 0 ),
+		MyPieceIndexOffset( 0 ),
+		Dying( false ), Dead( false ), FlamingCorpse( false ),
+		BoxesOnly( false ),
+		ScreenWrap( false ), ScreenWrapToCenter( false ), CollideWithCamera( false ),
+		MyPlayerIndex( static_cast<PlayerIndex>( 0 ) ),
+		TryPastTop( false ),
+		MinFall( 0 ), MinDrop( 0 ),
+		MakingLava( false ), MakingCeiling( false ),
+		NumBoxes( 0 ),
+		PopModifier( 0 ),
+		IsPlayer( false ),
+		DeathCount( 0 ),
+		CameraWeight( 0 ), CameraWeightSpeed( 0 )
 	{
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.
 		//LoadFromFile( file, EffectWad, TextureWad, BobPhsxNormal::getInstance() );
 	}
 
-	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats )
+	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
+		ShowCape( false ),
+		HeldObjectIteration( 0 ),
+		ImmortalCountDown( 0 ),
+		Moved( false ),
+		FadingIn( false ),
+		Fade( 0 ),
+		CanHaveCape( false ), CanHaveHat( false ),
+		SideHitCount( 0 ),
+		CanInteract( false ),
+		Count_ButtonA( 0 ),
+		WantsToLand( false ),
+		WantsToLand_Reluctant( false ),
+		GroundSpeed( 0 ),
+		ComputerWaitAtStart( false ),
+		ComputerWaitAtStartLength( 0 ),
+		SaveNoBlock( false ),
+		PlaceDelay( 0 ),
+		PlaceTimer( 0 ),
+		Immortal( false ), DoNotTrackOffScreen( false ),
+		TopCol( false ), BottomCol( false ),
+		CompControl( false ), CharacterSelect_Renamed( false ), CharacterSelect2( false ), Cinematic( false ), DrawWithLevel( false ), AffectsCamera( false ),
+		IndexOffset( 0 ),
+		ControlCount( 0 ),
+		CodeControl( false ),
+		MyPieceIndex( 0 ),
+		MyPieceIndexOffset( 0 ),
+		Dying( false ), Dead( false ), FlamingCorpse( false ),
+		BoxesOnly( false ),
+		ScreenWrap( false ), ScreenWrapToCenter( false ), CollideWithCamera( false ),
+		MyPlayerIndex( static_cast<PlayerIndex>( 0 ) ),
+		TryPastTop( false ),
+		MinFall( 0 ), MinDrop( 0 ),
+		MakingLava( false ), MakingCeiling( false ),
+		NumBoxes( 0 ),
+		PopModifier( 0 ),
+		IsPlayer( false ),
+		DeathCount( 0 ),
+		CameraWeight( 0 ), CameraWeightSpeed( 0 )
 	{
 		InitializeInstanceFields();
 		CanHaveHat = AllowHats;
@@ -327,7 +441,45 @@ namespace CloudberryKingdom
 		//LoadFromFile( file, EffectWad, TextureWad, MyHeroType );
 	}
 
-	Bob::Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats )
+	Bob::Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
+		ShowCape( false ),
+		HeldObjectIteration( 0 ),
+		ImmortalCountDown( 0 ),
+		Moved( false ),
+		FadingIn( false ),
+		Fade( 0 ),
+		CanHaveCape( false ), CanHaveHat( false ),
+		SideHitCount( 0 ),
+		CanInteract( false ),
+		Count_ButtonA( 0 ),
+		WantsToLand( false ),
+		WantsToLand_Reluctant( false ),
+		GroundSpeed( 0 ),
+		ComputerWaitAtStart( false ),
+		ComputerWaitAtStartLength( 0 ),
+		SaveNoBlock( false ),
+		PlaceDelay( 0 ),
+		PlaceTimer( 0 ),
+		Immortal( false ), DoNotTrackOffScreen( false ),
+		TopCol( false ), BottomCol( false ),
+		CompControl( false ), CharacterSelect_Renamed( false ), CharacterSelect2( false ), Cinematic( false ), DrawWithLevel( false ), AffectsCamera( false ),
+		IndexOffset( 0 ),
+		ControlCount( 0 ),
+		CodeControl( false ),
+		MyPieceIndex( 0 ),
+		MyPieceIndexOffset( 0 ),
+		Dying( false ), Dead( false ), FlamingCorpse( false ),
+		BoxesOnly( false ),
+		ScreenWrap( false ), ScreenWrapToCenter( false ), CollideWithCamera( false ),
+		MyPlayerIndex( static_cast<PlayerIndex>( 0 ) ),
+		TryPastTop( false ),
+		MinFall( 0 ), MinDrop( 0 ),
+		MakingLava( false ), MakingCeiling( false ),
+		NumBoxes( 0 ),
+		PopModifier( 0 ),
+		IsPlayer( false ),
+		DeathCount( 0 ),
+		CameraWeight( 0 ), CameraWeightSpeed( 0 )
 	{
 		InitializeInstanceFields();
 		CanHaveHat = AllowHats;

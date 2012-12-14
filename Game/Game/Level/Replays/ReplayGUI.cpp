@@ -599,6 +599,10 @@ namespace CloudberryKingdom
 
 	void ReplayGUI::InitializeInstanceFields()
 	{
+		Type = static_cast<ReplayGUIType>( 0 );
+		SkipPhsxStep = false;
+
+
 		StepControl = false;
 		SpeedVal = 2;
 		Delay = 10;

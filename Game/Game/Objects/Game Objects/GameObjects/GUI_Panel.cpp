@@ -164,7 +164,20 @@ namespace CloudberryKingdom
 		Hid = true;
 	}
 
-	GUI_Panel::GUI_Panel() { }
+	GUI_Panel::GUI_Panel() :
+		_Control( 0 ),
+		Active( false ),
+		ReturnToCallerDelay( 0 ),
+		CallDelay( 0 ),
+		ReleaseWhenDoneScaling( false ),
+		Hid( false ),
+		FixedToCamera( false ),
+		SlideOutLength( 0 ), SlideInLength( 0 ),
+		IsOnScreen( false ),
+		CheckForOutsideClick( false ),	
+		outside( false )
+	{
+	}
 	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct()
 	{
 		InitializeInstanceFields();
@@ -173,7 +186,20 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
-	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) { }
+	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) :
+		_Control( 0 ),
+		Active( false ),
+		ReturnToCallerDelay( 0 ),
+		CallDelay( 0 ),
+		ReleaseWhenDoneScaling( false ),
+		Hid( false ),
+		FixedToCamera( false ),
+		SlideOutLength( 0 ), SlideInLength( 0 ),
+		IsOnScreen( false ),
+		CheckForOutsideClick( false ),	
+		outside( false )
+	{
+	}
 	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct( bool CallBaseConstructor )
 	{
 		InitializeInstanceFields();

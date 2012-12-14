@@ -194,7 +194,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	ScoreScreen::ScoreScreen( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
+	ScoreScreen::ScoreScreen( bool CallBaseConstructor ) :
+		CkBaseMenu( CallBaseConstructor ),
+		_Add_Watch( false ), _Add_Save( false ), DelayPhsx( false ), MyStatGroup( static_cast<StatGroup>( 0 ) ), LastActive( false )
+	{
+	}
 	std::shared_ptr<ScoreScreen> ScoreScreen::ScoreScreen_Construct( bool CallBaseConstructor )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
@@ -204,7 +208,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<ScoreScreen>( shared_from_this() );
 	}
 
-	ScoreScreen::ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game ) : CkBaseMenu( false ) { }
+	ScoreScreen::ScoreScreen( StatGroup group, const std::shared_ptr<GameData> &game ) :
+		CkBaseMenu( false ),
+		_Add_Watch( false ), _Add_Save( false ), DelayPhsx( false ), MyStatGroup( static_cast<StatGroup>( 0 ) ), LastActive( false )
+	{
+	}
 	std::shared_ptr<ScoreScreen> ScoreScreen::ScoreScreen_Construct( StatGroup group, const std::shared_ptr<GameData> &game )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

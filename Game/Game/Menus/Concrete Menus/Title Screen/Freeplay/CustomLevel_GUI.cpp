@@ -272,7 +272,18 @@ namespace CloudberryKingdom
 		clGui->BringLoad();
 	}
 
-	CustomLevel_GUI::CustomLevel_GUI() { }
+	CustomLevel_GUI::CustomLevel_GUI() :
+		DesiredNumCheckpoints( 0 ),
+		DesiredLength( 0 ),
+		DesiredHeroIndex( 0 ),
+		LeftJustify( false ),
+		LeftJustifyAddX( 0 ),
+		HoldNumCheckpoints( 0 ),
+		HoldDesiredNumCheckpoints( 0 ),
+		HasWall( false )
+	{
+	}
+
 	std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI::CustomLevel_GUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

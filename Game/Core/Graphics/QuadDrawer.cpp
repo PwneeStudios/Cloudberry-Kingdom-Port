@@ -615,6 +615,15 @@ namespace CloudberryKingdom
 
 	void QuadDrawer::InitializeInstanceFields()
 	{
+		CurrentMatrixSignature = 0;
+	
+		Current_U_Wrap = false; Current_V_Wrap = false;
+	
+		N = 0;
+		TrianglesInBuffer = 0;
+	
+		i = 0;
+
 		_GlobalIllumination = 1;
 		Illumination = 1;
 	}

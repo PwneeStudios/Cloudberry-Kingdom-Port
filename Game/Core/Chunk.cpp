@@ -17,6 +17,9 @@ namespace CloudberryKingdom
 	Chunks::Chunks( std::vector<unsigned char> Data, int offset ) :
 		_StartPosition( offset )
 	{
+		_Position = 0;
+		_StartPosition = 0;
+
 		this->Data = Data;
 	}
 

@@ -31,10 +31,8 @@ namespace CloudberryKingdom
 		Matrix _CurrentMatrix;
 	
 		float CurrentMatrixSignature;
-
 	
 		bool Current_U_Wrap, Current_V_Wrap;
-
 	
 		std::vector<MyOwnVertexFormat> Vertices;
 		int N;

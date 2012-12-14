@@ -1255,6 +1255,9 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::InitializeInstanceFields()
 	{
+		Difficulty = 0; NumPieces = 0; Length = 0;
+		Initialized = false;
+
 		Saveable = true;
 		HasWall = false;
 		FadeIn = false;

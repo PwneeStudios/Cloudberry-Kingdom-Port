@@ -849,6 +849,14 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonCheck::ButtonCheck()
 	{
+		MyButton1 = static_cast<ControllerButtons>( 0 ); MyButton2 = static_cast<ControllerButtons>( 0 );
+		MyPlayerIndex = 0;
+		MyType = static_cast<MashType>( 0 );
+	
+		GapCount = 0; GapAllowance = 0;
+		Dir = 0;
+
+		Satisfied = false;
 	}
 
 	std::wstring ButtonCheck::GetString()

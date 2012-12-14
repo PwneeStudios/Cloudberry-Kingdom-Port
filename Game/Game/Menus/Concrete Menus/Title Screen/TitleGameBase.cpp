@@ -30,7 +30,12 @@ namespace CloudberryKingdom
 			Tools::WorldMap.reset();
 	}
 
-	TitleGameData::TitleGameData()
+	TitleGameData::TitleGameData() :
+		PanCamera( 0 ),
+		PanAcc( 0 ),
+		PanMaxSpeed( 0 ),
+		PanMaxDist( 0 ),
+		PanMinDist( 0 )
 	{
 		// See TitleGameData_Construct.
 

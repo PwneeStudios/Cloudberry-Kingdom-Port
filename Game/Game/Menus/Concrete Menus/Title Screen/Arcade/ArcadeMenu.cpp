@@ -117,7 +117,10 @@ namespace CloudberryKingdom
 		}
 	}
 
-	ArcadeMenu::ArcadeMenu() { }
+	ArcadeMenu::ArcadeMenu() :
+		Long( false )
+	{
+	}
 	std::shared_ptr<ArcadeMenu> ArcadeMenu::ArcadeMenu_Construct()
 	{
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();

@@ -5,15 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-namespace CloudberryKingdom
-{
 	struct TunnelFill
 	{
 		/// <summary>

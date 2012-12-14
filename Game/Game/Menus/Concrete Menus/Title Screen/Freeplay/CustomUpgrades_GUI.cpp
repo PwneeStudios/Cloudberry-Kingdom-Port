@@ -163,7 +163,10 @@ namespace CloudberryKingdom
 		cuGui->Go();
 	}
 
-	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) { }
+	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) :
+		ScaleList( 0 )
+	{
+	}
 	std::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

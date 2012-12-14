@@ -24,14 +24,16 @@ namespace CloudberryKingdom
 		return temp;
 	}
 
-	ActionGameData::ActionGameData()
+	ActionGameData::ActionGameData() :
+		Done( false ), ActionTaken( false)
 	{
 		// See ActionGameData_Construct.
 
 		// InitializeInstanceFields();
 	}
 
-	ActionGameData::ActionGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	ActionGameData::ActionGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
+		Done( false ), ActionTaken( false)
 	{
 		// See ActionGameData_Construct.
 

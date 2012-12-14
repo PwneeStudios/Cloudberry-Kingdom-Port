@@ -18,6 +18,7 @@ namespace CloudberryKingdom
 
 	HsvQuad::HsvQuad() : QuadClass()
 	{
+		_MyMatrixSignature = 0;
 	}
 
 	void HsvQuad::Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size )

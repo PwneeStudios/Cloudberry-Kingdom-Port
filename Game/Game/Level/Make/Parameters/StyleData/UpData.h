@@ -5,12 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct Rand;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct VerticalData : public StyleData
 	{
 	

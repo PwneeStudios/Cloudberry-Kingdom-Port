@@ -1088,6 +1088,13 @@ namespace CloudberryKingdom
 
 	void ObjectClass::InitializeInstanceFields()
 	{
+		LoadingRunSpeed = 0;
+		CapeThickness = 0;
+		VersionNumber = 0;
+		ContainedQuadAngle = 0;
+		xFlip = false; yFlip = false; CenterFlipOnBox = false;
+		DrawWidth = 0; DrawHeight = 0;
+
 		LoadingRunSpeed = .135f;
 		CapeThickness = 16;
 		p1_Left = Vector2( -63, -45 );

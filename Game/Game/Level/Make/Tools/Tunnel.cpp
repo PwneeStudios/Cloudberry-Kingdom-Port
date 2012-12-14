@@ -161,6 +161,8 @@ namespace CloudberryKingdom
 
 	void TunnelFill::InitializeInstanceFields()
 	{
+		N = 0; M = 0;
+
 		TunnelCeiling = true;
 		TunnelFloor = true;
 		RemoveWarts = false;

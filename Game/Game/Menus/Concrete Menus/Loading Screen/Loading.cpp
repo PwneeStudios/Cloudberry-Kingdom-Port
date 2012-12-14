@@ -129,6 +129,9 @@ namespace CloudberryKingdom
 
 	void ProgressBar::InitializeInstanceFields()
 	{
+		PercentDone = 0;
+		Width = 0;
+
 		MyType = BarType_SCALE;
 	}
 

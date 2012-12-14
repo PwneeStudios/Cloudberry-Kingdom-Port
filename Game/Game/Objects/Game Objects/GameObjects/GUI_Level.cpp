@@ -77,7 +77,13 @@ namespace CloudberryKingdom
 		LevelText->SubstituteText( ToString() );
 	}
 
-	GUI_Level::GUI_Level() { }
+	GUI_Level::GUI_Level() :
+		Prefix( static_cast<Localization::Words>( 0 ) ),
+		DoSlideIn( false ),
+		AddedOnce( false ),
+		Level_Renamed( 0 )	
+	{
+	}
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -88,7 +94,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
-	GUI_Level::GUI_Level( bool SlideIn )  { }
+	GUI_Level::GUI_Level( bool SlideIn ) :
+		Prefix( static_cast<Localization::Words>( 0 ) ),
+		DoSlideIn( false ),
+		AddedOnce( false ),
+		Level_Renamed( 0 )	
+	{
+	}
+
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool SlideIn )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -99,7 +112,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
-	GUI_Level::GUI_Level( int LevelNum ) { }
+	GUI_Level::GUI_Level( int LevelNum ) :
+		Prefix( static_cast<Localization::Words>( 0 ) ),
+		DoSlideIn( false ),
+		AddedOnce( false ),
+		Level_Renamed( 0 )	
+	{
+	}
+
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( int LevelNum )
 	{
 		GUI_Panel::GUI_Panel_Construct();

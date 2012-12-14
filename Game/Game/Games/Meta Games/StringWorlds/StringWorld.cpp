@@ -619,6 +619,10 @@ namespace CloudberryKingdom
 
 	void StringWorldGameData::InitializeInstanceFields()
 	{
+		FirstLevelSwappedIn = false;
+
+		Count = 0;
+
 		NextLevelIndex = 0;
 		CurLevelIndex = 0;
 		FirstLevelHasLoaded = false;

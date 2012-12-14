@@ -215,7 +215,10 @@ namespace CloudberryKingdom
 		CategoryDelays();
 	}
 
-	StatsMenu::StatsMenu( StatGroup group ) { }
+	StatsMenu::StatsMenu( StatGroup group ) :
+		n( 0 ), HeaderPos( 0 )
+	{
+	}
 	std::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

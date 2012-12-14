@@ -38,7 +38,11 @@ namespace CloudberryKingdom
 		vpm->No( item );
 	}
 
-	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) /*: VerifyBaseMenu( false )*/ { }
+	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) :
+		VerifyBaseMenu( false ),
+		Cost( 0 )
+	{
+	}
 	std::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );

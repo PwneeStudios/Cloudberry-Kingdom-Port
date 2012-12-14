@@ -9,7 +9,9 @@ namespace CloudberryKingdom
 		k.reset();
 	}
 
-	BobLink::BobLink()
+	BobLink::BobLink() :
+		_j( 0 ), _k( 0 ),
+		L( 0 ), a_in( 0 ), a_out( 0 ), MaxForce( 0 )
 	{
 		j = k = 0;
 

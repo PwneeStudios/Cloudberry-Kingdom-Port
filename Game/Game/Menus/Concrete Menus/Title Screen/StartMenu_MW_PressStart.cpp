@@ -3,7 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title ) : CkBaseMenu() { }
+	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title ) :
+		CkBaseMenu(),
+		t( 0 ), DelayToAllowInput( 0 )
+	{
+	}
 	std::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart::StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

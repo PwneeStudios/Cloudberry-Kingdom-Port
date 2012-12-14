@@ -4,7 +4,10 @@ namespace CloudberryKingdom
 {
 
 	//GamerTag::GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	GamerTag::GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	GamerTag::GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
+		ShowGamerTag( false )
+	{
+	}
 	std::shared_ptr<GamerTag> GamerTag::GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

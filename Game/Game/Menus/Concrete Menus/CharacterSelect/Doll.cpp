@@ -12,7 +12,10 @@ namespace CloudberryKingdom
 {
 
 	//Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
+		ShowBob( false )
+	{
+	}
 	std::shared_ptr<Doll> Doll::Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );

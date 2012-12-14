@@ -203,7 +203,11 @@ namespace CloudberryKingdom
 		Call( MakeMagic( VerifyQuitGameMenu2, ( getControl() ) ), 0 );
 	}
 
-	StartMenu::StartMenu() { }
+	StartMenu::StartMenu() :
+		NoBack( false ),
+		MyNextMenu( static_cast<Next>( 0 ) )
+	{
+	}
 	std::shared_ptr<StartMenu> StartMenu::StartMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();

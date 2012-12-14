@@ -139,7 +139,11 @@ namespace CloudberryKingdom
 		Text->SubstituteText( BuildString() );
 	}
 
-	GUI_Blobs::GUI_Blobs() { }
+	GUI_Blobs::GUI_Blobs() :
+		Blobs( 0 ), TotalBlobs( 0 ),
+		AddedOnce( false )
+	{
+	}
 	std::shared_ptr<GUI_Blobs> GUI_Blobs::GUI_Blobs_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();

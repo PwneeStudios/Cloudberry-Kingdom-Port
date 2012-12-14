@@ -30,5 +30,9 @@ namespace CloudberryKingdom
 	void ToDoItem::InitializeInstanceFields()
 	{
 		Step = 0;
+		_MarkedForDeltion = false;
+		PauseOnPause = false;
+
+		RemoveOnReset = false;
 	}
 }

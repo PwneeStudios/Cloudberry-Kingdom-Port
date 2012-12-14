@@ -175,6 +175,10 @@ namespace CloudberryKingdom
 
 	void LoadingScreen::InitializeInstanceFields()
 	{
+		MinLoading = 0;
+		Fade = false;
+		FadeAlpha = 0;
+
 		Fake = false;
 	}
 }
