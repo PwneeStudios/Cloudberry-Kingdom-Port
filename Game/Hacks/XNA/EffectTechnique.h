@@ -6,8 +6,6 @@
 struct EffectTechnique
 {
 
-
-
 	std::vector<std::shared_ptr<EffectPass> > Passes;
 
 	EffectTechnique()

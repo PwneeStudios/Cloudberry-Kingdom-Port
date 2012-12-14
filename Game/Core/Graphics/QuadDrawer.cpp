@@ -1,5 +1,10 @@
 ﻿#include <global_header.h>
 
+#include <Core.h>
+#include <Content/Wad.h>
+#include <Graphics/Types.h>
+#include <Graphics/QuadDrawer.h>
+
 #include "Hacks/XNA/SamplerState.h"
 
 namespace CloudberryKingdom
@@ -248,6 +253,31 @@ namespace CloudberryKingdom
 			}
 		}
 
+		::SimpleQuad sq;
+		sq.V[0] = Vector2( quad.v0.Vertex.xy.X, quad.v0.Vertex.xy.Y );
+		sq.V[1] = Vector2( quad.v1.Vertex.xy.X, quad.v1.Vertex.xy.Y );
+		sq.V[3] = Vector2( quad.v2.Vertex.xy.X, quad.v2.Vertex.xy.Y );
+		sq.V[2] = Vector2( quad.v3.Vertex.xy.X, quad.v3.Vertex.xy.Y );
+
+		for( int j = 0; j < 4; ++j )
+		{
+			sq.V[ j ] /= 1822.45f;
+			sq.V[ j ] += Vector2( 1 );
+			sq.V[ j ] /= 2.f;
+			sq.V[ j ] *= Vector2( 1280.f, 720.f );
+			sq.V[ j ].Y = 720.f - sq.V[ j ].Y;
+		}
+
+		sq.T[0] = Vector2( quad.v0.Vertex.uv.X, quad.v0.Vertex.uv.Y );
+		sq.T[1] = Vector2( quad.v1.Vertex.uv.X, quad.v1.Vertex.uv.Y );
+		sq.T[3] = Vector2( quad.v2.Vertex.uv.X, quad.v2.Vertex.uv.Y );
+		sq.T[2] = Vector2( quad.v3.Vertex.uv.X, quad.v3.Vertex.uv.Y );
+
+		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
+
+		ResourcePtr< Texture > background = CONTENT->Load< Texture >( "Art/Title/Title_Screen.png" );
+		sq.Diffuse = background;
+		QUAD_DRAWER->Draw( sq );
 		Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
 		Vertices[ i + 5 ] = Vertices[ i + 1 ];

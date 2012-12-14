@@ -4,7 +4,9 @@
 struct EffectPass
 {
 
-
+	EffectPass()
+	{
+	}
 
 	void Apply()
 	{

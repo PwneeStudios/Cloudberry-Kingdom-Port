@@ -4,9 +4,11 @@
 struct SoundEffect
 {
 
-
-
 	void Play( float volume, float i, float j )
+	{
+	}
+
+	SoundEffect()
 	{
 	}
 

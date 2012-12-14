@@ -104,7 +104,7 @@ void CloudberryKingdomWrapper::Update()
 			textPos += Vector2( 0, 10 );
 	}*/
 
-	Vector2 textPos( 0 );
+	/*Vector2 textPos( 0 );
 
 	ResourcePtr< Texture > texture = CONTENT->Load< Texture >( "Art/Bob/Bob_Trimmed/Bob_Run_0001.png" );
 	ResourcePtr< Texture > background = CONTENT->Load< Texture >( "Art/Title/Title_Screen.png" );
@@ -130,5 +130,5 @@ void CloudberryKingdomWrapper::Update()
 	quad.Diffuse = title;
 	QUAD_DRAWER->Draw( quad );
 
-	TEXT_DRAWER->Draw( "Game Over", textPos );
+	TEXT_DRAWER->Draw( "Game Over", textPos );*/
 }
