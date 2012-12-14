@@ -79,10 +79,7 @@ namespace CloudberryKingdom
 		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
 		anim = 0; OldAnim = 0;
 		t = 0; OldT = 0; StartT = 0;
-
-		std::vector<std::shared_ptr<EzEffect> > MyEffects;
-
-		bool Released;
+		Released = false;
 
 		Constructor( obj, BoxesOnly, false );
 	}
