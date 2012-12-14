@@ -677,6 +677,8 @@ namespace CloudberryKingdom
 
 	GameData::GameData()
 	{
+		InitializeInstanceFields();
+	
 		// This is now in GameData_Construct.  We welcome our C overlords.
 
 		/*InitializeInstanceFields();

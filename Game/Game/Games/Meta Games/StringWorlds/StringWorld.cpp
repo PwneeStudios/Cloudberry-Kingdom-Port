@@ -461,14 +461,16 @@ namespace CloudberryKingdom
 		}
 	}
 
-	StringWorldGameData::StringWorldGameData()
+	StringWorldGameData::StringWorldGameData() :
+		Count( 0 )
 	{
 		// See StringWorldGameData_Construct.
 
 		//InitializeInstanceFields();
 	}
 
-	StringWorldGameData::StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed )
+	StringWorldGameData::StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed ) :
+		Count( 0 )
 	{
 		// See StringWorldGameData_Construct.
 
