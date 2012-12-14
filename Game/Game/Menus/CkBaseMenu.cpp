@@ -390,7 +390,14 @@ std::shared_ptr<PieceQuad> CkBaseMenu::MenuTemplate = 0;
 
 int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
-	CkBaseMenu::CkBaseMenu() { }
+	CkBaseMenu::CkBaseMenu() :
+		FontScale( 0 ),
+		ItemShadows( true ),
+		CallToLeft( false ),
+		SlideInFrom( PresetPos_LEFT ),
+		SlideOutTo( PresetPos_LEFT )
+	{
+	}
 	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -400,8 +407,14 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 		return std::static_pointer_cast<CkBaseMenu>( shared_from_this() );
 	}
 
-	/*CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor )*/
-	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) { }
+	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor ),
+		FontScale( 0 ),
+		ItemShadows( true ),
+		CallToLeft( false ),
+		SlideInFrom( PresetPos_LEFT ),
+		SlideOutTo( PresetPos_LEFT )
+	{
+	}
 	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		GUI_Panel::GUI_Panel_Construct( CallBaseConstructor );
@@ -422,8 +435,6 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	void CkBaseMenu::InitializeInstanceFields()
 	{
-		FontScale = 0;
-	
 		ItemPos = Vector2( -808, 110 );
 		PosAdd = Vector2( 0, -151 ) * 1.181f;
 		ItemFont = Resources::Font_Grobold42;

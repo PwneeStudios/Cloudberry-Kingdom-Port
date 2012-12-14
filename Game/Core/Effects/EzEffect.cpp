@@ -1,9 +1,13 @@
 ﻿#include <global_header.h>
 
-
-
 namespace CloudberryKingdom
 {
+
+	EzEffect::EzEffect() :
+		IsUpToDate( false )
+	{
+		InitializeInstanceFields();
+	}
 
 	void EzEffect::SetCameraParameters()
 	{

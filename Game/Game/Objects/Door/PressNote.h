@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct PressNote : public GUI_Text
 	{
 	

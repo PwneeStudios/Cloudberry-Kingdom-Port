@@ -30,7 +30,8 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		Pendulum_Parameters()
+		Pendulum_Parameters() :
+			Motion( static_cast<MotionType>( 0 ) )
 		{
 			InitializeInstanceFields();
 		}

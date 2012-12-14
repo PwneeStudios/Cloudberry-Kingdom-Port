@@ -91,6 +91,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_LivesLeft::GUI_LivesLeft( int Lives ) :
+		PauseOnShow( false ),
 		_NumLives( 0 ),
 		UseBlackBack( false ),
 		FadeInVel( 0 ), FadeOutVel( 0 ),

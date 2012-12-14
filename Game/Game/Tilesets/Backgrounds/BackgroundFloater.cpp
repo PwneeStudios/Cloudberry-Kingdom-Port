@@ -80,13 +80,15 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	BackgroundFloater::BackgroundFloater()
+	BackgroundFloater::BackgroundFloater() :
+		_SpinVelocity( 0 )
 	{
 		InitializeInstanceFields();
 		MyQuad = std::make_shared<QuadClass>();
 	}
 
-	BackgroundFloater::BackgroundFloater( const std::shared_ptr<Level> &level )
+	BackgroundFloater::BackgroundFloater( const std::shared_ptr<Level> &level ) :
+		_SpinVelocity( 0 )
 	{
 		InitializeInstanceFields();
 		MyLevel = level;

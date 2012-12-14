@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 	int ScreenSaver::InitialDarkness = 30;
 
 	ScreenSaver::ScreenSaver() :
-		ForTrailer( false ), Bungee( false ), AllHeroes( false ), Difficulty( 0 ), Paths( 0 ), InitialZoom( 0 )
+		InitialFadeInSpeed( 0 ), ForTrailer( false ), Bungee( false ), AllHeroes( false ), Difficulty( 0 ), Paths( 0 ), InitialZoom( 0 )
 	{
 		// See ScreenSaver_Construct.
 
@@ -295,7 +295,7 @@ namespace CloudberryKingdom
 	}
 
 	ScreenSaver::ScreenSaver( bool ForTrailer ) :
-		ForTrailer( false ), Bungee( false ), AllHeroes( false ), Difficulty( 0 ), Paths( 0 ), InitialZoom( 0 )
+		InitialFadeInSpeed( 0 ), ForTrailer( false ), Bungee( false ), AllHeroes( false ), Difficulty( 0 ), Paths( 0 ), InitialZoom( 0 )
 	{
 		assert( !"Should not be called." );
 		/*InitializeInstanceFields();

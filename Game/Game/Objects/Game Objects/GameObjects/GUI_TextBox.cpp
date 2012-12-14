@@ -9,8 +9,7 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	//GUI_EnterName::GUI_EnterName() : GUI_TextBox(PlayerManager::getDefaultName(), Vector2())
-	GUI_EnterName::GUI_EnterName() { }
+	GUI_EnterName::GUI_EnterName() : GUI_TextBox(PlayerManager::getDefaultName(), Vector2()) { }
 	std::shared_ptr<GUI_EnterName> GUI_EnterName::GUI_EnterName_Construct()
 	{
 		GUI_TextBox::GUI_TextBox_Construct(PlayerManager::getDefaultName(), Vector2());
@@ -226,6 +225,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_TextBox::GUI_TextBox() :
+		SelectIndex_Start( 0 ), SelectIndex_End( 0 ),
 		HasFocus( false ),
 		Canceled( false ),
 		MaxLength( 0 ),
@@ -241,6 +241,7 @@ namespace CloudberryKingdom
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) : GUI_Text( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false )
 	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) :
+		SelectIndex_Start( 0 ), SelectIndex_End( 0 ),
 		HasFocus( false ),
 		Canceled( false ),
 		MaxLength( 0 ),
@@ -258,8 +259,8 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
-	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont )
-	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) :
+	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont ),
+		SelectIndex_Start( 0 ), SelectIndex_End( 0 ),
 		HasFocus( false ),
 		Canceled( false ),
 		MaxLength( 0 ),

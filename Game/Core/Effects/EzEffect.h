@@ -38,11 +38,8 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 
+		EzEffect();
 
-		EzEffect()
-		{
-			InitializeInstanceFields();
-		}
 	};
 }
 
