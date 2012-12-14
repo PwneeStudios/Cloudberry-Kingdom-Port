@@ -1,7 +1,8 @@
 #include <global_header.h>
 
-#include <Hacks/Parse.h>
-#include <Hacks/String.h>
+#include <Hacks\Parse.h>
+#include <Hacks\String.h>
+#include <Hacks\List.h>
 
 namespace CloudberryKingdom
 {
@@ -146,26 +147,26 @@ namespace CloudberryKingdom
 		text->setScale( FontScale *.9f );
 	}
 
-	const Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
-	std::vector<Vector2> StatsMenu::x1_name = std::vector<Vector2>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-	const Vector2 tempVector2[] = { Vector2( 1217, -147 ), Vector2( 2056, -147 ) };
-	std::vector<Vector2> StatsMenu::x2_name = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-	const Vector2 tempVector3[] = { Vector2( 1225, -295 ), Vector2( 1624, -127.3015f ), Vector2( 2116, -295 ) };
-	std::vector<Vector2> StatsMenu::x3_name = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
-	const Vector2 tempVector4[] = { Vector2( 1090, -295 ), Vector2( 1445, -127.3015f ), Vector2( 1800, -295 ), Vector2( 2155, -127.3015f ) };
-	std::vector<Vector2> StatsMenu::x4_name = std::vector<Vector2>( tempVector4, tempVector4 + sizeof( tempVector4 ) / sizeof( tempVector4[ 0 ] ) );
-	const float tempVector5[] = { 1920 };
-	std::vector<float> StatsMenu::x1 = std::vector<float>( tempVector5, tempVector5 + sizeof( tempVector5 ) / sizeof( tempVector5[ 0 ] ) );
-	const float tempVector6[] = { 1722.699f, 2454.445f };
-	std::vector<float> StatsMenu::x2 = std::vector<float>( tempVector6, tempVector6 + sizeof( tempVector6 ) / sizeof( tempVector6[ 0 ] ) );
-	const float tempVector7[] = { 1650, 2075, 2505 };
-	std::vector<float> StatsMenu::x3 = std::vector<float>( tempVector7, tempVector7 + sizeof( tempVector7 ) / sizeof( tempVector7[ 0 ] ) );
-	const float tempVector8[] = { 1550, 1905, 2260, 2615 };
-	std::vector<float> StatsMenu::x4 = std::vector<float>( tempVector8, tempVector8 + sizeof( tempVector8 ) / sizeof( tempVector8[ 0 ] ) );
-	const std::vector<float> tempVector9[] = { std::vector<float>(), StatsMenu::x1, StatsMenu::x2, StatsMenu::x3, StatsMenu::x4 };
-	std::vector<std::vector<float> > StatsMenu::x = std::vector<std::vector<float> >( tempVector9, tempVector9 + sizeof( tempVector9 ) / sizeof( tempVector9[ 0 ] ) );
-	const std::vector<Vector2> tempVector10[] = { std::vector<Vector2>(), StatsMenu::x1_name, StatsMenu::x2_name, StatsMenu::x3_name, StatsMenu::x4_name };
-	std::vector<std::vector<Vector2> > StatsMenu::name_pos = std::vector<std::vector<Vector2> >( tempVector10, tempVector10 + sizeof( tempVector10 ) / sizeof( tempVector10[ 0 ] ) );
+	Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
+	std::vector<Vector2> StatsMenu::x1_name = VecFromArray( tempVector );
+	Vector2 tempVector2[] = { Vector2( 1217, -147 ), Vector2( 2056, -147 ) };
+	std::vector<Vector2> StatsMenu::x2_name = VecFromArray( tempVector2 );
+	Vector2 tempVector3[] = { Vector2( 1225, -295 ), Vector2( 1624, -127.3015f ), Vector2( 2116, -295 ) };
+	std::vector<Vector2> StatsMenu::x3_name = VecFromArray( tempVector3 );
+	Vector2 tempVector4[] = { Vector2( 1090, -295 ), Vector2( 1445, -127.3015f ), Vector2( 1800, -295 ), Vector2( 2155, -127.3015f ) };
+	std::vector<Vector2> StatsMenu::x4_name = VecFromArray( tempVector4 );
+	float tempVector5[] = { 1920 };
+	std::vector<float> StatsMenu::x1 = VecFromArray( tempVector5 );
+	float tempVector6[] = { 1722.699f, 2454.445f };
+	std::vector<float> StatsMenu::x2 = VecFromArray( tempVector6 );
+	float tempVector7[] = { 1650, 2075, 2505 };
+	std::vector<float> StatsMenu::x3 = VecFromArray( tempVector7 );
+	float tempVector8[] = { 1550, 1905, 2260, 2615 };
+	std::vector<float> StatsMenu::x4 = VecFromArray( tempVector8 );
+	std::vector<float> tempVector9[] = { std::vector<float>(), StatsMenu::x1, StatsMenu::x2, StatsMenu::x3, StatsMenu::x4 };
+	std::vector<std::vector<float> > StatsMenu::x = VecFromArray( tempVector9 );
+	std::vector<Vector2> tempVector10[] = { std::vector<Vector2>(), StatsMenu::x1_name, StatsMenu::x2_name, StatsMenu::x3_name, StatsMenu::x4_name };
+	std::vector<std::vector<Vector2> > StatsMenu::name_pos = VecFromArray( tempVector10 );
 
 	std::shared_ptr<MenuItem> StatsMenu::AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, int> > &f )
 	{

@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
-#include <Hacks/String.h>
+#include <Hacks\String.h>
+#include <Hacks\List.h>
 
 namespace CloudberryKingdom
 {
@@ -344,8 +345,8 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::SmoothLerp( float v1, float v2, float t )
 	{
-		const float tempVector[] = { CoreMath::Lerp( v1, v2, 0 ), CoreMath::Lerp( v1, v2, 0.5f ), CoreMath::Lerp( v1, v2, 0.75f ), CoreMath::Lerp( v1, v2, 0.875f ), CoreMath::Lerp( v1, v2, 0.9375f ), CoreMath::Lerp( v1, v2, 1 ) };
-		return FancyLerp( t, std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
+		float tempVector[] = { CoreMath::Lerp( v1, v2, 0 ), CoreMath::Lerp( v1, v2, 0.5f ), CoreMath::Lerp( v1, v2, 0.75f ), CoreMath::Lerp( v1, v2, 0.875f ), CoreMath::Lerp( v1, v2, 0.9375f ), CoreMath::Lerp( v1, v2, 1 ) };
+		return FancyLerp( t, std::vector<float>( VecFromArray( tempVector ) ) );
 	}
 
 	float CoreMath::FancyLerp( float t, std::vector<float> keyframes )

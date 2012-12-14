@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -59,8 +61,8 @@ namespace CloudberryKingdom
 			length = 5;
 		}
 
-		const std::wstring tempVector[] = { _T( "" ), _T( "0" ), _T( "00" ), _T( "000" ), _T( "0000" ) };
-		std::vector<std::wstring> pad = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::wstring tempVector[] = { _T( "" ), _T( "0" ), _T( "00" ), _T( "000" ), _T( "0000" ) };
+		std::vector<std::wstring> pad = VecFromArray( tempVector );
 
 		if ( EndFrame >= StartFrame )
 		{
@@ -152,8 +154,8 @@ namespace CloudberryKingdom
 
 	void AnimationData_Texture::Init()
 	{
-		const OneAnim_Texture tempVector2[] = { OneAnim_Texture() };
-		Anims = std::vector<OneAnim_Texture>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+		OneAnim_Texture tempVector2[] = { OneAnim_Texture() };
+		Anims = VecFromArray( tempVector2 );
 	}
 
 	void AnimationData_Texture::InsertFrame( int anim, int frame )
@@ -239,8 +241,8 @@ namespace CloudberryKingdom
 
 		if ( Anims[ anim ].Data.empty() )
 		{
-			const std::shared_ptr<EzTexture> tempVector3[] = { 0 };
-			Anims[ anim ].Data = std::vector<std::shared_ptr<EzTexture> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+			std::shared_ptr<EzTexture> tempVector3[] = { 0 };
+			Anims[ anim ].Data = VecFromArray( tempVector3 );
 		}
 		else
 			if ( frame > 0 )

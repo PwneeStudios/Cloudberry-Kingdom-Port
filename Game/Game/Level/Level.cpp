@@ -3375,8 +3375,8 @@ int Level::AfterPostDrawLayer = 12;
 		LightQuad->setEffectName( _T( "LightMap" ) );
 	}
 
-	const float tempVector[] = { 800, 70, 690, 630, 500 };
-	std::vector<float> Level::BobLightRadiusByDifficulty = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	float tempVector[] = { 800, 70, 690, 630, 500 };
+	std::vector<float> Level::BobLightRadiusByDifficulty = VecFromArray( tempVector );
 
 	void Level::SetBobLightRadius( int Difficulty )
 	{

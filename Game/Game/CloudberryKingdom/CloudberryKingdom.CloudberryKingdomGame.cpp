@@ -1759,7 +1759,13 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+
+				// Test screen saver
+				std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+				ScreenSaver_Construct( Intro );
+				Intro->Init();
+
 				return;
 	#else
 				// Start at Screen Saver
@@ -1774,6 +1780,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::InitializeInstanceFields()
 	{
+		ScreenWidth = 0; ScreenHeight = 0;
+		DrawCount = 0; PhsxCount = 0;
+		LogoScreenUp = false;
 		LogoScreenPropUp = false;
 
 		Resolutions = std::vector<ResolutionGroup>( 4 );

@@ -69,8 +69,8 @@ bool AnimationData::RecordAll = false;
 
 	void AnimationData::Init()
 	{
-		const OneAnim tempVector[] = { OneAnim() };
-		Anims = std::vector<OneAnim>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		OneAnim tempVector[] = { OneAnim() };
+		Anims = VecFromArray( tempVector );
 		Hold = Vector2();
 	}
 
@@ -146,8 +146,8 @@ bool AnimationData::RecordAll = false;
 
 		if ( Anims[ anim ].Data.empty() )
 		{
-			const Vector2 tempVector2[] = { Default };
-			Anims[ anim ].Data = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+			Vector2 tempVector2[] = { Default };
+			Anims[ anim ].Data = VecFromArray( tempVector2 );
 		}
 		else
 			if ( frame > 0 )

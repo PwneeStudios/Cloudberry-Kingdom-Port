@@ -121,12 +121,12 @@ namespace CloudberryKingdom
 		pos.Y -= 1.35f * YSpacing;
 
 		const std::wstring tempVector[] = { _T( "Yes" ), _T( "No" ) };
-		std::vector<std::wstring> ItemString = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::vector<std::wstring> ItemString = VecFromArray( tempVector );
 		for ( int i = 0; i < 2; i++ )
 		{
 			item = std::make_shared<MenuItem>( std::make_shared<EzText>( ItemString[ i ], font ) );
 			item->MySelectedText->setScale( FontScale );
-		item->MyText->setScale( item->MySelectedText->getScale() );
+			item->MyText->setScale( item->MySelectedText->getScale() );
 			item->SelectionOscillate = false;
 
 			MyMenu->Add( item );

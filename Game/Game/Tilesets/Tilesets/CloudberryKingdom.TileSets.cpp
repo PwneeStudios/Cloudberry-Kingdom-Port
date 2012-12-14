@@ -1078,7 +1078,6 @@ namespace CloudberryKingdom
 		info->FlexibleHeight = false;
 		Upgrade tempVector[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_SPIKE };
 		AddRange<Upgrade>( info->ObstacleUpgrades, VecFromArray( tempVector ) );
-		//info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
 
 		// Random
 		Random = info = std::make_shared<TileSet>();
@@ -1090,7 +1089,6 @@ namespace CloudberryKingdom
 		info->ScreenshotString = _T( "Screenshot_Random" );
 		Upgrade tempVector2[] = { Upgrade_BOUNCY_BLOCK, Upgrade_FLY_BLOB, Upgrade_MOVING_BLOCK, Upgrade_FIREBALL, Upgrade_PINKY };
 		AddRange( info->ObstacleUpgrades, VecFromArray( tempVector2 ) );
-		//info->ObstacleUpgrades.AddRange( std::vector<Upgrade>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) ) );
 
 		// Sprite effects
 		LoadSpriteEffects();
@@ -1099,7 +1097,7 @@ namespace CloudberryKingdom
 		TileSets::LoadCode();
 
 		// Freeplay tilesets
-		const std::shared_ptr<TileSet>  tempVector3[] = {
+		std::shared_ptr<TileSet>  tempVector3[] = {
 			TileSets::Random,
 			TileSet::Get( _T( "sea" ) ),
 			TileSet::Get( _T( "hills" ) ),
@@ -1108,7 +1106,7 @@ namespace CloudberryKingdom
 			TileSet::Get( _T( "cave" ) ),
 			TileSet::Get( _T( "castle" ) )
 		};
-		CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+		CustomLevel_GUI::FreeplayTilesets = VecFromArray( tempVector3 );
 	}
 
 	void TileSets::LoadSpriteEffects()

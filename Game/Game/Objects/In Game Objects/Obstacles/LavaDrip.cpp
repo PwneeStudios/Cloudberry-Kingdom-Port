@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -79,10 +81,10 @@ namespace CloudberryKingdom
 		if ( Skip )
 			return;
 
-		const float tempVector[] = { 0,.5f,.8f,.9f,.95f,.975f, 1 };
-		std::vector<Vector2> KeyFrames_Peak = Tools::FloatArrayToVectorArray_y( std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
-		const float tempVector2[] = { .065f, 1 };
-		std::vector<Vector2> KeyFrames_Down = Tools::FloatArrayToVectorArray_y( std::vector<float>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) ) );
+		float tempVector[] = { 0,.5f,.8f,.9f,.95f,.975f, 1 };
+		std::vector<Vector2> KeyFrames_Peak = Tools::FloatArrayToVectorArray_y( VecFromArray( tempVector ) );
+		float tempVector2[] = { .065f, 1 };
+		std::vector<Vector2> KeyFrames_Down = Tools::FloatArrayToVectorArray_y( VecFromArray( tempVector2 ) );
 
 		Exposed = true;
 

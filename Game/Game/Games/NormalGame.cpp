@@ -62,6 +62,7 @@ namespace CloudberryKingdom
 		_MakeThreadLevelSeed = LevelSeed;
 		_MakeThreadMakeInBackground = MakeInBackground;
 		// FIXME: Add threading.
+		_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
 	//	std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
 	//	{
 	//#if defined(WINDOWS)
@@ -82,7 +83,7 @@ namespace CloudberryKingdom
 		// FIXME: Related to threading.
 	//#if defined(XBOX) && !defined(WINDOWS)
 	//	const int tempVector[] = { 3 };
-	//	Thread::CurrentThread->SetProcessorAffinity( std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) ) );
+	//	Thread::CurrentThread->SetProcessorAffinity( VecFromArray( tempVector ) );
 	//#endif
 	//	Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( shared_from_this(), &NormalGameData::KillThread );
 

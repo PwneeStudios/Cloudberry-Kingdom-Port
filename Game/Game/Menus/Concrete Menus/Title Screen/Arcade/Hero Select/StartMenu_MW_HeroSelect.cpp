@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -163,8 +165,8 @@ namespace CloudberryKingdom
 		//BobPhsxMeat.Instance =
 		//BobPhsxRocketbox.Instance =
 
-		const std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
-		std::vector<std::shared_ptr<BobPhsx> > list = std::vector<std::shared_ptr<BobPhsx> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
+		std::vector<std::shared_ptr<BobPhsx> > list = VecFromArray( tempVector );
 
 		// Menu
 		std::shared_ptr<MiniMenu> mini = std::make_shared<MiniMenu>();

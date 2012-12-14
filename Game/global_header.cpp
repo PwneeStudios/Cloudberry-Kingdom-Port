@@ -1,6 +1,7 @@
 #include "global_header.h"
 
-#include "Hacks/XNA/MediaPlayer.h"
+#include <Hacks\XNA\MediaPlayer.h>
+#include <Hacks\List.h>
 
 /// <summary>
 /// String Builder
@@ -19,8 +20,8 @@ int StringBuilder::LastDigit()
 	return 0;
 }
 
-const wchar_t tempVector[] = { L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9' };
-std::vector<wchar_t> StringBuilder::digit_char = std::vector<wchar_t>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+wchar_t tempVector[] = { L'0', L'1', L'2', L'3', L'4', L'5', L'6', L'7', L'8', L'9' };
+std::vector<wchar_t> StringBuilder::digit_char = VecFromArray( tempVector );
 
 void StringBuilder::DigitsToString( int NumDigits )
 {

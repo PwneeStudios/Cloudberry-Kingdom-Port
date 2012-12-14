@@ -612,13 +612,13 @@ namespace CloudberryKingdom
 		std::vector<Localization::Words> GameNames;
 		if ( PlayerManager::NumPlayers <= 1 )
 		{
-			const Localization::Words tempVector[] = { Localization::Words_CLASSIC_GAME, Localization::Words_WALL_LEVEL };
-			GameNames = std::vector<Localization::Words>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+			Localization::Words tempVector[] = { Localization::Words_CLASSIC_GAME, Localization::Words_WALL_LEVEL };
+			GameNames = VecFromArray( tempVector );
 		}
 		else
 		{
-			const Localization::Words tempVector2[] = { Localization::Words_CLASSIC_GAME, Localization::Words_BUNGEE, Localization::Words_WALL_LEVEL };
-			GameNames = std::vector<Localization::Words>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+			Localization::Words tempVector2[] = { Localization::Words_CLASSIC_GAME, Localization::Words_BUNGEE, Localization::Words_WALL_LEVEL };
+			GameNames = std::vector<Localization::Words>( VecFromArray( tempVector2 ) );
 		}
 		for ( std::vector<Localization::Words>::const_iterator name = GameNames.begin(); name != GameNames.end(); ++name )
 		{

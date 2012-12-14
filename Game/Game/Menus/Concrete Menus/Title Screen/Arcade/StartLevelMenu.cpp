@@ -1,7 +1,8 @@
 #include <global_header.h>
 
-#include <Hacks/String.h>
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Hacks\String.h>
+#include <Hacks\List.h>
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -249,10 +250,8 @@ namespace CloudberryKingdom
 
 	void StartLevelMenu::InitializeInstanceFields()
 	{
-		const int tempVector[] = { 1, 50, 100, 150 };
-		std::vector<int> temp_Levels = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_Levels ) / sizeof( temp_Levels[ 0 ] ); element++ )
-			Levels[ element ] = temp_Levels[ element ];
+		int tempVector[] = { 1, 50, 100, 150 };
+		Levels = VecFromArray( tempVector );
 		IndexCutoff = 0;
 	}
 }

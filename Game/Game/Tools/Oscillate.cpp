@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Hacks\List.h>
 
 namespace CloudberryKingdom
 {
@@ -45,8 +46,8 @@ namespace CloudberryKingdom
 		}
 	}
 
-const float tempVector[] = { 1.15f,.94f, 1.05f, 1 };
-std::vector<float> OscillateParams::JiggleScale = std::vector<float>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+float _oscillateparams[] = { 1.15f,.94f, 1.05f, 1 };
+std::vector<float> OscillateParams::JiggleScale = VecFromArray( _oscillateparams );
 
 	float OscillateParams::JigglePhsx()
 	{

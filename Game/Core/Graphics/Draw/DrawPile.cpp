@@ -10,10 +10,10 @@ namespace CloudberryKingdom
 	void DrawPile::InitializeStatics()
 	{
 		Vector2 tempVector2[] = { Vector2( 0.001f ), Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
-		DrawPile::BubbleScale = std::vector<Vector2>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+		DrawPile::BubbleScale = VecFromArray( tempVector2 );
 
 		Vector2 tempVector3[] = { Vector2( 1.15f ), Vector2( .94f ), Vector2( 1.05f ), Vector2( 1 ) };
-		DrawPile::JiggleScale = std::vector<Vector2>( tempVector3, tempVector3 + sizeof( tempVector3 ) / sizeof( tempVector3[ 0 ] ) );
+		DrawPile::JiggleScale = VecFromArray( tempVector3 );
 	}
 
 	// Statics

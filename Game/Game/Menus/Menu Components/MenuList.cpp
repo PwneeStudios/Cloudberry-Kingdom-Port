@@ -17,8 +17,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> MenuList::GetViewables()
 	{
-		const std::wstring tempVector[] = { _T( "RightArrowOffset" ), _T( "LeftArrowOffset" ), _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ) };
-		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::wstring tempVector[] = { _T( "RightArrowOffset" ), _T( "LeftArrowOffset" ), _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ) };
+		return VecFromArray( tempVector );
 	}
 
 	const bool &MenuList::getExpandOnGo() const

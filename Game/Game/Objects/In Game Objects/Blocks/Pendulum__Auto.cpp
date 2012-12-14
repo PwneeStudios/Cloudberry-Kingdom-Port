@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -34,10 +36,8 @@ namespace CloudberryKingdom
 
 	void Pendulum_Parameters::InitializeInstanceFields()
 	{
-		const int tempVector[] = { 0, 1, 2, 3, 4, 5, 6 };
-		std::vector<int> temp_MotionLevel = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_MotionLevel ) / sizeof( temp_MotionLevel[ 0 ] ); element++ )
-			MotionLevel[ element ] = temp_MotionLevel[ element ];
+		int tempVector[] = { 0, 1, 2, 3, 4, 5, 6 };
+		MotionLevel = VecFromArray( tempVector );
 	}
 
 	std::shared_ptr<Pendulum_AutoGen> Pendulum_AutoGen::instance = std::make_shared<Pendulum_AutoGen>();

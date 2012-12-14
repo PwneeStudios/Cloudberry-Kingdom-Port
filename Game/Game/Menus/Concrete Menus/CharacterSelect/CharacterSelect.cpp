@@ -250,10 +250,8 @@ namespace CloudberryKingdom
 		MyState = SelectState_BEGINNING;
 		Join = false;
 		ItemIndex = std::vector<int>( 5 );
-		const std::vector<std::shared_ptr<MenuListItem> > tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
-		std::vector<std::vector<std::shared_ptr<MenuListItem> > > temp_ItemList = std::vector<std::vector<std::shared_ptr<MenuListItem> > >( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_ItemList ) / sizeof( temp_ItemList[ 0 ] ); element++ )
-			ItemList[ element ] = temp_ItemList[ element ];
+		std::vector<std::shared_ptr<MenuListItem> > tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
+		ItemList = VecFromArray( tempVector2 );
 		HoldCapeIndex = 1;
 		HoldCapeOutlineIndex = 1;
 	}

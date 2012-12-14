@@ -1,10 +1,11 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/XNA/Keyboard.h"
-#include "Hacks/XNA/Mouse.h"
-#include "Hacks/XNA/GamePad.h"
+#include "Hacks\XNA\Keyboard.h"
+#include "Hacks\XNA\Mouse.h"
+#include "Hacks\XNA\GamePad.h"
+#include <Hacks\List.h>
 
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -142,8 +143,8 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		else
 			All->SetCount( ControllerButtons_A, 0 );
 
-		const ControllerButtons tempVector[] = { ControllerButtons_LEFT, ControllerButtons_RIGHT, ControllerButtons_UP, ControllerButtons_DOWN };
-		std::vector<ControllerButtons> buttons = std::vector<ControllerButtons>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		ControllerButtons tempVector[] = { ControllerButtons_LEFT, ControllerButtons_RIGHT, ControllerButtons_UP, ControllerButtons_DOWN };
+		std::vector<ControllerButtons> buttons = VecFromArray( tempVector );
 		for ( std::vector<ControllerButtons>::const_iterator button = buttons.begin(); button != buttons.end(); ++button )
 		{
 			Incr = false;
@@ -431,7 +432,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 	ButtonData ButtonCheck::AllState( int iPlayerIndex )
 	{
 		static ControllerButtons tempButtons[] = { ControllerButtons_A, ControllerButtons_B, ControllerButtons_X, ControllerButtons_Y, ControllerButtons_LS, ControllerButtons_RS };
-		static std::vector<ControllerButtons> buttons( tempButtons, tempButtons + sizeof( tempButtons ) / sizeof( ControllerButtons ) );
+		static std::vector<ControllerButtons> buttons = VecFromArray( tempButtons );
 
 		return State( iPlayerIndex, buttons );
 	}

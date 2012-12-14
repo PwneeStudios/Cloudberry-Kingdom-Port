@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -81,8 +83,8 @@ namespace CloudberryKingdom
 		SlideIn();
 	}
 
-	const std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
-	std::vector<std::wstring> HighScorePanel::TextureName = std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
+	std::vector<std::wstring> HighScorePanel::TextureName = VecFromArray( tempVector );
 
 	HighScorePanel::HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) :
 		Instant( false )

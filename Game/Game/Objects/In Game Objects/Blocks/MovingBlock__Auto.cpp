@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -37,14 +39,11 @@ namespace CloudberryKingdom
 
 	void MovingBlock_Parameters::InitializeInstanceFields()
 	{
-		const int tempVector[] = { 0, 1, 2, 3, 4, 5, 6 };
-		std::vector<int> temp_MotionLevel = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_MotionLevel ) / sizeof( temp_MotionLevel[ 0 ] ); element++ )
-			MotionLevel[ element ] = temp_MotionLevel[ element ];
-		const float tempVector2[] = { 1, 1, 1 };
-		std::vector<float> temp_AspectTypeRatio = std::vector<float>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_AspectTypeRatio ) / sizeof( temp_AspectTypeRatio[ 0 ] ); element++ )
-			AspectTypeRatio[ element ] = temp_AspectTypeRatio[ element ];
+		int tempVector[] = { 0, 1, 2, 3, 4, 5, 6 };
+		MotionLevel = VecFromArray( tempVector );
+
+		float tempVector2[] = { 1, 1, 1 };
+		AspectTypeRatio = VecFromArray( tempVector2 );
 	}
 
 std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_shared<MovingBlock_AutoGen>();

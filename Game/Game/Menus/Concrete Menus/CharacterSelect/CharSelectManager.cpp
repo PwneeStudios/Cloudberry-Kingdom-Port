@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
@@ -60,8 +62,8 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
-	const std::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
-	std::vector<std::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = std::vector<std::shared_ptr<CharacterSelect> >( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+	std::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
+	std::vector<std::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = VecFromArray( tempVector );
 	bool CharacterSelectManager::IsShowing = false;
 	std::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;
 	std::shared_ptr<EzText> CharacterSelectManager::ChooseYourHero_Text = 0;

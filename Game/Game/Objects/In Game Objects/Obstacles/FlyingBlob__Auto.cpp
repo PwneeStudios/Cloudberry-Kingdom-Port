@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -46,10 +48,9 @@ namespace CloudberryKingdom
 
 	void FlyingBlob_Parameters::InitializeInstanceFields()
 	{
-		const int tempVector[] = { 0, 1, 2, 3, 4, 5, 7, 8 };
-		std::vector<int> temp_MotionLevel = std::vector<int>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
-		for ( int element = 0; element < sizeof( temp_MotionLevel ) / sizeof( temp_MotionLevel[ 0 ] ); element++ )
-			MotionLevel[ element ] = temp_MotionLevel[ element ];
+		int tempVector[] = { 0, 1, 2, 3, 4, 5, 7, 8 };
+		MotionLevel = VecFromArray( tempVector );
+
 		TunnelCeiling = true;
 		TunnelDisplacement = 0;
 		TunnelMotionType = MotionType_HORIZONTAL;

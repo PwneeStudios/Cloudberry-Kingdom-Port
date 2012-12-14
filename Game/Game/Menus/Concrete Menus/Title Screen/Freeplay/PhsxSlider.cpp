@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -16,8 +18,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> PhsxSlider::GetViewables()
 	{
-		const std::wstring tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ), _T( "!MenuToAddTo" ) };
-		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::wstring tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ), _T( "!MenuToAddTo" ) };
+		return VecFromArray( tempVector );
 	}
 
 	std::shared_ptr<EzFont> PhsxSlider::Font = 0;

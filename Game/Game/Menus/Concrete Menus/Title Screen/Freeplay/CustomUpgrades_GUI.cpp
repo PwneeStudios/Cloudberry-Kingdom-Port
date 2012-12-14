@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Hacks\List.h>
+
 namespace CloudberryKingdom
 {
 
@@ -13,8 +15,8 @@ namespace CloudberryKingdom
 
 	std::vector<Upgrade> AggressiveUpgrades_GUI::GetUpgradeList()
 	{
-		const Upgrade tempVector[] = { Upgrade_FLY_BLOB, Upgrade_FIRE_SPINNER, Upgrade_SPIKEY_GUY, Upgrade_PINKY, Upgrade_LASER, Upgrade_SPIKE, Upgrade_LAVA_DRIP, Upgrade_SERPENT, Upgrade_SPIKEY_LINE, Upgrade_FIREBALL };
-		return std::vector<Upgrade>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		Upgrade tempVector[] = { Upgrade_FLY_BLOB, Upgrade_FIRE_SPINNER, Upgrade_SPIKEY_GUY, Upgrade_PINKY, Upgrade_LASER, Upgrade_SPIKE, Upgrade_LAVA_DRIP, Upgrade_SERPENT, Upgrade_SPIKEY_LINE, Upgrade_FIREBALL };
+		return VecFromArray( tempVector );
 	}
 
 	void AggressiveUpgrades_GUI::Go()
@@ -37,8 +39,8 @@ namespace CloudberryKingdom
 
 	std::vector<Upgrade> PassiveUpgrades_GUI::GetUpgradeList()
 	{
-		const Upgrade tempVector2[] = { Upgrade_JUMP, Upgrade_SPEED, Upgrade_CEILING, Upgrade_MOVING_BLOCK, Upgrade_GHOST_BLOCK, Upgrade_FALLING_BLOCK, Upgrade_ELEVATOR, Upgrade_CLOUD, Upgrade_BOUNCY_BLOCK, Upgrade_PENDULUM };
-		return std::vector<Upgrade>( tempVector2, tempVector2 + sizeof( tempVector2 ) / sizeof( tempVector2[ 0 ] ) );
+		Upgrade tempVector2[] = { Upgrade_JUMP, Upgrade_SPEED, Upgrade_CEILING, Upgrade_MOVING_BLOCK, Upgrade_GHOST_BLOCK, Upgrade_FALLING_BLOCK, Upgrade_ELEVATOR, Upgrade_CLOUD, Upgrade_BOUNCY_BLOCK, Upgrade_PENDULUM };
+		return VecFromArray( tempVector2 );
 	}
 
 	void PassiveUpgrades_GUI::Go()

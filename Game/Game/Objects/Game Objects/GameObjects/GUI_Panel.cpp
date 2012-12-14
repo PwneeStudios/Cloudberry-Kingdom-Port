@@ -1,6 +1,8 @@
 #include <global_header.h>
 
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Hacks\List.h>
+
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -68,8 +70,8 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_Panel::GetViewables()
 	{
-		const std::wstring tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
-		return std::vector<std::wstring>( tempVector, tempVector + sizeof( tempVector ) / sizeof( tempVector[ 0 ] ) );
+		std::wstring tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
+		return VecFromArray( tempVector );
 	}
 
 	void GUI_Panel::setControl( const int &value )
