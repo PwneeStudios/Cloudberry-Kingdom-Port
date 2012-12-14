@@ -37,7 +37,16 @@ namespace CloudberryKingdom
 		getCore()->EditHoldable = getCore()->Holdable = true;
 	}
 
-	Pendulum::Pendulum( bool BoxesOnly )
+	Pendulum::Pendulum( bool BoxesOnly ) :
+		MoveType( PendulumMoveType_LINE ),
+		Angle( 0 ),
+		MaxAngle( 0 ),
+		Length( 0 ),
+		Period( 0 ),
+		Offset( 0 ),
+		AddAngle( 0 ),
+		CorrespondingAngle( 0 ),
+		MyTime( 0 )
 	{
 		InitializeInstanceFields();
 		MyBox = std::make_shared<AABox>();

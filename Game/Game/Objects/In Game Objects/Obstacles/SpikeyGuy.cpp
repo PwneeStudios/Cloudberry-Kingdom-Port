@@ -62,7 +62,15 @@ namespace CloudberryKingdom
 		}
 	}
 
-	SpikeyGuy::SpikeyGuy( bool BoxesOnly )
+	SpikeyGuy::SpikeyGuy( bool BoxesOnly ) :
+		Angle( 0 ),
+		MaxAngle( 0 ),
+		Length( 0 ),
+		Period( 0 ),
+		Offset( 0 ),
+		Dir( 0 ),
+		CorrespondingAngle( 0 ),
+		OffScreen( 0 )
 	{
 		InitializeInstanceFields();
 		_CircleDeath::Construct( BoxesOnly );

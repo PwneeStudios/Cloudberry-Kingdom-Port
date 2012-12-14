@@ -50,6 +50,21 @@ namespace CloudberryKingdom
 		CoinPlaced = false;
 	}
 
+	Coin_Parameters::Coin_Parameters() :
+		Red( false ),
+		FillType( FillTypes_NONE ),
+		Grid( false ),
+		DoCleanup( false ),
+		StartFrame( 0 ),
+		Regular_Period( 0 ),
+		Regular_Offset( 0 ),
+		Regular_Period2( 0 ),
+		Regular_Offset2( 0 ),
+		CoinPlaced( false )
+	{
+		InitializeInstanceFields();
+	}
+
 std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_AutoGen>();
 
 	const std::shared_ptr<Coin_AutoGen> &Coin_AutoGen::getInstance()
@@ -57,7 +72,8 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 		return instance;
 	}
 
-	Coin_AutoGen::Coin_AutoGen()
+	Coin_AutoGen::Coin_AutoGen() :
+		offset( 0 )
 	{
 		Do_ActiveFill_1 = true;
 	}

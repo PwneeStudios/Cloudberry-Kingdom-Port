@@ -9,12 +9,16 @@ namespace CloudberryKingdom
 		BoxSize = Vector2( 180, 50 );
 	}
 
-	Cloud::Cloud()
+	Cloud::Cloud() :
+		Shiftiness( 0 ),
+		PeriodOffset( 0 )
 	{
 		InitializeInstanceFields();
 	}
 
-	Cloud::Cloud( bool BoxesOnly )
+	Cloud::Cloud( bool BoxesOnly ) :
+		Shiftiness( 0 ),
+		PeriodOffset( 0 )
 	{
 		InitializeInstanceFields();
 		Construct( BoxesOnly );

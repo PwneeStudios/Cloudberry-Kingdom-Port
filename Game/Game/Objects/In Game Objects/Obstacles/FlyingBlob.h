@@ -9,10 +9,8 @@ namespace CloudberryKingdom
 	struct FlyingBlob : public _Obstacle, public IBound
 	{
 
-	
 		static void InitializeStatics();
 
-	
 		struct FlyingBlobTileInfo : public TileInfoBase
 		{
 		

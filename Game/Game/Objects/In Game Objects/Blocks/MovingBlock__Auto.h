@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		MovingBlock_Parameters()
+		MovingBlock_Parameters() : Motion( MotionType_VERTICAL ), Aspect( AspectType_SQUARE )
 		{
 			InitializeInstanceFields();
 		}

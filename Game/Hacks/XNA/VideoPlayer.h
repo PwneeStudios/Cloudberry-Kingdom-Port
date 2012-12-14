@@ -4,8 +4,6 @@
 struct VideoPlayer
 {
 
-
-
 	bool IsLooped;
 
 	VideoPlayer() : IsLooped( false ) { }

@@ -288,7 +288,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Fireball::Fireball( bool BoxesOnly )
+	Fireball::Fireball( bool BoxesOnly ) :
+		Period( 0 ),
+		Offset( 0 ),
+		Alive( false ),
+		PrevStep( 0 )
 	{
 		_CircleDeath::Construct( BoxesOnly );
 

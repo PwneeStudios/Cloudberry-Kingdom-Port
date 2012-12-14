@@ -62,7 +62,14 @@ namespace CloudberryKingdom
 		MyLine.SkipEdge = true;
 	}
 
-	FireSpinner::FireSpinner( bool BoxesOnly )
+	FireSpinner::FireSpinner( bool BoxesOnly ) :
+		Offset( 0 ),
+		Period( 0 ),
+		Radius( 0 ),
+		Angle( 0 ),
+		MiniAngle( 0 ),
+		MiniAngle_Offset( 0 ),
+		Orientation( 0 )
 	{
 		if ( !BoxesOnly )
 		{

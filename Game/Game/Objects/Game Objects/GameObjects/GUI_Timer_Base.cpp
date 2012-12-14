@@ -100,7 +100,13 @@ namespace CloudberryKingdom
 		TimerText->SubstituteText( BuildString() );
 	}
 
-	GUI_Timer_Base::GUI_Timer_Base() { }
+	GUI_Timer_Base::GUI_Timer_Base() :
+		_Time( 0 ),
+		AddedOnce( false ),
+		Intensity( 0 ),
+		CountDownWhileDead( false )
+	{
+	}
 	std::shared_ptr<GUI_Timer_Base> GUI_Timer_Base::GUI_Timer_Base_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();

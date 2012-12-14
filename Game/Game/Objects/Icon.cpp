@@ -163,7 +163,10 @@ namespace CloudberryKingdom
 		FancyPos->RelVal = value;
 	}
 
-	ObjectIcon::ObjectIcon()
+	ObjectIcon::ObjectIcon() :
+		Flipped( false ),
+		DisplayText( Localization::Words_NONE ),
+		PrevSetRatio( 0 )
 	{
 		InitializeInstanceFields();
 		MyOscillateParams.Set( 2, 1.02f,.215f );
@@ -231,7 +234,8 @@ namespace CloudberryKingdom
 		return std::vector<std::wstring> ();
 	}
 
-	PictureIcon::PictureIcon( const std::shared_ptr<SpriteInfo> &info )
+	PictureIcon::PictureIcon( const std::shared_ptr<SpriteInfo> &info ) :
+		NormalWidth( 0 )
 	{
 		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->Set( info );
@@ -247,25 +251,29 @@ namespace CloudberryKingdom
 		this->NormalWidth = 161 * 1.31f * info->Size.X / 62;
 	}
 
-	PictureIcon::PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width )
+	PictureIcon::PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width ) :
+		NormalWidth( 0 )
 	{
 		this->DisplayText = DisplayText;
 		Init( Tools::TextureWad->FindByName( IconTextureString ), BarColor, Width );
 	}
 
-	PictureIcon::PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width, Vector2 HitPadding )
+	PictureIcon::PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width, Vector2 HitPadding ) :
+		NormalWidth( 0 )
 	{
 		this->DisplayText = DisplayText;
 		this->HitPadding = HitPadding;
 		Init( Tools::TextureWad->FindByName( IconTextureString ), BarColor, Width );
 	}
 
-	PictureIcon::PictureIcon( const std::wstring &IconTextureString, Color BarColor, float Width )
+	PictureIcon::PictureIcon( const std::wstring &IconTextureString, Color BarColor, float Width ) :
+		NormalWidth( 0 )
 	{
 		Init( Tools::TextureWad->FindByName( IconTextureString ), BarColor, Width );
 	}
 
-	PictureIcon::PictureIcon( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width )
+	PictureIcon::PictureIcon( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width ) :
+		NormalWidth( 0 )
 	{
 		Init( IconTexture, BarColor, Width );
 	}

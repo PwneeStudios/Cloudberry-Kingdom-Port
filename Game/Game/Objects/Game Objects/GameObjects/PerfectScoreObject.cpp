@@ -176,7 +176,22 @@ namespace CloudberryKingdom
 bool PerfectScoreObject::GlobalObtained = false;
 int PerfectScoreObject::GlobalBonus = 0;
 
-	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier ) { }
+	PerfectScoreObject::PerfectScoreObject( bool Global, bool ShowMultiplier ) :
+		Eligible( false ),
+		_Obtained( false ),
+		_BaseBonus( 0 ),
+		BonusIncrement( 0 ),
+		MaxBonus( 0 ),
+		_NextBonus( 0 ),
+		BonusCount( 0 ),
+		IneligibleOnDeath( false ),
+		Count( 0 ),
+		Global( false ),
+		ShowMultiplier( false ),
+		AddedOnce( false )
+	{
+	}
+
 	std::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
 	{
 		GUI_Panel::GUI_Panel_Construct();

@@ -138,7 +138,8 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Cape::Cape( const std::shared_ptr<Bob> &bob, CapeType Type, const std::shared_ptr<BobPhsx> &Phsx_Renamed )
+	Cape::Cape( const std::shared_ptr<Bob> &bob, CapeType Type, const std::shared_ptr<BobPhsx> &Phsx_Renamed ) :
+		LastPhsxUpdate( 0 )
 	{
 		InitializeInstanceFields();
 		MyBob = bob;

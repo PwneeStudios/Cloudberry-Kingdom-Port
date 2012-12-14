@@ -27,7 +27,11 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	MultiplierUp::MultiplierUp() { }
+	MultiplierUp::MultiplierUp() :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -38,7 +42,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
 	}
 
-	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) { }
+	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();

@@ -9,7 +9,9 @@ struct SamplerState
 	GfxTextureAddressMode AddressU;
 	GfxTextureAddressMode AddressV;
 
-	SamplerState()
+	SamplerState() :
+		AddressU( GfxTextureAddressMode_Clamp ),
+		AddressV( GfxTextureAddressMode_Clamp ),
 	{
 	}
 

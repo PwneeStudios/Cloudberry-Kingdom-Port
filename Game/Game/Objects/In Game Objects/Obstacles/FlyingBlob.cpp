@@ -159,7 +159,28 @@ namespace CloudberryKingdom
 		Box2->SwapToCurrent();
 	}
 
-	FlyingBlob::FlyingBlob( bool BoxesOnly )
+	FlyingBlob::FlyingBlob( bool BoxesOnly ) :
+		Period( 0 ),
+		Offset( 0 ),
+		HasArrived( false ),
+		RemoveOnArrival( false ),
+		ArrivedRadius( 0 ),
+		MaxVel( 0 ),
+		MaxAcc( 0 ),
+		DistAccMod( 0 ),
+		FinalizedParams( false ),
+		Damp( 0 ),
+		DampRange( 0 ),
+		GiveVelocity( false ),
+		MyMoveType( PrescribedMoveType_LINE ),
+		MyPhsxType( PhsxType_PRESCRIBED ),
+		MyColor( BlobColor_GREEN ),
+		MyAnimSpeed( 0 ),
+		DeleteOnDeath( false ),
+		Life( 0 ),
+		StartLife( 0 ),
+		Direction( 0 ),
+		NeverSkip( false )
 	{
 		InitializeInstanceFields();
 		Construct( BoxesOnly );
@@ -191,7 +212,28 @@ namespace CloudberryKingdom
 		MyObject->Update();
 	}
 
-	FlyingBlob::FlyingBlob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad )
+	FlyingBlob::FlyingBlob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+		Period( 0 ),
+		Offset( 0 ),
+		HasArrived( false ),
+		RemoveOnArrival( false ),
+		ArrivedRadius( 0 ),
+		MaxVel( 0 ),
+		MaxAcc( 0 ),
+		DistAccMod( 0 ),
+		FinalizedParams( false ),
+		Damp( 0 ),
+		DampRange( 0 ),
+		GiveVelocity( false ),
+		MyMoveType( PrescribedMoveType_LINE ),
+		MyPhsxType( PhsxType_PRESCRIBED ),
+		MyColor( BlobColor_GREEN ),
+		MyAnimSpeed( 0 ),
+		DeleteOnDeath( false ),
+		Life( 0 ),
+		StartLife( 0 ),
+		Direction( 0 ),
+		NeverSkip( false )
 	{
 		InitializeInstanceFields();
 		CoreData = std::make_shared<ObjectData>();

@@ -3,7 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	Listener::Listener() { }
+	Listener::Listener() :
+		MyType( Type_ON_DOWN ),
+		TriggeringPlayerIndex( 0 ),
+		RemoveAfterActivation( false ),
+		MyButton( ControllerButtons_A )
+	{
+	}
 	std::shared_ptr<Listener> Listener::Listener_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -16,7 +22,13 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<Listener>( shared_from_this() );
 	}
 
-	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) { }
+	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) :
+		MyType( Type_ON_DOWN ),
+		TriggeringPlayerIndex( 0 ),
+		RemoveAfterActivation( false ),
+		MyButton( ControllerButtons_A )
+	{
+	}
 	std::shared_ptr<Listener> Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
 	{
 		GUI_Panel::GUI_Panel_Construct();

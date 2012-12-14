@@ -5,16 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct EzText;
-}
-
-namespace CloudberryKingdom
-{
-	struct Camera;
-}
-
-namespace CloudberryKingdom
-{
 	struct TextList : public ObjectBase
 	{
 	

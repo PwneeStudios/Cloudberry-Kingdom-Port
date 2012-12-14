@@ -42,7 +42,9 @@ namespace CloudberryKingdom
 		bob->BehaviorLength = BehaviorLength;
 	}
 
-	BobPhsxTime::BobPhsxTime()
+	BobPhsxTime::BobPhsxTime() :
+		CurBehavior( Behavior_PAUSE ),
+		BehaviorLength( 0 )
 	{
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.

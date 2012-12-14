@@ -8,9 +8,7 @@ namespace CloudberryKingdom
 	struct BobPhsxInvert : public BobPhsxNormal
 	{
 
-	
 		static void InitializeStatics();
-
 	
 		enum Behavior
 		{

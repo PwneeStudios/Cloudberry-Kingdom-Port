@@ -5,34 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct PieceSeedData;
-}
-
-namespace CloudberryKingdom
-{
-	struct AutoGen_Parameters;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct Coin_Parameters : public AutoGen_Parameters
 	{
 	
@@ -82,11 +54,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 
-
-		Coin_Parameters()
-		{
-			InitializeInstanceFields();
-		}
+		Coin_Parameters();
 	};
 
 	struct Coin_AutoGen : public AutoGen

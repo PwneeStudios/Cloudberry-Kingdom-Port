@@ -1,7 +1,10 @@
 #include "GraphicsDevice.h"
 #include "PresentationParameters.h"
 
-GraphicsDevice::GraphicsDevice()
+GraphicsDevice::GraphicsDevice() :
+	RasterizerState( GfxRasterizerState_CullNone ),
+	BlendState( GfxBlendState_AlphaBlend ),
+	DepthStencilState( GfxDepthStencilState_None )
 {
 	SamplerStates.resize( 3 );
 

@@ -34,7 +34,10 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		BlockEmitter_Parameters()
+		BlockEmitter_Parameters() :
+			MyStyle( Style_FULL ),
+			LastUsedTimeStamp( 0 ),
+			StepCutoff( 0 )
 		{
 			InitializeInstanceFields();
 		}

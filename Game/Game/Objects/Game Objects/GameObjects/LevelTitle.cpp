@@ -27,7 +27,11 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	LevelTitle::LevelTitle( const std::wstring &str ) { }
+	LevelTitle::LevelTitle( const std::wstring &str ) :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -38,7 +42,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<LevelTitle>( shared_from_this() );
 	}
 
-	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
+	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();

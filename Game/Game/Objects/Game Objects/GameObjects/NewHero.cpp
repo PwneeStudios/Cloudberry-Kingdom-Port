@@ -26,7 +26,11 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	NewHero::NewHero( const std::wstring &str ) { }
+	NewHero::NewHero( const std::wstring &str ) :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -37,7 +41,11 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<NewHero>( shared_from_this() );
 	}
 
-	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) { }
+	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) :
+		Perma( false ),
+		Count( 0 )
+	{
+	}
 	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		GUI_Panel::GUI_Panel_Construct();

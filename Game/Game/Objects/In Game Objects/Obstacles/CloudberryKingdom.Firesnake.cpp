@@ -42,7 +42,9 @@ namespace CloudberryKingdom
 		_CircleDeath::Init( pos, level );
 	}
 
-	Firesnake::Firesnake( bool BoxesOnly )
+	Firesnake::Firesnake( bool BoxesOnly ) :
+		Period( 0 ),
+		Offset( 0 )
 	{
 		if ( !BoxesOnly )
 		{

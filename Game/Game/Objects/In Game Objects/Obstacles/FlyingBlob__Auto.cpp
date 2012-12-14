@@ -3,7 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	FlyingBlob_Parameters::FlyingBlob_Parameters()
+	FlyingBlob_Parameters::FlyingBlob_Parameters() :
+		Motion( MotionType_VERTICAL ),
+		TunnelCeiling( false ),
+		TunnelDisplacement( 0 ),
+		TunnelMotionType( MotionType_VERTICAL )
 	{
 		InitializeInstanceFields();
 	}

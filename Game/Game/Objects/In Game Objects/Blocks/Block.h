@@ -5,51 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct Rand;
-}
-
-namespace CloudberryKingdom
-{
-	struct BlockBase;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectData;
-}
-
-namespace CloudberryKingdom
-{
-	struct AABox;
-}
-
-namespace CloudberryKingdom
-{
-	struct BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct NormalBlockDraw;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
 	struct BlockData : public ObjectData
 	{
 	
@@ -147,10 +102,7 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		BlockData()
-		{
-			InitializeInstanceFields();
-		}
+		BlockData();
 	};
 
 	struct BlockBase : public ObjectBase

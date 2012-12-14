@@ -47,7 +47,13 @@ namespace CloudberryKingdom
 		_BoxDeath::Init( pos, level );
 	}
 
-	Serpent::Serpent( bool BoxesOnly )
+	Serpent::Serpent( bool BoxesOnly ) :
+		Offset( 0 ),
+		UpT( 0 ),
+		DownT( 0 ),
+		WaitT1( 0 ),
+		WaitT2( 0 ),
+		Exposed( false )
 	{
 		if ( !BoxesOnly )
 		{

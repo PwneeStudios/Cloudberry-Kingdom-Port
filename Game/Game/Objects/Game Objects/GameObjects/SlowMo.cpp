@@ -3,7 +3,8 @@
 namespace CloudberryKingdom
 {
 
-	SlowMo::SlowMo() {}
+	SlowMo::SlowMo() :
+		Speed( 0 ) { }
 	std::shared_ptr<SlowMo> SlowMo::SlowMo_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();

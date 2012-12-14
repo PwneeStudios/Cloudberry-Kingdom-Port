@@ -24,6 +24,8 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool IsDopplegangerInvert;
 
+		GameFlags();
+
 		void SetToDefault();
 	};
 

@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 			/// </summary>
 		
 			bool Hallway;
+
+			_Special() : Hallway( false ) { }
 		};
 	
 		Param FloaterMinDist, FloaterSparsity, FloaterPeriod, FloaterMaxAngle, FloaterPlaceDelay;
