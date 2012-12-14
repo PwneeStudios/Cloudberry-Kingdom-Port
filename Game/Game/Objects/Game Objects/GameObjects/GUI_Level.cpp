@@ -86,9 +86,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct()
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		DoInit( false );
 
 		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
@@ -104,9 +104,9 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool SlideIn )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		DoInit( SlideIn );
 
 		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
@@ -122,9 +122,9 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( int LevelNum )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		DoInit( false );
 		PreventRelease = false;
 

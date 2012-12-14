@@ -34,9 +34,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct()
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( Vector2(), 1, false );
 
 		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
@@ -49,9 +49,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( shift, scale, perma );
 
 		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );

@@ -101,9 +101,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_LivesLeft> GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		SetParams();
 
 		// Object is carried over through multiple levels, so prevent it from being released.

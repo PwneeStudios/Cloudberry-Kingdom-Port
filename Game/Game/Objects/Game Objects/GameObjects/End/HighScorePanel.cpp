@@ -90,9 +90,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
+		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		InitializeInstanceFields();
 		MultiInit( false, scorelist, levellist );
 
 		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
@@ -104,9 +104,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
 	{
+		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		InitializeInstanceFields();
 		MultiInit( Instant, scorelist, levellist );
 
 		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );

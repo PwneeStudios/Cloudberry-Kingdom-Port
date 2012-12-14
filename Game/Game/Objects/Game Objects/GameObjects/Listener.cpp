@@ -12,9 +12,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<Listener> Listener::Listener_Construct()
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Active = true;
 		PauseOnPause = true;
 		getCore()->Show = false;
@@ -31,9 +31,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<Listener> Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		if ( button == ControllerButtons_A )
 		{
 			if ( MyButton2 == 0 )

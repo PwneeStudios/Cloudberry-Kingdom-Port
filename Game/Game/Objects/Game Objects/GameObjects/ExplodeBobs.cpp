@@ -14,9 +14,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<ExplodeBobs> ExplodeBobs::ExplodeBobs_Construct( int speed )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Active = true;
 		PauseOnPause = true;
 

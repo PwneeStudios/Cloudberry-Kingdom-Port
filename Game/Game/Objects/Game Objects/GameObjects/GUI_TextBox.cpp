@@ -251,9 +251,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos )
 	{
+		InitializeInstanceFields();
 		GUI_Text::GUI_Text_Construct( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false );
 
-		InitializeInstanceFields();
 		Init( InitialText, pos, Vector2(1), 1 );
 
 		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
@@ -270,9 +270,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale )
 	{
+		InitializeInstanceFields();
 		GUI_Text::GUI_Text_Construct( InitialText, pos, false, Resources::LilFont );
 
-		InitializeInstanceFields();
 		Init( InitialText, pos, scale, fontscale );
 
 		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );

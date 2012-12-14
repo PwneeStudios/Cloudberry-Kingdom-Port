@@ -67,9 +67,8 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Timer> GUI_Timer::GUI_Timer_Construct()
 	{
-		GUI_Timer_Base::GUI_Timer_Base_Construct();
-
 		InitializeInstanceFields();
+		GUI_Timer_Base::GUI_Timer_Base_Construct();
 
 		return std::static_pointer_cast<GUI_Timer>( shared_from_this() );
 	}

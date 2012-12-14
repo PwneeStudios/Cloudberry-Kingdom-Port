@@ -89,9 +89,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		DoInit( false );
 
 		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
@@ -106,9 +106,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		DoInit( SlideIn );
 
 		return std::static_pointer_cast<GUI_Score>( shared_from_this() );

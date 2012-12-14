@@ -146,8 +146,8 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Blobs> GUI_Blobs::GUI_Blobs_Construct()
 	{
-		GUI_Panel::GUI_Panel_Construct();
 		InitializeInstanceFields();
+		GUI_Panel::GUI_Panel_Construct();
 
 		return std::static_pointer_cast<GUI_Blobs>( shared_from_this() );
 	}

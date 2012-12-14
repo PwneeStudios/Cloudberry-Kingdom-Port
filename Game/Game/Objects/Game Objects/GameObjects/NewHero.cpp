@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( str, Vector2(), 1, false );
 
 		return std::static_pointer_cast<NewHero>( shared_from_this() );
@@ -48,9 +48,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( str, shift, scale, perma );
 
 		return std::static_pointer_cast<NewHero>( shared_from_this() );

@@ -31,9 +31,8 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct()
 	{
-		GUI_Panel::GUI_Panel_Construct();
-
 		InitializeInstanceFields();
+		GUI_Panel::GUI_Panel_Construct();
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
@@ -48,9 +47,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( word, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
@@ -66,9 +65,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( word, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
@@ -84,9 +83,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( word, pos, true, style, Resources::Font_Grobold42 );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
@@ -102,9 +101,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( text, pos, true, Style_BUBBLE, Resources::Font_Grobold42 );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
@@ -120,9 +119,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, Resources::Font_Grobold42 );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
@@ -138,9 +137,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font )
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		Init( text, pos, centered, Style_BUBBLE, font );
 
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );

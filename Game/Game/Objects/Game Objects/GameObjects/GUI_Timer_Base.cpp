@@ -109,9 +109,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GUI_Timer_Base> GUI_Timer_Base::GUI_Timer_Base_Construct()
 	{
+		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		InitializeInstanceFields();
 		MyPile = std::make_shared<DrawPile>();
 		EnsureFancy();
 
