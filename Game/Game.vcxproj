@@ -365,6 +365,7 @@
     <ClCompile Include="Hacks\XNA\GamePad.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
+    <ClCompile Include="Hacks\XNA\Mouse.cpp" />
     <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="MasterHack.cpp" />

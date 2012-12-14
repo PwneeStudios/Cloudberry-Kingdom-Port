@@ -4,9 +4,8 @@
 #include <vector>
 #include <string>
 
-std::vector<std::wstring> ArtList()
+void ArtList( std::vector<std::wstring> &v )
 {
-	std::vector<std::wstring> v;
 	v.reserve( 800 );
 
 	v.push_back( _T( "Content/Art/Transparent.png" ) );
@@ -747,8 +746,6 @@ std::vector<std::wstring> ArtList()
 	v.push_back( _T( "Content/Art/Title/Categories/Arcade/Scene_Kobbler.png" ) );
 	v.push_back( _T( "Content/Art/Title/Categories/Arcade/Scene_Kobbler_Blur.png" ) );
 	v.push_back( _T( "Content/Art/Title/Categories/Story/Scene_Princess.png" ) );
-
-	return v;
 }
 
 #endif

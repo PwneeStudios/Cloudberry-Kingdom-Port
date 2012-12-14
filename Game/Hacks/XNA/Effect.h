@@ -7,9 +7,7 @@
 struct Effect
 {
 
-
-
-	std::shared_ptr<struct EffectTechnique> CurrentTechnique;
+	std::shared_ptr<EffectTechnique> CurrentTechnique;
 
 	Effect() 
 	{
@@ -17,15 +15,15 @@ struct Effect
 	}
 
 	// FIXME: Implement.
-	std::shared_ptr<struct EffectParameter> Parameters( const std::wstring &name )
+	std::shared_ptr<EffectParameter> Parameters( const std::wstring &name )
 	{
 		return 0;
 	}
 
 	// FIXME: Implement.
-	std::shared_ptr<struct EffectTechnique> Techniques( const std::wstring &name )
+	std::shared_ptr<EffectTechnique> Techniques( const std::wstring &name )
 	{
-		return 0;
+		return CurrentTechnique;
 	}
 
 };
