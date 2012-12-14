@@ -27,6 +27,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 	ClrTextFx::ClrTextFx() :
 		Guid( 0 ),
 		Price( 0 ),
+		Name( Localization::Words_NONE ),
 		UsePaintTexture( true )
 	{
 	}

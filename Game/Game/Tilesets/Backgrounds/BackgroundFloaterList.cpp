@@ -46,7 +46,12 @@ namespace CloudberryKingdom
 			( *floater )->ChangeParallax( PrevParallax, Parallax );
 	}
 
-	BackgroundFloaterList::BackgroundFloaterList()
+	BackgroundFloaterList::BackgroundFloaterList() :
+		Foreground( false ),
+		Fixed( false ),
+		Show( false ),
+		Parallax( false ),
+		DoPreDraw( false )
 	{
 		InitializeInstanceFields();
 		//Floaters = std::vector<std::shared_ptr<BackgroundFloater> >();

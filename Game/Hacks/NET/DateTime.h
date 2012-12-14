@@ -6,14 +6,13 @@
 struct DateTime
 {
 
-
 	int Time;
 
 	DateTime() : Time( 0 )
 	{
 	}
 
-	DateTime( int year, int month, int day )
+	DateTime( int year, int month, int day ) : Time( 0 )
 	{
 	}
 

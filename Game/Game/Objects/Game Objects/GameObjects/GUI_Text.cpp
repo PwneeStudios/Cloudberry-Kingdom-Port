@@ -21,7 +21,14 @@ namespace CloudberryKingdom
 		return text;
 	}
 
-	GUI_Text::GUI_Text() { }
+	GUI_Text::GUI_Text() :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -31,7 +38,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos ) { }
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -42,7 +56,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, bool centered ) { }
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, bool centered ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -53,7 +74,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, Style style ) { }
+	GUI_Text::GUI_Text( Localization::Words word, Vector2 pos, Style style ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -64,7 +92,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos ) { }
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -75,7 +110,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered ) { }
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered )
 	{
 		GUI_Panel::GUI_Panel_Construct();
@@ -86,7 +128,14 @@ namespace CloudberryKingdom
 		return std::static_pointer_cast<GUI_Text>( shared_from_this() );
 	}
 
-	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font ) { }
+	GUI_Text::GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font ) :
+		MyStyle( Style_BUBBLE ),
+		NoPosMod( false ),
+		Oscillate_Renamed( false ),
+		OscillationHeight( 0 ),
+		OscillationSpeed( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Text> GUI_Text::GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font )
 	{
 		GUI_Panel::GUI_Panel_Construct();

@@ -14,7 +14,11 @@ namespace CloudberryKingdom
 	{
 	}
 
-	TextList::TextList()
+	TextList::TextList() :
+		Index( 0 ),
+		ContinuousIndex( 0 ),
+		FadeOut( 0 ),
+		Alpha( 0 )
 	{
 		Text = std::vector<EzText*>();
 		SetIndex( 0 );

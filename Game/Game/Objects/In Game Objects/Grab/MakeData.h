@@ -85,10 +85,7 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 	
-		MakeData()
-		{
-			InitializeInstanceFields();
-		}
+		MakeData();
 	};
 }
 

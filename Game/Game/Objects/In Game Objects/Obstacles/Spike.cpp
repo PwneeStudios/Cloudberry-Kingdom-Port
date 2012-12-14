@@ -103,7 +103,16 @@ namespace CloudberryKingdom
 		Box->SwapToCurrent();
 	}
 
-	Spike::Spike( bool BoxesOnly )
+	Spike::Spike( bool BoxesOnly ) :
+		Dir( 0 ),
+		Angle( 0 ),
+		Offset( 0 ),
+		UpT( 0 ),
+		DownT( 0 ),
+		WaitT1( 0 ),
+		WaitT2( 0 ),
+		Exposed( false ),
+		SetHeight( 0 )
 	{
 		Construct( BoxesOnly );
 	}
@@ -137,7 +146,16 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Spike::Spike( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad )
+	Spike::Spike( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+		Dir( 0 ),
+		Angle( 0 ),
+		Offset( 0 ),
+		UpT( 0 ),
+		DownT( 0 ),
+		WaitT1( 0 ),
+		WaitT2( 0 ),
+		Exposed( false ),
+		SetHeight( 0 )
 	{
 		std::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();

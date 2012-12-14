@@ -6,31 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct LineSpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	struct Boulder : public _CircleDeath, public IBound
 	{
 	
@@ -49,11 +24,10 @@ namespace CloudberryKingdom
 
 			std::shared_ptr<LineSpriteInfo> Chain;
 
-		
 			void InitializeInstanceFields();
 
-
-			BoulderTileInfo()
+			BoulderTileInfo() :
+				Radius( 0 )
 			{
 				InitializeInstanceFields();
 			}

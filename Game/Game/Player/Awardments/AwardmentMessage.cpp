@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award ) { }
+	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award ) { InitializeInstanceFields(); }
 	std::shared_ptr<AwardmentMessage> AwardmentMessage::AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award )
 	{
 

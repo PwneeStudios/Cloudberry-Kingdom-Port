@@ -5,24 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct CircleBox;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct _CircleDeath : public _Death
 	{
 	

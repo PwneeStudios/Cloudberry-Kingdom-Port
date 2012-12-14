@@ -111,4 +111,23 @@ namespace CloudberryKingdom
 		TopLikeBottom_Thin = false;
 		BlocksAsIs = false;
 	}
+
+	MakeData::MakeData() :
+		ComputerWaitAtStart( false ),
+		SparsityMultiplier( 0 ),
+		NumInitialBobs( 0 ),
+		MinStartPositionsToMake( 0 ),
+		InitialPlats( false ),
+		InitialCamZone( false ),
+		FinalPlats( false ),
+		SkinnyStart( false ),
+		SetTRCamBound( false ),
+		TopLikeBottom( false ),
+		TopLikeBottom_Thin( false ),
+		BlocksAsIs( false ),
+		Index( 0 ),
+		OutOf( 0 )
+	{
+		InitializeInstanceFields();
+	}
 }

@@ -34,6 +34,10 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
+	GameFlags::GameFlags() : IsTethered( false ), IsDoppleganger( false ), IsDopplegangerInvert( false )
+	{
+	}
+
 	void GameFlags::SetToDefault()
 	{
 		IsTethered = IsDoppleganger = IsDopplegangerInvert = false;
@@ -1660,9 +1664,16 @@ namespace CloudberryKingdom
 		ShowHelpNotes = true;
 		FadeToBlackBeforeReturn = false;
 		FadingToReturn = false;
+		Loading = false;
+		SuppressQuickSpawn = false;
+		SuppressQuickSpawn_External = false;
 		AllowQuickJoin = false;
 		DrawObjectText = false;
+		CurPlayer = 0;
 		SuppressSongInfo = false;
+		BlackAlpha = 0;
+		FadeOutSpeed = 0;
+		FadeInSpeed = 0;
 		MyGameObjects = GameObjVec();
 		NewGameObjects = GameObjVec();
 		TakeOnce = false;
@@ -1685,12 +1696,19 @@ namespace CloudberryKingdom
 		CreationTime = 0;
 		GameObjectsAreLocked = false;
 		SkipBackgroundPhsx = false;
+		SetToReturnToCode = 0;
+		_IsSetToReturnTo = false;
 		ClearToDoOnReturnTo = true;
 		FreeReset = false;
+		PauseGame = false;
+		PauseLevel = false;
+		SoftPause = false;
 		PhsxStepsToDo = 2;
+		SuppressSoundForExtraSteps = false;
 		PhsxCount = 0;
 		ForceLevelZoomBeforeDraw = 0;
 		DoForceZoom = false;
+		ForceTargetZoom = 0;
 		ToDoOnDeath = std::vector<std::shared_ptr<Lambda> >();
 		DoneDyingDistance = 1200;
 		DoneDyingCount = 60;

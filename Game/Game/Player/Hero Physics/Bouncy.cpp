@@ -49,7 +49,11 @@ namespace CloudberryKingdom
 	}
 
 
-	BobPhsxBouncy::BobPhsxBouncy()
+	BobPhsxBouncy::BobPhsxBouncy() :
+		InitializedAnim( false ),
+		SuperBounce( 0 ),
+		SuperBounceGraceCount( 0 ),
+		SuperBounceGrace( 0 )
 	{
 		InitializeInstanceFields();
 	}

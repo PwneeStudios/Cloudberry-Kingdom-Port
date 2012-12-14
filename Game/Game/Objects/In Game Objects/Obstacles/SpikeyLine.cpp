@@ -41,7 +41,10 @@ namespace CloudberryKingdom
 		}
 	}
 
-	SpikeyLine::SpikeyLine( bool BoxesOnly )
+	SpikeyLine::SpikeyLine( bool BoxesOnly ) :
+		Period( 0 ),
+		Offset( 0 ),
+		OffScreen( 0 )
 	{
 		InitializeInstanceFields();
 		_CircleDeath::Construct( BoxesOnly );

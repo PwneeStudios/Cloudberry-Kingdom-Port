@@ -15,7 +15,10 @@ namespace CloudberryKingdom
 		GameObject::ReleaseBody();
 	}
 
-	TimerWarning::TimerWarning()
+	TimerWarning::TimerWarning() :
+		t( 0 ),
+		Threshhold( 0 ),
+		SubThreshholdCount( 0 )
 	{
 		// Object is carried over through multiple levels, so prevent it from being released.
 		InitializeInstanceFields();

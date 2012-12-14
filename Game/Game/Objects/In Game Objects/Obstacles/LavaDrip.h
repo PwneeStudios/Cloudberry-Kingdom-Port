@@ -5,21 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct LineSpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	struct LavaDrip : public _BoxDeath
 	{
 	

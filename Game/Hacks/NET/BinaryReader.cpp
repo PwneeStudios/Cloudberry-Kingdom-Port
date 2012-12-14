@@ -59,7 +59,7 @@ std::wstring BinaryReader::ReadString()
 	file_->Read( buffer, length );
 	buffer[ length ] = '\0';
 	std::wstring str = BytesToWstring( buffer, buffer + length );
-	delete buffer;
+	delete[] buffer;
 
 	return str;
 }

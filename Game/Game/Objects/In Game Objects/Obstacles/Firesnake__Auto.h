@@ -27,7 +27,8 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		Firesnake_Parameters()
+		Firesnake_Parameters() :
+			Make( false )
 		{
 			InitializeInstanceFields();
 		}

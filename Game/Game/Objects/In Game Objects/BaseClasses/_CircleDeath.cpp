@@ -14,11 +14,13 @@ namespace CloudberryKingdom
 		getCore()->ContinuousEnabled = true;
 	}
 
-	_CircleDeath::_CircleDeath()
+	_CircleDeath::_CircleDeath() :
+		Radius( 0 )
 	{
 	}
 
-	_CircleDeath::_CircleDeath( bool BoxesOnly )
+	_CircleDeath::_CircleDeath( bool BoxesOnly ) :
+		Radius( 0 )
 	{
 		Construct( BoxesOnly );
 	}

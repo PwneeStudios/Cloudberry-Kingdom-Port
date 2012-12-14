@@ -16,7 +16,16 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	PlayerData::PlayerData()
+	PlayerData::PlayerData() :
+		MyPlayerIndex( PlayerIndex_One ),
+		Exists( false ),
+		IsAlive( false ),
+		CampaignLevel( 0 ),
+		CampaignCoins( 0 ),
+		MyIndex( 0 ),
+		RandomNameIndex( 0 ),
+		KeyboardUsedLast( 0 ),
+		ColorSchemeIndex( 0 )
 	{
 		InitializeInstanceFields();
 		AlwaysSave = true;

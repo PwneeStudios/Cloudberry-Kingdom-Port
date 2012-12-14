@@ -225,7 +225,14 @@ namespace CloudberryKingdom
 		return static_cast<wchar_t>( _c );
 	}
 
-	GUI_TextBox::GUI_TextBox() { }
+	GUI_TextBox::GUI_TextBox() :
+		HasFocus( false ),
+		Canceled( false ),
+		MaxLength( 0 ),
+		LimitLength( false ),
+		DoRecenter( false )
+	{
+	}
 	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct()
 	{
 		GUI_Text::GUI_Text_Construct();
@@ -233,7 +240,14 @@ namespace CloudberryKingdom
 	}
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) : GUI_Text( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false )
-	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) { }
+	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) :
+		HasFocus( false ),
+		Canceled( false ),
+		MaxLength( 0 ),
+		LimitLength( false ),
+		DoRecenter( false )
+	{
+	}
 	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos )
 	{
 		GUI_Text::GUI_Text_Construct( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false );
@@ -245,7 +259,14 @@ namespace CloudberryKingdom
 	}
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont )
-	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) { }
+	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) :
+		HasFocus( false ),
+		Canceled( false ),
+		MaxLength( 0 ),
+		LimitLength( false ),
+		DoRecenter( false )
+	{
+	}
 	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale )
 	{
 		GUI_Text::GUI_Text_Construct( InitialText, pos, false, Resources::LilFont );

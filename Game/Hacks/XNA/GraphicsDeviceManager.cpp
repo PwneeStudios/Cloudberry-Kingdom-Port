@@ -2,14 +2,15 @@
 #include "GraphicsDeviceManager.h"
 #include "PresentationParameters.h"
 
-GraphicsDeviceManager::GraphicsDeviceManager()
+GraphicsDeviceManager::GraphicsDeviceManager() :
+	IsFullScreen( false ),
+	PreferredBackBufferWidth( 1280 ),
+	PreferredBackBufferHeight( 720 )
 {
 	MyGraphicsDevice = std::make_shared<GraphicsDevice>();
-
-	IsFullScreen = false;
 	
-	MyGraphicsDevice->PP->BackBufferWidth = PreferredBackBufferWidth = 1280;
-	MyGraphicsDevice->PP->BackBufferHeight = PreferredBackBufferHeight = 720;
+	MyGraphicsDevice->PP->BackBufferWidth = PreferredBackBufferWidth;
+	MyGraphicsDevice->PP->BackBufferHeight = PreferredBackBufferHeight;
 }
 
 void GraphicsDeviceManager::ToggleFullScreen()

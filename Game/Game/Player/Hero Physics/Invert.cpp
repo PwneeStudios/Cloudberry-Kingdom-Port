@@ -46,7 +46,10 @@ namespace CloudberryKingdom
 		bob->Count = Count;
 	}
 
-	BobPhsxInvert::BobPhsxInvert()
+	BobPhsxInvert::BobPhsxInvert() :
+		CurBehavior( Behavior_REGULAR ),
+		BehaviorLength( 0 ),
+		Count( 0 )
 	{
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.

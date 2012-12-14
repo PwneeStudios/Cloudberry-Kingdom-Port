@@ -59,7 +59,12 @@ namespace CloudberryKingdom
 		MaxTime = 60;
 	}
 
-	GUI_Timer::GUI_Timer() { }
+	GUI_Timer::GUI_Timer() :
+		CoinTimeValue( 0 ),
+		MinLevelStartTimeValue( 0 ),
+		MaxTime( 0 )
+	{
+	}
 	std::shared_ptr<GUI_Timer> GUI_Timer::GUI_Timer_Construct()
 	{
 		GUI_Timer_Base::GUI_Timer_Base_Construct();

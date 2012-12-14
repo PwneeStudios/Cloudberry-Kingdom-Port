@@ -142,6 +142,34 @@ namespace CloudberryKingdom
 		Objects = ObjectVec();
 	}
 
+	BlockData::BlockData() :
+		Safe( false ),
+		Finalized( false ),
+		NoExtend( false ),
+		UseCustomCenterAsParent( false ),
+		MyOrientation( PieceQuad::Orientation_NORMAL ),
+		RemoveOverlappingObjects( false ),
+		NonTopUsed( false ),
+		DisableFlexibleHeight( false ),
+		DeleteIfTopOnly( false ),
+		StoodOn( false ),
+		HitHead( false ),
+		DoNotPushHard( false ),
+		GivesVelocity( false ),
+		GroundSpeed( 0 ),
+		Layer( 0 ),
+		UseTopOnlyTexture( false ),
+		Ceiling( false ),
+		CeilingDraw( false ),
+		BlobsOnTop( false ),
+		Virgin( false ),
+		EndPiece( false ),
+		StartPiece( false ),
+		OnlyCollidesWithLowerLayers( false )
+	{
+		InitializeInstanceFields();
+	}
+
 	const std::shared_ptr<AABox> &BlockBase::getBox() const
 	{
 		return MyBox;
@@ -162,7 +190,8 @@ namespace CloudberryKingdom
 		return BlockCoreData;
 	}
 
-	BlockBase::BlockBase()
+	BlockBase::BlockBase() :
+		Active( false )
 	{
 		BlockCoreData = std::make_shared<BlockData>();
 		CoreData = std::dynamic_pointer_cast<ObjectData>( getBlockCore() );

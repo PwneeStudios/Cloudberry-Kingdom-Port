@@ -6,28 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	struct Firesnake : public _CircleDeath
 	{
 	

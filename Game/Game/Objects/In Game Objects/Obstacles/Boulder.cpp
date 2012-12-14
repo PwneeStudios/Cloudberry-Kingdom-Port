@@ -75,7 +75,16 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer2 = 8;
 	}
 
-	Boulder::Boulder( bool BoxesOnly )
+	Boulder::Boulder( bool BoxesOnly ) :
+		Angle( 0 ),
+		MaxAngle( 0 ),
+		Length( 0 ),
+		Period( 0 ),
+		Offset( 0 ),
+		AddAngle( 0 ),
+		PivotLocationType( PivotLocationTypes_TOP_BOTTOM ),
+		CorrespondingAngle( 0 ),
+		OffScreen( false )
 	{
 		InitializeInstanceFields();
 		_CircleDeath::Construct( BoxesOnly );

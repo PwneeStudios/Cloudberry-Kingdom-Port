@@ -39,7 +39,13 @@ namespace CloudberryKingdom
 		_BoxDeath::Init( pos, level );
 	}
 
-	LavaDrip::LavaDrip( bool BoxesOnly )
+	LavaDrip::LavaDrip( bool BoxesOnly ) :
+		Offset( 0 ),
+		DownT( 0 ),
+		WaitT( 0 ),
+		PeakT( 0 ),
+		Exposed( false ),
+		Period( 0 )
 	{
 		Construct( BoxesOnly );
 	}

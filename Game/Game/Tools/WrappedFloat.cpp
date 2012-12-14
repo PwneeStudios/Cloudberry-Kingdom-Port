@@ -3,14 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	WrappedBool::WrappedBool( bool val )
+	WrappedBool::WrappedBool( bool val ) :
+		MyBool( val )
 	{
-		MyBool = val;
 	}
 
-	WrappedInt::WrappedInt( int val )
+	WrappedInt::WrappedInt( int val ) :
+		MyInt( val )
 	{
-		MyInt = val;
 	}
 
 	const float &WrappedFloat::getVal()
@@ -26,18 +26,22 @@ namespace CloudberryKingdom
 		Set( value );
 	}
 
-	WrappedFloat::WrappedFloat()
+	WrappedFloat::WrappedFloat() :
+		MyFloat( 0 ),
+		MinVal( 0 ),
+		MaxVal( 0 ),
+		DefaultValue( 0 )
 	{
 		InitializeInstanceFields();
 	}
 
-	WrappedFloat::WrappedFloat( float Val, float MinVal, float MaxVal )
+	WrappedFloat::WrappedFloat( float Val, float MinVal, float MaxVal ) :
+		MinVal( MinVal ),
+		MaxVal( MaxVal )
 	{
 		InitializeInstanceFields();
-		this->MinVal = MinVal;
-		this->MaxVal = MaxVal;
 		this->setVal( Val );
-	DefaultValue = this->getVal();
+		DefaultValue = this->getVal();
 	}
 
 	void WrappedFloat::Set( float val )

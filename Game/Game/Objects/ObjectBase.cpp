@@ -672,5 +672,8 @@ namespace CloudberryKingdom
 		DrawLayer3 = -1;
 		FixSubLayer = false;
 		Released = false;
+
+		// FIXME: Maybe this shouldnt be here but lets try initializing this way.
+		Init();
 	}
 }

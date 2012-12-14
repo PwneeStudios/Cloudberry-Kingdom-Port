@@ -32,6 +32,8 @@ namespace CloudberryKingdom
 			/// A special fill type. One giant circle. All blobs orbit the same point.
 			/// </summary>
 			bool Pinwheel;
+
+			_Special() : Tunnel( false ), Pinwheel( false ) { }
 		};
 	
 		Param Range, Period, KeepUnused, Size;

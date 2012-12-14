@@ -6,36 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct AABox;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-namespace CloudberryKingdom
-{
 	struct Cloud : public _Obstacle
 	{
 	

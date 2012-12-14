@@ -29,6 +29,8 @@ namespace CloudberryKingdom
 			/// One straight block for the ceiling.
 			/// </summary>
 			bool LongCeiling;
+
+			_Special() : CementCeiling( false ), LongCeiling( false ) { }
 		};
 		/// <summary>
 		/// Whether to make the ceiling or not.
@@ -52,7 +54,9 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		Ceiling_Parameters()
+		Ceiling_Parameters() :
+			Make( false ),
+			MyStyle( Style_NORMAL )
 		{
 			InitializeInstanceFields();
 		}

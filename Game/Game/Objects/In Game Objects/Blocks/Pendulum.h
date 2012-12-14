@@ -6,29 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-
-namespace CloudberryKingdom
-{
 	struct Pendulum : public BlockBase, public IBound
 	{
 	

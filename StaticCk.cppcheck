@@ -18,6 +18,6 @@
         <define name=""/>
     </defines>
     <paths>
-        <dir name="C:/Users/Ezra/Desktop/CloudberryKingdomPort/Cloudberry-Kingdom-Port/Game"/>
+        <dir name="./Game"/>
     </paths>
 </project>

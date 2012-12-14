@@ -100,7 +100,22 @@ namespace CloudberryKingdom
 
 	}
 
-	BobPhsxMeat::BobPhsxMeat()
+	BobPhsxMeat::BobPhsxMeat() :
+		LastJumpWasSticky( false ),
+		StepsSinceSide( 0 ),
+		StepsOnSide( 0 ),
+		StickyDuration( 0 ),
+		StickySide( ColType_NO_COL ),
+		IsStuck( false ),
+		CanWallJump( false ),
+		WallJumpCount( 0 ),
+		StickyGracePeriod( 0 ),
+		Max_yVel_ForWallJump( 0 ),
+		SideJumpLength( 0 ),
+		SideJumpStr( 0 ),
+		WantToLandOnTop( false ),
+		StraightUpDuration( 0 ),
+		yVelCutoff( 0 )
 	{
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.

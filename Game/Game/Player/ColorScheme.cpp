@@ -57,7 +57,13 @@ namespace CloudberryKingdom
 		DrawSelf = true;
 	}
 
-	Hat::Hat()
+	Hat::Hat() :
+		Guid( 0 ),
+		Price( 0 ),
+		DrawHead( false ),
+		DrawSelf( false ),
+		AllowsFacialHair( false ),
+		Name( Localization::Words_NONE )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -70,7 +76,13 @@ namespace CloudberryKingdom
 		AssociatedAward.reset();
 	}
 
-	Hat::Hat( const std::wstring &QuadName )
+	Hat::Hat( const std::wstring &QuadName ) :
+		Guid( 0 ),
+		Price( 0 ),
+		DrawHead( false ),
+		DrawSelf( false ),
+		AllowsFacialHair( false ),
+		Name( Localization::Words_NONE )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -83,7 +95,13 @@ namespace CloudberryKingdom
 		AssociatedAward.reset();
 	}
 
-	Hat::Hat( const std::wstring &QuadName, bool DrawHead )
+	Hat::Hat( const std::wstring &QuadName, bool DrawHead ) :
+		Guid( 0 ),
+		Price( 0 ),
+		DrawHead( false ),
+		DrawSelf( false ),
+		AllowsFacialHair( false ),
+		Name( Localization::Words_NONE )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -96,7 +114,13 @@ namespace CloudberryKingdom
 		AssociatedAward.reset();
 	}
 
-	Hat::Hat( const std::wstring &QuadName, bool DrawHead, bool DrawSelf )
+	Hat::Hat( const std::wstring &QuadName, bool DrawHead, bool DrawSelf ) :
+		Guid( 0 ),
+		Price( 0 ),
+		DrawHead( false ),
+		DrawSelf( false ),
+		AllowsFacialHair( false ),
+		Name( Localization::Words_NONE )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
