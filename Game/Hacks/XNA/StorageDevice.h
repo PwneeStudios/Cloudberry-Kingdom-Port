@@ -4,10 +4,9 @@
 struct StorageDevice
 {
 
-
-
 	bool IsConnected;
 
+	StorageDevice() : IsConnected( false ) { }
 };
 
 #endif

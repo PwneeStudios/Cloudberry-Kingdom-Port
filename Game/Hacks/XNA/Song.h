@@ -4,12 +4,15 @@
 struct Song
 {
 
-
-
 	struct
 	{
 		double TotalSeconds;
 	} Duration;
+
+	Song()
+	{
+		Duration.TotalSeconds = 0;
+	}
 
 };
 
