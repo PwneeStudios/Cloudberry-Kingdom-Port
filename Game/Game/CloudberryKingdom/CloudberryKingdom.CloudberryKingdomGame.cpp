@@ -1774,6 +1774,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::InitializeInstanceFields()
 	{
+		LogoScreenPropUp = false;
+
 		Resolutions = std::vector<ResolutionGroup>( 4 );
 #if defined(WINDOWS)
 		_DrawMouseBackIcon = false;
