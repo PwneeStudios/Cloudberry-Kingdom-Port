@@ -603,6 +603,8 @@ namespace CloudberryKingdom
 
 	ObjectClass::ObjectClass( const std::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
 	{
+		InitializeInstanceFields();
+	
 		// Pulled out into ObjectClass_PostConstruct_3params
 		//InitializeInstanceFields();
 		//LoadingRunSpeed = obj->LoadingRunSpeed;

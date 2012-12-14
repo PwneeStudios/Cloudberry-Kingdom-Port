@@ -165,6 +165,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Panel::GUI_Panel() :
+		NoBackIfNoCaller( false ),
 		_Control( 0 ),
 		Active( false ),
 		ReturnToCallerDelay( 0 ),
@@ -187,6 +188,7 @@ namespace CloudberryKingdom
 	}
 
 	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) :
+		NoBackIfNoCaller( false ),
 		_Control( 0 ),
 		Active( false ),
 		ReturnToCallerDelay( 0 ),

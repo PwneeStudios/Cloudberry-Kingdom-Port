@@ -351,6 +351,7 @@ namespace CloudberryKingdom
 	}
 
 	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+		NewY( 0 ),
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
 		ImmortalCountDown( 0 ),
@@ -396,6 +397,7 @@ namespace CloudberryKingdom
 	}
 
 	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
+		NewY( 0 ),
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
 		ImmortalCountDown( 0 ),

@@ -137,7 +137,16 @@ namespace CloudberryKingdom
 		getCore()->ResetOnlyOnReset = true;
 	}
 
-	GameObject::GameObject()
+	GameObject::GameObject() :
+		PreventRelease( false ),
+		PauseOnPause( false ),
+		_SoftPause( false ),
+		_PauseGame( false ),
+		_PauseLevel( false ),
+		HideOnReplay( false ),
+		PauseOnReplay( false ),
+		AutoDraw( false ),
+		SkipPhsx( false )
 	{
 		InitializeInstanceFields();
 		MakeNew();

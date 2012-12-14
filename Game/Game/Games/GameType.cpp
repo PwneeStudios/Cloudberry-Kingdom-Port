@@ -598,10 +598,7 @@ namespace CloudberryKingdom
 				if ( Keep )
 				{
 					// Keep the function if it returned false
-					if ( CurToDo.size() > 0 )
-						CurToDo.push_back( *item );
-					else
-						return;
+					CurToDo.push_back( *item );
 				}
 			}
 			DoingToDoList = false;
@@ -680,6 +677,8 @@ namespace CloudberryKingdom
 
 	GameData::GameData()
 	{
+		InitializeInstanceFields();
+	
 		// This is now in GameData_Construct.  We welcome our C overlords.
 
 		/*InitializeInstanceFields();
