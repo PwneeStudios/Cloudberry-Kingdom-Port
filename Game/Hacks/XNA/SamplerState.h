@@ -11,7 +11,7 @@ struct SamplerState
 
 	SamplerState() :
 		AddressU( GfxTextureAddressMode_Clamp ),
-		AddressV( GfxTextureAddressMode_Clamp ),
+		AddressV( GfxTextureAddressMode_Clamp )
 	{
 	}
 
