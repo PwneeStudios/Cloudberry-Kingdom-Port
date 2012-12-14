@@ -9,9 +9,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<HintBlurb> HintBlurb::HintBlurb_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		PauseOnPause = false;
 		setPauseLevel( false );
 		FixedToCamera = true;

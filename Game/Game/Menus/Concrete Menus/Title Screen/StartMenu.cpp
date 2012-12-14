@@ -210,9 +210,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<StartMenu> StartMenu::StartMenu_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 )
 			Tools::TheGame->LoadingScreen_Renamed->IsDone = true;
 

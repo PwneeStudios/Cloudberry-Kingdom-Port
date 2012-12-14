@@ -134,9 +134,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<CustomHero_GUI> CustomHero_GUI::CustomHero_GUI_Construct( const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		this->CustomLevel = CustomLevel;
 
 		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );

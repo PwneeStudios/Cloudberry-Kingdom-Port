@@ -19,9 +19,9 @@ namespace CloudberryKingdom
 	VerifyBaseMenu::VerifyBaseMenu() { }
 	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
 
 		return std::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}
@@ -29,9 +29,10 @@ namespace CloudberryKingdom
 	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false ) { }
 	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( int Control )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( false );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( false );
+		
 		this->setControl( Control );
 
 		Constructor();
@@ -42,9 +43,9 @@ namespace CloudberryKingdom
 	VerifyBaseMenu::VerifyBaseMenu( bool CallBaseConstructor ) : CkBaseMenu( CallBaseConstructor ) { }
 	std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( bool CallBaseConstructor )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 
 		return std::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}

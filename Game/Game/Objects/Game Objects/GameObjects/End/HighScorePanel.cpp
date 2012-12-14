@@ -60,9 +60,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		Constructor( Scores );
 
 		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );

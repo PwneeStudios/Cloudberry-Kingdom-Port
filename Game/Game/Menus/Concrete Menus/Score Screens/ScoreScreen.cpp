@@ -201,9 +201,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<ScoreScreen> ScoreScreen::ScoreScreen_Construct( bool CallBaseConstructor )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 
 		return std::static_pointer_cast<ScoreScreen>( shared_from_this() );
 	}
@@ -215,9 +215,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<ScoreScreen> ScoreScreen::ScoreScreen_Construct( StatGroup group, const std::shared_ptr<GameData> &game )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( false );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( false );
+		
 		MyGame = game;
 		MyStatGroup = group;
 		FontScale = .6f;

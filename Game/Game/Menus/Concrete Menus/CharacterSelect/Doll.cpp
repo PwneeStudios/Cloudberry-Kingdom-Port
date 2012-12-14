@@ -18,9 +18,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<Doll> Doll::Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( false );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( false );
+		
 		this->Tags->Add( Tag_CHAR_SELECT);
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;

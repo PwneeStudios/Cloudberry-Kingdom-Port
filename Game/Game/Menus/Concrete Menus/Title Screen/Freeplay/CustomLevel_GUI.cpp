@@ -286,9 +286,10 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI::CustomLevel_GUI_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		BobPhsx::CustomPhsxData::InitBounds();
 
 		CustomHero_GUI::HeroPhsxData = BobPhsx::CustomPhsxData();

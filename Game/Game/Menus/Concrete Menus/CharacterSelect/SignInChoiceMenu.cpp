@@ -49,9 +49,10 @@ namespace CloudberryKingdom
 	SignInMenu::SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
 	std::shared_ptr<SignInMenu> SignInMenu::SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
-		CkBaseMenu::CkBaseMenu_Construct( false );
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct( false );
+		
 		this->Tags += Tag_CHAR_SELECT;
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;

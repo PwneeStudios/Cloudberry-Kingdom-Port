@@ -367,9 +367,8 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+		CkBaseMenu::CkBaseMenu_Construct();
 
 		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
@@ -382,9 +381,9 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		this->GameId_Score = GameId_Score;
 		this->GameId_Level = GameId_Level;
 

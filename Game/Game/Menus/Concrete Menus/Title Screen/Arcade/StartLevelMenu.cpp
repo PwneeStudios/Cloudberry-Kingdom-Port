@@ -114,9 +114,9 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
 
 		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
@@ -128,9 +128,10 @@ namespace CloudberryKingdom
 	}
 	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
-
 		InitializeInstanceFields();
+
+		CkBaseMenu::CkBaseMenu_Construct();
+		
 		this->HighestLevel = HighestLevel;
 
 		// Allow user to choose amongst any start level in the array Levels,
