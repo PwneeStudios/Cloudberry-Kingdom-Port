@@ -308,6 +308,40 @@ namespace CloudberryKingdom
 
 	void StyleData::InitializeInstanceFields()
 	{
+		Zoom = 0;
+		TimeTypes TimeType = static_cast<TimeTypes>( 0 );
+		SuppressCoins = false; SuppressCheckpoints = false;
+		TopSpace = 0; BottomSpace = 0;
+		FillxStep = 0; FillyStep = 0;
+		ModNormalBlockWeight = 0;
+		MyFinalPlatsType = static_cast<FinalPlatsType>( 0 );
+		MyFinalDoorStyle = static_cast<FinalDoorStyle>( 0 );
+		MyInitialPlatsType = static_cast<InitialPlatsType>( 0 );
+		MakeInitialPlats = false;
+		UpperSafetyNetOffset = 0; LowerSafetyNetOffset = 0;
+		BlockFillType = static_cast<_BlockFillType>( 0 );
+		OverlapCleanupType = static_cast<_OverlapCleanupType>( 0 );
+		AlwaysCurvyMove = false;
+		AlwaysEdgeJump = false;
+		MoveTypePeriod = static_cast<_MoveTypePeriod>( 0 );
+		MoveTypeInnerPeriod = static_cast<_MoveTypeInnerPeriod>( 0 );
+		PauseType = static_cast<_PauseType>( 0 );
+		ReverseType = static_cast<_ReverseType>( 0 );
+		JumpType = static_cast<_JumpType>( 0 );
+		ElevatorSwitchType = static_cast<_ElevatorSwitchType>( 0 );
+		PendulumOffsetType = static_cast<_OffsetType>( 0 ); FlyingBlobOffsetType = static_cast<_OffsetType>( 0 );
+		FillType = static_cast<_FillType>( 0 );
+		SinglePathType = static_cast<_SinglePathType>( 0 );
+		DoublePathType = static_cast<_DoublePathType>( 0 );
+		TriplePathType = static_cast<_TriplePathType>( 0 );
+		Bob1Start = Bob2Start = Bob3Start = static_cast<_StartType>( 0 );
+		ChanceToKeepUnused = 0;
+		FunRun = false;
+		Masochistic = false;
+
+
+
+
 		MyModParams = std::make_shared<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > >();
 		Zoom = 1;
 		TimeType = TimeTypes_REGULAR;

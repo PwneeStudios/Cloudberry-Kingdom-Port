@@ -4115,6 +4115,9 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::InitializeInstanceFields()
 	{
+		ShowCoinsInReplay = false;
+		Watching = Replay = SuppressCheckpoints = GhostCheckpoints = MainReplayOnly = ReplayPaused = false;
+
 		LevelReleased = false;
 		EndReached = false;
 		SingleOnly = false;
