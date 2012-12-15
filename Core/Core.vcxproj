@@ -22,6 +22,7 @@
     <ClInclude Include="..\zlib-1.2.7\zconf.h" />
     <ClInclude Include="..\zlib-1.2.7\zlib.h" />
     <ClInclude Include="..\zlib-1.2.7\zutil.h" />
+    <ClInclude Include="include\Architecture\Job.h" />
     <ClInclude Include="include\Architecture\Scheduler.h" />
     <ClInclude Include="include\Architecture\SchedulerPc.h" />
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
