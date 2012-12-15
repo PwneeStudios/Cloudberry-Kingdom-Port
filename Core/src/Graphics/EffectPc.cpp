@@ -56,7 +56,7 @@ std::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
 {
 	if( internal_->Parameters.find( name ) == internal_->Parameters.end() )
 	{
-		LOG.Write( "Unknown parameter %s\n", name.c_str() );
+		//LOG.Write( "Unknown parameter %s\n", name.c_str() );
 
 		return internal_->Parameters[ "SecretDefaultParameter" ];
 	}

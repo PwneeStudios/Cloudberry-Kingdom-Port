@@ -4,6 +4,7 @@
 #include <Content/Wad.h>
 #include <Graphics/Types.h>
 #include <Graphics/QuadDrawer.h>
+#include <Utility/Log.h>
 
 #include "Hacks/XNA/SamplerState.h"
 
@@ -283,6 +284,7 @@ namespace CloudberryKingdom
 		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
 
 		sq.Diffuse = quad.getMyTexture()->getTex()->texture_;
+		LOG.Write( "%s\n", sq.Diffuse->GetPath() );
 		QUAD_DRAWER->Draw( sq );
 
 		/*Vertices[ i ] = quad.v0.Vertex;
