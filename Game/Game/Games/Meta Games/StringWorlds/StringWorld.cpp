@@ -462,7 +462,7 @@ namespace CloudberryKingdom
 	}
 
 	StringWorldGameData::StringWorldGameData() :
-		Count( 0 
+		Count( 0 )
 	{
 		// See StringWorldGameData_Construct.
 

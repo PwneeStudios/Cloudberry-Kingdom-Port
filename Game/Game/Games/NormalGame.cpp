@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <MasterHack.h>
+#include <Core\
 
 namespace CloudberryKingdom
 {
@@ -76,6 +77,21 @@ namespace CloudberryKingdom
 	//	};
 
 	//	MakeThread->Start();
+	}
+
+	class MakeNormalGameJob : public Job
+	{
+		std::shared_ptr<NormalGameData> MyGame;
+		MakeNormalGameJob(std::shared_ptr<NormalGameData> game) :
+			MyGame( game )
+		{
+
+		}
+
+		Apply()
+		{
+			MyGame->_MakeThreadFunc();
+		}
 	}
 
 	void NormalGameData::_MakeThreadFunc()
