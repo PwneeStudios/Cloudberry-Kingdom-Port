@@ -8,7 +8,7 @@
 #include <GL/glfw.h>
 #include <Utility/Log.h>
 
-#define NUM_THREADS 4
+#define NUM_THREADS 2
 
 /**
  * Base job.
@@ -178,6 +178,16 @@ void SchedulerPc::MainThread()
 		( *i )->Do();
 		delete ( *i );
 	}
+}
+
+void SchedulerPc::RunJob( Job *job )
+{
+	glfwLockMutex( internal_->JobQueueMutex );
+	internal_->JobQueue.push_back( job );
+	glfwUnlockMutex( internal_->JobQueueMutex );
+
+	// Notify worker thread about the new job.
+	glfwSignalCond( internal_->JobQueueCV );
 }
 
 void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )

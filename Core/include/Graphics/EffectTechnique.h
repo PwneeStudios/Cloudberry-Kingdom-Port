@@ -5,15 +5,17 @@
 
 #include <vector>
 
-struct EffectTechnique
+class EffectTechnique
 {
+
+public:
 
 	std::vector<std::shared_ptr<EffectPass> > Passes;
 
-	EffectTechnique()
+	EffectTechnique( unsigned int progId )
 	{
 		Passes.resize( 1 );
-		Passes[ 0 ] = std::make_shared<EffectPass>();
+		Passes[ 0 ] = std::make_shared<EffectPass>( progId );
 	}
 
 };

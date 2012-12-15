@@ -44,6 +44,10 @@
     <ClInclude Include="include\ForwardDeclarations.h" />
     <ClInclude Include="include\GameLoop.h" />
     <ClInclude Include="include\Graphics\Color.h" />
+    <ClInclude Include="include\Graphics\Effect.h" />
+    <ClInclude Include="include\Graphics\EffectParameter.h" />
+    <ClInclude Include="include\Graphics\EffectPass.h" />
+    <ClInclude Include="include\Graphics\EffectTechnique.h" />
     <ClInclude Include="include\Graphics\QuadDrawer.h" />
     <ClInclude Include="include\Graphics\QuadDrawerPc.h" />
     <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />
@@ -93,6 +97,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Graphics\EffectParameterPc.cpp" />
+    <ClCompile Include="src\Graphics\EffectPass.cpp" />
+    <ClCompile Include="src\Graphics\EffectPc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerPc.cpp" />
     <ClCompile Include="src\Graphics\QuadDrawerWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

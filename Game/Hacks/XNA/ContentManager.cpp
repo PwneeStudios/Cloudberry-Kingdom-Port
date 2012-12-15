@@ -33,6 +33,8 @@ template<> std::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const s
 
 template<> std::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )
 {
-	return std::make_shared<Effect>();
+	std::shared_ptr<Effect> effect = std::make_shared<Effect>();
+	effect->Load( WstringToUtf8( name ) );
+	return effect;
 }
 

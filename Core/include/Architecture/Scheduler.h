@@ -47,6 +47,15 @@ public:
 		impl_.MainThread();
 	}
 
+	/// Run a job in the background.
+	/**
+	 * @param job Pointer to job.  Scheduler takes ownership.
+	 */
+	void RunJob( Job *job )
+	{
+		impl_.RunJob( job );
+	}
+
 	/// Create a resource.
 	/**
 	 * This method schedules the creation of a resource.  If the resource is

@@ -1089,9 +1089,6 @@
     <ClCompile Include="Hacks\XNA\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hacks\XNA\Effect.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2229,18 +2226,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\DisplayMode.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\Effect.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\EffectParameter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\EffectPass.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\EffectTechnique.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\Game.h">

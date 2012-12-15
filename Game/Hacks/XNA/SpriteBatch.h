@@ -2,7 +2,7 @@
 #define _SPRITEBATCH_H_
 
 #include "Hacks/XNA/Rectangle.h"
-#include "Hacks/XNA/Effect.h"
+#include "Graphics/Effect.h"
 
 struct SpriteBatch
 {

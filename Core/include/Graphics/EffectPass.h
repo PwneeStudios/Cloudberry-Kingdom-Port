@@ -1,16 +1,15 @@
 #ifndef _EFFECTPASS_H_
 #define _EFFECTPASS_H_
 
-struct EffectPass
+class EffectPass
 {
 
-	EffectPass()
-	{
-	}
+	unsigned int progId_;
 
-	void Apply()
-	{
-	}
+public:
+
+	EffectPass( unsigned int progId );
+	void Apply();
 
 };
 

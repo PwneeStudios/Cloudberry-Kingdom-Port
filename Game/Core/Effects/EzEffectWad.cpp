@@ -68,20 +68,20 @@ namespace CloudberryKingdom
 		Neweffect->Name = Name;
 		Neweffect->effect = effect;
 
-		Neweffect->FlipVector = effect->Parameters( _T( "FlipVector" ) );
-		Neweffect->FlipCenter = effect->Parameters( _T( "FlipCenter" ) );
-		Neweffect->xTexture = effect->Parameters( _T( "xTexture" ) );
-		Neweffect->Illumination = effect->Parameters( _T( "Illumination" ) );
-		Neweffect->t = effect->Parameters( _T( "t" ) );
-		Neweffect->xCameraAspect = effect->Parameters( _T( "xCameraAspect" ) );
-		Neweffect->xCameraPos = effect->Parameters( _T( "xCameraPos" ) );
+		Neweffect->FlipVector = effect->Parameters( "u_flipVector" );
+		Neweffect->FlipCenter = effect->Parameters( "u_flipCenter" );
+		Neweffect->xTexture = effect->Parameters( "u_texture" );
+		Neweffect->Illumination = effect->Parameters( "u_illumination" );
+		Neweffect->t = effect->Parameters( "t" );
+		Neweffect->xCameraAspect = effect->Parameters( "u_cameraAspect" );
+		Neweffect->xCameraPos = effect->Parameters("u_cameraPos" );
 
-		Neweffect->ExtraTexture1_Param = effect->Parameters( _T( "ExtraTexture1" ) );
-		Neweffect->ExtraTexture2_Param = effect->Parameters( _T( "ExtraTexture2" ) );
+		Neweffect->ExtraTexture1_Param = effect->Parameters( "ExtraTexture1" );
+		Neweffect->ExtraTexture2_Param = effect->Parameters( "ExtraTexture2" );
 
-		Neweffect->Hsl = effect->Parameters( _T( "ColorMatrix" ) );
+		Neweffect->Hsl = effect->Parameters( "ColorMatrix" );
 
-		Neweffect->Simplest = effect->Techniques( _T( "Simplest" ) );
+		Neweffect->Simplest = effect->Techniques( "Simplest" );
 
 		Neweffect->MyWad = shared_from_this();
 

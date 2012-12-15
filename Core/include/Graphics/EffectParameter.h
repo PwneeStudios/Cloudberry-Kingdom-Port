@@ -4,33 +4,23 @@
 #include <Math/Vectors.h>
 #include <memory>
 
-struct EffectParameter
+class EffectParameter
 {
 
-	void SetValue( const Vector4 &v )
-	{
-	}
+	struct EffectParameterInternal *internal_;
 
-	void SetValue( const Matrix &m )
-	{
-	}
+public:
 
-	void SetValue( const std::shared_ptr<struct Texture2D> &t )
-	{
-	}
+	EffectParameter( unsigned int progId, int id );
+	~EffectParameter();
 
-	void SetValue( const Vector2 &v )
-	{
-	}
-
-	void SetValue( float v )
-	{
-	}
-
-	float GetValueSingle()
-	{
-		return 0.f;
-	}
+	void SetValue( const Vector4 &v );
+	void SetValue( const Matrix &m );
+	void SetValue( const std::shared_ptr<struct Texture2D> &t );
+	void SetValue( const Vector2 &v );
+	void SetValue( float v );
+	void SetValue( int v );
+	float GetValueSingle();
 
 };
 
