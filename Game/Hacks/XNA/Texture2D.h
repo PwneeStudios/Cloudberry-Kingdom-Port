@@ -4,10 +4,14 @@
 #include <memory>
 #include <vector>
 
+#include <Content/ResourcePtr.h>
+
 struct GraphicsDevice;
 
 struct Texture2D
 {
+
+	ResourcePtr<Texture> texture_;
 
 	int Width;
 

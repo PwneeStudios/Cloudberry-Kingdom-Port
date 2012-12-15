@@ -2,8 +2,8 @@
 
 #include "Hacks/Queue.h"
 
-#include "Hacks/XNA/Effect.h"
-#include "Hacks/XNA/EffectTechnique.h"
+#include "Graphics/Effect.h"
+#include "Graphics/EffectTechnique.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
@@ -162,7 +162,7 @@ namespace CloudberryKingdom
 
 		ShadeQuad->MyEffect->effect->CurrentTechnique = ShadeQuad->MyEffect->Simplest;
 		Tools::EffectWad->SetCameraPosition( Vector4( 0, 0, 1 / scalex, 1 / scaley ) );
-		ShadeQuad->MyEffect->xCameraAspect->SetValue( 1 );
+		ShadeQuad->MyEffect->xCameraAspect->SetValue( 1.f );
 
 
 		float TimeScale = 4;
@@ -206,7 +206,7 @@ namespace CloudberryKingdom
 
 		fx->effect->CurrentTechnique = fx->Simplest;
 		Tools::EffectWad->SetCameraPosition( Vector4( 0, 0, 1 / scalex, 1 / scaley ) );
-		fx->xCameraAspect->SetValue( 1 );
+		fx->xCameraAspect->SetValue( 1.f );
 
 		Flame_Emitter->Draw();
 

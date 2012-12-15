@@ -1066,9 +1066,9 @@ namespace CloudberryKingdom
 		if ( yFlip )
 			posy = FlipCenter.Y - ( posy - FlipCenter.Y );
 
-		EffectWad->SetCameraPosition( Vector4( posx, posy, 1 / scalex, 1 / scaley ) );
+		EffectWad->SetCameraPosition( Vector4( posx, posy, 1.f / scalex, 1.f / scaley ) );
 		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
-			( *fx )->xCameraAspect->SetValue( 1 );
+			( *fx )->xCameraAspect->SetValue( 1.f );
 		ContainedDraw();
 		device->SetRenderTarget( Tools::DestinationRenderTarget );
 		Tools::Render->ResetViewport();

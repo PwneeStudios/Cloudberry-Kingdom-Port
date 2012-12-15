@@ -20,6 +20,10 @@ void SchedulerWiiU::MainThread()
 {
 }
 
+void SchedulerWiiU::RunJob( Job *job )
+{
+}
+
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
 	resource->Load();

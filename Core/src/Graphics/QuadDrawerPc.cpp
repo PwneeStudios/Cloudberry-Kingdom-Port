@@ -7,6 +7,7 @@
 #include <fstream>
 #include <GL/glew.h>
 #include <Graphics/Types.h>
+#include <Graphics/Effect.h>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -37,11 +38,14 @@ struct QuadDrawerInternal
 	GLuint NumElements;
 	QuadVert *Vertices;
 
-	GLuint Program;
+	//GLuint Program;
 	GLuint VertexAttrib;
 	GLuint TexCoordAttrib;
 	GLuint ColorAttrib;
-	GLuint TexUniform;
+	//GLuint TexUniform;
+
+	std::shared_ptr<Effect> CurrentEffect;
+	std::shared_ptr<EffectParameter> TextureParameter;
 
 	BatchList Batches;
 
@@ -49,11 +53,11 @@ struct QuadDrawerInternal
 		CurrentBuffer( 0 ),
 		NumElements( 0 ),
 		Vertices( 0 ),
-		Program( 0 ),
+		//Program( 0 ),
 		VertexAttrib( 0 ),
 		TexCoordAttrib( 0 ),
-		ColorAttrib( 0 ),
-		TexUniform( 0 )
+		ColorAttrib( 0 )//,
+		//TexUniform( 0 )
 	{
 
 	}
@@ -64,7 +68,7 @@ struct QuadDrawerInternal
  * @param path Path to file.
  * @return String containing file contents.
  */
-std::string ReadFile( const std::string &path )
+/*std::string ReadFile( const std::string &path )
 {
 	using namespace std;
 	stringstream ss;
@@ -75,7 +79,7 @@ std::string ReadFile( const std::string &path )
 		ss << line << endl;
 
 	return ss.str();
-}
+}*/
 
 /// Create a shader.
 /**
@@ -83,7 +87,7 @@ std::string ReadFile( const std::string &path )
  * @param src Shader source code.
  * @return Shader identifier or 0 in case of failure.
  */
-GLuint CreateShader( GLenum type, const std::string &src )
+/*GLuint CreateShader( GLenum type, const std::string &src )
 {
 	GLuint shader = glCreateShader( type );
 
@@ -109,13 +113,13 @@ GLuint CreateShader( GLenum type, const std::string &src )
 	}
 
 	return shader;
-}
+}*/
 
 /// Create screen program.
 /**
  * @return Identifier of screen space drawing program or 0 in case of failure.
  */
-GLuint CreateProgram()
+/*GLuint CreateProgram()
 {
 	using namespace std;
 
@@ -155,7 +159,7 @@ GLuint CreateProgram()
 	}
 
 	return 0;
-}
+}*/
 
 QuadDrawerPc::QuadDrawerPc() :
 	internal_( new QuadDrawerInternal )
@@ -171,12 +175,12 @@ QuadDrawerPc::QuadDrawerPc() :
 	glBufferData( GL_ARRAY_BUFFER, MAX_QUADS * 4 * sizeof( QuadVert ), 0, GL_DYNAMIC_DRAW );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-	internal_->Program = CreateProgram();
+	/*internal_->Program = CreateProgram();
 
 	internal_->VertexAttrib = glGetAttribLocation( internal_->Program, "a_position" );
 	internal_->TexCoordAttrib = glGetAttribLocation( internal_->Program, "a_texcoord" );
 	internal_->ColorAttrib = glGetAttribLocation( internal_->Program, "a_color" );
-	internal_->TexUniform = glGetUniformLocation( internal_->Program, "u_texture" );
+	internal_->TexUniform = glGetUniformLocation( internal_->Program, "u_texture" );*/
 
 	glClearColor( 0, 0, 0, 1 );
 	glClearDepth( 1 );
@@ -192,7 +196,7 @@ QuadDrawerPc::QuadDrawerPc() :
 
 QuadDrawerPc::~QuadDrawerPc()
 {
-	glDeleteProgram( internal_->Program );
+	//glDeleteProgram( internal_->Program );
 
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
 	glUnmapBuffer( GL_ARRAY_BUFFER );
@@ -201,6 +205,21 @@ QuadDrawerPc::~QuadDrawerPc()
 	glDeleteBuffers( 2, internal_->QuadBuffer );
 
 	delete internal_;
+}
+
+void QuadDrawerPc::SetEffect( const std::shared_ptr<Effect> &effect )
+{
+	internal_->CurrentEffect = effect;
+
+	internal_->VertexAttrib = effect->Attributes( "a_position" );
+	internal_->TexCoordAttrib = effect->Attributes( "a_texcoord" );
+	internal_->ColorAttrib = effect->Attributes( "a_color" );
+	internal_->TextureParameter = effect->Parameters( "u_texture" );
+}
+
+std::shared_ptr<Effect> QuadDrawerPc::GetEffect()
+{
+	return internal_->CurrentEffect;
 }
 
 void QuadDrawerPc::Draw( const SimpleQuad &quad )
@@ -246,8 +265,11 @@ void QuadDrawerPc::Flush()
 	if( internal_->NumElements == 0 )
 		return;
 
-	glUseProgram( internal_->Program );
-	glUniform1i( internal_->TexUniform, 0 );
+	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
+
+	internal_->TextureParameter->SetValue( 0 );
+	//glUseProgram( internal_->Program );
+	//glUniform1i( internal_->TexUniform, 0 );
 
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer[ internal_->CurrentBuffer ] );
 	glUnmapBuffer( GL_ARRAY_BUFFER );

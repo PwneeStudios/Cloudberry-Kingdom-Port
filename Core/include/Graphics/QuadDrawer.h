@@ -2,6 +2,7 @@
 #define _QUAD_DRAWER_H_
 
 #include <ForwardDeclarations.h>
+#include <memory>
 
 // Pick the implementation we want to use.
 #ifdef CAFE
@@ -35,6 +36,24 @@ public:
 
 	QuadDrawer() { }
 	virtual ~QuadDrawer() { }
+
+	/// Set current effect.
+	/**
+	 * @param effect New effect to use.
+	 */
+	void SetEffect( const std::shared_ptr<Effect> &effect )
+	{
+		impl_.SetEffect( effect );
+	}
+
+	/// Get current effect.
+	/**
+	 * @return Current effect in use by quad drawer.
+	 */
+	std::shared_ptr<Effect> GetEffect()
+	{
+		return impl_.GetEffect();
+	}
 
 	/// Draw a simple quad.
 	/**

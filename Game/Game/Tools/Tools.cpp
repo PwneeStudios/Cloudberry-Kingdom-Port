@@ -718,19 +718,19 @@ namespace CloudberryKingdom
 		if ( CreateNewWad )
 			EffectWad = std::make_shared<EzEffectWad>();
 
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BasicEffect" ) ), _T( "Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/NoTexture" ) ), _T( "NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Circle" ) ), _T( "Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Shell" ) ), _T( "Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/FireballEffect" ) ), _T( "Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Paint" ) ), _T( "Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Lava" ) ), _T( "Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightMap" ) ), _T( "LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightSource" ) ), _T( "LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BwEffect" ) ), _T( "BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl_Green" ) ), _T( "Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl" ) ), _T( "Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Window" ) ), _T( "Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BasicEffect" ) ), _T( "Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/NoTexture" ) ), _T( "NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Circle" ) ), _T( "Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Shell" ) ), _T( "Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/FireballEffect" ) ), _T( "Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Paint" ) ), _T( "Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Lava" ) ), _T( "Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightMap" ) ), _T( "LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightSource" ) ), _T( "LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BwEffect" ) ), _T( "BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl_Green" ) ), _T( "Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl" ) ), _T( "Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Window" ) ), _T( "Window" ) );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -740,7 +740,7 @@ namespace CloudberryKingdom
 		HslGreenEffect = EffectWad->FindByName( _T( "Hsl_Green" ) );
 		WindowEffect = EffectWad->FindByName( _T( "Window" ) );
 
-		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Effects/Paint_SpriteBatch" ) );
+		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Shaders/Paint_SpriteBatch" ) );
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )
@@ -1380,7 +1380,7 @@ namespace CloudberryKingdom
 
 			if ( AsPaint )
 			{
-				PaintEffect_SpriteBatch->Parameters( _T( "xTexture" ) )->SetValue( Tools::TextureWad->FindByName( _T( "PaintSplotch" ) )->getTex() );
+				PaintEffect_SpriteBatch->Parameters( "xTexture" )->SetValue( Tools::TextureWad->FindByName( _T( "PaintSplotch" ) )->getTex() );
 				//PaintEffect_SpriteBatch.Parameters["SceneTexture"].SetValue(Tools.TextureWad.FindByName("PaintSplotch").Tex); 
 				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, Tools::PaintEffect_SpriteBatch, Matrix::CreateScale( scale, scale, 1 ) );
 			}
@@ -1405,7 +1405,7 @@ namespace CloudberryKingdom
 			( *fx )->xCameraAspect->SetValue( AspectRatio );
 			( *fx )->effect->CurrentTechnique = ( *fx )->Simplest;
 			( *fx )->t->SetValue( Tools::t );
-			( *fx )->Illumination->SetValue( 1 );
+			( *fx )->Illumination->SetValue( 1.f );
 			( *fx )->FlipVector->SetValue( Vector2( -1, -1 ) );
 		}
 
@@ -1426,8 +1426,8 @@ namespace CloudberryKingdom
 	//colorm = HsvTransform(.95f, 1.3f, 0) * LinearColorTransform(240); // Red
 	//colorm = HsvTransform(1.25f, 1.3f, 0) * LinearColorTransform(305); // Yellow
 
-		HslGreenEffect->effect->Parameters( _T( "ColorMatrix" ) )->SetValue( colorm );
-		HslEffect->effect->Parameters( _T( "ColorMatrix" ) )->SetValue( colorm );
+		HslGreenEffect->effect->Parameters( "ColorMatrix" )->SetValue( colorm );
+		HslEffect->effect->Parameters( "ColorMatrix" )->SetValue( colorm );
 
 		//colorm = HsvTransform(1f, 1f, 30) * 
 		//        new Matrix(.6f, .6f, .6f, 0,

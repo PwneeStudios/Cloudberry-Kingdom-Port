@@ -6,7 +6,7 @@
 #include <Hacks/XNA/Song.h>
 #include <Hacks/XNA/Texture2D.h>
 #include <Hacks/XNA/SpriteFont.h>
-#include <Hacks/XNA/Effect.h>
+#include <Graphics/Effect.h>
 
 struct ContentManager
 {

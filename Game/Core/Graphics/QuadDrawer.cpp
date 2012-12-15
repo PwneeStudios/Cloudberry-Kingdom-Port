@@ -91,11 +91,12 @@ namespace CloudberryKingdom
 		if ( i == 0 )
 		{
 			CurrentEffect = quad->MyEffect;
+			QUAD_DRAWER->SetEffect( quad->MyEffect->effect );
 			CurrentTexture = quad->MyTexture;
 			setCurrentMatrix( quad->getMyMatrix() );
 		}
 		CurrentEffect->CurrentIllumination = 1;
-		CurrentEffect->Illumination->SetValue( 1 );
+		CurrentEffect->Illumination->SetValue( 1.f );
 
 
 		Vertices[ i ] = quad->Vertices[ 0 ];
@@ -171,6 +172,7 @@ namespace CloudberryKingdom
 				SetAddressMode( false, false );
 
 			CurrentEffect = quad.MyEffect;
+			QUAD_DRAWER->SetEffect( quad.MyEffect->effect );
 			CurrentTexture = quad.getMyTexture();
 
 			if ( CurrentTexture->FromPacked )
@@ -185,9 +187,9 @@ namespace CloudberryKingdom
 
 		Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
-	Vertices[ i + 5 ] = Vertices[ i + 1 ];
+		Vertices[ i + 5 ] = Vertices[ i + 1 ];
 		Vertices[ i + 2 ] = quad.v2.Vertex;
-	Vertices[ i + 4 ] = Vertices[ i + 2 ];
+		Vertices[ i + 4 ] = Vertices[ i + 2 ];
 		Vertices[ i + 3 ] = quad.v3.Vertex;
 
 		i += 6;
@@ -235,6 +237,11 @@ namespace CloudberryKingdom
 				SetAddressMode( quad.U_Wrap, quad.V_Wrap );
 
 			CurrentEffect = quad.MyEffect;
+			
+			// FIXME: HEHEHE.
+			QUAD_DRAWER->SetEffect( quad.MyEffect->effect );
+			CurrentEffect->SetCameraParameters();
+
 			CurrentTexture = quad.getMyTexture();
 
 			// Set extra textures
@@ -259,14 +266,14 @@ namespace CloudberryKingdom
 		sq.V[3] = Vector2( quad.v2.Vertex.xy.X, quad.v2.Vertex.xy.Y );
 		sq.V[2] = Vector2( quad.v3.Vertex.xy.X, quad.v3.Vertex.xy.Y );
 
-		for( int j = 0; j < 4; ++j )
+		/*for( int j = 0; j < 4; ++j )
 		{
 			sq.V[ j ] /= 1822.45f;
 			sq.V[ j ] += Vector2( 1 );
 			sq.V[ j ] /= 2.f;
 			sq.V[ j ] *= Vector2( 1280.f, 720.f );
 			sq.V[ j ].Y = 720.f - sq.V[ j ].Y;
-		}
+		}*/
 
 		sq.T[0] = Vector2( quad.v0.Vertex.uv.X, quad.v0.Vertex.uv.Y );
 		sq.T[1] = Vector2( quad.v1.Vertex.uv.X, quad.v1.Vertex.uv.Y );
@@ -275,10 +282,10 @@ namespace CloudberryKingdom
 
 		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
 
-		ResourcePtr< Texture > background = CONTENT->Load< Texture >( "Art/Title/Title_Screen.png" );
-		sq.Diffuse = background;
+		sq.Diffuse = quad.getMyTexture()->getTex()->texture_;
 		QUAD_DRAWER->Draw( sq );
-		Vertices[ i ] = quad.v0.Vertex;
+
+		/*Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
 		Vertices[ i + 5 ] = Vertices[ i + 1 ];
 		Vertices[ i + 2 ] = quad.v2.Vertex;
@@ -286,7 +293,7 @@ namespace CloudberryKingdom
 		Vertices[ i + 3 ] = quad.v3.Vertex;
 
 		i += 6;
-		TrianglesInBuffer += 2;
+		TrianglesInBuffer += 2;*/
 	}
 
 	void QuadDrawer::DrawFilledBox( Vector2 BL, Vector2 TR, Color color )
@@ -494,7 +501,7 @@ namespace CloudberryKingdom
 	{
 		if ( Fade != CurLightSourceFade )
 		{
-			Tools::LightSourceEffect->effect->Parameters( _T( "Fade" ) )->SetValue( Fade );
+			Tools::LightSourceEffect->effect->Parameters( "Fade" )->SetValue( Fade );
 			CurLightSourceFade = Fade;
 		}
 		DrawSquareDot( x, color, 2 * r, DefaultTexture, Tools::LightSourceEffect );

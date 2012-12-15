@@ -755,10 +755,6 @@
     <ClInclude Include="Hacks\NET\DateTime.h" />
     <ClInclude Include="Hacks\NET\Directory.h" />
     <ClInclude Include="Hacks\XNA\DisplayMode.h" />
-    <ClInclude Include="Hacks\XNA\Effect.h" />
-    <ClInclude Include="Hacks\XNA\EffectParameter.h" />
-    <ClInclude Include="Hacks\XNA\EffectPass.h" />
-    <ClInclude Include="Hacks\XNA\EffectTechnique.h" />
     <ClInclude Include="Hacks\NET\File.h" />
     <ClInclude Include="Hacks\FileReader.h" />
     <ClInclude Include="Hacks\NET\FileStream.h" />

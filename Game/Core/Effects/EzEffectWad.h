@@ -3,8 +3,8 @@
 
 #include <global_header.h>
 
-#include "Hacks/XNA/Effect.h"
-#include "Hacks/XNA/EffectParameter.h"
+#include "Graphics/Effect.h"
+#include "Graphics/EffectParameter.h"
 
 namespace CloudberryKingdom
 {
