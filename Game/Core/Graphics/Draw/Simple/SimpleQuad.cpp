@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\Dict.h>
+
 namespace CloudberryKingdom
 {
 
@@ -228,7 +230,8 @@ namespace CloudberryKingdom
 
 	void SimpleQuad::SetTextureOrAnim( const std::wstring &name )
 	{
-		if ( Tools::TextureWad->AnimationDict.find( name ) != Tools::TextureWad->AnimationDict.end() )
+		if ( Contains( Tools::TextureWad->AnimationDict, name ) )
+		//if ( Tools::TextureWad->AnimationDict.find( name ) != Tools::TextureWad->AnimationDict.end() )
 			SetTextureAnim( Tools::TextureWad->AnimationDict[ name ] );
 		else
 			setTextureName( name );

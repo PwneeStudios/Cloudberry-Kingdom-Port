@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		Tools::_VolumeFade = 0;
 
 		Tools::CurSongVolume = 0;
-		Tools::SoundVolume, Tools::MusicVolume = 0;
+		Tools::SoundVolume = 0; Tools::MusicVolume = 0;
 		Tools::FixedTimeStep = false;
 		Tools::WindowBorder = true;
 		Tools::GameClass = 0;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		Tools::CurLevel = 0;
 		Tools::DummyCamera = 0;
 
-		Tools::WorldMap, Tools::TitleGame;
+		Tools::WorldMap = 0; Tools::TitleGame = 0;
 		int tempVector4[] = { 0, 0, 0, 0 };
 		Tools::VibrateTimes = VecFromArray( tempVector4 );
 		Tools::DifficultyTypes = DifficultyParam_LENGTH;
@@ -49,15 +49,15 @@ namespace CloudberryKingdom
 		Tools::UpgradeTypes = Upgrade_LENGTH;
 
 		#if defined(WINDOWS)
-		Tools::Keyboard, Tools::PrevKeyboard;
+		//Tools::Keyboard, Tools::PrevKeyboard;
 		#endif
 
 		#if defined(WINDOWS)
-		Tools::Mouse, Tools::PrevMouse;
+		//Tools::Mouse, Tools::PrevMouse;
 		#endif
 
 		#if defined(WINDOWS)
-		Tools::DeltaMouse, Tools::RawDeltaMouse;
+		//Tools::DeltaMouse, Tools::RawDeltaMouse;
 		#endif
 
 		#if defined(WINDOWS)
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		Tools::PaintEffect_SpriteBatch = 0;
 		Tools::TextureWad = 0;
 		Tools::SoundContentManager = 0;
-		Tools::SoundWad, Tools::PrivateSoundWad = 0;
+		Tools::SoundWad = 0; Tools::PrivateSoundWad = 0;
 		Tools::SongWad = 0;
 		Tools::QDrawer = 0;
 		Tools::Render = 0;

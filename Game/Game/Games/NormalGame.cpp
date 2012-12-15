@@ -61,8 +61,11 @@ namespace CloudberryKingdom
 
 		_MakeThreadLevelSeed = LevelSeed;
 		_MakeThreadMakeInBackground = MakeInBackground;
+		
 		// FIXME: Add threading.
-		_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
+		//_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
+
+
 	//	std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
 	//	{
 	//#if defined(WINDOWS)

@@ -38,7 +38,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
+    <LinkIncremental>false</LinkIncremental>
     <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)Game;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)glfw-2.7.6\support\msvc100\$(Configuration);$(SolutionDir)glew-1.9.0\lib\$(Configuration);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>

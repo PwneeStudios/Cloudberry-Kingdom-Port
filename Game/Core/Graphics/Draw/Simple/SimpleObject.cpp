@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 	}
 
 	SimpleObject::SimpleObject( const std::shared_ptr<ObjectClass> &obj ) :
-		xFlip( false )
+		xFlip( false ), yFlip( false )
 	{
 		Base.Init();
 

@@ -9,7 +9,7 @@ int Compare( const T a, const T b )
 	//else if ( a < b ) return -1;
 	//else return 0;
 
-	if ( a >= b ) return 1;
+	if ( a > b ) return 1;
 	else return 0;
 }
 

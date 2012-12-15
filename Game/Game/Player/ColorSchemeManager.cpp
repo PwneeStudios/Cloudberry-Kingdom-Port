@@ -7,8 +7,6 @@ namespace CloudberryKingdom
 
 	void ColorSchemeManager::InitializeStatics()
 	{
-		ColorSchemeManager::ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
-
 		ColorSchemeManager::None = std::make_shared<ClrTextFx>();
 	}
 

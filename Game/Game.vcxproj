@@ -428,6 +428,7 @@
     <ClInclude Include="Core\Tools\Set.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h" />
     <ClInclude Include="Hacks\Compare.h" />
+    <ClInclude Include="Hacks\Dict.h" />
     <ClInclude Include="Hacks\List.h" />
     <ClInclude Include="Hacks\Parse.h" />
     <ClInclude Include="Hacks\Queue.h" />

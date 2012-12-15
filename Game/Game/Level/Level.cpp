@@ -4115,6 +4115,57 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::InitializeInstanceFields()
 	{
+		MaxRight = EndBuffer = 0;
+		LastStep = 0;
+		CoinsCountInStats = false;
+		NumCoins = NumBlobs = TotalCoinScore = 0;
+		Finished = false;
+		RecordPosition = false;
+		Geometry = static_cast<LevelGeometry>( 0 );
+		PlayMode = NumModes = 0;
+		CreationError = false;
+		Recording_Renamed = false;
+		SetToWatchMake = false;
+		SingleOnly = false;
+		NoCameraChange = false;
+		EndReached = false;
+		IndependentStepSetOnce = false;
+		IndependentPhsxStep = IndependentDeltaT = 0;
+		ShowCoinsInReplay = false;
+		Watching = Replay = SuppressCheckpoints = GhostCheckpoints = MainReplayOnly = ReplayPaused;	
+		Prev = 0;
+		NoParticles = false;
+		BobLightRadius = 0;
+		TimeType = static_cast<TimeTypes>( 0 );
+
+		SuppressSounds = false;
+		SuppressReplayButtons = false;
+		LevelReleased = false;
+		NumAttempts = 0; PieceAttempts = 0;
+		ReturnedEarly = false;
+		SetToWatchMake = false;
+		CanLoadLevels = false;
+		CanSaveLevel = false;
+		CanWatchComputer = false;
+		CanWatchReplay = false;
+		_PreventReset = false;
+		PreventHelp = false;
+		FreezeCamera = false;
+		TimeLimit = 0;
+		HaveTimeLimit = false;
+		TimeLimitTimerLength;
+		_UseLighting = false;
+		Par = 0;
+		CurPhsxStep = 0; StartPhsxStep = 0;
+		DelayReset = 0;
+		_SetToReset = false;
+		FreeReset = false;
+		ObjectsLocked = false;
+		CurEditorDrawLayer = 0;
+
+
+		ReturnedEarly = false;
+
 		ShowCoinsInReplay = false;
 		Watching = Replay = SuppressCheckpoints = GhostCheckpoints = MainReplayOnly = ReplayPaused = false;
 

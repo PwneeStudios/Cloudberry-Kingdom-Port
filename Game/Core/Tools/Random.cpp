@@ -7,7 +7,9 @@ namespace CloudberryKingdom
 
 	Rand::Rand( int seed )
 	{
-		MySeed = seed;
+		// FIXME: WARNING: testing 0 seed only.
+		//MySeed = seed;
+		MySeed = 0;
 		Rnd = std::make_shared<Random>( MySeed );
 	}
 
