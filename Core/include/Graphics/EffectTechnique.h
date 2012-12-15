@@ -1,7 +1,9 @@
 #ifndef _EFFECTTECHNIQUES_H_
 #define _EFFECTTECHNIQUES_H_
 
-#include "Hacks/XNA/EffectPass.h"
+#include "EffectPass.h"
+
+#include <vector>
 
 struct EffectTechnique
 {

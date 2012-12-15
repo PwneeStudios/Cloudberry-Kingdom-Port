@@ -275,10 +275,10 @@ namespace CloudberryKingdom
 
 		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
 
-		ResourcePtr< Texture > background = CONTENT->Load< Texture >( "Art/Title/Title_Screen.png" );
-		sq.Diffuse = background;
+		sq.Diffuse = CurrentTexture->getTex()->texture_;
 		QUAD_DRAWER->Draw( sq );
-		Vertices[ i ] = quad.v0.Vertex;
+
+		/*Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
 		Vertices[ i + 5 ] = Vertices[ i + 1 ];
 		Vertices[ i + 2 ] = quad.v2.Vertex;
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 		Vertices[ i + 3 ] = quad.v3.Vertex;
 
 		i += 6;
-		TrianglesInBuffer += 2;
+		TrianglesInBuffer += 2;*/
 	}
 
 	void QuadDrawer::DrawFilledBox( Vector2 BL, Vector2 TR, Color color )

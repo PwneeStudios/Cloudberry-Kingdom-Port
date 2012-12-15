@@ -1,12 +1,12 @@
 #ifndef _EFFECTPARAMETERS_H_
 #define _EFFECTPARAMETERS_H_
 
+#include <Math/Vectors.h>
+#include <memory>
+
 struct EffectParameter
 {
 
-
-
-	// FIXME: Implement everything.
 	void SetValue( const Vector4 &v )
 	{
 	}

@@ -1089,6 +1089,9 @@
     <ClCompile Include="Hacks\XNA\Mouse.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hacks\XNA\Effect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">

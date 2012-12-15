@@ -718,19 +718,19 @@ namespace CloudberryKingdom
 		if ( CreateNewWad )
 			EffectWad = std::make_shared<EzEffectWad>();
 
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BasicEffect" ) ), _T( "Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/NoTexture" ) ), _T( "NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Circle" ) ), _T( "Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Shell" ) ), _T( "Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/FireballEffect" ) ), _T( "Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Paint" ) ), _T( "Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Lava" ) ), _T( "Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightMap" ) ), _T( "LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/LightSource" ) ), _T( "LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/BwEffect" ) ), _T( "BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl_Green" ) ), _T( "Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Hsl" ) ), _T( "Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Effects/Window" ) ), _T( "Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BasicEffect" ) ), _T( "Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/NoTexture" ) ), _T( "NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Circle" ) ), _T( "Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Shell" ) ), _T( "Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/FireballEffect" ) ), _T( "Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Paint" ) ), _T( "Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Lava" ) ), _T( "Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightMap" ) ), _T( "LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightSource" ) ), _T( "LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BwEffect" ) ), _T( "BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl_Green" ) ), _T( "Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl" ) ), _T( "Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Window" ) ), _T( "Window" ) );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
