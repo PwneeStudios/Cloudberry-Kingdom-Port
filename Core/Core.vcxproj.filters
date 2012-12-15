@@ -159,6 +159,9 @@
     <ClInclude Include="include\Graphics\EffectPass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Architecture\Job.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">

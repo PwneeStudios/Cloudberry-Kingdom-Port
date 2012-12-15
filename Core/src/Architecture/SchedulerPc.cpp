@@ -1,5 +1,6 @@
 #include <Architecture/SchedulerPc.h>
 
+#include <Architecture/Job.h>
 #include <Architecture/Scheduler.h>
 #include <Content/Resource.h>
 #include <Content/ResourcePtr.h>
@@ -9,20 +10,6 @@
 #include <Utility/Log.h>
 
 #define NUM_THREADS 2
-
-/**
- * Base job.
- */
-class Job
-{
-
-public:
-
-	virtual ~Job() { }
-
-	virtual void Do() = 0 ;
-
-};
 
 #include <iostream>
 
