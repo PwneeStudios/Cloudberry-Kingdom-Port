@@ -63,7 +63,8 @@ namespace CloudberryKingdom
 		Priority = 0;
 	}
 
-	CameraZone::CameraZone()
+	CameraZone::CameraZone() :
+		Zoom( 0 ), FreeY( false ), SnapNext( 0 )
 	{
 		MakeNew();
 	}

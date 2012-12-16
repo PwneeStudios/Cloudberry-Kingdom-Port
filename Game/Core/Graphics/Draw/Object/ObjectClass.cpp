@@ -1090,6 +1090,13 @@ namespace CloudberryKingdom
 
 	void ObjectClass::InitializeInstanceFields()
 	{
+		t = 0;
+		OldT = 0;
+		OldAnim = 0;
+		OldLoop = false;
+
+		anim = 0;
+
 		LoadingRunSpeed = 0;
 		CapeThickness = 0;
 		VersionNumber = 0;

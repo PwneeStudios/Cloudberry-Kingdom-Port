@@ -8,12 +8,15 @@ namespace CloudberryKingdom
 	struct NormalBlock : public BlockBase
 	{
 
-	
+		// Members
+		
 		bool Invert;
-
 		std::shared_ptr<BlockBase> HoldBlock;
-
 		bool Moved;
+		static float TopOnlyHeight;
+
+
+		// Methods
 
 		void BasicConstruction( bool BoxesOnly );
 
@@ -33,10 +36,6 @@ namespace CloudberryKingdom
 
 		void Init( Vector2 center, Vector2 size, const std::shared_ptr<TileSet> &tile );
 
-	
-		static float TopOnlyHeight;
-
-	
 		void CheckHeight();
 
 		void MakeTopOnly();

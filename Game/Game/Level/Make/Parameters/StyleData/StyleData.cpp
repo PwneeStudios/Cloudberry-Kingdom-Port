@@ -308,6 +308,21 @@ namespace CloudberryKingdom
 
 	void StyleData::InitializeInstanceFields()
 	{
+		MyGroundType = MyTopType = static_cast<GroundType>( 0 );
+		RemovedUnusedOverlappingBlocks = false;
+		RemoveBlockOnCol = false;
+		RemoveBlockOnOverlap = false;
+		MinBlockDist = 0;
+
+		ChanceToKeepUnused = 0;
+		FunRun = false;
+		Masochistic = false;
+		RemovedUnusedOverlappingBlocks = false;
+		RemoveBlockOnCol = false;
+		RemoveBlockOnOverlap = false;
+		MinBlockDist = 0;
+
+
 		Zoom = 0;
 		TimeTypes TimeType = static_cast<TimeTypes>( 0 );
 		SuppressCoins = false; SuppressCheckpoints = false;

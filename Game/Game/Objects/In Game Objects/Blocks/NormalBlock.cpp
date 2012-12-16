@@ -451,5 +451,6 @@ float NormalBlock::TopOnlyHeight = 60;
 	void NormalBlock::InitializeInstanceFields()
 	{
 		Invert = false;
+		Moved = false;
 	}
 }

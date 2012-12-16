@@ -928,6 +928,57 @@ namespace CloudberryKingdom
 
 	void BobPhsx::InitializeInstanceFields()
 	{
+		DisableJumpCount = 0;
+		CustomPhsx = false;
+		Name = static_cast<Localization::Words>( 0 );
+		Id = 0;
+		DefaultIconWidth = 0;
+		CapePrototype = static_cast<CapeType>( 0 );
+		DollCamZoomMod = 0;
+		BlobMod = 0;
+		Ducking = false;
+		DuckingCount = 0;
+		MustHitGroundToReadyJump = false;
+		MaxSpeed = XAccel = 0;
+		Gravity = 0;
+		ForceDown = 0;
+		BobMaxFallSpeed = 0;
+		OnGround = PrevOnGround = Jumped = false;
+		AirTime = 0;
+		UseGroundSpeed = false;
+		Vector2 JumpStartPos;
+		ApexReached = false;
+		OverrideSticky = false;
+		MaxJumpAccelMultiple = JumpAccelModifier = 0;
+		JumpLengthModifier = 0;
+		ReverseDirectionBoost = 0;
+		DoFastTakeOff = false;
+		ReverseDirectionBoostMod = 0;
+		FricMod = 0;
+		AccelMod = 0;
+		IceRun = false;
+		DoubleJumpModel = false;
+		JetpackModel = false;
+		ThrustType = static_cast<RocketThrustType>( 0 );
+		GroundSpeed = 0;
+		Oscillate_Renamed = false;
+		ExplosionScale = 0;
+		RunAnimSpeed = 0;
+		ScaledFactor = 0;
+		OscillateSize1 = OscillateSize2 = OscillatePeriod = 0;
+		OscillateGravity1 = OscillateGravity2 = 0;
+		SameInputDirectionCount = 0;
+		FirstPhsxStep = false;
+		LastUsedStamp = 0;
+		PlacedJump = NextJumpIsPlacedJump = false;
+		SingletonInitialized = false;
+
+
+
+
+
+
+
 		CustomPhsx = false;
 		Name = Localization::Words_NONE;
 		Id = -1;

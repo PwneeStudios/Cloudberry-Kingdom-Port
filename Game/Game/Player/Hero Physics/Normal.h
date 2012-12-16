@@ -8,26 +8,8 @@ namespace CloudberryKingdom
 	struct BobPhsxNormal : public BobPhsx
 	{
 
-	
-		static void InitializeStatics();
-
-		// Singleton
-	
-		virtual void InitSingleton();
-	
-		static std::shared_ptr<BobPhsxNormal> instance;
-	
-		const static std::shared_ptr<BobPhsxNormal> &getInstance();
-
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxNormal> &bob );
-
-		// Instancable struct
-	
+		// Members
 		bool InitializedAnim;
-
-
-	
 		std::shared_ptr<EzSound> LandSound;
 	
 		std::shared_ptr<EzSound> DoubleJump;
@@ -37,9 +19,6 @@ namespace CloudberryKingdom
 
 		int RndMoveType, Offset;
 		int RndThrustType;
-
-	
-		virtual bool getSticky();
 
 		int BobFallDelay;
 		float XFriction, BobXDunkFriction;
@@ -56,14 +35,8 @@ namespace CloudberryKingdom
 		float JetPackAccel;
 		bool Thrusting, ReadyToThrust;
 
-
-
 		bool StartedJump;
 		int _JumpCount;
-		const int &getJumpCount() const;
-		void setJumpCount( const int &value );
-
-		virtual void KillJump();
 
 		int FallingCount;
 		bool ReadyToJump;
@@ -107,11 +80,56 @@ namespace CloudberryKingdom
 		/// <summary> Y velocity must be less than this thrust with the jetpack </summary>
 		float MaxVerticalSpeed_Thrust;
 
-	
+
 		bool StartJumpAnim;
 
+		Vector2 ThrustPos1;
+		Vector2 ThrustDir1;
+		Vector2 ThrustPos_Duck;
+		Vector2 ThrustDir_Duck;
+		Vector2 ThrustPos2;
+		Vector2 ThrustDir2;
+
+		bool AutoAllowComputerToJumpOnLand;
+
+		int NoStickPeriod;
+
+		std::shared_ptr<BlockBase> SafetyBlock;
+		int JumpCountdown, TurnCountdown, Dir;
+	
+		bool Up;
+
+		float ForcedJumpDamping;
+
+		float MinHeightAttained, MinGroundHeightAttained;
+		
 
 
+
+		// Static members
+		static std::shared_ptr<BobPhsxNormal> instance;		
+		
+
+		// Methods
+	
+		static void InitializeStatics();
+
+		// Singleton
+		virtual void InitSingleton();
+	
+		const static std::shared_ptr<BobPhsxNormal> &getInstance();
+
+		virtual std::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const std::shared_ptr<BobPhsxNormal> &bob );
+
+		// Instancable struct
+
+		virtual bool getSticky();
+
+		const int &getJumpCount() const;
+		void setJumpCount( const int &value );
+
+		virtual void KillJump();
 	
 		BobPhsxNormal();
 
@@ -130,19 +148,9 @@ namespace CloudberryKingdom
 
 		virtual void PhsxStep();
 
-		Vector2 ThrustPos1;
-		Vector2 ThrustDir1;
-		Vector2 ThrustPos_Duck;
-		Vector2 ThrustDir_Duck;
-		Vector2 ThrustPos2;
-		Vector2 ThrustDir2;
-
 		virtual void PhsxStep2();
-
-
 	
-		bool AutoAllowComputerToJumpOnLand;
-	
+
 		virtual void UpdateReadyToJump();
 
 		bool getCanJump() const;
@@ -155,8 +163,6 @@ namespace CloudberryKingdom
 		/// For this many frames Bob will not stick to blocks
 		/// (so that he can successfully jump off of fast upward moving blocks)
 		/// </summary>
-	
-		int NoStickPeriod;
 	
 		virtual void DoJump();
 
@@ -177,20 +183,13 @@ namespace CloudberryKingdom
 
 
 		// Survival variables
-	
-		std::shared_ptr<BlockBase> SafetyBlock;
-		int JumpCountdown, TurnCountdown, Dir;
-
-	
+		
 		void GenerateInput_Survival( int CurPhsxStep );
 
-		float MinHeightAttained, MinGroundHeightAttained;
 		void GenerateInput_Vertical( int CurPhsxStep );
 
 
 		/// <summary> When true Bob aims to go as high as possible </summary>
-	
-		bool Up;
 
 		void GenerateInput_Right( int CurPhsxStep );
 
@@ -206,7 +205,6 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 	
 		virtual void GenerateInput( int CurPhsxStep );
 
-		float ForcedJumpDamping;
 		virtual void DampForcedJump();
 
 

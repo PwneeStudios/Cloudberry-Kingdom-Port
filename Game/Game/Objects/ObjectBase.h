@@ -60,6 +60,8 @@ namespace CloudberryKingdom
 	struct GenerationData
 	{
 	
+		GenerationData();
+
 		enum OverlapPreference
 		{
 			OverlapPreference_REMOVE_LOWER_THAN_ME,

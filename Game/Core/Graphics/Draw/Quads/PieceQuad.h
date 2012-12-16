@@ -8,7 +8,8 @@ namespace CloudberryKingdom
 	struct PieceQuadData
 	{
 
-	
+		PieceQuadData();
+
 		Vector2 Center_BL_Shift;
 		Vector2 Center_TR_Shift;
 
@@ -31,6 +32,7 @@ namespace CloudberryKingdom
 		/// Make center quad's texture mirrored horizontally.
 		/// </summary>
 		bool Mirror;
+
 	};
 
 	struct PieceQuad

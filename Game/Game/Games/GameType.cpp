@@ -1650,6 +1650,9 @@ namespace CloudberryKingdom
 
 	void GameData::InitializeInstanceFields()
 	{
+		FadingToBlack = FadingIn = false;
+		BlackAlpha = 0;
+
 		_IsSetToReturnTo = false;
 
 		HasLava = false;

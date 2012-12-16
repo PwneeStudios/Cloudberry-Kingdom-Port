@@ -199,6 +199,37 @@ namespace CloudberryKingdom
 		OnUsed = OnMarkedForDeletion = 0;
 	}
 
+	GenerationData::GenerationData()
+	{
+		KeepIfUnused = 0;
+		EnforceBounds = 0;
+
+		AlwaysUse = AlwaysLandOn = AlwaysLandOn_Reluctantly = 0;
+		Used = RemoveIfUnused = RemoveIfUsed = RemoveIfOverlap = 0;
+		UsedTimeStamp = 0;
+
+		MyOverlapPreference = static_cast<OverlapPreference>( 0 );
+
+		NoBlockOverlap = 0;
+		OverlapWidth = 0;
+		LimitGeneralDensity = 0;
+
+		LimitDensity = 0;
+
+		DeleteSurroundingOnUse = 0;
+
+		EdgeJumpOnly = 0;
+
+		TemporaryNoLandZone = 0;
+
+		JumpNow = 0;
+
+		EdgeSafety = 0;
+
+		NoBottomShift = 0;
+		NoMakingTopOnly = 0;
+	}
+
 	void GenerationData::Init()
 	{
 		OnUsed = OnMarkedForDeletion = 0;

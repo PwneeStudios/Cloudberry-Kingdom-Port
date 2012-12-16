@@ -822,10 +822,19 @@ namespace CloudberryKingdom
 	{
 		UseEffective = false;
 		RocketManCamera = false;
+		Shaking = false;
 		Oscillating = false;
+		ShakingIntensity = 0;
 		ZoneLocked = false;
+		Speed = SpeedVel = TargetSpeed = 0;
+		ScreenWidth = ScreenHeight = 0;
+		AspectRatio = 0;
+		FollowCenter = false;
+		LastUpdate = 0;
 		LastUpdate = -1;
+		ShakeCount = ShakeLength = 0;
 		MyPhsxType = Camera_PhsxType_SIDE_LEVEL_RIGHT;
+		t = 0;
 		MovingCamera = false;
 	}
 }
