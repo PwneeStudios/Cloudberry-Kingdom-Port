@@ -8,6 +8,11 @@
 
 #include <Math/Vectors.h>
 
+inline float ColorClamp( float x )
+{
+	return x < 0.f ? 0.f : ( x > 1.f ? 1.f : x );
+}
+
 struct Color
 {
 	union
@@ -29,25 +34,25 @@ struct Color
 	Color( unsigned char r, unsigned char g, unsigned char b, unsigned char a ) :
 		R( r ), G( g ), B( b ), A( a ) { }
 	explicit Color( const Vector4 &c ) :
-		R( static_cast< unsigned char >( c.X * 255.f ) ),
-		G( static_cast< unsigned char >( c.Y * 255.f ) ),
-		B( static_cast< unsigned char >( c.Z * 255.f ) ),
-		A( static_cast< unsigned char >( c.W * 255.f ) ) { }
+		R( static_cast< unsigned char >( ColorClamp( c.X ) * 255.f ) ),
+		G( static_cast< unsigned char >( ColorClamp( c.Y ) * 255.f ) ),
+		B( static_cast< unsigned char >( ColorClamp( c.Z ) * 255.f ) ),
+		A( static_cast< unsigned char >( ColorClamp( c.W ) * 255.f ) ) { }
 	explicit Color( const Vector3 &c ) :
-		R( static_cast< unsigned char >( c.X * 255.f ) ),
-		G( static_cast< unsigned char >( c.Y * 255.f ) ),
-		B( static_cast< unsigned char >( c.Z * 255.f ) ),
+		R( static_cast< unsigned char >( ColorClamp( c.X ) * 255.f ) ),
+		G( static_cast< unsigned char >( ColorClamp( c.Y ) * 255.f ) ),
+		B( static_cast< unsigned char >( ColorClamp( c.Z ) * 255.f ) ),
 		A( 255 ) { }
 	Color( float r, float g, float b ) :
-		R( static_cast< unsigned char >( r * 255.f ) ),
-		G( static_cast< unsigned char >( g * 255.f ) ),
-		B( static_cast< unsigned char >( b * 255.f ) ),
+		R( static_cast< unsigned char >( ColorClamp( r ) * 255.f ) ),
+		G( static_cast< unsigned char >( ColorClamp( g ) * 255.f ) ),
+		B( static_cast< unsigned char >( ColorClamp( b ) * 255.f ) ),
 		A( 255 ) { }
 	Color( float r, float g, float b, float a ) :
-		R( static_cast< unsigned char >( r * 255.f ) ),
-		G( static_cast< unsigned char >( g * 255.f ) ),
-		B( static_cast< unsigned char >( b * 255.f ) ),
-		A( static_cast< unsigned char >( a * 255.f ) ) { }
+		R( static_cast< unsigned char >( ColorClamp( r ) * 255.f ) ),
+		G( static_cast< unsigned char >( ColorClamp( g ) * 255.f ) ),
+		B( static_cast< unsigned char >( ColorClamp( b ) * 255.f ) ),
+		A( static_cast< unsigned char >( ColorClamp( a ) * 255.f ) ) { }
 
 	Vector4 ToVector4() const
 	{

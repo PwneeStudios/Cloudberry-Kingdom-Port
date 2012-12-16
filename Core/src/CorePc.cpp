@@ -90,8 +90,8 @@ int CorePc::Run()
 
 		glfwSwapBuffers();
 
-		/*if( glfwGetKey( GLFW_KEY_ESC ) || !glfwGetWindowParam( GLFW_OPENED ) )
-			Exit();*/
+		if( /*glfwGetKey( GLFW_KEY_ESC ) ||*/ !glfwGetWindowParam( GLFW_OPENED ) )
+			Exit();
 	}
 
 	return 0;
