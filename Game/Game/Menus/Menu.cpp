@@ -817,8 +817,17 @@ namespace CloudberryKingdom
 	{
 		Layer = 0;
 		FixedToCamera = true;
+		ReadyToPlaySound = false;
+		SkipPhsx = false;
+		_Control = 0;
+		CurIndex = 0;
 		SelectDelay = 11;
+		DelayCount = 0;
+		MotionCount = 0;
+		CurDrawLayer = 0;
 		OnA_AutoTimerLength = -1;
+		OnA_AutoTimerCount = 0;
+		Released = false;
 		HasSelectedThisStep = false;
 		WrapSelect = true;
 		MouseOnly = false;
@@ -827,6 +836,7 @@ namespace CloudberryKingdom
 		AlwaysSelected = false;
 		ShowLastActivated = false;
 		LastActivatedItem = -1;
+		ActiveTimeStamp = 0;
 		Active = true;
 		CheckForOutsideClick = false;
 		AffectsOutsideMouse = true;

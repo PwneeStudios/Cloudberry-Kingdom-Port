@@ -1759,12 +1759,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				//std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
-				//ScreenSaver_Construct( Intro );
-				//Intro->Init();
+				std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+				ScreenSaver_Construct( Intro );
+				Intro->Init();
 
 				return;
 	#else
