@@ -665,6 +665,39 @@ namespace CloudberryKingdom
 
 	void ObjectData::InitializeInstanceFields()
 	{
+		SkippedPhsx = false;
+		WakeUpRequirements = false;
+		Encased = false;
+		Held = Placed = false;
+		Holdable = EditHoldable = false;
+		Tag = 0;
+		MyGuid = 0;
+		DebugCode = 0;
+		BoxesOnly = Show = AlwaysBoxesOnly = false;
+		VisualResettedOnce = false;
+		RemoveOnReset = MarkedForDeletion = false;
+		Active = false;
+		DeletedByBob = false;
+		OnDeletionCodeRan = false;
+		DoNotDrawWithParent = false;
+		Real = false;
+		IsGameObject = false;
+		ResetOnlyOnReset = false;
+		DrawLayer2 = DrawLayer3 = 0;
+		DrawLayer = DrawSubLayer = 0;
+		FixSubLayer = false;
+		ContinuousEnabled = false;
+		AddedTimeStamp = 0;
+		ParentObjId = 0;
+		DoNotScrollOut = false;
+		StepOffset = 0;
+		Released = false;
+
+
+
+
+
+
 		_TileSet = 0;
 		VisualResettedOnce = false;
 		Real = true;

@@ -1964,6 +1964,8 @@ namespace CloudberryKingdom
 
 	void Bob::InitializeInstanceFields()
 	{
+		MyCapeType = static_cast<CapeType> ( 0 );
+
 		LightSourceFade = 1;
 		LightSourceFadeVel = 0;
 		Dopple = false;

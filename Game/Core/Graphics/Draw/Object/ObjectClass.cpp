@@ -1097,6 +1097,10 @@ namespace CloudberryKingdom
 		xFlip = false; yFlip = false; CenterFlipOnBox = false;
 		DrawWidth = 0; DrawHeight = 0;
 
+		Linear = false;
+		BoxesOnly = false;
+	
+
 		LoadingRunSpeed = .135f;
 		CapeThickness = 16;
 		p1_Left = Vector2( -63, -45 );

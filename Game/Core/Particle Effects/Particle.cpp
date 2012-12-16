@@ -3,6 +3,19 @@
 namespace CloudberryKingdom
 {
 
+	Particle::Particle() :
+		Frozen( false ),
+		Code( 0 ),
+		KillOffSides( false ), KillOffBottom( false ),
+		FadingIn( false ),
+		FadeInTargetAlpha( 0 ),
+		Angle( 0 ), AngleSpeed( 0 ),
+		Life( 0 ),
+		UseAttraction( false ),
+		AttractionStrength( 0 )
+	{
+	}
+
 	void Particle::InitializeStatics()
 	{
 		Particle::Pool = std::make_shared<ParticleBin>();

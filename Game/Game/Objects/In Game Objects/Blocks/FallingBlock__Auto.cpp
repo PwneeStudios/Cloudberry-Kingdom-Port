@@ -5,6 +5,8 @@ namespace CloudberryKingdom
 
 	void FallingBlock_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
 	{
+
+
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();

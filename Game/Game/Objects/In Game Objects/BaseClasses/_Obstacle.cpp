@@ -63,9 +63,15 @@ namespace CloudberryKingdom
 		}
 	}
 
+	void _Obstacle::Construct( bool BoxesOnly ) { }
+	void _Obstacle::DrawGraphics() { }
+	void _Obstacle::DrawBoxes() { }
+	void _Obstacle::ActivePhsxStep() { }
+
 	void _Obstacle::InitializeInstanceFields()
 	{
 		PhsxCutoff_Playing = Vector2( 200, 200 );
 		PhsxCutoff_BoxesOnly = Vector2( -150, 200 );
 	}
+
 }

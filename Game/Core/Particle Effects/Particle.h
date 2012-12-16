@@ -26,6 +26,7 @@ namespace CloudberryKingdom
 	struct Particle : public std::enable_shared_from_this<Particle>
 	{
 
+		Particle();
 	
 		static void InitializeStatics();
 

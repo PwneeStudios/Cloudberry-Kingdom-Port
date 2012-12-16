@@ -20,10 +20,10 @@ uniform float u_illumination;
 
 void main()
 {
-	a_position = u_flipCenter - u_flipVector * ( a_position - u_flipCenter );
+	vec2 position = u_flipCenter - u_flipVector * ( a_position - u_flipCenter );
 	
-	gl_Position.x = ( a_position.x - u_cameraPos.x ) / u_cameraAspect * u_cameraPos.z;
-	gl_Position.y = ( a_position.y - u_cameraPos.y ) * u_cameraPos.w;
+	gl_Position.x = ( position.x - u_cameraPos.x ) / u_cameraAspect * u_cameraPos.z;
+	gl_Position.y = ( position.y - u_cameraPos.y ) * u_cameraPos.w;
 	gl_Position.zw = vec2( 0, 1 );
 
 	v_position = gl_Position.xy;

@@ -34,6 +34,7 @@ namespace CloudberryKingdom
 
 	void Firesnake_Parameters::InitializeInstanceFields()
 	{
+		Make = false;
 		Snakes = std::vector<std::vector<unsigned long long> >();
 	}
 

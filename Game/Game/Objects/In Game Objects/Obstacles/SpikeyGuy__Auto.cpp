@@ -5,6 +5,10 @@ namespace CloudberryKingdom
 
 	void SpikeyGuy_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
 	{
+		Make = false;
+		Special.Pinwheel = Special.Rockwheel = false;
+
+
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();

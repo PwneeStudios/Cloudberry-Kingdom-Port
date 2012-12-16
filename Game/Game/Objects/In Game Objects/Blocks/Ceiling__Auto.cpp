@@ -17,6 +17,10 @@ namespace CloudberryKingdom
 
 	void Ceiling_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
 	{
+		Special.CementCeiling = Special.LongCeiling = false;
+		Make = false;
+
+
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
