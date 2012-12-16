@@ -3,7 +3,7 @@
 
 #include <global_header.h>
 
-#include "Hacks/XNA/KeyboardState.h"
+#include <Input/KeyboardState.h>
 
 namespace CloudberryKingdom
 {

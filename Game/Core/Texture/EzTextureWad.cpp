@@ -59,8 +59,8 @@ namespace CloudberryKingdom
 			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
 			{
 				( *Tex )->setTex( Content->Load<Texture2D>( ( *Tex )->Path ) );
-				( *Tex )->Width = ( *Tex )->getTex()->Width;
-				( *Tex )->Height = ( *Tex )->getTex()->Height;
+				/*( *Tex )->Width = ( *Tex )->getTex()->Width;
+				( *Tex )->Height = ( *Tex )->getTex()->Height;*/
 
 	#if defined(EDITOR)
 	#else
@@ -128,12 +128,14 @@ namespace CloudberryKingdom
 
 	std::shared_ptr<EzTexture> EzTextureWad::Find( const std::wstring &name )
 	{
-		if ( name.find( _T( "/" ) ) != std::string::npos && BigNameDict.find( name ) != BigNameDict.end() )
-			return BigNameDict[ name ];
-		else if ( PathDict.find( name ) != PathDict.end() )
-			return PathDict[ name ];
-		else if ( NameDict.find( name ) != NameDict.end() )
-			return NameDict[ name ];
+		std::wstring lowercaseName = ToLower( name );
+
+		if ( lowercaseName.find( _T( "/" ) ) != std::string::npos && BigNameDict.find( lowercaseName ) != BigNameDict.end() )
+			return BigNameDict[ lowercaseName ];
+		else if ( PathDict.find( lowercaseName ) != PathDict.end() )
+			return PathDict[ lowercaseName ];
+		else if ( NameDict.find( lowercaseName ) != NameDict.end() )
+			return NameDict[ lowercaseName ];
 
 		return DefaultTexture;
 	}

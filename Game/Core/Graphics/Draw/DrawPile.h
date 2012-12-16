@@ -49,7 +49,6 @@ namespace CloudberryKingdom
 
 		void Add( const std::shared_ptr<QuadClass> &quad );
 		void Add( const std::shared_ptr<QuadClass> &quad, const std::wstring &name );
-		void Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter );
 		void Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name );
 
 		void Insert( int index, const std::shared_ptr<QuadClass> &quad );

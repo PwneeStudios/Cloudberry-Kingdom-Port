@@ -3,7 +3,7 @@
 
 #include <global_header.h>
 
-#include "Hacks/XNA/MouseState.h"
+#include <Input/MouseState.h>
 #include "Hacks/XNA/GamePadState.h"
 #include "Hacks/XNA/GameTime.h"
 #include "Hacks/NET/StreamReader.h"

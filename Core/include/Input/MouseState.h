@@ -1,10 +1,12 @@
 #ifndef _MOUSESTATE_H_
 #define _MOUSESTATE_H_
 
-#include <enums.h>
+#include "InputEnums.h"
 
-struct MouseState
+class MouseState
 {
+
+public:
 
 	int X;
 	int Y;
@@ -18,7 +20,7 @@ struct MouseState
 		Y( 0 ),
 		ScrollWheelValue( 0 ),
 		LeftButton( ButtonState_Released ),
-		RightButton( ButtonState_Pressed )
+		RightButton( ButtonState_Released )
 	{
 	}
 

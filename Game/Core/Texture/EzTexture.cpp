@@ -24,8 +24,8 @@ namespace CloudberryKingdom
 		if ( _Tex == 0 && Path != _T( "" ) )
 		{
 			_Tex = Tools::GameClass->getContent()->Load<Texture2D>(Path);
-			Width = _Tex->Width;
-			Height = _Tex->Height;
+			/*Width = _Tex->Width;
+			Height = _Tex->Height;*/
 		}
 
 		return _Tex != 0;

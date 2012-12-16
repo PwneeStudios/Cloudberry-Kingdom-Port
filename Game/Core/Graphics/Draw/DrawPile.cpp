@@ -90,11 +90,6 @@ namespace CloudberryKingdom
 		Add( quad, false, name );
 	}
 
-	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter )
-	{
-		Add( quad, KeepFancyCenter, _T( "" ) );
-	}
-
 	void DrawPile::Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name )
 	{
 		if ( name != _T( "" ) )

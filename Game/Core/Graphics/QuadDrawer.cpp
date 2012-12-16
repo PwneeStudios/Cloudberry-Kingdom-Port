@@ -284,7 +284,6 @@ namespace CloudberryKingdom
 		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
 
 		sq.Diffuse = quad.getMyTexture()->getTex()->texture_;
-		LOG.Write( "%s\n", sq.Diffuse->GetPath() );
 		QUAD_DRAWER->Draw( sq );
 
 		/*Vertices[ i ] = quad.v0.Vertex;

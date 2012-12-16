@@ -26,8 +26,16 @@ public:
 	/**
 	 * @param text Text to draw.
 	 * @param position Screen position of upper left hand corner.
+	 * @param color Text color.
 	 */
-	void Draw( const std::string &text, const Vector2 &position );
+	void Draw( const std::string &text, const Vector2 &position, const Vector4 &color );
+
+	/// Measure the size of the text.
+	/**
+	 * @param text Text to be measured.
+	 * @return Vector with the width and height of the text.
+	 */
+	Vector2 MeasureString( const std::string &text );
 
 };
 
