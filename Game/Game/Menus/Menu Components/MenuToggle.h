@@ -8,14 +8,14 @@ namespace CloudberryKingdom
 	struct MenuToggle : public MenuItem
 	{
 	
-		MenuToggle( const std::shared_ptr<EzFont> &Font );
+		MenuToggle( const boost::shared_ptr<EzFont> &Font );
 
 	
 		bool MyState;
 	
 		void Toggle( bool state );
 
-		std::shared_ptr<Lambda_1<bool> > OnToggle;
+		boost::shared_ptr<Lambda_1<bool> > OnToggle;
 		virtual void PhsxStep( bool Selected );
 
 	

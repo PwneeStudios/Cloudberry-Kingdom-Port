@@ -10,10 +10,10 @@ namespace CloudberryKingdom
 	
 		int Width, Height;
 	
-		std::shared_ptr<Texture2D> _Tex;
+		boost::shared_ptr<Texture2D> _Tex;
 	
-		const std::shared_ptr<Texture2D> &getTex() const;
-		void setTex( const std::shared_ptr<Texture2D> &value );
+		const boost::shared_ptr<Texture2D> &getTex() const;
+		void setTex( const boost::shared_ptr<Texture2D> &value );
 
 		float getAspectRatio() const;
 
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool FromPacked;
 
-		std::shared_ptr<EzTexture> Packed;
+		boost::shared_ptr<EzTexture> Packed;
 
 		/// <summary>
 		/// If true this texture was loaded dynamically after the game loaded, not from a packed XNA file.
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		Vector2 BL, TR;
 
 #if defined(EDITOR)
-		static std::shared_ptr<Game> game;
+		static boost::shared_ptr<Game> game;
 		bool Load();
 #else
 		bool Load();

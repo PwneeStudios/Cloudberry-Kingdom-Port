@@ -7,7 +7,7 @@
 namespace CloudberryKingdom
 {
 
-	GUI_Panel::ReturnToCallerHelper::ReturnToCallerHelper( const std::shared_ptr<GUI_Panel> &panel )
+	GUI_Panel::ReturnToCallerHelper::ReturnToCallerHelper( const boost::shared_ptr<GUI_Panel> &panel )
 	{
 		this->panel = panel;
 	}
@@ -17,47 +17,47 @@ namespace CloudberryKingdom
 		panel->OnReturnTo();
 	}
 
-	GUI_Panel::ItemReturnToCallerProxy::ItemReturnToCallerProxy( const std::shared_ptr<GUI_Panel> &guiPanel )
+	GUI_Panel::ItemReturnToCallerProxy::ItemReturnToCallerProxy( const boost::shared_ptr<GUI_Panel> &guiPanel )
 	{
 		this->guiPanel = guiPanel;
 	}
 
-	void GUI_Panel::ItemReturnToCallerProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void GUI_Panel::ItemReturnToCallerProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		guiPanel->ItemReturnToCaller( item );
 	}
 
-	GUI_Panel::MenuReturnToCallerProxy::MenuReturnToCallerProxy( const std::shared_ptr<GUI_Panel> &guiPanel )
+	GUI_Panel::MenuReturnToCallerProxy::MenuReturnToCallerProxy( const boost::shared_ptr<GUI_Panel> &guiPanel )
 	{
 		this->guiPanel = guiPanel;
 	}
 
-	void GUI_Panel::MenuReturnToCallerProxy::Apply( const std::shared_ptr<Menu> &menu )
+	void GUI_Panel::MenuReturnToCallerProxy::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		guiPanel->MenuReturnToCaller( menu );
 	}
 
-	GUI_Panel::MenuReturnToCallerLambda::MenuReturnToCallerLambda( const std::shared_ptr<GUI_Panel> &panel )
+	GUI_Panel::MenuReturnToCallerLambda::MenuReturnToCallerLambda( const boost::shared_ptr<GUI_Panel> &panel )
 	{
 		this->panel = panel;
 	}
 
-	void GUI_Panel::MenuReturnToCallerLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void GUI_Panel::MenuReturnToCallerLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		panel->ReturnToCaller();
 	}
 
-	GUI_Panel::MenuReturnToCallerLambdaFunc::MenuReturnToCallerLambdaFunc( const std::shared_ptr<GUI_Panel> &panel )
+	GUI_Panel::MenuReturnToCallerLambdaFunc::MenuReturnToCallerLambdaFunc( const boost::shared_ptr<GUI_Panel> &panel )
 	{
 		this->panel = panel;
 	}
 
-	bool GUI_Panel::MenuReturnToCallerLambdaFunc::Apply( const std::shared_ptr<Menu> &menu )
+	bool GUI_Panel::MenuReturnToCallerLambdaFunc::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		return panel->MenuReturnToCaller( menu );
 	}
 
-	GUI_Panel::CallHelper::CallHelper( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<GUI_Panel> &child )
+	GUI_Panel::CallHelper::CallHelper( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<GUI_Panel> &child )
 	{
 		this->panel = panel;
 		this->child = child;
@@ -106,15 +106,15 @@ namespace CloudberryKingdom
 		Hide();
 
 		if ( Caller != 0 )
-			MyGame->WaitThenDo( ReturnToCallerDelay, std::make_shared<ReturnToCallerHelper>( this->Caller ) );
+			MyGame->WaitThenDo( ReturnToCallerDelay, boost::make_shared<ReturnToCallerHelper>( this->Caller ) );
 	}
 
-	void GUI_Panel::ItemReturnToCaller( const std::shared_ptr<MenuItem> &item )
+	void GUI_Panel::ItemReturnToCaller( const boost::shared_ptr<MenuItem> &item )
 	{
 		ReturnToCaller();
 	}
 
-	bool GUI_Panel::MenuReturnToCaller( const std::shared_ptr<Menu> &menu )
+	bool GUI_Panel::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
 	{
 		ReturnToCaller();
 
@@ -132,23 +132,23 @@ namespace CloudberryKingdom
 		Show();
 	}
 
-	void GUI_Panel::Call( const std::shared_ptr<GUI_Panel> &child )
+	void GUI_Panel::Call( const boost::shared_ptr<GUI_Panel> &child )
 	{
 		Call( child, CallDelay );
 	}
 
-	void GUI_Panel::Call( const std::shared_ptr<GUI_Panel> &child, int Delay )
+	void GUI_Panel::Call( const boost::shared_ptr<GUI_Panel> &child, int Delay )
 	{
-		child->Caller = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
+		child->Caller = boost::static_pointer_cast<GUI_Panel>( shared_from_this() );
 
 		SetChildControl( child );
 
-		MyGame->WaitThenDo( Delay, std::make_shared<CallHelper>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ), child ) );
+		MyGame->WaitThenDo( Delay, boost::make_shared<CallHelper>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), child ) );
 
 		Active = false;
 	}
 
-	void GUI_Panel::SetChildControl( const std::shared_ptr<GUI_Panel> &child )
+	void GUI_Panel::SetChildControl( const boost::shared_ptr<GUI_Panel> &child )
 	{
 		// Copy control index to the child panel if the child hasn't initialized it's control already
 		if ( child->getControl() < 0 )
@@ -181,12 +181,12 @@ namespace CloudberryKingdom
 		outside( false )
 	{
 	}
-	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct()
+	boost::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct()
 	{
 		InitializeInstanceFields();
 		Constructor();
 
-		return std::static_pointer_cast<GUI_Panel>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
 	GUI_Panel::GUI_Panel( bool CallBaseConstructor ) :
@@ -204,13 +204,13 @@ namespace CloudberryKingdom
 		outside( false )
 	{
 	}
-	std::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct( bool CallBaseConstructor )
+	boost::shared_ptr<GUI_Panel> GUI_Panel::GUI_Panel_Construct( bool CallBaseConstructor )
 	{
 		InitializeInstanceFields();
 		if ( CallBaseConstructor )
 			Constructor();
 
-		return std::static_pointer_cast<GUI_Panel>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Panel>( shared_from_this() );
 	}
 
 	void GUI_Panel::Constructor()
@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 	{
 		GameObject::Init();
 
-		Pos = std::make_shared<FancyVector2>();
+		Pos = boost::make_shared<FancyVector2>();
 	}
 
 	void GUI_Panel::OnCameraChange()
@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 		Pos->LerpTo( Vector2(), Frames );
 	}
 
-	void GUI_Panel::CopySlideLengths( const std::shared_ptr<GUI_Panel> &source )
+	void GUI_Panel::CopySlideLengths( const boost::shared_ptr<GUI_Panel> &source )
 	{
 		SlideInLength = source->SlideInLength;
 		SlideOutLength = source->SlideOutLength;
@@ -323,9 +323,9 @@ namespace CloudberryKingdom
 	void GUI_Panel::EnsureFancy()
 	{
 		if ( MyPile != 0 && MyPile->FancyPos == 0 )
-			MyPile->FancyPos = std::make_shared<FancyVector2>( Pos );
+			MyPile->FancyPos = boost::make_shared<FancyVector2>( Pos );
 		if ( MyMenu != 0 && MyMenu->FancyPos == 0 )
-			MyMenu->FancyPos = std::make_shared<FancyVector2>( Pos );
+			MyMenu->FancyPos = boost::make_shared<FancyVector2>( Pos );
 	}
 
 	bool GUI_Panel::OnScreen()
@@ -455,7 +455,7 @@ namespace CloudberryKingdom
 	{
 		CheckForBackFromOutsideClick();
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		Pos->Update();
 

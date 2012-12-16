@@ -66,15 +66,15 @@ namespace CloudberryKingdom
 
 	FallingBlock::FallingBlock( bool BoxesOnly )
 	{
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		MakeNew();
 
 		getCore()->BoxesOnly = BoxesOnly;
 	}
 
-	void FallingBlock::Init( Vector2 center, Vector2 size, int life, const std::shared_ptr<Level> &level )
+	void FallingBlock::Init( Vector2 center, Vector2 size, int life, const boost::shared_ptr<Level> &level )
 	{
 		Active = true;
 
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		SetState( FallingBlockState_REGULAR, true );
 	}
 
-	void FallingBlock::HitHeadOn( const std::shared_ptr<Bob> &bob )
+	void FallingBlock::HitHeadOn( const boost::shared_ptr<Bob> &bob )
 	{
 		/* Use this if you want inverted Bobs to set off falling blocks
 		 * 
@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 		 * */
 	}
 
-	void FallingBlock::LandedOn( const std::shared_ptr<Bob> &bob )
+	void FallingBlock::LandedOn( const boost::shared_ptr<Bob> &bob )
 	{
 		// Don't register as a land if the Bob is moving upward.
 		if ( bob->getCore()->Data.Velocity.Y > 3 )
@@ -306,11 +306,11 @@ namespace CloudberryKingdom
 		getBlockCore()->Draw();
 	}
 
-	void FallingBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void FallingBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<FallingBlock> BlockA = std::dynamic_pointer_cast<FallingBlock>( A );
+		boost::shared_ptr<FallingBlock> BlockA = boost::dynamic_pointer_cast<FallingBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->StartLife, BlockA->getMyLevel() );
 

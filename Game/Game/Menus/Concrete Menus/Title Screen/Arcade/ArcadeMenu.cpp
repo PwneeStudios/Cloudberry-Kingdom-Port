@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	ArcadeItem::ArcadeItem( const std::shared_ptr<EzText> &Text, const std::shared_ptr<Challenge> &MyChallenge, const std::shared_ptr<Awardment> &MyPrereq ) : MenuItem( Text )
+	ArcadeItem::ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq ) : MenuItem( Text )
 	{
 		this->MyChallenge = MyChallenge;
 		this->MyPrereq = MyPrereq;
@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		Locked = MyPrereq != 0 && !PlayerManager::Awarded( MyPrereq ) && !CloudberryKingdomGame::UnlockAll;
 	}
 
-	ArcadeBaseMenu::PlayGameProxy::PlayGameProxy( const std::shared_ptr<ArcadeBaseMenu> &abm )
+	ArcadeBaseMenu::PlayGameProxy::PlayGameProxy( const boost::shared_ptr<ArcadeBaseMenu> &abm )
 	{
 		this->abm = abm;
 	}
@@ -23,21 +23,21 @@ namespace CloudberryKingdom
 		abm->PlayGame();
 	}
 
-	ArcadeBaseMenu::StartFuncProxy::StartFuncProxy( const std::shared_ptr<ArcadeBaseMenu> &abm )
+	ArcadeBaseMenu::StartFuncProxy::StartFuncProxy( const boost::shared_ptr<ArcadeBaseMenu> &abm )
 	{
 		this->abm = abm;
 	}
 
-	void ArcadeBaseMenu::StartFuncProxy::Apply( const std::shared_ptr<LevelItem> &levelitem )
+	void ArcadeBaseMenu::StartFuncProxy::Apply( const boost::shared_ptr<LevelItem> &levelitem )
 	{
 		abm->StartFunc( levelitem );
 	}
 
-	std::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu::ArcadeBaseMenu_Construct()
+	boost::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu::ArcadeBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() );
 	}
 
 	void ArcadeBaseMenu::OnAdd()
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		MyGame->ClearPreviousLoadFunction();
 	}
 
-	void ArcadeBaseMenu::StartFunc( const std::shared_ptr<LevelItem> &item )
+	void ArcadeBaseMenu::StartFunc( const boost::shared_ptr<LevelItem> &item )
 	{
 		SelectedItem = item;
 
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		StartLevelMenu::PreviousMenuIndex = item->MenuIndex;
 
 		// Start the game
-		MyGame->PlayGame( std::make_shared<PlayGameProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) ) );
+		MyGame->PlayGame( boost::make_shared<PlayGameProxy>( boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) ) );
 	}
 
 	void ArcadeBaseMenu::PlayGame()
@@ -76,17 +76,17 @@ namespace CloudberryKingdom
 		SelectedItem.reset();
 	}
 
-	ArcadeMenu::GoProxy::GoProxy( const std::shared_ptr<ArcadeMenu> &am )
+	ArcadeMenu::GoProxy::GoProxy( const boost::shared_ptr<ArcadeMenu> &am )
 	{
 		this->am = am;
 	}
 
-	void ArcadeMenu::GoProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void ArcadeMenu::GoProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		am->Go( item );
 	}
 
-	void ArcadeMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void ArcadeMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		ArcadeBaseMenu::SetItemProperties( item );
 
@@ -101,9 +101,9 @@ namespace CloudberryKingdom
 
 	void ArcadeMenu::SetLockColors()
 	{
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<Awardment> award = std::dynamic_pointer_cast<Awardment>( ( *item )->MyObject );
+			boost::shared_ptr<Awardment> award = boost::dynamic_pointer_cast<Awardment>( ( *item )->MyObject );
 			if ( 0 != award && !PlayerManager::Awarded( award ) && !CloudberryKingdomGame::UnlockAll )
 			{
 				( *item )->MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
@@ -121,13 +121,13 @@ namespace CloudberryKingdom
 		Long( false )
 	{
 	}
-	std::shared_ptr<ArcadeMenu> ArcadeMenu::ArcadeMenu_Construct()
+	boost::shared_ptr<ArcadeMenu> ArcadeMenu::ArcadeMenu_Construct()
 	{
 		InitializeInstanceFields();
 
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
-		return std::static_pointer_cast<ArcadeMenu>( shared_from_this() );
+		return boost::static_pointer_cast<ArcadeMenu>( shared_from_this() );
 	}
 
 	void ArcadeMenu::Init()
@@ -136,24 +136,24 @@ namespace CloudberryKingdom
 
 		SetParams();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Menu
 		if ( Long )
 		{
-			MyMenu = std::make_shared<LongMenu>();
+			MyMenu = boost::make_shared<LongMenu>();
 			MyMenu->FixedToCamera = false;
 			MyMenu->WrapSelect = false;
 		}
 		else
-			MyMenu = std::make_shared<Menu>( false );
+			MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
-		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
+		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
 		Header->Name = _T( "Header" );
 		MyMenu->Add( Header );
 		SetItemProperties( Header );
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 		Header->MyText->setScale( Header->MyText->getScale() * 1.15f );
 		Header->Selectable = false;
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 		ItemPos = Vector2( -1689.523f, 520.4127f );
 
 		// Escalation
@@ -180,9 +180,9 @@ namespace CloudberryKingdom
 		//item = AddChallenge(Challenge_HeroRush2.Instance, Awardments.UnlockHeroRush2, null, "Bungee");
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop;
+		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
+		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
 		if ( Long )
 			backdrop->setSizeY( backdrop->getSizeY() * 1.02f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
@@ -214,22 +214,22 @@ namespace CloudberryKingdom
 		return Vector2( -174.6031f, -603.1746f );
 	}
 
-	std::shared_ptr<MenuItem> ArcadeMenu::AddChallenge( const std::shared_ptr<Challenge> &challenge, const std::shared_ptr<Awardment> &prereq, const std::shared_ptr<Awardment> &goal, const std::wstring &itemname )
+	boost::shared_ptr<MenuItem> ArcadeMenu::AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const boost::shared_ptr<Awardment> &goal, const std::wstring &itemname )
 	{
-		std::shared_ptr<ArcadeItem> item;
+		boost::shared_ptr<ArcadeItem> item;
 		Localization::Words word = challenge->MenuName != 0 ? challenge->MenuName : challenge->Name;
 
-		item = std::make_shared<ArcadeItem>( std::make_shared<EzText>( word, ItemFont ), challenge, prereq );
+		item = boost::make_shared<ArcadeItem>( boost::make_shared<EzText>( word, ItemFont ), challenge, prereq );
 
 		item->Name = itemname;
 		AddItem( item );
 
-		item->setGo( std::make_shared<GoProxy>( std::static_pointer_cast<ArcadeMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<GoProxy>( boost::static_pointer_cast<ArcadeMenu>( shared_from_this() ) ) );
 
 		return item;
 	}
 
-	void ArcadeMenu::Go( const std::shared_ptr<MenuItem> &item )
+	void ArcadeMenu::Go( const boost::shared_ptr<MenuItem> &item )
 	{
 	}
 

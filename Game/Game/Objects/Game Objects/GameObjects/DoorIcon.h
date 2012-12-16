@@ -12,18 +12,18 @@ namespace CloudberryKingdom
 		int Level_Renamed;
 	
 		DoorIcon( int Level_Renamed );
-		std::shared_ptr<DoorIcon> DoorIcon_Construct( int Level_Renamed );
+		boost::shared_ptr<DoorIcon> DoorIcon_Construct( int Level_Renamed );
 
-		DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
-		std::shared_ptr<DoorIcon> DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
+		DoorIcon( const boost::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
+		boost::shared_ptr<DoorIcon> DoorIcon_Construct( const boost::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale );
 
 		std::wstring s;
 		Upgrade upgrade;
-		std::shared_ptr<BobPhsx> hero;
+		boost::shared_ptr<BobPhsx> hero;
 	
-		std::shared_ptr<ObjectIcon> icon;
+		boost::shared_ptr<ObjectIcon> icon;
 	
-		void SetIcon( const std::shared_ptr<BobPhsx> &hero );
+		void SetIcon( const boost::shared_ptr<BobPhsx> &hero );
 		void SetIcon( Upgrade upgrade );
 		void SetIcon( IconType type );
 

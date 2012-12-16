@@ -22,11 +22,11 @@ namespace CloudberryKingdom
 	struct RndDifficulty
 	{
 	
-		static int ChoosePaths( const std::shared_ptr<PieceSeedData> &data );
+		static int ChoosePaths( const boost::shared_ptr<PieceSeedData> &data );
 
 		static LadderType ChooseLadder( int Difficulty );
 
-		static void ZeroUpgrades( const std::shared_ptr<Upgrades> &upgrades );
+		static void ZeroUpgrades( const boost::shared_ptr<Upgrades> &upgrades );
 
 		//static public int[] ChooseUpgrades(int Num)
 		//{
@@ -39,15 +39,15 @@ namespace CloudberryKingdom
 		//}
 
 
-		static void EnforceLevelCap( const std::shared_ptr<Upgrades> &upgrades, int Cap, int LowerCap );
+		static void EnforceLevelCap( const boost::shared_ptr<Upgrades> &upgrades, int Cap, int LowerCap );
 
-		static void UseUpgrades( const std::shared_ptr<PieceSeedData> &Seed, const std::shared_ptr<Upgrades> &u );
+		static void UseUpgrades( const boost::shared_ptr<PieceSeedData> &Seed, const boost::shared_ptr<Upgrades> &u );
 
 		/// <summary>
 		/// Randomizes the obstacles upgrades of a seed, using the seed's integer valued difficulty.
 		/// </summary>
 		/// <param name="Seed"></param>
-		static void IntToDifficulty( const std::shared_ptr<PieceSeedData> &Seed, const std::shared_ptr<TileSet> &TileType );
+		static void IntToDifficulty( const boost::shared_ptr<PieceSeedData> &Seed, const boost::shared_ptr<TileSet> &TileType );
 	};
 }
 

@@ -7,17 +7,17 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void MakeFinalDoor::VanillaFillEndPieceLambda::Apply( const std::shared_ptr<BlockBase> &block )
+	void MakeFinalDoor::VanillaFillEndPieceLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
 		block->getBlockCore()->EndPiece = true;
 	}
 
-	MakeFinalDoor::ModBlockLambda::ModBlockLambda( const std::shared_ptr<MakeFinalDoor> &mfd )
+	MakeFinalDoor::ModBlockLambda::ModBlockLambda( const boost::shared_ptr<MakeFinalDoor> &mfd )
 	{
 		this->mfd = mfd;
 	}
 
-	void MakeFinalDoor::ModBlockLambda::Apply( const std::shared_ptr<BlockBase> &block )
+	void MakeFinalDoor::ModBlockLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
 		mfd->ModBlock( block );
 	}
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool MakeFinalDoor::FindFinalBlockLambda::Apply( const std::shared_ptr<BlockBase> &block )
+	bool MakeFinalDoor::FindFinalBlockLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
 		return block->getCore()->GenData.Used && block->getCore()->IsCalled( _T("FinalBlock") );
 	}
@@ -35,12 +35,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	float MakeFinalDoor::BoxTRyLambda::Apply( const std::shared_ptr<BlockBase> &block )
+	float MakeFinalDoor::BoxTRyLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
 		return block->getBox()->TR.Y;
 	}
 
-	MakeFinalDoor::MakeFinalDoor( const std::shared_ptr<Level> &level )
+	MakeFinalDoor::MakeFinalDoor( const boost::shared_ptr<Level> &level )
 	{
 		InitializeInstanceFields();
 		MyLevel = level;
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		float Spacing = 200;
 		Vector2 TR = Vector2( MyLevel->MaxRight + 1000, MyLevel->getMainCamera()->TR.Y - 850 );
 
-		float NewRight = MyLevel->VanillaFill( BL, TR, 400, Spacing, std::make_shared<VanillaFillEndPieceLambda>(), std::make_shared<ModBlockLambda>( shared_from_this() ) );
+		float NewRight = MyLevel->VanillaFill( BL, TR, 400, Spacing, boost::make_shared<VanillaFillEndPieceLambda>(), boost::make_shared<ModBlockLambda>( shared_from_this() ) );
 
 		// Make lowest block a safety (we'll place the door here if no other block is used)
 		FinalBlocks[ 0 ]->getCore()->GenData.KeepIfUnused = true;
@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void MakeFinalDoor::ModBlock( const std::shared_ptr<BlockBase> &block )
+	void MakeFinalDoor::ModBlock( const boost::shared_ptr<BlockBase> &block )
 	{
 		block->getBlockCore()->DisableFlexibleHeight = true;
 		block->getBlockCore()->DeleteIfTopOnly = true;
@@ -107,8 +107,8 @@ namespace CloudberryKingdom
 	{
 		MakeThing::Phase2();
 
-		BlockVec _FinalBlocks = Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<FindFinalBlockLambda>() );
-		FinalBlock = Tools::ArgMax<std::shared_ptr<BlockBase> >( _FinalBlocks, std::make_shared<BoxTRyLambda>() );
+		BlockVec _FinalBlocks = Tools::FindAll<boost::shared_ptr<BlockBase> >( MyLevel->Blocks, boost::make_shared<FindFinalBlockLambda>() );
+		FinalBlock = Tools::ArgMax<boost::shared_ptr<BlockBase> >( _FinalBlocks, boost::make_shared<BoxTRyLambda>() );
 
 		// If none exist use the lowest block
 		if ( FinalBlock == 0 )
@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 		}
 
 		// Add door
-		std::shared_ptr<Door> door = MyLevel->PlaceDoorOnBlock( FinalPos, FinalBlock, MyLevel->MyTileSet->CustomStartEnd ? false : true );
+		boost::shared_ptr<Door> door = MyLevel->PlaceDoorOnBlock( FinalPos, FinalBlock, MyLevel->MyTileSet->CustomStartEnd ? false : true );
 
 		// New style end blocks
 		if ( MyLevel->MyTileSet->FixedWidths )
@@ -176,20 +176,20 @@ namespace CloudberryKingdom
 		FinalBlock.reset();
 	}
 
-	void MakeFinalDoor::AttachDoorAction( const std::shared_ptr<ILevelConnector> &door )
+	void MakeFinalDoor::AttachDoorAction( const boost::shared_ptr<ILevelConnector> &door )
 	{
 		if ( Tools::WorldMap != 0 )
 		{
-			std::shared_ptr<StringWorldGameData> stringworld = std::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
+			boost::shared_ptr<StringWorldGameData> stringworld = boost::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 			if ( stringworld != 0 )
 			{
-				door->setOnOpen( std::make_shared<EOL_StringWorldDoorActionProxy>( stringworld ) );
-				door->setOnEnter( std::make_shared<EOL_StringWorldDoorEndActionProxy>( stringworld ) );
+				door->setOnOpen( boost::make_shared<EOL_StringWorldDoorActionProxy>( stringworld ) );
+				door->setOnEnter( boost::make_shared<EOL_StringWorldDoorEndActionProxy>( stringworld ) );
 			}
 		}
 	}
 
-	void MakeFinalDoor::SetFinalDoor( const std::shared_ptr<Door> &door, const std::shared_ptr<Level> &level, Vector2 FinalPos )
+	void MakeFinalDoor::SetFinalDoor( const boost::shared_ptr<Door> &door, const boost::shared_ptr<Level> &level, Vector2 FinalPos )
 	{
 		door->getCore()->EditorCode1 = LevelConnector::EndOfLevelCode;
 
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find<std::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		boost::shared_ptr<CameraZone> camzone = boost::static_pointer_cast<CameraZone>( Tools::Find<boost::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 500;
 
@@ -212,17 +212,17 @@ namespace CloudberryKingdom
 
 	void FindCamZoneLambda::InitializeStatics()
 	{
-		FindCamZoneLambda::FindCamZoneLambda_Static = std::make_shared<FindCamZoneLambda>();
+		FindCamZoneLambda::FindCamZoneLambda_Static = boost::make_shared<FindCamZoneLambda>();
 	}
 
 	// Statics
-	std::shared_ptr<FindCamZoneLambda> FindCamZoneLambda::FindCamZoneLambda_Static;
+	boost::shared_ptr<FindCamZoneLambda> FindCamZoneLambda::FindCamZoneLambda_Static;
 
 	FindCamZoneLambda::FindCamZoneLambda()
 	{
 	}
 
-	bool FindCamZoneLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool FindCamZoneLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->MyType == ObjectType_CAMERA_ZONE;
 	}

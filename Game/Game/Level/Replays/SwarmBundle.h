@@ -10,47 +10,47 @@ namespace CloudberryKingdom
 	{
 
 	
-		struct BobToSpritesLambda : public Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2>
+		struct BobToSpritesLambda : public Lambda_2<std::map<int, boost::shared_ptr<SpriteAnim> >, Vector2>
 		{
 		
-			std::shared_ptr<Bob> bob;
+			boost::shared_ptr<Bob> bob;
 		
-			BobToSpritesLambda( const std::shared_ptr<Bob> &bob );
+			BobToSpritesLambda( const boost::shared_ptr<Bob> &bob );
 
-			void Apply( const std::map<int, std::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos );
+			void Apply( const std::map<int, boost::shared_ptr<SpriteAnim> > &dict, const Vector2 &pos );
 		};
 
 	
-		std::vector<std::shared_ptr<SwarmRecord> > Swarms;
+		std::vector<boost::shared_ptr<SwarmRecord> > Swarms;
 	
-		std::shared_ptr<SwarmRecord> CurrentSwarm;
+		boost::shared_ptr<SwarmRecord> CurrentSwarm;
 
 		bool Initialized;
 	
-		std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup;
+		std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup;
 
-		std::vector<std::shared_ptr<BobLink> > BobLinks;
+		std::vector<boost::shared_ptr<BobLink> > BobLinks;
 
 	
 		void Release();
 
 		SwarmBundle();
 
-		void Init( const std::shared_ptr<Level> &level );
+		void Init( const boost::shared_ptr<Level> &level );
 
-		void SetSwarm( const std::shared_ptr<Level> &level, int i );
+		void SetSwarm( const boost::shared_ptr<Level> &level, int i );
 
 		const int getSwarmIndex() const;
 
 		const int getNumSwarms() const;
 
-		bool GetNextSwarm( const std::shared_ptr<Level> &level );
+		bool GetNextSwarm( const boost::shared_ptr<Level> &level );
 
-		bool EndCheck( const std::shared_ptr<Level> &level );
+		bool EndCheck( const boost::shared_ptr<Level> &level );
 
 		void StartNewSwarm();
 
-		void Draw( int Step, const std::shared_ptr<Level> &level );
+		void Draw( int Step, const boost::shared_ptr<Level> &level );
 	};
 }
 

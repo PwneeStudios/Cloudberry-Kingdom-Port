@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 		Step( 0 )
 	{
 	}
-	std::shared_ptr<HintBlurb> HintBlurb::HintBlurb_Construct()
+	boost::shared_ptr<HintBlurb> HintBlurb::HintBlurb_Construct()
 	{
 		InitializeInstanceFields();
 
@@ -18,18 +18,18 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 		getCore()->RemoveOnReset = false;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		MakeBackdrop();
 
 		SetText( _T( "Hold {pXbox_A,85,?} to jump higher!" ) );
 
-		return std::static_pointer_cast<HintBlurb>( shared_from_this() );
+		return boost::static_pointer_cast<HintBlurb>( shared_from_this() );
 	}
 
 	void HintBlurb::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true, false );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		Backdrop->setTextureName( _T( "WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1250, 138 ) );
 		Backdrop->setPos( Vector2( 0, 0 ) );
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 			if ( ( *obj ).get() == this )
 				continue;
 
-			std::shared_ptr<HintBlurb> blurb = std::dynamic_pointer_cast<HintBlurb>( *obj );
+			boost::shared_ptr<HintBlurb> blurb = boost::dynamic_pointer_cast<HintBlurb>( *obj );
 			if ( 0 != blurb )
 				blurb->Kill();
 		}
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		MyPile->MyTextList.clear();
 
 		// Add the new text
-		Text = std::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
+		Text = boost::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
 		Text->setScale( Text->getScale() * .74f );
 
 		MyPile->Add( Text );

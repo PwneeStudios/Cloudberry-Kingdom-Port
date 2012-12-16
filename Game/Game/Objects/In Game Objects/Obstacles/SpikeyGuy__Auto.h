@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		_Special Special;
 
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 	};
 
 	struct SpikeyGuy_AutoGen : public AutoGen
@@ -37,47 +37,47 @@ namespace CloudberryKingdom
 		struct MinDistHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<SpikeyGuy_Parameters> Params;
+			boost::shared_ptr<SpikeyGuy_Parameters> Params;
 
 		
-			MinDistHelper( const std::shared_ptr<SpikeyGuy_Parameters> &Params );
+			MinDistHelper( const boost::shared_ptr<SpikeyGuy_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
 	
-		struct SpikeyGuyCleanupMetricLambda : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
+		struct SpikeyGuyCleanupMetricLambda : public LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2>
 		{
 		
 			SpikeyGuyCleanupMetricLambda();
 
-			Vector2 Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B );
+			Vector2 Apply( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B );
 		};
 
 	
-		static std::shared_ptr<SpikeyGuy_AutoGen> instance;
+		static boost::shared_ptr<SpikeyGuy_AutoGen> instance;
 	
-		const static std::shared_ptr<SpikeyGuy_AutoGen> &getInstance();
+		const static boost::shared_ptr<SpikeyGuy_AutoGen> &getInstance();
 
 	
 		SpikeyGuy_AutoGen();
 
 	
-		virtual std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		virtual boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		virtual void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		virtual std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
-
-	
-		void Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir );
-
-		void Rockwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-
-		void Pinwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
 
 	
-		virtual void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir );
+
+		void Rockwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+		void Pinwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+	
+		virtual void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 	};
 }
 

@@ -90,7 +90,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		Effect = Tools::BasicEffect;
 	}
 
-	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture )
+	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const boost::shared_ptr<EzTexture> &texture )
 	{
 		this->M = Matrix::Identity();
 
@@ -144,7 +144,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		Effect = Tools::BasicEffect;
 	}
 
-	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::shared_ptr<EzTexture> &PicTexture )
+	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const boost::shared_ptr<EzTexture> &PicTexture )
 	{
 		this->M = Matrix::Identity();
 
@@ -199,7 +199,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		Effect = Tools::BasicEffect;
 	}
 
-	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture, Color DetailColor, const std::shared_ptr<EzEffect> &effect )
+	ClrTextFx::ClrTextFx( int Guid, int Price, Color color, const boost::shared_ptr<EzTexture> &texture, Color DetailColor, const boost::shared_ptr<EzEffect> &effect )
 	{
 		this->M = Matrix::Identity();
 

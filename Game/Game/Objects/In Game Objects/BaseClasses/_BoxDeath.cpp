@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->BoxesOnly = BoxesOnly;
 
-		Box = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
 
 		MakeNew();
 	}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		return getPos();
 	}
 
-	void _BoxDeath::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void _BoxDeath::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_Death::Init( pos, level );
 
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		Box->Move( shift );
 	}
 
-	void _BoxDeath::Interact( const std::shared_ptr<Bob> &bob )
+	void _BoxDeath::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->SkippedPhsx )
 		{
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void _BoxDeath::Clone( const std::shared_ptr<ObjectBase> &A )
+	void _BoxDeath::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 

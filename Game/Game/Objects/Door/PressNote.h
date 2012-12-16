@@ -13,13 +13,13 @@ namespace CloudberryKingdom
 		static const float TextScale;
 
 	
-		std::shared_ptr<Door> Parent;
+		boost::shared_ptr<Door> Parent;
 
 #if defined(PC_VERSION)
 	
-		PressNote( const std::shared_ptr<Door> &Parent );
+		PressNote( const boost::shared_ptr<Door> &Parent );
 	#else
-		PressNote( const std::shared_ptr<Door> &Parent );
+		PressNote( const boost::shared_ptr<Door> &Parent );
 #endif
 
 	

@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		Initialize();
 	}
 
-	Upgrades::Upgrades( const std::shared_ptr<Upgrades> &u )
+	Upgrades::Upgrades( const boost::shared_ptr<Upgrades> &u )
 	{
 		Initialize();
 		CopyFrom( u );
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		UpgradeLevels = std::vector<float>( Tools::UpgradeTypes );
 	}
 
-	void Upgrades::CopyFrom( const std::shared_ptr<Upgrades> &u )
+	void Upgrades::CopyFrom( const boost::shared_ptr<Upgrades> &u )
 	{
 		//u->UpgradeLevels.CopyTo( UpgradeLevels, 0 );
 		CopyFromTo( u->UpgradeLevels, UpgradeLevels);
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 			UpgradeLevels[ i ] = 0;
 	}
 
-	void Upgrades::CalcGenData( const std::shared_ptr<LevelGenData> &GenData, const std::shared_ptr<StyleData> &Style )
+	void Upgrades::CalcGenData( const boost::shared_ptr<LevelGenData> &GenData, const boost::shared_ptr<StyleData> &Style )
 	{
 		Style->Calculate( shared_from_this() );
 

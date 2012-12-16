@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		void SetLongCeiling();
 		void SetCementCeiling();
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -65,21 +65,21 @@ namespace CloudberryKingdom
 	struct Ceiling_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<Ceiling_AutoGen> instance;
+		static boost::shared_ptr<Ceiling_AutoGen> instance;
 	
-		const static std::shared_ptr<Ceiling_AutoGen> &getInstance();
+		const static boost::shared_ptr<Ceiling_AutoGen> &getInstance();
 
 	
 		Ceiling_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void MakeLongCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void MakeLongCeiling( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void MakeCeiling( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, float MaxStartY );
+		void MakeCeiling( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, float MaxStartY );
 	};
 }
 

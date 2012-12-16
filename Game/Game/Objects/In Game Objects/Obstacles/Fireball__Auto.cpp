@@ -3,18 +3,18 @@
 namespace CloudberryKingdom
 {
 
-	void Fireball_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Fireball_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		NumAngles = PieceSeed->Style->Masochistic ? 100 : 4;
 		NumPeriods = PieceSeed->Style->Masochistic ? 2 : 1;
 		NumOffsets = PieceSeed->Style->Masochistic ? 100 : 16;
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FIREBALL ) ) );
 		}
@@ -58,9 +58,9 @@ namespace CloudberryKingdom
 		SurvivalHallwaySpeed = Unset::Float;
 	}
 
-std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<Fireball_AutoGen>();
+boost::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = boost::make_shared<Fireball_AutoGen>();
 
-	const std::shared_ptr<Fireball_AutoGen> &Fireball_AutoGen::getInstance()
+	const boost::shared_ptr<Fireball_AutoGen> &Fireball_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -70,24 +70,24 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 		Do_PreFill_2 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Fireball_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Fireball_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Fireball_Parameters> Params = std::make_shared<Fireball_Parameters>();
+		boost::shared_ptr<Fireball_Parameters> Params = boost::make_shared<Fireball_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	std::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get emitter parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
+		boost::shared_ptr<Fireball_Parameters> Params = boost::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Period = static_cast<int>( Params->Period.GetVal( pos ) );
 		int Offset = Params->ChooseOffset( Period, level->getRnd() );
@@ -95,9 +95,9 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 		return 0;
 	}
 
-	void Fireball_AutoGen::inner( const std::shared_ptr<Fireball_Parameters> &Params, const std::shared_ptr<Level> &level, Vector2 pos, int i, LevelGeometry Geometry )
+	void Fireball_AutoGen::inner( const boost::shared_ptr<Fireball_Parameters> &Params, const boost::shared_ptr<Level> &level, Vector2 pos, int i, LevelGeometry Geometry )
 	{
-		std::shared_ptr<Fireball> emitter = std::static_pointer_cast<Fireball>( CreateAt( level, pos ) );
+		boost::shared_ptr<Fireball> emitter = boost::static_pointer_cast<Fireball>( CreateAt( level, pos ) );
 
 		float Speed = ( i == 0.f ? 1.f : -1.f );
 
@@ -130,9 +130,9 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 		emitter->getCore()->GenData.EnforceBounds = false;
 	}
 
-	void Fireball_AutoGen::BorderFill( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Fireball_AutoGen::BorderFill( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
+		boost::shared_ptr<Fireball_Parameters> Params = boost::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		LevelGeometry Geometry = level->CurMakeData->PieceSeed->GeometryType;
 
@@ -168,16 +168,16 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 		}
 	}
 
-	std::shared_ptr<Fireball_Parameters> Fireball_AutoGen::GetParams( const std::shared_ptr<Level> &level )
+	boost::shared_ptr<Fireball_Parameters> Fireball_AutoGen::GetParams( const boost::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
+		return boost::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 
-	std::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> Fireball_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		std::shared_ptr<Fireball_Parameters> Params = GetParams( level );
+		boost::shared_ptr<Fireball_Parameters> Params = GetParams( level );
 
-		std::shared_ptr<Fireball> emitter = std::static_pointer_cast<Fireball>( level->getRecycle()->GetObject(ObjectType_FIREBALL, true) );
+		boost::shared_ptr<Fireball> emitter = boost::static_pointer_cast<Fireball>( level->getRecycle()->GetObject(ObjectType_FIREBALL, true) );
 
 		emitter->Init( PhsxData(), level );
 
@@ -194,7 +194,7 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 		return emitter;
 	}
 
-	double Fireball_AutoGen::GetAngle( float MaxAngle, int NumAngles, const std::shared_ptr<Rand> &Rnd )
+	double Fireball_AutoGen::GetAngle( float MaxAngle, int NumAngles, const boost::shared_ptr<Rand> &Rnd )
 	{
 		if ( NumAngles < 0 )
 			return Rnd->Rnd->NextDouble() * 2 * MaxAngle - MaxAngle;
@@ -204,12 +204,12 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 			return Rnd->Rnd->Next( 0, NumAngles ) * 2 * MaxAngle / ( NumAngles - 1 ) - MaxAngle;
 	}
 
-	void Fireball_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Fireball_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
+		boost::shared_ptr<Fireball_Parameters> Params = boost::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 
 		int Length = level->CurPiece->PieceLength;
 
@@ -217,11 +217,11 @@ std::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = std::make_shared<
 			BorderFill( level, BL, TR );
 	}
 
-	void Fireball_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Fireball_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Fireball parameters
-		std::shared_ptr<Fireball_Parameters> Params = std::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
+		boost::shared_ptr<Fireball_Parameters> Params = boost::static_pointer_cast<Fireball_Parameters>( level->getStyle()->FindParams( Fireball_AutoGen::getInstance() ) );
 	}
 }

@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		Param LavaDripStep, Speed;
 		VectorParam Length;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -42,19 +42,19 @@ namespace CloudberryKingdom
 	struct LavaDrip_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<LavaDrip_AutoGen> instance;
+		static boost::shared_ptr<LavaDrip_AutoGen> instance;
 	
-		const static std::shared_ptr<LavaDrip_AutoGen> &getInstance();
+		const static boost::shared_ptr<LavaDrip_AutoGen> &getInstance();
 
 	
 		LavaDrip_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 	};
 }
 

@@ -43,8 +43,8 @@ namespace CloudberryKingdom
 		//    }
 		//}
 
-		std::shared_ptr<IPos> Center;
-		std::shared_ptr<ObjectBase> ObjCenter;
+		boost::shared_ptr<IPos> Center;
+		boost::shared_ptr<ObjectBase> ObjCenter;
 		// Debug Center
 		//IPos _Center;
 		//public IPos Center
@@ -71,27 +71,27 @@ namespace CloudberryKingdom
 
 		FancyVector2();
 
-		FancyVector2( const std::shared_ptr<IPos> &Center );
+		FancyVector2( const boost::shared_ptr<IPos> &Center );
 
 		/// <summary>
 		/// Sets the FancyPos's center FancyPos. Updates relative coordinates so that absolute coordinates are unaffected.
 		/// </summary>
-		void SetCenter( const std::shared_ptr<IPos> &Center );
+		void SetCenter( const boost::shared_ptr<IPos> &Center );
 		/// <summary>
 		/// Sets the FancyPos's center FancyPos
 		/// </summary>
 		/// <param name="UsePosAsRelPos">Whether to use the current position as relative coordinates in the new system</param>
-		void SetCenter( const std::shared_ptr<IPos> &Center, bool UsePosAsRelPos );
+		void SetCenter( const boost::shared_ptr<IPos> &Center, bool UsePosAsRelPos );
 
 		/// <summary>
 		/// Sets the FancyPos's ObjCenter FancyPos. Updates relative coordinates so that absolute coordinates are unaffected.
 		/// </summary>
-		void SetCenter( const std::shared_ptr<ObjectBase> &ObjCenter );
+		void SetCenter( const boost::shared_ptr<ObjectBase> &ObjCenter );
 		/// <summary>
 		/// Sets the FancyPos's ObjCenter FancyPos
 		/// </summary>
 		/// <param name="UsePosAsRelPos">Whether to use the current position as relative coordinates in the new system</param>
-		void SetCenter( const std::shared_ptr<ObjectBase> &ObjCenter, bool UsePosAsRelPos );
+		void SetCenter( const boost::shared_ptr<ObjectBase> &ObjCenter, bool UsePosAsRelPos );
 
 		Vector2 GetDest();
 

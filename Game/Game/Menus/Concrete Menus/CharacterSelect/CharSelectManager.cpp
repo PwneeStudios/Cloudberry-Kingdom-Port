@@ -13,17 +13,17 @@ namespace CloudberryKingdom
 
 	void CharacterSelectManager::InitializeStatics()
 	{
-		CharacterSelectManager::instance = std::make_shared<CharacterSelectManager>();
+		CharacterSelectManager::instance = boost::make_shared<CharacterSelectManager>();
 	}
 
 	// Statics
-	std::shared_ptr<Lambda> CharacterSelectManager::OnBack, CharacterSelectManager::OnDone;
-	std::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel;
-	std::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance;
+	boost::shared_ptr<Lambda> CharacterSelectManager::OnBack, CharacterSelectManager::OnDone;
+	boost::shared_ptr<GUI_Panel> CharacterSelectManager::ParentPanel;
+	boost::shared_ptr<CharacterSelectManager> CharacterSelectManager::instance;
 
 
 
-	CharacterSelectManager::SignInGamerLambda::SignInGamerLambda( const std::shared_ptr<SignedInEventArgs> &e )
+	CharacterSelectManager::SignInGamerLambda::SignInGamerLambda( const boost::shared_ptr<SignedInEventArgs> &e )
 	{
 		this->e = e;
 	}
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	void CharacterSelectManager::SignInGamerLambda::Apply()
 	{
 		int index = static_cast<int>( e->Gamer.MyPlayerIndex );
-		std::shared_ptr<CharacterSelect> select = CharSelect[ index ];
+		boost::shared_ptr<CharacterSelect> select = CharSelect[ index ];
 		if ( select != 0 )
 		{
 			select->InitColorScheme( index );
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool CharacterSelectManager::NullLambda::Apply( const std::shared_ptr<CharacterSelect> &select )
+	bool CharacterSelectManager::NullLambda::Apply( const boost::shared_ptr<CharacterSelect> &select )
 	{
 		return select == 0;
 	}
@@ -57,31 +57,31 @@ namespace CloudberryKingdom
 		CharacterSelectManager::AfterFinished();
 	}
 
-	const std::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
+	const boost::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
-	std::vector<std::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = VecFromArray( tempVector );
+	boost::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
+	std::vector<boost::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = VecFromArray( tempVector );
 	bool CharacterSelectManager::IsShowing = false;
-	std::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;
-	std::shared_ptr<EzText> CharacterSelectManager::ChooseYourHero_Text = 0;
+	boost::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;
+	boost::shared_ptr<EzText> CharacterSelectManager::ChooseYourHero_Text = 0;
 	bool CharacterSelectManager::Show_ChooseYourHero = false;
 	int CharacterSelectManager::ChooseYourHero_LerpLength = 100;
 	Vector2 HidePos, CharacterSelectManager::ShowPos = Vector2( 50.79541f, 900.1587f );
 
 	CharacterSelectManager::CharacterSelectManager()
 	{
-		CamPos = std::make_shared<FancyVector2>();
+		CamPos = boost::make_shared<FancyVector2>();
 
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
-		SignedInGamer::SignedIn += std::make_shared<System::EventHandler<SignedInEventArgs*> >( shared_from_this(), &CharacterSelectManager::SignedInGamer_SignedIn );
+		SignedInGamer::SignedIn += boost::make_shared<System::EventHandler<SignedInEventArgs*> >( shared_from_this(), &CharacterSelectManager::SignedInGamer_SignedIn );
 	#endif
 	}
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	void CharacterSelectManager::SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e )
+	void CharacterSelectManager::SignedInGamer_SignedIn( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedInEventArgs> &e )
 	{
 		if ( CharSelect.empty() )
 			return;
@@ -89,37 +89,37 @@ namespace CloudberryKingdom
 		UpdateAvailableHats();
 
 		// Get the signed in player's saved color scheme and set the character select accordingly
-		Tools::CurGameData->AddToDo( std::make_shared<SignInGamerLambda>( e ) );
+		Tools::CurGameData->AddToDo( boost::make_shared<SignInGamerLambda>( e ) );
 	}
 #endif
 
-std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHats = 0;
+boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::AvailableHats = 0;
 
 	void CharacterSelectManager::UpdateAvailableHats()
 	{
 		UpdateAvailableBeards();
 
 		// Determine which hats are availabe
-		AvailableHats = std::make_shared<Set<std::shared_ptr<Hat> > >();
-		for ( std::vector<std::shared_ptr<Hat> >::const_iterator hat = ColorSchemeManager::HatInfo.begin(); hat != ColorSchemeManager::HatInfo.end(); ++hat )
+		AvailableHats = boost::make_shared<Set<boost::shared_ptr<Hat> > >();
+		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator hat = ColorSchemeManager::HatInfo.begin(); hat != ColorSchemeManager::HatInfo.end(); ++hat )
 			if ( *hat == Hat::None || ( *hat )->AssociatedAward == 0 && PlayerManager::Bought( *hat ) || ( *hat )->AssociatedAward != 0 && PlayerManager::Awarded( ( *hat )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
 				AvailableHats->Add( *hat );
 	}
 
-	std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableBeards = 0;
+	boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::AvailableBeards = 0;
 
 	void CharacterSelectManager::UpdateAvailableBeards()
 	{
 		// Determine which Beards are availabe
-		AvailableBeards = std::make_shared<Set<std::shared_ptr<Hat> > >();
-		for ( std::vector<std::shared_ptr<Hat> >::const_iterator Beard = ColorSchemeManager::BeardInfo.begin(); Beard != ColorSchemeManager::BeardInfo.end(); ++Beard )
+		AvailableBeards = boost::make_shared<Set<boost::shared_ptr<Hat> > >();
+		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator Beard = ColorSchemeManager::BeardInfo.begin(); Beard != ColorSchemeManager::BeardInfo.end(); ++Beard )
 			if ( *Beard == Hat::None || ( *Beard )->AssociatedAward == 0 && PlayerManager::Bought( *Beard ) || ( *Beard )->AssociatedAward != 0 && PlayerManager::Awarded( ( *Beard )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
 				AvailableBeards->Add( *Beard );
 	}
 
-	std::shared_ptr<CharSelectBackdrop> CharacterSelectManager::Backdrop = 0;
+	boost::shared_ptr<CharSelectBackdrop> CharacterSelectManager::Backdrop = 0;
 
-	void CharacterSelectManager::Start( const std::shared_ptr<GUI_Panel> &Parent )
+	void CharacterSelectManager::Start( const boost::shared_ptr<GUI_Panel> &Parent )
 	{
 		ParentPanel = Parent;
 
@@ -128,7 +128,7 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 		Parent->MyGame->AddGameObject( Backdrop );
 
 		// Start the selects for each player
-		Parent->MyGame->WaitThenDo( 0, std::make_shared<_StartAllProxy>(), _T("StartCharSelect") );
+		Parent->MyGame->WaitThenDo( 0, boost::make_shared<_StartAllProxy>(), _T("StartCharSelect") );
 	}
 
 	void CharacterSelectManager::_StartAll()
@@ -147,7 +147,7 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 		if ( CharSelect[ PlayerIndex ] != 0 )
 			return;
 
-		CharSelect[ PlayerIndex ] = std::make_shared<CharacterSelect>( PlayerIndex, QuickJoin );
+		CharSelect[ PlayerIndex ] = boost::make_shared<CharacterSelect>( PlayerIndex, QuickJoin );
 	}
 
 	void CharacterSelectManager::FinishAll()
@@ -178,7 +178,7 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 
 	void CharacterSelectManager::Cleanup()
 	{
-		std::shared_ptr<CloudberryKingdom::GameData> game = Tools::CurGameData;
+		boost::shared_ptr<CloudberryKingdom::GameData> game = Tools::CurGameData;
 
 		CharacterSelectManager::FinishAll();
 
@@ -218,10 +218,10 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 
 	bool CharacterSelectManager::AllNull()
 	{
-		return Tools::All<std::shared_ptr<CharacterSelect> >( CharSelect, NullLambda_static );
+		return Tools::All<boost::shared_ptr<CharacterSelect> >( CharSelect, NullLambda_static );
 	}
 
-	std::shared_ptr<CharacterSelectManager::NullLambda> CharacterSelectManager::NullLambda_static = std::make_shared<CharacterSelectManager::NullLambda>();
+	boost::shared_ptr<CharacterSelectManager::NullLambda> CharacterSelectManager::NullLambda_static = boost::make_shared<CharacterSelectManager::NullLambda>();
 	int CharacterSelectManager::DrawLayer = 10;
 	float CharacterSelectManager::BobZoom = 2.6f;
 	float CharacterSelectManager::ZoomMod = 1.1f;
@@ -231,7 +231,7 @@ std::shared_ptr<Set<std::shared_ptr<Hat> > > CharacterSelectManager::AvailableHa
 		if ( !IsShowing )
 			return;
 
-		std::shared_ptr<Camera> cam = Tools::CurLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = Tools::CurLevel->getMainCamera();
 		Vector2 HoldZoom = cam->getZoom();
 		cam->setZoom( Vector2( .001f,.001f ) / ZoomMod );
 		cam->SetVertexCamera();
@@ -286,7 +286,7 @@ bool CharacterSelectManager::Active = false;
 		if ( AllFinished() && IsShowing )
 		{
 			Active = false;
-			Tools::CurGameData->SlideOut_FadeIn( 0, std::make_shared<AfterFinishedHelper>() );
+			Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<AfterFinishedHelper>() );
 		}
 
 		// Check for ready to exit from character selection

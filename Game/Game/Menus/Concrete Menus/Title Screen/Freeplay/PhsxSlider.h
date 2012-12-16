@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		{
 		
 			BobPhsx::CustomData MyType;
-			std::shared_ptr<WrappedFloat> MyFloat;
+			boost::shared_ptr<WrappedFloat> MyFloat;
 
 		
-			PhsxDataSetter( BobPhsx::CustomData MyType, const std::shared_ptr<WrappedFloat> &MyFloat );
+			PhsxDataSetter( BobPhsx::CustomData MyType, const boost::shared_ptr<WrappedFloat> &MyFloat );
 
 			void Apply();
 		};
@@ -23,8 +23,8 @@ namespace CloudberryKingdom
 	
 		virtual std::vector<std::wstring> GetViewables();
 
-		static std::shared_ptr<EzFont> Font;
-		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > Process;
+		static boost::shared_ptr<EzFont> Font;
+		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > Process;
 
 	
 		BobPhsx::CustomData MyType;

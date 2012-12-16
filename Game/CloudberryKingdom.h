@@ -14,7 +14,7 @@
 struct CloudberryKingdomWrapper : public GameLoop
 {
 	
-	std::shared_ptr<CloudberryKingdom::XnaGameClass> game;
+	boost::shared_ptr<CloudberryKingdom::XnaGameClass> game;
 
 	/**
 	 * @see GameLoop::Initialize

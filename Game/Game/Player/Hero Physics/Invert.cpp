@@ -5,11 +5,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxInvert::InitializeStatics()
 	{
-		BobPhsxInvert::instance = std::make_shared<BobPhsxInvert>();
+		BobPhsxInvert::instance = boost::make_shared<BobPhsxInvert>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance;
+	boost::shared_ptr<BobPhsxInvert> BobPhsxInvert::instance;
 
 
 	void BobPhsxInvert::InitSingleton()
@@ -20,26 +20,26 @@ namespace CloudberryKingdom
 		Name = Localization::Words_VIRIDIAN;
 		Adjective = _T( "Anti-Grav" );
 
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * -1.2f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * -1.2f );
 
 		HeroDollShift = Vector2( 0, 100 );
 	}
 
-	const std::shared_ptr<BobPhsxInvert> &BobPhsxInvert::getInstance()
+	const boost::shared_ptr<BobPhsxInvert> &BobPhsxInvert::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxInvert::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxInvert::Clone()
 	{
-		std::shared_ptr<BobPhsxInvert> newBob = std::make_shared<BobPhsxInvert>();
+		boost::shared_ptr<BobPhsxInvert> newBob = boost::make_shared<BobPhsxInvert>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxInvert::CopyTo( const std::shared_ptr<BobPhsxInvert> &bob )
+	void BobPhsxInvert::CopyTo( const boost::shared_ptr<BobPhsxInvert> &bob )
 	{
-		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+		BobPhsxNormal::CopyTo( boost::static_pointer_cast<BobPhsxNormal>( bob ) );
 
 		bob->CurBehavior = CurBehavior;
 		bob->BehaviorLength = BehaviorLength;
@@ -56,16 +56,16 @@ namespace CloudberryKingdom
 		//Set( shared_from_this() );
 	}
 
-	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxInvert::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		Set( phsx, Vector2(1) );
 	}
 
-	void BobPhsxInvert::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
+	void BobPhsxInvert::Set( const boost::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
 	{
 		//MustHitGroundToReadyJump = true;
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->BobJumpLength = 1;
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsxInvert::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxInvert::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxNormal::Init( bob );
 
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 			Invert();
 	}
 
-	void BobPhsxInvert::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxInvert::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		if ( Gravity < 0 )
 			BobPhsxNormal::HitHeadOnSomething( ThingLandedOn );
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 			BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 	}
 
-	void BobPhsxInvert::HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit )
+	void BobPhsxInvert::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
 	{
 		if ( Gravity < 0 )
 			BobPhsxNormal::LandOnSomething( false, ThingHit );
@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsxInvert::SetTarget( const std::shared_ptr<RichLevelGenData> &GenData )
+	void BobPhsxInvert::SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
 		if ( Count <= 0 || abs( MyBob->TargetPosition.Y - getPos().Y ) < 200 )
 		{
@@ -241,19 +241,19 @@ namespace CloudberryKingdom
 			Count--;
 	}
 
-	void BobPhsxInvert::PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData )
+	void BobPhsxInvert::PreventEarlyLandings( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
 		// Do nothing
 	}
 
-	void BobPhsxInvert::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxInvert::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 
 		makeData->TopLikeBottom_Thin = true;
 		makeData->BlocksAsIs = true;
 
-		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = std::static_pointer_cast<Ceiling_Parameters>( Style->FindParams( Ceiling_AutoGen::getInstance() ) );
+		boost::shared_ptr<Ceiling_Parameters> Ceiling_Params = boost::static_pointer_cast<Ceiling_Parameters>( Style->FindParams( Ceiling_AutoGen::getInstance() ) );
 		Ceiling_Params->Make = false;
 
 		Style->BlockFillType = StyleData::_BlockFillType_INVERTABLE;
@@ -261,22 +261,22 @@ namespace CloudberryKingdom
 
 		Style->TopSpace = 50;
 
-		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameters>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<MovingBlock_Parameters> MParams = boost::static_pointer_cast<MovingBlock_Parameters>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		if ( MParams->Aspect == MovingBlock_Parameters::AspectType_TALL )
 			MParams->Aspect = MovingBlock_Parameters::AspectType_THIN;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = std::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<GhostBlock_Parameters> GhParams = boost::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
 	}
 
-	void BobPhsxInvert::ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece )
+	void BobPhsxInvert::ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		BobPhsxNormal::ModLadderPiece( piece );
 
 		piece->ElevatorBoxStyle = BoxStyle_FULL_BOX;
 	}
 
-	bool BobPhsxInvert::IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	bool BobPhsxInvert::IsBottomCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		return Col == ColType_BOTTOM || Col != ColType_BOTTOM && getCore()->Data.Velocity.X != 0 && __min(MyBob->Box->Current->TR.Y, MyBob->Box->Target->TR.Y) < box->Target->BL.Y + __max(1.35 * getCore()->Data.Velocity.Y, 7);
 	}

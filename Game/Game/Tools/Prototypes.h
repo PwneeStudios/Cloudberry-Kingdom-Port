@@ -8,30 +8,30 @@ namespace CloudberryKingdom
 	struct Prototypes
 	{
 	
-		static std::shared_ptr<ObjectClass> LoadAnimObj;
+		static boost::shared_ptr<ObjectClass> LoadAnimObj;
 	
 		static void LoadAnimation( const std::wstring &path );
 
 	
-		static void SetTigarLoaded( const std::shared_ptr<ObjectClass> &obj );
+		static void SetTigarLoaded( const boost::shared_ptr<ObjectClass> &obj );
 
-		static std::shared_ptr<ObjectClass> MakeObj();
+		static boost::shared_ptr<ObjectClass> MakeObj();
 
 	
-		static std::shared_ptr<FlyingBlob> FlyingBlobObj;
-		static std::shared_ptr<FlyingBlob> goomba;
-		static std::map<std::shared_ptr<BobPhsx>, std::shared_ptr<Bob> > bob;
-		static std::shared_ptr<Spike> SpikeObj;
+		static boost::shared_ptr<FlyingBlob> FlyingBlobObj;
+		static boost::shared_ptr<FlyingBlob> goomba;
+		static std::map<boost::shared_ptr<BobPhsx>, boost::shared_ptr<Bob> > bob;
+		static boost::shared_ptr<Spike> SpikeObj;
 //C# TO C++ CONVERTER NOTE: The variable Door was renamed since it is named the same as a user-defined type:
-		static std::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door_Renamed, GrassDoor, ArrowObj;
+		static boost::shared_ptr<SimpleObject> GhostBlockObj, CheckpointObj, Door_Renamed, GrassDoor, ArrowObj;
 
-		static std::shared_ptr<ObjectClass> Hero;
+		static boost::shared_ptr<ObjectClass> Hero;
 
-		static std::shared_ptr<ObjectClass> PlaceBob;
+		static boost::shared_ptr<ObjectClass> PlaceBob;
 
-		static std::shared_ptr<SimpleObject> LoadSimple( const std::wstring &file );
+		static boost::shared_ptr<SimpleObject> LoadSimple( const std::wstring &file );
 
-		static std::shared_ptr<ObjectClass> LoadObject( const std::wstring &file );
+		static boost::shared_ptr<ObjectClass> LoadObject( const std::wstring &file );
 
 		static void LoadObjects();
 	};

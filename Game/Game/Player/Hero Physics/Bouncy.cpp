@@ -7,11 +7,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxBouncy::InitializeStatics()
 	{
-		BobPhsxBouncy::instance = std::make_shared<BobPhsxBouncy>();
+		BobPhsxBouncy::instance = boost::make_shared<BobPhsxBouncy>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance;
+	boost::shared_ptr<BobPhsxBouncy> BobPhsxBouncy::instance;
 
 
 	void BobPhsxBouncy::InitSingleton()
@@ -22,25 +22,25 @@ namespace CloudberryKingdom
 		Name = Localization::Words_BOUNCY;
 		NameTemplate = _T( "bouncey bounce" );
 
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.035f ) );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
+		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.035f ) );
 	}
 
-	const std::shared_ptr<BobPhsxBouncy> &BobPhsxBouncy::getInstance()
+	const boost::shared_ptr<BobPhsxBouncy> &BobPhsxBouncy::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxBouncy::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxBouncy::Clone()
 	{
-		std::shared_ptr<BobPhsxBouncy> newBob = std::make_shared<BobPhsxBouncy>();
+		boost::shared_ptr<BobPhsxBouncy> newBob = boost::make_shared<BobPhsxBouncy>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxBouncy::CopyTo( const std::shared_ptr<BobPhsxBouncy> &bob )
+	void BobPhsxBouncy::CopyTo( const boost::shared_ptr<BobPhsxBouncy> &bob )
 	{
-		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+		BobPhsxNormal::CopyTo( boost::static_pointer_cast<BobPhsxNormal>( bob ) );
 
 		bob->InitializedAnim = InitializedAnim;
 		bob->SuperBounce = SuperBounce;
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	void BobPhsxBouncy::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxBouncy::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxNormal::Init( bob );
 

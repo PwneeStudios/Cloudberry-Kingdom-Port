@@ -15,11 +15,11 @@ namespace CloudberryKingdom
 
 	// Statics
 	int Hat::Cheap, Hat::Mid, Hat::Expensive;
-	std::shared_ptr<Hat> Hat::None, Hat::Viking, Hat::Fedora, Hat::Afro, Hat::Halo, Hat::Ghost, Hat::CheckpointHead, Hat::FallingBlockHead, Hat::BlobHead, Hat::MovingBlockHead, Hat::SpikeyHead, Hat::FallingBlock3Head, Hat::Pink, Hat::Bubble, Hat::FireHead, Hat::Horns, Hat::Cloud_Renamed, Hat::NoHead, Hat::TopHat, Hat::Knight, Hat::Toad, Hat::BubbleBobble, Hat::Brain, Hat::Gosu, Hat::RobinHood, Hat::Rasta, Hat::Pumpkin, Hat::BunnyEars, Hat::Pirate, Hat::Miner, Hat::Glasses, Hat::Antlers, Hat::Arrow_Renamed, Hat::Bag, Hat::Cone, Hat::Pope, Hat::Rice, Hat::Santa, Hat::Sombrero, Hat::Tiki, Hat::Wizard;
-	std::shared_ptr<Hat> Hat::Vandyke, Hat::Beard, Hat::BigBeard, Hat::Goatee, Hat::Mustache;
+	boost::shared_ptr<Hat> Hat::None, Hat::Viking, Hat::Fedora, Hat::Afro, Hat::Halo, Hat::Ghost, Hat::CheckpointHead, Hat::FallingBlockHead, Hat::BlobHead, Hat::MovingBlockHead, Hat::SpikeyHead, Hat::FallingBlock3Head, Hat::Pink, Hat::Bubble, Hat::FireHead, Hat::Horns, Hat::Cloud_Renamed, Hat::NoHead, Hat::TopHat, Hat::Knight, Hat::Toad, Hat::BubbleBobble, Hat::Brain, Hat::Gosu, Hat::RobinHood, Hat::Rasta, Hat::Pumpkin, Hat::BunnyEars, Hat::Pirate, Hat::Miner, Hat::Glasses, Hat::Antlers, Hat::Arrow_Renamed, Hat::Bag, Hat::Cone, Hat::Pope, Hat::Rice, Hat::Santa, Hat::Sombrero, Hat::Tiki, Hat::Wizard;
+	boost::shared_ptr<Hat> Hat::Vandyke, Hat::Beard, Hat::BigBeard, Hat::Goatee, Hat::Mustache;
 
 
-	MenuListItem::MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word )
+	MenuListItem::MenuListItem( const boost::shared_ptr<Object> &obj, Localization::Words word )
 	{
 		this->obj = obj;
 		this->word = word;
@@ -35,13 +35,13 @@ namespace CloudberryKingdom
 		return Price;
 	}
 
-	std::shared_ptr<EzTexture> Hat::GetTexture()
+	boost::shared_ptr<EzTexture> Hat::GetTexture()
 	{
 		if ( HatPicTexture != 0 )
 			return HatPicTexture;
 		else
 		{
-			std::shared_ptr<BaseQuad> quad = Prototypes::bob[ BobPhsxNormal::getInstance() ]->PlayerObject->FindQuad(QuadName);
+			boost::shared_ptr<BaseQuad> quad = Prototypes::bob[ BobPhsxNormal::getInstance() ]->PlayerObject->FindQuad(QuadName);
 			if ( quad != 0 )
 				return quad->MyTexture;
 			else
@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 		this->word = word;
 	}
 
-	bool ColorScheme::FindColorLambda::Apply( const std::shared_ptr<MenuListItem> &item )
+	bool ColorScheme::FindColorLambda::Apply( const boost::shared_ptr<MenuListItem> &item )
 	{
 		return item->word == word;
 	}
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 		this->word = word;
 	}
 
-	bool ColorScheme::FindHatLambda::Apply( const std::shared_ptr<Hat> &item )
+	bool ColorScheme::FindHatLambda::Apply( const boost::shared_ptr<Hat> &item )
 	{
 		return item->Name == word;
 	}
@@ -165,24 +165,24 @@ namespace CloudberryKingdom
 		return Format( _T( "\"%d\", \"%d\", \"%d\", \"%d\", \"%d\"" ), SkinColor->Name, CapeColor->Name, CapeOutlineColor->Name, HatData->Name, BeardData->Name );
 	}
 
-	int ColorScheme::IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr )
+	int ColorScheme::IndexOf( std::vector<boost::shared_ptr<MenuListItem> > &list, const boost::shared_ptr<ClrTextFx> &clr )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
+			if ( boost::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
 				return index;
 			index++;
 		}
 		return -1;
 	}
 
-	int ColorScheme::IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat )
+	int ColorScheme::IndexOf( std::vector<boost::shared_ptr<Hat> > &list, const boost::shared_ptr<Hat> &hat )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<Hat> >::const_iterator _hat = list.begin(); _hat != list.end(); ++_hat )
+		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator _hat = list.begin(); _hat != list.end(); ++_hat )
 		{
 			if ( *_hat == hat )
 				return index;
@@ -191,12 +191,12 @@ namespace CloudberryKingdom
 		return -1;
 	}
 
-	void ColorScheme::WriteChunk_0( const std::shared_ptr<BinaryWriter> &writer )
+	void ColorScheme::WriteChunk_0( const boost::shared_ptr<BinaryWriter> &writer )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 0;
 
-		std::shared_ptr<ClrTextFx> clr;
+		boost::shared_ptr<ClrTextFx> clr;
 
 		chunk->Write( abs( IndexOf( ColorSchemeManager::BeardInfo, BeardData ) ) );
 
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void ColorScheme::ReadChunk_0( const std::shared_ptr<Chunk> &chunk )
+	void ColorScheme::ReadChunk_0( const boost::shared_ptr<Chunk> &chunk )
 	{
 		int index;
 
@@ -231,31 +231,31 @@ namespace CloudberryKingdom
 		try
 		{
 			index = chunk->ReadInt();
-			SkinColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ index ]->obj );
+			SkinColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			SkinColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ 0 ]->obj );
+			SkinColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ 0 ]->obj );
 		}
 
 		try
 		{
 			index = chunk->ReadInt();
-			CapeColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ index ]->obj );
+			CapeColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			CapeColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ 0 ]->obj );
+			CapeColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ 0 ]->obj );
 		}
 
 		try
 		{
 			index = chunk->ReadInt();
-			CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ index ]->obj );
+			CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ index ]->obj );
 		}
 		catch ( ... )
 		{
-			CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ 0 ]->obj );
+			CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ 0 ]->obj );
 		}
 
 		try
@@ -277,25 +277,25 @@ namespace CloudberryKingdom
 
 	ColorScheme::ColorScheme()
 	{
-		SkinColor = std::make_shared<ClrTextFx>();
-		CapeColor = std::make_shared<ClrTextFx>();
-		CapeOutlineColor = std::make_shared<ClrTextFx>();
+		SkinColor = boost::make_shared<ClrTextFx>();
+		CapeColor = boost::make_shared<ClrTextFx>();
+		CapeOutlineColor = boost::make_shared<ClrTextFx>();
 		HatData = Hat::None;
 		BeardData = Hat::Vandyke;
 	}
 
 	ColorScheme::ColorScheme( Localization::Words skincolor, Localization::Words capecolor, Localization::Words capeoutlinecolor, Localization::Words hatname, Localization::Words beardname )
 	{
-		SkinColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::ColorList,
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( skincolor ) ) )->obj );
-		CapeColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeColorList,
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( capecolor ) ) )->obj );
-		CapeOutlineColor = std::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeOutlineColorList,
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<MenuListItem>, bool> >( std::make_shared<FindColorLambda>( capeoutlinecolor ) ) )->obj );
+		SkinColor = boost::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::ColorList,
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<MenuListItem>, bool> >( boost::make_shared<FindColorLambda>( skincolor ) ) )->obj );
+		CapeColor = boost::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeColorList,
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<MenuListItem>, bool> >( boost::make_shared<FindColorLambda>( capecolor ) ) )->obj );
+		CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>( Tools::Find( ColorSchemeManager::CapeOutlineColorList,
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<MenuListItem>, bool> >( boost::make_shared<FindColorLambda>( capeoutlinecolor ) ) )->obj );
 		HatData = Tools::Find( ColorSchemeManager::HatInfo,
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<Hat>, bool> >( std::make_shared<FindHatLambda>( hatname ) ) );
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<Hat>, bool> >( boost::make_shared<FindHatLambda>( hatname ) ) );
 		BeardData = Tools::Find( ColorSchemeManager::BeardInfo,
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<Hat>, bool> >( std::make_shared<FindHatLambda>( beardname ) ) );
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<Hat>, bool> >( boost::make_shared<FindHatLambda>( beardname ) ) );
 
 		if ( HatData == 0 )
 			HatData = Hat::None;

@@ -8,9 +8,9 @@ namespace CloudberryKingdom
 	struct MenuSliderNoSlide : public MenuSliderBase
 	{
 	
-		MenuSliderNoSlide( const std::shared_ptr<EzText> &Text );
+		MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text );
 
-		MenuSliderNoSlide( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 #if defined(PC_VERSION)
 	

@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	int GUI_CampaignScore::RunningCampaignScoreLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int GUI_CampaignScore::RunningCampaignScoreLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return p->RunningCampaignScore();
 	}
@@ -12,19 +12,19 @@ namespace CloudberryKingdom
 		GUI_Score(false)
 	{
 	}
-	std::shared_ptr<GUI_CampaignScore> GUI_CampaignScore::GUI_CampaignScore_Construct()
+	boost::shared_ptr<GUI_CampaignScore> GUI_CampaignScore::GUI_CampaignScore_Construct()
 	{
 		GUI_Score::GUI_Score_Construct( false );
 
 		PreventRelease = false;
 		UpdateAfterLevelFinish = true;
 
-		return std::static_pointer_cast<GUI_CampaignScore>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_CampaignScore>( shared_from_this() );
 	}
 
 	int GUI_CampaignScore::GetScore()
 	{
-		int Score = PlayerManager::PlayerSum( std::make_shared<RunningCampaignScoreLambda>() );
+		int Score = PlayerManager::PlayerSum( boost::make_shared<RunningCampaignScoreLambda>() );
 		return Score;
 	}
 
@@ -87,14 +87,14 @@ namespace CloudberryKingdom
 		UpdateAfterLevelFinish( false )
 	{
 	}
-	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
+	boost::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( false );
 
-		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
 	GUI_Score::GUI_Score( bool SlideIn ) :
@@ -104,21 +104,21 @@ namespace CloudberryKingdom
 		UpdateAfterLevelFinish( false )
 	{
 	}
-	std::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
+	boost::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( SlideIn );
 
-		return std::static_pointer_cast<GUI_Score>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
 	void GUI_Score::DoInit( bool SlideIn )
 	{
 		DoSlideIn = SlideIn;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		MyPile->setPos( Vector2( 1235, 820 ) );
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		float scale;
 		Color c, o;
 
@@ -139,7 +139,7 @@ namespace CloudberryKingdom
 			c = bColor( 228, 0, 69 );
 			o = Color::White;
 
-			ScoreText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
+			ScoreText = boost::make_shared<EzText>( ToString(), font, 950.f, false, true );
 			ScoreText->setScale( scale );
 			ScoreText->setPos( Vector2( 381.4434f, 85.55492f ) );
 			ScoreText->MyFloatColor = c.ToVector4();

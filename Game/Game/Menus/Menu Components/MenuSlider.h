@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		Vector2 SliderShift, TabOffset;
 
-		std::shared_ptr<QuadClass> SliderBack, Slider, StartQuad, EndQuad;
+		boost::shared_ptr<QuadClass> SliderBack, Slider, StartQuad, EndQuad;
 
 		virtual void DoGrayOut();
 
@@ -18,8 +18,8 @@ namespace CloudberryKingdom
 
 		void Reset();
 
-		MenuSlider( const std::shared_ptr<EzText> &Text );
-		MenuSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		MenuSlider( const boost::shared_ptr<EzText> &Text );
+		MenuSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 	
 		virtual void InitializeSlider();
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		void CalcRelEndPoints();
 
 	
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 	
 		void InitializeInstanceFields();

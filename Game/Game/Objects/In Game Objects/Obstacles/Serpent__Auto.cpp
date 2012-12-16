@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	void Serpent_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Serpent_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
 		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_SERPENT ) );
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 		SerpentStepCutoff = 1651;
 	}
 
-std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Serpent_AutoGen>();
+boost::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = boost::make_shared<Serpent_AutoGen>();
 
-	const std::shared_ptr<Serpent_AutoGen> &Serpent_AutoGen::getInstance()
+	const boost::shared_ptr<Serpent_AutoGen> &Serpent_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -36,15 +36,15 @@ std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Se
 		Do_PreFill_2 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Serpent_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Serpent_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Serpent_Parameters> Params = std::make_shared<Serpent_Parameters>();
+		boost::shared_ptr<Serpent_Parameters> Params = boost::make_shared<Serpent_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void Serpent_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Serpent_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
@@ -52,7 +52,7 @@ std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Se
 		TR += Vector2( 350, 0 );
 
 		// Get Serpent parameters
-		std::shared_ptr<Serpent_Parameters> Params = std::static_pointer_cast<Serpent_Parameters>( level->getStyle()->FindParams( Serpent_AutoGen::getInstance() ) );
+		boost::shared_ptr<Serpent_Parameters> Params = boost::static_pointer_cast<Serpent_Parameters>( level->getStyle()->FindParams( Serpent_AutoGen::getInstance() ) );
 
 		float step = 5;
 
@@ -77,7 +77,7 @@ std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Se
 				// Create 2 serpents in this location, with offset perios.
 				for ( int i = 0; i < num; i++ )
 				{
-					std::shared_ptr<Serpent> serpent = std::static_pointer_cast<Serpent>( level->getRecycle()->GetObject(ObjectType_SERPENT, true) );
+					boost::shared_ptr<Serpent> serpent = boost::static_pointer_cast<Serpent>( level->getRecycle()->GetObject(ObjectType_SERPENT, true) );
 					serpent->Init( loc, level );
 
 					serpent->SetPeriod( period );
@@ -100,7 +100,7 @@ std::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = std::make_shared<Se
 		}
 	}
 
-	void Serpent_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Serpent_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 

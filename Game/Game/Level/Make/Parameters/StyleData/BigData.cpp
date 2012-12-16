@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	BigData::BigData( const std::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
+	BigData::BigData( const boost::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
 	{
 	}
 

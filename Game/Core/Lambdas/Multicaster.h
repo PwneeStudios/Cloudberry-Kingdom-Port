@@ -8,12 +8,12 @@ namespace CloudberryKingdom
 	struct Multicaster : public Lambda
 	{
 	
-		std::vector<std::shared_ptr<Lambda> > MyList;
+		std::vector<boost::shared_ptr<Lambda> > MyList;
 
 	
 		void Apply()
 		{
-			for ( std::vector<std::shared_ptr<Lambda> >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
+			for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
 				( *L ).get()->Apply();
 		}
 
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 			MyList.clear();
 		}
 
-		void Add( const std::shared_ptr<Lambda> &L )
+		void Add( const boost::shared_ptr<Lambda> &L )
 		{
 			MyList.push_back( L );
 		}

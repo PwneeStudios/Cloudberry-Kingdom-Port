@@ -12,7 +12,7 @@
 
 namespace CloudberryKingdom
 {
-	struct ObjectClass : public std::enable_shared_from_this<ObjectClass>
+	struct ObjectClass : public boost::enable_shared_from_this<ObjectClass>
 	{
 
 	
@@ -31,31 +31,31 @@ namespace CloudberryKingdom
 		int VersionNumber;
 
 		float ContainedQuadAngle;
-		std::shared_ptr<Quad> ContainedQuad;
+		boost::shared_ptr<Quad> ContainedQuad;
 
-		std::shared_ptr<EzTexture> MySkinTexture;
-		std::shared_ptr<EzEffect> MySkinEffect;
+		boost::shared_ptr<EzTexture> MySkinTexture;
+		boost::shared_ptr<EzEffect> MySkinEffect;
 
-		std::shared_ptr<Quad> ParentQuad;
-		std::vector<std::shared_ptr<BaseQuad> > QuadList;
+		boost::shared_ptr<Quad> ParentQuad;
+		std::vector<boost::shared_ptr<BaseQuad> > QuadList;
 
 	
-		std::shared_ptr<QuadDrawer> QDrawer;
+		boost::shared_ptr<QuadDrawer> QDrawer;
 	
 		bool xFlip, yFlip, CenterFlipOnBox;
 		Vector2 FlipCenter;
 
 	
-		std::shared_ptr<RenderTarget2D> ObjectRenderTarget, ToTextureRenderTarget;
+		boost::shared_ptr<RenderTarget2D> ObjectRenderTarget, ToTextureRenderTarget;
 		int DrawWidth, DrawHeight;
 
 	
-		std::vector<std::shared_ptr<EzEffect> > MyEffects;
+		std::vector<boost::shared_ptr<EzEffect> > MyEffects;
 
 		bool getDonePlaying() const;
 
-		std::queue<std::shared_ptr<AnimQueueEntry> > AnimQueue;
-		std::shared_ptr<AnimQueueEntry> LastAnimEntry;
+		std::queue<boost::shared_ptr<AnimQueueEntry> > AnimQueue;
+		boost::shared_ptr<AnimQueueEntry> LastAnimEntry;
 		std::vector<int> AnimLength;
 		std::vector<std::wstring> AnimName;
 		std::vector<float> AnimSpeed;
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		int anim, OldAnim;
 		float t, OldT, StartT;
 
-		std::vector<std::shared_ptr<ObjectBox> > BoxList;
+		std::vector<boost::shared_ptr<ObjectBox> > BoxList;
 
 		bool BoxesOnly;
 
@@ -71,10 +71,10 @@ namespace CloudberryKingdom
 
 		void ConvertForSimple();
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void ReadFile( const std::shared_ptr<EzReader> &reader );
-		void ReadFile( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad );
+		void ReadFile( const boost::shared_ptr<EzReader> &reader );
+		void ReadFile( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad );
 
 #if defined(EDITOR)
 		std::vector<ObjectVector*> GetObjectVectors();
@@ -92,9 +92,9 @@ namespace CloudberryKingdom
 		void EnqueueTransfer( int _anim, float _destT, float speed, bool DestLoop );
 		void EnqueueTransfer( int _anim, float _destT, float speed, bool DestLoop, bool KeepTransfers );
 
-		void ImportAnimData( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
+		void ImportAnimData( const boost::shared_ptr<ObjectClass> &SourceObj, std::vector<boost::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
 
-		void ImportAnimDataShallow( const std::shared_ptr<ObjectClass> &SourceObj, std::vector<std::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
+		void ImportAnimDataShallow( const boost::shared_ptr<ObjectClass> &SourceObj, std::vector<boost::shared_ptr<BaseQuad> > &SourceQuads, std::vector<std::wstring> &SourceAnims );
 
 		bool HasAnim( const std::wstring &name );
 		int FindAnim( const std::wstring &name );
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 
 		int DestinationAnim();
 
-		std::shared_ptr<AnimQueueEntry> DestAnim();
+		boost::shared_ptr<AnimQueueEntry> DestAnim();
 
 		void DequeueTransfers();
 
@@ -143,32 +143,32 @@ namespace CloudberryKingdom
 
 
 		void FinishLoading();
-		void FinishLoading( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height );
-		void FinishLoading( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, bool UseNames );
+		void FinishLoading( const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height );
+		void FinishLoading( const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height, bool UseNames );
 
 		ObjectClass();
 
-		ObjectClass( const std::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone );
+		ObjectClass( const boost::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone );
 
-		ObjectClass( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture );
+		ObjectClass( const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffect> &BaseEffect, const boost::shared_ptr<EzTexture> &BaseTexture );
 
-		ObjectClass( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture );
+		ObjectClass( const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height, const boost::shared_ptr<EzEffect> &BaseEffect, const boost::shared_ptr<EzTexture> &BaseTexture );
 
-		void ObjectClassInit( const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture );
+		void ObjectClassInit( const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height, const boost::shared_ptr<EzEffect> &BaseEffect, const boost::shared_ptr<EzTexture> &BaseTexture );
 
 		void MakeRenderTargetUnique( int width, int height );
 
 		bool OriginalRenderTarget;
 	
-		void InitRenderTargets( const std::shared_ptr<ObjectClass> &obj );
+		void InitRenderTargets( const boost::shared_ptr<ObjectClass> &obj );
 
-		void InitRenderTargets( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height );
-
-	
-		std::shared_ptr<BaseQuad> FindQuad( const std::wstring &name );
+		void InitRenderTargets( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height );
 
 	
-		void AddToNewList( std::vector<std::shared_ptr<BaseQuad> > &NewList, const std::shared_ptr<BaseQuad> &quad );
+		boost::shared_ptr<BaseQuad> FindQuad( const std::wstring &name );
+
+	
+		void AddToNewList( std::vector<boost::shared_ptr<BaseQuad> > &NewList, const boost::shared_ptr<BaseQuad> &quad );
 	
 		void Sort();
 
@@ -201,27 +201,27 @@ namespace CloudberryKingdom
 
 		void UpdateBoxes();
 
-		void Update( const std::shared_ptr<BaseQuad> &quad );
+		void Update( const boost::shared_ptr<BaseQuad> &quad );
 
-		void AddBox( const std::shared_ptr<ObjectBox> &box );
+		void AddBox( const boost::shared_ptr<ObjectBox> &box );
 
-		void AddQuad( const std::shared_ptr<Quad> &quad );
-		void AddQuad( const std::shared_ptr<Quad> &quad, bool ChangeParent );
+		void AddQuad( const boost::shared_ptr<Quad> &quad );
+		void AddQuad( const boost::shared_ptr<Quad> &quad, bool ChangeParent );
 
-		void RemoveQuad( const std::shared_ptr<BaseQuad> &quad );
+		void RemoveQuad( const boost::shared_ptr<BaseQuad> &quad );
 
 		void ContainedDraw();
 
-		std::shared_ptr<Quad> ExtraQuadToDraw;
-		std::shared_ptr<EzTexture> ExtraQuadToDrawTexture;
+		boost::shared_ptr<Quad> ExtraQuadToDraw;
+		boost::shared_ptr<EzTexture> ExtraQuadToDrawTexture;
 		bool DrawExtraQuad;
 
 		void Draw( bool UpdateFirst );
 
-		std::shared_ptr<SpriteAnim> AnimToSpriteFrames( int anim, int NumFrames, bool Loop, Vector2 Padding );
-		std::shared_ptr<SpriteAnim> AnimToSpriteFrames( int anim, int NumFrames, bool Loop, float StartT, float EndT, Vector2 Padding );
+		boost::shared_ptr<SpriteAnim> AnimToSpriteFrames( int anim, int NumFrames, bool Loop, Vector2 Padding );
+		boost::shared_ptr<SpriteAnim> AnimToSpriteFrames( int anim, int NumFrames, bool Loop, float StartT, float EndT, Vector2 Padding );
 
-		std::shared_ptr<Texture2D> DrawToTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad, Vector2 Padding );
+		boost::shared_ptr<Texture2D> DrawToTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad, Vector2 Padding );
 
 	
 		void InitializeInstanceFields();

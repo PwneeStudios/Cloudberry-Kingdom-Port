@@ -10,17 +10,17 @@ namespace CloudberryKingdom
 
 #if defined(PC_VERSION)
 	GUI_EnterName::GUI_EnterName() : GUI_TextBox(PlayerManager::getDefaultName(), Vector2()) { }
-	std::shared_ptr<GUI_EnterName> GUI_EnterName::GUI_EnterName_Construct()
+	boost::shared_ptr<GUI_EnterName> GUI_EnterName::GUI_EnterName_Construct()
 	{
 		GUI_TextBox::GUI_TextBox_Construct(PlayerManager::getDefaultName(), Vector2());
 
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_NEW_HIGH_SCORE, Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_NEW_HIGH_SCORE, Resources::Font_Grobold42 );
 
 		Text->setPos( Vector2( -579.365f, 253.9681f ) );
 		Text->setScale( Text->getScale() * .7f );
 		MyPile->Add( Text );
 
-		return std::static_pointer_cast<GUI_EnterName>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_EnterName>( shared_from_this() );
 	}
 #endif
 
@@ -60,8 +60,8 @@ namespace CloudberryKingdom
 		KeyboardExtension::FreezeInput();
 
 		// FIXME: Reimplement this using something similar.
-		//EventInput::CharEntered += std::make_shared<CharEnteredHandler>( shared_from_this(), &GUI_TextBox::CharEntered );
-		//EventInput::KeyDown += std::make_shared<KeyEventHandler>( shared_from_this(), &GUI_TextBox::KeyDown );
+		//EventInput::CharEntered += boost::make_shared<CharEnteredHandler>( shared_from_this(), &GUI_TextBox::CharEntered );
+		//EventInput::KeyDown += boost::make_shared<KeyEventHandler>( shared_from_this(), &GUI_TextBox::KeyDown );
 	#endif
 	}
 
@@ -233,10 +233,10 @@ namespace CloudberryKingdom
 		DoRecenter( false )
 	{
 	}
-	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct()
+	boost::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct()
 	{
 		GUI_Text::GUI_Text_Construct();
-		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
 	//GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos ) : GUI_Text( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false )
@@ -249,14 +249,14 @@ namespace CloudberryKingdom
 		DoRecenter( false )
 	{
 	}
-	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos )
+	boost::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos )
 	{
 		InitializeInstanceFields();
 		GUI_Text::GUI_Text_Construct( Tools::SantitizeOneLineString( InitialText, Resources::Font_Grobold42 ), pos, false );
 
 		Init( InitialText, pos, Vector2(1), 1 );
 
-		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
 	GUI_TextBox::GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale ) : GUI_Text( InitialText, pos, false, Resources::LilFont ),
@@ -268,14 +268,14 @@ namespace CloudberryKingdom
 		DoRecenter( false )
 	{
 	}
-	std::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale )
+	boost::shared_ptr<GUI_TextBox> GUI_TextBox::GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale )
 	{
 		InitializeInstanceFields();
 		GUI_Text::GUI_Text_Construct( InitialText, pos, false, Resources::LilFont );
 
 		Init( InitialText, pos, scale, fontscale );
 
-		return std::static_pointer_cast<GUI_TextBox>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_TextBox>( shared_from_this() );
 	}
 
 	void GUI_TextBox::Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale )
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 		MyText->setScale( MyText->getScale() * fontscale );
 
 		// Backdrop
-		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
 		Backdrop->setTextureName( _T( "score_screen" ) );
 		Backdrop->setSize( Vector2( 640.4763f, 138.0953f ) * scale );
 
@@ -297,8 +297,8 @@ namespace CloudberryKingdom
 
 		// Caret
 		//var font = Resources.Font_Grobold42;
-		std::shared_ptr<CloudberryKingdom::EzFont> font = Resources::LilFont;
-		Caret = std::make_shared<EzText>( _T( "_" ), font, 1000.f, false, true,.575f );
+		boost::shared_ptr<CloudberryKingdom::EzFont> font = Resources::LilFont;
+		Caret = boost::make_shared<EzText>( _T( "_" ), font, 1000.f, false, true,.575f );
 		Caret->MyFloatColor = Color::Black.ToVector4();
 		Caret->setPos( MyText->getPos() );
 		Caret->setScale( Caret->getScale() * fontscale );
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		MyPile->Add( Caret );
 
 		// Select quad
-		SelectQuad = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
+		SelectQuad = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
 		SelectQuad->setTextureName( _T( "White" ) );
 		SelectQuad->Quad_Renamed.SetColor( bColor( 255, 255, 255, 125 ) );
 		SelectQuad->setSize( Vector2( 100, 100 * scale.Y ) );
@@ -357,9 +357,9 @@ namespace CloudberryKingdom
 		SelectQuad->setLeft( MyText->getPos().X + pos );
 	}
 
-	std::shared_ptr<EzText> GUI_TextBox::MakeText( std::wstring text, bool centered, const std::shared_ptr<EzFont> &font )
+	boost::shared_ptr<EzText> GUI_TextBox::MakeText( std::wstring text, bool centered, const boost::shared_ptr<EzFont> &font )
 	{
-		std::shared_ptr<EzText> eztext = std::make_shared<EzText>( text, font, 1000.f, centered, true,.575f );
+		boost::shared_ptr<EzText> eztext = boost::make_shared<EzText>( text, font, 1000.f, centered, true,.575f );
 		eztext->MyFloatColor = Color::Black.ToVector4();
 		eztext->OutlineColor = Color::Transparent.ToVector4();
 
@@ -368,7 +368,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e )
+	/*void GUI_TextBox::CharEntered( const boost::shared_ptr<Object> &o, const boost::shared_ptr<CharacterEventArgs> &e )
 	{
 		if ( !Active )
 			return;
@@ -417,7 +417,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e )
+	/*void GUI_TextBox::KeyDown( const boost::shared_ptr<Object> &o, const boost::shared_ptr<KeyEventArgs> &e )
 	{
 		if ( !Active )
 			return;
@@ -477,8 +477,8 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::InitializeInstanceFields()
 	{
-		OnEnter = std::make_shared<Multicaster>();
-		OnEscape = std::make_shared<Multicaster>();
+		OnEnter = boost::make_shared<Multicaster>();
+		OnEscape = boost::make_shared<Multicaster>();
 		HasFocus = false;
 		Canceled = false;
 		SelectIndex_Start = 0;

@@ -14,10 +14,10 @@ namespace CloudberryKingdom
 		struct SetCallbackProxy : public Lambda
 		{
 		
-			std::shared_ptr<MenuSliderBase> Msb;
+			boost::shared_ptr<MenuSliderBase> Msb;
 
 		
-			SetCallbackProxy( const std::shared_ptr<MenuSliderBase> &msb );
+			SetCallbackProxy( const boost::shared_ptr<MenuSliderBase> &msb );
 
 			void Apply();
 		};
@@ -26,12 +26,12 @@ namespace CloudberryKingdom
 		/// Called when the user explicitly manipulates the slider.
 		/// </summary>
 	
-		std::shared_ptr<Lambda> OnSlide;
+		boost::shared_ptr<Lambda> OnSlide;
 
 		/// <summary>
 		/// Called whenever the slider value is set.
 		/// </summary>
-		std::shared_ptr<Lambda> OnSetValue;
+		boost::shared_ptr<Lambda> OnSetValue;
 
 		const bool getIsMaxed() const;
 
@@ -49,9 +49,9 @@ namespace CloudberryKingdom
 		const float getVal() const;
 		void setVal( const float &value );
 
-		std::shared_ptr<WrappedFloat> _MyFloat;
-		const std::shared_ptr<WrappedFloat> &getMyFloat() const;
-		void setMyFloat( const std::shared_ptr<WrappedFloat> &value );
+		boost::shared_ptr<WrappedFloat> _MyFloat;
+		const boost::shared_ptr<WrappedFloat> &getMyFloat() const;
+		void setMyFloat( const boost::shared_ptr<WrappedFloat> &value );
 
 		float InitialSlideSpeed;
 		float MaxSlideSpeed;
@@ -68,8 +68,8 @@ namespace CloudberryKingdom
 	
 		MenuSliderBase();
 
-		MenuSliderBase( const std::shared_ptr<EzText> &Text );
-		MenuSliderBase( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		MenuSliderBase( const boost::shared_ptr<EzText> &Text );
+		MenuSliderBase( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 	
 		std::wstring BaseString;

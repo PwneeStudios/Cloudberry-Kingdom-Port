@@ -14,16 +14,16 @@ namespace CloudberryKingdom
 		/// This is wrapped in a struct so that it can be used as a lock.
 		/// </summary>
 	
-		static std::shared_ptr<WrappedBool> LoadingResources;
+		static boost::shared_ptr<WrappedBool> LoadingResources;
 
 		/// <summary>
 		/// Tracks how many resources have been loaded.
 		/// This is wrapped in a struct so that it can be used as a lock.
 		/// </summary>
-		static std::shared_ptr<WrappedFloat> ResourceLoadedCountRef;
+		static boost::shared_ptr<WrappedFloat> ResourceLoadedCountRef;
 
-		static std::shared_ptr<EzFont> Font_Grobold42, Font_Grobold42_2;
-		static std::shared_ptr<EzFont> LilFont;
+		static boost::shared_ptr<EzFont> Font_Grobold42, Font_Grobold42_2;
+		static boost::shared_ptr<EzFont> LilFont;
 
 		/// <summary>
 		/// Load the necessary fonts.
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 	
 		static void LoadResources();
 
-		static std::shared_ptr<Thread> LoadThread;
+		static boost::shared_ptr<Thread> LoadThread;
 	
 		static void _LoadThread();
 	};

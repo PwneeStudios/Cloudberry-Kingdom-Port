@@ -6,37 +6,37 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu::StartMenuLambda_Campaign::StartMenuLambda_Campaign( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Campaign::StartMenuLambda_Campaign( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Campaign::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Campaign::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Campaign( item );
 	}
 
-	StartMenu::StartMenuLambda_Arcade::StartMenuLambda_Arcade( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Arcade::StartMenuLambda_Arcade( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Arcade::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Arcade::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Arcade( item );
 	}
 
-	StartMenu::StartMenuLambda_Freeplay::StartMenuLambda_Freeplay( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Freeplay::StartMenuLambda_Freeplay( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Freeplay::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Freeplay::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Freeplay( item );
 	}
 
-	StartMenu::CharacterSelectProxy::CharacterSelectProxy( const std::shared_ptr<StartMenu> &startMenu )
+	StartMenu::CharacterSelectProxy::CharacterSelectProxy( const boost::shared_ptr<StartMenu> &startMenu )
 	{
 		this->startMenu = startMenu;
 	}
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 		startMenu->CharacterSelect();
 	}
 
-	StartMenu::MenuGo_ScreenSaverHelper::MenuGo_ScreenSaverHelper( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::MenuGo_ScreenSaverHelper::MenuGo_ScreenSaverHelper( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
@@ -56,48 +56,48 @@ namespace CloudberryKingdom
 		sm->MyGame->Release();
 	}
 
-	StartMenu::StartMenuLambda_Controls::StartMenuLambda_Controls( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Controls::StartMenuLambda_Controls( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Controls::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Controls::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Controls( item );
 	}
 
-	StartMenu::StartMenuLambda_Options::StartMenuLambda_Options( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Options::StartMenuLambda_Options( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Options::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Options::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Options( item );
 	}
 
-	StartMenu::StartMenuLambda_Exit::StartMenuLambda_Exit( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuLambda_Exit::StartMenuLambda_Exit( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void StartMenu::StartMenuLambda_Exit::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::StartMenuLambda_Exit::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->MenuGo_Exit( item );
 	}
 
-	StartMenu::StartMenuExitLambda::StartMenuExitLambda( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::StartMenuExitLambda::StartMenuExitLambda( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	bool StartMenu::StartMenuExitLambda::Apply( const std::shared_ptr<Menu> &menu )
+	bool StartMenu::StartMenuExitLambda::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		sm->Exit();
 		return false;
 	}
 
-	StartMenu::DoneWithCharSelectProxy::DoneWithCharSelectProxy( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::DoneWithCharSelectProxy::DoneWithCharSelectProxy( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		sm->DoneWithCharSelect();
 	}
 
-	StartMenu::BringNextMenuLambda::BringNextMenuLambda( const std::shared_ptr<StartMenu> &sm )
+	StartMenu::BringNextMenuLambda::BringNextMenuLambda( const boost::shared_ptr<StartMenu> &sm )
 	{
 		this->sm = sm;
 	}
@@ -123,20 +123,20 @@ namespace CloudberryKingdom
 		ButtonCheck::PreLogIn = false;
 	}
 
-	void StartMenu::MenuGo_Campaign( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
 	{
 		MyNextMenu = Next_CAMPAIGN;
 		BringCharacterSelect();
 	}
 
-	void StartMenu::MenuGo_Arcade( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Arcade( const boost::shared_ptr<MenuItem> &item )
 	{
 		MyNextMenu = Next_ARCADE;
 		BringCharacterSelect();
 		//DoneWithCharSelect();StartMenu_MW_HeroSelect
 	}
 
-	void StartMenu::MenuGo_Freeplay( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Freeplay( const boost::shared_ptr<MenuItem> &item )
 	{
 		MyNextMenu = Next_FREEPLAY;
 		BringCharacterSelect();
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 	void StartMenu::BringCharacterSelect()
 	{
 		NoBack = true;
-		MyGame->SlideOut_FadeIn( 20, std::make_shared<CharacterSelectProxy>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		MyGame->SlideOut_FadeIn( 20, boost::make_shared<CharacterSelectProxy>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
 	void StartMenu::Show()
@@ -163,36 +163,36 @@ namespace CloudberryKingdom
 	void StartMenu::CharacterSelect()
 	{
 		GUI_Panel::Hide();
-		CharacterSelectManager::Start( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-		CharacterSelectManager::OnDone = std::make_shared<DoneWithCharSelectProxy>( std::static_pointer_cast<StartMenu>( shared_from_this() ) );
+		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelectManager::OnDone = boost::make_shared<DoneWithCharSelectProxy>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) );
 		CharacterSelectManager::OnBack.reset();
 	}
 
-	void StartMenu::MenuGo_ScreenSaver( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_ScreenSaver( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+		boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
 		ScreenSaver_Construct( Intro );
 		Intro->Init();
 		Tools::TheGame->LogoScreenPropUp = false;
-		Tools::AddToDo( std::make_shared<MenuGo_ScreenSaverHelper>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		Tools::AddToDo( boost::make_shared<MenuGo_ScreenSaverHelper>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
-	void StartMenu::MenuGo_Controls( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Controls( const boost::shared_ptr<MenuItem> &item )
 	{
 		Call( MakeMagic( ControlScreen, ( getControl() ) ), 0 );
 	}
 
-	void StartMenu::MenuGo_Stats( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Stats( const boost::shared_ptr<MenuItem> &item )
 	{
 		Call( MakeMagic( StatsMenu, ( StatGroup_LIFETIME ) ), 0 );
 	}
 
-	void StartMenu::MenuGo_Options( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
 		Call( MakeMagic( SoundMenu, ( getControl() ) ), 0 );
 	}
 
-	void StartMenu::MenuGo_Exit( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::MenuGo_Exit( const boost::shared_ptr<MenuItem> &item )
 	{
 		Exit();
 	}
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 		MyNextMenu( static_cast<Next>( 0 ) )
 	{
 	}
-	std::shared_ptr<StartMenu> StartMenu::StartMenu_Construct()
+	boost::shared_ptr<StartMenu> StartMenu::StartMenu_Construct()
 	{
 		InitializeInstanceFields();
 
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 )
 			Tools::TheGame->LoadingScreen_Renamed->IsDone = true;
 
-		return std::static_pointer_cast<StartMenu>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu>( shared_from_this() );
 	}
 
 	void StartMenu::SlideIn( int Frames )
@@ -239,13 +239,13 @@ namespace CloudberryKingdom
 		//SlideOnReturn = false;
 	}
 
-	void StartMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 		SetItemProperties_Red( item );
 	}
 
-	void StartMenu::SetText_Green( const std::shared_ptr<EzText> &text, bool outline )
+	void StartMenu::SetText_Green( const boost::shared_ptr<EzText> &text, bool outline )
 	{
 		if ( text == 0 )
 			return;
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 		text->MyFloatColor = ( bColor( 34, 214, 47 ) ).ToVector4();
 	}
 
-	void StartMenu::SetSelectedText_Green( const std::shared_ptr<EzText> &text, bool outline )
+	void StartMenu::SetSelectedText_Green( const boost::shared_ptr<EzText> &text, bool outline )
 	{
 		if ( text == 0 )
 			return;
@@ -263,13 +263,13 @@ namespace CloudberryKingdom
 		text->MyFloatColor = ( bColor( 65, 255, 100 ) ).ToVector4();
 	}
 
-	void StartMenu::SetItemProperties_Green( const std::shared_ptr<MenuItem> &item, bool outline )
+	void StartMenu::SetItemProperties_Green( const boost::shared_ptr<MenuItem> &item, bool outline )
 	{
 		SetText_Green( item->MyText, outline );
 		SetText_Green( item->MySelectedText, outline );
 	}
 
-	void StartMenu::SetItemProperties_Red( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::SetItemProperties_Red( const boost::shared_ptr<MenuItem> &item )
 	{
 		if ( item->MyText == 0 )
 			return;
@@ -296,14 +296,14 @@ namespace CloudberryKingdom
 		setSlideLength( 36 );
 		DestinationScale *= 1.015f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->setControl( -2 );
 
 		MyMenu->CheckForOutsideClick = false;
-		MyMenu->OnB = std::make_shared<StartMenuExitLambda>( std::static_pointer_cast<StartMenu>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<StartMenuExitLambda>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) );
 
 		FontScale *= .88f;
 		PosAdd = Vector2( 0, -117 );
@@ -312,7 +312,7 @@ namespace CloudberryKingdom
 		MakeMenu();
 	}
 
-	void StartMenu::GrayItem( const std::shared_ptr<MenuItem> &item )
+	void StartMenu::GrayItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		item->MyText->MyFloatColor = ColorHelper::Gray( .535f );
 		item->MySelectedText->MyFloatColor = ColorHelper::Gray( .55f );
@@ -320,19 +320,19 @@ namespace CloudberryKingdom
 
 	void StartMenu::MakeMenu()
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Arcade
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
 		item->Name = _T( "Arcade" );
-		item->setGo( std::make_shared<StartMenuLambda_Arcade>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<StartMenuLambda_Arcade>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Campaign
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
 		item->Name = _T( "Campaign" );
 		AddItem( item );
-		item->setGo( std::make_shared<StartMenuLambda_Campaign>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<StartMenuLambda_Campaign>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 
 		//// Extra
 		//item = new MenuItem(new EzText("Extras", ItemFont));
@@ -341,9 +341,9 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Free Play
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
 		item->Name = _T( "Freeplay" );
-		item->setGo( std::make_shared<StartMenuLambda_Freeplay>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<StartMenuLambda_Freeplay>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		//// Jukebox
@@ -353,9 +353,9 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Options
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
 		item->Name = _T( "Options" );
-		item->setGo( std::make_shared<StartMenuLambda_Options>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<StartMenuLambda_Options>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Stats
@@ -364,9 +364,9 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Exit
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
 		item->Name = _T( "Exit" );
-		item->setGo( std::make_shared<StartMenuLambda_Exit>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<StartMenuLambda_Exit>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		EnsureFancy();
@@ -376,7 +376,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::BlackBox()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
 		if ( _item != 0 )
 		{
@@ -410,7 +410,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 1737.697f, -212.8573f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
 		if ( _q != 0 )
 		{
@@ -435,7 +435,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::Centered()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
 		if ( _item != 0 )
 		{
@@ -469,7 +469,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 1715.474f, -154.5238f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
 		if ( _q != 0 )
 		{
@@ -488,7 +488,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::Forest()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
 		if ( _item != 0 )
 		{
@@ -527,7 +527,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::Title3()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
 		if ( _item != 0 )
 		{
@@ -561,7 +561,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -228.97f, -551.7461f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
 		if ( _q != 0 )
 		{
@@ -578,7 +578,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( 0, 0 ) );
 	}
 
-	void StartMenu::SetChildControl( const std::shared_ptr<GUI_Panel> &child )
+	void StartMenu::SetChildControl( const boost::shared_ptr<GUI_Panel> &child )
 	{
 	}
 
@@ -594,7 +594,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::DoneWithCharSelect()
 	{
-		MyGame->WaitThenDo( 0, std::make_shared<BringNextMenuLambda>( std::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 0, boost::make_shared<BringNextMenuLambda>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 	}
 
 	void StartMenu::BringNextMenu()

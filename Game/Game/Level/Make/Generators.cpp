@@ -7,27 +7,27 @@ namespace CloudberryKingdom
 
 	void Generators::InitializeStatics()
 	{
-		Generators::instance = std::make_shared<Generators>();
+		Generators::instance = boost::make_shared<Generators>();
 	}
 
 	// Statics
-	std::shared_ptr<Generators> Generators::instance;
+	boost::shared_ptr<Generators> Generators::instance;
 
 
-	const std::shared_ptr<Generators> &Generators::getInstance()
+	const boost::shared_ptr<Generators> &Generators::getInstance()
 	{
 		return instance;
 	}
 
-	std::vector<std::shared_ptr<AutoGen> > Generators::Gens, Generators::PreFill_1_Gens, Generators::PreFill_2_Gens, Generators::ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
+	std::vector<boost::shared_ptr<AutoGen> > Generators::Gens, Generators::PreFill_1_Gens, Generators::PreFill_2_Gens, Generators::ActiveFill_1_Gens, Generators::WeightedPreFill_1_Gens;
 
 	Generators::Generators()
 	{
-		Gens = std::vector<std::shared_ptr<AutoGen> >();
-		PreFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
-		PreFill_2_Gens = std::vector<std::shared_ptr<AutoGen> >();
-		ActiveFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
-		WeightedPreFill_1_Gens = std::vector<std::shared_ptr<AutoGen> >();
+		Gens = std::vector<boost::shared_ptr<AutoGen> >();
+		PreFill_1_Gens = std::vector<boost::shared_ptr<AutoGen> >();
+		PreFill_2_Gens = std::vector<boost::shared_ptr<AutoGen> >();
+		ActiveFill_1_Gens = std::vector<boost::shared_ptr<AutoGen> >();
+		WeightedPreFill_1_Gens = std::vector<boost::shared_ptr<AutoGen> >();
 
 		AddGenerator( NormalBlock_AutoGen::getInstance() );
 		AddGenerator( Ceiling_AutoGen::getInstance() );
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		AddGenerator( LavaDrip_AutoGen::getInstance() );
 	}
 
-	void Generators::AddGenerator( const std::shared_ptr<AutoGen> &gen )
+	void Generators::AddGenerator( const boost::shared_ptr<AutoGen> &gen )
 	{
 		Gens.push_back( gen );
 		if ( gen->Do_WeightedPreFill_1 )
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 			PreFill_2_Gens.push_back( gen );
 	}
 
-	int Generators::IndexOf( const std::shared_ptr<AutoGen> &gen )
+	int Generators::IndexOf( const boost::shared_ptr<AutoGen> &gen )
 	{
 		return ::IndexOf( Gens, gen );
 	}

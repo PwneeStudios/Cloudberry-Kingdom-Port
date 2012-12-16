@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	StringWorldEndurance::OnSwapLambda::OnSwapLambda( const std::shared_ptr<StringWorldEndurance> &ch )
+	StringWorldEndurance::OnSwapLambda::OnSwapLambda( const boost::shared_ptr<StringWorldEndurance> &ch )
 	{
 		this->ch = ch;
 	}
 
-	void StringWorldEndurance::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
+	void StringWorldEndurance::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		data->MyGame->AddGameObject( ch->Gui_LivesLeft );
 		data->MyGame->AddGameObject( ch->Gui_NextLife );
@@ -19,25 +19,25 @@ namespace CloudberryKingdom
 			//, MyGUI_Level
 	}
 
-	StringWorldEndurance::StringWorldEndurance( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife ) :
+	StringWorldEndurance::StringWorldEndurance( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife ) :
 		StringWorldGameData( GetSeed )
 	{
 		// StringWorldEndurance_Construct.
 
 		// Lives
 		/*this->Gui_LivesLeft = Gui_LivesLeft;
-		Gui_Lives = std::make_shared<GUI_Lives>( Gui_LivesLeft );
-		Gui_NextLife = std::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
+		Gui_Lives = boost::make_shared<GUI_Lives>( Gui_LivesLeft );
+		Gui_NextLife = boost::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
 
 		// Coin score multiplier
-		MyCoinScoreMultiplier = std::make_shared<CoinScoreMultiplierObject>();
+		MyCoinScoreMultiplier = boost::make_shared<CoinScoreMultiplierObject>();
 
 		// Level and Score
-		MyGUI_Score = std::make_shared<GUI_Score>();
-		MyGUI_Level = std::make_shared<GUI_Level>();
+		MyGUI_Score = boost::make_shared<GUI_Score>();
+		MyGUI_Level = boost::make_shared<GUI_Level>();
 
 		// Add game objects, including 'Perfect' watcher
-		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );*/
+		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<StringWorldEndurance>( shared_from_this() ) ) );*/
 	}
 
 	void StringWorldEndurance::Release()
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		Gui_NextLife->ForceRelease();
 	}
 
-	void StringWorldEndurance::AdditionalSwapToLevelProcessing( const std::shared_ptr<GameData> &game )
+	void StringWorldEndurance::AdditionalSwapToLevelProcessing( const boost::shared_ptr<GameData> &game )
 	{
 		StringWorldGameData::AdditionalSwapToLevelProcessing( game );
 

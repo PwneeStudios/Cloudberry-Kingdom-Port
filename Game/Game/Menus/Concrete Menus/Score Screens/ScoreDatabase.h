@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<ScoreDatabase> Instance;
+		static boost::shared_ptr<ScoreDatabase> Instance;
 
 	
 		static int MostRecentScoreDate;
@@ -21,14 +21,14 @@ namespace CloudberryKingdom
 		static int Capacity;
 
 	
-		static std::map<int, std::vector<std::shared_ptr<ScoreEntry> > > Games;
+		static std::map<int, std::vector<boost::shared_ptr<ScoreEntry> > > Games;
 
 	
 		static void Initialize();
 
 		#pragma region SaveLoad
 	
-		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Serialize( const boost::shared_ptr<BinaryWriter> &writer );
 		virtual void FailLoad();
 		virtual void Deserialize( std::vector<unsigned char> Data );
 		#pragma endregion
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	
 		static void EnsureList( int Game );
 
-		static std::shared_ptr<ScoreList> GetList( int Game );
+		static boost::shared_ptr<ScoreList> GetList( int Game );
 
 		/// <summary>
 		/// Whether the given score qualifies for the high score list
@@ -47,34 +47,34 @@ namespace CloudberryKingdom
 		/// Return the score with the smallest value.
 		/// </summary>
 	
-		static std::shared_ptr<ScoreEntry> Max( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
+		static boost::shared_ptr<ScoreEntry> Max( std::vector<boost::shared_ptr<ScoreEntry> > &Scores );
 
 	
-		static std::shared_ptr<ScoreEntry> Max( int GameId );
+		static boost::shared_ptr<ScoreEntry> Max( int GameId );
 
 		/// <summary>
 		/// Return the score with the smallest value.
 		/// </summary>
-		static std::shared_ptr<ScoreEntry> Min( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
+		static boost::shared_ptr<ScoreEntry> Min( std::vector<boost::shared_ptr<ScoreEntry> > &Scores );
 
-		static std::shared_ptr<ScoreEntry> Min( int GameId );
+		static boost::shared_ptr<ScoreEntry> Min( int GameId );
 
-		static void Add( const std::shared_ptr<ScoreEntry> &score );
+		static void Add( const boost::shared_ptr<ScoreEntry> &score );
 
 		/// <summary>
 		/// Remove excess entries, if the list is over capacity.
 		/// </summary>
 	
-		static void TrimExcess( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
+		static void TrimExcess( std::vector<boost::shared_ptr<ScoreEntry> > &Scores );
 
-		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
+		static int ScoreCompare( const boost::shared_ptr<ScoreEntry> &score1, const boost::shared_ptr<ScoreEntry> &score2 );
 
-		static bool ScoreCompareStrictWeak( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
+		static bool ScoreCompareStrictWeak( const boost::shared_ptr<ScoreEntry> &score1, const boost::shared_ptr<ScoreEntry> &score2 );
 
 		/// <summary>
 		/// Sort the list by value.
 		/// </summary>
-		static void Sort( std::vector<std::shared_ptr<ScoreEntry> > &Scores );
+		static void Sort( std::vector<boost::shared_ptr<ScoreEntry> > &Scores );
 	};
 }
 

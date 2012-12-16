@@ -12,19 +12,19 @@ namespace CloudberryKingdom
 	struct PresetUpgrades
 	{
 	
-		static std::shared_ptr<Upgrades> GetUpgrade1();
+		static boost::shared_ptr<Upgrades> GetUpgrade1();
 
-		static std::shared_ptr<Upgrades> GetUpgrade2();
+		static boost::shared_ptr<Upgrades> GetUpgrade2();
 
-		static std::shared_ptr<Upgrades> GetUpgrade3();
+		static boost::shared_ptr<Upgrades> GetUpgrade3();
 
-		static std::shared_ptr<Upgrades> GetUpgrade4();
+		static boost::shared_ptr<Upgrades> GetUpgrade4();
 
-		static std::shared_ptr<Upgrades> GetUpgrade5();
+		static boost::shared_ptr<Upgrades> GetUpgrade5();
 
-		static std::shared_ptr<Upgrades> GetUpgrade6();
+		static boost::shared_ptr<Upgrades> GetUpgrade6();
 
-		static std::shared_ptr<Upgrades> GetUpgrade( int Difficulty );
+		static boost::shared_ptr<Upgrades> GetUpgrade( int Difficulty );
 	};
 }
 

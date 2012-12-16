@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 
 		virtual void Construct( bool BoxesOnly );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 	
 		virtual void DrawBoxes();

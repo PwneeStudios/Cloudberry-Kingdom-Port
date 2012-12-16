@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		Initialized = false;
 	}
 
-	AnimQueueEntry::AnimQueueEntry( const std::shared_ptr<AnimQueueEntry> &entry )
+	AnimQueueEntry::AnimQueueEntry( const boost::shared_ptr<AnimQueueEntry> &entry )
 	{
 		Type = entry->Type;
 		AnimSpeed = entry->AnimSpeed;

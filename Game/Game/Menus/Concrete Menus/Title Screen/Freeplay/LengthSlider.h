@@ -13,13 +13,13 @@ namespace CloudberryKingdom
 
 	
 		LengthSlider();
-		LengthSlider( const std::shared_ptr<EzText> &Text );
-		LengthSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		LengthSlider( const boost::shared_ptr<EzText> &Text );
+		LengthSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 		int PerceivedMin;
 
 	
-		std::shared_ptr<ProgressBar> LengthBar;
+		boost::shared_ptr<ProgressBar> LengthBar;
 	
 		virtual void InitializeSlider();
 
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		virtual void CalcEndPoints();
 
 	
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 	
 		void InitializeInstanceFields();

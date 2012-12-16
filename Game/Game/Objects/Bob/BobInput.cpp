@@ -9,14 +9,14 @@ namespace CloudberryKingdom
 		xVec = Vector2();
 	}
 
-	void BobInput::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void BobInput::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( A_Button );
 		writer->Write( B_Button );
 		writer->Write( xVec );
 	}
 
-	void BobInput::Read( const std::shared_ptr<BinaryReader> &reader )
+	void BobInput::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		A_Button = reader->ReadBoolean();
 		B_Button = reader->ReadBoolean();

@@ -21,13 +21,13 @@ namespace CloudberryKingdom
 
 		OffsetStyles OffsetStyle;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 		/// <summary>
 		/// Set the period and period offset of the spike.
 		/// The spike's position should already have been set.
 		/// </summary>
-		void SetPeriod( const std::shared_ptr<Spike> &spike, const std::shared_ptr<Rand> &Rnd );
+		void SetPeriod( const boost::shared_ptr<Spike> &spike, const boost::shared_ptr<Rand> &Rnd );
 	};
 
 	struct Spike_AutoGen : public AutoGen
@@ -36,27 +36,27 @@ namespace CloudberryKingdom
 		struct SpikeCleanup : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<Spike_Parameters> Params;
+			boost::shared_ptr<Spike_Parameters> Params;
 
 		
-			SpikeCleanup( const std::shared_ptr<Spike_Parameters> &Params );
+			SpikeCleanup( const boost::shared_ptr<Spike_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 	
-		static std::shared_ptr<Spike_AutoGen> instance;
+		static boost::shared_ptr<Spike_AutoGen> instance;
 	
-		const static std::shared_ptr<Spike_AutoGen> &getInstance();
+		const static boost::shared_ptr<Spike_AutoGen> &getInstance();
 
 	
 		Spike_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 	};
 }

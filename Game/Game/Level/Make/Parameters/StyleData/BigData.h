@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	struct BigData : public StyleData
 	{
 	
-		BigData( const std::shared_ptr<Rand> &Rnd );
+		BigData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 	};

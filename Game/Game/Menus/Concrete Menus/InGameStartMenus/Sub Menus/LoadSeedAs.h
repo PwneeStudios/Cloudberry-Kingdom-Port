@@ -12,9 +12,9 @@ namespace CloudberryKingdom
 		struct LoadSeedAsOnEnterLambda : public Lambda
 		{
 		
-			std::shared_ptr<LoadSeedAs> lsa;
+			boost::shared_ptr<LoadSeedAs> lsa;
 		
-			LoadSeedAsOnEnterLambda( const std::shared_ptr<LoadSeedAs> &lsa );
+			LoadSeedAsOnEnterLambda( const boost::shared_ptr<LoadSeedAs> &lsa );
 
 			void Apply();
 		};
@@ -23,33 +23,33 @@ namespace CloudberryKingdom
 		struct LoadSeedAsBackLambda : public Lambda
 		{
 		
-			std::shared_ptr<LoadSeedAs> lsa;
+			boost::shared_ptr<LoadSeedAs> lsa;
 		
-			LoadSeedAsBackLambda( const std::shared_ptr<LoadSeedAs> &lsa );
+			LoadSeedAsBackLambda( const boost::shared_ptr<LoadSeedAs> &lsa );
 
 			void Apply();
 		};
 
 	
-		struct LoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct LoadProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<LoadSeedAs> lsa;
+			boost::shared_ptr<LoadSeedAs> lsa;
 
 		
-			LoadProxy1( const std::shared_ptr<LoadSeedAs> &lsa );
+			LoadProxy1( const boost::shared_ptr<LoadSeedAs> &lsa );
 
-			void Apply( const std::shared_ptr<MenuItem> &_item );
+			void Apply( const boost::shared_ptr<MenuItem> &_item );
 		};
 
 	
-		LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
-		std::shared_ptr<LoadSeedAs> LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
+		LoadSeedAs( int Control, const boost::shared_ptr<PlayerData> &Player );
+		boost::shared_ptr<LoadSeedAs> LoadSeedAs_Construct( int Control, const boost::shared_ptr<PlayerData> &Player );
 
 	
-		std::shared_ptr<PlayerData> Player;
-		std::shared_ptr<GUI_TextBox> TextBox;
-		std::shared_ptr<EzText> HeaderText;
+		boost::shared_ptr<PlayerData> Player;
+		boost::shared_ptr<GUI_TextBox> TextBox;
+		boost::shared_ptr<EzText> HeaderText;
 	
 		virtual void Init();
 
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		virtual void OnAdd();
 
 	
-		void Load( const std::shared_ptr<MenuItem> &_item );
+		void Load( const boost::shared_ptr<MenuItem> &_item );
 	};
 }
 

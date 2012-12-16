@@ -4,7 +4,7 @@
 namespace CloudberryKingdom
 {
 
-	CkBaseMenu::ReturnToCallerProxy::ReturnToCallerProxy( const std::shared_ptr<CkBaseMenu> &cbm )
+	CkBaseMenu::ReturnToCallerProxy::ReturnToCallerProxy( const boost::shared_ptr<CkBaseMenu> &cbm )
 	{
 		this->cbm = cbm;
 	}
@@ -14,22 +14,22 @@ namespace CloudberryKingdom
 		cbm->ReturnToCaller();
 	}
 
-	CkBaseMenu::ReturnToCallerProxy1::ReturnToCallerProxy1( const std::shared_ptr<CkBaseMenu> &cbm )
+	CkBaseMenu::ReturnToCallerProxy1::ReturnToCallerProxy1( const boost::shared_ptr<CkBaseMenu> &cbm )
 	{
 		this->cbm = cbm;
 	}
 
-	void CkBaseMenu::ReturnToCallerProxy1::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void CkBaseMenu::ReturnToCallerProxy1::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		cbm->ReturnToCaller();
 	}
 
-	CkBaseMenu::MakeBackButtonHelper::MakeBackButtonHelper( const std::shared_ptr<CkBaseMenu> &bm )
+	CkBaseMenu::MakeBackButtonHelper::MakeBackButtonHelper( const boost::shared_ptr<CkBaseMenu> &bm )
 	{
 		this->bm = bm;
 	}
 
-	void CkBaseMenu::MakeBackButtonHelper::Apply( const std::shared_ptr<MenuItem> &menuitem )
+	void CkBaseMenu::MakeBackButtonHelper::Apply( const boost::shared_ptr<MenuItem> &menuitem )
 	{
 		bm->MyMenu->OnB->Apply( bm->MyMenu );
 	}
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::MakeDarkBack()
 	{
 		// Make the dark back
-		DarkBack = std::make_shared<QuadClass>( _T( "White" ) );
+		DarkBack = boost::make_shared<QuadClass>( _T( "White" ) );
 		DarkBack->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
 		DarkBack->setAlpha( 0 );
 		DarkBack->Fade( .1f );
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		MyPile->Add( DarkBack, _T( "Dark" ) );
 	}
 
-	void CkBaseMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void CkBaseMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		if ( item->MyText == 0 )
 			return;
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		SetSelectedTextProperties( item->MySelectedText );
 	}
 
-	void CkBaseMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void CkBaseMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		text->MyFloatColor = Vector4( .6f,.6f,.6f, 1 );
 		text->OutlineColor = Vector4( 0, 0, 0, 1 );
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		text->setScale( FontScale *.9f );
 	}
 
-	void CkBaseMenu::SetTextProperties( const std::shared_ptr<EzText> &text )
+	void CkBaseMenu::SetTextProperties( const boost::shared_ptr<EzText> &text )
 	{
 		text->MyFloatColor = ( bColor( 184, 231, 231 ) ).ToVector4();
 
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 		text->ShadowOffset = Vector2( 12, 12 );
 	}
 
-	void CkBaseMenu::SetSelectedTextProperties( const std::shared_ptr<EzText> &text )
+	void CkBaseMenu::SetSelectedTextProperties( const boost::shared_ptr<EzText> &text )
 	{
 		text->MyFloatColor = ( bColor( 246, 214, 33 ) ).ToVector4();
 		//text.MyFloatColor = new Color(50, 220, 50).ToVector4();
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		text->ShadowOffset = Vector2( 12, 12 );
 	}
 
-	void CkBaseMenu::AddItem( const std::shared_ptr<MenuItem> &item )
+	void CkBaseMenu::AddItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		SetItemProperties( item );
 
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		CallDelay = 18;
 	}
 
-	void CkBaseMenu::Call( const std::shared_ptr<GUI_Panel> &child, int Delay )
+	void CkBaseMenu::Call( const boost::shared_ptr<GUI_Panel> &child, int Delay )
 	{
 		GUI_Panel::Call( child, Delay );
 
@@ -225,24 +225,24 @@ namespace CloudberryKingdom
 			BackSound->Play();
 	}
 
-	void CkBaseMenu::setRightPanel( const std::shared_ptr<GUI_Panel> &value )
+	void CkBaseMenu::setRightPanel( const boost::shared_ptr<GUI_Panel> &value )
 	{
 		_RightPanel = value;
-		_RightPanel->CopySlideLengths( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		_RightPanel->CopySlideLengths( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getRightPanel() const
+	const boost::shared_ptr<GUI_Panel> &CkBaseMenu::getRightPanel() const
 	{
 		return _RightPanel;
 	}
 
-	void CkBaseMenu::setTopPanel( const std::shared_ptr<GUI_Panel> &value )
+	void CkBaseMenu::setTopPanel( const boost::shared_ptr<GUI_Panel> &value )
 	{
 		_TopPanel = value;
-		_TopPanel->CopySlideLengths( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		_TopPanel->CopySlideLengths( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	const std::shared_ptr<GUI_Panel> &CkBaseMenu::getTopPanel() const
+	const boost::shared_ptr<GUI_Panel> &CkBaseMenu::getTopPanel() const
 	{
 		return _TopPanel;
 	}
@@ -338,24 +338,24 @@ namespace CloudberryKingdom
 			this->SlideOut( pos, frames );
 	}
 
-	std::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
+	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
 	{
 		return MakeBackButton( Localization::Words_BACK );
 	}
 
-	std::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton( Localization::Words Word )
+	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton( Localization::Words Word )
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 	#if defined(PC_VERSION)
 		//item = new MenuItem(new EzText(ButtonString.Back(86) + text, ItemFont));
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) );
 	#else
 		//item = new MenuItem(new EzText(ButtonString.Back(86) + " " + text, ItemFont));
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Back( 86 ) + _T( " " ) + Localization::WordString( Word ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + _T( " " ) + Localization::WordString( Word ) ) );
 	#endif
 
-		item->setGo( std::make_shared<MakeBackButtonHelper>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<MakeBackButtonHelper>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
 		item->Name = _T( "Back" );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -365,9 +365,9 @@ namespace CloudberryKingdom
 		return item;
 	}
 
-	void CkBaseMenu::MakeBackdrop( const std::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL )
+	void CkBaseMenu::MakeBackdrop( const boost::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL )
 	{
-		menu->MyPieceQuad = std::make_shared<PieceQuad>();
+		menu->MyPieceQuad = boost::make_shared<PieceQuad>();
 		menu->MyPieceQuadTemplate = MenuTemplate;
 		menu->TR = TR;
 		menu->BL = BL;
@@ -376,14 +376,14 @@ namespace CloudberryKingdom
 		SetBackdropProperties( menu->MyPieceQuad );
 	}
 
-std::shared_ptr<PieceQuad> CkBaseMenu::MenuTemplate = 0;
+boost::shared_ptr<PieceQuad> CkBaseMenu::MenuTemplate = 0;
 
 	void CkBaseMenu::MakeBackdrop( Vector2 TR, Vector2 BL )
 	{
 		MakeBackdrop( MyMenu, TR, BL );
 	}
 
-	void CkBaseMenu::SetBackdropProperties( const std::shared_ptr<PieceQuad> &piecequad )
+	void CkBaseMenu::SetBackdropProperties( const boost::shared_ptr<PieceQuad> &piecequad )
 	{
 		piecequad->SetAlpha( .7f );
 	}
@@ -398,14 +398,14 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 		SlideOutTo( PresetPos_LEFT )
 	{
 	}
-	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct()
+	boost::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 		
 		getCore()->DrawLayer = DefaultMenuLayer;
 
-		return std::static_pointer_cast<CkBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<CkBaseMenu>( shared_from_this() );
 	}
 
 	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor ),
@@ -416,14 +416,14 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 		SlideOutTo( PresetPos_LEFT )
 	{
 	}
-	std::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
+	boost::shared_ptr<CkBaseMenu> CkBaseMenu::CkBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct( CallBaseConstructor );
 		
 		getCore()->DrawLayer = DefaultMenuLayer;
 
-		return std::static_pointer_cast<CkBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<CkBaseMenu>( shared_from_this() );
 	}
 
 	void CkBaseMenu::Draw()

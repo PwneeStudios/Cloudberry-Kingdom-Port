@@ -3,14 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_Arcade::StartMenu_MW_Arcade( const std::shared_ptr<TitleGameData_MW> &Title ) : ArcadeMenu() { }
-	std::shared_ptr<StartMenu_MW_Arcade> StartMenu_MW_Arcade::StartMenu_MW_Arcade_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	StartMenu_MW_Arcade::StartMenu_MW_Arcade( const boost::shared_ptr<TitleGameData_MW> &Title ) : ArcadeMenu() { }
+	boost::shared_ptr<StartMenu_MW_Arcade> StartMenu_MW_Arcade::StartMenu_MW_Arcade_Construct( const boost::shared_ptr<TitleGameData_MW> &Title )
 	{
 		ArcadeMenu::ArcadeMenu_Construct();
 
 		this->Title = Title;
 
-		return std::static_pointer_cast<StartMenu_MW_Arcade>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_Arcade>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Arcade::SlideIn( int Frames )
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		ArcadeMenu::SlideOut( Preset, 0 );
 	}
 
-	void StartMenu_MW_Arcade::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_Arcade::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		ArcadeMenu::SetItemProperties( item );
 
@@ -36,23 +36,23 @@ namespace CloudberryKingdom
 	item->MyText->setScale( item->MySelectedText->getScale() );
 	}
 
-	void StartMenu_MW_Arcade::Go( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_Arcade::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		MyArcadeItem = std::dynamic_pointer_cast<ArcadeItem>( item );
+		MyArcadeItem = boost::dynamic_pointer_cast<ArcadeItem>( item );
 		if ( MyArcadeItem->Locked )
 			return;
 
 		if ( MyArcadeItem->MyChallenge == Challenge_Escalation::getInstance() || MyArcadeItem->MyChallenge == Challenge_TimeCrisis::getInstance() )
 		{
-			GUI_Panel::Call( MakeMagic( StartMenu_MW_HeroSelect, ( Title, std::static_pointer_cast<ArcadeMenu>( shared_from_this() ), MyArcadeItem ) ) );
+			GUI_Panel::Call( MakeMagic( StartMenu_MW_HeroSelect, ( Title, boost::static_pointer_cast<ArcadeMenu>( shared_from_this() ), MyArcadeItem ) ) );
 		}
 		else
 		{
 			Challenge::ChosenHero.reset();
-			std::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
+			boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
 
 			levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-			levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
+			levelmenu->StartFunc = boost::make_shared<StartFuncProxy>( boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
 			levelmenu->ReturnFunc.reset();
 
 			GUI_Panel::Call( levelmenu );
@@ -71,14 +71,14 @@ namespace CloudberryKingdom
 		 ArcadeMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPos();
 	}
 
 	void StartMenu_MW_Arcade::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Header" ) );
 		if ( _item != 0 )
 		{
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 1070.889f, -45.5556f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{

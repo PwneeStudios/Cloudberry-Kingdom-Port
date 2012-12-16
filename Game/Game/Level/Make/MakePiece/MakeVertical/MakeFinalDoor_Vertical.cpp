@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	float MakeFinalDoorVertical::ElementPositionProjectY::Apply( const std::shared_ptr<BlockBase> &element )
+	float MakeFinalDoorVertical::ElementPositionProjectY::Apply( const boost::shared_ptr<BlockBase> &element )
 	{
 		return element->getCore()->Data.Position.Y;
 	}
@@ -12,12 +12,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool MakeFinalDoorVertical::MatchUsedLambda::Apply( const std::shared_ptr<BlockBase> &match )
+	bool MakeFinalDoorVertical::MatchUsedLambda::Apply( const boost::shared_ptr<BlockBase> &match )
 	{
 		return match->getCore()->GenData.Used;
 	}
 
-	MakeFinalDoorVertical::MakeFinalDoorVertical( const std::shared_ptr<Level> &level )
+	MakeFinalDoorVertical::MakeFinalDoorVertical( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel = level;
 	}
@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 
 		// Find a final block that was used by the computer.
 		if ( MyLevel->CurMakeData->PieceSeed->GeometryType == LevelGeometry_DOWN )
-			FinalBlock = Tools::ArgMin<std::shared_ptr<BlockBase> >( Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
+			FinalBlock = Tools::ArgMin<boost::shared_ptr<BlockBase> >( Tools::FindAll<boost::shared_ptr<BlockBase> >( MyLevel->Blocks, boost::make_shared<MatchUsedLambda>() ), boost::make_shared<ElementPositionProjectY>() );
 		else
-			FinalBlock = Tools::ArgMax<std::shared_ptr<BlockBase> >( Tools::FindAll<std::shared_ptr<BlockBase> >( MyLevel->Blocks, std::make_shared<MatchUsedLambda>() ), std::make_shared<ElementPositionProjectY>() );
+			FinalBlock = Tools::ArgMax<boost::shared_ptr<BlockBase> >( Tools::FindAll<boost::shared_ptr<BlockBase> >( MyLevel->Blocks, boost::make_shared<MatchUsedLambda>() ), boost::make_shared<ElementPositionProjectY>() );
 
 		FinalPos = FinalBlock->getCore()->Data.Position;
 

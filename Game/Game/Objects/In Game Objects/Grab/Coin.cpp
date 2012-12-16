@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	Coin::CoinTileInfo::CoinTileInfo()
 	{
 		InitializeInstanceFields();
-		DieTemplate = std::make_shared<Particle>();
+		DieTemplate = boost::make_shared<Particle>();
 		DieTemplate->MyQuad.Init();
 		DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
 		DieTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Coin" ) ) );
@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 
 	void Coin::CoinTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "CoinShimmer" ) ), Vector2( 105.f, -1.f ) );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "CoinShimmer" ) ), Vector2( 105.f, -1.f ) );
 		BoxSize = Vector2( 52.5f, 65 );
 		Color = bColor( 255, 255, 255, 255 );
 		ShowEffect = true;
@@ -55,10 +55,10 @@ namespace CloudberryKingdom
 	Coin::Coin( bool BoxesOnly )
 	{
 		InitializeInstanceFields();
-		Box = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
 
 		if ( !BoxesOnly )
-			MyQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
 
 		MakeNew();
 
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		{
 			for ( int j = 0; j < 3; j++ )
 			{
-				std::shared_ptr<CloudberryKingdom::Particle> p = getCore()->MyLevel->MainEmitter->GetNewParticle(getInfo()->Coins->DieTemplate);
+				boost::shared_ptr<CloudberryKingdom::Particle> p = getCore()->MyLevel->MainEmitter->GetNewParticle(getInfo()->Coins->DieTemplate);
 				p->Data.Position = getCore()->Data.Position + getMyLevel()->getRnd()->RndDir(35);
 				p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Pop" ) ) );
 			}
@@ -93,13 +93,13 @@ namespace CloudberryKingdom
 		if ( getInfo()->Coins->ShowText )
 		{
 			int val = CalcScoreValue();
-			std::shared_ptr<TextFloat> text = std::make_shared<TextFloat>( _T( "+" ) + StringConverterHelper::toString( val ), getCore()->Data.Position + Vector2(21, 22.5f) );
+			boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( _T( "+" ) + StringConverterHelper::toString( val ), getCore()->Data.Position + Vector2(21, 22.5f) );
 			text->getCore()->DrawLayer = 8;
 			getCore()->MyLevel->MyGame->AddGameObject(text);
 		}
 	}
 
-	const std::shared_ptr<GameData> &Coin::getMyGame() const
+	const boost::shared_ptr<GameData> &Coin::getMyGame() const
 	{
 		return getCore()->MyLevel->MyGame;
 	}
@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 		Box->Move( shift );
 	}
 
-	void Coin::Interact( const std::shared_ptr<Bob> &bob )
+	void Coin::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->Active )
 			return;
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 			{
 				getCore()->setInteractingBob(bob);
 
-				std::shared_ptr<GameData> game = getCore()->MyLevel->MyGame;
+				boost::shared_ptr<GameData> game = getCore()->MyLevel->MyGame;
 
 				// Add the value to the player's stats
 				int CurScoreValue = CalcScoreValue();
@@ -256,11 +256,11 @@ Vector2 Coin::DrawGrace = Vector2( 50, 50 );
 			Box->Draw( Tools::QDrawer, Color::Bisque, 10 );
 	}
 
-	void Coin::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Coin::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Coin> CoinA = std::dynamic_pointer_cast<Coin>( A );
+		boost::shared_ptr<Coin> CoinA = boost::dynamic_pointer_cast<Coin>( A );
 
 		Box->SetTarget( CoinA->Box->Target->Center, CoinA->Box->Target->Size );
 		Box->SetCurrent( CoinA->Box->Current->Center, CoinA->Box->Current->Size );

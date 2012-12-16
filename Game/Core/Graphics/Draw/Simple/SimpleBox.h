@@ -23,16 +23,16 @@ namespace CloudberryKingdom
 
 		void Calc( int anim, float t, int AnimLength, bool Loop, bool Linear );
 
-		SimpleBox( const std::shared_ptr<SimpleBox> &box );
+		SimpleBox( const boost::shared_ptr<SimpleBox> &box );
 
-		SimpleBox( const std::shared_ptr<ObjectBox> &box );
+		SimpleBox( const boost::shared_ptr<ObjectBox> &box );
 
 		/// <summary>
 		/// Copy and shift the source boxes's vertex locations.
 		/// </summary>
 		/// <param name="SourceBox">The source box</param>
 		/// <param name="shift">The amount to shift</param>
-		void CopyUpdate( std::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift );
+		void CopyUpdate( boost::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift );
 
 		void Update( BasePoint &Base );
 

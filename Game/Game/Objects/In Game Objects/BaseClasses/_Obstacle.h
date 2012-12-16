@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	struct _Obstacle : public ObjectBase
 	{
 	
-		std::shared_ptr<AutoGen> AutoGenSingleton;
+		boost::shared_ptr<AutoGen> AutoGenSingleton;
 
 		/// <summary>
 		/// This is the distance from the edge of the screen the obstacle must be before Physics updates are no longer active in-game.

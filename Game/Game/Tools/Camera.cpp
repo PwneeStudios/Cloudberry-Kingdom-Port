@@ -66,12 +66,12 @@ namespace CloudberryKingdom
 		PrevPrevPos += shift;
 	}
 
-	void Camera::Clone( const std::shared_ptr<Camera> &cam )
+	void Camera::Clone( const boost::shared_ptr<Camera> &cam )
 	{
 		Clone( cam, false );
 	}
 
-	void Camera::Clone( const std::shared_ptr<Camera> &cam, bool DataOnly )
+	void Camera::Clone( const boost::shared_ptr<Camera> &cam, bool DataOnly )
 	{
 		MyPhsxType = cam->MyPhsxType;
 
@@ -111,12 +111,12 @@ namespace CloudberryKingdom
 	{
 		if ( FancyPos != 0 )
 			FancyPos->Release();
-		FancyPos = std::make_shared<FancyVector2>();
+		FancyPos = boost::make_shared<FancyVector2>();
 		FancyPos->RelVal = Data.Position;
 
 		if ( FancyZoom != 0 )
 			FancyZoom->Release();
-		FancyZoom = std::make_shared<FancyVector2>();
+		FancyZoom = boost::make_shared<FancyVector2>();
 		FancyZoom->RelVal = getZoom();
 	}
 
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 		AspectRatio = static_cast<float>( ScreenWidth ) / static_cast<float>( ScreenHeight );
 	}
 
-	Camera::Camera( const std::shared_ptr<Camera> &cam )
+	Camera::Camera( const boost::shared_ptr<Camera> &cam )
 	{
 		InitializeInstanceFields();
 		Clone( cam );

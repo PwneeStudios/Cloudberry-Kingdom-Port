@@ -40,14 +40,14 @@ namespace CloudberryKingdom
 		CalcBounds();
 	}
 
-	void AABox::Clone( const std::shared_ptr<AABox> &A )
+	void AABox::Clone( const boost::shared_ptr<AABox> &A )
 	{
 		Current->Clone( A->Current );
 		Target->Clone( A->Target );
 		TopOnly = A->TopOnly;
 	}
 
-	void AABox::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void AABox::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( TopOnly );
 		Current->Write( writer );
@@ -55,14 +55,14 @@ namespace CloudberryKingdom
 
 	}
 
-	void AABox::Read( const std::shared_ptr<BinaryReader> &reader )
+	void AABox::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		TopOnly = reader->ReadBoolean();
 		if ( Current == 0 )
-			Current = std::make_shared<FloatRectangle>();
+			Current = boost::make_shared<FloatRectangle>();
 		Current->Read( reader );
 		if ( Target == 0 )
-			Target = std::make_shared<FloatRectangle>();
+			Target = boost::make_shared<FloatRectangle>();
 		Target->Read( reader );
 	}
 
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		SwapToCurrent();
 	}
 
-	void AABox::DrawFilled( const std::shared_ptr<QuadDrawer> &QDrawer, Color color )
+	void AABox::DrawFilled( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color )
 	{
 		QDrawer->DrawFilledBox( Current->BL, Current->TR, color );
 		QDrawer->Flush();
@@ -99,12 +99,12 @@ namespace CloudberryKingdom
 		Draw( Tools::QDrawer, color, Width, true );
 	}
 
-	void AABox::Draw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width )
+	void AABox::Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width )
 	{
 		Draw( QDrawer, color, Width, false );
 	}
 
-	void AABox::Draw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width, bool DisregardTopOnly )
+	void AABox::Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width, bool DisregardTopOnly )
 	{
 		Vector2 BR, TL;
 		BR = Vector2( Current->TR.X, Current->BL.Y );
@@ -124,7 +124,7 @@ namespace CloudberryKingdom
 		DrawT( Tools::QDrawer, color, Width );
 	}
 
-	void AABox::DrawT( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width )
+	void AABox::DrawT( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width )
 	{
 		Vector2 BR, TL;
 		BR = Vector2( Target->TR.X, Target->BL.Y );
@@ -139,11 +139,11 @@ namespace CloudberryKingdom
 	void AABox::Initialize( Vector2 center, Vector2 size )
 	{
 		if ( Current == 0 )
-			Current = std::make_shared<FloatRectangle>( center, size );
+			Current = boost::make_shared<FloatRectangle>( center, size );
 		else
 			Current->Set( center, size );
 		if ( Target == 0 )
-			Target = std::make_shared<FloatRectangle>( center, size );
+			Target = boost::make_shared<FloatRectangle>( center, size );
 		else
 			Target->Set( center, size );
 

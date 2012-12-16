@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		Set( center, size );
 	}
 
-	void FloatRectangle::Clone( const std::shared_ptr<FloatRectangle> &A )
+	void FloatRectangle::Clone( const boost::shared_ptr<FloatRectangle> &A )
 	{
 		Center = A->Center;
 		Size = A->Size;
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		BL = A->BL;
 	}
 
-	void FloatRectangle::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void FloatRectangle::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		WriteReadTools::WriteVector2( writer, TR );
 		WriteReadTools::WriteVector2( writer, BL );
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		writer->Write( false );
 	}
 
-	void FloatRectangle::Read( const std::shared_ptr<BinaryReader> &reader )
+	void FloatRectangle::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		WriteReadTools::ReadVector2( reader, TR );
 		WriteReadTools::ReadVector2( reader, BL );

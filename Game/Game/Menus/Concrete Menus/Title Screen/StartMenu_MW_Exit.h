@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		StartMenu_MW_Exit( int Control );
-		std::shared_ptr<StartMenu_MW_Exit> StartMenu_MW_Exit_Construct( int Control );
+		boost::shared_ptr<StartMenu_MW_Exit> StartMenu_MW_Exit_Construct( int Control );
 
 		virtual void SlideIn( int Frames );
 

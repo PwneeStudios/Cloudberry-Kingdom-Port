@@ -14,11 +14,11 @@ namespace CloudberryKingdom
 		struct FlyingBlobTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Body;
+			boost::shared_ptr<SpriteInfo> Body;
 
 			Vector2 ObjectSize;
 
-			std::shared_ptr<TextureOrAnim> GooSprite;
+			boost::shared_ptr<TextureOrAnim> GooSprite;
 
 		
 			void InitializeInstanceFields();
@@ -54,8 +54,8 @@ namespace CloudberryKingdom
 		};
 
 	
-		static std::shared_ptr<Particle> BlobGooTemplate;
-		static std::shared_ptr<EzSound> SquishSound;
+		static boost::shared_ptr<Particle> BlobGooTemplate;
+		static boost::shared_ptr<EzSound> SquishSound;
 
 	
 		int Period, Offset;
@@ -82,21 +82,21 @@ namespace CloudberryKingdom
 		static float BobXFriction;
 
 	
-		std::shared_ptr<SimpleObject> MyObject;
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<SimpleObject> MyObject;
+		boost::shared_ptr<QuadClass> MyQuad;
 		float MyAnimSpeed;
 
 		/// <summary>
 		/// Source from which to copy object vertex info
 		/// </summary>
-		std::shared_ptr<FlyingBlob> CopySource;
+		boost::shared_ptr<FlyingBlob> CopySource;
 
 		/// <summary>
 		/// Whether to delete the blob permanently when it dies
 		/// </summary>
 		bool DeleteOnDeath;
 
-		std::shared_ptr<AABox> Box, Box2;
+		boost::shared_ptr<AABox> Box, Box2;
 
 		int Life, StartLife;
 
@@ -105,18 +105,18 @@ namespace CloudberryKingdom
 		bool NeverSkip;
 
 	
-		std::shared_ptr<Bob> KillingBob;
+		boost::shared_ptr<Bob> KillingBob;
 
 	
 		void SetColor( BlobColor color );
 
 	
-		static std::shared_ptr<EzTexture> GetGooTexture( BlobColor color );
+		static boost::shared_ptr<EzTexture> GetGooTexture( BlobColor color );
 
 	
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		FlyingBlob( bool BoxesOnly );
 
@@ -124,7 +124,7 @@ namespace CloudberryKingdom
 
 		void SetAnimation();
 
-		FlyingBlob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad );
+		FlyingBlob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad );
 
 		void Death();
 
@@ -165,11 +165,11 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 		void SetStandardTargetParams();
 

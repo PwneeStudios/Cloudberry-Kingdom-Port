@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 	
 		Param MinDist, MinDensity, MaxDensity, Length, Period;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 	};
 
 	struct FireSpinner_AutoGen : public AutoGen
@@ -84,28 +84,28 @@ namespace CloudberryKingdom
 		struct Cleanup_2Proxy : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<FireSpinner_Parameters> Params;
+			boost::shared_ptr<FireSpinner_Parameters> Params;
 
 		
-			Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params );
+			Cleanup_2Proxy( const boost::shared_ptr<FireSpinner_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
 	
-		static std::shared_ptr<FireSpinner_AutoGen> instance;
+		static boost::shared_ptr<FireSpinner_AutoGen> instance;
 	
-		const static std::shared_ptr<FireSpinner_AutoGen> &getInstance();
+		const static boost::shared_ptr<FireSpinner_AutoGen> &getInstance();
 
 	
 		FireSpinner_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 	};
 
 }

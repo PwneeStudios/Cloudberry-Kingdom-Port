@@ -5,12 +5,12 @@ namespace CloudberryKingdom
 
 	void BobPhsxWheel::InitializeStatics()
 	{
-		BobPhsxWheel::instance = std::make_shared<BobPhsxWheel>();
+		BobPhsxWheel::instance = boost::make_shared<BobPhsxWheel>();
 		BobPhsxWheel::AnimIndex = 0;
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance;
+	boost::shared_ptr<BobPhsxWheel> BobPhsxWheel::instance;
 	int BobPhsxWheel::AnimIndex;
 
 	void BobPhsxWheel::InitSingleton()
@@ -22,24 +22,24 @@ namespace CloudberryKingdom
 		NameTemplate = _T( "wheelie" );
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
 	}
 
-	const std::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance()
+	const boost::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxWheel::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxWheel::Clone()
 	{
-		std::shared_ptr<BobPhsxWheel> newBob = std::make_shared<BobPhsxWheel>();
+		boost::shared_ptr<BobPhsxWheel> newBob = boost::make_shared<BobPhsxWheel>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxWheel::CopyTo( const std::shared_ptr<BobPhsxWheel> &bob )
+	void BobPhsxWheel::CopyTo( const boost::shared_ptr<BobPhsxWheel> &bob )
 	{
-		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+		BobPhsxNormal::CopyTo( boost::static_pointer_cast<BobPhsxNormal>( bob ) );
 
 		bob->LandSound = LandSound;
 		bob->AngleSpeed = AngleSpeed;
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		SpritePadding = Vector2( 90, 0 );
 	}
 
-	void BobPhsxWheel::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxWheel::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxNormal::Init( bob );
 
@@ -149,14 +149,14 @@ namespace CloudberryKingdom
 			return 1;
 	}
 
-	void BobPhsxWheel::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxWheel::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
-		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && std::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
+		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && boost::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
 			LandSound->Play( .47f );
 		BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 	}
 
-	void BobPhsxWheel::HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit )
+	void BobPhsxWheel::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
 	{
 		BobPhsxNormal::HitHeadOnSomething( ThingHit );
 	}
@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	void BobPhsxWheel::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
+	void BobPhsxWheel::SideHit( ColType side, const boost::shared_ptr<BlockBase> &block )
 	{
 		BobPhsxNormal::SideHit( side, block );
 
@@ -211,16 +211,16 @@ namespace CloudberryKingdom
 		SetDeathVel( DeathType );
 	}
 
-	void BobPhsxWheel::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxWheel::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 
 		Style->DoorHitBoxPadding = Vector2( 25, 0 );
 	}
 
-	void BobPhsxWheel::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
+	void BobPhsxWheel::ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
-		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
+		boost::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
 		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( AnimIndex, 1, false, Padding ) ) );
 	}
 

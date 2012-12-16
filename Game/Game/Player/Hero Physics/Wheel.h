@@ -15,16 +15,16 @@ namespace CloudberryKingdom
 	
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxWheel> instance;
+		static boost::shared_ptr<BobPhsxWheel> instance;
 	
-		const static std::shared_ptr<BobPhsxWheel> &getInstance();
+		const static boost::shared_ptr<BobPhsxWheel> &getInstance();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxWheel> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxWheel> &bob );
 
 		// Instancable struct
 	
-		std::shared_ptr<EzSound> LandSound;
+		boost::shared_ptr<EzSound> LandSound;
 
 		float AngleSpeed;
 
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 	
 		static int AnimIndex;
 	
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual void DuckingPhsx();
 
@@ -50,9 +50,9 @@ namespace CloudberryKingdom
 	
 		virtual float RetardxVec();
 
-		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
+		virtual void LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn );
 
-		virtual void HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit );
+		virtual void HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit );
 
 		virtual void GenerateInput( int CurPhsxStep );
 
@@ -60,13 +60,13 @@ namespace CloudberryKingdom
 
 		virtual bool CheckFor_xFlip();
 
-		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
+		virtual void SideHit( ColType side, const boost::shared_ptr<BlockBase> &block );
 
 		virtual void Die( BobDeathType DeathType );
 
-		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style );
 
-		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 	
 		void InitializeInstanceFields();

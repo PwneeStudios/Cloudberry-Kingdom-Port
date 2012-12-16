@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		Berry = std::make_shared<QuadClass>();
+		Berry = boost::make_shared<QuadClass>();
 		Berry->SetToDefault();
 		Berry->setTextureName( _T( "cb_enthusiastic" ) );
 		Berry->Scale( 300 );
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		if ( !getCore()->Show || getCore()->MyLevel->SuppressCheckpoints )
 			return;
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 		MyPile->FancyPos->SetCenter( level->getMainCamera(), true );
 		MyPile->FancyPos->Update();
 
@@ -51,6 +51,6 @@ namespace CloudberryKingdom
 
 	void Cheer::InitializeInstanceFields()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 	}
 }

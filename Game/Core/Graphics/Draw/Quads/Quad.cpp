@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	Quad::UpdateCenterLambda::UpdateCenterLambda( const std::shared_ptr<Quad> &quad )
+	Quad::UpdateCenterLambda::UpdateCenterLambda( const boost::shared_ptr<Quad> &quad )
 	{
 		this->quad = quad;
 	}
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		quad->Center->RelPosFromPos();
 	}
 
-	Quad::UpdatexAxisLambda::UpdatexAxisLambda( const std::shared_ptr<Quad> &quad )
+	Quad::UpdatexAxisLambda::UpdatexAxisLambda( const boost::shared_ptr<Quad> &quad )
 	{
 		this->quad = quad;
 	}
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		quad->yAxis->RelPosFromPos();
 	}
 
-	Quad::UpdateyAxisLambda::UpdateyAxisLambda( const std::shared_ptr<Quad> &quad )
+	Quad::UpdateyAxisLambda::UpdateyAxisLambda( const boost::shared_ptr<Quad> &quad )
 	{
 		this->quad = quad;
 	}
@@ -98,10 +98,10 @@ namespace CloudberryKingdom
 		Vertices[ 3 ].uv = hold;
 	}
 
-	void Quad::CopyAnim( const std::shared_ptr<BaseQuad> &basequad, int Anim )
+	void Quad::CopyAnim( const boost::shared_ptr<BaseQuad> &basequad, int Anim )
 	{
 		// FIXME: Check dynamic cast.
-		std::shared_ptr<Quad> quad = std::dynamic_pointer_cast<Quad>( basequad );
+		boost::shared_ptr<Quad> quad = boost::dynamic_pointer_cast<Quad>( basequad );
 		if ( 0 != quad )
 		{
 			Center->CopyAnim( quad->Center, Anim );
@@ -112,10 +112,10 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Quad::CopyAnimShallow( const std::shared_ptr<BaseQuad> &basequad, int Anim )
+	void Quad::CopyAnimShallow( const boost::shared_ptr<BaseQuad> &basequad, int Anim )
 	{
 		// FIXME: Check dynamic cast.
-		std::shared_ptr<Quad> quad = std::dynamic_pointer_cast<Quad>( basequad );
+		boost::shared_ptr<Quad> quad = boost::dynamic_pointer_cast<Quad>( basequad );
 		if ( 0 != quad )
 		{
 			Center->AnimData = quad->Center->AnimData;
@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 
 		if ( getTextureIsAnimated() && UpdateSpriteAnim && anim < static_cast<int>( TextureAnim->Anims.size() ) && TextureAnim->Anims[ anim ].Data.size() > 0 )
 		{
-			std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, static_cast<float>( frame ) );
+			boost::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, static_cast<float>( frame ) );
 			MyTexture = data;
 
 			Vertices[ 0 ].uv = Vector2( 0, 0 );
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Quad::ModifyAxis( const std::shared_ptr<ObjectVector> &axis, int anim, int frame, ChangeMode RecordMode )
+	void Quad::ModifyAxis( const boost::shared_ptr<ObjectVector> &axis, int anim, int frame, ChangeMode RecordMode )
 	{
 		Vector2 Change_axis = CoreMath::CartesianToPolar( axis->RelPos ) - CoreMath::CartesianToPolar( axis->AnimData.Get( anim, frame ) );
 		Change_axis.Y = 1 + Change_axis.Y / axis->AnimData.Get( anim, frame ).Length();
@@ -207,7 +207,7 @@ namespace CloudberryKingdom
 		return v.X * xAxisPos / xAxisPos.Length() + v.Y * yAxisPos / yAxisPos.Length();
 	}
 
-	void Quad::ModifyPoint( const std::shared_ptr<ObjectVector> &point, int anim, int frame, ChangeMode RecordMode )
+	void Quad::ModifyPoint( const boost::shared_ptr<ObjectVector> &point, int anim, int frame, ChangeMode RecordMode )
 	{
 		Vector2 Change_point = ToAxisCoordinates( point->RelPos - point->AnimData.Get( anim, frame ), xAxis->RelPos, yAxis->RelPos );
 
@@ -240,13 +240,13 @@ namespace CloudberryKingdom
 
 	void Quad::ShowChildren()
 	{
-		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
+		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
 			( *child )->Show = true;
 	}
 
 	void Quad::HideChildren()
 	{
-		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
+		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator child = Children.begin(); child != Children.end(); ++child )
 			( *child )->Show = false;
 	}
 
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 		if ( getTextureIsAnimated() && UpdateSpriteAnim )
 		{
 			t = t + .5f;
-			std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, t, AnimLength, Loop );
+			boost::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, t, AnimLength, Loop );
 			MyTexture = data;
 
 			Vertices[ 0 ].uv = Vector2( 0, 0 );
@@ -292,7 +292,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Quad::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void Quad::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		BaseQuad::Write( writer );
 
@@ -300,7 +300,7 @@ namespace CloudberryKingdom
 			writer->Write( -1 );
 		else
 		{
-			writer->Write( IndexOf( ParentObject->QuadList, std::static_pointer_cast<BaseQuad>( ParentQuad ) ) );
+			writer->Write( IndexOf( ParentObject->QuadList, boost::static_pointer_cast<BaseQuad>( ParentQuad ) ) );
 		}
 
 		Center->Write( writer, ParentObject );
@@ -322,7 +322,7 @@ namespace CloudberryKingdom
 		writer->Write( MyEffect->Name );
 	}
 
-	void Quad::Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber )
+	void Quad::Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber )
 	{
 		BaseQuad::Read( reader, EffectWad, TextureWad, VersionNumber );
 
@@ -380,11 +380,11 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	std::vector<std::shared_ptr<BaseQuad> > Quad::GetAllChildren()
+	std::vector<boost::shared_ptr<BaseQuad> > Quad::GetAllChildren()
 	{
-		std::vector<std::shared_ptr<BaseQuad> > list;
+		std::vector<boost::shared_ptr<BaseQuad> > list;
 
-		for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = Children.begin(); quad != Children.end(); ++quad )
+		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = Children.begin(); quad != Children.end(); ++quad )
 		{
 			list.push_back( *quad );
 			if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
@@ -458,18 +458,18 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	void Quad::RemoveQuadChild( const std::shared_ptr<BaseQuad> &child )
+	void Quad::RemoveQuadChild( const boost::shared_ptr<BaseQuad> &child )
 	{
 		RemoveQuadChild( child, true );
 	}
 
-	void Quad::RemoveQuadChild( const std::shared_ptr<BaseQuad> &child, bool AddToRoot )
+	void Quad::RemoveQuadChild( const boost::shared_ptr<BaseQuad> &child, bool AddToRoot )
 	{
 		if ( std::find( Children.begin(), Children.end(), child ) != Children.end() )
 		{
 			if ( dynamic_cast<Quad*>( child.get() ) != 0 )
 			{
-				std::shared_ptr<Quad> child_quad = std::static_pointer_cast<Quad>( child );
+				boost::shared_ptr<Quad> child_quad = boost::static_pointer_cast<Quad>( child );
 				child_quad->Center->ParentQuad.reset();
 				child_quad->Center->RelPosFromPos();
 				child_quad->xAxis->ParentQuad.reset();
@@ -492,7 +492,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Quad::AddQuadChild( const std::shared_ptr<BaseQuad> &child, bool KeepNumericData )
+	void Quad::AddQuadChild( const boost::shared_ptr<BaseQuad> &child, bool KeepNumericData )
 	{
 		if ( this == child.get() )
 			return;
@@ -502,9 +502,9 @@ namespace CloudberryKingdom
 
 		if ( dynamic_cast<Quad*>( child.get() ) != 0 )
 		{
-			std::shared_ptr<Quad> child_quad = std::static_pointer_cast<Quad>( child );
+			boost::shared_ptr<Quad> child_quad = boost::static_pointer_cast<Quad>( child );
 
-			std::vector<std::shared_ptr<BaseQuad> > allchildren = child_quad->GetAllChildren();
+			std::vector<boost::shared_ptr<BaseQuad> > allchildren = child_quad->GetAllChildren();
 			if ( std::find( allchildren.begin(), allchildren.end(), this->shared_from_this() ) != allchildren.end() )
 				return;
 
@@ -519,26 +519,26 @@ namespace CloudberryKingdom
 				child_quad->yAxis->RelPosFromPos();
 		}
 
-		child->ParentQuad = std::static_pointer_cast<Quad>( this->shared_from_this() );
+		child->ParentQuad = boost::static_pointer_cast<Quad>( this->shared_from_this() );
 
 		Children.push_back( child );
 	}
 
-	void Quad::AddQuadChild( const std::shared_ptr<BaseQuad> &child )
+	void Quad::AddQuadChild( const boost::shared_ptr<BaseQuad> &child )
 	{
 		AddQuadChild( child, false );
 	}
 
-	void Quad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad )
+	void Quad::FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		FinishLoading( device, TexWad, EffectWad, true );
 	}
 
-	void Quad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
+	void Quad::FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
 	{
-		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		Center->ModifiedEventCallback = boost::make_shared<UpdateCenterLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		xAxis->ModifiedEventCallback = boost::make_shared<UpdatexAxisLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		yAxis->ModifiedEventCallback = boost::make_shared<UpdateyAxisLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
 
 		if ( UseNames )
 		{
@@ -550,7 +550,7 @@ namespace CloudberryKingdom
 
 	void Quad::InitVertices()
 	{
-		Children = std::vector<std::shared_ptr<BaseQuad> >();
+		Children = std::vector<boost::shared_ptr<BaseQuad> >();
 
 		NumVertices = 4;
 
@@ -561,25 +561,25 @@ namespace CloudberryKingdom
 		Vertices[ 2 ].uv = Vector2( 0, 1 );
 		Vertices[ 3 ].uv = Vector2( 1, 1 );
 
-		Center = std::make_shared<ObjectVector>();
-		Center->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( Center->shared_from_this() );
-		Center->ModifiedEventCallback = std::make_shared<UpdateCenterLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-		xAxis = std::make_shared<ObjectVector>();
-		xAxis->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( xAxis->shared_from_this() );
-		yAxis = std::make_shared<ObjectVector>();
-		yAxis->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( yAxis->shared_from_this() );
+		Center = boost::make_shared<ObjectVector>();
+		Center->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( Center->shared_from_this() );
+		Center->ModifiedEventCallback = boost::make_shared<UpdateCenterLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		xAxis = boost::make_shared<ObjectVector>();
+		xAxis->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( xAxis->shared_from_this() );
+		yAxis = boost::make_shared<ObjectVector>();
+		yAxis->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( yAxis->shared_from_this() );
 		xAxis->CenterPoint = Center;
 		yAxis->CenterPoint = Center;
 		xAxis->Move( Vector2( 1, 0 ) );
 		yAxis->Move( Vector2( 0, 1 ) );
-		xAxis->ModifiedEventCallback = std::make_shared<UpdatexAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
-		yAxis->ModifiedEventCallback = std::make_shared<UpdateyAxisLambda>( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		xAxis->ModifiedEventCallback = boost::make_shared<UpdatexAxisLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		yAxis->ModifiedEventCallback = boost::make_shared<UpdateyAxisLambda>( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
 
-		Corner = std::vector<std::shared_ptr<ObjectVector> >( 4 );
+		Corner = std::vector<boost::shared_ptr<ObjectVector> >( 4 );
 		for ( int i = 0; i < 4; i++ )
 		{
-			Corner[ i ] = std::make_shared<ObjectVector>();
-			Corner[ i ]->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( Corner[ i ]->shared_from_this() );
+			Corner[ i ] = boost::make_shared<ObjectVector>();
+			Corner[ i ]->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( Corner[ i ]->shared_from_this() );
 			Corner[ i ]->ParentQuad = this->shared_from_this();
 		}
 
@@ -597,12 +597,12 @@ namespace CloudberryKingdom
 		Corner[ 3 ]->RelPos = Vector2( size.X, -size.Y );
 	}
 
-	Quad::Quad( const std::shared_ptr<Quad> &quad, bool DeepClone )
+	Quad::Quad( const boost::shared_ptr<Quad> &quad, bool DeepClone )
 	{
 		BaseQuad::Clone( quad );
 
 		if ( DeepClone && quad->TextureAnim != 0 )
-			TextureAnim = std::make_shared<AnimationData_Texture>( quad->TextureAnim );
+			TextureAnim = boost::make_shared<AnimationData_Texture>( quad->TextureAnim );
 		else
 			TextureAnim = quad->TextureAnim;
 
@@ -714,7 +714,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Quad::Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v )
+	void Quad::Set_PosFromRelPos( const boost::shared_ptr<ObjectVector> &v )
 	{
 		Vector2 C1 = Vector2();
 		Vector2 C2 = Vector2();
@@ -728,7 +728,7 @@ namespace CloudberryKingdom
 		v->Pos = C1 + v->RelPos.X * ( xAxis->Pos - C2 ) + v->RelPos.Y * ( yAxis->Pos - C2 );
 	}
 
-	void Quad::Set_RelPosFromPos( const std::shared_ptr<ObjectVector> &v )
+	void Quad::Set_RelPosFromPos( const boost::shared_ptr<ObjectVector> &v )
 	{
 		Vector2 C = Vector2( 0, 0 );
 		if ( v->CenterPoint != 0 )
@@ -749,16 +749,16 @@ namespace CloudberryKingdom
 		Draw( Tools::QDrawer );
 	}
 
-	void Quad::Draw( std::shared_ptr<QuadDrawer> &Drawer )
+	void Quad::Draw( boost::shared_ptr<QuadDrawer> &Drawer )
 	{
 		if ( !Show )
 			return;
 
-		Drawer->DrawQuad( std::static_pointer_cast<Quad>( this->shared_from_this() ) );
+		Drawer->DrawQuad( boost::static_pointer_cast<Quad>( this->shared_from_this() ) );
 	}
 
 #if defined(EDITOR)
-	void Quad::DrawChildren( const std::shared_ptr<QuadDrawer> &Drawer )
+	void Quad::DrawChildren( const boost::shared_ptr<QuadDrawer> &Drawer )
 	{
 		for ( std::vector<BaseQuad*>::const_iterator child_quad = GetAllChildren().begin(); child_quad != GetAllChildren().end(); ++child_quad )
 		{
@@ -768,7 +768,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(EDITOR)
-	void Quad::DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, bool Additional, float ScaleLines )
+	void Quad::DrawExtra( const boost::shared_ptr<QuadDrawer> &Drawer, bool Additional, float ScaleLines )
 	{
 		if ( !Show )
 			return;

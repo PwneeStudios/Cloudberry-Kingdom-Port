@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		{
 		
 //C# TO C++ CONVERTER NOTE: The variable Line was renamed since it is named the same as a user-defined type:
-			std::shared_ptr<LineSpriteInfo> Line_Renamed;
+			boost::shared_ptr<LineSpriteInfo> Line_Renamed;
 			Vector2 BoxSize;
 
 		
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		LavaDrip( bool BoxesOnly );
 
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

@@ -11,19 +11,19 @@ namespace CloudberryKingdom
 	{
 
 	
-		std::vector<std::shared_ptr<Particle> > MyStack;
+		std::vector<boost::shared_ptr<Particle> > MyStack;
 		Mutex stackLock;
 
 	
 		ParticleBin();
 
-		std::shared_ptr<Particle> Get();
+		boost::shared_ptr<Particle> Get();
 
-		void ReturnItem( const std::shared_ptr<Particle> &item );
+		void ReturnItem( const boost::shared_ptr<Particle> &item );
 
 	};
 
-	struct Particle : public std::enable_shared_from_this<Particle>
+	struct Particle : public boost::enable_shared_from_this<Particle>
 	{
 
 		Particle();
@@ -31,11 +31,11 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<ParticleBin> Pool;
+		static boost::shared_ptr<ParticleBin> Pool;
 
 		void Recycle();
 
-		void Copy( const std::shared_ptr<Particle> &template_Renamed );
+		void Copy( const boost::shared_ptr<Particle> &template_Renamed );
 
 		bool Frozen;
 		int Code;
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 
 		void SetSize( float size );
 
-		void Phsx( const std::shared_ptr<Camera> &cam );
+		void Phsx( const boost::shared_ptr<Camera> &cam );
 
 		void Draw();
 	};

@@ -5,11 +5,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxRocketbox::InitializeStatics()
 	{
-		BobPhsxRocketbox::instance = std::make_shared<BobPhsxRocketbox>();
+		BobPhsxRocketbox::instance = boost::make_shared<BobPhsxRocketbox>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance;
+	boost::shared_ptr<BobPhsxRocketbox> BobPhsxRocketbox::instance;
 
 	void BobPhsxRocketbox::InitSingleton()
 	{
@@ -18,25 +18,25 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 6, 0, 0, 0 );
 		Name = Localization::Words_ROCKETBOX;
 		NameTemplate = _T( "rocketbox" );
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.485f ) );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
+		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.485f ) );
 	}
 
-	const std::shared_ptr<BobPhsxRocketbox> &BobPhsxRocketbox::getInstance()
+	const boost::shared_ptr<BobPhsxRocketbox> &BobPhsxRocketbox::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxRocketbox::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxRocketbox::Clone()
 	{
-		std::shared_ptr<BobPhsxRocketbox> newBob = std::make_shared<BobPhsxRocketbox>();
+		boost::shared_ptr<BobPhsxRocketbox> newBob = boost::make_shared<BobPhsxRocketbox>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxRocketbox::CopyTo( const std::shared_ptr<BobPhsxRocketbox> &bob )
+	void BobPhsxRocketbox::CopyTo( const boost::shared_ptr<BobPhsxRocketbox> &bob )
 	{
-		BobPhsxBox::CopyTo( std::static_pointer_cast<BobPhsxBox>( bob ) );
+		BobPhsxBox::CopyTo( boost::static_pointer_cast<BobPhsxBox>( bob ) );
 
 		bob->LeftWheel = LeftWheel;
 		bob->RightWheel = RightWheel;
@@ -49,18 +49,18 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	void BobPhsxRocketbox::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxRocketbox::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxBox::Init( bob );
 		//if (MyBob.Core.MyLevel.PlayMode == 0)
 		if ( Prototype != 0 && MyBob->PlayerObject != 0 && MyBob->PlayerObject->QuadList.size() > 0 )
 		{
-			LeftWheel = std::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Left" ) ) );
-			RightWheel = std::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Right" ) ) );
+			LeftWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Left" ) ) );
+			RightWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Right" ) ) );
 		}
 	}
 
-	void BobPhsxRocketbox::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
+	void BobPhsxRocketbox::SideHit( ColType side, const boost::shared_ptr<BlockBase> &block )
 	{
 		BobPhsxBox::SideHit( side, block );
 

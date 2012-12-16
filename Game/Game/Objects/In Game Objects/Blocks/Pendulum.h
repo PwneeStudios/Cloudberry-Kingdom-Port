@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		struct PendulumTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<BlockGroup> Group;
 
 		
 			void InitializeInstanceFields();
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		int Period, Offset;
 		Vector2 PivotPoint;
 
-		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
+		virtual void LandedOn( const boost::shared_ptr<Bob> &bob );
 
 		virtual void MakeNew();
 
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 
 		Vector2 BL_Bound();
 
-		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level );
+		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level );
 
 		void MoveToBounded( Vector2 shift );
 
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 
 		virtual void Extend( Side side, float pos );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

@@ -3,9 +3,9 @@
 namespace CloudberryKingdom
 {
 
-	//JoinText::JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	JoinText::JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	std::shared_ptr<JoinText> JoinText::JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	//JoinText::JoinText( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	JoinText::JoinText( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	boost::shared_ptr<JoinText> JoinText::JoinText_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<JoinText>( shared_from_this() );
+		return boost::static_pointer_cast<JoinText>( shared_from_this() );
 	}
 
 	void JoinText::ReleaseBody()
@@ -34,15 +34,15 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		// Press A to join
 		Tools::Warning();
 	#if defined(PC_VERSION)
-		Text = std::make_shared<EzText>( _T( "Press\n" ) + ButtonString::Go_Controller( 89 ) + _T( "\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
+		Text = boost::make_shared<EzText>( _T( "Press\n" ) + ButtonString::Go_Controller( 89 ) + _T( "\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
 	#else
-		Text = std::make_shared<EzText>( _T( "Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
+		Text = boost::make_shared<EzText>( _T( "Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
 	#endif
 		Text->setScale( .7765f );
 
@@ -52,10 +52,10 @@ namespace CloudberryKingdom
 
 		MyPile->Add( Text );
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	void JoinText::ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed )
+	void JoinText::ScaleGamerTag( const boost::shared_ptr<EzText> &GamerTag_Renamed )
 	{
 		GamerTag_Renamed->setScale( GamerTag_Renamed->getScale() * 850 / GamerTag_Renamed->GetWorldWidth() );
 
@@ -71,12 +71,12 @@ namespace CloudberryKingdom
 		if ( MyCharacterSelect->getPlayer()->Exists )
 		{
 			std::wstring name = MyCharacterSelect->getPlayer()->GetName();
-			Text = std::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
+			Text = boost::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
 			ScaleGamerTag( Text );
 		}
 		else
 		{
-			Text = std::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

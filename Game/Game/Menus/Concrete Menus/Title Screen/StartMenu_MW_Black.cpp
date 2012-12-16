@@ -19,25 +19,25 @@ namespace CloudberryKingdom
 	}
 
 	StartMenu_MW_Black::StartMenu_MW_Black() : CkBaseMenu() { }
-	std::shared_ptr<StartMenu_MW_Black> StartMenu_MW_Black::StartMenu_MW_Black_Construct()
+	boost::shared_ptr<StartMenu_MW_Black> StartMenu_MW_Black::StartMenu_MW_Black_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		getCore()->DrawLayer++;
 
-		return std::static_pointer_cast<StartMenu_MW_Black>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_Black>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Black::Init()
 	{
 		 CkBaseMenu::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		EnsureFancy();
 
 		//Black = new QuadClass("BlackSwipe");
-		Black = std::make_shared<QuadClass>( _T( "BlackSwipe_Vertical" ) );
+		Black = boost::make_shared<QuadClass>( _T( "BlackSwipe_Vertical" ) );
 		Black->ScaleXToMatchRatio( 1000 );
 		Black->setSizeX( Black->getSizeX() * 1.35f );
 		MyPile->Add( Black, _T( "Black" ) );

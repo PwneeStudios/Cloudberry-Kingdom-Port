@@ -7,16 +7,16 @@ namespace CloudberryKingdom
 	
 	// Statics
 	bool Background::GreenScreen;
-	std::shared_ptr<QuadClass> Background::TestQuad;
-	std::shared_ptr<EzTexture> Background::TestTexture;
+	boost::shared_ptr<QuadClass> Background::TestQuad;
+	boost::shared_ptr<EzTexture> Background::TestTexture;
 
-	void Background::AddRainLayer( const std::shared_ptr<Background> &b )
+	void Background::AddRainLayer( const boost::shared_ptr<Background> &b )
 	{
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __46 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__46->Name = _T( "Rain" );
 		__46->Foreground = true;
 		__46->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__47->Name = _T( "Rain" );
 		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Rain" ) );
@@ -52,34 +52,34 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __46 );
 	}
 
-	void Background::TurnOnSnow( const std::shared_ptr<Background> &b )
+	void Background::TurnOnSnow( const boost::shared_ptr<Background> &b )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
+		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
 			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
 			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = true;
 	}
 
-	void Background::TurnOffSnow( const std::shared_ptr<Background> &b )
+	void Background::TurnOffSnow( const boost::shared_ptr<Background> &b )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
+		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
 			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
 			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 				( *l )->Show = false;
 	}
 
-	void Background::_code_Forest( const std::shared_ptr<Background> &b )
+	void Background::_code_Forest( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Background" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "forest_sky" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -101,11 +101,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __3 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__3->Name = _T( "Back_Hills" );
 		__3->Foreground = false;
 		__3->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "forest_backhills_trim" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		__4->StartData = PhsxData( 3356.908f, 7187.623f, 0, 0, 0, 0 );
 		__3->Floaters.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "forest_backhills_p2_trim" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -145,11 +145,11 @@ namespace CloudberryKingdom
 		__3->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __3 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__6->Name = _T( "Mid_Hills" );
 		__6->Foreground = false;
 		__6->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "forest_mid_trim" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 		__7->StartData = PhsxData( 4111.627f, 1395.922f, 0, 0, 0, 0 );
 		__6->Floaters.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "forest_mid_p2_trim" );
 		__8->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 20274.01f, 4238.568f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
 		__8->MyQuad->Quad_Renamed.v0.Pos = Vector2( -0.724421f, 1.089628f );
@@ -201,11 +201,11 @@ namespace CloudberryKingdom
 		__6->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __6 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__9->Name = _T( "Clouds" );
 		__9->Foreground = false;
 		__9->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "forest_clouds" );
 		__10->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -26948.33f, 5153.887f ), Vector2( 0.9800779f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
 		__10->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
@@ -239,11 +239,11 @@ namespace CloudberryKingdom
 		__9->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__11->Name = _T( "Small_Trees" );
 		__11->Foreground = false;
 		__11->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "forest_backtrees_p1_0" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 		__12->StartData = PhsxData( -1550.031f, -1179.254f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __12 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "forest_backtrees_p2_0" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -279,7 +279,7 @@ namespace CloudberryKingdom
 		__13->StartData = PhsxData( 19061.51f, -1282.274f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __13 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "forest_backtrees_p1_0" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -297,7 +297,7 @@ namespace CloudberryKingdom
 		__14->StartData = PhsxData( 36512.66f, -1059.907f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "forest_backtrees_p2_0" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -319,11 +319,11 @@ namespace CloudberryKingdom
 		__11->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __11 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __16 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__16->Name = _T( "Snow1" );
 		__16->Foreground = false;
 		__16->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "Snow" );
 		__17->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -16817, 4586.932f ), 1 * Vector2( 21.61522f, -10.28082f ), Color( unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ), unsigned char( 88 ) ) );
 		__17->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
@@ -358,11 +358,11 @@ namespace CloudberryKingdom
 		__16->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __16 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __18 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__18->Name = _T( "Big_Trees" );
 		__18->Foreground = false;
 		__18->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "forest_foretrees_p1_0" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -380,7 +380,7 @@ namespace CloudberryKingdom
 		__19->StartData = PhsxData( 2154.271f, -47.44482f, 0, 0, 0, 0 );
 		__18->Floaters.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "forest_foretrees_p2_0" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -398,7 +398,7 @@ namespace CloudberryKingdom
 		__20->StartData = PhsxData( 11130.26f, -47.44482f, 0, 0, 0, 0 );
 		__18->Floaters.push_back( __20 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "forest_foretrees_p1_0" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -416,7 +416,7 @@ namespace CloudberryKingdom
 		__21->StartData = PhsxData( 19630.17f, -49.1123f, 0, 0, 0, 0 );
 		__18->Floaters.push_back( __21 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "forest_foretrees_p2_0" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -434,7 +434,7 @@ namespace CloudberryKingdom
 		__22->StartData = PhsxData( 28513.13f, -49.1123f, 0, 0, 0, 0 );
 		__18->Floaters.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "forest_foretrees_p1_0" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -452,7 +452,7 @@ namespace CloudberryKingdom
 		__23->StartData = PhsxData( 37097.56f, -92.27881f, 0, 0, 0, 0 );
 		__18->Floaters.push_back( __23 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "forest_foretrees_p2_0" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -474,11 +474,11 @@ namespace CloudberryKingdom
 		__18->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __18 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __25 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__25->Name = _T( "Snow2" );
 		__25->Foreground = true;
 		__25->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "Snow" );
 		__26->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -37182.87f, 1486.698f ), Vector2( 4.900445f, -4.900445f ), Color( unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ), unsigned char( 195 ) ) );
 		__26->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
@@ -508,7 +508,7 @@ namespace CloudberryKingdom
 		__26->StartData = PhsxData( 15675.01f, 0, 0, 0, 0, 0 );
 		__25->Floaters.push_back( __26 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "Snow" );
 		__27->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4499.879f, 1865.506f ), Vector2( 6.533891f, -7.513808f ), Color( unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ), unsigned char( 223 ) ) );
 		__27->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
@@ -549,16 +549,16 @@ namespace CloudberryKingdom
 		b->TR = Vector2( 100000, 10000 );
 	}
 
-	void Background::_code_Cloud( const std::shared_ptr<Background> &b )
+	void Background::_code_Cloud( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Layer" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "cloud_castle_layer5" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -576,7 +576,7 @@ namespace CloudberryKingdom
 		__2->StartData = PhsxData( 5485.83f, -9.382813f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __2 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "cloud_castle_layer5" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer5_p2" ) );
@@ -598,11 +598,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__4->Name = _T( "Layer" );
 		__4->Foreground = false;
 		__4->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "cloud_castle_layer4" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4" ) );
@@ -620,7 +620,7 @@ namespace CloudberryKingdom
 		__5->StartData = PhsxData( 3683.155f, -164.6855f, 0, 0, 0, 0 );
 		__4->Floaters.push_back( __5 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "cloud_castle_layer4" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4_p2" ) );
@@ -642,11 +642,11 @@ namespace CloudberryKingdom
 		__4->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__7->Name = _T( "cloud_3" );
 		__7->Foreground = false;
 		__7->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "cloud_cloud_layer3_1" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_1" ) );
@@ -664,7 +664,7 @@ namespace CloudberryKingdom
 		__8->StartData = PhsxData( -7449.813f, 713.1904f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __8 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "cloud_cloud_layer3_2" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_2" ) );
@@ -682,7 +682,7 @@ namespace CloudberryKingdom
 		__9->StartData = PhsxData( -2406.215f, 935.2354f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "cloud_cloud_layer3_3" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_3" ) );
@@ -700,7 +700,7 @@ namespace CloudberryKingdom
 		__10->StartData = PhsxData( 2447.061f, 205.6582f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __10 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "cloud_cloud_layer3_4" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_4" ) );
@@ -718,7 +718,7 @@ namespace CloudberryKingdom
 		__11->StartData = PhsxData( 5904.623f, 78.77539f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __11 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "cloud_cloud_layer3_5" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_5" ) );
@@ -736,7 +736,7 @@ namespace CloudberryKingdom
 		__12->StartData = PhsxData( 9330.461f, 522.8662f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __12 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "cloud_cloud_layer3_6" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_6" ) );
@@ -758,11 +758,11 @@ namespace CloudberryKingdom
 		__7->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __14 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__14->Name = _T( "castle_3" );
 		__14->Foreground = false;
 		__14->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "cloud_castle_layer3_1" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
@@ -780,7 +780,7 @@ namespace CloudberryKingdom
 		__15->StartData = PhsxData( -3419.336f, -1515.219f, 0, 0, 0, 0 );
 		__14->Floaters.push_back( __15 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "cloud_castle_layer3_2" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
@@ -798,7 +798,7 @@ namespace CloudberryKingdom
 		__16->StartData = PhsxData( 6745.723f, -1731.496f, 0, 0, 0, 0 );
 		__14->Floaters.push_back( __16 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "cloud_castle_layer3_3" );
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
@@ -816,7 +816,7 @@ namespace CloudberryKingdom
 		__17->StartData = PhsxData( 10662.76f, -1642.704f, 0, 0, 0, 0 );
 		__14->Floaters.push_back( __17 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "cloud_castle_layer3_1" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
@@ -834,7 +834,7 @@ namespace CloudberryKingdom
 		__18->StartData = PhsxData( 18973.14f, -1646.107f, 0, 0, 0, 0 );
 		__14->Floaters.push_back( __18 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "cloud_castle_layer3_2" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
@@ -852,7 +852,7 @@ namespace CloudberryKingdom
 		__19->StartData = PhsxData( 24460.43f, -1646.107f, 0, 0, 0, 0 );
 		__14->Floaters.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "cloud_castle_layer3_3" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
@@ -874,11 +874,11 @@ namespace CloudberryKingdom
 		__14->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __21 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__21->Name = _T( "cloud_2" );
 		__21->Foreground = false;
 		__21->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "cloud_cloud_layer2_1" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
@@ -896,7 +896,7 @@ namespace CloudberryKingdom
 		__22->StartData = PhsxData( 1758.984f, 54.01685f, 0, 0, 0, 0 );
 		__21->Floaters.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "cloud_cloud_layer2_1" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
@@ -914,7 +914,7 @@ namespace CloudberryKingdom
 		__23->StartData = PhsxData( 15294.52f, 3.80072f, 0, 0, 0, 0 );
 		__21->Floaters.push_back( __23 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "cloud_cloud_layer2_1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
@@ -932,7 +932,7 @@ namespace CloudberryKingdom
 		__24->StartData = PhsxData( 26639.14f, -429.751f, 0, 0, 0, 0 );
 		__21->Floaters.push_back( __24 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "cloud_cloud_layer2_1" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
@@ -954,11 +954,11 @@ namespace CloudberryKingdom
 		__21->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __21 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__26->Name = _T( "castle_2" );
 		__26->Foreground = false;
 		__26->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "cloud_castle_layer2_1" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
@@ -976,7 +976,7 @@ namespace CloudberryKingdom
 		__27->StartData = PhsxData( -2574.793f, -1026.896f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __27 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "cloud_castle_layer2_2" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
@@ -994,7 +994,7 @@ namespace CloudberryKingdom
 		__28->StartData = PhsxData( 4617.543f, -726.7338f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __28 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "cloud_castle_layer2_3" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
@@ -1012,7 +1012,7 @@ namespace CloudberryKingdom
 		__29->StartData = PhsxData( 13222.73f, -543.1658f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __29 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "cloud_castle_layer2_1" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
@@ -1030,7 +1030,7 @@ namespace CloudberryKingdom
 		__30->StartData = PhsxData( 17024.4f, -1760.757f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __30 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "cloud_castle_layer2_2" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
@@ -1048,7 +1048,7 @@ namespace CloudberryKingdom
 		__31->StartData = PhsxData( 21905.47f, -1027.331f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __31 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "cloud_castle_layer2_3" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
@@ -1066,7 +1066,7 @@ namespace CloudberryKingdom
 		__32->StartData = PhsxData( 29651.78f, -1127.46f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __32 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "cloud_castle_layer2_1" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
@@ -1084,7 +1084,7 @@ namespace CloudberryKingdom
 		__33->StartData = PhsxData( 33324.57f, -2302.971f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __33 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "cloud_castle_layer2_2" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
@@ -1106,11 +1106,11 @@ namespace CloudberryKingdom
 		__26->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __26 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __35 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__35->Name = _T( "cloud_1" );
 		__35->Foreground = false;
 		__35->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "cloud_cloud_layer1_1" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
@@ -1128,7 +1128,7 @@ namespace CloudberryKingdom
 		__36->StartData = PhsxData( -106.0938f, -291.884f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __36 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "cloud_cloud_layer1_2" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
@@ -1146,7 +1146,7 @@ namespace CloudberryKingdom
 		__37->StartData = PhsxData( 4506.916f, -181.2072f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __37 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "cloud_cloud_layer1_3" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
@@ -1164,7 +1164,7 @@ namespace CloudberryKingdom
 		__38->StartData = PhsxData( 7103.76f, -501.3638f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __38 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__39->Name = _T( "cloud_cloud_layer1_4" );
 		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
@@ -1182,7 +1182,7 @@ namespace CloudberryKingdom
 		__39->StartData = PhsxData( 10113.27f, -203.6833f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __39 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "cloud_cloud_layer1_1" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
@@ -1200,7 +1200,7 @@ namespace CloudberryKingdom
 		__40->StartData = PhsxData( 14141.27f, -125.3017f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __40 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "cloud_cloud_layer1_2" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
@@ -1218,7 +1218,7 @@ namespace CloudberryKingdom
 		__41->StartData = PhsxData( 17429.04f, -327.6263f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __41 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "cloud_cloud_layer1_3" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
@@ -1236,7 +1236,7 @@ namespace CloudberryKingdom
 		__42->StartData = PhsxData( 20784.25f, -445.6487f, 0, 0, 0, 0 );
 		__35->Floaters.push_back( __42 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "cloud_cloud_layer1_4" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
@@ -1258,11 +1258,11 @@ namespace CloudberryKingdom
 		__35->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __35 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __44 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__44->Name = _T( "castle_1" );
 		__44->Foreground = false;
 		__44->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "cloud_castle_layer1" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer1" ) );
@@ -1291,16 +1291,16 @@ namespace CloudberryKingdom
 		b->TR = Vector2( 100000, 10000 );
 	}
 
-	void Background::_code_Cave( const std::shared_ptr<Background> &b )
+	void Background::_code_Cave( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Backdrop" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "cave_backdrop_p1_0" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1318,7 +1318,7 @@ namespace CloudberryKingdom
 		__2->StartData = PhsxData( -14739.01f, 157.4063f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __2 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "cave_backdrop_p2_0" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1336,7 +1336,7 @@ namespace CloudberryKingdom
 		__3->StartData = PhsxData( 7165.438f, 157.4063f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __3 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "cave_backdrop_p1_1" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1354,7 +1354,7 @@ namespace CloudberryKingdom
 		__4->StartData = PhsxData( 29069.88f, 157.4063f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "cave_backdrop_p2_1" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1376,11 +1376,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__6->Name = _T( "Top_2" );
 		__6->Foreground = false;
 		__6->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "cave_top_2_p1_0" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1398,7 +1398,7 @@ namespace CloudberryKingdom
 		__7->StartData = PhsxData( -9290.906f, 81.43799f, 0, 0, 0, 0 );
 		__6->Floaters.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "cave_top_2_p2_0" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1416,7 +1416,7 @@ namespace CloudberryKingdom
 		__8->StartData = PhsxData( 5437.859f, 81.43799f, 0, 0, 0, 0 );
 		__6->Floaters.push_back( __8 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "cave_top_2_p1_1" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1434,7 +1434,7 @@ namespace CloudberryKingdom
 		__9->StartData = PhsxData( 20166.62f, 81.43799f, 0, 0, 0, 0 );
 		__6->Floaters.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "cave_top_2_p2_1" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1456,11 +1456,11 @@ namespace CloudberryKingdom
 		__6->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __6 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__11->Name = _T( "Bottom_2" );
 		__11->Foreground = false;
 		__11->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "cave_bottom_2_p1" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1478,7 +1478,7 @@ namespace CloudberryKingdom
 		__12->StartData = PhsxData( -2566.051f, -1868.793f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __12 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "cave_bottom_2_p2" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1496,7 +1496,7 @@ namespace CloudberryKingdom
 		__13->StartData = PhsxData( 8166.965f, -813.0869f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __13 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "cave_bottom_2_p1" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1514,7 +1514,7 @@ namespace CloudberryKingdom
 		__14->StartData = PhsxData( 19126.95f, -1801.052f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "cave_bottom_2_p2" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1532,7 +1532,7 @@ namespace CloudberryKingdom
 		__15->StartData = PhsxData( 29756.15f, -843.8784f, 0, 0, 0, 0 );
 		__11->Floaters.push_back( __15 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "cave_bottom_2_p1" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1554,11 +1554,11 @@ namespace CloudberryKingdom
 		__11->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __11 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__17->Name = _T( "Bottom_1" );
 		__17->Foreground = false;
 		__17->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "cave_bottom_1_p2_trim1" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1576,7 +1576,7 @@ namespace CloudberryKingdom
 		__18->StartData = PhsxData( 2967.173f, -1099.445f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __18 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "cave_bottom_1_p2_trim2" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1594,7 +1594,7 @@ namespace CloudberryKingdom
 		__19->StartData = PhsxData( 8139.643f, -271.6292f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "cave_bottom_1_trim1" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1612,7 +1612,7 @@ namespace CloudberryKingdom
 		__20->StartData = PhsxData( -7564.104f, -1065.574f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __20 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "cave_bottom_1_trim2" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1630,7 +1630,7 @@ namespace CloudberryKingdom
 		__21->StartData = PhsxData( -3669.087f, -1468.35f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __21 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "cave_bottom_1_p2_trim1" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1648,7 +1648,7 @@ namespace CloudberryKingdom
 		__22->StartData = PhsxData( 23295.67f, -1171.816f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "cave_bottom_1_p2_trim2" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1666,7 +1666,7 @@ namespace CloudberryKingdom
 		__23->StartData = PhsxData( 28381.08f, -351.9041f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __23 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "cave_bottom_1_trim1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1684,7 +1684,7 @@ namespace CloudberryKingdom
 		__24->StartData = PhsxData( 12685.62f, -1074.208f, 0, 0, 0, 0 );
 		__17->Floaters.push_back( __24 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "cave_bottom_1_trim2" );
 		__25->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -998.902f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
 		__25->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.1347f, 0.9736457f );
@@ -1718,11 +1718,11 @@ namespace CloudberryKingdom
 		__17->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __17 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__26->Name = _T( "Top_1" );
 		__26->Foreground = false;
 		__26->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "cave_top_1_p1_0" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1740,7 +1740,7 @@ namespace CloudberryKingdom
 		__27->StartData = PhsxData( -2258.242f, 30.32861f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __27 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "cave_top_1_p2_0" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1758,7 +1758,7 @@ namespace CloudberryKingdom
 		__28->StartData = PhsxData( 6400.621f, 30.32861f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __28 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "cave_top_1_p1_1" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1776,7 +1776,7 @@ namespace CloudberryKingdom
 		__29->StartData = PhsxData( 15059.48f, 30.32861f, 0, 0, 0, 0 );
 		__26->Floaters.push_back( __29 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "cave_top_1_p2_1" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1798,11 +1798,11 @@ namespace CloudberryKingdom
 		__26->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __26 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __31 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__31->Name = _T( "Lights" );
 		__31->Foreground = false;
 		__31->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "cave_lightshafts_p1_0" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1820,7 +1820,7 @@ namespace CloudberryKingdom
 		__32->StartData = PhsxData( 2142.867f, -1.561279f, 0, 0, 0, 0 );
 		__31->Floaters.push_back( __32 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "cave_lightshafts_p2_0" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1838,7 +1838,7 @@ namespace CloudberryKingdom
 		__33->StartData = PhsxData( 9308.145f, -1.561279f, 0, 0, 0, 0 );
 		__31->Floaters.push_back( __33 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "cave_lightshafts_p1_1" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1856,7 +1856,7 @@ namespace CloudberryKingdom
 		__34->StartData = PhsxData( 16473.42f, -1.561279f, 0, 0, 0, 0 );
 		__31->Floaters.push_back( __34 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "cave_lightshafts_p2_1" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1885,16 +1885,16 @@ namespace CloudberryKingdom
 		b->TR = Vector2( 100000, 10000 );
 	}
 
-	void Background::_code_Hills( const std::shared_ptr<Background> &b )
+	void Background::_code_Hills( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Backdrop" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "hills_backdrop_p1_0" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1912,7 +1912,7 @@ namespace CloudberryKingdom
 		__2->StartData = PhsxData( -4469.054f, 784.0586f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __2 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "hills_backdrop_p2_0" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1934,11 +1934,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__4->Name = _T( "Back_Castles" );
 		__4->Foreground = false;
 		__4->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "hills_backcastles_trim" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1956,7 +1956,7 @@ namespace CloudberryKingdom
 		__5->StartData = PhsxData( 3557.881f, 4444.444f, 0, 0, 0, 0 );
 		__4->Floaters.push_back( __5 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "hills_backcastles_p2_trim" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -1978,11 +1978,11 @@ namespace CloudberryKingdom
 		__4->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__7->Name = _T( "Hill" );
 		__7->Foreground = false;
 		__7->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "hills_backhills_p1_0" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2000,7 +2000,7 @@ namespace CloudberryKingdom
 		__8->StartData = PhsxData( 2926.976f, 102.2695f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __8 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "hills_backhills_p2_0" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2018,7 +2018,7 @@ namespace CloudberryKingdom
 		__9->StartData = PhsxData( 24113, 102.2695f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "hills_backhills_p1_0" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2036,7 +2036,7 @@ namespace CloudberryKingdom
 		__10->StartData = PhsxData( 39921.59f, 451.0566f, 0, 0, 0, 0 );
 		__7->Floaters.push_back( __10 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "hills_backhills_p2_0" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__11->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2058,11 +2058,11 @@ namespace CloudberryKingdom
 		__7->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__12->Name = _T( "Hill" );
 		__12->Foreground = false;
 		__12->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "hills_backhills2_trim" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2080,7 +2080,7 @@ namespace CloudberryKingdom
 		__13->StartData = PhsxData( 4186.129f, -1231.915f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __13 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "hills_backhills2_p2_trim" );
 		__14->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -192.9017f ), Vector2( 0, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
 		__14->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.000975f, 0.9990253f );
@@ -2110,7 +2110,7 @@ namespace CloudberryKingdom
 		__14->StartData = PhsxData( 17893.56f, -1699.611f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "hills_backhills2_trim" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2128,7 +2128,7 @@ namespace CloudberryKingdom
 		__15->StartData = PhsxData( 32150.93f, -1535.743f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __15 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "hills_backhills2_p2_trim" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2150,11 +2150,11 @@ namespace CloudberryKingdom
 		__12->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __12 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__17->Name = _T( "Clouds" );
 		__17->Foreground = false;
 		__17->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "hills_clouds" );
 		__18->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4171.699f, 2314.271f ), Vector2( 0.7512081f, 0 ), Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) ) );
 		__18->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
@@ -2188,11 +2188,11 @@ namespace CloudberryKingdom
 		__17->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __17 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __19 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__19->Name = _T( "Hills" );
 		__19->Foreground = false;
 		__19->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "hills_hill1" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2210,7 +2210,7 @@ namespace CloudberryKingdom
 		__20->StartData = PhsxData( 8635.98f, -926.418f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __20 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "hills_hillandtree" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2228,7 +2228,7 @@ namespace CloudberryKingdom
 		__21->StartData = PhsxData( 34.27734f, -34.0918f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __21 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "hills_hillandtree" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2246,7 +2246,7 @@ namespace CloudberryKingdom
 		__22->StartData = PhsxData( 17604.08f, -34.0918f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "hills_hill2" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2264,7 +2264,7 @@ namespace CloudberryKingdom
 		__23->StartData = PhsxData( 10419.8f, -1173.33f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __23 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "hills_hill1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2282,7 +2282,7 @@ namespace CloudberryKingdom
 		__24->StartData = PhsxData( 27956.91f, -438.7754f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __24 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "hills_hillandtree" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2300,7 +2300,7 @@ namespace CloudberryKingdom
 		__25->StartData = PhsxData( 34432.56f, -336.752f, 0, 0, 0, 0 );
 		__19->Floaters.push_back( __25 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "hills_hill1" );
 		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2322,11 +2322,11 @@ namespace CloudberryKingdom
 		__19->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __27 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__27->Name = _T( "Plants" );
 		__27->Foreground = false;
 		__27->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "hills_plants_1" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2344,7 +2344,7 @@ namespace CloudberryKingdom
 		__28->StartData = PhsxData( -8483.381f, -959.5684f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __28 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "hills_plants_2" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2362,7 +2362,7 @@ namespace CloudberryKingdom
 		__29->StartData = PhsxData( -6522.574f, -951.364f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __29 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "hills_plants_3" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2380,7 +2380,7 @@ namespace CloudberryKingdom
 		__30->StartData = PhsxData( -4241.8f, -1058.019f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __30 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "hills_plants_4" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__31->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2398,7 +2398,7 @@ namespace CloudberryKingdom
 		__31->StartData = PhsxData( -2026.664f, -1213.899f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __31 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "hills_plants_5" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2416,7 +2416,7 @@ namespace CloudberryKingdom
 		__32->StartData = PhsxData( -4.105469f, -1058.24f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __32 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "hills_plants_6" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2434,7 +2434,7 @@ namespace CloudberryKingdom
 		__33->StartData = PhsxData( 2359.654f, -917.8555f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __33 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "hills_plants_1" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2452,7 +2452,7 @@ namespace CloudberryKingdom
 		__34->StartData = PhsxData( 4476.271f, -1029.628f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __34 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "hills_plants_2" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2470,7 +2470,7 @@ namespace CloudberryKingdom
 		__35->StartData = PhsxData( 6329.44f, -981.4927f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __35 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "hills_plants_3" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__36->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2488,7 +2488,7 @@ namespace CloudberryKingdom
 		__36->StartData = PhsxData( 8591.752f, -933.3588f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __36 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "hills_plants_4" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__37->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2506,7 +2506,7 @@ namespace CloudberryKingdom
 		__37->StartData = PhsxData( 10830, -1125.896f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __37 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "hills_plants_5" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__38->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2524,7 +2524,7 @@ namespace CloudberryKingdom
 		__38->StartData = PhsxData( 13020.1f, -1053.695f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __38 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__39->Name = _T( "hills_plants_6" );
 		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__39->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2542,7 +2542,7 @@ namespace CloudberryKingdom
 		__39->StartData = PhsxData( 15234.28f, -933.358f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __39 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "hills_plants_1" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__40->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2560,7 +2560,7 @@ namespace CloudberryKingdom
 		__40->StartData = PhsxData( 17219.33f, -986.3066f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __40 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "hills_plants_2" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__41->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2578,7 +2578,7 @@ namespace CloudberryKingdom
 		__41->StartData = PhsxData( 19203.91f, -1006.042f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __41 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "hills_plants_3" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__42->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2596,7 +2596,7 @@ namespace CloudberryKingdom
 		__42->StartData = PhsxData( 21566.81f, -1132.153f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __42 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "hills_plants_4" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__43->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2614,7 +2614,7 @@ namespace CloudberryKingdom
 		__43->StartData = PhsxData( 23854.63f, -1173.068f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __43 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__44->Name = _T( "hills_plants_5" );
 		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__44->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2632,7 +2632,7 @@ namespace CloudberryKingdom
 		__44->StartData = PhsxData( 25828.14f, -1124.934f, 0, 0, 0, 0 );
 		__27->Floaters.push_back( __44 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "hills_plants_6" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__45->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
@@ -2661,16 +2661,16 @@ namespace CloudberryKingdom
 		b->TR = Vector2( 100000, 10000 );
 	}
 
-	void Background::_code_Castle( const std::shared_ptr<Background> &b )
+	void Background::_code_Castle( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Wall" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "castle_wall" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
@@ -2688,7 +2688,7 @@ namespace CloudberryKingdom
 		__2->StartData = PhsxData( 0, 0, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __2 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "castle_wall_p2" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
@@ -2706,7 +2706,7 @@ namespace CloudberryKingdom
 		__3->StartData = PhsxData( 16180.76f, 0.06445313f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __3 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__4->Name = _T( "castle_wall" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
@@ -2724,7 +2724,7 @@ namespace CloudberryKingdom
 		__4->StartData = PhsxData( 32361.51f, -0.03735352f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "castle_wall_p2" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
@@ -2742,7 +2742,7 @@ namespace CloudberryKingdom
 		__5->StartData = PhsxData( 48542.02f, 0.08365631f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __5 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "Castle_Window_Left_Frame" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
@@ -2760,7 +2760,7 @@ namespace CloudberryKingdom
 		__6->StartData = PhsxData( 1229.637f, -119.3635f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __6 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "Castle_Window_Center_Frame" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
@@ -2778,7 +2778,7 @@ namespace CloudberryKingdom
 		__7->StartData = PhsxData( 3022.709f, -70.24944f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "Castle_Window_Right_Frame" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
@@ -2796,7 +2796,7 @@ namespace CloudberryKingdom
 		__8->StartData = PhsxData( 4746.968f, -156.1684f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __8 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__9->Name = _T( "Castle_Window_Left_Frame" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
@@ -2814,7 +2814,7 @@ namespace CloudberryKingdom
 		__9->StartData = PhsxData( 10648.15f, -214.8148f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "Castle_Window_Center_Frame" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
@@ -2832,7 +2832,7 @@ namespace CloudberryKingdom
 		__10->StartData = PhsxData( 12472.22f, -112.9629f, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __10 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__11->Name = _T( "Castle_Window_Right_Frame" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
 		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
@@ -2854,11 +2854,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__12->Name = _T( "Pillars" );
 		__12->Foreground = false;
 		__12->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__13->Name = _T( "castle_pillar" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2876,7 +2876,7 @@ namespace CloudberryKingdom
 		__13->StartData = PhsxData( -432.9412f, -40.13337f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __13 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "castle_pillar" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2894,7 +2894,7 @@ namespace CloudberryKingdom
 		__14->StartData = PhsxData( 6537.952f, -69.89888f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "castle_pillar" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2912,7 +2912,7 @@ namespace CloudberryKingdom
 		__15->StartData = PhsxData( 8990.559f, -131.1371f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __15 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "castle_pillar" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2930,7 +2930,7 @@ namespace CloudberryKingdom
 		__16->StartData = PhsxData( -2508.168f, -225.2005f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __16 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "castle_pillar" );
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2948,7 +2948,7 @@ namespace CloudberryKingdom
 		__17->StartData = PhsxData( -7470.558f, -152.276f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __17 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "castle_pillar" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2966,7 +2966,7 @@ namespace CloudberryKingdom
 		__18->StartData = PhsxData( 15948.25f, 6.882294f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __18 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "castle_pillar" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -2984,7 +2984,7 @@ namespace CloudberryKingdom
 		__19->StartData = PhsxData( 18275.31f, -203.903f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "castle_pillar" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -3002,7 +3002,7 @@ namespace CloudberryKingdom
 		__20->StartData = PhsxData( 25510.57f, -232.6846f, 0, 0, 0, 0 );
 		__12->Floaters.push_back( __20 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "castle_pillar" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
@@ -3024,11 +3024,11 @@ namespace CloudberryKingdom
 		__12->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __12 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __22 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__22->Name = _T( "Chandeliers_Far" );
 		__22->Foreground = false;
 		__22->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "castle_chandelier_far" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3046,7 +3046,7 @@ namespace CloudberryKingdom
 		__23->StartData = PhsxData( -12552.62f, 2073.532f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __23 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__24->Name = _T( "castle_chandelier_far" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3064,7 +3064,7 @@ namespace CloudberryKingdom
 		__24->StartData = PhsxData( -9512.358f, 2305.82f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __24 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__25->Name = _T( "castle_chandelier_far" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3082,7 +3082,7 @@ namespace CloudberryKingdom
 		__25->StartData = PhsxData( -6887.27f, 2162.044f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __25 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__26->Name = _T( "castle_chandelier_far" );
 		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3100,7 +3100,7 @@ namespace CloudberryKingdom
 		__26->StartData = PhsxData( -3205.039f, 2042.446f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __26 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__27->Name = _T( "castle_chandelier_far" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3118,7 +3118,7 @@ namespace CloudberryKingdom
 		__27->StartData = PhsxData( -849.4259f, 1762.513f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __27 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__28->Name = _T( "castle_chandelier_far" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3136,7 +3136,7 @@ namespace CloudberryKingdom
 		__28->StartData = PhsxData( 1569.904f, 1935.758f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __28 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__29->Name = _T( "castle_chandelier_far" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3154,7 +3154,7 @@ namespace CloudberryKingdom
 		__29->StartData = PhsxData( 3734.492f, 1787.61f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __29 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__30->Name = _T( "castle_chandelier_far" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3172,7 +3172,7 @@ namespace CloudberryKingdom
 		__30->StartData = PhsxData( 6327.063f, 1954.761f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __30 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__31->Name = _T( "castle_chandelier_far" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3190,7 +3190,7 @@ namespace CloudberryKingdom
 		__31->StartData = PhsxData( 8253.275f, 1765.66f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __31 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__32->Name = _T( "castle_chandelier_far" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3208,7 +3208,7 @@ namespace CloudberryKingdom
 		__32->StartData = PhsxData( 10659.29f, 2202.28f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __32 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__33->Name = _T( "castle_chandelier_far" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3226,7 +3226,7 @@ namespace CloudberryKingdom
 		__33->StartData = PhsxData( 12939.41f, 1861.483f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __33 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__34->Name = _T( "castle_chandelier_far" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3244,7 +3244,7 @@ namespace CloudberryKingdom
 		__34->StartData = PhsxData( 14887.88f, 2277.576f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __34 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__35->Name = _T( "castle_chandelier_far" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3262,7 +3262,7 @@ namespace CloudberryKingdom
 		__35->StartData = PhsxData( 16950.35f, 1941.349f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __35 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__36->Name = _T( "castle_chandelier_far" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3280,7 +3280,7 @@ namespace CloudberryKingdom
 		__36->StartData = PhsxData( 19168.29f, 2669.889f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __36 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__37->Name = _T( "castle_chandelier_far" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3298,7 +3298,7 @@ namespace CloudberryKingdom
 		__37->StartData = PhsxData( 21178.94f, 1858.435f, 0, 0, 0, 0 );
 		__22->Floaters.push_back( __37 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__38->Name = _T( "castle_chandelier_far" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
@@ -3320,11 +3320,11 @@ namespace CloudberryKingdom
 		__22->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __39 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__39->Name = _T( "Chandeliers_Close" );
 		__39->Foreground = false;
 		__39->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__40->Name = _T( "castle_chandelier_close" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3342,7 +3342,7 @@ namespace CloudberryKingdom
 		__40->StartData = PhsxData( 3612.716f, 1209.252f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __40 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__41->Name = _T( "castle_chandelier_close" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3360,7 +3360,7 @@ namespace CloudberryKingdom
 		__41->StartData = PhsxData( -652.3344f, 1221.809f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __41 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__42->Name = _T( "castle_chandelier_close" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3378,7 +3378,7 @@ namespace CloudberryKingdom
 		__42->StartData = PhsxData( 7568.055f, 1272.035f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __42 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__43->Name = _T( "castle_chandelier_close" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3396,7 +3396,7 @@ namespace CloudberryKingdom
 		__43->StartData = PhsxData( 12490.26f, 1238.551f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __43 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__44->Name = _T( "castle_chandelier_close" );
 		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3414,7 +3414,7 @@ namespace CloudberryKingdom
 		__44->StartData = PhsxData( -4636.972f, 1288.777f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __44 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__45->Name = _T( "castle_chandelier_close" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3432,7 +3432,7 @@ namespace CloudberryKingdom
 		__45->StartData = PhsxData( -9182.47f, 1196.696f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __45 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __46 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__46->Name = _T( "castle_chandelier_close" );
 		__46->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__46->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3450,7 +3450,7 @@ namespace CloudberryKingdom
 		__46->StartData = PhsxData( 16752.85f, 1337.078f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __46 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__47->Name = _T( "castle_chandelier_close" );
 		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3468,7 +3468,7 @@ namespace CloudberryKingdom
 		__47->StartData = PhsxData( 20212.56f, 1004.161f, 0, 0, 0, 0 );
 		__39->Floaters.push_back( __47 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __48 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __48 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__48->Name = _T( "castle_chandelier_close" );
 		__48->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__48->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
@@ -3497,16 +3497,16 @@ namespace CloudberryKingdom
 		b->TR = Vector2( 100000, 10000 );
 	}
 
-	void Background::_code_Sea( const std::shared_ptr<Background> &b )
+	void Background::_code_Sea( const boost::shared_ptr<Background> &b )
 	{
 		b->GuidCounter = 0;
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__1->Name = _T( "Layer" );
 		__1->Foreground = false;
 		__1->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = _T( "sea_backdrop_p1_0" );
 		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3524,7 +3524,7 @@ namespace CloudberryKingdom
 		__2->StartData = PhsxData( -3333.766f, 0, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __2 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = _T( "sea_backdrop_p2_0" );
 		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3546,11 +3546,11 @@ namespace CloudberryKingdom
 		__1->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __1 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__4->Name = _T( "Layer" );
 		__4->Foreground = false;
 		__4->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = _T( "sea_behind_water_1" );
 		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_1" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3568,7 +3568,7 @@ namespace CloudberryKingdom
 		__5->StartData = PhsxData( -13367.37f, -754.4899f, 0, 0, 0, 0 );
 		__4->Floaters.push_back( __5 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = _T( "sea_behind_water_3" );
 		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3586,7 +3586,7 @@ namespace CloudberryKingdom
 		__6->StartData = PhsxData( 1839.004f, -3958.902f, 0, 0, 0, 0 );
 		__4->Floaters.push_back( __6 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = _T( "sea_behind_water_2" );
 		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_2" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3604,7 +3604,7 @@ namespace CloudberryKingdom
 		__7->StartData = PhsxData( 14889.68f, -2327.567f, 0, 0, 0, 0 );
 		__4->Floaters.push_back( __7 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = _T( "sea_behind_water_3" );
 		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3626,11 +3626,11 @@ namespace CloudberryKingdom
 		__4->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __4 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__9->Name = _T( "Layer" );
 		__9->Foreground = false;
 		__9->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = _T( "sea_seamonster" );
 		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_seamonster" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3652,11 +3652,11 @@ namespace CloudberryKingdom
 		__9->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __9 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__11->Name = _T( "Layer" );
 		__11->Foreground = false;
 		__11->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = _T( "sea_clouds" );
 		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_clouds" ) );
 		__12->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3690,11 +3690,11 @@ namespace CloudberryKingdom
 		__11->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __11 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __13 = std::make_shared<CloudberryKingdom::BackgroundFloaterList>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
 		__13->Name = _T( "Layer" );
 		__13->Foreground = false;
 		__13->Fixed = false;
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = _T( "sea_water_1" );
 		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_1" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3712,7 +3712,7 @@ namespace CloudberryKingdom
 		__14->StartData = PhsxData( 1360.16f, -2833.725f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __14 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = _T( "sea_water_2" );
 		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_2" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3730,7 +3730,7 @@ namespace CloudberryKingdom
 		__15->StartData = PhsxData( 16882.17f, -2834.259f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __15 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__16->Name = _T( "sea_rock_1" );
 		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3748,7 +3748,7 @@ namespace CloudberryKingdom
 		__16->StartData = PhsxData( 644.2549f, -1623.055f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __16 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__17->Name = _T( "sea_rock_2" );
 		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
 		__17->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3766,7 +3766,7 @@ namespace CloudberryKingdom
 		__17->StartData = PhsxData( 10703.01f, -2166.667f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __17 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__18->Name = _T( "sea_rock_3" );
 		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_3" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3784,7 +3784,7 @@ namespace CloudberryKingdom
 		__18->StartData = PhsxData( -3843.269f, -342.5923f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __18 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__19->Name = _T( "sea_rock_4" );
 		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3802,7 +3802,7 @@ namespace CloudberryKingdom
 		__19->StartData = PhsxData( 9069.232f, -2839.639f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __19 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__20->Name = _T( "sea_rock_5" );
 		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_5" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3820,7 +3820,7 @@ namespace CloudberryKingdom
 		__20->StartData = PhsxData( 14098.87f, -1460.87f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __20 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__21->Name = _T( "sea_rock_1" );
 		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3838,7 +3838,7 @@ namespace CloudberryKingdom
 		__21->StartData = PhsxData( 6594.551f, -1877.636f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __21 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__22->Name = _T( "sea_rock_2" );
 		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3856,7 +3856,7 @@ namespace CloudberryKingdom
 		__22->StartData = PhsxData( 18768.2f, -2215.924f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __22 );
 
-		std::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = std::make_shared<CloudberryKingdom::BackgroundFloater>();
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__23->Name = _T( "sea_rock_4" );
 		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ) );
@@ -3893,7 +3893,7 @@ namespace CloudberryKingdom
 		return GuidCounter++;
 	}
 
-	const std::shared_ptr<Rand> &Background::getRnd() const
+	const boost::shared_ptr<Rand> &Background::getRnd() const
 	{
 		return MyLevel->getRnd();
 	}
@@ -3911,7 +3911,7 @@ namespace CloudberryKingdom
 		MyCollection->Reset();
 	}
 
-	std::shared_ptr<Background> Background::UseCode( const std::shared_ptr<BackgroundTemplate> &template_Renamed, const std::shared_ptr<Background> &b )
+	boost::shared_ptr<Background> Background::UseCode( const boost::shared_ptr<BackgroundTemplate> &template_Renamed, const boost::shared_ptr<Background> &b )
 	{
 		b->MyCollection->Lists.clear();
 
@@ -3924,12 +3924,12 @@ namespace CloudberryKingdom
 		return b;
 	}
 
-	std::shared_ptr<Background> Background::Get( const std::wstring &name )
+	boost::shared_ptr<Background> Background::Get( const std::wstring &name )
 	{
 		return BackgroundType::NameLookup[ name ]->MakeInstanceOf();
 	}
 
-	std::shared_ptr<Background> Background::Get( const std::shared_ptr<BackgroundTemplate> &Type )
+	boost::shared_ptr<Background> Background::Get( const boost::shared_ptr<BackgroundTemplate> &Type )
 	{
 		return Type->MakeInstanceOf();
 	}
@@ -3940,7 +3940,7 @@ namespace CloudberryKingdom
 		Tools::QDrawer->setGlobalIllumination( 1 );
 	}
 
-	void Background::Init( const std::shared_ptr<Level> &level )
+	void Background::Init( const boost::shared_ptr<Level> &level )
 	{
 	}
 
@@ -3955,7 +3955,7 @@ namespace CloudberryKingdom
 		BL += shift;
 	}
 
-	void Background::SetLevel( const std::shared_ptr<Level> &level )
+	void Background::SetLevel( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel = level;
 
@@ -3963,13 +3963,13 @@ namespace CloudberryKingdom
 			MyCollection->SetLevel( level );
 	}
 
-	void Background::SetBackground( const std::shared_ptr<Background> &b )
+	void Background::SetBackground( const boost::shared_ptr<Background> &b )
 	{
 		if ( MyCollection != 0 )
 			MyCollection->SetBackground( b );
 	}
 
-	void Background::Absorb( const std::shared_ptr<Background> &background )
+	void Background::Absorb( const boost::shared_ptr<Background> &background )
 	{
 		if ( MyCollection != 0 && background->MyCollection != 0 )
 			MyCollection->Absorb( background->MyCollection );
@@ -3977,13 +3977,13 @@ namespace CloudberryKingdom
 
 	void Background::Clear()
 	{
-		std::shared_ptr<FloatRectangle> rect = std::make_shared<FloatRectangle>();
+		boost::shared_ptr<FloatRectangle> rect = boost::make_shared<FloatRectangle>();
 		rect->TR = TR + Vector2( 10000, 10000 );
 		rect->BL = BL - Vector2( 10000, 10000 );
 		Clear( rect );
 	}
 
-	void Background::Clear( const std::shared_ptr<FloatRectangle> &Area )
+	void Background::Clear( const boost::shared_ptr<FloatRectangle> &Area )
 	{
 		if ( MyCollection != 0 )
 			MyCollection->Clear( Area );
@@ -3991,7 +3991,7 @@ namespace CloudberryKingdom
 
 	void Background::DrawTest()
 	{
-		std::shared_ptr<Camera> Cam = Tools::getCurCamera();
+		boost::shared_ptr<Camera> Cam = Tools::getCurCamera();
 
 		if ( GreenScreen )
 		{
@@ -4032,9 +4032,9 @@ namespace CloudberryKingdom
 	void Background::DimAll( float dim )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator c = MyCollection->Lists.begin(); c != MyCollection->Lists.end(); ++c )
+		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator c = MyCollection->Lists.begin(); c != MyCollection->Lists.end(); ++c )
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator fl = ( *c )->Floaters.begin(); fl != ( *c )->Floaters.end(); ++fl )
+			for ( std::vector<boost::shared_ptr<BackgroundFloater> >::const_iterator fl = ( *c )->Floaters.begin(); fl != ( *c )->Floaters.end(); ++fl )
 			{
 				Vector4 clr = ( *fl )->MyQuad->Quad_Renamed.MySetColor.ToVector4();
 				clr *= dim;
@@ -4046,8 +4046,8 @@ namespace CloudberryKingdom
 	void Background::Save( const std::wstring &path )
 	{
 		// FIXME: Implement this; maybe?
-		/*std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
-		std::shared_ptr<StreamWriter> writer = std::make_shared<StreamWriter>( stream );
+		/*boost::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		boost::shared_ptr<StreamWriter> writer = boost::make_shared<StreamWriter>( stream );
 
 		Write( writer );
 
@@ -4059,8 +4059,8 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Implement this; maybe?
 		/*Tools::UseInvariantCulture();
-		std::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		boost::shared_ptr<System::IO::FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
+		boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
 
 		Read( reader );
 
@@ -4072,12 +4072,12 @@ namespace CloudberryKingdom
 	{
 		// Mod snow
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
+		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
 			if ( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
+				for ( std::vector<boost::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
 					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;
@@ -4086,12 +4086,12 @@ namespace CloudberryKingdom
 
 		// Mod rain
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
+		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
 			if ( ( *l )->Name.find( _T( "Rain" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::vector<std::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
+				for ( std::vector<boost::shared_ptr<BackgroundFloater> >::const_iterator f = ( *l )->Floaters.begin(); f != ( *l )->Floaters.end(); ++f )
 				{
 					( *f )->MyQuad->setAlpha( ( *f )->MyQuad->getAlpha() * Intensity );
 					( *f )->uv_speed *= 1;

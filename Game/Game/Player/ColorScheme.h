@@ -8,10 +8,10 @@ namespace CloudberryKingdom
 	struct MenuListItem
 	{
 	
-		std::shared_ptr<Object> obj;
+		boost::shared_ptr<Object> obj;
 		Localization::Words word;
 
-		MenuListItem( const std::shared_ptr<Object> &obj, Localization::Words word );
+		MenuListItem( const boost::shared_ptr<Object> &obj, Localization::Words word );
 	};
 
 	struct Hat : public Buyable
@@ -28,14 +28,14 @@ namespace CloudberryKingdom
 
 		static int Cheap, Mid, Expensive;
 
-		static std::shared_ptr<Hat> None, Viking, Fedora, Afro, Halo, Ghost, CheckpointHead, FallingBlockHead, BlobHead, MovingBlockHead, SpikeyHead, FallingBlock3Head, Pink, Bubble, FireHead, Horns, Cloud_Renamed, NoHead, TopHat, Knight, Toad, BubbleBobble, Brain, Gosu, RobinHood, Rasta, Pumpkin, BunnyEars, Pirate, Miner, Glasses, Antlers, Arrow_Renamed, Bag, Cone, Pope, Rice, Santa, Sombrero, Tiki, Wizard;
+		static boost::shared_ptr<Hat> None, Viking, Fedora, Afro, Halo, Ghost, CheckpointHead, FallingBlockHead, BlobHead, MovingBlockHead, SpikeyHead, FallingBlock3Head, Pink, Bubble, FireHead, Horns, Cloud_Renamed, NoHead, TopHat, Knight, Toad, BubbleBobble, Brain, Gosu, RobinHood, Rasta, Pumpkin, BunnyEars, Pirate, Miner, Glasses, Antlers, Arrow_Renamed, Bag, Cone, Pope, Rice, Santa, Sombrero, Tiki, Wizard;
 
-		static std::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Mustache;
+		static boost::shared_ptr<Hat> Vandyke, Beard, BigBeard, Goatee, Mustache;
 
 		int Price;
 
 		std::wstring QuadName;
-		std::shared_ptr<EzTexture> HatPicTexture;
+		boost::shared_ptr<EzTexture> HatPicTexture;
 		bool DrawHead, DrawSelf;
 		Vector2 HatPicScale, HatPicShift;
 
@@ -43,9 +43,9 @@ namespace CloudberryKingdom
 
 		Localization::Words Name;
 
-		std::shared_ptr<Awardment> AssociatedAward;
+		boost::shared_ptr<Awardment> AssociatedAward;
 
-		std::shared_ptr<EzTexture> GetTexture();
+		boost::shared_ptr<EzTexture> GetTexture();
 
 		void Init();
 
@@ -64,43 +64,43 @@ namespace CloudberryKingdom
 	struct ColorScheme
 	{
 	
-		struct FindColorLambda : public LambdaFunc_1<std::shared_ptr<MenuListItem> , bool>
+		struct FindColorLambda : public LambdaFunc_1<boost::shared_ptr<MenuListItem> , bool>
 		{
 		
 			Localization::Words word;
 		
 			FindColorLambda( Localization::Words word );
 
-			bool Apply( const std::shared_ptr<MenuListItem> &item );
+			bool Apply( const boost::shared_ptr<MenuListItem> &item );
 		};
 
 	
-		struct FindHatLambda : public LambdaFunc_1<std::shared_ptr<Hat> , bool>
+		struct FindHatLambda : public LambdaFunc_1<boost::shared_ptr<Hat> , bool>
 		{
 		
 			Localization::Words word;
 		
 			FindHatLambda( Localization::Words word );
 
-			bool Apply( const std::shared_ptr<Hat> &item );
+			bool Apply( const boost::shared_ptr<Hat> &item );
 		};
 
 	
 		virtual std::wstring ToString();
 
 	
-		int IndexOf( std::vector<std::shared_ptr<MenuListItem> > &list, const std::shared_ptr<ClrTextFx> &clr );
+		int IndexOf( std::vector<boost::shared_ptr<MenuListItem> > &list, const boost::shared_ptr<ClrTextFx> &clr );
 
-		int IndexOf( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat );
+		int IndexOf( std::vector<boost::shared_ptr<Hat> > &list, const boost::shared_ptr<Hat> &hat );
 
 
 	
-		void WriteChunk_0( const std::shared_ptr<BinaryWriter> &writer );
+		void WriteChunk_0( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void ReadChunk_0( const std::shared_ptr<Chunk> &chunk );
+		void ReadChunk_0( const boost::shared_ptr<Chunk> &chunk );
 
-		std::shared_ptr<ClrTextFx> SkinColor, CapeColor, CapeOutlineColor;
-		std::shared_ptr<Hat> HatData, BeardData;
+		boost::shared_ptr<ClrTextFx> SkinColor, CapeColor, CapeOutlineColor;
+		boost::shared_ptr<Hat> HatData, BeardData;
 
 		void Init();
 

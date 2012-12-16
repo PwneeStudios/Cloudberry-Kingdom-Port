@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	MenuListExpand::OnSelectProxy::OnSelectProxy( const std::shared_ptr<MenuListExpand> &mle )
+	MenuListExpand::OnSelectProxy::OnSelectProxy( const boost::shared_ptr<MenuListExpand> &mle )
 	{
 		this->mle = mle;
 	}
@@ -13,12 +13,12 @@ namespace CloudberryKingdom
 		mle->OnSelect();
 	}
 
-	MenuListExpand::InitOnBMenuHelper::InitOnBMenuHelper( const std::shared_ptr<MenuListExpand> &mle )
+	MenuListExpand::InitOnBMenuHelper::InitOnBMenuHelper( const boost::shared_ptr<MenuListExpand> &mle )
 	{
 		this->mle = mle;
 	}
 
-	bool MenuListExpand::InitOnBMenuHelper::Apply( const std::shared_ptr<Menu> &menu )
+	bool MenuListExpand::InitOnBMenuHelper::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		mle->Back();
 		return true;
@@ -37,12 +37,12 @@ namespace CloudberryKingdom
 			MyMenuList->OnConfirmedIndexSelect->Apply();
 	}
 
-	MenuListExpand::MenuListExpand( int Control, const std::shared_ptr<MenuList> &MyMenuList ) :
+	MenuListExpand::MenuListExpand( int Control, const boost::shared_ptr<MenuList> &MyMenuList ) :
 		CkBaseMenu( false ),
 		Count( 0 )
 	{
 	}
-	std::shared_ptr<MenuListExpand> MenuListExpand::MenuListExpand_Construct( int Control, const std::shared_ptr<MenuList> &MyMenuList )
+	boost::shared_ptr<MenuListExpand> MenuListExpand::MenuListExpand_Construct( int Control, const boost::shared_ptr<MenuList> &MyMenuList )
 	{
 		InitializeInstanceFields();
 
@@ -51,10 +51,10 @@ namespace CloudberryKingdom
 		this->MyMenuList = MyMenuList;
 		Constructor();
 
-		return std::static_pointer_cast<MenuListExpand>( shared_from_this() );
+		return boost::static_pointer_cast<MenuListExpand>( shared_from_this() );
 	}
 
-	void MenuListExpand::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void MenuListExpand::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		//base.SetItemProperties(item);
 
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 			//item.SelectIconOffset = new Vector2(0, -160);
 	}
 
-	void MenuListExpand::AddItem( const std::shared_ptr<MenuItem> &item )
+	void MenuListExpand::AddItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::AddItem( item );
 
@@ -91,11 +91,11 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		MyPile->FancyPos->UpdateWithGame = true;
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->SlipSelect = true;
 		MyMenu->Active = false;
 		MyMenu->NoneSelected = true;
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 
 		MyMenu->OnB.reset();
 
-		MyMenu->OnB = std::make_shared<InitOnBMenuHelper>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<InitOnBMenuHelper>( boost::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
 
 		ItemPos = Vector2( 0, 0 );
 		PosAdd = Vector2( 0, -168 - 3 );
@@ -113,16 +113,16 @@ namespace CloudberryKingdom
 
 		float Width = 0;
 		int index = 0;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenuList->MyList.begin(); item != MyMenuList->MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenuList->MyList.begin(); item != MyMenuList->MyList.end(); ++item )
 		{
 			index++;
 
 			if ( !( *item )->Selectable )
 				continue;
 
-			std::shared_ptr<MenuItem> clone = ( *item )->Clone();
+			boost::shared_ptr<MenuItem> clone = ( *item )->Clone();
 			clone->MyInt = index - 1;
-			clone->AdditionalOnSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
+			clone->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<MenuListExpand>( shared_from_this() ) );
 			AddItem( clone );
 			clone->ScaleText( .85f );
 			Vector2 size = clone->MyText->GetWorldSize();
@@ -130,11 +130,11 @@ namespace CloudberryKingdom
 			Width = __max( size.X, Width );
 
 			if ( MyMenuList->AdditionalExpandProcessing != 0 )
-				MyMenuList->AdditionalExpandProcessing->Apply( std::static_pointer_cast<MenuListExpand>( std::static_pointer_cast<MenuListExpand>( shared_from_this() ) ), clone );
+				MyMenuList->AdditionalExpandProcessing->Apply( boost::static_pointer_cast<MenuListExpand>( boost::static_pointer_cast<MenuListExpand>( shared_from_this() ) ), clone );
 		}
 
 		// Backdrop
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen_grey" ), 482.f );
+		backdrop = boost::make_shared<QuadClass>( _T( "score_screen_grey" ), 482.f );
 		//backdrop.Size = backdrop.Size * new Vector2(1f, 2.03f);
 		MyMenu->CalcBounds();
 		float Height = ( MyMenu->TR.Y - MyMenu->BL.Y ) / 2;

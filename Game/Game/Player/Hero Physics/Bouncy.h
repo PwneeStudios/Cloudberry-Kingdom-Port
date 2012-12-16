@@ -15,12 +15,12 @@ namespace CloudberryKingdom
 	
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxBouncy> instance;
+		static boost::shared_ptr<BobPhsxBouncy> instance;
 	
-		const static std::shared_ptr<BobPhsxBouncy> &getInstance();
+		const static boost::shared_ptr<BobPhsxBouncy> &getInstance();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxBouncy> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxBouncy> &bob );
 
 		// Instancable struct
 	
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	
 		BobPhsxBouncy();
 
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual void DefaultValues();
 

@@ -17,15 +17,15 @@ namespace CloudberryKingdom
 
 		bool CustomWeight;
 
-		std::shared_ptr<Wall> MyWall;
-		std::shared_ptr<Wall> SetWall( LevelGeometry geometry );
+		boost::shared_ptr<Wall> MyWall;
+		boost::shared_ptr<Wall> SetWall( LevelGeometry geometry );
 
 		/// <summary>
 		/// Whether to do the standard Stage1Fill. False when certain special fills are set.
 		/// </summary>
 		bool DoStage1Fill, DoInitialPlats, DoFinalPlats;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -40,30 +40,30 @@ namespace CloudberryKingdom
 	struct NormalBlock_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<NormalBlock_AutoGen> instance;
+		static boost::shared_ptr<NormalBlock_AutoGen> instance;
 	
-		const static std::shared_ptr<NormalBlock_AutoGen> &getInstance();
+		const static boost::shared_ptr<NormalBlock_AutoGen> &getInstance();
 
 	
 		NormalBlock_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
 	
-		void MakeWall( const std::shared_ptr<Level> &level );
+		void MakeWall( const boost::shared_ptr<Level> &level );
 
-		std::shared_ptr<NormalBlock_Parameters> GetParams( const std::shared_ptr<Level> &level );
+		boost::shared_ptr<NormalBlock_Parameters> GetParams( const boost::shared_ptr<Level> &level );
 
 	
-		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 	};
 }
 

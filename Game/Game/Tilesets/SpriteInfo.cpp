@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	LineSpriteInfo::LineSpriteInfo( const std::shared_ptr<TextureOrAnim> &End1, const std::shared_ptr<TextureOrAnim> &Body, const std::shared_ptr<TextureOrAnim> &End2, float Width )
+	LineSpriteInfo::LineSpriteInfo( const boost::shared_ptr<TextureOrAnim> &End1, const boost::shared_ptr<TextureOrAnim> &Body, const boost::shared_ptr<TextureOrAnim> &End2, float Width )
 	{
 		InitializeInstanceFields();
 		DrawEndPoints = true;
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		this->BlendAddRatio = 0;
 	}
 
-	LineSpriteInfo::LineSpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth )
+	LineSpriteInfo::LineSpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		this->BlendAddRatio = 0;
 	}
 
-	LineSpriteInfo::LineSpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth, int Dir, Vector4 Tint )
+	LineSpriteInfo::LineSpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth, int Dir, Vector4 Tint )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		this->BlendAddRatio = 0;
 	}
 
-	LineSpriteInfo::LineSpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth, int Dir, Vector4 Tint, float BlendAddRatio )
+	LineSpriteInfo::LineSpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, float Width, float RepeatWidth, int Dir, Vector4 Tint, float BlendAddRatio )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		DrawEndPoints = false;
 	}
 
-	SpriteInfo::SpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite )
+	SpriteInfo::SpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		this->RelativeOffset = false;
 	}
 
-	SpriteInfo::SpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size )
+	SpriteInfo::SpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		this->RelativeOffset = false;
 	}
 
-	SpriteInfo::SpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size, Vector2 Offset, Color Tint )
+	SpriteInfo::SpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size, Vector2 Offset, Color Tint )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		this->RelativeOffset = false;
 	}
 
-	SpriteInfo::SpriteInfo( const std::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size, Vector2 Offset, Color Tint, bool RelativeOffset )
+	SpriteInfo::SpriteInfo( const boost::shared_ptr<TextureOrAnim> &Sprite, Vector2 Size, Vector2 Offset, Color Tint, bool RelativeOffset )
 	{
 		InitializeInstanceFields();
 		this->Sprite = Sprite;

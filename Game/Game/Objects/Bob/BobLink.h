@@ -6,12 +6,12 @@
 namespace CloudberryKingdom
 {
 
-	struct BobLink : public std::enable_shared_from_this<BobLink>
+	struct BobLink : public boost::enable_shared_from_this<BobLink>
 	{
 
 	
 		int _j, _k;
-		std::shared_ptr<Bob> j, k;
+		boost::shared_ptr<Bob> j, k;
 		float L, a_in, a_out, MaxForce;
 
 		void Release();
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 
 		void Draw( Vector2 p1, Vector2 p2 );
 
-		void PhsxStep( const std::shared_ptr<Bob> &bob );
+		void PhsxStep( const boost::shared_ptr<Bob> &bob );
 
-		void Connect( const std::shared_ptr<Bob> &bob1, const std::shared_ptr<Bob> &bob2 );
+		void Connect( const boost::shared_ptr<Bob> &bob1, const boost::shared_ptr<Bob> &bob2 );
 	};
 }
 

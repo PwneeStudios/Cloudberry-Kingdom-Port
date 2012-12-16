@@ -18,11 +18,11 @@ namespace CloudberryKingdom
 		struct BoulderTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Ball;
+			boost::shared_ptr<SpriteInfo> Ball;
 
 			float Radius;
 
-			std::shared_ptr<LineSpriteInfo> Chain;
+			boost::shared_ptr<LineSpriteInfo> Chain;
 
 			void InitializeInstanceFields();
 
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 		float Angle, MaxAngle, Length;
 		int Period, Offset;
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 	
 		void SetLayers();
@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

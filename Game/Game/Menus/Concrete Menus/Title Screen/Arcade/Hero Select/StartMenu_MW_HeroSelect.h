@@ -8,10 +8,10 @@ namespace CloudberryKingdom
 	struct HeroItem : public MenuItem
 	{
 	
-		std::shared_ptr<BobPhsx> Hero;
+		boost::shared_ptr<BobPhsx> Hero;
 		bool Locked;
 
-		HeroItem( const std::shared_ptr<BobPhsx> &Hero );
+		HeroItem( const boost::shared_ptr<BobPhsx> &Hero );
 	};
 
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu
@@ -23,10 +23,10 @@ namespace CloudberryKingdom
 		struct OnSelectProxy : public Lambda
 		{
 		
-			std::shared_ptr<StartMenu_MW_HeroSelect> smmwhs;
+			boost::shared_ptr<StartMenu_MW_HeroSelect> smmwhs;
 
 		
-			OnSelectProxy( const std::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs );
+			OnSelectProxy( const boost::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs );
 
 			void Apply();
 		};
@@ -35,35 +35,35 @@ namespace CloudberryKingdom
 		struct UpdateScoreProxy : public Lambda
 		{
 		
-			std::shared_ptr<StartMenu_MW_HeroSelect> smmwhs;
+			boost::shared_ptr<StartMenu_MW_HeroSelect> smmwhs;
 
 		
-			UpdateScoreProxy( const std::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs );
+			UpdateScoreProxy( const boost::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs );
 
 			void Apply();
 		};
 
 	
-		struct StartMenuGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct StartMenuGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<StartMenu_MW_HeroSelect> hs;
+			boost::shared_ptr<StartMenu_MW_HeroSelect> hs;
 		
-			StartMenuGoLambda( const std::shared_ptr<StartMenu_MW_HeroSelect> &hs );
+			StartMenuGoLambda( const boost::shared_ptr<StartMenu_MW_HeroSelect> &hs );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		std::shared_ptr<TitleGameData_MW> Title;
-		std::shared_ptr<ArcadeMenu> Arcade;
+		boost::shared_ptr<TitleGameData_MW> Title;
+		boost::shared_ptr<ArcadeMenu> Arcade;
 
 	
-		std::shared_ptr<HeroSelectOptions> Options;
+		boost::shared_ptr<HeroSelectOptions> Options;
 
 	
-		StartMenu_MW_HeroSelect( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
-		std::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect_Construct( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem );
+		StartMenu_MW_HeroSelect( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem );
+		boost::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect_Construct( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem );
 
 		virtual void Release();
 
@@ -76,19 +76,19 @@ namespace CloudberryKingdom
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
-		static void SetItemProperties_FadedOnUnselect( const std::shared_ptr<MenuItem> &item );
+		static void SetItemProperties_FadedOnUnselect( const boost::shared_ptr<MenuItem> &item );
 
 		virtual void OnAdd();
 
-		std::shared_ptr<HeroDoll> MyHeroDoll;
+		boost::shared_ptr<HeroDoll> MyHeroDoll;
 		virtual void Init();
 
 	
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<EzText> Score, Level_Renamed;
+		boost::shared_ptr<EzText> Score, Level_Renamed;
 
 	
 		virtual void OnReturnTo();
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 		void SetPos();
 
 	
-		virtual void Go( const std::shared_ptr<MenuItem> &item );
+		virtual void Go( const boost::shared_ptr<MenuItem> &item );
 	};
 }
 

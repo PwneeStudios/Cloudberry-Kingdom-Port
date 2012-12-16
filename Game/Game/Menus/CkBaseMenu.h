@@ -12,65 +12,65 @@ namespace CloudberryKingdom
 		struct ReturnToCallerProxy : public Lambda
 		{
 		
-			std::shared_ptr<CkBaseMenu> cbm;
+			boost::shared_ptr<CkBaseMenu> cbm;
 
 		
-			ReturnToCallerProxy( const std::shared_ptr<CkBaseMenu> &cbm );
+			ReturnToCallerProxy( const boost::shared_ptr<CkBaseMenu> &cbm );
 
 			void Apply();
 		};
 
 	
-		struct ReturnToCallerProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct ReturnToCallerProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<CkBaseMenu> cbm;
+			boost::shared_ptr<CkBaseMenu> cbm;
 
 		
-			ReturnToCallerProxy1( const std::shared_ptr<CkBaseMenu> &cbm );
+			ReturnToCallerProxy1( const boost::shared_ptr<CkBaseMenu> &cbm );
 
-			void Apply( const std::shared_ptr<MenuItem> &dummy );
+			void Apply( const boost::shared_ptr<MenuItem> &dummy );
 		};
 
 	
-		struct MakeBackButtonHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct MakeBackButtonHelper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<CkBaseMenu> bm;
+			boost::shared_ptr<CkBaseMenu> bm;
 
 		
-			MakeBackButtonHelper( const std::shared_ptr<CkBaseMenu> &bm );
+			MakeBackButtonHelper( const boost::shared_ptr<CkBaseMenu> &bm );
 
-			void Apply( const std::shared_ptr<MenuItem> &menuitem );
+			void Apply( const boost::shared_ptr<MenuItem> &menuitem );
 		};
 
 	
-		std::shared_ptr<QuadClass> DarkBack;
+		boost::shared_ptr<QuadClass> DarkBack;
 	
 		void MakeDarkBack();
 
-		std::shared_ptr<EzSound> SelectSound, BackSound;
+		boost::shared_ptr<EzSound> SelectSound, BackSound;
 
 	
 		Vector2 ItemPos;
 	
 		Vector2 PosAdd;
 
-		std::shared_ptr<EzFont> ItemFont;
+		boost::shared_ptr<EzFont> ItemFont;
 		float FontScale;
 
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 		/// <summary>
 		/// Whether menu items added to the menu are given shadows
 		/// </summary>
 		bool ItemShadows;
 
-		virtual void SetTextProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetTextProperties( const boost::shared_ptr<EzText> &text );
 
-		void SetSelectedTextProperties( const std::shared_ptr<EzText> &text );
+		void SetSelectedTextProperties( const boost::shared_ptr<EzText> &text );
 
 		/// <summary>
 		/// Amount a menu item is shifted when selected.
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		//protected Vector2 SelectedItemShift = new Vector2(-65, 0);
 		Vector2 SelectedItemShift;
 
-		virtual void AddItem( const std::shared_ptr<MenuItem> &item );
+		virtual void AddItem( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void setSlideLength( const int &value );
@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 	
 		bool CallToLeft;
 	
-		virtual void Call( const std::shared_ptr<GUI_Panel> &child, int Delay );
+		virtual void Call( const boost::shared_ptr<GUI_Panel> &child, int Delay );
 
 		virtual void OnReturnTo();
 
@@ -117,12 +117,12 @@ namespace CloudberryKingdom
 		virtual void ReturnToCaller( bool PlaySound );
 
 	
-		std::shared_ptr<GUI_Panel> _RightPanel, _TopPanel;
+		boost::shared_ptr<GUI_Panel> _RightPanel, _TopPanel;
 	
-		void setRightPanel( const std::shared_ptr<GUI_Panel> &value );
-		const std::shared_ptr<GUI_Panel> &getRightPanel() const;
-		void setTopPanel( const std::shared_ptr<GUI_Panel> &value );
-		const std::shared_ptr<GUI_Panel> &getTopPanel() const;
+		void setRightPanel( const boost::shared_ptr<GUI_Panel> &value );
+		const boost::shared_ptr<GUI_Panel> &getRightPanel() const;
+		void setTopPanel( const boost::shared_ptr<GUI_Panel> &value );
+		const boost::shared_ptr<GUI_Panel> &getTopPanel() const;
 
 	
 		virtual void OnAdd();
@@ -152,25 +152,25 @@ namespace CloudberryKingdom
 		virtual void Hide( PresetPos pos, int frames );
 
 	
-		std::shared_ptr<MenuItem> MakeBackButton();
-		std::shared_ptr<MenuItem> MakeBackButton( Localization::Words Word );
+		boost::shared_ptr<MenuItem> MakeBackButton();
+		boost::shared_ptr<MenuItem> MakeBackButton( Localization::Words Word );
 
 	
-		static void MakeBackdrop( const std::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL );
+		static void MakeBackdrop( const boost::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL );
 
-		static std::shared_ptr<PieceQuad> MenuTemplate;
+		static boost::shared_ptr<PieceQuad> MenuTemplate;
 	
 		void MakeBackdrop( Vector2 TR, Vector2 BL );
 
 	
-		static void SetBackdropProperties( const std::shared_ptr<PieceQuad> &piecequad );
+		static void SetBackdropProperties( const boost::shared_ptr<PieceQuad> &piecequad );
 
 		static int DefaultMenuLayer;
 
 		CkBaseMenu();
-		std::shared_ptr<CkBaseMenu> CkBaseMenu_Construct();
+		boost::shared_ptr<CkBaseMenu> CkBaseMenu_Construct();
 		CkBaseMenu( bool CallBaseConstructor );
-		std::shared_ptr<CkBaseMenu> CkBaseMenu_Construct( bool CallBaseConstructor );
+		boost::shared_ptr<CkBaseMenu> CkBaseMenu_Construct( bool CallBaseConstructor );
 
 		virtual void Draw();
 

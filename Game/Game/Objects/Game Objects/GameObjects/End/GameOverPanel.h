@@ -13,10 +13,10 @@ namespace CloudberryKingdom
 		struct MenuActiveHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			MenuActiveHelper( const std::shared_ptr<GameOverPanel> &gop );
+			MenuActiveHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -25,10 +25,10 @@ namespace CloudberryKingdom
 		struct TextBoxActiveHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			TextBoxActiveHelper( const std::shared_ptr<GameOverPanel> &gop );
+			TextBoxActiveHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -37,10 +37,10 @@ namespace CloudberryKingdom
 		struct OnAddHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			OnAddHelper( const std::shared_ptr<GameOverPanel> &gop );
+			OnAddHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -49,10 +49,10 @@ namespace CloudberryKingdom
 		struct MakeTextBoxHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			MakeTextBoxHelper( const std::shared_ptr<GameOverPanel> &gop );
+			MakeTextBoxHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -61,10 +61,10 @@ namespace CloudberryKingdom
 		struct OnEnterLambda : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			OnEnterLambda( const std::shared_ptr<GameOverPanel> &gop );
+			OnEnterLambda( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -73,10 +73,10 @@ namespace CloudberryKingdom
 		struct Action_DoneHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			Action_DoneHelper( const std::shared_ptr<GameOverPanel> &gop );
+			Action_DoneHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -85,10 +85,10 @@ namespace CloudberryKingdom
 		struct Action_DoneProxy : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			Action_DoneProxy( const std::shared_ptr<GameOverPanel> &gop );
+			Action_DoneProxy( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -97,10 +97,10 @@ namespace CloudberryKingdom
 		struct Action_PlayAgainHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			Action_PlayAgainHelper( const std::shared_ptr<GameOverPanel> &gop );
+			Action_PlayAgainHelper( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -109,10 +109,10 @@ namespace CloudberryKingdom
 		struct Action_PlayAgainProxy : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			Action_PlayAgainProxy( const std::shared_ptr<GameOverPanel> &gop );
+			Action_PlayAgainProxy( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -121,10 +121,10 @@ namespace CloudberryKingdom
 		struct Action_ShowHighScoresProxy : public Lambda
 		{
 		
-			std::shared_ptr<GameOverPanel> gop;
+			boost::shared_ptr<GameOverPanel> gop;
 
 		
-			Action_ShowHighScoresProxy( const std::shared_ptr<GameOverPanel> &gop );
+			Action_ShowHighScoresProxy( const boost::shared_ptr<GameOverPanel> &gop );
 
 			void Apply();
 		};
@@ -135,12 +135,12 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A High Scores list for the game just played.
 		/// </summary>
-		std::shared_ptr<ScoreList> MyHighScoreList, MyHighLevelList;
+		boost::shared_ptr<ScoreList> MyHighScoreList, MyHighLevelList;
 
-		std::shared_ptr<GUI_TextBox> MyTextBox;
+		boost::shared_ptr<GUI_TextBox> MyTextBox;
 		Vector2 MenuPos;
 
-		std::shared_ptr<ScoreEntry> HighScoreEntry, HighLevelEntry;
+		boost::shared_ptr<ScoreEntry> HighScoreEntry, HighLevelEntry;
 	
 		int Score, Levels, Attempts, Time, Date;
 
@@ -171,13 +171,13 @@ namespace CloudberryKingdom
 		void AddScore();
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
 		void MakeMenu();
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		void Action_Done();
@@ -190,8 +190,8 @@ namespace CloudberryKingdom
 		GameOverPanel();
 		GameOverPanel( int GameId_Score, int GameId_Level );
 
-		std::shared_ptr<GameOverPanel> GameOverPanel_Construct();
-		std::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
+		boost::shared_ptr<GameOverPanel> GameOverPanel_Construct();
+		boost::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
 
 	
 		virtual void MyDraw();

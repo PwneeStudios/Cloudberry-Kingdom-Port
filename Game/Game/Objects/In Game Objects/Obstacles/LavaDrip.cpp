@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 
 	void LavaDrip::LavaDripTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Lava_Drip_1" ) ), TextureOrAnim::Get( _T( "Lava_Drip_2" ) ), TextureOrAnim::Get( _T( "Lava_Drip_3" ) ), 440.f );
+		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Lava_Drip_1" ) ), TextureOrAnim::Get( _T( "Lava_Drip_2" ) ), TextureOrAnim::Get( _T( "Lava_Drip_3" ) ), 440.f );
 		BoxSize = Vector2( 118.f, 1300.f );
 	}
 
@@ -29,9 +29,9 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void LavaDrip::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void LavaDrip::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<LavaDripTileInfo> info = level->getInfo()->LavaDrips;
+		boost::shared_ptr<LavaDripTileInfo> info = level->getInfo()->LavaDrips;
 
 		BoxSize.X = info->BoxSize.X * level->getInfo()->ScaleAll * level->getInfo()->ScaleAllObjects;
 
@@ -116,10 +116,10 @@ namespace CloudberryKingdom
 		_BoxDeath::Reset( BoxesOnly );
 	}
 
-	void LavaDrip::Clone( const std::shared_ptr<ObjectBase> &A )
+	void LavaDrip::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
-		std::shared_ptr<LavaDrip> LavaDripA = std::dynamic_pointer_cast<LavaDrip>( A );
+		boost::shared_ptr<LavaDrip> LavaDripA = boost::dynamic_pointer_cast<LavaDrip>( A );
 
 		BoxSize = LavaDripA->BoxSize;
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );

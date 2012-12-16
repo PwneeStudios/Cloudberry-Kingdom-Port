@@ -18,11 +18,11 @@ namespace CloudberryKingdom
 		void MakeFake();
 
 	
-		std::shared_ptr<QuadClass> BackgroundQuad, BlackQuad;
-		std::shared_ptr<ObjectClass> CenterObject;
-		std::shared_ptr<EzText> LoadingText, HintText;
+		boost::shared_ptr<QuadClass> BackgroundQuad, BlackQuad;
+		boost::shared_ptr<ObjectClass> CenterObject;
+		boost::shared_ptr<EzText> LoadingText, HintText;
 
-		std::shared_ptr<EzText> TextObject;
+		boost::shared_ptr<EzText> TextObject;
 
 		bool Fade;
 		float FadeAlpha;
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 
 		void PreDraw();
 
-		void Draw( const std::shared_ptr<Camera> &cam );
+		void Draw( const boost::shared_ptr<Camera> &cam );
 
 	
 		void InitializeInstanceFields();

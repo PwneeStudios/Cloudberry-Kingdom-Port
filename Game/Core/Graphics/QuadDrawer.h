@@ -12,15 +12,15 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		std::shared_ptr<GraphicsDevice> Device;
+		boost::shared_ptr<GraphicsDevice> Device;
 
 	
-		std::shared_ptr<EzEffect> DefaultEffect;
-		std::shared_ptr<EzTexture> DefaultTexture;
+		boost::shared_ptr<EzEffect> DefaultEffect;
+		boost::shared_ptr<EzTexture> DefaultTexture;
 
 	
-		std::shared_ptr<EzEffect> CurrentEffect;
-		std::shared_ptr<EzTexture> CurrentTexture;
+		boost::shared_ptr<EzEffect> CurrentEffect;
+		boost::shared_ptr<EzTexture> CurrentTexture;
 
 		/// <summary>
 		/// Color rotation matrix.
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 
 		SimpleQuad LineQuad;
 
-		std::shared_ptr<SamplerState> WrapWrap, ClampWrap, WrapClamp, ClampClamp;
+		boost::shared_ptr<SamplerState> WrapWrap, ClampWrap, WrapClamp, ClampClamp;
 
 	
 		const float &getGlobalIllumination() const;
@@ -55,11 +55,11 @@ namespace CloudberryKingdom
 		//public void InvalidateIllumination() { CurrentIllumination = -1; }
 
 	
-		QuadDrawer( const std::shared_ptr<GraphicsDevice> &device, int n );
+		QuadDrawer( const boost::shared_ptr<GraphicsDevice> &device, int n );
 
 		void SetColorMatrix( Matrix m, float signature );
 
-		void DrawQuad( const std::shared_ptr<Quad> &quad );
+		void DrawQuad( const boost::shared_ptr<Quad> &quad );
 
 		void SetInitialState();
 
@@ -75,15 +75,15 @@ namespace CloudberryKingdom
 
 		void DrawFilledBox( Vector2 BL, Vector2 TR, Color color );
 
-		void DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info );
-		void DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width );
-		void DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width, float v_shift );
+		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info );
+		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width );
+		void DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width, float v_shift );
 		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width );
-		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, bool Illumination );
-		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio );
-		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift, bool Wrap );
+		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, bool Illumination );
+		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio );
+		void DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift, bool Wrap );
 
-		void DrawLineAndEndPoints( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex1, const std::shared_ptr<EzTexture> &Tex2, const std::shared_ptr<EzTexture> &Tex3, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift );
+		void DrawLineAndEndPoints( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex1, const boost::shared_ptr<EzTexture> &Tex2, const boost::shared_ptr<EzTexture> &Tex3, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift );
 
 		void DrawCircle( Vector2 x, float r, Color color );
 
@@ -93,11 +93,11 @@ namespace CloudberryKingdom
 		void DrawLightSource( Vector2 x, float r, float Fade, Color color );
 
 		void DrawSquareDot( Vector2 x, Color color, float width );
-		void DrawSquareDot( Vector2 x, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx );
+		void DrawSquareDot( Vector2 x, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx );
 
 
 		void DrawToScaleQuad( Vector2 x, Color color, float width );
-		void DrawToScaleQuad( Vector2 x, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx );
+		void DrawToScaleQuad( Vector2 x, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx );
 
 		void DrawBox( Vector2 BL, Vector2 TR, Color color, float width );
 

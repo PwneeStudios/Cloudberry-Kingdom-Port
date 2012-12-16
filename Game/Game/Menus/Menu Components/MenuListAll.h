@@ -8,32 +8,32 @@ namespace CloudberryKingdom
 	struct Brackets
 	{
 	
-		std::shared_ptr<QuadClass> Br1, Br2;
+		boost::shared_ptr<QuadClass> Br1, Br2;
 
 	
 		Brackets();
 
 		void Draw( Vector2 Center );
 
-		void AddToDrawPile( const std::shared_ptr<DrawPile> &pile );
+		void AddToDrawPile( const boost::shared_ptr<DrawPile> &pile );
 	};
 
 	struct MenuListAll : public MenuList
 	{
 	
-		std::shared_ptr<MenuItem> SelectedItem;
+		boost::shared_ptr<MenuItem> SelectedItem;
 
 #if defined(WINDOWS)
 	
 		Vector2 ListPadding;
 		Vector2 TotalPadding;
-		std::shared_ptr<MenuItem> LastHitItem;
+		boost::shared_ptr<MenuItem> LastHitItem;
 	
 		virtual bool HitTest( Vector2 pos, Vector2 padding );
 #endif
 
 	
-		std::shared_ptr<Brackets> MyBrackets;
+		boost::shared_ptr<Brackets> MyBrackets;
 	
 		MenuListAll();
 
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		virtual void SetIndex( int NewIndex );
 
 		float ShiftAmount;
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 	
 		void InitializeInstanceFields();

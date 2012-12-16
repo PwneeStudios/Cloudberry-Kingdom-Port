@@ -19,11 +19,11 @@ namespace CloudberryKingdom
 			//foreach (SimpleQuad quad in Quads)
 				//quad.Release();
 		if ( Boxes.size() > 0 )
-			for ( std::vector<std::shared_ptr<SimpleBox> >::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
+			for ( std::vector<boost::shared_ptr<SimpleBox> >::const_iterator box = Boxes.begin(); box != Boxes.end(); ++box )
 				( *box )->Release();
 
 		//AnimQueue.clear();
-		std::queue<std::shared_ptr<AnimQueueEntry> > empty;
+		std::queue<boost::shared_ptr<AnimQueueEntry> > empty;
 		std::swap( AnimQueue, empty );
 		
 		LastAnimEntry.reset();
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 			return;
 
 		if ( MyEffects.empty() )
-			MyEffects = std::vector<std::shared_ptr<EzEffect> >();
+			MyEffects = std::vector<boost::shared_ptr<EzEffect> >();
 		else
 			MyEffects.clear();
 
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 				Quads[ i ].SetColor( color );
 	}
 
-	SimpleObject::SimpleObject( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly )
+	SimpleObject::SimpleObject( const boost::shared_ptr<SimpleObject> &obj, bool BoxesOnly )
 	{
 		xFlip = false; yFlip = false; CenterFlipOnBox = false;;
 		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		Constructor( obj, BoxesOnly, false );
 	}
 
-	void SimpleObject::Constructor( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy )
+	void SimpleObject::Constructor( const boost::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy )
 	{
 		xFlip = false; yFlip = false; CenterFlipOnBox = false;;
 		Play = false; Loop = false; Transfer = false; OldLoop = false; Linear = false;
@@ -102,14 +102,14 @@ namespace CloudberryKingdom
 				Quads[ i ] = SimpleQuad( obj->Quads[ i ] );
 		}
 
-		Boxes = std::vector<std::shared_ptr<SimpleBox> >( obj->Boxes.size() );
+		Boxes = std::vector<boost::shared_ptr<SimpleBox> >( obj->Boxes.size() );
 		for ( int i = 0; i < static_cast<int>( obj->Boxes.size() ); i++ )
-			Boxes[ i ] = std::make_shared<SimpleBox>( obj->Boxes[ i ] );
+			Boxes[ i ] = boost::make_shared<SimpleBox>( obj->Boxes[ i ] );
 
 		// Copy the AnimQueue
-		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
-		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
-		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		AnimQueue = std::queue<boost::shared_ptr<AnimQueueEntry> >();
+		std::queue<boost::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<boost::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<boost::shared_ptr<AnimQueueEntry> > array_Renamed;
 		while( !QueueCopy.empty() )
 		{
 			array_Renamed.push_back( QueueCopy.front() );
@@ -119,9 +119,9 @@ namespace CloudberryKingdom
 		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
-			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
+			LastAnimEntry = boost::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
 			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
-				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
+				AnimQueue.push( boost::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			AnimQueue.push( LastAnimEntry );
 		}
 
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	SimpleObject::SimpleObject( const std::shared_ptr<ObjectClass> &obj ) :
+	SimpleObject::SimpleObject( const boost::shared_ptr<ObjectClass> &obj ) :
 		xFlip( false ), yFlip( false )
 	{
 		Base.Init();
@@ -163,16 +163,16 @@ namespace CloudberryKingdom
 
 		Quads = std::vector<SimpleQuad>( obj->QuadList.size() );
 		for ( int i = 0; i < static_cast<int>( obj->QuadList.size() ); i++ )
-			Quads[ i ] = SimpleQuad( std::dynamic_pointer_cast<Quad>( obj->QuadList[ i ] ) );
+			Quads[ i ] = SimpleQuad( boost::dynamic_pointer_cast<Quad>( obj->QuadList[ i ] ) );
 		
-		Boxes = std::vector<std::shared_ptr<SimpleBox> >( obj->BoxList.size() );
+		Boxes = std::vector<boost::shared_ptr<SimpleBox> >( obj->BoxList.size() );
 		for ( int i = 0; i < static_cast<int>( obj->BoxList.size() ); i++ )
-			Boxes[ i ] = std::make_shared<SimpleBox>( obj->BoxList[ i ] );
+			Boxes[ i ] = boost::make_shared<SimpleBox>( obj->BoxList[ i ] );
 
 		// Copy the AnimQueue
-		AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
-		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
-		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		AnimQueue = std::queue<boost::shared_ptr<AnimQueueEntry> >();
+		std::queue<boost::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<boost::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<boost::shared_ptr<AnimQueueEntry> > array_Renamed;
 		while( !QueueCopy.empty() )
 		{
 			array_Renamed.push_back( QueueCopy.front() );
@@ -182,9 +182,9 @@ namespace CloudberryKingdom
 		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
-			LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
+			LastAnimEntry = boost::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
 			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
-				AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
+				AnimQueue.push( boost::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			AnimQueue.push( LastAnimEntry );
 		}
 
@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 		return c;
 	}
 
-	void SimpleObject::CopyUpdate( const std::shared_ptr<SimpleObject> &source )
+	void SimpleObject::CopyUpdate( const boost::shared_ptr<SimpleObject> &source )
 	{
 		Vector2 shift = Base.Origin - source->Base.Origin;
 
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		Draw( Tools::QDrawer, Tools::EffectWad );
 	}
 
-	void SimpleObject::Draw( const std::shared_ptr<QuadDrawer> &QDrawer, const std::shared_ptr<EzEffectWad> &EffectWad )
+	void SimpleObject::Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		int n = 0;
 		if ( Quads.size() > 0 )
@@ -278,10 +278,10 @@ namespace CloudberryKingdom
 		Draw( QDrawer, EffectWad, 0, n - 1 );
 	}
 
-	void SimpleObject::Draw( const std::shared_ptr<QuadDrawer> &QDrawer, const std::shared_ptr<EzEffectWad> &EffectWad, int StartIndex, int EndIndex )
+	void SimpleObject::Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, const boost::shared_ptr<EzEffectWad> &EffectWad, int StartIndex, int EndIndex )
 	{
 		if ( xFlip || yFlip )
-			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			{
 				( *fx )->FlipCenter->SetValue( FlipCenter );
 				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1.f : -1.f, yFlip ? 1.f : -1.f ) );
@@ -294,7 +294,7 @@ namespace CloudberryKingdom
 		if ( xFlip || yFlip )
 		{
 			QDrawer->Flush();
-			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 				( *fx )->FlipVector->SetValue( Vector2( -1.f, -1.f ) );
 		}
 	}
@@ -302,7 +302,7 @@ namespace CloudberryKingdom
 	void SimpleObject::DrawQuad( SimpleQuad &Quad_Renamed )
 	{
 		if ( xFlip || yFlip )
-			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			{
 				( *fx )->FlipCenter->SetValue( FlipCenter );
 				( *fx )->FlipVector->SetValue( Vector2( xFlip ? 1.f : -1.f, yFlip ? 1.f : -1.f ) );
@@ -313,7 +313,7 @@ namespace CloudberryKingdom
 		if ( xFlip || yFlip )
 		{
 			Tools::QDrawer->Flush();
-			for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
+			for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 				( *fx )->FlipVector->SetValue( Vector2( -1.f, -1.f ) );
 		}
 	}
@@ -322,7 +322,7 @@ namespace CloudberryKingdom
 	{
 		DequeueTransfers();
 
-		std::shared_ptr<AnimQueueEntry> NewEntry = std::make_shared<AnimQueueEntry>();
+		boost::shared_ptr<AnimQueueEntry> NewEntry = boost::make_shared<AnimQueueEntry>();
 		NewEntry->anim = _anim;
 		NewEntry->AnimSpeed = speed;
 		NewEntry->StartT = 0;
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 	{
 		EnqueueTransfer( _anim, startT,.5f, loop );
 
-		std::shared_ptr<AnimQueueEntry> NewEntry = std::make_shared<AnimQueueEntry>();
+		boost::shared_ptr<AnimQueueEntry> NewEntry = boost::make_shared<AnimQueueEntry>();
 		NewEntry->anim = _anim;
 		NewEntry->AnimSpeed = 1;
 		NewEntry->StartT = startT;
@@ -374,7 +374,7 @@ namespace CloudberryKingdom
 		if ( AnimQueue.empty() )
 			return;
 
-		std::shared_ptr<AnimQueueEntry> CurAnimQueueEntry = AnimQueue.front();
+		boost::shared_ptr<AnimQueueEntry> CurAnimQueueEntry = AnimQueue.front();
 
 		if ( !CurAnimQueueEntry->Initialized )
 		{
@@ -396,7 +396,7 @@ namespace CloudberryKingdom
 				AnimQueue.pop();
 				if ( AnimQueue.size() > 0 )
 				{
-					std::shared_ptr<AnimQueueEntry> Next = AnimQueue.front();
+					boost::shared_ptr<AnimQueueEntry> Next = AnimQueue.front();
 					if ( Next->anim == anim )
 						Next->StartT = CurAnimQueueEntry->DestT;
 				}

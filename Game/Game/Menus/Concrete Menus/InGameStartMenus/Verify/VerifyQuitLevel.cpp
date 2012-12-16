@@ -7,9 +7,9 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void VerifyQuitLevelMenu::VerifyQuitOkLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void VerifyQuitLevelMenu::VerifyQuitOkLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
-		Tools::CurrentAftermath = std::make_shared<AftermathData>();
+		Tools::CurrentAftermath = boost::make_shared<AftermathData>();
 		Tools::CurrentAftermath->Success = false;
 		Tools::CurrentAftermath->EarlyExit = true;
 
@@ -17,19 +17,19 @@ namespace CloudberryKingdom
 	}
 
 	VerifyQuitLevelMenu::VerifyQuitLevelMenu( bool CallBaseConstructor ) : VerifyBaseMenu( CallBaseConstructor ) { }
-	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
+	boost::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( bool CallBaseConstructor )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( CallBaseConstructor );
 
-		return std::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
+		return boost::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
 
 	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control ) { }
-	std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
+	boost::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
 
-		return std::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
+		return boost::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
 
 	void VerifyQuitLevelMenu::Init()
@@ -37,27 +37,27 @@ namespace CloudberryKingdom
 		VerifyBaseMenu::Init();
 
 		// Make the menu
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Localization::Words_EXIT_LEVEL_QUESTION, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL_QUESTION, ItemFont );
 		SetHeaderProperties( HeaderText );
 		HeaderText->Name = _T( "Header" );
 		MyPile->Add( HeaderText );
 
 		// Ok
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
-		item->setGo( std::make_shared<VerifyQuitOkLambda>() );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item->setGo( boost::make_shared<VerifyQuitOkLambda>() );
 		item->Name = _T( "Yes" );
 		AddItem( item );
 
 		// No
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->Name = _T( "No" );
 		AddItem( item );
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 	void VerifyQuitLevelMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Yes" ) );
 		if ( _item != 0 )
 		{
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1000.001f, -302.7777f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.96f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{

@@ -27,10 +27,10 @@ namespace CloudberryKingdom
 
 		// Now write to file
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
-		//std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
+		//boost::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
+		//boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
 		{
-			std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( fullpath );
+			boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( fullpath );
 			Write( writer );
 		}
 		//writer->Close();
@@ -46,15 +46,15 @@ namespace CloudberryKingdom
 
 		// Now read the file
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( fullpath );
+		//boost::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( fullpath );
 		Read( reader );
 		//reader->Close();
 		//stream->Close();
 	}
 
-	void Recording::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void Recording::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( NumBobs );
 		writer->Write( Length );
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 			Recordings[ i ]->Write( writer, Length );
 	}
 
-	void Recording::Read( const std::shared_ptr<BinaryReader> &reader )
+	void Recording::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		NumBobs = reader->ReadInt32();
 		Length = reader->ReadInt32();
@@ -73,13 +73,13 @@ namespace CloudberryKingdom
 			Recordings[ i ]->Read( reader, Length );
 	}
 
-	void Recording::Draw( const std::shared_ptr<QuadClass> &BobQuad, int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks )
+	void Recording::Draw( const boost::shared_ptr<QuadClass> &BobQuad, int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks )
 	{
 		if ( level->MyGame->MyGameFlags.IsTethered && Step < Length - 1 )
 		{
-			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
+			for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = BobLinks.begin(); link != BobLinks.end(); ++link )
 			{
-				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
+				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && ( !Recordings[ ( *link )->_j ]->GetAlive( Step ) || !Recordings[ ( *link )->_k ]->GetAlive( Step ) ) )
 					continue;
 				( *link )->Draw( Recordings[ ( *link )->_j ]->GetBoxCenter( Step ), Recordings[ ( *link )->_k ]->GetBoxCenter( Step ) );
 			}
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 				continue;
 			if ( Step < Length - 1 )
 			{
-				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 					if ( Step > 0 && !Recordings[ i ]->GetAlive( Step ) )
 					{
 						if ( Recordings[ i ]->GetAlive( Step - 1 ) )
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 				Tools::QDrawer->Flush();
 			}
 			else
-				if ( Step == Length - 1 && !level->ReplayPaused && !( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
+				if ( Step == Length - 1 && !level->ReplayPaused && !( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 && !Recordings[ i ]->GetAlive( Length - 1 ) ) )
 					ParticleEffects::AddPop( level, Recordings[ i ]->GetBoxCenter( Length - 1 ) );
 		}
 	}
@@ -150,15 +150,15 @@ namespace CloudberryKingdom
 	{
 		this->NumBobs = NumBobs;
 
-		Recordings = std::vector<std::shared_ptr<ComputerRecording> >( NumBobs );
+		Recordings = std::vector<boost::shared_ptr<ComputerRecording> >( NumBobs );
 		for ( int i = 0; i < NumBobs; i++ )
 		{
-			Recordings[ i ] = std::make_shared<ComputerRecording>();
+			Recordings[ i ] = boost::make_shared<ComputerRecording>();
 			Recordings[ i ]->Init( Length, true );
 		}
 	}
 
-	void Recording::Record( const std::shared_ptr<Level> &level )
+	void Recording::Record( const boost::shared_ptr<Level> &level )
 	{
 		if ( level->Bobs.size() <= 0 )
 			return;
@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Recording::MarkEnd( const std::shared_ptr<Level> &level )
+	void Recording::MarkEnd( const boost::shared_ptr<Level> &level )
 	{
 		Length = level->CurPhsxStep;
 	}

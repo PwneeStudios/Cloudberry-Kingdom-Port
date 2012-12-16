@@ -32,14 +32,14 @@ namespace CloudberryKingdom
 		Count( 0 )
 	{
 	}
-	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct()
+	boost::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( Vector2(), 1, false );
 
-		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
+		return boost::static_pointer_cast<MultiplierUp>( shared_from_this() );
 	}
 
 	MultiplierUp::MultiplierUp( Vector2 shift, float scale, bool perma ) :
@@ -47,14 +47,14 @@ namespace CloudberryKingdom
 		Count( 0 )
 	{
 	}
-	std::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
+	boost::shared_ptr<MultiplierUp> MultiplierUp::MultiplierUp_Construct( Vector2 shift, float scale, bool perma )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( shift, scale, perma );
 
-		return std::static_pointer_cast<MultiplierUp>( shared_from_this() );
+		return boost::static_pointer_cast<MultiplierUp>( shared_from_this() );
 	}
 
 	void MultiplierUp::Init( Vector2 shift, float scale, bool perma )
@@ -66,11 +66,11 @@ namespace CloudberryKingdom
 		//Core.DrawLayer++; // Draw above cheering berries
 		PauseOnPause = true;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 		MyPile->setPos( MyPile->getPos() + shift );
 
-		text = std::make_shared<EzText>( Localization::Words_MULTIPLIER_INCREASED, Resources::Font_Grobold42, true, true );
+		text = boost::make_shared<EzText>( Localization::Words_MULTIPLIER_INCREASED, Resources::Font_Grobold42, true, true );
 		text->setScale( text->getScale() * scale );
 
 		//// Happy Blue

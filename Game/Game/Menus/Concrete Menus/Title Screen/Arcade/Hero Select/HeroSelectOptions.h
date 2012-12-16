@@ -14,20 +14,20 @@ namespace CloudberryKingdom
 		struct BringLeaderboardProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroSelectOptions> hso;
+			boost::shared_ptr<HeroSelectOptions> hso;
 
 		
-			BringLeaderboardProxy( const std::shared_ptr<HeroSelectOptions> &hso );
+			BringLeaderboardProxy( const boost::shared_ptr<HeroSelectOptions> &hso );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<StartMenu_MW_HeroSelect> HeroSelect;
+		boost::shared_ptr<StartMenu_MW_HeroSelect> HeroSelect;
 
 	
-		HeroSelectOptions( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
-		std::shared_ptr<HeroSelectOptions> HeroSelectOptions_Construct( const std::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
+		HeroSelectOptions( const boost::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
+		boost::shared_ptr<HeroSelectOptions> HeroSelectOptions_Construct( const boost::shared_ptr<StartMenu_MW_HeroSelect> &HeroSelect );
 
 		virtual void Release();
 
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void OnAdd();
@@ -52,14 +52,14 @@ namespace CloudberryKingdom
 
 	
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<EzText> Score, Level_Renamed;
+		boost::shared_ptr<EzText> Score, Level_Renamed;
 
 		void SetPos_Console();
 
 		void SetPos_PC();
 
 	
-		virtual void Go( const std::shared_ptr<MenuItem> &item );
+		virtual void Go( const boost::shared_ptr<MenuItem> &item );
 	};
 }
 

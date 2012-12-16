@@ -16,8 +16,8 @@ namespace CloudberryKingdom
 		{
 		
 //C# TO C++ CONVERTER NOTE: The variable Spike was renamed since it is named the same as a user-defined type:
-			std::shared_ptr<SpriteInfo> Spike_Renamed;
-			std::shared_ptr<SpriteInfo> Base;
+			boost::shared_ptr<SpriteInfo> Spike_Renamed;
+			boost::shared_ptr<SpriteInfo> Base;
 
 			float PeakHeight;
 
@@ -39,9 +39,9 @@ namespace CloudberryKingdom
 		static bool PeakOut;
 
 	
-		std::shared_ptr<SimpleObject> MyObject;
+		boost::shared_ptr<SimpleObject> MyObject;
 
-		std::shared_ptr<QuadClass> MyQuad, MyBaseQuad;
+		boost::shared_ptr<QuadClass> MyQuad, MyBaseQuad;
 
 		int Dir;
 		float Angle;
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 	
 		float SetHeight;
 	
-		virtual void Init( Vector2 Pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 Pos, const boost::shared_ptr<Level> &level );
 
 		Spike( bool BoxesOnly );
 
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		void SetAngle( float Ang );
 
 
-		Spike( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad );
+		Spike( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad );
 
 		virtual void PhsxStep();
 
@@ -93,11 +93,11 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
-		void CloneBoxObject( const std::shared_ptr<SimpleObject> &SimpleObjA, const std::shared_ptr<SimpleObject> &SimpleObjB );
+		void CloneBoxObject( const boost::shared_ptr<SimpleObject> &SimpleObjA, const boost::shared_ptr<SimpleObject> &SimpleObjB );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

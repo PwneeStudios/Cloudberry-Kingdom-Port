@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	//GamerTag::GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	GamerTag::GamerTag( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
+	//GamerTag::GamerTag( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	GamerTag::GamerTag( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
 		ShowGamerTag( false )
 	{
 	}
-	std::shared_ptr<GamerTag> GamerTag::GamerTag_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	boost::shared_ptr<GamerTag> GamerTag::GamerTag_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		InitializeInstanceFields();
 
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<GamerTag>( shared_from_this() );
+		return boost::static_pointer_cast<GamerTag>( shared_from_this() );
 	}
 
 	void GamerTag::ReleaseBody()
@@ -39,15 +39,15 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		SetGamerTag();
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	void GamerTag::ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed )
+	void GamerTag::ScaleGamerTag( const boost::shared_ptr<EzText> &GamerTag_Renamed )
 	{
 		GamerTag_Renamed->setScale( GamerTag_Renamed->getScale() * 850 / GamerTag_Renamed->GetWorldWidth() );
 
@@ -66,12 +66,12 @@ namespace CloudberryKingdom
 		if ( MyCharacterSelect->getPlayer()->Exists )
 		{
 			std::wstring name = MyCharacterSelect->getPlayer()->GetName();
-			Text = std::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
+			Text = boost::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
 			ScaleGamerTag( Text );
 		}
 		else
 		{
-			Text = std::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

@@ -8,13 +8,13 @@ struct VideoPlayer
 
 	VideoPlayer() : IsLooped( false ) { }
 
-	void Play( const std::shared_ptr<Video> &video )
+	void Play( const boost::shared_ptr<Video> &video )
 	{
 	}
 
-	std::shared_ptr<Texture2D> GetTexture()
+	boost::shared_ptr<Texture2D> GetTexture()
 	{
-		return std::shared_ptr<Texture2D>();
+		return boost::shared_ptr<Texture2D>();
 	}
 
 };

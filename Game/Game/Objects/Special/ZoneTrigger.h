@@ -8,10 +8,10 @@ namespace CloudberryKingdom
 	struct ZoneTrigger : public ObjectBase
 	{
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<ZoneTrigger> > > MyContainsEvent;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<ZoneTrigger> > > MyContainsEvent;
 
 	
-		std::shared_ptr<AABox> Box;
+		boost::shared_ptr<AABox> Box;
 
 	
 		virtual void MakeNew();
@@ -26,12 +26,12 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

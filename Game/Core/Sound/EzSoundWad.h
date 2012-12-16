@@ -17,16 +17,16 @@ namespace CloudberryKingdom
 		/// </summary>
 		static bool SuppressSounds;
 
-		std::vector<std::shared_ptr<EzSound> > SoundList;
+		std::vector<boost::shared_ptr<EzSound> > SoundList;
 		int MaxInstancesPerSound;
 
 		EzSoundWad( int MaxInstancesPerSound );
 
 		void Update();
 
-		std::shared_ptr<EzSound> FindByName( const std::wstring &name );
+		boost::shared_ptr<EzSound> FindByName( const std::wstring &name );
 
-		void AddSound( const std::shared_ptr<SoundEffect> &sound, const std::wstring &Name );
+		void AddSound( const boost::shared_ptr<SoundEffect> &sound, const std::wstring &Name );
 	};
 }
 

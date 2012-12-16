@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		bool Invalidated;
 
 		Vector2 BL, TR;
-		std::shared_ptr<FloatRectangle> Current, Target;
+		boost::shared_ptr<FloatRectangle> Current, Target;
 		bool TopOnly;
 
 		Vector2 RealTR();
@@ -34,21 +34,21 @@ namespace CloudberryKingdom
 
 		void Move( Vector2 shift );
 
-		void Clone( const std::shared_ptr<AABox> &A );
+		void Clone( const boost::shared_ptr<AABox> &A );
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 		void Extend( Side side, float pos );
 
-		void DrawFilled( const std::shared_ptr<QuadDrawer> &QDrawer, Color color );
+		void DrawFilled( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color );
 
 		void Draw( Color color, float Width );
-		void Draw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width );
-		void Draw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width, bool DisregardTopOnly );
+		void Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width );
+		void Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width, bool DisregardTopOnly );
 
 		void DrawT( Color color, float Width );
-		void DrawT( const std::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width );
+		void DrawT( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color, float Width );
 
 		void Initialize( Vector2 center, Vector2 size );
 

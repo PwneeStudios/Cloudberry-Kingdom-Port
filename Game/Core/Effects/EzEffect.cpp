@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		IsUpToDate = true;
 	}
 
-	void EzEffect::SetExtraTexture1( const std::shared_ptr<EzTexture> &texture )
+	void EzEffect::SetExtraTexture1( const boost::shared_ptr<EzTexture> &texture )
 	{
 		if ( ExtraTexture1 == texture )
 			return;
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 			ExtraTexture1_Param->SetValue( texture->getTex() );
 	}
 
-	void EzEffect::SetExtraTexture2( const std::shared_ptr<EzTexture> &texture )
+	void EzEffect::SetExtraTexture2( const boost::shared_ptr<EzTexture> &texture )
 	{
 		if ( ExtraTexture2 == texture )
 			return;

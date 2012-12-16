@@ -15,9 +15,9 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<GUI_Timer> MyTimer;
+		boost::shared_ptr<GUI_Timer> MyTimer;
 	
-		CoinMod( const std::shared_ptr<GUI_Timer> &Timer );
+		CoinMod( const boost::shared_ptr<GUI_Timer> &Timer );
 
 		/// <summary>
 		/// The manner in which coins are controlled to control difficulty.
@@ -30,18 +30,18 @@ namespace CloudberryKingdom
 		/// Restricts the number of coins in the level so that 
 		/// the total amount of seconds possible to gain equals the level's par
 		/// </summary>
-		void CoinControl( const std::shared_ptr<Level> &level, int Index );
+		void CoinControl( const boost::shared_ptr<Level> &level, int Index );
 
 	
-		void CoinControl_ModValue( const std::shared_ptr<Level> &level, float t );
+		void CoinControl_ModValue( const boost::shared_ptr<Level> &level, float t );
 
 		//public float ParMultiplier_Start = 1.85f, ParMultiplier_End = 1f;
 	
 		float ParMultiplier_Start, ParMultiplier_End;
 	
-		void CoinControl_ModNumber( const std::shared_ptr<Level> &level, float t );
+		void CoinControl_ModNumber( const boost::shared_ptr<Level> &level, float t );
 
-		int ModCoinNumber( const std::shared_ptr<Level> &level, int N );
+		int ModCoinNumber( const boost::shared_ptr<Level> &level, int N );
 
 	
 		void InitializeInstanceFields();

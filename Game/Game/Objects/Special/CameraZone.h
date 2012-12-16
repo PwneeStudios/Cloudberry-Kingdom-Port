@@ -8,14 +8,14 @@ namespace CloudberryKingdom
 	struct CameraZone : public ZoneTrigger
 	{
 	
-		struct ZoneTriggerLambda : public Lambda_1<std::shared_ptr<ZoneTrigger> >
+		struct ZoneTriggerLambda : public Lambda_1<boost::shared_ptr<ZoneTrigger> >
 		{
 		
-			std::shared_ptr<CameraZone> zt;
+			boost::shared_ptr<CameraZone> zt;
 		
-			ZoneTriggerLambda( const std::shared_ptr<CameraZone> &zt );
+			ZoneTriggerLambda( const boost::shared_ptr<CameraZone> &zt );
 
-			void Apply( const std::shared_ptr<ZoneTrigger> &trig );
+			void Apply( const boost::shared_ptr<ZoneTrigger> &trig );
 		};
 
 	
@@ -50,14 +50,14 @@ namespace CloudberryKingdom
 
 		Vector2 FromProjected( Vector2 x );
 
-		void SetZoom( const std::shared_ptr<Camera> &cam );
+		void SetZoom( const boost::shared_ptr<Camera> &cam );
 
-		void Enforce( const std::shared_ptr<Camera> &cam );
+		void Enforce( const boost::shared_ptr<Camera> &cam );
 
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

@@ -7,7 +7,7 @@
 namespace CloudberryKingdom
 {
 
-	StatsMenu::StringificationWrapper::StringificationWrapper( const std::shared_ptr<LambdaFunc_1<int, int> > &f )
+	StatsMenu::StringificationWrapper::StringificationWrapper( const boost::shared_ptr<LambdaFunc_1<int, int> > &f )
 	{
 		this->f = f;
 	}
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		return ToString( f->Apply( i ) );
 	}
 
-	StatsMenu::StatsLevels::StatsLevels( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsLevels::StatsLevels( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		 return Stats[ j ]->Levels;
 	}
 
-	StatsMenu::StatsJumps::StatsJumps( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsJumps::StatsJumps( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Jumps;
 	}
 
-	StatsMenu::StatsScore::StatsScore( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsScore::StatsScore( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Score;
 	}
 
-	StatsMenu::StatsCoins::StatsCoins( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsCoins::StatsCoins( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Coins;
 	}
 
-	StatsMenu::StatsTotalCoins::StatsTotalCoins( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsTotalCoins::StatsTotalCoins( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->TotalCoins;
 	}
 
-	StatsMenu::StatsCoinPercentGotten::StatsCoinPercentGotten( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsCoinPercentGotten::StatsCoinPercentGotten( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		return Format( _T( "%d%%" ), Stats[ j ]->getCoinPercentGotten() );
 	}
 
-	StatsMenu::StatsBlobs::StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsBlobs::StatsBlobs( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Blobs;
 	}
 
-	StatsMenu::StatsCheckpoints::StatsCheckpoints( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsCheckpoints::StatsCheckpoints( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->Checkpoints;
 	}
 
-	StatsMenu::StatsLifeExpectancy::StatsLifeExpectancy( std::vector<std::shared_ptr<PlayerStats> > Stats )
+	StatsMenu::StatsLifeExpectancy::StatsLifeExpectancy( std::vector<boost::shared_ptr<PlayerStats> > Stats )
 	{
 		this->Stats = Stats;
 	}
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->getLifeExpectancy();
 	}
 
-	StatsMenu::StatsDeathsBy::StatsDeathsBy( std::vector<std::shared_ptr<PlayerStats> > Stats, int i )
+	StatsMenu::StatsDeathsBy::StatsDeathsBy( std::vector<boost::shared_ptr<PlayerStats> > Stats, int i )
 	{
 		this->Stats = Stats;
 		this->i = i;
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		return Stats[ j ]->DeathsBy[ i ];
 	}
 
-	StatsMenu::OnAddHelper::OnAddHelper( const std::shared_ptr<ScrollBar> &bar )
+	StatsMenu::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScrollBar> &bar )
 	{
 		this->bar = bar;
 	}
@@ -128,14 +128,14 @@ namespace CloudberryKingdom
 		return bar->MyMenu->HitTest();
 	}
 
-	void StatsMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StatsMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
 		item->MyText->Shadow = item->MySelectedText->Shadow = false;
 	}
 
-	void StatsMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void StatsMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		text->MyFloatColor = Vector4( .6f,.6f,.6f, 1 );
 		text->OutlineColor = Vector4( 0, 0, 0, 1 );
@@ -168,24 +168,24 @@ namespace CloudberryKingdom
 	std::vector<Vector2> tempVector10[] = { std::vector<Vector2>(), StatsMenu::x1_name, StatsMenu::x2_name, StatsMenu::x3_name, StatsMenu::x4_name };
 	std::vector<std::vector<Vector2> > StatsMenu::name_pos = VecFromArray( tempVector10 );
 
-	std::shared_ptr<MenuItem> StatsMenu::AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, int> > &f )
+	boost::shared_ptr<MenuItem> StatsMenu::AddRow( const boost::shared_ptr<MenuItem> &Item, const boost::shared_ptr<LambdaFunc_1<int, int> > &f )
 	{
-		return AddRow( Item, std::make_shared<StringificationWrapper>( f ) );
+		return AddRow( Item, boost::make_shared<StringificationWrapper>( f ) );
 	}
 
-	std::shared_ptr<MenuItem> StatsMenu::AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, std::wstring> > &f )
+	boost::shared_ptr<MenuItem> StatsMenu::AddRow( const boost::shared_ptr<MenuItem> &Item, const boost::shared_ptr<LambdaFunc_1<int, std::wstring> > &f )
 	{
 		AddItem( Item );
 
 		int index = 0;
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 		for ( int j = 0; j < 4; j++ )
 		{
 			if ( PlayerManager::Get( j )->Exists )
 			{
 				std::wstring val = f->Apply( j );
 
-				Text = std::make_shared<EzText>( val, ItemFont, false, true );
+				Text = boost::make_shared<EzText>( val, ItemFont, false, true );
 				Text->Layer = 1;
 				MyPile->Add( Text );
 				Text->FancyPos->SetCenter( Item->FancyPos );
@@ -220,7 +220,7 @@ namespace CloudberryKingdom
 		n( 0 ), HeaderPos( 0 )
 	{
 	}
-	std::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
+	boost::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
 	{
 		InitializeInstanceFields();
 
@@ -231,23 +231,23 @@ namespace CloudberryKingdom
 		// Grab the stats for each player
 		for ( int i = 0; i < 4; i++ )
 		{
-			std::shared_ptr<CloudberryKingdom::PlayerData> player = PlayerManager::Get( i );
+			boost::shared_ptr<CloudberryKingdom::PlayerData> player = PlayerManager::Get( i );
 
 			Stats[ i ] = player->GetSummedStats( group );
 			if ( !Tools::CurLevel->Finished && !Tools::CurLevel->CoinsCountInStats )
 				Stats[ i ]->TotalCoins += Tools::CurLevel->NumCoins;
 		}
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the menu
-		MyMenu = std::make_shared<LongMenu>();
+		MyMenu = boost::make_shared<LongMenu>();
 		MyMenu->FixedToCamera = false;
 		MyMenu->WrapSelect = false;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MakeBack();
 
@@ -258,16 +258,16 @@ namespace CloudberryKingdom
 		BarPos = Vector2( 340, 125 );
 
 		// Header
-		std::shared_ptr<MenuItem> Header;
+		boost::shared_ptr<MenuItem> Header;
 		if ( group == StatGroup_LIFETIME )
-			Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) );
+			Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) );
 		else if ( group == StatGroup_CAMPAIGN )
 		{
-			Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STORY_MODE, Resources::Font_Grobold42_2 ) );
+			Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STORY_MODE, Resources::Font_Grobold42_2 ) );
 			Header->MyText->setScale( Header->MyText->getScale() * .725f );
 		}
 		else
-			Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) );
+			Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( HeaderPos, ItemPos.Y - 40 );
 		SetHeaderProperties( Header->MyText );
@@ -276,8 +276,8 @@ namespace CloudberryKingdom
 		ItemPos += HeaderPosAdd;
 
 	#if defined(NOT_PC)
-		std::shared_ptr<EzText> Text;
-		Header = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "" ), ItemFont ) );
+		boost::shared_ptr<EzText> Text;
+		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "" ), ItemFont ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( -1138.889f, 988.0952f );
 		Header->Selectable = false;
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 			{
 				//string val = "Hobabby!";
 				std::wstring val = PlayerManager::Get( j )->GetName();
-				Text = std::make_shared<EzText>( val, ItemFont, true, true );
+				Text = boost::make_shared<EzText>( val, ItemFont, true, true );
 				Text->Layer = 1;
 				MyPile->Add( Text );
 				Text->FancyPos->SetCenter( Header->FancyPos );
@@ -313,26 +313,26 @@ namespace CloudberryKingdom
 			}
 		}
 	#endif
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LEVELS_BEAT, ItemFont ) ), std::make_shared<StatsLevels>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_JUMPS, ItemFont ) ), std::make_shared<StatsJumps>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SCORE, ItemFont ) ), std::make_shared<StatsScore>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LEVELS_BEAT, ItemFont ) ), boost::make_shared<StatsLevels>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_JUMPS, ItemFont ) ), boost::make_shared<StatsJumps>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont ) ), boost::make_shared<StatsScore>( Stats ) );
 
 
 		// Coins
-		std::shared_ptr<MenuItem> coinitem = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_COINS, ItemFont ) );
+		boost::shared_ptr<MenuItem> coinitem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_COINS, ItemFont ) );
 		coinitem->Selectable = false;
 		AddItem( coinitem );
 
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_GRABBED, ItemFont ) ), std::make_shared<StatsCoins>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_COINS_OUT_OF, ItemFont ) ), std::make_shared<StatsTotalCoins>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PERCENT, ItemFont ) ), std::make_shared<StatsCoinPercentGotten>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_GRABBED, ItemFont ) ), boost::make_shared<StatsCoins>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_COINS_OUT_OF, ItemFont ) ), boost::make_shared<StatsTotalCoins>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PERCENT, ItemFont ) ), boost::make_shared<StatsCoinPercentGotten>( Stats ) );
 
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_FLYING_BLOBS, ItemFont ) ), std::make_shared<StatsBlobs>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont ) ), std::make_shared<StatsCheckpoints>( Stats ) );
-		AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_AVERAGE_LIFE, ItemFont ) ), std::make_shared<StatsLifeExpectancy>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_FLYING_BLOBS, ItemFont ) ), boost::make_shared<StatsBlobs>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont ) ), boost::make_shared<StatsCheckpoints>( Stats ) );
+		AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_AVERAGE_LIFE, ItemFont ) ), boost::make_shared<StatsLifeExpectancy>( Stats ) );
 
 		// Deaths
-		Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DEATHS, Resources::Font_Grobold42_2 ) );
+		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DEATHS, Resources::Font_Grobold42_2 ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( HeaderPos, ItemPos.Y - 40 );
 		SetHeaderProperties( Header->MyText );
@@ -349,7 +349,7 @@ namespace CloudberryKingdom
 			{
 				Localization::Words word = Bob::BobDeathNames[ type ];
 
-				AddRow( std::make_shared<MenuItem>( std::make_shared<EzText>( word, ItemFont ) ), std::make_shared<StatsDeathsBy>( Stats, i ) );
+				AddRow( boost::make_shared<MenuItem>( boost::make_shared<EzText>( word, ItemFont ) ), boost::make_shared<StatsDeathsBy>( Stats, i ) );
 			}
 		}
 
@@ -365,7 +365,7 @@ namespace CloudberryKingdom
 
 
 		// Darker Backdrop
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), _T( "Backdrop" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), _T( "Backdrop" ) );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 
@@ -375,12 +375,12 @@ namespace CloudberryKingdom
 
 		SetPos();
 
-		return std::static_pointer_cast<StatsMenu>( shared_from_this() );
+		return boost::static_pointer_cast<StatsMenu>( shared_from_this() );
 	}
 
 	void StatsMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Back" ) );
 		if ( _item != 0 )
 		{
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 		}
 		MyMenu->setPos( Vector2( 67.45706f, 0 ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -408,16 +408,16 @@ namespace CloudberryKingdom
 
 		// Scroll bar
 	#if defined(PC_VERSION)
-		bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+		bar = MakeMagic( ScrollBar, ( boost::static_pointer_cast<LongMenu>( MyMenu ), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		bar->setBarPos( BarPos );
 		MyGame->AddGameObject( bar );
-		MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );
+		MyMenu->AdditionalCheckForOutsideClick = boost::make_shared<OnAddHelper>( bar );
 	#endif
 	}
 
 	void StatsMenu::MakeBack()
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		ItemPos = Vector2( 1230.718f, 975.2383f );
 		item = MakeBackButton();
@@ -440,6 +440,6 @@ namespace CloudberryKingdom
 	void StatsMenu::InitializeInstanceFields()
 	{
 		HeaderPos = -1595;
-		Stats = std::vector<std::shared_ptr<PlayerStats> >( 4 );
+		Stats = std::vector<boost::shared_ptr<PlayerStats> >( 4 );
 	}
 }

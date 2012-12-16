@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		struct WallTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 
 		
 			void InitializeInstanceFields();
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 	
 		bool Horizontal;
 	
-		static std::shared_ptr<Wall> MakeWall( LevelGeometry geometry );
+		static boost::shared_ptr<Wall> MakeWall( LevelGeometry geometry );
 
 	
 		bool Spiked;
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		virtual void MakeNew();
 
 	
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 	
 		Wall( bool BoxesOnly );
 
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 		BufferType MyBufferType;
 		float Space;
 
-		void DoInteraction( const std::shared_ptr<Bob> &bob );
+		void DoInteraction( const boost::shared_ptr<Bob> &bob );
 
 		virtual void PhsxStep();
 
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 
 		virtual void Extend( Side side, float pos );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

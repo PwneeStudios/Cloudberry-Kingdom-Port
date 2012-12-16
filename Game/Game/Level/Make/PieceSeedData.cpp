@@ -15,12 +15,12 @@ namespace CloudberryKingdom
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 	}
 
-	std::shared_ptr<AutoGen_Parameters> PieceSeedData::operator []( const std::shared_ptr<AutoGen> &gen )
+	boost::shared_ptr<AutoGen_Parameters> PieceSeedData::operator []( const boost::shared_ptr<AutoGen> &gen )
 	{
 		return Style->FindParams( gen );
 	}
 
-	const std::shared_ptr<Upgrades> &PieceSeedData::getu() const
+	const boost::shared_ptr<Upgrades> &PieceSeedData::getu() const
 	{
 		return MyUpgrades1;
 	}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 		MyLevelSeed.reset();
 	}
 
-	void PieceSeedData::CopyFrom( const std::shared_ptr<PieceSeedData> &piece )
+	void PieceSeedData::CopyFrom( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		//Style = piece.Style.Clone();
 		MyUpgrades1->CopyFrom( piece->MyUpgrades1 );
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		MyUpgrades2->CalcGenData( MyGenData->gen2, Style );
 	}
 
-	void PieceSeedData::CopyUpgrades( const std::shared_ptr<PieceSeedData> &piece )
+	void PieceSeedData::CopyUpgrades( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		MyUpgrades1->CopyFrom( piece->MyUpgrades1 );
 		MyUpgrades2->CopyFrom( piece->MyUpgrades2 );
@@ -72,19 +72,19 @@ namespace CloudberryKingdom
 		Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
-	const std::shared_ptr<Rand> &PieceSeedData::getRnd() const
+	const boost::shared_ptr<Rand> &PieceSeedData::getRnd() const
 	{
 		return MyLevelSeed->Rnd;
 	}
 
-	PieceSeedData::PieceSeedData( const std::shared_ptr<LevelSeedData> &LevelSeed )
+	PieceSeedData::PieceSeedData( const boost::shared_ptr<LevelSeedData> &LevelSeed )
 	{
 		InitializeInstanceFields();
 		MyLevelSeed = LevelSeed;
 		Init( LevelGeometry_RIGHT );
 	}
 
-	PieceSeedData::PieceSeedData( int Index, LevelGeometry Type, const std::shared_ptr<LevelSeedData> &LevelSeed )
+	PieceSeedData::PieceSeedData( int Index, LevelGeometry Type, const boost::shared_ptr<LevelSeedData> &LevelSeed )
 	{
 		InitializeInstanceFields();
 		MyLevelSeed = LevelSeed;
@@ -100,28 +100,28 @@ namespace CloudberryKingdom
 		switch ( GeometryType )
 		{
 			case LevelGeometry_RIGHT:
-				Style = std::make_shared<SingleData>( getRnd() );
+				Style = boost::make_shared<SingleData>( getRnd() );
 				break;
 			case LevelGeometry_DOWN:
-				Style = std::make_shared<DownData>( getRnd() );
+				Style = boost::make_shared<DownData>( getRnd() );
 				break;
 			case LevelGeometry_UP:
-				Style = std::make_shared<UpData>( getRnd() );
+				Style = boost::make_shared<UpData>( getRnd() );
 				break;
 			case LevelGeometry_ONE_SCREEN:
-				Style = std::make_shared<OneScreenData>( getRnd() );
+				Style = boost::make_shared<OneScreenData>( getRnd() );
 				break;
 			case LevelGeometry_BIG:
-				Style = std::make_shared<BigData>( getRnd() );
+				Style = boost::make_shared<BigData>( getRnd() );
 				break;
 		}
 
-		MyGenData = std::make_shared<RichLevelGenData>();
-		MyGenData->gen1 = std::make_shared<LevelGenData>();
-		MyGenData->gen2 = std::make_shared<LevelGenData>();
+		MyGenData = boost::make_shared<RichLevelGenData>();
+		MyGenData->gen1 = boost::make_shared<LevelGenData>();
+		MyGenData->gen2 = boost::make_shared<LevelGenData>();
 
-		MyUpgrades1 = std::make_shared<Upgrades>();
-		MyUpgrades2 = std::make_shared<Upgrades>();
+		MyUpgrades1 = boost::make_shared<Upgrades>();
+		MyUpgrades2 = boost::make_shared<Upgrades>();
 
 		//MyGenData.gen3 = new LevelGenData();
 		//MyUpgrades1.CalcGenData(MyGenData.gen3);

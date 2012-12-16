@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		};
 	
 		ExplodeBobs( int speed );
-		std::shared_ptr<ExplodeBobs> ExplodeBobs_Construct( int speed );
+		boost::shared_ptr<ExplodeBobs> ExplodeBobs_Construct( int speed );
 
 	
 		int MySpeed;
@@ -24,11 +24,11 @@ namespace CloudberryKingdom
 	
 		void SetSpeed( int speed );
 
-		std::shared_ptr<Lambda> OnDone;
+		boost::shared_ptr<Lambda> OnDone;
 	
 		void Finish();
 
-		static int CompareBobs( const std::shared_ptr<Bob> &A, const std::shared_ptr<Bob> &B );
+		static int CompareBobs( const boost::shared_ptr<Bob> &A, const boost::shared_ptr<Bob> &B );
 
 		int Count;
 	

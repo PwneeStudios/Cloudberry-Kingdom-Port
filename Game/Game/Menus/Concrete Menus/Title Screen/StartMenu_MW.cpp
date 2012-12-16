@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	void StartMenu_MW::MenuGo_Options( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
 		Call( MakeMagic( StartMenu_MW_Options, ( getControl(), true ) ), 0 );
@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		SelectSound.reset();
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
-		Call( std::make_shared<StartMenu_MW_Exit>( getControl() ), 0 );
+		Call( boost::make_shared<StartMenu_MW_Exit>( getControl() ), 0 );
 	}
 
 	void StartMenu_MW::BringNextMenu()
@@ -23,14 +23,14 @@ namespace CloudberryKingdom
 		GUI_Panel::Hide();
 	}
 
-	StartMenu_MW::StartMenu_MW( const std::shared_ptr<TitleGameData_MW> &Title ) : StartMenu() { }
-	std::shared_ptr<StartMenu_MW> StartMenu_MW::StartMenu_MW_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	StartMenu_MW::StartMenu_MW( const boost::shared_ptr<TitleGameData_MW> &Title ) : StartMenu() { }
+	boost::shared_ptr<StartMenu_MW> StartMenu_MW::StartMenu_MW_Construct( const boost::shared_ptr<TitleGameData_MW> &Title )
 	{
 		StartMenu::StartMenu_Construct();
 
 		this->Title = Title;
 
-		return std::static_pointer_cast<StartMenu_MW>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW>( shared_from_this() );
 	}
 
 	void StartMenu_MW::SlideIn( int Frames )
@@ -63,10 +63,10 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringFreeplay();
 
-		GUI_Panel::Call( std::make_shared<StartMenu_MW_CustomLevel>( Title ) );
+		GUI_Panel::Call( boost::make_shared<StartMenu_MW_CustomLevel>( Title ) );
 	}
 
-	void StartMenu_MW::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		StartMenu::SetItemProperties( item );
 
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		StartMenu::OnAdd();
 	}
 
-	bool StartMenu_MW::MenuReturnToCaller( const std::shared_ptr<Menu> &menu )
+	bool StartMenu_MW::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
 	{
 		if ( NoBack )
 			return false;
@@ -91,16 +91,16 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
-		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_MENU, ItemFont ) );
+		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_MENU, ItemFont ) );
 		Header->ScaleText( 1.3f );
 		SetItemProperties( Header );
 		Header->Selectable = false;
 		MyMenu->Add( Header, 0 );
 		MyMenu->SelectItem( 1 );
 
-		BackBox = std::make_shared<QuadClass>( _T( "Title_Strip" ) );
+		BackBox = boost::make_shared<QuadClass>( _T( "Title_Strip" ) );
 		BackBox->setAlpha( .9f );
 		MyPile->Add( BackBox, _T( "Back" ) );
 
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 		BackBox->Quad_Renamed.SetColor( ColorHelper::Gray( .1f ) );
 		BackBox->setAlpha( .73f );
 
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "" ) );
 		if ( _item != 0 )
 		{
@@ -173,7 +173,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 1709.92f, -246.1907f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Back" ) );
 		if ( _q != 0 )
 		{

@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	DownData::DownData( const std::shared_ptr<Rand> &Rnd ) : VerticalData( Rnd )
+	DownData::DownData( const boost::shared_ptr<Rand> &Rnd ) : VerticalData( Rnd )
 	{
 		VisualStyle = VisualStyles_CASTLE;
 	}

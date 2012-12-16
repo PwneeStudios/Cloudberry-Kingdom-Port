@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		return MyGUI_Lives->getNumLives();
 	}
 
-	std::shared_ptr<StringBuilder> GUI_Lives::BuildString()
+	boost::shared_ptr<StringBuilder> GUI_Lives::BuildString()
 	{
 		MyString->setLength( 0 );
 
@@ -56,12 +56,12 @@ namespace CloudberryKingdom
 		Text->SubstituteText( BuildString() );
 	}
 
-	GUI_Lives::GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed ) :
+	GUI_Lives::GUI_Lives( const boost::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed ) :
 		GUI_Panel( false ),
 		AddedOnce( false )
 	{
 	}
-	std::shared_ptr<GUI_Lives> GUI_Lives::GUI_Lives_Construct( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed )
+	boost::shared_ptr<GUI_Lives> GUI_Lives::GUI_Lives_Construct( const boost::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct( false );
@@ -69,14 +69,14 @@ namespace CloudberryKingdom
 		MyGUI_Lives = GUI_Lives_Renamed;
 		Constructor();
 
-		return std::static_pointer_cast<GUI_Lives>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Lives>( shared_from_this() );
 	}
 
 	void GUI_Lives::Init()
 	{
 		GUI_Panel::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		Vector2 shift = Vector2( -320, 0 );
@@ -90,14 +90,14 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		Text = std::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42, 450.f, false, false );
+		Text = boost::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42, 450.f, false, false );
 		Text->setScale( .625f );
 		Text->setPos( Vector2( -67.22302f, 83.26669f ) );
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Bob_Renamed = std::make_shared<QuadClass>( _T( "Score/Stickman" ), 64.f, true );
+		Bob_Renamed = boost::make_shared<QuadClass>( _T( "Score/Stickman" ), 64.f, true );
 		Bob_Renamed->setPos( Vector2( 200.5664f, -42.03058f ) + shift );
 		MyPile->Add( Bob_Renamed );
 	}
@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 
 	void GUI_Lives::InitializeInstanceFields()
 	{
-		MyString = std::make_shared<StringBuilder>( 50, 50 );
+		MyString = boost::make_shared<StringBuilder>( 50, 50 );
 		AddedOnce = false;
 	}
 }

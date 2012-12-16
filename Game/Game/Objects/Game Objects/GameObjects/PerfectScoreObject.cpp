@@ -5,17 +5,17 @@
 namespace CloudberryKingdom
 {
 
-	PerfectScoreObject::OnCoinGrabProxy::OnCoinGrabProxy( const std::shared_ptr<PerfectScoreObject> &pso )
+	PerfectScoreObject::OnCoinGrabProxy::OnCoinGrabProxy( const boost::shared_ptr<PerfectScoreObject> &pso )
 	{
 		this->pso = pso;
 	}
 
-	void PerfectScoreObject::OnCoinGrabProxy::Apply( const std::shared_ptr<ObjectBase> &obj )
+	void PerfectScoreObject::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		pso->OnCoinGrab( obj );
 	}
 
-	PerfectScoreObject::OnLevelRetryProxy::OnLevelRetryProxy( const std::shared_ptr<PerfectScoreObject> &pso )
+	PerfectScoreObject::OnLevelRetryProxy::OnLevelRetryProxy( const boost::shared_ptr<PerfectScoreObject> &pso )
 	{
 		this->pso = pso;
 	}
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 		{
 			if ( ( *obj ).get() == this )
 				continue;
-			if ( std::dynamic_pointer_cast<PerfectScoreObject>( *obj ) != 0 )
+			if ( boost::dynamic_pointer_cast<PerfectScoreObject>( *obj ) != 0 )
 				( *obj )->Release();
 		}
 
@@ -57,8 +57,8 @@ namespace CloudberryKingdom
 
 		Eligible = true;
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
-		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( std::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
+		MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
+		MyGame->OnLevelRetry->Add( boost::make_shared<OnLevelRetryProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
 
 		OnAdd_GUI();
 	}
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 			GlobalBonus = _NextBonus;
 	}
 
-	void PerfectScoreObject::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
+	void PerfectScoreObject::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		if ( !Eligible )
 			return;
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 			setObtained( true );
 			BonusCount++;
 
-			std::shared_ptr<PlayerData> player = obj->getCore()->InteractingPlayer;
+			boost::shared_ptr<PlayerData> player = obj->getCore()->InteractingPlayer;
 
 			if ( player != 0 )
 				player->LevelStats->Score += BonusValue();
@@ -134,14 +134,14 @@ namespace CloudberryKingdom
 		// Berries
 		if ( BonusCount % 5 == 0 )
 		{
-			Tools::CurGameData->AddGameObject( std::make_shared<Cheer>() );
+			Tools::CurGameData->AddGameObject( boost::make_shared<Cheer>() );
 		}
 
 		pos += Vector2( 110, 70 );
 
 		// Text float
-		std::shared_ptr<TextFloat> text = std::make_shared<TextFloat>( Localization::Words_PERFECT, pos + Vector2( 21, 22.5f ) );
-		std::shared_ptr<TextFloat> text2 = std::make_shared<TextFloat>( StringConverterHelper::toString( BonusValue() ), pos + Vector2(21, -42.5f) );
+		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_PERFECT, pos + Vector2( 21, 22.5f ) );
+		boost::shared_ptr<TextFloat> text2 = boost::make_shared<TextFloat>( StringConverterHelper::toString( BonusValue() ), pos + Vector2(21, -42.5f) );
 
 		text->MyText->setScale( text->MyText->getScale() * 1.5f );
 		MyGame->AddGameObject( text );
@@ -192,7 +192,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 	{
 	}
 
-	std::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
+	boost::shared_ptr<PerfectScoreObject> PerfectScoreObject::PerfectScoreObject_Construct( bool Global, bool ShowMultiplier )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -218,7 +218,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 		Init_GUI();
 
-		return std::static_pointer_cast<PerfectScoreObject>( shared_from_this() );
+		return boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() );
 	}
 
 	const float PerfectScoreObject::getMultiplier() const
@@ -268,7 +268,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 	void PerfectScoreObject::Init_GUI()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		MyPile->setPos( Vector2( 1350, -800 ) );
@@ -280,7 +280,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		float scale;
 		Color c, o;
 
@@ -289,7 +289,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 		c = bColor( 228, 0, 69 );
 		o = Color::White;
 
-		Text = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
+		Text = boost::make_shared<EzText>( ToString(), font, 950.f, false, true );
 		Text->setScale( scale );
 		Text->setPos( Vector2( 0, 0 ) );
 		Text->MyFloatColor = c.ToVector4();

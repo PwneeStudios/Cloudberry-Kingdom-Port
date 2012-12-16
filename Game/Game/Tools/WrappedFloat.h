@@ -30,8 +30,8 @@ namespace CloudberryKingdom
 		const float &getVal();
 		void setVal( const float &value );
 
-		std::shared_ptr<Lambda> SetCallback;
-		std::shared_ptr<LambdaFunc<float> > GetCallback;
+		boost::shared_ptr<Lambda> SetCallback;
+		boost::shared_ptr<LambdaFunc<float> > GetCallback;
 
 		WrappedFloat();
 

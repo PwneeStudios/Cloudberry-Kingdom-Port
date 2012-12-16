@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct BlockData : public ObjectData
 	{
 	
-		void Decide_RemoveIfUnused( float ChanceToKeep, const std::shared_ptr<Rand> &Rnd );
+		void Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd );
 
 		bool Safe;
 
@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 
 		bool OnlyCollidesWithLowerLayers;
 
-		std::shared_ptr<BlockBase> TopRightNeighbor, TopLeftNeighbor;
+		boost::shared_ptr<BlockBase> TopRightNeighbor, TopLeftNeighbor;
 
 		ObjectVec Objects;
 
@@ -92,11 +92,11 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
-		virtual void Clone( const std::shared_ptr<ObjectData> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectData> &A );
 
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 	
 		void InitializeInstanceFields();
@@ -108,17 +108,17 @@ namespace CloudberryKingdom
 	struct BlockBase : public ObjectBase
 	{
 	
-		std::shared_ptr<AABox> MyBox;
-		const std::shared_ptr<AABox> &getBox() const;
+		boost::shared_ptr<AABox> MyBox;
+		const boost::shared_ptr<AABox> &getBox() const;
 
 		bool Active;
 		const bool &getIsActive() const;
 		void setIsActive( const bool &value );
 
 	
-		std::shared_ptr<BlockData> BlockCoreData;
+		boost::shared_ptr<BlockData> BlockCoreData;
 	
-		const std::shared_ptr<BlockData> &getBlockCore() const;
+		const boost::shared_ptr<BlockData> &getBlockCore() const;
 
 		BlockBase();
 
@@ -126,9 +126,9 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		void Init( Vector2 &center, Vector2 &size, const std::shared_ptr<Level> &level, const std::shared_ptr<BlockGroup> &group );
+		void Init( Vector2 &center, Vector2 &size, const boost::shared_ptr<Level> &level, const boost::shared_ptr<BlockGroup> &group );
 
-		std::shared_ptr<NormalBlockDraw> MyDraw;
+		boost::shared_ptr<NormalBlockDraw> MyDraw;
 		virtual void ResetPieces();
 
 		virtual void PhsxStep2();
@@ -136,33 +136,33 @@ namespace CloudberryKingdom
 
 		virtual void Extend( Side side, float pos );
 
-		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
-		virtual void HitHeadOn( const std::shared_ptr<Bob> &bob );
-		virtual void SideHit( const std::shared_ptr<Bob> &bob );
-		virtual void Hit( const std::shared_ptr<Bob> &bob );
+		virtual void LandedOn( const boost::shared_ptr<Bob> &bob );
+		virtual void HitHeadOn( const boost::shared_ptr<Bob> &bob );
+		virtual void SideHit( const boost::shared_ptr<Bob> &bob );
+		virtual void Hit( const boost::shared_ptr<Bob> &bob );
 
-		virtual bool PostCollidePreDecision( const std::shared_ptr<Bob> &bob );
+		virtual bool PostCollidePreDecision( const boost::shared_ptr<Bob> &bob );
 
-		virtual bool PostCollideDecision_Bottom_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Bottom_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Bottom( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Bottom_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Bottom_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Bottom( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
-		virtual bool PostCollideDecision_Side_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Side_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Side( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Side_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Side_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Side( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
-		virtual bool PostCollideDecision_Land_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Land_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual bool PostCollideDecision_Land( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Land_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Land_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual bool PostCollideDecision_Land( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
-		virtual void PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete );
-
-	
-		void EdgeSafety( const std::shared_ptr<Bob> &bob, bool &Delete );
+		virtual void PostCollideDecision( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete );
 
 	
-		virtual void PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
-		virtual void PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		void EdgeSafety( const boost::shared_ptr<Bob> &bob, bool &Delete );
+
+	
+		virtual void PostKeep( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual void PostInteractWith( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
 		// These were extension methods
 		void StampAsFullyUsed( int CurPhsxStep );

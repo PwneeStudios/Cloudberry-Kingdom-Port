@@ -11,19 +11,19 @@ namespace CloudberryKingdom
 	struct GUI_Timer_Simple : public GUI_Timer_Base
 	{
 	
-		struct SimpleOnExpireLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
+		struct SimpleOnExpireLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{
 		
-			std::shared_ptr<GUI_Timer_Simple> timer;
+			boost::shared_ptr<GUI_Timer_Simple> timer;
 		
-			SimpleOnExpireLambda( const std::shared_ptr<GUI_Timer_Simple> &timer );
+			SimpleOnExpireLambda( const boost::shared_ptr<GUI_Timer_Simple> &timer );
 
-			void Apply( const std::shared_ptr<GUI_Timer_Base> &timer );
+			void Apply( const boost::shared_ptr<GUI_Timer_Base> &timer );
 		};
 
 	
 		GUI_Timer_Simple( int Time );
-		std::shared_ptr<GUI_Timer_Simple> GUI_Timer_Simple_Construct( int Time );
+		boost::shared_ptr<GUI_Timer_Simple> GUI_Timer_Simple_Construct( int Time );
 
 		//void OnExpire(GUI_Timer_Base timer)
 		//{

@@ -12,17 +12,17 @@ namespace CloudberryKingdom
 		Retry = false;
 	}
 
-	Challenge::PassGetSeedAsLambda::PassGetSeedAsLambda( const std::shared_ptr<Challenge> &challenge )
+	Challenge::PassGetSeedAsLambda::PassGetSeedAsLambda( const boost::shared_ptr<Challenge> &challenge )
 	{
 		this->challenge = challenge;
 	}
 
-	std::shared_ptr<LevelSeedData> Challenge::PassGetSeedAsLambda::Apply( const int &index )
+	boost::shared_ptr<LevelSeedData> Challenge::PassGetSeedAsLambda::Apply( const int &index )
 	{
 		return challenge->GetSeed( index );
 	}
 
-	Challenge::ShowEndScreenProxy::ShowEndScreenProxy( const std::shared_ptr<Challenge> &challenge )
+	Challenge::ShowEndScreenProxy::ShowEndScreenProxy( const boost::shared_ptr<Challenge> &challenge )
 	{
 		this->challenge = challenge;
 	}
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		challenge->ShowEndScreen();
 	}
 
-	std::shared_ptr<BobPhsx> Challenge::ChosenHero = 0;
+	boost::shared_ptr<BobPhsx> Challenge::ChosenHero = 0;
 
 	int Challenge::SetGameId()
 	{
@@ -43,9 +43,9 @@ namespace CloudberryKingdom
 		return GameId_Score;
 	}
 
-	const std::shared_ptr<StringWorldGameData> Challenge::getStringWorld() const
+	const boost::shared_ptr<StringWorldGameData> Challenge::getStringWorld() const
 	{
-		return std::static_pointer_cast<StringWorldGameData>( Tools::WorldMap );
+		return boost::static_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 	}
 
 	int Challenge::TopScore()
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 
 	void Challenge::ShowEndScreen()
 	{
-		std::shared_ptr<GameOverPanel> MyGameOverPanel = MakeMagic( GameOverPanel, ( GameId_Score, GameId_Level ) );
+		boost::shared_ptr<GameOverPanel> MyGameOverPanel = MakeMagic( GameOverPanel, ( GameId_Score, GameId_Level ) );
 		MyGameOverPanel->Levels = getStringWorld()->CurLevelIndex + 1;
 
 		Tools::CurGameData->AddGameObject( MyGameOverPanel );
@@ -90,10 +90,10 @@ namespace CloudberryKingdom
 
 	void Challenge::Aftermath()
 	{
-		std::shared_ptr<AftermathData> data = Tools::CurrentAftermath;
+		boost::shared_ptr<AftermathData> data = Tools::CurrentAftermath;
 	}
 
-	void Challenge::SetGameParent( const std::shared_ptr<GameData> &game )
+	void Challenge::SetGameParent( const boost::shared_ptr<GameData> &game )
 	{
 		game->ParentGame = Tools::CurGameData;
 		Tools::WorldMap = Tools::CurGameData = game;

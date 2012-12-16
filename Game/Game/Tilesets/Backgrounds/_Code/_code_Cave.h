@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		Background_Cave( const std::wstring &Name );
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 	};
 
 }

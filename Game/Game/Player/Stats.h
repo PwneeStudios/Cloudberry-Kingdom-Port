@@ -11,18 +11,18 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
-	struct PlayerStats : public std::enable_shared_from_this<PlayerStats>
+	struct PlayerStats : public boost::enable_shared_from_this<PlayerStats>
 	{
 		#pragma region WriteRead
 	
-		void WriteChunk_4( const std::shared_ptr<BinaryWriter> &writer );
+		void WriteChunk_4( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void ReadChunk_4( const std::shared_ptr<Chunk> &ParentChunk );
+		void ReadChunk_4( const boost::shared_ptr<Chunk> &ParentChunk );
 
 	
-		void WriteDeathChunk_9( const std::shared_ptr<Chunk> &ParentChunk, int Index );
+		void WriteDeathChunk_9( const boost::shared_ptr<Chunk> &ParentChunk, int Index );
 
-		void ReadDeathChunk_9( const std::shared_ptr<Chunk> &chunk );
+		void ReadDeathChunk_9( const boost::shared_ptr<Chunk> &chunk );
 		#pragma endregion
 
 		#pragma region Persistent Stats
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		#pragma endregion
 
 		// Add all fields and elements of arrays to the corresponding field in this instance.
-		std::shared_ptr<PlayerStats> Absorb( const std::shared_ptr<PlayerStats> &stats );
+		boost::shared_ptr<PlayerStats> Absorb( const boost::shared_ptr<PlayerStats> &stats );
 
 		// Set all fields and all elements of arrays to 0.
 		void Clean();

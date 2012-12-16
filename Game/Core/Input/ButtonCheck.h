@@ -47,8 +47,8 @@ namespace CloudberryKingdom
 	struct ButtonStats
 	{
 	
-		static std::vector<std::shared_ptr<ButtonStatistics> > Controller;
-		static std::shared_ptr<ButtonStatistics> All;
+		static std::vector<boost::shared_ptr<ButtonStatistics> > Controller;
+		static boost::shared_ptr<ButtonStatistics> All;
 
 	
 		static void Init();
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 
 		static void KillSecondary();
 
-		static std::shared_ptr<ButtonClass> Quickspawn_KeyboardKey, Help_KeyboardKey, QuickReset_KeyboardKey;
+		static boost::shared_ptr<ButtonClass> Quickspawn_KeyboardKey, Help_KeyboardKey, QuickReset_KeyboardKey;
 		static Keys Start_Secondary, Go_Secondary, Back_Secondary, ReplayPrev_Secondary, ReplayNext_Secondary, ReplayToggle_Secondary, SlowMoToggle_Secondary, Left_Secondary, Right_Secondary, Up_Secondary, Down_Secondary;
 
 		static void Reset();
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		static bool PreLogIn;
 
-		static ButtonData State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex );
+		static ButtonData State( const boost::shared_ptr<ButtonClass> &Button, int iPlayerIndex );
 	
 		static ButtonData GetState( Keys Key, bool Prev );
 

@@ -9,13 +9,13 @@ namespace CloudberryKingdom
 	{
 	
 		Region( const Vector2 &pos, const Vector2 &size );
-		std::shared_ptr<Region> Region_Construct( const Vector2 &pos, const Vector2 &size );
+		boost::shared_ptr<Region> Region_Construct( const Vector2 &pos, const Vector2 &size );
 	
-		std::shared_ptr<AABox> Box;
+		boost::shared_ptr<AABox> Box;
 	
 		void Init( const Vector2 &pos, const Vector2 &size );
 
-		std::shared_ptr<Door> AttachedDoor;
+		boost::shared_ptr<Door> AttachedDoor;
 	
 		virtual void MyPhsxStep();
 

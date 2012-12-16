@@ -6,34 +6,34 @@
 namespace CloudberryKingdom
 {
 
-	struct PassGetSeedAsLambda_LevelSequence : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+	struct PassGetSeedAsLambda_LevelSequence : public LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> >
 	{
 
 	
-		std::shared_ptr<LevelSequence> ls;
+		boost::shared_ptr<LevelSequence> ls;
 
 	
-		PassGetSeedAsLambda_LevelSequence( const std::shared_ptr<LevelSequence> &ls);
+		PassGetSeedAsLambda_LevelSequence( const boost::shared_ptr<LevelSequence> &ls);
 
-		std::shared_ptr<LevelSeedData> Apply( const int &index );
+		boost::shared_ptr<LevelSeedData> Apply( const int &index );
 
 	};
 
-	struct LevelSequence : public std::enable_shared_from_this<LevelSequence>
+	struct LevelSequence : public boost::enable_shared_from_this<LevelSequence>
 	{
 	
-		struct OnLevelBeginLambda : public LambdaFunc_1<std::shared_ptr<Level> , bool>
+		struct OnLevelBeginLambda : public LambdaFunc_1<boost::shared_ptr<Level> , bool>
 		{
 		
-			std::shared_ptr<LevelSequence> ls;
+			boost::shared_ptr<LevelSequence> ls;
 		
-			OnLevelBeginLambda( const std::shared_ptr<LevelSequence> &ls );
+			OnLevelBeginLambda( const boost::shared_ptr<LevelSequence> &ls );
 
-			bool Apply( const std::shared_ptr<Level> &level );
+			bool Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		std::shared_ptr<StringWorldGameData> MyStringWorld;
+		boost::shared_ptr<StringWorldGameData> MyStringWorld;
 
 	
 		std::vector<std::wstring> Seeds;
@@ -53,15 +53,15 @@ namespace CloudberryKingdom
 		/// Special levels (such as watching a movie) do not need the normal processing (and would crash the game if they happened).
 		/// </summary>
 	
-		bool OnLevelBegin( const std::shared_ptr<Level> &level );
+		bool OnLevelBegin( const boost::shared_ptr<Level> &level );
 
 	
-		virtual void SetGameParent( const std::shared_ptr<GameData> &game );
+		virtual void SetGameParent( const boost::shared_ptr<GameData> &game );
 
 		virtual void AdditionalPreStart();
 
 	
-		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
+		virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
 
 	
 		void InitializeInstanceFields();

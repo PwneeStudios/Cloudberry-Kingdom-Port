@@ -28,10 +28,10 @@ namespace CloudberryKingdom
 		struct TextKillerHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			TextKillerHelper( const std::shared_ptr<GUI_Text> &text );
+			TextKillerHelper( const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -40,20 +40,20 @@ namespace CloudberryKingdom
 		struct ReadyGo_GoProxy : public Lambda
 		{
 		
-			std::shared_ptr<GameData> game;
-			std::shared_ptr<Lambda> End;
+			boost::shared_ptr<GameData> game;
+			boost::shared_ptr<Lambda> End;
 
 		
-			ReadyGo_GoProxy( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End );
+			ReadyGo_GoProxy( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &End );
 
 			void Apply();
 		};
 
 	
 		static Vector2 ReadyGoPos;
-		static void ReadyGo( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End );
+		static void ReadyGo( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &End );
 
-		static void ReadyGo_Go( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &End );
+		static void ReadyGo_Go( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &End );
 	};
 }
 

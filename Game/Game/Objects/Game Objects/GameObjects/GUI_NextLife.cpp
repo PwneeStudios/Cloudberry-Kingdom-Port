@@ -5,12 +5,12 @@
 namespace CloudberryKingdom
 {
 
-	GUI_NextLife::OnCoinGrabProxy::OnCoinGrabProxy( const std::shared_ptr<GUI_NextLife> &guiNl )
+	GUI_NextLife::OnCoinGrabProxy::OnCoinGrabProxy( const boost::shared_ptr<GUI_NextLife> &guiNl )
 	{
 		this->guiNl = guiNl;
 	}
 
-	void GUI_NextLife::OnCoinGrabProxy::Apply( const std::shared_ptr<ObjectBase> &obj )
+	void GUI_NextLife::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		guiNl->OnCoinGrab( obj );
 	}
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		MyGame->RemoveLastCoinText();
 
 		// Add text
-		std::shared_ptr<TextFloat> text = std::make_shared<TextFloat>( Localization::Words_EXTRA_LIFE, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
+		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_EXTRA_LIFE, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
 		text->MyText->setScale( text->MyText->getScale() * 1.33f );
 		text->getCore()->DrawLayer = 8;
 		text->MyText->MyFloatColor = ( bColor( 0, 195, 17 ) ).ToVector4();
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		return str;
 	}
 
-	void GUI_NextLife::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
+	void GUI_NextLife::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		setCoins( getCoins() + 1 );
 	}
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		CoinsText->SubstituteText( ToString() );
 	}
 
-	GUI_NextLife::GUI_NextLife( int CoinsToNextLife, const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed )
+	GUI_NextLife::GUI_NextLife( int CoinsToNextLife, const boost::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed )
 	{
 		// Object is carried over through multiple levels, so prevent it from being released.
 		InitializeInstanceFields();
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		std::wstring coin;
 		float scale;
 		Color c, o;
@@ -110,13 +110,13 @@ namespace CloudberryKingdom
 			o = Color::White;
 		}
 
-		CoinsText = std::make_shared<EzText>( ToString(), font, 450.f, false, true );
+		CoinsText = boost::make_shared<EzText>( ToString(), font, 450.f, false, true );
 		CoinsText->Name = _T( "coin" );
 		CoinsText->setScale( scale );
 		CoinsText->MyFloatColor = c.ToVector4();
 		CoinsText->OutlineColor = o.ToVector4();
 
-		std::shared_ptr<QuadClass> Coin_Renamed = std::make_shared<QuadClass>();
+		boost::shared_ptr<QuadClass> Coin_Renamed = boost::make_shared<QuadClass>();
 		Coin_Renamed->Name = _T( "coin" );
 		Coin_Renamed->SetToDefault();
 		Coin_Renamed->setTextureName( coin );
@@ -134,14 +134,14 @@ namespace CloudberryKingdom
 
 	void GUI_NextLife::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "coin" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 189.7776f, 111.7778f ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "coin" ) );
 		if ( _q != 0 )
 		{
@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 	{
 		GameObject::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<GUI_NextLife>( shared_from_this() ) ) );
+		MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>( boost::static_pointer_cast<GUI_NextLife>( shared_from_this() ) ) );
 	}
 
 	void GUI_NextLife::ReleaseBody()
@@ -177,14 +177,14 @@ namespace CloudberryKingdom
 
 	void GUI_NextLife::MyPhsxStep()
 	{
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 		MyPile->FancyPos->SetCenter( level->getMainCamera(), true );
 		MyPile->FancyPos->Update();
 	}
 
 	void GUI_NextLife::InitializeInstanceFields()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		Max = 25;
 		_Coins = 0;
 	}

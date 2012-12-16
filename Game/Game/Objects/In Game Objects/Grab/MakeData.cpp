@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		GenData.reset();
 	}
 
-	void MakeData::Init( const std::shared_ptr<PieceSeedData> &data )
+	void MakeData::Init( const boost::shared_ptr<PieceSeedData> &data )
 	{
 		int N = data->Paths;
 
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		SetTRCamBound = true;
 	}
 
-	BobVec MakeData::MakeBobs( const std::shared_ptr<Level> &level )
+	BobVec MakeData::MakeBobs( const boost::shared_ptr<Level> &level )
 	{
 		/*
 		if (level.MySourceGame.MyGameFlags.IsDoppleganger)
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < NumInitialBobs; i++ )
 		{
 			//Computers[i] = new Bob(Prototypes.bob[level.DefaultHeroType], true);
-			Computers[ i ] = std::make_shared<Bob>( level->DefaultHeroType, true );
+			Computers[ i ] = boost::make_shared<Bob>( level->DefaultHeroType, true );
 			Bob_PostConstruct( Computers[i], level->DefaultHeroType, true );
 
 			level->AddBob( Computers[ i ] );
@@ -85,9 +85,9 @@ namespace CloudberryKingdom
 		return Computers;
 	}
 
-	std::shared_ptr<LevelPiece> MakeData::MakeLevelPiece( const std::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep )
+	boost::shared_ptr<LevelPiece> MakeData::MakeLevelPiece( const boost::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep )
 	{
-		std::shared_ptr<LevelPiece> Piece = level->StartNewPiece( Length, bobs );
+		boost::shared_ptr<LevelPiece> Piece = level->StartNewPiece( Length, bobs );
 		Piece->MyData = PieceSeed;
 		Piece->MyMakeData = shared_from_this();
 		for ( int i = 0; i < NumInitialBobs; i++ )

@@ -16,16 +16,16 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<ContentManager> Content;
+		static boost::shared_ptr<ContentManager> Content;
 
 	
 		static bool Playing;
 
 	
-		static std::shared_ptr<Video> CurrentVideo;
-		static std::shared_ptr<VideoPlayer> VPlayer;
+		static boost::shared_ptr<Video> CurrentVideo;
+		static boost::shared_ptr<VideoPlayer> VPlayer;
 
-		static std::shared_ptr<EzTexture> VEZTexture;
+		static boost::shared_ptr<EzTexture> VEZTexture;
 
 		static double Duration;
 		static DateTime StartTime;
@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 		static bool CanSkip;
 		static float LengthUntilUserCanSkip;
 
-		static std::vector<std::shared_ptr<SubtitleAction> > Subtitles;
+		static std::vector<boost::shared_ptr<SubtitleAction> > Subtitles;
 		static int SubtitleIndex;
-		static std::shared_ptr<QuadClass> SubtitleQuad;
+		static boost::shared_ptr<QuadClass> SubtitleQuad;
 
 	
 		static void StartVideo_CanSkipIfWatched( const std::wstring &MovieName );

@@ -124,6 +124,14 @@ QuadDrawerWiiU::~QuadDrawerWiiU()
 	delete internal_;
 }
 
+void QuadDrawerWiiU::SetEffect( const boost::shared_ptr<Effect> &effect )
+{
+}
+
+boost::shared_ptr<Effect> QuadDrawerWiiU::GetEffect()
+{
+}
+
 void QuadDrawerWiiU::Draw( const SimpleQuad &quad )
 {
 	if( internal_->NumElements >= MAX_QUADS * 4 )

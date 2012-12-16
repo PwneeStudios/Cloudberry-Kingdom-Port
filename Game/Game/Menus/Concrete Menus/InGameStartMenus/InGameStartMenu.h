@@ -9,21 +9,21 @@ namespace CloudberryKingdom
 	struct InGameStartMenu : public CkBaseMenu
 	{
 	
-		struct MakeListenerHelper : public LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> >
+		struct MakeListenerHelper : public LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> >
 		{
 		
-			std::shared_ptr<GUI_Panel> Apply( const std::shared_ptr<Listener> &listener );
+			boost::shared_ptr<GUI_Panel> Apply( const boost::shared_ptr<Listener> &listener );
 		};
 
 	
 		struct PreventMenuHelper : public Lambda
 		{
 		
-			std::shared_ptr<Listener> listener;
-			std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > Make;
+			boost::shared_ptr<Listener> listener;
+			boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > Make;
 
 		
-			PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make );
+			PreventMenuHelper( const boost::shared_ptr<Listener> &listener, const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > &Make );
 
 			void Apply();
 		};
@@ -32,10 +32,10 @@ namespace CloudberryKingdom
 		struct GoRemoveProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoRemoveProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoRemoveProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -44,10 +44,10 @@ namespace CloudberryKingdom
 		struct GoControlsHelper : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoControlsHelper( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoControlsHelper( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -56,10 +56,10 @@ namespace CloudberryKingdom
 		struct GoControlsProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoControlsProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoControlsProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -68,10 +68,10 @@ namespace CloudberryKingdom
 		struct GoOptionsProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoOptionsProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoOptionsProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -80,10 +80,10 @@ namespace CloudberryKingdom
 		struct GoSaveLoadProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoSaveLoadProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoSaveLoadProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -92,10 +92,10 @@ namespace CloudberryKingdom
 		struct GoStatsProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			GoStatsProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			GoStatsProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -104,10 +104,10 @@ namespace CloudberryKingdom
 		struct VerifyExitProxy : public Lambda
 		{
 		
-			std::shared_ptr<InGameStartMenu> igsm;
+			boost::shared_ptr<InGameStartMenu> igsm;
 
 		
-			VerifyExitProxy( const std::shared_ptr<InGameStartMenu> &igsm );
+			VerifyExitProxy( const boost::shared_ptr<InGameStartMenu> &igsm );
 
 			void Apply();
 		};
@@ -116,20 +116,20 @@ namespace CloudberryKingdom
 		static bool PreventMenu;
 
 		InGameStartMenu( int Control );
-		std::shared_ptr<InGameStartMenu> InGameStartMenu_Construct( int Control );
+		boost::shared_ptr<InGameStartMenu> InGameStartMenu_Construct( int Control );
 
-		static std::shared_ptr<GameObject> MakeListener();
+		static boost::shared_ptr<GameObject> MakeListener();
 
-		static std::shared_ptr<GameObject> MakeListener_Base( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make );
+		static boost::shared_ptr<GameObject> MakeListener_Base( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > &Make );
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
 		virtual void OnReturnTo();
 
 	
-		std::shared_ptr<MenuItem> RemoveMe;
+		boost::shared_ptr<MenuItem> RemoveMe;
 	
 		virtual void Init();
 

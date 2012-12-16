@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	{
 	
 
-		std::shared_ptr<LevelGenData> gen1, gen2;
+		boost::shared_ptr<LevelGenData> gen1, gen2;
 		Vector2 p1, p2;
 
 		void Set( DifficultyParam type, int val );

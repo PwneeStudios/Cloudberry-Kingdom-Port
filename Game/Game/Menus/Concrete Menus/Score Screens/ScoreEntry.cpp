@@ -40,9 +40,9 @@ namespace CloudberryKingdom
 		this->Date = Date;
 	}
 
-	void ScoreEntry::WriteChunk_1000( const std::shared_ptr<BinaryWriter> &writer )
+	void ScoreEntry::WriteChunk_1000( const boost::shared_ptr<BinaryWriter> &writer )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 1000;
 
 		chunk->Write( Fake );
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void ScoreEntry::ReadChunk_1000( const std::shared_ptr<Chunk> &chunk )
+	void ScoreEntry::ReadChunk_1000( const boost::shared_ptr<Chunk> &chunk )
 	{
 		Fake = chunk->ReadBool();
 		GamerTag_Renamed = chunk->ReadString();

@@ -5,12 +5,12 @@
 namespace CloudberryKingdom
 {
 
-	MenuList::ExpandProxy1::ExpandProxy1( const std::shared_ptr<MenuList> &ml )
+	MenuList::ExpandProxy1::ExpandProxy1( const boost::shared_ptr<MenuList> &ml )
 	{
 		this->ml = ml;
 	}
 
-	void MenuList::ExpandProxy1::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void MenuList::ExpandProxy1::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		ml->Expand();
 	}
@@ -30,9 +30,9 @@ namespace CloudberryKingdom
 	{
 		_ExpandOnGo = value;
 		if ( _ExpandOnGo )
-			OnClick = std::static_pointer_cast<Lambda_1<std::shared_ptr<MenuItem> > >(
-				std::make_shared<ExpandProxy1>(
-					std::static_pointer_cast<MenuList>( shared_from_this() )
+			OnClick = boost::static_pointer_cast<Lambda_1<boost::shared_ptr<MenuItem> > >(
+				boost::make_shared<ExpandProxy1>(
+					boost::static_pointer_cast<MenuList>( shared_from_this() )
 				)
 			);
 		else
@@ -43,8 +43,8 @@ namespace CloudberryKingdom
 	{
 		if ( MyMenuListExpand == 0 || MyMenuListExpand->getCore()->Released )
 		{
-			MyMenuListExpand = std::make_shared<MenuListExpand>( this->Control,
-				std::static_pointer_cast<MenuList>( shared_from_this() )
+			MyMenuListExpand = boost::make_shared<MenuListExpand>( this->Control,
+				boost::static_pointer_cast<MenuList>( shared_from_this() )
 			);
 			Tools::CurGameData->AddGameObject( MyMenuListExpand );
 			MyMenu->Active = false;
@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 		Center( false )
 	{
 		InitializeInstanceFields();
-		MyList = std::vector<std::shared_ptr<MenuItem> >();
+		MyList = std::vector<boost::shared_ptr<MenuItem> >();
 
 		MenuItem::Init( 0, 0 );
 
@@ -121,25 +121,25 @@ namespace CloudberryKingdom
 	{
 		Vector2 Size;
 
-		RightArrow = std::make_shared<QuadClass>();
+		RightArrow = boost::make_shared<QuadClass>();
 		RightArrow->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuRightArrow_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Size;
 		RightArrow->Base.e1 *= Size.X;
 		RightArrow->Base.e2 *= Size.Y;
 
-		LeftArrow = std::make_shared<QuadClass>();
+		LeftArrow = boost::make_shared<QuadClass>();
 		LeftArrow->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuLeftArrow_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Size;
 		LeftArrow->Base.e1 *= Size.X;
 		LeftArrow->Base.e2 *= Size.Y;
 
-		RightArrow_Selected = std::make_shared<QuadClass>();
+		RightArrow_Selected = boost::make_shared<QuadClass>();
 		RightArrow_Selected->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
 		RightArrow_Selected->Base.e1 *= Size.X;
 		RightArrow_Selected->Base.e2 *= Size.Y;
 
-		LeftArrow_Selected = std::make_shared<QuadClass>();
+		LeftArrow_Selected = boost::make_shared<QuadClass>();
 		LeftArrow_Selected->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture );
 		Size = Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
 		LeftArrow_Selected->Base.e1 *= Size.X;
@@ -156,18 +156,18 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void MenuList::AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj )
+	void MenuList::AddItem( const boost::shared_ptr<MenuItem> &item, const boost::shared_ptr<Object> &obj )
 	{
 		MyList.push_back( item );
 		ObjDict.insert( std::make_pair( item, obj ) );
 	}
 
-	std::shared_ptr<MenuItem> MenuList::GetListItem()
+	boost::shared_ptr<MenuItem> MenuList::GetListItem()
 	{
 		return MyList[ ListIndex ];
 	}
 
-	const std::shared_ptr<Object> &MenuList::getCurObj() const
+	const boost::shared_ptr<Object> &MenuList::getCurObj() const
 	{
 		return ObjDict.at( CurMenuItem );
 	}
@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 		return MyList[ index ]->Selectable;
 	}
 
-	void MenuList::SetSelectedItem( const std::shared_ptr<MenuItem> &item )
+	void MenuList::SetSelectedItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		SetIndex( IndexOf( MyList, item ) );
 	}
@@ -257,7 +257,7 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	std::shared_ptr<QuadClass> MenuList::GetSelectedArrow()
+	boost::shared_ptr<QuadClass> MenuList::GetSelectedArrow()
 	{
 		if ( !HoldSelected )
 			return 0;
@@ -309,7 +309,7 @@ namespace CloudberryKingdom
 				if ( ButtonCheck::MouseInUse && ClickForNextItem )
 					if ( ButtonCheck::State( ControllerButtons_A, Control ).Pressed && !ButtonCheck::KeyboardGo() )
 					{
-						std::shared_ptr<QuadClass> SelectedArrow = GetSelectedArrow();
+						boost::shared_ptr<QuadClass> SelectedArrow = GetSelectedArrow();
 						if ( SelectedArrow == RightArrow_Selected )
 							IncrementIndex( 1 );
 						else if ( SelectedArrow == LeftArrow_Selected )
@@ -332,7 +332,7 @@ namespace CloudberryKingdom
 				ListScrollSound->Play();
 	}
 
-	void MenuList::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	void MenuList::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		if ( MyMenu->CurDrawLayer != MyDrawLayer || !Show || ( MyMenuListExpand != 0 && !MyMenuListExpand->getCore()->Released ) )
 			return;
@@ -399,7 +399,7 @@ namespace CloudberryKingdom
 
 	#if defined(WINDOWS)
 				// Highlight selected arrow
-				std::shared_ptr<QuadClass> arrow = 0;
+				boost::shared_ptr<QuadClass> arrow = 0;
 				if ( ButtonCheck::MouseInUse )
 				{
 					Vector2 mouse = Tools::MouseGUIPos( getMyCameraZoom() );
@@ -436,7 +436,7 @@ namespace CloudberryKingdom
 		ListPadding = Vector2( 65, 0 );
 		TotalPadding = Vector2();
 #endif
-		ObjDict = std::map<std::shared_ptr<MenuItem>, std::shared_ptr<Object> >();
+		ObjDict = std::map<boost::shared_ptr<MenuItem>, boost::shared_ptr<Object> >();
 		DoIndexWrapping = true;
 		LastIncrDir = 0;
 		ClickForNextItem = true;

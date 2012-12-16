@@ -3,16 +3,16 @@
 namespace CloudberryKingdom
 {
 
-	void GhostBlock_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void GhostBlock_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		BoxType = BoxTypes_TOP_ONLY;
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_GHOST_BLOCK ) ) );
 		}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 			Masochistic = true;
 	}
 
-	GhostBlock_AutoGen::OnGhostUsedLambda::OnGhostUsedLambda( const std::shared_ptr<GhostBlock> &block, const std::shared_ptr<Level> &level )
+	GhostBlock_AutoGen::OnGhostUsedLambda::OnGhostUsedLambda( const boost::shared_ptr<GhostBlock> &block, const boost::shared_ptr<Level> &level )
 	{
 		this->block = block;
 		this->level = level;
@@ -48,9 +48,9 @@ namespace CloudberryKingdom
 		block->ModOffset( level->getRnd()->RndInt(static_cast<int>(.25f * max), static_cast<int>(.75f * max)) );
 	}
 
-std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_shared<GhostBlock_AutoGen>();
+boost::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = boost::make_shared<GhostBlock_AutoGen>();
 
-	const std::shared_ptr<GhostBlock_AutoGen> &GhostBlock_AutoGen::getInstance()
+	const boost::shared_ptr<GhostBlock_AutoGen> &GhostBlock_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -61,41 +61,41 @@ std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_sha
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> GhostBlock_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> GhostBlock_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<GhostBlock_Parameters> Params = std::make_shared<GhostBlock_Parameters>();
+		boost::shared_ptr<GhostBlock_Parameters> Params = boost::make_shared<GhostBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void GhostBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void GhostBlock_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void GhostBlock_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void GhostBlock_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	std::shared_ptr<ObjectBase> GhostBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> GhostBlock_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get GhostBlock parameters
-		std::shared_ptr<GhostBlock_Parameters> Params = std::static_pointer_cast<GhostBlock_Parameters>( level->getStyle()->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<GhostBlock_Parameters> Params = boost::static_pointer_cast<GhostBlock_Parameters>( level->getStyle()->FindParams( GhostBlock_AutoGen::getInstance() ) );
 
 		int InLength = static_cast<int>( Params->InLength.GetVal( pos ) );
 		int OutLength = static_cast<int>( Params->OutLength.GetVal( pos ) );
 		int Period = InLength + OutLength;
 		int Offset = level->getRnd()->Rnd->Next( Period );
 
-		std::shared_ptr<GhostBlock> gblock = 0;
+		boost::shared_ptr<GhostBlock> gblock = 0;
 		int NumGhosts = 1; // Number of ghosts to create
 		for ( int i = 0; i < NumGhosts; i++ )
 		{
@@ -110,7 +110,7 @@ std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_sha
 			if ( i == 1 )
 				offset = Vector2( 50, 0 );
 
-			gblock = std::static_pointer_cast<GhostBlock>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
+			gblock = boost::static_pointer_cast<GhostBlock>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
 
 			// Box type
 			if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )
@@ -136,8 +136,8 @@ std::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = std::make_sha
 			//if (i == 1) gblock.Offset = Offset + (int)((InLength + OutLength) * .5f);
 			//if (i == 2) gblock.Offset = Offset + (int)((InLength + OutLength) * .666f);
 
-			std::shared_ptr<GhostBlock> block = gblock;
-			block->getCore()->GenData.OnUsed = std::make_shared<OnGhostUsedLambda>(block, level);
+			boost::shared_ptr<GhostBlock> block = gblock;
+			block->getCore()->GenData.OnUsed = boost::make_shared<OnGhostUsedLambda>(block, level);
 
 			// Box type
 			if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_TOP_ONLY )

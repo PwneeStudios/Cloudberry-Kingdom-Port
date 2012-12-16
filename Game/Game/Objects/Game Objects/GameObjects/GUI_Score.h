@@ -29,15 +29,15 @@ namespace CloudberryKingdom
 		int Score;
 		void SetScore( int Score );
 
-		std::shared_ptr<EzText> ScoreText;
+		boost::shared_ptr<EzText> ScoreText;
 		void UpdateScoreText();
 
 		bool DoSlideIn;
 	
 		GUI_Score();
-		std::shared_ptr<GUI_Score> GUI_Score_Construct();
+		boost::shared_ptr<GUI_Score> GUI_Score_Construct();
 		GUI_Score( bool SlideIn );
-		std::shared_ptr<GUI_Score> GUI_Score_Construct( bool SlideIn );
+		boost::shared_ptr<GUI_Score> GUI_Score_Construct( bool SlideIn );
 
 	
 		void DoInit( bool SlideIn );
@@ -58,11 +58,11 @@ namespace CloudberryKingdom
 		struct RunningCampaignScoreLambda : public PlayerIntLambda
 		{
 		
-			virtual int Apply( const std::shared_ptr<PlayerData> &p );
+			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 		};
 	
 		GUI_CampaignScore();
-		std::shared_ptr<GUI_CampaignScore> GUI_CampaignScore_Construct();
+		boost::shared_ptr<GUI_CampaignScore> GUI_CampaignScore_Construct();
 	
 		virtual int GetScore();
 

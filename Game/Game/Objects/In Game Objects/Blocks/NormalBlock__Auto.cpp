@@ -3,20 +3,20 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<Wall> NormalBlock_Parameters::SetWall( LevelGeometry geometry )
+	boost::shared_ptr<Wall> NormalBlock_Parameters::SetWall( LevelGeometry geometry )
 	{
 		MyWall = Wall::MakeWall( geometry );
 		return MyWall;
 	}
 
-	void NormalBlock_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void NormalBlock_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( .7f );
 		}
@@ -34,9 +34,9 @@ namespace CloudberryKingdom
 		DoFinalPlats = true;
 	}
 
-std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_shared<NormalBlock_AutoGen>();
+boost::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = boost::make_shared<NormalBlock_AutoGen>();
 
-	const std::shared_ptr<NormalBlock_AutoGen> &NormalBlock_AutoGen::getInstance()
+	const boost::shared_ptr<NormalBlock_AutoGen> &NormalBlock_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -48,61 +48,61 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> NormalBlock_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> NormalBlock_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<NormalBlock_Parameters> Params = std::make_shared<NormalBlock_Parameters>();
+		boost::shared_ptr<NormalBlock_Parameters> Params = boost::make_shared<NormalBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void NormalBlock_AutoGen::MakeWall( const std::shared_ptr<Level> &level )
+	void NormalBlock_AutoGen::MakeWall( const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<CloudberryKingdom::NormalBlock_Parameters> Params = GetParams( level );
+		boost::shared_ptr<CloudberryKingdom::NormalBlock_Parameters> Params = GetParams( level );
 
 		level->AddBlock( Params->MyWall );
 		Params->MyWall.reset();
 	}
 
-	std::shared_ptr<NormalBlock_Parameters> NormalBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
+	boost::shared_ptr<NormalBlock_Parameters> NormalBlock_AutoGen::GetParams( const boost::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		return boost::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
 	}
 
-	void NormalBlock_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void NormalBlock_AutoGen::PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> Params = boost::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
 
 		if ( Params->MyWall != 0 )
 			MakeWall( level );
 	}
 
-	void NormalBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void NormalBlock_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void NormalBlock_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void NormalBlock_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	std::shared_ptr<ObjectBase> NormalBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> NormalBlock_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		AutoGen::CreateAt( level, pos );
 
-		std::shared_ptr<StyleData> style = level->getStyle();
+		boost::shared_ptr<StyleData> style = level->getStyle();
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> Params = boost::static_pointer_cast<NormalBlock_Parameters>( style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( !Params->Make )
 			return 0;
 
-		std::shared_ptr<NormalBlock> block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-		std::shared_ptr<BlockData> core = block->getBlockCore();
+		boost::shared_ptr<NormalBlock> block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		boost::shared_ptr<BlockData> core = block->getBlockCore();
 		block->Init( pos, Vector2( 50, 50 ), level->getMyTileSetInfo() );
 
 		core->GenData.RemoveIfUnused = true;
@@ -119,21 +119,21 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 		return block;
 	}
 
-	std::shared_ptr<ObjectBase> NormalBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> NormalBlock_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get NormalBlock parameters
-		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> Params = boost::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return 0;
 
-		std::shared_ptr<NormalBlock> block;
+		boost::shared_ptr<NormalBlock> block;
 		Vector2 size = Vector2();
 		Vector2 offset = Vector2();
 
@@ -152,7 +152,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
 
-				block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( pos + offset, size, level->getMyTileSetInfo() );
 				block->Extend( Side_BOTTOM, block->getBox()->BL.Y - level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -167,7 +167,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );
 
-				block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( pos + offset, size, level->getMyTileSetInfo() );
 				block->MakeTopOnly();
 
@@ -187,7 +187,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
 
-					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_BOTTOM, block->getBox()->BL.Y - level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -206,7 +206,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 					if ( pos.X - size.X < BL.X )
 						offset.X += BL.X - ( pos.X - size.X );
 
-					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_TOP, block->getBox()->TR.Y + level->CurMakeData->PieceSeed->ExtraBlockLength );
 
@@ -227,7 +227,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.X ),
 									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ) );
 
-					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_RIGHT;
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_LEFT, block->getBox()->BL.X - level->CurMakeData->PieceSeed->ExtraBlockLength );
@@ -240,7 +240,7 @@ std::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = std::make_s
 					offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) + size.X ),
 									  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ) );
 
-					block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBlockCore()->MyOrientation = PieceQuad::Orientation_ROTATE_LEFT;
 					block->Init( pos + offset, size, level->getMyTileSetInfo() );
 					block->Extend( Side_RIGHT, block->getBox()->TR.X + level->CurMakeData->PieceSeed->ExtraBlockLength );

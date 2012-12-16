@@ -12,19 +12,19 @@ namespace CloudberryKingdom
 	struct GUI_Lives : public GUI_Panel
 	{
 	
-		std::shared_ptr<StringBuilder> MyString;
+		boost::shared_ptr<StringBuilder> MyString;
 
 	
 		const int &getLives() const;
 	
-		std::shared_ptr<GUI_LivesLeft> MyGUI_Lives;
+		boost::shared_ptr<GUI_LivesLeft> MyGUI_Lives;
 
 		/// <summary>
 		/// Return a string representation of the number of Lives
 		/// </summary>
 		/// <returns></returns>
 	
-		std::shared_ptr<StringBuilder> BuildString();
+		boost::shared_ptr<StringBuilder> BuildString();
 
 	
 		bool AddedOnce;
@@ -38,12 +38,12 @@ namespace CloudberryKingdom
 		const Vector2 getApparentPos() const;
 
 
-		std::shared_ptr<QuadClass> Bob_Renamed;
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<QuadClass> Bob_Renamed;
+		boost::shared_ptr<EzText> Text;
 		void UpdateLivesText();
 	
-		GUI_Lives( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
-		std::shared_ptr<GUI_Lives> GUI_Lives_Construct( const std::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
+		GUI_Lives( const boost::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
+		boost::shared_ptr<GUI_Lives> GUI_Lives_Construct( const boost::shared_ptr<GUI_LivesLeft> &GUI_Lives_Renamed );
 
 		virtual void Init();
 

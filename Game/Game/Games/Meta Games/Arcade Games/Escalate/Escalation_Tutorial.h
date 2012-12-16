@@ -30,10 +30,10 @@ namespace CloudberryKingdom
 		struct PreventThingsHelper : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			PreventThingsHelper( const std::shared_ptr<Escalation_Tutorial> &et );
+			PreventThingsHelper( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -42,10 +42,10 @@ namespace CloudberryKingdom
 		struct TitleProxy : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			TitleProxy( const std::shared_ptr<Escalation_Tutorial> &et );
+			TitleProxy( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -54,10 +54,10 @@ namespace CloudberryKingdom
 		struct TutorialOrSkipProxy : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			TutorialOrSkipProxy( const std::shared_ptr<Escalation_Tutorial> &et );
+			TutorialOrSkipProxy( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -66,11 +66,11 @@ namespace CloudberryKingdom
 		struct NextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			NextTutorialHelper( const std::shared_ptr<Escalation_Tutorial> &et, const std::shared_ptr<GUI_Text> &text );
+			NextTutorialHelper( const boost::shared_ptr<Escalation_Tutorial> &et, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -79,11 +79,11 @@ namespace CloudberryKingdom
 		struct TextKillHelper : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			TextKillHelper( const std::shared_ptr<Escalation_Tutorial> &et, const std::shared_ptr<GUI_Text> &text );
+			TextKillHelper( const boost::shared_ptr<Escalation_Tutorial> &et, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -92,10 +92,10 @@ namespace CloudberryKingdom
 		struct ReadyProxy : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			ReadyProxy( const std::shared_ptr<Escalation_Tutorial> &et );
+			ReadyProxy( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -104,10 +104,10 @@ namespace CloudberryKingdom
 		struct TutorialHelperReadyGo : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			TutorialHelperReadyGo( const std::shared_ptr<Escalation_Tutorial> &et );
+			TutorialHelperReadyGo( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -116,10 +116,10 @@ namespace CloudberryKingdom
 		struct EndProxy : public Lambda
 		{
 		
-			std::shared_ptr<Escalation_Tutorial> et;
+			boost::shared_ptr<Escalation_Tutorial> et;
 
 		
-			EndProxy( const std::shared_ptr<Escalation_Tutorial> &et );
+			EndProxy( const boost::shared_ptr<Escalation_Tutorial> &et );
 
 			void Apply();
 		};
@@ -143,9 +143,9 @@ namespace CloudberryKingdom
 		bool SoundOnKill;
 
 	
-		std::shared_ptr<Challenge_Escalation> Escalation;
+		boost::shared_ptr<Challenge_Escalation> Escalation;
 	
-		Escalation_Tutorial( const std::shared_ptr<Challenge_Escalation> &Escalation );
+		Escalation_Tutorial( const boost::shared_ptr<Challenge_Escalation> &Escalation );
 
 		virtual void OnAdd();
 

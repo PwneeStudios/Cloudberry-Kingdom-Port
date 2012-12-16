@@ -5,12 +5,12 @@
 
 namespace CloudberryKingdom
 {
-	struct PlayerIntLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , int>
+	struct PlayerIntLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , int>
 	{
 	
 		PlayerIntLambda();
 
-		virtual int Apply( const std::shared_ptr<PlayerData> &p );
+		virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 	};
 
 	struct UserPowers
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		bool ResolutionPreferenceSet;
 
 	
-		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Serialize( const boost::shared_ptr<BinaryWriter> &writer );
 
 		virtual void Deserialize( std::vector<unsigned char> Data );
 
@@ -69,12 +69,12 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		struct SaveRezAndKeysLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
+		struct SaveRezAndKeysLambda : public Lambda_1<boost::shared_ptr<BinaryWriter> >
 		{
 		
 			SaveRezAndKeysLambda();
 
-			void Apply( const std::shared_ptr<BinaryWriter> &writer );
+			void Apply( const boost::shared_ptr<BinaryWriter> &writer );
 		};
 
 	
@@ -87,60 +87,60 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct GetGroupGamerTagNameLength : public LambdaFunc_1<std::shared_ptr<StringBuilder>, float>
+		struct GetGroupGamerTagNameLength : public LambdaFunc_1<boost::shared_ptr<StringBuilder>, float>
 		{
 		
-			float Apply( const std::shared_ptr<StringBuilder> &name );
+			float Apply( const boost::shared_ptr<StringBuilder> &name );
 		};
 
 	
-		struct AnyAwardmentLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+		struct AnyAwardmentLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , bool>
 		{
 		
-			std::shared_ptr<Awardment> award;
+			boost::shared_ptr<Awardment> award;
 		
-			AnyAwardmentLambda( const std::shared_ptr<Awardment> &award );
+			AnyAwardmentLambda( const boost::shared_ptr<Awardment> &award );
 
-			bool Apply( const std::shared_ptr<PlayerData> &player );
+			bool Apply( const boost::shared_ptr<PlayerData> &player );
 		};
 
 	
-		struct AnyBoughtLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+		struct AnyBoughtLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , bool>
 		{
 		
-			std::shared_ptr<Buyable> item;
+			boost::shared_ptr<Buyable> item;
 		
-			AnyBoughtLambda( const std::shared_ptr<Buyable> &item );
+			AnyBoughtLambda( const boost::shared_ptr<Buyable> &item );
 
-			bool Apply( const std::shared_ptr<PlayerData> &player );
+			bool Apply( const boost::shared_ptr<PlayerData> &player );
 		};
 
 	
 		struct BankLambda : public PlayerIntLambda
 		{
 		
-			virtual int Apply( const std::shared_ptr<PlayerData> &p );
+			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 		};
 
 	
-		struct NotAllAwardedLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+		struct NotAllAwardedLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , bool>
 		{
 		
-			std::shared_ptr<Awardment> award;
+			boost::shared_ptr<Awardment> award;
 		
-			NotAllAwardedLambda( const std::shared_ptr<Awardment> &award );
+			NotAllAwardedLambda( const boost::shared_ptr<Awardment> &award );
 
-			bool Apply( const std::shared_ptr<PlayerData> &player );
+			bool Apply( const boost::shared_ptr<PlayerData> &player );
 		};
 
 	
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-		struct ExistingPlayerFindLambda : public LambdaFunc_1<std::shared_ptr<PlayerData> , bool>
+		struct ExistingPlayerFindLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , bool>
 		{
 		
 			ExistingPlayerFindLambda();
 
-			bool Apply( const std::shared_ptr<PlayerData> &player );
+			bool Apply( const boost::shared_ptr<PlayerData> &player );
 		};
 #endif
 
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		static void SaveRezAndKeys();
 
 	
-		static void _SaveRezAndKeys( const std::shared_ptr<BinaryWriter> &writer );
+		static void _SaveRezAndKeys( const boost::shared_ptr<BinaryWriter> &writer );
 
 		static RezData d;
 	
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 		const static int &getCoinsSpent();
 		static void setCoinsSpent( const int &value );
 
-		static std::shared_ptr<_SavePlayerData> SavePlayerData;
+		static boost::shared_ptr<_SavePlayerData> SavePlayerData;
 #if defined(PC_VERSION)
 	
 		static std::wstring _DefaultName;
@@ -194,10 +194,10 @@ namespace CloudberryKingdom
 		static int GetFirstPlayer();
 
 		static int NumPlayers;
-		static std::vector<std::shared_ptr<PlayerData> > Players;
+		static std::vector<boost::shared_ptr<PlayerData> > Players;
 
 	
-		static int length( std::vector<std::shared_ptr<StringBuilder> > &names );
+		static int length( std::vector<boost::shared_ptr<StringBuilder> > &names );
 
 		/// <summary>
 		/// Return a string representing the names of all players playing
@@ -211,17 +211,17 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Returns true if any of the current players has been awarded the specified awardment.
 		/// </summary>
-		static bool Awarded( const std::shared_ptr<Awardment> &award );
+		static bool Awarded( const boost::shared_ptr<Awardment> &award );
 
 		/// <summary>
 		/// Returns true if any of the current players has been bought the specified hat.
 		/// </summary>
-		static bool Bought( const std::shared_ptr<Buyable> &item );
+		static bool Bought( const boost::shared_ptr<Buyable> &item );
 
 		/// <summary>
 		/// Returns true if any of the current players has been bought the specified hat, or it's free.
 		/// </summary>
-		static bool BoughtOrFree( const std::shared_ptr<Buyable> &item );
+		static bool BoughtOrFree( const boost::shared_ptr<Buyable> &item );
 
 		/// <summary>
 		/// The combined bank accounts of all current players.
@@ -230,12 +230,12 @@ namespace CloudberryKingdom
 
 		static void DeductCost( int Cost );
 
-		static void GiveBoughtItem( const std::shared_ptr<Buyable> &buyable );
+		static void GiveBoughtItem( const boost::shared_ptr<Buyable> &buyable );
 
 		/// <summary>
 		/// Returns true if any of the current players has NOT been awarded the specified awardment.
 		/// </summary>
-		static bool NotAllAwarded( const std::shared_ptr<Awardment> &award );
+		static bool NotAllAwarded( const boost::shared_ptr<Awardment> &award );
 
 		/// <summary>
 		/// Returns the sum of all player's current game score.
@@ -247,9 +247,9 @@ namespace CloudberryKingdom
 		/// </summary>
 		static int GetGameScore_WithTemporary();
 
-		static int PlayerSum( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f );
+		static int PlayerSum( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f );
 
-		static int PlayerMax( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f );
+		static int PlayerMax( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f );
 
 		/// <summary>
 		/// Returns the total coins gotten in a level by all players.
@@ -259,29 +259,29 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A list of all players that exist and are logged in.
 		/// </summary>
-		const static std::vector<std::shared_ptr<PlayerData> > &getLoggedInPlayers();
+		const static std::vector<boost::shared_ptr<PlayerData> > &getLoggedInPlayers();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 #endif
 		/// <summary>
 		/// A list of all players currently existing.
 		/// </summary>
-		const static std::vector<std::shared_ptr<PlayerData> > &getExistingPlayers();
-		static std::vector<std::shared_ptr<PlayerData> > _ExistingPlayers;
+		const static std::vector<boost::shared_ptr<PlayerData> > &getExistingPlayers();
+		static std::vector<boost::shared_ptr<PlayerData> > _ExistingPlayers;
 
 		/// <summary>
 		/// A list of all players currently alive.
 		/// </summary>
-		const static std::vector<std::shared_ptr<PlayerData> > &getAlivePlayers();
-		static std::vector<std::shared_ptr<PlayerData> > _AlivePlayers;
+		const static std::vector<boost::shared_ptr<PlayerData> > &getAlivePlayers();
+		static std::vector<boost::shared_ptr<PlayerData> > _AlivePlayers;
 
 #if defined(PC_VERSION)
-		const static std::shared_ptr<PlayerData> &getPlayer();
+		const static boost::shared_ptr<PlayerData> &getPlayer();
 #endif
 
-		static std::shared_ptr<PlayerData> Get( int i );
-		static std::shared_ptr<PlayerData> Get( PlayerIndex Index );
-		static std::shared_ptr<PlayerData> Get( const std::shared_ptr<Bob> &bob );
+		static boost::shared_ptr<PlayerData> Get( int i );
+		static boost::shared_ptr<PlayerData> Get( PlayerIndex Index );
+		static boost::shared_ptr<PlayerData> Get( const boost::shared_ptr<Bob> &bob );
 
 		static int Score_Blobs, Score_Coins, Score_Attempts, Score_Time;
 		static void CalcScore( StatGroup group );
@@ -308,7 +308,7 @@ namespace CloudberryKingdom
 
 		static void KillPlayer( PlayerIndex PIndex );
 
-		static void ReviveBob( const std::shared_ptr<Bob> &bob );
+		static void ReviveBob( const boost::shared_ptr<Bob> &bob );
 
 		static void RevivePlayer( PlayerIndex PIndex );
 

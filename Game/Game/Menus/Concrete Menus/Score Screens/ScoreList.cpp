@@ -55,13 +55,13 @@ namespace CloudberryKingdom
 		this->DefaultValue = DefaultValue;
 		this->Capacity = Capacity;
 
-		Scores = std::vector<std::shared_ptr<ScoreEntry> >( Capacity );
+		Scores = std::vector<boost::shared_ptr<ScoreEntry> >( Capacity );
 
 		for ( int i = 0; i < Capacity; i++ )
-			Scores.push_back( std::make_shared<ScoreEntry>( DefaultValue ) );
+			Scores.push_back( boost::make_shared<ScoreEntry>( DefaultValue ) );
 	}
 
-	bool ScoreList::Qualifies( const std::shared_ptr<ScoreEntry> &Entry )
+	bool ScoreList::Qualifies( const boost::shared_ptr<ScoreEntry> &Entry )
 	{
 		return static_cast<int>( Scores.size() ) < Capacity || Entry->Value > getBottom();
 	}
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		return Scores[ Scores.size() - 1 ]->Value;
 	}
 
-	std::wstring ScoreList::ScoreString( const std::shared_ptr<ScoreEntry> &score, int Length )
+	std::wstring ScoreList::ScoreString( const boost::shared_ptr<ScoreEntry> &score, int Length )
 	{
 		score->MyFormat = MyFormat;
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		return RankStr + score->ToString( Length - RankStr.length() );
 	}
 
-	void ScoreList::Add( const std::shared_ptr<ScoreEntry> &score )
+	void ScoreList::Add( const boost::shared_ptr<ScoreEntry> &score )
 	{
 		if ( !Qualifies( score ) )
 			return;
@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		//	Scores.RemoveRange( Scores.size() - 1, Scores.size() - Capacity );
 	}
 
-	int ScoreList::ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 )
+	int ScoreList::ScoreCompare( const boost::shared_ptr<ScoreEntry> &score1, const boost::shared_ptr<ScoreEntry> &score2 )
 	{
 		return score2->Value - score1->Value;
 	}

@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		virtual void CalculateKeepUnused( float JumpLevel );
 
 	
-		DownData( const std::shared_ptr<Rand> &Rnd );
+		DownData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 	};

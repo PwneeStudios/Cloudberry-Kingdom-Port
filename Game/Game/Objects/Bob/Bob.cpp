@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		Bob::ImmortalLength = 55;
 
 		Bob::JumpSound_Default = 0; Bob::DieSound_Default = 0;
-		std::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
+		boost::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
 		Bob::HeroTypes = VecFromArray( tempVector );
 
 		Bob::GuideActivated = false;
@@ -53,11 +53,11 @@ namespace CloudberryKingdom
 	bool Bob::ShowCorpseAfterExplode;
 	int Bob::ImmortalLength;
 
-	std::shared_ptr<EzSound> Bob::JumpSound_Default, Bob::DieSound_Default;
-	std::vector<std::shared_ptr<BobPhsx> > Bob::HeroTypes;
+	boost::shared_ptr<EzSound> Bob::JumpSound_Default, Bob::DieSound_Default;
+	std::vector<boost::shared_ptr<BobPhsx> > Bob::HeroTypes;
 
 	bool Bob::GuideActivated;
-	std::shared_ptr<QuadClass> Bob::GuideQuad;
+	boost::shared_ptr<QuadClass> Bob::GuideQuad;
 
 	int Bob::GuideLength;
 	float Bob::Guide_h;
@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 			MyRecord.reset();
 
 		if ( MyBobLinks.size() > 0 )
-			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
+			for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
 				( *link )->Release();
 		MyBobLinks.clear();
 
@@ -137,12 +137,12 @@ namespace CloudberryKingdom
 			temp.reset();
 	}
 
-	void Bob::SetObject( const std::shared_ptr<ObjectClass> &obj, bool boxesOnly )
+	void Bob::SetObject( const boost::shared_ptr<ObjectClass> &obj, bool boxesOnly )
 	{
 		if ( PlayerObject != 0 )
 			PlayerObject->Release();
 
-		PlayerObject = std::make_shared<ObjectClass>( obj, BoxesOnly, false );
+		PlayerObject = boost::make_shared<ObjectClass>( obj, BoxesOnly, false );
 		ObjectClass_PostConstruct_3params( PlayerObject, obj, BoxesOnly, false );
 
 		Vector2 size = PlayerObject->BoxList[ 0 ]->Size();
@@ -170,16 +170,16 @@ namespace CloudberryKingdom
 
 		if ( CanHaveHat )
 		{
-			std::shared_ptr<CloudberryKingdom::BaseQuad> head = PlayerObject->FindQuad( _T( "Head" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> head = PlayerObject->FindQuad( _T( "Head" ) );
 			//if (null != head) head.Show = scheme.HatData.DrawHead;
 			if ( 0 != head )
 				head->Show = false;
 
-			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
+			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
 			{
 				if ( Contains( ( *quad )->Name, _T( "Hat_" ) ) )
 				{
-					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
+					boost::shared_ptr<Quad> _Quad = boost::dynamic_pointer_cast<Quad>( *quad );
 					if ( CompareIgnoreCase( ( *quad )->Name, scheme.HatData->QuadName ) == 0 )
 					{
 						( *quad )->Show = scheme.HatData->DrawSelf;
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 
 				if ( Contains( ( *quad )->Name, _T( "Facial_" ) ) )
 				{
-					std::shared_ptr<Quad> _Quad = std::dynamic_pointer_cast<Quad>( *quad );
+					boost::shared_ptr<Quad> _Quad = boost::dynamic_pointer_cast<Quad>( *quad );
 
 					if ( !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && CompareIgnoreCase( ( *quad )->Name, scheme.BeardData->QuadName ) == 0 )
 					{
@@ -217,15 +217,15 @@ namespace CloudberryKingdom
 		}
 
 
-		std::shared_ptr<CloudberryKingdom::BaseQuad> q = PlayerObject->FindQuad( _T( "MainQuad" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> q = PlayerObject->FindQuad( _T( "MainQuad" ) );
 		if ( q != 0 )
 		{
 			q->setMyMatrix( scheme.SkinColor->M );
 
-			std::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( _T( "Wings_Front" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( _T( "Wings_Front" ) );
 			if ( wf != 0 )
 				wf->setMyMatrix( scheme.SkinColor->M );
-			std::shared_ptr<CloudberryKingdom::BaseQuad> wb = PlayerObject->FindQuad( _T( "Wings_Back" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> wb = PlayerObject->FindQuad( _T( "Wings_Back" ) );
 			if ( wb != 0 )
 				wb->setMyMatrix( scheme.SkinColor->M );
 		}
@@ -247,7 +247,7 @@ namespace CloudberryKingdom
 			MyCape->MyQuad->Quad_Renamed.MyEffect = scheme.CapeColor->Effect;
 
 			if ( scheme.CapeColor->ModObject != 0 )
-				scheme.CapeColor->ModObject->Apply( std::static_pointer_cast<Bob>( shared_from_this() ) );
+				scheme.CapeColor->ModObject->Apply( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 			if ( scheme.CapeColor->Clr.A == 0 || scheme.CapeOutlineColor->Clr.A == 0 )
 				ShowCape = false;
@@ -263,7 +263,7 @@ namespace CloudberryKingdom
 		ControlFunc.reset();
 	}
 
-	const std::shared_ptr<PlayerData> Bob::getMyPlayerData() const
+	const boost::shared_ptr<PlayerData> Bob::getMyPlayerData() const
 	{
 		return PlayerManager::Get( MyPlayerIndex );
 	}
@@ -275,13 +275,13 @@ namespace CloudberryKingdom
 		return Vector2( Box->Current->Center.X, Box->BL.Y );
 	}
 
-	std::shared_ptr<AABox> Bob::GetBox( int DifficultyLevel )
+	boost::shared_ptr<AABox> Bob::GetBox( int DifficultyLevel )
 	{
 		int index = CoreMath::RestrictVal( 0, Boxes.size() - 1, DifficultyLevel );
 		return Boxes[ index ];
 	}
 
-	Bob::Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly ) :
+	Bob::Bob( const boost::shared_ptr<BobPhsx> &type, bool boxesOnly ) :
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
 		ImmortalCountDown( 0 ),
@@ -323,7 +323,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		MyHeroType = type;
-		std::shared_ptr<Bob> bob = type->Prototype;
+		boost::shared_ptr<Bob> bob = type->Prototype;
 
 		CanHaveCape = bob->CanHaveCape;
 		CanHaveHat = bob->CanHaveHat;
@@ -342,15 +342,15 @@ namespace CloudberryKingdom
 		PlayerObject->Update( 0 );
 		PlayerObject->PlayUpdate( 0 );
 
-		Box = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 1 ]->Size() / 2 );
-		Box2 = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
+		Box = boost::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 1 ]->Size() / 2 );
+		Box2 = boost::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
 		// Pulled out to avoid using shared_from_this inside constructor.
 		//SetHeroPhsx( MyHeroType );
 		//SetColorScheme( bob->MyColorScheme );
 	}
 
-	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+	Bob::Bob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad ) :
 		NewY( 0 ),
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
@@ -396,7 +396,7 @@ namespace CloudberryKingdom
 		//LoadFromFile( file, EffectWad, TextureWad, BobPhsxNormal::getInstance() );
 	}
 
-	Bob::Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
+	Bob::Bob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
 		NewY( 0 ),
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
@@ -443,7 +443,7 @@ namespace CloudberryKingdom
 		//LoadFromFile( file, EffectWad, TextureWad, MyHeroType );
 	}
 
-	Bob::Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
+	Bob::Bob( const boost::shared_ptr<ObjectClass> &obj, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats ) :
 		ShowCape( false ),
 		HeldObjectIteration( 0 ),
 		ImmortalCountDown( 0 ),
@@ -488,19 +488,19 @@ namespace CloudberryKingdom
 		_Load( obj, EffectWad, TextureWad, MyHeroType );
 	}
 
-	void Bob::LoadFromFile( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType )
+	void Bob::LoadFromFile( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &HeroType )
 	{
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		//boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
 
 		Vector2 size = Vector2( 1, 2 );
 		float ratio = size.Y / size.X;
 		int width = Tools::TheGame->Resolution.Bob_Renamed.X;
 		int height = static_cast<int>( width * ratio );
 
-		std::shared_ptr<ObjectClass> obj = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		boost::shared_ptr<ObjectClass> obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 
 		obj->ReadFile( reader, EffectWad, TextureWad );
@@ -514,13 +514,13 @@ namespace CloudberryKingdom
 		_Load( obj, EffectWad, TextureWad, MyHeroType );
 	}
 
-	void Bob::_Load( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType )
+	void Bob::_Load( const boost::shared_ptr<ObjectClass> &obj, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &HeroType )
 	{
 		this->PlayerObject = obj;
 
 		this->MyHeroType = HeroType;
 
-		CoreData = std::make_shared<ObjectData>();
+		CoreData = boost::make_shared<ObjectData>();
 		getCore()->Show = true;
 
 		JumpSound = JumpSound_Default = Tools::SoundWad->FindByName( _T( "Jump5" ) );
@@ -538,16 +538,16 @@ namespace CloudberryKingdom
 		PlayerObject->Update( 0 );
 		PlayerObject->PlayUpdate( 0 );
 
-		Box = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 1 ]->Size() / 2 );
-		Box2 = std::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
+		Box = boost::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 1 ]->Size() / 2 );
+		Box2 = boost::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
-		MyPhsx = std::make_shared<BobPhsx>();
-		MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
+		MyPhsx = boost::make_shared<BobPhsx>();
+		MyPhsx->Init( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
 	}
 
-	void Bob::SwitchHero( const std::shared_ptr<BobPhsx> &hero )
+	void Bob::SwitchHero( const boost::shared_ptr<BobPhsx> &hero )
 	{
 		Vector2 HoldVel = MyPhsx->getVel();
 
@@ -563,7 +563,7 @@ namespace CloudberryKingdom
 
 		//MakeCape();
 
-		SetColorScheme( PlayerManager::Get( std::static_pointer_cast<Bob>( shared_from_this() ) )->ColorScheme_Renamed );
+		SetColorScheme( PlayerManager::Get( boost::static_pointer_cast<Bob>( shared_from_this() ) )->ColorScheme_Renamed );
 
 		MyPhsx->setVel( HoldVel );
 
@@ -572,14 +572,14 @@ namespace CloudberryKingdom
 		//PhsxStep2();
 	}
 
-	void Bob::SetHeroPhsx( const std::shared_ptr<BobPhsx> &type )
+	void Bob::SetHeroPhsx( const boost::shared_ptr<BobPhsx> &type )
 	{
 		MyCapeType = CapeType_NORMAL;
 
 		MyPhsx = type->Clone();
 		//MyPhsx = new BobPhsxNormal();
 
-		MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
+		MyPhsx->Init( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 		MakeCape( MyCapeType );
 	}
 
@@ -587,18 +587,18 @@ namespace CloudberryKingdom
 	{
 		if ( MyCape == 0 && !BoxesOnly && CanHaveCape )
 		{
-			MyCape = std::make_shared<Cape>( std::static_pointer_cast<Bob>( shared_from_this() ), CapeType, MyPhsx );
+			MyCape = boost::make_shared<Cape>( boost::static_pointer_cast<Bob>( shared_from_this() ), CapeType, MyPhsx );
 			MyCape->Reset();
 		}
 	}
 
-	void Bob::Init( bool BoxesOnly, PhsxData StartData, const std::shared_ptr<GameData> &game )
+	void Bob::Init( bool BoxesOnly, PhsxData StartData, const boost::shared_ptr<GameData> &game )
 	{
 		getCore()->Show = true;
 
 		HeldObjectIteration = 0;
 
-		std::shared_ptr<BobPhsx> type = game->DefaultHeroType;
+		boost::shared_ptr<BobPhsx> type = game->DefaultHeroType;
 		if ( getCore()->MyLevel != 0 )
 			type = getCore()->MyLevel->DefaultHeroType;
 		MyHeroType = type;
@@ -607,8 +607,8 @@ namespace CloudberryKingdom
 
 		if ( CharacterSelect2 )
 		{
-			MyPhsx = std::make_shared<BobPhsxCharSelect>();
-			MyPhsx->Init( std::static_pointer_cast<Bob>( shared_from_this() ) );
+			MyPhsx = boost::make_shared<BobPhsxCharSelect>();
+			MyPhsx->Init( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 			MakeCape( CapeType_NORMAL );
 		}
 		else
@@ -629,7 +629,7 @@ namespace CloudberryKingdom
 
 		if ( PlayerObject == 0 )
 		{
-			PlayerObject = std::make_shared<ObjectClass>( type->Prototype->PlayerObject, BoxesOnly, false );
+			PlayerObject = boost::make_shared<ObjectClass>( type->Prototype->PlayerObject, BoxesOnly, false );
 			ObjectClass_PostConstruct_3params( PlayerObject, type->Prototype->PlayerObject, BoxesOnly, false );
 
 			PlayerObject->FinishLoading();
@@ -670,7 +670,7 @@ namespace CloudberryKingdom
 		SetColorScheme( MyColorScheme );
 	}
 
-	std::shared_ptr<PlayerData> Bob::GetPlayerData()
+	boost::shared_ptr<PlayerData> Bob::GetPlayerData()
 	{
 		if ( !IsPlayer )
 			return 0;
@@ -683,12 +683,12 @@ namespace CloudberryKingdom
 		return getCore()->MyLevel->PlayMode == 0 && !CompControl && !getCore()->MyLevel->Watching && !Dead && !Dying;
 	}
 
-	const std::shared_ptr<PlayerStats> &Bob::getMyStats() const
+	const boost::shared_ptr<PlayerStats> &Bob::getMyStats() const
 	{
 		return PlayerManager::Get( static_cast<int>( MyPlayerIndex ) )->getStats();
 	}
 
-	const std::shared_ptr<PlayerStats> &Bob::getMyTempStats() const
+	const boost::shared_ptr<PlayerStats> &Bob::getMyTempStats() const
 	{
 		return PlayerManager::Get( static_cast<int>( MyPlayerIndex ) )->TempStats;
 	}
@@ -703,12 +703,12 @@ namespace CloudberryKingdom
 		Die( DeathType, 0, false, true );
 	}
 
-	void Bob::Die( BobDeathType DeathType, const std::shared_ptr<ObjectBase> &KillingObject )
+	void Bob::Die( BobDeathType DeathType, const boost::shared_ptr<ObjectBase> &KillingObject )
 	{
 		Die( DeathType, KillingObject, false, true );
 	}
 
-	void Bob::Die( BobDeathType DeathType, const std::shared_ptr<ObjectBase> &KillingObject, bool ForceDeath, bool DoAnim )
+	void Bob::Die( BobDeathType DeathType, const boost::shared_ptr<ObjectBase> &KillingObject, bool ForceDeath, bool DoAnim )
 	{
 		if ( Dying )
 			return;
@@ -745,7 +745,7 @@ namespace CloudberryKingdom
 		if ( DoAnim )
 			MyPhsx->Die( DeathType );
 
-		Tools::CurGameData->BobDie( getCore()->MyLevel, std::static_pointer_cast<Bob>( shared_from_this() ) );
+		Tools::CurGameData->BobDie( getCore()->MyLevel, boost::static_pointer_cast<Bob>( shared_from_this() ) );
 	}
 
 	const bool Bob::getCanDie() const
@@ -784,7 +784,7 @@ namespace CloudberryKingdom
 		// if so, officially declare the player dead.
 		if ( !Dead && ( ( IsVisible() && getCore()->Show && getCore()->Data.Position.Y < getCore()->MyLevel->getMainCamera()->BL.Y - getGame()->DoneDyingDistance ) || (!IsVisible() && DeathCount > getGame()->DoneDyingCount) ) )
 		{
-			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, std::static_pointer_cast<Bob>( shared_from_this() ) );
+			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, boost::static_pointer_cast<Bob>( shared_from_this() ) );
 			Dead = true;
 		}
 
@@ -814,7 +814,7 @@ namespace CloudberryKingdom
 					Vector2 Destination = getCore()->MyLevel->getMainCamera()->Data.Position;
 					if ( getCore()->MyLevel->Bobs.size() > 1 )
 					{
-						std::shared_ptr<Bob> HighestBob = 0;
+						boost::shared_ptr<Bob> HighestBob = 0;
 						for ( BobVec::const_iterator bob = getCore()->MyLevel->Bobs.begin(); bob != getCore()->MyLevel->Bobs.end(); ++bob )
 						{
 							if ( *bob != shared_from_this() && ( *bob )->AffectsCamera && ( HighestBob == 0 || ( *bob )->getCore()->Data.Position.Y > HighestBob->getCore()->Data.Position.Y ) )
@@ -1013,9 +1013,9 @@ namespace CloudberryKingdom
 
 	void Bob::UpdateColors()
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 && PlayerObject->QuadList.size() > 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 && PlayerObject->QuadList.size() > 0 )
 		{
-			std::vector<std::shared_ptr<BaseQuad> > ql = PlayerObject->QuadList;
+			std::vector<boost::shared_ptr<BaseQuad> > ql = PlayerObject->QuadList;
 			if ( ql.size() >= 1 )
 				PlayerObject->QuadList[ 1 ]->SetColor( Color::White );
 			if ( ql.size() >= 1 )
@@ -1034,7 +1034,7 @@ namespace CloudberryKingdom
 		if ( GuideQuad != 0 )
 			return;
 
-		GuideQuad = std::make_shared<QuadClass>();
+		GuideQuad = boost::make_shared<QuadClass>();
 		GuideQuad->setEffectName( _T( "Circle" ) );
 		GuideQuad->setSize( Vector2( 100, 100 ) );
 	}
@@ -1123,9 +1123,9 @@ namespace CloudberryKingdom
 	{
 		if ( Rocket == 0 )
 		{
-			Rocket = std::make_shared<QuadClass>( _T( "Castle_Jet_Pack" ) );
+			Rocket = boost::make_shared<QuadClass>( _T( "Castle_Jet_Pack" ) );
 			//Rocket = new QuadClass("RocketPack");
-			Rocket->FancyAngle = std::make_shared<FancyVector2>();
+			Rocket->FancyAngle = boost::make_shared<FancyVector2>();
 			Rocket->Quad_Renamed.MyEffect = Tools::HslEffect;
 			Rocket->setDegrees( -20 );
 		}
@@ -1168,7 +1168,7 @@ namespace CloudberryKingdom
 			if ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode )
 				return;
 
-			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 )
+			if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( MyObjectType ) != 0 )
 			{
 				return;
 			}
@@ -1220,8 +1220,8 @@ namespace CloudberryKingdom
 				else
 				{
 					PlayerObject->Update( 0 );
-					std::shared_ptr<Quad> w = std::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Wheel" ) ) );
-					std::shared_ptr<CloudberryKingdom::Quad> p = PlayerObject->ParentQuad;
+					boost::shared_ptr<Quad> w = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Wheel" ) ) );
+					boost::shared_ptr<CloudberryKingdom::Quad> p = PlayerObject->ParentQuad;
 					Vector2 hold = p->Center->Pos;
 
 					float D = 116.6666f * p->getSize().Y / 260;
@@ -1275,13 +1275,13 @@ namespace CloudberryKingdom
 			MyCape->Move( shift );
 	}
 
-	void Bob::InteractWithBlock( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block, ColType Col )
+	void Bob::InteractWithBlock( const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block, ColType Col )
 	{
 		if ( block != 0 && !block->getIsActive() )
 			return;
 
 		if ( block != 0 && Col != ColType_NO_COL )
-			block->Hit( std::static_pointer_cast<Bob>( shared_from_this() ) );
+			block->Hit( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		if ( block != 0 && Col != ColType_NO_COL )
 			if ( Col != ColType_TOP )
@@ -1305,7 +1305,7 @@ namespace CloudberryKingdom
 				if ( block != 0 )
 				{
 					block->getBlockCore()->StoodOn = true;
-					block->LandedOn( std::static_pointer_cast<Bob>( shared_from_this() ) );
+					block->LandedOn( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 				}
 
 				if ( !TopCol )
@@ -1365,14 +1365,14 @@ namespace CloudberryKingdom
 				{
 					if ( MyPhsx->OnGround && block->getBlockCore()->DoNotPushHard )
 					{
-						block->Smash( std::static_pointer_cast<Bob>( shared_from_this() ) );
+						block->Smash( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 						return;
 					}
 
 					MyPhsx->HitHeadOnSomething( block );
 
 					if ( block != 0 )
-						block->HitHeadOn( std::static_pointer_cast<Bob>( shared_from_this() ) );
+						block->HitHeadOn( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 					if ( OriginalColType == ColType_BOTTOM )
 					{
@@ -1408,7 +1408,7 @@ namespace CloudberryKingdom
 					if ( Col == ColType_LEFT )
 					{
 						if ( block != 0 )
-							block->SideHit( std::static_pointer_cast<Bob>( shared_from_this() ) );
+							block->SideHit( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1427,7 +1427,7 @@ namespace CloudberryKingdom
 					if ( Col == ColType_RIGHT )
 					{
 						if ( block != 0 )
-							block->SideHit( std::static_pointer_cast<Bob>( shared_from_this() ) );
+							block->SideHit( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 						MyPhsx->SideHit( Col, block );
 
@@ -1447,7 +1447,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Bob::UpdateGroundSpeed( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	void Bob::UpdateGroundSpeed( const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		GroundSpeed = box->xSpeed();
 
@@ -1461,7 +1461,7 @@ namespace CloudberryKingdom
 		Box->Current->Size = PlayerObject->BoxList[ 1 ]->Size() / 2;
 		Box2->Current->Size = PlayerObject->BoxList[ 2 ]->Size() / 2;
 
-		if ( getCore()->MyLevel->PlayMode != 0 && std::dynamic_pointer_cast<BobPhsxSpaceship>(getCore()->MyLevel->DefaultHeroType) != 0 )
+		if ( getCore()->MyLevel->PlayMode != 0 && boost::dynamic_pointer_cast<BobPhsxSpaceship>(getCore()->MyLevel->DefaultHeroType) != 0 )
 		{
 			Box->Current->Size *= 1.2f;
 			Box2->Current->Size *= 1.2f;
@@ -1505,12 +1505,12 @@ namespace CloudberryKingdom
 		// Set the anchor point
 		if ( temp == 0 )
 		{
-			temp = std::make_shared<ObjectVector>();
-			temp->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( temp->shared_from_this() );
+			temp = boost::make_shared<ObjectVector>();
+			temp->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( temp->shared_from_this() );
 		}
 
 		if ( Head == 0 )
-			Head = std::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Head" ) ) );
+			Head = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Head" ) ) );
 		temp->Pos = Head->Center->Pos;
 
 		if ( MyPhsx->Ducking )
@@ -1609,8 +1609,8 @@ namespace CloudberryKingdom
 
 		// Bob connections
 		if ( MyBobLinks.size() > 0 )
-			for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
-				( *link )->PhsxStep( std::static_pointer_cast<Bob>( shared_from_this() ) );
+			for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
+				( *link )->PhsxStep( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		if ( Dying )
 		{
@@ -1816,9 +1816,9 @@ namespace CloudberryKingdom
 			// Create list of boxes
 			if ( Boxes.empty() )
 			{
-				Boxes = std::vector<std::shared_ptr<AABox> >();
+				Boxes = std::vector<boost::shared_ptr<AABox> >();
 				for ( int i = 0; i <= NumBoxes; i++ )
-					Boxes.push_back( std::make_shared<AABox>( Vector2(), Vector2(1) ) );
+					Boxes.push_back( boost::make_shared<AABox>( Vector2(), Vector2(1) ) );
 			}
 
 			// Update box list
@@ -1832,7 +1832,7 @@ namespace CloudberryKingdom
 		for ( ObjectVec::const_iterator obj = getCore()->MyLevel->ActiveObjectList.begin(); obj != getCore()->MyLevel->ActiveObjectList.end(); ++obj )
 		{
 			if ( !( *obj )->getCore()->MarkedForDeletion && (*obj)->getCore()->Real && (*obj)->getCore()->Active && (*obj)->getCore()->Show )
-				( *obj )->Interact( std::static_pointer_cast<Bob>( shared_from_this() ) );
+				( *obj )->Interact( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 		}
 	}
 
@@ -1841,7 +1841,7 @@ namespace CloudberryKingdom
 		float extra = 0; // 5;
 		for ( int i = 0; i <= NumBoxes; i++ )
 		{
-			std::shared_ptr<AABox> box = Boxes[ i ];
+			boost::shared_ptr<AABox> box = Boxes[ i ];
 
 			box->Current->Size = Box2->Current->Size;
 
@@ -1860,7 +1860,7 @@ namespace CloudberryKingdom
 		Box2->SetTarget( getCore()->Data.Position, Box2->Current->Size );
 	}
 
-	void Bob::DeleteObj( const std::shared_ptr<ObjectBase> &obj )
+	void Bob::DeleteObj( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		obj->getCore()->DeletedByBob = true;
 		getCore()->getRecycle()->CollectObject(obj);
@@ -1890,7 +1890,7 @@ namespace CloudberryKingdom
 				MyPhsx->BlockInteractions();
 			else
 			{
-				CeilingParams = std::static_pointer_cast<Ceiling_Parameters>( getCore()->GetParams(Ceiling_AutoGen::getInstance()) );
+				CeilingParams = boost::static_pointer_cast<Ceiling_Parameters>( getCore()->GetParams(Ceiling_AutoGen::getInstance()) );
 
 				for ( BlockVec::const_iterator block = getCore()->MyLevel->Blocks.begin(); block != getCore()->MyLevel->Blocks.end(); ++block )
 				{
@@ -1900,7 +1900,7 @@ namespace CloudberryKingdom
 					//if (block.BlockCore.OnlyCollidesWithLowerLayers && block.Core.DrawLayer <= Core.DrawLayer)
 					//    continue;
 
-					if ( ( *block )->PreDecision( std::static_pointer_cast<Bob>( shared_from_this() ) ) )
+					if ( ( *block )->PreDecision( boost::static_pointer_cast<Bob>( shared_from_this() ) ) )
 						continue;
 					if ( !( *block )->getIsActive() )
 						continue;
@@ -1913,11 +1913,11 @@ namespace CloudberryKingdom
 
 					if ( Col != ColType_NO_COL || Overlap )
 					{
-						if ( ( *block )->PostCollidePreDecision( std::static_pointer_cast<Bob>( shared_from_this() ) ) )
+						if ( ( *block )->PostCollidePreDecision( boost::static_pointer_cast<Bob>( shared_from_this() ) ) )
 							continue;
 
 						bool Delete = false;
-						( *block )->PostCollideDecision( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap, Delete );
+						( *block )->PostCollideDecision( boost::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap, Delete );
 
 						// We're done deciding if we should delete the block or not.
 						// If we should delete it, delete.
@@ -1931,7 +1931,7 @@ namespace CloudberryKingdom
 						{
 							Delete = false;
 
-							( *block )->PostKeep( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
+							( *block )->PostKeep( boost::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
 
 							if ( Col != ColType_NO_COL )
 							{
@@ -1951,7 +1951,7 @@ namespace CloudberryKingdom
 										( *block )->StampAsUsed( CurPhsxStep );
 										MyPhsx->LastUsedStamp = CurPhsxStep;
 
-										( *block )->PostInteractWith( std::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
+										( *block )->PostInteractWith( boost::static_pointer_cast<Bob>( shared_from_this() ), Col, Overlap );
 										//block.PostCollidePreDecision(this);
 									}
 								}

@@ -12,12 +12,12 @@ namespace CloudberryKingdom
 		struct BlockPieceSeedSetter : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> gui;
+			boost::shared_ptr<CustomUpgrades_GUI> gui;
 			Upgrade upgrade;
-			std::shared_ptr<MenuSlider> slider;
+			boost::shared_ptr<MenuSlider> slider;
 
 		
-			BlockPieceSeedSetter( const std::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const std::shared_ptr<MenuSlider> &slider );
+			BlockPieceSeedSetter( const boost::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const boost::shared_ptr<MenuSlider> &slider );
 
 			void Apply();
 		};
@@ -26,12 +26,12 @@ namespace CloudberryKingdom
 		struct PieceSeedSetter : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> gui;
+			boost::shared_ptr<CustomUpgrades_GUI> gui;
 			Upgrade upgrade;
-			std::shared_ptr<MenuSlider> slider;
+			boost::shared_ptr<MenuSlider> slider;
 
 		
-			PieceSeedSetter( const std::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const std::shared_ptr<MenuSlider> &slider );
+			PieceSeedSetter( const boost::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const boost::shared_ptr<MenuSlider> &slider );
 
 			void Apply();
 		};
@@ -40,12 +40,12 @@ namespace CloudberryKingdom
 		struct AddUpgradeAdditionalOnSelect : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cuGui;
-			std::shared_ptr<MenuSlider> slider;
+			boost::shared_ptr<CustomUpgrades_GUI> cuGui;
+			boost::shared_ptr<MenuSlider> slider;
 			Upgrade upgrade;
 
 		
-			AddUpgradeAdditionalOnSelect( const std::shared_ptr<CustomUpgrades_GUI> &cuGui, const std::shared_ptr<MenuSlider> &slider, Upgrade upgrade );
+			AddUpgradeAdditionalOnSelect( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui, const boost::shared_ptr<MenuSlider> &slider, Upgrade upgrade );
 
 			void Apply();
 		};
@@ -54,10 +54,10 @@ namespace CloudberryKingdom
 		struct UpgradesSliderLambda : public LambdaFunc<float>
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cu;
+			boost::shared_ptr<CustomUpgrades_GUI> cu;
 			Upgrade upgrade;
 		
-			UpgradesSliderLambda( const std::shared_ptr<CustomUpgrades_GUI> &cu, Upgrade upgrade );
+			UpgradesSliderLambda( const boost::shared_ptr<CustomUpgrades_GUI> &cu, Upgrade upgrade );
 
 			float Apply();
 		};
@@ -66,10 +66,10 @@ namespace CloudberryKingdom
 		struct StartLevelProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cuGui;
+			boost::shared_ptr<CustomUpgrades_GUI> cuGui;
 
 		
-			StartLevelProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui );
+			StartLevelProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui );
 
 			void Apply();
 		};
@@ -78,10 +78,10 @@ namespace CloudberryKingdom
 		struct ZeroProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cuGui;
+			boost::shared_ptr<CustomUpgrades_GUI> cuGui;
 
 		
-			ZeroProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui );
+			ZeroProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui );
 
 			void Apply();
 		};
@@ -90,10 +90,10 @@ namespace CloudberryKingdom
 		struct RandomizeProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cuGui;
+			boost::shared_ptr<CustomUpgrades_GUI> cuGui;
 
 		
-			RandomizeProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui );
+			RandomizeProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui );
 
 			void Apply();
 		};
@@ -102,34 +102,34 @@ namespace CloudberryKingdom
 		struct GoProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomUpgrades_GUI> cuGui;
+			boost::shared_ptr<CustomUpgrades_GUI> cuGui;
 
 		
-			GoProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui );
+			GoProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<PieceSeedData> PieceSeed;
-		std::shared_ptr<CustomLevel_GUI> CustomLevel;
+		boost::shared_ptr<PieceSeedData> PieceSeed;
+		boost::shared_ptr<CustomLevel_GUI> CustomLevel;
 
 	
-		std::shared_ptr<EzText> TopText;
+		boost::shared_ptr<EzText> TopText;
 
 	
-		CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-		std::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		CustomUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		boost::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual void OnAdd();
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
-		std::shared_ptr<ObjectIcon> BigIcon;
+		boost::shared_ptr<ObjectIcon> BigIcon;
 	
 		void AddUpgrade( Upgrade upgrade );
 
@@ -174,8 +174,8 @@ namespace CloudberryKingdom
 	struct AggressiveUpgrades_GUI : public CustomUpgrades_GUI
 	{
 	
-		AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-		std::shared_ptr<AggressiveUpgrades_GUI> AggressiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		AggressiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		boost::shared_ptr<AggressiveUpgrades_GUI> AggressiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual std::vector<Upgrade> GetUpgradeList();
 
@@ -188,8 +188,8 @@ namespace CloudberryKingdom
 	struct PassiveUpgrades_GUI : public CustomUpgrades_GUI
 	{
 	
-		PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-		std::shared_ptr<PassiveUpgrades_GUI> PassiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		PassiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		boost::shared_ptr<PassiveUpgrades_GUI> PassiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual std::vector<Upgrade> GetUpgradeList();
 

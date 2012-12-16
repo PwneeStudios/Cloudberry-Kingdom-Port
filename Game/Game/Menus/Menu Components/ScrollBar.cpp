@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	ScrollBar::ScrollBarReleaseLambda::ScrollBarReleaseLambda( const std::shared_ptr<ScrollBar> &sb )
+	ScrollBar::ScrollBarReleaseLambda::ScrollBarReleaseLambda( const boost::shared_ptr<ScrollBar> &sb )
 	{
 		this->sb = sb;
 	}
@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		sb->Release();
 	}
 
-	ScrollBar::SliderSetProxy::SliderSetProxy( const std::shared_ptr<ScrollBar> &sb )
+	ScrollBar::SliderSetProxy::SliderSetProxy( const boost::shared_ptr<ScrollBar> &sb )
 	{
 		Sb = sb;
 	}
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		Sb->SliderSet();
 	}
 
-	ScrollBar::SliderGetLambda::SliderGetLambda( const std::shared_ptr<ScrollBar> &sb )
+	ScrollBar::SliderGetLambda::SliderGetLambda( const boost::shared_ptr<ScrollBar> &sb )
 	{
 		this->sb = sb;
 	}
@@ -41,22 +41,22 @@ namespace CloudberryKingdom
 		Parent.reset();
 	}
 
-	ScrollBar::ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent ) :
+	ScrollBar::ScrollBar( const boost::shared_ptr<LongMenu> &AttachedMenu, const boost::shared_ptr<GUI_Panel> &Parent ) :
 		CkBaseMenu( false ),
 		Height( 0 )
 	{
 	}
-	std::shared_ptr<ScrollBar> ScrollBar::ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent )
+	boost::shared_ptr<ScrollBar> ScrollBar::ScrollBar_Construct( const boost::shared_ptr<LongMenu> &AttachedMenu, const boost::shared_ptr<GUI_Panel> &Parent )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
 		this->AttachedMenu = AttachedMenu;
 		this->Parent = Parent;
-		this->Parent->OnRelease->Add( std::make_shared<ScrollBarReleaseLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );
+		this->Parent->OnRelease->Add( boost::make_shared<ScrollBarReleaseLambda>( boost::static_pointer_cast<ScrollBar>( shared_from_this() ) ) );
 
 		Constructor();
 
-		return std::static_pointer_cast<ScrollBar>( shared_from_this() );
+		return boost::static_pointer_cast<ScrollBar>( shared_from_this() );
 	}
 
 	void ScrollBar::Init()
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::Init();
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->CheckForOutsideClick = false;
 		MyMenu->AffectsOutsideMouse = false;
 
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		slider = std::make_shared<MenuScrollBar>();
+		slider = boost::make_shared<MenuScrollBar>();
 		slider->setSliderBackSize( Vector2(1.15f,.72f) * slider->getSliderBackSize() );
 		slider->CustomEndPoints = true;
 		slider->CustomStart = Vector2( 0, -800 );
@@ -87,11 +87,11 @@ namespace CloudberryKingdom
 		slider->Slider->ScaleYToMatchRatio( 90 );
 		slider->SliderBack->setTextureName( _T( "Chain_Tile" ) );
 		slider->TabOffset = Vector2( 0, 28 );
-		slider->setMyFloat( std::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
+		slider->setMyFloat( boost::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
 
 		Height = AttachedMenu->Height();
-		slider->getMyFloat()->GetCallback = std::make_shared<SliderGetLambda>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) );
-		slider->getMyFloat()->SetCallback = std::make_shared<SliderSetProxy>( std::static_pointer_cast<ScrollBar>( shared_from_this() ) );
+		slider->getMyFloat()->GetCallback = boost::make_shared<SliderGetLambda>( boost::static_pointer_cast<ScrollBar>( shared_from_this() ) );
+		slider->getMyFloat()->SetCallback = boost::make_shared<SliderSetProxy>( boost::static_pointer_cast<ScrollBar>( shared_from_this() ) );
 		slider->getMyFloat()->MaxVal = Height;
 		slider->getMyFloat()->MinVal = 0;
 

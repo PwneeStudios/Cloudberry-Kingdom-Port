@@ -8,44 +8,44 @@ namespace CloudberryKingdom
 	struct StringWorldTimed : public StringWorldGameData
 	{
 	
-		struct StringWorldOnTimerExpiredLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
+		struct StringWorldOnTimerExpiredLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{
 		
-			std::shared_ptr<GUI_Score> MyGUI_Score;
-			std::shared_ptr<GUI_Level> MyGUI_Level;
+			boost::shared_ptr<GUI_Score> MyGUI_Score;
+			boost::shared_ptr<GUI_Level> MyGUI_Level;
 
 		
-			StringWorldOnTimerExpiredLambda( const std::shared_ptr<GUI_Score> &MyGUI_Score, const std::shared_ptr<GUI_Level> &MyGUI_Level );
+			StringWorldOnTimerExpiredLambda( const boost::shared_ptr<GUI_Score> &MyGUI_Score, const boost::shared_ptr<GUI_Level> &MyGUI_Level );
 
-			void Apply( const std::shared_ptr<GUI_Timer_Base> &timer );
+			void Apply( const boost::shared_ptr<GUI_Timer_Base> &timer );
 		};
 
 	
-		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		
-			std::shared_ptr<StringWorldTimed> ch;
+			boost::shared_ptr<StringWorldTimed> ch;
 		
-			OnSwapLambda( const std::shared_ptr<StringWorldTimed> &ch );
+			OnSwapLambda( const boost::shared_ptr<StringWorldTimed> &ch );
 
-			void Apply( const std::shared_ptr<LevelSeedData> &data );
+			void Apply( const boost::shared_ptr<LevelSeedData> &data );
 		};
 
 	
-		std::shared_ptr<GUI_Timer> MyGUI_Timer;
-		std::shared_ptr<TimerWarning> Warning;
+		boost::shared_ptr<GUI_Timer> MyGUI_Timer;
+		boost::shared_ptr<TimerWarning> Warning;
 	
-		std::shared_ptr<GUI_Score> MyGUI_Score;
-		std::shared_ptr<GUI_Level> MyGUI_Level;
+		boost::shared_ptr<GUI_Score> MyGUI_Score;
+		boost::shared_ptr<GUI_Level> MyGUI_Level;
 	
-		std::shared_ptr<CoinScoreMultiplierObject> MyCoinScoreMultiplier;
+		boost::shared_ptr<CoinScoreMultiplierObject> MyCoinScoreMultiplier;
 
 	
-		StringWorldTimed( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer );
+		StringWorldTimed( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_Timer> &Timer );
 
 		virtual void Release();
 
-		virtual void AdditionalSwapToLevelProcessing( const std::shared_ptr<GameData> &game );
+		virtual void AdditionalSwapToLevelProcessing( const boost::shared_ptr<GameData> &game );
 	};
 }
 

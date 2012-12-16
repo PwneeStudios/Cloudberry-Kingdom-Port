@@ -5,9 +5,9 @@ namespace CloudberryKingdom
 
 	void SpikeyGuy::SpikeyGuyTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
-		Base = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Joint" ) ), Vector2( 50.f, -1.f ), Vector2(), Color::White );
-		Chain = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Chain_Tile" ) ), 44.f, 63.f );
+		Ball = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
+		Base = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Joint" ) ), Vector2( 50.f, -1.f ), Vector2(), Color::White );
+		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Chain_Tile" ) ), 44.f, 63.f );
 		Radius = 200;
 		Rotate = false;
 		RotateOffset = 0;
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 	{
 		_CircleDeath::OnAttachedToBlock();
 
-		if ( std::dynamic_pointer_cast<NormalBlock>( getCore()->ParentBlock ) != 0 )
+		if ( boost::dynamic_pointer_cast<NormalBlock>( getCore()->ParentBlock ) != 0 )
 			return;
 		else
 		{
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer3 = 6;
 	}
 
-	void SpikeyGuy::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void SpikeyGuy::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_CircleDeath::Init( pos, level );
 
@@ -77,8 +77,8 @@ namespace CloudberryKingdom
 
 		if ( !getCore()->BoxesOnly )
 		{
-			Anchor = std::make_shared<QuadClass>();
-			Head = std::make_shared<QuadClass>();
+			Anchor = boost::make_shared<QuadClass>();
+			Head = boost::make_shared<QuadClass>();
 		}
 	}
 
@@ -183,11 +183,11 @@ namespace CloudberryKingdom
 		_CircleDeath::Move( shift );
 	}
 
-	void SpikeyGuy::Clone( const std::shared_ptr<ObjectBase> &A )
+	void SpikeyGuy::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<SpikeyGuy> FloaterA = std::dynamic_pointer_cast<SpikeyGuy>( A );
+		boost::shared_ptr<SpikeyGuy> FloaterA = boost::dynamic_pointer_cast<SpikeyGuy>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Angle = FloaterA->Angle;

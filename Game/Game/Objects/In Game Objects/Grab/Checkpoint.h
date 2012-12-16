@@ -15,13 +15,13 @@ namespace CloudberryKingdom
 		struct CheckpointTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<TextureOrAnim> Sprite;
+			boost::shared_ptr<TextureOrAnim> Sprite;
 			Vector2 Size;
 			Vector2 TextureSize;
 
-			std::shared_ptr<EzSound> MySound;
+			boost::shared_ptr<EzSound> MySound;
 
-			std::shared_ptr<Particle> DieTemplate;
+			boost::shared_ptr<Particle> DieTemplate;
 			CheckpointTileInfo();
 
 		
@@ -37,20 +37,20 @@ namespace CloudberryKingdom
 
 		float Taken_Scale, Taken_Alpha;
 
-		static std::shared_ptr<EzSound> MySound;
+		static boost::shared_ptr<EzSound> MySound;
 
 	
 		bool SkipPhsx;
 
 		bool Touched;
 
-		std::shared_ptr<AABox> Box;
+		boost::shared_ptr<AABox> Box;
 		SimpleQuad MyQuad;
 		BasePoint Base;
 
-		std::shared_ptr<SimpleObject> MyObject;
+		boost::shared_ptr<SimpleObject> MyObject;
 
-		std::shared_ptr<LevelPiece> MyPiece;
+		boost::shared_ptr<LevelPiece> MyPiece;
 		int MyPieceIndex;
 
 		virtual void MakeNew();
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 	
 		void Die();
 
-		void Init( const std::shared_ptr<Level> &level );
+		void Init( const boost::shared_ptr<Level> &level );
 
 		void AnimStep();
 
@@ -83,13 +83,13 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 		void SetAlpha();
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void Background_Forest::Code( const std::shared_ptr<Background> &b )
+	void Background_Forest::Code( const boost::shared_ptr<Background> &b )
 	{
 		BackgroundTemplate::Code( b );
 
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void Background_ForestSnow::Code( const std::shared_ptr<Background> &b )
+	void Background_ForestSnow::Code( const boost::shared_ptr<Background> &b )
 	{
 		BackgroundTemplate::Code( b );
 

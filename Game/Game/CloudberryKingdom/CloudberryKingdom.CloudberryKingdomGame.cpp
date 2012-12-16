@@ -146,18 +146,18 @@ namespace CloudberryKingdom
 
 		// Background
 		Background::GreenScreen = false;
-		Background::TestQuad = std::make_shared<QuadClass>();
+		Background::TestQuad = boost::make_shared<QuadClass>();
 		Background::TestTexture = 0;
 
 		// Challenge_HeroRush2
 		Challenge_HeroRush2::HeroList = std::vector<HeroSpec>( );
 		Challenge_HeroRush2::HeroList.reserve( 100 );
-		Challenge_HeroRush2::instance = std::make_shared<Challenge_HeroRush2>();
+		Challenge_HeroRush2::instance = boost::make_shared<Challenge_HeroRush2>();
 
 		CloudberryKingdomGame::TitleGameFactory = TitleGameData_MW::Factory;
 	}
 
-	CloudberryKingdomGame::ExitProxy::ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
+	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
 	}
@@ -172,22 +172,22 @@ namespace CloudberryKingdom
 		Tools::UpdateVolume();
 	}
 
-	CloudberryKingdomGame::MakeTestLevelInitializeHelper::MakeTestLevelInitializeHelper( const std::shared_ptr<CloudberryKingdomGame> &ckg )
+	CloudberryKingdomGame::MakeTestLevelInitializeHelper::MakeTestLevelInitializeHelper( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
 	}
 
-	void CloudberryKingdomGame::MakeTestLevelInitializeHelper::Apply( const std::shared_ptr<PieceSeedData> &piece )
+	void CloudberryKingdomGame::MakeTestLevelInitializeHelper::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		ckg->TestLevelInit( piece );
 	}
 
-	CloudberryKingdomGame::TestLevelPostMakeProxy::TestLevelPostMakeProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg )
+	CloudberryKingdomGame::TestLevelPostMakeProxy::TestLevelPostMakeProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
 	{
 		this->ckg = ckg;
 	}
 
-	void CloudberryKingdomGame::TestLevelPostMakeProxy::Apply( const std::shared_ptr<Level> &level )
+	void CloudberryKingdomGame::TestLevelPostMakeProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		ckg->TestLevelPostMake( level );
 	}
@@ -213,7 +213,7 @@ bool CloudberryKingdomGame::AlwaysSkipDynamicArt = false;
 bool CloudberryKingdomGame::HideGui = false;
 bool CloudberryKingdomGame::HideForeground = false;
 bool CloudberryKingdomGame::UseNewBob = false;
-std::shared_ptr<SimpleGameFactory> CloudberryKingdomGame::TitleGameFactory;
+boost::shared_ptr<SimpleGameFactory> CloudberryKingdomGame::TitleGameFactory;
 float CloudberryKingdomGame::fps = 0;
 
 #if defined(WINDOWS)
@@ -277,23 +277,23 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	CloudberryKingdomGame::CloudberryKingdomGame()
 	{
-		//Tools::GameClass = std::make_shared<XnaGameClass>();
+		//Tools::GameClass = boost::make_shared<XnaGameClass>();
 
 		CloudberryKingdomGame::StaticIntializer_NoDependence();
 
 		InitializeInstanceFields();
-		/*MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>( Tools::GameClass );*/
-		MyGraphicsDeviceManager = std::make_shared<GraphicsDeviceManager>();
+		/*MyGraphicsDeviceManager = boost::make_shared<GraphicsDeviceManager>( Tools::GameClass );*/
+		MyGraphicsDeviceManager = boost::make_shared<GraphicsDeviceManager>();
 
 		// FIXME: This is an event that hooks in to whenever the game has to prepare a device (usually after losing it). Do we need this?
-		//MyGraphicsDeviceManager->PreparingDeviceSettings += std::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
+		//MyGraphicsDeviceManager->PreparingDeviceSettings += boost::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		// Pull these out, so they aren't inside the constructor.
 		//Tools::GameClass->getContent()->RootDirectory = _T("Content");
 		//Tools::TheGame = shared_from_this();
 	}
 
-	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e )
+	void CloudberryKingdomGame::graphics_PreparingDeviceSettings( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<PreparingDeviceSettingsEventArgs> &e )
 	{
 		//graphics.PreferMultiSampling = false;
 		//graphics.MyGraphicsDevice.PresentationParameters.MultiSampleCount = 16;
@@ -315,16 +315,16 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		ButtonCheck::Reset();
 
 		// Volume control
-		Tools::SoundVolume = std::make_shared<WrappedFloat>();
+		Tools::SoundVolume = boost::make_shared<WrappedFloat>();
 		Tools::SoundVolume->MinVal = 0;
 		Tools::SoundVolume->MaxVal = 1;
 		Tools::SoundVolume->setVal( .7f );
 
-		Tools::MusicVolume = std::make_shared<WrappedFloat>();
+		Tools::MusicVolume = boost::make_shared<WrappedFloat>();
 		Tools::MusicVolume->MinVal = 0;
 		Tools::MusicVolume->MaxVal = 1;
 		Tools::MusicVolume->setVal( 1 );
-		Tools::MusicVolume->SetCallback = std::make_shared<UpdateVolumeProxy>();
+		Tools::MusicVolume->SetCallback = boost::make_shared<UpdateVolumeProxy>();
 
 	#if defined(DEBUG) || defined(INCLUDE_EDITOR)
 		Tools::SoundVolume->setVal( 0 );
@@ -444,7 +444,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	}
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void CloudberryKingdomGame::SignedInGamer_SignedOut( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedOutEventArgs> &e )
+	void CloudberryKingdomGame::SignedInGamer_SignedOut( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedOutEventArgs> &e )
 	{
 		SaveGroup::SaveAll();
 
@@ -454,12 +454,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void CloudberryKingdomGame::SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e )
+	void CloudberryKingdomGame::SignedInGamer_SignedIn( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedInEventArgs> &e )
 	{
 		int Index = static_cast<int>( e->Gamer->PlayerIndex );
 		std::wstring Name = e->Gamer->Gamertag;
 
-		std::shared_ptr<PlayerData> data = std::make_shared<PlayerData>();
+		boost::shared_ptr<PlayerData> data = boost::make_shared<PlayerData>();
 		data->Init( Index );
 		PlayerManager::Players[ Index ] = data;
 
@@ -469,7 +469,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::LoadContent()
 	{
-		std::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
+		boost::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
 		//BenchmarkLoadSize();
 		//Tools.Warning();
@@ -478,9 +478,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		Tools::LoadBasicArt( Tools::GameClass->getContent() );
 
-		Tools::Render = std::make_shared<MainRender>( MyGraphicsDevice );
+		Tools::Render = boost::make_shared<MainRender>( MyGraphicsDevice );
 
-		Tools::QDrawer = std::make_shared<QuadDrawer>( MyGraphicsDevice, 1000 );
+		Tools::QDrawer = boost::make_shared<QuadDrawer>( MyGraphicsDevice, 1000 );
 		Tools::QDrawer->DefaultEffect = Tools::EffectWad->FindByName( _T( "NoTexture" ) );
 		Tools::QDrawer->DefaultTexture = Tools::TextureWad->FindByName( _T( "White" ) );
 
@@ -490,13 +490,13 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		LogoScreenUp = true;
 
 
-		/*Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>( MyGraphicsDevice );*/
-		Tools::Render->MySpriteBatch = std::make_shared<SpriteBatch>();
+		/*Tools::Render->MySpriteBatch = boost::make_shared<SpriteBatch>( MyGraphicsDevice );*/
+		Tools::Render->MySpriteBatch = boost::make_shared<SpriteBatch>();
 
 		ScreenWidth = MyGraphicsDevice->PP->BackBufferWidth;
 		ScreenHeight = MyGraphicsDevice->PP->BackBufferHeight;
 
-		MainCamera = std::make_shared<Camera>( ScreenWidth, ScreenHeight );
+		MainCamera = boost::make_shared<Camera>( ScreenWidth, ScreenHeight );
 
 		MainCamera->Update();
 
@@ -526,7 +526,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//_LoadThread(); return;
 
 		// Create the initial loading screen
-		LoadingScreen_Renamed = std::make_shared<InitialLoadingScreen>( Tools::GameClass->getContent(), Resources::ResourceLoadedCountRef );
+		LoadingScreen_Renamed = boost::make_shared<InitialLoadingScreen>( Tools::GameClass->getContent(), Resources::ResourceLoadedCountRef );
 
 		// Load resource thread
 		Resources::LoadResources();
@@ -537,8 +537,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 	#if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-		SignedInGamer::SignedIn += std::make_shared<EventHandler<SignedInEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedIn );
-		SignedInGamer::SignedOut += std::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
+		SignedInGamer::SignedIn += boost::make_shared<EventHandler<SignedInEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedIn );
+		SignedInGamer::SignedOut += boost::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
 	#endif
 
 		// FIXME: Start videos later.
@@ -568,7 +568,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 	}
 
-	const std::shared_ptr<GameData> &CloudberryKingdomGame::getGame() const
+	const boost::shared_ptr<GameData> &CloudberryKingdomGame::getGame() const
 	{
 		return Tools::CurGameData;
 	}
@@ -711,7 +711,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//Tools.GameClass.IsFixedTimeStep = true;
 	}
 
-	void CloudberryKingdomGame::Draw( const std::shared_ptr<GameTime> &gameTime )
+	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
 	#if defined(DEBUG_OBJDATA)
 		ObjectData::UpdateWeak();
@@ -806,7 +806,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 	}
 
-	void CloudberryKingdomGame::GameUpdate( const std::shared_ptr<GameTime> &gameTime )
+	void CloudberryKingdomGame::GameUpdate( const boost::shared_ptr<GameTime> &gameTime )
 	{
 		// Update controller/keyboard states
 		ButtonCheck::UpdateControllerAndKeyboard_StartOfStep();
@@ -840,7 +840,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 	}
 
-	void CloudberryKingdomGame::UpdateFps( const std::shared_ptr<GameTime> &gameTime )
+	void CloudberryKingdomGame::UpdateFps( const boost::shared_ptr<GameTime> &gameTime )
 	{
 		// Track time, changes in time, and FPS
 		Tools::gameTime = gameTime;
@@ -1044,11 +1044,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		std::cout << _T( "" ) << std::endl;
 	}
 
-	std::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;
+	boost::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch = 0;
 
 	void CloudberryKingdomGame::Start()
 	{
-		stopwatch = std::make_shared<Stopwatch>();
+		stopwatch = boost::make_shared<Stopwatch>();
 		stopwatch->Start();
 	}
 
@@ -1058,11 +1058,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		return stopwatch->ElapsedTicks;
 	}
 
-	std::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch2 = 0;
+	boost::shared_ptr<Stopwatch> CloudberryKingdomGame::stopwatch2 = 0;
 
 	void CloudberryKingdomGame::Start2()
 	{
-		stopwatch2 = std::make_shared<Stopwatch>();
+		stopwatch2 = boost::make_shared<Stopwatch>();
 		stopwatch2->Start();
 	}
 
@@ -1177,11 +1177,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			// Make blocks in the current level reset their art to reflect possible changes in the reloaded tileset info.
 			for ( BlockVec::const_iterator block = Tools::CurLevel->Blocks.begin(); block != Tools::CurLevel->Blocks.end(); ++block )
 			{
-				std::shared_ptr<NormalBlock> nblock = std::dynamic_pointer_cast<NormalBlock>( *block );
+				boost::shared_ptr<NormalBlock> nblock = boost::dynamic_pointer_cast<NormalBlock>( *block );
 				if ( 0 != nblock )
 					nblock->ResetPieces();
 
-				std::shared_ptr<MovingBlock> mblock = std::dynamic_pointer_cast<MovingBlock>( *block );
+				boost::shared_ptr<MovingBlock> mblock = boost::dynamic_pointer_cast<MovingBlock>( *block );
 				if ( 0 != mblock )
 					mblock->ResetPieces();
 			}
@@ -1192,7 +1192,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Z ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Z ) )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
+			for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
 				( *hero )->ResetInfo();
 
 			//Tools.TextureWad.LoadAllDynamic(Tools.GameClass.Content, EzTextureWad.WhatToLoad.Animations);
@@ -1389,8 +1389,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::MakeEmptyLevel()
 	{
-		std::shared_ptr<Level> level = std::make_shared<Level>();
-		level->setMainCamera( std::make_shared<Camera>() );
+		boost::shared_ptr<Level> level = boost::make_shared<Level>();
+		level->setMainCamera( boost::make_shared<Camera>() );
 		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 		level->CurPiece->StartData[ 0 ].Position = Vector2( 0, 0 );
 		level->getMainCamera()->BLCamBound = Vector2(-100000, 0);
@@ -1398,10 +1398,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		level->getMainCamera()->Update();
 		level->TimeLimit = -1;
 
-		level->MyBackground = std::make_shared<RegularBackground>();
+		level->MyBackground = boost::make_shared<RegularBackground>();
 		level->MyBackground->Init( level );
 
-		Tools::CurGameData = level->MyGame = std::make_shared<GameData>();
+		Tools::CurGameData = level->MyGame = boost::make_shared<GameData>();
 		GameData_Construct( level->MyGame );
 
 		Tools::CurGameData->MyLevel = Tools::CurLevel = level;
@@ -1414,7 +1414,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//PlayerManager.Players[2].Exists = true;
 		//PlayerManager.Players[3].Exists = true;
 
-		std::shared_ptr<LevelSeedData> data = std::make_shared<LevelSeedData>();
+		boost::shared_ptr<LevelSeedData> data = boost::make_shared<LevelSeedData>();
 
 
 		//data.ReadString("0;s:1830873138;h:2,0,2,0;t:sea;n:1;l:2150;u:0,0,0,0,0,2,4.625,0,0,0,0,0,3.75,6.375,0,0,0,0,0,0,0,7.75,0,6.625;");
@@ -1492,12 +1492,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//data.MyGameFlags.IsDoppleganger = true;
 		//data.MyGameFlags.IsDopplegangerInvert = true;
 
-		data->Initialize( std::make_shared<MakeTestLevelInitializeHelper>( shared_from_this() ) );
+		data->Initialize( boost::make_shared<MakeTestLevelInitializeHelper>( shared_from_this() ) );
 
 		// Add Landing Zone
 		//data.PieceSeeds[0].Style.MyInitialPlatsType = StyleData.InitialPlatsType.LandingZone;
 
-		data->PostMake->Add( std::make_shared<TestLevelPostMakeProxy>( shared_from_this() ) );
+		data->PostMake->Add( boost::make_shared<TestLevelPostMakeProxy>( shared_from_this() ) );
 
 		//Campaign.CarryPrinces(data);
 
@@ -1511,7 +1511,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		GameData::StartLevel( data );
 	}
 
-	void CloudberryKingdomGame::TestLevelPostMake( const std::shared_ptr<Level> &level )
+	void CloudberryKingdomGame::TestLevelPostMake( const boost::shared_ptr<Level> &level )
 	{
 		level->StartRecording();
 
@@ -1530,7 +1530,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//level.MyGame.DramaticEntry(level.StartDoor, 20);
 	}
 
-	void CloudberryKingdomGame::TestLevelInit( const std::shared_ptr<PieceSeedData> &piece )
+	void CloudberryKingdomGame::TestLevelInit( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		//writelist();
 		//Tools.Write("!");
@@ -1597,7 +1597,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		piece->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
-	void CloudberryKingdomGame::__Roughly_Maso( const std::shared_ptr<PieceSeedData> &piece )
+	void CloudberryKingdomGame::__Roughly_Maso( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 1;
 		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 10;
@@ -1622,7 +1622,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//piece.MyUpgrades1->Get(Upgrade.Conveyor) = 8;
 	}
 
-	void CloudberryKingdomGame::__Roughly_Abusive( const std::shared_ptr<PieceSeedData> &piece )
+	void CloudberryKingdomGame::__Roughly_Abusive( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		piece->MyUpgrades1->Get( Upgrade_JUMP ) = 1;
 		piece->MyUpgrades1->Get( Upgrade_SPEED ) = 3;
@@ -1644,7 +1644,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//piece.MyUpgrades1->Get(Upgrade.Conveyor) = 8;
 	}
 
-	void CloudberryKingdomGame::TestLevelModParams( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
+	void CloudberryKingdomGame::TestLevelModParams( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 	{
 		//var Params = (NormalBlock_Parameters)p.Style.FindParams(NormalBlock_AutoGen.Instance);
 		//Wall wall = Params.SetWall(data.MyGeometry);
@@ -1673,17 +1673,17 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 
 		float size = 90;
-		std::shared_ptr<FallingBlock_Parameters> FParams = std::static_pointer_cast<FallingBlock_Parameters>( p->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<FallingBlock_Parameters> FParams = boost::static_pointer_cast<FallingBlock_Parameters>( p->Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
 		FParams->Width.SetVal( size );
-		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameters>( p->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<MovingBlock_Parameters> MParams = boost::static_pointer_cast<MovingBlock_Parameters>( p->Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		MParams->Size.SetVal( size );
 		MParams->Aspect = MovingBlock_Parameters::AspectType_SQUARE;
 		MParams->Motion = MovingBlock_Parameters::MotionType_VERTICAL;
-		std::shared_ptr<BouncyBlock_Parameters> BParams = std::static_pointer_cast<BouncyBlock_Parameters>( p->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<BouncyBlock_Parameters> BParams = boost::static_pointer_cast<BouncyBlock_Parameters>( p->Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		BParams->Size.SetVal( size );
-		std::shared_ptr<FlyingBlob_Parameters> GParams = std::static_pointer_cast<FlyingBlob_Parameters>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> GParams = boost::static_pointer_cast<FlyingBlob_Parameters>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 		//GParams.Counter
-		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameters>( p->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> NParams = boost::static_pointer_cast<NormalBlock_Parameters>( p->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		//NParams.Make = false;
 
 
@@ -1762,14 +1762,14 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				//std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
 				//ScreenSaver_Construct( Intro );
 				//Intro->Init();
 
 				return;
 	#else
 				// Start at Screen Saver
-				std::shared_ptr<ScreenSaver> Intro = std::make_shared<ScreenSaver>();
+				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
 				ScreenSaver_Construct( Intro );
 				Intro->Init();
 				return;
@@ -1789,7 +1789,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 #if defined(WINDOWS)
 		_DrawMouseBackIcon = false;
 #endif
-		ToDo = std::make_shared<Multicaster>();
+		ToDo = boost::make_shared<Multicaster>();
 #if defined(WINDOWS)
 		ShowMouse = false;
 #endif
@@ -1799,7 +1799,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		DeltaT = 0;
 		//RunningSlowly = false;
 		ShowFPS = false;
-		MainString = std::make_shared<StringBuilder>( 100, 100 );
+		MainString = boost::make_shared<StringBuilder>( 100, 100 );
 		DoInnerLogoPhsx = true;
 	}
 }

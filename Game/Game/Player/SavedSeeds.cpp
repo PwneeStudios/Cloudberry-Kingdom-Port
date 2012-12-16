@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	void SavedSeeds::WriteChunk_5( const std::shared_ptr<BinaryWriter> &writer )
+	void SavedSeeds::WriteChunk_5( const boost::shared_ptr<BinaryWriter> &writer )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 5;
 
 		for ( std::vector<std::wstring>::const_iterator seed = SeedStrings.begin(); seed != SeedStrings.end(); ++seed )
@@ -32,14 +32,14 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void SavedSeeds::ReadChunk_5( const std::shared_ptr<Chunk> &ParentChunk )
+	void SavedSeeds::ReadChunk_5( const boost::shared_ptr<Chunk> &ParentChunk )
 	{
-		std::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
+		boost::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
 		chunks->StartGettingChunks();
 
 		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
 			switch ( chunk->Type )
 			{

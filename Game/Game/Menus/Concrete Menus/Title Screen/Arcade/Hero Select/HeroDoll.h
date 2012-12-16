@@ -9,21 +9,21 @@ namespace CloudberryKingdom
 	{
 	
 		HeroDoll( int Control );
-		std::shared_ptr<HeroDoll> HeroDoll_Construct( int Control );
+		boost::shared_ptr<HeroDoll> HeroDoll_Construct( int Control );
 
 	
 		virtual void ReleaseBody();
 
 	
-		std::shared_ptr<Bob> MyDoll;
+		boost::shared_ptr<Bob> MyDoll;
 		virtual void Init();
 
 		virtual void OnAdd();
 
 	
-		std::shared_ptr<PlayerData> player;
+		boost::shared_ptr<PlayerData> player;
 	
-		void MakeHeroDoll( const std::shared_ptr<BobPhsx> &hero );
+		void MakeHeroDoll( const boost::shared_ptr<BobPhsx> &hero );
 
 	
 		void SetPos();

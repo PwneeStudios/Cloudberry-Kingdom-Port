@@ -10,16 +10,16 @@ namespace CloudberryKingdom
 
 	void ActionGameData::InitializeStatics()
 	{
-		ActionGameData::Factory = std::make_shared<ActionFactory>();
+		ActionGameData::Factory = boost::make_shared<ActionFactory>();
 	}
 
 	// Statics
-	std::shared_ptr<GameFactory> ActionGameData::Factory;
+	boost::shared_ptr<GameFactory> ActionGameData::Factory;
 
 
-	std::shared_ptr<GameData> ActionFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> ActionFactory::Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
-		std::shared_ptr<ActionGameData> temp = std::make_shared<ActionGameData>( data, MakeInBackground );
+		boost::shared_ptr<ActionGameData> temp = boost::make_shared<ActionGameData>( data, MakeInBackground );
 		ActionGameData_Construct( temp, data, MakeInBackground );
 		return temp;
 	}
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		// InitializeInstanceFields();
 	}
 
-	ActionGameData::ActionGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
+	ActionGameData::ActionGameData( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
 		Done( false ), ActionTaken( false)
 	{
 		// See ActionGameData_Construct.
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		Init( LevelSeed, MakeInBackground );*/
 	}
 
-	void ActionGameData::Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	void ActionGameData::Init( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
 		GameData::Init();
 
@@ -92,10 +92,10 @@ namespace CloudberryKingdom
 		Seed.reset();
 	}
 
-	std::shared_ptr<Level> ActionGameData::MakeEmptyLevel()
+	boost::shared_ptr<Level> ActionGameData::MakeEmptyLevel()
 	{
-		std::shared_ptr<Level> level = std::make_shared<Level>();
-		level->setMainCamera( std::make_shared<Camera>() );
+		boost::shared_ptr<Level> level = boost::make_shared<Level>();
+		level->setMainCamera( boost::make_shared<Camera>() );
 		level->CurPiece = level->StartNewPiece( 0, BobVec(), 4 );
 		level->CurPiece->StartData[ 0 ].Position = Vector2( 0, 0 );
 		level->getMainCamera()->BLCamBound = Vector2(-100000, 0);
@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 		level->getMainCamera()->Update();
 		level->TimeLimit = -1;
 
-		level->MyBackground = std::make_shared<RegularBackground>();
+		level->MyBackground = boost::make_shared<RegularBackground>();
 		level->MyBackground->Init( level );
 
 		level->MyGame =  shared_from_this();
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		return level;
 	}
 
-	void ActionGameData::MakeBobs( const std::shared_ptr<Level> &level )
+	void ActionGameData::MakeBobs( const boost::shared_ptr<Level> &level )
 	{
 	}
 

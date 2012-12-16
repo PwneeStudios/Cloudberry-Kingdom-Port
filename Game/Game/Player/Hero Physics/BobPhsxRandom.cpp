@@ -5,11 +5,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxRandom::InitializeStatics()
 	{
-		BobPhsxRandom::instance = std::make_shared<BobPhsxRandom>();
+		BobPhsxRandom::instance = boost::make_shared<BobPhsxRandom>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance;
+	boost::shared_ptr<BobPhsxRandom> BobPhsxRandom::instance;
 
 
 	void BobPhsxRandom::InitSingleton()
@@ -20,28 +20,28 @@ namespace CloudberryKingdom
 		Icon = ObjectIcon::RandomIcon;
 	}
 
-	const std::shared_ptr<BobPhsxRandom> &BobPhsxRandom::getInstance()
+	const boost::shared_ptr<BobPhsxRandom> &BobPhsxRandom::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxRandom::ChooseHeroType()
+	boost::shared_ptr<BobPhsx> BobPhsxRandom::ChooseHeroType()
 	{
 		// FIXME: Check isomorphism.
 		return Tools::GlobalRnd->ChooseOne( Bob::HeroTypes );
 		//return Tools::GlobalRnd->Choose( Bob::HeroTypes );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxRandom::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxRandom::Clone()
 	{
-		std::shared_ptr<BobPhsxRandom> newBob = std::make_shared<BobPhsxRandom>();
+		boost::shared_ptr<BobPhsxRandom> newBob = boost::make_shared<BobPhsxRandom>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxRandom::CopyTo( const std::shared_ptr<BobPhsxRandom> &bob )
+	void BobPhsxRandom::CopyTo( const boost::shared_ptr<BobPhsxRandom> &bob )
 	{
-		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) ); 
+		BobPhsx::CopyTo( boost::static_pointer_cast<BobPhsx>( bob ) ); 
 	}
 
 	BobPhsxRandom::BobPhsxRandom()

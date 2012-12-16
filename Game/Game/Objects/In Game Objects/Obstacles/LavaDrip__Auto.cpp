@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	void LavaDrip_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void LavaDrip_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
 		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_LAVA_DRIP ) );
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 		LavaDripStepCutoff = 1499;
 	}
 
-	std::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = std::make_shared<LavaDrip_AutoGen>();
+	boost::shared_ptr<LavaDrip_AutoGen> LavaDrip_AutoGen::instance = boost::make_shared<LavaDrip_AutoGen>();
 
-	const std::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance()
+	const boost::shared_ptr<LavaDrip_AutoGen> &LavaDrip_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -36,15 +36,15 @@ namespace CloudberryKingdom
 		Do_PreFill_2 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> LavaDrip_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> LavaDrip_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<LavaDrip_Parameters> Params = std::make_shared<LavaDrip_Parameters>();
+		boost::shared_ptr<LavaDrip_Parameters> Params = boost::make_shared<LavaDrip_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void LavaDrip_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void LavaDrip_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		TR += Vector2( 350, 0 );
 
 		// Get LavaDrip parameters
-		std::shared_ptr<LavaDrip_Parameters> Params = std::static_pointer_cast<LavaDrip_Parameters>( level->getStyle()->FindParams( LavaDrip_AutoGen::getInstance() ) );
+		boost::shared_ptr<LavaDrip_Parameters> Params = boost::static_pointer_cast<LavaDrip_Parameters>( level->getStyle()->FindParams( LavaDrip_AutoGen::getInstance() ) );
 
 		float step = 5;
 
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 
 			if ( step < Params->LavaDripStepCutoff )
 			{
-				std::shared_ptr<LavaDrip> LavaDrip_Renamed = std::static_pointer_cast<LavaDrip>( level->getRecycle()->GetObject(ObjectType_LAVA_DRIP, true) );
+				boost::shared_ptr<LavaDrip> LavaDrip_Renamed = boost::static_pointer_cast<LavaDrip>( level->getRecycle()->GetObject(ObjectType_LAVA_DRIP, true) );
 				LavaDrip_Renamed->BoxSize.Y = Params->Length.RndFloat( loc, level->getRnd() );
 				LavaDrip_Renamed->Init( loc, level );
 
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void LavaDrip_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void LavaDrip_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}

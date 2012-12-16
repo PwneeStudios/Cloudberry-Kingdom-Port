@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void SpikeyLine::SpikeyLineTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
+		Ball = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
 		Radius = 120;
 		Rotate = false;
 		RotateOffset = 0;
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer2 = 6;
 	}
 
-	void SpikeyLine::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void SpikeyLine::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_CircleDeath::Init( pos, level );
 
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 
 		if ( !getCore()->BoxesOnly )
 		{
-			Head = std::make_shared<QuadClass>();
+			Head = boost::make_shared<QuadClass>();
 		}
 	}
 
@@ -154,11 +154,11 @@ namespace CloudberryKingdom
 		Move( shift );
 	}
 
-	void SpikeyLine::Clone( const std::shared_ptr<ObjectBase> &A )
+	void SpikeyLine::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<SpikeyLine> FloaterA = std::dynamic_pointer_cast<SpikeyLine>( A );
+		boost::shared_ptr<SpikeyLine> FloaterA = boost::dynamic_pointer_cast<SpikeyLine>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Period = FloaterA->Period;

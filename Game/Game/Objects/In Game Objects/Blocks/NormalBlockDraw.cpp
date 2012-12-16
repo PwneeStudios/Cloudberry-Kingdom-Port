@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		MyTemplate.reset();
 	}
 
-	void NormalBlockDraw::Clone( const std::shared_ptr<NormalBlockDraw> &DrawA )
+	void NormalBlockDraw::Clone( const boost::shared_ptr<NormalBlockDraw> &DrawA )
 	{
 		SetTint( DrawA->Tint );
 		MyTemplate = DrawA->MyTemplate;
@@ -42,12 +42,12 @@ namespace CloudberryKingdom
 
 	Vector2 NormalBlockDraw::ModCeilingSize = Vector2( 25, 0 );
 
-	void NormalBlockDraw::Init( const std::shared_ptr<BlockBase> &block )
+	void NormalBlockDraw::Init( const boost::shared_ptr<BlockBase> &block )
 	{
 		Init( block, 0, false );
 	}
 
-	void NormalBlockDraw::Init( const std::shared_ptr<BlockBase> &block, std::shared_ptr<PieceQuad> template_Renamed, bool Invert )
+	void NormalBlockDraw::Init( const boost::shared_ptr<BlockBase> &block, boost::shared_ptr<PieceQuad> template_Renamed, bool Invert )
 	{
 		if ( MyTemplate != 0 )
 			template_Renamed = MyTemplate;
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		if ( template_Renamed != 0 )
 		{
 			if ( MyPieces == 0 )
-				MyPieces = std::make_shared<PieceQuad>();
+				MyPieces = boost::make_shared<PieceQuad>();
 			MyPieces->Clone( template_Renamed );
 		}
 

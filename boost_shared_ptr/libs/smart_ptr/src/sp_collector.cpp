@@ -14,6 +14,7 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/detail/lightweight_mutex.hpp>
 #include <cstdlib>
+#include <Utility/Limits.h>
 #include <map>
 #include <deque>
 #include <iostream>

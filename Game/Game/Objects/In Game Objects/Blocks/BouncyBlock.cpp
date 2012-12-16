@@ -49,15 +49,15 @@ namespace CloudberryKingdom
 	BouncyBlock::BouncyBlock( bool BoxesOnly )
 	{
 		InitializeInstanceFields();
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		MakeNew();
 
 		getCore()->BoxesOnly = BoxesOnly;
 	}
 
-	void BouncyBlock::Init( Vector2 center, Vector2 size, float speed, const std::shared_ptr<Level> &level )
+	void BouncyBlock::Init( Vector2 center, Vector2 size, float speed, const boost::shared_ptr<Level> &level )
 	{
 		Active = true;
 
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		Update();
 	}
 
-	void BouncyBlock::Snap( const std::shared_ptr<Bob> &bob )
+	void BouncyBlock::Snap( const boost::shared_ptr<Bob> &bob )
 	{
 		TouchedCountdown = 3;
 
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 		SetState( BouncyBlockState_SUPER_STIFF );
 	}
 
-	void BouncyBlock::SideHit( const std::shared_ptr<Bob> &bob )
+	void BouncyBlock::SideHit( const boost::shared_ptr<Bob> &bob )
 	{
 		Offset = Vector2( static_cast<float>( ::Sign( bob->getCore()->Data.Position.X - getCore()->Data.Position.X ) ), 0.f );
 		bob->MyPhsx->Forced( Offset );
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		Snap( bob );
 	}
 
-	void BouncyBlock::LandedOn( const std::shared_ptr<Bob> &bob )
+	void BouncyBlock::LandedOn( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->MyPhsx->OverrideSticky = true;
 
@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 		Snap( bob );
 	}
 
-	void BouncyBlock::HitHeadOn( const std::shared_ptr<Bob> &bob )
+	void BouncyBlock::HitHeadOn( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->MyPhsx->KillJump();
 		Offset = Vector2( 0, -1 );
@@ -266,11 +266,11 @@ namespace CloudberryKingdom
 		getBlockCore()->Draw();
 	}
 
-	void BouncyBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void BouncyBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<BouncyBlock> BlockA = std::dynamic_pointer_cast<BouncyBlock>( A );
+		boost::shared_ptr<BouncyBlock> BlockA = boost::dynamic_pointer_cast<BouncyBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->speed, BlockA->getMyLevel() );
 

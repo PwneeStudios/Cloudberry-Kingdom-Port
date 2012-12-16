@@ -9,11 +9,11 @@ namespace CloudberryKingdom
 	struct HintBlurb : public CkBaseMenu
 	{
 	
-		std::shared_ptr<QuadClass> Backdrop;
+		boost::shared_ptr<QuadClass> Backdrop;
 
 	
 		HintBlurb();
-		std::shared_ptr<HintBlurb> HintBlurb_Construct();
+		boost::shared_ptr<HintBlurb> HintBlurb_Construct();
 
 	
 		virtual void MakeBackdrop();
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 	
 		void SetText( const std::wstring &text );
 

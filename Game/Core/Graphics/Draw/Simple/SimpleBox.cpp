@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		TR.Pos = TR.AnimData.Calc( anim, t, AnimLength, Loop, Linear );
 	}
 
-	SimpleBox::SimpleBox( const std::shared_ptr<SimpleBox> &box )
+	SimpleBox::SimpleBox( const boost::shared_ptr<SimpleBox> &box )
 	{
 		Animated = box->Animated;
 
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		TR = box->TR;
 	}
 
-	SimpleBox::SimpleBox( const std::shared_ptr<ObjectBox> &box )
+	SimpleBox::SimpleBox( const boost::shared_ptr<ObjectBox> &box )
 	{
 		Animated = true;
 
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		TR.AnimData = box->TR->AnimData;
 	}
 
-	void SimpleBox::CopyUpdate( std::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift )
+	void SimpleBox::CopyUpdate( boost::shared_ptr<SimpleBox> &SourceBox, Vector2 &shift )
 	{
 		BL.Vertex.xy = SourceBox->BL.Vertex.xy + shift;
 		TR.Vertex.xy = SourceBox->TR.Vertex.xy + shift;

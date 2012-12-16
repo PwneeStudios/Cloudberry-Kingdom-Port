@@ -12,17 +12,17 @@ namespace CloudberryKingdom
 		bool Fading;
 		float Fade;
 
-		std::vector<std::shared_ptr<EzSong> > SongList;
-		std::vector<std::shared_ptr<EzSong> > PlayList;
+		std::vector<boost::shared_ptr<EzSong> > SongList;
+		std::vector<boost::shared_ptr<EzSong> > PlayList;
 
 		int CurIndex;
 
 		bool StartingSong;
 
-		std::shared_ptr<EzText> SongInfoText;
+		boost::shared_ptr<EzText> SongInfoText;
 		bool DisplayingInfo;
 	
-		std::shared_ptr<Camera> DefaultCam;
+		boost::shared_ptr<Camera> DefaultCam;
 
 	
 		EzSongWad();
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 
 		void Unpause();
 
-		void DisplaySongInfo( const std::shared_ptr<EzSong> &song );
+		void DisplaySongInfo( const boost::shared_ptr<EzSong> &song );
 
 		void Draw();
 
@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 	
 		bool IsPlaying();
 
-		void Next( const std::shared_ptr<EzSong> &song );
+		void Next( const boost::shared_ptr<EzSong> &song );
 
 		void Next();
 
@@ -73,22 +73,22 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Set the play list and start playing it.
 		/// </summary>
-		void SetPlayList( std::vector<std::shared_ptr<EzSong> > &songs );
+		void SetPlayList( std::vector<boost::shared_ptr<EzSong> > &songs );
 		void SetPlayList( const std::wstring &name );
 
 		/// <summary>
 		/// Set the play list to a single song and start playing it.
 		/// </summary>
-		void SetPlayList( const std::shared_ptr<EzSong> &song );
+		void SetPlayList( const boost::shared_ptr<EzSong> &song );
 
 		/// <summary>
 		/// The play list currently playing
 		/// (possibly different than the set play list, if it hasn't been started yet).
 		/// </summary>
 	
-		std::vector<std::shared_ptr<EzSong> > CurrentPlayingList;
+		std::vector<boost::shared_ptr<EzSong> > CurrentPlayingList;
 
-		bool SamePlayList( std::vector<std::shared_ptr<EzSong> > &list1, std::vector<std::shared_ptr<EzSong> > &list2 );
+		bool SamePlayList( std::vector<boost::shared_ptr<EzSong> > &list1, std::vector<boost::shared_ptr<EzSong> > &list2 );
 
 		/// <summary>
 		/// Starts the play list if it ISN'T already playing
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 
 		void SetSong( const std::wstring &name );
 
-		void SetSong( const std::shared_ptr<EzSong> &song );
+		void SetSong( const boost::shared_ptr<EzSong> &song );
 
 		bool SuppressNextInfoDisplay;
 		void SetSong( int Index );
@@ -112,13 +112,13 @@ namespace CloudberryKingdom
 
 		void Play( int Index, bool DisplayInfo );
 
-		std::shared_ptr<EzSong> FindByName( const std::wstring &name );
+		boost::shared_ptr<EzSong> FindByName( const std::wstring &name );
 
 		void AddSong( const std::wstring &Name );
 
-		void AddSong( const std::shared_ptr<Song> &song, const std::wstring &Name );
+		void AddSong( const boost::shared_ptr<Song> &song, const std::wstring &Name );
 
-		void LoopSong( const std::shared_ptr<EzSong> &song );
+		void LoopSong( const boost::shared_ptr<EzSong> &song );
 
 	
 		void InitializeInstanceFields();

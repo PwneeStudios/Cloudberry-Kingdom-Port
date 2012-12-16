@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	PhsxSlider::PhsxDataSetter::PhsxDataSetter( BobPhsx::CustomData MyType, const std::shared_ptr<WrappedFloat> &MyFloat )
+	PhsxSlider::PhsxDataSetter::PhsxDataSetter( BobPhsx::CustomData MyType, const boost::shared_ptr<WrappedFloat> &MyFloat )
 	{
 		this->MyType = MyType;
 		this->MyFloat = MyFloat;
@@ -22,21 +22,21 @@ namespace CloudberryKingdom
 		return VecFromArray( tempVector );
 	}
 
-	std::shared_ptr<EzFont> PhsxSlider::Font = 0;
-	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
+	boost::shared_ptr<EzFont> PhsxSlider::Font = 0;
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
 
-	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( std::make_shared<EzText>( word, Font ) )
+	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( boost::make_shared<EzText>( word, Font ) )
 	{
 		InitializeInstanceFields();
 		MyType = type;
 
-		setMyFloat( std::make_shared<WrappedFloat>( CustomHero_GUI::HeroPhsxData[ MyType ], BobPhsx::CustomPhsxData::Bounds( type ).MinValue, BobPhsx::CustomPhsxData::Bounds( type ).MaxValue ) );
+		setMyFloat( boost::make_shared<WrappedFloat>( CustomHero_GUI::HeroPhsxData[ MyType ], BobPhsx::CustomPhsxData::Bounds( type ).MinValue, BobPhsx::CustomPhsxData::Bounds( type ).MaxValue ) );
 								   //CustomHero_GUI.Hero.MyCustomPhsxData[type],
 								   //BobPhsx.CustomPhsxData.Bounds(type).DefaultValue,
 		Process->Apply( shared_from_this() );
 		ScaleText( .33f );
 
-		getMyFloat()->SetCallback = std::make_shared<PhsxDataSetter>(MyType, getMyFloat());
+		getMyFloat()->SetCallback = boost::make_shared<PhsxDataSetter>(MyType, getMyFloat());
 
 		SliderShift = Vector2( -296.6946f, -57.77405f );
 

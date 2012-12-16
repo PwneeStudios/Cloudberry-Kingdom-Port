@@ -3,18 +3,18 @@
 namespace CloudberryKingdom
 {
 
-	void BlockEmitter_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void BlockEmitter_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		MyStyle = static_cast<Style>( level->getRnd()->RndInt( 0, BlockEmitter_Parameters::Style_LENGTH - 1 ) );
 
 		FillWeight = Param( PieceSeed,.5f * u->Get( Upgrade_ELEVATOR ) );
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_GHOST_BLOCK ) ) );
 		}
@@ -58,9 +58,9 @@ namespace CloudberryKingdom
 		StepCutoff = 1350;
 	}
 
-std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make_shared<BlockEmitter_AutoGen>();
+boost::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = boost::make_shared<BlockEmitter_AutoGen>();
 
-	const std::shared_ptr<BlockEmitter_AutoGen> &BlockEmitter_AutoGen::getInstance()
+	const boost::shared_ptr<BlockEmitter_AutoGen> &BlockEmitter_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -71,27 +71,27 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 		Do_WeightedPreFill_1 = true;
 	}
 
-	std::shared_ptr<ObjectBase> BlockEmitter_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> BlockEmitter_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		return AutoGen::CreateAt( level, pos );
 
 		// Do nothing
 	}
 
-	std::shared_ptr<AutoGen_Parameters> BlockEmitter_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> BlockEmitter_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<BlockEmitter_Parameters> Params = std::make_shared<BlockEmitter_Parameters>();
+		boost::shared_ptr<BlockEmitter_Parameters> Params = boost::make_shared<BlockEmitter_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void BlockEmitter_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void BlockEmitter_AutoGen::PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_1( level, BL, TR );
 
 		// Get BlockEmitter parameters
-		std::shared_ptr<BlockEmitter_Parameters> Params = std::static_pointer_cast<BlockEmitter_Parameters>( level->getStyle()->FindParams( BlockEmitter_AutoGen::getInstance() ) );
+		boost::shared_ptr<BlockEmitter_Parameters> Params = boost::static_pointer_cast<BlockEmitter_Parameters>( level->getStyle()->FindParams( BlockEmitter_AutoGen::getInstance() ) );
 
 		Vector2 Pos = BL;
 		int count = 0;
@@ -102,7 +102,7 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 			{
 				if ( Params->Dist.GetVal( Pos ) < Params->StepCutoff )
 				{
-					std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+					boost::shared_ptr<BlockEmitter> bm = boost::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 					bm->Init( Pos, level, level->CurMakeData->PieceSeed->ElevatorBoxStyle );
 
 					float Vel = GetVel( Params, Pos );
@@ -155,7 +155,7 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 
 					if ( DistAdd < Params->StepCutoff )
 					{
-						std::shared_ptr<BlockEmitter> bm = std::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
+						boost::shared_ptr<BlockEmitter> bm = boost::static_pointer_cast<BlockEmitter>( level->getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, true) );
 
 						float Vel = GetVel( Params, Pos );
 
@@ -199,7 +199,7 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 			}
 	}
 
-	float BlockEmitter_AutoGen::GetVel( const std::shared_ptr<BlockEmitter_Parameters> &Params, Vector2 &Pos )
+	float BlockEmitter_AutoGen::GetVel( const boost::shared_ptr<BlockEmitter_Parameters> &Params, Vector2 &Pos )
 	{
 		//float SpeedAdd = Params.SpeedAdd.GetVal(Pos);
 
@@ -212,7 +212,7 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 		return Vel;
 	}
 
-	void BlockEmitter_AutoGen::SetAndAdd( const std::shared_ptr<Level> &level, const std::shared_ptr<BlockEmitter_Parameters> &Params, Vector2 Pos, const std::shared_ptr<BlockEmitter> &bm )
+	void BlockEmitter_AutoGen::SetAndAdd( const boost::shared_ptr<Level> &level, const boost::shared_ptr<BlockEmitter_Parameters> &Params, Vector2 Pos, const boost::shared_ptr<BlockEmitter> &bm )
 	{
 		bm->Delay = static_cast<int>( Params->Delay.GetVal( Pos ) );
 
@@ -240,7 +240,7 @@ std::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = std::make
 		level->AddObject( bm );
 	}
 
-	void BlockEmitter_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void BlockEmitter_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}

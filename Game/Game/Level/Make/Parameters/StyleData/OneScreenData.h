@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		Vector2 CamShift;
 
-		OneScreenData( const std::shared_ptr<Rand> &Rnd );
+		OneScreenData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 

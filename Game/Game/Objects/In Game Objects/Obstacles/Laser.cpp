@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Laser::LaserTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Laser" ) ), 100.f, 60.f, 1, Vector4( 1.f ) );
+		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Laser" ) ), 100.f, 60.f, 1, Vector4( 1.f ) );
 		Tint_Full = Vector4( 1.f, 1.f, 1.f, .95f );
 		Tint_Half = Vector4( 1,.5f,.5f,.4f );
 		Scale = 1;
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 
 	void Laser::DrawGraphics()
 	{
-		std::shared_ptr<CloudberryKingdom::Laser::LaserTileInfo> info = getInfo()->Lasers;
+		boost::shared_ptr<CloudberryKingdom::Laser::LaserTileInfo> info = getInfo()->Lasers;
 		float scale = info->Scale;
 		Vector4 Full = info->Tint_Full;
 		Vector4 Half = info->Tint_Half;
@@ -197,18 +197,18 @@ namespace CloudberryKingdom
 		p2 += shift;
 	}
 
-	void Laser::Interact( const std::shared_ptr<Bob> &bob )
+	void Laser::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( MyState == LaserState_ON && !getCore()->SkippedPhsx )
 			_LineDeath::Interact( bob );
 	}
 
-	void Laser::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Laser::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 		getCore()->WakeUpRequirements = true;
 
-		std::shared_ptr<Laser> LaserA = std::dynamic_pointer_cast<Laser>( A );
+		boost::shared_ptr<Laser> LaserA = boost::dynamic_pointer_cast<Laser>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		SetLine( LaserA->p1, LaserA->p2 );

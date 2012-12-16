@@ -18,32 +18,32 @@ namespace CloudberryKingdom
 
 		bool AllowTopOnlyBlocks;
 
-		std::shared_ptr<Wall::WallTileInfo> Walls;
+		boost::shared_ptr<Wall::WallTileInfo> Walls;
 
-		std::shared_ptr<Pendulum::PendulumTileInfo> Pendulums;
-		std::shared_ptr<LavaDrip::LavaDripTileInfo> LavaDrips;
-		std::shared_ptr<Serpent::SerpentTileInfo> Serpents;
-		std::shared_ptr<Firesnake::FiresnakeTileInfo> Firesnakes;
+		boost::shared_ptr<Pendulum::PendulumTileInfo> Pendulums;
+		boost::shared_ptr<LavaDrip::LavaDripTileInfo> LavaDrips;
+		boost::shared_ptr<Serpent::SerpentTileInfo> Serpents;
+		boost::shared_ptr<Firesnake::FiresnakeTileInfo> Firesnakes;
 
-		std::shared_ptr<Cloud::CloudTileInfo> Clouds;
-		std::shared_ptr<MovingPlatform::ElevatorTileInfo> Elevators;
-		std::shared_ptr<MovingBlock::MovingBlockTileInfo> MovingBlocks;
-		std::shared_ptr<BouncyBlock::BouncyBlockTileInfo> BouncyBlocks;
-		std::shared_ptr<FallingBlock::FallingBlockTileInfo> FallingBlocks;
-		std::shared_ptr<GhostBlock::GhostBlockTileInfo> GhostBlocks;
-		std::shared_ptr<FlyingBlob::FlyingBlobTileInfo> Blobs;
+		boost::shared_ptr<Cloud::CloudTileInfo> Clouds;
+		boost::shared_ptr<MovingPlatform::ElevatorTileInfo> Elevators;
+		boost::shared_ptr<MovingBlock::MovingBlockTileInfo> MovingBlocks;
+		boost::shared_ptr<BouncyBlock::BouncyBlockTileInfo> BouncyBlocks;
+		boost::shared_ptr<FallingBlock::FallingBlockTileInfo> FallingBlocks;
+		boost::shared_ptr<GhostBlock::GhostBlockTileInfo> GhostBlocks;
+		boost::shared_ptr<FlyingBlob::FlyingBlobTileInfo> Blobs;
 
-		std::shared_ptr<Laser::LaserTileInfo> Lasers;
-		std::shared_ptr<SpikeyLine::SpikeyLineTileInfo> SpikeyLines;
-		std::shared_ptr<SpikeyGuy::SpikeyGuyTileInfo> SpikeyGuys;
-		std::shared_ptr<Boulder::BoulderTileInfo> Boulders;
-		std::shared_ptr<Spike::SpikeTileInfo> Spikes;
-		std::shared_ptr<FireSpinner::FireSpinnerTileInfo> Spinners;
-		std::shared_ptr<Fireball::FireballTileInfo> Fireballs;
+		boost::shared_ptr<Laser::LaserTileInfo> Lasers;
+		boost::shared_ptr<SpikeyLine::SpikeyLineTileInfo> SpikeyLines;
+		boost::shared_ptr<SpikeyGuy::SpikeyGuyTileInfo> SpikeyGuys;
+		boost::shared_ptr<Boulder::BoulderTileInfo> Boulders;
+		boost::shared_ptr<Spike::SpikeTileInfo> Spikes;
+		boost::shared_ptr<FireSpinner::FireSpinnerTileInfo> Spinners;
+		boost::shared_ptr<Fireball::FireballTileInfo> Fireballs;
 
-		std::shared_ptr<Checkpoint::CheckpointTileInfo> Checkpoints;
-		std::shared_ptr<Coin::CoinTileInfo> Coins;
-		std::shared_ptr<Door::DoorTileInfo> Doors;
+		boost::shared_ptr<Checkpoint::CheckpointTileInfo> Checkpoints;
+		boost::shared_ptr<Coin::CoinTileInfo> Coins;
+		boost::shared_ptr<Door::DoorTileInfo> Doors;
 
 	
 		void InitializeInstanceFields();

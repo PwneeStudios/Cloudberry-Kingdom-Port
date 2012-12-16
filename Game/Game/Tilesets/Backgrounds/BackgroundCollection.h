@@ -8,11 +8,11 @@ namespace CloudberryKingdom
 	struct BackgroundCollection
 	{
 	
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 
-		std::vector<std::shared_ptr<BackgroundFloaterList> > Lists;
+		std::vector<boost::shared_ptr<BackgroundFloaterList> > Lists;
 
-		BackgroundCollection( const std::shared_ptr<Level> &level );
+		BackgroundCollection( const boost::shared_ptr<Level> &level );
 
 		void Release();
 
@@ -21,16 +21,16 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Reset();
 
-		void SetLevel( const std::shared_ptr<Level> &level );
+		void SetLevel( const boost::shared_ptr<Level> &level );
 
-		void SetBackground( const std::shared_ptr<Background> &b );
+		void SetBackground( const boost::shared_ptr<Background> &b );
 
 		void Move( Vector2 shift );
 
 		void Clear();
-		void Clear( const std::shared_ptr<FloatRectangle> &Area );
+		void Clear( const boost::shared_ptr<FloatRectangle> &Area );
 
-		void Absorb( const std::shared_ptr<BackgroundCollection> &collection );
+		void Absorb( const boost::shared_ptr<BackgroundCollection> &collection );
 
 		void DrawLayer( int Layer );
 

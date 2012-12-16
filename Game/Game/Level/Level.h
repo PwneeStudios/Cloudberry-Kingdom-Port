@@ -5,10 +5,10 @@
 
 namespace CloudberryKingdom
 {
-	struct Level : public std::enable_shared_from_this<Level>
+	struct Level : public boost::enable_shared_from_this<Level>
 	{
 	
-		struct ElementDistanceSquared : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
+		struct ElementDistanceSquared : public LambdaFunc_1<boost::shared_ptr<BlockBase> , float>
 		{
 		
 			Vector2 pos;
@@ -16,46 +16,46 @@ namespace CloudberryKingdom
 		
 			ElementDistanceSquared( Vector2 pos );
 
-			float Apply( const std::shared_ptr<BlockBase> &element );
+			float Apply( const boost::shared_ptr<BlockBase> &element );
 		};
 
 	
-		struct FindFirstRowLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+		struct FindFirstRowLambda : public LambdaFunc_1<boost::shared_ptr<BlockBase> , bool>
 		{
 		
 			FindFirstRowLambda();
 
-			bool Apply( const std::shared_ptr<BlockBase> &match );
+			bool Apply( const boost::shared_ptr<BlockBase> &match );
 		};
 
 	
 		struct MakeVerticalCleanupHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 
 		
-			MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level );
+			MakeVerticalCleanupHelper( const boost::shared_ptr<Level> &level );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
 	
-		struct FindLimitGeneralDensityLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+		struct FindLimitGeneralDensityLambda : public LambdaFunc_1<boost::shared_ptr<ObjectBase> , bool>
 		{
 		
 			FindLimitGeneralDensityLambda();
 
-			bool Apply( const std::shared_ptr<ObjectBase> &obj );
+			bool Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
 		struct EndReachedLambda : public Lambda
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 		
-			EndReachedLambda( const std::shared_ptr<Level> &level );
+			EndReachedLambda( const boost::shared_ptr<Level> &level );
 
 			void Apply();
 		};
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		struct SafetyNetLambda : public Lambda_1<Vector2>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 			Vector2 BL;
 			Vector2 TR;
 			Vector2 size;
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 			bool Invert;
 
 		
-			SafetyNetLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert );
+			SafetyNetLambda( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert );
 
 			void Apply( const Vector2 &pos );
 
@@ -90,10 +90,10 @@ namespace CloudberryKingdom
 		struct MakeInitialLambda : public Lambda_1<Vector2>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 			Vector2 size;
 		
-			MakeInitialLambda( const std::shared_ptr<Level> &level, Vector2 size );
+			MakeInitialLambda( const boost::shared_ptr<Level> &level, Vector2 size );
 
 			void Apply( const Vector2 &pos );
 		};
@@ -102,13 +102,13 @@ namespace CloudberryKingdom
 		struct Stage1RndFillLambda : public Lambda_1<Vector2>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 			Vector2 BL;
 			Vector2 TR;
 			Vector2 BL_Cutoff;
 
 		
-			Stage1RndFillLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff );
+			Stage1RndFillLambda( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff );
 
 			void Apply( const Vector2 &pos );
 		};
@@ -117,69 +117,69 @@ namespace CloudberryKingdom
 		struct GeneralMinDistLambda : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 		
-			GeneralMinDistLambda( const std::shared_ptr<Level> &level );
+			GeneralMinDistLambda( const boost::shared_ptr<Level> &level );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
 
 	
-		struct CloseToStartLambda : public LambdaFunc_1<std::shared_ptr<Bob> , bool>
+		struct CloseToStartLambda : public LambdaFunc_1<boost::shared_ptr<Bob> , bool>
 		{
 		
 			CloseToStartLambda();
 
-			bool Apply( const std::shared_ptr<Bob> &bob );
+			bool Apply( const boost::shared_ptr<Bob> &bob );
 		};
 
 	
-		struct IsLavaLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+		struct IsLavaLambda : public LambdaFunc_1<boost::shared_ptr<BlockBase> , bool>
 		{
 		
 			IsLavaLambda();
 
-			bool Apply( const std::shared_ptr<BlockBase> &block );
+			bool Apply( const boost::shared_ptr<BlockBase> &block );
 		};
 
 	
-		struct FindGuidLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+		struct FindGuidLambda : public LambdaFunc_1<boost::shared_ptr<ObjectBase> , bool>
 		{
 		
 			unsigned long long guid;
 		
 			FindGuidLambda( unsigned long long guid );
 
-			bool Apply( const std::shared_ptr<ObjectBase> &obj );
+			bool Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
-		struct CleanObjectListLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+		struct CleanObjectListLambda : public LambdaFunc_1<boost::shared_ptr<ObjectBase> , bool>
 		{
 		
 			CleanObjectListLambda();
 
-			bool Apply( const std::shared_ptr<ObjectBase> &obj );
+			bool Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
-		struct CleanDrawLayerLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+		struct CleanDrawLayerLambda : public LambdaFunc_1<boost::shared_ptr<ObjectBase> , bool>
 		{
 		
 			int layer;
 		
 			CleanDrawLayerLambda( int layer );
 
-			bool Apply( const std::shared_ptr<ObjectBase> &obj );
+			bool Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
-		struct CleanBlockListLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+		struct CleanBlockListLambda : public LambdaFunc_1<boost::shared_ptr<BlockBase> , bool>
 		{
 		
 			CleanBlockListLambda();
 
-			bool Apply( const std::shared_ptr<BlockBase> &obj );
+			bool Apply( const boost::shared_ptr<BlockBase> &obj );
 		};
 
 	
@@ -189,34 +189,34 @@ namespace CloudberryKingdom
 			LightLayers_FRONT_OF_EVERYTHING
 		};
 	
-		struct RemoveForeignLambda : public LambdaFunc_1<std::shared_ptr<ObjectBase> , bool>
+		struct RemoveForeignLambda : public LambdaFunc_1<boost::shared_ptr<ObjectBase> , bool>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 		
-			RemoveForeignLambda( const std::shared_ptr<Level> &level );
+			RemoveForeignLambda( const boost::shared_ptr<Level> &level );
 
-			bool Apply( const std::shared_ptr<ObjectBase> &obj );
+			bool Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
-		struct RemoveForeignBlockLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+		struct RemoveForeignBlockLambda : public LambdaFunc_1<boost::shared_ptr<BlockBase> , bool>
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 		
-			RemoveForeignBlockLambda( const std::shared_ptr<Level> &level );
+			RemoveForeignBlockLambda( const boost::shared_ptr<Level> &level );
 
-			bool Apply( const std::shared_ptr<BlockBase> &obj );
+			bool Apply( const boost::shared_ptr<BlockBase> &obj );
 		};
 
 	
-		struct BaseMetric : public LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2>
+		struct BaseMetric : public LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2>
 		{
 		
 			BaseMetric();
 
-			Vector2 Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B );
+			Vector2 Apply( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B );
 		};
 	
 		struct ConstLambda : public LambdaFunc_1<Vector2, Vector2>
@@ -233,11 +233,11 @@ namespace CloudberryKingdom
 		struct SetBackLambda : public Lambda
 		{
 		
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<Level> level;
 			int Steps;
 
 		
-			SetBackLambda( const std::shared_ptr<Level> &level, int Steps );
+			SetBackLambda( const boost::shared_ptr<Level> &level, int Steps );
 
 			void Apply();
 		};
@@ -246,10 +246,10 @@ namespace CloudberryKingdom
 		struct CleanupCoinsHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
 		
-			std::shared_ptr<Coin_Parameters> Params;
+			boost::shared_ptr<Coin_Parameters> Params;
 
 		
-			CleanupCoinsHelper( const std::shared_ptr<Coin_Parameters> &Params );
+			CleanupCoinsHelper( const boost::shared_ptr<Coin_Parameters> &Params );
 
 			Vector2 Apply( const Vector2 &pos );
 		};
@@ -265,22 +265,22 @@ namespace CloudberryKingdom
 		/// <param name="Up">Whether the level is an up level or a down level</param>
 		/// <param name="Height">The height of the level, always positive.</param>
 		/// <returns></returns>
-		std::shared_ptr<CameraZone> MakeVerticalCameraZone( LevelGeometry Geometry, float Height );
+		boost::shared_ptr<CameraZone> MakeVerticalCameraZone( LevelGeometry Geometry, float Height );
 
 		/// <summary>
 		/// Create the initial platforms the players start on.
 		/// </summary>
-		float MakeVerticalInitialPlats( const std::shared_ptr<StyleData> &Style );
+		float MakeVerticalInitialPlats( const boost::shared_ptr<StyleData> &Style );
 
 	
 		bool EndReached;
 	
-		bool MakeVertical( int Length, float Height, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData );
+		bool MakeVertical( int Length, float Height, int StartPhsxStep, int ReturnEarly, const boost::shared_ptr<MakeData> &makeData );
 
 	
 		float SetStepMultiplier( Vector2 &Size, Vector2 &Step );
 
-		std::shared_ptr<NormalBlock> MakePillarBack( Vector2 p1, Vector2 p2 );
+		boost::shared_ptr<NormalBlock> MakePillarBack( Vector2 p1, Vector2 p2 );
 
 
 	
@@ -290,7 +290,7 @@ namespace CloudberryKingdom
 
 		static Vector2 GetLadderSize( LadderType Type );
 
-		void MakeLadder( const std::shared_ptr<PieceSeedData> &Piece );
+		void MakeLadder( const boost::shared_ptr<PieceSeedData> &Piece );
 
 
 		/// <summary>
@@ -298,12 +298,12 @@ namespace CloudberryKingdom
 		/// </summary>
 		const bool getReplayAvailable() const;
 
-		std::shared_ptr<SwarmBundle> MySwarmBundle;
-		std::shared_ptr<Recording> CurrentRecording;
+		boost::shared_ptr<SwarmBundle> MySwarmBundle;
+		boost::shared_ptr<Recording> CurrentRecording;
 //C# TO C++ CONVERTER NOTE: The variable Recording was renamed since it is named the same as a user-defined type:
 		bool Recording_Renamed;
 	
-		std::shared_ptr<ReplayGUI> MyReplayGUI;
+		boost::shared_ptr<ReplayGUI> MyReplayGUI;
 
 	
 		bool SingleOnly;
@@ -318,23 +318,23 @@ namespace CloudberryKingdom
 
 		void WatchReplay( bool SaveCurInfo );
 
-		std::shared_ptr<Lambda> OnWatchComputer;
+		boost::shared_ptr<Lambda> OnWatchComputer;
 
 		void WatchComputer();
 		void WatchComputer( bool GUI );
 
 		bool EndOfReplay();
 
-		std::shared_ptr<Lambda> OnEndReplay;
+		boost::shared_ptr<Lambda> OnEndReplay;
 		void EndReplay();
 
 
 		void EndComputerWatch();
 
 
-		std::shared_ptr<MakeData> CurMakeData;
-		const std::shared_ptr<StyleData> &getStyle() const;
-		const std::shared_ptr<PieceSeedData> &getPieceSeed() const;
+		boost::shared_ptr<MakeData> CurMakeData;
+		const boost::shared_ptr<StyleData> &getStyle() const;
+		const boost::shared_ptr<PieceSeedData> &getPieceSeed() const;
 		LevelGeometry Geometry;
 
 		bool CreationError;
@@ -349,13 +349,13 @@ namespace CloudberryKingdom
 		bool SetToWatchMake;
 
 
-		std::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer );
-		std::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer, int NumBobs );
+		boost::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer );
+		boost::shared_ptr<LevelPiece> StartNewPiece( int Length, BobVec Computer, int NumBobs );
 
-		void Clone( const std::shared_ptr<Level> &A );
+		void Clone( const boost::shared_ptr<Level> &A );
 
-		void Fill( Vector2 BL, Vector2 TR, float xstep, float ystep, const std::shared_ptr<Lambda_1<Vector2> > &FillFunc );
-		void Fill( Vector2 BL, Vector2 TR, Vector2 xstep, float ystep, const std::shared_ptr<Lambda_1<Vector2> > &FillFunc );
+		void Fill( Vector2 BL, Vector2 TR, float xstep, float ystep, const boost::shared_ptr<Lambda_1<Vector2> > &FillFunc );
+		void Fill( Vector2 BL, Vector2 TR, Vector2 xstep, float ystep, const boost::shared_ptr<Lambda_1<Vector2> > &FillFunc );
 
 		void FadeMusic();
 
@@ -363,8 +363,8 @@ namespace CloudberryKingdom
 		/// Give a bonus to player's score fore beating the level.
 		/// Increment the number of levels the player has finished.
 		/// </summary>
-		void EndOfLevelBonus( const std::shared_ptr<PlayerData> &FinishingPlayer );
-		void EndOfLevelBonus( const std::shared_ptr<PlayerData> &FinishingPlayer, bool IncrLevels );
+		void EndOfLevelBonus( const boost::shared_ptr<PlayerData> &FinishingPlayer );
+		void EndOfLevelBonus( const boost::shared_ptr<PlayerData> &FinishingPlayer, bool IncrLevels );
 
 		bool CoinsCountInStats;
 		int NumCoins, NumBlobs, TotalCoinScore;
@@ -385,45 +385,45 @@ namespace CloudberryKingdom
 		/// </summary>
 		void UndoSoftEndLevel();
 
-		std::shared_ptr<BlockBase> LastSafetyBlock;
+		boost::shared_ptr<BlockBase> LastSafetyBlock;
 		static const float SafetyNetHeight;
-		std::shared_ptr<BlockBase> Stage1SafetyNet( Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type );
-		std::shared_ptr<BlockBase> __LastBlock;
+		boost::shared_ptr<BlockBase> Stage1SafetyNet( Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type );
+		boost::shared_ptr<BlockBase> __LastBlock;
 
-		std::shared_ptr<BlockBase> MadeBackBlock;
+		boost::shared_ptr<BlockBase> MadeBackBlock;
 		/// <summary>
 		/// Creates a door at the specified position, as well as a backdrop block.
 		/// </summary>
-		std::shared_ptr<Door> PlaceDoorOnBlock_Unlayered( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop );
-		std::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop );
-		std::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset );
-		std::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset, bool LayeredDoor );
+		boost::shared_ptr<Door> PlaceDoorOnBlock_Unlayered( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop );
+		boost::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop );
+		boost::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop, const boost::shared_ptr<TileSet> &BackdropTileset );
+		boost::shared_ptr<Door> PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop, const boost::shared_ptr<TileSet> &BackdropTileset, bool LayeredDoor );
 
 	
-		void SetBackblockProperties( const std::shared_ptr<NormalBlock> &backblock );
+		void SetBackblockProperties( const boost::shared_ptr<NormalBlock> &backblock );
 
 	
-		static void SpreadStartPositions( const std::shared_ptr<LevelPiece> &piece, const std::shared_ptr<MakeData> &make, Vector2 pos, Vector2 SpanPer );
+		static void SpreadStartPositions( const boost::shared_ptr<LevelPiece> &piece, const boost::shared_ptr<MakeData> &make, Vector2 pos, Vector2 SpanPer );
 
 		/// <summary>
 		/// Create the initial platforms the players start on.
 		/// </summary>
-		float MakeInitialPlats( Vector2 BL, Vector2 TR, const std::shared_ptr<SingleData> &Style );
+		float MakeInitialPlats( Vector2 BL, Vector2 TR, const boost::shared_ptr<SingleData> &Style );
 
 	
 		float MakeInitial_LandingZone( Vector2 &BL, Vector2 &TR, Vector2 &size );
 
-		float MakeInitial_Spaceship( Vector2 &BL, Vector2 &TR, Vector2 &pos, std::shared_ptr<NormalBlock> &block );
+		float MakeInitial_Spaceship( Vector2 &BL, Vector2 &TR, Vector2 &pos, boost::shared_ptr<NormalBlock> &block );
 
 		float MakeInitial_Normal( Vector2 BL, Vector2 TR, Vector2 size );
 
-		std::shared_ptr<NormalBlock> __block_fromlambda;
+		boost::shared_ptr<NormalBlock> __block_fromlambda;
 
 	
 		float VanillaFill( Vector2 BL, Vector2 TR, float width );
-		float VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PreInit, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PostInit );
+		float VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BlockBase> > > &PreInit, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BlockBase> > > &PostInit );
 
-		float RandomBlocks( Vector2 BL, Vector2 TR, std::shared_ptr<MakeData> &makeData );
+		float RandomBlocks( Vector2 BL, Vector2 TR, boost::shared_ptr<MakeData> &makeData );
 
 	
 		static int CountToSleep;
@@ -436,8 +436,8 @@ namespace CloudberryKingdom
 
 
 
-		std::shared_ptr<CameraZone> MakeCameraZone();
-		std::shared_ptr<CameraZone> MakeCameraZone( Vector2 Size );
+		boost::shared_ptr<CameraZone> MakeCameraZone();
+		boost::shared_ptr<CameraZone> MakeCameraZone( Vector2 Size );
 
 		/// <summary>
 		/// A BL bound for filling, offset by beginning platforms.
@@ -462,7 +462,7 @@ namespace CloudberryKingdom
 
 		float MaxRight, EndBuffer;
 		int LastStep;
-		bool MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData );
+		bool MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const boost::shared_ptr<MakeData> &makeData );
 
 	
 		void Stage1( Vector2 BL_Bound, Vector2 TR_Bound, int Length );
@@ -484,18 +484,18 @@ namespace CloudberryKingdom
 		void RegularBlockCleanup();
 
 
-		void InitMakeData( const std::shared_ptr<MakeData> &makeData );
+		void InitMakeData( const boost::shared_ptr<MakeData> &makeData );
 
 
 	
-		const std::shared_ptr<Recycler> getRecycle() const;
+		const boost::shared_ptr<Recycler> getRecycle() const;
 
 		std::wstring Name;
 
 	
-		std::shared_ptr<Rand> _PrivateRnd;
+		boost::shared_ptr<Rand> _PrivateRnd;
 	
-		const std::shared_ptr<Rand> &getRnd();
+		const boost::shared_ptr<Rand> &getRnd();
 
 		bool SuppressSounds;
 
@@ -505,7 +505,7 @@ namespace CloudberryKingdom
 
 		int NumAttempts, PieceAttempts;
 
-		std::shared_ptr<BobPhsx> DefaultHeroType;
+		boost::shared_ptr<BobPhsx> DefaultHeroType;
 
 		/// <summary>
 		/// True if the level generation algorithm returned early.
@@ -566,9 +566,9 @@ namespace CloudberryKingdom
 		/// Make sure the lava in this level (if it exists) is pushed below the given y-coordinate.
 		/// </summary>
 		void PushLava( float y );
-		void PushLava( float y, const std::shared_ptr<LavaBlock> &lava );
+		void PushLava( float y, const boost::shared_ptr<LavaBlock> &lava );
 
-		std::shared_ptr<GameData> MyGame, MySourceGame;
+		boost::shared_ptr<GameData> MyGame, MySourceGame;
 		int TimeLimit;
 		bool HaveTimeLimit;
 
@@ -587,34 +587,34 @@ namespace CloudberryKingdom
 		/// Holds the LevelSeedData that generated this level.
 		/// </summary>
 	
-		std::shared_ptr<LevelSeedData> MyLevelSeed;
+		boost::shared_ptr<LevelSeedData> MyLevelSeed;
 
 		Vector2 ModZoom;
 
 	
-		std::shared_ptr<EzTexture> LightTexture;
-		std::shared_ptr<RenderTarget2D> LightRenderTarget;
+		boost::shared_ptr<EzTexture> LightTexture;
+		boost::shared_ptr<RenderTarget2D> LightRenderTarget;
 	
-		std::shared_ptr<ClosingCircle> Circle;
+		boost::shared_ptr<ClosingCircle> Circle;
 	
-		std::shared_ptr<QuadClass> LightQuad;
+		boost::shared_ptr<QuadClass> LightQuad;
 	
 		bool _UseLighting;
 
-		std::shared_ptr<Background> MyBackground;
-		std::shared_ptr<TileSet> MyTileSet;
+		boost::shared_ptr<Background> MyBackground;
+		boost::shared_ptr<TileSet> MyTileSet;
 
-		const std::shared_ptr<TileSet> &getMyTileSetInfo() const;
-		const std::shared_ptr<TileSetInfo> &getInfo() const;
+		const boost::shared_ptr<TileSet> &getMyTileSetInfo() const;
+		const boost::shared_ptr<TileSetInfo> &getInfo() const;
 
 		int Par;
 
-		std::shared_ptr<CameraZone> FinalCamZone;
+		boost::shared_ptr<CameraZone> FinalCamZone;
 
-		std::vector<std::shared_ptr<LevelPiece> > LevelPieces;
-		std::shared_ptr<LevelPiece> CurPiece;
+		std::vector<boost::shared_ptr<LevelPiece> > LevelPieces;
+		boost::shared_ptr<LevelPiece> CurPiece;
 
-		std::shared_ptr<ParticleEmitter> MainEmitter;
+		boost::shared_ptr<ParticleEmitter> MainEmitter;
 
 		int CurPhsxStep, StartPhsxStep;
 		int DelayReset;
@@ -664,7 +664,7 @@ namespace CloudberryKingdom
 	
 		std::vector<ObjectVec > DrawLayer;
 	
-		std::vector<std::shared_ptr<ParticleEmitter> > ParticleEmitters;
+		std::vector<boost::shared_ptr<ParticleEmitter> > ParticleEmitters;
 
 		BlockVec Blocks, AddedBlocks;
 		BobVec Bobs, HoldPlayerBobs;
@@ -673,17 +673,17 @@ namespace CloudberryKingdom
 		bool ShowCoinsInReplay;
 		bool Watching, Replay, SuppressCheckpoints, GhostCheckpoints, MainReplayOnly, ReplayPaused;
 
-		std::shared_ptr<Camera> MyCamera;
+		boost::shared_ptr<Camera> MyCamera;
 	
-		std::shared_ptr<Camera> HoldCamera;
+		boost::shared_ptr<Camera> HoldCamera;
 	
-		const std::shared_ptr<Camera> &getMainCamera() const;
-		void setMainCamera( std::shared_ptr<Camera> &value );
+		const boost::shared_ptr<Camera> &getMainCamera() const;
+		void setMainCamera( boost::shared_ptr<Camera> &value );
 
 		/// <summary>
 		/// Event handler. Activates when the main camera is set to another camera instance.
 		/// </summary>
-		std::shared_ptr<Multicaster> OnCameraChange;
+		boost::shared_ptr<Multicaster> OnCameraChange;
 
 		Vector2 BL, TR;
 
@@ -704,17 +704,17 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Get the final door of this level (the exit).
 		/// </summary>
-		const std::shared_ptr<Door> getFinalDoor() const;
+		const boost::shared_ptr<Door> getFinalDoor() const;
 
 		/// <summary>
 		/// Get the first door of this level (the entrance).
 		/// </summary>
-		const std::shared_ptr<Door> getStartDoor() const;
+		const boost::shared_ptr<Door> getStartDoor() const;
 
 		/// <summary>
 		/// Find an object in this level by its code number.
 		/// </summary>
-		const std::shared_ptr<ObjectBase> FindIObject( const std::wstring &Code1 ) const;
+		const boost::shared_ptr<ObjectBase> FindIObject( const std::wstring &Code1 ) const;
 
 		int GetPhsxStep();
 		float GetIndependentPhsxStep();
@@ -739,12 +739,12 @@ namespace CloudberryKingdom
 		void Save( const std::wstring &file, bool Bin );
 
 	
-		static int DrawLayerSortFunc( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B );
+		static int DrawLayerSortFunc( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B );
 
 		void SortDrawLayers();
 
 	
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
 		void Move( Vector2 shift );
 		void Move( Vector2 shift, bool MoveBackground );
@@ -781,7 +781,7 @@ namespace CloudberryKingdom
 		/// Gets the objects associated with a GUID.
 		/// If the object is marked for deletion then null is returned.
 		/// </summary>
-		std::shared_ptr<ObjectBase> GuidToObj( unsigned long long guid );
+		boost::shared_ptr<ObjectBase> GuidToObj( unsigned long long guid );
 
 		/// <summary>
 		/// Gets the objects associated with a list of GUIDs.
@@ -793,10 +793,10 @@ namespace CloudberryKingdom
 		/// Gets the object associated with a GUID, even if that object is marked for deletion.
 		/// If no such object exists then null is returned.
 		/// </summary>
-		std::shared_ptr<ObjectBase> LookupGUID( unsigned long long guid );
+		boost::shared_ptr<ObjectBase> LookupGUID( unsigned long long guid );
 
 		void SetCurrentPiece( int LevelPieceIndex );
-		void SetCurrentPiece( const std::shared_ptr<LevelPiece> &piece );
+		void SetCurrentPiece( const boost::shared_ptr<LevelPiece> &piece );
 
 	
 		void NonLambdaReset();
@@ -810,30 +810,30 @@ namespace CloudberryKingdom
 		void Reset_Graphical( bool AdditionalReset );
 		void __Reset( bool BoxesOnly, bool AdditionalReset );
 
-		static std::shared_ptr<ObjectBase> FindParentObjectById( ObjectVec &ObjectList, const std::shared_ptr<ObjectBase> &obj );
+		static boost::shared_ptr<ObjectBase> FindParentObjectById( ObjectVec &ObjectList, const boost::shared_ptr<ObjectBase> &obj );
 
 	
-		void SynchObject( const std::shared_ptr<ObjectBase> &obj );
+		void SynchObject( const boost::shared_ptr<ObjectBase> &obj );
 
-		void MoveUpOneSublayer( const std::shared_ptr<ObjectBase> &obj );
+		void MoveUpOneSublayer( const boost::shared_ptr<ObjectBase> &obj );
 
-		void MoveToTopOfDrawLayer( const std::shared_ptr<ObjectBase> &obj );
+		void MoveToTopOfDrawLayer( const boost::shared_ptr<ObjectBase> &obj );
 
-		void MoveDownOneSublayer( const std::shared_ptr<ObjectBase> &obj );
+		void MoveDownOneSublayer( const boost::shared_ptr<ObjectBase> &obj );
 
-		void ChangeObjectDrawLayer( const std::shared_ptr<ObjectBase> &obj, int DestinationLayer );
+		void ChangeObjectDrawLayer( const boost::shared_ptr<ObjectBase> &obj, int DestinationLayer );
 
-		void RelayerObject( const std::shared_ptr<ObjectBase> &Obj, int NewLayer, bool Front );
+		void RelayerObject( const boost::shared_ptr<ObjectBase> &Obj, int NewLayer, bool Front );
 
 		//Dictionary<IObject, bool> AllObjects = new Dictionary<IObject, bool>();
-		void AddObject( const std::shared_ptr<ObjectBase> &NewObject );
-		void AddObject( const std::shared_ptr<ObjectBase> &NewObject, bool AddTimeStamp );
+		void AddObject( const boost::shared_ptr<ObjectBase> &NewObject );
+		void AddObject( const boost::shared_ptr<ObjectBase> &NewObject, bool AddTimeStamp );
 
 		/// <summary>
 		/// Call to add an object back to the level,
 		/// assuming it was never deleted from the main object/block list, nor the main dictionary.
 		/// </summary>
-		void ReAddObject( const std::shared_ptr<ObjectBase> &NewObject );
+		void ReAddObject( const boost::shared_ptr<ObjectBase> &NewObject );
 
 		ObjectVec PreRecycleBin;
 
@@ -852,11 +852,11 @@ namespace CloudberryKingdom
 		void CleanBlockList();
 
 
-		void AddBlock( const std::shared_ptr<BlockBase> &block );
-		void AddBlock( const std::shared_ptr<BlockBase> &block, bool AddTimeStamp );
+		void AddBlock( const boost::shared_ptr<BlockBase> &block );
+		void AddBlock( const boost::shared_ptr<BlockBase> &block, bool AddTimeStamp );
 
 
-		void AddBob( const std::shared_ptr<Bob> &bob );
+		void AddBob( const boost::shared_ptr<Bob> &bob );
 
 		/// <summary>
 		/// While the level is drawing this is the current draw layer being drawn.
@@ -867,7 +867,7 @@ namespace CloudberryKingdom
 
 		void MakeClosingCircle();
 		void MakeClosingCircle( float Frames, Vector2 Pos );
-		void MakeClosingCircle( float Frames, const std::shared_ptr<IPos> &Pos );
+		void MakeClosingCircle( float Frames, const boost::shared_ptr<IPos> &Pos );
 
 
 		bool StickmanLighting;
@@ -901,17 +901,17 @@ namespace CloudberryKingdom
 		void TagAll( int Tag );
 
 		// Take all objects in a different level and add them
-		void AddLevelBlocks( const std::shared_ptr<Level> &level );
-		void AddLevelBlocks( const std::shared_ptr<Level> &level, int Tag );
-		void AddLevelObjects( const std::shared_ptr<Level> &level );
-		void AddLevelObjects( const std::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 );
-		void AddLevelObjects( const std::shared_ptr<Level> &level, int Tag );
+		void AddLevelBlocks( const boost::shared_ptr<Level> &level );
+		void AddLevelBlocks( const boost::shared_ptr<Level> &level, int Tag );
+		void AddLevelObjects( const boost::shared_ptr<Level> &level );
+		void AddLevelObjects( const boost::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 );
+		void AddLevelObjects( const boost::shared_ptr<Level> &level, int Tag );
 
-		void AbsorbLevelVisuals( const std::shared_ptr<Level> &level );
+		void AbsorbLevelVisuals( const boost::shared_ptr<Level> &level );
 
-		void SetBackground( const std::shared_ptr<Background> &background );
+		void SetBackground( const boost::shared_ptr<Background> &background );
 
-		void AbsorbLevel( const std::shared_ptr<Level> &level );
+		void AbsorbLevel( const boost::shared_ptr<Level> &level );
 
 		// Remove all objects that belong to a different level
 		void RemoveForeignObjects();
@@ -924,29 +924,29 @@ namespace CloudberryKingdom
 		ObjectVec GetObjectList( ObjectType type );
 
 	
-		static std::shared_ptr<BaseMetric> DefaultMetric;
+		static boost::shared_ptr<BaseMetric> DefaultMetric;
 
 	
 		void Cleanup( ObjectType type, Vector2 v );
 		void Cleanup( ObjectType type, Vector2 v, Vector2 BL, Vector2 TR );
 
-		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc );
-		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
-		void Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric );
+		void Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc );
+		void Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
+		void Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric );
 
-		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
+		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		// If MustBeDifferent is set, then only two objects of different types can force a deletion
-		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
-		void Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric );
+		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
+		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric );
 
 
 		void Cleanup_xCoord( ObjectType ObjType, float MinDist );
 
 
 	
-		void CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
+		void CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
 
-		void CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
+		void CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
 
 	
 		void StartPlayerPlay();

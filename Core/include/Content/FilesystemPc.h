@@ -2,6 +2,9 @@
 #define _FILESYSTEM_PC_H_
 
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <string>
 
 // Forward declarations.
@@ -28,7 +31,7 @@ public:
 	/**
 	 * @see Filesystem::Open()
 	 */
-	std::shared_ptr<File> Open( const std::string &path, bool write );
+	boost::shared_ptr<File> Open( const std::string &path, bool write );
 
 };
 

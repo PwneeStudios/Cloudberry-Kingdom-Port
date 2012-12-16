@@ -13,53 +13,53 @@ namespace CloudberryKingdom
 	Vector4 Menu::DefaultMenuInfo::SelectedBackColor;
 	Vector4 Menu::DefaultMenuInfo::UnselectedNextColor;
 	Vector4 Menu::DefaultMenuInfo::UnselectedBackColor;
-	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound;
-	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound;
-	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound;
-	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_ListScroll_Sound;
-	std::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Back_Sound;
+	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound;
+	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound;
+	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound;
+	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_ListScroll_Sound;
+	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Back_Sound;
 	int Menu::DefaultMenuInfo::Menu_Slide_SoundDelay;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Texture;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Texture;
 	Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Offset;
 	Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Offset;
 	Vector2 Menu::DefaultMenuInfo::MenuArrow_Size;
 	Vector4 Menu::DefaultMenuInfo::MenuArrow_Color;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture;
 	Vector2 Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset;
 	Vector2 Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset;
 	Vector2 Menu::DefaultMenuInfo::MenuArrow_Selected_Size;
 	Vector4 Menu::DefaultMenuInfo::MenuArrow_Selected_Color;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::SliderBack_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::SliderBack_Texture;
 	Vector2 Menu::DefaultMenuInfo::SliderBack_Size;
-	std::shared_ptr<EzTexture> Menu::DefaultMenuInfo::Slider_Texture;
+	boost::shared_ptr<EzTexture> Menu::DefaultMenuInfo::Slider_Texture;
 	Vector2 Menu::DefaultMenuInfo::Slider_StartPos;
 	Vector2 Menu::DefaultMenuInfo::Slider_EndPos;
 	Vector2 Menu::DefaultMenuInfo::Slider_Size;
 
-	Cast::ToMenuHelper1::ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a )
+	Cast::ToMenuHelper1::ToMenuHelper1( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a )
 	{
 		this->a = a;
 	}
 
-	bool Cast::ToMenuHelper1::Apply( const std::shared_ptr<Menu> &dummy )
+	bool Cast::ToMenuHelper1::Apply( const boost::shared_ptr<Menu> &dummy )
 	{
 		a->Apply( 0 );
 		return true;
 	}
 
-	Cast::LambdaWrapper::LambdaWrapper( const std::shared_ptr<Lambda> &a )
+	Cast::LambdaWrapper::LambdaWrapper( const boost::shared_ptr<Lambda> &a )
 	{
 		this->a = a;
 	}
 
-	void Cast::LambdaWrapper::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void Cast::LambdaWrapper::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		a->Apply();
 	}
 
-	Cast::Lambda_1Wrapper::Lambda_1Wrapper( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a )
+	Cast::Lambda_1Wrapper::Lambda_1Wrapper( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a )
 	{
 		this->a = a;
 	}
@@ -69,35 +69,35 @@ namespace CloudberryKingdom
 		a->Apply( 0 );
 	}
 
-	Cast::ToMenuHelper::ToMenuHelper( const std::shared_ptr<Lambda> &a )
+	Cast::ToMenuHelper::ToMenuHelper( const boost::shared_ptr<Lambda> &a )
 	{
 		this->a = a;
 	}
 
-	bool Cast::ToMenuHelper::Apply( const std::shared_ptr<Menu> &dummy )
+	bool Cast::ToMenuHelper::Apply( const boost::shared_ptr<Menu> &dummy )
 	{
 		a->Apply();
 		return true;
 	}
 
-	std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > Cast::ToMenu( const std::shared_ptr<Lambda> &a )
+	boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Menu> , bool> > Cast::ToMenu( const boost::shared_ptr<Lambda> &a )
 	{
-		return std::make_shared<ToMenuHelper>( a );
+		return boost::make_shared<ToMenuHelper>( a );
 	}
 
-	std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > Cast::ToMenu( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a )
+	boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Menu> , bool> > Cast::ToMenu( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a )
 	{
-		return std::make_shared<ToMenuHelper1>( a );
+		return boost::make_shared<ToMenuHelper1>( a );
 	}
 
-	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > Cast::ToItem( const std::shared_ptr<Lambda> &a )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > Cast::ToItem( const boost::shared_ptr<Lambda> &a )
 	{
-		return std::make_shared<LambdaWrapper>( a );
+		return boost::make_shared<LambdaWrapper>( a );
 	}
 
-	std::shared_ptr<Lambda> Cast::ToAction( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a )
+	boost::shared_ptr<Lambda> Cast::ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a )
 	{
-		return std::make_shared<Lambda_1Wrapper>( a );
+		return boost::make_shared<Lambda_1Wrapper>( a );
 	}
 
 	Menu::FindItemByNameLambda::FindItemByNameLambda( const std::wstring &name )
@@ -105,19 +105,19 @@ namespace CloudberryKingdom
 		this->name = name;
 	}
 
-	bool Menu::FindItemByNameLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	bool Menu::FindItemByNameLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		return item->Name == name;
 	}
 
-	bool Menu::DefaultOnBProxy::Apply( const std::shared_ptr<Menu> &menu )
+	bool Menu::DefaultOnBProxy::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		return Menu::DefaultOnB( menu );
 	}
 
-	std::shared_ptr<MenuItem> Menu::FindItemByName( const std::wstring &name )
+	boost::shared_ptr<MenuItem> Menu::FindItemByName( const std::wstring &name )
 	{
-		return Tools::Find<std::shared_ptr<MenuItem> >( Items, std::make_shared<FindItemByNameLambda>( name ) );
+		return Tools::Find<boost::shared_ptr<MenuItem> >( Items, boost::make_shared<FindItemByNameLambda>( name ) );
 	}
 
 	const Vector2 &Menu::getPos() const
@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 		_Control = value;
 	}
 
-	const std::shared_ptr<MenuItem> Menu::getCurItem() const
+	const boost::shared_ptr<MenuItem> Menu::getCurItem() const
 	{
 		if ( Items.empty() )
 			return 0;
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		ParentMenu.reset();
 
 		if ( Items.size() > 0 )
-			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 				( *item )->Release();
 		Items.clear();
 
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 	void Menu::ClearList()
 	{
 		if ( Items.size() > 0 )
-			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 				( *item )->Release();
 		Items.clear();
 	}
@@ -213,23 +213,23 @@ namespace CloudberryKingdom
 
 		setControl( -1 );
 
-		Items = std::vector<std::shared_ptr<MenuItem> >();
+		Items = std::vector<boost::shared_ptr<MenuItem> >();
 		CurIndex = 0;
 
-		OnB = std::make_shared<DefaultOnBProxy>();
+		OnB = boost::make_shared<DefaultOnBProxy>();
 
 		MyPieceQuadTemplate.reset();
 		MyPieceQuadTemplate2.reset();
 	}
 
-	bool Menu::DefaultOnB( const std::shared_ptr<Menu> &menu )
+	bool Menu::DefaultOnB( const boost::shared_ptr<Menu> &menu )
 	{
 		menu->Release( false );
 
 		return true;
 	}
 
-	void Menu::SelectItem( const std::shared_ptr<MenuItem> &item )
+	void Menu::SelectItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		HasSelectedThisStep = true;
 
@@ -246,7 +246,7 @@ namespace CloudberryKingdom
 
 		// If no items are selectable, return
 		bool All = true;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			if ( ( *item )->Selectable )
 				All = false;
 		if ( All )
@@ -351,7 +351,7 @@ namespace CloudberryKingdom
 		Vector2 MousePos = Tools::MouseGUIPos( getMyCameraZoom() );
 
 		bool Hit = false;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			Hit |= ( *item )->HitTest( MousePos, HitPadding );
 
 		return Hit;
@@ -521,7 +521,7 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PhsxStep( *item == Items[ CurIndex ] && ( !NoneSelected || AlwaysSelected ) );
 			if ( Released )
@@ -596,7 +596,7 @@ namespace CloudberryKingdom
 		}
 
 		float Height = Center.Y - Pos.Y;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			( *item )->Pos.Y += Height / 2;
 	}
 
@@ -625,7 +625,7 @@ namespace CloudberryKingdom
 		TR = Vector2( -100000, -100000 );
 		BL = Vector2( 100000, 100000 );
 
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			Vector2 Size = ( *item )->Size();
 			TR = Vector2::Max( TR, ( *item )->Pos + Size / 2 );
@@ -633,7 +633,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	int Menu::SortByHeightMethod( const std::shared_ptr<MenuItem> &item1, const std::shared_ptr<MenuItem> &item2 )
+	int Menu::SortByHeightMethod( const boost::shared_ptr<MenuItem> &item1, const boost::shared_ptr<MenuItem> &item2 )
 	{
 		return Compare( -item1->Pos.Y, item2->Pos.Y );
 	}
@@ -645,14 +645,14 @@ namespace CloudberryKingdom
 
 	void Menu::ResetPieces()
 	{
-		MyPieceQuad = std::make_shared<PieceQuad>();
+		MyPieceQuad = boost::make_shared<PieceQuad>();
 		MyPieceQuad->Clone( MyPieceQuadTemplate );
 		MyPieceQuad->CalcQuads( ( TR - BL ) / 2 );
 		BackdropShift = ( TR + BL ) / 2;
 
 		if ( MyPieceQuadTemplate2 != 0 )
 		{
-			MyPieceQuad2 = std::make_shared<PieceQuad>();
+			MyPieceQuad2 = boost::make_shared<PieceQuad>();
 			MyPieceQuad2->Clone( MyPieceQuadTemplate2 );
 			MyPieceQuad2->CalcQuads( ( TR - BL ) / 2 );
 		}
@@ -681,7 +681,7 @@ namespace CloudberryKingdom
 		int SelectedIndex = getApparentCurIndex();
 
 		// Draw item text backdrops
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
 			if ( SelectedIndex < 0 || ( *item ).get() != Items[ SelectedIndex ].get() )
@@ -691,7 +691,7 @@ namespace CloudberryKingdom
 			Items[ SelectedIndex ]->DrawBackdrop( true );
 
 		// Draw item non-text
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
 			( *item )->Draw( false, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(*item) );
@@ -711,7 +711,7 @@ namespace CloudberryKingdom
 			return;
 
 		CurDrawLayer = 1;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->Draw( false, Tools::CurLevel->getMainCamera(), DrawItemAsSelected(*item) );
 		}
@@ -735,7 +735,7 @@ namespace CloudberryKingdom
 		CurDrawLayer = Layer;
 
 		// Draw item text
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 		{
 			( *item )->PosOffset = PosOffset;
 			if ( ( *item )->UnaffectedByScroll )
@@ -745,7 +745,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	bool Menu::DrawItemAsSelected( const std::shared_ptr<MenuItem> &item )
+	bool Menu::DrawItemAsSelected( const boost::shared_ptr<MenuItem> &item )
 	{
 	#if defined(PC_VERSION)
 	#else
@@ -796,12 +796,12 @@ namespace CloudberryKingdom
 		DrawText( 1 );
 	}
 
-	void Menu::Add( const std::shared_ptr<MenuItem> &item )
+	void Menu::Add( const boost::shared_ptr<MenuItem> &item )
 	{
 		Add( item, Items.size() );
 	}
 
-	void Menu::Add( const std::shared_ptr<MenuItem> &item, int index )
+	void Menu::Add( const boost::shared_ptr<MenuItem> &item, int index )
 	{
 		item->SelectSound = SelectSound;
 		item->SlideSound = SlideSound;

@@ -3,32 +3,32 @@
 namespace CloudberryKingdom
 {
 
-	EOL_StringWorldDoorActionProxy::EOL_StringWorldDoorActionProxy( const std::shared_ptr<StringWorldGameData> &gameData )
+	EOL_StringWorldDoorActionProxy::EOL_StringWorldDoorActionProxy( const boost::shared_ptr<StringWorldGameData> &gameData )
 	{
 		this->gameData = gameData;
 	}
 
-	void EOL_StringWorldDoorActionProxy::Apply( const std::shared_ptr<Door> &door )
+	void EOL_StringWorldDoorActionProxy::Apply( const boost::shared_ptr<Door> &door )
 	{
 		gameData->EOL_StringWorldDoorAction( door );
 	}
 
-	EOL_StringWorldDoorEndActionProxy::EOL_StringWorldDoorEndActionProxy( const std::shared_ptr<StringWorldGameData> &gameData )
+	EOL_StringWorldDoorEndActionProxy::EOL_StringWorldDoorEndActionProxy( const boost::shared_ptr<StringWorldGameData> &gameData )
 	{
 		this->gameData = gameData;
 	}
 
-	void EOL_StringWorldDoorEndActionProxy::Apply( const std::shared_ptr<Door> &door )
+	void EOL_StringWorldDoorEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
 	{
 		gameData->EOL_StringWorldDoorEndAction( door );
 	}
 
-	void EOG_StandardDoorActionProxy::Apply( const std::shared_ptr<Door> &door )
+	void EOG_StandardDoorActionProxy::Apply( const boost::shared_ptr<Door> &door )
 	{
 		StringWorldGameData::EOG_StandardDoorAction( door );
 	}
 
-	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
+	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
 	{
 		this->g = g;
 		this->level = level;
@@ -50,12 +50,12 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	void StringWorldGameData::DefaultStartLevelMusicProxy::Apply( const std::shared_ptr<StringWorldGameData> &stringworld )
+	void StringWorldGameData::DefaultStartLevelMusicProxy::Apply( const boost::shared_ptr<StringWorldGameData> &stringworld )
 	{
 		StringWorldGameData::DefaultStartLevelMusic( stringworld );
 	}
 
-	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( std::shared_ptr<StringWorldGameData> &g, const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, const std::shared_ptr<LevelSeedData> &CurLevelSeed )
+	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, const boost::shared_ptr<LevelSeedData> &CurLevelSeed )
 	{
 		this->g = g;
 		this->level = level;
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		g->_StartOfLevelDoorAction__OpenAndShow( level, door, CurLevelSeed->OpenDoorSound );
 	}
 
-	StringWorldGameData::FinishLambda::FinishLambda( const std::shared_ptr<StringWorldGameData> &g )
+	StringWorldGameData::FinishLambda::FinishLambda( const boost::shared_ptr<StringWorldGameData> &g )
 	{
 		this->g = g;
 	}
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		g->Finish( val );
 	}
 
-	StringWorldGameData::CloseDoorAndAbsorbLambda::CloseDoorAndAbsorbLambda( const std::shared_ptr<Door> &door )
+	StringWorldGameData::CloseDoorAndAbsorbLambda::CloseDoorAndAbsorbLambda( const boost::shared_ptr<Door> &door )
 	{
 		this->door = door;
 	}
@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		PlayerManager::AbsorbLevelStats();
 	}
 
-	StringWorldGameData::StartNextLevelLambda::StartNextLevelLambda( const std::shared_ptr<StringWorldGameData> &g )
+	StringWorldGameData::StartNextLevelLambda::StartNextLevelLambda( const boost::shared_ptr<StringWorldGameData> &g )
 	{
 		this->g = g;
 	}
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 			return false;
 	}
 
-	std::shared_ptr<GameData> StringWorldGameData::Factory( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> StringWorldGameData::Factory( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return 0;
 	}
@@ -147,7 +147,7 @@ namespace CloudberryKingdom
 		GameData::Release();
 	}
 
-	std::shared_ptr<LevelSeedData> StringWorldGameData::GetSeed( int Index )
+	boost::shared_ptr<LevelSeedData> StringWorldGameData::GetSeed( int Index )
 	{
 		if ( GetSeedFunc == 0 )
 			return 0;
@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 		NextLevelSeed->Loaded->MyMutex.Unlock();
 	}
 
-	void StringWorldGameData::LevelBegin( const std::shared_ptr<Level> &level )
+	void StringWorldGameData::LevelBegin( const boost::shared_ptr<Level> &level )
 	{
 		Recycler::DumpMetaBin();
 
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		bool Hold_FirstLevelHasBegun = FirstLevelHasBegun;
 		if ( level->MyGame != 0 )
 		{
-			level->MyGame->AddToDo( std::make_shared<StartOfLevelLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, Hold_FirstLevelHasBegun ) );
+			level->MyGame->AddToDo( boost::make_shared<StartOfLevelLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, Hold_FirstLevelHasBegun ) );
 
 			level->MyGame->PhsxStepsToDo += 2;
 		}
@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 		FirstLevelHasBegun = true;
 	}
 
-	void StringWorldGameData::DefaultStartLevelMusic( const std::shared_ptr<StringWorldGameData> &stringworld )
+	void StringWorldGameData::DefaultStartLevelMusic( const boost::shared_ptr<StringWorldGameData> &stringworld )
 	{
 		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
 
@@ -201,10 +201,10 @@ namespace CloudberryKingdom
 			Tools::SongWad->Next();
 	}
 
-	void StringWorldGameData::BeginningCloseDoor( const std::shared_ptr<Level> &level )
+	void StringWorldGameData::BeginningCloseDoor( const boost::shared_ptr<Level> &level )
 	{
 		// Find the initial door
-		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 == door )
 			return;
 
@@ -215,15 +215,15 @@ namespace CloudberryKingdom
 		level->Finished = true;
 	}
 
-	void StringWorldGameData::StartOfLevelDoorAction( const std::shared_ptr<Level> &level )
+	void StringWorldGameData::StartOfLevelDoorAction( const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<GameData> game = level->MyGame;
+		boost::shared_ptr<GameData> game = level->MyGame;
 
 		if ( game == 0 )
 			return;
 
 		// Find the initial door
-		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( level->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 == door )
 		{
 
@@ -235,10 +235,10 @@ namespace CloudberryKingdom
 
 		if ( CurLevelIndex > 0 )
 			Wait = CurLevelSeed->WaitLengthToOpenDoor;
-		game->WaitThenDo( Wait, std::make_shared<OpenAndShowLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, door, CurLevelSeed ) );
+		game->WaitThenDo( Wait, boost::make_shared<OpenAndShowLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, door, CurLevelSeed ) );
 	}
 
-	void StringWorldGameData::_StartOfLevelDoorAction__OpenAndShow( const std::shared_ptr<Level> &level, const std::shared_ptr<Door> &door, bool OpenDoorSound )
+	void StringWorldGameData::_StartOfLevelDoorAction__OpenAndShow( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, bool OpenDoorSound )
 	{
 		// Whether to play a sound for the door opening
 		bool sound = false;
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 		door->ShowBobs();
 	}
 
-	bool StringWorldGameData::LevelIsLoaded( const std::shared_ptr<LevelSeedData> &data )
+	bool StringWorldGameData::LevelIsLoaded( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		data->Loaded->MyMutex.Lock();
 		{
@@ -266,11 +266,11 @@ namespace CloudberryKingdom
 			// Check for last level
 			if ( NextIsLast() )
 			{
-				std::shared_ptr<ObjectBase> obj = NextLevelSeed->MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
+				boost::shared_ptr<ObjectBase> obj = NextLevelSeed->MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
 
-				std::shared_ptr<Door> door = std::static_pointer_cast<Door>( obj );
+				boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( obj );
 				if ( 0 != door )
-					door->setOnOpen( std::make_shared<EOG_StandardDoorActionProxy>() );
+					door->setOnOpen( boost::make_shared<EOG_StandardDoorActionProxy>() );
 			}
 
 			// Replace all Bobs with new Bobs (to handle newly joined players)
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 		//Tools.CurLevel = CurLevelSeed.MyGame.MyLevel;
 
 		// Set end of game function
-		Tools::CurGameData->EndGame = std::make_shared<FinishLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ) );
+		Tools::CurGameData->EndGame = boost::make_shared<FinishLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ) );
 
 		// Add the saved objects
 		for ( GameObjVec::const_iterator obj = ObjectsToSave.begin(); obj != ObjectsToSave.end(); ++obj )
@@ -373,7 +373,7 @@ namespace CloudberryKingdom
 		Tools::CurGameData->MyLevel->PhsxStep( true );
 	}
 
-	void StringWorldGameData::AdditionalSwapToLevelProcessing( const std::shared_ptr<GameData> &game )
+	void StringWorldGameData::AdditionalSwapToLevelProcessing( const boost::shared_ptr<GameData> &game )
 	{
 	}
 
@@ -402,7 +402,7 @@ namespace CloudberryKingdom
 			return;
 
 		// ActionGames immediately switch to next game when they are done.
-		std::shared_ptr<ActionGameData> ActionGame = std::static_pointer_cast<ActionGameData>( Tools::CurGameData );
+		boost::shared_ptr<ActionGameData> ActionGame = boost::static_pointer_cast<ActionGameData>( Tools::CurGameData );
 		if ( 0 != ActionGame && ActionGame->Done )
 			TellGameToBringNext( 0, ActionGame );
 
@@ -437,7 +437,7 @@ namespace CloudberryKingdom
 					{
 						LastLevelSeedSet = Tools::CurLevel;
 
-						std::shared_ptr<ILevelConnector> connector = std::static_pointer_cast<ILevelConnector>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
+						boost::shared_ptr<ILevelConnector> connector = boost::static_pointer_cast<ILevelConnector>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
 						if ( connector != 0 )
 							connector->setNextLevelSeedData( NextLevelSeed );
 					}
@@ -469,7 +469,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	StringWorldGameData::StringWorldGameData( const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed ) :
+	StringWorldGameData::StringWorldGameData( const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed ) :
 		Count( 0 )
 	{
 		// See StringWorldGameData_Construct.
@@ -478,10 +478,10 @@ namespace CloudberryKingdom
 		/*this->GetSeedFunc = GetSeed;*/
 	}
 
-	std::shared_ptr<Level> StringWorldGameData::MakeLevel()
+	boost::shared_ptr<Level> StringWorldGameData::MakeLevel()
 	{
-		std::shared_ptr<Level> level = std::make_shared<Level>( false );
-		level->setMainCamera( std::make_shared<Camera>() );
+		boost::shared_ptr<Level> level = boost::make_shared<Level>( false );
+		level->setMainCamera( boost::make_shared<Camera>() );
 
 		return level;
 	}
@@ -525,9 +525,9 @@ namespace CloudberryKingdom
 		EndGame->Apply( false );
 	}
 
-	void StringWorldGameData::EOG_StandardDoorAction( const std::shared_ptr<Door> &door )
+	void StringWorldGameData::EOG_StandardDoorAction( const boost::shared_ptr<Door> &door )
 	{
-		Tools::CurrentAftermath = std::make_shared<AftermathData>();
+		Tools::CurrentAftermath = boost::make_shared<AftermathData>();
 		Tools::CurrentAftermath->Success = true;
 
 		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
@@ -541,35 +541,35 @@ namespace CloudberryKingdom
 		PlayerManager::AbsorbGameStats();
 	}
 
-	void StringWorldGameData::EOL_StringWorldDoorAction( const std::shared_ptr<Door> &door )
+	void StringWorldGameData::EOL_StringWorldDoorAction( const boost::shared_ptr<Door> &door )
 	{
 		// Make sure that there is another level to go to
 		if ( NextLevelSeed == 0 )
 			return;
 		else
 		{
-			std::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
+			boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 			BaseDoorAction( door );
 
 			// Close the door
-			game->AddToDo( std::make_shared<CloseDoorAndAbsorbLambda>( door ) );
+			game->AddToDo( boost::make_shared<CloseDoorAndAbsorbLambda>( door ) );
 
 			if ( door->getOnEnter() != 0 )
 				door->getOnEnter()->Apply(door);
 		}
 	}
 
-	void StringWorldGameData::EOL_StringWorldDoorEndAction( const std::shared_ptr<Door> &door )
+	void StringWorldGameData::EOL_StringWorldDoorEndAction( const boost::shared_ptr<Door> &door )
 	{
-		std::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
+		boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 
 		// Tell the current Game to perform the following
 		TellGameToBringNext( 13, game );
 	}
 
-	void StringWorldGameData::EOL_StringWorldDoorEndAction_WithFade( const std::shared_ptr<Door> &door )
+	void StringWorldGameData::EOL_StringWorldDoorEndAction_WithFade( const boost::shared_ptr<Door> &door )
 	{
-		std::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
+		boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 
 		Tools::SongWad->FadeOut();
 		game->FadeToBlack( .02f, 47 );
@@ -579,19 +579,19 @@ namespace CloudberryKingdom
 		TellGameToBringNext( 165, game );
 	}
 
-	void StringWorldGameData::TellGameToBringNext( int delay, const std::shared_ptr<GameData> &game )
+	void StringWorldGameData::TellGameToBringNext( int delay, const boost::shared_ptr<GameData> &game )
 	{
 		if ( WaitingForNext )
 			return;
 
 		WaitingForNext = true;
 
-		game->WaitThenAddToToDo( delay, std::make_shared<StartNextLevelLambda>( std::static_pointer_cast<StringWorldGameData>( shared_from_this() ) ) );
+		game->WaitThenAddToToDo( delay, boost::make_shared<StartNextLevelLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ) ) );
 	}
 
-	void StringWorldGameData::BaseDoorAction( const std::shared_ptr<Door> &door )
+	void StringWorldGameData::BaseDoorAction( const boost::shared_ptr<Door> &door )
 	{
-		std::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
+		boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 
 		game->CompleteLevelEvent();
 
@@ -630,11 +630,11 @@ namespace CloudberryKingdom
 		FirstLevelHasLoaded = false;
 		FirstLevelHasBegun = false;
 		WaitLengthToOpenDoor_FirstLevel = 6;
-		StartLevelMusic = std::make_shared<DefaultStartLevelMusicProxy>();
+		StartLevelMusic = boost::make_shared<DefaultStartLevelMusicProxy>();
 		FirstDoorAction = true;
-		OnSwapToFirstLevel = std::make_shared<Multicaster_1<std::shared_ptr<LevelSeedData> > >();
-		OnSwapToLastLevel = std::make_shared<Multicaster_1<std::shared_ptr<LevelSeedData> > >();
-		OnSwapToLevel = std::make_shared<Multicaster_1<int> >();
+		OnSwapToFirstLevel = boost::make_shared<Multicaster_1<boost::shared_ptr<LevelSeedData> > >();
+		OnSwapToLastLevel = boost::make_shared<Multicaster_1<boost::shared_ptr<LevelSeedData> > >();
+		OnSwapToLevel = boost::make_shared<Multicaster_1<int> >();
 		FirstLevelSwappedIn = false;
 		EndLoadingImmediately = false;
 		LastLevelSeedSet = 0;

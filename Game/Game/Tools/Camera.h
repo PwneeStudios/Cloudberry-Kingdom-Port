@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct Camera : public IPos, public std::enable_shared_from_this<Camera>
+	struct Camera : public IPos, public boost::enable_shared_from_this<Camera>
 	{
 
 	
@@ -25,20 +25,20 @@ namespace CloudberryKingdom
 
 		bool RocketManCamera;
 
-		std::shared_ptr<FancyVector2> FancyPos, FancyZoom;
+		boost::shared_ptr<FancyVector2> FancyPos, FancyZoom;
 
 		bool Shaking, Oscillating;
 		float ShakingIntensity;
 		Vector2 ShakingSaveZoom, ShakingSavePos;
 
-		std::shared_ptr<CameraZone> MyZone;
+		boost::shared_ptr<CameraZone> MyZone;
 
 		/// <summary>
 		/// If true the camera will not interact with other CameraZones
 		/// </summary>
 		bool ZoneLocked;
 
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 		PhsxData Data;
 		Vector2 PrevPos, PrevPrevPos;
 
@@ -79,8 +79,8 @@ namespace CloudberryKingdom
 
 		void Move( Vector2 shift );
 
-		void Clone( const std::shared_ptr<Camera> &cam );
-		void Clone( const std::shared_ptr<Camera> &cam, bool DataOnly );
+		void Clone( const boost::shared_ptr<Camera> &cam );
+		void Clone( const boost::shared_ptr<Camera> &cam, bool DataOnly );
 
 		void MakeFancyPos();
 
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 
 		void Init( int width, int height );
 
-		Camera( const std::shared_ptr<Camera> &cam );
+		Camera( const boost::shared_ptr<Camera> &cam );
 
 		Vector2 ShakeOffset, OscillateOffset;
 	

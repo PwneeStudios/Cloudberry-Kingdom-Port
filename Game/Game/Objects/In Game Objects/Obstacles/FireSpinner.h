@@ -13,8 +13,8 @@ namespace CloudberryKingdom
 		{
 			//public SpriteInfo Flame = new SpriteInfo(Tools.Texture("small flame"), new Vector2(72, 72), Vector2.Zero, new Color(255, 140, 140));
 		
-			std::shared_ptr<SpriteInfo> Flame;
-			std::shared_ptr<SpriteInfo> Base;
+			boost::shared_ptr<SpriteInfo> Flame;
+			boost::shared_ptr<SpriteInfo> Base;
 
 			float SegmentSpacing;
 			float SpaceFromBase;
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		static bool RandomMiniOrientation;
 
 	
-		std::shared_ptr<QuadClass> MyQuad, MyBaseQuad;
+		boost::shared_ptr<QuadClass> MyQuad, MyBaseQuad;
 
 		int Offset, Period;
 
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		FireSpinner( bool BoxesOnly );
 
@@ -85,9 +85,9 @@ namespace CloudberryKingdom
 	
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

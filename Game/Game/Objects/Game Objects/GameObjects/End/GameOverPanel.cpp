@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	GameOverPanel::MenuActiveHelper::MenuActiveHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::MenuActiveHelper::MenuActiveHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		gop->MyMenu->Active = true;
 	}
 
-	GameOverPanel::TextBoxActiveHelper::TextBoxActiveHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::TextBoxActiveHelper::TextBoxActiveHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		gop->MyTextBox->Active = true;
 	}
 
-	GameOverPanel::OnAddHelper::OnAddHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::OnAddHelper::OnAddHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -39,16 +39,16 @@ namespace CloudberryKingdom
 
 		// Prevent menu interactions for a second
 		gop->MyMenu->Active = false;
-		gop->MyGame->WaitThenDo( gop->DelayPhsx, std::make_shared<MenuActiveHelper>( gop ) );
+		gop->MyGame->WaitThenDo( gop->DelayPhsx, boost::make_shared<MenuActiveHelper>( gop ) );
 
 	#if defined(PC_VERSION)
 		if ( gop->MyTextBox != 0 )
-			gop->MyGame->WaitThenDo( gop->DelayPhsx, std::make_shared<TextBoxActiveHelper>( gop ) );
+			gop->MyGame->WaitThenDo( gop->DelayPhsx, boost::make_shared<TextBoxActiveHelper>( gop ) );
 		//MyMenu.Show = MyMenu.Active = false;
 	#endif
 	}
 
-	GameOverPanel::MakeTextBoxHelper::MakeTextBoxHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::MakeTextBoxHelper::MakeTextBoxHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		gop->MyTextBox->Pos->LerpTo( Vector2( -width, 0 ), 20 );
 	}
 
-	GameOverPanel::OnEnterLambda::OnEnterLambda( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::OnEnterLambda::OnEnterLambda( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -75,10 +75,10 @@ namespace CloudberryKingdom
 		// Add the high score
 		gop->AddScore();
 
-		gop->MyGame->WaitThenDo( 35, std::make_shared<MakeTextBoxHelper>( gop ) );
+		gop->MyGame->WaitThenDo( 35, boost::make_shared<MakeTextBoxHelper>( gop ) );
 	}
 
-	GameOverPanel::Action_DoneHelper::Action_DoneHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::Action_DoneHelper::Action_DoneHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		gop->MyGame->EndGame->Apply( false );
 	}
 
-	GameOverPanel::Action_DoneProxy::Action_DoneProxy( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::Action_DoneProxy::Action_DoneProxy( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 		gop->Action_Done();
 	}
 
-	GameOverPanel::Action_PlayAgainHelper::Action_PlayAgainHelper( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::Action_PlayAgainHelper::Action_PlayAgainHelper( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 		gop->MyGame->EndGame->Apply( true );
 	}
 
-	GameOverPanel::Action_PlayAgainProxy::Action_PlayAgainProxy( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::Action_PlayAgainProxy::Action_PlayAgainProxy( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		gop->Action_PlayAgain();
 	}
 
-	GameOverPanel::Action_ShowHighScoresProxy::Action_ShowHighScoresProxy( const std::shared_ptr<GameOverPanel> &gop )
+	GameOverPanel::Action_ShowHighScoresProxy::Action_ShowHighScoresProxy( const boost::shared_ptr<GameOverPanel> &gop )
 	{
 		this->gop = gop;
 	}
@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::OnAdd();
 
 		// Set the aftermath data to note the failure
-		Tools::CurrentAftermath = std::make_shared<AftermathData>();
+		Tools::CurrentAftermath = boost::make_shared<AftermathData>();
 		Tools::CurrentAftermath->Success = false;
 
 		// Absorb stats into the game's total stats
@@ -159,8 +159,8 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER NOTE: The variable GamerTag was renamed since it is named the same as a user-defined type:
 		std::wstring GamerTag_Renamed = PlayerManager::GetGroupGamerTag( 18 );
-		HighScoreEntry = std::make_shared<ScoreEntry>( GamerTag_Renamed, GameId_Score, Score, Score, Levels, Attempts, Time, Date );
-		HighLevelEntry = std::make_shared<ScoreEntry>( GamerTag_Renamed, GameId_Level, Levels, Score, Levels, Attempts, Time, Date );
+		HighScoreEntry = boost::make_shared<ScoreEntry>( GamerTag_Renamed, GameId_Score, Score, Score, Levels, Attempts, Time, Date );
+		HighLevelEntry = boost::make_shared<ScoreEntry>( GamerTag_Renamed, GameId_Level, Levels, Score, Levels, Attempts, Time, Date );
 
 	#if defined(NOT_PC)
 		AddScore();
@@ -173,21 +173,21 @@ namespace CloudberryKingdom
 		// Initially hide the score screen
 		this->SlideOut( PresetPos_TOP, 0 );
 
-		MyGame->WaitThenDo( Awardments::AwardDelay(), std::make_shared<OnAddHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( Awardments::AwardDelay(), boost::make_shared<OnAddHelper>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 	}
 
 	void GameOverPanel::Create()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score/Score_Screen" ), 1440.f );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Score/Score_Screen" ), 1440.f );
 		backdrop->Quad_Renamed.SetColor( bColor( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'Game Over' text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_GAME_OVER, Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_GAME_OVER, Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
 		Text->setScale( 1 );
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
@@ -199,15 +199,15 @@ namespace CloudberryKingdom
 
 
 		// 'Levels' text
-		MyPile->Add( std::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( _T( "Level" ) ) ) );
-		Text = std::make_shared<EzText>( Format( _T( "%d" ), Levels ), ItemFont );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( _T( "Level" ) ) ) );
+		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
 		MyPile->Add( Text, _T( "Level" ) );
 
 		// 'Score' text
-		MyPile->Add( std::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( _T( "Score" ) ) ) );
-		Text = std::make_shared<EzText>( Format( _T( "%d" ), Score ), ItemFont );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( _T( "Score" ) ) ) );
+		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
 		MyPile->Add( Text, _T( "Score" ) );
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 		MyMenu->Show = MyMenu->Active = false;
 
 		// Show the menu when the user is done entering their name
-		MyTextBox->OnEnter->Add( std::make_shared<OnEnterLambda>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
+		MyTextBox->OnEnter->Add( boost::make_shared<OnEnterLambda>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 	}
 #endif
 
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 		ScoreDatabase::Add( HighLevelEntry );
 	}
 
-	void GameOverPanel::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void GameOverPanel::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -299,30 +299,30 @@ namespace CloudberryKingdom
 
 	void GameOverPanel::MakeMenu()
 	{
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->setControl( -1 );
 
 		MyMenu->OnB.reset();
 
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 		FontScale *= .89f * 1.16f;
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_PlayAgainProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
+		item->setGo( Cast::ToItem( boost::make_shared<Action_PlayAgainProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_ShowHighScoresProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
+		item->setGo( Cast::ToItem( boost::make_shared<Action_ShowHighScoresProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<Action_DoneProxy>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
+		item->setGo( Cast::ToItem( boost::make_shared<Action_DoneProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 	}
 
-	void GameOverPanel::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void GameOverPanel::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -336,7 +336,7 @@ namespace CloudberryKingdom
 		Active = false;
 
 		Tools::SongWad->FadeOut();
-		MyGame->WaitThenDo( 36, std::make_shared<Action_DoneHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 36, boost::make_shared<Action_DoneHelper>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 
 		return;
 	}
@@ -348,7 +348,7 @@ namespace CloudberryKingdom
 
 		Tools::SongWad->FadeOut();
 
-		MyGame->WaitThenDo( 36, std::make_shared<Action_PlayAgainHelper>( std::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 36, boost::make_shared<Action_PlayAgainHelper>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) );
 		return;
 	}
 
@@ -365,12 +365,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct()
+	boost::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct()
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
+		return boost::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	GameOverPanel::GameOverPanel( int GameId_Score, int GameId_Level ) :
@@ -379,7 +379,7 @@ namespace CloudberryKingdom
 		DelayPhsx( 0 )
 	{
 	}
-	std::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
+	boost::shared_ptr<GameOverPanel> GameOverPanel::GameOverPanel_Construct( int GameId_Score, int GameId_Level )
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
@@ -393,7 +393,7 @@ namespace CloudberryKingdom
 		MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
 		MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
 
-		return std::static_pointer_cast<GameOverPanel>( shared_from_this() );
+		return boost::static_pointer_cast<GameOverPanel>( shared_from_this() );
 	}
 
 	void GameOverPanel::MyDraw()

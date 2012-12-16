@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		int StartLevel, MenuIndex;
 
-		LevelItem( const std::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked );
+		LevelItem( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked );
 	};
 
 	struct StartLevelMenu : public CkBaseMenu
@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 		struct GameReturnProxy : public LambdaFunc<bool>
 		{
 		
-			std::shared_ptr<StartLevelMenu> slm;
+			boost::shared_ptr<StartLevelMenu> slm;
 
 		
-			GameReturnProxy( const std::shared_ptr<StartLevelMenu> &slm );
+			GameReturnProxy( const boost::shared_ptr<StartLevelMenu> &slm );
 
 			bool Apply();
 		};
@@ -31,25 +31,25 @@ namespace CloudberryKingdom
 		struct LaunchHelper : public Lambda
 		{
 		
-			std::shared_ptr<StartLevelMenu> slm;
-			std::shared_ptr<LevelItem> litem;
+			boost::shared_ptr<StartLevelMenu> slm;
+			boost::shared_ptr<LevelItem> litem;
 
 		
-			LaunchHelper( const std::shared_ptr<StartLevelMenu> &slm, const std::shared_ptr<LevelItem> &litem );
+			LaunchHelper( const boost::shared_ptr<StartLevelMenu> &slm, const boost::shared_ptr<LevelItem> &litem );
 
 			void Apply();
 		};
 
 	
-		struct LaunchProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct LaunchProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<StartLevelMenu> slm;
+			boost::shared_ptr<StartLevelMenu> slm;
 
 		
-			LaunchProxy( const std::shared_ptr<StartLevelMenu> &slm );
+			LaunchProxy( const boost::shared_ptr<StartLevelMenu> &slm );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 		/// <summary>
@@ -59,18 +59,18 @@ namespace CloudberryKingdom
 		static int PreviousMenuIndex;
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<LevelItem> > > StartFunc;
-		std::shared_ptr<Lambda> ReturnFunc;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<LevelItem> > > StartFunc;
+		boost::shared_ptr<Lambda> ReturnFunc;
 
 	
-		virtual void Launch( const std::shared_ptr<MenuItem> &item );
+		virtual void Launch( const boost::shared_ptr<MenuItem> &item );
 
 		virtual bool GameReturn();
 
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		std::vector<int> Levels;
@@ -80,9 +80,9 @@ namespace CloudberryKingdom
 
 		int HighestLevel;
 		StartLevelMenu();
-		std::shared_ptr<StartLevelMenu> StartLevelMenu_Construct();
+		boost::shared_ptr<StartLevelMenu> StartLevelMenu_Construct();
 		StartLevelMenu( int HighestLevel );
-		std::shared_ptr<StartLevelMenu> StartLevelMenu_Construct( int HighestLevel );
+		boost::shared_ptr<StartLevelMenu> StartLevelMenu_Construct( int HighestLevel );
 
 		int IndexCutoff;
 

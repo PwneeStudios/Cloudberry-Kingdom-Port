@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 			return dict.find( item ) != dict.end();
 		}
 
-		//std::shared_ptr<Set<T> > operator + ( T item )
+		//boost::shared_ptr<Set<T> > operator + ( T item )
 		//{
 		//	if ( !this->dict.find( item ) != this->dict.end() )
 		//		this->dict.insert( make_pair( item, true ) );
@@ -40,16 +40,16 @@ namespace CloudberryKingdom
 				dict.insert( std::make_pair( item, true ) );
 		}
 
-		/*std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()
+		/*boost::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()
 		{
 			return dict.Keys->GetEnumerator();
 		}
-		std::shared_ptr<IEnumerator<T> > GetEnumerator()
+		boost::shared_ptr<IEnumerator<T> > GetEnumerator()
 		{
 			return dict.Keys->GetEnumerator();
 		}*/
 
-		T Choose( const std::shared_ptr<Rand> &Rnd )
+		T Choose( const boost::shared_ptr<Rand> &Rnd )
 		{
 			// FIXME: Please don't do this -_-
 			int i = Rnd->RndInt( 0, dict.size() - 1 );

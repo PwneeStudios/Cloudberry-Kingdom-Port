@@ -29,14 +29,14 @@ namespace CloudberryKingdom
 		void Init( int N, int M );
 
 	
-		void SetTunnelObjParameter( const std::shared_ptr<ObjectBase> &obj );
+		void SetTunnelObjParameter( const boost::shared_ptr<ObjectBase> &obj );
 
 		void Clean();
 
 		void Clean( int i, int j );
 
 	
-		void CleanupTunnel( const std::shared_ptr<Level> &level );
+		void CleanupTunnel( const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();

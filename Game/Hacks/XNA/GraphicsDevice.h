@@ -2,6 +2,9 @@
 #define _GRAPHICSDEVICE_H_
 
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <vector>
 
 #include <enums.h>
@@ -17,8 +20,8 @@ struct RenderTarget2D;
 struct GraphicsDevice
 {
 
-	std::shared_ptr<PresentationParameters> PP;
-	std::vector<std::shared_ptr<SamplerState> > SamplerStates;
+	boost::shared_ptr<PresentationParameters> PP;
+	std::vector<boost::shared_ptr<SamplerState> > SamplerStates;
 	GfxRasterizerState RasterizerState;
 	GfxBlendState BlendState;
 	GfxDepthStencilState DepthStencilState;
@@ -27,7 +30,7 @@ struct GraphicsDevice
 
 	GraphicsDevice();
 
-	void SetRenderTarget( const std::shared_ptr<RenderTarget2D> &rt );
+	void SetRenderTarget( const boost::shared_ptr<RenderTarget2D> &rt );
 
 	void Clear( const Color &color);
 

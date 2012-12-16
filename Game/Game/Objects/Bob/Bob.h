@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		static bool AllExplode;
 		static bool ShowCorpseAfterExplode;
 
-		std::shared_ptr<BobPhsx> MyHeroType;
+		boost::shared_ptr<BobPhsx> MyHeroType;
 
 		bool FadingIn;
 		float Fade;
@@ -65,30 +65,30 @@ namespace CloudberryKingdom
 		int HeldObjectIteration;
 
 		bool CanHaveCape, CanHaveHat;
-		std::shared_ptr<BobPhsx> MyObjectType;
+		boost::shared_ptr<BobPhsx> MyObjectType;
 
 		float NewY, NewVel, Xvel;
 
 		virtual void Release();
 
-		void SetObject( const std::shared_ptr<ObjectClass> &obj, bool boxesOnly );
+		void SetObject( const boost::shared_ptr<ObjectClass> &obj, bool boxesOnly );
 
 		void SetColorScheme( ColorScheme scheme );
 
 		Vector2 CapeWind, Wind;
 
-		std::shared_ptr<Hat> MyHat;
+		boost::shared_ptr<Hat> MyHat;
 		CapeType MyCapeType;
-		std::shared_ptr<Cape> MyCape;
+		boost::shared_ptr<Cape> MyCape;
 		bool ShowCape;
 		Color InsideColor;
 
 	
-		std::shared_ptr<ObjectVector> temp;
-		std::shared_ptr<Quad> Head;
+		boost::shared_ptr<ObjectVector> temp;
+		boost::shared_ptr<Quad> Head;
 
 	
-		std::vector<std::shared_ptr<BobLink> > MyBobLinks;
+		std::vector<boost::shared_ptr<BobLink> > MyBobLinks;
 
 		int SideHitCount;
 
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 
 		int Count_ButtonA;
 		BobInput CurInput, PrevInput;
-		std::shared_ptr<BobPhsx> MyPhsx;
+		boost::shared_ptr<BobPhsx> MyPhsx;
 
 		/// <summary>
 		/// Whether the computer wants to land on a potential block (For PlayMode == 2)
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 
 		bool TopCol, BottomCol;
 
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 //C# TO C++ CONVERTER NOTE: The variable CharacterSelect was renamed since it is named the same as a user-defined type:
 		bool CompControl, CharacterSelect_Renamed, CharacterSelect2, Cinematic, DrawWithLevel, AffectsCamera;
 		int IndexOffset;
@@ -135,22 +135,22 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A callback called when the Bob lands on something.
 		/// </summary>
-		std::shared_ptr<Lambda> OnLand;
+		boost::shared_ptr<Lambda> OnLand;
 
 		/// <summary>
 		/// A callback called when the Bob reaches his jump apex.
 		/// </summary>
-		std::shared_ptr<Lambda> OnApexReached;
+		boost::shared_ptr<Lambda> OnApexReached;
 
 
 		bool CodeControl;
-		std::shared_ptr<Lambda_1<int> > ControlFunc;
-		std::shared_ptr<Lambda_1<int> > CinematicFunc;
-		std::shared_ptr<Lambda> OnAnimFinish;
+		boost::shared_ptr<Lambda_1<int> > ControlFunc;
+		boost::shared_ptr<Lambda_1<int> > CinematicFunc;
+		boost::shared_ptr<Lambda> OnAnimFinish;
 
 		void SetCodeControl();
 
-		std::shared_ptr<LevelPiece> MyPiece;
+		boost::shared_ptr<LevelPiece> MyPiece;
 
 		/// <summary>
 		/// Which start position in the current level piece this Bob belongs to
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 		/// If more than one Bob belongs to the same start position, this is the Bobs' ordering
 		/// </summary>
 		int MyPieceIndexOffset;
-		std::shared_ptr<ComputerRecording> MyRecord;
+		boost::shared_ptr<ComputerRecording> MyRecord;
 
 
 		bool Dying, Dead, FlamingCorpse;
@@ -170,19 +170,19 @@ namespace CloudberryKingdom
 
 		bool ScreenWrap, ScreenWrapToCenter, CollideWithCamera;
 
-		std::shared_ptr<EzSound> JumpSound, DieSound;
-		static std::shared_ptr<EzSound> JumpSound_Default, DieSound_Default;
+		boost::shared_ptr<EzSound> JumpSound, DieSound;
+		static boost::shared_ptr<EzSound> JumpSound_Default, DieSound_Default;
 
 		PlayerIndex MyPlayerIndex;
-		const std::shared_ptr<PlayerData> getMyPlayerData() const;
+		const boost::shared_ptr<PlayerData> getMyPlayerData() const;
 
 
 		bool TryPastTop;
 
 
-		std::shared_ptr<ObjectClass> PlayerObject;
+		boost::shared_ptr<ObjectClass> PlayerObject;
 
-		std::shared_ptr<BlockBase> LastCeiling;
+		boost::shared_ptr<BlockBase> LastCeiling;
 	
 		Vector2 LastCoinPos;
 
@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 
 		bool MakingLava, MakingCeiling;
 
-		std::shared_ptr<AABox> Box, Box2;
+		boost::shared_ptr<AABox> Box, Box2;
 
 		Vector2 Feet();
 
@@ -199,47 +199,47 @@ namespace CloudberryKingdom
 		/// A list of boxes to allow for different difficulty levels for different obstacles.
 		/// </summary>
 	
-		std::vector<std::shared_ptr<AABox> > Boxes;
+		std::vector<boost::shared_ptr<AABox> > Boxes;
 		int NumBoxes;
 
 	
-		std::shared_ptr<AABox> GetBox( int DifficultyLevel );
+		boost::shared_ptr<AABox> GetBox( int DifficultyLevel );
 
 		/// <summary>
 		/// A collision box corresponding to the normal size of Box2 during actual gameplay.
 		/// </summary>
-		std::shared_ptr<AABox> RegularBox2;
+		boost::shared_ptr<AABox> RegularBox2;
 
-		static std::vector<std::shared_ptr<BobPhsx> > HeroTypes;
+		static std::vector<boost::shared_ptr<BobPhsx> > HeroTypes;
 
 		/// <summary>
 		/// How many time the bob has popped something without hitting the ground.
 		/// </summary>
 		int PopModifier;
 
-		Bob( const std::shared_ptr<BobPhsx> &type, bool boxesOnly );
+		Bob( const boost::shared_ptr<BobPhsx> &type, bool boxesOnly );
 
 		bool IsSpriteBased;
-		Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad );
-		Bob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
-		Bob( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
+		Bob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad );
+		Bob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
+		Bob( const boost::shared_ptr<ObjectClass> &obj, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &MyHeroType, bool AllowHats );
 	
-		void LoadFromFile( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType );
-		void _Load( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, const std::shared_ptr<BobPhsx> &HeroType );
+		void LoadFromFile( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &HeroType );
+		void _Load( const boost::shared_ptr<ObjectClass> &obj, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, const boost::shared_ptr<BobPhsx> &HeroType );
 
 	
-		void SwitchHero( const std::shared_ptr<BobPhsx> &hero );
+		void SwitchHero( const boost::shared_ptr<BobPhsx> &hero );
 
 		/// <summary>
 		/// When true the player can not move.
 		/// </summary>
 		bool Immobile;
 
-		void SetHeroPhsx( const std::shared_ptr<BobPhsx> &type );
+		void SetHeroPhsx( const boost::shared_ptr<BobPhsx> &type );
 
 		void MakeCape( CapeType CapeType );
 
-		void Init( bool BoxesOnly, PhsxData StartData, const std::shared_ptr<GameData> &game );
+		void Init( bool BoxesOnly, PhsxData StartData, const boost::shared_ptr<GameData> &game );
 
 		/// <summary>
 		/// Whether this Bob is a player.
@@ -251,13 +251,13 @@ namespace CloudberryKingdom
 		/// If the Bob isn't controlled by a player return null.
 		/// </summary>
 		/// <returns></returns>
-		std::shared_ptr<PlayerData> GetPlayerData();
+		boost::shared_ptr<PlayerData> GetPlayerData();
 
 		bool GiveStats();
 
-		const std::shared_ptr<PlayerStats> &getMyStats() const;
+		const boost::shared_ptr<PlayerStats> &getMyStats() const;
 
-		const std::shared_ptr<PlayerStats> &getMyTempStats() const;
+		const boost::shared_ptr<PlayerStats> &getMyTempStats() const;
 
 		/// <summary>
 		/// The number of frames since the player has died.
@@ -266,7 +266,7 @@ namespace CloudberryKingdom
 		int DeathCount;
 
 	
-		std::shared_ptr<ObjectBase> KillingObject;
+		boost::shared_ptr<ObjectBase> KillingObject;
 		static std::map<BobDeathType, Localization::Words> BobDeathNames;
 
 		/// <summary>
@@ -277,8 +277,8 @@ namespace CloudberryKingdom
 		/// <param name="DoAnim">Whether to do the death animation.</param>
 		void Die( BobDeathType DeathType, bool ForceDeath, bool DoAnim );
 		void Die( BobDeathType DeathType );
-		void Die( BobDeathType DeathType, const std::shared_ptr<ObjectBase> &KillingObject );
-		void Die( BobDeathType DeathType, const std::shared_ptr<ObjectBase> &KillingObject, bool ForceDeath, bool DoAnim );
+		void Die( BobDeathType DeathType, const boost::shared_ptr<ObjectBase> &KillingObject );
+		void Die( BobDeathType DeathType, const boost::shared_ptr<ObjectBase> &KillingObject, bool ForceDeath, bool DoAnim );
 
 		/// <summary>
 		/// Whether we can kill the current player.
@@ -325,7 +325,7 @@ namespace CloudberryKingdom
 
 		static bool GuideActivated;
 	
-		static std::shared_ptr<QuadClass> GuideQuad;
+		static boost::shared_ptr<QuadClass> GuideQuad;
 		void InitGuideQuad();
 
 		static int GuideLength;
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 		bool IsVisible();
 
 	
-		std::shared_ptr<QuadClass> Rocket;
+		boost::shared_ptr<QuadClass> Rocket;
 	
 		Vector2 RocketOffset;
 	
@@ -357,10 +357,10 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		void InteractWithBlock( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block, ColType Col );
+		void InteractWithBlock( const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block, ColType Col );
 
 	
-		void UpdateGroundSpeed( const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
+		void UpdateGroundSpeed( const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block );
 
 	
 		void InitBoxesForCollisionDetect();
@@ -390,9 +390,9 @@ namespace CloudberryKingdom
 		void UpdateBoxList();
 
 	
-		void DeleteObj( const std::shared_ptr<ObjectBase> &obj );
+		void DeleteObj( const boost::shared_ptr<ObjectBase> &obj );
 
-		std::shared_ptr<Ceiling_Parameters> CeilingParams;
+		boost::shared_ptr<Ceiling_Parameters> CeilingParams;
 		/// <summary>
 		/// Calculate all interactions between the player and every Block in the level.
 		/// </summary>

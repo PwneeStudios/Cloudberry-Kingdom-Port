@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Backpanel::InitialZoomIn()
 	{
 		Vector2 size = Scene->getSize();
-		Scene->FancyScale = std::make_shared<FancyVector2>();
+		Scene->FancyScale = boost::make_shared<FancyVector2>();
 		Scene->FancyScale->LerpTo( 1.025f * size, size, 120, LerpStyle_DECAY_NO_OVERSHOOT );
 	}
 
@@ -36,35 +36,35 @@ namespace CloudberryKingdom
 	{
 		 CkBaseMenu::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		EnsureFancy();
 
-		Scene = std::make_shared<QuadClass>( _T( "Title_Screen" ), 1778.f );
+		Scene = boost::make_shared<QuadClass>( _T( "Title_Screen" ), 1778.f );
 		MyPile->Add( Scene, _T( "Scene" ) );
 
-		Title = std::make_shared<QuadClass>( _T( "Title" ), 1778.f );
+		Title = boost::make_shared<QuadClass>( _T( "Title" ), 1778.f );
 		//MyPile.Add(Title, "Title");
 
-		Title_Trim = std::make_shared<QuadClass>( _T( "Title_Trim" ), 1778 * 783 / 1280.f );
+		Title_Trim = boost::make_shared<QuadClass>( _T( "Title_Trim" ), 1778 * 783 / 1280.f );
 		MyPile->Add( Title_Trim, _T( "Title_Trim" ) );
 
-		Scene_NoBob_Blur = std::make_shared<QuadClass>( _T( "Title_NoBob_Blur" ), 1778.f );
+		Scene_NoBob_Blur = boost::make_shared<QuadClass>( _T( "Title_NoBob_Blur" ), 1778.f );
 		MyPile->Add( Scene_NoBob_Blur, _T( "Scene_NoBob_Blur" ) );
 
-		Scene_NoBob_Brighten = std::make_shared<QuadClass>( _T( "Title_NoBob_Brighten" ), 1778.f );
+		Scene_NoBob_Brighten = boost::make_shared<QuadClass>( _T( "Title_NoBob_Brighten" ), 1778.f );
 		MyPile->Add( Scene_NoBob_Brighten, _T( "Scene_NoBob_Brighten" ) );
 
-		Scene_Blur = std::make_shared<QuadClass>( _T( "Title_Blur" ), 1778.f );
+		Scene_Blur = boost::make_shared<QuadClass>( _T( "Title_Blur" ), 1778.f );
 		MyPile->Add( Scene_Blur, _T( "Scene_Blur" ) );
 
-		Scene_Princess = std::make_shared<QuadClass>( _T( "Scene_Princess" ), 1778.f );
+		Scene_Princess = boost::make_shared<QuadClass>( _T( "Scene_Princess" ), 1778.f );
 		MyPile->Add( Scene_Princess, _T( "Scene_Princess" ) );
 
-		Scene_Kobbler = std::make_shared<QuadClass>( _T( "Scene_Kobbler" ), 1778.f );
+		Scene_Kobbler = boost::make_shared<QuadClass>( _T( "Scene_Kobbler" ), 1778.f );
 		MyPile->Add( Scene_Kobbler, _T( "Scene_Kobbler" ) );
 
-		Scene_Kobbler_Blur = std::make_shared<QuadClass>( _T( "Scene_Kobbler_Blur" ), 1778.f );
+		Scene_Kobbler_Blur = boost::make_shared<QuadClass>( _T( "Scene_Kobbler_Blur" ), 1778.f );
 		MyPile->Add( Scene_Kobbler_Blur, _T( "Scene_Kobbler_Blur" ) );
 
 		BlackBox();
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Backpanel::SetState( State state )
 	{
-		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = MyPile->MyQuadList.begin(); quad != MyPile->MyQuadList.end(); ++quad )
+		for ( std::vector<boost::shared_ptr<QuadClass> >::const_iterator quad = MyPile->MyQuadList.begin(); quad != MyPile->MyQuadList.end(); ++quad )
 		{
 			( *quad )->ResetFade();
 			( *quad )->Show = false;
@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Backpanel::BlackBox()
 	{
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Scene" ) );
 		if ( _q != 0 )
 		{
@@ -271,12 +271,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
+	boost::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel::StartMenu_MW_Backpanel_Construct()
 	{
 		InitializeInstanceFields();
 
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<StartMenu_MW_Backpanel>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_Backpanel>( shared_from_this() );
 	}
 }

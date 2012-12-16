@@ -12,6 +12,9 @@
 #define _USE_MATH_DEFINES
 #include "math.h"
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <queue>
 #include <stack>
 #include <string>
@@ -20,14 +23,14 @@
 
 // Syntactic sugar
 #define MakeMagic( classname, params ) \
-	std::make_shared<classname> params -> classname##_Construct params
+	boost::make_shared<classname> params -> classname##_Construct params
 
 namespace CloudberryKingdom
 {
-	typedef std::vector<std::shared_ptr<Bob> > BobVec;
-	typedef std::vector<std::shared_ptr<ObjectBase> > ObjectVec;
-	typedef std::vector<std::shared_ptr<BlockBase> > BlockVec;
-	typedef std::vector<std::shared_ptr<GameObject> > GameObjVec;
+	typedef std::vector<boost::shared_ptr<Bob> > BobVec;
+	typedef std::vector<boost::shared_ptr<ObjectBase> > ObjectVec;
+	typedef std::vector<boost::shared_ptr<BlockBase> > BlockVec;
+	typedef std::vector<boost::shared_ptr<GameObject> > GameObjVec;
 }
 
 // Jordan's unalphebatized shit. Suck it Oleg.
@@ -66,21 +69,21 @@ struct WrappedValue : public Object
 };
 
 template<class T>
-inline T Unbox( std::shared_ptr<Object> o )
+inline T Unbox( boost::shared_ptr<Object> o )
 {
-	return ( *std::static_pointer_cast<WrappedValue<T> >( o ).get() ).MyValue;
+	return ( *boost::static_pointer_cast<WrappedValue<T> >( o ).get() ).MyValue;
 }
 
 template<class T>
-inline std::shared_ptr<Object> MakeSmartObject( T t )
+inline boost::shared_ptr<Object> MakeSmartObject( T t )
 {
-	return std::static_pointer_cast<Object>( std::make_shared<WrappedValue<T> >( t ) );
+	return boost::static_pointer_cast<Object>( boost::make_shared<WrappedValue<T> >( t ) );
 }
 
 template<class T>
-inline std::shared_ptr<Object> MakeSmartObject( std::shared_ptr<T> ptr )
+inline boost::shared_ptr<Object> MakeSmartObject( boost::shared_ptr<T> ptr )
 {
-	return std::static_pointer_cast<Object>( ptr );
+	return boost::static_pointer_cast<Object>( ptr );
 }
 
 

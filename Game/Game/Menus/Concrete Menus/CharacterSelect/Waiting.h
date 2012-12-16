@@ -9,10 +9,10 @@ namespace CloudberryKingdom
 	struct Waiting : public CkBaseMenu
 	{
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
-		Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		std::shared_ptr<Waiting> Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		boost::shared_ptr<Waiting> Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
 	

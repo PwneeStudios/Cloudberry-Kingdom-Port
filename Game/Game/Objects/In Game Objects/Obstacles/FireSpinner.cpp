@@ -5,8 +5,8 @@ namespace CloudberryKingdom
 
 	void FireSpinner::FireSpinnerTileInfo::InitializeInstanceFields()
 	{
-		Flame = std::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "small flame" ) ) ), Vector2( 72.f, 72.f ), Vector2(), Color::White );
-		Base = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72.f, 72.f ), Vector2(), Color::White );
+		Flame = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "small flame" ) ) ), Vector2( 72.f, 72.f ), Vector2(), Color::White );
+		Base = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2( 72.f, 72.f ), Vector2(), Color::White );
 		SegmentSpacing = 53;
 		SpaceFromBase = 0;
 		Rotate = true;
@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void FireSpinner::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void FireSpinner::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_LineDeath::Init( pos, level );
 
@@ -73,8 +73,8 @@ namespace CloudberryKingdom
 	{
 		if ( !BoxesOnly )
 		{
-			MyQuad = std::make_shared<QuadClass>();
-			MyBaseQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
+			MyBaseQuad = boost::make_shared<QuadClass>();
 		}
 
 		Construct( BoxesOnly );
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 		_LineDeath::Move( shift );
 	}
 
-	void FireSpinner::Interact( const std::shared_ptr<Bob> &bob )
+	void FireSpinner::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->SkippedPhsx )
 		if ( Phsx::AABoxAndLineCollisionTest( bob->Box2, MyLine ) )
@@ -214,12 +214,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void FireSpinner::Clone( const std::shared_ptr<ObjectBase> &A )
+	void FireSpinner::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 		getCore()->WakeUpRequirements = true;
 
-		std::shared_ptr<FireSpinner> SpinnerA = std::dynamic_pointer_cast<FireSpinner>( A );
+		boost::shared_ptr<FireSpinner> SpinnerA = boost::dynamic_pointer_cast<FireSpinner>( A );
 		Init( SpinnerA->getPos(), SpinnerA->getMyLevel() );
 
 		Radius = SpinnerA->Radius;

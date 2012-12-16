@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		struct FireballTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 
 		
 			void InitializeInstanceFields();
@@ -24,36 +24,36 @@ namespace CloudberryKingdom
 		};
 
 	
-		static std::shared_ptr<Particle> ExplodeTemplate, EmitterTemplate;
+		static boost::shared_ptr<Particle> ExplodeTemplate, EmitterTemplate;
 	
-		static std::shared_ptr<EzSound> ExplodeSound;
+		static boost::shared_ptr<EzSound> ExplodeSound;
 	
 		static float t;
 
-		static std::shared_ptr<Quad> ShadeQuad;
+		static boost::shared_ptr<Quad> ShadeQuad;
 	
-		static std::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, BaseFireballTexture;
+		static boost::shared_ptr<EzTexture> FireballTexture, FlameTexture, EmitterTexture, BaseFireballTexture;
 	
-		static std::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, EmitterRenderTarget;
+		static boost::shared_ptr<RenderTarget2D> FireballRenderTarget, FlameRenderTarget, EmitterRenderTarget;
 		static int DrawWidth, DrawHeight;
 	
-		static std::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Emitter_Emitter;
+		static boost::shared_ptr<ParticleEmitter> Fireball_Emitter, Flame_Emitter, Emitter_Emitter;
 
 		static void PreInit();
 
-		static void InitRenderTargets( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height );
+		static void InitRenderTargets( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height );
 
 		static void TexturePhsx();
 
-		static void DrawFireballTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad );
+		static void DrawFireballTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad );
 
-		static void DrawEmitterTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad );
+		static void DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad );
 
-		static void Explosion( Vector2 pos, const std::shared_ptr<Level> &level );
-		static void Explosion( Vector2 pos, const std::shared_ptr<Level> &level, Vector2 vel, float Scale, float ScaleQuad );
+		static void Explosion( Vector2 pos, const boost::shared_ptr<Level> &level );
+		static void Explosion( Vector2 pos, const boost::shared_ptr<Level> &level, Vector2 vel, float Scale, float ScaleQuad );
 
 
-		std::shared_ptr<HsvQuad> MyQuad;
+		boost::shared_ptr<HsvQuad> MyQuad;
 
 		int Period, Offset;
 
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 		Fireball( bool BoxesOnly );
 
-		void Init( PhsxData data, const std::shared_ptr<Level> &level );
+		void Init( PhsxData data, const boost::shared_ptr<Level> &level );
 
 	
 		float PrevStep;
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		virtual void ActivePhsxStep();
 
 	
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 	
 		virtual void DrawGraphics();
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		virtual void DrawBoxes();
 
 	
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

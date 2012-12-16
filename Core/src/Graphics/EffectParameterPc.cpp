@@ -34,7 +34,7 @@ void EffectParameter::SetValue( const Matrix &m )
 	glUniform4fv( internal_->Location, 4, m.M );
 }
 
-void EffectParameter::SetValue( const std::shared_ptr<struct Texture2D> &t )
+void EffectParameter::SetValue( const boost::shared_ptr<struct Texture2D> &t )
 {
 	glUseProgram( internal_->ProgId );
 }

@@ -14,9 +14,9 @@ namespace CloudberryKingdom
 	int MenuItem::ActivatingPlayer;
 
 
-	std::shared_ptr<MenuItem> MenuItem::Clone()
+	boost::shared_ptr<MenuItem> MenuItem::Clone()
 	{
-		std::shared_ptr<MenuItem> clone = std::make_shared<MenuItem>( MyText->Clone(), MySelectedText->Clone() );
+		boost::shared_ptr<MenuItem> clone = boost::make_shared<MenuItem>( MyText->Clone(), MySelectedText->Clone() );
 		if ( Icon != 0 )
 		{
 			clone->Icon = Icon->Clone();
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		SelectedPos += shift;
 	}
 
-	void MenuItem::SetIcon( const std::shared_ptr<ObjectIcon> &Icon )
+	void MenuItem::SetIcon( const boost::shared_ptr<ObjectIcon> &Icon )
 	{
 		this->Icon = Icon;
 		Icon->FancyPos->SetCenter( FancyPos );
@@ -67,14 +67,14 @@ namespace CloudberryKingdom
 		MySelectedText->SubstituteText( text );
 	}
 
-	void MenuItem::setGo( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &value )
+	void MenuItem::setGo( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &value )
 	{
 		_Go = value;
 		if ( _Go != 0 )
 			setOverrideA( true );
 	}
 
-	const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &MenuItem::getGo() const
+	const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &MenuItem::getGo() const
 	{
 		return _Go;
 	}
@@ -177,20 +177,20 @@ namespace CloudberryKingdom
 			return __max( MyText->GetWorldWidth(), MySelectedText->GetWorldWidth() );
 	}
 
-	MenuItem::MenuItem( const std::shared_ptr<EzText> &Text )
+	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
 		Init( Text, Text->Clone() );
 	}
 
-	MenuItem::MenuItem( const std::shared_ptr<EzText> &Text, const std::wstring &Name )
+	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Name )
 	{
 		InitializeInstanceFields();
 		Init( Text, Text->Clone() );
 		this->Name = Name;
 	}
 
-	MenuItem::MenuItem( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
 		Init( Text, SelectedText );
@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 		MySelectedText->setScale( MySelectedText->getScale() * scale );
 	}
 
-	void MenuItem::Init( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	void MenuItem::Init( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		//MyOscillateParams.Set(2f, 1.03f, .05f);
 		MyOscillateParams.Set( 2.05f, 1.0295f,.045f );
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	void MenuItem::DrawText( const std::shared_ptr<Camera> &cam, bool Selected )
+	void MenuItem::DrawText( const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		if ( !getOnScreen() )
 			return;
@@ -344,15 +344,15 @@ namespace CloudberryKingdom
 	void MenuItem::DoGrayOut()
 	{
 		MyText->MyFloatColor.W = .5f;
-		if ( Icon != 0 && std::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
-			( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( .5f );
+		if ( Icon != 0 && boost::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
+			( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( .5f );
 	}
 
 	void MenuItem::DoDeGrayOut()
 	{
 		MyText->MyFloatColor.W = 1;
-		if ( Icon != 0 && std::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
-			( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( 1 );
+		if ( Icon != 0 && boost::dynamic_pointer_cast<PictureIcon>( Icon ) != 0 )
+			( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->setAlpha( 1 );
 	}
 
 	void MenuItem::setInclude( const bool &value )
@@ -390,7 +390,7 @@ namespace CloudberryKingdom
 		this->Draw( true, Tools::getCurCamera(), false );
 	}
 
-	bool MenuItem::DrawBase( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	bool MenuItem::DrawBase( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		setMyCameraZoom( cam->getZoom() );
 
@@ -416,7 +416,7 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	void MenuItem::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	void MenuItem::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		if ( DrawBase( Text, cam, Selected ) )
 			return;
@@ -470,7 +470,7 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	std::shared_ptr<PlayerData> MenuItem::GetActivatingPlayerData()
+	boost::shared_ptr<PlayerData> MenuItem::GetActivatingPlayerData()
 	{
 		int p = MenuItem::ActivatingPlayer;
 		if ( p < 0 )
@@ -576,7 +576,7 @@ namespace CloudberryKingdom
 		UnaffectedByScroll = false;
 		MyObject = 0;
 		MyInt = 0;
-		FancyPos = std::make_shared<FancyVector2>();
+		FancyPos = boost::make_shared<FancyVector2>();
 		CustomSelectedPos = false;
 		SelectionOscillate = true;
 		AlwaysDrawAsSelected = false;

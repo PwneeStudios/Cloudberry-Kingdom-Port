@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 
 		BoxTypes BoxType;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 	};
 
 	struct GhostBlock_AutoGen : public AutoGen
@@ -28,30 +28,30 @@ namespace CloudberryKingdom
 		struct OnGhostUsedLambda : public Lambda
 		{
 		
-			std::shared_ptr<GhostBlock> block;
-			std::shared_ptr<Level> level;
+			boost::shared_ptr<GhostBlock> block;
+			boost::shared_ptr<Level> level;
 
 		
-			OnGhostUsedLambda( const std::shared_ptr<GhostBlock> &block, const std::shared_ptr<Level> &level );
+			OnGhostUsedLambda( const boost::shared_ptr<GhostBlock> &block, const boost::shared_ptr<Level> &level );
 
 			void Apply();
 		};
 	
-		static std::shared_ptr<GhostBlock_AutoGen> instance;
+		static boost::shared_ptr<GhostBlock_AutoGen> instance;
 	
-		const static std::shared_ptr<GhostBlock_AutoGen> &getInstance();
+		const static boost::shared_ptr<GhostBlock_AutoGen> &getInstance();
 
 	
 		GhostBlock_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 
 	};
 }

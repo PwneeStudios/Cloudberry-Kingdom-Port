@@ -8,16 +8,16 @@ namespace CloudberryKingdom
 	struct PlayerData : public SaveLoad
 	{
 	
-		std::shared_ptr<SavedSeeds> MySavedSeeds;
+		boost::shared_ptr<SavedSeeds> MySavedSeeds;
 
 		PlayerIndex MyPlayerIndex;
 		bool Exists, IsAlive;
 
-		std::shared_ptr<Set<int> > Purchases;
+		boost::shared_ptr<Set<int> > Purchases;
 //C# TO C++ CONVERTER NOTE: The variable Awardments was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<Set<int> > Awardments_Renamed;
+		boost::shared_ptr<Set<int> > Awardments_Renamed;
 
-		std::map<int, std::shared_ptr<ScoreEntry> > HighScores;
+		std::map<int, boost::shared_ptr<ScoreEntry> > HighScores;
 
 		int CampaignLevel, CampaignCoins;
 
@@ -42,20 +42,20 @@ namespace CloudberryKingdom
 		ColorScheme CustomColorScheme;
 		int ColorSchemeIndex;
 
-		std::shared_ptr<PlayerStats> LifetimeStats, GameStats, LevelStats, TempStats;
-		std::shared_ptr<PlayerStats> CampaignStats;
+		boost::shared_ptr<PlayerStats> LifetimeStats, GameStats, LevelStats, TempStats;
+		boost::shared_ptr<PlayerStats> CampaignStats;
 
 #if defined(PC_VERSION)
 #elif defined(XBOX) || defined(XBOX_SIGNIN)
-		std::shared_ptr<Gamer> _MyGamer;
-		const std::shared_ptr<Gamer> &getMyGamer() const;
+		boost::shared_ptr<Gamer> _MyGamer;
+		const boost::shared_ptr<Gamer> &getMyGamer() const;
 #endif
 
 		PlayerData();
 
 		#pragma region WriteRead
 	
-		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Serialize( const boost::shared_ptr<BinaryWriter> &writer );
 
 		virtual void FailLoad();
 
@@ -65,17 +65,17 @@ namespace CloudberryKingdom
 	
 		int GetHighScore( int GameId );
 
-		void AddHighScore( const std::shared_ptr<ScoreEntry> &score );
+		void AddHighScore( const boost::shared_ptr<ScoreEntry> &score );
 
-		const std::shared_ptr<PlayerStats> &getStats() const;
-		std::shared_ptr<PlayerStats> GetStats( StatGroup group );
+		const boost::shared_ptr<PlayerStats> &getStats() const;
+		boost::shared_ptr<PlayerStats> GetStats( StatGroup group );
 
-		std::shared_ptr<PlayerStats> GetSummedStats( StatGroup group );
+		boost::shared_ptr<PlayerStats> GetSummedStats( StatGroup group );
 
 	
 //ORIGINAL LINE: PlayerStats SumStats(params StatGroup[] group)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		std::shared_ptr<PlayerStats> SumStats( const std::vector<StatGroup> &group );
+		boost::shared_ptr<PlayerStats> SumStats( const std::vector<StatGroup> &group );
 
 		/// <summary>
 		/// Get the the players current score for the game,
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		int Bank();
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-		std::shared_ptr<Gamer> CheckForMatchingGamer();
+		boost::shared_ptr<Gamer> CheckForMatchingGamer();
 #endif
 		/// <summary>
 		/// Gets the color that the player's name should be drawn with.
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Sets the color of text to match the color of the player.
 		/// </summary>
-		void SetNameText( const std::shared_ptr<EzText> &text );
+		void SetNameText( const boost::shared_ptr<EzText> &text );
 
 		std::wstring GetName();
 

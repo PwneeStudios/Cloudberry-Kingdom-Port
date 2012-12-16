@@ -24,14 +24,14 @@ namespace CloudberryKingdom
 		const int getMilliseconds() const;
 
 	
-		std::shared_ptr<StringBuilder> MyString;
+		boost::shared_ptr<StringBuilder> MyString;
 
 		/// <summary>
 		/// Return a string representation of the time
 		/// </summary>
 		/// <returns></returns>
 	
-		std::shared_ptr<StringBuilder> BuildString();
+		boost::shared_ptr<StringBuilder> BuildString();
 
 	
 		bool AddedOnce;
@@ -52,18 +52,18 @@ namespace CloudberryKingdom
 		const Vector2 getApparentPos() const;
 
 	
-		std::shared_ptr<EzText> TimerText;
+		boost::shared_ptr<EzText> TimerText;
 		void UpdateTimerText();
 
 	
 		GUI_Timer_Base();
-		std::shared_ptr<GUI_Timer_Base> GUI_Timer_Base_Construct();
+		boost::shared_ptr<GUI_Timer_Base> GUI_Timer_Base_Construct();
 
 	
 		virtual void MyDraw();
 
 	
-		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_Timer_Base> > > OnTimeExpired;
+		boost::shared_ptr<Multicaster_1<boost::shared_ptr<GUI_Timer_Base> > > OnTimeExpired;
 
 		/// <summary>
 		/// When true the timer will continue to count down even when every player is dead.

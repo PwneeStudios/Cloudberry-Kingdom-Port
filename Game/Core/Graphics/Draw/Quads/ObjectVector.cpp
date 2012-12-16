@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	ObjectVector::DefaultCallbackLambda::DefaultCallbackLambda( const std::shared_ptr<ObjectVector> &v )
+	ObjectVector::DefaultCallbackLambda::DefaultCallbackLambda( const boost::shared_ptr<ObjectVector> &v )
 	{
 		this->v = v;
 	}
@@ -22,13 +22,13 @@ namespace CloudberryKingdom
 		ModifiedEventCallback.reset();
 	}
 
-	void ObjectVector::Write( const std::shared_ptr<BinaryWriter> &writer, const std::shared_ptr<ObjectClass> &MainObject )
+	void ObjectVector::Write( const boost::shared_ptr<BinaryWriter> &writer, const boost::shared_ptr<ObjectClass> &MainObject )
 	{
 		if ( ParentQuad == 0 || ParentQuad == MainObject->ParentQuad )
 			writer->Write( -1 );
 		else
 		{
-			std::vector<std::shared_ptr<BaseQuad> >::iterator i = std::find( MainObject->QuadList.begin(),
+			std::vector<boost::shared_ptr<BaseQuad> >::iterator i = std::find( MainObject->QuadList.begin(),
 				MainObject->QuadList.end(), ParentQuad );
 			writer->Write( i - MainObject->QuadList.end() );
 		}
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		AnimData.Write( writer );
 	}
 
-	void ObjectVector::Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<ObjectClass> &MainObject )
+	void ObjectVector::Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<ObjectClass> &MainObject )
 	{
 		int ParentQuadInt = reader->ReadInt32();
 		if ( ParentQuadInt == -1 )
@@ -65,12 +65,12 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	void ObjectVector::Clone( const std::shared_ptr<ObjectVector> &dest )
+	void ObjectVector::Clone( const boost::shared_ptr<ObjectVector> &dest )
 	{
 		Clone( dest, true );
 	}
 
-	void ObjectVector::Clone( const std::shared_ptr<ObjectVector> &dest, bool CloneAnimData )
+	void ObjectVector::Clone( const boost::shared_ptr<ObjectVector> &dest, bool CloneAnimData )
 	{
 		dest->Pos = Pos;
 		dest->RelPos = RelPos;
@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 			dest->AnimData = AnimData;
 	}
 
-	void ObjectVector::CopyAnim( const std::shared_ptr<ObjectVector> &vec, int Anim )
+	void ObjectVector::CopyAnim( const boost::shared_ptr<ObjectVector> &vec, int Anim )
 	{
 		AnimData.CopyAnim( vec->AnimData, Anim );
 	}
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		AnimData.Init(); // = new AnimationData();
 
 		Pos = Vector2();
-		//ModifiedEventCallback = std::make_shared<DefaultCallbackLambda>( this->shared_from_this() );
+		//ModifiedEventCallback = boost::make_shared<DefaultCallbackLambda>( this->shared_from_this() );
 
 		CenterPoint.reset();
 	}

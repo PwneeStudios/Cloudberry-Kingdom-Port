@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		_GlobalIllumination = value;
 	}
 
-	QuadDrawer::QuadDrawer( const std::shared_ptr<GraphicsDevice> &device, int n )
+	QuadDrawer::QuadDrawer( const boost::shared_ptr<GraphicsDevice> &device, int n )
 	{
 		InitializeInstanceFields();
 		Device = device;
@@ -54,19 +54,19 @@ namespace CloudberryKingdom
 		LineQuad = SimpleQuad();
 		LineQuad.Init();
 
-		WrapWrap = std::make_shared<SamplerState>();
+		WrapWrap = boost::make_shared<SamplerState>();
 		WrapWrap->AddressU = GfxTextureAddressMode_Wrap;
 		WrapWrap->AddressV = GfxTextureAddressMode_Wrap;
 
-		ClampClamp = std::make_shared<SamplerState>();
+		ClampClamp = boost::make_shared<SamplerState>();
 		ClampClamp->AddressU = GfxTextureAddressMode_Clamp;
 		ClampClamp->AddressV = GfxTextureAddressMode_Clamp;
 
-		ClampWrap = std::make_shared<SamplerState>();
+		ClampWrap = boost::make_shared<SamplerState>();
 		ClampWrap->AddressU = GfxTextureAddressMode_Clamp;
 		ClampWrap->AddressV = GfxTextureAddressMode_Wrap;
 
-		WrapClamp = std::make_shared<SamplerState>();
+		WrapClamp = boost::make_shared<SamplerState>();
 		WrapClamp->AddressU = GfxTextureAddressMode_Wrap;
 		WrapClamp->AddressV = GfxTextureAddressMode_Clamp;
 	}
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void QuadDrawer::DrawQuad( const std::shared_ptr<Quad> &quad )
+	void QuadDrawer::DrawQuad( const boost::shared_ptr<Quad> &quad )
 	{
 		if ( i + 6 > N || i != 0 && ( CurrentEffect->effect != quad->MyEffect->effect || CurrentTexture->getTex() != quad->MyTexture->getTex() || CurrentMatrixSignature != quad->MyMatrixSignature ) )
 			Flush();
@@ -322,7 +322,7 @@ namespace CloudberryKingdom
 		DrawQuad( LineQuad );
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info )
 	{
 		if ( info->DrawEndPoints )
 			DrawLineAndEndPoints( x1, x2, Color( info->Tint ), info->Width, info->End1->MyTexture, info->Sprite->MyTexture, info->End2->MyTexture, Tools::BasicEffect, info->RepeatWidth, info->Dir, 0, 0 );
@@ -330,12 +330,12 @@ namespace CloudberryKingdom
 			DrawLine( x1, x2, Color( info->Tint ), info->Width, info->Sprite->MyTexture, Tools::BasicEffect, info->RepeatWidth, info->Dir, 0, 0, info->Wrap );
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width )
 	{
 		DrawLine( x1, x2, Color( info->Tint * Tint ), Width, info->Sprite->MyTexture, Tools::BasicEffect, info->RepeatWidth, info->Dir, 0, 0, info->Wrap );
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const std::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width, float v_shift )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, const boost::shared_ptr<LineSpriteInfo> &info, Vector4 Tint, float Width, float v_shift )
 	{
 		DrawLine( x1, x2, Color( info->Tint * Tint ), Width, info->Sprite->MyTexture, Tools::BasicEffect, info->RepeatWidth, info->Dir, 0, v_shift, info->Wrap );
 	}
@@ -345,7 +345,7 @@ namespace CloudberryKingdom
 		DrawLine( x1, x2, color, width, 0, 0, 1, 0, 0, 0, false );
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, bool Illumination )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, bool Illumination )
 	{
 		bool Hold = LineQuad.UseGlobalIllumination;
 		LineQuad.UseGlobalIllumination = Illumination;
@@ -353,12 +353,12 @@ namespace CloudberryKingdom
 		LineQuad.UseGlobalIllumination = Hold;
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio )
 	{
 		DrawLine( x1, x2, color, width, Tex, fx, RepeatWidth, Dir, BlendAddRatio, 0, false );
 	}
 
-	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift, bool Wrap )
+	void QuadDrawer::DrawLine( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift, bool Wrap )
 	{
 		color = ColorHelper::PremultiplyAlpha( color );
 
@@ -416,7 +416,7 @@ namespace CloudberryKingdom
 		LineQuad.BlendAddRatio = 0;
 	}
 
-	void QuadDrawer::DrawLineAndEndPoints( Vector2 x1, Vector2 x2, Color color, float width, const std::shared_ptr<EzTexture> &Tex1, const std::shared_ptr<EzTexture> &Tex2, const std::shared_ptr<EzTexture> &Tex3, const std::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift )
+	void QuadDrawer::DrawLineAndEndPoints( Vector2 x1, Vector2 x2, Color color, float width, const boost::shared_ptr<EzTexture> &Tex1, const boost::shared_ptr<EzTexture> &Tex2, const boost::shared_ptr<EzTexture> &Tex3, const boost::shared_ptr<EzEffect> &fx, float RepeatWidth, int Dir, float BlendAddRatio, float v_shift )
 	{
 		color = ColorHelper::PremultiplyAlpha( color );
 
@@ -513,7 +513,7 @@ namespace CloudberryKingdom
 		DrawSquareDot( x, color, width, 0, 0 );
 	}
 
-	void QuadDrawer::DrawSquareDot( Vector2 x, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx )
+	void QuadDrawer::DrawSquareDot( Vector2 x, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx )
 	{
 		color = ColorHelper::PremultiplyAlpha( color );
 
@@ -556,7 +556,7 @@ namespace CloudberryKingdom
 		DrawToScaleQuad( x, color, width, 0, 0 );
 	}
 
-	void QuadDrawer::DrawToScaleQuad( Vector2 x, Color color, float width, const std::shared_ptr<EzTexture> &Tex, const std::shared_ptr<EzEffect> &fx )
+	void QuadDrawer::DrawToScaleQuad( Vector2 x, Color color, float width, const boost::shared_ptr<EzTexture> &Tex, const boost::shared_ptr<EzEffect> &fx )
 	{
 		color = ColorHelper::PremultiplyAlpha( color );
 

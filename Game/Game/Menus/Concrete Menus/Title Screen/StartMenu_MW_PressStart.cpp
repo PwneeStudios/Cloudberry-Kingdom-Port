@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title ) :
+	StartMenu_MW_PressStart::StartMenu_MW_PressStart( const boost::shared_ptr<TitleGameData_MW> &Title ) :
 		CkBaseMenu(),
 		t( 0 ), DelayToAllowInput( 0 )
 	{
 	}
-	std::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart::StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	boost::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart::StartMenu_MW_PressStart_Construct( const boost::shared_ptr<TitleGameData_MW> &Title )
 	{
 		InitializeInstanceFields();
 
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		
 		this->Title = Title;
 
-		return std::static_pointer_cast<StartMenu_MW_PressStart>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_PressStart>( shared_from_this() );
 	}
 
 	void StartMenu_MW_PressStart::SlideIn( int Frames )
@@ -45,12 +45,12 @@ namespace CloudberryKingdom
 
 		CallDelay = ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		EnsureFancy();
 
 		//Text = new EzText("Press any key to start", Resources.Font_Grobold42, true);
-		Text = std::make_shared<EzText>( Localization::Words_PRESS_START, Resources::Font_Grobold42, true );
+		Text = boost::make_shared<EzText>( Localization::Words_PRESS_START, Resources::Font_Grobold42, true );
 		//Text = new EzText(Localization.Words.PressStart, ItemFont);
 
 		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_PressStart::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "" ) );
 		if ( _t != 0 )
 		{

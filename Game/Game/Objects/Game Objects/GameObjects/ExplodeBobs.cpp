@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		InitialDelay_MultipleBobs( 0 ), Delay( 0 ), InitialDelay_OneBob( 0 )
 	{
 	}
-	std::shared_ptr<ExplodeBobs> ExplodeBobs::ExplodeBobs_Construct( int speed )
+	boost::shared_ptr<ExplodeBobs> ExplodeBobs::ExplodeBobs_Construct( int speed )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		SetSpeed( speed );
 
-		return std::static_pointer_cast<ExplodeBobs>( shared_from_this() );
+		return boost::static_pointer_cast<ExplodeBobs>( shared_from_this() );
 	}
 
 	void ExplodeBobs::SetSpeed( int speed )
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		Release();
 	}
 
-	int ExplodeBobs::CompareBobs( const std::shared_ptr<Bob> &A, const std::shared_ptr<Bob> &B )
+	int ExplodeBobs::CompareBobs( const boost::shared_ptr<Bob> &A, const boost::shared_ptr<Bob> &B )
 	{
 		return Compare(A->getCore()->Data.Position.X, B->getCore()->Data.Position.X);
 	}
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		Count++;
 
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 			else
 			{
 				// Kill the first bob in the list
-				std::shared_ptr<Bob> targetbob = bobs[ 0 ];
+				boost::shared_ptr<Bob> targetbob = bobs[ 0 ];
 
 				Fireball::Explosion( targetbob->getCore()->Data.Position, targetbob->getCore()->MyLevel );
 				Fireball::ExplodeSound->Play();

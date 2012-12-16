@@ -35,8 +35,8 @@ namespace CloudberryKingdom
 
 	MovingBlock::MovingBlock( bool BoxesOnly )
 	{
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		MakeNew();
 
@@ -62,13 +62,13 @@ namespace CloudberryKingdom
 		{
 			if ( MyDraw->MyTemplate != 0 )
 			{
-				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->MovingBlocks->Group);
-				MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
+				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->MovingBlocks->Group);
+				MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
 			}
 		}
 	}
 
-	void MovingBlock::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level )
+	void MovingBlock::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level )
 	{
 		BlockBase::Init( center, size, level, level->getInfo()->MovingBlocks->Group );
 	}
@@ -188,9 +188,9 @@ namespace CloudberryKingdom
 		ResetPieces();
 	}
 
-	void MovingBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void MovingBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<MovingBlock> BlockA = std::dynamic_pointer_cast<MovingBlock>( A );
+		boost::shared_ptr<MovingBlock> BlockA = boost::dynamic_pointer_cast<MovingBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel() );
 

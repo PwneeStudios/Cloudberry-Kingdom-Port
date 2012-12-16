@@ -6,7 +6,7 @@ struct MediaPlayer
 
 
 
-	static void Play( const std::shared_ptr<Song> &song )
+	static void Play( const boost::shared_ptr<Song> &song )
 	{
 	}
 

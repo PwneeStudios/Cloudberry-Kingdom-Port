@@ -11,10 +11,10 @@ struct DisplayMode : public Object
 
 };
 /// Gets all supported display modes for the running machine.
-inline std::vector<std::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
+inline std::vector<boost::shared_ptr<DisplayMode> > GetSupportedDisplayModes()
 {
 	// FIXME: Implement.
-	return std::vector<std::shared_ptr<DisplayMode> >();
+	return std::vector<boost::shared_ptr<DisplayMode> >();
 }
 
 #endif

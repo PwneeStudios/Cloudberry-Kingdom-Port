@@ -9,13 +9,13 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::shared_ptr<EzSound> Checkpoint::MySound;
+	boost::shared_ptr<EzSound> Checkpoint::MySound;
 
 
 	Checkpoint::CheckpointTileInfo::CheckpointTileInfo()
 	{
 		InitializeInstanceFields();
-		DieTemplate = std::make_shared<Particle>();
+		DieTemplate = boost::make_shared<Particle>();
 		DieTemplate->MyQuad.Init();
 		DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
 		DieTemplate->MyQuad.setMyTexture( Tools::Texture( _T( "Checkpoint3" ) ) );
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 
 	void Checkpoint::CheckpointTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<TextureOrAnim>( _T( "Checkpoint3" ) );
+		Sprite = boost::make_shared<TextureOrAnim>( _T( "Checkpoint3" ) );
 		Size = Vector2( 115, 115 );
 		TextureSize = Vector2( 170, 170 );
 		MySound = Tools::NewSound( _T( "Checkpoint" ),.6f );
@@ -60,10 +60,10 @@ namespace CloudberryKingdom
 
 	Checkpoint::Checkpoint()
 	{
-		Box = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
 
 		MyQuad = SimpleQuad();
-		MyObject = std::make_shared<SimpleObject>( Prototypes::CheckpointObj, false );
+		MyObject = boost::make_shared<SimpleObject>( Prototypes::CheckpointObj, false );
 
 		MakeNew();
 
@@ -109,7 +109,7 @@ namespace CloudberryKingdom
 		getInfo()->Checkpoints->MySound->Play();
 	}
 
-	void Checkpoint::Init( const std::shared_ptr<Level> &level )
+	void Checkpoint::Init( const boost::shared_ptr<Level> &level )
 	{
 		ObjectBase::Init( Vector2(), level );
 
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 		Box->Move( shift );
 	}
 
-	void Checkpoint::Interact( const std::shared_ptr<Bob> &bob )
+	void Checkpoint::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( Taken )
 			return;
@@ -258,7 +258,7 @@ namespace CloudberryKingdom
 				// Kill other checkpoints
 				for ( ObjectVec::const_iterator obj = getCore()->MyLevel->Objects.begin(); obj != getCore()->MyLevel->Objects.end(); ++obj )
 				{
-					std::shared_ptr<Checkpoint> checkpoint = std::dynamic_pointer_cast<Checkpoint>( *obj );
+					boost::shared_ptr<Checkpoint> checkpoint = boost::dynamic_pointer_cast<Checkpoint>( *obj );
 					if ( 0 != checkpoint )
 						if ( checkpoint->MyPiece == MyPiece )
 							checkpoint->Die();
@@ -320,11 +320,11 @@ namespace CloudberryKingdom
 			Box->Draw( Tools::QDrawer, Color::Bisque, 10 );
 	}
 
-	void Checkpoint::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Checkpoint::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Checkpoint> CheckpointA = std::dynamic_pointer_cast<Checkpoint>( A );
+		boost::shared_ptr<Checkpoint> CheckpointA = boost::dynamic_pointer_cast<Checkpoint>( A );
 
 		GhostFaded = CheckpointA->GhostFaded;
 		Taken = CheckpointA->Taken;

@@ -5,8 +5,8 @@
 namespace CloudberryKingdom
 {
 
-	AwardmentMessage::AwardmentMessage( const std::shared_ptr<Awardment> &award ) { InitializeInstanceFields(); }
-	std::shared_ptr<AwardmentMessage> AwardmentMessage::AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award )
+	AwardmentMessage::AwardmentMessage( const boost::shared_ptr<Awardment> &award ) { InitializeInstanceFields(); }
+	boost::shared_ptr<AwardmentMessage> AwardmentMessage::AwardmentMessage_Construct( const boost::shared_ptr<Awardment> &award )
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
@@ -18,27 +18,27 @@ namespace CloudberryKingdom
 		FixedToCamera = true;
 		getCore()->RemoveOnReset = false;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		MakeBackdrop();
 
 		SetText( award );
 
-		std::shared_ptr<EzText> Title;
+		boost::shared_ptr<EzText> Title;
 		if ( award->Unlockable == 0 )
-			Title = std::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
+			Title = boost::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		else
-			Title = std::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
+			Title = boost::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		Title->setPos( Vector2( -1726.192f, 369.0475f ) );
 		Title->setScale( Title->getScale() * .79f );
 		MyPile->Add( Title );
 
-		return std::static_pointer_cast<AwardmentMessage>( shared_from_this() );
+		return boost::static_pointer_cast<AwardmentMessage>( shared_from_this() );
 	}
 
 	void AwardmentMessage::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<EzTexture>(), true, false );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
 		Backdrop->setTextureName( _T( "WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1750, 284.8255f ) );
 		Backdrop->setPos( Vector2( -11.9043f, 59.52365f ) );
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		Active = false;
 	}
 
-	void AwardmentMessage::SetText( const std::shared_ptr<Awardment> &award )
+	void AwardmentMessage::SetText( const boost::shared_ptr<Awardment> &award )
 	{
 		std::wstring text = award->Name;
 
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		MyPile->MyTextList.clear();
 
 		// Add the new text
-		Text = std::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
+		Text = boost::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
 
 		if ( award->Unlockable == 0 )
 		{

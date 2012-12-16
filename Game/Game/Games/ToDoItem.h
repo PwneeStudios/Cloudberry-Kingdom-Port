@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct ToDoItem
 	{
 	
-		std::shared_ptr<LambdaFunc<bool> > MyFunc;
+		boost::shared_ptr<LambdaFunc<bool> > MyFunc;
 		std::wstring Name;
 
 		int Step;
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 
 		bool RemoveOnReset;
 
-		ToDoItem( const std::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset );
+		ToDoItem( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset );
 
 		/// <summary>
 		/// Mark the function for deletion and prevent execution.

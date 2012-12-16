@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct FancyColor
 	{
 	
-		std::shared_ptr<FancyVector2> clr1, clr2;
+		boost::shared_ptr<FancyVector2> clr1, clr2;
 	
 		float getA();
 		Color getColor();

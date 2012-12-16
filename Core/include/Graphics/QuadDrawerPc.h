@@ -3,6 +3,7 @@
 
 #include <ForwardDeclarations.h>
 #include <memory>
+#include <boost/shared_ptr.hpp>
 
 /**
  * Drawer of quads.
@@ -29,12 +30,12 @@ public:
 	/**
 	 * @see QuadDrawer::SetEffect()
 	 */
-	void SetEffect( const std::shared_ptr<Effect> &effect );
+	void SetEffect( const boost::shared_ptr<Effect> &effect );
 
 	/**
 	 * @see QuadDrawer::GetEffect()
 	 */
-	std::shared_ptr<Effect> GetEffect();
+	boost::shared_ptr<Effect> GetEffect();
 
 	/**
 	 * @see QuadDrawer::Draw()

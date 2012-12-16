@@ -3,13 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	VectorParam::VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed )
+	VectorParam::VectorParam( const boost::shared_ptr<PieceSeedData> &PieceSeed )
 	{
 		X = Param( PieceSeed );
 		Y = Param( PieceSeed );
 	}
 
-	VectorParam::VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v )
+	VectorParam::VectorParam( const boost::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v )
 	{
 		X = Param( PieceSeed );
 		Y = Param( PieceSeed );
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		return Vector2( X.GetVal( Pos ), Y.GetVal( Pos ) );
 	}
 
-	float VectorParam::RndFloat( Vector2 Pos, const std::shared_ptr<Rand> &Rnd )
+	float VectorParam::RndFloat( Vector2 Pos, const boost::shared_ptr<Rand> &Rnd )
 	{
 		return Rnd->RndFloat( GetVal( Pos ) );
 	}
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		val1_IsSet = val2_IsSet = true;
 	}
 
-	Param::Param( const std::shared_ptr<PieceSeedData> &PieceSeed )
+	Param::Param( const boost::shared_ptr<PieceSeedData> &PieceSeed )
 	{
 		val1 = val2 = 0;
 		val1_IsSet = val2_IsSet = false;
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 		this->PieceSeed = PieceSeed;
 	}
 
-	Param::Param( const std::shared_ptr<PieceSeedData> &PieceSeed, float v )
+	Param::Param( const boost::shared_ptr<PieceSeedData> &PieceSeed, float v )
 	{
 		val1 = val2 = 0;
 		val1_IsSet = val2_IsSet = false;
@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 		if ( PieceSeed == 0 )
 			return val1;
 
-		std::shared_ptr<RichLevelGenData> data = PieceSeed->MyGenData;
+		boost::shared_ptr<RichLevelGenData> data = PieceSeed->MyGenData;
 
 		if ( !val1_IsSet || data->gen1 == 0 )
 			return 0;
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		if ( PieceSeed == 0 )
 			return val1;
 
-		std::shared_ptr<RichLevelGenData> data = PieceSeed->MyGenData;
+		boost::shared_ptr<RichLevelGenData> data = PieceSeed->MyGenData;
 
 		if ( !val1_IsSet || data->gen1 == 0 )
 			return 0;

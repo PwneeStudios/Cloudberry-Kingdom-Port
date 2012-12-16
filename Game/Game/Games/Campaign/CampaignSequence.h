@@ -12,51 +12,51 @@ namespace CloudberryKingdom
 	{
 
 	
-		struct PostMakeCampaignProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct PostMakeCampaignProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		
-			void Apply( const std::shared_ptr<ObjectBase> &obj );
+			void Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
-		struct OnCompleteLevelProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct OnCompleteLevelProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		struct WatchMovieLambda : public Lambda_1<std::shared_ptr<Level> >
+		struct WatchMovieLambda : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
 			std::wstring movie;
 		
 			WatchMovieLambda( const std::wstring &movie );
 
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		struct EndActionProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct EndActionProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		static std::shared_ptr<CampaignSequence> instance;
-		const static std::shared_ptr<CampaignSequence> &getInstance();
+		static boost::shared_ptr<CampaignSequence> instance;
+		const static boost::shared_ptr<CampaignSequence> &getInstance();
 
 	
 		std::map<int, int> ChapterStart;
-		std::map<int, std::shared_ptr< Tuple<std::wstring, std::wstring> > > SpecialLevel;
+		std::map<int, boost::shared_ptr< Tuple<std::wstring, std::wstring> > > SpecialLevel;
 
 	
 		virtual void Start( int Chapter );
@@ -65,21 +65,21 @@ namespace CloudberryKingdom
 		virtual void MakeSeedList();
 
 	
-		static std::shared_ptr<LevelSeedData> MakeActionSeed( const std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > SeedAction );
+		static boost::shared_ptr<LevelSeedData> MakeActionSeed( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > SeedAction );
 
 	
-		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
+		virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
 
 	
-		static void PostMakeCampaign( const std::shared_ptr<Level> &level );
+		static void PostMakeCampaign( const boost::shared_ptr<Level> &level );
 
-		static void OnCoinGrab( const std::shared_ptr<ObjectBase> &obj );
+		static void OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj );
 
-		static void OnCompleteLevel( const std::shared_ptr<Level> &level );
+		static void OnCompleteLevel( const boost::shared_ptr<Level> &level );
 
-		static std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > MakeWatchMovieAction( const std::wstring &movie );
+		static boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > MakeWatchMovieAction( const std::wstring &movie );
 
-		static void EndAction( const std::shared_ptr<Level> &level );
+		static void EndAction( const boost::shared_ptr<Level> &level );
 
 	
 		CampaignSequence();

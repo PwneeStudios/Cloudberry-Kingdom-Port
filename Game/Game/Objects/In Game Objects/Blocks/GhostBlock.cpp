@@ -63,11 +63,11 @@ namespace CloudberryKingdom
 
 	GhostBlock::GhostBlock( bool BoxesOnly )
 	{
-		MyObject = std::make_shared<SimpleObject>( Prototypes::GhostBlockObj, BoxesOnly );
+		MyObject = boost::make_shared<SimpleObject>( Prototypes::GhostBlockObj, BoxesOnly );
 
 		MyObject->Boxes[ 0 ]->Animated = false;
 
-		MyBox = std::make_shared<AABox>();
+		MyBox = boost::make_shared<AABox>();
 
 		MakeNew();
 
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 
 float GhostBlock::TallScale = 1.45f;
 
-	void GhostBlock::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level )
+	void GhostBlock::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level )
 	{
 		Active = true;
 
@@ -335,16 +335,16 @@ int GhostBlock::LengthOfPhaseChange = 35;
 		getBlockCore()->Draw();
 	}
 
-	void GhostBlock::PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	void GhostBlock::PostInteractWith( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<GhostBlock> block = std::dynamic_pointer_cast<GhostBlock>( shared_from_this() );
+		boost::shared_ptr<GhostBlock> block = boost::dynamic_pointer_cast<GhostBlock>( shared_from_this() );
 
 		// Ghost blocks delete surrounding blocks when stamped as used
 		for ( BlockVec::const_iterator gblock = getCore()->MyLevel->Blocks.begin(); gblock != getCore()->MyLevel->Blocks.end(); ++gblock )
 		{
-			std::shared_ptr<GhostBlock> ghost = std::dynamic_pointer_cast<GhostBlock>( *gblock );
+			boost::shared_ptr<GhostBlock> ghost = boost::dynamic_pointer_cast<GhostBlock>( *gblock );
 			if ( 0 != ghost && !ghost->getCore()->MarkedForDeletion )
 				if ( !ghost->getCore()->GenData.Used && (ghost->getCore()->Data.Position - block->getCore()->Data.Position).Length() < 200 )
 				{
@@ -354,11 +354,11 @@ int GhostBlock::LengthOfPhaseChange = 35;
 		}
 	}
 
-	void GhostBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void GhostBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<GhostBlock> BlockA = std::dynamic_pointer_cast<GhostBlock>( A );
+		boost::shared_ptr<GhostBlock> BlockA = boost::dynamic_pointer_cast<GhostBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, A->getMyLevel() );
 		MyBox->TopOnly = BlockA->MyBox->TopOnly;

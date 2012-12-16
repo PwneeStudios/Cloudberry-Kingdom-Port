@@ -11,11 +11,11 @@ namespace CloudberryKingdom
 		struct TempStatsLambda : public PlayerIntLambda
 		{
 		
-			virtual int Apply( const std::shared_ptr<PlayerData> &p );
+			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 		};
 
 	
-		std::shared_ptr<StringBuilder> MyString;
+		boost::shared_ptr<StringBuilder> MyString;
 
 	
 		int Blobs, TotalBlobs;
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		/// Return a string representation of the number of Blobs
 		/// </summary>
 		/// <returns></returns>
-		std::shared_ptr<StringBuilder> BuildString();
+		boost::shared_ptr<StringBuilder> BuildString();
 
 	
 		virtual int OutOf();
@@ -41,14 +41,14 @@ namespace CloudberryKingdom
 		const Vector2 getApparentPos() const;
 
 	
-		std::shared_ptr<QuadClass> Blob;
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<QuadClass> Blob;
+		boost::shared_ptr<EzText> Text;
 	
 		void UpdateCoinText();
 
 	
 		GUI_Blobs();
-		std::shared_ptr<GUI_Blobs> GUI_Blobs_Construct();
+		boost::shared_ptr<GUI_Blobs> GUI_Blobs_Construct();
 
 		virtual void Init();
 
@@ -70,10 +70,10 @@ namespace CloudberryKingdom
 		struct MyPhsxStepHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_BlobQuota> blobQuota;
+			boost::shared_ptr<GUI_BlobQuota> blobQuota;
 
 		
-			MyPhsxStepHelper( const std::shared_ptr<GUI_BlobQuota> &blobQuota );
+			MyPhsxStepHelper( const boost::shared_ptr<GUI_BlobQuota> &blobQuota );
 
 			void Apply();
 		};
@@ -87,11 +87,11 @@ namespace CloudberryKingdom
 		virtual int OutOf();
 
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<GUI_Blobs> > > OnQuotaMet;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<GUI_Blobs> > > OnQuotaMet;
 		bool QuotaMet;
 
 	
-		std::shared_ptr<Door> FinalDoor;
+		boost::shared_ptr<Door> FinalDoor;
 	
 		virtual void OnAdd();
 

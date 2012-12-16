@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		return Dir + NormalIntensity * Normal * static_cast<float>( sin( t / Period ) );
 	}
 
-	void Cape::Copy( const std::shared_ptr<Cape> &cape )
+	void Cape::Copy( const boost::shared_ptr<Cape> &cape )
 	{
 		for ( size_t i = 0; i < Nodes.size(); i++ )
 			Nodes[ i ] = cape->Nodes[ i ];
@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Cape::Cape( const std::shared_ptr<Bob> &bob, CapeType Type, const std::shared_ptr<BobPhsx> &Phsx_Renamed ) :
+	Cape::Cape( const boost::shared_ptr<Bob> &bob, CapeType Type, const boost::shared_ptr<BobPhsx> &Phsx_Renamed ) :
 		LastPhsxUpdate( 0 )
 	{
 		InitializeInstanceFields();
@@ -186,7 +186,7 @@ namespace CloudberryKingdom
 		strength_in *= 1 / ( .5f * ( Phsx_Renamed->ModCapeSize.X - 1 ) + 1 );
 
 
-		MyQuad = std::make_shared<QuadClass>();
+		MyQuad = boost::make_shared<QuadClass>();
 		MyQuad->SetToDefault();
 		//MyQuad.Quad.MyTexture = Tools.TextureWad.FindByName("FallingBlock13");//"White");
 		//MyQuad.Quad.MyEffect = Tools.BasicEffect;
@@ -474,7 +474,7 @@ namespace CloudberryKingdom
 	{
 		Tools::QDrawer->Flush();
 
-		std::shared_ptr<EzEffect> Effect = MyQuad->Quad_Renamed.MyEffect;
+		boost::shared_ptr<EzEffect> Effect = MyQuad->Quad_Renamed.MyEffect;
 
 		if ( !Effect->IsUpToDate )
 			Effect->SetCameraParameters();

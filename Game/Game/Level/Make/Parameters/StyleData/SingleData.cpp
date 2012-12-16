@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	SingleData::SingleData( const std::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
+	SingleData::SingleData( const boost::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
 	{
 		InitializeInstanceFields();
 	}

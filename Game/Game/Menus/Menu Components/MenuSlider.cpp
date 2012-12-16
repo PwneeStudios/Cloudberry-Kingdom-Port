@@ -24,14 +24,14 @@ namespace CloudberryKingdom
 		setVal( getMyFloat()->DefaultValue );
 	}
 
-	MenuSlider::MenuSlider( const std::shared_ptr<EzText> &Text )
+	MenuSlider::MenuSlider( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
 		Init( Text, Text->Clone() );
 		InitializeSlider();
 	}
 
-	MenuSlider::MenuSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	MenuSlider::MenuSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
 		Init( Text, SelectedText );
@@ -49,13 +49,13 @@ namespace CloudberryKingdom
 		TR_HitPadding.X += 40;
 	#endif
 
-		SliderBack = std::make_shared<QuadClass>();
+		SliderBack = boost::make_shared<QuadClass>();
 		SliderBack->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::SliderBack_Texture );
 		Vector2 Size = Vector2( 250, 35 ) * 1.35f;
 		SliderBack->Base.e1 *= Size.X;
 		SliderBack->Base.e2 *= Size.Y;
 
-		Slider = std::make_shared<QuadClass>();
+		Slider = boost::make_shared<QuadClass>();
 		Slider->Quad_Renamed.setMyTexture( Menu::DefaultMenuInfo::Slider_Texture );
 		Size = Vector2( 28, 55 ) * 1.35f;
 		Slider->Base.e1 *= Size.X;
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void MenuSlider::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	void MenuSlider::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		setMyCameraZoom( cam->getZoom() );
 

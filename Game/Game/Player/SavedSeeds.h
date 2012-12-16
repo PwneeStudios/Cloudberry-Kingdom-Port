@@ -26,9 +26,9 @@ namespace CloudberryKingdom
 		bool IsSeedValue( const std::wstring &seed );
 
 		#pragma region WriteRead
-		void WriteChunk_5( const std::shared_ptr<BinaryWriter> &writer );
+		void WriteChunk_5( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void ReadChunk_5( const std::shared_ptr<Chunk> &ParentChunk );
+		void ReadChunk_5( const boost::shared_ptr<Chunk> &ParentChunk );
 		#pragma endregion
 
 	

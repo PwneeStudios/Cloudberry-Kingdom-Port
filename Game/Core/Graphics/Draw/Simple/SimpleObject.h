@@ -9,14 +9,14 @@ namespace CloudberryKingdom
 	{
 	
 		std::vector<SimpleQuad> Quads;
-		std::vector<std::shared_ptr<SimpleBox> > Boxes;
+		std::vector<boost::shared_ptr<SimpleBox> > Boxes;
 		BasePoint Base;
 
 		bool xFlip, yFlip, CenterFlipOnBox;
 		Vector2 FlipCenter;
 
-		std::queue<std::shared_ptr<AnimQueueEntry> > AnimQueue;
-		std::shared_ptr<AnimQueueEntry> LastAnimEntry;
+		std::queue<boost::shared_ptr<AnimQueueEntry> > AnimQueue;
+		boost::shared_ptr<AnimQueueEntry> LastAnimEntry;
 		std::vector<int> AnimLength;
 		std::vector<std::wstring> AnimName;
 		std::vector<float> AnimSpeed;
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		int anim, OldAnim;
 		float t, OldT, StartT;
 
-		std::vector<std::shared_ptr<EzEffect> > MyEffects;
+		std::vector<boost::shared_ptr<EzEffect> > MyEffects;
 
 		bool Released;
 
@@ -44,16 +44,16 @@ namespace CloudberryKingdom
 
 		void SetColor( Color color );
 
-		SimpleObject( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly );
+		SimpleObject( const boost::shared_ptr<SimpleObject> &obj, bool BoxesOnly );
 	
-		void Constructor( const std::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy );
+		void Constructor( const boost::shared_ptr<SimpleObject> &obj, bool BoxesOnly, bool DeepCopy );
 
 	
-		SimpleObject( const std::shared_ptr<ObjectClass> &obj );
+		SimpleObject( const boost::shared_ptr<ObjectClass> &obj );
 
 		Vector2 GetBoxCenter( int i );
 
-		void CopyUpdate( const std::shared_ptr<SimpleObject> &source );
+		void CopyUpdate( const boost::shared_ptr<SimpleObject> &source );
 
 		void UpdateQuads();
 
@@ -69,8 +69,8 @@ namespace CloudberryKingdom
 
 		void Draw();
 
-		void Draw( const std::shared_ptr<QuadDrawer> &QDrawer, const std::shared_ptr<EzEffectWad> &EffectWad );
-		void Draw( const std::shared_ptr<QuadDrawer> &QDrawer, const std::shared_ptr<EzEffectWad> &EffectWad, int StartIndex, int EndIndex );
+		void Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, const boost::shared_ptr<EzEffectWad> &EffectWad );
+		void Draw( const boost::shared_ptr<QuadDrawer> &QDrawer, const boost::shared_ptr<EzEffectWad> &EffectWad, int StartIndex, int EndIndex );
 
 //C# TO C++ CONVERTER NOTE: The parameter Quad was renamed since it is named the same as a user-defined type:
 		void DrawQuad( SimpleQuad &Quad_Renamed );

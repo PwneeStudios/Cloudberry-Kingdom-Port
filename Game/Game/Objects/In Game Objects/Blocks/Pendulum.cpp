@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		Group = PieceQuad::ElevatorGroup;
 	}
 
-	void Pendulum::LandedOn( const std::shared_ptr<Bob> &bob )
+	void Pendulum::LandedOn( const boost::shared_ptr<Bob> &bob )
 	{
 		BlockBase::LandedOn( bob );
 	}
@@ -49,8 +49,8 @@ namespace CloudberryKingdom
 		MyTime( 0 )
 	{
 		InitializeInstanceFields();
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		MakeNew();
 
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		return min;
 	}
 
-	void Pendulum::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level )
+	void Pendulum::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level )
 	{
 		BlockBase::Init( center, size, level, level->getInfo()->Pendulums->Group );
 
@@ -252,8 +252,8 @@ namespace CloudberryKingdom
 		if ( getInfo()->Pendulums->Group != 0 )
 			if ( MyDraw->MyTemplate != 0 )
 			{
-				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->Pendulums->Group);
-				MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
+				MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd(), getInfo()->Pendulums->Group);
+				MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ), MyDraw->MyTemplate, false );
 			}
 	}
 
@@ -271,9 +271,9 @@ namespace CloudberryKingdom
 		ResetPieces();
 	}
 
-	void Pendulum::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Pendulum::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<Pendulum> BlockA = std::dynamic_pointer_cast<Pendulum>( A );
+		boost::shared_ptr<Pendulum> BlockA = boost::dynamic_pointer_cast<Pendulum>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel() );
 

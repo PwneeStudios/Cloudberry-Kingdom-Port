@@ -7,6 +7,7 @@
 #include <Content/Wad.h>
 #include <Core.h>
 #include <cstdlib>
+#include <Utility/Limits.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
 #include <Graphics/Types.h>
@@ -21,7 +22,7 @@
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
 }*/
 
-static std::shared_ptr<GameTime> gt = std::make_shared<GameTime>();
+static boost::shared_ptr<GameTime> gt = boost::make_shared<GameTime>();
 
 void CloudberryKingdomWrapper::Initialize()
 {
@@ -36,7 +37,7 @@ void CloudberryKingdomWrapper::Initialize()
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );*/
 
-	game = std::make_shared<CloudberryKingdom::XnaGameClass>();
+	game = boost::make_shared<CloudberryKingdom::XnaGameClass>();
 
 	//Tools::GameClass->getContent()->RootDirectory = _T("Content");
 	CloudberryKingdom::Tools::GameClass = game;

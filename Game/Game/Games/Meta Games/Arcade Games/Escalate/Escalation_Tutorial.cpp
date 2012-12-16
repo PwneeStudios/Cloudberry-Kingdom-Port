@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		Tools::SongWad->Restart( true );
 	}
 
-	Escalation_Tutorial::PreventThingsHelper::PreventThingsHelper( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::PreventThingsHelper::PreventThingsHelper( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		et->MyGame->MyLevel->Finished = false;
 	}
 
-	Escalation_Tutorial::TitleProxy::TitleProxy( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::TitleProxy::TitleProxy( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		et->Title();
 	}
 
-	Escalation_Tutorial::TutorialOrSkipProxy::TutorialOrSkipProxy( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::TutorialOrSkipProxy::TutorialOrSkipProxy( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		et->TutorialOrSkip();
 	}
 
-	Escalation_Tutorial::NextTutorialHelper::NextTutorialHelper( const std::shared_ptr<Escalation_Tutorial> &et, const std::shared_ptr<GUI_Text> &text )
+	Escalation_Tutorial::NextTutorialHelper::NextTutorialHelper( const boost::shared_ptr<Escalation_Tutorial> &et, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->et = et;
 		this->text = text;
@@ -52,11 +52,11 @@ namespace CloudberryKingdom
 
 	void Escalation_Tutorial::NextTutorialHelper::Apply()
 	{
-		et->MyGame->WaitThenDo( 12, std::make_shared<TutorialOrSkipProxy>( et ) );
+		et->MyGame->WaitThenDo( 12, boost::make_shared<TutorialOrSkipProxy>( et ) );
 		text->Kill( et->SoundOnKill );
 	}
 
-	Escalation_Tutorial::TextKillHelper::TextKillHelper( const std::shared_ptr<Escalation_Tutorial> &et, const std::shared_ptr<GUI_Text> &text )
+	Escalation_Tutorial::TextKillHelper::TextKillHelper( const boost::shared_ptr<Escalation_Tutorial> &et, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->et = et;
 		this->text = text;
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 		text->Kill( et->SoundOnKill );
 	}
 
-	Escalation_Tutorial::ReadyProxy::ReadyProxy( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::ReadyProxy::ReadyProxy( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
@@ -77,17 +77,17 @@ namespace CloudberryKingdom
 		et->Ready();
 	}
 
-	Escalation_Tutorial::TutorialHelperReadyGo::TutorialHelperReadyGo( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::TutorialHelperReadyGo::TutorialHelperReadyGo( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
 
 	void Escalation_Tutorial::TutorialHelperReadyGo::Apply()
 	{
-		TutorialHelper::ReadyGo( et->MyGame, std::make_shared<EndProxy>( et ) );
+		TutorialHelper::ReadyGo( et->MyGame, boost::make_shared<EndProxy>( et ) );
 	}
 
-	Escalation_Tutorial::EndProxy::EndProxy( const std::shared_ptr<Escalation_Tutorial> &et )
+	Escalation_Tutorial::EndProxy::EndProxy( const boost::shared_ptr<Escalation_Tutorial> &et )
 	{
 		this->et = et;
 	}
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 bool Escalation_Tutorial::_WatchedOnce = false;
 bool Escalation_Tutorial::ShowTitle = true;
 
-	Escalation_Tutorial::Escalation_Tutorial( const std::shared_ptr<Challenge_Escalation> &Escalation )
+	Escalation_Tutorial::Escalation_Tutorial( const boost::shared_ptr<Challenge_Escalation> &Escalation )
 	{
 		InitializeInstanceFields();
 		this->Escalation = Escalation;
@@ -127,7 +127,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 		// Add the princess
 		if ( !getWatchedOnce() )
 		{
-			std::shared_ptr<Level> lvl = MyGame->MyLevel;
+			boost::shared_ptr<Level> lvl = MyGame->MyLevel;
 
 			lvl->setPreventReset( true );
 		}
@@ -139,13 +139,13 @@ bool Escalation_Tutorial::ShowTitle = true;
 		MyGame->PhsxStepsToDo += 2;
 
 		// Start the music
-		MyGame->WaitThenDo( 20, std::make_shared<ConfigureSongsHelper>() );
+		MyGame->WaitThenDo( 20, boost::make_shared<ConfigureSongsHelper>() );
 
 		if ( HeroRush_Tutorial::ShowTitle || !getWatchedOnce() )
 		//if (ShowTitle || !WatchedOnce)
-			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 27, boost::make_shared<TitleProxy>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		else
-			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 20, boost::make_shared<ReadyProxy>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 	}
 
 	void Escalation_Tutorial::TutorialOrSkip()
@@ -156,7 +156,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 
 			int wait = MyGame->DramaticEntry( MyGame->MyLevel->getStartDoor(), 90 );
 			MyGame->MyLevel->SetBack( wait + 90 );
-			MyGame->WaitThenDo( wait, std::make_shared<PreventThingsHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( wait, boost::make_shared<PreventThingsHelper>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		}
 		else
 			Ready();
@@ -170,24 +170,24 @@ bool Escalation_Tutorial::ShowTitle = true;
 
 		if ( getWatchedOnce() )
 		{
-			std::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Escalation->Name );
+			boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Escalation->Name );
 			CkColorHelper::_x_x_HappyBlueColor( text->MyText );
 
 			MyGame->AddGameObject( text );
 
 			// On (A) go to next part of the tutorial
-			MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<NextTutorialHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) ) ) );
+			MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<NextTutorialHelper>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) ) ) );
 		}
 		else
 		{
-			std::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Escalation->Name );
+			boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Escalation->Name );
 			CkColorHelper::_x_x_HappyBlueColor( text->MyText );
 			text->Pos->RelVal.Y -= 800;
 
 			MyGame->AddGameObject( text );
 
-			MyGame->WaitThenDo( 120, std::make_shared<TextKillHelper>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) );
-			MyGame->WaitThenDo( 40, std::make_shared<TutorialOrSkipProxy>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 120, boost::make_shared<TextKillHelper>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ), text ) );
+			MyGame->WaitThenDo( 40, boost::make_shared<TutorialOrSkipProxy>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 		}
 	}
 
@@ -195,7 +195,7 @@ bool Escalation_Tutorial::ShowTitle = true;
 	{
 		int Wait = 5 + 22;
 
-		MyGame->WaitThenDo( Wait, std::make_shared<TutorialHelperReadyGo>( std::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( Wait, boost::make_shared<TutorialHelperReadyGo>( boost::static_pointer_cast<Escalation_Tutorial>( shared_from_this() ) ) );
 	}
 
 	void Escalation_Tutorial::End()

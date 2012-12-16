@@ -8,10 +8,10 @@
 
 namespace CloudberryKingdom
 {
-	struct QuadClass : public std::enable_shared_from_this<QuadClass>
+	struct QuadClass : public boost::enable_shared_from_this<QuadClass>
 	{
 	
-		static std::shared_ptr<QuadClass> FindQuad( std::vector<std::shared_ptr<QuadClass> > &list, const std::wstring &Name );
+		static boost::shared_ptr<QuadClass> FindQuad( std::vector<boost::shared_ptr<QuadClass> > &list, const std::wstring &Name );
 
 		bool HitTest( Vector2 pos );
 		bool HitTest( Vector2 pos, Vector2 padding );
@@ -38,9 +38,9 @@ namespace CloudberryKingdom
 		SimpleQuad Quad_Renamed;
 		BasePoint Base;
 
-		std::shared_ptr<FancyVector2> FancyPos, FancyScale, FancyAngle;
+		boost::shared_ptr<FancyVector2> FancyPos, FancyScale, FancyAngle;
 
-		std::shared_ptr<FancyVector2> FancyLightAlpha;
+		boost::shared_ptr<FancyVector2> FancyLightAlpha;
 		void MakeLightAlpha();
 
 		void SetDefaultShadow();
@@ -82,16 +82,16 @@ namespace CloudberryKingdom
 		float getAngle() const;
 		void setAngle( const float &value );
 
-		QuadClass( const std::shared_ptr<Quad> &quad );
+		QuadClass( const boost::shared_ptr<Quad> &quad );
 
-		QuadClass( const std::shared_ptr<QuadClass> &quad );
+		QuadClass( const boost::shared_ptr<QuadClass> &quad );
 
 		QuadClass();
-		QuadClass( const std::shared_ptr<FancyVector2> &Center );
-		QuadClass( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize );
-		QuadClass( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
+		QuadClass( const boost::shared_ptr<FancyVector2> &Center );
+		QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize );
+		QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
 
-		void Initialize( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
+		void Initialize( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
 
 		/// <summary>
 		/// The name of the quad's texture. Setting will automatically search the TextureWad for a matching texture.
@@ -105,16 +105,16 @@ namespace CloudberryKingdom
 		const std::wstring &getEffectName() const;
 		void setEffectName( const std::wstring &value );
 
-		std::shared_ptr<QuadClass> Clone();
+		boost::shared_ptr<QuadClass> Clone();
 
 		/// <summary>
 		/// Copy this quads' properties TO another quad
 		/// </summary>
-		void Clone( const std::shared_ptr<QuadClass> &quad );
+		void Clone( const boost::shared_ptr<QuadClass> &quad );
 
 		void SetTexture( const std::wstring &Name );
 
-		float WidthToScreenWidthRatio( const std::shared_ptr<Camera> &cam );
+		float WidthToScreenWidthRatio( const boost::shared_ptr<Camera> &cam );
 
 		/// <summary>
 		/// Sets the size to the given Vector2.
@@ -145,29 +145,29 @@ namespace CloudberryKingdom
 
 		void PointxAxisTo( Vector2 Dir );
 
-		void TextureParralax( float Parralax, Vector2 repeat, Vector2 shift, const std::shared_ptr<Camera> &Cam );
+		void TextureParralax( float Parralax, Vector2 repeat, Vector2 shift, const boost::shared_ptr<Camera> &Cam );
 
-		void FullScreen( const std::shared_ptr<Camera> &cam );
+		void FullScreen( const boost::shared_ptr<Camera> &cam );
 
 		void FromBounds( Vector2 BL, Vector2 TR );
 
 		void SetToDefault();
 
-		QuadClass( const std::shared_ptr<EzTexture> &texture );
+		QuadClass( const boost::shared_ptr<EzTexture> &texture );
 		QuadClass( const std::wstring &name );
 
 		QuadClass( const std::wstring &TextureName, float Width );
 		QuadClass( const std::wstring &TextureName, const std::wstring &Name );
-		QuadClass( const std::shared_ptr<EzTexture> &Texture, float Width, const std::wstring &Name );
-		QuadClass( const std::shared_ptr<EzTexture> &Texture, float Width, bool Fancy );
+		QuadClass( const boost::shared_ptr<EzTexture> &Texture, float Width, const std::wstring &Name );
+		QuadClass( const boost::shared_ptr<EzTexture> &Texture, float Width, bool Fancy );
 		QuadClass( const std::wstring &TextureName, float Width, bool Fancy );
 		void Set( const std::wstring &TextureName, float Width );
-		void Set( const std::shared_ptr<EzTexture> &Texture, float Width );
-		void Set( const std::shared_ptr<TextureOrAnim> &t_or_a );
+		void Set( const boost::shared_ptr<EzTexture> &Texture, float Width );
+		void Set( const boost::shared_ptr<TextureOrAnim> &t_or_a );
 		void Set( const std::wstring &name );
 
-		void Set( const std::shared_ptr<SpriteInfo> &info );
-		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );
+		void Set( const boost::shared_ptr<SpriteInfo> &info );
+		virtual void Set( const boost::shared_ptr<SpriteInfo> &info, Vector2 Size );
 
 		void Draw();
 		void DrawShadow();
@@ -207,8 +207,8 @@ namespace CloudberryKingdom
 
 		void Update();
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 	
 		void InitializeInstanceFields();
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 	
 		HsvQuad();
 
-		virtual void Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size );
+		virtual void Set( const boost::shared_ptr<SpriteInfo> &info, Vector2 Size );
 
 		virtual void Draw( bool Update, bool DrawQuad, bool DrawShadow );
 

@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 		MyButton( ControllerButtons_A )
 	{
 	}
-	std::shared_ptr<Listener> Listener::Listener_Construct()
+	boost::shared_ptr<Listener> Listener::Listener_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -19,17 +19,17 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 		getCore()->Show = false;
 
-		return std::static_pointer_cast<Listener>( shared_from_this() );
+		return boost::static_pointer_cast<Listener>( shared_from_this() );
 	}
 
-	Listener::Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action ) :
+	Listener::Listener( ControllerButtons button, const boost::shared_ptr<Lambda> &action ) :
 		MyType( Type_ON_DOWN ),
 		TriggeringPlayerIndex( 0 ),
 		RemoveAfterActivation( false ),
 		MyButton( ControllerButtons_A )
 	{
 	}
-	std::shared_ptr<Listener> Listener::Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action )
+	boost::shared_ptr<Listener> Listener::Listener_Construct( ControllerButtons button, const boost::shared_ptr<Lambda> &action )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		if ( button == ControllerButtons_A )
 		{
 			if ( MyButton2 == 0 )
-				MyButton2 = std::make_shared<ButtonClass>();
+				MyButton2 = boost::make_shared<ButtonClass>();
 			MyButton2->Set( ControllerButtons_ENTER );
 		}
 
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 
 		setControl( -1 );
 
-		return std::static_pointer_cast<Listener>( shared_from_this() );
+		return boost::static_pointer_cast<Listener>( shared_from_this() );
 	}
 
 	void Listener::Activate()
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// Listen
 		if ( MyType == Type_ON_DOWN && ( ButtonCheck::State( MyButton, getControl() ).Down || ButtonCheck::State(MyButton2, getControl()).Down ) || (MyType == Type_ON_PRESSED && (ButtonCheck::State(MyButton, getControl()).Pressed || ButtonCheck::State(MyButton2, getControl()).Pressed)) )

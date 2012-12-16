@@ -10,9 +10,9 @@ namespace CloudberryKingdom
 		MyCharacterSelect.reset();
 	}
 
-	//ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
-	ArrowMenu::ArrowMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple ) { }
-	std::shared_ptr<ArrowMenu> ArrowMenu::ArrowMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent, const std::shared_ptr<SimpleMenuBase> &MySimple )
+	//ArrowMenu::ArrowMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent, const boost::shared_ptr<SimpleMenuBase> &MySimple ) : CkBaseMenu( false )
+	ArrowMenu::ArrowMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent, const boost::shared_ptr<SimpleMenuBase> &MySimple ) { }
+	boost::shared_ptr<ArrowMenu> ArrowMenu::ArrowMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent, const boost::shared_ptr<SimpleMenuBase> &MySimple )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		Constructor();
 		MyMenu->AffectsOutsideMouse = false;
 
-		return std::static_pointer_cast<ArrowMenu>( shared_from_this() );
+		return boost::static_pointer_cast<ArrowMenu>( shared_from_this() );
 	}
 
 	void ArrowMenu::Init()
@@ -37,12 +37,12 @@ namespace CloudberryKingdom
 		ReturnToCallerDelay = 0;
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->MouseOnly = true;
 
 		MyMenu->OnB.reset();
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// The distance between the two arrows
 		float SeparationWidth = 300;
@@ -51,23 +51,23 @@ namespace CloudberryKingdom
 		Vector2 padding = Vector2( 0, 80 );
 
 		// Left arrow
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "{pcharmenu_larrow_1,70,?}" ), ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "{pcharmenu_larrow_1,70,?}" ), ItemFont ) );
 		item->AlwaysDrawAsSelected = true;
-		item->setGo( Cast::ToItem( std::make_shared<SimpleMenuBase::SimpleSelect_LeftProxy>( MySimple ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<SimpleMenuBase::SimpleSelect_LeftProxy>( MySimple ) ) );
 		ItemPos = Vector2( -SeparationWidth, 250 );
 		AddItem( item );
 
 		// Right arrow
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "{pcharmenu_rarrow_1,70,?}" ), ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "{pcharmenu_rarrow_1,70,?}" ), ItemFont ) );
 		item->AlwaysDrawAsSelected = true;
-		item->setGo( Cast::ToItem( std::make_shared<SimpleMenuBase::SimpleSelect_RightProxy>( MySimple ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<SimpleMenuBase::SimpleSelect_RightProxy>( MySimple ) ) );
 		ItemPos = Vector2( SeparationWidth, 250 );
 		AddItem( item );
 
 		EnsureFancy();
 
 		MyMenu->FancyPos->RelVal = Vector2( -62.5f, -15 + 250 );
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void ArrowMenu::MyDraw()

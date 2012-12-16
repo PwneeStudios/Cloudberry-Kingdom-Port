@@ -8,30 +8,30 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::shared_ptr<ObjectIcon> ObjectIcon::RobotIcon, ObjectIcon::PathIcon, ObjectIcon::SlowMoIcon;
-	std::shared_ptr<ObjectIcon> ObjectIcon::CheckpointIcon, ObjectIcon::RandomIcon, ObjectIcon::CustomIcon, ObjectIcon::CustomHoverIcon_Renamed;
-	std::map<Upgrade, std::shared_ptr<ObjectIcon> > ObjectIcon::UpgradeIcons;
-	std::map<ObjectType, std::shared_ptr<ObjectIcon> > ObjectIcon::ObjIcons;
+	boost::shared_ptr<ObjectIcon> ObjectIcon::RobotIcon, ObjectIcon::PathIcon, ObjectIcon::SlowMoIcon;
+	boost::shared_ptr<ObjectIcon> ObjectIcon::CheckpointIcon, ObjectIcon::RandomIcon, ObjectIcon::CustomIcon, ObjectIcon::CustomHoverIcon_Renamed;
+	std::map<Upgrade, boost::shared_ptr<ObjectIcon> > ObjectIcon::UpgradeIcons;
+	std::map<ObjectType, boost::shared_ptr<ObjectIcon> > ObjectIcon::ObjIcons;
 
 
-	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade )
+	boost::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade )
 	{
 		return CreateIcon( upgrade, false );
 	}
 
-	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade, bool big )
+	boost::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( Upgrade upgrade, bool big )
 	{
 		if ( UpgradeIcons.find( upgrade ) != UpgradeIcons.end() )
 			return UpgradeIcons[ upgrade ]->Clone();
 		else
 		{
-			std::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, TileSet::Get( _T( "castle" ) ) );
+			boost::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, TileSet::Get( _T( "castle" ) ) );
 
-			std::shared_ptr<PictureIcon> icon;
+			boost::shared_ptr<PictureIcon> icon;
 			if ( big && info->Icon_Big != 0 )
-				icon = std::make_shared<PictureIcon>( info->Icon_Big );
+				icon = boost::make_shared<PictureIcon>( info->Icon_Big );
 			else
-				icon = std::make_shared<PictureIcon>( info->Icon );
+				icon = boost::make_shared<PictureIcon>( info->Icon );
 
 			icon->DisplayText = UpgradeName( upgrade );
 			return icon;
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( ObjectType obj )
+	boost::shared_ptr<ObjectIcon> ObjectIcon::CreateIcon( ObjectType obj )
 	{
 		switch ( obj )
 		{
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 
 	void ObjectIcon::InitIcons()
 	{
-		UpgradeIcons = std::map<Upgrade, std::shared_ptr<ObjectIcon> >();
+		UpgradeIcons = std::map<Upgrade, boost::shared_ptr<ObjectIcon> >();
 
 		float StandardWidth = 161 * 1.31f;
 		//UpgradeIcons.Add(Upgrade.BouncyBlock, new PictureIcon("Bouncy blocks", "Icon_BouncyBlock1", Color.Lime, StandardWidth*.555f));
@@ -125,11 +125,11 @@ namespace CloudberryKingdom
 		//UpgradeIcons.Add(Upgrade.Firesnake, new PictureIcon("Firesnake", "Icon_Firesnake", Color.Orange, StandardWidth * .905f));
 		//UpgradeIcons.Add(Upgrade.SpikeyLine, new PictureIcon("Spikey line", "Icon_SpikeyLine", Color.Orange, StandardWidth * .905f));
 
-		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, std::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, _T( "Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, std::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, std::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, boost::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, _T( "Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, boost::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, boost::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
 
-		ObjIcons = std::map<ObjectType, std::shared_ptr<ObjectIcon> >();
+		ObjIcons = std::map<ObjectType, boost::shared_ptr<ObjectIcon> >();
 		//ObjIcons.Add(ObjectType.FallingBlock, UpgradeIcons[Upgrade.FallingBlock]);
 		//ObjIcons.Add(ObjectType.MovingBlock, UpgradeIcons[Upgrade.MovingBlock]);
 		//ObjIcons.Add(ObjectType.GhostBlock, UpgradeIcons[Upgrade.GhostBlock]);
@@ -140,17 +140,17 @@ namespace CloudberryKingdom
 		//UncheckedIcon = new PictureIcon("Uncheck", Color.Lime, StandardWidth * .85f);
 
 		//CheckpointIcon = new PictureIcon("Icon_Checkpoint", Color.Lime, StandardWidth * .85f);
-		CheckpointIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Icon_Checkpoint_v2" ) ), Color::Lime, StandardWidth *.85f );
+		CheckpointIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Icon_Checkpoint_v2" ) ), Color::Lime, StandardWidth *.85f );
 		//RandomIcon = new PictureIcon("Unknown", Color.Lime, StandardWidth * 1.2f);
-		RandomIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Random" ) ), Color::Lime, StandardWidth * 1.08f );
-		CustomIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Custom" ) ), Color::Lime, StandardWidth * 1.45f );
+		RandomIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Random" ) ), Color::Lime, StandardWidth * 1.08f );
+		CustomIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Custom" ) ), Color::Lime, StandardWidth * 1.45f );
 
 		//RobotIcon = new PictureIcon("Robot", Color.Lime, StandardWidth * .75f);
 		//PathIcon = new PictureIcon("Path", Color.Lime, StandardWidth * .75f);
 		//SlowMoIcon = new PictureIcon("SlowMo", Color.Lime, StandardWidth * .75f);
-		RobotIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Computer" ) ), Color::Lime, StandardWidth *.75f );
-		PathIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Path" ) ), Color::Lime, StandardWidth *.75f );
-		SlowMoIcon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_SlowMo" ) ), Color::Lime, StandardWidth *.75f );
+		RobotIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Computer" ) ), Color::Lime, StandardWidth *.75f );
+		PathIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Path" ) ), Color::Lime, StandardWidth *.75f );
+		SlowMoIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_SlowMo" ) ), Color::Lime, StandardWidth *.75f );
 	}
 
 	const Vector2 &ObjectIcon::getPos() const
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		MyOscillateParams.Set( 2, 1.02f,.215f );
 
-		Backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true );
 		Backdrop->SetToDefault();
 		Backdrop->setTextureName( _T( "Icon_Backdrop" ) );
 		Backdrop->ScaleYToMatchRatio( 210 );
@@ -189,16 +189,16 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<ObjectIcon> ObjectIcon::Clone( IconScale ScaleType )
+	boost::shared_ptr<ObjectIcon> ObjectIcon::Clone( IconScale ScaleType )
 	{
-		std::shared_ptr<ObjectIcon> icon = std::make_shared<ObjectIcon>();
+		boost::shared_ptr<ObjectIcon> icon = boost::make_shared<ObjectIcon>();
 
 		icon->DisplayText = DisplayText;
 
 		return icon;
 	}
 
-	std::shared_ptr<ObjectIcon> ObjectIcon::Clone()
+	boost::shared_ptr<ObjectIcon> ObjectIcon::Clone()
 	{
 		return Clone( IconScale_FULL );
 	}
@@ -225,7 +225,7 @@ namespace CloudberryKingdom
 	void ObjectIcon::InitializeInstanceFields()
 	{
 		Flipped = false;
-		FancyPos = std::make_shared<FancyVector2>();
+		FancyPos = boost::make_shared<FancyVector2>();
 		PrevSetRatio = 1;
 	}
 
@@ -234,10 +234,10 @@ namespace CloudberryKingdom
 		return std::vector<std::wstring> ();
 	}
 
-	PictureIcon::PictureIcon( const std::shared_ptr<SpriteInfo> &info ) :
+	PictureIcon::PictureIcon( const boost::shared_ptr<SpriteInfo> &info ) :
 		NormalWidth( 0 )
 	{
-		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
+		IconQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->Set( info );
 
 		IconQuad->Quad_Renamed.Playing = false;
@@ -272,19 +272,19 @@ namespace CloudberryKingdom
 		Init( Tools::TextureWad->FindByName( IconTextureString ), BarColor, Width );
 	}
 
-	PictureIcon::PictureIcon( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width ) :
+	PictureIcon::PictureIcon( const boost::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width ) :
 		NormalWidth( 0 )
 	{
 		Init( IconTexture, BarColor, Width );
 	}
 
-	void PictureIcon::Init( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width )
+	void PictureIcon::Init( const boost::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width )
 	{
 		this->IconTexture = IconTexture;
 		this->BarColor = BarColor;
 		this->NormalWidth = Width;
 
-		IconQuad = std::make_shared<QuadClass>( FancyPos, true );
+		IconQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		IconQuad->SetToDefault();
 		IconQuad->Quad_Renamed.setMyTexture( IconTexture );
 		IconQuad->ScaleYToMatchRatio( Width );
@@ -318,7 +318,7 @@ namespace CloudberryKingdom
 			IconQuad->Quad_Renamed.SetColor( Color::White );
 	}
 
-	std::shared_ptr<ObjectIcon> PictureIcon::Clone( IconScale ScaleType )
+	boost::shared_ptr<ObjectIcon> PictureIcon::Clone( IconScale ScaleType )
 	{
 		float width = NormalWidth;
 		if ( ScaleType == IconScale_WIDGET )
@@ -326,7 +326,7 @@ namespace CloudberryKingdom
 		if ( ScaleType == IconScale_NEARLY_FULL )
 			width *= .9f;
 
-		std::shared_ptr<PictureIcon> icon = std::make_shared<PictureIcon>( IconTexture, BarColor, width );
+		boost::shared_ptr<PictureIcon> icon = boost::make_shared<PictureIcon>( IconTexture, BarColor, width );
 		icon->DisplayText = DisplayText;
 		icon->IconQuad->Quad_Renamed.v0 = IconQuad->Quad_Renamed.v0;
 		icon->IconQuad->Quad_Renamed.v1 = IconQuad->Quad_Renamed.v1;
@@ -335,7 +335,7 @@ namespace CloudberryKingdom
 
 		icon->HitPadding = HitPadding;
 
-		return std::static_pointer_cast<ObjectIcon>( icon );
+		return boost::static_pointer_cast<ObjectIcon>( icon );
 	}
 
 	void PictureIcon::SetScale( float Ratio )
@@ -385,13 +385,13 @@ namespace CloudberryKingdom
 
 	CustomHoverIcon::CustomHoverIcon()
 	{
-		YQuad = std::make_shared<QuadClass>( FancyPos, true );
+		YQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		YQuad->SetToDefault();
 		YQuad->setTextureName( _T( "Xbox_Y" ) );
 		YQuad->ScaleYToMatchRatio( 60 );
 		YQuad->setPos( Vector2( 60, 0 ) );
 
-		GearQuad = std::make_shared<QuadClass>( FancyPos, true );
+		GearQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		GearQuad->SetToDefault();
 		GearQuad->setTextureName( _T( "Gears" ) );
 		GearQuad->ScaleYToMatchRatio( 82 );

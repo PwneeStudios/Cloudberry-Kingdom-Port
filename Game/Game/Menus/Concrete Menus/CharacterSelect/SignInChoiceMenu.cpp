@@ -4,31 +4,31 @@ namespace CloudberryKingdom
 {
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	SignInMenu::SignInNoLambda::SignInNoLambda( const std::shared_ptr<SignInMenu> &sim )
+	SignInMenu::SignInNoLambda::SignInNoLambda( const boost::shared_ptr<SignInMenu> &sim )
 	{
 		this->sim = sim;
 	}
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void SignInMenu::SignInNoLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void SignInMenu::SignInNoLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sim->MyCharacterSelect->Player->StoredName = _T( "" );
 		sim->MyCharacterSelect->Player->Init();
-		sim->Call( std::make_shared<SimpleMenu>( sim->getControl(), sim->MyCharacterSelect ) );
+		sim->Call( boost::make_shared<SimpleMenu>( sim->getControl(), sim->MyCharacterSelect ) );
 		sim->Hide();
 	}
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	SignInMenu::SignInYesLambda::SignInYesLambda( const std::shared_ptr<SignInMenu> &sim )
+	SignInMenu::SignInYesLambda::SignInYesLambda( const boost::shared_ptr<SignInMenu> &sim )
 	{
 		this->sim = sim;
 	}
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	void SignInMenu::SignInYesLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void SignInMenu::SignInYesLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		if ( !Guide::IsVisible )
 		{
@@ -45,9 +45,9 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	//SignInMenu::SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	SignInMenu::SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	std::shared_ptr<SignInMenu> SignInMenu::SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	//SignInMenu::SignInMenu( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	SignInMenu::SignInMenu( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	boost::shared_ptr<SignInMenu> SignInMenu::SignInMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		InitializeInstanceFields();
 
@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<SignInMenu>( shared_from_this() );
+		return boost::static_pointer_cast<SignInMenu>( shared_from_this() );
 	}
 #endif
 
@@ -91,9 +91,9 @@ namespace CloudberryKingdom
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	void SignInMenu::MakeSignInChoiceMenu()
 	{
-		MyMenu = std::make_shared<Menu>();
+		MyMenu = boost::make_shared<Menu>();
 		MyMenu->setControl( MyCharacterSelect->PlayerIndex );
-		MyMenu->SelectIcon = std::make_shared<QuadClass>();
+		MyMenu->SelectIcon = boost::make_shared<QuadClass>();
 		MyMenu->SelectIcon->ShadowOffset = Vector2( 7.5f, 7.5f );
 		MyMenu->SelectIcon->ShadowColor = Color( 30, 30, 30 );
 		MyMenu->SelectIcon->Scale( 90 );
@@ -103,16 +103,16 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( shared_from_this() );
 
 		Vector2 pos = Vector2( 0, 0 );
 		float YSpacing = 200;
 
-		std::shared_ptr<MenuItem> item;
-		std::shared_ptr<EzFont> font = Resources::Font_Grobold42;
+		boost::shared_ptr<MenuItem> item;
+		boost::shared_ptr<EzFont> font = Resources::Font_Grobold42;
 		float FontScale = .775f;
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "Sign in?" ), font ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "Sign in?" ), font ) );
 		item->Name = _T( "Header" );
 		item->MyText->setScale( .89f );
 
@@ -124,7 +124,7 @@ namespace CloudberryKingdom
 		std::vector<std::wstring> ItemString = VecFromArray( tempVector );
 		for ( int i = 0; i < 2; i++ )
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( ItemString[ i ], font ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ItemString[ i ], font ) );
 			item->MySelectedText->setScale( FontScale );
 			item->MyText->setScale( item->MySelectedText->getScale() );
 			item->SelectionOscillate = false;
@@ -138,10 +138,10 @@ namespace CloudberryKingdom
 		MyMenu->SelectItem( 1 );
 
 		MyMenu->Items[ 1 ]->Name = _T( "Yes" );
-		MyMenu->Items[ 1 ]->setGo( std::make_shared<SignInYesLambda>( shared_from_this() ) );
+		MyMenu->Items[ 1 ]->setGo( boost::make_shared<SignInYesLambda>( shared_from_this() ) );
 
 		MyMenu->Items[ 2 ]->Name = _T( "No" );
-		MyMenu->Items[ 2 ]->setGo( std::make_shared<SignInNoLambda>( shared_from_this() ) );
+		MyMenu->Items[ 2 ]->setGo( boost::make_shared<SignInNoLambda>( shared_from_this() ) );
 
 		MyMenu->MyPieceQuadTemplate.reset();
 
@@ -152,7 +152,7 @@ namespace CloudberryKingdom
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	void SignInMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Header" ) );
 		if ( _item != 0 )
 		{
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		// The guide just went down. Check to see if someone signed in and act accordingly.
 		if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )
 		{
-			Call( std::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
+			Call( boost::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
 			Hide();
 		}
 		else

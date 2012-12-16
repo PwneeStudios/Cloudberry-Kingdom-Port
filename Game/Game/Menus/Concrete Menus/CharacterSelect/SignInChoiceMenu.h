@@ -10,32 +10,32 @@ namespace CloudberryKingdom
 	struct SignInMenu : public CkBaseMenu
 	{
 	
-		struct SignInNoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct SignInNoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<SignInMenu> sim;
+			boost::shared_ptr<SignInMenu> sim;
 		
-			SignInNoLambda( const std::shared_ptr<SignInMenu> &sim );
+			SignInNoLambda( const boost::shared_ptr<SignInMenu> &sim );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		struct SignInYesLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct SignInYesLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<SignInMenu> sim;
+			boost::shared_ptr<SignInMenu> sim;
 		
-			SignInYesLambda( const std::shared_ptr<SignInMenu> &sim );
+			SignInYesLambda( const boost::shared_ptr<SignInMenu> &sim );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
-		SignInMenu( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		std::shared_ptr<SignInMenu> SignInMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		SignInMenu( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		boost::shared_ptr<SignInMenu> SignInMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
 	
 		virtual void ReleaseBody();
 

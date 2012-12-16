@@ -12,17 +12,17 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
+		virtual void Set( const boost::shared_ptr<BobPhsx> &phsx );
 
-		static void SetJetmanObject( const std::shared_ptr<ObjectClass> &obj );
+		static void SetJetmanObject( const boost::shared_ptr<ObjectClass> &obj );
 
 		// Singleton
 	
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxJetman> instance;
+		static boost::shared_ptr<BobPhsxJetman> instance;
 	
-		const static std::shared_ptr<BobPhsxJetman> &getInstance();
+		const static boost::shared_ptr<BobPhsxJetman> &getInstance();
 
 		// Instancable struct
 		BobPhsxJetman();

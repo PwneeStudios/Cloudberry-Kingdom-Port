@@ -5,14 +5,14 @@
 namespace CloudberryKingdom
 {
 
-	HeroItem::HeroItem( const std::shared_ptr<BobPhsx> &Hero ) : MenuItem( std::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) )
+	HeroItem::HeroItem( const boost::shared_ptr<BobPhsx> &Hero ) : MenuItem( boost::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) )
 	{
 		this->Hero = Hero;
 
 		Locked = false;
 	}
 
-	StartMenu_MW_HeroSelect::OnSelectProxy::OnSelectProxy( const std::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs )
+	StartMenu_MW_HeroSelect::OnSelectProxy::OnSelectProxy( const boost::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs )
 	{
 		this->smmwhs = smmwhs;
 	}
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		smmwhs->OnSelect();
 	}
 
-	StartMenu_MW_HeroSelect::UpdateScoreProxy::UpdateScoreProxy( const std::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs )
+	StartMenu_MW_HeroSelect::UpdateScoreProxy::UpdateScoreProxy( const boost::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs )
 	{
 		this->smmwhs = smmwhs;
 	}
@@ -32,18 +32,18 @@ namespace CloudberryKingdom
 		smmwhs->UpdateScore();
 	}
 
-	StartMenu_MW_HeroSelect::StartMenuGoLambda::StartMenuGoLambda( const std::shared_ptr<StartMenu_MW_HeroSelect> &hs )
+	StartMenu_MW_HeroSelect::StartMenuGoLambda::StartMenuGoLambda( const boost::shared_ptr<StartMenu_MW_HeroSelect> &hs )
 	{
 		this->hs = hs;
 	}
 
-	void StartMenu_MW_HeroSelect::StartMenuGoLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_HeroSelect::StartMenuGoLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		hs->Go( item );
 	}
 
-	StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem ) : ArcadeBaseMenu() { }
-	std::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect_Construct( const std::shared_ptr<TitleGameData_MW> &Title, const std::shared_ptr<ArcadeMenu> &Arcade, const std::shared_ptr<ArcadeItem> &MyArcadeItem )
+	StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem ) : ArcadeBaseMenu() { }
+	boost::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect_Construct( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem )
 	{
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		this->Arcade = Arcade;
 		this->MyArcadeItem = MyArcadeItem;
 
-		return std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() );
 	}
 
 	void StartMenu_MW_HeroSelect::Release()
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::OnSelect()
 	{
-		std::shared_ptr<HeroItem> item = std::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
+		boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
 
@@ -103,14 +103,14 @@ namespace CloudberryKingdom
 			Options->SlideOut( Preset, 0 );
 	}
 
-	void StartMenu_MW_HeroSelect::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_HeroSelect::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		ArcadeBaseMenu::SetItemProperties( item );
 
 		SetItemProperties_FadedOnUnselect( item );
 	}
 
-	void StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( const boost::shared_ptr<MenuItem> &item )
 	{
 		item->MySelectedText->Shadow = item->MyText->Shadow = false;
 
@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( MyHeroDoll );
 
 		// Options. Menu for PC, graphics only for consoles.
-		Options = MakeMagic( HeroSelectOptions, ( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
+		Options = MakeMagic( HeroSelectOptions, ( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
 		MyGame->AddGameObject( Options );
 	}
 
@@ -137,12 +137,12 @@ namespace CloudberryKingdom
 	{
 		 ArcadeBaseMenu::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		CallDelay = ReturnToCallerDelay = 0;
 
-		Score = std::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
-		Level_Renamed = std::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
+		Score = boost::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
+		Level_Renamed = boost::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
 
 		// Heroes
 		BobPhsxNormal::getInstance()->Id = 0;
@@ -158,36 +158,36 @@ namespace CloudberryKingdom
 		BobPhsxSpaceship::getInstance()->Id = 10;
 		BobPhsxWheel::getInstance()->Id = 11;
 
-		std::shared_ptr<BobPhsx> JetpackWheelie = BobPhsx::MakeCustom( Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK );
+		boost::shared_ptr<BobPhsx> JetpackWheelie = BobPhsx::MakeCustom( Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK );
 		JetpackWheelie->Name = Localization::Words_JETPACK_WHEELIE;
 		JetpackWheelie->Id = 12;
 
 		//BobPhsxMeat.Instance =
 		//BobPhsxRocketbox.Instance =
 
-		std::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
-		std::vector<std::shared_ptr<BobPhsx> > list = VecFromArray( tempVector );
+		boost::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
+		std::vector<boost::shared_ptr<BobPhsx> > list = VecFromArray( tempVector );
 
 		// Menu
-		std::shared_ptr<MiniMenu> mini = std::make_shared<MiniMenu>();
+		boost::shared_ptr<MiniMenu> mini = boost::make_shared<MiniMenu>();
 		MyMenu = mini;
 
-		MyMenu->OnSelect = std::make_shared<UpdateScoreProxy>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
+		MyMenu->OnSelect = boost::make_shared<UpdateScoreProxy>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 
 		mini->WrapSelect = false;
 		mini->Shift = Vector2( 0, -135 );
 		mini->ItemsToShow = 6;
 		FontScale *= .75f;
 
-		for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
+		for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
 		{
-			std::shared_ptr<HeroItem> item = std::make_shared<HeroItem>( *phsx );
-			item->AdditionalOnSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
+			boost::shared_ptr<HeroItem> item = boost::make_shared<HeroItem>( *phsx );
+			item->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 			AddItem( item );
-			item->setGo( std::make_shared<StartMenuGoLambda>( std::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
+			item->setGo( boost::make_shared<StartMenuGoLambda>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
 		}
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 		EnsureFancy();
 
 		/// <summary>
@@ -195,7 +195,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		#pragma region
 		// Black box, left side
-		std::shared_ptr<QuadClass> BackBoxLeft = std::make_shared<QuadClass>( _T( "Arcade_BoxLeft" ) );
+		boost::shared_ptr<QuadClass> BackBoxLeft = boost::make_shared<QuadClass>( _T( "Arcade_BoxLeft" ) );
 		BackBoxLeft->setAlpha( 1 );
 		MyPile->Add( BackBoxLeft, _T( "BoxLeft" ) );
 		#pragma endregion
@@ -205,18 +205,18 @@ namespace CloudberryKingdom
 		/// </summary>
 		#pragma region
 		// Black box, right side
-		std::shared_ptr<QuadClass> BackBox = std::make_shared<QuadClass>( _T( "Arcade_Box" ) );
+		boost::shared_ptr<QuadClass> BackBox = boost::make_shared<QuadClass>( _T( "Arcade_Box" ) );
 		BackBox->setAlpha( 1 );
 		MyPile->Add( BackBox, _T( "BoxRight" ) );
 
 		// Score, level
-		std::shared_ptr<EzText> ScoreHeader = std::make_shared<EzText>( Localization::Words_HIGH_SCORE, Resources::Font_Grobold42_2 );
+		boost::shared_ptr<EzText> ScoreHeader = boost::make_shared<EzText>( Localization::Words_HIGH_SCORE, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( ScoreHeader, true );
 		MyPile->Add( ScoreHeader, _T( "ScoreHeader" ) );
 
 		MyPile->Add( Score, _T( "Score" ) );
 
-		std::shared_ptr<EzText> LevelHeader = std::make_shared<EzText>( Localization::Words_BEST_LEVEL, Resources::Font_Grobold42_2 );
+		boost::shared_ptr<EzText> LevelHeader = boost::make_shared<EzText>( Localization::Words_BEST_LEVEL, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( LevelHeader, true );
 		MyPile->Add( LevelHeader, _T( "LevelHeader" ) );
 
@@ -226,8 +226,8 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Back
 		/// </summary>
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack() ), _T("Back") );
-		MyPile->Add( std::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack() ), _T("Back") );
+		MyPile->Add( boost::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) ) );
 
 		MyPile->FadeIn( .33f );
 
@@ -243,7 +243,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::UpdateScore()
 	{
-		std::shared_ptr<HeroItem> item = std::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
+		boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
 
@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 	{
 		MyMenu->setPos( Vector2( -1340.222f, 104.4444f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "ScoreHeader" ) );
 		if ( _t != 0 )
 		{
@@ -285,7 +285,7 @@ namespace CloudberryKingdom
 			_t->setScale( 1 );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "BoxLeft" ) );
 		if ( _q != 0 )
 		{
@@ -315,12 +315,12 @@ namespace CloudberryKingdom
 
 	}
 
-	void StartMenu_MW_HeroSelect::Go( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_HeroSelect::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
+		boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
-		levelmenu->StartFunc = std::make_shared<StartFuncProxy>( std::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
+		levelmenu->StartFunc = boost::make_shared<StartFuncProxy>( boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );
 		levelmenu->ReturnFunc.reset();
 
 		Call( levelmenu );

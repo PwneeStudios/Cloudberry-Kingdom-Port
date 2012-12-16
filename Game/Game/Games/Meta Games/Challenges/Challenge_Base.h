@@ -20,36 +20,36 @@ namespace CloudberryKingdom
 		}
 	};
 
-	struct Challenge : public std::enable_shared_from_this<Challenge>
+	struct Challenge : public boost::enable_shared_from_this<Challenge>
 	{
 
 	
-		struct PassGetSeedAsLambda : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+		struct PassGetSeedAsLambda : public LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> >
 		{
 
 		
-			std::shared_ptr<Challenge> challenge;
+			boost::shared_ptr<Challenge> challenge;
 
 		
-			PassGetSeedAsLambda( const std::shared_ptr<Challenge> &challenge );
+			PassGetSeedAsLambda( const boost::shared_ptr<Challenge> &challenge );
 
-			std::shared_ptr<LevelSeedData> Apply( const int &index );
+			boost::shared_ptr<LevelSeedData> Apply( const int &index );
 
 		};
 
 		struct ShowEndScreenProxy : public Lambda
 		{
 		
-			std::shared_ptr<Challenge> challenge;
+			boost::shared_ptr<Challenge> challenge;
 
 		
-			ShowEndScreenProxy( const std::shared_ptr<Challenge> &challenge );
+			ShowEndScreenProxy( const boost::shared_ptr<Challenge> &challenge );
 
 			void Apply();
 		};
 
 	
-		static std::shared_ptr<BobPhsx> ChosenHero;
+		static boost::shared_ptr<BobPhsx> ChosenHero;
 	
 		static const int LevelMask = 10000;
 
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		int SetGameId();
 
 	
-		const std::shared_ptr<StringWorldGameData> getStringWorld() const;
+		const boost::shared_ptr<StringWorldGameData> getStringWorld() const;
 
 		/// <summary>
 		/// Get the top score that anyone on this machine has ever gotten.
@@ -110,10 +110,10 @@ namespace CloudberryKingdom
 		void Aftermath();
 
 	
-		virtual void SetGameParent( const std::shared_ptr<GameData> &game );
+		virtual void SetGameParent( const boost::shared_ptr<GameData> &game );
 
 	
-		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index ) = 0;
+		virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index ) = 0;
 
 	
 		void InitializeInstanceFields();

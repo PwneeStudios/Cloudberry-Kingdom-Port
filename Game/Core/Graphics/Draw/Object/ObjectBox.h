@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 	struct ObjectBox
 	{
 	
-		std::shared_ptr<ObjectVector> BL, TR;
+		boost::shared_ptr<ObjectVector> BL, TR;
 
 		std::wstring Name;
 		bool Show;
@@ -28,11 +28,11 @@ namespace CloudberryKingdom
 
 		void Calc( int anim, float t, int AnimLength, bool Loop, bool Linear );
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer, const std::shared_ptr<ObjectClass> &MainObject );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer, const boost::shared_ptr<ObjectClass> &MainObject );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<ObjectClass> &MainObject, int VersionNumber );
+		void Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<ObjectClass> &MainObject, int VersionNumber );
 
-		ObjectBox( const std::shared_ptr<ObjectBox> &box, bool DeepClone );
+		ObjectBox( const boost::shared_ptr<ObjectBox> &box, bool DeepClone );
 
 		ObjectBox();
 
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 
 		Vector2 Size();
 
-		void DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, Color clr );
+		void DrawExtra( const boost::shared_ptr<QuadDrawer> &Drawer, Color clr );
 
 	
 		void InitializeInstanceFields();

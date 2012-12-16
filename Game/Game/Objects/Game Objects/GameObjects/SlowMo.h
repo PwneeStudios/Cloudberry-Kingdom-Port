@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	
 		SlowMo();
-		std::shared_ptr<SlowMo> SlowMo_Construct();
+		boost::shared_ptr<SlowMo> SlowMo_Construct();
 	
 		virtual void ReleaseBody();
 

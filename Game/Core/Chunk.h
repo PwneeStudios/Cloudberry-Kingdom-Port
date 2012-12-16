@@ -11,8 +11,8 @@ namespace CloudberryKingdom
 	struct Chunks /*: public IEnumerable<Chunk*>*/
 	{
 	
-		static std::shared_ptr<Chunks> Get( std::vector<unsigned char> Data );
-		static std::shared_ptr<Chunks> Get( std::shared_ptr<Chunk> Chunk );
+		static boost::shared_ptr<Chunks> Get( std::vector<unsigned char> Data );
+		static boost::shared_ptr<Chunks> Get( boost::shared_ptr<Chunk> Chunk );
 
 	
 		std::vector<unsigned char> Data;
@@ -25,11 +25,11 @@ namespace CloudberryKingdom
 
 		void StartGettingChunks();
 		const bool HasChunk();
-		const std::shared_ptr<Chunk> GetChunk();
+		const boost::shared_ptr<Chunk> GetChunk();
 
-		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
+		/*boost::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
-		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
+		boost::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
 	};
 
 	/*struct ChunkEnumerator : public IEnumerator<Chunk*>
@@ -45,15 +45,15 @@ namespace CloudberryKingdom
 		ChunkEnumerator( std::vector<unsigned char> Data, int Start, int DataLength );
 
 	
-		std::shared_ptr<Chunk> _Current;
+		boost::shared_ptr<Chunk> _Current;
 	
-		const std::shared_ptr<Chunk> &getCurrent() const;
+		const boost::shared_ptr<Chunk> &getCurrent() const;
 
 		bool MoveNext();
 
 		void Reset();
 
-		const std::shared_ptr<Object> &getIEnumerator_Current() = IEnumerator::Current::get const;
+		const boost::shared_ptr<Object> &getIEnumerator_Current() = IEnumerator::Current::get const;
 
 		~ChunkEnumerator();
 
@@ -80,9 +80,9 @@ namespace CloudberryKingdom
 		void Initialize( int Capacity );
 
 	
-		/*std::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
+		/*boost::shared_ptr<IEnumerator<Chunk*> > GetEnumerator();
 
-		std::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
+		boost::shared_ptr<IEnumerator> IEnumerable_GetEnumerator();*/
 
 		/// <summary>
 		/// Double the size of the buffer without losing any data.
@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		void SetTypeAndLength();
 
 	
-		void Finish( const std::shared_ptr<BinaryWriter> &writer );
+		void Finish( const boost::shared_ptr<BinaryWriter> &writer );
 		void Finish( Chunk &ParentChunk );
 
 	
@@ -127,11 +127,11 @@ namespace CloudberryKingdom
 		void ReadSingle( std::wstring &val );
 		void ReadSingle( Keys &val );
 
-		static void WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, int val );
-		static void WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, bool val );
-		static void WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, float val );
-		static void WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, const std::wstring &val );
-		static void WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, Keys val );
+		static void WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, int val );
+		static void WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, bool val );
+		static void WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, float val );
+		static void WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, const std::wstring &val );
+		static void WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, Keys val );
 
 		void WriteSingle( int type, int val );
 		void WriteSingle( int type, bool val );

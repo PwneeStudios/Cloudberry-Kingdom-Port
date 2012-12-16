@@ -8,9 +8,9 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_PressStart : public CkBaseMenu
 	{
 	
-		std::shared_ptr<TitleGameData_MW> Title;
-		StartMenu_MW_PressStart( const std::shared_ptr<TitleGameData_MW> &Title );
-		std::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<TitleGameData_MW> Title;
+		StartMenu_MW_PressStart( const boost::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart_Construct( const boost::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		virtual void OnAdd();
 
 	
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 		int DelayToAllowInput;
 	
 		virtual void Init();

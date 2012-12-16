@@ -15,10 +15,10 @@ namespace CloudberryKingdom
 		struct SimpleToCustomProxy : public Lambda
 		{
 		
-			std::shared_ptr<SimpleMenuBase> smb;
+			boost::shared_ptr<SimpleMenuBase> smb;
 
 		
-			SimpleToCustomProxy( const std::shared_ptr<SimpleMenuBase> &smb );
+			SimpleToCustomProxy( const boost::shared_ptr<SimpleMenuBase> &smb );
 
 			void Apply();
 		};
@@ -27,10 +27,10 @@ namespace CloudberryKingdom
 		struct SimpleToDoneProxy : public Lambda
 		{
 		
-			std::shared_ptr<SimpleMenuBase> smb;
+			boost::shared_ptr<SimpleMenuBase> smb;
 
 		
-			SimpleToDoneProxy( const std::shared_ptr<SimpleMenuBase> &smb );
+			SimpleToDoneProxy( const boost::shared_ptr<SimpleMenuBase> &smb );
 
 			void Apply();
 		};
@@ -39,10 +39,10 @@ namespace CloudberryKingdom
 		struct SimpleToBackProxy : public Lambda
 		{
 		
-			std::shared_ptr<SimpleMenuBase> smb;
+			boost::shared_ptr<SimpleMenuBase> smb;
 
 		
-			SimpleToBackProxy( const std::shared_ptr<SimpleMenuBase> &smb );
+			SimpleToBackProxy( const boost::shared_ptr<SimpleMenuBase> &smb );
 
 			void Apply();
 		};
@@ -51,10 +51,10 @@ namespace CloudberryKingdom
 		struct SimpleSelect_RightProxy : public Lambda
 		{
 		
-			std::shared_ptr<SimpleMenuBase> smb;
+			boost::shared_ptr<SimpleMenuBase> smb;
 
 		
-			SimpleSelect_RightProxy( const std::shared_ptr<SimpleMenuBase> &smb );
+			SimpleSelect_RightProxy( const boost::shared_ptr<SimpleMenuBase> &smb );
 
 			void Apply();
 		};
@@ -63,25 +63,25 @@ namespace CloudberryKingdom
 		struct SimpleSelect_LeftProxy : public Lambda
 		{
 		
-			std::shared_ptr<SimpleMenuBase> smb;
+			boost::shared_ptr<SimpleMenuBase> smb;
 
 		
-			SimpleSelect_LeftProxy( const std::shared_ptr<SimpleMenuBase> &smb );
+			SimpleSelect_LeftProxy( const boost::shared_ptr<SimpleMenuBase> &smb );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
-		std::shared_ptr<ArrowMenu> Arrows;
+		boost::shared_ptr<ArrowMenu> Arrows;
 
 	
 		virtual void ReleaseBody();
 
 	
-		SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent );
-		std::shared_ptr<SimpleMenuBase> SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		SimpleMenuBase( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
+		boost::shared_ptr<SimpleMenuBase> SimpleMenuBase_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 
 		virtual void OnAdd();
 
@@ -119,11 +119,11 @@ namespace CloudberryKingdom
 	struct SimpleMenu : public SimpleMenuBase
 	{
 	
-		SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent );
-		std::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
+		boost::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void Init();
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 	struct SimpleMenu : public SimpleMenuBase
 	{
 	
-		SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 
 		virtual void Init();
 

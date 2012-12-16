@@ -21,13 +21,13 @@ namespace CloudberryKingdom
 	
 		RegularLevel();
 
-		static void StandardInit( const std::shared_ptr<LevelSeedData> &data );
+		static void StandardInit( const boost::shared_ptr<LevelSeedData> &data );
 
 		// -------------------------
 		// Fixed upgrade lists
 		// -------------------------
 	
-		static std::shared_ptr<LevelSeedData> HeroLevel( float Difficulty, const std::shared_ptr<BobPhsx> &Hero, int Length );
+		static boost::shared_ptr<LevelSeedData> HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length );
 	};
 }
 

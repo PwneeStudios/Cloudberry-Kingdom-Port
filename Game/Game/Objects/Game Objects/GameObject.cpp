@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	GameObject::OnCameraChangeProxy::OnCameraChangeProxy( const std::shared_ptr<GameObject> &go )
+	GameObject::OnCameraChangeProxy::OnCameraChangeProxy( const boost::shared_ptr<GameObject> &go )
 	{
 		this->go = go;
 	}
@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		go->OnCameraChange();
 	}
 
-	GameObject::AddGameObjectToCoreHelper::AddGameObjectToCoreHelper( const std::shared_ptr<GameObject> &obj )
+	GameObject::AddGameObjectToCoreHelper::AddGameObjectToCoreHelper( const boost::shared_ptr<GameObject> &obj )
 	{
 		this->obj = obj;
 	}
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	{
 		if ( MyGame == 0 )
 			if ( getCore()->MyLevel->MyGame != 0 )
-				getCore()->MyLevel->MyGame->WaitThenDo(0, std::make_shared<AddGameObjectToCoreHelper>( std::static_pointer_cast<GameObject>( shared_from_this() ) ) );
+				getCore()->MyLevel->MyGame->WaitThenDo(0, boost::make_shared<AddGameObjectToCoreHelper>( boost::static_pointer_cast<GameObject>( shared_from_this() ) ) );
 
 		return MyGame == 0;
 	}
@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		if ( PauseOnReplay && ( level->Replay || level->Watching ) )
 			return;
@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 		AffectGamePause();
 
 		if ( getCore()->MyLevel != 0 )
-			getCore()->MyLevel->OnCameraChange->Add(std::make_shared<OnCameraChangeProxy>( std::static_pointer_cast<GameObject>( shared_from_this() ) ) );
+			getCore()->MyLevel->OnCameraChange->Add(boost::make_shared<OnCameraChangeProxy>( boost::static_pointer_cast<GameObject>( shared_from_this() ) ) );
 	}
 
 	void GameObject::OnCameraChange()
@@ -213,10 +213,10 @@ namespace CloudberryKingdom
 
 	void GameObject::InitializeInstanceFields()
 	{
-		Tags = std::make_shared<Set<Tag> >();
+		Tags = boost::make_shared<Set<Tag> >();
 		PreventRelease = false;
 		PauseOnPause = false;
-		OnRelease = std::make_shared<Multicaster>();
+		OnRelease = boost::make_shared<Multicaster>();
 		HideOnReplay = false;
 		PauseOnReplay = false;
 		AutoDraw = true;

@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 
 	
-		virtual std::shared_ptr<GameData> Make();
+		virtual boost::shared_ptr<GameData> Make();
 
 	};
 
@@ -24,16 +24,16 @@ namespace CloudberryKingdom
 		struct _InitProxy : public Lambda
 		{
 		
-			std::shared_ptr<TitleGameData_MW> tgdmw;
+			boost::shared_ptr<TitleGameData_MW> tgdmw;
 
 		
-			_InitProxy( const std::shared_ptr<TitleGameData_MW> &tgdmw );
+			_InitProxy( const boost::shared_ptr<TitleGameData_MW> &tgdmw );
 
 			void Apply();
 		};
 
 	
-		static std::shared_ptr<SimpleGameFactory> Factory;
+		static boost::shared_ptr<SimpleGameFactory> Factory;
 
 		virtual void Release();
 
@@ -44,11 +44,11 @@ namespace CloudberryKingdom
 		virtual void ReturnTo( int code );
 
 	
-		virtual std::shared_ptr<Level> MakeLevel();
+		virtual boost::shared_ptr<Level> MakeLevel();
 
 	
-		std::shared_ptr<StartMenu_MW_Backpanel> BackPanel;
-		std::shared_ptr<StartMenu_MW_PressStart> PressStart;
+		boost::shared_ptr<StartMenu_MW_Backpanel> BackPanel;
+		boost::shared_ptr<StartMenu_MW_PressStart> PressStart;
 		virtual void Init();
 
 	

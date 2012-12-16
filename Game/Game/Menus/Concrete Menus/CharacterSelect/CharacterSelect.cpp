@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	std::vector<Vector2> CharacterSelect::Centers;
 
 
-	CharacterSelect::RandomizeProxy::RandomizeProxy( const std::shared_ptr<CharacterSelect> &cs )
+	CharacterSelect::RandomizeProxy::RandomizeProxy( const boost::shared_ptr<CharacterSelect> &cs )
 	{
 		this->cs = cs;
 	}
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		cs->Randomize();
 	}
 
-	const std::shared_ptr<PlayerData> CharacterSelect::getPlayer() const
+	const boost::shared_ptr<PlayerData> CharacterSelect::getPlayer() const
 	{
 		return PlayerManager::Get( PlayerIndex );
 	}
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		Centers = VecFromArray( tempVector );
 	}
 
-	void CharacterSelect::Shift( const std::shared_ptr<GUI_Panel> &panel )
+	void CharacterSelect::Shift( const boost::shared_ptr<GUI_Panel> &panel )
 	{
 		panel->Shift( Centers[ panel->getControl() ] );
 	}
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 	CharacterSelect::CharacterSelect( int PlayerIndex, bool QuickJoin )
 	{
 		InitializeInstanceFields();
-		std::shared_ptr<GameData> game = Tools::CurGameData;
+		boost::shared_ptr<GameData> game = Tools::CurGameData;
 
 		Tools::StartGUIDraw();
 
@@ -116,17 +116,17 @@ namespace CloudberryKingdom
 			if ( i == 1 || i == 2 )
 				continue;
 
-			std::vector<std::shared_ptr<MenuListItem> > list = std::vector<std::shared_ptr<MenuListItem> >( ItemList[ i ].capacity() );
+			std::vector<boost::shared_ptr<MenuListItem> > list = std::vector<boost::shared_ptr<MenuListItem> >( ItemList[ i ].capacity() );
 
-			for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
-				if ( PlayerManager::BoughtOrFree( std::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
+			for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
+				if ( PlayerManager::BoughtOrFree( boost::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
 					list.push_back( *item );
 
 			ItemIndex[ i ] = IndexOf( ItemList[ i ], ListExtension::Choose( list, Tools::GlobalRnd ) );
 		}
 
-		std::shared_ptr<Hat> hat = CharacterSelectManager::AvailableHats->Choose( Tools::GlobalRnd );
-		std::shared_ptr<Hat> beard = CharacterSelectManager::AvailableBeards->Choose( Tools::GlobalRnd );
+		boost::shared_ptr<Hat> hat = CharacterSelectManager::AvailableHats->Choose( Tools::GlobalRnd );
+		boost::shared_ptr<Hat> beard = CharacterSelectManager::AvailableBeards->Choose( Tools::GlobalRnd );
 		ItemIndex[ 1 ] = IndexOf( ColorSchemeManager::BeardInfo, beard );
 		ItemIndex[ 2 ] = IndexOf( ColorSchemeManager::HatInfo, hat );
 
@@ -141,11 +141,11 @@ namespace CloudberryKingdom
 	{
 		bool ShowingCape = getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A > 0 || getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A > 0;
 
-		getPlayer()->ColorScheme_Renamed.SkinColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 0 ][ ItemIndex[ 0 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.SkinColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 0 ][ ItemIndex[ 0 ] ]->obj);
 		getPlayer()->ColorScheme_Renamed.BeardData = ColorSchemeManager::BeardInfo[ ItemIndex[ 1 ] ];
 		getPlayer()->ColorScheme_Renamed.HatData = ColorSchemeManager::HatInfo[ ItemIndex[ 2 ] ];
-		getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
-		getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.CapeColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+		getPlayer()->ColorScheme_Renamed.CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 
 		// If the cape has gone from not-shown to shown,
 		// make sure both the cape color and cape outline color aren't invisible.
@@ -154,12 +154,12 @@ namespace CloudberryKingdom
 			if ( getPlayer()->ColorScheme_Renamed.CapeColor->Equals(*ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed.CapeColor->Clr.A == 0 )
 			{
 				ItemIndex[ 3 ] = HoldCapeIndex;
-				getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+				getPlayer()->ColorScheme_Renamed.CapeColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
 			}
 			if ( getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Equals(*ColorSchemeManager::None) || getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A == 0 )
 			{
 				ItemIndex[ 4 ] = HoldCapeOutlineIndex;
-				getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+				getPlayer()->ColorScheme_Renamed.CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 			}
 		}
 
@@ -168,13 +168,13 @@ namespace CloudberryKingdom
 		{
 			HoldCapeIndex = ItemIndex[ 3 ];
 			ItemIndex[ 3 ] = 0;
-			getPlayer()->ColorScheme_Renamed.CapeColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
+			getPlayer()->ColorScheme_Renamed.CapeColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 3 ][ ItemIndex[ 3 ] ]->obj);
 		}
 		if ( getPlayer()->ColorScheme_Renamed.CapeColor->Equals(*ColorSchemeManager::None) && getPlayer()->ColorScheme_Renamed.CapeOutlineColor->Clr.A > 0 )
 		{
 			HoldCapeOutlineIndex = ItemIndex[ 4 ];
 			ItemIndex[ 4 ] = 0;
-			getPlayer()->ColorScheme_Renamed.CapeOutlineColor = std::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
+			getPlayer()->ColorScheme_Renamed.CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>(ItemList[ 4 ][ ItemIndex[ 4 ] ]->obj);
 		}
 
 		MyDoll->UpdateColorScheme();
@@ -211,13 +211,13 @@ namespace CloudberryKingdom
 		CopyIndicesFromColorScheme();
 	}
 
-	int CharacterSelect::FindIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx obj )
+	int CharacterSelect::FindIndex( std::vector<boost::shared_ptr<MenuListItem> > &list, ClrTextFx obj )
 	{
 		int index = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid == obj.Guid )
+			if ( ( boost::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid == obj.Guid )
 				return index;
 			index++;
 		}
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 		MyState = SelectState_BEGINNING;
 		Join = false;
 		ItemIndex = std::vector<int>( 5 );
-		std::vector<std::shared_ptr<MenuListItem> > tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
+		std::vector<boost::shared_ptr<MenuListItem> > tempVector2[] = { ColorSchemeManager::ColorList, ColorSchemeManager::OutlineList, ColorSchemeManager::HatList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList };
 		ItemList = VecFromArray( tempVector2 );
 		HoldCapeIndex = 1;
 		HoldCapeOutlineIndex = 1;

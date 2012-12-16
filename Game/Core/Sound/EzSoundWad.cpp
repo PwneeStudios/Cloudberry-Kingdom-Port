@@ -25,9 +25,9 @@ namespace CloudberryKingdom
 		//     sound.Update();
 	}
 
-	std::shared_ptr<EzSound> EzSoundWad::FindByName( const std::wstring &name )
+	boost::shared_ptr<EzSound> EzSoundWad::FindByName( const std::wstring &name )
 	{
-		for ( std::vector<std::shared_ptr<EzSound> >::const_iterator Snd = SoundList.begin(); Snd != SoundList.end(); ++Snd )
+		for ( std::vector<boost::shared_ptr<EzSound> >::const_iterator Snd = SoundList.begin(); Snd != SoundList.end(); ++Snd )
 		if ( CompareIgnoreCase( ( *Snd )->Name, name ) == 0 )
 				return *Snd;
 
@@ -38,9 +38,9 @@ namespace CloudberryKingdom
 		return SoundList[ 0 ];
 	}
 
-	void EzSoundWad::AddSound( const std::shared_ptr<SoundEffect> &sound, const std::wstring &Name )
+	void EzSoundWad::AddSound( const boost::shared_ptr<SoundEffect> &sound, const std::wstring &Name )
 	{
-		std::shared_ptr<EzSound> NewSound = std::make_shared<EzSound>();
+		boost::shared_ptr<EzSound> NewSound = boost::make_shared<EzSound>();
 		NewSound->Name = Name;
 		NewSound->sound = sound;
 		NewSound->MaxInstances = MaxInstancesPerSound;

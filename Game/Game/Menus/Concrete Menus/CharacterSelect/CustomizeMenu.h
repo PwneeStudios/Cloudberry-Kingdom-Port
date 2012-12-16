@@ -9,41 +9,41 @@ namespace CloudberryKingdom
 	struct CustomizeMenu : public CkBaseMenu
 	{
 	
-		struct GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct GoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<CustomizeMenu> cm;
+			boost::shared_ptr<CustomizeMenu> cm;
 
 		
-			GoProxy( const std::shared_ptr<CustomizeMenu> &cm );
+			GoProxy( const boost::shared_ptr<CustomizeMenu> &cm );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		struct CreateColorSelectProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomizeMenu> cm;
+			boost::shared_ptr<CustomizeMenu> cm;
 
 		
-			CreateColorSelectProxy( const std::shared_ptr<CustomizeMenu> &cm );
+			CreateColorSelectProxy( const boost::shared_ptr<CustomizeMenu> &cm );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 
 	
 		virtual void ReleaseBody();
 
 	
-		CustomizeMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent );
-		std::shared_ptr<CustomizeMenu> CustomizeMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent );
+		CustomizeMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
+		boost::shared_ptr<CustomizeMenu> CustomizeMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void Init();
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 	
 		void SetPos();
 
-		void Go( const std::shared_ptr<MenuItem> &item );
+		void Go( const boost::shared_ptr<MenuItem> &item );
 
 		//void AddMenuItem(string Text, string Name)
 		void AddMenuItem( Localization::Words Word, const std::wstring &Name );

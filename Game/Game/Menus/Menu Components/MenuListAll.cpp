@@ -6,8 +6,8 @@ namespace CloudberryKingdom
 	Brackets::Brackets()
 	{
 		float Size = 50;
-		Br1 = std::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
-		Br2 = std::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
+		Br1 = boost::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
+		Br2 = boost::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
 
 		//float Size = 53;
 		//Br1 = new QuadClass("Edge", Size, true);
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		Br2->Draw();
 	}
 
-	void Brackets::AddToDrawPile( const std::shared_ptr<DrawPile> &pile )
+	void Brackets::AddToDrawPile( const boost::shared_ptr<DrawPile> &pile )
 	{
 		pile->Add( Br1 );
 		pile->Add( Br2 );
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 
 		bool hit = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
 		{
 			if ( ( *item )->HitTest( pos, padding ) )
 			{
@@ -97,14 +97,14 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	void MenuListAll::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	void MenuListAll::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		if ( MyMenu->CurDrawLayer != MyDrawLayer || !Show )
 			return;
 
 		float Shift = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyList.begin(); item != MyList.end(); ++item )
 		{
 			// The unselected text of the current menu item may not ever have been drawn,
 			// so update its CameraZoom manually
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		ListPadding = Vector2( 65, 0 );
 		TotalPadding = Vector2();
 #endif
-		MyBrackets = std::make_shared<Brackets>();
+		MyBrackets = boost::make_shared<Brackets>();
 		ShiftAmount = 250;
 	}
 }

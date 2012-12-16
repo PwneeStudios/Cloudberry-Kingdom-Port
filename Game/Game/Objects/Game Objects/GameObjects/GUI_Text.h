@@ -17,40 +17,40 @@ namespace CloudberryKingdom
 	
 		Style MyStyle;
 
-		std::shared_ptr<EzText> MyText;
+		boost::shared_ptr<EzText> MyText;
 
-		static std::shared_ptr<GUI_Text> SimpleTitle( Localization::Words word );
-		static std::shared_ptr<GUI_Text> SimpleTitle( Localization::Words word, Style style );
+		static boost::shared_ptr<GUI_Text> SimpleTitle( Localization::Words word );
+		static boost::shared_ptr<GUI_Text> SimpleTitle( Localization::Words word, Style style );
 
 		GUI_Text();
-		std::shared_ptr<GUI_Text> GUI_Text_Construct();
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct();
 
 		GUI_Text( Localization::Words word, Vector2 pos );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos );
 
 		GUI_Text( Localization::Words word, Vector2 pos, bool centered );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, bool centered );
 
 		GUI_Text( Localization::Words word, Vector2 pos, Style style );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( Localization::Words word, Vector2 pos, Style style );
 
 		GUI_Text( const std::wstring &text, Vector2 pos );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos );
 
 		GUI_Text( const std::wstring &text, Vector2 pos, bool centered );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered );
 
-		GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font );
-		std::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const std::shared_ptr<EzFont> &font );
+		GUI_Text( const std::wstring &text, Vector2 pos, bool centered, const boost::shared_ptr<EzFont> &font );
+		boost::shared_ptr<GUI_Text> GUI_Text_Construct( const std::wstring &text, Vector2 pos, bool centered, const boost::shared_ptr<EzFont> &font );
 
-		void Init( Localization::Words word, Vector2 pos, bool centered, Style style, const std::shared_ptr<EzFont> &font );
+		void Init( Localization::Words word, Vector2 pos, bool centered, Style style, const boost::shared_ptr<EzFont> &font );
 
-		void Init( const std::wstring &text, Vector2 pos, bool centered, Style style, const std::shared_ptr<EzFont> &font );
+		void Init( const std::wstring &text, Vector2 pos, bool centered, Style style, const boost::shared_ptr<EzFont> &font );
 
 	
-		virtual std::shared_ptr<EzText> MakeText( Localization::Words word, bool centered, const std::shared_ptr<EzFont> &font );
+		virtual boost::shared_ptr<EzText> MakeText( Localization::Words word, bool centered, const boost::shared_ptr<EzFont> &font );
 
-		virtual std::shared_ptr<EzText> MakeText( const std::wstring &text, bool centered, const std::shared_ptr<EzFont> &font );
+		virtual boost::shared_ptr<EzText> MakeText( const std::wstring &text, bool centered, const boost::shared_ptr<EzFont> &font );
 
 	
 		void Kill();

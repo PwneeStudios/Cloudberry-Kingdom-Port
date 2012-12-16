@@ -15,10 +15,10 @@ namespace CloudberryKingdom
 		struct StartTestProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			StartTestProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			StartTestProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -27,10 +27,10 @@ namespace CloudberryKingdom
 		struct MoveBlockAndKillProxy : public LambdaFunc<bool>
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			MoveBlockAndKillProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			MoveBlockAndKillProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			bool Apply();
 		};
@@ -39,34 +39,34 @@ namespace CloudberryKingdom
 		struct KillBobsHelper : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			KillBobsHelper( const std::shared_ptr<CustomHero_GUI> &chGui );
+			KillBobsHelper( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
 
 	
-		struct AddItemProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct AddItemProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			AddItemProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			AddItemProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		struct UpdateBaseHeroProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			UpdateBaseHeroProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			UpdateBaseHeroProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -75,10 +75,10 @@ namespace CloudberryKingdom
 		struct UpdateSizeHeroProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			UpdateSizeHeroProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			UpdateSizeHeroProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -87,10 +87,10 @@ namespace CloudberryKingdom
 		struct UpdateJumpHeroProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			UpdateJumpHeroProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			UpdateJumpHeroProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -99,10 +99,10 @@ namespace CloudberryKingdom
 		struct NextProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			NextProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			NextProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -111,10 +111,10 @@ namespace CloudberryKingdom
 		struct StartLevelProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			StartLevelProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			StartLevelProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -123,10 +123,10 @@ namespace CloudberryKingdom
 		struct ResetSlidersProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomHero_GUI> chGui;
+			boost::shared_ptr<CustomHero_GUI> chGui;
 
 		
-			ResetSlidersProxy( const std::shared_ptr<CustomHero_GUI> &chGui );
+			ResetSlidersProxy( const boost::shared_ptr<CustomHero_GUI> &chGui );
 
 			void Apply();
 		};
@@ -134,15 +134,15 @@ namespace CloudberryKingdom
 	
 		static BobPhsx::CustomPhsxData HeroPhsxData;
 
-		static std::shared_ptr<BobPhsx> Hero;
+		static boost::shared_ptr<BobPhsx> Hero;
 	
-		const std::shared_ptr<BobPhsxNormal> getNormalHero() const;
+		const boost::shared_ptr<BobPhsxNormal> getNormalHero() const;
 
 	
-		std::shared_ptr<CustomLevel_GUI> CustomLevel;
+		boost::shared_ptr<CustomLevel_GUI> CustomLevel;
 	
-		CustomHero_GUI( const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
-		std::shared_ptr<CustomHero_GUI> CustomHero_GUI_Construct( const std::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		CustomHero_GUI( const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
+		boost::shared_ptr<CustomHero_GUI> CustomHero_GUI_Construct( const boost::shared_ptr<CustomLevel_GUI> &CustomLevel );
 
 		virtual void OnAdd();
 
@@ -150,9 +150,9 @@ namespace CloudberryKingdom
 		virtual void ReleaseBody();
 
 	
-		std::shared_ptr<PhsxSlider> GravitySlider, MaxSpeedSlider, AccelSlider;
-		std::shared_ptr<PhsxSlider> MaxFallSpeedSlider, JumpLengthSlider, JumpAccelSlider, DoubleJumpLengthSlider, DoubleJumpAccelSlider, FrictionSlider, JetPackSlider, JetPackFuelSlider, NumJumpsSlider;
-		std::shared_ptr<PhsxSlider> SizeSlider, PhasedSizeSlider, PhasedGravitySlider, PhasePeriodSlider;
+		boost::shared_ptr<PhsxSlider> GravitySlider, MaxSpeedSlider, AccelSlider;
+		boost::shared_ptr<PhsxSlider> MaxFallSpeedSlider, JumpLengthSlider, JumpAccelSlider, DoubleJumpLengthSlider, DoubleJumpAccelSlider, FrictionSlider, JetPackSlider, JetPackFuelSlider, NumJumpsSlider;
+		boost::shared_ptr<PhsxSlider> SizeSlider, PhasedSizeSlider, PhasedGravitySlider, PhasePeriodSlider;
 		void MakeSliders();
 
 	
@@ -178,29 +178,29 @@ namespace CloudberryKingdom
 		void CreateGround();
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
-		void SetSuperHeader( const std::shared_ptr<EzText> &text );
+		void SetSuperHeader( const boost::shared_ptr<EzText> &text );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
-		std::shared_ptr<MenuList> MakeList();
+		boost::shared_ptr<MenuList> MakeList();
 
 	
-		virtual void AddItem( const std::shared_ptr<MenuItem> &item );
+		virtual void AddItem( const boost::shared_ptr<MenuItem> &item );
 
 	
-		std::shared_ptr<BobPhsx> Base, Jump, Size;
+		boost::shared_ptr<BobPhsx> Base, Jump, Size;
 
-		std::shared_ptr<MenuItem> Start, Back;
-		std::shared_ptr<EzText> HeroText;
-		std::shared_ptr<MenuList> BaseList, JumpList, SizeList;
-		std::shared_ptr<EzText> BaseHeader, JumpHeader, SizeHeader;
+		boost::shared_ptr<MenuItem> Start, Back;
+		boost::shared_ptr<EzText> HeroText;
+		boost::shared_ptr<MenuList> BaseList, JumpList, SizeList;
+		boost::shared_ptr<EzText> BaseHeader, JumpHeader, SizeHeader;
 
-		void SetListItemProperties( const std::shared_ptr<MenuItem> &item );
+		void SetListItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 		static int BaseListIndex;
 		static int SizeListIndex;
@@ -226,14 +226,14 @@ namespace CloudberryKingdom
 
 		void SetPos();
 
-		std::shared_ptr<MenuItem> A, B, X, Y;
+		boost::shared_ptr<MenuItem> A, B, X, Y;
 		void MakeOptionItems();
 
 		bool AdvancedAvailable();
 
 		void ResetAdvancedSliders();
 
-		std::shared_ptr<MenuItem> ResetButton;
+		boost::shared_ptr<MenuItem> ResetButton;
 
 		void Next();
 

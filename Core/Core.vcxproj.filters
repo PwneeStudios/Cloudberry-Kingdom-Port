@@ -177,6 +177,9 @@
     <ClInclude Include="include\Input\InputEnums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utility\Limits.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -297,6 +300,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Input\Keyboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

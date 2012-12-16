@@ -5,9 +5,9 @@
 struct Game
 {
 
-	std::shared_ptr<ContentManager> Content;
+	boost::shared_ptr<ContentManager> Content;
 
-	std::shared_ptr<ContentManager> getContent()
+	boost::shared_ptr<ContentManager> getContent()
 	{
 		return Content;
 	}

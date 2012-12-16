@@ -15,13 +15,13 @@ namespace CloudberryKingdom
 		};
 	
 		Listener();
-		std::shared_ptr<Listener> Listener_Construct();
-		Listener( ControllerButtons button, const std::shared_ptr<Lambda> &action );
-		std::shared_ptr<Listener> Listener_Construct( ControllerButtons button, const std::shared_ptr<Lambda> &action );
+		boost::shared_ptr<Listener> Listener_Construct();
+		Listener( ControllerButtons button, const boost::shared_ptr<Lambda> &action );
+		boost::shared_ptr<Listener> Listener_Construct( ControllerButtons button, const boost::shared_ptr<Lambda> &action );
 
 		Type MyType;
 
-		std::shared_ptr<Lambda> MyAction;
+		boost::shared_ptr<Lambda> MyAction;
 		int TriggeringPlayerIndex;
 
 		/// <summary>
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		virtual void Activate();
 
 		ControllerButtons MyButton;
-		std::shared_ptr<ButtonClass> MyButton2;
+		boost::shared_ptr<ButtonClass> MyButton2;
 	
 		virtual void MyPhsxStep();
 

@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 	struct LavaBlock : public BlockBase
 	{
 	
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 		virtual void MakeNew();
 
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		virtual void Reset( bool BoxesOnly );
 
 	
-		void CollisionCheck( const std::shared_ptr<Bob> &bob );
+		void CollisionCheck( const boost::shared_ptr<Bob> &bob );
 
 	
 		virtual void PhsxStep();
@@ -67,9 +67,9 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		virtual bool PreDecision( const std::shared_ptr<Bob> &bob );
+		virtual bool PreDecision( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

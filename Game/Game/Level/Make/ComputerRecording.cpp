@@ -5,17 +5,17 @@ namespace CloudberryKingdom
 
 	void ComputerRecording::InitializeStatics()
 	{
-		ComputerRecording::Pool = std::stack<std::shared_ptr<ComputerRecording> >();
+		ComputerRecording::Pool = std::stack<boost::shared_ptr<ComputerRecording> >();
 		ComputerRecording::PareDivider = 4;
 	}
 
 	// Statics
-	std::stack<std::shared_ptr<ComputerRecording> > ComputerRecording::Pool;
+	std::stack<boost::shared_ptr<ComputerRecording> > ComputerRecording::Pool;
 	int ComputerRecording::PareDivider;
 
 	void ComputerRecording::FillPool()
 	{
-		std::shared_ptr<ComputerRecording> record = std::make_shared<ComputerRecording>();
+		boost::shared_ptr<ComputerRecording> record = boost::make_shared<ComputerRecording>();
 		record->Init( 7000, false );
 		record->IsFromPool = true;
 		Pool.push( record );
@@ -23,24 +23,24 @@ namespace CloudberryKingdom
 
 	void ComputerRecording::InitPool()
 	{
-		Pool = std::stack<std::shared_ptr<ComputerRecording> >();
+		Pool = std::stack<boost::shared_ptr<ComputerRecording> >();
 		for ( int i = 0; i < 20; i++ )
 			FillPool();
 	}
 
-	std::shared_ptr<ComputerRecording> ComputerRecording::FromPool()
+	boost::shared_ptr<ComputerRecording> ComputerRecording::FromPool()
 	{
 		if ( Pool.empty() )
 			FillPool();
 
-		std::shared_ptr<ComputerRecording> popped = Pool.top();
+		boost::shared_ptr<ComputerRecording> popped = Pool.top();
 		Pool.pop();
 		popped->Clean();
 
 		return popped;
 	}
 
-	void ComputerRecording::ToPool( const std::shared_ptr<ComputerRecording> &record )
+	void ComputerRecording::ToPool( const boost::shared_ptr<ComputerRecording> &record )
 	{
 		Pool.push( record );
 	}
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 			AutoLocs[ i ] += shift;
 	}
 
-	void ComputerRecording::Write( const std::shared_ptr<BinaryWriter> &writer, int Length )
+	void ComputerRecording::Write( const boost::shared_ptr<BinaryWriter> &writer, int Length )
 	{
 		for ( int frame = 0; frame < Length; frame++ )
 		{
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void ComputerRecording::Read( const std::shared_ptr<BinaryReader> &reader, int Length )
+	void ComputerRecording::Read( const boost::shared_ptr<BinaryReader> &reader, int Length )
 	{
 		for ( int frame = 0; frame < Length; frame++ )
 		{

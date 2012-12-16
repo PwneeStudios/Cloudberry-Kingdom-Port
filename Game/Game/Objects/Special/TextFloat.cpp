@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = pos;
 		getCore()->Data.Velocity = Vector2(0, 8);
 
-		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
+		MyText = boost::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
 		MyText->setScale( .5f );
 		MyText->MyFloatColor = ( bColor( 228, 0, 69 ) ).ToVector4();
 		MyText->OutlineColor = Color::White.ToVector4();
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = pos;
 		getCore()->Data.Velocity = Vector2(0, 8);
 
-		MyText = std::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
+		MyText = boost::make_shared<EzText>( Text, Resources::Font_Grobold42, 1000.f, true, true );
 		MyText->setScale( .5f );
 		MyText->MyFloatColor = ( bColor( 228, 0, 69 ) ).ToVector4();
 		MyText->OutlineColor = Color::White.ToVector4();

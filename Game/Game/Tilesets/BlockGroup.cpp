@@ -7,28 +7,28 @@ namespace CloudberryKingdom
 
 	BlockGroup::BlockGroup()
 	{
-		Dict = std::map<int, std::vector<std::shared_ptr<PieceQuad> > >();
+		Dict = std::map<int, std::vector<boost::shared_ptr<PieceQuad> > >();
 	}
 
-	void BlockGroup::Add( const std::shared_ptr<PieceQuad> &piece )
+	void BlockGroup::Add( const boost::shared_ptr<PieceQuad> &piece )
 	{
 		Add( piece->Pillar_Width, piece );
 	}
 
-	void BlockGroup::Add( int width, const std::shared_ptr<PieceQuad> &piece )
+	void BlockGroup::Add( int width, const boost::shared_ptr<PieceQuad> &piece )
 	{
 		if ( Dict.find( width ) == Dict.end() )
-			Dict.insert( std::make_pair( width, std::vector<std::shared_ptr<PieceQuad> >() ) );
+			Dict.insert( std::make_pair( width, std::vector<boost::shared_ptr<PieceQuad> >() ) );
 
 		Dict[ width ].push_back( piece );
 	}
 
-	std::shared_ptr<PieceQuad> BlockGroup::Choose( int width )
+	boost::shared_ptr<PieceQuad> BlockGroup::Choose( int width )
 	{
 		return Dict[ SnapWidthUp( static_cast<float>( width ) ) ][ 0 ];
 	}
 
-	std::shared_ptr<PieceQuad> BlockGroup::Choose( int width, const std::shared_ptr<Rand> &rnd )
+	boost::shared_ptr<PieceQuad> BlockGroup::Choose( int width, const boost::shared_ptr<Rand> &rnd )
 	{
 		return ListExtension::Choose( Dict[ width ], rnd );
 	}

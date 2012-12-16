@@ -7,14 +7,14 @@ namespace CloudberryKingdom
 
 	void TitleGameData::InitializeStatics()
 	{
-		TitleGameData::Factory = std::make_shared<TitleFactory>();
+		TitleGameData::Factory = boost::make_shared<TitleFactory>();
 	}
 
 	// Statics
-	std::shared_ptr<GameFactory> TitleGameData::Factory;;
+	boost::shared_ptr<GameFactory> TitleGameData::Factory;;
 
 
-	std::shared_ptr<GameData> TitleFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> TitleFactory::Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return 0;
 	}
@@ -64,10 +64,10 @@ namespace CloudberryKingdom
 		ReturnToEvent();
 	}
 
-	std::shared_ptr<Level> TitleGameData::MakeLevel()
+	boost::shared_ptr<Level> TitleGameData::MakeLevel()
 	{
-		std::shared_ptr<Level> level = std::make_shared<Level>();
-		level->setMainCamera( std::make_shared<Camera>() );
+		boost::shared_ptr<Level> level = boost::make_shared<Level>();
+		level->setMainCamera( boost::make_shared<Camera>() );
 
 		level->TimeLimit = -1;
 
@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		level->CurPiece->CamStartPos = Center;
 
 		// Camera Zone
-		CamZone = std::static_pointer_cast<CameraZone>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
+		CamZone = boost::static_pointer_cast<CameraZone>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
 		CamZone->Init( Vector2(), Vector2( 100000, 100000 ) );
 		CamZone->Start = Center;
 		CamZone->End = Center;
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		Tools::TheGame->ShowMouse = true;
 	#endif
-		std::shared_ptr<Camera> cam = MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = MyLevel->getMainCamera();
 		cam->MyPhsxType = Camera_PhsxType_FIXED;
 
 		cam->FancyPos->RelVal = Vector2();

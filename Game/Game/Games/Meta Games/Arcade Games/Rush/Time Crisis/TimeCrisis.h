@@ -12,25 +12,25 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		
-			std::shared_ptr<Challenge_TimeCrisis> ch;
+			boost::shared_ptr<Challenge_TimeCrisis> ch;
 		
-			OnSwapLambda( const std::shared_ptr<Challenge_TimeCrisis> &ch );
+			OnSwapLambda( const boost::shared_ptr<Challenge_TimeCrisis> &ch );
 
-			void Apply( const std::shared_ptr<LevelSeedData> &data );
+			void Apply( const boost::shared_ptr<LevelSeedData> &data );
 		};
 	
-		static std::shared_ptr<Challenge_TimeCrisis> instance;
+		static boost::shared_ptr<Challenge_TimeCrisis> instance;
 	
-		const static std::shared_ptr<Challenge_TimeCrisis> &getInstance();
+		const static boost::shared_ptr<Challenge_TimeCrisis> &getInstance();
 
 	
 		Challenge_TimeCrisis();
 
 	
-		virtual std::shared_ptr<BobPhsx> GetHero( int i );
+		virtual boost::shared_ptr<BobPhsx> GetHero( int i );
 
 		virtual void PreStart_Tutorial( bool TemporarySkip );
 

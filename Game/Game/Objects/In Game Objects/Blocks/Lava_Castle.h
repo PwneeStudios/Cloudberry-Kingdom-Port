@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

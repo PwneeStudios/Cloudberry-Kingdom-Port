@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		Tools::PrevGamepadState;
 
 		Tools::gameTime = 0;
-		Tools::GlobalRnd = std::make_shared<Rand>( 0 );
+		Tools::GlobalRnd = boost::make_shared<Rand>( 0 );
 		Tools::EffectWad = 0;
 		Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
 		Tools::PaintEffect_SpriteBatch = 0;
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		Tools::DrawCount = 0;
 		Tools::PhsxCount = 0;
 		Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
-		Tools::SongList_Standard = std::vector<std::shared_ptr<EzSong> >();
+		Tools::SongList_Standard = std::vector<boost::shared_ptr<EzSong> >();
 		Tools::FreeCam = false;
 		Tools::DrawBoxes = false;
 		Tools::DrawGraphics = true;
@@ -118,27 +118,27 @@ namespace CloudberryKingdom
 	}
 
 	// Static variables
-	std::shared_ptr<AftermathData> Tools::CurrentAftermath;
+	boost::shared_ptr<AftermathData> Tools::CurrentAftermath;
 	bool Tools::IsMasochistic;
 	bool Tools::AutoLoop;
 	int Tools::AutoLoopDelay;
 	float Tools::_VolumeFade;
 
 	float Tools::CurSongVolume;
-	std::shared_ptr<WrappedFloat> Tools::SoundVolume, Tools::MusicVolume;
+	boost::shared_ptr<WrappedFloat> Tools::SoundVolume, Tools::MusicVolume;
 	bool Tools::FixedTimeStep;
 	bool Tools::WindowBorder;
-	std::shared_ptr<XnaGameClass> Tools::GameClass;
-	std::shared_ptr<CloudberryKingdomGame> Tools::TheGame;
+	boost::shared_ptr<XnaGameClass> Tools::GameClass;
+	boost::shared_ptr<CloudberryKingdomGame> Tools::TheGame;
 
 	std::vector<std::wstring> Tools::ButtonNames;
 	std::vector<std::wstring> Tools::DirNames;
-	std::shared_ptr<GameFactory> Tools::CurGameType;
-	std::shared_ptr<GameData> Tools::CurGameData;
-	std::shared_ptr<Level> Tools::CurLevel;
-	std::shared_ptr<Camera> Tools::DummyCamera;
+	boost::shared_ptr<GameFactory> Tools::CurGameType;
+	boost::shared_ptr<GameData> Tools::CurGameData;
+	boost::shared_ptr<Level> Tools::CurLevel;
+	boost::shared_ptr<Camera> Tools::DummyCamera;
 
-	std::shared_ptr<GameData> Tools::WorldMap, Tools::TitleGame;
+	boost::shared_ptr<GameData> Tools::WorldMap, Tools::TitleGame;
 	std::vector<int> Tools::VibrateTimes;
 	int Tools::DifficultyTypes;
 	int Tools::StyleTypes;
@@ -167,25 +167,25 @@ namespace CloudberryKingdom
 	std::vector<GamePadState> Tools::GamepadState;
 	std::vector<GamePadState> Tools::PrevGamepadState;
 
-	std::shared_ptr<GameTime> Tools::gameTime;
-	std::shared_ptr<Rand> Tools::GlobalRnd;
-	std::shared_ptr<EzEffectWad> Tools::EffectWad;
-	std::shared_ptr<EzEffect> Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
-	std::shared_ptr<Effect> Tools::PaintEffect_SpriteBatch;
-	std::shared_ptr<EzTextureWad> Tools::TextureWad;
-	std::shared_ptr<ContentManager> Tools::SoundContentManager;
-	std::shared_ptr<EzSoundWad> Tools::SoundWad, Tools::PrivateSoundWad;
-	std::shared_ptr<EzSongWad> Tools::SongWad;
-	std::shared_ptr<QuadDrawer> Tools::QDrawer;
-	std::shared_ptr<MainRender> Tools::Render;
-	std::shared_ptr<GraphicsDevice> Tools::Device;
-	std::shared_ptr<RenderTarget2D> Tools::DestinationRenderTarget;
+	boost::shared_ptr<GameTime> Tools::gameTime;
+	boost::shared_ptr<Rand> Tools::GlobalRnd;
+	boost::shared_ptr<EzEffectWad> Tools::EffectWad;
+	boost::shared_ptr<EzEffect> Tools::BasicEffect, Tools::NoTexture, Tools::CircleEffect, Tools::LightSourceEffect, Tools::HslEffect, Tools::HslGreenEffect, Tools::WindowEffect;
+	boost::shared_ptr<Effect> Tools::PaintEffect_SpriteBatch;
+	boost::shared_ptr<EzTextureWad> Tools::TextureWad;
+	boost::shared_ptr<ContentManager> Tools::SoundContentManager;
+	boost::shared_ptr<EzSoundWad> Tools::SoundWad, Tools::PrivateSoundWad;
+	boost::shared_ptr<EzSongWad> Tools::SongWad;
+	boost::shared_ptr<QuadDrawer> Tools::QDrawer;
+	boost::shared_ptr<MainRender> Tools::Render;
+	boost::shared_ptr<GraphicsDevice> Tools::Device;
+	boost::shared_ptr<RenderTarget2D> Tools::DestinationRenderTarget;
 	float Tools::t;
 	float Tools::dt;
 	int Tools::DrawCount;
 	int Tools::PhsxCount;
-	std::shared_ptr<EzSong> Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
-	std::vector<std::shared_ptr<EzSong> > Tools::SongList_Standard;
+	boost::shared_ptr<EzSong> Tools::Song_140mph, Tools::Song_Happy, Tools::Song_BlueChair, Tools::Song_Ripcurl, Tools::Song_Evidence, Tools::Song_GetaGrip, Tools::Song_House, Tools::Song_Nero, Tools::Song_FatInFire, Tools::Song_Heavens, Tools::Song_TidyUp, Tools::Song_WritersBlock;
+	std::vector<boost::shared_ptr<EzSong> > Tools::SongList_Standard;
 	bool Tools::FreeCam;
 	bool Tools::DrawBoxes;
 	bool Tools::DrawGraphics;
@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 	int Tools::_PhsxSpeed;
 	
 	bool Tools::ShowLoadingScreen;
-	std::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen;
+	boost::shared_ptr<ILoadingScreen> Tools::CurrentLoadingScreen;
 
 	float Tools::CurVolume;
 	
@@ -262,8 +262,8 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Implement log.
 
-		/*std::shared_ptr<System::IO::FileStream> stream = File->Open( _T( "dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
-		std::shared_ptr<StreamWriter> writer = std::make_shared<StreamWriter>( stream );
+		/*boost::shared_ptr<System::IO::FileStream> stream = File->Open( _T( "dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		boost::shared_ptr<StreamWriter> writer = boost::make_shared<StreamWriter>( stream );
 		writer->Write( dump );
 		writer->Close();
 		stream->Close();*/
@@ -291,7 +291,7 @@ namespace CloudberryKingdom
 #endif
 	}
 
-	void Tools::Write( const std::shared_ptr<Object> &obj )
+	void Tools::Write( const boost::shared_ptr<Object> &obj )
 	{
 #if defined(DEBUG)
 	std::cout << obj << std::endl;
@@ -337,14 +337,14 @@ namespace CloudberryKingdom
 		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Art") );
 	}
 
-	std::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
+	boost::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
 	{
-		std::shared_ptr<ObjectClass> SourceObject;
+		boost::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		/*std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
-		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		/*boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		reader->Close();
@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 
 		SourceObject->ConvertForSimple();
 
-		return std::make_shared<SimpleObject>( SourceObject );
+		return boost::make_shared<SimpleObject>( SourceObject );
 	}
 
 	const float &Tools::getVolumeFade()
@@ -371,17 +371,17 @@ namespace CloudberryKingdom
 		return CloudberryKingdomGame::GameVersion;
 	}
 
-	void Tools::AddToDo( const std::shared_ptr<Lambda> &todo )
+	void Tools::AddToDo( const boost::shared_ptr<Lambda> &todo )
 	{
 		TheGame->ToDo->Add( todo );
 	}
 
-	const std::shared_ptr<Camera> &Tools::getCurCamera()
+	const boost::shared_ptr<Camera> &Tools::getCurCamera()
 	{
 		if ( CurLevel == 0 )
 		{
 			if ( DummyCamera == 0 )
-				DummyCamera = std::make_shared<Camera>();
+				DummyCamera = boost::make_shared<Camera>();
 			return DummyCamera;
 		}
 		else
@@ -537,7 +537,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(WINDOWS)
-	std::wstring Tools::SantitizeOneLineString( std::wstring s, const std::shared_ptr<EzFont> &font )
+	std::wstring Tools::SantitizeOneLineString( std::wstring s, const boost::shared_ptr<EzFont> &font )
 	{
 		s = RemoveAfter( s, _T( "\n" ) );
 		s = RemoveAfter( s, _T( "\t" ) );
@@ -564,7 +564,7 @@ namespace CloudberryKingdom
 #endif
 
 #if ! defined(WINDOWS)
-	std::wstring Tools::SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font )
+	std::wstring Tools::SantitizeOneLineString( const std::wstring &s, const boost::shared_ptr<EzFont> &font )
 	{
 		return s;
 	}
@@ -592,12 +592,12 @@ namespace CloudberryKingdom
 			return path.substr( 0, FirstSlash );
 	}
 
-	std::shared_ptr<EzTexture> Tools::Texture( const std::wstring &name )
+	boost::shared_ptr<EzTexture> Tools::Texture( const std::wstring &name )
 	{
 		return TextureWad->FindByName( name );
 	}
 
-	std::shared_ptr<EzSound> Tools::Sound( const std::wstring &name )
+	boost::shared_ptr<EzSound> Tools::Sound( const std::wstring &name )
 	{
 		return SoundWad->FindByName( name );
 	}
@@ -626,9 +626,9 @@ namespace CloudberryKingdom
 		_PhsxSpeed = value;
 	}
 
-	void Tools::LoadBasicArt( const std::shared_ptr<ContentManager> &Content )
+	void Tools::LoadBasicArt( const boost::shared_ptr<ContentManager> &Content )
 	{
-		TextureWad = std::make_shared<EzTextureWad>();
+		TextureWad = boost::make_shared<EzTextureWad>();
 		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "White" ) ), _T( "White" ) );
 		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Circle" ) ), _T( "Circle" ) );
 		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Smooth" ) ), _T( "Smooth" ) );
@@ -713,10 +713,10 @@ namespace CloudberryKingdom
 		return files;
 	}
 
-	void Tools::LoadEffects( const std::shared_ptr<ContentManager> &Content, bool CreateNewWad )
+	void Tools::LoadEffects( const boost::shared_ptr<ContentManager> &Content, bool CreateNewWad )
 	{
 		if ( CreateNewWad )
-			EffectWad = std::make_shared<EzEffectWad>();
+			EffectWad = boost::make_shared<EzEffectWad>();
 
 		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BasicEffect" ) ), _T( "Basic" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/NoTexture" ) ), _T( "NoTexture" ) );
@@ -768,7 +768,7 @@ namespace CloudberryKingdom
 
 		Tools::ShowLoadingScreen = true;
 
-		CurrentLoadingScreen = std::make_shared<LoadingScreen>();
+		CurrentLoadingScreen = boost::make_shared<LoadingScreen>();
 
 		CurrentLoadingScreen->Start();
 	}
@@ -795,7 +795,7 @@ namespace CloudberryKingdom
 		line = Tools::RemoveComment_SlashStyle( line );
 
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-		//std::shared_ptr<std::vector<void*> > bits = line.Split( L' ', L'\t' )->ToList();
+		//boost::shared_ptr<std::vector<void*> > bits = line.Split( L' ', L'\t' )->ToList();
 		
 		// FIXME: Fix this monstrosity.
 		std::vector<std::wstring> temp_bits = Split( line, L' ' );
@@ -806,19 +806,19 @@ namespace CloudberryKingdom
 			AddRange( bits, more_bits );
 		}
 
-		Tools::RemoveAll( bits, std::static_pointer_cast<LambdaFunc_1<std::wstring, bool> >( std::make_shared<RemoveBitsLambda>() ) );
+		Tools::RemoveAll( bits, boost::static_pointer_cast<LambdaFunc_1<std::wstring, bool> >( boost::make_shared<RemoveBitsLambda>() ) );
 
 		return bits;
 	}
 
-	std::vector<std::wstring> Tools::GetBitsFromReader( const std::shared_ptr<StreamReader> &reader )
+	std::vector<std::wstring> Tools::GetBitsFromReader( const boost::shared_ptr<StreamReader> &reader )
 	{
 		return GetBitsFromLine( reader->ReadLine() );
 	}
 
-	/*std::shared_ptr<Object> Tools::ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader )
+	/*boost::shared_ptr<Object> Tools::ReadFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamReader> &reader )
 	{
-		std::shared_ptr<std::wstring> line = reader->ReadLine();
+		boost::shared_ptr<std::wstring> line = reader->ReadLine();
 		while ( line != 0 )
 		{
 			std::vector<std::wstring> bits = Tools::GetBitsFromLine( line );
@@ -838,21 +838,21 @@ namespace CloudberryKingdom
 					if ( info->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 					{
 						WasReadable = true;
-						std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( info->GetValue( obj ) );
+						boost::shared_ptr<IReadWrite> rw = boost::static_pointer_cast<IReadWrite>( info->GetValue( obj ) );
 						rw->Read( reader );
 						info->SetValue( obj, rw );
 					}
 					else
 					// List of IReadWrites
 					{
-						std::shared_ptr<Type> type = info->FieldType;
+						boost::shared_ptr<Type> type = info->FieldType;
 						if ( type->IsGenericType && type->GetGenericTypeDefinition() == std::vector<*>::typeid )
 						{
 							WasReadable = true;
 
-							std::shared_ptr<System::Collections::IList> list = std::dynamic_pointer_cast<System::Collections::IList>( info->GetValue( obj ) );
+							boost::shared_ptr<System::Collections::IList> list = boost::dynamic_pointer_cast<System::Collections::IList>( info->GetValue( obj ) );
 
-							std::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
+							boost::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
 							if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
 								ReadList( reader, list, itemType );
 						}
@@ -891,9 +891,9 @@ namespace CloudberryKingdom
 		return obj;
 	}*/
 
-	/*void Tools::ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType )
+	/*void Tools::ReadList( const boost::shared_ptr<StreamReader> &reader, const boost::shared_ptr<System::Collections::IList> &list, const boost::shared_ptr<Type> &itemType )
 	{
-		std::shared_ptr<std::wstring> line = reader->ReadLine();
+		boost::shared_ptr<std::wstring> line = reader->ReadLine();
 		bool ReadingList = true;
 
 		while ( line != 0 && ReadingList )
@@ -906,7 +906,7 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "Add":
 			if ( bits[ 0 ] == _T( "Add" ) )
 			{
-					std::shared_ptr<ConstructorInfo> constructor;
+					boost::shared_ptr<ConstructorInfo> constructor;
 					if ( bits.size() > 1 )
 					{
 						//var type = Type.GetType("CloudberryKingdom." + bits[1]);
@@ -917,10 +917,10 @@ namespace CloudberryKingdom
 					else
 						constructor = itemType->GetConstructor( Type_EMPTY_TYPES );
 
-					std::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
+					boost::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
 					//ReadFields(newobj, reader);
-					if ( std::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
-						( std::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
+					if ( boost::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
+						( boost::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
 					else
 						ReadFields( newobj, reader );
 					list->Add( newobj );
@@ -941,7 +941,7 @@ namespace CloudberryKingdom
 		}
 	}*/
 
-	/*void Tools::WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... )
+	/*void Tools::WriteFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamWriter> &writer, ... )
 	{
 		WriteRecursiveDepth++;
 		std::wstring WhiteSpace = _T( "" );
@@ -997,7 +997,7 @@ namespace CloudberryKingdom
 				// EzTexture
 				else if ( ( *info )->FieldType == EzTexture::typeid )
 				{
-					std::shared_ptr<EzTexture> texture = std::static_pointer_cast<EzTexture>( ( *info )->GetValue( obj ) );
+					boost::shared_ptr<EzTexture> texture = boost::static_pointer_cast<EzTexture>( ( *info )->GetValue( obj ) );
 					if ( texture == 0 )
 						continue;
 					else
@@ -1007,7 +1007,7 @@ namespace CloudberryKingdom
 				// EzEffect
 				else if ( ( *info )->FieldType == EzEffect::typeid )
 				{
-					std::shared_ptr<EzEffect> effect = std::static_pointer_cast<EzEffect>( ( *info )->GetValue( obj ) );
+					boost::shared_ptr<EzEffect> effect = boost::static_pointer_cast<EzEffect>( ( *info )->GetValue( obj ) );
 					if ( effect == 0 )
 						continue;
 					else
@@ -1034,7 +1034,7 @@ namespace CloudberryKingdom
 				}
 				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
 				{
-					std::shared_ptr<IReadWrite> rw = std::static_pointer_cast<IReadWrite>( ( *info )->GetValue( obj ) );
+					boost::shared_ptr<IReadWrite> rw = boost::static_pointer_cast<IReadWrite>( ( *info )->GetValue( obj ) );
 					writer->WriteLine( WhiteSpace + ( *info )->Name );
 					rw->Write( writer );
 					writer->WriteLine( WhiteSpace + _T( "End" ) );
@@ -1043,10 +1043,10 @@ namespace CloudberryKingdom
 				else
 				{
 					// List of IReadWrites
-					std::shared_ptr<Type> type = ( *info )->FieldType;
+					boost::shared_ptr<Type> type = ( *info )->FieldType;
 					if ( type->IsGenericType && type->GetGenericTypeDefinition() == std::vector<*>::typeid )
 					{
-						std::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
+						boost::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
 						if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
 						{
 							writer->WriteLine( WhiteSpace + ( *info )->Name );
@@ -1227,7 +1227,7 @@ namespace CloudberryKingdom
 		return clr;
 	}
 
-	std::shared_ptr<EzSound> Tools::ParseToEzSound( const std::wstring &str )
+	boost::shared_ptr<EzSound> Tools::ParseToEzSound( const std::wstring &str )
 	{
 		int LineIndex = str.find( _T( "|" ) );
 
@@ -1238,9 +1238,9 @@ namespace CloudberryKingdom
 		return NewSound( ParseToFileName( Component1 ), ParseFloat( Component2 ) );
 	}
 
-	std::shared_ptr<EzSound> Tools::NewSound( const std::wstring &name, float volume )
+	boost::shared_ptr<EzSound> Tools::NewSound( const std::wstring &name, float volume )
 	{
-		std::shared_ptr<EzSound> snd = std::make_shared<EzSound>();
+		boost::shared_ptr<EzSound> snd = boost::make_shared<EzSound>();
 		snd->sound = Tools::SoundWad->FindByName( name )->sound;
 		snd->DefaultVolume = volume;
 		snd->MaxInstances = 4;
@@ -1266,7 +1266,7 @@ namespace CloudberryKingdom
 	}*/
 
 /*template<typename T>
-	std::shared_ptr<IEnumerable<T> > Tools::GetValues()
+	boost::shared_ptr<IEnumerable<T> > Tools::GetValues()
 	{
 		return ( from x in T::typeid::GetFields( BindingFlags::Static | BindingFlags::Public ) select ( T )x::GetValue( 0 ) );
 	}*/
@@ -1287,12 +1287,12 @@ namespace CloudberryKingdom
 			Tools::setPhsxSpeed( 0 );
 	}
 
-	void Tools::MoveTo( const std::shared_ptr<ObjectBase> &obj, Vector2 pos )
+	void Tools::MoveTo( const boost::shared_ptr<ObjectBase> &obj, Vector2 pos )
 	{
 		obj->Move( pos - obj->getCore()->Data.Position );
 	}
 
-	Vector2 Tools::ToScreenCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 ZoomMod )
+	Vector2 Tools::ToScreenCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 ZoomMod )
 	{
 		Vector2 loc = Vector2();
 		loc.X = ( pos.X - cam->Data.Position.X ) / cam->AspectRatio * cam->getZoom().X * ZoomMod.X;
@@ -1307,22 +1307,22 @@ namespace CloudberryKingdom
 		return loc;
 	}
 
-	Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
+	Vector2 Tools::ToGUICoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam )
 	{
 		return ToWorldCoordinates( pos, cam, Vector2( .001f,.001f ) );
 	}
 
-	Vector2 Tools::ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
+	Vector2 Tools::ToGUICoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 zoom )
 	{
 		return ToWorldCoordinates( pos, cam, zoom );
 	}
 
-	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam )
+	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam )
 	{
 		return ToWorldCoordinates( pos, cam, cam->getZoom() );
 	}
 
-	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom )
+	Vector2 Tools::ToWorldCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 zoom )
 	{
 		pos.X -= cam->ScreenWidth / 2;
 		pos.Y -= cam->ScreenHeight / 2;
@@ -1391,7 +1391,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Tools::DrawText( Vector2 pos, const std::shared_ptr<Camera> &cam, const std::wstring &str, const std::shared_ptr<SpriteFont> &font )
+	void Tools::DrawText( Vector2 pos, const boost::shared_ptr<Camera> &cam, const std::wstring &str, const boost::shared_ptr<SpriteFont> &font )
 	{
 		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2(1) );
 
@@ -1400,7 +1400,7 @@ namespace CloudberryKingdom
 
 	void Tools::SetDefaultEffectParams( float AspectRatio )
 	{
-		for ( std::vector<std::shared_ptr<EzEffect> >::const_iterator fx = EffectWad->EffectList.begin(); fx != EffectWad->EffectList.end(); ++fx )
+		for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = EffectWad->EffectList.begin(); fx != EffectWad->EffectList.end(); ++fx )
 		{
 			( *fx )->xCameraAspect->SetValue( AspectRatio );
 			( *fx )->effect->CurrentTechnique = ( *fx )->Simplest;
@@ -1521,7 +1521,7 @@ namespace CloudberryKingdom
 		//return "x" + num.ToString();
 	}
 
-	void Tools::EnsureBounds_X( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
+	void Tools::EnsureBounds_X( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
 	{
 		float TR_Bound = obj->TR_Bound().X;
 		if ( TR_Bound > TR.X )
@@ -1534,7 +1534,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Tools::EnsureBounds_Y( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
+	void Tools::EnsureBounds_Y( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
 	{
 		float TR_Bound = obj->TR_Bound().Y;
 		if ( TR_Bound > TR.Y )
@@ -1547,7 +1547,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Tools::EnsureBounds( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
+	void Tools::EnsureBounds( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL )
 	{
 		Vector2 TR_Bound = obj->TR_Bound();
 		Vector2 BL_Bound = obj->BL_Bound();

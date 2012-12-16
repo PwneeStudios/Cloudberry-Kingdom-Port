@@ -5,25 +5,25 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<TileSet> TileSets::Load_Cloud()
+	boost::shared_ptr<TileSet> TileSets::Load_Cloud()
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Cloud" ) );
-		std::shared_ptr<CloudberryKingdom::TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<CloudberryKingdom::TileSet> t = GetOrMakeTileset( _T( "Cloud" ) );
+		boost::shared_ptr<CloudberryKingdom::TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
 	t->Name = _T( "cloud" );
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_cloud_50" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_cloud_100" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_cloud_150" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_cloud_250" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_cloud_300" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_cloud_600" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_cloud_1000" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_cloud_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_cloud_100" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_cloud_150" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_cloud_250" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_cloud_300" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_cloud_600" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_cloud_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -550.f, 135.f, 1450.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -15.f, 670.f, 1450.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -550.f, 135.f, 1450.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_cloud" ), -15.f, 670.f, 1450.f ) );
 
 	info->ShiftStartDoor = 30;
 	info->ShiftStartBlock = Vector2( 120, 0 );
@@ -51,10 +51,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( _T( "fblock_cloud" ), _T( "fblock_cloud" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 103, _T( "fblock_cloud" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, _T( "fblock_cloud" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( _T( "Bouncy_cloud" ), _T( "Bouncy_cloud" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_cloud" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_cloud" ), -6.f, 6.f, 13.f ) );
 
 	sprite_anim( _T( "flame_cloud" ), _T( "firespinner_flame_cloud" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_cloud" ) );
@@ -70,20 +70,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_cloud" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_cloud_190" ), -4.f, 13.f, 10.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_cloud_135" ), -4.f, 4.f, 10.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_cloud_80" ), -1.f, 1.f, 2.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_cloud_40" ), -1.f, 1.f, 2.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_cloud_190" ), -4.f, 13.f, 10.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_cloud_135" ), -4.f, 4.f, 10.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_cloud_80" ), -1.f, 1.f, 2.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_cloud_40" ), -1.f, 1.f, 2.f ) );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
 
 	sprite_anim( _T( "Serpent_Cloud" ), _T( "Serpent_Cloud" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Cloud" ) );
@@ -155,10 +155,10 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::Load_Castle()
+	boost::shared_ptr<TileSet> TileSets::Load_Castle()
 	{
-		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Castle" ) );
-		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Castle" ) );
+		boost::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -166,26 +166,26 @@ namespace CloudberryKingdom
 
 	t->HasCeiling = true;
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_castle_50" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_castle_100" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_castle_150" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_castle_250" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_castle_300" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_castle_600" ), -15.f, 15.f, 1.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_castle_1000" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_castle_50" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_castle_100" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_castle_150" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_castle_250" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_castle_300" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_castle_600" ), -15.f, 15.f, 1.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_castle_1000" ), -15.f, 15.f, 1.f ) );
 
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_castle_50" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_castle_100" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_castle_150" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_castle_250" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_castle_300" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_castle_600" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_castle_1000" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_castle_50" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_castle_100" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_castle_150" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_castle_250" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_castle_300" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_castle_600" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_castle_1000" ), -20.f, 20.f, 0.f, true ) );
 
 	//t.StartBlock.Add(new PieceQuad(400, "wall_castle", -670, 15, 1407));
 	//t.EndBlock.Add(new PieceQuad(400, "wall_castle", -15, 670, 1407));
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_castle" ), -950.f, 15.f, 1670.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_castle" ), -45.f, 920.f, 1670.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_castle" ), -950.f, 15.f, 1670.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_castle" ), -45.f, 920.f, 1670.f ) );
 
 	info->ShiftStartDoor = 0;
 	info->ShiftStartBlock = Vector2( 100, 0 );
@@ -218,12 +218,12 @@ namespace CloudberryKingdom
 	info->Lasers->Icon->Sprite = TextureOrAnim::Get( _T( "Icon_Laser" ) );
 
 	sprite_anim( _T( "fblock_castle" ), _T( "fblock_castle" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 103, _T( "fblock_castle" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, _T( "fblock_castle" ), -3.f, 3.f, 2.f ) );
 	info->FallingBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "fblock_castle" ) );
 	info->FallingBlocks->Icon->Size = Vector2( 40, -1 );
 
 	sprite_anim( _T( "Bouncy_castle" ), _T( "Bouncy_castle" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_castle" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_castle" ), -6.f, 6.f, 13.f ) );
 	info->BouncyBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "Bouncy_Castle" ) );
 
 	sprite_anim( _T( "flame_castle" ), _T( "firespinner_flame_castle_v1" ), 1, 4, 6 );
@@ -243,26 +243,26 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "Ghostblock_Castle" ) );
 	info->GhostBlocks->Icon->Size = Vector2( 40, -1 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_castle_190" ), -1.f, 1.f, 25.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_castle_135" ), -1.f, 1.f, 25.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_castle_80" ), -1.f, 1.f, 5.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_castle_40" ), -1.f, 1.f, 5.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_castle_190" ), -1.f, 1.f, 25.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_castle_135" ), -1.f, 1.f, 25.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_castle_80" ), -1.f, 1.f, 5.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_castle_40" ), -1.f, 1.f, 5.f ) );
 	info->MovingBlocks->Icon->Sprite = TextureOrAnim::Get( _T( "MovingBlock_Castle_40" ) );
 	info->MovingBlocks->Icon->Size = Vector2( 40, -1 );
-	info->MovingBlocks->Icon_Big = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
+	info->MovingBlocks->Icon_Big = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>() );
 	info->MovingBlocks->Icon_Big->Sprite = TextureOrAnim::Get( _T( "MovingBlock_Castle_135" ) );
 	info->MovingBlocks->Icon_Big->Size = Vector2( 40, -1 );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
 	info->Elevators->Icon->Sprite = TextureOrAnim::Get( _T( "Elevator_Castle_80" ) );
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
 	//info.Pendulums.Icon.Sprite = "Elevator_Castle_80";
 	info->Pendulums->Icon->Sprite = TextureOrAnim::Get( _T( "Pendulum_Icon_Castle" ) );
 
@@ -341,25 +341,25 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::Load_Sea()
+	boost::shared_ptr<TileSet> TileSets::Load_Sea()
 	{
-		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Sea" ) );
-		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Sea" ) );
+		boost::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
 	t->Name = _T( "sea" );
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_sea_50" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_sea_100" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_sea_150" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_sea_250" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_sea_300" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_sea_600" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_sea_1000" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_sea_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_sea_100" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_sea_150" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_sea_250" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_sea_300" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_sea_600" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_sea_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_sea" ), -670.f, 15.f, 1420.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_sea" ), -55.f, 630.f, 1420.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_sea" ), -670.f, 15.f, 1420.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_sea" ), -55.f, 630.f, 1420.f ) );
 
 	info->ShiftStartDoor = -140;
 	info->ShiftStartBlock = Vector2( 320, 0 );
@@ -387,10 +387,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( _T( "fblock_sea" ), _T( "fblock_sea" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 110, _T( "fblock_sea" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, _T( "fblock_sea" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( _T( "Bouncy_sea" ), _T( "Bouncy_Cloud" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_sea" ), -6.f, 6.f, 13.f, true) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_sea" ), -6.f, 6.f, 13.f, true) );
 
 	sprite_anim( _T( "flame_Sea" ), _T( "firespinner_flame_Sea" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_Sea" ) );
@@ -406,20 +406,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_sea" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_sea_190" ), -1.f, 1.f, 12.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_sea_135" ), -1.f, 1.f, 12.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_sea_80" ), -1.f, 1.f, 4.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_sea_40" ), -1.f, 1.f, 4.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_sea_190" ), -1.f, 1.f, 12.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_sea_135" ), -1.f, 1.f, 12.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_sea_80" ), -1.f, 1.f, 4.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_sea_40" ), -1.f, 1.f, 4.f ) );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
 
 	sprite_anim( _T( "Serpent_Sea" ), _T( "Serpent_Sea" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Sea" ) );
@@ -488,25 +488,25 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::Load_Hills()
+	boost::shared_ptr<TileSet> TileSets::Load_Hills()
 	{
-		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Hills" ) );
-		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Hills" ) );
+		boost::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
 	t->Name = _T( "hills" );
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_hills_50" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_hills_100" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_hills_150" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_hills_250" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_hills_300" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_hills_600" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_hills_1000" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_hills_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_hills_100" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_hills_150" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_hills_250" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_hills_300" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_hills_600" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_hills_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_hills" ), -880.f, 40.f, 1650.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_hills" ), -40.f, 880.f, 1650.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_hills" ), -880.f, 40.f, 1650.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_hills" ), -40.f, 880.f, 1650.f ) );
 
 	info->ShiftStartDoor = -140;
 	info->ShiftStartBlock = Vector2( 200, 0 );
@@ -534,10 +534,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( _T( "fblock_hills" ), _T( "fblock_hills" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 110, _T( "fblock_hills" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, _T( "fblock_hills" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( _T( "Bouncy_hills" ), _T( "Bouncy_hills" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_hills" ), -15.f, 15.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_hills" ), -15.f, 15.f, 13.f ) );
 
 	sprite_anim( _T( "flame_Hills" ), _T( "firespinner_flame_Hills" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_Hills" ) );
@@ -553,20 +553,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_hills" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_hills_190" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_hills_135" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_hills_80" ), -1.f, 1.f, 3.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_hills_40" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_hills_190" ), -1.f, 1.f, 7.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_hills_135" ), -1.f, 1.f, 7.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_hills_80" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_hills_40" ), -1.f, 1.f, 3.f ) );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
 
 	sprite_anim( _T( "Serpent_Hills" ), _T( "Serpent_Castle" ), 1, 2, 5 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Hills" ) );
@@ -631,25 +631,25 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::Load_Forest()
+	boost::shared_ptr<TileSet> TileSets::Load_Forest()
 	{
-		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Forest" ) );
-		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Forest" ) );
+		boost::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
 	t->Name = _T( "forest" );
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_forest_50" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_forest_100" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_forest_150" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_forest_250" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_forest_300" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_forest_600" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_forest_1000" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_forest_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_forest_100" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_forest_150" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_forest_250" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_forest_300" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_forest_600" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_forest_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_forest" ), -670.f, 15.f, 1500.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_forest" ), -15.f, 670.f, 1500.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_forest" ), -670.f, 15.f, 1500.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_forest" ), -15.f, 670.f, 1500.f ) );
 
 	info->ShiftStartDoor = 25;
 	info->ShiftStartBlock = Vector2( 50, 0 );
@@ -677,10 +677,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( _T( "fblock_forest" ), _T( "fblock_forest" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 103, _T( "fblock_forest" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, _T( "fblock_forest" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( _T( "Bouncy_Forest" ), _T( "Bouncy_Forest" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_Forest" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_Forest" ), -6.f, 6.f, 13.f ) );
 
 	sprite_anim( _T( "flame_forest" ), _T( "firespinner_flame_forest" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_forest" ) );
@@ -696,21 +696,21 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_forest_1" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_forest_190_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 150, _T( "movingblock_forest_150" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_forest_135_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_forest_80_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_forest_40_v2" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_forest_190_v2" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 150, _T( "movingblock_forest_150" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_forest_135_v2" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_forest_80_v2" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_forest_40_v2" ), -1.f, 1.f, 1.f ) );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
 
 	sprite_anim( _T( "Serpent_Forest" ), _T( "Serpent_Forest" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Forest" ) );
@@ -787,10 +787,10 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::Load_Cave()
+	boost::shared_ptr<TileSet> TileSets::Load_Cave()
 	{
-		std::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Cave" ) );
-		std::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
+		boost::shared_ptr<TileSet> t = GetOrMakeTileset( _T( "Cave" ) );
+		boost::shared_ptr<TileSetInfo> info = t->MyTileSetInfo;
 
 		t->_Start();
 
@@ -798,21 +798,21 @@ namespace CloudberryKingdom
 
 	t->HasCeiling = true;
 
-	t->Pillars->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_cave_50" ), -15.f, 15.f, 3.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_cave_100" ), -15.f, 15.f, 12.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_cave_150" ), -15.f, 15.f, 0.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_cave_250" ), -15.f, 15.f, 0.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_cave_300" ), -15.f, 15.f, 0.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_cave_600" ), -15.f, 15.f, 0.f ) );
-	t->Pillars->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_cave_1000" ), -15.f, 15.f, 0.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_cave_50" ), -15.f, 15.f, 3.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_cave_100" ), -15.f, 15.f, 12.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_cave_150" ), -15.f, 15.f, 0.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_cave_250" ), -15.f, 15.f, 0.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_cave_300" ), -15.f, 15.f, 0.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_cave_600" ), -15.f, 15.f, 0.f ) );
+	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_cave_1000" ), -15.f, 15.f, 0.f ) );
 
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 50, _T( "pillar_cave_50" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 100, _T( "pillar_cave_100" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 150, _T( "pillar_cave_150" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 250, _T( "pillar_cave_250" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 300, _T( "pillar_cave_300" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 600, _T( "pillar_cave_600" ), -20.f, 20.f, 0.f, true ) );
-	t->Ceilings->Add( std::make_shared<PieceQuad>( 1000, _T( "pillar_cave_1000" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 50, _T( "pillar_cave_50" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 100, _T( "pillar_cave_100" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 150, _T( "pillar_cave_150" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 250, _T( "pillar_cave_250" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 300, _T( "pillar_cave_300" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 600, _T( "pillar_cave_600" ), -20.f, 20.f, 0.f, true ) );
+	t->Ceilings->Add( boost::make_shared<PieceQuad>( 1000, _T( "pillar_cave_1000" ), -20.f, 20.f, 0.f, true ) );
 
 	//t.Pillars.Add(new PieceQuad(50, "pillar_cave_50_v3", -15, 15, 3));
 	//t.Pillars.Add(new PieceQuad(100, "pillar_cave_100_v3", -15, 15, 12));
@@ -830,8 +830,8 @@ namespace CloudberryKingdom
 	//t.Ceilings.Add(new PieceQuad(600, "pillar_cave_600_v3", -20, 20, 0, true));
 	//t.Ceilings.Add(new PieceQuad(1000, "pillar_cave_1000_v3", -20, 20, 0, true));
 
-	t->StartBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cave" ), -650.f, 120.f, 1548.f ) );
-	t->EndBlock->Add( std::make_shared<PieceQuad>( 400, _T( "wall_cave" ), -34.f, 736.f, 1548.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_cave" ), -650.f, 120.f, 1548.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, _T( "wall_cave" ), -34.f, 736.f, 1548.f ) );
 
 	info->ShiftStartDoor = -180;
 	info->ShiftStartBlock = Vector2( 300, 0 );
@@ -860,10 +860,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( _T( "fblock_cave" ), _T( "fblock_cave" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( std::make_shared<PieceQuad>( 103, _T( "fblock_cave" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, _T( "fblock_cave" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( _T( "Bouncy_cave" ), _T( "Bouncy_cave" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( std::make_shared<PieceQuad>( 124, _T( "bouncy_cave" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, _T( "bouncy_cave" ), -6.f, 6.f, 13.f ) );
 
 	sprite_anim( _T( "flame_cave" ), _T( "firespinner_flame_cloud" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( _T( "flame_cave" ) );
@@ -879,24 +879,24 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( _T( "ghostblock_cave" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 190, _T( "movingblock_cave_190" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 135, _T( "movingblock_cave_135" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 80, _T( "movingblock_cave_80" ), -1.f, 1.f, 3.f ) );
-	info->MovingBlocks->Group->Add( std::make_shared<PieceQuad>( 40, _T( "movingblock_cave_40" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "movingblock_cave_190" ), -1.f, 1.f, 7.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "movingblock_cave_135" ), -1.f, 1.f, 7.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "movingblock_cave_80" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "movingblock_cave_40" ), -1.f, 1.f, 3.f ) );
 
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
 	//info.Elevators.Group.Add(40, "Cave_40_v2", -1, 1, 1));
 	//info.Elevators.Group.Add(80, "Cave_80_v2", -1, 1, 1));
 	//info.Elevators.Group.Add(135, "Cave_135_v2", -1, 1, 1));
 	//info.Elevators.Group.Add(190, "Cave_190_v2", -1, 1, 1));
 
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 40, _T( "Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 80, _T( "Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 135, _T( "Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( std::make_shared<PieceQuad>( 190, _T( "Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, _T( "Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, _T( "Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, _T( "Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, _T( "Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
 
 	sprite_anim( _T( "Serpent_Cave" ), _T( "Serpent_Cloud" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( _T( "Serpent_Cave" ) );
@@ -975,13 +975,13 @@ namespace CloudberryKingdom
 		return t;
 	}
 
-	std::shared_ptr<TileSet> TileSets::None, TileSets::Random;
-	std::shared_ptr<TileSet> TileSets::DefaultTileSet;
-	std::vector<std::shared_ptr<TileSet> > TileSets::TileList;
-	std::map<int, std::shared_ptr<TileSet> > TileSets::GuidLookup;
-	std::map<std::wstring, std::shared_ptr<TileSet> > TileSets::NameLookup, TileSets::PathLookup;
+	boost::shared_ptr<TileSet> TileSets::None, TileSets::Random;
+	boost::shared_ptr<TileSet> TileSets::DefaultTileSet;
+	std::vector<boost::shared_ptr<TileSet> > TileSets::TileList;
+	std::map<int, boost::shared_ptr<TileSet> > TileSets::GuidLookup;
+	std::map<std::wstring, boost::shared_ptr<TileSet> > TileSets::NameLookup, TileSets::PathLookup;
 
-	void TileSets::AddTileSet( const std::shared_ptr<TileSet> &tileset )
+	void TileSets::AddTileSet( const boost::shared_ptr<TileSet> &tileset )
 	{
 		TileList.push_back( tileset );
 
@@ -1019,15 +1019,15 @@ namespace CloudberryKingdom
 
 	void TileSets::LoadTileSet( const std::wstring &path )
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> tileset = GetOrMakeTileset( path );
+		boost::shared_ptr<CloudberryKingdom::TileSet> tileset = GetOrMakeTileset( path );
 
 		tileset->Read( path );
 		AddTileSet( tileset );
 	}
 
-	std::shared_ptr<TileSet> TileSets::GetOrMakeTileset( const std::wstring &path )
+	boost::shared_ptr<TileSet> TileSets::GetOrMakeTileset( const std::wstring &path )
 	{
-		std::shared_ptr<TileSet> tileset;
+		boost::shared_ptr<TileSet> tileset;
 		if ( PathLookup.find( path ) != PathLookup.end() )
 		{
 			tileset = PathLookup[ path ];
@@ -1035,7 +1035,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			tileset = std::make_shared<TileSet>();
+			tileset = boost::make_shared<TileSet>();
 
 			// Add the tileset to Freeplay
 			CustomLevel_GUI::FreeplayTilesets.push_back( tileset );
@@ -1051,9 +1051,9 @@ namespace CloudberryKingdom
 
 	void TileSets::sprite_anim( const std::wstring &name, const std::wstring &texture_root, int start_frame, int end_frame, int frame_length, bool reverse_at_end )
 	{
-		std::shared_ptr<AnimationData_Texture> sprite_anim = 0;
+		boost::shared_ptr<AnimationData_Texture> sprite_anim = 0;
 
-		sprite_anim = std::make_shared<AnimationData_Texture>( texture_root, start_frame, end_frame );
+		sprite_anim = boost::make_shared<AnimationData_Texture>( texture_root, start_frame, end_frame );
 
 		// Set speed based on how long each frame is.
 		sprite_anim->Anims[ 0 ].Speed = 1.f / frame_length;
@@ -1064,10 +1064,10 @@ namespace CloudberryKingdom
 
 	void TileSets::Init()
 	{
-		std::shared_ptr<TileSet> info;
+		boost::shared_ptr<TileSet> info;
 
 		// None
-		DefaultTileSet = None = info = std::make_shared<TileSet>();
+		DefaultTileSet = None = info = boost::make_shared<TileSet>();
 		info->Name = _T( "None" );
 		info->NameInGame = Localization::Words_NONE;
 		info->Guid = 5551;
@@ -1080,7 +1080,7 @@ namespace CloudberryKingdom
 		AddRange<Upgrade>( info->ObstacleUpgrades, VecFromArray( tempVector ) );
 
 		// Random
-		Random = info = std::make_shared<TileSet>();
+		Random = info = boost::make_shared<TileSet>();
 		info->Name = _T( "Random" );
 		info->NameInGame = Localization::Words_RANDOM;
 		info->Guid = 5552;
@@ -1097,7 +1097,7 @@ namespace CloudberryKingdom
 		TileSets::LoadCode();
 
 		// Freeplay tilesets
-		std::shared_ptr<TileSet>  tempVector3[] = {
+		boost::shared_ptr<TileSet>  tempVector3[] = {
 			TileSets::Random,
 			TileSet::Get( _T( "sea" ) ),
 			TileSet::Get( _T( "hills" ) ),

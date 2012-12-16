@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	struct Param
 	{
 	
-		std::shared_ptr<PieceSeedData> PieceSeed;
+		boost::shared_ptr<PieceSeedData> PieceSeed;
 		float val1, val2;
 		bool val1_IsSet, val2_IsSet;
 
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 		Param( float val );
 
-		Param( const std::shared_ptr<PieceSeedData> &PieceSeed );
+		Param( const boost::shared_ptr<PieceSeedData> &PieceSeed );
 
 		//public Param(PieceSeedData PieceSeed, ParamFunc f)
 		//{
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		//    }
 		//}
 
-		Param( const std::shared_ptr<PieceSeedData> &PieceSeed, float v );
+		Param( const boost::shared_ptr<PieceSeedData> &PieceSeed, float v );
 
 		void SetVal( float v );
 
@@ -79,9 +79,9 @@ namespace CloudberryKingdom
 
 		VectorParam() { }
 
-		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed );
+		VectorParam( const boost::shared_ptr<PieceSeedData> &PieceSeed );
 
-		VectorParam( const std::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v );
+		VectorParam( const boost::shared_ptr<PieceSeedData> &PieceSeed, Vector2 v );
 
 		void SetVal( Vector2 v );
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		/// this method returns a randomly chosen value in that range.
 		/// </summary>
 		/// <returns></returns>
-		float RndFloat( Vector2 Pos, const std::shared_ptr<Rand> &Rnd );
+		float RndFloat( Vector2 Pos, const boost::shared_ptr<Rand> &Rnd );
 	};
 }
 

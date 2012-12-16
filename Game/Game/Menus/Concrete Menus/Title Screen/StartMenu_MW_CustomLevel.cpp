@@ -3,14 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel( const std::shared_ptr<TitleGameData_MW> &Title ) : CustomLevel_GUI() { }
-	std::shared_ptr<StartMenu_MW_CustomLevel> StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel( const boost::shared_ptr<TitleGameData_MW> &Title ) : CustomLevel_GUI() { }
+	boost::shared_ptr<StartMenu_MW_CustomLevel> StartMenu_MW_CustomLevel::StartMenu_MW_CustomLevel_Construct( const boost::shared_ptr<TitleGameData_MW> &Title )
 	{
 		CustomLevel_GUI::CustomLevel_GUI_Construct();
 
 		this->Title = Title;
 
-		return std::static_pointer_cast<StartMenu_MW_CustomLevel>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_CustomLevel>( shared_from_this() );
 	}
 
 	void StartMenu_MW_CustomLevel::SlideIn( int Frames )
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::SlideOut( Preset, Frames );
 	}
 
-	void StartMenu_MW_CustomLevel::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_CustomLevel::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CustomLevel_GUI::SetItemProperties( item );
 
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 		//ReturnToCallerDelay = 10;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void StartMenu_MW_CustomLevel::ReturnToCaller()

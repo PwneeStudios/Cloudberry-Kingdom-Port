@@ -13,12 +13,12 @@ namespace CloudberryKingdom
 		
 			CampaignLevelsLambda();
 
-			virtual int Apply( const std::shared_ptr<PlayerData> &p );
+			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
 		};
 	
 		int Chapter;
 
-		CampaignChapterItem( const std::shared_ptr<EzText> &Text, int Chapter );
+		CampaignChapterItem( const boost::shared_ptr<EzText> &Text, int Chapter );
 
 
 	
@@ -28,40 +28,40 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Campaign : public StartMenu
 	{
 	
-		struct CampaignGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct CampaignGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<StartMenu_MW_Campaign> cine;
+			boost::shared_ptr<StartMenu_MW_Campaign> cine;
 		
-			CampaignGoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &cine );
+			CampaignGoLambda( const boost::shared_ptr<StartMenu_MW_Campaign> &cine );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		struct GoLambda : public Lambda
 		{
 		
-			std::shared_ptr<StartMenu_MW_Campaign> sm;
+			boost::shared_ptr<StartMenu_MW_Campaign> sm;
 		
-			GoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &sm );
+			GoLambda( const boost::shared_ptr<StartMenu_MW_Campaign> &sm );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<TitleGameData_MW> Title;
-		StartMenu_MW_Campaign( const std::shared_ptr<TitleGameData_MW> &Title );
-		std::shared_ptr<StartMenu_MW_Campaign> StartMenu_MW_Campaign_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<TitleGameData_MW> Title;
+		StartMenu_MW_Campaign( const boost::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<StartMenu_MW_Campaign> StartMenu_MW_Campaign_Construct( const boost::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		void SetText( const std::shared_ptr<EzText> &text );
+		void SetText( const boost::shared_ptr<EzText> &text );
 
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void OnAdd();
@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 		void MakeHeader();
 
 	
-		void Go( const std::shared_ptr<MenuItem> &item );
+		void Go( const boost::shared_ptr<MenuItem> &item );
 
 		int _StartLevel;
 		void Go( int StartLevel );

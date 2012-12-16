@@ -3,6 +3,7 @@
 
 #include <ForwardDeclarations.h>
 #include <memory>
+#include <boost/shared_ptr.hpp>
 
 // Pick the implementation we want to use.
 #ifdef CAFE
@@ -41,7 +42,7 @@ public:
 	/**
 	 * @param effect New effect to use.
 	 */
-	void SetEffect( const std::shared_ptr<Effect> &effect )
+	void SetEffect( const boost::shared_ptr<Effect> &effect )
 	{
 		impl_.SetEffect( effect );
 	}
@@ -50,7 +51,7 @@ public:
 	/**
 	 * @return Current effect in use by quad drawer.
 	 */
-	std::shared_ptr<Effect> GetEffect()
+	boost::shared_ptr<Effect> GetEffect()
 	{
 		return impl_.GetEffect();
 	}

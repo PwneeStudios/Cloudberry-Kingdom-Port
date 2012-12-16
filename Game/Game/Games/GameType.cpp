@@ -24,12 +24,12 @@ namespace CloudberryKingdom
 	Vector2 GameData::DramaticEntryVel;
 
 
-	std::shared_ptr<GameData> GameFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> GameFactory::Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return 0;
 	}
 
-	std::shared_ptr<GameData> SimpleGameFactory::Make()
+	boost::shared_ptr<GameData> SimpleGameFactory::Make()
 	{
 		return 0;
 	}
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		IsTethered = IsDoppleganger = IsDopplegangerInvert = false;
 	}
 
-	GameData::AddScoreLambda::AddScoreLambda( const std::shared_ptr<GameData> &game, const std::shared_ptr<Door> &door )
+	GameData::AddScoreLambda::AddScoreLambda( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Door> &door )
 	{
 		this->game = game;
 		this->door = door;
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		if ( game->MakeScore == 0 )
 			return;
 
-		std::shared_ptr<GameObject> ScoreObj = game->MakeScore->Apply();
+		boost::shared_ptr<GameObject> ScoreObj = game->MakeScore->Apply();
 		if ( ScoreObj == 0 )
 			return;
 		door->getCore()->MyLevel->MyGame->AddGameObject(ScoreObj);
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		PlayerManager::AbsorbGameStats();
 	}
 
-	GameData::FinishProxy::FinishProxy( const std::shared_ptr<GameData> &gt )
+	GameData::FinishProxy::FinishProxy( const boost::shared_ptr<GameData> &gt )
 	{
 		this->gt = gt;
 	}
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		Tools::PlayHappyMusic();
 	}
 
-	GameData::PlayAgainLambda::PlayAgainLambda( const std::shared_ptr<GameData> &parentgame )
+	GameData::PlayAgainLambda::PlayAgainLambda( const boost::shared_ptr<GameData> &parentgame )
 	{
 		this->parentgame = parentgame;
 	}
@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		parentgame->PlayAgain();
 	}
 
-	GameData::ReleaseThisLambda::ReleaseThisLambda( const std::shared_ptr<GameData> &game )
+	GameData::ReleaseThisLambda::ReleaseThisLambda( const boost::shared_ptr<GameData> &game )
 	{
 		this->game = game;
 	}
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	GameData::WaitThenDoCoversion::WaitThenDoCoversion( int WaitLength, const std::shared_ptr<Lambda> &f )
+	GameData::WaitThenDoCoversion::WaitThenDoCoversion( int WaitLength, const boost::shared_ptr<Lambda> &f )
 	{
 		WaitLength_ = WaitLength;
 		f_ = f;
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	GameData::WaitThenAddToToDoLambda::WaitThenAddToToDoLambda( const std::shared_ptr<GameData> &game, const std::shared_ptr<LambdaFunc<bool> > &f )
+	GameData::WaitThenAddToToDoLambda::WaitThenAddToToDoLambda( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<LambdaFunc<bool> > &f )
 	{
 		this->game = game;
 		this->f = f;
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 		game->AddToDo( f );
 	}
 
-	GameData::FadeInAndDoAction::FadeInAndDoAction( const std::shared_ptr<GameData> &game, const std::shared_ptr<Lambda> &OnBlack, float speed, float TargetOpaqueness )
+	GameData::FadeInAndDoAction::FadeInAndDoAction( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &OnBlack, float speed, float TargetOpaqueness )
 	{
 		this->game = game;
 		this->OnBlack = OnBlack;
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 			OnBlack->Apply();
 	}
 
-	GameData::SlideInLambda::SlideInLambda( const std::shared_ptr<StartMenu_MW_Black> &black )
+	GameData::SlideInLambda::SlideInLambda( const boost::shared_ptr<StartMenu_MW_Black> &black )
 	{
 		this->black = black;
 	}
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 		black->SlideFromRight();
 	}
 
-	GameData::FadeInAfterBlack::FadeInAfterBlack( const std::shared_ptr<StartMenu_MW_Black> &black, const std::shared_ptr<Lambda> &OnBlack, const std::shared_ptr<GameData> &game )
+	GameData::FadeInAfterBlack::FadeInAfterBlack( const boost::shared_ptr<StartMenu_MW_Black> &black, const boost::shared_ptr<Lambda> &OnBlack, const boost::shared_ptr<GameData> &game )
 	{
 		this->black = black;
 		this->OnBlack = OnBlack;
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 			OnBlack->Apply();
 	}
 
-	GameData::ConvertLambdaToLambdaFuncTrue::ConvertLambdaToLambdaFuncTrue( const std::shared_ptr<Lambda> &f )
+	GameData::ConvertLambdaToLambdaFuncTrue::ConvertLambdaToLambdaFuncTrue( const boost::shared_ptr<Lambda> &f )
 	{
 		f_ = f;
 	}
@@ -191,12 +191,12 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	GameData::FindTargetBobLambda::FindTargetBobLambda( const std::shared_ptr<Bob> &Player )
+	GameData::FindTargetBobLambda::FindTargetBobLambda( const boost::shared_ptr<Bob> &Player )
 	{
 		this->Player = Player;
 	}
 
-	bool GameData::FindTargetBobLambda::Apply( const std::shared_ptr<Bob> &bob )
+	bool GameData::FindTargetBobLambda::Apply( const boost::shared_ptr<Bob> &bob )
 	{
 		return bob != Player && !bob->Dying;
 	}
@@ -205,12 +205,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool GameData::RemoveMarkedLambda::Apply( const std::shared_ptr<GameObject> &obj )
+	bool GameData::RemoveMarkedLambda::Apply( const boost::shared_ptr<GameObject> &obj )
 	{
 		return obj->getCore()->MarkedForDeletion;
 	}
 
-	GameData::FadeToBlackLambda::FadeToBlackLambda( const std::shared_ptr<GameData> &game, float FadeOutSpeed )
+	GameData::FadeToBlackLambda::FadeToBlackLambda( const boost::shared_ptr<GameData> &game, float FadeOutSpeed )
 	{
 		game_ = game;
 		FadeOutSpeed_ = FadeOutSpeed;
@@ -225,12 +225,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	float GameData::GetCampaignStatsScoreLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	float GameData::GetCampaignStatsScoreLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return static_cast<float>( p->CampaignStats->Score );
 	}
 
-	GameData::OpenDoorAndShowBobsLambda::OpenDoorAndShowBobsLambda( const std::shared_ptr<Level> &MyLevel, const std::shared_ptr<Door> &door, const std::shared_ptr<GameData> &game )
+	GameData::OpenDoorAndShowBobsLambda::OpenDoorAndShowBobsLambda( const boost::shared_ptr<Level> &MyLevel, const boost::shared_ptr<Door> &door, const boost::shared_ptr<GameData> &game )
 	{
 		MyLevel_ = MyLevel;
 		Door_ = door;
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 		Door_->MoveBobs();
 	}
 
-	GameData::DramaticEntryLambda::DramaticEntryLambda( const std::shared_ptr<GameData> &game, int Wait, const std::shared_ptr<Door> &door )
+	GameData::DramaticEntryLambda::DramaticEntryLambda( const boost::shared_ptr<GameData> &game, int Wait, const boost::shared_ptr<Door> &door )
 	{
 		Game_ = game;
 		Wait_ = Wait;
@@ -260,12 +260,12 @@ namespace CloudberryKingdom
 	void GameData::DramaticEntryLambda::Apply()
 	{
 		Game_->EnterFrom( Door_, DramaticEntryWait[ 0 ] + Wait_ );
-		Game_->CinematicToDo( DramaticEntryWait[ 1 ] + Wait_, std::make_shared<Door::ShakeLambda>( Door_, 19, 11, true ) );
-		Game_->CinematicToDo( DramaticEntryWait[ 2 ] + Wait_, std::make_shared<Door::ShakeLambda>( Door_, 19, 11, true ) );
-		Game_->CinematicToDo( DramaticEntryWait[ 3 ] + Wait_, std::make_shared<DramaticEntryEnterLambda>( Door_ ) );
+		Game_->CinematicToDo( DramaticEntryWait[ 1 ] + Wait_, boost::make_shared<Door::ShakeLambda>( Door_, 19, 11, true ) );
+		Game_->CinematicToDo( DramaticEntryWait[ 2 ] + Wait_, boost::make_shared<Door::ShakeLambda>( Door_, 19, 11, true ) );
+		Game_->CinematicToDo( DramaticEntryWait[ 3 ] + Wait_, boost::make_shared<DramaticEntryEnterLambda>( Door_ ) );
 	}
 
-	GameData::DramaticEntryEnterLambda::DramaticEntryEnterLambda( const std::shared_ptr<Door> &door )
+	GameData::DramaticEntryEnterLambda::DramaticEntryEnterLambda( const boost::shared_ptr<Door> &door )
 	{
 		Door_ = door;
 	}
@@ -280,19 +280,19 @@ namespace CloudberryKingdom
 		}
 	}
 
-	/*void GameData::KillThread( const std::shared_ptr<Object> &sender, const std::shared_ptr<System::EventArgs> &e )
+	/*void GameData::KillThread( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<System::EventArgs> &e )
 	{
-		std::shared_ptr<Thread> MakeThread = Thread::CurrentThread;
+		boost::shared_ptr<Thread> MakeThread = Thread::CurrentThread;
 		if ( MakeThread != 0 )
 		{
 			MakeThread->Abort();
 		}
 	}*/
 
-	void GameData::EOL_DoorAction( const std::shared_ptr<Door> &door )
+	void GameData::EOL_DoorAction( const boost::shared_ptr<Door> &door )
 	{
 		StatGroup group = door->getGame()->MyStatGroup;
-		std::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
+		boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 
 		game->HasBeenCompleted = true;
 
@@ -303,7 +303,7 @@ namespace CloudberryKingdom
 		door->SetLock( true, false, true );
 
 		// Aftermath
-		Tools::CurrentAftermath = std::make_shared<AftermathData>();
+		Tools::CurrentAftermath = boost::make_shared<AftermathData>();
 		Tools::CurrentAftermath->Success = true;
 
 		// Ensure door isn't reused
@@ -321,9 +321,9 @@ namespace CloudberryKingdom
 		door->InteractingBob->getCore()->Show = false;
 
 		// Add the score
-		std::shared_ptr<ExplodeBobs> explode = MakeMagic( ExplodeBobs, ( ExplodeBobs::Speed_REGULAR ) );
-		door->getCore()->MyLevel->MyGame->AddGameObject(std::static_pointer_cast<GameObject> ( explode ) );
-		explode->OnDone = std::make_shared<AddScoreLambda>( game, door );
+		boost::shared_ptr<ExplodeBobs> explode = MakeMagic( ExplodeBobs, ( ExplodeBobs::Speed_REGULAR ) );
+		door->getCore()->MyLevel->MyGame->AddGameObject(boost::static_pointer_cast<GameObject> ( explode ) );
+		explode->OnDone = boost::make_shared<AddScoreLambda>( game, door );
 	}
 
 	void GameData::Finish( bool Replay )
@@ -332,7 +332,7 @@ namespace CloudberryKingdom
 
 		// Start the world map music
 		ParentGame->KillToDo( _T( "StartMusic" ) );
-		ParentGame->WaitThenDo( 50, std::make_shared<PlayWorldMapMusicLambda>(), _T("StartMusic") );
+		ParentGame->WaitThenDo( 50, boost::make_shared<PlayWorldMapMusicLambda>(), _T("StartMusic") );
 	}
 
 	void GameData::StandardFinish( bool Replay )
@@ -354,13 +354,13 @@ namespace CloudberryKingdom
 		ParentGame->SetToReturnTo( 0 );
 
 		// Release this game
-		ParentGame->AddToDo( std::make_shared<ReleaseThisLambda>( shared_from_this() ) );
+		ParentGame->AddToDo( boost::make_shared<ReleaseThisLambda>( shared_from_this() ) );
 
 		// Check if we should replay the current game
 		if ( Replay )
 		{
-			std::shared_ptr<GameData> parentgame = ParentGame;
-			ParentGame->AddToDo( std::make_shared<PlayAgainLambda>( parentgame ) );
+			boost::shared_ptr<GameData> parentgame = ParentGame;
+			ParentGame->AddToDo( boost::make_shared<PlayAgainLambda>( parentgame ) );
 		}
 
 		// Save everything
@@ -373,7 +373,7 @@ namespace CloudberryKingdom
 		PreviousLoadFunction.reset();
 	}
 
-	void GameData::PlayGame( const std::shared_ptr<Lambda> &LoadFunction )
+	void GameData::PlayGame( const boost::shared_ptr<Lambda> &LoadFunction )
 	{
 		PreviousLoadFunction = LoadFunction;
 
@@ -389,43 +389,43 @@ namespace CloudberryKingdom
 		ExecutingPreviousLoadFunction = false;
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f )
+	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ) );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name )
+	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, const std::wstring &Name )
 	{
 		WaitThenDo( WaitLength, f, Name, false, false );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, bool PauseOnPause )
+	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, bool PauseOnPause )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), PauseOnPause, false );
 	}
 
-	void GameData::WaitThenDo_Pausable( int WaitLength, const std::shared_ptr<Lambda> f )
+	void GameData::WaitThenDo_Pausable( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), true, false );
 	}
 
-	void GameData::CinematicToDo( int WaitLength, const std::shared_ptr<Lambda> f )
+	void GameData::CinematicToDo( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
 		WaitThenDo( WaitLength, f, _T( "" ), true, true );
 	}
 
-	void GameData::WaitThenDo( int WaitLength, const std::shared_ptr<Lambda> f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
+	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
 	{
 		if ( WaitLength < 0 )
 			return;
 
-		AddToDo( std::make_shared<WaitThenDoCoversion>( WaitLength, f ), Name, PauseOnPause, RemoveOnReset );
+		AddToDo( boost::make_shared<WaitThenDoCoversion>( WaitLength, f ), Name, PauseOnPause, RemoveOnReset );
 	}
 
-	void GameData::WaitThenAddToToDo( int WaitLength, const std::shared_ptr<LambdaFunc<bool> > f )
+	void GameData::WaitThenAddToToDo( int WaitLength, const boost::shared_ptr<LambdaFunc<bool> > f )
 	{
 		// Create a function that after the specified time will add f to the ToDo list
-		WaitThenDo( WaitLength, std::make_shared<WaitThenAddToToDoLambda>( shared_from_this(), f ) );
+		WaitThenDo( WaitLength, boost::make_shared<WaitThenAddToToDoLambda>( shared_from_this(), f ) );
 	}
 
 	bool GameData::QuickSpawnEnabled()
@@ -433,14 +433,14 @@ namespace CloudberryKingdom
 		return !SuppressQuickSpawn && !SuppressQuickSpawn_External;
 	}
 
-	const std::shared_ptr<Camera> GameData::getCam() const
+	const boost::shared_ptr<Camera> GameData::getCam() const
 	{
 		if ( MyLevel == 0 )
 			return 0;
 		return MyLevel->getMainCamera();
 	}
 
-	const std::shared_ptr<Rand> &GameData::getRnd() const
+	const boost::shared_ptr<Rand> &GameData::getRnd() const
 	{
 		return MyLevel->getRnd();
 	}
@@ -458,25 +458,25 @@ namespace CloudberryKingdom
 		return FadingToBlack || FadingIn;
 	}
 
-	void GameData::PartialFade_InAndOut( int Delay, float TargetOpaqueness, int FadeOutLength, int FadeInLength, const std::shared_ptr<Lambda> &OnBlack )
+	void GameData::PartialFade_InAndOut( int Delay, float TargetOpaqueness, int FadeOutLength, int FadeInLength, const boost::shared_ptr<Lambda> &OnBlack )
 	{
 		// Wait then screen partially fade to black.
-		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( shared_from_this(), TargetOpaqueness / FadeOutLength ) );
+		WaitThenDo( Delay, boost::make_shared<FadeToBlackLambda>( shared_from_this(), TargetOpaqueness / FadeOutLength ) );
 
 		// Wait for the apex of blackness, trigger the action and fade back in.
-		WaitThenDo( Delay + FadeOutLength, std::make_shared<FadeInAndDoAction>( shared_from_this(), OnBlack, TargetOpaqueness / FadeOutLength, TargetOpaqueness ) );
+		WaitThenDo( Delay + FadeOutLength, boost::make_shared<FadeInAndDoAction>( shared_from_this(), OnBlack, TargetOpaqueness / FadeOutLength, TargetOpaqueness ) );
 	}
 
-	void GameData::SlideOut_FadeIn( int Delay, const std::shared_ptr<Lambda> &OnBlack )
+	void GameData::SlideOut_FadeIn( int Delay, const boost::shared_ptr<Lambda> &OnBlack )
 	{
-		std::shared_ptr<StartMenu_MW_Black> black = MakeMagic( StartMenu_MW_Black, () );
+		boost::shared_ptr<StartMenu_MW_Black> black = MakeMagic( StartMenu_MW_Black, () );
 		AddGameObject( black );
 
 		// Wait then screen swipe to black.
-		WaitThenDo( Delay, std::make_shared<SlideInLambda>( black ), _T( "SlideOut_FadeIn" ) );
+		WaitThenDo( Delay, boost::make_shared<SlideInLambda>( black ), _T( "SlideOut_FadeIn" ) );
 
 		// Wait for screen to be completely black, then fade in.
-		WaitThenDo( Delay + 17, std::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), _T( "SlideOut_FadeIn" ) );
+		WaitThenDo( Delay + 17, boost::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), _T( "SlideOut_FadeIn" ) );
 	}
 
 	void GameData::RemoveGameObjects( GameObject::Tag tag )
@@ -500,13 +500,13 @@ namespace CloudberryKingdom
 			OnCalculateScoreMultiplier->Apply( shared_from_this() );
 	}
 
-	void GameData::CheckpointGrabEvent( const std::shared_ptr<ObjectBase> &Checkpoint_Renamed )
+	void GameData::CheckpointGrabEvent( const boost::shared_ptr<ObjectBase> &Checkpoint_Renamed )
 	{
 		if ( OnCheckpointGrab != 0 )
 			OnCheckpointGrab->Apply( Checkpoint_Renamed );
 	}
 
-	void GameData::CoinGrabEvent( const std::shared_ptr<ObjectBase> &coin )
+	void GameData::CoinGrabEvent( const boost::shared_ptr<ObjectBase> &coin )
 	{
 		if ( OnCoinGrab != 0 )
 			OnCoinGrab->Apply( coin );
@@ -534,37 +534,37 @@ namespace CloudberryKingdom
 			OnReturnTo_OneOff.reset();
 	}
 
-	void GameData::AddToDo( const std::shared_ptr<LambdaFunc<bool> > &FuncToDo )
+	void GameData::AddToDo( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo )
 	{
-		getToDo().push_back(std::make_shared<ToDoItem>(FuncToDo, _T(""), false, false));
+		getToDo().push_back(boost::make_shared<ToDoItem>(FuncToDo, _T(""), false, false));
 	}
 
-	void GameData::AddToDo( const std::shared_ptr<Lambda> &FuncToDo )
+	void GameData::AddToDo( const boost::shared_ptr<Lambda> &FuncToDo )
 	{
 		AddToDo( FuncToDo, _T( "" ), false, false );
 	}
 
-	void GameData::AddToDo( const std::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset )
+	void GameData::AddToDo( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset )
 	{
-		getToDo().push_back(std::make_shared<ToDoItem>(FuncToDo, name, PauseOnPause, RemoveOnReset));
+		getToDo().push_back(boost::make_shared<ToDoItem>(FuncToDo, name, PauseOnPause, RemoveOnReset));
 	}
 
-	void GameData::AddToDo( const std::shared_ptr<Lambda> &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset )
+	void GameData::AddToDo( const boost::shared_ptr<Lambda> &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset )
 	{
-		getToDo().push_back(std::make_shared<ToDoItem>(std::make_shared<ConvertLambdaToLambdaFuncTrue>(FuncToDo), name, PauseOnPause, RemoveOnReset));
+		getToDo().push_back(boost::make_shared<ToDoItem>(boost::make_shared<ConvertLambdaToLambdaFuncTrue>(FuncToDo), name, PauseOnPause, RemoveOnReset));
 	}
 
-	std::vector<std::shared_ptr<ToDoItem> > &GameData::getToDo()
+	std::vector<boost::shared_ptr<ToDoItem> > &GameData::getToDo()
 	{
 		return CurToDo;
 	}
 
 	void GameData::DoToDoOnResetList()
 	{
-		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnReset );
+		std::vector<boost::shared_ptr<Lambda> > list = std::vector<boost::shared_ptr<Lambda> >( ToDoOnReset );
 		ToDoOnReset.clear();
 
-		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
@@ -580,7 +580,7 @@ namespace CloudberryKingdom
 			AddRange( NextToDo, CurToDo );
 
 			CurToDo.clear();
-			for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator item = NextToDo.begin(); item != NextToDo.end(); ++item )
+			for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator item = NextToDo.begin(); item != NextToDo.end(); ++item )
 			{
 				// Skip deleted items
 				if ( ( *item )->getMarkedForDeletion() )
@@ -607,15 +607,15 @@ namespace CloudberryKingdom
 
 	void GameData::KillToDo( const std::wstring &name )
 	{
-		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = ToDoFindAll( name ).begin(); todo != ToDoFindAll(name).end(); ++todo )
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = ToDoFindAll( name ).begin(); todo != ToDoFindAll(name).end(); ++todo )
 			( *todo )->Delete();
 	}
 
-	std::vector<std::shared_ptr<ToDoItem> > GameData::ToDoFindAll( const std::wstring &name )
+	std::vector<boost::shared_ptr<ToDoItem> > GameData::ToDoFindAll( const std::wstring &name )
 	{
-		std::vector<std::shared_ptr<ToDoItem> > l = std::vector<std::shared_ptr<ToDoItem> >();
+		std::vector<boost::shared_ptr<ToDoItem> > l = std::vector<boost::shared_ptr<ToDoItem> >();
 
-		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
 			if ( CompareIgnoreCase( ( *todo )->Name, name ) == 0 )
 				l.push_back( *todo );
 
@@ -670,7 +670,7 @@ namespace CloudberryKingdom
 		Recycle.reset();
 	}
 
-	std::shared_ptr<GameData> GameData::Factory( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> GameData::Factory( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
 		return 0;
 	}
@@ -687,12 +687,12 @@ namespace CloudberryKingdom
 
 		Recycle = Recycler::GetRecycler();
 
-		EndGame = std::make_shared<FinishProxy>( shared_from_this() );
+		EndGame = boost::make_shared<FinishProxy>( shared_from_this() );
 
 		Loading = false;
 
-		CurToDo = std::vector<std::shared_ptr<ToDoItem> >();
-		NextToDo = std::vector<std::shared_ptr<ToDoItem> >();*/
+		CurToDo = std::vector<boost::shared_ptr<ToDoItem> >();
+		NextToDo = std::vector<boost::shared_ptr<ToDoItem> >();*/
 	}
 
 	void GameData::LockGameObjects( bool Lock )
@@ -708,7 +708,7 @@ namespace CloudberryKingdom
 		GameObjectsAreLocked = Lock;
 	}
 
-	void GameData::AddGameObject( const std::shared_ptr<GameObject> &obj )
+	void GameData::AddGameObject( const boost::shared_ptr<GameObject> &obj )
 	{
 		if ( GameObjectsAreLocked )
 			NewGameObjects.push_back( obj );
@@ -798,7 +798,7 @@ namespace CloudberryKingdom
 
 	void GameData::CleanLastLevel()
 	{
-		std::shared_ptr<Level> PrevLevel;
+		boost::shared_ptr<Level> PrevLevel;
 
 		if ( !getIsSetToReturnTo() )
 			PrevLevel = Tools::CurLevel;
@@ -826,7 +826,7 @@ namespace CloudberryKingdom
 	{
 		for ( ObjectVec::const_iterator obj = MyLevel->Objects.begin(); obj != MyLevel->Objects.end(); ++obj )
 		{
-			std::shared_ptr<Checkpoint> checkpoint = std::static_pointer_cast<Checkpoint>( *obj );
+			boost::shared_ptr<Checkpoint> checkpoint = boost::static_pointer_cast<Checkpoint>( *obj );
 			if ( 0 != checkpoint )
 				checkpoint->Revert();
 		}
@@ -841,7 +841,7 @@ namespace CloudberryKingdom
 		MyLevel->SetCurrentPiece( 0 );
 	}
 
-	void GameData::GotCheckpoint( const std::shared_ptr<Bob> &CheckpointBob )
+	void GameData::GotCheckpoint( const boost::shared_ptr<Bob> &CheckpointBob )
 	{
 		MyLevel->PieceAttempts = 0;
 
@@ -868,14 +868,14 @@ namespace CloudberryKingdom
 			return;
 
 		// Remove marked todo items
-		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
 				( *todo )->setMarkedForDeletion(true);
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<ToDoItem> >::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
 				( *todo )->setMarkedForDeletion(true);
@@ -920,7 +920,7 @@ namespace CloudberryKingdom
 			MyLevel->ResetAll( false );
 	}
 
-	void GameData::SetCreatedBobParameters( const std::shared_ptr<Bob> &bob )
+	void GameData::SetCreatedBobParameters( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->Immortal = true;
 		bob->ScreenWrap = true;
@@ -929,14 +929,14 @@ namespace CloudberryKingdom
 
 	void GameData::CreateBob( int i, bool Pop )
 	{
-		std::shared_ptr<Bob> TemplateBob = 0;
+		boost::shared_ptr<Bob> TemplateBob = 0;
 		if ( MyLevel->Bobs.size() > 0 )
 			TemplateBob = MyLevel->Bobs[ 0 ];
 
 		PlayerManager::Get( i )->IsAlive = PlayerManager::Get( i )->Exists = true;
 
 		//Bob Player = new Bob(Prototypes.bob[MyLevel.DefaultHeroType], false);
-		std::shared_ptr<Bob> Player = std::make_shared<Bob>( MyLevel->DefaultHeroType, false );
+		boost::shared_ptr<Bob> Player = boost::make_shared<Bob>( MyLevel->DefaultHeroType, false );
 		Bob_PostConstruct( Player, MyLevel->DefaultHeroType, false );
 
 		Player->MyPlayerIndex = PlayerManager::Get( i )->MyPlayerIndex;
@@ -960,7 +960,7 @@ namespace CloudberryKingdom
 		int _i = __min( i, static_cast<int>( MyLevel->CurPiece->StartData.size() ) - 1 );
 		PhsxData StartData = MyLevel->CurPiece->StartData[ _i ];
 		Player->Init( false, MyLevel->CurPiece->StartData[ 0 ], shared_from_this() );
-		std::shared_ptr<Bob> TargetBob = Tools::Find<std::shared_ptr<Bob> >( MyLevel->Bobs, std::make_shared<FindTargetBobLambda>( Player ) );
+		boost::shared_ptr<Bob> TargetBob = Tools::Find<boost::shared_ptr<Bob> >( MyLevel->Bobs, boost::make_shared<FindTargetBobLambda>( Player ) );
 
 		if ( TargetBob != 0 )
 			Player->Move( Vector2( 20, 450 ) + TargetBob->getCore()->Data.Position - Player->getCore()->Data.Position );
@@ -1017,7 +1017,7 @@ namespace CloudberryKingdom
 		if ( PauseLevel )
 			return;
 
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			if ( ( *player )->StoredName.length() > 0 && (*player)->getMyGamer() == 0 )
 			{
 				PlayerManager::GetNumPlayers();
@@ -1202,7 +1202,7 @@ namespace CloudberryKingdom
 
 	void GameData::CleanGameObjects()
 	{
-		Tools::RemoveAll<std::shared_ptr<GameObject> >( MyGameObjects, std::make_shared<RemoveMarkedLambda>() );
+		Tools::RemoveAll<boost::shared_ptr<GameObject> >( MyGameObjects, boost::make_shared<RemoveMarkedLambda>() );
 	}
 
 	void GameData::Move( Vector2 shift )
@@ -1213,7 +1213,7 @@ namespace CloudberryKingdom
 
 	void GameData::Init()
 	{
-		BlackQuad = std::make_shared<QuadClass>( _T( "White" ) );
+		BlackQuad = boost::make_shared<QuadClass>( _T( "White" ) );
 		BlackQuad->Quad_Renamed.SetColor( Color::Black );
 
 		BlackBase.e1 = Vector2( 45, 0 );
@@ -1251,7 +1251,7 @@ namespace CloudberryKingdom
 
 	void GameData::FadeToBlack( float FadeOutSpeed, int Delay )
 	{
-		WaitThenDo( Delay, std::make_shared<FadeToBlackLambda>( shared_from_this(), FadeOutSpeed ) );
+		WaitThenDo( Delay, boost::make_shared<FadeToBlackLambda>( shared_from_this(), FadeOutSpeed ) );
 	}
 
 	void GameData::Draw()
@@ -1310,7 +1310,7 @@ namespace CloudberryKingdom
 		Tools::EndGUIDraw();
 	}
 
-	void GameData::BobDie( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob )
+	void GameData::BobDie( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob )
 	{
 		if ( bob->DieSound == 0 )
 			Bob::DieSound_Default->Play( .3f );
@@ -1325,16 +1325,16 @@ namespace CloudberryKingdom
 
 	void GameData::DoToDoOnDeathList()
 	{
-		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnDeath );
+		std::vector<boost::shared_ptr<Lambda> > list = std::vector<boost::shared_ptr<Lambda> >( ToDoOnDeath );
 		ToDoOnDeath.clear();
 
-		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
 	}
 
-	void GameData::BobDoneDying( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob )
+	void GameData::BobDoneDying( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob )
 	{
 		if ( PlayerManager::AllDead() && level->ResetEnabled() )
 		{
@@ -1346,17 +1346,17 @@ namespace CloudberryKingdom
 
 	void GameData::DoToDoOnDoneDyingList()
 	{
-		std::vector<std::shared_ptr<Lambda> > list = std::vector<std::shared_ptr<Lambda> >( ToDoOnDoneDying );
+		std::vector<boost::shared_ptr<Lambda> > list = std::vector<boost::shared_ptr<Lambda> >( ToDoOnDoneDying );
 		ToDoOnDoneDying.clear();
 
-		for ( std::vector<std::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
+		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
 			( *f )->Apply();
 
 		list.clear();
 	}
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	void GameData::OnSignOut( const std::shared_ptr<SignedOutEventArgs> &e )
+	void GameData::OnSignOut( const boost::shared_ptr<SignedOutEventArgs> &e )
 	{
 	}
 #endif
@@ -1366,7 +1366,7 @@ namespace CloudberryKingdom
 		bool OnePast = false;
 		if ( MyLevel->Bobs.size() > 0 )
 		{
-			for ( std::vector<std::shared_ptr<Bob> >::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
+			for ( std::vector<boost::shared_ptr<Bob> >::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 				if ( ( *bob )->getCore()->Data.Position.X > x )
 					OnePast = true;
 
@@ -1391,12 +1391,12 @@ namespace CloudberryKingdom
 			return false;
 	}
 
-	std::shared_ptr<PlayerData> GameData::getMvp() const
+	boost::shared_ptr<PlayerData> GameData::getMvp() const
 	{
-		return Tools::ArgMax<std::shared_ptr<PlayerData> >( PlayerManager::getExistingPlayers(), std::make_shared<GetCampaignStatsScoreLambda>() );
+		return Tools::ArgMax<boost::shared_ptr<PlayerData> >( PlayerManager::getExistingPlayers(), boost::make_shared<GetCampaignStatsScoreLambda>() );
 	}
 
-	std::shared_ptr<Bob> GameData::getMvpBob() const
+	boost::shared_ptr<Bob> GameData::getMvpBob() const
 	{
 		for ( BobVec::const_iterator bob = MyLevel->Bobs.begin(); bob != MyLevel->Bobs.end(); ++bob )
 			if ( ( *bob )->MyPlayerIndex == getMvp()->MyPlayerIndex )
@@ -1404,7 +1404,7 @@ namespace CloudberryKingdom
 		return MyLevel->Bobs[ 0 ];
 	}
 
-	void GameData::MakeBobs( const std::shared_ptr<Level> &level )
+	void GameData::MakeBobs( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel->Bobs.clear();
 
@@ -1434,9 +1434,9 @@ namespace CloudberryKingdom
 			SetCreatedBobParameters( *bob );
 	}
 
-	int GameData::CreateBob( const std::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j )
+	int GameData::CreateBob( const boost::shared_ptr<Level> &level, int NumStarts, int Count, int i, int j )
 	{
-		std::shared_ptr<Bob> Player = std::make_shared<Bob>( level->DefaultHeroType, false );
+		boost::shared_ptr<Bob> Player = boost::make_shared<Bob>( level->DefaultHeroType, false );
 		Bob_PostConstruct( Player, level->DefaultHeroType, false );
 
 		Player->MyPlayerIndex = PlayerManager::Get( i )->MyPlayerIndex;
@@ -1486,18 +1486,18 @@ namespace CloudberryKingdom
 			// Link bobs together
 			for ( int i = 0; i < static_cast<int>( Bobs.size() ) - 1; i++ )
 			{
-				std::shared_ptr<BobLink> link = std::make_shared<BobLink>();
+				boost::shared_ptr<BobLink> link = boost::make_shared<BobLink>();
 				link->Connect( Bobs[ i ], Bobs[ i + 1 ] );
 			}
 		}
 	}
 
-	std::shared_ptr<GameData> GameData::StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed )
+	boost::shared_ptr<GameData> GameData::StartLevel( const boost::shared_ptr<LevelSeedData> &LevelSeed )
 	{
 		return StartLevel( LevelSeed, false );
 	}
 
-	std::shared_ptr<GameData> GameData::StartLevel( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	boost::shared_ptr<GameData> GameData::StartLevel( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
 		if ( LockLevelStart )
 			return 0;
@@ -1517,7 +1517,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		std::shared_ptr<GameData> MadeGame = 0;
+		boost::shared_ptr<GameData> MadeGame = 0;
 		MadeGame = LevelSeed->MyGameType->Make( LevelSeed, MakeInBackground );
 
 		if ( !MakeInBackground )
@@ -1526,7 +1526,7 @@ namespace CloudberryKingdom
 		return MadeGame;
 	}
 
-	void GameData::UseBobLighting( const std::shared_ptr<Level> &lvl, int difficulty )
+	void GameData::UseBobLighting( const boost::shared_ptr<Level> &lvl, int difficulty )
 	{
 		lvl->setUseLighting( true );
 		lvl->StickmanLighting = true;
@@ -1579,12 +1579,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void GameData::EnterFrom( const std::shared_ptr<Door> &door )
+	void GameData::EnterFrom( const boost::shared_ptr<Door> &door )
 	{
 		EnterFrom( door, 20 );
 	}
 
-	void GameData::EnterFrom( const std::shared_ptr<Door> &door, int Wait )
+	void GameData::EnterFrom( const boost::shared_ptr<Door> &door, int Wait )
 	{
 		// Initially close door and hide bobs
 		door->SetLock( true, true, false );
@@ -1593,7 +1593,7 @@ namespace CloudberryKingdom
 		door->MoveBobs();
 
 		// Open the door and show the bobs
-		CinematicToDo( Wait, std::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, shared_from_this() ) );
+		CinematicToDo( Wait, boost::make_shared<OpenDoorAndShowBobsLambda>( MyLevel, door, shared_from_this() ) );
 	}
 
 	void GameData::SetDramaticEntryParams()
@@ -1603,11 +1603,11 @@ namespace CloudberryKingdom
 		DramaticEntryVel = Vector2( 0, 2 );
 	}
 
-	int GameData::DramaticEntry( const std::shared_ptr<Door> &door, int Wait )
+	int GameData::DramaticEntry( const boost::shared_ptr<Door> &door, int Wait )
 	{
 		SetDramaticEntryParams();
 
-		WaitThenDo( 1, std::make_shared<DramaticEntryLambda>( shared_from_this(), Wait, door ) );
+		WaitThenDo( 1, boost::make_shared<DramaticEntryLambda>( shared_from_this(), Wait, door ) );
 
 		return DramaticEntryWait[ 0 ] + Wait;
 	}
@@ -1642,7 +1642,7 @@ namespace CloudberryKingdom
 
 	void GameData::LoadRecording( const std::wstring &RecordingName )
 	{
-		std::shared_ptr<Recording> rec = std::make_shared<Recording>( 1, 10000 );
+		boost::shared_ptr<Recording> rec = boost::make_shared<Recording>( 1, 10000 );
 		rec->Load( RecordingName );
 		MyLevel->Bobs[ 0 ]->MyRecord = rec->Recordings[ 0 ];
 		MyLevel->Bobs[ 0 ]->CompControl = true;
@@ -1678,16 +1678,16 @@ namespace CloudberryKingdom
 		TakeOnce = false;
 		AlwaysGiveCoinScore = false;
 		CoinScoreMultiplier = 1;
-		OnCalculateCoinScoreMultiplier = std::make_shared<Multicaster_1<std::shared_ptr<GameData> > >();
+		OnCalculateCoinScoreMultiplier = boost::make_shared<Multicaster_1<boost::shared_ptr<GameData> > >();
 		ScoreMultiplier = 1;
-		OnCalculateScoreMultiplier = std::make_shared<Multicaster_1<std::shared_ptr<GameData> > >();
-		OnCheckpointGrab = std::make_shared<Multicaster_1<std::shared_ptr<ObjectBase> > >();
-		OnCoinGrab = std::make_shared<Multicaster_1<std::shared_ptr<ObjectBase> > >();
-		OnCompleteLevel = std::make_shared<Multicaster_1<std::shared_ptr<Level> > >();
-		OnLevelRetry = std::make_shared<Multicaster>();
-		OnReturnTo = std::make_shared<Multicaster>();
-		OnReturnTo_OneOff = std::make_shared<Multicaster>();
-		ToDoOnReset = std::vector<std::shared_ptr<Lambda> >();
+		OnCalculateScoreMultiplier = boost::make_shared<Multicaster_1<boost::shared_ptr<GameData> > >();
+		OnCheckpointGrab = boost::make_shared<Multicaster_1<boost::shared_ptr<ObjectBase> > >();
+		OnCoinGrab = boost::make_shared<Multicaster_1<boost::shared_ptr<ObjectBase> > >();
+		OnCompleteLevel = boost::make_shared<Multicaster_1<boost::shared_ptr<Level> > >();
+		OnLevelRetry = boost::make_shared<Multicaster>();
+		OnReturnTo = boost::make_shared<Multicaster>();
+		OnReturnTo_OneOff = boost::make_shared<Multicaster>();
+		ToDoOnReset = std::vector<boost::shared_ptr<Lambda> >();
 		DoingToDoList = false;
 		DefaultHeroType = BobPhsxNormal::getInstance();
 		Released = false;
@@ -1708,10 +1708,10 @@ namespace CloudberryKingdom
 		ForceLevelZoomBeforeDraw = 0;
 		DoForceZoom = false;
 		ForceTargetZoom = 0;
-		ToDoOnDeath = std::vector<std::shared_ptr<Lambda> >();
+		ToDoOnDeath = std::vector<boost::shared_ptr<Lambda> >();
 		DoneDyingDistance = 1200;
 		DoneDyingCount = 60;
-		ToDoOnDoneDying = std::vector<std::shared_ptr<Lambda> >();
+		ToDoOnDoneDying = std::vector<boost::shared_ptr<Lambda> >();
 		MvpOnly = false;
 		ModdedBlobGrace = false;
 		BlobGraceY = 76;

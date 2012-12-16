@@ -30,29 +30,29 @@ namespace CloudberryKingdom
 	
 		Param Width, KeepUnused, Speed;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 	};
 
 	struct ConveyorBlock_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<ConveyorBlock_AutoGen> instance;
+		static boost::shared_ptr<ConveyorBlock_AutoGen> instance;
 	
-		const static std::shared_ptr<ConveyorBlock_AutoGen> &getInstance();
+		const static boost::shared_ptr<ConveyorBlock_AutoGen> &getInstance();
 
 	
 		ConveyorBlock_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		std::shared_ptr<ConveyorBlock_Parameters> GetParams( const std::shared_ptr<Level> &level );
+		boost::shared_ptr<ConveyorBlock_Parameters> GetParams( const boost::shared_ptr<Level> &level );
 
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 	};
 }
 

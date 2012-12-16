@@ -60,15 +60,15 @@ namespace CloudberryKingdom
 		/// </summary>
 		int Layer;
 
-		static std::map<std::wstring, std::shared_ptr<PieceQuad> > Dict;
+		static std::map<std::wstring, boost::shared_ptr<PieceQuad> > Dict;
 
-		static std::shared_ptr<PieceQuad> Get( const std::wstring &name );
+		static boost::shared_ptr<PieceQuad> Get( const std::wstring &name );
 
 //C# TO C++ CONVERTER NOTE: The variable MovingBlock was renamed since it is named the same as a user-defined type:
 //C# TO C++ CONVERTER NOTE: The variable FallingBlock was renamed since it is named the same as a user-defined type:
 //C# TO C++ CONVERTER NOTE: The variable BouncyBlock was renamed since it is named the same as a user-defined type:
-		static std::shared_ptr<PieceQuad> MovingBlock_Renamed, FallingBlock_Renamed, BouncyBlock_Renamed, Elevator;
-		static std::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, ElevatorGroup;
+		static boost::shared_ptr<PieceQuad> MovingBlock_Renamed, FallingBlock_Renamed, BouncyBlock_Renamed, Elevator;
+		static boost::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, ElevatorGroup;
 
 		SimpleQuad Center;
 
@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Clone the properties of another PieceQuad to this PieceQuad.
 		/// </summary>
-		void Clone( const std::shared_ptr<PieceQuad> &PieceQuadA );
+		void Clone( const boost::shared_ptr<PieceQuad> &PieceQuadA );
 
 		/// <summary>
 		/// The width of the pillar this piecequad is associated with, if any.
@@ -109,9 +109,9 @@ namespace CloudberryKingdom
 
 		void SetColor( Color color );
 
-		void SetEffect( const std::shared_ptr<EzEffect> &effect );
+		void SetEffect( const boost::shared_ptr<EzEffect> &effect );
 
-		void Init( const std::shared_ptr<EzTexture> &tex, const std::shared_ptr<EzEffect> &fx );
+		void Init( const boost::shared_ptr<EzTexture> &tex, const boost::shared_ptr<EzEffect> &fx );
 
 		Vector2 FromBounds( Vector2 TR, Vector2 BL );
 

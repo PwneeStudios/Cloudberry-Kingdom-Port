@@ -5,11 +5,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxTime::InitializeStatics()
 	{
-		BobPhsxTime::instance = std::make_shared<BobPhsxTime>();
+		BobPhsxTime::instance = boost::make_shared<BobPhsxTime>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxTime> BobPhsxTime::instance;
+	boost::shared_ptr<BobPhsxTime> BobPhsxTime::instance;
 
 
 	void BobPhsxTime::InitSingleton()
@@ -19,24 +19,24 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 0, 0, 0, 1 );
 		Name = Localization::Words_TIME_MASTER;
 		Adjective = _T( "Chrono" );
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Classic" ) ), Color::White, 1.2f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Classic" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
 
-	const std::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance()
+	const boost::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxTime::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxTime::Clone()
 	{
-		std::shared_ptr<BobPhsxTime> newBob = std::make_shared<BobPhsxTime>();
+		boost::shared_ptr<BobPhsxTime> newBob = boost::make_shared<BobPhsxTime>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsxTime>( newBob );
+		return boost::static_pointer_cast<BobPhsxTime>( newBob );
 	}
 
-	void BobPhsxTime::CopyTo( const std::shared_ptr<BobPhsxTime> &bob )
+	void BobPhsxTime::CopyTo( const boost::shared_ptr<BobPhsxTime> &bob )
 	{
-		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+		BobPhsxNormal::CopyTo( boost::static_pointer_cast<BobPhsxNormal>( bob ) );
 
 		bob->CurBehavior = CurBehavior;
 		bob->BehaviorLength = BehaviorLength;
@@ -51,22 +51,22 @@ namespace CloudberryKingdom
 		//Set( shared_from_this() );
 	}
 
-	void BobPhsxTime::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxTime::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		Set( phsx, Vector2(1) );
 	}
 
-	void BobPhsxTime::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
+	void BobPhsxTime::Set( const boost::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
 	{
 		phsx->UseGroundSpeed = false;
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 		}
 	}
 
-	void BobPhsxTime::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxTime::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxNormal::Init( bob );
 	}
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::PhsxStep();
 	}
 
-	void BobPhsxTime::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxTime::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 	}
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsxTime::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxTime::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 

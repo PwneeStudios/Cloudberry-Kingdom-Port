@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		TunnelObjs = std::vector<ObjectVec >( N, M );
 	}
 
-	void TunnelFill::SetTunnelObjParameter( const std::shared_ptr<ObjectBase> &obj )
+	void TunnelFill::SetTunnelObjParameter( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		obj->getCore()->GenData.RemoveIfUnused = false;
 	}
@@ -38,9 +38,9 @@ namespace CloudberryKingdom
 		TunnelObjs[ i ][ j ] = 0;
 	}
 
-	void TunnelFill::CleanupTunnel( const std::shared_ptr<Level> &level )
+	void TunnelFill::CleanupTunnel( const boost::shared_ptr<Level> &level )
 	{
-		std::map<unsigned long long, std::shared_ptr<ObjectBase> > ObjDict = std::map<unsigned long long, std::shared_ptr<ObjectBase> >();
+		std::map<unsigned long long, boost::shared_ptr<ObjectBase> > ObjDict = std::map<unsigned long long, boost::shared_ptr<ObjectBase> >();
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( ObjDict.find( ( *obj )->getCore()->MyGuid ) == ObjDict.end() )
 				ObjDict.insert( std::make_pair( ( *obj )->getCore()->MyGuid, *obj ) );

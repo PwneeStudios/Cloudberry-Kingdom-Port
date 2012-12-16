@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		int Index;
 		float ContinuousIndex;
 
-		std::shared_ptr<Camera> MyCam;
+		boost::shared_ptr<Camera> MyCam;
 
 		bool FadeOut;
 		float Alpha;

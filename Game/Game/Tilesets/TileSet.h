@@ -8,8 +8,8 @@ namespace CloudberryKingdom
 	struct TileInfoBase
 	{
 	
-		std::shared_ptr<SpriteInfo> Icon;
-		std::shared_ptr<SpriteInfo> Icon_Big;
+		boost::shared_ptr<SpriteInfo> Icon;
+		boost::shared_ptr<SpriteInfo> Icon_Big;
 
 	
 		void InitializeInstanceFields();
@@ -24,34 +24,34 @@ namespace CloudberryKingdom
 	/// <summary>
 	/// Stores a tile set's information, including what obstacles are allowed.
 	/// </summary>
-	struct TileSet : public Object, public std::enable_shared_from_this<TileSet>
+	struct TileSet : public Object, public boost::enable_shared_from_this<TileSet>
 	{
 	
-		static std::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile );
+		static boost::shared_ptr<TileInfoBase> UpgradeToInfo( Upgrade upgrade, const boost::shared_ptr<TileSet> &tile );
 
 		//C# TO C++ CONVERTER TODO TASK: C++ cast operators must convert from the enclosing type to another type:
-		//operator std::shared_ptr<TileSet> ( const std::wstring &name );
+		//operator boost::shared_ptr<TileSet> ( const std::wstring &name );
 
-		static std::shared_ptr<TileSet> Get( const std::wstring &name );
+		static boost::shared_ptr<TileSet> Get( const std::wstring &name );
 
-		std::shared_ptr<TileSetInfo> MyTileSetInfo;
+		boost::shared_ptr<TileSetInfo> MyTileSetInfo;
 
 		TileSet();
 
-		std::shared_ptr<TileSet> SetName( const std::wstring &Name );
+		boost::shared_ptr<TileSet> SetName( const std::wstring &Name );
 
-		std::shared_ptr<TileSet> SetNameInGame( Localization::Words Name );
+		boost::shared_ptr<TileSet> SetNameInGame( Localization::Words Name );
 
-		std::shared_ptr<TileSet> SetBackground( const std::wstring &background );
+		boost::shared_ptr<TileSet> SetBackground( const std::wstring &background );
 
 		void MakeNew();
 
 		// New tile set stuff
 		bool IsLoaded;
 		bool CustomStartEnd;
-		std::shared_ptr<BlockGroup> Pillars, Platforms, Ceilings, StartBlock, EndBlock;
+		boost::shared_ptr<BlockGroup> Pillars, Platforms, Ceilings, StartBlock, EndBlock;
 //C# TO C++ CONVERTER NOTE: The variable Wall was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<PieceQuad> Wall_Renamed;
+		boost::shared_ptr<PieceQuad> Wall_Renamed;
 
 		bool FixedWidths;
 		bool ProvidesTemplates;
@@ -66,19 +66,19 @@ namespace CloudberryKingdom
 
 		void _Start();
 
-		std::shared_ptr<PieceQuad> ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const std::shared_ptr<BlockGroup> &group );
+		boost::shared_ptr<PieceQuad> ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const boost::shared_ptr<BlockGroup> &group );
 
 	
-		std::shared_ptr<PieceQuad> ParseBlockLine( int width, std::vector<std::wstring> &bits );
+		boost::shared_ptr<PieceQuad> ParseBlockLine( int width, std::vector<std::wstring> &bits );
 
-		void ParseExtraBlockInfo( const std::shared_ptr<PieceQuad> &c, int width, std::vector<std::wstring> &bits );
+		void ParseExtraBlockInfo( const boost::shared_ptr<PieceQuad> &c, int width, std::vector<std::wstring> &bits );
 
 	
-		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd );
-		std::shared_ptr<PieceQuad> GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, std::shared_ptr<BlockGroup> group );
+		boost::shared_ptr<PieceQuad> GetPieceTemplate( const boost::shared_ptr<BlockBase> &block, const boost::shared_ptr<Rand> &rnd );
+		boost::shared_ptr<PieceQuad> GetPieceTemplate( const boost::shared_ptr<BlockBase> &block, const boost::shared_ptr<Rand> &rnd, boost::shared_ptr<BlockGroup> group );
 
 
-		std::shared_ptr<TileSet> StandInType;
+		boost::shared_ptr<TileSet> StandInType;
 
 		std::vector<Upgrade> ObstacleUpgrades;
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 
 		std::wstring ScreenshotString;
 
-		std::shared_ptr<BackgroundTemplate> MyBackgroundType;
+		boost::shared_ptr<BackgroundTemplate> MyBackgroundType;
 
 		Color CoinScoreColor;
 

@@ -8,26 +8,26 @@ namespace CloudberryKingdom
 	struct NormalFactory : public GameFactory
 	{
 	
-		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
 	struct NormalGameData : public GameData
 	{
 	
-		virtual void SetCreatedBobParameters( const std::shared_ptr<Bob> &bob );
+		virtual void SetCreatedBobParameters( const boost::shared_ptr<Bob> &bob );
 
 		virtual void SetAdditionalLevelParameters();
 
-		static std::shared_ptr<GameFactory> Factory;
+		static boost::shared_ptr<GameFactory> Factory;
 
 		NormalGameData();
 
-		NormalGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
+		NormalGameData( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
-		virtual void Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
+		virtual void Init( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
 	
-		std::shared_ptr<LevelSeedData> _MakeThreadLevelSeed;
+		boost::shared_ptr<LevelSeedData> _MakeThreadLevelSeed;
 		bool _MakeThreadMakeInBackground;
 		void _MakeThreadFunc();
 
@@ -39,9 +39,9 @@ namespace CloudberryKingdom
 
 		virtual void AdditionalReset();
 
-		virtual void BobDie( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob );
+		virtual void BobDie( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob );
 
-		virtual void BobDoneDying( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob );
+		virtual void BobDoneDying( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob );
 	};
 }
 

@@ -13,29 +13,29 @@ namespace CloudberryKingdom
 		MainVideo::Playing = false;
 		MainVideo::CurrentVideo = 0;
 		MainVideo::VPlayer = 0;
-		MainVideo::VEZTexture = std::make_shared<EzTexture>();
+		MainVideo::VEZTexture = boost::make_shared<EzTexture>();
 		MainVideo::Duration = 0;
 		MainVideo::StartTime;
 		MainVideo::CanSkip = false;
 		MainVideo::LengthUntilUserCanSkip = 0;
 		MainVideo::Subtitles;
 		MainVideo::SubtitleIndex = 0;
-		MainVideo::SubtitleQuad = std::make_shared<QuadClass>();
+		MainVideo::SubtitleQuad = boost::make_shared<QuadClass>();
 	}
 
 	// Statics
-	std::shared_ptr<ContentManager> MainVideo::Content;
+	boost::shared_ptr<ContentManager> MainVideo::Content;
 	bool MainVideo::Playing;
-	std::shared_ptr<Video> MainVideo::CurrentVideo;
-	std::shared_ptr<VideoPlayer> MainVideo::VPlayer;
-	std::shared_ptr<EzTexture> MainVideo::VEZTexture;
+	boost::shared_ptr<Video> MainVideo::CurrentVideo;
+	boost::shared_ptr<VideoPlayer> MainVideo::VPlayer;
+	boost::shared_ptr<EzTexture> MainVideo::VEZTexture;
 	double MainVideo::Duration;
 	DateTime MainVideo::StartTime;
 	bool MainVideo::CanSkip;
 	float MainVideo::LengthUntilUserCanSkip;
-	std::vector<std::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
+	std::vector<boost::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
 	int MainVideo::SubtitleIndex;
-	std::shared_ptr<QuadClass> MainVideo::SubtitleQuad;
+	boost::shared_ptr<QuadClass> MainVideo::SubtitleQuad;
 
 
 	void MainVideo::StartVideo_CanSkipIfWatched( const std::wstring &MovieName )
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 		if ( Content == 0 )
 		{
-			Content = std::make_shared<ContentManager>( _T("Content") );
+			Content = boost::make_shared<ContentManager>( _T("Content") );
 		}
 
 		CanSkip = CanSkipVideo;
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		//CurrentVideo = Tools.GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
 		CurrentVideo = Content->Load<Video>( Path::Combine( _T( "Movies" ), MovieName ) );
 
-		VPlayer = std::make_shared<VideoPlayer>();
+		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
 		VPlayer->Play( CurrentVideo );
 
@@ -135,7 +135,7 @@ bool MainVideo::Paused = false;
 		if ( SubtitleIndex >= static_cast<int>( Subtitles.size() ) )
 			return;
 
-		std::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
+		boost::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
 		if ( ElapsedTime() > NextSubtitle->Time )
 		{
 			switch ( NextSubtitle->MyAction )

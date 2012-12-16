@@ -11,12 +11,12 @@
 namespace CloudberryKingdom
 {
 
-	//Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	Doll::Doll( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
+	//Doll::Doll( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	Doll::Doll( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
 		ShowBob( false )
 	{
 	}
-	std::shared_ptr<Doll> Doll::Doll_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	boost::shared_ptr<Doll> Doll::Doll_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		InitializeInstanceFields();
 
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<Doll>( shared_from_this() );
+		return boost::static_pointer_cast<Doll>( shared_from_this() );
 	}
 
 	void Doll::ReleaseBody()
@@ -59,10 +59,10 @@ namespace CloudberryKingdom
 
 	void Doll::MakeDoll()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		MyDoll = std::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
+		MyDoll = boost::make_shared<Bob>( BobPhsxNormal::getInstance(), false );
 		Bob_PostConstruct( MyDoll, BobPhsxNormal::getInstance(), false );
 		MyDoll->MyPlayerIndex = MyCharacterSelect->getPlayer()->MyPlayerIndex;
 		MyDoll->MyPiece = Tools::CurLevel->CurPiece;
@@ -90,22 +90,22 @@ namespace CloudberryKingdom
 		MyDoll->SetColorScheme( MyCharacterSelect->getPlayer()->ColorScheme_Renamed );
 	}
 
-	int Doll::FindClrIndex( std::vector<std::shared_ptr<MenuListItem> > &list, std::shared_ptr<ClrTextFx> clr )
+	int Doll::FindClrIndex( std::vector<boost::shared_ptr<MenuListItem> > &list, boost::shared_ptr<ClrTextFx> clr )
 	{
 		int Index = 0;
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			if ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
+			if ( boost::static_pointer_cast<ClrTextFx>( ( *item )->obj ) == clr )
 				return Index;
 			Index++;
 		}
 		return 0;
 	}
 
-	int Doll::FindHatIndex( std::vector<std::shared_ptr<Hat> > &list, const std::shared_ptr<Hat> &hat )
+	int Doll::FindHatIndex( std::vector<boost::shared_ptr<Hat> > &list, const boost::shared_ptr<Hat> &hat )
 	{
 		int Index = 0;
-		for ( std::vector<std::shared_ptr<Hat> >::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
 			if ( *item == hat )
 				return Index;
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void Doll::GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<std::shared_ptr<MenuListItem> > > &ItemList )
+	void Doll::GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<boost::shared_ptr<MenuListItem> > > &ItemList )
 	{
 		ItemIndex[ 0 ] = FindClrIndex( ItemList[ 0 ], MyDoll->MyColorScheme.SkinColor );
 
@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::MyPhsxStep();
 
-		std::shared_ptr<BobPhsxCharSelect> DollPhsx = std::dynamic_pointer_cast<BobPhsxCharSelect>( MyDoll->MyPhsx );
+		boost::shared_ptr<BobPhsxCharSelect> DollPhsx = boost::dynamic_pointer_cast<BobPhsxCharSelect>( MyDoll->MyPhsx );
 
 		MyDoll->CapeWind = Cape::SineWind( Vector2( -1.25f, -.1f ),.5f,.05f, Tools::t ) *.7f;
 		MyDoll->MyPhsx->OnGround = true;

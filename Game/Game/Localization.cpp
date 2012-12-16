@@ -16,19 +16,19 @@ namespace CloudberryKingdom
 		this->MyDirectory = MyDirectory;
 	}
 
-	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture )
+	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const boost::shared_ptr<EzTexture> &MyTexture )
 	{
 		this->MyAction = MyAction;
 		this->Time = Time;
 		this->MyTexture = MyTexture;
 	}
 
-	std::shared_ptr<ContentManager> Localization::Content;
-	std::vector<std::shared_ptr<SubtitleAction> > Localization::Subtitles;
+	boost::shared_ptr<ContentManager> Localization::Content;
+	std::vector<boost::shared_ptr<SubtitleAction> > Localization::Subtitles;
 
 	const int Localization::NumLanguages = 10;
-	std::map<Localization::Language, std::shared_ptr<LanguageInfo> > Localization::Languages;
-	std::shared_ptr<LanguageInfo> Localization::CurrentLanguage;
+	std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages;
+	boost::shared_ptr<LanguageInfo> Localization::CurrentLanguage;
 	std::map<Localization::Language, std::map<Localization::Words, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
@@ -46,9 +46,9 @@ namespace CloudberryKingdom
 
 		// Open the giant translation file
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
-		std::shared_ptr<FileReader> reader = std::make_shared<FileReader>( path );
+		//boost::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
+		boost::shared_ptr<FileReader> reader = boost::make_shared<FileReader>( path );
 
 		std::wstring line;
 
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 	}
 
 	// FIXME: preinitialize the map with a fixed size?
-	//std::map<Localization::Language, std::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, std::shared_ptr<LanguageInfo> >( NumLanguages );
+	//std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages = std::map<Localization::Language, boost::shared_ptr<LanguageInfo> >( NumLanguages );
 
 	void Localization::SetLanguage( Language SelectedLanguage )
 	{
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 			if ( Tools::GetFileExt( path, *file ) == _T( "xnb" ) )
 			{
 				//var texture = Tools.TextureWad.AddTexture(null, Tools.GetFileName(path, file));
-				std::shared_ptr<CloudberryKingdom::EzTexture> texture = Tools::TextureWad->AddTexture( 0, Tools::GetFileName( _T( "Content" ), *file ) );
+				boost::shared_ptr<CloudberryKingdom::EzTexture> texture = Tools::TextureWad->AddTexture( 0, Tools::GetFileName( _T( "Content" ), *file ) );
 				texture->Load();
 			}
 		}*/
@@ -128,19 +128,19 @@ namespace CloudberryKingdom
 
 	void Localization::Initialize()
 	{
-		/*Content = std::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(_T("Content"), _T("Localization")) );*/
-		Content = std::make_shared<ContentManager>( Path::Combine(_T("Content"), _T("Localization")) );
+		/*Content = boost::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(_T("Content"), _T("Localization")) );*/
+		Content = boost::make_shared<ContentManager>( Path::Combine(_T("Content"), _T("Localization")) );
 
-		Languages.insert( std::make_pair( Language_CHINESE, std::make_shared<LanguageInfo>( Language_CHINESE, _T( "Chinese" ) ) ) );
-		Languages.insert( std::make_pair( Language_ENGLISH, std::make_shared<LanguageInfo>( Language_ENGLISH, _T( "English" ) ) ) );
-		Languages.insert( std::make_pair( Language_FRENCH, std::make_shared<LanguageInfo>( Language_FRENCH, _T( "French" ) ) ) );
-		Languages.insert( std::make_pair( Language_GERMAN, std::make_shared<LanguageInfo>( Language_GERMAN, _T( "German" ) ) ) );
-		Languages.insert( std::make_pair( Language_ITALIAN, std::make_shared<LanguageInfo>( Language_ITALIAN, _T( "Italian" ) ) ) );
-		Languages.insert( std::make_pair( Language_JAPANESE, std::make_shared<LanguageInfo>( Language_JAPANESE, _T( "Japanese" ) ) ) );
-		Languages.insert( std::make_pair( Language_KOREAN, std::make_shared<LanguageInfo>( Language_KOREAN, _T( "Korean" ) ) ) );
-		Languages.insert( std::make_pair( Language_PORTUGUESE, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Portuguese" ) ) ) );
-		Languages.insert( std::make_pair( Language_RUSSIAN, std::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Russian" ) ) ) );
-		Languages.insert( std::make_pair( Language_SPANISH, std::make_shared<LanguageInfo>( Language_SPANISH, _T( "English" ) ) ) );
+		Languages.insert( std::make_pair( Language_CHINESE, boost::make_shared<LanguageInfo>( Language_CHINESE, _T( "Chinese" ) ) ) );
+		Languages.insert( std::make_pair( Language_ENGLISH, boost::make_shared<LanguageInfo>( Language_ENGLISH, _T( "English" ) ) ) );
+		Languages.insert( std::make_pair( Language_FRENCH, boost::make_shared<LanguageInfo>( Language_FRENCH, _T( "French" ) ) ) );
+		Languages.insert( std::make_pair( Language_GERMAN, boost::make_shared<LanguageInfo>( Language_GERMAN, _T( "German" ) ) ) );
+		Languages.insert( std::make_pair( Language_ITALIAN, boost::make_shared<LanguageInfo>( Language_ITALIAN, _T( "Italian" ) ) ) );
+		Languages.insert( std::make_pair( Language_JAPANESE, boost::make_shared<LanguageInfo>( Language_JAPANESE, _T( "Japanese" ) ) ) );
+		Languages.insert( std::make_pair( Language_KOREAN, boost::make_shared<LanguageInfo>( Language_KOREAN, _T( "Korean" ) ) ) );
+		Languages.insert( std::make_pair( Language_PORTUGUESE, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Portuguese" ) ) ) );
+		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, _T( "Russian" ) ) ) );
+		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, _T( "English" ) ) ) );
 
 		std::wstring path = Path::Combine( Content->RootDirectory, _T( "Localization.tsv" ) );
 		ReadTranslationGrid( path );
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		ReadSubtitles( path );
 	}
 
-	std::vector<std::shared_ptr<SubtitleAction> > Localization::GetSubtitles( const std::wstring &VideoName )
+	std::vector<boost::shared_ptr<SubtitleAction> > Localization::GetSubtitles( const std::wstring &VideoName )
 	{
 		Subtitles.clear();
 		ReadSubtitleInfo( VideoName );
@@ -166,13 +166,13 @@ namespace CloudberryKingdom
 		if ( !File::Exists( path ) )
 			return;
 
-		Subtitles = std::vector<std::shared_ptr<SubtitleAction> >();
+		Subtitles = std::vector<boost::shared_ptr<SubtitleAction> >();
 		Subtitles.reserve( 50 );
 
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
-		std::shared_ptr<FileReader> reader = std::make_shared<FileReader>( path );
+		//boost::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
+		boost::shared_ptr<FileReader> reader = boost::make_shared<FileReader>( path );
 
 		std::wstring line;
 
@@ -203,8 +203,8 @@ namespace CloudberryKingdom
 
 			if ( identifier == _T( "show" ) )
 			{
-					std::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_%d" ), Index ) );
-					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, ParseFloat( data ), SubtitleTexture ) );
+					boost::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_%d" ), Index ) );
+					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, ParseFloat( data ), SubtitleTexture ) );
 
 					Index++;
 
@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == _T( "hide" ) )
 			{
-					Subtitles.push_back( std::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), std::shared_ptr<EzTexture>() ) );
+					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), boost::shared_ptr<EzTexture>() ) );
 			}
 
 			line = reader->ReadLine();

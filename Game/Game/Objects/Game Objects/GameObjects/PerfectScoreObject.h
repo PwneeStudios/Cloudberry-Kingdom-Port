@@ -13,25 +13,25 @@ namespace CloudberryKingdom
 	struct PerfectScoreObject : public GUI_Panel
 	{
 
-		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		
-			std::shared_ptr<PerfectScoreObject> pso;
+			boost::shared_ptr<PerfectScoreObject> pso;
 
 		
-			OnCoinGrabProxy( const std::shared_ptr<PerfectScoreObject> &pso );
+			OnCoinGrabProxy( const boost::shared_ptr<PerfectScoreObject> &pso );
 
-			void Apply( const std::shared_ptr<ObjectBase> &obj );
+			void Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
 		struct OnLevelRetryProxy : public Lambda
 		{
 		
-			std::shared_ptr<PerfectScoreObject> pso;
+			boost::shared_ptr<PerfectScoreObject> pso;
 
 		
-			OnLevelRetryProxy( const std::shared_ptr<PerfectScoreObject> &pso );
+			OnLevelRetryProxy( const boost::shared_ptr<PerfectScoreObject> &pso );
 
 			void Apply();
 		};
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 		/// Every time a coin is grabbed check to see if it was the last coin on the level.
 		/// </summary>
 	
-		void OnCoinGrab( const std::shared_ptr<ObjectBase> &obj );
+		void OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj );
 
 		/// <summary>
 		/// The value of the current bonus, factoring in score multipliers the current game might have.
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		bool Global;
 		bool ShowMultiplier;
 		PerfectScoreObject( bool Global, bool ShowMultiplier );
-		std::shared_ptr<PerfectScoreObject> PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
+		boost::shared_ptr<PerfectScoreObject> PerfectScoreObject_Construct( bool Global, bool ShowMultiplier );
 
 		const float getMultiplier() const;
 
@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 		bool AddedOnce;
 		void OnAdd_GUI();
 
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 		void UpdateScoreText();
 
 		void Init_GUI();

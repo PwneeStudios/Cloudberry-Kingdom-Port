@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	const std::shared_ptr<Texture2D> &EzTexture::getTex() const
+	const boost::shared_ptr<Texture2D> &EzTexture::getTex() const
 	{
 		return _Tex;
 	}
 
-	void EzTexture::setTex( const std::shared_ptr<Texture2D> &value )
+	void EzTexture::setTex( const boost::shared_ptr<Texture2D> &value )
 	{
 		_Tex = value;
 	}

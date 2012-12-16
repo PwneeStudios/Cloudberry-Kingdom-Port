@@ -10,14 +10,14 @@ namespace CloudberryKingdom
 	{
 	
 		CharSelectBackdrop();
-		std::shared_ptr<CharSelectBackdrop> CharSelectBackdrop_Construct();
+		boost::shared_ptr<CharSelectBackdrop> CharSelectBackdrop_Construct();
 
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void OnAdd();

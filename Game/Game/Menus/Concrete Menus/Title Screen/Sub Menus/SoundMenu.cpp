@@ -15,28 +15,28 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	SoundMenu::InitHideHelper::InitHideHelper( const std::shared_ptr<SoundMenu> &sm )
+	SoundMenu::InitHideHelper::InitHideHelper( const boost::shared_ptr<SoundMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void SoundMenu::InitHideHelper::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SoundMenu::InitHideHelper::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		sm->Hide();
 		sm->Call( MakeMagic( ControlScreen, ( sm->getControl() ) ), 10 );
 	}
 
-	SoundMenu::InitCallCustomControlsHelper::InitCallCustomControlsHelper( const std::shared_ptr<SoundMenu> &sm )
+	SoundMenu::InitCallCustomControlsHelper::InitCallCustomControlsHelper( const boost::shared_ptr<SoundMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void SoundMenu::InitCallCustomControlsHelper::Apply( const std::shared_ptr<MenuItem> &menuitem )
+	void SoundMenu::InitCallCustomControlsHelper::Apply( const boost::shared_ptr<MenuItem> &menuitem )
 	{
 		sm->Call( MakeMagic( CustomControlsMenu, () ), 10 );
 	}
 
-	SoundMenu::InitOnConfirmedIndexSelect::InitOnConfirmedIndexSelect( const std::shared_ptr<MenuList> &FsRezList )
+	SoundMenu::InitOnConfirmedIndexSelect::InitOnConfirmedIndexSelect( const boost::shared_ptr<MenuList> &FsRezList )
 	{
 		this->FsRezList = FsRezList;
 	}
@@ -44,12 +44,12 @@ namespace CloudberryKingdom
 	void SoundMenu::InitOnConfirmedIndexSelect::Apply()
 	{
 		PlayerManager::SavePlayerData->ResolutionPreferenceSet = true;
-		ResolutionGroup::Use( std::dynamic_pointer_cast<DisplayMode>( FsRezList->getCurObj() ) );
+		ResolutionGroup::Use( boost::dynamic_pointer_cast<DisplayMode>( FsRezList->getCurObj() ) );
 		SaveGroup::SaveAll();
 		PlayerManager::SaveRezAndKeys();
 	}
 
-	SoundMenu::Toggle_BorderlessProxy::Toggle_BorderlessProxy( const std::shared_ptr<SoundMenu> &sm )
+	SoundMenu::Toggle_BorderlessProxy::Toggle_BorderlessProxy( const boost::shared_ptr<SoundMenu> &sm )
 	{
 		this->sm = sm;
 	}
@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 	}
 
 	SoundMenu::SoundMenu( int Control ) : VerifyBaseMenu( false ) { }
-	std::shared_ptr<SoundMenu> SoundMenu::SoundMenu_Construct( int Control )
+	boost::shared_ptr<SoundMenu> SoundMenu::SoundMenu_Construct( int Control )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<SoundMenu>( shared_from_this() );
+		return boost::static_pointer_cast<SoundMenu>( shared_from_this() );
 	}
 
 	void SoundMenu::Init()
@@ -80,40 +80,40 @@ namespace CloudberryKingdom
 		this->FontScale *= .9f;
 
 		// Header
-		HeaderText = std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont );
 		HeaderText->Name = _T( "Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
-		std::shared_ptr<MenuSlider> FxSlider = std::make_shared<MenuSlider>( std::make_shared<EzText>( Localization::Words_SOUND_VOLUME, ItemFont ) );
+		boost::shared_ptr<MenuSlider> FxSlider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( Localization::Words_SOUND_VOLUME, ItemFont ) );
 		FxSlider->setMyFloat( Tools::SoundVolume );
 		FxSlider->Name = _T( "Sound" );
 		AddItem( FxSlider );
 
-		std::shared_ptr<MenuSlider> MusicSlider = std::make_shared<MenuSlider>( std::make_shared<EzText>( Localization::Words_MUSIC_VOLUME, ItemFont ) );
+		boost::shared_ptr<MenuSlider> MusicSlider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( Localization::Words_MUSIC_VOLUME, ItemFont ) );
 		MusicSlider->setMyFloat( Tools::MusicVolume );
 		MusicSlider->Name = _T( "Music" );
 		AddItem( MusicSlider );
 
-		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
-		item->setGo( std::make_shared<InitHideHelper>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
+		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
+		item->setGo( boost::make_shared<InitHideHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		item->Name = _T( "Controls" );
 		AddItem( item );
 
 	#if defined(PC_VERSION)
 		// Custom controls
-		std::shared_ptr<MenuItem> mitem = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) );
-		mitem->setGo( std::make_shared<InitCallCustomControlsHelper>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
+		boost::shared_ptr<MenuItem> mitem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) );
+		mitem->setGo( boost::make_shared<InitCallCustomControlsHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		mitem->Name = _T( "Custom" );
 		AddItem( mitem );
 
 		// Full screen resolutions
-		std::shared_ptr<EzText> RezText = std::make_shared<EzText>( Localization::Words_RESOLUTION, ItemFont );
+		boost::shared_ptr<EzText> RezText = boost::make_shared<EzText>( Localization::Words_RESOLUTION, ItemFont );
 		SetHeaderProperties( RezText );
 		RezText->Name = _T( "RezText" );
 		MyPile->Add( RezText );
 
-		std::shared_ptr<MenuList> FsRezList = std::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> FsRezList = boost::make_shared<MenuList>();
 		FsRezList->Name = _T( "RezList" );
 		FsRezList->Center = false;
 		FsRezList->MyExpandPos = Vector2( -498.1506f, 713.873f );
@@ -121,15 +121,15 @@ namespace CloudberryKingdom
 		int CurRez = 0;
 
 		// Get viable resolutions
-		std::vector<std::shared_ptr<DisplayMode> > modes = GetSupportedDisplayModes();
+		std::vector<boost::shared_ptr<DisplayMode> > modes = GetSupportedDisplayModes();
 
 		// Add resolutions to the current list
 		bool found = false;
-		for ( std::vector<std::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
+		for ( std::vector<boost::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
 			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;
 			Tools::Write( str.c_str() );
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( str, ItemFont, false, true ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, ItemFont, false, true ) );
 			SetItemProperties( item );
 			FsRezList->AddItem( item, MakeSmartObject( *mode ) );
 
@@ -145,16 +145,16 @@ namespace CloudberryKingdom
 		}
 		AddItem( FsRezList );
 		FsRezList->SetIndex( CurRez );
-		FsRezList->OnConfirmedIndexSelect = std::make_shared<InitOnConfirmedIndexSelect>( FsRezList );
+		FsRezList->OnConfirmedIndexSelect = boost::make_shared<InitOnConfirmedIndexSelect>( FsRezList );
 
 		// Full screen toggle
-		std::shared_ptr<EzText> FullScreenText = std::make_shared<EzText>( Localization::Words_FULL_SCREEN, ItemFont );
+		boost::shared_ptr<EzText> FullScreenText = boost::make_shared<EzText>( Localization::Words_FULL_SCREEN, ItemFont );
 		SetHeaderProperties( FullScreenText );
 		FullScreenText->Name = _T( "Fullscreen" );
 		MyPile->Add( FullScreenText );
 
-		std::shared_ptr<MenuToggle> toggle = std::make_shared<MenuToggle>( ItemFont );
-		toggle->OnToggle = std::make_shared<InitOnToggleHelper>();
+		boost::shared_ptr<MenuToggle> toggle = boost::make_shared<MenuToggle>( ItemFont );
+		toggle->OnToggle = boost::make_shared<InitOnToggleHelper>();
 		toggle->Name = _T( "FullscreenToggle" );
 		toggle->Toggle( Tools::getFullscreen() );
 
@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 		MakeBackButton();
 		SetPosition();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 	void SoundMenu::AddToggle_Borderless()
 	{
 		// Text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( Localization::Words_WINDOW_BORDER, ItemFont );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_WINDOW_BORDER, ItemFont );
 		SetHeaderProperties( Text );
 		Text->Name = _T( "WindowBorder" );
 		MyPile->Add( Text );
@@ -185,8 +185,8 @@ namespace CloudberryKingdom
 		Text->setScale( Text->getScale() * .9f );
 
 		// Toggle
-		std::shared_ptr<MenuToggle> Toggle = std::make_shared<MenuToggle>( ItemFont );
-		Toggle->OnToggle = std::make_shared<Toggle_BorderlessProxy>( std::static_pointer_cast<SoundMenu>( shared_from_this() ) );
+		boost::shared_ptr<MenuToggle> Toggle = boost::make_shared<MenuToggle>( ItemFont );
+		Toggle->OnToggle = boost::make_shared<Toggle_BorderlessProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) );
 		Toggle->Toggle( Tools::WindowBorder );
 		Toggle->Name = _T( "WindowBorderToggle" );
 		AddItem( Toggle );
@@ -206,7 +206,7 @@ namespace CloudberryKingdom
 	}
 #endif
 
-	bool SoundMenu::MenuReturnToCaller( const std::shared_ptr<Menu> &menu )
+	bool SoundMenu::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
 	{
 	#if defined(PC_VERSION)
 		PlayerManager::SaveRezAndKeys();
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 
 	void SoundMenu::SetPosition()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Sound" ) );
 		if ( _item != 0 )
 		{
@@ -225,7 +225,7 @@ namespace CloudberryKingdom
 			_item->MyText->setScale( 0.72f );
 			_item->MySelectedText->setScale( 0.72f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
-			( std::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1611.11f, -152.7778f );
+			( boost::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1611.11f, -152.7778f );
 		}
 		_item = MyMenu->FindItemByName( _T( "Music" ) );
 		if ( _item != 0 )
@@ -234,7 +234,7 @@ namespace CloudberryKingdom
 			_item->MyText->setScale( 0.72f );
 			_item->MySelectedText->setScale( 0.72f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
-			( std::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1552.777f, -150.0001f );
+			( boost::static_pointer_cast<MenuSlider>( _item ) )->SliderShift = Vector2( 1552.777f, -150.0001f );
 		}
 		_item = MyMenu->FindItemByName( _T( "Controls" ) );
 		if ( _item != 0 )
@@ -287,7 +287,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1007.934f, -43.651f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{
@@ -313,7 +313,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.7776f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{

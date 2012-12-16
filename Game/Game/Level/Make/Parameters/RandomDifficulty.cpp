@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	int RndDifficulty::ChoosePaths( const std::shared_ptr<PieceSeedData> &data )
+	int RndDifficulty::ChoosePaths( const boost::shared_ptr<PieceSeedData> &data )
 	{
 		float JumpDifficulty = data->MyUpgrades1->Get( Upgrade_JUMP );
 
@@ -26,19 +26,19 @@ namespace CloudberryKingdom
 			return LadderType_DOUBLE_MOVING;
 	}
 
-	void RndDifficulty::ZeroUpgrades( const std::shared_ptr<Upgrades> &upgrades )
+	void RndDifficulty::ZeroUpgrades( const boost::shared_ptr<Upgrades> &upgrades )
 	{
 		for ( int i = 0; i < Tools::UpgradeTypes; i++ )
 			upgrades->UpgradeLevels[ i ] = 0;
 	}
 
-	void RndDifficulty::EnforceLevelCap( const std::shared_ptr<Upgrades> &upgrades, int Cap, int LowerCap )
+	void RndDifficulty::EnforceLevelCap( const boost::shared_ptr<Upgrades> &upgrades, int Cap, int LowerCap )
 	{
 		for ( int i = 0; i < Tools::UpgradeTypes; i++ )
 			upgrades->UpgradeLevels[ i ] = __max( LowerCap, __min( Cap, upgrades->UpgradeLevels[ i ] ) );
 	}
 
-	void RndDifficulty::UseUpgrades( const std::shared_ptr<PieceSeedData> &Seed, const std::shared_ptr<Upgrades> &u )
+	void RndDifficulty::UseUpgrades( const boost::shared_ptr<PieceSeedData> &Seed, const boost::shared_ptr<Upgrades> &u )
 	{
 		ZeroUpgrades( Seed->MyUpgrades1 );
 		Seed->MyUpgrades1->CopyFrom( u );
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		Seed->MyUpgrades2->CalcGenData( Seed->MyGenData->gen2, Seed->Style );
 	}
 
-	void RndDifficulty::IntToDifficulty( const std::shared_ptr<PieceSeedData> &Seed, const std::shared_ptr<TileSet> &TileType )
+	void RndDifficulty::IntToDifficulty( const boost::shared_ptr<PieceSeedData> &Seed, const boost::shared_ptr<TileSet> &TileType )
 	{
 		ZeroUpgrades( Seed->MyUpgrades1 );
 		Seed->MyUpgrades1->Get( Upgrade_FIRE_SPINNER ) = 10;

@@ -8,11 +8,11 @@ GraphicsDevice::GraphicsDevice() :
 {
 	SamplerStates.resize( 3 );
 
-	PP = std::make_shared<PresentationParameters>();
+	PP = boost::make_shared<PresentationParameters>();
 
 }
 
-void GraphicsDevice::SetRenderTarget( const std::shared_ptr<RenderTarget2D> &rt )
+void GraphicsDevice::SetRenderTarget( const boost::shared_ptr<RenderTarget2D> &rt )
 {
 }
 

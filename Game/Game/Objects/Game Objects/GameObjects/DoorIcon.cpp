@@ -10,22 +10,22 @@ namespace CloudberryKingdom
 		Level_Renamed( 0 )
 	{
 	}
-	std::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( int Level_Renamed )
+	boost::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( int Level_Renamed )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
 		this->Level_Renamed = Level_Renamed;
 		Init( StringConverterHelper::toString( Level_Renamed ) );
 
-		return std::static_pointer_cast<DoorIcon>( shared_from_this() );
+		return boost::static_pointer_cast<DoorIcon>( shared_from_this() );
 	}
 
-	DoorIcon::DoorIcon( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) :
+	DoorIcon::DoorIcon( const boost::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale ) :
 		upgrade( static_cast<Upgrade>( 0 ) ),
 		Level_Renamed( 0 )
 	{
 	}
-	std::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( const std::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale )
+	boost::shared_ptr<DoorIcon> DoorIcon::DoorIcon_Construct( const boost::shared_ptr<BobPhsx> &PhsxType, Vector2 pos, float Scale )
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -36,10 +36,10 @@ namespace CloudberryKingdom
 
 		getCore()->DrawLayer = 2;
 
-		return std::static_pointer_cast<DoorIcon>( shared_from_this() );
+		return boost::static_pointer_cast<DoorIcon>( shared_from_this() );
 	}
 
-	void DoorIcon::SetIcon( const std::shared_ptr<BobPhsx> &hero )
+	void DoorIcon::SetIcon( const boost::shared_ptr<BobPhsx> &hero )
 	{
 		this->hero = hero;
 		SetIcon( IconType_HERO );
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 	void DoorIcon::SetIcon( IconType type )
 	{
 		MyPile->Clear();
-		std::shared_ptr<QuadClass> Backdrop = 0;
+		boost::shared_ptr<QuadClass> Backdrop = 0;
 
 		switch ( type )
 		{
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer = 9;
 
 		s = text;
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		SetIcon( IconType_NUMBER );
 

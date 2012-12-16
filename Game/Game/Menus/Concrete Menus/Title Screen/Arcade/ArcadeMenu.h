@@ -8,11 +8,11 @@ namespace CloudberryKingdom
 	struct ArcadeItem : public MenuItem
 	{
 	
-		std::shared_ptr<Challenge> MyChallenge;
-		std::shared_ptr<Awardment> MyPrereq;
+		boost::shared_ptr<Challenge> MyChallenge;
+		boost::shared_ptr<Awardment> MyPrereq;
 		bool Locked;
 
-		ArcadeItem( const std::shared_ptr<EzText> &Text, const std::shared_ptr<Challenge> &MyChallenge, const std::shared_ptr<Awardment> &MyPrereq );
+		ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq );
 	};
 
 	struct ArcadeBaseMenu : public CkBaseMenu
@@ -21,36 +21,36 @@ namespace CloudberryKingdom
 		struct PlayGameProxy : public Lambda
 		{
 		
-			std::shared_ptr<ArcadeBaseMenu> abm;
+			boost::shared_ptr<ArcadeBaseMenu> abm;
 
 		
-			PlayGameProxy( const std::shared_ptr<ArcadeBaseMenu> &abm );
+			PlayGameProxy( const boost::shared_ptr<ArcadeBaseMenu> &abm );
 
 			void Apply();
 		};
 
 	
-		struct StartFuncProxy : public Lambda_1<std::shared_ptr<LevelItem> >
+		struct StartFuncProxy : public Lambda_1<boost::shared_ptr<LevelItem> >
 		{
 		
-			std::shared_ptr<ArcadeBaseMenu> abm;
+			boost::shared_ptr<ArcadeBaseMenu> abm;
 
 		
-			StartFuncProxy( const std::shared_ptr<ArcadeBaseMenu> &abm );
+			StartFuncProxy( const boost::shared_ptr<ArcadeBaseMenu> &abm );
 
-			void Apply( const std::shared_ptr<LevelItem> &levelitem );
+			void Apply( const boost::shared_ptr<LevelItem> &levelitem );
 		};
 
 	
-		std::shared_ptr<LevelItem> SelectedItem;
-		std::shared_ptr<ArcadeItem> MyArcadeItem;
+		boost::shared_ptr<LevelItem> SelectedItem;
+		boost::shared_ptr<ArcadeItem> MyArcadeItem;
 
-		std::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu_Construct();
+		boost::shared_ptr<ArcadeBaseMenu> ArcadeBaseMenu_Construct();
 
 		virtual void OnAdd();
 
 	
-		virtual void StartFunc( const std::shared_ptr<LevelItem> &item );
+		virtual void StartFunc( const boost::shared_ptr<LevelItem> &item );
 
 		virtual void PlayGame();
 
@@ -62,22 +62,22 @@ namespace CloudberryKingdom
 	struct ArcadeMenu : public ArcadeBaseMenu
 	{
 	
-		struct GoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct GoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<ArcadeMenu> am;
+			boost::shared_ptr<ArcadeMenu> am;
 
 		
-			GoProxy( const std::shared_ptr<ArcadeMenu> &am );
+			GoProxy( const boost::shared_ptr<ArcadeMenu> &am );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		bool Long;
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void OnReturnTo();
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 
 	
 		ArcadeMenu();
-		std::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
+		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
 
 		virtual void Init();
 
@@ -96,10 +96,10 @@ namespace CloudberryKingdom
 
 		Vector2 GetGoalPos();
 
-		std::shared_ptr<MenuItem> AddChallenge( const std::shared_ptr<Challenge> &challenge, const std::shared_ptr<Awardment> &prereq, const std::shared_ptr<Awardment> &goal, const std::wstring &itemname );
+		boost::shared_ptr<MenuItem> AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const boost::shared_ptr<Awardment> &goal, const std::wstring &itemname );
 
 	
-		virtual void Go( const std::shared_ptr<MenuItem> &item );
+		virtual void Go( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void MyPhsxStep();

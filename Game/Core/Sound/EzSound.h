@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	struct EzSound
 	{
 	
-		std::shared_ptr<SoundEffect> sound;
+		boost::shared_ptr<SoundEffect> sound;
 		std::wstring Name;
 		int MaxInstances;
 		float DefaultVolume;

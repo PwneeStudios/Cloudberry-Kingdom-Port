@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	LoadSeedAs::LoadSeedAsOnEnterLambda::LoadSeedAsOnEnterLambda( const std::shared_ptr<LoadSeedAs> &lsa )
+	LoadSeedAs::LoadSeedAsOnEnterLambda::LoadSeedAsOnEnterLambda( const boost::shared_ptr<LoadSeedAs> &lsa )
 	{
 		this->lsa = lsa;
 	}
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		lsa->ReturnToCaller();
 	}
 
-	LoadSeedAs::LoadSeedAsBackLambda::LoadSeedAsBackLambda( const std::shared_ptr<LoadSeedAs> &lsa )
+	LoadSeedAs::LoadSeedAsBackLambda::LoadSeedAsBackLambda( const boost::shared_ptr<LoadSeedAs> &lsa )
 	{
 		this->lsa = lsa;
 	}
@@ -28,18 +28,18 @@ namespace CloudberryKingdom
 		lsa->ReturnToCaller();
 	}
 
-	LoadSeedAs::LoadProxy1::LoadProxy1( const std::shared_ptr<LoadSeedAs> &lsa )
+	LoadSeedAs::LoadProxy1::LoadProxy1( const boost::shared_ptr<LoadSeedAs> &lsa )
 	{
 		this->lsa = lsa;
 	}
 
-	void LoadSeedAs::LoadProxy1::Apply( const std::shared_ptr<MenuItem> &_item )
+	void LoadSeedAs::LoadProxy1::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		lsa->Load( _item );
 	}
 
-	LoadSeedAs::LoadSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
-	std::shared_ptr<LoadSeedAs> LoadSeedAs::LoadSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
+	LoadSeedAs::LoadSeedAs( int Control, const boost::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
+	boost::shared_ptr<LoadSeedAs> LoadSeedAs::LoadSeedAs_Construct( int Control, const boost::shared_ptr<PlayerData> &Player )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<LoadSeedAs>( shared_from_this() );
+		return boost::static_pointer_cast<LoadSeedAs>( shared_from_this() );
 	}
 
 	void LoadSeedAs::Init()
@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 
 		// Header
 		std::wstring Text = _T( "Load the following Seed...?" );
-		HeaderText = std::make_shared<EzText>( Text, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Text, ItemFont );
 		HeaderText->Name = _T( "Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
@@ -73,18 +73,18 @@ namespace CloudberryKingdom
 		//MyPile.Add(HeaderText);
 		//HeaderText.Pos = HeaderPos;
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Load seed
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 		item->Name = _T( "Load" );
-		item->setGo( std::make_shared<LoadProxy1>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<LoadProxy1>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 
 	void LoadSeedAs::SetPosition()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Load" ) );
 		if ( _item != 0 )
 		{
@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 
 		MyPile->FindEzText( _T( "Header" ) )->setPos( Vector2( 61.11098f, 821.8887f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -152,14 +152,14 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<LoadSeedAsOnEnterLambda>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
-		TextBox->OnEscape->Add( std::make_shared<LoadSeedAsBackLambda>( std::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEnter->Add( boost::make_shared<LoadSeedAsOnEnterLambda>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEscape->Add( boost::make_shared<LoadSeedAsBackLambda>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();
 	}
 
-	void LoadSeedAs::Load( const std::shared_ptr<MenuItem> &_item )
+	void LoadSeedAs::Load( const boost::shared_ptr<MenuItem> &_item )
 	{
 		if ( TextBox != 0 )
 		{
@@ -167,6 +167,6 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		SavedSeedsGUI::LoadSeed( TextBox->getText(), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		SavedSeedsGUI::LoadSeed( TextBox->getText(), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 }

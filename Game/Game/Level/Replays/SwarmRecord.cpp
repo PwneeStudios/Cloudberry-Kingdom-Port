@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		MainRecord.reset();
 		
 		// Release all recordings in Records
-		for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+		for ( std::list<boost::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 			( *record )->Release();
 
 		Records.clear();
@@ -19,17 +19,17 @@ namespace CloudberryKingdom
 	SwarmRecord::SwarmRecord()
 	{
 		InitializeInstanceFields();
-		Records = std::list<std::shared_ptr<Recording> >();
+		Records = std::list<boost::shared_ptr<Recording> >();
 
-		BobQuad = std::make_shared<QuadClass>();
+		BobQuad = boost::make_shared<QuadClass>();
 		BobQuad->Base.e1 *= 100;
 		BobQuad->Base.e2 *= 100;
 		BobQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		BobQuad->Quad_Renamed.setMyTexture( std::make_shared<EzTexture>() );
+		BobQuad->Quad_Renamed.setMyTexture( boost::make_shared<EzTexture>() );
 		BobQuad->Quad_Renamed.getMyTexture()->Name = _T( "BobQuad" );
 	}
 
-	void SwarmRecord::Draw( int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks )
+	void SwarmRecord::Draw( int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks )
 	{
 		if ( level->SingleOnly )
 		{
@@ -37,24 +37,24 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+			for ( std::list<boost::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 				( *record )->Draw( BobQuad, Step, level, AnimGroup, BobLinks );
 		}
 	}
 
-	void SwarmRecord::AddRecord( const std::shared_ptr<Recording> &Record, int Step )
+	void SwarmRecord::AddRecord( const boost::shared_ptr<Recording> &Record, int Step )
 	{
 		MainRecord = Record;
 
 		if ( static_cast<int>( Records.size() ) >= MaxRecords )
 		{
-			/*std::shared_ptr<Recording> DevectordRecord = Records.pop();*/
-			std::shared_ptr<Recording> DevectordRecord = Records.front();
+			/*boost::shared_ptr<Recording> DevectordRecord = Records.pop();*/
+			boost::shared_ptr<Recording> DevectordRecord = Records.front();
 			Records.pop_front();
 			DevectordRecord->Release();
 		}
 
-		for ( std::list<std::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
+		for ( std::list<boost::shared_ptr<Recording> >::const_iterator record = Records.begin(); record != Records.end(); ++record )
 			if ( *record != MainRecord )
 				( *record )->ConvertToSuperSparse();
 

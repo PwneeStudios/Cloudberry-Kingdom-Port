@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		void InitialZoomIn();
 
 	
-		std::shared_ptr<QuadClass> Scene, Title, Title_Trim, Scene_NoBob_Blur, Scene_Blur, Scene_Princess, Scene_NoBob_Brighten, Scene_Kobbler, Scene_Kobbler_Blur;
+		boost::shared_ptr<QuadClass> Scene, Title, Title_Trim, Scene_NoBob_Blur, Scene_Blur, Scene_Princess, Scene_NoBob_Brighten, Scene_Kobbler, Scene_Kobbler_Blur;
 	
 		virtual void Init();
 
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 
 		StartMenu_MW_Backpanel();
-		std::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel_Construct();
+		boost::shared_ptr<StartMenu_MW_Backpanel> StartMenu_MW_Backpanel_Construct();
 	};
 }
 

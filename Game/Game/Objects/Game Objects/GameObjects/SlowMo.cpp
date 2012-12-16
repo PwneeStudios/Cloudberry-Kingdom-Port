@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	SlowMo::SlowMo() :
 		Speed( 0 ) { }
-	std::shared_ptr<SlowMo> SlowMo::SlowMo_Construct()
+	boost::shared_ptr<SlowMo> SlowMo::SlowMo_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
 
-		return std::static_pointer_cast<SlowMo>( shared_from_this() );
+		return boost::static_pointer_cast<SlowMo>( shared_from_this() );
 	}
 
 	void SlowMo::ReleaseBody()
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		// Don't affect speed if a replay is being watched
 		if ( level->Replay || level->Watching )

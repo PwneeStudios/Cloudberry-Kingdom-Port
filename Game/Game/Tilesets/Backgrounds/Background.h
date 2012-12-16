@@ -12,9 +12,9 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
+		static std::map<std::wstring, boost::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
 
-		static std::shared_ptr<BackgroundTemplate> None, Random, _Sea, _Sea_Rain, _Hills, _Hills_Rain, _Forest, _Forest_Rain, _Cloud, _Cloud_Rain, _Cave, _Castle;
+		static boost::shared_ptr<BackgroundTemplate> None, Random, _Sea, _Sea_Rain, _Hills, _Hills_Rain, _Forest, _Forest_Rain, _Cloud, _Cloud_Rain, _Cave, _Castle;
 
 			//_Sea = new BackgroundTemplate("sea", Background._code_Sea),
 			//_Sea_Rain = new BackgroundTemplate("sea_rain", Background._code_Sea, Background.AddRainLayer),
@@ -27,12 +27,12 @@ namespace CloudberryKingdom
 			//_Cave = new BackgroundTemplate("cave", Background._code_Cave),
 			//_Castle = new BackgroundTemplate("castle", Background._code_Castle);
 
-		static void AddTemplate( const std::shared_ptr<BackgroundTemplate> &template_Renamed );
+		static void AddTemplate( const boost::shared_ptr<BackgroundTemplate> &template_Renamed );
 
 		static void Load( const std::wstring &path );
 	};
 
-	struct BackgroundTemplate : public std::enable_shared_from_this<BackgroundTemplate>
+	struct BackgroundTemplate : public boost::enable_shared_from_this<BackgroundTemplate>
 	{
 	
 		std::wstring Name;
@@ -40,13 +40,13 @@ namespace CloudberryKingdom
 		bool MadeOfText;
 		std::wstring File;
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 
 		BackgroundTemplate();
 
 		BackgroundTemplate( const std::wstring &Name );
 
-		std::shared_ptr<Background> MakeInstanceOf();
+		boost::shared_ptr<Background> MakeInstanceOf();
 
 	
 		void InitializeInstanceFields();
@@ -55,11 +55,11 @@ namespace CloudberryKingdom
 	struct RegularBackground : public Background
 	{
 	
-		std::shared_ptr<BackgroundTemplate> MyTemplate;
+		boost::shared_ptr<BackgroundTemplate> MyTemplate;
 
 		RegularBackground();
 
-		virtual void Init( const std::shared_ptr<Level> &level );
+		virtual void Init( const boost::shared_ptr<Level> &level );
 
 		virtual void Draw();
 

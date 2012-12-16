@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		bool Initialized;
 
 		AnimQueueEntry();
-		AnimQueueEntry( const std::shared_ptr<AnimQueueEntry> &entry );
+		AnimQueueEntry( const boost::shared_ptr<AnimQueueEntry> &entry );
 	};
 }
 

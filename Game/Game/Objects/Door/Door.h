@@ -13,10 +13,10 @@ namespace CloudberryKingdom
 		
 			int Length_, Intensity_;
 			bool Sound_;
-			std::shared_ptr<Door> Door_;
+			boost::shared_ptr<Door> Door_;
 
 		
-			ShakeLambda( const std::shared_ptr<Door> &door, int Length, int Intensity, bool Sound );
+			ShakeLambda( const boost::shared_ptr<Door> &door, int Length, int Intensity, bool Sound );
 
 			void Apply();
 		};
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		struct DoorTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 			bool Show;
 
 			Vector2 SizePadding;
@@ -34,11 +34,11 @@ namespace CloudberryKingdom
 			Vector2 ShiftStart;
 			Vector2 CollisionSize;
 
-			std::shared_ptr<EzSound> DoorOpen;
-			std::shared_ptr<EzSound> DoorClose;
+			boost::shared_ptr<EzSound> DoorOpen;
+			boost::shared_ptr<EzSound> DoorClose;
 
 //C# TO C++ CONVERTER NOTE: The variable Sign was renamed since it is named the same as a user-defined type:
-			std::shared_ptr<SpriteInfo> Sign_Renamed;
+			boost::shared_ptr<SpriteInfo> Sign_Renamed;
 			bool ShowSign;
 
 		
@@ -52,12 +52,12 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<LevelSeedData> _NextLevelSeedData;
+		boost::shared_ptr<LevelSeedData> _NextLevelSeedData;
 	
-		const std::shared_ptr<LevelSeedData> &getNextLevelSeedData() const;
-		void setNextLevelSeedData( const std::shared_ptr<LevelSeedData> &value );
+		const boost::shared_ptr<LevelSeedData> &getNextLevelSeedData() const;
+		void setNextLevelSeedData( const boost::shared_ptr<LevelSeedData> &value );
 
-		std::shared_ptr<NormalBlock> MyBackblock;
+		boost::shared_ptr<NormalBlock> MyBackblock;
 
 		virtual void Release();
 
@@ -72,23 +72,23 @@ namespace CloudberryKingdom
 	
 		bool Locked;
 
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnOpen;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > _OnOpen;
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > getOnOpen() const;
-		void setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > getOnOpen() const;
+		void setOnOpen( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value );
 
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > _OnEnter;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > _OnEnter;
 	
-		const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &getOnEnter() const;
-		void setOnEnter( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value );
-		std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > ExtraPhsx;
+		const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &getOnEnter() const;
+		void setOnEnter( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value );
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > ExtraPhsx;
 
 	
-		std::shared_ptr<PressNote> MyPressNote;
+		boost::shared_ptr<PressNote> MyPressNote;
 
 	
 		virtual void MakeNew();
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 		/// Sets the door to a default type associated with the given tile set.
 		/// </summary>
 	
-		void SetDoorType( const std::shared_ptr<TileSet> &TileSetType, const std::shared_ptr<Level> &level );
+		void SetDoorType( const boost::shared_ptr<TileSet> &TileSetType, const boost::shared_ptr<Level> &level );
 
 		Door( bool BoxesOnly );
 
@@ -171,17 +171,17 @@ namespace CloudberryKingdom
 		void MoveBobs();
 
 		bool MoveFeet;
-		void MoveBobToHere( const std::shared_ptr<Bob> &bob );
+		void MoveBobToHere( const boost::shared_ptr<Bob> &bob );
 
 		/// <summary>
 		/// The Bob interacting with the door.
 		/// </summary>
-		std::shared_ptr<Bob> InteractingBob;
+		boost::shared_ptr<Bob> InteractingBob;
 
 		/// <summary>
 		/// The Bob activating the door.
 		/// </summary>
-		std::shared_ptr<Bob> ActivatingBob;
+		boost::shared_ptr<Bob> ActivatingBob;
 
 		/// <summary>
 		/// When true, when a player closes the door he is hid.
@@ -227,17 +227,17 @@ namespace CloudberryKingdom
 		bool AutoOpen;
 
 		static bool AllowCompControl;
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 		void Do();
 
-		void HaveBobUseDoor( const std::shared_ptr<Bob> &bob );
+		void HaveBobUseDoor( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 	
 		void InitializeInstanceFields();

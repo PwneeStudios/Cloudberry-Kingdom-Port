@@ -44,8 +44,8 @@ struct QuadDrawerInternal
 	GLuint ColorAttrib;
 	//GLuint TexUniform;
 
-	std::shared_ptr<Effect> CurrentEffect;
-	std::shared_ptr<EffectParameter> TextureParameter;
+	boost::shared_ptr<Effect> CurrentEffect;
+	boost::shared_ptr<EffectParameter> TextureParameter;
 
 	BatchList Batches;
 
@@ -207,7 +207,7 @@ QuadDrawerPc::~QuadDrawerPc()
 	delete internal_;
 }
 
-void QuadDrawerPc::SetEffect( const std::shared_ptr<Effect> &effect )
+void QuadDrawerPc::SetEffect( const boost::shared_ptr<Effect> &effect )
 {
 	internal_->CurrentEffect = effect;
 
@@ -217,7 +217,7 @@ void QuadDrawerPc::SetEffect( const std::shared_ptr<Effect> &effect )
 	internal_->TextureParameter = effect->Parameters( "u_texture" );
 }
 
-std::shared_ptr<Effect> QuadDrawerPc::GetEffect()
+boost::shared_ptr<Effect> QuadDrawerPc::GetEffect()
 {
 	return internal_->CurrentEffect;
 }

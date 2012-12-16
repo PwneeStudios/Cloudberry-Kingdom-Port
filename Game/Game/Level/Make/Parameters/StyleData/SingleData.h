@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 	
 		Vector2 InitialDoorYRange;
 
-		SingleData( const std::shared_ptr<Rand> &Rnd );
+		SingleData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 

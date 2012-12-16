@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	struct StyleData : public std::enable_shared_from_this<StyleData>
+	struct StyleData : public boost::enable_shared_from_this<StyleData>
 	{
 
 	
@@ -162,15 +162,15 @@ namespace CloudberryKingdom
 		/// A callback to modify AutoGen parameters after they have been set
 		/// </summary>
 	
-		std::shared_ptr<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > > MyModParams;
+		boost::shared_ptr<Multicaster_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> > > MyModParams;
 
 		void Release();
 
-		std::map<std::shared_ptr<AutoGen>, std::shared_ptr<AutoGen_Parameters> > GenParams;
-		void CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level );
-		std::shared_ptr<AutoGen_Parameters> FindParams( const std::shared_ptr<AutoGen> &gen );
+		std::map<boost::shared_ptr<AutoGen>, boost::shared_ptr<AutoGen_Parameters> > GenParams;
+		void CalcGenParams( const boost::shared_ptr<PieceSeedData> &SeedData, const boost::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> FindParams( const boost::shared_ptr<AutoGen> &gen );
 
-		std::shared_ptr<StyleData> Clone();
+		boost::shared_ptr<StyleData> Clone();
 
 		float Zoom;
 		TimeTypes TimeType;
@@ -286,10 +286,10 @@ namespace CloudberryKingdom
 
 		bool Masochistic;
 
-		std::shared_ptr<Rand> Rnd;
-		StyleData( const std::shared_ptr<Rand> &Rnd );
+		boost::shared_ptr<Rand> Rnd;
+		StyleData( const boost::shared_ptr<Rand> &Rnd );
 
-		void Calculate( const std::shared_ptr<Upgrades> &u );
+		void Calculate( const boost::shared_ptr<Upgrades> &u );
 
 	
 		virtual void CalculateKeepUnused( float JumpLevel );
@@ -301,18 +301,18 @@ namespace CloudberryKingdom
 
 		int GetOffset( int Period, Vector2 pos, _OffsetType Type );
 	
-		void SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const boost::shared_ptr<PieceSeedData> &Piece );
 
 	
-		void SetSinglePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetSinglePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece );
 
-		void SetDoubePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetDoubePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece );
 
-		void SetTriplePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece );
+		void SetTriplePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece );
 
-		void SuppressGroundCeiling( const std::shared_ptr<PieceSeedData> &piece );
+		void SuppressGroundCeiling( const boost::shared_ptr<PieceSeedData> &piece );
 
-		void SetToMake_BouncyHallway( const std::shared_ptr<PieceSeedData> &piece );
+		void SetToMake_BouncyHallway( const boost::shared_ptr<PieceSeedData> &piece );
 
 	
 		void InitializeInstanceFields();

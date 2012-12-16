@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 			VisualStyles_CASTLE
 		};
 	
-		VerticalData( const std::shared_ptr<Rand> &Rnd );
+		VerticalData( const boost::shared_ptr<Rand> &Rnd );
 
 		VisualStyles VisualStyle;
 	};
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		virtual void CalculateKeepUnused( float JumpLevel );
 
 	
-		UpData( const std::shared_ptr<Rand> &Rnd );
+		UpData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
 	};

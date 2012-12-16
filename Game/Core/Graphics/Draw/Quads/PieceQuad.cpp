@@ -8,9 +8,9 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::map<std::wstring, std::shared_ptr<PieceQuad> > PieceQuad::Dict;
-	std::shared_ptr<PieceQuad> PieceQuad::MovingBlock_Renamed, PieceQuad::FallingBlock_Renamed, PieceQuad::BouncyBlock_Renamed, PieceQuad::Elevator;
-	std::shared_ptr<BlockGroup> PieceQuad::FallGroup, PieceQuad::BouncyGroup, PieceQuad::MovingGroup, PieceQuad::ElevatorGroup;
+	std::map<std::wstring, boost::shared_ptr<PieceQuad> > PieceQuad::Dict;
+	boost::shared_ptr<PieceQuad> PieceQuad::MovingBlock_Renamed, PieceQuad::FallingBlock_Renamed, PieceQuad::BouncyBlock_Renamed, PieceQuad::Elevator;
+	boost::shared_ptr<BlockGroup> PieceQuad::FallGroup, PieceQuad::BouncyGroup, PieceQuad::MovingGroup, PieceQuad::ElevatorGroup;
 
 
 	void PieceQuad::CalcTexture( int anim, float t )
@@ -18,12 +18,12 @@ namespace CloudberryKingdom
 		Center.CalcTexture( anim, t );
 	}
 
-	std::shared_ptr<PieceQuad> PieceQuad::Get( const std::wstring &name )
+	boost::shared_ptr<PieceQuad> PieceQuad::Get( const std::wstring &name )
 	{
 		return Dict[ name ];
 	}
 
-	void PieceQuad::Clone( const std::shared_ptr<PieceQuad> &PieceQuadA )
+	void PieceQuad::Clone( const boost::shared_ptr<PieceQuad> &PieceQuadA )
 	{
 		FixedHeight = PieceQuadA->FixedHeight;
 
@@ -116,12 +116,12 @@ namespace CloudberryKingdom
 		Center.SetColor( color );
 	}
 
-	void PieceQuad::SetEffect( const std::shared_ptr<EzEffect> &effect )
+	void PieceQuad::SetEffect( const boost::shared_ptr<EzEffect> &effect )
 	{
 		Center.MyEffect = effect;
 	}
 
-	void PieceQuad::Init( const std::shared_ptr<EzTexture> &tex, const std::shared_ptr<EzEffect> &fx )
+	void PieceQuad::Init( const boost::shared_ptr<EzTexture> &tex, const boost::shared_ptr<EzEffect> &fx )
 	{
 		Data.Center_BL_Shift = Vector2();
 		Data.Center_TR_Shift = Vector2();

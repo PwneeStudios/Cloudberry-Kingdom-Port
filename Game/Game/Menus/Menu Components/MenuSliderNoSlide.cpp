@@ -3,13 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	MenuSliderNoSlide::MenuSliderNoSlide( const std::shared_ptr<EzText> &Text )
+	MenuSliderNoSlide::MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text )
 	{
 		Init( Text, Text->Clone() );
 		InitializeSlider();
 	}
 
-	MenuSliderNoSlide::MenuSliderNoSlide( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	MenuSliderNoSlide::MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		Init( Text, SelectedText );
 		InitializeSlider();

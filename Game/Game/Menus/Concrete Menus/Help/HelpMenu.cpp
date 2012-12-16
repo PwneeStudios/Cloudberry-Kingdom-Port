@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	HelpMenu::MakeListenerHelper::MakeListenerHelper( const std::shared_ptr<Listener> &listener )
+	HelpMenu::MakeListenerHelper::MakeListenerHelper( const boost::shared_ptr<Listener> &listener )
 	{
 		this->listener = listener;
 	}
@@ -13,12 +13,12 @@ namespace CloudberryKingdom
 		if ( Tools::StepControl )
 			return;
 
-		std::shared_ptr<Level> level = Tools::CurLevel;
+		boost::shared_ptr<Level> level = Tools::CurLevel;
 		if ( !level->Replay && !level->Watching && !level->Finished && !level->PreventHelp )
 			listener->Call( MakeMagic( HelpMenu, () ) );
 	}
 
-	HelpMenu::ReturnToCallerProxy::ReturnToCallerProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::ReturnToCallerProxy::ReturnToCallerProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		hm->ReturnToCaller();
 	}
 
-	HelpMenu::WatchComputerHelper::WatchComputerHelper( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::WatchComputerHelper::WatchComputerHelper( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		hm->MyGame->MyLevel->WatchComputer();
 	}
 
-	HelpMenu::WatchComputerProxy::WatchComputerProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::WatchComputerProxy::WatchComputerProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -52,21 +52,21 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool HelpMenu::IsShowGuidLambda::Apply( const std::shared_ptr<GameObject> &obj )
+	bool HelpMenu::IsShowGuidLambda::Apply( const boost::shared_ptr<GameObject> &obj )
 	{
-		return std::dynamic_pointer_cast<ShowGuide>( obj ) != 0;
+		return boost::dynamic_pointer_cast<ShowGuide>( obj ) != 0;
 	}
 
 	HelpMenu::IsSlowMoLambda::IsSlowMoLambda()
 	{
 	}
 
-	bool HelpMenu::IsSlowMoLambda::Apply( const std::shared_ptr<GameObject> &obj )
+	bool HelpMenu::IsSlowMoLambda::Apply( const boost::shared_ptr<GameObject> &obj )
 	{
-		return std::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( obj ) != 0;
+		return boost::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( obj ) != 0;
 	}
 
-	HelpMenu::Toggle_ShowPathHelper::Toggle_ShowPathHelper( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::Toggle_ShowPathHelper::Toggle_ShowPathHelper( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -75,12 +75,12 @@ namespace CloudberryKingdom
 	{
 		for ( GameObjVec::const_iterator go = hm->MyGame->MyGameObjects.begin(); go != hm->MyGame->MyGameObjects.end(); ++go )
 		{
-			if ( std::dynamic_pointer_cast<ShowGuide>( *go ) != 0 )
+			if ( boost::dynamic_pointer_cast<ShowGuide>( *go ) != 0 )
 				( *go )->Release();
 		}
 	}
 
-	HelpMenu::Toggle_ShowPathSetter::Toggle_ShowPathSetter( const std::shared_ptr<HelpMenu> &hm, bool state )
+	HelpMenu::Toggle_ShowPathSetter::Toggle_ShowPathSetter( const boost::shared_ptr<HelpMenu> &hm, bool state )
 	{
 		this->hm = hm;
 		this->state = state;
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 		hm->Toggle_ShowPath( state );
 	}
 
-	HelpMenu::Toggle_ShowPathProxy::Toggle_ShowPathProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::Toggle_ShowPathProxy::Toggle_ShowPathProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 		hm->Toggle_ShowPath( state );
 	}
 
-	HelpMenu::ShowPathProxy::ShowPathProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::ShowPathProxy::ShowPathProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -111,22 +111,22 @@ namespace CloudberryKingdom
 		hm->ShowPath();
 	}
 
-	bool HelpMenu::Toggle_SloMoHelperPredicate::Apply( const std::shared_ptr<GameObject> &match )
+	bool HelpMenu::Toggle_SloMoHelperPredicate::Apply( const boost::shared_ptr<GameObject> &match )
 	{
-		return std::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( match ) != 0;
+		return boost::dynamic_pointer_cast<CloudberryKingdom::SlowMo>( match ) != 0;
 	}
 
-	HelpMenu::Toggle_SloMoHelper::Toggle_SloMoHelper( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::Toggle_SloMoHelper::Toggle_SloMoHelper( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
 
 	void HelpMenu::Toggle_SloMoHelper::Apply()
 	{
-		Tools::RemoveAll<std::shared_ptr<GameObject> >( hm->MyGame->MyGameObjects, std::make_shared<Toggle_SloMoHelperPredicate>() );
+		Tools::RemoveAll<boost::shared_ptr<GameObject> >( hm->MyGame->MyGameObjects, boost::make_shared<Toggle_SloMoHelperPredicate>() );
 	}
 
-	HelpMenu::Toggle_SlowMoProxy::Toggle_SlowMoProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::Toggle_SlowMoProxy::Toggle_SlowMoProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
 		hm->Toggle_SlowMo( state );
 	}
 
-	HelpMenu::SlowMoProxy::SlowMoProxy( const std::shared_ptr<HelpMenu> &hm )
+	HelpMenu::SlowMoProxy::SlowMoProxy( const boost::shared_ptr<HelpMenu> &hm )
 	{
 		this->hm = hm;
 	}
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 		hm->SlowMo();
 	}
 
-	int HelpMenu::CampaignCoinsLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int HelpMenu::CampaignCoinsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return p->CampaignCoins;
 	}
@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 				return 99;
 
 			case GameData::BankType_CAMPAIGN:
-				return PlayerManager::PlayerMax( std::make_shared<CampaignCoinsLambda>() );
+				return PlayerManager::PlayerMax( boost::make_shared<CampaignCoinsLambda>() );
 		}
 
 		return 0;
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		{
 			case GameData::BankType_CAMPAIGN:
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
 					( *p )->CampaignCoins = __max( ( *p )->CampaignCoins - Cost, 0 );
 				break;
 
@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 		CoinsText->SubstituteText( _T( "x" ) + StringConverterHelper::toString( Coins ) );
 	}
 
-	void HelpMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void HelpMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<HelpMenu> HelpMenu::HelpMenu_Construct()
+	boost::shared_ptr<HelpMenu> HelpMenu::HelpMenu_Construct()
 	{
 		InitializeInstanceFields();
 
@@ -214,16 +214,16 @@ namespace CloudberryKingdom
 		// Note that help was used, so that no hint is given about it
 		Hints::SetYForHelpNum( 999 );
 
-		return std::static_pointer_cast<HelpMenu>( shared_from_this() );
+		return boost::static_pointer_cast<HelpMenu>( shared_from_this() );
 	}
 
-	std::shared_ptr<GameObject> HelpMenu::MakeListener()
+	boost::shared_ptr<GameObject> HelpMenu::MakeListener()
 	{
-		std::shared_ptr<Listener> listener = MakeMagic( Listener, () );
+		boost::shared_ptr<Listener> listener = MakeMagic( Listener, () );
 		//listener.MyType = Listener.Type.OnDown;
 		listener->MyButton = ControllerButtons_Y;
 		listener->MyButton2 = ButtonCheck::Help_KeyboardKey;
-		listener->MyAction = std::make_shared<MakeListenerHelper>( listener );
+		listener->MyAction = boost::make_shared<MakeListenerHelper>( listener );
 
 		return listener;
 	}
@@ -235,13 +235,13 @@ namespace CloudberryKingdom
 		if ( Active )
 		{
 			Active = false;
-			MyGame->WaitThenDo( DelayExit, std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( DelayExit, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 		else
 			CkBaseMenu::ReturnToCaller();
 	}
 
-	bool HelpMenu::MenuReturnToCaller( const std::shared_ptr<Menu> &menu )
+	bool HelpMenu::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
 	{
 		DelayExit = 0;
 
@@ -261,12 +261,12 @@ namespace CloudberryKingdom
 		Buy( Cost_Watch );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<WatchComputerHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<WatchComputerHelper>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 	}
 
 	bool HelpMenu::On_ShowPath()
 	{
-		return Tools::Any<std::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, std::make_shared<IsShowGuidLambda>() );
+		return Tools::Any<boost::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, boost::make_shared<IsShowGuidLambda>() );
 	}
 
 	bool HelpMenu::Allowed_ShowPath()
@@ -282,16 +282,16 @@ namespace CloudberryKingdom
 	{
 		if ( state )
 		{
-			std::shared_ptr<ShowGuide> guide = std::make_shared<ShowGuide>();
+			boost::shared_ptr<ShowGuide> guide = boost::make_shared<ShowGuide>();
 
 			MyGame->AddGameObject( guide );
 		}
 		else
 		{
 			for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
-				if ( std::dynamic_pointer_cast<ShowGuide>( *obj ) != 0 )
+				if ( boost::dynamic_pointer_cast<ShowGuide>( *obj ) != 0 )
 					( *obj )->Release();
-			MyGame->AddToDo( std::make_shared<Toggle_ShowPathHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
+			MyGame->AddToDo( boost::make_shared<Toggle_ShowPathHelper>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 	}
 
@@ -303,12 +303,12 @@ namespace CloudberryKingdom
 		Buy( Cost_Path );
 
 		ReturnToCaller();
-		MyGame->WaitThenDo( DelayExit - 10, std::make_shared<Toggle_ShowPathSetter>( std::static_pointer_cast<HelpMenu>( shared_from_this() ), true ) );
+		MyGame->WaitThenDo( DelayExit - 10, boost::make_shared<Toggle_ShowPathSetter>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ), true ) );
 	}
 
 	bool HelpMenu::On_SlowMo()
 	{
-		return Tools::Any<std::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, std::make_shared<IsSlowMoLambda>() );
+		return Tools::Any<boost::shared_ptr<GameObject> >( Tools::CurGameData->MyGameObjects, boost::make_shared<IsSlowMoLambda>() );
 	}
 
 	bool HelpMenu::Allowed_SlowMo()
@@ -320,14 +320,14 @@ namespace CloudberryKingdom
 	{
 		if ( state )
 		{
-			std::shared_ptr<CloudberryKingdom::SlowMo> slowmo = std::make_shared<CloudberryKingdom::SlowMo>();
+			boost::shared_ptr<CloudberryKingdom::SlowMo> slowmo = boost::make_shared<CloudberryKingdom::SlowMo>();
 			slowmo->setControl( getControl() );
 
 			MyGame->AddGameObject( slowmo );
 		}
 		else
 		{
-			MyGame->AddToDo( std::make_shared<Toggle_SloMoHelper>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
+			MyGame->AddToDo( boost::make_shared<Toggle_SloMoHelper>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) );
 		}
 	}
 
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 		ReturnToCallerDelay = 30;
 	}
 
-	void HelpMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void HelpMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -366,14 +366,14 @@ namespace CloudberryKingdom
 
 	void HelpMenu::Initialization()
 	{
-		std::shared_ptr<GameData> game = Tools::CurGameData;
+		boost::shared_ptr<GameData> game = Tools::CurGameData;
 
 		setPauseGame( true );
 
 		//FontScale = .73f;
 		FontScale = .8f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		setRightPanel( Blurb = MakeMagic( HelpBlurb, () ) );
 
@@ -385,16 +385,16 @@ namespace CloudberryKingdom
 		MakeDarkBack();
 
 		// Make the left backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 		backdrop->setPos( Vector2( -1777.778f, 30.55557f ) );
 
 		// Coin
-		std::shared_ptr<QuadClass> Coin_Renamed = std::make_shared<QuadClass>( _T( "Coin_Blue" ), 90.f, true );
+		boost::shared_ptr<QuadClass> Coin_Renamed = boost::make_shared<QuadClass>( _T( "Coin_Blue" ), 90.f, true );
 		Coin_Renamed->setPos( Vector2( -873.1558f, 770.5778f ) );
 		MyPile->Add( Coin_Renamed, _T( "Coin" ) );
 
-		CoinsText = std::make_shared<EzText>( _T( "x" ), Resources::Font_Grobold42, 450.f, false, true );
+		CoinsText = boost::make_shared<EzText>( _T( "x" ), Resources::Font_Grobold42, 450.f, false, true );
 		CoinsText->Name = _T( "Coins" );
 		CoinsText->setScale( .8f );
 		CoinsText->setPos( Vector2( -910.2224f, 717.3333f ) );
@@ -409,17 +409,17 @@ namespace CloudberryKingdom
 
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		setControl( -1 );
 
 		MyMenu->OnB.reset();
 
-		std::shared_ptr<MenuItem> item;
-		std::shared_ptr<MenuToggle> toggle;
+		boost::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuToggle> toggle;
 
 		// Header
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Localization::Words_COINS, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_COINS, ItemFont );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText, _T( "Header" ) );
 		HeaderText->setPos( Vector2( -1663.889f, 971.8889f ) );
@@ -430,12 +430,12 @@ namespace CloudberryKingdom
 		std::wstring CoinPrefix = _T( "{pCoin_Blue,68,?}" );
 
 		// Watch the computer
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) );
 		item->Name = _T( "WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -10, 0 ) );
-		item->setGo( Cast::ToItem( std::make_shared<WatchComputerProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<WatchComputerProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		ItemPos = Vector2( -1033.333f, 429.4446f );
 		PosAdd = Vector2( 0, -520 );
 		AddItem( item );
@@ -444,14 +444,14 @@ namespace CloudberryKingdom
 		// Show path
 		if ( On_ShowPath() )
 		{
-			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_ShowPathProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) );
+			item = toggle = boost::make_shared<MenuToggle>( ItemFont );
+			toggle->OnToggle = boost::make_shared<Toggle_ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) );
 			toggle->Toggle( true );
 		}
 		else
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<ShowPathProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
+			item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = _T( "ShowPath" );
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
@@ -463,14 +463,14 @@ namespace CloudberryKingdom
 		// Slow mo
 		if ( On_SlowMo() )
 		{
-			item = toggle = std::make_shared<MenuToggle>( ItemFont );
-			toggle->OnToggle = std::make_shared<Toggle_SlowMoProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ));
+			item = toggle = boost::make_shared<MenuToggle>( ItemFont );
+			toggle->OnToggle = boost::make_shared<Toggle_SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ));
 			toggle->Toggle( true );
 		}
 		else
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
-			item->setGo( Cast::ToItem( std::make_shared<SlowMoProxy>( std::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
+			item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = _T( "SlowMo" );
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
@@ -479,8 +479,8 @@ namespace CloudberryKingdom
 		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ACTIVATE_SLOW_MO );
 		Item_SlowMo = item;
 
-		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-		MyMenu->OnY = Cast::ToAction( std::make_shared<MenuReturnToCallerProxy>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnY = Cast::ToAction( boost::make_shared<MenuReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
@@ -491,7 +491,7 @@ namespace CloudberryKingdom
 
 	void HelpMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "WatchComputer" ) );
 		if ( _item != 0 )
 		{
@@ -519,7 +519,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Coins" ) );
 		if ( _t != 0 )
 		{
@@ -533,7 +533,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.9640832f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -550,7 +550,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( 0, 0 ) );
 	}
 
-	void HelpMenu::AddItem( const std::shared_ptr<MenuItem> &item )
+	void HelpMenu::AddItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::AddItem( item );
 

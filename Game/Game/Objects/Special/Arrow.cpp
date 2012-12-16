@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		this->PreventRelease = false;
-		MyObject = std::make_shared<SimpleObject>( Prototypes::ArrowObj, false );
+		MyObject = boost::make_shared<SimpleObject>( Prototypes::ArrowObj, false );
 		SetScale( 800 );
 		SetAnimation();
 	}

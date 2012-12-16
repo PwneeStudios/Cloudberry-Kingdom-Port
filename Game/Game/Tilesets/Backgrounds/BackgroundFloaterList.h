@@ -5,17 +5,17 @@
 
 namespace CloudberryKingdom
 {
-	struct BackgroundFloaterList : public std::enable_shared_from_this<BackgroundFloaterList>
+	struct BackgroundFloaterList : public boost::enable_shared_from_this<BackgroundFloaterList>
 	{
 	
-		struct ClearBackgroundListLambda : public LambdaFunc_1<std::shared_ptr<BackgroundFloater>, bool>
+		struct ClearBackgroundListLambda : public LambdaFunc_1<boost::shared_ptr<BackgroundFloater>, bool>
 		{
 		
-			std::shared_ptr<FloatRectangle> Area;
+			boost::shared_ptr<FloatRectangle> Area;
 		
-			ClearBackgroundListLambda( const std::shared_ptr<FloatRectangle> &Area );
+			ClearBackgroundListLambda( const boost::shared_ptr<FloatRectangle> &Area );
 
-			bool Apply( const std::shared_ptr<BackgroundFloater> &floater );
+			bool Apply( const boost::shared_ptr<BackgroundFloater> &floater );
 		};
 
 	
@@ -35,8 +35,8 @@ namespace CloudberryKingdom
 		const bool &getEditable() const;
 #endif
 
-		std::shared_ptr<Level> MyLevel;
-		std::vector<std::shared_ptr<BackgroundFloater> > Floaters;
+		boost::shared_ptr<Level> MyLevel;
+		std::vector<boost::shared_ptr<BackgroundFloater> > Floaters;
 
 		float Parallax;
 
@@ -51,18 +51,18 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		void SetLevel( const std::shared_ptr<Level> &level );
+		void SetLevel( const boost::shared_ptr<Level> &level );
 
 //C# TO C++ CONVERTER NOTE: The parameter Background was renamed since it is named the same as a user-defined type:
-		void SetBackground( const std::shared_ptr<Background> &Background_Renamed );
+		void SetBackground( const boost::shared_ptr<Background> &Background_Renamed );
 
 		void Move( Vector2 shift );
 
 		void Clear();
 
-		void Clear( const std::shared_ptr<FloatRectangle> &Area );
+		void Clear( const boost::shared_ptr<FloatRectangle> &Area );
 
-		void Absorb( const std::shared_ptr<BackgroundFloaterList> &list );
+		void Absorb( const boost::shared_ptr<BackgroundFloaterList> &list );
 
 		Vector2 BL, TR;
 		void PhsxStep();

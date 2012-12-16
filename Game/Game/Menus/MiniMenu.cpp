@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 			if ( i >= static_cast<int>( Items.size() ) )
 				break;
 
-			std::shared_ptr<MenuItem> item = Items[ i ];
+			boost::shared_ptr<MenuItem> item = Items[ i ];
 
 			item->setSetPos( Vector2() );
 			item->PosOffset = getPos() + Shift * static_cast<float>(i - TopItem);

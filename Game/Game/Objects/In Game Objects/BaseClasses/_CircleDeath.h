@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct _CircleDeath : public _Death
 	{
 	
-		std::shared_ptr<CircleBox> Circle;
+		boost::shared_ptr<CircleBox> Circle;
 		float Radius;
 
 	
@@ -29,9 +29,9 @@ namespace CloudberryKingdom
 	
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

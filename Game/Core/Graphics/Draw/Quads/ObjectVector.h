@@ -8,16 +8,16 @@
 
 namespace CloudberryKingdom
 {
-	struct ObjectVector : public std::enable_shared_from_this<ObjectVector>
+	struct ObjectVector : public boost::enable_shared_from_this<ObjectVector>
 	{
 	
 		struct DefaultCallbackLambda : public Lambda_1<Vector2>
 		{
 		
-			std::shared_ptr<ObjectVector> v;
+			boost::shared_ptr<ObjectVector> v;
 
 		
-			DefaultCallbackLambda( const std::shared_ptr<ObjectVector> &v );
+			DefaultCallbackLambda( const boost::shared_ptr<ObjectVector> &v );
 
 			void Apply( const Vector2 &NewPos );
 		};
@@ -26,9 +26,9 @@ namespace CloudberryKingdom
 		AnimationData AnimData;
 
 		Vector2 Pos, RelPos;
-		std::shared_ptr<BaseQuad> ParentQuad;
-		std::shared_ptr<ObjectVector> CenterPoint;
-		std::shared_ptr<Lambda_1<Vector2> > ModifiedEventCallback;
+		boost::shared_ptr<BaseQuad> ParentQuad;
+		boost::shared_ptr<ObjectVector> CenterPoint;
+		boost::shared_ptr<Lambda_1<Vector2> > ModifiedEventCallback;
 
 		void Release();
 
@@ -36,12 +36,12 @@ namespace CloudberryKingdom
 		static const int NumSaveStates = 10;
 		std::vector<Vector2> SavedStates;
 
-		std::shared_ptr<ClickCallback> ClickEventCallback;
+		boost::shared_ptr<ClickCallback> ClickEventCallback;
 #endif
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer, const std::shared_ptr<ObjectClass> &MainObject );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer, const boost::shared_ptr<ObjectClass> &MainObject );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<ObjectClass> &MainObject );
+		void Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<ObjectClass> &MainObject );
 
 #if defined(EDITOR)
 		void SaveState( int StateIndex );
@@ -49,11 +49,11 @@ namespace CloudberryKingdom
 		void RecoverState( int StateIndex );
 #endif
 
-		void Clone( const std::shared_ptr<ObjectVector> &dest );
+		void Clone( const boost::shared_ptr<ObjectVector> &dest );
 
-		void Clone( const std::shared_ptr<ObjectVector> &dest, bool CloneAnimData );
+		void Clone( const boost::shared_ptr<ObjectVector> &dest, bool CloneAnimData );
 
-		void CopyAnim( const std::shared_ptr<ObjectVector> &vec, int Anim );
+		void CopyAnim( const boost::shared_ptr<ObjectVector> &vec, int Anim );
 
 		ObjectVector();
 

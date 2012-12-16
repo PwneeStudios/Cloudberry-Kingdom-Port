@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		Background_Forest( const std::wstring &Name );
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 	};
 
 	struct Background_ForestSnow : public BackgroundTemplate
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 	
 		Background_ForestSnow( const std::wstring &Name );
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 	};
 
 }

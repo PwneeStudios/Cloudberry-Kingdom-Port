@@ -27,15 +27,15 @@ namespace CloudberryKingdom
 		int Multiplier;
 		void SetMultiplier( int Multiplier );
 
-		std::shared_ptr<EzText> MultiplierText;
+		boost::shared_ptr<EzText> MultiplierText;
 		void UpdateMultiplierText();
 
 		bool DoSlideIn;
 	
 		GUI_Multiplier( int Style );
-		std::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style );
+		boost::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style );
 		GUI_Multiplier( int Style, bool SlideIn );
-		std::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style, bool SlideIn );
+		boost::shared_ptr<GUI_Multiplier> GUI_Multiplier_Construct( int Style, bool SlideIn );
 
 	
 		void DoInit( int Style, bool SlideIn );

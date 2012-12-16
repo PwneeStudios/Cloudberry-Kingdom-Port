@@ -7,10 +7,10 @@
 
 namespace CloudberryKingdom
 {
-	struct XnaGameClass : public Game, public std::enable_shared_from_this<XnaGameClass>
+	struct XnaGameClass : public Game, public boost::enable_shared_from_this<XnaGameClass>
 	{
 	
-		std::shared_ptr<CloudberryKingdomGame> MyGame;
+		boost::shared_ptr<CloudberryKingdomGame> MyGame;
 	
 		XnaGameClass();
 
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 
 		virtual void UnloadContent();
 
-		virtual void Update( const std::shared_ptr<GameTime> &gameTime );
+		virtual void Update( const boost::shared_ptr<GameTime> &gameTime );
 
-		virtual void Draw( const std::shared_ptr<GameTime> &gameTime );
+		virtual void Draw( const boost::shared_ptr<GameTime> &gameTime );
 
 		virtual void Exit();
 

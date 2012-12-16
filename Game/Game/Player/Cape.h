@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 	
 		static Vector2 SineWind( Vector2 Dir, float NormalIntensity, float Period, float t );
 
-		std::shared_ptr<Bob> MyBob;
+		boost::shared_ptr<Bob> MyBob;
 		int LastPhsxUpdate;
 
 		std::vector<MyOwnVertexFormat> Vertices;
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		std::vector<CapeNode> Nodes;
 		std::vector<CapeLink> Links;
 
-		void Copy( const std::shared_ptr<Cape> &cape );
+		void Copy( const boost::shared_ptr<Cape> &cape );
 
 
 		Color _MyColor;
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		void setMyOutlineColor( const Color &value );
 		const Color &getMyOutlineColor() const;
 
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 	
 		int Sections, HorizontalSections;
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		CapeType MyType;
 
 //C# TO C++ CONVERTER NOTE: The parameter Phsx was renamed since it is named the same as a user-defined type:
-		Cape( const std::shared_ptr<Bob> &bob, CapeType Type, const std::shared_ptr<BobPhsx> &Phsx_Renamed );
+		Cape( const boost::shared_ptr<Bob> &bob, CapeType Type, const boost::shared_ptr<BobPhsx> &Phsx_Renamed );
 
 		void PhsxStep();
 

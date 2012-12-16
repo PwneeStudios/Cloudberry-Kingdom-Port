@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		this->pos = pos;
 	}
 
-	float Level::ElementDistanceSquared::Apply( const std::shared_ptr<BlockBase> &element )
+	float Level::ElementDistanceSquared::Apply( const boost::shared_ptr<BlockBase> &element )
 	{
 		return ( element->getCore()->Data.Position - pos ).LengthSquared();
 	}
@@ -28,12 +28,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::FindFirstRowLambda::Apply( const std::shared_ptr<BlockBase> &match )
+	bool Level::FindFirstRowLambda::Apply( const boost::shared_ptr<BlockBase> &match )
 	{
 		return match->getCore()->IsCalled( _T( "FirstRow" ) );
 	}
 
-	Level::MakeVerticalCleanupHelper::MakeVerticalCleanupHelper( const std::shared_ptr<Level> &level )
+	Level::MakeVerticalCleanupHelper::MakeVerticalCleanupHelper( const boost::shared_ptr<Level> &level )
 	{
 		this->level = level;
 	}
@@ -48,12 +48,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::FindLimitGeneralDensityLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool Level::FindLimitGeneralDensityLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->GenData.LimitGeneralDensity;
 	}
 
-	Level::EndReachedLambda::EndReachedLambda( const std::shared_ptr<Level> &level )
+	Level::EndReachedLambda::EndReachedLambda( const boost::shared_ptr<Level> &level )
 	{
 		this->level = level;
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		level->EndReached = true;
 	}
 
-	Level::SafetyNetLambda::SafetyNetLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert )
+	Level::SafetyNetLambda::SafetyNetLambda( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type, bool Virgin, bool Used, bool BoxesOnly, bool InvertDraw, bool Invert )
 	{
 		InitializeInstanceFields();
 		this->level = level;
@@ -88,9 +88,9 @@ namespace CloudberryKingdom
 				return;
 		}
 
-		std::shared_ptr<NormalBlock> block;
+		boost::shared_ptr<NormalBlock> block;
 
-		block = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		block = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		block->getCore()->AlwaysBoxesOnly = BoxesOnly;
 		block->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
 		block->getCore()->GenData.RemoveIfUnused = true;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		Invert = false;
 	}
 
-	Level::MakeInitialLambda::MakeInitialLambda( const std::shared_ptr<Level> &level, Vector2 size )
+	Level::MakeInitialLambda::MakeInitialLambda( const boost::shared_ptr<Level> &level, Vector2 size )
 	{
 		this->level = level;
 		this->size = size;
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 
 	void Level::MakeInitialLambda::Apply( const Vector2 &pos )
 	{
-		level->__block_fromlambda = std::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		level->__block_fromlambda = boost::static_pointer_cast<NormalBlock>( level->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		level->__block_fromlambda->Init( pos + Vector2( 0, -size.Y ), size, level->getMyTileSetInfo() );
 		level->__block_fromlambda->getCore()->GenData.RemoveIfUnused = true;
 		level->__block_fromlambda->getBlockCore()->BlobsOnTop = false;
@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 		level->AddBlock( level->__block_fromlambda );
 	}
 
-	Level::Stage1RndFillLambda::Stage1RndFillLambda( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff )
+	Level::Stage1RndFillLambda::Stage1RndFillLambda( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR, Vector2 BL_Cutoff )
 	{
 		this->level = level;
 		this->BL = BL;
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 
 	void Level::Stage1RndFillLambda::Apply( const Vector2 &pos )
 	{
-		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> NParams = boost::static_pointer_cast<NormalBlock_Parameters>( level->getStyle()->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		std::vector<float> Weights = std::vector<float>( Generators::WeightedPreFill_1_Gens.size() );
 
 		float MaxWeight = 0;
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		// Find the relative weights of all the obstacles we wish to fill with 
 		for ( int i = 0; i < static_cast<int>( Generators::WeightedPreFill_1_Gens.size() ); i++ )
 		{
-			std::shared_ptr<AutoGen> gen = Generators::WeightedPreFill_1_Gens[ i ];
+			boost::shared_ptr<AutoGen> gen = Generators::WeightedPreFill_1_Gens[ i ];
 
 			if ( gen != NormalBlock_AutoGen::getInstance() )
 			{
@@ -164,13 +164,13 @@ namespace CloudberryKingdom
 
 		float NormalBlockTotal = __max( 0, 3 - MaxWeight / 3 );
 
-		Weights[ IndexOf<std::shared_ptr<AutoGen> >( Generators::WeightedPreFill_1_Gens, NormalBlock_AutoGen::getInstance() ) ] = NParams->CustomWeight ? NParams->FillWeight.GetVal(pos) : NormalBlockTotal * level->getStyle()->ModNormalBlockWeight;
+		Weights[ IndexOf<boost::shared_ptr<AutoGen> >( Generators::WeightedPreFill_1_Gens, NormalBlock_AutoGen::getInstance() ) ] = NParams->CustomWeight ? NParams->FillWeight.GetVal(pos) : NormalBlockTotal * level->getStyle()->ModNormalBlockWeight;
 
 
 		// Choose a random generator and make a new obstacle with it
 		int choice = level->getRnd()->Choose(Weights);
-		std::shared_ptr<AutoGen> chosen_gen = Generators::WeightedPreFill_1_Gens[ choice ];
-		std::shared_ptr<ObjectBase> NewObj = chosen_gen->CreateAt( level, pos, BL_Cutoff, TR );
+		boost::shared_ptr<AutoGen> chosen_gen = Generators::WeightedPreFill_1_Gens[ choice ];
+		boost::shared_ptr<ObjectBase> NewObj = chosen_gen->CreateAt( level, pos, BL_Cutoff, TR );
 
 		if ( NewObj == 0 )
 			return;
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		CheckToSleep();
 	}
 
-	Level::GeneralMinDistLambda::GeneralMinDistLambda( const std::shared_ptr<Level> &level )
+	Level::GeneralMinDistLambda::GeneralMinDistLambda( const boost::shared_ptr<Level> &level )
 	{
 		this->level = level;
 	}
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::CloseToStartLambda::Apply( const std::shared_ptr<Bob> &bob )
+	bool Level::CloseToStartLambda::Apply( const boost::shared_ptr<Bob> &bob )
 	{
 		return ( bob->getCore()->Data.Position - bob->getCore()->StartData.Position ).Length() < 500 && !bob->Dead;
 	}
@@ -209,9 +209,9 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::IsLavaLambda::Apply( const std::shared_ptr<BlockBase> &block )
+	bool Level::IsLavaLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
-		return std::dynamic_pointer_cast<LavaBlock>( block ) != 0;
+		return boost::dynamic_pointer_cast<LavaBlock>( block ) != 0;
 	}
 
 	Level::FindGuidLambda::FindGuidLambda( unsigned long long guid )
@@ -219,7 +219,7 @@ namespace CloudberryKingdom
 		this->guid = guid;
 	}
 
-	bool Level::FindGuidLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool Level::FindGuidLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->MyGuid == guid;
 	}
@@ -228,7 +228,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::CleanObjectListLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool Level::CleanObjectListLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->MarkedForDeletion;
 	}
@@ -238,7 +238,7 @@ namespace CloudberryKingdom
 		this->layer = layer;
 	}
 
-	bool Level::CleanDrawLayerLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool Level::CleanDrawLayerLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->MarkedForDeletion || (obj->getCore()->DrawLayer != layer && obj->getCore()->DrawLayer2 != layer && obj->getCore()->DrawLayer3 != layer);
 	}
@@ -247,27 +247,27 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool Level::CleanBlockListLambda::Apply( const std::shared_ptr<BlockBase> &obj )
+	bool Level::CleanBlockListLambda::Apply( const boost::shared_ptr<BlockBase> &obj )
 	{
 		return obj->getCore()->MarkedForDeletion;
 	}
 
-	Level::RemoveForeignLambda::RemoveForeignLambda( const std::shared_ptr<Level> &level )
+	Level::RemoveForeignLambda::RemoveForeignLambda( const boost::shared_ptr<Level> &level )
 	{
 		this->level = level;
 	}
 
-	bool Level::RemoveForeignLambda::Apply( const std::shared_ptr<ObjectBase> &obj )
+	bool Level::RemoveForeignLambda::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		return obj->getCore()->MyLevel != level;
 	}
 
-	Level::RemoveForeignBlockLambda::RemoveForeignBlockLambda( const std::shared_ptr<Level> &level )
+	Level::RemoveForeignBlockLambda::RemoveForeignBlockLambda( const boost::shared_ptr<Level> &level )
 	{
 		this->level = level;
 	}
 
-	bool Level::RemoveForeignBlockLambda::Apply( const std::shared_ptr<BlockBase> &obj )
+	bool Level::RemoveForeignBlockLambda::Apply( const boost::shared_ptr<BlockBase> &obj )
 	{
 		return obj->getCore()->MyLevel != level;
 	}
@@ -276,7 +276,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	Vector2 Level::BaseMetric::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
+	Vector2 Level::BaseMetric::Apply( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B )
 	{
 		return Vector2( abs( A->getCore()->Data.Position.X - B->getCore()->Data.Position.X ), abs(A->getCore()->Data.Position.Y - B->getCore()->Data.Position.Y) );
 	}
@@ -291,7 +291,7 @@ namespace CloudberryKingdom
 		return c;
 	}
 
-	Level::SetBackLambda::SetBackLambda( const std::shared_ptr<Level> &level, int Steps )
+	Level::SetBackLambda::SetBackLambda( const boost::shared_ptr<Level> &level, int Steps )
 	{
 		this->level = level;
 		this->Steps = Steps;
@@ -302,7 +302,7 @@ namespace CloudberryKingdom
 		level->CurPiece->StartPhsxStep += Steps;
 	}
 
-	Level::CleanupCoinsHelper::CleanupCoinsHelper( const std::shared_ptr<Coin_Parameters> &Params )
+	Level::CleanupCoinsHelper::CleanupCoinsHelper( const boost::shared_ptr<Coin_Parameters> &Params )
 	{
 		this->Params = Params;
 	}
@@ -316,7 +316,7 @@ namespace CloudberryKingdom
 	void Level::CleanupCoins( Vector2 BL, Vector2 TR )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
+		boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoCleanup )
 			return;
@@ -325,27 +325,27 @@ namespace CloudberryKingdom
 		if ( getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
 		{
 			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-				if ( std::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().X > TR.X + 160 )
+				if ( boost::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().X > TR.X + 160 )
 					getRecycle()->CollectObject(*obj);
 		}
 		else if ( getPieceSeed()->GeometryType == LevelGeometry_UP )
 		{
 			for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
-				if ( std::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().Y > TR.Y - 280 )
+				if ( boost::dynamic_pointer_cast<Coin>( *obj ) != 0 && ( *obj )->getPos().Y > TR.Y - 280 )
 					getRecycle()->CollectObject(*obj);
 		}
 
 		// General cleanup
-		Cleanup( ObjectType_COIN, std::make_shared<CleanupCoinsHelper>( Params ), BL + Params->BL_Bound_Mod, TR + Params->TR_Bound_Mod );
+		Cleanup( ObjectType_COIN, boost::make_shared<CleanupCoinsHelper>( Params ), BL + Params->BL_Bound_Mod, TR + Params->TR_Bound_Mod );
 	}
 
-	std::shared_ptr<CameraZone> Level::MakeVerticalCameraZone( LevelGeometry Geometry, float Height )
+	boost::shared_ptr<CameraZone> Level::MakeVerticalCameraZone( LevelGeometry Geometry, float Height )
 	{
 		Vector2 Size = CoreMath::Abs( CurMakeData->PieceSeed->End - CurMakeData->PieceSeed->Start ) / 2;
 		Size.Y += 900;
 		Size = Vector2::Max( Size, getMainCamera()->GetSize() );
 
-		std::shared_ptr<CameraZone> CamZone = std::static_pointer_cast<CameraZone>( MySourceGame->Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
+		boost::shared_ptr<CameraZone> CamZone = boost::static_pointer_cast<CameraZone>( MySourceGame->Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
 		CamZone->Init( ( CurMakeData->PieceSeed->Start + CurMakeData->PieceSeed->End ) / 2, Size );
 		CamZone->Start = CurMakeData->PieceSeed->Start;
 		//CamZone.End = CurMakeData.PieceSeed.End;
@@ -371,21 +371,21 @@ namespace CloudberryKingdom
 		return CamZone;
 	}
 
-	float Level::MakeVerticalInitialPlats( const std::shared_ptr<StyleData> &Style )
+	float Level::MakeVerticalInitialPlats( const boost::shared_ptr<StyleData> &Style )
 	{
 		Vector2 size = Vector2( 350, 2250 );
 		Vector2 pos = CurPiece->StartData[ 0 ].Position + Vector2( 0, 200 );
-		std::shared_ptr<NormalBlock> block = 0, startblock = 0;
+		boost::shared_ptr<NormalBlock> block = 0, startblock = 0;
 
 		// Find the closest block to pos on first row
-		startblock = std::static_pointer_cast<NormalBlock>( Tools::ArgMin<std::shared_ptr<BlockBase> >( Tools::FindAll<std::shared_ptr<BlockBase> >( Blocks, std::make_shared<FindFirstRowLambda>() ), std::make_shared<ElementDistanceSquared>(pos) ) );
+		startblock = boost::static_pointer_cast<NormalBlock>( Tools::ArgMin<boost::shared_ptr<BlockBase> >( Tools::FindAll<boost::shared_ptr<BlockBase> >( Blocks, boost::make_shared<FindFirstRowLambda>() ), boost::make_shared<ElementDistanceSquared>(pos) ) );
 
-		std::shared_ptr<Door> door = 0;
+		boost::shared_ptr<Door> door = 0;
 		switch ( Style->MyInitialPlatsType )
 		{
 			case StyleData::InitialPlatsType_UP_TILED_FLOOR:
 			case StyleData::InitialPlatsType_DOOR:
-				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, false) );
+				block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, false) );
 
 				// Tiled bottom
 				if ( Style->MyInitialPlatsType == StyleData::InitialPlatsType_UP_TILED_FLOOR )
@@ -429,13 +429,13 @@ namespace CloudberryKingdom
 		}
 	}
 
-	bool Level::MakeVertical( int Length, float Height, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData )
+	bool Level::MakeVertical( int Length, float Height, int StartPhsxStep, int ReturnEarly, const boost::shared_ptr<MakeData> &makeData )
 	{
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
 		getStyle()->ModNormalBlockWeight = .15f;
 
-		std::shared_ptr<VerticalData> VStyle = std::static_pointer_cast<VerticalData>( CurMakeData->PieceSeed->Style );
+		boost::shared_ptr<VerticalData> VStyle = boost::static_pointer_cast<VerticalData>( CurMakeData->PieceSeed->Style );
 		LevelGeometry Geometry = CurMakeData->PieceSeed->GeometryType;
 
 		// Shift start position up for down levels
@@ -463,7 +463,7 @@ namespace CloudberryKingdom
 		BobVec Computers = CurMakeData->MakeBobs( shared_from_this() );
 
 		// New level piece
-		std::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( shared_from_this(), Computers, Length, StartPhsxStep );
+		boost::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( shared_from_this(), Computers, Length, StartPhsxStep );
 
 		// Start data
 		Vector2 StartPos = getMainCamera()->getPos() + Vector2(0, -400);
@@ -473,7 +473,7 @@ namespace CloudberryKingdom
 			Piece->StartData[ i ].Position = StartPos;
 
 		// Camera Zone
-		std::shared_ptr<CameraZone> CamZone = MakeVerticalCameraZone( Geometry, Height );
+		boost::shared_ptr<CameraZone> CamZone = MakeVerticalCameraZone( Geometry, Height );
 		FinalCamZone = CamZone;
 		Sleep();
 
@@ -530,7 +530,7 @@ namespace CloudberryKingdom
 			bool ShouldBreak = false;
 			for ( _pos.Y = BL_Bound.Y; ; )
 			{
-				std::shared_ptr<NormalBlock> block = std::static_pointer_cast<NormalBlock>( NormalBlock_AutoGen::getInstance()->CreateAt( shared_from_this(), _pos) );
+				boost::shared_ptr<NormalBlock> block = boost::static_pointer_cast<NormalBlock>( NormalBlock_AutoGen::getInstance()->CreateAt( shared_from_this(), _pos) );
 
 				block->Init( _pos, Size, getMyTileSetInfo() );
 				block->MakeTopOnly();
@@ -574,7 +574,7 @@ namespace CloudberryKingdom
 		// Set flag when a block on the last row is used.
 		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
 			if ( ( *block )->getCore()->IsCalled( _T("LastRow") ) )
-				( *block )->getCore()->GenData.OnUsed = std::make_shared<EndReachedLambda>( shared_from_this() );
+				( *block )->getCore()->GenData.OnUsed = boost::make_shared<EndReachedLambda>( shared_from_this() );
 
 		// Initial platform
 		if ( CurMakeData->InitialPlats && VStyle->MakeInitialPlats )
@@ -584,13 +584,13 @@ namespace CloudberryKingdom
 		}
 
 		// Final platform
-		std::shared_ptr<MakeThing> MakeFinalPlat = 0;
+		boost::shared_ptr<MakeThing> MakeFinalPlat = 0;
 		if ( CurMakeData->FinalPlats )
 		{
 			if ( VStyle->MyFinalPlatsType == StyleData::FinalPlatsType_DOOR )
-				MakeFinalPlat = std::make_shared<MakeFinalDoorVertical>( shared_from_this() );
+				MakeFinalPlat = boost::make_shared<MakeFinalDoorVertical>( shared_from_this() );
 			if ( VStyle->MyFinalPlatsType == StyleData::FinalPlatsType_DARK_BOTTOM )
-				MakeFinalPlat = std::make_shared<MakeDarkBottom>( shared_from_this() );
+				MakeFinalPlat = boost::make_shared<MakeDarkBottom>( shared_from_this() );
 		}
 
 		if ( MakeFinalPlat != 0 )
@@ -598,7 +598,7 @@ namespace CloudberryKingdom
 
 
 		// Pre Fill #1
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_1_Gens.begin(); gen != Generators::PreFill_1_Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_1_Gens.begin(); gen != Generators::PreFill_1_Gens.end(); ++gen )
 		{
 			( *gen )->PreFill_1( shared_from_this(), BL_Bound, TR_Bound );
 			Sleep();
@@ -610,7 +610,7 @@ namespace CloudberryKingdom
 
 
 		// Stage 1 fill
-		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameters>( VStyle->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> BlockParams = boost::static_pointer_cast<NormalBlock_Parameters>( VStyle->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( BlockParams->DoStage1Fill )
 		{
 			//Fill_BL = BL_Bound + new Vector2(400, 0);
@@ -653,7 +653,7 @@ namespace CloudberryKingdom
 				break;
 
 			PhsxStep( true );
-			for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::ActiveFill_1_Gens.begin(); gen != Generators::ActiveFill_1_Gens.end(); ++gen )
+			for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::ActiveFill_1_Gens.begin(); gen != Generators::ActiveFill_1_Gens.end(); ++gen )
 				( *gen )->ActiveFill_1( shared_from_this(), BL_Bound, TR_Bound );
 		}
 		int LastStep = CurPhsxStep;
@@ -667,7 +667,7 @@ namespace CloudberryKingdom
 		Par += CurPiece->Par;
 
 		// Cleanup
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			( *gen )->Cleanup_1( shared_from_this(), BL_Bound, TR_Bound );
 
 		// Overlapping blocks
@@ -694,7 +694,7 @@ namespace CloudberryKingdom
 		CurPiece->PieceLength = LastStep - StartPhsxStep;
 
 		// Pre Fill #2
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_2_Gens.begin(); gen != Generators::PreFill_2_Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_2_Gens.begin(); gen != Generators::PreFill_2_Gens.end(); ++gen )
 		{
 			( *gen )->PreFill_2( shared_from_this(), BL_Bound, TR_Bound );
 			Sleep();
@@ -728,14 +728,14 @@ namespace CloudberryKingdom
 		CleanAllObjectLists();
 		Sleep();
 
-		Cleanup( Tools::FindAll<std::shared_ptr<ObjectBase> >( Objects, std::make_shared<FindLimitGeneralDensityLambda>() ), std::make_shared<MakeVerticalCleanupHelper>( shared_from_this() ), true, BL_Bound, TR_Bound );
+		Cleanup( Tools::FindAll<boost::shared_ptr<ObjectBase> >( Objects, boost::make_shared<FindLimitGeneralDensityLambda>() ), boost::make_shared<MakeVerticalCleanupHelper>( shared_from_this() ), true, BL_Bound, TR_Bound );
 		Sleep();
 
 		Cleanup( ObjectType_COIN, Vector2( 180, 180 ), BL_Bound, TR_Bound + Vector2( 500, 0 ) );
 		Sleep();
 
 
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			( *gen )->Cleanup_2( shared_from_this(), BL_Bound, TR_Bound );
 
 		CleanAllObjectLists();
@@ -749,13 +749,13 @@ namespace CloudberryKingdom
 
 		if ( Geometry == LevelGeometry_UP )
 		{
-			std::shared_ptr<CloudberryKingdom::NormalBlock> back = MakePillarBack( getFinalDoor()->getPos() + Vector2(0, -400), getFinalDoor()->getPos() + Vector2(0, 2000) );
+			boost::shared_ptr<CloudberryKingdom::NormalBlock> back = MakePillarBack( getFinalDoor()->getPos() + Vector2(0, -400), getFinalDoor()->getPos() + Vector2(0, 2000) );
 			back->getBlockCore()->CeilingDraw = true;
 			MakePillarBack( getStartDoor()->getPos() + Vector2(0, 400), getStartDoor()->getPos() - Vector2(0, 2000) );
 		}
 		else
 		{
-			std::shared_ptr<CloudberryKingdom::NormalBlock> back = MakePillarBack( getStartDoor()->getPos() + Vector2(0, -400), getStartDoor()->getPos() + Vector2(0, 2000) );
+			boost::shared_ptr<CloudberryKingdom::NormalBlock> back = MakePillarBack( getStartDoor()->getPos() + Vector2(0, -400), getStartDoor()->getPos() + Vector2(0, 2000) );
 			back->getBlockCore()->CeilingDraw = true;
 			MakePillarBack( getFinalDoor()->getPos() + Vector2(0, 400), getFinalDoor()->getPos() - Vector2(0, 2000) );
 		}
@@ -766,21 +766,21 @@ namespace CloudberryKingdom
 	float Level::SetStepMultiplier( Vector2 &Size, Vector2 &Step )
 	{
 		float StepMultiplier = 1;
-		if ( std::dynamic_pointer_cast<BobPhsxJetman>( DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxJetman>( DefaultHeroType ) != 0 )
 			StepMultiplier = 3;
-		else if ( std::dynamic_pointer_cast<BobPhsxDouble>( DefaultHeroType ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxDouble>( DefaultHeroType ) != 0 )
 			StepMultiplier = 1.75f;
-		else if ( std::dynamic_pointer_cast<BobPhsxSmall>( DefaultHeroType ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxSmall>( DefaultHeroType ) != 0 )
 		{
 			Size = Vector2( 100, 50 );
 			Step = Vector2( 240, 390 );
 			StepMultiplier = 1.5f;
 		}
-		else if ( std::dynamic_pointer_cast<BobPhsxBox>( DefaultHeroType ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxBox>( DefaultHeroType ) != 0 )
 			StepMultiplier = .7f;
-		else if ( std::dynamic_pointer_cast<BobPhsxBig>( DefaultHeroType ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxBig>( DefaultHeroType ) != 0 )
 			StepMultiplier = .7f;
-		else if ( std::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
 		{
 			Size = Vector2( 100, 50 );
 			Step = Vector2( 240, 390 );
@@ -789,9 +789,9 @@ namespace CloudberryKingdom
 		return StepMultiplier;
 	}
 
-	std::shared_ptr<NormalBlock> Level::MakePillarBack( Vector2 p1, Vector2 p2 )
+	boost::shared_ptr<NormalBlock> Level::MakePillarBack( Vector2 p1, Vector2 p2 )
 	{
-		std::shared_ptr<NormalBlock> doo = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		boost::shared_ptr<NormalBlock> doo = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		doo->Init( ( p1 + p2 ) / 2, Vector2( 350, abs( p2.Y - p1.Y ) / 2 ), getMyTileSetInfo() );
 
 		AddBlock( doo );
@@ -834,16 +834,16 @@ namespace CloudberryKingdom
 		return Vector2();
 	}
 
-	void Level::MakeLadder( const std::shared_ptr<PieceSeedData> &Piece )
+	void Level::MakeLadder( const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		Vector2 LeftCenter = Piece->Start;
 		LadderType Ladder = Piece->Ladder;
 
 		Vector2 Center, Size, pos;
-		std::shared_ptr<BlockEmitter> bm;
-		std::shared_ptr<NormalBlock> block;
+		boost::shared_ptr<BlockEmitter> bm;
+		boost::shared_ptr<NormalBlock> block;
 
-		std::shared_ptr<CameraZone> CamZone;
+		boost::shared_ptr<CameraZone> CamZone;
 
 		float y = 0;
 		int Count = 0;
@@ -854,8 +854,8 @@ namespace CloudberryKingdom
 				y = LeftCenter.Y - getMainCamera()->GetHeight() / 2 - 250;
 				while ( y < LeftCenter.Y + getMainCamera()->GetHeight() / 2 - 400 )
 				{
-					std::shared_ptr<BouncyBlock> bouncy;
-					bouncy = std::static_pointer_cast<BouncyBlock>( MySourceGame->Recycle->GetObject( ObjectType_BOUNCY_BLOCK, false ) );
+					boost::shared_ptr<BouncyBlock> bouncy;
+					bouncy = boost::static_pointer_cast<BouncyBlock>( MySourceGame->Recycle->GetObject( ObjectType_BOUNCY_BLOCK, false ) );
 					bouncy->Init( Vector2( LeftCenter.X, y ), Vector2( 220, 220 ), 70, shared_from_this() );
 					bouncy->getCore()->DrawLayer = 9;
 
@@ -871,7 +871,7 @@ namespace CloudberryKingdom
 				break;
 
 			case LadderType_FINAL_PLAT:
-				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X );
 				block->Extend( Side_RIGHT, LeftCenter.X + 5000 );
@@ -882,7 +882,7 @@ namespace CloudberryKingdom
 
 
 				// Camera zone
-				FinalCamZone = CamZone = std::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
+				FinalCamZone = CamZone = boost::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
 				CamZone->Init( block->getBox()->Current->Center + Vector2(700, 500), block->getBox()->Current->Size / 3 + Vector2(0, getMainCamera()->GetHeight() / 2 + 1000) );
 				CamZone->Start = LeftCenter - Vector2( 100000, 0 );
 				CamZone->End = CamZone->Start;
@@ -892,7 +892,7 @@ namespace CloudberryKingdom
 
 
 				// Stop block, to prevent Bob from running off edge
-				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 				block->Init( TR, Vector2(), getMyTileSetInfo() );
 				block->Extend( Side_LEFT, LeftCenter.X + 4400 );
 				block->Extend( Side_RIGHT, LeftCenter.X + 4500 );
@@ -910,7 +910,7 @@ namespace CloudberryKingdom
 				pos = Center - Vector2( 0, getMainCamera()->GetHeight() / 2 );
 				while ( pos.Y < Center.Y + getMainCamera()->GetHeight() / 2 )
 				{
-					block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBox()->TopOnly = true;
 					block->Init( pos, Size, getMyTileSetInfo() );
 
@@ -935,7 +935,7 @@ namespace CloudberryKingdom
 				Count = 0;
 				while ( pos.Y < Center.Y + getMainCamera()->GetHeight() / 2 )
 				{
-					block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+					block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 					block->getBox()->TopOnly = true;
 					if ( Count % 2 == 0 )
 						block->Init( pos + offset, Size, getMyTileSetInfo() );
@@ -958,7 +958,7 @@ namespace CloudberryKingdom
 			case LadderType_SIMPLE_MOVING:
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
-				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = boost::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center;
 				bm->EmitData.Velocity = Vector2( 0, 6 );
@@ -979,7 +979,7 @@ namespace CloudberryKingdom
 				// Left emitter                    
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, -getMainCamera()->GetHeight() / 2 - 250 );
 
-				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = boost::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(-175, 0);
 				bm->EmitData.Velocity = Vector2( 0, 6 );
@@ -997,7 +997,7 @@ namespace CloudberryKingdom
 				// Right emitter
 				Center = LeftCenter + Vector2( GetLadderSize( Ladder ).X / 2, getMainCamera()->GetHeight() / 2 + 250 );
 
-				bm = std::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
+				bm = boost::static_pointer_cast<BlockEmitter>( getRecycle()->GetObject(ObjectType_BLOCK_EMITTER, false) );
 				bm->Init( Vector2(), shared_from_this(), Piece->ElevatorBoxStyle );
 				bm->EmitData.Position = bm->getCore()->Data.Position = Center + Vector2(175, 0);
 				bm->EmitData.Velocity = Vector2( 0, -6 );
@@ -1027,7 +1027,7 @@ namespace CloudberryKingdom
 			return;
 
 		HoldCamera = getMainCamera();
-		setMainCamera( std::make_shared<Camera>( getMainCamera() ) );
+		setMainCamera( boost::make_shared<Camera>( getMainCamera() ) );
 	}
 
 	void Level::RestoreCamera()
@@ -1052,7 +1052,7 @@ namespace CloudberryKingdom
 				break;
 
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
-			std::shared_ptr<Bob> Comp = std::make_shared<Bob>( DefaultHeroType, false );
+			boost::shared_ptr<Bob> Comp = boost::make_shared<Bob>( DefaultHeroType, false );
 			Bob_PostConstruct( Comp, DefaultHeroType, false );
 			Comp->SetColorScheme( PlayerManager::Get( i )->ColorScheme_Renamed );
 
@@ -1071,7 +1071,7 @@ namespace CloudberryKingdom
 		SuppressCheckpoints = true;
 		GhostCheckpoints = true;
 
-		MyReplayGUI = std::make_shared<ReplayGUI>();
+		MyReplayGUI = boost::make_shared<ReplayGUI>();
 		MyReplayGUI->Type = ReplayGUIType_REPLAY;
 		MyGame->AddGameObject( MyReplayGUI );
 
@@ -1129,7 +1129,7 @@ namespace CloudberryKingdom
 		if ( GUI )
 		{
 			// Create the GUI
-			MyReplayGUI = std::make_shared<ReplayGUI>();
+			MyReplayGUI = boost::make_shared<ReplayGUI>();
 			MyReplayGUI->Type = ReplayGUIType_COMPUTER;
 			MyGame->AddGameObject( MyReplayGUI );
 
@@ -1148,7 +1148,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < CurPiece->NumBobs; i++ )
 		{
 			//Bob Comp = new Bob(Prototypes.bob[DefaultHeroType], false);
-			std::shared_ptr<Bob> Comp = std::make_shared<Bob>( DefaultHeroType, false );
+			boost::shared_ptr<Bob> Comp = boost::make_shared<Bob>( DefaultHeroType, false );
 			Bob_PostConstruct( Comp, DefaultHeroType, false );
 
 			Comp->MyPiece = CurPiece;
@@ -1229,33 +1229,33 @@ namespace CloudberryKingdom
 			OnEndReplay->Apply();
 	}
 
-	const std::shared_ptr<StyleData> &Level::getStyle() const
+	const boost::shared_ptr<StyleData> &Level::getStyle() const
 	{
 		return CurMakeData->PieceSeed->Style;
 	}
 
-	const std::shared_ptr<PieceSeedData> &Level::getPieceSeed() const
+	const boost::shared_ptr<PieceSeedData> &Level::getPieceSeed() const
 	{
 		return CurMakeData->PieceSeed;
 	}
 
-	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer )
+	boost::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer )
 	{
 		return StartNewPiece( Length, Computer, 1 );
 	}
 
-	std::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer, int NumBobs )
+	boost::shared_ptr<LevelPiece> Level::StartNewPiece( int Length, BobVec Computer, int NumBobs )
 	{
-		std::shared_ptr<LevelPiece> NewPiece = std::make_shared<LevelPiece>( Length, shared_from_this(), Computer, NumBobs );
+		boost::shared_ptr<LevelPiece> NewPiece = boost::make_shared<LevelPiece>( Length, shared_from_this(), Computer, NumBobs );
 		LevelPieces.push_back( NewPiece );
 		return NewPiece;
 	}
 
-	void Level::Clone( const std::shared_ptr<Level> &A )
+	void Level::Clone( const boost::shared_ptr<Level> &A )
 	{
 		for ( BlockVec::const_iterator block = A->Blocks.begin(); block != A->Blocks.end(); ++block )
 		{
-			std::shared_ptr<BlockBase> DestBlock = std::static_pointer_cast<BlockBase>( MySourceGame->Recycle->GetObject( ( *block )->getCore()->MyType, false ) );
+			boost::shared_ptr<BlockBase> DestBlock = boost::static_pointer_cast<BlockBase>( MySourceGame->Recycle->GetObject( ( *block )->getCore()->MyType, false ) );
 			DestBlock->Clone( *block );
 
 			AddBlock( DestBlock );
@@ -1263,19 +1263,19 @@ namespace CloudberryKingdom
 
 		for ( ObjectVec::const_iterator obj = A->Objects.begin(); obj != A->Objects.end(); ++obj )
 		{
-			std::shared_ptr<ObjectBase> DestObj = std::static_pointer_cast<ObjectBase>( MySourceGame->Recycle->GetObject( ( *obj )->getCore()->MyType, false ) );
+			boost::shared_ptr<ObjectBase> DestObj = boost::static_pointer_cast<ObjectBase>( MySourceGame->Recycle->GetObject( ( *obj )->getCore()->MyType, false ) );
 			DestObj->Clone( *obj );
 
 			AddObject( DestObj );
 		}
 	}
 
-	void Level::Fill( Vector2 BL, Vector2 TR, float xstep, float ystep, const std::shared_ptr<Lambda_1<Vector2> > &FillFunc )
+	void Level::Fill( Vector2 BL, Vector2 TR, float xstep, float ystep, const boost::shared_ptr<Lambda_1<Vector2> > &FillFunc )
 	{
 		Fill( BL, TR, Vector2( xstep, xstep ), ystep, FillFunc );
 	}
 
-	void Level::Fill( Vector2 BL, Vector2 TR, Vector2 xstep, float ystep, const std::shared_ptr<Lambda_1<Vector2> > &FillFunc )
+	void Level::Fill( Vector2 BL, Vector2 TR, Vector2 xstep, float ystep, const boost::shared_ptr<Lambda_1<Vector2> > &FillFunc )
 	{
 		if ( Sign( TR.X - BL.X ) != Sign( xstep.X ) )
 			return;
@@ -1307,23 +1307,23 @@ namespace CloudberryKingdom
 			Tools::SongWad->FadeOut();
 	}
 
-	void Level::EndOfLevelBonus( const std::shared_ptr<PlayerData> &FinishingPlayer )
+	void Level::EndOfLevelBonus( const boost::shared_ptr<PlayerData> &FinishingPlayer )
 	{
 		EndOfLevelBonus( FinishingPlayer, true );
 	}
 
-	void Level::EndOfLevelBonus( const std::shared_ptr<PlayerData> &FinishingPlayer, bool IncrLevels )
+	void Level::EndOfLevelBonus( const boost::shared_ptr<PlayerData> &FinishingPlayer, bool IncrLevels )
 	{
-		std::vector<std::shared_ptr<PlayerData> > players;
+		std::vector<boost::shared_ptr<PlayerData> > players;
 		if ( FinishingPlayer == 0 )
 			players = PlayerManager::getAlivePlayers();
 		else
 		{
-			players = std::vector<std::shared_ptr<PlayerData> >();
+			players = std::vector<boost::shared_ptr<PlayerData> >();
 			players.push_back( FinishingPlayer );
 		}
 
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
 		{
 			if ( IncrLevels )
 				( *player )->getStats()->Levels++;
@@ -1342,7 +1342,7 @@ namespace CloudberryKingdom
 		}
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 		{
 			CoinsCountInStats = true;
 			( *player )->getStats()->TotalCoins += NumCoins;
@@ -1396,7 +1396,7 @@ namespace CloudberryKingdom
 
 const float Level::SafetyNetHeight = 124;
 
-	std::shared_ptr<BlockBase> Level::Stage1SafetyNet( Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type )
+	boost::shared_ptr<BlockBase> Level::Stage1SafetyNet( Vector2 BL, Vector2 TR, Vector2 size, float xstep, StyleData::GroundType Type )
 	{
 		bool Virgin = false;
 		bool Used = false;
@@ -1440,32 +1440,32 @@ const float Level::SafetyNetHeight = 124;
 		// Safety net
 		__LastBlock.reset();
 		
-		Fill( BL + Vector2( 0, SafetyNetHeight ), Vector2( TR.X, BL.Y + SafetyNetHeight + 1 ), xstep, 50, std::make_shared<SafetyNetLambda>( SafetyNetLambda( shared_from_this(), BL, TR, size, xstep, Type, Virgin, Used, BoxesOnly, InvertDraw, Invert ) ) );
+		Fill( BL + Vector2( 0, SafetyNetHeight ), Vector2( TR.X, BL.Y + SafetyNetHeight + 1 ), xstep, 50, boost::make_shared<SafetyNetLambda>( SafetyNetLambda( shared_from_this(), BL, TR, size, xstep, Type, Virgin, Used, BoxesOnly, InvertDraw, Invert ) ) );
 
 		return __LastBlock;
 	}
 
-	std::shared_ptr<Door> Level::PlaceDoorOnBlock_Unlayered( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop )
+	boost::shared_ptr<Door> Level::PlaceDoorOnBlock_Unlayered( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop )
 	{
 		return PlaceDoorOnBlock( pos, block, AddBackdrop, MyTileSet, false );
 	}
 
-	std::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop )
+	boost::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop )
 	{
 		return PlaceDoorOnBlock( pos, block, AddBackdrop, MyTileSet, true );
 	}
 
-	std::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset )
+	boost::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop, const boost::shared_ptr<TileSet> &BackdropTileset )
 	{
 		return PlaceDoorOnBlock( pos, block, AddBackdrop, BackdropTileset, true );
 	}
 
-	std::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const std::shared_ptr<BlockBase> &block, bool AddBackdrop, const std::shared_ptr<TileSet> &BackdropTileset, bool LayeredDoor )
+	boost::shared_ptr<Door> Level::PlaceDoorOnBlock( Vector2 pos, const boost::shared_ptr<BlockBase> &block, bool AddBackdrop, const boost::shared_ptr<TileSet> &BackdropTileset, bool LayeredDoor )
 	{
 		int DesiredDoorLayer = 0, DesiredDoorLayer2 = 0;
 
 		// Add door
-		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( getRecycle()->GetObject(ObjectType_DOOR, false) );
+		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( getRecycle()->GetObject(ObjectType_DOOR, false) );
 		//door.Layered = LayeredDoor;
 		door->StampAsUsed( 0 );
 
@@ -1486,7 +1486,7 @@ const float Level::SafetyNetHeight = 124;
 		}
 
 		// Add a backdrop block that the door opens into
-		std::shared_ptr<NormalBlock> backblock = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		boost::shared_ptr<NormalBlock> backblock = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		MadeBackBlock = backblock;
 		backblock->Clone( block );
 
@@ -1505,7 +1505,7 @@ const float Level::SafetyNetHeight = 124;
 		return door;
 	}
 
-	void Level::SetBackblockProperties( const std::shared_ptr<NormalBlock> &backblock )
+	void Level::SetBackblockProperties( const boost::shared_ptr<NormalBlock> &backblock )
 	{
 		float shade = .85f;
 		backblock->MyDraw->SetTint( Color( shade, shade, shade ) );
@@ -1524,7 +1524,7 @@ const float Level::SafetyNetHeight = 124;
 		AddBlock( backblock );
 	}
 
-	void Level::SpreadStartPositions( const std::shared_ptr<LevelPiece> &piece, const std::shared_ptr<MakeData> &make, Vector2 pos, Vector2 SpanPer )
+	void Level::SpreadStartPositions( const boost::shared_ptr<LevelPiece> &piece, const boost::shared_ptr<MakeData> &make, Vector2 pos, Vector2 SpanPer )
 	{
 		int n = __max( 1, make->NumInitialBobs );
 		Vector2 span = SpanPer * ( static_cast<float>( n - 1 ) );
@@ -1536,11 +1536,11 @@ const float Level::SafetyNetHeight = 124;
 		}
 	}
 
-	float Level::MakeInitialPlats( Vector2 BL, Vector2 TR, const std::shared_ptr<SingleData> &Style )
+	float Level::MakeInitialPlats( Vector2 BL, Vector2 TR, const boost::shared_ptr<SingleData> &Style )
 	{
 		Vector2 size;
 		Vector2 pos;
-		std::shared_ptr<NormalBlock> block = 0;
+		boost::shared_ptr<NormalBlock> block = 0;
 
 		size = Vector2( 350, 2250 );
 		if ( CurMakeData->SkinnyStart )
@@ -1550,7 +1550,7 @@ const float Level::SafetyNetHeight = 124;
 
 		pos += getInfo()->ShiftStartBlock;
 
-		std::shared_ptr<Door> door = 0;
+		boost::shared_ptr<Door> door = 0;
 		switch ( Style->MyInitialPlatsType )
 		{
 			case StyleData::InitialPlatsType_SPACESHIP:
@@ -1560,7 +1560,7 @@ const float Level::SafetyNetHeight = 124;
 				size.X += 100;
 				pos.X -= 50;
 
-				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
 				// New style end blocks
 				if ( MyTileSet->FixedWidths )
@@ -1608,10 +1608,10 @@ const float Level::SafetyNetHeight = 124;
 
 	float Level::MakeInitial_LandingZone( Vector2 &BL, Vector2 &TR, Vector2 &size )
 	{
-		std::shared_ptr<NormalBlock> nblock;
+		boost::shared_ptr<NormalBlock> nblock;
 		Vector2 Pos = BL;
 		size = Vector2( 2200, 200 );
-		nblock = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+		nblock = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 		nblock->getCore()->setMyTileSet(MyTileSet);
 		nblock->Init( Pos, size, getMyTileSetInfo() );
 		nblock->Extend( Side_BOTTOM, getMainCamera()->BL.Y - 300 );
@@ -1636,7 +1636,7 @@ const float Level::SafetyNetHeight = 124;
 		return VanillaFill( BL + Vector2( size.X, 0 ), Vector2( BL.X + size.X + 500, TR.Y - 500 ), 600 );
 	}
 
-	float Level::MakeInitial_Spaceship( Vector2 &BL, Vector2 &TR, Vector2 &pos, std::shared_ptr<NormalBlock> &block )
+	float Level::MakeInitial_Spaceship( Vector2 &BL, Vector2 &TR, Vector2 &pos, boost::shared_ptr<NormalBlock> &block )
 	{
 		BL = BL + Vector2( -600, -400 );
 		TR = Vector2( BL.X + 750, TR.Y + 400 );
@@ -1648,7 +1648,7 @@ const float Level::SafetyNetHeight = 124;
 	{
 		__block_fromlambda.reset();
 
-		Fill( BL, Vector2( BL.X + 10, TR.Y ), 200, 250, std::make_shared<MakeInitialLambda>( shared_from_this(), size ) );
+		Fill( BL, Vector2( BL.X + 10, TR.Y ), 200, 250, boost::make_shared<MakeInitialLambda>( shared_from_this(), size ) );
 
 		if ( __block_fromlambda == 0 )
 			return 0;
@@ -1661,18 +1661,18 @@ const float Level::SafetyNetHeight = 124;
 		return VanillaFill( BL, TR, width, 200, 0, 0 );
 	}
 
-	float Level::VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PreInit, const std::shared_ptr<Lambda_1<std::shared_ptr<BlockBase> > > &PostInit )
+	float Level::VanillaFill( Vector2 BL, Vector2 TR, float width, float ystep, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BlockBase> > > &PreInit, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BlockBase> > > &PostInit )
 	{
 		Vector2 Pos = BL;
 
 		float step = 2 * width;
 
-		std::shared_ptr<NormalBlock> block = 0;
+		boost::shared_ptr<NormalBlock> block = 0;
 		while ( Pos.X < TR.X )
 		{
 			while ( Pos.Y < TR.Y )
 			{
-				block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+				block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
 				if ( PreInit != 0 )
 					PreInit->Apply( block );
@@ -1704,17 +1704,17 @@ const float Level::SafetyNetHeight = 124;
 		return Pos.X;
 	}
 
-	float Level::RandomBlocks( Vector2 BL, Vector2 TR, std::shared_ptr<MakeData> &makeData )
+	float Level::RandomBlocks( Vector2 BL, Vector2 TR, boost::shared_ptr<MakeData> &makeData )
 	{
 		Vector2 Pos = BL;
 
 		float width = 400;
 		float step = 2 * width;
 
-		std::shared_ptr<NormalBlock> block = 0;
+		boost::shared_ptr<NormalBlock> block = 0;
 		while ( Pos.X < TR.X )
 		{
-			block = std::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			block = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 			block->Init( Pos + Vector2( width, getRnd()->RndFloat(200, 1000) ), Vector2(getRnd()->RndFloat(width / 2, width), 200), getMyTileSetInfo() );
 			block->Extend( Side_BOTTOM, BL.Y - 300 );
 
@@ -1758,19 +1758,19 @@ int Level::CountToSleep = 0;
 	{
 		Vector2 xstep = Vector2( CurMakeData->PieceSeed->Style->FillxStep * Sparsity, 0 );
 		xstep.Y = xstep.X;
-		Fill( BL, TR, xstep, CurMakeData->PieceSeed->Style->FillyStep, std::make_shared<Stage1RndFillLambda>( shared_from_this(), BL, TR, BL_Cutoff ) );
+		Fill( BL, TR, xstep, CurMakeData->PieceSeed->Style->FillyStep, boost::make_shared<Stage1RndFillLambda>( shared_from_this(), BL, TR, BL_Cutoff ) );
 	}
 
-	std::shared_ptr<CameraZone> Level::MakeCameraZone()
+	boost::shared_ptr<CameraZone> Level::MakeCameraZone()
 	{
 		return MakeCameraZone( Vector2( ( CurMakeData->PieceSeed->End.X - CurMakeData->PieceSeed->Start.X ) / 2 + 150, getMainCamera()->GetHeight() / 2 ) );
 	}
 
-	std::shared_ptr<CameraZone> Level::MakeCameraZone( Vector2 Size )
+	boost::shared_ptr<CameraZone> Level::MakeCameraZone( Vector2 Size )
 	{
-		std::shared_ptr<PieceSeedData> s = CurMakeData->PieceSeed;
+		boost::shared_ptr<PieceSeedData> s = CurMakeData->PieceSeed;
 
-		std::shared_ptr<CameraZone> CamZone = std::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
+		boost::shared_ptr<CameraZone> CamZone = boost::static_pointer_cast<CameraZone>( getRecycle()->GetObject(ObjectType_CAMERA_ZONE, false) );
 		CamZone->Init( ( s->Start + s->End ) / 2, Size );
 		CamZone->Start = s->Start + s->CamZoneStartAdd;
 		CamZone->End = s->End + s->CamZoneEndAdd;
@@ -1827,7 +1827,7 @@ bool Level::dodebug = false;
 	std::wstring Level::Pre1 = _T( "" ), Level::Pre2 = _T( "" ), Level::Post = _T( "" );
 	int Level::Step1 = 0, Level::Step2 = 0;
 
-	bool Level::MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const std::shared_ptr<MakeData> &makeData )
+	bool Level::MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const boost::shared_ptr<MakeData> &makeData )
 	{
 		int TestNumber;
 
@@ -1845,7 +1845,7 @@ bool Level::dodebug = false;
 
 		CurMakeData = makeData;
 		InitMakeData( CurMakeData );
-		std::shared_ptr<SingleData> Style = std::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
+		boost::shared_ptr<SingleData> Style = boost::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
 
 		// Calculate the style parameters
 		Style->CalcGenParams( CurMakeData->PieceSeed, shared_from_this() );
@@ -1863,10 +1863,10 @@ bool Level::dodebug = false;
 		BobVec Computers = CurMakeData->MakeBobs( shared_from_this() );
 
 		// New level piece
-		std::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( shared_from_this(), Computers, Length, StartPhsxStep );
+		boost::shared_ptr<LevelPiece> Piece = CurPiece = CurMakeData->MakeLevelPiece( shared_from_this(), Computers, Length, StartPhsxStep );
 
 		// Camera Zone
-		std::shared_ptr<CameraZone> CamZone = MakeCameraZone();
+		boost::shared_ptr<CameraZone> CamZone = MakeCameraZone();
 		CamZone->SetZoom( getMainCamera() );
 		Sleep();
 
@@ -1882,7 +1882,7 @@ bool Level::dodebug = false;
 		float Left;
 		Left = MaxLeft;
 
-		std::shared_ptr<NormalBlock_Parameters> BlockParams = std::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> BlockParams = boost::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		if ( !BlockParams->DoInitialPlats )
 			CurMakeData->InitialPlats = false;
 		if ( !BlockParams->DoFinalPlats )
@@ -1906,7 +1906,7 @@ bool Level::dodebug = false;
 		if ( MySourceGame->HasLava )
 		{
 			VoidHeight = 40;
-			std::shared_ptr<LavaBlock> lblock = std::static_pointer_cast<LavaBlock>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
+			boost::shared_ptr<LavaBlock> lblock = boost::static_pointer_cast<LavaBlock>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
 			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 800) + Style->LowerSafetyNetOffset, MaxLeft - 1000, MaxRight + 1000, 5000 );
 			lblock->StampAsUsed( 0 );
 			AddBlock( lblock );
@@ -1924,15 +1924,15 @@ bool Level::dodebug = false;
 
 		// Final platform
 		EndBuffer = 0;
-		std::shared_ptr<MakeThing> MakeFinalPlat = 0;
+		boost::shared_ptr<MakeThing> MakeFinalPlat = 0;
 		if ( CurMakeData->FinalPlats )
 		{
 			if ( Style->MyFinalPlatsType == StyleData::FinalPlatsType_DOOR )
 			{
-				if ( DefaultHeroType == BobPhsxRocketbox::getInstance() || std::dynamic_pointer_cast<BobPhsxSpaceship>(DefaultHeroType) != 0 )
-					MakeFinalPlat = std::make_shared<MakeFinalDoor_Float>( shared_from_this() );
+				if ( DefaultHeroType == BobPhsxRocketbox::getInstance() || boost::dynamic_pointer_cast<BobPhsxSpaceship>(DefaultHeroType) != 0 )
+					MakeFinalPlat = boost::make_shared<MakeFinalDoor_Float>( shared_from_this() );
 				else
-					MakeFinalPlat = std::make_shared<MakeFinalDoor>( shared_from_this() );
+					MakeFinalPlat = boost::make_shared<MakeFinalDoor>( shared_from_this() );
 			}
 		}
 
@@ -1951,7 +1951,7 @@ bool Level::dodebug = false;
 
 		Fill_BL = Vector2( Left, getMainCamera()->BL.Y + Style->BottomSpace );
 		Fill_TR = Vector2( MaxRight + 100, getMainCamera()->TR.Y - Style->TopSpace );
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_1_Gens.begin(); gen != Generators::PreFill_1_Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_1_Gens.begin(); gen != Generators::PreFill_1_Gens.end(); ++gen )
 		{
 			//gen.PreFill_1(this, BL_Bound, TR_Bound);
 			( *gen )->PreFill_1( shared_from_this(), FillBL, TR_Bound );
@@ -2047,7 +2047,7 @@ bool Level::dodebug = false;
 
 
 		// Pre Fill #2
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_2_Gens.begin(); gen != Generators::PreFill_2_Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::PreFill_2_Gens.begin(); gen != Generators::PreFill_2_Gens.end(); ++gen )
 		{
 			//gen.PreFill_2(this, BL_Bound, TR_Bound);
 			( *gen )->PreFill_2( shared_from_this(), FillBL, TR_Bound );
@@ -2098,7 +2098,7 @@ bool Level::dodebug = false;
 		}
 
 		// Door properties
-		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
 		if ( 0 != door )
 			door->AutoOpen = Style->AutoOpenDoor;
 
@@ -2133,7 +2133,7 @@ bool Level::dodebug = false;
 				break;
 
 			PhsxStep( true );
-			for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::ActiveFill_1_Gens.begin(); gen != Generators::ActiveFill_1_Gens.end(); ++gen )
+			for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::ActiveFill_1_Gens.begin(); gen != Generators::ActiveFill_1_Gens.end(); ++gen )
 				( *gen )->ActiveFill_1( shared_from_this(), FillBL, TR_Bound );
 		}
 		LastStep = CurPhsxStep;
@@ -2141,9 +2141,9 @@ bool Level::dodebug = false;
 
 	void Level::Stage1Cleanup( Vector2 BL_Bound, Vector2 TR_Bound )
 	{
-		std::shared_ptr<SingleData> Style = std::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
+		boost::shared_ptr<SingleData> Style = boost::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
 
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			( *gen )->Cleanup_1( shared_from_this(), BL_Bound, TR_Bound );
 
 		// Overlapping blocks
@@ -2189,18 +2189,18 @@ bool Level::dodebug = false;
 			if ( ( *obj )->getCore()->GenData.LimitGeneralDensity )
 				ObjsToClean.push_back( *obj );
 
-		Cleanup( ObjsToClean, std::make_shared<GeneralMinDistLambda>( shared_from_this() ), true, BL_Bound, TR_Bound );
+		Cleanup( ObjsToClean, boost::make_shared<GeneralMinDistLambda>( shared_from_this() ), true, BL_Bound, TR_Bound );
 		Sleep();
 
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
+			boost::shared_ptr<Coin> coin = boost::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin )
 				if ( coin->getCore()->AddedTimeStamp > LastStep )
 					getRecycle()->CollectObject(coin);
 		}
 
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			( *gen )->Cleanup_2( shared_from_this(), BL_Bound, TR_Bound );
 
 		// Clean up deleted objects
@@ -2294,9 +2294,9 @@ bool Level::dodebug = false;
 		}
 	}
 
-	void Level::InitMakeData( const std::shared_ptr<MakeData> &makeData )
+	void Level::InitMakeData( const boost::shared_ptr<MakeData> &makeData )
 	{
-		std::shared_ptr<PieceSeedData> Piece = makeData->PieceSeed;
+		boost::shared_ptr<PieceSeedData> Piece = makeData->PieceSeed;
 
 		makeData->Init( Piece );
 
@@ -2340,7 +2340,7 @@ bool Level::dodebug = false;
 		makeData->CamStartPos = getMainCamera()->Data.Position;
 	}
 
-	const std::shared_ptr<Recycler> Level::getRecycle() const
+	const boost::shared_ptr<Recycler> Level::getRecycle() const
 	{
 		if ( MySourceGame != 0 && !MySourceGame->Released )
 			return MySourceGame->Recycle;
@@ -2352,12 +2352,12 @@ bool Level::dodebug = false;
 		return 0;
 	}
 
-	const std::shared_ptr<Rand> &Level::getRnd()
+	const boost::shared_ptr<Rand> &Level::getRnd()
 	{
 		if ( MyLevelSeed == 0 )
 		{
 			if ( _PrivateRnd == 0 )
-				_PrivateRnd = std::make_shared<Rand>( 0 );
+				_PrivateRnd = boost::make_shared<Rand>( 0 );
 			return _PrivateRnd;
 		}
 		else
@@ -2386,7 +2386,7 @@ bool Level::dodebug = false;
 		if ( Bobs.empty() )
 			return true;
 
-		return Tools::All<std::shared_ptr<Bob> >( Bobs, std::make_shared<CloseToStartLambda>() );
+		return Tools::All<boost::shared_ptr<Bob> >( Bobs, boost::make_shared<CloseToStartLambda>() );
 	}
 
 	const bool &Level::getPreventReset() const
@@ -2406,13 +2406,13 @@ bool Level::dodebug = false;
 
 	void Level::PushLava( float y )
 	{
-		std::shared_ptr<BlockBase> lava = Tools::Find<std::shared_ptr<BlockBase> >( Blocks, std::make_shared<IsLavaLambda>() );
+		boost::shared_ptr<BlockBase> lava = Tools::Find<boost::shared_ptr<BlockBase> >( Blocks, boost::make_shared<IsLavaLambda>() );
 
 		if ( 0 != lava )
-			PushLava( y, std::dynamic_pointer_cast<LavaBlock>( lava ) );
+			PushLava( y, boost::dynamic_pointer_cast<LavaBlock>( lava ) );
 	}
 
-	void Level::PushLava( float y, const std::shared_ptr<LavaBlock> &lava )
+	void Level::PushLava( float y, const boost::shared_ptr<LavaBlock> &lava )
 	{
 		float newtop = __min( lava->getBox()->Current->TR.Y, y );
 		float shift = newtop - lava->getBox()->Current->TR.Y;
@@ -2428,12 +2428,12 @@ bool Level::dodebug = false;
 			MyGame->AddGameObject( MakeMagic( GUI_Timer_Simple, ( TimeLimitTimerLength ) ) );
 	}
 
-	const std::shared_ptr<TileSet> &Level::getMyTileSetInfo() const
+	const boost::shared_ptr<TileSet> &Level::getMyTileSetInfo() const
 	{
 		return MyTileSet;
 	}
 
-	const std::shared_ptr<TileSetInfo> &Level::getInfo() const
+	const boost::shared_ptr<TileSetInfo> &Level::getInfo() const
 	{
 		return MyTileSet->MyTileSetInfo;
 	}
@@ -2453,12 +2453,12 @@ int Level::AfterParticlesDrawLayer = 10;
 int Level::LastInLevelDrawLayer = 10;
 int Level::AfterPostDrawLayer = 12;
 
-	const std::shared_ptr<Camera> &Level::getMainCamera() const
+	const boost::shared_ptr<Camera> &Level::getMainCamera() const
 	{
 		return MyCamera;
 	}
 
-	void Level::setMainCamera( std::shared_ptr<Camera> &value )
+	void Level::setMainCamera( boost::shared_ptr<Camera> &value )
 	{
 		MyCamera = value;
 		MyCamera->MyLevel = shared_from_this();
@@ -2485,7 +2485,7 @@ int Level::AfterPostDrawLayer = 12;
 
 		CanWatchComputer = CanWatchReplay = false;
 
-		LevelPieces = std::vector<std::shared_ptr<LevelPiece> >();
+		LevelPieces = std::vector<boost::shared_ptr<LevelPiece> >();
 
 		if ( !NoParticles )
 			MainEmitter = ParticleEmitter::Pool->Get();
@@ -2536,7 +2536,7 @@ int Level::AfterPostDrawLayer = 12;
 			MySwarmBundle->Release();
 
 		if ( LevelPieces.size() > 0 )
-			for ( std::vector<std::shared_ptr<LevelPiece> >::const_iterator piece = LevelPieces.begin(); piece != LevelPieces.end(); ++piece )
+			for ( std::vector<boost::shared_ptr<LevelPiece> >::const_iterator piece = LevelPieces.begin(); piece != LevelPieces.end(); ++piece )
 				( *piece )->Release();
 		LevelPieces.clear();
 		CurPiece.reset();
@@ -2549,7 +2549,7 @@ int Level::AfterPostDrawLayer = 12;
 			MainEmitter.reset();
 		}
 		if ( ParticleEmitters.size() > 0 )
-			for ( std::vector<std::shared_ptr<ParticleEmitter> >::const_iterator emitter = ParticleEmitters.begin(); emitter != ParticleEmitters.end(); ++emitter )
+			for ( std::vector<boost::shared_ptr<ParticleEmitter> >::const_iterator emitter = ParticleEmitters.begin(); emitter != ParticleEmitters.end(); ++emitter )
 				if ( *emitter != 0 )
 					( *emitter )->Release();
 		ParticleEmitters.clear();
@@ -2603,17 +2603,17 @@ int Level::AfterPostDrawLayer = 12;
 		OnCameraChange.reset();
 	}
 
-	const std::shared_ptr<Door> Level::getFinalDoor() const
+	const boost::shared_ptr<Door> Level::getFinalDoor() const
 	{
-		return std::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
+		return boost::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
 	}
 
-	const std::shared_ptr<Door> Level::getStartDoor() const
+	const boost::shared_ptr<Door> Level::getStartDoor() const
 	{
-		return std::static_pointer_cast<Door>( FindIObject( LevelConnector::StartOfLevelCode ) );
+		return boost::static_pointer_cast<Door>( FindIObject( LevelConnector::StartOfLevelCode ) );
 	}
 
-	const std::shared_ptr<ObjectBase> Level::FindIObject( const std::wstring &Code1 ) const
+	const boost::shared_ptr<ObjectBase> Level::FindIObject( const std::wstring &Code1 ) const
 	{
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 			if ( CompareIgnoreCase( ( *obj )->getCore()->EditorCode1, Code1 ) == 0 )
@@ -2653,17 +2653,17 @@ int Level::AfterPostDrawLayer = 12;
 
 		// Now write to file
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
-		//std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
+		//boost::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
+		//boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
 		{
-			std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( fullpath );
+			boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( fullpath );
 			Tools::CurLevel->Write( writer );
 		}
 		//writer->Close();
 		//stream->Close();
 	}
 
-	int Level::DrawLayerSortFunc( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
+	int Level::DrawLayerSortFunc( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B )
 	{
 		return Compare( A->getCore()->DrawSubLayer, B->getCore()->DrawSubLayer );
 	}
@@ -2675,7 +2675,7 @@ int Level::AfterPostDrawLayer = 12;
 			Sort( DrawLayer[ i ], DrawLayerSortFunc );
 	}
 
-	void Level::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void Level::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		// Save sub draw layers
 		for ( int i = 0; i < NumDrawLayers; i++ )
@@ -2730,7 +2730,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		getMainCamera()->Move(shift);
 
-		for ( std::vector<std::shared_ptr<LevelPiece> >::const_iterator piece = LevelPieces.begin(); piece != LevelPieces.end(); ++piece )
+		for ( std::vector<boost::shared_ptr<LevelPiece> >::const_iterator piece = LevelPieces.begin(); piece != LevelPieces.end(); ++piece )
 		{
 			for ( int i = 0; i < (*piece)->NumBobs; i++ )
 				( *piece )->StartData[ i ].Position += shift;
@@ -2756,7 +2756,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
+			boost::shared_ptr<Coin> coin = boost::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin )
 			{
 				if ( !coin->getCore()->Active )
@@ -2775,7 +2775,7 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::PrepareBundleToAddRecording()
 	{
 		if ( MySwarmBundle == 0 )
-			MySwarmBundle = std::make_shared<SwarmBundle>();
+			MySwarmBundle = boost::make_shared<SwarmBundle>();
 
 		if ( MySwarmBundle->CurrentSwarm == 0 )
 		{
@@ -2821,12 +2821,12 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		Recording_Renamed = true;
-		CurrentRecording = std::make_shared<Recording>( Bobs.size(), 8000 );
+		CurrentRecording = boost::make_shared<Recording>( Bobs.size(), 8000 );
 	}
 
-	std::shared_ptr<ObjectBase> Level::GuidToObj( unsigned long long guid )
+	boost::shared_ptr<ObjectBase> Level::GuidToObj( unsigned long long guid )
 	{
-		std::shared_ptr<ObjectBase> obj = LookupGUID( guid );
+		boost::shared_ptr<ObjectBase> obj = LookupGUID( guid );
 		if ( obj != 0 && obj->getCore()->MarkedForDeletion )
 			return 0;
 		else
@@ -2841,9 +2841,9 @@ int Level::AfterPostDrawLayer = 12;
 		return list;
 	}
 
-	std::shared_ptr<ObjectBase> Level::LookupGUID( unsigned long long guid )
+	boost::shared_ptr<ObjectBase> Level::LookupGUID( unsigned long long guid )
 	{
-		std::shared_ptr<ObjectBase> FoundObj = Tools::Find<std::shared_ptr<ObjectBase> >( Objects, std::make_shared<FindGuidLambda>( guid ) );
+		boost::shared_ptr<ObjectBase> FoundObj = Tools::Find<boost::shared_ptr<ObjectBase> >( Objects, boost::make_shared<FindGuidLambda>( guid ) );
 		if ( FoundObj != 0 )
 			return FoundObj;
 
@@ -2855,7 +2855,7 @@ int Level::AfterPostDrawLayer = 12;
 		SetCurrentPiece( LevelPieces[ LevelPieceIndex ] );
 	}
 
-	void Level::SetCurrentPiece( const std::shared_ptr<LevelPiece> &piece )
+	void Level::SetCurrentPiece( const boost::shared_ptr<LevelPiece> &piece )
 	{
 		CurPiece = piece;
 
@@ -2912,7 +2912,7 @@ int Level::AfterPostDrawLayer = 12;
 			if ( MainEmitter != 0 )
 				MainEmitter->Clean();
 			if ( ParticleEmitters.size() > 0 )
-				for ( std::vector<std::shared_ptr<ParticleEmitter> >::const_iterator emitter = ParticleEmitters.begin(); emitter != ParticleEmitters.end(); ++emitter )
+				for ( std::vector<boost::shared_ptr<ParticleEmitter> >::const_iterator emitter = ParticleEmitters.begin(); emitter != ParticleEmitters.end(); ++emitter )
 					if ( *emitter != 0 )
 						( *emitter )->Clean();
 		}
@@ -2946,7 +2946,7 @@ int Level::AfterPostDrawLayer = 12;
 		{
 			for ( int j = 0; j < static_cast<int>( DrawLayer[ i ].size() ); j++ )
 			{
-				std::shared_ptr<ObjectData> Core = DrawLayer[ i ][ j ]->getCore();
+				boost::shared_ptr<ObjectData> Core = DrawLayer[ i ][ j ]->getCore();
 				if ( !Core->FixSubLayer )
 					Core->DrawSubLayer = j;
 			}
@@ -3004,7 +3004,7 @@ int Level::AfterPostDrawLayer = 12;
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			( *obj )->Reset( BoxesOnly );
-			std::shared_ptr<ObjectBase> NewObj;
+			boost::shared_ptr<ObjectBase> NewObj;
 			if ( ( *obj )->getCore()->ResetOnlyOnReset )
 				NewObj = *obj;
 			else
@@ -3024,7 +3024,7 @@ int Level::AfterPostDrawLayer = 12;
 		{
 			if ( ( *obj )->getCore()->ParentObject != 0 )
 			{
-				std::shared_ptr<ObjectBase> parent = FindParentObjectById( NewObjects, *obj );
+				boost::shared_ptr<ObjectBase> parent = FindParentObjectById( NewObjects, *obj );
 
 				( *obj )->getCore()->ParentObject = parent;
 			}
@@ -3063,14 +3063,14 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	std::shared_ptr<ObjectBase> Level::FindParentObjectById( ObjectVec &ObjectList, const std::shared_ptr<ObjectBase> &obj )
+	boost::shared_ptr<ObjectBase> Level::FindParentObjectById( ObjectVec &ObjectList, const boost::shared_ptr<ObjectBase> &obj )
 	{
-		std::shared_ptr<ObjectBase> FoundObj = Tools::Find<std::shared_ptr<ObjectBase> >( ObjectList, std::make_shared<FindGuidLambda>( obj->getCore()->ParentObjId ) );
+		boost::shared_ptr<ObjectBase> FoundObj = Tools::Find<boost::shared_ptr<ObjectBase> >( ObjectList, boost::make_shared<FindGuidLambda>( obj->getCore()->ParentObjId ) );
 
 		return FoundObj;
 	}
 
-	void Level::SynchObject( const std::shared_ptr<ObjectBase> &obj )
+	void Level::SynchObject( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		if ( obj->getCore()->MyLevel == 0 )
 			obj->getCore()->StepOffset = 0;
@@ -3078,7 +3078,7 @@ int Level::AfterPostDrawLayer = 12;
 			obj->getCore()->StepOffset = obj->getCore()->MyLevel->GetPhsxStep() - GetPhsxStep();
 	}
 
-	void Level::MoveUpOneSublayer( const std::shared_ptr<ObjectBase> &obj )
+	void Level::MoveUpOneSublayer( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		/*int i = DrawLayer[ obj->getCore()->DrawLayer ].find( obj ) + 1;*/
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ] , obj ) + 1;
@@ -3089,7 +3089,7 @@ int Level::AfterPostDrawLayer = 12;
 		Insert( DrawLayer[ obj->getCore()->DrawLayer ], i, obj);
 	}
 
-	void Level::MoveToTopOfDrawLayer( const std::shared_ptr<ObjectBase> &obj )
+	void Level::MoveToTopOfDrawLayer( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ], obj );
 		int N = static_cast<int>( DrawLayer[ obj->getCore()->DrawLayer ].size() );
@@ -3100,7 +3100,7 @@ int Level::AfterPostDrawLayer = 12;
 		Insert( DrawLayer[ obj->getCore()->DrawLayer ], N - 1, obj );
 	}
 
-	void Level::MoveDownOneSublayer( const std::shared_ptr<ObjectBase> &obj )
+	void Level::MoveDownOneSublayer( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		int i = IndexOf( DrawLayer[ obj->getCore()->DrawLayer ], obj ) - 1;
 		int N = static_cast<int>( DrawLayer[ obj->getCore()->DrawLayer ].size() );
@@ -3110,7 +3110,7 @@ int Level::AfterPostDrawLayer = 12;
 		Insert( DrawLayer[ obj->getCore()->DrawLayer ], i, obj );
 	}
 
-	void Level::ChangeObjectDrawLayer( const std::shared_ptr<ObjectBase> &obj, int DestinationLayer )
+	void Level::ChangeObjectDrawLayer( const boost::shared_ptr<ObjectBase> &obj, int DestinationLayer )
 	{
 		if ( obj->getCore()->DrawLayer == DestinationLayer )
 			return;
@@ -3120,7 +3120,7 @@ int Level::AfterPostDrawLayer = 12;
 		obj->getCore()->DrawLayer = DestinationLayer;
 	}
 
-	void Level::RelayerObject( const std::shared_ptr<ObjectBase> &Obj, int NewLayer, bool Front )
+	void Level::RelayerObject( const boost::shared_ptr<ObjectBase> &Obj, int NewLayer, bool Front )
 	{
 		Remove( DrawLayer[ Obj->getCore()->DrawLayer ], Obj );
 
@@ -3132,12 +3132,12 @@ int Level::AfterPostDrawLayer = 12;
 		Obj->getCore()->DrawLayer = NewLayer;
 	}
 
-	void Level::AddObject( const std::shared_ptr<ObjectBase> &NewObject )
+	void Level::AddObject( const boost::shared_ptr<ObjectBase> &NewObject )
 	{
 		AddObject( NewObject, true );
 	}
 
-	void Level::AddObject( const std::shared_ptr<ObjectBase> &NewObject, bool AddTimeStamp )
+	void Level::AddObject( const boost::shared_ptr<ObjectBase> &NewObject, bool AddTimeStamp )
 	{
 		if ( AddTimeStamp )
 			NewObject->getCore()->AddedTimeStamp = CurPhsxStep;
@@ -3147,7 +3147,7 @@ int Level::AfterPostDrawLayer = 12;
 
 		if ( NewObject->getCore()->DrawLayer >= 0 )
 		{
-			if ( NewObject->getCore()->ParentBlock == 0 || std::dynamic_pointer_cast<NormalBlock>(NewObject->getCore()->ParentBlock) != 0 || NewObject->getCore()->DoNotDrawWithParent )
+			if ( NewObject->getCore()->ParentBlock == 0 || boost::dynamic_pointer_cast<NormalBlock>(NewObject->getCore()->ParentBlock) != 0 || NewObject->getCore()->DoNotDrawWithParent )
 			{
 				DrawLayer[ NewObject->getCore()->DrawLayer ].push_back(NewObject);
 			}
@@ -3175,7 +3175,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	void Level::ReAddObject( const std::shared_ptr<ObjectBase> &NewObject )
+	void Level::ReAddObject( const boost::shared_ptr<ObjectBase> &NewObject )
 	{
 		//AllObjects.Add(NewObject, true);
 		DrawLayer[ NewObject->getCore()->DrawLayer ].push_back(NewObject);
@@ -3220,28 +3220,28 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::CleanObjectList()
 	{
-		Tools::RemoveAll<std::shared_ptr<ObjectBase> >( Objects, std::make_shared<CleanObjectListLambda>() );
+		Tools::RemoveAll<boost::shared_ptr<ObjectBase> >( Objects, boost::make_shared<CleanObjectListLambda>() );
 	}
 
 	void Level::CleanDrawLayers()
 	{
 		for ( int i = 0; i < NumDrawLayers; i++ )
 		{
-			Tools::RemoveAll<std::shared_ptr<ObjectBase> >( DrawLayer[ i ], std::make_shared<CleanDrawLayerLambda>( i ) );
+			Tools::RemoveAll<boost::shared_ptr<ObjectBase> >( DrawLayer[ i ], boost::make_shared<CleanDrawLayerLambda>( i ) );
 		}
 	}
 
 	void Level::CleanBlockList()
 	{
-		Tools::RemoveAll<std::shared_ptr<BlockBase> >( Blocks, std::make_shared<CleanBlockListLambda>() );
+		Tools::RemoveAll<boost::shared_ptr<BlockBase> >( Blocks, boost::make_shared<CleanBlockListLambda>() );
 	}
 
-	void Level::AddBlock( const std::shared_ptr<BlockBase> &block )
+	void Level::AddBlock( const boost::shared_ptr<BlockBase> &block )
 	{
 		AddBlock( block, true );
 	}
 
-	void Level::AddBlock( const std::shared_ptr<BlockBase> &block, bool AddTimeStamp )
+	void Level::AddBlock( const boost::shared_ptr<BlockBase> &block, bool AddTimeStamp )
 	{
 		// Add a time stamp
 		if ( AddTimeStamp )
@@ -3262,7 +3262,7 @@ int Level::AfterPostDrawLayer = 12;
 		ReAddObject( block );
 	}
 
-	void Level::AddBob( const std::shared_ptr<Bob> &bob )
+	void Level::AddBob( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->getCore()->MyLevel = shared_from_this();
 		Bobs.push_back( bob );
@@ -3307,7 +3307,7 @@ int Level::AfterPostDrawLayer = 12;
 			for ( BobVec::const_iterator Player = Bobs.begin(); Player != Bobs.end(); ++Player )
 			{
 				if ( ( *Player )->getCore()->DrawLayer == i && (*Player)->MyBobLinks.size() > 0 )
-					for ( std::vector<std::shared_ptr<BobLink> >::const_iterator link = ( *Player )->MyBobLinks.begin(); link != ( *Player )->MyBobLinks.end(); ++link )
+					for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = ( *Player )->MyBobLinks.begin(); link != ( *Player )->MyBobLinks.end(); ++link )
 						( *link )->Draw();
 			}
 
@@ -3332,14 +3332,14 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		setUseLighting( true );
 
-		Circle = std::make_shared<ClosingCircle>( getMainCamera(), Frames, Pos );
+		Circle = boost::make_shared<ClosingCircle>( getMainCamera(), Frames, Pos );
 	}
 
-	void Level::MakeClosingCircle( float Frames, const std::shared_ptr<IPos> &Pos )
+	void Level::MakeClosingCircle( float Frames, const boost::shared_ptr<IPos> &Pos )
 	{
 		setUseLighting( true );
 
-		Circle = std::make_shared<ClosingCircle>( getMainCamera(), Frames, Pos );
+		Circle = boost::make_shared<ClosingCircle>( getMainCamera(), Frames, Pos );
 	}
 
 	const bool &Level::getUseLighting() const
@@ -3365,13 +3365,13 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::InitializeLighting()
 	{
-		LightTexture = std::make_shared<EzTexture>();
+		LightTexture = boost::make_shared<EzTexture>();
 		LightTexture->Name = _T( "LightTexture" );
 
-		std::shared_ptr<PresentationParameters> pp = Tools::Device->PP;
-		LightRenderTarget = std::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		boost::shared_ptr<PresentationParameters> pp = Tools::Device->PP;
+		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-		LightQuad = std::make_shared<QuadClass>();
+		LightQuad = boost::make_shared<QuadClass>();
 		LightQuad->setEffectName( _T( "LightMap" ) );
 	}
 
@@ -3532,13 +3532,13 @@ int Level::AfterPostDrawLayer = 12;
 			( *block )->getCore()->Tag = Tag;
 	}
 
-	void Level::AddLevelBlocks( const std::shared_ptr<Level> &level )
+	void Level::AddLevelBlocks( const boost::shared_ptr<Level> &level )
 	{
 		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 			AddBlock( *block );
 	}
 
-	void Level::AddLevelBlocks( const std::shared_ptr<Level> &level, int Tag )
+	void Level::AddLevelBlocks( const boost::shared_ptr<Level> &level, int Tag )
 	{
 		for ( BlockVec::const_iterator block = level->Blocks.begin(); block != level->Blocks.end(); ++block )
 			if ( ( *block )->getCore()->Tag == Tag && !(*block)->getCore()->DoNotScrollOut )
@@ -3546,19 +3546,19 @@ int Level::AfterPostDrawLayer = 12;
 		level->RemoveForeignObjects();
 	}
 
-	void Level::AddLevelObjects( const std::shared_ptr<Level> &level )
+	void Level::AddLevelObjects( const boost::shared_ptr<Level> &level )
 	{
 		AddLevelObjects( level, Vector2( -10000000, -100000000 ), Vector2( 10000000, 10000000 ) );
 	}
 
-	void Level::AddLevelObjects( const std::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 )
+	void Level::AddLevelObjects( const boost::shared_ptr<Level> &level, Vector2 p1, Vector2 p2 )
 	{
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( IsBetween( ( *obj )->getCore()->Data.Position, p1, p2 ) && !(*obj)->getCore()->DoNotScrollOut )
 				AddObject( *obj, false );
 	}
 
-	void Level::AddLevelObjects( const std::shared_ptr<Level> &level, int Tag )
+	void Level::AddLevelObjects( const boost::shared_ptr<Level> &level, int Tag )
 	{
 		for ( ObjectVec::const_iterator obj = level->Objects.begin(); obj != level->Objects.end(); ++obj )
 			if ( ( *obj )->getCore()->Tag == Tag && !(*obj)->getCore()->DoNotScrollOut )
@@ -3566,7 +3566,7 @@ int Level::AfterPostDrawLayer = 12;
 		level->RemoveForeignObjects();
 	}
 
-	void Level::AbsorbLevelVisuals( const std::shared_ptr<Level> &level )
+	void Level::AbsorbLevelVisuals( const boost::shared_ptr<Level> &level )
 	{
 		if ( MainEmitter != 0 && level->MainEmitter != 0 )
 			MainEmitter->Absorb( level->MainEmitter );
@@ -3575,17 +3575,17 @@ int Level::AfterPostDrawLayer = 12;
 			MyBackground->Absorb( level->MyBackground );
 	}
 
-	void Level::SetBackground( const std::shared_ptr<Background> &background )
+	void Level::SetBackground( const boost::shared_ptr<Background> &background )
 	{
 		MyBackground = background;
 		MyBackground->SetLevel( shared_from_this() );
 	}
 
-	void Level::AbsorbLevel( const std::shared_ptr<Level> &level )
+	void Level::AbsorbLevel( const boost::shared_ptr<Level> &level )
 	{
 		AddLevelBlocks( level );
 		AddLevelObjects( level );
-		for ( std::vector<std::shared_ptr<LevelPiece> >::const_iterator piece = level->LevelPieces.begin(); piece != level->LevelPieces.end(); ++piece )
+		for ( std::vector<boost::shared_ptr<LevelPiece> >::const_iterator piece = level->LevelPieces.begin(); piece != level->LevelPieces.end(); ++piece )
 		{
 			( *piece )->MyLevel = shared_from_this();
 			LevelPieces.push_back( *piece );
@@ -3604,10 +3604,10 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::RemoveForeignObjects()
 	{
-		Tools::RemoveAll<std::shared_ptr<ObjectBase> >( Objects, std::make_shared<RemoveForeignLambda>( shared_from_this() ) );
+		Tools::RemoveAll<boost::shared_ptr<ObjectBase> >( Objects, boost::make_shared<RemoveForeignLambda>( shared_from_this() ) );
 		for ( int i = 0; i < NumDrawLayers; i++ )
-			Tools::RemoveAll<std::shared_ptr<ObjectBase> >( DrawLayer[ i ], std::make_shared<RemoveForeignLambda>( shared_from_this() ) );
-		Tools::RemoveAll<std::shared_ptr<BlockBase> >( Blocks, std::make_shared<RemoveForeignBlockLambda>( shared_from_this() ) );
+			Tools::RemoveAll<boost::shared_ptr<ObjectBase> >( DrawLayer[ i ], boost::make_shared<RemoveForeignLambda>( shared_from_this() ) );
+		Tools::RemoveAll<boost::shared_ptr<BlockBase> >( Blocks, boost::make_shared<RemoveForeignBlockLambda>( shared_from_this() ) );
 	}
 
 	ObjectVec Level::GetObjectList( ObjectType type )
@@ -3621,7 +3621,7 @@ int Level::AfterPostDrawLayer = 12;
 		return list;
 	}
 
-	std::shared_ptr<Level::BaseMetric> Level::DefaultMetric = std::make_shared<Level::BaseMetric>();
+	boost::shared_ptr<Level::BaseMetric> Level::DefaultMetric = boost::make_shared<Level::BaseMetric>();
 
 	void Level::Cleanup( ObjectType type, Vector2 v )
 	{
@@ -3630,37 +3630,37 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::Cleanup( ObjectType type, Vector2 v, Vector2 BL, Vector2 TR )
 	{
-		Cleanup( type, std::make_shared<ConstLambda>( v ), BL, TR, DefaultMetric );
+		Cleanup( type, boost::make_shared<ConstLambda>( v ), BL, TR, DefaultMetric );
 	}
 
-	void Level::Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc )
+	void Level::Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc )
 	{
 		Cleanup( type, MinDistFunc, Vector2( -100000000, -100000000 ), Vector2( 100000000, 100000000 ) );
 	}
 
-	void Level::Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( type, MinDistFunc, BL, TR, DefaultMetric );
 	}
 
-	void Level::Cleanup( ObjectType type, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric )
+	void Level::Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric )
 	{
 		ObjectVec CleanupList = GetObjectList( type );
 
 		Cleanup( CleanupList, MinDistFunc, false, BL, TR, metric );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, false, BL, TR );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, MustBeDifferent, BL, TR, DefaultMetric );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric )
+	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric )
 	{
 		if ( ObjList.empty() )
 			return;
@@ -3694,7 +3694,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	void Level::CheckAgainst( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const std::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const std::shared_ptr<LambdaFunc_2<std::shared_ptr<ObjectBase> , std::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent )
+	void Level::CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent )
 	{
 		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
@@ -3735,7 +3735,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	void Level::CheckAgainst_xCoord( const std::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist )
+	void Level::CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist )
 	{
 		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
@@ -4092,14 +4092,14 @@ int Level::AfterPostDrawLayer = 12;
 		TotalCoinScore = 0;
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
-			std::shared_ptr<Coin> coin = std::dynamic_pointer_cast<Coin>( *obj );
+			boost::shared_ptr<Coin> coin = boost::dynamic_pointer_cast<Coin>( *obj );
 			if ( 0 != coin && !coin->getCore()->MarkedForDeletion )
 			{
 				NumCoins++;
 				TotalCoinScore += coin->MyScoreValue;
 			}
 
-			std::shared_ptr<FlyingBlob> blob = std::dynamic_pointer_cast<FlyingBlob>( *obj );
+			boost::shared_ptr<FlyingBlob> blob = boost::dynamic_pointer_cast<FlyingBlob>( *obj );
 			if ( 0 != blob )
 			{
 				NumBlobs++;
@@ -4110,7 +4110,7 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::SetBack( int Steps )
 	{
 		CurPiece->StartPhsxStep -= Steps;
-		MyGame->WaitThenDo( 2, std::make_shared<SetBackLambda>( shared_from_this(), Steps ) );
+		MyGame->WaitThenDo( 2, boost::make_shared<SetBackLambda>( shared_from_this(), Steps ) );
 	}
 
 	void Level::InitializeInstanceFields()
@@ -4193,9 +4193,9 @@ int Level::AfterPostDrawLayer = 12;
 		_UseLighting = false;
 		CurEditorDrawLayer = -1;
 		DrawLayer = std::vector<ObjectVec>( NumDrawLayers );
-		ParticleEmitters = std::vector<std::shared_ptr<ParticleEmitter> >( NumDrawLayers );
+		ParticleEmitters = std::vector<boost::shared_ptr<ParticleEmitter> >( NumDrawLayers );
 		ShowCoinsInReplay = true;
-		OnCameraChange = std::make_shared<Multicaster>();
+		OnCameraChange = boost::make_shared<Multicaster>();
 		AllowRecording = false;
 		PreRecycleBin.reserve( 1000 );
 		StickmanLighting = false;

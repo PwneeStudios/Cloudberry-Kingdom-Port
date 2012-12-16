@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Firesnake::FiresnakeTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
 	}
 
 	void Firesnake::MakeNew()
@@ -28,9 +28,9 @@ namespace CloudberryKingdom
 		Orbit = Vector2();
 	}
 
-	void Firesnake::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void Firesnake::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<FiresnakeTileInfo> info = level->getInfo()->Firesnakes;
+		boost::shared_ptr<FiresnakeTileInfo> info = level->getInfo()->Firesnakes;
 
 		Size = info->Sprite->Size * level->getInfo()->ScaleAll * level->getInfo()->ScaleAllObjects;
 
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 	{
 		if ( !BoxesOnly )
 		{
-			MyQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
 		}
 
 		Construct( BoxesOnly );
@@ -87,11 +87,11 @@ namespace CloudberryKingdom
 		getCore()->Active = true;
 	}
 
-	void Firesnake::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Firesnake::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Firesnake> FiresnakeA = std::dynamic_pointer_cast<Firesnake>( A );
+		boost::shared_ptr<Firesnake> FiresnakeA = boost::dynamic_pointer_cast<Firesnake>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		Size = FiresnakeA->Size;
