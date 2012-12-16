@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::setAlpha( const float &value )
 	{
-		MyFancyColor->setColor( Color( 255, 255, 255, value ) );
+		MyFancyColor->setColor( Color( 1.f, 1.f, 1.f, value ) );
 	}
 
 	void DrawPile::Scale( float scale )

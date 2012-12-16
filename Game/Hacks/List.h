@@ -51,16 +51,16 @@ std::vector<T> VecFromArray( T (&a)[N] )
 }
 
 template<class T>
-void Insert( std::vector<T> v, int index, T a )
+void Insert( std::vector<T> &v, int index, T a )
 {
 	v.insert( v.begin() + index, a );
 }
 
 template<class T>
-T Sum( std::vector<T> v )
+T Sum( const std::vector<T> &v )
 {
 	T s = T( 0 );
-	for( std::vector<T>::iterator i = v.begin(); i != v.end(); ++i )
+	for( std::vector<T>::const_iterator i = v.begin(); i != v.end(); ++i )
 		s += *i;
 	return s;
 }
