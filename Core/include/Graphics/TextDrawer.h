@@ -27,8 +27,9 @@ public:
 	 * @param text Text to draw.
 	 * @param position Screen position of upper left hand corner.
 	 * @param color Text color.
+	 * @param scale Scale of text.
 	 */
-	void Draw( const std::string &text, const Vector2 &position, const Vector4 &color );
+	void Draw( const std::string &text, const Vector2 &position, const Vector4 &color, const Vector2 &scale );
 
 	/// Measure the size of the text.
 	/**

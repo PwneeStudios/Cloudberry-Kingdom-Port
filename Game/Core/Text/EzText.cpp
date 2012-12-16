@@ -1149,9 +1149,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			Vector2 worldLoc = Tools::ToWorldCoordinates( (*bit)->loc, cam, Tools::EffectWad->ModZoom );
 
 			if ( ( *bit )->builder_str != 0 )
-				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale()*ZoomMod, SpriteEffects_None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, /*Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) **/ Vector2( 1 ) / ( getScale() * ZoomMod ), SpriteEffects_None, 1 );
 			else
-				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale() * ZoomMod, SpriteEffects_None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, /*Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * */ Vector2( 1 ) / ( getScale() * ZoomMod ), SpriteEffects_None, 1 );
 		}
 		if ( DrawPics )
 			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )

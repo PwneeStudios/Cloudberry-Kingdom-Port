@@ -19,7 +19,7 @@ TextDrawer::~TextDrawer()
 {
 }
 
-void TextDrawer::Draw( const std::string &text, const Vector2 &position, const Vector4 &color )
+void TextDrawer::Draw( const std::string &text, const Vector2 &position, const Vector4 &color, const Vector2 &scale )
 {
 	Vector2 p( position );
 	for( size_t i = 0; i < text.size(); ++i)
@@ -30,9 +30,9 @@ void TextDrawer::Draw( const std::string &text, const Vector2 &position, const V
 		SimpleQuad quad;
 		quad.Color = color;
 		quad.V[ 0 ] = Vector2( p.x(), p.y() );
-		quad.V[ 1 ] = Vector2( p.x(), p.y() + d.y() );
-		quad.V[ 2 ] = Vector2( p.x() + d.x(), p.y() + d.y() );
-		quad.V[ 3 ] = Vector2( p.x() + d.x(), p.y() );
+		quad.V[ 1 ] = Vector2( p.x(), p.y() + d.y() * scale.Y );
+		quad.V[ 2 ] = Vector2( p.x() + d.x() * scale.X, p.y() + d.y() * scale.Y );
+		quad.V[ 3 ] = Vector2( p.x() + d.x() * scale.X, p.y() );
 
 		quad.T[ 1 ] = Vector2( tq.x(), tq.y() );
 		quad.T[ 0 ] = Vector2( tq.x(), tq.y() + tq.w() );
@@ -41,7 +41,7 @@ void TextDrawer::Draw( const std::string &text, const Vector2 &position, const V
 		quad.Diffuse = fontTexture_;
 
 		QUAD_DRAWER->Draw( quad );
-		p += Vector2( d.x() + font_->GetCharSpacing(), 0 );
+		p += Vector2( d.x() + font_->GetCharSpacing(), 0 ) * scale;
 	}
 }
 

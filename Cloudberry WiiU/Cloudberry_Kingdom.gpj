@@ -6,6 +6,9 @@
 	-object_dir=objs\Cloudberry_Kingdom
 	-o Cloudberry_Kingdom.elf
 	-I.
+	-Iboost_shared_ptr
+boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
+boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp
 Game\CloudberryKingdom.cpp
 Game\Core\Animation\AnimationData_Integer.cpp
 Game\Core\Animation\AnimationData_Vector.cpp
@@ -793,17 +796,6 @@ Game\ResourceList\Resources_Art.h
 Game\ResourceList\Resources_Music.h
 Game\ResourceList\Resources_Sound.h
 Game\stringconverter.h
-
-Game\stringconverter.h
-Game\MasterHack.h
-Game\MasterHack.cpp
-Game\global_header.h
-Game\global_header.cpp
-Game\forward_declarations.h
-Game\enums.h
-Game\CloudberryKingdom.h
-Game\CloudberryKingdom.cpp
-Game\src\CloudberryKingdom.cpp
 tgt\cafe_libs.gpj
 tgt\eppc.Cafe.ld
 Main.cpp

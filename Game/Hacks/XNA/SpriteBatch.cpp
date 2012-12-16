@@ -18,7 +18,7 @@ SpriteBatch::~SpriteBatch()
 
 void SpriteBatch::DrawString( const std::shared_ptr<struct SpriteFont> &font, const std::wstring &str, const Vector2 &loc, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
 {
-	TEXT_DRAWER->Draw( WstringToUtf8( str ), loc, c.ToVector4() );
+	TEXT_DRAWER->Draw( WstringToUtf8( str ), loc, c.ToVector4(), scale );
 }
 
 void SpriteBatch::Draw( const std::shared_ptr<struct Texture2D> &texture, const Vector2 &position, Rectangle *rect, const Color &c, float rotation, const Vector2 &origin, const Vector2 &scale, SpriteEffects se, float depth )
