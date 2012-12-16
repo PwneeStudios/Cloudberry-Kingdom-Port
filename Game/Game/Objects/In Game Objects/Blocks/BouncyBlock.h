@@ -5,33 +5,6 @@
 
 namespace CloudberryKingdom
 {
-	struct BlockGroup;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	struct Level;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	struct BouncyBlock : public BlockBase
 	{
 	

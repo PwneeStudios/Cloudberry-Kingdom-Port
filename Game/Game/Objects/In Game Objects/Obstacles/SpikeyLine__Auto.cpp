@@ -5,6 +5,9 @@ namespace CloudberryKingdom
 
 	void SpikeyLine_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
 	{
+		Make = false;
+
+
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
 		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();

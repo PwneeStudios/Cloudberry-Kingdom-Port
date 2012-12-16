@@ -1665,6 +1665,114 @@ namespace CloudberryKingdom
 
 	void BobPhsxNormal::InitializeInstanceFields()
 	{
+InitializedAnim = false;
+ThrustSoundDelay = 0;
+ThrustSoundCount = 0;
+RndMoveType = 0;
+Offset = 0;
+RndThrustType = 0;
+BobFallDelay = 0;
+XFriction = 0;
+BobXDunkFriction = 0;
+BobJumpLength = 0;
+BobJumpLengthDucking = 0;
+BobInitialJumpSpeed = 0;
+BobInitialJumpSpeedDucking = 0;
+BobJumpAccel2 = 0;
+BobJumpLength2 = 0;
+BobJumpLengthDucking2 = 0;
+BobInitialJumpSpeed2 = 0;
+BobInitialJumpSpeedDucking2 = 0;
+BobJumpAccel = 0;
+BobEdgeJump = 0;
+BobEdgeJumpLength = 0;
+JetPackAccel = 0;
+Thrusting = 0;
+ReadyToThrust = 0;
+StartedJump = 0;
+_JumpCount = 0;
+FallingCount = 0;
+ReadyToJump = 0;
+ApexY = 0;
+CountSinceApex = 0;
+AutoMoveLength = 0;
+AutoMoveType = 0;
+AutoStrafeLength = 0;
+AutoSetToJumpLength = 0;
+AutoSetToJumpType = 0;
+AutoDirLength = 0;
+AutoDir = 0;
+AutoDirLength_SetTo = 0;
+AutoFallOrJumpLength = 0;
+AutoFallOrJump = 0;
+NumJumps = 0;
+CurJump = 0;
+JumpDelay = 0;
+JumpDelayCount = 0;
+JetPack = 0;
+JetPackLength = 0;
+JetPackCushion = 0;
+JetPackCount = 0;
+MaxVerticalSpeed_Jump = 0;
+MaxVerticalSpeed_Thrust = 0;
+StartJumpAnim = 0;
+AutoAllowComputerToJumpOnLand = 0;
+NoStickPeriod = 0;
+SafetyBlock = 0;
+JumpCountdown = 0;
+TurnCountdown = 0;
+Dir = 0;
+MinHeightAttained = 0;
+MinGroundHeightAttained = 0;
+Up = 0;
+ForcedJumpDamping = 0;
+
+
+		AutoMoveLength = 0; AutoMoveType = 0; AutoStrafeLength = 0; AutoSetToJumpLength = 0; AutoSetToJumpType = 0;
+		AutoDirLength = 0; AutoDir = 0; AutoDirLength_SetTo = 0;
+		AutoFallOrJumpLength = 0; AutoFallOrJump = 0;
+		NumJumps = 0;
+		CurJump = 0;
+		JumpDelay = 0;
+		JumpDelayCount = 0;
+		JetPack = false;
+		JetPackLength = 0;
+		JetPackCushion = 0;
+		JetPackCount = 0;
+		MaxVerticalSpeed_Jump = 0;
+		MaxVerticalSpeed_Thrust = 0;
+		StartJumpAnim = false;
+		AutoAllowComputerToJumpOnLand = 0;
+		NoStickPeriod = 0;
+		JumpCountdown = 0; TurnCountdown = 0; Dir = 0;
+		MinHeightAttained = 0; MinGroundHeightAttained = 0;
+		Up = false;
+		ForcedJumpDamping = 0;
+		ThrustSoundDelay = 0;
+		ThrustSoundCount = 0;
+		RndMoveType = 0; Offset = 0;
+		RndThrustType = 0;
+		BobFallDelay = 0;
+		XFriction = 0; BobXDunkFriction = 0;
+		BobJumpLength = 0; BobJumpLengthDucking = 0;
+		BobInitialJumpSpeed = 0; BobInitialJumpSpeedDucking; BobJumpAccel2;
+		BobJumpLength2 = 0; BobJumpLengthDucking2 = 0;
+		BobInitialJumpSpeed2 = 0; BobInitialJumpSpeedDucking2 = 0; BobJumpAccel = 0;
+		BobEdgeJump = 0;
+		BobEdgeJumpLength = 0;
+		JetPackAccel = 0;
+		Thrusting; ReadyToThrust;
+		StartedJump = false;
+		_JumpCount = 0;
+		FallingCount = 0;
+		ReadyToJump = false;
+		CountSinceApex = 0;
+
+
+
+
+
+
 		InitializedAnim = false;
 		LandSound = 0;
 		DoubleJump = BobPhsx::DefaultInfo::DoubleJump_Sound;

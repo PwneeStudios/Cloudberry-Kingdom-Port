@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/String.h"
+#include <Hacks\String.h>
+#include <Hacks\Dict.h>
 
 namespace CloudberryKingdom
 {
@@ -18,7 +19,8 @@ namespace CloudberryKingdom
 	void EzTextureWad::Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name )
 	{
 		//AnimationDict.AddOrOverwrite( name, anim );
-		AnimationDict[ name ] = anim;
+		//AnimationDict[ name ] = anim;
+		::Add( AnimationDict, name, anim );
 	}
 
 	void EzTextureWad::Add( const std::shared_ptr<PackedTexture> &packed )
@@ -144,15 +146,18 @@ namespace CloudberryKingdom
 
 		std::wstring name = ToLower( NewTex->Name );
 		if ( NameDict.find( name ) == NameDict.end() )
-			NameDict[ name] = NewTex;
+			//NameDict[ name ] = NewTex;
+			::Add( NameDict, name, NewTex );
 		// FIXME: This was AddOrOverwrite.
 
 		if ( NewTex->Path != _T( "" ) )
 		{
 			// FIXME: This was AddOrOverwrite.
-			PathDict[ ToLower( NewTex->Path ) ] = NewTex;
+			//PathDict[ ToLower( NewTex->Path ) ] = NewTex;
+			::Add( PathDict, NewTex->Path, NewTex );
 			// FIXME: This was AddOrOverwrite.
-			BigNameDict[ ToLower( Tools::GetFileBigName( NewTex->Path ) ) ] = NewTex;
+			//BigNameDict[ ToLower( Tools::GetFileBigName( NewTex->Path ) ) ] = NewTex;
+			::Add( BigNameDict, NewTex->Path, NewTex );
 		}
 	}
 

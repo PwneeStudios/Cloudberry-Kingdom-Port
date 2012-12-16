@@ -37,6 +37,7 @@ namespace CloudberryKingdom
 
 	void Boulder_Parameters::InitializeInstanceFields()
 	{
+		Special.Hallway = false;
 		HallwaySpacing = Unset::Vector;
 	}
 

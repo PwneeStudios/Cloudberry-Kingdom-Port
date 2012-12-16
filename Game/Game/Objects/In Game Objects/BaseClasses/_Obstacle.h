@@ -5,12 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct AutoGen;
-}
 
-
-namespace CloudberryKingdom
-{
 	struct _Obstacle : public ObjectBase
 	{
 	
@@ -33,7 +28,7 @@ namespace CloudberryKingdom
 		const Vector2 &getPhsxCutoff() const;
 
 	
-		virtual void Construct( bool BoxesOnly ) = 0;
+		virtual void Construct( bool BoxesOnly );
 
 		virtual void MakeNew();
 
@@ -46,11 +41,11 @@ namespace CloudberryKingdom
 		virtual void Draw();
 
 	
-		virtual void DrawGraphics() = 0;
+		virtual void DrawGraphics();
 
-		virtual void DrawBoxes() = 0;
+		virtual void DrawBoxes();
 
-		virtual void ActivePhsxStep() = 0;
+		virtual void ActivePhsxStep();
 
 	
 		void InitializeInstanceFields();
@@ -61,6 +56,7 @@ namespace CloudberryKingdom
 			InitializeInstanceFields();
 		}
 	};
+
 }
 
 

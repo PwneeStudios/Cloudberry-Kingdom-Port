@@ -97,6 +97,8 @@ namespace CloudberryKingdom
 
 	void NormalBlockDraw::InitializeInstanceFields()
 	{
+
+
 		Shadow = false;
 		ShadowOffset = Vector2();
 		ShadowColor = Color::Black;

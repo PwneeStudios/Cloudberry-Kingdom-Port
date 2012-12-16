@@ -281,6 +281,10 @@ namespace CloudberryKingdom
 
 	void BouncyBlock::InitializeInstanceFields()
 	{
+		State = static_cast<BouncyBlockState>( 0 );
+		speed = 0;
+		TouchedCountdown = 0;
+		SideDampening = 0;
 		TouchedCountdown = 0;
 	}
 }

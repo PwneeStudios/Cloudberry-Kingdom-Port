@@ -2,8 +2,27 @@
 
 #include <MasterHack.h>
 
+#include <Architecture/Job.h>
+#include <Architecture/Scheduler.h>
+#include <Core.h>
+
 namespace CloudberryKingdom
 {
+
+	struct MakeNormalGameJob : public Job
+	{
+		std::shared_ptr<NormalGameData> MyGame;
+		MakeNormalGameJob( std::shared_ptr<NormalGameData> game ) :
+			MyGame( game )
+		{
+
+		}
+
+		void Do()
+		{
+			MyGame->_MakeThreadFunc();
+		}
+	};
 
 	std::shared_ptr<GameData> NormalFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
@@ -61,8 +80,15 @@ namespace CloudberryKingdom
 
 		_MakeThreadLevelSeed = LevelSeed;
 		_MakeThreadMakeInBackground = MakeInBackground;
+		
+		// Using Oleg's threading
+		Job *job = new MakeNormalGameJob( std::static_pointer_cast<NormalGameData>( shared_from_this() ) );
+		SCHEDULER->RunJob( job );
+
 		// FIXME: Add threading.
-		_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
+		//_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
+
+
 	//	std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
 	//	{
 	//#if defined(WINDOWS)

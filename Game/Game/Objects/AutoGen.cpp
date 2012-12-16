@@ -3,6 +3,11 @@
 namespace CloudberryKingdom
 {
 
+	AutoGen::AutoGen() :
+		Do_WeightedPreFill_1( false ), Do_PreFill_1( false ), Do_PreFill_2( false ), Do_ActiveFill_1( false ), Do_ActiveFill_2( false )
+	{
+	}
+
 	const bool IntelliSpread = true;
 
 	int AutoGen_Parameters::ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd )

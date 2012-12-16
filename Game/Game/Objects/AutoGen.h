@@ -74,6 +74,8 @@ namespace CloudberryKingdom
 	struct AutoGen : public std::enable_shared_from_this<AutoGen>
 	{
 	
+		AutoGen();
+
 		virtual std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
 
 		virtual std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
@@ -85,6 +87,7 @@ namespace CloudberryKingdom
 		virtual void ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 		virtual void Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 		virtual void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
 	};
 }
 

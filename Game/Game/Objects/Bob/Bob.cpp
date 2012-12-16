@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		Bob::ShowCorpseAfterExplode = false;
 		Bob::ImmortalLength = 55;
 
-		Bob::JumpSound_Default, Bob::DieSound_Default = 0;
+		Bob::JumpSound_Default = 0; Bob::DieSound_Default = 0;
 		std::shared_ptr<BobPhsx> tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBox::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxRocketbox::getInstance(), BobPhsxBig::getInstance(), BobPhsxScale::getInstance(), BobPhsxInvert::getInstance() };
 		Bob::HeroTypes = VecFromArray( tempVector );
 
@@ -1964,6 +1964,8 @@ namespace CloudberryKingdom
 
 	void Bob::InitializeInstanceFields()
 	{
+		MyCapeType = static_cast<CapeType> ( 0 );
+
 		LightSourceFade = 1;
 		LightSourceFadeVel = 0;
 		Dopple = false;
