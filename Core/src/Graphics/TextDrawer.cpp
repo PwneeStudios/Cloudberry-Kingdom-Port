@@ -19,7 +19,7 @@ TextDrawer::~TextDrawer()
 {
 }
 
-void TextDrawer::Draw( const std::string &text, const Vector2 &position )
+void TextDrawer::Draw( const std::string &text, const Vector2 &position, const Vector4 &color )
 {
 	Vector2 p( position );
 	for( size_t i = 0; i < text.size(); ++i)
@@ -28,19 +28,33 @@ void TextDrawer::Draw( const std::string &text, const Vector2 &position )
 		const Vector2 &d = font_->GetDimensions( text[ i ] );
 
 		SimpleQuad quad;
-		quad.Color = Vector4( 1 );
+		quad.Color = color;
 		quad.V[ 0 ] = Vector2( p.x(), p.y() );
 		quad.V[ 1 ] = Vector2( p.x(), p.y() + d.y() );
 		quad.V[ 2 ] = Vector2( p.x() + d.x(), p.y() + d.y() );
 		quad.V[ 3 ] = Vector2( p.x() + d.x(), p.y() );
 
-		quad.T[ 0 ] = Vector2( tq.x(), tq.y() );
-		quad.T[ 1 ] = Vector2( tq.x(), tq.y() + tq.w() );
-		quad.T[ 2 ] = Vector2( tq.x() + tq.z(), tq.y() + tq.w() );
-		quad.T[ 3 ] = Vector2( tq.x() + tq.z(), tq.y() );
+		quad.T[ 1 ] = Vector2( tq.x(), tq.y() );
+		quad.T[ 0 ] = Vector2( tq.x(), tq.y() + tq.w() );
+		quad.T[ 3 ] = Vector2( tq.x() + tq.z(), tq.y() + tq.w() );
+		quad.T[ 2 ] = Vector2( tq.x() + tq.z(), tq.y() );
 		quad.Diffuse = fontTexture_;
 
 		QUAD_DRAWER->Draw( quad );
 		p += Vector2( d.x() + font_->GetCharSpacing(), 0 );
 	}
+}
+
+Vector2 TextDrawer::MeasureString( const std::string &text )
+{
+	Vector2 size;
+
+	for( size_t i = 0; i < text.size(); ++i )
+	{
+		const Vector2 &dim = font_->GetDimensions( text[ i ] );
+		size.X += dim.X;
+		size.Y = __max( size.Y, dim.Y );
+	}
+
+	return size;
 }

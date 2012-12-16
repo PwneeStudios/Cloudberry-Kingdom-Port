@@ -54,9 +54,14 @@
     <ClInclude Include="include\Graphics\QuadDrawerWiiU.h" />
     <ClInclude Include="include\Graphics\TextDrawer.h" />
     <ClInclude Include="include\Graphics\Types.h" />
+    <ClInclude Include="include\Input\InputEnums.h" />
     <ClInclude Include="include\Input\Input.h" />
     <ClInclude Include="include\Input\InputPc.h" />
     <ClInclude Include="include\Input\InputWiiU.h" />
+    <ClInclude Include="include\Input\Keyboard.h" />
+    <ClInclude Include="include\Input\KeyboardState.h" />
+    <ClInclude Include="include\Input\Mouse.h" />
+    <ClInclude Include="include\Input\MouseState.h" />
     <ClInclude Include="include\Math\Vectors.h" />
     <ClInclude Include="include\Utility\Log.h" />
   </ItemGroup>
@@ -76,6 +81,8 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Input\Keyboard.cpp" />
+    <ClCompile Include="src\Input\Mouse.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />
     <ClCompile Include="src\Architecture\SchedulerPc.cpp" />
     <ClCompile Include="src\Architecture\SchedulerWiiU.cpp">

@@ -3,8 +3,10 @@
 
 #include "MouseState.h"
 
-struct Mouse
+class Mouse
 {
+
+public:
 
 	static void SetPosition( int x, int y );
 

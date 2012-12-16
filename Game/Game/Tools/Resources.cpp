@@ -262,11 +262,20 @@ namespace CloudberryKingdom
 		//	}
 		//}
 
-		std::vector<std::wstring> files;
-		ArtList( files );
 
-		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
-			Tools::TextureWad->AddTexture( 0, *file );
+		for( int i = 0; i < sizeof( TEXTURE_PATHS ) / sizeof( TEXTURE_PATHS[ 0 ] ); ++i )
+			Tools::TextureWad->AddTexture( 0, TEXTURE_PATHS[ i ], TEXTURE_WIDTHS[ i ], TEXTURE_HEIGHTS[ i ] );
+
+		/*std::vector<std::wstring> files;
+		std::vector<int> widths;
+		std::vector<int> heights;
+
+		ArtList( files, widths, heights );
+
+		std::vector<int>::iterator w, h;
+		std::vector<std::wstring>::const_iterator file;
+		for (file = files.begin(), w = widths.begin(), h = heights.begin() j; file != files.end(); ++file, ++w, ++h )
+			Tools::TextureWad->AddTexture( 0, *file );*/
 	}
 
 	void Resources::LoadResources()

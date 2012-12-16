@@ -1086,7 +1086,10 @@
     <ClCompile Include="Hacks\XNA\GamePad.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hacks\XNA\Mouse.cpp">
+    <ClCompile Include="Hacks\XNA\SpriteBatch.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Hacks\XNA\SpriteFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2261,19 +2264,7 @@
     <ClInclude Include="Hacks\XNA\GraphicsDeviceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hacks\XNA\Keyboard.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\KeyboardState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hacks\XNA\MediaPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\Mouse.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\MouseState.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\PreparingDeviceSettingsEventArgs.h">

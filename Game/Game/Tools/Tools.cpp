@@ -8,7 +8,7 @@
 #include "Hacks/NET/Directory.h"
 #include "Hacks/XNA/GamePad.h"
 #include "Hacks/XNA/MediaPlayer.h"
-#include "Hacks/XNA/Mouse.h"
+#include <Input/Mouse.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

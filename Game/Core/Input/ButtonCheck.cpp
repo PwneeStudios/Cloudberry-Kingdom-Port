@@ -1,7 +1,7 @@
 ﻿#include <global_header.h>
 
-#include "Hacks\XNA\Keyboard.h"
-#include "Hacks\XNA\Mouse.h"
+#include <Input/Keyboard.h>
+#include <Input/Mouse.h>
 #include "Hacks\XNA\GamePad.h"
 #include <Hacks\List.h>
 

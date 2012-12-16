@@ -365,7 +365,8 @@
     <ClCompile Include="Hacks\XNA\GamePad.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
-    <ClCompile Include="Hacks\XNA\Mouse.cpp" />
+    <ClCompile Include="Hacks\XNA\SpriteBatch.cpp" />
+    <ClCompile Include="Hacks\XNA\SpriteFont.cpp" />
     <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="MasterHack.cpp" />
@@ -770,11 +771,7 @@
     <ClInclude Include="Hacks\XNA\GraphicsDevice.h" />
     <ClInclude Include="Hacks\XNA\GraphicsDeviceManager.h" />
     <ClInclude Include="Hacks\NET\IAsyncResult.h" />
-    <ClInclude Include="Hacks\XNA\Keyboard.h" />
-    <ClInclude Include="Hacks\XNA\KeyboardState.h" />
     <ClInclude Include="Hacks\XNA\MediaPlayer.h" />
-    <ClInclude Include="Hacks\XNA\Mouse.h" />
-    <ClInclude Include="Hacks\XNA\MouseState.h" />
     <ClInclude Include="Hacks\Mutex.h" />
     <ClInclude Include="Hacks\NET\Path.h" />
     <ClInclude Include="Hacks\XNA\PreparingDeviceSettingsEventArgs.h" />
