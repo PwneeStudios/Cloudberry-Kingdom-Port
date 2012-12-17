@@ -510,7 +510,7 @@ namespace CloudberryKingdom
 
 		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Random" ), ItemFont );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
-		text->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
+		text->MyFloatColor = ( Color( static_cast<unsigned char>( 204 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		MyPile->Add( text, _T( "Random" ) );
 
 		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );

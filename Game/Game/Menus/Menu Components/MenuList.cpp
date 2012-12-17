@@ -167,9 +167,9 @@ namespace CloudberryKingdom
 		return MyList[ ListIndex ];
 	}
 
-	const boost::shared_ptr<Object> &MenuList::getCurObj() const
+	const boost::shared_ptr<Object> &MenuList::getCurObj()
 	{
-		return ObjDict.at( CurMenuItem );
+		return ObjDict[ CurMenuItem ];
 	}
 
 	const bool MenuList::getOnFirstIndex() const

@@ -149,7 +149,7 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 		Vector2 size = ( TR - BL ) / Step;
 		int N = static_cast<int>( size.X ), M = static_cast<int>( size.Y );
 
-		Params->TunnelGUIDs = std::vector<std::vector<unsigned long long> >( N, M );
+		Params->TunnelGUIDs = std::vector<std::vector<unsigned long long> >( N, std::vector<unsigned long long>( M ) );
 
 		for ( int i = 0; i < N; i++ )
 		{

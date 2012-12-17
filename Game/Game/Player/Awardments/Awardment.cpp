@@ -54,10 +54,10 @@ namespace CloudberryKingdom
 		Awardment_PostConstruct( Awardments::PerfectEasyCastle );
 		Awardments::UnlockHeroRush2 = boost::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ),
 			Format( _T( "%lsRequired:%ls\n   Level %d in %lsHero Rush" ),
-			EzText::ColorToMarkup( Color( unsigned char( 205 ), unsigned char( 10 ), unsigned char( 10 ) ) ).c_str(),
+			EzText::ColorToMarkup( Color( static_cast<unsigned char>( 205 ), static_cast<unsigned char>( 10 ), static_cast<unsigned char>( 10 ) ) ).c_str(),
 				EzText::ColorToMarkup( Color::White ).c_str(),
 				HeroRush2_LevelUnlock,
-				EzText::ColorToMarkup( Color( unsigned char( 26 ), unsigned char( 178 ), unsigned char( 231 ) ) ).c_str() ),
+				EzText::ColorToMarkup( Color( static_cast<unsigned char>( 26 ), static_cast<unsigned char>( 178 ), static_cast<unsigned char>( 231 ) ) ).c_str() ),
 			boost::shared_ptr<Hat>() );
 		Awardment_PostConstruct( Awardments::UnlockHeroRush2 );
 	}

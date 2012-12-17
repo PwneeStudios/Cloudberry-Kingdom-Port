@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		this->Fake = true;
 	}
 
-	ScoreEntry::ScoreEntry( std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date )
+	ScoreEntry::ScoreEntry( std::wstring GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date )
 	{
 		InitializeInstanceFields();
 		if ( GamerTag_Renamed == _T( "" ) )

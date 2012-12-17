@@ -165,19 +165,20 @@ namespace CloudberryKingdom
 		Init();
 
 		// Try and load the data into the array.
-		try
-		{
+		// FIXME: Make sure parse works.
+		/*try
+		{*/
 			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
 			{
 				float v = ParseFloat( terms[ i ] );
 				data[ i ] = CoreMath::RestrictVal( Bounds( i ).MinValue, Bounds( i ).MaxValue, v );
 			}
-		}
+		/*}
 		catch ( ... )
 		{
 			for ( int i = 0; i < static_cast<int>( data.size() ); i++ )
 				data[ i ] = Bounds( i ).DefaultValue;
-		}
+		}*/
 	}
 
 	float &BobPhsx::CustomPhsxData::operator []( CustomData type )
@@ -335,17 +336,18 @@ namespace CloudberryKingdom
 	{
 		int _BaseType, _Shape, _MoveMod, _Special;
 
-		try
-		{
+		// FIXME: Make sure try/catch works as before.
+		/*try
+		{*/
 			_BaseType = ParseInt( BaseType );
 			_Shape = ParseInt( Shape );
 			_MoveMod = ParseInt( MoveMod );
 			_Special = ParseInt( Special );
-		}
+		/*}
 		catch ( ... )
 		{
 			_BaseType = _Shape = _MoveMod = _Special = 0;
-		}
+		}*/
 
 		_BaseType = CoreMath::RestrictVal( 0, Hero_BaseType_LENGTH - 1, _BaseType );
 		_Shape = CoreMath::RestrictVal( 0, Hero_Shape_LENGTH - 1, _Shape );

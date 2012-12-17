@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The object associated with the currently selected MenuItem
 		/// </summary>
-		const boost::shared_ptr<Object> &getCurObj() const;
+		const boost::shared_ptr<Object> &getCurObj();
 
 		/// <summary>
 		/// When true the list's index will wrap if too large or too small.

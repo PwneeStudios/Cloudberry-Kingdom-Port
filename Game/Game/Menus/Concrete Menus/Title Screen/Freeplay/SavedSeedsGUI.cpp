@@ -123,7 +123,11 @@ namespace CloudberryKingdom
 
 	bool SavedSeedsGUI::OnAddHelper::Apply()
 	{
+#if defined(WINDOWS)
 		return bar->MyMenu->HitTest();
+#else
+		return false;
+#endif
 	}
 
 	SavedSeedsGUI::SavedSeedsGUI() { }
@@ -524,7 +528,7 @@ namespace CloudberryKingdom
 		text->Name = _T( "Delete" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
-		text->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
+		text->MyFloatColor = ( Color( static_cast<unsigned char>( 204 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		MyPile->Add( text );
 
 		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );

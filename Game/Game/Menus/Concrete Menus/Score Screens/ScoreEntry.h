@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 		ScoreEntry( int Score );
 
-		ScoreEntry( std::wstring &GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date );
+		ScoreEntry( std::wstring GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date );
 
 		void WriteChunk_1000( const boost::shared_ptr<BinaryWriter> &writer );
 

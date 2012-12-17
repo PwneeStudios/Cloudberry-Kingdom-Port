@@ -7,8 +7,10 @@ namespace CloudberryKingdom
 
 	void SoundMenu::InitOnToggleHelper::Apply( const bool &state )
 	{
+#if defined(PC_VERSION)
 		PlayerManager::SavePlayerData->ResolutionPreferenceSet = true;
 		Tools::setFullscreen( state );
+#endif
 		SaveGroup::SaveAll();
 	#if defined(PC_VERSION)
 		PlayerManager::SaveRezAndKeys();
@@ -26,6 +28,7 @@ namespace CloudberryKingdom
 		sm->Call( MakeMagic( ControlScreen, ( sm->getControl() ) ), 10 );
 	}
 
+#if defined(PC_VERSION)
 	SoundMenu::InitCallCustomControlsHelper::InitCallCustomControlsHelper( const boost::shared_ptr<SoundMenu> &sm )
 	{
 		this->sm = sm;
@@ -58,6 +61,7 @@ namespace CloudberryKingdom
 	{
 		sm->Toggle_Borderless( state );
 	}
+#endif // #if defined(PC_VERSION)
 
 	SoundMenu::SoundMenu( int Control ) : VerifyBaseMenu( false ) { }
 	boost::shared_ptr<SoundMenu> SoundMenu::SoundMenu_Construct( int Control )

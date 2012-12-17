@@ -218,55 +218,56 @@ namespace CloudberryKingdom
 	{
 		int index;
 
-		try
-		{
+		// FIXME: Check all the try/catches.
+		/*try
+		{*/
 			index = chunk->ReadInt();
 			BeardData = ColorSchemeManager::BeardInfo[ index ];
-		}
+		/*}
 		catch ( ... )
 		{
 			BeardData = ColorSchemeManager::BeardInfo[ 0 ];
-		}
+		}*/
 
-		try
-		{
+		/*try
+		{*/
 			index = chunk->ReadInt();
 			SkinColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ index ]->obj );
-		}
+		/*}
 		catch ( ... )
 		{
 			SkinColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::ColorList[ 0 ]->obj );
-		}
+		}*/
 
-		try
-		{
+		/*try
+		{*/
 			index = chunk->ReadInt();
 			CapeColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ index ]->obj );
-		}
+		/*}
 		catch ( ... )
 		{
 			CapeColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeColorList[ 0 ]->obj );
-		}
+		}*/
 
-		try
-		{
+		/*try
+		{*/
 			index = chunk->ReadInt();
 			CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ index ]->obj );
-		}
+		/*}
 		catch ( ... )
 		{
 			CapeOutlineColor = boost::static_pointer_cast<ClrTextFx>( ColorSchemeManager::CapeOutlineColorList[ 0 ]->obj );
-		}
+		}*/
 
-		try
-		{
+		/*try
+		{*/
 			index = chunk->ReadInt();
 			HatData = ColorSchemeManager::HatInfo[ index ];
-		}
+		/*}
 		catch ( ... )
 		{
 			HatData = ColorSchemeManager::HatInfo[ 0 ];
-		}
+		}*/
 	}
 
 	void ColorScheme::Init()

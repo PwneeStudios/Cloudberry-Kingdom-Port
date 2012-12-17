@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		Ball = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
 		Radius = 120;
 		
-		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "chain_tile" ) ), 44.f, 63.f, 0, ( bColor( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 210 ) ) ).ToVector4(), .2f );
+		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "chain_tile" ) ), 44.f, 63.f, 0, ( bColor( 255, 255, 255, 210 ) ).ToVector4(), .2f );
 	}
 
 	void Boulder::OnAttachedToBlock()
