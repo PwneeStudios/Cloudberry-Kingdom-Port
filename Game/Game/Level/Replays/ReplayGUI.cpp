@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 	#else
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, _T("Button_Go") ) );
 		Play = boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
-		Play->MyFloatColor = ( Color( 67, 198, 48, 255 ) ).ToVector4();
+		Play->MyFloatColor = ( Color( static_cast<unsigned char>( 67 ), static_cast<unsigned char>( 198 ), static_cast<unsigned char>( 48 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		Play->Name = _T( "Play" );
 		SetHeaderProperties( Play );
 	#endif
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 	#else
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
 		End = boost::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
-		End->MyFloatColor = ( Color( 239, 41, 41, 255 ) ).ToVector4();
+		End->MyFloatColor = ( Color( static_cast<unsigned char>( 239 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		End->Name = _T( "Back" );
 		SetHeaderProperties( End );
 	#endif
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 			SetGrayHeaderProperties( Toggle );
 	#else
 			SetHeaderProperties( Toggle );
-			Toggle->MyFloatColor = ( Color( 0, 0, 255, 255 ) ).ToVector4();
+			Toggle->MyFloatColor = ( Color( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 	#endif
 			SetToggleText();
 		}

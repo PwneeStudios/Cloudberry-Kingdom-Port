@@ -136,6 +136,7 @@ namespace CloudberryKingdom
 	{
 	
 		SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
+		boost::shared_ptr<SimpleMenu> SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent );
 
 		virtual void Init();
 

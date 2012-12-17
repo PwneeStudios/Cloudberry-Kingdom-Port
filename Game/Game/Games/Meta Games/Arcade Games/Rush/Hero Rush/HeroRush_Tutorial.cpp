@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 		text2->Kill( false );
 	}
 
-	HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::PointAtCoinsNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text, std::vector<boost::shared_ptr<Arrow> > &arrows )
+	HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::PointAtCoinsNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text, const std::vector<boost::shared_ptr<Arrow> > &arrows )
 	{
 		this->hrt = hrt;
 		this->text = text;

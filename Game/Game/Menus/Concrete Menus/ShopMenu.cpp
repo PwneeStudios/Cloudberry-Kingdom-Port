@@ -150,7 +150,11 @@ namespace CloudberryKingdom
 
 	bool ShopMenu::OnAddHelper::Apply()
 	{
+#if defined(WINDOWS)
 		return bar->MyMenu->HitTest();
+#else
+		return false;
+#endif
 	}
 
 boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;

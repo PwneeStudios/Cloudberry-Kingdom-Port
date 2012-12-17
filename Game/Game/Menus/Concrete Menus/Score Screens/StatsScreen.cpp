@@ -125,7 +125,11 @@ namespace CloudberryKingdom
 
 	bool StatsMenu::OnAddHelper::Apply()
 	{
+#if defined(WINDOWS)
 		return bar->MyMenu->HitTest();
+#else
+		return false;
+#endif
 	}
 
 	void StatsMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )

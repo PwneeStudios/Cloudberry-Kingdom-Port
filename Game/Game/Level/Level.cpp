@@ -3650,17 +3650,17 @@ int Level::AfterPostDrawLayer = 12;
 		Cleanup( CleanupList, MinDistFunc, false, BL, TR, metric );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, false, BL, TR );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
+	void Level::Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR )
 	{
 		Cleanup( ObjList, MinDistFunc, MustBeDifferent, BL, TR, DefaultMetric );
 	}
 
-	void Level::Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric )
+	void Level::Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric )
 	{
 		if ( ObjList.empty() )
 			return;
@@ -3694,7 +3694,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	void Level::CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent )
+	void Level::CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent )
 	{
 		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
@@ -3735,7 +3735,7 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
-	void Level::CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist )
+	void Level::CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, const ObjectVec &ObjList, float MinDist )
 	{
 		for ( ObjectVec::const_iterator obj2 = ObjList.begin(); obj2 != ObjList.end(); ++obj2 )
 		{
