@@ -993,6 +993,10 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::Release()
 	{
+#if defined(DEBUG)
+		Name += _T( "_Released" );
+#endif
+
 		ReleasePieces();
 		PieceSeeds.clear();
 		MyGame.reset();
@@ -1285,6 +1289,15 @@ namespace CloudberryKingdom
 		LockedSeed = false;
 		MyGameType = NormalGameData::Factory;
 		Initialized = false;
+
+#if defined(DEBUG)
+		static int debug_count = 0;
+		static std::wstring debug_name = _T( "" );
+		debug_count++;
+		debug_name = ::ToString( debug_count );
+		Name = debug_name;
+#endif
+
 	}
 
 }

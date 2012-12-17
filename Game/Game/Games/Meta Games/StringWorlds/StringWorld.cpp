@@ -127,8 +127,13 @@ namespace CloudberryKingdom
 
 		if ( NextLevelSeed != 0 )
 		{
-			NextLevelSeed->MyGame->Release();
-			NextLevelSeed->Release();
+            if ( LevelIsLoaded( NextLevelSeed ) )
+            {
+                NextLevelSeed->MyGame->Release();
+                NextLevelSeed->Release();
+            }
+            else
+                NextLevelSeed->ReleaseWhenLoaded = true;
 		}
 		NextLevelSeed.reset();
 

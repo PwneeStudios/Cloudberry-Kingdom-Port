@@ -170,6 +170,12 @@ namespace CloudberryKingdom
 
 		// FIXME: Related to threading.
 		//Tools::TheGame->Exiting -= KillThread;
+
+        if (LevelSeed->ReleaseWhenLoaded)
+        {
+            Release();
+            LevelSeed->Release();
+        }
 	}
 
 	void NormalGameData::PhsxStep()
