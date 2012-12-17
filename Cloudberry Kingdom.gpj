@@ -16,6 +16,7 @@ primaryTarget=ppc_cos.tgt
 	-IGame
 	-DDEBUG
 	-DGAME
+	-DNOT_PC
 Core\Core.gpj		[Library]
 Cloudberry WiiU\Cloudberry_Kingdom.gpj		[Program]
 tgt\resources.gpj		[Project]

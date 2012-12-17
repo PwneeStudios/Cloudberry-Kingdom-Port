@@ -13,8 +13,8 @@ namespace CloudberryKingdom
 		this->N = N;
 		this->M = M;
 
-		TunnelGUIDs = std::vector<std::vector<unsigned long long> >( N, M );
-		TunnelObjs = std::vector<ObjectVec >( N, M );
+		TunnelGUIDs = std::vector<std::vector<unsigned long long> >( N, std::vector<unsigned long long>( M ) );
+		TunnelObjs = std::vector<ObjectVec >( N, ObjectVec( M ) );
 	}
 
 	void TunnelFill::SetTunnelObjParameter( const boost::shared_ptr<ObjectBase> &obj )

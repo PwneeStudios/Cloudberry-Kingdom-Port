@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 			bool Hold_FirstLevelHasBegun;
 
 		
-			StartOfLevelLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun );
+			StartOfLevelLambda( const boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun );
 
 			bool Apply();
 		};
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 			boost::shared_ptr<Door> door;
 			boost::shared_ptr<LevelSeedData> CurLevelSeed;
 		
-			OpenAndShowLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, const boost::shared_ptr<LevelSeedData> &CurLevelSeed );
+			OpenAndShowLambda( const boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, const boost::shared_ptr<LevelSeedData> &CurLevelSeed );
 
 			void Apply();
 		};

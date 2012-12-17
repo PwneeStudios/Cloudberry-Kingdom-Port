@@ -364,7 +364,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( ButtonString::Go( ButtonSize ) + Space + _T( "{c188,255,176,255} Select" ), ItemFont, true, true );
 		ContinueText->setScale( this->FontScale );
 		ContinueText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		ContinueText->ShadowColor = Color( 30, 30, 30 );
+		ContinueText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
 		ContinueText->ColorizePics = true;
 		ContinueText->setPos( Vector2( 23.09587f + Shift, -386.9842f ) );
 
@@ -374,7 +374,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( ButtonString::Y( ButtonSize ) + Space + _T( "{c255,255,155,255} Custom" ), ItemFont, true, true );
 		CustomizeText->setScale( this->FontScale );
 		CustomizeText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		CustomizeText->ShadowColor = Color( 30, 30, 30 );
+		CustomizeText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
 		CustomizeText->ColorizePics = true;
 		CustomizeText->setPos( Vector2( 105.2387f + Shift, -611.9048f ) );
 
@@ -384,7 +384,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( ButtonString::X( ButtonSize ) + Space + _T( "{c194,210,255,255} Random" ), ItemFont, true, true );
 		RandomText->setScale( this->FontScale );
 		RandomText->ShadowOffset = Vector2( 7.5f, 7.5f );
-		RandomText->ShadowColor = Color( 30, 30, 30 );
+		RandomText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
 		RandomText->ColorizePics = true;
 		RandomText->setPos( Vector2( 69.52449f + Shift, -835.7142f ) );
 
@@ -417,7 +417,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.66f );
 		}
 
-		CharacterSelect::Shift( shared_from_this() );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 #endif
 

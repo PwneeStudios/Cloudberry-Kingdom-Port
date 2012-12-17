@@ -526,6 +526,8 @@ namespace CloudberryKingdom
 
 		std::vector<std::wstring> bits = Split( str, L';' );
 
+		// FIXME: Fix all the try/catch error cases in the following loop.
+
 		for ( int i = 0; i < static_cast<int>( bits.size() ); i++ )
 		{
 			std::wstring identifier, data;
@@ -548,14 +550,14 @@ namespace CloudberryKingdom
 			// Seed [This must come first]
 			if ( ToLower( identifier ) == _T("s") )
 			{
-				try
-				{
+				/*try
+				{*/
 					setSeed( ParseInt( data ) );
-				}
+				/*}
 				catch ( ... )
 				{
 					setSeed( GetHashCode(data) );
-				}
+				}*/
 			}
 			// Game type
 			else if ( ToLower( identifier ) == _T("g") )
@@ -573,14 +575,14 @@ namespace CloudberryKingdom
 			// Geometry
 			else if ( ToLower( identifier ) == _T("geo") )
 			{
-				try
-				{
+				/*try
+				{*/
 					MyGeometry = static_cast<LevelGeometry>( ParseInt( data ) );
-				}
+				/*}
 				catch ( ... )
 				{
 					MyGeometry = LevelGeometry_RIGHT;
-				}
+				}*/
 			}
 			// Hero [This must come before "ph:"]
 			else if ( ToLower( identifier ) == _T("h") )
@@ -604,14 +606,14 @@ namespace CloudberryKingdom
 					MyTileSet.reset();
 					if ( data.length() > 0 )
 					{
-						try
-						{
+						/*try
+						{*/
 							SetTileSet( data );
-						}
+						/*}
 						catch ( ... )
 						{
 							MyTileSet.reset();
-						}
+						}*/
 					}
 					if ( MyTileSet == 0 )
 						SetTileSet( _T( "castle" ) );
@@ -619,29 +621,29 @@ namespace CloudberryKingdom
 			// Number of pieces
 			else if ( ToLower( identifier ) == _T("n") )
 			{
-					try
-					{
+					/*try
+					{*/
 						NumPieces = ParseInt( data );
 						NumPieces = CoreMath::RestrictVal( 1, 5, NumPieces );
-					}
+					/*}
 					catch ( ... )
 					{
 						NumPieces = 1;
-					}
+					}*/
 			}
 			// Length
 			else if ( ToLower( identifier ) == _T("l") )
 			{
-					try
-					{
+					/*try
+					{*/
 						Length = ParseInt( data );
 						Length = CoreMath::RestrictVal( 2000, 50000, Length );
 						PieceLength = Length;
-					}
+					/*}
 					catch ( ... )
 					{
 						PieceLength = Length = 5000;
-					}
+					}*/
 			}
 			// Upgrades
 			else if ( ToLower( identifier ) == _T("u") )
@@ -676,38 +678,38 @@ namespace CloudberryKingdom
 			// Weather intensity
 			else if ( ToLower( identifier ) == WeatherIntensityFlag )
 			{
-					try
-					{
+					/*try
+					{*/
 						WeatherIntensity = ParseFloat( data );
-					}
+					/*}
 					catch ( ... )
 					{
 						WeatherIntensity = 1;
-					}
+					}*/
 			}
 			// Wait length to open door
 			else if ( ToLower( identifier ) == WaitLengthToOpenDoorString )
 			{
-					try
-					{
+					/*try
+					{*/
 						WaitLengthToOpenDoor = ParseInt( data );
-					}
+					/*}
 					catch ( ... )
 					{
 						WaitLengthToOpenDoor = 6;
-					}
+					}*/
 			}
 			// Song to play at beginning of level
 			else if ( ToLower( identifier ) == SongString )
 			{
-					try
-					{
+					/*try
+					{*/
 						MySong = Tools::SongWad->FindByName( data );
-					}
+					/*}
 					catch ( ... )
 					{
 						MySong.reset();
-					}
+					}*/
 			}
 			// Open door sound
 			else if ( ToLower( identifier ) == OpenDoorSoundFlag )
@@ -819,16 +821,17 @@ namespace CloudberryKingdom
 		std::vector<std::wstring> terms = Split( UpgradeStrs[ index ], L',' );
 
 		// Try and load the data into the upgrade array.
-		try
-		{
+		// FIXME: Fix try/catch.
+		/*try
+		{*/
 			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
 				piece->MyUpgrades1->UpgradeLevels[ i ] = ParseFloat( terms[ i ] );
-		}
+		/*}
 		catch ( ... )
 		{
 			// If we fail, zero all the upgrades.
 			piece->MyUpgrades1->Zero();
-		}
+		}*/
 
 		piece->StandardClose();
 	}

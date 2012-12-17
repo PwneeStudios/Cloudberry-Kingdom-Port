@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		//Circle.TextureName = "SpikeBlob";
 
 		Circle->FullScreen( MyCamera );
-		Circle->Scale( 1.3f * static_cast<float>( pow( 2,.5f ) ) );
+		Circle->Scale( 1.3f * static_cast<float>( pow( 2.f, 0.5f ) ) );
 		Circle->Base.e2.Y = Circle->Base.e1.X;
 
 		Speed = Circle->Base.e1.X / Frames;

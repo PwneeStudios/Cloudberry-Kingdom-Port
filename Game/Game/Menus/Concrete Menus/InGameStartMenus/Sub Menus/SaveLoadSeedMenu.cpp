@@ -38,6 +38,8 @@ namespace CloudberryKingdom
 		slsm->Load( _item );
 	}
 
+	
+#if defined(WINDOWS)
 	SaveLoadSeedMenu::CopyProxy::CopyProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
 		this->slsm = slsm;
@@ -47,6 +49,7 @@ namespace CloudberryKingdom
 	{
 		slsm->Copy( _item );
 	}
+#endif
 
 	SaveLoadSeedMenu::LoadStringProxy::LoadStringProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
@@ -349,7 +352,9 @@ boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<PlayerData> &activeplayer )
 	{
 		_player = activeplayer;
-		kyar = Guide::BeginShowKeyboardInput( _player->MyPlayerIndex, _T( "Save random seed as..." ), _T( "Choose a name to save this level as." ), Tools::CurLevel->MyLevelSeed->SuggestedName(), OnKeyboardComplete, 0 );
+		
+		// FIXME: Uncomment this.
+		//kyar = Guide::BeginShowKeyboardInput( _player->MyPlayerIndex, _T( "Save random seed as..." ), _T( "Choose a name to save this level as." ), Tools::CurLevel->MyLevelSeed->SuggestedName(), OnKeyboardComplete, 0 );
 	}
 #endif
 
@@ -357,13 +362,15 @@ boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 	void SaveLoadSeedMenu::OnKeyboardComplete( const boost::shared_ptr<IAsyncResult> &ar )
 	{
 		// Get the input from the virtual keyboard
-		std::wstring input = Guide::EndShowKeyboardInput( kyar );
+
+		// FIXME: Uncomment this.
+		std::wstring input;// = Guide::EndShowKeyboardInput( kyar );
 
 		if ( input == _T( "" ) )
 			return;
 
 		// Strip anything after a semicolon (because this will confuse the seed parser)
-		if ( input.find( _T( ";" ) ) != string::npos )
+		if ( input.find( _T( ";" ) ) != std::string::npos )
 		{
 			input = input.substr( 0, input.find( _T( ";" ) ) );
 		}

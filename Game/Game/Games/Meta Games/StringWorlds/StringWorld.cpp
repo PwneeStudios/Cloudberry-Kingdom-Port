@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 		StringWorldGameData::EOG_StandardDoorAction( door );
 	}
 
-	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
+	StringWorldGameData::StartOfLevelLambda::StartOfLevelLambda( const boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, bool Hold_FirstLevelHasBegun )
 	{
 		this->g = g;
 		this->level = level;
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		StringWorldGameData::DefaultStartLevelMusic( stringworld );
 	}
 
-	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, const boost::shared_ptr<LevelSeedData> &CurLevelSeed )
+	StringWorldGameData::OpenAndShowLambda::OpenAndShowLambda( const boost::shared_ptr<StringWorldGameData> &g, const boost::shared_ptr<Level> &level, const boost::shared_ptr<Door> &door, const boost::shared_ptr<LevelSeedData> &CurLevelSeed )
 	{
 		this->g = g;
 		this->level = level;

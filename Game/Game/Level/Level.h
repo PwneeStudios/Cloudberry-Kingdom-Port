@@ -934,19 +934,19 @@ namespace CloudberryKingdom
 		void Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		void Cleanup( ObjectType type, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric );
 
-		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
+		void Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, Vector2 BL, Vector2 TR );
 		// If MustBeDifferent is set, then only two objects of different types can force a deletion
-		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
-		void Cleanup( ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric );
+		void Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR );
+		void Cleanup( const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, bool MustBeDifferent, Vector2 BL, Vector2 TR, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric );
 
 
 		void Cleanup_xCoord( ObjectType ObjType, float MinDist );
 
 
 	
-		void CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
+		void CheckAgainst( const boost::shared_ptr<ObjectBase> &obj, const ObjectVec &ObjList, const boost::shared_ptr<LambdaFunc_1<Vector2, Vector2> > &MinDistFunc, const boost::shared_ptr<LambdaFunc_2<boost::shared_ptr<ObjectBase> , boost::shared_ptr<ObjectBase> , Vector2> > &metric, bool MustBeDifferent );
 
-		void CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, ObjectVec &ObjList, float MinDist );
+		void CheckAgainst_xCoord( const boost::shared_ptr<ObjectBase> &obj, const ObjectVec &ObjList, float MinDist );
 
 	
 		void StartPlayerPlay();
