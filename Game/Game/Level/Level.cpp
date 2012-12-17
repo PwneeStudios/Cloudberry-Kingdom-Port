@@ -4115,6 +4115,9 @@ int Level::AfterPostDrawLayer = 12;
 
 	void Level::InitializeInstanceFields()
 	{
+		BoxesOnly = false;
+		TimeType = static_cast<TimeTypes>( 0 );
+
 		MaxRight = EndBuffer = 0;
 		LastStep = 0;
 		CoinsCountInStats = false;

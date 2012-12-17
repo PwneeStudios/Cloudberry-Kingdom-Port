@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 
 	};
 
-	struct BobPhsx : public Object, public std::enable_shared_from_this<BobPhsx>
+	struct BobPhsx : public Object, public boost::enable_shared_from_this<BobPhsx>
 	{
 		struct DefaultInfo
 		{

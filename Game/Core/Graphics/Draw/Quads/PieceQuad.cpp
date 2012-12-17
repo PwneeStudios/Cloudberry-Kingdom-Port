@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		RepeatWidth( 0 ), RepeatHeight( 0 ),
 		BottomFlush( false ),
 		UpsideDown( false ),
-		Mirror( false ),
+		Mirror( false )
 	{
 	}
 

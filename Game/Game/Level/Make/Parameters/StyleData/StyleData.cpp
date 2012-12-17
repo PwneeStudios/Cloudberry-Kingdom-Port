@@ -324,7 +324,7 @@ namespace CloudberryKingdom
 
 
 		Zoom = 0;
-		TimeTypes TimeType = static_cast<TimeTypes>( 0 );
+		TimeType = static_cast<TimeTypes>( 0 );
 		SuppressCoins = false; SuppressCheckpoints = false;
 		TopSpace = 0; BottomSpace = 0;
 		FillxStep = 0; FillyStep = 0;

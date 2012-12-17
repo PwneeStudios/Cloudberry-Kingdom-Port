@@ -1224,6 +1224,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	void EzText::InitializeInstanceFields()
 	{
+		ColorizePics = false;
+		FixedToCamera = false;
+
 		Name = _T( "" );
 		Layer = 0;
 		ParentScaling = Vector2(1);
