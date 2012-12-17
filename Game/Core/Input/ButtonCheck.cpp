@@ -203,6 +203,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonCheck::UpdateControllerAndKeyboard_EndOfStep( ResolutionGroup Resolution )
 	{
+#if defined( PC_VERSION )
 		// Determine if the mouse is in the window or not.
 		Tools::MouseInWindow = Tools::Mouse.X > 0 && Tools::Mouse.X < Resolution.Backbuffer.X && Tools::Mouse.Y > 0 && Tools::Mouse.Y < Resolution.Backbuffer.Y;
 
@@ -226,6 +227,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 			//if ( Tools::PrevGamepadState[ i ] != 0 )
 				Tools::PrevGamepadState[ i ] = Tools::GamepadState[ i ];
 		}
+#endif
 	}
 
 #if defined(PC_VERSION)

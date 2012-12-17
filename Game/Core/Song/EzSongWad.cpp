@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::DisposeAllUnused()
 	{
-		for ( std::vector<boost::shared_ptr<EzSong> >::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
+		for ( std::vector<boost::shared_ptr<EzSong> >::iterator song = SongList.begin(); song != SongList.end(); ++song )
 			if ( ( *song )->song != 0 && SongList[ CurIndex ] != *song && !SongList[ CurIndex ]->AlwaysLoaded )
 			{
 				/*delete ( *song )->song;

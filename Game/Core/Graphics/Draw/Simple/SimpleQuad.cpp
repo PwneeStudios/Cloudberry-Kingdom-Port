@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 		UseGlobalIllumination = false;
 	}
 
-	SimpleQuad::SimpleQuad( SimpleQuad &quad )
+	SimpleQuad::SimpleQuad( const SimpleQuad &quad )
 	{
 		Name = quad.Name;
 

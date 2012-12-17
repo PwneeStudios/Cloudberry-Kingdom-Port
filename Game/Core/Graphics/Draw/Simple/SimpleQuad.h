@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 
 		SimpleQuad();
 
-		SimpleQuad( SimpleQuad &quad );
+		SimpleQuad( const SimpleQuad &quad );
 
 		SimpleQuad( const boost::shared_ptr<Quad> &quad );
 

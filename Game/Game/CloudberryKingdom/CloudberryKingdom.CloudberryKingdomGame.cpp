@@ -1159,21 +1159,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 	#endif
 
+#if defined(WINDOWS)
 		// Reload some dynamic data (tileset info, animation specifications).
 		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_X ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_X ) )
 		{
-	#if defined(INCLUDE_EDITOR)
-			if ( LoadDynamic )
-			{
-				////Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Art);
-				////Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Backgrounds);
-				//Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Tilesets);
-				//Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Animations);
-				TileSets::LoadSpriteEffects();
-				TileSets::LoadCode();
-			}
-	#endif
-
 			// Make blocks in the current level reset their art to reflect possible changes in the reloaded tileset info.
 			for ( BlockVec::const_iterator block = Tools::CurLevel->Blocks.begin(); block != Tools::CurLevel->Blocks.end(); ++block )
 			{
@@ -1295,6 +1284,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
 				Tools::FreeCam = !Tools::FreeCam;
 		}
+#endif // #if defined(WINDOWS)
 
 		// Allow Back to exit the game if we are in test mode
 	#if defined(DEBUG)
