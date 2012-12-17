@@ -1,6 +1,9 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Content\FilesystemWiiU.cpp
+src\Content\Filesystem.cpp
+src\Graphics\Color.cpp
 src\Input\InputWiiU.cpp
 src\Input\Input.cpp
 src\Content\File.cpp
