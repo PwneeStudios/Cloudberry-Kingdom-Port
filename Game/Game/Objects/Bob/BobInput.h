@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 	struct BobInput
 	{
 	
+		BobInput();
+
 		bool A_Button, B_Button;
 		Vector2 xVec;
 

@@ -1665,6 +1665,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxNormal::InitializeInstanceFields()
 	{
+		MustHitGroundToReadyJump = false;
+		OnGround = false;
+		NumJumps = 0;
+
+
 		InitializedAnim = false;
 		ThrustSoundDelay = 0;
 		ThrustSoundCount = 0;

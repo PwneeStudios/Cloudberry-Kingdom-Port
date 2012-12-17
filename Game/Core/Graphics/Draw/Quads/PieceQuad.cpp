@@ -3,6 +3,15 @@
 namespace CloudberryKingdom
 {
 
+	PieceQuadData::PieceQuadData() :
+		LeftWidth( 0 ), RightWidth( 0 ), TopWidth( 0 ), BottomWidth( 0 ),
+		RepeatWidth( 0 ), RepeatHeight( 0 ),
+		BottomFlush( false ),
+		UpsideDown( false ),
+		Mirror( false ),
+	{
+	}
+
 	void PieceQuad::InitializeStatics()
 	{
 	}
@@ -252,6 +261,8 @@ namespace CloudberryKingdom
 
 	void PieceQuad::InitializeInstanceFields()
 	{
+		Invert = false;
+
 		BoxHeight = -1;
 		Group_CutoffWidth = 0;
 		Layer = 0;

@@ -3,6 +3,11 @@
 namespace CloudberryKingdom
 {
 
+	BobInput::BobInput() :
+		A_Button( false ), B_Button( false )
+	{
+	}
+
 	void BobInput::Clean()
 	{
 		A_Button = B_Button = false;
