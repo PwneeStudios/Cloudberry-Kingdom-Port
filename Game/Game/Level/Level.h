@@ -678,7 +678,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Camera> HoldCamera;
 	
 		const boost::shared_ptr<Camera> &getMainCamera() const;
-		void setMainCamera( boost::shared_ptr<Camera> &value );
+		void setMainCamera( const boost::shared_ptr<Camera> &value );
 
 		/// <summary>
 		/// Event handler. Activates when the main camera is set to another camera instance.

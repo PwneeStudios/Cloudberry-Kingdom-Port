@@ -2458,7 +2458,7 @@ int Level::AfterPostDrawLayer = 12;
 		return MyCamera;
 	}
 
-	void Level::setMainCamera( boost::shared_ptr<Camera> &value )
+	void Level::setMainCamera( const boost::shared_ptr<Camera> &value )
 	{
 		MyCamera = value;
 		MyCamera->MyLevel = shared_from_this();
