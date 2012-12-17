@@ -16,6 +16,8 @@ class File;
 class FilesystemWiiU
 {
 
+	struct FilesystemWiiUInternal *internal_;
+
 private:
 
 	/// No copying.
@@ -27,6 +29,8 @@ private:
 public:
 
 	FilesystemWiiU();
+
+	~FilesystemWiiU();
 
 	/**
 	 * @see Filesystem::Open()

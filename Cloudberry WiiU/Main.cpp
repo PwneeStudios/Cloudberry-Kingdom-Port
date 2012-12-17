@@ -17,12 +17,20 @@ public:
 	}
 };
 
+namespace boost
+{
+	void throw_exception(std::exception const & e)
+	{
+		LOG.Write( e.what() );
+	}
+}
+
 int main( int argc, char *argv[] )
 {
-	Filesystem filesystem;
-
 	OSLog osLog;
 	Log theLog;
+
+	Filesystem *filesystem = new Filesystem;
 
 	theLog.AddListener( osLog );
 
@@ -32,6 +40,8 @@ int main( int argc, char *argv[] )
 	delete core;
 	delete game;
 
+	delete filesystem;
+	
 	theLog.RemoveListener( osLog );
 
 	return result;

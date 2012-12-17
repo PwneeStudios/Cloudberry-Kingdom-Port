@@ -2,6 +2,7 @@
 #define _FILESYSTEM_H_
 
 #include <Architecture/Singleton.h>
+#include <ForwardDeclarations.h>
 
 #include <memory>
 #include <boost/shared_ptr.hpp>
@@ -39,7 +40,8 @@ private:
 
 public:
 
-	Filesystem() { }
+	Filesystem();
+	~Filesystem();
 
 	/// Open a file for reading.
 	/**

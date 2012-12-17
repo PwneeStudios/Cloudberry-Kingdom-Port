@@ -59,7 +59,11 @@ namespace CloudberryKingdom
 		Tools::UseInvariantCulture();
 		//boost::shared_ptr<FileStream> stream = File->Open( _T( "Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
 		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
+#if defined(PC_VERSION)
 		FileReader reader = FileReader( _T( "Content/Campaign/CampaignList.txt" ) );
+#else
+		FileReader reader = FileReader( _T( "Campaign/CampaignList.txt" ) );
+#endif
 
 		std::wstring line;
 

@@ -307,7 +307,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	//#if defined(WINDOWS)
 	//	EventInput::Initialize( Tools::GameClass->getWindow() );
 	//#endif
+#if defined(PC_VERSION)
 		Globals::ContentDirectory = Tools::GameClass->getContent()->RootDirectory;
+#else
+		Globals::ContentDirectory = "";
+#endif
 
 		Tools::LoadEffects( Tools::GameClass->getContent(), true );
 
@@ -1749,12 +1753,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
-				ScreenSaver_Construct( Intro );
-				Intro->Init();
+				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
+				//ScreenSaver_Construct( Intro );
+				//Intro->Init();
 
 				return;
 	#else

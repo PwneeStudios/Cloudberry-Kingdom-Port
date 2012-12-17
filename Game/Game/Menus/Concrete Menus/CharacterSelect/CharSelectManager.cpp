@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
-	boost::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
+	static boost::shared_ptr<CharacterSelect>  tempVector[] = { 0, 0, 0, 0 };
 	std::vector<boost::shared_ptr<CharacterSelect> > CharacterSelectManager::CharSelect = VecFromArray( tempVector );
 	bool CharacterSelectManager::IsShowing = false;
 	boost::shared_ptr<FancyVector2> CharacterSelectManager::CamPos = 0;

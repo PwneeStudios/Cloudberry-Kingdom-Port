@@ -28,7 +28,8 @@ namespace CloudberryKingdom
 				Awardment_PostConstruct( *award );
 		}
 
-		Awardments::JumpAlot = boost::make_shared<Awardment>( 5, _T( "Jumple-upagus" ), _T( "Jump " ) + StringConverterHelper::toString( LotsOfJumps ) + _T( " times." ), Hat::Bubble );
+		// FIXME: This should be LotsOfJumps but it's trapped in the header.
+		Awardments::JumpAlot = boost::make_shared<Awardment>( 5, _T( "Jumple-upagus" ), _T( "Jump " ) + StringConverterHelper::toString( /*LotsOfJumps*/10000 ) + _T( " times." ), Hat::Bubble );
 		Awardment_PostConstruct( Awardments::JumpAlot );
 		Awardments::HoldForwardFreeplay = boost::make_shared<Awardment>( 6, _T( "White Rabbit" ), std::wstring( _T( "Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( _T( "level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
 		Awardment_PostConstruct( Awardments::HoldForwardFreeplay );
@@ -252,7 +253,8 @@ namespace CloudberryKingdom
 	void Awardments::CheckForAward_JumpAlot( const boost::shared_ptr<Bob> &bob )
 	{
 		int jumps = bob->getMyStats()->Jumps + PlayerManager::Get(bob)->GameStats->Jumps + PlayerManager::Get(bob)->LifetimeStats->Jumps;
-		if ( jumps >= LotsOfJumps )
+		// FIXME: This should be LotsOfJumps but it's trapped in the header.
+		if ( jumps >= /*LotsOfJumps*/10000 )
 			GiveAward( JumpAlot );
 	}
 

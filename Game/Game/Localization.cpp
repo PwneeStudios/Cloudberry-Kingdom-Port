@@ -129,7 +129,11 @@ namespace CloudberryKingdom
 	void Localization::Initialize()
 	{
 		/*Content = boost::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(_T("Content"), _T("Localization")) );*/
+#if defined(PC_VERSION)
 		Content = boost::make_shared<ContentManager>( Path::Combine(_T("Content"), _T("Localization")) );
+#else
+		Content = boost::make_shared<ContentManager>( _T("Localization") );
+#endif
 
 		Languages.insert( std::make_pair( Language_CHINESE, boost::make_shared<LanguageInfo>( Language_CHINESE, _T( "Chinese" ) ) ) );
 		Languages.insert( std::make_pair( Language_ENGLISH, boost::make_shared<LanguageInfo>( Language_ENGLISH, _T( "English" ) ) ) );

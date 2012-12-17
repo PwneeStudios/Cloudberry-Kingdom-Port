@@ -7,6 +7,7 @@
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
+#include <Input/Keyboard.h>
 
 #include <GL/glew.h>
 #include <GL/glfw.h>
@@ -81,6 +82,8 @@ int CorePc::Run()
 
 	while( running_ )
 	{
+		Keyboard::Update();
+
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
 		scheduler_->MainThread();

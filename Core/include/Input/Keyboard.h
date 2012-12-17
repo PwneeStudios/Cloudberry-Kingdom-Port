@@ -6,7 +6,11 @@
 class Keyboard
 {
 
+	static KeyboardState currentState_;
+
 public:
+
+	static void Update();
 
 	static KeyboardState GetState();
 
