@@ -201,15 +201,18 @@ namespace CloudberryKingdom
 
 		This->AnimLength = std::vector<int>( 50 );
 		//obj->AnimLength.CopyTo( AnimLength, 0 );
-		This->AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
+		//This->AnimLength.assign( obj->AnimLength.begin(), obj->AnimLength.end() );
+		CopyFromTo( obj->AnimLength, This->AnimLength );
 
 		This->AnimSpeed = std::vector<float>( 50 );
 		//obj->AnimSpeed.CopyTo( AnimSpeed, 0 );
-		This->AnimSpeed.assign( obj->AnimSpeed.begin(), obj->AnimSpeed.end() );
+		//This->AnimSpeed.assign( obj->AnimSpeed.begin(), obj->AnimSpeed.end() );
+		CopyFromTo( obj->AnimSpeed, This->AnimSpeed );
 
 		This->AnimName = std::vector<std::wstring>( 50 );
 		//obj->AnimName.CopyTo( AnimName, 0 );
-		This->AnimName.assign( obj->AnimName.begin(), obj->AnimName.end() );
+		//This->AnimName.assign( obj->AnimName.begin(), obj->AnimName.end() );
+		CopyFromTo( obj->AnimName, This->AnimName );
 
 		This->QDrawer = obj->QDrawer;
 

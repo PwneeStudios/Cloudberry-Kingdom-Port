@@ -9,7 +9,7 @@
 #include <GL/glfw.h>
 #include <Utility/Log.h>
 
-#define NUM_THREADS 2
+#define NUM_THREADS 1
 
 #include <iostream>
 

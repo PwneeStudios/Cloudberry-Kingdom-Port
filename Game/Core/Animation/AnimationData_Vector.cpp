@@ -61,7 +61,8 @@ bool AnimationData::RecordAll = false;
 		{
 			Anims[ Anim ].Data = std::vector<Vector2>( data.Anims[ Anim ].Data.size() );
 			//data.Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
-			Anims[ Anim ].Data.assign( data.Anims[ Anim ].Data.begin(), data.Anims[ Anim ].Data.end() );
+			//Anims[ Anim ].Data.assign( data.Anims[ Anim ].Data.begin(), data.Anims[ Anim ].Data.end() );
+			CopyFromTo( data.Anims[ Anim ].Data, Anims[ Anim ].Data );
 		}
 		else
 			Anims[ Anim ].Data.clear();
@@ -159,7 +160,8 @@ bool AnimationData::RecordAll = false;
 			for ( int i = 0; i < frame + 1; i++ )
 				NewData[ i ] = Default;
 			//Anims[ anim ].Data.CopyTo( NewData, 0 );
-			NewData.assign(Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
+			//NewData.assign(Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
+			CopyFromTo( Anims[ anim ].Data, NewData );
 			Anims[ anim ].Data = NewData;
 		}
 

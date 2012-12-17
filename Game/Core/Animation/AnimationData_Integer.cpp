@@ -146,7 +146,8 @@ namespace CloudberryKingdom
 			Anims[ Anim ].Speed = data->Anims[ Anim ].Speed;
 			Anims[ Anim ].Data = std::vector<boost::shared_ptr<EzTexture> >( data->Anims[ Anim ].Data.size() );
 			//data->Anims[ Anim ].Data.CopyTo( Anims[ Anim ].Data, 0 );
-			Anims[ Anim ].Data.assign( data->Anims[ Anim ].Data.begin(), data->Anims[ Anim ].Data.end() );
+			//Anims[ Anim ].Data.assign( data->Anims[ Anim ].Data.begin(), data->Anims[ Anim ].Data.end() );
+			CopyFromTo( data->Anims[ Anim ].Data, Anims[ Anim ].Data );
 		}
 		else
 			Anims[ Anim ].Data.clear();
@@ -235,7 +236,8 @@ namespace CloudberryKingdom
 		{
 			std::vector<OneAnim_Texture> NewAnims = std::vector<OneAnim_Texture>( anim + 1 );
 			//Anims.CopyTo( NewAnims, 0 );
-			NewAnims.assign( Anims.begin(), Anims.end() );
+			//NewAnims.assign( Anims.begin(), Anims.end() );
+			CopyFromTo( Anims, NewAnims );
 			Anims = NewAnims;
 		}
 
@@ -255,7 +257,8 @@ namespace CloudberryKingdom
 				NewData[ i ] = Default;
 
 			//Anims[ anim ].Data.CopyTo( NewData, 0 );
-			NewData.assign( Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
+			//NewData.assign( Anims[ anim ].Data.begin(), Anims[ anim ].Data.end() );
+			CopyFromTo( Anims[ anim ].Data, NewData );
 			Anims[ anim ].Data = NewData;
 		}
 

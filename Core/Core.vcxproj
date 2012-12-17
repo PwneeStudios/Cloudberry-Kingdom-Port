@@ -30,6 +30,7 @@
     <ClInclude Include="include\Content\File.h" />
     <ClInclude Include="include\Content\FilesystemPc.h" />
     <ClInclude Include="include\Content\Filesystem.h" />
+    <ClInclude Include="include\Content\FilesystemWiiU.h" />
     <ClInclude Include="include\Content\Font.h" />
     <ClInclude Include="include\Content\Resource.h" />
     <ClInclude Include="include\Content\ResourcePtr.h" />
@@ -84,6 +85,10 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Content\FilesystemWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Input\Keyboard.cpp" />
     <ClCompile Include="src\Input\Mouse.cpp" />
     <ClCompile Include="src\Graphics\Color.cpp" />

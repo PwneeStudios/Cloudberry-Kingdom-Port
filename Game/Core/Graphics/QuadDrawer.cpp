@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 		CurrentEffect->Illumination->SetValue( 1.f );
 
 
-		Vertices[ i ] = quad->Vertices[ 0 ];
+		/*Vertices[ i ] = quad->Vertices[ 0 ];
 		Vertices[ i + 1 ] = quad->Vertices[ 1 ];
 		Vertices[ i + 2 ] = quad->Vertices[ 2 ];
 
@@ -109,7 +109,23 @@ namespace CloudberryKingdom
 		Vertices[ i + 5 ] = quad->Vertices[ 1 ];
 
 		i += 6;
-		TrianglesInBuffer += 2;
+		TrianglesInBuffer += 2;*/
+
+		::SimpleQuad sq;
+		sq.V[0] = Vector2( quad->Vertices[ 0 ].xy.X, quad->Vertices[ 0 ].xy.Y );
+		sq.V[1] = Vector2( quad->Vertices[ 1 ].xy.X, quad->Vertices[ 1 ].xy.Y );
+		sq.V[3] = Vector2( quad->Vertices[ 2 ].xy.X, quad->Vertices[ 2 ].xy.Y );
+		sq.V[2] = Vector2( quad->Vertices[ 3 ].xy.X, quad->Vertices[ 3 ].xy.Y );
+
+		sq.T[0] = Vector2( quad->Vertices[ 0 ].uv.X, quad->Vertices[ 0 ].uv.Y );
+		sq.T[1] = Vector2( quad->Vertices[ 1 ].uv.X, quad->Vertices[ 1 ].uv.Y );
+		sq.T[3] = Vector2( quad->Vertices[ 2 ].uv.X, quad->Vertices[ 2 ].uv.Y );
+		sq.T[2] = Vector2( quad->Vertices[ 3 ].uv.X, quad->Vertices[ 3 ].uv.Y );
+
+		sq.Color = quad->Vertices[ 0 ].TheColor.ToVector4();
+
+		sq.Diffuse = quad->MyTexture->getTex()->texture_;
+		QUAD_DRAWER->Draw( sq );
 	}
 
 	void QuadDrawer::SetInitialState()
@@ -186,7 +202,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		Vertices[ i ] = quad.v0.Vertex;
+		/*Vertices[ i ] = quad.v0.Vertex;
 		Vertices[ i + 1 ] = quad.v1.Vertex;
 		Vertices[ i + 5 ] = Vertices[ i + 1 ];
 		Vertices[ i + 2 ] = quad.v2.Vertex;
@@ -194,7 +210,23 @@ namespace CloudberryKingdom
 		Vertices[ i + 3 ] = quad.v3.Vertex;
 
 		i += 6;
-		TrianglesInBuffer += 2;
+		TrianglesInBuffer += 2;*/
+
+		::SimpleQuad sq;
+		sq.V[0] = Vector2( quad.v0.Vertex.xy.X, quad.v0.Vertex.xy.Y );
+		sq.V[1] = Vector2( quad.v1.Vertex.xy.X, quad.v1.Vertex.xy.Y );
+		sq.V[3] = Vector2( quad.v2.Vertex.xy.X, quad.v2.Vertex.xy.Y );
+		sq.V[2] = Vector2( quad.v3.Vertex.xy.X, quad.v3.Vertex.xy.Y );
+
+		sq.T[0] = Vector2( quad.v0.Vertex.uv.X, quad.v0.Vertex.uv.Y );
+		sq.T[1] = Vector2( quad.v1.Vertex.uv.X, quad.v1.Vertex.uv.Y );
+		sq.T[3] = Vector2( quad.v2.Vertex.uv.X, quad.v2.Vertex.uv.Y );
+		sq.T[2] = Vector2( quad.v3.Vertex.uv.X, quad.v3.Vertex.uv.Y );
+
+		sq.Color = quad.v0.Vertex.TheColor.ToVector4();
+
+		sq.Diffuse = quad.getMyTexture()->getTex()->texture_;
+		QUAD_DRAWER->Draw( sq );
 	}
 
 	void QuadDrawer::DrawQuad( SimpleQuad &quad )
@@ -621,6 +653,7 @@ namespace CloudberryKingdom
 
 	void QuadDrawer::Flush()
 	{
+		return; // FIXME: We shoudl not return.
 	//#if DEBUG
 	//            if (Device.SamplerStates[1] == null) Tools.Write("!");
 	//            if (Device.SamplerStates[1] != ClampClamp) Tools.Write("!");
@@ -649,6 +682,8 @@ namespace CloudberryKingdom
 
 		TrianglesInBuffer = 0;
 		i = 0;
+
+		QUAD_DRAWER->Flush();
 	}
 
 	void QuadDrawer::InitializeInstanceFields()

@@ -206,7 +206,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ZoomLerpToLambda::Apply()
 	{
-		zoom_t->LerpTo( 1, zoomout_length, style );
+		zoom_t->LerpTo( 1.f, zoomout_length, style );
 	}
 
 	ScreenSaver::SigmoidLambda::SigmoidLambda( const boost::shared_ptr<FancyVector2> &zoom_t )

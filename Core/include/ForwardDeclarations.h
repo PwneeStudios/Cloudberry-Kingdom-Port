@@ -11,6 +11,7 @@ class Effect;
 class EffectParameter;
 class EffectPass;
 class EffectTechnique;
+class Filesystem;
 class Font;
 template< class T, unsigned int N > class Freelist;
 class GameLoop;
