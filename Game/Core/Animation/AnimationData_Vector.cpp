@@ -15,7 +15,7 @@ bool AnimationData::RecordAll = false;
 		Anims.clear();
 	}
 
-	void AnimationData::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void AnimationData::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		if ( Anims.empty() )
 			writer->Write( -1 );
@@ -27,7 +27,7 @@ bool AnimationData::RecordAll = false;
 		}
 	}
 
-	void AnimationData::Read( const std::shared_ptr<BinaryReader> &reader )
+	void AnimationData::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		int length = reader->ReadInt32();
 		if ( length == -1 )

@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	void SpikeyGuy_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void SpikeyGuy_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		Make = false;
 		Special.Pinwheel = Special.Rockwheel = false;
@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		if ( PieceSeed->MyUpgrades1->Get( Upgrade_PINKY ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_PINKY ) > 0 )
 			Make = true;
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		Density = Param( PieceSeed, u->Get( Upgrade_PINKY ) == 0 ? 0 : DifficultyHelper::Interp( 40, 73, u->Get( Upgrade_PINKY ) ) );
 	}
 
-	SpikeyGuy_AutoGen::MinDistHelper::MinDistHelper( const std::shared_ptr<SpikeyGuy_Parameters> &Params )
+	SpikeyGuy_AutoGen::MinDistHelper::MinDistHelper( const boost::shared_ptr<SpikeyGuy_Parameters> &Params )
 	{
 		this->Params = Params;
 	}
@@ -51,16 +51,16 @@ namespace CloudberryKingdom
 	{
 	}
 
-	Vector2 SpikeyGuy_AutoGen::SpikeyGuyCleanupMetricLambda::Apply( const std::shared_ptr<ObjectBase> &A, const std::shared_ptr<ObjectBase> &B )
+	Vector2 SpikeyGuy_AutoGen::SpikeyGuyCleanupMetricLambda::Apply( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B )
 	{
-		std::shared_ptr<SpikeyGuy> floater_A = std::dynamic_pointer_cast<SpikeyGuy>( A );
-		std::shared_ptr<SpikeyGuy> floater_B = std::dynamic_pointer_cast<SpikeyGuy>( B );
+		boost::shared_ptr<SpikeyGuy> floater_A = boost::dynamic_pointer_cast<SpikeyGuy>( A );
+		boost::shared_ptr<SpikeyGuy> floater_B = boost::dynamic_pointer_cast<SpikeyGuy>( B );
 		return CoreMath::Abs( floater_A->PivotPoint - floater_B->PivotPoint );
 	}
 
-std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_shared<SpikeyGuy_AutoGen>();
+boost::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = boost::make_shared<SpikeyGuy_AutoGen>();
 
-	const std::shared_ptr<SpikeyGuy_AutoGen> &SpikeyGuy_AutoGen::getInstance()
+	const boost::shared_ptr<SpikeyGuy_AutoGen> &SpikeyGuy_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -70,31 +70,31 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 		Do_PreFill_2 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> SpikeyGuy_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> SpikeyGuy_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::make_shared<SpikeyGuy_Parameters>();
+		boost::shared_ptr<SpikeyGuy_Parameters> Params = boost::make_shared<SpikeyGuy_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void SpikeyGuy_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyGuy_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyGuy_Parameters> Params = boost::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
-		level->Cleanup( ObjectType_SPIKEY_GUY, std::make_shared<MinDistHelper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ), std::make_shared<SpikeyGuyCleanupMetricLambda>() );
+		level->Cleanup( ObjectType_SPIKEY_GUY, boost::make_shared<MinDistHelper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ), boost::make_shared<SpikeyGuyCleanupMetricLambda>() );
 	}
 
-	std::shared_ptr<ObjectBase> SpikeyGuy_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> SpikeyGuy_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyGuy_Parameters> Params = boost::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<SpikeyGuy> NewFloater = std::static_pointer_cast<SpikeyGuy>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
+		boost::shared_ptr<SpikeyGuy> NewFloater = boost::static_pointer_cast<SpikeyGuy>( level->getRecycle()->GetObject(ObjectType_SPIKEY_GUY, true) );
 		NewFloater->Length = 650;
 		NewFloater->Init( pos, level );
 
@@ -113,11 +113,11 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 		return NewFloater;
 	}
 
-	void SpikeyGuy_AutoGen::Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir )
+	void SpikeyGuy_AutoGen::Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir )
 	{
 		for ( int j = 0; j < Num; j++ )
 		{
-			std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Center ) );
+			boost::shared_ptr<SpikeyGuy> floater = boost::static_pointer_cast<SpikeyGuy>( CreateAt( level, Center ) );
 
 			floater->Period = 3 * floater->Period / 2;
 			floater->Offset = static_cast<int>( j * ( static_cast<float>( floater->Period ) / Num ) );
@@ -131,7 +131,7 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 		}
 	}
 
-	void SpikeyGuy_AutoGen::Rockwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyGuy_AutoGen::Rockwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		Vector2 Center = ( TR + BL ) / 2;
 
@@ -143,7 +143,7 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 		}
 	}
 
-	void SpikeyGuy_AutoGen::Pinwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyGuy_AutoGen::Pinwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		Vector2 Center = ( TR + BL ) / 2;
 
@@ -161,12 +161,12 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 		}
 	}
 
-	void SpikeyGuy_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyGuy_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyGuy_Parameters> Params = std::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyGuy_Parameters> Params = boost::static_pointer_cast<SpikeyGuy_Parameters>( level->getStyle()->FindParams( SpikeyGuy_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Rockwheel )
 			Rockwheel( level, BL, TR );
@@ -216,7 +216,7 @@ std::shared_ptr<SpikeyGuy_AutoGen> SpikeyGuy_AutoGen::instance = std::make_share
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )
 						continue;
 
-					std::shared_ptr<SpikeyGuy> floater = std::static_pointer_cast<SpikeyGuy>( CreateAt( level, Vector2( x, y ) ) );
+					boost::shared_ptr<SpikeyGuy> floater = boost::static_pointer_cast<SpikeyGuy>( CreateAt( level, Vector2( x, y ) ) );
 
 					floater->SetParentBlock( *block );
 

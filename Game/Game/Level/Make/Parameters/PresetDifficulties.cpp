@@ -3,9 +3,9 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade1()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade1()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 14 ) )
 		{
@@ -251,9 +251,9 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade2()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade2()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 1, 17 ) )
 		{
@@ -533,9 +533,9 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade3()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade3()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 25 ) )
 		{
@@ -970,9 +970,9 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade4()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade4()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 25 ) )
 		{
@@ -1405,9 +1405,9 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade5()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade5()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 30 ) )
 		{
@@ -1925,9 +1925,9 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade6()
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade6()
 	{
-		std::shared_ptr<Upgrades> u = std::make_shared<Upgrades>();
+		boost::shared_ptr<Upgrades> u = boost::make_shared<Upgrades>();
 
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 0 ) )
 		{
@@ -1952,7 +1952,7 @@ namespace CloudberryKingdom
 		return u;
 	}
 
-	std::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade( int Difficulty )
+	boost::shared_ptr<Upgrades> PresetUpgrades::GetUpgrade( int Difficulty )
 	{
 		switch ( Difficulty )
 		{

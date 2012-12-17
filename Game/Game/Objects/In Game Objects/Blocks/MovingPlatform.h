@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		struct ElevatorTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<BlockGroup> Group;
 
 		
 			void InitializeInstanceFields();
@@ -38,15 +38,15 @@ namespace CloudberryKingdom
 
 		Vector2 Range;
 
-		std::shared_ptr<BlockEmitter> Parent;
+		boost::shared_ptr<BlockEmitter> Parent;
 
 	
-		const std::shared_ptr<BlockEmitter_Parameters> getMyParams() const;
+		const boost::shared_ptr<BlockEmitter_Parameters> getMyParams() const;
 
 	
 		virtual bool PermissionToUse();
 
-		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
+		virtual void LandedOn( const boost::shared_ptr<Bob> &bob );
 		virtual void OnUsed();
 
 		virtual void OnMarkedForDeletion();
@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 	
 		BoxStyle MyBoxStyle;
 	
-		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BoxStyle boxstyle );
+		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, BoxStyle boxstyle );
 
 
 		virtual void Move( Vector2 shift );
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

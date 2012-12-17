@@ -15,37 +15,37 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct InitHideHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct InitHideHelper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<SoundMenu> sm;
+			boost::shared_ptr<SoundMenu> sm;
 
 		
-			InitHideHelper( const std::shared_ptr<SoundMenu> &sm );
+			InitHideHelper( const boost::shared_ptr<SoundMenu> &sm );
 
-			void Apply( const std::shared_ptr<MenuItem> &_item );
+			void Apply( const boost::shared_ptr<MenuItem> &_item );
 		};
 
 	
-		struct InitCallCustomControlsHelper : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct InitCallCustomControlsHelper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<SoundMenu> sm;
+			boost::shared_ptr<SoundMenu> sm;
 
 		
-			InitCallCustomControlsHelper( const std::shared_ptr<SoundMenu> &sm );
+			InitCallCustomControlsHelper( const boost::shared_ptr<SoundMenu> &sm );
 
-			void Apply( const std::shared_ptr<MenuItem> &menuitem );
+			void Apply( const boost::shared_ptr<MenuItem> &menuitem );
 		};
 
 	
 		struct InitOnConfirmedIndexSelect : public Lambda
 		{
 		
-			std::shared_ptr<MenuList> FsRezList;
+			boost::shared_ptr<MenuList> FsRezList;
 
 		
-			InitOnConfirmedIndexSelect( const std::shared_ptr<MenuList> &FsRezList );
+			InitOnConfirmedIndexSelect( const boost::shared_ptr<MenuList> &FsRezList );
 
 			void Apply();
 		};
@@ -53,23 +53,23 @@ namespace CloudberryKingdom
 		struct Toggle_BorderlessProxy : public Lambda_1<bool>
 		{
 		
-			std::shared_ptr<SoundMenu> sm;
+			boost::shared_ptr<SoundMenu> sm;
 
 		
-			Toggle_BorderlessProxy( const std::shared_ptr<SoundMenu> &sm );
+			Toggle_BorderlessProxy( const boost::shared_ptr<SoundMenu> &sm );
 
 			void Apply( const bool &state );
 		};
 
 	
 		SoundMenu( int Control );
-		std::shared_ptr<SoundMenu> SoundMenu_Construct( int Control );
+		boost::shared_ptr<SoundMenu> SoundMenu_Construct( int Control );
 
 #if defined(PC_VERSION)
 #endif
 
 	
-		std::shared_ptr<EzText> HeaderText;
+		boost::shared_ptr<EzText> HeaderText;
 	
 		virtual void Init();
 
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 #endif
 
 	
-		virtual bool MenuReturnToCaller( const std::shared_ptr<Menu> &menu );
+		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
 
 	
 		void SetPosition();

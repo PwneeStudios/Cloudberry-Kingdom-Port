@@ -17,10 +17,10 @@ namespace CloudberryKingdom
 		struct OnCameraChangeProxy : public Lambda
 		{
 		
-			std::shared_ptr<GameObject> go;
+			boost::shared_ptr<GameObject> go;
 
 		
-			OnCameraChangeProxy( const std::shared_ptr<GameObject> &go );
+			OnCameraChangeProxy( const boost::shared_ptr<GameObject> &go );
 
 			void Apply();
 		};
@@ -29,10 +29,10 @@ namespace CloudberryKingdom
 		struct AddGameObjectToCoreHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameObject> obj;
+			boost::shared_ptr<GameObject> obj;
 
 		
-			AddGameObjectToCoreHelper( const std::shared_ptr<GameObject> &obj );
+			AddGameObjectToCoreHelper( const boost::shared_ptr<GameObject> &obj );
 
 			void Apply();
 		};
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 	
 		bool AttemptToReAdd();
 
-		std::shared_ptr<Set<Tag> > Tags;
+		boost::shared_ptr<Set<Tag> > Tags;
 
 		/// <summary>
 		/// If true the object is prevented from being released.
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 
 		virtual void Release();
 
-		std::shared_ptr<Multicaster> OnRelease;
+		boost::shared_ptr<Multicaster> OnRelease;
 	
 		virtual void ReleaseBody();
 
@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 		/// The GameData this GameObject belongs to.
 		/// </summary>
 	
-		std::shared_ptr<GameData> MyGame;
+		boost::shared_ptr<GameData> MyGame;
 
 		virtual void MakeNew();
 

@@ -5,11 +5,11 @@
 namespace CloudberryKingdom
 {
 
-std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 
 	void ParticleEffects::Init_CoinExplosion()
 	{
-		CoinExplosionTemplate = std::make_shared<Particle>();
+		CoinExplosionTemplate = boost::make_shared<Particle>();
 
 		CoinExplosionTemplate->MyQuad.Init();
 		CoinExplosionTemplate->MyQuad.MyEffect = Tools::BasicEffect;
@@ -24,7 +24,7 @@ std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 		CoinExplosionTemplate->KillOffBottom = CoinExplosionTemplate->KillOffSides = true;
 	}
 
-	void ParticleEffects::SetRandomCoin( const std::shared_ptr<Particle> &p )
+	void ParticleEffects::SetRandomCoin( const boost::shared_ptr<Particle> &p )
 	{
 		switch ( Tools::GlobalRnd->RndInt( 0, 6 ) )
 		{
@@ -52,15 +52,15 @@ std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::CoinExplosion( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::CoinExplosion( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		float intensity = 1;
 
 		for ( int k = 0; k < 14; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( CoinExplosionTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( CoinExplosionTemplate );
 
 			Vector2 Dir = level->getRnd()->RndDir();
 
@@ -75,9 +75,9 @@ std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 		}
 	}
 
-	std::shared_ptr<Particle> ParticleEffects::SingleAnimatedParticle( Vector2 Pos, Vector2 Size, PhsxData Data, const std::shared_ptr<EzTexture> &Texture )
+	boost::shared_ptr<Particle> ParticleEffects::SingleAnimatedParticle( Vector2 Pos, Vector2 Size, PhsxData Data, const boost::shared_ptr<EzTexture> &Texture )
 	{
-		std::shared_ptr<Particle> p = std::make_shared<Particle>();
+		boost::shared_ptr<Particle> p = boost::make_shared<Particle>();
 		p->MyQuad.Init();
 		p->MyQuad.MyEffect = Tools::BasicEffect;
 		p->MyQuad.setMyTexture( Texture );
@@ -91,12 +91,12 @@ std::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 		return p;
 	}
 
-std::shared_ptr<Particle> ParticleEffects::DustCloudTemplate = 0;
-std::shared_ptr<EzSound> ParticleEffects::DustCloudSound = 0;
-std::shared_ptr<Particle> ParticleEffects::FlameTemplate = 0;
-std::shared_ptr<Particle> ParticleEffects::ThrustTemplate = 0;
-std::shared_ptr<Particle> ParticleEffects::PieceExplosionTemplate = 0;
-std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::DustCloudTemplate = 0;
+boost::shared_ptr<EzSound> ParticleEffects::DustCloudSound = 0;
+boost::shared_ptr<Particle> ParticleEffects::FlameTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::ThrustTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::PieceExplosionTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init()
 	{
@@ -111,7 +111,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init_Coalesce()
 	{
-		CoalesceTemplate = std::make_shared<Particle>();
+		CoalesceTemplate = boost::make_shared<Particle>();
 
 		CoalesceTemplate->MyQuad.Init();
 		CoalesceTemplate->MyQuad.MyEffect = Tools::BasicEffect;
@@ -128,7 +128,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init_PieceExplosion()
 	{
-		PieceExplosionTemplate = std::make_shared<Particle>();
+		PieceExplosionTemplate = boost::make_shared<Particle>();
 
 		PieceExplosionTemplate->MyQuad.Init();
 		PieceExplosionTemplate->MyQuad.MyEffect = Tools::BasicEffect;
@@ -147,7 +147,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 	{
 		DustCloudSound = Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) );
 
-		DustCloudTemplate = std::make_shared<Particle>();
+		DustCloudTemplate = boost::make_shared<Particle>();
 
 		DustCloudTemplate->MyQuad.Init();
 		DustCloudTemplate->MyQuad.MyEffect = Tools::BasicEffect;
@@ -163,7 +163,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init_Flame()
 	{
-		FlameTemplate = std::make_shared<Particle>();
+		FlameTemplate = boost::make_shared<Particle>();
 
 		FlameTemplate->MyQuad.Init();
 		FlameTemplate->MyQuad.UseGlobalIllumination = false;
@@ -184,7 +184,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init_Thrust()
 	{
-		ThrustTemplate = std::make_shared<Particle>();
+		ThrustTemplate = boost::make_shared<Particle>();
 
 		ThrustTemplate->MyQuad.Init();
 		ThrustTemplate->MyQuad.UseGlobalIllumination = false;
@@ -202,16 +202,16 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		ThrustTemplate->MyQuad.BlendAddRatio = .5f;
 	}
 
-	void ParticleEffects::CartThrust( const std::shared_ptr<Level> &level, int Layer, Vector2 pos, Vector2 dir, Vector2 vel )
+	void ParticleEffects::CartThrust( const boost::shared_ptr<Level> &level, int Layer, Vector2 pos, Vector2 dir, Vector2 vel )
 	{
 		if ( level->GetPhsxStep() % 2 != 0 )
 			return;
 
-		std::shared_ptr<ParticleEmitter> emit = level->ParticleEmitters[ Layer ];
+		boost::shared_ptr<ParticleEmitter> emit = level->ParticleEmitters[ Layer ];
 
 		for ( int k = 0; k < 1; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( ThrustTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( ThrustTemplate );
 			p->Size *= 2;
 			p->Life = 9;
 			p->MyColor.X *= .8f;
@@ -224,15 +224,15 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::Thrust( const std::shared_ptr<Level> &level, int Layer, Vector2 pos, Vector2 dir, Vector2 vel, float scale )
+	void ParticleEffects::Thrust( const boost::shared_ptr<Level> &level, int Layer, Vector2 pos, Vector2 dir, Vector2 vel, float scale )
 	{
 		//if (level.GetPhsxStep() % 3 != 0) return;
 
-		std::shared_ptr<ParticleEmitter> emit = level->ParticleEmitters[ Layer ];
+		boost::shared_ptr<ParticleEmitter> emit = level->ParticleEmitters[ Layer ];
 
 		for ( int k = 0; k < 1; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( ThrustTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( ThrustTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			p->Data.Position = pos + 3 * Dir;
@@ -242,13 +242,13 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::HeroExplosion( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::HeroExplosion( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		for ( int k = 0; k < 37; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( DustCloudTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( DustCloudTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			float scale = 1.25f;
@@ -270,13 +270,13 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		DustCloudSound->Play();
 	}
 
-	void ParticleEffects::DustCloudExplosion( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::DustCloudExplosion( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		for ( int k = 0; k < 27; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( DustCloudTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( DustCloudTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			p->Data.Position = pos + 70 * Dir;
@@ -296,21 +296,21 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		DustCloudSound->Play();
 	}
 
-	void ParticleEffects::Flame( const std::shared_ptr<Level> &level, Vector2 pos, int frame, float intensity, int life, bool ModFade )
+	void ParticleEffects::Flame( const boost::shared_ptr<Level> &level, Vector2 pos, int frame, float intensity, int life, bool ModFade )
 	{
 		Flame( level->MainEmitter, pos, frame, intensity, life, ModFade );
 	}
 
-	void ParticleEffects::Flame( const std::shared_ptr<ParticleEmitter> &emitter, Vector2 pos, int frame, float intensity, int life, bool ModFade )
+	void ParticleEffects::Flame( const boost::shared_ptr<ParticleEmitter> &emitter, Vector2 pos, int frame, float intensity, int life, bool ModFade )
 	{
 		//if (frame % 3 != 0) return;
 		//if (Tools.TheGame.DrawCount % 3 == 0) return;
 
-		std::shared_ptr<ParticleEmitter> emit = emitter;
+		boost::shared_ptr<ParticleEmitter> emit = emitter;
 
 		for ( int k = 0; k < 1; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( FlameTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( FlameTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			if ( ModFade )
@@ -331,7 +331,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::SetRandomPiece( const std::shared_ptr<Particle> &p )
+	void ParticleEffects::SetRandomPiece( const boost::shared_ptr<Particle> &p )
 	{
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 8 ) )
 		{
@@ -373,14 +373,14 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::Coalesce( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::Coalesce( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		Coalesce( level, pos, 0 );
 	}
 
-	void ParticleEffects::Coalesce( const std::shared_ptr<Level> &level, Vector2 pos, int PadLife )
+	void ParticleEffects::Coalesce( const boost::shared_ptr<Level> &level, Vector2 pos, int PadLife )
 	{
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		int num = 1;
 		if ( Tools::TheGame->DrawCount % 2 == 0 )
@@ -388,7 +388,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 		for ( int k = 0; k < num; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( CoalesceTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( CoalesceTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			p->Data.Position = pos + 1500 * Dir;
@@ -411,9 +411,9 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::PieceExplosion( const std::shared_ptr<Level> &level, Vector2 pos, int frame, float intensity )
+	void ParticleEffects::PieceExplosion( const boost::shared_ptr<Level> &level, Vector2 pos, int frame, float intensity )
 	{
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		int num = 2;
 		if ( Tools::TheGame->DrawCount % 2 == 0 )
@@ -422,7 +422,7 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 		for ( int k = 0; k < num; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( PieceExplosionTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( PieceExplosionTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			p->Data.Position = pos + 75 * Dir * intensity;
@@ -434,12 +434,12 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity )
+	void ParticleEffects::PieceOrb( const boost::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity )
 	{
 		PieceOrb( level, style, pos, frame, intensity, 0, Vector2(1), Vector4( 1 ) );
 	}
 
-	void ParticleEffects::PieceOrb( const std::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, std::shared_ptr<EzTexture> texture, Vector2 size, Vector4 color )
+	void ParticleEffects::PieceOrb( const boost::shared_ptr<Level> &level, PieceOrbStyle style, Vector2 pos, int frame, float intensity, boost::shared_ptr<EzTexture> texture, Vector2 size, Vector4 color )
 	{
 		// Number of particles to emit
 		int num = 1;
@@ -490,11 +490,11 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 				break;
 		}
 
-		std::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
+		boost::shared_ptr<ParticleEmitter> emit = level->MainEmitter;
 
 		for ( int k = 0; k < num; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( PieceExplosionTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emit->GetNewParticle( PieceExplosionTemplate );
 			Vector2 Dir = Tools::GlobalRnd->RndDir();
 
 			p->MyColor *= color;
@@ -525,31 +525,31 @@ std::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		}
 	}
 
-	void ParticleEffects::PiecePopFart( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::PiecePopFart( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		Tools::SoundWad->FindByName( _T( "Piece_Explosion_Small" ) )->Play( 1 );
 		for ( int i = 0; i < 4; i++ )
 			PieceExplosion( level, pos, 0, 1 );
 	}
 
-std::shared_ptr<Particle> ParticleEffects::PopTemplate = 0;
+boost::shared_ptr<Particle> ParticleEffects::PopTemplate = 0;
 
-	void ParticleEffects::AddPop( const std::shared_ptr<Level> &level, Vector2 pos )
+	void ParticleEffects::AddPop( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		AddPop( level, pos, 85, PopTemplate->MyQuad.getMyTexture() );
 	}
 
-	void ParticleEffects::AddPop( const std::shared_ptr<Level> &level, Vector2 pos, float size )
+	void ParticleEffects::AddPop( const boost::shared_ptr<Level> &level, Vector2 pos, float size )
 	{
 		AddPop( level, pos, size, PopTemplate->MyQuad.getMyTexture() );
 	}
 
-	void ParticleEffects::AddPop( const std::shared_ptr<Level> &level, Vector2 pos, float size, const std::shared_ptr<EzTexture> &tex )
+	void ParticleEffects::AddPop( const boost::shared_ptr<Level> &level, Vector2 pos, float size, const boost::shared_ptr<EzTexture> &tex )
 	{
 		if ( level->NoParticles )
 			return;
 
-		std::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( PopTemplate );
+		boost::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( PopTemplate );
 		p->Data.Position = pos;
 		p->SetSize( size );
 		p->MyQuad.setMyTexture( tex );
@@ -557,7 +557,7 @@ std::shared_ptr<Particle> ParticleEffects::PopTemplate = 0;
 
 	void ParticleEffects::Init_Pop()
 	{
-		PopTemplate = std::make_shared<Particle>();
+		PopTemplate = boost::make_shared<Particle>();
 		PopTemplate->MyQuad.Init();
 		PopTemplate->MyQuad.MyEffect = Tools::EffectWad->FindByName( _T( "Shell" ) );
 		PopTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );

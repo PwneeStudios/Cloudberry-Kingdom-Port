@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	void DifficultyGroups::UpgradeSequenceSingle::Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty )
+	void DifficultyGroups::UpgradeSequenceSingle::Apply( const boost::shared_ptr<PieceSeedData> &Piece, float Difficulty )
 	{
 		float d = Difficulty;
 
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		Values[ 4 ] = v4;
 	}
 
-	void DifficultyGroups::UpgradeSequence::Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty )
+	void DifficultyGroups::UpgradeSequence::Apply( const boost::shared_ptr<PieceSeedData> &Piece, float Difficulty )
 	{
 		for ( std::vector<UpgradeSequenceSingle>::iterator upgrade = UpgradeList.begin(); upgrade != UpgradeList.end(); ++upgrade )
 		{
@@ -217,43 +217,43 @@ namespace CloudberryKingdom
 		UpgradeList.push_back( s1 );
 	}
 
-	DifficultyGroups::FixedPieceModHelper::FixedPieceModHelper( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed )
+	DifficultyGroups::FixedPieceModHelper::FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed )
 	{
 		this->Difficulty = Difficulty;
 		this->LevelSeed = LevelSeed;
 	}
 
-	void DifficultyGroups::FixedPieceModHelper::Apply( const std::shared_ptr<PieceSeedData> &piece )
+	void DifficultyGroups::FixedPieceModHelper::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		DifficultyGroups::FixedPieceSeed( piece, Difficulty, LevelSeed->DefaultHeroType );
 	}
 
-	std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > DifficultyGroups::FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > DifficultyGroups::FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed )
 	{
-		return std::make_shared<FixedPieceModHelper>( Difficulty, LevelSeed );
+		return boost::make_shared<FixedPieceModHelper>( Difficulty, LevelSeed );
 	}
 
-	float DifficultyGroups::HeroDifficultyMod( float Difficulty, const std::shared_ptr<BobPhsx> &hero )
+	float DifficultyGroups::HeroDifficultyMod( float Difficulty, const boost::shared_ptr<BobPhsx> &hero )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxBox>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxBox>( hero ) != 0 )
 			return -.235f;
-		if ( std::dynamic_pointer_cast<BobPhsxWheel>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxWheel>( hero ) != 0 )
 			return -.1f;
-		if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
 			return -.33f;
-		if ( std::dynamic_pointer_cast<BobPhsxSmall>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSmall>( hero ) != 0 )
 			return -.1f;
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( hero ) != 0 )
 			return -.065f;
-		if ( std::dynamic_pointer_cast<BobPhsxDouble>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxDouble>( hero ) != 0 )
 			return 0;
-		if ( std::dynamic_pointer_cast<BobPhsxBouncy>( hero ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxBouncy>( hero ) != 0 )
 			return -0.435f;
 
 		return 0;
 	}
 
-	void DifficultyGroups::FixedPieceSeed( const std::shared_ptr<PieceSeedData> &piece, float Difficulty, const std::shared_ptr<BobPhsx> &hero )
+	void DifficultyGroups::FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero )
 	{
 		InitFixedUpgrades();
 
@@ -264,7 +264,7 @@ namespace CloudberryKingdom
 		else if ( piece->GeometryType == LevelGeometry_DOWN )
 			piece->getRnd()->Choose(DownUpgrades).Apply(piece, Difficulty);
 		// Cart level
-		else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
+		else if ( boost::dynamic_pointer_cast<BobPhsxRocketbox>( hero ) != 0 )
 		{
 			if ( Difficulty < .5f )
 				Difficulty -= .8f;

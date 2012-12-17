@@ -14,16 +14,16 @@ namespace CloudberryKingdom
 	struct HeroLevel : public CkBaseMenu
 	{
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
-		HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		std::shared_ptr<HeroLevel> HeroLevel_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		HeroLevel( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		boost::shared_ptr<HeroLevel> HeroLevel_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 	
 		virtual void ReleaseBody();
 
 	
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 	
 		virtual void Init();
 

@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		GenParams.clear();
 	}
 
-	void StyleData::CalcGenParams( const std::shared_ptr<PieceSeedData> &SeedData, const std::shared_ptr<Level> &level )
+	void StyleData::CalcGenParams( const boost::shared_ptr<PieceSeedData> &SeedData, const boost::shared_ptr<Level> &level )
 	{
-		GenParams = std::map<std::shared_ptr<AutoGen>, std::shared_ptr<AutoGen_Parameters> >();
-		for ( std::vector<std::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
+		GenParams = std::map<boost::shared_ptr<AutoGen>, boost::shared_ptr<AutoGen_Parameters> >();
+		for ( std::vector<boost::shared_ptr<AutoGen> >::const_iterator gen = Generators::Gens.begin(); gen != Generators::Gens.end(); ++gen )
 			GenParams.insert( std::make_pair( *gen, ( *gen )->SetParameters( SeedData, level ) ) );
 
 		MyModParams->Apply( level, SeedData );
@@ -28,12 +28,12 @@ namespace CloudberryKingdom
 		level->TimeType = TimeType;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> StyleData::FindParams( const std::shared_ptr<AutoGen> &gen )
+	boost::shared_ptr<AutoGen_Parameters> StyleData::FindParams( const boost::shared_ptr<AutoGen> &gen )
 	{
 		return GenParams[ gen ];
 	}
 
-	//std::shared_ptr<StyleData> StyleData::Clone()
+	//boost::shared_ptr<StyleData> StyleData::Clone()
 	//{
 	//	return static_cast<StyleData>( this->MemberwiseClone() );
 	//}
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 	float _singlepathration[] = { .7f,.1f,.1f,.1f };
 	std::vector<float> StyleData::_SinglePathRatio = VecFromArray( _singlepathration );
 
-	StyleData::StyleData( const std::shared_ptr<Rand> &Rnd )
+	StyleData::StyleData( const boost::shared_ptr<Rand> &Rnd )
 	{
 		//this.Rnd = new Rand(Rnd.MySeed);
 		InitializeInstanceFields();
@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		Randomize();
 	}
 
-	void StyleData::Calculate( const std::shared_ptr<Upgrades> &u )
+	void StyleData::Calculate( const boost::shared_ptr<Upgrades> &u )
 	{
 		float JumpLevel = u->Get( Upgrade_JUMP );
 
@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void StyleData::SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetStartType( PhsxData &Start, Vector2 &CheckpointShift, _StartType StartType, const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		switch ( StartType )
 		{
@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void StyleData::SetSinglePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetSinglePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		SetStartType( makeData->Start[ 0 ], makeData->CheckpointShift[ 0 ], Bob1Start, Piece );
 
@@ -207,7 +207,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void StyleData::SetDoubePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetDoubePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		if ( DoublePathType == _DoublePathType_INDEPENDENT )
 			DoublePathType = _DoublePathType_GAP;
@@ -256,7 +256,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void StyleData::SetTriplePathType( const std::shared_ptr<MakeData> &makeData, const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &Piece )
+	void StyleData::SetTriplePathType( const boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		if ( TriplePathType == _TriplePathType_INDEPENDENT )
 			TriplePathType = _TriplePathType_SEPARATED;
@@ -290,19 +290,19 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void StyleData::SuppressGroundCeiling( const std::shared_ptr<PieceSeedData> &piece )
+	void StyleData::SuppressGroundCeiling( const boost::shared_ptr<PieceSeedData> &piece )
 	{
-		std::shared_ptr<Ceiling_Parameters> Ceiling_Params = std::dynamic_pointer_cast<Ceiling_Parameters>( FindParams( Ceiling_AutoGen::getInstance() ) );
+		boost::shared_ptr<Ceiling_Parameters> Ceiling_Params = boost::dynamic_pointer_cast<Ceiling_Parameters>( FindParams( Ceiling_AutoGen::getInstance() ) );
 		Ceiling_Params->Make = false;
-		std::shared_ptr<NormalBlock_Parameters> NBlock_Params = std::dynamic_pointer_cast<NormalBlock_Parameters>( FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> NBlock_Params = boost::dynamic_pointer_cast<NormalBlock_Parameters>( FindParams( NormalBlock_AutoGen::getInstance() ) );
 		NBlock_Params->Make = false;
 	}
 
-	void StyleData::SetToMake_BouncyHallway( const std::shared_ptr<PieceSeedData> &piece )
+	void StyleData::SetToMake_BouncyHallway( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		SuppressGroundCeiling( piece );
 
-		std::shared_ptr<BouncyBlock_Parameters> Bounce_Params = std::dynamic_pointer_cast<BouncyBlock_Parameters>( FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<BouncyBlock_Parameters> Bounce_Params = boost::dynamic_pointer_cast<BouncyBlock_Parameters>( FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		Bounce_Params->Special.Hallway = true;
 	}
 
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 
 
 
-		MyModParams = std::make_shared<Multicaster_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> > >();
+		MyModParams = boost::make_shared<Multicaster_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> > >();
 		Zoom = 1;
 		TimeType = TimeTypes_REGULAR;
 		ModNormalBlockWeight = 1;

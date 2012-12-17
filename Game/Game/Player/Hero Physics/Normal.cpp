@@ -7,11 +7,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxNormal::InitializeStatics()
 	{
-		BobPhsxNormal::instance = std::make_shared<BobPhsxNormal>();
+		BobPhsxNormal::instance = boost::make_shared<BobPhsxNormal>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance;
+	boost::shared_ptr<BobPhsxNormal> BobPhsxNormal::instance;
 
 	void BobPhsxNormal::InitSingleton()
 	{
@@ -22,24 +22,24 @@ namespace CloudberryKingdom
 		NameTemplate = _T( "hero" );
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * 1.1f);
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
 	}
 
-	const std::shared_ptr<BobPhsxNormal> &BobPhsxNormal::getInstance()
+	const boost::shared_ptr<BobPhsxNormal> &BobPhsxNormal::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxNormal::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxNormal::Clone()
 	{
-		std::shared_ptr<BobPhsxNormal> newBob = std::make_shared<BobPhsxNormal>();
+		boost::shared_ptr<BobPhsxNormal> newBob = boost::make_shared<BobPhsxNormal>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxNormal::CopyTo( const std::shared_ptr<BobPhsxNormal> &bob )
+	void BobPhsxNormal::CopyTo( const boost::shared_ptr<BobPhsxNormal> &bob )
 	{
-		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) );
+		BobPhsx::CopyTo( boost::static_pointer_cast<BobPhsx>( bob ) );
 
 		bob->InitializedAnim = InitializedAnim;
 		bob->LandSound = LandSound;
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 		XAccel *= 1.1175f;
 	}
 
-	void BobPhsxNormal::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxNormal::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsx::Init( bob );
 
@@ -601,11 +601,11 @@ namespace CloudberryKingdom
 		LandSound->Play( .47f );
 	}
 
-	void BobPhsxNormal::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxNormal::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		BobPhsx::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 
-		if ( LandSound != 0 && MyBob->getCore()->MyLevel->PlayMode == 0 && std::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
+		if ( LandSound != 0 && MyBob->getCore()->MyLevel->PlayMode == 0 && boost::dynamic_pointer_cast<BlockBase>(ObjectLandedOn) != 0 && !PrevOnGround )
 			PlayLandSound();
 
 		ReadyToJump = ReadyToJump || MakeReadyToJump;
@@ -618,17 +618,17 @@ namespace CloudberryKingdom
 		CurJump = 1;
 		JetPackCount = 0;
 
-		if ( std::dynamic_pointer_cast<FlyingBlob>( ObjectLandedOn ) != 0 )
+		if ( boost::dynamic_pointer_cast<FlyingBlob>( ObjectLandedOn ) != 0 )
 			FallingCount = -4;
 
-		if ( std::dynamic_pointer_cast<BouncyBlock>( ObjectLandedOn ) != 0 )
+		if ( boost::dynamic_pointer_cast<BouncyBlock>( ObjectLandedOn ) != 0 )
 		{
 			FallingCount = -1;
 			ReadyToJump = false;
 		}
 	}
 
-	void BobPhsxNormal::HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit )
+	void BobPhsxNormal::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
 	{
 		BobPhsx::HitHeadOnSomething( ThingHit );
 
@@ -667,7 +667,7 @@ namespace CloudberryKingdom
 		else
 			TurnCountdown--;
 
-		std::shared_ptr<BlockBase> block = std::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
+		boost::shared_ptr<BlockBase> block = boost::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
 		if ( 0 != block )
 			SafetyBlock = block;
 
@@ -720,7 +720,7 @@ namespace CloudberryKingdom
 		else
 			TurnCountdown--;
 
-		std::shared_ptr<Camera> cam = MyBob->getCore()->MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = MyBob->getCore()->MyLevel->getMainCamera();
 		float HardBound = 1000;
 		float SoftBound = 1500;
 		if ( getPos().X > cam->TR.X - HardBound )
@@ -961,7 +961,7 @@ namespace CloudberryKingdom
 			if ( getPos().Y < MyBob->TargetPosition.Y - MaxDip )
 				MyBob->CurInput.A_Button = true;
 		}
-		std::shared_ptr<BlockBase> block = std::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
+		boost::shared_ptr<BlockBase> block = boost::dynamic_pointer_cast<BlockBase>( ObjectLandedOn );
 		if ( 0 != block && ( OnGround || FallingCount < BobFallDelay ) && ( BobEdgeJump == 1 || block->getCore()->GenData.EdgeJumpOnly ) )
 		{
 			MyBob->Box->CalcBounds();
@@ -1128,7 +1128,7 @@ namespace CloudberryKingdom
 						}
 	}
 
-	void BobPhsxNormal::SetTarget( const std::shared_ptr<RichLevelGenData> &GenData )
+	void BobPhsxNormal::SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
 			int Period = GenData->Get( BehaviorParam_MOVE_TYPE_PERIOD, getPos() );
 			float InnerPeriod = static_cast<float>( GenData->Get( BehaviorParam_MOVE_TYPE_INNER_PERIOD, getPos() ) );
@@ -1219,7 +1219,7 @@ namespace CloudberryKingdom
 
 	}
 
-	void BobPhsxNormal::PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData )
+	void BobPhsxNormal::PreventEarlyLandings( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
 		int ApexWait = GenData->Get( DifficultyParam_APEX_WAIT, getPos() );
 		if ( !OnGround && ( !ApexReached || CountSinceApex < ApexWait ) )
@@ -1622,7 +1622,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsx::Die( DeathType );
 
-		std::shared_ptr<ObjectClass> obj = MyBob->PlayerObject;
+		boost::shared_ptr<ObjectClass> obj = MyBob->PlayerObject;
 
 		if ( Bob::AllExplode )
 		{
@@ -1644,11 +1644,11 @@ namespace CloudberryKingdom
 		return;
 	}
 
-	void BobPhsxNormal::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
+	void BobPhsxNormal::ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 		BobPhsx::ToSprites( SpriteAnims, Padding );
 
-		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
+		boost::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
 		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
 		SpriteAnims.insert( std::make_pair( 1, Obj->AnimToSpriteFrames( 1, 1, true, 1, 1, Padding ) ) );
 		SpriteAnims.insert( std::make_pair( 2, Obj->AnimToSpriteFrames( 2, 1, false, 1, 1, Padding ) ) );

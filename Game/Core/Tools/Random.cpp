@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 		// FIXME: WARNING: testing 0 seed only.
 		//MySeed = seed;
 		MySeed = 0;
-		Rnd = std::make_shared<Random>( MySeed );
+		Rnd = boost::make_shared<Random>( MySeed );
 	}
 
 	Vector2 Rand::RndPos( Vector2 BL, Vector2 TR )

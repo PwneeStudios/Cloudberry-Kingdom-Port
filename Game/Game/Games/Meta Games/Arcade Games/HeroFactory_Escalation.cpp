@@ -3,10 +3,10 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::FactoryHero = BobPhsxNormal::getInstance();
-	std::shared_ptr<Challenge_HeroFactoryEscalation> Challenge_HeroFactoryEscalation::instance = std::make_shared<Challenge_HeroFactoryEscalation>();
+	boost::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::FactoryHero = BobPhsxNormal::getInstance();
+	boost::shared_ptr<Challenge_HeroFactoryEscalation> Challenge_HeroFactoryEscalation::instance = boost::make_shared<Challenge_HeroFactoryEscalation>();
 
-	const std::shared_ptr<Challenge_HeroFactoryEscalation> &Challenge_HeroFactoryEscalation::getInstance()
+	const boost::shared_ptr<Challenge_HeroFactoryEscalation> &Challenge_HeroFactoryEscalation::getInstance()
 	{
 		return instance;
 	}
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		Name = Localization::Words_CUSTOM;
 	}
 
-	std::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::GetHero( int i )
+	boost::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::GetHero( int i )
 	{
 		return FactoryHero;
 	}

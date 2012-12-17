@@ -7,11 +7,11 @@ namespace CloudberryKingdom
 
 	void SimpleQuad::NextKeyFrame()
 	{
-		std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->NextKeyFrame();
+		boost::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->NextKeyFrame();
 		setMyTexture( data );
 	}
 
-	void SimpleQuad::SetTextureAnim( const std::shared_ptr<AnimationData_Texture> &TextureAnim )
+	void SimpleQuad::SetTextureAnim( const boost::shared_ptr<AnimationData_Texture> &TextureAnim )
 	{
 		this->TextureAnim = TextureAnim;
 		t = 0;
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		speed = 1;
 	}
 
-	void SimpleQuad::Set( const std::shared_ptr<TextureOrAnim> &t_or_a )
+	void SimpleQuad::Set( const boost::shared_ptr<TextureOrAnim> &t_or_a )
 	{
 		SetTextureOrAnim( t_or_a );
 	}
@@ -38,12 +38,12 @@ namespace CloudberryKingdom
 		CalcTexture( anim, t );
 	}
 
-	const std::shared_ptr<EzTexture> &SimpleQuad::getMyTexture() const
+	const boost::shared_ptr<EzTexture> &SimpleQuad::getMyTexture() const
 	{
 		return _MyTexture;
 	}
 
-	void SimpleQuad::setMyTexture( const std::shared_ptr<EzTexture> &value )
+	void SimpleQuad::setMyTexture( const boost::shared_ptr<EzTexture> &value )
 	{
 		_MyTexture = value;
 		if ( _MyTexture != 0 && _MyTexture->FromPacked )
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 				t = static_cast<float>( TextureAnim->Anims[ anim ].Data.size() ) - 1;
 		}
 
-		std::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, t );
+		boost::shared_ptr<CloudberryKingdom::EzTexture> data = TextureAnim->Calc( anim, t );
 		setMyTexture( data );
 	}
 
@@ -164,7 +164,7 @@ namespace CloudberryKingdom
 		UseGlobalIllumination = quad.UseGlobalIllumination;
 	}
 
-	SimpleQuad::SimpleQuad( const std::shared_ptr<Quad> &quad )
+	SimpleQuad::SimpleQuad( const boost::shared_ptr<Quad> &quad )
 	{
 		Name = quad->Name;
 
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 		setMyTexture( quad->MyTexture );
 	}
 
-	void SimpleQuad::SetTextureOrAnim( const std::shared_ptr<TextureOrAnim> &t_or_a )
+	void SimpleQuad::SetTextureOrAnim( const boost::shared_ptr<TextureOrAnim> &t_or_a )
 	{
 		if ( t_or_a->IsAnim )
 		{

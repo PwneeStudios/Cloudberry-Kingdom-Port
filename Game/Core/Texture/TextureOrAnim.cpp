@@ -28,16 +28,16 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<TextureOrAnim> TextureOrAnim::Get( const std::shared_ptr<EzTexture> &texture )
+	boost::shared_ptr<TextureOrAnim> TextureOrAnim::Get( const boost::shared_ptr<EzTexture> &texture )
 	{
-		std::shared_ptr<TextureOrAnim> t_or_a = std::make_shared<TextureOrAnim>();
+		boost::shared_ptr<TextureOrAnim> t_or_a = boost::make_shared<TextureOrAnim>();
 		t_or_a->MyTexture = texture;
 		return t_or_a;
 	}
 
-	std::shared_ptr<TextureOrAnim> TextureOrAnim::Get( const std::wstring &name )
+	boost::shared_ptr<TextureOrAnim> TextureOrAnim::Get( const std::wstring &name )
 	{
-		std::shared_ptr<TextureOrAnim> t_or_a = std::make_shared<TextureOrAnim>();
+		boost::shared_ptr<TextureOrAnim> t_or_a = boost::make_shared<TextureOrAnim>();
 		t_or_a->Set( name );
 		return t_or_a;
 	}

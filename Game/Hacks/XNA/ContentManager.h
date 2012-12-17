@@ -16,16 +16,16 @@ struct ContentManager
 	{
 	}
 
-	ContentManager( const std::shared_ptr<GameServiceContainer> &container, const std::wstring &root ) :
+	ContentManager( const boost::shared_ptr<GameServiceContainer> &container, const std::wstring &root ) :
 		RootDirectory( root )
 	{
 	}
 
 	template<class T>
-	std::shared_ptr<T> Load( const std::wstring &name )
+	boost::shared_ptr<T> Load( const std::wstring &name )
 	{
 		assert( !"Can't touch this." );
-		return std::shared_ptr<T>();
+		return boost::shared_ptr<T>();
 	}
 
 	void Unload(  )
@@ -38,10 +38,10 @@ struct ContentManager
 
 };
 
-template<> std::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( const std::wstring &name );
-template<> std::shared_ptr<Song> ContentManager::Load<Song>( const std::wstring &name );
-template<> std::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const std::wstring &name );
-template<> std::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const std::wstring &name );
-template<> std::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name );
+template<> boost::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( const std::wstring &name );
+template<> boost::shared_ptr<Song> ContentManager::Load<Song>( const std::wstring &name );
+template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const std::wstring &name );
+template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const std::wstring &name );
+template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name );
 
 #endif

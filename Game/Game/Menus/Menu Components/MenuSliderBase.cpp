@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	MenuSliderBase::SetCallbackProxy::SetCallbackProxy( const std::shared_ptr<MenuSliderBase> &msb )
+	MenuSliderBase::SetCallbackProxy::SetCallbackProxy( const boost::shared_ptr<MenuSliderBase> &msb )
 	{
 		Msb = msb;
 	}
@@ -51,34 +51,34 @@ namespace CloudberryKingdom
 			OnSetValue->Apply();
 	}
 
-	const std::shared_ptr<WrappedFloat> &MenuSliderBase::getMyFloat() const
+	const boost::shared_ptr<WrappedFloat> &MenuSliderBase::getMyFloat() const
 	{
 		return _MyFloat;
 	}
 
-	void MenuSliderBase::setMyFloat( const std::shared_ptr<WrappedFloat> &value )
+	void MenuSliderBase::setMyFloat( const boost::shared_ptr<WrappedFloat> &value )
 	{
 		_MyFloat = value;
-		_MyFloat->SetCallback = std::make_shared<SetCallbackProxy>( std::static_pointer_cast<MenuSliderBase>( shared_from_this() ) );
+		_MyFloat->SetCallback = boost::make_shared<SetCallbackProxy>( boost::static_pointer_cast<MenuSliderBase>( shared_from_this() ) );
 		SetCallback();
 	}
 
 	MenuSliderBase::MenuSliderBase()
 	{
 		InitializeInstanceFields();
-		std::shared_ptr<EzText> NoText = std::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> NoText = boost::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42 );
 		Init( NoText, NoText->Clone() );
 		InitializeSlider();
 	}
 
-	MenuSliderBase::MenuSliderBase( const std::shared_ptr<EzText> &Text )
+	MenuSliderBase::MenuSliderBase( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
 		Init( Text, Text->Clone() );
 		InitializeSlider();
 	}
 
-	MenuSliderBase::MenuSliderBase( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	MenuSliderBase::MenuSliderBase( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
 		Init( Text, SelectedText );

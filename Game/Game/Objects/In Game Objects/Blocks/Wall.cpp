@@ -5,12 +5,12 @@ namespace CloudberryKingdom
 
 	void Wall::WallTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
+		Sprite = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>() );
 	}
 
-	std::shared_ptr<Wall> Wall::MakeWall( LevelGeometry geometry )
+	boost::shared_ptr<Wall> Wall::MakeWall( LevelGeometry geometry )
 	{
-		std::shared_ptr<Wall> wall = std::make_shared<Wall>( false );
+		boost::shared_ptr<Wall> wall = boost::make_shared<Wall>( false );
 		wall->MakeNew();
 		wall->Horizontal = geometry == LevelGeometry_RIGHT;
 
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 
 	void Wall::MakeSpike( int count, float pos )
 	{
-		std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( getCore()->MyLevel->getRecycle()->GetObject(ObjectType_SPIKE, false) );
+		boost::shared_ptr<Spike> spike = boost::static_pointer_cast<Spike>( getCore()->MyLevel->getRecycle()->GetObject(ObjectType_SPIKE, false) );
 		spike->Init( Vector2(), getMyLevel() );
 
 		if ( Horizontal )
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		spike->SetPeriod( 50 );
 		spike->Offset = count % 2 == 0 ? 0 : 50 / 2;
 
-		spike->SetParentBlock( std::static_pointer_cast<BlockBase>( shared_from_this() ) );
+		spike->SetParentBlock( boost::static_pointer_cast<BlockBase>( shared_from_this() ) );
 		getCore()->MyLevel->AddObject(spike);
 	}
 
@@ -115,8 +115,8 @@ namespace CloudberryKingdom
 	Wall::Wall( bool BoxesOnly )
 	{
 		InitializeInstanceFields();
-		MyBox = std::make_shared<AABox>();
-		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 100.f, true );
+		MyBox = boost::make_shared<AABox>();
+		MyQuad = boost::make_shared<QuadClass>( _T( "White" ), 100.f, true );
 
 		MakeNew();
 
@@ -238,7 +238,7 @@ namespace CloudberryKingdom
 		return getCore()->Data.Position + getCore()->Data.Velocity;
 	}
 
-	void Wall::DoInteraction( const std::shared_ptr<Bob> &bob )
+	void Wall::DoInteraction( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->Box->CalcBounds();
 		float dif;
@@ -355,9 +355,9 @@ namespace CloudberryKingdom
 		ResetPieces();
 	}
 
-	void Wall::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Wall::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<Wall> BlockA = std::dynamic_pointer_cast<Wall>( A );
+		boost::shared_ptr<Wall> BlockA = boost::dynamic_pointer_cast<Wall>( A );
 
 		Init();
 

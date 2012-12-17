@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 {
 	// Stores the level of each obstacles
 	// CalcGenData translates this into actual parameters
-	struct Upgrades : public std::enable_shared_from_this<Upgrades>
+	struct Upgrades : public boost::enable_shared_from_this<Upgrades>
 	{
 
 	
@@ -18,14 +18,14 @@ namespace CloudberryKingdom
 
 		Upgrades();
 
-		Upgrades( const std::shared_ptr<Upgrades> &u );
+		Upgrades( const boost::shared_ptr<Upgrades> &u );
 
 	
 		void Initialize();
 
 
 	
-		void CopyFrom( const std::shared_ptr<Upgrades> &u );
+		void CopyFrom( const boost::shared_ptr<Upgrades> &u );
 
 		/// <summary>
 		/// Access the specified upgrade level
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 		void Zero();
 
 		static int MaxBobWidth;
-		void CalcGenData( const std::shared_ptr<LevelGenData> &GenData, const std::shared_ptr<StyleData> &Style );
+		void CalcGenData( const boost::shared_ptr<LevelGenData> &GenData, const boost::shared_ptr<StyleData> &Style );
 	};
 }
 

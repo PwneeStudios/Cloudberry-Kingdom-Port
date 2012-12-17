@@ -8,23 +8,23 @@ namespace CloudberryKingdom
 	struct Challenge_HeroRush2 : public Challenge_HeroRush
 	{
 	
-		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		
-			std::shared_ptr<Challenge_HeroRush2> ch;
+			boost::shared_ptr<Challenge_HeroRush2> ch;
 		
-			OnSwapLambda( const std::shared_ptr<Challenge_HeroRush2> &ch );
+			OnSwapLambda( const boost::shared_ptr<Challenge_HeroRush2> &ch );
 
-			void Apply( const std::shared_ptr<LevelSeedData> &data );
+			void Apply( const boost::shared_ptr<LevelSeedData> &data );
 		};
 
 	
 		static std::vector<HeroSpec> HeroList;
 
 	
-		static std::shared_ptr<Challenge_HeroRush2> instance;
+		static boost::shared_ptr<Challenge_HeroRush2> instance;
 	
-		const static std::shared_ptr<Challenge_HeroRush2> &getInstance();
+		const static boost::shared_ptr<Challenge_HeroRush2> &getInstance();
 
 	
 		static std::vector<std::vector<Vector2> > IconPos;
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		virtual void Start( int StartLevel );
 
 	
-		virtual std::shared_ptr<BobPhsx> GetHero( int i );
+		virtual boost::shared_ptr<BobPhsx> GetHero( int i );
 
 		virtual void PreStart_Tutorial( bool TemporarySkip );
 

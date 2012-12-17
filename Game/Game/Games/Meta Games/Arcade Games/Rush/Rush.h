@@ -8,46 +8,46 @@ namespace CloudberryKingdom
 	struct Rush : public Challenge
 	{
 	
-		struct RushOnTimeExpiredLambda : public Lambda_1<std::shared_ptr<GUI_Timer_Base> >
+		struct RushOnTimeExpiredLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{
 		
-			std::shared_ptr<Rush> rush;
+			boost::shared_ptr<Rush> rush;
 
 		
-			RushOnTimeExpiredLambda( const std::shared_ptr<Rush> &rush );
+			RushOnTimeExpiredLambda( const boost::shared_ptr<Rush> &rush );
 
-			void Apply( const std::shared_ptr<GUI_Timer_Base> &Timer );
+			void Apply( const boost::shared_ptr<GUI_Timer_Base> &Timer );
 		};
 
 	
-		struct OnLevelBeginLambda : public LambdaFunc_1<std::shared_ptr<Level> , bool>
+		struct OnLevelBeginLambda : public LambdaFunc_1<boost::shared_ptr<Level> , bool>
 		{
 		
 			OnLevelBeginLambda();
 
-			bool Apply( const std::shared_ptr<Level> &level );
+			bool Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
 		struct KillAllPlayersHelper : public LambdaFunc<bool>
 		{
 		
-			std::shared_ptr<Rush> rush;
-			std::shared_ptr<GameData> game;
+			boost::shared_ptr<Rush> rush;
+			boost::shared_ptr<GameData> game;
 
 		
-			KillAllPlayersHelper( const std::shared_ptr<Rush> &rush, const std::shared_ptr<GameData> &game );
+			KillAllPlayersHelper( const boost::shared_ptr<Rush> &rush, const boost::shared_ptr<GameData> &game );
 
 			bool Apply();
 		};
 
 	
-		std::shared_ptr<GUI_Timer> Timer;
+		boost::shared_ptr<GUI_Timer> Timer;
 	
-		void OnTimeExpired( const std::shared_ptr<GUI_Timer_Base> &Timer );
+		void OnTimeExpired( const boost::shared_ptr<GUI_Timer_Base> &Timer );
 
 		int StartIndex;
-		std::shared_ptr<StringWorldTimed> MyStringWorld;
+		boost::shared_ptr<StringWorldTimed> MyStringWorld;
 	
 		virtual void Start( int StartLevel );
 

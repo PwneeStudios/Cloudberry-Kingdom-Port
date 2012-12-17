@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		struct CloudTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 			Vector2 BoxSize;
 
 		
@@ -30,9 +30,9 @@ namespace CloudberryKingdom
 		float Shiftiness;
 		Vector2 Size;
 
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
-		std::shared_ptr<AABox> Box;
+		boost::shared_ptr<AABox> Box;
 
 		Cloud();
 		Cloud( bool BoxesOnly );
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 	
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		virtual void Construct( bool BoxesOnly );
 
@@ -61,14 +61,14 @@ namespace CloudberryKingdom
 	
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 	
 		void InitializeInstanceFields();

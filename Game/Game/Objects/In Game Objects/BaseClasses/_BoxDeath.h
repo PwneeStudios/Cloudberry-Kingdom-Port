@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	struct _BoxDeath : public _Death
 	{
 	
-		std::shared_ptr<AABox> Box;
+		boost::shared_ptr<AABox> Box;
 	
 		Vector2 BoxSize;
 
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 
 		virtual Vector2 GetBoxPos();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		virtual void Scale( float scale );
 
@@ -64,9 +64,9 @@ namespace CloudberryKingdom
 	
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

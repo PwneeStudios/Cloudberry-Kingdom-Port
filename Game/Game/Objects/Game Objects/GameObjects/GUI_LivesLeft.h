@@ -16,10 +16,10 @@ namespace CloudberryKingdom
 		struct BringStartDelayHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			BringStartDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			BringStartDelayHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
@@ -28,10 +28,10 @@ namespace CloudberryKingdom
 		struct BringShowLengthHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			BringShowLengthHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			BringShowLengthHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
@@ -40,10 +40,10 @@ namespace CloudberryKingdom
 		struct BringInitialDelayHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			BringInitialDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			BringInitialDelayHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
@@ -52,10 +52,10 @@ namespace CloudberryKingdom
 		struct OnResetProxy : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			OnResetProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			OnResetProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
@@ -64,10 +64,10 @@ namespace CloudberryKingdom
 		struct OnDoneDyingProxy : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			OnDoneDyingProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			OnDoneDyingProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
@@ -76,16 +76,16 @@ namespace CloudberryKingdom
 		struct OnDeathProxy : public Lambda
 		{
 		
-			std::shared_ptr<GUI_LivesLeft> guiLl;
+			boost::shared_ptr<GUI_LivesLeft> guiLl;
 
 		
-			OnDeathProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl );
+			OnDeathProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl );
 
 			void Apply();
 		};
 
 	
-		std::shared_ptr<Multicaster_1<std::shared_ptr<GUI_LivesLeft> > > OnOutOfLives;
+		boost::shared_ptr<Multicaster_1<boost::shared_ptr<GUI_LivesLeft> > > OnOutOfLives;
 
 	
 		int _NumLives;
@@ -99,12 +99,12 @@ namespace CloudberryKingdom
 		virtual std::wstring ToString();
 
 	
-		std::shared_ptr<EzText> LivesLeftText;
+		boost::shared_ptr<EzText> LivesLeftText;
 		void UpdateLivesLeftText();
 
 	
 		GUI_LivesLeft( int Lives );
-		std::shared_ptr<GUI_LivesLeft> GUI_LivesLeft_Construct( int Lives );
+		boost::shared_ptr<GUI_LivesLeft> GUI_LivesLeft_Construct( int Lives );
 
 	
 		void SetPos();
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		int LastLife;
 		void OnReset();
 
-		void PreventResetOnLastLife( const std::shared_ptr<Level> &level );
+		void PreventResetOnLastLife( const boost::shared_ptr<Level> &level );
 
 		void OnDoneDying();
 

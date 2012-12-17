@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 	void BackgroundFloater::setSpinVelocity( const float &value )
 	{
 		if ( MyQuad != 0 && MyQuad->FancyAngle == 0 )
-			MyQuad->FancyAngle = std::make_shared<FancyVector2>();
+			MyQuad->FancyAngle = boost::make_shared<FancyVector2>();
 		_SpinVelocity = value;
 	}
 
@@ -31,12 +31,12 @@ namespace CloudberryKingdom
 		MyQuad->Release();
 	}
 
-	void BackgroundFloater::SetLevel( const std::shared_ptr<Level> &level )
+	void BackgroundFloater::SetLevel( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel = level;
 	}
 
-	void BackgroundFloater::SetBackground( const std::shared_ptr<Background> &b )
+	void BackgroundFloater::SetBackground( const boost::shared_ptr<Background> &b )
 	{
 		//MyBackground = b;
 	}
@@ -69,12 +69,12 @@ namespace CloudberryKingdom
 		InitialUpdate();
 	}
 
-	BackgroundFloater::BackgroundFloater( const std::shared_ptr<BackgroundFloater> &source ) :
+	BackgroundFloater::BackgroundFloater( const boost::shared_ptr<BackgroundFloater> &source ) :
 		_SpinVelocity( 0 ),
 		Data( source->Data ),
 		StartData( source->StartData ),
 		MyLevel( source->MyLevel ),
-		MyQuad( std::make_shared<QuadClass>( source->MyQuad ) ),
+		MyQuad( boost::make_shared<QuadClass>( source->MyQuad ) ),
 		Name( source->Name )
 	{
 		InitializeInstanceFields();
@@ -84,16 +84,16 @@ namespace CloudberryKingdom
 		_SpinVelocity( 0 )
 	{
 		InitializeInstanceFields();
-		MyQuad = std::make_shared<QuadClass>();
+		MyQuad = boost::make_shared<QuadClass>();
 	}
 
-	BackgroundFloater::BackgroundFloater( const std::shared_ptr<Level> &level ) :
+	BackgroundFloater::BackgroundFloater( const boost::shared_ptr<Level> &level ) :
 		_SpinVelocity( 0 )
 	{
 		InitializeInstanceFields();
 		MyLevel = level;
 
-		MyQuad = std::make_shared<QuadClass>();
+		MyQuad = boost::make_shared<QuadClass>();
 	}
 
 	void BackgroundFloater::InitialUpdate()
@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 			MyQuad->Quad_Renamed.V_Wrap = true;
 	}
 
-	void BackgroundFloater::PhsxStep( const std::shared_ptr<BackgroundFloaterList> &list )
+	void BackgroundFloater::PhsxStep( const boost::shared_ptr<BackgroundFloaterList> &list )
 	{
 		MyQuad->Quad_Renamed.UV_Phsx( uv_speed );
 

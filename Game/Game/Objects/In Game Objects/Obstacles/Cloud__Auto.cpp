@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	void Cloud_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Cloud_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		FillWeight = Param( PieceSeed );
 		FillWeight.SetVal( .62f * u->Get( Upgrade_CLOUD ) );
@@ -19,9 +19,9 @@ namespace CloudberryKingdom
 		Size.SetVal( 2 - .1f * u->Get( Upgrade_CLOUD ) );
 	}
 
-	std::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = std::make_shared<Cloud_AutoGen>();
+	boost::shared_ptr<Cloud_AutoGen> Cloud_AutoGen::instance = boost::make_shared<Cloud_AutoGen>();
 
-	const std::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance()
+	const boost::shared_ptr<Cloud_AutoGen> &Cloud_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -32,35 +32,35 @@ namespace CloudberryKingdom
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Cloud_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Cloud_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Cloud_Parameters> Params = std::make_shared<Cloud_Parameters>();
+		boost::shared_ptr<Cloud_Parameters> Params = boost::make_shared<Cloud_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void Cloud_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Cloud_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void Cloud_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Cloud_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	std::shared_ptr<ObjectBase> Cloud_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> Cloud_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
 		// Get Cloud parameters
-		std::shared_ptr<Cloud_Parameters> Params = std::static_pointer_cast<Cloud_Parameters>( level->getStyle()->FindParams( Cloud_AutoGen::getInstance() ) );
+		boost::shared_ptr<Cloud_Parameters> Params = boost::static_pointer_cast<Cloud_Parameters>( level->getStyle()->FindParams( Cloud_AutoGen::getInstance() ) );
 
 		// Make the new cloud
 		pos += Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 70) ),
 						static_cast<float>( level->getRnd()->Rnd->Next(0, 70) ) );
-		std::shared_ptr<Cloud> NewCloud = std::static_pointer_cast<Cloud>( level->MySourceGame->Recycle->GetObject( ObjectType_CLOUD, true ) );
+		boost::shared_ptr<Cloud> NewCloud = boost::static_pointer_cast<Cloud>( level->MySourceGame->Recycle->GetObject( ObjectType_CLOUD, true ) );
 
 		NewCloud->Shiftiness = Params->Shiftiness.GetVal( pos );
 		NewCloud->Init( pos, level );

@@ -12,8 +12,8 @@ namespace CloudberryKingdom
 		struct GhostBlockTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
-			std::shared_ptr<TextureOrAnim> Sprite;
+			boost::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<TextureOrAnim> Sprite;
 			Vector2 Shift;
 
 		
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<SimpleObject> MyObject;
+		boost::shared_ptr<SimpleObject> MyObject;
 
 	
 		GhostBlockState State;
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 
 		static float TallScale;
 		bool TallBox;
-		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level );
+		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level );
 
 		virtual void Reset( bool BoxesOnly );
 
@@ -98,9 +98,9 @@ namespace CloudberryKingdom
 		virtual void Move( Vector2 shift );
 		virtual void Draw();
 
-		virtual void PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
+		virtual void PostInteractWith( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

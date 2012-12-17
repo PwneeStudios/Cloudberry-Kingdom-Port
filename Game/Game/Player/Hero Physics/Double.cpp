@@ -5,18 +5,18 @@ namespace CloudberryKingdom
 
 	void BobPhsxDouble::InitializeStatics()
 	{
-		BobPhsxDouble::instance = std::make_shared<BobPhsxDouble>();
+		BobPhsxDouble::instance = boost::make_shared<BobPhsxDouble>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance;
+	boost::shared_ptr<BobPhsxDouble> BobPhsxDouble::instance;
 
 
-	void BobPhsxDouble::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxDouble::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		phsx->DoubleJumpModel = true;
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->JetPack = false;
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		phsx->CapePrototype = CapeType_NONE;
 	}
 
-	void BobPhsxDouble::SetDoubleObject( const std::shared_ptr<ObjectClass> &obj, const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxDouble::SetDoubleObject( const boost::shared_ptr<ObjectClass> &obj, const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		if ( obj->QuadList.size() > 0 )
 		{
@@ -63,11 +63,11 @@ namespace CloudberryKingdom
 		Name = Localization::Words_DOUBLE_JUMP;
 		Adjective = _T( "double jump" );
 
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
+		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
 	}
 
-	const std::shared_ptr<BobPhsxDouble> &BobPhsxDouble::getInstance()
+	const boost::shared_ptr<BobPhsxDouble> &BobPhsxDouble::getInstance()
 	{
 		return instance;
 	}

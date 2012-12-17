@@ -3,16 +3,16 @@
 namespace CloudberryKingdom
 {
 
-	CameraZone::ZoneTriggerLambda::ZoneTriggerLambda( const std::shared_ptr<CameraZone> &zt )
+	CameraZone::ZoneTriggerLambda::ZoneTriggerLambda( const boost::shared_ptr<CameraZone> &zt )
 	{
 		this->zt = zt;
 	}
 
-	void CameraZone::ZoneTriggerLambda::Apply( const std::shared_ptr<ZoneTrigger> &trig )
+	void CameraZone::ZoneTriggerLambda::Apply( const boost::shared_ptr<ZoneTrigger> &trig )
 	{
-		std::shared_ptr<CameraZone> CamZone = std::dynamic_pointer_cast<CameraZone>( trig );
+		boost::shared_ptr<CameraZone> CamZone = boost::dynamic_pointer_cast<CameraZone>( trig );
 
-		std::shared_ptr<Camera> cam = CamZone->getCore()->MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = CamZone->getCore()->MyLevel->getMainCamera();
 		if ( cam->ZoneLocked || cam->MyPhsxType == Camera_PhsxType_FIXED )
 			return;
 
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 	{
 		ZoneTrigger::Init( center, size );
 
-		MyContainsEvent = std::make_shared<ZoneTriggerLambda>( std::static_pointer_cast<CameraZone>( shared_from_this() ) );
+		MyContainsEvent = boost::make_shared<ZoneTriggerLambda>( boost::static_pointer_cast<CameraZone>( shared_from_this() ) );
 	}
 
 	void CameraZone::PhsxStep()
@@ -117,12 +117,12 @@ namespace CloudberryKingdom
 		return Start + x.X * Tangent / Length;
 	}
 
-	void CameraZone::SetZoom( const std::shared_ptr<Camera> &cam )
+	void CameraZone::SetZoom( const boost::shared_ptr<Camera> &cam )
 	{
 		cam->setZoom( Zoom * Vector2( .001f,.001f ) );
 	}
 
-	void CameraZone::Enforce( const std::shared_ptr<Camera> &cam )
+	void CameraZone::Enforce( const boost::shared_ptr<Camera> &cam )
 	{
 		SetZoom( cam );
 
@@ -171,11 +171,11 @@ namespace CloudberryKingdom
 		End += shift;
 	}
 
-	void CameraZone::Clone( const std::shared_ptr<ObjectBase> &A )
+	void CameraZone::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		ZoneTrigger::Clone( A );
 
-		std::shared_ptr<CameraZone> ZoneA = std::dynamic_pointer_cast<CameraZone>( A );
+		boost::shared_ptr<CameraZone> ZoneA = boost::dynamic_pointer_cast<CameraZone>( A );
 
 		Start = ZoneA->Start;
 		End = ZoneA->End;

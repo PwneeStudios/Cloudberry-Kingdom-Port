@@ -4,6 +4,9 @@
 #include <Architecture/Singleton.h>
 
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 #ifdef CAFE
 	#include "FilesystemWiiU.h"
@@ -44,7 +47,7 @@ public:
 	 * @param write Should the file be open to writing?
 	 * @return File interface.
 	 */
-	std::shared_ptr<File> Open( const std::string &path, bool write = false )
+	boost::shared_ptr<File> Open( const std::string &path, bool write = false )
 	{
 		return impl_.Open( path, write );
 	}

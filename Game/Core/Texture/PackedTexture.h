@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	struct PackedTexture
 	{
 	
-		std::shared_ptr<EzTexture> MyTexture;
+		boost::shared_ptr<EzTexture> MyTexture;
 
 		/// <summary>
 		/// The subtextures held inside this PackedTexture.

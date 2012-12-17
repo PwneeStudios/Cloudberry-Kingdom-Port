@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	const bool BobLink::getInactive() const
 	{
 		// Don't draw the bungee if we are a dead spaceship or if we explode on death and are dead
-		if ( ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode ) || std::dynamic_pointer_cast<BobPhsxSpaceship>( j->getCore()->MyLevel->DefaultHeroType ) != 0 && (j->Dead || j->Dying || k->Dead || k->Dying) )
+		if ( ( Bob::AllExplode && !Bob::ShowCorpseAfterExplode ) || boost::dynamic_pointer_cast<BobPhsxSpaceship>( j->getCore()->MyLevel->DefaultHeroType ) != 0 && (j->Dead || j->Dying || k->Dead || k->Dying) )
 			return true;
 
 		// Don't draw the bungee if one of the players isn't being drawn.
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		Tools::QDrawer->DrawLine( p1, p2, Color::WhiteSmoke, 15 );
 	}
 
-	void BobLink::PhsxStep( const std::shared_ptr<Bob> &bob )
+	void BobLink::PhsxStep( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( getInactive() )
 			return;
@@ -88,14 +88,14 @@ namespace CloudberryKingdom
 			bob->getCore()->Data.Velocity += VectorForce;
 	}
 
-	void BobLink::Connect( const std::shared_ptr<Bob> &bob1, const std::shared_ptr<Bob> &bob2 )
+	void BobLink::Connect( const boost::shared_ptr<Bob> &bob1, const boost::shared_ptr<Bob> &bob2 )
 	{
 		j = bob1;
 		k = bob2;
 		if ( bob1->MyBobLinks.empty() )
-			bob1->MyBobLinks = std::vector<std::shared_ptr<BobLink> >();
+			bob1->MyBobLinks = std::vector<boost::shared_ptr<BobLink> >();
 		if ( bob2->MyBobLinks.empty() )
-			bob2->MyBobLinks = std::vector<std::shared_ptr<BobLink> >();
+			bob2->MyBobLinks = std::vector<boost::shared_ptr<BobLink> >();
 		bob1->MyBobLinks.push_back( shared_from_this() );
 		bob2->MyBobLinks.push_back( shared_from_this() );
 	}

@@ -9,15 +9,15 @@ namespace CloudberryKingdom
 	struct ControlScreen : public CkBaseMenu
 	{
 	
-		std::shared_ptr<QuadClass> BackgroundQuad;
+		boost::shared_ptr<QuadClass> BackgroundQuad;
 
 	
 		ControlScreen( int Control );
-		std::shared_ptr<ControlScreen> ControlScreen_Construct( int Control );
+		boost::shared_ptr<ControlScreen> ControlScreen_Construct( int Control );
 
 #if defined(PC_VERSION)
 	
-		std::shared_ptr<QuadClass> MakeQuad( Keys key );
+		boost::shared_ptr<QuadClass> MakeQuad( Keys key );
 #endif
 	
 		virtual void Init();

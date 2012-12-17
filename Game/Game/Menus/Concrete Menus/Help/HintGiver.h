@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		static void SetQuickSpawnNum( int val );
 		static void IncrQuickSpawnNum();
 
-		static std::shared_ptr<HintGiver> CurrentGiver;
+		static boost::shared_ptr<HintGiver> CurrentGiver;
 	};
 
 	struct HintGiver : public GUI_Panel
@@ -25,10 +25,10 @@ namespace CloudberryKingdom
 		struct Check_QuickSpawnHelper : public Lambda
 		{
 		
-			std::shared_ptr<HintGiver> hg;
+			boost::shared_ptr<HintGiver> hg;
 
 		
-			Check_QuickSpawnHelper( const std::shared_ptr<HintGiver> &hg );
+			Check_QuickSpawnHelper( const boost::shared_ptr<HintGiver> &hg );
 
 			void Apply();
 		};
@@ -37,17 +37,17 @@ namespace CloudberryKingdom
 		struct Check_YForHelpHelper : public Lambda
 		{
 		
-			std::shared_ptr<HintGiver> hg;
+			boost::shared_ptr<HintGiver> hg;
 
 		
-			Check_YForHelpHelper( const std::shared_ptr<HintGiver> &hg );
+			Check_YForHelpHelper( const boost::shared_ptr<HintGiver> &hg );
 
 			void Apply();
 		};
 
 	
 		HintGiver();
-		std::shared_ptr<HintGiver> HintGiver_Construct();
+		boost::shared_ptr<HintGiver> HintGiver_Construct();
 
 	
 		virtual void ReleaseBody();

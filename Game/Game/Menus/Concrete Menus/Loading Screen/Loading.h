@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 		const Vector2 &getFull_TR() const;
 		const Vector2 getCurrent_TR() const;
 
-		std::shared_ptr<DrawPile> MyPile;
+		boost::shared_ptr<DrawPile> MyPile;
 
-		std::shared_ptr<QuadClass> Outline, Fill;
+		boost::shared_ptr<QuadClass> Outline, Fill;
 
 		float PercentDone;
 		float Width;
@@ -60,18 +60,18 @@ namespace CloudberryKingdom
 	
 		bool IsDone;
 	
-		std::shared_ptr<SoundEffect> Whinney;
+		boost::shared_ptr<SoundEffect> Whinney;
 
-		std::shared_ptr<DrawPile> MyPile;
-		std::shared_ptr<ProgressBar> MyProgressBar;
+		boost::shared_ptr<DrawPile> MyPile;
+		boost::shared_ptr<ProgressBar> MyProgressBar;
 
 		int LogoCount;
-		std::shared_ptr<WrappedFloat> ResourceCount;
+		boost::shared_ptr<WrappedFloat> ResourceCount;
 
-		std::shared_ptr<QuadClass> BlackQuad, Splash;
+		boost::shared_ptr<QuadClass> BlackQuad, Splash;
 
 	
-		InitialLoadingScreen( const std::shared_ptr<ContentManager> &Content, const std::shared_ptr<WrappedFloat> &ResourceCount );
+		InitialLoadingScreen( const boost::shared_ptr<ContentManager> &Content, const boost::shared_ptr<WrappedFloat> &ResourceCount );
 
 		static int TotalResources;
 

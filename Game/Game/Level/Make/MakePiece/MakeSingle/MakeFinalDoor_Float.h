@@ -30,20 +30,20 @@ namespace CloudberryKingdom
 	struct MakeFinalDoor_Float : public MakeThing
 	{
 	
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 
 		/// <summary>
 		/// The block on which the final door rests on.
 		/// </summary>
 	
-		std::shared_ptr<BlockBase> FinalBlock;
+		boost::shared_ptr<BlockBase> FinalBlock;
 
 		/// <summary>
 		/// The position of the final door.
 		/// </summary>
 		Vector2 FinalPos;
 
-		MakeFinalDoor_Float( const std::shared_ptr<Level> &level );
+		MakeFinalDoor_Float( const boost::shared_ptr<Level> &level );
 
 		virtual void Phase1();
 
@@ -51,9 +51,9 @@ namespace CloudberryKingdom
 
 		virtual void Phase3();
 
-		static void AttachDoorAction( const std::shared_ptr<ILevelConnector> &door );
+		static void AttachDoorAction( const boost::shared_ptr<ILevelConnector> &door );
 
-		static void SetFinalDoor( const std::shared_ptr<Door> &door, const std::shared_ptr<Level> &level, Vector2 FinalPos );
+		static void SetFinalDoor( const boost::shared_ptr<Door> &door, const boost::shared_ptr<Level> &level, Vector2 FinalPos );
 	};
 }
 

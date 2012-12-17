@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	struct OneAnim_Texture
 	{
 
-		std::vector<std::shared_ptr<EzTexture> > Data;
+		std::vector<boost::shared_ptr<EzTexture> > Data;
 		float Speed;
 
 		OneAnim_Texture();
@@ -26,19 +26,19 @@ namespace CloudberryKingdom
 		AnimationData_Texture( const std::wstring &TextureName );
 		AnimationData_Texture( const std::wstring &TextureRoot, int StartFrame, int EndFrame );
 
-		AnimationData_Texture( const std::shared_ptr<EzTexture> &texture );
+		AnimationData_Texture( const boost::shared_ptr<EzTexture> &texture );
 
 		int Width, Height;
 
 		void Release();
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
-		AnimationData_Texture( const std::shared_ptr<AnimationData_Texture> &data );
+		AnimationData_Texture( const boost::shared_ptr<AnimationData_Texture> &data );
 
-		void CopyAnim( const std::shared_ptr<AnimationData_Texture> &data, int Anim );
+		void CopyAnim( const boost::shared_ptr<AnimationData_Texture> &data, int Anim );
 
 		void Init();
 
@@ -51,17 +51,17 @@ namespace CloudberryKingdom
 
 		void DeleteFrame( int anim, int frame );
 
-		void AddFrame( const std::shared_ptr<EzTexture> &val, int anim );
-		void Set( const std::shared_ptr<EzTexture> &val, int anim, int frame );
+		void AddFrame( const boost::shared_ptr<EzTexture> &val, int anim );
+		void Set( const boost::shared_ptr<EzTexture> &val, int anim, int frame );
 
-		std::shared_ptr<EzTexture> Get( int anim, int frame );
+		boost::shared_ptr<EzTexture> Get( int anim, int frame );
 
 		int LastSetFrame, LastSetAnim;
-		std::shared_ptr<EzTexture> NextKeyFrame();
+		boost::shared_ptr<EzTexture> NextKeyFrame();
 
-		std::shared_ptr<EzTexture> Calc( int anim, float t, int Length, bool Loop );
+		boost::shared_ptr<EzTexture> Calc( int anim, float t, int Length, bool Loop );
 
-		std::shared_ptr<EzTexture> Calc( int anim, float t );
+		boost::shared_ptr<EzTexture> Calc( int anim, float t );
 
 	
 		void InitializeInstanceFields();

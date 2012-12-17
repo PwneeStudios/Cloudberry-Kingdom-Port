@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		TR->RelPos = TR->AnimData.Calc( anim, t, AnimLength, Loop, Linear );
 	}
 
-	void ObjectBox::Write( const std::shared_ptr<BinaryWriter> &writer, const std::shared_ptr<ObjectClass> &MainObject )
+	void ObjectBox::Write( const boost::shared_ptr<BinaryWriter> &writer, const boost::shared_ptr<ObjectClass> &MainObject )
 	{
 		BL->Write( writer, MainObject );
 		TR->Write( writer, MainObject );
@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		writer->Write( Show );
 	}
 
-	void ObjectBox::Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<ObjectClass> &MainObject, int VersionNumber )
+	void ObjectBox::Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<ObjectClass> &MainObject, int VersionNumber )
 	{
 		BL->Read( reader, MainObject );
 		TR->Read( reader, MainObject );
@@ -76,14 +76,14 @@ namespace CloudberryKingdom
 		}
 	}
 
-	ObjectBox::ObjectBox( const std::shared_ptr<ObjectBox> &box, bool DeepClone )
+	ObjectBox::ObjectBox( const boost::shared_ptr<ObjectBox> &box, bool DeepClone )
 	{
 		InitializeInstanceFields();
-		BL = std::make_shared<ObjectVector>();
-		BL->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
+		BL = boost::make_shared<ObjectVector>();
+		BL->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
 		box->BL->Clone( BL, DeepClone );
-		TR = std::make_shared<ObjectVector>();
-		TR->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
+		TR = boost::make_shared<ObjectVector>();
+		TR->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
 		box->TR->Clone( TR, DeepClone );
 
 		Show = box->Show;
@@ -93,10 +93,10 @@ namespace CloudberryKingdom
 	ObjectBox::ObjectBox()
 	{
 		InitializeInstanceFields();
-		BL = std::make_shared<ObjectVector>();
-		BL->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
-		TR = std::make_shared<ObjectVector>();
-		TR->ModifiedEventCallback = std::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
+		BL = boost::make_shared<ObjectVector>();
+		BL->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( BL->shared_from_this() );
+		TR = boost::make_shared<ObjectVector>();
+		TR->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
 
 		Name = _T( "Box" );
 	}
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		return ( TR->Pos - BL->Pos );
 	}
 
-	void ObjectBox::DrawExtra( const std::shared_ptr<QuadDrawer> &Drawer, Color clr )
+	void ObjectBox::DrawExtra( const boost::shared_ptr<QuadDrawer> &Drawer, Color clr )
 	{
 		if ( !Show )
 			return;

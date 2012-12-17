@@ -66,13 +66,13 @@ namespace CloudberryKingdom
 		/// Returns a single randomly chosen item from the list
 		/// </summary>
 		/*template<typename T>
-		static T Choose( std::vector<T> list, const std::shared_ptr<Rand> &rnd );*/
+		static T Choose( std::vector<T> list, const boost::shared_ptr<Rand> &rnd );*/
 
 		/// <summary>
 		/// Choose a random element from the list
 		/// </summary>
 		template<typename T>
-		static T Choose( const std::vector<T> &list, const std::shared_ptr<Rand> &rnd )
+		static T Choose( const std::vector<T> &list, const boost::shared_ptr<Rand> &rnd )
 		{
 			if ( rnd == 0 )
 				return list[ 0 ];
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 		static void LevelIsFinished();
 
 		static void Break();
-		static void Write( const std::shared_ptr<Object> &obj );
+		static void Write( const boost::shared_ptr<Object> &obj );
 		static void Write( const wchar_t *str, ... );
 
 		static std::wstring DefaultObjectDirectory();
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 
 		static std::wstring SourceTextureDirectory();
 
-		static std::shared_ptr<AftermathData> CurrentAftermath;
+		static boost::shared_ptr<AftermathData> CurrentAftermath;
 
 		static bool IsMasochistic;
 
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static TSource Find( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		static TSource Find( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
@@ -160,7 +160,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static std::vector<TSource> FindAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		static std::vector<TSource> FindAll( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			std::vector<TSource> newlist = std::vector<TSource>();
 			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static bool All( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		static bool All( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			bool all = true;
 			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static bool Any( const std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		static bool Any( const std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static void RemoveAll( std::vector<TSource> &list, const std::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
+		static void RemoveAll( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			int OpenSlot = 0;
 			int i = 0;
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static void RemoveAll( std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_2<TSource, int, bool> > &predicate )
+		static void RemoveAll( std::vector<TSource> &source, const boost::shared_ptr<LambdaFunc_2<TSource, int, bool> > &predicate )
 		{
 			int i = 0;
 			int j = 0;
@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static TSource ArgMin( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+		static TSource ArgMin( const std::vector<TSource> &source, const boost::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 		{
 			TSource min = TSource();
 			float minval = 0;
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 		}
 
 		template<typename TSource>
-		static TSource ArgMax( const std::vector<TSource> &source, const std::shared_ptr<LambdaFunc_1<TSource, float> > &val )
+		static TSource ArgMax( const std::vector<TSource> &source, const boost::shared_ptr<LambdaFunc_1<TSource, float> > &val )
 		{
 			TSource max = TSource();
 			float maxval = 0;
@@ -268,7 +268,7 @@ namespace CloudberryKingdom
 			return max;
 		}
 
-		static std::shared_ptr<SimpleObject> LoadSimpleObject( const std::wstring &file );
+		static boost::shared_ptr<SimpleObject> LoadSimpleObject( const std::wstring &file );
 
 	
 		static float _VolumeFade;
@@ -277,25 +277,25 @@ namespace CloudberryKingdom
 		static void setVolumeFade( const float &value );
 
 		static float CurSongVolume;
-		static std::shared_ptr<WrappedFloat> SoundVolume, MusicVolume;
+		static boost::shared_ptr<WrappedFloat> SoundVolume, MusicVolume;
 		static bool FixedTimeStep;
 		static bool WindowBorder;
 
-		static std::shared_ptr<XnaGameClass> GameClass;
+		static boost::shared_ptr<XnaGameClass> GameClass;
 
-		static std::shared_ptr<CloudberryKingdomGame> TheGame;
+		static boost::shared_ptr<CloudberryKingdomGame> TheGame;
 		const static Version &getGameVersion();
-		static void AddToDo( const std::shared_ptr<Lambda> &todo );
+		static void AddToDo( const boost::shared_ptr<Lambda> &todo );
 
 		static std::vector<std::wstring> ButtonNames;
 		static std::vector<std::wstring> DirNames;
 
-		static std::shared_ptr<GameFactory> CurGameType;
-		static std::shared_ptr<GameData> CurGameData;
-		static std::shared_ptr<Level> CurLevel;
-		static std::shared_ptr<Camera> DummyCamera;
-		const static std::shared_ptr<Camera> &getCurCamera();
-		static std::shared_ptr<GameData> WorldMap, TitleGame;
+		static boost::shared_ptr<GameFactory> CurGameType;
+		static boost::shared_ptr<GameData> CurGameData;
+		static boost::shared_ptr<Level> CurLevel;
+		static boost::shared_ptr<Camera> DummyCamera;
+		const static boost::shared_ptr<Camera> &getCurCamera();
+		static boost::shared_ptr<GameData> WorldMap, TitleGame;
 
 		static std::vector<int> VibrateTimes;
 
@@ -370,9 +370,9 @@ namespace CloudberryKingdom
 		static bool CntrlDown();
 
 		static std::wstring RemoveAfter( const std::wstring &s, const std::wstring &occurence );
-		static std::wstring SantitizeOneLineString( std::wstring s, const std::shared_ptr<EzFont> &font );
+		static std::wstring SantitizeOneLineString( std::wstring s, const boost::shared_ptr<EzFont> &font );
 #else
-		static std::wstring SantitizeOneLineString( const std::wstring &s, const std::shared_ptr<EzFont> &font );
+		static std::wstring SantitizeOneLineString( const std::wstring &s, const boost::shared_ptr<EzFont> &font );
 #endif
 		static std::vector<GamePadState> GamepadState;
 		static std::vector<GamePadState> PrevGamepadState;
@@ -387,32 +387,32 @@ namespace CloudberryKingdom
 		/// </summary>
 		static std::wstring FirstFolder( std::wstring path, const std::wstring &ignore );
 
-		static std::shared_ptr<EzTexture> Texture( const std::wstring &name );
-		static std::shared_ptr<EzSound> Sound( const std::wstring &name );
+		static boost::shared_ptr<EzTexture> Texture( const std::wstring &name );
+		static boost::shared_ptr<EzSound> Sound( const std::wstring &name );
 		static void Pop();
 		static void Pop( int Pitch );
 
-		static std::shared_ptr<GameTime> gameTime;
+		static boost::shared_ptr<GameTime> gameTime;
 
-		static std::shared_ptr<Rand> GlobalRnd;
-		static std::shared_ptr<EzEffectWad> EffectWad;
-		static std::shared_ptr<EzEffect> BasicEffect, NoTexture, CircleEffect, LightSourceEffect, HslEffect, HslGreenEffect, WindowEffect;
-		static std::shared_ptr<Effect> PaintEffect_SpriteBatch;
-		static std::shared_ptr<EzTextureWad> TextureWad;
-		static std::shared_ptr<ContentManager> SoundContentManager;
-		static std::shared_ptr<EzSoundWad> SoundWad, PrivateSoundWad;
-		static std::shared_ptr<EzSongWad> SongWad;
-		static std::shared_ptr<QuadDrawer> QDrawer;
-		static std::shared_ptr<MainRender> Render;
-		static std::shared_ptr<GraphicsDevice> Device;
-		static std::shared_ptr<RenderTarget2D> DestinationRenderTarget;
+		static boost::shared_ptr<Rand> GlobalRnd;
+		static boost::shared_ptr<EzEffectWad> EffectWad;
+		static boost::shared_ptr<EzEffect> BasicEffect, NoTexture, CircleEffect, LightSourceEffect, HslEffect, HslGreenEffect, WindowEffect;
+		static boost::shared_ptr<Effect> PaintEffect_SpriteBatch;
+		static boost::shared_ptr<EzTextureWad> TextureWad;
+		static boost::shared_ptr<ContentManager> SoundContentManager;
+		static boost::shared_ptr<EzSoundWad> SoundWad, PrivateSoundWad;
+		static boost::shared_ptr<EzSongWad> SongWad;
+		static boost::shared_ptr<QuadDrawer> QDrawer;
+		static boost::shared_ptr<MainRender> Render;
+		static boost::shared_ptr<GraphicsDevice> Device;
+		static boost::shared_ptr<RenderTarget2D> DestinationRenderTarget;
 
 		static float t, dt;
 
 		static int DrawCount, PhsxCount;
 
-		static std::shared_ptr<EzSong> Song_140mph, Song_Happy, Song_BlueChair, Song_Ripcurl, Song_Evidence, Song_GetaGrip, Song_House, Song_Nero, Song_FatInFire, Song_Heavens, Song_TidyUp, Song_WritersBlock;
-		static std::vector<std::shared_ptr<EzSong> > SongList_Standard;
+		static boost::shared_ptr<EzSong> Song_140mph, Song_Happy, Song_BlueChair, Song_Ripcurl, Song_Evidence, Song_GetaGrip, Song_House, Song_Nero, Song_FatInFire, Song_Heavens, Song_TidyUp, Song_WritersBlock;
+		static std::vector<boost::shared_ptr<EzSong> > SongList_Standard;
 
 		static bool FreeCam;
 		static bool DrawBoxes;
@@ -425,9 +425,9 @@ namespace CloudberryKingdom
 		static void setPhsxSpeed( const int &value );
 
 		static bool ShowLoadingScreen;
-		static std::shared_ptr<ILoadingScreen> CurrentLoadingScreen;
+		static boost::shared_ptr<ILoadingScreen> CurrentLoadingScreen;
 
-		static void LoadBasicArt( const std::shared_ptr<ContentManager> &Content );
+		static void LoadBasicArt( const boost::shared_ptr<ContentManager> &Content );
 
 		static std::wstring GetFileName( const std::wstring &FilePath );
 
@@ -441,7 +441,7 @@ namespace CloudberryKingdom
 
 		static std::vector<std::wstring> GetFiles( const std::wstring &path, bool IncludeSubdirectories );
 
-		static void LoadEffects( const std::shared_ptr<ContentManager> &Content, bool CreateNewWad );
+		static void LoadEffects( const boost::shared_ptr<ContentManager> &Content, bool CreateNewWad );
 
 		static float BoxSize( Vector2 TR, Vector2 BL );
 
@@ -473,24 +473,24 @@ namespace CloudberryKingdom
 
 
 
-		static std::vector<std::wstring> GetBitsFromReader( const std::shared_ptr<StreamReader> &reader );
+		static std::vector<std::wstring> GetBitsFromReader( const boost::shared_ptr<StreamReader> &reader );
 
 
-		//static std::shared_ptr<Object> ReadFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamReader> &reader );
+		//static boost::shared_ptr<Object> ReadFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamReader> &reader );
 
 	
-		//static void ReadList( const std::shared_ptr<StreamReader> &reader, const std::shared_ptr<System::Collections::IList> &list, const std::shared_ptr<Type> &itemType );
+		//static void ReadList( const boost::shared_ptr<StreamReader> &reader, const boost::shared_ptr<System::Collections::IList> &list, const boost::shared_ptr<Type> &itemType );
 		static int WriteRecursiveDepth;
 		static int WriteObjId;
 	
 //ORIGINAL LINE: public static void WriteFields(object obj, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		//static void WriteFields( const std::shared_ptr<Object> &obj, const std::shared_ptr<StreamWriter> &writer, ... );
+		//static void WriteFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamWriter> &writer, ... );
 
 	
 //ORIGINAL LINE: public static void WriteFieldsToCode(object obj, string prefix, StreamWriter writer, params string[] VariableNames)
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
-		static void WriteFieldsToCode( const std::shared_ptr<Object> &obj, const std::wstring &prefix, const std::shared_ptr<StreamWriter> &writer, ... );
+		static void WriteFieldsToCode( const boost::shared_ptr<Object> &obj, const std::wstring &prefix, const boost::shared_ptr<StreamWriter> &writer, ... );
 	
 		static int GetObjId();
 		static std::wstring ObjName( int id );
@@ -502,8 +502,8 @@ namespace CloudberryKingdom
 		//static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, ... );
 		static std::map<std::wstring, int> GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords );
 
-		/*static void ReadLineToObj( std::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits );
-		static void ReadLineToObj( std::shared_ptr<Object> &obj, std::wstring field, std::vector<std::wstring> &Bits );*/
+		/*static void ReadLineToObj( boost::shared_ptr<Object> &obj, std::vector<std::wstring> &Bits );
+		static void ReadLineToObj( boost::shared_ptr<Object> &obj, std::wstring field, std::vector<std::wstring> &Bits );*/
 
 		static bool BitsHasBit( std::vector<std::wstring> &Bits, const std::wstring &Bit );
 
@@ -527,9 +527,9 @@ namespace CloudberryKingdom
 
 		static Color ParseToColor( const std::wstring &str );
 
-		static std::shared_ptr<EzSound> ParseToEzSound( const std::wstring &str );
+		static boost::shared_ptr<EzSound> ParseToEzSound( const std::wstring &str );
 
-		static std::shared_ptr<EzSound> NewSound( const std::wstring &name, float volume );
+		static boost::shared_ptr<EzSound> NewSound( const std::wstring &name, float volume );
 
 		/// <summary>
 		/// Returns the substring inside two quotations.
@@ -547,7 +547,7 @@ namespace CloudberryKingdom
 		static int Length();*/
 
 		/*template<typename T>
-		static std::shared_ptr<IEnumerable<T> > GetValues();*/
+		static boost::shared_ptr<IEnumerable<T> > GetValues();*/
 
 		static unsigned char FloatToByte( float x );
 
@@ -562,7 +562,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		/// <param name="obj"></param>
 		/// <param name="pos"></param>
-		static void MoveTo( const std::shared_ptr<ObjectBase> &obj, Vector2 pos );
+		static void MoveTo( const boost::shared_ptr<ObjectBase> &obj, Vector2 pos );
 
 		/// <summary>
 		/// Takes in world coordinates and returns screen coordinates.
@@ -570,21 +570,21 @@ namespace CloudberryKingdom
 		/// <param name="pos"></param>
 		/// <param name="cam"></param>
 		/// <returns></returns>
-		static Vector2 ToScreenCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 ZoomMod );
+		static Vector2 ToScreenCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 ZoomMod );
 
 		/// <summary>
 		/// Takes in screen coordinates and returns world coordinates.
 		/// (0,0) corresponds to the top left corner of the screen.
 		/// </summary>
-		static Vector2 ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam );
-		static Vector2 ToGUICoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom );
+		static Vector2 ToGUICoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam );
+		static Vector2 ToGUICoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 zoom );
 
 		/// <summary>
 		/// Takes in screen coordinates and returns world coordinates.
 		/// (0,0) corresponds to the top left corner of the screen.
 		/// </summary>
-		static Vector2 ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam );
-		static Vector2 ToWorldCoordinates( Vector2 pos, const std::shared_ptr<Camera> &cam, Vector2 zoom );
+		static Vector2 ToWorldCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam );
+		static Vector2 ToWorldCoordinates( Vector2 pos, const boost::shared_ptr<Camera> &cam, Vector2 zoom );
 
 		/// <summary>
 		/// Incremented when StartGUIDraw is called.
@@ -614,7 +614,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Core wrapper for drawing text. Assumes SpriteBatch is started.
 		/// </summary>
-		static void DrawText( Vector2 pos, const std::shared_ptr<Camera> &cam, const std::wstring &str, const std::shared_ptr<SpriteFont> &font );
+		static void DrawText( Vector2 pos, const boost::shared_ptr<Camera> &cam, const std::wstring &str, const boost::shared_ptr<SpriteFont> &font );
 
 		static void SetDefaultEffectParams( float AspectRatio );
 
@@ -655,21 +655,21 @@ namespace CloudberryKingdom
 		/// <param name="obj">The IObject to be moved. Must also be IBound</param>
 		/// <param name="BL">BL extent of the bounded area</param>
 		/// <param name="TR">TR extent of the bounded area</param>
-		static void EnsureBounds_X( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
+		static void EnsureBounds_X( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
 		/// <summary>
 		/// Moves an IObject/IBound object to within BL.Y and TR.Y
 		/// </summary>
 		/// <param name="obj">The IObject to be moved. Must also be IBound</param>
 		/// <param name="BL">BL extent of the bounded area</param>
 		/// <param name="TR">TR extent of the bounded area</param>
-		static void EnsureBounds_Y( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
+		static void EnsureBounds_Y( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
 		/// <summary>
 		/// Moves an IObject/IBound object to within BL and TR
 		/// </summary>
 		/// <param name="obj">The IObject to be moved. Must also be IBound</param>
 		/// <param name="BL">BL extent of the bounded area</param>
 		/// <param name="TR">TR extent of the bounded area</param>
-		static void EnsureBounds( const std::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
+		static void EnsureBounds( const boost::shared_ptr<IBound> &obj, Vector2 TR, Vector2 BL );
 	};
 }
 

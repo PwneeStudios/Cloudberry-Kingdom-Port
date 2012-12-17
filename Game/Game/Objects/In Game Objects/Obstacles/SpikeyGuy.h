@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		struct SpikeyGuyTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Ball;
-			std::shared_ptr<SpriteInfo> Base;
+			boost::shared_ptr<SpriteInfo> Ball;
+			boost::shared_ptr<SpriteInfo> Base;
 
-			std::shared_ptr<LineSpriteInfo> Chain;
+			boost::shared_ptr<LineSpriteInfo> Chain;
 
 			float Radius;
 
@@ -40,14 +40,14 @@ namespace CloudberryKingdom
 		int Dir;
 
 	
-		std::shared_ptr<QuadClass> Anchor, Head;
+		boost::shared_ptr<QuadClass> Anchor, Head;
 
 	
 		virtual void OnAttachedToBlock();
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		SpikeyGuy( bool BoxesOnly );
 
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 	
 		virtual void Move( Vector2 shift );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

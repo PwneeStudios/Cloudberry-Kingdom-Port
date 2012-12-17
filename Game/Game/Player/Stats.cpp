@@ -5,9 +5,9 @@
 namespace CloudberryKingdom
 {
 
-	void PlayerStats::WriteChunk_4( const std::shared_ptr<BinaryWriter> &writer )
+	void PlayerStats::WriteChunk_4( const boost::shared_ptr<BinaryWriter> &writer )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 4;
 
 		chunk->WriteSingle( 0, Score );
@@ -27,14 +27,14 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void PlayerStats::ReadChunk_4( const std::shared_ptr<Chunk> &ParentChunk )
+	void PlayerStats::ReadChunk_4( const boost::shared_ptr<Chunk> &ParentChunk )
 	{
-		std::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
+		boost::shared_ptr<Chunks> chunks = Chunks::Get( ParentChunk );
 		chunks->StartGettingChunks();
 
 		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
 			switch ( chunk->Type )
 			{
@@ -76,9 +76,9 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void PlayerStats::WriteDeathChunk_9( const std::shared_ptr<Chunk> &ParentChunk, int Index )
+	void PlayerStats::WriteDeathChunk_9( const boost::shared_ptr<Chunk> &ParentChunk, int Index )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = 9;
 
 		chunk->Write( Index );
@@ -87,14 +87,14 @@ namespace CloudberryKingdom
 		chunk->Finish( *ParentChunk.get() );
 	}
 
-	void PlayerStats::ReadDeathChunk_9( const std::shared_ptr<Chunk> &chunk )
+	void PlayerStats::ReadDeathChunk_9( const boost::shared_ptr<Chunk> &chunk )
 	{
 		int Index = chunk->ReadInt();
 		if ( Index >= 0 && Index < static_cast<int>( DeathsBy.size() ) )
 			DeathsBy[ Index ] = chunk->ReadInt();
 	}
 
-	std::shared_ptr<PlayerStats> PlayerStats::Absorb( const std::shared_ptr<PlayerStats> &stats )
+	boost::shared_ptr<PlayerStats> PlayerStats::Absorb( const boost::shared_ptr<PlayerStats> &stats )
 	{
 		/*for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
 		{

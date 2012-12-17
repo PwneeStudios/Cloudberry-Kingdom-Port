@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		Tools::SongWad->Restart( true );
 	}
 
-	HeroRush_Tutorial::TutorialOrSkipProxy::TutorialOrSkipProxy( const std::shared_ptr<HeroRush_Tutorial> &tutorial )
+	HeroRush_Tutorial::TutorialOrSkipProxy::TutorialOrSkipProxy( const boost::shared_ptr<HeroRush_Tutorial> &tutorial )
 	{
 		this->tutorial = tutorial;
 	}
@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		tutorial->TutorialOrSkip();
 	}
 
-	HeroRush_Tutorial::ListenerHelper::ListenerHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text )
+	HeroRush_Tutorial::ListenerHelper::ListenerHelper( const boost::shared_ptr<HeroRush_Tutorial> &tutorial, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->tutorial = tutorial;
 		this->text = text;
@@ -43,11 +43,11 @@ namespace CloudberryKingdom
 
 	void HeroRush_Tutorial::ListenerHelper::Apply()
 	{
-		tutorial->MyGame->WaitThenDo( 12, std::make_shared<TutorialOrSkipProxy>( tutorial ) );
+		tutorial->MyGame->WaitThenDo( 12, boost::make_shared<TutorialOrSkipProxy>( tutorial ) );
 		text->Kill( tutorial->SoundOnKill );
 	}
 
-	HeroRush_Tutorial::AddGameObjectHelper::AddGameObjectHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text )
+	HeroRush_Tutorial::AddGameObjectHelper::AddGameObjectHelper( const boost::shared_ptr<HeroRush_Tutorial> &tutorial, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->tutorial = tutorial;
 		this->text = text;
@@ -56,10 +56,10 @@ namespace CloudberryKingdom
 	void HeroRush_Tutorial::AddGameObjectHelper::Apply()
 	{
 		// On (A) go to next part of the tutorial
-		tutorial->MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<ListenerHelper>( tutorial, text ) ) ) );
+		tutorial->MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<ListenerHelper>( tutorial, text ) ) ) );
 	}
 
-	HeroRush_Tutorial::TitleProxy::TitleProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::TitleProxy::TitleProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		hrt->Title();
 	}
 
-	HeroRush_Tutorial::TitleNextTutorialHelper::TitleNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text )
+	HeroRush_Tutorial::TitleNextTutorialHelper::TitleNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->hrt = hrt;
 		this->text = text;
@@ -77,11 +77,11 @@ namespace CloudberryKingdom
 
 	void HeroRush_Tutorial::TitleNextTutorialHelper::Apply()
 	{
-		hrt->MyGame->WaitThenDo( 12, std::make_shared<TutorialOrSkipProxy>( hrt ) );
+		hrt->MyGame->WaitThenDo( 12, boost::make_shared<TutorialOrSkipProxy>( hrt ) );
 		text->Kill( hrt->SoundOnKill );
 	}
 
-	HeroRush_Tutorial::HeroRushTimerShowHelper::HeroRushTimerShowHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::HeroRushTimerShowHelper::HeroRushTimerShowHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 		hrt->HeroRush->Timer->Show();
 	}
 
-	HeroRush_Tutorial::PointAtDoorNextTutorialHelper::PointAtDoorNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text )
+	HeroRush_Tutorial::PointAtDoorNextTutorialHelper::PointAtDoorNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->hrt = hrt;
 		this->arrow = arrow;
@@ -103,11 +103,11 @@ namespace CloudberryKingdom
 		arrow->Release();
 		text->Kill( hrt->SoundOnKill );
 
-		hrt->MyGame->WaitThenDo( 7, std::make_shared<HeroRushTimerShowHelper>( hrt ) );
-		hrt->MyGame->WaitThenDo( 0, std::make_shared<PointAtTimerProxy>( hrt ) );
+		hrt->MyGame->WaitThenDo( 7, boost::make_shared<HeroRushTimerShowHelper>( hrt ) );
+		hrt->MyGame->WaitThenDo( 0, boost::make_shared<PointAtTimerProxy>( hrt ) );
 	}
 
-	HeroRush_Tutorial::PointAtTimerProxy::PointAtTimerProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::PointAtTimerProxy::PointAtTimerProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		hrt->PointAtTimer();
 	}
 
-	HeroRush_Tutorial::PointAtTimerNextTutorialHelper::PointAtTimerNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text, const std::shared_ptr<GUI_Text> &text2 )
+	HeroRush_Tutorial::PointAtTimerNextTutorialHelper::PointAtTimerNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text, const boost::shared_ptr<GUI_Text> &text2 )
 	{
 		this->hrt = hrt;
 		this->arrow = arrow;
@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 		text2->Kill( false );
 	}
 
-	HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::PointAtCoinsNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text, std::vector<std::shared_ptr<Arrow> > &arrows )
+	HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::PointAtCoinsNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text, std::vector<boost::shared_ptr<Arrow> > &arrows )
 	{
 		this->hrt = hrt;
 		this->text = text;
@@ -143,14 +143,14 @@ namespace CloudberryKingdom
 	void HeroRush_Tutorial::PointAtCoinsNextTutorialHelper::Apply()
 	{
 		hrt->PointAtScore();
-		for ( std::vector<std::shared_ptr<Arrow> >::const_iterator arrow = arrows.begin(); arrow != arrows.end(); ++arrow )
+		for ( std::vector<boost::shared_ptr<Arrow> >::const_iterator arrow = arrows.begin(); arrow != arrows.end(); ++arrow )
 		{
 			( *arrow )->Release();
 		}
 		text->Kill( hrt->SoundOnKill );
 	}
 
-	HeroRush_Tutorial::PointAtScoreNextTutorialHelper::PointAtScoreNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text )
+	HeroRush_Tutorial::PointAtScoreNextTutorialHelper::PointAtScoreNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text )
 	{
 		this->hrt = hrt;
 		this->arrow = arrow;
@@ -159,13 +159,13 @@ namespace CloudberryKingdom
 
 	void HeroRush_Tutorial::PointAtScoreNextTutorialHelper::Apply()
 	{
-		hrt->MyGame->WaitThenDo( 0, std::make_shared<ReadyProxy>( hrt ) );
+		hrt->MyGame->WaitThenDo( 0, boost::make_shared<ReadyProxy>( hrt ) );
 		//Ready();
 		arrow->Release();
 		text->Kill( false );
 	}
 
-	HeroRush_Tutorial::ReadyProxy::ReadyProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::ReadyProxy::ReadyProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -175,17 +175,17 @@ namespace CloudberryKingdom
 		hrt->Ready();
 	}
 
-	HeroRush_Tutorial::ReadyTutorialHelper::ReadyTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::ReadyTutorialHelper::ReadyTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
 
 	void HeroRush_Tutorial::ReadyTutorialHelper::Apply()
 	{
-		TutorialHelper::ReadyGo( hrt->MyGame, std::make_shared<EndProxy>( hrt ) );
+		TutorialHelper::ReadyGo( hrt->MyGame, boost::make_shared<EndProxy>( hrt ) );
 	}
 
-	HeroRush_Tutorial::PauseHeroRushTimerHelper::PauseHeroRushTimerHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::PauseHeroRushTimerHelper::PauseHeroRushTimerHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -195,7 +195,7 @@ namespace CloudberryKingdom
 		hrt->HeroRush->Timer->PauseOnPause = true;
 	}
 
-	HeroRush_Tutorial::EndProxy::EndProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt )
+	HeroRush_Tutorial::EndProxy::EndProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt )
 	{
 		this->hrt = hrt;
 	}
@@ -211,7 +211,7 @@ namespace CloudberryKingdom
 		PlayerManager::SavePlayerData->Changed = true;
 	}
 
-	HeroRush_Tutorial::HeroRush_Tutorial( const std::shared_ptr<Challenge_HeroRush> &HeroRush )
+	HeroRush_Tutorial::HeroRush_Tutorial( const boost::shared_ptr<Challenge_HeroRush> &HeroRush )
 	{
 		InitializeInstanceFields();
 		this->HeroRush = HeroRush;
@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		setPauseGame( true );
 
 		// Find the initial door
-		std::shared_ptr<Door> door = std::static_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 != door )
 		{
 			for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
@@ -234,12 +234,12 @@ namespace CloudberryKingdom
 		}
 
 		// Start the music
-		MyGame->WaitThenDo( 20, std::make_shared<StartMusicHelper>() );
+		MyGame->WaitThenDo( 20, boost::make_shared<StartMusicHelper>() );
 
 		if ( ShowTitle || !HasWatchedOnce || CloudberryKingdomGame::AlwaysGiveTutorials )
-			MyGame->WaitThenDo( 27, std::make_shared<TitleProxy>( std::static_pointer_cast<HeroRush_Tutorial>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) ) );
+			MyGame->WaitThenDo( 27, boost::make_shared<TitleProxy>( boost::static_pointer_cast<HeroRush_Tutorial>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) ) );
 		else
-			MyGame->WaitThenDo( 20, std::make_shared<ReadyProxy>( std::static_pointer_cast<HeroRush_Tutorial>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) ) );
+			MyGame->WaitThenDo( 20, boost::make_shared<ReadyProxy>( boost::static_pointer_cast<HeroRush_Tutorial>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) ) );
 	}
 
 	void HeroRush_Tutorial::TutorialOrSkip()
@@ -265,32 +265,32 @@ namespace CloudberryKingdom
 	{
 		ShowTitle = false;
 
-		std::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HERO_RUSH );
+		boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HERO_RUSH );
 
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<TitleNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<TitleNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtDoor()
 	{
 		//HeroRush.Timer.Show();
 
-		std::shared_ptr<ObjectBase> end_door = MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
+		boost::shared_ptr<ObjectBase> end_door = MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
 		Vector2 endpos = end_door->getCore()->Data.Position;
 
-		std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>();
+		boost::shared_ptr<Arrow> arrow = boost::make_shared<Arrow>();
 		arrow->SetOrientation( Arrow::Orientation_RIGHT );
 		arrow->Move( endpos + Vector2( -673, 0 ) );
 		arrow->PointTo( endpos );
 		MyGame->AddGameObject( arrow );
 
-		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_TO_THE_EXIT, arrow->getCore()->Data.Position + Vector2(-200, 400) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_TO_THE_EXIT, arrow->getCore()->Data.Position + Vector2(-200, 400) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtDoorNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtDoorNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtTimer()
@@ -298,32 +298,32 @@ namespace CloudberryKingdom
 		//Vector2 timerpos = HeroRush.Timer.ApparentPos;
 		Vector2 timerpos = MyGame->getCamPos() + Vector2(-60, 1000);
 
-		std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>();
+		boost::shared_ptr<Arrow> arrow = boost::make_shared<Arrow>();
 		arrow->SetOrientation( Arrow::Orientation_RIGHT );
 		arrow->Move( timerpos + Vector2( 30, -655 ) );
 		arrow->PointTo( timerpos );
 		MyGame->AddGameObject( arrow );
 
 
-		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SECONDS_ON_THE_CLOCK, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SECONDS_ON_THE_CLOCK, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
 
-		std::shared_ptr<GUI_Text> text2 = MakeMagic( GUI_Text, ( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) ) );
+		boost::shared_ptr<GUI_Text> text2 = MakeMagic( GUI_Text, ( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) ) );
 
 		MyGame->AddGameObject( text );
 		MyGame->AddGameObject( text2 );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtTimerNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, text2 ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtTimerNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text, text2 ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtCoins()
 	{
-		std::vector<std::shared_ptr<Arrow> > arrows;
+		std::vector<boost::shared_ptr<Arrow> > arrows;
 		for ( ObjectVec::const_iterator coin = MyGame->MyLevel->GetObjectList( ObjectType_COIN ).begin(); coin != MyGame->MyLevel->GetObjectList(ObjectType_COIN).end(); ++coin )
 		{
 			Vector2 coinpos = ( *coin )->getCore()->Data.Position;
 
-			std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>();
+			boost::shared_ptr<Arrow> arrow = boost::make_shared<Arrow>();
 			arrow->SetScale( 300 );
 			arrow->SetOrientation( Arrow::Orientation_LEFT );
 			arrow->Move( coinpos + Vector2( 120, 200 ) * 1.04f );
@@ -332,21 +332,21 @@ namespace CloudberryKingdom
 			arrows.push_back( arrow );
 		}
 
-		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_COINS_ADD_SECONDS, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_COINS_ADD_SECONDS, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtCoinsNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text, arrows ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtCoinsNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), text, arrows ) ) ) );
 	}
 
 	void HeroRush_Tutorial::PointAtScore()
 	{
-		std::shared_ptr<GUI_Score> score = 0;
+		boost::shared_ptr<GUI_Score> score = 0;
 		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
-			if ( std::static_pointer_cast<GUI_Score>( *obj ) != 0 )
+			if ( boost::static_pointer_cast<GUI_Score>( *obj ) != 0 )
 			{
-				score = std::static_pointer_cast<GUI_Score>( *obj );
+				score = boost::static_pointer_cast<GUI_Score>( *obj );
 				break;
 			}
 		}
@@ -358,17 +358,17 @@ namespace CloudberryKingdom
 
 		Vector2 scorepos = score->MyPile->FancyPos->AbsVal + Vector2( -60, 40 );
 
-		std::shared_ptr<Arrow> arrow = std::make_shared<Arrow>();
+		boost::shared_ptr<Arrow> arrow = boost::make_shared<Arrow>();
 		arrow->SetOrientation( Arrow::Orientation_RIGHT );
 		arrow->Move( scorepos + Vector2( -510, -430 ) );
 		arrow->PointTo( scorepos );
 		MyGame->AddGameObject( arrow );
 
-		std::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_AHIGH_SCORE, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_AHIGH_SCORE, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
-		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<PointAtScoreNextTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
+		MyGame->AddGameObject( MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<PointAtScoreNextTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ), arrow, text ) ) ) );
 	}
 
 	void HeroRush_Tutorial::Ready()
@@ -380,13 +380,13 @@ namespace CloudberryKingdom
 		HeroRush->Timer->Show();
 		HeroRush->Timer->PauseOnPause = false; // Start the timer
 
-		MyGame->WaitThenDo( Wait, std::make_shared<ReadyTutorialHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( Wait, boost::make_shared<ReadyTutorialHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) );
 	}
 
 	void HeroRush_Tutorial::End()
 	{
 		setPauseGame( false );
-		MyGame->WaitThenDo( 25, std::make_shared<PauseHeroRushTimerHelper>( std::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 25, boost::make_shared<PauseHeroRushTimerHelper>( boost::static_pointer_cast<HeroRush_Tutorial>( shared_from_this() ) ) );
 
 		Release();
 	}

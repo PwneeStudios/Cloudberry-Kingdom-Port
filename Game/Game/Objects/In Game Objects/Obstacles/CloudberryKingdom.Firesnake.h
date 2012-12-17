@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		struct FiresnakeTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 
 		
 			void InitializeInstanceFields();
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 	
 		Vector2 Size;
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		Firesnake( bool BoxesOnly );
 
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

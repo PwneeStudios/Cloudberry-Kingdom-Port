@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	//HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	HeroLevel::HeroLevel( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
+	//HeroLevel::HeroLevel( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	HeroLevel::HeroLevel( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) :
 		ShowHeroLevel( 0 )
 	{
 	}
-	std::shared_ptr<HeroLevel> HeroLevel::HeroLevel_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) 
+	boost::shared_ptr<HeroLevel> HeroLevel::HeroLevel_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) 
 	{
 		InitializeInstanceFields();
 
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<HeroLevel>( shared_from_this() );
+		return boost::static_pointer_cast<HeroLevel>( shared_from_this() );
 	}
 
 	void HeroLevel::ReleaseBody()
@@ -39,12 +39,12 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		SetHeroLevel();
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void HeroLevel::SetHeroLevel()
@@ -57,11 +57,11 @@ namespace CloudberryKingdom
 		{
 			//string name = MyCharacterSelect.Player.GetName();
 			std::wstring name = _T( "Level 56" );
-			Text = std::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
+			Text = boost::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
 		}
 		else
 		{
-			Text = std::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

@@ -6,54 +6,54 @@ namespace CloudberryKingdom
 {
 
 #if defined(WINDOWS)
-	SaveLoadSeedMenu::MakeSaveHelper::MakeSaveHelper( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	SaveLoadSeedMenu::MakeSaveHelper::MakeSaveHelper( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		this->panel = panel;
 		this->player = player;
 	}
 
-	void SaveLoadSeedMenu::MakeSaveHelper::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::MakeSaveHelper::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		SaveLoadSeedMenu::Save( _item, panel, player );
 	}
 #else
-	SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::SaveLoadSeedsMakeSaveLambda( const std::shared_ptr<PlayerData> &player )
+	SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::SaveLoadSeedsMakeSaveLambda( const boost::shared_ptr<PlayerData> &player )
 	{
 		this->player = player;
 	}
 
-	void SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		SaveLoadSeedMenu::Save( item, player );
 	}
 #endif
 
-	SaveLoadSeedMenu::LoadProxy::LoadProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm )
+	SaveLoadSeedMenu::LoadProxy::LoadProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
 		this->slsm = slsm;
 	}
 
-	void SaveLoadSeedMenu::LoadProxy::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::LoadProxy::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		slsm->Load( _item );
 	}
 
-	SaveLoadSeedMenu::CopyProxy::CopyProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm )
+	SaveLoadSeedMenu::CopyProxy::CopyProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
 		this->slsm = slsm;
 	}
 
-	void SaveLoadSeedMenu::CopyProxy::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::CopyProxy::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		slsm->Copy( _item );
 	}
 
-	SaveLoadSeedMenu::LoadStringProxy::LoadStringProxy( const std::shared_ptr<SaveLoadSeedMenu> &slsm )
+	SaveLoadSeedMenu::LoadStringProxy::LoadStringProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
 		this->slsm = slsm;
 	}
 
-	void SaveLoadSeedMenu::LoadStringProxy::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::LoadStringProxy::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		slsm->LoadString( _item );
 	}
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<SaveLoadSeedMenu> SaveLoadSeedMenu::SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave )
+	boost::shared_ptr<SaveLoadSeedMenu> SaveLoadSeedMenu::SaveLoadSeedMenu_Construct( int Control, bool CanLoad, bool CanSave )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() );
+		return boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() );
 	}
 
 	void SaveLoadSeedMenu::Init()
@@ -90,29 +90,29 @@ namespace CloudberryKingdom
 		player = MenuItem::GetActivatingPlayerData();
 
 		// Header
-		HeaderText = std::make_shared<EzText>( Localization::Words_RANDOM_SEED, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_RANDOM_SEED, ItemFont );
 		HeaderText->Name = _T( "Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 		HeaderText->setPos( HeaderPos );
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		if ( CanSave )
 		{
 			// Save seed
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 			item->Name = _T( "Save" );
-			item->setGo( MakeSave( std::static_pointer_cast<GUI_Panel>( shared_from_this() ), player ) );
+			item->setGo( MakeSave( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), player ) );
 			AddItem( item );
 		}
 
 		if ( CanLoad )
 		{
 			// Load seed
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
 			item->Name = _T( "Load" );
-			item->setGo( std::make_shared<LoadProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
+			item->setGo( boost::make_shared<LoadProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 
@@ -120,24 +120,24 @@ namespace CloudberryKingdom
 		if ( CanSave )
 		{
 			// Copy seed
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_COPY_TO_CLIPBOARD, ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_COPY_TO_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "Copy" );
-			item->setGo( std::make_shared<CopyProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
+			item->setGo( boost::make_shared<CopyProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 
 		if ( CanLoad )
 		{
 			// Load seed from string
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_FROM_CLIPBOARD, ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_FROM_CLIPBOARD, ItemFont ) );
 			item->Name = _T( "LoadString" );
-			item->setGo( std::make_shared<LoadStringProxy>( std::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
+			item->setGo( boost::make_shared<LoadStringProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
 		}
 	#endif
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		if ( CanLoad && CanSave )
 		{
-			std::shared_ptr<MenuItem> _item;
+			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( _T( "Save" ) );
 			if ( _item != 0 )
 			{
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 
 			MyPile->FindEzText( _T( "Header" ) )->setPos( Vector2( 402.7776f, 871.8887f ) );
 
-			std::shared_ptr<QuadClass> _q;
+			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( _T( "Backdrop" ) );
 			if ( _q != 0 )
 			{
@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 		}
 		else if ( CanLoad && !CanSave )
 		{
-			std::shared_ptr<MenuItem> _item;
+			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( _T( "Save" ) );
 			if ( _item != 0 )
 			{
@@ -223,7 +223,7 @@ namespace CloudberryKingdom
 
 			MyPile->FindEzText( _T( "Header" ) )->setPos( Vector2( 402.7776f, 871.8887f ) );
 
-			std::shared_ptr<QuadClass> _q;
+			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( _T( "Backdrop" ) );
 			if ( _q != 0 )
 			{
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			std::shared_ptr<MenuItem> _item;
+			boost::shared_ptr<MenuItem> _item;
 			_item = MyMenu->FindItemByName( _T( "Save" ) );
 			if ( _item != 0 )
 			{
@@ -254,14 +254,14 @@ namespace CloudberryKingdom
 
 			MyMenu->setPos( Vector2( -1125.001f, -319.4444f ) );
 
-			std::shared_ptr<EzText> _t;
+			boost::shared_ptr<EzText> _t;
 			_t = MyPile->FindEzText( _T( "Header" ) );
 			if ( _t != 0 )
 			{
 				_t->setPos( Vector2( 425, 807.9997f ) );
 			}
 
-			std::shared_ptr<QuadClass> _q;
+			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( _T( "Backdrop" ) );
 			if ( _q != 0 )
 			{
@@ -272,7 +272,7 @@ namespace CloudberryKingdom
 			MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
 		}
 	#else
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Save" ) );
 		if ( _item != 0 )
 		{
@@ -303,7 +303,7 @@ namespace CloudberryKingdom
 
 		MyPile->FindEzText( _T( "Header" ) )->setPos( Vector2( 402.7776f, 871.8887f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -316,37 +316,37 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
-		return std::make_shared<MakeSaveHelper>( panel, player );
+		return boost::make_shared<MakeSaveHelper>( panel, player );
 	}
 #endif
 
 #if defined(WINDOWS)
-	void SaveLoadSeedMenu::Save( const std::shared_ptr<MenuItem> &_item, const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
-		std::shared_ptr<SaveSeedAs> SaveAs = std::make_shared<SaveSeedAs>( panel->getControl(), player );
+		boost::shared_ptr<SaveSeedAs> SaveAs = boost::make_shared<SaveSeedAs>( panel->getControl(), player );
 		panel->Call( SaveAs, 0 );
 	}
 #endif
 
 #if ! defined(WINDOWS)
-	std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<PlayerData> &player )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
-		return std::make_shared<SaveLoadSeedsMakeSaveLambda>( player );
+		return boost::make_shared<SaveLoadSeedsMakeSaveLambda>( player );
 	}
 #endif
 
 #if ! defined(WINDOWS)
-std::shared_ptr<IAsyncResult> SaveLoadSeedMenu::kyar = 0;
+boost::shared_ptr<IAsyncResult> SaveLoadSeedMenu::kyar = 0;
 #endif
 
 #if ! defined(WINDOWS)
-std::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
+boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 #endif
 
 #if ! defined(WINDOWS)
-	void SaveLoadSeedMenu::Save( const std::shared_ptr<MenuItem> &_item, const std::shared_ptr<PlayerData> &activeplayer )
+	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<PlayerData> &activeplayer )
 	{
 		_player = activeplayer;
 		kyar = Guide::BeginShowKeyboardInput( _player->MyPlayerIndex, _T( "Save random seed as..." ), _T( "Choose a name to save this level as." ), Tools::CurLevel->MyLevelSeed->SuggestedName(), OnKeyboardComplete, 0 );
@@ -354,7 +354,7 @@ std::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 #endif
 
 #if ! defined(WINDOWS)
-	void SaveLoadSeedMenu::OnKeyboardComplete( const std::shared_ptr<IAsyncResult> &ar )
+	void SaveLoadSeedMenu::OnKeyboardComplete( const boost::shared_ptr<IAsyncResult> &ar )
 	{
 		// Get the input from the virtual keyboard
 		std::wstring input = Guide::EndShowKeyboardInput( kyar );
@@ -374,23 +374,23 @@ std::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 	}
 #endif
 
-	void SaveLoadSeedMenu::Load( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::Load( const boost::shared_ptr<MenuItem> &_item )
 	{
-		std::shared_ptr<SavedSeedsGUI> LoadMenu = MakeMagic( SavedSeedsGUI, () );
+		boost::shared_ptr<SavedSeedsGUI> LoadMenu = MakeMagic( SavedSeedsGUI, () );
 		Call( LoadMenu, 0 );
 	}
 
 #if defined(WINDOWS)
-	void SaveLoadSeedMenu::Copy( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::Copy( const boost::shared_ptr<MenuItem> &_item )
 	{
 		std::wstring seed = Tools::CurLevel->MyLevelSeed->ToString();
 		Clipboard::SetText( seed );
 	}
 #endif
 
-	void SaveLoadSeedMenu::LoadString( const std::shared_ptr<MenuItem> &_item )
+	void SaveLoadSeedMenu::LoadString( const boost::shared_ptr<MenuItem> &_item )
 	{
-		std::shared_ptr<LoadSeedAs> LoadAs = std::make_shared<LoadSeedAs>( getControl(), player );
+		boost::shared_ptr<LoadSeedAs> LoadAs = boost::make_shared<LoadSeedAs>( getControl(), player );
 		Call( LoadAs, 0 );
 	}
 

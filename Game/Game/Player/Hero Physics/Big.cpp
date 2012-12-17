@@ -5,16 +5,16 @@ namespace CloudberryKingdom
 
 	void BobPhsxBig::InitializeStatics()
 	{
-		BobPhsxBig::instance = std::make_shared<BobPhsxBig>();
+		BobPhsxBig::instance = boost::make_shared<BobPhsxBig>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxBig> BobPhsxBig::instance;
+	boost::shared_ptr<BobPhsxBig> BobPhsxBig::instance;
 
 
-	void BobPhsxBig::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxBig::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 )
 			phsx->ModInitSize = Vector2( 1.45f );
 		else
 			phsx->ModInitSize = Vector2( 1.7f, 1.4f );
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		phsx->CapePrototype = CapeType_NORMAL;
 		phsx->CapeOffset += Vector2( 0, -20 );
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->Gravity *= 1.55f;
@@ -42,10 +42,10 @@ namespace CloudberryKingdom
 		Name = Localization::Words_FAT_BOB;
 		Adjective = _T( "Fatty" );
 
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
 	}
 
-	const std::shared_ptr<BobPhsxBig> &BobPhsxBig::getInstance()
+	const boost::shared_ptr<BobPhsxBig> &BobPhsxBig::getInstance()
 	{
 		return instance;
 	}

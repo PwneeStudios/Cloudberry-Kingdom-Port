@@ -22,10 +22,10 @@ namespace CloudberryKingdom
 		struct TutorialOrSkipProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> tutorial;
+			boost::shared_ptr<HeroRush_Tutorial> tutorial;
 
 		
-			TutorialOrSkipProxy( const std::shared_ptr<HeroRush_Tutorial> &tutorial );
+			TutorialOrSkipProxy( const boost::shared_ptr<HeroRush_Tutorial> &tutorial );
 
 			void Apply();
 		};
@@ -34,11 +34,11 @@ namespace CloudberryKingdom
 		struct ListenerHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> tutorial;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<HeroRush_Tutorial> tutorial;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			ListenerHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text );
+			ListenerHelper( const boost::shared_ptr<HeroRush_Tutorial> &tutorial, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -47,11 +47,11 @@ namespace CloudberryKingdom
 		struct AddGameObjectHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> tutorial;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<HeroRush_Tutorial> tutorial;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			AddGameObjectHelper( const std::shared_ptr<HeroRush_Tutorial> &tutorial, const std::shared_ptr<GUI_Text> &text );
+			AddGameObjectHelper( const boost::shared_ptr<HeroRush_Tutorial> &tutorial, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -60,10 +60,10 @@ namespace CloudberryKingdom
 		struct TitleProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			TitleProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			TitleProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -72,11 +72,11 @@ namespace CloudberryKingdom
 		struct TitleNextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			TitleNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text );
+			TitleNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -85,10 +85,10 @@ namespace CloudberryKingdom
 		struct HeroRushTimerShowHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			HeroRushTimerShowHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			HeroRushTimerShowHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -97,12 +97,12 @@ namespace CloudberryKingdom
 		struct PointAtDoorNextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
-			std::shared_ptr<Arrow> arrow;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<Arrow> arrow;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			PointAtDoorNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text );
+			PointAtDoorNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -111,10 +111,10 @@ namespace CloudberryKingdom
 		struct PointAtTimerProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			PointAtTimerProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			PointAtTimerProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -123,13 +123,13 @@ namespace CloudberryKingdom
 		struct PointAtTimerNextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
-			std::shared_ptr<Arrow> arrow;
-			std::shared_ptr<GUI_Text> text;
-			std::shared_ptr<GUI_Text> text2;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<Arrow> arrow;
+			boost::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<GUI_Text> text2;
 
 		
-			PointAtTimerNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text, const std::shared_ptr<GUI_Text> &text2 );
+			PointAtTimerNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text, const boost::shared_ptr<GUI_Text> &text2 );
 
 			void Apply();
 		};
@@ -138,12 +138,12 @@ namespace CloudberryKingdom
 		struct PointAtCoinsNextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
-			std::shared_ptr<GUI_Text> text;
-			std::vector<std::shared_ptr<Arrow> > arrows;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<GUI_Text> text;
+			std::vector<boost::shared_ptr<Arrow> > arrows;
 
 		
-			PointAtCoinsNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<GUI_Text> &text, std::vector<std::shared_ptr<Arrow> > &arrows );
+			PointAtCoinsNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<GUI_Text> &text, std::vector<boost::shared_ptr<Arrow> > &arrows );
 
 			void Apply();
 		};
@@ -152,12 +152,12 @@ namespace CloudberryKingdom
 		struct PointAtScoreNextTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
-			std::shared_ptr<Arrow> arrow;
-			std::shared_ptr<GUI_Text> text;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<Arrow> arrow;
+			boost::shared_ptr<GUI_Text> text;
 
 		
-			PointAtScoreNextTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt, const std::shared_ptr<Arrow> &arrow, const std::shared_ptr<GUI_Text> &text );
+			PointAtScoreNextTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt, const boost::shared_ptr<Arrow> &arrow, const boost::shared_ptr<GUI_Text> &text );
 
 			void Apply();
 		};
@@ -166,10 +166,10 @@ namespace CloudberryKingdom
 		struct ReadyProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			ReadyProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			ReadyProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -178,10 +178,10 @@ namespace CloudberryKingdom
 		struct ReadyTutorialHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			ReadyTutorialHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			ReadyTutorialHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -190,10 +190,10 @@ namespace CloudberryKingdom
 		struct PauseHeroRushTimerHelper : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			PauseHeroRushTimerHelper( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			PauseHeroRushTimerHelper( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -202,10 +202,10 @@ namespace CloudberryKingdom
 		struct EndProxy : public Lambda
 		{
 		
-			std::shared_ptr<HeroRush_Tutorial> hrt;
+			boost::shared_ptr<HeroRush_Tutorial> hrt;
 
 		
-			EndProxy( const std::shared_ptr<HeroRush_Tutorial> &hrt );
+			EndProxy( const boost::shared_ptr<HeroRush_Tutorial> &hrt );
 
 			void Apply();
 		};
@@ -232,9 +232,9 @@ namespace CloudberryKingdom
 		bool SoundOnKill;
 
 	
-		std::shared_ptr<Challenge_HeroRush> HeroRush;
+		boost::shared_ptr<Challenge_HeroRush> HeroRush;
 	
-		HeroRush_Tutorial( const std::shared_ptr<Challenge_HeroRush> &HeroRush );
+		HeroRush_Tutorial( const boost::shared_ptr<Challenge_HeroRush> &HeroRush );
 
 		virtual void OnAdd();
 

@@ -8,11 +8,11 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel::GUI_CampaignLevel_Construct()
+	boost::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel::GUI_CampaignLevel_Construct()
 	{
 		GUI_Level::GUI_Level_Construct( false );
 
-		return std::static_pointer_cast<GUI_CampaignLevel>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_CampaignLevel>( shared_from_this() );
 	}
 
 	void GUI_CampaignLevel::OnAdd()
@@ -84,14 +84,14 @@ namespace CloudberryKingdom
 		Level_Renamed( 0 )	
 	{
 	}
-	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct()
+	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( false );
 
-		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	GUI_Level::GUI_Level( bool SlideIn ) :
@@ -102,14 +102,14 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool SlideIn )
+	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool SlideIn )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( SlideIn );
 
-		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	GUI_Level::GUI_Level( int LevelNum ) :
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( int LevelNum )
+	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( int LevelNum )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -130,14 +130,14 @@ namespace CloudberryKingdom
 
 		SetLevel( LevelNum );
 
-		return std::static_pointer_cast<GUI_Level>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
 	void GUI_Level::DoInit( bool SlideIn )
 	{
 		DoSlideIn = SlideIn;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		MyPile->setPos( Vector2( 1590.556f, 803.2224f ) );
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 		MyPile->FancyPos->UpdateWithGame = true;
 
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		float scale;
 		Color c, o;
 
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 			o = Color::White;
 		}
 
-		LevelText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
+		LevelText = boost::make_shared<EzText>( ToString(), font, 950.f, false, true );
 		LevelText->setScale( scale );
 		LevelText->MyFloatColor = c.ToVector4();
 		LevelText->OutlineColor = o.ToVector4();

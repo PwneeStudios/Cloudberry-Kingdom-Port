@@ -57,11 +57,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void LavaBlock_Castle::Clone( const std::shared_ptr<ObjectBase> &A )
+	void LavaBlock_Castle::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<LavaBlock> BlockA = std::dynamic_pointer_cast<LavaBlock>( A );
+		boost::shared_ptr<LavaBlock> BlockA = boost::dynamic_pointer_cast<LavaBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size );
 	}

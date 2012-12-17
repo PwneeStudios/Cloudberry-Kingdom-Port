@@ -8,13 +8,13 @@
 
 namespace CloudberryKingdom
 {
-	struct BaseQuad : public std::enable_shared_from_this<BaseQuad>
+	struct BaseQuad : public boost::enable_shared_from_this<BaseQuad>
 	{
 	
 		ObjectDrawOrder MyDrawOrder;
 
-		std::shared_ptr<ObjectClass> ParentObject;
-		std::shared_ptr<Quad> ParentQuad;
+		boost::shared_ptr<ObjectClass> ParentObject;
+		boost::shared_ptr<Quad> ParentQuad;
 
 		std::vector<MyOwnVertexFormat> Vertices;
 		int NumVertices;
@@ -31,10 +31,10 @@ namespace CloudberryKingdom
 	
 		float MyMatrixSignature;
 
-		std::shared_ptr<EzTexture> MyTexture;
-		std::shared_ptr<EzEffect> MyEffect;
+		boost::shared_ptr<EzTexture> MyTexture;
+		boost::shared_ptr<EzEffect> MyEffect;
 
-		std::shared_ptr<AnimationData_Texture> TextureAnim;
+		boost::shared_ptr<AnimationData_Texture> TextureAnim;
 		bool UpdateSpriteAnim;
 		bool getTextureIsAnimated() const;
 
@@ -51,11 +51,11 @@ namespace CloudberryKingdom
 #if defined(EDITOR)
 		bool Expanded; // Whether the tree node for this quad is expanded
 
-		std::shared_ptr<ObjectVector> ParentPoint, ChildPoint, ReleasePoint;
+		boost::shared_ptr<ObjectVector> ParentPoint, ChildPoint, ReleasePoint;
 		bool SetToBeParent, SetToBeChild;
 #endif
 
-		void Clone( const std::shared_ptr<BaseQuad> &quad );
+		void Clone( const boost::shared_ptr<BaseQuad> &quad );
 
 		virtual void Release();
 
@@ -68,12 +68,12 @@ namespace CloudberryKingdom
 		virtual void Calc( int anim, float t, int AnimLength, bool Loop, bool Linear );
 		virtual void Transfer( int anim, float DestT, int AnimLength, bool Loop, bool DestLinear, float t );
 
-		virtual void CopyAnim( const std::shared_ptr<BaseQuad> &quad, int Anim );
-		virtual void CopyAnimShallow( const std::shared_ptr<BaseQuad> &quad, int Anim );
+		virtual void CopyAnim( const boost::shared_ptr<BaseQuad> &quad, int Anim );
+		virtual void CopyAnimShallow( const boost::shared_ptr<BaseQuad> &quad, int Anim );
 
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber );
 
 #if defined(EDITOR)
 		virtual void SaveState( int StateIndex );
@@ -85,31 +85,31 @@ namespace CloudberryKingdom
 
 		Vector2 TR();
 
-		void SetTexture( const std::wstring &Name, const std::shared_ptr<EzTextureWad> &Wad );
+		void SetTexture( const std::wstring &Name, const boost::shared_ptr<EzTextureWad> &Wad );
 
-		void SetEffect( const std::wstring &Name, const std::shared_ptr<EzEffectWad> &Wad );
+		void SetEffect( const std::wstring &Name, const boost::shared_ptr<EzEffectWad> &Wad );
 
 		void OrphanSelf();
 
-		virtual void FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad );
-		virtual void FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames );
+		virtual void FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad );
+		virtual void FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad, bool UseNames );
 
 		virtual void Draw();
-		virtual void Draw( std::shared_ptr<QuadDrawer> &QDrawer );
-		virtual void DrawExtra( std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines );
+		virtual void Draw( boost::shared_ptr<QuadDrawer> &QDrawer );
+		virtual void DrawExtra( boost::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines );
 		virtual bool HitTest( Vector2 x );
 
 #if defined(EDITOR)
 		virtual std::vector<ObjectVector*> GetObjectVectors();
 
-		void ColoredDraw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color );
+		void ColoredDraw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color );
 #endif
 
 		virtual void SetColor( Color color );
 
-		virtual void Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v );
+		virtual void Set_PosFromRelPos( const boost::shared_ptr<ObjectVector> &v );
 
-		virtual void Set_RelPosFromPos( const std::shared_ptr<ObjectVector> &v );
+		virtual void Set_RelPosFromPos( const boost::shared_ptr<ObjectVector> &v );
 
 #if defined(EDITOR)
 		virtual void ClickOnChildButton();

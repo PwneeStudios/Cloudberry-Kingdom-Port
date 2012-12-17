@@ -5,13 +5,13 @@
 
 namespace CloudberryKingdom
 {
-	struct AutoGen_Parameters : public std::enable_shared_from_this<AutoGen_Parameters>
+	struct AutoGen_Parameters : public boost::enable_shared_from_this<AutoGen_Parameters>
 	{
 		/// <summary>
 		/// Whether to intelligently spread out the period offsets of placed obstacles
 		/// </summary>
 	
-		int ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd );
+		int ChooseOffset( int Period, const boost::shared_ptr<Rand> &Rnd );
 
 		int EnforceOffset( int offset, int period );
 
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		int Counter;
 
-		std::shared_ptr<PieceSeedData> PieceSeed;
+		boost::shared_ptr<PieceSeedData> PieceSeed;
 		Param FillWeight;
 
 		/// <summary>
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool DoStage2Fill;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 		void SetVal( Vector2 &val, Vector2 newval );
 
@@ -71,22 +71,22 @@ namespace CloudberryKingdom
 		}
 	};
 
-	struct AutoGen : public std::enable_shared_from_this<AutoGen>
+	struct AutoGen : public boost::enable_shared_from_this<AutoGen>
 	{
 	
 		AutoGen();
 
-		virtual std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		virtual boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		virtual std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
-		virtual std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+		virtual boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
+		virtual boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 
 		bool Do_WeightedPreFill_1, Do_PreFill_1, Do_PreFill_2, Do_ActiveFill_1, Do_ActiveFill_2;
-		virtual void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-		virtual void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-		virtual void ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-		virtual void Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-		virtual void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void Cleanup_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		virtual void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 	};
 }

@@ -18,24 +18,24 @@ namespace CloudberryKingdom
 
 	void Particle::InitializeStatics()
 	{
-		Particle::Pool = std::make_shared<ParticleBin>();
+		Particle::Pool = boost::make_shared<ParticleBin>();
 	}
 
 	// Statics
-	std::shared_ptr<ParticleBin> Particle::Pool;
+	boost::shared_ptr<ParticleBin> Particle::Pool;
 
 
 	ParticleBin::ParticleBin()
 	{
-		MyStack = std::vector<std::shared_ptr<Particle> >( 1000 );
+		MyStack = std::vector<boost::shared_ptr<Particle> >( 1000 );
 
 		for ( int i = 0; i < 1000; i++ )
-			MyStack[ i ] = std::make_shared<Particle>();
+			MyStack[ i ] = boost::make_shared<Particle>();
 	}
 
-	std::shared_ptr<Particle> ParticleBin::Get()
+	boost::shared_ptr<Particle> ParticleBin::Get()
 	{
-		std::shared_ptr<Particle> item = 0;
+		boost::shared_ptr<Particle> item = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MyStack )
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 			stackLock.Lock();
 
 			if ( MyStack.empty() )
-				return std::make_shared<Particle>();
+				return boost::make_shared<Particle>();
 
 			item = MyStack.back();
 			MyStack.pop_back();
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		return item;
 	}
 
-	void ParticleBin::ReturnItem( const std::shared_ptr<Particle> &item )
+	void ParticleBin::ReturnItem( const boost::shared_ptr<Particle> &item )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MyStack )
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		Pool->ReturnItem( shared_from_this() );
 	}
 
-	void Particle::Copy( const std::shared_ptr<Particle> &template_Renamed )
+	void Particle::Copy( const boost::shared_ptr<Particle> &template_Renamed )
 	{
 		Frozen = template_Renamed->Frozen;
 		Code = template_Renamed->Code;
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		Size.X = Size.Y = size;
 	}
 
-	void Particle::Phsx( const std::shared_ptr<Camera> &cam )
+	void Particle::Phsx( const boost::shared_ptr<Camera> &cam )
 	{
 		if ( Frozen )
 			return;

@@ -60,14 +60,14 @@ namespace CloudberryKingdom
 		DoSlideIn( false )
 	{
 	}
-	std::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style )
+	boost::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( Style, false );
 
-		return std::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
 	}
 
 	GUI_Multiplier::GUI_Multiplier( int Style, bool SlideIn ) :
@@ -76,21 +76,21 @@ namespace CloudberryKingdom
 		DoSlideIn( false )
 	{
 	}
-	std::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style, bool SlideIn )
+	boost::shared_ptr<GUI_Multiplier> GUI_Multiplier::GUI_Multiplier_Construct( int Style, bool SlideIn )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		DoInit( Style, SlideIn );
 
-		return std::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Multiplier>( shared_from_this() );
 	}
 
 	void GUI_Multiplier::DoInit( int Style, bool SlideIn )
 	{
 		DoSlideIn = SlideIn;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		MyPile->setPos( Vector2( 1235, 820 ) );
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		float scale;
 		Color c, o;
 
@@ -123,14 +123,14 @@ namespace CloudberryKingdom
 
 		if ( Style == 0 )
 		{
-			MultiplierText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 950.f, false, true );
+			MultiplierText = boost::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 950.f, false, true );
 			MultiplierText->setScale( .95f );
 			MultiplierText->setPos( Vector2( 187, 130 ) );
 			MultiplierText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		}
 		else if ( Style == 1 )
 		{
-			MultiplierText = std::make_shared<EzText>( ToString(), font, 950.f, false, true );
+			MultiplierText = boost::make_shared<EzText>( ToString(), font, 950.f, false, true );
 			MultiplierText->setScale( scale );
 			MultiplierText->setPos( Vector2( 381.4434f, 85.55492f ) );
 			MultiplierText->MyFloatColor = c.ToVector4();

@@ -12,8 +12,8 @@ namespace CloudberryKingdom
 		{
 		
 //C# TO C++ CONVERTER NOTE: The variable Serpent was renamed since it is named the same as a user-defined type:
-			std::shared_ptr<SpriteInfo> Serpent_Renamed;
-			std::shared_ptr<SpriteInfo> Fish;
+			boost::shared_ptr<SpriteInfo> Serpent_Renamed;
+			boost::shared_ptr<SpriteInfo> Fish;
 			Vector2 BoxSize;
 
 		
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		std::shared_ptr<QuadClass> MyQuad, MyFish;
+		boost::shared_ptr<QuadClass> MyQuad, MyFish;
 
 		int Offset, UpT, DownT, WaitT1, WaitT2;
 
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 
 		virtual void MakeNew();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		Serpent( bool BoxesOnly );
 
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 		virtual void Reset( bool BoxesOnly );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

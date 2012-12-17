@@ -8,15 +8,15 @@ namespace CloudberryKingdom
 	struct MenuList : public MenuItem
 	{
 	
-		struct ExpandProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct ExpandProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<MenuList> ml;
+			boost::shared_ptr<MenuList> ml;
 
 		
-			ExpandProxy1( const std::shared_ptr<MenuList> &ml );
+			ExpandProxy1( const boost::shared_ptr<MenuList> &ml );
 
-			void Apply( const std::shared_ptr<MenuItem> &dummy );
+			void Apply( const boost::shared_ptr<MenuItem> &dummy );
 		};
 
 	
@@ -28,12 +28,12 @@ namespace CloudberryKingdom
 		bool _ExpandOnGo;
 
 	
-		std::shared_ptr<MenuListExpand> MyMenuListExpand;
+		boost::shared_ptr<MenuListExpand> MyMenuListExpand;
 		Vector2 MyExpandPos;
-		std::shared_ptr<Lambda_2<std::shared_ptr<MenuListExpand>, std::shared_ptr<MenuItem> > > AdditionalExpandProcessing;
+		boost::shared_ptr<Lambda_2<boost::shared_ptr<MenuListExpand>, boost::shared_ptr<MenuItem> > > AdditionalExpandProcessing;
 		void Expand();
 
-		std::vector<std::shared_ptr<MenuItem> > MyList;
+		std::vector<boost::shared_ptr<MenuItem> > MyList;
 		int ListIndex;
 
 	
@@ -41,14 +41,14 @@ namespace CloudberryKingdom
 		int DelayCount;
 
 	
-		std::shared_ptr<QuadClass> RightArrow, LeftArrow;
-		std::shared_ptr<QuadClass> RightArrow_Selected, LeftArrow_Selected;
+		boost::shared_ptr<QuadClass> RightArrow, LeftArrow;
+		boost::shared_ptr<QuadClass> RightArrow_Selected, LeftArrow_Selected;
 
 		bool CustomArrow;
 		Vector2 LeftArrowOffset, RightArrowOffset;
 		//public Vector2 LeftArrow_SelectedOffset, RightArrow_SelectedOffset;
 
-		std::shared_ptr<Lambda> OnIndexSelect, OnConfirmedIndexSelect;
+		boost::shared_ptr<Lambda> OnIndexSelect, OnConfirmedIndexSelect;
 
 		/// <summary>
 		/// Whether to draw the list's arrows when the list isn't currently selected
@@ -79,16 +79,16 @@ namespace CloudberryKingdom
 		virtual float Width();
 
 	
-		std::map<std::shared_ptr<MenuItem>, std::shared_ptr<Object> > ObjDict;
+		std::map<boost::shared_ptr<MenuItem>, boost::shared_ptr<Object> > ObjDict;
 	
-		void AddItem( const std::shared_ptr<MenuItem> &item, const std::shared_ptr<Object> &obj );
+		void AddItem( const boost::shared_ptr<MenuItem> &item, const boost::shared_ptr<Object> &obj );
 
-		std::shared_ptr<MenuItem> GetListItem();
+		boost::shared_ptr<MenuItem> GetListItem();
 
 		/// <summary>
 		/// The object associated with the currently selected MenuItem
 		/// </summary>
-		const std::shared_ptr<Object> &getCurObj() const;
+		const boost::shared_ptr<Object> &getCurObj() const;
 
 		/// <summary>
 		/// When true the list's index will wrap if too large or too small.
@@ -101,8 +101,8 @@ namespace CloudberryKingdom
 
 		bool ValidIndex( int index );
 
-		std::shared_ptr<MenuItem> CurMenuItem;
-		void SetSelectedItem( const std::shared_ptr<MenuItem> &item );
+		boost::shared_ptr<MenuItem> CurMenuItem;
+		void SetSelectedItem( const boost::shared_ptr<MenuItem> &item );
 
 		virtual void SetIndex( int NewIndex );
 
@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 	
-		std::shared_ptr<QuadClass> GetSelectedArrow();
+		boost::shared_ptr<QuadClass> GetSelectedArrow();
 #endif
 
 		/// <summary>
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 		virtual void PhsxStep( bool Selected );
 
 		bool Center;
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 	
 		void InitializeInstanceFields();

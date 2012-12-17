@@ -17,65 +17,65 @@ namespace CloudberryKingdom
 
 
 #if defined(PC_VERSION)
-	std::shared_ptr<EzTexture> ButtonTexture::getGo()
+	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Enter_Key" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getBack()
+	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Esc_Key" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getX()
+	boost::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
 		return ButtonString::ActualKeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
 		//return Tools.TextureWad.FindByName("Xbox_X");
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
+	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "LeftRight_Key" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
+	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
 	{
 		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayPrev_Secondary );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
+	boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
 	{
 		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayNext_Secondary );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	std::shared_ptr<EzTexture> ButtonTexture::getGo()
+	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_A" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getBack()
+	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_B" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getX()
+	boost::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_X" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
+	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_Dir" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
+	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_LB" ) );
 	}
 
-	std::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
+	boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
 	{
 		return Tools::TextureWad->FindByName( _T( "Xbox_RB" ) );
 	}
@@ -172,7 +172,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		return str;
 	}
 
-	std::shared_ptr<EzTexture> ButtonString::ActualKeyToTexture( Keys key )
+	boost::shared_ptr<EzTexture> ButtonString::ActualKeyToTexture( Keys key )
 	{
 		return Tools::Texture( KeyToTexture( key ) );
 	}
@@ -413,7 +413,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		TextWidth += Bits[ 0 ]->size.X;
 	}
 
-	void EzText::SubstituteText( const std::shared_ptr<StringBuilder> &text )
+	void EzText::SubstituteText( const boost::shared_ptr<StringBuilder> &text )
 	{
 		Bits[ 0 ]->builder_str = text;
 		TextWidth -= Bits[ 0 ]->size.X;
@@ -449,7 +449,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	{
 		if ( FancyPos != 0 )
 			FancyPos->Release();
-		FancyPos = std::make_shared<FancyVector2>();
+		FancyPos = boost::make_shared<FancyVector2>();
 		FancyPos->RelVal = _Pos;
 		;
 	}
@@ -519,9 +519,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			FancyPos.reset();
 	}
 
-	std::shared_ptr<EzText> EzText::Clone()
+	boost::shared_ptr<EzText> EzText::Clone()
 	{
-		std::shared_ptr<EzText> clone = std::make_shared<EzText>( MyString, MyFont,TextBoxWidth, Centered, YCentered, LineHeightMod );
+		boost::shared_ptr<EzText> clone = boost::make_shared<EzText>( MyString, MyFont,TextBoxWidth, Centered, YCentered, LineHeightMod );
 		clone->MyFloatColor = MyFloatColor;
 		clone->OutlineColor = OutlineColor;
 		return clone;
@@ -534,14 +534,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( Localization::WordString( word ) );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( Localization::WordString( word ) );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, const std::wstring &Name )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, const std::wstring &Name )
 	{
 		InitializeInstanceFields();
 		this->Name = Name;
@@ -549,28 +549,28 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( Localization::WordString( word ) );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, bool Centered )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, bool Centered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( Localization::WordString( word ), 10000, Centered, false, 1 );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, bool Centered, bool YCentered )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, bool Centered, bool YCentered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( Localization::WordString( word ), 10000, Centered, YCentered, 1 );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( Localization::WordString( word ), Width, Centered, YCentered, 1 );
 	}
 
-	EzText::EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod )
+	EzText::EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
@@ -584,14 +584,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( str );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( str );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, const std::wstring &Name )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, const std::wstring &Name )
 	{
 		InitializeInstanceFields();
 		this->Name = Name;
@@ -599,28 +599,28 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( str );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, bool Centered )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, bool Centered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( str, 10000, Centered, false, 1 );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, bool Centered, bool YCentered )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, bool Centered, bool YCentered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( str, 10000, Centered, YCentered, 1 );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
 		Init( str, Width, Centered, YCentered, 1 );
 	}
 
-	EzText::EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod )
+	EzText::EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod )
 	{
 		InitializeInstanceFields();
 		MyFont = font;
@@ -680,7 +680,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 						Parse_PicShift = Vector2();
 
 					Vector2 size;
-					std::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
+					boost::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
 					float ratio = static_cast<float>( texture->Width ) / static_cast<float>( texture->Height );
 
 					// 's' scale the texture
@@ -841,7 +841,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				// Parse picture info
 				if ( Parse_Type == ParseData_PIC )
 				{
-					std::shared_ptr<EzTextPic> pic = std::make_shared<EzTextPic>();
+					boost::shared_ptr<EzTextPic> pic = boost::make_shared<EzTextPic>();
 					pic->LineNumber = LineNumber;
 
 					if ( !FirstElement )
@@ -876,7 +876,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				else
 					i = BeginBracketIndex;
 
-				std::shared_ptr<EzTextBit> bit = std::make_shared<EzTextBit>();
+				boost::shared_ptr<EzTextBit> bit = boost::make_shared<EzTextBit>();
 				bit->LineNumber = LineNumber;
 				bit->clr = CurColor;
 				bit->str = str.substr( 0, i );
@@ -981,8 +981,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		MyColor = Color::White;
 		MyFloatColor = Vector4( 1, 1, 1, 1 );
 
-		Bits = std::vector<std::shared_ptr<EzTextBit> >();
-		Pics = std::vector<std::shared_ptr<EzTextPic> >();
+		Bits = std::vector<boost::shared_ptr<EzTextBit> >();
+		Pics = std::vector<boost::shared_ptr<EzTextPic> >();
 
 		loc = Vector2();
 		LineHeight = 0;
@@ -1021,22 +1021,22 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 		if ( YCentered )
 		{
-			for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+			for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 				( *bit )->loc.Y -= Height / 2;
-			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 				( *pic )->rect.Y -= static_cast<int>( Height / 2 );
 		}
 
 		if ( !Centered )
 		{
-			for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+			for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 				( *bit )->loc.X += LineSizes[ ( *bit )->LineNumber ].X / 2 * Tools::TheGame->Resolution.LineHeightMod;
-			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools.TheGame.Resolution.LineHeightMod);
+			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools.TheGame.Resolution.LineHeightMod);
 				( *pic )->rect.X += static_cast<int>( LineSizes[ ( *pic )->LineNumber ].X / 2 );
 		}
 		else
 		{
-			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 				( *pic )->rect.X = static_cast<int>( ( getScale() * (*pic)->rect.X - getPos().X + (*pic)->rect.Width / 2 ) * Tools::TheGame->Resolution.LineHeightMod + getPos().X - (*pic)->rect.Width / 2 );
 		}
 	}
@@ -1046,12 +1046,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		setPos( Vector2( getPos().X - .5f * GetWorldWidth(), getPos().Y ) );
 	}
 
-	void EzText::Draw( const std::shared_ptr<Camera> &cam )
+	void EzText::Draw( const boost::shared_ptr<Camera> &cam )
 	{
 		Draw( cam, true );
 	}
 
-	void EzText::Draw( const std::shared_ptr<Camera> &cam, bool EndBatch )
+	void EzText::Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch )
 	{
 		Alpha += AlphaVel;
 
@@ -1120,7 +1120,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			Alpha = HoldAlpha;
 	}
 
-	void EzText::_Draw( const std::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const std::shared_ptr<SpriteFont> &font, Vector4 color )
+	void EzText::_Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<SpriteFont> &font, Vector4 color )
 	{
 		if ( MyFloatColor.W <= 0 )
 			return;
@@ -1142,7 +1142,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Vector2 Loc = Tools::ToScreenCoordinates( Position, cam, Tools::EffectWad->ModZoom );
 
 		Tools::StartSpriteBatch();
-		for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+		for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 		{
 			Color textcolor = ColorHelper::PremultiplyAlpha( Color( MyColor.ToVector4() * (*bit)->clr.ToVector4() ) );
 
@@ -1154,7 +1154,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, /*Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * */ Vector2( 1 ) / ( getScale() * ZoomMod ), SpriteEffects_None, 1 );
 		}
 		if ( DrawPics )
-			for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 			{
 				Color piccolor = PicColor;
 				piccolor.A = Tools::FloatToByte( Alpha * piccolor.A / 255 );
@@ -1188,7 +1188,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 		Vector2 Loc = _Pos;
 
-		for ( std::vector<std::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
+		for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 		{
 			Vector2 loc, size;
 
@@ -1205,7 +1205,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			BL = Vector2::Min( BL, bit_BL );
 		}
 
-		for ( std::vector<std::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
+		for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
 		{
 			Vector2 loc = GetWorldVector( Vector2( static_cast<float>( ( *pic )->rect.X ), static_cast<float>( ( *pic )->rect.Y ) ) );
 			Vector2 size = Vector2( static_cast<float>( ( *pic )->rect.Width ), static_cast<float>( ( *pic )->rect.Height ) );

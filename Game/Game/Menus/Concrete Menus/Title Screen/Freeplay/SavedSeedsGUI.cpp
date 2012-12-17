@@ -4,17 +4,17 @@
 namespace CloudberryKingdom
 {
 
-	SavedSeedsGUI::PostMakeStandardLoadHelper::PostMakeStandardLoadHelper( const std::shared_ptr<LevelSeedData> &seed )
+	SavedSeedsGUI::PostMakeStandardLoadHelper::PostMakeStandardLoadHelper( const boost::shared_ptr<LevelSeedData> &seed )
 	{
 		this->seed = seed;
 	}
 
-	void SavedSeedsGUI::PostMakeStandardLoadHelper::Apply( const std::shared_ptr<Level> &level )
+	void SavedSeedsGUI::PostMakeStandardLoadHelper::Apply( const boost::shared_ptr<Level> &level )
 	{
 		seed->PostMake_StandardLoad( level );
 	}
 
-	SavedSeedsGUI::LoadFromFreeplayMenuHelper::LoadFromFreeplayMenuHelper( const std::shared_ptr<LevelSeedData> &seed, const std::wstring &seedstr, const std::shared_ptr<CustomLevel_GUI> &simple )
+	SavedSeedsGUI::LoadFromFreeplayMenuHelper::LoadFromFreeplayMenuHelper( const boost::shared_ptr<LevelSeedData> &seed, const std::wstring &seedstr, const boost::shared_ptr<CustomLevel_GUI> &simple )
 	{
 		this->seed = seed;
 		this->seedstr = seedstr;
@@ -26,23 +26,23 @@ namespace CloudberryKingdom
 		simple->StartLevel( seed );
 
 		// Randomize the seed for the next level, if the player chooses to continue using this LevelSeedData.
-		seed = std::make_shared<LevelSeedData>();
+		seed = boost::make_shared<LevelSeedData>();
 		seed->ReadString( seedstr );
-		seed->PostMake->Add( std::make_shared<PostMakeStandardLoadHelper>( seed ) );
+		seed->PostMake->Add( boost::make_shared<PostMakeStandardLoadHelper>( seed ) );
 		seed->setSeed( Tools::GlobalRnd->Rnd->Next() );
 	}
 
-	SavedSeedsGUI::SaveSeedsDeleteLambda::SaveSeedsDeleteLambda( const std::shared_ptr<SavedSeedsGUI> &gui )
+	SavedSeedsGUI::SaveSeedsDeleteLambda::SaveSeedsDeleteLambda( const boost::shared_ptr<SavedSeedsGUI> &gui )
 	{
 		this->gui = gui;
 	}
 
-	bool SavedSeedsGUI::SaveSeedsDeleteLambda::Apply( const std::shared_ptr<Menu> &menu )
+	bool SavedSeedsGUI::SaveSeedsDeleteLambda::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		return gui->Delete( menu );
 	}
 
-	SavedSeedsGUI::ReturnToCallerProxy::ReturnToCallerProxy( const std::shared_ptr<SavedSeedsGUI> &ssGui )
+	SavedSeedsGUI::ReturnToCallerProxy::ReturnToCallerProxy( const boost::shared_ptr<SavedSeedsGUI> &ssGui )
 	{
 		this->ssGui = ssGui;
 	}
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		ssGui->ReturnToCaller();
 	}
 
-	SavedSeedsGUI::DoDeletionProxy::DoDeletionProxy( const std::shared_ptr<SavedSeedsGUI> &ssGui )
+	SavedSeedsGUI::DoDeletionProxy::DoDeletionProxy( const boost::shared_ptr<SavedSeedsGUI> &ssGui )
 	{
 		this->ssGui = ssGui;
 	}
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 		ssGui->DoDeletion( choice );
 	}
 
-	SavedSeedsGUI::SortProxy::SortProxy( const std::shared_ptr<SavedSeedsGUI> &ssGui )
+	SavedSeedsGUI::SortProxy::SortProxy( const boost::shared_ptr<SavedSeedsGUI> &ssGui )
 	{
 		this->ssGui = ssGui;
 	}
@@ -72,17 +72,17 @@ namespace CloudberryKingdom
 		ssGui->Sort();
 	}
 
-	SavedSeedsGUI::SaveSeedsBackLambda::SaveSeedsBackLambda( const std::shared_ptr<SavedSeedsGUI> &gui )
+	SavedSeedsGUI::SaveSeedsBackLambda::SaveSeedsBackLambda( const boost::shared_ptr<SavedSeedsGUI> &gui )
 	{
 		this->gui = gui;
 	}
 
-	bool SavedSeedsGUI::SaveSeedsBackLambda::Apply( const std::shared_ptr<Menu> &menu )
+	bool SavedSeedsGUI::SaveSeedsBackLambda::Apply( const boost::shared_ptr<Menu> &menu )
 	{
 		return gui->Back( menu );
 	}
 
-	SavedSeedsGUI::SeedItem::SeedItem( const std::wstring &name, const std::wstring &seed, const std::shared_ptr<EzFont> &font ) : MenuItem( std::make_shared<EzText>( name, font ) )
+	SavedSeedsGUI::SeedItem::SeedItem( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font ) : MenuItem( boost::make_shared<EzText>( name, font ) )
 	{
 		InitializeInstanceFields();
 		this->Name = name;
@@ -105,18 +105,18 @@ namespace CloudberryKingdom
 		MarkedForDeletion = false;
 	}
 
-	SavedSeedsGUI::StartLevelProxy1::StartLevelProxy1( const std::shared_ptr<SavedSeedsGUI> &ssGui, const std::wstring &_seed )
+	SavedSeedsGUI::StartLevelProxy1::StartLevelProxy1( const boost::shared_ptr<SavedSeedsGUI> &ssGui, const std::wstring &_seed )
 	{
 		this->ssGui = ssGui;
 		this->_seed = _seed;
 	}
 
-	void SavedSeedsGUI::StartLevelProxy1::Apply( const std::shared_ptr<MenuItem> &_menu )
+	void SavedSeedsGUI::StartLevelProxy1::Apply( const boost::shared_ptr<MenuItem> &_menu )
 	{
 		ssGui->StartLevel( _seed );
 	}
 
-	SavedSeedsGUI::OnAddHelper::OnAddHelper( const std::shared_ptr<ScrollBar> &bar )
+	SavedSeedsGUI::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScrollBar> &bar )
 	{
 		this->bar = bar;
 	}
@@ -127,21 +127,21 @@ namespace CloudberryKingdom
 	}
 
 	SavedSeedsGUI::SavedSeedsGUI() { }
-	std::shared_ptr<SavedSeedsGUI> SavedSeedsGUI::SavedSeedsGUI_Construct()
+	boost::shared_ptr<SavedSeedsGUI> SavedSeedsGUI::SavedSeedsGUI_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
+		return boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
 	}
 
-	void SavedSeedsGUI::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void SavedSeedsGUI::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
 		text->Shadow = false;
 	}
 
-	void SavedSeedsGUI::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void SavedSeedsGUI::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -150,18 +150,18 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::StartLevel( const std::wstring &seedstr )
 	{
-		LoadSeed( seedstr, std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		LoadSeed( seedstr, boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	std::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
+	boost::shared_ptr<CustomLevel_GUI> SavedSeedsGUI::FreeplayMenu = 0;
 
-	void SavedSeedsGUI::LoadSeed( const std::wstring &seedstr, const std::shared_ptr<GUI_Panel> &panel )
+	void SavedSeedsGUI::LoadSeed( const std::wstring &seedstr, const boost::shared_ptr<GUI_Panel> &panel )
 	{
 		// If the current panel or parent panel is the Freeplay menu,
 		// then directly start the level.
-		FreeplayMenu = std::dynamic_pointer_cast<CustomLevel_GUI>( panel->Caller );
+		FreeplayMenu = boost::dynamic_pointer_cast<CustomLevel_GUI>( panel->Caller );
 		if ( FreeplayMenu == 0 )
-			FreeplayMenu = std::dynamic_pointer_cast<CustomLevel_GUI>( panel );
+			FreeplayMenu = boost::dynamic_pointer_cast<CustomLevel_GUI>( panel );
 		if ( 0 != FreeplayMenu )
 		{
 			LoadFromFreeplayMenu( seedstr, FreeplayMenu );
@@ -169,9 +169,9 @@ namespace CloudberryKingdom
 		else
 		{
 			// Otherwise, if the parent game is Freeplay, then queue Freeplay to load the level.
-			if ( std::dynamic_pointer_cast<TitleGameData>( Tools::CurGameData->ParentGame ) != 0 )
+			if ( boost::dynamic_pointer_cast<TitleGameData>( Tools::CurGameData->ParentGame ) != 0 )
 			{
-				Tools::CurrentAftermath = std::make_shared<AftermathData>();
+				Tools::CurrentAftermath = boost::make_shared<AftermathData>();
 				Tools::CurrentAftermath->Success = false;
 				Tools::CurrentAftermath->EarlyExit = true;
 
@@ -197,22 +197,22 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void SavedSeedsGUI::LoadFromFreeplayMenu( const std::wstring &seedstr, const std::shared_ptr<CustomLevel_GUI> &simple )
+	void SavedSeedsGUI::LoadFromFreeplayMenu( const std::wstring &seedstr, const boost::shared_ptr<CustomLevel_GUI> &simple )
 	{
-		std::shared_ptr<LevelSeedData> seed = std::make_shared<LevelSeedData>();
+		boost::shared_ptr<LevelSeedData> seed = boost::make_shared<LevelSeedData>();
 		seed->ReadString( seedstr );
-		seed->PostMake->Add( std::make_shared<PostMakeStandardLoadHelper>( seed ) );
+		seed->PostMake->Add( boost::make_shared<PostMakeStandardLoadHelper>( seed ) );
 
-		simple->MyGame->PlayGame( std::make_shared<LoadFromFreeplayMenuHelper>( seed, seedstr, simple ) );
+		simple->MyGame->PlayGame( boost::make_shared<LoadFromFreeplayMenuHelper>( seed, seedstr, simple ) );
 
 	}
 
 	int SavedSeedsGUI::NumSeedsToDelete()
 	{
 		int count = 0;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
+			boost::shared_ptr<SeedItem> seeditem = boost::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 != seeditem && seeditem->MarkedForDeletion )
 				count++;
 		}
@@ -220,12 +220,12 @@ namespace CloudberryKingdom
 		return count;
 	}
 
-	bool SavedSeedsGUI::Delete( const std::shared_ptr<Menu> &_menu )
+	bool SavedSeedsGUI::Delete( const boost::shared_ptr<Menu> &_menu )
 	{
 		if ( !Active )
 			return true;
 
-		std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( MyMenu->getCurItem() );
+		boost::shared_ptr<SeedItem> seeditem = boost::dynamic_pointer_cast<SeedItem>( MyMenu->getCurItem() );
 		if ( 0 != seeditem )
 			seeditem->ToggleDeletion();
 
@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 		// If "No", do not delete any seeds.
 		if ( !choice )
 		{
-			MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 			return;
 		}
 
@@ -247,9 +247,9 @@ namespace CloudberryKingdom
 		player->MySavedSeeds->SeedStrings.clear();
 
 		// Save seeds not marked for deletion.
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<SeedItem> seeditem = std::dynamic_pointer_cast<SeedItem>( *item );
+			boost::shared_ptr<SeedItem> seeditem = boost::dynamic_pointer_cast<SeedItem>( *item );
 			if ( 0 == seeditem )
 				continue;
 			if ( seeditem->MarkedForDeletion )
@@ -260,7 +260,7 @@ namespace CloudberryKingdom
 
 		SaveGroup::SaveAll();
 
-		MyGame->WaitThenDo( 10, std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 10, boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 	}
 
 	void SavedSeedsGUI::Sort()
@@ -274,7 +274,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::Init();
 
 		setControl( -1 );
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Get the activating player
 		player = MenuItem::GetActivatingPlayerData();
@@ -288,15 +288,15 @@ namespace CloudberryKingdom
 
 		// Make the menu
 		//MyMenu = new Menu(false);
-		MyMenu = std::make_shared<LongMenu>();
+		MyMenu = boost::make_shared<LongMenu>();
 		MyMenu->FixedToCamera = false;
 		MyMenu->WrapSelect = false;
-		( std::static_pointer_cast<LongMenu>( MyMenu ) )->OffsetStep = 30;
+		( boost::static_pointer_cast<LongMenu>( MyMenu ) )->OffsetStep = 30;
 		EnsureFancy();
 		MyMenu->OnA.reset();
-		MyMenu->OnB = std::make_shared<SaveSeedsBackLambda>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
-		MyMenu->OnX = std::make_shared<SaveSeedsDeleteLambda>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
-		MyMenu->OnY = std::make_shared<SortProxy>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<SaveSeedsBackLambda>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
+		MyMenu->OnX = boost::make_shared<SaveSeedsDeleteLambda>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
+		MyMenu->OnY = boost::make_shared<SortProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) );
 		MyMenu->SelectDelay = 11;
 
 		ItemPos = Vector2( 80.5547f, 756.1112f );
@@ -305,7 +305,7 @@ namespace CloudberryKingdom
 		FontScale = .666f;
 
 		// Header
-		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
+		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 		item->Name = _T( "Header" );
 		item->Selectable = false;
 		SetHeaderProperties( item->MySelectedText );
@@ -325,9 +325,9 @@ namespace CloudberryKingdom
 	#endif
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop;
+		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( backdrop );
 
@@ -348,7 +348,7 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	bool SavedSeedsGUI::Back( const std::shared_ptr<Menu> &menu )
+	bool SavedSeedsGUI::Back( const boost::shared_ptr<Menu> &menu )
 	{
 		if ( !Active )
 			return true;
@@ -356,8 +356,8 @@ namespace CloudberryKingdom
 		int num = NumSeedsToDelete();
 		if ( num > 0 )
 		{
-			std::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num ) );
-			verify->OnSelect->Add( std::make_shared<DoDeletionProxy>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
+			boost::shared_ptr<VerifyDeleteSeeds> verify = MakeMagic( VerifyDeleteSeeds, ( getControl(), num ) );
+			verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
 			Call( verify, 0 );
 		}
@@ -383,7 +383,7 @@ namespace CloudberryKingdom
 	void SavedSeedsGUI::SetPos()
 	{
 	#if defined(PC_VERSION)
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Header" ) );
 		if ( _item != 0 )
 		{
@@ -402,7 +402,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -412,7 +412,7 @@ namespace CloudberryKingdom
 
 		MyPile->setPos( Vector2( 0, 0 ) );
 	#else
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Header" ) );
 		if ( _item != 0 )
 		{
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Load" ) );
 		if ( _t != 0 )
 			_t->setPos( Vector2( 564.6826f, -51.11127f ) );
@@ -432,7 +432,7 @@ namespace CloudberryKingdom
 		if ( _t != 0 )
 			_t->setPos( Vector2( 579.6982f, -569.7302f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -452,8 +452,8 @@ namespace CloudberryKingdom
 			std::wstring name = LevelSeedData::GetNameFromSeedStr( *seed );
 
 			// Get name of seed
-			std::shared_ptr<MenuItem> seeditem = std::make_shared<SeedItem>( name, *seed, ItemFont );
-			seeditem->setGo( std::make_shared<StartLevelProxy1>( std::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ), _seed ) );
+			boost::shared_ptr<MenuItem> seeditem = boost::make_shared<SeedItem>( name, *seed, ItemFont );
+			seeditem->setGo( boost::make_shared<StartLevelProxy1>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ), _seed ) );
 			AddItem( seeditem );
 		}
 	}
@@ -467,11 +467,11 @@ namespace CloudberryKingdom
 	//#if PC_VERSION
 		//if (false)
 		{
-			bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+			bar = MakeMagic( ScrollBar, ( boost::static_pointer_cast<LongMenu>( MyMenu ), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 			bar->setBarPos( Vector2( -1860, 102.7778f ) );
 			MyGame->AddGameObject( bar );
 	#if defined(PC_VERSION)
-			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );
+			MyMenu->AdditionalCheckForOutsideClick = boost::make_shared<OnAddHelper>( bar );
 	#endif
 		}
 	#endif
@@ -482,7 +482,7 @@ namespace CloudberryKingdom
 		FontScale *= .8f;
 
 	#if defined(PC_VERSION)
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 		//// Load
 		//item = new MenuItem(new EzText("Load", ItemFont));
 		//item.Name = "Load";
@@ -512,22 +512,22 @@ namespace CloudberryKingdom
 	#else
 		float scale = .75f;
 
-		std::shared_ptr<EzText> text;
-		text = std::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Load" ), ItemFont );
+		boost::shared_ptr<EzText> text;
+		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Load" ), ItemFont );
 		text->Name = _T( "Load" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 417.4604f, -159.4446f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		MyPile->Add( text );
 
-		text = std::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Delete" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Delete" ), ItemFont );
 		text->Name = _T( "Delete" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
 		text->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
 		MyPile->Add( text );
 
-		text = std::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
 		text->Name = _T( "Back" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 682.4761f, -622.5079f ) );

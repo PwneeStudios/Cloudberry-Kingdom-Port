@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		/// <summary> Used to determine if a coin should be placed (Regular style) </summary>
 		int Regular_Period, Regular_Offset, Regular_Period2, Regular_Offset2;
 		/// <summary> Whehter a coin should be placed (Regular style) </summary>
-		bool Regular_ReadyToPlace( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob, int Step );
+		bool Regular_ReadyToPlace( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob, int Step );
 
 		bool CoinPlaced;
 
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 
 		_Special Special;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -68,29 +68,29 @@ namespace CloudberryKingdom
 			BobPos_REGULAR
 		};
 	
-		static std::shared_ptr<Coin_AutoGen> instance;
+		static boost::shared_ptr<Coin_AutoGen> instance;
 	
-		const static std::shared_ptr<Coin_AutoGen> &getInstance();
+		const static boost::shared_ptr<Coin_AutoGen> &getInstance();
 
 	
 		Coin_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
 	
 		int offset;
 	
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, bool NewOffset );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, bool NewOffset );
 
 	
-		Vector2 CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos );
+		Vector2 CalcPos( const boost::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos );
 
 	
-		void ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 	};
 
 }

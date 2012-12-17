@@ -14,22 +14,22 @@ namespace CloudberryKingdom
 	unsigned long long ObjectData::NextId;
 
 
-	const std::shared_ptr<GameData> &ObjectBase::getGame() const
+	const boost::shared_ptr<GameData> &ObjectBase::getGame() const
 	{
 		return getCore()->MyLevel->MyGame;
 	}
 
-	const std::shared_ptr<Level> &ObjectBase::getMyLevel() const
+	const boost::shared_ptr<Level> &ObjectBase::getMyLevel() const
 	{
 		return getCore()->MyLevel;
 	}
 
-	const std::shared_ptr<Camera> &ObjectBase::getCam() const
+	const boost::shared_ptr<Camera> &ObjectBase::getCam() const
 	{
 		return getCore()->MyLevel->getMainCamera();
 	}
 
-	const std::shared_ptr<Rand> &ObjectBase::getRnd() const
+	const boost::shared_ptr<Rand> &ObjectBase::getRnd() const
 	{
 		return getCore()->MyLevel->getRnd();
 	}
@@ -44,12 +44,12 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = value;
 	}
 
-	const std::shared_ptr<ObjectData> &ObjectBase::getCore() const
+	const boost::shared_ptr<ObjectData> &ObjectBase::getCore() const
 	{
 		return CoreData;
 	}
 
-	const std::shared_ptr<TileSetInfo> ObjectBase::getInfo() const
+	const boost::shared_ptr<TileSetInfo> ObjectBase::getInfo() const
 	{
 		if ( CoreData->MyLevel == 0 )
 			return 0;
@@ -59,10 +59,10 @@ namespace CloudberryKingdom
 
 	ObjectBase::ObjectBase()
 	{
-		CoreData = std::make_shared<ObjectData>();
+		CoreData = boost::make_shared<ObjectData>();
 	}
 
-	void ObjectBase::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void ObjectBase::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		getCore()->StartData.Position = getCore()->Data.Position = pos;
 
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		getCore()->Release();
 	}
 
-	void ObjectBase::SetParentBlock( const std::shared_ptr<BlockBase> &block )
+	void ObjectBase::SetParentBlock( const boost::shared_ptr<BlockBase> &block )
 	{
 		getCore()->SetParentBlock(block);
 		OnAttachedToBlock();
@@ -119,22 +119,22 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void ObjectBase::Clone( const std::shared_ptr<ObjectBase> &A )
+	void ObjectBase::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 	}
 
-	void ObjectBase::Read( const std::shared_ptr<BinaryReader> &reader )
+	void ObjectBase::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		getCore()->Read(reader);
 	}
 
-	void ObjectBase::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void ObjectBase::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		getCore()->Write(writer);
 	}
 
-	void ObjectBase::Interact( const std::shared_ptr<Bob> &bob )
+	void ObjectBase::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
@@ -161,16 +161,16 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	void ObjectBase::Smash( const std::shared_ptr<Bob> &bob )
+	void ObjectBase::Smash( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
-	bool ObjectBase::PreDecision( const std::shared_ptr<Bob> &bob )
+	bool ObjectBase::PreDecision( const boost::shared_ptr<Bob> &bob )
 	{
 		return false;
 	}
 
-	void GenerationData::Decide_RemoveIfUnused( float ChanceToKeep, const std::shared_ptr<Rand> &Rnd )
+	void GenerationData::Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd )
 	{
 		if ( Rnd->Rnd->NextDouble() < ChanceToKeep )
 		{
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		UseWhenUsed = false;
 	}
 
-	const std::shared_ptr<Recycler> ObjectData::getRecycle() const
+	const boost::shared_ptr<Recycler> ObjectData::getRecycle() const
 	{
 		if ( MyLevel != 0 )
 			return MyLevel->getRecycle();
@@ -287,19 +287,19 @@ namespace CloudberryKingdom
 			return true;
 	}
 
-	const std::shared_ptr<TileSet> &ObjectData::getMyTileSet() const
+	const boost::shared_ptr<TileSet> &ObjectData::getMyTileSet() const
 	{
 		return _TileSet;
 	}
 
-	void ObjectData::setMyTileSet( const std::shared_ptr<TileSet> &value )
+	void ObjectData::setMyTileSet( const boost::shared_ptr<TileSet> &value )
 	{
 		_TileSet = value;
 		if ( _TileSet == 0 )
 			Tools::Break();
 	}
 
-	std::shared_ptr<AutoGen_Parameters> ObjectData::GetParams( const std::shared_ptr<AutoGen> &singleton )
+	boost::shared_ptr<AutoGen_Parameters> ObjectData::GetParams( const boost::shared_ptr<AutoGen> &singleton )
 	{
 		return MyLevel->CurPiece->MyData->Style->FindParams( singleton );
 	}
@@ -309,12 +309,12 @@ namespace CloudberryKingdom
 		return NextId++;
 	}
 
-	const std::shared_ptr<Bob> &ObjectData::getInteractingBob() const
+	const boost::shared_ptr<Bob> &ObjectData::getInteractingBob() const
 	{
 		return _InteractingBob;
 	}
 
-	void ObjectData::setInteractingBob( const std::shared_ptr<Bob> &value )
+	void ObjectData::setInteractingBob( const boost::shared_ptr<Bob> &value )
 	{
 		_InteractingBob = value;
 
@@ -330,7 +330,7 @@ namespace CloudberryKingdom
 	//				( *obj )->getCore()->AddAssociate(*_obj, DeleteWhenDeleted, UseWhenUsed);
 	//}
 
-	//void ObjectData::AddAssociate( const std::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed )
+	//void ObjectData::AddAssociate( const boost::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed )
 	//{
 	//	int FreeIndex = 0;
 	//	if ( Associations.empty() )
@@ -348,7 +348,7 @@ namespace CloudberryKingdom
 	//	Associations[ FreeIndex ].UseWhenUsed = UseWhenUsed;
 	//}
 
-	bool ObjectData::IsAssociatedWith( const std::shared_ptr<ObjectBase> &obj )
+	bool ObjectData::IsAssociatedWith( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		if ( Associations.empty() || obj->getCore()->Associations.empty() )
 			return false;
@@ -363,7 +363,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	int ObjectData::GetAssociatedIndex( const std::shared_ptr<ObjectBase> &obj )
+	int ObjectData::GetAssociatedIndex( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		for ( int i = 0; i < static_cast<float>( Associations.size() ); i++ )
 			if ( Associations[ i ].Guid == obj->getCore()->MyGuid )
@@ -372,7 +372,7 @@ namespace CloudberryKingdom
 		return -1;
 	}
 
-	ObjectData::AssociatedObjData ObjectData::GetAssociationData( const std::shared_ptr<ObjectBase> &obj )
+	ObjectData::AssociatedObjData ObjectData::GetAssociationData( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		for ( std::vector<ObjectData::AssociatedObjData>::const_iterator objdata = Associations.begin(); objdata != Associations.end(); ++objdata )
 			if ( ( *objdata ).Guid == obj->getCore()->MyGuid )
@@ -403,13 +403,13 @@ namespace CloudberryKingdom
 		_InteractingBob.reset();
 	}
 
-	void ObjectData::SetParentObj( const std::shared_ptr<ObjectBase> &obj )
+	void ObjectData::SetParentObj( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		ParentObject = obj;
 		ParentObjId = obj->getCore()->MyGuid;
 	}
 
-	void ObjectData::SetParentBlock( const std::shared_ptr<BlockBase> &block )
+	void ObjectData::SetParentBlock( const boost::shared_ptr<BlockBase> &block )
 	{
 		ParentBlock = block;
 
@@ -418,7 +418,7 @@ namespace CloudberryKingdom
 
 	Vector2 ObjectData::GetPosFromParentOffset()
 	{
-		std::shared_ptr<BlockData> pdata = ParentBlock->getBlockCore();
+		boost::shared_ptr<BlockData> pdata = ParentBlock->getBlockCore();
 
 		//return ParentBlock.Box.Target.Center + ParentOffset;
 		if ( pdata->UseCustomCenterAsParent )
@@ -526,7 +526,7 @@ namespace CloudberryKingdom
 		Associations.clear();
 	}
 
-	void ObjectData::Clone( const std::shared_ptr<ObjectData> &A )
+	void ObjectData::Clone( const boost::shared_ptr<ObjectData> &A )
 	{
 		setMyTileSet( A->getMyTileSet() );
 		Encased = A->Encased;
@@ -607,7 +607,7 @@ namespace CloudberryKingdom
 		ParentOffset = A->ParentOffset;
 	}
 
-	void ObjectData::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void ObjectData::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( static_cast<unsigned int>( getMyTileSet()->Guid ) );
 		writer->Write( EditorCode1 );
@@ -649,7 +649,7 @@ namespace CloudberryKingdom
 		WriteReadTools::WriteVector2( writer, ParentOffset );
 	}
 
-	void ObjectData::Read( const std::shared_ptr<BinaryReader> &reader )
+	void ObjectData::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		//MyTileSet = (TileSet)reader.ReadUInt32();
 		int TileGuid = static_cast<int>( reader->ReadUInt32() );

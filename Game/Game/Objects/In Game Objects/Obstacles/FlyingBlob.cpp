@@ -17,8 +17,8 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::shared_ptr<Particle> FlyingBlob::BlobGooTemplate;
-	std::shared_ptr<EzSound> FlyingBlob::SquishSound;
+	boost::shared_ptr<Particle> FlyingBlob::BlobGooTemplate;
+	boost::shared_ptr<EzSound> FlyingBlob::SquishSound;
 	std::vector<float> FlyingBlob::BobMaxSpeed;
 	float FlyingBlob::BobXAccel;
 	float FlyingBlob::BobXFriction;
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::FlyingBlobTileInfo::InitializeInstanceFields()
 	{
-		Body = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f), Vector2(), Color::White );
+		Body = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2(1.f), Vector2(), Color::White );
 		ObjectSize = Vector2( 616.05f, 616.05f );
 		GooSprite = 0;
 	}
@@ -62,12 +62,12 @@ namespace CloudberryKingdom
 		if ( getInfo()->Blobs->Body->Sprite != 0 )
 		{
 			if ( MyQuad == 0 )
-				MyQuad = std::make_shared<QuadClass>();
+				MyQuad = boost::make_shared<QuadClass>();
 			MyQuad->Set( getInfo()->Blobs->Body );
 		}
 	}
 
-	std::shared_ptr<EzTexture> FlyingBlob::GetGooTexture( BlobColor color )
+	boost::shared_ptr<EzTexture> FlyingBlob::GetGooTexture( BlobColor color )
 	{
 		switch ( color )
 		{
@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 		GiveVelocity = false;
 	}
 
-	void FlyingBlob::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void FlyingBlob::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_Obstacle::Init( pos, level );
 
@@ -188,10 +188,10 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::Construct( bool BoxesOnly )
 	{
-		MyObject = std::make_shared<SimpleObject>( Prototypes::FlyingBlobObj->MyObject, BoxesOnly );
+		MyObject = boost::make_shared<SimpleObject>( Prototypes::FlyingBlobObj->MyObject, BoxesOnly );
 
-		Box = std::make_shared<AABox>();
-		Box2 = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
+		Box2 = boost::make_shared<AABox>();
 
 		SetAnimation();
 
@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 		MyObject->Update();
 	}
 
-	FlyingBlob::FlyingBlob( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+	FlyingBlob::FlyingBlob( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad ) :
 		Period( 0 ),
 		Offset( 0 ),
 		HasArrived( false ),
@@ -236,13 +236,13 @@ namespace CloudberryKingdom
 		NeverSkip( false )
 	{
 		InitializeInstanceFields();
-		CoreData = std::make_shared<ObjectData>();
+		CoreData = boost::make_shared<ObjectData>();
 		getCore()->Active = true;
 
 		// Initialize statics
 		SquishSound = Tools::SoundWad->FindByName( _T( "Blob_Squish" ) );
 
-		BlobGooTemplate = std::make_shared<Particle>();
+		BlobGooTemplate = boost::make_shared<Particle>();
 		BlobGooTemplate->MyQuad.Init();
 		BlobGooTemplate->MyQuad.MyEffect = Tools::BasicEffect;
 		BlobGooTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "BlobGoo" ) ) );
@@ -254,13 +254,13 @@ namespace CloudberryKingdom
 		BlobGooTemplate->ColorVel = Vector4( 0.01f, 0.01f, 0, -.072f );
 		BlobGooTemplate->Data.Acceleration = Vector2( 0, -1.5f );
 
-		std::shared_ptr<ObjectClass> SourceObject;
+		boost::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		//boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
 
-		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		reader->Close();
 
 		SourceObject->ConvertForSimple();
-		MyObject = std::make_shared<SimpleObject>( SourceObject );
+		MyObject = boost::make_shared<SimpleObject>( SourceObject );
 		MyObject->Base.e1 *= 555;
 		MyObject->Base.e2 *= 555;
 
@@ -283,8 +283,8 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = Vector2(100, 50);
 		getCore()->Data.Velocity = Vector2(0, 0);
 
-		Box = std::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 0 ]->Size() / 2 );
-		Box2 = std::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 1 ]->Size() / 2 );
+		Box = boost::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 0 ]->Size() / 2 );
+		Box2 = boost::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 1 ]->Size() / 2 );
 
 		StartLife = Life = 1;
 		Direction = -1;
@@ -307,11 +307,11 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::Squish( Vector2 vel )
 	{
-		std::shared_ptr<CloudberryKingdom::ParticleEmitter> emitter = getCore()->MyLevel->MainEmitter;
+		boost::shared_ptr<CloudberryKingdom::ParticleEmitter> emitter = getCore()->MyLevel->MainEmitter;
 
 		for ( int k = 0; k < 9; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = emitter->GetNewParticle( BlobGooTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = emitter->GetNewParticle( BlobGooTemplate );
 			if ( getInfo()->Blobs->GooSprite == 0 )
 				p->MyQuad.setMyTexture( GetGooTexture( MyColor ) );
 			else
@@ -604,7 +604,7 @@ namespace CloudberryKingdom
 		MyObject->Update();
 	}
 
-	void FlyingBlob::Interact( const std::shared_ptr<Bob> &bob )
+	void FlyingBlob::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->Active )
 			return;
@@ -694,7 +694,7 @@ namespace CloudberryKingdom
 
 			if ( DoInteraction && ( UnderFoot || SideHit ) )
 			{
-				if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 )
+				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 )
 					UnderFoot = false;
 
 				if ( UnderFoot )
@@ -754,11 +754,11 @@ namespace CloudberryKingdom
 		MyObject->Update();
 	}
 
-	void FlyingBlob::Clone( const std::shared_ptr<ObjectBase> &A )
+	void FlyingBlob::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<FlyingBlob> GoombaA = std::dynamic_pointer_cast<FlyingBlob>( A );
+		boost::shared_ptr<FlyingBlob> GoombaA = boost::dynamic_pointer_cast<FlyingBlob>( A );
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );
 
 		MyMoveType = GoombaA->MyMoveType;

@@ -3,17 +3,17 @@
 namespace CloudberryKingdom
 {
 
-	SaveSeedAs::SaveProxy::SaveProxy( const std::shared_ptr<SaveSeedAs> &ssa )
+	SaveSeedAs::SaveProxy::SaveProxy( const boost::shared_ptr<SaveSeedAs> &ssa )
 	{
 		this->ssa = ssa;
 	}
 
-	void SaveSeedAs::SaveProxy::Apply( const std::shared_ptr<MenuItem> &_item )
+	void SaveSeedAs::SaveProxy::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		ssa->Save( _item );
 	}
 
-	SaveSeedAs::OnOkProxy::OnOkProxy( const std::shared_ptr<SaveSeedAs> &ssa )
+	SaveSeedAs::OnOkProxy::OnOkProxy( const boost::shared_ptr<SaveSeedAs> &ssa )
 	{
 		this->ssa = ssa;
 	}
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		ssa->OnOk();
 	}
 
-	SaveSeedAs::SaveSeedAsOnEscapeLambda::SaveSeedAsOnEscapeLambda( const std::shared_ptr<SaveSeedAs> &ssa )
+	SaveSeedAs::SaveSeedAsOnEscapeLambda::SaveSeedAsOnEscapeLambda( const boost::shared_ptr<SaveSeedAs> &ssa )
 	{
 		this->ssa = ssa;
 	}
@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 		ssa->ReturnToCaller();
 	}
 
-	SaveSeedAs::SaveSeedAsOnEnterLambda::SaveSeedAsOnEnterLambda( const std::shared_ptr<SaveSeedAs> &ssa )
+	SaveSeedAs::SaveSeedAsOnEnterLambda::SaveSeedAsOnEnterLambda( const boost::shared_ptr<SaveSeedAs> &ssa )
 	{
 		this->ssa = ssa;
 	}
@@ -47,8 +47,8 @@ namespace CloudberryKingdom
 		ssa->Save( 0 );
 	}
 
-	SaveSeedAs::SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
-	std::shared_ptr<SaveSeedAs> SaveSeedAs::SaveSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player )
+	SaveSeedAs::SaveSeedAs( int Control, const boost::shared_ptr<PlayerData> &Player ) : VerifyBaseMenu( false ) { }
+	boost::shared_ptr<SaveSeedAs> SaveSeedAs::SaveSeedAs_Construct( int Control, const boost::shared_ptr<PlayerData> &Player )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<SaveSeedAs>( shared_from_this() );
+		return boost::static_pointer_cast<SaveSeedAs>( shared_from_this() );
 	}
 
 	void SaveSeedAs::Init()
@@ -69,31 +69,31 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		HeaderText = std::make_shared<EzText>( Localization::Words_SAVE_RANDOM_SEED_AS, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_SAVE_RANDOM_SEED_AS, ItemFont );
 		HeaderText->Name = _T( "Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
 		// Save seed
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
 		item->Name = _T( "Save" );
-		item->setGo( std::make_shared<SaveProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
 
 		MakeBackButton();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		SetPosition();
 		MyMenu->SortByHeight();
 		MyMenu->SelectItem( 0 );
 	}
 
-	void SaveSeedAs::Save( const std::shared_ptr<MenuItem> &_item )
+	void SaveSeedAs::Save( const boost::shared_ptr<MenuItem> &_item )
 	{
 		// Save the seed
 		if ( TextBox->getText().length() > 0 )
@@ -102,15 +102,15 @@ namespace CloudberryKingdom
 			Player->MySavedSeeds->SaveSeed( Tools::CurLevel->MyLevelSeed->ToString(), TextBox->getText() );
 
 			// Success!
-			std::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY ) );
-			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
+			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY ) );
+			ok->OnOk = boost::make_shared<OnOkProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}
 		else
 		{
 			// Failure!
-			std::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH ) );
-			ok->OnOk = std::make_shared<OnOkProxy>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
+			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH ) );
+			ok->OnOk = boost::make_shared<OnOkProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}
 
@@ -141,7 +141,7 @@ namespace CloudberryKingdom
 
 	void SaveSeedAs::SetPosition()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Save" ) );
 		if ( _item != 0 )
 		{
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1125.001f, -319.4444f ) );
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -176,8 +176,8 @@ namespace CloudberryKingdom
 		TextBox->FixedToCamera = false;
 		TextBox->Pos->SetCenter( MyPile->FancyPos );
 		TextBox->Pos->RelVal = Vector2( 1175.001f, 277.7778f );
-		TextBox->OnEnter->Add( std::make_shared<SaveSeedAsOnEnterLambda>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
-		TextBox->OnEscape->Add( std::make_shared<SaveSeedAsOnEscapeLambda>( std::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEnter->Add( boost::make_shared<SaveSeedAsOnEnterLambda>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
+		TextBox->OnEscape->Add( boost::make_shared<SaveSeedAsOnEscapeLambda>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		MyGame->AddGameObject( TextBox );
 
 		SetPosition();

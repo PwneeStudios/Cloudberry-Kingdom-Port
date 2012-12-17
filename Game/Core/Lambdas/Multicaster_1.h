@@ -9,12 +9,12 @@ namespace CloudberryKingdom
 	struct Multicaster_1 : public Lambda_1<T>
 	{
 	
-		std::vector<std::shared_ptr<Lambda_1<T> > > MyList;
+		std::vector<boost::shared_ptr<Lambda_1<T> > > MyList;
 
 	
 		void Apply( const T &t )
 		{
-			for ( std::vector<std::shared_ptr<Lambda_1<T> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
+			for ( std::vector<boost::shared_ptr<Lambda_1<T> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
 				( *L )->Apply( t );
 		}
 
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 			MyList.clear();
 		}
 
-		void Add( const std::shared_ptr<Lambda_1<T> > L )
+		void Add( const boost::shared_ptr<Lambda_1<T> > L )
 		{
 			MyList.push_back( L );
 		}
@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields()
 		{
-			MyList = std::vector<std::shared_ptr<Lambda_1<T> > >();
+			MyList = std::vector<boost::shared_ptr<Lambda_1<T> > >();
 		}
 
 

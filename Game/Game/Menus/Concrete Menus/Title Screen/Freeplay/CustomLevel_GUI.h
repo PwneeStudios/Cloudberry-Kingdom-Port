@@ -16,49 +16,49 @@ namespace CloudberryKingdom
 		using GUI_Panel::SlideIn;
 
 	
-		struct StartLevelFromMenDataStandardLoadProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct StartLevelFromMenDataStandardLoadProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			std::shared_ptr<LevelSeedData> data;
+			boost::shared_ptr<LevelSeedData> data;
 
 		
-			StartLevelFromMenDataStandardLoadProxy( const std::shared_ptr<LevelSeedData> &data );
+			StartLevelFromMenDataStandardLoadProxy( const boost::shared_ptr<LevelSeedData> &data );
 
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
-		struct StartLevelFromMenuDataInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+		struct StartLevelFromMenuDataInitializeHelper : public Lambda_1<boost::shared_ptr<PieceSeedData> >
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			StartLevelFromMenuDataInitializeHelper( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			StartLevelFromMenuDataInitializeHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
-			void Apply( const std::shared_ptr<PieceSeedData> &piece );
+			void Apply( const boost::shared_ptr<PieceSeedData> &piece );
 		};
 
 	
-		struct StartLevelEnableLoadProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct StartLevelEnableLoadProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			std::shared_ptr<LevelSeedData> data;
+			boost::shared_ptr<LevelSeedData> data;
 
 		
-			StartLevelEnableLoadProxy( const std::shared_ptr<LevelSeedData> &data );
+			StartLevelEnableLoadProxy( const boost::shared_ptr<LevelSeedData> &data );
 
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 	
 		struct OnReturnFromLevelProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			OnReturnFromLevelProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			OnReturnFromLevelProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
@@ -67,11 +67,11 @@ namespace CloudberryKingdom
 		struct InitOnSetValueHelper : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<LengthSlider> length;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<LengthSlider> length;
 
 		
-			InitOnSetValueHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
+			InitOnSetValueHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
@@ -80,11 +80,11 @@ namespace CloudberryKingdom
 		struct InitOnSlideHelper : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<LengthSlider> length;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<LengthSlider> length;
 
 		
-			InitOnSlideHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
+			InitOnSlideHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
@@ -93,11 +93,11 @@ namespace CloudberryKingdom
 		struct InitOnSlideHelper2 : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<LengthSlider> length;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<LengthSlider> length;
 
 		
-			InitOnSlideHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
+			InitOnSlideHelper2( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
@@ -106,36 +106,36 @@ namespace CloudberryKingdom
 		struct InitOnSetValueHelper2 : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<LengthSlider> length;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<LengthSlider> length;
 
 		
-			InitOnSetValueHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length );
+			InitOnSetValueHelper2( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length );
 
 			void Apply();
 		};
 
 	
-		struct InitOnAStartHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+		struct InitOnAStartHelper : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			InitOnAStartHelper( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			InitOnAStartHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
-			bool Apply( const std::shared_ptr<Menu> &dummy );
+			bool Apply( const boost::shared_ptr<Menu> &dummy );
 		};
 
 	
 		struct InitOnIndexSelectHelper : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<MenuList> LocationList;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<MenuList> LocationList;
 
 		
-			InitOnIndexSelectHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &LocationList );
+			InitOnIndexSelectHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<MenuList> &LocationList );
 
 			void Apply();
 		};
@@ -144,11 +144,11 @@ namespace CloudberryKingdom
 		struct InitOnIndexSelect : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
-			std::shared_ptr<MenuList> GameList;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<MenuList> GameList;
 
 		
-			InitOnIndexSelect( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &GameList );
+			InitOnIndexSelect( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<MenuList> &GameList );
 
 			void Apply();
 		};
@@ -157,10 +157,10 @@ namespace CloudberryKingdom
 		struct DiffList_OnIndexProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			DiffList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			DiffList_OnIndexProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
@@ -169,10 +169,10 @@ namespace CloudberryKingdom
 		struct HeroList_OnIndexProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			HeroList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			HeroList_OnIndexProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
@@ -181,10 +181,10 @@ namespace CloudberryKingdom
 		struct BringNextProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			BringNextProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			BringNextProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
@@ -193,29 +193,29 @@ namespace CloudberryKingdom
 		struct BringLoadProxy : public Lambda
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			BringLoadProxy( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			BringLoadProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
 			void Apply();
 		};
 
 	
-		struct BringLoadProxy1 : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct BringLoadProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<CustomLevel_GUI> clGui;
+			boost::shared_ptr<CustomLevel_GUI> clGui;
 
 		
-			BringLoadProxy1( const std::shared_ptr<CustomLevel_GUI> &clGui );
+			BringLoadProxy1( const boost::shared_ptr<CustomLevel_GUI> &clGui );
 
-			void Apply( const std::shared_ptr<MenuItem> &dummy );
+			void Apply( const boost::shared_ptr<MenuItem> &dummy );
 		};
 
 	
-		static std::vector<std::shared_ptr<TileSet> > FreeplayTilesets;
-		static std::vector<std::shared_ptr<BobPhsx> > FreeplayHeroes;
+		static std::vector<boost::shared_ptr<TileSet> > FreeplayTilesets;
+		static std::vector<boost::shared_ptr<BobPhsx> > FreeplayHeroes;
 
 		static bool IsMaxLength;
 		static int Difficulty;
@@ -223,21 +223,21 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// This is the level seed being edited.
 		/// </summary>
-		std::shared_ptr<LevelSeedData> LevelSeed;
-		std::shared_ptr<PieceSeedData> PieceSeed;
+		boost::shared_ptr<LevelSeedData> LevelSeed;
+		boost::shared_ptr<PieceSeedData> PieceSeed;
 
-		std::shared_ptr<ObjectIcon> HeroIcon, MiniCheckpoint;
+		boost::shared_ptr<ObjectIcon> HeroIcon, MiniCheckpoint;
 
 	
 		static Localization::Words CustomHeroString;
 
 	
 		CustomLevel_GUI();
-		std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI_Construct();
+		boost::shared_ptr<CustomLevel_GUI> CustomLevel_GUI_Construct();
 
 		void StartLevelFromMenuData();
 
-		void StartLevel( const std::shared_ptr<LevelSeedData> &data );
+		void StartLevel( const boost::shared_ptr<LevelSeedData> &data );
 
 		virtual void OnAdd();
 
@@ -273,16 +273,16 @@ namespace CloudberryKingdom
 
 		//static Vector2 RightPanelCenter = new Vector2(-410, 75);
 		static Vector2 RightPanelCenter;
-		std::shared_ptr<LengthSlider> length;
-		std::shared_ptr<MenuSliderBase> checkpoints;
-		std::shared_ptr<MenuItem> Start;
-		std::shared_ptr<MenuList> HeroList, DiffList;
-		std::shared_ptr<EzText> HeroText, CheckpointsText;
+		boost::shared_ptr<LengthSlider> length;
+		boost::shared_ptr<MenuSliderBase> checkpoints;
+		boost::shared_ptr<MenuItem> Start;
+		boost::shared_ptr<MenuList> HeroList, DiffList;
+		boost::shared_ptr<EzText> HeroText, CheckpointsText;
 	
 		virtual void Init();
 
 	
-		std::shared_ptr<MenuItem> AddHeroItem( const std::shared_ptr<BobPhsx> &hero );
+		boost::shared_ptr<MenuItem> AddHeroItem( const boost::shared_ptr<BobPhsx> &hero );
 
 		void DiffList_OnIndex();
 
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		/// The panel that actually starts the level, when it is started.
 		/// </summary>
 	
-		std::shared_ptr<GUI_Panel> CallingPanel;
+		boost::shared_ptr<GUI_Panel> CallingPanel;
 
 	
 		void BringNext();
@@ -315,7 +315,7 @@ namespace CloudberryKingdom
 		virtual void Show();
 
 	
-		std::shared_ptr<CustomHero_GUI> HeroGui;
+		boost::shared_ptr<CustomHero_GUI> HeroGui;
 		void BringHero();
 
 		void BringUpgrades();

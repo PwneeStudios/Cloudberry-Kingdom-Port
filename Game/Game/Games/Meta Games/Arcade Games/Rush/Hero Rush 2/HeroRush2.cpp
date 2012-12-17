@@ -5,20 +5,20 @@
 namespace CloudberryKingdom
 {
 
-	Challenge_HeroRush2::OnSwapLambda::OnSwapLambda( const std::shared_ptr<Challenge_HeroRush2> &ch )
+	Challenge_HeroRush2::OnSwapLambda::OnSwapLambda( const boost::shared_ptr<Challenge_HeroRush2> &ch )
 	{
 		this->ch = ch;
 	}
 
-	void Challenge_HeroRush2::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
+	void Challenge_HeroRush2::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
-		data->MyGame->AddGameObject( std::make_shared<HeroRush2_Tutorial>( ch ) );
+		data->MyGame->AddGameObject( boost::make_shared<HeroRush2_Tutorial>( ch ) );
 	}
 
 	std::vector<HeroSpec> Challenge_HeroRush2::HeroList;
-	std::shared_ptr<Challenge_HeroRush2> Challenge_HeroRush2::instance;
+	boost::shared_ptr<Challenge_HeroRush2> Challenge_HeroRush2::instance;
 
-	const std::shared_ptr<Challenge_HeroRush2> &Challenge_HeroRush2::getInstance()
+	const boost::shared_ptr<Challenge_HeroRush2> &Challenge_HeroRush2::getInstance()
 	{
 		return instance;
 	}
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	void Challenge_HeroRush2::MakeExitDoorIcon( int levelindex )
 	{
 		HeroSpec spec = HeroList[ ( levelindex + 1 - StartIndex ) % HeroList.size() ];
-		std::shared_ptr<GameData> game = Tools::CurGameData;
+		boost::shared_ptr<GameData> game = Tools::CurGameData;
 		Vector2 pos = Tools::CurLevel->getFinalDoor()->getPos();
 
 		// Count number of icons needed
@@ -129,7 +129,7 @@ namespace CloudberryKingdom
 		Challenge_HeroRush::Start( StartLevel );
 	}
 
-	std::shared_ptr<BobPhsx> Challenge_HeroRush2::GetHero( int i )
+	boost::shared_ptr<BobPhsx> Challenge_HeroRush2::GetHero( int i )
 	{
 		//return BobPhsx.MakeCustom(HeroList[i % NumHeros]);
 		return BobPhsx::MakeCustom( HeroList[ i % HeroList.size() ] );
@@ -138,6 +138,6 @@ namespace CloudberryKingdom
 	void Challenge_HeroRush2::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_HeroRush2>( shared_from_this() ) ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<Challenge_HeroRush2>( shared_from_this() ) ) );
 	}
 }

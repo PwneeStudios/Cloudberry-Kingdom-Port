@@ -4,11 +4,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxMeat::InitializeStatics()
 	{
-		BobPhsxMeat::instance = std::make_shared<BobPhsxMeat>();
+		BobPhsxMeat::instance = boost::make_shared<BobPhsxMeat>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance;
+	boost::shared_ptr<BobPhsxMeat> BobPhsxMeat::instance;
 
 	void BobPhsxMeat::Release()
 	{
@@ -17,17 +17,17 @@ namespace CloudberryKingdom
 		LastStickyBlock.reset();
 	}
 
-	void BobPhsxMeat::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxMeat::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		Set( phsx, Vector2(1) );
 	}
 
-	void BobPhsxMeat::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
+	void BobPhsxMeat::Set( const boost::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
 	{
 		phsx->ModInitSize = 1.25f * Vector2( .27f,.27f ) * modsize;
 		phsx->CapePrototype = CapeType_SMALL;
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->BobJumpLength = static_cast<int>( normal->BobJumpLength * 1.5f );
@@ -59,24 +59,24 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 5, 0, 0, 0 );
 		Name = Localization::Words_MEATBOY;
 		Adjective = _T( "Meat" );
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Meat" ) ), Color::White, 1.2f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Meat" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
 
-	const std::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance()
+	const boost::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxMeat::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxMeat::Clone()
 	{
-		std::shared_ptr<BobPhsxMeat> newBob = std::make_shared<BobPhsxMeat>();
+		boost::shared_ptr<BobPhsxMeat> newBob = boost::make_shared<BobPhsxMeat>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxMeat::CopyTo( const std::shared_ptr<BobPhsxMeat> &bob )
+	void BobPhsxMeat::CopyTo( const boost::shared_ptr<BobPhsxMeat> &bob )
 	{
-		BobPhsxNormal::CopyTo( std::static_pointer_cast<BobPhsxNormal>( bob ) );
+		BobPhsxNormal::CopyTo( boost::static_pointer_cast<BobPhsxNormal>( bob ) );
 
 		bob->LastJumpWasSticky = LastJumpWasSticky;
 		bob->StepsSinceSide = StepsSinceSide;
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		//Set( shared_from_this() );
 	}
 
-	void BobPhsxMeat::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxMeat::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsxNormal::Init( bob );
 
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 		Target = Vector2( FLT_MIN, FLT_MIN );
 	}
 
-	void BobPhsxMeat::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
+	void BobPhsxMeat::SideHit( ColType side, const boost::shared_ptr<BlockBase> &block )
 	{
 		BobPhsxNormal::SideHit( side, block );
 
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 		//    base.LandOnSomething(false);
 	}
 
-	void BobPhsxMeat::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxMeat::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		BobPhsxNormal::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 
@@ -318,7 +318,7 @@ namespace CloudberryKingdom
 		return StartJumpAnim;
 	}
 
-	void BobPhsxMeat::SetTarget( const std::shared_ptr<RichLevelGenData> &GenData )
+	void BobPhsxMeat::SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
 		BobPhsxNormal::SetTarget( GenData );
 	}
@@ -460,17 +460,17 @@ namespace CloudberryKingdom
 		}
 	}
 
-	bool BobPhsxMeat::IsTopCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	bool BobPhsxMeat::IsTopCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		return Col != ColType_NO_COL && Col == ColType_TOP;
 	}
 
-	bool BobPhsxMeat::IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	bool BobPhsxMeat::IsBottomCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		return Col == ColType_BOTTOM;
 	}
 
-	void BobPhsxMeat::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxMeat::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 		BobPhsxNormal::ModData( makeData, Style );
 
@@ -484,18 +484,18 @@ namespace CloudberryKingdom
 		Style->ChanceToKeepUnused = 0;
 
 		// Square mblocks, vertical motion
-		std::shared_ptr<MovingBlock_Parameters> MParams = std::static_pointer_cast<MovingBlock_Parameters>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<MovingBlock_Parameters> MParams = boost::static_pointer_cast<MovingBlock_Parameters>( Style->FindParams( MovingBlock_AutoGen::getInstance() ) );
 		MParams->Aspect = MovingBlock_Parameters::AspectType_SQUARE;
 		//MParams.Motion = MovingBlock_Parameters.MotionType.Vertical;
 		//MParams.Motion = MovingBlock_Parameters.MotionType.Horizontal;
 		//MParams.Size = size;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = std::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<GhostBlock_Parameters> GhParams = boost::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_LONG;
-		std::shared_ptr<FallingBlock_Parameters> FParams = std::static_pointer_cast<FallingBlock_Parameters>( Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
-		std::shared_ptr<BouncyBlock_Parameters> BParams = std::static_pointer_cast<BouncyBlock_Parameters>( Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<FallingBlock_Parameters> FParams = boost::static_pointer_cast<FallingBlock_Parameters>( Style->FindParams( FallingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<BouncyBlock_Parameters> BParams = boost::static_pointer_cast<BouncyBlock_Parameters>( Style->FindParams( BouncyBlock_AutoGen::getInstance() ) );
 		//var GParams = (Goomba_Parameters)Style.FindParams(Goomba_AutoGen.Instance);
-		std::shared_ptr<NormalBlock_Parameters> NParams = std::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<NormalBlock_Parameters> NParams = boost::static_pointer_cast<NormalBlock_Parameters>( Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
 		//NParams.CustomWeight = true;
 		//NParams.FillWeight.Val = 1;
 

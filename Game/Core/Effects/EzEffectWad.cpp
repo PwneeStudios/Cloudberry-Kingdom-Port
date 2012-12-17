@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		EffectList = EffectVec();
 	}
 
-	std::shared_ptr<EzEffect> EzEffectWad::FindByName( const std::wstring &name )
+	boost::shared_ptr<EzEffect> EzEffectWad::FindByName( const std::wstring &name )
 	{
 		for ( EffectVec::const_iterator effect = EffectList.begin(); effect != EffectList.end(); ++effect )
 			if ( ( *effect )->Name.compare( name ) == 0 )
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		return Tools::BasicEffect;
 	}
 
-	void EzEffectWad::AddEffect( const std::shared_ptr<Effect> &effect, const std::wstring &Name )
+	void EzEffectWad::AddEffect( const boost::shared_ptr<Effect> &effect, const std::wstring &Name )
 	{
 		for ( EffectVec::const_iterator e = EffectList.begin(); e != EffectList.end(); ++e )
 		{
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 			}
 		}
 
-		std::shared_ptr<EzEffect> Neweffect = std::make_shared<EzEffect>();
+		boost::shared_ptr<EzEffect> Neweffect = boost::make_shared<EzEffect>();
 		Neweffect->Name = Name;
 		Neweffect->effect = effect;
 

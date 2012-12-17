@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		Background_Sea( const std::wstring &Name );
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 	};
 
 	struct Background_SeaRain : public BackgroundTemplate
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 	
 		Background_SeaRain( const std::wstring &Name );
 
-		virtual void Code( const std::shared_ptr<Background> &b );
+		virtual void Code( const boost::shared_ptr<Background> &b );
 	};
 
 }

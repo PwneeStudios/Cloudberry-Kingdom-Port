@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 		int MySeed;
 		Rand( int seed );
 
-		std::shared_ptr<Random> Rnd;
+		boost::shared_ptr<Random> Rnd;
 
 		Vector2 RndPos( Vector2 BL, Vector2 TR );
 

@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 			Orientation_RIGHT
 		};
 	
-		std::shared_ptr<SimpleObject> MyObject;
+		boost::shared_ptr<SimpleObject> MyObject;
 
 		Arrow();
 

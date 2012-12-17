@@ -15,14 +15,14 @@ namespace CloudberryKingdom
 		// Singleton
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxRandom> instance;
+		static boost::shared_ptr<BobPhsxRandom> instance;
 	
-		static const std::shared_ptr<BobPhsxRandom> &getInstance();
+		static const boost::shared_ptr<BobPhsxRandom> &getInstance();
 
-		static std::shared_ptr<BobPhsx> ChooseHeroType();
+		static boost::shared_ptr<BobPhsx> ChooseHeroType();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxRandom> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxRandom> &bob );
 
 		// Instancable struct
 		BobPhsxRandom();

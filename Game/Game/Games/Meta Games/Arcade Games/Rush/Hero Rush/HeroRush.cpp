@@ -7,14 +7,14 @@ namespace CloudberryKingdom
 
 	void Challenge_HeroRush::InitializeStatics()
 	{
-		Challenge_HeroRush::instance = std::make_shared<Challenge_HeroRush>();
+		Challenge_HeroRush::instance = boost::make_shared<Challenge_HeroRush>();
 
 		int tempVector[] = { 20, 15, 10, 10, 10 };
 		Challenge_HeroRush::MaxTime_ByDifficulty = VecFromArray( tempVector );
 		int tempVector2[] = { 15, 12, 10, 10, 10 };
 		Challenge_HeroRush::StartTime_ByDifficulty = VecFromArray( tempVector2 );
 
-		std::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
+		boost::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
 		Challenge_HeroRush::HeroTypes = VecFromArray( tempVector3 );
 
 		std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
@@ -22,24 +22,24 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance;
+	boost::shared_ptr<Challenge_HeroRush> Challenge_HeroRush::instance;
 
 	std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty;
 	std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty;
 
-	std::vector<std::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes;
+	std::vector<boost::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes;
 	std::vector<std::wstring> Challenge_HeroRush::tilesets;
 
 
 
-	Challenge_HeroRush::OnSwapLambda::OnSwapLambda( const std::shared_ptr<Challenge_HeroRush> &ch )
+	Challenge_HeroRush::OnSwapLambda::OnSwapLambda( const boost::shared_ptr<Challenge_HeroRush> &ch )
 	{
 		this->ch = ch;
 	}
 
-	void Challenge_HeroRush::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
+	void Challenge_HeroRush::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
-		data->MyGame->AddGameObject( std::make_shared<HeroRush_Tutorial>( ch ) );
+		data->MyGame->AddGameObject( boost::make_shared<HeroRush_Tutorial>( ch ) );
 	}
 
 	Challenge_HeroRush::ScoreMultiplierHelper::ScoreMultiplierHelper( float multiplier )
@@ -47,12 +47,12 @@ namespace CloudberryKingdom
 		this->multiplier = multiplier;
 	}
 
-	void Challenge_HeroRush::ScoreMultiplierHelper::Apply( const std::shared_ptr<GameData> &game )
+	void Challenge_HeroRush::ScoreMultiplierHelper::Apply( const boost::shared_ptr<GameData> &game )
 	{
 		game->ScoreMultiplier *= multiplier;
 	}
 
-	Challenge_HeroRush::AdditionalPreStartOnSwapToLevelHelper::AdditionalPreStartOnSwapToLevelHelper( const std::shared_ptr<Challenge_HeroRush> &chr )
+	Challenge_HeroRush::AdditionalPreStartOnSwapToLevelHelper::AdditionalPreStartOnSwapToLevelHelper( const boost::shared_ptr<Challenge_HeroRush> &chr )
 	{
 		this->chr = chr;
 	}
@@ -66,10 +66,10 @@ namespace CloudberryKingdom
 
 		// Score multiplier, x1, x1.5, x2, ... for levels 0, 20, 40, ...
 		float multiplier = 1 + ( ( levelindex + 1 ) / chr->LevelsPerDifficulty ) *.5f;
-		Tools::CurGameData->OnCalculateScoreMultiplier->Add( std::make_shared<ScoreMultiplierHelper>( multiplier ) );
+		Tools::CurGameData->OnCalculateScoreMultiplier->Add( boost::make_shared<ScoreMultiplierHelper>( multiplier ) );
 
 		// Mod number of coins
-		std::shared_ptr<CoinMod> mod = std::make_shared<CoinMod>( chr->Timer );
+		boost::shared_ptr<CoinMod> mod = boost::make_shared<CoinMod>( chr->Timer );
 		mod->LevelMax = 17;
 		mod->ParMultiplier_Start = 1.6f;
 		mod->ParMultiplier_End = 1;
@@ -84,13 +84,13 @@ namespace CloudberryKingdom
 		chr->OnSwapTo_GUI( levelindex );
 	}
 
-	void Challenge_HeroRush::MakeMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
+	void Challenge_HeroRush::MakeMyModParamsHelper::Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 	{
-		std::shared_ptr<Coin_Parameters> Params = std::dynamic_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
+		boost::shared_ptr<Coin_Parameters> Params = boost::dynamic_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
 		Params->FillType = Coin_Parameters::FillTypes_RUSH;
 	}
 
-	const std::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance()
+	const boost::shared_ptr<Challenge_HeroRush> &Challenge_HeroRush::getInstance()
 	{
 		return instance;
 	}
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 	void Challenge_HeroRush::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
 	}
 
 	void Challenge_HeroRush::MakeExitDoorIcon( int levelindex )
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 		PreStart_Tutorial( StartIndex > 0 );
 
 		// When a new level is swapped to...
-		MyStringWorld->OnSwapToLevel->Add( std::make_shared<AdditionalPreStartOnSwapToLevelHelper>( std::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
+		MyStringWorld->OnSwapToLevel->Add( boost::make_shared<AdditionalPreStartOnSwapToLevelHelper>( boost::static_pointer_cast<Challenge_HeroRush>( shared_from_this() ) ) );
 	}
 
 	void Challenge_HeroRush::OnSwapTo_GUI( int levelindex )
@@ -155,10 +155,10 @@ namespace CloudberryKingdom
 
 		// Cheering berries (20, 40, 60, ...)
 		if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 && levelindex != StartIndex )
-			Tools::CurGameData->AddGameObject( std::make_shared<SuperCheer>( 1 ) );
+			Tools::CurGameData->AddGameObject( boost::make_shared<SuperCheer>( 1 ) );
 	}
 
-	std::shared_ptr<LevelSeedData> Challenge_HeroRush::GetSeed( int Index )
+	boost::shared_ptr<LevelSeedData> Challenge_HeroRush::GetSeed( int Index )
 	{
 		std::vector<float> lerp_vec;
 
@@ -173,24 +173,24 @@ namespace CloudberryKingdom
 		lerp_vec.push_back(4.5f);
 
 		float difficulty = CoreMath::MultiLerpRestrict( Index / static_cast<float>( LevelsPerDifficulty ), lerp_vec );
-		std::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
+		boost::shared_ptr<CloudberryKingdom::LevelSeedData> seed = Make( Index, difficulty );
 
 		return seed;
 	}
 
-	std::shared_ptr<BobPhsx> Challenge_HeroRush::GetHero( int i )
+	boost::shared_ptr<BobPhsx> Challenge_HeroRush::GetHero( int i )
 	{
 		return HeroTypes[ i % HeroTypes.size() ];
 	}
 
-	std::shared_ptr<TileSet> Challenge_HeroRush::GetTileSet( int i )
+	boost::shared_ptr<TileSet> Challenge_HeroRush::GetTileSet( int i )
 	{
 		return TileSet::Get( tilesets[ ( i / LevelsPerTileset ) % tilesets.size() ] );
 	}
 
-	std::shared_ptr<LevelSeedData> Challenge_HeroRush::Make( int Index, float Difficulty )
+	boost::shared_ptr<LevelSeedData> Challenge_HeroRush::Make( int Index, float Difficulty )
 	{
-		std::shared_ptr<BobPhsx> hero = GetHero( Index - StartIndex );
+		boost::shared_ptr<BobPhsx> hero = GetHero( Index - StartIndex );
 
 		// Adjust the length. Longer for higher levels.
 		int Length;
@@ -203,11 +203,11 @@ namespace CloudberryKingdom
 		}
 
 		// Create the LevelSeedData
-		std::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length );
+		boost::shared_ptr<LevelSeedData> data = RegularLevel::HeroLevel( Difficulty, hero, Length );
 		data->SetTileSet( GetTileSet( Index - StartIndex ) );
 
 		// Adjust the piece seed data
-		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
+		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			// Shorten the initial computer delay
 			( *piece )->Style->ComputerWaitLengthRange = Vector2( 4, 23 );
@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 			( *piece )->Paths = 1;
 			( *piece )->LockNumOfPaths = true;
 
-			( *piece )->Style->MyModParams->Add( std::make_shared<MakeMyModParamsHelper>() );
+			( *piece )->Style->MyModParams->Add( boost::make_shared<MakeMyModParamsHelper>() );
 		}
 
 		return data;

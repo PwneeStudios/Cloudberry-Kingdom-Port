@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		struct MovingBlockTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<BlockGroup> Group;
 
 			MovingBlockTileInfo();
 
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 
 		virtual void ResetPieces();
 
-		void Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level );
+		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level );
 
 		void MoveToBounded( Vector2 shift );
 
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 		virtual void Extend( Side side, float pos );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

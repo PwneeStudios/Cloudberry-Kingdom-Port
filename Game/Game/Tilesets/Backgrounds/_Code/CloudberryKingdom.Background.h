@@ -5,26 +5,26 @@
 
 namespace CloudberryKingdom
 {
-	struct Background : public std::enable_shared_from_this<Background>
+	struct Background : public boost::enable_shared_from_this<Background>
 	{
 	
-		static void AddRainLayer( const std::shared_ptr<Background> &b );
+		static void AddRainLayer( const boost::shared_ptr<Background> &b );
 
-		static void TurnOnSnow( const std::shared_ptr<Background> &b );
+		static void TurnOnSnow( const boost::shared_ptr<Background> &b );
 
-		static void TurnOffSnow( const std::shared_ptr<Background> &b );
+		static void TurnOffSnow( const boost::shared_ptr<Background> &b );
 
-		static void _code_Forest( const std::shared_ptr<Background> &b );
+		static void _code_Forest( const boost::shared_ptr<Background> &b );
 
-		static void _code_Cloud( const std::shared_ptr<Background> &b );
+		static void _code_Cloud( const boost::shared_ptr<Background> &b );
 
-		static void _code_Cave( const std::shared_ptr<Background> &b );
+		static void _code_Cave( const boost::shared_ptr<Background> &b );
 
-		static void _code_Hills( const std::shared_ptr<Background> &b );
+		static void _code_Hills( const boost::shared_ptr<Background> &b );
 
-		static void _code_Castle( const std::shared_ptr<Background> &b );
+		static void _code_Castle( const boost::shared_ptr<Background> &b );
 
-		static void _code_Sea( const std::shared_ptr<Background> &b );
+		static void _code_Sea( const boost::shared_ptr<Background> &b );
 
 
 		int GuidCounter;
@@ -35,19 +35,19 @@ namespace CloudberryKingdom
 
 		Vector2 Wind;
 
-		std::shared_ptr<Level> MyLevel;
-		const std::shared_ptr<Rand> &getRnd() const;
+		boost::shared_ptr<Level> MyLevel;
+		const boost::shared_ptr<Rand> &getRnd() const;
 
-		std::shared_ptr<BackgroundTemplate> MyType;
+		boost::shared_ptr<BackgroundTemplate> MyType;
 
-		std::shared_ptr<BackgroundCollection> MyCollection;
+		boost::shared_ptr<BackgroundCollection> MyCollection;
 		Vector2 OffsetOffset; // How much the BackgroundQuad offset is offset by (from calls to Move)
 
 		float Light;
 
 		Vector2 BL, TR;
 
-		std::shared_ptr<TileSet> MyTileSet;
+		boost::shared_ptr<TileSet> MyTileSet;
 
 		void Release();
 
@@ -56,33 +56,33 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Reset();
 
-		static std::shared_ptr<Background> UseCode( const std::shared_ptr<BackgroundTemplate> &template_Renamed, const std::shared_ptr<Background> &b );
+		static boost::shared_ptr<Background> UseCode( const boost::shared_ptr<BackgroundTemplate> &template_Renamed, const boost::shared_ptr<Background> &b );
 
-		static std::shared_ptr<Background> Get( const std::wstring &name );
+		static boost::shared_ptr<Background> Get( const std::wstring &name );
 
-		static std::shared_ptr<Background> Get( const std::shared_ptr<BackgroundTemplate> &Type );
+		static boost::shared_ptr<Background> Get( const boost::shared_ptr<BackgroundTemplate> &Type );
 
 		Background();
 
-		virtual void Init( const std::shared_ptr<Level> &level );
+		virtual void Init( const boost::shared_ptr<Level> &level );
 
 		virtual void Move( Vector2 shift );
 
-		virtual void SetLevel( const std::shared_ptr<Level> &level );
+		virtual void SetLevel( const boost::shared_ptr<Level> &level );
 
-		virtual void SetBackground( const std::shared_ptr<Background> &b );
+		virtual void SetBackground( const boost::shared_ptr<Background> &b );
 
-		virtual void Absorb( const std::shared_ptr<Background> &background );
+		virtual void Absorb( const boost::shared_ptr<Background> &background );
 
 		void Clear();
 
-		virtual void Clear( const std::shared_ptr<FloatRectangle> &Area );
+		virtual void Clear( const boost::shared_ptr<FloatRectangle> &Area );
 
 		static bool GreenScreen;
 	
-		static std::shared_ptr<QuadClass> TestQuad;
+		static boost::shared_ptr<QuadClass> TestQuad;
 	
-		static std::shared_ptr<EzTexture> TestTexture;
+		static boost::shared_ptr<EzTexture> TestTexture;
 
 		static void DrawTest();
 

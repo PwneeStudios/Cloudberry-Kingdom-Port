@@ -332,13 +332,13 @@ namespace CloudberryKingdom
 		static std::wstring WordMarkup( Words Word, int Size );
 
 		static const int NumLanguages;
-		static std::map<Language, std::shared_ptr<LanguageInfo> > Languages;
+		static std::map<Language, boost::shared_ptr<LanguageInfo> > Languages;
 
 	
-		static std::shared_ptr<ContentManager> Content;
+		static boost::shared_ptr<ContentManager> Content;
 
 	
-		static std::shared_ptr<LanguageInfo> CurrentLanguage;
+		static boost::shared_ptr<LanguageInfo> CurrentLanguage;
 
 		static void SetLanguage( Language SelectedLanguage );
 
@@ -348,10 +348,10 @@ namespace CloudberryKingdom
 		static void ReadSubtitleInfo( const std::wstring &VideoName );
 
 	
-		static std::vector<std::shared_ptr<SubtitleAction> > GetSubtitles( const std::wstring &VideoName );
+		static std::vector<boost::shared_ptr<SubtitleAction> > GetSubtitles( const std::wstring &VideoName );
 
 	
-		static std::vector<std::shared_ptr<SubtitleAction> > Subtitles;
+		static std::vector<boost::shared_ptr<SubtitleAction> > Subtitles;
 
 		static void ReadSubtitles( const std::wstring &path );
 	};
@@ -384,9 +384,9 @@ namespace CloudberryKingdom
 
 		ActionType MyAction;
 
-		std::shared_ptr<EzTexture> MyTexture;
+		boost::shared_ptr<EzTexture> MyTexture;
 
-		SubtitleAction( ActionType MyAction, float Time, const std::shared_ptr<EzTexture> &MyTexture );
+		SubtitleAction( ActionType MyAction, float Time, const boost::shared_ptr<EzTexture> &MyTexture );
 
 	};
 

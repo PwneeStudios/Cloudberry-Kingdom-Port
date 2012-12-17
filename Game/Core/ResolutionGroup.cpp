@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		LineHeightMod = 0;
 	}
 
-	std::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
+	boost::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 
 	IntVector2 ResolutionGroup::SafeResolution( int width, int height )
 	{
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		return IntVector2( 1280, 720 );
 	}
 
-	void ResolutionGroup::Use( const std::shared_ptr<DisplayMode> &mode )
+	void ResolutionGroup::Use( const boost::shared_ptr<DisplayMode> &mode )
 	{
 		/*LastSetMode = mode;
 		Use( mode->Width, mode->Height );*/

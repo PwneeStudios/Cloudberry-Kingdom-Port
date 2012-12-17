@@ -8,17 +8,17 @@ namespace CloudberryKingdom
 	struct MainRender
 	{
 	
-		std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
+		boost::shared_ptr<GraphicsDevice> MyGraphicsDevice;
 	
 		float SpriteScaling;
 
 		Viewport MainViewport;
 
 		bool UsingSpriteBatch;
-		std::shared_ptr<SpriteBatch> MySpriteBatch;
+		boost::shared_ptr<SpriteBatch> MySpriteBatch;
 
 
-		MainRender( const std::shared_ptr<GraphicsDevice> &Device );
+		MainRender( const boost::shared_ptr<GraphicsDevice> &Device );
 
 		/// <summary>
 		/// Sets the standard render states.

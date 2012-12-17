@@ -10,17 +10,17 @@ namespace CloudberryKingdom
 
 	// Statics
 	int Recycler::MetaCount;
-	std::vector<std::shared_ptr<Recycler> > Recycler::MetaBin;
+	std::vector<boost::shared_ptr<Recycler> > Recycler::MetaBin;
 	Mutex Recycler::MetaBinLock;
 
 
 	void RecycleBin::Release()
 	{
-		for ( std::vector<std::shared_ptr<ObjectBase> >::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
+		for ( std::vector<boost::shared_ptr<ObjectBase> >::const_iterator obj = FullObject.begin(); obj != FullObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 
-		for ( std::vector<std::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
+		for ( std::vector<boost::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
 	}
@@ -29,11 +29,11 @@ namespace CloudberryKingdom
 	{
 		MyType = type;
 
-		/*FullObject = std::stack<std::shared_ptr<ObjectBase> >();
-		BoxObject = std::stack<std::shared_ptr<ObjectBase> >();*/
+		/*FullObject = std::stack<boost::shared_ptr<ObjectBase> >();
+		BoxObject = std::stack<boost::shared_ptr<ObjectBase> >();*/
 	}
 
-	std::shared_ptr<ObjectBase> RecycleBin::GetObject( bool BoxesOnly )
+	boost::shared_ptr<ObjectBase> RecycleBin::GetObject( bool BoxesOnly )
 	{
 		if ( BoxesOnly )
 			return GetObject_BoxesOnly();
@@ -41,19 +41,19 @@ namespace CloudberryKingdom
 			return GetObject_Graphical();
 	}
 
-	std::shared_ptr<ObjectBase> RecycleBin::GetObject_BoxesOnly()
+	boost::shared_ptr<ObjectBase> RecycleBin::GetObject_BoxesOnly()
 	{
 		return __GetObject( true );
 	}
 
-	std::shared_ptr<ObjectBase> RecycleBin::GetObject_Graphical()
+	boost::shared_ptr<ObjectBase> RecycleBin::GetObject_Graphical()
 	{
 		return __GetObject( false );
 	}
 
-	std::shared_ptr<ObjectBase> RecycleBin::__GetObject( bool BoxesOnly )
+	boost::shared_ptr<ObjectBase> RecycleBin::__GetObject( bool BoxesOnly )
 	{
-		std::shared_ptr<ObjectBase> obj = 0;
+		boost::shared_ptr<ObjectBase> obj = 0;
 
 		//lock (this)
 		{
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		return obj;
 	}
 
-	void RecycleBin::CollectObject( const std::shared_ptr<ObjectBase> &obj )
+	void RecycleBin::CollectObject( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		if ( obj->getCore()->MarkedForDeletion )
 			return;
@@ -114,64 +114,64 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<ObjectBase> RecycleBin::NewObject( bool BoxesOnly )
+	boost::shared_ptr<ObjectBase> RecycleBin::NewObject( bool BoxesOnly )
 	{
 		switch ( MyType )
 		{
 			case ObjectType_FLYING_BLOB:
-				return std::make_shared<FlyingBlob>( BoxesOnly );
+				return boost::make_shared<FlyingBlob>( BoxesOnly );
 			case ObjectType_BLOCK_EMITTER:
-				return std::make_shared<BlockEmitter>( BoxesOnly );
+				return boost::make_shared<BlockEmitter>( BoxesOnly );
 			case ObjectType_COIN:
-				return std::make_shared<Coin>( BoxesOnly );
+				return boost::make_shared<Coin>( BoxesOnly );
 			case ObjectType_SPIKE:
-				return std::make_shared<Spike>( BoxesOnly );
+				return boost::make_shared<Spike>( BoxesOnly );
 			case ObjectType_FIREBALL:
-				return std::make_shared<Fireball>( BoxesOnly );
+				return boost::make_shared<Fireball>( BoxesOnly );
 			case ObjectType_FIRE_SPINNER:
-				return std::make_shared<FireSpinner>( BoxesOnly );
+				return boost::make_shared<FireSpinner>( BoxesOnly );
 			case ObjectType_NORMAL_BLOCK:
-				return std::make_shared<NormalBlock>( BoxesOnly );
+				return boost::make_shared<NormalBlock>( BoxesOnly );
 			case ObjectType_MOVING_PLATFORM:
-				return std::make_shared<MovingPlatform>( BoxesOnly );
+				return boost::make_shared<MovingPlatform>( BoxesOnly );
 			case ObjectType_MOVING_BLOCK:
-				return std::make_shared<MovingBlock>( BoxesOnly );
+				return boost::make_shared<MovingBlock>( BoxesOnly );
 			case ObjectType_FALLING_BLOCK:
-				return std::make_shared<FallingBlock>( BoxesOnly );
+				return boost::make_shared<FallingBlock>( BoxesOnly );
 			case ObjectType_BOUNCY_BLOCK:
-				return std::make_shared<BouncyBlock>( BoxesOnly );
+				return boost::make_shared<BouncyBlock>( BoxesOnly );
 			case ObjectType_LAVA_BLOCK:
 				//return new LavaBlock(BoxesOnly);
-				return std::make_shared<LavaBlock_Castle>( BoxesOnly );
+				return boost::make_shared<LavaBlock_Castle>( BoxesOnly );
 			case ObjectType_BOULDER:
-				return std::make_shared<Boulder>( BoxesOnly );
+				return boost::make_shared<Boulder>( BoxesOnly );
 			case ObjectType_SPIKEY_GUY:
-				return std::make_shared<SpikeyGuy>( BoxesOnly );
+				return boost::make_shared<SpikeyGuy>( BoxesOnly );
 			case ObjectType_CAMERA_ZONE:
-				return std::make_shared<CameraZone>();
+				return boost::make_shared<CameraZone>();
 			case ObjectType_DOOR:
-				return std::make_shared<Door>( BoxesOnly );
+				return boost::make_shared<Door>( BoxesOnly );
 			case ObjectType_CHECKPOINT:
-				return std::make_shared<Checkpoint>();
+				return boost::make_shared<Checkpoint>();
 			case ObjectType_LASER:
-				return std::make_shared<Laser>( BoxesOnly );
+				return boost::make_shared<Laser>( BoxesOnly );
 			case ObjectType_CLOUD:
-				return std::make_shared<Cloud>( BoxesOnly );
+				return boost::make_shared<Cloud>( BoxesOnly );
 			case ObjectType_GHOST_BLOCK:
-				return std::make_shared<GhostBlock>( BoxesOnly );
+				return boost::make_shared<GhostBlock>( BoxesOnly );
 			case ObjectType_CONVEYOR_BLOCK:
-				return std::make_shared<ConveyorBlock>( BoxesOnly );
+				return boost::make_shared<ConveyorBlock>( BoxesOnly );
 			case ObjectType_SPIKEY_LINE:
-				return std::make_shared<SpikeyLine>( BoxesOnly );
+				return boost::make_shared<SpikeyLine>( BoxesOnly );
 			case ObjectType_FIRESNAKE:
-				return std::make_shared<Firesnake>( BoxesOnly );
+				return boost::make_shared<Firesnake>( BoxesOnly );
 
 			case ObjectType_PENDULUM:
-				return std::make_shared<Pendulum>( BoxesOnly );
+				return boost::make_shared<Pendulum>( BoxesOnly );
 			case ObjectType_SERPENT:
-				return std::make_shared<Serpent>( BoxesOnly );
+				return boost::make_shared<Serpent>( BoxesOnly );
 			case ObjectType_LAVA_DRIP:
-				return std::make_shared<LavaDrip>( BoxesOnly );
+				return boost::make_shared<LavaDrip>( BoxesOnly );
 
 			default:
 				return 0;
@@ -180,9 +180,9 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<Recycler> Recycler::GetRecycler()
+	boost::shared_ptr<Recycler> Recycler::GetRecycler()
 	{
-		std::shared_ptr<Recycler> bin = 0;
+		boost::shared_ptr<Recycler> bin = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MetaBin )
@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 
 			MetaCount++;
 			if ( MetaBin.empty() )
-				return std::make_shared<Recycler>();
+				return boost::make_shared<Recycler>();
 
 			bin = MetaBin.back();
 			MetaBin.pop_back();
@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 		return bin;
 	}
 
-	void Recycler::ReturnRecycler( const std::shared_ptr<Recycler> &recycler )
+	void Recycler::ReturnRecycler( const boost::shared_ptr<Recycler> &recycler )
 	{
 		recycler->Empty();
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 		{
 			MetaBinLock.Lock();
 
-			for ( std::vector<std::shared_ptr<Recycler> >::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
+			for ( std::vector<boost::shared_ptr<Recycler> >::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
 				( *recycler )->Empty( false );
 			//GC::Collect();
 
@@ -241,28 +241,28 @@ namespace CloudberryKingdom
 	{
 		//Bins = new Dictionary<ObjectType, RecycleBin>();
 		int N = ObjectType_LENGTH; //Tools::GetValues<ObjectType>()->Count(); //Enum.GetValues(typeof(ObjectType)).Length;
-		Bins = std::vector<std::shared_ptr<RecycleBin> >( N );
+		Bins = std::vector<boost::shared_ptr<RecycleBin> >( N );
 	}
 
-	std::shared_ptr<ObjectBase> Recycler::GetNewObject( ObjectType type, bool BoxesOnly )
+	boost::shared_ptr<ObjectBase> Recycler::GetNewObject( ObjectType type, bool BoxesOnly )
 	{
 		if ( type == ObjectType_UNDEFINED )
 			return 0;
 
 		if ( Bins[ static_cast<int>( type ) ] == 0 )
-			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+			Bins[ static_cast<int>( type ) ] = boost::make_shared<RecycleBin>( type );
 
-		std::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->NewObject( BoxesOnly );
+		boost::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->NewObject( BoxesOnly );
 
 		return obj;
 	}
 
-	/*std::shared_ptr <ObjectBase> Recycler::operator []( ObjectType type, bool BoxesOnly )
+	/*boost::shared_ptr <ObjectBase> Recycler::operator []( ObjectType type, bool BoxesOnly )
 	{
 		return GetObject( type, BoxesOnly );
 	}*/
 
-	std::shared_ptr<ObjectBase> Recycler::GetObject( ObjectType type, bool BoxesOnly )
+	boost::shared_ptr<ObjectBase> Recycler::GetObject( ObjectType type, bool BoxesOnly )
 	{
 		//if (type == ObjectType.FlyingBlob)
 		//    Tools.Write("!");
@@ -275,20 +275,20 @@ namespace CloudberryKingdom
 		  //  Bins.Add(type, new RecycleBin(type));
 
 		if ( Bins[ static_cast<int>( type ) ] == 0 )
-			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+			Bins[ static_cast<int>( type ) ] = boost::make_shared<RecycleBin>( type );
 
 		//return Bins[type].GetObject(BoxesOnly);
-		std::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->GetObject( BoxesOnly );
+		boost::shared_ptr<ObjectBase> obj = Bins[ static_cast<int>( type ) ]->GetObject( BoxesOnly );
 
 		return obj;
 	}
 
-	void Recycler::CollectObject( const std::shared_ptr<ObjectBase> &obj )
+	void Recycler::CollectObject( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		CollectObject( obj, true );
 	}
 
-	void Recycler::CollectObject( const std::shared_ptr<ObjectBase> &obj, bool CollectAssociates )
+	void Recycler::CollectObject( const boost::shared_ptr<ObjectBase> &obj, bool CollectAssociates )
 	{
 		if ( obj == 0 || obj->getCore()->MarkedForDeletion )
 			return;
@@ -314,7 +314,7 @@ namespace CloudberryKingdom
 		}
 
 		if ( Bins[ static_cast<int>( type ) ] == 0 )
-			Bins[ static_cast<int>( type ) ] = std::make_shared<RecycleBin>( type );
+			Bins[ static_cast<int>( type ) ] = boost::make_shared<RecycleBin>( type );
 
 		Bins[ static_cast<int>( type ) ]->CollectObject( obj );
 
@@ -323,7 +323,7 @@ namespace CloudberryKingdom
 			for ( size_t i = 0; i < obj->getCore()->Associations.size(); i++ )
 				if ( obj->getCore()->Associations[ i ].Guid > 0 )
 				{
-					std::shared_ptr<ObjectBase> _obj = obj->getCore()->MyLevel->LookupGUID(obj->getCore()->Associations[ i ].Guid);
+					boost::shared_ptr<ObjectBase> _obj = obj->getCore()->MyLevel->LookupGUID(obj->getCore()->Associations[ i ].Guid);
 					if ( _obj == 0 )
 						continue;
 

@@ -5,10 +5,10 @@ namespace CloudberryKingdom
 
 	void Boulder::BoulderTileInfo::InitializeInstanceFields()
 	{
-		Ball = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
+		Ball = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2(1.f) );
 		Radius = 120;
 		
-		Chain = std::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "chain_tile" ) ), 44.f, 63.f, 0, ( bColor( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 210 ) ) ).ToVector4(), .2f );
+		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "chain_tile" ) ), 44.f, 63.f, 0, ( bColor( unsigned char( 255 ), unsigned char( 255 ), unsigned char( 255 ), unsigned char( 210 ) ) ).ToVector4(), .2f );
 	}
 
 	void Boulder::OnAttachedToBlock()
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		SetLayers();
 	}
 
-	void Boulder::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void Boulder::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		_CircleDeath::Init( pos, level );
 
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		Circle->setCenter( getCore()->Data.Position );
 		getCore()->Data.Position = getCore()->StartData.Position = PivotPoint = pos;
 
-		std::shared_ptr<BoulderTileInfo> info = level->getInfo()->Boulders;
+		boost::shared_ptr<BoulderTileInfo> info = level->getInfo()->Boulders;
 
 		if ( !level->BoxesOnly )
 		{
@@ -91,7 +91,7 @@ namespace CloudberryKingdom
 
 		if ( !getCore()->BoxesOnly )
 		{
-			MyQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
 		}
 	}
 
@@ -260,11 +260,11 @@ namespace CloudberryKingdom
 		getCore()->Data.Velocity = Vector2();
 	}
 
-	void Boulder::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Boulder::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Boulder> FloaterA = std::dynamic_pointer_cast<Boulder>( A );
+		boost::shared_ptr<Boulder> FloaterA = boost::dynamic_pointer_cast<Boulder>( A );
 		Init( FloaterA->getPos(), FloaterA->getMyLevel() );
 
 		Angle = FloaterA->Angle;

@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	struct ConveyorBlock : public BlockBase
 	{
 	
-		std::shared_ptr<QuadClass> MyQuad, LeftEnd, RightEnd;
+		boost::shared_ptr<QuadClass> MyQuad, LeftEnd, RightEnd;
 
 		virtual void MakeNew();
 
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

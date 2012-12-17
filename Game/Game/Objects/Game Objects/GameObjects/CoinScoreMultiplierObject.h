@@ -9,36 +9,36 @@ namespace CloudberryKingdom
 	struct CoinScoreMultiplierObject : public GameObject
 	{
 	
-		struct OnCoinGrabProxy : public Lambda_1<std::shared_ptr<ObjectBase> >
+		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		
-			std::shared_ptr<CoinScoreMultiplierObject> csmo;
+			boost::shared_ptr<CoinScoreMultiplierObject> csmo;
 		
-			OnCoinGrabProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
+			OnCoinGrabProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
-			void Apply( const std::shared_ptr<ObjectBase> &obj );
+			void Apply( const boost::shared_ptr<ObjectBase> &obj );
 		};
 
 	
 		struct OnLevelRetryProxy : public Lambda
 		{
 		
-			std::shared_ptr<CoinScoreMultiplierObject> csmo;
+			boost::shared_ptr<CoinScoreMultiplierObject> csmo;
 		
-			OnLevelRetryProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
+			OnLevelRetryProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
 			void Apply();
 		};
 
 	
-		struct OnCalculateCoinScoreMultiplierProxy : public Lambda_1<std::shared_ptr<GameData> >
+		struct OnCalculateCoinScoreMultiplierProxy : public Lambda_1<boost::shared_ptr<GameData> >
 		{
 		
-			std::shared_ptr<CoinScoreMultiplierObject> csmo;
+			boost::shared_ptr<CoinScoreMultiplierObject> csmo;
 		
-			OnCalculateCoinScoreMultiplierProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo );
+			OnCalculateCoinScoreMultiplierProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo );
 
-			void Apply( const std::shared_ptr<GameData> &obj );
+			void Apply( const boost::shared_ptr<GameData> &obj );
 		};
 
 	
@@ -65,7 +65,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Every time a coin is grabbed increase the multiplier
 		/// </summary>
-		void OnCoinGrab( const std::shared_ptr<ObjectBase> &obj );
+		void OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj );
 
 		/// <summary>
 		/// When the players die reset the multiplier

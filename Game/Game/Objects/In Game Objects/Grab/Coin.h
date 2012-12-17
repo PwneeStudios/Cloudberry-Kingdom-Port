@@ -61,15 +61,15 @@ namespace CloudberryKingdom
 		{
 			//public SpriteInfo Sprite = new SpriteInfo("CoinBlue2", new Vector2(105, -1));
 		
-			std::shared_ptr<SpriteInfo> Sprite;
+			boost::shared_ptr<SpriteInfo> Sprite;
 
 			Vector2 BoxSize;
 			Color Color;
 			bool ShowEffect, ShowText, ShowCoin;
 
-			std::shared_ptr<EzSound> MySound;
+			boost::shared_ptr<EzSound> MySound;
 
-			std::shared_ptr<Particle> DieTemplate;
+			boost::shared_ptr<Particle> DieTemplate;
 			CoinTileInfo();
 
 		
@@ -79,8 +79,8 @@ namespace CloudberryKingdom
 	
 		bool Touched;
 
-		std::shared_ptr<AABox> Box;
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<AABox> Box;
+		boost::shared_ptr<QuadClass> MyQuad;
 
 		int MyValue, MyScoreValue;
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		void Die();
 
 	
-		const std::shared_ptr<GameData> &getMyGame() const;
+		const boost::shared_ptr<GameData> &getMyGame() const;
 
 	
 		int CalcScoreValue();
@@ -120,14 +120,14 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
 	
 		static Vector2 DrawGrace;
 	
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

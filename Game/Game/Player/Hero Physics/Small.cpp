@@ -5,25 +5,25 @@ namespace CloudberryKingdom
 
 	void BobPhsxSmall::InitializeStatics()
 	{
-		BobPhsxSmall::instance = std::make_shared<BobPhsxSmall>();
+		BobPhsxSmall::instance = boost::make_shared<BobPhsxSmall>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxSmall> BobPhsxSmall::instance;
+	boost::shared_ptr<BobPhsxSmall> BobPhsxSmall::instance;
 
-	void BobPhsxSmall::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxSmall::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 		Set( phsx, Vector2(1) );
 	}
 
-	void BobPhsxSmall::Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
+	void BobPhsxSmall::Set( const boost::shared_ptr<BobPhsx> &phsx, Vector2 modsize )
 	{
 		phsx->ModInitSize = Vector2( .6f ) * modsize;
 
 		phsx->CapePrototype = CapeType_SMALL;
 		phsx->CapeOffset += Vector2( 0, -20 );
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->Gravity *= .56f;
@@ -41,10 +41,10 @@ namespace CloudberryKingdom
 		Adjective = _T( "tiny" );
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Tiny"), Color.White, DefaultIconWidth);
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * .6f);
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth *.8f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth *.8f );
 	}
 
-	const std::shared_ptr<BobPhsxSmall> &BobPhsxSmall::getInstance()
+	const boost::shared_ptr<BobPhsxSmall> &BobPhsxSmall::getInstance()
 	{
 		return instance;
 	}

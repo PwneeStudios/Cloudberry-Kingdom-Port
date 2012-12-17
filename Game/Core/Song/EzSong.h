@@ -7,10 +7,10 @@
 
 namespace CloudberryKingdom
 {
-	struct EzSong : public std::enable_shared_from_this<EzSong>
+	struct EzSong : public boost::enable_shared_from_this<EzSong>
 	{
 	
-		std::shared_ptr<Song> song;
+		boost::shared_ptr<Song> song;
 		std::wstring Name, SongName, ArtistName, FileName;
 		bool Enabled, AlwaysLoaded;
 

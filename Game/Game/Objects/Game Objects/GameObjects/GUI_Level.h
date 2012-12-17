@@ -29,18 +29,18 @@ namespace CloudberryKingdom
 	
 		void SetLevel( int Level_Renamed );
 
-		std::shared_ptr<EzText> LevelText;
+		boost::shared_ptr<EzText> LevelText;
 	
 		void UpdateLevelText();
 
 	
 		GUI_Level();
-		std::shared_ptr<GUI_Level> GUI_Level_Construct();
+		boost::shared_ptr<GUI_Level> GUI_Level_Construct();
 		GUI_Level( bool SlideIn );
-		std::shared_ptr<GUI_Level> GUI_Level_Construct( bool SlideIn );
+		boost::shared_ptr<GUI_Level> GUI_Level_Construct( bool SlideIn );
 
 		GUI_Level( int LevelNum );
-		std::shared_ptr<GUI_Level> GUI_Level_Construct( int LevelNum );
+		boost::shared_ptr<GUI_Level> GUI_Level_Construct( int LevelNum );
 
 	
 		void DoInit( bool SlideIn );
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 	{
 	
 		GUI_CampaignLevel();
-		std::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel_Construct();
+		boost::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel_Construct();
 
 		virtual void OnAdd();
 

@@ -2,13 +2,16 @@
 #define _GRAPHICSDEVICEMANAGER_H_
 
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 
 struct GraphicsDevice;
 
 struct GraphicsDeviceManager
 {
 
-	std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
+	boost::shared_ptr<GraphicsDevice> MyGraphicsDevice;
 
 	bool IsFullScreen;
 	int PreferredBackBufferWidth;

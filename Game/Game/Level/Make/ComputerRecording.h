@@ -5,14 +5,14 @@
 
 namespace CloudberryKingdom
 {
-	struct ComputerRecording : public std::enable_shared_from_this<ComputerRecording>
+	struct ComputerRecording : public boost::enable_shared_from_this<ComputerRecording>
 	{
 
 	
 		static void InitializeStatics();
 
 	
-		static std::stack<std::shared_ptr<ComputerRecording> > Pool;
+		static std::stack<boost::shared_ptr<ComputerRecording> > Pool;
 
 		bool IsFromPool;
 		static void FillPool();
@@ -20,9 +20,9 @@ namespace CloudberryKingdom
 	
 		static void InitPool();
 
-		static std::shared_ptr<ComputerRecording> FromPool();
+		static boost::shared_ptr<ComputerRecording> FromPool();
 
-		static void ToPool( const std::shared_ptr<ComputerRecording> &record );
+		static void ToPool( const boost::shared_ptr<ComputerRecording> &record );
 
 
 
@@ -41,9 +41,9 @@ namespace CloudberryKingdom
 
 		static int PareDivider;
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer, int Length );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer, int Length );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader, int Length );
+		void Read( const boost::shared_ptr<BinaryReader> &reader, int Length );
 
 		void Clean();
 

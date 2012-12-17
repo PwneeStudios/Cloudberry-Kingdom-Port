@@ -7,8 +7,8 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::InitializeStatics()
 	{
-		CustomLevel_GUI::FreeplayTilesets = std::vector<std::shared_ptr<TileSet> >();
-		CustomLevel_GUI::FreeplayHeroes = std::vector<std::shared_ptr<BobPhsx> >();
+		CustomLevel_GUI::FreeplayTilesets = std::vector<boost::shared_ptr<TileSet> >();
+		CustomLevel_GUI::FreeplayHeroes = std::vector<boost::shared_ptr<BobPhsx> >();
 		CustomLevel_GUI::IsMaxLength = false;
 		CustomLevel_GUI::Difficulty = 0;
 		CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
@@ -18,8 +18,8 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::vector<std::shared_ptr<TileSet> > CustomLevel_GUI::FreeplayTilesets;
-	std::vector<std::shared_ptr<BobPhsx> > CustomLevel_GUI::FreeplayHeroes;
+	std::vector<boost::shared_ptr<TileSet> > CustomLevel_GUI::FreeplayTilesets;
+	std::vector<boost::shared_ptr<BobPhsx> > CustomLevel_GUI::FreeplayHeroes;
 	bool CustomLevel_GUI::IsMaxLength;
 	int CustomLevel_GUI::Difficulty;
 	Localization::Words CustomLevel_GUI::CustomHeroString;
@@ -29,39 +29,39 @@ namespace CloudberryKingdom
 
 
 
-	CustomLevel_GUI::StartLevelFromMenDataStandardLoadProxy::StartLevelFromMenDataStandardLoadProxy( const std::shared_ptr<LevelSeedData> &data )
+	CustomLevel_GUI::StartLevelFromMenDataStandardLoadProxy::StartLevelFromMenDataStandardLoadProxy( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		this->data = data;
 	}
 
-	void CustomLevel_GUI::StartLevelFromMenDataStandardLoadProxy::Apply( const std::shared_ptr<Level> &level )
+	void CustomLevel_GUI::StartLevelFromMenDataStandardLoadProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		data->PostMake_StandardLoad( level );
 	}
 
-	CustomLevel_GUI::StartLevelFromMenuDataInitializeHelper::StartLevelFromMenuDataInitializeHelper( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::StartLevelFromMenuDataInitializeHelper::StartLevelFromMenuDataInitializeHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
 
-	void CustomLevel_GUI::StartLevelFromMenuDataInitializeHelper::Apply( const std::shared_ptr<PieceSeedData> &piece )
+	void CustomLevel_GUI::StartLevelFromMenuDataInitializeHelper::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		piece->CopyUpgrades( clGui->PieceSeed );
 
 		piece->StandardClose();
 	}
 
-	CustomLevel_GUI::StartLevelEnableLoadProxy::StartLevelEnableLoadProxy( const std::shared_ptr<LevelSeedData> &data )
+	CustomLevel_GUI::StartLevelEnableLoadProxy::StartLevelEnableLoadProxy( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		this->data = data;
 	}
 
-	void CustomLevel_GUI::StartLevelEnableLoadProxy::Apply( const std::shared_ptr<Level> &level )
+	void CustomLevel_GUI::StartLevelEnableLoadProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		data->PostMake_EnableLoad( level );
 	}
 
-	CustomLevel_GUI::OnReturnFromLevelProxy::OnReturnFromLevelProxy( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::OnReturnFromLevelProxy::OnReturnFromLevelProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		clGui->OnReturnFromLevel();
 	}
 
-	CustomLevel_GUI::InitOnSetValueHelper::InitOnSetValueHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length )
+	CustomLevel_GUI::InitOnSetValueHelper::InitOnSetValueHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length )
 	{
 		this->clGui = clGui;
 		this->length = length;
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	CustomLevel_GUI::InitOnSlideHelper::InitOnSlideHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length )
+	CustomLevel_GUI::InitOnSlideHelper::InitOnSlideHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length )
 	{
 		this->clGui = clGui;
 		this->length = length;
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 		clGui->checkpoints->getMyFloat()->setVal( currentcheckpoints );
 	}
 
-	CustomLevel_GUI::InitOnSlideHelper2::InitOnSlideHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length )
+	CustomLevel_GUI::InitOnSlideHelper2::InitOnSlideHelper2( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length )
 	{
 		this->clGui = clGui;
 		this->length = length;
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 		length->getMyFloat()->setVal(__max(length->getMyFloat()->getVal(), MinLength));
 	}
 
-	CustomLevel_GUI::InitOnSetValueHelper2::InitOnSetValueHelper2( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<LengthSlider> &length )
+	CustomLevel_GUI::InitOnSetValueHelper2::InitOnSetValueHelper2( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<LengthSlider> &length )
 	{
 		this->clGui = clGui;
 		this->length = length;
@@ -151,18 +151,18 @@ namespace CloudberryKingdom
 			clGui->MiniCheckpoint->SetScale( .01f );
 	}
 
-	CustomLevel_GUI::InitOnAStartHelper::InitOnAStartHelper( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::InitOnAStartHelper::InitOnAStartHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
 
-	bool CustomLevel_GUI::InitOnAStartHelper::Apply( const std::shared_ptr<Menu> &dummy )
+	bool CustomLevel_GUI::InitOnAStartHelper::Apply( const boost::shared_ptr<Menu> &dummy )
 	{
 		clGui->Start->getGo()->Apply( 0 );
 		return true;
 	}
 
-	CustomLevel_GUI::InitOnIndexSelectHelper::InitOnIndexSelectHelper( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &LocationList )
+	CustomLevel_GUI::InitOnIndexSelectHelper::InitOnIndexSelectHelper( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<MenuList> &LocationList )
 	{
 		this->clGui = clGui;
 		this->LocationList = LocationList;
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::InitOnIndexSelectHelper::Apply()
 	{
-		std::shared_ptr<TileSet> tileset = std::dynamic_pointer_cast<TileSet>( LocationList->getCurObj() );
+		boost::shared_ptr<TileSet> tileset = boost::dynamic_pointer_cast<TileSet>( LocationList->getCurObj() );
 
 		//Vector2 HoldRelativeSize = Screenshot.GetTextureScaling();
 		//Screenshot.TextureName = tileset.ScreenshotString;
@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		clGui->LevelSeed->SetTileSet( tileset );
 	}
 
-	CustomLevel_GUI::InitOnIndexSelect::InitOnIndexSelect( const std::shared_ptr<CustomLevel_GUI> &clGui, const std::shared_ptr<MenuList> &GameList )
+	CustomLevel_GUI::InitOnIndexSelect::InitOnIndexSelect( const boost::shared_ptr<CustomLevel_GUI> &clGui, const boost::shared_ptr<MenuList> &GameList )
 	{
 		this->clGui = clGui;
 		this->GameList = GameList;
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	CustomLevel_GUI::DiffList_OnIndexProxy::DiffList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::DiffList_OnIndexProxy::DiffList_OnIndexProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 		clGui->DiffList_OnIndex();
 	}
 
-	CustomLevel_GUI::HeroList_OnIndexProxy::HeroList_OnIndexProxy( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::HeroList_OnIndexProxy::HeroList_OnIndexProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
@@ -242,7 +242,7 @@ namespace CloudberryKingdom
 		clGui->HeroList_OnIndex();
 	}
 
-	CustomLevel_GUI::BringNextProxy::BringNextProxy( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::BringNextProxy::BringNextProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
@@ -252,7 +252,7 @@ namespace CloudberryKingdom
 		clGui->BringNext();
 	}
 
-	CustomLevel_GUI::BringLoadProxy::BringLoadProxy( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::BringLoadProxy::BringLoadProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
@@ -262,12 +262,12 @@ namespace CloudberryKingdom
 		clGui->BringLoad();
 	}
 
-	CustomLevel_GUI::BringLoadProxy1::BringLoadProxy1( const std::shared_ptr<CustomLevel_GUI> &clGui )
+	CustomLevel_GUI::BringLoadProxy1::BringLoadProxy1( const boost::shared_ptr<CustomLevel_GUI> &clGui )
 	{
 		this->clGui = clGui;
 	}
 
-	void CustomLevel_GUI::BringLoadProxy1::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void CustomLevel_GUI::BringLoadProxy1::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		clGui->BringLoad();
 	}
@@ -284,7 +284,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<CustomLevel_GUI> CustomLevel_GUI::CustomLevel_GUI_Construct()
+	boost::shared_ptr<CustomLevel_GUI> CustomLevel_GUI::CustomLevel_GUI_Construct()
 	{
 		InitializeInstanceFields();
 
@@ -300,12 +300,12 @@ namespace CloudberryKingdom
 		SeedStringToLoad = _T( "" );
 		ExitFreeplay = false;
 
-		return std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() );
+		return boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() );
 	}
 
 	void CustomLevel_GUI::StartLevelFromMenuData()
 	{
-		std::shared_ptr<LevelSeedData> data = std::make_shared<LevelSeedData>( LevelSeed );
+		boost::shared_ptr<LevelSeedData> data = boost::make_shared<LevelSeedData>( LevelSeed );
 		data->setSeed( Tools::GlobalRnd->Rnd->Next() );
 
 		// Debug: set hero type
@@ -321,12 +321,12 @@ namespace CloudberryKingdom
 		// Custom difficulty
 		if ( IsCustomDifficulty() )
 		{
-			data->Initialize( std::make_shared<StartLevelFromMenuDataInitializeHelper>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+			data->Initialize( boost::make_shared<StartLevelFromMenuDataInitializeHelper>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		}
 		// Preset difficulty
 		else
 		{
-			std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > custom;
+			boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > custom;
 
 			custom = DifficultyGroups::FixedPieceMod( static_cast<float>( DiffList->ListIndex - 1 ), data );
 
@@ -343,18 +343,18 @@ namespace CloudberryKingdom
 		if ( data->MyGeometry == LevelGeometry_DOWN )
 			data->PieceSeeds[ 0 ]->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DARK_BOTTOM;
 
-		data->PostMake->Add( std::make_shared<StartLevelFromMenDataStandardLoadProxy>( data ) );
+		data->PostMake->Add( boost::make_shared<StartLevelFromMenDataStandardLoadProxy>( data ) );
 
 		StartLevel( data );
 	}
 
-	void CustomLevel_GUI::StartLevel( const std::shared_ptr<LevelSeedData> &data )
+	void CustomLevel_GUI::StartLevel( const boost::shared_ptr<LevelSeedData> &data )
 	{
-		data->PostMake->Add( std::make_shared<StartLevelEnableLoadProxy>( data ) );
+		data->PostMake->Add( boost::make_shared<StartLevelEnableLoadProxy>( data ) );
 
 		PlayerManager::setCoinsSpent( -999 );
 
-		std::shared_ptr<GameData> game = data->Create();
+		boost::shared_ptr<GameData> game = data->Create();
 		game->ParentGame = MyGame;
 		game->Freeplay = true;
 		game->DefaultHeroType = data->DefaultHeroType;
@@ -372,7 +372,7 @@ namespace CloudberryKingdom
 		MyMenu->FancyPos->RelVal += RightPanelCenter;
 
 		// Register for when the created level ends
-		MyGame->OnReturnTo->Add( std::make_shared<OnReturnFromLevelProxy>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		MyGame->OnReturnTo->Add( boost::make_shared<OnReturnFromLevelProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 
 		SetPos();
 	}
@@ -424,16 +424,16 @@ namespace CloudberryKingdom
 	void CustomLevel_GUI::AnyHero()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
 			( *item )->Selectable = true;
 	}
 
 	void CustomLevel_GUI::UpHero_ModShown()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = HeroList->MyList.begin(); item != HeroList->MyList.end(); ++item )
 		{
-			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( ( *item )->MyObject ) != 0 || std::dynamic_pointer_cast<BobPhsxRocketbox>( ( *item )->MyObject ) != 0 )
+			if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( ( *item )->MyObject ) != 0 || boost::dynamic_pointer_cast<BobPhsxRocketbox>( ( *item )->MyObject ) != 0 )
 				( *item )->Selectable = false;
 			else
 				( *item )->Selectable = true;
@@ -521,14 +521,14 @@ namespace CloudberryKingdom
 	{
 		ItemShadows = false;
 
-		LevelSeed = std::make_shared<LevelSeedData>();
-		PieceSeed = std::make_shared<PieceSeedData>( std::shared_ptr<LevelSeedData>() );
+		LevelSeed = boost::make_shared<LevelSeedData>();
+		PieceSeed = boost::make_shared<PieceSeedData>( boost::shared_ptr<LevelSeedData>() );
 
 		SlideInFrom = SlideOutTo = PresetPos_RIGHT;
 
 		FontScale = .73f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		CkBaseMenu::Init();
 
@@ -542,22 +542,22 @@ namespace CloudberryKingdom
 		SelectedItemShift = Vector2( 0, 0 );
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop;
+		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 1690.477f, 1115.617f ) );
 		backdrop->setPos( Vector2( 287.6977f, 51.58758f ) );
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		setControl( -1 );
 
 		MyMenu->OnB.reset();
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Location screenshot
 		//QuadClass Screenshot = new QuadClass();
@@ -570,23 +570,23 @@ namespace CloudberryKingdom
 		//Screenshot.SetDefaultShadow(15);
 
 		// Location
-		std::shared_ptr<EzText> LocationText = std::make_shared<EzText>( Localization::Words_LOCATION, ItemFont );
+		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( Localization::Words_LOCATION, ItemFont );
 		LocationText->Name = _T( "Location" );
 		SetHeaderProperties( LocationText );
 		MyPile->Add( LocationText );
 		LocationText->setPos( Vector2( -1050.111f, 933 ) );
 
-		std::shared_ptr<MenuList> LocationList = std::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> LocationList = boost::make_shared<MenuList>();
 		LocationList->Name = _T( "Location" );
 		LocationList->Center = !LeftJustify;
 		LocationList->MyExpandPos = Vector2( -498.1506f, 713.873f );
-		for ( std::vector<std::shared_ptr<TileSet> >::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
+		for ( std::vector<boost::shared_ptr<TileSet> >::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( ( *tileset )->NameInGame, ItemFont, false, true ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ( *tileset )->NameInGame, ItemFont, false, true ) );
 			SetItemProperties( item );
 			
-			std::shared_ptr<TileSet> t = *tileset;
-			std::shared_ptr<Object> smart = std::static_pointer_cast<Object>( t );
+			boost::shared_ptr<TileSet> t = *tileset;
+			boost::shared_ptr<Object> smart = boost::static_pointer_cast<Object>( t );
 
 			LocationList->AddItem( item, MakeSmartObject( smart ) );
 		}
@@ -595,17 +595,17 @@ namespace CloudberryKingdom
 			LocationList->Pos = Vector2( 200 + LeftJustifyAddX, 828 );
 		else
 			LocationList->Pos = Vector2( 200, 828 );
-		LocationList->OnIndexSelect = std::make_shared<InitOnIndexSelectHelper>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), LocationList );
+		LocationList->OnIndexSelect = boost::make_shared<InitOnIndexSelectHelper>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), LocationList );
 		LocationList->SetIndex( 0 );
 
 		// Game type
-		std::shared_ptr<EzText> GameText = std::make_shared<EzText>( Localization::Words_GAME, ItemFont );
+		boost::shared_ptr<EzText> GameText = boost::make_shared<EzText>( Localization::Words_GAME, ItemFont );
 		GameText->Name = _T( "Game" );
 		SetHeaderProperties( GameText );
 		MyPile->Add( GameText );
 		GameText->setPos( Vector2( -1061.11f, 933 - 222 ) );
 
-		std::shared_ptr<MenuList> GameList = std::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> GameList = boost::make_shared<MenuList>();
 		GameList->Name = _T( "Game" );
 		GameList->MyExpandPos = Vector2( -580, 500.873f );
 		GameList->Center = !LeftJustify;
@@ -622,7 +622,7 @@ namespace CloudberryKingdom
 		}
 		for ( std::vector<Localization::Words>::const_iterator name = GameNames.begin(); name != GameNames.end(); ++name )
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( *name, ItemFont, false, true ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( *name, ItemFont, false, true ) );
 			SetItemProperties( item );
 			GameList->AddItem( item, MakeSmartObject( *name ) );
 		}
@@ -631,28 +631,28 @@ namespace CloudberryKingdom
 			GameList->Pos = Vector2( 117 + LeftJustifyAddX, 828 - 222 );
 		else
 			GameList->Pos = Vector2( 117, 828 - 222 );
-		GameList->OnIndexSelect = std::make_shared<InitOnIndexSelect>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), GameList );
+		GameList->OnIndexSelect = boost::make_shared<InitOnIndexSelect>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), GameList );
 
 		// Hero
-		HeroText = std::make_shared<EzText>( Localization::Words_HERO, ItemFont );
+		HeroText = boost::make_shared<EzText>( Localization::Words_HERO, ItemFont );
 		HeroText->Name = _T( "Hero" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
 		HeroText->setPos( Vector2( -1044.443f, 933 - 2 * 222 ) );
 
-		HeroList = std::make_shared<MenuList>();
+		HeroList = boost::make_shared<MenuList>();
 		HeroList->Name = _T( "Hero" );
 		HeroList->Center = !LeftJustify;
 		HeroList->MyExpandPos = Vector2( -782.1666f, 293.6826f );
-		for ( std::vector<std::shared_ptr<BobPhsx> >::const_iterator hero = FreeplayHeroes.begin(); hero != FreeplayHeroes.end(); ++hero )
+		for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator hero = FreeplayHeroes.begin(); hero != FreeplayHeroes.end(); ++hero )
 			AddHeroItem( *hero );
 
 		// Random
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RANDOM, ItemFont, false, true ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont, false, true ) );
 		SetItemProperties( item );
 		HeroList->AddItem( item, MakeSmartObject( BobPhsxRandom::getInstance() ) );
 		// Custom
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( CustomHeroString, ItemFont, false, true ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CustomHeroString, ItemFont, false, true ) );
 		SetItemProperties( item );
 		HeroList->AddItem( item, 0 );
 
@@ -661,25 +661,25 @@ namespace CloudberryKingdom
 			HeroList->Pos = Vector2( 117.2227f + LeftJustifyAddX - 150, 828 - 2 * 222 );
 		else
 			HeroList->Pos = Vector2( 117.2227f, 828 - 2 * 222 );
-		HeroList->OnIndexSelect = std::make_shared<HeroList_OnIndexProxy>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		HeroList->OnIndexSelect = boost::make_shared<HeroList_OnIndexProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
 		HeroList->SetIndex( 0 );
 
 		// Difficulty
-		std::shared_ptr<EzText> DiffText = std::make_shared<EzText>( Localization::Words_DIFFICULTY, ItemFont );
+		boost::shared_ptr<EzText> DiffText = boost::make_shared<EzText>( Localization::Words_DIFFICULTY, ItemFont );
 		DiffText->Name = _T( "Diff" );
 		SetHeaderProperties( DiffText );
 		MyPile->Add( DiffText );
 		DiffText->setPos( Vector2( -1233.889f, 40.55557f ) );
 
 		std::vector<Localization::Words> Names = CampaignHelper::DifficultyNames;
-		DiffList = std::make_shared<MenuList>();
+		DiffList = boost::make_shared<MenuList>();
 		DiffList->Name = _T( "Diff" );
 		DiffList->Center = !LeftJustify;
 		DiffList->MyExpandPos = Vector2( -519.6807f, -151.5238f );
 		DiffList->DoIndexWrapping = false;
 		for ( int i = 0; i < 5; i++ )
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Names[ i ], ItemFont, false, true ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Names[ i ], ItemFont, false, true ) );
 			SetItemProperties( item );
 			DiffList->AddItem( item, MakeSmartObject( Names[ i ] ) );
 		}
@@ -688,39 +688,39 @@ namespace CloudberryKingdom
 			DiffList->Pos = Vector2( 242.2246f + LeftJustifyAddX, -73.11105f );
 		else
 			DiffList->Pos = Vector2( 242.2246f, -73.11105f );
-		DiffList->OnIndexSelect = std::make_shared<DiffList_OnIndexProxy>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		DiffList->OnIndexSelect = boost::make_shared<DiffList_OnIndexProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
 
 
 		// Length
-		std::shared_ptr<EzText> LengthText = std::make_shared<EzText>( Localization::Words_LENGTH, ItemFont );
+		boost::shared_ptr<EzText> LengthText = boost::make_shared<EzText>( Localization::Words_LENGTH, ItemFont );
 		LengthText->Name = _T( "Length" );
 		SetHeaderProperties( LengthText );
 		MyPile->Add( LengthText );
 		LengthText->setPos( Vector2( -1224.999f, -191.6667f ) );
 
-		length = std::make_shared<LengthSlider>();
+		length = boost::make_shared<LengthSlider>();
 		length->Name = _T( "Length" );
 		length->_Go.reset();
 		AddItem( length );
 		length->Pos = Vector2( -283, -556.1017f );
 
-		length->OnSetValue = std::make_shared<InitOnSetValueHelper>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
-		length->OnSlide = std::make_shared<InitOnSlideHelper>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
+		length->OnSetValue = boost::make_shared<InitOnSetValueHelper>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
+		length->OnSlide = boost::make_shared<InitOnSlideHelper>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
 
 		// Mini checkpoints
 		MiniCheckpoint = ObjectIcon::CheckpointIcon->Clone( ObjectIcon::IconScale_WIDGET );
 		MiniCheckpoint->SetShadow( false );
 
 		// Checkpoints
-		CheckpointsText = std::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont );
+		CheckpointsText = boost::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont );
 		CheckpointsText->Name = _T( "Checkpoints" );
 		SetHeaderProperties( CheckpointsText );
 		MyPile->Add( CheckpointsText );
 		CheckpointsText->setPos( Vector2( -1008.33f, -661.1111f ) );
 
-		checkpoints = std::make_shared<MenuSliderNoSlide>( std::make_shared<EzText>( _T( "x " ), ItemFont ) );
+		checkpoints = boost::make_shared<MenuSliderNoSlide>( boost::make_shared<EzText>( _T( "x " ), ItemFont ) );
 		checkpoints->Name = _T( "Checkpoints" );
-		checkpoints->setMyFloat( std::make_shared<WrappedFloat>( 1.f, 0.f, 4.f ) );
+		checkpoints->setMyFloat( boost::make_shared<WrappedFloat>( 1.f, 0.f, 4.f ) );
 		checkpoints->InitialSlideSpeed = 1;
 		checkpoints->MaxSlideSpeed = 1;
 		checkpoints->Discrete = true;
@@ -732,9 +732,9 @@ namespace CloudberryKingdom
 		AddItem( checkpoints );
 		checkpoints->Pos = checkpoints->SelectedPos = Vector2( 267, -680.549f );
 		checkpoints->Icon->setPos( Vector2( -22.22266f, -41.66666f ) );
-		checkpoints->OnSlide = std::make_shared<InitOnSlideHelper2>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
+		checkpoints->OnSlide = boost::make_shared<InitOnSlideHelper2>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
 
-		checkpoints->OnSetValue = std::make_shared<InitOnSetValueHelper2>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
+		checkpoints->OnSetValue = boost::make_shared<InitOnSetValueHelper2>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), length );
 
 		DesiredNumCheckpoints = 1;
 		checkpoints->setVal( static_cast<float>( DesiredNumCheckpoints ) );
@@ -745,9 +745,9 @@ namespace CloudberryKingdom
 
 		// Start
 	#if defined(XBOX)
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_A") ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_A") ) );
 	#endif
-		Start = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_START, ItemFont ) );
+		Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
 		Start->Name = _T( "Start" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -758,21 +758,21 @@ namespace CloudberryKingdom
 		item->Selectable = false;
 		item->Pos = Vector2( 721.8262f, -226.9048f );
 	#endif
-		item->setGo( Cast::ToItem( std::make_shared<BringNextProxy>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<BringNextProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) ) );
 		item->ScaleText( .92f );
 
 		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = std::make_shared<InitOnAStartHelper>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		MyMenu->OnA = boost::make_shared<InitOnAStartHelper>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
 
 		// Load
-		std::shared_ptr<MenuItem> Load;
+		boost::shared_ptr<MenuItem> Load;
 	#if defined(PC_VERSION)
-		Load = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) );
+		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) );
 	#else
-		Load = item = std::make_shared<MenuItem>( std::make_shared<EzText>( ButtonString::Y( 90 ) + _T( " Load" ), ItemFont ) );
+		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Y( 90 ) + _T( " Load" ), ItemFont ) );
 	#endif
 		Load->Name = _T( "Load" );
-		Load->setGo( std::make_shared<BringLoadProxy1>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		Load->setGo( boost::make_shared<BringLoadProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
@@ -786,13 +786,13 @@ namespace CloudberryKingdom
 
 		// Back
 	#if defined(XBOX)
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 90, _T("Button_B") ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, _T("Button_B") ) );
 	#endif
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		item->Name = _T( "Back" );
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( std::make_shared<ReturnToCallerProxy1>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<ReturnToCallerProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		item->Pos = item->SelectedPos = Vector2( 922.9375f, -523.8096f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
@@ -806,14 +806,14 @@ namespace CloudberryKingdom
 		MyMenu->SelectItem( 0 );
 		GameList->SetIndex( 0 );
 		DiffList->SetIndex( 0 );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-		MyMenu->OnY = std::make_shared<BringLoadProxy>( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnY = boost::make_shared<BringLoadProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) );
 	}
 
-	std::shared_ptr<MenuItem> CustomLevel_GUI::AddHeroItem( const std::shared_ptr<BobPhsx> &hero )
+	boost::shared_ptr<MenuItem> CustomLevel_GUI::AddHeroItem( const boost::shared_ptr<BobPhsx> &hero )
 	{
-		std::shared_ptr<MenuItem> item;
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
+		boost::shared_ptr<MenuItem> item;
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
 		item->MyObject = MakeSmartObject( hero );
 		SetItemProperties( item );
 		HeroList->AddItem( item, MakeSmartObject( hero ) );
@@ -842,7 +842,7 @@ namespace CloudberryKingdom
 	{
 		DesiredHeroIndex = HeroList->ListIndex;
 
-		std::shared_ptr<BobPhsx> Hero = std::dynamic_pointer_cast<BobPhsx>( HeroList->getCurObj() );
+		boost::shared_ptr<BobPhsx> Hero = boost::dynamic_pointer_cast<BobPhsx>( HeroList->getCurObj() );
 
 		if ( 0 != Hero )
 		{
@@ -866,7 +866,7 @@ namespace CloudberryKingdom
 
 	bool CustomLevel_GUI::IsCustomHero()
 	{
-		return ( std::static_pointer_cast<BobPhsx>( HeroList->CurMenuItem->MyObject ) ) == 0;
+		return ( boost::static_pointer_cast<BobPhsx>( HeroList->CurMenuItem->MyObject ) ) == 0;
 	}
 
 	bool CustomLevel_GUI::IsCustomDifficulty()
@@ -877,7 +877,7 @@ namespace CloudberryKingdom
 	void CustomLevel_GUI::SetPos()
 	{
 	#if defined(PC_VERSION)
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Location" ) );
 		if ( _item != 0 )
 		{
@@ -926,7 +926,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -285, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Location" ) );
 		if ( _t != 0 )
 		{
@@ -958,7 +958,7 @@ namespace CloudberryKingdom
 			_t->setPos( Vector2( -1177.774f, -463.8889f ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -975,7 +975,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( -285, 0 ) );
 
 	#else
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Location" ) );
 		if ( _item != 0 )
 		{
@@ -1024,7 +1024,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -285, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Location" ) );
 		if ( _t != 0 )
 		{
@@ -1056,7 +1056,7 @@ namespace CloudberryKingdom
 			_t->setPos( Vector2( -1177.774f, -463.8889f ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -1119,7 +1119,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::BringHero()
 	{
-		HeroGui = MakeMagic( CustomHero_GUI, ( std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		HeroGui = MakeMagic( CustomHero_GUI, ( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		Call( HeroGui, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1127,7 +1127,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::BringUpgrades()
 	{
-		CallingPanel = MakeMagic( PassiveUpgrades_GUI, ( PieceSeed, std::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
+		CallingPanel = MakeMagic( PassiveUpgrades_GUI, ( PieceSeed, boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		Call( CallingPanel, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -1138,7 +1138,7 @@ namespace CloudberryKingdom
 		// Create the load menu
 		//SavedSeedsGUI LoadMenu = new SavedSeedsGUI();
 		//Call(LoadMenu, 0);
-		std::shared_ptr<SaveLoadSeedMenu> menu = MakeMagic( SaveLoadSeedMenu, ( MenuItem::ActivatingPlayer, true, false ) );
+		boost::shared_ptr<SaveLoadSeedMenu> menu = MakeMagic( SaveLoadSeedMenu, ( MenuItem::ActivatingPlayer, true, false ) );
 		Call( menu, 0 );
 
 		Hide( PresetPos_LEFT );
@@ -1194,7 +1194,7 @@ namespace CloudberryKingdom
 			std::wstring seed = SeedStringToLoad;
 			SeedStringToLoad = _T( "" );
 
-			SavedSeedsGUI::LoadSeed( seed, std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+			SavedSeedsGUI::LoadSeed( seed, boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 			return;
 		}
 

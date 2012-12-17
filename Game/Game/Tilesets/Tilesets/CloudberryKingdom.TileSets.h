@@ -8,39 +8,39 @@ namespace CloudberryKingdom
 	struct TileSets
 	{
 	
-		static std::shared_ptr<TileSet> Load_Cloud();
+		static boost::shared_ptr<TileSet> Load_Cloud();
 
 
-		static std::shared_ptr<TileSet> Load_Castle();
+		static boost::shared_ptr<TileSet> Load_Castle();
 
 
-		static std::shared_ptr<TileSet> Load_Sea();
+		static boost::shared_ptr<TileSet> Load_Sea();
 
 
-		static std::shared_ptr<TileSet> Load_Hills();
+		static boost::shared_ptr<TileSet> Load_Hills();
 
 
-		static std::shared_ptr<TileSet> Load_Forest();
+		static boost::shared_ptr<TileSet> Load_Forest();
 
 
-		static std::shared_ptr<TileSet> Load_Cave();
+		static boost::shared_ptr<TileSet> Load_Cave();
 
 
 	
-		static std::shared_ptr<TileSet> None, Random;
-		static std::shared_ptr<TileSet> DefaultTileSet;
+		static boost::shared_ptr<TileSet> None, Random;
+		static boost::shared_ptr<TileSet> DefaultTileSet;
 
-		static std::vector<std::shared_ptr<TileSet> > TileList;
-		static std::map<int, std::shared_ptr<TileSet> > GuidLookup;
-		static std::map<std::wstring, std::shared_ptr<TileSet> > NameLookup, PathLookup;
+		static std::vector<boost::shared_ptr<TileSet> > TileList;
+		static std::map<int, boost::shared_ptr<TileSet> > GuidLookup;
+		static std::map<std::wstring, boost::shared_ptr<TileSet> > NameLookup, PathLookup;
 
-		static void AddTileSet( const std::shared_ptr<TileSet> &tileset );
+		static void AddTileSet( const boost::shared_ptr<TileSet> &tileset );
 
 		static void LoadCode();
 
 		static void LoadTileSet( const std::wstring &path );
 	
-		static std::shared_ptr<TileSet> GetOrMakeTileset( const std::wstring &path );
+		static boost::shared_ptr<TileSet> GetOrMakeTileset( const std::wstring &path );
 
 		/// <summary>
 		/// Make a sprite animation and add it to the texture wad.

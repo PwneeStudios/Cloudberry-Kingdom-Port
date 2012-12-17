@@ -2,6 +2,9 @@
 #define _TEXTURE2D_H_
 
 #include <memory>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+#include <boost/enable_shared_from_this.hpp>
 #include <vector>
 
 #include <Content/ResourcePtr.h>
@@ -17,7 +20,7 @@ struct Texture2D
 
 	int Height;
 
-	Texture2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height );
+	Texture2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height );
 
 	// FIXME: Implement this.
 	void Dispose();

@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		return CompareIgnoreCase( this->Name, Name ) == 0;
 	}
 
-	void BaseQuad::Clone( const std::shared_ptr<BaseQuad> &quad )
+	void BaseQuad::Clone( const boost::shared_ptr<BaseQuad> &quad )
 	{
 		Show = quad->Show;
 
@@ -82,15 +82,15 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void BaseQuad::CopyAnim( const std::shared_ptr<BaseQuad> &quad, int Anim )
+	void BaseQuad::CopyAnim( const boost::shared_ptr<BaseQuad> &quad, int Anim )
 	{
 	}
 
-	void BaseQuad::CopyAnimShallow( const std::shared_ptr<BaseQuad> &quad, int Anim )
+	void BaseQuad::CopyAnimShallow( const boost::shared_ptr<BaseQuad> &quad, int Anim )
 	{
 	}
 
-	void BaseQuad::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void BaseQuad::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		// Version 51, 3/31/2010
 		// Write draw order
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BaseQuad::Read( const std::shared_ptr<BinaryReader> &reader, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber )
+	void BaseQuad::Read( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad, int VersionNumber )
 	{
 		// Version 51, 3/31/2010
 		// Read in draw order
@@ -137,7 +137,7 @@ namespace CloudberryKingdom
 			if ( exists == 1 )
 			{
 				if ( TextureAnim == 0 )
-					TextureAnim = std::make_shared<AnimationData_Texture>();
+					TextureAnim = boost::make_shared<AnimationData_Texture>();
 				TextureAnim->Read( reader );
 			}
 		}
@@ -173,12 +173,12 @@ namespace CloudberryKingdom
 		return TR;
 	}
 
-	void BaseQuad::SetTexture( const std::wstring &Name, const std::shared_ptr<EzTextureWad> &Wad )
+	void BaseQuad::SetTexture( const std::wstring &Name, const boost::shared_ptr<EzTextureWad> &Wad )
 	{
 		MyTexture = Wad->FindByName( Name );
 	}
 
-	void BaseQuad::SetEffect( const std::wstring &Name, const std::shared_ptr<EzEffectWad> &Wad )
+	void BaseQuad::SetEffect( const std::wstring &Name, const boost::shared_ptr<EzEffectWad> &Wad )
 	{
 		MyEffect = Wad->FindByName( Name );
 	}
@@ -188,12 +188,12 @@ namespace CloudberryKingdom
 		ParentQuad->RemoveQuadChild( this->shared_from_this() );
 	}
 
-	void BaseQuad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad )
+	void BaseQuad::FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		FinishLoading( device, TexWad, EffectWad, true );
 	}
 
-	void BaseQuad::FinishLoading( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzTextureWad> &TexWad, const std::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
+	void BaseQuad::FinishLoading( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzTextureWad> &TexWad, const boost::shared_ptr<EzEffectWad> &EffectWad, bool UseNames )
 	{
 	}
 
@@ -201,11 +201,11 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void BaseQuad::Draw( std::shared_ptr<QuadDrawer> &QDrawer )
+	void BaseQuad::Draw( boost::shared_ptr<QuadDrawer> &QDrawer )
 	{
 	}
 
-	void BaseQuad::DrawExtra( std::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines )
+	void BaseQuad::DrawExtra( boost::shared_ptr<QuadDrawer> &QDrawer, bool Additional, float ScaleLines )
 	{
 	}
 
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(EDITOR)
-	void BaseQuad::ColoredDraw( const std::shared_ptr<QuadDrawer> &QDrawer, Color color )
+	void BaseQuad::ColoredDraw( const boost::shared_ptr<QuadDrawer> &QDrawer, Color color )
 	{
 		std::vector<MyOwnVertexFormat> hold = std::vector<MyOwnVertexFormat>( Vertices.size() );
 		Vertices.CopyTo( hold, 0 );
@@ -246,11 +246,11 @@ namespace CloudberryKingdom
 			Vertices[ i ].TheColor = PremultipliedColor;
 	}
 
-	void BaseQuad::Set_PosFromRelPos( const std::shared_ptr<ObjectVector> &v )
+	void BaseQuad::Set_PosFromRelPos( const boost::shared_ptr<ObjectVector> &v )
 	{
 	}
 
-	void BaseQuad::Set_RelPosFromPos( const std::shared_ptr<ObjectVector> &v )
+	void BaseQuad::Set_RelPosFromPos( const boost::shared_ptr<ObjectVector> &v )
 	{
 	}
 

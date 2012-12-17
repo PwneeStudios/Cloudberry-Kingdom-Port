@@ -1,6 +1,6 @@
 #include "Texture2D.h"
 
-Texture2D::Texture2D( const std::shared_ptr<GraphicsDevice> &device, int width, int height ) :
+Texture2D::Texture2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height ) :
 	Width( width ), Height( height )
 {
 }

@@ -3,13 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	CoinMod::CoinMod( const std::shared_ptr<GUI_Timer> &Timer )
+	CoinMod::CoinMod( const boost::shared_ptr<GUI_Timer> &Timer )
 	{
 		InitializeInstanceFields();
 		this->MyTimer = Timer;
 	}
 
-	void CoinMod::CoinControl( const std::shared_ptr<Level> &level, int Index )
+	void CoinMod::CoinControl( const boost::shared_ptr<Level> &level, int Index )
 	{
 		// Calculate difficulty based on level
 		// t ranges from 0 to 1
@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void CoinMod::CoinControl_ModValue( const std::shared_ptr<Level> &level, float t )
+	void CoinMod::CoinControl_ModValue( const boost::shared_ptr<Level> &level, float t )
 	{
 		int NumCoins = ModCoinNumber( level, 6 );
 
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		MyTimer->CoinTimeValue = static_cast<int>( par / NumCoins );
 	}
 
-	void CoinMod::CoinControl_ModNumber( const std::shared_ptr<Level> &level, float t )
+	void CoinMod::CoinControl_ModNumber( const boost::shared_ptr<Level> &level, float t )
 	{
 		// Par starts a 1.75 times the actual par, and decreases down to the actual par as t -> 1
 		float par = level->Par * ( ParMultiplier_Start * ( 1 - t ) + ParMultiplier_End * t );
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 		ModCoinNumber( level, NumCoinsNeeded );
 	}
 
-	int CoinMod::ModCoinNumber( const std::shared_ptr<Level> &level, int N )
+	int CoinMod::ModCoinNumber( const boost::shared_ptr<Level> &level, int N )
 	{
 		// Get all coins
 		ObjectVec coins = level->GetObjectList( ObjectType_COIN );

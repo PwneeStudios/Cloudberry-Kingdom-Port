@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		virtual void End() = 0;
 
 		virtual void PreDraw() = 0;
-		virtual void Draw( const std::shared_ptr<Camera> &cam ) = 0;
+		virtual void Draw( const boost::shared_ptr<Camera> &cam ) = 0;
 
 		virtual void MakeFake() = 0;
 

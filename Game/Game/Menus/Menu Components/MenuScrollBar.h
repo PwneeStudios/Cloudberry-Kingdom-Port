@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		MenuScrollBar();
 
-		std::shared_ptr<EzTexture> Normal, Held;
+		boost::shared_ptr<EzTexture> Normal, Held;
 	
 		virtual void InitializeSlider();
 
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		Vector2 StartPlus;
 		Vector2 EndPlus;
 		bool DrawEnds;
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 	
 		void InitializeInstanceFields();

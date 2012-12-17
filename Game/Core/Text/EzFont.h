@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	struct EzFont
 	{
 	
-		std::shared_ptr<SpriteFont> Font, OutlineFont;
+		boost::shared_ptr<SpriteFont> Font, OutlineFont;
 		float CharacterSpacing;
 		int LineSpacing;
 

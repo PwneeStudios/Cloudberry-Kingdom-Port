@@ -5,12 +5,12 @@ namespace CloudberryKingdom
 
 	//CharSelectBackdrop::CharSelectBackdrop() : CkBaseMenu()
 	CharSelectBackdrop::CharSelectBackdrop() { }
-	std::shared_ptr<CharSelectBackdrop> CharSelectBackdrop::CharSelectBackdrop_Construct()
+	boost::shared_ptr<CharSelectBackdrop> CharSelectBackdrop::CharSelectBackdrop_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 		//Core.DrawLayer += 1;
 
-		return std::static_pointer_cast<CharSelectBackdrop>( shared_from_this() );
+		return boost::static_pointer_cast<CharSelectBackdrop>( shared_from_this() );
 	}
 
 	void CharSelectBackdrop::SlideIn( int Frames )
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideOut( PresetPos_RIGHT, Frames );
 	}
 
-	void CharSelectBackdrop::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void CharSelectBackdrop::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -43,10 +43,10 @@ namespace CloudberryKingdom
 
 		CallDelay = ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "CharSelect" ), 1778.f );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "CharSelect" ), 1778.f );
 		MyPile->Add( Backdrop, _T( "Backdrop" ) );
 
 		//var Backdrop = new QuadClass("CharSelect_Backdrop", 1778);

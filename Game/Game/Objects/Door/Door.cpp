@@ -4,7 +4,7 @@
 namespace CloudberryKingdom
 {
 
-	Door::ShakeLambda::ShakeLambda( const std::shared_ptr<Door> &door, int Length, int Intensity, bool Sound )
+	Door::ShakeLambda::ShakeLambda( const boost::shared_ptr<Door> &door, int Length, int Intensity, bool Sound )
 	{
 		Length_ = Length;
 		Intensity_ = Intensity;
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 
 	void Door::DoorTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>( 0 ) );
+		Sprite = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>( 0 ) );
 		Show = true;
 		SizePadding = Vector2();
 		ShiftBottom = Vector2();
@@ -27,16 +27,16 @@ namespace CloudberryKingdom
 		CollisionSize = Vector2( 100, 200 );
 		DoorOpen = Tools::NewSound( _T( "Door_Opening" ), 1 );
 		DoorClose = Tools::NewSound( _T( "Door_Slamming" ), 1 );
-		Sign_Renamed = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Sign_Off" ) ), Vector2( 275, -1 ) );
+		Sign_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Sign_Off" ) ), Vector2( 275, -1 ) );
 		ShowSign = false;
 	}
 
-	const std::shared_ptr<LevelSeedData> &Door::getNextLevelSeedData() const
+	const boost::shared_ptr<LevelSeedData> &Door::getNextLevelSeedData() const
 	{
 		return _NextLevelSeedData;
 	}
 
-	void Door::setNextLevelSeedData( const std::shared_ptr<LevelSeedData> &value )
+	void Door::setNextLevelSeedData( const boost::shared_ptr<LevelSeedData> &value )
 	{
 		_NextLevelSeedData = value;
 	}
@@ -53,22 +53,22 @@ namespace CloudberryKingdom
 		ExtraPhsx.reset();
 	}
 
-	std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > Door::getOnOpen() const
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > Door::getOnOpen() const
 	{
-		return std::static_pointer_cast<Lambda_1<std::shared_ptr<Door> > >( _OnOpen );
+		return boost::static_pointer_cast<Lambda_1<boost::shared_ptr<Door> > >( _OnOpen );
 	}
 
-	void Door::setOnOpen( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value )
+	void Door::setOnOpen( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value )
 	{
 		_OnOpen = value;
 	}
 
-	const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &Door::getOnEnter() const
+	const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &Door::getOnEnter() const
 	{
 		return _OnEnter;
 	}
 
-	void Door::setOnEnter( const std::shared_ptr<Lambda_1<std::shared_ptr<Door> > > &value )
+	void Door::setOnEnter( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value )
 	{
 		_OnEnter = value;
 	}
@@ -95,14 +95,14 @@ namespace CloudberryKingdom
 		MyBackblock.reset();
 	}
 
-	void Door::SetDoorType( const std::shared_ptr<TileSet> &TileSetType, const std::shared_ptr<Level> &level )
+	void Door::SetDoorType( const boost::shared_ptr<TileSet> &TileSetType, const boost::shared_ptr<Level> &level )
 	{
 		if ( level != 0 && level->CurMakeData != 0 && level->CurMakeData->PieceSeed != 0 )
 			HitBoxPadding = level->getStyle()->DoorHitBoxPadding;
 
 		getCore()->setMyTileSet(TileSetType);
 
-		std::shared_ptr<CloudberryKingdom::Door::DoorTileInfo> info = TileSetType->MyTileSetInfo->Doors;
+		boost::shared_ptr<CloudberryKingdom::Door::DoorTileInfo> info = TileSetType->MyTileSetInfo->Doors;
 		MyQuad->Quad_Renamed.Init();
 
 		if ( Mirror )
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		getCore()->BoxesOnly = BoxesOnly;
 
-		MyQuad = std::make_shared<QuadClass>();
+		MyQuad = boost::make_shared<QuadClass>();
 
 		MakeNew();
 
@@ -257,7 +257,7 @@ namespace CloudberryKingdom
 
 		if ( MyPressNote == 0 )
 		{
-			MyPressNote = std::make_shared<PressNote>( std::static_pointer_cast<Door>( shared_from_this() ) );
+			MyPressNote = boost::make_shared<PressNote>( boost::static_pointer_cast<Door>( shared_from_this() ) );
 			getCore()->MyLevel->MyGame->AddGameObject(MyPressNote);
 		}
 		else
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		DoShake();
 
 		if ( ExtraPhsx != 0 )
-			ExtraPhsx->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
+			ExtraPhsx->Apply( boost::static_pointer_cast<Door>( shared_from_this() ) );
 	}
 
 	bool Door::OnScreen()
@@ -375,7 +375,7 @@ namespace CloudberryKingdom
 			MoveBobToHere( *bob );
 	}
 
-	void Door::MoveBobToHere( const std::shared_ptr<Bob> &bob )
+	void Door::MoveBobToHere( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( MoveFeet )
 		{
@@ -410,7 +410,7 @@ namespace CloudberryKingdom
 	int Door::DoorOperated = 0;
 	bool Door::AllowCompControl = false;
 
-	void Door::Interact( const std::shared_ptr<Bob> &bob )
+	void Door::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( Locked || getOnOpen() == 0 || getMyLevel()->PlayMode != 0 )
 			return;
@@ -457,26 +457,26 @@ namespace CloudberryKingdom
 
 	void Door::Do()
 	{
-		getOnOpen()->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
+		getOnOpen()->Apply( boost::static_pointer_cast<Door>( shared_from_this() ) );
 	}
 
-	void Door::HaveBobUseDoor( const std::shared_ptr<Bob> &bob )
+	void Door::HaveBobUseDoor( const boost::shared_ptr<Bob> &bob )
 	{
 		ActivatingBob = bob;
 		UsedOnce = true;
 
 		if ( !TemporaryBlock )
 		{
-			getOnOpen()->Apply( std::static_pointer_cast<Door>( shared_from_this() ) );
+			getOnOpen()->Apply( boost::static_pointer_cast<Door>( shared_from_this() ) );
 			DoorOperated++;
 		}
 	}
 
-	void Door::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Door::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone( A->getCore() );
 
-		std::shared_ptr<Door> DoorA = std::static_pointer_cast<Door>( A );
+		boost::shared_ptr<Door> DoorA = boost::static_pointer_cast<Door>( A );
 
 		DoorA->MyQuad->Clone( MyQuad );
 		Locked = DoorA->Locked;
@@ -485,14 +485,14 @@ namespace CloudberryKingdom
 		HitBoxPadding = DoorA->HitBoxPadding;
 	}
 
-	void Door::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void Door::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		getCore()->Write(writer);
 
 		MyQuad->Write( writer );
 	}
 
-	void Door::Read( const std::shared_ptr<BinaryReader> &reader )
+	void Door::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		getCore()->Read(reader);
 

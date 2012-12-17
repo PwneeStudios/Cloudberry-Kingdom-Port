@@ -7,7 +7,7 @@
 namespace CloudberryKingdom
 {
 
-	ScreenSaver::ConstructorPressAListenerHelper::ConstructorPressAListenerHelper( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::ConstructorPressAListenerHelper::ConstructorPressAListenerHelper( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
@@ -18,14 +18,14 @@ namespace CloudberryKingdom
 		Tools::SongWad->FadeOut();
 		ss->DoBackgroundPhsx = false;
 
-		Tools::CurGameData->WaitThenDo( 55, std::make_shared<ConstructorPressAListenerHelperHelper>( ss ) );
+		Tools::CurGameData->WaitThenDo( 55, boost::make_shared<ConstructorPressAListenerHelperHelper>( ss ) );
 
 		ss->PressA_Listener->Release();
 		if ( ss->PressA != 0 )
 			ss->PressA->Kill( true );
 	}
 
-	ScreenSaver::ScreenSaverReleaseHelper::ScreenSaverReleaseHelper( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::ScreenSaverReleaseHelper::ScreenSaverReleaseHelper( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		ss->Release();
 	}
 
-	ScreenSaver::ConstructorPressAListenerHelperHelper::ConstructorPressAListenerHelperHelper( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::ConstructorPressAListenerHelperHelper::ConstructorPressAListenerHelperHelper( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
@@ -44,31 +44,31 @@ namespace CloudberryKingdom
 	{
 		Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 		Tools::CurGameData->FadeIn( .0275f );
-		Tools::AddToDo( std::make_shared<ScreenSaverReleaseHelper>( ss ) );
+		Tools::AddToDo( boost::make_shared<ScreenSaverReleaseHelper>( ss ) );
 	}
 
 	ScreenSaver::OnSwapLambda::OnSwapLambda()
 	{
 	}
 
-	void ScreenSaver::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
+	void ScreenSaver::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		Tools::ShowLoadingScreen = false;
 		Tools::TheGame->LogoScreenPropUp = false;
 		Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}
 
-	ScreenSaver::GetSeedFuncLambdaSS::GetSeedFuncLambdaSS( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::GetSeedFuncLambdaSS::GetSeedFuncLambdaSS( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
 
-	std::shared_ptr<LevelSeedData> ScreenSaver::GetSeedFuncLambdaSS::Apply( const int &index )
+	boost::shared_ptr<LevelSeedData> ScreenSaver::GetSeedFuncLambdaSS::Apply( const int &index )
 	{
 		return ss->Make( index );
 	}
 	
-	ScreenSaver::ConstructorOnSwapToLevelHelper::ConstructorOnSwapToLevelHelper( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::ConstructorOnSwapToLevelHelper::ConstructorOnSwapToLevelHelper( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
@@ -114,13 +114,13 @@ namespace CloudberryKingdom
 		// Add 'Press (A) to start' text
 		if ( index == 0 )
 		{
-			Tools::CurGameData->WaitThenDo( MandatoryWatchLength_Initial + InitialDarkness - 3, std::make_shared<MakePressALambda>( ss, ss->ForTrailer ), true );
+			Tools::CurGameData->WaitThenDo( MandatoryWatchLength_Initial + InitialDarkness - 3, boost::make_shared<MakePressALambda>( ss, ss->ForTrailer ), true );
 
-			Tools::CurGameData->WaitThenDo( getMandatoryWatchLength() + InitialDarkness - 3, std::make_shared<AddListenerLambda>(ss), true );
+			Tools::CurGameData->WaitThenDo( getMandatoryWatchLength() + InitialDarkness - 3, boost::make_shared<AddListenerLambda>(ss), true );
 		}
 	}
 
-	ScreenSaver::MakePressALambda::MakePressALambda( const std::shared_ptr<ScreenSaver> &ss, bool ForTrailer )
+	ScreenSaver::MakePressALambda::MakePressALambda( const boost::shared_ptr<ScreenSaver> &ss, bool ForTrailer )
 	{
 		this->ss = ss;
 		this->ForTrailer = ForTrailer;
@@ -143,14 +143,14 @@ namespace CloudberryKingdom
 			Tools::CurGameData->AddGameObject( ss->PressA );
 	}
 
-	ScreenSaver::AddListenerLambda::AddListenerLambda( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::AddListenerLambda::AddListenerLambda( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
 
 	void ScreenSaver::AddListenerLambda::Apply()
 	{
-		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_A, std::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
+		ss->PressA_Listener = MakeMagic( Listener, ( ControllerButtons_A, boost::make_shared<ConstructorPressAListenerHelper>( ss ) ) );
 		ss->PressA_Listener->PreventRelease = true;
 		ss->PressA_Listener->setControl( -2 );
 		Tools::CurGameData->AddGameObject( ss->PressA_Listener );
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		Tools::SoundWad->FindByName( _T( "Record_Scratch" ) )->Play();
 	}
 
-	ScreenSaver::WindLambda::WindLambda( const std::shared_ptr<FancyVector2> &wind_t )
+	ScreenSaver::WindLambda::WindLambda( const boost::shared_ptr<FancyVector2> &wind_t )
 	{
 		this->wind_t = wind_t;
 	}
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		wind_t->LerpTo( 1, 40 );
 	}
 
-	ScreenSaver::PosLerpToLambda::PosLerpToLambda( const std::shared_ptr<FancyVector2> &pos_t, int zoomout_length, LerpStyle style )
+	ScreenSaver::PosLerpToLambda::PosLerpToLambda( const boost::shared_ptr<FancyVector2> &pos_t, int zoomout_length, LerpStyle style )
 	{
 		this->pos_t = pos_t;
 		this->zoomout_length = zoomout_length;
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		pos_t->LerpTo( 1, zoomout_length + 6, style );
 	}
 
-	ScreenSaver::ZoomLerpToLambda::ZoomLerpToLambda( const std::shared_ptr<FancyVector2> &zoom_t, int zoomout_length, LerpStyle style )
+	ScreenSaver::ZoomLerpToLambda::ZoomLerpToLambda( const boost::shared_ptr<FancyVector2> &zoom_t, int zoomout_length, LerpStyle style )
 	{
 		this->zoom_t = zoom_t;
 		this->zoomout_length = zoomout_length;
@@ -209,7 +209,7 @@ namespace CloudberryKingdom
 		zoom_t->LerpTo( 1, zoomout_length, style );
 	}
 
-	ScreenSaver::SigmoidLambda::SigmoidLambda( const std::shared_ptr<FancyVector2> &zoom_t )
+	ScreenSaver::SigmoidLambda::SigmoidLambda( const boost::shared_ptr<FancyVector2> &zoom_t )
 	{
 		this->zoom_t = zoom_t;
 	}
@@ -219,7 +219,7 @@ namespace CloudberryKingdom
 		zoom_t->LerpTo( .6f, 90, LerpStyle_SIGMOID );
 	}
 
-	ScreenSaver::FadeInLambda::FadeInLambda( const std::shared_ptr<Level> &lvl, float InitialFadeInSpeed )
+	ScreenSaver::FadeInLambda::FadeInLambda( const boost::shared_ptr<Level> &lvl, float InitialFadeInSpeed )
 	{
 		this->lvl = lvl;
 		this->InitialFadeInSpeed = InitialFadeInSpeed;
@@ -230,15 +230,15 @@ namespace CloudberryKingdom
 		lvl->MyGame->FadeIn( InitialFadeInSpeed );
 	}
 
-	ScreenSaver::MultiplayerBlobsMyModParamsHelper::MultiplayerBlobsMyModParamsHelper( const std::shared_ptr<ScreenSaver> &ss )
+	ScreenSaver::MultiplayerBlobsMyModParamsHelper::MultiplayerBlobsMyModParamsHelper( const boost::shared_ptr<ScreenSaver> &ss )
 	{
 		this->ss = ss;
 	}
 
-	void ScreenSaver::MultiplayerBlobsMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
+	void ScreenSaver::MultiplayerBlobsMyModParamsHelper::Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 	{
 		// ->Style->FindParams
-		std::shared_ptr<FlyingBlob_Parameters> GParams = std::static_pointer_cast<FlyingBlob_Parameters>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> GParams = boost::static_pointer_cast<FlyingBlob_Parameters>( p->Style->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 		GParams->KeepUnused.SetVal( ss->MyLevel->getRnd()->RndBool(.5f) ? 0 : ss->MyLevel->getRnd()->RndFloat(0,.06f) );
 		GParams->FillWeight.SetVal( 100 );
 		GParams->Period.SetVal( 115 );
@@ -320,11 +320,11 @@ namespace CloudberryKingdom
 		Tools::TheGame->LogoScreenPropUp = true;
 		Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
 
-		this->GetSeedFunc = std::make_shared<GetSeedFuncLambdaSS>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) );
+		this->GetSeedFunc = boost::make_shared<GetSeedFuncLambdaSS>( boost::static_pointer_cast<ScreenSaver>( shared_from_this() ) );
 
-		OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>() );
+		OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>() );
 
-		OnSwapToLevel->Add( std::make_shared<ConstructorOnSwapToLevelHelper>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
+		OnSwapToLevel->Add( boost::make_shared<ConstructorOnSwapToLevelHelper>( boost::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
 	}
 
 	void ScreenSaver::Release()
@@ -354,39 +354,39 @@ namespace CloudberryKingdom
 
 		PhsxCount++;
 
-		std::shared_ptr<Level> lvl = Tools::CurLevel;
+		boost::shared_ptr<Level> lvl = Tools::CurLevel;
 		if ( lvl != 0 && lvl->Bobs.size() > 0 )
 		{
 			if ( pos_t == 0 )
 			{
-				pos_t = std::make_shared<FancyVector2>();
+				pos_t = boost::make_shared<FancyVector2>();
 				pos_t->setVal( 0 );
-				zoom_t = std::make_shared<FancyVector2>();
+				zoom_t = boost::make_shared<FancyVector2>();
 				zoom_t->setVal( InitialZoom );
-				wind_t = std::make_shared<FancyVector2>();
+				wind_t = boost::make_shared<FancyVector2>();
 				wind_t->setVal( 0 );
 
-				lvl->MyGame->WaitThenDo( InitialDarkness, std::make_shared<FadeInLambda>( lvl, InitialFadeInSpeed ) );
+				lvl->MyGame->WaitThenDo( InitialDarkness, boost::make_shared<FadeInLambda>( lvl, InitialFadeInSpeed ) );
 
-				lvl->MyGame->WaitThenDo( PartialZoomOut, std::make_shared<SigmoidLambda>( zoom_t ) );
+				lvl->MyGame->WaitThenDo( PartialZoomOut, boost::make_shared<SigmoidLambda>( zoom_t ) );
 				int zoomout_length = 21;
 				int zoomout_start = FullZoomOut + InitialDarkness - 3;
 				LerpStyle style = LerpStyle_SIGMOID;
-				lvl->MyGame->WaitThenDo( zoomout_start, std::make_shared<ZoomLerpToLambda>( zoom_t, zoomout_length, style ) );
-				lvl->MyGame->WaitThenDo( zoomout_start, std::make_shared<PosLerpToLambda>( pos_t, zoomout_length, style ) );
+				lvl->MyGame->WaitThenDo( zoomout_start, boost::make_shared<ZoomLerpToLambda>( zoom_t, zoomout_length, style ) );
+				lvl->MyGame->WaitThenDo( zoomout_start, boost::make_shared<PosLerpToLambda>( pos_t, zoomout_length, style ) );
 
-				lvl->MyGame->WaitThenDo( KillCapeDelay + InitialDarkness, std::make_shared<WindLambda>( wind_t ) );
+				lvl->MyGame->WaitThenDo( KillCapeDelay + InitialDarkness, boost::make_shared<WindLambda>( wind_t ) );
 
-				lvl->MyGame->WaitThenDo( zoomout_start - 3 - 3, std::make_shared<RecordScratchLambda>() );
+				lvl->MyGame->WaitThenDo( zoomout_start - 3 - 3, boost::make_shared<RecordScratchLambda>() );
 				Tools::SongWad->SetPlayList( _T( "Ripcurl^Blind_Digital" ) );
 				Tools::SongWad->Restart( true, false );
 				Tools::SongWad->Pause();
-				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 28, std::make_shared<StartMusicLambda>() );
+				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 28, boost::make_shared<StartMusicLambda>() );
 			}
 
 			lvl->Bobs[ 0 ]->CapeWind = CoreMath::LerpRestrict( 2.7f, 0.f, wind_t->getVal() ) * Cape::SineWind( Vector2(-1, .15f), .75f + .3f, 4.5f, static_cast<float>( lvl->CurPhsxStep ) );
 
-			std::shared_ptr<Camera> cam = lvl->getMainCamera();
+			boost::shared_ptr<Camera> cam = lvl->getMainCamera();
 			cam->UseEffective = true;
 			cam->EffectivePos = lvl->Bobs[ 0 ]->getPos();
 			cam->EffectiveZoom = Vector2( .0025f );
@@ -404,14 +404,14 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<LevelSeedData> ScreenSaver::Make( int index )
+	boost::shared_ptr<LevelSeedData> ScreenSaver::Make( int index )
 	{
 		bool First = index == 0;
 
-		std::shared_ptr<BobPhsx> hero = FixedHero;
+		boost::shared_ptr<BobPhsx> hero = FixedHero;
 		if ( hero == 0 )
 		{
-			std::vector<std::shared_ptr<BobPhsx> > l;
+			std::vector<boost::shared_ptr<BobPhsx> > l;
 			l.push_back( BobPhsxSmall::getInstance() );
 			l.push_back( BobPhsxBig::getInstance() );
 			l.push_back( BobPhsxBouncy::getInstance() );
@@ -428,7 +428,7 @@ namespace CloudberryKingdom
 		int Length = 6700;
 
 		// Create the LevelSeedData
-		std::shared_ptr<LevelSeedData> data;
+		boost::shared_ptr<LevelSeedData> data;
 		if ( Difficulty >= 0 )
 			data = RegularLevel::HeroLevel( static_cast<float>( Difficulty ), hero, Length );
 		else
@@ -458,7 +458,7 @@ namespace CloudberryKingdom
 		//                                          "sea_rain", "forest_snow", "hills_rain"));
 
 		// Adjust the piece seed data
-		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
+		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
 			if ( First )
 			{
@@ -468,7 +468,7 @@ namespace CloudberryKingdom
 			// Shorten the initial computer delay
 			if ( First )
 			{
-				std::shared_ptr<SingleData> style = std::dynamic_pointer_cast<SingleData>( ( *piece )->Style );
+				boost::shared_ptr<SingleData> style = boost::dynamic_pointer_cast<SingleData>( ( *piece )->Style );
 				style->ComputerWaitLengthRange = Vector2( static_cast<float>( InitialDelay ) );
 				style->InitialDoorYRange = Vector2( -200 );
 			}
@@ -486,7 +486,7 @@ namespace CloudberryKingdom
 		return data;
 	}
 
-	void ScreenSaver::FirstLevel( int index, const std::shared_ptr<PieceSeedData> &piece )
+	void ScreenSaver::FirstLevel( int index, const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		piece->MyUpgrades1->Zero();
 		piece->MyUpgrades2->Zero();
@@ -505,7 +505,7 @@ namespace CloudberryKingdom
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 	}
 
-	void ScreenSaver::MultiplayerBlobs( int index, const std::shared_ptr<PieceSeedData> &piece )
+	void ScreenSaver::MultiplayerBlobs( int index, const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		//// Easy/Masochistic
 		//piece.MyUpgrades1.Zero();
@@ -551,7 +551,7 @@ namespace CloudberryKingdom
 		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
-		piece->Style->MyModParams->Add( std::make_shared<MultiplayerBlobsMyModParamsHelper>( std::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
+		piece->Style->MyModParams->Add( boost::make_shared<MultiplayerBlobsMyModParamsHelper>( boost::static_pointer_cast<ScreenSaver>( shared_from_this() ) ) );
 	}
 
 	void ScreenSaver::InitializeInstanceFields()

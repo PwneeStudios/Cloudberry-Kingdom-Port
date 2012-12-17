@@ -4,7 +4,7 @@ namespace CloudberryKingdom
 {
 
 	ControlScreen::ControlScreen( int Control ) : CkBaseMenu( false ) { }
-	std::shared_ptr<ControlScreen> ControlScreen::ControlScreen_Construct( int Control )
+	boost::shared_ptr<ControlScreen> ControlScreen::ControlScreen_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -12,13 +12,13 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<ControlScreen>( shared_from_this() );
+		return boost::static_pointer_cast<ControlScreen>( shared_from_this() );
 	}
 
 #if defined(PC_VERSION)
-	std::shared_ptr<QuadClass> ControlScreen::MakeQuad( Keys key )
+	boost::shared_ptr<QuadClass> ControlScreen::MakeQuad( Keys key )
 	{
-		std::shared_ptr<QuadClass> quad = std::make_shared<QuadClass>( ButtonString::KeyToTexture( key ), 90.f );
+		boost::shared_ptr<QuadClass> quad = boost::make_shared<QuadClass>( ButtonString::KeyToTexture( key ), 90.f );
 		MyPile->Add( quad );
 		quad->Quad_Renamed.SetColor( CustomControlsMenu::SecondaryKeyColor );
 		return quad;
@@ -37,59 +37,59 @@ namespace CloudberryKingdom
 		setSlideLength( 29 );
 		DestinationScale *= 1.02f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		Backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( Backdrop );
 
 		ReturnToCallerDelay = 10;
 
-		std::shared_ptr<EzText> text;
+		boost::shared_ptr<EzText> text;
 
 	#if defined(PC_VERSION)
-		text = std::make_shared<EzText>( Localization::Words_QUICK_SPAWN, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_QUICK_SPAWN, Resources::Font_Grobold42 );
 		MyPile->Add( text, _T( "quickspawn" ) );
 		text->MyFloatColor = ColorHelper::Gray( .955f );
 
-		text = std::make_shared<EzText>( Localization::Words_POWER_UP_MENU, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_POWER_UP_MENU, Resources::Font_Grobold42 );
 		MyPile->Add( text, _T( "powerups" ) );
 		text->MyFloatColor = ColorHelper::Gray( .955f );
 
-		text = std::make_shared<EzText>( Localization::Words_MENU, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_MENU, Resources::Font_Grobold42 );
 		MyPile->Add( text, _T( "menu" ) );
 		text->MyFloatColor = CampaignHelper::DifficultyColor[ 1 ].ToVector4();
 
-		text = std::make_shared<EzText>( Localization::Words_ACCEPT, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_ACCEPT, Resources::Font_Grobold42 );
 		MyPile->Add( text, _T( "accept" ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
-		text = std::make_shared<EzText>( Localization::Words_BACK, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_BACK, Resources::Font_Grobold42 );
 		MyPile->Add( text, _T( "back" ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 
-		text = std::make_shared<EzText>( _T( "b" ), Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( _T( "b" ), Resources::Font_Grobold42 );
 		text->SubstituteText( _T( "<" ) );
 		MyPile->Add( text, _T( "split" ) );
 
-		std::shared_ptr<QuadClass> q;
+		boost::shared_ptr<QuadClass> q;
 
-		q = std::make_shared<QuadClass>( _T( "Enter_Key" ) );
+		q = boost::make_shared<QuadClass>( _T( "Enter_Key" ) );
 		q->ScaleXToMatchRatio( 130 );
 		MyPile->Add( q, _T( "enter" ) );
 
-		q = std::make_shared<QuadClass>( _T( "Esc_Key" ) );
+		q = boost::make_shared<QuadClass>( _T( "Esc_Key" ) );
 		q->ScaleXToMatchRatio( 130 );
 		MyPile->Add( q, _T( "esc" ) );
 
-		q = std::make_shared<QuadClass>( _T( "Backspace_Key" ) );
+		q = boost::make_shared<QuadClass>( _T( "Backspace_Key" ) );
 		q->ScaleXToMatchRatio( 130 );
 		MyPile->Add( q, _T( "backspace" ) );
 
-		q = std::make_shared<QuadClass>( _T( "Space_Key" ) );
+		q = boost::make_shared<QuadClass>( _T( "Space_Key" ) );
 		q->ScaleXToMatchRatio( 130 );
 		MyPile->Add( q, _T( "space" ) );
 
@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void ControlScreen::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "quickspawn" ) );
 		if ( _t != 0 )
 		{
@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 			_t->setScale( 1.46f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{

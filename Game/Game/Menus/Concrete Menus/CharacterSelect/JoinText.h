@@ -13,18 +13,18 @@ namespace CloudberryKingdom
 	struct JoinText : public CkBaseMenu
 	{
 	
-		std::shared_ptr<CharacterSelect> MyCharacterSelect;
+		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	
-		JoinText( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		std::shared_ptr<JoinText> JoinText_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		JoinText( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		boost::shared_ptr<JoinText> JoinText_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
 
 		virtual void ReleaseBody();
 	
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 	
 		virtual void Init();
 
-		static void ScaleGamerTag( const std::shared_ptr<EzText> &GamerTag_Renamed );
+		static void ScaleGamerTag( const boost::shared_ptr<EzText> &GamerTag_Renamed );
 	
 		void SetGamerTag();
 	

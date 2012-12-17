@@ -14,18 +14,18 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	void FlyingBlob_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void FlyingBlob_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		float FlyingBlobLevel = PieceSeed->MyUpgrades1->Get( Upgrade_FLY_BLOB );
 
 		Motion = static_cast<MotionType>( level->getRnd()->Choose(MotionLevel, static_cast<int>(FlyingBlobLevel)) );
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_FLY_BLOB ) ) );
 		}
@@ -58,9 +58,9 @@ namespace CloudberryKingdom
 		TunnelMotionType = MotionType_HORIZONTAL;
 	}
 
-std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_shared<FlyingBlob_AutoGen>();
+boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make_shared<FlyingBlob_AutoGen>();
 
-	const std::shared_ptr<FlyingBlob_AutoGen> &FlyingBlob_AutoGen::getInstance()
+	const boost::shared_ptr<FlyingBlob_AutoGen> &FlyingBlob_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -72,24 +72,24 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> FlyingBlob_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> FlyingBlob_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::make_shared<FlyingBlob_Parameters>();
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::make_shared<FlyingBlob_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void FlyingBlob_AutoGen::Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir )
+	void FlyingBlob_AutoGen::Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir )
 	{
 		Circle( level, Center, Radius, Num, Dir, 1 );
 	}
 
-	void FlyingBlob_AutoGen::Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir, float ModPeriod )
+	void FlyingBlob_AutoGen::Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir, float ModPeriod )
 	{
 		for ( int j = 0; j < Num; j++ )
 		{
-			std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, Center ) );
+			boost::shared_ptr<FlyingBlob> blob = boost::static_pointer_cast<FlyingBlob>( CreateAt( level, Center ) );
 
 			blob->SetColor( FlyingBlob::BlobColor_BLUE );
 
@@ -106,7 +106,7 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		}
 	}
 
-	void FlyingBlob_AutoGen::Pinwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::Pinwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		Vector2 Center = ( TR + BL ) / 2;
 
@@ -126,7 +126,7 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		  //  Circle(level, Center, 160 * i + 90, Num, 1);
 	}
 
-	void FlyingBlob_AutoGen::SetTunnelBlobParameter( const std::shared_ptr<FlyingBlob> &blob, const std::shared_ptr<FlyingBlob_Parameters> &Params, const std::shared_ptr<Rand> &Rnd )
+	void FlyingBlob_AutoGen::SetTunnelBlobParameter( const boost::shared_ptr<FlyingBlob> &blob, const boost::shared_ptr<FlyingBlob_Parameters> &Params, const boost::shared_ptr<Rand> &Rnd )
 	{
 		blob->SetColor( FlyingBlob::BlobColor_PINK );
 
@@ -138,10 +138,10 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		blob->Offset = 0;
 	}
 
-	void FlyingBlob_AutoGen::Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::Tunnel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		BL.X = level->FillBL.X;
 
@@ -155,7 +155,7 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		{
 			for ( int j = 0; j < M; j++ )
 			{
-				std::shared_ptr<FlyingBlob> blob = std::static_pointer_cast<FlyingBlob>( CreateAt( level, BL + Vector2( static_cast<float>( i ), static_cast<float>( j ) ) * Step ) );
+				boost::shared_ptr<FlyingBlob> blob = boost::static_pointer_cast<FlyingBlob>( CreateAt( level, BL + Vector2( static_cast<float>( i ), static_cast<float>( j ) ) * Step ) );
 				SetTunnelBlobParameter( blob, Params, level->getRnd() );
 
 				Params->TunnelGUIDs[ i ][ j ] = blob->getCore()->MyGuid;
@@ -163,7 +163,7 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		}
 	}
 
-	/*void FlyingBlob_AutoGen::Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed )
+	/*void FlyingBlob_AutoGen::Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed )
 	{
 		for ( int i = 0; i < array_Renamed.GetLength( 0 ); i++ )
 			for ( int j = 0; j < array_Renamed.GetLength( 1 ); j++ )
@@ -171,7 +171,7 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 					array_Renamed[ i ][ j ] = 0;
 	}
 
-	void FlyingBlob_AutoGen::Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j )
+	void FlyingBlob_AutoGen::Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j )
 	{
 		if ( array_Renamed[ i ][ j ] == 0 )
 			return;
@@ -179,10 +179,10 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		array_Renamed[ i ][ j ] = 0;
 	}
 
-	void FlyingBlob_AutoGen::CleanupTunnel( const std::shared_ptr<Level> &level )
+	void FlyingBlob_AutoGen::CleanupTunnel( const boost::shared_ptr<Level> &level )
 	{
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		std::vector<std::vector<unsigned long long> > GUIDs = Params->TunnelGUIDs;
 		std::vector<ObjectVec > Blobs = std::vector<ObjectVec >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
@@ -267,12 +267,12 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		Blobs.clear();
 	}*/
 
-	void FlyingBlob_AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Tunnel )
 			Tunnel( level, BL, TR );
@@ -280,28 +280,28 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 			Pinwheel( level, BL, TR );
 	}
 
-	void FlyingBlob_AutoGen::Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::Cleanup_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_1( level, BL, TR );
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		/*if ( Params->Special.Tunnel )
 			CleanupTunnel( level );*/
 	}
 
-	void FlyingBlob_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void FlyingBlob_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FlyingBlob_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	void FlyingBlob_AutoGen::SetMoveType( const std::shared_ptr<FlyingBlob> &fblob, float Displacement, FlyingBlob_Parameters::MotionType mtype, const std::shared_ptr<Rand> &Rnd )
+	void FlyingBlob_AutoGen::SetMoveType( const boost::shared_ptr<FlyingBlob> &fblob, float Displacement, FlyingBlob_Parameters::MotionType mtype, const boost::shared_ptr<Rand> &Rnd )
 	{
 		switch ( mtype )
 		{
@@ -364,11 +364,11 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		}
 	}
 
-	std::shared_ptr<ObjectBase> FlyingBlob_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> FlyingBlob_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
+		boost::shared_ptr<FlyingBlob> NewBlob = boost::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
 
 		TR.X += 200;
 		Tools::EnsureBounds_X( NewBlob, TR, BL );
@@ -382,28 +382,28 @@ std::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = std::make_sha
 		return NewBlob;
 	}
 
-	std::shared_ptr<ObjectBase> FlyingBlob_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> FlyingBlob_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		AutoGen::CreateAt( level, pos );
 
-		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
+		boost::shared_ptr<FlyingBlob> NewBlob = boost::static_pointer_cast<FlyingBlob>( BasicCreateAt( level, pos ) );
 
 		level->AddObject( NewBlob );
 
 		return NewBlob;
 	}
 
-	std::shared_ptr<ObjectBase> FlyingBlob_AutoGen::BasicCreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> FlyingBlob_AutoGen::BasicCreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get Goomba parameters
-		std::shared_ptr<FlyingBlob_Parameters> Params = std::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
+		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
 		// Make the new blob
-		std::shared_ptr<FlyingBlob> NewBlob = std::static_pointer_cast<FlyingBlob>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );
+		boost::shared_ptr<FlyingBlob> NewBlob = boost::static_pointer_cast<FlyingBlob>( level->getRecycle()->GetObject(ObjectType_FLYING_BLOB, true) );
 		NewBlob->Init( pos, level );
 
 		NewBlob->getCore()->Data.Position = NewBlob->getCore()->StartData.Position = pos;

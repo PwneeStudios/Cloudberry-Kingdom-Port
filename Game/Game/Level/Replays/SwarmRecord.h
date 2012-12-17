@@ -9,10 +9,10 @@ namespace CloudberryKingdom
 	struct SwarmRecord
 	{
 	
-		std::shared_ptr<LevelPiece> MyLevelPiece;
+		boost::shared_ptr<LevelPiece> MyLevelPiece;
 
-		std::list<std::shared_ptr<Recording> > Records;
-		std::shared_ptr<Recording> MainRecord;
+		std::list<boost::shared_ptr<Recording> > Records;
+		boost::shared_ptr<Recording> MainRecord;
 #if defined(XBOX)
 	
 		int MaxRecords;
@@ -20,16 +20,16 @@ namespace CloudberryKingdom
 		int MaxRecords;
 #endif
 
-		std::shared_ptr<QuadClass> BobQuad;
+		boost::shared_ptr<QuadClass> BobQuad;
 
 	
 		void Release();
 
 		SwarmRecord();
 
-		void Draw( int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks );
+		void Draw( int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks );
 
-		void AddRecord( const std::shared_ptr<Recording> &Record, int Step );
+		void AddRecord( const boost::shared_ptr<Recording> &Record, int Step );
 
 	
 		void InitializeInstanceFields();

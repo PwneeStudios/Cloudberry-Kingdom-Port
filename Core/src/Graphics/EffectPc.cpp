@@ -13,7 +13,7 @@ static GLuint CreateProgram( const std::string &name );
 
 struct EffectInternal
 {
-	std::map<std::string, std::shared_ptr<EffectParameter> > Parameters;
+	std::map<std::string, boost::shared_ptr<EffectParameter> > Parameters;
 
 	GLuint Program;
 };
@@ -33,13 +33,13 @@ void Effect::Load( const std::string &name )
 	internal_->Program = CreateProgram( "Content/" + name );
 	assert( internal_->Program != 0 );
 
-	DefaultTechnique = std::make_shared<EffectTechnique>( internal_->Program );
+	DefaultTechnique = boost::make_shared<EffectTechnique>( internal_->Program );
 	CurrentTechnique = DefaultTechnique;
 
 	GLint activeUniforms;
 	glGetProgramiv( internal_->Program, GL_ACTIVE_UNIFORMS, &activeUniforms );
 
-	internal_->Parameters[ "SecretDefaultParameter" ] = std::make_shared<EffectParameter>( internal_->Program, -1 );
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( internal_->Program, -1 );
 	for( GLint i = 0; i < activeUniforms; ++i )
 	{
 		GLchar buffer[ 256 ];
@@ -48,11 +48,11 @@ void Effect::Load( const std::string &name )
 		GLenum type;
 		glGetActiveUniform( internal_->Program, i, sizeof( buffer ), &length, &size, &type, buffer );
 
-		internal_->Parameters[ buffer ] = std::make_shared<EffectParameter>( internal_->Program, i );
+		internal_->Parameters[ buffer ] = boost::make_shared<EffectParameter>( internal_->Program, i );
 	}
 }
 
-std::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
+boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
 {
 	if( internal_->Parameters.find( name ) == internal_->Parameters.end() )
 	{
@@ -64,7 +64,7 @@ std::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
 	return internal_->Parameters.at( name );
 }
 
-std::shared_ptr<EffectTechnique> Effect::Techniques( const std::string &name )
+boost::shared_ptr<EffectTechnique> Effect::Techniques( const std::string &name )
 {
 	return DefaultTechnique;
 }

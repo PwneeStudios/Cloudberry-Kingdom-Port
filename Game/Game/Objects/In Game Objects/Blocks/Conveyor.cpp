@@ -22,18 +22,18 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		if ( !BoxesOnly )
 		{
-			MyQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
 			MyQuad->Quad_Renamed.U_Wrap = true;
 			MyQuad->setTextureName( _T( "Conveyor" ) );
 
-			LeftEnd = std::make_shared<QuadClass>();
+			LeftEnd = boost::make_shared<QuadClass>();
 			LeftEnd->setTextureName( _T( "ConveyorEnd" ) );
 
-			RightEnd = std::make_shared<QuadClass>();
+			RightEnd = boost::make_shared<QuadClass>();
 			RightEnd->setTextureName( _T( "ConveyorEnd" ) );
 		}
 
-		MyBox = std::make_shared<AABox>();
+		MyBox = boost::make_shared<AABox>();
 
 		MakeNew();
 
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		Size.Y = texture_size.Y;
 
 		getBlockCore()->Layer = .35f;
-		MyBox = std::make_shared<AABox>( center, Size );
+		MyBox = boost::make_shared<AABox>( center, Size );
 		MyQuad->Base.Origin = getBlockCore()->Data.Position = getBlockCore()->StartData.Position = center;
 
 		MyBox->Initialize( center, Size );
@@ -190,11 +190,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void ConveyorBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void ConveyorBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<ConveyorBlock> BlockA = std::dynamic_pointer_cast<ConveyorBlock>( A );
+		boost::shared_ptr<ConveyorBlock> BlockA = boost::dynamic_pointer_cast<ConveyorBlock>( A );
 
 		Speed = BlockA->Speed;
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size );

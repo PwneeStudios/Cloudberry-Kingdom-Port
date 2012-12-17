@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	void Spike_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Spike_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		float lvl = PieceSeed->getu()->Get( Upgrade_SPIKE );
 
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		SpikePeriod = Param( PieceSeed, __max( 60, 240 - 20 * u->Get( Upgrade_SPEED ) ) );
 	}
 
-	void Spike_Parameters::SetPeriod( const std::shared_ptr<Spike> &spike, const std::shared_ptr<Rand> &Rnd )
+	void Spike_Parameters::SetPeriod( const boost::shared_ptr<Spike> &spike, const boost::shared_ptr<Rand> &Rnd )
 	{
 		Vector2 pos = spike->getCore()->Data.Position;
 		int period = static_cast<int>( SpikePeriod.GetVal( pos ) );
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		spike->Offset = EnforceOffset( spike->Offset, period );
 	}
 
-	Spike_AutoGen::SpikeCleanup::SpikeCleanup( const std::shared_ptr<Spike_Parameters> &Params )
+	Spike_AutoGen::SpikeCleanup::SpikeCleanup( const boost::shared_ptr<Spike_Parameters> &Params )
 	{
 		this->Params = Params;
 	}
@@ -75,9 +75,9 @@ namespace CloudberryKingdom
 		return Vector2( dist, dist );
 	}
 
-std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_AutoGen>();
+boost::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = boost::make_shared<Spike_AutoGen>();
 
-	const std::shared_ptr<Spike_AutoGen> &Spike_AutoGen::getInstance()
+	const boost::shared_ptr<Spike_AutoGen> &Spike_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -88,20 +88,20 @@ std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Spike_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Spike_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Spike_Parameters> Params = std::make_shared<Spike_Parameters>();
+		boost::shared_ptr<Spike_Parameters> Params = boost::make_shared<Spike_Parameters>();
 		Params->SetParameters( data, level );
 
 		return Params;
 	}
 
-	void Spike_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Spike_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameters>( level->getStyle()->FindParams( Spike_AutoGen::getInstance() ) );
+		boost::shared_ptr<Spike_Parameters> Params = boost::static_pointer_cast<Spike_Parameters>( level->getStyle()->FindParams( Spike_AutoGen::getInstance() ) );
 
 		if ( Params->MinSpikeDensity.getVal() <= 0 )
 			return;
@@ -140,7 +140,7 @@ std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_
 			{
 				//if (xdif > 15)
 			{
-					std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+					boost::shared_ptr<Spike> spike = boost::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 					spike->Init( Vector2(), level );
 
 					float x = static_cast<float>( level->getRnd()->Rnd->NextDouble() ) * xdif + (*block)->getBox()->Target->BL.X + 55;
@@ -187,7 +187,7 @@ std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_
 						if ( y < ( *block )->getBox()->TR.Y - level->getInfo()->ObstacleCutoff )
 							continue;
 
-						std::shared_ptr<Spike> spike = std::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
+						boost::shared_ptr<Spike> spike = boost::static_pointer_cast<Spike>( level->getRecycle()->GetObject(ObjectType_SPIKE, true) ); //false);
 						spike->Init( Vector2(), level );
 
 						if ( level->getRnd()->Rnd->Next(0, 2) == 0 )
@@ -214,13 +214,13 @@ std::shared_ptr<Spike_AutoGen> Spike_AutoGen::instance = std::make_shared<Spike_
 		}
 	}
 
-	void Spike_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Spike_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Spike parameters
-		std::shared_ptr<Spike_Parameters> Params = std::static_pointer_cast<Spike_Parameters>( level->getStyle()->FindParams( Spike_AutoGen::getInstance() ) );
+		boost::shared_ptr<Spike_Parameters> Params = boost::static_pointer_cast<Spike_Parameters>( level->getStyle()->FindParams( Spike_AutoGen::getInstance() ) );
 
-		level->Cleanup( ObjectType_SPIKE, std::make_shared<SpikeCleanup>( Params ), BL, TR );
+		level->Cleanup( ObjectType_SPIKE, boost::make_shared<SpikeCleanup>( Params ), BL, TR );
 	}
 }

@@ -16,8 +16,8 @@ namespace CloudberryKingdom
 
 	void Spike::SpikeTileInfo::InitializeInstanceFields()
 	{
-		Spike_Renamed = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
-		Base = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>() );
+		Spike_Renamed = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>() );
+		Base = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>() );
 		PeakHeight = .2f;
 		TopOffset = 2;
 		BottomOffset = 2;
@@ -59,9 +59,9 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void Spike::Init( Vector2 Pos, const std::shared_ptr<Level> &level )
+	void Spike::Init( Vector2 Pos, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<SpikeTileInfo> info = level->getInfo()->Spikes;
+		boost::shared_ptr<SpikeTileInfo> info = level->getInfo()->Spikes;
 
 		Vector2 size = info->ObjectSize * level->getInfo()->ScaleAll * level->getInfo()->ScaleAllObjects;
 		MyObject->Base.e1 = Vector2( size.X, 0 );
@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 			//else
 			if ( info->Base->Sprite != 0 )
 			{
-				MyBaseQuad = std::make_shared<QuadClass>();
+				MyBaseQuad = boost::make_shared<QuadClass>();
 				MyBaseQuad->Set( info->Base );
 				MyObject->Quads[ 1 ].Hide = true;
 			}
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 			//else
 			if ( info->Spike_Renamed->Sprite != 0 )
 			{
-				MyQuad = std::make_shared<QuadClass>();
+				MyQuad = boost::make_shared<QuadClass>();
 				MyQuad->Set( info->Spike_Renamed );
 				SetHeight = MyQuad->getSize().Y;
 				MyObject->Quads[ 1 ].Hide = true;
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 
 	void Spike::Construct( bool BoxesOnly )
 	{
-		MyObject = std::make_shared<SimpleObject>( Prototypes::SpikeObj->MyObject, BoxesOnly );
+		MyObject = boost::make_shared<SimpleObject>( Prototypes::SpikeObj->MyObject, BoxesOnly );
 
 		 _BoxDeath::Construct( BoxesOnly );
 	}
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	Spike::Spike( const std::wstring &file, const std::shared_ptr<EzEffectWad> &EffectWad, const std::shared_ptr<EzTextureWad> &TextureWad ) :
+	Spike::Spike( const std::wstring &file, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad ) :
 		Dir( 0 ),
 		Angle( 0 ),
 		Offset( 0 ),
@@ -157,13 +157,13 @@ namespace CloudberryKingdom
 		Exposed( false ),
 		SetHeight( 0 )
 	{
-		std::shared_ptr<ObjectClass> SourceObject;
+		boost::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		std::shared_ptr<BinaryReader> reader = std::make_shared<BinaryReader>( file );
+		//boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
 
-		SourceObject = std::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		//reader->Close();
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		reader->Close();
 
 		SourceObject->ConvertForSimple();
-		MyObject = std::make_shared<SimpleObject>( SourceObject );
+		MyObject = boost::make_shared<SimpleObject>( SourceObject );
 
 		MyObject->Quads[ 1 ].Animated = false;
 
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		getCore()->Data.Position = Vector2(0, 0);
 		getCore()->Data.Velocity = Vector2(0, 0);
 
-		Box = std::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 0 ]->Size() / 2 );
+		Box = boost::make_shared<AABox>( getCore()->Data.Position, MyObject->Boxes[ 0 ]->Size() / 2 );
 	}
 
 	void Spike::PhsxStep()
@@ -343,7 +343,7 @@ namespace CloudberryKingdom
 		_BoxDeath::Reset( BoxesOnly );
 	}
 
-	void Spike::Interact( const std::shared_ptr<Bob> &bob )
+	void Spike::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->SkippedPhsx && Exposed )
 		{
@@ -364,7 +364,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Spike::CloneBoxObject( const std::shared_ptr<SimpleObject> &SimpleObjA, const std::shared_ptr<SimpleObject> &SimpleObjB )
+	void Spike::CloneBoxObject( const boost::shared_ptr<SimpleObject> &SimpleObjA, const boost::shared_ptr<SimpleObject> &SimpleObjB )
 	{
 		SimpleObjA->Base = SimpleObjB->Base;
 		for ( int i = 0; i < static_cast<float>( SimpleObjA->Boxes.size() ); i++ )
@@ -374,11 +374,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void Spike::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Spike::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Spike> SpikeA = std::dynamic_pointer_cast<Spike>( A );
+		boost::shared_ptr<Spike> SpikeA = boost::dynamic_pointer_cast<Spike>( A );
 		Init( A->getPos(), A->getMyLevel() );
 
 		SetDir( SpikeA->Dir );

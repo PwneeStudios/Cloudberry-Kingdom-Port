@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	OneScreenData::OneScreenData( const std::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
+	OneScreenData::OneScreenData( const boost::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
 	{
 		InitializeInstanceFields();
 	}

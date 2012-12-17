@@ -8,14 +8,14 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	LengthSlider::LengthSlider( const std::shared_ptr<EzText> &Text )
+	LengthSlider::LengthSlider( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
 		Init( Text, Text->Clone() );
 		InitializeSlider();
 	}
 
-	LengthSlider::LengthSlider( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText )
+	LengthSlider::LengthSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
 		Init( Text, SelectedText );
@@ -29,13 +29,13 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		BL_HitPadding = Vector2( 200, 30 );
 	#endif
-		LengthBar = std::make_shared<ProgressBar>( _T( "Length" ), _T( "LengthBack" ), 850.f );
+		LengthBar = boost::make_shared<ProgressBar>( _T( "Length" ), _T( "LengthBack" ), 850.f );
 		LengthBar->MyType = ProgressBar::BarType_REVEAL;
 
 		LengthBar->Outline->Shadow = false;
 		LengthBar->MyPile->MyOscillateParams.Set( 2,.99f,.05f );
 
-		setMyFloat( std::make_shared<WrappedFloat>( 8000.f, 3000.f, 15000.f ) );
+		setMyFloat( boost::make_shared<WrappedFloat>( 8000.f, 3000.f, 15000.f ) );
 		PerceivedMin = 500;
 		InitialSlideSpeed = 120;
 		MaxSlideSpeed = 550;
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		Start = Start + min_ratio * ( End - Start );
 	}
 
-	void LengthSlider::Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected )
+	void LengthSlider::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
 	{
 		MenuSliderBase::Draw( Text, cam, Selected );
 

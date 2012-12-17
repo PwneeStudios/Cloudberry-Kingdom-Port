@@ -12,25 +12,25 @@ namespace CloudberryKingdom
 
 	void Fireball::FireballTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 72, -1 ) );
+		Sprite = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2( 72, -1 ) );
 	}
 
-	std::shared_ptr<Particle> Fireball::ExplodeTemplate, Fireball::EmitterTemplate;
-	std::shared_ptr<EzSound> Fireball::ExplodeSound;
+	boost::shared_ptr<Particle> Fireball::ExplodeTemplate, Fireball::EmitterTemplate;
+	boost::shared_ptr<EzSound> Fireball::ExplodeSound;
 	float Fireball::t = 0;
-	std::shared_ptr<Quad> Fireball::ShadeQuad = 0;
-	std::shared_ptr<EzTexture> Fireball::FireballTexture, Fireball::FlameTexture, Fireball::EmitterTexture, Fireball::BaseFireballTexture;
-	std::shared_ptr<RenderTarget2D> Fireball::FireballRenderTarget, Fireball::FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
+	boost::shared_ptr<Quad> Fireball::ShadeQuad = 0;
+	boost::shared_ptr<EzTexture> Fireball::FireballTexture, Fireball::FlameTexture, Fireball::EmitterTexture, Fireball::BaseFireballTexture;
+	boost::shared_ptr<RenderTarget2D> Fireball::FireballRenderTarget, Fireball::FlameRenderTarget, Fireball::EmitterRenderTarget = 0;
 	int Fireball::DrawWidth = 0, Fireball::DrawHeight = 0;
-	std::shared_ptr<ParticleEmitter> Fireball::Fireball_Emitter, Fireball::Flame_Emitter, Fireball::Emitter_Emitter;
+	boost::shared_ptr<ParticleEmitter> Fireball::Fireball_Emitter, Fireball::Flame_Emitter, Fireball::Emitter_Emitter;
 
 	void Fireball::PreInit()
 	{
-		FireballTexture = std::make_shared<EzTexture>();
+		FireballTexture = boost::make_shared<EzTexture>();
 		FireballTexture->FromCode = true;
-		FlameTexture = std::make_shared<EzTexture>();
+		FlameTexture = boost::make_shared<EzTexture>();
 		FlameTexture->FromCode = true;
-		EmitterTexture = std::make_shared<EzTexture>();
+		EmitterTexture = boost::make_shared<EzTexture>();
 		EmitterTexture->FromCode = true;
 
 		FireballTexture->Name = _T( "FireballTexture" );
@@ -40,18 +40,18 @@ namespace CloudberryKingdom
 		Tools::TextureWad->AddEzTexture( EmitterTexture );
 	}
 
-	void Fireball::InitRenderTargets( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height )
+	void Fireball::InitRenderTargets( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height )
 	{
 		DrawWidth = Width;
 		DrawHeight = Height;
-		FireballRenderTarget = std::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		FireballRenderTarget = boost::make_shared<RenderTarget2D>( device, DrawWidth, DrawHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-		FlameRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		FlameRenderTarget = boost::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
-		EmitterRenderTarget = std::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+		EmitterRenderTarget = boost::make_shared<RenderTarget2D>( device, 300, 300, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
 
-		ShadeQuad = std::make_shared<Quad>();
+		ShadeQuad = boost::make_shared<Quad>();
 		ShadeQuad->InitVertices();
 		ShadeQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
 		ShadeQuad->MyEffect = Tools::EffectWad->FindByName( _T( "Fireball" ) );
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		ExplodeSound = Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) );
 
 		// Fireball particle emitter
-		Fireball_Emitter = std::make_shared<ParticleEmitter>( 20 );
+		Fireball_Emitter = boost::make_shared<ParticleEmitter>( 20 );
 
 		Fireball_Emitter->Position = Vector2( 55, 0 );
 		Fireball_Emitter->Amount = 2;
@@ -84,18 +84,18 @@ namespace CloudberryKingdom
 		Fireball_Emitter->ParticleTemplate->MyQuad.BlendAddRatio = 0;
 
 		// Flame particle emitter
-		Flame_Emitter = std::make_shared<ParticleEmitter>( 40 );
+		Flame_Emitter = boost::make_shared<ParticleEmitter>( 40 );
 		Flame_Emitter->Position = Vector2( 0, 0 );
 
 		// Emitter particle emitter
-		Emitter_Emitter = std::make_shared<ParticleEmitter>( 40 );
+		Emitter_Emitter = boost::make_shared<ParticleEmitter>( 40 );
 		Emitter_Emitter->Position = Vector2( 0, 0 );
 
 
 		BaseFireballTexture = Tools::TextureWad->FindByName( _T( "Fireball" ) );
 
 		// Initialize explosion particle
-		ExplodeTemplate = std::make_shared<Particle>();
+		ExplodeTemplate = boost::make_shared<Particle>();
 		ExplodeTemplate->MyQuad.Init();
 		ExplodeTemplate->MyQuad.UseGlobalIllumination = false;
 		ExplodeTemplate->MyQuad.MyEffect = Tools::BasicEffect;
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		ExplodeTemplate->MyQuad.BlendAddRatio = 0;
 
 		// Initialize emitter particle
-		EmitterTemplate = std::make_shared<Particle>();
+		EmitterTemplate = boost::make_shared<Particle>();
 		EmitterTemplate->MyQuad.Init();
 		EmitterTemplate->MyQuad.UseGlobalIllumination = false;
 		EmitterTemplate->MyQuad.MyEffect = Tools::BasicEffect; //Circle");
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 
 	void Fireball::TexturePhsx()
 	{
-		std::shared_ptr<Rand> Rnd = Tools::GlobalRnd;
+		boost::shared_ptr<Rand> Rnd = Tools::GlobalRnd;
 
 		// Fireball superparticle physics
 		Fireball_Emitter->Phsx();
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 		// Flame superparticle physics
 		for ( int k = 0; k < 1; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = Flame_Emitter->GetNewParticle( EmitterTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = Flame_Emitter->GetNewParticle( EmitterTemplate );
 			Vector2 Dir = Rnd->RndDir();
 			p->Data.Position = 20 * Dir; //+ Tools.CurLevel.MainCamera.Data.Position;
 			//p.Data.Velocity = 4 * (float)MyLevel.Rnd.Rnd.NextDouble() * Dir;
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		Emitter_Emitter->Phsx();
 	}
 
-	void Fireball::DrawFireballTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad )
+	void Fireball::DrawFireballTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		t += 1 / 60;
 
@@ -193,7 +193,7 @@ namespace CloudberryKingdom
 		//FireballTexture.Tex.Save(string.Format("Fireball_{0}.png", Tools.DrawCount), ImageFileFormat.Png);
 	}
 
-	void Fireball::DrawEmitterTexture( const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<EzEffectWad> &EffectWad )
+	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		t += 1 / 60;
 
@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 		float scalex = 175;
 		float scaley = 175;
 
-		std::shared_ptr<EzEffect> fx = Tools::BasicEffect;
+		boost::shared_ptr<EzEffect> fx = Tools::BasicEffect;
 
 		fx->effect->CurrentTechnique = fx->Simplest;
 		Tools::EffectWad->SetCameraPosition( Vector4( 0, 0, 1 / scalex, 1 / scaley ) );
@@ -226,19 +226,19 @@ namespace CloudberryKingdom
 		EmitterTexture->setTex( EmitterRenderTarget );
 	}
 
-	void Fireball::Explosion( Vector2 pos, const std::shared_ptr<Level> &level )
+	void Fireball::Explosion( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
 		Explosion( pos, level, Vector2(), 1, 1 );
 	}
 
-	void Fireball::Explosion( Vector2 pos, const std::shared_ptr<Level> &level, Vector2 vel, float Scale, float ScaleQuad )
+	void Fireball::Explosion( Vector2 pos, const boost::shared_ptr<Level> &level, Vector2 vel, float Scale, float ScaleQuad )
 	{
-		std::shared_ptr<Rand> Rnd = Tools::GlobalRnd;
+		boost::shared_ptr<Rand> Rnd = Tools::GlobalRnd;
 
 		//int i;
 		for ( int k = 0; k < 20; k++ )
 		{
-			std::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( ExplodeTemplate );
+			boost::shared_ptr<CloudberryKingdom::Particle> p = level->MainEmitter->GetNewParticle( ExplodeTemplate );
 
 			Vector2 Dir = Rnd->RndDir();
 
@@ -298,11 +298,11 @@ namespace CloudberryKingdom
 
 		if ( !getCore()->BoxesOnly )
 		{
-			MyQuad = std::make_shared<HsvQuad>();
+			MyQuad = boost::make_shared<HsvQuad>();
 		}
 	}
 
-	void Fireball::Init( PhsxData data, const std::shared_ptr<Level> &level )
+	void Fireball::Init( PhsxData data, const boost::shared_ptr<Level> &level )
 	{
 		_CircleDeath::Init( data.Position, level );
 
@@ -315,13 +315,13 @@ namespace CloudberryKingdom
 			if ( level->getInfo()->Fireballs->Sprite->Sprite != 0 )
 			{
 				if ( MyQuad == 0 )
-					MyQuad = std::make_shared<HsvQuad>();
+					MyQuad = boost::make_shared<HsvQuad>();
 				MyQuad->Set( level->getInfo()->Fireballs->Sprite );
 			}
 			else
 			{
 				if ( MyQuad == 0 )
-					MyQuad = std::make_shared<HsvQuad>();
+					MyQuad = boost::make_shared<HsvQuad>();
 
 				if ( !getCore()->BoxesOnly )
 				{
@@ -367,7 +367,7 @@ namespace CloudberryKingdom
 		_CircleDeath::ActivePhsxStep();
 	}
 
-	void Fireball::Interact( const std::shared_ptr<Bob> &bob )
+	void Fireball::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !Alive )
 			return;
@@ -400,11 +400,11 @@ namespace CloudberryKingdom
 		Circle->Draw( bColor( 50, 50, 255, 220 ) );
 	}
 
-	void Fireball::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Fireball::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Fireball> FireballA = std::dynamic_pointer_cast<Fireball>( A );
+		boost::shared_ptr<Fireball> FireballA = boost::dynamic_pointer_cast<Fireball>( A );
 
 		Radius = FireballA->Radius;
 		Period = FireballA->Period;

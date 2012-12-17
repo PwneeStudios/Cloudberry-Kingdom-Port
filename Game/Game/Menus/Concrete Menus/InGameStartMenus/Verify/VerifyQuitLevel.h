@@ -9,19 +9,19 @@ namespace CloudberryKingdom
 	struct VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
 	
-		struct VerifyQuitOkLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct VerifyQuitOkLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
 			VerifyQuitOkLambda();
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		VerifyQuitLevelMenu( bool CallBaseConstructor );
-		std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( bool CallBaseConstructor );
+		boost::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( bool CallBaseConstructor );
 		VerifyQuitLevelMenu( int Control );
-		std::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( int Control );
+		boost::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu_Construct( int Control );
 
 		virtual void Init();
 

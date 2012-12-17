@@ -11,10 +11,10 @@ namespace CloudberryKingdom
 		struct ConstructorPressAListenerHelper : public Lambda
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			ConstructorPressAListenerHelper( const std::shared_ptr<ScreenSaver> &ss );
+			ConstructorPressAListenerHelper( const boost::shared_ptr<ScreenSaver> &ss );
 
 			void Apply();
 		};
@@ -23,10 +23,10 @@ namespace CloudberryKingdom
 		struct ScreenSaverReleaseHelper : public Lambda
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			ScreenSaverReleaseHelper( const std::shared_ptr<ScreenSaver> &ss );
+			ScreenSaverReleaseHelper( const boost::shared_ptr<ScreenSaver> &ss );
 
 			void Apply();
 		};
@@ -35,43 +35,43 @@ namespace CloudberryKingdom
 		struct ConstructorPressAListenerHelperHelper : public Lambda
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			ConstructorPressAListenerHelperHelper( const std::shared_ptr<ScreenSaver> &ss );
+			ConstructorPressAListenerHelperHelper( const boost::shared_ptr<ScreenSaver> &ss );
 
 			void Apply();
 		};
 
 	
-		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		
 			OnSwapLambda();
 
-			void Apply( const std::shared_ptr<LevelSeedData> &data );
+			void Apply( const boost::shared_ptr<LevelSeedData> &data );
 		};
 
 	
-		struct GetSeedFuncLambdaSS : public LambdaFunc_1<int, std::shared_ptr<LevelSeedData> >
+		struct GetSeedFuncLambdaSS : public LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> >
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			GetSeedFuncLambdaSS( const std::shared_ptr<ScreenSaver> &ss );
+			GetSeedFuncLambdaSS( const boost::shared_ptr<ScreenSaver> &ss );
 
-			std::shared_ptr<LevelSeedData> Apply( const int &index );
+			boost::shared_ptr<LevelSeedData> Apply( const int &index );
 		};
 
 	
 		struct ConstructorOnSwapToLevelHelper : public Lambda_1<int>
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			ConstructorOnSwapToLevelHelper( const std::shared_ptr<ScreenSaver> &ss );
+			ConstructorOnSwapToLevelHelper( const boost::shared_ptr<ScreenSaver> &ss );
 
 			void Apply( const int &index );
 		};
@@ -80,11 +80,11 @@ namespace CloudberryKingdom
 		struct MakePressALambda : public Lambda
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 			bool ForTrailer;
 
 		
-			MakePressALambda( const std::shared_ptr<ScreenSaver> &ss, bool ForTrailer );
+			MakePressALambda( const boost::shared_ptr<ScreenSaver> &ss, bool ForTrailer );
 
 			void Apply();
 		};
@@ -93,9 +93,9 @@ namespace CloudberryKingdom
 		struct AddListenerLambda : public Lambda
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 		
-			AddListenerLambda( const std::shared_ptr<ScreenSaver> &ss );
+			AddListenerLambda( const boost::shared_ptr<ScreenSaver> &ss );
 
 			void Apply();
 		};
@@ -121,9 +121,9 @@ namespace CloudberryKingdom
 		struct WindLambda : public Lambda
 		{
 		
-			std::shared_ptr<FancyVector2> wind_t;
+			boost::shared_ptr<FancyVector2> wind_t;
 		
-			WindLambda( const std::shared_ptr<FancyVector2> &wind_t );
+			WindLambda( const boost::shared_ptr<FancyVector2> &wind_t );
 
 			void Apply();
 		};
@@ -132,11 +132,11 @@ namespace CloudberryKingdom
 		struct PosLerpToLambda : public Lambda
 		{
 		
-			std::shared_ptr<FancyVector2> pos_t;
+			boost::shared_ptr<FancyVector2> pos_t;
 			int zoomout_length;
 			LerpStyle style;
 		
-			PosLerpToLambda( const std::shared_ptr<FancyVector2> &pos_t, int zoomout_length, LerpStyle style );
+			PosLerpToLambda( const boost::shared_ptr<FancyVector2> &pos_t, int zoomout_length, LerpStyle style );
 
 			void Apply();
 		};
@@ -145,11 +145,11 @@ namespace CloudberryKingdom
 		struct ZoomLerpToLambda : public Lambda
 		{
 		
-			std::shared_ptr<FancyVector2> zoom_t;
+			boost::shared_ptr<FancyVector2> zoom_t;
 			int zoomout_length;
 			LerpStyle style;
 		
-			ZoomLerpToLambda( const std::shared_ptr<FancyVector2> &zoom_t, int zoomout_length, LerpStyle style );
+			ZoomLerpToLambda( const boost::shared_ptr<FancyVector2> &zoom_t, int zoomout_length, LerpStyle style );
 
 			void Apply();
 		};
@@ -158,9 +158,9 @@ namespace CloudberryKingdom
 		struct SigmoidLambda : public Lambda
 		{
 		
-			std::shared_ptr<FancyVector2> zoom_t;
+			boost::shared_ptr<FancyVector2> zoom_t;
 		
-			SigmoidLambda( const std::shared_ptr<FancyVector2> &zoom_t );
+			SigmoidLambda( const boost::shared_ptr<FancyVector2> &zoom_t );
 
 			void Apply();
 		};
@@ -169,24 +169,24 @@ namespace CloudberryKingdom
 		struct FadeInLambda : public Lambda
 		{
 		
-			std::shared_ptr<Level> lvl;
+			boost::shared_ptr<Level> lvl;
 			float InitialFadeInSpeed;
 		
-			FadeInLambda( const std::shared_ptr<Level> &lvl, float InitialFadeInSpeed );
+			FadeInLambda( const boost::shared_ptr<Level> &lvl, float InitialFadeInSpeed );
 
 			void Apply();
 		};
 
 	
-		struct MultiplayerBlobsMyModParamsHelper : public Lambda_2<std::shared_ptr<Level>, std::shared_ptr<PieceSeedData> >
+		struct MultiplayerBlobsMyModParamsHelper : public Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
 		{
 		
-			std::shared_ptr<ScreenSaver> ss;
+			boost::shared_ptr<ScreenSaver> ss;
 
 		
-			MultiplayerBlobsMyModParamsHelper( const std::shared_ptr<ScreenSaver> &ss );
+			MultiplayerBlobsMyModParamsHelper( const boost::shared_ptr<ScreenSaver> &ss );
 
-			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );
+			void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p );
 		};
 
 	
@@ -197,8 +197,8 @@ namespace CloudberryKingdom
 		bool AllHeroes;
 		int Difficulty;
 		int Paths;
-		std::shared_ptr<BobPhsx> FixedHero;
-		std::shared_ptr<TileSet> FixedTileSet;
+		boost::shared_ptr<BobPhsx> FixedHero;
+		boost::shared_ptr<TileSet> FixedTileSet;
 
 		float InitialZoom;
 		void ForTrailerParams();
@@ -206,7 +206,7 @@ namespace CloudberryKingdom
 	
 		virtual void Init();
 
-		std::shared_ptr<GUI_Text> PressA;
+		boost::shared_ptr<GUI_Text> PressA;
 
 		const static int getMandatoryWatchLength();
 	
@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 		void Constructor();
 
 	
-		std::shared_ptr<Listener> PressA_Listener;
+		boost::shared_ptr<Listener> PressA_Listener;
 
 		virtual void Release();
 
@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 		int PhsxCount;
 
 		int Duration;
-		std::shared_ptr<FancyVector2> pos_t, zoom_t, wind_t;
+		boost::shared_ptr<FancyVector2> pos_t, zoom_t, wind_t;
 
 	
 		virtual void UpdateGamePause();
@@ -243,11 +243,11 @@ namespace CloudberryKingdom
 		virtual void BackgroundPhsx();
 
 	
-		std::shared_ptr<LevelSeedData> Make( int index );
+		boost::shared_ptr<LevelSeedData> Make( int index );
 
-		void FirstLevel( int index, const std::shared_ptr<PieceSeedData> &piece );
+		void FirstLevel( int index, const boost::shared_ptr<PieceSeedData> &piece );
 
-		void MultiplayerBlobs( int index, const std::shared_ptr<PieceSeedData> &piece );
+		void MultiplayerBlobs( int index, const boost::shared_ptr<PieceSeedData> &piece );
 
 	
 		void InitializeInstanceFields();

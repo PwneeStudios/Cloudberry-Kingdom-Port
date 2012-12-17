@@ -63,9 +63,12 @@
     <ClInclude Include="include\Input\Mouse.h" />
     <ClInclude Include="include\Input\MouseState.h" />
     <ClInclude Include="include\Math\Vectors.h" />
+    <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
+    <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp" />
     <ClCompile Include="..\zlib-1.2.7\adler32.c" />
     <ClCompile Include="..\zlib-1.2.7\compress.c" />
     <ClCompile Include="..\zlib-1.2.7\crc32.c" />
@@ -150,10 +153,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(IncludePath)</IncludePath>
+    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

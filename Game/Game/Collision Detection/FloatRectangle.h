@@ -13,10 +13,10 @@ namespace CloudberryKingdom
 
 		FloatRectangle( Vector2 center, Vector2 size );
 
-		void Clone( const std::shared_ptr<FloatRectangle> &A );
+		void Clone( const boost::shared_ptr<FloatRectangle> &A );
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 		float BoxSize();
 

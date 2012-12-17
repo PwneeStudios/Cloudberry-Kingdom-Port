@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// A function that may modify the player object.
 		/// </summary>
-		std::shared_ptr<Lambda_1<std::shared_ptr<Bob> > > ModObject;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<Bob> > > ModObject;
 
-		std::shared_ptr<EzTexture> PicTexture;
+		boost::shared_ptr<EzTexture> PicTexture;
 		Vector2 PicScale;
 
 		bool UsePaintTexture;
@@ -34,8 +34,8 @@ namespace CloudberryKingdom
 		Color DetailColor;
 
 		Color Clr;
-		std::shared_ptr<EzTexture> Texture;
-		std::shared_ptr<EzEffect> Effect;
+		boost::shared_ptr<EzTexture> Texture;
+		boost::shared_ptr<EzEffect> Effect;
 
 		/// <summary>
 		/// This matrix is used to hue rotate Bob's outfit.
@@ -52,19 +52,19 @@ namespace CloudberryKingdom
 
 		ClrTextFx( int Guid, int Price, Color color, Color DetailColor, Matrix M, Localization::Words Name );
 
-		ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture );
+		ClrTextFx( int Guid, int Price, Color color, const boost::shared_ptr<EzTexture> &texture );
 
 		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture );
 
 		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture );
 
-		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::shared_ptr<EzTexture> &PicTexture );
+		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const boost::shared_ptr<EzTexture> &PicTexture );
 
 		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, bool UsePaintTexture, const std::wstring &PicTextureName );
 
 		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor );
 
-		ClrTextFx( int Guid, int Price, Color color, const std::shared_ptr<EzTexture> &texture, Color DetailColor, const std::shared_ptr<EzEffect> &effect );
+		ClrTextFx( int Guid, int Price, Color color, const boost::shared_ptr<EzTexture> &texture, Color DetailColor, const boost::shared_ptr<EzEffect> &effect );
 
 		ClrTextFx( int Guid, int Price, Color color, const std::wstring &texture, Color DetailColor, const std::wstring &effect );
 

@@ -9,9 +9,9 @@ namespace CloudberryKingdom
 	struct TimerWarning : public GameObject
 	{
 	
-		std::shared_ptr<GUI_Timer> MyTimer;
+		boost::shared_ptr<GUI_Timer> MyTimer;
 	
-		std::shared_ptr<QuadClass> Fullscreen;
+		boost::shared_ptr<QuadClass> Fullscreen;
 
 	
 		virtual void OnAdd();

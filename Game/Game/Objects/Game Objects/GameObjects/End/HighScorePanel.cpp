@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	HighScorePanel::HighScoreReturnToCallerLambda::HighScoreReturnToCallerLambda( const std::shared_ptr<HighScorePanel> &hsp )
+	HighScorePanel::HighScoreReturnToCallerLambda::HighScoreReturnToCallerLambda( const boost::shared_ptr<HighScorePanel> &hsp )
 	{
 		this->hsp = hsp;
 	}
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		hsp->ReturnToCaller();
 	}
 
-	HighScorePanel::HighScorePanelEndGameHelper::HighScorePanelEndGameHelper( const std::shared_ptr<HighScorePanel> &hsp, bool param )
+	HighScorePanel::HighScorePanelEndGameHelper::HighScorePanelEndGameHelper( const boost::shared_ptr<HighScorePanel> &hsp, bool param )
 	{
 		this->hsp = hsp;
 		this->param = param;
@@ -26,22 +26,22 @@ namespace CloudberryKingdom
 		hsp->MyGame->EndGame->Apply( param );
 	}
 
-	HighScorePanel::Action_DoneProxy1::Action_DoneProxy1( const std::shared_ptr<HighScorePanel> &hsp )
+	HighScorePanel::Action_DoneProxy1::Action_DoneProxy1( const boost::shared_ptr<HighScorePanel> &hsp )
 	{
 		this->hsp = hsp;
 	}
 
-	void HighScorePanel::Action_DoneProxy1::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void HighScorePanel::Action_DoneProxy1::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		hsp->Action_Done();
 	}
 
-	HighScorePanel::Action_PlayAgainProxy1::Action_PlayAgainProxy1( const std::shared_ptr<HighScorePanel> &hsp )
+	HighScorePanel::Action_PlayAgainProxy1::Action_PlayAgainProxy1( const boost::shared_ptr<HighScorePanel> &hsp )
 	{
 		this->hsp = hsp;
 	}
 
-	void HighScorePanel::Action_PlayAgainProxy1::Apply( const std::shared_ptr<MenuItem> &dummy )
+	void HighScorePanel::Action_PlayAgainProxy1::Apply( const boost::shared_ptr<MenuItem> &dummy )
 	{
 		hsp->Action_PlayAgain();
 	}
@@ -56,21 +56,21 @@ namespace CloudberryKingdom
 		Panels.clear();
 	}
 
-	HighScorePanel::HighScorePanel( const std::shared_ptr<ScoreList> &Scores ) :
+	HighScorePanel::HighScorePanel( const boost::shared_ptr<ScoreList> &Scores ) :
 		Instant( false )
 	{
 	}
-	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( const std::shared_ptr<ScoreList> &Scores )
+	boost::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( const boost::shared_ptr<ScoreList> &Scores )
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 		
 		Constructor( Scores );
 
-		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
+		return boost::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
-	void HighScorePanel::Constructor( const std::shared_ptr<ScoreList> &Scores )
+	void HighScorePanel::Constructor( const boost::shared_ptr<ScoreList> &Scores )
 	{
 		if ( Instant )
 			NoDelays();
@@ -86,46 +86,46 @@ namespace CloudberryKingdom
 	std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
 	std::vector<std::wstring> HighScorePanel::TextureName = VecFromArray( tempVector );
 
-	HighScorePanel::HighScorePanel( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) :
+	HighScorePanel::HighScorePanel( boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist ) :
 		Instant( false )
 	{
 	}
-	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
+	boost::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist )
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		MultiInit( false, scorelist, levellist );
 
-		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
+		return boost::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
-	HighScorePanel::HighScorePanel( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist ) :
+	HighScorePanel::HighScorePanel( bool Instant, boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist ) :
 		Instant( false )
 	{
 	}
-	std::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
+	boost::shared_ptr<HighScorePanel> HighScorePanel::HighScorePanel_Construct( bool Instant, boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist )
 	{
 		InitializeInstanceFields();
 		CkBaseMenu::CkBaseMenu_Construct();
 
 		MultiInit( Instant, scorelist, levellist );
 
-		return std::static_pointer_cast<HighScorePanel>( shared_from_this() );
+		return boost::static_pointer_cast<HighScorePanel>( shared_from_this() );
 	}
 
-	void HighScorePanel::MultiInit( bool Instant, std::shared_ptr<ScoreList> scorelist, std::shared_ptr<ScoreList> levellist )
+	void HighScorePanel::MultiInit( bool Instant, boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist )
 	{
 		this->Instant = Instant;
 
-		OnOutsideClick = std::make_shared<HighScoreReturnToCallerLambda>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) );
+		OnOutsideClick = boost::make_shared<HighScoreReturnToCallerLambda>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ) );
 		CheckForOutsideClick = true;
 
 		Constructor( scorelist );
 
-		Panels = std::vector<std::shared_ptr<HighScorePanel> >( 2 );
+		Panels = std::vector<boost::shared_ptr<HighScorePanel> >( 2 );
 
-		Panels[ 0 ] = std::static_pointer_cast<HighScorePanel>( shared_from_this() );
+		Panels[ 0 ] = boost::static_pointer_cast<HighScorePanel>( shared_from_this() );
 		Panels[ 0 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
 
 		Panels[ 1 ] = MakeMagic( HighScorePanel, ( levellist ) );
@@ -160,10 +160,10 @@ namespace CloudberryKingdom
 
 	void HighScorePanel::Create()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500.f, true );
 		Backdrop->setDegrees( 90 );
 		Backdrop->setTextureName( _T( "Score/Score_Screen_grey" ) );
 
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		Backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'High Score' text
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( MyScoreList->GetHeader(), Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( MyScoreList->GetHeader(), Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
 		Text->setScale( .8f );
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
@@ -185,9 +185,9 @@ namespace CloudberryKingdom
 		int DesiredLength = 35;
 		float y_spacing = 120;
 		Vector2 pos = Vector2( -973, 322 );
-		for ( std::vector<std::shared_ptr<ScoreEntry> >::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end(); ++score )
+		for ( std::vector<boost::shared_ptr<ScoreEntry> >::const_iterator score = MyScoreList->Scores.begin(); score != MyScoreList->Scores.end(); ++score )
 		{
-			Text = std::make_shared<EzText>( MyScoreList->ScoreString( *score, DesiredLength ), Resources::Font_Grobold42 );
+			Text = boost::make_shared<EzText>( MyScoreList->ScoreString( *score, DesiredLength ), Resources::Font_Grobold42 );
 			SetHeaderProperties( Text );
 			Text->setScale( Text->getScale() * .55f );
 
@@ -206,7 +206,7 @@ namespace CloudberryKingdom
 
 	void HighScorePanel::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.8f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 		//SwapText = new EzText(ButtonString.Enter(200), Resources.Font_Grobold42_2, 1450, false, true, .6f);
 		//SwapText.Pos = new Vector2(-1169.281f, 602.9366f);
 	#else
-		SwapText = std::make_shared<EzText>( ButtonString::Go( 130 ), Resources::Font_Grobold42_2, 1450, false, true,.6f );
+		SwapText = boost::make_shared<EzText>( ButtonString::Go( 130 ), Resources::Font_Grobold42_2, 1450, false, true,.6f );
 		SwapText->setPos( Vector2( -1014.837f, 597.3811f ) );
 	#endif
 
@@ -248,7 +248,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void HighScorePanel::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void HighScorePanel::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -262,30 +262,30 @@ namespace CloudberryKingdom
 
 	void HighScorePanel::MakeMenu()
 	{
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->setControl( -1 );
 
 		MyMenu->OnB.reset();
 
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 		FontScale *= .89f * 1.16f;
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
-		item->setGo( std::make_shared<Action_PlayAgainProxy1>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) );
+		item->setGo( boost::make_shared<Action_PlayAgainProxy1>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) );
 		item->_Go.reset();
 		AddItem( item );
 
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
-		item->setGo( std::make_shared<Action_DoneProxy1>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
+		item->setGo( boost::make_shared<Action_DoneProxy1>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 	}
 
-	void HighScorePanel::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void HighScorePanel::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -298,7 +298,7 @@ namespace CloudberryKingdom
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ), false ) );
+		MyGame->WaitThenDo( 36, boost::make_shared<HighScorePanelEndGameHelper>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ), false ) );
 		return;
 	}
 
@@ -307,7 +307,7 @@ namespace CloudberryKingdom
 		SlideOut( PresetPos_TOP, 13 );
 		Active = false;
 
-		MyGame->WaitThenDo( 36, std::make_shared<HighScorePanelEndGameHelper>( std::static_pointer_cast<HighScorePanel>( shared_from_this() ), true ) );
+		MyGame->WaitThenDo( 36, boost::make_shared<HighScorePanelEndGameHelper>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ), true ) );
 		return;
 	}
 

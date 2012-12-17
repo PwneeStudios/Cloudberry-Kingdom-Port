@@ -13,7 +13,7 @@
 namespace CloudberryKingdom
 {
 
-	struct CloudberryKingdomGame : public std::enable_shared_from_this<CloudberryKingdomGame>
+	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
 
 	
@@ -24,10 +24,10 @@ namespace CloudberryKingdom
 		struct ExitProxy : public Lambda
 		{
 		
-			std::shared_ptr<CloudberryKingdomGame> ckg;
+			boost::shared_ptr<CloudberryKingdomGame> ckg;
 
 		
-			ExitProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg );
+			ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg );
 
 			void Apply();
 		};
@@ -40,26 +40,26 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct MakeTestLevelInitializeHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+		struct MakeTestLevelInitializeHelper : public Lambda_1<boost::shared_ptr<PieceSeedData> >
 		{
 		
-			std::shared_ptr<CloudberryKingdomGame> ckg;
+			boost::shared_ptr<CloudberryKingdomGame> ckg;
 
 		
-			MakeTestLevelInitializeHelper( const std::shared_ptr<CloudberryKingdomGame> &ckg );
+			MakeTestLevelInitializeHelper( const boost::shared_ptr<CloudberryKingdomGame> &ckg );
 
-			void Apply( const std::shared_ptr<PieceSeedData> &piece );
+			void Apply( const boost::shared_ptr<PieceSeedData> &piece );
 		};
 
 	
-		struct TestLevelPostMakeProxy : public Lambda_1<std::shared_ptr<Level> >
+		struct TestLevelPostMakeProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
-			std::shared_ptr<CloudberryKingdomGame> ckg;
+			boost::shared_ptr<CloudberryKingdomGame> ckg;
 		
-			TestLevelPostMakeProxy( const std::shared_ptr<CloudberryKingdomGame> &ckg );
+			TestLevelPostMakeProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg );
 
-			void Apply( const std::shared_ptr<Level> &level );
+			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
 		/// <summary>
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 		static bool UseNewBob;
 
 		//public static SimpleGameFactory TitleGameFactory = TitleGameData_Intense.Factory;
-		static std::shared_ptr<SimpleGameFactory> TitleGameFactory;
+		static boost::shared_ptr<SimpleGameFactory> TitleGameFactory;
 		//public static SimpleGameFactory TitleGameFactory = TitleGameData_Forest.Factory;
 
 		static float fps;
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		std::vector<ResolutionGroup> Resolutions;
 
 #if defined(WINDOWS)
-		std::shared_ptr<QuadClass> MousePointer, MouseBack;
+		boost::shared_ptr<QuadClass> MousePointer, MouseBack;
 	
 		bool _DrawMouseBackIcon;
 	
@@ -138,15 +138,15 @@ namespace CloudberryKingdom
 		/// The game's initial loading screen. Different than the in-game loading screens seen before levels.
 		/// </summary>
 //C# TO C++ CONVERTER NOTE: The variable LoadingScreen was renamed since it is named the same as a user-defined type:
-		std::shared_ptr<InitialLoadingScreen> LoadingScreen_Renamed;
+		boost::shared_ptr<InitialLoadingScreen> LoadingScreen_Renamed;
 
-		std::shared_ptr<GraphicsDevice> MyGraphicsDevice;
-		std::shared_ptr<GraphicsDeviceManager> MyGraphicsDeviceManager;
+		boost::shared_ptr<GraphicsDevice> MyGraphicsDevice;
+		boost::shared_ptr<GraphicsDeviceManager> MyGraphicsDeviceManager;
 
 	
 		int ScreenWidth, ScreenHeight;
 
-		std::shared_ptr<Camera> MainCamera;
+		boost::shared_ptr<Camera> MainCamera;
 
 //C# TO C++ CONVERTER TODO TASK: There is no direct equivalent to .NET events in native C++:
 //		public event EventHandler<EventArgs> Exiting
@@ -174,16 +174,16 @@ namespace CloudberryKingdom
 		CloudberryKingdomGame();
 
 	
-		void graphics_PreparingDeviceSettings( const std::shared_ptr<Object> &sender, const std::shared_ptr<PreparingDeviceSettingsEventArgs> &e );
+		void graphics_PreparingDeviceSettings( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<PreparingDeviceSettingsEventArgs> &e );
 
 	
 		void Initialize();
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	
-		void SignedInGamer_SignedOut( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedOutEventArgs> &e );
+		void SignedInGamer_SignedOut( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedOutEventArgs> &e );
 
-		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
+		void SignedInGamer_SignedIn( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedInEventArgs> &e );
 #endif
 
 	
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The current game being played.
 		/// </summary>
-		const std::shared_ptr<GameData> &getGame() const;
+		const boost::shared_ptr<GameData> &getGame() const;
 
 		/// <summary>
 		/// Update the current game.
@@ -209,7 +209,7 @@ namespace CloudberryKingdom
 		/// A list of actions to perform. Each time an action is peformed it is removed from the list.
 		/// </summary>
 	
-		std::shared_ptr<Multicaster> ToDo;
+		boost::shared_ptr<Multicaster> ToDo;
 
 	
 		void DoToDoList();
@@ -264,7 +264,7 @@ namespace CloudberryKingdom
 		/// Also updates the game logic. TODO: Seperate this from the draw function?
 		/// </summary>
 		/// <param name="gameTime"></param>
-		void Draw( const std::shared_ptr<GameTime> &gameTime );
+		void Draw( const boost::shared_ptr<GameTime> &gameTime );
 
 		/// <summary>
 		/// Non-game drawing, such as debug info and tool drawing.
@@ -291,9 +291,9 @@ namespace CloudberryKingdom
 		/// The update function called for the actual game, not for loading screens or other non-game functions.
 		/// </summary>
 		/// <param name="gameTime"></param>
-		void GameUpdate( const std::shared_ptr<GameTime> &gameTime );
+		void GameUpdate( const boost::shared_ptr<GameTime> &gameTime );
 
-		void UpdateFps( const std::shared_ptr<GameTime> &gameTime );
+		void UpdateFps( const boost::shared_ptr<GameTime> &gameTime );
 
 		/// <summary>
 		/// Sets up the renderer. Returns true if no additional drawing should be done, because the game does not have focus.
@@ -317,11 +317,11 @@ namespace CloudberryKingdom
 
 		void BenchmarkAll();
 
-		static std::shared_ptr<Stopwatch> stopwatch;
+		static boost::shared_ptr<Stopwatch> stopwatch;
 		static void Start();
 		static long long Stop();
 
-		static std::shared_ptr<Stopwatch> stopwatch2;
+		static boost::shared_ptr<Stopwatch> stopwatch2;
 		static void Start2();
 		static long long Stop2();
 
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 	
 		static std::wstring debugstring;
 	
-		std::shared_ptr<StringBuilder> MainString;
+		boost::shared_ptr<StringBuilder> MainString;
 
 		/// <summary>
 		/// Method for drawing various debug information to the screen.
@@ -352,15 +352,15 @@ namespace CloudberryKingdom
 
 		void MakeTestLevel();
 
-		void TestLevelPostMake( const std::shared_ptr<Level> &level );
+		void TestLevelPostMake( const boost::shared_ptr<Level> &level );
 
-		void TestLevelInit( const std::shared_ptr<PieceSeedData> &piece );
+		void TestLevelInit( const boost::shared_ptr<PieceSeedData> &piece );
 
-		static void __Roughly_Maso( const std::shared_ptr<PieceSeedData> &piece );
+		static void __Roughly_Maso( const boost::shared_ptr<PieceSeedData> &piece );
 
-		static void __Roughly_Abusive( const std::shared_ptr<PieceSeedData> &piece );
+		static void __Roughly_Abusive( const boost::shared_ptr<PieceSeedData> &piece );
 
-		void TestLevelModParams( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );
+		void TestLevelModParams( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p );
 
 
 		bool DoInnerLogoPhsx;

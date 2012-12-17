@@ -11,8 +11,8 @@ namespace CloudberryKingdom
 		struct BouncyBlockTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
-			std::shared_ptr<EzSound> BounceSound;
+			boost::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<EzSound> BounceSound;
 
 		
 			void InitializeInstanceFields();
@@ -41,18 +41,18 @@ namespace CloudberryKingdom
 
 		BouncyBlock( bool BoxesOnly );
 
-		void Init( Vector2 center, Vector2 size, float speed, const std::shared_ptr<Level> &level );
+		void Init( Vector2 center, Vector2 size, float speed, const boost::shared_ptr<Level> &level );
 
 		float SideDampening;
 	
-		void Snap( const std::shared_ptr<Bob> &bob );
+		void Snap( const boost::shared_ptr<Bob> &bob );
 
 	
-		virtual void SideHit( const std::shared_ptr<Bob> &bob );
+		virtual void SideHit( const boost::shared_ptr<Bob> &bob );
 
-		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
+		virtual void LandedOn( const boost::shared_ptr<Bob> &bob );
 
-		virtual void HitHeadOn( const std::shared_ptr<Bob> &bob );
+		virtual void HitHeadOn( const boost::shared_ptr<Bob> &bob );
 
 		virtual void Reset( bool BoxesOnly );
 
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

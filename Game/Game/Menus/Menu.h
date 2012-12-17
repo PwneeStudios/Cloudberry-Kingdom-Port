@@ -8,81 +8,81 @@ namespace CloudberryKingdom
 	struct Cast
 	{
 	
-		struct ToMenuHelper1 : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+		struct ToMenuHelper1 : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
 		
-			std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > a;
+			boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > a;
 
 		
-			ToMenuHelper1( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
+			ToMenuHelper1( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a );
 
-			bool Apply( const std::shared_ptr<Menu> &dummy );
+			bool Apply( const boost::shared_ptr<Menu> &dummy );
 		};
 
 	
-		struct LambdaWrapper : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct LambdaWrapper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<Lambda> a;
+			boost::shared_ptr<Lambda> a;
 
 		
-			LambdaWrapper( const std::shared_ptr<Lambda> &a );
+			LambdaWrapper( const boost::shared_ptr<Lambda> &a );
 
-			void Apply( const std::shared_ptr<MenuItem> &dummy );
+			void Apply( const boost::shared_ptr<MenuItem> &dummy );
 		};
 
 	
 		struct Lambda_1Wrapper : public Lambda
 		{
 		
-			std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > a;
+			boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > a;
 
 		
-			Lambda_1Wrapper( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
+			Lambda_1Wrapper( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a );
 
 			void Apply();
 		};
 
 	
-		struct ToMenuHelper : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+		struct ToMenuHelper : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
 		
-			std::shared_ptr<Lambda> a;
+			boost::shared_ptr<Lambda> a;
 
 		
-			ToMenuHelper( const std::shared_ptr<Lambda> &a );
+			ToMenuHelper( const boost::shared_ptr<Lambda> &a );
 
-			bool Apply( const std::shared_ptr<Menu> &dummy );
+			bool Apply( const boost::shared_ptr<Menu> &dummy );
 		};
 
 	
-		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda> &a );
+		static boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Menu> , bool> > ToMenu( const boost::shared_ptr<Lambda> &a );
 
-		static std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > ToMenu( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &a );
+		static boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Menu> , bool> > ToMenu( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a );
 
-		static std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > ToItem( const std::shared_ptr<Lambda> &a );
+		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > ToItem( const boost::shared_ptr<Lambda> &a );
 
-		static std::shared_ptr<Lambda> ToAction( const std::shared_ptr<Lambda_1<std::shared_ptr<Menu> > > &a );
+		static boost::shared_ptr<Lambda> ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a );
 	};
 
-	struct Menu : public std::enable_shared_from_this<Menu>
+	struct Menu : public boost::enable_shared_from_this<Menu>
 	{
 	
-		struct FindItemByNameLambda : public LambdaFunc_1<std::shared_ptr<MenuItem> , bool>
+		struct FindItemByNameLambda : public LambdaFunc_1<boost::shared_ptr<MenuItem> , bool>
 		{
 		
 			std::wstring name;
 		
 			FindItemByNameLambda( const std::wstring &name );
 
-			bool Apply( const std::shared_ptr<MenuItem> &item );
+			bool Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		struct DefaultOnBProxy : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+		struct DefaultOnBProxy : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
 		
-			bool Apply( const std::shared_ptr<Menu> &menu );
+			bool Apply( const boost::shared_ptr<Menu> &menu );
 		};
 
 	
@@ -94,30 +94,30 @@ namespace CloudberryKingdom
 			static Vector4 UnselectedNextColor;
 			static Vector4 UnselectedBackColor;
 
-			static std::shared_ptr<EzSound> Menu_UpDown_Sound;
-			static std::shared_ptr<EzSound> Menu_Select_Sound;
-			static std::shared_ptr<EzSound> Menu_Slide_Sound;
-			static std::shared_ptr<EzSound> Menu_ListScroll_Sound;
-			static std::shared_ptr<EzSound> Menu_Back_Sound;
+			static boost::shared_ptr<EzSound> Menu_UpDown_Sound;
+			static boost::shared_ptr<EzSound> Menu_Select_Sound;
+			static boost::shared_ptr<EzSound> Menu_Slide_Sound;
+			static boost::shared_ptr<EzSound> Menu_ListScroll_Sound;
+			static boost::shared_ptr<EzSound> Menu_Back_Sound;
 			static int Menu_Slide_SoundDelay;
 
-			static std::shared_ptr<EzTexture> MenuRightArrow_Texture;
-			static std::shared_ptr<EzTexture> MenuLeftArrow_Texture;
+			static boost::shared_ptr<EzTexture> MenuRightArrow_Texture;
+			static boost::shared_ptr<EzTexture> MenuLeftArrow_Texture;
 			static Vector2 MenuRightArrow_Offset;
 			static Vector2 MenuLeftArrow_Offset;
 			static Vector2 MenuArrow_Size;
 			static Vector4 MenuArrow_Color;
 
-			static std::shared_ptr<EzTexture> MenuRightArrow_Selected_Texture;
-			static std::shared_ptr<EzTexture> MenuLeftArrow_Selected_Texture;
+			static boost::shared_ptr<EzTexture> MenuRightArrow_Selected_Texture;
+			static boost::shared_ptr<EzTexture> MenuLeftArrow_Selected_Texture;
 			static Vector2 MenuRightArrow_Selected_Offset;
 			static Vector2 MenuLeftArrow_Selected_Offset;
 			static Vector2 MenuArrow_Selected_Size;
 			static Vector4 MenuArrow_Selected_Color;
 
-			static std::shared_ptr<EzTexture> SliderBack_Texture;
+			static boost::shared_ptr<EzTexture> SliderBack_Texture;
 			static Vector2 SliderBack_Size;
-			static std::shared_ptr<EzTexture> Slider_Texture;
+			static boost::shared_ptr<EzTexture> Slider_Texture;
 			static Vector2 Slider_StartPos;
 			static Vector2 Slider_EndPos;
 			static Vector2 Slider_Size;
@@ -125,28 +125,28 @@ namespace CloudberryKingdom
 
 	
 
-		std::shared_ptr<MenuItem> FindItemByName( const std::wstring &name );
+		boost::shared_ptr<MenuItem> FindItemByName( const std::wstring &name );
 
 		/// <summary>
 		/// Layer of the menu, used in DrawPiles
 		/// </summary>
 		int Layer;
 
-		std::shared_ptr<QuadClass> SelectIcon;
+		boost::shared_ptr<QuadClass> SelectIcon;
 
 		Vector2 PosOffset;
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 
 		bool FixedToCamera;
 
-		std::shared_ptr<EzSound> UpDownSound, SelectSound, BackSound, SlideSound, ListScrollSound;
+		boost::shared_ptr<EzSound> UpDownSound, SelectSound, BackSound, SlideSound, ListScrollSound;
 		bool ReadyToPlaySound;
 
 		bool SkipPhsx;
 
-		std::shared_ptr<Menu> ParentMenu;
+		boost::shared_ptr<Menu> ParentMenu;
 
 	
 		int _Control;
@@ -154,10 +154,10 @@ namespace CloudberryKingdom
 		const int &getControl() const;
 		void setControl( const int &value );
 
-		std::vector<std::shared_ptr<MenuItem> > Items;
+		std::vector<boost::shared_ptr<MenuItem> > Items;
 		int CurIndex;
 
-		const std::shared_ptr<MenuItem> getCurItem() const;
+		const boost::shared_ptr<MenuItem> getCurItem() const;
 
 		int SelectDelay;
 	
@@ -165,8 +165,8 @@ namespace CloudberryKingdom
 		int MotionCount;
 
 	
-		std::shared_ptr<PieceQuad> MyPieceQuad, MyPieceQuadTemplate;
-		std::shared_ptr<PieceQuad> MyPieceQuad2, MyPieceQuadTemplate2;
+		boost::shared_ptr<PieceQuad> MyPieceQuad, MyPieceQuadTemplate;
+		boost::shared_ptr<PieceQuad> MyPieceQuad2, MyPieceQuadTemplate2;
 		Vector2 BackdropShift;
 
 
@@ -174,8 +174,8 @@ namespace CloudberryKingdom
 		/// Called when the player presses (B) while the menu is active.
 		/// Should return true if the menu phsx step should be ended immediately after executing the delegate.
 		/// </summary>
-		std::shared_ptr<LambdaFunc_1<std::shared_ptr<Menu> , bool> > OnA, OnB, OnX, OnStart;
-		std::shared_ptr<Lambda> OnSelect, OnY;
+		boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Menu> , bool> > OnA, OnB, OnX, OnStart;
+		boost::shared_ptr<Lambda> OnSelect, OnY;
 
 		Vector2 TR, BL;
 
@@ -196,7 +196,7 @@ namespace CloudberryKingdom
 		void Init();
 
 	
-		static bool DefaultOnB( const std::shared_ptr<Menu> &menu );
+		static bool DefaultOnB( const boost::shared_ptr<Menu> &menu );
 
 		bool HasSelectedThisStep;
 
@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool WrapSelect;
 
-		void SelectItem( const std::shared_ptr<MenuItem> &item );
+		void SelectItem( const boost::shared_ptr<MenuItem> &item );
 
 		virtual void SelectItem( int Index );
 
@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Add a delegate that should return true if this menu should NOT go back when the user clicks
 		/// </summary>
-		std::shared_ptr<LambdaFunc<bool> > AdditionalCheckForOutsideClick;
+		boost::shared_ptr<LambdaFunc<bool> > AdditionalCheckForOutsideClick;
 
 	
 		bool CheckForBackFromOutsideClick();
@@ -283,7 +283,7 @@ namespace CloudberryKingdom
 		void CalcBounds();
 
 	
-		static int SortByHeightMethod( const std::shared_ptr<MenuItem> &item1, const std::shared_ptr<MenuItem> &item2 );
+		static int SortByHeightMethod( const boost::shared_ptr<MenuItem> &item1, const boost::shared_ptr<MenuItem> &item2 );
 
 	
 		void SortByHeight();
@@ -300,7 +300,7 @@ namespace CloudberryKingdom
 		/// Whether an item should be drawn as selected or not.
 		/// </summary>
 	
-		bool DrawItemAsSelected( const std::shared_ptr<MenuItem> &item );
+		bool DrawItemAsSelected( const boost::shared_ptr<MenuItem> &item );
 
 		/// <summary>
 		/// The index of the item to be drawn as selected
@@ -322,8 +322,8 @@ namespace CloudberryKingdom
 
 		virtual void Draw();
 
-		void Add( const std::shared_ptr<MenuItem> &item );
-		void Add( const std::shared_ptr<MenuItem> &item, int index );
+		void Add( const boost::shared_ptr<MenuItem> &item );
+		void Add( const boost::shared_ptr<MenuItem> &item, int index );
 
 	
 		void InitializeInstanceFields();

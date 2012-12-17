@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct TitleFactory : public GameFactory
 	{
 	
-		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
 	struct TitleGameData : public GameData
@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<GameFactory> Factory;
+		static boost::shared_ptr<GameFactory> Factory;
 
 		virtual void Release();
 
@@ -29,8 +29,8 @@ namespace CloudberryKingdom
 		virtual void ReturnTo( int code );
 
 	
-		std::shared_ptr<CameraZone> CamZone;
-		virtual std::shared_ptr<Level> MakeLevel();
+		boost::shared_ptr<CameraZone> CamZone;
+		virtual boost::shared_ptr<Level> MakeLevel();
 
 	
 		virtual void Init();

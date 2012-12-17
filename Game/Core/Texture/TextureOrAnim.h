@@ -13,8 +13,8 @@ namespace CloudberryKingdom
 	struct TextureOrAnim
 	{
 	
-		std::shared_ptr<EzTexture> MyTexture;
-		std::shared_ptr<AnimationData_Texture> MyAnim;
+		boost::shared_ptr<EzTexture> MyTexture;
+		boost::shared_ptr<AnimationData_Texture> MyAnim;
 		bool IsAnim;
 
 		TextureOrAnim();
@@ -23,8 +23,8 @@ namespace CloudberryKingdom
 
 		void Set( const std::wstring &name );
 
-		static std::shared_ptr<TextureOrAnim> Get( const std::shared_ptr<EzTexture> &texture );
-		static std::shared_ptr<TextureOrAnim> Get( const std::wstring &name );
+		static boost::shared_ptr<TextureOrAnim> Get( const boost::shared_ptr<EzTexture> &texture );
+		static boost::shared_ptr<TextureOrAnim> Get( const std::wstring &name );
 
 	
 		void InitializeInstanceFields();

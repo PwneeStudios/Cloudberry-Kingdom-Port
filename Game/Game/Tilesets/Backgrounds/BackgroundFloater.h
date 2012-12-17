@@ -14,11 +14,11 @@ namespace CloudberryKingdom
 		void setSpinVelocity( const float &value );
 
 	
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 	
 		std::wstring Name;
 
-		std::shared_ptr<QuadClass> MyQuad;
+		boost::shared_ptr<QuadClass> MyQuad;
 		Vector2 uv_speed, uv_offset;
 
 		PhsxData Data, StartData;
@@ -34,9 +34,9 @@ namespace CloudberryKingdom
 
 		virtual void Release();
 
-		void SetLevel( const std::shared_ptr<Level> &level );
+		void SetLevel( const boost::shared_ptr<Level> &level );
 
-		virtual void SetBackground( const std::shared_ptr<Background> &b );
+		virtual void SetBackground( const boost::shared_ptr<Background> &b );
 
 		/// <summary>
 		/// Reset the floater to its start position.
@@ -47,15 +47,15 @@ namespace CloudberryKingdom
 
 		void Move( Vector2 shift );
 
-		BackgroundFloater( const std::shared_ptr<BackgroundFloater> &source );
+		BackgroundFloater( const boost::shared_ptr<BackgroundFloater> &source );
 
 		BackgroundFloater();
 
-		BackgroundFloater( const std::shared_ptr<Level> &level );
+		BackgroundFloater( const boost::shared_ptr<Level> &level );
 
 		virtual void InitialUpdate();
 
-		virtual void PhsxStep( const std::shared_ptr<BackgroundFloaterList> &list );
+		virtual void PhsxStep( const boost::shared_ptr<BackgroundFloaterList> &list );
 
 		virtual void Draw();
 

@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 	const bool IntelliSpread = true;
 
-	int AutoGen_Parameters::ChooseOffset( int Period, const std::shared_ptr<Rand> &Rnd )
+	int AutoGen_Parameters::ChooseOffset( int Period, const boost::shared_ptr<Rand> &Rnd )
 	{
 		if ( IntelliSpread )
 			return Counter++ % NumOffsets * Period / NumOffsets;
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		return static_cast<int>( offset / offset_size ) * offset_size;
 	}
 
-	void AutoGen_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void AutoGen_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		this->PieceSeed = PieceSeed;
 	}
@@ -63,38 +63,38 @@ namespace CloudberryKingdom
 		DoStage2Fill = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
 		return 0;
 	}
 
-	std::shared_ptr<ObjectBase> AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		return 0;
 	}
 
-	std::shared_ptr<ObjectBase> AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		return 0;
 	}
 
-	void AutoGen::PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void AutoGen::PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 	}
 
-	void AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 	}
 
-	void AutoGen::ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void AutoGen::ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 	}
 
-	void AutoGen::Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void AutoGen::Cleanup_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 	}
 
-	void AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 	}
 }

@@ -1,6 +1,7 @@
 #include <Core.h>
 
 #include <cstdlib>
+#include <Utility/Limits.h>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 

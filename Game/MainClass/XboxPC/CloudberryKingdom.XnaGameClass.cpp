@@ -9,15 +9,15 @@ namespace CloudberryKingdom
 
 	XnaGameClass::XnaGameClass()
 	{
-		Content = std::make_shared<ContentManager>( _T( "Content" ) );
+		Content = boost::make_shared<ContentManager>( _T( "Content" ) );
 
 		//Tools::GameClass = shared_from_this();
-		MyGame = std::make_shared<CloudberryKingdomGame>();
+		MyGame = boost::make_shared<CloudberryKingdomGame>();
 		Tools::TheGame = MyGame;
 
 	#if defined(PC_VERSION)
 	#elif defined(XBOX) || defined(XBOX_SIGNIN)
-		getComponents()->Add(std::make_shared<GamerServicesComponent>(this));
+		getComponents()->Add(boost::make_shared<GamerServicesComponent>(this));
 	#endif
 	}
 
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void XnaGameClass::Update( const std::shared_ptr<GameTime> &gameTime )
+	void XnaGameClass::Update( const boost::shared_ptr<GameTime> &gameTime )
 	{
 		// FIXME: Make sure game is using a Fixed Time Step!
 		//this->setIsFixedTimeStep( Tools::FixedTimeStep );
@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 		//Game::Update( gameTime );
 	}
 
-	void XnaGameClass::Draw( const std::shared_ptr<GameTime> &gameTime )
+	void XnaGameClass::Draw( const boost::shared_ptr<GameTime> &gameTime )
 	{
 		MyGame->Draw( gameTime );
 
@@ -84,8 +84,8 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Make game window borderless or not. Here was the C# code:
 		//void* hWnd = Tools::GameClass->getWindow()->Handle;
-		//std::shared_ptr<Forms::Control> control = Control::FromHandle( hWnd );
-		//std::shared_ptr<Forms::Form> form = control->FindForm();
+		//boost::shared_ptr<Forms::Control> control = Control::FromHandle( hWnd );
+		//boost::shared_ptr<Forms::Form> form = control->FindForm();
 		//form->FormBorderStyle = Show ? FormBorderStyle::FixedSingle : FormBorderStyle::None;
 	}
 #endif

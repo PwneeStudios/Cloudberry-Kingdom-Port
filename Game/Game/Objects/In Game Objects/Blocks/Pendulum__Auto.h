@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		std::vector<int> MotionLevel;
 		MotionType Motion;
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -40,17 +40,17 @@ namespace CloudberryKingdom
 	struct Pendulum_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<Pendulum_AutoGen> instance;
+		static boost::shared_ptr<Pendulum_AutoGen> instance;
 	
-		const static std::shared_ptr<Pendulum_AutoGen> &getInstance();
+		const static boost::shared_ptr<Pendulum_AutoGen> &getInstance();
 
 	
 		Pendulum_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
 	};
 }
 

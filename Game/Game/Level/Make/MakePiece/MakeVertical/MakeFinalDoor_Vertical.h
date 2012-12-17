@@ -8,29 +8,29 @@ namespace CloudberryKingdom
 	struct MakeFinalDoorVertical : public MakeThing
 	{
 	
-		struct ElementPositionProjectY : public LambdaFunc_1<std::shared_ptr<BlockBase> , float>
+		struct ElementPositionProjectY : public LambdaFunc_1<boost::shared_ptr<BlockBase> , float>
 		{
 		
-			float Apply( const std::shared_ptr<BlockBase> &element );
+			float Apply( const boost::shared_ptr<BlockBase> &element );
 		};
 
 	
-		struct MatchUsedLambda : public LambdaFunc_1<std::shared_ptr<BlockBase> , bool>
+		struct MatchUsedLambda : public LambdaFunc_1<boost::shared_ptr<BlockBase> , bool>
 		{
 		
 			MatchUsedLambda();
 
-			bool Apply( const std::shared_ptr<BlockBase> &match );
+			bool Apply( const boost::shared_ptr<BlockBase> &match );
 		};
 
 	
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 
 		/// <summary>
 		/// The block on which the final door rests on.
 		/// </summary>
 	
-		std::shared_ptr<BlockBase> FinalBlock;
+		boost::shared_ptr<BlockBase> FinalBlock;
 
 		/// <summary>
 		/// The position of the final door.
@@ -38,14 +38,14 @@ namespace CloudberryKingdom
 		Vector2 FinalPos;
 
 	
-		MakeFinalDoorVertical( const std::shared_ptr<Level> &level );
+		MakeFinalDoorVertical( const boost::shared_ptr<Level> &level );
 
 		virtual void Phase1();
 
 		virtual void Phase2();
 
 	
-		std::shared_ptr<Door> MadeDoor;
+		boost::shared_ptr<Door> MadeDoor;
 	
 		virtual void Phase3();
 

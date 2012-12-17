@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void Background_Cave::Code( const std::shared_ptr<Background> &b )
+	void Background_Cave::Code( const boost::shared_ptr<Background> &b )
 	{
 		BackgroundTemplate::Code( b );
 

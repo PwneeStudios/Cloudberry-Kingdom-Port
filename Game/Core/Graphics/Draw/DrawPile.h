@@ -5,7 +5,7 @@
 
 namespace CloudberryKingdom
 {
-	struct DrawPile : public std::enable_shared_from_this<DrawPile>
+	struct DrawPile : public boost::enable_shared_from_this<DrawPile>
 	{
 
 	
@@ -15,9 +15,9 @@ namespace CloudberryKingdom
 		struct WaitThenPop : public Lambda
 		{
 		
-			std::shared_ptr<DrawPile> MyDrawPile_;
+			boost::shared_ptr<DrawPile> MyDrawPile_;
 		
-			WaitThenPop( const std::shared_ptr<DrawPile> &MyDrawPile );
+			WaitThenPop( const boost::shared_ptr<DrawPile> &MyDrawPile );
 
 			void Apply();
 		};
@@ -30,42 +30,42 @@ namespace CloudberryKingdom
 		};
 	
 
-		std::shared_ptr<FancyVector2> FancyScale;
+		boost::shared_ptr<FancyVector2> FancyScale;
 		const Vector2 &getSize() const;
 		void setSize( const Vector2 &value );
 
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 
-		std::vector<std::shared_ptr<EzText> > MyTextList;
-		std::vector<std::shared_ptr<QuadClass> > MyQuadList;
+		std::vector<boost::shared_ptr<EzText> > MyTextList;
+		std::vector<boost::shared_ptr<QuadClass> > MyQuadList;
 
 		DrawPile();
 
-		DrawPile( const std::shared_ptr<FancyVector2> &Center );
+		DrawPile( const boost::shared_ptr<FancyVector2> &Center );
 
 		void Clear();
 
-		void Add( const std::shared_ptr<QuadClass> &quad );
-		void Add( const std::shared_ptr<QuadClass> &quad, const std::wstring &name );
-		void Add( const std::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name );
+		void Add( const boost::shared_ptr<QuadClass> &quad );
+		void Add( const boost::shared_ptr<QuadClass> &quad, const std::wstring &name );
+		void Add( const boost::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name );
 
-		void Insert( int index, const std::shared_ptr<QuadClass> &quad );
+		void Insert( int index, const boost::shared_ptr<QuadClass> &quad );
 
-		void Add( const std::shared_ptr<EzText> &text );
+		void Add( const boost::shared_ptr<EzText> &text );
 
-		void Add( const std::shared_ptr<EzText> &text, const std::wstring &name );
+		void Add( const boost::shared_ptr<EzText> &text, const std::wstring &name );
 
-		void Remove( const std::shared_ptr<EzText> &text );
+		void Remove( const boost::shared_ptr<EzText> &text );
 
-		std::shared_ptr<QuadClass> FindQuad( const std::wstring &Name );
+		boost::shared_ptr<QuadClass> FindQuad( const std::wstring &Name );
 
-		std::shared_ptr<EzText> FindEzText( const std::wstring &Name );
+		boost::shared_ptr<EzText> FindEzText( const std::wstring &Name );
 
 		float AlphaVel;
 
-		std::shared_ptr<FancyColor> MyFancyColor;
+		boost::shared_ptr<FancyColor> MyFancyColor;
 		float getAlpha();
 		void setAlpha( const float &value );
 

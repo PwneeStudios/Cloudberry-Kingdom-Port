@@ -3,9 +3,9 @@
 namespace CloudberryKingdom
 {
 
-	//Waiting::Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	Waiting::Waiting( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	std::shared_ptr<Waiting> Waiting::Waiting_Construct( int Control, const std::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	//Waiting::Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
+	Waiting::Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
+	boost::shared_ptr<Waiting> Waiting::Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<Waiting>( shared_from_this() );
+		return boost::static_pointer_cast<Waiting>( shared_from_this() );
 	}
 
 	void Waiting::ReleaseBody()
@@ -37,10 +37,10 @@ namespace CloudberryKingdom
 		if ( MyCharacterSelect->QuickJoin )
 			MyCharacterSelect->Join = true;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void Waiting::MyPhsxStep()

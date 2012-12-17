@@ -3,12 +3,12 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<GUI_Panel> InGameStartMenu::MakeListenerHelper::Apply( const std::shared_ptr<Listener> &listener )
+	boost::shared_ptr<GUI_Panel> InGameStartMenu::MakeListenerHelper::Apply( const boost::shared_ptr<Listener> &listener )
 	{
 		return MakeMagic( InGameStartMenu, ( listener->TriggeringPlayerIndex ) );
 	}
 
-	InGameStartMenu::PreventMenuHelper::PreventMenuHelper( const std::shared_ptr<Listener> &listener, const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
+	InGameStartMenu::PreventMenuHelper::PreventMenuHelper( const boost::shared_ptr<Listener> &listener, const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > &Make )
 	{
 		this->listener = listener;
 		this->Make = Make;
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 			listener->Call( Make->Apply( listener ) );
 	}
 
-	InGameStartMenu::GoRemoveProxy::GoRemoveProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoRemoveProxy::GoRemoveProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		igsm->GoRemove();
 	}
 
-	InGameStartMenu::GoControlsHelper::GoControlsHelper( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoControlsHelper::GoControlsHelper( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		igsm->setPauseGame( true );
 	}
 
-	InGameStartMenu::GoControlsProxy::GoControlsProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoControlsProxy::GoControlsProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 		igsm->GoControls();
 	}
 
-	InGameStartMenu::GoOptionsProxy::GoOptionsProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoOptionsProxy::GoOptionsProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		igsm->GoOptions();
 	}
 
-	InGameStartMenu::GoSaveLoadProxy::GoSaveLoadProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoSaveLoadProxy::GoSaveLoadProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		igsm->GoSaveLoad();
 	}
 
-	InGameStartMenu::GoStatsProxy::GoStatsProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::GoStatsProxy::GoStatsProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		igsm->GoStats();
 	}
 
-	InGameStartMenu::VerifyExitProxy::VerifyExitProxy( const std::shared_ptr<InGameStartMenu> &igsm )
+	InGameStartMenu::VerifyExitProxy::VerifyExitProxy( const boost::shared_ptr<InGameStartMenu> &igsm )
 	{
 		this->igsm = igsm;
 	}
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 bool InGameStartMenu::PreventMenu = false;
 
 	InGameStartMenu::InGameStartMenu( int Control ) : CkBaseMenu( false ) { }
-	std::shared_ptr<InGameStartMenu> InGameStartMenu::InGameStartMenu_Construct( int Control )
+	boost::shared_ptr<InGameStartMenu> InGameStartMenu::InGameStartMenu_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -102,27 +102,27 @@ bool InGameStartMenu::PreventMenu = false;
 
 		Constructor();
 
-		return std::static_pointer_cast<InGameStartMenu>( shared_from_this() );
+		return boost::static_pointer_cast<InGameStartMenu>( shared_from_this() );
 	}
 
-	std::shared_ptr<GameObject> InGameStartMenu::MakeListener()
+	boost::shared_ptr<GameObject> InGameStartMenu::MakeListener()
 	{
-		return MakeListener_Base( std::make_shared<MakeListenerHelper>() );
+		return MakeListener_Base( boost::make_shared<MakeListenerHelper>() );
 	}
 
-	std::shared_ptr<GameObject> InGameStartMenu::MakeListener_Base( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<Listener> , std::shared_ptr<GUI_Panel> > > &Make )
+	boost::shared_ptr<GameObject> InGameStartMenu::MakeListener_Base( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > &Make )
 	{
-		std::shared_ptr<Listener> listener = MakeMagic( Listener, () );
+		boost::shared_ptr<Listener> listener = MakeMagic( Listener, () );
 		listener->MyButton = ControllerButtons_START;
 
 		listener->Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
 
-		listener->MyAction = std::make_shared<PreventMenuHelper>( listener, Make );
+		listener->MyAction = boost::make_shared<PreventMenuHelper>( listener, Make );
 
 		return listener;
 	}
 
-	void InGameStartMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void InGameStartMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -147,7 +147,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 		FontScale = .775f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		this->CallDelay = 5;
 		this->setSlideLength( 14 );
@@ -156,20 +156,20 @@ bool InGameStartMenu::PreventMenu = false;
 		MakeDarkBack();
 
 		// Make the backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Backplate_1080x840" ), 1500.f, true );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1080x840" ), 1500.f, true );
 
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( -975.6945f, 54.86111f ) );
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->OnB.reset();
 
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Localization::Words_MENU, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_MENU, ItemFont );
 		HeaderText->Name = _T( "Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
@@ -186,9 +186,9 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 
 		// Resume
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) );
 		item->Name = _T( "Resume" );
-		item->setGo( Cast::ToItem( std::make_shared<ReturnToCallerProxy>( std::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->MyText->setScale( item->MyText->getScale() * 1.1f );
 		item->MySelectedText->setScale( item->MySelectedText->getScale() * 1.1f );
 		AddItem( item );
@@ -196,16 +196,16 @@ bool InGameStartMenu::PreventMenu = false;
 
 
 		// Statistics
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) );
 		item->Name = _T( "Stats" );
-		item->setGo( Cast::ToItem( std::make_shared<GoStatsProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<GoStatsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// SaveLoadSeed
 		Localization::Words word = Tools::CurLevel->CanLoadLevels ? Localization::Words_SAVE_LOAD : Localization::Words_SAVE_SEED;
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( word, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( word, ItemFont ) );
 		item->Name = _T( "SaveLoadSeed" );
-		item->setGo( Cast::ToItem( std::make_shared<GoSaveLoadProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 		{
 			item->Selectable = false;
@@ -214,23 +214,23 @@ bool InGameStartMenu::PreventMenu = false;
 		AddItem( item );
 
 		// Options
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
 		item->Name = _T( "Options" );
-		item->setGo( Cast::ToItem( std::make_shared<GoOptionsProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<GoOptionsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Controls
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
 		item->Name = _T( "Controls" );
-		item->setGo( Cast::ToItem( std::make_shared<GoControlsProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Remove player
 		if ( RemoveMeOption )
 		{
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) );
 			item->Name = _T( "Remove" );
-			item->setGo( Cast::ToItem( std::make_shared<GoRemoveProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+			item->setGo( Cast::ToItem( boost::make_shared<GoRemoveProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 			AddItem( item );
 			RemoveMe = item;
 		}
@@ -239,7 +239,7 @@ bool InGameStartMenu::PreventMenu = false;
 		MakeExitItem();
 
 		// Button interactions
-		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Shift everything
 		EnsureFancy();
@@ -252,7 +252,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoRemove()
 	{
-		std::shared_ptr<VerifyRemoveMenu> verify = MakeMagic( VerifyRemoveMenu, ( getControl() ) );
+		boost::shared_ptr<VerifyRemoveMenu> verify = MakeMagic( VerifyRemoveMenu, ( getControl() ) );
 		GUI_Panel::Call( verify );
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );
@@ -260,8 +260,8 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoControls()
 	{
-		MyGame->WaitThenDo( 4, std::make_shared<GoControlsHelper>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
-		std::shared_ptr<ControlScreen> screen = MakeMagic( ControlScreen, ( getControl() ) );
+		MyGame->WaitThenDo( 4, boost::make_shared<GoControlsHelper>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
+		boost::shared_ptr<ControlScreen> screen = MakeMagic( ControlScreen, ( getControl() ) );
 		Call( screen, 22 );
 	}
 
@@ -279,7 +279,7 @@ bool InGameStartMenu::PreventMenu = false;
 	#if !defined(PC_VERSION)
 		if ( !getMyLevel()->CanLoadLevels )
 		{
-			Call( std::make_shared<SaveSeedAs>( getControl(), MenuItem::GetActivatingPlayerData() ), 0 );
+			Call( boost::make_shared<SaveSeedAs>( getControl(), MenuItem::GetActivatingPlayerData() ), 0 );
 		}
 		else
 	#endif
@@ -304,7 +304,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Resume" ) );
 		if ( _item != 0 )
 		{
@@ -338,14 +338,14 @@ bool InGameStartMenu::PreventMenu = false;
 
 		MyMenu->setPos( Vector2( 1109.028f, 20.13885f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1463.89f, 1474.667f ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "" ) );
 		if ( _q != 0 )
 		{
@@ -358,8 +358,8 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::MakeExitItem()
 	{
-		std::shared_ptr<MenuItem> item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) );
-		item->setGo( Cast::ToItem( std::make_shared<VerifyExitProxy>( std::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) );
+		item->setGo( Cast::ToItem( boost::make_shared<VerifyExitProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 
 		AddItem( item );
 	}

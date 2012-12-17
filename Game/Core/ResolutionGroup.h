@@ -12,11 +12,11 @@ namespace CloudberryKingdom
 	
 		ResolutionGroup();
 
-		static std::shared_ptr<DisplayMode> LastSetMode;
+		static boost::shared_ptr<DisplayMode> LastSetMode;
 
 		static IntVector2 SafeResolution( int width, int height );
 
-		static void Use( const std::shared_ptr<DisplayMode> &mode );
+		static void Use( const boost::shared_ptr<DisplayMode> &mode );
 
 		static void Use( int width, int height );
 		static void Use( int width, int height, bool AllowModifications );

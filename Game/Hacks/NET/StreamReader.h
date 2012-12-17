@@ -12,7 +12,7 @@ struct StreamReader
 	{
 	}
 
-	StreamReader( const std::shared_ptr<Stream> &s )
+	StreamReader( const boost::shared_ptr<Stream> &s )
 	{
 	}
 

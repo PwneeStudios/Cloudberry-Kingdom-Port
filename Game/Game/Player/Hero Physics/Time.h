@@ -21,24 +21,24 @@ namespace CloudberryKingdom
 	
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxTime> instance;
+		static boost::shared_ptr<BobPhsxTime> instance;
 	
-		const static std::shared_ptr<BobPhsxTime> &getInstance();
+		const static boost::shared_ptr<BobPhsxTime> &getInstance();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxTime> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxTime> &bob );
 
 		// Instancable struct
 		BobPhsxTime();
 
-		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
-		void Set( const std::shared_ptr<BobPhsx> &phsx, Vector2 modsize );
+		virtual void Set( const boost::shared_ptr<BobPhsx> &phsx );
+		void Set( const boost::shared_ptr<BobPhsx> &phsx, Vector2 modsize );
 
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual void PhsxStep();
 
-		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
+		virtual void LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn );
 
 	
 		Behavior CurBehavior;
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 	
 		virtual void GenerateInput( int CurPhsxStep );
 
-		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style );
 
 	
 		void InitializeInstanceFields();

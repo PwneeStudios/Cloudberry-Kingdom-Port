@@ -5,8 +5,8 @@ namespace CloudberryKingdom
 
 	void Serpent::SerpentTileInfo::InitializeInstanceFields()
 	{
-		Serpent_Renamed = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Serpent" ) ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
-		Fish = std::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Fish_1" ) ), Vector2( 35, -1 ) );
+		Serpent_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Serpent" ) ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
+		Fish = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Fish_1" ) ), Vector2( 35, -1 ) );
 		BoxSize = Vector2( 90, 1000 );
 	}
 
@@ -28,9 +28,9 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void Serpent::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void Serpent::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<SerpentTileInfo> info = level->getInfo()->Serpents;
+		boost::shared_ptr<SerpentTileInfo> info = level->getInfo()->Serpents;
 
 		BoxSize = info->BoxSize * level->getInfo()->ScaleAll * level->getInfo()->ScaleAllObjects;
 
@@ -57,8 +57,8 @@ namespace CloudberryKingdom
 	{
 		if ( !BoxesOnly )
 		{
-			MyQuad = std::make_shared<QuadClass>();
-			MyFish = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
+			MyFish = boost::make_shared<QuadClass>();
 		}
 
 		Construct( BoxesOnly );
@@ -164,12 +164,12 @@ namespace CloudberryKingdom
 		_BoxDeath::Reset( BoxesOnly );
 	}
 
-	void Serpent::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Serpent::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 		Init( A->getCore()->StartData.Position, A->getMyLevel() );
 
-		std::shared_ptr<Serpent> SerpentA = std::dynamic_pointer_cast<Serpent>( A );
+		boost::shared_ptr<Serpent> SerpentA = boost::dynamic_pointer_cast<Serpent>( A );
 
 		Offset = SerpentA->Offset;
 		UpT = SerpentA->UpT;

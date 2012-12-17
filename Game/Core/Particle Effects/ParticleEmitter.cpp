@@ -7,24 +7,24 @@ namespace CloudberryKingdom
 
 	void ParticleEmitter::InitializeStatics()
 	{
-		ParticleEmitter::Pool = std::make_shared<ParticleEmitterBin>();
+		ParticleEmitter::Pool = boost::make_shared<ParticleEmitterBin>();
 	}
 	
 	// Statis
-	std::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool;
+	boost::shared_ptr<ParticleEmitterBin> ParticleEmitter::Pool;
 
 
 	ParticleEmitterBin::ParticleEmitterBin()
 	{
 		const int capacity = 20;
-		MyStack = std::vector<std::shared_ptr<ParticleEmitter> >( capacity );
+		MyStack = std::vector<boost::shared_ptr<ParticleEmitter> >( capacity );
 		for ( int i = 0; i < capacity; ++i )
-			MyStack[i] = std::make_shared<ParticleEmitter>( 300 );
+			MyStack[i] = boost::make_shared<ParticleEmitter>( 300 );
 	}
 
-	std::shared_ptr<ParticleEmitter> ParticleEmitterBin::Get()
+	boost::shared_ptr<ParticleEmitter> ParticleEmitterBin::Get()
 	{
-		std::shared_ptr<ParticleEmitter> item = 0;
+		boost::shared_ptr<ParticleEmitter> item = 0;
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MyStack )
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 			stackLock.Lock();
 
 			if ( MyStack.empty() )
-				return std::make_shared<ParticleEmitter>( 300 );
+				return boost::make_shared<ParticleEmitter>( 300 );
 
 			item = MyStack.back();
 			MyStack.pop_back();
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		return item;
 	}
 
-	void ParticleEmitterBin::ReturnItem( const std::shared_ptr<ParticleEmitter> &item )
+	void ParticleEmitterBin::ReturnItem( const boost::shared_ptr<ParticleEmitter> &item )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MyStack )
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 
 		Count = Index = 0;
 
-		Particles = std::list<std::shared_ptr<Particle> >();
+		Particles = std::list<boost::shared_ptr<Particle> >();
 
 		MyTexture = Tools::TextureWad->TextureList[ 0 ];
 
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 		VelBase = 2;
 		VelDir = Vector2( 0, 0 );
 
-		ParticleTemplate = std::make_shared<Particle>();
+		ParticleTemplate = boost::make_shared<Particle>();
 		ParticleTemplate->Init();
 		ParticleTemplate->SetSize( 150 );
 		ParticleTemplate->Life = 200;
@@ -103,33 +103,33 @@ namespace CloudberryKingdom
 
 	void ParticleEmitter::Clean()
 	{
-		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<boost::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			( *p )->Recycle();
 		Particles.clear();
 	}
 
-	void ParticleEmitter::Absorb( const std::shared_ptr<ParticleEmitter> &emitter )
+	void ParticleEmitter::Absorb( const boost::shared_ptr<ParticleEmitter> &emitter )
 	{
-		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = emitter->Particles.begin(); p != emitter->Particles.end(); ++p )
+		for ( std::list<boost::shared_ptr<Particle> >::const_iterator p = emitter->Particles.begin(); p != emitter->Particles.end(); ++p )
 			Particles.push_back( *p );
 		emitter->Particles.clear();
 	}
 
-	std::list<std::shared_ptr<Particle> >::iterator ParticleEmitter::KillParticle( const std::list<std::shared_ptr<Particle> >::iterator &node )
+	std::list<boost::shared_ptr<Particle> >::iterator ParticleEmitter::KillParticle( const std::list<boost::shared_ptr<Particle> >::iterator &node )
 	{
-		std::shared_ptr<Particle> p = *node;
+		boost::shared_ptr<Particle> p = *node;
 		p->Recycle();
 		return Particles.erase( node );
 	}
 
-	void ParticleEmitter::EmitParticle( const std::shared_ptr<Particle> &p )
+	void ParticleEmitter::EmitParticle( const boost::shared_ptr<Particle> &p )
 	{
 		Particles.push_back( p );
 	}
 
-	std::shared_ptr<Particle> ParticleEmitter::GetNewParticle( const std::shared_ptr<Particle> &template_Renamed )
+	boost::shared_ptr<Particle> ParticleEmitter::GetNewParticle( const boost::shared_ptr<Particle> &template_Renamed )
 	{
-		std::shared_ptr<CloudberryKingdom::Particle> p = Particle::Pool->Get();
+		boost::shared_ptr<CloudberryKingdom::Particle> p = Particle::Pool->Get();
 		p->Copy( template_Renamed );
 
 		Particles.push_back( p );
@@ -145,21 +145,21 @@ namespace CloudberryKingdom
 		if ( Tools::Render->UsingSpriteBatch )
 			Tools::Render->EndSpriteBatch();
 
-		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<boost::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			( *p )->Draw();
 		Tools::QDrawer->Flush();
 	}
 
 	void ParticleEmitter::Unfreeze( int code )
 	{
-		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<boost::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			if ( ( *p )->Code == code )
 				( *p )->Frozen = false;
 	}
 
 	void ParticleEmitter::RestrictedUpdate( int code )
 	{
-		for ( std::list<std::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
+		for ( std::list<boost::shared_ptr<Particle> >::const_iterator p = Particles.begin(); p != Particles.end(); ++p )
 			if ( ( *p )->Code == code )
 				( *p )->Phsx( Tools::CurLevel->getMainCamera() );
 	}
@@ -171,11 +171,11 @@ namespace CloudberryKingdom
 		// FIXME: Check update loop logic.
 
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		std::list<std::shared_ptr<Particle> >::iterator node = Particles.begin();
+		std::list<boost::shared_ptr<Particle> >::iterator node = Particles.begin();
 		while ( node != Particles.end() )
 		{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			std::shared_ptr<Particle> &p = *node;
+			boost::shared_ptr<Particle> &p = *node;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 			//var next = node->Next;
 

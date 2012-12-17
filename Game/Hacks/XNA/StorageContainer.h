@@ -16,9 +16,9 @@ struct StorageContainer
 		
 	}
 
-	std::shared_ptr<BinaryWriter> CreateFile( const std::wstring &name )
+	boost::shared_ptr<BinaryWriter> CreateFile( const std::wstring &name )
 	{
-		return std::shared_ptr<BinaryWriter>();
+		return boost::shared_ptr<BinaryWriter>();
 	}
 
 };

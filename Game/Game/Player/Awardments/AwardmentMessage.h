@@ -9,11 +9,11 @@ namespace CloudberryKingdom
 	struct AwardmentMessage : public CkBaseMenu
 	{
 	
-		std::shared_ptr<QuadClass> Backdrop;
+		boost::shared_ptr<QuadClass> Backdrop;
 
 	
-		AwardmentMessage( const std::shared_ptr<Awardment> &award );
-		std::shared_ptr<AwardmentMessage> AwardmentMessage_Construct( const std::shared_ptr<Awardment> &award );
+		AwardmentMessage( const boost::shared_ptr<Awardment> &award );
+		boost::shared_ptr<AwardmentMessage> AwardmentMessage_Construct( const boost::shared_ptr<Awardment> &award );
 
 	
 		virtual void MakeBackdrop();
@@ -24,9 +24,9 @@ namespace CloudberryKingdom
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		std::shared_ptr<EzText> Text;
+		boost::shared_ptr<EzText> Text;
 	
-		void SetText( const std::shared_ptr<Awardment> &award );
+		void SetText( const boost::shared_ptr<Awardment> &award );
 
 	
 		virtual void SizeAndPosition();

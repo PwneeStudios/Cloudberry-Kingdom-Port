@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 		{
 		
 //C# TO C++ CONVERTER NOTE: The variable Line was renamed since it is named the same as a user-defined type:
-			std::shared_ptr<LineSpriteInfo> Line_Renamed;
+			boost::shared_ptr<LineSpriteInfo> Line_Renamed;
 
 			Vector4 Tint_Full;
 			Vector4 Tint_Half;
@@ -92,9 +92,9 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

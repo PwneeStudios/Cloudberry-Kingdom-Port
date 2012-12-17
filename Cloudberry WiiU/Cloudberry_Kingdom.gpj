@@ -6,7 +6,6 @@
 	-object_dir=objs\Cloudberry_Kingdom
 	-o Cloudberry_Kingdom.elf
 	-I.
-	-Iboost_shared_ptr
 boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp
 Game\CloudberryKingdom.cpp

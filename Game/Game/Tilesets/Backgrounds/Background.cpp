@@ -5,44 +5,44 @@ namespace CloudberryKingdom
 
 	void BackgroundType::InitializeStatics()
 	{
-		BackgroundType::None = std::make_shared<BackgroundTemplate>();
-		BackgroundType::Random = std::make_shared<BackgroundTemplate>();
+		BackgroundType::None = boost::make_shared<BackgroundTemplate>();
+		BackgroundType::Random = boost::make_shared<BackgroundTemplate>();
 		
-		BackgroundType::_Sea = std::make_shared<Background_Castle>( _T( "sea" ) );
+		BackgroundType::_Sea = boost::make_shared<Background_Castle>( _T( "sea" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Sea->shared_from_this() );
 
-		BackgroundType::_Sea_Rain = std::make_shared<Background_Castle>( _T( "sea_rain" ) );
+		BackgroundType::_Sea_Rain = boost::make_shared<Background_Castle>( _T( "sea_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Sea_Rain ->shared_from_this() );
 
-		BackgroundType::_Hills = std::make_shared<Background_Castle>( _T( "hills" ) );
+		BackgroundType::_Hills = boost::make_shared<Background_Castle>( _T( "hills" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Hills->shared_from_this() );
 
-		BackgroundType::_Hills_Rain = std::make_shared<Background_Castle>( _T( "hills_rain" ) );
+		BackgroundType::_Hills_Rain = boost::make_shared<Background_Castle>( _T( "hills_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Hills_Rain->shared_from_this() );
 
-		BackgroundType::_Forest = std::make_shared<Background_Castle>( _T( "forest" ) );
+		BackgroundType::_Forest = boost::make_shared<Background_Castle>( _T( "forest" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Forest->shared_from_this() );
 
-		BackgroundType::_Forest_Rain = std::make_shared<Background_Castle>( _T( "forest_snow" ) );
+		BackgroundType::_Forest_Rain = boost::make_shared<Background_Castle>( _T( "forest_snow" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Forest_Rain->shared_from_this() );
 
-		BackgroundType::_Cloud = std::make_shared<Background_Castle>( _T( "cloud" ) );
+		BackgroundType::_Cloud = boost::make_shared<Background_Castle>( _T( "cloud" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cloud->shared_from_this() );
 
-		BackgroundType::_Cloud_Rain = std::make_shared<Background_Castle>( _T( "cloud_rain" ) );
+		BackgroundType::_Cloud_Rain = boost::make_shared<Background_Castle>( _T( "cloud_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cloud_Rain->shared_from_this() );
 
-		BackgroundType::_Cave = std::make_shared<Background_Castle>( _T( "cave" ) );
+		BackgroundType::_Cave = boost::make_shared<Background_Castle>( _T( "cave" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cave->shared_from_this() );
 
-		BackgroundType::_Castle = std::make_shared<Background_Castle>( _T( "castle" ) );
+		BackgroundType::_Castle = boost::make_shared<Background_Castle>( _T( "castle" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Castle->shared_from_this() );
 	}
 
-	std::map<std::wstring, std::shared_ptr<BackgroundTemplate> > BackgroundType::NameLookup, BackgroundType::PathLookup;
-	std::shared_ptr<BackgroundTemplate> BackgroundType::None, BackgroundType::Random, BackgroundType::_Sea, BackgroundType::_Sea_Rain, BackgroundType::_Hills, BackgroundType::_Hills_Rain, BackgroundType::_Forest, BackgroundType::_Forest_Rain, BackgroundType::_Cloud, BackgroundType::_Cloud_Rain, BackgroundType::_Cave, BackgroundType::_Castle;
+	std::map<std::wstring, boost::shared_ptr<BackgroundTemplate> > BackgroundType::NameLookup, BackgroundType::PathLookup;
+	boost::shared_ptr<BackgroundTemplate> BackgroundType::None, BackgroundType::Random, BackgroundType::_Sea, BackgroundType::_Sea_Rain, BackgroundType::_Hills, BackgroundType::_Hills_Rain, BackgroundType::_Forest, BackgroundType::_Forest_Rain, BackgroundType::_Cloud, BackgroundType::_Cloud_Rain, BackgroundType::_Cave, BackgroundType::_Castle;
 
-	void BackgroundType::AddTemplate( const std::shared_ptr<BackgroundTemplate> &template_Renamed )
+	void BackgroundType::AddTemplate( const boost::shared_ptr<BackgroundTemplate> &template_Renamed )
 	{
 		// FIXME: These used to be AddOrOverwrite.
 		NameLookup[ template_Renamed->Name ] = template_Renamed;
@@ -53,14 +53,14 @@ namespace CloudberryKingdom
 
 	void BackgroundType::Load( const std::wstring &path )
 	{
-		std::shared_ptr<BackgroundTemplate> template_Renamed;
+		boost::shared_ptr<BackgroundTemplate> template_Renamed;
 		if ( PathLookup.find( path ) != PathLookup.end() )
 		{
 			template_Renamed = PathLookup[ path ];
 		}
 		else
 		{
-			template_Renamed = std::make_shared<BackgroundTemplate>();
+			template_Renamed = boost::make_shared<BackgroundTemplate>();
 
 			std::wstring name = Tools::GetFileName( path );
 			template_Renamed->Name = name;
@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		template_Renamed->MadeOfText = true;
 	}
 
-	void BackgroundTemplate::Code( const std::shared_ptr<Background> &b )
+	void BackgroundTemplate::Code( const boost::shared_ptr<Background> &b )
 	{
 	}
 
@@ -92,9 +92,9 @@ namespace CloudberryKingdom
 		//BackgroundType::AddTemplate( shared_from_this() );
 	}
 
-	std::shared_ptr<Background> BackgroundTemplate::MakeInstanceOf()
+	boost::shared_ptr<Background> BackgroundTemplate::MakeInstanceOf()
 	{
-		std::shared_ptr<RegularBackground> b = std::make_shared<RegularBackground>();
+		boost::shared_ptr<RegularBackground> b = boost::make_shared<RegularBackground>();
 		b->MyTemplate = shared_from_this();
 
 		if ( MadeOfCode || File == _T( "" ) )
@@ -115,10 +115,10 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	void RegularBackground::Init( const std::shared_ptr<Level> &level )
+	void RegularBackground::Init( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel = level;
-		MyCollection = std::make_shared<BackgroundCollection>( MyLevel );
+		MyCollection = boost::make_shared<BackgroundCollection>( MyLevel );
 		TR = Vector2( 5000, 2000 );
 		BL = Vector2( -2000, -2000 );
 
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 	void RegularBackground::Draw()
 	{
 		Tools::QDrawer->Flush();
-		std::shared_ptr<Camera> Cam = MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> Cam = MyLevel->getMainCamera();
 		Cam->SetVertexCamera();
 
 		if ( MyLevel->IndependentDeltaT > 0 )
@@ -148,7 +148,7 @@ namespace CloudberryKingdom
 	void RegularBackground::DrawForeground()
 	{
 		Tools::QDrawer->Flush();
-		std::shared_ptr<Camera> Cam = MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> Cam = MyLevel->getMainCamera();
 		Cam->SetVertexCamera();
 
 		MyCollection->Draw( 1, true );

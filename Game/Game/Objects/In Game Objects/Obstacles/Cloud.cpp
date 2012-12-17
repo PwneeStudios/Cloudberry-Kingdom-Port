@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Cloud::CloudTileInfo::InitializeInstanceFields()
 	{
-		Sprite = std::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "Cloud1" ) ) ), Vector2( 250.f, 180.f ), Vector2( 0.f, -50.f ), Color( 1.f, 1.f, 1.f, .95f ) );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "Cloud1" ) ) ), Vector2( 250.f, 180.f ), Vector2( 0.f, -50.f ), Color( 1.f, 1.f, 1.f, .95f ) );
 		BoxSize = Vector2( 180, 50 );
 	}
 
@@ -43,9 +43,9 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void Cloud::Init( Vector2 pos, const std::shared_ptr<Level> &level )
+	void Cloud::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<CloudTileInfo> info = level->getInfo()->Clouds;
+		boost::shared_ptr<CloudTileInfo> info = level->getInfo()->Clouds;
 
 		_Obstacle::Init( pos, level );
 
@@ -64,10 +64,10 @@ namespace CloudberryKingdom
 
 	void Cloud::Construct( bool BoxesOnly )
 	{
-		Box = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
 
 		if ( !BoxesOnly )
-			MyQuad = std::make_shared<QuadClass>();
+			MyQuad = boost::make_shared<QuadClass>();
 
 		getCore()->BoxesOnly = BoxesOnly;
 
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 		Box->Move( shift );
 	}
 
-	void Cloud::Interact( const std::shared_ptr<Bob> &bob )
+	void Cloud::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->Active )
 			return;
@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 					// Remove surrounding clouds
 					for ( ObjectVec::const_iterator cloud = getCore()->MyLevel->Objects.begin(); cloud != getCore()->MyLevel->Objects.end(); ++cloud )
 					{
-						std::shared_ptr<Cloud> Cloud_Renamed = std::dynamic_pointer_cast<Cloud>( *cloud );
+						boost::shared_ptr<Cloud> Cloud_Renamed = boost::dynamic_pointer_cast<Cloud>( *cloud );
 						if ( 0 != Cloud_Renamed )
 							if ( !Cloud_Renamed->getCore()->GenData.Used && (Cloud_Renamed->getCore()->Data.Position - getCore()->Data.Position).Length() < 2.35f * Box->Current->Size.X )
 							{
@@ -208,11 +208,11 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void Cloud::Clone( const std::shared_ptr<ObjectBase> &A )
+	void Cloud::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<Cloud> CloudA = std::dynamic_pointer_cast<Cloud>( A );
+		boost::shared_ptr<Cloud> CloudA = boost::dynamic_pointer_cast<Cloud>( A );
 
 		Shiftiness = CloudA->Shiftiness;
 		Size = CloudA->Size;
@@ -223,7 +223,7 @@ namespace CloudberryKingdom
 		getCore()->WakeUpRequirements = true;
 	}
 
-	void Cloud::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void Cloud::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		getCore()->Write(writer);
 
@@ -232,7 +232,7 @@ namespace CloudberryKingdom
 		Box->Write( writer );
 	}
 
-	void Cloud::Read( const std::shared_ptr<BinaryReader> &reader )
+	void Cloud::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		getCore()->Read(reader);
 

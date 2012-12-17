@@ -185,6 +185,11 @@ public:
         boost::detail::sp_enable_shared_from_this( this, p, p );
     }
 
+	// FIXME: Added by us in order to get cases like "shared_ptr = 0" to work.
+	shared_ptr( int ): px(0), pn()
+	{
+	}
+
     //
     // Requirements: D's copy constructor must not throw
     //

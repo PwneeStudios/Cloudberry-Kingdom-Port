@@ -88,7 +88,7 @@ FilesystemPc::FilesystemPc()
 {
 }
 
-std::shared_ptr<File> FilesystemPc::Open( const std::string &path, bool write )
+boost::shared_ptr<File> FilesystemPc::Open( const std::string &path, bool write )
 {
-	return std::static_pointer_cast<File>( std::make_shared<FilePc>( path, write ) );
+	return boost::static_pointer_cast<File>( boost::make_shared<FilePc>( path, write ) );
 }

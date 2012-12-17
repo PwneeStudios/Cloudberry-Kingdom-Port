@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 	int SimpleMenuBase::NoMoveDuration;
 
 
-	SimpleMenuBase::SimpleToCustomProxy::SimpleToCustomProxy( const std::shared_ptr<SimpleMenuBase> &smb )
+	SimpleMenuBase::SimpleToCustomProxy::SimpleToCustomProxy( const boost::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
 	}
@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		smb->SimpleToCustom();
 	}
 
-	SimpleMenuBase::SimpleToDoneProxy::SimpleToDoneProxy( const std::shared_ptr<SimpleMenuBase> &smb )
+	SimpleMenuBase::SimpleToDoneProxy::SimpleToDoneProxy( const boost::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
 	}
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		smb->SimpleToDone();
 	}
 
-	SimpleMenuBase::SimpleToBackProxy::SimpleToBackProxy( const std::shared_ptr<SimpleMenuBase> &smb )
+	SimpleMenuBase::SimpleToBackProxy::SimpleToBackProxy( const boost::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
 	}
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		smb->SimpleToBack();
 	}
 
-	SimpleMenuBase::SimpleSelect_RightProxy::SimpleSelect_RightProxy( const std::shared_ptr<SimpleMenuBase> &smb )
+	SimpleMenuBase::SimpleSelect_RightProxy::SimpleSelect_RightProxy( const boost::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
 	}
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		smb->SimpleSelect_Right();
 	}
 
-	SimpleMenuBase::SimpleSelect_LeftProxy::SimpleSelect_LeftProxy( const std::shared_ptr<SimpleMenuBase> &smb )
+	SimpleMenuBase::SimpleSelect_LeftProxy::SimpleSelect_LeftProxy( const boost::shared_ptr<SimpleMenuBase> &smb )
 	{
 		this->smb = smb;
 	}
@@ -69,12 +69,12 @@ namespace CloudberryKingdom
 		MyCharacterSelect.reset();
 	}
 
-	//SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
-	SimpleMenuBase::SimpleMenuBase( int Control, const std::shared_ptr<CharacterSelect> &Parent ) :
+	//SimpleMenuBase::SimpleMenuBase( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) : CkBaseMenu( false )
+	SimpleMenuBase::SimpleMenuBase( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) :
 		NoMoveCount( 0 )
 	{
 	}
-	std::shared_ptr<SimpleMenuBase> SimpleMenuBase::SimpleMenuBase_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
+	boost::shared_ptr<SimpleMenuBase> SimpleMenuBase::SimpleMenuBase_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -84,14 +84,14 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<SimpleMenuBase>( shared_from_this() );
+		return boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() );
 	}
 
 	void SimpleMenuBase::OnAdd()
 	{
 		CkBaseMenu::OnAdd();
 
-		Arrows = MakeMagic( ArrowMenu, ( getControl(), MyCharacterSelect, std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
+		Arrows = MakeMagic( ArrowMenu, ( getControl(), MyCharacterSelect, boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
 		MyGame->AddGameObject( Arrows );
 	}
 
@@ -212,17 +212,17 @@ namespace CloudberryKingdom
 	}
 
 #if defined(PC_VERSION)
-	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
-	std::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
+	SimpleMenu::SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
+	boost::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent )
 	{
 		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
 
-		return std::static_pointer_cast<SimpleMenu>( shared_from_this() );
+		return boost::static_pointer_cast<SimpleMenu>( shared_from_this() );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void SimpleMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void SimpleMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		item->MySelectedText->setScale( FontScale );
 		item->MyText->setScale( item->MySelectedText->getScale() );
@@ -241,44 +241,44 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		MyPile->FancyPos->UpdateWithGame = true;
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->setControl( getControl() );
 
 		MyMenu->OnB.reset();
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Customize
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) );
 		item->Name = _T( "Custom" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToCustomProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<SimpleToCustomProxy>( boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		ItemPos = Vector2( -523, -174 );
 		PosAdd = Vector2( 0, -220 );
 		AddItem( item );
 
 		// Random
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
 		item->Name = _T( "Random" );
-		item->setGo( Cast::ToItem( std::make_shared<CharacterSelect::RandomizeProxy>( MyCharacterSelect ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<CharacterSelect::RandomizeProxy>( MyCharacterSelect ) ) );
 		AddItem( item );
 
 		// Confirm
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
 		item->Name = _T( "Done" );
-		item->setGo( Cast::ToItem( std::make_shared<SimpleToDoneProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<SimpleToDoneProxy>( boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Select "Confirm" to start with
 		MyMenu->SelectItem( item );
 
-		MyMenu->OnB = Cast::ToMenu( std::make_shared<SimpleToBackProxy>( std::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
+		MyMenu->OnB = Cast::ToMenu( boost::make_shared<SimpleToBackProxy>( boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) );
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "Score_Screen" ), 485.f );
-		backdrop = std::make_shared<QuadClass>( std::shared_ptr<FancyVector2>(), true, false );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Score_Screen" ), 485.f );
+		backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		backdrop->setTextureName( _T( "Score_Screen" ) );
 		backdrop->ScaleYToMatchRatio( 485 );
 
@@ -297,7 +297,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void SimpleMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Custom" ) );
 		if ( _item != 0 )
 		{
@@ -326,17 +326,17 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 0, 0 ) );
 		MyPile->setPos( Vector2( 0, 0 ) );
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 #endif
 
 #if ! defined(PC_VERSION)
-	SimpleMenu::SimpleMenu( int Control, const std::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
-	std::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const std::shared_ptr<CharacterSelect> &Parent )
+	SimpleMenu::SimpleMenu( int Control, const boost::shared_ptr<CharacterSelect> &Parent ) : SimpleMenuBase( Control, Parent ) { }
+	boost::shared_ptr<SimpleMenu> SimpleMenu::SimpleMenu_Construct( int Control, const boost::shared_ptr<CharacterSelect> &Parent )
 	{
 		SimpleMenuBase::SimpleMenuBase_Construct( Control, Parent );
 
-		return std::static_pointer_cast<SimpleMenu>( shared_from_this() );
+		return boost::static_pointer_cast<SimpleMenu>( shared_from_this() );
 	}
 #endif
 
@@ -350,7 +350,7 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		ItemFont = Resources::Font_Grobold42;
 		FontScale = .66f;
@@ -361,7 +361,7 @@ namespace CloudberryKingdom
 		float Shift = 25;
 
 		// Press A to continue
-		std::shared_ptr<EzText> ContinueText = std::make_shared<EzText>( ButtonString::Go( ButtonSize ) + Space + _T( "{c188,255,176,255} Select" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( ButtonString::Go( ButtonSize ) + Space + _T( "{c188,255,176,255} Select" ), ItemFont, true, true );
 		ContinueText->setScale( this->FontScale );
 		ContinueText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		ContinueText->ShadowColor = Color( 30, 30, 30 );
@@ -371,7 +371,7 @@ namespace CloudberryKingdom
 		MyPile->Add( ContinueText, _T( "A" ) );
 
 		// Press Y to customize
-		std::shared_ptr<EzText> CustomizeText = std::make_shared<EzText>( ButtonString::Y( ButtonSize ) + Space + _T( "{c255,255,155,255} Custom" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( ButtonString::Y( ButtonSize ) + Space + _T( "{c255,255,155,255} Custom" ), ItemFont, true, true );
 		CustomizeText->setScale( this->FontScale );
 		CustomizeText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		CustomizeText->ShadowColor = Color( 30, 30, 30 );
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 		MyPile->Add( CustomizeText, _T( "Y" ) );
 
 		// Press X to randomize
-		std::shared_ptr<EzText> RandomText = std::make_shared<EzText>( ButtonString::X( ButtonSize ) + Space + _T( "{c194,210,255,255} Random" ), ItemFont, true, true );
+		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( ButtonString::X( ButtonSize ) + Space + _T( "{c194,210,255,255} Random" ), ItemFont, true, true );
 		RandomText->setScale( this->FontScale );
 		RandomText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		RandomText->ShadowColor = Color( 30, 30, 30 );
@@ -397,7 +397,7 @@ namespace CloudberryKingdom
 #if ! defined(PC_VERSION)
 	void SimpleMenu::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "A" ) );
 		if ( _t != 0 )
 		{

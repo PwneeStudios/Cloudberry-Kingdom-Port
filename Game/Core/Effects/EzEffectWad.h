@@ -9,12 +9,12 @@
 namespace CloudberryKingdom
 {
 
-	struct EzEffectWad : std::enable_shared_from_this<EzEffectWad>
+	struct EzEffectWad : boost::enable_shared_from_this<EzEffectWad>
 	{
 	
 		Vector2 ModZoom;
 
-		typedef std::vector<std::shared_ptr<EzEffect> > EffectVec;
+		typedef std::vector<boost::shared_ptr<EzEffect> > EffectVec;
 		EffectVec EffectList;
 
 	
@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 
 		EzEffectWad();
 
-		std::shared_ptr<EzEffect> FindByName( const std::wstring &name );
+		boost::shared_ptr<EzEffect> FindByName( const std::wstring &name );
 
-		void AddEffect( const std::shared_ptr<Effect> &effect, const std::wstring &Name );
+		void AddEffect( const boost::shared_ptr<Effect> &effect, const std::wstring &Name );
 
 	
 		void InitializeInstanceFields();

@@ -15,9 +15,9 @@ namespace CloudberryKingdom
 	}
 
 	// Statics
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound;
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound;
-	std::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound;
+	boost::shared_ptr<EzSound> BobPhsx::DefaultInfo::DoubleJump_Sound;
+	boost::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobBoxJump_Sound;
+	boost::shared_ptr<EzSound> BobPhsx::DefaultInfo::BobJetpack_Sound;
 	int BobPhsx::DefaultInfo::BobJetpack_SoundDelay;
 
 
@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 		return MyBob->getCore()->MyLevel->CurMakeData->PieceSeed->GeometryType;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Base( int BaseType )
+	boost::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Base( int BaseType )
 	{
 		switch ( BaseType )
 		{
@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Shape( int Shape )
+	boost::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Shape( int Shape )
 	{
 		switch ( Shape )
 		{
@@ -243,7 +243,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Move( int MoveMod )
+	boost::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Move( int MoveMod )
 	{
 		switch ( MoveMod )
 		{
@@ -260,7 +260,7 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Special( int Special )
+	boost::shared_ptr<BobPhsx> BobPhsx::GetPhsx_Special( int Special )
 	{
 		switch ( Special )
 		{
@@ -273,37 +273,37 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void BobPhsx::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsx::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( HeroSpec spec )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( HeroSpec spec )
 	{
 		return MakeCustom( spec.basetype, spec.shape, spec.move );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( std::shared_ptr<BobPhsx> BaseType, const std::shared_ptr<BobPhsx> &Shape, std::shared_ptr<BobPhsx> MoveMod, std::shared_ptr<BobPhsx> Special )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( boost::shared_ptr<BobPhsx> BaseType, const boost::shared_ptr<BobPhsx> &Shape, boost::shared_ptr<BobPhsx> MoveMod, boost::shared_ptr<BobPhsx> Special )
 	{
 		// Error catch. Spaceship can't be rocketman or double jump
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( BaseType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( BaseType ) != 0 )
 			MoveMod = BobPhsxNormal::getInstance();
 
 		// Error catch. Invert must be classic, and must be the base struct.
-		if ( std::dynamic_pointer_cast<BobPhsxInvert>( MoveMod ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxInvert>( MoveMod ) != 0 )
 		{
 			BaseType = BobPhsxInvert::getInstance();
 			MoveMod = BobPhsxNormal::getInstance();
 		}
 
 		// Error catch. Time Master must be classic, and must be the base struct.
-		if ( std::dynamic_pointer_cast<BobPhsxTime>( Special ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxTime>( Special ) != 0 )
 		{
 			BaseType = BobPhsxTime::getInstance();
 			Special = BobPhsxNormal::getInstance();
 		}
 
 		// Make the phsx
-		std::shared_ptr<BobPhsx> custom = BaseType->Clone();
+		boost::shared_ptr<BobPhsx> custom = BaseType->Clone();
 		Shape->Set( custom );
 		MoveMod->Set( custom );
 		Special->Set( custom );
@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 		return custom;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( const std::wstring &BaseType, const std::wstring &Shape, const std::wstring &MoveMod, const std::wstring &Special )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( const std::wstring &BaseType, const std::wstring &Shape, const std::wstring &MoveMod, const std::wstring &Special )
 	{
 		int _BaseType, _Shape, _MoveMod, _Special;
 
@@ -356,22 +356,22 @@ namespace CloudberryKingdom
 		return MakeCustom( _BaseType, _Shape, _MoveMod, _Special );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( int BaseType, int Shape, int MoveMod )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( int BaseType, int Shape, int MoveMod )
 	{
 		return MakeCustom( static_cast<Hero_BaseType>( BaseType ), static_cast<Hero_Shape>( Shape ), static_cast<Hero_MoveMod>( MoveMod ) );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( int BaseType, int Shape, int MoveMod, int Special )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( int BaseType, int Shape, int MoveMod, int Special )
 	{
 		return MakeCustom( static_cast<Hero_BaseType>( BaseType ), static_cast<Hero_Shape>( Shape ), static_cast<Hero_MoveMod>( MoveMod ), static_cast<Hero_Special>( Special ) );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod )
 	{
 		return MakeCustom( GetPhsx_Base( BaseType ), GetPhsx_Shape( Shape ), GetPhsx_Move( MoveMod ), BobPhsxNormal::getInstance() );
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod, Hero_Special Special )
+	boost::shared_ptr<BobPhsx> BobPhsx::MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod, Hero_Special Special )
 	{
 		return MakeCustom( GetPhsx_Base( BaseType ), GetPhsx_Shape( Shape ), GetPhsx_Move( MoveMod ), GetPhsx_Special( Special ) );
 	}
@@ -389,15 +389,15 @@ namespace CloudberryKingdom
 		ModCapeSize *= data[ CustomData_SIZE ];
 
 		// Wheelie phsx
-		std::shared_ptr<BobPhsxWheel> wheel = std::dynamic_pointer_cast<BobPhsxWheel>( shared_from_this() );
+		boost::shared_ptr<BobPhsxWheel> wheel = boost::dynamic_pointer_cast<BobPhsxWheel>( shared_from_this() );
 		if ( 0 != wheel )
 		{
 			wheel->AngleAcc *= static_cast<float>( pow( data[ CustomData_ACCEL ], 1.5f ) );
 			wheel->MaxAngleSpeed *= data[ CustomData_MAXSPEED ];
 		}
 
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( shared_from_this() );
-		if ( std::dynamic_pointer_cast<BobPhsxNormal>( normal ) != 0 )
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( shared_from_this() );
+		if ( boost::dynamic_pointer_cast<BobPhsxNormal>( normal ) != 0 )
 		{
 			// Normal phsx
 			BobMaxFallSpeed *= data[ CustomData_MAXFALL ];
@@ -440,27 +440,27 @@ namespace CloudberryKingdom
 		SingletonInitialized = true;
 	}
 
-	const std::shared_ptr<ObjectClass> &BobPhsx::getObj() const
+	const boost::shared_ptr<ObjectClass> &BobPhsx::getObj() const
 	{
 		return MyBob->PlayerObject;
 	}
 
-	const std::shared_ptr<Camera> &BobPhsx::getCam() const
+	const boost::shared_ptr<Camera> &BobPhsx::getCam() const
 	{
 		return MyBob->getCore()->MyLevel->getMainCamera();
 	}
 
-	const std::shared_ptr<Level> &BobPhsx::getMyLevel() const
+	const boost::shared_ptr<Level> &BobPhsx::getMyLevel() const
 	{
 		return MyBob->getCore()->MyLevel;
 	}
 
-	const std::shared_ptr<ObjectData> &BobPhsx::getCore() const
+	const boost::shared_ptr<ObjectData> &BobPhsx::getCore() const
 	{
 		return MyBob->getCore();
 	}
 
-	const std::shared_ptr<RichLevelGenData> &BobPhsx::getGenData() const
+	const boost::shared_ptr<RichLevelGenData> &BobPhsx::getGenData() const
 	{
 		return MyBob->getCore()->MyLevel->CurMakeData->GenData;
 	}
@@ -545,7 +545,7 @@ namespace CloudberryKingdom
 		MaxJumpAccelMultiple = JumpAccelModifier = JumpLengthModifier = 1;
 	}
 
-	void BobPhsx::ToSprites( const std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
+	void BobPhsx::ToSprites( const std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
 	}
 
@@ -561,15 +561,15 @@ namespace CloudberryKingdom
 			InitSingleton();
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsx::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsx::Clone()
 	{
 		// FIXME: Verify MemberwiseClone() behavior.
-		std::shared_ptr<BobPhsx> newBob = std::make_shared<BobPhsx>();
+		boost::shared_ptr<BobPhsx> newBob = boost::make_shared<BobPhsx>();
 		CopyTo( newBob );
 		return newBob;
 	}
 
-	void BobPhsx::CopyTo( const std::shared_ptr<BobPhsx> &bob )
+	void BobPhsx::CopyTo( const boost::shared_ptr<BobPhsx> &bob )
 	{
 		bob->CustomPhsx = CustomPhsx;
 		bob->MyCustomPhsxData = MyCustomPhsxData;
@@ -659,7 +659,7 @@ namespace CloudberryKingdom
 		DisableJumpCount = Length;
 	}
 
-	void BobPhsx::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsx::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		MyBob = bob;
 
@@ -701,7 +701,7 @@ namespace CloudberryKingdom
 		RunAnimSpeed = 1 / ( ( scale - 1 ) *.16f + 1 );
 		ExplosionScale = 1.4f * ( ( scale - 1 ) *.5f + 1 );
 
-		std::shared_ptr<Cape> cape = MyBob->MyCape;
+		boost::shared_ptr<Cape> cape = MyBob->MyCape;
 		if ( cape != 0 )
 		{
 			cape->DoScaling = true;
@@ -820,12 +820,12 @@ namespace CloudberryKingdom
 		return HoldFlip != MyBob->PlayerObject->xFlip;
 	}
 
-	void BobPhsx::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsx::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		ObjectLandedOn = ThingLandedOn;
 	}
 
-	void BobPhsx::HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit )
+	void BobPhsx::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
 	{
 	}
 
@@ -865,7 +865,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsx::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
+	void BobPhsx::SideHit( ColType side, const boost::shared_ptr<BlockBase> &block )
 	{
 	}
 
@@ -873,7 +873,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool BobPhsx::SkipInteraction( const std::shared_ptr<BlockBase> &block )
+	bool BobPhsx::SkipInteraction( const boost::shared_ptr<BlockBase> &block )
 	{
 		if ( block->getCore()->MarkedForDeletion || !block->getCore()->Active || !block->getIsActive() || !block->getCore()->Real )
 			return true;
@@ -900,21 +900,21 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool BobPhsx::IsTopCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	bool BobPhsx::IsTopCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		return Col != ColType_NO_COL && ( Col == ColType_TOP || Col != ColType_BOTTOM && __max( MyBob->Box->Current->BL.Y, MyBob->Box->Target->BL.Y ) > box->Target->TR.Y - __max( -1.35 * getCore()->Data.Velocity.Y, 7 ) );
 	}
 
-	bool BobPhsx::IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block )
+	bool BobPhsx::IsBottomCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )
 	{
 		return Col == ColType_BOTTOM || Col != ColType_BOTTOM && getCore()->Data.Velocity.X != 0 && !OnGround && __min(MyBob->Box->Current->TR.Y, MyBob->Box->Target->TR.Y) < box->Target->BL.Y + __max(1.35 * getCore()->Data.Velocity.Y, 7);
 	}
 
-	void BobPhsx::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsx::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 	}
 
-	void BobPhsx::ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece )
+	void BobPhsx::ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 	}
 

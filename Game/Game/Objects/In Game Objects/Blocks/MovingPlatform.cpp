@@ -8,9 +8,9 @@ namespace CloudberryKingdom
 		Group = PieceQuad::ElevatorGroup;
 	}
 
-	const std::shared_ptr<BlockEmitter_Parameters> MovingPlatform::getMyParams() const
+	const boost::shared_ptr<BlockEmitter_Parameters> MovingPlatform::getMyParams() const
 	{
-		return std::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->getStyle()->FindParams(BlockEmitter_AutoGen::getInstance()) );
+		return boost::static_pointer_cast<BlockEmitter_Parameters>( getCore()->MyLevel->getStyle()->FindParams(BlockEmitter_AutoGen::getInstance()) );
 	}
 
 	bool MovingPlatform::PermissionToUse()
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void MovingPlatform::LandedOn( const std::shared_ptr<Bob> &bob )
+	void MovingPlatform::LandedOn( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( getCore()->MyLevel->PlayMode == 2 )
 		{
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 	void MovingPlatform::OnMarkedForDeletion()
 	{
 		if ( Parent != 0 )
-			Parent->RemovePlatform( std::static_pointer_cast<MovingPlatform>( shared_from_this() ) );
+			Parent->RemovePlatform( boost::static_pointer_cast<MovingPlatform>( shared_from_this() ) );
 
 		if ( !getCore()->DeletedByBob )
 			return;
@@ -81,14 +81,14 @@ namespace CloudberryKingdom
 
 	MovingPlatform::MovingPlatform( bool BoxesOnly )
 	{
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		getCore()->BoxesOnly = BoxesOnly;
 		MakeNew();
 	}
 
-	void MovingPlatform::Init( Vector2 center, Vector2 size, const std::shared_ptr<Level> &level, BoxStyle boxstyle )
+	void MovingPlatform::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, BoxStyle boxstyle )
 	{
 		MyBoxStyle = boxstyle;
 
@@ -215,9 +215,9 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void MovingPlatform::Clone( const std::shared_ptr<ObjectBase> &A )
+	void MovingPlatform::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<MovingPlatform> BlockA = std::dynamic_pointer_cast<MovingPlatform>( A );
+		boost::shared_ptr<MovingPlatform> BlockA = boost::dynamic_pointer_cast<MovingPlatform>( A );
 		getBlockCore()->Clone(A->getCore());
 
 		Parent = BlockA->Parent;

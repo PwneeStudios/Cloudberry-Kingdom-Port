@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	{
 		MinLoading += extra_wait;
 
-		HintText = std::make_shared<EzText>( hint, Resources::Font_Grobold42, 10000.f, true, true );
+		HintText = boost::make_shared<EzText>( hint, Resources::Font_Grobold42, 10000.f, true, true );
 		HintText->setScale( HintText->getScale() * .6125f );
 		CkColorHelper::_x_x_HappyBlueColor( HintText );
 		//HintText.OutlineColor = Color.Purple.ToVector4();
@@ -37,17 +37,17 @@ namespace CloudberryKingdom
 	LoadingScreen::LoadingScreen()
 	{
 		InitializeInstanceFields();
-		BackgroundQuad = std::make_shared<QuadClass>();
+		BackgroundQuad = boost::make_shared<QuadClass>();
 		BackgroundQuad->SetToDefault();
 
 		BackgroundQuad->Set( _T( "LoadingStrip" ) );
 		BackgroundQuad->Quad_Renamed.SetColor( Color::Gray );
 
-		BlackQuad = std::make_shared<QuadClass>();
+		BlackQuad = boost::make_shared<QuadClass>();
 		BlackQuad->SetToDefault();
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 0 ) );
 
-		LoadingText = std::make_shared<EzText>( Localization::Words_LOADING, Resources::Font_Grobold42, true, true );
+		LoadingText = boost::make_shared<EzText>( Localization::Words_LOADING, Resources::Font_Grobold42, true, true );
 		LoadingText->setScale( LoadingText->getScale() * .445f );
 		LoadingText->FixedToCamera = true;
 		LoadingText->_Pos = Vector2( 21, -106 );
@@ -59,16 +59,16 @@ namespace CloudberryKingdom
 		}
 		TextObject.reset();
 
-		std::shared_ptr<BobPhsx> type;
+		boost::shared_ptr<BobPhsx> type;
 		//if (Tools.WorldMap != null)
 		if ( Tools::CurGameData == 0 || Tools::CurGameData->DefaultHeroType == 0 )
 			type = Tools::WorldMap->DefaultHeroType;
 		else
 			type = Tools::CurGameData->DefaultHeroType;
 
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 		{
-			TextObject = std::make_shared<EzText>( _T( "?" ), Resources::Font_Grobold42, true, true );
+			TextObject = boost::make_shared<EzText>( _T( "?" ), Resources::Font_Grobold42, true, true );
 			CkColorHelper::_x_x_HappyBlueColor( TextObject );
 			TextObject->setScale( TextObject->getScale() * 1.25f );
 			TextObject->FixedToCamera = true;
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			CenterObject = std::make_shared<ObjectClass>( type->Prototype->PlayerObject, false, false );
+			CenterObject = boost::make_shared<ObjectClass>( type->Prototype->PlayerObject, false, false );
 			ObjectClass_PostConstruct_3params( CenterObject, type->Prototype->PlayerObject, false, false );
 
 			Vector2 size = CenterObject->BoxList[ 0 ]->Size();
@@ -92,14 +92,14 @@ namespace CloudberryKingdom
 
 			if ( type == BobPhsxBox::getInstance() )
 			{
-				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
+				for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
 					if ( ( *quad )->MyDrawOrder == ObjectDrawOrder_WITH_OUTLINE )
 						( *quad )->Show = false;
 			}
 
-			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
+			if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 			{
-				for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
+				for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = CenterObject->QuadList.begin(); quad != CenterObject->QuadList.end(); ++quad )
 					( *quad )->MyDrawOrder = ObjectDrawOrder_WITH_OUTLINE;
 			}
 		}
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void LoadingScreen::Draw( const std::shared_ptr<Camera> &cam )
+	void LoadingScreen::Draw( const boost::shared_ptr<Camera> &cam )
 	{
 		Tools::Device->Clear( Color::Black );
 		BackgroundQuad->FullScreen( cam );

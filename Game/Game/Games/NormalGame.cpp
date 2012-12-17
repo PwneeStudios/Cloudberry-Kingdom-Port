@@ -11,8 +11,8 @@ namespace CloudberryKingdom
 
 	struct MakeNormalGameJob : public Job
 	{
-		std::shared_ptr<NormalGameData> MyGame;
-		MakeNormalGameJob( std::shared_ptr<NormalGameData> game ) :
+		boost::shared_ptr<NormalGameData> MyGame;
+		MakeNormalGameJob( boost::shared_ptr<NormalGameData> game ) :
 			MyGame( game )
 		{
 
@@ -24,14 +24,14 @@ namespace CloudberryKingdom
 		}
 	};
 
-	std::shared_ptr<GameData> NormalFactory::Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
+	boost::shared_ptr<GameData> NormalFactory::Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )
 	{
-		std::shared_ptr<NormalGameData> temp = std::make_shared<NormalGameData>( data, MakeInBackground );
+		boost::shared_ptr<NormalGameData> temp = boost::make_shared<NormalGameData>( data, MakeInBackground );
 		NormalGameData_Construct( temp, data, MakeInBackground );
-		return std::static_pointer_cast<GameData>( temp );
+		return boost::static_pointer_cast<GameData>( temp );
 	}
 
-	void NormalGameData::SetCreatedBobParameters( const std::shared_ptr<Bob> &bob )
+	void NormalGameData::SetCreatedBobParameters( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->Immortal = false;
 		bob->ScreenWrap = false;
@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		MyLevel->AllowRecording = true;
 	}
 
-	std::shared_ptr<GameFactory> NormalGameData::Factory = std::make_shared<NormalFactory>();
+	boost::shared_ptr<GameFactory> NormalGameData::Factory = boost::make_shared<NormalFactory>();
 
 	NormalGameData::NormalGameData() :
 		_MakeThreadMakeInBackground( false )
@@ -51,14 +51,14 @@ namespace CloudberryKingdom
 		assert( !"Should not be called." );
 	}
 
-	NormalGameData::NormalGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
+	NormalGameData::NormalGameData( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground ) :
 		_MakeThreadMakeInBackground( false )
 	{
 		// Now in NormalGameData_Construct.
 		// Init( LevelSeed, MakeInBackground );
 	}
 
-	void NormalGameData::Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	void NormalGameData::Init( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
 		GameData::Init();
 
@@ -82,14 +82,14 @@ namespace CloudberryKingdom
 		_MakeThreadMakeInBackground = MakeInBackground;
 		
 		// Using Oleg's threading
-		Job *job = new MakeNormalGameJob( std::static_pointer_cast<NormalGameData>( shared_from_this() ) );
+		Job *job = new MakeNormalGameJob( boost::static_pointer_cast<NormalGameData>( shared_from_this() ) );
 		SCHEDULER->RunJob( job );
 
 		// FIXME: Add threading.
 		//_MakeThreadFunc(); // WARNING: This is just to test the level construction without a thread.
 
 
-	//	std::shared_ptr<Thread> MakeThread = std::make_shared<Thread>( std::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
+	//	boost::shared_ptr<Thread> MakeThread = boost::make_shared<Thread>( boost::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
 	//	{
 	//#if defined(WINDOWS)
 	//		Name = _T( "MakeLevelThread" ),Priority = ThreadPriority::Normal,
@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 
 	void NormalGameData::_MakeThreadFunc()
 	{
-		std::shared_ptr<LevelSeedData> LevelSeed = _MakeThreadLevelSeed;
+		boost::shared_ptr<LevelSeedData> LevelSeed = _MakeThreadLevelSeed;
 		bool MakeInBackground = _MakeThreadMakeInBackground;
 
 		// FIXME: Related to threading.
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 	//	const int tempVector[] = { 3 };
 	//	Thread::CurrentThread->SetProcessorAffinity( VecFromArray( tempVector ) );
 	//#endif
-	//	Tools::TheGame->Exiting += std::make_shared<EventHandler<EventArgs*> >( shared_from_this(), &NormalGameData::KillThread );
+	//	Tools::TheGame->Exiting += boost::make_shared<EventHandler<EventArgs*> >( shared_from_this(), &NormalGameData::KillThread );
 
 		MyLevel = LevelSeed->MakeLevel( shared_from_this() );
 
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 		{
 			Tools::AutoLoopDelay++;
 			if ( Tools::AutoLoopDelay == 20 || Tools::AutoLoopDelay == 40 )
-				for ( std::vector<std::shared_ptr<EzSound> >::const_iterator snd = Tools::SoundWad->SoundList.begin(); snd != Tools::SoundWad->SoundList.end(); ++snd )
+				for ( std::vector<boost::shared_ptr<EzSound> >::const_iterator snd = Tools::SoundWad->SoundList.begin(); snd != Tools::SoundWad->SoundList.end(); ++snd )
 					( *snd )->Play();
 			if ( Tools::AutoLoopDelay > 60 )
 			{
@@ -203,12 +203,12 @@ namespace CloudberryKingdom
 			MyLevel->StartRecording();
 	}
 
-	void NormalGameData::BobDie( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob )
+	void NormalGameData::BobDie( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob )
 	{
 		GameData::BobDie( level, bob );
 	}
 
-	void NormalGameData::BobDoneDying( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob )
+	void NormalGameData::BobDoneDying( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob )
 	{
 		GameData::BobDoneDying( level, bob );
 	}

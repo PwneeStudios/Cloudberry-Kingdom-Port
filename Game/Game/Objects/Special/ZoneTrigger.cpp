@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	ZoneTrigger::ZoneTrigger()
 	{
-		Box = std::make_shared<AABox>();
+		Box = boost::make_shared<AABox>();
 
 		MakeNew();
 	}
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		Box->Move( shift );
 	}
 
-	void ZoneTrigger::Interact( const std::shared_ptr<Bob> &bob )
+	void ZoneTrigger::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( MyContainsEvent == 0 )
 			return;
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 			return;
 		bool Overlap = Phsx::BoxBoxOverlap( bob->Box, Box );
 		if ( Overlap )
-			MyContainsEvent->Apply( std::static_pointer_cast<ZoneTrigger>( shared_from_this() ) );
+			MyContainsEvent->Apply( boost::static_pointer_cast<ZoneTrigger>( shared_from_this() ) );
 	}
 
 	void ZoneTrigger::Draw()
@@ -55,11 +55,11 @@ namespace CloudberryKingdom
 		//    Box.Draw(Tools.QDrawer, Color.Teal, 30);
 	}
 
-	void ZoneTrigger::Clone( const std::shared_ptr<ObjectBase> &A )
+	void ZoneTrigger::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<ZoneTrigger> TriggerA = std::dynamic_pointer_cast<ZoneTrigger>( A );
+		boost::shared_ptr<ZoneTrigger> TriggerA = boost::dynamic_pointer_cast<ZoneTrigger>( A );
 		Box->Initialize( TriggerA->Box->Current->Center, TriggerA->Box->Current->Size );
 		MyContainsEvent = TriggerA->MyContainsEvent;
 	}

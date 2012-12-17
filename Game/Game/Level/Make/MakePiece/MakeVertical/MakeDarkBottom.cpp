@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	MakeDarkBottom::MakeDarkBottom( const std::shared_ptr<Level> &level ) : MakeFinalDoorVertical( level )
+	MakeDarkBottom::MakeDarkBottom( const boost::shared_ptr<Level> &level ) : MakeFinalDoorVertical( level )
 	{
 	}
 
@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		float MoveAll = 1450;
 
 		// Add dark bottom region
-		std::shared_ptr<Region> region = MakeMagic( Region, ( MadeDoor->getPos() + Vector2(0, 100 - MoveAll), Vector2(5000, 2000) ) );
+		boost::shared_ptr<Region> region = MakeMagic( Region, ( MadeDoor->getPos() + Vector2(0, 100 - MoveAll), Vector2(5000, 2000) ) );
 		region->AttachedDoor = MadeDoor;
 		MyLevel->AddObject( region );
 

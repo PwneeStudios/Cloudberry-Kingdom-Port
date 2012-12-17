@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	ListSelectPanel::OnSelectProxy::OnSelectProxy( const std::shared_ptr<ListSelectPanel> &lsp )
+	ListSelectPanel::OnSelectProxy::OnSelectProxy( const boost::shared_ptr<ListSelectPanel> &lsp )
 	{
 		this->lsp = lsp;
 	}
@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		lsp->OnSelect();
 	}
 
-	ListSelectPanel::BackProxy::BackProxy( const std::shared_ptr<ListSelectPanel> &lsp )
+	ListSelectPanel::BackProxy::BackProxy( const boost::shared_ptr<ListSelectPanel> &lsp )
 	{
 		this->lsp = lsp;
 	}
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		lsp->Back();
 	}
 
-	ListSelectPanel::SelectProxy::SelectProxy( const std::shared_ptr<ListSelectPanel> &lsp )
+	ListSelectPanel::SelectProxy::SelectProxy( const boost::shared_ptr<ListSelectPanel> &lsp )
 	{
 		this->lsp = lsp;
 	}
@@ -49,9 +49,9 @@ namespace CloudberryKingdom
 	void ListSelectPanel::SetIndexViaAssociated( int index )
 	{
 		int FindIndex = 0;
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyList->MyList.begin(); item != MyList->MyList.end(); ++item )
 		{
-			if ( std::static_pointer_cast<WrappedInt>( ( *item )->MyObject )->MyInt == index )
+			if ( boost::static_pointer_cast<WrappedInt>( ( *item )->MyObject )->MyInt == index )
 				break;
 			FindIndex++;
 		}
@@ -64,15 +64,15 @@ namespace CloudberryKingdom
 
 	int ListSelectPanel::GetAssociatedIndex()
 	{
-		return std::static_pointer_cast<WrappedInt>( MyList->getCurObj() )->MyInt;
+		return boost::static_pointer_cast<WrappedInt>( MyList->getCurObj() )->MyInt;
 	}
 
-	//ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
-	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) :
+	//ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const boost::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) : CkBaseMenu( false )
+	ListSelectPanel::ListSelectPanel( int Control, Localization::Words Header, const boost::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex ) :
 			Header( static_cast<Localization::Words>( 0 ) ), HoldIndex( 0 ), ClrSelectIndex( 0 )
 	{
 	}
-	std::shared_ptr<ListSelectPanel> ListSelectPanel::ListSelectPanel_Construct( int Control, Localization::Words Header, const std::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex )
+	boost::shared_ptr<ListSelectPanel> ListSelectPanel::ListSelectPanel_Construct( int Control, Localization::Words Header, const boost::shared_ptr<CharacterSelect> &Parent, int ClrSelectIndex )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<ListSelectPanel>( shared_from_this() );
+		return boost::static_pointer_cast<ListSelectPanel>( shared_from_this() );
 	}
 
 	void ListSelectPanel::OnSelect()
@@ -102,43 +102,43 @@ namespace CloudberryKingdom
 		setSlideLength( 0 );
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
-		MyMenu = std::make_shared<Menu>( false );
+		MyPile = boost::make_shared<DrawPile>();
+		MyMenu = boost::make_shared<Menu>( false );
 		EnsureFancy();
 
-		MyMenu->OnB = Cast::ToMenu( std::make_shared<BackProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
+		MyMenu->OnB = Cast::ToMenu( boost::make_shared<BackProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
+		MyMenu->OnA = Cast::ToMenu( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 
-		MyList = std::make_shared<MenuList>();
+		MyList = boost::make_shared<MenuList>();
 		MyList->Name = _T( "list" );
 		MyList->Center = true;
-		MyList->OnIndexSelect = std::make_shared<OnSelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) );
-		MyList->setGo( Cast::ToItem( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) );
+		MyList->OnIndexSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) );
+		MyList->setGo( Cast::ToItem( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) );
 		MyMenu->Add( MyList );
 
 		//var Done = new MenuItem(new EzText("Use", ItemFont));
-		std::shared_ptr<MenuItem> Done = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_USE, ItemFont ) );
+		boost::shared_ptr<MenuItem> Done = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_USE, ItemFont ) );
 		Done->Name = _T( "Done" );
-		Done->setGo( Cast::ToItem( std::make_shared<SelectProxy>( std::static_pointer_cast<ListSelectPanel>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
+		Done->setGo( Cast::ToItem( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( Done );
 
 		//var BackButton = new MenuItem(new EzText("{pBackArrow2,80,?}", ItemFont));
 		//var BackButton = new MenuItem(new EzText("Cancel", ItemFont));
-		std::shared_ptr<MenuItem> BackButton = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) );
+		boost::shared_ptr<MenuItem> BackButton = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) );
 		BackButton->Name = _T( "Cancel" );
-		BackButton->setGo( Cast::ToItem( std::make_shared<BackProxy>( std::static_pointer_cast<ListSelectPanel>( std::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
+		BackButton->setGo( Cast::ToItem( boost::make_shared<BackProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( BackButton );
 
-		MyPile->Add( std::make_shared<EzText>( Header, Resources::Font_Grobold42, true ), _T( "Header" ) );
+		MyPile->Add( boost::make_shared<EzText>( Header, Resources::Font_Grobold42, true ), _T( "Header" ) );
 
-		CharacterSelect::Shift( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
 	void ListSelectPanel::OnAdd()
 	{
 		 CkBaseMenu::OnAdd();
 
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "list" ) );
 		if ( _item != 0 )
 		{
@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -1418.571f, -484.127f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{

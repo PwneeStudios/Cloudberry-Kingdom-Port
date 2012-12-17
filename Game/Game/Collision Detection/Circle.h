@@ -32,11 +32,11 @@ namespace CloudberryKingdom
 
 		void Move( Vector2 shift );
 
-		void Clone( const std::shared_ptr<CircleBox> &A );
+		void Clone( const boost::shared_ptr<CircleBox> &A );
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 		void Draw( Color color );
 
@@ -55,22 +55,22 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Performs a collision detection between the circle and a list of tiered boxes associated with the Bob.
 		/// </summary>
-		bool BoxOverlap_Tiered( const std::shared_ptr<ObjectData> &Core, const std::shared_ptr<Bob> &bob, const std::shared_ptr<AutoGen> &singleton );
+		bool BoxOverlap_Tiered( const boost::shared_ptr<ObjectData> &Core, const boost::shared_ptr<Bob> &bob, const boost::shared_ptr<AutoGen> &singleton );
 
 		/// <summary>
 		/// Returns true if the box overlaps the circle
 		/// </summary>
-		bool BoxOverlap( const std::shared_ptr<AABox> &box );
+		bool BoxOverlap( const boost::shared_ptr<AABox> &box );
 
 		/// <summary>
 		/// Whether the circle is contained in the FloatRectangle
 		/// </summary>
-		bool ContainedIn( const std::shared_ptr<FloatRectangle> &rect );
+		bool ContainedIn( const boost::shared_ptr<FloatRectangle> &rect );
 
 		/// <summary>
 		/// Whether the circle is contained in the AABox
 		/// </summary>
-		bool ContainedIn( const std::shared_ptr<AABox> &box );
+		bool ContainedIn( const boost::shared_ptr<AABox> &box );
 
 		/// <summary>
 		/// Checks if a vertical line segment from (x,y1) to (x,y2) intersects the circle.

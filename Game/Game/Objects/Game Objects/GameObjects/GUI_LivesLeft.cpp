@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	GUI_LivesLeft::BringStartDelayHelper::BringStartDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::BringStartDelayHelper::BringStartDelayHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	GUI_LivesLeft::BringShowLengthHelper::BringShowLengthHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::BringShowLengthHelper::BringShowLengthHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -25,10 +25,10 @@ namespace CloudberryKingdom
 	void GUI_LivesLeft::BringShowLengthHelper::Apply()
 	{
 		guiLl->MyPile->AlphaVel = guiLl->FadeOutVel;
-		guiLl->MyGame->CinematicToDo( guiLl->StartDelay, std::make_shared<BringStartDelayHelper>( guiLl ) );
+		guiLl->MyGame->CinematicToDo( guiLl->StartDelay, boost::make_shared<BringStartDelayHelper>( guiLl ) );
 	}
 
-	GUI_LivesLeft::BringInitialDelayHelper::BringInitialDelayHelper( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::BringInitialDelayHelper::BringInitialDelayHelper( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -36,10 +36,10 @@ namespace CloudberryKingdom
 	void GUI_LivesLeft::BringInitialDelayHelper::Apply()
 	{
 		guiLl->MyPile->AlphaVel = guiLl->FadeInVel;
-		guiLl->MyGame->CinematicToDo( guiLl->ShowLength, std::make_shared<BringShowLengthHelper>( guiLl ) );
+		guiLl->MyGame->CinematicToDo( guiLl->ShowLength, boost::make_shared<BringShowLengthHelper>( guiLl ) );
 	}
 
-	GUI_LivesLeft::OnResetProxy::OnResetProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::OnResetProxy::OnResetProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 		guiLl->OnReset();
 	}
 
-	GUI_LivesLeft::OnDoneDyingProxy::OnDoneDyingProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::OnDoneDyingProxy::OnDoneDyingProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 		guiLl->OnDoneDying();
 	}
 
-	GUI_LivesLeft::OnDeathProxy::OnDeathProxy( const std::shared_ptr<GUI_LivesLeft> &guiLl )
+	GUI_LivesLeft::OnDeathProxy::OnDeathProxy( const boost::shared_ptr<GUI_LivesLeft> &guiLl )
 	{
 		this->guiLl = guiLl;
 	}
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 		LastLife( 0 )
 	{
 	}
-	std::shared_ptr<GUI_LivesLeft> GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
+	boost::shared_ptr<GUI_LivesLeft> GUI_LivesLeft::GUI_LivesLeft_Construct( int Lives )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
@@ -111,12 +111,12 @@ namespace CloudberryKingdom
 
 		_NumLives = Lives;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		MyPile->Add( std::make_shared<QuadClass>( _T( "Bob_Stand_0001" ), 130.f, true ), _T( "Bob" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( _T( "Bob_Stand_0001" ), 130.f, true ), _T( "Bob" ) );
 
-		LivesLeftText = std::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 450.f, false, true );
+		LivesLeftText = boost::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 450.f, false, true );
 		LivesLeftText->Name = _T( "Text" );
 		LivesLeftText->setScale( .53f );
 		LivesLeftText->setPos( Vector2( 187, -16 ) );
@@ -133,19 +133,19 @@ namespace CloudberryKingdom
 		// Hide initially
 		MyPile->setAlpha( 0 );
 
-		return std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() );
 	}
 
 	void GUI_LivesLeft::SetPos()
 	{
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Text" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 195.3334f, -43.77777f ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Bob" ) );
 		if ( _q != 0 )
 		{
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 
 		// Fade in and out
 		MyPile->setAlpha( 0 );
-		MyGame->WaitThenDo( InitialDelay, std::make_shared<BringInitialDelayHelper>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ), _T( "Start lives left bring" ), true, false );
+		MyGame->WaitThenDo( InitialDelay, boost::make_shared<BringInitialDelayHelper>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ), _T( "Start lives left bring" ), true, false );
 	}
 
 	void GUI_LivesLeft::Reset( bool BoxesOnly )
@@ -198,16 +198,16 @@ namespace CloudberryKingdom
 		// Black background
 		if ( UseBlackBack )
 		{
-			std::shared_ptr<QuadClass> Black = std::make_shared<QuadClass>( _T( "White" ), 1.f );
+			boost::shared_ptr<QuadClass> Black = boost::make_shared<QuadClass>( _T( "White" ), 1.f );
 			Black->FullScreen( MyGame->getCam() );
 			Black->Quad_Renamed.SetColor( Color::Black );
 			Black->Scale( 2 );
 			MyPile->Insert( 0, Black );
 		}
 
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
+		MyGame->ToDoOnReset.push_back( boost::make_shared<OnResetProxy>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 		//MyGame.ToDoOnDoneDying.Add(OnDoneDying);
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
+		MyGame->ToDoOnDeath.push_back( boost::make_shared<OnDeathProxy>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( MyGame->MyLevel != 0 )
 			PreventResetOnLastLife( MyGame->MyLevel );
@@ -215,9 +215,9 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnReset()
 	{
-		MyGame->ToDoOnReset.push_back( std::make_shared<OnResetProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
+		MyGame->ToDoOnReset.push_back( boost::make_shared<OnResetProxy>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		 if ( !MyGame->FreeReset )
 			setNumLives( getNumLives() - 1 );
@@ -225,7 +225,7 @@ namespace CloudberryKingdom
 		PreventResetOnLastLife( level );
 	}
 
-	void GUI_LivesLeft::PreventResetOnLastLife( const std::shared_ptr<Level> &level )
+	void GUI_LivesLeft::PreventResetOnLastLife( const boost::shared_ptr<Level> &level )
 	{
 		// If only 1 life remains.
 		if ( getNumLives() == LastLife )
@@ -243,13 +243,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDoneDying()
 	{
-		MyGame->ToDoOnDoneDying.push_back( std::make_shared<OnDoneDyingProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
+		MyGame->ToDoOnDoneDying.push_back( boost::make_shared<OnDoneDyingProxy>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
+				OnOutOfLives->Apply( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
 
 			Release();
 			return;
@@ -258,13 +258,13 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::OnDeath()
 	{
-		MyGame->ToDoOnDeath.push_back( std::make_shared<OnDeathProxy>( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
+		MyGame->ToDoOnDeath.push_back( boost::make_shared<OnDeathProxy>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ) );
 
 		if ( getNumLives() == LastLife )
 		{
 			//Core.MyLevel.MyGame.AddGameObject(new GameOverPanel());
 			if ( OnOutOfLives != 0 )
-				OnOutOfLives->Apply( std::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
+				OnOutOfLives->Apply( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) );
 
 			Release();
 			return;
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::InitializeInstanceFields()
 	{
-		OnOutOfLives = std::make_shared<Multicaster_1<std::shared_ptr<GUI_LivesLeft> > >();
+		OnOutOfLives = boost::make_shared<Multicaster_1<boost::shared_ptr<GUI_LivesLeft> > >();
 		_NumLives = 2;
 		UseBlackBack = false;
 		PauseOnShow = false;

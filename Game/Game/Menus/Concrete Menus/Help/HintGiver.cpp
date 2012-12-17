@@ -33,16 +33,16 @@ namespace CloudberryKingdom
 		PlayerManager::SavePlayerData->Changed = true;
 	}
 
-	std::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
+	boost::shared_ptr<HintGiver> Hints::CurrentGiver = 0;
 
-	HintGiver::Check_QuickSpawnHelper::Check_QuickSpawnHelper( const std::shared_ptr<HintGiver> &hg )
+	HintGiver::Check_QuickSpawnHelper::Check_QuickSpawnHelper( const boost::shared_ptr<HintGiver> &hg )
 	{
 		this->hg = hg;
 	}
 
 	void HintGiver::Check_QuickSpawnHelper::Apply()
 	{
-		std::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
+		boost::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
 		hint->SetText( HintGiver::getQuickSpawnHint() );
 
 		/*
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		hg->Call( hint );
 	}
 
-	HintGiver::Check_YForHelpHelper::Check_YForHelpHelper( const std::shared_ptr<HintGiver> &hg )
+	HintGiver::Check_YForHelpHelper::Check_YForHelpHelper( const boost::shared_ptr<HintGiver> &hg )
 	{
 		this->hg = hg;
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		if ( Hints::YForHelpNum > 10 )
 			return;
 
-		std::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
+		boost::shared_ptr<HintBlurb> hint = MakeMagic( HintBlurb, () );
 		hint->SetText( HintGiver::getPowerupHint() );
 
 		/*
@@ -75,16 +75,16 @@ namespace CloudberryKingdom
 	}
 
 	HintGiver::HintGiver() { }
-	std::shared_ptr<HintGiver> HintGiver::HintGiver_Construct()
+	boost::shared_ptr<HintGiver> HintGiver::HintGiver_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
 		Active = true;
 		PauseOnPause = true;
 
-		Hints::CurrentGiver =  std::static_pointer_cast<HintGiver>( shared_from_this() );
+		Hints::CurrentGiver =  boost::static_pointer_cast<HintGiver>( shared_from_this() );
 
-		return std::static_pointer_cast<HintGiver>( shared_from_this() );
+		return boost::static_pointer_cast<HintGiver>( shared_from_this() );
 	}
 
 	void HintGiver::ReleaseBody()
@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 
 	void HintGiver::Check_QuickSpawn()
 	{
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// "Quickspawn"
 		//int FirstHint = 12, SecondHint = 36, ThirdHint = 70;
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		{
 			Hints::IncrQuickSpawnNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_QuickSpawnHelper>( std::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 5, boost::make_shared<Check_QuickSpawnHelper>( boost::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
 		}
 	}
 
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 
 	void HintGiver::Check_YForHelp()
 	{
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 
 		// "Press (Y) for help"
 		//int FirstHint = 24, SecondHint = 50, ThirdHint = 90;
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 		{
 			Hints::IncrYForHelpNum();
 
-			MyGame->WaitThenDo( 5, std::make_shared<Check_YForHelpHelper>( std::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
+			MyGame->WaitThenDo( 5, boost::make_shared<Check_YForHelpHelper>( boost::static_pointer_cast<HintGiver>( shared_from_this() ) ) );
 		}
 	}
 }

@@ -3,15 +3,15 @@
 namespace CloudberryKingdom
 {
 
-	void ConveyorBlock_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void ConveyorBlock_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_CONVEYOR ) ) );
 		}
@@ -23,9 +23,9 @@ namespace CloudberryKingdom
 		Width = Param( PieceSeed, DifficultyHelper::InterpRestrict19( 240, 60, u->Get( Upgrade_CONVEYOR ) ) );
 	}
 
-	std::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = std::make_shared<ConveyorBlock_AutoGen>();
+	boost::shared_ptr<ConveyorBlock_AutoGen> ConveyorBlock_AutoGen::instance = boost::make_shared<ConveyorBlock_AutoGen>();
 
-	const std::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance()
+	const boost::shared_ptr<ConveyorBlock_AutoGen> &ConveyorBlock_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -35,39 +35,39 @@ namespace CloudberryKingdom
 		Do_WeightedPreFill_1 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> ConveyorBlock_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> ConveyorBlock_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<ConveyorBlock_Parameters> Params = std::make_shared<ConveyorBlock_Parameters>();
+		boost::shared_ptr<ConveyorBlock_Parameters> Params = boost::make_shared<ConveyorBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void ConveyorBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void ConveyorBlock_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void ConveyorBlock_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void ConveyorBlock_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	std::shared_ptr<ConveyorBlock_Parameters> ConveyorBlock_AutoGen::GetParams( const std::shared_ptr<Level> &level )
+	boost::shared_ptr<ConveyorBlock_Parameters> ConveyorBlock_AutoGen::GetParams( const boost::shared_ptr<Level> &level )
 	{
-		return std::static_pointer_cast<ConveyorBlock_Parameters>( level->getStyle()->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
+		return boost::static_pointer_cast<ConveyorBlock_Parameters>( level->getStyle()->FindParams( ConveyorBlock_AutoGen::getInstance() ) );
 	}
 
-	std::shared_ptr<ObjectBase> ConveyorBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> ConveyorBlock_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get ConveyorBlock parameters
-		std::shared_ptr<ConveyorBlock_Parameters> Params = GetParams( level );
+		boost::shared_ptr<ConveyorBlock_Parameters> Params = GetParams( level );
 
 		int Width = static_cast<int>( Params->Width.GetVal( pos ) );
 		float Height = 60;
@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 
 		speed *= -1; //level.Rnd.RndBit();
 
-		std::shared_ptr<ConveyorBlock> conveyblock = std::static_pointer_cast<ConveyorBlock>( level->getRecycle()->GetObject(ObjectType_CONVEYOR_BLOCK, false) );
+		boost::shared_ptr<ConveyorBlock> conveyblock = boost::static_pointer_cast<ConveyorBlock>( level->getRecycle()->GetObject(ObjectType_CONVEYOR_BLOCK, false) );
 		conveyblock->Init( pos, size );
 		conveyblock->Speed = speed;
 

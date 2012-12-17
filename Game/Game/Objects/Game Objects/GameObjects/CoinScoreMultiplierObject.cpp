@@ -3,17 +3,17 @@
 namespace CloudberryKingdom
 {
 
-	CoinScoreMultiplierObject::OnCoinGrabProxy::OnCoinGrabProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo )
+	CoinScoreMultiplierObject::OnCoinGrabProxy::OnCoinGrabProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo )
 	{
 		this->csmo = csmo;
 	}
 
-	void CoinScoreMultiplierObject::OnCoinGrabProxy::Apply( const std::shared_ptr<ObjectBase> &obj )
+	void CoinScoreMultiplierObject::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		csmo->OnCoinGrab( obj );
 	}
 
-	CoinScoreMultiplierObject::OnLevelRetryProxy::OnLevelRetryProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo )
+	CoinScoreMultiplierObject::OnLevelRetryProxy::OnLevelRetryProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo )
 	{
 		this->csmo = csmo;
 	}
@@ -23,12 +23,12 @@ namespace CloudberryKingdom
 		csmo->OnLevelRetry();
 	}
 
-	CoinScoreMultiplierObject::OnCalculateCoinScoreMultiplierProxy::OnCalculateCoinScoreMultiplierProxy( const std::shared_ptr<CoinScoreMultiplierObject> &csmo )
+	CoinScoreMultiplierObject::OnCalculateCoinScoreMultiplierProxy::OnCalculateCoinScoreMultiplierProxy( const boost::shared_ptr<CoinScoreMultiplierObject> &csmo )
 	{
 		this->csmo = csmo;
 	}
 
-	void CoinScoreMultiplierObject::OnCalculateCoinScoreMultiplierProxy::Apply( const std::shared_ptr<GameData> &obj )
+	void CoinScoreMultiplierObject::OnCalculateCoinScoreMultiplierProxy::Apply( const boost::shared_ptr<GameData> &obj )
 	{
 		obj->CoinScoreMultiplier *= csmo->_CoinScoreMultiplier;
 	}
@@ -39,10 +39,10 @@ namespace CloudberryKingdom
 
 		ResetMultiplier();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
-		MyGame->OnLevelRetry->Add( std::make_shared<OnLevelRetryProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
+		MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>( boost::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
+		MyGame->OnLevelRetry->Add( boost::make_shared<OnLevelRetryProxy>( boost::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
 
-		MyGame->OnCalculateCoinScoreMultiplier->Add( std::make_shared<OnCalculateCoinScoreMultiplierProxy>( std::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
+		MyGame->OnCalculateCoinScoreMultiplier->Add( boost::make_shared<OnCalculateCoinScoreMultiplierProxy>( boost::static_pointer_cast<CoinScoreMultiplierObject>( shared_from_this() ) ) );
 	}
 
 	void CoinScoreMultiplierObject::ReleaseBody()
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		//UpdateGameMultiplier();                
 	}
 
-	void CoinScoreMultiplierObject::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
+	void CoinScoreMultiplierObject::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		setCoinScoreMultiplier( getCoinScoreMultiplier() + 1 );
 	}

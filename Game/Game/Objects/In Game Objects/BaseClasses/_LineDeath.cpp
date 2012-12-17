@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		MakeNew();
 	}
 
-	void _LineDeath::Interact( const std::shared_ptr<Bob> &bob )
+	void _LineDeath::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( Phsx::AABoxAndLineCollisionTest( bob->Box2, MyLine ) )
 		{

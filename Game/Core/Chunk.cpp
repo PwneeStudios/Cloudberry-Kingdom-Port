@@ -4,14 +4,14 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<Chunks> Chunks::Get( std::vector<unsigned char> Data )
+	boost::shared_ptr<Chunks> Chunks::Get( std::vector<unsigned char> Data )
 	{
-		return std::make_shared<Chunks>( Data, 0 );
+		return boost::make_shared<Chunks>( Data, 0 );
 	}
 
-	std::shared_ptr<Chunks> Chunks::Get( std::shared_ptr<Chunk> Chunk )
+	boost::shared_ptr<Chunks> Chunks::Get( boost::shared_ptr<Chunk> Chunk )
 	{
-		return std::make_shared<Chunks>( Chunk->Buffer, 8 );
+		return boost::make_shared<Chunks>( Chunk->Buffer, 8 );
 	}
 
 	Chunks::Chunks( std::vector<unsigned char> Data, int offset ) :
@@ -36,7 +36,7 @@ namespace CloudberryKingdom
 			return true;
 	}
 
-	const std::shared_ptr<Chunk> Chunks::GetChunk()
+	const boost::shared_ptr<Chunk> Chunks::GetChunk()
 	{
 		//int Type = BitConverter::ToInt32( Data, _Position );
 		//int Length = BitConverter::ToInt32( Data, _Position + 4 );
@@ -49,8 +49,8 @@ namespace CloudberryKingdom
 		//if ( Length <= 0 )
 		//	throw std::exception( _T( "Chunk length must be strictly positive. Are you loading a non-chunked file?" ) );
 
-		std::shared_ptr<Chunk> _Current = std::make_shared<Chunk>( Length );
-		_Current->Copy( Data.data(), _Position, Length );
+		boost::shared_ptr<Chunk> _Current = boost::make_shared<Chunk>( Length );
+		_Current->Copy( &Data[ 0 ], _Position, Length );
 		_Current->Type = Type;
 		_Current->Length = Length;
 
@@ -101,16 +101,16 @@ namespace CloudberryKingdom
 		Position = Size;
 	}
 
-	void Chunk::Finish( const std::shared_ptr<BinaryWriter> &writer )
+	void Chunk::Finish( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		SetTypeAndLength();
-		writer->Write( Buffer.data(), 0, Position );
+		writer->Write( &Buffer[ 0 ], 0, Position );
 	}
 
 	void Chunk::Finish( Chunk &ParentChunk )
 	{
 		SetTypeAndLength();
-		ParentChunk.Write( Buffer.data(), 0, Position );
+		ParentChunk.Write( &Buffer[ 0 ], 0, Position );
 	}
 
 	void Chunk::EnsureRoom( int Size )
@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 		const wchar_t *start = reinterpret_cast<const wchar_t *>(&Buffer[Position]);
 		std::wstring val(start, start + StringLength);
 		Position += StringLength * sizeof(wchar_t);
-		//std::shared_ptr<std::wstring> val = System::Text::Encoding::UTF8->GetString( Buffer, Position, StringLength );
+		//boost::shared_ptr<std::wstring> val = System::Text::Encoding::UTF8->GetString( Buffer, Position, StringLength );
 
 		//Position += StringLength;
 
@@ -250,9 +250,9 @@ namespace CloudberryKingdom
 		val = static_cast<Keys>( ReadInt() );
 	}
 
-	void Chunk::WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, int val )
+	void Chunk::WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, int val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -260,9 +260,9 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void Chunk::WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, bool val )
+	void Chunk::WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, bool val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -270,9 +270,9 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void Chunk::WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, float val )
+	void Chunk::WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, float val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -280,9 +280,9 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void Chunk::WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, const std::wstring &val )
+	void Chunk::WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, const std::wstring &val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -290,9 +290,9 @@ namespace CloudberryKingdom
 		chunk->Finish( writer );
 	}
 
-	void Chunk::WriteSingle( const std::shared_ptr<BinaryWriter> &writer, int type, Keys val )
+	void Chunk::WriteSingle( const boost::shared_ptr<BinaryWriter> &writer, int type, Keys val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( static_cast<int>( val ) );
@@ -302,7 +302,7 @@ namespace CloudberryKingdom
 
 	void Chunk::WriteSingle( int type, int val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -312,7 +312,7 @@ namespace CloudberryKingdom
 
 	void Chunk::WriteSingle( int type, bool val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -322,7 +322,7 @@ namespace CloudberryKingdom
 
 	void Chunk::WriteSingle( int type, float val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );
@@ -332,7 +332,7 @@ namespace CloudberryKingdom
 
 	void Chunk::WriteSingle( int type, const std::wstring &val )
 	{
-		std::shared_ptr<Chunk> chunk = std::make_shared<Chunk>();
+		boost::shared_ptr<Chunk> chunk = boost::make_shared<Chunk>();
 		chunk->Type = type;
 
 		chunk->Write( val );

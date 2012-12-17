@@ -4,10 +4,10 @@ namespace CloudberryKingdom
 {
 
 #if defined(PC_VERSION)
-	ControlItem::ControlItem( Localization::Words description, Keys key ) : MenuItem( std::make_shared<EzText>( description, Resources::Font_Grobold42, 2000.f, false, false, .65f ) )
+	ControlItem::ControlItem( Localization::Words description, Keys key ) : MenuItem( boost::make_shared<EzText>( description, Resources::Font_Grobold42, 2000.f, false, false, .65f ) )
 	{
 		MyKey = key;
-		MyQuad = std::make_shared<QuadClass>( _T( "White" ), 72.f );
+		MyQuad = boost::make_shared<QuadClass>( _T( "White" ), 72.f );
 		//MyQuad.Quad.SetColor(CustomControlsMenu.SecondaryKeyColor);
 		MyQuad->Quad_Renamed.SetColor( bColor( 240, 240, 240 ) );
 		SetKey( MyKey );
@@ -32,14 +32,14 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	CustomControlsMenu::ResetProxy::ResetProxy( const std::shared_ptr<CustomControlsMenu> &ccm )
+	CustomControlsMenu::ResetProxy::ResetProxy( const boost::shared_ptr<CustomControlsMenu> &ccm )
 	{
 		this->ccm = ccm;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetProxy::Apply( const std::shared_ptr<MenuItem> &_item )
+	void CustomControlsMenu::ResetProxy::Apply( const boost::shared_ptr<MenuItem> &_item )
 	{
 		ccm->Reset( _item );
 	}
@@ -116,84 +116,84 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetQuickspawn_KeyboardKey::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetQuickspawn_KeyboardKey::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetHelp_KeyboardKey::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetHelp_KeyboardKey::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Help_KeyboardKey->KeyboardKey );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetLeft_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetLeft_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Left_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetRight_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetRight_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Right_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetUp_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetUp_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Up_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetDown_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetDown_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::Down_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetReplayPrev_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetReplayPrev_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::ReplayPrev_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetReplayNext_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetReplayNext_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::ReplayNext_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetReplayToggle_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetReplayToggle_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::SlowMoToggle_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::ResetSlowMoToggle_Secondary::Apply( const std::shared_ptr<ControlItem> &_item )
+	void CustomControlsMenu::ResetSlowMoToggle_Secondary::Apply( const boost::shared_ptr<ControlItem> &_item )
 	{
 		_item->SetKey( ButtonCheck::SlowMoToggle_Secondary );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	CustomControlsMenu::InitOnButtonHelper::InitOnButtonHelper( const std::shared_ptr<CustomControlsMenu> &ccm )
+	CustomControlsMenu::InitOnButtonHelper::InitOnButtonHelper( const boost::shared_ptr<CustomControlsMenu> &ccm )
 	{
 		this->ccm = ccm;
 	}
 #endif
 
 #if defined(PC_VERSION)
-	bool CustomControlsMenu::InitOnButtonHelper::Apply( const std::shared_ptr<Menu> &_m )
+	bool CustomControlsMenu::InitOnButtonHelper::Apply( const boost::shared_ptr<Menu> &_m )
 	{
 		ccm->Save();
 		return ccm->MenuReturnToCaller( _m );
@@ -215,9 +215,9 @@ namespace CloudberryKingdom
 	void CustomControlsMenu::Save()
 	{
 		// Before we exit make sure secondary keys match up to what the user just specified.
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<ControlItem> citem = std::dynamic_pointer_cast<ControlItem>( *item );
+			boost::shared_ptr<ControlItem> citem = boost::dynamic_pointer_cast<ControlItem>( *item );
 			if ( 0 != citem )
 				citem->SetSecondaryKey->Apply( citem->MyKey );
 		}
@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::SetTextProperties( const std::shared_ptr<EzText> &text )
+	void CustomControlsMenu::SetTextProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetTextProperties( text );
 
@@ -236,7 +236,7 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void CustomControlsMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -245,12 +245,12 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::AddItem( const std::shared_ptr<MenuItem> &item )
+	void CustomControlsMenu::AddItem( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::AddItem( item );
 
 		// Add the associated quad
-		std::shared_ptr<ControlItem> citem = std::dynamic_pointer_cast<ControlItem>( item );
+		boost::shared_ptr<ControlItem> citem = boost::dynamic_pointer_cast<ControlItem>( item );
 		if ( 0 == citem )
 			return;
 
@@ -261,18 +261,18 @@ namespace CloudberryKingdom
 
 #if defined(PC_VERSION)
 	CustomControlsMenu::CustomControlsMenu() { }
-	std::shared_ptr<CustomControlsMenu> CustomControlsMenu::CustomControlsMenu_Construct()
+	boost::shared_ptr<CustomControlsMenu> CustomControlsMenu::CustomControlsMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<CustomControlsMenu>( shared_from_this() );
+		return boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1376.984f, 1077.035f ) );
 		Backdrop->setPos( Vector2( -18.6521f, -10.31725f ) );
@@ -297,13 +297,13 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	void CustomControlsMenu::Reset( const std::shared_ptr<MenuItem> &_item )
+	void CustomControlsMenu::Reset( const boost::shared_ptr<MenuItem> &_item )
 	{
 		ButtonCheck::Reset();
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<ControlItem> c = std::dynamic_pointer_cast<ControlItem>( *item );
+			boost::shared_ptr<ControlItem> c = boost::dynamic_pointer_cast<ControlItem>( *item );
 			if ( 0 == c )
 				continue;
 
@@ -315,12 +315,12 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBack()
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Customize
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( std::make_shared<ResetProxy>( std::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<ResetProxy>( boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
 		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 
 		ItemPos = Vector2( 698.9696f, 892.0638f );
@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 
 		FontScale = .8f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
 		MakeBackdrop();
@@ -360,76 +360,76 @@ namespace CloudberryKingdom
 		MakeInstructions();
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->setControl( getControl() );
 
 		MakeBack();
 		ItemSetup();
 
-		std::shared_ptr<ControlItem> item;
+		boost::shared_ptr<ControlItem> item;
 
-		item = std::make_shared<ControlItem>( Localization::Words_QUICK_SPAWN, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
+		item = boost::make_shared<ControlItem>( Localization::Words_QUICK_SPAWN, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
 		item->Name = _T( "quickspawn" );
-		item->SetSecondaryKey = std::make_shared<KeyQuickspawn_KeyboardKey>();
-		item->Reset = std::make_shared<ResetQuickspawn_KeyboardKey>();
+		item->SetSecondaryKey = boost::make_shared<KeyQuickspawn_KeyboardKey>();
+		item->Reset = boost::make_shared<ResetQuickspawn_KeyboardKey>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_POWER_UP_MENU, ButtonCheck::Help_KeyboardKey->KeyboardKey );
+		item = boost::make_shared<ControlItem>( Localization::Words_POWER_UP_MENU, ButtonCheck::Help_KeyboardKey->KeyboardKey );
 		item->Name = _T( "powerup" );
-		item->SetSecondaryKey = std::make_shared<KeyHelp_KeyboardKey>();
-		item->Reset = std::make_shared<ResetHelp_KeyboardKey>();
+		item->SetSecondaryKey = boost::make_shared<KeyHelp_KeyboardKey>();
+		item->Reset = boost::make_shared<ResetHelp_KeyboardKey>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_LEFT, ButtonCheck::Left_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_LEFT, ButtonCheck::Left_Secondary );
 		item->Name = _T( "left" );
-		item->SetSecondaryKey = std::make_shared<KeyLeft_Secondary>();
-		item->Reset = std::make_shared<ResetLeft_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyLeft_Secondary>();
+		item->Reset = boost::make_shared<ResetLeft_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_RIGHT, ButtonCheck::Right_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_RIGHT, ButtonCheck::Right_Secondary );
 		item->Name = _T( "right" );
-		item->SetSecondaryKey = std::make_shared<KeyRight_Secondary>();
-		item->Reset = std::make_shared<ResetRight_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyRight_Secondary>();
+		item->Reset = boost::make_shared<ResetRight_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_UP, ButtonCheck::Up_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_UP, ButtonCheck::Up_Secondary );
 		item->Name = _T( "up" );
-		item->SetSecondaryKey = std::make_shared<KeyUp_Secondary>();
-		item->Reset = std::make_shared<ResetUp_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyUp_Secondary>();
+		item->Reset = boost::make_shared<ResetUp_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_DOWN, ButtonCheck::Down_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_DOWN, ButtonCheck::Down_Secondary );
 		item->Name = _T( "down" );
-		item->SetSecondaryKey = std::make_shared<KeyDown_Secondary>();
-		item->Reset = std::make_shared<ResetDown_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyDown_Secondary>();
+		item->Reset = boost::make_shared<ResetDown_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_REPLAY_PREV, ButtonCheck::ReplayPrev_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_PREV, ButtonCheck::ReplayPrev_Secondary );
 		item->Name = _T( "replayprev" );
-		item->SetSecondaryKey = std::make_shared<KeyReplayPrev_Secondary>();
-		item->Reset = std::make_shared<ResetReplayPrev_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyReplayPrev_Secondary>();
+		item->Reset = boost::make_shared<ResetReplayPrev_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_REPLAY_NEXT, ButtonCheck::ReplayNext_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_NEXT, ButtonCheck::ReplayNext_Secondary );
 		item->Name = _T( "replaynext" );
-		item->SetSecondaryKey = std::make_shared<KeyReplayNext_Secondary>();
-		item->Reset = std::make_shared<ResetReplayNext_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyReplayNext_Secondary>();
+		item->Reset = boost::make_shared<ResetReplayNext_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_REPLAY_TOGGLE, ButtonCheck::SlowMoToggle_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_TOGGLE, ButtonCheck::SlowMoToggle_Secondary );
 		item->Name = _T( "replaytoggle" );
-		item->SetSecondaryKey = std::make_shared<KeyReplayToggle_Secondary>();
-		item->Reset = std::make_shared<ResetSlowMoToggle_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeyReplayToggle_Secondary>();
+		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();
 		AddItem( item );
 
-		item = std::make_shared<ControlItem>( Localization::Words_ACTIVATE_SLOW_MO, ButtonCheck::SlowMoToggle_Secondary );
+		item = boost::make_shared<ControlItem>( Localization::Words_ACTIVATE_SLOW_MO, ButtonCheck::SlowMoToggle_Secondary );
 		item->Name = _T( "toggleslowmo" );
-		item->SetSecondaryKey = std::make_shared<KeySlowMoToggle_Secondary>();
-		item->Reset = std::make_shared<ResetSlowMoToggle_Secondary>();
+		item->SetSecondaryKey = boost::make_shared<KeySlowMoToggle_Secondary>();
+		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();
 		AddItem( item );
 
 		ButtonCheck::KillSecondary();
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<InitOnButtonHelper>( std::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<InitOnButtonHelper>( boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) );
 
 		// Shift everything
 		EnsureFancy();
@@ -443,7 +443,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void CustomControlsMenu::SetPos()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Reset" ) );
 		if ( _item != 0 )
 		{
@@ -543,7 +543,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "instructions" ) );
 		if ( _t != 0 )
 		{
@@ -572,7 +572,7 @@ namespace CloudberryKingdom
 		if ( !Active || MyMenu == 0 || MyMenu->Released )
 			return;
 
-		std::shared_ptr<ControlItem> item = std::dynamic_pointer_cast<ControlItem>( MyMenu->getCurItem() );
+		boost::shared_ptr<ControlItem> item = boost::dynamic_pointer_cast<ControlItem>( MyMenu->getCurItem() );
 		if ( 0 != item )
 		{
 			for ( std::map<Keys, std::wstring>::const_iterator key = ButtonString::KeyToString.begin(); key != ButtonString::KeyToString.end(); ++key )

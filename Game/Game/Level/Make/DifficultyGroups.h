@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		struct UpgradeSequenceSingle
 		{
 		
-			void Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty );
+			void Apply( const boost::shared_ptr<PieceSeedData> &Piece, float Difficulty );
 
 		
 			Upgrade MyUpgrade;
@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		struct UpgradeSequence
 		{
 		
-			void Apply( const std::shared_ptr<PieceSeedData> &Piece, float Difficulty );
+			void Apply( const boost::shared_ptr<PieceSeedData> &Piece, float Difficulty );
 
 		
 			std::vector<UpgradeSequenceSingle> UpgradeList;
@@ -99,31 +99,31 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct FixedPieceModHelper : public Lambda_1<std::shared_ptr<PieceSeedData> >
+		struct FixedPieceModHelper : public Lambda_1<boost::shared_ptr<PieceSeedData> >
 		{
 		
 			float Difficulty;
-			std::shared_ptr<LevelSeedData> LevelSeed;
+			boost::shared_ptr<LevelSeedData> LevelSeed;
 
 		
-			FixedPieceModHelper( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
+			FixedPieceModHelper( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed );
 
-			void Apply( const std::shared_ptr<PieceSeedData> &piece );
+			void Apply( const boost::shared_ptr<PieceSeedData> &piece );
 		};
 
 		/// <summary>
 		/// Returns a function that modifies a PieceSeed's difficulty
 		/// </summary>
 	
-		static std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const std::shared_ptr<LevelSeedData> &LevelSeed );
+		static boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > FixedPieceMod( float Difficulty, const boost::shared_ptr<LevelSeedData> &LevelSeed );
 
-		static float HeroDifficultyMod( float Difficulty, const std::shared_ptr<BobPhsx> &hero );
+		static float HeroDifficultyMod( float Difficulty, const boost::shared_ptr<BobPhsx> &hero );
 
 		/// <summary>
 		/// Modify the upgrades for a PieceSeed.
 		/// Difficulty should range from 0 (Easy) to 4 (Masochistic)
 		/// </summary>
-		static void FixedPieceSeed( const std::shared_ptr<PieceSeedData> &piece, float Difficulty, const std::shared_ptr<BobPhsx> &hero );
+		static void FixedPieceSeed( const boost::shared_ptr<PieceSeedData> &piece, float Difficulty, const boost::shared_ptr<BobPhsx> &hero );
 
 	
 		static void InitFixedUpgrades();

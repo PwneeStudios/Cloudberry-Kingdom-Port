@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		_MyMatrixSignature = 0;
 	}
 
-	void HsvQuad::Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size )
+	void HsvQuad::Set( const boost::shared_ptr<SpriteInfo> &info, Vector2 Size )
 	{
 		QuadClass::Set( info, Size );
 
@@ -37,10 +37,10 @@ namespace CloudberryKingdom
 		QuadClass::Draw( Update, DrawQuad, DrawShadow );
 	}
 
-	std::shared_ptr<QuadClass> QuadClass::FindQuad( std::vector<std::shared_ptr<QuadClass> > &list, const std::wstring &Name )
+	boost::shared_ptr<QuadClass> QuadClass::FindQuad( std::vector<boost::shared_ptr<QuadClass> > &list, const std::wstring &Name )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<QuadClass> >::const_iterator quad = list.begin(); quad != list.end(); ++quad )
+		for ( std::vector<boost::shared_ptr<QuadClass> >::const_iterator quad = list.begin(); quad != list.end(); ++quad )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *quad )->Name, Name) == 0 )
 				return *quad;
@@ -152,7 +152,7 @@ namespace CloudberryKingdom
 		if ( FancyLightAlpha != 0 )
 			return;
 
-		FancyLightAlpha = std::make_shared<FancyVector2>();
+		FancyLightAlpha = boost::make_shared<FancyVector2>();
 	}
 
 	void QuadClass::SetDefaultShadow()
@@ -176,7 +176,7 @@ namespace CloudberryKingdom
 	{
 		if ( FancyPos != 0 )
 			FancyPos->Release();
-		FancyPos = std::make_shared<FancyVector2>();
+		FancyPos = boost::make_shared<FancyVector2>();
 		FancyPos->RelVal = Base.Origin;
 	}
 
@@ -295,14 +295,14 @@ namespace CloudberryKingdom
 			FancyAngle->setRelValX( value );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<Quad> &quad )
+	QuadClass::QuadClass( const boost::shared_ptr<Quad> &quad )
 	{
 		InitializeInstanceFields();
 		Initialize( 0, false, false );
 		Quad_Renamed = SimpleQuad( quad );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<QuadClass> &quad )
+	QuadClass::QuadClass( const boost::shared_ptr<QuadClass> &quad )
 	{
 		InitializeInstanceFields();
 		Initialize( 0, false, false );
@@ -315,25 +315,25 @@ namespace CloudberryKingdom
 		Initialize( 0, false, false );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<FancyVector2> &Center )
+	QuadClass::QuadClass( const boost::shared_ptr<FancyVector2> &Center )
 	{
 		InitializeInstanceFields();
 		Initialize( Center, false, false );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize )
+	QuadClass::QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize )
 	{
 		InitializeInstanceFields();
 		Initialize( Center, UseFancySize, false );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle )
+	QuadClass::QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle )
 	{
 		InitializeInstanceFields();
 		Initialize( Center, UseFancySize, UseFancyAngle );
 	}
 
-	void QuadClass::Initialize( const std::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle )
+	void QuadClass::Initialize( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle )
 	{
 		Quad_Renamed.Init();
 		Base.Init();
@@ -342,18 +342,18 @@ namespace CloudberryKingdom
 
 		if ( Center != 0 )
 		{
-			FancyPos = std::make_shared<FancyVector2>();
+			FancyPos = boost::make_shared<FancyVector2>();
 			FancyPos->Center = Center;
 		}
 
 		if ( UseFancySize )
 		{
-			FancyScale = std::make_shared<FancyVector2>();
+			FancyScale = boost::make_shared<FancyVector2>();
 		}
 
 		if ( UseFancyAngle )
 		{
-			FancyAngle = std::make_shared<FancyVector2>();
+			FancyAngle = boost::make_shared<FancyVector2>();
 		}
 	}
 
@@ -377,14 +377,14 @@ namespace CloudberryKingdom
 		Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( value );
 	}
 
-	std::shared_ptr<QuadClass> QuadClass::Clone()
+	boost::shared_ptr<QuadClass> QuadClass::Clone()
 	{
-		std::shared_ptr<QuadClass> cloned = std::make_shared<QuadClass>();
+		boost::shared_ptr<QuadClass> cloned = boost::make_shared<QuadClass>();
 		Clone( cloned );
 		return cloned;
 	}
 
-	void QuadClass::Clone( const std::shared_ptr<QuadClass> &quad )
+	void QuadClass::Clone( const boost::shared_ptr<QuadClass> &quad )
 	{
 		quad->Base = Base;
 
@@ -401,7 +401,7 @@ namespace CloudberryKingdom
 		Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( Name ) );
 	}
 
-	float QuadClass::WidthToScreenWidthRatio( const std::shared_ptr<Camera> &cam )
+	float QuadClass::WidthToScreenWidthRatio( const boost::shared_ptr<Camera> &cam )
 	{
 		return.5f * getSize().X / cam->GetWidth();
 	}
@@ -483,7 +483,7 @@ namespace CloudberryKingdom
 		CoreMath::PointxAxisTo( Base.e1, Base.e2, Dir );
 	}
 
-	void QuadClass::TextureParralax( float Parralax, Vector2 repeat, Vector2 shift, const std::shared_ptr<Camera> &Cam )
+	void QuadClass::TextureParralax( float Parralax, Vector2 repeat, Vector2 shift, const boost::shared_ptr<Camera> &Cam )
 	{
 		Vector2 offset = Parralax * repeat * ( Cam->EffectivePos + shift ) / ( 2 * Vector2( Cam->AspectRatio / .001f, 1 / .001f ) );
 
@@ -495,7 +495,7 @@ namespace CloudberryKingdom
 		Quad_Renamed.v3.Vertex.uv = Vector2( repeat.X / 2, repeat.Y / 2 ) + offset;
 	}
 
-	void QuadClass::FullScreen( const std::shared_ptr<Camera> &cam )
+	void QuadClass::FullScreen( const boost::shared_ptr<Camera> &cam )
 	{
 		setSize( Vector2( ( cam->EffectiveTR.X - cam->EffectiveBL.X ) / 2, ( cam->EffectiveTR.Y - cam->EffectiveBL.Y ) / 2 ) );
 		setPos( ( cam->EffectiveTR + cam->EffectiveBL ) / 2 );
@@ -513,7 +513,7 @@ namespace CloudberryKingdom
 		Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<EzTexture> &texture )
+	QuadClass::QuadClass( const boost::shared_ptr<EzTexture> &texture )
 	{
 		InitializeInstanceFields();
 		Initialize( 0, false, false );
@@ -544,7 +544,7 @@ namespace CloudberryKingdom
 		this->Name = Name;
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<EzTexture> &Texture, float Width, const std::wstring &Name )
+	QuadClass::QuadClass( const boost::shared_ptr<EzTexture> &Texture, float Width, const std::wstring &Name )
 	{
 		InitializeInstanceFields();
 		Initialize( 0, false, false );
@@ -552,7 +552,7 @@ namespace CloudberryKingdom
 		this->Name = Name;
 	}
 
-	QuadClass::QuadClass( const std::shared_ptr<EzTexture> &Texture, float Width, bool Fancy )
+	QuadClass::QuadClass( const boost::shared_ptr<EzTexture> &Texture, float Width, bool Fancy )
 	{
 		InitializeInstanceFields();
 		Initialize( 0, Fancy, Fancy );
@@ -574,7 +574,7 @@ namespace CloudberryKingdom
 		ScaleYToMatchRatio( Width );
 	}
 
-	void QuadClass::Set( const std::shared_ptr<EzTexture> &Texture, float Width )
+	void QuadClass::Set( const boost::shared_ptr<EzTexture> &Texture, float Width )
 	{
 		Quad_Renamed.MyEffect = Tools::BasicEffect;
 		Quad_Renamed.setMyTexture( Texture );
@@ -582,7 +582,7 @@ namespace CloudberryKingdom
 		ScaleYToMatchRatio( Width );
 	}
 
-	void QuadClass::Set( const std::shared_ptr<TextureOrAnim> &t_or_a )
+	void QuadClass::Set( const boost::shared_ptr<TextureOrAnim> &t_or_a )
 	{
 		Quad_Renamed.SetTextureOrAnim( t_or_a );
 	}
@@ -592,12 +592,12 @@ namespace CloudberryKingdom
 		Quad_Renamed.SetTextureOrAnim( name );
 	}
 
-	void QuadClass::Set( const std::shared_ptr<SpriteInfo> &info )
+	void QuadClass::Set( const boost::shared_ptr<SpriteInfo> &info )
 	{
 		Set( info, info->Size );
 	}
 
-	void QuadClass::Set( const std::shared_ptr<SpriteInfo> &info, Vector2 Size )
+	void QuadClass::Set( const boost::shared_ptr<SpriteInfo> &info, Vector2 Size )
 	{
 		if ( info->Sprite == 0 )
 			Show = false;
@@ -751,7 +751,7 @@ namespace CloudberryKingdom
 		Quad_Renamed.Update( Base );
 	}
 
-	void QuadClass::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void QuadClass::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( Quad_Renamed.getMyTexture()->Path );
 		writer->Write( Quad_Renamed.MyEffect->Name );
@@ -761,7 +761,7 @@ namespace CloudberryKingdom
 		WriteReadTools::WriteVector2( writer, Base.Origin );
 	}
 
-	void QuadClass::Read( const std::shared_ptr<BinaryReader> &reader )
+	void QuadClass::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( reader->ReadString() ) );
 		Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( reader->ReadString() );

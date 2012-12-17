@@ -3,13 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	void Boulder_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Boulder_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
-		Tunnel = std::make_shared<TunnelFill>();
+		Tunnel = boost::make_shared<TunnelFill>();
 		HallwaySpacing = Vector2( 300 - 5 * u->Get( Upgrade_SPIKEY_GUY ), DifficultyHelper::Interp19( 220, 80, u->Get( Upgrade_SPIKEY_GUY ) ) );
 
 		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_GUY ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_GUY ) > 0 )
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		HallwaySpacing = Unset::Vector;
 	}
 
-	Boulder_AutoGen::Cleanup_2Helper::Cleanup_2Helper( const std::shared_ptr<Boulder_Parameters> &Params )
+	Boulder_AutoGen::Cleanup_2Helper::Cleanup_2Helper( const boost::shared_ptr<Boulder_Parameters> &Params )
 	{
 		this->Params = Params;
 	}
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		return Vector2( dist, dist );
 	}
 
-	Boulder_AutoGen::BoulderFillLambda::BoulderFillLambda( const std::shared_ptr<Level> &level, Vector2 TR, Vector2 BL, const std::shared_ptr<Boulder_AutoGen> &autogen )
+	Boulder_AutoGen::BoulderFillLambda::BoulderFillLambda( const boost::shared_ptr<Level> &level, Vector2 TR, Vector2 BL, const boost::shared_ptr<Boulder_AutoGen> &autogen )
 	{
 		this->level = level;
 		this->TR = TR;
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 	void Boulder_AutoGen::BoulderFillLambda::Apply( const Vector2 &pos )
 	{
-		std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( autogen->CreateAt( level, pos ) );
+		boost::shared_ptr<Boulder> floater = boost::static_pointer_cast<Boulder>( autogen->CreateAt( level, pos ) );
 		Vector2 Padding = Vector2( 200, 375 );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
@@ -71,9 +71,9 @@ namespace CloudberryKingdom
 			Tools::EnsureBounds_Y( floater, TR - Padding, BL + Padding );
 	}
 
-std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Boulder_AutoGen>();
+boost::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = boost::make_shared<Boulder_AutoGen>();
 
-	const std::shared_ptr<Boulder_AutoGen> &Boulder_AutoGen::getInstance()
+	const boost::shared_ptr<Boulder_AutoGen> &Boulder_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -85,30 +85,30 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Boulder_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Boulder_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Boulder_Parameters> Params = std::make_shared<Boulder_Parameters>();
+		boost::shared_ptr<Boulder_Parameters> Params = boost::make_shared<Boulder_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void Boulder_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Boulder_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get Boulder parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
+		boost::shared_ptr<Boulder_Parameters> Params = boost::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
 
-		level->Cleanup( ObjectType_BOULDER, std::make_shared<Cleanup_2Helper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ) );
+		level->Cleanup( ObjectType_BOULDER, boost::make_shared<Cleanup_2Helper>( Params ), BL + Vector2( 400, 0 ), TR - Vector2( 500, 0 ) );
 
 		if ( Params->Special.Hallway )
 			Params->Tunnel->CleanupTunnel( level );
 	}
 
-	void Boulder_AutoGen::Hallway( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Boulder_AutoGen::Hallway( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
+		boost::shared_ptr<Boulder_Parameters> Params = boost::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		TR.X += 700;
 
@@ -125,7 +125,7 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		{
 			Vector2 pos = Spacing * Vector2( static_cast<float>( i ), static_cast<float>( j ) ) + BL;
 
-			std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( CreateAt( level, pos ) );
+			boost::shared_ptr<Boulder> floater = boost::static_pointer_cast<Boulder>( CreateAt( level, pos ) );
 			floater->Offset = 0;
 			floater->getCore()->GenData.KeepIfUnused = true;
 			floater->getCore()->GenData.EnforceBounds = false;
@@ -134,13 +134,13 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		}
 	}
 
-	std::shared_ptr<ObjectBase> Boulder_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> Boulder_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
+		boost::shared_ptr<Boulder_Parameters> Params = boost::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<Boulder> NewFloater = std::static_pointer_cast<Boulder>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
+		boost::shared_ptr<Boulder> NewFloater = boost::static_pointer_cast<Boulder>( level->getRecycle()->GetObject(ObjectType_BOULDER, true) );
 		NewFloater->Init( pos, level );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
@@ -172,7 +172,7 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		return NewFloater;
 	}
 
-	Vector2 Boulder_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, const std::shared_ptr<Rand> &Rnd )
+	Vector2 Boulder_AutoGen::CalcPos( const boost::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, const boost::shared_ptr<Rand> &Rnd )
 	{
 		Vector2 pos = bob->getCore()->Data.Position + Vector2(Rnd->RndFloat(-600, 600), Rnd->RndFloat(-300, 400));
 		pos.Y = __min( pos.Y, TR.Y - 400 );
@@ -188,12 +188,12 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		return pos;
 	}
 
-	void Boulder_AutoGen::ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Boulder_AutoGen::ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
+		boost::shared_ptr<Boulder_Parameters> Params = boost::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;
@@ -209,7 +209,7 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 			int Delay = static_cast<int>( Params->FloaterPlaceDelay.GetVal( pos ) );
 			if ( Step > 90 && Step % Delay == 0 )
 			{
-				std::shared_ptr<Boulder> floater = std::static_pointer_cast<Boulder>( CreateAt( level, CalcPos( *bob, BL, TR, level->getRnd() ) ) );
+				boost::shared_ptr<Boulder> floater = boost::static_pointer_cast<Boulder>( CreateAt( level, CalcPos( *bob, BL, TR, level->getRnd() ) ) );
 				Vector2 Padding = Vector2( 200, 375 );
 
 				if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
@@ -220,12 +220,12 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		}
 	}
 
-	void Boulder_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Boulder_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<Boulder_Parameters> Params = std::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
+		boost::shared_ptr<Boulder_Parameters> Params = boost::static_pointer_cast<Boulder_Parameters>( level->getStyle()->FindParams( Boulder_AutoGen::getInstance() ) );
 
 		if ( Params->Special.Hallway )
 			Hallway( level, BL, TR );
@@ -238,6 +238,6 @@ std::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = std::make_shared<Bo
 		Vector2 FillTR = Vector2( TR.X, y + level->getMainCamera()->GetHeight() / 2 - 350 );
 
 		int Sparsity = static_cast<int>( Params->FloaterSparsity.getVal() );
-		level->Fill( FillBL, FillTR, 225.f * Sparsity, 250.f, std::make_shared<BoulderFillLambda>( level, TR, BL, std::static_pointer_cast<Boulder_AutoGen>( shared_from_this() ) ) );
+		level->Fill( FillBL, FillTR, 225.f * Sparsity, 250.f, boost::make_shared<BoulderFillLambda>( level, TR, BL, boost::static_pointer_cast<Boulder_AutoGen>( shared_from_this() ) ) );
 	}
 }

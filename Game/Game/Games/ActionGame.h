@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 	struct ActionFactory : public GameFactory
 	{
 	
-		virtual std::shared_ptr<GameData> Make( const std::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
 	struct ActionGameData : public GameData
@@ -18,16 +18,16 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<GameFactory> Factory;
+		static boost::shared_ptr<GameFactory> Factory;
 
 		ActionGameData();
 
-		ActionGameData( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
+		ActionGameData( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
 	
-		std::shared_ptr<LevelSeedData> Seed;
+		boost::shared_ptr<LevelSeedData> Seed;
 	
-		virtual void Init( const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
+		virtual void Init( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
 		bool Done;
 	
@@ -43,10 +43,10 @@ namespace CloudberryKingdom
 		virtual void Release();
 
 	
-		std::shared_ptr<Level> MakeEmptyLevel();
+		boost::shared_ptr<Level> MakeEmptyLevel();
 
 	
-		virtual void MakeBobs( const std::shared_ptr<Level> &level );
+		virtual void MakeBobs( const boost::shared_ptr<Level> &level );
 
 		virtual void UpdateBobs();
 

@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	GUI_BlobQuota::MyPhsxStepHelper::MyPhsxStepHelper( const std::shared_ptr<GUI_BlobQuota> &blobQuota )
+	GUI_BlobQuota::MyPhsxStepHelper::MyPhsxStepHelper( const boost::shared_ptr<GUI_BlobQuota> &blobQuota )
 	{
 		this->blobQuota = blobQuota;
 	}
@@ -50,13 +50,13 @@ namespace CloudberryKingdom
 			{
 				// On Quoate Met
 				if ( OnQuotaMet != 0 )
-					OnQuotaMet->Apply( std::static_pointer_cast<GUI_Blobs>( shared_from_this() ) );
+					OnQuotaMet->Apply( boost::static_pointer_cast<GUI_Blobs>( shared_from_this() ) );
 
 				// Emphasize
 				MyPile->BubbleUp( true );
 
 				// Hide
-				MyGame->WaitThenDo( 28, std::make_shared<MyPhsxStepHelper>( std::static_pointer_cast<GUI_BlobQuota>( shared_from_this() ) ), _T( "" ), true, true );
+				MyGame->WaitThenDo( 28, boost::make_shared<MyPhsxStepHelper>( boost::static_pointer_cast<GUI_BlobQuota>( shared_from_this() ) ), _T( "" ), true, true );
 
 				//FinalDoor.SetLock(false);
 
@@ -76,12 +76,12 @@ namespace CloudberryKingdom
 		QuotaMet = false;
 	}
 
-	int GUI_Blobs::TempStatsLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int GUI_Blobs::TempStatsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return p->TempStats->Blobs;
 	}
 
-	std::shared_ptr<StringBuilder> GUI_Blobs::BuildString()
+	boost::shared_ptr<StringBuilder> GUI_Blobs::BuildString()
 	{
 		MyString->setLength( 0 );
 
@@ -144,19 +144,19 @@ namespace CloudberryKingdom
 		AddedOnce( false )
 	{
 	}
-	std::shared_ptr<GUI_Blobs> GUI_Blobs::GUI_Blobs_Construct()
+	boost::shared_ptr<GUI_Blobs> GUI_Blobs::GUI_Blobs_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		return std::static_pointer_cast<GUI_Blobs>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Blobs>( shared_from_this() );
 	}
 
 	void GUI_Blobs::Init()
 	{
 		GUI_Panel::Init();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		Vector2 shift = Vector2( -320, 0 );
@@ -170,20 +170,20 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<QuadClass> cloud = std::make_shared<QuadClass>( _T( "Cloud1" ), 150.f, true );
+		boost::shared_ptr<QuadClass> cloud = boost::make_shared<QuadClass>( _T( "Cloud1" ), 150.f, true );
 		cloud->setPos( Vector2( 193.0659f, -22.74048f ) );
 		cloud->setSize( Vector2( 465.5865f, 259.2372f ) );
 		MyPile->Add( cloud );
 
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		Text = std::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42_2, 450.f, false, false );
+		Text = boost::make_shared<EzText>( BuildString()->ToString(), Resources::Font_Grobold42_2, 450.f, false, false );
 		Text->setScale( .55f );
 		Text->setPos( Vector2( 0.3707275f, 73.3901f ) );
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Blob = std::make_shared<QuadClass>( _T( "Score/Blob" ), 150.f, true );
+		Blob = boost::make_shared<QuadClass>( _T( "Score/Blob" ), 150.f, true );
 		Blob->setPos( Vector2( -26.84131f, 11.98175f ) );
 		Blob->setSize( Vector2( 122.2223f, 193.6508f ) );
 		Blob->ScaleXToMatchRatio();
@@ -211,7 +211,7 @@ namespace CloudberryKingdom
 		if ( getCore()->MyLevel->Watching || getCore()->MyLevel->Finished )
 			return;
 
-		Blobs = PlayerManager::PlayerSum( std::make_shared<TempStatsLambda>() );
+		Blobs = PlayerManager::PlayerSum( boost::make_shared<TempStatsLambda>() );
 
 		//CoinText.Pos = new Vector2(CoinText.GetWorldWidth(), CoinText.Pos.Y);
 		UpdateCoinText();
@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 
 	void GUI_Blobs::InitializeInstanceFields()
 	{
-		MyString = std::make_shared<StringBuilder>( 50, 50 );
+		MyString = boost::make_shared<StringBuilder>( 50, 50 );
 		TotalBlobs = 0;
 		AddedOnce = false;
 	}

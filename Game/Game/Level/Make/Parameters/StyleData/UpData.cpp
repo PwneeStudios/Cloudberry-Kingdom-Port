@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	VerticalData::VerticalData( const std::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
+	VerticalData::VerticalData( const boost::shared_ptr<Rand> &Rnd ) : StyleData( Rnd )
 	{
 		VisualStyle = static_cast<VisualStyles>( 0 );
 	}
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	UpData::UpData( const std::shared_ptr<Rand> &Rnd ) : VerticalData( Rnd )
+	UpData::UpData( const boost::shared_ptr<Rand> &Rnd ) : VerticalData( Rnd )
 	{
 		VisualStyle = VisualStyles_CASTLE;
 		BlockFillType = _BlockFillType_TOP_ONLY;

@@ -11,19 +11,19 @@ namespace CloudberryKingdom
 	{
 #if defined(PC_VERSION)
 	
-		static std::shared_ptr<EzTexture> getGo();
-		static std::shared_ptr<EzTexture> getBack();
-		static std::shared_ptr<EzTexture> getX();
-		static std::shared_ptr<EzTexture> getLeftRight();
-		static std::shared_ptr<EzTexture> getLeftBumper();
-		static std::shared_ptr<EzTexture> getRightBumper();
+		static boost::shared_ptr<EzTexture> getGo();
+		static boost::shared_ptr<EzTexture> getBack();
+		static boost::shared_ptr<EzTexture> getX();
+		static boost::shared_ptr<EzTexture> getLeftRight();
+		static boost::shared_ptr<EzTexture> getLeftBumper();
+		static boost::shared_ptr<EzTexture> getRightBumper();
 #else
-		static std::shared_ptr<EzTexture> getGo();
-		static std::shared_ptr<EzTexture> getBack();
-		static std::shared_ptr<EzTexture> getX();
-		static std::shared_ptr<EzTexture> getLeftRight();
-		static std::shared_ptr<EzTexture> getLeftBumper();
-		static std::shared_ptr<EzTexture> getRightBumper();
+		static boost::shared_ptr<EzTexture> getGo();
+		static boost::shared_ptr<EzTexture> getBack();
+		static boost::shared_ptr<EzTexture> getX();
+		static boost::shared_ptr<EzTexture> getLeftRight();
+		static boost::shared_ptr<EzTexture> getLeftBumper();
+		static boost::shared_ptr<EzTexture> getRightBumper();
 #endif
 	};
 
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 		static void SetKeyFromString( Keys &key, const std::wstring &str );
 
 		static std::wstring KeyToTexture( Keys key );
-		static std::shared_ptr<EzTexture> ActualKeyToTexture( Keys key );
+		static boost::shared_ptr<EzTexture> ActualKeyToTexture( Keys key );
 
 		// Go/Back small keys
 		//public static string Back(int size) { return string.Format("{{p{1},{0},?}}{{s15,0}}", size, KeyToTexture(ButtonCheck.Back_Secondary)); }
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		
 			int LineNumber;
 			std::wstring str;
-			std::shared_ptr<StringBuilder> builder_str;
+			boost::shared_ptr<StringBuilder> builder_str;
 			Vector2 loc, size;
 			Color clr;
 		};
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		{
 		
 			int LineNumber;
-			std::shared_ptr<EzTexture> tex;
+			boost::shared_ptr<EzTexture> tex;
 			Rectangle rect;
 			Vector2 size;
 			bool AsPaint;
@@ -163,15 +163,15 @@ namespace CloudberryKingdom
 		bool HitTest( Vector2 pos, Vector2 padding );
 
 	
-		std::vector<std::shared_ptr<EzTextBit> > Bits;
-		std::vector<std::shared_ptr<EzTextPic> > Pics;
+		std::vector<boost::shared_ptr<EzTextBit> > Bits;
+		std::vector<boost::shared_ptr<EzTextPic> > Pics;
 
 		/// <summary>
 		/// Replaces the first bit of text, with no reformatting
 		/// </summary>
 	
 		void SubstituteText( const std::wstring &text );
-		void SubstituteText( const std::shared_ptr<StringBuilder> &text );
+		void SubstituteText( const boost::shared_ptr<StringBuilder> &text );
 		void SubstituteText( Localization::Words word );
 
 		/// <summary>
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		Color PicColor;
 
 	
-		std::shared_ptr<EzFont> MyFont;
+		boost::shared_ptr<EzFont> MyFont;
 	
 		Color MyColor;
 	
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 		const float &getY() const;
 		void setY( const float &value );
 
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 		float TextBoxWidth;
 		float Height, TextWidth;
 
@@ -246,26 +246,26 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		virtual std::shared_ptr<EzText> Clone();
+		virtual boost::shared_ptr<EzText> Clone();
 
 		bool RightJustify;
 		bool Centered, YCentered;
 
 		EzText( Localization::Words word );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, const std::wstring &Name );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, bool Centered );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, bool Centered, bool YCentered );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
-		EzText( Localization::Words word, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, const std::wstring &Name );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, bool Centered );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, bool Centered, bool YCentered );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
+		EzText( Localization::Words word, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
 
 		EzText( const std::wstring &str );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, const std::wstring &Name );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, bool Centered );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, bool Centered, bool YCentered );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
-		EzText( const std::wstring &str, const std::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, const std::wstring &Name );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, bool Centered );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, bool Centered, bool YCentered );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
+		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
 
 	
 		Vector2 loc;
@@ -356,14 +356,14 @@ namespace CloudberryKingdom
 
 	
 		bool Show;
-		void Draw( const std::shared_ptr<Camera> &cam );
-		virtual void Draw( const std::shared_ptr<Camera> &cam, bool EndBatch );
+		void Draw( const boost::shared_ptr<Camera> &cam );
+		virtual void Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch );
 
 		float Angle;
 
 		static bool ZoomWithCamera_Override;
 		bool ZoomWithCam;
-		void _Draw( const std::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const std::shared_ptr<SpriteFont> &font, Vector4 color );
+		void _Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<SpriteFont> &font, Vector4 color );
 
 		void CalcBounds();
 

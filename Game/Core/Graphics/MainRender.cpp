@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	MainRender::MainRender( const std::shared_ptr<GraphicsDevice> &Device )
+	MainRender::MainRender( const boost::shared_ptr<GraphicsDevice> &Device )
 	{
 		InitializeInstanceFields();
 		MyGraphicsDevice = Device;

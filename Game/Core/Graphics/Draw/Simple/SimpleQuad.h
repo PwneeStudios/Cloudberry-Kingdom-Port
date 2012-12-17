@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 
 		void NextKeyFrame();
 
-		std::shared_ptr<AnimationData_Texture> TextureAnim;
-		void SetTextureAnim( const std::shared_ptr<AnimationData_Texture> &TextureAnim );
-		void Set( const std::shared_ptr<TextureOrAnim> &t_or_a );
+		boost::shared_ptr<AnimationData_Texture> TextureAnim;
+		void SetTextureAnim( const boost::shared_ptr<AnimationData_Texture> &TextureAnim );
+		void Set( const boost::shared_ptr<TextureOrAnim> &t_or_a );
 		void Set( const std::wstring &name );
 
 		float t;
@@ -36,19 +36,19 @@ namespace CloudberryKingdom
 
 	
 		SimpleVector v0, v1, v2, v3;
-		std::shared_ptr<EzEffect> MyEffect;
+		boost::shared_ptr<EzEffect> MyEffect;
 
 		/// <summary>
 		/// Extra textures used as input more advanced pixel shaders.
 		/// </summary>
-		std::shared_ptr<EzTexture> ExtraTexture1, ExtraTexture2;
+		boost::shared_ptr<EzTexture> ExtraTexture1, ExtraTexture2;
 
 		/// <summary>
 		/// Texture to be drawn on this quad.
 		/// </summary>
-		const std::shared_ptr<EzTexture> &getMyTexture() const;
-		void setMyTexture( const std::shared_ptr<EzTexture> &value );
-		std::shared_ptr<EzTexture> _MyTexture;
+		const boost::shared_ptr<EzTexture> &getMyTexture() const;
+		void setMyTexture( const boost::shared_ptr<EzTexture> &value );
+		boost::shared_ptr<EzTexture> _MyTexture;
 
 		void CalcTexture( int anim, float frame );
 
@@ -68,9 +68,9 @@ namespace CloudberryKingdom
 
 		SimpleQuad( SimpleQuad &quad );
 
-		SimpleQuad( const std::shared_ptr<Quad> &quad );
+		SimpleQuad( const boost::shared_ptr<Quad> &quad );
 
-		void SetTextureOrAnim( const std::shared_ptr<TextureOrAnim> &t_or_a );
+		void SetTextureOrAnim( const boost::shared_ptr<TextureOrAnim> &t_or_a );
 		void SetTextureOrAnim( const std::wstring &name );
 
 		const int &getTexWidth() const;

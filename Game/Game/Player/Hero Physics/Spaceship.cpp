@@ -5,11 +5,11 @@ namespace CloudberryKingdom
 
 	void BobPhsxSpaceship::InitializeStatics()
 	{
-		BobPhsxSpaceship::instance = std::make_shared<BobPhsxSpaceship>();
+		BobPhsxSpaceship::instance = boost::make_shared<BobPhsxSpaceship>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance;
+	boost::shared_ptr<BobPhsxSpaceship> BobPhsxSpaceship::instance;
 
 	float BobPhsxSpaceship::KeepUnused( float UpgradeLevel )
 	{
@@ -23,24 +23,24 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 4, 0, 0, 0 );
 		Name = Localization::Words_SPACESHIP;
 		NameTemplate = _T( "spaceship" );
-		Icon = std::make_shared<PictureIcon>( Tools::Texture( _T( "Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
 	}
 
-	const std::shared_ptr<BobPhsxSpaceship> &BobPhsxSpaceship::getInstance()
+	const boost::shared_ptr<BobPhsxSpaceship> &BobPhsxSpaceship::getInstance()
 	{
 		return instance;
 	}
 
-	std::shared_ptr<BobPhsx> BobPhsxSpaceship::Clone()
+	boost::shared_ptr<BobPhsx> BobPhsxSpaceship::Clone()
 	{
-		std::shared_ptr<BobPhsxSpaceship> newBob = std::make_shared<BobPhsxSpaceship>();
+		boost::shared_ptr<BobPhsxSpaceship> newBob = boost::make_shared<BobPhsxSpaceship>();
 		CopyTo( newBob );
-		return std::static_pointer_cast<BobPhsx>( newBob );
+		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
 
-	void BobPhsxSpaceship::CopyTo( const std::shared_ptr<BobPhsxSpaceship> &bob )
+	void BobPhsxSpaceship::CopyTo( const boost::shared_ptr<BobPhsxSpaceship> &bob )
 	{
-		BobPhsx::CopyTo( std::static_pointer_cast<BobPhsx>( bob ) );
+		BobPhsx::CopyTo( boost::static_pointer_cast<BobPhsx>( bob ) );
 
 		bob->AutoMoveLength = AutoMoveLength;
 		bob->AutoMoveType = AutoMoveType;
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		BobPhsx::DefaultValues();
 	}
 
-	void BobPhsxSpaceship::Init( const std::shared_ptr<Bob> &bob )
+	void BobPhsxSpaceship::Init( const boost::shared_ptr<Bob> &bob )
 	{
 		BobPhsx::Init( bob );
 
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 		OnGround = false;
 	}
 
-	void BobPhsxSpaceship::SideHit( ColType side, const std::shared_ptr<BlockBase> &block )
+	void BobPhsxSpaceship::SideHit( ColType side, const boost::shared_ptr<BlockBase> &block )
 	{
 		BobPhsx::SideHit( side, block );
 
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void BobPhsxSpaceship::LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn )
+	void BobPhsxSpaceship::LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn )
 	{
 		BobPhsx::LandOnSomething( MakeReadyToJump, ThingLandedOn );
 
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 		OnGround = true;
 	}
 
-	void BobPhsxSpaceship::HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit )
+	void BobPhsxSpaceship::HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit )
 	{
 		BobPhsx::HitHeadOnSomething( ThingHit );
 	}
@@ -365,9 +365,9 @@ namespace CloudberryKingdom
 		BobPhsx::AnimStep();
 	}
 
-	void BobPhsxSpaceship::ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
+	void BobPhsxSpaceship::ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding )
 	{
-		std::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
+		boost::shared_ptr<ObjectClass> Obj = MyBob->PlayerObject;
 		SpriteAnims.insert( std::make_pair( 0, Obj->AnimToSpriteFrames( 0, 1, true, Padding ) ) );
 	}
 
@@ -398,7 +398,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsxSpaceship::ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style )
+	void BobPhsxSpaceship::ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style )
 	{
 		BobPhsx::ModData( makeData, Style );
 
@@ -430,11 +430,11 @@ namespace CloudberryKingdom
 		Style->UpperSafetyNetOffset = -100;
 		Style->LowerSafetyNetOffset = -200;
 
-		std::shared_ptr<GhostBlock_Parameters> GhParams = std::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<GhostBlock_Parameters> GhParams = boost::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
 		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
 	}
 
-	void BobPhsxSpaceship::ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece )
+	void BobPhsxSpaceship::ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		 BobPhsx::ModLadderPiece( piece );
 

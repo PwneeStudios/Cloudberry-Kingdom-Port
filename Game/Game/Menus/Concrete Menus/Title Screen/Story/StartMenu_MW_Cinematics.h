@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		std::wstring Movie;
 
-		CinematicsLevelItem( const std::shared_ptr<EzText> &Text, const std::wstring &Movie );
+		CinematicsLevelItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Movie );
 
 	
 		void InitializeInstanceFields();
@@ -19,29 +19,29 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Cinematics : public StartMenu
 	{
 	
-		struct CinematicsGoLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct CinematicsGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<StartMenu_MW_Cinematics> cine;
+			boost::shared_ptr<StartMenu_MW_Cinematics> cine;
 		
-			CinematicsGoLambda( const std::shared_ptr<StartMenu_MW_Cinematics> &cine );
+			CinematicsGoLambda( const boost::shared_ptr<StartMenu_MW_Cinematics> &cine );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		std::shared_ptr<TitleGameData_MW> Title;
-		StartMenu_MW_Cinematics( const std::shared_ptr<TitleGameData_MW> &Title );
-		std::shared_ptr<StartMenu_MW_Cinematics> StartMenu_MW_Cinematics_Construct( const std::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<TitleGameData_MW> Title;
+		StartMenu_MW_Cinematics( const boost::shared_ptr<TitleGameData_MW> &Title );
+		boost::shared_ptr<StartMenu_MW_Cinematics> StartMenu_MW_Cinematics_Construct( const boost::shared_ptr<TitleGameData_MW> &Title );
 
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );
 
 	
-		void SetText( const std::shared_ptr<EzText> &text );
+		void SetText( const boost::shared_ptr<EzText> &text );
 
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void OnAdd();
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		void MakeHeader();
 
 	
-		void Go( const std::shared_ptr<MenuItem> &item );
+		void Go( const boost::shared_ptr<MenuItem> &item );
 
 	
 		void SetPos();

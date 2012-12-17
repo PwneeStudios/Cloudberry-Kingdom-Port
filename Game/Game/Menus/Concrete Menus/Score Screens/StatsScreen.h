@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		struct StringificationWrapper : public LambdaFunc_1<int, std::wstring>
 		{
 		
-			std::shared_ptr<LambdaFunc_1<int, int> > f;
+			boost::shared_ptr<LambdaFunc_1<int, int> > f;
 
 		
-			StringificationWrapper( const std::shared_ptr<LambdaFunc_1<int, int> > &f );
+			StringificationWrapper( const boost::shared_ptr<LambdaFunc_1<int, int> > &f );
 
 			std::wstring Apply( const int &i );
 		};
@@ -24,10 +24,10 @@ namespace CloudberryKingdom
 		struct StatsLevels : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsLevels( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsLevels( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -36,10 +36,10 @@ namespace CloudberryKingdom
 		struct StatsJumps : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsJumps( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsJumps( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -48,10 +48,10 @@ namespace CloudberryKingdom
 		struct StatsScore : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsScore( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsScore( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -60,10 +60,10 @@ namespace CloudberryKingdom
 		struct StatsCoins : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsCoins( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsCoins( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -72,10 +72,10 @@ namespace CloudberryKingdom
 		struct StatsTotalCoins : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsTotalCoins( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsTotalCoins( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -84,10 +84,10 @@ namespace CloudberryKingdom
 		struct StatsCoinPercentGotten : public LambdaFunc_1<int, std::wstring>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsCoinPercentGotten( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsCoinPercentGotten( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			std::wstring Apply( const int &j );
 		};
@@ -96,10 +96,10 @@ namespace CloudberryKingdom
 		struct StatsBlobs : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsBlobs( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsBlobs( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -108,10 +108,10 @@ namespace CloudberryKingdom
 		struct StatsCheckpoints : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsCheckpoints( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsCheckpoints( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			int Apply( const int &j );
 		};
@@ -120,10 +120,10 @@ namespace CloudberryKingdom
 		struct StatsLifeExpectancy : public LambdaFunc_1<int, std::wstring>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 
 		
-			StatsLifeExpectancy( std::vector<std::shared_ptr<PlayerStats> > Stats );
+			StatsLifeExpectancy( std::vector<boost::shared_ptr<PlayerStats> > Stats );
 
 			std::wstring Apply( const int &j );
 		};
@@ -132,11 +132,11 @@ namespace CloudberryKingdom
 		struct StatsDeathsBy : public LambdaFunc_1<int, int>
 		{
 		
-			std::vector<std::shared_ptr<PlayerStats> > Stats;
+			std::vector<boost::shared_ptr<PlayerStats> > Stats;
 			int i;
 
 		
-			StatsDeathsBy( std::vector<std::shared_ptr<PlayerStats> > Stats, int i );
+			StatsDeathsBy( std::vector<boost::shared_ptr<PlayerStats> > Stats, int i );
 
 			int Apply( const int &j );
 		};
@@ -145,17 +145,17 @@ namespace CloudberryKingdom
 		struct OnAddHelper : public LambdaFunc<bool>
 		{
 		
-			std::shared_ptr<ScrollBar> bar;
+			boost::shared_ptr<ScrollBar> bar;
 
 		
-			OnAddHelper( const std::shared_ptr<ScrollBar> &bar );
+			OnAddHelper( const boost::shared_ptr<ScrollBar> &bar );
 
 			bool Apply();
 		};
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
 		static std::vector<Vector2> x1_name;
@@ -171,23 +171,23 @@ namespace CloudberryKingdom
 		static std::vector<std::vector<float> > x;
 		static std::vector<std::vector<Vector2> > name_pos;
 
-		std::shared_ptr<MenuItem> AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, int> > &f );
-		std::shared_ptr<MenuItem> AddRow( const std::shared_ptr<MenuItem> &Item, const std::shared_ptr<LambdaFunc_1<int, std::wstring> > &f );
+		boost::shared_ptr<MenuItem> AddRow( const boost::shared_ptr<MenuItem> &Item, const boost::shared_ptr<LambdaFunc_1<int, int> > &f );
+		boost::shared_ptr<MenuItem> AddRow( const boost::shared_ptr<MenuItem> &Item, const boost::shared_ptr<LambdaFunc_1<int, std::wstring> > &f );
 
 	
 		virtual void Init();
 
 #if defined(PC_VERSION)
 	
-		std::shared_ptr<ScrollBar> bar;
+		boost::shared_ptr<ScrollBar> bar;
 #endif
 
 		int n;
 		float HeaderPos;
-		std::vector<std::shared_ptr<PlayerStats> > Stats;
+		std::vector<boost::shared_ptr<PlayerStats> > Stats;
 	
 		StatsMenu( StatGroup group );
-		std::shared_ptr<StatsMenu> StatsMenu_Construct( StatGroup group );
+		boost::shared_ptr<StatsMenu> StatsMenu_Construct( StatGroup group );
 
 
 	

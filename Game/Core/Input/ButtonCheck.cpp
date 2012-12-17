@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		ButtonCheck::MouseInUse = false;
 		ButtonCheck::PrevMouseInUse = false;
 
-		ButtonCheck::Quickspawn_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = std::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = std::make_shared<ButtonClass>();
+		ButtonCheck::Quickspawn_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = boost::make_shared<ButtonClass>();
 		ButtonCheck::Start_Secondary = Keys_None;
 		ButtonCheck::Go_Secondary = Keys_None;
 		ButtonCheck::Back_Secondary = Keys_None;
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	bool ButtonCheck::MouseInUse;
 	bool ButtonCheck::PrevMouseInUse;
 
-	std::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey, ButtonCheck::Help_KeyboardKey, ButtonCheck::QuickReset_KeyboardKey;
+	boost::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey, ButtonCheck::Help_KeyboardKey, ButtonCheck::QuickReset_KeyboardKey;
 	Keys ButtonCheck::Start_Secondary, ButtonCheck::Go_Secondary, ButtonCheck::Back_Secondary, ButtonCheck::ReplayPrev_Secondary, ButtonCheck::ReplayNext_Secondary, ButtonCheck::ReplayToggle_Secondary, ButtonCheck::SlowMoToggle_Secondary, ButtonCheck::Left_Secondary, ButtonCheck::Right_Secondary, ButtonCheck::Up_Secondary, ButtonCheck::Down_Secondary;
 
 	float ButtonCheck::ThresholdSensitivity;
@@ -101,18 +101,18 @@ bool KeyboardExtension::Freeze = false;
 		_DownCount = std::vector<int>( ControllerButtons_LENGTH );
 	}
 
-std::vector<std::shared_ptr<ButtonStatistics> > ButtonStats::Controller;
-std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
+std::vector<boost::shared_ptr<ButtonStatistics> > ButtonStats::Controller;
+boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	void ButtonStats::Init()
 	{
 		if ( Controller.empty() )
 		{
-			Controller = std::vector<std::shared_ptr<ButtonStatistics> >( 4 );
-			All = std::make_shared<ButtonStatistics>();
+			Controller = std::vector<boost::shared_ptr<ButtonStatistics> >( 4 );
+			All = boost::make_shared<ButtonStatistics>();
 
 			for ( int i = 0; i < 4; i++ )
-				Controller[ i ] = std::make_shared<ButtonStatistics>();
+				Controller[ i ] = boost::make_shared<ButtonStatistics>();
 		}
 	}
 
@@ -461,7 +461,7 @@ std::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		return data;
 	}
 
-	ButtonData ButtonCheck::State( const std::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
+	ButtonData ButtonCheck::State( const boost::shared_ptr<ButtonClass> &Button, int iPlayerIndex )
 	{
 		if ( Button == 0 )
 			return State( ControllerButtons_NONE, iPlayerIndex );

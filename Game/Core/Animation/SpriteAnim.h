@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 	{
 	
 		float dt;
-		std::vector<std::shared_ptr<Texture2D> > Frames;
+		std::vector<boost::shared_ptr<Texture2D> > Frames;
 		Vector2 Padding;
 
 		void Release();
@@ -24,16 +24,16 @@ namespace CloudberryKingdom
 	struct SpriteAnimGroup
 	{
 	
-		std::map<int, std::shared_ptr<SpriteAnim> > SpriteAnims;
+		std::map<int, boost::shared_ptr<SpriteAnim> > SpriteAnims;
 
 		void Release();
 
 		SpriteAnimGroup();
 
-		void Init( const std::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
-			std::shared_ptr<Lambda_2<std::map<int, std::shared_ptr<SpriteAnim> >, Vector2> > SpriteFunc );
+		void Init( const boost::shared_ptr<ObjectClass> &Obj, Vector2 ExtraPadding,
+			boost::shared_ptr<Lambda_2<std::map<int, boost::shared_ptr<SpriteAnim> >, Vector2> > SpriteFunc );
 
-		std::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
+		boost::shared_ptr<Texture2D> Get( int anim, float t, Vector2 &padding );
 	};
 
 }

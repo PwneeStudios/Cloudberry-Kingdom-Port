@@ -47,8 +47,8 @@ namespace CloudberryKingdom
 
 	void FancyColor::CreateVectors()
 	{
-		clr1 = std::make_shared<FancyVector2>();
-		clr2 = std::make_shared<FancyVector2>();
+		clr1 = boost::make_shared<FancyVector2>();
+		clr2 = boost::make_shared<FancyVector2>();
 	}
 
 	Color FancyColor::ToColor( Vector2 v1, Vector2 v2 )

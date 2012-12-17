@@ -21,9 +21,9 @@ namespace CloudberryKingdom
 		return Inside( p, BL - padding, TR + padding );
 	}
 
-	bool Phsx::BoxBoxOverlap_Tiered( const std::shared_ptr<AABox> &Box, const std::shared_ptr<ObjectData> &Core, const std::shared_ptr<Bob> &bob, const std::shared_ptr<AutoGen> &singleton )
+	bool Phsx::BoxBoxOverlap_Tiered( const boost::shared_ptr<AABox> &Box, const boost::shared_ptr<ObjectData> &Core, const boost::shared_ptr<Bob> &bob, const boost::shared_ptr<AutoGen> &singleton )
 	{
-		std::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
+		boost::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
 		int WidthLevel = static_cast<int>( Params->BobWidthLevel.GetVal( Core->Data.Position ) );
 
 		bool col = Phsx::BoxBoxOverlap( bob->GetBox( WidthLevel ), Box );
@@ -31,9 +31,9 @@ namespace CloudberryKingdom
 		return col;
 	}
 
-	bool Phsx::AABoxAndLineCollisionTest_Tiered( MovingLine &Line_Renamed, const std::shared_ptr<ObjectData> &Core, const std::shared_ptr<Bob> &bob, const std::shared_ptr<AutoGen> &singleton )
+	bool Phsx::AABoxAndLineCollisionTest_Tiered( MovingLine &Line_Renamed, const boost::shared_ptr<ObjectData> &Core, const boost::shared_ptr<Bob> &bob, const boost::shared_ptr<AutoGen> &singleton )
 	{
-		std::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
+		boost::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
 		int WidthLevel = static_cast<int>( Params->BobWidthLevel.GetVal( Core->Data.Position ) );
 
 		bool col = Phsx::AABoxAndLineCollisionTest( bob->GetBox( WidthLevel ), Line_Renamed );
@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		return col;
 	}
 
-	bool Phsx::BoxBoxOverlap( const std::shared_ptr<AABox> &A, const std::shared_ptr<AABox> &B )
+	bool Phsx::BoxBoxOverlap( const boost::shared_ptr<AABox> &A, const boost::shared_ptr<AABox> &B )
 	{
 		// Do not need to validate if we are using *.Target directly
 		//A.Validate();
@@ -85,12 +85,12 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	bool Phsx::PointAndAABoxCollisionTest( Vector2 &p, const std::shared_ptr<AABox> &Box )
+	bool Phsx::PointAndAABoxCollisionTest( Vector2 &p, const boost::shared_ptr<AABox> &Box )
 	{
 		return PointAndAABoxCollisionTest( p, Box, 0 );
 	}
 
-	bool Phsx::PointAndAABoxCollisionTest( Vector2 &p, const std::shared_ptr<AABox> &Box, float Padding )
+	bool Phsx::PointAndAABoxCollisionTest( Vector2 &p, const boost::shared_ptr<AABox> &Box, float Padding )
 	{
 		Box->Validate();
 		Vector2 A_BL = Vector2::Min( Box->Current->BL, Box->Target->BL );
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	bool Phsx::AABoxAndLineCollisionTest( const std::shared_ptr<AABox> &Box, MovingLine &L )
+	bool Phsx::AABoxAndLineCollisionTest( const boost::shared_ptr<AABox> &Box, MovingLine &L )
 	{
 		Box->Validate();
 		L.Validate();
@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	ColType Phsx::CollisionTest( const std::shared_ptr<AABox> &A, const std::shared_ptr<AABox> &B )
+	ColType Phsx::CollisionTest( const boost::shared_ptr<AABox> &A, const boost::shared_ptr<AABox> &B )
 	{
 		/*
 		A.Current.CalcReal();

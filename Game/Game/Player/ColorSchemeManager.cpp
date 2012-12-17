@@ -7,18 +7,18 @@ namespace CloudberryKingdom
 
 	void ColorSchemeManager::InitializeStatics()
 	{
-		ColorSchemeManager::None = std::make_shared<ClrTextFx>();
+		ColorSchemeManager::None = boost::make_shared<ClrTextFx>();
 	}
 
 	// Statics
-	std::shared_ptr<CapeOnLambda> ColorSchemeManager::CapeOn;
+	boost::shared_ptr<CapeOnLambda> ColorSchemeManager::CapeOn;
 	std::vector<ColorScheme> ColorSchemeManager::ColorSchemes, ColorSchemeManager::ComputerColorSchemes;
 
-	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::HatList, ColorSchemeManager::ColorList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList, ColorSchemeManager::TextureList, ColorSchemeManager::OutlineList;
-	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
-	std::vector<std::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
-	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
-	std::shared_ptr<ClrTextFx> ColorSchemeManager::None;
+	std::vector<boost::shared_ptr<MenuListItem> > ColorSchemeManager::HatList, ColorSchemeManager::ColorList, ColorSchemeManager::CapeColorList, ColorSchemeManager::CapeOutlineColorList, ColorSchemeManager::TextureList, ColorSchemeManager::OutlineList;
+	std::vector<boost::shared_ptr<Hat> > ColorSchemeManager::HatInfo;
+	std::vector<boost::shared_ptr<Hat> > ColorSchemeManager::BeardInfo;
+	std::vector<boost::shared_ptr<MenuListItem> > ColorSchemeManager::ClrList;
+	boost::shared_ptr<ClrTextFx> ColorSchemeManager::None;
 
 
 
@@ -26,11 +26,11 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void CapeOnLambda::Apply( const std::shared_ptr<Bob> &bob )
+	void CapeOnLambda::Apply( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->ShowCape = false;
 
-		std::shared_ptr<ObjectClass> obj = bob->PlayerObject;
+		boost::shared_ptr<ObjectClass> obj = bob->PlayerObject;
 		obj->FindQuad( _T( "Wing1" ) )->Show = false;
 		obj->FindQuad( _T( "Wing2" ) )->Show = false;
 		obj->FindQuad( _T( "DWing1" ) )->Show = false;
@@ -46,71 +46,71 @@ namespace CloudberryKingdom
 			ComputerColorSchemes.push_back( scheme );
 	}
 
-	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
+	boost::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, Localization::Words Name )
 	{
-		return std::make_shared<MenuListItem>( std::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name ), Name );
+		return boost::make_shared<MenuListItem>( boost::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name ), Name );
 	}
 
-	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Color HighlightClr, Matrix M, Localization::Words Name )
+	boost::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Color HighlightClr, Matrix M, Localization::Words Name )
 	{
-		return std::make_shared<MenuListItem>( std::make_shared<ClrTextFx>( Guid, Price, Clr, HighlightClr, M, Name ), Name );
+		return boost::make_shared<MenuListItem>( boost::make_shared<ClrTextFx>( Guid, Price, Clr, HighlightClr, M, Name ), Name );
 	}
 
-	std::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, const std::shared_ptr<EzEffect> &Effect, Localization::Words Name )
+	boost::shared_ptr<MenuListItem> ColorSchemeManager::_i( int Guid, int Price, Color Clr, Matrix M, const boost::shared_ptr<EzEffect> &Effect, Localization::Words Name )
 	{
-		std::shared_ptr<ClrTextFx> ctf = std::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name );
+		boost::shared_ptr<ClrTextFx> ctf = boost::make_shared<ClrTextFx>( Guid, Price, Clr, M, Name );
 		ctf->Effect = Effect;
 
-		return std::make_shared<MenuListItem>( ctf, Name );
+		return boost::make_shared<MenuListItem>( ctf, Name );
 	}
 
 	void ColorSchemeManager::InitColorSchemes()
 	{
-		ColorList = std::vector<std::shared_ptr<MenuListItem> >();
-		CapeColorList = std::vector<std::shared_ptr<MenuListItem> >();
-		CapeOutlineColorList = std::vector<std::shared_ptr<MenuListItem> >();
-		HatList = std::vector<std::shared_ptr<MenuListItem> >();
-		TextureList = std::vector<std::shared_ptr<MenuListItem> >();
-		OutlineList = std::vector<std::shared_ptr<MenuListItem> >();
+		ColorList = std::vector<boost::shared_ptr<MenuListItem> >();
+		CapeColorList = std::vector<boost::shared_ptr<MenuListItem> >();
+		CapeOutlineColorList = std::vector<boost::shared_ptr<MenuListItem> >();
+		HatList = std::vector<boost::shared_ptr<MenuListItem> >();
+		TextureList = std::vector<boost::shared_ptr<MenuListItem> >();
+		OutlineList = std::vector<boost::shared_ptr<MenuListItem> >();
 
 		ColorSchemes = std::vector<ColorScheme>();
 		ComputerColorSchemes = std::vector<ColorScheme>();
 
-		HatInfo = std::vector<std::shared_ptr<Hat> >();
-		BeardInfo = std::vector<std::shared_ptr<Hat> >();
+		HatInfo = std::vector<boost::shared_ptr<Hat> >();
+		BeardInfo = std::vector<boost::shared_ptr<Hat> >();
 
 		// Fill the beard list
-		std::shared_ptr<Hat> beard;
+		boost::shared_ptr<Hat> beard;
 
-		Hat::Vandyke = beard = std::make_shared<Hat>( _T( "None" ) );
+		Hat::Vandyke = beard = boost::make_shared<Hat>( _T( "None" ) );
 		beard->Name = Localization::Words_VANDYKE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259001;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Beard = beard = std::make_shared<Hat>( _T( "Facial_Beard" ) );
+		Hat::Beard = beard = boost::make_shared<Hat>( _T( "Facial_Beard" ) );
 		beard->Name = Localization::Words_RUGGED;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259002;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Mustache = beard = std::make_shared<Hat>( _T( "Facial_Moustache" ) );
+		Hat::Mustache = beard = boost::make_shared<Hat>( _T( "Facial_Moustache" ) );
 		beard->Name = Localization::Words_MANHATTAN;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259003;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::BigBeard = beard = std::make_shared<Hat>( _T( "Facial_BigBeard" ) );
+		Hat::BigBeard = beard = boost::make_shared<Hat>( _T( "Facial_BigBeard" ) );
 		beard->Name = Localization::Words_LUMBERJACK;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259004;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Goatee = beard = std::make_shared<Hat>( _T( "Facial_Goatee" ) );
+		Hat::Goatee = beard = boost::make_shared<Hat>( _T( "Facial_Goatee" ) );
 		beard->Name = Localization::Words_GOATEE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259005;
@@ -119,36 +119,36 @@ namespace CloudberryKingdom
 
 
 		// Fill the hat list
-		std::shared_ptr<Hat> hat;
-		hat = std::make_shared<Hat>( _T( "None" ) );
+		boost::shared_ptr<Hat> hat;
+		hat = boost::make_shared<Hat>( _T( "None" ) );
 		hat->Name = Localization::Words_NONE;
 		hat->Guid = 19;
 			HatInfo.push_back( hat );
 			Hat::None = hat;
 
 
-		hat = std::make_shared<Hat>( _T( "Hat_Viking" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Viking" ) );
 		hat->Name = Localization::Words_VIKING;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 20;
 			hat->HatPicShift = Vector2( -.02f,.075f );
 			HatInfo.push_back( hat );
 			Hat::Viking = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Fedora" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Fedora" ) );
 		hat->Name = Localization::Words_FEDORA;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 21;
 			hat->HatPicScale *= 1.075f;
 			HatInfo.push_back( hat );
 			Hat::Fedora = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Afro" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Afro" ) );
 		hat->Name = Localization::Words_AFRO;
 		hat->Price = Hat::Mid;
 		hat->Guid = 22;
 			hat->HatPicScale *= 1.065f;
 			HatInfo.push_back( hat );
 			Hat::Afro = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Halo" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Halo" ) );
 		hat->Name = Localization::Words_HALO;
 		hat->Price = Hat::Mid;
 		hat->Guid = 23;
@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 			hat->HatPicShift = Vector2( .15f,.08f );
 			HatInfo.push_back( hat );
 			Hat::Halo = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_FireHead" ), false );
+		hat = boost::make_shared<Hat>( _T( "Hat_FireHead" ), false );
 		hat->Name = Localization::Words_FIREHEAD;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 24;
@@ -176,7 +176,7 @@ namespace CloudberryKingdom
 		//hat.Guid = 26;
 		//    HatInfo.Add(hat);
 		//    Hat.CheckpointHead = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Horns" ), true, false );
+		hat = boost::make_shared<Hat>( _T( "Hat_Horns" ), true, false );
 		hat->Name = Localization::Words_HORNS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 27;
@@ -234,7 +234,7 @@ namespace CloudberryKingdom
 		//    hat.HatPicScale *= .95f;
 		//    HatInfo.Add(hat);
 		//    Hat.Pink = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Bubble" ), true );
+		hat = boost::make_shared<Hat>( _T( "Hat_Bubble" ), true );
 		hat->Name = Localization::Words_BUBBLE;
 		hat->DrawHead = false;
 		hat->Price = Hat::Mid;
@@ -246,7 +246,7 @@ namespace CloudberryKingdom
 	float ScaleNew = 1.35f;
 	float DefaultShiftX = -.35f;
 
-		hat = std::make_shared<Hat>( _T( "Hat_TopHat" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_TopHat" ) );
 		hat->Name = Localization::Words_TOP_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 37;
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.35f;
 			HatInfo.push_back( hat );
 			Hat::TopHat = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Knight" ), false );
+		hat = boost::make_shared<Hat>( _T( "Hat_Knight" ), false );
 		hat->Name = Localization::Words_KNIGHT_HELMET;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 38;
@@ -262,7 +262,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.145f;
 			HatInfo.push_back( hat );
 			Hat::Knight = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Toad" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Toad" ) );
 		hat->Name = Localization::Words_MUSHROOM_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 39;
@@ -270,7 +270,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.115f;
 			HatInfo.push_back( hat );
 			Hat::Toad = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_BubbleBobble" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_BubbleBobble" ) );
 		hat->Name = Localization::Words_OM_NOM_NOM;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 40;
@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.105f;
 			HatInfo.push_back( hat );
 			Hat::BubbleBobble = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Brain" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Brain" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_BRAIN_HAT;
 		hat->Price = Hat::Expensive;
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 			Hat::Brain = hat;
-		hat = std::make_shared<Hat>( _T( "Hat_Gosu" ) );
+		hat = boost::make_shared<Hat>( _T( "Hat_Gosu" ) );
 		hat->Name = Localization::Words_GOSU;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 42;
@@ -300,7 +300,7 @@ namespace CloudberryKingdom
 
 
 		// Buyables
-		Hat::RobinHood = hat = std::make_shared<Hat>( _T( "Hat_RobinHood" ) );
+		Hat::RobinHood = hat = boost::make_shared<Hat>( _T( "Hat_RobinHood" ) );
 		hat->Name = Localization::Words_ROBIN_HOOD;
 		hat->Price = Hat::Mid;
 		hat->Guid = 1;
@@ -308,7 +308,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Rasta = hat = std::make_shared<Hat>( _T( "Hat_Rasta" ) );
+		Hat::Rasta = hat = boost::make_shared<Hat>( _T( "Hat_Rasta" ) );
 		hat->Name = Localization::Words_REGGAE;
 		hat->Price = Hat::Mid;
 		hat->Guid = 2;
@@ -316,7 +316,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Pumpkin = hat = std::make_shared<Hat>( _T( "Hat_Pumpkin" ) );
+		Hat::Pumpkin = hat = boost::make_shared<Hat>( _T( "Hat_Pumpkin" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_PUMPKIN;
 		hat->Price = Hat::Mid;
@@ -326,7 +326,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 
-		Hat::Pirate = hat = std::make_shared<Hat>( _T( "Hat_Pirate" ) );
+		Hat::Pirate = hat = boost::make_shared<Hat>( _T( "Hat_Pirate" ) );
 		hat->Name = Localization::Words_PIRATE_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 4;
@@ -334,7 +334,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Miner = hat = std::make_shared<Hat>( _T( "Hat_Miner" ) );
+		Hat::Miner = hat = boost::make_shared<Hat>( _T( "Hat_Miner" ) );
 		hat->Name = Localization::Words_HARD_HAT;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 5;
@@ -342,7 +342,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Glasses = hat = std::make_shared<Hat>( _T( "Hat_Glasses" ) );
+		Hat::Glasses = hat = boost::make_shared<Hat>( _T( "Hat_Glasses" ) );
 		hat->Name = Localization::Words_FOUR_EYES;
 		hat->Price = Hat::Mid;
 		hat->Guid = 6;
@@ -350,7 +350,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::BunnyEars = hat = std::make_shared<Hat>( _T( "Hat_BunnyEars" ) );
+		Hat::BunnyEars = hat = boost::make_shared<Hat>( _T( "Hat_BunnyEars" ) );
 		hat->Name = Localization::Words_BUNNY_EARS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 7;
@@ -365,7 +365,7 @@ namespace CloudberryKingdom
 		//    hat.HatPicScale *= ScaleNew * 1.165f;
 		//    HatInfo.Add(hat);
 
-		Hat::Antlers = hat = std::make_shared<Hat>( _T( "Hat_Antlers" ) );
+		Hat::Antlers = hat = boost::make_shared<Hat>( _T( "Hat_Antlers" ) );
 		hat->Name = Localization::Words_ANTLERS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 9;
@@ -373,7 +373,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Arrow_Renamed = hat = std::make_shared<Hat>( _T( "Hat_Arrow" ) );
+		Hat::Arrow_Renamed = hat = boost::make_shared<Hat>( _T( "Hat_Arrow" ) );
 		hat->Name = Localization::Words_ARROW_THROUGH_HEAD;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 10;
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Bag = hat = std::make_shared<Hat>( _T( "Hat_Bag" ) );
+		Hat::Bag = hat = boost::make_shared<Hat>( _T( "Hat_Bag" ) );
 		hat->Name = Localization::Words_BROWN_BAG;
 		hat->DrawHead = false;
 		hat->Price = Hat::Cheap;
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 
-		Hat::Cone = hat = std::make_shared<Hat>( _T( "Hat_Cone" ) );
+		Hat::Cone = hat = boost::make_shared<Hat>( _T( "Hat_Cone" ) );
 		hat->Name = Localization::Words_TRAFFIC_CONE;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 12;
@@ -399,7 +399,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Pope = hat = std::make_shared<Hat>( _T( "Hat_Pope" ) );
+		Hat::Pope = hat = boost::make_shared<Hat>( _T( "Hat_Pope" ) );
 		hat->Name = Localization::Words_POPE_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 13;
@@ -407,7 +407,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Rice = hat = std::make_shared<Hat>( _T( "Hat_Rice" ) );
+		Hat::Rice = hat = boost::make_shared<Hat>( _T( "Hat_Rice" ) );
 		hat->Name = Localization::Words_RICE_HAT;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 14;
@@ -415,7 +415,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Santa = hat = std::make_shared<Hat>( _T( "Hat_Santa" ) );
+		Hat::Santa = hat = boost::make_shared<Hat>( _T( "Hat_Santa" ) );
 		hat->Name = Localization::Words_SANTA_CLAUS;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 15;
@@ -423,7 +423,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Sombrero = hat = std::make_shared<Hat>( _T( "Hat_Sombrero" ) );
+		Hat::Sombrero = hat = boost::make_shared<Hat>( _T( "Hat_Sombrero" ) );
 		hat->Name = Localization::Words_SOMBRERO;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 16;
@@ -431,7 +431,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Tiki = hat = std::make_shared<Hat>( _T( "Hat_Tiki" ) );
+		Hat::Tiki = hat = boost::make_shared<Hat>( _T( "Hat_Tiki" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_TIKI_MASK;
 		hat->Price = Hat::Mid;
@@ -440,7 +440,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Wizard = hat = std::make_shared<Hat>( _T( "Hat_Wizard" ) );
+		Hat::Wizard = hat = boost::make_shared<Hat>( _T( "Hat_Wizard" ) );
 		hat->Name = Localization::Words_WIZARD;
 		hat->Price = Hat::Mid;
 		hat->Guid = 18;
@@ -449,8 +449,8 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		for ( int i = 0; i < static_cast<int>( HatInfo.size() ); i++ )
-			HatList.push_back( std::make_shared<MenuListItem>( 
-				std::static_pointer_cast<Object>( std::make_shared<WrappedValue<int> >( i ) ),
+			HatList.push_back( boost::make_shared<MenuListItem>( 
+				boost::static_pointer_cast<Object>( boost::make_shared<WrappedValue<int> >( i ) ),
 				Localization::Words_NONE ) );
 
 
@@ -514,15 +514,15 @@ namespace CloudberryKingdom
 		 */
 		Matrix m = Matrix();
 		m.M11 = m.M12 = m.M13 = m.M14 = m.M21 = m.M22 = m.M23 = m.M24 = m.M31 = m.M32 = m.M33 = m.M34 = m.M41 = m.M42 = m.M43 = m.M44 = 0;
-		std::shared_ptr<MenuListItem> NoTexture = _i( 3524, 0, Color::Transparent, m, Localization::Words_CLEAR ); // 6
+		boost::shared_ptr<MenuListItem> NoTexture = _i( 3524, 0, Color::Transparent, m, Localization::Words_CLEAR ); // 6
 		TextureList.push_back( NoTexture );
 
 
 		// Fill the cape color list
-		std::shared_ptr<ClrTextFx> cape;
-		None = std::make_shared<ClrTextFx>( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
+		boost::shared_ptr<ClrTextFx> cape;
+		None = boost::make_shared<ClrTextFx>( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
 		None->Name = Localization::Words_NONE;
-		CapeColorList.push_back( std::make_shared<MenuListItem>( None, Localization::Words_NONE ) );
+		CapeColorList.push_back( boost::make_shared<MenuListItem>( None, Localization::Words_NONE ) );
 		//CapeColorList.AddRange( ColorList );
 		AddRange( CapeColorList, ColorList );
 
@@ -533,14 +533,14 @@ namespace CloudberryKingdom
 
 		// Fill the cape outline list
 		// FIXME: This could be wrong.  capeoutline used to be a struct and was passed around by value.
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
-			Color clr = ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Clr;
+			Color clr = ( boost::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Clr;
 			Color color = Color( clr.ToVector3() * .8f );
 			color.A = clr.A;
-			std::shared_ptr<ClrTextFx> capeoutline = std::static_pointer_cast<ClrTextFx>( ( *item )->obj );
+			boost::shared_ptr<ClrTextFx> capeoutline = boost::static_pointer_cast<ClrTextFx>( ( *item )->obj );
 			capeoutline->Clr = color;
-			CapeOutlineColorList.push_back( std::make_shared<MenuListItem>( capeoutline, ( *item )->word ) );
+			CapeOutlineColorList.push_back( boost::make_shared<MenuListItem>( capeoutline, ( *item )->word ) );
 		}
 
 		// Add textures to skin color list and cape color list
@@ -570,18 +570,18 @@ namespace CloudberryKingdom
 		//CapeColorList.Add(new MenuListItem(fx, "AngryCape"));
 
 		// Wings and cape mod functions
-		std::vector<std::shared_ptr<MenuListItem> > NewCapeList = std::vector<std::shared_ptr<MenuListItem> >();
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
+		std::vector<boost::shared_ptr<MenuListItem> > NewCapeList = std::vector<boost::shared_ptr<MenuListItem> >();
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = CapeColorList.begin(); item != CapeColorList.end(); ++item )
 		{
-			cape = std::static_pointer_cast<ClrTextFx>( ( *item )->obj );
+			cape = boost::static_pointer_cast<ClrTextFx>( ( *item )->obj );
 			cape->ModObject = CapeOn;
-			NewCapeList.push_back( std::make_shared<MenuListItem>( cape, ( *item )->word ) );
+			NewCapeList.push_back( boost::make_shared<MenuListItem>( cape, ( *item )->word ) );
 		}
 		CapeColorList = NewCapeList;
 
 		// Combine all colors
-		std::vector<std::shared_ptr<MenuListItem> > temp;
-		temp = std::vector<std::shared_ptr<MenuListItem> >();
+		std::vector<boost::shared_ptr<MenuListItem> > temp;
+		temp = std::vector<boost::shared_ptr<MenuListItem> >();
 		//temp.AddRange( ColorList );
 		AddRange( temp, ColorList );
 		//temp.AddRange( CapeColorList );
@@ -602,14 +602,14 @@ namespace CloudberryKingdom
 		AddScheme( ColorScheme( Localization::Words_RED, Localization::Words_NONE, Localization::Words_NONE, Localization::Words_ANTLERS, Localization::Words_VANDYKE ), false );
 	}
 
-	std::vector<std::shared_ptr<MenuListItem> > ColorSchemeManager::MakeUnique( std::vector<std::shared_ptr<MenuListItem> > &list )
+	std::vector<boost::shared_ptr<MenuListItem> > ColorSchemeManager::MakeUnique( std::vector<boost::shared_ptr<MenuListItem> > &list )
 	{
-		std::shared_ptr<Set<int> > guids = std::make_shared<Set<int> >();
-		std::vector<std::shared_ptr<MenuListItem> > uniques = std::vector<std::shared_ptr<MenuListItem> >();
+		boost::shared_ptr<Set<int> > guids = boost::make_shared<Set<int> >();
+		std::vector<boost::shared_ptr<MenuListItem> > uniques = std::vector<boost::shared_ptr<MenuListItem> >();
 
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )
 		{
-			int guid = ( std::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid;
+			int guid = ( boost::static_pointer_cast<ClrTextFx>( ( *item )->obj ) )->Guid;
 
 			if ( guids->Contains( guid ) )
 				continue;

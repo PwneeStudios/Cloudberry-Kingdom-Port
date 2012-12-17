@@ -5,23 +5,23 @@ namespace CloudberryKingdom
 
 	void Challenge_TimeCrisis::InitializeStatics()
 	{
-		Challenge_TimeCrisis::instance = std::make_shared<Challenge_TimeCrisis>();
+		Challenge_TimeCrisis::instance = boost::make_shared<Challenge_TimeCrisis>();
 	}
 
 	// Statics
-	std::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance;
+	boost::shared_ptr<Challenge_TimeCrisis> Challenge_TimeCrisis::instance;
 
-	Challenge_TimeCrisis::OnSwapLambda::OnSwapLambda( const std::shared_ptr<Challenge_TimeCrisis> &ch )
+	Challenge_TimeCrisis::OnSwapLambda::OnSwapLambda( const boost::shared_ptr<Challenge_TimeCrisis> &ch )
 	{
 		this->ch = ch;
 	}
 
-	void Challenge_TimeCrisis::OnSwapLambda::Apply( const std::shared_ptr<LevelSeedData> &data )
+	void Challenge_TimeCrisis::OnSwapLambda::Apply( const boost::shared_ptr<LevelSeedData> &data )
 	{
-		data->MyGame->AddGameObject( std::make_shared<TimeCrisis_Tutorial>( ch ) );
+		data->MyGame->AddGameObject( boost::make_shared<TimeCrisis_Tutorial>( ch ) );
 	}
 
-	const std::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance()
+	const boost::shared_ptr<Challenge_TimeCrisis> &Challenge_TimeCrisis::getInstance()
 	{
 		return instance;
 	}
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		MenuName = Name = Localization::Words_TIME_CRISIS;
 	}
 
-	std::shared_ptr<BobPhsx> Challenge_TimeCrisis::GetHero( int i )
+	boost::shared_ptr<BobPhsx> Challenge_TimeCrisis::GetHero( int i )
 	{
 		return Challenge::ChosenHero;
 	}
@@ -40,6 +40,6 @@ namespace CloudberryKingdom
 	void Challenge_TimeCrisis::PreStart_Tutorial( bool TemporarySkip )
 	{
 		HeroRush_Tutorial::TemporarySkip = TemporarySkip;
-		MyStringWorld->OnSwapToFirstLevel->Add( std::make_shared<OnSwapLambda>( std::static_pointer_cast<Challenge_TimeCrisis>( shared_from_this() ) ) );
+		MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapLambda>( boost::static_pointer_cast<Challenge_TimeCrisis>( shared_from_this() ) ) );
 	}
 }

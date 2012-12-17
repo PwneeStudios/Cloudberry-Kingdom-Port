@@ -7,17 +7,17 @@ namespace CloudberryKingdom
 
 	void TitleGameData_MW::InitializeStatics()
 	{
-		TitleGameData_MW::Factory = std::make_shared<TitleGameData_MW_Factory>();
+		TitleGameData_MW::Factory = boost::make_shared<TitleGameData_MW_Factory>();
 	}
 
-	std::shared_ptr<GameData> TitleGameData_MW_Factory::Make()
+	boost::shared_ptr<GameData> TitleGameData_MW_Factory::Make()
 	{
-		std::shared_ptr<TitleGameData_MW> temp = std::make_shared<TitleGameData_MW>();
+		boost::shared_ptr<TitleGameData_MW> temp = boost::make_shared<TitleGameData_MW>();
 		TitleGameData_MW_Construct( temp );
-		return std::static_pointer_cast<GameData>( temp );
+		return boost::static_pointer_cast<GameData>( temp );
 	}
 
-	TitleGameData_MW::_InitProxy::_InitProxy( const std::shared_ptr<TitleGameData_MW> &tgdmw )
+	TitleGameData_MW::_InitProxy::_InitProxy( const boost::shared_ptr<TitleGameData_MW> &tgdmw )
 	{
 		this->tgdmw = tgdmw;
 	}
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		tgdmw->_Init();
 	}
 
-	std::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory;
+	boost::shared_ptr<SimpleGameFactory> TitleGameData_MW::Factory;
 
 	void TitleGameData_MW::Release()
 	{
@@ -52,10 +52,10 @@ namespace CloudberryKingdom
 		TitleGameData::ReturnTo( code );
 	}
 
-	std::shared_ptr<Level> TitleGameData_MW::MakeLevel()
+	boost::shared_ptr<Level> TitleGameData_MW::MakeLevel()
 	{
-		std::shared_ptr<Level> level = std::make_shared<Level>();
-		level->setMainCamera( std::make_shared<Camera>() );
+		boost::shared_ptr<Level> level = boost::make_shared<Level>();
+		level->setMainCamera( boost::make_shared<Camera>() );
 
 		level->TimeLimit = -1;
 
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 		level->CurPiece->CamStartPos = Center;
 
 		// Camera Zone
-		CamZone = std::static_pointer_cast<CameraZone>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
+		CamZone = boost::static_pointer_cast<CameraZone>( Recycle->GetObject( ObjectType_CAMERA_ZONE, false ) );
 		CamZone->Init( Vector2(), Vector2( 100000, 100000 ) );
 		CamZone->Start = Center;
 		CamZone->End = Center;
@@ -104,13 +104,13 @@ namespace CloudberryKingdom
 
 		// Fade in
 		FadeIn( .0175f );
-		WaitThenDo( 18, std::make_shared<_InitProxy>( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
+		WaitThenDo( 18, boost::make_shared<_InitProxy>( boost::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
 	}
 
 	void TitleGameData_MW::_Init()
 	{
 		// Press Start
-		PressStart = MakeMagic( StartMenu_MW_PressStart, ( std::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
+		PressStart = MakeMagic( StartMenu_MW_PressStart, ( boost::static_pointer_cast<TitleGameData_MW>( shared_from_this() ) ) );
 		AddGameObject( PressStart );
 
 		/*

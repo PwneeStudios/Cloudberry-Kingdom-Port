@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 	void Template_GameObject::MyPhsxStep()
 	{
-		std::shared_ptr<Level> level = getCore()->MyLevel;
+		boost::shared_ptr<Level> level = getCore()->MyLevel;
 	}
 
 }

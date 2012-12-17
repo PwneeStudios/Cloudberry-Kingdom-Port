@@ -7,18 +7,18 @@ namespace CloudberryKingdom
 	{
 	}
 
-	int CampaignChapterItem::CampaignLevelsLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int CampaignChapterItem::CampaignLevelsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return p->CampaignLevel;
 	}
 
-	CampaignChapterItem::CampaignChapterItem( const std::shared_ptr<EzText> &Text, int Chapter ) : MenuItem( Text )
+	CampaignChapterItem::CampaignChapterItem( const boost::shared_ptr<EzText> &Text, int Chapter ) : MenuItem( Text )
 	{
 		InitializeInstanceFields();
 		this->Chapter = Chapter;
 
 	#if !defined(DEBUG)
-		if ( PlayerManager::PlayerMax( std::make_shared<CampaignLevelsLambda>() ) < (Chapter - 1) * 100 )
+		if ( PlayerManager::PlayerMax( boost::make_shared<CampaignLevelsLambda>() ) < (Chapter - 1) * 100 )
 		{
 			this->GrayOutOnUnselectable = true;
 			this->Selectable = false;
@@ -31,17 +31,17 @@ namespace CloudberryKingdom
 		Chapter = 0;
 	}
 
-	StartMenu_MW_Campaign::CampaignGoLambda::CampaignGoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &cine )
+	StartMenu_MW_Campaign::CampaignGoLambda::CampaignGoLambda( const boost::shared_ptr<StartMenu_MW_Campaign> &cine )
 	{
 		this->cine = cine;
 	}
 
-	void StartMenu_MW_Campaign::CampaignGoLambda::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_Campaign::CampaignGoLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		cine->Go( item );
 	}
 
-	StartMenu_MW_Campaign::GoLambda::GoLambda( const std::shared_ptr<StartMenu_MW_Campaign> &sm )
+	StartMenu_MW_Campaign::GoLambda::GoLambda( const boost::shared_ptr<StartMenu_MW_Campaign> &sm )
 	{
 		this->sm = sm;
 	}
@@ -53,17 +53,17 @@ namespace CloudberryKingdom
 		CampaignSequence::getInstance()->Start(sm->_StartLevel);
 	}
 
-	StartMenu_MW_Campaign::StartMenu_MW_Campaign( const std::shared_ptr<TitleGameData_MW> &Title ) : 
+	StartMenu_MW_Campaign::StartMenu_MW_Campaign( const boost::shared_ptr<TitleGameData_MW> &Title ) : 
 		StartMenu(),
 		_StartLevel( 0 )
 	{
 	}
-	std::shared_ptr<StartMenu_MW_Campaign> StartMenu_MW_Campaign::StartMenu_MW_Campaign_Construct( const std::shared_ptr<TitleGameData_MW> &Title )
+	boost::shared_ptr<StartMenu_MW_Campaign> StartMenu_MW_Campaign::StartMenu_MW_Campaign_Construct( const boost::shared_ptr<TitleGameData_MW> &Title )
 	{
 		StartMenu::StartMenu_Construct();
 		this->Title = Title;
 
-		return std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() );
+		return boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() );
 	}
 
 	void StartMenu_MW_Campaign::SlideIn( int Frames )
@@ -78,13 +78,13 @@ namespace CloudberryKingdom
 		StartMenu::SlideOut( Preset, 0 );
 	}
 
-	void StartMenu_MW_Campaign::SetText( const std::shared_ptr<EzText> &text )
+	void StartMenu_MW_Campaign::SetText( const boost::shared_ptr<EzText> &text )
 	{
 		text->MyFloatColor = ( bColor( 34, 214, 47 ) ).ToVector4();
 		text->OutlineColor = ( bColor( 0, 0, 0, 0 ) ).ToVector4();
 	}
 
-	void StartMenu_MW_Campaign::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_Campaign::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		StartMenu::SetItemProperties( item );
 
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		 StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		MyMenu->ClearList();
 
@@ -118,36 +118,36 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::CreateMenu()
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Chapter 1
-		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
+		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
 		item->Name = _T( "MainCampaign" );
-		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
-		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
+		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
 		item->Name = _T( "Easy" );
-		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
-		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
+		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
 		item->Name = _T( "Hard" );
-		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
-		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
+		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
 		item->Name = _T( "Hardcore" );
-		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
-		item = std::make_shared<CampaignChapterItem>( std::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
+		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
 		item->Name = _T( "Maso" );
-		item->setGo( std::make_shared<CampaignGoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		//// Cinematics
@@ -166,7 +166,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::MakeHeader()
 	{
-		std::shared_ptr<EzText> Header = std::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
+		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
 		Header->Name = _T( "Header" );
 		Header->setScale( Header->getScale() * 1.3f );
 		SetText( Header );
@@ -176,9 +176,9 @@ namespace CloudberryKingdom
 		Header->setPos( Vector2( -800.0029f, 863.8889f ) );
 	}
 
-	void StartMenu_MW_Campaign::Go( const std::shared_ptr<MenuItem> &item )
+	void StartMenu_MW_Campaign::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<CampaignChapterItem> c_item = std::dynamic_pointer_cast<CampaignChapterItem>( item );
+		boost::shared_ptr<CampaignChapterItem> c_item = boost::dynamic_pointer_cast<CampaignChapterItem>( item );
 		if ( 0 == c_item )
 			return;
 
@@ -192,12 +192,12 @@ namespace CloudberryKingdom
 		Active = false;
 
 		_StartLevel = StartLevel;
-		MyGame->WaitThenDo( 75, std::make_shared<GoLambda>( std::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
+		MyGame->WaitThenDo( 75, boost::make_shared<GoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 	}
 
 	void StartMenu_MW_Campaign::SetPos_NoCinematic()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "MainCampaign" ) );
 		if ( _item != 0 )
 		{
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::SetPos_WithCinematic()
 	{
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "MainCampaign" ) );
 		if ( _item != 0 )
 		{
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -783.3339f, 227.7778f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Header" ) );
 		if ( _t != 0 )
 		{

@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 
-	struct CharacterSelect : public std::enable_shared_from_this<CharacterSelect>
+	struct CharacterSelect : public boost::enable_shared_from_this<CharacterSelect>
 	{
 
 		static void InitializeStatics();
@@ -15,10 +15,10 @@ namespace CloudberryKingdom
 		struct RandomizeProxy : public Lambda
 		{
 		
-			std::shared_ptr<CharacterSelect> cs;
+			boost::shared_ptr<CharacterSelect> cs;
 
 		
-			RandomizeProxy( const std::shared_ptr<CharacterSelect> &cs );
+			RandomizeProxy( const boost::shared_ptr<CharacterSelect> &cs );
 
 			void Apply();
 		};
@@ -40,15 +40,15 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool QuickJoin;
 
-		std::shared_ptr<GamerTag> MyGamerTag;
-		std::shared_ptr<HeroLevel> MyHeroLevel;
-		std::shared_ptr<Doll> MyDoll;
+		boost::shared_ptr<GamerTag> MyGamerTag;
+		boost::shared_ptr<HeroLevel> MyHeroLevel;
+		boost::shared_ptr<Doll> MyDoll;
 
 		int PlayerIndex;
-		const std::shared_ptr<PlayerData> getPlayer() const;
+		const boost::shared_ptr<PlayerData> getPlayer() const;
 
 		std::vector<int> ItemIndex;
-		std::vector<std::vector<std::shared_ptr<MenuListItem> > > ItemList;
+		std::vector<std::vector<boost::shared_ptr<MenuListItem> > > ItemList;
 
 	
 		Vector2 Center, NormalZoomCenter;
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		static std::vector<Vector2> Centers;
 		void InitCenters();
 
-		static void Shift( const std::shared_ptr<GUI_Panel> &panel );
+		static void Shift( const boost::shared_ptr<GUI_Panel> &panel );
 
 		void Release();
 
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 		void SetIndex( int i );
 
 	
-		int FindIndex( std::vector<std::shared_ptr<MenuListItem> > &list, ClrTextFx obj );
+		int FindIndex( std::vector<boost::shared_ptr<MenuListItem> > &list, ClrTextFx obj );
 
 		/// <summary>
 		/// Find the indices that would reproduce the current color scheme.

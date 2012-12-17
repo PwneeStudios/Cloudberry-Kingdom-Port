@@ -16,9 +16,9 @@ namespace CloudberryKingdom
 		struct SignInGamerLambda : public Lambda
 		{
 		
-			std::shared_ptr<SignedInEventArgs> e;
+			boost::shared_ptr<SignedInEventArgs> e;
 		
-			SignInGamerLambda( const std::shared_ptr<SignedInEventArgs> &e );
+			SignInGamerLambda( const boost::shared_ptr<SignedInEventArgs> &e );
 
 			void Apply();
 		};
@@ -30,12 +30,12 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct NullLambda : public LambdaFunc_1<std::shared_ptr<CharacterSelect> , bool>
+		struct NullLambda : public LambdaFunc_1<boost::shared_ptr<CharacterSelect> , bool>
 		{
 		
 			NullLambda();
 
-			bool Apply( const std::shared_ptr<CharacterSelect> &select );
+			bool Apply( const boost::shared_ptr<CharacterSelect> &select );
 		};
 
 	
@@ -46,22 +46,22 @@ namespace CloudberryKingdom
 		};
 
 	
-		static std::shared_ptr<Lambda> OnBack, OnDone;
+		static boost::shared_ptr<Lambda> OnBack, OnDone;
 
-		static std::shared_ptr<GUI_Panel> ParentPanel;
+		static boost::shared_ptr<GUI_Panel> ParentPanel;
 
 	
-		static std::shared_ptr<CharacterSelectManager> instance;
+		static boost::shared_ptr<CharacterSelectManager> instance;
 	
-		const static std::shared_ptr<CharacterSelectManager> &getInstance();
+		const static boost::shared_ptr<CharacterSelectManager> &getInstance();
 
-		static std::vector<std::shared_ptr<CharacterSelect> > CharSelect;
+		static std::vector<boost::shared_ptr<CharacterSelect> > CharSelect;
 		static bool IsShowing;
 
 	
-		static std::shared_ptr<FancyVector2> CamPos;
+		static boost::shared_ptr<FancyVector2> CamPos;
 	
-		static std::shared_ptr<EzText> ChooseYourHero_Text;
+		static boost::shared_ptr<EzText> ChooseYourHero_Text;
 	
 		static bool Show_ChooseYourHero;
 
@@ -74,21 +74,21 @@ namespace CloudberryKingdom
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
 	
-		void SignedInGamer_SignedIn( const std::shared_ptr<Object> &sender, const std::shared_ptr<SignedInEventArgs> &e );
+		void SignedInGamer_SignedIn( const boost::shared_ptr<Object> &sender, const boost::shared_ptr<SignedInEventArgs> &e );
 
 #endif
 
 	
-		static std::shared_ptr<Set<std::shared_ptr<Hat> > > AvailableHats;
+		static boost::shared_ptr<Set<boost::shared_ptr<Hat> > > AvailableHats;
 		static void UpdateAvailableHats();
 
-		static std::shared_ptr<Set<std::shared_ptr<Hat> > > AvailableBeards;
+		static boost::shared_ptr<Set<boost::shared_ptr<Hat> > > AvailableBeards;
 	
 		static void UpdateAvailableBeards();
 
-		static std::shared_ptr<CharSelectBackdrop> Backdrop;
+		static boost::shared_ptr<CharSelectBackdrop> Backdrop;
 	
-		static void Start( const std::shared_ptr<GUI_Panel> &Parent );
+		static void Start( const boost::shared_ptr<GUI_Panel> &Parent );
 
 	
 		static void _StartAll();
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 
 		static bool AllNull();
 
-		static std::shared_ptr<NullLambda> NullLambda_static;
+		static boost::shared_ptr<NullLambda> NullLambda_static;
 	
 		static int DrawLayer;
 		static float BobZoom;

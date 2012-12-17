@@ -10,13 +10,13 @@ namespace CloudberryKingdom
 	
 		virtual void OnAdd();
 
-		std::shared_ptr<EzText> text;
+		boost::shared_ptr<EzText> text;
 		LevelTitle( const std::wstring &str );
-		std::shared_ptr<LevelTitle> LevelTitle_Construct( const std::wstring &str );
+		boost::shared_ptr<LevelTitle> LevelTitle_Construct( const std::wstring &str );
 		LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma );
-		std::shared_ptr<LevelTitle> LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma );
+		boost::shared_ptr<LevelTitle> LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma );
 
-		static std::shared_ptr<LevelTitle> HeroTitle( const std::wstring &str );
+		static boost::shared_ptr<LevelTitle> HeroTitle( const std::wstring &str );
 
 	
 		bool Perma;

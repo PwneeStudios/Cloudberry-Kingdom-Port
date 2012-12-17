@@ -3,13 +3,13 @@
 namespace CloudberryKingdom
 {
 
-	ClosingCircle::ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames )
+	ClosingCircle::ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames )
 	{
 		InitializeInstanceFields();
 		Init( camera, Frames );
 	}
 
-	ClosingCircle::ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames, const std::shared_ptr<IPos> &Center )
+	ClosingCircle::ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames, const boost::shared_ptr<IPos> &Center )
 	{
 		InitializeInstanceFields();
 		Init( camera, Frames );
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		CenterObj = Center;
 	}
 
-	ClosingCircle::ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames, Vector2 Center )
+	ClosingCircle::ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames, Vector2 Center )
 	{
 		InitializeInstanceFields();
 		Init( camera, Frames );
@@ -25,11 +25,11 @@ namespace CloudberryKingdom
 		CenterPos = Center;
 	}
 
-	void ClosingCircle::Init( const std::shared_ptr<Camera> &camera, float Frames )
+	void ClosingCircle::Init( const boost::shared_ptr<Camera> &camera, float Frames )
 	{
 		MyCamera = camera;
 
-		Circle = std::make_shared<QuadClass>();
+		Circle = boost::make_shared<QuadClass>();
 		Circle->Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( _T( "Circle" ) );
 		Circle->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
 

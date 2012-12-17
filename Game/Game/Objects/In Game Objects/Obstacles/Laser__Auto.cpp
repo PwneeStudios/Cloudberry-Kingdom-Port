@@ -3,11 +3,11 @@
 namespace CloudberryKingdom
 {
 
-	void Laser_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Laser_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
 		BobWidthLevel = Param( PieceSeed, u->Get( Upgrade_LASER ) );
@@ -22,9 +22,9 @@ namespace CloudberryKingdom
 		LaserStepCutoff = 1499;
 	}
 
-std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_AutoGen>();
+boost::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = boost::make_shared<Laser_AutoGen>();
 
-	const std::shared_ptr<Laser_AutoGen> &Laser_AutoGen::getInstance()
+	const boost::shared_ptr<Laser_AutoGen> &Laser_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -35,15 +35,15 @@ std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Laser_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Laser_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Laser_Parameters> Params = std::make_shared<Laser_Parameters>();
+		boost::shared_ptr<Laser_Parameters> Params = boost::make_shared<Laser_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void Laser_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Laser_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
@@ -51,7 +51,7 @@ std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_
 		TR += Vector2( 350, 0 );
 
 		// Get Laser parameters
-		std::shared_ptr<Laser_Parameters> Params = std::static_pointer_cast<Laser_Parameters>( level->getStyle()->FindParams( Laser_AutoGen::getInstance() ) );
+		boost::shared_ptr<Laser_Parameters> Params = boost::static_pointer_cast<Laser_Parameters>( level->getStyle()->FindParams( Laser_AutoGen::getInstance() ) );
 
 		float step = 5;
 
@@ -69,7 +69,7 @@ std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_
 
 			if ( step < Params->LaserStepCutoff )
 			{
-				std::shared_ptr<Laser> laser = std::static_pointer_cast<Laser>( level->getRecycle()->GetObject(ObjectType_LASER, true) );
+				boost::shared_ptr<Laser> laser = boost::static_pointer_cast<Laser>( level->getRecycle()->GetObject(ObjectType_LASER, true) );
 				laser->Init( Vector2(), level );
 
 				laser->getCore()->Data.Position = loc;
@@ -108,7 +108,7 @@ std::shared_ptr<Laser_AutoGen> Laser_AutoGen::instance = std::make_shared<Laser_
 		}
 	}
 
-	void Laser_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Laser_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}

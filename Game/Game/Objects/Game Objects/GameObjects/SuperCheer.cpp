@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	SuperCheer::CheerHelper::CheerHelper( const std::shared_ptr<GameData> &mygame, Vector2 pos )
+	SuperCheer::CheerHelper::CheerHelper( const boost::shared_ptr<GameData> &mygame, Vector2 pos )
 	{
 		this->mygame = mygame;
 		this->pos = pos;
@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	void SuperCheer::CheerHelper::Apply()
 	{
-		std::shared_ptr<Cheer> cheer = std::make_shared<Cheer>();
+		boost::shared_ptr<Cheer> cheer = boost::make_shared<Cheer>();
 		cheer->Berry->setPos( cheer->Berry->getPos() + pos );
 		mygame->AddGameObject( cheer );
 	}
@@ -43,8 +43,8 @@ namespace CloudberryKingdom
 			float y = -Taper * 4 * x * x / ( Spread * Spread );
 			Vector2 pos = Vector2( x, y - 130 );
 
-			std::shared_ptr<GameData> mygame = MyGame;
-			MyGame->WaitThenDo( i * 6 + Delay, std::make_shared<CheerHelper>( mygame, pos ) );
+			boost::shared_ptr<GameData> mygame = MyGame;
+			MyGame->WaitThenDo( i * 6 + Delay, boost::make_shared<CheerHelper>( mygame, pos ) );
 		}
 	}
 }

@@ -13,6 +13,7 @@
 #include <boost/assert.hpp>
 #include <new>
 #include <cstdlib>
+#include <Utility/Limits.h>
 
 int const m = 2; // m * sizeof(int) must be aligned appropriately
 

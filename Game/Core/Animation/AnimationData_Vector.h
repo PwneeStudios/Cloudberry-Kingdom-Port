@@ -30,9 +30,9 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 		AnimationData();
 

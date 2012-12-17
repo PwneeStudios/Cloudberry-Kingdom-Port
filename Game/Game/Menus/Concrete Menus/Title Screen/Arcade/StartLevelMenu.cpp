@@ -7,7 +7,7 @@
 namespace CloudberryKingdom
 {
 
-	LevelItem::LevelItem( const std::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked ) : MenuItem( Text )
+	LevelItem::LevelItem( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked ) : MenuItem( Text )
 	{
 		this->StartLevel = StartLevel - 1;
 		this->MenuIndex = MenuIndex;
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	StartLevelMenu::GameReturnProxy::GameReturnProxy( const std::shared_ptr<StartLevelMenu> &slm )
+	StartLevelMenu::GameReturnProxy::GameReturnProxy( const boost::shared_ptr<StartLevelMenu> &slm )
 	{
 		this->slm = slm;
 	}
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 		return slm->GameReturn();
 	}
 
-	StartLevelMenu::LaunchHelper::LaunchHelper( const std::shared_ptr<StartLevelMenu> &slm, const std::shared_ptr<LevelItem> &litem )
+	StartLevelMenu::LaunchHelper::LaunchHelper( const boost::shared_ptr<StartLevelMenu> &slm, const boost::shared_ptr<LevelItem> &litem )
 	{
 		this->slm = slm;
 		this->litem = litem;
@@ -38,24 +38,24 @@ namespace CloudberryKingdom
 	void StartLevelMenu::LaunchHelper::Apply()
 	{
 		// Executed once the game exits back to this menu
-		slm->MyGame->AddToDo( std::make_shared<GameReturnProxy>( slm ) );
+		slm->MyGame->AddToDo( boost::make_shared<GameReturnProxy>( slm ) );
 
 		slm->StartFunc->Apply( litem );
 	}
 
-	StartLevelMenu::LaunchProxy::LaunchProxy( const std::shared_ptr<StartLevelMenu> &slm )
+	StartLevelMenu::LaunchProxy::LaunchProxy( const boost::shared_ptr<StartLevelMenu> &slm )
 	{
 		this->slm = slm;
 	}
 
-	void StartLevelMenu::LaunchProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void StartLevelMenu::LaunchProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		slm->Launch( item );
 	}
 
 	int StartLevelMenu::PreviousMenuIndex = 0;
 
-	void StartLevelMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void StartLevelMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -64,13 +64,13 @@ namespace CloudberryKingdom
 		text->Shadow = false;
 	}
 
-	void StartLevelMenu::Launch( const std::shared_ptr<MenuItem> &item )
+	void StartLevelMenu::Launch( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<LevelItem> litem = std::dynamic_pointer_cast<LevelItem>( item );
+		boost::shared_ptr<LevelItem> litem = boost::dynamic_pointer_cast<LevelItem>( item );
 		if ( 0 == litem )
 			return;
 
-		MyGame->WaitThenDo( CallDelay, std::make_shared<LaunchHelper>( std::static_pointer_cast<StartLevelMenu>( shared_from_this() ), litem ), _T( "StartGame" ) );
+		MyGame->WaitThenDo( CallDelay, boost::make_shared<LaunchHelper>( boost::static_pointer_cast<StartLevelMenu>( shared_from_this() ), litem ), _T( "StartGame" ) );
 	}
 
 	bool StartLevelMenu::GameReturn()
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		return true;
 	}
 
-	void StartLevelMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void StartLevelMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -113,13 +113,13 @@ namespace CloudberryKingdom
 	{
 	}
 
-	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct()
+	boost::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct()
 	{
 		InitializeInstanceFields();
 
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
+		return boost::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
 
 	StartLevelMenu::StartLevelMenu( int HighestLevel ) :
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		IndexCutoff( 0 )
 	{
 	}
-	std::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
+	boost::shared_ptr<StartLevelMenu> StartLevelMenu::StartLevelMenu_Construct( int HighestLevel )
 	{
 		InitializeInstanceFields();
 
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 
 		Initialize();
 
-		return std::static_pointer_cast<StartLevelMenu>( shared_from_this() );
+		return boost::static_pointer_cast<StartLevelMenu>( shared_from_this() );
 	}
 
 	void StartLevelMenu::Initialize()
@@ -160,11 +160,11 @@ namespace CloudberryKingdom
 
 		SlideInFrom = SlideOutTo = PresetPos_RIGHT;
 
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 
 		Vector2 shift = Vector2( -200, 40 );
@@ -177,9 +177,9 @@ namespace CloudberryKingdom
 			int MenuIndex = i;
 			bool Locked = i >= IndexCutoff;
 
-			std::shared_ptr<LevelItem> item = std::make_shared<LevelItem>( std::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked );
+			boost::shared_ptr<LevelItem> item = boost::make_shared<LevelItem>( boost::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked );
 			if ( !Locked )
-				item->setGo( std::make_shared<LaunchProxy>( std::static_pointer_cast<StartLevelMenu>( shared_from_this() ) ) );
+				item->setGo( boost::make_shared<LaunchProxy>( boost::static_pointer_cast<StartLevelMenu>( shared_from_this() ) ) );
 
 			AddItem( item );
 			item->SelectedPos.X -= 25;
@@ -191,22 +191,22 @@ namespace CloudberryKingdom
 
 		this->EnsureFancy();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Backdrop
-		std::shared_ptr<QuadClass> Backdrop = std::make_shared<QuadClass>( _T( "Arcade_Box" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Arcade_Box" ) );
 		Backdrop->ScaleYToMatchRatio( 587 );
 		MyPile->Add( Backdrop );
 
 		// Back
-		std::shared_ptr<QuadClass> BackButton = std::make_shared<QuadClass>( ButtonTexture::getBack() );
+		boost::shared_ptr<QuadClass> BackButton = boost::make_shared<QuadClass>( ButtonTexture::getBack() );
 		MyPile->Add( BackButton, _T( "Back" ) );
-		std::shared_ptr<QuadClass> BackArrow = std::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) );
+		boost::shared_ptr<QuadClass> BackArrow = boost::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) );
 		MyPile->Add( BackArrow );
 		BackArrow->FancyPos->SetCenter( BackButton->FancyPos );
 
 		// Header
-		std::shared_ptr<EzText> Header = std::make_shared<EzText>( Localization::Words_LEVEL, Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_LEVEL, Resources::Font_Grobold42 );
 		MyPile->Add( Header );
 		SetHeaderProperties( Header );
 
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 	{
 		MyMenu->setPos( Vector2( 647.2223f, -447.2223f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "" ) );
 		if ( _t != 0 )
 		{
@@ -225,7 +225,7 @@ namespace CloudberryKingdom
 			_t->setScale( 1.30125f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "" ) );
 		if ( _q != 0 )
 		{

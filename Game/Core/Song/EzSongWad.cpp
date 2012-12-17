@@ -13,13 +13,13 @@ namespace CloudberryKingdom
 	EzSongWad::EzSongWad()
 	{
 		InitializeInstanceFields();
-		SongList = std::vector<std::shared_ptr<EzSong> >();
+		SongList = std::vector<boost::shared_ptr<EzSong> >();
 
 		CurIndex = 0;
 
 		StartingSong = false;
 
-		DefaultCam = std::make_shared<Camera>();
+		DefaultCam = boost::make_shared<Camera>();
 
 		MediaPlayer::IsRepeating = false;
 	}
@@ -47,14 +47,14 @@ namespace CloudberryKingdom
 		MediaPlayer::Resume();
 	}
 
-	void EzSongWad::DisplaySongInfo( const std::shared_ptr<EzSong> &song )
+	void EzSongWad::DisplaySongInfo( const boost::shared_ptr<EzSong> &song )
 	{
 		if ( !DisplayInfo )
 			return;
 		if ( !song->DisplayInfo )
 			return;
 
-		SongInfoText = std::make_shared<EzText>( song->SongName + _T( "\n" ) + song->ArtistName, Resources::LilFont, true, true );
+		SongInfoText = boost::make_shared<EzText>( song->SongName + _T( "\n" ) + song->ArtistName, Resources::LilFont, true, true );
 		SongInfoText->_Pos = Vector2( -850, -790 );
 		SongInfoText->MyFloatColor = Vector4( 1, 1, 1, 4.5f );
 		SongInfoText->Alpha = -.45f;
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 			return false;
 	}
 
-	void EzSongWad::Next( const std::shared_ptr<EzSong> &song )
+	void EzSongWad::Next( const boost::shared_ptr<EzSong> &song )
 	{
 		CurIndex = IndexOf( PlayList, song );
 
@@ -191,7 +191,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::DisposeAllUnused()
 	{
-		for ( std::vector<std::shared_ptr<EzSong> >::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
+		for ( std::vector<boost::shared_ptr<EzSong> >::const_iterator song = SongList.begin(); song != SongList.end(); ++song )
 			if ( ( *song )->song != 0 && SongList[ CurIndex ] != *song && !SongList[ CurIndex ]->AlwaysLoaded )
 			{
 				/*delete ( *song )->song;
@@ -206,9 +206,9 @@ namespace CloudberryKingdom
 		PlayList = Tools::GlobalRnd->Shuffle( PlayList );
 	}
 
-	void EzSongWad::SetPlayList( std::vector<std::shared_ptr<EzSong> > &songs )
+	void EzSongWad::SetPlayList( std::vector<boost::shared_ptr<EzSong> > &songs )
 	{
-		PlayList = std::vector<std::shared_ptr<EzSong> >( songs );
+		PlayList = std::vector<boost::shared_ptr<EzSong> >( songs );
 	}
 
 	void EzSongWad::SetPlayList( const std::wstring &name )
@@ -216,16 +216,16 @@ namespace CloudberryKingdom
 		SetPlayList( FindByName( name ) );
 	}
 
-	void EzSongWad::SetPlayList( const std::shared_ptr<EzSong> &song )
+	void EzSongWad::SetPlayList( const boost::shared_ptr<EzSong> &song )
 	{
-		std::vector<std::shared_ptr<EzSong> > list;
+		std::vector<boost::shared_ptr<EzSong> > list;
 		list.push_back( song );
 
 		SetPlayList( list );
 		CurIndex = 0;
 	}
 
-	bool EzSongWad::SamePlayList( std::vector<std::shared_ptr<EzSong> > &list1, std::vector<std::shared_ptr<EzSong> > &list2 )
+	bool EzSongWad::SamePlayList( std::vector<boost::shared_ptr<EzSong> > &list1, std::vector<boost::shared_ptr<EzSong> > &list2 )
 	{
 		if ( list1 == list2 )
 			return true;
@@ -280,7 +280,7 @@ namespace CloudberryKingdom
 		SetSong( IndexOf( PlayList, FindByName( name ) ) );
 	}
 
-	void EzSongWad::SetSong( const std::shared_ptr<EzSong> &song )
+	void EzSongWad::SetSong( const boost::shared_ptr<EzSong> &song )
 	{
 		SetSong( IndexOf( PlayList, song ) );
 	}
@@ -315,9 +315,9 @@ namespace CloudberryKingdom
 		Duration = PlayList[ CurIndex ]->Play( DisplayInfo );
 	}
 
-	std::shared_ptr<EzSong> EzSongWad::FindByName( const std::wstring &name )
+	boost::shared_ptr<EzSong> EzSongWad::FindByName( const std::wstring &name )
 	{
-		for ( std::vector<std::shared_ptr<EzSong> >::const_iterator Sng = SongList.begin(); Sng != SongList.end(); ++Sng )
+		for ( std::vector<boost::shared_ptr<EzSong> >::const_iterator Sng = SongList.begin(); Sng != SongList.end(); ++Sng )
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *Sng )->Name, name ) == 0 )
 				return *Sng;
@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 
 	void EzSongWad::AddSong( const std::wstring &Name )
 	{
-		std::shared_ptr<EzSong> NewSong = std::make_shared<EzSong>();
+		boost::shared_ptr<EzSong> NewSong = boost::make_shared<EzSong>();
 
 		int Index = Name.find( _T( "^" ) );
 
@@ -357,9 +357,9 @@ namespace CloudberryKingdom
 		SongList.push_back( NewSong );
 	}
 
-	void EzSongWad::AddSong( const std::shared_ptr<Song> &song, const std::wstring &Name )
+	void EzSongWad::AddSong( const boost::shared_ptr<Song> &song, const std::wstring &Name )
 	{
-		std::shared_ptr<EzSong> NewSong = std::make_shared<EzSong>();
+		boost::shared_ptr<EzSong> NewSong = boost::make_shared<EzSong>();
 
 		int Index = Name.find( _T( "^" ) );
 
@@ -384,7 +384,7 @@ namespace CloudberryKingdom
 		SongList.push_back( NewSong );
 	}
 
-	void EzSongWad::LoopSong( const std::shared_ptr<EzSong> &song )
+	void EzSongWad::LoopSong( const boost::shared_ptr<EzSong> &song )
 	{
 		Stop();
 		SetPlayList( song );
@@ -406,7 +406,7 @@ namespace CloudberryKingdom
 		Paused = false;
 		Duration = 0;
 		Elapsed = 0;
-		CurrentPlayingList = std::vector<std::shared_ptr<EzSong> >();
+		CurrentPlayingList = std::vector<boost::shared_ptr<EzSong> >();
 		SuppressNextInfoDisplay = false;
 	}
 }

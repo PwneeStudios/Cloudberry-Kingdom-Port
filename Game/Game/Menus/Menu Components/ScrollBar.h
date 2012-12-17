@@ -11,9 +11,9 @@ namespace CloudberryKingdom
 		struct ScrollBarReleaseLambda : public Lambda
 		{
 		
-			std::shared_ptr<ScrollBar> sb;
+			boost::shared_ptr<ScrollBar> sb;
 		
-			ScrollBarReleaseLambda( const std::shared_ptr<ScrollBar> &sb );
+			ScrollBarReleaseLambda( const boost::shared_ptr<ScrollBar> &sb );
 
 			void Apply();
 		};
@@ -22,10 +22,10 @@ namespace CloudberryKingdom
 		struct SliderSetProxy : public Lambda
 		{
 		
-			std::shared_ptr<ScrollBar> Sb;
+			boost::shared_ptr<ScrollBar> Sb;
 
 		
-			SliderSetProxy( const std::shared_ptr<ScrollBar> &sb );
+			SliderSetProxy( const boost::shared_ptr<ScrollBar> &sb );
 
 			void Apply();
 		};
@@ -34,26 +34,26 @@ namespace CloudberryKingdom
 		struct SliderGetLambda : public LambdaFunc<float>
 		{
 		
-			std::shared_ptr<ScrollBar> sb;
+			boost::shared_ptr<ScrollBar> sb;
 		
-			SliderGetLambda( const std::shared_ptr<ScrollBar> &sb );
+			SliderGetLambda( const boost::shared_ptr<ScrollBar> &sb );
 
 			float Apply();
 		};
 
 	
-		std::shared_ptr<LongMenu> AttachedMenu;
-		std::shared_ptr<GUI_Panel> Parent;
+		boost::shared_ptr<LongMenu> AttachedMenu;
+		boost::shared_ptr<GUI_Panel> Parent;
 
 	
 		virtual void ReleaseBody();
 
 	
-		ScrollBar( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent );
-		std::shared_ptr<ScrollBar> ScrollBar_Construct( const std::shared_ptr<LongMenu> &AttachedMenu, const std::shared_ptr<GUI_Panel> &Parent );
+		ScrollBar( const boost::shared_ptr<LongMenu> &AttachedMenu, const boost::shared_ptr<GUI_Panel> &Parent );
+		boost::shared_ptr<ScrollBar> ScrollBar_Construct( const boost::shared_ptr<LongMenu> &AttachedMenu, const boost::shared_ptr<GUI_Panel> &Parent );
 
 	
-		std::shared_ptr<MenuSlider> slider;
+		boost::shared_ptr<MenuSlider> slider;
 	
 		virtual void Init();
 

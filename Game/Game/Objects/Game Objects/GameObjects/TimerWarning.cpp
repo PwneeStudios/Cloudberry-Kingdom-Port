@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 
 		// Make a quad to fill the whole screen
-		Fullscreen = std::make_shared<QuadClass>();
+		Fullscreen = boost::make_shared<QuadClass>();
 	}
 
 	void TimerWarning::MyDraw()
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 				float LeftIntensity = CoreMath::Restrict( .4f,.4f, t );
 				float RightIntensity = CoreMath::Restrict( .1f,.3f, t );
 
-				for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getAlivePlayers().begin(); player != PlayerManager::getAlivePlayers().end(); ++player )
+				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getAlivePlayers().begin(); player != PlayerManager::getAlivePlayers().end(); ++player )
 					Tools::SetVibration( ( *player )->MyPlayerIndex, LeftIntensity, LeftIntensity, 30 );
 	#endif
 			}

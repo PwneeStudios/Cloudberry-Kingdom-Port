@@ -9,13 +9,13 @@
 namespace CloudberryKingdom
 {
 
-	void Bob_PostConstruct( const std::shared_ptr<Bob> &This, const std::shared_ptr<BobPhsx> &type, bool boxesOnly )
+	void Bob_PostConstruct( const boost::shared_ptr<Bob> &This, const boost::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
 		This->SetHeroPhsx( This->MyHeroType );
 		This->SetColorScheme( This->MyHeroType->Prototype->MyColorScheme );
 	}
 
-	void Awardment_PostConstruct( const std::shared_ptr<Awardment> &This )
+	void Awardment_PostConstruct( const boost::shared_ptr<Awardment> &This )
 	{
 		if ( This->Unlockable != 0 )
 			This->Unlockable->AssociatedAward = This->shared_from_this();
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		Awardments::Awards.push_back( This->shared_from_this() );
 	}
 
-	void Quad_PostConstruct( const std::shared_ptr<Quad> &This, const std::shared_ptr<Quad> &quad, bool DeepClone )
+	void Quad_PostConstruct( const boost::shared_ptr<Quad> &This, const boost::shared_ptr<Quad> &quad, bool DeepClone )
 	{
 		This->InitVertices();
 
@@ -37,23 +37,23 @@ namespace CloudberryKingdom
 			This->Vertices[ i ] = quad->Vertices[ i ];
 	}
 
-	void ObjectClass_PostConstruct( const std::shared_ptr<ObjectClass> &This, const std::shared_ptr<QuadDrawer> &Drawer, const std::shared_ptr<GraphicsDevice> &device, const std::shared_ptr<PresentationParameters> &pp, int Width, int Height, const std::shared_ptr<EzEffect> &BaseEffect, const std::shared_ptr<EzTexture> &BaseTexture )
+	void ObjectClass_PostConstruct( const boost::shared_ptr<ObjectClass> &This, const boost::shared_ptr<QuadDrawer> &Drawer, const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<PresentationParameters> &pp, int Width, int Height, const boost::shared_ptr<EzEffect> &BaseEffect, const boost::shared_ptr<EzTexture> &BaseTexture )
 	{
 		This->VersionNumber = ObjectClass::ObjectClassVersionNumber;
 
-		This->AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
+		This->AnimQueue = std::queue<boost::shared_ptr<AnimQueueEntry> >();
 
 		This->CenterFlipOnBox = true;
 
-		This->ParentQuad = std::make_shared<Quad>();
+		This->ParentQuad = boost::make_shared<Quad>();
 		This->ParentQuad->InitVertices();
 		This->ParentQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
 		This->ParentQuad->ParentObject = This->shared_from_this();
 		This->ParentQuad->MyEffect = BaseEffect;
 		This->ParentQuad->MyTexture = BaseTexture;
 
-		This->QuadList = std::vector<std::shared_ptr<BaseQuad> >();
-		This->BoxList = std::vector<std::shared_ptr<ObjectBox> >();
+		This->QuadList = std::vector<boost::shared_ptr<BaseQuad> >();
+		This->BoxList = std::vector<boost::shared_ptr<ObjectBox> >();
 
 		This->AnimLength = std::vector<int>( 50 );
 		This->AnimSpeed = std::vector<float>( 50 );
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 		This->UpdateEffectList();
 	}
 
-	void ObjectClass_PostConstruct_3params( const std::shared_ptr<ObjectClass> &This, const std::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
+	void ObjectClass_PostConstruct_3params( const boost::shared_ptr<ObjectClass> &This, const boost::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
 	{
 		This->InitializeInstanceFields();
 		This->LoadingRunSpeed = obj->LoadingRunSpeed;
@@ -93,9 +93,9 @@ namespace CloudberryKingdom
 
 		This->LoadingRunSpeed = obj->LoadingRunSpeed;
 
-		This->AnimQueue = std::queue<std::shared_ptr<AnimQueueEntry> >();
-		std::queue<std::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<std::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
-		std::vector<std::shared_ptr<AnimQueueEntry> > array_Renamed;
+		This->AnimQueue = std::queue<boost::shared_ptr<AnimQueueEntry> >();
+		std::queue<boost::shared_ptr<AnimQueueEntry> > QueueCopy = std::queue<boost::shared_ptr<AnimQueueEntry> >( obj->AnimQueue );
+		std::vector<boost::shared_ptr<AnimQueueEntry> > array_Renamed;
 		while( !QueueCopy.empty() )
 		{
 			array_Renamed.push_back( QueueCopy.front() );
@@ -105,9 +105,9 @@ namespace CloudberryKingdom
 		// FIXME: Make sure make_shared actually copies the object.
 		if ( array_Renamed.size() > 0 )
 		{
-			This->LastAnimEntry = std::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
+			This->LastAnimEntry = boost::make_shared<AnimQueueEntry>( array_Renamed[ array_Renamed.size() - 1 ] );
 			for ( size_t i = 0; i < array_Renamed.size() - 1; i++ )
-				This->AnimQueue.push( std::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
+				This->AnimQueue.push( boost::make_shared<AnimQueueEntry>( array_Renamed[ i ] ) );
 			This->AnimQueue.push( This->LastAnimEntry );
 		}
 
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 
 		This->CenterFlipOnBox = obj->CenterFlipOnBox;
 
-		This->ParentQuad = std::make_shared<Quad>( obj->ParentQuad, DeepClone );
+		This->ParentQuad = boost::make_shared<Quad>( obj->ParentQuad, DeepClone );
 		Quad_PostConstruct( This->ParentQuad, obj->ParentQuad, DeepClone );
 		This->ParentQuad->ParentObject = This->shared_from_this();
 		This->ParentQuad->MyEffect = obj->ParentQuad->MyEffect;
@@ -127,15 +127,15 @@ namespace CloudberryKingdom
 		// Add quads and boxes            
 		if ( !This->BoxesOnly )
 		{
-			This->QuadList = std::vector<std::shared_ptr<BaseQuad> >();
+			This->QuadList = std::vector<boost::shared_ptr<BaseQuad> >();
 
-			for ( std::vector<std::shared_ptr<BaseQuad> >::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
+			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = obj->QuadList.begin(); quad != obj->QuadList.end(); ++quad )
 			{
 				if ( dynamic_cast<Quad*>( ( *quad ).get() ) != 0 )
 				{
 					// FIXME: Check static_pointer_cast.
-					std::shared_ptr<Quad> nquad = std::make_shared<Quad>( std::static_pointer_cast<Quad>( *quad ), DeepClone );
-					Quad_PostConstruct( nquad, std::static_pointer_cast<Quad>( *quad ), DeepClone );
+					boost::shared_ptr<Quad> nquad = boost::make_shared<Quad>( boost::static_pointer_cast<Quad>( *quad ), DeepClone );
+					Quad_PostConstruct( nquad, boost::static_pointer_cast<Quad>( *quad ), DeepClone );
 					This->QuadList.push_back( nquad );
 					nquad->ParentObject = This->shared_from_this();
 					if ( ( *quad )->ParentQuad == ( *quad )->ParentObject->ParentQuad )
@@ -145,9 +145,9 @@ namespace CloudberryKingdom
 		}
 
 		// Clone boxes
-		This->BoxList = std::vector<std::shared_ptr<ObjectBox> >();
-		for ( std::vector<std::shared_ptr<ObjectBox> >::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
-			This->BoxList.push_back( std::make_shared<ObjectBox>( *box, DeepClone ) );
+		This->BoxList = std::vector<boost::shared_ptr<ObjectBox> >();
+		for ( std::vector<boost::shared_ptr<ObjectBox> >::const_iterator box = obj->BoxList.begin(); box != obj->BoxList.end(); ++box )
+			This->BoxList.push_back( boost::make_shared<ObjectBox>( *box, DeepClone ) );
 
 
 		// Make sure pointers match up
@@ -159,15 +159,15 @@ namespace CloudberryKingdom
 				if ( dynamic_cast<Quad*>( obj->QuadList[ i ].get() ) != 0 )
 				{
 					// FIXME: Check static_pointer_cast.
-					std::shared_ptr<BaseQuad> parent = ( std::static_pointer_cast<Quad>( obj->QuadList[ i ] ) )->Center->ParentQuad;
+					boost::shared_ptr<BaseQuad> parent = ( boost::static_pointer_cast<Quad>( obj->QuadList[ i ] ) )->Center->ParentQuad;
 					if ( parent != 0 )
 					{
 						if ( parent == obj->ParentQuad )
-							( std::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->ParentQuad;
+							( boost::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->ParentQuad;
 						else
 						{
 							int j = IndexOf( obj->QuadList, parent );
-							( std::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->QuadList[ j ];
+							( boost::static_pointer_cast<Quad>( This->QuadList[ i ] ) )->Center->ParentQuad = This->QuadList[ j ];
 						}
 					}
 				}
@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 				{
 					//((Quad)QuadList[obj.QuadList.IndexOf(obj.QuadList[i].ParentQuad)]).AddQuadChild(QuadList[i]);
 					//((Quad)                               QuadList[obj.QuadList.IndexOf(                                obj.QuadList[i].ParentQuad)]).          AddQuadChild(QuadList[i]);
-					( std::static_pointer_cast<Quad>( This->QuadList[ IndexOf<std::shared_ptr<BaseQuad> >( obj->QuadList, obj->QuadList[ i ]->ParentQuad ) ] ) )->AddQuadChild( This->QuadList[ i ] );
+					( boost::static_pointer_cast<Quad>( This->QuadList[ IndexOf<boost::shared_ptr<BaseQuad> >( obj->QuadList, obj->QuadList[ i ]->ParentQuad ) ] ) )->AddQuadChild( This->QuadList[ i ] );
 				}
 			}
 		}
@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 			{
 				//BoxList[i].TR.ParentQuad = BoxList[i].BL.ParentQuad = (Quad)QuadList[obj.QuadList.IndexOf(obj.BoxList[i].BL.ParentQuad)];
 				//    BoxList[i].TR.ParentQuad	   =       BoxList[i].BL.ParentQuad     = (Quad)							    QuadList[obj.QuadList.IndexOf(obj.BoxList[i].BL.ParentQuad)];
-				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = std::static_pointer_cast<Quad>( This->QuadList[ IndexOf( obj->QuadList, obj->BoxList[ i ]->BL->ParentQuad ) ] );
+				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = boost::static_pointer_cast<Quad>( This->QuadList[ IndexOf( obj->QuadList, obj->BoxList[ i ]->BL->ParentQuad ) ] );
 			}
 			else
 				This->BoxList[ i ]->TR->ParentQuad = This->BoxList[ i ]->BL->ParentQuad = This->ParentQuad;
@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 		This->UpdateEffectList();
 	}
 
-	std::shared_ptr<GameData> GameData_Construct( const std::shared_ptr<GameData> &This )
+	boost::shared_ptr<GameData> GameData_Construct( const boost::shared_ptr<GameData> &This )
 	{
 		This->InitializeInstanceFields();
 
@@ -226,19 +226,19 @@ namespace CloudberryKingdom
 
 		This->Recycle = Recycler::GetRecycler();
 
-		This->EndGame = std::make_shared<GameData::FinishProxy>( This->shared_from_this() );
+		This->EndGame = boost::make_shared<GameData::FinishProxy>( This->shared_from_this() );
 
 		This->Loading = false;
 
-		This->CurToDo = std::vector<std::shared_ptr<ToDoItem> >();
-		This->NextToDo = std::vector<std::shared_ptr<ToDoItem> >();
+		This->CurToDo = std::vector<boost::shared_ptr<ToDoItem> >();
+		This->NextToDo = std::vector<boost::shared_ptr<ToDoItem> >();
 
 		return This;
 	}
 
-	std::shared_ptr<ActionGameData> ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This )
+	boost::shared_ptr<ActionGameData> ActionGameData_Construct( const boost::shared_ptr<ActionGameData> &This )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 
@@ -246,9 +246,9 @@ namespace CloudberryKingdom
 	}
 
 	
-	std::shared_ptr<ActionGameData> ActionGameData_Construct( const std::shared_ptr<ActionGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	boost::shared_ptr<ActionGameData> ActionGameData_Construct( const boost::shared_ptr<ActionGameData> &This, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->Init( LevelSeed, MakeInBackground );
@@ -256,27 +256,27 @@ namespace CloudberryKingdom
 		return This;
 	}
 
-	std::shared_ptr<NormalGameData> NormalGameData_Construct( const std::shared_ptr<NormalGameData> &This, const std::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
+	boost::shared_ptr<NormalGameData> NormalGameData_Construct( const boost::shared_ptr<NormalGameData> &This, const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->Init( LevelSeed, MakeInBackground );
 
 		return This;
 	}
 
-	std::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This )
+	boost::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const boost::shared_ptr<StringWorldGameData> &This )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 
 		return This;
 	}
 
-	std::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const std::shared_ptr<StringWorldGameData> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed )
+	boost::shared_ptr<StringWorldGameData> StringWorldGameData_Construct( const boost::shared_ptr<StringWorldGameData> &This, const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->GetSeedFunc = GetSeed;
@@ -284,9 +284,9 @@ namespace CloudberryKingdom
 		return This;
 	}
 
-	std::shared_ptr<ScreenSaver> ScreenSaver_Construct( const std::shared_ptr<ScreenSaver> &This )
+	boost::shared_ptr<ScreenSaver> ScreenSaver_Construct( const boost::shared_ptr<ScreenSaver> &This )
 	{
-		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ) );
+		StringWorldGameData_Construct( boost::static_pointer_cast<StringWorldGameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->Constructor();
@@ -294,54 +294,54 @@ namespace CloudberryKingdom
 		return This;
 	}
 
-	std::shared_ptr<StringWorldEndurance> StringWorldEndurance_Construct( const std::shared_ptr<StringWorldEndurance> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife )
+	boost::shared_ptr<StringWorldEndurance> StringWorldEndurance_Construct( const boost::shared_ptr<StringWorldEndurance> &This, const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_LivesLeft> &Gui_LivesLeft, int NextLife )
 	{
-		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
+		StringWorldGameData_Construct( boost::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
 
 		// Lives
 		This->Gui_LivesLeft = Gui_LivesLeft;
 		This->Gui_Lives = MakeMagic( GUI_Lives, ( Gui_LivesLeft ) );
-		This->Gui_NextLife = std::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
+		This->Gui_NextLife = boost::make_shared<GUI_NextLife>( NextLife, Gui_LivesLeft );
 
 		// Coin score multiplier
-		This->MyCoinScoreMultiplier = std::make_shared<CoinScoreMultiplierObject>();
+		This->MyCoinScoreMultiplier = boost::make_shared<CoinScoreMultiplierObject>();
 
 		// Level and Score
 		This->MyGUI_Score = MakeMagic( GUI_Score, () ) ;
 		This->MyGUI_Level = MakeMagic( GUI_Level, () );
 
 		// Add game objects, including 'Perfect' watcher
-		This->OnSwapToFirstLevel->Add( std::make_shared<StringWorldEndurance::OnSwapLambda>( std::static_pointer_cast<StringWorldEndurance>( This->shared_from_this() ) ) );
+		This->OnSwapToFirstLevel->Add( boost::make_shared<StringWorldEndurance::OnSwapLambda>( boost::static_pointer_cast<StringWorldEndurance>( This->shared_from_this() ) ) );
 
 		return This;
 	}
 
-	std::shared_ptr<StringWorldTimed> StringWorldTimed_Construct( const std::shared_ptr<StringWorldTimed> &This, const std::shared_ptr<LambdaFunc_1<int, std::shared_ptr<LevelSeedData> > > &GetSeed, const std::shared_ptr<GUI_Timer> &Timer )
+	boost::shared_ptr<StringWorldTimed> StringWorldTimed_Construct( const boost::shared_ptr<StringWorldTimed> &This, const boost::shared_ptr<LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> > > &GetSeed, const boost::shared_ptr<GUI_Timer> &Timer )
 	{
-		StringWorldGameData_Construct( std::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
+		StringWorldGameData_Construct( boost::static_pointer_cast<StringWorldGameData>( This ), GetSeed );
 
 		This->MyGUI_Timer = Timer;
 
-		This->Warning = std::make_shared<TimerWarning>();
+		This->Warning = boost::make_shared<TimerWarning>();
 		This->Warning->MyTimer = Timer;
 
 		This->MyGUI_Score = MakeMagic( GUI_Score, () );
 		This->MyGUI_Level = MakeMagic( GUI_Level, () );
 
-		Timer->OnTimeExpired->Add( std::make_shared<StringWorldTimed::StringWorldOnTimerExpiredLambda>( This->MyGUI_Score, This->MyGUI_Level ) );
+		Timer->OnTimeExpired->Add( boost::make_shared<StringWorldTimed::StringWorldOnTimerExpiredLambda>( This->MyGUI_Score, This->MyGUI_Level ) );
 
 		// Coin score multiplier
-		This->MyCoinScoreMultiplier = std::make_shared<CoinScoreMultiplierObject>();
+		This->MyCoinScoreMultiplier = boost::make_shared<CoinScoreMultiplierObject>();
 
 		// Add 'Perfect' watcher
-		This->OnSwapToFirstLevel->Add( std::make_shared<StringWorldTimed::OnSwapLambda>( std::static_pointer_cast<StringWorldTimed>( This->shared_from_this() ) ) );
+		This->OnSwapToFirstLevel->Add( boost::make_shared<StringWorldTimed::OnSwapLambda>( boost::static_pointer_cast<StringWorldTimed>( This->shared_from_this() ) ) );
 
 		return This;
 	}
 
-	std::shared_ptr<TitleGameData> TitleGameData_Construct( const std::shared_ptr<TitleGameData> &This )
+	boost::shared_ptr<TitleGameData> TitleGameData_Construct( const boost::shared_ptr<TitleGameData> &This )
 	{
-		GameData_Construct( std::static_pointer_cast<GameData>( This ) );
+		GameData_Construct( boost::static_pointer_cast<GameData>( This ) );
 
 		This->InitializeInstanceFields();
 		This->LockLevelStart = false;
@@ -355,9 +355,9 @@ namespace CloudberryKingdom
 		return This;
 	}
 
-	std::shared_ptr<TitleGameData_MW> TitleGameData_MW_Construct( const std::shared_ptr<TitleGameData_MW> &This )
+	boost::shared_ptr<TitleGameData_MW> TitleGameData_MW_Construct( const boost::shared_ptr<TitleGameData_MW> &This )
 	{
-		TitleGameData_Construct( std::static_pointer_cast<TitleGameData>( This ) );
+		TitleGameData_Construct( boost::static_pointer_cast<TitleGameData>( This ) );
 
 		return This;
 	}

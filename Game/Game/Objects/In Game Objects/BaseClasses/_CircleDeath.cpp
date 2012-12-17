@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	{
 		getCore()->BoxesOnly = BoxesOnly;
 
-		Circle = std::make_shared<CircleBox>();
+		Circle = boost::make_shared<CircleBox>();
 
 		MakeNew();
 	}
@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		Circle->Move( shift );
 	}
 
-	void _CircleDeath::Interact( const std::shared_ptr<Bob> &bob )
+	void _CircleDeath::Interact( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( !getCore()->SkippedPhsx )
 		{
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void _CircleDeath::Clone( const std::shared_ptr<ObjectBase> &A )
+	void _CircleDeath::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 

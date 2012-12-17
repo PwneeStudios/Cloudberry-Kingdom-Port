@@ -7,8 +7,8 @@ namespace CloudberryKingdom
 	{
 		getCore()->BoxesOnly = BoxesOnly;
 
-		MyBox = std::make_shared<AABox>();
-		MyDraw = std::make_shared<NormalBlockDraw>();
+		MyBox = boost::make_shared<AABox>();
+		MyDraw = boost::make_shared<NormalBlockDraw>();
 
 		MakeNew();
 	}
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 		BasicConstruction( BoxesOnly );
 	}
 
-	std::shared_ptr<PieceQuad> NormalBlock::GetPieceTemplate()
+	boost::shared_ptr<PieceQuad> NormalBlock::GetPieceTemplate()
 	{
 		if ( getBlockCore()->MyOrientation == PieceQuad::Orientation_ROTATE_RIGHT || getBlockCore()->MyOrientation == PieceQuad::Orientation_ROTATE_LEFT )
 			return GetPieceTemplate( getBox()->Current->Size.Y );
@@ -56,15 +56,15 @@ namespace CloudberryKingdom
 			return GetPieceTemplate( getBox()->Current->Size.X );
 	}
 
-	std::shared_ptr<PieceQuad> NormalBlock::GetPieceTemplate( float width )
+	boost::shared_ptr<PieceQuad> NormalBlock::GetPieceTemplate( float width )
 	{
-		std::shared_ptr<CloudberryKingdom::TileSet> tileset = getCore()->getMyTileSet();
+		boost::shared_ptr<CloudberryKingdom::TileSet> tileset = getCore()->getMyTileSet();
 		if ( tileset->ProvidesTemplates )
 		{
 			if ( getMyLevel() == 0 )
-				return tileset->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), 0 );
+				return tileset->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), 0 );
 			else
-				return tileset->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd() );
+				return tileset->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), getRnd() );
 		}
 
 		if ( tileset->PassableSides )
@@ -83,12 +83,12 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
+		MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}
 
-	void NormalBlock::Init( Vector2 center, Vector2 size, const std::shared_ptr<TileSet> &tile )
+	void NormalBlock::Init( Vector2 center, Vector2 size, const boost::shared_ptr<TileSet> &tile )
 	{
 		getCore()->Data.Position = getCore()->StartData.Position = center;
 		getCore()->setMyTileSet(tile);
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		MyBox->Initialize( center, size );
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
+			MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		Update();
 
@@ -231,7 +231,7 @@ float NormalBlock::TopOnlyHeight = 60;
 		MyBox->Validate();
 
 		if ( !getCore()->BoxesOnly )
-			MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
+			MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ), GetPieceTemplate(), Invert );
 
 		getBlockCore()->StartData.Position = MyBox->Current->Center;
 
@@ -273,9 +273,9 @@ float NormalBlock::TopOnlyHeight = 60;
 		}
 	}
 
-	void NormalBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void NormalBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
-		std::shared_ptr<NormalBlock> BlockA = std::dynamic_pointer_cast<NormalBlock>( A );
+		boost::shared_ptr<NormalBlock> BlockA = boost::dynamic_pointer_cast<NormalBlock>( A );
 		getBlockCore()->Clone(A->getCore());
 
 		if ( BlockA == 0 )
@@ -289,14 +289,14 @@ float NormalBlock::TopOnlyHeight = 60;
 			MyDraw->Clone( BlockA->MyDraw );
 	}
 
-	void NormalBlock::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void NormalBlock::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		getBlockCore()->Write(writer);
 
 		getBox()->Write(writer);
 	}
 
-	void NormalBlock::Read( const std::shared_ptr<BinaryReader> &reader )
+	void NormalBlock::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		getBlockCore()->Read(reader);
 
@@ -304,7 +304,7 @@ float NormalBlock::TopOnlyHeight = 60;
 		ResetPieces();
 	}
 
-	bool NormalBlock::PreDecision( const std::shared_ptr<Bob> &bob )
+	bool NormalBlock::PreDecision( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( getBlockCore()->Ceiling )
 		{
@@ -332,7 +332,7 @@ float NormalBlock::TopOnlyHeight = 60;
 		return false;
 	}
 
-	bool NormalBlock::PostCollidePreDecision( const std::shared_ptr<Bob> &bob )
+	bool NormalBlock::PostCollidePreDecision( const boost::shared_ptr<Bob> &bob )
 	{
 		if ( getBlockCore()->Ceiling )
 		{
@@ -343,13 +343,13 @@ float NormalBlock::TopOnlyHeight = 60;
 		return false;
 	}
 
-	void NormalBlock::PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
+	void NormalBlock::PostCollideDecision( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
 	{
-		Block_PostCollideDecision( std::dynamic_pointer_cast<BlockBase>( shared_from_this() ), bob, Col, Overlap, Delete );
+		Block_PostCollideDecision( boost::dynamic_pointer_cast<BlockBase>( shared_from_this() ), bob, Col, Overlap, Delete );
 		BlockBase::PostCollideDecision( bob, Col, Overlap, Delete );
 	}
 
-	void NormalBlock::Block_PostCollideDecision( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
+	void NormalBlock::Block_PostCollideDecision( const boost::shared_ptr<BlockBase> &block, const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
 	{
 		bool MakeTopOnly = false;
 
@@ -373,7 +373,7 @@ float NormalBlock::TopOnlyHeight = 60;
 			// If we've used something besides the top of the block already,
 			// or this tileset doesn't allow for top only blocks,
 			// then make sure we don't make the block top only.
-			if ( block->getBlockCore()->NonTopUsed || !(std::dynamic_pointer_cast<NormalBlock>(block) != 0) || !block->getInfo()->AllowTopOnlyBlocks )
+			if ( block->getBlockCore()->NonTopUsed || !(boost::dynamic_pointer_cast<NormalBlock>(block) != 0) || !block->getInfo()->AllowTopOnlyBlocks )
 			{
 				if ( MakeTopOnly )
 				{
@@ -395,28 +395,28 @@ float NormalBlock::TopOnlyHeight = 60;
 			if ( MakeTopOnly )
 			{
 				block->Extend( Side_BOTTOM, __max( block->getBox()->Current->BL.Y, __max(bob->Box->Target->TR.Y, bob->Box->Current->TR.Y) + bob->CeilingParams->BufferSize.GetVal(bob->getCore()->Data.Position) ) );
-				( std::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
+				( boost::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
 				if ( Col != ColType_TOP )
 					Col = ColType_NO_COL;
 			}
 		}
 	}
 
-	void NormalBlock::PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	void NormalBlock::PostInteractWith( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		BlockBase::PostInteractWith( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = std::static_pointer_cast<BlockBase>( shared_from_this() );
+		boost::shared_ptr<BlockBase> block = boost::static_pointer_cast<BlockBase>( shared_from_this() );
 
 		// Draw block upside down if Bob used it upside down.
 		if ( Col == ColType_BOTTOM && bob->MyPhsx->Gravity < 0 )
 			getBlockCore()->CeilingDraw = true;
 
 		// Normal blocks delete surrounding blocks when stamped as used
-		if ( block->getCore()->GenData.DeleteSurroundingOnUse && std::dynamic_pointer_cast<NormalBlock>(block) != 0 )
+		if ( block->getCore()->GenData.DeleteSurroundingOnUse && boost::dynamic_pointer_cast<NormalBlock>(block) != 0 )
 			for ( BlockVec::const_iterator nblock = getCore()->MyLevel->Blocks.begin(); nblock != getCore()->MyLevel->Blocks.end(); ++nblock )
 			{
-				std::shared_ptr<NormalBlock> Normal = std::dynamic_pointer_cast<NormalBlock>( *nblock );
+				boost::shared_ptr<NormalBlock> Normal = boost::dynamic_pointer_cast<NormalBlock>( *nblock );
 				if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
 					if ( !Normal->getCore()->GenData.Used && abs(Normal->getBox()->Current->TR.Y - block->getBox()->TR.Y) < 15 && !(Normal->getBox()->Current->TR.X < block->getBox()->Current->BL.X - 350 || Normal->getBox()->Current->BL.X > block->getBox()->Current->TR.X + 350) )
 					{
@@ -426,23 +426,23 @@ float NormalBlock::TopOnlyHeight = 60;
 			}
 	}
 
-	void NormalBlock::PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	void NormalBlock::PostKeep( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		BlockBase::PostKeep( bob, Col, Overlap );
 
-		std::shared_ptr<BlockBase> block = std::static_pointer_cast<NormalBlock>( shared_from_this() );
+		boost::shared_ptr<BlockBase> block = boost::static_pointer_cast<NormalBlock>( shared_from_this() );
 
 		if ( !block->getCore()->GenData.NoBottomShift )
 		{
 			// Shift bottom of block if necessary
-			if ( std::dynamic_pointer_cast<NormalBlock>( block ) != 0 && !block->getBlockCore()->DeleteIfTopOnly )
+			if ( boost::dynamic_pointer_cast<NormalBlock>( block ) != 0 && !block->getBlockCore()->DeleteIfTopOnly )
 			{
 				float NewBottom = __max( block->getBox()->Current->BL.Y, __max(getBox()->Target->TR.Y, getBox()->Current->TR.Y) + bob->CeilingParams->BufferSize.GetVal(getCore()->Data.Position) );
 
 				if ( ( Col == ColType_BOTTOM || Overlap ) && Col != ColType_TOP && !block->getBlockCore()->NonTopUsed )
 				{
 					block->Extend( Side_BOTTOM, NewBottom );
-					( std::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
+					( boost::static_pointer_cast<NormalBlock>( block ) )->CheckHeight();
 				}
 			}
 		}

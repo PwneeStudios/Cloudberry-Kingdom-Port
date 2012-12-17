@@ -47,13 +47,13 @@ namespace CloudberryKingdom
 
 	void ProgressBar::Initialize()
 	{
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
-		Outline = std::make_shared<QuadClass>();
+		Outline = boost::make_shared<QuadClass>();
 		Outline->SetToDefault();
 		MyPile->Add( Outline );
 
-		Fill = std::make_shared<QuadClass>();
+		Fill = boost::make_shared<QuadClass>();
 		Fill->SetToDefault();
 		MyPile->Add( Fill );
 	}
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 		MyType = BarType_SCALE;
 	}
 
-	InitialLoadingScreen::InitialLoadingScreen( const std::shared_ptr<ContentManager> &Content, const std::shared_ptr<WrappedFloat> &ResourceCount )
+	InitialLoadingScreen::InitialLoadingScreen( const boost::shared_ptr<ContentManager> &Content, const boost::shared_ptr<WrappedFloat> &ResourceCount )
 	{
 		InitializeInstanceFields();
 		this->ResourceCount = ResourceCount;
@@ -145,16 +145,16 @@ namespace CloudberryKingdom
 		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadOutline" ) );
 		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadFill" ) );
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		//Tools.TextureWad.FindOrLoad(Content, "Splash");
 		//Splash = new QuadClass("Splash", 1400);
 		//MyPile.Add(Splash);
 
-		MyProgressBar = std::make_shared<ProgressBar>();
+		MyProgressBar = boost::make_shared<ProgressBar>();
 		MyProgressBar->setPos( Vector2( 900, -400 ) );
 
-		BlackQuad = std::make_shared<QuadClass>( _T( "White" ), 1400.f );
+		BlackQuad = boost::make_shared<QuadClass>( _T( "White" ), 1400.f );
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 255 ) );
 		BlackQuad->setAlpha( 0 );
 		BlackQuad->Layer = 1;

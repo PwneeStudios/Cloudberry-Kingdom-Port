@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	AlertBaseMenu::OkProxy::OkProxy( const std::shared_ptr<AlertBaseMenu> &abm )
+	AlertBaseMenu::OkProxy::OkProxy( const boost::shared_ptr<AlertBaseMenu> &abm )
 	{
 		this->abm = abm;
 	}
@@ -32,11 +32,11 @@ namespace CloudberryKingdom
 		Message( static_cast<Localization::Words>( 0 ) ), OkText( static_cast<Localization::Words>( 0 ) )
 	{
 	}
-	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct()
+	boost::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
 	AlertBaseMenu::AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText ) :
@@ -44,7 +44,7 @@ namespace CloudberryKingdom
 		CkBaseMenu( false )
 	{
 	}
-	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText )
+	boost::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
 	AlertBaseMenu::AlertBaseMenu( bool CallBaseConstructor ) :
@@ -62,14 +62,14 @@ namespace CloudberryKingdom
 		Message( static_cast<Localization::Words>( 0 ) ), OkText( static_cast<Localization::Words>( 0 ) )
 	{
 	}
-	std::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
+	boost::shared_ptr<AlertBaseMenu> AlertBaseMenu::AlertBaseMenu_Construct( bool CallBaseConstructor )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( CallBaseConstructor );
 
-		return std::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() );
 	}
 
-	void AlertBaseMenu::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void AlertBaseMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 
 	void AlertBaseMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
 		Backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( Backdrop );
 	}
@@ -98,31 +98,31 @@ namespace CloudberryKingdom
 
 		FontScale = .8f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
 		MakeBackdrop();
 
-		std::shared_ptr<EzText> message = std::make_shared<EzText>( Message, ItemFont, 700.f, true, true );
+		boost::shared_ptr<EzText> message = boost::make_shared<EzText>( Message, ItemFont, 700.f, true, true );
 		message->Name = _T( "Message" );
 		MyPile->Add( message );
 
 		// Make the menu
-		MyMenu = std::make_shared<Menu>( false );
+		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->setControl( getControl() );
 
-		std::shared_ptr<MenuItem> OkItem = std::make_shared<MenuItem>( std::make_shared<EzText>( OkText, ItemFont, true, true ), _T( "Message" ) );
-		OkItem->setGo( Cast::ToItem( std::make_shared<OkProxy>( std::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) ) );
+		boost::shared_ptr<MenuItem> OkItem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( OkText, ItemFont, true, true ), _T( "Message" ) );
+		OkItem->setGo( Cast::ToItem( boost::make_shared<OkProxy>( boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) ) );
 		AddItem( OkItem );
 		OkItem->SelectSound.reset();
 
-		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( std::make_shared<OkProxy>( std::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) );
+		MyMenu->OnA = MyMenu->OnX = MyMenu->OnB = Cast::ToMenu( boost::make_shared<OkProxy>( boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) );
 
 		EnsureFancy();
 
 
 
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Message" ) );
 		if ( _item != 0 )
 		{
@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Message" ) );
 		if ( _t != 0 )
 		{
@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 			_t->setScale( 1 );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{

@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 {
 
 	HeroDoll::HeroDoll( int Control ) : CkBaseMenu( false ) { }
-	std::shared_ptr<HeroDoll> HeroDoll::HeroDoll_Construct( int Control )
+	boost::shared_ptr<HeroDoll> HeroDoll::HeroDoll_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<HeroDoll>( shared_from_this() );
+		return boost::static_pointer_cast<HeroDoll>( shared_from_this() );
 	}
 
 	void HeroDoll::ReleaseBody()
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		CallDelay = 0;
 		ReturnToCallerDelay = 0;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 	}
 
@@ -53,13 +53,13 @@ namespace CloudberryKingdom
 		MakeHeroDoll( BobPhsxNormal::getInstance() );
 	}
 
-	void HeroDoll::MakeHeroDoll( const std::shared_ptr<BobPhsx> &hero )
+	void HeroDoll::MakeHeroDoll( const boost::shared_ptr<BobPhsx> &hero )
 	{
-		std::shared_ptr<Bob> current_bob = MyGame->MyLevel->Bobs.empty() ? 0 : MyGame->MyLevel->Bobs[ 0 ];
+		boost::shared_ptr<Bob> current_bob = MyGame->MyLevel->Bobs.empty() ? 0 : MyGame->MyLevel->Bobs[ 0 ];
 		Vector2 current_pos = current_bob == 0 ? Vector2() : current_bob->getPos();
 
 		// Grab cape
-		std::shared_ptr<Cape> PrevCape = 0;
+		boost::shared_ptr<Cape> PrevCape = 0;
 		if ( current_bob != 0 )
 		{
 			PrevCape = current_bob->MyCape;
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		player = PlayerManager::Players[ PlayerManager::GetFirstPlayer() ];
 
 		// Make doll
-		MyDoll = std::make_shared<Bob>( hero, false );
+		MyDoll = boost::make_shared<Bob>( hero, false );
 		Bob_PostConstruct( MyDoll, hero, false );
 		MyDoll->MyPlayerIndex = player->MyPlayerIndex;
 		MyDoll->MyPiece = Tools::CurLevel->CurPiece;
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::MyPhsxStep();
 
-		std::shared_ptr<BobPhsxCharSelect> HeroDollPhsx = std::dynamic_pointer_cast<BobPhsxCharSelect>( MyDoll->MyPhsx );
+		boost::shared_ptr<BobPhsxCharSelect> HeroDollPhsx = boost::dynamic_pointer_cast<BobPhsxCharSelect>( MyDoll->MyPhsx );
 
 		MyDoll->CapeWind = Cape::SineWind( Vector2( -1.25f, -.1f ),.5f,.05f, Tools::t ) *.7f;
 		MyDoll->MyPhsx->OnGround = true;
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 
 	void HeroDoll::DrawBob()
 	{
-		std::shared_ptr<Camera> cam = Tools::CurLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = Tools::CurLevel->getMainCamera();
 		Vector2 HoldZoom = cam->getZoom();
 
 		cam->FancyPos->AbsVal = cam->FancyPos->RelVal = cam->Data.Position;

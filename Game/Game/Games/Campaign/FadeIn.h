@@ -11,10 +11,10 @@ namespace CloudberryKingdom
 		struct ReadyProxy : public Lambda
 		{
 		
-			std::shared_ptr<FadeInObject> fio;
+			boost::shared_ptr<FadeInObject> fio;
 
 		
-			ReadyProxy( const std::shared_ptr<FadeInObject> &fio );
+			ReadyProxy( const boost::shared_ptr<FadeInObject> &fio );
 
 			void Apply();
 		};
@@ -23,10 +23,10 @@ namespace CloudberryKingdom
 		struct EndProxy : public Lambda
 		{
 		
-			std::shared_ptr<FadeInObject> fio;
+			boost::shared_ptr<FadeInObject> fio;
 
 		
-			EndProxy( const std::shared_ptr<FadeInObject> &fio );
+			EndProxy( const boost::shared_ptr<FadeInObject> &fio );
 
 			void Apply();
 		};

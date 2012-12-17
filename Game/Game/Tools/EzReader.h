@@ -11,9 +11,9 @@ namespace CloudberryKingdom
 		std::wstring FileName;
 
 	
-		//std::shared_ptr<FileStream> stream;
+		//boost::shared_ptr<FileStream> stream;
 	
-		std::shared_ptr<BinaryReader> reader;
+		boost::shared_ptr<BinaryReader> reader;
 
 		EzReader( const std::wstring &FileName );
 

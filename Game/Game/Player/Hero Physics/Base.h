@@ -32,9 +32,9 @@ namespace CloudberryKingdom
 		
 			static void InitializeStatics();
 		
-			static std::shared_ptr<EzSound> DoubleJump_Sound;
-			static std::shared_ptr<EzSound> BobBoxJump_Sound;
-			static std::shared_ptr<EzSound> BobJetpack_Sound;
+			static boost::shared_ptr<EzSound> DoubleJump_Sound;
+			static boost::shared_ptr<EzSound> BobBoxJump_Sound;
+			static boost::shared_ptr<EzSound> BobJetpack_Sound;
 			static int BobJetpack_SoundDelay;
 		};
 		enum CustomData
@@ -105,11 +105,11 @@ namespace CloudberryKingdom
 		int Id;
 		std::wstring Adjective;
 		std::wstring NameTemplate;
-		std::shared_ptr<ObjectIcon> Icon;
+		boost::shared_ptr<ObjectIcon> Icon;
 	
 		float DefaultIconWidth;
 	
-		std::shared_ptr<Bob> Prototype;
+		boost::shared_ptr<Bob> Prototype;
 		CapeType CapePrototype;
 		Vector2 CapeOffset;
 		Vector2 CapeOffset_Ducking;
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		Vector2 ModCapeSize;
 		float DollCamZoomMod;
 		Vector2 HeroDollShift;
-		std::shared_ptr<Bob> MyBob;
+		boost::shared_ptr<Bob> MyBob;
 		float BlobMod;
 		bool Ducking;
 		int DuckingCount;
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		/// True when the first phsx step hasn't finished yet.
 		/// </summary>
 		bool FirstPhsxStep;
-		std::shared_ptr<ObjectBase> ObjectLandedOn;
+		boost::shared_ptr<ObjectBase> ObjectLandedOn;
 		int LastUsedStamp;
 		bool PlacedJump, NextJumpIsPlacedJump;
 
@@ -185,28 +185,28 @@ namespace CloudberryKingdom
 	
 		const LevelGeometry &getGeometry() const;
 	
-		static std::shared_ptr<BobPhsx> GetPhsx_Base( int BaseType );
-		static std::shared_ptr<BobPhsx> GetPhsx_Shape( int Shape );
-		static std::shared_ptr<BobPhsx> GetPhsx_Move( int MoveMod );
-		static std::shared_ptr<BobPhsx> GetPhsx_Special( int Special );
-		virtual void Set( const std::shared_ptr<BobPhsx> &phsx );
-		static std::shared_ptr<BobPhsx> MakeCustom( HeroSpec spec );
-		static std::shared_ptr<BobPhsx> MakeCustom( std::shared_ptr<BobPhsx> BaseType, const std::shared_ptr<BobPhsx> &Shape, std::shared_ptr<BobPhsx> MoveMod, std::shared_ptr<BobPhsx> Special );
-		static std::shared_ptr<BobPhsx> MakeCustom( const std::wstring &BaseType, const std::wstring &Shape, const std::wstring &MoveMod, const std::wstring &Special );
-		static std::shared_ptr<BobPhsx> MakeCustom( int BaseType, int Shape, int MoveMod );
-		static std::shared_ptr<BobPhsx> MakeCustom( int BaseType, int Shape, int MoveMod, int Special );
-		static std::shared_ptr<BobPhsx> MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod );
-		static std::shared_ptr<BobPhsx> MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod, Hero_Special Special );
+		static boost::shared_ptr<BobPhsx> GetPhsx_Base( int BaseType );
+		static boost::shared_ptr<BobPhsx> GetPhsx_Shape( int Shape );
+		static boost::shared_ptr<BobPhsx> GetPhsx_Move( int MoveMod );
+		static boost::shared_ptr<BobPhsx> GetPhsx_Special( int Special );
+		virtual void Set( const boost::shared_ptr<BobPhsx> &phsx );
+		static boost::shared_ptr<BobPhsx> MakeCustom( HeroSpec spec );
+		static boost::shared_ptr<BobPhsx> MakeCustom( boost::shared_ptr<BobPhsx> BaseType, const boost::shared_ptr<BobPhsx> &Shape, boost::shared_ptr<BobPhsx> MoveMod, boost::shared_ptr<BobPhsx> Special );
+		static boost::shared_ptr<BobPhsx> MakeCustom( const std::wstring &BaseType, const std::wstring &Shape, const std::wstring &MoveMod, const std::wstring &Special );
+		static boost::shared_ptr<BobPhsx> MakeCustom( int BaseType, int Shape, int MoveMod );
+		static boost::shared_ptr<BobPhsx> MakeCustom( int BaseType, int Shape, int MoveMod, int Special );
+		static boost::shared_ptr<BobPhsx> MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod );
+		static boost::shared_ptr<BobPhsx> MakeCustom( Hero_BaseType BaseType, Hero_Shape Shape, Hero_MoveMod MoveMod, Hero_Special Special );
 		/// <summary>
 		/// If true this BobPhsx has custom physic's parameters, such as gravity, friction, etc.
 		/// </summary>
 		void SetCustomPhsx( CustomPhsxData data );
 		virtual void InitSingleton();
-		const std::shared_ptr<ObjectClass> &getObj() const;
-		const std::shared_ptr<Camera> &getCam() const;
-		const std::shared_ptr<Level> &getMyLevel() const;
-		const std::shared_ptr<ObjectData> &getCore() const;
-		const std::shared_ptr<RichLevelGenData> &getGenData() const;
+		const boost::shared_ptr<ObjectClass> &getObj() const;
+		const boost::shared_ptr<Camera> &getCam() const;
+		const boost::shared_ptr<Level> &getMyLevel() const;
+		const boost::shared_ptr<ObjectData> &getCore() const;
+		const boost::shared_ptr<RichLevelGenData> &getGenData() const;
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 		Vector2 getApparentVelocity() const;
@@ -224,11 +224,11 @@ namespace CloudberryKingdom
 		virtual bool getSticky() const;
 
 		void ResetJumpModifiers();
-		virtual void ToSprites( const std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( const std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 		virtual void Release();
 		BobPhsx();
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsx> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsx> &bob );
 		virtual void KillJump();
 		/// <summary>
 		/// Called when an external force (such as a bouncy block) forces Bob toward a specific direction.
@@ -236,7 +236,7 @@ namespace CloudberryKingdom
 		virtual void Forced( Vector2 Dir );
 		virtual void DampForcedJump();
 		virtual void DisableJump( int Length );
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual void Integrate();
 
@@ -259,23 +259,23 @@ namespace CloudberryKingdom
 		void AdditionalGenerateInputChecks( int CurPhsxStep );
 	
 		virtual bool CheckFor_xFlip();
-		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
-		virtual void HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit );
+		virtual void LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn );
+		virtual void HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit );
 		virtual void GenerateInput( int CurPhsxStep );
 		virtual void AnimStep();
 	
 		void CheckForAnimDone();
 	
 		virtual void IncrementJumpCounter();
-		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
+		virtual void SideHit( ColType side, const boost::shared_ptr<BlockBase> &block );
 		virtual void Die( BobDeathType DeathType );
-		bool SkipInteraction( const std::shared_ptr<BlockBase> &block );
+		bool SkipInteraction( const boost::shared_ptr<BlockBase> &block );
 		virtual void BlockInteractions();
 		virtual void BlockInteractions_Stage1();
-		virtual bool IsTopCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
-		virtual bool IsBottomCollision( ColType Col, const std::shared_ptr<AABox> &box, const std::shared_ptr<BlockBase> &block );
-		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
-		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
+		virtual bool IsTopCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block );
+		virtual bool IsBottomCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block );
+		virtual void ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style );
+		virtual void ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece );
 		virtual void OnInitBoxes();
 		/// <summary>
 		/// Do any initial actions needed for using this hero as a Doll.

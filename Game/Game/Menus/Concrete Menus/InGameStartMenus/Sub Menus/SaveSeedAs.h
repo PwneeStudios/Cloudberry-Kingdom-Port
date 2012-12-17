@@ -9,25 +9,25 @@ namespace CloudberryKingdom
 	struct SaveSeedAs : public VerifyBaseMenu
 	{
 	
-		struct SaveProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct SaveProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<SaveSeedAs> ssa;
+			boost::shared_ptr<SaveSeedAs> ssa;
 
 		
-			SaveProxy( const std::shared_ptr<SaveSeedAs> &ssa );
+			SaveProxy( const boost::shared_ptr<SaveSeedAs> &ssa );
 
-			void Apply( const std::shared_ptr<MenuItem> &_item );
+			void Apply( const boost::shared_ptr<MenuItem> &_item );
 		};
 
 	
 		struct OnOkProxy : public Lambda
 		{
 		
-			std::shared_ptr<SaveSeedAs> ssa;
+			boost::shared_ptr<SaveSeedAs> ssa;
 
 		
-			OnOkProxy( const std::shared_ptr<SaveSeedAs> &ssa );
+			OnOkProxy( const boost::shared_ptr<SaveSeedAs> &ssa );
 
 			void Apply();
 		};
@@ -36,9 +36,9 @@ namespace CloudberryKingdom
 		struct SaveSeedAsOnEscapeLambda : public Lambda
 		{
 		
-			std::shared_ptr<SaveSeedAs> ssa;
+			boost::shared_ptr<SaveSeedAs> ssa;
 		
-			SaveSeedAsOnEscapeLambda( const std::shared_ptr<SaveSeedAs> &ssa );
+			SaveSeedAsOnEscapeLambda( const boost::shared_ptr<SaveSeedAs> &ssa );
 
 			void Apply();
 		};
@@ -47,25 +47,25 @@ namespace CloudberryKingdom
 		struct SaveSeedAsOnEnterLambda : public Lambda
 		{
 		
-			std::shared_ptr<SaveSeedAs> ssa;
+			boost::shared_ptr<SaveSeedAs> ssa;
 		
-			SaveSeedAsOnEnterLambda( const std::shared_ptr<SaveSeedAs> &ssa );
+			SaveSeedAsOnEnterLambda( const boost::shared_ptr<SaveSeedAs> &ssa );
 
 			void Apply();
 		};
 	
-		SaveSeedAs( int Control, const std::shared_ptr<PlayerData> &Player );
-		std::shared_ptr<SaveSeedAs> SaveSeedAs_Construct( int Control, const std::shared_ptr<PlayerData> &Player );
+		SaveSeedAs( int Control, const boost::shared_ptr<PlayerData> &Player );
+		boost::shared_ptr<SaveSeedAs> SaveSeedAs_Construct( int Control, const boost::shared_ptr<PlayerData> &Player );
 
 	
-		std::shared_ptr<PlayerData> Player;
-		std::shared_ptr<GUI_TextBox> TextBox;
-		std::shared_ptr<EzText> HeaderText;
+		boost::shared_ptr<PlayerData> Player;
+		boost::shared_ptr<GUI_TextBox> TextBox;
+		boost::shared_ptr<EzText> HeaderText;
 	
 		virtual void Init();
 
 	
-		void Save( const std::shared_ptr<MenuItem> &_item );
+		void Save( const boost::shared_ptr<MenuItem> &_item );
 
 	
 		virtual void OnReturnTo();

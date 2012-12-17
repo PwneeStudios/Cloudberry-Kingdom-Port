@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 		CalcBounds();
 	}
 
-	void CircleBox::Clone( const std::shared_ptr<CircleBox> &A )
+	void CircleBox::Clone( const boost::shared_ptr<CircleBox> &A )
 	{
 		setCenter( A->getCenter() );
 		setRadius( A->getRadius() );
@@ -67,13 +67,13 @@ namespace CloudberryKingdom
 		BL = A->BL;
 	}
 
-	void CircleBox::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void CircleBox::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		writer->Write( getCenter() );
 		writer->Write( getRadius() );
 	}
 
-	void CircleBox::Read( const std::shared_ptr<BinaryReader> &reader )
+	void CircleBox::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		setCenter( reader->ReadVector2() );
 		setRadius( reader->ReadSingle() );
@@ -126,9 +126,9 @@ namespace CloudberryKingdom
 		setRadius( getRadius() * scale );
 	}
 
-	bool CircleBox::BoxOverlap_Tiered( const std::shared_ptr<ObjectData> &Core, const std::shared_ptr<Bob> &bob, const std::shared_ptr<AutoGen> &singleton )
+	bool CircleBox::BoxOverlap_Tiered( const boost::shared_ptr<ObjectData> &Core, const boost::shared_ptr<Bob> &bob, const boost::shared_ptr<AutoGen> &singleton )
 	{
-		std::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
+		boost::shared_ptr<AutoGen_Parameters> Params = Core->GetParams( singleton );
 		int WidthLevel = static_cast<int>( Params->BobWidthLevel.GetVal( Core->Data.Position ) );
 
 		bool col = BoxOverlap( bob->GetBox( WidthLevel ) );
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
 		return col;
 	}
 
-	bool CircleBox::BoxOverlap( const std::shared_ptr<AABox> &box )
+	bool CircleBox::BoxOverlap( const boost::shared_ptr<AABox> &box )
 	{
 		Validate();
 
@@ -150,17 +150,17 @@ namespace CloudberryKingdom
 		if ( box->Target->TR.Y <= BL.Y )
 			return false;
 
-		std::shared_ptr<FloatRectangle> rect = box->Target;
+		boost::shared_ptr<FloatRectangle> rect = box->Target;
 
 		return VerticalSegmentOverlap( rect->TR.X, rect->BL.Y, rect->TR.Y ) || VerticalSegmentOverlap( rect->BL.X, rect->BL.Y, rect->TR.Y ) || HorizontalSegmentOverlap( rect->TR.Y, rect->BL.X, rect->TR.X ) || HorizontalSegmentOverlap( rect->BL.Y, rect->BL.X, rect->TR.X ) || ContainedIn( box ); // Inside -  Bottom segment -  Top segment -  Left segment -  Right segment
 	}
 
-	bool CircleBox::ContainedIn( const std::shared_ptr<FloatRectangle> &rect )
+	bool CircleBox::ContainedIn( const boost::shared_ptr<FloatRectangle> &rect )
 	{
 		return TR.LE( rect->TR ) && BL.GE( rect->BL );
 	}
 
-	bool CircleBox::ContainedIn( const std::shared_ptr<AABox> &box )
+	bool CircleBox::ContainedIn( const boost::shared_ptr<AABox> &box )
 	{
 		box->CalcBounds();
 		return TR.LE( box->TR ) && BL.GE( box->BL );

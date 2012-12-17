@@ -12,69 +12,69 @@ namespace CloudberryKingdom
 		struct ReturnToCallerHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_Panel> panel;
+			boost::shared_ptr<GUI_Panel> panel;
 
 		
-			ReturnToCallerHelper( const std::shared_ptr<GUI_Panel> &panel );
+			ReturnToCallerHelper( const boost::shared_ptr<GUI_Panel> &panel );
 
 			void Apply();
 		};
 
 	
-		struct ItemReturnToCallerProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct ItemReturnToCallerProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<GUI_Panel> guiPanel;
+			boost::shared_ptr<GUI_Panel> guiPanel;
 
 		
-			ItemReturnToCallerProxy( const std::shared_ptr<GUI_Panel> &guiPanel );
+			ItemReturnToCallerProxy( const boost::shared_ptr<GUI_Panel> &guiPanel );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		struct MenuReturnToCallerProxy : public Lambda_1<std::shared_ptr<Menu> >
+		struct MenuReturnToCallerProxy : public Lambda_1<boost::shared_ptr<Menu> >
 		{
 		
-			std::shared_ptr<GUI_Panel> guiPanel;
+			boost::shared_ptr<GUI_Panel> guiPanel;
 
 		
-			MenuReturnToCallerProxy( const std::shared_ptr<GUI_Panel> &guiPanel );
+			MenuReturnToCallerProxy( const boost::shared_ptr<GUI_Panel> &guiPanel );
 
-			void Apply( const std::shared_ptr<Menu> &menu );
+			void Apply( const boost::shared_ptr<Menu> &menu );
 		};
 
 	
-		struct MenuReturnToCallerLambda : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct MenuReturnToCallerLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<GUI_Panel> panel;
+			boost::shared_ptr<GUI_Panel> panel;
 		
-			MenuReturnToCallerLambda( const std::shared_ptr<GUI_Panel> &panel );
+			MenuReturnToCallerLambda( const boost::shared_ptr<GUI_Panel> &panel );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		struct MenuReturnToCallerLambdaFunc : public LambdaFunc_1<std::shared_ptr<Menu> , bool>
+		struct MenuReturnToCallerLambdaFunc : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
 		
-			std::shared_ptr<GUI_Panel> panel;
+			boost::shared_ptr<GUI_Panel> panel;
 		
-			MenuReturnToCallerLambdaFunc( const std::shared_ptr<GUI_Panel> &panel );
+			MenuReturnToCallerLambdaFunc( const boost::shared_ptr<GUI_Panel> &panel );
 
-			bool Apply( const std::shared_ptr<Menu> &menu );
+			bool Apply( const boost::shared_ptr<Menu> &menu );
 		};
 
 	
 		struct CallHelper : public Lambda
 		{
 		
-			std::shared_ptr<GUI_Panel> panel;
-			std::shared_ptr<GUI_Panel> child;
+			boost::shared_ptr<GUI_Panel> panel;
+			boost::shared_ptr<GUI_Panel> child;
 
 		
-			CallHelper( const std::shared_ptr<GUI_Panel> &panel, const std::shared_ptr<GUI_Panel> &child );
+			CallHelper( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<GUI_Panel> &child );
 
 			void Apply();
 		};
@@ -96,8 +96,8 @@ namespace CloudberryKingdom
 		void setControl( const int &value );
 		const int &getControl() const;
 
-		std::shared_ptr<Menu> MyMenu;
-		std::shared_ptr<DrawPile> MyPile;
+		boost::shared_ptr<Menu> MyMenu;
+		boost::shared_ptr<DrawPile> MyPile;
 
 		/// <summary>
 		/// The accumulation of all shifts
@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// The GUI_Panel that called up this GUI_Panel, if it exists.
 		/// </summary>
-		std::shared_ptr<GUI_Panel> Caller;
+		boost::shared_ptr<GUI_Panel> Caller;
 
 		/// <summary>
 		/// When ReturnToCaller is called, this is the number of frames to wait before showing the parent.
@@ -151,9 +151,9 @@ namespace CloudberryKingdom
 		bool ReleaseWhenDoneScaling;
 
 	
-		virtual void ItemReturnToCaller( const std::shared_ptr<MenuItem> &item );
+		virtual void ItemReturnToCaller( const boost::shared_ptr<MenuItem> &item );
 
-		virtual bool MenuReturnToCaller( const std::shared_ptr<Menu> &menu );
+		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
 
 		/// <summary>
 		/// Called when a child panel is exiting to this parent panel.
@@ -163,11 +163,11 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Called to deactivate this panel and bring a child panel.
 		/// </summary>
-		void Call( const std::shared_ptr<GUI_Panel> &child );
-		virtual void Call( const std::shared_ptr<GUI_Panel> &child, int Delay );
+		void Call( const boost::shared_ptr<GUI_Panel> &child );
+		virtual void Call( const boost::shared_ptr<GUI_Panel> &child, int Delay );
 
 	
-		virtual void SetChildControl( const std::shared_ptr<GUI_Panel> &child );
+		virtual void SetChildControl( const boost::shared_ptr<GUI_Panel> &child );
 
 		/// <summary>
 		/// Called to show the Panel. By default, called by OnReturnTo.
@@ -182,13 +182,13 @@ namespace CloudberryKingdom
 
 		bool Hid;
 
-		std::shared_ptr<FancyVector2> Pos;
+		boost::shared_ptr<FancyVector2> Pos;
 
 		GUI_Panel();
-		std::shared_ptr<GUI_Panel> GUI_Panel_Construct();
+		boost::shared_ptr<GUI_Panel> GUI_Panel_Construct();
 
 		GUI_Panel( bool CallBaseConstructor );
-		std::shared_ptr<GUI_Panel> GUI_Panel_Construct( bool CallBaseConstructor );
+		boost::shared_ptr<GUI_Panel> GUI_Panel_Construct( bool CallBaseConstructor );
 
 		virtual void Constructor();
 
@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Copy the slide in and out lengths from a source panel.
 		/// </summary>
-		void CopySlideLengths( const std::shared_ptr<GUI_Panel> &source );
+		void CopySlideLengths( const boost::shared_ptr<GUI_Panel> &source );
 
 		/// <summary>
 		/// The number of frames a slide in/out lasts.
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 	
 		bool outside;
 	
-		std::shared_ptr<Lambda> OnOutsideClick;
+		boost::shared_ptr<Lambda> OnOutsideClick;
 	
 		void CheckForBackFromOutsideClick();
 

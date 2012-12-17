@@ -5,11 +5,11 @@
 namespace CloudberryKingdom
 {
 
-	void MovingBlock_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void MovingBlock_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		float MovingBlockLevel = PieceSeed->MyUpgrades1->Get( Upgrade_MOVING_BLOCK );
 
@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		Motion = static_cast<MotionType>( level->getRnd()->Choose(MotionLevel, static_cast<int>(MovingBlockLevel)) );
 
 		KeepUnused = Param( PieceSeed );
-		if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( level->DefaultHeroType ) != 0 )
 		{
 			KeepUnused.SetVal( BobPhsxSpaceship::KeepUnused( u->Get( Upgrade_MOVING_BLOCK ) ) );
 		}
@@ -46,9 +46,9 @@ namespace CloudberryKingdom
 		AspectTypeRatio = VecFromArray( tempVector2 );
 	}
 
-std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_shared<MovingBlock_AutoGen>();
+boost::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = boost::make_shared<MovingBlock_AutoGen>();
 
-	const std::shared_ptr<MovingBlock_AutoGen> &MovingBlock_AutoGen::getInstance()
+	const boost::shared_ptr<MovingBlock_AutoGen> &MovingBlock_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -59,25 +59,25 @@ std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_s
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> MovingBlock_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> MovingBlock_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<MovingBlock_Parameters> Params = std::make_shared<MovingBlock_Parameters>();
+		boost::shared_ptr<MovingBlock_Parameters> Params = boost::make_shared<MovingBlock_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void MovingBlock_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void MovingBlock_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 	}
 
-	void MovingBlock_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void MovingBlock_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	void MovingBlock_AutoGen::SetMoveType( const std::shared_ptr<MovingBlock> &mblock, float Displacement, MovingBlock_Parameters::MotionType mtype, const std::shared_ptr<Rand> &Rnd )
+	void MovingBlock_AutoGen::SetMoveType( const boost::shared_ptr<MovingBlock> &mblock, float Displacement, MovingBlock_Parameters::MotionType mtype, const boost::shared_ptr<Rand> &Rnd )
 	{
 		switch ( mtype )
 		{
@@ -128,16 +128,16 @@ std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_s
 		}
 	}
 
-	std::shared_ptr<ObjectBase> MovingBlock_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
+	boost::shared_ptr<ObjectBase> MovingBlock_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::CreateAt( level, pos, BL, TR );
 
-		std::shared_ptr<StyleData> Style = level->getStyle();
-		std::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
-		std::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
+		boost::shared_ptr<StyleData> Style = level->getStyle();
+		boost::shared_ptr<RichLevelGenData> GenData = level->CurMakeData->GenData;
+		boost::shared_ptr<PieceSeedData> piece = level->CurMakeData->PieceSeed;
 
 		// Get MovingBlock parameters
-		std::shared_ptr<MovingBlock_Parameters> Params = std::static_pointer_cast<MovingBlock_Parameters>( level->getStyle()->FindParams( MovingBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<MovingBlock_Parameters> Params = boost::static_pointer_cast<MovingBlock_Parameters>( level->getStyle()->FindParams( MovingBlock_AutoGen::getInstance() ) );
 
 		Vector2 size = Vector2( Params->Size.GetVal( pos ), 0 );
 		switch ( Params->Aspect )
@@ -156,7 +156,7 @@ std::shared_ptr<MovingBlock_AutoGen> MovingBlock_AutoGen::instance = std::make_s
 		Vector2 offset = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(0, 0) ),
 								  static_cast<float>( level->getRnd()->Rnd->Next(0, 0) - size.Y ) );
 
-		std::shared_ptr<MovingBlock> mblock = std::static_pointer_cast<MovingBlock>( level->getRecycle()->GetObject(ObjectType_MOVING_BLOCK, true) );
+		boost::shared_ptr<MovingBlock> mblock = boost::static_pointer_cast<MovingBlock>( level->getRecycle()->GetObject(ObjectType_MOVING_BLOCK, true) );
 		mblock->Init( pos + offset, size, level );
 
 		mblock->Period = static_cast<int>( Params->Period.GetVal( pos ) );

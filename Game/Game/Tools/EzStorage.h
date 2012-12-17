@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::vector<std::shared_ptr<SaveLoad> > ThingsToSave;
+		static std::vector<boost::shared_ptr<SaveLoad> > ThingsToSave;
 
 	
 		static void Initialize();
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Add an item to group. The item will be saved whenever the group is saved.
 		/// </summary>
-		static void Add( const std::shared_ptr<SaveLoad> &ThingToSave );
+		static void Add( const boost::shared_ptr<SaveLoad> &ThingToSave );
 
 		/// <summary>
 		/// Save every item that has been changed.
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		static void SaveAll();
 
 #if defined(NOT_PC)
-		static std::shared_ptr<PlayerData> LoadGamer( const std::wstring &GamerName, const std::shared_ptr<PlayerData> &Data );
+		static boost::shared_ptr<PlayerData> LoadGamer( const std::wstring &GamerName, const boost::shared_ptr<PlayerData> &Data );
 #endif
 
 		//public static void LoadRes()
@@ -55,7 +55,7 @@ namespace CloudberryKingdom
 		static void LoadAll();
 
 	
-		static std::shared_ptr<WrappedInt> Count;
+		static boost::shared_ptr<WrappedInt> Count;
 		static Mutex CountLock;
 
 		static void Incr();
@@ -63,26 +63,26 @@ namespace CloudberryKingdom
 		static void Decr();
 	};
 
-	struct SaveLoad : public std::enable_shared_from_this<SaveLoad>
+	struct SaveLoad : public boost::enable_shared_from_this<SaveLoad>
 	{
 	
-		struct SaveLambda : public Lambda_1<std::shared_ptr<BinaryWriter> >
+		struct SaveLambda : public Lambda_1<boost::shared_ptr<BinaryWriter> >
 		{
 		
-			std::shared_ptr<SaveLoad> sl;
+			boost::shared_ptr<SaveLoad> sl;
 		
-			SaveLambda( const std::shared_ptr<SaveLoad> &sl );
+			SaveLambda( const boost::shared_ptr<SaveLoad> &sl );
 
-			void Apply( const std::shared_ptr<BinaryWriter> &writer );
+			void Apply( const boost::shared_ptr<BinaryWriter> &writer );
 		};
 
 	
 		struct SaveFailLambda : public Lambda
 		{
 		
-			std::shared_ptr<SaveLoad> sl;
+			boost::shared_ptr<SaveLoad> sl;
 		
-			SaveFailLambda( const std::shared_ptr<SaveLoad> &sl );
+			SaveFailLambda( const boost::shared_ptr<SaveLoad> &sl );
 
 			void Apply();
 		};
@@ -91,10 +91,10 @@ namespace CloudberryKingdom
 		struct LoadLambda : public Lambda_1<std::vector<unsigned char> >
 		{
 		
-			std::shared_ptr<SaveLoad> sl;
+			boost::shared_ptr<SaveLoad> sl;
 
 		
-			LoadLambda( const std::shared_ptr<SaveLoad> &sl );
+			LoadLambda( const boost::shared_ptr<SaveLoad> &sl );
 
 			void Apply( const std::vector<unsigned char> &data );
 		};
@@ -103,10 +103,10 @@ namespace CloudberryKingdom
 		struct LoadFailLambda : public Lambda
 		{
 		
-			std::shared_ptr<SaveLoad> sl;
+			boost::shared_ptr<SaveLoad> sl;
 
 		
-			LoadFailLambda( const std::shared_ptr<SaveLoad> &sl );
+			LoadFailLambda( const boost::shared_ptr<SaveLoad> &sl );
 
 			void Apply();
 		};
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 		void Load();
 
 	
-		virtual void Serialize( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Serialize( const boost::shared_ptr<BinaryWriter> &writer );
 		virtual void Deserialize( std::vector<unsigned char> Data );
 		virtual void FailLoad();
 
@@ -147,8 +147,8 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		static std::shared_ptr<StorageDevice> Device;
-		static std::shared_ptr<WrappedBool> InUse;
+		static boost::shared_ptr<StorageDevice> Device;
+		static boost::shared_ptr<WrappedBool> InUse;
 		static Mutex InUseLock;
 
 	
@@ -156,16 +156,16 @@ namespace CloudberryKingdom
 
 		static void GetDevice();
 
-		static void Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::shared_ptr<BinaryWriter> > > &SaveLogic, const std::shared_ptr<Lambda> &Fail );
+		static void Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail );
 
 	
-		static void SaveToContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic );
+		static void SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic );
 
 	
-		static void Load( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const std::shared_ptr<Lambda> &Fail );
+		static void Load( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &Fail );
 
 	
-		static void LoadFromContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const std::shared_ptr<Lambda> &FailLogic );
+		static void LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic );
 	};
 }
 

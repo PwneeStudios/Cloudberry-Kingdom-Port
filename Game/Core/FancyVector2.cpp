@@ -50,18 +50,18 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	FancyVector2::FancyVector2( const std::shared_ptr<IPos> &Center )
+	FancyVector2::FancyVector2( const boost::shared_ptr<IPos> &Center )
 	{
 		InitializeInstanceFields();
 		this->Center = Center;
 	}
 
-	void FancyVector2::SetCenter( const std::shared_ptr<IPos> &Center )
+	void FancyVector2::SetCenter( const boost::shared_ptr<IPos> &Center )
 	{
 		SetCenter( Center, false );
 	}
 
-	void FancyVector2::SetCenter( const std::shared_ptr<IPos> &Center, bool UsePosAsRelPos )
+	void FancyVector2::SetCenter( const boost::shared_ptr<IPos> &Center, bool UsePosAsRelPos )
 	{
 		if ( this->Center == Center )
 			return;
@@ -71,12 +71,12 @@ namespace CloudberryKingdom
 		this->Center = Center;
 	}
 
-	void FancyVector2::SetCenter( const std::shared_ptr<ObjectBase> &ObjCenter )
+	void FancyVector2::SetCenter( const boost::shared_ptr<ObjectBase> &ObjCenter )
 	{
 		SetCenter( ObjCenter, false );
 	}
 
-	void FancyVector2::SetCenter( const std::shared_ptr<ObjectBase> &ObjCenter, bool UsePosAsRelPos )
+	void FancyVector2::SetCenter( const boost::shared_ptr<ObjectBase> &ObjCenter, bool UsePosAsRelPos )
 	{
 		if ( this->ObjCenter == ObjCenter )
 			return;

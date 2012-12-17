@@ -23,10 +23,10 @@ namespace CloudberryKingdom
 	struct ClosingCircle
 	{
 	
-		std::shared_ptr<QuadClass> Circle;
-		std::shared_ptr<Camera> MyCamera;
+		boost::shared_ptr<QuadClass> Circle;
+		boost::shared_ptr<Camera> MyCamera;
 
-		std::shared_ptr<IPos> CenterObj;
+		boost::shared_ptr<IPos> CenterObj;
 		Vector2 CenterPos;
 
 		float Speed;
@@ -34,12 +34,12 @@ namespace CloudberryKingdom
 	
 		int FinishedCount;
 
-		ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames );
-		ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames, const std::shared_ptr<IPos> &Center );
-		ClosingCircle( const std::shared_ptr<Camera> &camera, float Frames, Vector2 Center );
+		ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames );
+		ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames, const boost::shared_ptr<IPos> &Center );
+		ClosingCircle( const boost::shared_ptr<Camera> &camera, float Frames, Vector2 Center );
 
 	
-		void Init( const std::shared_ptr<Camera> &camera, float Frames );
+		void Init( const boost::shared_ptr<Camera> &camera, float Frames );
 
 		float angle;
 	

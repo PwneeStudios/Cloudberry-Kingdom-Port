@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 		FlyingBlob_Parameters();
 
-		virtual void SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level );
+		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
 
 	
 		void InitializeInstanceFields();
@@ -76,48 +76,48 @@ namespace CloudberryKingdom
 	struct FlyingBlob_AutoGen : public AutoGen
 	{
 	
-		static std::shared_ptr<FlyingBlob_AutoGen> instance;
+		static boost::shared_ptr<FlyingBlob_AutoGen> instance;
 	
-		const static std::shared_ptr<FlyingBlob_AutoGen> &getInstance();
+		const static boost::shared_ptr<FlyingBlob_AutoGen> &getInstance();
 
 	
 		FlyingBlob_AutoGen();
 
 	
-		std::shared_ptr<AutoGen_Parameters> SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level );
+		boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
 
 	
-		void Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir );
-		void Circle( const std::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir, float ModPeriod );
+		void Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir );
+		void Circle( const boost::shared_ptr<Level> &level, Vector2 Center, float Radius, int Num, int Dir, float ModPeriod );
 
-		void Pinwheel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Pinwheel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 
-		void SetTunnelBlobParameter( const std::shared_ptr<FlyingBlob> &blob, const std::shared_ptr<FlyingBlob_Parameters> &Params, const std::shared_ptr<Rand> &Rnd );
+		void SetTunnelBlobParameter( const boost::shared_ptr<FlyingBlob> &blob, const boost::shared_ptr<FlyingBlob_Parameters> &Params, const boost::shared_ptr<Rand> &Rnd );
 
-		void Tunnel( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+		void Tunnel( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
-		/*void Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed );
-		void Clean( array_Renamed<std::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j );
-		void CleanupTunnel( const std::shared_ptr<Level> &level );*/
-
-	
-		void PreFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-
-		void Cleanup_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-
-		void PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-
-		void Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
-
-		void SetMoveType( const std::shared_ptr<FlyingBlob> &fblob, float Displacement, FlyingBlob_Parameters::MotionType mtype, const std::shared_ptr<Rand> &Rnd );
-
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
-
-		std::shared_ptr<ObjectBase> CreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
+		/*void Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed );
+		void Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j );
+		void CleanupTunnel( const boost::shared_ptr<Level> &level );*/
 
 	
-		std::shared_ptr<ObjectBase> BasicCreateAt( const std::shared_ptr<Level> &level, Vector2 pos );
+		void PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+		void Cleanup_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+		void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+		void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
+
+		void SetMoveType( const boost::shared_ptr<FlyingBlob> &fblob, float Displacement, FlyingBlob_Parameters::MotionType mtype, const boost::shared_ptr<Rand> &Rnd );
+
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, Vector2 BL, Vector2 TR );
+
+		boost::shared_ptr<ObjectBase> CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
+
+	
+		boost::shared_ptr<ObjectBase> BasicCreateAt( const boost::shared_ptr<Level> &level, Vector2 pos );
 	};
 }
 

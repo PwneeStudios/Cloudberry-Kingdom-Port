@@ -13,9 +13,9 @@ namespace CloudberryKingdom
 	
 		bool SkipPhsxStep;
 
-		std::shared_ptr<EzText> Play, Toggle, End, Speed, LB, RB;
+		boost::shared_ptr<EzText> Play, Toggle, End, Speed, LB, RB;
 
-		std::shared_ptr<QuadClass> BigPaused, BigEnd;
+		boost::shared_ptr<QuadClass> BigPaused, BigEnd;
 
 	
 		ReplayGUIType Type;
@@ -23,9 +23,9 @@ namespace CloudberryKingdom
 		ReplayGUI();
 
 	
-		void SetGrayHeaderProperties( const std::shared_ptr<EzText> &text );
+		void SetGrayHeaderProperties( const boost::shared_ptr<EzText> &text );
 
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
 		virtual void Init();
@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		void StartUp();
 
 	
-		void ResetReplay( const std::shared_ptr<Level> &level );
+		void ResetReplay( const boost::shared_ptr<Level> &level );
 
 		void SetToggleText();
 

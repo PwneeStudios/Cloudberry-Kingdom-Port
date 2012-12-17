@@ -6,31 +6,31 @@
 namespace CloudberryKingdom
 {
 	
-	struct ObjectBase : public std::enable_shared_from_this<ObjectBase>
+	struct ObjectBase : public boost::enable_shared_from_this<ObjectBase>
 	{
 
 	
-		const std::shared_ptr<GameData> &getGame() const;
-		const std::shared_ptr<Level> &getMyLevel() const;
-		const std::shared_ptr<Camera> &getCam() const;
-		const std::shared_ptr<Rand> &getRnd() const;
+		const boost::shared_ptr<GameData> &getGame() const;
+		const boost::shared_ptr<Level> &getMyLevel() const;
+		const boost::shared_ptr<Camera> &getCam() const;
+		const boost::shared_ptr<Rand> &getRnd() const;
 
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
 
 	
-		std::shared_ptr<ObjectData> CoreData;
+		boost::shared_ptr<ObjectData> CoreData;
 	
-		const std::shared_ptr<ObjectData> &getCore() const;
-		const std::shared_ptr<TileSetInfo> getInfo() const;
+		const boost::shared_ptr<ObjectData> &getCore() const;
+		const boost::shared_ptr<TileSetInfo> getInfo() const;
 
 		ObjectBase();
 
-		virtual void Init( Vector2 pos, const std::shared_ptr<Level> &level );
+		virtual void Init( Vector2 pos, const boost::shared_ptr<Level> &level );
 
 		virtual void Release();
 
-		void SetParentBlock( const std::shared_ptr<BlockBase> &block );
+		void SetParentBlock( const boost::shared_ptr<BlockBase> &block );
 
 		virtual void CollectSelf();
 
@@ -42,10 +42,10 @@ namespace CloudberryKingdom
 		virtual void Draw();
 		virtual void TextDraw();
 		virtual void Reset( bool BoxesOnly );
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
-		virtual void Interact( const std::shared_ptr<Bob> &bob );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		virtual void Interact( const boost::shared_ptr<Bob> &bob );
 		virtual void Move( Vector2 shift );
 
 		virtual void OnUsed();
@@ -53,8 +53,8 @@ namespace CloudberryKingdom
 		virtual void OnAttachedToBlock();
 		virtual bool PermissionToUse();
 
-		virtual void Smash( const std::shared_ptr<Bob> &bob );
-		virtual bool PreDecision( const std::shared_ptr<Bob> &bob );
+		virtual void Smash( const boost::shared_ptr<Bob> &bob );
+		virtual bool PreDecision( const boost::shared_ptr<Bob> &bob );
 	};
 
 	struct GenerationData
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 
 		OverlapPreference MyOverlapPreference;
 
-		void Decide_RemoveIfUnused( float ChanceToKeep, const std::shared_ptr<Rand> &Rnd );
+		void Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd );
 
 		/// <summary>
 		/// Removes the object if it overlaps with a block. Defaults to false.
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 		bool NoBottomShift;
 		bool NoMakingTopOnly;
 
-		std::shared_ptr<Lambda> OnUsed, OnMarkedForDeletion;
+		boost::shared_ptr<Lambda> OnUsed, OnMarkedForDeletion;
 		void __StampAsUsed( int Step );
 
 		void Release();
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		const std::shared_ptr<Recycler> getRecycle() const;
+		const boost::shared_ptr<Recycler> getRecycle() const;
 
 		/// <summary>
 		/// Whether this object belongs to a level in the middle of level generation
@@ -171,17 +171,17 @@ namespace CloudberryKingdom
 		bool WakeUpRequirements;
 
 	
-		std::shared_ptr<TileSet> _TileSet;
+		boost::shared_ptr<TileSet> _TileSet;
 	
-		const std::shared_ptr<TileSet> &getMyTileSet() const;
-		void setMyTileSet( const std::shared_ptr<TileSet> &value );
+		const boost::shared_ptr<TileSet> &getMyTileSet() const;
+		void setMyTileSet( const boost::shared_ptr<TileSet> &value );
 
 		/// <summary>
 		/// Whether the object should be drawn encased in glass.
 		/// </summary>
 		bool Encased;
 
-		std::shared_ptr<AutoGen_Parameters> GetParams( const std::shared_ptr<AutoGen> &singleton );
+		boost::shared_ptr<AutoGen_Parameters> GetParams( const boost::shared_ptr<AutoGen> &singleton );
 
 		std::wstring EditorCode1, EditorCode2, EditorCode3;
 
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 
 		int DrawLayer2, DrawLayer3;
 
-		std::shared_ptr<Level> MyLevel;
+		boost::shared_ptr<Level> MyLevel;
 		int DrawLayer, DrawSubLayer;
 
 		/// <summary>
@@ -278,21 +278,21 @@ namespace CloudberryKingdom
 
 		std::vector<AssociatedObjData> Associations;
 		unsigned long long ParentObjId;
-		std::shared_ptr<ObjectBase> ParentObject;
-		std::shared_ptr<BlockBase> ParentBlock;
+		boost::shared_ptr<ObjectBase> ParentObject;
+		boost::shared_ptr<BlockBase> ParentBlock;
 		Vector2 ParentOffset;
 
 		/// <summary>
 		/// If the object just interacted with a player, this should point to the player's Bob
 		/// </summary>
-		const std::shared_ptr<Bob> &getInteractingBob() const;
-		void setInteractingBob( const std::shared_ptr<Bob> &value );
-		std::shared_ptr<Bob> _InteractingBob;
+		const boost::shared_ptr<Bob> &getInteractingBob() const;
+		void setInteractingBob( const boost::shared_ptr<Bob> &value );
+		boost::shared_ptr<Bob> _InteractingBob;
 
 		/// <summary>
 		/// If the object just interacted with a player, this should point to the player
 		/// </summary>
-		std::shared_ptr<PlayerData> InteractingPlayer;
+		boost::shared_ptr<PlayerData> InteractingPlayer;
 
 		bool DoNotScrollOut;
 
@@ -302,20 +302,20 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: Use 'va_start', 'va_arg', and 'va_end' to access the parameter array within this method:
 		static void AddAssociation( bool DeleteWhenDeleted, bool UseWhenUsed, ... );
 
-		void AddAssociate( const std::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed );
+		void AddAssociate( const boost::shared_ptr<ObjectBase> &obj, bool DeleteWhenDeleted, bool UseWhenUsed );
 
-		bool IsAssociatedWith( const std::shared_ptr<ObjectBase> &obj );
+		bool IsAssociatedWith( const boost::shared_ptr<ObjectBase> &obj );
 
-		int GetAssociatedIndex( const std::shared_ptr<ObjectBase> &obj );
+		int GetAssociatedIndex( const boost::shared_ptr<ObjectBase> &obj );
 
-		AssociatedObjData GetAssociationData( const std::shared_ptr<ObjectBase> &obj );
+		AssociatedObjData GetAssociationData( const boost::shared_ptr<ObjectBase> &obj );
 
 		bool Released;
 		virtual void Release();
 
-		void SetParentObj( const std::shared_ptr<ObjectBase> &obj );
+		void SetParentObj( const boost::shared_ptr<ObjectBase> &obj );
 
-		void SetParentBlock( const std::shared_ptr<BlockBase> &block );
+		void SetParentBlock( const boost::shared_ptr<BlockBase> &block );
 
 		Vector2 GetPosFromParentOffset();
 
@@ -336,11 +336,11 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
-		virtual void Clone( const std::shared_ptr<ObjectData> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectData> &A );
 
-		virtual void Write( const std::shared_ptr<BinaryWriter> &writer );
+		virtual void Write( const boost::shared_ptr<BinaryWriter> &writer );
 
-		virtual void Read( const std::shared_ptr<BinaryReader> &reader );
+		virtual void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 	
 		void InitializeInstanceFields();

@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 		_MarkedForDeltion = value;
 	}
 
-	ToDoItem::ToDoItem( const std::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
+	ToDoItem::ToDoItem( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
 	{
 		InitializeInstanceFields();
 		MyFunc = FuncToDo;

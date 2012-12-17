@@ -6,6 +6,7 @@
 #include <cafe/procui.h>
 #include <Content/Wad.h>
 #include <cstdlib>
+#include <Utility/Limits.h>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>

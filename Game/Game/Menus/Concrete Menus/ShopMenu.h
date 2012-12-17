@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		{
 		
 			float pitch;
-			std::shared_ptr<EzSound> sound;
+			boost::shared_ptr<EzSound> sound;
 
 		
 			CoinSoundPlayer( float pitch );
@@ -21,39 +21,39 @@ namespace CloudberryKingdom
 		};
 
 	
-		struct YesProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct YesProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<VerifyPurchaseMenu> vpm;
+			boost::shared_ptr<VerifyPurchaseMenu> vpm;
 
 		
-			YesProxy( const std::shared_ptr<VerifyPurchaseMenu> &vpm );
+			YesProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		struct NoProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct NoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<VerifyPurchaseMenu> vpm;
+			boost::shared_ptr<VerifyPurchaseMenu> vpm;
 
 		
-			NoProxy( const std::shared_ptr<VerifyPurchaseMenu> &vpm );
+			NoProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
-		std::shared_ptr<Buyable> buyable;
+		boost::shared_ptr<Buyable> buyable;
 		int Cost;
-		VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable );
-		std::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable );
+		VerifyPurchaseMenu( int Control, const boost::shared_ptr<Buyable> &buyable );
+		boost::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu_Construct( int Control, const boost::shared_ptr<Buyable> &buyable );
 
 	
-		void Yes( const std::shared_ptr<MenuItem> &item );
+		void Yes( const boost::shared_ptr<MenuItem> &item );
 
-		void No( const std::shared_ptr<MenuItem> &item );
+		void No( const boost::shared_ptr<MenuItem> &item );
 
 	
 		virtual void MakeBackdrop();
@@ -64,41 +64,41 @@ namespace CloudberryKingdom
 	struct ShopMenu : public CkBaseMenu
 	{
 	
-		struct VerifyPurchaseProxy : public Lambda_1<std::shared_ptr<MenuItem> >
+		struct VerifyPurchaseProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
-			std::shared_ptr<ShopMenu> sm;
+			boost::shared_ptr<ShopMenu> sm;
 
 		
-			VerifyPurchaseProxy( const std::shared_ptr<ShopMenu> &sm );
+			VerifyPurchaseProxy( const boost::shared_ptr<ShopMenu> &sm );
 
-			void Apply( const std::shared_ptr<MenuItem> &item );
+			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
 	
 		struct OnAddHelper : public LambdaFunc<bool>
 		{
 		
-			std::shared_ptr<ScrollBar> bar;
+			boost::shared_ptr<ScrollBar> bar;
 
 		
-			OnAddHelper( const std::shared_ptr<ScrollBar> &bar );
+			OnAddHelper( const boost::shared_ptr<ScrollBar> &bar );
 
 			bool Apply();
 		};
 	
-		static std::shared_ptr<ShopMenu> ActiveShop;
+		static boost::shared_ptr<ShopMenu> ActiveShop;
 
 	
 		virtual void ReleaseBody();
 
 	
-		void VerifyPurchase( const std::shared_ptr<MenuItem> &item );
+		void VerifyPurchase( const boost::shared_ptr<MenuItem> &item );
 
 	
-		virtual void SetItemProperties( const std::shared_ptr<MenuItem> &item );
+		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-		void SetHeaderProperties2( const std::shared_ptr<EzText> &text );
+		void SetHeaderProperties2( const boost::shared_ptr<EzText> &text );
 
 	
 		virtual void Init();
@@ -110,27 +110,27 @@ namespace CloudberryKingdom
 		void UpdateAll();
 
 	
-		static std::wstring ClrString( std::shared_ptr<ClrTextFx> data );
+		static std::wstring ClrString( boost::shared_ptr<ClrTextFx> data );
 
-		void SetItem( const std::shared_ptr<MenuItem> &item );
+		void SetItem( const boost::shared_ptr<MenuItem> &item );
 
-
-	
-		static std::wstring GetString( const std::shared_ptr<MenuItem> &item );
-		static std::wstring GetString( const std::shared_ptr<Buyable> &buyable );
 
 	
-		void MenuGo_Customize( const std::shared_ptr<MenuItem> &item );
+		static std::wstring GetString( const boost::shared_ptr<MenuItem> &item );
+		static std::wstring GetString( const boost::shared_ptr<Buyable> &buyable );
+
+	
+		void MenuGo_Customize( const boost::shared_ptr<MenuItem> &item );
 		void CharSelect();
 
-		static int HatCompare( const std::shared_ptr<Hat> &h1, const std::shared_ptr<Hat> &h2 );
+		static int HatCompare( const boost::shared_ptr<Hat> &h1, const boost::shared_ptr<Hat> &h2 );
 
-		std::shared_ptr<EzText> Bank, BankAmount;
+		boost::shared_ptr<EzText> Bank, BankAmount;
 	
 		ShopMenu();
-		std::shared_ptr<ShopMenu> ShopMenu_Construct();
+		boost::shared_ptr<ShopMenu> ShopMenu_Construct();
 	
-		void MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str );
+		void MakeHeader( boost::shared_ptr<MenuItem> &Header, const std::wstring &str );
 
 
 		void MakeRest();

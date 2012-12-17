@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-	void BlockData::Decide_RemoveIfUnused( float ChanceToKeep, const std::shared_ptr<Rand> &Rnd )
+	void BlockData::Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd )
 	{
 		GenData.Decide_RemoveIfUnused( ChanceToKeep, Rnd );
 		if ( GenData.RemoveIfUnused || Rnd->RndFloat() < .75f )
@@ -71,11 +71,11 @@ namespace CloudberryKingdom
 		TopLeftNeighbor = TopRightNeighbor = 0;
 	}
 
-	void BlockData::Clone( const std::shared_ptr<ObjectData> &A )
+	void BlockData::Clone( const boost::shared_ptr<ObjectData> &A )
 	{
 		ObjectData::Clone( A );
 
-		std::shared_ptr<BlockData> BlockDataA = std::dynamic_pointer_cast<BlockData>( A );
+		boost::shared_ptr<BlockData> BlockDataA = boost::dynamic_pointer_cast<BlockData>( A );
 		// FIXME: Implement exceptions?
 		//if ( BlockDataA == 0 )
 		//	throw ( std::exception( _T( "Can't copy block data from object data" ) ) );
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		AddRange( Objects, BlockDataA->Objects );
 	}
 
-	void BlockData::Write( const std::shared_ptr<BinaryWriter> &writer )
+	void BlockData::Write( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		ObjectData::Write( writer );
 
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		writer->Write( Layer );
 	}
 
-	void BlockData::Read( const std::shared_ptr<BinaryReader> &reader )
+	void BlockData::Read( const boost::shared_ptr<BinaryReader> &reader )
 	{
 		ObjectData::Read( reader );
 
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	const std::shared_ptr<AABox> &BlockBase::getBox() const
+	const boost::shared_ptr<AABox> &BlockBase::getBox() const
 	{
 		return MyBox;
 	}
@@ -185,7 +185,7 @@ namespace CloudberryKingdom
 		Active = value;
 	}
 
-	const std::shared_ptr<BlockData> &BlockBase::getBlockCore() const
+	const boost::shared_ptr<BlockData> &BlockBase::getBlockCore() const
 	{
 		return BlockCoreData;
 	}
@@ -193,8 +193,8 @@ namespace CloudberryKingdom
 	BlockBase::BlockBase() :
 		Active( false )
 	{
-		BlockCoreData = std::make_shared<BlockData>();
-		CoreData = std::dynamic_pointer_cast<ObjectData>( getBlockCore() );
+		BlockCoreData = boost::make_shared<BlockData>();
+		CoreData = boost::dynamic_pointer_cast<ObjectData>( getBlockCore() );
 	}
 
 	void BlockBase::Release()
@@ -220,7 +220,7 @@ namespace CloudberryKingdom
 			ResetPieces();
 	}
 
-	void BlockBase::Init( Vector2 &center, Vector2 &size, const std::shared_ptr<Level> &level, const std::shared_ptr<BlockGroup> &group )
+	void BlockBase::Init( Vector2 &center, Vector2 &size, const boost::shared_ptr<Level> &level, const boost::shared_ptr<BlockGroup> &group )
 	{
 		size *= level->getInfo()->ScaleAll * level->getInfo()->ScaleAllBlocks;
 
@@ -228,7 +228,7 @@ namespace CloudberryKingdom
 		if ( level->MyTileSet->FixedWidths )
 			group->SnapWidthUp( size );
 		MyBox->Initialize( center, size );
-		MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( std::static_pointer_cast<BlockBase>( shared_from_this() ), level->getRnd(), group);
+		MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), level->getRnd(), group);
 
 		getCore()->Data.Position = getBlockCore()->Data.Position = getBlockCore()->StartData.Position = center;
 
@@ -241,7 +241,7 @@ namespace CloudberryKingdom
 		if ( MyDraw == 0 )
 			return;
 
-		MyDraw->Init( std::static_pointer_cast<BlockBase>( shared_from_this() ) );
+		MyDraw->Init( boost::static_pointer_cast<BlockBase>( shared_from_this() ) );
 
 		MyDraw->MyPieces->Center.Playing = false;
 	}
@@ -258,35 +258,35 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void BlockBase::LandedOn( const std::shared_ptr<Bob> &bob )
+	void BlockBase::LandedOn( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
-	void BlockBase::HitHeadOn( const std::shared_ptr<Bob> &bob )
+	void BlockBase::HitHeadOn( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
-	void BlockBase::SideHit( const std::shared_ptr<Bob> &bob )
+	void BlockBase::SideHit( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
-	void BlockBase::Hit( const std::shared_ptr<Bob> &bob )
+	void BlockBase::Hit( const boost::shared_ptr<Bob> &bob )
 	{
 	}
 
-	bool BlockBase::PostCollidePreDecision( const std::shared_ptr<Bob> &bob )
+	bool BlockBase::PostCollidePreDecision( const boost::shared_ptr<Bob> &bob )
 	{
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Bottom_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Bottom_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		if ( Col == ColType_BOTTOM )
 			return true;
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Bottom_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Bottom_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		if ( bob->MyPhsx->Gravity > 0 )
 		{
@@ -305,15 +305,15 @@ namespace CloudberryKingdom
 		}
 	}
 
-	bool BlockBase::PostCollideDecision_Bottom( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Bottom( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Bottom_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Bottom_Normal( bob, Col, Overlap );
 	}
 
-	bool BlockBase::PostCollideDecision_Side_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Side_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		if ( Col == ColType_LEFT || Col == ColType_RIGHT )
 		{
@@ -328,7 +328,7 @@ namespace CloudberryKingdom
 			//if (Box.TR.Y < bob.Box.BL.Y + 20) return true;
 
 
-			if ( std::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
+			if ( boost::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
 				return true;
 
 			//BobPhsxMeat meat = (BobPhsxMeat)bob.MyPhsx;
@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Side_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Side_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		if ( Col == ColType_LEFT || Col == ColType_RIGHT )
 			return true;
@@ -371,22 +371,22 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Side( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Side( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Side_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Side_Normal( bob, Col, Overlap );
 	}
 
-	bool BlockBase::PostCollideDecision_Land_Meat( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Land_Meat( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		std::shared_ptr<BobPhsxMeat> meat = std::static_pointer_cast<BobPhsxMeat>( bob->MyPhsx );
+		boost::shared_ptr<BobPhsxMeat> meat = boost::static_pointer_cast<BobPhsxMeat>( bob->MyPhsx );
 
 		if ( meat->WantToLandOnTop && Col == ColType_TOP )
 			return false;
 
-		if ( std::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
+		if ( boost::dynamic_pointer_cast<BouncyBlock>( shared_from_this() ) != 0 )
 			return false;
 
 		if ( Col == ColType_TOP )
@@ -395,7 +395,7 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Land_Normal( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Land_Normal( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 		if ( bob->MyPhsx->Gravity > 0 )
 		{
@@ -411,15 +411,15 @@ namespace CloudberryKingdom
 		return false;
 	}
 
-	bool BlockBase::PostCollideDecision_Land( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	bool BlockBase::PostCollideDecision_Land( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return PostCollideDecision_Land_Meat( bob, Col, Overlap );
 		else
 			return PostCollideDecision_Land_Normal( bob, Col, Overlap );
 	}
 
-	void BlockBase::PostCollideDecision( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
+	void BlockBase::PostCollideDecision( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap, bool &Delete )
 	{
 		// Decide if we should delete or keep the block
 		//bool Delete = false;
@@ -439,7 +439,7 @@ namespace CloudberryKingdom
 		Delete |= PostCollideDecision_Side( bob, Col, Overlap );
 
 		// ???
-		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(std::dynamic_pointer_cast<NormalBlock>( shared_from_this() ) != 0 && !getBlockCore()->NonTopUsed) )
+		if ( Overlap && Col == ColType_NO_COL && !getBox()->TopOnly && !(boost::dynamic_pointer_cast<NormalBlock>( shared_from_this() ) != 0 && !getBlockCore()->NonTopUsed) )
 			Delete = true;
 
 		// Don't land on the very edge of the block
@@ -447,7 +447,7 @@ namespace CloudberryKingdom
 
 		// Don't land on a block that says not to
 		bool DesiresDeletion = false;
-		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(std::static_pointer_cast<BlockBase>( shared_from_this() ) )->PermissionToUse() )
+		if ( getCore()->GenData.TemporaryNoLandZone || !getCore()->GenData.Used && !(boost::static_pointer_cast<BlockBase>( shared_from_this() ) )->PermissionToUse() )
 			DesiresDeletion = Delete = true;
 
 		if ( getCore()->GenData.Used )
@@ -463,9 +463,9 @@ namespace CloudberryKingdom
 			Delete = false;
 	}
 
-	void BlockBase::EdgeSafety( const std::shared_ptr<Bob> &bob, bool &Delete )
+	void BlockBase::EdgeSafety( const boost::shared_ptr<Bob> &bob, bool &Delete )
 	{
-		if ( std::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxMeat>( bob->MyPhsx ) != 0 )
 			return;
 
 		if ( !Delete && !bob->MyPhsx->OnGround )
@@ -478,11 +478,11 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BlockBase::PostKeep( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	void BlockBase::PostKeep( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 	}
 
-	void BlockBase::PostInteractWith( const std::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
+	void BlockBase::PostInteractWith( const boost::shared_ptr<Bob> &bob, ColType &Col, bool &Overlap )
 	{
 	}
 

@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		float Amp;
 
 	
-		std::vector<std::shared_ptr<MovingPlatform> > Platforms;
+		std::vector<boost::shared_ptr<MovingPlatform> > Platforms;
 
 	
 		virtual void Release();
@@ -57,9 +57,9 @@ namespace CloudberryKingdom
 		void Emit( int offset );
 
 	
-		void AddPlatform( const std::shared_ptr<MovingPlatform> &platform );
+		void AddPlatform( const boost::shared_ptr<MovingPlatform> &platform );
 
-		void RemovePlatform( const std::shared_ptr<MovingPlatform> &platform );
+		void RemovePlatform( const boost::shared_ptr<MovingPlatform> &platform );
 
 		virtual void PhsxStep();
 
@@ -68,9 +68,9 @@ namespace CloudberryKingdom
 	
 		BoxStyle MyBoxStyle;
 	
-		void Init( Vector2 pos, const std::shared_ptr<Level> &level, BoxStyle MyBoxStyle );
+		void Init( Vector2 pos, const boost::shared_ptr<Level> &level, BoxStyle MyBoxStyle );
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 
 	
 		void InitializeInstanceFields();

@@ -5,16 +5,16 @@ namespace CloudberryKingdom
 
 	void BobPhsxJetman::InitializeStatics()
 	{
-		BobPhsxJetman::instance = std::make_shared<BobPhsxJetman>();
+		BobPhsxJetman::instance = boost::make_shared<BobPhsxJetman>();
 	}
 
 	// Statics
-	std::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance;
+	boost::shared_ptr<BobPhsxJetman> BobPhsxJetman::instance;
 
 
-	void BobPhsxJetman::Set( const std::shared_ptr<BobPhsx> &phsx )
+	void BobPhsxJetman::Set( const boost::shared_ptr<BobPhsx> &phsx )
 	{
-		std::shared_ptr<BobPhsxNormal> normal = std::dynamic_pointer_cast<BobPhsxNormal>( phsx );
+		boost::shared_ptr<BobPhsxNormal> normal = boost::dynamic_pointer_cast<BobPhsxNormal>( phsx );
 		if ( 0 != normal )
 		{
 			normal->JetPack = true;
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 
 		phsx->CapePrototype = CapeType_NONE;
 
-		if ( std::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 && 0 != normal )
+		if ( boost::dynamic_pointer_cast<BobPhsxWheel>( phsx ) != 0 && 0 != normal )
 		{
 			phsx->JetpackModel = false;
 
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void BobPhsxJetman::SetJetmanObject( const std::shared_ptr<ObjectClass> &obj )
+	void BobPhsxJetman::SetJetmanObject( const boost::shared_ptr<ObjectClass> &obj )
 	{
 		if ( obj->QuadList.size() > 0 )
 		{
@@ -68,11 +68,11 @@ namespace CloudberryKingdom
 		Name = Localization::Words_JETMAN;
 		Adjective = _T( "jetman" );
 
-		Icon = std::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
-		( std::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.25f, -.01f ) );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
+		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.25f, -.01f ) );
 	}
 
-	const std::shared_ptr<BobPhsxJetman> &BobPhsxJetman::getInstance()
+	const boost::shared_ptr<BobPhsxJetman> &BobPhsxJetman::getInstance()
 	{
 		return instance;
 	}

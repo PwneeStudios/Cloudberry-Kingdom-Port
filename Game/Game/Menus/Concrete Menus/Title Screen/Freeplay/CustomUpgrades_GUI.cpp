@@ -5,12 +5,12 @@
 namespace CloudberryKingdom
 {
 
-	AggressiveUpgrades_GUI::AggressiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
-	std::shared_ptr<AggressiveUpgrades_GUI> AggressiveUpgrades_GUI::AggressiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
+	AggressiveUpgrades_GUI::AggressiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
+	boost::shared_ptr<AggressiveUpgrades_GUI> AggressiveUpgrades_GUI::AggressiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
 		CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( PieceSeed, CustomLevel );
 
-		return std::static_pointer_cast<AggressiveUpgrades_GUI>( shared_from_this() );
+		return boost::static_pointer_cast<AggressiveUpgrades_GUI>( shared_from_this() );
 	}
 
 	std::vector<Upgrade> AggressiveUpgrades_GUI::GetUpgradeList()
@@ -29,12 +29,12 @@ namespace CloudberryKingdom
 		return Localization::Words_AGGRESSIVE;
 	}
 
-	PassiveUpgrades_GUI::PassiveUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
-	std::shared_ptr<PassiveUpgrades_GUI> PassiveUpgrades_GUI::PassiveUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
+	PassiveUpgrades_GUI::PassiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
+	boost::shared_ptr<PassiveUpgrades_GUI> PassiveUpgrades_GUI::PassiveUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
 		CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( PieceSeed, CustomLevel );
 
-		return std::static_pointer_cast<PassiveUpgrades_GUI>( shared_from_this() );
+		return boost::static_pointer_cast<PassiveUpgrades_GUI>( shared_from_this() );
 	}
 
 	std::vector<Upgrade> PassiveUpgrades_GUI::GetUpgradeList()
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 
 	void PassiveUpgrades_GUI::Go()
 	{
-		std::shared_ptr<AggressiveUpgrades_GUI> UpgradeGui = MakeMagic( AggressiveUpgrades_GUI, ( PieceSeed, CustomLevel ) );
+		boost::shared_ptr<AggressiveUpgrades_GUI> UpgradeGui = MakeMagic( AggressiveUpgrades_GUI, ( PieceSeed, CustomLevel ) );
 		Call( UpgradeGui, 0 );
 		Hide( PresetPos_LEFT );
 		this->SlideInFrom = PresetPos_LEFT;
@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 		return Localization::Words_PASSIVE;
 	}
 
-	CustomUpgrades_GUI::BlockPieceSeedSetter::BlockPieceSeedSetter( const std::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const std::shared_ptr<MenuSlider> &slider )
+	CustomUpgrades_GUI::BlockPieceSeedSetter::BlockPieceSeedSetter( const boost::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const boost::shared_ptr<MenuSlider> &slider )
 	{
 		this->gui = gui;
 		this->upgrade = upgrade;
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		// Set the Fallingblock to an O-face when maxed out
 		if ( slider == gui->MyMenu->getCurItem() )
 		{
-			std::shared_ptr<PictureIcon> pic = std::dynamic_pointer_cast<PictureIcon>( gui->BigIcon );
+			boost::shared_ptr<PictureIcon> pic = boost::dynamic_pointer_cast<PictureIcon>( gui->BigIcon );
 			if ( slider->getMyFloat()->getVal() > 7.6f )
 				pic->IconQuad->setTextureName( _T( "fblock_castle_3" ) );
 			else if ( slider->getMyFloat()->getVal() > 3.2f )
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	CustomUpgrades_GUI::PieceSeedSetter::PieceSeedSetter( const std::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const std::shared_ptr<MenuSlider> &slider )
+	CustomUpgrades_GUI::PieceSeedSetter::PieceSeedSetter( const boost::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const boost::shared_ptr<MenuSlider> &slider )
 	{
 		this->gui = gui;
 		this->upgrade = upgrade;
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		gui->PieceSeed->MyUpgrades1->Get( upgrade ) = slider->getMyFloat()->MyFloat;
 	}
 
-	CustomUpgrades_GUI::AddUpgradeAdditionalOnSelect::AddUpgradeAdditionalOnSelect( const std::shared_ptr<CustomUpgrades_GUI> &cuGui, const std::shared_ptr<MenuSlider> &slider, Upgrade upgrade )
+	CustomUpgrades_GUI::AddUpgradeAdditionalOnSelect::AddUpgradeAdditionalOnSelect( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui, const boost::shared_ptr<MenuSlider> &slider, Upgrade upgrade )
 	{
 		this->cuGui = cuGui;
 		this->slider = slider;
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		cuGui->TopText->Show = true;
 	}
 
-	CustomUpgrades_GUI::UpgradesSliderLambda::UpgradesSliderLambda( const std::shared_ptr<CustomUpgrades_GUI> &cu, Upgrade upgrade )
+	CustomUpgrades_GUI::UpgradesSliderLambda::UpgradesSliderLambda( const boost::shared_ptr<CustomUpgrades_GUI> &cu, Upgrade upgrade )
 	{
 		this->cu = cu;
 		this->upgrade = upgrade;
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 		return cu->PieceSeed->MyUpgrades1->Get( upgrade );
 	}
 
-	CustomUpgrades_GUI::StartLevelProxy::StartLevelProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui )
+	CustomUpgrades_GUI::StartLevelProxy::StartLevelProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui )
 	{
 		this->cuGui = cuGui;
 	}
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 		cuGui->StartLevel();
 	}
 
-	CustomUpgrades_GUI::ZeroProxy::ZeroProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui )
+	CustomUpgrades_GUI::ZeroProxy::ZeroProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui )
 	{
 		this->cuGui = cuGui;
 	}
@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 		cuGui->Zero();
 	}
 
-	CustomUpgrades_GUI::RandomizeProxy::RandomizeProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui )
+	CustomUpgrades_GUI::RandomizeProxy::RandomizeProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui )
 	{
 		this->cuGui = cuGui;
 	}
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 		cuGui->Randomize();
 	}
 
-	CustomUpgrades_GUI::GoProxy::GoProxy( const std::shared_ptr<CustomUpgrades_GUI> &cuGui )
+	CustomUpgrades_GUI::GoProxy::GoProxy( const boost::shared_ptr<CustomUpgrades_GUI> &cuGui )
 	{
 		this->cuGui = cuGui;
 	}
@@ -165,22 +165,22 @@ namespace CloudberryKingdom
 		cuGui->Go();
 	}
 
-	CustomUpgrades_GUI::CustomUpgrades_GUI( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel ) :
+	CustomUpgrades_GUI::CustomUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel ) :
 		ScaleList( 0 )
 	{
 	}
-	std::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<CustomLevel_GUI> &CustomLevel )
+	boost::shared_ptr<CustomUpgrades_GUI> CustomUpgrades_GUI::CustomUpgrades_GUI_Construct( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel )
 	{
 		InitializeInstanceFields();
 
 		CkBaseMenu::CkBaseMenu_Construct();
 		
-		CustomLevel->CallingPanel = std::static_pointer_cast<GUI_Panel>( shared_from_this() );
+		CustomLevel->CallingPanel = boost::static_pointer_cast<GUI_Panel>( shared_from_this() );
 
 		this->PieceSeed = PieceSeed;
 		this->CustomLevel = CustomLevel;
 
-		return std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() );
+		return boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() );
 	}
 
 	void CustomUpgrades_GUI::OnAdd()
@@ -188,14 +188,14 @@ namespace CloudberryKingdom
 		CkBaseMenu::OnAdd();
 	}
 
-	void CustomUpgrades_GUI::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void CustomUpgrades_GUI::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
 		text->Shadow = false;
 	}
 
-	void CustomUpgrades_GUI::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void CustomUpgrades_GUI::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
@@ -204,25 +204,25 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::AddUpgrade( Upgrade upgrade )
 	{
-		std::shared_ptr<MenuSlider> slider = std::make_shared<MenuSlider>( std::make_shared<EzText>( _T( "" ), ItemFont ) );
+		boost::shared_ptr<MenuSlider> slider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( _T( "" ), ItemFont ) );
 		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f, .72f) * .975f * ScaleList );
 		slider->SetIcon( ObjectIcon::CreateIcon( upgrade ) );
 		slider->Icon->SetScale( .6f * ScaleList );
-		slider->setMyFloat( std::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
+		slider->setMyFloat( boost::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
 		slider->InitialSlideSpeed *= 9;
 		slider->MaxSlideSpeed *= 9;
 		slider->Icon->setPos( slider->Icon->getPos() + Vector2(110, -123.5f) );
-		slider->getMyFloat()->GetCallback = std::make_shared<UpgradesSliderLambda>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade );
+		slider->getMyFloat()->GetCallback = boost::make_shared<UpgradesSliderLambda>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade );
 
 		// Keep the PieceSeed up to date when the slider changes
 		if ( upgrade == Upgrade_FALLING_BLOCK )
 		{
-			slider->getMyFloat()->SetCallback = std::make_shared<BlockPieceSeedSetter>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
+			slider->getMyFloat()->SetCallback = boost::make_shared<BlockPieceSeedSetter>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
 		}
 		else
-			slider->getMyFloat()->SetCallback = std::make_shared<PieceSeedSetter>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
+			slider->getMyFloat()->SetCallback = boost::make_shared<PieceSeedSetter>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), upgrade, slider );
 
-		slider->AdditionalOnSelect = std::make_shared<AddUpgradeAdditionalOnSelect>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), slider, upgrade );
+		slider->AdditionalOnSelect = boost::make_shared<AddUpgradeAdditionalOnSelect>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ), slider, upgrade );
 		AddItem( slider );
 	}
 
@@ -233,9 +233,9 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::Zero()
 	{
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
-			std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
+			boost::shared_ptr<MenuSlider> slider = boost::dynamic_pointer_cast<MenuSlider>( *item );
 			if ( 0 != slider )
 				slider->getMyFloat()->setVal(0);
 		}
@@ -245,18 +245,18 @@ namespace CloudberryKingdom
 	{
 		if ( getMyLevel()->getRnd()->RndFloat() < .25f )
 		{
-			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
-				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
+				boost::shared_ptr<MenuSlider> slider = boost::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )
 					slider->getMyFloat()->setVal(static_cast<float>(pow(getMyLevel()->getRnd()->RndFloat(0, 9),.9f)));
 			}
 		}
 		else
 		{
-			for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
+			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 			{
-				std::shared_ptr<MenuSlider> slider = std::dynamic_pointer_cast<MenuSlider>( *item );
+				boost::shared_ptr<MenuSlider> slider = boost::dynamic_pointer_cast<MenuSlider>( *item );
 				if ( 0 != slider )
 				{
 					float ChanceToZero = .1f;
@@ -300,15 +300,15 @@ namespace CloudberryKingdom
 		for ( std::vector<Upgrade>::const_iterator upgrade = GetUpgradeList().begin(); upgrade != GetUpgradeList().end(); ++upgrade )
 			AddUpgrade( *upgrade );
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		FontScale = 1;
 		MakeOptions();
 
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop;
+		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = std::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = _T( "Backdrop" );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 		backdrop->setSize( Vector2( 1682.54f, 1107.681f ) );
@@ -320,7 +320,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		// Header
-		std::shared_ptr<EzText> LocationText = std::make_shared<EzText>( HeaderText(), ItemFont );
+		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( HeaderText(), ItemFont );
 		LocationText->Name = _T( "Header" );
 		SetHeaderProperties( LocationText );
 		MyPile->Add( LocationText );
@@ -336,7 +336,7 @@ namespace CloudberryKingdom
 	void CustomUpgrades_GUI::SetPos()
 	{
 	#if defined(PC_VERSION)
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		_item = MyMenu->FindItemByName( _T( "Start" ) );
 		if ( _item != 0 )
 		{
@@ -372,7 +372,7 @@ namespace CloudberryKingdom
 
 		MyMenu->setPos( Vector2( -202.7773f, -122.2222f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "TopText" ) );
 		if ( _t != 0 )
 		{
@@ -386,7 +386,7 @@ namespace CloudberryKingdom
 			_t->setScale( 0.72f );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -396,10 +396,10 @@ namespace CloudberryKingdom
 
 		MyPile->setPos( Vector2( -285, 0 ) );
 	#else
-		std::shared_ptr<MenuItem> _item;
+		boost::shared_ptr<MenuItem> _item;
 		MyMenu->setPos( Vector2( -202.7773f, -122.2222f ) );
 
-		std::shared_ptr<EzText> _t;
+		boost::shared_ptr<EzText> _t;
 		_t = MyPile->FindEzText( _T( "Start" ) );
 		if ( _t != 0 )
 		{
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
 			_t->setPos( Vector2( 773.5558f, 725 ) );
 		}
 
-		std::shared_ptr<QuadClass> _q;
+		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( _T( "Backdrop" ) );
 		if ( _q != 0 )
 		{
@@ -435,11 +435,11 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::MakeMenu()
 	{
-		MyMenu = std::make_shared<Menu>( false );
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-		MyMenu->OnX = Cast::ToMenu( std::make_shared<RandomizeProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
-		MyMenu->OnY = std::make_shared<ZeroProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) );
+		MyMenu = boost::make_shared<Menu>( false );
+		MyMenu->OnA = Cast::ToMenu( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = Cast::ToMenu( boost::make_shared<RandomizeProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyMenu->OnY = boost::make_shared<ZeroProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) );
 		MyMenu->SelectDelay = 11;
 	}
 
@@ -449,7 +449,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::StartGame()
 	{
-		MyGame->PlayGame( std::make_shared<StartLevelProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyGame->PlayGame( boost::make_shared<StartLevelProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
 	}
 
 	void CustomUpgrades_GUI::MakeOptions()
@@ -458,10 +458,10 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		// Start
-		std::shared_ptr<MenuItem> item;
-		std::shared_ptr<MenuItem> Start = item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_START, ItemFont ) );
+		boost::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
 		item->Name = _T( "Start" );
-		item->setGo( Cast::ToItem( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 425.3959f, -99.92095f );
@@ -469,12 +469,12 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
 		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = Cast::ToMenu( std::make_shared<GoProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
+		MyMenu->OnA = Cast::ToMenu( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
 
 		// Random
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
 		item->Name = _T( "Random" );
-		item->setGo( Cast::ToItem( std::make_shared<RandomizeProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<RandomizeProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 511.8408f, -302.6506f );
@@ -482,9 +482,9 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4();
 
 		// Zero
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
 		item->Name = _T( "Reset" );
-		item->setGo( Cast::ToItem( std::make_shared<ZeroProxy>( std::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
+		item->setGo( Cast::ToItem( boost::make_shared<ZeroProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->Pos = item->SelectedPos = Vector2( 599.1416f, -501.0634f );
@@ -492,28 +492,28 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4();
 
 		// Back
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		item->Name = _T( "Back" );
 		item->_Go.reset();
 		AddItem( item );
 		item->SelectSound.reset();
-		item->setGo( std::make_shared<ItemReturnToCallerProxy>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+		item->setGo( boost::make_shared<ItemReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->Pos = item->SelectedPos = Vector2( 702.3179f, -689.9683f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 	#else
-		std::shared_ptr<EzText> text;
-		text = std::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Start" ), ItemFont );
+		boost::shared_ptr<EzText> text;
+		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Start" ), ItemFont );
 		text->setPos( Vector2( 417.4604f, -159.4446f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		MyPile->Add( text, _T( "Start" ) );
 
-		text = std::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Random" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Random" ), ItemFont );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
 		text->MyFloatColor = ( Color( 204, 220, 255 ) ).ToVector4();
 		MyPile->Add( text, _T( "Random" ) );
 
-		text = std::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
 		text->setPos( Vector2( 682.4761f, -622.5079f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 		MyPile->Add( text, _T( "Back" ) );
@@ -522,7 +522,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::MakeTopText()
 	{
-		TopText = std::make_shared<EzText>( _T( "   " ), ItemFont, true, true );
+		TopText = boost::make_shared<EzText>( _T( "   " ), ItemFont, true, true );
 		SetTextProperties( TopText );
 		TopText->Shadow = false;
 		MyPile->Add( TopText, _T( "TopText" ) );
@@ -533,7 +533,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::MyDraw()
 	{
-		std::shared_ptr<Camera> cam = MyGame->MyLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = MyGame->MyLevel->getMainCamera();
 
 		CkBaseMenu::MyDraw();
 

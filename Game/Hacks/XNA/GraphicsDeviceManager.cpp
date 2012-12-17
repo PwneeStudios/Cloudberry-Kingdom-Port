@@ -7,7 +7,7 @@ GraphicsDeviceManager::GraphicsDeviceManager() :
 	PreferredBackBufferWidth( 1280 ),
 	PreferredBackBufferHeight( 720 )
 {
-	MyGraphicsDevice = std::make_shared<GraphicsDevice>();
+	MyGraphicsDevice = boost::make_shared<GraphicsDevice>();
 	
 	MyGraphicsDevice->PP->BackBufferWidth = PreferredBackBufferWidth;
 	MyGraphicsDevice->PP->BackBufferHeight = PreferredBackBufferHeight;

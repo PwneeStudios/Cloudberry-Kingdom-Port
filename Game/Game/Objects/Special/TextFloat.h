@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 	struct TextFloat : public GameObject
 	{
 	
-		std::shared_ptr<EzText> MyText;
+		boost::shared_ptr<EzText> MyText;
 
 		TextFloat( Localization::Words Text, Vector2 pos );
 

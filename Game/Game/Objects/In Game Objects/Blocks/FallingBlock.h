@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 		struct FallingBlockTileInfo : public TileInfoBase
 		{
 		
-			std::shared_ptr<BlockGroup> Group;
+			boost::shared_ptr<BlockGroup> Group;
 
 			FallingBlockTileInfo();
 
@@ -46,11 +46,11 @@ namespace CloudberryKingdom
 
 		FallingBlock( bool BoxesOnly );
 
-		void Init( Vector2 center, Vector2 size, int life, const std::shared_ptr<Level> &level );
+		void Init( Vector2 center, Vector2 size, int life, const boost::shared_ptr<Level> &level );
 
-		virtual void HitHeadOn( const std::shared_ptr<Bob> &bob );
+		virtual void HitHeadOn( const boost::shared_ptr<Bob> &bob );
 
-		virtual void LandedOn( const std::shared_ptr<Bob> &bob );
+		virtual void LandedOn( const boost::shared_ptr<Bob> &bob );
 
 		virtual void Reset( bool BoxesOnly );
 
@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		virtual void Move( Vector2 shift );
 		virtual void Draw();
 
-		virtual void Clone( const std::shared_ptr<ObjectBase> &A );
+		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
 }
 

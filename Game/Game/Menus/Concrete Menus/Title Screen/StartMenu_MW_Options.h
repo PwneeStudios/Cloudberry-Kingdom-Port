@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 	{
 	
 		StartMenu_MW_Options( int Control, bool Centered );
-		std::shared_ptr<StartMenu_MW_Options> StartMenu_MW_Options_Construct( int Control, bool Centered );
+		boost::shared_ptr<StartMenu_MW_Options> StartMenu_MW_Options_Construct( int Control, bool Centered );
 
 		virtual void SlideIn( int Frames );
 

@@ -5,26 +5,26 @@ namespace CloudberryKingdom
 
 	void SaveGroup::InitializeStatics()
 	{
-		SaveGroup::Count = std::make_shared<WrappedInt>( 0 );
+		SaveGroup::Count = boost::make_shared<WrappedInt>( 0 );
 	}
 
 	// Statics
-	std::shared_ptr<WrappedInt> SaveGroup::Count;
+	boost::shared_ptr<WrappedInt> SaveGroup::Count;
 	Mutex SaveGroup::CountLock;
-	std::vector<std::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
+	std::vector<boost::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
 
 
 	void EzStorage::InitializeStatics()
 	{
 		EzStorage::InUseLock;
 		EzStorage::Device = 0;
-		EzStorage::InUse = std::make_shared<WrappedBool>( false );
+		EzStorage::InUse = boost::make_shared<WrappedBool>( false );
 	}
 
 	// Statics
 	Mutex EzStorage::InUseLock;
-	std::shared_ptr<StorageDevice> EzStorage::Device;
-	std::shared_ptr<WrappedBool> EzStorage::InUse;
+	boost::shared_ptr<StorageDevice> EzStorage::Device;
+	boost::shared_ptr<WrappedBool> EzStorage::InUse;
 
 
 	void SaveGroup::Initialize()
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		ScoreDatabase::Initialize();
 
 		// Player data
-		PlayerManager::SavePlayerData = std::make_shared<_SavePlayerData>();
+		PlayerManager::SavePlayerData = boost::make_shared<_SavePlayerData>();
 		PlayerManager::SavePlayerData->ContainerName = _T( "PlayerData" );
 		PlayerManager::SavePlayerData->FileName = _T( "PlayerData.hsc" );
 		Add( PlayerManager::SavePlayerData );
@@ -69,14 +69,14 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void SaveGroup::Add( const std::shared_ptr<SaveLoad> &ThingToSave )
+	void SaveGroup::Add( const boost::shared_ptr<SaveLoad> &ThingToSave )
 	{
 		ThingsToSave.push_back( ThingToSave );
 	}
 
 	void SaveGroup::SaveAll()
 	{
-		for ( std::vector<std::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
+		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
 			//if (!(ThingToSave is ScoreList)) Tools.Write("!");
 
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 
 	#if defined(NOT_PC)
 		// Save each player's info
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
 		{
 			Incr();
 			( *player )->ContainerName = _T( "Gamers" );
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 	}
 
 #if defined(NOT_PC)
-	std::shared_ptr<PlayerData> SaveGroup::LoadGamer( const std::wstring &GamerName, const std::shared_ptr<PlayerData> &Data )
+	boost::shared_ptr<PlayerData> SaveGroup::LoadGamer( const std::wstring &GamerName, const boost::shared_ptr<PlayerData> &Data )
 	{
 		Data->ContainerName = _T( "Gamers" );
 		Data->FileName = _T( "___" ) + GamerName;
@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 
 	void SaveGroup::LoadAll()
 	{
-		for ( std::vector<std::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
+		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{
 			Incr();
 			( *ThingToLoad )->Load();
@@ -148,19 +148,19 @@ namespace CloudberryKingdom
 		}
 	}
 
-	SaveLoad::SaveLambda::SaveLambda( const std::shared_ptr<SaveLoad> &sl )
+	SaveLoad::SaveLambda::SaveLambda( const boost::shared_ptr<SaveLoad> &sl )
 	{
 		this->sl = sl;
 	}
 
-	void SaveLoad::SaveLambda::Apply( const std::shared_ptr<BinaryWriter> &writer )
+	void SaveLoad::SaveLambda::Apply( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		sl->Serialize( writer );
 		sl->Changed = false;
 		SaveGroup::Decr();
 	}
 
-	SaveLoad::SaveFailLambda::SaveFailLambda( const std::shared_ptr<SaveLoad> &sl )
+	SaveLoad::SaveFailLambda::SaveFailLambda( const boost::shared_ptr<SaveLoad> &sl )
 	{
 		this->sl = sl;
 	}
@@ -171,7 +171,7 @@ namespace CloudberryKingdom
 		sl->Changed = false;
 	}
 
-	SaveLoad::LoadLambda::LoadLambda( const std::shared_ptr<SaveLoad> &sl )
+	SaveLoad::LoadLambda::LoadLambda( const boost::shared_ptr<SaveLoad> &sl )
 	{
 		this->sl = sl;
 	}
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 		SaveGroup::Decr();
 	}
 
-	SaveLoad::LoadFailLambda::LoadFailLambda( const std::shared_ptr<SaveLoad> &sl )
+	SaveLoad::LoadFailLambda::LoadFailLambda( const boost::shared_ptr<SaveLoad> &sl )
 	{
 		this->sl = sl;
 	}
@@ -212,7 +212,7 @@ namespace CloudberryKingdom
 	{
 		if ( Changed || AlwaysSave )
 		{
-			EzStorage::Save( getActualContainerName(), FileName, std::make_shared<SaveLambda>( shared_from_this() ), std::make_shared<SaveFailLambda>( shared_from_this() ) );
+			EzStorage::Save( getActualContainerName(), FileName, boost::make_shared<SaveLambda>( shared_from_this() ), boost::make_shared<SaveFailLambda>( shared_from_this() ) );
 		}
 		else
 			SaveGroup::Decr();
@@ -220,10 +220,10 @@ namespace CloudberryKingdom
 
 	void SaveLoad::Load()
 	{
-		EzStorage::Load( getActualContainerName(), FileName, std::make_shared<LoadLambda>( shared_from_this() ), std::make_shared<LoadFailLambda>( shared_from_this() ) );
+		EzStorage::Load( getActualContainerName(), FileName, boost::make_shared<LoadLambda>( shared_from_this() ), boost::make_shared<LoadFailLambda>( shared_from_this() ) );
 	}
 
-	void SaveLoad::Serialize( const std::shared_ptr<BinaryWriter> &writer )
+	void SaveLoad::Serialize( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 	}
 
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
 	void EzStorage::GetDevice()
 	{
 		// FIXME: Implement this.
-		/*std::shared_ptr<IAsyncResult> result = StorageDevice::BeginShowSelector( 0, 0 );
+		/*boost::shared_ptr<IAsyncResult> result = StorageDevice::BeginShowSelector( 0, 0 );
 		result->AsyncWaitHandle->WaitOne();
 
 		Device = StorageDevice::EndShowSelector( result );
@@ -257,7 +257,7 @@ namespace CloudberryKingdom
 		result->AsyncWaitHandle->Close();*/
 	}
 
-	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::shared_ptr<BinaryWriter> > > &SaveLogic, const std::shared_ptr<Lambda> &Fail )
+	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		if ( !DeviceOK() )
 			GetDevice();
@@ -296,7 +296,7 @@ namespace CloudberryKingdom
 
 		// Open a container
 		// FIXME: Implement this.
-		/*std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
+		/*boost::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
 		{
 			if ( !ContainerResult::IsCompleted )
 			{
@@ -304,7 +304,7 @@ namespace CloudberryKingdom
 					Fail->Apply();
 					return;
 			}
-			std::shared_ptr<StorageContainer> container = Device->EndOpenContainer( ContainerResult );
+			boost::shared_ptr<StorageContainer> container = Device->EndOpenContainer( ContainerResult );
 			ContainerResult::AsyncWaitHandle->Close();
 			if ( SaveLogic != 0 )
 				SaveToContainer( container, FileName, SaveLogic );
@@ -312,7 +312,7 @@ namespace CloudberryKingdom
 	   , 0);*/
 	}
 
-	void EzStorage::SaveToContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic )
+	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic )
 	{
 		// Check to see whether the save exists.
 		if ( container->FileExists( FileName ) )
@@ -322,12 +322,12 @@ namespace CloudberryKingdom
 		// FIXME: Implement this.
 
 		// Create the file.
-		/*std::shared_ptr<Stream> stream = container->CreateFile( FileName );
+		/*boost::shared_ptr<Stream> stream = container->CreateFile( FileName );
 
 		// Save the data
 		if ( SaveLogic != 0 )
 		{
-			std::shared_ptr<BinaryWriter> writer = std::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
+			boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
 			SaveLogic->Apply( writer );
 			writer->Close();
 		}
@@ -349,7 +349,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void EzStorage::Load( const std::wstring &ContainerName, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const std::shared_ptr<Lambda> &Fail )
+	void EzStorage::Load( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		if ( !DeviceOK() )
 			GetDevice();
@@ -389,7 +389,7 @@ namespace CloudberryKingdom
 		// Open a container
 
 		// FIXME: Implement this.
-		/*std::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
+		/*boost::shared_ptr<IAsyncResult> result = Device->BeginOpenContainer(ContainerName, ContainerResult =>
 				//if (Fail != null) Fail(); return;
 		{
 			if ( !ContainerResult::IsCompleted )
@@ -398,7 +398,7 @@ namespace CloudberryKingdom
 					Fail->Apply();
 					return;
 			}
-			std::shared_ptr<StorageContainer> container = Device->EndOpenContainer( ContainerResult );
+			boost::shared_ptr<StorageContainer> container = Device->EndOpenContainer( ContainerResult );
 			ContainerResult::AsyncWaitHandle->Close();
 			if ( LoadLogic != 0 )
 				LoadFromContainer( container, FileName, LoadLogic, Fail );
@@ -406,7 +406,7 @@ namespace CloudberryKingdom
 	   , 0);*/
 	}
 
-	void EzStorage::LoadFromContainer( const std::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const std::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const std::shared_ptr<Lambda> &FailLogic )
+	void EzStorage::LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic )
 	{
 		// Fallback action if file doesn't exist
 		if ( !container->FileExists( FileName ) )
@@ -437,7 +437,7 @@ namespace CloudberryKingdom
 		{
 			try
 			{
-				std::shared_ptr<Stream> s = container->OpenFile( FileName, FileMode::Open );
+				boost::shared_ptr<Stream> s = container->OpenFile( FileName, FileMode::Open );
 				std::vector<unsigned char> Data = std::vector<unsigned char>( s->Length );
 				s->Read( Data, 0, static_cast<int>( s->Length ) );
 

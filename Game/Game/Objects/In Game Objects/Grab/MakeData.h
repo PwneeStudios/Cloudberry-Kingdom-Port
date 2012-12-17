@@ -6,23 +6,23 @@
 namespace CloudberryKingdom
 {
 
-	struct MakeData : public std::enable_shared_from_this<MakeData>
+	struct MakeData : public boost::enable_shared_from_this<MakeData>
 	{
 
 	
 		Vector2 TRBobMoveZone, BLBobMoveZone;
 
-		std::shared_ptr<RichLevelGenData> GenData;
+		boost::shared_ptr<RichLevelGenData> GenData;
 
 		/// <summary>
 		/// The PieceSeedData from which the current MakeData's level is being made
 		/// </summary>
-		std::shared_ptr<PieceSeedData> PieceSeed;
+		boost::shared_ptr<PieceSeedData> PieceSeed;
 
 		/// <summary>
 		/// The LevelSeed which spawned the creation of this level.
 		/// </summary>
-		std::shared_ptr<LevelSeedData> LevelSeed;
+		boost::shared_ptr<LevelSeedData> LevelSeed;
 
 		bool ComputerWaitAtStart;
 		std::vector<int> ComputerWaitAtStartLength;
@@ -75,11 +75,11 @@ namespace CloudberryKingdom
 
 		void Release();
 
-		void Init( const std::shared_ptr<PieceSeedData> &data );
+		void Init( const boost::shared_ptr<PieceSeedData> &data );
 
-		BobVec MakeBobs( const std::shared_ptr<Level> &level );
+		BobVec MakeBobs( const boost::shared_ptr<Level> &level );
 
-		std::shared_ptr<LevelPiece> MakeLevelPiece( const std::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep );
+		boost::shared_ptr<LevelPiece> MakeLevelPiece( const boost::shared_ptr<Level> &level, BobVec bobs, int Length, int StartPhsxStep );
 
 	
 		void InitializeInstanceFields();

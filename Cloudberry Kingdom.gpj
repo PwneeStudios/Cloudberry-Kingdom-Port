@@ -12,6 +12,10 @@ primaryTarget=ppc_cos.tgt
 	-ICore/include
 	-IGame/include
 	-L.
+	-Iboost_shared_ptr
+	-IGame
+	-DDEBUG
+	-DGAME
 Core\Core.gpj		[Library]
 Cloudberry WiiU\Cloudberry_Kingdom.gpj		[Program]
 tgt\resources.gpj		[Project]

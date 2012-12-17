@@ -37,16 +37,16 @@ namespace CloudberryKingdom
 		/// </summary>
 		void Load( const std::wstring &file );
 
-		void Write( const std::shared_ptr<BinaryWriter> &writer );
-		void Read( const std::shared_ptr<BinaryReader> &reader );
+		void Write( const boost::shared_ptr<BinaryWriter> &writer );
+		void Read( const boost::shared_ptr<BinaryReader> &reader );
 
 		int NumBobs;
-		std::vector<std::shared_ptr<ComputerRecording> > Recordings;
+		std::vector<boost::shared_ptr<ComputerRecording> > Recordings;
 		int Length;
 
 		Vector2 BoxSize;
 
-		void Draw( const std::shared_ptr<QuadClass> &BobQuad, int Step, const std::shared_ptr<Level> &level, std::vector<std::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<std::shared_ptr<BobLink> > &BobLinks );
+		void Draw( const boost::shared_ptr<QuadClass> &BobQuad, int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks );
 
 		void ConvertToSuperSparse();
 
@@ -55,9 +55,9 @@ namespace CloudberryKingdom
 		Recording( int NumBobs, int Length );
 		void Init( int NumBobs, int Length );
 
-		void Record( const std::shared_ptr<Level> &level );
+		void Record( const boost::shared_ptr<Level> &level );
 
-		void MarkEnd( const std::shared_ptr<Level> &level );
+		void MarkEnd( const boost::shared_ptr<Level> &level );
 	};
 }
 

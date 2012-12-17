@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		/// Bool is set to the user's choice.
 		/// </summary>
 	
-		std::shared_ptr<Multicaster_1<bool> > OnSelect;
+		boost::shared_ptr<Multicaster_1<bool> > OnSelect;
 
 	
 		void DoSelect( bool choice );
@@ -21,18 +21,18 @@ namespace CloudberryKingdom
 
 	
 		VerifyBaseMenu();
-		std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct();
+		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct();
 
 		VerifyBaseMenu( int Control );
-		std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( int Control );
+		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( int Control );
 
 		VerifyBaseMenu( bool CallBaseConstructor );
-		std::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( bool CallBaseConstructor );
+		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( bool CallBaseConstructor );
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
-		std::shared_ptr<QuadClass> Backdrop;
+		boost::shared_ptr<QuadClass> Backdrop;
 	
 		virtual void MakeBackdrop();
 

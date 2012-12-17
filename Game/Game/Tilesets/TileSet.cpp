@@ -11,13 +11,13 @@ namespace CloudberryKingdom
 
 	void TileInfoBase::InitializeInstanceFields()
 	{
-		Icon = std::make_shared<SpriteInfo>( std::shared_ptr<TextureOrAnim>(), Vector2( 50, -1 ) );
+		Icon = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>(), Vector2( 50, -1 ) );
 		Icon_Big = 0;
 	}
 
-	std::shared_ptr<TileInfoBase> TileSet::UpgradeToInfo( Upgrade upgrade, const std::shared_ptr<TileSet> &tile )
+	boost::shared_ptr<TileInfoBase> TileSet::UpgradeToInfo( Upgrade upgrade, const boost::shared_ptr<TileSet> &tile )
 	{
-		std::shared_ptr<TileSetInfo> info = tile->MyTileSetInfo;
+		boost::shared_ptr<TileSetInfo> info = tile->MyTileSetInfo;
 
 		switch ( upgrade )
 		{
@@ -75,12 +75,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	/*TileSet::operator std::shared_ptr<TileSet> ( const std::wstring &name )
+	/*TileSet::operator boost::shared_ptr<TileSet> ( const std::wstring &name )
 	{
 		return TileSets::NameLookup[ name ];
 	}*/
 
-	std::shared_ptr<TileSet> TileSet::Get( const std::wstring &name )
+	boost::shared_ptr<TileSet> TileSet::Get( const std::wstring &name )
 	{
 		return TileSets::NameLookup[ name ];
 	}
@@ -91,19 +91,19 @@ namespace CloudberryKingdom
 		MakeNew();
 	}
 
-	std::shared_ptr<TileSet> TileSet::SetName( const std::wstring &Name )
+	boost::shared_ptr<TileSet> TileSet::SetName( const std::wstring &Name )
 	{
 		this->Name = Name;
 		return shared_from_this();
 	}
 
-	std::shared_ptr<TileSet> TileSet::SetNameInGame( Localization::Words Name )
+	boost::shared_ptr<TileSet> TileSet::SetNameInGame( Localization::Words Name )
 	{
 		this->NameInGame = Name;
 		return shared_from_this();
 	}
 
-	std::shared_ptr<TileSet> TileSet::SetBackground( const std::wstring &background )
+	boost::shared_ptr<TileSet> TileSet::SetBackground( const std::wstring &background )
 	{
 		MyBackgroundType = BackgroundType::NameLookup[ background ];
 		return shared_from_this();
@@ -113,15 +113,15 @@ namespace CloudberryKingdom
 	{
 		IsLoaded = false;
 
-		MyTileSetInfo = std::make_shared<TileSetInfo>();
+		MyTileSetInfo = boost::make_shared<TileSetInfo>();
 
 		CustomStartEnd = false;
 
-		Pillars = std::make_shared<BlockGroup>();
-		Platforms = std::make_shared<BlockGroup>();
-		Ceilings = std::make_shared<BlockGroup>();
-		StartBlock = std::make_shared<BlockGroup>();
-		EndBlock = std::make_shared<BlockGroup>();
+		Pillars = boost::make_shared<BlockGroup>();
+		Platforms = boost::make_shared<BlockGroup>();
+		Ceilings = boost::make_shared<BlockGroup>();
+		StartBlock = boost::make_shared<BlockGroup>();
+		EndBlock = boost::make_shared<BlockGroup>();
 
 		FixedWidths = false;
 		ProvidesTemplates = false;
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 
 		// Find path
 		Tools::UseInvariantCulture();
-		std::shared_ptr<FileStream> stream = 0;
+		boost::shared_ptr<FileStream> stream = 0;
 		std::wstring original_path = path;
 
 		// FIXME: Rewrite this thing.
@@ -184,7 +184,7 @@ namespace CloudberryKingdom
 		}*/
 
 
-		std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
 
 		std::wstring line;
 
@@ -215,7 +215,7 @@ namespace CloudberryKingdom
 				else if ( first.find( _T( "Ceiling_" ) ) != std::string::npos )
 				{
 					HasCeiling = true;
-					std::shared_ptr<CloudberryKingdom::PieceQuad> pq = ParseBlock( bits, first, Ceilings );
+					boost::shared_ptr<CloudberryKingdom::PieceQuad> pq = ParseBlock( bits, first, Ceilings );
 					pq->Data.BottomFlush = true;
 				}
 				// Is it a start piece?
@@ -276,7 +276,7 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 						std::wstring file = bits[ dict[ _T( "file" ) ] + 1 ];
 
-						std::shared_ptr<AnimationData_Texture> sprite_anim = 0;
+						boost::shared_ptr<AnimationData_Texture> sprite_anim = 0;
 						if ( dict.find( _T( "frames" ) ) != dict.end() )
 						{
 							int start_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 1 ] );
@@ -285,7 +285,7 @@ namespace CloudberryKingdom
 								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 3 ] );
 							else
 								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 2 ] );
-							sprite_anim = std::make_shared<AnimationData_Texture>( file, start_frame, end_frame );
+							sprite_anim = boost::make_shared<AnimationData_Texture>( file, start_frame, end_frame );
 						}
 
 						if ( dict.find( _T( "frame_length" ) ) != dict.end() )
@@ -301,14 +301,14 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "BackgroundFile":
 					else if ( first == _T( "BackgroundFile" ) )
 					{
-						std::shared_ptr<BackgroundTemplate> template_Renamed;
+						boost::shared_ptr<BackgroundTemplate> template_Renamed;
 						try
 						{
 							template_Renamed = BackgroundType::NameLookup[ bits[ 1 ] ];
 						}
 						catch ( ... )
 						{
-							template_Renamed = std::make_shared<BackgroundTemplate>();
+							template_Renamed = boost::make_shared<BackgroundTemplate>();
 							template_Renamed->Name = bits[ 1 ];
 						}
 
@@ -375,29 +375,29 @@ namespace CloudberryKingdom
 		ProvidesTemplates = true;
 		MyBackgroundType = BackgroundType::None;
 
-		MyTileSetInfo->Pendulums->Group = std::make_shared<BlockGroup>();
-		MyTileSetInfo->Elevators->Group = std::make_shared<BlockGroup>();
-		MyTileSetInfo->FallingBlocks->Group = std::make_shared<BlockGroup>();
-		MyTileSetInfo->BouncyBlocks->Group = std::make_shared<BlockGroup>();
-		MyTileSetInfo->MovingBlocks->Group = std::make_shared<BlockGroup>();
+		MyTileSetInfo->Pendulums->Group = boost::make_shared<BlockGroup>();
+		MyTileSetInfo->Elevators->Group = boost::make_shared<BlockGroup>();
+		MyTileSetInfo->FallingBlocks->Group = boost::make_shared<BlockGroup>();
+		MyTileSetInfo->BouncyBlocks->Group = boost::make_shared<BlockGroup>();
+		MyTileSetInfo->MovingBlocks->Group = boost::make_shared<BlockGroup>();
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const std::shared_ptr<BlockGroup> &group )
+	boost::shared_ptr<PieceQuad> TileSet::ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const boost::shared_ptr<BlockGroup> &group )
 	{
 		// Get the block width
 		std::wstring num_str = first.substr( first.find( _T( "_" ) ) + 1 );
 		int width = ParseInt( num_str );
 
 		// Get the rest of the information
-		std::shared_ptr<CloudberryKingdom::PieceQuad> piecequad = ParseBlockLine( width, bits );
+		boost::shared_ptr<CloudberryKingdom::PieceQuad> piecequad = ParseBlockLine( width, bits );
 		group->Add( width, piecequad );
 
 		return piecequad;
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::ParseBlockLine( int width, std::vector<std::wstring> &bits )
+	boost::shared_ptr<PieceQuad> TileSet::ParseBlockLine( int width, std::vector<std::wstring> &bits )
 	{
-		std::shared_ptr<PieceQuad> c = std::make_shared<PieceQuad>();
+		boost::shared_ptr<PieceQuad> c = boost::make_shared<PieceQuad>();
 		c->Init( 0, Tools::BasicEffect );
 
 		bool IsTile = Tools::BitsHasBit( bits, _T( "tile" ) );
@@ -424,7 +424,7 @@ namespace CloudberryKingdom
 		return c;
 	}
 
-	void TileSet::ParseExtraBlockInfo( const std::shared_ptr<PieceQuad> &c, int width, std::vector<std::wstring> &bits )
+	void TileSet::ParseExtraBlockInfo( const boost::shared_ptr<PieceQuad> &c, int width, std::vector<std::wstring> &bits )
 	{
 		c->Center.SetTextureOrAnim( bits[ 1 ] );
 		//c.Center.TextureName = bits[1];
@@ -490,12 +490,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd )
+	boost::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const boost::shared_ptr<BlockBase> &block, const boost::shared_ptr<Rand> &rnd )
 	{
 		return GetPieceTemplate( block, rnd, 0 );
 	}
 
-	std::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const std::shared_ptr<BlockBase> &block, const std::shared_ptr<Rand> &rnd, std::shared_ptr<BlockGroup> group )
+	boost::shared_ptr<PieceQuad> TileSet::GetPieceTemplate( const boost::shared_ptr<BlockBase> &block, const boost::shared_ptr<Rand> &rnd, boost::shared_ptr<BlockGroup> group )
 	{
 		if ( group == 0 )
 		{
@@ -519,8 +519,8 @@ namespace CloudberryKingdom
 		}
 
 		// Get the block's info
-		std::shared_ptr<CloudberryKingdom::AABox> box = block->getBox();
-		std::shared_ptr<CloudberryKingdom::BlockData> core = block->getBlockCore();
+		boost::shared_ptr<CloudberryKingdom::AABox> box = block->getBox();
+		boost::shared_ptr<CloudberryKingdom::BlockData> core = block->getBlockCore();
 
 		// Get the width of the block (accounting for possible rotations for Meatboy levels)
 		float width = 0;

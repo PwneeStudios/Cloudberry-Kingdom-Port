@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::OnUsed()
 	{
-		for ( std::vector<std::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
+		for ( std::vector<boost::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
 			( *platform )->getCore()->GenData.Used = true;
 	}
 
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 			return;
 
 		// Delete all children platforms
-		for ( std::vector<std::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
+		for ( std::vector<boost::shared_ptr<MovingPlatform> >::const_iterator platform = Platforms.begin(); platform != Platforms.end(); ++platform )
 		{
 			( *platform )->Parent.reset(); // Make sure we destroy this connection to prevent an infinite recursion
 			( *platform )->CollectSelf();
@@ -81,9 +81,9 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::Emit( int offset )
 	{
-		std::shared_ptr<MovingPlatform> block = std::static_pointer_cast<MovingPlatform>( getCore()->getRecycle()->GetObject(ObjectType_MOVING_PLATFORM, getCore()->BoxesOnly) );
+		boost::shared_ptr<MovingPlatform> block = boost::static_pointer_cast<MovingPlatform>( getCore()->getRecycle()->GetObject(ObjectType_MOVING_PLATFORM, getCore()->BoxesOnly) );
 
-		block->Parent = std::static_pointer_cast<BlockEmitter>( shared_from_this() );
+		block->Parent = boost::static_pointer_cast<BlockEmitter>( shared_from_this() );
 		block->Init( EmitData.Position, Size, getMyLevel(), MyBoxStyle );
 
 		if ( GiveLayer )
@@ -121,12 +121,12 @@ namespace CloudberryKingdom
 		block->getCore()->WakeUpRequirements = true;
 	}
 
-	void BlockEmitter::AddPlatform( const std::shared_ptr<MovingPlatform> &platform )
+	void BlockEmitter::AddPlatform( const boost::shared_ptr<MovingPlatform> &platform )
 	{
 		Platforms.push_back( platform );
 	}
 
-	void BlockEmitter::RemovePlatform( const std::shared_ptr<MovingPlatform> &platform )
+	void BlockEmitter::RemovePlatform( const boost::shared_ptr<MovingPlatform> &platform )
 	{
 		Remove( Platforms, platform );
 	}
@@ -160,18 +160,18 @@ namespace CloudberryKingdom
 		EmitData.Position += shift;
 	}
 
-	void BlockEmitter::Init( Vector2 pos, const std::shared_ptr<Level> &level, BoxStyle MyBoxStyle )
+	void BlockEmitter::Init( Vector2 pos, const boost::shared_ptr<Level> &level, BoxStyle MyBoxStyle )
 	{
 		ObjectBase::Init( pos, level );
 
 		this->MyBoxStyle = MyBoxStyle;
 	}
 
-	void BlockEmitter::Clone( const std::shared_ptr<ObjectBase> &A )
+	void BlockEmitter::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<BlockEmitter> EmitterA = std::dynamic_pointer_cast<BlockEmitter>( A );
+		boost::shared_ptr<BlockEmitter> EmitterA = boost::dynamic_pointer_cast<BlockEmitter>( A );
 		Init( A->getPos(), A->getMyLevel(), EmitterA->MyBoxStyle );
 
 		EmitData = EmitterA->EmitData;
@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 
 	void BlockEmitter::InitializeInstanceFields()
 	{
-		Platforms = std::vector<std::shared_ptr<MovingPlatform> >();
+		Platforms = std::vector<boost::shared_ptr<MovingPlatform> >();
 		DoPreEmit = true;
 		SetToPreEmit = false;
 		GiveCustomRange = false;

@@ -3,14 +3,14 @@
 namespace CloudberryKingdom
 {
 
-	void SpikeyLine_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void SpikeyLine_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		Make = false;
 
 
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		if ( PieceSeed->MyUpgrades1->Get( Upgrade_SPIKEY_LINE ) > 0 || PieceSeed->MyUpgrades2->Get( Upgrade_SPIKEY_LINE ) > 0 )
 			Make = true;
@@ -31,9 +31,9 @@ namespace CloudberryKingdom
 		LinePeriod = Param( PieceSeed, __max( 70, 200 - 11 * u->Get( Upgrade_SPEED ) ) );
 	}
 
-std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_shared<SpikeyLine_AutoGen>();
+boost::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = boost::make_shared<SpikeyLine_AutoGen>();
 
-	const std::shared_ptr<SpikeyLine_AutoGen> &SpikeyLine_AutoGen::getInstance()
+	const boost::shared_ptr<SpikeyLine_AutoGen> &SpikeyLine_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -43,23 +43,23 @@ std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_sha
 		Do_PreFill_2 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> SpikeyLine_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> SpikeyLine_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<SpikeyLine_Parameters> Params = std::make_shared<SpikeyLine_Parameters>();
+		boost::shared_ptr<SpikeyLine_Parameters> Params = boost::make_shared<SpikeyLine_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void SpikeyLine_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyLine_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 	}
 
-	void SpikeyLine_AutoGen::CreateLine( const std::shared_ptr<Level> &level, Vector2 pos )
+	void SpikeyLine_AutoGen::CreateLine( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<SpikeyLine_Parameters> Params = std::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyLine_Parameters> Params = boost::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
 		float Period = Params->LinePeriod.GetVal( pos );
 
 		int n = 6;
@@ -69,7 +69,7 @@ std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_sha
 		float periodstep = Period / n;
 		for ( int i = 0; i < n; i++ )
 		{
-			std::shared_ptr<SpikeyLine> spikey = std::static_pointer_cast<SpikeyLine>( CreateAt( level, pos ) );
+			boost::shared_ptr<SpikeyLine> spikey = boost::static_pointer_cast<SpikeyLine>( CreateAt( level, pos ) );
 			spikey->Offset = static_cast<int>( i * periodstep );
 
 			//Line.Add(spikey);
@@ -78,13 +78,13 @@ std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_sha
 		//Params.Lines.Add(Line);
 	}
 
-	std::shared_ptr<ObjectBase> SpikeyLine_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> SpikeyLine_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		// Get Floater parameters
-		std::shared_ptr<SpikeyLine_Parameters> Params = std::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyLine_Parameters> Params = boost::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
 
 		// Get the new floater
-		std::shared_ptr<SpikeyLine> NewFloater = std::static_pointer_cast<SpikeyLine>( level->getRecycle()->GetObject(ObjectType_SPIKEY_LINE, true) );
+		boost::shared_ptr<SpikeyLine> NewFloater = boost::static_pointer_cast<SpikeyLine>( level->getRecycle()->GetObject(ObjectType_SPIKEY_LINE, true) );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
 		{
@@ -122,12 +122,12 @@ std::shared_ptr<SpikeyLine_AutoGen> SpikeyLine_AutoGen::instance = std::make_sha
 		return NewFloater;
 	}
 
-	void SpikeyLine_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void SpikeyLine_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get Floater parameters
-		std::shared_ptr<SpikeyLine_Parameters> Params = std::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
+		boost::shared_ptr<SpikeyLine_Parameters> Params = boost::static_pointer_cast<SpikeyLine_Parameters>( level->getStyle()->FindParams( SpikeyLine_AutoGen::getInstance() ) );
 
 		if ( !Params->Make )
 			return;

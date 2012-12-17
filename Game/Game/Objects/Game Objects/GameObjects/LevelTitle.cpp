@@ -32,14 +32,14 @@ namespace CloudberryKingdom
 		Count( 0 )
 	{
 	}
-	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str )
+	boost::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( str, Vector2(), 1, false );
 
-		return std::static_pointer_cast<LevelTitle>( shared_from_this() );
+		return boost::static_pointer_cast<LevelTitle>( shared_from_this() );
 	}
 
 	LevelTitle::LevelTitle( const std::wstring &str, Vector2 shift, float scale, bool perma ) :
@@ -47,19 +47,19 @@ namespace CloudberryKingdom
 		Count( 0 )
 	{
 	}
-	std::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	boost::shared_ptr<LevelTitle> LevelTitle::LevelTitle_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( str, shift, scale, perma );
 
-		return std::static_pointer_cast<LevelTitle>( shared_from_this() );
+		return boost::static_pointer_cast<LevelTitle>( shared_from_this() );
 	}
 
-	std::shared_ptr<LevelTitle> LevelTitle::HeroTitle( const std::wstring &str )
+	boost::shared_ptr<LevelTitle> LevelTitle::HeroTitle( const std::wstring &str )
 	{
-		std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( str, Vector2( 150.f, -130.f ), 1.f, false ) );
+		boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( str, Vector2( 150.f, -130.f ), 1.f, false ) );
 		title->SlideInLength = 55;
 
 		return title;
@@ -74,12 +74,12 @@ namespace CloudberryKingdom
 		//Core.DrawLayer++; // Draw above cheering berries
 		PauseOnPause = true;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 		MyPile->setPos( MyPile->getPos() + shift );
 
 		Tools::Warning(); // May be text, rather than Localization.Words
-		text = std::make_shared<EzText>( str, Resources::Font_Grobold42, true, true );
+		text = boost::make_shared<EzText>( str, Resources::Font_Grobold42, true, true );
 		text->setScale( text->getScale() * scale );
 
 		text->MyFloatColor = ( bColor( 26, 188, 241 ) ).ToVector4();

@@ -12,18 +12,18 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 
 	
-		struct OnSwapLambda : public Lambda_1<std::shared_ptr<LevelSeedData> >
+		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		
-			std::shared_ptr<Challenge_HeroRush> ch;
+			boost::shared_ptr<Challenge_HeroRush> ch;
 		
-			OnSwapLambda( const std::shared_ptr<Challenge_HeroRush> &ch );
+			OnSwapLambda( const boost::shared_ptr<Challenge_HeroRush> &ch );
 
-			void Apply( const std::shared_ptr<LevelSeedData> &data );
+			void Apply( const boost::shared_ptr<LevelSeedData> &data );
 		};
 
 	
-		struct ScoreMultiplierHelper : public Lambda_1<std::shared_ptr<GameData> >
+		struct ScoreMultiplierHelper : public Lambda_1<boost::shared_ptr<GameData> >
 		{
 		
 			float multiplier;
@@ -31,32 +31,32 @@ namespace CloudberryKingdom
 		
 			ScoreMultiplierHelper( float multiplier );
 
-			void Apply( const std::shared_ptr<GameData> &game );
+			void Apply( const boost::shared_ptr<GameData> &game );
 		};
 
 	
 		struct AdditionalPreStartOnSwapToLevelHelper : public Lambda_1<int>
 		{
 		
-			std::shared_ptr<Challenge_HeroRush> chr;
+			boost::shared_ptr<Challenge_HeroRush> chr;
 
 		
-			AdditionalPreStartOnSwapToLevelHelper( const std::shared_ptr<Challenge_HeroRush> &chr );
+			AdditionalPreStartOnSwapToLevelHelper( const boost::shared_ptr<Challenge_HeroRush> &chr );
 
 			void Apply( const int &levelindex );
 		};
 
 	
-		struct MakeMyModParamsHelper : public Lambda_2<std::shared_ptr<Level> , std::shared_ptr<PieceSeedData> >
+		struct MakeMyModParamsHelper : public Lambda_2<boost::shared_ptr<Level> , boost::shared_ptr<PieceSeedData> >
 		{
 		
-			void Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p );
+			void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p );
 		};
 
 	
-		static std::shared_ptr<Challenge_HeroRush> instance;
+		static boost::shared_ptr<Challenge_HeroRush> instance;
 	
-		const static std::shared_ptr<Challenge_HeroRush> &getInstance();
+		const static boost::shared_ptr<Challenge_HeroRush> &getInstance();
 
 	
 		Challenge_HeroRush();
@@ -82,13 +82,13 @@ namespace CloudberryKingdom
 		void OnSwapTo_GUI( int levelindex );
 
 	
-		virtual std::shared_ptr<LevelSeedData> GetSeed( int Index );
+		virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
 
 	
-		static std::vector<std::shared_ptr<BobPhsx> > HeroTypes;
+		static std::vector<boost::shared_ptr<BobPhsx> > HeroTypes;
 
 	
-		virtual std::shared_ptr<BobPhsx> GetHero( int i );
+		virtual boost::shared_ptr<BobPhsx> GetHero( int i );
 
 	
 		int LevelsPerTileset;
@@ -96,13 +96,13 @@ namespace CloudberryKingdom
 		//static string[] tilesets = { "hills", "forest", "cloud", "cave", "castle", "sea" };
 
 	
-		virtual std::shared_ptr<TileSet> GetTileSet( int i );
+		virtual boost::shared_ptr<TileSet> GetTileSet( int i );
 
 	
 		int LevelLength_Short;
 		int LevelLength_Long;
 	
-		virtual std::shared_ptr<LevelSeedData> Make( int Index, float Difficulty );
+		virtual boost::shared_ptr<LevelSeedData> Make( int Index, float Difficulty );
 
 	
 		void InitializeInstanceFields();

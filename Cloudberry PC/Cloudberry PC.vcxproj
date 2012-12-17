@@ -39,12 +39,12 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)Game;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)Game;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)glfw-2.7.6\support\msvc100\$(Configuration);$(SolutionDir)glew-1.9.0\lib\$(Configuration);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)Game;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)Core\include;$(SolutionDir)Game;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
     <LibraryPath>$(SolutionDir)glfw-2.7.6\support\msvc100\$(Configuration);$(SolutionDir)glew-1.9.0\lib\$(Configuration);$(SolutionDir)$(Configuration);$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

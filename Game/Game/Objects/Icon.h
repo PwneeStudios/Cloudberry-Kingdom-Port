@@ -22,28 +22,28 @@ namespace CloudberryKingdom
 
 		bool Flipped;
 
-		static std::shared_ptr<ObjectIcon> RobotIcon, PathIcon, SlowMoIcon;
-		static std::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, CustomHoverIcon_Renamed;
+		static boost::shared_ptr<ObjectIcon> RobotIcon, PathIcon, SlowMoIcon;
+		static boost::shared_ptr<ObjectIcon> CheckpointIcon, RandomIcon, CustomIcon, CustomHoverIcon_Renamed;
 		//public static ObjectIcon UncheckedIcon, CheckIcon
 
-		static std::map<Upgrade, std::shared_ptr<ObjectIcon> > UpgradeIcons;
-		static std::map<ObjectType, std::shared_ptr<ObjectIcon> > ObjIcons;
+		static std::map<Upgrade, boost::shared_ptr<ObjectIcon> > UpgradeIcons;
+		static std::map<ObjectType, boost::shared_ptr<ObjectIcon> > ObjIcons;
 
-		static std::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade );
-		static std::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade, bool big );
+		static boost::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade );
+		static boost::shared_ptr<ObjectIcon> CreateIcon( Upgrade upgrade, bool big );
 
 		static Localization::Words UpgradeName( Upgrade upgrade );
 
-		static std::shared_ptr<ObjectIcon> CreateIcon( ObjectType obj );
+		static boost::shared_ptr<ObjectIcon> CreateIcon( ObjectType obj );
 
 		static void InitIcons();
 
-		std::shared_ptr<QuadClass> Backdrop;
+		boost::shared_ptr<QuadClass> Backdrop;
 		Color BarColor;
 
 		Localization::Words DisplayText;
 
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 
 		const Vector2 &getPos() const;
 		void setPos( const Vector2 &value );
@@ -57,9 +57,9 @@ namespace CloudberryKingdom
 
 		virtual void Fade( bool fade );
 
-		virtual std::shared_ptr<ObjectIcon> Clone( IconScale ScaleType );
+		virtual boost::shared_ptr<ObjectIcon> Clone( IconScale ScaleType );
 
-		virtual std::shared_ptr<ObjectIcon> Clone();
+		virtual boost::shared_ptr<ObjectIcon> Clone();
 
 		float PrevSetRatio;
 		virtual void SetScale( float Ratio );
@@ -79,20 +79,20 @@ namespace CloudberryKingdom
 	
 		virtual std::vector<std::wstring> GetViewables();
 
-		std::shared_ptr<QuadClass> IconQuad;
+		boost::shared_ptr<QuadClass> IconQuad;
 
-		std::shared_ptr<EzTexture> IconTexture;
+		boost::shared_ptr<EzTexture> IconTexture;
 		float NormalWidth;
 
-		PictureIcon( const std::shared_ptr<SpriteInfo> &info );
+		PictureIcon( const boost::shared_ptr<SpriteInfo> &info );
 
 		PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width );
 		PictureIcon( Localization::Words DisplayText, const std::wstring &IconTextureString, Color BarColor, float Width, Vector2 HitPadding );
 		PictureIcon( const std::wstring &IconTextureString, Color BarColor, float Width );
-		PictureIcon( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
+		PictureIcon( const boost::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
 
 	
-		void Init( const std::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
+		void Init( const boost::shared_ptr<EzTexture> &IconTexture, Color BarColor, float Width );
 
 	
 		virtual void SetShadow( Color color );
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 
 		virtual void Fade( bool fade );
 
-		virtual std::shared_ptr<ObjectIcon> Clone( IconScale ScaleType );
+		virtual boost::shared_ptr<ObjectIcon> Clone( IconScale ScaleType );
 
 		virtual void SetScale( float Ratio );
 
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 	
 		virtual std::vector<std::wstring> GetViewables();
 
-		std::shared_ptr<QuadClass> GearQuad, YQuad;
+		boost::shared_ptr<QuadClass> GearQuad, YQuad;
 
 		CustomHoverIcon();
 

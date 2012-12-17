@@ -7,72 +7,72 @@
 namespace CloudberryKingdom
 {
 
-	LevelSeedData::_StartSongProxy::_StartSongProxy( const std::shared_ptr<LevelSeedData> &lsd )
+	LevelSeedData::_StartSongProxy::_StartSongProxy( const boost::shared_ptr<LevelSeedData> &lsd )
 	{
 		this->lsd = lsd;
 	}
 
-	void LevelSeedData::_StartSongProxy::Apply( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_StartSongProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		lsd->_StartSong( level );
 	}
 
-	void LevelSeedData::_HasWall_ProcessProxy::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::_HasWall_ProcessProxy::Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		LevelSeedData::_HasWall_Process( level, piece );
 	}
 
-	void LevelSeedData::_SetWeather_ProcessProxy::Apply( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_SetWeather_ProcessProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::_SetWeather_Process( level );
 	}
 
-	void LevelSeedData::_NoStartDoorProxy::Apply( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_NoStartDoorProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::_NoStartDoor( level );
 	}
 
-	void LevelSeedData::_FadeIn_ProcessProxy::Apply( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_FadeIn_ProcessProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::_FadeIn_Process( level );
 	}
 
-	LevelSeedData::EOL_StringWorldDoorEndAction_WithFadeProxy::EOL_StringWorldDoorEndAction_WithFadeProxy( const std::shared_ptr<StringWorldGameData> &gameData )
+	LevelSeedData::EOL_StringWorldDoorEndAction_WithFadeProxy::EOL_StringWorldDoorEndAction_WithFadeProxy( const boost::shared_ptr<StringWorldGameData> &gameData )
 	{
 		this->gameData = gameData;
 	}
 
-	void LevelSeedData::EOL_StringWorldDoorEndAction_WithFadeProxy::Apply( const std::shared_ptr<Door> &door )
+	void LevelSeedData::EOL_StringWorldDoorEndAction_WithFadeProxy::Apply( const boost::shared_ptr<Door> &door )
 	{
 		gameData->EOL_StringWorldDoorEndAction_WithFade( door );
 	}
 
-	void LevelSeedData::_FadeOut_ProcessProxy::Apply( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_FadeOut_ProcessProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::_FadeOut_Process( level );
 	}
 
-	LevelSeedData::ModPieceViaStringProxy::ModPieceViaStringProxy( const std::shared_ptr<LevelSeedData> &lsd )
+	LevelSeedData::ModPieceViaStringProxy::ModPieceViaStringProxy( const boost::shared_ptr<LevelSeedData> &lsd )
 	{
 		this->lsd = lsd;
 	}
 
-	void LevelSeedData::ModPieceViaStringProxy::Apply( const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::ModPieceViaStringProxy::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		lsd->ModPieceViaString( piece );
 	}
 
-	LevelSeedData::ModPieceViaHashProxy::ModPieceViaHashProxy( const std::shared_ptr<LevelSeedData> &lsd )
+	LevelSeedData::ModPieceViaHashProxy::ModPieceViaHashProxy( const boost::shared_ptr<LevelSeedData> &lsd )
 	{
 		this->lsd = lsd;
 	}
 
-	void LevelSeedData::ModPieceViaHashProxy::Apply( const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::ModPieceViaHashProxy::Apply( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		lsd->ModPieceViaHash( piece );
 	}
 
-	LevelSeedData::SetToStartSongHelper::SetToStartSongHelper( const std::shared_ptr<EzSong> &song )
+	LevelSeedData::SetToStartSongHelper::SetToStartSongHelper( const boost::shared_ptr<EzSong> &song )
 	{
 		this->song = song;
 	}
@@ -82,13 +82,13 @@ namespace CloudberryKingdom
 		Tools::SongWad->LoopSong( song );
 	}
 
-	LevelSeedData::SetToStartSongPostMakeHelper::SetToStartSongPostMakeHelper( int delay, const std::shared_ptr<Lambda> &songHelper )
+	LevelSeedData::SetToStartSongPostMakeHelper::SetToStartSongPostMakeHelper( int delay, const boost::shared_ptr<Lambda> &songHelper )
 	{
 		this->delay = delay;
 		this->songHelper = songHelper;
 	}
 
-	void LevelSeedData::SetToStartSongPostMakeHelper::Apply( const std::shared_ptr<Level> &lvl )
+	void LevelSeedData::SetToStartSongPostMakeHelper::Apply( const boost::shared_ptr<Level> &lvl )
 	{
 		lvl->MyGame->WaitThenDo( delay, songHelper );
 	}
@@ -98,18 +98,18 @@ namespace CloudberryKingdom
 		LevelSeedData::BOL_StartMusic();
 	}
 
-	LevelSeedData::ScoreScreenLambda::ScoreScreenLambda( StatGroup stats, const std::shared_ptr<Level> &level )
+	LevelSeedData::ScoreScreenLambda::ScoreScreenLambda( StatGroup stats, const boost::shared_ptr<Level> &level )
 	{
 		this->stats = stats;
 		this->level = level;
 	}
 
-	std::shared_ptr<GameObject> LevelSeedData::ScoreScreenLambda::Apply()
+	boost::shared_ptr<GameObject> LevelSeedData::ScoreScreenLambda::Apply()
 	{
 		return MakeMagic( ScoreScreen, ( stats, level->MyGame ) );
 	}
 
-	void LevelSeedData::EOL_DoorActionProxy::Apply( const std::shared_ptr<Door> &door )
+	void LevelSeedData::EOL_DoorActionProxy::Apply( const boost::shared_ptr<Door> &door )
 	{
 		GameData::EOL_DoorAction( door );
 	}
@@ -124,12 +124,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	LevelSeedData::StandardInitHelper::StandardInitHelper( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData>, std::shared_ptr<Upgrades> > > &CustomDiff )
+	LevelSeedData::StandardInitHelper::StandardInitHelper( const boost::shared_ptr<Lambda_2<boost::shared_ptr<PieceSeedData>, boost::shared_ptr<Upgrades> > > &CustomDiff )
 	{
 		this->CustomDiff = CustomDiff;
 	}
 
-	void LevelSeedData::StandardInitHelper::Apply( const std::shared_ptr<PieceSeedData> &p )
+	void LevelSeedData::StandardInitHelper::Apply( const boost::shared_ptr<PieceSeedData> &p )
 	{
 		CustomDiff->Apply( p, p->getu() );
 		p->MyUpgrades1->CalcGenData( p->MyGenData->gen1, p->Style );
@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 		p->Style->MyFinalPlatsType = StyleData::FinalPlatsType_DOOR;
 	}
 
-	void LevelSeedData::InitNormalMyModParamsHelper::Apply( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &p )
+	void LevelSeedData::InitNormalMyModParamsHelper::Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 	{
 		p->Style->FillxStep *= 3.1f;
 		p->Style->FillyStep *= 1.7f;
@@ -150,12 +150,12 @@ namespace CloudberryKingdom
 
 	bool LevelSeedData::NoDoublePaths = true;
 
-	std::shared_ptr<Level> LevelSeedData::MakeLevel( const std::shared_ptr<GameData> &game )
+	boost::shared_ptr<Level> LevelSeedData::MakeLevel( const boost::shared_ptr<GameData> &game )
 	{
 		return MakeLevel( true, game );
 	}
 
-	std::shared_ptr<Level> LevelSeedData::MakeLevel( bool MakeBackground, const std::shared_ptr<GameData> &game )
+	boost::shared_ptr<Level> LevelSeedData::MakeLevel( bool MakeBackground, const boost::shared_ptr<GameData> &game )
 	{
 		this->setSeed( this->getSeed() );
 		int TestNumber;
@@ -164,9 +164,9 @@ namespace CloudberryKingdom
 
 		game->DefaultHeroType = this->DefaultHeroType; // = BobPhsxMario.Instance;
 
-		std::shared_ptr<Level> NewLevel = MakeNewLevel( game );
+		boost::shared_ptr<Level> NewLevel = MakeNewLevel( game );
 		NewLevel->Geometry = MyGeometry;
-		std::shared_ptr<Camera> cam = NewLevel->getMainCamera();
+		boost::shared_ptr<Camera> cam = NewLevel->getMainCamera();
 
 		// Set lava
 		if ( NewLevel->getInfo()->AllowLava )
@@ -190,8 +190,8 @@ namespace CloudberryKingdom
 
 		float Height = 0;
 
-		std::shared_ptr<Level> level = 0;
-		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator Piece = PieceSeeds.begin(); Piece != PieceSeeds.end(); ++Piece )
+		boost::shared_ptr<Level> level = 0;
+		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator Piece = PieceSeeds.begin(); Piece != PieceSeeds.end(); ++Piece )
 		{
 			if ( ( *Piece )->Ladder != LadderType_NONE )
 			{
@@ -226,18 +226,18 @@ namespace CloudberryKingdom
 
 
 
-			level = std::make_shared<Level>( true );
+			level = boost::make_shared<Level>( true );
 			level->MySourceGame = game;
 			level->MyLevelSeed = shared_from_this();
 			level->MyTileSet = NewLevel->MyTileSet;
 			level->DefaultHeroType = NewLevel->DefaultHeroType;
-			level->setMainCamera( std::make_shared<Camera>() );
+			level->setMainCamera( boost::make_shared<Camera>() );
 
 			cam->Data.Position = ( *Piece )->Start + Vector2( 1000, 0 );
 			cam->Update();
 
 
-			std::shared_ptr<MakeData> makeData = std::make_shared<MakeData>();
+			boost::shared_ptr<MakeData> makeData = boost::make_shared<MakeData>();
 			makeData->LevelSeed = shared_from_this();
 			makeData->PieceSeed = *Piece;
 			makeData->GenData = ( *Piece )->MyGenData;
@@ -277,7 +277,7 @@ namespace CloudberryKingdom
 			{
 				Tools::DrawBoxes = true;
 
-				level->MainEmitter = std::make_shared<ParticleEmitter>( 1000 );
+				level->MainEmitter = boost::make_shared<ParticleEmitter>( 1000 );
 				for ( BobVec::const_iterator bob = level->Bobs.begin(); bob != level->Bobs.end(); ++bob )
 					( *bob )->SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
 				level->SetToWatchMake = true;
@@ -301,7 +301,7 @@ namespace CloudberryKingdom
 			{
 				for ( int i = 0; i < level->LevelPieces[ 0 ]->NumBobs; i++ )
 				{
-					std::shared_ptr<Checkpoint> checkpoint = std::static_pointer_cast<Checkpoint>( game->Recycle->GetObject( ObjectType_CHECKPOINT, false ) );
+					boost::shared_ptr<Checkpoint> checkpoint = boost::static_pointer_cast<Checkpoint>( game->Recycle->GetObject( ObjectType_CHECKPOINT, false ) );
 					checkpoint->Init( level );
 
 					PhsxData data = level->LevelPieces[ 0 ]->StartData[ i ];
@@ -349,7 +349,7 @@ namespace CloudberryKingdom
 		if ( Lavas.size() > 0 )
 		{
 			// Find the lowest watermark
-			std::shared_ptr<BlockBase> Lowest = 0;
+			boost::shared_ptr<BlockBase> Lowest = 0;
 			for ( BlockVec::const_iterator lava = Lavas.begin(); lava != Lavas.end(); ++lava )
 				if ( Lowest == 0 || ( *lava )->getBox()->TR.Y < Lowest->getBox()->TR.Y )
 					Lowest = *lava;
@@ -381,14 +381,14 @@ namespace CloudberryKingdom
 		return NewLevel;
 	}
 
-	void LevelSeedData::MakeTheBackground( const std::shared_ptr<Level> &NewLevel, float Height )
+	void LevelSeedData::MakeTheBackground( const boost::shared_ptr<Level> &NewLevel, float Height )
 	{
 		NewLevel->MyBackground->Init( NewLevel );
 	}
 
 	int LevelSeedData::ForcedReturnEarly = 0;
 
-	int LevelSeedData::SetReturnEarly( const std::shared_ptr<PieceSeedData> &Piece )
+	int LevelSeedData::SetReturnEarly( const boost::shared_ptr<PieceSeedData> &Piece )
 	{
 		int ReturnEarly = ForcedReturnEarly;
 
@@ -409,39 +409,39 @@ namespace CloudberryKingdom
 	{
 		if ( HasWall )
 		{
-			std::shared_ptr<PieceSeedData> p = PieceSeeds[ 0 ];
+			boost::shared_ptr<PieceSeedData> p = PieceSeeds[ 0 ];
 			//p.Style.ComputerWaitLengthRange = new Vector2(4, 23);
 
-			p->Style->MyModParams->Add( std::make_shared<_HasWall_ProcessProxy>() );
+			p->Style->MyModParams->Add( boost::make_shared<_HasWall_ProcessProxy>() );
 		}
 
 		if ( NoStartDoor )
-			PostMake->Add( std::make_shared<_NoStartDoorProxy>() );
+			PostMake->Add( boost::make_shared<_NoStartDoorProxy>() );
 
 		if ( FadeIn )
-			PostMake->Add( std::make_shared<_FadeIn_ProcessProxy>() );
+			PostMake->Add( boost::make_shared<_FadeIn_ProcessProxy>() );
 
 		if ( FadeOut )
-			PostMake->Add( std::make_shared<_FadeOut_ProcessProxy>() );
+			PostMake->Add( boost::make_shared<_FadeOut_ProcessProxy>() );
 
 		if ( WeatherIntensity != 1 )
-			PostMake->Add( std::make_shared<_SetWeather_ProcessProxy>() );
+			PostMake->Add( boost::make_shared<_SetWeather_ProcessProxy>() );
 
 		if ( MySong != 0 )
-			PostMake->Add( std::make_shared<_StartSongProxy>( shared_from_this() ) );
+			PostMake->Add( boost::make_shared<_StartSongProxy>( shared_from_this() ) );
 	}
 
-	void LevelSeedData::_StartSong( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_StartSong( const boost::shared_ptr<Level> &level )
 	{
 		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
 		Tools::SongWad->Next( MySong );
 		Tools::SongWad->PlayNext = true;
 	}
 
-	void LevelSeedData::_HasWall_Process( const std::shared_ptr<Level> &level, const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::_HasWall_Process( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &piece )
 	{
-		std::shared_ptr<NormalBlock_Parameters> Params = std::static_pointer_cast<NormalBlock_Parameters>( piece->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
-		std::shared_ptr<Wall> wall = Params->SetWall( LevelGeometry_RIGHT );
+		boost::shared_ptr<NormalBlock_Parameters> Params = boost::static_pointer_cast<NormalBlock_Parameters>( piece->Style->FindParams( NormalBlock_AutoGen::getInstance() ) );
+		boost::shared_ptr<Wall> wall = Params->SetWall( LevelGeometry_RIGHT );
 		wall->Space = 20;
 		wall->MyBufferType = Wall::BufferType_SPACE;
 		piece->CamZoneStartAdd.X = -2000;
@@ -450,33 +450,33 @@ namespace CloudberryKingdom
 		wall->InitialDelay = 72;
 	}
 
-	void LevelSeedData::_SetWeather_Process( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_SetWeather_Process( const boost::shared_ptr<Level> &level )
 	{
 		level->MyBackground->SetWeatherIntensity( level->MyLevelSeed->WeatherIntensity );
 	}
 
-	void LevelSeedData::_NoStartDoor( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_NoStartDoor( const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<CloudberryKingdom::Door> door = level->getStartDoor();
+		boost::shared_ptr<CloudberryKingdom::Door> door = level->getStartDoor();
 		if ( door == 0 )
 			return;
 		door->CollectSelf();
 	}
 
-	void LevelSeedData::_FadeIn_Process( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_FadeIn_Process( const boost::shared_ptr<Level> &level )
 	{
 		level->MyGame->PhsxStepsToDo += 2;
-		level->MyGame->AddGameObject( std::make_shared<FadeInObject>() );
+		level->MyGame->AddGameObject( boost::make_shared<FadeInObject>() );
 	}
 
-	void LevelSeedData::_FadeOut_Process( const std::shared_ptr<Level> &level )
+	void LevelSeedData::_FadeOut_Process( const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<StringWorldGameData> stringworld = std::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
-		std::shared_ptr<Door> door = std::dynamic_pointer_cast<Door>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
+		boost::shared_ptr<StringWorldGameData> stringworld = boost::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
+		boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
 
 		if ( 0 != stringworld && 0 != door )
 		{
-			door->setOnEnter( std::make_shared<EOL_StringWorldDoorEndAction_WithFadeProxy>( stringworld ) );
+			door->setOnEnter( boost::make_shared<EOL_StringWorldDoorEndAction_WithFadeProxy>( stringworld ) );
 		}
 	}
 
@@ -489,8 +489,8 @@ namespace CloudberryKingdom
 
 		// Tileset
 		i /= 2;
-		//std::shared_ptr<std::vector<std::shared_ptr<BackgroundTemplate> > > tilesets = TileSets::NameLookup.Keys::ToList();
-		std::shared_ptr<TileSet> tileset = CustomLevel_GUI::FreeplayTilesets[ ( i + 23 ) % CustomLevel_GUI::FreeplayTilesets.size() ];
+		//boost::shared_ptr<std::vector<boost::shared_ptr<BackgroundTemplate> > > tilesets = TileSets::NameLookup.Keys::ToList();
+		boost::shared_ptr<TileSet> tileset = CustomLevel_GUI::FreeplayTilesets[ ( i + 23 ) % CustomLevel_GUI::FreeplayTilesets.size() ];
 		if ( tileset == TileSets::Random )
 			tileset = CustomLevel_GUI::FreeplayTilesets[ ( i + 2323 ) % CustomLevel_GUI::FreeplayTilesets.size() ];
 		if ( tileset == TileSets::Random )
@@ -721,12 +721,12 @@ namespace CloudberryKingdom
 		}
 
 		// Error catch.
-		if ( std::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxMeat>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_UP;
 			NumPieces = 1;
 		}
-		if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
+		if ( boost::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 		{
 			MyGeometry = LevelGeometry_RIGHT;
 			NumPieces = 1;
@@ -736,11 +736,11 @@ namespace CloudberryKingdom
 		if ( UpgradeStrs.empty() )
 		{
 			UpgradeStrs.push_back( _T( "" ) );
-			Initialize( std::make_shared<ModPieceViaHashProxy>( shared_from_this() ) );
+			Initialize( boost::make_shared<ModPieceViaHashProxy>( shared_from_this() ) );
 		}
 		else
 		{
-			Initialize( std::make_shared<ModPieceViaStringProxy>( shared_from_this() ) );
+			Initialize( boost::make_shared<ModPieceViaStringProxy>( shared_from_this() ) );
 		}
 
 		ProcessSpecial();
@@ -785,7 +785,7 @@ namespace CloudberryKingdom
 
 		// Upgrades
 		std::wstring upgrades = _T( "" );
-		for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
+		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
 		{
 			if ( ( *p )->Ladder != LadderType_NONE )
 				continue;
@@ -812,7 +812,7 @@ namespace CloudberryKingdom
 		return str;
 	}
 
-	void LevelSeedData::ModPieceViaString( const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::ModPieceViaString( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		// Break the data up by commas
 		int index = CoreMath::RestrictVal( 0, UpgradeStrs.size() - 1, piece->MyPieceIndex );
@@ -833,7 +833,7 @@ namespace CloudberryKingdom
 		piece->StandardClose();
 	}
 
-	void LevelSeedData::ModPieceViaHash( const std::shared_ptr<PieceSeedData> &piece )
+	void LevelSeedData::ModPieceViaHash( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		PieceHash = abs( PieceHash );
 		PieceHash *= 997;
@@ -860,7 +860,7 @@ namespace CloudberryKingdom
 		piece->StandardClose();
 	}
 
-	void LevelSeedData::RandomHero( const std::shared_ptr<BobPhsx> &Hero, int Hash )
+	void LevelSeedData::RandomHero( const boost::shared_ptr<BobPhsx> &Hero, int Hash )
 	{
 		int Length = BobPhsx::CustomPhsxData::Length;
 		std::vector<float> vals = std::vector<float>( Length );
@@ -890,18 +890,18 @@ namespace CloudberryKingdom
 		return name;
 	}
 
-	void LevelSeedData::SetToStartSong( const std::shared_ptr<EzSong> &song )
+	void LevelSeedData::SetToStartSong( const boost::shared_ptr<EzSong> &song )
 	{
 		SetToStartSong( song, 5 );
 	}
 
-	void LevelSeedData::SetToStartSong( const std::shared_ptr<EzSong> &song, int delay )
+	void LevelSeedData::SetToStartSong( const boost::shared_ptr<EzSong> &song, int delay )
 	{
 		NoMusicStart = true;
-		PostMake->Add( std::make_shared<SetToStartSongPostMakeHelper>( delay, std::make_shared<SetToStartSongHelper>( song ) ) );
+		PostMake->Add( boost::make_shared<SetToStartSongPostMakeHelper>( delay, boost::make_shared<SetToStartSongHelper>( song ) ) );
 	}
 
-	void LevelSeedData::AddGameObjects_Default( const std::shared_ptr<Level> &level, bool global, bool ShowMultiplier )
+	void LevelSeedData::AddGameObjects_Default( const boost::shared_ptr<Level> &level, bool global, bool ShowMultiplier )
 	{
 		level->MyGame->AddGameObject( MakeMagic( HintGiver, () ) );
 		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
@@ -910,7 +910,7 @@ namespace CloudberryKingdom
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 	}
 
-	void LevelSeedData::AddGameObjects_BareBones( const std::shared_ptr<Level> &level, bool global )
+	void LevelSeedData::AddGameObjects_BareBones( const boost::shared_ptr<Level> &level, bool global )
 	{
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 		level->MyGame->AddGameObject( MakeMagic( PerfectScoreObject, (global, true) ) );
@@ -923,35 +923,35 @@ namespace CloudberryKingdom
 		Tools::SongWad->Start( true );
 	}
 
-	void LevelSeedData::PostMake_EnableLoad( const std::shared_ptr<Level> &level )
+	void LevelSeedData::PostMake_EnableLoad( const boost::shared_ptr<Level> &level )
 	{
 		level->CanLoadLevels = true;
 	}
 
-	void LevelSeedData::PostMake_StandardLoad( const std::shared_ptr<Level> &level )
+	void LevelSeedData::PostMake_StandardLoad( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::PostMake_Standard( level, true, false );
-		level->MyGame->MakeScore = std::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level );
+		level->MyGame->MakeScore = boost::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level );
 	}
 
-	void LevelSeedData::PostMake_Standard( const std::shared_ptr<Level> &level, bool StartMusic, bool ShowMultiplier )
+	void LevelSeedData::PostMake_Standard( const boost::shared_ptr<Level> &level, bool StartMusic, bool ShowMultiplier )
 	{
 		AddGameObjects_Default( level, false, ShowMultiplier );
 
 		if ( StartMusic )
-			level->MyGame->WaitThenDo( 8, std::make_shared<BOL_StartMusicProxy>() );
+			level->MyGame->WaitThenDo( 8, boost::make_shared<BOL_StartMusicProxy>() );
 
-		std::shared_ptr<ILevelConnector> door = std::static_pointer_cast<ILevelConnector>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
-		door->setOnOpen( std::make_shared<EOL_DoorActionProxy>() );
+		boost::shared_ptr<ILevelConnector> door = boost::static_pointer_cast<ILevelConnector>( level->FindIObject( LevelConnector::EndOfLevelCode ) );
+		door->setOnOpen( boost::make_shared<EOL_DoorActionProxy>() );
 
 		level->StartRecording();
 	}
 
-	void LevelSeedData::PostMake_StringWorldStandard( const std::shared_ptr<Level> &level )
+	void LevelSeedData::PostMake_StringWorldStandard( const boost::shared_ptr<Level> &level )
 	{
 		AddGameObjects_Default( level, false, true );
 
-		level->MyGame->WaitThenDo( 8, std::make_shared<PostMake_StringWorldStandardHelper>() );
+		level->MyGame->WaitThenDo( 8, boost::make_shared<PostMake_StringWorldStandardHelper>() );
 	}
 
 	const int &LevelSeedData::getSeed() const
@@ -961,7 +961,7 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::setSeed( const int &value )
 	{
-		Rnd = std::make_shared<Rand>( value );
+		Rnd = boost::make_shared<Rand>( value );
 	}
 
 	void LevelSeedData::SetTileSet( const std::wstring &name )
@@ -972,7 +972,7 @@ namespace CloudberryKingdom
 			SetTileSet( TileSets::NameLookup[ name ] );
 	}
 
-	void LevelSeedData::SetTileSet( const std::shared_ptr<TileSet> &tileset )
+	void LevelSeedData::SetTileSet( const boost::shared_ptr<TileSet> &tileset )
 	{
 		MyTileSet = tileset;
 		MyBackgroundType = MyTileSet == 0 ? 0 : MyTileSet->MyBackgroundType;
@@ -985,7 +985,7 @@ namespace CloudberryKingdom
 		MyGame.reset();
 
 		ReleasePieces();
-		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
+		PieceSeeds = std::vector<boost::shared_ptr<PieceSeedData> >();
 	}
 
 	void LevelSeedData::Release()
@@ -1000,12 +1000,12 @@ namespace CloudberryKingdom
 	void LevelSeedData::ReleasePieces()
 	{
 		if ( PieceSeeds.size() > 0 )
-			for ( std::vector<std::shared_ptr<PieceSeedData> >::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
+			for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator data = PieceSeeds.begin(); data != PieceSeeds.end(); ++data )
 				( *data )->Release();
 		PieceSeeds.clear();
 	}
 
-	LevelSeedData::LevelSeedData( const std::shared_ptr<LevelSeedData> &data )
+	LevelSeedData::LevelSeedData( const boost::shared_ptr<LevelSeedData> &data )
 	{
 		InitializeInstanceFields();
 		setSeed( data->getSeed() );
@@ -1042,12 +1042,12 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::BaseInit()
 	{
-		PieceSeeds = std::vector<std::shared_ptr<PieceSeedData> >();
+		PieceSeeds = std::vector<boost::shared_ptr<PieceSeedData> >();
 
-		Loaded = std::make_shared<LockableBool>();
+		Loaded = boost::make_shared<LockableBool>();
 	}
 
-	void LevelSeedData::PreInitialize( const std::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
+	void LevelSeedData::PreInitialize( const boost::shared_ptr<GameFactory> &Type, int Difficulty, int NumPieces, int Length, const boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		this->MyGameType = Type;
 		this->Difficulty = Difficulty;
@@ -1098,9 +1098,9 @@ namespace CloudberryKingdom
 		// No spaceships or carts on vertical levels
 		if ( MyGeometry == LevelGeometry_UP || MyGeometry == LevelGeometry_DOWN )
 		{
-			if ( std::dynamic_pointer_cast<BobPhsxSpaceship>( DefaultHeroType ) != 0 )
+			if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxDouble::getInstance();
-			else if ( std::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
+			else if ( boost::dynamic_pointer_cast<BobPhsxRocketbox>( DefaultHeroType ) != 0 )
 				DefaultHeroType = BobPhsxJetman::getInstance();
 		}
 
@@ -1108,18 +1108,18 @@ namespace CloudberryKingdom
 		Tools::Write( Format( _T( "Post-sanitize: %d" ), TestNumber ).c_str() );
 	}
 
-	void LevelSeedData::StandardInit( const std::shared_ptr<Lambda_2<std::shared_ptr<PieceSeedData> , std::shared_ptr<Upgrades> > > &CustomDiff )
+	void LevelSeedData::StandardInit( const boost::shared_ptr<Lambda_2<boost::shared_ptr<PieceSeedData> , boost::shared_ptr<Upgrades> > > &CustomDiff )
 	{
-		Initialize( std::make_shared<StandardInitHelper>( CustomDiff ) );
+		Initialize( boost::make_shared<StandardInitHelper>( CustomDiff ) );
 
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
+	void LevelSeedData::Initialize( const boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialize( MyGameType, MyGeometry, NumPieces, PieceLength, CustomDiff );
 	}
 
-	void LevelSeedData::Initialize( const std::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
+	void LevelSeedData::Initialize( const boost::shared_ptr<GameFactory> &factory, LevelGeometry geometry, int NumPieces, int Length, const boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		Initialized = true;
 
@@ -1135,7 +1135,7 @@ namespace CloudberryKingdom
 			InitNormal( false, CustomDiff );
 	}
 
-	float LevelSeedData::CalcPieceLength( const std::shared_ptr<PieceSeedData> &data )
+	float LevelSeedData::CalcPieceLength( const boost::shared_ptr<PieceSeedData> &data )
 	{
 		if ( data->Style->MyInitialPlatsType == StyleData::InitialPlatsType_LANDING_ZONE )
 		{
@@ -1145,15 +1145,15 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	void LevelSeedData::InitNormal( bool Place, const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
+	void LevelSeedData::InitNormal( bool Place, const boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
-		std::shared_ptr<PieceSeedData> Piece;
+		boost::shared_ptr<PieceSeedData> Piece;
 
 		Vector2 Pos = Vector2();
 
 		for ( int i = 0; i < NumPieces; i++ )
 		{
-			Piece = std::make_shared<PieceSeedData>( i, MyGeometry, shared_from_this() );
+			Piece = boost::make_shared<PieceSeedData>( i, MyGeometry, shared_from_this() );
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades1 );
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades2 );
 
@@ -1161,7 +1161,7 @@ namespace CloudberryKingdom
 			{
 				Piece->Style->JumpType = StyleData::_JumpType_ALWAYS;
 
-				Piece->Style->MyModParams->Add( std::make_shared<InitNormalMyModParamsHelper>() );
+				Piece->Style->MyModParams->Add( boost::make_shared<InitNormalMyModParamsHelper>() );
 			}
 
 			if ( CustomDiff != 0 )
@@ -1197,7 +1197,7 @@ namespace CloudberryKingdom
 
 			if ( i < NumPieces - 1 )
 			{
-				Piece = std::make_shared<PieceSeedData>( shared_from_this() );
+				Piece = boost::make_shared<PieceSeedData>( shared_from_this() );
 				Piece->Start = Pos;
 				Piece->Ladder = RndDifficulty::ChooseLadder( Difficulty );
 				Pos += Level::GetLadderSize( Piece->Ladder );
@@ -1207,12 +1207,12 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void LevelSeedData::InitPlace( const std::shared_ptr<Lambda_1<std::shared_ptr<PieceSeedData> > > &CustomDiff )
+	void LevelSeedData::InitPlace( const boost::shared_ptr<Lambda_1<boost::shared_ptr<PieceSeedData> > > &CustomDiff )
 	{
 		InitNormal( true, CustomDiff );
 	}
 
-	std::shared_ptr<Level> LevelSeedData::MakeNewLevel( const std::shared_ptr<GameData> &game )
+	boost::shared_ptr<Level> LevelSeedData::MakeNewLevel( const boost::shared_ptr<GameData> &game )
 	{
 		game->MyGameFlags = MyGameFlags;
 
@@ -1225,11 +1225,11 @@ namespace CloudberryKingdom
 		//game.Rnd.Rnd = new Random(Seed);
 
 		// Create the level object
-		std::shared_ptr<Level> NewLevel = std::make_shared<Level>();
+		boost::shared_ptr<Level> NewLevel = boost::make_shared<Level>();
 		NewLevel->MySourceGame = game;
 		NewLevel->DefaultHeroType = DefaultHeroType;
-		NewLevel->setMainCamera( std::make_shared<Camera>() );
-		std::shared_ptr<Camera> cam = NewLevel->getMainCamera();
+		NewLevel->setMainCamera( boost::make_shared<Camera>() );
+		boost::shared_ptr<Camera> cam = NewLevel->getMainCamera();
 		cam->Update();
 
 		// Set background and tileset
@@ -1240,14 +1240,14 @@ namespace CloudberryKingdom
 		return NewLevel;
 	}
 
-	std::shared_ptr<GameData> LevelSeedData::Create()
+	boost::shared_ptr<GameData> LevelSeedData::Create()
 	{
 		return Create( false );
 	}
 
-	std::shared_ptr<GameData> LevelSeedData::Create( bool MakeInBackground )
+	boost::shared_ptr<GameData> LevelSeedData::Create( bool MakeInBackground )
 	{
-		std::shared_ptr<GameData> game = MyGameType->Make( shared_from_this(), MakeInBackground );
+		boost::shared_ptr<GameData> game = MyGameType->Make( shared_from_this(), MakeInBackground );
 		game->EndMusicOnFinish = !NoMusicStart;
 
 		return game;
@@ -1273,7 +1273,7 @@ namespace CloudberryKingdom
 		NoDefaultMake = false;
 		NoMusicStart = false;
 		Name = _T( "" );
-		PostMake = std::make_shared<Multicaster_1<std::shared_ptr<Level> > >();
+		PostMake = boost::make_shared<Multicaster_1<boost::shared_ptr<Level> > >();
 		ReleaseWhenLoaded = false;
 		LoadingBegun = false;
 		MyGeometry = LevelGeometry_RIGHT;

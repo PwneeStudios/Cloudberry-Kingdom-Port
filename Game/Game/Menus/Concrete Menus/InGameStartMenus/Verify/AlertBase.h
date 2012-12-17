@@ -12,10 +12,10 @@ namespace CloudberryKingdom
 		struct OkProxy : public Lambda
 		{
 		
-			std::shared_ptr<AlertBaseMenu> abm;
+			boost::shared_ptr<AlertBaseMenu> abm;
 
 		
-			OkProxy( const std::shared_ptr<AlertBaseMenu> &abm );
+			OkProxy( const boost::shared_ptr<AlertBaseMenu> &abm );
 
 			void Apply();
 		};
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		/// Called when the user presses OK.
 		/// </summary>
 	
-		std::shared_ptr<Lambda> OnOk;
+		boost::shared_ptr<Lambda> OnOk;
 
 	
 		void Ok();
@@ -33,21 +33,21 @@ namespace CloudberryKingdom
 
 	
 		AlertBaseMenu();
-		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct();
+		boost::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct();
 
 	
 		Localization::Words Message, OkText;
 	
 		AlertBaseMenu( int Control, Localization::Words Message, Localization::Words OkText );
-		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText );
+		boost::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( int Control, Localization::Words Message, Localization::Words OkText );
 
 		AlertBaseMenu( bool CallBaseConstructor );
-		std::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( bool CallBaseConstructor );
+		boost::shared_ptr<AlertBaseMenu> AlertBaseMenu_Construct( bool CallBaseConstructor );
 
 	
-		virtual void SetHeaderProperties( const std::shared_ptr<EzText> &text );
+		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
-		std::shared_ptr<QuadClass> Backdrop;
+		boost::shared_ptr<QuadClass> Backdrop;
 	
 		virtual void MakeBackdrop();
 

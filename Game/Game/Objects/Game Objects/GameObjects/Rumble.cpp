@@ -4,14 +4,14 @@ namespace CloudberryKingdom
 {
 
 	Rumble::Rumble() { }
-	std::shared_ptr<Rumble> Rumble::Rumble_Construct()
+	boost::shared_ptr<Rumble> Rumble::Rumble_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
 		Active = true;
 		PauseOnPause = true;
 
-		return std::static_pointer_cast<Rumble>( shared_from_this() );
+		return boost::static_pointer_cast<Rumble>( shared_from_this() );
 	}
 
 	void Rumble::ReleaseBody()

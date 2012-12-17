@@ -3,22 +3,22 @@
 namespace CloudberryKingdom
 {
 
-	GUI_Timer::OnCoinGrabProxy::OnCoinGrabProxy( const std::shared_ptr<GUI_Timer> &timer )
+	GUI_Timer::OnCoinGrabProxy::OnCoinGrabProxy( const boost::shared_ptr<GUI_Timer> &timer )
 	{
 		this->timer = timer;
 	}
 
-	void GUI_Timer::OnCoinGrabProxy::Apply( const std::shared_ptr<ObjectBase> &obj )
+	void GUI_Timer::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		timer->OnCoinGrab( obj );
 	}
 
-	GUI_Timer::OnCompleteLevelProxy::OnCompleteLevelProxy( const std::shared_ptr<GUI_Timer> &timer )
+	GUI_Timer::OnCompleteLevelProxy::OnCompleteLevelProxy( const boost::shared_ptr<GUI_Timer> &timer )
 	{
 		this->timer = timer;
 	}
 
-	void GUI_Timer::OnCompleteLevelProxy::Apply( const std::shared_ptr<Level> &level )
+	void GUI_Timer::OnCompleteLevelProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		timer->OnCompleteLevel( level );
 	}
@@ -27,8 +27,8 @@ namespace CloudberryKingdom
 	{
 		GUI_Timer_Base::OnAdd();
 
-		MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>( std::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
-		MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>( std::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
+		MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>( boost::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
+		MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>( boost::static_pointer_cast<GUI_Timer>( shared_from_this() ) ) );
 	}
 
 	void GUI_Timer::ReleaseBody()
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 		GUI_Timer_Base::ReleaseBody();
 	}
 
-	void GUI_Timer::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
+	void GUI_Timer::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		setTime( getTime() + CoinTimeValue );
 
@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 			setTime( MaxTime );
 	}
 
-	void GUI_Timer::OnCompleteLevel( const std::shared_ptr<Level> &level )
+	void GUI_Timer::OnCompleteLevel( const boost::shared_ptr<Level> &level )
 	{
 		MinLevelStartTimeValue = 124;
 		setTime( CoreMath::RestrictVal( MinLevelStartTimeValue, MaxTime, getTime() ) );
@@ -65,11 +65,11 @@ namespace CloudberryKingdom
 		MaxTime( 0 )
 	{
 	}
-	std::shared_ptr<GUI_Timer> GUI_Timer::GUI_Timer_Construct()
+	boost::shared_ptr<GUI_Timer> GUI_Timer::GUI_Timer_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Timer_Base::GUI_Timer_Base_Construct();
 
-		return std::static_pointer_cast<GUI_Timer>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Timer>( shared_from_this() );
 	}
 }

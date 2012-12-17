@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 	bool PlayerManager::PartiallyInvisible, PlayerManager::TotallyInvisible;
 	int PlayerManager::_CoinsSpent;
 
-	std::shared_ptr<_SavePlayerData> PlayerManager::SavePlayerData;
+	boost::shared_ptr<_SavePlayerData> PlayerManager::SavePlayerData;
 
 #if defined(PC_VERSION)
 	std::wstring PlayerManager::_DefaultName;
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 	bool PlayerManager::HaveFirstPlayer;
 
 	int PlayerManager::NumPlayers;
-	std::vector<std::shared_ptr<PlayerData> > PlayerManager::Players;
+	std::vector<boost::shared_ptr<PlayerData> > PlayerManager::Players;
 
 	int PlayerManager::Score_Blobs, PlayerManager::Score_Coins, PlayerManager::Score_Attempts, PlayerManager::Score_Time;
 
@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	int PlayerIntLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int PlayerIntLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return 0;
 	}
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-	void _SavePlayerData::Serialize( const std::shared_ptr<BinaryWriter> &writer )
+	void _SavePlayerData::Serialize( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		SaveLoad::Serialize( writer );
 
@@ -107,12 +107,12 @@ namespace CloudberryKingdom
 
 	void _SavePlayerData::Deserialize( std::vector<unsigned char> Data )
 	{
-		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		boost::shared_ptr<Chunks> chunks = Chunks::Get( Data );
 		chunks->StartGettingChunks();
 
 		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
 			switch ( chunk->Type )
 			{
@@ -148,7 +148,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	void PlayerManager::SaveRezAndKeysLambda::Apply( const std::shared_ptr<BinaryWriter> &writer )
+	void PlayerManager::SaveRezAndKeysLambda::Apply( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		PlayerManager::_SaveRezAndKeys( writer );
 	}
@@ -162,43 +162,43 @@ namespace CloudberryKingdom
 		PlayerManager::_LoadRezAndKeys( Data );
 	}
 
-	float PlayerManager::GetGroupGamerTagNameLength::Apply( const std::shared_ptr<StringBuilder> &name )
+	float PlayerManager::GetGroupGamerTagNameLength::Apply( const boost::shared_ptr<StringBuilder> &name )
 	{
 		return static_cast<float>( name->getLength() );
 	}
 
-	PlayerManager::AnyAwardmentLambda::AnyAwardmentLambda( const std::shared_ptr<Awardment> &award )
+	PlayerManager::AnyAwardmentLambda::AnyAwardmentLambda( const boost::shared_ptr<Awardment> &award )
 	{
 		this->award = award;
 	}
 
-	bool PlayerManager::AnyAwardmentLambda::Apply( const std::shared_ptr<PlayerData> &player )
+	bool PlayerManager::AnyAwardmentLambda::Apply( const boost::shared_ptr<PlayerData> &player )
 	{
 		// FIXME: This used to be [] operator.
 		return player->Awardments_Renamed->Has( award->Guid );
 	}
 
-	PlayerManager::AnyBoughtLambda::AnyBoughtLambda( const std::shared_ptr<Buyable> &item )
+	PlayerManager::AnyBoughtLambda::AnyBoughtLambda( const boost::shared_ptr<Buyable> &item )
 	{
 		this->item = item;
 	}
 
-	bool PlayerManager::AnyBoughtLambda::Apply( const std::shared_ptr<PlayerData> &player )
+	bool PlayerManager::AnyBoughtLambda::Apply( const boost::shared_ptr<PlayerData> &player )
 	{
 		return player->Purchases->Has( item->GetGuid() );
 	}
 
-	int PlayerManager::BankLambda::Apply( const std::shared_ptr<PlayerData> &p )
+	int PlayerManager::BankLambda::Apply( const boost::shared_ptr<PlayerData> &p )
 	{
 		return p->Bank();
 	}
 
-	PlayerManager::NotAllAwardedLambda::NotAllAwardedLambda( const std::shared_ptr<Awardment> &award )
+	PlayerManager::NotAllAwardedLambda::NotAllAwardedLambda( const boost::shared_ptr<Awardment> &award )
 	{
 		this->award = award;
 	}
 
-	bool PlayerManager::NotAllAwardedLambda::Apply( const std::shared_ptr<PlayerData> &player )
+	bool PlayerManager::NotAllAwardedLambda::Apply( const boost::shared_ptr<PlayerData> &player )
 	{
 		return !player->Awardments_Renamed->Has( award->Guid );
 	}
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool PlayerManager::ExistingPlayerFindLambda::Apply( const std::shared_ptr<PlayerData> &player )
+	bool PlayerManager::ExistingPlayerFindLambda::Apply( const boost::shared_ptr<PlayerData> &player )
 	{
 		return player->getMyGamer() != 0 || player->StoredName.length() > 0;
 	}
@@ -217,12 +217,12 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void PlayerManager::SaveRezAndKeys()
 	{
-		EzStorage::Save( _T( "Settings" ), _T( "Custom" ), std::static_pointer_cast<Lambda_1<std::shared_ptr<BinaryWriter> > >( std::make_shared<SaveRezAndKeysLambda>() ), 0 );
+		EzStorage::Save( _T( "Settings" ), _T( "Custom" ), boost::static_pointer_cast<Lambda_1<boost::shared_ptr<BinaryWriter> > >( boost::make_shared<SaveRezAndKeysLambda>() ), 0 );
 	}
 #endif
 
 #if defined(PC_VERSION)
-	void PlayerManager::_SaveRezAndKeys( const std::shared_ptr<BinaryWriter> &writer )
+	void PlayerManager::_SaveRezAndKeys( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		Chunk::WriteSingle( writer, 0, SavePlayerData->ResolutionPreferenceSet );
 
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	RezData PlayerManager::LoadRezAndKeys()
 	{
-		EzStorage::Load( _T( "Settings" ), _T( "Custom" ), std::make_shared<LoadRezAndKeysLambda>(), 0 );
+		EzStorage::Load( _T( "Settings" ), _T( "Custom" ), boost::make_shared<LoadRezAndKeysLambda>(), 0 );
 
 		return d;
 	}
@@ -280,12 +280,12 @@ namespace CloudberryKingdom
 	{
 		d = RezData();
 
-		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		boost::shared_ptr<Chunks> chunks = Chunks::Get( Data );
 		chunks->StartGettingChunks();
 
 		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
 			switch ( chunk->Type )
 			{
@@ -444,17 +444,17 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	int PlayerManager::length( std::vector<std::shared_ptr<StringBuilder> > &names )
+	int PlayerManager::length( std::vector<boost::shared_ptr<StringBuilder> > &names )
 	{
 		int count = 0;
-		for ( std::vector<std::shared_ptr<StringBuilder> >::const_iterator name = names.begin(); name != names.end(); ++name )
+		for ( std::vector<boost::shared_ptr<StringBuilder> >::const_iterator name = names.begin(); name != names.end(); ++name )
 			count += ( *name )->getLength();
 		return count;
 	}
 
 	std::wstring PlayerManager::GetGroupGamerTag( int MaxLength )
 	{
-		std::vector<std::shared_ptr<PlayerData> > players = getLoggedInPlayers();
+		std::vector<boost::shared_ptr<PlayerData> > players = getLoggedInPlayers();
 		if ( players.empty() )
 			players = getExistingPlayers();
 
@@ -462,16 +462,16 @@ namespace CloudberryKingdom
 		int CharLength = MaxLength - ( N - 1 ); // The max number of characters, exlucing slashes
 
 		// Get a list of all names
-		std::vector<std::shared_ptr<StringBuilder> > names;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
-			names.push_back( std::make_shared<StringBuilder>( ( *player )->GetName() ) );
+		std::vector<boost::shared_ptr<StringBuilder> > names;
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = players.begin(); player != players.end(); ++player )
+			names.push_back( boost::make_shared<StringBuilder>( ( *player )->GetName() ) );
 
 		// Remove one character from the longest name until the total length is small enough
-		std::shared_ptr<GetGroupGamerTagNameLength> groupNameLengthGetter = std::make_shared<GetGroupGamerTagNameLength>();
+		boost::shared_ptr<GetGroupGamerTagNameLength> groupNameLengthGetter = boost::make_shared<GetGroupGamerTagNameLength>();
 		while ( length( names ) > CharLength )
 		{
-			std::shared_ptr<StringBuilder> str = Tools::ArgMax( names, 
-				std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<StringBuilder>, float> >( groupNameLengthGetter ) );
+			boost::shared_ptr<StringBuilder> str = Tools::ArgMax( names, 
+				boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<StringBuilder>, float> >( groupNameLengthGetter ) );
 			str->Remove( str->getLength() - 1, 1 );
 		}
 
@@ -480,8 +480,8 @@ namespace CloudberryKingdom
 		//foreach (StringBuilder str in names)
 		for ( int i = 0; i < static_cast<int>( names.size() ); i++ )
 		{
-			std::shared_ptr<StringBuilder> str = names[ i ];
-			std::shared_ptr<PlayerData> player = players[ i ];
+			boost::shared_ptr<StringBuilder> str = names[ i ];
+			boost::shared_ptr<PlayerData> player = players[ i ];
 
 			//string clr = EzText.ColorToCode(new Color(player.GetTextColor()));
 
@@ -501,32 +501,32 @@ namespace CloudberryKingdom
 	int PlayerManager::MaxPlayerHighScore( int GameId )
 	{
 		int max = 0;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			max = __max( max, ( *player )->GetHighScore( GameId ) );
 
 		return max;
 	}
 
-	bool PlayerManager::Awarded( const std::shared_ptr<Awardment> &award )
+	bool PlayerManager::Awarded( const boost::shared_ptr<Awardment> &award )
 	{
 		return Tools::Any( getExistingPlayers(),
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<AnyAwardmentLambda>(award) ) );
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<PlayerData>, bool> >( boost::make_shared<AnyAwardmentLambda>(award) ) );
 	}
 
-	bool PlayerManager::Bought( const std::shared_ptr<Buyable> &item )
+	bool PlayerManager::Bought( const boost::shared_ptr<Buyable> &item )
 	{
 		return Tools::Any( getExistingPlayers(),
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<AnyBoughtLambda>(item) ) );
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<PlayerData>, bool> >( boost::make_shared<AnyBoughtLambda>(item) ) );
 	}
 
-	bool PlayerManager::BoughtOrFree( const std::shared_ptr<Buyable> &item )
+	bool PlayerManager::BoughtOrFree( const boost::shared_ptr<Buyable> &item )
 	{
 		return item->GetPrice() == 0 || Bought(item);
 	}
 
 	int PlayerManager::CombinedBank()
 	{
-		return PlayerSum( std::make_shared<BankLambda>() );
+		return PlayerSum( boost::make_shared<BankLambda>() );
 	}
 
 	void PlayerManager::DeductCost( int Cost )
@@ -544,7 +544,7 @@ namespace CloudberryKingdom
 				return;
 
 			// Deduct one coin from each player at a time, so long as they can afford it.
-			std::shared_ptr<PlayerData> p = Players[ PlayerIndex ];
+			boost::shared_ptr<PlayerData> p = Players[ PlayerIndex ];
 			if ( p->Exists && p->Bank() > 0 )
 			{
 				p->LifetimeStats->CoinsSpentAtShop++;
@@ -557,28 +557,28 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void PlayerManager::GiveBoughtItem( const std::shared_ptr<Buyable> &buyable )
+	void PlayerManager::GiveBoughtItem( const boost::shared_ptr<Buyable> &buyable )
 	{
 		if ( buyable == 0 )
 			return;
 
 		// Give the hat to each player
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
 			( *p )->Purchases->Add( buyable->GetGuid() );
 
 		SavePlayerData->Changed = true;
 	}
 
-	bool PlayerManager::NotAllAwarded( const std::shared_ptr<Awardment> &award )
+	bool PlayerManager::NotAllAwarded( const boost::shared_ptr<Awardment> &award )
 	{
 		return Tools::Any( getExistingPlayers(),
-			std::static_pointer_cast<LambdaFunc_1<std::shared_ptr<PlayerData>, bool> >( std::make_shared<NotAllAwardedLambda>(award) ) );
+			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<PlayerData>, bool> >( boost::make_shared<NotAllAwardedLambda>(award) ) );
 	}
 
 	int PlayerManager::GetGameScore()
 	{
 		int score = 0;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			score += ( *player )->GetGameScore();
 
 		return score;
@@ -587,16 +587,16 @@ namespace CloudberryKingdom
 	int PlayerManager::GetGameScore_WithTemporary()
 	{
 		int score = 0;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			score += ( *player )->GetGameScore() + (*player)->TempStats->Score;
 
 		return score;
 	}
 
-	int PlayerManager::PlayerSum( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f )
+	int PlayerManager::PlayerSum( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int sum = 0;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 		{
 			if ( *player != 0 )
 				sum += f->Apply( *player );
@@ -605,10 +605,10 @@ namespace CloudberryKingdom
 		return sum;
 	}
 
-	int PlayerManager::PlayerMax( const std::shared_ptr<LambdaFunc_1<std::shared_ptr<PlayerData> , int> > &f )
+	int PlayerManager::PlayerMax( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int max = INT_MIN;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 		{
 			if ( *player != 0 )
 				max = __max( max, f->Apply( *player ) );
@@ -620,65 +620,65 @@ namespace CloudberryKingdom
 	int PlayerManager::GetLevelCoins()
 	{
 		int coins = 0;
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
 			coins += ( *player )->GetLevelCoins();
 
 		return coins;
 	}
 
-	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getLoggedInPlayers()
+	const std::vector<boost::shared_ptr<PlayerData> > &PlayerManager::getLoggedInPlayers()
 	{
 	#if defined(PC_VERSION)
 		return getExistingPlayers();
 	#elif defined(XBOX) || defined(XBOX_SIGNIN)
-		return Tools::FindAll( getExistingPlayers(), std::make_shared<ExistingPlayerFindLambda>() );
+		return Tools::FindAll( getExistingPlayers(), boost::make_shared<ExistingPlayerFindLambda>() );
 	#else
 		return getExistingPlayers();
 	#endif
 	}
 
-	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getExistingPlayers()
+	const std::vector<boost::shared_ptr<PlayerData> > &PlayerManager::getExistingPlayers()
 	{
 		_ExistingPlayers.clear();
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( *data != 0 && ( *data )->Exists )
 				_ExistingPlayers.push_back( *data );
 
 		return _ExistingPlayers;
 	}
 
-	std::vector<std::shared_ptr<PlayerData> > PlayerManager::_ExistingPlayers = std::vector<std::shared_ptr<PlayerData> >();
+	std::vector<boost::shared_ptr<PlayerData> > PlayerManager::_ExistingPlayers = std::vector<boost::shared_ptr<PlayerData> >();
 
-	const std::vector<std::shared_ptr<PlayerData> > &PlayerManager::getAlivePlayers()
+	const std::vector<boost::shared_ptr<PlayerData> > &PlayerManager::getAlivePlayers()
 	{
 		_AlivePlayers.clear();
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
 			if ( ( *data )->Exists && ( *data )->IsAlive )
 				_AlivePlayers.push_back( *data );
 
 		return _AlivePlayers;
 	}
 
-	std::vector<std::shared_ptr<PlayerData> > PlayerManager::_AlivePlayers = std::vector<std::shared_ptr<PlayerData> >();
+	std::vector<boost::shared_ptr<PlayerData> > PlayerManager::_AlivePlayers = std::vector<boost::shared_ptr<PlayerData> >();
 
 #if defined(PC_VERSION)
-	const std::shared_ptr<PlayerData> &PlayerManager::getPlayer()
+	const boost::shared_ptr<PlayerData> &PlayerManager::getPlayer()
 	{
 		return Players[ 0 ];
 	}
 #endif
 
-	std::shared_ptr<PlayerData> PlayerManager::Get( int i )
+	boost::shared_ptr<PlayerData> PlayerManager::Get( int i )
 	{
 		return Players[ i ];
 	}
 
-	std::shared_ptr<PlayerData> PlayerManager::Get( PlayerIndex Index )
+	boost::shared_ptr<PlayerData> PlayerManager::Get( PlayerIndex Index )
 	{
 		return Players[ static_cast<int>( Index ) ];
 	}
 
-	std::shared_ptr<PlayerData> PlayerManager::Get( const std::shared_ptr<Bob> &bob )
+	boost::shared_ptr<PlayerData> PlayerManager::Get( const boost::shared_ptr<Bob> &bob )
 	{
 		return Players[ static_cast<int>( bob->MyPlayerIndex ) ];
 	}
@@ -698,7 +698,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < 4; i++ )
 			if ( PlayerManager::Get( i )->Exists )
 			{
-				std::shared_ptr<PlayerStats> stats = Get( i )->GetStats( group );
+				boost::shared_ptr<PlayerStats> stats = Get( i )->GetStats( group );
 
 				Score_Coins += stats->Coins;
 				Score_Blobs += stats->Blobs;
@@ -763,7 +763,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 		Players[ Index ]->IsAlive = false;
 	}
 
-	void PlayerManager::ReviveBob( const std::shared_ptr<Bob> &bob )
+	void PlayerManager::ReviveBob( const boost::shared_ptr<Bob> &bob )
 	{
 		bob->Dead = bob->Dying = false;
 
@@ -783,13 +783,13 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 		_DefaultName = ListExtension::Choose( PlayerManager::RandomNames, Tools::GlobalRnd );
 	#endif
 
-		Players = std::vector<std::shared_ptr<PlayerData> >( 4 );
+		Players = std::vector<boost::shared_ptr<PlayerData> >( 4 );
 		ColorSchemeManager::InitColorSchemes();
 
 		// Player templates
 		for ( int i = 0; i < 4; i++ )
 		{
-			Players[ i ] = std::make_shared<PlayerData>();
+			Players[ i ] = boost::make_shared<PlayerData>();
 			Players[ i ]->Init( i );
 		}
 	}

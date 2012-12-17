@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 {
 
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
-	const std::shared_ptr<Gamer> &PlayerData::getMyGamer() const
+	const boost::shared_ptr<Gamer> &PlayerData::getMyGamer() const
 	{
 		return CheckForMatchingGamer();
 	}
@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 		FailLoad();
 	}
 
-	void PlayerData::Serialize( const std::shared_ptr<BinaryWriter> &writer )
+	void PlayerData::Serialize( const boost::shared_ptr<BinaryWriter> &writer )
 	{
 		// Color scheme
 		CustomColorScheme.WriteChunk_0( writer );
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 
 		// High Scores
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::map<int, std::shared_ptr<ScoreEntry> >::const_iterator HighScore = HighScores.begin(); HighScore != HighScores.end(); ++HighScore )
+		for ( std::map<int, boost::shared_ptr<ScoreEntry> >::const_iterator HighScore = HighScores.begin(); HighScore != HighScores.end(); ++HighScore )
 			HighScore->second->WriteChunk_1000( writer );
 
 		// Awardments
@@ -64,19 +64,19 @@ namespace CloudberryKingdom
 
 	void PlayerData::FailLoad()
 	{
-		MySavedSeeds = std::make_shared<SavedSeeds>();
-		HighScores = std::map<int, std::shared_ptr<ScoreEntry> >();
-		Purchases = std::make_shared<Set<int> >();
-		Awardments_Renamed = std::make_shared<Set<int> >();
+		MySavedSeeds = boost::make_shared<SavedSeeds>();
+		HighScores = std::map<int, boost::shared_ptr<ScoreEntry> >();
+		Purchases = boost::make_shared<Set<int> >();
+		Awardments_Renamed = boost::make_shared<Set<int> >();
 	}
 
 	void PlayerData::Deserialize( std::vector<unsigned char> Data )
 	{
-		std::shared_ptr<Chunks> chunks = Chunks::Get( Data );
+		boost::shared_ptr<Chunks> chunks = Chunks::Get( Data );
 		chunks->StartGettingChunks();
 		while( chunks->HasChunk() )
 		{
-			std::shared_ptr<Chunk> chunk = chunks->GetChunk();
+			boost::shared_ptr<Chunk> chunk = chunks->GetChunk();
 
 			switch ( chunk->Type )
 			{
@@ -99,7 +99,7 @@ namespace CloudberryKingdom
 				// High Scores
 				case 1000:
 					{
-						std::shared_ptr<ScoreEntry> score = std::make_shared<ScoreEntry>();
+						boost::shared_ptr<ScoreEntry> score = boost::make_shared<ScoreEntry>();
 						score->ReadChunk_1000( chunk );
 						AddHighScore( score );
 					}
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 			return 0;
 	}
 
-	void PlayerData::AddHighScore( const std::shared_ptr<ScoreEntry> &score )
+	void PlayerData::AddHighScore( const boost::shared_ptr<ScoreEntry> &score )
 	{
 		if ( HighScores.find( score->GameId ) != HighScores.end() && score->Value < HighScores[ score->GameId ]->Value )
 			return;
@@ -157,12 +157,12 @@ namespace CloudberryKingdom
 		Changed = true;
 	}
 
-	const std::shared_ptr<PlayerStats> &PlayerData::getStats() const
+	const boost::shared_ptr<PlayerStats> &PlayerData::getStats() const
 	{
 		return LevelStats;
 	}
 
-	std::shared_ptr<PlayerStats> PlayerData::GetStats( StatGroup group )
+	boost::shared_ptr<PlayerStats> PlayerData::GetStats( StatGroup group )
 	{
 		switch ( group )
 		{
@@ -181,7 +181,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<PlayerStats> PlayerData::GetSummedStats( StatGroup group )
+	boost::shared_ptr<PlayerStats> PlayerData::GetSummedStats( StatGroup group )
 	{
 		if ( group == StatGroup_LIFETIME )
 		{
@@ -217,9 +217,9 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
-	std::shared_ptr<PlayerStats> PlayerData::SumStats( const std::vector<StatGroup> &group )
+	boost::shared_ptr<PlayerStats> PlayerData::SumStats( const std::vector<StatGroup> &group )
 	{
-		std::shared_ptr<PlayerStats> StatSum = std::make_shared<PlayerStats>();
+		boost::shared_ptr<PlayerStats> StatSum = boost::make_shared<PlayerStats>();
 
 		StatSum->Clean();
 		for ( std::vector<StatGroup>::const_iterator g = group.begin(); g != group.end(); ++g )
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
 	}
 
 #if defined(XBOX) || defined(XBOX_SIGNIN)
-	std::shared_ptr<Gamer> PlayerData::CheckForMatchingGamer()
+	boost::shared_ptr<Gamer> PlayerData::CheckForMatchingGamer()
 	{
 		_MyGamer.reset();
 		//return _MyGamer;
@@ -273,7 +273,7 @@ namespace CloudberryKingdom
 		return clr;
 	}
 
-	void PlayerData::SetNameText( const std::shared_ptr<EzText> &text )
+	void PlayerData::SetNameText( const boost::shared_ptr<EzText> &text )
 	{
 		//text.ShadowOffset = new Vector2(9, 9);
 		//text.ShadowColor = Generic.PlayerColorSchemes[PlayerIndex].OutlineColor.Clr;
@@ -311,12 +311,12 @@ namespace CloudberryKingdom
 	{
 		RandomNameIndex = -1;
 
-		TempStats = std::make_shared<PlayerStats>();
-		LevelStats = std::make_shared<PlayerStats>();
-		GameStats = std::make_shared<PlayerStats>();
-		LifetimeStats = std::make_shared<PlayerStats>();
+		TempStats = boost::make_shared<PlayerStats>();
+		LevelStats = boost::make_shared<PlayerStats>();
+		GameStats = boost::make_shared<PlayerStats>();
+		LifetimeStats = boost::make_shared<PlayerStats>();
 
-		CampaignStats = std::make_shared<PlayerStats>();
+		CampaignStats = boost::make_shared<PlayerStats>();
 	}
 
 	void PlayerData::InitializeInstanceFields()

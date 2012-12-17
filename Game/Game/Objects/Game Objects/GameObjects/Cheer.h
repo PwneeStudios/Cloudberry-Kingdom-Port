@@ -9,10 +9,10 @@ namespace CloudberryKingdom
 	struct Cheer : public GameObject
 	{
 	
-		std::shared_ptr<DrawPile> MyPile;
+		boost::shared_ptr<DrawPile> MyPile;
 
 	
-		std::shared_ptr<QuadClass> Berry;
+		boost::shared_ptr<QuadClass> Berry;
 		Cheer();
 
 		virtual void OnAdd();

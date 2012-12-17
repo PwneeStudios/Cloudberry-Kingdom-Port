@@ -7,17 +7,17 @@
 namespace CloudberryKingdom
 {
 
-	void CampaignSequence::PostMakeCampaignProxy::Apply( const std::shared_ptr<Level> &level )
+	void CampaignSequence::PostMakeCampaignProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		CampaignSequence::PostMakeCampaign( level );
 	}
 
-	void CampaignSequence::OnCoinGrabProxy::Apply( const std::shared_ptr<ObjectBase> &obj )
+	void CampaignSequence::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
 		CampaignSequence::OnCoinGrab( obj );
 	}
 
-	void CampaignSequence::OnCompleteLevelProxy::Apply( const std::shared_ptr<Level> &level )
+	void CampaignSequence::OnCompleteLevelProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		CampaignSequence::OnCompleteLevel( level );
 	}
@@ -27,20 +27,20 @@ namespace CloudberryKingdom
 		this->movie = movie;
 	}
 
-	void CampaignSequence::WatchMovieLambda::Apply( const std::shared_ptr<Level> &level )
+	void CampaignSequence::WatchMovieLambda::Apply( const boost::shared_ptr<Level> &level )
 	{
 		MainVideo::StartVideo_CanSkipIfWatched_OrCanSkipAfterXseconds( movie, 1.5f );
-		( std::static_pointer_cast<ActionGameData>( level->MyGame ) )->Done = true;
+		( boost::static_pointer_cast<ActionGameData>( level->MyGame ) )->Done = true;
 	}
 
-	void CampaignSequence::EndActionProxy::Apply( const std::shared_ptr<Level> &level )
+	void CampaignSequence::EndActionProxy::Apply( const boost::shared_ptr<Level> &level )
 	{
 		CampaignSequence::EndAction( level );
 	}
 
-	std::shared_ptr<CampaignSequence> CampaignSequence::instance = std::make_shared<CampaignSequence>();
+	boost::shared_ptr<CampaignSequence> CampaignSequence::instance = boost::make_shared<CampaignSequence>();
 
-	const std::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
+	const boost::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
 	{
 		return instance;
 	}
@@ -57,8 +57,8 @@ namespace CloudberryKingdom
 		Seeds.push_back( 0 );
 
 		Tools::UseInvariantCulture();
-		//std::shared_ptr<FileStream> stream = File->Open( _T( "Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
-		//std::shared_ptr<StreamReader> reader = std::make_shared<StreamReader>( stream );
+		//boost::shared_ptr<FileStream> stream = File->Open( _T( "Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
 		FileReader reader = FileReader( _T( "Content/Campaign/CampaignList.txt" ) );
 
 		std::wstring line;
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == _T( "movie" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
 					Seeds.push_back( 0 );
 					count++;
 
@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == _T( "end" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, std::make_shared<Tuple<std::wstring, std::wstring> >( identifier, _T( "" ) ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, _T( "" ) ) );
 					Seeds.push_back( 0 );
 					count++;
 
@@ -129,9 +129,9 @@ namespace CloudberryKingdom
 		//stream->Close();
 	}
 
-	std::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > SeedAction )
+	boost::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > SeedAction )
 	{
-		std::shared_ptr<LevelSeedData> seed = std::make_shared<LevelSeedData>();
+		boost::shared_ptr<LevelSeedData> seed = boost::make_shared<LevelSeedData>();
 		seed->MyGameType = ActionGameData::Factory;
 
 		seed->PostMake->Add( SeedAction );
@@ -139,20 +139,20 @@ namespace CloudberryKingdom
 		return seed;
 	}
 
-	std::shared_ptr<LevelSeedData> CampaignSequence::GetSeed( int Index )
+	boost::shared_ptr<LevelSeedData> CampaignSequence::GetSeed( int Index )
 	{
 		if ( SpecialLevel.find( Index ) != SpecialLevel.end() )
 		{
-			std::shared_ptr<Tuple<std::wstring, std::wstring> > data = SpecialLevel[ Index ];
+			boost::shared_ptr<Tuple<std::wstring, std::wstring> > data = SpecialLevel[ Index ];
 
 			if ( data->Item1 == _T( "end" ) )
 			{
-					return MakeActionSeed( std::make_shared<EndActionProxy>() );
+					return MakeActionSeed( boost::make_shared<EndActionProxy>() );
 
 			}
 			else if ( data->Item1 == _T( "movie" ) )
 			{
-					std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > temp = MakeWatchMovieAction( data->Item2 );
+					boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > temp = MakeWatchMovieAction( data->Item2 );
 					return MakeActionSeed( temp );
 
 			}
@@ -163,23 +163,23 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			std::shared_ptr<CloudberryKingdom::LevelSeedData> seed = LevelSequence::GetSeed( Index );
+			boost::shared_ptr<CloudberryKingdom::LevelSeedData> seed = LevelSequence::GetSeed( Index );
 
-			seed->PostMake->Add( std::make_shared<PostMakeCampaignProxy>() );
+			seed->PostMake->Add( boost::make_shared<PostMakeCampaignProxy>() );
 
 			return seed;
 		}
 	}
 
-	void CampaignSequence::PostMakeCampaign( const std::shared_ptr<Level> &level )
+	void CampaignSequence::PostMakeCampaign( const boost::shared_ptr<Level> &level )
 	{
 		if ( level->MyLevelSeed->MyGameType == ActionGameData::Factory )
 			return;
 
-		level->MyGame->OnCoinGrab->Add( std::make_shared<OnCoinGrabProxy>() );
-		level->MyGame->OnCompleteLevel->Add( std::make_shared<OnCompleteLevelProxy>() );
+		level->MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>() );
+		level->MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>() );
 
-		std::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
+		boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
 		level->MyGame->AddGameObject( title );
 
 		level->MyGame->AddGameObject( MakeMagic( GUI_CampaignScore, () ) );
@@ -188,25 +188,25 @@ namespace CloudberryKingdom
 		level->MyGame->MyBankType = GameData::BankType_CAMPAIGN;
 	}
 
-	void CampaignSequence::OnCoinGrab( const std::shared_ptr<ObjectBase> &obj )
+	void CampaignSequence::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			( *player )->CampaignCoins++;
 	}
 
-	void CampaignSequence::OnCompleteLevel( const std::shared_ptr<Level> &level )
+	void CampaignSequence::OnCompleteLevel( const boost::shared_ptr<Level> &level )
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
 			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
 	}
 
-	std::shared_ptr<Lambda_1<std::shared_ptr<Level> > > CampaignSequence::MakeWatchMovieAction( const std::wstring &movie )
+	boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > CampaignSequence::MakeWatchMovieAction( const std::wstring &movie )
 	{
-		return std::make_shared<WatchMovieLambda>( movie );
+		return boost::make_shared<WatchMovieLambda>( movie );
 	}
 
-	void CampaignSequence::EndAction( const std::shared_ptr<Level> &level )
+	void CampaignSequence::EndAction( const boost::shared_ptr<Level> &level )
 	{
 		level->MyGame->EndGame->Apply( false );
 	}
@@ -219,6 +219,6 @@ namespace CloudberryKingdom
 	void CampaignSequence::InitializeInstanceFields()
 	{
 		ChapterStart = std::map<int, int>();
-		SpecialLevel = std::map<int, std::shared_ptr<Tuple<std::wstring, std::wstring> > >();
+		SpecialLevel = std::map<int, boost::shared_ptr<Tuple<std::wstring, std::wstring> > >();
 	}
 }

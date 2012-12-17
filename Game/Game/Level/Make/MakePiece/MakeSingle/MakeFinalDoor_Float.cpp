@@ -4,7 +4,7 @@
 namespace CloudberryKingdom
 {
 
-	MakeFinalDoor_Float::MakeFinalDoor_Float( const std::shared_ptr<Level> &level )
+	MakeFinalDoor_Float::MakeFinalDoor_Float( const boost::shared_ptr<Level> &level )
 	{
 		MyLevel = level;
 	}
@@ -46,10 +46,10 @@ namespace CloudberryKingdom
 		{
 			// Create the block
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-			std::shared_ptr<BlockBase> block = FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			boost::shared_ptr<BlockBase> block = FinalBlock = boost::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
 
 			block->getBlockCore()->EndPiece = true;
-			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( -130, -600 ), Vector2( 400, 400 ), MyLevel->getMyTileSetInfo() );
+			( boost::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( -130, -600 ), Vector2( 400, 400 ), MyLevel->getMyTileSetInfo() );
 
 			block->getCore()->DrawLayer = 0;
 			block->getCore()->Real = false;
@@ -59,8 +59,8 @@ namespace CloudberryKingdom
 		{
 			// Create a dummy block
 			int width = 400;
-			FinalBlock = std::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-			( std::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( static_cast<float>( width ) ), MyLevel->getMyTileSetInfo() );
+			FinalBlock = boost::static_pointer_cast<NormalBlock>( MyLevel->getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
+			( boost::static_pointer_cast<NormalBlock>( FinalBlock ) )->Init( FinalPos + Vector2( 130, 0 ), Vector2( static_cast<float>( width ) ), MyLevel->getMyTileSetInfo() );
 			FinalBlock->getCore()->setMyTileSet(MyLevel->MyTileSet);
 		}
 	}
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 	{
 		MakeThing::Phase3();
 
-		std::shared_ptr<Door> door;
+		boost::shared_ptr<Door> door;
 
 		// New style end blocks
 		if ( MyLevel->MyTileSet->FixedWidths )
@@ -101,20 +101,20 @@ namespace CloudberryKingdom
 		FinalBlock.reset();
 	}
 
-	void MakeFinalDoor_Float::AttachDoorAction( const std::shared_ptr<ILevelConnector> &door )
+	void MakeFinalDoor_Float::AttachDoorAction( const boost::shared_ptr<ILevelConnector> &door )
 	{
 		if ( Tools::WorldMap != 0 )
 		{
-			std::shared_ptr<StringWorldGameData> stringworld = std::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
+			boost::shared_ptr<StringWorldGameData> stringworld = boost::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 			if ( stringworld != 0 )
 			{
-				door->setOnOpen( std::make_shared<EOL_StringWorldDoorActionProxy>( stringworld ) );
-				door->setOnEnter( std::make_shared<EOL_StringWorldDoorEndActionProxy>( stringworld ) );
+				door->setOnOpen( boost::make_shared<EOL_StringWorldDoorActionProxy>( stringworld ) );
+				door->setOnEnter( boost::make_shared<EOL_StringWorldDoorEndActionProxy>( stringworld ) );
 			}
 		}
 	}
 
-	void MakeFinalDoor_Float::SetFinalDoor( const std::shared_ptr<Door> &door, const std::shared_ptr<Level> &level, Vector2 FinalPos )
+	void MakeFinalDoor_Float::SetFinalDoor( const boost::shared_ptr<Door> &door, const boost::shared_ptr<Level> &level, Vector2 FinalPos )
 	{
 		door->getCore()->EditorCode1 = LevelConnector::EndOfLevelCode;
 
@@ -122,7 +122,7 @@ namespace CloudberryKingdom
 		AttachDoorAction( door );
 
 		// Mod CameraZone
-		std::shared_ptr<CameraZone> camzone = std::static_pointer_cast<CameraZone>( Tools::Find<std::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
+		boost::shared_ptr<CameraZone> camzone = boost::static_pointer_cast<CameraZone>( Tools::Find<boost::shared_ptr<ObjectBase> >( level->Objects, FindCamZoneLambda::FindCamZoneLambda_Static ) );
 
 		camzone->End.X = FinalPos.X - level->getMainCamera()->GetWidth() / 2 + 420;
 

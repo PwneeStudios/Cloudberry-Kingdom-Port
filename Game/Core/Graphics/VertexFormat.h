@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 
 		MyOwnVertexFormat( Vector2 XY, Vector2 UV, Color color, Vector3 depth );
 
-		/*const static std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> VertexDeclaration;
+		/*const static boost::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> VertexDeclaration;
 
-		const std::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> &getVertexDeclaration() = IVertexType::VertexDeclaration::get const;*/
+		const boost::shared_ptr<Microsoft::Xna::Framework::Graphics::VertexDeclaration> &getVertexDeclaration() = IVertexType::VertexDeclaration::get const;*/
 
 		/*
 		static string[] _bits_to_save = new string[] { "xy", "uv", "Color" };

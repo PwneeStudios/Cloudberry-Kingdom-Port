@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 
 		std::wstring GetPrefix();
 
-		std::vector<std::shared_ptr<ScoreEntry> > Scores;
+		std::vector<boost::shared_ptr<ScoreEntry> > Scores;
 
 		ScoreList();
 		ScoreList( int DefaultValue );
@@ -31,16 +31,16 @@ namespace CloudberryKingdom
 		/// Whether the given score qualifies for the high score list
 		/// </summary>
 	
-		bool Qualifies( const std::shared_ptr<ScoreEntry> &Entry );
+		bool Qualifies( const boost::shared_ptr<ScoreEntry> &Entry );
 
 		/// <summary>
 		/// Get the value of the bottom score
 		/// </summary>
 		const int getBottom() const;
 
-		std::wstring ScoreString( const std::shared_ptr<ScoreEntry> &score, int Length );
+		std::wstring ScoreString( const boost::shared_ptr<ScoreEntry> &score, int Length );
 
-		void Add( const std::shared_ptr<ScoreEntry> &score );
+		void Add( const boost::shared_ptr<ScoreEntry> &score );
 
 		/// <summary>
 		/// Remove excess entries, if the list is over capacity.
@@ -48,7 +48,7 @@ namespace CloudberryKingdom
 	
 		void TrimExcess();
 
-		static int ScoreCompare( const std::shared_ptr<ScoreEntry> &score1, const std::shared_ptr<ScoreEntry> &score2 );
+		static int ScoreCompare( const boost::shared_ptr<ScoreEntry> &score1, const boost::shared_ptr<ScoreEntry> &score2 );
 
 		/// <summary>
 		/// Sort the list by value.

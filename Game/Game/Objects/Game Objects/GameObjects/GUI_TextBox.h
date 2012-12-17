@@ -12,8 +12,8 @@ namespace CloudberryKingdom
 		/// Event handler. Activated when the the user presses Enter while the textbox has focus.
 		/// </summary>
 	
-		std::shared_ptr<Multicaster> OnEnter;
-		std::shared_ptr<Multicaster> OnEscape;
+		boost::shared_ptr<Multicaster> OnEnter;
+		boost::shared_ptr<Multicaster> OnEscape;
 
 		virtual void OnAdd();
 
@@ -46,18 +46,18 @@ namespace CloudberryKingdom
 		wchar_t IncrChar( wchar_t c );
 		wchar_t DecrChar( wchar_t c );
 
-		std::shared_ptr<QuadClass> Backdrop, SelectQuad;
-		std::shared_ptr<EzText> Caret;
+		boost::shared_ptr<QuadClass> Backdrop, SelectQuad;
+		boost::shared_ptr<EzText> Caret;
 
 	
 		GUI_TextBox();
-		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct();
+		boost::shared_ptr<GUI_TextBox> GUI_TextBox_Construct();
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos );
-		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos );
+		boost::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos );
 
 		GUI_TextBox( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
-		std::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
+		boost::shared_ptr<GUI_TextBox> GUI_TextBox_Construct( const std::wstring &InitialText, Vector2 pos, Vector2 scale, float fontscale );
 
 	
 		void Init( std::wstring InitialText, Vector2 pos, Vector2 scale, float fontscale );
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		void UpdateSelectQuad();
 
 	
-		virtual std::shared_ptr<EzText> MakeText( std::wstring text, bool centered, const std::shared_ptr<EzFont> &font );
+		virtual boost::shared_ptr<EzText> MakeText( std::wstring text, bool centered, const boost::shared_ptr<EzFont> &font );
 
 	
 		int MaxLength;
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	
 		// FIXME: Related to removal of TextInput.
-		//void CharEntered( const std::shared_ptr<Object> &o, const std::shared_ptr<CharacterEventArgs> &e );
+		//void CharEntered( const boost::shared_ptr<Object> &o, const boost::shared_ptr<CharacterEventArgs> &e );
 
 		bool IsAcceptableChar( wchar_t c );
 #endif
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 		// FIXME: Related to removal of TextInput.
-		//void KeyDown( const std::shared_ptr<Object> &o, const std::shared_ptr<KeyEventArgs> &e );
+		//void KeyDown( const boost::shared_ptr<Object> &o, const boost::shared_ptr<KeyEventArgs> &e );
 #endif
 
 		void Backspace();
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 	{
 
 		GUI_EnterName();
-		std::shared_ptr<GUI_EnterName> GUI_EnterName_Construct();
+		boost::shared_ptr<GUI_EnterName> GUI_EnterName_Construct();
 
 		virtual void Enter();
 

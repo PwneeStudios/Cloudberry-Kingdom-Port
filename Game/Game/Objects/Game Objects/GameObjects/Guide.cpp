@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		if ( !Active )
 			return;
 
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		// Don't affect speed if a replay is being watched
 		if ( level->Replay || level->Watching )

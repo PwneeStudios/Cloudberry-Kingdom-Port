@@ -18,32 +18,32 @@ namespace CloudberryKingdom
 		sound->Play( 1, pitch, 0 );
 	}
 
-	VerifyPurchaseMenu::YesProxy::YesProxy( const std::shared_ptr<VerifyPurchaseMenu> &vpm )
+	VerifyPurchaseMenu::YesProxy::YesProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm )
 	{
 		this->vpm = vpm;
 	}
 
-	void VerifyPurchaseMenu::YesProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void VerifyPurchaseMenu::YesProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		vpm->Yes( item );
 	}
 
-	VerifyPurchaseMenu::NoProxy::NoProxy( const std::shared_ptr<VerifyPurchaseMenu> &vpm )
+	VerifyPurchaseMenu::NoProxy::NoProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm )
 	{
 		this->vpm = vpm;
 	}
 
-	void VerifyPurchaseMenu::NoProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void VerifyPurchaseMenu::NoProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		vpm->No( item );
 	}
 
-	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const std::shared_ptr<Buyable> &buyable ) :
+	VerifyPurchaseMenu::VerifyPurchaseMenu( int Control, const boost::shared_ptr<Buyable> &buyable ) :
 		VerifyBaseMenu( false ),
 		Cost( 0 )
 	{
 	}
-	std::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const std::shared_ptr<Buyable> &buyable )
+	boost::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu::VerifyPurchaseMenu_Construct( int Control, const boost::shared_ptr<Buyable> &buyable )
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
@@ -53,17 +53,17 @@ namespace CloudberryKingdom
 
 		Constructor();
 
-		return std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() );
+		return boost::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() );
 	}
 
-	void VerifyPurchaseMenu::Yes( const std::shared_ptr<MenuItem> &item )
+	void VerifyPurchaseMenu::Yes( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<CloudberryKingdom::EzSound> sound = Tools::Sound( _T( "Coin" ) );
+		boost::shared_ptr<CloudberryKingdom::EzSound> sound = Tools::Sound( _T( "Coin" ) );
 		int wait = 0;
 		float pitch = 0;
 		for ( int i = 0; i < Cost; i += 150 )
 		{
-			MyGame->WaitThenDo( wait, std::make_shared<CoinSoundPlayer>( pitch ) );
+			MyGame->WaitThenDo( wait, boost::make_shared<CoinSoundPlayer>( pitch ) );
 			wait += 5;
 			pitch += .05f;
 		}
@@ -76,14 +76,14 @@ namespace CloudberryKingdom
 		ReturnToCaller();
 	}
 
-	void VerifyPurchaseMenu::No( const std::shared_ptr<MenuItem> &item )
+	void VerifyPurchaseMenu::No( const boost::shared_ptr<MenuItem> &item )
 	{
 		ReturnToCaller();
 	}
 
 	void VerifyPurchaseMenu::MakeBackdrop()
 	{
-		Backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1246.031f, 691.4683f ) );
@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 		VerifyBaseMenu::Init();
 
 		// Make the menu
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		// Header
 		std::wstring pic = ShopMenu::GetString( buyable );
@@ -109,41 +109,41 @@ namespace CloudberryKingdom
 
 		std::wstring postfix = _T( "{pCoinBlue,80,?}x " ) + StringConverterHelper::toString( Cost );
 		std::wstring Text = _T( "Buy  " ) + pic + _T( "\n    for " ) + postfix + _T( "?" );
-		std::shared_ptr<EzText> HeaderText = std::make_shared<EzText>( Text, ItemFont, 1000.f, false, false, .8f );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, 1000.f, false, false, .8f );
 		HeaderText->setScale( HeaderText->getScale() * .85f );
 		//SetHeaderProperties(HeaderText);
 		MyPile->Add( HeaderText );
 		HeaderText->setPos( HeaderPos + Vector2( -200, 200 ) );
 
 		// Yes
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
-		item->setGo( std::make_shared<YesProxy>( std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item->setGo( boost::make_shared<YesProxy>( boost::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->setGo( std::make_shared<NoProxy>( std::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item->setGo( boost::make_shared<NoProxy>( boost::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
-		MyMenu->OnX = MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Select the first item in the menu to start
 		MyMenu->SelectItem( 0 );
 	}
 
-	ShopMenu::VerifyPurchaseProxy::VerifyPurchaseProxy( const std::shared_ptr<ShopMenu> &sm )
+	ShopMenu::VerifyPurchaseProxy::VerifyPurchaseProxy( const boost::shared_ptr<ShopMenu> &sm )
 	{
 		this->sm = sm;
 	}
 
-	void ShopMenu::VerifyPurchaseProxy::Apply( const std::shared_ptr<MenuItem> &item )
+	void ShopMenu::VerifyPurchaseProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
 		sm->VerifyPurchase( item );
 	}
 
-	ShopMenu::OnAddHelper::OnAddHelper( const std::shared_ptr<ScrollBar> &bar )
+	ShopMenu::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScrollBar> &bar )
 	{
 		this->bar = bar;
 	}
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		return bar->MyMenu->HitTest();
 	}
 
-std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
+boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::ReleaseBody()
 	{
@@ -163,9 +163,9 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		SaveGroup::SaveAll();
 	}
 
-	void ShopMenu::VerifyPurchase( const std::shared_ptr<MenuItem> &item )
+	void ShopMenu::VerifyPurchase( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
+		boost::shared_ptr<Buyable> buyable = boost::dynamic_pointer_cast<Buyable>( item->MyObject );
 		int Price = buyable->GetPrice();
 		if ( PlayerManager::CombinedBank() >= Price )
 			Call( MakeMagic( VerifyPurchaseMenu, ( -1, buyable ) ), 6 );
@@ -173,14 +173,14 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			Tools::Sound( _T( "Menu_Tick" ) )->Play();
 	}
 
-	void ShopMenu::SetItemProperties( const std::shared_ptr<MenuItem> &item )
+	void ShopMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
 	{
 		CkBaseMenu::SetItemProperties( item );
 
 		item->MyText->Shadow = item->MySelectedText->Shadow = false;
 	}
 
-	void ShopMenu::SetHeaderProperties2( const std::shared_ptr<EzText> &text )
+	void ShopMenu::SetHeaderProperties2( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 		text->Shadow = false;
@@ -206,9 +206,9 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		SetBankAmount();
 	}
 
-	std::wstring ShopMenu::ClrString( std::shared_ptr<ClrTextFx> data )
+	std::wstring ShopMenu::ClrString( boost::shared_ptr<ClrTextFx> data )
 	{
-		std::shared_ptr<EzTexture> texture;
+		boost::shared_ptr<EzTexture> texture;
 		int width = 100, height = 96;
 
 		Vector2 Offset = Vector2();
@@ -230,9 +230,9 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		return pic;
 	}
 
-	void ShopMenu::SetItem( const std::shared_ptr<MenuItem> &item )
+	void ShopMenu::SetItem( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
+		boost::shared_ptr<Buyable> buyable = boost::dynamic_pointer_cast<Buyable>( item->MyObject );
 
 		bool Sold = PlayerManager::Bought( buyable );
 
@@ -248,8 +248,8 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			postfix = Format(_T( "  {pCoinBlue,80,?}x %d" ), buyable->GetPrice() );
 
 		// Replace text and reset item properties
-		std::shared_ptr<EzText> Text = std::make_shared<EzText>( pic + postfix, ItemFont );
-		std::shared_ptr<EzText> SelectedText = std::make_shared<EzText>( pic + postfix, ItemFont );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( pic + postfix, ItemFont );
+		boost::shared_ptr<EzText> SelectedText = boost::make_shared<EzText>( pic + postfix, ItemFont );
 		item->MyText->Release();
 		item->MySelectedText->Release();
 		item->MyText = Text;
@@ -261,21 +261,21 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			item->_Go.reset();
 		else
 		{
-			item->setGo( std::make_shared<VerifyPurchaseProxy>( std::static_pointer_cast<ShopMenu>( shared_from_this() ) ) );
+			item->setGo( boost::make_shared<VerifyPurchaseProxy>( boost::static_pointer_cast<ShopMenu>( shared_from_this() ) ) );
 			item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 		}
 	}
 
-	std::wstring ShopMenu::GetString( const std::shared_ptr<MenuItem> &item )
+	std::wstring ShopMenu::GetString( const boost::shared_ptr<MenuItem> &item )
 	{
-		std::shared_ptr<Buyable> buyable = std::dynamic_pointer_cast<Buyable>( item->MyObject );
+		boost::shared_ptr<Buyable> buyable = boost::dynamic_pointer_cast<Buyable>( item->MyObject );
 		return GetString( buyable );
 	}
 
-	std::wstring ShopMenu::GetString( const std::shared_ptr<Buyable> &buyable )
+	std::wstring ShopMenu::GetString( const boost::shared_ptr<Buyable> &buyable )
 	{
 		std::wstring pic;
-		std::shared_ptr<Hat> hat = std::dynamic_pointer_cast<Hat>( buyable );
+		boost::shared_ptr<Hat> hat = boost::dynamic_pointer_cast<Hat>( buyable );
 		if ( 0 != hat )
 		{
 			float width;
@@ -289,13 +289,13 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		}
 		else
 		{
-			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( buyable );
+			boost::shared_ptr<ClrTextFx> clr = boost::static_pointer_cast<ClrTextFx>( buyable );
 			pic = ShopMenu::ClrString( clr );
 		}
 		return pic;
 	}
 
-	void ShopMenu::MenuGo_Customize( const std::shared_ptr<MenuItem> &item )
+	void ShopMenu::MenuGo_Customize( const boost::shared_ptr<MenuItem> &item )
 	{
 		SlideInFrom = PresetPos_LEFT;
 		Hide( PresetPos_LEFT );
@@ -304,37 +304,37 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::CharSelect()
 	{
-		CharacterSelectManager::Start( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
-	int ShopMenu::HatCompare( const std::shared_ptr<Hat> &h1, const std::shared_ptr<Hat> &h2 )
+	int ShopMenu::HatCompare( const boost::shared_ptr<Hat> &h1, const boost::shared_ptr<Hat> &h2 )
 	{
 		return Compare( h1->Price, h2->Price );
 	}
 
 	ShopMenu::ShopMenu() { }
-	std::shared_ptr<ShopMenu> ShopMenu::ShopMenu_Construct()
+	boost::shared_ptr<ShopMenu> ShopMenu::ShopMenu_Construct()
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
-		ActiveShop = std::static_pointer_cast<ShopMenu>( shared_from_this() );
+		ActiveShop = boost::static_pointer_cast<ShopMenu>( shared_from_this() );
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the menu
 		ItemPos = Vector2( -1305, 620 );
 		PosAdd = Vector2( 0, -151 ) * 1.2f * 1.1f;
 
-		MyMenu = std::make_shared<LongMenu>();
+		MyMenu = boost::make_shared<LongMenu>();
 		MyMenu->FixedToCamera = false;
 		MyMenu->WrapSelect = false;
 
 		MyMenu->setControl( -1 );
 
-		MyMenu->OnB = std::make_shared<MenuReturnToCallerLambdaFunc>( std::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
-		std::shared_ptr<MenuItem> Header = std::make_shared<MenuItem>( std::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) );
+		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( -1608.809f, 951.508f );
 		SetHeaderProperties( Header->MyText );
@@ -346,19 +346,19 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		ItemPos = Vector2( -1305, 620 );
 
 		// Format the list of hats into a menu
-		std::shared_ptr<MenuItem> item;
-		std::vector<std::shared_ptr<Hat> > hats = std::vector<std::shared_ptr<Hat> >( ColorSchemeManager::HatInfo );
+		boost::shared_ptr<MenuItem> item;
+		std::vector<boost::shared_ptr<Hat> > hats = std::vector<boost::shared_ptr<Hat> >( ColorSchemeManager::HatInfo );
 		Sort( hats, HatCompare );
 
 		//foreach (Hat hat in ColorSchemeManager.HatInfo)
-		for ( std::vector<std::shared_ptr<Hat> >::const_iterator hat = hats.begin(); hat != hats.end(); ++hat )
+		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator hat = hats.begin(); hat != hats.end(); ++hat )
 		{
 			if ( ( *hat )->AssociatedAward != 0 || ( *hat )->GetTexture() == 0 || ( *hat ).get() == Hat::None.get() )
 				continue;
 
 			//item = new MenuItem(new EzText(pic + postfix, ItemFont));
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
-			item->MyObject = std::static_pointer_cast<Object>( *hat );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item->MyObject = boost::static_pointer_cast<Object>( *hat );
 
 			AddItem( item );
 			SetItem( item );
@@ -369,15 +369,15 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Header
 		MakeHeader( Header, _T( "Skins" ) );
 
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::ColorList.begin(); clr_item != ColorSchemeManager::ColorList.end(); ++clr_item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::ColorList.begin(); clr_item != ColorSchemeManager::ColorList.end(); ++clr_item )
 		{
-			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
+			boost::shared_ptr<ClrTextFx> clr = boost::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
 
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
-			item->MyObject = std::static_pointer_cast<Object>( clr );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item->MyObject = boost::static_pointer_cast<Object>( clr );
 
 			AddItem( item );
 			SetItem( item );
@@ -390,14 +390,14 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Header
 		MakeHeader( Header, _T( "Capes" ) );
 
-		for ( std::vector<std::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::CapeColorList.begin(); clr_item != ColorSchemeManager::CapeColorList.end(); ++clr_item )
+		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::CapeColorList.begin(); clr_item != ColorSchemeManager::CapeColorList.end(); ++clr_item )
 		{
-			std::shared_ptr<ClrTextFx> clr = std::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
+			boost::shared_ptr<ClrTextFx> clr = boost::static_pointer_cast<ClrTextFx>( ( *clr_item )->obj );
 
 			bool found = false;
-			for ( std::vector<std::shared_ptr<MenuListItem> >::iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
+			for ( std::vector<boost::shared_ptr<MenuListItem> >::iterator match = ColorSchemeManager::ColorList.begin(); match != ColorSchemeManager::ColorList.end(); ++match )
 			{
-				if ( clr->Guid == ( std::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
+				if ( clr->Guid == ( boost::static_pointer_cast<Buyable>( ( *match )->obj ) )->GetGuid() )
 				{
 					found = true;
 					break;
@@ -410,7 +410,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = std::make_shared<MenuItem>( std::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
 			item->MyObject = clr;
 
 			AddItem( item );
@@ -429,12 +429,12 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		MakeRest();
 
-		return std::static_pointer_cast<ShopMenu>( shared_from_this() );
+		return boost::static_pointer_cast<ShopMenu>( shared_from_this() );
 	}
 
-	void ShopMenu::MakeHeader( std::shared_ptr<MenuItem> &Header, const std::wstring &str )
+	void ShopMenu::MakeHeader( boost::shared_ptr<MenuItem> &Header, const std::wstring &str )
 	{
-		Header = std::make_shared<MenuItem>( std::make_shared<EzText>( str, Resources::Font_Grobold42_2 ) );
+		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, Resources::Font_Grobold42_2 ) );
 		MyMenu->Add( Header );
 		ItemPos.Y -= 40;
 		Header->Pos = ItemPos + Vector2( -130, 40 );
@@ -448,35 +448,35 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 	void ShopMenu::MakeRest()
 	{
 		// Backdrop
-		std::shared_ptr<QuadClass> backdrop;
+		boost::shared_ptr<QuadClass> backdrop;
 
 		//backdrop = new QuadClass("Backplate_1500x900", 1500, true);
 		//MyPile.Add(backdrop);
 		//backdrop.Pos = new Vector2(3009.921265f, -111.1109f) + new Vector2(-297.6191f, 15.87299f);
 
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
 		backdrop->setPos( Vector2( 869.0458f, -35.71438f ) );
 
-		backdrop = std::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
 		backdrop->setPos( Vector2( -825.3976f, -71.42863f ) );
 
-		std::shared_ptr<QuadClass> shop = std::make_shared<QuadClass>( _T( "menupic_shop" ), 965 * 1.042f * 1.15f, true );
+		boost::shared_ptr<QuadClass> shop = boost::make_shared<QuadClass>( _T( "menupic_shop" ), 965 * 1.042f * 1.15f, true );
 		shop->setPos( Vector2( 800, -200 ) );
 		MyPile->Add( shop );
 
-		Bank = std::make_shared<EzText>( Localization::Words_BANK, Resources::Font_Grobold42 );
+		Bank = boost::make_shared<EzText>( Localization::Words_BANK, Resources::Font_Grobold42 );
 		Bank->setScale( Bank->getScale() * 1.1f );
 		CkColorHelper::UnpleasantColor( Bank );
 		MyPile->Add( Bank );
 		Bank->setPos( Vector2( 100, 919.0476f ) );
 
-		BankAmount = std::make_shared<EzText>( _T( "xx" ), Resources::Font_Grobold42 );
+		BankAmount = boost::make_shared<EzText>( _T( "xx" ), Resources::Font_Grobold42 );
 		BankAmount->setScale( BankAmount->getScale() * .935f );
 		MyPile->Add( BankAmount );
 		BankAmount->setPos( Vector2( 855.f, 877.5f ) );
@@ -490,7 +490,7 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::MakeBack()
 	{
-		std::shared_ptr<MenuItem> item;
+		boost::shared_ptr<MenuItem> item;
 
 		ItemPos = Vector2( -1257.38f, -5900.f );
 
@@ -532,10 +532,10 @@ std::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		// Scroll bar
 	#if defined(PC_VERSION)
 		{
-			std::shared_ptr<ScrollBar> bar = MakeMagic( ScrollBar, ( std::static_pointer_cast<LongMenu>( MyMenu ), std::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+			boost::shared_ptr<ScrollBar> bar = MakeMagic( ScrollBar, ( boost::static_pointer_cast<LongMenu>( MyMenu ), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 			bar->setBarPos( Vector2( -2384.921f, 135 ) );
 			MyGame->AddGameObject( bar );
-			MyMenu->AdditionalCheckForOutsideClick = std::make_shared<OnAddHelper>( bar );
+			MyMenu->AdditionalCheckForOutsideClick = boost::make_shared<OnAddHelper>( bar );
 		}
 	#endif
 	}

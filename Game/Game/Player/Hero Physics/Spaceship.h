@@ -18,12 +18,12 @@ namespace CloudberryKingdom
 	
 		virtual void InitSingleton();
 	
-		static std::shared_ptr<BobPhsxSpaceship> instance;
+		static boost::shared_ptr<BobPhsxSpaceship> instance;
 	
-		const static std::shared_ptr<BobPhsxSpaceship> &getInstance();
+		const static boost::shared_ptr<BobPhsxSpaceship> &getInstance();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxSpaceship> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxSpaceship> &bob );
 
 		// Instancable struct
 	
@@ -37,11 +37,11 @@ namespace CloudberryKingdom
 
 		virtual void DefaultValues();
 
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual void PhsxStep();
 
-		virtual void SideHit( ColType side, const std::shared_ptr<BlockBase> &block );
+		virtual void SideHit( ColType side, const boost::shared_ptr<BlockBase> &block );
 
 		virtual void PhsxStep2();
 
@@ -49,9 +49,9 @@ namespace CloudberryKingdom
 
 		virtual void Jump();
 
-		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
+		virtual void LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn );
 
-		virtual void HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit );
+		virtual void HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit );
 
 	
 		int Dir;
@@ -66,15 +66,15 @@ namespace CloudberryKingdom
 	
 		virtual void AnimStep();
 
-		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 		virtual void Die( BobDeathType DeathType );
 
 		virtual void BlockInteractions();
 
-		virtual void ModData( std::shared_ptr<MakeData> &makeData, const std::shared_ptr<StyleData> &Style );
+		virtual void ModData( boost::shared_ptr<MakeData> &makeData, const boost::shared_ptr<StyleData> &Style );
 
-		virtual void ModLadderPiece( const std::shared_ptr<PieceSeedData> &piece );
+		virtual void ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece );
 
 	
 		void InitializeInstanceFields();

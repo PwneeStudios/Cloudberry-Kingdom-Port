@@ -6,7 +6,7 @@
 namespace CloudberryKingdom
 {
 	//public delegate void MenuItemGo(MenuItem item);
-	struct MenuItem : public std::enable_shared_from_this<MenuItem>
+	struct MenuItem : public boost::enable_shared_from_this<MenuItem>
 	{
 
 	
@@ -21,18 +21,18 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// An associated object to store extra info.
 		/// </summary>
-		std::shared_ptr<Object> MyObject;
+		boost::shared_ptr<Object> MyObject;
 		int MyInt;
 
-		std::shared_ptr<MenuItem> Clone();
+		boost::shared_ptr<MenuItem> Clone();
 
 		Vector2 PosOffset, SelectIconOffset;
 
-		std::shared_ptr<EzSound> SelectSound, SlideSound, ListScrollSound;
+		boost::shared_ptr<EzSound> SelectSound, SlideSound, ListScrollSound;
 
-		std::shared_ptr<Menu> MyMenu;
+		boost::shared_ptr<Menu> MyMenu;
 
-		std::shared_ptr<FancyVector2> FancyPos;
+		boost::shared_ptr<FancyVector2> FancyPos;
 		Vector2 Pos, SelectedPos;
 		bool CustomSelectedPos;
 
@@ -56,25 +56,25 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool ColWithIcon;
 
-		std::shared_ptr<ObjectIcon> Icon;
-		void SetIcon( const std::shared_ptr<ObjectIcon> &Icon );
+		boost::shared_ptr<ObjectIcon> Icon;
+		void SetIcon( const boost::shared_ptr<ObjectIcon> &Icon );
 
 		void SubstituteText( Localization::Words text );
 
 		void SubstituteText( const std::wstring &text );
 
 		int TextWidth;
-		std::shared_ptr<EzText> MyText, MySelectedText;
+		boost::shared_ptr<EzText> MyText, MySelectedText;
 
-		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > OnClick;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > OnClick;
 
 	
-		std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > _Go;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > _Go;
 	
-		void setGo( const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &value );
-		const std::shared_ptr<Lambda_1<std::shared_ptr<MenuItem> > > &getGo() const;
+		void setGo( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &value );
+		const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &getGo() const;
 
-		std::shared_ptr<Lambda> AdditionalOnSelect;
+		boost::shared_ptr<Lambda> AdditionalOnSelect;
 
 		int Control;
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 		void setOverrideA( const bool &value );
 
 		Vector4 MySelectedColor, MyColor;
-		std::shared_ptr<EzFont> MySelectedFont, MyFont;
+		boost::shared_ptr<EzFont> MySelectedFont, MyFont;
 
 		const std::wstring getMyString() const;
 
@@ -126,9 +126,9 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Initialize a new MenuItem.
 		/// </summary>
-		MenuItem( const std::shared_ptr<EzText> &Text );
-		MenuItem( const std::shared_ptr<EzText> &Text, const std::wstring &Name );
-		MenuItem( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		MenuItem( const boost::shared_ptr<EzText> &Text );
+		MenuItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Name );
+		MenuItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 		void ScaleText( float scale );
 
@@ -136,7 +136,7 @@ namespace CloudberryKingdom
 		/// The new style initialization function. User provides the EzText for both selected and unselected.
 		/// </summary>
 	
-		virtual void Init( const std::shared_ptr<EzText> &Text, const std::shared_ptr<EzText> &SelectedText );
+		virtual void Init( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 	
 		void setFixedToCamera( const bool &value );
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 		const bool getOnScreen() const;
 
 	
-		void DrawText( const std::shared_ptr<Camera> &cam, bool Selected );
+		void DrawText( const boost::shared_ptr<Camera> &cam, bool Selected );
 
 		bool GrayOutOnUnselectable;
 		void GrayOut();
@@ -188,9 +188,9 @@ namespace CloudberryKingdom
 
 		void Draw();
 
-		bool DrawBase( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		bool DrawBase( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
-		virtual void Draw( bool Text, const std::shared_ptr<Camera> &cam, bool Selected );
+		virtual void Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected );
 
 #if defined(WINDOWS)
 		virtual bool HitTest();
@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 #endif
 
 		static int ActivatingPlayer;
-		static std::shared_ptr<PlayerData> GetActivatingPlayerData();
+		static boost::shared_ptr<PlayerData> GetActivatingPlayerData();
 
 
 		/// <summary>

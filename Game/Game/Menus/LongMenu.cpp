@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 
 	float LongMenu::Height()
 	{
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			( *item )->UpdatePos();
 
 		int HoldIndex = CurIndex;
@@ -71,9 +71,9 @@ namespace CloudberryKingdom
 		//        item.Selectable = false;
 
 		//if (Items[CurIndex].UnaffectedByScroll) return;
-		std::shared_ptr<MenuItem> LastItem = Items[ 0 ];
+		boost::shared_ptr<MenuItem> LastItem = Items[ 0 ];
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 			if ( !( *item )->UnaffectedByScroll && ( *item )->Selectable )
 				LastItem = *item;
 		//LastItem = Items[Items.Count - 1];

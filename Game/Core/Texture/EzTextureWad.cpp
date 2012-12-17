@@ -6,28 +6,28 @@
 namespace CloudberryKingdom
 {
 
-	std::shared_ptr<TextureOrAnim> EzTextureWad::FindTextureOrAnim( const std::wstring &name )
+	boost::shared_ptr<TextureOrAnim> EzTextureWad::FindTextureOrAnim( const std::wstring &name )
 	{
 		if ( name == _T( "null" ) )
 			return 0;
 
-		std::shared_ptr<TextureOrAnim> t_or_a = std::make_shared<TextureOrAnim>();
+		boost::shared_ptr<TextureOrAnim> t_or_a = boost::make_shared<TextureOrAnim>();
 		t_or_a->Set( name );
 		return t_or_a;
 	}
 
-	void EzTextureWad::Add( const std::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name )
+	void EzTextureWad::Add( const boost::shared_ptr<AnimationData_Texture> &anim, const std::wstring &name )
 	{
 		//AnimationDict.AddOrOverwrite( name, anim );
 		//AnimationDict[ name ] = anim;
 		::Add( AnimationDict, name, anim );
 	}
 
-	void EzTextureWad::Add( const std::shared_ptr<PackedTexture> &packed )
+	void EzTextureWad::Add( const boost::shared_ptr<PackedTexture> &packed )
 	{
 		for ( std::vector<SubTexture>::const_iterator sub = packed->SubTextures.begin(); sub != packed->SubTextures.end(); ++sub )
 		{
-			std::shared_ptr<EzTexture> texture = FindByName( ( *sub ).name );
+			boost::shared_ptr<EzTexture> texture = FindByName( ( *sub ).name );
 			texture->FromPacked = true;
 			texture->TR = ( *sub ).TR;
 			texture->BL = ( *sub ).BL;
@@ -40,20 +40,20 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		const int Size = 2000;
 
-		TextureList = std::vector<std::shared_ptr<EzTexture> >();
+		TextureList = std::vector<boost::shared_ptr<EzTexture> >();
 		TextureList.reserve( Size );
-		TextureListByFolder = std::map<std::wstring, std::vector<std::shared_ptr<EzTexture> > >();
+		TextureListByFolder = std::map<std::wstring, std::vector<boost::shared_ptr<EzTexture> > >();
 
-		AnimationDict = std::map<std::wstring, std::shared_ptr<AnimationData_Texture> >();
+		AnimationDict = std::map<std::wstring, boost::shared_ptr<AnimationData_Texture> >();
 
-		PathDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
-		NameDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
-		BigNameDict = std::map<std::wstring, std::shared_ptr<EzTexture> >();
+		PathDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
+		NameDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
+		BigNameDict = std::map<std::wstring, boost::shared_ptr<EzTexture> >();
 	}
 
-	void EzTextureWad::LoadFolder( const std::shared_ptr<ContentManager> &Content, const std::wstring &Folder )
+	void EzTextureWad::LoadFolder( const boost::shared_ptr<ContentManager> &Content, const std::wstring &Folder )
 	{
-		for ( std::vector<std::shared_ptr<EzTexture> >::const_iterator Tex = TextureListByFolder[ Folder ].begin(); Tex != TextureListByFolder[ Folder ].end(); ++Tex )
+		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = TextureListByFolder[ Folder ].begin(); Tex != TextureListByFolder[ Folder ].end(); ++Tex )
 		{
 			// If texture hasn't been loaded yet, load it
 			if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
@@ -70,9 +70,9 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::FindOrLoad( const std::shared_ptr<ContentManager> &Content, const std::wstring &name )
+	boost::shared_ptr<EzTexture> EzTextureWad::FindOrLoad( const boost::shared_ptr<ContentManager> &Content, const std::wstring &name )
 	{
-		std::shared_ptr<EzTexture> texture = FindByName( name );
+		boost::shared_ptr<EzTexture> texture = FindByName( name );
 
 		if ( texture != Tools::TextureWad->DefaultTexture )
 			return texture;
@@ -80,10 +80,10 @@ namespace CloudberryKingdom
 		return Tools::TextureWad->AddTexture( Content->Load<Texture2D>( name ), name );
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::FindByPathOrName( const std::wstring &path )
+	boost::shared_ptr<EzTexture> EzTextureWad::FindByPathOrName( const std::wstring &path )
 	{
 		// Look for the texture with the full path
-		std::shared_ptr<EzTexture> PathTexture = FindByName( path );
+		boost::shared_ptr<EzTexture> PathTexture = FindByName( path );
 
 		// If nothing but white was found
 		if ( PathTexture == 0 || PathTexture == TextureList[ 0 ] )
@@ -103,9 +103,9 @@ namespace CloudberryKingdom
 			return PathTexture;
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::FindByName( const std::wstring &name )
+	boost::shared_ptr<EzTexture> EzTextureWad::FindByName( const std::wstring &name )
 	{
-		std::shared_ptr<EzTexture> texture = _FindByName( name );
+		boost::shared_ptr<EzTexture> texture = _FindByName( name );
 
 		if ( texture == 0 )
 			return 0;
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		return texture;
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::_FindByName( const std::wstring &name )
+	boost::shared_ptr<EzTexture> EzTextureWad::_FindByName( const std::wstring &name )
 	{
 		if ( name == _T( "" ) )
 			return DefaultTexture;
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
 		return Find( name );
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::Find( const std::wstring &name )
+	boost::shared_ptr<EzTexture> EzTextureWad::Find( const std::wstring &name )
 	{
 		std::wstring lowercaseName = ToLower( name );
 
@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 		return DefaultTexture;
 	}
 
-	void EzTextureWad::AddEzTexture( const std::shared_ptr<EzTexture> &NewTex )
+	void EzTextureWad::AddEzTexture( const boost::shared_ptr<EzTexture> &NewTex )
 	{
 		TextureList.push_back( NewTex );
 
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::AddTexture( const std::shared_ptr<Texture2D> &Tex, const std::wstring &Name )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name )
 	{
 		if ( Tex == 0 )
 			return AddTexture( Tex, Name, 0, 0 );
@@ -169,13 +169,13 @@ namespace CloudberryKingdom
 			return AddTexture( Tex, Name, Tex->Width, Tex->Height );
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::AddTexture( const std::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height )
 	{
-		std::shared_ptr<EzTexture> NewTex = 0;
+		boost::shared_ptr<EzTexture> NewTex = 0;
 
 		bool OneFound = false;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<std::shared_ptr<EzTexture> >::const_iterator texture = TextureList.begin(); texture != TextureList.end(); ++texture )
+		for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator texture = TextureList.begin(); texture != TextureList.end(); ++texture )
 		{
 //C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *texture )->Path, Name ) == 0 )
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 
 		if ( !OneFound )
 		{
-			NewTex = std::make_shared<EzTexture>();
+			NewTex = boost::make_shared<EzTexture>();
 			NewTex->Path = Name;
 			NewTex->setTex( Tex );
 
@@ -220,7 +220,7 @@ namespace CloudberryKingdom
 			// Add to folder
 			std::wstring folder = Tools::FirstFolder( Name, _T( "Art/" ) );
 			if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
-				TextureListByFolder.insert( make_pair( folder, std::vector<std::shared_ptr<EzTexture> >() ) );
+				TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
 			TextureListByFolder[ folder ].push_back( NewTex );
 		}
 
@@ -230,16 +230,16 @@ namespace CloudberryKingdom
 		return NewTex;
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const std::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height )
 	{
 		return 0;
 	}
 
-	std::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const std::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &LowerPath, const std::wstring &BigName, const std::wstring &Folder )
+	boost::shared_ptr<EzTexture> EzTextureWad::AddTexture_Fast( const boost::shared_ptr<Texture2D> &Tex, const std::wstring &Name, int Width, int Height, const std::wstring &StrippedName, const std::wstring &LowerName, const std::wstring &LowerPath, const std::wstring &BigName, const std::wstring &Folder )
 	{
-		std::shared_ptr<EzTexture> NewTex = 0;
+		boost::shared_ptr<EzTexture> NewTex = 0;
 
-		NewTex = std::make_shared<EzTexture>();
+		NewTex = boost::make_shared<EzTexture>();
 		NewTex->Path = Name;
 		NewTex->setTex( Tex );
 
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 
 		// Add to folder
 		if ( TextureListByFolder.find( Folder ) == TextureListByFolder.end() )
-			TextureListByFolder.insert( make_pair( Folder, std::vector<std::shared_ptr<EzTexture> >() ) );
+			TextureListByFolder.insert( make_pair( Folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
 		TextureListByFolder[ Folder ].push_back( NewTex );
 
 		NewTex->Width = Width;
@@ -265,6 +265,6 @@ namespace CloudberryKingdom
 
 	void EzTextureWad::InitializeInstanceFields()
 	{
-		PackedDict = std::map<std::wstring, std::shared_ptr<PackedTexture> >();
+		PackedDict = std::map<std::wstring, boost::shared_ptr<PackedTexture> >();
 	}
 }

@@ -22,9 +22,9 @@ namespace CloudberryKingdom
 	LavaBlock::LavaBlock( bool BoxesOnly )
 	{
 		InitializeInstanceFields();
-		MyQuad = std::make_shared<QuadClass>();
+		MyQuad = boost::make_shared<QuadClass>();
 
-		MyBox = std::make_shared<AABox>();
+		MyBox = boost::make_shared<AABox>();
 
 		MakeNew();
 
@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 
 		getBlockCore()->Layer = .35f;
 
-		MyBox = std::make_shared<AABox>( center, size );
+		MyBox = boost::make_shared<AABox>( center, size );
 
 		SetQuad( center, size );
 
@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 		SetUV();
 	}
 
-	void LavaBlock::CollisionCheck( const std::shared_ptr<Bob> &bob )
+	void LavaBlock::CollisionCheck( const boost::shared_ptr<Bob> &bob )
 	{
 		float h = MyBox->TR.Y;
 
@@ -182,22 +182,22 @@ namespace CloudberryKingdom
 	{
 	}
 
-	bool LavaBlock::PreDecision( const std::shared_ptr<Bob> &bob )
+	bool LavaBlock::PreDecision( const boost::shared_ptr<Bob> &bob )
 	{
 		// If the computer gets close, move the lava block down
 		if ( bob->Box->Current->TR.X > getBox()->Current->BL.X && bob->Box->Current->BL.X < getBox()->Current->TR.X )
 		{
-			bob->getCore()->MyLevel->PushLava( bob->Box->Target->BL.Y - 60, std::static_pointer_cast<LavaBlock>( shared_from_this() ) );
+			bob->getCore()->MyLevel->PushLava( bob->Box->Target->BL.Y - 60, boost::static_pointer_cast<LavaBlock>( shared_from_this() ) );
 		}
 
 		return true;
 	}
 
-	void LavaBlock::Clone( const std::shared_ptr<ObjectBase> &A )
+	void LavaBlock::Clone( const boost::shared_ptr<ObjectBase> &A )
 	{
 		getCore()->Clone(A->getCore());
 
-		std::shared_ptr<LavaBlock> BlockA = std::dynamic_pointer_cast<LavaBlock>( A );
+		boost::shared_ptr<LavaBlock> BlockA = boost::dynamic_pointer_cast<LavaBlock>( A );
 
 		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size );
 	}

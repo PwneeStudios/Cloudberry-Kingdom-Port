@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-	void ReplayGUI::SetGrayHeaderProperties( const std::shared_ptr<EzText> &text )
+	void ReplayGUI::SetGrayHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
 
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		MyPile->Add( text );
 	}
 
-	void ReplayGUI::SetHeaderProperties( const std::shared_ptr<EzText> &text )
+	void ReplayGUI::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		text->setScale( FontScale );
 		MyPile->Add( text );
@@ -46,15 +46,15 @@ namespace CloudberryKingdom
 
 		FontScale = .5f;
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 
 		// Backrop
-		std::shared_ptr<QuadClass> backdrop2 = std::make_shared<QuadClass>( _T( "White" ), 1500.f );
+		boost::shared_ptr<QuadClass> backdrop2 = boost::make_shared<QuadClass>( _T( "White" ), 1500.f );
 		backdrop2->Quad_Renamed.SetColor( ColorHelper::GrayColor( .1f ) );
 		backdrop2->setAlpha( .45f );
 		MyPile->Add( backdrop2, _T( "Backdrop2" ) );
 
-		std::shared_ptr<QuadClass> backdrop = std::make_shared<QuadClass>( _T( "White" ), 1500.f );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "White" ), 1500.f );
 		backdrop->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
 		backdrop->setAlpha( .35f );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
@@ -62,13 +62,13 @@ namespace CloudberryKingdom
 		Vector2 AdditionalAdd = Vector2();
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 140.f, static_cast<std::wstring>( _T("Button_Go") ) ) );
-		Play = std::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 140.f, static_cast<std::wstring>( _T("Button_Go") ) ) );
+		Play = boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->Name = _T( "Play" );
 		SetGrayHeaderProperties( Play );
 	#else
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, _T("Button_Go") ) );
-		Play = std::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, _T("Button_Go") ) );
+		Play = boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->MyFloatColor = ( Color( 67, 198, 48, 255 ) ).ToVector4();
 		Play->Name = _T( "Play" );
 		SetHeaderProperties( Play );
@@ -76,13 +76,13 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getBack(), 140.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
-		End = std::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 140.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
+		End = boost::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->Name = _T( "Back" );
 		SetGrayHeaderProperties( End );
 	#else
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
-		End = std::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
+		End = boost::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->MyFloatColor = ( Color( 239, 41, 41, 255 ) ).ToVector4();
 		End->Name = _T( "Back" );
 		SetHeaderProperties( End );
@@ -90,8 +90,8 @@ namespace CloudberryKingdom
 
 		if ( Type == ReplayGUIType_REPLAY )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
-			Toggle = std::make_shared<EzText>( Localization::Words_SINGLE, ItemFont, true );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
+			Toggle = boost::make_shared<EzText>( Localization::Words_SINGLE, ItemFont, true );
 			Toggle->Name = _T( "Toggle" );
 	#if defined(PC_VERSION)
 			SetGrayHeaderProperties( Toggle );
@@ -102,40 +102,40 @@ namespace CloudberryKingdom
 			SetToggleText();
 		}
 
-		MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85.f, static_cast<std::wstring>( _T("Button_LR") ) ) );
-		Speed = std::make_shared<EzText>( Localization::Words_SPEED, ItemFont );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85.f, static_cast<std::wstring>( _T("Button_LR") ) ) );
+		Speed = boost::make_shared<EzText>( Localization::Words_SPEED, ItemFont );
 		Speed->Name = _T( "Speed" );
 		SetGrayHeaderProperties( Speed );
 
 		if ( Type == ReplayGUIType_COMPUTER )
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
-			LB = std::make_shared<EzText>( Localization::Words_RESET, ItemFont, true );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
+			LB = boost::make_shared<EzText>( Localization::Words_RESET, ItemFont, true );
 			LB->Name = _T( "Reset" );
 			SetGrayHeaderProperties( LB );
 		}
 		else
 		{
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
-			LB = std::make_shared<EzText>( Localization::Words_PREVIOUS, ItemFont, true );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
+			LB = boost::make_shared<EzText>( Localization::Words_PREVIOUS, ItemFont, true );
 			LB->Name = _T( "Prev" );
 			SetGrayHeaderProperties( LB );
 
-			MyPile->Add( std::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85.f, static_cast<std::wstring>( _T("Button_RB") ) ) );
-			RB = std::make_shared<EzText>( Localization::Words_NEXT, ItemFont, true );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85.f, static_cast<std::wstring>( _T("Button_RB") ) ) );
+			RB = boost::make_shared<EzText>( Localization::Words_NEXT, ItemFont, true );
 			RB->Name = _T( "Next" );
 			SetGrayHeaderProperties( RB );
 		}
 		SetSpeed();
 
-		BigPaused = std::make_shared<QuadClass>();
+		BigPaused = boost::make_shared<QuadClass>();
 		BigPaused->SetToDefault();
 		BigPaused->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Replay_GUI/Paused" ) ) );
 		BigPaused->ScaleYToMatchRatio( 355 );
 		MyPile->Add( BigPaused );
 		BigPaused->setPos( Vector2( 1210.557f, 791.1111f ) );
 
-		BigEnd = std::make_shared<QuadClass>();
+		BigEnd = boost::make_shared<QuadClass>();
 		BigEnd->SetToDefault();
 		BigEnd->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Replay_GUI/End" ) ) );
 		BigEnd->ScaleYToMatchRatio( 255 );
@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 
 		if ( Type == ReplayGUIType_COMPUTER )
 		{
-			std::shared_ptr<EzText> _t;
+			boost::shared_ptr<EzText> _t;
 			_t = MyPile->FindEzText( _T( "Play" ) );
 			if ( _t != 0 )
 			{
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 				_t->setScale( 0.44f );
 			}
 
-			std::shared_ptr<QuadClass> _q;
+			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( _T( "Backdrop2" ) );
 			if ( _q != 0 )
 			{
@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			std::shared_ptr<EzText> _t;
+			boost::shared_ptr<EzText> _t;
 			_t = MyPile->FindEzText( _T( "Play" ) );
 			if ( _t != 0 )
 			{
@@ -255,7 +255,7 @@ namespace CloudberryKingdom
 				_t->setScale( 0.4238334f );
 			}
 
-			std::shared_ptr<QuadClass> _q;
+			boost::shared_ptr<QuadClass> _q;
 			_q = MyPile->FindQuad( _T( "Backdrop2" ) );
 			if ( _q != 0 )
 			{
@@ -314,7 +314,7 @@ namespace CloudberryKingdom
 		SkipPhsxStep = true;
 	}
 
-	void ReplayGUI::ResetReplay( const std::shared_ptr<Level> &level )
+	void ReplayGUI::ResetReplay( const boost::shared_ptr<Level> &level )
 	{
 		if ( Type == ReplayGUIType_REPLAY )
 			level->SetReplay();
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 
 	void ReplayGUI::ProcessInput()
 	{
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		if ( SkipPhsxStep )
 		{
@@ -520,7 +520,7 @@ namespace CloudberryKingdom
 
 	void ReplayGUI::MyPhsxStep()
 	{
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		if ( level->SuppressReplayButtons )
 			return;
@@ -563,7 +563,7 @@ namespace CloudberryKingdom
 			return;
 		}
 
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		if ( level->SuppressReplayButtons )
 			return;
@@ -585,7 +585,7 @@ namespace CloudberryKingdom
 
 	bool ReplayGUI::ReplayIsOver()
 	{
-		std::shared_ptr<Level> level = MyGame->MyLevel;
+		boost::shared_ptr<Level> level = MyGame->MyLevel;
 
 		if ( Type == ReplayGUIType_COMPUTER && level->EndOfReplay() )
 			return true;

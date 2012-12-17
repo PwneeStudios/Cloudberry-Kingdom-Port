@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		return static_cast<int>( 100 * Remainder / 62 );
 	}
 
-	std::shared_ptr<StringBuilder> GUI_Timer_Base::BuildString()
+	boost::shared_ptr<StringBuilder> GUI_Timer_Base::BuildString()
 	{
 		MyString->setLength( 0 );
 
@@ -107,12 +107,12 @@ namespace CloudberryKingdom
 		CountDownWhileDead( false )
 	{
 	}
-	std::shared_ptr<GUI_Timer_Base> GUI_Timer_Base::GUI_Timer_Base_Construct()
+	boost::shared_ptr<GUI_Timer_Base> GUI_Timer_Base::GUI_Timer_Base_Construct()
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		MyPile = std::make_shared<DrawPile>();
+		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
 		MyPile->setPos( Vector2( -90, 865 ) );
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		std::shared_ptr<EzFont> font;
+		boost::shared_ptr<EzFont> font;
 		float scale;
 		Color c, o;
 
@@ -144,14 +144,14 @@ namespace CloudberryKingdom
 			o = Color::White;
 		}
 
-		TimerText = std::make_shared<EzText>( BuildString()->ToString(), font, 450.f, true, true );
+		TimerText = boost::make_shared<EzText>( BuildString()->ToString(), font, 450.f, true, true );
 		TimerText->setScale( scale );
 		TimerText->MyFloatColor = c.ToVector4();
 		TimerText->OutlineColor = o.ToVector4();
 
 		MyPile->Add( TimerText );
 
-		return std::static_pointer_cast<GUI_Timer_Base>( shared_from_this() );
+		return boost::static_pointer_cast<GUI_Timer_Base>( shared_from_this() );
 	}
 
 	void GUI_Timer_Base::MyDraw()
@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		if ( getTime() == 0 )
 		{
 			if ( OnTimeExpired != 0 )
-				OnTimeExpired->Apply( std::static_pointer_cast<GUI_Timer_Base>( shared_from_this() ) );
+				OnTimeExpired->Apply( boost::static_pointer_cast<GUI_Timer_Base>( shared_from_this() ) );
 
 			return;
 		}
@@ -194,10 +194,10 @@ namespace CloudberryKingdom
 	void GUI_Timer_Base::InitializeInstanceFields()
 	{
 		_Time = 5000;
-		MyString = std::make_shared<StringBuilder>( 50, 50 );
+		MyString = boost::make_shared<StringBuilder>( 50, 50 );
 		AddedOnce = false;
 		Intensity = 1;
-		OnTimeExpired = std::make_shared<Multicaster_1<std::shared_ptr<GUI_Timer_Base> > >();
+		OnTimeExpired = boost::make_shared<Multicaster_1<boost::shared_ptr<GUI_Timer_Base> > >();
 		CountDownWhileDead = false;
 	}
 }

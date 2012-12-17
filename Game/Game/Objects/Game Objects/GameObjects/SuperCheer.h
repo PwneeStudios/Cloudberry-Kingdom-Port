@@ -11,11 +11,11 @@ namespace CloudberryKingdom
 		struct CheerHelper : public Lambda
 		{
 		
-			std::shared_ptr<GameData> mygame;
+			boost::shared_ptr<GameData> mygame;
 			Vector2 pos;
 
 		
-			CheerHelper( const std::shared_ptr<GameData> &mygame, Vector2 pos );
+			CheerHelper( const boost::shared_ptr<GameData> &mygame, Vector2 pos );
 
 			void Apply();
 		};

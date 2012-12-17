@@ -10,10 +10,10 @@ namespace CloudberryKingdom
 
 		// Members
 		bool InitializedAnim;
-		std::shared_ptr<EzSound> LandSound;
+		boost::shared_ptr<EzSound> LandSound;
 	
-		std::shared_ptr<EzSound> DoubleJump;
-		std::shared_ptr<EzSound> ThrustSound;
+		boost::shared_ptr<EzSound> DoubleJump;
+		boost::shared_ptr<EzSound> ThrustSound;
 		int ThrustSoundDelay;
 		int ThrustSoundCount;
 
@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 
 		int NoStickPeriod;
 
-		std::shared_ptr<BlockBase> SafetyBlock;
+		boost::shared_ptr<BlockBase> SafetyBlock;
 		int JumpCountdown, TurnCountdown, Dir;
 	
 		bool Up;
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 
 
 		// Static members
-		static std::shared_ptr<BobPhsxNormal> instance;		
+		static boost::shared_ptr<BobPhsxNormal> instance;		
 		
 
 		// Methods
@@ -117,10 +117,10 @@ namespace CloudberryKingdom
 		// Singleton
 		virtual void InitSingleton();
 	
-		const static std::shared_ptr<BobPhsxNormal> &getInstance();
+		const static boost::shared_ptr<BobPhsxNormal> &getInstance();
 
-		virtual std::shared_ptr<BobPhsx> Clone();
-		void CopyTo( const std::shared_ptr<BobPhsxNormal> &bob );
+		virtual boost::shared_ptr<BobPhsx> Clone();
+		void CopyTo( const boost::shared_ptr<BobPhsxNormal> &bob );
 
 		// Instancable struct
 
@@ -140,7 +140,7 @@ namespace CloudberryKingdom
 
 		virtual void DefaultValues();
 
-		virtual void Init( const std::shared_ptr<Bob> &bob );
+		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
 		virtual bool CheckFor_xFlip();
 
@@ -175,9 +175,9 @@ namespace CloudberryKingdom
 
 		virtual void PlayLandSound();
 
-		virtual void LandOnSomething( bool MakeReadyToJump, const std::shared_ptr<ObjectBase> &ThingLandedOn );
+		virtual void LandOnSomething( bool MakeReadyToJump, const boost::shared_ptr<ObjectBase> &ThingLandedOn );
 
-		virtual void HitHeadOnSomething( const std::shared_ptr<ObjectBase> &ThingHit );
+		virtual void HitHeadOnSomething( const boost::shared_ptr<ObjectBase> &ThingHit );
 
 		virtual float RetardxVec();
 
@@ -197,9 +197,9 @@ namespace CloudberryKingdom
 
 void HighThrusts( int CurPhsxStep );
 
-virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
+virtual void SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData );
 
-		virtual void PreventEarlyLandings( const std::shared_ptr<RichLevelGenData> &GenData );
+		virtual void PreventEarlyLandings( const boost::shared_ptr<RichLevelGenData> &GenData );
 
 
 	
@@ -231,7 +231,7 @@ virtual void SetTarget( const std::shared_ptr<RichLevelGenData> &GenData );
 	
 		virtual void Die( BobDeathType DeathType );
 
-		virtual void ToSprites( std::map<int, std::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
+		virtual void ToSprites( std::map<int, boost::shared_ptr<SpriteAnim> > &SpriteAnims, Vector2 Padding );
 
 		virtual void DollInitialize();
 

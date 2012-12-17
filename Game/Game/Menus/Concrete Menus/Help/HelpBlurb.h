@@ -12,22 +12,22 @@ namespace CloudberryKingdom
 		struct SetText_ActionHelper : public Lambda
 		{
 		
-			std::shared_ptr<HelpBlurb> hb;
+			boost::shared_ptr<HelpBlurb> hb;
 			Localization::Words Word;
 
 		
-			SetText_ActionHelper( const std::shared_ptr<HelpBlurb> &hb, Localization::Words Word );
+			SetText_ActionHelper( const boost::shared_ptr<HelpBlurb> &hb, Localization::Words Word );
 
 			void Apply();
 		};
 
 	
 		HelpBlurb();
-		std::shared_ptr<HelpBlurb> HelpBlurb_Construct();
+		boost::shared_ptr<HelpBlurb> HelpBlurb_Construct();
 
 		virtual void Init();
 
-		std::shared_ptr<Lambda> SetText_Action( Localization::Words Word );
+		boost::shared_ptr<Lambda> SetText_Action( Localization::Words Word );
 
 		void SetText( Localization::Words Word );
 	};

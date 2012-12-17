@@ -10,11 +10,11 @@ namespace CloudberryKingdom
 		this->DefaultValue = DefaultValue;
 	}
 
-	void FireSpinner_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void FireSpinner_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
-		std::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
+		boost::shared_ptr<CloudberryKingdom::Upgrades> u = PieceSeed->getu();
 
 		// General difficulty
 		float FirespinnerLevel = PieceSeed->MyUpgrades1->Get( Upgrade_FIRE_SPINNER );
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		MaxDensity.SetVal( u->Get( Upgrade_FIRE_SPINNER ) == 0 ? 0 : DifficultyHelper::Interp( 50, 150, u->Get( Upgrade_FIRE_SPINNER ) ) );
 	}
 
-	FireSpinner_AutoGen::Cleanup_2Proxy::Cleanup_2Proxy( const std::shared_ptr<FireSpinner_Parameters> &Params )
+	FireSpinner_AutoGen::Cleanup_2Proxy::Cleanup_2Proxy( const boost::shared_ptr<FireSpinner_Parameters> &Params )
 	{
 		this->Params = Params;
 	}
@@ -53,9 +53,9 @@ namespace CloudberryKingdom
 		return Vector2( dist, dist );
 	}
 
-std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_shared<FireSpinner_AutoGen>();
+boost::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = boost::make_shared<FireSpinner_AutoGen>();
 
-	const std::shared_ptr<FireSpinner_AutoGen> &FireSpinner_AutoGen::getInstance()
+	const boost::shared_ptr<FireSpinner_AutoGen> &FireSpinner_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -66,20 +66,20 @@ std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_s
 		//Generators.AddGenerator(this);
 	}
 
-	std::shared_ptr<AutoGen_Parameters> FireSpinner_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> FireSpinner_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<FireSpinner_Parameters> Params = std::make_shared<FireSpinner_Parameters>();
+		boost::shared_ptr<FireSpinner_Parameters> Params = boost::make_shared<FireSpinner_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void FireSpinner_AutoGen::PreFill_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FireSpinner_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::PreFill_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameters>( level->getStyle()->FindParams( FireSpinner_AutoGen::getInstance() ) );
+		boost::shared_ptr<FireSpinner_Parameters> Params = boost::static_pointer_cast<FireSpinner_Parameters>( level->getStyle()->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
 		float SpinnerTopOffset = level->getInfo()->Spinners->TopOffset;
 		float SpinnerBottomOffset = level->getInfo()->Spinners->BottomOffset;
@@ -123,9 +123,9 @@ std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_s
 					if ( x > level->CurMakeData->PieceSeed->End.X - 400 )
 						continue;
 
-					std::shared_ptr<FireSpinner> spinner;
+					boost::shared_ptr<FireSpinner> spinner;
 
-					spinner = std::static_pointer_cast<FireSpinner>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
+					spinner = boost::static_pointer_cast<FireSpinner>( level->getRecycle()->GetObject(ObjectType_FIRE_SPINNER, true) );
 					spinner->getCore()->StartData.Position = spinner->getCore()->Data.Position = Vector2(x, y);
 
 					spinner->Orientation = 1;
@@ -146,13 +146,13 @@ std::shared_ptr<FireSpinner_AutoGen> FireSpinner_AutoGen::instance = std::make_s
 		}
 	}
 
-	void FireSpinner_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void FireSpinner_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 
 		// Get FireSpinner parameters
-		std::shared_ptr<FireSpinner_Parameters> Params = std::static_pointer_cast<FireSpinner_Parameters>( level->getStyle()->FindParams( FireSpinner_AutoGen::getInstance() ) );
+		boost::shared_ptr<FireSpinner_Parameters> Params = boost::static_pointer_cast<FireSpinner_Parameters>( level->getStyle()->FindParams( FireSpinner_AutoGen::getInstance() ) );
 
-		level->Cleanup( ObjectType_FIRE_SPINNER, std::make_shared<Cleanup_2Proxy>( Params ), BL, TR );
+		level->Cleanup( ObjectType_FIRE_SPINNER, boost::make_shared<Cleanup_2Proxy>( Params ), BL, TR );
 	}
 }

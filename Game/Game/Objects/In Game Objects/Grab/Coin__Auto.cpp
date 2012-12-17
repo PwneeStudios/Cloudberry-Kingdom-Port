@@ -13,12 +13,12 @@ namespace CloudberryKingdom
 		return pos;
 	}
 
-	bool Coin_Parameters::Regular_ReadyToPlace( const std::shared_ptr<Level> &level, const std::shared_ptr<Bob> &bob, int Step )
+	bool Coin_Parameters::Regular_ReadyToPlace( const boost::shared_ptr<Level> &level, const boost::shared_ptr<Bob> &bob, int Step )
 	{
 		return ( Step % Regular_Period == Regular_Offset && Step / 50 % Regular_Period2 == Regular_Offset2 && ( Step / 90 ) % level->Bobs.size() == IndexOf( level->Bobs, bob) );
 	}
 
-	void Coin_Parameters::SetParameters( const std::shared_ptr<PieceSeedData> &PieceSeed, const std::shared_ptr<Level> &level )
+	void Coin_Parameters::SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level )
 	{
 		AutoGen_Parameters::SetParameters( PieceSeed, level );
 
@@ -65,9 +65,9 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
-std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_AutoGen>();
+boost::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = boost::make_shared<Coin_AutoGen>();
 
-	const std::shared_ptr<Coin_AutoGen> &Coin_AutoGen::getInstance()
+	const boost::shared_ptr<Coin_AutoGen> &Coin_AutoGen::getInstance()
 	{
 		return instance;
 	}
@@ -78,39 +78,39 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 		Do_ActiveFill_1 = true;
 	}
 
-	std::shared_ptr<AutoGen_Parameters> Coin_AutoGen::SetParameters( const std::shared_ptr<PieceSeedData> &data, const std::shared_ptr<Level> &level )
+	boost::shared_ptr<AutoGen_Parameters> Coin_AutoGen::SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level )
 	{
-		std::shared_ptr<Coin_Parameters> Params = std::make_shared<Coin_Parameters>();
+		boost::shared_ptr<Coin_Parameters> Params = boost::make_shared<Coin_Parameters>();
 		Params->SetParameters( data, level );
 
-		return std::static_pointer_cast<AutoGen_Parameters>( Params );
+		return boost::static_pointer_cast<AutoGen_Parameters>( Params );
 	}
 
-	void Coin_AutoGen::Cleanup_2( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Coin_AutoGen::Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::Cleanup_2( level, BL, TR );
 		level->CleanupCoins( BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
+		boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 	}
 
-	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos )
+	boost::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
 		return CreateAt( level, pos, true );
 	}
 
-	std::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const std::shared_ptr<Level> &level, Vector2 pos, bool NewOffset )
+	boost::shared_ptr<ObjectBase> Coin_AutoGen::CreateAt( const boost::shared_ptr<Level> &level, Vector2 pos, bool NewOffset )
 	{
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
+		boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 
 		// Snap the coins to a grid
 		if ( Params->Grid )
 			pos = Params->SnapToGrid( pos );
 
 		// Get the new Coin
-		std::shared_ptr<Coin> NewCoin = std::static_pointer_cast<Coin>( level->getRecycle()->GetObject(ObjectType_COIN, true) );
+		boost::shared_ptr<Coin> NewCoin = boost::static_pointer_cast<Coin>( level->getRecycle()->GetObject(ObjectType_COIN, true) );
 
 		NewCoin->getCore()->GenData.Used = true;
 		NewCoin->getCore()->GenData.LimitGeneralDensity = false;
@@ -137,7 +137,7 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 		return NewCoin;
 	}
 
-	Vector2 Coin_AutoGen::CalcPos( const std::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos )
+	Vector2 Coin_AutoGen::CalcPos( const boost::shared_ptr<Bob> &bob, Vector2 BL, Vector2 TR, BobPos pos )
 	{
 		Vector2 center = bob->getCore()->Data.Position;
 		Vector2 top = Vector2( center.X, bob->Box->TR.Y );
@@ -156,12 +156,12 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 		}
 	}
 
-	void Coin_AutoGen::ActiveFill_1( const std::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
+	void Coin_AutoGen::ActiveFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::ActiveFill_1( level, BL, TR );
 
 		// Get Coin parameters
-		std::shared_ptr<Coin_Parameters> Params = std::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
+		boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( level->getStyle()->FindParams( Coin_AutoGen::getInstance() ) );
 
 		if ( !Params->DoStage2Fill )
 			return;
@@ -178,17 +178,17 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 
 			Vector2 pos = ( *bob )->getCore()->Data.Position;
 
-			std::shared_ptr<Coin> coin;
+			boost::shared_ptr<Coin> coin;
 			switch ( Params->FillType )
 			{
 				case Coin_Parameters::FillTypes_REGULAR:
 					if ( Params->Regular_ReadyToPlace( level, *bob, Step ) )
-						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
+						coin = boost::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
 					break;
 
 				case Coin_Parameters::FillTypes_RUSH:
 					if ( Step % 15 == 0 )
-						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
+						coin = boost::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_REGULAR ) ) );
 					break;
 
 				case Coin_Parameters::FillTypes_COIN_GRAB:
@@ -197,9 +197,9 @@ std::shared_ptr<Coin_AutoGen> Coin_AutoGen::instance = std::make_shared<Coin_Aut
 						Params->CoinPlaced = true;
 						( *bob )->LastPlacedCoin = ( *bob )->getPos();
 
-						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_HIGH ) ) );
-						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_CENTER ), false ) );
-						coin = std::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_LOW ), false ) );
+						coin = boost::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_HIGH ) ) );
+						coin = boost::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_CENTER ), false ) );
+						coin = boost::static_pointer_cast<Coin>( CreateAt( level, CalcPos( *bob, BL, TR, BobPos_LOW ), false ) );
 					}
 					break;
 
