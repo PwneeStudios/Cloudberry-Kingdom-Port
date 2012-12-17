@@ -314,10 +314,12 @@ namespace CloudberryKingdom
 	else
 		std::cout << std::endl;*/
 #else
-	if ( objs->Length == 0 )
-		System::Diagnostics::Debug::WriteLine( str );
-	else
-		System::Diagnostics::Debug::WriteLine( str, objs );
+		va_list args;
+		va_start( args, str );
+		vwprintf( str, args );
+		va_end( args );
+		
+		wprintf( L"\n" );
 #endif
 #endif
 	}

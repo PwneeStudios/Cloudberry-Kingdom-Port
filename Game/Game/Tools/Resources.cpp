@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		// Elevator
 		PieceQuad::Elevator = boost::make_shared<PieceQuad>();
 		PieceQuad::Elevator->Center.Set( _T( "palette" ) );
-		PieceQuad::Elevator->Center.SetColor( Color( unsigned char( 210 ), unsigned char( 210 ), unsigned char( 210 ) ) );
+		PieceQuad::Elevator->Center.SetColor( Color( static_cast<unsigned char>( 210 ), static_cast<unsigned char>( 210 ), static_cast<unsigned char>( 210 ) ) );
 		PieceQuad::ElevatorGroup = boost::make_shared<BlockGroup>();
 		PieceQuad::ElevatorGroup->Add( 100, PieceQuad::Elevator );
 		PieceQuad::ElevatorGroup->SortWidths();

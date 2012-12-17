@@ -144,6 +144,7 @@ namespace CloudberryKingdom
 		ResolutionPreferenceSet = false;
 	}
 
+#if defined(PC_VERSION)
 	PlayerManager::SaveRezAndKeysLambda::SaveRezAndKeysLambda()
 	{
 	}
@@ -161,6 +162,7 @@ namespace CloudberryKingdom
 	{
 		PlayerManager::_LoadRezAndKeys( Data );
 	}
+#endif
 
 	float PlayerManager::GetGroupGamerTagNameLength::Apply( const boost::shared_ptr<StringBuilder> &name )
 	{

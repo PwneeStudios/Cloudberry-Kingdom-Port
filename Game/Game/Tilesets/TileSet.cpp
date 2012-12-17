@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/List.h"
+#include "Hacks/Dict.h"
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
 
@@ -143,198 +144,11 @@ namespace CloudberryKingdom
 
 		MyBackgroundType = BackgroundType::Random;
 
-		CoinScoreColor = Color( unsigned char( 220 ), unsigned char( 255 ), unsigned char( 255 ) );
+		CoinScoreColor = Color( static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 	}
 
 	void TileSet::Read( const std::wstring &path )
 	{
-		MyPath = path;
-		_Start();
-
-		// Find path
-		Tools::UseInvariantCulture();
-		boost::shared_ptr<FileStream> stream = 0;
-		std::wstring original_path = path;
-
-		// FIXME: Rewrite this thing.
-
-		/*try
-		{
-			stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-		}
-		catch ( ... )
-		{
-			try
-			{
-				path = Path::Combine( Globals::ContentDirectory, original_path );
-				stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-			}
-			catch ( ... )
-			{
-				try
-				{
-					path = Path::Combine( Globals::ContentDirectory, Path::Combine( _T( "DynamicLoad" ), original_path ) );
-					stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
-				}
-				catch ( ... )
-				{
-					Tools::Log( Format( _T( "Attempting to load a .tileset file. Path <{0}> not found." ) ) );
-				}
-			}
-		}*/
-
-
-		boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
-
-		std::wstring line;
-
-		line = reader->ReadLine();
-		while ( line != _T( "" ) )
-		{
-			std::vector<std::wstring> bits = Tools::GetBitsFromLine( line );
-
-			if ( bits.size() > 1 )
-			{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				std::wstring first = bits[ 0 ];
-
-				// Is it a pillar?
-				//if ( first->Contains( _T( "Pillar_" ) ) )
-				if ( first.find( _T( "Pillar_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, Pillars );
-				}
-				// Is it a platform?
-				//else if ( first->Contains( _T( "Platform_" ) ) )
-				else if ( first.find( _T( "Platform_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, Platforms );
-				}
-				// Is it a ceiling?
-				//else if ( first->Contains( _T( "Ceiling_" ) ) )
-				else if ( first.find( _T( "Ceiling_" ) ) != std::string::npos )
-				{
-					HasCeiling = true;
-					boost::shared_ptr<CloudberryKingdom::PieceQuad> pq = ParseBlock( bits, first, Ceilings );
-					pq->Data.BottomFlush = true;
-				}
-				// Is it a start piece?
-				//if ( first->Contains( _T( "Start_" ) ) )
-				if ( first.find( _T( "Start_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, StartBlock );
-				}
-				// Is it an end piece?
-				//if ( first->Contains( _T( "End_" ) ) )
-				if ( first.find( _T( "End_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, EndBlock );
-				}
-				// Is it a moving block?
-				//else if ( first->Contains( _T( "MovingBlock_" ) ) )
-				else if ( first.find( _T( "MovingBlock_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, MyTileSetInfo->MovingBlocks->Group );
-				}
-				// Is it an elevator block?
-				//else if ( first->Contains( _T( "Elevator_" ) ) )
-				else if ( first.find( _T( "Elevator_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, MyTileSetInfo->Elevators->Group );
-				}
-				// Is it a pendulum block?
-				//else if ( first->Contains( _T( "Pendulum_" ) ) )
-				else if ( first.find( _T( "Pendulum_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, MyTileSetInfo->Pendulums->Group );
-				}
-				// Is it a falling block?
-				//else if ( first->Contains( _T( "FallingBlock_" ) ) )
-				else if ( first.find( _T( "FallingBlock_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, MyTileSetInfo->FallingBlocks->Group );
-				}
-				// Is it a bouncy block?
-				//else if ( first->Contains( _T( "BouncyBlock_" ) ) )
-				else if ( first.find( _T( "BouncyBlock_" ) ) != std::string::npos )
-				{
-					ParseBlock( bits, first, MyTileSetInfo->BouncyBlocks->Group );
-				}
-				else
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//					switch (first)
-//ORIGINAL LINE: case "sprite_anim":
-					if ( first == _T( "sprite_anim" ) )
-					{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						std::wstring names[] = { _T( "name" ), _T( "file" ), _T( "size" ), _T( "frames" ), _T( "frame_length" ), _T( "reverse_at_end" ) };
-						std::vector<std::wstring> locations = VecFromArray( names );
-						std::map<std::wstring, int> dict = Tools::GetLocations( bits, locations );
-
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						std::wstring name = bits[ dict[ _T( "name" ) ] + 1 ];
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						std::wstring file = bits[ dict[ _T( "file" ) ] + 1 ];
-
-						boost::shared_ptr<AnimationData_Texture> sprite_anim = 0;
-						if ( dict.find( _T( "frames" ) ) != dict.end() )
-						{
-							int start_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 1 ] );
-							int end_frame;
-							if ( bits[ dict[ _T( "frames" ) ] + 2 ][ 0 ] == L't' )
-								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 3 ] );
-							else
-								end_frame = ParseInt( bits[ dict[ _T( "frames" ) ] + 2 ] );
-							sprite_anim = boost::make_shared<AnimationData_Texture>( file, start_frame, end_frame );
-						}
-
-						if ( dict.find( _T( "frame_length" ) ) != dict.end() )
-						{
-							int frame_length = ParseInt( bits[ dict[ _T( "frame_length" ) ] + 1 ] );
-							sprite_anim->Anims[ 0 ].Speed = 1.f / frame_length;
-						}
-
-						Tools::TextureWad->Add( sprite_anim, name );
-
-
-					}
-//ORIGINAL LINE: case "BackgroundFile":
-					else if ( first == _T( "BackgroundFile" ) )
-					{
-						boost::shared_ptr<BackgroundTemplate> template_Renamed;
-						try
-						{
-							template_Renamed = BackgroundType::NameLookup[ bits[ 1 ] ];
-						}
-						catch ( ... )
-						{
-							template_Renamed = boost::make_shared<BackgroundTemplate>();
-							template_Renamed->Name = bits[ 1 ];
-						}
-
-						MyBackgroundType = template_Renamed;
-
-
-					}
-//ORIGINAL LINE: case "Name":
-					else if ( first == _T( "Name" ) )
-					{
-						Name = bits[ 1 ];
-					}
-					else
-					{
-						// FIXME: This function no longer exists.
-						//Tools::ReadLineToObj( MyTileSetInfo, bits );
-					}
-			}
-
-			line = reader->ReadLine();
-		}
-
-		reader->Close();
-		stream->Close();
-
-		_Finish();
 	}
 
 	void TileSet::_Finish()
@@ -532,11 +346,11 @@ namespace CloudberryKingdom
 		int int_width = group->SnapWidthUp( width - .1f );
 
 		// Get the piecequad template
-		try
+		if ( Contains( group->Dict, int_width ) )
 		{
 			return group->Choose( int_width, rnd );
 		}
-		catch ( ... )
+		else
 		{
 			Tools::Log( Format( _T( "Could not find %ls of width %f for tileset %ls" ), _T( "block" ), width, Name.c_str() ) );
 			return 0;
@@ -548,6 +362,6 @@ namespace CloudberryKingdom
 		StandInType = TileSets::None;
 		ObstacleUpgrades = std::vector<Upgrade>();
 		Tint = Vector4( 1 );
-		CoinScoreColor = Color( unsigned char( 220 ), unsigned char( 255 ), unsigned char( 255 ) );
+		CoinScoreColor = Color( static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 	}
 }
