@@ -310,7 +310,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 #if defined(PC_VERSION)
 		Globals::ContentDirectory = Tools::GameClass->getContent()->RootDirectory;
 #else
-		Globals::ContentDirectory = "";
+		Globals::ContentDirectory = L"" ;
 #endif
 
 		Tools::LoadEffects( Tools::GameClass->getContent(), true );
