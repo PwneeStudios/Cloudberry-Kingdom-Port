@@ -4,6 +4,14 @@
 
 template<> Filesystem *Singleton< Filesystem >::singleton_ = 0;
 
+Filesystem::Filesystem()
+{
+}
+
+Filesystem::~Filesystem()
+{
+}
+
 Filesystem &Filesystem::GetSingleton()
 {
 	assert( singleton_ );

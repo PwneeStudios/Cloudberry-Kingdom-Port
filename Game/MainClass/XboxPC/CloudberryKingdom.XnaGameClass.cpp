@@ -4,6 +4,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <Core.h>
+
 namespace CloudberryKingdom
 {
 
@@ -77,6 +79,7 @@ namespace CloudberryKingdom
 	void XnaGameClass::Exit()
 	{
 		// FIXME
+		CORE.Exit();
 	}
 
 #if defined(WINDOWS)

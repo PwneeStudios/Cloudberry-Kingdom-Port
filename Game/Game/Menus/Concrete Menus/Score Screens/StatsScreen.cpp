@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		text->setScale( FontScale *.9f );
 	}
 
-	Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
+	static Vector2 tempVector[] = { Vector2( 1431.285f, -158.9048f ) };
 	std::vector<Vector2> StatsMenu::x1_name = VecFromArray( tempVector );
 	Vector2 tempVector2[] = { Vector2( 1217, -147 ), Vector2( 2056, -147 ) };
 	std::vector<Vector2> StatsMenu::x2_name = VecFromArray( tempVector2 );

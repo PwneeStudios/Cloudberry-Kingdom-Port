@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		SlideIn();
 	}
 
-	std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
+	static std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
 	std::vector<std::wstring> HighScorePanel::TextureName = VecFromArray( tempVector );
 
 	HighScorePanel::HighScorePanel( boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist ) :

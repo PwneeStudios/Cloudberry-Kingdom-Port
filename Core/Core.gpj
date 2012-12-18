@@ -1,8 +1,11 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
-src\Content\FilesystemWiiU.cpp
+src\Graphics\EffectWiiU.cpp
+src\Graphics\EffectPassWiiU.cpp
+src\Graphics\EffectParameterWiiU.cpp
 src\Content\Filesystem.cpp
+src\Content\FilesystemWiiU.cpp
 src\Graphics\Color.cpp
 src\Input\InputWiiU.cpp
 src\Input\Input.cpp

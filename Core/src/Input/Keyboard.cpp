@@ -264,12 +264,15 @@ int XnaToGlfw[] = {
 
 int GlfwToXna[ GLFW_KEY_LAST ];
 
+KeyboardState Keyboard::currentState_;
+
+void Keyboard::Update()
+{
+	for( int i = 0; i < 256; ++i )
+		currentState_.keyState_[ i ] = XnaToGlfw[ i ] ? glfwGetKey( XnaToGlfw[ i ] ) == GLFW_PRESS : false;
+}
+
 KeyboardState Keyboard::GetState()
 {
-	KeyboardState ks;
-
-	for( int i = 0; i < 256; ++i )
-		ks.keyState_[ i ] = XnaToGlfw[ i ] ? glfwGetKey( XnaToGlfw[ i ] ) == GLFW_PRESS : false;
-
-	return ks;
+	return currentState_;
 }
