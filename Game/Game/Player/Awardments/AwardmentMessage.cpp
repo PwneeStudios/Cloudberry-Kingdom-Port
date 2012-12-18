@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 
 	void AwardmentMessage::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		Backdrop->setTextureName( _T( "WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1750, 284.8255f ) );
 		Backdrop->setPos( Vector2( -11.9043f, 59.52365f ) );

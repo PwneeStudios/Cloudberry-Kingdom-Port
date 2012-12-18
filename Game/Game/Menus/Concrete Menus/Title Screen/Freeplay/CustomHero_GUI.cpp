@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -342,6 +344,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<MenuList> CustomHero_GUI::MakeList()
 	{
 		boost::shared_ptr<MenuList> list = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( list );
 
 		list->GrayOutOnUnselectable = true;
 

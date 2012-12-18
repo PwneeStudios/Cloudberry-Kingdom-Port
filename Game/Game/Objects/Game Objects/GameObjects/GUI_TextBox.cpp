@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 		MyText->setScale( MyText->getScale() * fontscale );
 
 		// Backdrop
-		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		Backdrop->setTextureName( _T( "score_screen" ) );
 		Backdrop->setSize( Vector2( 640.4763f, 138.0953f ) * scale );
 
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		MyPile->Add( Caret );
 
 		// Select quad
-		SelectQuad = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
+		SelectQuad = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		SelectQuad->setTextureName( _T( "White" ) );
 		SelectQuad->Quad_Renamed.SetColor( bColor( 255, 255, 255, 125 ) );
 		SelectQuad->setSize( Vector2( 100, 100 * scale.Y ) );

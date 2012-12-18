@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		SelectSound.reset();
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
-		Call( boost::make_shared<StartMenu_MW_Exit>( getControl() ), 0 );
+		Call( MakeMagic( StartMenu_MW_Exit, ( getControl() ) ), 0 );
 	}
 
 	void StartMenu_MW::BringNextMenu()
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringFreeplay();
 
-		GUI_Panel::Call( boost::make_shared<StartMenu_MW_CustomLevel>( Title ) );
+		GUI_Panel::Call( MakeMagic( StartMenu_MW_CustomLevel, ( Title ) ) );
 	}
 
 	void StartMenu_MW::SetItemProperties( const boost::shared_ptr<MenuItem> &item )

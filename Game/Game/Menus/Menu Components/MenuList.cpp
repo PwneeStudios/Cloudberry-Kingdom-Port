@@ -103,18 +103,10 @@ namespace CloudberryKingdom
 		Center( false )
 	{
 		InitializeInstanceFields();
+
 		MyList = std::vector<boost::shared_ptr<MenuItem> >();
 
 		MenuItem::Init( 0, 0 );
-
-		setOverrideA( false );
-
-	#if defined(PC_VERSION)
-		Padding.Y = 7;
-		setExpandOnGo( true );
-	#endif
-
-		InitializeArrows();
 	}
 
 	void MenuList::InitializeArrows()

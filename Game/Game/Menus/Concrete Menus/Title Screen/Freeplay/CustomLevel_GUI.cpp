@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Hacks/List.h"
+#include <MasterHack.h>
 
 namespace CloudberryKingdom
 {
@@ -577,6 +578,7 @@ namespace CloudberryKingdom
 		LocationText->setPos( Vector2( -1050.111f, 933 ) );
 
 		boost::shared_ptr<MenuList> LocationList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( LocationList );
 		LocationList->Name = _T( "Location" );
 		LocationList->Center = !LeftJustify;
 		LocationList->MyExpandPos = Vector2( -498.1506f, 713.873f );
@@ -606,6 +608,7 @@ namespace CloudberryKingdom
 		GameText->setPos( Vector2( -1061.11f, 933 - 222 ) );
 
 		boost::shared_ptr<MenuList> GameList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( GameList );
 		GameList->Name = _T( "Game" );
 		GameList->MyExpandPos = Vector2( -580, 500.873f );
 		GameList->Center = !LeftJustify;
@@ -641,6 +644,7 @@ namespace CloudberryKingdom
 		HeroText->setPos( Vector2( -1044.443f, 933 - 2 * 222 ) );
 
 		HeroList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( HeroList );
 		HeroList->Name = _T( "Hero" );
 		HeroList->Center = !LeftJustify;
 		HeroList->MyExpandPos = Vector2( -782.1666f, 293.6826f );
@@ -673,6 +677,7 @@ namespace CloudberryKingdom
 
 		std::vector<Localization::Words> Names = CampaignHelper::DifficultyNames;
 		DiffList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( DiffList );
 		DiffList->Name = _T( "Diff" );
 		DiffList->Center = !LeftJustify;
 		DiffList->MyExpandPos = Vector2( -519.6807f, -151.5238f );

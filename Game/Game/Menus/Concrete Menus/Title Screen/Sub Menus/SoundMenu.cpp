@@ -1,5 +1,6 @@
 #include <global_header.h>
 
+#include <MasterHack.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -118,6 +119,7 @@ namespace CloudberryKingdom
 		MyPile->Add( RezText );
 
 		boost::shared_ptr<MenuList> FsRezList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( FsRezList );
 		FsRezList->Name = _T( "RezList" );
 		FsRezList->Center = false;
 		FsRezList->MyExpandPos = Vector2( -498.1506f, 713.873f );

@@ -16,6 +16,8 @@ struct PresentationParameters;
 namespace CloudberryKingdom
 {
 
+	void MenuList_PostConstruct( const boost::shared_ptr<MenuList> &This );
+
 	void Bob_PostConstruct( const boost::shared_ptr<Bob> &This, const boost::shared_ptr<BobPhsx> &type, bool boxesOnly );
 
 	void Awardment_PostConstruct( const boost::shared_ptr<Awardment> &This );

@@ -181,9 +181,9 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 	#if defined(WINDOWS)
 		Tools::Keyboard = Keyboard::GetState();
 
-		// FIXME: These are all value types.
+		// FIXED: PrevKeyboard was a value type that needed to get initalized.
 		//if ( Tools::PrevKeyboard == 0 )
-			Tools::PrevKeyboard = Tools::Keyboard;
+			//Tools::PrevKeyboard = Tools::Keyboard;
 
 		Tools::Mouse = Mouse::GetState();
 	#endif
@@ -832,7 +832,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		}
 	}
 	#endif
-
+		
 		// Get previous data to calculate Pressed and Released
 		if ( !Prev )
 		{

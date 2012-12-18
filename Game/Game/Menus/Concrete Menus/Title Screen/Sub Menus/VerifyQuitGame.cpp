@@ -26,12 +26,12 @@ namespace CloudberryKingdom
 
 	void VerifyQuitGameMenu2::MakeBackdrop()
 	{
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		backdrop->setTextureName( _T( "Backplate_1230x740" ) );
 		backdrop->ScaleYToMatchRatio( 1000 );
 		MyPile->Add( backdrop, _T( "Backdrop" ) );
 
-		Berry = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
+		Berry = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
 		Berry->setTextureName( _T( "cb_crying" ) );
 		MyPile->Add( Berry, _T( "Berry" ) );
 

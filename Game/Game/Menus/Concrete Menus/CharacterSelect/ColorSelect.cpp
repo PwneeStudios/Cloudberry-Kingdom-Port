@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -110,6 +112,7 @@ namespace CloudberryKingdom
 		MyMenu->OnA = Cast::ToMenu( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 
 		MyList = boost::make_shared<MenuList>();
+			MenuList_PostConstruct( MyList );
 		MyList->Name = _T( "list" );
 		MyList->Center = true;
 		MyList->OnIndexSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) );

@@ -9,6 +9,18 @@
 namespace CloudberryKingdom
 {
 
+	void MenuList_PostConstruct( const boost::shared_ptr<MenuList> &This )
+	{
+		This->setOverrideA( false );
+
+	#if defined(PC_VERSION)
+		This->Padding.Y = 7;
+		This->setExpandOnGo( true );
+	#endif
+
+		This->InitializeArrows();
+	}
+
 	void Bob_PostConstruct( const boost::shared_ptr<Bob> &This, const boost::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
 		This->SetHeroPhsx( This->MyHeroType );
