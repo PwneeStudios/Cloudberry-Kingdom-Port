@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		DieTemplate = boost::make_shared<Particle>();
 		DieTemplate->MyQuad.Init();
 		DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		DieTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Coin" ) ) );
+		DieTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Coin" ) ) );
 
 		DieTemplate->SetSize( 45 );
 		DieTemplate->SizeSpeed = Vector2( 10, 10 );
@@ -21,13 +21,13 @@ namespace CloudberryKingdom
 
 	void Coin::CoinTileInfo::InitializeInstanceFields()
 	{
-		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "CoinShimmer" ) ), Vector2( 105.f, -1.f ) );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) ), Vector2( 105.f, -1.f ) );
 		BoxSize = Vector2( 52.5f, 65 );
 		Color = bColor( 255, 255, 255, 255 );
 		ShowEffect = true;
 		ShowText = true;
 		ShowCoin = true;
-		MySound = Tools::NewSound( _T( "Coin" ),.75f );
+		MySound = Tools::NewSound( std::wstring( L"Coin" ),.75f );
 	}
 
 	void Coin::MakeNew()
@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 			{
 				boost::shared_ptr<CloudberryKingdom::Particle> p = getCore()->MyLevel->MainEmitter->GetNewParticle(getInfo()->Coins->DieTemplate);
 				p->Data.Position = getCore()->Data.Position + getMyLevel()->getRnd()->RndDir(35);
-				p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Pop" ) ) );
+				p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Pop" ) ) );
 			}
 		}
 
@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		if ( getInfo()->Coins->ShowText )
 		{
 			int val = CalcScoreValue();
-			boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( _T( "+" ) + StringConverterHelper::toString( val ), getCore()->Data.Position + Vector2(21, 22.5f) );
+			boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( std::wstring( L"+" ) + StringConverterHelper::toString( val ), getCore()->Data.Position + Vector2(21, 22.5f) );
 			text->getCore()->DrawLayer = 8;
 			getCore()->MyLevel->MyGame->AddGameObject(text);
 		}

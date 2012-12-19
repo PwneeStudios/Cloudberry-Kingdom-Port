@@ -33,8 +33,8 @@ namespace CloudberryKingdom
 		EmitterTexture = boost::make_shared<EzTexture>();
 		EmitterTexture->FromCode = true;
 
-		FireballTexture->Name = _T( "FireballTexture" );
-		EmitterTexture->Name = _T( "EmitterTexture" );
+		FireballTexture->Name = std::wstring( L"FireballTexture" );
+		EmitterTexture->Name = std::wstring( L"EmitterTexture" );
 
 		Tools::TextureWad->AddEzTexture( FireballTexture );
 		Tools::TextureWad->AddEzTexture( EmitterTexture );
@@ -54,13 +54,13 @@ namespace CloudberryKingdom
 		ShadeQuad = boost::make_shared<Quad>();
 		ShadeQuad->InitVertices();
 		ShadeQuad->SetColor( Color( 1.f, 1.f, 1.f ) );
-		ShadeQuad->MyEffect = Tools::EffectWad->FindByName( _T( "Fireball" ) );
-		ShadeQuad->MyTexture = Tools::TextureWad->FindByName( _T( "White" ) );
+		ShadeQuad->MyEffect = Tools::EffectWad->FindByName( std::wstring( L"Fireball" ) );
+		ShadeQuad->MyTexture = Tools::TextureWad->FindByName( std::wstring( L"White" ) );
 		ShadeQuad->Scale( Vector2( 210 * 1.15f, 55 * 1.15f ) );
 
 		ShadeQuad->Update();
 
-		ExplodeSound = Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) );
+		ExplodeSound = Tools::SoundWad->FindByName( std::wstring( L"DustCloud_Explode" ) );
 
 		// Fireball particle emitter
 		Fireball_Emitter = boost::make_shared<ParticleEmitter>( 20 );
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		Fireball_Emitter->VelDir = Vector2( -5, 0 );
 
 		Fireball_Emitter->ParticleTemplate->MyQuad.UseGlobalIllumination = false;
-		Fireball_Emitter->ParticleTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Fireball" ) ) );
+		Fireball_Emitter->ParticleTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Fireball" ) ) );
 		Fireball_Emitter->ParticleTemplate->MyQuad.MyEffect = Tools::BasicEffect;
 		Fireball_Emitter->ParticleTemplate->SetSize( 43 );
 		Fireball_Emitter->ParticleTemplate->Life = 140;
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		Emitter_Emitter->Position = Vector2( 0, 0 );
 
 
-		BaseFireballTexture = Tools::TextureWad->FindByName( _T( "Fireball" ) );
+		BaseFireballTexture = Tools::TextureWad->FindByName( std::wstring( L"Fireball" ) );
 
 		// Initialize explosion particle
 		ExplodeTemplate = boost::make_shared<Particle>();
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 		EmitterTemplate->MyQuad.Init();
 		EmitterTemplate->MyQuad.UseGlobalIllumination = false;
 		EmitterTemplate->MyQuad.MyEffect = Tools::BasicEffect; //Circle");
-		EmitterTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Fire" ) ) );
+		EmitterTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Fire" ) ) );
 		EmitterTemplate->SetSize( 55 );
 		EmitterTemplate->SizeSpeed = Vector2( 2, 2 );
 		EmitterTemplate->AngleSpeed = .1f;

@@ -125,7 +125,7 @@ inline std::wstring FormatWithSeparators( int i )
 //inline std::wstring Format( std::wstring s, ... )
 //{
 //	// FIXME: Implement this. 
-//	return _T( "" );
+//	return std::wstring( L"" );
 //}
 
 template<class T>

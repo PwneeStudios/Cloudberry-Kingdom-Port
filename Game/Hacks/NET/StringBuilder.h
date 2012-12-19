@@ -1,50 +1,29 @@
 #ifndef _STRINGBUILDER_H_
 #define _STRINGBUILDER_H_
 
+#include <vector>
+#include <string>
+
 struct StringBuilder
 {
 
+	std::vector<wchar_t> buffer;
 
+	StringBuilder( const std::wstring &str );
 
-	StringBuilder( const std::wstring &str )
-	{
-	}
+	StringBuilder( int Capacity, int MaxCapacity );
 
-	StringBuilder( int Capacity, int MaxCapacity )
-	{
-		// FIXME
-	}
+	operator std::wstring() const;
 
-	operator std::wstring() const
-	{
-		// FIXME
-		return _T( "" );
-	}
+	void Append( const wchar_t &c );
 
-	void Append( const wchar_t &c )
-	{
-		// FIXME
-	}
+	void setLength( int length );
 
-	void setLength( int length )
-	{
-		// FIXME: this should affect the string. length == 0 should make the string equal to "".
-	}
+	int getLength();
 
-	int getLength()
-	{
-		return 0;
-	}
+	std::wstring ToString() const;
 
-	std::wstring ToString()
-	{
-		return _T( "" );
-		// FIXME: implement
-	}
-
-	void Remove( int offset, int length )
-	{
-	}
+	void Remove( int offset, int length );
 
 	/// <summary>
 	/// The maximum number of digits an integer can be

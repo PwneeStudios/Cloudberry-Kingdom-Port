@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 			Options->SlideIn( 0 );
 	}
 
-	void StartMenu_MW_HeroSelect::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_HeroSelect::SlideOut( PresetPos Preset, int Frames )
 	{
 		ArcadeBaseMenu::SlideOut( Preset, 0 );
 
@@ -141,8 +141,8 @@ namespace CloudberryKingdom
 
 		CallDelay = ReturnToCallerDelay = 0;
 
-		Score = boost::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
-		Level_Renamed = boost::make_shared<EzText>( _T( "0" ), Resources::Font_Grobold42_2 );
+		Score = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
+		Level_Renamed = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
 
 		// Heroes
 		BobPhsxNormal::getInstance()->Id = 0;
@@ -195,9 +195,9 @@ namespace CloudberryKingdom
 		/// </summary>
 		#pragma region
 		// Black box, left side
-		boost::shared_ptr<QuadClass> BackBoxLeft = boost::make_shared<QuadClass>( _T( "Arcade_BoxLeft" ) );
+		boost::shared_ptr<QuadClass> BackBoxLeft = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ) );
 		BackBoxLeft->setAlpha( 1 );
-		MyPile->Add( BackBoxLeft, _T( "BoxLeft" ) );
+		MyPile->Add( BackBoxLeft, std::wstring( L"BoxLeft" ) );
 		#pragma endregion
 
 		/// <summary>
@@ -205,29 +205,29 @@ namespace CloudberryKingdom
 		/// </summary>
 		#pragma region
 		// Black box, right side
-		boost::shared_ptr<QuadClass> BackBox = boost::make_shared<QuadClass>( _T( "Arcade_Box" ) );
+		boost::shared_ptr<QuadClass> BackBox = boost::make_shared<QuadClass>( std::wstring( L"Arcade_Box" ) );
 		BackBox->setAlpha( 1 );
-		MyPile->Add( BackBox, _T( "BoxRight" ) );
+		MyPile->Add( BackBox, std::wstring( L"BoxRight" ) );
 
 		// Score, level
 		boost::shared_ptr<EzText> ScoreHeader = boost::make_shared<EzText>( Localization::Words_HIGH_SCORE, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( ScoreHeader, true );
-		MyPile->Add( ScoreHeader, _T( "ScoreHeader" ) );
+		MyPile->Add( ScoreHeader, std::wstring( L"ScoreHeader" ) );
 
-		MyPile->Add( Score, _T( "Score" ) );
+		MyPile->Add( Score, std::wstring( L"Score" ) );
 
 		boost::shared_ptr<EzText> LevelHeader = boost::make_shared<EzText>( Localization::Words_BEST_LEVEL, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( LevelHeader, true );
-		MyPile->Add( LevelHeader, _T( "LevelHeader" ) );
+		MyPile->Add( LevelHeader, std::wstring( L"LevelHeader" ) );
 
-		MyPile->Add( Level_Renamed, _T( "Level" ) );
+		MyPile->Add( Level_Renamed, std::wstring( L"Level" ) );
 		#pragma endregion
 
 		/// <summary>
 		/// Back
 		/// </summary>
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack() ), _T("Back") );
-		MyPile->Add( boost::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack() ), std::wstring( L"Back" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"BackArrow2" ), std::wstring( L"BackArrow" ) ) );
 
 		MyPile->FadeIn( .33f );
 
@@ -260,25 +260,25 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -1340.222f, 104.4444f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "ScoreHeader" ) );
+		_t = MyPile->FindEzText( std::wstring( L"ScoreHeader" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -22.22266f, 636.1111f ) );
 			_t->setScale( 1 );
 		}
-		_t = MyPile->FindEzText( _T( "Score" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Score" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 1161.11f, 366.6667f ) );
 			_t->setScale( 1 );
 		}
-		_t = MyPile->FindEzText( _T( "LevelHeader" ) );
+		_t = MyPile->FindEzText( std::wstring( L"LevelHeader" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -2.779297f, 105.5556f ) );
 			_t->setScale( 1 );
 		}
-		_t = MyPile->FindEzText( _T( "Level" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Level" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 1163.887f, -155.5555f ) );
@@ -286,25 +286,25 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "BoxLeft" ) );
+		_q = MyPile->FindQuad( std::wstring( L"BoxLeft" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -972.2227f, -127.7778f ) );
 			_q->setSize( Vector2( 616.5467f, 1004.329f ) );
 		}
-		_q = MyPile->FindQuad( _T( "BoxRight" ) );
+		_q = MyPile->FindQuad( std::wstring( L"BoxRight" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 666.6641f, -88.88879f ) );
 			_q->setSize( Vector2( 776.5515f, 846.666f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Back" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Back" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -1269.443f, -1011.111f ) );
 			_q->setSize( Vector2( 64.49973f, 64.49973f ) );
 		}
-		_q = MyPile->FindQuad( _T( "BackArrow" ) );
+		_q = MyPile->FindQuad( std::wstring( L"BackArrow" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -1416.666f, -1016.667f ) );

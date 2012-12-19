@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 
 	void LavaDrip::LavaDripTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Lava_Drip_1" ) ), TextureOrAnim::Get( _T( "Lava_Drip_2" ) ), TextureOrAnim::Get( _T( "Lava_Drip_3" ) ), 440.f );
+		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( std::wstring( L"Lava_Drip_1" ) ), TextureOrAnim::Get( std::wstring( L"Lava_Drip_2" ) ), TextureOrAnim::Get( std::wstring( L"Lava_Drip_3" ) ), 440.f );
 		BoxSize = Vector2( 118.f, 1300.f );
 	}
 

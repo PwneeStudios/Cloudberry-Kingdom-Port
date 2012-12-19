@@ -96,7 +96,9 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<PlayerStats> PlayerStats::Absorb( const boost::shared_ptr<PlayerStats> &stats )
 	{
-		/*for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
+		/*
+		unknown vec = GetType()->GetFields();
+		for ( unknown::const_iterator info = vec.begin(); info != vec.end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
 				( *info )->SetValue( shared_from_this(), static_cast<int>( ( *info )->GetValue( shared_from_this() ) ) + static_cast<int>( ( *info )->GetValue( stats ) ) );
@@ -129,7 +131,8 @@ namespace CloudberryKingdom
 
 	void PlayerStats::Clean()
 	{
-		/*for ( unknown::const_iterator info = GetType()->GetFields().begin(); info != GetType()->GetFields().end(); ++info )
+		/*unknown vec = GetType()->GetFields();
+		for ( unknown::const_iterator info = vec.begin(); info != vec.end(); ++info )
 		{
 			if ( ( *info )->FieldType == int::typeid )
 				( *info )->SetValue( shared_from_this(), 0 );

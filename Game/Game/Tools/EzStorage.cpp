@@ -33,13 +33,13 @@ namespace CloudberryKingdom
 
 		// Player data
 		PlayerManager::SavePlayerData = boost::make_shared<_SavePlayerData>();
-		PlayerManager::SavePlayerData->ContainerName = _T( "PlayerData" );
-		PlayerManager::SavePlayerData->FileName = _T( "PlayerData.hsc" );
+		PlayerManager::SavePlayerData->ContainerName = std::wstring( L"PlayerData" );
+		PlayerManager::SavePlayerData->FileName = std::wstring( L"PlayerData.hsc" );
 		Add( PlayerManager::SavePlayerData );
 
 	#if defined(PC_VERSION)
-		PlayerManager::getPlayer()->ContainerName = _T("PlayerData");
-		PlayerManager::getPlayer()->FileName = _T("MainPlayer");
+		PlayerManager::getPlayer()->ContainerName = std::wstring( L"PlayerData" );
+		PlayerManager::getPlayer()->FileName = std::wstring( L"MainPlayer" );
 		Add( PlayerManager::getPlayer() );
 	#endif
 
@@ -87,11 +87,12 @@ namespace CloudberryKingdom
 
 	#if defined(NOT_PC)
 		// Save each player's info
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getLoggedInPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			Incr();
-			( *player )->ContainerName = _T( "Gamers" );
-			( *player )->FileName = _T( "___" ) + ( *player )->GetName();
+			( *player )->ContainerName = std::wstring( L"Gamers" );
+			( *player )->FileName = std::wstring( L"___" ) + ( *player )->GetName();
 			( *player )->Save();
 			Wait();
 		}
@@ -101,8 +102,8 @@ namespace CloudberryKingdom
 #if defined(NOT_PC)
 	boost::shared_ptr<PlayerData> SaveGroup::LoadGamer( const std::wstring &GamerName, const boost::shared_ptr<PlayerData> &Data )
 	{
-		Data->ContainerName = _T( "Gamers" );
-		Data->FileName = _T( "___" ) + GamerName;
+		Data->ContainerName = std::wstring( L"Gamers" );
+		Data->FileName = std::wstring( L"___" ) + GamerName;
 
 		Incr();
 		Data->Load();
@@ -201,7 +202,7 @@ namespace CloudberryKingdom
 		return ContainerName;
 	#else
 	#if defined(WINDOWS)
-		return ContainerName + _T( "_XboxVersion" );
+		return ContainerName + std::wstring( L"_XboxVersion" );
 	#else
 		return ContainerName;
 	#endif

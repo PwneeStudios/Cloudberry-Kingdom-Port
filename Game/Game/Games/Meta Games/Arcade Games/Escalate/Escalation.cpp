@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		
 		Challenge_Escalation::instance = boost::make_shared<Challenge_Escalation>();
 
-		std::wstring tempVector2[] = { _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ), _T( "sea" ) };
+		std::wstring tempVector2[] = { std::wstring( L"hills" ), std::wstring( L"forest" ), std::wstring( L"cloud" ), std::wstring( L"cave" ), std::wstring( L"castle" ), std::wstring( L"sea" ) };
 		Challenge_Escalation::tilesets = VecFromArray( tempVector2 );
 	}
 

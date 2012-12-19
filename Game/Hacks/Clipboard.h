@@ -5,7 +5,7 @@ struct Clipboard
 {
 
 
-	static std::wstring GetText() { return _T( "" ); }
+	static std::wstring GetText() { return std::wstring( L"" ); }
 	static void SetText( std::wstring text ) { }
 
 };

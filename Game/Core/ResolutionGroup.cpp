@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	ResolutionGroup::ResolutionGroup()
 	{
-		LineHeightMod = 0;
+		LineHeightMod = 1;
 	}
 
 	boost::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
@@ -98,8 +98,8 @@ namespace CloudberryKingdom
 
 	std::wstring ResolutionGroup::ToString()
 	{
-		return _T( "FIXME" );
-		/*return Backbuffer.X + _T( " x " ) + Backbuffer.Y;*/
+		return std::wstring( L"FIXME" );
+		/*return Backbuffer.X + std::wstring( L" x " ) + Backbuffer.Y;*/
 	}
 
 	void ResolutionGroup::CopyTo( ResolutionGroup &dest )

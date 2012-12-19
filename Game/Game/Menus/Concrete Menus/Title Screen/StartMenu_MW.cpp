@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		SelectSound.reset();
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
-		Call( boost::make_shared<StartMenu_MW_Exit>( getControl() ), 0 );
+		Call( MakeMagic( StartMenu_MW_Exit, ( getControl() ) ), 0 );
 	}
 
 	void StartMenu_MW::BringNextMenu()
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW::SlideOut( PresetPos Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringFreeplay();
 
-		GUI_Panel::Call( boost::make_shared<StartMenu_MW_CustomLevel>( Title ) );
+		GUI_Panel::Call( MakeMagic( StartMenu_MW_CustomLevel, ( Title ) ) );
 	}
 
 	void StartMenu_MW::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
@@ -100,9 +100,9 @@ namespace CloudberryKingdom
 		MyMenu->Add( Header, 0 );
 		MyMenu->SelectItem( 1 );
 
-		BackBox = boost::make_shared<QuadClass>( _T( "Title_Strip" ) );
+		BackBox = boost::make_shared<QuadClass>( std::wstring( L"Title_Strip" ) );
 		BackBox->setAlpha( .9f );
-		MyPile->Add( BackBox, _T( "Back" ) );
+		MyPile->Add( BackBox, std::wstring( L"Back" ) );
 
 		MyPile->FadeIn( .33f );
 
@@ -117,12 +117,12 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::SmallBlackBox()
 	{
-		BackBox->setTextureName( _T( "White" ) );
+		BackBox->setTextureName( std::wstring( L"White" ) );
 		BackBox->Quad_Renamed.SetColor( ColorHelper::Gray( .1f ) );
 		BackBox->setAlpha( .73f );
 
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 255.5566f, -8.333374f ) );
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.66f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Arcade" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2232.778f, 337.7501f ) );
@@ -138,7 +138,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.66f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2233.943f, 149.1946f ) );
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.66f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Freeplay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2156.22f, -34.80548f ) );
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.66f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2090.221f, -213.25f ) );
@@ -162,7 +162,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.66f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Exit" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1950.778f, -413.5834f ) );
@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 1709.92f, -246.1907f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Back" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Back" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -61.11133f, -336.1111f ) );

@@ -170,14 +170,14 @@ namespace CloudberryKingdom
 
 		if ( CanHaveHat )
 		{
-			boost::shared_ptr<CloudberryKingdom::BaseQuad> head = PlayerObject->FindQuad( _T( "Head" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> head = PlayerObject->FindQuad( std::wstring( L"Head" ) );
 			//if (null != head) head.Show = scheme.HatData.DrawHead;
 			if ( 0 != head )
 				head->Show = false;
 
 			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = PlayerObject->QuadList.begin(); quad != PlayerObject->QuadList.end(); ++quad )
 			{
-				if ( Contains( ( *quad )->Name, _T( "Hat_" ) ) )
+				if ( Contains( ( *quad )->Name, std::wstring( L"Hat_" ) ) )
 				{
 					boost::shared_ptr<Quad> _Quad = boost::dynamic_pointer_cast<Quad>( *quad );
 					if ( CompareIgnoreCase( ( *quad )->Name, scheme.HatData->QuadName ) == 0 )
@@ -195,7 +195,7 @@ namespace CloudberryKingdom
 					}
 				}
 
-				if ( Contains( ( *quad )->Name, _T( "Facial_" ) ) )
+				if ( Contains( ( *quad )->Name, std::wstring( L"Facial_" ) ) )
 				{
 					boost::shared_ptr<Quad> _Quad = boost::dynamic_pointer_cast<Quad>( *quad );
 
@@ -217,15 +217,15 @@ namespace CloudberryKingdom
 		}
 
 
-		boost::shared_ptr<CloudberryKingdom::BaseQuad> q = PlayerObject->FindQuad( _T( "MainQuad" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> q = PlayerObject->FindQuad( std::wstring( L"MainQuad" ) );
 		if ( q != 0 )
 		{
 			q->setMyMatrix( scheme.SkinColor->M );
 
-			boost::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( _T( "Wings_Front" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( std::wstring( L"Wings_Front" ) );
 			if ( wf != 0 )
 				wf->setMyMatrix( scheme.SkinColor->M );
-			boost::shared_ptr<CloudberryKingdom::BaseQuad> wb = PlayerObject->FindQuad( _T( "Wings_Back" ) );
+			boost::shared_ptr<CloudberryKingdom::BaseQuad> wb = PlayerObject->FindQuad( std::wstring( L"Wings_Back" ) );
 			if ( wb != 0 )
 				wb->setMyMatrix( scheme.SkinColor->M );
 		}
@@ -500,8 +500,8 @@ namespace CloudberryKingdom
 		int width = Tools::TheGame->Resolution.Bob_Renamed.X;
 		int height = static_cast<int>( width * ratio );
 
-		boost::shared_ptr<ObjectClass> obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		boost::shared_ptr<ObjectClass> obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, width, height, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
 
 		obj->ReadFile( reader, EffectWad, TextureWad );
 		
@@ -523,11 +523,11 @@ namespace CloudberryKingdom
 		CoreData = boost::make_shared<ObjectData>();
 		getCore()->Show = true;
 
-		JumpSound = JumpSound_Default = Tools::SoundWad->FindByName( _T( "Jump5" ) );
+		JumpSound = JumpSound_Default = Tools::SoundWad->FindByName( std::wstring( L"Jump5" ) );
 		JumpSound->DefaultVolume = .1f;
 		JumpSound->DelayTillNextSoundCanPlay = 10;
 
-		DieSound = DieSound_Default = Tools::Sound( _T( "Death_Chime" ) );
+		DieSound = DieSound_Default = Tools::Sound( std::wstring( L"Death_Chime" ) );
 
 		PlayerObject->Read( 0, 0 );
 		PlayerObject->Play = true;
@@ -1035,7 +1035,7 @@ namespace CloudberryKingdom
 			return;
 
 		GuideQuad = boost::make_shared<QuadClass>();
-		GuideQuad->setEffectName( _T( "Circle" ) );
+		GuideQuad->setEffectName( std::wstring( L"Circle" ) );
 		GuideQuad->setSize( Vector2( 100, 100 ) );
 	}
 
@@ -1123,7 +1123,7 @@ namespace CloudberryKingdom
 	{
 		if ( Rocket == 0 )
 		{
-			Rocket = boost::make_shared<QuadClass>( _T( "Castle_Jet_Pack" ) );
+			Rocket = boost::make_shared<QuadClass>( std::wstring( L"Castle_Jet_Pack" ) );
 			//Rocket = new QuadClass("RocketPack");
 			Rocket->FancyAngle = boost::make_shared<FancyVector2>();
 			Rocket->Quad_Renamed.MyEffect = Tools::HslEffect;
@@ -1220,7 +1220,7 @@ namespace CloudberryKingdom
 				else
 				{
 					PlayerObject->Update( 0 );
-					boost::shared_ptr<Quad> w = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Wheel" ) ) );
+					boost::shared_ptr<Quad> w = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( std::wstring( L"Wheel" ) ) );
 					boost::shared_ptr<CloudberryKingdom::Quad> p = PlayerObject->ParentQuad;
 					Vector2 hold = p->Center->Pos;
 
@@ -1510,7 +1510,7 @@ namespace CloudberryKingdom
 		}
 
 		if ( Head == 0 )
-			Head = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( _T( "Head" ) ) );
+			Head = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( std::wstring( L"Head" ) ) );
 		temp->Pos = Head->Center->Pos;
 
 		if ( MyPhsx->Ducking )

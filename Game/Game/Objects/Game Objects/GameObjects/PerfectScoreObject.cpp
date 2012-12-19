@@ -238,7 +238,7 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 	std::wstring PerfectScoreObject::ToString()
 	{
-		return _T( "x" ) + Format( _T( "%01.1f" ), getMultiplier() );
+		return std::wstring( L"x" ) + Format( _T( "%01.1f" ), getMultiplier() );
 	}
 
 	void PerfectScoreObject::OnAdd_GUI()

@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
 		Challenge_HeroRush::HeroTypes = VecFromArray( tempVector3 );
 
-		std::wstring tempVector4[] = { _T( "sea" ), _T( "hills" ), _T( "forest" ), _T( "cloud" ), _T( "cave" ), _T( "castle" ) };
+		std::wstring tempVector4[] = { std::wstring( L"sea" ), std::wstring( L"hills" ), std::wstring( L"forest" ), std::wstring( L"cloud" ), std::wstring( L"cave" ), std::wstring( L"castle" ) };
 		Challenge_HeroRush::tilesets = VecFromArray( tempVector4 );
 	}
 

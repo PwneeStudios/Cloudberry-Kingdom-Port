@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	VerifyPurchaseMenu::CoinSoundPlayer::CoinSoundPlayer( float pitch )
 	{
 		this->pitch = pitch;
-		sound = Tools::Sound( _T( "Coin" ) );
+		sound = Tools::Sound( std::wstring( L"Coin" ) );
 	}
 
 	void VerifyPurchaseMenu::CoinSoundPlayer::Apply()
@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 
 	void VerifyPurchaseMenu::Yes( const boost::shared_ptr<MenuItem> &item )
 	{
-		boost::shared_ptr<CloudberryKingdom::EzSound> sound = Tools::Sound( _T( "Coin" ) );
+		boost::shared_ptr<CloudberryKingdom::EzSound> sound = Tools::Sound( std::wstring( L"Coin" ) );
 		int wait = 0;
 		float pitch = 0;
 		for ( int i = 0; i < Cost; i += 150 )
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 
 	void VerifyPurchaseMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"score_screen" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1246.031f, 691.4683f ) );
@@ -107,8 +107,8 @@ namespace CloudberryKingdom
 		string pic = "{p" + buyable.GetTexture().Name + "," + width.ToString() + ",?," + offset + "}";
 		*/
 
-		std::wstring postfix = _T( "{pCoinBlue,80,?}x " ) + StringConverterHelper::toString( Cost );
-		std::wstring Text = _T( "Buy  " ) + pic + _T( "\n    for " ) + postfix + _T( "?" );
+		std::wstring postfix = std::wstring( L"{pCoinBlue,80,?}x " ) + StringConverterHelper::toString( Cost );
+		std::wstring Text = std::wstring( L"Buy  " ) + pic + std::wstring( L"\n    for " ) + postfix + std::wstring( L"?" );
 		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, 1000.f, false, false, .8f );
 		HeaderText->setScale( HeaderText->getScale() * .85f );
 		//SetHeaderProperties(HeaderText);
@@ -174,7 +174,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		if ( PlayerManager::CombinedBank() >= Price )
 			Call( MakeMagic( VerifyPurchaseMenu, ( -1, buyable ) ), 6 );
 		else
-			Tools::Sound( _T( "Menu_Tick" ) )->Play();
+			Tools::Sound( std::wstring( L"Menu_Tick" ) )->Play();
 	}
 
 	void ShopMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
@@ -226,10 +226,10 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		else
 		{
 			texture = data->Texture;
-			offset += _T( ",1" ); // Use paint effect
+			offset += std::wstring( L",1" ); // Use paint effect
 		}
 
-		pic = _T( "{p" ) + texture->Name + _T( "," ) + StringConverterHelper::toString( width ) + _T( "," ) + StringConverterHelper::toString( height ) + _T( "," ) + offset + _T( "}" );
+		pic = std::wstring( L"{p" ) + texture->Name + std::wstring( L"," ) + StringConverterHelper::toString( width ) + std::wstring( L"," ) + StringConverterHelper::toString( height ) + std::wstring( L"," ) + offset + std::wstring( L"}" );
 
 		return pic;
 	}
@@ -247,9 +247,9 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		pic = GetString( item );
 
 		if ( Sold )
-			postfix = _T( "  {c255,100,100,255}Sold!" );
+			postfix = std::wstring( L"  {c255,100,100,255}Sold!" );
 		else
-			postfix = Format(_T( "  {pCoinBlue,80,?}x %d" ), buyable->GetPrice() );
+			postfix = Format( _T( "  {pCoinBlue,80,?}x %d" ), buyable->GetPrice() );
 
 		// Replace text and reset item properties
 		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( pic + postfix, ItemFont );
@@ -289,7 +289,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			width = static_cast<float>( static_cast<int>( 100 * hat->HatPicScale.X ) );
 			Offset = hat->HatPicShift * 100;
 			offset = Format( _T( "%f,%f" ), Offset.X, -Offset.Y );
-			pic = _T( "{p" ) + hat->GetTexture()->Name + _T(",") + StringConverterHelper::toString(width) + _T(",?,") + offset + _T("}");
+			pic = std::wstring( L"{p" ) + hat->GetTexture()->Name + std::wstring( L"," ) + StringConverterHelper::toString(width) + std::wstring( L",?," ) + offset + std::wstring( L"}" );
 		}
 		else
 		{
@@ -361,7 +361,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 				continue;
 
 			//item = new MenuItem(new EzText(pic + postfix, ItemFont));
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
 			item->MyObject = boost::static_pointer_cast<Object>( *hat );
 
 			AddItem( item );
@@ -371,7 +371,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		}
 
 		// Header
-		MakeHeader( Header, _T( "Skins" ) );
+		MakeHeader( Header, std::wstring( L"Skins" ) );
 
 		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::ColorList.begin(); clr_item != ColorSchemeManager::ColorList.end(); ++clr_item )
 		{
@@ -380,7 +380,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
 			item->MyObject = boost::static_pointer_cast<Object>( clr );
 
 			AddItem( item );
@@ -392,7 +392,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 
 		// Header
-		MakeHeader( Header, _T( "Capes" ) );
+		MakeHeader( Header, std::wstring( L"Capes" ) );
 
 		for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator clr_item = ColorSchemeManager::CapeColorList.begin(); clr_item != ColorSchemeManager::CapeColorList.end(); ++clr_item )
 		{
@@ -414,7 +414,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "xxx" ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
 			item->MyObject = clr;
 
 			AddItem( item );
@@ -458,19 +458,19 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		//MyPile.Add(backdrop);
 		//backdrop.Pos = new Vector2(3009.921265f, -111.1109f) + new Vector2(-297.6191f, 15.87299f);
 
-		backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
 		backdrop->setPos( Vector2( 869.0458f, -35.71438f ) );
 
-		backdrop = boost::make_shared<QuadClass>( _T( "score_screen" ), 1500.f, true );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"score_screen" ), 1500.f, true );
 		MyPile->Add( backdrop );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 853.1744f, 1973.215f ) );
 		backdrop->setPos( Vector2( -825.3976f, -71.42863f ) );
 
-		boost::shared_ptr<QuadClass> shop = boost::make_shared<QuadClass>( _T( "menupic_shop" ), 965 * 1.042f * 1.15f, true );
+		boost::shared_ptr<QuadClass> shop = boost::make_shared<QuadClass>( std::wstring( L"menupic_shop" ), 965 * 1.042f * 1.15f, true );
 		shop->setPos( Vector2( 800, -200 ) );
 		MyPile->Add( shop );
 
@@ -480,7 +480,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		MyPile->Add( Bank );
 		Bank->setPos( Vector2( 100, 919.0476f ) );
 
-		BankAmount = boost::make_shared<EzText>( _T( "xx" ), Resources::Font_Grobold42 );
+		BankAmount = boost::make_shared<EzText>( std::wstring( L"xx" ), Resources::Font_Grobold42 );
 		BankAmount->setScale( BankAmount->getScale() * .935f );
 		MyPile->Add( BankAmount );
 		BankAmount->setPos( Vector2( 855.f, 877.5f ) );

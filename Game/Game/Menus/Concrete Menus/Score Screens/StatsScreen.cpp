@@ -281,7 +281,7 @@ namespace CloudberryKingdom
 
 	#if defined(NOT_PC)
 		boost::shared_ptr<EzText> Text;
-		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "" ), ItemFont ) );
+		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"" ), ItemFont ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( -1138.889f, 988.0952f );
 		Header->Selectable = false;
@@ -369,7 +369,7 @@ namespace CloudberryKingdom
 
 
 		// Darker Backdrop
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), _T( "Backdrop" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), std::wstring( L"Backdrop" ) );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 
@@ -385,7 +385,7 @@ namespace CloudberryKingdom
 	void StatsMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 1230.718f, 975.2383f ) );
@@ -396,7 +396,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 67.45706f, 0 ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -91.66821f, -103.8888f ) );

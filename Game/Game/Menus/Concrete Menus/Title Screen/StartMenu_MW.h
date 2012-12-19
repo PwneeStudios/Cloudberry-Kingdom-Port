@@ -5,9 +5,14 @@
 
 namespace CloudberryKingdom
 {
+
 	struct StartMenu_MW : public StartMenu
 	{
-	
+
+		using StartMenu::SlideOut;
+		using StartMenu::SlideIn;
+		using StartMenu::Call;
+
 		virtual void MenuGo_Options( const boost::shared_ptr<MenuItem> &item );
 
 		virtual void Exit();
@@ -21,7 +26,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 	
 		virtual void BringCampaign();

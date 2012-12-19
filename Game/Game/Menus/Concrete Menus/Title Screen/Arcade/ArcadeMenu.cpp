@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 
 		// Header
 		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
-		Header->Name = _T( "Header" );
+		Header->Name = std::wstring( L"Header" );
 		MyMenu->Add( Header );
 		SetItemProperties( Header );
 		Header->Pos = Vector2( -1834.998f, 999.1272f );
@@ -165,16 +165,16 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( -1689.523f, 520.4127f );
 
 		// Escalation
-		item = AddChallenge( Challenge_Escalation::getInstance(), 0, 0, _T("Escalation") );
+		item = AddChallenge( Challenge_Escalation::getInstance(), 0, 0, std::wstring( L"Escalation" ) );
 
 		// Time Crisis
-		item = AddChallenge( Challenge_TimeCrisis::getInstance(), 0, Awardments::UnlockHeroRush2, _T("Time Crisis") );
+		item = AddChallenge( Challenge_TimeCrisis::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Time Crisis" ) );
 
 		// Hero Rush
-		item = AddChallenge( Challenge_HeroRush::getInstance(), 0, Awardments::UnlockHeroRush2, _T("Hero Rush") );
+		item = AddChallenge( Challenge_HeroRush::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Hero Rush" ) );
 
 		// Hero Rush 2
-		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, 0, _T("Hero Rush 2") );
+		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, 0, std::wstring( L"Hero Rush 2" ) );
 
 		// Bungee Co-op
 		//item = AddChallenge(Challenge_HeroRush2.Instance, Awardments.UnlockHeroRush2, null, "Bungee");
@@ -182,10 +182,10 @@ namespace CloudberryKingdom
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f );
 		if ( Long )
 			backdrop->setSizeY( backdrop->getSizeY() * 1.02f );
-		MyPile->Add( backdrop, _T( "Backdrop" ) );
+		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
 		backdrop->setPos( Vector2( 9.921265f, -111.1109f ) + Vector2( -297.6191f, 15.87299f ) );
 
 		// Position

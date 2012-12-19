@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_PressStart::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_PressStart::SlideOut( PresetPos Preset, int Frames )
 	{
 		CkBaseMenu::SlideOut( Preset, 0 );
 	}
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_PressStart::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "" ) );
+		_t = MyPile->FindEzText( std::wstring( L"" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -11.11157f, -461.111f ) );

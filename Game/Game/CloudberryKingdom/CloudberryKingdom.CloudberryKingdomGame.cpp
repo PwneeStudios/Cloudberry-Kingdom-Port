@@ -120,27 +120,27 @@ namespace CloudberryKingdom
 		Menu::DefaultMenuInfo::SelectedBackColor = ( bColor( 250, 100, 100, 255 ) ).ToVector4();
 		Menu::DefaultMenuInfo::UnselectedNextColor = ( bColor( 40, 180, 40, 255 ) ).ToVector4();
 		Menu::DefaultMenuInfo::UnselectedBackColor = ( bColor( 180, 40, 40, 255 ) ).ToVector4();
-		Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( _T( "Menu_Hover" ),.7f );
-		Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( _T( "Menu_Select" ),.6f );
-		Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( _T( "Menu_Tick" ),.3f );
-		Menu::DefaultMenuInfo::Menu_ListScroll_Sound = Tools::NewSound( _T( "Menu_Hover" ),.5f );
-		Menu::DefaultMenuInfo::Menu_Back_Sound = Tools::NewSound( _T( "Menu_Back" ),.8f );
+		Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( std::wstring( L"Menu_Hover" ),.7f );
+		Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( std::wstring( L"Menu_Select" ),.6f );
+		Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( std::wstring( L"Menu_Tick" ),.3f );
+		Menu::DefaultMenuInfo::Menu_ListScroll_Sound = Tools::NewSound( std::wstring( L"Menu_Hover" ),.5f );
+		Menu::DefaultMenuInfo::Menu_Back_Sound = Tools::NewSound( std::wstring( L"Menu_Back" ),.8f );
 		Menu::DefaultMenuInfo::Menu_Slide_SoundDelay = 8;
-		Menu::DefaultMenuInfo::MenuRightArrow_Texture = Tools::Texture( _T( "ListRightArrow" ) );
-		Menu::DefaultMenuInfo::MenuLeftArrow_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
+		Menu::DefaultMenuInfo::MenuRightArrow_Texture = Tools::Texture( std::wstring( L"ListRightArrow" ) );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Texture = Tools::Texture( std::wstring( L"ListLeftArrow" ) );
 		Menu::DefaultMenuInfo::MenuRightArrow_Offset = Vector2( 20, -14 );
 		Menu::DefaultMenuInfo::MenuLeftArrow_Offset = Vector2( -20, -14 );
 		Menu::DefaultMenuInfo::MenuArrow_Size = Vector2( 45, 45 );
 		Menu::DefaultMenuInfo::MenuArrow_Color = ( bColor( 255, 255, 255, 255 ) ).ToVector4();
-		Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture = Tools::Texture( _T( "ListRightArrow" ) );
-		Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture = Tools::Texture( _T( "ListLeftArrow" ) );
+		Menu::DefaultMenuInfo::MenuRightArrow_Selected_Texture = Tools::Texture( std::wstring( L"ListRightArrow" ) );
+		Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Texture = Tools::Texture( std::wstring( L"ListLeftArrow" ) );
 		Menu::DefaultMenuInfo::MenuRightArrow_Selected_Offset = Vector2( 20, -14 );
 		Menu::DefaultMenuInfo::MenuLeftArrow_Selected_Offset = Vector2( -20, -14 );
 		Menu::DefaultMenuInfo::MenuArrow_Selected_Size = Vector2( 45, 45 );
 		Menu::DefaultMenuInfo::MenuArrow_Selected_Color = ( bColor( 255, 255, 255, 0 ) ).ToVector4();
-		Menu::DefaultMenuInfo::SliderBack_Texture = Tools::Texture( _T( "menuslider_bar" ) );
+		Menu::DefaultMenuInfo::SliderBack_Texture = Tools::Texture( std::wstring( L"menuslider_bar" ) );
 		Menu::DefaultMenuInfo::SliderBack_Size = Vector2( 250, 35 );
-		Menu::DefaultMenuInfo::Slider_Texture = Tools::Texture( _T( "menuslider_slider" ) );
+		Menu::DefaultMenuInfo::Slider_Texture = Tools::Texture( std::wstring( L"menuslider_slider" ) );
 		Menu::DefaultMenuInfo::Slider_StartPos = Vector2( -210, 0 );
 		Menu::DefaultMenuInfo::Slider_EndPos = Vector2( 210, 0 );
 		Menu::DefaultMenuInfo::Slider_Size = Vector2( 28, 55 );
@@ -208,8 +208,8 @@ bool CloudberryKingdomGame::LoadDynamic = false;
 #endif
 
 bool CloudberryKingdomGame::ShowSongInfo = true;
-std::wstring CloudberryKingdomGame::TileSetToTest = _T( "cave" );
-std::wstring CloudberryKingdomGame::ModRoot = _T( "Standard" );
+std::wstring CloudberryKingdomGame::TileSetToTest = std::wstring( L"cave" );
+std::wstring CloudberryKingdomGame::ModRoot = std::wstring( L"Standard" );
 bool CloudberryKingdomGame::AlwaysSkipDynamicArt = false;
 bool CloudberryKingdomGame::HideGui = false;
 bool CloudberryKingdomGame::HideForeground = false;
@@ -290,7 +290,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//MyGraphicsDeviceManager->PreparingDeviceSettings += boost::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		// Pull these out, so they aren't inside the constructor.
-		//Tools::GameClass->getContent()->RootDirectory = _T("Content");
+		//Tools::GameClass->getContent()->RootDirectory = std::wstring( L"Content" );
 		//Tools::TheGame = shared_from_this();
 	}
 
@@ -486,8 +486,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Tools::Render = boost::make_shared<MainRender>( MyGraphicsDevice );
 
 		Tools::QDrawer = boost::make_shared<QuadDrawer>( MyGraphicsDevice, 1000 );
-		Tools::QDrawer->DefaultEffect = Tools::EffectWad->FindByName( _T( "NoTexture" ) );
-		Tools::QDrawer->DefaultTexture = Tools::TextureWad->FindByName( _T( "White" ) );
+		Tools::QDrawer->DefaultEffect = Tools::EffectWad->FindByName( std::wstring( L"NoTexture" ) );
+		Tools::QDrawer->DefaultTexture = Tools::TextureWad->FindByName( std::wstring( L"White" ) );
 
 		Tools::Device = MyGraphicsDevice;
 		Tools::t = 0;
@@ -547,7 +547,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#endif
 
 		// FIXME: Start videos later.
-		//MainVideo::StartVideo_CanSkipIfWatched( _T( "LogoSalad" ) );
+		//MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 	}
 
 	void CloudberryKingdomGame::UnloadContent()
@@ -964,30 +964,30 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start2();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Environments") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Environments" ) );
 		long long LoadEnviros = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Bob") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Bob" ) );
 		long long LoadBob = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Menu") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Menu" ) );
 		long long LoadMenus = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Coins") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
 		//Tools.TextureWad.LoadFolder(Tools.GameClass.Content, "Effects");
 		long long LoadEffects = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Buttons") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Characters") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("HeroItems") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Initial") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Level") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Old Art Holdover") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Title") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old Art Holdover" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
 		long long LoadRest = Stop();
 
 		Tools::Write( _T( "ArtMusic done..." ) );
@@ -1081,7 +1081,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		std::wcout << Tools::GameClass->getContent()->RootDirectory << std::endl;
 
-		Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Snow"));
+		Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Snow" ));
 
 
 		long long big = 0;
@@ -1090,20 +1090,20 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0001"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0002"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0003"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0004"));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0001" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0002" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0003" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0004" ));
 		}
 		small = Stop();
 
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Castle/Pillars/Pillar_Castle_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cave/Pillars/Pillar_Cave_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cloud/Pillars/Pillar_Cloud_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Forest/Pillars/Pillar_Forest_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Castle/Pillars/Pillar_Castle_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Cave/Pillars/Pillar_Cave_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Cloud/Pillars/Pillar_Cloud_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Forest/Pillars/Pillar_Forest_1000" ));
 		}
 		big = Stop();
 
@@ -1304,7 +1304,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	}
 #endif
 
-	std::wstring CloudberryKingdomGame::debugstring = _T( "" );
+	std::wstring CloudberryKingdomGame::debugstring = std::wstring( L"" );
 
 	void CloudberryKingdomGame::DrawDebugInfo()
 	{
@@ -1312,7 +1312,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		//if ( Tools::ShowNums )
 		//{
-		//	std::wstring nums = Tools::Num_0_to_2 + _T( "\n\n" ) + Tools::Num_0_to_360;
+		//	std::wstring nums = Tools::Num_0_to_2 + std::wstring( L"\n\n" ) + Tools::Num_0_to_360;
 
 		//	Tools::StartSpriteBatch();
 		//	Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, nums, Vector2( 0, 100 ), Color::Orange, 0, Vector2(),.4f, SpriteEffects::None, 0 );
@@ -1425,12 +1425,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//TileSetToTest = "sea_rain";
 		//TileSetToTest = "hills";
 		//TileSetToTest = "forest";
-		TileSetToTest = _T( "cloud" );
+		TileSetToTest = std::wstring( L"cloud" );
 		//TileSetToTest = "cave";
 		//TileSetToTest = "castle";
 
-		if ( TileSetToTest == _T( "" ) )
-			data->SetTileSet( _T( "castle" ) );
+		if ( TileSetToTest == std::wstring( L"" ) )
+			data->SetTileSet( std::wstring( L"castle" ) );
 		else
 			data->SetTileSet( TileSetToTest );
 

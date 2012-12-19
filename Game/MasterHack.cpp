@@ -9,6 +9,46 @@
 namespace CloudberryKingdom
 {
 
+	void CharacterSelect_PostConstruct( const boost::shared_ptr<CharacterSelect> &This, int PlayerIndex, bool QuickJoin )
+	{
+		boost::shared_ptr<GameData> game = Tools::CurGameData;
+
+		Tools::StartGUIDraw();
+
+		This->PlayerIndex = PlayerIndex;
+		This->QuickJoin = QuickJoin;
+
+		This->InitCenters();
+		This->Center = This->Centers[ PlayerIndex ];
+		This->NormalZoomCenter = This->Center;
+
+		This->MyDoll = MakeMagic( Doll, ( PlayerIndex, This->shared_from_this() ) );
+		This->MyGamerTag = MakeMagic( GamerTag, ( PlayerIndex, This->shared_from_this() ) );
+		This->MyHeroLevel = MakeMagic( HeroLevel, ( PlayerIndex, This->shared_from_this() ) );
+		game->AddGameObject( This->MyDoll );
+		game->AddGameObject( This->MyGamerTag );
+		game->AddGameObject( This->MyHeroLevel );
+
+		This->InitColorScheme( PlayerIndex );
+
+		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, This->shared_from_this() ) ) );
+
+		Tools::EndGUIDraw();
+	}
+
+
+	void MenuList_PostConstruct( const boost::shared_ptr<MenuList> &This )
+	{
+		This->setOverrideA( false );
+
+	#if defined(PC_VERSION)
+		This->Padding.Y = 7;
+		This->setExpandOnGo( true );
+	#endif
+
+		This->InitializeArrows();
+	}
+
 	void Bob_PostConstruct( const boost::shared_ptr<Bob> &This, const boost::shared_ptr<BobPhsx> &type, bool boxesOnly )
 	{
 		This->SetHeroPhsx( This->MyHeroType );
@@ -60,7 +100,7 @@ namespace CloudberryKingdom
 		This->AnimName = std::vector<std::wstring>( 50 );
 		for ( int i = 0; i < 50; i++ )
 		{
-			This->AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
+			This->AnimName[ i ] = std::wstring( L"Anim_" ) + StringConverterHelper::toString( i );
 			This->AnimSpeed[ i ] = 1;
 		}
 

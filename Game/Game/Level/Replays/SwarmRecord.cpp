@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		BobQuad->Base.e2 *= 100;
 		BobQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		BobQuad->Quad_Renamed.setMyTexture( boost::make_shared<EzTexture>() );
-		BobQuad->Quad_Renamed.getMyTexture()->Name = _T( "BobQuad" );
+		BobQuad->Quad_Renamed.getMyTexture()->Name = std::wstring( L"BobQuad" );
 	}
 
 	void SwarmRecord::Draw( int Step, const boost::shared_ptr<Level> &level, std::vector<boost::shared_ptr<SpriteAnimGroup> > AnimGroup, std::vector<boost::shared_ptr<BobLink> > &BobLinks )

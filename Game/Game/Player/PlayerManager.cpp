@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 		PlayerManager::SavePlayerData = 0;
 
 #if defined(PC_VERSION)
-		PlayerManager::_DefaultName = _T( "" );
+		PlayerManager::_DefaultName = std::wstring( L"" );
 #endif
 
-		std::wstring tempVector[] = { _T( "Honky Tonk" ), _T( "Bosco" ), _T( "Nuh Guck" ), _T( "Short-shorts" ), _T( "Itsy-bitsy" ), _T( "Low Ball" ), _T( "Cowboy Stu" ), _T( "Capsaicin" ), _T( "Hoity-toity" ), _T( "Ram Bam" ), _T( "King Kong" ), _T( "Upsilon" ), _T( "Omega" ), _T( "Peristaltic Pump" ), _T( "Jeebers" ), _T( "Sugar Cane" ), _T( "See-Saw" ), _T( "Ink Blot" ), _T( "Glottal Stop" ), _T( "Olive Oil" ), _T( "Cod Fish" ), _T( "Flax" ), _T( "Tahini" ), _T( "Cotton Ball" ), _T( "Sweet Justice" ), _T( "Ham Sandwich" ), _T( "Liverwurst" ), _T( "Cumulus" ), _T( "Oyster" ), _T( "Klein" ), _T( "Hippopotamus" ), _T( "Bonobo" ), _T( "Homo Erectus" ), _T( "Australopithecine" ), _T( "Quetzalcoatl" ), _T( "Balogna" ), _T( "Ceraunoscopy" ), _T( "Shirley" ), _T( "Susie" ), _T( "Sally" ), _T( "Sue" ), _T( "Tyrannosaur" ), _T( "Stick Man Chu" ), _T( "Paragon" ), _T( "Woodchuck" ), _T( "Laissez Faire" ), _T( "Ipso Facto" ), _T( "Leviticus" ), _T( "Berrylicious" ), _T( "Elderberry" ), _T( "Currant" ), _T( "Blackberry" ), _T( "Blueberry" ), _T( "Strawberry" ), _T( "Gooseberry" ), _T( "Honeysuckle" ), _T( "Nannyberry" ), _T( "Hackberry" ), _T( "Boysenberry" ), _T( "Cloudberry" ), _T( "Thimbleberry" ), _T( "Huckleberry" ), _T( "Bilberry" ), _T( "Bearberry" ), _T( "Mulberry" ), _T( "Wolfberry" ), _T( "Raisin" ), _T( "Samson" ) };
+		std::wstring tempVector[] = { std::wstring( L"Honky Tonk" ), std::wstring( L"Bosco" ), std::wstring( L"Nuh Guck" ), std::wstring( L"Short-shorts" ), std::wstring( L"Itsy-bitsy" ), std::wstring( L"Low Ball" ), std::wstring( L"Cowboy Stu" ), std::wstring( L"Capsaicin" ), std::wstring( L"Hoity-toity" ), std::wstring( L"Ram Bam" ), std::wstring( L"King Kong" ), std::wstring( L"Upsilon" ), std::wstring( L"Omega" ), std::wstring( L"Peristaltic Pump" ), std::wstring( L"Jeebers" ), std::wstring( L"Sugar Cane" ), std::wstring( L"See-Saw" ), std::wstring( L"Ink Blot" ), std::wstring( L"Glottal Stop" ), std::wstring( L"Olive Oil" ), std::wstring( L"Cod Fish" ), std::wstring( L"Flax" ), std::wstring( L"Tahini" ), std::wstring( L"Cotton Ball" ), std::wstring( L"Sweet Justice" ), std::wstring( L"Ham Sandwich" ), std::wstring( L"Liverwurst" ), std::wstring( L"Cumulus" ), std::wstring( L"Oyster" ), std::wstring( L"Klein" ), std::wstring( L"Hippopotamus" ), std::wstring( L"Bonobo" ), std::wstring( L"Homo Erectus" ), std::wstring( L"Australopithecine" ), std::wstring( L"Quetzalcoatl" ), std::wstring( L"Balogna" ), std::wstring( L"Ceraunoscopy" ), std::wstring( L"Shirley" ), std::wstring( L"Susie" ), std::wstring( L"Sally" ), std::wstring( L"Sue" ), std::wstring( L"Tyrannosaur" ), std::wstring( L"Stick Man Chu" ), std::wstring( L"Paragon" ), std::wstring( L"Woodchuck" ), std::wstring( L"Laissez Faire" ), std::wstring( L"Ipso Facto" ), std::wstring( L"Leviticus" ), std::wstring( L"Berrylicious" ), std::wstring( L"Elderberry" ), std::wstring( L"Currant" ), std::wstring( L"Blackberry" ), std::wstring( L"Blueberry" ), std::wstring( L"Strawberry" ), std::wstring( L"Gooseberry" ), std::wstring( L"Honeysuckle" ), std::wstring( L"Nannyberry" ), std::wstring( L"Hackberry" ), std::wstring( L"Boysenberry" ), std::wstring( L"Cloudberry" ), std::wstring( L"Thimbleberry" ), std::wstring( L"Huckleberry" ), std::wstring( L"Bilberry" ), std::wstring( L"Bearberry" ), std::wstring( L"Mulberry" ), std::wstring( L"Wolfberry" ), std::wstring( L"Raisin" ), std::wstring( L"Samson" ) };
 		PlayerManager::RandomNames = VecFromArray( tempVector );
 		PlayerManager::FirstPlayer = 0;
 		PlayerManager::HaveFirstPlayer = false;
@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 
 				// Load the names of videos the user has already watched.
 				case 5:
-					std::wstring VideoName = _T( "" );
+					std::wstring VideoName = std::wstring( L"" );
 					chunk->ReadSingle( VideoName );
 					UserPowers::WatchedVideo.Add( VideoName );
 					break;
@@ -219,7 +219,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void PlayerManager::SaveRezAndKeys()
 	{
-		EzStorage::Save( _T( "Settings" ), _T( "Custom" ), boost::static_pointer_cast<Lambda_1<boost::shared_ptr<BinaryWriter> > >( boost::make_shared<SaveRezAndKeysLambda>() ), 0 );
+		EzStorage::Save( std::wstring( L"Settings" ), std::wstring( L"Custom" ), boost::static_pointer_cast<Lambda_1<boost::shared_ptr<BinaryWriter> > >( boost::make_shared<SaveRezAndKeysLambda>() ), 0 );
 	}
 #endif
 
@@ -271,7 +271,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	RezData PlayerManager::LoadRezAndKeys()
 	{
-		EzStorage::Load( _T( "Settings" ), _T( "Custom" ), boost::make_shared<LoadRezAndKeysLambda>(), 0 );
+		EzStorage::Load( std::wstring( L"Settings" ), std::wstring( L"Custom" ), boost::make_shared<LoadRezAndKeysLambda>(), 0 );
 
 		return d;
 	}
@@ -478,7 +478,7 @@ namespace CloudberryKingdom
 		}
 
 		// Concatenate the names together
-		std::wstring GroupTag = _T( "" );
+		std::wstring GroupTag = std::wstring( L"" );
 		//foreach (StringBuilder str in names)
 		for ( int i = 0; i < static_cast<int>( names.size() ); i++ )
 		{
@@ -503,7 +503,8 @@ namespace CloudberryKingdom
 	int PlayerManager::MaxPlayerHighScore( int GameId )
 	{
 		int max = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			max = __max( max, ( *player )->GetHighScore( GameId ) );
 
 		return max;
@@ -565,7 +566,8 @@ namespace CloudberryKingdom
 			return;
 
 		// Give the hat to each player
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 			( *p )->Purchases->Add( buyable->GetGuid() );
 
 		SavePlayerData->Changed = true;
@@ -580,7 +582,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetGameScore()
 	{
 		int score = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			score += ( *player )->GetGameScore();
 
 		return score;
@@ -589,7 +592,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetGameScore_WithTemporary()
 	{
 		int score = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			score += ( *player )->GetGameScore() + (*player)->TempStats->Score;
 
 		return score;
@@ -598,7 +602,8 @@ namespace CloudberryKingdom
 	int PlayerManager::PlayerSum( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int sum = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			if ( *player != 0 )
 				sum += f->Apply( *player );
@@ -610,7 +615,8 @@ namespace CloudberryKingdom
 	int PlayerManager::PlayerMax( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int max = INT_MIN;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			if ( *player != 0 )
 				max = __max( max, f->Apply( *player ) );
@@ -622,7 +628,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetLevelCoins()
 	{
 		int coins = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			coins += ( *player )->GetLevelCoins();
 
 		return coins;
@@ -755,7 +762,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 
 		return -1;
 		// FIXME: No exceptions!
-		//throw ( std::exception( _T( "PlayerIndex not found!" ) ) );
+		//throw ( std::exception( std::wstring( L"PlayerIndex not found!" ) ) );
 	}
 
 	void PlayerManager::KillPlayer( PlayerIndex PIndex )

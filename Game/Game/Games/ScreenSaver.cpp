@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::RecordScratchLambda::Apply()
 	{
-		Tools::SoundWad->FindByName( _T( "Record_Scratch" ) )->Play();
+		Tools::SoundWad->FindByName( std::wstring( L"Record_Scratch" ) )->Play();
 	}
 
 	ScreenSaver::WindLambda::WindLambda( const boost::shared_ptr<FancyVector2> &wind_t )
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 		Difficulty = 4;
 		Paths = 1;
 		FixedHero = BobPhsxNormal::getInstance();
-		FixedTileSet = TileSet::Get( _T( "sea" ) );
+		FixedTileSet = TileSet::Get( std::wstring( L"sea" ) );
 
 		InitialFadeInSpeed = 1;
 		InitialDarkness = 0;
@@ -378,7 +378,7 @@ namespace CloudberryKingdom
 				lvl->MyGame->WaitThenDo( KillCapeDelay + InitialDarkness, boost::make_shared<WindLambda>( wind_t ) );
 
 				lvl->MyGame->WaitThenDo( zoomout_start - 3 - 3, boost::make_shared<RecordScratchLambda>() );
-				Tools::SongWad->SetPlayList( _T( "Ripcurl^Blind_Digital" ) );
+				Tools::SongWad->SetPlayList( std::wstring( L"Ripcurl^Blind_Digital" ) );
 				Tools::SongWad->Restart( true, false );
 				Tools::SongWad->Pause();
 				lvl->MyGame->WaitThenDo( zoomout_start + zoomout_length + 28, boost::make_shared<StartMusicLambda>() );
@@ -442,12 +442,12 @@ namespace CloudberryKingdom
 		if ( FixedTileSet == 0 )
 		{
 			std::vector<std::wstring> tileset_choices;
-			tileset_choices.push_back( _T( "forest" ) );
-			tileset_choices.push_back( _T( "cave" ) );
-			tileset_choices.push_back( _T( "castle" ) );
-			tileset_choices.push_back( _T( "cloud" ) );
-			tileset_choices.push_back( _T( "hills" ) );
-			tileset_choices.push_back( _T( "sea" ) );
+			tileset_choices.push_back( std::wstring( L"forest" ) );
+			tileset_choices.push_back( std::wstring( L"cave" ) );
+			tileset_choices.push_back( std::wstring( L"castle" ) );
+			tileset_choices.push_back( std::wstring( L"cloud" ) );
+			tileset_choices.push_back( std::wstring( L"hills" ) );
+			tileset_choices.push_back( std::wstring( L"sea" ) );
 
 			data->SetTileSet( Tools::GlobalRnd->ChooseOne( tileset_choices ) );
 		}

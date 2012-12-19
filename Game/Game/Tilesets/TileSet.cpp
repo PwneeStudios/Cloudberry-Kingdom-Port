@@ -134,13 +134,13 @@ namespace CloudberryKingdom
 		FlexibleHeight = false;
 		HasCeiling = false;
 
-		Name = _T( "" );
-		MyPath = _T( "" );
+		Name = std::wstring( L"" );
+		MyPath = std::wstring( L"" );
 		Guid = 0;
 
 		Tint = Vector4( 1 );
 
-		ScreenshotString = _T( "" );
+		ScreenshotString = std::wstring( L"" );
 
 		MyBackgroundType = BackgroundType::Random;
 
@@ -199,7 +199,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<PieceQuad> TileSet::ParseBlock( std::vector<std::wstring> &bits, const std::wstring &first, const boost::shared_ptr<BlockGroup> &group )
 	{
 		// Get the block width
-		std::wstring num_str = first.substr( first.find( _T( "_" ) ) + 1 );
+		std::wstring num_str = first.substr( first.find( std::wstring( L"_" ) ) + 1 );
 		int width = ParseInt( num_str );
 
 		// Get the rest of the information
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<PieceQuad> c = boost::make_shared<PieceQuad>();
 		c->Init( 0, Tools::BasicEffect );
 
-		bool IsTile = Tools::BitsHasBit( bits, _T( "tile" ) );
+		bool IsTile = Tools::BitsHasBit( bits, std::wstring( L"tile" ) );
 
 		if ( IsTile )
 		{
@@ -253,42 +253,42 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
 //			switch (bits[i])
 //ORIGINAL LINE: case "upside_down":
-			if ( bits[ i ] == _T( "upside_down" ) )
+			if ( bits[ i ] == std::wstring( L"upside_down" ) )
 			{
 					c->Data.UpsideDown = true;
 			}
 //ORIGINAL LINE: case "mirror":
-			else if ( bits[ i ] == _T( "mirror" ) )
+			else if ( bits[ i ] == std::wstring( L"mirror" ) )
 			{
 					c->Data.Mirror = true;
 			}
 //ORIGINAL LINE: case "box_height":
-			else if ( bits[ i ] == _T( "box_height" ) )
+			else if ( bits[ i ] == std::wstring( L"box_height" ) )
 			{
 					c->BoxHeight = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "width":
-			else if ( bits[ i ] == _T( "width" ) )
+			else if ( bits[ i ] == std::wstring( L"width" ) )
 			{
 					c->Data.RepeatWidth = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "height":
-			else if ( bits[ i ] == _T( "height" ) )
+			else if ( bits[ i ] == std::wstring( L"height" ) )
 			{
 					c->Data.RepeatHeight = 2 * ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "left":
-			else if ( bits[ i ] == _T( "left" ) )
+			else if ( bits[ i ] == std::wstring( L"left" ) )
 			{
 					c->Data.Center_BL_Shift.X = ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "right":
-			else if ( bits[ i ] == _T( "right" ) )
+			else if ( bits[ i ] == std::wstring( L"right" ) )
 			{
 					c->Data.Center_TR_Shift.X = ParseFloat( bits[ i + 1 ] );
 			}
 //ORIGINAL LINE: case "top":
-			else if ( bits[ i ] == _T( "top" ) )
+			else if ( bits[ i ] == std::wstring( L"top" ) )
 			{
 					float shift = ParseFloat( bits[ i + 1 ] );
 					c->Data.Center_TR_Shift.Y = shift;
@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			Tools::Log( Format( _T( "Could not find %ls of width %f for tileset %ls" ), _T( "block" ), width, Name.c_str() ) );
+			Tools::Log( Format( _T( "Could not find %ls of width %f for tileset %ls" ), std::wstring( L"block" ), width, Name.c_str() ) );
 			return 0;
 		}
 	}

@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 				MyPile->BubbleUp( true );
 
 				// Hide
-				MyGame->WaitThenDo( 28, boost::make_shared<MyPhsxStepHelper>( boost::static_pointer_cast<GUI_BlobQuota>( shared_from_this() ) ), _T( "" ), true, true );
+				MyGame->WaitThenDo( 28, boost::make_shared<MyPhsxStepHelper>( boost::static_pointer_cast<GUI_BlobQuota>( shared_from_this() ) ), std::wstring( L"" ), true, true );
 
 				//FinalDoor.SetLock(false);
 
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		boost::shared_ptr<QuadClass> cloud = boost::make_shared<QuadClass>( _T( "Cloud1" ), 150.f, true );
+		boost::shared_ptr<QuadClass> cloud = boost::make_shared<QuadClass>( std::wstring( L"Cloud1" ), 150.f, true );
 		cloud->setPos( Vector2( 193.0659f, -22.74048f ) );
 		cloud->setSize( Vector2( 465.5865f, 259.2372f ) );
 		MyPile->Add( cloud );
@@ -183,7 +183,7 @@ namespace CloudberryKingdom
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Blob = boost::make_shared<QuadClass>( _T( "Score/Blob" ), 150.f, true );
+		Blob = boost::make_shared<QuadClass>( std::wstring( L"Score/Blob" ), 150.f, true );
 		Blob->setPos( Vector2( -26.84131f, 11.98175f ) );
 		Blob->setSize( Vector2( 122.2223f, 193.6508f ) );
 		Blob->ScaleXToMatchRatio();

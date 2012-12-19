@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 
 	void BackgroundFloaterList::InitializeInstanceFields()
 	{
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		Foreground = false;
 		Fixed = false;
 		Show = true;

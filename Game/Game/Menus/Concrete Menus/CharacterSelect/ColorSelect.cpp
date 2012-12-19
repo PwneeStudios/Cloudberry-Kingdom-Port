@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -110,7 +112,8 @@ namespace CloudberryKingdom
 		MyMenu->OnA = Cast::ToMenu( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 
 		MyList = boost::make_shared<MenuList>();
-		MyList->Name = _T( "list" );
+			MenuList_PostConstruct( MyList );
+		MyList->Name = std::wstring( L"list" );
 		MyList->Center = true;
 		MyList->OnIndexSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) );
 		MyList->setGo( Cast::ToItem( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) );
@@ -118,18 +121,18 @@ namespace CloudberryKingdom
 
 		//var Done = new MenuItem(new EzText("Use", ItemFont));
 		boost::shared_ptr<MenuItem> Done = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_USE, ItemFont ) );
-		Done->Name = _T( "Done" );
+		Done->Name = std::wstring( L"Done" );
 		Done->setGo( Cast::ToItem( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( Done );
 
 		//var BackButton = new MenuItem(new EzText("{pBackArrow2,80,?}", ItemFont));
 		//var BackButton = new MenuItem(new EzText("Cancel", ItemFont));
 		boost::shared_ptr<MenuItem> BackButton = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) );
-		BackButton->Name = _T( "Cancel" );
+		BackButton->Name = std::wstring( L"Cancel" );
 		BackButton->setGo( Cast::ToItem( boost::make_shared<BackProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( BackButton );
 
-		MyPile->Add( boost::make_shared<EzText>( Header, Resources::Font_Grobold42, true ), _T( "Header" ) );
+		MyPile->Add( boost::make_shared<EzText>( Header, Resources::Font_Grobold42, true ), std::wstring( L"Header" ) );
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
@@ -139,7 +142,7 @@ namespace CloudberryKingdom
 		 CkBaseMenu::OnAdd();
 
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "list" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"list" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 83.33337f, 153.1746f ) );
@@ -147,7 +150,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.375f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Done" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Done" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -177.4444f, 46.11105f ) );
@@ -155,7 +158,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5535835f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Cancel" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Cancel" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -183.0001f, -79.44217f ) );
@@ -167,7 +170,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -1418.571f, -484.127f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 87.69827f, 534.1268f ) );

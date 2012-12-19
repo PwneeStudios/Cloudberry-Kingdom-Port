@@ -16,9 +16,12 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu
 	{
-	
-		using GUI_Panel::Call;
 
+		using ArcadeBaseMenu::SlideOut;
+		using ArcadeBaseMenu::SlideIn;
+		using ArcadeBaseMenu::Call;
+
+		using GUI_Panel::Call;
 	
 		struct OnSelectProxy : public Lambda
 		{
@@ -73,7 +76,7 @@ namespace CloudberryKingdom
 	
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 	
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );

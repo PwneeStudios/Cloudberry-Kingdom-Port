@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 #if ! defined(EDITOR)
 	bool EzTexture::Load()
 	{
-		if ( _Tex == 0 && Path != _T( "" ) )
+		if ( _Tex == 0 && Path != std::wstring( L"" ) )
 		{
 			_Tex = Tools::GameClass->getContent()->Load<Texture2D>(Path);
 			/*Width = _Tex->Width;

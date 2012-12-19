@@ -24,13 +24,13 @@ namespace CloudberryKingdom
 		{
 			MyQuad = boost::make_shared<QuadClass>();
 			MyQuad->Quad_Renamed.U_Wrap = true;
-			MyQuad->setTextureName( _T( "Conveyor" ) );
+			MyQuad->setTextureName( std::wstring( L"Conveyor" ) );
 
 			LeftEnd = boost::make_shared<QuadClass>();
-			LeftEnd->setTextureName( _T( "ConveyorEnd" ) );
+			LeftEnd->setTextureName( std::wstring( L"ConveyorEnd" ) );
 
 			RightEnd = boost::make_shared<QuadClass>();
-			RightEnd->setTextureName( _T( "ConveyorEnd" ) );
+			RightEnd->setTextureName( std::wstring( L"ConveyorEnd" ) );
 		}
 
 		MyBox = boost::make_shared<AABox>();
@@ -175,7 +175,7 @@ namespace CloudberryKingdom
 		{
 			if ( !getBlockCore()->BoxesOnly )
 			{
-				MyQuad->setTextureName( _T( "Chain_Tile" ) );
+				MyQuad->setTextureName( std::wstring( L"Chain_Tile" ) );
 				MyQuad->Base.Origin = MyBox->Current->Center;
 				MyQuad->Draw();
 

@@ -18,7 +18,7 @@ struct StreamReader
 
 	std::wstring ReadLine()
 	{
-		return _T( "" );
+		return std::wstring( L"" );
 	}
 
 	void Close() { }

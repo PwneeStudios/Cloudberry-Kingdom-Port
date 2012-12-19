@@ -496,40 +496,6 @@ namespace CloudberryKingdom
 			( *box )->SetHold();
 	}
 
-#if defined(EDITOR)
-	void ObjectClass::DeleteFrame( int anim, int frame )
-	{
-		if ( frame <= AnimLength[ anim ] )
-		{
-			AnimLength[ anim ]--;
-
-			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.DeleteFrame( anim, frame );
-			for ( std::vector<boost::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
-				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.DeleteFrame( anim, frame );
-		}
-	}
-#endif
-
-#if defined(EDITOR)
-	void ObjectClass::InsertFrame( int anim, int frame )
-	{
-		if ( frame <= AnimLength[ anim ] )
-		{
-			AnimLength[ anim ]++;
-
-			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.InsertFrame( anim, frame );
-			for ( std::vector<boost::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
-				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.InsertFrame( anim, frame );
-		}
-	}
-#endif
-
 	void ObjectClass::Record( int anim, int frame, bool UseRelativeCoords )
 	{
 		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
@@ -599,7 +565,7 @@ namespace CloudberryKingdom
 	ObjectClass::ObjectClass()
 	{
 		InitializeInstanceFields();
-		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 	}
 
 	ObjectClass::ObjectClass( const boost::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
@@ -789,7 +755,7 @@ namespace CloudberryKingdom
 		//AnimName = std::vector<std::wstring>( 50 );
 		//for ( int i = 0; i < 50; i++ )
 		//{
-		//	AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
+		//	AnimName[ i ] = std::wstring( L"Anim_" ) + StringConverterHelper::toString( i );
 		//	AnimSpeed[ i ] = 1;
 		//}
 

@@ -8,9 +8,9 @@ namespace CloudberryKingdom
 
 	void BobPhsx::DefaultInfo::InitializeStatics()
 	{
-		BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( _T( "Jump5" ),.1f );
-		BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( _T( "BoxHero_Land" ), 1 );
-		BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( _T( "Jetpack" ),.15f );
+		BobPhsx::DefaultInfo::DoubleJump_Sound = Tools::NewSound( std::wstring( L"Jump5" ),.1f );
+		BobPhsx::DefaultInfo::BobBoxJump_Sound = Tools::NewSound( std::wstring( L"BoxHero_Land" ), 1 );
+		BobPhsx::DefaultInfo::BobJetpack_Sound = Tools::NewSound( std::wstring( L"Jetpack" ),.15f );
 		BobPhsx::DefaultInfo::BobJetpack_SoundDelay = 5;
 	}
 
@@ -143,15 +143,15 @@ namespace CloudberryKingdom
 
 	std::wstring BobPhsx::CustomPhsxData::ToString()
 	{
-		std::wstring str = _T( "ph:" );
+		std::wstring str = std::wstring( L"ph:" );
 
 		for ( size_t i = 0; i < data.size(); i++ )
 		{
 			str += ::ToString( data[ i ] );
 			if ( i + 1 < data.size() )
-				str += _T( "," );
+				str += std::wstring( L"," );
 		}
-		str += _T( ";" );
+		str += std::wstring( L";" );
 
 		return str;
 	}
@@ -984,8 +984,8 @@ namespace CloudberryKingdom
 		CustomPhsx = false;
 		Name = Localization::Words_NONE;
 		Id = -1;
-		Adjective = _T( "" );
-		NameTemplate = _T( "Hero" );
+		Adjective = std::wstring( L"" );
+		NameTemplate = std::wstring( L"Hero" );
 		DefaultIconWidth = 150;
 		CapeOffset = Vector2();
 		CapeOffset_Ducking = Vector2( -20, 0 );

@@ -181,7 +181,7 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Score/Score_Screen" ), 1440.f );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Score/Score_Screen" ), 1440.f );
 		backdrop->Quad_Renamed.SetColor( bColor( 220, 220, 220 ) );
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
@@ -192,25 +192,25 @@ namespace CloudberryKingdom
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		Text->setPos( Vector2( -675.6388f, 575.4443f ) );
-		MyPile->Add( Text, _T( "Header" ) );
+		MyPile->Add( Text, std::wstring( L"Header" ) );
 		//Text.Shadow = true;
 		Text->ShadowColor = Color( .36f,.36f,.36f,.86f );
 		Text->ShadowOffset = Vector2( -24, -20 );
 
 
 		// 'Levels' text
-		MyPile->Add( boost::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( _T( "Level" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( std::wstring( L"Level" ) ) ) );
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
-		MyPile->Add( Text, _T( "Level" ) );
+		MyPile->Add( Text, std::wstring( L"Level" ) );
 
 		// 'Score' text
-		MyPile->Add( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( _T( "Score" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( std::wstring( L"Score" ) ) ) );
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
-		MyPile->Add( Text, _T( "Score" ) );
+		MyPile->Add( Text, std::wstring( L"Score" ) );
 
 		// 'Distance' text
 		//Text = new EzText("Distance: " + Distance.ToString() + " feet", ItemFont);

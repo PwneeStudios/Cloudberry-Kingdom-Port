@@ -11,8 +11,8 @@ namespace CloudberryKingdom
 	{
 		LavaBlock::MakeNew();
 
-		MyQuad->setEffectName( _T( "Basic" ) );
-		MyQuad->setTextureName( _T( "Castle_Lava" ) );
+		MyQuad->setEffectName( std::wstring( L"Basic" ) );
+		MyQuad->setTextureName( std::wstring( L"Castle_Lava" ) );
 		TextureSize = Vector2( 2048, 128 ) * 1;
 	}
 

@@ -73,7 +73,7 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Campaign::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Campaign::SlideOut( PresetPos Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}
@@ -122,31 +122,31 @@ namespace CloudberryKingdom
 
 		// Chapter 1
 		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
-		item->Name = _T( "MainCampaign" );
+		item->Name = std::wstring( L"MainCampaign" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
 		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
-		item->Name = _T( "Easy" );
+		item->Name = std::wstring( L"Easy" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
 		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
-		item->Name = _T( "Hard" );
+		item->Name = std::wstring( L"Hard" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
 		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
-		item->Name = _T( "Hardcore" );
+		item->Name = std::wstring( L"Hardcore" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
 		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
-		item->Name = _T( "Maso" );
+		item->Name = std::wstring( L"Maso" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -167,7 +167,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Campaign::MakeHeader()
 	{
 		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
-		Header->Name = _T( "Header" );
+		Header->Name = std::wstring( L"Header" );
 		Header->setScale( Header->getScale() * 1.3f );
 		SetText( Header );
 		Header->OutlineColor = Color::Black.ToVector4();
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Campaign::SetPos_NoCinematic()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "MainCampaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"MainCampaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 686.4453f, 191.6667f ) );
@@ -207,7 +207,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, 186.1112f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Easy" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Easy" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 708.665f, -36.44455f ) );
@@ -216,7 +216,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hard" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hard" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 711.4443f, -239.5557f ) );
@@ -225,7 +225,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hardcore" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hardcore" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 714.2227f, -437.111f ) );
@@ -234,7 +234,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Maso" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Maso" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 730.8906f, -656.889f ) );
@@ -250,7 +250,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Campaign::SetPos_WithCinematic()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "MainCampaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"MainCampaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 686.4453f, 191.6667f ) );
@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, 186.1112f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Easy" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Easy" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 708.665f, -36.44455f ) );
@@ -268,7 +268,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hard" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hard" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 711.4443f, -239.5557f ) );
@@ -277,7 +277,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hardcore" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hardcore" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 714.2227f, -437.111f ) );
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Maso" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Maso" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 730.8906f, -656.889f ) );
@@ -295,7 +295,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Cine" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Cine" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 733.6666f, -876.6666f ) );
@@ -307,7 +307,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -783.3339f, 227.7778f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -800.0029f, 863.8889f ) );

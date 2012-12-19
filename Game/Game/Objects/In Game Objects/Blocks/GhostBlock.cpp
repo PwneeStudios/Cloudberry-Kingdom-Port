@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	void GhostBlock::GhostBlockTileInfo::InitializeInstanceFields()
 	{
 		Group = 0;
-		Sprite = Tools::TextureWad->FindTextureOrAnim( _T( "fading block" ) );
+		Sprite = Tools::TextureWad->FindTextureOrAnim( std::wstring( L"fading block" ) );
 		Shift = Vector2();
 	}
 

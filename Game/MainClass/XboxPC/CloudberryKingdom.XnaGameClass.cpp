@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	XnaGameClass::XnaGameClass()
 	{
-		Content = boost::make_shared<ContentManager>( _T( "Content" ) );
+		Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 
 		//Tools::GameClass = shared_from_this();
 		MyGame = boost::make_shared<CloudberryKingdomGame>();
@@ -38,7 +38,7 @@ namespace CloudberryKingdom
 	{
 		MyGame->Initialize();
 
-		//getWindow()->Title = _T("Cloudberry Kingdom ");
+		//getWindow()->Title = std::wstring( L"Cloudberry Kingdom " );
 		// FIXME: Set the title of the window to "Cloudberry Kingdom "
 
 		// This called the XNA base game struct method. Should not be needed.

@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 
 		MakeBackdrop();
 
-		SetText( _T( "Hold {pXbox_A,85,?} to jump higher!" ) );
+		SetText( std::wstring( L"Hold {pXbox_A,85,?} to jump higher!" ) );
 
 		return boost::static_pointer_cast<HintBlurb>( shared_from_this() );
 	}
@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 	void HintBlurb::MakeBackdrop()
 	{
 		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
-		Backdrop->setTextureName( _T( "WidePlaque" ) );
+		Backdrop->setTextureName( std::wstring( L"WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1250, 138 ) );
 		Backdrop->setPos( Vector2( 0, 0 ) );
 
@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( true );
 	}
 
-	void HintBlurb::SlideOut( const PresetPos &Preset, int Frames )
+	void HintBlurb::SlideOut( PresetPos Preset, int Frames )
 	{
 		if ( Frames == 0 )
 			return;

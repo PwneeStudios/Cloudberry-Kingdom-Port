@@ -34,10 +34,10 @@ namespace CloudberryKingdom
 			//obj.FindQuad("Wing1").Show = true;
 			//obj.FindQuad("Wing2").Show = true;
 			//obj.FindQuad("Wings").Show = true;
-			obj->FindQuad( _T( "Wings_Front" ) )->Show = true;
-			obj->FindQuad( _T( "Wings_Back" ) )->Show = true;
-			obj->FindQuad( _T( "Wings_Front" ) )->MyEffect = Tools::HslGreenEffect;
-			obj->FindQuad( _T( "Wings_Back" ) )->MyEffect = Tools::HslGreenEffect;
+			obj->FindQuad( std::wstring( L"Wings_Front" ) )->Show = true;
+			obj->FindQuad( std::wstring( L"Wings_Back" ) )->Show = true;
+			obj->FindQuad( std::wstring( L"Wings_Front" ) )->MyEffect = Tools::HslGreenEffect;
+			obj->FindQuad( std::wstring( L"Wings_Back" ) )->MyEffect = Tools::HslGreenEffect;
 
 			//BaseQuad quad = obj.FindQuad("Arm_Right");
 			//if (quad != null) quad.Show = false;
@@ -61,9 +61,9 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 0, 1, 0 );
 		Name = Localization::Words_DOUBLE_JUMP;
-		Adjective = _T( "double jump" );
+		Adjective = std::wstring( L"double jump" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
 	}
 

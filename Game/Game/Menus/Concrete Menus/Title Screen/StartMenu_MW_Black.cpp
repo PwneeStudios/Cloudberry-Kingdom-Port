@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Black::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Black::SlideOut( PresetPos Preset, int Frames )
 	{
 		CkBaseMenu::SlideOut( Preset, 0 );
 	}
@@ -37,10 +37,10 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		//Black = new QuadClass("BlackSwipe");
-		Black = boost::make_shared<QuadClass>( _T( "BlackSwipe_Vertical" ) );
+		Black = boost::make_shared<QuadClass>( std::wstring( L"BlackSwipe_Vertical" ) );
 		Black->ScaleXToMatchRatio( 1000 );
 		Black->setSizeX( Black->getSizeX() * 1.35f );
-		MyPile->Add( Black, _T( "Black" ) );
+		MyPile->Add( Black, std::wstring( L"Black" ) );
 
 		MyPile->setAlpha( 0 );
 

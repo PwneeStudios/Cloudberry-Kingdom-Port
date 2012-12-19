@@ -18,7 +18,11 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_Cinematics : public StartMenu
 	{
-	
+
+		using StartMenu::SlideOut;
+		using StartMenu::SlideIn;
+		using StartMenu::Call;
+
 		struct CinematicsGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
@@ -36,7 +40,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 	
 		void SetText( const boost::shared_ptr<EzText> &text );

@@ -30,8 +30,8 @@ namespace CloudberryKingdom
 		MyCamera = camera;
 
 		Circle = boost::make_shared<QuadClass>();
-		Circle->Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( _T( "Circle" ) );
-		Circle->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
+		Circle->Quad_Renamed.MyEffect = Tools::EffectWad->FindByName( std::wstring( L"Circle" ) );
+		Circle->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 
 		//Circle.TextureName = "Star";
 		//Circle.TextureName = "SpikeBlob";

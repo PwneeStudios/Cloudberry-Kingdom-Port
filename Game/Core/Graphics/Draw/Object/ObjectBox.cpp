@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 		TR = boost::make_shared<ObjectVector>();
 		TR->ModifiedEventCallback = boost::make_shared<ObjectVector::DefaultCallbackLambda>( TR->shared_from_this() );
 
-		Name = _T( "Box" );
+		Name = std::wstring( L"Box" );
 	}
 
 	void ObjectBox::Update()

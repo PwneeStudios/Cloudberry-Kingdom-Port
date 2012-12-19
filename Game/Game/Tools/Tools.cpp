@@ -33,9 +33,9 @@ namespace CloudberryKingdom
 		Tools::GameClass = 0;
 		Tools::TheGame = 0;
 
-		std::wstring tempVector2[] = { _T( "A" ), _T( "B" ), _T( "X" ), _T( "Y" ), _T( "RS" ), _T( "LS" ), _T( "RT" ), _T( "LT" ), _T( "RJ" ), _T( "RJ" ), _T( "LJ" ), _T( "LJ" ), _T( "DPad" ), _T( "Start" ) };
+		std::wstring tempVector2[] = { std::wstring( L"A" ), std::wstring( L"B" ), std::wstring( L"X" ), std::wstring( L"Y" ), std::wstring( L"RS" ), std::wstring( L"LS" ), std::wstring( L"RT" ), std::wstring( L"LT" ), std::wstring( L"RJ" ), std::wstring( L"RJ" ), std::wstring( L"LJ" ), std::wstring( L"LJ" ), std::wstring( L"DPad" ), std::wstring( L"Start" ) };
 		Tools::ButtonNames = VecFromArray( tempVector2 );
-		std::wstring tempVector3[] = { _T( "right" ), _T( "up" ), _T( "left" ), _T( "down" ) };
+		std::wstring tempVector3[] = { std::wstring( L"right" ), std::wstring( L"up" ), std::wstring( L"left" ), std::wstring( L"down" ) };
 		Tools::DirNames = VecFromArray( tempVector3 );
 		Tools::CurGameType = 0;
 		Tools::CurGameData = 0;
@@ -248,7 +248,7 @@ namespace CloudberryKingdom
 
 	bool Tools::RemoveBitsLambda::Apply( const std::wstring &bit )
 	{
-		return bit == _T( "" ) || bit == _T( " " ) || bit == _T( "\t" );
+		return bit == std::wstring( L"" ) || bit == std::wstring( L" " ) || bit == std::wstring( L"\t" );
 	}
 
 	void Tools::Assert( bool MustBeTrue )
@@ -263,7 +263,7 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Implement log.
 
-		/*boost::shared_ptr<System::IO::FileStream> stream = File->Open( _T( "dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
+		/*boost::shared_ptr<System::IO::FileStream> stream = File->Open( std::wstring( L"dump" ), FileMode::OpenOrCreate, FileAccess::Write, FileShare::None );
 		boost::shared_ptr<StreamWriter> writer = boost::make_shared<StreamWriter>( stream );
 		writer->Write( dump );
 		writer->Close();
@@ -327,17 +327,17 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::DefaultObjectDirectory()
 	{
-		return Path::Combine( Globals::ContentDirectory, _T( "Objects" ) );
+		return Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects" ) );
 	}
 
 	std::wstring Tools::DefaultDynamicDirectory()
 	{
-		return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, _T("DynamicLoad")) );
+		return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, std::wstring( L"DynamicLoad" )) );
 	}
 
 	std::wstring Tools::SourceTextureDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Art") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), std::wstring( L"Content/Art" ) );
 	}
 
 	boost::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
@@ -347,8 +347,8 @@ namespace CloudberryKingdom
 		/*boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
-		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		reader->Close();
 		//stream->Close();
@@ -542,14 +542,14 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	std::wstring Tools::SantitizeOneLineString( std::wstring s, const boost::shared_ptr<EzFont> &font )
 	{
-		s = RemoveAfter( s, _T( "\n" ) );
-		s = RemoveAfter( s, _T( "\t" ) );
+		s = RemoveAfter( s, std::wstring( L"\n" ) );
+		s = RemoveAfter( s, std::wstring( L"\t" ) );
 
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Replace' method:
-		//s = s.Replace( _T( "{" ), _T( " " ) );
+		//s = s.Replace( std::wstring( L"{" ), std::wstring( L" " ) );
 		Replace( s, '{', ' ' );
 //C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Replace' method:
-		//s = s.Replace( _T( "}" ), _T( " " ) );
+		//s = s.Replace( std::wstring( L"}" ), std::wstring( L" " ) );
 		Replace( s, '}', ' ' );
 
 		// FIXME: Re-enable this logic.
@@ -559,7 +559,7 @@ namespace CloudberryKingdom
 		}
 		catch ( ... )
 		{
-			s = _T( "Invalid" );
+			s = std::wstring( L"Invalid" );
 		}*/
 
 		return s;
@@ -575,7 +575,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::StripPath( const std::wstring &file )
 	{
-		int LastSlash = file.rfind( _T( "/" ) );
+		int LastSlash = file.rfind( std::wstring( L"/" ) );
 		if ( LastSlash < 0 )
 			return file;
 		else
@@ -588,7 +588,7 @@ namespace CloudberryKingdom
 		if ( i >= 0 )
 			path = path.substr( i + ignore.length() );
 
-		int FirstSlash = path.find( _T( "/" ) );
+		int FirstSlash = path.find( std::wstring( L"/" ) );
 		if ( FirstSlash < 0 )
 			return path;
 		else
@@ -614,7 +614,7 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
 		std::wstringstream wss;
-		wss << _T( "Pop_" );
+		wss << std::wstring( L"Pop_" );
 		wss << CoreMath::RestrictVal( 1, 3, Pitch );
 		Sound( wss.str() )->Play();
 	}
@@ -632,17 +632,17 @@ namespace CloudberryKingdom
 	void Tools::LoadBasicArt( const boost::shared_ptr<ContentManager> &Content )
 	{
 		TextureWad = boost::make_shared<EzTextureWad>();
-		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "White" ) ), _T( "White" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Circle" ) ), _T( "Circle" ) );
-		TextureWad->AddTexture( Content->Load<Texture2D>( _T( "Smooth" ) ), _T( "Smooth" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"White" ) ), std::wstring( L"White" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Circle" ) ), std::wstring( L"Circle" ) );
+		TextureWad->AddTexture( Content->Load<Texture2D>( std::wstring( L"Smooth" ) ), std::wstring( L"Smooth" ) );
 
 		TextureWad->DefaultTexture = TextureWad->TextureList[ 0 ];
 	}
 
 	std::wstring Tools::GetFileName( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "/" ) );
-		int j = FilePath.find( _T( "." ), i );
+		int i = FilePath.rfind( std::wstring( L"/" ) );
+		int j = FilePath.find( std::wstring( L"." ), i );
 		if ( j < 0 )
 			j = FilePath.length();
 		if ( i < 0 )
@@ -653,7 +653,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::GetFileNamePlusExtension( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "/" ) );
+		int i = FilePath.rfind( std::wstring( L"/" ) );
 		int n = FilePath.length();
 		if ( i < 0 )
 			return FilePath.substr( 0, n - 1 );
@@ -663,12 +663,12 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::GetFileBigName( const std::wstring &FilePath )
 	{
-		int i = FilePath.rfind( _T( "/" ) );
+		int i = FilePath.rfind( std::wstring( L"/" ) );
 		if ( i < 0 )
 			return FilePath;
 
 		std::wstring Path = FilePath.substr( 0, i );
-		i = Path.rfind( _T( "/" ) );
+		i = Path.rfind( std::wstring( L"/" ) );
 
 		if ( i < 0 )
 			return FilePath;
@@ -680,19 +680,19 @@ namespace CloudberryKingdom
 	{
 		int i = FilePath.find( path ) + path.length() + 1;
 		if ( i < 0 )
-			return _T( "ERROR" );
-		int j = FilePath.find( _T( "." ), i );
+			return std::wstring( L"ERROR" );
+		int j = FilePath.find( std::wstring( L"." ), i );
 		if ( j <= i )
-			return _T( "ERROR" );
+			return std::wstring( L"ERROR" );
 
 		return FilePath.substr( i, j - i );
 	}
 
 	std::wstring Tools::GetFileExt( const std::wstring &path, const std::wstring &FilePath )
 	{
-		int j = FilePath.find( _T( "." ) );
+		int j = FilePath.find( std::wstring( L"." ) );
 		if ( j < 0 )
-			return _T( "ERROR" );
+			return std::wstring( L"ERROR" );
 
 		return FilePath.substr( j + 1 );
 	}
@@ -721,29 +721,29 @@ namespace CloudberryKingdom
 		if ( CreateNewWad )
 			EffectWad = boost::make_shared<EzEffectWad>();
 
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BasicEffect" ) ), _T( "Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/NoTexture" ) ), _T( "NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Circle" ) ), _T( "Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Shell" ) ), _T( "Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/FireballEffect" ) ), _T( "Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Paint" ) ), _T( "Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Lava" ) ), _T( "Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightMap" ) ), _T( "LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/LightSource" ) ), _T( "LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/BwEffect" ) ), _T( "BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl_Green" ) ), _T( "Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Hsl" ) ), _T( "Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( _T( "Shaders/Window" ) ), _T( "Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Circle" ) ), std::wstring( L"Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Shell" ) ), std::wstring( L"Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Paint" ) ), std::wstring( L"Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Lava" ) ), std::wstring( L"Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
 		CircleEffect = EffectWad->EffectList[ 2 ];
-		LightSourceEffect = EffectWad->FindByName( _T( "LightSource" ) );
-		HslEffect = EffectWad->FindByName( _T( "Hsl" ) );
-		HslGreenEffect = EffectWad->FindByName( _T( "Hsl_Green" ) );
-		WindowEffect = EffectWad->FindByName( _T( "Window" ) );
+		LightSourceEffect = EffectWad->FindByName( std::wstring( L"LightSource" ) );
+		HslEffect = EffectWad->FindByName( std::wstring( L"Hsl" ) );
+		HslGreenEffect = EffectWad->FindByName( std::wstring( L"Hsl_Green" ) );
+		WindowEffect = EffectWad->FindByName( std::wstring( L"Window" ) );
 
-		PaintEffect_SpriteBatch = Content->Load<Effect>( _T( "Shaders/Paint_SpriteBatch" ) );
+		PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"Shaders/Paint_SpriteBatch" ) );
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )
@@ -819,271 +819,6 @@ namespace CloudberryKingdom
 		return GetBitsFromLine( reader->ReadLine() );
 	}
 
-	/*boost::shared_ptr<Object> Tools::ReadFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamReader> &reader )
-	{
-		boost::shared_ptr<std::wstring> line = reader->ReadLine();
-		while ( line != 0 )
-		{
-			std::vector<std::wstring> bits = Tools::GetBitsFromLine( line );
-
-			if ( bits.size() > 0 )
-			{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				var first = bits[ 0 ];
-
-				bool WasReadable = false;
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				var info = obj->GetType()->GetField(first);
-				//try
-				if ( info != 0 )
-				{
-					info = obj->GetType()->GetField(first);
-					if ( info->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
-					{
-						WasReadable = true;
-						boost::shared_ptr<IReadWrite> rw = boost::static_pointer_cast<IReadWrite>( info->GetValue( obj ) );
-						rw->Read( reader );
-						info->SetValue( obj, rw );
-					}
-					else
-					// List of IReadWrites
-					{
-						boost::shared_ptr<Type> type = info->FieldType;
-						if ( type->IsGenericType && type->GetGenericTypeDefinition() == std::vector<*>::typeid )
-						{
-							WasReadable = true;
-
-							boost::shared_ptr<System::Collections::IList> list = boost::dynamic_pointer_cast<System::Collections::IList>( info->GetValue( obj ) );
-
-							boost::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
-							if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
-								ReadList( reader, list, itemType );
-						}
-					}
-				}
-				//catch
-				else
-				{
-					WasReadable = false;
-				}
-
-				if ( !WasReadable )
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//					switch (first)
-//ORIGINAL LINE: case "End":
-					if ( first == _T( "End" ) )
-					{
-							return obj;
-
-					}
-//ORIGINAL LINE: case "_MyTexture":
-					else if ( first == _T( "_MyTexture" ) )
-					{
-							Tools::ReadLineToObj( obj, bits );
-
-					}
-					else
-					{
-							Tools::ReadLineToObj( obj, bits );
-					}
-			}
-
-			line = reader->ReadLine();
-		}
-
-		return obj;
-	}*/
-
-	/*void Tools::ReadList( const boost::shared_ptr<StreamReader> &reader, const boost::shared_ptr<System::Collections::IList> &list, const boost::shared_ptr<Type> &itemType )
-	{
-		boost::shared_ptr<std::wstring> line = reader->ReadLine();
-		bool ReadingList = true;
-
-		while ( line != 0 && ReadingList )
-		{
-			line = reader->ReadLine();
-			std::vector<std::wstring> bits = Tools::GetBitsFromLine( line );
-
-//C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
-//			switch (bits[0])
-//ORIGINAL LINE: case "Add":
-			if ( bits[ 0 ] == _T( "Add" ) )
-			{
-					boost::shared_ptr<ConstructorInfo> constructor;
-					if ( bits.size() > 1 )
-					{
-						//var type = Type.GetType("CloudberryKingdom." + bits[1]);
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-						var type = Type_GET_TYPE( bits[ 1 ] );
-						constructor = type->GetConstructor( Type_EMPTY_TYPES );
-					}
-					else
-						constructor = itemType->GetConstructor( Type_EMPTY_TYPES );
-
-					boost::shared_ptr<Object> newobj = constructor->Invoke( Type_EMPTY_TYPES );
-					//ReadFields(newobj, reader);
-					if ( boost::dynamic_pointer_cast<IReadWrite>( newobj ) != 0 )
-						( boost::static_pointer_cast<IReadWrite>( newobj ) )->Read( reader );
-					else
-						ReadFields( newobj, reader );
-					list->Add( newobj );
-
-			}
-//ORIGINAL LINE: case "EndList":
-			else if ( bits[ 0 ] == _T( "EndList" ) )
-			{
-					ReadingList = false;
-			}
-//ORIGINAL LINE: case "End":
-			else if ( bits[ 0 ] == _T( "End" ) )
-			{
-			}
-			else
-			{
-			}
-		}
-	}*/
-
-	/*void Tools::WriteFields( const boost::shared_ptr<Object> &obj, const boost::shared_ptr<StreamWriter> &writer, ... )
-	{
-		WriteRecursiveDepth++;
-		std::wstring WhiteSpace = _T( "" );
-		for ( int i = 1; i < WriteRecursiveDepth; i++ )
-			WhiteSpace += _T( "  " );
-
-		for ( unknown::const_iterator info = obj->GetType()->GetFields().begin(); info != obj->GetType()->GetFields().end(); ++info )
-		{
-			// Check if field is listed as a variable to be written.
-			if ( VariableNames->Contains( ( *info )->Name ) )
-			{
-				std::wstring line = _T( "" );
-				// int
-				if ( ( *info )->FieldType == int::typeid )
-					line = StringConverterHelper::toString( static_cast<int>( ( *info )->GetValue( obj ) ) );
-				// float
-				else if ( ( *info )->FieldType == float::typeid )
-					line = StringConverterHelper::toString( static_cast<float>( ( *info )->GetValue( obj ) ) );
-				// Vector2
-				else if ( ( *info )->FieldType == Vector2::typeid )
-				{
-					Vector2 v = static_cast<Vector2>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1}" ), v.X, v.Y );
-				}
-				// Vector3
-				else if ( ( *info )->FieldType == Vector3::typeid )
-				{
-					Vector3 v = static_cast<Vector3>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2}" ), v.X, v.Y, v.Z );
-				}
-				// Vector4
-				else if ( ( *info )->FieldType == Vector4::typeid )
-				{
-					Vector4 v = static_cast<Vector4>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2} {3}" ), v.X, v.Y, v.Z, v.W );
-				}
-				// Color
-				else if ( ( *info )->FieldType == Color::typeid )
-				{
-					Color c = static_cast<Color>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2} {3}" ), c.R, c.G, c.B, c.A );
-				}
-				// bool
-				else if ( ( *info )->FieldType == bool::typeid )
-				{
-					bool b = static_cast<bool>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0}" ), b );
-				}
-				// string
-				else if ( ( *info )->FieldType == std::wstring::typeid )
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-					line = ( static_cast<std::wstring>( ( *info )->GetValue( obj ) ) )->ToString();
-				// EzTexture
-				else if ( ( *info )->FieldType == EzTexture::typeid )
-				{
-					boost::shared_ptr<EzTexture> texture = boost::static_pointer_cast<EzTexture>( ( *info )->GetValue( obj ) );
-					if ( texture == 0 )
-						continue;
-					else
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-						line = texture->Name->ToString();
-				}
-				// EzEffect
-				else if ( ( *info )->FieldType == EzEffect::typeid )
-				{
-					boost::shared_ptr<EzEffect> effect = boost::static_pointer_cast<EzEffect>( ( *info )->GetValue( obj ) );
-					if ( effect == 0 )
-						continue;
-					else
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-						line = effect->Name->ToString();
-				}
-				// PhsxData
-				else if ( ( *info )->FieldType == PhsxData::typeid )
-				{
-					PhsxData d = static_cast<PhsxData>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2} {3} {4} {5}" ), d.Position.X, d.Position.Y, d.Velocity.X, d.Velocity.Y, d.Acceleration.X, d.Acceleration.Y );
-				}
-				// BasePoint
-				else if ( ( *info )->FieldType == BasePoint::typeid )
-				{
-					BasePoint b = static_cast<BasePoint>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2} {3} {4} {5}" ), b.e1.X, b.e1.Y, b.e2.X, b.e2.Y, b.Origin.X, b.Origin.Y );
-				}
-				// MyOwnVertexFormat
-				else if ( ( *info )->FieldType == MyOwnVertexFormat::typeid )
-				{
-					MyOwnVertexFormat v = static_cast<MyOwnVertexFormat>( ( *info )->GetValue( obj ) );
-					line = Format( _T( "{0} {1} {2} {3} {4} {5} {6} {7}" ), v.xy.X, v.xy.Y, v.uv.X, v.uv.Y, v.TheColor.R, v.TheColor.G, v.TheColor.B, v.TheColor.A );
-				}
-				else if ( ( *info )->FieldType->GetInterfaces()->Contains(IReadWrite::typeid) )
-				{
-					boost::shared_ptr<IReadWrite> rw = boost::static_pointer_cast<IReadWrite>( ( *info )->GetValue( obj ) );
-					writer->WriteLine( WhiteSpace + ( *info )->Name );
-					rw->Write( writer );
-					writer->WriteLine( WhiteSpace + _T( "End" ) );
-					writer->WriteLine();
-				}
-				else
-				{
-					// List of IReadWrites
-					boost::shared_ptr<Type> type = ( *info )->FieldType;
-					if ( type->IsGenericType && type->GetGenericTypeDefinition() == std::vector<*>::typeid )
-					{
-						boost::shared_ptr<Type> itemType = type->GetGenericArguments()[ 0 ];
-						if ( itemType->GetInterfaces()->Contains(IReadWrite::typeid) )
-						{
-							writer->WriteLine( WhiteSpace + ( *info )->Name );
-							writer->WriteLine( WhiteSpace + _T( "StartList" ) );
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-							for ( IEnumerable<IReadWrite*>::const_iterator rw = static_cast<IEnumerable<IReadWrite*>*>( info->GetValue( obj ).begin() ); rw != static_cast<IEnumerable<IReadWrite*>*>(info->GetValue(obj).end()); ++rw )
-							{
-								writer->WriteLine( WhiteSpace + _T( "Add " ) + ( *rw )->GetType()->Namespace + _T(".") + (*rw)->GetType()->Name );
-								( *rw )->Write( writer );
-								writer->WriteLine( WhiteSpace + _T( "End" ) );
-							}
-							writer->WriteLine( WhiteSpace + _T( "EndList" ) );
-							writer->WriteLine();
-						}
-					}
-				}
-
-				if ( line != _T( "" ) )
-					writer->WriteLine( WhiteSpace + Format( _T( "{0} {1}" ), ( *info )->Name, line ) );
-			}
-		}
-
-		WriteRecursiveDepth--;
-	}*/
-
-	/*std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, ... )
-	{
-		std::map<std::wstring, int> dict;
-		for ( int i = 0; i < static_cast<int>( Bits.size() ); i++ )
-			if ( keywords->Contains( Bits[ i ] ) )
-				dict->Add( Bits[ i ], i );
-		return dict;
-	}*/
-
 	std::map<std::wstring, int> Tools::GetLocations( std::vector<std::wstring> &Bits, std::vector<std::wstring> &keywords )
 	{
 		std::map<std::wstring, int> dict;
@@ -1104,7 +839,7 @@ namespace CloudberryKingdom
 	std::wstring Tools::RemoveComment_SlashStyle( const std::wstring &str )
 	{
 		std::wstring ws;
-		int CommentIndex = str.find( _T( "//" ) );
+		int CommentIndex = str.find( std::wstring( L"//" ) );
 		if ( CommentIndex >= 0 )
 			ws = str.substr( 0, CommentIndex );
 		return ws;
@@ -1113,7 +848,7 @@ namespace CloudberryKingdom
 	std::wstring Tools::RemoveComment_DashStyle( const std::wstring &str )
 	{
 		std::wstring ws;
-		int CommentIndex = str.find( _T( "--" ) );
+		int CommentIndex = str.find( std::wstring( L"--" ) );
 		if ( CommentIndex >= 0 )
 			ws = str.substr( 0, CommentIndex );
 		return ws;
@@ -1189,7 +924,7 @@ namespace CloudberryKingdom
 
 	Vector2 Tools::ParseToVector2( const std::wstring &str )
 	{
-		int CommaIndex = str.find( _T( "," ) );
+		int CommaIndex = str.find( std::wstring( L"," ) );
 		Vector2 Vec = Vector2();
 
 		std::wstring Component1, Component2;
@@ -1215,9 +950,9 @@ namespace CloudberryKingdom
 
 	Color Tools::ParseToColor( const std::wstring &str )
 	{
-		int CommaIndex = str.find( _T( "," ) );
-		int CommaIndex2 = str.find( _T( "," ), CommaIndex + 1 );
-		int CommaIndex3 = str.find( _T( "," ), CommaIndex2 + 1 );
+		int CommaIndex = str.find( std::wstring( L"," ) );
+		int CommaIndex2 = str.find( std::wstring( L"," ), CommaIndex + 1 );
+		int CommaIndex3 = str.find( std::wstring( L"," ), CommaIndex2 + 1 );
 
 		std::wstring Component1, Component2, Component3, Component4;
 		Component1 = str.substr( 0, CommaIndex );
@@ -1232,7 +967,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<EzSound> Tools::ParseToEzSound( const std::wstring &str )
 	{
-		int LineIndex = str.find( _T( "|" ) );
+		int LineIndex = str.find( std::wstring( L"|" ) );
 
 		std::wstring Component1, Component2;
 		Component1 = str.substr( 0, LineIndex );
@@ -1255,8 +990,8 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::ParseToFileName( const std::wstring &str )
 	{
-		int Quote1 = str.find( _T( "\"" ) );
-		int Quote2 = str.find( _T( "\"" ), Quote1 + 1 );
+		int Quote1 = str.find( std::wstring( L"\"" ) );
+		int Quote2 = str.find( std::wstring( L"\"" ), Quote1 + 1 );
 
 		std::wstring Name = str.substr( Quote1 + 1, Quote2 - Quote1 - 1 );
 		return Name;
@@ -1383,7 +1118,7 @@ namespace CloudberryKingdom
 
 			if ( AsPaint )
 			{
-				PaintEffect_SpriteBatch->Parameters( "xTexture" )->SetValue( Tools::TextureWad->FindByName( _T( "PaintSplotch" ) )->getTex() );
+				PaintEffect_SpriteBatch->Parameters( "xTexture" )->SetValue( Tools::TextureWad->FindByName( std::wstring( L"PaintSplotch" ) )->getTex() );
 				//PaintEffect_SpriteBatch.Parameters["SceneTexture"].SetValue(Tools.TextureWad.FindByName("PaintSplotch").Tex); 
 				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, Tools::PaintEffect_SpriteBatch, Matrix::CreateScale( scale, scale, 1 ) );
 			}
@@ -1514,7 +1249,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::ScoreString( int num, int outof )
 	{
-		return StringConverterHelper::toString( num ) + _T( "/" ) + StringConverterHelper::toString( outof );
+		return StringConverterHelper::toString( num ) + std::wstring( L"/" ) + StringConverterHelper::toString( outof );
 		//return "x" + num.ToString() + "/" + outof.ToString();
 	}
 

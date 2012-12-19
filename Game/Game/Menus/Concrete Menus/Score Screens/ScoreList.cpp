@@ -24,11 +24,11 @@ namespace CloudberryKingdom
 		switch ( MyFormat )
 		{
 			case ScoreEntry::Format_SCORE:
-				return _T( "" );
+				return std::wstring( L"" );
 			case ScoreEntry::Format_LEVEL:
-				return _T( "" );
+				return std::wstring( L"" );
 			default:
-				return _T( "" );
+				return std::wstring( L"" );
 		}
 	}
 
@@ -81,10 +81,10 @@ namespace CloudberryKingdom
 		score->MyFormat = MyFormat;
 
 		int Rank = IndexOf( Scores, score ) + 1;
-		std::wstring RankStr = StringConverterHelper::toString( Rank ) + _T( ". " );
+		std::wstring RankStr = StringConverterHelper::toString( Rank ) + std::wstring( L". " );
 
 		while ( RankStr.length() < 4 )
-			RankStr += _T( " " );
+			RankStr += std::wstring( L" " );
 
 		if ( !score->Fake )
 			RankStr += GetPrefix();

@@ -40,9 +40,9 @@ namespace CloudberryKingdom
 		// Press A to join
 		Tools::Warning();
 	#if defined(PC_VERSION)
-		Text = boost::make_shared<EzText>( _T( "Press\n" ) + ButtonString::Go_Controller( 89 ) + _T( "\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
+		Text = boost::make_shared<EzText>( std::wstring( L"Press\n" ) + ButtonString::Go_Controller( 89 ) + std::wstring( L"\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
 	#else
-		Text = boost::make_shared<EzText>( _T( "Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
+		Text = boost::make_shared<EzText>( std::wstring( L"Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
 	#endif
 		Text->setScale( .7765f );
 
@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( std::wstring( L"ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

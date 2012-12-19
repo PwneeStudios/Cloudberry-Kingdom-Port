@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 		if ( Content == 0 )
 		{
-			Content = boost::make_shared<ContentManager>( _T("Content") );
+			Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 		}
 
 		CanSkip = CanSkipVideo;
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 		Cleaned = false;
 
 		//CurrentVideo = Tools.GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
-		CurrentVideo = Content->Load<Video>( Path::Combine( _T( "Movies" ), MovieName ) );
+		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
 		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;

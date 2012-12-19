@@ -116,7 +116,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		MyBox = boost::make_shared<AABox>();
-		MyQuad = boost::make_shared<QuadClass>( _T( "White" ), 100.f, true );
+		MyQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ), 100.f, true );
 
 		MakeNew();
 

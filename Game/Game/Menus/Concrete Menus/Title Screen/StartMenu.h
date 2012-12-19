@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		enum Next
 		{
 			Next_CAMPAIGN,
@@ -140,7 +144,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		virtual void Hide( const PresetPos &pos, int frames );
+		virtual void Hide( PresetPos pos, int frames );
 
 		Next MyNextMenu;
 

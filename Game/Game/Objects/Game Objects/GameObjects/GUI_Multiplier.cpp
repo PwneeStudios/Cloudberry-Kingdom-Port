@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	std::wstring GUI_Multiplier::ToString()
 	{
-		return _T( "x" ) + StringConverterHelper::toString( GetMultiplier() );
+		return std::wstring( L"x" ) + StringConverterHelper::toString( GetMultiplier() );
 	}
 
 	void GUI_Multiplier::OnAdd()

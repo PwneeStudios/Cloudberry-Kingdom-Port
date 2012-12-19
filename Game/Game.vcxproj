@@ -359,8 +359,14 @@
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
     <ClCompile Include="Hacks\FileReader.cpp" />
+    <ClCompile Include="Hacks\MutexPc.cpp" />
+    <ClCompile Include="Hacks\MutexWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Hacks\NET\BinaryReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryWriter.cpp" />
+    <ClCompile Include="Hacks\NET\StringBuilder.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
     <ClCompile Include="Hacks\XNA\GamePad.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />

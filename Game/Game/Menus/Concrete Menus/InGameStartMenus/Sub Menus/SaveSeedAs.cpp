@@ -73,13 +73,13 @@ namespace CloudberryKingdom
 
 		// Header
 		HeaderText = boost::make_shared<EzText>( Localization::Words_SAVE_RANDOM_SEED_AS, ItemFont );
-		HeaderText->Name = _T( "Header" );
+		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
 		// Save seed
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
-		item->Name = _T( "Save" );
+		item->Name = std::wstring( L"Save" );
 		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -142,12 +142,12 @@ namespace CloudberryKingdom
 	void SaveSeedAs::SetPosition()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Save" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Save" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 1269.445f, 161 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 1338.89f, -52.8888f ) );
@@ -156,13 +156,13 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -1125.001f, -319.4444f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 1175.696f, 233.3334f ) );
 			_q->setSize( Vector2( 1500, 803.2258f ) );
 		}
-		MyPile->FindEzText( _T( "Header" ) )->setPos( Vector2( 61.11098f, 821.8887f ) );
+		MyPile->FindEzText( std::wstring( L"Header" ) )->setPos( Vector2( 61.11098f, 821.8887f ) );
 
 		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
 	}

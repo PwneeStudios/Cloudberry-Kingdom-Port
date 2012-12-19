@@ -7,16 +7,16 @@ namespace CloudberryKingdom
 	{
 		if ( IsSeedValue( seed ) )
 		{
-			SeedStrings.push_back( seed + _T( "name:" ) + name + _T( ";" ) );
+			SeedStrings.push_back( seed + std::wstring( L"name:" ) + name + std::wstring( L";" ) );
 			SaveGroup::SaveAll();
 		}
 	}
 
 	bool SavedSeeds::IsSeedValue( const std::wstring &seed )
 	{
-		if ( seed.find( _T( ";" ) ) == std::wstring::npos )
+		if ( seed.find( std::wstring( L";" ) ) == std::wstring::npos )
 			return false;
-		if ( seed.find( _T( ":" ) ) == std::wstring::npos )
+		if ( seed.find( std::wstring( L":" ) ) == std::wstring::npos )
 			return false;
 		return true;
 	}

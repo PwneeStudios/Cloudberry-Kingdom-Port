@@ -20,10 +20,10 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 1, 0, 0, 0 );
 		Name = Localization::Words_HERO_IN_ABOX;
-		NameTemplate = _T( "hero in a box" );
+		NameTemplate = std::wstring( L"hero in a box" );
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Box_Duck_0000" ) ), Color::White, DefaultIconWidth * 1.35f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Box_Duck_0000" ) ), Color::White, DefaultIconWidth * 1.35f );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0,.0485f ) );
 	}
 
@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 	BobPhsxBox::BobPhsxBox()
 	{
 		InitializeInstanceFields();
-		LandSound = Tools::SoundWad->FindByName( _T( "BoxHero_Land" ) );
+		LandSound = Tools::SoundWad->FindByName( std::wstring( L"BoxHero_Land" ) );
 
 		DefaultValues();
 	}
@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsxNormal::Init( bob );
 
-		MyBob->JumpSound = Tools::SoundWad->FindByName( _T( "BoxHero_Jump" ) );
+		MyBob->JumpSound = Tools::SoundWad->FindByName( std::wstring( L"BoxHero_Jump" ) );
 
 		InitializedAnim = false;
 
@@ -126,8 +126,8 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<CloudberryKingdom::ObjectClass> p = MyBob->PlayerObject;
 			p->DrawExtraQuad = true;
-			p->ExtraQuadToDraw = boost::static_pointer_cast<Quad>( p->FindQuad( _T( "MainQuad" ) ) );
-			p->ExtraQuadToDrawTexture = Tools::Texture( _T( "BoxAlone" ) );
+			p->ExtraQuadToDraw = boost::static_pointer_cast<Quad>( p->FindQuad( std::wstring( L"MainQuad" ) ) );
+			p->ExtraQuadToDrawTexture = Tools::Texture( std::wstring( L"BoxAlone" ) );
 		}
 		else
 		{

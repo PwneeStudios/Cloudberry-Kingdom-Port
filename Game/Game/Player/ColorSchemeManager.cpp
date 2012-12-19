@@ -31,10 +31,10 @@ namespace CloudberryKingdom
 		bob->ShowCape = false;
 
 		boost::shared_ptr<ObjectClass> obj = bob->PlayerObject;
-		obj->FindQuad( _T( "Wing1" ) )->Show = false;
-		obj->FindQuad( _T( "Wing2" ) )->Show = false;
-		obj->FindQuad( _T( "DWing1" ) )->Show = false;
-		obj->FindQuad( _T( "DWing2" ) )->Show = false;
+		obj->FindQuad( std::wstring( L"Wing1" ) )->Show = false;
+		obj->FindQuad( std::wstring( L"Wing2" ) )->Show = false;
+		obj->FindQuad( std::wstring( L"DWing1" ) )->Show = false;
+		obj->FindQuad( std::wstring( L"DWing2" ) )->Show = false;
 
 		bob->ShowCape = true;
 	}
@@ -82,35 +82,35 @@ namespace CloudberryKingdom
 		// Fill the beard list
 		boost::shared_ptr<Hat> beard;
 
-		Hat::Vandyke = beard = boost::make_shared<Hat>( _T( "None" ) );
+		Hat::Vandyke = beard = boost::make_shared<Hat>( std::wstring( L"None" ) );
 		beard->Name = Localization::Words_VANDYKE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259001;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Beard = beard = boost::make_shared<Hat>( _T( "Facial_Beard" ) );
+		Hat::Beard = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Beard" ) );
 		beard->Name = Localization::Words_RUGGED;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259002;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Mustache = beard = boost::make_shared<Hat>( _T( "Facial_Moustache" ) );
+		Hat::Mustache = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Moustache" ) );
 		beard->Name = Localization::Words_MANHATTAN;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259003;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::BigBeard = beard = boost::make_shared<Hat>( _T( "Facial_BigBeard" ) );
+		Hat::BigBeard = beard = boost::make_shared<Hat>( std::wstring( L"Facial_BigBeard" ) );
 		beard->Name = Localization::Words_LUMBERJACK;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259004;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
-		Hat::Goatee = beard = boost::make_shared<Hat>( _T( "Facial_Goatee" ) );
+		Hat::Goatee = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Goatee" ) );
 		beard->Name = Localization::Words_GOATEE;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259005;
@@ -120,35 +120,35 @@ namespace CloudberryKingdom
 
 		// Fill the hat list
 		boost::shared_ptr<Hat> hat;
-		hat = boost::make_shared<Hat>( _T( "None" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"None" ) );
 		hat->Name = Localization::Words_NONE;
 		hat->Guid = 19;
 			HatInfo.push_back( hat );
 			Hat::None = hat;
 
 
-		hat = boost::make_shared<Hat>( _T( "Hat_Viking" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Viking" ) );
 		hat->Name = Localization::Words_VIKING;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 20;
 			hat->HatPicShift = Vector2( -.02f,.075f );
 			HatInfo.push_back( hat );
 			Hat::Viking = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Fedora" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Fedora" ) );
 		hat->Name = Localization::Words_FEDORA;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 21;
 			hat->HatPicScale *= 1.075f;
 			HatInfo.push_back( hat );
 			Hat::Fedora = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Afro" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Afro" ) );
 		hat->Name = Localization::Words_AFRO;
 		hat->Price = Hat::Mid;
 		hat->Guid = 22;
 			hat->HatPicScale *= 1.065f;
 			HatInfo.push_back( hat );
 			Hat::Afro = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Halo" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Halo" ) );
 		hat->Name = Localization::Words_HALO;
 		hat->Price = Hat::Mid;
 		hat->Guid = 23;
@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 			hat->HatPicShift = Vector2( .15f,.08f );
 			HatInfo.push_back( hat );
 			Hat::Halo = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_FireHead" ), false );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_FireHead" ), false );
 		hat->Name = Localization::Words_FIREHEAD;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 24;
@@ -176,11 +176,11 @@ namespace CloudberryKingdom
 		//hat.Guid = 26;
 		//    HatInfo.Add(hat);
 		//    Hat.CheckpointHead = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Horns" ), true, false );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Horns" ), true, false );
 		hat->Name = Localization::Words_HORNS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 27;
-			hat->HatPicTexture = Tools::TextureWad->FindByName( _T( "HatPic_Horns" ) );
+			hat->HatPicTexture = Tools::TextureWad->FindByName( std::wstring( L"HatPic_Horns" ) );
 			hat->HatPicScale *= 1.1f;
 			HatInfo.push_back( hat );
 			Hat::Horns = hat;
@@ -234,7 +234,7 @@ namespace CloudberryKingdom
 		//    hat.HatPicScale *= .95f;
 		//    HatInfo.Add(hat);
 		//    Hat.Pink = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Bubble" ), true );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Bubble" ), true );
 		hat->Name = Localization::Words_BUBBLE;
 		hat->DrawHead = false;
 		hat->Price = Hat::Mid;
@@ -246,7 +246,7 @@ namespace CloudberryKingdom
 	float ScaleNew = 1.35f;
 	float DefaultShiftX = -.35f;
 
-		hat = boost::make_shared<Hat>( _T( "Hat_TopHat" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_TopHat" ) );
 		hat->Name = Localization::Words_TOP_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 37;
@@ -254,7 +254,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.35f;
 			HatInfo.push_back( hat );
 			Hat::TopHat = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Knight" ), false );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Knight" ), false );
 		hat->Name = Localization::Words_KNIGHT_HELMET;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 38;
@@ -262,7 +262,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.145f;
 			HatInfo.push_back( hat );
 			Hat::Knight = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Toad" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Toad" ) );
 		hat->Name = Localization::Words_MUSHROOM_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 39;
@@ -270,7 +270,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.115f;
 			HatInfo.push_back( hat );
 			Hat::Toad = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_BubbleBobble" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_BubbleBobble" ) );
 		hat->Name = Localization::Words_OM_NOM_NOM;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 40;
@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.105f;
 			HatInfo.push_back( hat );
 			Hat::BubbleBobble = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Brain" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Brain" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_BRAIN_HAT;
 		hat->Price = Hat::Expensive;
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 			Hat::Brain = hat;
-		hat = boost::make_shared<Hat>( _T( "Hat_Gosu" ) );
+		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Gosu" ) );
 		hat->Name = Localization::Words_GOSU;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 42;
@@ -300,7 +300,7 @@ namespace CloudberryKingdom
 
 
 		// Buyables
-		Hat::RobinHood = hat = boost::make_shared<Hat>( _T( "Hat_RobinHood" ) );
+		Hat::RobinHood = hat = boost::make_shared<Hat>( std::wstring( L"Hat_RobinHood" ) );
 		hat->Name = Localization::Words_ROBIN_HOOD;
 		hat->Price = Hat::Mid;
 		hat->Guid = 1;
@@ -308,7 +308,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Rasta = hat = boost::make_shared<Hat>( _T( "Hat_Rasta" ) );
+		Hat::Rasta = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Rasta" ) );
 		hat->Name = Localization::Words_REGGAE;
 		hat->Price = Hat::Mid;
 		hat->Guid = 2;
@@ -316,7 +316,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Pumpkin = hat = boost::make_shared<Hat>( _T( "Hat_Pumpkin" ) );
+		Hat::Pumpkin = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pumpkin" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_PUMPKIN;
 		hat->Price = Hat::Mid;
@@ -326,7 +326,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 
-		Hat::Pirate = hat = boost::make_shared<Hat>( _T( "Hat_Pirate" ) );
+		Hat::Pirate = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pirate" ) );
 		hat->Name = Localization::Words_PIRATE_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 4;
@@ -334,7 +334,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Miner = hat = boost::make_shared<Hat>( _T( "Hat_Miner" ) );
+		Hat::Miner = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Miner" ) );
 		hat->Name = Localization::Words_HARD_HAT;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 5;
@@ -342,7 +342,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Glasses = hat = boost::make_shared<Hat>( _T( "Hat_Glasses" ) );
+		Hat::Glasses = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Glasses" ) );
 		hat->Name = Localization::Words_FOUR_EYES;
 		hat->Price = Hat::Mid;
 		hat->Guid = 6;
@@ -350,7 +350,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::BunnyEars = hat = boost::make_shared<Hat>( _T( "Hat_BunnyEars" ) );
+		Hat::BunnyEars = hat = boost::make_shared<Hat>( std::wstring( L"Hat_BunnyEars" ) );
 		hat->Name = Localization::Words_BUNNY_EARS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 7;
@@ -365,7 +365,7 @@ namespace CloudberryKingdom
 		//    hat.HatPicScale *= ScaleNew * 1.165f;
 		//    HatInfo.Add(hat);
 
-		Hat::Antlers = hat = boost::make_shared<Hat>( _T( "Hat_Antlers" ) );
+		Hat::Antlers = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Antlers" ) );
 		hat->Name = Localization::Words_ANTLERS;
 		hat->Price = Hat::Mid;
 		hat->Guid = 9;
@@ -373,7 +373,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Arrow_Renamed = hat = boost::make_shared<Hat>( _T( "Hat_Arrow" ) );
+		Hat::Arrow_Renamed = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Arrow" ) );
 		hat->Name = Localization::Words_ARROW_THROUGH_HEAD;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 10;
@@ -381,7 +381,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Bag = hat = boost::make_shared<Hat>( _T( "Hat_Bag" ) );
+		Hat::Bag = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Bag" ) );
 		hat->Name = Localization::Words_BROWN_BAG;
 		hat->DrawHead = false;
 		hat->Price = Hat::Cheap;
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 			hat->AllowsFacialHair = false;
 			HatInfo.push_back( hat );
 
-		Hat::Cone = hat = boost::make_shared<Hat>( _T( "Hat_Cone" ) );
+		Hat::Cone = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Cone" ) );
 		hat->Name = Localization::Words_TRAFFIC_CONE;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 12;
@@ -399,7 +399,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Pope = hat = boost::make_shared<Hat>( _T( "Hat_Pope" ) );
+		Hat::Pope = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pope" ) );
 		hat->Name = Localization::Words_POPE_HAT;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 13;
@@ -407,7 +407,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Rice = hat = boost::make_shared<Hat>( _T( "Hat_Rice" ) );
+		Hat::Rice = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Rice" ) );
 		hat->Name = Localization::Words_RICE_HAT;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 14;
@@ -415,7 +415,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Santa = hat = boost::make_shared<Hat>( _T( "Hat_Santa" ) );
+		Hat::Santa = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Santa" ) );
 		hat->Name = Localization::Words_SANTA_CLAUS;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 15;
@@ -423,7 +423,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Sombrero = hat = boost::make_shared<Hat>( _T( "Hat_Sombrero" ) );
+		Hat::Sombrero = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Sombrero" ) );
 		hat->Name = Localization::Words_SOMBRERO;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 16;
@@ -431,7 +431,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Tiki = hat = boost::make_shared<Hat>( _T( "Hat_Tiki" ) );
+		Hat::Tiki = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Tiki" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_TIKI_MASK;
 		hat->Price = Hat::Mid;
@@ -440,7 +440,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.165f;
 			HatInfo.push_back( hat );
 
-		Hat::Wizard = hat = boost::make_shared<Hat>( _T( "Hat_Wizard" ) );
+		Hat::Wizard = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Wizard" ) );
 		hat->Name = Localization::Words_WIZARD;
 		hat->Price = Hat::Mid;
 		hat->Guid = 18;

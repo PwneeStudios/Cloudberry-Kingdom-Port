@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::SlideIn( Frames );
 	}
 
-	void StartMenu_MW_CustomLevel::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_CustomLevel::SlideOut( PresetPos Preset, int Frames )
 	{
 		//base.SlideOut(Preset, 0);
 		CustomLevel_GUI::SlideOut( Preset, Frames );

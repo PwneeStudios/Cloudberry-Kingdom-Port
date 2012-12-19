@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		sm->BringNextMenu();
 	}
 
-	void StartMenu::Hide( const PresetPos &pos, int frames )
+	void StartMenu::Hide( PresetPos pos, int frames )
 	{
 		CkBaseMenu::Hide( pos, frames );
 		ButtonCheck::PreLogIn = false;
@@ -324,13 +324,13 @@ namespace CloudberryKingdom
 
 		// Arcade
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
-		item->Name = _T( "Arcade" );
+		item->Name = std::wstring( L"Arcade" );
 		item->setGo( boost::make_shared<StartMenuLambda_Arcade>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Campaign
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
-		item->Name = _T( "Campaign" );
+		item->Name = std::wstring( L"Campaign" );
 		AddItem( item );
 		item->setGo( boost::make_shared<StartMenuLambda_Campaign>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 
@@ -342,7 +342,7 @@ namespace CloudberryKingdom
 
 		// Free Play
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
-		item->Name = _T( "Freeplay" );
+		item->Name = std::wstring( L"Freeplay" );
 		item->setGo( boost::make_shared<StartMenuLambda_Freeplay>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -354,7 +354,7 @@ namespace CloudberryKingdom
 
 		// Options
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
-		item->Name = _T( "Options" );
+		item->Name = std::wstring( L"Options" );
 		item->setGo( boost::make_shared<StartMenuLambda_Options>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -365,7 +365,7 @@ namespace CloudberryKingdom
 
 		// Exit
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
-		item->Name = _T( "Exit" );
+		item->Name = std::wstring( L"Exit" );
 		item->setGo( boost::make_shared<StartMenuLambda_Exit>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -377,32 +377,32 @@ namespace CloudberryKingdom
 	void StartMenu::BlackBox()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2206.164f, 346.4168f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Arcade" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2118.89f, 148.8611f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Freeplay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2156.22f, -34.80548f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Jukebox" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Jukebox" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 2.666809f, -843.4722f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2090.221f, -213.25f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Exit" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1950.778f, -413.5834f ) );
@@ -411,19 +411,19 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 1737.697f, -212.8573f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
+		_q = MyPile->FindQuad( std::wstring( L"TitleScreen" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 0, 0 ) );
 			_q->setSize( Vector2( 1799.546f, 1012.247f ) );
 		}
-		_q = MyPile->FindQuad( _T( "BackBox" ) );
+		_q = MyPile->FindQuad( std::wstring( L"BackBox" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -94.44531f, -355.5555f ) );
 			_q->setSize( Vector2( 458.5224f, 560.4163f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Title" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Title" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -25, 88.88889f ) );
@@ -436,32 +436,32 @@ namespace CloudberryKingdom
 	void StartMenu::Centered()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2206.164f, 346.4168f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Arcade" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2116.112f, 148.8611f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Freeplay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2156.22f, -34.80548f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Jukebox" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Jukebox" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 2.666809f, -843.4722f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2087.443f, -213.25f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Exit" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1950.778f, -410.8056f ) );
@@ -470,13 +470,13 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 1715.474f, -154.5238f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
+		_q = MyPile->FindQuad( std::wstring( L"TitleScreen" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 0, 0 ) );
 			_q->setSize( Vector2( 1799.547f, 1012.247f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Title" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Title" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -25, 88.88889f ) );
@@ -489,32 +489,32 @@ namespace CloudberryKingdom
 	void StartMenu::Forest()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -45.05542f, 907.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Arcade" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 89.4444f, 690.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Freeplay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -17.33331f, 509.6389f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Jukebox" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Jukebox" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 49.88898f, 312.0833f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 112.5558f, 114.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Exit" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 357.5555f, -83.02777f ) );
@@ -528,32 +528,32 @@ namespace CloudberryKingdom
 	void StartMenu::Title3()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Campaign" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -45.05542f, 907.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Arcade" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 89.4444f, 690.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Freeplay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -17.33331f, 509.6389f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Jukebox" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Jukebox" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 49.88898f, 312.0833f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 112.5558f, 114.5278f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Exit" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 357.5555f, -83.02777f ) );
@@ -562,13 +562,13 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -228.97f, -551.7461f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "TitleScreen" ) );
+		_q = MyPile->FindQuad( std::wstring( L"TitleScreen" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 0, 0 ) );
 			_q->setSize( Vector2( 1799.551f, 1012.248f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Title" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Title" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -25, 88.88889f ) );

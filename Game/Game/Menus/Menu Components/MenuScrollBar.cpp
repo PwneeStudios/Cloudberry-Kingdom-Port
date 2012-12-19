@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	MenuScrollBar::MenuScrollBar() : MenuSlider(boost::make_shared<EzText>(_T(""), Resources::Font_Grobold42))
+	MenuScrollBar::MenuScrollBar() : MenuSlider(boost::make_shared<EzText>(std::wstring( L"" ), Resources::Font_Grobold42))
 	{
 		InitializeInstanceFields();
 	}
@@ -12,11 +12,11 @@ namespace CloudberryKingdom
 	{
 		MenuSlider::InitializeSlider();
 
-		Normal = Tools::TextureWad->FindByName( _T( "BouncyBlock1" ) );
-		Held = Tools::TextureWad->FindByName( _T( "BouncyBlock2" ) );
+		Normal = Tools::TextureWad->FindByName( std::wstring( L"BouncyBlock1" ) );
+		Held = Tools::TextureWad->FindByName( std::wstring( L"BouncyBlock2" ) );
 
-		EndQuad = boost::make_shared<QuadClass>( _T( "Joint" ), 85.f, true );
-		StartQuad = boost::make_shared<QuadClass>( _T( "Joint" ), 85.f, true );
+		EndQuad = boost::make_shared<QuadClass>( std::wstring( L"Joint" ), 85.f, true );
+		StartQuad = boost::make_shared<QuadClass>( std::wstring( L"Joint" ), 85.f, true );
 	}
 
 	void MenuScrollBar::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )

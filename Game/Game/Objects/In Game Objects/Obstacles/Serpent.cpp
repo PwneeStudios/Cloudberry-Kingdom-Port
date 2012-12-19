@@ -5,8 +5,8 @@ namespace CloudberryKingdom
 
 	void Serpent::SerpentTileInfo::InitializeInstanceFields()
 	{
-		Serpent_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Serpent" ) ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
-		Fish = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Fish_1" ) ), Vector2( 35, -1 ) );
+		Serpent_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"Serpent" ) ), Vector2( 200, -1 ), Vector2( 0, -.875f ), Color::White, true );
+		Fish = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"Fish_1" ) ), Vector2( 35, -1 ) );
 		BoxSize = Vector2( 90, 1000 );
 	}
 

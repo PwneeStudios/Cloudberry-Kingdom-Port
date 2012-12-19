@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 
 	void BackgroundFloater::InitializeInstanceFields()
 	{
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		uv_speed = Vector2();
 		uv_offset = Vector2();
 	}

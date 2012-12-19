@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <cstring>
 #include <string>
+#include <map>
 
 #include "String.h"
 
@@ -21,6 +22,13 @@ void Add( std::map<std::wstring, item> &m, const std::wstring &k, const item &o 
 	using namespace std;
 
 	m[ ToLower( k ) ] = o;
+}
+
+template<typename Key, typename Value>
+void GetKeys( const std::map<Key, Value> &m, std::vector<Key> &keys)
+{
+	for( std::map<Key, Value>::const_iterator i = m.begin(); i != m.end(); ++i )
+		keys.push_back( i->first );
 }
 
 #endif

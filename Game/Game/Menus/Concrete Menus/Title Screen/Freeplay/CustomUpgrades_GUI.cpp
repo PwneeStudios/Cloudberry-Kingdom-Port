@@ -72,11 +72,11 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<PictureIcon> pic = boost::dynamic_pointer_cast<PictureIcon>( gui->BigIcon );
 			if ( slider->getMyFloat()->getVal() > 7.6f )
-				pic->IconQuad->setTextureName( _T( "fblock_castle_3" ) );
+				pic->IconQuad->setTextureName( std::wstring( L"fblock_castle_3" ) );
 			else if ( slider->getMyFloat()->getVal() > 3.2f )
-				pic->IconQuad->setTextureName( _T( "fblock_castle_2" ) );
+				pic->IconQuad->setTextureName( std::wstring( L"fblock_castle_2" ) );
 			else
-				pic->IconQuad->setTextureName( _T( "fblock_castle_1" ) );
+				pic->IconQuad->setTextureName( std::wstring( L"fblock_castle_1" ) );
 		}
 	}
 
@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::AddUpgrade( Upgrade upgrade )
 	{
-		boost::shared_ptr<MenuSlider> slider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( _T( "" ), ItemFont ) );
+		boost::shared_ptr<MenuSlider> slider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( std::wstring( L"" ), ItemFont ) );
 		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f, .72f) * .975f * ScaleList );
 		slider->SetIcon( ObjectIcon::CreateIcon( upgrade ) );
 		slider->Icon->SetScale( .6f * ScaleList );
@@ -297,7 +297,8 @@ namespace CloudberryKingdom
 		PosAdd.Y *= 1.18f * ScaleList;
 
 		// Add obstacles
-		for ( std::vector<Upgrade>::const_iterator upgrade = GetUpgradeList().begin(); upgrade != GetUpgradeList().end(); ++upgrade )
+		std::vector<Upgrade> vec = GetUpgradeList();
+		for ( std::vector<Upgrade>::const_iterator upgrade = vec.begin(); upgrade != vec.end(); ++upgrade )
 			AddUpgrade( *upgrade );
 
 		MyPile = boost::make_shared<DrawPile>();
@@ -308,9 +309,9 @@ namespace CloudberryKingdom
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
-		backdrop->Name = _T( "Backdrop" );
-		MyPile->Add( backdrop, _T( "Backdrop" ) );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
+		backdrop->Name = std::wstring( L"Backdrop" );
+		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
 		backdrop->setSize( Vector2( 1682.54f, 1107.681f ) );
 		backdrop->setPos( Vector2( 347.2231f, 51.58749f ) );
 
@@ -321,7 +322,7 @@ namespace CloudberryKingdom
 
 		// Header
 		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( HeaderText(), ItemFont );
-		LocationText->Name = _T( "Header" );
+		LocationText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( LocationText );
 		MyPile->Add( LocationText );
 
@@ -337,7 +338,7 @@ namespace CloudberryKingdom
 	{
 	#if defined(PC_VERSION)
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Start" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Start" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 317.0639f, 22.30127f ) );
@@ -345,7 +346,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.8f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Random" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Random" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 325.7295f, -155.4283f ) );
@@ -353,7 +354,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.8f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Reset" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Reset" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 324.1416f, -326.0634f ) );
@@ -361,7 +362,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.8f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 327.3179f, -498.3018f ) );
@@ -373,13 +374,13 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -202.7773f, -122.2222f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "TopText" ) );
+		_t = MyPile->FindEzText( std::wstring( L"TopText" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 508.8778f, 725 ) );
 			_t->setScale( 0.664f );
 		}
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -872.222f, 936.1112f ) );
@@ -387,7 +388,7 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 307.143f, -23.41241f ) );
@@ -400,29 +401,29 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -202.7773f, -122.2222f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Start" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Start" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 323.017f, -78.88908f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Random" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Random" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 470.5718f, -323.2856f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Back" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Back" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 629.6987f, -550.2858f ) );
 		}
-		_t = MyPile->FindEzText( _T( "TopText" ) );
+		_t = MyPile->FindEzText( std::wstring( L"TopText" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 773.5558f, 725 ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 307.143f, -23.41241f ) );
@@ -460,7 +461,7 @@ namespace CloudberryKingdom
 		// Start
 		boost::shared_ptr<MenuItem> item;
 		boost::shared_ptr<MenuItem> Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
-		item->Name = _T( "Start" );
+		item->Name = std::wstring( L"Start" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -473,7 +474,7 @@ namespace CloudberryKingdom
 
 		// Random
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
-		item->Name = _T( "Random" );
+		item->Name = std::wstring( L"Random" );
 		item->setGo( Cast::ToItem( boost::make_shared<RandomizeProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -483,7 +484,7 @@ namespace CloudberryKingdom
 
 		// Zero
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
-		item->Name = _T( "Reset" );
+		item->Name = std::wstring( L"Reset" );
 		item->setGo( Cast::ToItem( boost::make_shared<ZeroProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -493,7 +494,7 @@ namespace CloudberryKingdom
 
 		// Back
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
-		item->Name = _T( "Back" );
+		item->Name = std::wstring( L"Back" );
 		item->_Go.reset();
 		AddItem( item );
 		item->SelectSound.reset();
@@ -503,29 +504,29 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 	#else
 		boost::shared_ptr<EzText> text;
-		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Start" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + std::wstring( L" Start" ), ItemFont );
 		text->setPos( Vector2( 417.4604f, -159.4446f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
-		MyPile->Add( text, _T( "Start" ) );
+		MyPile->Add( text, std::wstring( L"Start" ) );
 
-		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Random" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + std::wstring( L" Random" ), ItemFont );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
 		text->MyFloatColor = ( Color( static_cast<unsigned char>( 204 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
-		MyPile->Add( text, _T( "Random" ) );
+		MyPile->Add( text, std::wstring( L"Random" ) );
 
-		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
+		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + std::wstring( L" Back" ), ItemFont );
 		text->setPos( Vector2( 682.4761f, -622.5079f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
-		MyPile->Add( text, _T( "Back" ) );
+		MyPile->Add( text, std::wstring( L"Back" ) );
 	#endif
 	}
 
 	void CustomUpgrades_GUI::MakeTopText()
 	{
-		TopText = boost::make_shared<EzText>( _T( "   " ), ItemFont, true, true );
+		TopText = boost::make_shared<EzText>( std::wstring( L"   " ), ItemFont, true, true );
 		SetTextProperties( TopText );
 		TopText->Shadow = false;
-		MyPile->Add( TopText, _T( "TopText" ) );
+		MyPile->Add( TopText, std::wstring( L"TopText" ) );
 		TopText->setScale( TopText->getScale() * .83f );
 		TopText->setPos( Vector2( 199.2069f, 746.0317f ) );
 		TopText->Center();

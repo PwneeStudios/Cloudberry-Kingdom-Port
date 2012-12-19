@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 2, 0, 0, 0 );
 		Name = Localization::Words_WHEELIE;
-		NameTemplate = _T( "wheelie" );
+		NameTemplate = std::wstring( L"wheelie" );
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
 	}
 
 	const boost::shared_ptr<BobPhsxWheel> &BobPhsxWheel::getInstance()
@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 	BobPhsxWheel::BobPhsxWheel()
 	{
 		InitializeInstanceFields();
-		LandSound = Tools::SoundWad->FindByName( _T( "BoxHero_Land" ) );
+		LandSound = Tools::SoundWad->FindByName( std::wstring( L"BoxHero_Land" ) );
 
 		DefaultValues();
 	}
@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsxNormal::Init( bob );
 
-		MyBob->JumpSound = Tools::SoundWad->FindByName( _T( "BoxHero_Jump" ) );
+		MyBob->JumpSound = Tools::SoundWad->FindByName( std::wstring( L"BoxHero_Jump" ) );
 
 		OnGround = false;
 		StartedJump = false;
@@ -80,7 +80,7 @@ namespace CloudberryKingdom
 
 		Ducking = false;
 
-		AnimIndex = MyBob->PlayerObject->FindAnim( _T( "Wheel" ) );
+		AnimIndex = MyBob->PlayerObject->FindAnim( std::wstring( L"Wheel" ) );
 		MyBob->PlayerObject->Read( AnimIndex, 0 );
 	}
 

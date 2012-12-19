@@ -310,7 +310,7 @@ namespace CloudberryKingdom
 
 		// Header
 		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
-		item->Name = _T( "Header" );
+		item->Name = std::wstring( L"Header" );
 		item->Selectable = false;
 		SetHeaderProperties( item->MySelectedText );
 		AddItem( item );
@@ -331,8 +331,8 @@ namespace CloudberryKingdom
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
-		backdrop->Name = _T( "Backdrop" );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
+		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
 
 		SetPos();
@@ -388,17 +388,17 @@ namespace CloudberryKingdom
 	{
 	#if defined(PC_VERSION)
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Header" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 27.77808f, 925.0002f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 278.9676f, 937.6984f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "castle_testsave" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"castle_testsave" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 80.5547f, 516.1112f ) );
@@ -407,7 +407,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 2.77771f, 22.22221f ) );
@@ -417,7 +417,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( 0, 0 ) );
 	#else
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Header" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 27.77808f, 925.0002f ) );
@@ -426,18 +426,18 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Load" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Load" ) );
 		if ( _t != 0 )
 			_t->setPos( Vector2( 564.6826f, -51.11127f ) );
-		_t = MyPile->FindEzText( _T( "Delete" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Delete" ) );
 		if ( _t != 0 )
 			_t->setPos( Vector2( 570.572f, -309.3967f ) );
-		_t = MyPile->FindEzText( _T( "Back" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Back" ) );
 		if ( _t != 0 )
 			_t->setPos( Vector2( 579.6982f, -569.7302f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 2.77771f, 22.22221f ) );
@@ -517,22 +517,22 @@ namespace CloudberryKingdom
 		float scale = .75f;
 
 		boost::shared_ptr<EzText> text;
-		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + _T( " Load" ), ItemFont );
-		text->Name = _T( "Load" );
+		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + std::wstring( L" Load" ), ItemFont );
+		text->Name = std::wstring( L"Load" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 417.4604f, -159.4446f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		MyPile->Add( text );
 
-		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + _T( " Delete" ), ItemFont );
-		text->Name = _T( "Delete" );
+		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + std::wstring( L" Delete" ), ItemFont );
+		text->Name = std::wstring( L"Delete" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 531.6831f, -389.9523f ) );
 		text->MyFloatColor = ( Color( static_cast<unsigned char>( 204 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		MyPile->Add( text );
 
-		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + _T( " Back" ), ItemFont );
-		text->Name = _T( "Back" );
+		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + std::wstring( L" Back" ), ItemFont );
+		text->Name = std::wstring( L"Back" );
 		text->setScale( text->getScale() * scale );
 		text->setPos( Vector2( 682.4761f, -622.5079f ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;

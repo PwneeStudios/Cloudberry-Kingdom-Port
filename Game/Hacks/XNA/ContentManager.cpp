@@ -37,7 +37,7 @@ template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const s
 
 template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const std::wstring &name )
 {
-	return boost::make_shared<SpriteFont>();
+	return boost::make_shared<SpriteFont>( WstringToUtf8( name ) );
 }
 
 template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )

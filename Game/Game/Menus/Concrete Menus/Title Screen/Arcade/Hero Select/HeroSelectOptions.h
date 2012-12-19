@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct HeroSelectOptions : public ArcadeBaseMenu
 	{
-	
+
+		using ArcadeBaseMenu::SlideOut;
+		using ArcadeBaseMenu::SlideIn;
+		using ArcadeBaseMenu::Call;
+
 		using GUI_Panel::Call;
 
 	
@@ -33,7 +37,7 @@ namespace CloudberryKingdom
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 	
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );

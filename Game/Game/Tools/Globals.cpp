@@ -7,12 +7,12 @@ namespace CloudberryKingdom
 
 	void Globals::InitializeStatics()
 	{
-		Globals::ContentDirectory = _T( "" );
+		Globals::ContentDirectory = std::wstring( L"" );
 		Color tempVector[] = { Color::LightSeaGreen, Color::BlueViolet, Color::Fuchsia, Color::Gainsboro };
 		Globals::OnOffBlockColors = VecFromArray( tempVector );
 		bool tempVector2[] = { false, false, false, false };
 		Globals::ColorSwitch = VecFromArray( tempVector2 );
-		std::wstring tempVector3[] = { _T( "Fireball" ), _T( "Spike" ), _T( "Falling Block" ), _T( "Flying Blob" ), _T( "Fire Spinner" ), _T( "Moving Block" ), _T( "Elevator" ), _T( "Spikey Guy" ), _T( "Spinner" ), _T( "Laser" ), _T( "Ghost Block" ), _T( "Bouncy Block" ), _T( "Cloud" ), _T( "General" ), _T( "Speed" ), _T( "Jump" ), _T( "Ceiling" ) };
+		std::wstring tempVector3[] = { std::wstring( L"Fireball" ), std::wstring( L"Spike" ), std::wstring( L"Falling Block" ), std::wstring( L"Flying Blob" ), std::wstring( L"Fire Spinner" ), std::wstring( L"Moving Block" ), std::wstring( L"Elevator" ), std::wstring( L"Spikey Guy" ), std::wstring( L"Spinner" ), std::wstring( L"Laser" ), std::wstring( L"Ghost Block" ), std::wstring( L"Bouncy Block" ), std::wstring( L"Cloud" ), std::wstring( L"General" ), std::wstring( L"Speed" ), std::wstring( L"Jump" ), std::wstring( L"Ceiling" ) };
 		Globals::UpgradeString = VecFromArray( tempVector3 );
 	}
 

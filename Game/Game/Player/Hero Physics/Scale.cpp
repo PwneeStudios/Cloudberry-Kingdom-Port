@@ -26,8 +26,8 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 2, 0, 0 );
 		Name = Localization::Words_PHASE_BOB;
-		Adjective = _T( "phasing" );
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Phase" ) ), Color::White, 1.1f * DefaultIconWidth );
+		Adjective = std::wstring( L"phasing" );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Phase" ) ), Color::White, 1.1f * DefaultIconWidth );
 	}
 
 	const boost::shared_ptr<BobPhsxScale> &BobPhsxScale::getInstance()

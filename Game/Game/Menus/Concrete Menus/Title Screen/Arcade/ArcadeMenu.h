@@ -18,6 +18,10 @@ namespace CloudberryKingdom
 	struct ArcadeBaseMenu : public CkBaseMenu
 	{
 	
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		struct PlayGameProxy : public Lambda
 		{
 		

@@ -60,10 +60,10 @@ namespace CloudberryKingdom
 
 	void ProgressBar::InitStandardBar()
 	{
-		Outline->setTextureName( _T( "LoadOutline" ) );
+		Outline->setTextureName( std::wstring( L"LoadOutline" ) );
 		Outline->ScaleYToMatchRatio( 192 );
 
-		Fill->setTextureName( _T( "LoadFill" ) );
+		Fill->setTextureName( std::wstring( L"LoadFill" ) );
 		Fill->ScaleYToMatchRatio( 192 );
 		Width = Fill->getSize().X;
 	}
@@ -140,10 +140,10 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		this->ResourceCount = ResourceCount;
 
-		Whinney = Content->Load<SoundEffect>( _T( "Whinney" ) );
+		Whinney = Content->Load<SoundEffect>( std::wstring( L"Whinney" ) );
 
-		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadOutline" ) );
-		Tools::TextureWad->FindOrLoad( Content, _T( "Art/LoadScreen_Initial/LoadFill" ) );
+		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadOutline" ) );
+		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadFill" ) );
 
 		MyPile = boost::make_shared<DrawPile>();
 
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 		MyProgressBar = boost::make_shared<ProgressBar>();
 		MyProgressBar->setPos( Vector2( 900, -400 ) );
 
-		BlackQuad = boost::make_shared<QuadClass>( _T( "White" ), 1400.f );
+		BlackQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ), 1400.f );
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 255 ) );
 		BlackQuad->setAlpha( 0 );
 		BlackQuad->Layer = 1;

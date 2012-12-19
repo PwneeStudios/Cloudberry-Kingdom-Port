@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer = 9;
 		getBlockCore()->MyType = ObjectType_LAVA_BLOCK;
 
-		MyQuad->setEffectName( _T( "Lava" ) );
+		MyQuad->setEffectName( std::wstring( L"Lava" ) );
 	}
 
 	void LavaBlock::Release()

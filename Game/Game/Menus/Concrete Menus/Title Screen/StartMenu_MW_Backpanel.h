@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		enum State
 		{
 			State_NONE,
@@ -21,11 +25,11 @@ namespace CloudberryKingdom
 							State_SCENE_KOBBLER_BLUR
 		};
 	
-		virtual void Hide( const PresetPos &pos, int frames );
+		virtual void Hide( PresetPos pos, int frames );
 
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 		virtual void OnAdd();
 

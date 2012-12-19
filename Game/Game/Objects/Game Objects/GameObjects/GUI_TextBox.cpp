@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	void GUI_TextBox::Copy()
 	{
-		if ( getText() != _T("") && getText().length() > 0 )
+		if ( getText() != std::wstring( L"" ) && getText().length() > 0 )
 			Clipboard::SetText( getText() );
 	}
 #endif
@@ -288,8 +288,8 @@ namespace CloudberryKingdom
 		MyText->setScale( MyText->getScale() * fontscale );
 
 		// Backdrop
-		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
-		Backdrop->setTextureName( _T( "score_screen" ) );
+		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
+		Backdrop->setTextureName( std::wstring( L"score_screen" ) );
 		Backdrop->setSize( Vector2( 640.4763f, 138.0953f ) * scale );
 
 		MyText->setPos( Vector2( -522.2222f, 23.80954f ) * scale );
@@ -298,7 +298,7 @@ namespace CloudberryKingdom
 		// Caret
 		//var font = Resources.Font_Grobold42;
 		boost::shared_ptr<CloudberryKingdom::EzFont> font = Resources::LilFont;
-		Caret = boost::make_shared<EzText>( _T( "_" ), font, 1000.f, false, true,.575f );
+		Caret = boost::make_shared<EzText>( std::wstring( L"_" ), font, 1000.f, false, true,.575f );
 		Caret->MyFloatColor = Color::Black.ToVector4();
 		Caret->setPos( MyText->getPos() );
 		Caret->setScale( Caret->getScale() * fontscale );
@@ -306,8 +306,8 @@ namespace CloudberryKingdom
 		MyPile->Add( Caret );
 
 		// Select quad
-		SelectQuad = boost::make_shared<QuadClass>( boost::shared_ptr<EzTexture>(), true, false );
-		SelectQuad->setTextureName( _T( "White" ) );
+		SelectQuad = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
+		SelectQuad->setTextureName( std::wstring( L"White" ) );
 		SelectQuad->Quad_Renamed.SetColor( bColor( 255, 255, 255, 125 ) );
 		SelectQuad->setSize( Vector2( 100, 100 * scale.Y ) );
 		SelectQuad->Layer = 0;
@@ -409,7 +409,7 @@ namespace CloudberryKingdom
 
 		// If we're selecting move the caret one character to the left
 		if ( SelectIndex_End - SelectIndex_Start > 0 )
-			Caret->setX( Caret->getX() - MyText->GetWorldWidth(_T(" ")) );
+			Caret->setX( Caret->getX() - MyText->GetWorldWidth(std::wstring( L" " )) );
 
 		if ( DoRecenter )
 			MyText->setPos( Vector2( -MyText->GetWorldWidth() / 2, 0 ) );
@@ -454,7 +454,7 @@ namespace CloudberryKingdom
 		MyPile->Jiggle( true );
 
 		// Change the backdrop color
-		Backdrop->setTextureName( _T( "Score/Score_Screen_grey" ) );
+		Backdrop->setTextureName( std::wstring( L"Score/Score_Screen_grey" ) );
 
 		if ( OnEnter != 0 )
 			OnEnter->Apply();

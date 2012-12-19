@@ -13,13 +13,13 @@ namespace CloudberryKingdom
 	void Background::AddRainLayer( const boost::shared_ptr<Background> &b )
 	{
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__46->Name = _T( "Rain" );
+		__46->Name = std::wstring( L"Rain" );
 		__46->Foreground = true;
 		__46->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__47->Name = _T( "Rain" );
+		__47->Name = std::wstring( L"Rain" );
 		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Rain" ) );
+		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Rain" ) );
 		__47->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 158 ) );
 		__47->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 157 ), static_cast<unsigned char>( 157 ), static_cast<unsigned char>( 157 ), static_cast<unsigned char>( 91 ) );
 		__47->MyQuad->Quad_Renamed.BlendAddRatio = 0.42f;
@@ -56,8 +56,8 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
-			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
+			//if ( ( *l )->Name->Contains( std::wstring( L"Snow" ) ) )
+			if( ( *l )->Name.find( std::wstring( L"Snow" ) ) != std::wstring::npos )
 				( *l )->Show = true;
 	}
 
@@ -65,8 +65,8 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = b->MyCollection->Lists.begin(); l != b->MyCollection->Lists.end(); ++l )
-			//if ( ( *l )->Name->Contains( _T( "Snow" ) ) )
-			if( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
+			//if ( ( *l )->Name->Contains( std::wstring( L"Snow" ) ) )
+			if( ( *l )->Name.find( std::wstring( L"Snow" ) ) != std::wstring::npos )
 				( *l )->Show = false;
 	}
 
@@ -76,15 +76,15 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Background" );
+		__1->Name = std::wstring( L"Background" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "forest_sky" );
+		__2->Name = std::wstring( L"forest_sky" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_sky" ) );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_sky" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -102,15 +102,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__3->Name = _T( "Back_Hills" );
+		__3->Name = std::wstring( L"Back_Hills" );
 		__3->Foreground = false;
 		__3->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__4->Name = _T( "forest_backhills_trim" );
+		__4->Name = std::wstring( L"forest_backhills_trim" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__4->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backhills_trim" ) );
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backhills_trim" ) );
 		__4->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -124,11 +124,11 @@ namespace CloudberryKingdom
 		__3->Floaters.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "forest_backhills_p2_trim" );
+		__5->Name = std::wstring( L"forest_backhills_p2_trim" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backhills_p2_trim" ) );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backhills_p2_trim" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -146,15 +146,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __3 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__6->Name = _T( "Mid_Hills" );
+		__6->Name = std::wstring( L"Mid_Hills" );
 		__6->Foreground = false;
 		__6->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__7->Name = _T( "forest_mid_trim" );
+		__7->Name = std::wstring( L"forest_mid_trim" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_mid_trim" ) );
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_mid_trim" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -168,7 +168,7 @@ namespace CloudberryKingdom
 		__6->Floaters.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "forest_mid_p2_trim" );
+		__8->Name = std::wstring( L"forest_mid_p2_trim" );
 		__8->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 20274.01f, 4238.568f ), Vector2( 0, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__8->MyQuad->Quad_Renamed.v0.Pos = Vector2( -0.724421f, 1.089628f );
 
@@ -184,7 +184,7 @@ namespace CloudberryKingdom
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_mid_p2_trim" ) );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_mid_p2_trim" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -202,11 +202,11 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __6 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__9->Name = _T( "Clouds" );
+		__9->Name = std::wstring( L"Clouds" );
 		__9->Foreground = false;
 		__9->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "forest_clouds" );
+		__10->Name = std::wstring( L"forest_clouds" );
 		__10->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -26948.33f, 5153.887f ), Vector2( 0.9800779f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__10->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_clouds" ) );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_clouds" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -240,15 +240,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__11->Name = _T( "Small_Trees" );
+		__11->Name = std::wstring( L"Small_Trees" );
 		__11->Foreground = false;
 		__11->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__12->Name = _T( "forest_backtrees_p1_0" );
+		__12->Name = std::wstring( L"forest_backtrees_p1_0" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backtrees" ) );
 		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -262,11 +262,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __12 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__13->Name = _T( "forest_backtrees_p2_0" );
+		__13->Name = std::wstring( L"forest_backtrees_p2_0" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backtrees_p2" ) );
 		__13->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -280,11 +280,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __13 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__14->Name = _T( "forest_backtrees_p1_0" );
+		__14->Name = std::wstring( L"forest_backtrees_p1_0" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees" ) );
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backtrees" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -298,11 +298,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "forest_backtrees_p2_0" );
+		__15->Name = std::wstring( L"forest_backtrees_p2_0" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_backtrees_p2" ) );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_backtrees_p2" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -320,11 +320,11 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __11 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__16->Name = _T( "Snow1" );
+		__16->Name = std::wstring( L"Snow1" );
 		__16->Foreground = false;
 		__16->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__17->Name = _T( "Snow" );
+		__17->Name = std::wstring( L"Snow" );
 		__17->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -16817, 4586.932f ), 1 * Vector2( 21.61522f, -10.28082f ), Color( static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ) ) );
 		__17->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Snow" ) );
 		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 89 ) );
 		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ), static_cast<unsigned char>( 88 ) );
 		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -359,15 +359,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __16 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__18->Name = _T( "Big_Trees" );
+		__18->Name = std::wstring( L"Big_Trees" );
 		__18->Foreground = false;
 		__18->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = _T( "forest_foretrees_p1_0" );
+		__19->Name = std::wstring( L"forest_foretrees_p1_0" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -381,11 +381,11 @@ namespace CloudberryKingdom
 		__18->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "forest_foretrees_p2_0" );
+		__20->Name = std::wstring( L"forest_foretrees_p2_0" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees_p2" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -399,11 +399,11 @@ namespace CloudberryKingdom
 		__18->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = _T( "forest_foretrees_p1_0" );
+		__21->Name = std::wstring( L"forest_foretrees_p1_0" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -417,11 +417,11 @@ namespace CloudberryKingdom
 		__18->Floaters.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = _T( "forest_foretrees_p2_0" );
+		__22->Name = std::wstring( L"forest_foretrees_p2_0" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees_p2" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -435,11 +435,11 @@ namespace CloudberryKingdom
 		__18->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "forest_foretrees_p1_0" );
+		__23->Name = std::wstring( L"forest_foretrees_p1_0" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees" ) );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -453,11 +453,11 @@ namespace CloudberryKingdom
 		__18->Floaters.push_back( __23 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__24->Name = _T( "forest_foretrees_p2_0" );
+		__24->Name = std::wstring( L"forest_foretrees_p2_0" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "forest_foretrees_p2" ) );
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"forest_foretrees_p2" ) );
 		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -475,11 +475,11 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__25->Name = _T( "Snow2" );
+		__25->Name = std::wstring( L"Snow2" );
 		__25->Foreground = true;
 		__25->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__26->Name = _T( "Snow" );
+		__26->Name = std::wstring( L"Snow" );
 		__26->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -37182.87f, 1486.698f ), Vector2( 4.900445f, -4.900445f ), Color( static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ) ) );
 		__26->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
@@ -495,7 +495,7 @@ namespace CloudberryKingdom
 		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__26->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Snow" ) );
 		__26->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 196 ) );
 		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ), static_cast<unsigned char>( 195 ) );
 		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -509,7 +509,7 @@ namespace CloudberryKingdom
 		__25->Floaters.push_back( __26 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__27->Name = _T( "Snow" );
+		__27->Name = std::wstring( L"Snow" );
 		__27->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4499.879f, 1865.506f ), Vector2( 6.533891f, -7.513808f ), Color( static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ) ) );
 		__27->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
@@ -525,7 +525,7 @@ namespace CloudberryKingdom
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Snow" ) );
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Snow" ) );
 		__27->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 224 ) );
 		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ), static_cast<unsigned char>( 223 ) );
 		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -555,15 +555,15 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Layer" );
+		__1->Name = std::wstring( L"Layer" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "cloud_castle_layer5" );
+		__2->Name = std::wstring( L"cloud_castle_layer5" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer5" ) );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer5" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -577,9 +577,9 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __2 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__3->Name = _T( "cloud_castle_layer5" );
+		__3->Name = std::wstring( L"cloud_castle_layer5" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer5_p2" ) );
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer5_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -599,13 +599,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__4->Name = _T( "Layer" );
+		__4->Name = std::wstring( L"Layer" );
 		__4->Foreground = false;
 		__4->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "cloud_castle_layer4" );
+		__5->Name = std::wstring( L"cloud_castle_layer4" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4" ) );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer4" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -621,9 +621,9 @@ namespace CloudberryKingdom
 		__4->Floaters.push_back( __5 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__6->Name = _T( "cloud_castle_layer4" );
+		__6->Name = std::wstring( L"cloud_castle_layer4" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer4_p2" ) );
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer4_p2" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -643,13 +643,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__7->Name = _T( "cloud_3" );
+		__7->Name = std::wstring( L"cloud_3" );
 		__7->Foreground = false;
 		__7->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "cloud_cloud_layer3_1" );
+		__8->Name = std::wstring( L"cloud_cloud_layer3_1" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_1" ) );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_1" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -665,9 +665,9 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __8 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__9->Name = _T( "cloud_cloud_layer3_2" );
+		__9->Name = std::wstring( L"cloud_cloud_layer3_2" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_2" ) );
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_2" ) );
 		__9->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -683,9 +683,9 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "cloud_cloud_layer3_3" );
+		__10->Name = std::wstring( L"cloud_cloud_layer3_3" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_3" ) );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_3" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -701,9 +701,9 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __10 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__11->Name = _T( "cloud_cloud_layer3_4" );
+		__11->Name = std::wstring( L"cloud_cloud_layer3_4" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_4" ) );
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_4" ) );
 		__11->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -719,9 +719,9 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __11 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__12->Name = _T( "cloud_cloud_layer3_5" );
+		__12->Name = std::wstring( L"cloud_cloud_layer3_5" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_5" ) );
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_5" ) );
 		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -737,9 +737,9 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __12 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__13->Name = _T( "cloud_cloud_layer3_6" );
+		__13->Name = std::wstring( L"cloud_cloud_layer3_6" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer3_6" ) );
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer3_6" ) );
 		__13->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -759,13 +759,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__14->Name = _T( "castle_3" );
+		__14->Name = std::wstring( L"castle_3" );
 		__14->Foreground = false;
 		__14->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "cloud_castle_layer3_1" );
+		__15->Name = std::wstring( L"cloud_castle_layer3_1" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_1" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -781,9 +781,9 @@ namespace CloudberryKingdom
 		__14->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = _T( "cloud_castle_layer3_2" );
+		__16->Name = std::wstring( L"cloud_castle_layer3_2" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_2" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -799,9 +799,9 @@ namespace CloudberryKingdom
 		__14->Floaters.push_back( __16 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__17->Name = _T( "cloud_castle_layer3_3" );
+		__17->Name = std::wstring( L"cloud_castle_layer3_3" );
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_3" ) );
 		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -817,9 +817,9 @@ namespace CloudberryKingdom
 		__14->Floaters.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = _T( "cloud_castle_layer3_1" );
+		__18->Name = std::wstring( L"cloud_castle_layer3_1" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_1" ) );
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_1" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -835,9 +835,9 @@ namespace CloudberryKingdom
 		__14->Floaters.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = _T( "cloud_castle_layer3_2" );
+		__19->Name = std::wstring( L"cloud_castle_layer3_2" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_2" ) );
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_2" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -853,9 +853,9 @@ namespace CloudberryKingdom
 		__14->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "cloud_castle_layer3_3" );
+		__20->Name = std::wstring( L"cloud_castle_layer3_3" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer3_3" ) );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer3_3" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -875,13 +875,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__21->Name = _T( "cloud_2" );
+		__21->Name = std::wstring( L"cloud_2" );
 		__21->Foreground = false;
 		__21->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = _T( "cloud_cloud_layer2_1" );
+		__22->Name = std::wstring( L"cloud_cloud_layer2_1" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer2_1" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -897,9 +897,9 @@ namespace CloudberryKingdom
 		__21->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "cloud_cloud_layer2_1" );
+		__23->Name = std::wstring( L"cloud_cloud_layer2_1" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer2_1" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -915,9 +915,9 @@ namespace CloudberryKingdom
 		__21->Floaters.push_back( __23 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__24->Name = _T( "cloud_cloud_layer2_1" );
+		__24->Name = std::wstring( L"cloud_cloud_layer2_1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer2_1" ) );
 		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -933,9 +933,9 @@ namespace CloudberryKingdom
 		__21->Floaters.push_back( __24 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__25->Name = _T( "cloud_cloud_layer2_1" );
+		__25->Name = std::wstring( L"cloud_cloud_layer2_1" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer2_1" ) );
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer2_1" ) );
 		__25->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -955,13 +955,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__26->Name = _T( "castle_2" );
+		__26->Name = std::wstring( L"castle_2" );
 		__26->Foreground = false;
 		__26->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__27->Name = _T( "cloud_castle_layer2_1" );
+		__27->Name = std::wstring( L"cloud_castle_layer2_1" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_1" ) );
 		__27->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -977,9 +977,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __27 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__28->Name = _T( "cloud_castle_layer2_2" );
+		__28->Name = std::wstring( L"cloud_castle_layer2_2" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_2" ) );
 		__28->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -995,9 +995,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __28 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__29->Name = _T( "cloud_castle_layer2_3" );
+		__29->Name = std::wstring( L"cloud_castle_layer2_3" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_3" ) );
 		__29->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1013,9 +1013,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __29 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__30->Name = _T( "cloud_castle_layer2_1" );
+		__30->Name = std::wstring( L"cloud_castle_layer2_1" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_1" ) );
 		__30->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1031,9 +1031,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __30 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__31->Name = _T( "cloud_castle_layer2_2" );
+		__31->Name = std::wstring( L"cloud_castle_layer2_2" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_2" ) );
 		__31->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1049,9 +1049,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __31 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__32->Name = _T( "cloud_castle_layer2_3" );
+		__32->Name = std::wstring( L"cloud_castle_layer2_3" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_3" ) );
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_3" ) );
 		__32->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1067,9 +1067,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __32 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__33->Name = _T( "cloud_castle_layer2_1" );
+		__33->Name = std::wstring( L"cloud_castle_layer2_1" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_1" ) );
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_1" ) );
 		__33->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1085,9 +1085,9 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __33 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__34->Name = _T( "cloud_castle_layer2_2" );
+		__34->Name = std::wstring( L"cloud_castle_layer2_2" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer2_2" ) );
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer2_2" ) );
 		__34->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1107,13 +1107,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __26 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__35->Name = _T( "cloud_1" );
+		__35->Name = std::wstring( L"cloud_1" );
 		__35->Foreground = false;
 		__35->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__36->Name = _T( "cloud_cloud_layer1_1" );
+		__36->Name = std::wstring( L"cloud_cloud_layer1_1" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_1" ) );
 		__36->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1129,9 +1129,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __36 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__37->Name = _T( "cloud_cloud_layer1_2" );
+		__37->Name = std::wstring( L"cloud_cloud_layer1_2" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_2" ) );
 		__37->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1147,9 +1147,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __37 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__38->Name = _T( "cloud_cloud_layer1_3" );
+		__38->Name = std::wstring( L"cloud_cloud_layer1_3" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_3" ) );
 		__38->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1165,9 +1165,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __38 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__39->Name = _T( "cloud_cloud_layer1_4" );
+		__39->Name = std::wstring( L"cloud_cloud_layer1_4" );
 		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
+		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_4" ) );
 		__39->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__39->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__39->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1183,9 +1183,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __39 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__40->Name = _T( "cloud_cloud_layer1_1" );
+		__40->Name = std::wstring( L"cloud_cloud_layer1_1" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_1" ) );
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_1" ) );
 		__40->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1201,9 +1201,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __40 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__41->Name = _T( "cloud_cloud_layer1_2" );
+		__41->Name = std::wstring( L"cloud_cloud_layer1_2" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_2" ) );
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_2" ) );
 		__41->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1219,9 +1219,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __41 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__42->Name = _T( "cloud_cloud_layer1_3" );
+		__42->Name = std::wstring( L"cloud_cloud_layer1_3" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_3" ) );
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_3" ) );
 		__42->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1237,9 +1237,9 @@ namespace CloudberryKingdom
 		__35->Floaters.push_back( __42 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__43->Name = _T( "cloud_cloud_layer1_4" );
+		__43->Name = std::wstring( L"cloud_cloud_layer1_4" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_cloud_layer1_4" ) );
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_cloud_layer1_4" ) );
 		__43->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1259,13 +1259,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __35 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__44->Name = _T( "castle_1" );
+		__44->Name = std::wstring( L"castle_1" );
 		__44->Foreground = false;
 		__44->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__45->Name = _T( "cloud_castle_layer1" );
+		__45->Name = std::wstring( L"cloud_castle_layer1" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cloud_castle_layer1" ) );
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cloud_castle_layer1" ) );
 		__45->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1297,15 +1297,15 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Backdrop" );
+		__1->Name = std::wstring( L"Backdrop" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "cave_backdrop_p1_0" );
+		__2->Name = std::wstring( L"cave_backdrop_p1_0" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_backdrop" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1319,11 +1319,11 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __2 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__3->Name = _T( "cave_backdrop_p2_0" );
+		__3->Name = std::wstring( L"cave_backdrop_p2_0" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_backdrop_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1337,11 +1337,11 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __3 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__4->Name = _T( "cave_backdrop_p1_1" );
+		__4->Name = std::wstring( L"cave_backdrop_p1_1" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__4->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__4->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop" ) );
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_backdrop" ) );
 		__4->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1355,11 +1355,11 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "cave_backdrop_p2_1" );
+		__5->Name = std::wstring( L"cave_backdrop_p2_1" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_backdrop_p2" ) );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_backdrop_p2" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1377,15 +1377,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__6->Name = _T( "Top_2" );
+		__6->Name = std::wstring( L"Top_2" );
 		__6->Foreground = false;
 		__6->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__7->Name = _T( "cave_top_2_p1_0" );
+		__7->Name = std::wstring( L"cave_top_2_p1_0" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2" ) );
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_2" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1399,11 +1399,11 @@ namespace CloudberryKingdom
 		__6->Floaters.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "cave_top_2_p2_0" );
+		__8->Name = std::wstring( L"cave_top_2_p2_0" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_2_p2" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1417,11 +1417,11 @@ namespace CloudberryKingdom
 		__6->Floaters.push_back( __8 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__9->Name = _T( "cave_top_2_p1_1" );
+		__9->Name = std::wstring( L"cave_top_2_p1_1" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__9->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2" ) );
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_2" ) );
 		__9->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1435,11 +1435,11 @@ namespace CloudberryKingdom
 		__6->Floaters.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "cave_top_2_p2_1" );
+		__10->Name = std::wstring( L"cave_top_2_p2_1" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_2_p2" ) );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_2_p2" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1457,15 +1457,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __6 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__11->Name = _T( "Bottom_2" );
+		__11->Name = std::wstring( L"Bottom_2" );
 		__11->Foreground = false;
 		__11->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__12->Name = _T( "cave_bottom_2_p1" );
+		__12->Name = std::wstring( L"cave_bottom_2_p1" );
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_2_p1" ) );
 		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1479,11 +1479,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __12 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__13->Name = _T( "cave_bottom_2_p2" );
+		__13->Name = std::wstring( L"cave_bottom_2_p2" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_2_p2" ) );
 		__13->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1497,11 +1497,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __13 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__14->Name = _T( "cave_bottom_2_p1" );
+		__14->Name = std::wstring( L"cave_bottom_2_p1" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_2_p1" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1515,11 +1515,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "cave_bottom_2_p2" );
+		__15->Name = std::wstring( L"cave_bottom_2_p2" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p2" ) );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_2_p2" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1533,11 +1533,11 @@ namespace CloudberryKingdom
 		__11->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = _T( "cave_bottom_2_p1" );
+		__16->Name = std::wstring( L"cave_bottom_2_p1" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_2_p1" ) );
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_2_p1" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1555,15 +1555,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __11 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__17->Name = _T( "Bottom_1" );
+		__17->Name = std::wstring( L"Bottom_1" );
 		__17->Foreground = false;
 		__17->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = _T( "cave_bottom_1_p2_trim1" );
+		__18->Name = std::wstring( L"cave_bottom_1_p2_trim1" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_p2_trim1" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1577,11 +1577,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = _T( "cave_bottom_1_p2_trim2" );
+		__19->Name = std::wstring( L"cave_bottom_1_p2_trim2" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_p2_trim2" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1595,11 +1595,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "cave_bottom_1_trim1" );
+		__20->Name = std::wstring( L"cave_bottom_1_trim1" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_trim1" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1613,11 +1613,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = _T( "cave_bottom_1_trim2" );
+		__21->Name = std::wstring( L"cave_bottom_1_trim2" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_trim2" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1631,11 +1631,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = _T( "cave_bottom_1_p2_trim1" );
+		__22->Name = std::wstring( L"cave_bottom_1_p2_trim1" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim1" ) );
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_p2_trim1" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1649,11 +1649,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "cave_bottom_1_p2_trim2" );
+		__23->Name = std::wstring( L"cave_bottom_1_p2_trim2" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_p2_trim2" ) );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_p2_trim2" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1667,11 +1667,11 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __23 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__24->Name = _T( "cave_bottom_1_trim1" );
+		__24->Name = std::wstring( L"cave_bottom_1_trim1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim1" ) );
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_trim1" ) );
 		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1685,7 +1685,7 @@ namespace CloudberryKingdom
 		__17->Floaters.push_back( __24 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__25->Name = _T( "cave_bottom_1_trim2" );
+		__25->Name = std::wstring( L"cave_bottom_1_trim2" );
 		__25->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 15360.32f, -998.902f ), Vector2( 0, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__25->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.1347f, 0.9736457f );
 
@@ -1701,7 +1701,7 @@ namespace CloudberryKingdom
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_bottom_1_trim2" ) );
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_bottom_1_trim2" ) );
 		__25->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1719,15 +1719,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__26->Name = _T( "Top_1" );
+		__26->Name = std::wstring( L"Top_1" );
 		__26->Foreground = false;
 		__26->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__27->Name = _T( "cave_top_1_p1_0" );
+		__27->Name = std::wstring( L"cave_top_1_p1_0" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__27->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__27->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1" ) );
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_1" ) );
 		__27->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1741,11 +1741,11 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __27 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__28->Name = _T( "cave_top_1_p2_0" );
+		__28->Name = std::wstring( L"cave_top_1_p2_0" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_1_p2" ) );
 		__28->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1759,11 +1759,11 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __28 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__29->Name = _T( "cave_top_1_p1_1" );
+		__29->Name = std::wstring( L"cave_top_1_p1_1" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1" ) );
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_1" ) );
 		__29->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1777,11 +1777,11 @@ namespace CloudberryKingdom
 		__26->Floaters.push_back( __29 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__30->Name = _T( "cave_top_1_p2_1" );
+		__30->Name = std::wstring( L"cave_top_1_p2_1" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_top_1_p2" ) );
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_top_1_p2" ) );
 		__30->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1799,15 +1799,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __26 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__31->Name = _T( "Lights" );
+		__31->Name = std::wstring( L"Lights" );
 		__31->Foreground = false;
 		__31->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__32->Name = _T( "cave_lightshafts_p1_0" );
+		__32->Name = std::wstring( L"cave_lightshafts_p1_0" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_lightshafts" ) );
 		__32->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1821,11 +1821,11 @@ namespace CloudberryKingdom
 		__31->Floaters.push_back( __32 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__33->Name = _T( "cave_lightshafts_p2_0" );
+		__33->Name = std::wstring( L"cave_lightshafts_p2_0" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_lightshafts_p2" ) );
 		__33->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1839,11 +1839,11 @@ namespace CloudberryKingdom
 		__31->Floaters.push_back( __33 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__34->Name = _T( "cave_lightshafts_p1_1" );
+		__34->Name = std::wstring( L"cave_lightshafts_p1_1" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts" ) );
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_lightshafts" ) );
 		__34->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1857,11 +1857,11 @@ namespace CloudberryKingdom
 		__31->Floaters.push_back( __34 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__35->Name = _T( "cave_lightshafts_p2_1" );
+		__35->Name = std::wstring( L"cave_lightshafts_p2_1" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__35->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "cave_lightshafts_p2" ) );
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"cave_lightshafts_p2" ) );
 		__35->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1891,15 +1891,15 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Backdrop" );
+		__1->Name = std::wstring( L"Backdrop" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "hills_backdrop_p1_0" );
+		__2->Name = std::wstring( L"hills_backdrop_p1_0" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backdrop" ) );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backdrop" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1913,11 +1913,11 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __2 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__3->Name = _T( "hills_backdrop_p2_0" );
+		__3->Name = std::wstring( L"hills_backdrop_p2_0" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backdrop_p2" ) );
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backdrop_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1935,15 +1935,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__4->Name = _T( "Back_Castles" );
+		__4->Name = std::wstring( L"Back_Castles" );
 		__4->Foreground = false;
 		__4->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "hills_backcastles_trim" );
+		__5->Name = std::wstring( L"hills_backcastles_trim" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backcastles_trim" ) );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backcastles_trim" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1957,11 +1957,11 @@ namespace CloudberryKingdom
 		__4->Floaters.push_back( __5 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__6->Name = _T( "hills_backcastles_p2_trim" );
+		__6->Name = std::wstring( L"hills_backcastles_p2_trim" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backcastles_p2_trim" ) );
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backcastles_p2_trim" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -1979,15 +1979,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__7->Name = _T( "Hill" );
+		__7->Name = std::wstring( L"Hill" );
 		__7->Foreground = false;
 		__7->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "hills_backhills_p1_0" );
+		__8->Name = std::wstring( L"hills_backhills_p1_0" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills" ) );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2001,11 +2001,11 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __8 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__9->Name = _T( "hills_backhills_p2_0" );
+		__9->Name = std::wstring( L"hills_backhills_p2_0" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__9->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__9->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills_p2" ) );
 		__9->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2019,11 +2019,11 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "hills_backhills_p1_0" );
+		__10->Name = std::wstring( L"hills_backhills_p1_0" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills" ) );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2037,11 +2037,11 @@ namespace CloudberryKingdom
 		__7->Floaters.push_back( __10 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__11->Name = _T( "hills_backhills_p2_0" );
+		__11->Name = std::wstring( L"hills_backhills_p2_0" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__11->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__11->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills_p2" ) );
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills_p2" ) );
 		__11->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2059,15 +2059,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__12->Name = _T( "Hill" );
+		__12->Name = std::wstring( L"Hill" );
 		__12->Foreground = false;
 		__12->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__13->Name = _T( "hills_backhills2_trim" );
+		__13->Name = std::wstring( L"hills_backhills2_trim" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__13->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__13->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills2_trim" ) );
 		__13->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2081,7 +2081,7 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __13 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__14->Name = _T( "hills_backhills2_p2_trim" );
+		__14->Name = std::wstring( L"hills_backhills2_p2_trim" );
 		__14->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( 10065.5f, -192.9017f ), Vector2( 0, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__14->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1.000975f, 0.9990253f );
 
@@ -2097,7 +2097,7 @@ namespace CloudberryKingdom
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills2_p2_trim" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2111,11 +2111,11 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "hills_backhills2_trim" );
+		__15->Name = std::wstring( L"hills_backhills2_trim" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_trim" ) );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills2_trim" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2129,11 +2129,11 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = _T( "hills_backhills2_p2_trim" );
+		__16->Name = std::wstring( L"hills_backhills2_p2_trim" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_backhills2_p2_trim" ) );
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_backhills2_p2_trim" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2151,11 +2151,11 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __12 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__17->Name = _T( "Clouds" );
+		__17->Name = std::wstring( L"Clouds" );
 		__17->Foreground = false;
 		__17->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = _T( "hills_clouds" );
+		__18->Name = std::wstring( L"hills_clouds" );
 		__18->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -4171.699f, 2314.271f ), Vector2( 0.7512081f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__18->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
@@ -2171,7 +2171,7 @@ namespace CloudberryKingdom
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_clouds" ) );
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_clouds" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2189,15 +2189,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__19->Name = _T( "Hills" );
+		__19->Name = std::wstring( L"Hills" );
 		__19->Foreground = false;
 		__19->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "hills_hill1" );
+		__20->Name = std::wstring( L"hills_hill1" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hill1" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2211,11 +2211,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = _T( "hills_hillandtree" );
+		__21->Name = std::wstring( L"hills_hillandtree" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hillandtree" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2229,11 +2229,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = _T( "hills_hillandtree" );
+		__22->Name = std::wstring( L"hills_hillandtree" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hillandtree" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2247,11 +2247,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "hills_hill2" );
+		__23->Name = std::wstring( L"hills_hill2" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill2" ) );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hill2" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2265,11 +2265,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __23 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__24->Name = _T( "hills_hill1" );
+		__24->Name = std::wstring( L"hills_hill1" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hill1" ) );
 		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2283,11 +2283,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __24 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__25->Name = _T( "hills_hillandtree" );
+		__25->Name = std::wstring( L"hills_hillandtree" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__25->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__25->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hillandtree" ) );
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hillandtree" ) );
 		__25->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2301,11 +2301,11 @@ namespace CloudberryKingdom
 		__19->Floaters.push_back( __25 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__26->Name = _T( "hills_hill1" );
+		__26->Name = std::wstring( L"hills_hill1" );
 		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__26->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__26->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_hill1" ) );
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_hill1" ) );
 		__26->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2323,15 +2323,15 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__27->Name = _T( "Plants" );
+		__27->Name = std::wstring( L"Plants" );
 		__27->Foreground = false;
 		__27->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__28->Name = _T( "hills_plants_1" );
+		__28->Name = std::wstring( L"hills_plants_1" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__28->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__28->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_1" ) );
 		__28->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2345,11 +2345,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __28 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__29->Name = _T( "hills_plants_2" );
+		__29->Name = std::wstring( L"hills_plants_2" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__29->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__29->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_2" ) );
 		__29->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2363,11 +2363,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __29 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__30->Name = _T( "hills_plants_3" );
+		__30->Name = std::wstring( L"hills_plants_3" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__30->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__30->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_3" ) );
 		__30->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2381,11 +2381,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __30 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__31->Name = _T( "hills_plants_4" );
+		__31->Name = std::wstring( L"hills_plants_4" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__31->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__31->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_4" ) );
 		__31->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2399,11 +2399,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __31 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__32->Name = _T( "hills_plants_5" );
+		__32->Name = std::wstring( L"hills_plants_5" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__32->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__32->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_5" ) );
 		__32->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2417,11 +2417,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __32 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__33->Name = _T( "hills_plants_6" );
+		__33->Name = std::wstring( L"hills_plants_6" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__33->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__33->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_6" ) );
 		__33->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2435,11 +2435,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __33 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__34->Name = _T( "hills_plants_1" );
+		__34->Name = std::wstring( L"hills_plants_1" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__34->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__34->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_1" ) );
 		__34->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2453,11 +2453,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __34 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__35->Name = _T( "hills_plants_2" );
+		__35->Name = std::wstring( L"hills_plants_2" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__35->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__35->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_2" ) );
 		__35->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2471,11 +2471,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __35 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__36->Name = _T( "hills_plants_3" );
+		__36->Name = std::wstring( L"hills_plants_3" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__36->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__36->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_3" ) );
 		__36->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2489,11 +2489,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __36 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__37->Name = _T( "hills_plants_4" );
+		__37->Name = std::wstring( L"hills_plants_4" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__37->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__37->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_4" ) );
 		__37->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2507,11 +2507,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __37 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__38->Name = _T( "hills_plants_5" );
+		__38->Name = std::wstring( L"hills_plants_5" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__38->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__38->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_5" ) );
 		__38->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2525,11 +2525,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __38 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__39->Name = _T( "hills_plants_6" );
+		__39->Name = std::wstring( L"hills_plants_6" );
 		__39->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__39->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__39->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__39->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_6" ) );
 		__39->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__39->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__39->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2543,11 +2543,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __39 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__40->Name = _T( "hills_plants_1" );
+		__40->Name = std::wstring( L"hills_plants_1" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__40->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__40->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_1" ) );
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_1" ) );
 		__40->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2561,11 +2561,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __40 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__41->Name = _T( "hills_plants_2" );
+		__41->Name = std::wstring( L"hills_plants_2" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__41->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__41->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_2" ) );
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_2" ) );
 		__41->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2579,11 +2579,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __41 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__42->Name = _T( "hills_plants_3" );
+		__42->Name = std::wstring( L"hills_plants_3" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__42->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__42->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_3" ) );
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_3" ) );
 		__42->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2597,11 +2597,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __42 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__43->Name = _T( "hills_plants_4" );
+		__43->Name = std::wstring( L"hills_plants_4" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__43->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__43->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_4" ) );
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_4" ) );
 		__43->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2615,11 +2615,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __43 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__44->Name = _T( "hills_plants_5" );
+		__44->Name = std::wstring( L"hills_plants_5" );
 		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__44->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__44->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_5" ) );
+		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_5" ) );
 		__44->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__44->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__44->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2633,11 +2633,11 @@ namespace CloudberryKingdom
 		__27->Floaters.push_back( __44 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__45->Name = _T( "hills_plants_6" );
+		__45->Name = std::wstring( L"hills_plants_6" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__45->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__45->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
-		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "hills_plants_6" ) );
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"hills_plants_6" ) );
 		__45->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2667,13 +2667,13 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Wall" );
+		__1->Name = std::wstring( L"Wall" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "castle_wall" );
+		__2->Name = std::wstring( L"castle_wall" );
 		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_wall" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2689,9 +2689,9 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __2 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__3->Name = _T( "castle_wall_p2" );
+		__3->Name = std::wstring( L"castle_wall_p2" );
 		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_wall_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2707,9 +2707,9 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __3 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__4->Name = _T( "castle_wall" );
+		__4->Name = std::wstring( L"castle_wall" );
 		__4->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall" ) );
+		__4->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_wall" ) );
 		__4->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__4->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2725,9 +2725,9 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "castle_wall_p2" );
+		__5->Name = std::wstring( L"castle_wall_p2" );
 		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_wall_p2" ) );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_wall_p2" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2743,14 +2743,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __5 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__6->Name = _T( "Castle_Window_Left_Frame" );
+		__6->Name = std::wstring( L"Castle_Window_Left_Frame" );
 		__6->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Left_Frame" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__6->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__6->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Left_Mask" ) );
 
 		__6->MyQuad->Base = BasePoint( 821.9902f, 0, 0, 1827.779f, 1229.637f, -119.3635f );
 
@@ -2761,14 +2761,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __6 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__7->Name = _T( "Castle_Window_Center_Frame" );
+		__7->Name = std::wstring( L"Castle_Window_Center_Frame" );
 		__7->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Center_Frame" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__7->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__7->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Center_Mask" ) );
 
 		__7->MyQuad->Base = BasePoint( 1069.899f, 0, 0, 2655.173f, 3022.709f, -70.24944f );
 
@@ -2779,14 +2779,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "Castle_Window_Right_Frame" );
+		__8->Name = std::wstring( L"Castle_Window_Right_Frame" );
 		__8->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Right_Frame" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__8->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__8->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Right_Mask" ) );
 
 		__8->MyQuad->Base = BasePoint( 868.2858f, 0, 0, 1843.033f, 4746.968f, -156.1684f );
 
@@ -2797,14 +2797,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __8 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__9->Name = _T( "Castle_Window_Left_Frame" );
+		__9->Name = std::wstring( L"Castle_Window_Left_Frame" );
 		__9->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Left_Frame" ) );
+		__9->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Left_Frame" ) );
 		__9->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__9->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__9->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__9->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Left_Mask" ) );
+		__9->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__9->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Left_Mask" ) );
 
 		__9->MyQuad->Base = BasePoint( 821.9902f, 0, 0, 1827.779f, 10648.15f, -214.8148f );
 
@@ -2815,14 +2815,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "Castle_Window_Center_Frame" );
+		__10->Name = std::wstring( L"Castle_Window_Center_Frame" );
 		__10->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Center_Frame" ) );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Center_Frame" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__10->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__10->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Center_Mask" ) );
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Center_Mask" ) );
 
 		__10->MyQuad->Base = BasePoint( 1069.899f, 0, 0, 2655.173f, 12472.22f, -112.9629f );
 
@@ -2833,14 +2833,14 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __10 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__11->Name = _T( "Castle_Window_Right_Frame" );
+		__11->Name = std::wstring( L"Castle_Window_Right_Frame" );
 		__11->MyQuad->Quad_Renamed.MyEffect = Tools::WindowEffect;
-		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "Castle_Window_Right_Frame" ) );
+		__11->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"Castle_Window_Right_Frame" ) );
 		__11->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__11->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__11->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( _T( "Castle_Backdrop_2" ) );
-		__11->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( _T( "Castle_Window_Right_Mask" ) );
+		__11->MyQuad->Quad_Renamed.ExtraTexture1 = Tools::Texture( std::wstring( L"Castle_Backdrop_2" ) );
+		__11->MyQuad->Quad_Renamed.ExtraTexture2 = Tools::Texture( std::wstring( L"Castle_Window_Right_Mask" ) );
 
 		__11->MyQuad->Base = BasePoint( 868.2858f, 0, 0, 1843.033f, 14259.26f, -279.6296f );
 
@@ -2855,13 +2855,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__12->Name = _T( "Pillars" );
+		__12->Name = std::wstring( L"Pillars" );
 		__12->Foreground = false;
 		__12->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__13->Name = _T( "castle_pillar" );
+		__13->Name = std::wstring( L"castle_pillar" );
 		__13->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__13->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__13->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__13->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2877,9 +2877,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __13 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__14->Name = _T( "castle_pillar" );
+		__14->Name = std::wstring( L"castle_pillar" );
 		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2895,9 +2895,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "castle_pillar" );
+		__15->Name = std::wstring( L"castle_pillar" );
 		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2913,9 +2913,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = _T( "castle_pillar" );
+		__16->Name = std::wstring( L"castle_pillar" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2931,9 +2931,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __16 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__17->Name = _T( "castle_pillar" );
+		__17->Name = std::wstring( L"castle_pillar" );
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2949,9 +2949,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = _T( "castle_pillar" );
+		__18->Name = std::wstring( L"castle_pillar" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2967,9 +2967,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = _T( "castle_pillar" );
+		__19->Name = std::wstring( L"castle_pillar" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -2985,9 +2985,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "castle_pillar" );
+		__20->Name = std::wstring( L"castle_pillar" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3003,9 +3003,9 @@ namespace CloudberryKingdom
 		__12->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = _T( "castle_pillar" );
+		__21->Name = std::wstring( L"castle_pillar" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_pillar" ) );
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_pillar" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3025,13 +3025,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __12 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__22->Name = _T( "Chandeliers_Far" );
+		__22->Name = std::wstring( L"Chandeliers_Far" );
 		__22->Foreground = false;
 		__22->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "castle_chandelier_far" );
+		__23->Name = std::wstring( L"castle_chandelier_far" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3047,9 +3047,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __23 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__24->Name = _T( "castle_chandelier_far" );
+		__24->Name = std::wstring( L"castle_chandelier_far" );
 		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3065,9 +3065,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __24 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __25 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__25->Name = _T( "castle_chandelier_far" );
+		__25->Name = std::wstring( L"castle_chandelier_far" );
 		__25->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__25->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__25->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__25->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3083,9 +3083,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __25 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __26 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__26->Name = _T( "castle_chandelier_far" );
+		__26->Name = std::wstring( L"castle_chandelier_far" );
 		__26->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__26->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__26->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__26->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__26->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3101,9 +3101,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __26 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __27 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__27->Name = _T( "castle_chandelier_far" );
+		__27->Name = std::wstring( L"castle_chandelier_far" );
 		__27->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__27->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__27->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__27->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3119,9 +3119,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __27 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __28 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__28->Name = _T( "castle_chandelier_far" );
+		__28->Name = std::wstring( L"castle_chandelier_far" );
 		__28->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__28->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__28->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__28->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3137,9 +3137,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __28 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __29 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__29->Name = _T( "castle_chandelier_far" );
+		__29->Name = std::wstring( L"castle_chandelier_far" );
 		__29->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__29->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__29->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__29->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3155,9 +3155,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __29 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __30 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__30->Name = _T( "castle_chandelier_far" );
+		__30->Name = std::wstring( L"castle_chandelier_far" );
 		__30->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__30->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__30->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__30->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3173,9 +3173,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __30 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __31 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__31->Name = _T( "castle_chandelier_far" );
+		__31->Name = std::wstring( L"castle_chandelier_far" );
 		__31->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__31->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__31->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__31->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3191,9 +3191,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __31 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __32 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__32->Name = _T( "castle_chandelier_far" );
+		__32->Name = std::wstring( L"castle_chandelier_far" );
 		__32->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__32->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__32->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__32->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3209,9 +3209,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __32 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __33 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__33->Name = _T( "castle_chandelier_far" );
+		__33->Name = std::wstring( L"castle_chandelier_far" );
 		__33->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__33->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__33->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__33->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3227,9 +3227,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __33 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __34 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__34->Name = _T( "castle_chandelier_far" );
+		__34->Name = std::wstring( L"castle_chandelier_far" );
 		__34->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__34->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__34->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__34->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3245,9 +3245,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __34 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __35 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__35->Name = _T( "castle_chandelier_far" );
+		__35->Name = std::wstring( L"castle_chandelier_far" );
 		__35->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__35->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__35->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__35->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3263,9 +3263,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __35 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __36 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__36->Name = _T( "castle_chandelier_far" );
+		__36->Name = std::wstring( L"castle_chandelier_far" );
 		__36->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__36->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__36->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__36->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3281,9 +3281,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __36 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __37 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__37->Name = _T( "castle_chandelier_far" );
+		__37->Name = std::wstring( L"castle_chandelier_far" );
 		__37->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__37->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__37->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__37->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3299,9 +3299,9 @@ namespace CloudberryKingdom
 		__22->Floaters.push_back( __37 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __38 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__38->Name = _T( "castle_chandelier_far" );
+		__38->Name = std::wstring( L"castle_chandelier_far" );
 		__38->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_far" ) );
+		__38->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_far" ) );
 		__38->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__38->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3321,13 +3321,13 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __39 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__39->Name = _T( "Chandeliers_Close" );
+		__39->Name = std::wstring( L"Chandeliers_Close" );
 		__39->Foreground = false;
 		__39->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __40 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__40->Name = _T( "castle_chandelier_close" );
+		__40->Name = std::wstring( L"castle_chandelier_close" );
 		__40->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__40->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__40->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__40->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3343,9 +3343,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __40 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __41 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__41->Name = _T( "castle_chandelier_close" );
+		__41->Name = std::wstring( L"castle_chandelier_close" );
 		__41->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__41->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__41->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__41->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3361,9 +3361,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __41 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __42 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__42->Name = _T( "castle_chandelier_close" );
+		__42->Name = std::wstring( L"castle_chandelier_close" );
 		__42->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__42->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__42->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__42->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3379,9 +3379,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __42 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __43 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__43->Name = _T( "castle_chandelier_close" );
+		__43->Name = std::wstring( L"castle_chandelier_close" );
 		__43->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__43->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__43->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__43->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3397,9 +3397,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __43 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __44 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__44->Name = _T( "castle_chandelier_close" );
+		__44->Name = std::wstring( L"castle_chandelier_close" );
 		__44->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__44->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__44->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__44->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__44->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3415,9 +3415,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __44 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __45 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__45->Name = _T( "castle_chandelier_close" );
+		__45->Name = std::wstring( L"castle_chandelier_close" );
 		__45->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__45->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__45->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__45->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3433,9 +3433,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __45 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__46->Name = _T( "castle_chandelier_close" );
+		__46->Name = std::wstring( L"castle_chandelier_close" );
 		__46->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__46->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__46->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__46->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__46->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__46->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3451,9 +3451,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __46 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __47 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__47->Name = _T( "castle_chandelier_close" );
+		__47->Name = std::wstring( L"castle_chandelier_close" );
 		__47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__47->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__47->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__47->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__47->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3469,9 +3469,9 @@ namespace CloudberryKingdom
 		__39->Floaters.push_back( __47 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __48 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__48->Name = _T( "castle_chandelier_close" );
+		__48->Name = std::wstring( L"castle_chandelier_close" );
 		__48->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__48->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "castle_chandelier_close" ) );
+		__48->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"castle_chandelier_close" ) );
 		__48->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__48->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__48->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3503,12 +3503,12 @@ namespace CloudberryKingdom
 		b->MyGlobalIllumination = 1;
 		b->AllowLava = true;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __1 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__1->Name = _T( "Layer" );
+		__1->Name = std::wstring( L"Layer" );
 		__1->Foreground = false;
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__2->Name = _T( "sea_backdrop_p1_0" );
-		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop" ) );
+		__2->Name = std::wstring( L"sea_backdrop_p1_0" );
+		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_backdrop" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3525,8 +3525,8 @@ namespace CloudberryKingdom
 		__1->Floaters.push_back( __2 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__3->Name = _T( "sea_backdrop_p2_0" );
-		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_backdrop_p2" ) );
+		__3->Name = std::wstring( L"sea_backdrop_p2_0" );
+		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_backdrop_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3547,12 +3547,12 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __1 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __4 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__4->Name = _T( "Layer" );
+		__4->Name = std::wstring( L"Layer" );
 		__4->Foreground = false;
 		__4->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__5->Name = _T( "sea_behind_water_1" );
-		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_1" ) );
+		__5->Name = std::wstring( L"sea_behind_water_1" );
+		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_1" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3569,8 +3569,8 @@ namespace CloudberryKingdom
 		__4->Floaters.push_back( __5 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__6->Name = _T( "sea_behind_water_3" );
-		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
+		__6->Name = std::wstring( L"sea_behind_water_3" );
+		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_3" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3587,8 +3587,8 @@ namespace CloudberryKingdom
 		__4->Floaters.push_back( __6 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__7->Name = _T( "sea_behind_water_2" );
-		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_2" ) );
+		__7->Name = std::wstring( L"sea_behind_water_2" );
+		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_2" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3605,8 +3605,8 @@ namespace CloudberryKingdom
 		__4->Floaters.push_back( __7 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__8->Name = _T( "sea_behind_water_3" );
-		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_behind_water_3" ) );
+		__8->Name = std::wstring( L"sea_behind_water_3" );
+		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_3" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3627,12 +3627,12 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __4 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __9 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__9->Name = _T( "Layer" );
+		__9->Name = std::wstring( L"Layer" );
 		__9->Foreground = false;
 		__9->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__10->Name = _T( "sea_seamonster" );
-		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_seamonster" ) );
+		__10->Name = std::wstring( L"sea_seamonster" );
+		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_seamonster" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3653,12 +3653,12 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __9 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __11 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__11->Name = _T( "Layer" );
+		__11->Name = std::wstring( L"Layer" );
 		__11->Foreground = false;
 		__11->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__12->Name = _T( "sea_clouds" );
-		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_clouds" ) );
+		__12->Name = std::wstring( L"sea_clouds" );
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_clouds" ) );
 		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3691,12 +3691,12 @@ namespace CloudberryKingdom
 		b->MyCollection->Lists.push_back( __11 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __13 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
-		__13->Name = _T( "Layer" );
+		__13->Name = std::wstring( L"Layer" );
 		__13->Foreground = false;
 		__13->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__14->Name = _T( "sea_water_1" );
-		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_1" ) );
+		__14->Name = std::wstring( L"sea_water_1" );
+		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_water_1" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3713,8 +3713,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __14 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__15->Name = _T( "sea_water_2" );
-		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_water_2" ) );
+		__15->Name = std::wstring( L"sea_water_2" );
+		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_water_2" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3731,8 +3731,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = _T( "sea_rock_1" );
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
+		__16->Name = std::wstring( L"sea_rock_1" );
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
 		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3749,8 +3749,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __16 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__17->Name = _T( "sea_rock_2" );
-		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
+		__17->Name = std::wstring( L"sea_rock_2" );
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
 		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3767,8 +3767,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = _T( "sea_rock_3" );
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_3" ) );
+		__18->Name = std::wstring( L"sea_rock_3" );
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_3" ) );
 		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3785,8 +3785,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = _T( "sea_rock_4" );
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
+		__19->Name = std::wstring( L"sea_rock_4" );
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
 		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3803,8 +3803,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = _T( "sea_rock_5" );
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_5" ) );
+		__20->Name = std::wstring( L"sea_rock_5" );
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_5" ) );
 		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3821,8 +3821,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = _T( "sea_rock_1" );
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_1" ) );
+		__21->Name = std::wstring( L"sea_rock_1" );
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
 		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3839,8 +3839,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = _T( "sea_rock_2" );
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_2" ) );
+		__22->Name = std::wstring( L"sea_rock_2" );
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
 		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3857,8 +3857,8 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = _T( "sea_rock_4" );
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( _T( "sea_rock_4" ) );
+		__23->Name = std::wstring( L"sea_rock_4" );
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
 		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
@@ -3996,7 +3996,7 @@ namespace CloudberryKingdom
 		if ( GreenScreen )
 		{
 			TestQuad->Quad_Renamed.SetColor( Color( Vector3( 0, 1, 0 ) ) );
-			TestQuad->setTextureName( _T( "White" ) );
+			TestQuad->setTextureName( std::wstring( L"White" ) );
 			TestQuad->FullScreen( Cam );
 		}
 		else
@@ -4006,7 +4006,7 @@ namespace CloudberryKingdom
 			if ( TestTexture == 0 )
 			{
 				//TestTexture = Tools.Texture("BGPlain");
-				TestTexture = Tools::Texture( _T( "11 hill_4" ) );
+				TestTexture = Tools::Texture( std::wstring( L"11 hill_4" ) );
 			}
 			TestQuad->Quad_Renamed.setMyTexture( TestTexture );
 
@@ -4073,7 +4073,7 @@ namespace CloudberryKingdom
 		// Mod snow
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name.find( _T( "Snow" ) ) != std::wstring::npos )
+			if ( ( *l )->Name.find( std::wstring( L"Snow" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
@@ -4087,7 +4087,7 @@ namespace CloudberryKingdom
 		// Mod rain
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator l = MyCollection->Lists.begin(); l != MyCollection->Lists.end(); ++l )
-			if ( ( *l )->Name.find( _T( "Rain" ) ) != std::wstring::npos )
+			if ( ( *l )->Name.find( std::wstring( L"Rain" ) ) != std::wstring::npos )
 			{
 				( *l )->Show = true;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:

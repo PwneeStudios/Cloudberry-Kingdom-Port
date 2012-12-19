@@ -83,7 +83,7 @@ namespace CloudberryKingdom
 		SlideIn();
 	}
 
-	static std::wstring tempVector[] = { _T( "score_screen_grey" ), _T( "score_screen_grey" ), _T( "score_screen_grey" ) };
+	static std::wstring tempVector[] = { std::wstring( L"score_screen_grey" ), std::wstring( L"score_screen_grey" ), std::wstring( L"score_screen_grey" ) };
 	std::vector<std::wstring> HighScorePanel::TextureName = VecFromArray( tempVector );
 
 	HighScorePanel::HighScorePanel( boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist ) :
@@ -126,10 +126,10 @@ namespace CloudberryKingdom
 		Panels = std::vector<boost::shared_ptr<HighScorePanel> >( 2 );
 
 		Panels[ 0 ] = boost::static_pointer_cast<HighScorePanel>( shared_from_this() );
-		Panels[ 0 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
+		Panels[ 0 ]->Backdrop->setTextureName( std::wstring( L"score_screen_grey" ) );
 
 		Panels[ 1 ] = MakeMagic( HighScorePanel, ( levellist ) );
-		Panels[ 1 ]->Backdrop->setTextureName( _T( "score_screen_grey" ) );
+		Panels[ 1 ]->Backdrop->setTextureName( std::wstring( L"score_screen_grey" ) );
 
 		for ( int i = 0; i < 2; i++ )
 			Panels[ i ]->MakeSwapText();
@@ -163,11 +163,11 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		// Make the backdrop
-		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 500.f, true );
 		Backdrop->setDegrees( 90 );
-		Backdrop->setTextureName( _T( "Score/Score_Screen_grey" ) );
+		Backdrop->setTextureName( std::wstring( L"Score/Score_Screen_grey" ) );
 
-		MyPile->Add( Backdrop, _T( "Backdrop" ) );
+		MyPile->Add( Backdrop, std::wstring( L"Backdrop" ) );
 		Backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'High Score' text
@@ -176,7 +176,7 @@ namespace CloudberryKingdom
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		Text->setPos( Vector2( -675.6388f, 585 ) );
-		MyPile->Add( Text, _T( "Header" ) );
+		MyPile->Add( Text, std::wstring( L"Header" ) );
 		Text->Shadow = false;
 		Text->ShadowColor = Color( .36f,.36f,.36f,.86f );
 		Text->ShadowOffset = Vector2( -24, -20 );
@@ -207,7 +207,7 @@ namespace CloudberryKingdom
 	void HighScorePanel::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -675.6388f, 585 ) );
@@ -215,7 +215,7 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -102.7767f, -253.3332f ) );

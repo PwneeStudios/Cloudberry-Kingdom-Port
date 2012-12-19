@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
-		Init( _T( "" ) );
+		Init( std::wstring( L"" ) );
 		SetIcon( PhsxType );
 		Pos->RelVal = pos;
 		icon->SetScale( Scale );

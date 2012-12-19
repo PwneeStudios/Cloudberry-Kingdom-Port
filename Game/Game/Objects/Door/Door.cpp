@@ -25,9 +25,9 @@ namespace CloudberryKingdom
 		ShiftBottom = Vector2();
 		ShiftStart = Vector2();
 		CollisionSize = Vector2( 100, 200 );
-		DoorOpen = Tools::NewSound( _T( "Door_Opening" ), 1 );
-		DoorClose = Tools::NewSound( _T( "Door_Slamming" ), 1 );
-		Sign_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Sign_Off" ) ), Vector2( 275, -1 ) );
+		DoorOpen = Tools::NewSound( std::wstring( L"Door_Opening" ), 1 );
+		DoorClose = Tools::NewSound( std::wstring( L"Door_Slamming" ), 1 );
+		Sign_Renamed = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"Sign_Off" ) ), Vector2( 275, -1 ) );
 		ShowSign = false;
 	}
 
@@ -280,7 +280,7 @@ namespace CloudberryKingdom
 		save = getPos();
 
 		if ( Sound )
-			Tools::SoundWad->FindByName( _T( "Bash" ) )->Play( 1 );
+			Tools::SoundWad->FindByName( std::wstring( L"Bash" ) )->Play( 1 );
 	}
 
 	void Door::DoShake()

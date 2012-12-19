@@ -181,9 +181,9 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 	#if defined(WINDOWS)
 		Tools::Keyboard = Keyboard::GetState();
 
-		// FIXME: These are all value types.
+		// FIXED: PrevKeyboard was a value type that needed to get initalized.
 		//if ( Tools::PrevKeyboard == 0 )
-			Tools::PrevKeyboard = Tools::Keyboard;
+			//Tools::PrevKeyboard = Tools::Keyboard;
 
 		Tools::Mouse = Mouse::GetState();
 	#endif
@@ -832,7 +832,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		}
 	}
 	#endif
-
+		
 		// Get previous data to calculate Pressed and Released
 		if ( !Prev )
 		{
@@ -869,25 +869,25 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		switch ( MyType )
 		{
 			case MashType_HOLD:
-				s = _T( "Hold {p" );
+				s = std::wstring( L"Hold {p" );
 				break;
 			case MashType_TAP:
-				s = _T( "Tap {p" );
+				s = std::wstring( L"Tap {p" );
 				break;
 			case MashType_HOLD_DIR:
-				s = _T( "Hold {p" );
+				s = std::wstring( L"Hold {p" );
 				break;
 			default:
-				s = _T( "" );
+				s = std::wstring( L"" );
 				break;
 		}
 
-		s += _T( "Big_Button_" ) + Tools::ButtonNames[ static_cast<int>( MyButton1 ) ] + _T( ",75,75}" );
+		s += std::wstring( L"Big_Button_" ) + Tools::ButtonNames[ static_cast<int>( MyButton1 ) ] + std::wstring( L",75,75}" );
 
 		switch ( MyType )
 		{
 			case MashType_HOLD_DIR:
-				s += _T( " " ) + Tools::DirNames[ Dir ];
+				s += std::wstring( L" " ) + Tools::DirNames[ Dir ];
 				break;
 			default:
 				break;

@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		//MyPile.FadeIn(.1f);
 	}
 
-	void StartMenu_MW_Exit::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Exit::SlideOut( PresetPos Preset, int Frames )
 	{
 		VerifyQuitGameMenu2::SlideOut( Preset, 0 );
 	}

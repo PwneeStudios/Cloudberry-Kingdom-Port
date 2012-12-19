@@ -52,53 +52,8 @@ namespace CloudberryKingdom
 	CharacterSelect::CharacterSelect( int PlayerIndex, bool QuickJoin )
 	{
 		InitializeInstanceFields();
-		boost::shared_ptr<GameData> game = Tools::CurGameData;
 
-		Tools::StartGUIDraw();
-
-		this->PlayerIndex = PlayerIndex;
-		this->QuickJoin = QuickJoin;
-
-		InitCenters();
-		Center = Centers[ PlayerIndex ];
-		NormalZoomCenter = Center;
-
-		MyDoll = MakeMagic( Doll, ( PlayerIndex, shared_from_this() ) );
-		MyGamerTag = MakeMagic( GamerTag, ( PlayerIndex, shared_from_this() ) );
-		MyHeroLevel = MakeMagic( HeroLevel, ( PlayerIndex, shared_from_this() ) );
-		game->AddGameObject( MyDoll );
-		game->AddGameObject( MyGamerTag );
-		game->AddGameObject( MyHeroLevel );
-
-		InitColorScheme( PlayerIndex );
-
-		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, shared_from_this() ) ) );
-
-		/*
-		if (QuickJoin)
-		{
-	#if XBOX || XBOX_SIGNIN
-		    if (Player.MyGamer == null)
-		        game.AddGameObject(new SignInMenu(this));
-		    else
-		        game.AddGameObject(new SimpleMenu(PlayerIndex, this));
-	#else
-		    game.AddGameObject(new SimpleMenu(PlayerIndex, this));
-	#endif
-		}
-		else
-		{
-	#if PC_VERSION
-		    if (PlayerIndex == 0)
-		        game.AddGameObject(new SimpleMenu(PlayerIndex, this));
-		    else
-		        game.AddGameObject(new JoinText(this));
-	#else
-		    game.AddGameObject(new JoinText(this));
-	#endif
-		}
-		*/
-		Tools::EndGUIDraw();
+		// Rest of constructor is in CharacterSelect_PostConstruct
 	}
 
 	void CharacterSelect::InitColorScheme( int PlayerIndex )

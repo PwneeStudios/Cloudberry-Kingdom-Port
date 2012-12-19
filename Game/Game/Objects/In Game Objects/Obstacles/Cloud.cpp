@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Cloud::CloudTileInfo::InitializeInstanceFields()
 	{
-		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( _T( "Cloud1" ) ) ), Vector2( 250.f, 180.f ), Vector2( 0.f, -50.f ), Color( 1.f, 1.f, 1.f, .95f ) );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( Tools::Texture( std::wstring( L"Cloud1" ) ) ), Vector2( 250.f, 180.f ), Vector2( 0.f, -50.f ), Color( 1.f, 1.f, 1.f, .95f ) );
 		BoxSize = Vector2( 180, 50 );
 	}
 

@@ -17,9 +17,9 @@ namespace CloudberryKingdom
 		Awardments::CurShift = 0;
 		Awardments::Shift = 520;
 
-		Awardments::BeatStr = _T( "Beat a classic castle\non" );
+		Awardments::BeatStr = std::wstring( L"Beat a classic castle\non" );
 	
-		boost::shared_ptr<Awardment> tempVector[] = { boost::shared_ptr<Awardment>(), boost::make_shared<Awardment>( 1, _T( "Italian Plumbing" ), Awardments::BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), boost::make_shared<Awardment>( 2, _T( "Bubbly Bop" ), Awardments::BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), boost::make_shared<Awardment>( 3, _T( "Ghouls n' stickmen" ), Awardments::BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), boost::make_shared<Awardment>( 4, _T( "Gosu Master" ), Awardments::BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
+		boost::shared_ptr<Awardment> tempVector[] = { boost::shared_ptr<Awardment>(), boost::make_shared<Awardment>( 1, std::wstring( L"Italian Plumbing" ), Awardments::BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), boost::make_shared<Awardment>( 2, std::wstring( L"Bubbly Bop" ), Awardments::BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), boost::make_shared<Awardment>( 3, std::wstring( L"Ghouls n' stickmen" ), Awardments::BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), boost::make_shared<Awardment>( 4, std::wstring( L"Gosu Master" ), Awardments::BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
 		Awardments::BeatCampaign = VecFromArray( tempVector );
 	
 		for ( std::vector<boost::shared_ptr<Awardment> >::iterator award = Awardments::BeatCampaign.begin(); award != Awardments::BeatCampaign.end(); ++award ) 
@@ -29,31 +29,31 @@ namespace CloudberryKingdom
 		}
 
 		// FIXME: This should be LotsOfJumps but it's trapped in the header.
-		Awardments::JumpAlot = boost::make_shared<Awardment>( 5, _T( "Jumple-upagus" ), _T( "Jump " ) + StringConverterHelper::toString( /*LotsOfJumps*/10000 ) + _T( " times." ), Hat::Bubble );
+		Awardments::JumpAlot = boost::make_shared<Awardment>( 5, std::wstring( L"Jumple-upagus" ), std::wstring( L"Jump " ) + StringConverterHelper::toString( /*LotsOfJumps*/10000 ) + std::wstring( L" times." ), Hat::Bubble );
 		Awardment_PostConstruct( Awardments::JumpAlot );
-		Awardments::HoldForwardFreeplay = boost::make_shared<Awardment>( 6, _T( "White Rabbit" ), std::wstring( _T( "Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( _T( "level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
+		Awardments::HoldForwardFreeplay = boost::make_shared<Awardment>( 6, std::wstring( L"White Rabbit" ), std::wstring( std::wstring( L"Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( std::wstring( L"level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
 		Awardment_PostConstruct( Awardments::HoldForwardFreeplay );
-		Awardments::HeroRush_Score = boost::make_shared<Awardment>( 7, _T( "Locked IN" ), std::wstring( _T( "Score " ) ) + ToString( HeroRushScore ) + std::wstring( _T( " points in Hero Rush." ) ), Hat::FallingBlockHead );
+		Awardments::HeroRush_Score = boost::make_shared<Awardment>( 7, std::wstring( L"Locked IN" ), std::wstring( std::wstring( L"Score " ) ) + ToString( HeroRushScore ) + std::wstring( std::wstring( L" points in Hero Rush." ) ), Hat::FallingBlockHead );
 		Awardment_PostConstruct( Awardments::HeroRush_Score );
-		Awardments::Escalation_Levels = boost::make_shared<Awardment>( 8, _T( "Iron Man" ), _T( "Beat 26.2 levels in Escalation." ), Hat::FireHead );
+		Awardments::Escalation_Levels = boost::make_shared<Awardment>( 8, std::wstring( L"Iron Man" ), std::wstring( L"Beat 26.2 levels in Escalation." ), Hat::FireHead );
 		Awardment_PostConstruct( Awardments::Escalation_Levels );
-		Awardments::FastCampaign2 = boost::make_shared<Awardment>( 10, _T( "Minute man" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle in under " ) ) + StringConverterHelper::toString( FastCampaign_Minutes ) + std::wstring( _T( " minutes." ) ), Hat::Pink );
+		Awardments::FastCampaign2 = boost::make_shared<Awardment>( 10, std::wstring( L"Minute man" ), std::wstring( std::wstring( L"Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( std::wstring( L"castle in under " ) ) + StringConverterHelper::toString( FastCampaign_Minutes ) + std::wstring( std::wstring( L" minutes." ) ), Hat::Pink );
 		Awardment_PostConstruct( Awardments::FastCampaign2 );
-		Awardments::HeroRush2_Score = boost::make_shared<Awardment>( 12, _T( "Jack of all sticks" ), std::wstring( _T( "Score " ) ) + ToString( HeroRush2Score ) + std::wstring( _T( " points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ) ), Hat::Fedora );
+		Awardments::HeroRush2_Score = boost::make_shared<Awardment>( 12, std::wstring( L"Jack of all sticks" ), std::wstring( std::wstring( L"Score " ) ) + ToString( HeroRush2Score ) + std::wstring( std::wstring( L" points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ) ), Hat::Fedora );
 		Awardment_PostConstruct( Awardments::HeroRush2_Score );
-		Awardments::PartiallyInvisibleCampaign = boost::make_shared<Awardment>( 13, _T( "I HAVE NO FEET" ), std::wstring( _T( "Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( _T( "castle while invisible. Cape and hat recommended." ) ), Hat::Ghost );
+		Awardments::PartiallyInvisibleCampaign = boost::make_shared<Awardment>( 13, std::wstring( L"I HAVE NO FEET" ), std::wstring( std::wstring( L"Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( std::wstring( L"castle while invisible. Cape and hat recommended." ) ), Hat::Ghost );
 		Awardment_PostConstruct( Awardments::PartiallyInvisibleCampaign );
-		Awardments::TotallyInvisibleCampaign = boost::make_shared<Awardment>( 14, _T( "Mind Games" ), _T( "Beat a" ) + CampaignHelper::GetName( 1 ) + _T( "castle while invisible, with no hat and no cape." ), Hat::Brain );
+		Awardments::TotallyInvisibleCampaign = boost::make_shared<Awardment>( 14, std::wstring( L"Mind Games" ), std::wstring( L"Beat a" ) + CampaignHelper::GetName( 1 ) + std::wstring( L"castle while invisible, with no hat and no cape." ), Hat::Brain );
 		Awardment_PostConstruct( Awardments::TotallyInvisibleCampaign );
-		Awardments::NoCoinFreeplay = boost::make_shared<Awardment>( 15, _T( "Chromotephobia" ), _T( "Beat a max length " ) + CampaignHelper::GetName( 2 ) + _T( "level without grabbing a single coin. Classic hero. No checkpoints." ), Hat::CheckpointHead );
+		Awardments::NoCoinFreeplay = boost::make_shared<Awardment>( 15, std::wstring( L"Chromotephobia" ), std::wstring( L"Beat a max length " ) + CampaignHelper::GetName( 2 ) + std::wstring( L"level without grabbing a single coin. Classic hero. No checkpoints." ), Hat::CheckpointHead );
 		Awardment_PostConstruct( Awardments::NoCoinFreeplay );
-		Awardments::AllCoinsAbusiveCastle = boost::make_shared<Awardment>( 16, _T( "Ebenezer" ), _T( "Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + _T( "castle." ), Hat::TopHat );
+		Awardments::AllCoinsAbusiveCastle = boost::make_shared<Awardment>( 16, std::wstring( L"Ebenezer" ), std::wstring( L"Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + std::wstring( L"castle." ), Hat::TopHat );
 		Awardment_PostConstruct( Awardments::AllCoinsAbusiveCastle );
-		Awardments::NoDeathsNormalCastle = boost::make_shared<Awardment>( 17, _T( "Untouchable" ), _T( "Beat an" ) + CampaignHelper::GetName( 2 ) + _T( "castle without dying once." ), Hat::Afro );
+		Awardments::NoDeathsNormalCastle = boost::make_shared<Awardment>( 17, std::wstring( L"Untouchable" ), std::wstring( L"Beat an" ) + CampaignHelper::GetName( 2 ) + std::wstring( L"castle without dying once." ), Hat::Afro );
 		Awardment_PostConstruct( Awardments::NoDeathsNormalCastle );
-		Awardments::PerfectEasyCastle = boost::make_shared<Awardment>( 18, _T( "Perfection" ), _T( "Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + _T( "castle without dying once. Image is everything." ), Hat::Halo );
+		Awardments::PerfectEasyCastle = boost::make_shared<Awardment>( 18, std::wstring( L"Perfection" ), std::wstring( L"Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + std::wstring( L"castle without dying once. Image is everything." ), Hat::Halo );
 		Awardment_PostConstruct( Awardments::PerfectEasyCastle );
-		Awardments::UnlockHeroRush2 = boost::make_shared<Awardment>( 100, _T( "Hero Rush 2 unlocked!" ),
+		Awardments::UnlockHeroRush2 = boost::make_shared<Awardment>( 100, std::wstring( L"Hero Rush 2 unlocked!" ),
 			Format( _T( "%lsRequired:%ls\n   Level %d in %lsHero Rush" ),
 			EzText::ColorToMarkup( Color( static_cast<unsigned char>( 205 ), static_cast<unsigned char>( 10 ), static_cast<unsigned char>( 10 ) ) ).c_str(),
 				EzText::ColorToMarkup( Color::White ).c_str(),
@@ -142,7 +142,8 @@ namespace CloudberryKingdom
 	void Awardments::CheckForAward_HoldForward()
 	{
 		bool Ran = false;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 		{
 			boost::shared_ptr<PlayerStats> stats = ( *p )->GetStats( StatGroup_LEVEL );
 			float ratio = stats->FinalTimeSpentNotMoving / static_cast<float>( stats->FinalTimeSpent );
@@ -266,7 +267,8 @@ namespace CloudberryKingdom
 		if ( PlayerManager::NotAllAwarded( award ) )
 		{
 			// Give the award to each player
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+			std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 				( *p )->Awardments_Renamed->Add( award->Guid );
 
 			// Show a note saying the reward was given

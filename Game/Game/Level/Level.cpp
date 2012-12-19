@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 
 	bool Level::FindFirstRowLambda::Apply( const boost::shared_ptr<BlockBase> &match )
 	{
-		return match->getCore()->IsCalled( _T( "FirstRow" ) );
+		return match->getCore()->IsCalled( std::wstring( L"FirstRow" ) );
 	}
 
 	Level::MakeVerticalCleanupHelper::MakeVerticalCleanupHelper( const boost::shared_ptr<Level> &level )
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 				if ( Style->MyInitialPlatsType == StyleData::InitialPlatsType_UP_TILED_FLOOR )
 				{
 					for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
-						if ( ( *_block )->getCore()->IsCalled( _T("FirstRow")  ))
+						if ( ( *_block )->getCore()->IsCalled( std::wstring( L"FirstRow" )  ))
 							( *_block )->CollectSelf();
 
 					FinalCamZone->End.Y += 400;
@@ -403,7 +403,7 @@ namespace CloudberryKingdom
 					block->Stretch( Side_LEFT, -2000 );
 					block->Stretch( Side_BOTTOM, -800 );
 					block->Extend( Side_TOP, startblock->getBox()->Current->TR.Y + 1 );
-					block->getCore()->EditorCode1 = _T("Tiled bottom");
+					block->getCore()->EditorCode1 = std::wstring( L"Tiled bottom" );
 				}
 				else
 					block->Clone( startblock );
@@ -505,16 +505,16 @@ namespace CloudberryKingdom
 		Size = Vector2( 100, 50 );
 		Step = Vector2( 300, 390 );
 
-		std::wstring BottomRowTag = _T( "" ), TopRowTag = _T( "" );
+		std::wstring BottomRowTag = std::wstring( L"" ), TopRowTag = std::wstring( L"" );
 		if ( Geometry == LevelGeometry_UP )
 		{
-			BottomRowTag = _T( "FirstRow" );
-			TopRowTag = _T( "LastRow" );
+			BottomRowTag = std::wstring( L"FirstRow" );
+			TopRowTag = std::wstring( L"LastRow" );
 		}
 		else if ( Geometry == LevelGeometry_DOWN )
 		{
-			BottomRowTag = _T( "LastRow" );
-			TopRowTag = _T( "FirstRow" );
+			BottomRowTag = std::wstring( L"LastRow" );
+			TopRowTag = std::wstring( L"FirstRow" );
 		}
 
 		// Vary the spacing depending on how high the hero can jump
@@ -573,7 +573,7 @@ namespace CloudberryKingdom
 
 		// Set flag when a block on the last row is used.
 		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
-			if ( ( *block )->getCore()->IsCalled( _T("LastRow") ) )
+			if ( ( *block )->getCore()->IsCalled( std::wstring( L"LastRow" ) ) )
 				( *block )->getCore()->GenData.OnUsed = boost::make_shared<EndReachedLambda>( shared_from_this() );
 
 		// Initial platform
@@ -626,7 +626,7 @@ namespace CloudberryKingdom
 		//        nblock.MakeTopOnly();
 		//}
 
-		DEBUGMsg( _T( "Pre stage 1, about to reset" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 1, about to reset" ) );
 
 		PlayMode = 2;
 		RecordPosition = true;
@@ -1341,8 +1341,8 @@ namespace CloudberryKingdom
 			MyGame->AllowQuickJoin = false;
 		}
 
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			CoinsCountInStats = true;
 			( *player )->getStats()->TotalCoins += NumCoins;
@@ -1623,7 +1623,7 @@ const float Level::SafetyNetHeight = 124;
 		nblock->getBlockCore()->Virgin = true;
 		nblock->getCore()->GenData.AlwaysLandOn = true;
 
-		nblock->getCore()->EditorCode1 = _T("Landing Platform");
+		nblock->getCore()->EditorCode1 = std::wstring( L"Landing Platform" );
 
 		AddBlock( nblock );
 
@@ -1805,7 +1805,7 @@ bool Level::dodebug = false;
 
 		CloudberryKingdomGame::debugstring = str;
 		//delay( 5000 );
-		CloudberryKingdomGame::debugstring = _T( "DOING" ) + str;
+		CloudberryKingdomGame::debugstring = std::wstring( L"DOING" ) + str;
 	#endif
 	}
 
@@ -1824,7 +1824,7 @@ bool Level::dodebug = false;
 		}
 	}
 
-	std::wstring Level::Pre1 = _T( "" ), Level::Pre2 = _T( "" ), Level::Post = _T( "" );
+	std::wstring Level::Pre1 = std::wstring( L"" ), Level::Pre2 = std::wstring( L"" ), Level::Post = std::wstring( L"" );
 	int Level::Step1 = 0, Level::Step2 = 0;
 
 	bool Level::MakeSingle( int Length, float MaxRight, float MaxLeft, int StartPhsxStep, int ReturnEarly, const boost::shared_ptr<MakeData> &makeData )
@@ -1832,14 +1832,14 @@ bool Level::dodebug = false;
 		int TestNumber;
 
 		// Tracking info
-		Pre1 = Pre2 = Post = _T( "" );
+		Pre1 = Pre2 = Post = std::wstring( L"" );
 		Step1 = Step2 = 0;
 		Pre1 += L'A';
 
 		this->MaxRight = MaxRight;
 
 		PREFILL();
-		DEBUGMsg( _T( "Pre stage 1, about to fill" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 1, about to fill" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test: %d" ), TestNumber ).c_str() );
 
@@ -1991,7 +1991,7 @@ bool Level::dodebug = false;
 		}
 
 		Pre1 += L'C';
-		DEBUGMsg( _T( "Pre stage 1, about to reset" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 1, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test: %d" ), TestNumber ).c_str() );
 
@@ -2002,7 +2002,7 @@ bool Level::dodebug = false;
 			getPieceSeed()->PreStage1->Apply( shared_from_this() );
 		ResetAll( true );
 
-		DEBUGMsg( _T( "Pre stage 1, about to run through" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 1, about to run through" ) );
 
 		// Set special Bob parameters
 		MySourceGame->SetAdditionalBobParameters( Computers );
@@ -2034,7 +2034,7 @@ bool Level::dodebug = false;
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test c: %d" ), TestNumber ).c_str() );
 
-		DEBUGMsg( _T( "Done with stage 1 run through, about to cleanup" ) );
+		DEBUGMsg( std::wstring( L"Done with stage 1 run through, about to cleanup" ) );
 
 		// Stage 1 Cleanup
 		Stage1Cleanup( BL_Bound, TR_Bound );
@@ -2043,7 +2043,7 @@ bool Level::dodebug = false;
 		CurPiece->PieceLength = LastStep - StartPhsxStep;
 
 
-		DEBUGMsg( _T( "Pre stage 2, about to fill" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 2, about to fill" ) );
 
 
 		// Pre Fill #2
@@ -2058,7 +2058,7 @@ bool Level::dodebug = false;
 		FinalizeBlocks();
 
 		Pre2 += L'C';
-		DEBUGMsg( _T( "Pre stage 2, about to reset" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 2, about to reset" ) );
 		TestNumber = getRnd()->RndInt(0, 1000);
 		Tools::Write( Format( _T( "Test d: %d" ), TestNumber ).c_str() );
 
@@ -2074,14 +2074,14 @@ bool Level::dodebug = false;
 		if ( ReturnEarly == 2 )
 			return false;
 
-		DEBUGMsg( _T( "Pre stage 2, about to run through" ) );
+		DEBUGMsg( std::wstring( L"Pre stage 2, about to run through" ) );
 		Pre2 += L'D';
 
 		// Stage 2 Run through
 		Stage2();
 		Post += L'A';
 
-		DEBUGMsg( _T( "Done with stage 2 run through, about to cleanup" ) );
+		DEBUGMsg( std::wstring( L"Done with stage 2 run through, about to cleanup" ) );
 		showdebug = true;
 
 		// Stage 2 Cleanup
@@ -2634,12 +2634,12 @@ int Level::AfterPostDrawLayer = 12;
 
 	std::wstring Level::DefaultLevelDirectory()
 	{
-		return Path::Combine( Globals::ContentDirectory, _T( "Levels" ) );
+		return Path::Combine( Globals::ContentDirectory, std::wstring( L"Levels" ) );
 	}
 
 	std::wstring Level::SourceLevelDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Levels") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), std::wstring( L"Content/Levels" ) );
 	}
 
 	void Level::Save( const std::wstring &file, bool Bin )
@@ -3366,13 +3366,13 @@ int Level::AfterPostDrawLayer = 12;
 	void Level::InitializeLighting()
 	{
 		LightTexture = boost::make_shared<EzTexture>();
-		LightTexture->Name = _T( "LightTexture" );
+		LightTexture->Name = std::wstring( L"LightTexture" );
 
 		boost::shared_ptr<PresentationParameters> pp = Tools::Device->PP;
 		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
 
 		LightQuad = boost::make_shared<QuadClass>();
-		LightQuad->setEffectName( _T( "LightMap" ) );
+		LightQuad->setEffectName( std::wstring( L"LightMap" ) );
 	}
 
 	static float tempVector[] = { 800, 70, 690, 630, 500 };
@@ -4181,7 +4181,7 @@ int Level::AfterPostDrawLayer = 12;
 		Finished = false;
 		LastSafetyBlock = 0;
 		__block_fromlambda = 0;
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		_PrivateRnd = 0;
 		SuppressSounds = false;
 		SuppressReplayButtons = false;

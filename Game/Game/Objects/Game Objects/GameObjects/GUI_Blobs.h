@@ -5,8 +5,13 @@
 
 namespace CloudberryKingdom
 {
+
 	struct GUI_Blobs : public GUI_Panel
 	{
+
+		using GUI_Panel::SlideOut;
+		using GUI_Panel::SlideIn;
+		using GUI_Panel::Call;
 	
 		struct TempStatsLambda : public PlayerIntLambda
 		{

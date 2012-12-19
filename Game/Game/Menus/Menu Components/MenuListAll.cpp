@@ -6,8 +6,8 @@ namespace CloudberryKingdom
 	Brackets::Brackets()
 	{
 		float Size = 50;
-		Br1 = boost::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
-		Br2 = boost::make_shared<QuadClass>( _T( "Edge2" ), Size, true );
+		Br1 = boost::make_shared<QuadClass>( std::wstring( L"Edge2" ), Size, true );
+		Br2 = boost::make_shared<QuadClass>( std::wstring( L"Edge2" ), Size, true );
 
 		//float Size = 53;
 		//Br1 = new QuadClass("Edge", Size, true);

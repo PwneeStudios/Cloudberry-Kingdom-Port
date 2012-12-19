@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> PhsxSlider::GetViewables()
 	{
-		std::wstring tempVector[] = { _T( "Pos" ), _T( "SelectedPos" ), _T( "!MyMenu" ), _T( "SliderShift" ), _T( "!MenuToAddTo" ) };
+		std::wstring tempVector[] = { std::wstring( L"Pos" ), std::wstring( L"SelectedPos" ), std::wstring( L"!MyMenu" ), std::wstring( L"SliderShift" ), std::wstring( L"!MenuToAddTo" ) };
 		return VecFromArray( tempVector );
 	}
 

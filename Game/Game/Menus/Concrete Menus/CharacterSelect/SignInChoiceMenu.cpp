@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	void SignInMenu::SignInNoLambda::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
-		sim->MyCharacterSelect->Player->StoredName = _T( "" );
+		sim->MyCharacterSelect->Player->StoredName = std::wstring( L"" );
 		sim->MyCharacterSelect->Player->Init();
 		sim->Call( boost::make_shared<SimpleMenu>( sim->getControl(), sim->MyCharacterSelect ) );
 		sim->Hide();
@@ -112,15 +112,15 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzFont> font = Resources::Font_Grobold42;
 		float FontScale = .775f;
 
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( _T( "Sign in?" ), font ) );
-		item->Name = _T( "Header" );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"Sign in?" ), font ) );
+		item->Name = std::wstring( L"Header" );
 		item->MyText->setScale( .89f );
 
 		MyMenu->Add( item );
 		item->Selectable = false;
 		pos.Y -= 1.35f * YSpacing;
 
-		const std::wstring tempVector[] = { _T( "Yes" ), _T( "No" ) };
+		const std::wstring tempVector[] = { std::wstring( L"Yes" ), std::wstring( L"No" ) };
 		std::vector<std::wstring> ItemString = VecFromArray( tempVector );
 		for ( int i = 0; i < 2; i++ )
 		{
@@ -137,10 +137,10 @@ namespace CloudberryKingdom
 		}
 		MyMenu->SelectItem( 1 );
 
-		MyMenu->Items[ 1 ]->Name = _T( "Yes" );
+		MyMenu->Items[ 1 ]->Name = std::wstring( L"Yes" );
 		MyMenu->Items[ 1 ]->setGo( boost::make_shared<SignInYesLambda>( shared_from_this() ) );
 
-		MyMenu->Items[ 2 ]->Name = _T( "No" );
+		MyMenu->Items[ 2 ]->Name = std::wstring( L"No" );
 		MyMenu->Items[ 2 ]->setGo( boost::make_shared<SignInNoLambda>( shared_from_this() ) );
 
 		MyMenu->MyPieceQuadTemplate.reset();
@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 	void SignInMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Header" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -416.668f, 527.7777f ) );
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 1 );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Yes" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Yes" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -108.333f, 149.4445f ) );
@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.775f );
 			_item->SelectIconOffset = Vector2( -88.88965f, -130.3333f );
 		}
-		_item = MyMenu->FindItemByName( _T( "No" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"No" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -72.22559f, -108.8889f ) );
