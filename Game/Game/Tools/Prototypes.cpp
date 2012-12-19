@@ -7,6 +7,7 @@
 #include "Hacks/NET/Path.h"
 
 #include <MasterHack.h>
+#include <Utility/Log.h>
 
 namespace CloudberryKingdom
 {

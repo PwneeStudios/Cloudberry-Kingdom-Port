@@ -5,6 +5,16 @@
 
 #include <Hacks/String.h>
 
+#ifdef CAFE
+#define NTOHS( x ) ( ( ( ( x ) & 0xff ) << 8 ) | ( ( ( x ) >> 8 ) & 0xff ) )
+#define NTOHL( x ) ( ( NTOHS( x & 0xffff ) << 16 ) | NTOHS( ( x >> 16 ) & 0xffff ) )
+#define NTOHLL( x ) ( ( NTOHL( x & 0xffffffff ) << 32 ) | NTOHL( ( x >> 32 ) & 0xffffffff ) )
+#else
+#define NTOHS( x ) ( x )
+#define NTOHL( x ) ( x )
+#define NTOHLL( x ) ( x )
+#endif
+
 BinaryReader::BinaryReader( const std::wstring &path ) :
 	file_( FILESYSTEM.Open( WstringToUtf8( path ) ) )
 {
@@ -19,6 +29,7 @@ int BinaryReader::ReadInt32()
 {
 	int t;
 	file_->Read( reinterpret_cast<char *>( &t ), 4 );
+	t = NTOHL( t );
 	return t;
 }
 
@@ -26,6 +37,7 @@ unsigned int BinaryReader::ReadUInt32()
 {
 	unsigned int t;
 	file_->Read( reinterpret_cast<char *>( &t ), 4 );
+	t = NTOHL( t );
 	return t;
 }
 
@@ -34,6 +46,7 @@ unsigned long BinaryReader::ReadUInt64()
 {
 	unsigned long long t;
 	file_->Read( reinterpret_cast<char *>( &t ), 8 );
+	t = NTOHLL( t );
 	return static_cast<unsigned long>( t );
 }
 
@@ -81,9 +94,10 @@ bool BinaryReader::ReadBoolean()
 
 float BinaryReader::ReadSingle()
 {
-	float f;
-	file_->Read( reinterpret_cast<char *>( &f ), 4 );
-	return f;
+	unsigned int t;
+	file_->Read( reinterpret_cast<char *>( &t ), 4 );
+	t = NTOHL( t );
+	return *reinterpret_cast<float *>( &t );
 }
 
 unsigned char BinaryReader::ReadByte()

@@ -13,6 +13,7 @@
 #include <ResourceList\Resources_Art.h>
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
+#include <Utility/Log.h>
 
 namespace CloudberryKingdom
 {
@@ -296,7 +297,8 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		
 		//Thread::SpinWait( 100 );
 
-		Tools::Write( _T( "Start" ) );
+		//Tools::Write( _T( "Start" ) );
+		LOG.Write( "Start\n" );
 
 		// Initialize the Gamepads
 		Tools::GamepadState = std::vector<GamePadState>( 4 );
@@ -319,7 +321,8 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Old_Art_Holdover") );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Title") );
 
-		Tools::Write( _T( "ArtMusic done..." ) );
+		//Tools::Write( _T( "ArtMusic done..." ) );
+		LOG.Write( "ArtMusic done...\n" );
 
 		// Load the tile info
 		LoadInfo();
@@ -349,13 +352,16 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Prototypes::LoadObjects();
 		ObjectIcon::InitIcons();
 
-		std::cout << _T( "Total resources: " ) << ResourceLoadedCountRef->MyFloat << std::endl;
+		//std::cout << _T( "Total resources: " ) << ResourceLoadedCountRef->MyFloat << std::endl;
+		LOG.Write( "Total resources: %d\n", static_cast<int>( ResourceLoadedCountRef->MyFloat ) );
 
 		// Note that we are done loading.
 		LoadingResources->MyBool = false;
-		Tools::Write( _T( "Loading done!" ) );
+		//Tools::Write( _T( "Loading done!" ) );
+		LOG.Write( "Loading done!\n" );
 
 		//Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
-		Tools::Write( Format( _T( "Load thread done ... NOW!" ) ).c_str() );
+		//Tools::Write( Format( _T( "Load thread done ... NOW!" ) ).c_str() );
+		LOG.Write( "Load thread done ... NOW!\n" );
 	}
 }

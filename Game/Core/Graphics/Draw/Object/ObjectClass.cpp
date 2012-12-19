@@ -118,20 +118,15 @@ namespace CloudberryKingdom
 
 	void ObjectClass::ReadFile( const boost::shared_ptr<BinaryReader> &reader, const boost::shared_ptr<EzEffectWad> &EffectWad, const boost::shared_ptr<EzTextureWad> &TextureWad )
 	{
-		LOG.Write( "ObjectClass::ReadFile\n" );
-
 		// Get object version number
 		VersionNumber = reader->PeekChar();
-		LOG.Write( "VersionNumber = %d\n", VersionNumber );
 		if ( VersionNumber > 50 )
 			VersionNumber = reader->ReadInt32();
-		LOG.Write( "VersionNumber = %d\n", VersionNumber );
 
 		// Get anim data
 		int length;
 
 		length = reader->ReadInt32();
-		LOG.Write( "VersionNumber = %d\n", length);
 		AnimLength = std::vector<int>( length );
 		for ( int i = 0; i < length; i++ )
 			AnimLength[ i ] = reader->ReadInt32();

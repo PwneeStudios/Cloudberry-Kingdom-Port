@@ -87,7 +87,7 @@ int CoreWiiU::Run()
 	{
 		game_.Update();
 
-		if( DEMODRCGetStatus() != GX2_DRC_NONE )
+		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
 			DEMODRCBeforeRender();
 
@@ -98,7 +98,7 @@ int CoreWiiU::Run()
 			GX2SetContextState( DEMODRCContextState );
 
 			DEMODRCDoneRender();
-		}
+		}*/
 
 		DEMOGfxBeforeRender();
 		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );

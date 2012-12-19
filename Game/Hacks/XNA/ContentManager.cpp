@@ -8,6 +8,7 @@
 #include "GraphicsDevice.h"
 
 #include <Hacks/String.h>
+#include <Utility/Log.h>
 
 template<> boost::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( const std::wstring &name )
 {
@@ -41,6 +42,7 @@ template<> boost::shared_ptr<SpriteFont> ContentManager::Load<SpriteFont>( const
 
 template<> boost::shared_ptr<Effect> ContentManager::Load<Effect>( const std::wstring &name )
 {
+	LOG.Write( "Loading effect: %s\n", WstringToUtf8( name ).c_str() );
 	boost::shared_ptr<Effect> effect = boost::make_shared<Effect>();
 	effect->Load( WstringToUtf8( name ) );
 	return effect;

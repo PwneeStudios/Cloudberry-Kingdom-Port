@@ -13,6 +13,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include <MasterHack.h>
+#include <Utility/Log.h>
 
 namespace CloudberryKingdom
 {

@@ -31,6 +31,7 @@ Effect::~Effect()
 
 void Effect::Load( const std::string &name )
 {
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( 0, 0 );
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )

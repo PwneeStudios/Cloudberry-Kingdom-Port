@@ -44,12 +44,9 @@ public:
 	 */
 	size_t Read( char *buffer, size_t length )
 	{
-		LOG.Write( "meep %d %d\n", buffer, length );
-
 		// Current position plus requested length goes beyond the buffer.
 		if( get_ + length >= length_ )
 		{
-			LOG.Write( "finishing read %d %d\n", buffer, length );
 			memcpy( buffer, buffer_ + get_, length_ - get_ );
 			get_ = length_;
 			return length_ - get_;
@@ -154,8 +151,6 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 
 	memset( &stat, 0, sizeof( FSStat ) );
 	FSGetStatFile( internal_->Client, internal_->Cmd, fh, &stat, FS_RET_NO_ERROR );
-
-	LOG.Write( "Size %d\n", stat.size );
 
 	char *buffer = reinterpret_cast< char * >( MEMAllocFromDefaultHeapEx( stat.size, FS_IO_BUFFER_ALIGN ) );
 	FSReadFile( internal_->Client, internal_->Cmd, buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
