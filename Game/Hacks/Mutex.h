@@ -4,15 +4,10 @@
 struct Mutex
 {
 
-
-
-	void Lock()
-	{
-	}
-
-	void Unlock()
-	{
-	}
+	Mutex();
+	~Mutex();
+	void Lock();
+	void Unlock();
 
 };
 

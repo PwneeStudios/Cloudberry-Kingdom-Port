@@ -108,6 +108,8 @@ int CoreWiiU::Run()
 
 		qd_->Flush();
 
+		DEMOGfxSetContextState();
+
 		DEMOGfxDoneRender();
 
 		// Close down.

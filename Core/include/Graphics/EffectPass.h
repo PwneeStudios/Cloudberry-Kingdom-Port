@@ -1,14 +1,19 @@
 #ifndef _EFFECTPASS_H_
 #define _EFFECTPASS_H_
 
+// Forward declarations.
+class Effect;
+
 class EffectPass
 {
 
-	unsigned int progId_;
+	struct EffectPassInternal *internal_;
 
 public:
 
-	EffectPass( unsigned int progId );
+	EffectPass( const Effect &effect, unsigned int id );
+	~EffectPass();
+
 	void Apply();
 
 };

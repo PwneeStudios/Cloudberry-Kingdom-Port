@@ -3,6 +3,7 @@
 
 #include "EffectPass.h"
 
+#include <boost/shared_ptr.hpp>
 #include <vector>
 
 class EffectTechnique
@@ -12,10 +13,9 @@ public:
 
 	std::vector<boost::shared_ptr<EffectPass> > Passes;
 
-	EffectTechnique( unsigned int progId )
+	EffectTechnique( const boost::shared_ptr<EffectPass> &pass )
 	{
-		Passes.resize( 1 );
-		Passes[ 0 ] = boost::make_shared<EffectPass>( progId );
+		Passes.push_back( pass );
 	}
 
 };

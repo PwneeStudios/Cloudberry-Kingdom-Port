@@ -15,9 +15,11 @@ class Effect
 
 	boost::shared_ptr<EffectTechnique> DefaultTechnique;
 
-public:
-
 	struct EffectInternal *internal_;
+	
+	friend class EffectPass;
+
+public:
 
 	boost::shared_ptr<EffectTechnique> CurrentTechnique;
 

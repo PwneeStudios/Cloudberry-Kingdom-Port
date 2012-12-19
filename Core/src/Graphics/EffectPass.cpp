@@ -2,12 +2,23 @@
 
 #include <GL/glew.h>
 
-EffectPass::EffectPass( unsigned int progId ) :
-	progId_( progId )
+struct EffectPassInternal
 {
+	GLuint id;
+};
+
+EffectPass::EffectPass( const Effect &effect, unsigned int id ) :
+	internal_( new EffectPassInternal )
+{
+	internal_->id = id;
+}
+
+EffectPass::~EffectPass()
+{
+	delete internal_;
 }
 
 void EffectPass::Apply()
 {
-	glUseProgram( progId_ );
+	glUseProgram( internal_->id );
 }

@@ -33,9 +33,6 @@ void Effect::Load( const std::string &name )
 	internal_->Program = CreateProgram( "Content/" + name );
 	assert( internal_->Program != 0 );
 
-	DefaultTechnique = boost::make_shared<EffectTechnique>( internal_->Program );
-	CurrentTechnique = DefaultTechnique;
-
 	GLint activeUniforms;
 	glGetProgramiv( internal_->Program, GL_ACTIVE_UNIFORMS, &activeUniforms );
 
@@ -50,6 +47,11 @@ void Effect::Load( const std::string &name )
 
 		internal_->Parameters[ buffer ] = boost::make_shared<EffectParameter>( internal_->Program, i );
 	}
+
+	DefaultTechnique = boost::make_shared<EffectTechnique>(
+		boost::make_shared<EffectPass>( *this, internal_->Program )
+	);
+	CurrentTechnique = DefaultTechnique;
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
