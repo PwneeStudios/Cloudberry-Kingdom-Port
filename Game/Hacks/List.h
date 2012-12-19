@@ -65,11 +65,4 @@ T Sum( const std::vector<T> &v )
 	return s;
 }
 
-template<typename Key, typename Value>
-void GetKeys( const std::map<Key, Value> &m, std::vector<Key> &keys)
-{
-	for( std::map<Key, Value>::const_iterator i = m.begin(); i != m.end(); ++i )
-		keys.push_back( i->first );
-}
-
 #endif

@@ -142,7 +142,8 @@ namespace CloudberryKingdom
 	void Awardments::CheckForAward_HoldForward()
 	{
 		bool Ran = false;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 		{
 			boost::shared_ptr<PlayerStats> stats = ( *p )->GetStats( StatGroup_LEVEL );
 			float ratio = stats->FinalTimeSpentNotMoving / static_cast<float>( stats->FinalTimeSpent );
@@ -266,7 +267,8 @@ namespace CloudberryKingdom
 		if ( PlayerManager::NotAllAwarded( award ) )
 		{
 			// Give the award to each player
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+			std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 				( *p )->Awardments_Renamed->Add( award->Guid );
 
 			// Show a note saying the reward was given

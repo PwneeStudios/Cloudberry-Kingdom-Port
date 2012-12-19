@@ -167,11 +167,13 @@ namespace CloudberryKingdom
 
 	void HelpMenu::Buy( int Cost )
 	{
+		std::vector<boost::shared_ptr<PlayerData> > vec;
+
 		switch ( MyGame->MyBankType )
 		{
 			case GameData::BankType_CAMPAIGN:
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = PlayerManager::getExistingPlayers().begin(); p != PlayerManager::getExistingPlayers().end(); ++p )
+				vec = PlayerManager::getExistingPlayers();
+				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 					( *p )->CampaignCoins = __max( ( *p )->CampaignCoins - Cost, 0 );
 				break;
 

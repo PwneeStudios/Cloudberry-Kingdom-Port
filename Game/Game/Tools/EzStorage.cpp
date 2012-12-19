@@ -87,7 +87,8 @@ namespace CloudberryKingdom
 
 	#if defined(NOT_PC)
 		// Save each player's info
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getLoggedInPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			Incr();
 			( *player )->ContainerName = std::wstring( L"Gamers" );

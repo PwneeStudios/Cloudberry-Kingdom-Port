@@ -1092,6 +1092,9 @@
     <ClCompile Include="Hacks\XNA\SpriteFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Hacks\NET\StringBuilder.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">

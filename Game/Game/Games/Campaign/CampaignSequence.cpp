@@ -194,14 +194,15 @@ namespace CloudberryKingdom
 
 	void CampaignSequence::OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj )
 	{
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			( *player )->CampaignCoins++;
 	}
 
 	void CampaignSequence::OnCompleteLevel( const boost::shared_ptr<Level> &level )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
 	}
 

@@ -136,8 +136,8 @@ namespace CloudberryKingdom
 
 	void ScoreDatabase::Add( const boost::shared_ptr<ScoreEntry> &score )
 	{
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			( *player )->AddHighScore( score );
 
 		EnsureList( score->GameId );

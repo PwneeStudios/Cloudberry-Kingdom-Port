@@ -68,7 +68,8 @@ namespace CloudberryKingdom
 				float LeftIntensity = CoreMath::Restrict( .4f,.4f, t );
 				float RightIntensity = CoreMath::Restrict( .1f,.3f, t );
 
-				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getAlivePlayers().begin(); player != PlayerManager::getAlivePlayers().end(); ++player )
+				std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getAlivePlayers();
+				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 					Tools::SetVibration( ( *player )->MyPlayerIndex, LeftIntensity, LeftIntensity, 30 );
 	#endif
 			}

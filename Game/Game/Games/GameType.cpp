@@ -616,7 +616,8 @@ namespace CloudberryKingdom
 	{
 		std::vector<boost::shared_ptr<ToDoItem> > l = std::vector<boost::shared_ptr<ToDoItem> >();
 
-		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+		std::vector<boost::shared_ptr<ToDoItem> > vec = getToDo();
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = vec.begin(); todo != vec.end(); ++todo )
 			if ( CompareIgnoreCase( ( *todo )->Name, name ) == 0 )
 				l.push_back( *todo );
 
@@ -869,13 +870,13 @@ namespace CloudberryKingdom
 			return;
 
 		// Remove marked todo items
-		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = getToDo().begin(); todo != getToDo().end(); ++todo )
+		std::vector<boost::shared_ptr<ToDoItem> > vec = getToDo();
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = vec.begin(); todo != vec.end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
 				( *todo )->setMarkedForDeletion(true);
 		}
 
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = NextToDo.begin(); todo != NextToDo.end(); ++todo )
 		{
 			if ( ( *todo )->RemoveOnReset )
@@ -1018,7 +1019,8 @@ namespace CloudberryKingdom
 		if ( PauseLevel )
 			return;
 
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getExistingPlayers().begin(); player != PlayerManager::getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			if ( ( *player )->StoredName.length() > 0 && (*player)->getMyGamer() == 0 )
 			{
 				PlayerManager::GetNumPlayers();

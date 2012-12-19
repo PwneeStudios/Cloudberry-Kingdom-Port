@@ -297,7 +297,8 @@ namespace CloudberryKingdom
 		PosAdd.Y *= 1.18f * ScaleList;
 
 		// Add obstacles
-		for ( std::vector<Upgrade>::const_iterator upgrade = GetUpgradeList().begin(); upgrade != GetUpgradeList().end(); ++upgrade )
+		std::vector<Upgrade> vec = GetUpgradeList();
+		for ( std::vector<Upgrade>::const_iterator upgrade = vec.begin(); upgrade != vec.end(); ++upgrade )
 			AddUpgrade( *upgrade );
 
 		MyPile = boost::make_shared<DrawPile>();

@@ -495,40 +495,6 @@ namespace CloudberryKingdom
 			( *box )->SetHold();
 	}
 
-#if defined(EDITOR)
-	void ObjectClass::DeleteFrame( int anim, int frame )
-	{
-		if ( frame <= AnimLength[ anim ] )
-		{
-			AnimLength[ anim ]--;
-
-			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.DeleteFrame( anim, frame );
-			for ( std::vector<boost::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
-				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.DeleteFrame( anim, frame );
-		}
-	}
-#endif
-
-#if defined(EDITOR)
-	void ObjectClass::InsertFrame( int anim, int frame )
-	{
-		if ( frame <= AnimLength[ anim ] )
-		{
-			AnimLength[ anim ]++;
-
-			for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )
-				for ( std::vector<ObjectVector*>::const_iterator point = quad->GetObjectVectors().begin(); point != quad->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.InsertFrame( anim, frame );
-			for ( std::vector<boost::shared_ptr<ObjectBox> >::const_iterator box = BoxList.begin(); box != BoxList.end(); ++box )
-				for ( std::vector<ObjectVector*>::const_iterator point = box->GetObjectVectors().begin(); point != box->GetObjectVectors().end(); ++point )
-					( *point )->AnimData.InsertFrame( anim, frame );
-		}
-	}
-#endif
-
 	void ObjectClass::Record( int anim, int frame, bool UseRelativeCoords )
 	{
 		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = QuadList.begin(); quad != QuadList.end(); ++quad )

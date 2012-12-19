@@ -503,7 +503,8 @@ namespace CloudberryKingdom
 	int PlayerManager::MaxPlayerHighScore( int GameId )
 	{
 		int max = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			max = __max( max, ( *player )->GetHighScore( GameId ) );
 
 		return max;
@@ -565,7 +566,8 @@ namespace CloudberryKingdom
 			return;
 
 		// Give the hat to each player
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = getExistingPlayers().begin(); p != getExistingPlayers().end(); ++p )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
 			( *p )->Purchases->Add( buyable->GetGuid() );
 
 		SavePlayerData->Changed = true;
@@ -580,7 +582,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetGameScore()
 	{
 		int score = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			score += ( *player )->GetGameScore();
 
 		return score;
@@ -589,7 +592,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetGameScore_WithTemporary()
 	{
 		int score = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			score += ( *player )->GetGameScore() + (*player)->TempStats->Score;
 
 		return score;
@@ -598,7 +602,8 @@ namespace CloudberryKingdom
 	int PlayerManager::PlayerSum( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int sum = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			if ( *player != 0 )
 				sum += f->Apply( *player );
@@ -610,7 +615,8 @@ namespace CloudberryKingdom
 	int PlayerManager::PlayerMax( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<PlayerData> , int> > &f )
 	{
 		int max = INT_MIN;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 		{
 			if ( *player != 0 )
 				max = __max( max, f->Apply( *player ) );
@@ -622,7 +628,8 @@ namespace CloudberryKingdom
 	int PlayerManager::GetLevelCoins()
 	{
 		int coins = 0;
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = getExistingPlayers().begin(); player != getExistingPlayers().end(); ++player )
+		std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
 			coins += ( *player )->GetLevelCoins();
 
 		return coins;
