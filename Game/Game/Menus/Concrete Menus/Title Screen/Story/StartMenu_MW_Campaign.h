@@ -27,7 +27,11 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_Campaign : public StartMenu
 	{
-	
+
+		using StartMenu::SlideOut;
+		using StartMenu::SlideIn;
+		using StartMenu::Call;
+
 		struct CampaignGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		

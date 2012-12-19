@@ -16,9 +16,12 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu
 	{
-	
-		using GUI_Panel::Call;
 
+		using ArcadeBaseMenu::SlideOut;
+		using ArcadeBaseMenu::SlideIn;
+		using ArcadeBaseMenu::Call;
+
+		using GUI_Panel::Call;
 	
 		struct OnSelectProxy : public Lambda
 		{

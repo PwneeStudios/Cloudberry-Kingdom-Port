@@ -9,6 +9,34 @@
 namespace CloudberryKingdom
 {
 
+	void CharacterSelect_PostConstruct( const boost::shared_ptr<CharacterSelect> &This, int PlayerIndex, bool QuickJoin )
+	{
+		boost::shared_ptr<GameData> game = Tools::CurGameData;
+
+		Tools::StartGUIDraw();
+
+		This->PlayerIndex = PlayerIndex;
+		This->QuickJoin = QuickJoin;
+
+		This->InitCenters();
+		This->Center = This->Centers[ PlayerIndex ];
+		This->NormalZoomCenter = This->Center;
+
+		This->MyDoll = MakeMagic( Doll, ( PlayerIndex, This->shared_from_this() ) );
+		This->MyGamerTag = MakeMagic( GamerTag, ( PlayerIndex, This->shared_from_this() ) );
+		This->MyHeroLevel = MakeMagic( HeroLevel, ( PlayerIndex, This->shared_from_this() ) );
+		game->AddGameObject( This->MyDoll );
+		game->AddGameObject( This->MyGamerTag );
+		game->AddGameObject( This->MyHeroLevel );
+
+		This->InitColorScheme( PlayerIndex );
+
+		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, This->shared_from_this() ) ) );
+
+		Tools::EndGUIDraw();
+	}
+
+
 	void MenuList_PostConstruct( const boost::shared_ptr<MenuList> &This )
 	{
 		This->setOverrideA( false );

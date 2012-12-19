@@ -333,9 +333,9 @@ namespace CloudberryKingdom
 		GUI_Panel::Hide();
 
 		if ( frames == -1 )
-			GUI_Panel::SlideOut( pos );
+			SlideOut( pos );
 		else
-			this->SlideOut( pos, frames );
+			SlideOut( pos, frames );
 	}
 
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()

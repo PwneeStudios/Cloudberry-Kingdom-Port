@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
-#include <Hacks\List.h>
+#include <Hacks/List.h>
+#include <MasterHack.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
@@ -147,7 +148,11 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		if ( CharSelect[ PlayerIndex ] != 0 )
 			return;
 
-		CharSelect[ PlayerIndex ] = boost::make_shared<CharacterSelect>( PlayerIndex, QuickJoin );
+		//CharSelect[ PlayerIndex ] = boost::make_shared<CharacterSelect>( PlayerIndex, QuickJoin );
+		//CharSelect[ PlayerIndex ] = MakeMagic( CharacterSelect, ( PlayerIndex, QuickJoin ) );
+		
+		CharSelect[ PlayerIndex ] = boost::make_shared<CharacterSelect>( CharacterSelect( PlayerIndex, QuickJoin ) );
+		CharacterSelect_PostConstruct( CharSelect[ PlayerIndex ], PlayerIndex, QuickJoin );
 	}
 
 	void CharacterSelectManager::FinishAll()

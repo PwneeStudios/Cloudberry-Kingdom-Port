@@ -9,12 +9,10 @@ namespace CloudberryKingdom
 	struct CustomLevel_GUI : public CkBaseMenu
 	{
 
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+
 		static void InitializeStatics();
-
-	
-		using GUI_Panel::SlideOut;
-		using GUI_Panel::SlideIn;
-
 	
 		struct StartLevelFromMenDataStandardLoadProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{

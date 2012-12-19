@@ -8,7 +8,11 @@ namespace CloudberryKingdom
 
 	struct HelpMenu : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		struct MakeListenerHelper : public Lambda
 		{
 		

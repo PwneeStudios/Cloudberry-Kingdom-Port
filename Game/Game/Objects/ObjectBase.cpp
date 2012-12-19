@@ -696,6 +696,8 @@ namespace CloudberryKingdom
 
 	void ObjectData::InitializeInstanceFields()
 	{
+		MyType = static_cast<ObjectType>( 0 );
+
 		SkippedPhsx = false;
 		WakeUpRequirements = false;
 		Encased = false;

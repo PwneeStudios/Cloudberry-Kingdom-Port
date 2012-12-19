@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		enum Next
 		{
 			Next_CAMPAIGN,

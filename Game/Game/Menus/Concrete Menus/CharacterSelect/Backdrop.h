@@ -9,6 +9,10 @@ namespace CloudberryKingdom
 	struct CharSelectBackdrop : public CkBaseMenu
 	{
 	
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		CharSelectBackdrop();
 		boost::shared_ptr<CharSelectBackdrop> CharSelectBackdrop_Construct();
 

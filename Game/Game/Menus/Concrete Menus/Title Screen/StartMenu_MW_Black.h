@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu_MW_Black : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		virtual void SlideIn( int Frames );
 
 		virtual void SlideOut( const PresetPos &Preset, int Frames );

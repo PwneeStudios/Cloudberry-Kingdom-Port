@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu_MW_PressStart : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		boost::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_PressStart( const boost::shared_ptr<TitleGameData_MW> &Title );
 		boost::shared_ptr<StartMenu_MW_PressStart> StartMenu_MW_PressStart_Construct( const boost::shared_ptr<TitleGameData_MW> &Title );

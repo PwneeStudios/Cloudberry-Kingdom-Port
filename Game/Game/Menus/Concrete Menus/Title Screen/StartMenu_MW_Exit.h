@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu_MW_Exit : public VerifyQuitGameMenu2
 	{
-	
+
+		using VerifyQuitGameMenu2::SlideOut;
+		using VerifyQuitGameMenu2::SlideIn;
+		using VerifyQuitGameMenu2::Call;
+
 		StartMenu_MW_Exit( int Control );
 		boost::shared_ptr<StartMenu_MW_Exit> StartMenu_MW_Exit_Construct( int Control );
 

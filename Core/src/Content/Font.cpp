@@ -30,6 +30,11 @@ static std::istream& safeGetline( std::istream& is, std::string &t )
     }
 }
 
+Font::Font() :
+	charSpacing_( 0 )
+{
+}
+
 void Font::Load()
 {
 	using namespace std;

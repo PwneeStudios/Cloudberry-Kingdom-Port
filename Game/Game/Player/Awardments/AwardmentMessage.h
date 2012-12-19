@@ -8,7 +8,11 @@ namespace CloudberryKingdom
 
 	struct AwardmentMessage : public CkBaseMenu
 	{
-	
+
+		using CkBaseMenu::SlideOut;
+		using CkBaseMenu::SlideIn;
+		using CkBaseMenu::Call;
+
 		boost::shared_ptr<QuadClass> Backdrop;
 
 	

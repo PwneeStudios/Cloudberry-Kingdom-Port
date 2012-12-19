@@ -1,8 +1,12 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/String.h"
+#include <Core.h>
+#include <Graphics\Types.h>
+#include <Graphics/QuadDrawer.h>
 
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include "Hacks\String.h"
+
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -1146,12 +1150,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		{
 			Color textcolor = ColorHelper::PremultiplyAlpha( Color( MyColor.ToVector4() * (*bit)->clr.ToVector4() ) );
 
-			Vector2 worldLoc = Tools::ToWorldCoordinates( (*bit)->loc, cam, Tools::EffectWad->ModZoom );
+			Vector2 _pos = getScale() * (*bit)->loc * ZoomMod + Loc;
+			_pos = Tools::ToWorldCoordinates( _pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
 
 			if ( ( *bit )->builder_str != 0 )
-				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, /*Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) **/ Vector2( 1 ) / ( getScale() * ZoomMod ), SpriteEffects_None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, _pos, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale() * ZoomMod, SpriteEffects_None, 1 );
 			else
-				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str, getScale() * worldLoc/*(*bit)->loc*/ * ZoomMod + Position/*Loc*/, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, /*Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * */ Vector2( 1 ) / ( getScale() * ZoomMod ), SpriteEffects_None, 1 );
+				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str,			_pos, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod, SpriteEffects_None, 1 );
+			
 		}
 		if ( DrawPics )
 			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
@@ -1164,17 +1170,26 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				Vector2 pos = Loc + getScale() * ZoomMod * Vector2( static_cast<float>( (*pic)->rect.X ), static_cast<float>( (*pic)->rect.Y ) );
 				Vector2 scale = getScale() * ZoomMod * Vector2((*pic)->rect.Width / static_cast<float>((*pic)->tex->Width), (*pic)->rect.Height / static_cast<float>((*pic)->tex->Height));
 
-				if ( ( *pic )->AsPaint )
-				{
-					Tools::Render->EndSpriteBatch();
-					Tools::StartSpriteBatch( true );
-				}
-				Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects_None, 0 );
-				if ( ( *pic )->AsPaint )
-				{
-					Tools::Render->EndSpriteBatch();
-					Tools::StartSpriteBatch();
-				}
+				//Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects_None, 0 );
+
+				pos = Tools::ToWorldCoordinates( pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X ) + Position;
+				scale *= 1000.f / 320.f;
+				
+				::SimpleQuad sq;
+				sq.V[0] = pos;
+				sq.V[1] = pos + Vector2( 0, scale.Y );
+				sq.V[2] = pos + Vector2( scale.X, scale.Y );
+				sq.V[3] = pos + Vector2( scale.X, 0 );
+
+				sq.V[0] = Vector2(0, 1);
+				sq.V[1] = Vector2(0, 0);
+				sq.V[2] = Vector2(1, 0);
+				sq.V[3] = Vector2(1, 1);
+				
+				sq.Diffuse = ( *pic )->tex->getTex()->texture_;
+				sq.Color = Vector4(1);
+
+				QUAD_DRAWER->Draw( sq );
 			}
 
 		if ( EndBatch )

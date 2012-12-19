@@ -7,7 +7,11 @@ namespace CloudberryKingdom
 {
 	struct StartMenu_MW_Arcade : public ArcadeMenu
 	{
-	
+
+		using ArcadeMenu::SlideOut;
+		using ArcadeMenu::SlideIn;
+		using ArcadeMenu::Call;
+
 		boost::shared_ptr<TitleGameData_MW> Title;
 		StartMenu_MW_Arcade( const boost::shared_ptr<TitleGameData_MW> &Title );
 		boost::shared_ptr<StartMenu_MW_Arcade> StartMenu_MW_Arcade_Construct( const boost::shared_ptr<TitleGameData_MW> &Title );

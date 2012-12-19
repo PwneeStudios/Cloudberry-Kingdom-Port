@@ -11,6 +11,10 @@ namespace CloudberryKingdom
 	/// </summary>
 	struct GUI_Lives : public GUI_Panel
 	{
+
+		using GUI_Panel::SlideOut;
+		using GUI_Panel::SlideIn;
+		using GUI_Panel::Call;
 	
 		boost::shared_ptr<StringBuilder> MyString;
 

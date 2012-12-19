@@ -18,7 +18,11 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_Cinematics : public StartMenu
 	{
-	
+
+		using StartMenu::SlideOut;
+		using StartMenu::SlideIn;
+		using StartMenu::Call;
+
 		struct CinematicsGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		

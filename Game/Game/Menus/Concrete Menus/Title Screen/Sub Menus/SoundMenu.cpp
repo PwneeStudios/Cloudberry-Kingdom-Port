@@ -128,12 +128,20 @@ namespace CloudberryKingdom
 
 		// Get viable resolutions
 		std::vector<boost::shared_ptr<DisplayMode> > modes = GetSupportedDisplayModes();
+		if ( modes.size() == 0 )
+		{
+			boost::shared_ptr<DisplayMode> default_mode = boost::make_shared<DisplayMode>();
+			default_mode->Width = 1280;
+			default_mode->Height = 720;
+			modes.push_back( default_mode );
+		}
 
 		// Add resolutions to the current list
 		bool found = false;
 		for ( std::vector<boost::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
 			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;
+			//std::wstring str = _T( "Hello" );
 			Tools::Write( str.c_str() );
 			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, ItemFont, false, true ) );
 			SetItemProperties( item );

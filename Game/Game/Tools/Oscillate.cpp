@@ -1,10 +1,16 @@
 ﻿#include <global_header.h>
 
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 #include <Hacks\List.h>
 
 namespace CloudberryKingdom
 {
+
+	// Static variables
+	float _oscillateparams[] = { 1.15f,.94f, 1.05f, 1 };
+	std::vector<float> OscillateParams::JiggleScale = VecFromArray( _oscillateparams );
+
+
 
 	void OscillateParams::SetType( Type type )
 	{
@@ -46,9 +52,6 @@ namespace CloudberryKingdom
 		}
 	}
 
-float _oscillateparams[] = { 1.15f,.94f, 1.05f, 1 };
-std::vector<float> OscillateParams::JiggleScale = VecFromArray( _oscillateparams );
-
 	float OscillateParams::JigglePhsx()
 	{
 		Count++;
@@ -82,8 +85,6 @@ std::vector<float> OscillateParams::JiggleScale = VecFromArray( _oscillateparams
 		{
 			case OscillateParams::Type_OSCILLATE:
 				Count++;
-				if ( UseGlobalCount )
-					Count = Tools::TheGame->PhsxCount;
 				scale = Oscillate::GetScale_Oscillate( static_cast<float>( Count ), w, base_value, max_addition );
 				break;
 

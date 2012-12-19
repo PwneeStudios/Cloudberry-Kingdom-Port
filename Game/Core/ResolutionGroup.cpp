@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	ResolutionGroup::ResolutionGroup()
 	{
-		LineHeightMod = 0;
+		LineHeightMod = 1;
 	}
 
 	boost::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;

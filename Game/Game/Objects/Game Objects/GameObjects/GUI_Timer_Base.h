@@ -5,9 +5,14 @@
 
 namespace CloudberryKingdom
 {
+
 	struct GUI_Timer_Base : public GUI_Panel
 	{
 	
+		using GUI_Panel::SlideOut;
+		using GUI_Panel::SlideIn;
+		using GUI_Panel::Call;
+
 		int _Time;
 
 		/// <summary>
