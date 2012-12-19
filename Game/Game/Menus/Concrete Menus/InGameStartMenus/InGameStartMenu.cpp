@@ -156,7 +156,7 @@ bool InGameStartMenu::PreventMenu = false;
 		MakeDarkBack();
 
 		// Make the backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1080x840" ), 1500.f, true );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1080x840" ), 1500.f, true );
 
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( -975.6945f, 54.86111f ) );
@@ -170,7 +170,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Header
 		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_MENU, ItemFont );
-		HeaderText->Name = _T( "Header" );
+		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 		HeaderText->setPos( Vector2( -1663.889f, 971.8889f ) );
@@ -187,7 +187,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Resume
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) );
-		item->Name = _T( "Resume" );
+		item->Name = std::wstring( L"Resume" );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->MyText->setScale( item->MyText->getScale() * 1.1f );
 		item->MySelectedText->setScale( item->MySelectedText->getScale() * 1.1f );
@@ -197,14 +197,14 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Statistics
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) );
-		item->Name = _T( "Stats" );
+		item->Name = std::wstring( L"Stats" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoStatsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// SaveLoadSeed
 		Localization::Words word = Tools::CurLevel->CanLoadLevels ? Localization::Words_SAVE_LOAD : Localization::Words_SAVE_SEED;
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( word, ItemFont ) );
-		item->Name = _T( "SaveLoadSeed" );
+		item->Name = std::wstring( L"SaveLoadSeed" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
 		{
@@ -215,13 +215,13 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Options
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
-		item->Name = _T( "Options" );
+		item->Name = std::wstring( L"Options" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoOptionsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Controls
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
-		item->Name = _T( "Controls" );
+		item->Name = std::wstring( L"Controls" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
@@ -229,7 +229,7 @@ bool InGameStartMenu::PreventMenu = false;
 		if ( RemoveMeOption )
 		{
 			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) );
-			item->Name = _T( "Remove" );
+			item->Name = std::wstring( L"Remove" );
 			item->setGo( Cast::ToItem( boost::make_shared<GoRemoveProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 			AddItem( item );
 			RemoveMe = item;
@@ -305,32 +305,32 @@ bool InGameStartMenu::PreventMenu = false;
 	void InGameStartMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Resume" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Resume" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1501.999f, 708.3334f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Stats" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Stats" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1504.778f, 469.9999f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "SaveLoadSeed" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"SaveLoadSeed" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1504.777f, 231.6667f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Options" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1496.443f, -3.88887f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Controls" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Controls" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1501.999f, -258.8889f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1499.222f, -502.7777f ) );
@@ -339,14 +339,14 @@ bool InGameStartMenu::PreventMenu = false;
 		MyMenu->setPos( Vector2( 1109.028f, 20.13885f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1463.89f, 1474.667f ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "" ) );
+		_q = MyPile->FindQuad( std::wstring( L"" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -989.5837f, -0.6944637f ) );

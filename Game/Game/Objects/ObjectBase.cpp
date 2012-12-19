@@ -475,7 +475,7 @@ namespace CloudberryKingdom
 		setMyTileSet( TileSets::None );
 		Encased = false;
 
-		EditorCode1 = EditorCode2 = EditorCode3 = _T( "" );
+		EditorCode1 = EditorCode2 = EditorCode3 = std::wstring( L"" );
 
 		MyGuid = GetId();
 
@@ -531,16 +531,16 @@ namespace CloudberryKingdom
 		setMyTileSet( A->getMyTileSet() );
 		Encased = A->Encased;
 
-		if ( A->EditorCode1 == _T( "" ) )
-			EditorCode1 = _T( "" );
+		if ( A->EditorCode1 == std::wstring( L"" ) )
+			EditorCode1 = std::wstring( L"" );
 		else
 			EditorCode1 = A->EditorCode1;
-		if ( A->EditorCode2 == _T( "" ) )
-			EditorCode2 = _T( "" );
+		if ( A->EditorCode2 == std::wstring( L"" ) )
+			EditorCode2 = std::wstring( L"" );
 		else
 			EditorCode2 = A->EditorCode2;
-		if ( A->EditorCode3 == _T( "" ) )
-			EditorCode3 = _T( "" );
+		if ( A->EditorCode3 == std::wstring( L"" ) )
+			EditorCode3 = std::wstring( L"" );
 		else
 			EditorCode3 = A->EditorCode3;
 

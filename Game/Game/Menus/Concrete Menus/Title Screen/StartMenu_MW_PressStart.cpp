@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_PressStart::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "" ) );
+		_t = MyPile->FindEzText( std::wstring( L"" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -11.11157f, -461.111f ) );

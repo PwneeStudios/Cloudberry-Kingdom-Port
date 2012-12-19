@@ -83,9 +83,9 @@ namespace CloudberryKingdom
 		slider->BL_HitPadding.X += 50;
 		slider->TR_HitPadding.X += 50;
 	#endif
-		slider->Slider->setTextureName( _T( "BouncyBlock_Castle" ) );
+		slider->Slider->setTextureName( std::wstring( L"BouncyBlock_Castle" ) );
 		slider->Slider->ScaleYToMatchRatio( 90 );
-		slider->SliderBack->setTextureName( _T( "Chain_Tile" ) );
+		slider->SliderBack->setTextureName( std::wstring( L"Chain_Tile" ) );
 		slider->TabOffset = Vector2( 0, 28 );
 		slider->setMyFloat( boost::make_shared<WrappedFloat>( 0.f, 0.f, 9.f ) );
 

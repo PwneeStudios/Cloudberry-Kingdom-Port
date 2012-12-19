@@ -315,8 +315,8 @@ namespace CloudberryKingdom
 
 		WriteReadTools::WriteColor( writer, MyColor );
 
-		if ( MyTexture->Path == _T( "" ) )
-			writer->Write( _T( "White" ) );
+		if ( MyTexture->Path == std::wstring( L"" ) )
+			writer->Write( std::wstring( L"White" ) );
 		else
 			writer->Write( MyTexture->Path );
 		writer->Write( MyEffect->Name );
@@ -542,7 +542,7 @@ namespace CloudberryKingdom
 
 		if ( UseNames )
 		{
-			if ( MyTexture->Name != _T( "" ) )
+			if ( MyTexture->Name != std::wstring( L"" ) )
 				MyTexture = TexWad->FindByPathOrName( MyTexture->Path );
 			MyEffect = EffectWad->FindByName( MyEffect->Name );
 		}
@@ -621,7 +621,7 @@ namespace CloudberryKingdom
 
 	Quad::Quad()
 	{
-		Name = _T( "Quad" );
+		Name = std::wstring( L"Quad" );
 
 		// Commented out and moved inline every time this constructor is called.
 		//InitVertices();

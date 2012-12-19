@@ -22,8 +22,8 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 4, 0, 0, 0 );
 		Name = Localization::Words_SPACESHIP;
-		NameTemplate = _T( "spaceship" );
-		Icon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
+		NameTemplate = std::wstring( L"spaceship" );
+		Icon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
 	}
 
 	const boost::shared_ptr<BobPhsxSpaceship> &BobPhsxSpaceship::getInstance()
@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsx::Init( bob );
 
-		bob->DieSound = Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) );
+		bob->DieSound = Tools::SoundWad->FindByName( std::wstring( L"DustCloud_Explode" ) );
 
 		OnGround = false;
 	}

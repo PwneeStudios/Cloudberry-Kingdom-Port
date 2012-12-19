@@ -13,7 +13,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 
 		CoinExplosionTemplate->MyQuad.Init();
 		CoinExplosionTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		CoinExplosionTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "checkpoint3" ) ) );
+		CoinExplosionTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"checkpoint3" ) ) );
 		CoinExplosionTemplate->Size = Vector2( 45, 70 ) * 1.15f;
 		CoinExplosionTemplate->SizeSpeed = Vector2( 1.5f, 1.5f );
 		CoinExplosionTemplate->AngleSpeed = .02f;
@@ -29,25 +29,25 @@ boost::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 		switch ( Tools::GlobalRnd->RndInt( 0, 6 ) )
 		{
 			case 0:
-				p->MyQuad.setTextureName( _T( "CoinBlue" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinBlue" ) );
 				break;
 			case 1:
-				p->MyQuad.setTextureName( _T( "CoinCyan" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinCyan" ) );
 				break;
 			case 2:
-				p->MyQuad.setTextureName( _T( "CoinGreen" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinGreen" ) );
 				break;
 			case 3:
-				p->MyQuad.setTextureName( _T( "CoinOrange" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinOrange" ) );
 				break;
 			case 4:
-				p->MyQuad.setTextureName( _T( "CoinPurple" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinPurple" ) );
 				break;
 			case 5:
-				p->MyQuad.setTextureName( _T( "CoinRed" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinRed" ) );
 				break;
 			case 6:
-				p->MyQuad.setTextureName( _T( "CoinYellow" ) );
+				p->MyQuad.setTextureName( std::wstring( L"CoinYellow" ) );
 				break;
 		}
 	}
@@ -70,7 +70,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 			p->Size *= intensity;
 
 			//p.MyQuad.TextureName = "CoinBlue";
-			p->MyQuad.setTextureName( _T( "CoinGreen" ) );
+			p->MyQuad.setTextureName( std::wstring( L"CoinGreen" ) );
 			//SetRandomCoin(emit, i);
 		}
 	}
@@ -115,7 +115,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 		CoalesceTemplate->MyQuad.Init();
 		CoalesceTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		CoalesceTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Cloud1" ) ) );
+		CoalesceTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Cloud1" ) ) );
 		CoalesceTemplate->SetSize( 145 );
 		CoalesceTemplate->SizeSpeed = Vector2( 4, 4 );
 		CoalesceTemplate->AngleSpeed = -.03f;
@@ -132,7 +132,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 		PieceExplosionTemplate->MyQuad.Init();
 		PieceExplosionTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		PieceExplosionTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Smoke2" ) ) );
+		PieceExplosionTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Smoke2" ) ) );
 		PieceExplosionTemplate->SetSize( 145 );
 		PieceExplosionTemplate->SizeSpeed = Vector2( 4, 4 );
 		PieceExplosionTemplate->AngleSpeed = .02f;
@@ -145,13 +145,13 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init_DustCloud()
 	{
-		DustCloudSound = Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) );
+		DustCloudSound = Tools::SoundWad->FindByName( std::wstring( L"DustCloud_Explode" ) );
 
 		DustCloudTemplate = boost::make_shared<Particle>();
 
 		DustCloudTemplate->MyQuad.Init();
 		DustCloudTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		DustCloudTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "Smoke2" ) ) );
+		DustCloudTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Smoke2" ) ) );
 		DustCloudTemplate->SetSize( 120 );
 		DustCloudTemplate->SizeSpeed = Vector2( 4, 4 );
 		DustCloudTemplate->AngleSpeed = .02f;
@@ -336,38 +336,38 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		switch ( Tools::GlobalRnd->Rnd->Next( 0, 8 ) )
 		{
 			case 0:
-				p->MyQuad.Set( _T( "FallingBlock2" ) );
+				p->MyQuad.Set( std::wstring( L"FallingBlock2" ) );
 				break;
 
 			case 1:
-				p->MyQuad.Set( _T( "FallingBlock1" ) );
+				p->MyQuad.Set( std::wstring( L"FallingBlock1" ) );
 				break;
 
 			case 2:
-				p->MyQuad.Set( _T( "blue_small" ) );
+				p->MyQuad.Set( std::wstring( L"blue_small" ) );
 				break;
 
 			case 3:
-				p->MyQuad.Set( _T( "fading_block" ) );
+				p->MyQuad.Set( std::wstring( L"fading_block" ) );
 				p->Size *= Vector2( 1, 1.11f );
 				break;
 
 			case 4:
-				p->MyQuad.Set( _T( "SpikeyGuy" ) );
+				p->MyQuad.Set( std::wstring( L"SpikeyGuy" ) );
 				p->Size *= Vector2( 1.2f, 1.6f );
 				break;
 
 			case 5:
-				p->MyQuad.Set( _T( "blob2_body" ) );
+				p->MyQuad.Set( std::wstring( L"blob2_body" ) );
 				break;
 
 			case 6:
-				p->MyQuad.Set( _T( "checkpoint3" ) );
+				p->MyQuad.Set( std::wstring( L"checkpoint3" ) );
 				p->Size *= Vector2( 1, 1 );
 				break;
 
 			case 7:
-				p->MyQuad.Set( _T( "CoinBlue" ) );
+				p->MyQuad.Set( std::wstring( L"CoinBlue" ) );
 				p->Size *= Vector2( .3f,.7f );
 				break;
 		}
@@ -472,7 +472,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 				size *= 1.2f * 1.5f * 1.5f;
 				angle_vel = -10;
 				if ( texture == 0 )
-					texture = Tools::TextureWad->FindByName( _T( "Cloud1" ) );
+					texture = Tools::TextureWad->FindByName( std::wstring( L"Cloud1" ) );
 				life = 20;
 				break;
 
@@ -527,7 +527,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::PiecePopFart( const boost::shared_ptr<Level> &level, Vector2 pos )
 	{
-		Tools::SoundWad->FindByName( _T( "Piece_Explosion_Small" ) )->Play( 1 );
+		Tools::SoundWad->FindByName( std::wstring( L"Piece_Explosion_Small" ) )->Play( 1 );
 		for ( int i = 0; i < 4; i++ )
 			PieceExplosion( level, pos, 0, 1 );
 	}
@@ -559,8 +559,8 @@ boost::shared_ptr<Particle> ParticleEffects::PopTemplate = 0;
 	{
 		PopTemplate = boost::make_shared<Particle>();
 		PopTemplate->MyQuad.Init();
-		PopTemplate->MyQuad.MyEffect = Tools::EffectWad->FindByName( _T( "Shell" ) );
-		PopTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
+		PopTemplate->MyQuad.MyEffect = Tools::EffectWad->FindByName( std::wstring( L"Shell" ) );
+		PopTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 		PopTemplate->SetSize( 85 );
 		PopTemplate->SizeSpeed = Vector2( 10, 10 );
 		PopTemplate->AngleSpeed = 0;

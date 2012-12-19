@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		BackgroundQuad = boost::make_shared<QuadClass>();
 		BackgroundQuad->SetToDefault();
 
-		BackgroundQuad->Set( _T( "LoadingStrip" ) );
+		BackgroundQuad->Set( std::wstring( L"LoadingStrip" ) );
 		BackgroundQuad->Quad_Renamed.SetColor( Color::Gray );
 
 		BlackQuad = boost::make_shared<QuadClass>();
@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 
 		if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( type ) != 0 )
 		{
-			TextObject = boost::make_shared<EzText>( _T( "?" ), Resources::Font_Grobold42, true, true );
+			TextObject = boost::make_shared<EzText>( std::wstring( L"?" ), Resources::Font_Grobold42, true, true );
 			CkColorHelper::_x_x_HappyBlueColor( TextObject );
 			TextObject->setScale( TextObject->getScale() * 1.25f );
 			TextObject->FixedToCamera = true;

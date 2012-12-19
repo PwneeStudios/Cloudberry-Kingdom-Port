@@ -323,7 +323,7 @@ namespace CloudberryKingdom
 	{
 		CampaignLevel = 0;
 		CampaignCoins = 0;
-		StoredName = _T( "" );
+		StoredName = std::wstring( L"" );
 		KeyboardUsedLast = false;
 		ColorSchemeIndex = Unset::Int;
 	}

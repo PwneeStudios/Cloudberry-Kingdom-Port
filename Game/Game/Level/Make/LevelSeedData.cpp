@@ -395,15 +395,15 @@ namespace CloudberryKingdom
 		return ReturnEarly;
 	}
 
-	const std::wstring LevelSeedData::WallFlag = _T( "wall" );
-	const std::wstring LevelSeedData::FadeInFlag = _T( "fadein" );
-	const std::wstring LevelSeedData::FadeOutFlag = _T( "fadeout" );
-	const std::wstring LevelSeedData::WeatherIntensityFlag = _T( "weather" );
-	const std::wstring LevelSeedData::NoStartDoorFlag = _T( "nostartdoor" );
-	const std::wstring LevelSeedData::LevelFlag = _T( "level" );
-	const std::wstring LevelSeedData::WaitLengthToOpenDoorString = _T( "opendoor" );
-	const std::wstring LevelSeedData::OpenDoorSoundFlag = _T( "opendoorsound" );
-	const std::wstring LevelSeedData::SongString = _T( "song" );
+	const std::wstring LevelSeedData::WallFlag = std::wstring( L"wall" );
+	const std::wstring LevelSeedData::FadeInFlag = std::wstring( L"fadein" );
+	const std::wstring LevelSeedData::FadeOutFlag = std::wstring( L"fadeout" );
+	const std::wstring LevelSeedData::WeatherIntensityFlag = std::wstring( L"weather" );
+	const std::wstring LevelSeedData::NoStartDoorFlag = std::wstring( L"nostartdoor" );
+	const std::wstring LevelSeedData::LevelFlag = std::wstring( L"level" );
+	const std::wstring LevelSeedData::WaitLengthToOpenDoorString = std::wstring( L"opendoor" );
+	const std::wstring LevelSeedData::OpenDoorSoundFlag = std::wstring( L"opendoorsound" );
+	const std::wstring LevelSeedData::SongString = std::wstring( L"song" );
 
 	void LevelSeedData::ProcessSpecial()
 	{
@@ -532,12 +532,12 @@ namespace CloudberryKingdom
 		{
 			std::wstring identifier, data;
 
-			int index = bits[ i ].find( _T( ":" ) );
+			int index = bits[ i ].find( std::wstring( L":" ) );
 
 			if ( index <= 0 )
 			{
 				identifier = bits[ i ];
-				data = _T( "" );
+				data = std::wstring( L"" );
 			}
 			else
 			{
@@ -616,7 +616,7 @@ namespace CloudberryKingdom
 						}*/
 					}
 					if ( MyTileSet == 0 )
-						SetTileSet( _T( "castle" ) );
+						SetTileSet( std::wstring( L"castle" ) );
 			}
 			// Number of pieces
 			else if ( ToLower( identifier ) == _T("n") )
@@ -737,7 +737,7 @@ namespace CloudberryKingdom
 		// If no upgrade was provided, zero everything.
 		if ( UpgradeStrs.empty() )
 		{
-			UpgradeStrs.push_back( _T( "" ) );
+			UpgradeStrs.push_back( std::wstring( L"" ) );
 			Initialize( boost::make_shared<ModPieceViaHashProxy>( shared_from_this() ) );
 		}
 		else
@@ -751,20 +751,20 @@ namespace CloudberryKingdom
 	std::wstring LevelSeedData::ToString()
 	{
 		int _version = 0;
-		std::wstring version = StringConverterHelper::toString( _version ) + _T( ";" );
+		std::wstring version = StringConverterHelper::toString( _version ) + std::wstring( L";" );
 
 		// Seed
-		std::wstring seed = _T( "s:" ) + StringConverterHelper::toString( getSeed() ) + _T(";");
+		std::wstring seed = std::wstring( L"s:" ) + StringConverterHelper::toString( getSeed() ) + _T(";");
 
 		// Game
-		std::wstring game = _T( "" );
+		std::wstring game = std::wstring( L"" );
 		if ( MyGameType != NormalGameData::Factory )
 		{
-			return _T( "!This level can not be saved!" );
+			return std::wstring( L"!This level can not be saved!" );
 		}
 
 		// Geometry
-		std::wstring geometry = _T( "" );
+		std::wstring geometry = std::wstring( L"" );
 		if ( MyGeometry != LevelGeometry_RIGHT )
 			geometry = Format( _T( "geo:%d;" ), + static_cast<int>( MyGeometry ) );
 
@@ -772,7 +772,7 @@ namespace CloudberryKingdom
 		std::wstring hero = Format( _T( "h:%ls;" ), DefaultHeroType->Specification.ToString().c_str() );
 
 		// Custom phsx
-		std::wstring customphsx = _T( "" );
+		std::wstring customphsx = std::wstring( L"" );
 		if ( DefaultHeroType->CustomPhsx )
 			customphsx = DefaultHeroType->MyCustomPhsxData.ToString();
 
@@ -786,22 +786,22 @@ namespace CloudberryKingdom
 		std::wstring length = Format( _T( "l:%ls;" ), StringConverterHelper::toString( Length ).c_str() );
 
 		// Upgrades
-		std::wstring upgrades = _T( "" );
+		std::wstring upgrades = std::wstring( L"" );
 		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator p = PieceSeeds.begin(); p != PieceSeeds.end(); ++p )
 		{
 			if ( ( *p )->Ladder != LadderType_NONE )
 				continue;
 
-			upgrades += _T( "u:" );
+			upgrades += std::wstring( L"u:" );
 
 			std::vector<float> upgrade_levels = ( *p )->MyUpgrades1->UpgradeLevels;
 			for ( int i = 0; i < static_cast<int>( upgrade_levels.size() ); i++ )
 			{
 				upgrades += StringConverterHelper::toString( upgrade_levels[ i ] );
 				if ( i + 1 < static_cast<int>( upgrade_levels.size() ) )
-					upgrades += _T( "," );
+					upgrades += std::wstring( L"," );
 			}
-			upgrades += _T( ";" );
+			upgrades += std::wstring( L";" );
 		}
 
 		// Build final string
@@ -809,7 +809,7 @@ namespace CloudberryKingdom
 
 		// Add special flags
 		if ( HasWall )
-			str += WallFlag + _T( ";" );
+			str += WallFlag + std::wstring( L";" );
 
 		return str;
 	}
@@ -881,13 +881,13 @@ namespace CloudberryKingdom
 
 	std::wstring LevelSeedData::SuggestedName()
 	{
-		return DefaultHeroType->Name + _T( "_" ) + StringConverterHelper::toString( getSeed() );
+		return Localization::WordString( DefaultHeroType->Name ) + std::wstring( L"_" ) + StringConverterHelper::toString( getSeed() );
 	}
 
 	std::wstring LevelSeedData::GetNameFromSeedStr( const std::wstring &seed )
 	{
-		int index_name = seed.find( _T( "name:" ) ) + 5;
-		int index_name_end = seed.find( _T( ";" ), index_name );
+		int index_name = seed.find( std::wstring( L"name:" ) ) + 5;
+		int index_name_end = seed.find( std::wstring( L";" ), index_name );
 		std::wstring name = seed.substr( index_name, index_name_end - index_name );
 
 		return name;
@@ -969,7 +969,7 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::SetTileSet( const std::wstring &name )
 	{
-		if ( name == _T( "" ) )
+		if ( name == std::wstring( L"" ) )
 			SetTileSet( name );
 		else
 			SetTileSet( TileSets::NameLookup[ name ] );
@@ -994,7 +994,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::Release()
 	{
 #if defined(DEBUG)
-		Name += _T( "_Released" );
+		Name += std::wstring( L"_Released" );
 #endif
 
 		ReleasePieces();
@@ -1073,7 +1073,7 @@ namespace CloudberryKingdom
 
 		// FIXME: Implement exceptions?
 		//if ( Length == 0 )
-		//	throw ( std::exception( _T( "Invalid length. PreInitialize may not have been called." ) ) );
+		//	throw ( std::exception( std::wstring( L"Invalid length. PreInitialize may not have been called." ) ) );
 
 		Initialize( MyGameType, MyGeometry, NumPieces, Length, MyCustomDifficulty );
 	}
@@ -1279,7 +1279,7 @@ namespace CloudberryKingdom
 		PieceHash = 1;
 		NoDefaultMake = false;
 		NoMusicStart = false;
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		PostMake = boost::make_shared<Multicaster_1<boost::shared_ptr<Level> > >();
 		ReleaseWhenLoaded = false;
 		LoadingBegun = false;
@@ -1292,7 +1292,7 @@ namespace CloudberryKingdom
 
 #if defined(DEBUG)
 		static int debug_count = 0;
-		static std::wstring debug_name = _T( "" );
+		static std::wstring debug_name = std::wstring( L"" );
 		debug_count++;
 		debug_name = ::ToString( debug_count );
 		Name = debug_name;

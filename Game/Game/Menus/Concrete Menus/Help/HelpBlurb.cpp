@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<QuadClass> Berry = boost::make_shared<QuadClass>();
 		Berry->SetToDefault();
-		Berry->setTextureName( _T( "cb_surprised" ) );
+		Berry->setTextureName( std::wstring( L"cb_surprised" ) );
 		Berry->Scale( 625 );
 		Berry->ScaleYToMatchRatio();
 

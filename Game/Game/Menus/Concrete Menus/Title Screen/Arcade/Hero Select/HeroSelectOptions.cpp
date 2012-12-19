@@ -114,7 +114,7 @@ namespace CloudberryKingdom
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( _T("Button_X") ) ) );
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LEADERBOARD, ItemFont, false, true ) );
 
-		item->Name = _T( "Leaderboard" );
+		item->Name = std::wstring( L"Leaderboard" );
 		item->setGo( Cast::ToItem( boost::make_shared<BringLeaderboardProxy>( boost::static_pointer_cast<HeroSelectOptions>( shared_from_this() ) ) ) );
 		AddItem( item );
 		StartMenu_MW_HeroSelect::SetItemProperties_FadedOnUnselect( item );
@@ -122,12 +122,12 @@ namespace CloudberryKingdom
 		MyMenu->MouseOnly = true;
 		MyMenu->NoneSelected = true;
 	#else
-		std::wstring Space = _T( "{s34,0}" );
-		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + _T( "{c122,209,39,255} Start" ), ItemFont, true, true );
-		MyPile->Add( StartText, _T( "Go" ) );
+		std::wstring Space = std::wstring( L"{s34,0}" );
+		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L"{c122,209,39,255} Start" ), ItemFont, true, true );
+		MyPile->Add( StartText, std::wstring( L"Go" ) );
 
-		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + _T( "{c150,189,244,255} Leaderboard" ), ItemFont, true, true );
-		MyPile->Add( LeaderText, _T( "Leaderboard" ) );
+		boost::shared_ptr<EzText> LeaderText = boost::make_shared<EzText>( ButtonString::X( 80 ) + Space + std::wstring( L"{c150,189,244,255} Leaderboard" ), ItemFont, true, true );
+		MyPile->Add( LeaderText, std::wstring( L"Leaderboard" ) );
 	#endif
 
 	#if defined(PC_VERSION)
@@ -140,13 +140,13 @@ namespace CloudberryKingdom
 	void HeroSelectOptions::SetPos_Console()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Go" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Go" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 513.8887f, -472.2224f ) );
 			_t->setScale( 0.7423338f );
 		}
-		_t = MyPile->FindEzText( _T( "Leaderboard" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Leaderboard" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 825, -655.5554f ) );
@@ -159,7 +159,7 @@ namespace CloudberryKingdom
 	void HeroSelectOptions::SetPos_PC()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Leaderboard" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Leaderboard" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -808, 110 ) );

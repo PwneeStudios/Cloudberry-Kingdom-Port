@@ -33,8 +33,8 @@ namespace CloudberryKingdom
 
 		// Player data
 		PlayerManager::SavePlayerData = boost::make_shared<_SavePlayerData>();
-		PlayerManager::SavePlayerData->ContainerName = _T( "PlayerData" );
-		PlayerManager::SavePlayerData->FileName = _T( "PlayerData.hsc" );
+		PlayerManager::SavePlayerData->ContainerName = std::wstring( L"PlayerData" );
+		PlayerManager::SavePlayerData->FileName = std::wstring( L"PlayerData.hsc" );
 		Add( PlayerManager::SavePlayerData );
 
 	#if defined(PC_VERSION)
@@ -90,8 +90,8 @@ namespace CloudberryKingdom
 		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = PlayerManager::getLoggedInPlayers().begin(); player != PlayerManager::getLoggedInPlayers().end(); ++player )
 		{
 			Incr();
-			( *player )->ContainerName = _T( "Gamers" );
-			( *player )->FileName = _T( "___" ) + ( *player )->GetName();
+			( *player )->ContainerName = std::wstring( L"Gamers" );
+			( *player )->FileName = std::wstring( L"___" ) + ( *player )->GetName();
 			( *player )->Save();
 			Wait();
 		}
@@ -101,8 +101,8 @@ namespace CloudberryKingdom
 #if defined(NOT_PC)
 	boost::shared_ptr<PlayerData> SaveGroup::LoadGamer( const std::wstring &GamerName, const boost::shared_ptr<PlayerData> &Data )
 	{
-		Data->ContainerName = _T( "Gamers" );
-		Data->FileName = _T( "___" ) + GamerName;
+		Data->ContainerName = std::wstring( L"Gamers" );
+		Data->FileName = std::wstring( L"___" ) + GamerName;
 
 		Incr();
 		Data->Load();
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 		return ContainerName;
 	#else
 	#if defined(WINDOWS)
-		return ContainerName + _T( "_XboxVersion" );
+		return ContainerName + std::wstring( L"_XboxVersion" );
 	#else
 		return ContainerName;
 	#endif

@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	MenuToggle::MenuToggle( const boost::shared_ptr<EzFont> &Font )
 	{
 		InitializeInstanceFields();
-		boost::shared_ptr<EzText> text = boost::make_shared<EzText>( _T( "xxxxx" ), Font );
+		boost::shared_ptr<EzText> text = boost::make_shared<EzText>( std::wstring( L"xxxxx" ), Font );
 		MenuItem::Init( text, text->Clone() );
 	}
 

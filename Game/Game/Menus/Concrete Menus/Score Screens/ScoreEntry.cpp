@@ -19,14 +19,14 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		this->Value = Score;
-		this->GamerTag_Renamed = _T( "" );
+		this->GamerTag_Renamed = std::wstring( L"" );
 		this->Fake = true;
 	}
 
 	ScoreEntry::ScoreEntry( std::wstring GamerTag_Renamed, int Game, int Value, int Score, int Level_Renamed, int Attempts, int Time, int Date )
 	{
 		InitializeInstanceFields();
-		if ( GamerTag_Renamed == _T( "" ) )
+		if ( GamerTag_Renamed == std::wstring( L"" ) )
 			GamerTag_Renamed = getDefaultName();
 		this->GamerTag_Renamed = GamerTag_Renamed;
 
@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 	std::wstring ScoreEntry::_ToString( Format format )
 	{
 		if ( Fake )
-			return _T( "" );
+			return std::wstring( L"" );
 
 		switch ( format )
 		{
@@ -98,7 +98,7 @@ namespace CloudberryKingdom
 				return TimeToString();
 		}
 
-		return _T( "" );
+		return std::wstring( L"" );
 	}
 
 	std::wstring ScoreEntry::ScoreToString()
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 			NumDots = 0;
 
 		for ( int i = 0; i < NumDots; i++ )
-			score.append( _T( "." ) );
+			score.append( std::wstring( L"." ) );
 		return score + tag;
 	}
 
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		int NumDots = __max( MinDots, Length - static_cast<int>( scorestr.length() - root.length() ) );
 
 		for ( int i = 0; i < NumDots; i++ )
-			root.append( _T( "." ) );
+			root.append( std::wstring( L"." ) );
 		return root + scorestr;
 	}
 

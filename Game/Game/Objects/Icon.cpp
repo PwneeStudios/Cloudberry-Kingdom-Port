@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 			return UpgradeIcons[ upgrade ]->Clone();
 		else
 		{
-			boost::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, TileSet::Get( _T( "castle" ) ) );
+			boost::shared_ptr<CloudberryKingdom::TileInfoBase> info = TileSet::UpgradeToInfo( upgrade, TileSet::Get( std::wstring( L"castle" ) ) );
 
 			boost::shared_ptr<PictureIcon> icon;
 			if ( big && info->Icon_Big != 0 )
@@ -125,9 +125,9 @@ namespace CloudberryKingdom
 		//UpgradeIcons.Add(Upgrade.Firesnake, new PictureIcon("Firesnake", "Icon_Firesnake", Color.Orange, StandardWidth * .905f));
 		//UpgradeIcons.Add(Upgrade.SpikeyLine, new PictureIcon("Spikey line", "Icon_SpikeyLine", Color.Orange, StandardWidth * .905f));
 
-		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, boost::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, _T( "Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, boost::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, _T( "SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, boost::make_shared<PictureIcon>( Localization::Words_CEILINGS, _T( "CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, boost::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, std::wstring( L"Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, boost::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, std::wstring( L"SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, boost::make_shared<PictureIcon>( Localization::Words_CEILINGS, std::wstring( L"CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
 
 		ObjIcons = std::map<ObjectType, boost::shared_ptr<ObjectIcon> >();
 		//ObjIcons.Add(ObjectType.FallingBlock, UpgradeIcons[Upgrade.FallingBlock]);
@@ -140,17 +140,17 @@ namespace CloudberryKingdom
 		//UncheckedIcon = new PictureIcon("Uncheck", Color.Lime, StandardWidth * .85f);
 
 		//CheckpointIcon = new PictureIcon("Icon_Checkpoint", Color.Lime, StandardWidth * .85f);
-		CheckpointIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Icon_Checkpoint_v2" ) ), Color::Lime, StandardWidth *.85f );
+		CheckpointIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Icon_Checkpoint_v2" ) ), Color::Lime, StandardWidth *.85f );
 		//RandomIcon = new PictureIcon("Unknown", Color.Lime, StandardWidth * 1.2f);
-		RandomIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Random" ) ), Color::Lime, StandardWidth * 1.08f );
-		CustomIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "HeroIcon_Custom" ) ), Color::Lime, StandardWidth * 1.45f );
+		RandomIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"HeroIcon_Random" ) ), Color::Lime, StandardWidth * 1.08f );
+		CustomIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"HeroIcon_Custom" ) ), Color::Lime, StandardWidth * 1.45f );
 
 		//RobotIcon = new PictureIcon("Robot", Color.Lime, StandardWidth * .75f);
 		//PathIcon = new PictureIcon("Path", Color.Lime, StandardWidth * .75f);
 		//SlowMoIcon = new PictureIcon("SlowMo", Color.Lime, StandardWidth * .75f);
-		RobotIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Computer" ) ), Color::Lime, StandardWidth *.75f );
-		PathIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_Path" ) ), Color::Lime, StandardWidth *.75f );
-		SlowMoIcon = boost::make_shared<PictureIcon>( Tools::Texture( _T( "Powerup_SlowMo" ) ), Color::Lime, StandardWidth *.75f );
+		RobotIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Powerup_Computer" ) ), Color::Lime, StandardWidth *.75f );
+		PathIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Powerup_Path" ) ), Color::Lime, StandardWidth *.75f );
+		SlowMoIcon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Powerup_SlowMo" ) ), Color::Lime, StandardWidth *.75f );
 	}
 
 	const Vector2 &ObjectIcon::getPos() const
@@ -173,7 +173,7 @@ namespace CloudberryKingdom
 
 		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true );
 		Backdrop->SetToDefault();
-		Backdrop->setTextureName( _T( "Icon_Backdrop" ) );
+		Backdrop->setTextureName( std::wstring( L"Icon_Backdrop" ) );
 		Backdrop->ScaleYToMatchRatio( 210 );
 	}
 
@@ -387,13 +387,13 @@ namespace CloudberryKingdom
 	{
 		YQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		YQuad->SetToDefault();
-		YQuad->setTextureName( _T( "Xbox_Y" ) );
+		YQuad->setTextureName( std::wstring( L"Xbox_Y" ) );
 		YQuad->ScaleYToMatchRatio( 60 );
 		YQuad->setPos( Vector2( 60, 0 ) );
 
 		GearQuad = boost::make_shared<QuadClass>( FancyPos, true );
 		GearQuad->SetToDefault();
-		GearQuad->setTextureName( _T( "Gears" ) );
+		GearQuad->setTextureName( std::wstring( L"Gears" ) );
 		GearQuad->ScaleYToMatchRatio( 82 );
 		GearQuad->setPos( Vector2( -60.55469f, -16.66663f ) );
 	}

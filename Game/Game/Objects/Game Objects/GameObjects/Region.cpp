@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		//QuadClass Backdrop = new QuadClass("White");
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "dungeon_smoke_thick" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"dungeon_smoke_thick" ) );
 		MyPile->Add( Backdrop );
 
 		//Backdrop.Quad.SetColor(Color.Black);

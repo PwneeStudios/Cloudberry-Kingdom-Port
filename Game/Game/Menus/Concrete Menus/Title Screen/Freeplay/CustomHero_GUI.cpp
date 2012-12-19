@@ -229,7 +229,7 @@ namespace CloudberryKingdom
 			( *bob )->CollectSelf();
 		}
 
-		MyGame->AddToDo( boost::make_shared<MoveBlockAndKillProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), _T( "MoveOut" ), true, true );
+		MyGame->AddToDo( boost::make_shared<MoveBlockAndKillProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), std::wstring( L"MoveOut" ), true, true );
 	}
 
 	bool CustomHero_GUI::MoveBlockAndKill()
@@ -244,7 +244,7 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::KillBobs()
 	{
-		MyGame->WaitThenDo( 20, boost::make_shared<KillBobsHelper>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), _T( "RemoveBobs" ), false, true );
+		MyGame->WaitThenDo( 20, boost::make_shared<KillBobsHelper>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ), std::wstring( L"RemoveBobs" ), false, true );
 	}
 
 	void CustomHero_GUI::MakeBobPhsx()
@@ -266,7 +266,7 @@ namespace CloudberryKingdom
 	void CustomHero_GUI::CreateHeroes()
 	{
 		// Remove any previous bobs
-		MyGame->KillToDo( _T( "RemoveBobs" ) );
+		MyGame->KillToDo( std::wstring( L"RemoveBobs" ) );
 		for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )
 			( *bob )->CollectSelf();
 
@@ -286,7 +286,7 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::RemovePreviousGround()
 	{
-		MyGame->KillToDo( _T( "MoveOut" ) );
+		MyGame->KillToDo( std::wstring( L"MoveOut" ) );
 
 		for ( BlockVec::const_iterator block = MyGame->MyLevel->Blocks.begin(); block != MyGame->MyLevel->Blocks.end(); ++block )
 			( *block )->CollectSelf();
@@ -294,7 +294,7 @@ namespace CloudberryKingdom
 
 	void CustomHero_GUI::CreateGround()
 	{
-		MyGame->MyLevel->MyTileSet = TileSet::Get( _T( "castle" ) );
+		MyGame->MyLevel->MyTileSet = TileSet::Get( std::wstring( L"castle" ) );
 
 		boost::shared_ptr<NormalBlock> block;
 
@@ -394,26 +394,26 @@ namespace CloudberryKingdom
 
 		// Header
 		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_HERO_FACTORY, Resources::Font_Grobold42 );
-		HeaderText->Name = _T( "Header" );
+		HeaderText->Name = std::wstring( L"Header" );
 		SetSuperHeader( HeaderText );
 		HeaderText->setPos( Vector2( -1169.842f, 985.7144f ) );
 		MyPile->Add( HeaderText );
 
 		// Backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
-		backdrop->Name = _T( "Backdrop" );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
+		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
 
 		boost::shared_ptr<MenuItem> item;
 
 		// Hero lists
 		BaseHeader = HeroText = boost::make_shared<EzText>( Localization::Words_BASE, ItemFont );
-		HeroText->Name = _T( "base" );
+		HeroText->Name = std::wstring( L"base" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
 
 		BaseList = MakeList();
-		BaseList->Name = _T( "base" );
+		BaseList->Name = std::wstring( L"base" );
 		for ( Hero_BaseType _hero = static_cast<Hero_BaseType>( 0 ); _hero != Hero_BaseType_LENGTH; Incr( _hero ) )
 		{
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Base( _hero );
@@ -426,12 +426,12 @@ namespace CloudberryKingdom
 
 		// Hero jump
 		JumpHeader = HeroText = boost::make_shared<EzText>( Localization::Words_JUMP, ItemFont );
-		HeroText->Name = _T( "jump" );
+		HeroText->Name = std::wstring( L"jump" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
 
 		JumpList = MakeList();
-		JumpList->Name = _T( "jump" );
+		JumpList->Name = std::wstring( L"jump" );
 		for ( Hero_MoveMod _hero = static_cast<Hero_MoveMod>( 0 ); _hero != Hero_MoveMod_LENGTH; Incr( _hero ) )
 		{
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Move( _hero );
@@ -444,12 +444,12 @@ namespace CloudberryKingdom
 
 		// Hero shape
 		SizeHeader = HeroText = boost::make_shared<EzText>( Localization::Words_SHAPE, ItemFont );
-		HeroText->Name = _T( "size" );
+		HeroText->Name = std::wstring( L"size" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
 
 		SizeList = MakeList();
-		SizeList->Name = _T( "size" );
+		SizeList->Name = std::wstring( L"size" );
 		for ( Hero_Shape _hero = static_cast<Hero_Shape>( 0 ); _hero < Hero_Shape_LENGTH; Incr( _hero ) )
 		//for ( IEnumerable<T*>::const_iterator _hero = Tools::GetValues<Hero_Shape>()->begin(); _hero != Tools::GetValues<Hero_Shape>()->end(); ++_hero )
 		{
@@ -610,7 +610,7 @@ namespace CloudberryKingdom
 	void CustomHero_GUI::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "base" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"base" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1655.38f, 642.6317f ) );
@@ -618,7 +618,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "jump" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"jump" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1653.446f, 451.6321f ) );
@@ -626,7 +626,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "size" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"size" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1656.223f, 256.2355f ) );
@@ -634,7 +634,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "test" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"test" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1914.311f, 134.3449f ) );
@@ -642,7 +642,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.7685415f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1909.15f, -90.52583f ) );
@@ -650,7 +650,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.6955291f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "continue" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"continue" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1915.104f, -288.0107f ) );
@@ -658,7 +658,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.7520385f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "reset" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"reset" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1916.694f, -502.1649f ) );
@@ -670,25 +670,25 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 1166.862f, -69.45605f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -664.2021f, 960.7101f ) );
 			_t->setScale( 0.8010691f );
 		}
-		_t = MyPile->FindEzText( _T( "base" ) );
+		_t = MyPile->FindEzText( std::wstring( L"base" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1269.655f, 708.4517f ) );
 			_t->setScale( 0.6189448f );
 		}
-		_t = MyPile->FindEzText( _T( "jump" ) );
+		_t = MyPile->FindEzText( std::wstring( L"jump" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1270.534f, 507.2669f ) );
 			_t->setScale( 0.5981081f );
 		}
-		_t = MyPile->FindEzText( _T( "size" ) );
+		_t = MyPile->FindEzText( std::wstring( L"size" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1234.811f, 317.9383f ) );
@@ -696,7 +696,7 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 0, 0 ) );
@@ -727,7 +727,7 @@ namespace CloudberryKingdom
 		}
 		else
 			A = Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) );
-		item->Name = _T( "test" );
+		item->Name = std::wstring( L"test" );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
@@ -749,7 +749,7 @@ namespace CloudberryKingdom
 		}
 		else
 			B = Back = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
-		item->Name = _T( "back" );
+		item->Name = std::wstring( L"back" );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
@@ -768,7 +768,7 @@ namespace CloudberryKingdom
 		else
 			X = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) );
 
-		item->Name = _T( "continue" );
+		item->Name = std::wstring( L"continue" );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->MyText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4() *.93f;
@@ -781,7 +781,7 @@ namespace CloudberryKingdom
 
 		// Reset
 		item = ResetButton = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
-		item->Name = _T( "reset" );
+		item->Name = std::wstring( L"reset" );
 		AddItem( item );
 		item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
 	}

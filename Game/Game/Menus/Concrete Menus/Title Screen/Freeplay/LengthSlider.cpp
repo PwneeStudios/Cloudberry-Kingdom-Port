@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		BL_HitPadding = Vector2( 200, 30 );
 	#endif
-		LengthBar = boost::make_shared<ProgressBar>( _T( "Length" ), _T( "LengthBack" ), 850.f );
+		LengthBar = boost::make_shared<ProgressBar>( std::wstring( L"Length" ), std::wstring( L"LengthBack" ), 850.f );
 		LengthBar->MyType = ProgressBar::BarType_REVEAL;
 
 		LengthBar->Outline->Shadow = false;

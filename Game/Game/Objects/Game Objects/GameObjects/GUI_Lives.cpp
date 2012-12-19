@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
 		MyPile->Add( Text );
 
-		Bob_Renamed = boost::make_shared<QuadClass>( _T( "Score/Stickman" ), 64.f, true );
+		Bob_Renamed = boost::make_shared<QuadClass>( std::wstring( L"Score/Stickman" ), 64.f, true );
 		Bob_Renamed->setPos( Vector2( 200.5664f, -42.03058f ) + shift );
 		MyPile->Add( Bob_Renamed );
 	}

@@ -46,8 +46,8 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "CharSelect" ), 1778.f );
-		MyPile->Add( Backdrop, _T( "Backdrop" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"CharSelect" ), 1778.f );
+		MyPile->Add( Backdrop, std::wstring( L"Backdrop" ) );
 
 		//var Backdrop = new QuadClass("CharSelect_Backdrop", 1778);
 		//MyPile.Add(Backdrop, "Backdrop");

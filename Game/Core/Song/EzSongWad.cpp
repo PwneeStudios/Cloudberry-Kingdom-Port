@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		if ( !song->DisplayInfo )
 			return;
 
-		SongInfoText = boost::make_shared<EzText>( song->SongName + _T( "\n" ) + song->ArtistName, Resources::LilFont, true, true );
+		SongInfoText = boost::make_shared<EzText>( song->SongName + std::wstring( L"\n" ) + song->ArtistName, Resources::LilFont, true, true );
 		SongInfoText->_Pos = Vector2( -850, -790 );
 		SongInfoText->MyFloatColor = Vector4( 1, 1, 1, 4.5f );
 		SongInfoText->Alpha = -.45f;
@@ -333,7 +333,7 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<EzSong> NewSong = boost::make_shared<EzSong>();
 
-		int Index = Name.find( _T( "^" ) );
+		int Index = Name.find( std::wstring( L"^" ) );
 
 		std::wstring SongName, AristName;
 		if ( Index > 0 )
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 		else
 		{
 			SongName = Name;
-			AristName = _T( "Unknown artist" );
+			AristName = std::wstring( L"Unknown artist" );
 		}
 
 		NewSong->FileName = Name;
@@ -361,7 +361,7 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<EzSong> NewSong = boost::make_shared<EzSong>();
 
-		int Index = Name.find( _T( "^" ) );
+		int Index = Name.find( std::wstring( L"^" ) );
 
 		std::wstring SongName, AristName;
 		if ( Index > 0 )
@@ -372,7 +372,7 @@ namespace CloudberryKingdom
 		else
 		{
 			SongName = Name;
-			AristName = _T( "Unknown artist" );
+			AristName = std::wstring( L"Unknown artist" );
 		}
 
 		NewSong->Name = Name;

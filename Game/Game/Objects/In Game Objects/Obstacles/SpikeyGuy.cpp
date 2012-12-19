@@ -5,9 +5,9 @@ namespace CloudberryKingdom
 
 	void SpikeyGuy::SpikeyGuyTileInfo::InitializeInstanceFields()
 	{
-		Ball = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
-		Base = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "Joint" ) ), Vector2( 50.f, -1.f ), Vector2(), Color::White );
-		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Chain_Tile" ) ), 44.f, 63.f );
+		Ball = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
+		Base = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"Joint" ) ), Vector2( 50.f, -1.f ), Vector2(), Color::White );
+		Chain = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( std::wstring( L"Chain_Tile" ) ), 44.f, 63.f );
 		Radius = 200;
 		Rotate = false;
 		RotateOffset = 0;

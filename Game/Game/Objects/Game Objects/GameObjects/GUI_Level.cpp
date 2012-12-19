@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 	std::wstring GUI_CampaignLevel::ToString()
 	{
 		if ( MyGame == 0 )
-			return _T( "   " );
+			return std::wstring( L"   " );
 
 		return MyGame->MyLevel->Name;
 	}
@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 	std::wstring GUI_Level::ToString()
 	{
 		Tools::Warning();
-		return Localization::WordString( Prefix ) + _T( " " ) + StringConverterHelper::toString( Level_Renamed );
+		return Localization::WordString( Prefix ) + std::wstring( L" " ) + StringConverterHelper::toString( Level_Renamed );
 	}
 
 	void GUI_Level::OnAdd()

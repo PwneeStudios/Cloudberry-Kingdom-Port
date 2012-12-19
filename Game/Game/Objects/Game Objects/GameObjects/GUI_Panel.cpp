@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 
 	std::vector<std::wstring> GUI_Panel::GetViewables()
 	{
-		std::wstring tempVector[] = { _T( "MyMenu" ), _T( "MyPile" ) };
+		std::wstring tempVector[] = { std::wstring( L"MyMenu" ), std::wstring( L"MyPile" ) };
 		return VecFromArray( tempVector );
 	}
 

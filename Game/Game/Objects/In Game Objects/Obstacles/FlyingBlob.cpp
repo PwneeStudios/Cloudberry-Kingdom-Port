@@ -42,19 +42,19 @@ namespace CloudberryKingdom
 			switch ( MyColor )
 			{
 				case BlobColor_GREEN:
-					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( _T( "Blob2_Body" ) ) );
+					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Blob2_Body" ) ) );
 					break;
 				case BlobColor_PINK:
-					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( _T( "Blob2_Body2" ) ) );
+					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Blob2_Body2" ) ) );
 					break;
 				case BlobColor_BLUE:
-					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( _T( "Blob2_Body3" ) ) );
+					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Blob2_Body3" ) ) );
 					break;
 				case BlobColor_GREY:
-					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( _T( "Blob2_Body4" ) ) );
+					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Blob2_Body4" ) ) );
 					break;
 				case BlobColor_GOLD:
-					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( _T( "Blob2_Body5" ) ) );
+					MyObject->Quads[ 2 ].setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Blob2_Body5" ) ) );
 					break;
 			}
 		}
@@ -72,15 +72,15 @@ namespace CloudberryKingdom
 		switch ( color )
 		{
 			case BlobColor_GREEN:
-				return Tools::TextureWad->FindByName( _T( "BlobGoo" ) );
+				return Tools::TextureWad->FindByName( std::wstring( L"BlobGoo" ) );
 			case BlobColor_PINK:
-				return Tools::TextureWad->FindByName( _T( "BlobGoo2" ) );
+				return Tools::TextureWad->FindByName( std::wstring( L"BlobGoo2" ) );
 			case BlobColor_BLUE:
-				return Tools::TextureWad->FindByName( _T( "BlobGoo3" ) );
+				return Tools::TextureWad->FindByName( std::wstring( L"BlobGoo3" ) );
 			case BlobColor_GREY:
-				return Tools::TextureWad->FindByName( _T( "BlobGoo4" ) );
+				return Tools::TextureWad->FindByName( std::wstring( L"BlobGoo4" ) );
 			case BlobColor_GOLD:
-				return Tools::TextureWad->FindByName( _T( "BlobGoo5" ) );
+				return Tools::TextureWad->FindByName( std::wstring( L"BlobGoo5" ) );
 		}
 
 		return 0;
@@ -240,12 +240,12 @@ namespace CloudberryKingdom
 		getCore()->Active = true;
 
 		// Initialize statics
-		SquishSound = Tools::SoundWad->FindByName( _T( "Blob_Squish" ) );
+		SquishSound = Tools::SoundWad->FindByName( std::wstring( L"Blob_Squish" ) );
 
 		BlobGooTemplate = boost::make_shared<Particle>();
 		BlobGooTemplate->MyQuad.Init();
 		BlobGooTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		BlobGooTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( _T( "BlobGoo" ) ) );
+		BlobGooTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"BlobGoo" ) ) );
 		BlobGooTemplate->SetSize( 55 );
 		BlobGooTemplate->SizeSpeed = Vector2( 4, 4 );
 		BlobGooTemplate->AngleSpeed = .06f;
@@ -260,8 +260,8 @@ namespace CloudberryKingdom
 		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
 
-		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( _T( "BasicEffect" ) ), TextureWad->FindByName( _T( "White" ) ) );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
 		SourceObject->ReadFile( reader, EffectWad, TextureWad );
 		
 		//reader->Close();

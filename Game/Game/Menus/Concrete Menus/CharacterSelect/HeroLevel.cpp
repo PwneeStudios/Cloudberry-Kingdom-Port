@@ -56,12 +56,12 @@ namespace CloudberryKingdom
 		if ( MyCharacterSelect->getPlayer()->Exists )
 		{
 			//string name = MyCharacterSelect.Player.GetName();
-			std::wstring name = _T( "Level 56" );
+			std::wstring name = std::wstring( L"Level 56" );
 			Text = boost::make_shared<EzText>( name, Resources::Font_Grobold42, true, true );
 		}
 		else
 		{
-			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( std::wstring( L"ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 
 		Berry = boost::make_shared<QuadClass>();
 		Berry->SetToDefault();
-		Berry->setTextureName( _T( "cb_enthusiastic" ) );
+		Berry->setTextureName( std::wstring( L"cb_enthusiastic" ) );
 		Berry->Scale( 300 );
 		Berry->ScaleYToMatchRatio();
 

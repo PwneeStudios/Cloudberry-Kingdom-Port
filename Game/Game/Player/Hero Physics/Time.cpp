@@ -18,8 +18,8 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 0, 0, 1 );
 		Name = Localization::Words_TIME_MASTER;
-		Adjective = _T( "Chrono" );
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Classic" ) ), Color::White, 1.2f * DefaultIconWidth );
+		Adjective = std::wstring( L"Chrono" );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Classic" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
 
 	const boost::shared_ptr<BobPhsxTime> &BobPhsxTime::getInstance()

@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 	{
 		// FIXME: Implement exceptions?
 		//if ( gen1 == 0 )
-		//	throw ( std::exception( _T( "No gen data to retrieve!" ) ) );
+		//	throw ( std::exception( std::wstring( L"No gen data to retrieve!" ) ) );
 		if ( gen2 == 0 )
 			return gen1->Get( type );
 
@@ -75,7 +75,7 @@ namespace CloudberryKingdom
 
 		// FIXME: Implement exceptions?
 		//if ( val < 1 )
-		//	throw ( std::exception( _T( "Nonpositive return!" ) ) );
+		//	throw ( std::exception( std::wstring( L"Nonpositive return!" ) ) );
 
 		return val;
 	}

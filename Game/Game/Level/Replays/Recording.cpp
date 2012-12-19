@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	std::wstring Recording::DefaultRecordingDirectory()
 	{
-		return Path::Combine( Globals::ContentDirectory, _T( "Recordings" ) );
+		return Path::Combine( Globals::ContentDirectory, std::wstring( L"Recordings" ) );
 	}
 
 	std::wstring Recording::SourceRecordingDirectory()

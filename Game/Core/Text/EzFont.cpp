@@ -9,12 +9,12 @@ namespace CloudberryKingdom
 		CharacterSpacing = Font->Spacing;
 
 		//LineSpacing = Font.LineSpacing;
-		LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) ).Y );
+		LineSpacing = static_cast<int>( Font->MeasureString( std::wstring( L"abc" ) ).Y );
 	}
 
 	EzFont::EzFont( const std::wstring &FontName, float CharacterSpacing, int LineSpacing )
 	{
-		Initialize( FontName, _T( "" ), CharacterSpacing, LineSpacing );
+		Initialize( FontName, std::wstring( L"" ), CharacterSpacing, LineSpacing );
 	}
 
 	EzFont::EzFont( const std::wstring &FontName, const std::wstring &OutlineFontName, float CharacterSpacing, int LineSpacing )
@@ -52,6 +52,6 @@ namespace CloudberryKingdom
 		else
 			OutlineFont.reset();
 
-		this->LineSpacing = static_cast<int>( Font->MeasureString( _T( "abc" ) ).Y );
+		this->LineSpacing = static_cast<int>( Font->MeasureString( std::wstring( L"abc" ) ).Y );
 	}
 }

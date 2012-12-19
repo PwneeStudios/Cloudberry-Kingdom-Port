@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		DieTemplate = boost::make_shared<Particle>();
 		DieTemplate->MyQuad.Init();
 		DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		DieTemplate->MyQuad.setMyTexture( Tools::Texture( _T( "Checkpoint3" ) ) );
+		DieTemplate->MyQuad.setMyTexture( Tools::Texture( std::wstring( L"Checkpoint3" ) ) );
 		DieTemplate->SetSize( TextureSize.X );
 		DieTemplate->SizeSpeed = Vector2( 10, 10 );
 		DieTemplate->AngleSpeed = .013f;
@@ -29,10 +29,10 @@ namespace CloudberryKingdom
 
 	void Checkpoint::CheckpointTileInfo::InitializeInstanceFields()
 	{
-		Sprite = boost::make_shared<TextureOrAnim>( _T( "Checkpoint3" ) );
+		Sprite = boost::make_shared<TextureOrAnim>( std::wstring( L"Checkpoint3" ) );
 		Size = Vector2( 115, 115 );
 		TextureSize = Vector2( 170, 170 );
-		MySound = Tools::NewSound( _T( "Checkpoint" ),.6f );
+		MySound = Tools::NewSound( std::wstring( L"Checkpoint" ),.6f );
 	}
 
 	void Checkpoint::Release()

@@ -71,7 +71,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			Text = boost::make_shared<EzText>( _T( "ERROR" ), Resources::LilFont, true, true );
+			Text = boost::make_shared<EzText>( std::wstring( L"ERROR" ), Resources::LilFont, true, true );
 		}
 
 		Text->Shadow = false;

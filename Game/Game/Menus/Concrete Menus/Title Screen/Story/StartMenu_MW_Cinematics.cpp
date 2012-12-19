@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	void CinematicsLevelItem::InitializeInstanceFields()
 	{
-		Movie = _T( "" );
+		Movie = std::wstring( L"" );
 	}
 
 	StartMenu_MW_Cinematics::CinematicsGoLambda::CinematicsGoLambda( const boost::shared_ptr<StartMenu_MW_Cinematics> &cine )
@@ -89,38 +89,38 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Chapter 1
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "Over the Edge" ), ItemFont ), _T( "Cutscene_1" ) );
-		item->Name = _T( "1" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Over the Edge" ), ItemFont ), std::wstring( L"Cutscene_1" ) );
+		item->Name = std::wstring( L"1" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "Into the Forest" ), ItemFont ), _T( "Cutscene_2" ) );
-		item->Name = _T( "2" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Into the Forest" ), ItemFont ), std::wstring( L"Cutscene_2" ) );
+		item->Name = std::wstring( L"2" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "Woes of a Kidnapper" ), ItemFont ), _T( "Cutscene_3" ) );
-		item->Name = _T( "3" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Woes of a Kidnapper" ), ItemFont ), std::wstring( L"Cutscene_3" ) );
+		item->Name = std::wstring( L"3" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "Welterweight" ), ItemFont ), _T( "Cutscene_4" ) );
-		item->Name = _T( "4" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Welterweight" ), ItemFont ), std::wstring( L"Cutscene_4" ) );
+		item->Name = std::wstring( L"4" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "Cloudberry Pie" ), ItemFont ), _T( "Cutscene_5" ) );
-		item->Name = _T( "5" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Cloudberry Pie" ), ItemFont ), std::wstring( L"Cutscene_5" ) );
+		item->Name = std::wstring( L"5" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ));
 		AddItem( item );
 
 		// Chapter 6
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( _T( "I Always Told You" ), ItemFont ), _T( "Cutscene_6" ) );
-		item->Name = _T( "6" );
+		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"I Always Told You" ), ItemFont ), std::wstring( L"Cutscene_6" ) );
+		item->Name = std::wstring( L"6" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Cinematics::MakeHeader()
 	{
 		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
-		Header->Name = _T( "Header" );
+		Header->Name = std::wstring( L"Header" );
 		Header->setScale( Header->getScale() * 1.3f );
 		SetText( Header );
 		Header->OutlineColor = Color::Black.ToVector4();

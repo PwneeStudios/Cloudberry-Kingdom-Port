@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		if ( 0 == litem )
 			return;
 
-		MyGame->WaitThenDo( CallDelay, boost::make_shared<LaunchHelper>( boost::static_pointer_cast<StartLevelMenu>( shared_from_this() ), litem ), _T( "StartGame" ) );
+		MyGame->WaitThenDo( CallDelay, boost::make_shared<LaunchHelper>( boost::static_pointer_cast<StartLevelMenu>( shared_from_this() ), litem ), std::wstring( L"StartGame" ) );
 	}
 
 	bool StartLevelMenu::GameReturn()
@@ -194,14 +194,14 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 
 		// Backdrop
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Arcade_Box" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_Box" ) );
 		Backdrop->ScaleYToMatchRatio( 587 );
 		MyPile->Add( Backdrop );
 
 		// Back
 		boost::shared_ptr<QuadClass> BackButton = boost::make_shared<QuadClass>( ButtonTexture::getBack() );
-		MyPile->Add( BackButton, _T( "Back" ) );
-		boost::shared_ptr<QuadClass> BackArrow = boost::make_shared<QuadClass>( _T( "BackArrow2" ), _T( "BackArrow" ) );
+		MyPile->Add( BackButton, std::wstring( L"Back" ) );
+		boost::shared_ptr<QuadClass> BackArrow = boost::make_shared<QuadClass>( std::wstring( L"BackArrow2" ), std::wstring( L"BackArrow" ) );
 		MyPile->Add( BackArrow );
 		BackArrow->FancyPos->SetCenter( BackButton->FancyPos );
 
@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 647.2223f, -447.2223f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "" ) );
+		_t = MyPile->FindEzText( std::wstring( L"" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -749.9998f, 761.1111f ) );
@@ -226,19 +226,19 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "" ) );
+		_q = MyPile->FindQuad( std::wstring( L"" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -591.6664f, -63.88891f ) );
 			_q->setSize( Vector2( 884.3204f, 964.1653f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Back" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Back" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -1102.777f, -761.1107f ) );
 			_q->setSize( Vector2( 56.24945f, 56.24945f ) );
 		}
-		_q = MyPile->FindQuad( _T( "BackArrow" ) );
+		_q = MyPile->FindQuad( std::wstring( L"BackArrow" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -136.1112f, -11.11111f ) );

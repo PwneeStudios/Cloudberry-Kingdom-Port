@@ -90,9 +90,9 @@ namespace CloudberryKingdom
 		level->getMainCamera()->MyZone = CamZone;
 
 		// Initialize the background
-		level->MyTileSet = TileSet::Get( _T( "forest" ) );
+		level->MyTileSet = TileSet::Get( std::wstring( L"forest" ) );
 		//level.MyBackground = Background.Get("KobblerPie");
-		level->MyBackground = Background::Get( _T( "forest" ) );
+		level->MyBackground = Background::Get( std::wstring( L"forest" ) );
 		//level.MyBackground = Background.Get("forest_snow");
 
 		level->MyBackground->Init( level );

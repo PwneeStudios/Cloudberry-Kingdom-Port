@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	ControlItem::ControlItem( Localization::Words description, Keys key ) : MenuItem( boost::make_shared<EzText>( description, Resources::Font_Grobold42, 2000.f, false, false, .65f ) )
 	{
 		MyKey = key;
-		MyQuad = boost::make_shared<QuadClass>( _T( "White" ), 72.f );
+		MyQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ), 72.f );
 		//MyQuad.Quad.SetColor(CustomControlsMenu.SecondaryKeyColor);
 		MyQuad->Quad_Renamed.SetColor( bColor( 240, 240, 240 ) );
 		SetKey( MyKey );
@@ -272,7 +272,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
+		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1376.984f, 1077.035f ) );
 		Backdrop->setPos( Vector2( -18.6521f, -10.31725f ) );
@@ -319,7 +319,7 @@ namespace CloudberryKingdom
 
 		// Customize
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
-		item->Name = _T( "Reset" );
+		item->Name = std::wstring( L"Reset" );
 		item->setGo( boost::make_shared<ResetProxy>( boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
 		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
 
@@ -369,61 +369,61 @@ namespace CloudberryKingdom
 		boost::shared_ptr<ControlItem> item;
 
 		item = boost::make_shared<ControlItem>( Localization::Words_QUICK_SPAWN, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey );
-		item->Name = _T( "quickspawn" );
+		item->Name = std::wstring( L"quickspawn" );
 		item->SetSecondaryKey = boost::make_shared<KeyQuickspawn_KeyboardKey>();
 		item->Reset = boost::make_shared<ResetQuickspawn_KeyboardKey>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_POWER_UP_MENU, ButtonCheck::Help_KeyboardKey->KeyboardKey );
-		item->Name = _T( "powerup" );
+		item->Name = std::wstring( L"powerup" );
 		item->SetSecondaryKey = boost::make_shared<KeyHelp_KeyboardKey>();
 		item->Reset = boost::make_shared<ResetHelp_KeyboardKey>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_LEFT, ButtonCheck::Left_Secondary );
-		item->Name = _T( "left" );
+		item->Name = std::wstring( L"left" );
 		item->SetSecondaryKey = boost::make_shared<KeyLeft_Secondary>();
 		item->Reset = boost::make_shared<ResetLeft_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_RIGHT, ButtonCheck::Right_Secondary );
-		item->Name = _T( "right" );
+		item->Name = std::wstring( L"right" );
 		item->SetSecondaryKey = boost::make_shared<KeyRight_Secondary>();
 		item->Reset = boost::make_shared<ResetRight_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_UP, ButtonCheck::Up_Secondary );
-		item->Name = _T( "up" );
+		item->Name = std::wstring( L"up" );
 		item->SetSecondaryKey = boost::make_shared<KeyUp_Secondary>();
 		item->Reset = boost::make_shared<ResetUp_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_DOWN, ButtonCheck::Down_Secondary );
-		item->Name = _T( "down" );
+		item->Name = std::wstring( L"down" );
 		item->SetSecondaryKey = boost::make_shared<KeyDown_Secondary>();
 		item->Reset = boost::make_shared<ResetDown_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_PREV, ButtonCheck::ReplayPrev_Secondary );
-		item->Name = _T( "replayprev" );
+		item->Name = std::wstring( L"replayprev" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayPrev_Secondary>();
 		item->Reset = boost::make_shared<ResetReplayPrev_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_NEXT, ButtonCheck::ReplayNext_Secondary );
-		item->Name = _T( "replaynext" );
+		item->Name = std::wstring( L"replaynext" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayNext_Secondary>();
 		item->Reset = boost::make_shared<ResetReplayNext_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_REPLAY_TOGGLE, ButtonCheck::SlowMoToggle_Secondary );
-		item->Name = _T( "replaytoggle" );
+		item->Name = std::wstring( L"replaytoggle" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayToggle_Secondary>();
 		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();
 		AddItem( item );
 
 		item = boost::make_shared<ControlItem>( Localization::Words_ACTIVATE_SLOW_MO, ButtonCheck::SlowMoToggle_Secondary );
-		item->Name = _T( "toggleslowmo" );
+		item->Name = std::wstring( L"toggleslowmo" );
 		item->SetSecondaryKey = boost::make_shared<KeySlowMoToggle_Secondary>();
 		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();
 		AddItem( item );
@@ -444,7 +444,7 @@ namespace CloudberryKingdom
 	void CustomControlsMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Reset" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Reset" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 648.9698f, 861.5082f ) );
@@ -452,7 +452,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.4f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 676.7499f, 761.0321f ) );
@@ -460,7 +460,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.4f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "quickspawn" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"quickspawn" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -877.7778f, 870.3333f ) );
@@ -468,7 +468,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "powerup" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"powerup" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -886.1108f, 683.2222f ) );
@@ -476,7 +476,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "left" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"left" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -877.7778f, 498.8889f ) );
@@ -484,7 +484,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "right" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"right" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -874.9998f, 314.5556f ) );
@@ -492,7 +492,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "up" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"up" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -866.6667f, 149.6667f ) );
@@ -500,7 +500,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "down" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"down" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -863.8887f, -34.66666f ) );
@@ -508,7 +508,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5840001f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "replayprev" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"replayprev" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -861.1111f, -219 ) );
@@ -516,7 +516,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.539f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "replaynext" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"replaynext" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -858.3333f, -395 ) );
@@ -524,7 +524,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5430002f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "replaytoggle" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"replaytoggle" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -847.2224f, -576.5555f ) );
@@ -532,7 +532,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.4623334f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "toggleslowmo" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"toggleslowmo" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -841.6666f, -760.8889f ) );
@@ -544,7 +544,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "instructions" ) );
+		_t = MyPile->FindEzText( std::wstring( L"instructions" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 636.5076f, 215.4761f ) );

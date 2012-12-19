@@ -18,9 +18,9 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 0, 3, 0 );
 		Name = Localization::Words_VIRIDIAN;
-		Adjective = _T( "Anti-Grav" );
+		Adjective = std::wstring( L"Anti-Grav" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * -1.2f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * -1.2f );
 
 		HeroDollShift = Vector2( 0, 100 );
 	}

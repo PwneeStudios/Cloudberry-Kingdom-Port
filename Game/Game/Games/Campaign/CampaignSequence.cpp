@@ -57,12 +57,12 @@ namespace CloudberryKingdom
 		Seeds.push_back( 0 );
 
 		Tools::UseInvariantCulture();
-		//boost::shared_ptr<FileStream> stream = File->Open( _T( "Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		//boost::shared_ptr<FileStream> stream = File->Open( std::wstring( L"Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
 		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
 #if defined(PC_VERSION)
-		FileReader reader = FileReader( _T( "Content/Campaign/CampaignList.txt" ) );
+		FileReader reader = FileReader( std::wstring( L"Content/Campaign/CampaignList.txt" ) );
 #else
-		FileReader reader = FileReader( _T( "Campaign/CampaignList.txt" ) );
+		FileReader reader = FileReader( std::wstring( L"Campaign/CampaignList.txt" ) );
 #endif
 
 		std::wstring line;
@@ -70,10 +70,10 @@ namespace CloudberryKingdom
 		int level = 1, count = 1;
 
 		line = reader.ReadLine();
-		while ( line != _T( "" ) )
+		while ( line != std::wstring( L"" ) )
 		{
 			line = Tools::RemoveComment_DashStyle( line );
-			if ( line == _T( "" ) || line.length() <= 1 )
+			if ( line == std::wstring( L"" ) || line.length() <= 1 )
 			{
 				line = reader.ReadLine();
 				continue;
@@ -89,17 +89,17 @@ namespace CloudberryKingdom
 			else
 			{
 				identifier = line;
-				data = _T( "" );
+				data = std::wstring( L"" );
 			}
 
-			if ( identifier == _T( "chapter" ) )
+			if ( identifier == std::wstring( L"chapter" ) )
 			{
 					int chapter = ParseInt( data );
 					//ChapterStart.AddOrOverwrite( chapter, count );
 					DictionaryExtension::AddOrOverwrite( ChapterStart, chapter, count );
 
 			}
-			else if ( identifier == _T( "movie" ) )
+			else if ( identifier == std::wstring( L"movie" ) )
 			{
 					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
 					Seeds.push_back( 0 );
@@ -107,15 +107,15 @@ namespace CloudberryKingdom
 
 
 			}
-			else if ( identifier == _T( "end" ) )
+			else if ( identifier == std::wstring( L"end" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, _T( "" ) ) );
+					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, std::wstring( L"" ) ) );
 					Seeds.push_back( 0 );
 					count++;
 
 
 			}
-			else if ( identifier == _T( "seed" ) )
+			else if ( identifier == std::wstring( L"seed" ) )
 			{
 					std::wstring seed = data;
 					seed += Format( _T( "level:%d;" ), level );
@@ -149,12 +149,12 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<Tuple<std::wstring, std::wstring> > data = SpecialLevel[ Index ];
 
-			if ( data->Item1 == _T( "end" ) )
+			if ( data->Item1 == std::wstring( L"end" ) )
 			{
 					return MakeActionSeed( boost::make_shared<EndActionProxy>() );
 
 			}
-			else if ( data->Item1 == _T( "movie" ) )
+			else if ( data->Item1 == std::wstring( L"movie" ) )
 			{
 					boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > temp = MakeWatchMovieAction( data->Item2 );
 					return MakeActionSeed( temp );

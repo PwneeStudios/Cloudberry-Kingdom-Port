@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 
 	XnaGameClass::XnaGameClass()
 	{
-		Content = boost::make_shared<ContentManager>( _T( "Content" ) );
+		Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 
 		//Tools::GameClass = shared_from_this();
 		MyGame = boost::make_shared<CloudberryKingdomGame>();

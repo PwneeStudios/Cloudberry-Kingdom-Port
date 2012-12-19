@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 	void Hat::Init()
 	{
 		HatPicScale = Vector2(1);
-		QuadName = _T( "" );
+		QuadName = std::wstring( L"" );
 		DrawHead = true;
 		DrawSelf = true;
 	}
@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		HatPicShift = Vector2();
 		HatPicTexture.reset();
 		DrawSelf = false;
-		QuadName = _T( "None" );
+		QuadName = std::wstring( L"None" );
 		DrawHead = true;
 
 		AssociatedAward.reset();

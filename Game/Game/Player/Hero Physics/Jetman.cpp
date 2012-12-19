@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 	{
 		if ( obj->QuadList.size() > 0 )
 		{
-			obj->FindQuad( _T( "Rocket" ) )->Show = true;
+			obj->FindQuad( std::wstring( L"Rocket" ) )->Show = true;
 		}
 	}
 
@@ -66,9 +66,9 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 0, 2, 0 );
 		Name = Localization::Words_JETMAN;
-		Adjective = _T( "jetman" );
+		Adjective = std::wstring( L"jetman" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Jetman" ) ), Color::White, 1.1f * DefaultIconWidth );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.25f, -.01f ) );
 	}
 

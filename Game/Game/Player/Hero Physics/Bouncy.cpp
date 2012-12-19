@@ -20,9 +20,9 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 3, 0, 0, 0 );
 		Name = Localization::Words_BOUNCY;
-		NameTemplate = _T( "bouncey bounce" );
+		NameTemplate = std::wstring( L"bouncey bounce" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.035f ) );
 	}
 

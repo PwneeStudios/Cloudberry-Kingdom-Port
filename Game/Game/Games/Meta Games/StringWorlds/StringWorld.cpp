@@ -314,7 +314,7 @@ namespace CloudberryKingdom
 
 	bool StringWorldGameData::NextIsLast()
 	{
-		return NextLevelSeed->Name == _T( "Last" );
+		return NextLevelSeed->Name == std::wstring( L"Last" );
 	}
 
 	void StringWorldGameData::SwapToLevel()
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 		{
 			// FIXME: forget about throwing exceptions?
 			//if ( CurLevelSeed->MyGame->Loading )
-			//	throw InvalidOperationException( _T( "Swapping from a level that hasn't finished loading!" ) );
+			//	throw InvalidOperationException( std::wstring( L"Swapping from a level that hasn't finished loading!" ) );
 
 			for ( GameObjVec::const_iterator obj = CurLevelSeed->MyGame->MyGameObjects.begin(); obj != CurLevelSeed->MyGame->MyGameObjects.end(); ++obj )
 				if ( ( *obj )->PreventRelease )

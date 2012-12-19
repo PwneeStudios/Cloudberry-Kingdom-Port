@@ -96,7 +96,7 @@ namespace CloudberryKingdom
 		if ( false )
 		{
 			font = Resources::Font_Grobold42;
-			coin = _T( "CoinBlue" );
+			coin = std::wstring( L"CoinBlue" );
 			scale = .625f;
 			c = Color::White;
 			o = Color::Black;
@@ -104,20 +104,20 @@ namespace CloudberryKingdom
 		else
 		{
 			font = Resources::Font_Grobold42;
-			coin = _T( "coin_blue" );
+			coin = std::wstring( L"coin_blue" );
 			scale = .55f;
 			c = bColor( 228, 0, 69 );
 			o = Color::White;
 		}
 
 		CoinsText = boost::make_shared<EzText>( ToString(), font, 450.f, false, true );
-		CoinsText->Name = _T( "coin" );
+		CoinsText->Name = std::wstring( L"coin" );
 		CoinsText->setScale( scale );
 		CoinsText->MyFloatColor = c.ToVector4();
 		CoinsText->OutlineColor = o.ToVector4();
 
 		boost::shared_ptr<QuadClass> Coin_Renamed = boost::make_shared<QuadClass>();
-		Coin_Renamed->Name = _T( "coin" );
+		Coin_Renamed->Name = std::wstring( L"coin" );
 		Coin_Renamed->SetToDefault();
 		Coin_Renamed->setTextureName( coin );
 		Coin_Renamed->Scale( 61.5f );
@@ -135,14 +135,14 @@ namespace CloudberryKingdom
 	void GUI_NextLife::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "coin" ) );
+		_t = MyPile->FindEzText( std::wstring( L"coin" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 189.7776f, 111.7778f ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "coin" ) );
+		_q = MyPile->FindQuad( std::wstring( L"coin" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 140.7331f, 117.8001f ) );

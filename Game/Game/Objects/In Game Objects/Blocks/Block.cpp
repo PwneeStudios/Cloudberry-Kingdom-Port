@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<BlockData> BlockDataA = boost::dynamic_pointer_cast<BlockData>( A );
 		// FIXME: Implement exceptions?
 		//if ( BlockDataA == 0 )
-		//	throw ( std::exception( _T( "Can't copy block data from object data" ) ) );
+		//	throw ( std::exception( std::wstring( L"Can't copy block data from object data" ) ) );
 
 		Safe = BlockDataA->Safe;
 

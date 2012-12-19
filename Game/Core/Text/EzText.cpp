@@ -23,12 +23,12 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
-		return Tools::TextureWad->FindByName( _T( "Enter_Key" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Enter_Key" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
-		return Tools::TextureWad->FindByName( _T( "Esc_Key" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Esc_Key" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getX()
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
-		return Tools::TextureWad->FindByName( _T( "LeftRight_Key" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"LeftRight_Key" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
@@ -56,32 +56,32 @@ namespace CloudberryKingdom
 #if ! defined(PC_VERSION)
 	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_A" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_A" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_B" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_B" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_X" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_X" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_Dir" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_Dir" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_LB" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_LB" ) );
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
 	{
-		return Tools::TextureWad->FindByName( _T( "Xbox_RB" ) );
+		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_RB" ) );
 	}
 #endif
 
@@ -95,39 +95,39 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		using namespace std;
 		KeyToString = std::map<Keys, std::wstring>();
 
-		KeyToString.insert( make_pair( Keys_None, _T( "None" ) ) );
+		KeyToString.insert( make_pair( Keys_None, std::wstring( L"None" ) ) );
 
-		KeyToString.insert( make_pair( Keys_A, _T( "A" ) ) );
-		KeyToString.insert( make_pair( Keys_B, _T( "B" ) ) );
-		KeyToString.insert( make_pair( Keys_C, _T( "C" ) ) );
-		KeyToString.insert( make_pair( Keys_D, _T( "D" ) ) );
-		KeyToString.insert( make_pair( Keys_E, _T( "E" ) ) );
-		KeyToString.insert( make_pair( Keys_F, _T( "F" ) ) );
-		KeyToString.insert( make_pair( Keys_G, _T( "G" ) ) );
-		KeyToString.insert( make_pair( Keys_H, _T( "H" ) ) );
-		KeyToString.insert( make_pair( Keys_I, _T( "I" ) ) );
-		KeyToString.insert( make_pair( Keys_J, _T( "J" ) ) );
-		KeyToString.insert( make_pair( Keys_K, _T( "K" ) ) );
-		KeyToString.insert( make_pair( Keys_L, _T( "L" ) ) );
-		KeyToString.insert( make_pair( Keys_M, _T( "M" ) ) );
-		KeyToString.insert( make_pair( Keys_N, _T( "N" ) ) );
-		KeyToString.insert( make_pair( Keys_O, _T( "O" ) ) );
-		KeyToString.insert( make_pair( Keys_P, _T( "P" ) ) );
-		KeyToString.insert( make_pair( Keys_Q, _T( "Q" ) ) );
-		KeyToString.insert( make_pair( Keys_R, _T( "R" ) ) );
-		KeyToString.insert( make_pair( Keys_S, _T( "S" ) ) );
-		KeyToString.insert( make_pair( Keys_T, _T( "T" ) ) );
-		KeyToString.insert( make_pair( Keys_U, _T( "U" ) ) );
-		KeyToString.insert( make_pair( Keys_V, _T( "V" ) ) );
-		KeyToString.insert( make_pair( Keys_W, _T( "W" ) ) );
-		KeyToString.insert( make_pair( Keys_X, _T( "X" ) ) );
-		KeyToString.insert( make_pair( Keys_Y, _T( "Y" ) ) );
-		KeyToString.insert( make_pair( Keys_Z, _T( "Z" ) ) );
+		KeyToString.insert( make_pair( Keys_A, std::wstring( L"A" ) ) );
+		KeyToString.insert( make_pair( Keys_B, std::wstring( L"B" ) ) );
+		KeyToString.insert( make_pair( Keys_C, std::wstring( L"C" ) ) );
+		KeyToString.insert( make_pair( Keys_D, std::wstring( L"D" ) ) );
+		KeyToString.insert( make_pair( Keys_E, std::wstring( L"E" ) ) );
+		KeyToString.insert( make_pair( Keys_F, std::wstring( L"F" ) ) );
+		KeyToString.insert( make_pair( Keys_G, std::wstring( L"G" ) ) );
+		KeyToString.insert( make_pair( Keys_H, std::wstring( L"H" ) ) );
+		KeyToString.insert( make_pair( Keys_I, std::wstring( L"I" ) ) );
+		KeyToString.insert( make_pair( Keys_J, std::wstring( L"J" ) ) );
+		KeyToString.insert( make_pair( Keys_K, std::wstring( L"K" ) ) );
+		KeyToString.insert( make_pair( Keys_L, std::wstring( L"L" ) ) );
+		KeyToString.insert( make_pair( Keys_M, std::wstring( L"M" ) ) );
+		KeyToString.insert( make_pair( Keys_N, std::wstring( L"N" ) ) );
+		KeyToString.insert( make_pair( Keys_O, std::wstring( L"O" ) ) );
+		KeyToString.insert( make_pair( Keys_P, std::wstring( L"P" ) ) );
+		KeyToString.insert( make_pair( Keys_Q, std::wstring( L"Q" ) ) );
+		KeyToString.insert( make_pair( Keys_R, std::wstring( L"R" ) ) );
+		KeyToString.insert( make_pair( Keys_S, std::wstring( L"S" ) ) );
+		KeyToString.insert( make_pair( Keys_T, std::wstring( L"T" ) ) );
+		KeyToString.insert( make_pair( Keys_U, std::wstring( L"U" ) ) );
+		KeyToString.insert( make_pair( Keys_V, std::wstring( L"V" ) ) );
+		KeyToString.insert( make_pair( Keys_W, std::wstring( L"W" ) ) );
+		KeyToString.insert( make_pair( Keys_X, std::wstring( L"X" ) ) );
+		KeyToString.insert( make_pair( Keys_Y, std::wstring( L"Y" ) ) );
+		KeyToString.insert( make_pair( Keys_Z, std::wstring( L"Z" ) ) );
 
-		KeyToString.insert( make_pair( Keys_Enter, _T( "Enter" ) ) );
-		KeyToString.insert( make_pair( Keys_Space, _T( "Space" ) ) );
-		KeyToString.insert( make_pair( Keys_Back, _T( "Backspace" ) ) );
-		KeyToString.insert( make_pair( Keys_Escape, _T( "Esc" ) ) );
+		KeyToString.insert( make_pair( Keys_Enter, std::wstring( L"Enter" ) ) );
+		KeyToString.insert( make_pair( Keys_Space, std::wstring( L"Space" ) ) );
+		KeyToString.insert( make_pair( Keys_Back, std::wstring( L"Backspace" ) ) );
+		KeyToString.insert( make_pair( Keys_Escape, std::wstring( L"Esc" ) ) );
 
 		//KeyToString.Add(Keys.OemPeriod, ".");
 		//KeyToString.Add(Keys.OemComma, ",");
@@ -166,11 +166,11 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		std::wstring str;
 		try
 		{
-			str = KeyToString[ key ] + _T( "_Key" );
+			str = KeyToString[ key ] + std::wstring( L"_Key" );
 		}
 		catch ( ... )
 		{
-			str = _T( "White" );
+			str = std::wstring( L"White" );
 		}
 
 		return str;
@@ -185,14 +185,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Back( int size )
 	{
-		return _T( "" );
+		return std::wstring( L"" );
 	}
 #endif
 
 #if defined(PC_VERSION)
 	std::wstring ButtonString::Go( int size )
 	{
-		return _T( "" );
+		return std::wstring( L"" );
 	}
 #endif
 
@@ -348,12 +348,12 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b )
 	{
-		return ColorToMarkup( r, g, b, 0, _T( "" ) );
+		return ColorToMarkup( r, g, b, 0, std::wstring( L"" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b, int shift )
 	{
-		return ColorToMarkup( r, g, b, shift, _T( "" ) );
+		return ColorToMarkup( r, g, b, shift, std::wstring( L"" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b, int shift, const std::wstring &bit )
@@ -363,17 +363,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	std::wstring EzText::ColorToMarkup( Color clr )
 	{
-		return ColorToMarkup( clr, 0, _T( "" ) );
+		return ColorToMarkup( clr, 0, std::wstring( L"" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( Color clr, int shift )
 	{
-		return ColorToMarkup( clr, shift, _T( "" ) );
+		return ColorToMarkup( clr, shift, std::wstring( L"" ) );
 	}
 
 	std::wstring EzText::ColorToMarkup( Color clr, int shift, const std::wstring &bit )
 	{
-		if ( bit != _T( "" ) )
+		if ( bit != std::wstring( L"" ) )
 		{
 			return ColorToMarkup( clr, shift ) + bit + ColorToMarkup( Color::White, shift );
 		}
@@ -444,7 +444,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	std::wstring EzText::FirstString()
 	{
 		if ( Bits.empty() )
-			return _T( "" );
+			return std::wstring( L"" );
 		else
 			return Bits[ 0 ]->str;
 	}
@@ -663,8 +663,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 					std::vector<std::wstring> string_bits; // = str.Split( L',' );
 					Split( str, ',', string_bits );
 
-					Comma1 = str.find( _T( "," ) );
-					Comma2 = str.find( _T( "," ), Comma1 + 1 );
+					Comma1 = str.find( std::wstring( L"," ) );
+					Comma2 = str.find( std::wstring( L"," ), Comma1 + 1 );
 
 					Parse_PicName = str.substr( 2, Comma1 - 2 );
 					WidthString = string_bits[ 1 ];
@@ -712,9 +712,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			// Blank space
 			case L's':
 				Parse_Type = ParseData_PIC;
-				Parse_PicName = _T( "Transparent" );
+				Parse_PicName = std::wstring( L"Transparent" );
 
-				Comma1 = str.find( _T( "," ) );
+				Comma1 = str.find( std::wstring( L"," ) );
 
 				WidthString = str.substr( 2, Comma1 - 2 );
 				HeightString = str.substr( Comma1 + 1 );
@@ -725,9 +725,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			case L'c':
 				Parse_Type = ParseData_COLOR;
 
-				Comma1 = str.find( _T( "," ) );
-				Comma2 = str.find( _T( "," ), Comma1 + 1 );
-				Comma3 = str.find( _T( "," ), Comma2 + 1 );
+				Comma1 = str.find( std::wstring( L"," ) );
+				Comma2 = str.find( std::wstring( L"," ), Comma1 + 1 );
+				Comma3 = str.find( std::wstring( L"," ), Comma2 + 1 );
 
 				std::wstring RString = str.substr( 2, Comma1 - 2 );
 				std::wstring GString = str.substr( Comma1 + 1, Comma2 - 1 - Comma1 );
@@ -753,8 +753,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		bool ReachedEnd = false;
 		while ( !ReachedEnd )
 		{
-			BracketIndex = str.find( _T( "}" ), EndIndex );
-			SpaceIndex = str.find( _T( " " ), EndIndex );
+			BracketIndex = str.find( std::wstring( L"}" ), EndIndex );
+			SpaceIndex = str.find( std::wstring( L" " ), EndIndex );
 			DelimiterIndex = str.find( L'\n', EndIndex );
 			if ( BracketIndex == -1 && SpaceIndex == -1 )
 			{
@@ -794,10 +794,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 		while ( !flag )
 		{
-			BeginBracketIndex = str.find( _T( "{" ), 0 );
+			BeginBracketIndex = str.find( std::wstring( L"{" ), 0 );
 			if ( BeginBracketIndex >= 0 )
 			{
-				EndBracketIndex = str.find( _T( "}" ), 0 );
+				EndBracketIndex = str.find( std::wstring( L"}" ), 0 );
 				std::wstring PicStr = str.substr( BeginBracketIndex, EndBracketIndex - BeginBracketIndex );
 				Parse( PicStr );
 				//str = str.erase( BeginBracketIndex, EndBracketIndex - BeginBracketIndex + 1 );
@@ -827,17 +827,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		MyFont->FixFont();
 
 		Vector2 loc = Vector2( StartX, 0 );
-		float LineHeight = MyFont->Font->MeasureString( _T( " " ) ).Y;
+		float LineHeight = MyFont->Font->MeasureString( std::wstring( L" " ) ).Y;
 		int BeginBracketIndex, EndBracketIndex;
 
 		bool FirstElement = true;
 
 		while ( str.length() > 0 )
 		{
-			BeginBracketIndex = str.find( _T( "{" ), 0 );
+			BeginBracketIndex = str.find( std::wstring( L"{" ), 0 );
 			if ( BeginBracketIndex == 0 )
 			{
-				EndBracketIndex = str.find( _T( "}" ), 0 );
+				EndBracketIndex = str.find( std::wstring( L"}" ), 0 );
 				std::wstring PicStr = str.substr( BeginBracketIndex, EndBracketIndex - BeginBracketIndex );
 				Parse( PicStr );
 				str = str.erase( BeginBracketIndex, EndBracketIndex - BeginBracketIndex + 1 );
@@ -1242,7 +1242,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		ColorizePics = false;
 		FixedToCamera = false;
 
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		Layer = 0;
 		ParentScaling = Vector2(1);
 		ParentAlpha = 1;

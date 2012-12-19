@@ -92,9 +92,9 @@ namespace CloudberryKingdom
 	//	boost::shared_ptr<Thread> MakeThread = boost::make_shared<Thread>( boost::make_shared<ThreadStart>( this->_MakeThreadFunc ) )
 	//	{
 	//#if defined(WINDOWS)
-	//		Name = _T( "MakeLevelThread" ),Priority = ThreadPriority::Normal,
+	//		Name = std::wstring( L"MakeLevelThread" ),Priority = ThreadPriority::Normal,
 	//#else
-	//		Name = _T( "MakeLevelThread" ),
+	//		Name = std::wstring( L"MakeLevelThread" ),
 	//#endif
 	//	};
 

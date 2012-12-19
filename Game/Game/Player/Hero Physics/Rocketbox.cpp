@@ -17,8 +17,8 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 6, 0, 0, 0 );
 		Name = Localization::Words_ROCKETBOX;
-		NameTemplate = _T( "rocketbox" );
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
+		NameTemplate = std::wstring( L"rocketbox" );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.485f ) );
 	}
 
@@ -55,8 +55,8 @@ namespace CloudberryKingdom
 		//if (MyBob.Core.MyLevel.PlayMode == 0)
 		if ( Prototype != 0 && MyBob->PlayerObject != 0 && MyBob->PlayerObject->QuadList.size() > 0 )
 		{
-			LeftWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Left" ) ) );
-			RightWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( _T( "Wheel_Right" ) ) );
+			LeftWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Left" ) ) );
+			RightWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Right" ) ) );
 		}
 	}
 

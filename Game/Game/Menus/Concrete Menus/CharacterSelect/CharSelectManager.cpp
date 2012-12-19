@@ -187,7 +187,7 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 
 		CharacterSelectManager::FinishAll();
 
-		game->KillToDo( _T( "StartCharSelect" ) );
+		game->KillToDo( std::wstring( L"StartCharSelect" ) );
 
 		game->RemoveGameObjects( GameObject::Tag_CHAR_SELECT );
 		Backdrop->Release();

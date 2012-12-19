@@ -598,7 +598,7 @@ namespace CloudberryKingdom
 	ObjectClass::ObjectClass()
 	{
 		InitializeInstanceFields();
-		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		ObjectClassInit( Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 	}
 
 	ObjectClass::ObjectClass( const boost::shared_ptr<ObjectClass> &obj, bool _BoxesOnly, bool DeepClone )
@@ -788,7 +788,7 @@ namespace CloudberryKingdom
 		//AnimName = std::vector<std::wstring>( 50 );
 		//for ( int i = 0; i < 50; i++ )
 		//{
-		//	AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
+		//	AnimName[ i ] = std::wstring( L"Anim_" ) + StringConverterHelper::toString( i );
 		//	AnimSpeed[ i ] = 1;
 		//}
 

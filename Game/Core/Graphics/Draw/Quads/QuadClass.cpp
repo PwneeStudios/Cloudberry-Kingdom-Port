@@ -510,7 +510,7 @@ namespace CloudberryKingdom
 	void QuadClass::SetToDefault()
 	{
 		Quad_Renamed.MyEffect = Tools::BasicEffect;
-		Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "White" ) ) );
+		Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 	}
 
 	QuadClass::QuadClass( const boost::shared_ptr<EzTexture> &texture )
@@ -778,7 +778,7 @@ namespace CloudberryKingdom
 		ShadowColor = Color::Black;
 		ShadowScale = 1;
 		Quad_Renamed = SimpleQuad();
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		Layer = 0;
 		ParentScaling = Vector2(1);
 		ParentAlpha = 1;

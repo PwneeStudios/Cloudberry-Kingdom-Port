@@ -28,8 +28,8 @@ namespace CloudberryKingdom
 	void ScoreDatabase::Initialize()
 	{
 		Instance = boost::make_shared<ScoreDatabase>();
-		Instance->ContainerName = _T( "HighScores" );
-		Instance->FileName = _T( "HighScores" );
+		Instance->ContainerName = std::wstring( L"HighScores" );
+		Instance->FileName = std::wstring( L"HighScores" );
 		Instance->FailLoad();
 
 		MostRecentScoreDate = CurrentDate();

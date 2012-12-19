@@ -78,8 +78,8 @@ namespace CloudberryKingdom
 
 	void AlertBaseMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
-		Backdrop->Name = _T( "Backdrop" );
+		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 	}
 
@@ -104,14 +104,14 @@ namespace CloudberryKingdom
 		MakeBackdrop();
 
 		boost::shared_ptr<EzText> message = boost::make_shared<EzText>( Message, ItemFont, 700.f, true, true );
-		message->Name = _T( "Message" );
+		message->Name = std::wstring( L"Message" );
 		MyPile->Add( message );
 
 		// Make the menu
 		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->setControl( getControl() );
 
-		boost::shared_ptr<MenuItem> OkItem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( OkText, ItemFont, true, true ), _T( "Message" ) );
+		boost::shared_ptr<MenuItem> OkItem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( OkText, ItemFont, true, true ), std::wstring( L"Message" ) );
 		OkItem->setGo( Cast::ToItem( boost::make_shared<OkProxy>( boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) ) );
 		AddItem( OkItem );
 		OkItem->SelectSound.reset();
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 
 
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Message" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Message" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 22.55518f, -626.111f ) );
@@ -135,7 +135,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Message" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Message" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 0, 0 ) );
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 0, 0 ) );

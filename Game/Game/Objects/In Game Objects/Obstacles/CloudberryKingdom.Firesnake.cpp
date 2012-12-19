@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Firesnake::FiresnakeTileInfo::InitializeInstanceFields()
 	{
-		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( _T( "EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
+		Sprite = boost::make_shared<SpriteInfo>( TextureOrAnim::Get( std::wstring( L"EmitterTexture" ) ), Vector2( 320.f ), Vector2(), Color::White );
 	}
 
 	void Firesnake::MakeNew()

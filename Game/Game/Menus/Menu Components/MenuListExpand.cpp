@@ -134,7 +134,7 @@ namespace CloudberryKingdom
 		}
 
 		// Backdrop
-		backdrop = boost::make_shared<QuadClass>( _T( "score_screen_grey" ), 482.f );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"score_screen_grey" ), 482.f );
 		//backdrop.Size = backdrop.Size * new Vector2(1f, 2.03f);
 		MyMenu->CalcBounds();
 		float Height = ( MyMenu->TR.Y - MyMenu->BL.Y ) / 2;

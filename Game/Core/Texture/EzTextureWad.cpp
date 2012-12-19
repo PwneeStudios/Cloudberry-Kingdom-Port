@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<TextureOrAnim> EzTextureWad::FindTextureOrAnim( const std::wstring &name )
 	{
-		if ( name == _T( "null" ) )
+		if ( name == std::wstring( L"null" ) )
 			return 0;
 
 		boost::shared_ptr<TextureOrAnim> t_or_a = boost::make_shared<TextureOrAnim>();
@@ -89,7 +89,7 @@ namespace CloudberryKingdom
 		if ( PathTexture == 0 || PathTexture == TextureList[ 0 ] )
 		{
 			// Get the name from the path
-			int i = path.rfind( _T( "/" ) );
+			int i = path.rfind( std::wstring( L"/" ) );
 
 			// If the name is the path, return what we found
 			if ( i <= 0 )
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<EzTexture> EzTextureWad::_FindByName( const std::wstring &name )
 	{
-		if ( name == _T( "" ) )
+		if ( name == std::wstring( L"" ) )
 			return DefaultTexture;
 
 		return Find( name );
@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 	{
 		std::wstring lowercaseName = ToLower( name );
 
-		if ( lowercaseName.find( _T( "/" ) ) != std::string::npos && BigNameDict.find( lowercaseName ) != BigNameDict.end() )
+		if ( lowercaseName.find( std::wstring( L"/" ) ) != std::string::npos && BigNameDict.find( lowercaseName ) != BigNameDict.end() )
 			return BigNameDict[ lowercaseName ];
 		else if ( PathDict.find( lowercaseName ) != PathDict.end() )
 			return PathDict[ lowercaseName ];
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
 			::Add( NameDict, name, NewTex );
 		// FIXME: This was AddOrOverwrite.
 
-		if ( NewTex->Path != _T( "" ) )
+		if ( NewTex->Path != std::wstring( L"" ) )
 		{
 			// FIXME: This was AddOrOverwrite.
 			//PathDict[ ToLower( NewTex->Path ) ] = NewTex;
@@ -218,7 +218,7 @@ namespace CloudberryKingdom
 			BigNameDict[ToLower( Tools::GetFileBigName( NewTex->Path ) ) ]= NewTex;
 
 			// Add to folder
-			std::wstring folder = Tools::FirstFolder( Name, _T( "Art/" ) );
+			std::wstring folder = Tools::FirstFolder( Name, std::wstring( L"Art/" ) );
 			if ( TextureListByFolder.find( folder ) == TextureListByFolder.end() )
 				TextureListByFolder.insert( make_pair( folder, std::vector<boost::shared_ptr<EzTexture> >() ) );
 			TextureListByFolder[ folder ].push_back( NewTex );

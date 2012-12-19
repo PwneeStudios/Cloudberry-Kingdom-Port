@@ -37,10 +37,10 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		//Black = new QuadClass("BlackSwipe");
-		Black = boost::make_shared<QuadClass>( _T( "BlackSwipe_Vertical" ) );
+		Black = boost::make_shared<QuadClass>( std::wstring( L"BlackSwipe_Vertical" ) );
 		Black->ScaleXToMatchRatio( 1000 );
 		Black->setSizeX( Black->getSizeX() * 1.35f );
-		MyPile->Add( Black, _T( "Black" ) );
+		MyPile->Add( Black, std::wstring( L"Black" ) );
 
 		MyPile->setAlpha( 0 );
 

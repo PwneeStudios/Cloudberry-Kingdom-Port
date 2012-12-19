@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 
 	void Laser::LaserTileInfo::InitializeInstanceFields()
 	{
-		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( _T( "Laser" ) ), 100.f, 60.f, 1, Vector4( 1.f ) );
+		Line_Renamed = boost::make_shared<LineSpriteInfo>( TextureOrAnim::Get( std::wstring( L"Laser" ) ), 100.f, 60.f, 1, Vector4( 1.f ) );
 		Tint_Full = Vector4( 1.f, 1.f, 1.f, .95f );
 		Tint_Half = Vector4( 1,.5f,.5f,.4f );
 		Scale = 1;

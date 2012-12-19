@@ -100,7 +100,7 @@ namespace CloudberryKingdom
 		This->AnimName = std::vector<std::wstring>( 50 );
 		for ( int i = 0; i < 50; i++ )
 		{
-			This->AnimName[ i ] = _T( "Anim_" ) + StringConverterHelper::toString( i );
+			This->AnimName[ i ] = std::wstring( L"Anim_" ) + StringConverterHelper::toString( i );
 			This->AnimSpeed[ i ] = 1;
 		}
 

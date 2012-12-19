@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Arcade::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Header" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2771.113f, 901.9052f ) );
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( -2490.635f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Escalation" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Escalation" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2458.969f, 320.413f ) );
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( -2490.635f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Time Crisis" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Time Crisis" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2467.301f, 117.0817f ) );
@@ -106,7 +106,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( -2490.635f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hero Rush" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hero Rush" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2456.189f, -97.36035f ) );
@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, 0 );
 			_item->SetSelectedPos( Vector2( -2490.635f, -1 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hero Rush 2" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hero Rush 2" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -2472.857f, -297.9135f ) );
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 1070.889f, -45.5556f ) );
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -290.4752f, -2200.793f ) );

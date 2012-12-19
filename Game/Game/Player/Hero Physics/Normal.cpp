@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 0, 0, 0 );
 		Name = Localization::Words_CLASSIC_HERO;
-		NameTemplate = _T( "hero" );
+		NameTemplate = std::wstring( L"hero" );
 
 		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * 1.1f);
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
 	}
 
 	const boost::shared_ptr<BobPhsxNormal> &BobPhsxNormal::getInstance()
@@ -1615,7 +1615,7 @@ namespace CloudberryKingdom
 	{
 		Fireball::Explosion( MyBob->getCore()->Data.Position, MyBob->getCore()->MyLevel,.1f * getVel(), ExplosionScale, ExplosionScale / 1.4f );
 		Fireball::Explosion( MyBob->getCore()->Data.Position, MyBob->getCore()->MyLevel,.1f * getVel(), ExplosionScale, ExplosionScale / 1.4f );
-		Tools::SoundWad->FindByName( _T( "DustCloud_Explode" ) )->Play( .4f );
+		Tools::SoundWad->FindByName( std::wstring( L"DustCloud_Explode" ) )->Play( .4f );
 	}
 
 	void BobPhsxNormal::Die( BobDeathType DeathType )

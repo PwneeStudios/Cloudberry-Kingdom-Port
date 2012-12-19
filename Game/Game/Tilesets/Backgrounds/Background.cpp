@@ -8,34 +8,34 @@ namespace CloudberryKingdom
 		BackgroundType::None = boost::make_shared<BackgroundTemplate>();
 		BackgroundType::Random = boost::make_shared<BackgroundTemplate>();
 		
-		BackgroundType::_Sea = boost::make_shared<Background_Sea>( _T( "sea" ) );
+		BackgroundType::_Sea = boost::make_shared<Background_Sea>( std::wstring( L"sea" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Sea->shared_from_this() );
 
-		BackgroundType::_Sea_Rain = boost::make_shared<Background_SeaRain>( _T( "sea_rain" ) );
+		BackgroundType::_Sea_Rain = boost::make_shared<Background_SeaRain>( std::wstring( L"sea_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Sea_Rain ->shared_from_this() );
 
-		BackgroundType::_Hills = boost::make_shared<Background_Hills>( _T( "hills" ) );
+		BackgroundType::_Hills = boost::make_shared<Background_Hills>( std::wstring( L"hills" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Hills->shared_from_this() );
 
-		BackgroundType::_Hills_Rain = boost::make_shared<Background_HillsRain>( _T( "hills_rain" ) );
+		BackgroundType::_Hills_Rain = boost::make_shared<Background_HillsRain>( std::wstring( L"hills_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Hills_Rain->shared_from_this() );
 
-		BackgroundType::_Forest = boost::make_shared<Background_Forest>( _T( "forest" ) );
+		BackgroundType::_Forest = boost::make_shared<Background_Forest>( std::wstring( L"forest" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Forest->shared_from_this() );
 
-		BackgroundType::_Forest_Rain = boost::make_shared<Background_ForestSnow>( _T( "forest_snow" ) );
+		BackgroundType::_Forest_Rain = boost::make_shared<Background_ForestSnow>( std::wstring( L"forest_snow" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Forest_Rain->shared_from_this() );
 
-		BackgroundType::_Cloud = boost::make_shared<Background_Cloud>( _T( "cloud" ) );
+		BackgroundType::_Cloud = boost::make_shared<Background_Cloud>( std::wstring( L"cloud" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cloud->shared_from_this() );
 
-		BackgroundType::_Cloud_Rain = boost::make_shared<Background_CloudRain>( _T( "cloud_rain" ) );
+		BackgroundType::_Cloud_Rain = boost::make_shared<Background_CloudRain>( std::wstring( L"cloud_rain" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cloud_Rain->shared_from_this() );
 
-		BackgroundType::_Cave = boost::make_shared<Background_Cave>( _T( "cave" ) );
+		BackgroundType::_Cave = boost::make_shared<Background_Cave>( std::wstring( L"cave" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Cave->shared_from_this() );
 
-		BackgroundType::_Castle = boost::make_shared<Background_Castle>( _T( "castle" ) );
+		BackgroundType::_Castle = boost::make_shared<Background_Castle>( std::wstring( L"castle" ) );
 		BackgroundType::AddTemplate( BackgroundType::_Castle->shared_from_this() );
 	}
 
@@ -97,7 +97,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<RegularBackground> b = boost::make_shared<RegularBackground>();
 		b->MyTemplate = shared_from_this();
 
-		if ( MadeOfCode || File == _T( "" ) )
+		if ( MadeOfCode || File == std::wstring( L"" ) )
 			return b;
 
 		return b;
@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 	{
 		MadeOfCode = true;
 		MadeOfText = false;
-		File = _T( "" );
+		File = std::wstring( L"" );
 	}
 
 	RegularBackground::RegularBackground()

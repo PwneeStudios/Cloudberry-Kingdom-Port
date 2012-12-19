@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::Difficulty = 0;
 		CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
 		CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
-		CustomLevel_GUI::SeedStringToLoad = _T( "" );
+		CustomLevel_GUI::SeedStringToLoad = std::wstring( L"" );
 		CustomLevel_GUI::ExitFreeplay = false;
 	}
 
@@ -298,7 +298,7 @@ namespace CloudberryKingdom
 
 		NoBackIfNoCaller = true;
 
-		SeedStringToLoad = _T( "" );
+		SeedStringToLoad = std::wstring( L"" );
 		ExitFreeplay = false;
 
 		return boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() );
@@ -545,8 +545,8 @@ namespace CloudberryKingdom
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
 
-		backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f, true );
-		backdrop->Name = _T( "Backdrop" );
+		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
+		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
 		backdrop->setSize( Vector2( 1690.477f, 1115.617f ) );
 		backdrop->setPos( Vector2( 287.6977f, 51.58758f ) );
@@ -572,14 +572,14 @@ namespace CloudberryKingdom
 
 		// Location
 		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( Localization::Words_LOCATION, ItemFont );
-		LocationText->Name = _T( "Location" );
+		LocationText->Name = std::wstring( L"Location" );
 		SetHeaderProperties( LocationText );
 		MyPile->Add( LocationText );
 		LocationText->setPos( Vector2( -1050.111f, 933 ) );
 
 		boost::shared_ptr<MenuList> LocationList = boost::make_shared<MenuList>();
 			MenuList_PostConstruct( LocationList );
-		LocationList->Name = _T( "Location" );
+		LocationList->Name = std::wstring( L"Location" );
 		LocationList->Center = !LeftJustify;
 		LocationList->MyExpandPos = Vector2( -498.1506f, 713.873f );
 		for ( std::vector<boost::shared_ptr<TileSet> >::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
@@ -602,14 +602,14 @@ namespace CloudberryKingdom
 
 		// Game type
 		boost::shared_ptr<EzText> GameText = boost::make_shared<EzText>( Localization::Words_GAME, ItemFont );
-		GameText->Name = _T( "Game" );
+		GameText->Name = std::wstring( L"Game" );
 		SetHeaderProperties( GameText );
 		MyPile->Add( GameText );
 		GameText->setPos( Vector2( -1061.11f, 933 - 222 ) );
 
 		boost::shared_ptr<MenuList> GameList = boost::make_shared<MenuList>();
 			MenuList_PostConstruct( GameList );
-		GameList->Name = _T( "Game" );
+		GameList->Name = std::wstring( L"Game" );
 		GameList->MyExpandPos = Vector2( -580, 500.873f );
 		GameList->Center = !LeftJustify;
 		std::vector<Localization::Words> GameNames;
@@ -638,14 +638,14 @@ namespace CloudberryKingdom
 
 		// Hero
 		HeroText = boost::make_shared<EzText>( Localization::Words_HERO, ItemFont );
-		HeroText->Name = _T( "Hero" );
+		HeroText->Name = std::wstring( L"Hero" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
 		HeroText->setPos( Vector2( -1044.443f, 933 - 2 * 222 ) );
 
 		HeroList = boost::make_shared<MenuList>();
 			MenuList_PostConstruct( HeroList );
-		HeroList->Name = _T( "Hero" );
+		HeroList->Name = std::wstring( L"Hero" );
 		HeroList->Center = !LeftJustify;
 		HeroList->MyExpandPos = Vector2( -782.1666f, 293.6826f );
 		for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator hero = FreeplayHeroes.begin(); hero != FreeplayHeroes.end(); ++hero )
@@ -670,7 +670,7 @@ namespace CloudberryKingdom
 
 		// Difficulty
 		boost::shared_ptr<EzText> DiffText = boost::make_shared<EzText>( Localization::Words_DIFFICULTY, ItemFont );
-		DiffText->Name = _T( "Diff" );
+		DiffText->Name = std::wstring( L"Diff" );
 		SetHeaderProperties( DiffText );
 		MyPile->Add( DiffText );
 		DiffText->setPos( Vector2( -1233.889f, 40.55557f ) );
@@ -678,7 +678,7 @@ namespace CloudberryKingdom
 		std::vector<Localization::Words> Names = CampaignHelper::DifficultyNames;
 		DiffList = boost::make_shared<MenuList>();
 			MenuList_PostConstruct( DiffList );
-		DiffList->Name = _T( "Diff" );
+		DiffList->Name = std::wstring( L"Diff" );
 		DiffList->Center = !LeftJustify;
 		DiffList->MyExpandPos = Vector2( -519.6807f, -151.5238f );
 		DiffList->DoIndexWrapping = false;
@@ -698,13 +698,13 @@ namespace CloudberryKingdom
 
 		// Length
 		boost::shared_ptr<EzText> LengthText = boost::make_shared<EzText>( Localization::Words_LENGTH, ItemFont );
-		LengthText->Name = _T( "Length" );
+		LengthText->Name = std::wstring( L"Length" );
 		SetHeaderProperties( LengthText );
 		MyPile->Add( LengthText );
 		LengthText->setPos( Vector2( -1224.999f, -191.6667f ) );
 
 		length = boost::make_shared<LengthSlider>();
-		length->Name = _T( "Length" );
+		length->Name = std::wstring( L"Length" );
 		length->_Go.reset();
 		AddItem( length );
 		length->Pos = Vector2( -283, -556.1017f );
@@ -718,13 +718,13 @@ namespace CloudberryKingdom
 
 		// Checkpoints
 		CheckpointsText = boost::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont );
-		CheckpointsText->Name = _T( "Checkpoints" );
+		CheckpointsText->Name = std::wstring( L"Checkpoints" );
 		SetHeaderProperties( CheckpointsText );
 		MyPile->Add( CheckpointsText );
 		CheckpointsText->setPos( Vector2( -1008.33f, -661.1111f ) );
 
-		checkpoints = boost::make_shared<MenuSliderNoSlide>( boost::make_shared<EzText>( _T( "x " ), ItemFont ) );
-		checkpoints->Name = _T( "Checkpoints" );
+		checkpoints = boost::make_shared<MenuSliderNoSlide>( boost::make_shared<EzText>( std::wstring( L"x " ), ItemFont ) );
+		checkpoints->Name = std::wstring( L"Checkpoints" );
 		checkpoints->setMyFloat( boost::make_shared<WrappedFloat>( 1.f, 0.f, 4.f ) );
 		checkpoints->InitialSlideSpeed = 1;
 		checkpoints->MaxSlideSpeed = 1;
@@ -753,7 +753,7 @@ namespace CloudberryKingdom
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_A") ) );
 	#endif
 		Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
-		Start->Name = _T( "Start" );
+		Start->Name = std::wstring( L"Start" );
 		item->JiggleOnGo = false;
 		AddItem( item );
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
@@ -774,9 +774,9 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) );
 	#else
-		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Y( 90 ) + _T( " Load" ), ItemFont ) );
+		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) );
 	#endif
-		Load->Name = _T( "Load" );
+		Load->Name = std::wstring( L"Load" );
 		Load->setGo( boost::make_shared<BringLoadProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -794,7 +794,7 @@ namespace CloudberryKingdom
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, _T("Button_B") ) );
 	#endif
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
-		item->Name = _T( "Back" );
+		item->Name = std::wstring( L"Back" );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->setGo( boost::make_shared<ReturnToCallerProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
@@ -883,47 +883,47 @@ namespace CloudberryKingdom
 	{
 	#if defined(PC_VERSION)
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Location" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Location" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -66.66797f, 677.9999f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Game" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Game" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -24.66602f, 475.4443f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hero" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hero" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -4.999969f, 284 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Diff" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Diff" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -41.10744f, 79.66678f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Length" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Length" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -221.8892f, -342.2129f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Checkpoints" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Checkpoints" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 150.3331f, -602.7712f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Start" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Start" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 580.5577f, 4.047569f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Load" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Load" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 773.0172f, -224.9205f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 850.7158f, -461.508f ) );
@@ -932,45 +932,45 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -285, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Location" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Location" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1002.89f, 802.4446f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Game" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Game" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -844.444f, 619.3334f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Hero" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Hero" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -780.5543f, 419.5557f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Diff" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Diff" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1033.889f, 212.7778f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Length" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Length" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1166.665f, 36.11107f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Checkpoints" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Checkpoints" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1177.774f, -463.8889f ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 307.143f, -23.41241f ) );
 			_q->setSize( Vector2( 1741.167f, 1044.7f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Screenshot" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Screenshot" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 1340.002f, 497.2222f ) );
@@ -981,47 +981,47 @@ namespace CloudberryKingdom
 
 	#else
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Location" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Location" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -66.66797f, 677.9999f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Game" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Game" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -24.66602f, 475.4443f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hero" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hero" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -4.999969f, 284 ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Diff" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Diff" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -41.10744f, 79.66678f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Length" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Length" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -221.8892f, -342.2129f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Checkpoints" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Checkpoints" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 150.3331f, -602.7712f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Start" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Start" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 708.3351f, 4.047569f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Load" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Load" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 839.6832f, -241.5872f ) );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 975.7158f, -483.7302f ) );
@@ -1030,45 +1030,45 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -285, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Location" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Location" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1002.89f, 802.4446f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Game" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Game" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -844.444f, 619.3334f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Hero" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Hero" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -780.5543f, 419.5557f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Diff" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Diff" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1033.889f, 212.7778f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Length" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Length" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1166.665f, 36.11107f ) );
 		}
-		_t = MyPile->FindEzText( _T( "Checkpoints" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Checkpoints" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1177.774f, -463.8889f ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 307.143f, -23.41241f ) );
 			_q->setSize( Vector2( 1741.167f, 1044.7f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Screenshot" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Screenshot" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 1340.002f, 497.2222f ) );
@@ -1194,10 +1194,10 @@ namespace CloudberryKingdom
 		if ( ExitFreeplay )
 			return;
 
-		if ( SeedStringToLoad != _T( "" ) )
+		if ( SeedStringToLoad != std::wstring( L"" ) )
 		{
 			std::wstring seed = SeedStringToLoad;
-			SeedStringToLoad = _T( "" );
+			SeedStringToLoad = std::wstring( L"" );
 
 			SavedSeedsGUI::LoadSeed( seed, boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 			return;

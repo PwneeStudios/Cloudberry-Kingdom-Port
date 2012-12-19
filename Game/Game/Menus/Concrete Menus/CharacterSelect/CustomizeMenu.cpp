@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 	void CustomizeMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Color" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Color" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -208.3333f, 5.555542f ) );
@@ -95,7 +95,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5835f );
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Beard" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Beard" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -205.5554f, -123.8889f ) );
@@ -103,7 +103,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5835f );
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Hat" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Hat" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -141.6667f, -250.5555f ) );
@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5835f );
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Cape" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Cape" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -188.8889f, -377.2222f ) );
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5835f );
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Lining" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Lining" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -191.6665f, -501.1112f ) );
@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.5835f );
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Done" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Done" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -177.7778f, -672.2223f ) );
@@ -164,13 +164,13 @@ namespace CloudberryKingdom
 		FontScale = .5835f;
 		ItemFont = Resources::Font_Grobold42;
 
-		AddMenuItem( Localization::Words_COLOR, _T( "Color" ) );
-		AddMenuItem( Localization::Words_BEARD, _T( "Beard" ) );
-		AddMenuItem( Localization::Words_HAT, _T( "Hat" ) );
-		AddMenuItem( Localization::Words_CAPE, _T( "Cape" ) );
-		AddMenuItem( Localization::Words_LINING, _T( "Lining" ) );
+		AddMenuItem( Localization::Words_COLOR, std::wstring( L"Color" ) );
+		AddMenuItem( Localization::Words_BEARD, std::wstring( L"Beard" ) );
+		AddMenuItem( Localization::Words_HAT, std::wstring( L"Hat" ) );
+		AddMenuItem( Localization::Words_CAPE, std::wstring( L"Cape" ) );
+		AddMenuItem( Localization::Words_LINING, std::wstring( L"Lining" ) );
 
-		boost::shared_ptr<MenuItem> back = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ), _T( "Done" ) );
+		boost::shared_ptr<MenuItem> back = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ), std::wstring( L"Done" ) );
 		AddItem( back );
 		back->setGo( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) );
 	}

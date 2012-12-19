@@ -40,9 +40,9 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 0, 3, 0, 0 );
 		Name = Localization::Words_FAT_BOB;
-		Adjective = _T( "Fatty" );
+		Adjective = std::wstring( L"Fatty" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
 	}
 
 	const boost::shared_ptr<BobPhsxBig> &BobPhsxBig::getInstance()

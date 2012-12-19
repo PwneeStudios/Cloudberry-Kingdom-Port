@@ -27,13 +27,13 @@ namespace CloudberryKingdom
 	void VerifyQuitGameMenu2::MakeBackdrop()
 	{
 		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
-		backdrop->setTextureName( _T( "Backplate_1230x740" ) );
+		backdrop->setTextureName( std::wstring( L"Backplate_1230x740" ) );
 		backdrop->ScaleYToMatchRatio( 1000 );
-		MyPile->Add( backdrop, _T( "Backdrop" ) );
+		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
 
 		Berry = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
-		Berry->setTextureName( _T( "cb_crying" ) );
-		MyPile->Add( Berry, _T( "Berry" ) );
+		Berry->setTextureName( std::wstring( L"cb_crying" ) );
+		MyPile->Add( Berry, std::wstring( L"Berry" ) );
 
 		//QuadClass Cloudback = new QuadClass("menupic_bg_cloud", 1200, true);
 		//Cloudback.Pos = new Vector2(99.20645f, 19.84137f);
@@ -87,16 +87,16 @@ namespace CloudberryKingdom
 
 		// Yes
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
-		item->Name = _T( "Yes" );
+		item->Name = std::wstring( L"Yes" );
 		item->setGo( Cast::ToItem( boost::make_shared<CloudberryKingdomGame::ExitProxy>( Tools::TheGame ) ) );
-		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, _T( "cb_crying" ) );
+		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, std::wstring( L"cb_crying" ) );
 		AddItem( item );
 
 		// No
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
-		item->Name = _T( "No" );
+		item->Name = std::wstring( L"No" );
 		item->setGo( boost::make_shared<MenuReturnToCallerLambda>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
-		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, _T( "cb_enthusiastic" ) );
+		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, std::wstring( L"cb_enthusiastic" ) );
 		item->SelectSound.reset();
 		BackSound.reset();
 		AddItem( item );
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 	void VerifyQuitGameMenu2::SetPosition()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Yes" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Yes" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 800, 361 ) );
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 1.04f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "No" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"No" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( 800, 61 ) );
@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( -396.8268f, -265.873f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "" ) );
+		_t = MyPile->FindEzText( std::wstring( L"" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -442.855f, 605.6183f ) );
@@ -141,13 +141,13 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 44.44434f, 30.5556f ) );
 			_q->setSize( Vector2( 1065.378f, 640.9592f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Berry" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Berry" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 16.6665f, -25 ) );

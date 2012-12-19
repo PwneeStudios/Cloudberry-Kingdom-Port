@@ -34,34 +34,34 @@ namespace CloudberryKingdom
 		Anims = std::vector<OneAnim_Texture>( 1 );
 
 		// Determine format of texture names.
-		std::wstring format = _T( "" );
+		std::wstring format = std::wstring( L"" );
 		int length = 1;
 		if ( Tools::Texture( TextureRoot + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
-			format = _T( "" );
-		else if ( Tools::Texture( TextureRoot + _T( "_" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
-			format = _T( "_" );
-		else if ( Tools::Texture( TextureRoot + _T( "_0" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
+			format = std::wstring( L"" );
+		else if ( Tools::Texture( TextureRoot + std::wstring( L"_" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
+			format = std::wstring( L"_" );
+		else if ( Tools::Texture( TextureRoot + std::wstring( L"_0" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
 		{
-			format = _T( "_" );
+			format = std::wstring( L"_" );
 			length = 2;
 		}
-		else if ( Tools::Texture( TextureRoot + _T( "_00" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
+		else if ( Tools::Texture( TextureRoot + std::wstring( L"_00" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
 		{
-			format = _T( "_" );
+			format = std::wstring( L"_" );
 			length = 3;
 		}
-		else if ( Tools::Texture( TextureRoot + _T( "_000" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
+		else if ( Tools::Texture( TextureRoot + std::wstring( L"_000" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
 		{
-			format = _T( "_" );
+			format = std::wstring( L"_" );
 			length = 4;
 		}
-		else if ( Tools::Texture( TextureRoot + _T( "_0000" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
+		else if ( Tools::Texture( TextureRoot + std::wstring( L"_0000" ) + StringConverterHelper::toString( StartFrame ) ) != Tools::TextureWad->DefaultTexture )
 		{
-			format = _T( "_" );
+			format = std::wstring( L"_" );
 			length = 5;
 		}
 
-		std::wstring tempVector[] = { _T( "" ), _T( "0" ), _T( "00" ), _T( "000" ), _T( "0000" ) };
+		std::wstring tempVector[] = { std::wstring( L"" ), std::wstring( L"0" ), std::wstring( L"00" ), std::wstring( L"000" ), std::wstring( L"0000" ) };
 		std::vector<std::wstring> pad = VecFromArray( tempVector );
 
 		if ( EndFrame >= StartFrame )
@@ -69,7 +69,7 @@ namespace CloudberryKingdom
 			for ( int i = StartFrame; i <= EndFrame; i++ )
 			{
 				int len = i == 0 ? 1 : static_cast<int>( std::log10( static_cast<float>( i ) ) ) + 1;
-				std::wstring padding = len <= length ? pad[ length - len ] : _T( "" );
+				std::wstring padding = len <= length ? pad[ length - len ] : std::wstring( L"" );
 				AddFrame( Tools::Texture( TextureRoot + format + padding + StringConverterHelper::toString( i ) ), 0 );
 			}
 		}

@@ -33,7 +33,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::WaitThenPop2::Apply()
 	{
-		Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
+		Tools::SoundWad->FindByName( std::wstring( L"Pop_2" ) )->Play();
 	}
 
 	const Vector2 &DrawPile::getSize() const
@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::Add( const boost::shared_ptr<QuadClass> &quad )
 	{
-		Add( quad, false, _T( "" ) );
+		Add( quad, false, std::wstring( L"" ) );
 	}
 
 	void DrawPile::Add( const boost::shared_ptr<QuadClass> &quad, const std::wstring &name )
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 
 	void DrawPile::Add( const boost::shared_ptr<QuadClass> &quad, bool KeepFancyCenter, const std::wstring &name )
 	{
-		if ( name != _T( "" ) )
+		if ( name != std::wstring( L"" ) )
 			quad->Name = name;
 
 		if ( KeepFancyCenter && quad->FancyPos != 0 && quad->FancyPos->Center != 0
@@ -347,7 +347,7 @@ namespace CloudberryKingdom
 		FancyScale->LerpTo( Vector2( .1f ), Length + 1 );
 		MyFancyColor->LerpTo( Vector4( 1, 1, 1, 0 ), Length );
 		if ( sound )
-			Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
+			Tools::SoundWad->FindByName( std::wstring( L"Pop_2" ) )->Play();
 	}
 
 	void DrawPile::Jiggle( bool sound )

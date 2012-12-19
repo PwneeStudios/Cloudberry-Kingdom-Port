@@ -69,20 +69,20 @@ namespace CloudberryKingdom
 			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS ).c_str(), NumSeeds );
 		else
 			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ).c_str(), NumSeeds );
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( _T( "Header" ) ) );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( std::wstring( L"Header" ) ) );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 		HeaderText->setPos( HeaderPos );
 
 
 		// Yes
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( _T( "Yes" ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( std::wstring( L"Yes" ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteYesGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( _T( "No" ) ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( std::wstring( L"No" ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteNoGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();

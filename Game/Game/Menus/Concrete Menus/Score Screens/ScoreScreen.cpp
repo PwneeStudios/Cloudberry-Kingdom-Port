@@ -133,7 +133,7 @@ namespace CloudberryKingdom
 			boost::shared_ptr<MenuItem> item;
 
 			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_KEEP_SETTINGS, ItemFont ) );
-			item->Name = _T( "Continue" );
+			item->Name = std::wstring( L"Continue" );
 			item->setGo( boost::make_shared<MenuGo_NewLevelProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			AddItem( item );
 			item->MySelectedText->setScale( item->MySelectedText->getScale() * 1.3f );
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 			if ( _Add_Watch )
 			{
 				item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont ) );
-				item->Name = _T( "Replay" );
+				item->Name = std::wstring( L"Replay" );
 				item->setGo( boost::make_shared<MenuGo_WatchReplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
 			}
@@ -152,7 +152,7 @@ namespace CloudberryKingdom
 			if ( _Add_Save )
 			{
 				item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVED_SEEDS, ItemFont ) );
-				item->Name = _T( "Save" );
+				item->Name = std::wstring( L"Save" );
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
 			}
@@ -166,12 +166,12 @@ namespace CloudberryKingdom
 		else
 		{
 			boost::shared_ptr<QuadClass> ContinueButton = boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, false );
-			ContinueButton->Name = _T( "GoButton" );
+			ContinueButton->Name = std::wstring( L"GoButton" );
 			MyPile->Add( ContinueButton );
 			ContinueButton->setPos( Vector2( 180, -477.7778f ) + ShiftAll );
 
 			boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_CONTINUE, ItemFont );
-			ContinueText->Name = _T( "Continue" );
+			ContinueText->Name = std::wstring( L"Continue" );
 			SetHeaderProperties( ContinueText );
 			ContinueText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 			MyPile->Add( ContinueText );
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 			if ( MyGame->MyLevel->getReplayAvailable() )
 			{
 				boost::shared_ptr<QuadClass> XButton = boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, false );
-				XButton->Name = _T( "XButton" );
+				XButton->Name = std::wstring( L"XButton" );
 				MyPile->Add( XButton );
 				XButton->setPos( Vector2( 180, -325.3333f ) + ShiftAll );
 
@@ -258,23 +258,23 @@ bool ScoreScreen::AsMenu = true;
 
 		//MakeDarkBack();
 
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), _T( "Backdrop" ) );
+		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), std::wstring( L"Backdrop" ) );
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 
-		LevelCleared = boost::make_shared<QuadClass>( _T( "Score/LevelCleared" ), _T( "Header" ) );
+		LevelCleared = boost::make_shared<QuadClass>( std::wstring( L"Score/LevelCleared" ), std::wstring( L"Header" ) );
 		LevelCleared->Scale( .9f );
 		MyPile->Add( LevelCleared );
 		LevelCleared->setPos( Vector2( 10, 655 ) + ShiftAll );
 
-		MyPile->Add( boost::make_shared<QuadClass>( _T( "Coin_Blue" ), _T( "Coin" ) ) );
-		MyPile->Add( boost::make_shared<QuadClass>( _T( "Stopwatch_Black" ), _T( "Stopwatch" ) ) );
-		MyPile->Add( boost::make_shared<QuadClass>( _T( "Bob_Dead" ), _T( "Death" ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Coin_Blue" ), std::wstring( L"Coin" ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Stopwatch_Black" ), std::wstring( L"Stopwatch" ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Bob_Dead" ), std::wstring( L"Death" ) ) );
 
 		MakeMenu();
 
-		ScoreSound = Tools::SoundWad->FindByName( _T( "Coin" ) );
-		BonusSound = Tools::SoundWad->FindByName( _T( "Coin" ) );
+		ScoreSound = Tools::SoundWad->FindByName( std::wstring( L"Coin" ) );
+		BonusSound = Tools::SoundWad->FindByName( std::wstring( L"Coin" ) );
 		ScoreSound->MaxInstances = 2;
 
 		SetPos();
@@ -283,7 +283,7 @@ bool ScoreScreen::AsMenu = true;
 	void ScoreScreen::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "Continue" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Continue" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -871.7776f, 516.6667f ) );
@@ -291,7 +291,7 @@ bool ScoreScreen::AsMenu = true;
 			_item->MySelectedText->setScale( 0.78f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Save" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Save" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -646.8889f, 266.6737f ) );
@@ -299,7 +299,7 @@ bool ScoreScreen::AsMenu = true;
 			_item->MySelectedText->setScale( 0.6f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Replay" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Replay" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -641.3332f, 91.67379f ) );
@@ -307,7 +307,7 @@ bool ScoreScreen::AsMenu = true;
 			_item->MySelectedText->setScale( 0.6f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "Back" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -755.2222f, -75.5462f ) );
@@ -319,19 +319,19 @@ bool ScoreScreen::AsMenu = true;
 		MyMenu->setPos( Vector2( 902.3811f, -136.1111f ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Coins" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Coins" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -719.4445f, 22.22227f ) );
 			_t->setScale( 1 );
 		}
-		_t = MyPile->FindEzText( _T( "Blobs" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Blobs" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -661.1107f, -402.7777f ) );
 			_t->setScale( 1 );
 		}
-		_t = MyPile->FindEzText( _T( "Deaths" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Deaths" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -655.5553f, 411.1111f ) );
@@ -339,37 +339,37 @@ bool ScoreScreen::AsMenu = true;
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 27.77808f, -6.666618f ) );
 			_q->setSize( Vector2( 1509.489f, 943.4307f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 27.77808f, -6.666618f ) );
 			_q->setSize( Vector2( 1509.489f, 943.4307f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Header" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Header" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 16.66687f, 615.5555f ) );
 			_q->setSize( Vector2( 937.8f, 147.6f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Coin" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Coin" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -955.5555f, -141.6665f ) );
 			_q->setSize( Vector2( 168.1188f, 168.1188f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Stopwatch" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Stopwatch" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -886.1108f, -513.8888f ) );
 			_q->setSize( Vector2( 180.9532f, 211.6065f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Death" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Death" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -983.3334f, 230.5556f ) );
@@ -404,9 +404,9 @@ bool ScoreScreen::UseZoomIn = true;
 		int Blobs = PlayerManager::PlayerSum( boost::make_shared<VariableBlobsLambda>( MyStatGroup ) );
 		int BlobTotal = PlayerManager::PlayerMax( boost::make_shared<VariableTotalBlobsLambda>( MyStatGroup ) );
 
-		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, std::wstring( _T( "Coins" ) ) ) );
-		MyPile->Add( boost::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( _T( "Blobs" ) ) ) );
-		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( _T( "Deaths" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( Coins, CoinTotal ), ItemFont, std::wstring( std::wstring( L"Coins" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( std::wstring( L"Blobs" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( std::wstring( L"Deaths" ) ) ) );
 
 		// Awardments
 		Awardments::CheckForAward_HoldForward();

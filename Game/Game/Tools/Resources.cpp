@@ -24,10 +24,10 @@ namespace CloudberryKingdom
 
 	void Resources::FontLoad()
 	{
-		Resources::Font_Grobold42 = boost::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline" ), -50.f, 40 );
-		Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( _T( "Fonts/Grobold_42" ), _T( "Fonts/Grobold_42_Outline2" ), -50.f, 40 );
+		Resources::Font_Grobold42 = boost::make_shared<EzFont>( std::wstring( L"Fonts/Grobold_42" ), std::wstring( L"Fonts/Grobold_42_Outline" ), -50.f, 40 );
+		Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( std::wstring( L"Fonts/Grobold_42" ), std::wstring( L"Fonts/Grobold_42_Outline2" ), -50.f, 40 );
 
-		Resources::LilFont = boost::make_shared<EzFont>( _T( "Fonts/LilFont" ) );
+		Resources::LilFont = boost::make_shared<EzFont>( std::wstring( L"Fonts/LilFont" ) );
 
 		Tools::Write( _T( "Fonts done..." ) );
 	}
@@ -42,10 +42,10 @@ namespace CloudberryKingdom
 
 		// Moving block
 		c = PieceQuad::MovingBlock_Renamed = boost::make_shared<PieceQuad>();
-		c->Center.setMyTexture( Tools::TextureWad->FindByName( _T( "blue_small" ) ) );
+		c->Center.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"blue_small" ) ) );
 
 		// Falling block
-		boost::shared_ptr<AnimationData_Texture> Fall = boost::make_shared<AnimationData_Texture>( _T( "FallingBlock" ), 1, 4 );
+		boost::shared_ptr<AnimationData_Texture> Fall = boost::make_shared<AnimationData_Texture>( std::wstring( L"FallingBlock" ), 1, 4 );
 		PieceQuad::FallingBlock_Renamed = boost::make_shared<PieceQuad>();
 		PieceQuad::FallingBlock_Renamed->Center.SetTextureAnim( Fall );
 		PieceQuad::FallGroup = boost::make_shared<BlockGroup>();
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		PieceQuad::FallGroup->SortWidths();
 
 		// Bouncy block
-		boost::shared_ptr<AnimationData_Texture> Bouncy = boost::make_shared<AnimationData_Texture>( _T( "BouncyBlock" ), 1, 2 );
+		boost::shared_ptr<AnimationData_Texture> Bouncy = boost::make_shared<AnimationData_Texture>( std::wstring( L"BouncyBlock" ), 1, 2 );
 		PieceQuad::BouncyBlock_Renamed = boost::make_shared<PieceQuad>();
 		PieceQuad::BouncyBlock_Renamed->Center.SetTextureAnim( Bouncy );
 		PieceQuad::BouncyGroup = boost::make_shared<BlockGroup>();
@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 		// Elevator
 		PieceQuad::Elevator = boost::make_shared<PieceQuad>();
-		PieceQuad::Elevator->Center.Set( _T( "palette" ) );
+		PieceQuad::Elevator->Center.Set( std::wstring( L"palette" ) );
 		PieceQuad::Elevator->Center.SetColor( Color( static_cast<unsigned char>( 210 ), static_cast<unsigned char>( 210 ), static_cast<unsigned char>( 210 ) ) );
 		PieceQuad::ElevatorGroup = boost::make_shared<BlockGroup>();
 		PieceQuad::ElevatorGroup->Add( 100, PieceQuad::Elevator );
@@ -101,8 +101,8 @@ namespace CloudberryKingdom
 
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
 		{
-			int i = ( *file ).find( _T( "Music" ) ) + 5 + 1;
-			int j = ( *file ).find( _T( "." ), i );
+			int i = ( *file ).find( std::wstring( L"Music" ) ) + 5 + 1;
+			int j = ( *file ).find( std::wstring( L"." ), i );
 
 			std::wstring name = ( *file ).substr( i, j - i );
 
@@ -113,40 +113,40 @@ namespace CloudberryKingdom
 		}
 
 
-		Tools::Song_Happy = Tools::SongWad->FindByName( _T( "Happy" ) );
+		Tools::Song_Happy = Tools::SongWad->FindByName( std::wstring( L"Happy" ) );
 		Tools::Song_Happy->DisplayInfo = false;
 
-		Tools::Song_140mph = Tools::SongWad->FindByName( _T( "140_Mph_in_the_Fog^Blind_Digital" ) );
+		Tools::Song_140mph = Tools::SongWad->FindByName( std::wstring( L"140_Mph_in_the_Fog^Blind_Digital" ) );
 		Tools::Song_140mph->Volume = .7f;
 
-		Tools::Song_BlueChair = Tools::SongWad->FindByName( _T( "Blue_Chair^Blind_Digital" ) );
+		Tools::Song_BlueChair = Tools::SongWad->FindByName( std::wstring( L"Blue_Chair^Blind_Digital" ) );
 		Tools::Song_BlueChair->Volume = .7f;
 
-		Tools::Song_Evidence = Tools::SongWad->FindByName( _T( "Evidence^Blind_Digital" ) );
+		Tools::Song_Evidence = Tools::SongWad->FindByName( std::wstring( L"Evidence^Blind_Digital" ) );
 		Tools::Song_Evidence->Volume = .7f;
 
-		Tools::Song_GetaGrip = Tools::SongWad->FindByName( _T( "Get_a_Grip^Peacemaker" ) );
+		Tools::Song_GetaGrip = Tools::SongWad->FindByName( std::wstring( L"Get_a_Grip^Peacemaker" ) );
 		Tools::Song_GetaGrip->Volume = 1;
 
-		Tools::Song_House = Tools::SongWad->FindByName( _T( "House^Blind_Digital" ) );
+		Tools::Song_House = Tools::SongWad->FindByName( std::wstring( L"House^Blind_Digital" ) );
 		Tools::Song_House->Volume = .7f;
 
-		Tools::Song_Nero = Tools::SongWad->FindByName( _T( "Nero's_Law^Peacemaker" ) );
+		Tools::Song_Nero = Tools::SongWad->FindByName( std::wstring( L"Nero's_Law^Peacemaker" ) );
 		Tools::Song_Nero->Volume = 1;
 
-		Tools::Song_Ripcurl = Tools::SongWad->FindByName( _T( "Ripcurl^Blind_Digital" ) );
+		Tools::Song_Ripcurl = Tools::SongWad->FindByName( std::wstring( L"Ripcurl^Blind_Digital" ) );
 		Tools::Song_Ripcurl->Volume = .7f;
 
-		Tools::Song_FatInFire = Tools::SongWad->FindByName( _T( "The_Fat_is_in_the_Fire^Peacemaker" ) );
+		Tools::Song_FatInFire = Tools::SongWad->FindByName( std::wstring( L"The_Fat_is_in_the_Fire^Peacemaker" ) );
 		Tools::Song_FatInFire->Volume = .9f;
 
-		Tools::Song_Heavens = Tools::SongWad->FindByName( _T( "The_Heavens_Opened^Peacemaker" ) );
+		Tools::Song_Heavens = Tools::SongWad->FindByName( std::wstring( L"The_Heavens_Opened^Peacemaker" ) );
 		Tools::Song_Heavens->Volume = 1;
 
-		Tools::Song_TidyUp = Tools::SongWad->FindByName( _T( "Tidy_Up^Peacemaker" ) );
+		Tools::Song_TidyUp = Tools::SongWad->FindByName( std::wstring( L"Tidy_Up^Peacemaker" ) );
 		Tools::Song_TidyUp->Volume = 1;
 
-		Tools::Song_WritersBlock = Tools::SongWad->FindByName( _T( "Writer's_Block^Peacemaker" ) );
+		Tools::Song_WritersBlock = Tools::SongWad->FindByName( std::wstring( L"Writer's_Block^Peacemaker" ) );
 		Tools::Song_WritersBlock->Volume = 1;
 
 		// Create the standard playlist
@@ -173,8 +173,8 @@ namespace CloudberryKingdom
 
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
 		{
-			int i = ( *file ).find( _T( "Sound" ) ) + 5 + 1;
-			int j = ( *file ).find( _T( "." ), i );
+			int i = ( *file ).find( std::wstring( L"Sound" ) ) + 5 + 1;
+			int j = ( *file ).find( std::wstring( L"." ), i );
 
 			std::wstring name = ( *file ).substr( i, j - i );
 
@@ -190,26 +190,26 @@ namespace CloudberryKingdom
 			Tools::PrivateSoundWad = boost::make_shared<EzSoundWad>( 4 );
 		}
 
-		std::wstring path = Path::Combine( Globals::ContentDirectory, _T( "Sound" ) );
+		std::wstring path = Path::Combine( Globals::ContentDirectory, std::wstring( L"Sound" ) );
 		std::vector<std::wstring> files = Directory::GetFiles( path );
 		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
 		{
-			int i = ( *file ).find( _T( "Sound" ) ) + 5 + 1;
+			int i = ( *file ).find( std::wstring( L"Sound" ) ) + 5 + 1;
 			if ( i < 0 )
 				continue;
-			int j = ( *file ).find( _T( "." ), i );
+			int j = ( *file ).find( std::wstring( L"." ), i );
 			if ( j <= i )
 				continue;
 			std::wstring name = ( *file ).substr( i, j - i );
 			std::wstring extension = ( *file ).substr( j + 1 );
 
-			if ( extension == _T( "xnb" ) )
+			if ( extension == std::wstring( L"xnb" ) )
 			{
 				if ( CreateNewWad )
-					Tools::SoundWad->AddSound( manager->Load<boost::shared_ptr<SoundEffect> >( _T( "Sound/" ) + name ), name );
+					Tools::SoundWad->AddSound( manager->Load<boost::shared_ptr<SoundEffect> >( std::wstring( L"Sound/" ) + name ), name );
 				else
 				{
-					boost::shared_ptr<SoundEffect> NewSound = manager->Load<boost::shared_ptr<SoundEffect> >( _T( "Sound/" ) + name );
+					boost::shared_ptr<SoundEffect> NewSound = manager->Load<boost::shared_ptr<SoundEffect> >( std::wstring( L"Sound/" ) + name );
 
 					boost::shared_ptr<EzSound> CurSound = Tools::SoundWad->FindByName( name );
 					for ( std::vector<EzSound*>::const_iterator ezsound = Tools::PrivateSoundWad->SoundList.begin(); ezsound != Tools::PrivateSoundWad->SoundList.end(); ++ezsound )
@@ -252,13 +252,13 @@ namespace CloudberryKingdom
 
 	void Resources::PreloadArt()
 	{
-		//std::wstring path = Path::Combine( Globals::ContentDirectory, _T( "Art" ) );
+		//std::wstring path = Path::Combine( Globals::ContentDirectory, std::wstring( L"Art" ) );
 		//std::vector<std::wstring> files = Tools::GetFiles( path, true );
 		//for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
 		//{
-		//	if ( Tools::GetFileExt( path, *file ) == _T( "xnb" ) )
+		//	if ( Tools::GetFileExt( path, *file ) == std::wstring( L"xnb" ) )
 		//	{
-		//		Tools::TextureWad->AddTexture( 0, _T( "Art/" ) + Tools::GetFileName( path, *file ) );
+		//		Tools::TextureWad->AddTexture( 0, std::wstring( L"Art/" ) + Tools::GetFileName( path, *file ) );
 		//	}
 		//}
 
@@ -281,7 +281,7 @@ namespace CloudberryKingdom
 	void Resources::LoadResources()
 	{
 		// FIXME: Load resources in other thread.
-		//LoadThread = ThreadHelper::EasyThread( 5, _T( "LoadThread" ), boost::make_shared<Action>( &_LoadThread ) );
+		//LoadThread = ThreadHelper::EasyThread( 5, std::wstring( L"LoadThread" ), boost::make_shared<Action>( &_LoadThread ) );
 		_LoadThread();
 	}
 
@@ -334,12 +334,12 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 	#if defined(PC_VERSION)
 		// Mouse pointer
 		Ck->MousePointer = boost::make_shared<QuadClass>();
-		Ck->MousePointer->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "Hand_Open" ) ) );
+		Ck->MousePointer->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Hand_Open" ) ) );
 		Ck->MousePointer->ScaleYToMatchRatio( 70 );
 
 		// Mouse back icon
 		Ck->MouseBack = boost::make_shared<QuadClass>();
-		Ck->MouseBack->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( _T( "charmenu_larrow_1" ) ) );
+		Ck->MouseBack->Quad_Renamed.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"charmenu_larrow_1" ) ) );
 		Ck->MouseBack->ScaleYToMatchRatio( 40 );
 		Ck->MouseBack->Quad_Renamed.SetColor( Color( unsigned char( 255 ), unsigned char( 150 ), unsigned char( 150 ), unsigned char( 100 ) ) );
 	#endif
@@ -356,6 +356,6 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Tools::Write( _T( "Loading done!" ) );
 
 		//Tools::Write( Format( _T( "Load thread done at {0}" ), DateTime::Now ) );
-		Tools::Write( Format( _T( "Load thread done ... NOW!" ) ).c_str() );
+		Tools::Write( _T( "Load thread done ... NOW!" ) );
 	}
 }

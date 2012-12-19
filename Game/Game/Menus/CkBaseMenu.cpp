@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	void CkBaseMenu::MakeDarkBack()
 	{
 		// Make the dark back
-		DarkBack = boost::make_shared<QuadClass>( _T( "White" ) );
+		DarkBack = boost::make_shared<QuadClass>( std::wstring( L"White" ) );
 		DarkBack->Quad_Renamed.SetColor( ColorHelper::GrayColor( .25f ) );
 		DarkBack->setAlpha( 0 );
 		DarkBack->Fade( .1f );
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		DarkBack->FullScreen( Tools::getCurCamera() );
 		DarkBack->setPos( Vector2() );
 		DarkBack->Scale( 5 );
-		MyPile->Add( DarkBack, _T( "Dark" ) );
+		MyPile->Add( DarkBack, std::wstring( L"Dark" ) );
 	}
 
 	void CkBaseMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
@@ -352,11 +352,11 @@ namespace CloudberryKingdom
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) );
 	#else
 		//item = new MenuItem(new EzText(ButtonString.Back(86) + " " + text, ItemFont));
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + _T( " " ) + Localization::WordString( Word ) ) );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + std::wstring( L" " ) + Localization::WordString( Word ) ) );
 	#endif
 
 		item->setGo( boost::make_shared<MakeBackButtonHelper>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
-		item->Name = _T( "Back" );
+		item->Name = std::wstring( L"Back" );
 		AddItem( item );
 		item->SelectSound.reset();
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;

@@ -45,9 +45,9 @@ namespace CloudberryKingdom
 
 		// FIXME: Implement exceptions?
 		//if ( Type < 0 )
-		//	throw std::exception( _T( "Chunk type must be non-negative. Are you loading a non-chunked file?" ) );
+		//	throw std::exception( std::wstring( L"Chunk type must be non-negative. Are you loading a non-chunked file?" ) );
 		//if ( Length <= 0 )
-		//	throw std::exception( _T( "Chunk length must be strictly positive. Are you loading a non-chunked file?" ) );
+		//	throw std::exception( std::wstring( L"Chunk length must be strictly positive. Are you loading a non-chunked file?" ) );
 
 		boost::shared_ptr<Chunk> _Current = boost::make_shared<Chunk>( Length );
 		_Current->Copy( &Data[ 0 ], _Position, Length );

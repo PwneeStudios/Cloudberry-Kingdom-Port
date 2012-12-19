@@ -66,7 +66,7 @@ namespace CloudberryKingdom
 	MenuSliderBase::MenuSliderBase()
 	{
 		InitializeInstanceFields();
-		boost::shared_ptr<EzText> NoText = boost::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> NoText = boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42 );
 		Init( NoText, NoText->Clone() );
 		InitializeSlider();
 	}

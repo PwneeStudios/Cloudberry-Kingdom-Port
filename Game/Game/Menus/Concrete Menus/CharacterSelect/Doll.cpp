@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 
 		MyDoll->SetColorScheme( MyCharacterSelect->getPlayer()->ColorScheme_Renamed );
 
-		MyDoll->PlayerObject->EnqueueAnimation( _T( "Stand" ), 0, true, true );
+		MyDoll->PlayerObject->EnqueueAnimation( std::wstring( L"Stand" ), 0, true, true );
 		MyDoll->PlayerObject->DequeueTransfers();
 
 		Tools::CurLevel->AddBob( MyDoll );

@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 
 	std::wstring GUI_LivesLeft::ToString()
 	{
-		return _T( "x " ) + StringConverterHelper::toString( getNumLives() );
+		return std::wstring( L"x " ) + StringConverterHelper::toString( getNumLives() );
 	}
 
 	void GUI_LivesLeft::UpdateLivesLeftText()
@@ -114,10 +114,10 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 		MyPile->FancyPos->UpdateWithGame = true;
 
-		MyPile->Add( boost::make_shared<QuadClass>( _T( "Bob_Stand_0001" ), 130.f, true ), _T( "Bob" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"Bob_Stand_0001" ), 130.f, true ), std::wstring( L"Bob" ) );
 
 		LivesLeftText = boost::make_shared<EzText>( ToString(), Resources::Font_Grobold42, 450.f, false, true );
-		LivesLeftText->Name = _T( "Text" );
+		LivesLeftText->Name = std::wstring( L"Text" );
 		LivesLeftText->setScale( .53f );
 		LivesLeftText->setPos( Vector2( 187, -16 ) );
 		LivesLeftText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
@@ -139,14 +139,14 @@ namespace CloudberryKingdom
 	void GUI_LivesLeft::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Text" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Text" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( 195.3334f, -43.77777f ) );
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Bob" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Bob" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 133.3333f, -27.77774f ) );
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
 
 		// Fade in and out
 		MyPile->setAlpha( 0 );
-		MyGame->WaitThenDo( InitialDelay, boost::make_shared<BringInitialDelayHelper>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ), _T( "Start lives left bring" ), true, false );
+		MyGame->WaitThenDo( InitialDelay, boost::make_shared<BringInitialDelayHelper>( boost::static_pointer_cast<GUI_LivesLeft>( shared_from_this() ) ), std::wstring( L"Start lives left bring" ), true, false );
 	}
 
 	void GUI_LivesLeft::Reset( bool BoxesOnly )
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 		// Black background
 		if ( UseBlackBack )
 		{
-			boost::shared_ptr<QuadClass> Black = boost::make_shared<QuadClass>( _T( "White" ), 1.f );
+			boost::shared_ptr<QuadClass> Black = boost::make_shared<QuadClass>( std::wstring( L"White" ), 1.f );
 			Black->FullScreen( MyGame->getCam() );
 			Black->Quad_Renamed.SetColor( Color::Black );
 			Black->Scale( 2 );

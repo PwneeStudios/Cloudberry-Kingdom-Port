@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<EzText> Title;
 		if ( award->Unlockable == 0 )
-			Title = boost::make_shared<EzText>( _T( "" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
+			Title = boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		else
 			Title = boost::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
 		Title->setPos( Vector2( -1726.192f, 369.0475f ) );
@@ -39,7 +39,7 @@ namespace CloudberryKingdom
 	void AwardmentMessage::MakeBackdrop()
 	{
 		Backdrop = boost::make_shared<QuadClass>( boost::shared_ptr<FancyVector2>(), true, false );
-		Backdrop->setTextureName( _T( "WidePlaque" ) );
+		Backdrop->setTextureName( std::wstring( L"WidePlaque" ) );
 		Backdrop->setSize( Vector2( 1750, 284.8255f ) );
 		Backdrop->setPos( Vector2( -11.9043f, 59.52365f ) );
 

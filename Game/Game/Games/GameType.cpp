@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 		StandardFinish( Replay );
 
 		// Start the world map music
-		ParentGame->KillToDo( _T( "StartMusic" ) );
+		ParentGame->KillToDo( std::wstring( L"StartMusic" ) );
 		ParentGame->WaitThenDo( 50, boost::make_shared<PlayWorldMapMusicLambda>(), _T("StartMusic") );
 	}
 
@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 
 	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
-		WaitThenDo( WaitLength, f, _T( "" ) );
+		WaitThenDo( WaitLength, f, std::wstring( L"" ) );
 	}
 
 	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, const std::wstring &Name )
@@ -401,17 +401,17 @@ namespace CloudberryKingdom
 
 	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, bool PauseOnPause )
 	{
-		WaitThenDo( WaitLength, f, _T( "" ), PauseOnPause, false );
+		WaitThenDo( WaitLength, f, std::wstring( L"" ), PauseOnPause, false );
 	}
 
 	void GameData::WaitThenDo_Pausable( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
-		WaitThenDo( WaitLength, f, _T( "" ), true, false );
+		WaitThenDo( WaitLength, f, std::wstring( L"" ), true, false );
 	}
 
 	void GameData::CinematicToDo( int WaitLength, const boost::shared_ptr<Lambda> f )
 	{
-		WaitThenDo( WaitLength, f, _T( "" ), true, true );
+		WaitThenDo( WaitLength, f, std::wstring( L"" ), true, true );
 	}
 
 	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f, const std::wstring &Name, bool PauseOnPause, bool RemoveOnReset )
@@ -473,10 +473,10 @@ namespace CloudberryKingdom
 		AddGameObject( black );
 
 		// Wait then screen swipe to black.
-		WaitThenDo( Delay, boost::make_shared<SlideInLambda>( black ), _T( "SlideOut_FadeIn" ) );
+		WaitThenDo( Delay, boost::make_shared<SlideInLambda>( black ), std::wstring( L"SlideOut_FadeIn" ) );
 
 		// Wait for screen to be completely black, then fade in.
-		WaitThenDo( Delay + 17, boost::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), _T( "SlideOut_FadeIn" ) );
+		WaitThenDo( Delay + 17, boost::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), std::wstring( L"SlideOut_FadeIn" ) );
 	}
 
 	void GameData::RemoveGameObjects( GameObject::Tag tag )
@@ -541,7 +541,7 @@ namespace CloudberryKingdom
 
 	void GameData::AddToDo( const boost::shared_ptr<Lambda> &FuncToDo )
 	{
-		AddToDo( FuncToDo, _T( "" ), false, false );
+		AddToDo( FuncToDo, std::wstring( L"" ), false, false );
 	}
 
 	void GameData::AddToDo( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo, const std::wstring &name, bool PauseOnPause, bool RemoveOnReset )
@@ -909,7 +909,7 @@ namespace CloudberryKingdom
 				if ( !PlayerManager::Get( static_cast<int>( ( *bob )->MyPlayerIndex ) )->Exists )
 				{
 					ParticleEffects::AddPop( MyLevel, ( *bob )->getCore()->Data.Position );
-					Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
+					Tools::SoundWad->FindByName( std::wstring( L"Pop_2" ) )->Play();
 				}
 				else
 					NewBobList.push_back( *bob );
@@ -971,7 +971,7 @@ namespace CloudberryKingdom
 		if ( Pop )
 		{
 			ParticleEffects::AddPop( MyLevel, Player->getCore()->Data.Position );
-			Tools::SoundWad->FindByName( _T( "Pop_2" ) )->Play();
+			Tools::SoundWad->FindByName( std::wstring( L"Pop_2" ) )->Play();
 		}
 	}
 
@@ -1214,7 +1214,7 @@ namespace CloudberryKingdom
 
 	void GameData::Init()
 	{
-		BlackQuad = boost::make_shared<QuadClass>( _T( "White" ) );
+		BlackQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ) );
 		BlackQuad->Quad_Renamed.SetColor( Color::Black );
 
 		BlackBase.e1 = Vector2( 45, 0 );

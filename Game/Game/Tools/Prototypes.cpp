@@ -17,15 +17,15 @@ namespace CloudberryKingdom
 	{
 		//if (!path.Contains("double")) return;
 		//if (path.Contains("double")) return;
-		if ( path.find( _T( "bob_v2_trimmed" ) ) == std::string::npos )
+		if ( path.find( std::wstring( L"bob_v2_trimmed" ) ) == std::string::npos )
 			return;
 
 		Tools::UseInvariantCulture();
-		/*boost::shared_ptr<FileStream> rstream = File->Open( _T( "Content/Objects/TigarBob.smo" ), FileMode::Open, FileAccess::Read, FileShare::None );
+		/*boost::shared_ptr<FileStream> rstream = File->Open( std::wstring( L"Content/Objects/TigarBob.smo" ), FileMode::Open, FileAccess::Read, FileShare::None );
 		boost::shared_ptr<BinaryReader> rreader = boost::make_shared<BinaryReader>( rstream, Encoding::UTF8 );*/
-		boost::shared_ptr<BinaryReader> rreader = boost::make_shared<BinaryReader>( _T( "Content/Objects/TigarBob.smo" ) );
-		boost::shared_ptr<ObjectClass> obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( _T( "White" ) ) );
+		boost::shared_ptr<BinaryReader> rreader = boost::make_shared<BinaryReader>( std::wstring( L"Content/Objects/TigarBob.smo" ) );
+		boost::shared_ptr<ObjectClass> obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::BasicEffect, Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 		obj->ReadFile( rreader, Tools::EffectWad, Tools::TextureWad );
 		rreader->Close();
 		//rstream->Close();
@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 			{
 				try
 				{
-					path = Path::Combine( Globals::ContentDirectory, Path::Combine( _T( "DynamicLoad" ), original_path ) );
+					path = Path::Combine( Globals::ContentDirectory, Path::Combine( std::wstring( L"DynamicLoad" ), original_path ) );
 					stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );
 				}
 				catch ( ... )
@@ -87,10 +87,10 @@ namespace CloudberryKingdom
 		for ( std::vector<boost::shared_ptr<BaseQuad> >::const_iterator quad = p->QuadList.begin(); quad != p->QuadList.end(); ++quad )
 			( *quad )->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 
-		boost::shared_ptr<CloudberryKingdom::BaseQuad> h = p->FindQuad( _T( "Head" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> h = p->FindQuad( std::wstring( L"Head" ) );
 		h->Show = false;
 
-		boost::shared_ptr<CloudberryKingdom::BaseQuad> q = p->FindQuad( _T( "MainQuad" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> q = p->FindQuad( std::wstring( L"MainQuad" ) );
 		q->MyEffect = Tools::BasicEffect;
 		q->MyDrawOrder = ObjectDrawOrder_AFTER_OUTLINE;
 		q->SetColor( Color::White );
@@ -99,22 +99,22 @@ namespace CloudberryKingdom
 		q->TextureAnim->Anims = std::vector<OneAnim_Texture>( 20 );
 
 		boost::shared_ptr<std::map<std::wstring, int> > ToAnim = boost::make_shared<std::map<std::wstring, int> >();
-		(*ToAnim)[ _T( "Stand" ) ] = 0;
-		(*ToAnim)[ _T( "Run" ) ] = 1;
-		(*ToAnim)[ _T( "Jump" ) ] = 2;
-		(*ToAnim)[ _T( "DoubleJump" ) ] = 29;
-		(*ToAnim)[ _T( "Fall" ) ] = 3;
-		(*ToAnim)[ _T( "Duck" ) ] = 4;
-		(*ToAnim)[ _T( "Turn" ) ] = 5;
+		(*ToAnim)[ std::wstring( L"Stand" ) ] = 0;
+		(*ToAnim)[ std::wstring( L"Run" ) ] = 1;
+		(*ToAnim)[ std::wstring( L"Jump" ) ] = 2;
+		(*ToAnim)[ std::wstring( L"DoubleJump" ) ] = 29;
+		(*ToAnim)[ std::wstring( L"Fall" ) ] = 3;
+		(*ToAnim)[ std::wstring( L"Duck" ) ] = 4;
+		(*ToAnim)[ std::wstring( L"Turn" ) ] = 5;
 
-		(*ToAnim)[ _T( "Wheel" ) ] = 25;
-		(*ToAnim)[ _T( "Bouncy" ) ] = 24;
-		(*ToAnim)[ _T( "Jump2" ) ] = 29;
-		(*ToAnim)[ _T( "Flip" ) ] = 16;
-		(*ToAnim)[ _T( "Wave" ) ] = 13;
-		(*ToAnim)[ _T( "Box_Stand" ) ] = 6;
-		(*ToAnim)[ _T( "Box_Jump" ) ] = 7;
-		(*ToAnim)[ _T( "Box_Duck" ) ] = 8;
+		(*ToAnim)[ std::wstring( L"Wheel" ) ] = 25;
+		(*ToAnim)[ std::wstring( L"Bouncy" ) ] = 24;
+		(*ToAnim)[ std::wstring( L"Jump2" ) ] = 29;
+		(*ToAnim)[ std::wstring( L"Flip" ) ] = 16;
+		(*ToAnim)[ std::wstring( L"Wave" ) ] = 13;
+		(*ToAnim)[ std::wstring( L"Box_Stand" ) ] = 6;
+		(*ToAnim)[ std::wstring( L"Box_Jump" ) ] = 7;
+		(*ToAnim)[ std::wstring( L"Box_Duck" ) ] = 8;
 
 		LoadAnimObj = p;
 
@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 		float scale = 1;
 
 		line = reader->ReadLine();
-		while ( line != _T( "" ) )
+		while ( line != std::wstring( L"" ) )
 		{
 			std::vector<std::wstring> bits = Tools::GetBitsFromLine( line );
 
@@ -148,7 +148,7 @@ namespace CloudberryKingdom
 					bool _use_speed = false;
 					int frame_length = 1;
 					float speed = 1;
-					if ( bits[ 4 ] == _T( "speed" ) )
+					if ( bits[ 4 ] == std::wstring( L"speed" ) )
 					{
 						speed = ParseFloat( bits[ 5 ] );
 						_use_speed = true;
@@ -246,13 +246,13 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER NOTE: The following 'switch' operated on a string variable and was converted to C++ 'if-else' logic:
 //				switch (bits[0])
 //ORIGINAL LINE: case "Scale":
-				if ( bits[ 0 ] == _T( "Scale" ) )
+				if ( bits[ 0 ] == std::wstring( L"Scale" ) )
 				{
 						scale = ParseFloat( bits[ 1 ] );
 
 				}
 //ORIGINAL LINE: case "Shift":
-				else if ( bits[ 0 ] == _T( "Shift" ) )
+				else if ( bits[ 0 ] == std::wstring( L"Shift" ) )
 				{
 						shift = Tools::ParseToVector2( bits[ 1 ], bits[ 2 ] );
 
@@ -313,7 +313,7 @@ namespace CloudberryKingdom
 		// Save object
 	#if defined(DEBUG)
 		/*Tools::UseInvariantCulture();
-		boost::shared_ptr<FileStream> fstream = File->Open( _T( "C:/Users/Ezra/Desktop/TigarBob.smo" ), FileMode::Create, FileAccess::Write, FileShare::None );
+		boost::shared_ptr<FileStream> fstream = File->Open( std::wstring( L"C:/Users/Ezra/Desktop/TigarBob.smo" ), FileMode::Create, FileAccess::Write, FileShare::None );
 		boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( fstream, Encoding::UTF8 );
 		p->Write( writer );
 		writer->Close();
@@ -332,18 +332,18 @@ namespace CloudberryKingdom
 		obj->p2_Right = obj->p2_Left;
 		obj->p2_Right.X *= -1;
 
-		boost::shared_ptr<CloudberryKingdom::BaseQuad> mq = obj->FindQuad( _T( "MainQuad" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> mq = obj->FindQuad( std::wstring( L"MainQuad" ) );
 		if ( mq != 0 )
-			mq->MyEffect = Tools::EffectWad->FindByName( _T( "Hsl_Green" ) );
-		boost::shared_ptr<CloudberryKingdom::BaseQuad> rp = obj->FindQuad( _T( "Rocket" ) );
+			mq->MyEffect = Tools::EffectWad->FindByName( std::wstring( L"Hsl_Green" ) );
+		boost::shared_ptr<CloudberryKingdom::BaseQuad> rp = obj->FindQuad( std::wstring( L"Rocket" ) );
 		if ( rp != 0 )
-			rp->MyEffect = Tools::EffectWad->FindByName( _T( "Hsl" ) );
+			rp->MyEffect = Tools::EffectWad->FindByName( std::wstring( L"Hsl" ) );
 		obj->UpdateEffectList();
 	}
 
 	boost::shared_ptr<ObjectClass> Prototypes::MakeObj()
 	{
-		std::wstring path = _T( "Objects/SpriteHeroTemplate.smo" );
+		std::wstring path = std::wstring( L"Objects/SpriteHeroTemplate.smo" );
 		//var path = "Objects/stickman.smo";
 		path = Path::Combine( Globals::ContentDirectory, path );
 
@@ -366,8 +366,8 @@ namespace CloudberryKingdom
 		/*boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
-		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 		SourceObject->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
 		//stream->Close();
@@ -383,8 +383,8 @@ namespace CloudberryKingdom
 		/*boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );*/
 		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
-		obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
-		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( _T( "BasicEffect" ) ), Tools::TextureWad->FindByName( _T( "White" ) ) );
+		obj = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
+		ObjectClass_PostConstruct( obj, Tools::QDrawer, Tools::Device, Tools::Device->PP, 100, 100, Tools::EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), Tools::TextureWad->FindByName( std::wstring( L"White" ) ) );
 		obj->ReadFile( reader, Tools::EffectWad, Tools::TextureWad );
 		reader->Close();
 		//stream->Close();
@@ -394,19 +394,19 @@ namespace CloudberryKingdom
 
 	void Prototypes::LoadObjects()
 	{
-		Prototypes::CheckpointObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, _T( "Objects/FlyingCoin_v2.smo" ) ) );
+		Prototypes::CheckpointObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/FlyingCoin_v2.smo" ) ) );
 
-		Prototypes::ArrowObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, _T( "Objects/Arrow.smo" ) ) );
+		Prototypes::ArrowObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/Arrow.smo" ) ) );
 
-		Prototypes::GhostBlockObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, _T( "Objects/GhostBlock.smo" ) ) );
+		Prototypes::GhostBlockObj = Prototypes::LoadSimple( Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/GhostBlock.smo" ) ) );
 
-		Prototypes::FlyingBlobObj = boost::make_shared<FlyingBlob>( Path::Combine( Globals::ContentDirectory, _T( "Objects/Blob.smo" ) ), Tools::EffectWad, Tools::TextureWad );
+		Prototypes::FlyingBlobObj = boost::make_shared<FlyingBlob>( Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/Blob.smo" ) ), Tools::EffectWad, Tools::TextureWad );
 		Prototypes::FlyingBlobObj->getCore()->MyType = ObjectType_FLYING_BLOB;
 		Vector2 BlobSize = Vector2( 1.11f, 1.11f );
 		Prototypes::FlyingBlobObj->MyObject->Base.e1 *= BlobSize.X;
 		Prototypes::FlyingBlobObj->MyObject->Base.e2 *= BlobSize.Y;
 
-		Prototypes::SpikeObj = boost::make_shared<Spike>( Path::Combine( Globals::ContentDirectory, _T( "Objects/regular_spike.smo" ) ), Tools::EffectWad, Tools::TextureWad );
+		Prototypes::SpikeObj = boost::make_shared<Spike>( Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/regular_spike.smo" ) ), Tools::EffectWad, Tools::TextureWad );
 
 		// Create all the stickmen hero prototypes
 		bob = std::map<boost::shared_ptr<BobPhsx> , boost::shared_ptr<Bob> >();
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
 		//NewBob.PlayerObject.FindQuad("Hat_FireHead").MyTexture = Fireball.FlameTexture;
 
 		// Tigar base object
-		std::wstring TigarBobPath = Path::Combine( Globals::ContentDirectory, _T( "Objects/TigarBob.smo" ) );
+		std::wstring TigarBobPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/TigarBob.smo" ) );
 		NewBob = boost::make_shared<Bob>( TigarBobPath, Tools::EffectWad, Tools::TextureWad );
 		NewBob->LoadFromFile( TigarBobPath, Tools::EffectWad, Tools::TextureWad, BobPhsxNormal::getInstance() );
 		SetTigarLoaded( NewBob->PlayerObject );
@@ -430,7 +430,7 @@ namespace CloudberryKingdom
 		NewBob->CanHaveCape = true;
 		NewBob->PlayerObject->Linear = true;
 		NewBob->PlayerObject->ParentQuad->MyEffect = Tools::BasicEffect;
-		NewBob->PlayerObject->FindQuad( _T( "Hat_FireHead" ) )->MyTexture = Fireball::FlameTexture;
+		NewBob->PlayerObject->FindQuad( std::wstring( L"Hat_FireHead" ) )->MyTexture = Fireball::FlameTexture;
 
 		// Classic Bob
 		BobPhsxNormal::getInstance()->Prototype = NewBob;
@@ -470,7 +470,7 @@ namespace CloudberryKingdom
 		NewBob->MyObjectType = BobPhsxBouncy::getInstance();
 		NewBob->CanHaveCape = true;
 		if ( !NewBob->IsSpriteBased )
-			NewBob->PlayerObject->FindQuad( _T( "Bouncy" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Bouncy" ) )->Show = true;
 
 		BobPhsxBouncy::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxBouncy::getInstance(), NewBob ) );
@@ -481,7 +481,7 @@ namespace CloudberryKingdom
 		NewBob->MyObjectType = BobPhsxWheel::getInstance();
 		NewBob->CanHaveCape = false;
 		if ( !NewBob->IsSpriteBased )
-			NewBob->PlayerObject->FindQuad( _T( "Wheel" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Wheel" ) )->Show = true;
 
 		BobPhsxWheel::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxWheel::getInstance(), NewBob ) );
@@ -492,10 +492,10 @@ namespace CloudberryKingdom
 		NewBob->MyObjectType = BobPhsxBox::getInstance();
 		if ( !NewBob->IsSpriteBased )
 		{
-			NewBob->PlayerObject->FindQuad( _T( "Box_Back" ) )->Show = true;
-			NewBob->PlayerObject->FindQuad( _T( "Box_Front" ) )->Show = true;
-			NewBob->PlayerObject->FindQuad( _T( "Leg_Left" ) )->Show = false;
-			NewBob->PlayerObject->FindQuad( _T( "Leg_Right" ) )->Show = false;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Box_Back" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Box_Front" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Leg_Left" ) )->Show = false;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Leg_Right" ) )->Show = false;
 		}
 
 		BobPhsxBox::getInstance()->Prototype = NewBob;
@@ -507,15 +507,15 @@ namespace CloudberryKingdom
 		NewBob->MyObjectType = BobPhsxBox::getInstance();
 		if ( !NewBob->IsSpriteBased )
 		{
-			NewBob->PlayerObject->FindQuad( _T( "Wheel_Left" ) )->Show = true;
-			NewBob->PlayerObject->FindQuad( _T( "Wheel_Right" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Left" ) )->Show = true;
+			NewBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Right" ) )->Show = true;
 		}
 
 		BobPhsxRocketbox::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxRocketbox::getInstance(), NewBob ) );
 
 		// Spaceship 
-		std::wstring SpaceshipPath = Path::Combine( Globals::ContentDirectory, _T( "Objects/Spaceship.smo" ) );
+		std::wstring SpaceshipPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/Spaceship.smo" ) );
 		NewBob = boost::make_shared<Bob>( SpaceshipPath, Tools::EffectWad, Tools::TextureWad, BobPhsxSpaceship::getInstance(), false );
 		NewBob->LoadFromFile( SpaceshipPath, Tools::EffectWad, Tools::TextureWad, BobPhsxSpaceship::getInstance() );
 		NewBob->MyObjectType = BobPhsxSpaceship::getInstance();
@@ -527,7 +527,7 @@ namespace CloudberryKingdom
 		NewBob->PlayerObject->ParentQuad->MyEffect = Tools::BasicEffect;
 
 		boost::shared_ptr<Quad> spaceship = boost::static_pointer_cast<Quad>( NewBob->PlayerObject->QuadList[ 1 ] );
-		spaceship->MyTexture = Tools::Texture( _T( "Spaceship_Paper" ) );
+		spaceship->MyTexture = Tools::Texture( std::wstring( L"Spaceship_Paper" ) );
 		spaceship->Resize();
 		NewBob->PlayerObject->QuadList[ 2 ]->Show = false;
 
@@ -537,7 +537,7 @@ namespace CloudberryKingdom
 
 
 		// Meat
-		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, _T( "Objects/MeatBoy.smo" ) );
+		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/MeatBoy.smo" ) );
 		NewBob = boost::make_shared<Bob>( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance(), true );
 		NewBob->LoadFromFile( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance() );
 		NewBob->IsSpriteBased = false;
@@ -548,8 +548,8 @@ namespace CloudberryKingdom
 		NewBob->CanHaveCape = true;
 		NewBob->CanHaveHat = true;
 		NewBob->PlayerObject->ParentQuad->MyEffect = Tools::BasicEffect;
-		NewBob->PlayerObject->QuadList[ 0 ]->SetTexture( _T( "FallingBlock1" ), Tools::TextureWad );
-		NewBob->PlayerObject->QuadList[ 1 ]->SetTexture( _T( "FallingBlock1" ), Tools::TextureWad );
+		NewBob->PlayerObject->QuadList[ 0 ]->SetTexture( std::wstring( L"FallingBlock1" ), Tools::TextureWad );
+		NewBob->PlayerObject->QuadList[ 1 ]->SetTexture( std::wstring( L"FallingBlock1" ), Tools::TextureWad );
 
 		BobPhsxMeat::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxMeat::getInstance(), NewBob ) );

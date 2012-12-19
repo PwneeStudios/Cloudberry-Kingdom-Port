@@ -176,7 +176,7 @@ namespace CloudberryKingdom
 			default:
 				return 0;
 				assert( !"No type found for desired object" );
-				//throw ( std::exception( _T( "No type found for desired object" ) ) );
+				//throw ( std::exception( std::wstring( L"No type found for desired object" ) ) );
 		}
 	}
 

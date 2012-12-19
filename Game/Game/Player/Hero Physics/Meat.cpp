@@ -58,8 +58,8 @@ namespace CloudberryKingdom
 
 		Specification = HeroSpec( 5, 0, 0, 0 );
 		Name = Localization::Words_MEATBOY;
-		Adjective = _T( "Meat" );
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( _T( "HeroIcon_Meat" ) ), Color::White, 1.2f * DefaultIconWidth );
+		Adjective = std::wstring( L"Meat" );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Meat" ) ), Color::White, 1.2f * DefaultIconWidth );
 	}
 
 	const boost::shared_ptr<BobPhsxMeat> &BobPhsxMeat::getInstance()

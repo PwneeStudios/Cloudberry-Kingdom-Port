@@ -59,8 +59,8 @@ namespace CloudberryKingdom
 
 	void VerifyBaseMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1230x740" ), 1500.f, true );
-		Backdrop->Name = _T( "Backdrop" );
+		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 		Backdrop->setPos( Vector2( 1181.251f, 241.6668f ) );
 			//new Vector2(1525.001f, 200.0001f);

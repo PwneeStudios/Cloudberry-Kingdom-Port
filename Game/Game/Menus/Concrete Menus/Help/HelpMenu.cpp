@@ -188,7 +188,7 @@ namespace CloudberryKingdom
 	{
 		if ( Coins > 99 )
 			Coins = 99;
-		CoinsText->SubstituteText( _T( "x" ) + StringConverterHelper::toString( Coins ) );
+		CoinsText->SubstituteText( std::wstring( L"x" ) + StringConverterHelper::toString( Coins ) );
 	}
 
 	void HelpMenu::SetItemProperties( const boost::shared_ptr<MenuItem> &item )
@@ -385,17 +385,17 @@ namespace CloudberryKingdom
 		MakeDarkBack();
 
 		// Make the left backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( _T( "Backplate_1500x900" ), 1500.f );
-		MyPile->Add( backdrop, _T( "Backdrop" ) );
+		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f );
+		MyPile->Add( backdrop, std::wstring( L"Backdrop" ) );
 		backdrop->setPos( Vector2( -1777.778f, 30.55557f ) );
 
 		// Coin
-		boost::shared_ptr<QuadClass> Coin_Renamed = boost::make_shared<QuadClass>( _T( "Coin_Blue" ), 90.f, true );
+		boost::shared_ptr<QuadClass> Coin_Renamed = boost::make_shared<QuadClass>( std::wstring( L"Coin_Blue" ), 90.f, true );
 		Coin_Renamed->setPos( Vector2( -873.1558f, 770.5778f ) );
-		MyPile->Add( Coin_Renamed, _T( "Coin" ) );
+		MyPile->Add( Coin_Renamed, std::wstring( L"Coin" ) );
 
-		CoinsText = boost::make_shared<EzText>( _T( "x" ), Resources::Font_Grobold42, 450.f, false, true );
-		CoinsText->Name = _T( "Coins" );
+		CoinsText = boost::make_shared<EzText>( std::wstring( L"x" ), Resources::Font_Grobold42, 450.f, false, true );
+		CoinsText->Name = std::wstring( L"Coins" );
 		CoinsText->setScale( .8f );
 		CoinsText->setPos( Vector2( -910.2224f, 717.3333f ) );
 		CoinsText->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
@@ -421,17 +421,17 @@ namespace CloudberryKingdom
 		// Header
 		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_COINS, ItemFont );
 		SetHeaderProperties( HeaderText );
-		MyPile->Add( HeaderText, _T( "Header" ) );
+		MyPile->Add( HeaderText, std::wstring( L"Header" ) );
 		HeaderText->setPos( Vector2( -1663.889f, 971.8889f ) );
 
 
 		Vector2 IconOffset = Vector2( -150, 0 );
 
-		std::wstring CoinPrefix = _T( "{pCoin_Blue,68,?}" );
+		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,68,?}" );
 
 		// Watch the computer
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) );
-		item->Name = _T( "WatchComputer" );
+		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) );
+		item->Name = std::wstring( L"WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -10, 0 ) );
@@ -450,10 +450,10 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
 			item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
-		item->Name = _T( "ShowPath" );
+		item->Name = std::wstring( L"ShowPath" );
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -20, -75 ) );
 		AddItem( item );
@@ -469,10 +469,10 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + _T( "x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
+			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
 			item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
-		item->Name = _T( "SlowMo" );
+		item->Name = std::wstring( L"SlowMo" );
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -20, -55 ) );
 		AddItem( item );
@@ -492,7 +492,7 @@ namespace CloudberryKingdom
 	void HelpMenu::SetPos()
 	{
 		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( _T( "WatchComputer" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"WatchComputer" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1050, 285.0002f ) );
@@ -500,7 +500,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.8f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "ShowPath" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"ShowPath" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1047.222f, -98.8887f ) );
@@ -508,7 +508,7 @@ namespace CloudberryKingdom
 			_item->MySelectedText->setScale( 0.8f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
-		_item = MyMenu->FindItemByName( _T( "SlowMo" ) );
+		_item = MyMenu->FindItemByName( std::wstring( L"SlowMo" ) );
 		if ( _item != 0 )
 		{
 			_item->setSetPos( Vector2( -1052.777f, -499.4443f ) );
@@ -520,13 +520,13 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 0, 0 ) );
 
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( _T( "Coins" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Coins" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -771.3337f, 622.889f ) );
 			_t->setScale( 0.6593335f );
 		}
-		_t = MyPile->FindEzText( _T( "Header" ) );
+		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
 		if ( _t != 0 )
 		{
 			_t->setPos( Vector2( -1497.222f, 816.3335f ) );
@@ -534,13 +534,13 @@ namespace CloudberryKingdom
 		}
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( _T( "Backdrop" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( 22.22229f, -33.33333f ) );
 			_q->setSize( Vector2( 1740.553f, 1044.332f ) );
 		}
-		_q = MyPile->FindQuad( _T( "Coin" ) );
+		_q = MyPile->FindQuad( std::wstring( L"Coin" ) );
 		if ( _q != 0 )
 		{
 			_q->setPos( Vector2( -798.1558f, 634.4669f ) );

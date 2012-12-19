@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 	void BouncyBlock::BouncyBlockTileInfo::InitializeInstanceFields()
 	{
 		Group = PieceQuad::BouncyGroup;
-		BounceSound = Tools::SoundWad->FindByName( _T( "BouncyBlock_Bounce" ) );
+		BounceSound = Tools::SoundWad->FindByName( std::wstring( L"BouncyBlock_Bounce" ) );
 	}
 
 	void BouncyBlock::MakeNew()

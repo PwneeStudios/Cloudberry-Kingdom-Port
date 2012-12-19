@@ -94,7 +94,7 @@ namespace CloudberryKingdom
 	const std::wstring MenuItem::getMyString() const
 	{
 		if ( MyText == 0 )
-			return _T( "" );
+			return std::wstring( L"" );
 		else
 			return MyText->MyString;
 	}
@@ -572,7 +572,7 @@ namespace CloudberryKingdom
 	void MenuItem::InitializeInstanceFields()
 	{
 		Code = 0;
-		Name = _T( "" );
+		Name = std::wstring( L"" );
 		UnaffectedByScroll = false;
 		MyObject = 0;
 		MyInt = 0;

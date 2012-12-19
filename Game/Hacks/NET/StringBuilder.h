@@ -18,7 +18,7 @@ struct StringBuilder
 	operator std::wstring() const
 	{
 		// FIXME
-		return _T( "" );
+		return std::wstring( L"" );
 	}
 
 	void Append( const wchar_t &c )
@@ -38,7 +38,7 @@ struct StringBuilder
 
 	std::wstring ToString()
 	{
-		return _T( "" );
+		return std::wstring( L"" );
 		// FIXME: implement
 	}
 
