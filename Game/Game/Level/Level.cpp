@@ -391,7 +391,7 @@ namespace CloudberryKingdom
 				if ( Style->MyInitialPlatsType == StyleData::InitialPlatsType_UP_TILED_FLOOR )
 				{
 					for ( BlockVec::const_iterator _block = Blocks.begin(); _block != Blocks.end(); ++_block )
-						if ( ( *_block )->getCore()->IsCalled( _T("FirstRow")  ))
+						if ( ( *_block )->getCore()->IsCalled( std::wstring( L"FirstRow" )  ))
 							( *_block )->CollectSelf();
 
 					FinalCamZone->End.Y += 400;
@@ -403,7 +403,7 @@ namespace CloudberryKingdom
 					block->Stretch( Side_LEFT, -2000 );
 					block->Stretch( Side_BOTTOM, -800 );
 					block->Extend( Side_TOP, startblock->getBox()->Current->TR.Y + 1 );
-					block->getCore()->EditorCode1 = _T("Tiled bottom");
+					block->getCore()->EditorCode1 = std::wstring( L"Tiled bottom" );
 				}
 				else
 					block->Clone( startblock );
@@ -573,7 +573,7 @@ namespace CloudberryKingdom
 
 		// Set flag when a block on the last row is used.
 		for ( BlockVec::const_iterator block = Blocks.begin(); block != Blocks.end(); ++block )
-			if ( ( *block )->getCore()->IsCalled( _T("LastRow") ) )
+			if ( ( *block )->getCore()->IsCalled( std::wstring( L"LastRow" ) ) )
 				( *block )->getCore()->GenData.OnUsed = boost::make_shared<EndReachedLambda>( shared_from_this() );
 
 		// Initial platform
@@ -1623,7 +1623,7 @@ const float Level::SafetyNetHeight = 124;
 		nblock->getBlockCore()->Virgin = true;
 		nblock->getCore()->GenData.AlwaysLandOn = true;
 
-		nblock->getCore()->EditorCode1 = _T("Landing Platform");
+		nblock->getCore()->EditorCode1 = std::wstring( L"Landing Platform" );
 
 		AddBlock( nblock );
 
@@ -2639,7 +2639,7 @@ int Level::AfterPostDrawLayer = 12;
 
 	std::wstring Level::SourceLevelDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Levels") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), std::wstring( L"Content/Levels" ) );
 	}
 
 	void Level::Save( const std::wstring &file, bool Bin )

@@ -331,12 +331,12 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::DefaultDynamicDirectory()
 	{
-		return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, _T("DynamicLoad")) );
+		return Path::Combine( Directory::GetCurrentDirectory(), Path::Combine(Globals::ContentDirectory, std::wstring( L"DynamicLoad" )) );
 	}
 
 	std::wstring Tools::SourceTextureDirectory()
 	{
-		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), _T("Content/Art") );
+		return Path::Combine( Path::GetDirectoryName( Path::GetDirectoryName( Path::GetDirectoryName( Directory::GetCurrentDirectory() ) ) ), std::wstring( L"Content/Art" ) );
 	}
 
 	boost::shared_ptr<SimpleObject> Tools::LoadSimpleObject( const std::wstring &file )
@@ -1056,7 +1056,7 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 							for ( IEnumerable<IReadWrite*>::const_iterator rw = static_cast<IEnumerable<IReadWrite*>*>( info->GetValue( obj ).begin() ); rw != static_cast<IEnumerable<IReadWrite*>*>(info->GetValue(obj).end()); ++rw )
 							{
-								writer->WriteLine( WhiteSpace + std::wstring( L"Add " ) + ( *rw )->GetType()->Namespace + _T(".") + (*rw)->GetType()->Name );
+								writer->WriteLine( WhiteSpace + std::wstring( L"Add " ) + ( *rw )->GetType()->Namespace + std::wstring( L"." ) + (*rw)->GetType()->Name );
 								( *rw )->Write( writer );
 								writer->WriteLine( WhiteSpace + std::wstring( L"End" ) );
 							}

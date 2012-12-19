@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 	bool MakeFinalDoor::FindFinalBlockLambda::Apply( const boost::shared_ptr<BlockBase> &block )
 	{
-		return block->getCore()->GenData.Used && block->getCore()->IsCalled( _T("FinalBlock") );
+		return block->getCore()->GenData.Used && block->getCore()->IsCalled( std::wstring( L"FinalBlock" ) );
 	}
 
 	MakeFinalDoor::BoxTRyLambda::BoxTRyLambda()
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		block->getBlockCore()->DeleteIfTopOnly = true;
 		block->getBlockCore()->GenData.RemoveIfUnused = true;
 		block->getBlockCore()->GenData.AlwaysUse = false;
-		block->getCore()->EditorCode1 = _T("FinalBlock");
+		block->getCore()->EditorCode1 = std::wstring( L"FinalBlock" );
 		FinalBlocks.push_back( block );
 
 		// New style end blocks

@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 		if ( Content == 0 )
 		{
-			Content = boost::make_shared<ContentManager>( _T("Content") );
+			Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 		}
 
 		CanSkip = CanSkipVideo;

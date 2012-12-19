@@ -548,7 +548,7 @@ namespace CloudberryKingdom
 			std::vector<std::wstring> terms;
 
 			// Seed [This must come first]
-			if ( ToLower( identifier ) == _T("s") )
+			if ( ToLower( identifier ) == std::wstring( L"s" ) )
 			{
 				/*try
 				{*/
@@ -560,7 +560,7 @@ namespace CloudberryKingdom
 				}*/
 			}
 			// Game type
-			else if ( ToLower( identifier ) == _T("g") )
+			else if ( ToLower( identifier ) == std::wstring( L"g" ) )
 			{
 				MyGameType = NormalGameData::Factory;
 				//try
@@ -573,7 +573,7 @@ namespace CloudberryKingdom
 				//}
 			}
 			// Geometry
-			else if ( ToLower( identifier ) == _T("geo") )
+			else if ( ToLower( identifier ) == std::wstring( L"geo" ) )
 			{
 				/*try
 				{*/
@@ -585,7 +585,7 @@ namespace CloudberryKingdom
 				}*/
 			}
 			// Hero [This must come before "ph:"]
-			else if ( ToLower( identifier ) == _T("h") )
+			else if ( ToLower( identifier ) == std::wstring( L"h" ) )
 			{
 					terms = Split( data, L',' );
 					if ( terms.size() == 4 )
@@ -594,14 +594,14 @@ namespace CloudberryKingdom
 						DefaultHeroType = BobPhsxNormal::getInstance();
 			}
 			// Custom physics [This must come after "h:"]
-			else if ( ToLower( identifier ) == _T("ph") )
+			else if ( ToLower( identifier ) == std::wstring( L"ph" ) )
 			{
 					BobPhsx::CustomPhsxData custom = BobPhsx::CustomPhsxData();
 					custom.Init( data );
 					DefaultHeroType->SetCustomPhsx( custom );
 			}
 			// Tileset
-			else if ( ToLower( identifier ) == _T("t") )
+			else if ( ToLower( identifier ) == std::wstring( L"t" ) )
 			{
 					MyTileSet.reset();
 					if ( data.length() > 0 )
@@ -619,7 +619,7 @@ namespace CloudberryKingdom
 						SetTileSet( std::wstring( L"castle" ) );
 			}
 			// Number of pieces
-			else if ( ToLower( identifier ) == _T("n") )
+			else if ( ToLower( identifier ) == std::wstring( L"n" ) )
 			{
 					/*try
 					{*/
@@ -632,7 +632,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Length
-			else if ( ToLower( identifier ) == _T("l") )
+			else if ( ToLower( identifier ) == std::wstring( L"l" ) )
 			{
 					/*try
 					{*/
@@ -646,7 +646,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Upgrades
-			else if ( ToLower( identifier ) == _T("u") )
+			else if ( ToLower( identifier ) == std::wstring( L"u" ) )
 			{
 					UpgradeStrs.push_back( data );
 			}
@@ -754,7 +754,7 @@ namespace CloudberryKingdom
 		std::wstring version = StringConverterHelper::toString( _version ) + std::wstring( L";" );
 
 		// Seed
-		std::wstring seed = std::wstring( L"s:" ) + StringConverterHelper::toString( getSeed() ) + _T(";");
+		std::wstring seed = std::wstring( L"s:" ) + StringConverterHelper::toString( getSeed() ) + std::wstring( L";" );
 
 		// Game
 		std::wstring game = std::wstring( L"" );

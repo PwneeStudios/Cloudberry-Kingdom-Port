@@ -289,7 +289,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//MyGraphicsDeviceManager->PreparingDeviceSettings += boost::make_shared<EventHandler<PreparingDeviceSettingsEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::graphics_PreparingDeviceSettings );
 
 		// Pull these out, so they aren't inside the constructor.
-		//Tools::GameClass->getContent()->RootDirectory = _T("Content");
+		//Tools::GameClass->getContent()->RootDirectory = std::wstring( L"Content" );
 		//Tools::TheGame = shared_from_this();
 	}
 
@@ -963,30 +963,30 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start2();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Environments") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Environments" ) );
 		long long LoadEnviros = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Bob") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Bob" ) );
 		long long LoadBob = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Menu") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Menu" ) );
 		long long LoadMenus = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Coins") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
 		//Tools.TextureWad.LoadFolder(Tools.GameClass.Content, "Effects");
 		long long LoadEffects = Stop();
 
 		Start();
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Buttons") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Characters") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("HeroItems") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Initial") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Level") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Old Art Holdover") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Title") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old Art Holdover" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
 		long long LoadRest = Stop();
 
 		Tools::Write( _T( "ArtMusic done..." ) );
@@ -1080,7 +1080,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		std::wcout << Tools::GameClass->getContent()->RootDirectory << std::endl;
 
-		Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Snow"));
+		Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Snow" ));
 
 
 		long long big = 0;
@@ -1089,20 +1089,20 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0001"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0002"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0003"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Bob/Classic/v1/Stand/Bob_Stand_0004"));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0001" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0002" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0003" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Bob/Classic/v1/Stand/Bob_Stand_0004" ));
 		}
 		small = Stop();
 
 		Start();
 		for ( int i = 0; i < 1; i++ )
 		{
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Castle/Pillars/Pillar_Castle_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cave/Pillars/Pillar_Cave_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Cloud/Pillars/Pillar_Cloud_1000"));
-			Tools::GameClass->getContent()->Load<Texture2D>(_T("Art/Environments/Forest/Pillars/Pillar_Forest_1000"));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Castle/Pillars/Pillar_Castle_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Cave/Pillars/Pillar_Cave_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Cloud/Pillars/Pillar_Cloud_1000" ));
+			Tools::GameClass->getContent()->Load<Texture2D>(std::wstring( L"Art/Environments/Forest/Pillars/Pillar_Forest_1000" ));
 		}
 		big = Stop();
 

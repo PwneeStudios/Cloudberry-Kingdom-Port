@@ -306,18 +306,18 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Fireball::PreInit();
 
 		// Load art
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Environments") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Bob") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Buttons") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Characters") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Coins") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Environments" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Bob" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
 		//Tools.TextureWad.LoadFolder(Tools.GameClass.Content, "Effects");
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("HeroItems") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Initial") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("LoadScreen_Level") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Menu") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Old_Art_Holdover") );
-		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), _T("Title") );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Menu" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old_Art_Holdover" ) );
+		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
 
 		Tools::Write( _T( "ArtMusic done..." ) );
 

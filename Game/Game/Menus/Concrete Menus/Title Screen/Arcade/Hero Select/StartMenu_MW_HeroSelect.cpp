@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Back
 		/// </summary>
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack() ), _T("Back") );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack() ), std::wstring( L"Back" ) );
 		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"BackArrow2" ), std::wstring( L"BackArrow" ) ) );
 
 		MyPile->FadeIn( .33f );

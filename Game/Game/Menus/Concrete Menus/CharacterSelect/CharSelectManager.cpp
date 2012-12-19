@@ -129,7 +129,7 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		Parent->MyGame->AddGameObject( Backdrop );
 
 		// Start the selects for each player
-		Parent->MyGame->WaitThenDo( 0, boost::make_shared<_StartAllProxy>(), _T("StartCharSelect") );
+		Parent->MyGame->WaitThenDo( 0, boost::make_shared<_StartAllProxy>(), std::wstring( L"StartCharSelect" ) );
 	}
 
 	void CharacterSelectManager::_StartAll()

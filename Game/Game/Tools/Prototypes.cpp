@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 
 					// Reverse
 					bool reverse = false;
-					if ( std::find( bits.begin(), bits.end(), _T("reverse") ) != bits.end() )
+					if ( std::find( bits.begin(), bits.end(), std::wstring( L"reverse" ) ) != bits.end() )
 						reverse = true;
 
 					q->TextureAnim->ClearAnim( anim );

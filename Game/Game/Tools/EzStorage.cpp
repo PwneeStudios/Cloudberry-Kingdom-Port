@@ -38,8 +38,8 @@ namespace CloudberryKingdom
 		Add( PlayerManager::SavePlayerData );
 
 	#if defined(PC_VERSION)
-		PlayerManager::getPlayer()->ContainerName = _T("PlayerData");
-		PlayerManager::getPlayer()->FileName = _T("MainPlayer");
+		PlayerManager::getPlayer()->ContainerName = std::wstring( L"PlayerData" );
+		PlayerManager::getPlayer()->FileName = std::wstring( L"MainPlayer" );
 		Add( PlayerManager::getPlayer() );
 	#endif
 

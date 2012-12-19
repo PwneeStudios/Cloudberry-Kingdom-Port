@@ -165,16 +165,16 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( -1689.523f, 520.4127f );
 
 		// Escalation
-		item = AddChallenge( Challenge_Escalation::getInstance(), 0, 0, _T("Escalation") );
+		item = AddChallenge( Challenge_Escalation::getInstance(), 0, 0, std::wstring( L"Escalation" ) );
 
 		// Time Crisis
-		item = AddChallenge( Challenge_TimeCrisis::getInstance(), 0, Awardments::UnlockHeroRush2, _T("Time Crisis") );
+		item = AddChallenge( Challenge_TimeCrisis::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Time Crisis" ) );
 
 		// Hero Rush
-		item = AddChallenge( Challenge_HeroRush::getInstance(), 0, Awardments::UnlockHeroRush2, _T("Hero Rush") );
+		item = AddChallenge( Challenge_HeroRush::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Hero Rush" ) );
 
 		// Hero Rush 2
-		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, 0, _T("Hero Rush 2") );
+		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, 0, std::wstring( L"Hero Rush 2" ) );
 
 		// Bungee Co-op
 		//item = AddChallenge(Challenge_HeroRush2.Instance, Awardments.UnlockHeroRush2, null, "Bungee");

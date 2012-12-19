@@ -39,7 +39,7 @@ void CloudberryKingdomWrapper::Initialize()
 
 	game = boost::make_shared<CloudberryKingdom::XnaGameClass>();
 
-	//Tools::GameClass->getContent()->RootDirectory = _T("Content");
+	//Tools::GameClass->getContent()->RootDirectory = std::wstring( L"Content" );
 	CloudberryKingdom::Tools::GameClass = game;
 
 	game->Initialize();

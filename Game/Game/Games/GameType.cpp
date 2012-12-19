@@ -332,7 +332,7 @@ namespace CloudberryKingdom
 
 		// Start the world map music
 		ParentGame->KillToDo( std::wstring( L"StartMusic" ) );
-		ParentGame->WaitThenDo( 50, boost::make_shared<PlayWorldMapMusicLambda>(), _T("StartMusic") );
+		ParentGame->WaitThenDo( 50, boost::make_shared<PlayWorldMapMusicLambda>(), std::wstring( L"StartMusic" ) );
 	}
 
 	void GameData::StandardFinish( bool Replay )
@@ -536,7 +536,7 @@ namespace CloudberryKingdom
 
 	void GameData::AddToDo( const boost::shared_ptr<LambdaFunc<bool> > &FuncToDo )
 	{
-		getToDo().push_back(boost::make_shared<ToDoItem>(FuncToDo, _T(""), false, false));
+		getToDo().push_back(boost::make_shared<ToDoItem>(FuncToDo, std::wstring( L"" ), false, false));
 	}
 
 	void GameData::AddToDo( const boost::shared_ptr<Lambda> &FuncToDo )

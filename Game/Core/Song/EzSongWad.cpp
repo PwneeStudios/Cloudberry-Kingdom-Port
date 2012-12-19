@@ -309,7 +309,7 @@ namespace CloudberryKingdom
 	void EzSongWad::Play( int Index, bool DisplayInfo )
 	{
 		if ( PlayList[ CurIndex ]->song == 0 )
-			PlayList[ CurIndex ]->song = Tools::GameClass->getContent()->Load<Song>(_T("Music/") + PlayList[ CurIndex ]->FileName);
+			PlayList[ CurIndex ]->song = Tools::GameClass->getContent()->Load<Song>(std::wstring( L"Music/" ) + PlayList[ CurIndex ]->FileName);
 
 		Elapsed = 0;
 		Duration = PlayList[ CurIndex ]->Play( DisplayInfo );

@@ -62,12 +62,12 @@ namespace CloudberryKingdom
 		Vector2 AdditionalAdd = Vector2();
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 140.f, static_cast<std::wstring>( _T("Button_Go") ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 140.f, static_cast<std::wstring>( std::wstring( L"Button_Go" ) ) ) );
 		Play = boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->Name = std::wstring( L"Play" );
 		SetGrayHeaderProperties( Play );
 	#else
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, _T("Button_Go") ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_Go" ) ) );
 		Play = boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont, true );
 		Play->MyFloatColor = ( Color( static_cast<unsigned char>( 67 ), static_cast<unsigned char>( 198 ), static_cast<unsigned char>( 48 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		Play->Name = std::wstring( L"Play" );
@@ -76,12 +76,12 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		AdditionalAdd = Vector2( -2, 0 );
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 140.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 140.f, static_cast<std::wstring>( std::wstring( L"Button_Back" ) ) ) );
 		End = boost::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->Name = std::wstring( L"Back" );
 		SetGrayHeaderProperties( End );
 	#else
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( _T("Button_Back") ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_Back" ) ) ) );
 		End = boost::make_shared<EzText>( Localization::Words_DONE, ItemFont, true );
 		End->MyFloatColor = ( Color( static_cast<unsigned char>( 239 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 41 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
 		End->Name = std::wstring( L"Back" );
@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 
 		if ( Type == ReplayGUIType_REPLAY )
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
 			Toggle = boost::make_shared<EzText>( Localization::Words_SINGLE, ItemFont, true );
 			Toggle->Name = std::wstring( L"Toggle" );
 	#if defined(PC_VERSION)
@@ -102,26 +102,26 @@ namespace CloudberryKingdom
 			SetToggleText();
 		}
 
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85.f, static_cast<std::wstring>( _T("Button_LR") ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_LR" ) ) ) );
 		Speed = boost::make_shared<EzText>( Localization::Words_SPEED, ItemFont );
 		Speed->Name = std::wstring( L"Speed" );
 		SetGrayHeaderProperties( Speed );
 
 		if ( Type == ReplayGUIType_COMPUTER )
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_LB" ) ) ) );
 			LB = boost::make_shared<EzText>( Localization::Words_RESET, ItemFont, true );
 			LB->Name = std::wstring( L"Reset" );
 			SetGrayHeaderProperties( LB );
 		}
 		else
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( _T("Button_LB") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftBumper(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_LB" ) ) ) );
 			LB = boost::make_shared<EzText>( Localization::Words_PREVIOUS, ItemFont, true );
 			LB->Name = std::wstring( L"Prev" );
 			SetGrayHeaderProperties( LB );
 
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85.f, static_cast<std::wstring>( _T("Button_RB") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getRightBumper(), 85.f, static_cast<std::wstring>( std::wstring( L"Button_RB" ) ) ) );
 			RB = boost::make_shared<EzText>( Localization::Words_NEXT, ItemFont, true );
 			RB->Name = std::wstring( L"Next" );
 			SetGrayHeaderProperties( RB );

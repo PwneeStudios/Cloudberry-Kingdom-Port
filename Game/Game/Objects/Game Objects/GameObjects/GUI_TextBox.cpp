@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	void GUI_TextBox::Copy()
 	{
-		if ( getText() != _T("") && getText().length() > 0 )
+		if ( getText() != std::wstring( L"" ) && getText().length() > 0 )
 			Clipboard::SetText( getText() );
 	}
 #endif
@@ -409,7 +409,7 @@ namespace CloudberryKingdom
 
 		// If we're selecting move the caret one character to the left
 		if ( SelectIndex_End - SelectIndex_Start > 0 )
-			Caret->setX( Caret->getX() - MyText->GetWorldWidth(_T(" ")) );
+			Caret->setX( Caret->getX() - MyText->GetWorldWidth(std::wstring( L" " )) );
 
 		if ( DoRecenter )
 			MyText->setPos( Vector2( -MyText->GetWorldWidth() / 2, 0 ) );

@@ -750,7 +750,7 @@ namespace CloudberryKingdom
 
 		// Start
 	#if defined(XBOX)
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, _T("Button_A") ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, std::wstring( L"Button_A" ) ) );
 	#endif
 		Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
 		Start->Name = std::wstring( L"Start" );
@@ -791,7 +791,7 @@ namespace CloudberryKingdom
 
 		// Back
 	#if defined(XBOX)
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, _T("Button_B") ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, std::wstring( L"Button_B" ) ) );
 	#endif
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		item->Name = std::wstring( L"Back" );

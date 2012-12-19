@@ -289,7 +289,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			width = static_cast<float>( static_cast<int>( 100 * hat->HatPicScale.X ) );
 			Offset = hat->HatPicShift * 100;
 			offset = Format( _T( "%f,%f" ), Offset.X, -Offset.Y );
-			pic = std::wstring( L"{p" ) + hat->GetTexture()->Name + _T(",") + StringConverterHelper::toString(width) + _T(",?,") + offset + _T("}");
+			pic = std::wstring( L"{p" ) + hat->GetTexture()->Name + std::wstring( L"," ) + StringConverterHelper::toString(width) + std::wstring( L",?," ) + offset + std::wstring( L"}" );
 		}
 		else
 		{

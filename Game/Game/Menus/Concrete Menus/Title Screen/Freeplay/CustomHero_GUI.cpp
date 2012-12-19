@@ -722,7 +722,7 @@ namespace CloudberryKingdom
 		// Start
 		if ( WithButtonPics )
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( _T("Button_A") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_A" ) ) ) );
 			A = Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) );
 		}
 		else
@@ -744,7 +744,7 @@ namespace CloudberryKingdom
 		// Back
 		if ( WithButtonPics )
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( _T("Button_B") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_B" ) ) ) );
 			B = Back = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
 		}
 		else
@@ -762,7 +762,7 @@ namespace CloudberryKingdom
 		// Continue
 		if ( WithButtonPics )
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( _T("Button_X") ) ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
 			X = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) );
 		}
 		else

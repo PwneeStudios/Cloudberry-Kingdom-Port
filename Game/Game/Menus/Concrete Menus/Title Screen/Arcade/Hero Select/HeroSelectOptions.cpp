@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		boost::shared_ptr<MenuItem> item;
 
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( _T("Button_X") ) ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
 		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LEADERBOARD, ItemFont, false, true ) );
 
 		item->Name = std::wstring( L"Leaderboard" );
