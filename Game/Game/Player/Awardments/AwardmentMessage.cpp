@@ -54,7 +54,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( true );
 	}
 
-	void AwardmentMessage::SlideOut( const PresetPos &Preset, int Frames )
+	void AwardmentMessage::SlideOut( PresetPos Preset, int Frames )
 	{
 		if ( Frames == 0 )
 			return;

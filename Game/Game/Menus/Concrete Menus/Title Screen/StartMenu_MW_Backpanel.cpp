@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	void StartMenu_MW_Backpanel::Hide( const PresetPos &pos, int frames )
+	void StartMenu_MW_Backpanel::Hide( PresetPos pos, int frames )
 	{
 		CkBaseMenu::Hide( pos, frames );
 		ButtonCheck::PreLogIn = false;
@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Backpanel::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Backpanel::SlideOut( PresetPos Preset, int Frames )
 	{
 		//base.SlideOut(Preset, 0);
 		CkBaseMenu::SlideOut( Preset, Frames );

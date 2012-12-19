@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 	
 		virtual void SlideIn( int Frames );
 
-		virtual void SlideOut( const PresetPos &Preset, int Frames );
+		virtual void SlideOut( PresetPos Preset, int Frames );
 
 	
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );

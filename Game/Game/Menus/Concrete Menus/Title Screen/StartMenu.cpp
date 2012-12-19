@@ -117,7 +117,7 @@ namespace CloudberryKingdom
 		sm->BringNextMenu();
 	}
 
-	void StartMenu::Hide( const PresetPos &pos, int frames )
+	void StartMenu::Hide( PresetPos pos, int frames )
 	{
 		CkBaseMenu::Hide( pos, frames );
 		ButtonCheck::PreLogIn = false;

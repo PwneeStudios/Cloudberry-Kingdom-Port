@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		CkBaseMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_PressStart::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_PressStart::SlideOut( PresetPos Preset, int Frames )
 	{
 		CkBaseMenu::SlideOut( Preset, 0 );
 	}

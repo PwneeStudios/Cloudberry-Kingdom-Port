@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 			Options->SlideIn( 0 );
 	}
 
-	void StartMenu_MW_HeroSelect::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_HeroSelect::SlideOut( PresetPos Preset, int Frames )
 	{
 		ArcadeBaseMenu::SlideOut( Preset, 0 );
 

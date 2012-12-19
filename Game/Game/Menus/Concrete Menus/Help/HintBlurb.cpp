@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 		MyPile->BubbleUp( true );
 	}
 
-	void HintBlurb::SlideOut( const PresetPos &Preset, int Frames )
+	void HintBlurb::SlideOut( PresetPos Preset, int Frames )
 	{
 		if ( Frames == 0 )
 			return;

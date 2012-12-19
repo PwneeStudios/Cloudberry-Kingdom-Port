@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 				return;
 			GUI_Panel::Show();
 			this->SlideOut( PresetPos_LEFT, 0 );
-			GUI_Panel::SlideIn();
+			this->SlideIn();
 		}
 		else
 			GUI_Panel::OnReturnTo();
@@ -276,11 +276,11 @@ namespace CloudberryKingdom
 		if ( !Hid )
 			return;
 
-		 GUI_Panel::Show();
+		GUI_Panel::Show();
 
-		this->SlideOut( SlideInFrom, 0 );
+		SlideOut( SlideInFrom, 0 );
 
-		GUI_Panel::SlideIn();
+		SlideIn();
 	}
 
 	void CkBaseMenu::SlideIn( int Frames )

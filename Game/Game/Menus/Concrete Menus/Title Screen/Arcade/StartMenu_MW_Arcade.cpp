@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		ArcadeMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Arcade::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Arcade::SlideOut( PresetPos Preset, int Frames )
 	{
 		ArcadeMenu::SlideOut( Preset, 0 );
 	}

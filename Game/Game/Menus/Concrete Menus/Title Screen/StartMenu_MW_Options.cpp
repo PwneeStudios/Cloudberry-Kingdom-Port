@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		SoundMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Options::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Options::SlideOut( PresetPos Preset, int Frames )
 	{
 		SoundMenu::SlideOut( Preset, 0 );
 	}

@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::SlideIn( 0 );
 	}
 
-	void HeroSelectOptions::SlideOut( const PresetPos &Preset, int Frames )
+	void HeroSelectOptions::SlideOut( PresetPos Preset, int Frames )
 	{
 		ArcadeBaseMenu::SlideOut( Preset, 0 );
 	}

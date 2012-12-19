@@ -1,7 +1,8 @@
 #include <global_header.h>
 
+#include <Hacks\String.h>
 #include <MasterHack.h>
-#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -140,7 +141,7 @@ namespace CloudberryKingdom
 		bool found = false;
 		for ( std::vector<boost::shared_ptr<DisplayMode> >::const_iterator mode = modes.begin(); mode != modes.end(); ++mode )
 		{
-			std::wstring str = ( *mode )->Width + _T( " x " ) + ( *mode )->Height;
+			std::wstring str = ::ToString( ( *mode )->Width ) + _T( " x " ) + ::ToString( ( *mode )->Height );
 			//std::wstring str = _T( "Hello" );
 			Tools::Write( str.c_str() );
 			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, ItemFont, false, true ) );

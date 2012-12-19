@@ -607,7 +607,8 @@ namespace CloudberryKingdom
 
 	void GameData::KillToDo( const std::wstring &name )
 	{
-		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = ToDoFindAll( name ).begin(); todo != ToDoFindAll(name).end(); ++todo )
+		std::vector<boost::shared_ptr<ToDoItem> > list_to_kill = ToDoFindAll( name );
+		for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator todo = list_to_kill.begin(); todo != list_to_kill.end(); ++todo )
 			( *todo )->Delete();
 	}
 

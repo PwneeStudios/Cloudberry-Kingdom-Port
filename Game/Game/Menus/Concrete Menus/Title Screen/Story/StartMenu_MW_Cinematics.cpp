@@ -41,7 +41,7 @@ namespace CloudberryKingdom
 		StartMenu::SlideIn( 0 );
 	}
 
-	void StartMenu_MW_Cinematics::SlideOut( const PresetPos &Preset, int Frames )
+	void StartMenu_MW_Cinematics::SlideOut( PresetPos Preset, int Frames )
 	{
 		StartMenu::SlideOut( Preset, 0 );
 	}

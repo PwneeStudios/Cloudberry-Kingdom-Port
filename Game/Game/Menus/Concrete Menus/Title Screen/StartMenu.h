@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		virtual void Hide( const PresetPos &pos, int frames );
+		virtual void Hide( PresetPos pos, int frames );
 
 		Next MyNextMenu;
 
