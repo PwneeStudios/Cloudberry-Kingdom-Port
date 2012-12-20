@@ -4,6 +4,10 @@
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
 
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
 namespace CloudberryKingdom
 {
 

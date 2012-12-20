@@ -9,7 +9,9 @@
 #include "Hacks/NET/Directory.h"
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
-
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
 #include <MasterHack.h>
 
 namespace CloudberryKingdom

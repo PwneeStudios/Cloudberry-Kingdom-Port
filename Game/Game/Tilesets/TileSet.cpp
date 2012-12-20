@@ -1,5 +1,13 @@
 ﻿#include <global_header.h>
 
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloater_Stationary.h"
+
 #include "Hacks/List.h"
 #include "Hacks/Dict.h"
 #include "Hacks/String.h"

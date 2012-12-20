@@ -2,6 +2,10 @@
 
 #include "Hacks/Queue.h"
 
+#include "Game/Tilesets/Backgrounds/BackgroundCollection.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloater.h"
+#include "Game/Tilesets/Backgrounds/BackgroundFloaterList.h"
+
 namespace CloudberryKingdom
 {
 

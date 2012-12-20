@@ -14,6 +14,8 @@
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
 
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
 namespace CloudberryKingdom
 {
 
