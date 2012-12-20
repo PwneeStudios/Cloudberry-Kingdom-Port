@@ -3,6 +3,8 @@
 #include "Hacks/List.h"
 #include "Hacks/String.h"
 
+#include <Core/Animation/AnimQueue.h>
+
 namespace CloudberryKingdom
 {
 

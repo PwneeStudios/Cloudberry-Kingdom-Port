@@ -153,6 +153,11 @@ namespace CloudberryKingdom
 
 	void Fireball::DrawFireballTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
+		// FIXME
+		FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+		return;
+
+
 		t += 1 / 60;
 
 		device->SetRenderTarget( FireballRenderTarget );
@@ -195,6 +200,11 @@ namespace CloudberryKingdom
 
 	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
+		// FIXME
+		FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+		EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+		return;
+
 		t += 1 / 60;
 
 		device->SetRenderTarget( FlameRenderTarget );

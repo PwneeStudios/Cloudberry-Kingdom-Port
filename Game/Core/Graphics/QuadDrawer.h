@@ -3,6 +3,21 @@
 
 #include <global_header.h>
 
+#include "Core/Graphics/VertexFormat.h"
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/MainRender.h"
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Graphics/Draw/Simple/SimpleBox.h"
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+
+#include <Hacks\XNA\SamplerState.h>
+
 namespace CloudberryKingdom
 {
 	struct QuadDrawer

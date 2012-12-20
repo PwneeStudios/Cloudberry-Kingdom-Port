@@ -3,26 +3,25 @@
 namespace CloudberryKingdom
 {
 
-const float PressNote::TextScale = .555f / .7f *.8f;
+	const float PressNote::TextScale = .555f / .7f *.8f;
 
-#if defined(PC_VERSION)
-	PressNote::PressNote( const boost::shared_ptr<Door> &Parent ) :
-		GUI_Text( std::wstring( L"Press " ) + ButtonString::Up( ButtonScale ), Parent->getPos(), true ),
-		Life( 0 ),
-		LifeSpeed( 0 ),
-		DelayToFadeOut( 0 ),
-		Count( 0 )
-
-#endif
-#if ! defined(PC_VERSION)
-	PressNote::PressNote( const boost::shared_ptr<Door> &Parent ) :
-		GUI_Text( std::wstring( L"Press " ) + ButtonString::X( ButtonScale ), Parent->getPos(), true ),
-		Life( 0 ),
-		LifeSpeed( 0 ),
-		DelayToFadeOut( 0 ),
-		Count( 0 )
-	#endif
+	PressNote::PressNote( const boost::shared_ptr<Door> &Parent )
 	{
+	}
+
+	boost::shared_ptr<PressNote> PressNote::PressNote_Construct( const boost::shared_ptr<Door> &Parent )
+	{
+#if defined(PC_VERSION)
+		GUI_Text_Construct( std::wstring( L"Press " ) + ButtonString::Up( ButtonScale ), Parent->getPos(), true );
+#else
+		GUI_Text_Construct( std::wstring( L"Press " ) + ButtonString::X( ButtonScale ), Parent->getPos(), true );
+#endif
+
+		Life = 0;
+		LifeSpeed = 0;
+		DelayToFadeOut = 0;
+		Count = 0;
+
 		this->Parent = Parent;
 		Oscillate_Renamed = true;
 		OscillationSpeed = .0125f;
@@ -50,6 +49,8 @@ const float PressNote::TextScale = .555f / .7f *.8f;
 		MyPile->FancyPos->RelVal = Vector2( 33, 340 );
 
 		Active = true;
+
+		return boost::static_pointer_cast<PressNote>( shared_from_this() );
 	}
 
 	void PressNote::FadeIn()

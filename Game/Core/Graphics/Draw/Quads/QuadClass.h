@@ -1,6 +1,14 @@
 ﻿#ifndef QUADCLASS
 #define QUADCLASS
 
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/FancyColor.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+
+
+
 #include <global_header.h>
 
 #include "Hacks/NET/BinaryWriter.h"
@@ -34,7 +42,6 @@ namespace CloudberryKingdom
 		Color ShadowColor;
 		float ShadowScale;
 
-//C# TO C++ CONVERTER NOTE: The variable Quad was renamed since it is named the same as a user-defined type:
 		SimpleQuad Quad_Renamed;
 		BasePoint Base;
 

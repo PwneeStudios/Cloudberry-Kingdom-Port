@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Game/Localization.h"
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/Lambda_1.h"
 
 namespace CloudberryKingdom
 {

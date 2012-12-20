@@ -26,13 +26,10 @@ namespace CloudberryKingdom
 
 		virtual void Init( const boost::shared_ptr<LevelSeedData> &LevelSeed, bool MakeInBackground );
 
-	
 		boost::shared_ptr<LevelSeedData> _MakeThreadLevelSeed;
 		bool _MakeThreadMakeInBackground;
 		void _MakeThreadFunc();
 
-
-	
 		virtual void PhsxStep();
 
 		virtual void PostDraw();

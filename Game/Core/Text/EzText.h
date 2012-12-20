@@ -3,7 +3,10 @@
 
 #include <global_header.h>
 
+#include "Game/Localization.h"
+
 #include "Hacks/NET/StringBuilder.h"
+#include "Hacks/XNA/Rectangle.h"
 
 namespace CloudberryKingdom
 {

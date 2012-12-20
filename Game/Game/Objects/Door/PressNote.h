@@ -15,16 +15,10 @@ namespace CloudberryKingdom
 	
 		boost::shared_ptr<Door> Parent;
 
-#if defined(PC_VERSION)
-	
 		PressNote( const boost::shared_ptr<Door> &Parent );
-	#else
-		PressNote( const boost::shared_ptr<Door> &Parent );
-#endif
-
+		boost::shared_ptr<PressNote> PressNote_Construct( const boost::shared_ptr<Door> &Parent );
 	
 		int Life;
-
 	
 		int LifeSpeed; //9;
 		void FadeIn();

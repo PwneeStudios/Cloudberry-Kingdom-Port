@@ -1,6 +1,9 @@
 ﻿#ifndef SIMPLEQUAD
 #define SIMPLEQUAD
 
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+#include "Core/Effects/EzEffect.h"
+
 #include <global_header.h>
 
 namespace CloudberryKingdom

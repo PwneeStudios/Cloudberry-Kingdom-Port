@@ -64,7 +64,14 @@ namespace CloudberryKingdom
 		State = NewState;
 	}
 
-	FallingBlock::FallingBlock( bool BoxesOnly )
+	FallingBlock::FallingBlock( bool BoxesOnly ) :
+		TouchedOnce( false ), HitGround( false ),
+		Thwomp( false ),
+		AngryMaxSpeed( 0 ),
+		StartLife( 0 ), Life( 0 ),
+		State( static_cast<FallingBlockState>( 0 ) ),
+		EmittedExplosion( false ),
+		ResetTimer( 0 )
 	{
 		MyBox = boost::make_shared<AABox>();
 		MyDraw = boost::make_shared<NormalBlockDraw>();

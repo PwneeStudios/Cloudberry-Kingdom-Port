@@ -6,6 +6,8 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <Core\Animation\AnimQueue.h>
+
 namespace CloudberryKingdom
 {
 

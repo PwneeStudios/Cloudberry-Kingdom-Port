@@ -319,7 +319,8 @@ namespace CloudberryKingdom
 	void HeroRush_Tutorial::PointAtCoins()
 	{
 		std::vector<boost::shared_ptr<Arrow> > arrows;
-		for ( ObjectVec::const_iterator coin = MyGame->MyLevel->GetObjectList( ObjectType_COIN ).begin(); coin != MyGame->MyLevel->GetObjectList(ObjectType_COIN).end(); ++coin )
+		ObjectVec vec = MyGame->MyLevel->GetObjectList( ObjectType_COIN );
+		for ( ObjectVec::const_iterator coin = vec.begin(); coin != vec.end(); ++coin )
 		{
 			Vector2 coinpos = ( *coin )->getCore()->Data.Position;
 

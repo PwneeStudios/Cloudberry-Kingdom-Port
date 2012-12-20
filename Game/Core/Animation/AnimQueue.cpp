@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Core/Animation/AnimQueue.h>
+
 namespace CloudberryKingdom
 {
 

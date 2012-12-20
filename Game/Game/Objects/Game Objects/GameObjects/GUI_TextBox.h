@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 
 	struct GUI_TextBox : public GUI_Text
 	{
+
 		/// <summary>
 		/// Event handler. Activated when the the user presses Enter while the textbox has focus.
 		/// </summary>

@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
 namespace CloudberryKingdom
 {
 	struct PieceQuadData
@@ -66,9 +68,6 @@ namespace CloudberryKingdom
 
 		static boost::shared_ptr<PieceQuad> Get( const std::wstring &name );
 
-//C# TO C++ CONVERTER NOTE: The variable MovingBlock was renamed since it is named the same as a user-defined type:
-//C# TO C++ CONVERTER NOTE: The variable FallingBlock was renamed since it is named the same as a user-defined type:
-//C# TO C++ CONVERTER NOTE: The variable BouncyBlock was renamed since it is named the same as a user-defined type:
 		static boost::shared_ptr<PieceQuad> MovingBlock_Renamed, FallingBlock_Renamed, BouncyBlock_Renamed, Elevator;
 		static boost::shared_ptr<BlockGroup> FallGroup, BouncyGroup, MovingGroup, ElevatorGroup;
 

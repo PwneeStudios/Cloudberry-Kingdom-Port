@@ -1,7 +1,8 @@
 ﻿#ifndef MAINRENDER
 #define MAINRENDER
 
-#include "Hacks/XNA/SpriteBatch.h"
+#include <Hacks/XNA/SpriteBatch.h>
+#include <Hacks/XNA/Viewport.h>
 
 namespace CloudberryKingdom
 {

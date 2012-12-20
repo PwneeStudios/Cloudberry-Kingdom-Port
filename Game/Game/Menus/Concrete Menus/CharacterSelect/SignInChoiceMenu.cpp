@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	{
 		sim->MyCharacterSelect->Player->StoredName = std::wstring( L"" );
 		sim->MyCharacterSelect->Player->Init();
-		sim->Call( boost::make_shared<SimpleMenu>( sim->getControl(), sim->MyCharacterSelect ) );
+		sim->Call( MakeMagic( SimpleMenu, ( sim->getControl(), sim->MyCharacterSelect ) ) );
 		sim->Hide();
 	}
 #endif
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		// The guide just went down. Check to see if someone signed in and act accordingly.
 		if ( MyCharacterSelect->getPlayer()->getMyGamer() != 0 )
 		{
-			Call( boost::make_shared<SimpleMenu>( getControl(), MyCharacterSelect ) );
+			Call( MakeMagic( SimpleMenu, ( getControl(), MyCharacterSelect ) ) );
 			Hide();
 		}
 		else

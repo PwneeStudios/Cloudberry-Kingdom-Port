@@ -3,6 +3,11 @@
 
 #include <global_header.h>
 
+#include "Core/PhsxData.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+
+#include "Core/Graphics/Draw/Simple/BasePoint.h"
+
 #include "Hacks/Mutex.h"
 
 namespace CloudberryKingdom

@@ -3,6 +3,16 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/LambdaFunc.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+#include "Core/Lambdas/LambdaFunc_2.h"
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Lambdas/Lambda_2.h"
+#include "Core/Lambdas/Multicaster.h"
+#include "Core/Lambdas/Multicaster_1.h"
+#include "Core/Lambdas/Multicaster_2.h"
+
 namespace CloudberryKingdom
 {
 
