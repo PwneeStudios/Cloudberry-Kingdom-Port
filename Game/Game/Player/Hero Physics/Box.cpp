@@ -2,6 +2,8 @@
 
 #include "Hacks/Queue.h"
 
+#include <Core\Animation\AnimQueue.h>
+
 namespace CloudberryKingdom
 {
 

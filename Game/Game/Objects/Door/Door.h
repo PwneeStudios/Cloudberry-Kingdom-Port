@@ -3,6 +3,36 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/LambdaFunc.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+#include "Core/Lambdas/LambdaFunc_2.h"
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Lambdas/Lambda_2.h"
+#include "Core/Lambdas/Multicaster.h"
+#include "Core/Lambdas/Multicaster_1.h"
+#include "Core/Lambdas/Multicaster_2.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/FancyColor.h"
+#include "Core/PhsxData.h"
+#include "Core/Graphics/Draw/Simple/SimpleVector.h"
+#include "Core/Graphics/Draw/Simple/SimpleQuad.h"
+#include "Core/WriteReadTools.h"
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/MainRender.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/Object/ObjectBox.h"
+#include "Core/Graphics/Draw/Quads/BaseQuad.h"
+#include "Core/Graphics/Draw/Quads/ObjectVector.h"
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Graphics/Draw/Quads/Quad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+#include "Core/Graphics/Draw/Simple/SimpleBox.h"
+#include "Core/Graphics/Draw/Simple/SimpleObject.h"
+
 namespace CloudberryKingdom
 {
 	struct Door : public ILevelConnector

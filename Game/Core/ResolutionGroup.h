@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Game/Tools/IntVector2.h"
+
 #include "Hacks/XNA/DisplayMode.h"
 
 namespace CloudberryKingdom
@@ -23,7 +25,6 @@ namespace CloudberryKingdom
 
 		void Use();
 
-//C# TO C++ CONVERTER NOTE: The variable Bob was renamed since it is named the same as a user-defined type:
 		IntVector2 Backbuffer, Bob_Renamed;
 
 		Vector2 TextOrigin;

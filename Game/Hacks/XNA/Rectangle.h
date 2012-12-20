@@ -4,8 +4,6 @@
 struct Rectangle
 {
 
-
-
 	int X, Y, Width, Height;
 
 	Rectangle() : X( 0 ), Y( 0 ), Width( 0 ), Height( 0 ) { }

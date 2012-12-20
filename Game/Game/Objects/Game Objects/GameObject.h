@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/Multicaster.h"
+
 namespace CloudberryKingdom
 {
 	struct GameObject : public ObjectBase

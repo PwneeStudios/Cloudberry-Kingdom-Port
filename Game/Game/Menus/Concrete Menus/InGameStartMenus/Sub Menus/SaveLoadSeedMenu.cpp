@@ -328,7 +328,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
-		boost::shared_ptr<SaveSeedAs> SaveAs = boost::make_shared<SaveSeedAs>( panel->getControl(), player );
+		boost::shared_ptr<SaveSeedAs> SaveAs = MakeMagic( SaveSeedAs, ( panel->getControl(), player ) );
 		panel->Call( SaveAs, 0 );
 	}
 #endif
@@ -397,7 +397,7 @@ boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 
 	void SaveLoadSeedMenu::LoadString( const boost::shared_ptr<MenuItem> &_item )
 	{
-		boost::shared_ptr<LoadSeedAs> LoadAs = boost::make_shared<LoadSeedAs>( getControl(), player );
+		boost::shared_ptr<LoadSeedAs> LoadAs = MakeMagic( LoadSeedAs, ( getControl(), player ) );
 		Call( LoadAs, 0 );
 	}
 

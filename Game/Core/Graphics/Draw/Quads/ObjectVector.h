@@ -1,13 +1,19 @@
 ﻿#ifndef OBJECTVECTOR
 #define OBJECTVECTOR
 
+#include "Core/Lambdas/Lambda_1.h"
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Animation/AnimationData_Integer.h"
+
 #include <global_header.h>
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"
 
+
 namespace CloudberryKingdom
 {
+
 	struct ObjectVector : public boost::enable_shared_from_this<ObjectVector>
 	{
 	

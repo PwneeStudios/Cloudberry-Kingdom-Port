@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include <Hacks\XNA\RenderTarget2D.h>
+
 namespace CloudberryKingdom
 {
 	struct Level : public boost::enable_shared_from_this<Level>

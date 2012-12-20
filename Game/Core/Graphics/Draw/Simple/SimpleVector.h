@@ -3,11 +3,16 @@
 
 #include <global_header.h>
 
+#include "Core/Graphics/VertexFormat.h"
+
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Animation/AnimationData_Integer.h"
+
 namespace CloudberryKingdom
 {
 	struct SimpleVector
 	{
-	
+
 		AnimationData AnimData;
 		MyOwnVertexFormat Vertex;
 		Vector2 Pos;

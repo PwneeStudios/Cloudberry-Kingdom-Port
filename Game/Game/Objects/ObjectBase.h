@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include <Core/Lambdas/Lambda.h>
+
 namespace CloudberryKingdom
 {
 	

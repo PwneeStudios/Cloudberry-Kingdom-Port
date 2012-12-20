@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include "Door.h"
 
 namespace CloudberryKingdom
 {
@@ -257,7 +258,7 @@ namespace CloudberryKingdom
 
 		if ( MyPressNote == 0 )
 		{
-			MyPressNote = boost::make_shared<PressNote>( boost::static_pointer_cast<Door>( shared_from_this() ) );
+			MyPressNote = MakeMagic( PressNote, ( boost::static_pointer_cast<Door>( shared_from_this() ) ) );
 			getCore()->MyLevel->MyGame->AddGameObject(MyPressNote);
 		}
 		else

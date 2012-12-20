@@ -3,6 +3,21 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Lambda.h"
+#include "Core/Lambdas/LambdaFunc_1.h"
+
+#include "Core/FancyVector2.h"
+#include "Core/FancyColor.h"
+#include "Core/PhsxData.h"
+#include "Core/Animation/SpriteAnim.h"
+#include "Core/Effects/EzEffectWad.h"
+#include "Core/Effects/EzEffect.h"
+#include "Core/Graphics/MainRender.h"
+#include "Core/Graphics/QuadDrawer.h"
+#include "Core/Graphics/Draw/DrawPile.h"
+#include "Core/Graphics/Draw/Quads/PieceQuad.h"
+#include "Core/Graphics/Draw/Quads/QuadClass.h"
+
 namespace CloudberryKingdom
 {
 

@@ -279,7 +279,7 @@ bool InGameStartMenu::PreventMenu = false;
 	#if !defined(PC_VERSION)
 		if ( !getMyLevel()->CanLoadLevels )
 		{
-			Call( boost::make_shared<SaveSeedAs>( getControl(), MenuItem::GetActivatingPlayerData() ), 0 );
+			Call( MakeMagic( SaveSeedAs, ( getControl(), MenuItem::GetActivatingPlayerData() ) ), 0 );
 		}
 		else
 	#endif

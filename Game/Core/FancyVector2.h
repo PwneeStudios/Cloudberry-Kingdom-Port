@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Core/Animation/AnimationData_Vector.h"
+#include "Core/Animation/AnimationData_Integer.h"
+
 namespace CloudberryKingdom
 {
 	struct IPos
@@ -13,7 +16,6 @@ namespace CloudberryKingdom
 
 	struct FancyVector2 : public IPos
 	{
-	
 
 		AnimationData AnimData;
 

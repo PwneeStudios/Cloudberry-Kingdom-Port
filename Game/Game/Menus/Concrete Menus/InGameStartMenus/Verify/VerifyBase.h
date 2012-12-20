@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Multicaster_1.h"
+
 namespace CloudberryKingdom
 {
 	struct VerifyBaseMenu : public CkBaseMenu

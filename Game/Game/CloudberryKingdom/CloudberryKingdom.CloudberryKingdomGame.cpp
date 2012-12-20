@@ -635,7 +635,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		ButtonCheck::UpdateControllerAndKeyboard_EndOfStep( Resolution );
 
 		// Update the fireball textures.
-		//Fireball::TexturePhsx();
+		Fireball::TexturePhsx();
 	}
 
 #if defined(WINDOWS)
@@ -882,7 +882,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		Tools::Render->SetStandardRenderStates();
 
 		Tools::QDrawer->SetInitialState();
-		//ComputeFire();
+		ComputeFire();
 
 		Tools::EffectWad->SetCameraPosition( cameraPos );
 

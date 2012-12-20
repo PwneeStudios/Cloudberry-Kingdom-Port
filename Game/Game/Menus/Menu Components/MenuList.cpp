@@ -43,8 +43,8 @@ namespace CloudberryKingdom
 	{
 		if ( MyMenuListExpand == 0 || MyMenuListExpand->getCore()->Released )
 		{
-			MyMenuListExpand = boost::make_shared<MenuListExpand>( this->Control,
-				boost::static_pointer_cast<MenuList>( shared_from_this() )
+			MyMenuListExpand = MakeMagic( MenuListExpand, ( this->Control,
+				boost::static_pointer_cast<MenuList>( shared_from_this() ) )
 			);
 			Tools::CurGameData->AddGameObject( MyMenuListExpand );
 			MyMenu->Active = false;

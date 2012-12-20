@@ -3,6 +3,11 @@
 namespace CloudberryKingdom
 {
 
+	EzTexture::EzTexture()
+	{
+		InitializeInstanceFields();
+	}
+
 	const boost::shared_ptr<Texture2D> &EzTexture::getTex() const
 	{
 		return _Tex;

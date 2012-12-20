@@ -3,6 +3,8 @@
 
 #include <global_header.h>
 
+#include <Hacks\XNA\PresentationParameters.h>
+
 namespace CloudberryKingdom
 {
 	struct Fireball : public _CircleDeath

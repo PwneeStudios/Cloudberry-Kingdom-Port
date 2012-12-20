@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct EzTexture
 	{
 	
@@ -41,25 +42,17 @@ namespace CloudberryKingdom
 		/// </summary>
 		Vector2 BL, TR;
 
-#if defined(EDITOR)
-		static boost::shared_ptr<Game> game;
 		bool Load();
-#else
-		bool Load();
-#endif
 
 		virtual std::wstring ToString();
 
 	
 		void InitializeInstanceFields();
 
+		EzTexture();
 
-		EzTexture()
-		{
-			InitializeInstanceFields();
-		}
 	};
-}
 
+}
 
 #endif	//#ifndef EZTEXTURE

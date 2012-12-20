@@ -3,6 +3,9 @@
 
 #include <global_header.h>
 
+#include "Core/Lambdas/Lambda.h"
+#include "Game/Tools/Oscillate.h"
+
 namespace CloudberryKingdom
 {
 	struct DrawPile : public boost::enable_shared_from_this<DrawPile>
@@ -25,7 +28,6 @@ namespace CloudberryKingdom
 	
 		struct WaitThenPop2 : public Lambda
 		{
-		
 			void Apply();
 		};
 	
