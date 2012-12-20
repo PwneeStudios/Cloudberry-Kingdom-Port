@@ -1,6 +1,8 @@
 #include "StringBuilder.h"
 
-#include <Hacks\List.h>
+#include <cmath>
+#include <Hacks/List.h>
+#include <Utility/Limits.h>
 
 StringBuilder::StringBuilder( const std::wstring &str )
 {

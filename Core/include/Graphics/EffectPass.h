@@ -11,7 +11,7 @@ class EffectPass
 
 public:
 
-	EffectPass( const Effect &effect, unsigned int id );
+	EffectPass( Effect &effect, unsigned int id );
 	~EffectPass();
 
 	void Apply();

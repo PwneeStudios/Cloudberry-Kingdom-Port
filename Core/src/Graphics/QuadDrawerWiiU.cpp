@@ -35,7 +35,7 @@ struct RenderBatch
 typedef std::vector< RenderBatch > BatchList;
 
 // static void InitShader( DEMOGfxShader *shader, AttribBuffer *attribData )
-static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer, u32 &sampler )
+/*static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer, u32 &sampler )
 {
 	void *gshBuf;
 	u32 gshLen;
@@ -74,18 +74,18 @@ static void InitShader( DEMOGfxShader *shader, GX2RBuffer *positionBuffer, u32 &
 
 	GX2SetShaders( &shader->fetchShader, shader->pVertexShader, shader->pPixelShader );
 }
-
+*/
 
 struct QuadDrawerInternal
 {
-	DEMOGfxShader SimpleShader;
+	//DEMOGfxShader SimpleShader;
 	GX2RBuffer QuadBuffer;
 	std::vector<QuadVert> LocalQuadBuffer;
 
 	QuadVert *Vertices;
 	u32 NumElements;
 
-	u32 SamplerLocation;
+	//u32 SamplerLocation;
 	GX2Sampler Sampler;
 
 	BatchList Batches;
@@ -98,7 +98,7 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 {
 	internal_->Vertices = 0;
 	internal_->NumElements = 0;
-	internal_->SamplerLocation = 0;
+	//internal_->SamplerLocation = 0;
 
 	internal_->LocalQuadBuffer.reserve( MAX_QUADS * 4 );
 
@@ -107,7 +107,7 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 		MAX_QUADS * 4 );
 	GX2RSetBufferName( &internal_->QuadBuffer, "QuadBuffer" );
 
-	InitShader( &internal_->SimpleShader, &internal_->QuadBuffer, internal_->SamplerLocation );
+	//InitShader( &internal_->SimpleShader, &internal_->QuadBuffer, internal_->SamplerLocation );
 
 	GX2InitSampler( &internal_->Sampler, GX2_TEX_CLAMP_CLAMP, GX2_TEX_XY_FILTER_BILINEAR );
 
@@ -115,15 +115,12 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);*/
 
-	GX2SetDepthOnlyControl( GX2_TRUE, GX2_TRUE, GX2_COMPARE_ALWAYS );
-	GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
-
 	GX2SetDebugMode( ( GX2DebugMode )( GX2_DEBUG_MODE_FLUSH_PER_DRAW | GX2_DEBUG_MODE_DONE_PER_FLUSH ) );
 }
 
 QuadDrawerWiiU::~QuadDrawerWiiU()
 {
-	DEMOGfxFreeShaders( &internal_->SimpleShader );
+	//DEMOGfxFreeShaders( &internal_->SimpleShader );
 
 	//GX2RUnlockBuffer( &internal_->QuadBuffer );
 
@@ -190,6 +187,9 @@ void QuadDrawerWiiU::Flush()
 	if( internal_->NumElements == 0 )
 		return;
 
+	GX2SetDepthOnlyControl( GX2_TRUE, GX2_TRUE, GX2_COMPARE_ALWAYS );
+	GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+
 	internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);
@@ -199,17 +199,25 @@ void QuadDrawerWiiU::Flush()
 	//GX2RUnlockBuffer( &internal_->QuadBuffer );
 	//GX2SetShaders( &internal_->SimpleShader.fetchShader, internal_->SimpleShader.pVertexShader, internal_->SimpleShader.pPixelShader );
 	internal_->Effect->CurrentTechnique->Passes[ 0 ]->Apply();
+	/*internal_->Effect->Parameters( "u_cameraPos" )->SetValue( Vector4( 0, 0, 0.001f, 0.001f ) );
+	internal_->Effect->Parameters( "u_cameraAspect" )->SetValue( 1.77778f );
+	internal_->Effect->Parameters( "u_flipVector" )->SetValue( Vector2( -1, -1 ) );
+	internal_->Effect->Parameters( "u_flipCenter" )->SetValue( Vector2( 0, 0 ) );
+	internal_->Effect->Parameters( "u_illumination" )->SetValue( 1.f );*/
 
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 0, 0 );
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 1, offsetof( QuadVert, TexCoord ) );
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 2, offsetof( QuadVert, Color ) );
 
+	GX2SetPixelSampler( &internal_->Sampler, 0 );
+
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
-		batch.Map->Activate( internal_->SamplerLocation );
-		GX2SetPixelSampler( &internal_->Sampler, internal_->SamplerLocation );
+		/*batch.Map->Activate( internal_->SamplerLocation );
+		GX2SetPixelSampler( &internal_->Sampler, internal_->SamplerLocation );*/
+		batch.Map->Activate( 0 );
 		GX2DrawEx( GX2_PRIMITIVE_QUADS, batch.NumElements, batch.Offset, 1 );	
 	}
 	

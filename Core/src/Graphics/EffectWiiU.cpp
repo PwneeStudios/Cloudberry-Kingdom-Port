@@ -14,6 +14,13 @@
 
 static void InitShader( const std::string &shaderFile, DEMOGfxShader *shader );
 
+void Effect::Apply()
+{
+	std::map<std::string, boost::shared_ptr<EffectParameter> >::iterator i;
+	for( i = internal_->Parameters.begin(); i != internal_->Parameters.end(); ++i )
+		i->second->Apply();
+}
+
 Effect::Effect() :
 	internal_( new EffectInternal )
 {
@@ -28,17 +35,22 @@ void Effect::Load( const std::string &name )
 {
 	InitShader( name + ".gsh", &internal_->Shader );
 
-	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( 0, 0 );
+	// FIXME: The offset is 14 because 14 is a nice number sometimes.
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( *this, 0xffff );
 	for( int i = 0; i < internal_->Shader.pVertexShader->numUniforms; ++i )
 	{
 		GX2UniformVar *var = &internal_->Shader.pVertexShader->uniformVars[ i ];
-		internal_->Parameters[ var->name ] = boost::make_shared<EffectParameter>( 0, var->offset );
+		internal_->Parameters[ var->name ] = boost::make_shared<EffectParameter>( *this,
+			GX2GetVertexUniformVarOffset( internal_->Shader.pVertexShader, var->name )
+		);
 	}
 
 	for( int i = 0; i < internal_->Shader.pPixelShader->numSamplers; ++i )
 	{
 		GX2SamplerVar *var = &internal_->Shader.pPixelShader->samplerVars[ i ];
-		internal_->Parameters[ var->name ] = boost::make_shared<EffectParameter>( 0, var->location );
+		internal_->Parameters[ var->name ] = boost::make_shared<EffectParameter>( *this,
+			GX2GetPixelSamplerVarLocation( internal_->Shader.pPixelShader, var->name )
+		);
 	}
 
 	for( unsigned int i = 0; i  < internal_->Shader.pVertexShader->numAttribs; ++i )
@@ -48,7 +60,7 @@ void Effect::Load( const std::string &name )
 	}
 
 	DefaultTechnique = boost::make_shared<EffectTechnique>(
-		boost::make_shared<EffectPass>( *this, 0 )
+		boost::shared_ptr<EffectPass>( new EffectPass( *this, 0 ) )
 	);
 	CurrentTechnique = DefaultTechnique;
 }

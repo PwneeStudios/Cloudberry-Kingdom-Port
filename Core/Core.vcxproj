@@ -66,6 +66,7 @@
     <ClInclude Include="include\Math\Vectors.h" />
     <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
+    <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
   </ItemGroup>
   <ItemGroup>

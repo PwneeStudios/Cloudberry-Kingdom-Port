@@ -186,6 +186,9 @@
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Graphics\EffectInternalPc.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">

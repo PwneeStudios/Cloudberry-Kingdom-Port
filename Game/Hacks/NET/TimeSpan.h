@@ -31,7 +31,7 @@ struct TimeSpan
 
 	float getTotalSeconds()
 	{
-		return TotalMinutes * 60.f;
+		return TotalSeconds;
 	}
 
 	float getTotalMilliseconds()

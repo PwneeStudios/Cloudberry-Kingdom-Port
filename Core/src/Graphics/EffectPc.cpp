@@ -7,16 +7,18 @@
 #include <sstream>
 #include <Utility/Log.h>
 
+#include "EffectInternalPc.h"
+
 static std::string ReadFile( const std::string &path );
 static GLuint CreateShader( GLenum type, const std::string &src );
 static GLuint CreateProgram( const std::string &name );
 
-struct EffectInternal
+void Effect::Apply()
 {
-	std::map<std::string, boost::shared_ptr<EffectParameter> > Parameters;
-
-	GLuint Program;
-};
+	std::map<std::string, boost::shared_ptr<EffectParameter> >::iterator i;
+	for( i = internal_->Parameters.begin(); i != internal_->Parameters.end(); ++i )
+		i->second->Apply();
+}
 
 Effect::Effect() :
 	internal_( new EffectInternal )
@@ -36,7 +38,7 @@ void Effect::Load( const std::string &name )
 	GLint activeUniforms;
 	glGetProgramiv( internal_->Program, GL_ACTIVE_UNIFORMS, &activeUniforms );
 
-	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( internal_->Program, -1 );
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( *this, -1 );
 	for( GLint i = 0; i < activeUniforms; ++i )
 	{
 		GLchar buffer[ 256 ];
@@ -45,7 +47,7 @@ void Effect::Load( const std::string &name )
 		GLenum type;
 		glGetActiveUniform( internal_->Program, i, sizeof( buffer ), &length, &size, &type, buffer );
 
-		internal_->Parameters[ buffer ] = boost::make_shared<EffectParameter>( internal_->Program, i );
+		internal_->Parameters[ buffer ] = boost::make_shared<EffectParameter>( *this, i );
 	}
 
 	DefaultTechnique = boost::make_shared<EffectTechnique>(

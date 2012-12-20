@@ -7,6 +7,9 @@
 #include <boost/make_shared.hpp>
 #include <boost/enable_shared_from_this.hpp>
 
+// Forward declarations.
+class Effect;
+
 class EffectParameter
 {
 
@@ -14,7 +17,7 @@ class EffectParameter
 
 public:
 
-	EffectParameter( unsigned int progId, int id );
+	EffectParameter( const Effect &effect, int id );
 	~EffectParameter();
 
 	void SetValue( const Vector4 &v );
@@ -24,6 +27,8 @@ public:
 	void SetValue( float v );
 	void SetValue( int v );
 	float GetValueSingle();
+
+	void Apply();
 
 };
 

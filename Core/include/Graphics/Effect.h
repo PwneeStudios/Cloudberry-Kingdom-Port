@@ -18,6 +18,9 @@ class Effect
 	struct EffectInternal *internal_;
 	
 	friend class EffectPass;
+	friend class EffectParameter;
+
+	void Apply();
 
 public:
 

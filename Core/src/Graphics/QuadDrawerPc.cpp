@@ -265,9 +265,10 @@ void QuadDrawerPc::Flush()
 	if( internal_->NumElements == 0 )
 		return;
 
+	internal_->TextureParameter->SetValue( 0 );
+
 	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-	internal_->TextureParameter->SetValue( 0 );
 	//glUseProgram( internal_->Program );
 	//glUniform1i( internal_->TexUniform, 0 );
 
