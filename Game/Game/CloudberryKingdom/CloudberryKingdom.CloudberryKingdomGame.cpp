@@ -11,6 +11,10 @@
 #include <MasterHack.h>
 #include <Utility/Log.h>
 
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+#include "Game/Tilesets/Backgrounds/Background.h"
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
 namespace CloudberryKingdom
 {
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()

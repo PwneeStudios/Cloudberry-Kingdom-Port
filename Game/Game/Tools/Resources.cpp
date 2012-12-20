@@ -15,6 +15,8 @@
 #include <ResourceList\Resources_Sound.h>
 #include <Utility/Log.h>
 
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
 namespace CloudberryKingdom
 {
 

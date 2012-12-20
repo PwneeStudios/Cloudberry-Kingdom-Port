@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
 namespace CloudberryKingdom
 {
 
