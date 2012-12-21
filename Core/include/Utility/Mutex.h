@@ -4,6 +4,8 @@
 struct Mutex
 {
 
+	struct MutexInternal *internal_;
+
 	Mutex();
 	~Mutex();
 	void Lock();

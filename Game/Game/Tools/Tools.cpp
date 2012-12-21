@@ -6,7 +6,7 @@
 
 #include "Hacks/NET/Path.h"
 #include "Hacks/NET/Directory.h"
-#include "Hacks/XNA/GamePad.h"
+#include <Input/GamePad.h>
 #include "Hacks/XNA/MediaPlayer.h"
 #include <Input/Mouse.h>
 

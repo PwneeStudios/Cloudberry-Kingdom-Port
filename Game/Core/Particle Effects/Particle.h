@@ -8,7 +8,7 @@
 
 #include "Core/Graphics/Draw/Simple/BasePoint.h"
 
-#include "Hacks/Mutex.h"
+#include <Utility/Mutex.h>
 
 namespace CloudberryKingdom
 {

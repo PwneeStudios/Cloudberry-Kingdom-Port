@@ -2,7 +2,7 @@
 
 #include <Input/Keyboard.h>
 #include <Input/Mouse.h>
-#include "Hacks\XNA\GamePad.h"
+#include <Input/GamePad.h>
 #include <Hacks\List.h>
 
 #include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>

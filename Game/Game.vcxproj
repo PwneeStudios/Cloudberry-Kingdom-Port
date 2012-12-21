@@ -359,16 +359,10 @@
     <ClCompile Include="Game\Video.cpp" />
     <ClCompile Include="global_header.cpp" />
     <ClCompile Include="Hacks\FileReader.cpp" />
-    <ClCompile Include="Hacks\MutexPc.cpp" />
-    <ClCompile Include="Hacks\MutexWiiU.cpp">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
-    </ClCompile>
     <ClCompile Include="Hacks\NET\BinaryReader.cpp" />
     <ClCompile Include="Hacks\NET\BinaryWriter.cpp" />
     <ClCompile Include="Hacks\NET\StringBuilder.cpp" />
     <ClCompile Include="Hacks\XNA\ContentManager.cpp" />
-    <ClCompile Include="Hacks\XNA\GamePad.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDevice.cpp" />
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Hacks\XNA\SpriteBatch.cpp" />
@@ -767,19 +761,12 @@
     <ClInclude Include="Hacks\NET\FileStream.h" />
     <ClInclude Include="Hacks\FileWriter.h" />
     <ClInclude Include="Hacks\XNA\Game.h" />
-    <ClInclude Include="Hacks\XNA\GamePad.h" />
-    <ClInclude Include="Hacks\XNA\GamePadButtons.h" />
-    <ClInclude Include="Hacks\XNA\GamePadDPad.h" />
-    <ClInclude Include="Hacks\XNA\GamePadState.h" />
-    <ClInclude Include="Hacks\XNA\GamePadThumbSticks.h" />
-    <ClInclude Include="Hacks\XNA\GamePadTriggers.h" />
     <ClInclude Include="Hacks\XNA\GameServiceContainer.h" />
     <ClInclude Include="Hacks\XNA\GameTime.h" />
     <ClInclude Include="Hacks\XNA\GraphicsDevice.h" />
     <ClInclude Include="Hacks\XNA\GraphicsDeviceManager.h" />
     <ClInclude Include="Hacks\NET\IAsyncResult.h" />
     <ClInclude Include="Hacks\XNA\MediaPlayer.h" />
-    <ClInclude Include="Hacks\Mutex.h" />
     <ClInclude Include="Hacks\NET\Path.h" />
     <ClInclude Include="Hacks\XNA\PreparingDeviceSettingsEventArgs.h" />
     <ClInclude Include="Hacks\XNA\PresentationParameters.h" />

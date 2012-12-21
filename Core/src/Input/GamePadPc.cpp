@@ -1,6 +1,12 @@
-#include "GamePad.h"
+#include <Input/GamePad.h>
 
-#include <enums.h>
+void GamePad::Initialize()
+{
+}
+
+void GamePad::Update()
+{
+}
 
 GamePadState GamePad::GetState( PlayerIndex index )
 {
@@ -8,5 +14,9 @@ GamePadState GamePad::GetState( PlayerIndex index )
 }
 
 void GamePad::SetVibration( PlayerIndex index, float left, float right )
+{
+}
+
+void GamePad::Shutdown()
 {
 }

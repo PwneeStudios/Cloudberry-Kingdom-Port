@@ -16,6 +16,7 @@ bool File::ReadAsString( const std::string &path, std::string &str )
 
 #ifdef CAFE
 	u32 length;
+	LOG.Write( "DEMOFSSimpleRead( %s )\n", path.c_str() );
 	char *fileContents = reinterpret_cast< char * >( DEMOFSSimpleRead( path.c_str(), &length ) );
 	str.reserve( length );
 	str.assign( fileContents, fileContents + length );

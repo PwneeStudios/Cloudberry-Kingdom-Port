@@ -1,10 +1,10 @@
 #ifndef _GAMEPADSTATE_H_
 #define _GAMEPADSTATE_H_
 
-#include "Hacks/XNA/GamePadButtons.h"
-#include "Hacks/XNA/GamePadTriggers.h"
-#include "Hacks/XNA/GamePadDPad.h"
-#include "Hacks/XNA/GamePadThumbSticks.h"
+#include "GamePadButtons.h"
+#include "GamePadTriggers.h"
+#include "GamePadDPad.h"
+#include "GamePadThumbSticks.h"
 
 struct GamePadState
 {
