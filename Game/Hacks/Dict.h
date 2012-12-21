@@ -16,6 +16,14 @@ bool Contains( const std::map<key, item> &m, const key &k )
 	return m.find( k ) != m.end();
 }
 
+template< class item>
+bool Contains( const std::map<std::wstring, item> &m, const std::wstring &k )
+{
+	using namespace std;
+
+	return m.find( ToLower( k ) ) != m.end();
+}
+
 template<class item>
 void Add( std::map<std::wstring, item> &m, const std::wstring &k, const item &o )
 {

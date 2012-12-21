@@ -5,13 +5,14 @@ namespace CloudberryKingdom
 
 	void Recycler::InitializeStatics()
 	{
+		Recycler::MetaBinLock = boost::make_shared<Mutex>();
 		Recycler::MetaCount = 0;
 	}
 
 	// Statics
 	int Recycler::MetaCount;
 	std::vector<boost::shared_ptr<Recycler> > Recycler::MetaBin;
-	Mutex Recycler::MetaBinLock;
+	boost::shared_ptr<Mutex> Recycler::MetaBinLock;
 
 
 	void RecycleBin::Release()
@@ -184,19 +185,21 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<Recycler> bin = 0;
 
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MetaBin )
 		{
-			MetaBinLock.Lock();
+			MetaBinLock->Lock();
 
 			MetaCount++;
 			if ( MetaBin.empty() )
+			{
+				MetaBinLock->Unlock();
 				return boost::make_shared<Recycler>();
+			}
 
 			bin = MetaBin.back();
 			MetaBin.pop_back();
 
-			MetaBinLock.Unlock();
+			MetaBinLock->Unlock();
 		}
 
 		return bin;
@@ -208,12 +211,12 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MetaBin )
 		{
-			MetaBinLock.Lock();
+			MetaBinLock->Lock();
 
 			MetaCount--;
 			MetaBin.push_back( recycler );
 
-			MetaBinLock.Unlock();
+			MetaBinLock->Unlock();
 		}
 	}
 
@@ -222,13 +225,13 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( MetaBin )
 		{
-			MetaBinLock.Lock();
+			MetaBinLock->Lock();
 
 			for ( std::vector<boost::shared_ptr<Recycler> >::const_iterator recycler = MetaBin.begin(); recycler != MetaBin.end(); ++recycler )
 				( *recycler )->Empty( false );
 			//GC::Collect();
 
-			MetaBinLock.Unlock();
+			MetaBinLock->Unlock();
 		}
 	}
 

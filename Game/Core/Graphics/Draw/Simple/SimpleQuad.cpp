@@ -230,11 +230,12 @@ namespace CloudberryKingdom
 
 	void SimpleQuad::SetTextureOrAnim( const std::wstring &name )
 	{
-		if ( Contains( Tools::TextureWad->AnimationDict, name ) )
+		std::wstring lowercase = ToLower( name );
+		if ( Contains( Tools::TextureWad->AnimationDict, lowercase ) )
 		//if ( Tools::TextureWad->AnimationDict.find( name ) != Tools::TextureWad->AnimationDict.end() )
-			SetTextureAnim( Tools::TextureWad->AnimationDict[ name ] );
+			SetTextureAnim( Tools::TextureWad->AnimationDict[ lowercase ] );
 		else
-			setTextureName( name );
+			setTextureName( lowercase );
 	}
 
 	const int &SimpleQuad::getTexWidth() const

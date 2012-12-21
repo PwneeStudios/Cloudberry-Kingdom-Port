@@ -1428,8 +1428,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		//TileSetToTest = "sea_rain";
 		//TileSetToTest = "hills";
-		//TileSetToTest = "forest";
-		TileSetToTest = std::wstring( L"cloud" );
+		TileSetToTest = L"forest";
+		//TileSetToTest = std::wstring( L"cloud" );
 		//TileSetToTest = "cave";
 		//TileSetToTest = "castle";
 
@@ -1549,6 +1549,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//piece.MyUpgrades1->Get(Upgrade.SpikeyGuy) = 5;
 		//piece.MyUpgrades1->Get(Upgrade.FireSpinner) = 6;
 		//piece.MyUpgrades1->Get(Upgrade.GhostBlock) = 6;
+		piece->MyUpgrades1->Get( Upgrade_BOUNCY_BLOCK ) = 6;
 		//piece.MyUpgrades1->Get(Upgrade.Serpent) = 5;
 		//piece.MyUpgrades1->Get(Upgrade.Cloud) = 5;
 		//piece.MyUpgrades1->Get(Upgrade.Pinky) = 5;
@@ -1557,7 +1558,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//piece.MyUpgrades1->Get(Upgrade.BouncyBlock) = 5;
 		//piece.MyUpgrades1->Get(Upgrade.FallingBlock) = 5;
 
-		__Roughly_Abusive( piece );
+		//__Roughly_Abusive( piece );
 		//__Roughly_Maso(piece);
 		//piece.Style.Masochistic = true;
 
@@ -1759,12 +1760,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
-				ScreenSaver_Construct( Intro );
-				Intro->Init();
+				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
+				//ScreenSaver_Construct( Intro );
+				//Intro->Init();
 
 				return;
 	#else

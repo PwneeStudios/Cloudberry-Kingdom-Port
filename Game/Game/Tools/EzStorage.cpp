@@ -5,24 +5,25 @@ namespace CloudberryKingdom
 
 	void SaveGroup::InitializeStatics()
 	{
+		SaveGroup::CountLock = boost::make_shared<Mutex>();
 		SaveGroup::Count = boost::make_shared<WrappedInt>( 0 );
 	}
 
 	// Statics
 	boost::shared_ptr<WrappedInt> SaveGroup::Count;
-	Mutex SaveGroup::CountLock;
+	boost::shared_ptr<Mutex> SaveGroup::CountLock;
 	std::vector<boost::shared_ptr<SaveLoad> > SaveGroup::ThingsToSave;
 
 
 	void EzStorage::InitializeStatics()
 	{
-		EzStorage::InUseLock;
+		EzStorage::InUseLock = boost::make_shared<Mutex>();
 		EzStorage::Device = 0;
 		EzStorage::InUse = boost::make_shared<WrappedBool>( false );
 	}
 
 	// Statics
-	Mutex EzStorage::InUseLock;
+	boost::shared_ptr<Mutex> EzStorage::InUseLock;
 	boost::shared_ptr<StorageDevice> EzStorage::Device;
 	boost::shared_ptr<WrappedBool> EzStorage::InUse;
 
@@ -54,15 +55,17 @@ namespace CloudberryKingdom
 	{
 		while ( true )
 		{
-//C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 			//lock ( Count )
 			{
-				CountLock.Lock();
+				CountLock->Lock();
 
 				if ( Count->MyInt == 0 )
+				{
+					CountLock->Unlock();
 					return;
+				}
 
-				CountLock.Unlock();
+				CountLock->Unlock();
 			}
 
 			Thread::Delay( 1 );
@@ -128,11 +131,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( Count )
 		{
-			CountLock.Lock();
+			CountLock->Lock();
 
 			Count->MyInt++;
 
-			CountLock.Unlock();
+			CountLock->Unlock();
 		}
 	}
 
@@ -141,11 +144,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( Count )
 		{
-			CountLock.Lock();
+			CountLock->Lock();
 
 			Count->MyInt--;
 
-			CountLock.Unlock();
+			CountLock->Unlock();
 		}
 	}
 
@@ -286,11 +289,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
 		{
-			InUseLock.Lock();
+			InUseLock->Lock();
 
 			InUse->MyBool = true;
 
-			InUseLock.Unlock();
+			InUseLock->Unlock();
 		}
 
 		// Device is hooked up and ready for us to save to
@@ -342,11 +345,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
 		{
-			InUseLock.Lock();
+			InUseLock->Lock();
 
 			InUse->MyBool = false;
 
-			InUseLock.Unlock();
+			InUseLock->Unlock();
 		}
 	}
 
@@ -378,11 +381,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
 		{
-			InUseLock.Lock();
+			InUseLock->Lock();
 
 			InUse->MyBool = true;
 
-			InUseLock.Unlock();
+			InUseLock->Unlock();
 		}
 
 		// Device is hooked up and ready for us to load from
@@ -418,11 +421,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 			//lock ( InUse )
 			{
-				InUseLock.Lock();
+				InUseLock->Lock();
 
 				InUse->MyBool = false;
 
-				InUseLock.Unlock();
+				InUseLock->Unlock();
 			}
 
 			if ( FailLogic != 0 )
@@ -456,11 +459,11 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
 		{
-			InUseLock.Lock();
+			InUseLock->Lock();
 
 			InUse->MyBool = false;
 
-			InUseLock.Unlock();
+			InUseLock->Unlock();
 		}
 	}
 }

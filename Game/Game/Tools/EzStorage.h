@@ -56,7 +56,7 @@ namespace CloudberryKingdom
 
 	
 		static boost::shared_ptr<WrappedInt> Count;
-		static Mutex CountLock;
+		static boost::shared_ptr<Mutex> CountLock;
 
 		static void Incr();
 	
@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 	
 		static boost::shared_ptr<StorageDevice> Device;
 		static boost::shared_ptr<WrappedBool> InUse;
-		static Mutex InUseLock;
+		static boost::shared_ptr<Mutex> InUseLock;
 
 	
 		static bool DeviceOK();

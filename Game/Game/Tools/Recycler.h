@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	
 		static int MetaCount;
 		static std::vector<boost::shared_ptr<Recycler> > MetaBin;
-		static Mutex MetaBinLock;
+		static boost::shared_ptr<Mutex> MetaBinLock;
 	
 		static boost::shared_ptr<Recycler> GetRecycler();
 		static void ReturnRecycler( const boost::shared_ptr<Recycler> &recycler );
