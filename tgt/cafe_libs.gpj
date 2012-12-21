@@ -1,0 +1,35 @@
+#!gbuild
+# This file contains all of the Cafe OS libraries and should
+# be included as a Subproject of every Program built with SDK 2.06
+[Subproject]
+coredyn.a
+pad.a
+gfd.a
+mtx.a
+demo.a
+wbc.a
+wpad.a
+lint.a
+bti.a
+gx2ut.a
+nsyshid.a
+nlibcurl.a
+nsysnet.a
+nsysccr.a
+nsysuvd.a
+gx2.a
+avm.a
+tcl.a
+tve.a
+dc.a
+snd_core.a
+snd_user.a
+uvc.a
+uvd.a
+camera.a
+dmae.a
+nn_acp.a
+nn_save.a
+vpad.a
+vpadbase.a
+proc_ui.a
