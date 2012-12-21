@@ -9,6 +9,11 @@ namespace CloudberryKingdom
 
 	LevelItem::LevelItem( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked ) : MenuItem( Text )
 	{
+	}
+	boost::shared_ptr<LevelItem> LevelItem::LevelItem_Construct( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked )
+	{
+		MenuItem::MenuItem_Construct( Text );
+
 		this->StartLevel = StartLevel - 1;
 		this->MenuIndex = MenuIndex;
 
@@ -17,6 +22,8 @@ namespace CloudberryKingdom
 			MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
 			MySelectedText->MyFloatColor = ( bColor( 255, 160, 160 ) ).ToVector4();
 		}
+
+		return boost::static_pointer_cast<LevelItem>( shared_from_this() );
 	}
 
 	StartLevelMenu::GameReturnProxy::GameReturnProxy( const boost::shared_ptr<StartLevelMenu> &slm )
@@ -177,7 +184,7 @@ namespace CloudberryKingdom
 			int MenuIndex = i;
 			bool Locked = i >= IndexCutoff;
 
-			boost::shared_ptr<LevelItem> item = boost::make_shared<LevelItem>( boost::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked );
+			boost::shared_ptr<LevelItem> item = MakeMagic( LevelItem, ( boost::make_shared<EzText>( Names[ i ], Resources::Font_Grobold42 ), StartLevel, MenuIndex, Locked ) );
 			if ( !Locked )
 				item->setGo( boost::make_shared<LaunchProxy>( boost::static_pointer_cast<StartLevelMenu>( shared_from_this() ) ) );
 

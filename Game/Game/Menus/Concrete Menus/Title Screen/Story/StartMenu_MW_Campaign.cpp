@@ -15,6 +15,11 @@ namespace CloudberryKingdom
 	CampaignChapterItem::CampaignChapterItem( const boost::shared_ptr<EzText> &Text, int Chapter ) : MenuItem( Text )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<CampaignChapterItem> CampaignChapterItem::CampaignChapterItem_Construct( const boost::shared_ptr<EzText> &Text, int Chapter )
+	{
+		MenuItem::MenuItem_Construct( Text );
+
 		this->Chapter = Chapter;
 
 	#if !defined(DEBUG)
@@ -24,6 +29,8 @@ namespace CloudberryKingdom
 			this->Selectable = false;
 		}
 	#endif
+
+		return boost::static_pointer_cast<CampaignChapterItem>( shared_from_this() );
 	}
 
 	void CampaignChapterItem::InitializeInstanceFields()
@@ -121,42 +128,34 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Chapter 1
-		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 ) );
 		item->Name = std::wstring( L"MainCampaign" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
-		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 ) );
 		item->Name = std::wstring( L"Easy" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
-		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 ) );
 		item->Name = std::wstring( L"Hard" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
-		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 ) );
 		item->Name = std::wstring( L"Hardcore" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
-		item = boost::make_shared<CampaignChapterItem>( boost::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 ) );
 		item->Name = std::wstring( L"Maso" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
-
-		//// Cinematics
-		//item = new MenuItem(new EzText("Cinematics", ItemFont));
-		//item.Name = "Cine";
-		//item.Go = null;
-		//AddItem(item);
-		//item.MyText.MyFloatColor = new Color(241, 32, 117).ToVector4();
-		//item.MySelectedText.MyFloatColor = new Color(251, 52, 137).ToVector4();
 
 		MyMenu->SelectItem( 0 );
 

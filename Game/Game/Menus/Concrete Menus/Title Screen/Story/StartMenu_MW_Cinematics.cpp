@@ -6,7 +6,14 @@ namespace CloudberryKingdom
 	CinematicsLevelItem::CinematicsLevelItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Movie ) : MenuItem( Text )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<CinematicsLevelItem> CinematicsLevelItem::CinematicsLevelItem_Construct( const boost::shared_ptr<EzText> &Text, const std::wstring &Movie )
+	{
+		MenuItem::MenuItem_Construct( Text );
+
 		this->Movie = Movie;
+
+		return boost::static_pointer_cast<CinematicsLevelItem>( shared_from_this() );
 	}
 
 	void CinematicsLevelItem::InitializeInstanceFields()
@@ -89,37 +96,37 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Chapter 1
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Over the Edge" ), ItemFont ), std::wstring( L"Cutscene_1" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Over the Edge" ), ItemFont ), std::wstring( L"Cutscene_1" ) ) );
 		item->Name = std::wstring( L"1" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Into the Forest" ), ItemFont ), std::wstring( L"Cutscene_2" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Into the Forest" ), ItemFont ), std::wstring( L"Cutscene_2" ) ) );
 		item->Name = std::wstring( L"2" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Woes of a Kidnapper" ), ItemFont ), std::wstring( L"Cutscene_3" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Woes of a Kidnapper" ), ItemFont ), std::wstring( L"Cutscene_3" ) ) );
 		item->Name = std::wstring( L"3" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Welterweight" ), ItemFont ), std::wstring( L"Cutscene_4" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Welterweight" ), ItemFont ), std::wstring( L"Cutscene_4" ) ) );
 		item->Name = std::wstring( L"4" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"Cloudberry Pie" ), ItemFont ), std::wstring( L"Cutscene_5" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Cloudberry Pie" ), ItemFont ), std::wstring( L"Cutscene_5" ) ) );
 		item->Name = std::wstring( L"5" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ));
 		AddItem( item );
 
 		// Chapter 6
-		item = boost::make_shared<CinematicsLevelItem>( boost::make_shared<EzText>( std::wstring( L"I Always Told You" ), ItemFont ), std::wstring( L"Cutscene_6" ) );
+		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"I Always Told You" ), ItemFont ), std::wstring( L"Cutscene_6" ) ) );
 		item->Name = std::wstring( L"6" );
 		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
 		AddItem( item );

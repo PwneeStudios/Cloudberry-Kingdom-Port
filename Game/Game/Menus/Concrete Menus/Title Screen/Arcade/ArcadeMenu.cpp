@@ -7,10 +7,17 @@ namespace CloudberryKingdom
 
 	ArcadeItem::ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq ) : MenuItem( Text )
 	{
+	}
+	boost::shared_ptr<ArcadeItem> ArcadeItem::ArcadeItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq )
+	{
+		MenuItem::MenuItem_Construct( Text );
+
 		this->MyChallenge = MyChallenge;
 		this->MyPrereq = MyPrereq;
 
 		Locked = MyPrereq != 0 && !PlayerManager::Awarded( MyPrereq ) && !CloudberryKingdomGame::UnlockAll;
+
+		return boost::static_pointer_cast<ArcadeItem>( shared_from_this() );
 	}
 
 	ArcadeBaseMenu::PlayGameProxy::PlayGameProxy( const boost::shared_ptr<ArcadeBaseMenu> &abm )
@@ -219,7 +226,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<ArcadeItem> item;
 		Localization::Words word = challenge->MenuName != 0 ? challenge->MenuName : challenge->Name;
 
-		item = boost::make_shared<ArcadeItem>( boost::make_shared<EzText>( word, ItemFont ), challenge, prereq );
+		item = MakeMagic( ArcadeItem, ( boost::make_shared<EzText>( word, ItemFont ), challenge, prereq ) );
 
 		item->Name = itemname;
 		AddItem( item );

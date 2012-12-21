@@ -19,10 +19,10 @@ namespace CloudberryKingdom
 		int Chapter;
 
 		CampaignChapterItem( const boost::shared_ptr<EzText> &Text, int Chapter );
+		boost::shared_ptr<CampaignChapterItem> CampaignChapterItem_Construct( const boost::shared_ptr<EzText> &Text, int Chapter );
 
-
-	
 		void InitializeInstanceFields();
+
 	};
 
 	struct StartMenu_MW_Campaign : public StartMenu

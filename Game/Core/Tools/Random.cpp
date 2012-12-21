@@ -8,8 +8,8 @@ namespace CloudberryKingdom
 	Rand::Rand( int seed )
 	{
 		// FIXME: WARNING: testing 0 seed only.
-		//MySeed = seed;
-		MySeed = 0;
+		MySeed = seed;
+		//MySeed = 0;
 		Rnd = boost::make_shared<Random>( MySeed );
 	}
 

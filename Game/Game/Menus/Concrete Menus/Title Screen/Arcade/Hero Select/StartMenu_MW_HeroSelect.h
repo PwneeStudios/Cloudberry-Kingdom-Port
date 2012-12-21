@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 		bool Locked;
 
 		HeroItem( const boost::shared_ptr<BobPhsx> &Hero );
+		boost::shared_ptr<HeroItem> HeroItem_Construct( const boost::shared_ptr<BobPhsx> &Hero );
+
 	};
 
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu

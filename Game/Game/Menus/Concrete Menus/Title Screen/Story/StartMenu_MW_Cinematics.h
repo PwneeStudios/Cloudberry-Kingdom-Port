@@ -5,15 +5,17 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct CinematicsLevelItem : public MenuItem
 	{
 	
 		std::wstring Movie;
 
 		CinematicsLevelItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Movie );
-
+		boost::shared_ptr<CinematicsLevelItem> CinematicsLevelItem_Construct( const boost::shared_ptr<EzText> &Text, const std::wstring &Movie );
 	
 		void InitializeInstanceFields();
+
 	};
 
 	struct StartMenu_MW_Cinematics : public StartMenu

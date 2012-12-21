@@ -82,11 +82,18 @@ namespace CloudberryKingdom
 		return gui->Back( menu );
 	}
 
-	SavedSeedsGUI::SeedItem::SeedItem( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font ) : MenuItem( boost::make_shared<EzText>( name, font ) )
+	SavedSeedsGUI::SeedItem::SeedItem( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font ) : MenuItem( boost::shared_ptr<EzText>( 0 ) )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<SavedSeedsGUI::SeedItem> SavedSeedsGUI::SeedItem::SeedItem_Construct( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font )
+	{
+		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( name, font ) );
+
 		this->Name = name;
 		this->Seed = seed;
+
+		return boost::static_pointer_cast<SavedSeedsGUI::SeedItem>( shared_from_this() );
 	}
 
 	void SavedSeedsGUI::SeedItem::ToggleDeletion()
@@ -456,7 +463,7 @@ namespace CloudberryKingdom
 			std::wstring name = LevelSeedData::GetNameFromSeedStr( *seed );
 
 			// Get name of seed
-			boost::shared_ptr<MenuItem> seeditem = boost::make_shared<SeedItem>( name, *seed, ItemFont );
+			boost::shared_ptr<MenuItem> seeditem = MakeMagic( SeedItem, ( name, *seed, ItemFont ) );
 			seeditem->setGo( boost::make_shared<StartLevelProxy1>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ), _seed ) );
 			AddItem( seeditem );
 		}

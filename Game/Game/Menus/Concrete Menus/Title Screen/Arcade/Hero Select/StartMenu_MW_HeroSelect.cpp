@@ -5,11 +5,18 @@
 namespace CloudberryKingdom
 {
 
-	HeroItem::HeroItem( const boost::shared_ptr<BobPhsx> &Hero ) : MenuItem( boost::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) )
+	HeroItem::HeroItem( const boost::shared_ptr<BobPhsx> &Hero ) : MenuItem( boost::shared_ptr<EzText>( 0 ) )
 	{
+	}
+	boost::shared_ptr<HeroItem> HeroItem::HeroItem_Construct( const boost::shared_ptr<BobPhsx> &Hero )
+	{
+		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) );
+
 		this->Hero = Hero;
 
 		Locked = false;
+
+		return boost::static_pointer_cast<HeroItem>( shared_from_this() );
 	}
 
 	StartMenu_MW_HeroSelect::OnSelectProxy::OnSelectProxy( const boost::shared_ptr<StartMenu_MW_HeroSelect> &smmwhs )
@@ -181,7 +188,7 @@ namespace CloudberryKingdom
 
 		for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
 		{
-			boost::shared_ptr<HeroItem> item = boost::make_shared<HeroItem>( *phsx );
+			boost::shared_ptr<HeroItem> item = MakeMagic( HeroItem, ( *phsx ) );
 			item->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
 			AddItem( item );
 			item->setGo( boost::make_shared<StartMenuGoLambda>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
