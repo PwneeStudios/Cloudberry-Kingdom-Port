@@ -32,7 +32,10 @@ namespace CloudberryKingdom
 			stackLock.Lock();
 
 			if ( MyStack.empty() )
+			{
+				stackLock.Unlock();
 				return boost::make_shared<ParticleEmitter>( 300 );
+			}
 
 			item = MyStack.back();
 			MyStack.pop_back();
