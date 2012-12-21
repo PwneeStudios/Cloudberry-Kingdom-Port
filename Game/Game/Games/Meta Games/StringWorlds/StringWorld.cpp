@@ -165,11 +165,14 @@ namespace CloudberryKingdom
 		if ( NextLevelSeed == 0 )
 			return false;
 
+		bool val = false;
 		NextLevelSeed->Loaded->MyMutex.Lock();
 		{
-			return NextLevelSeed->Loaded->getval();
+			 val = NextLevelSeed->Loaded->getval();
 		}
 		NextLevelSeed->Loaded->MyMutex.Unlock();
+
+		return val;
 	}
 
 	void StringWorldGameData::LevelBegin( const boost::shared_ptr<Level> &level )
@@ -257,11 +260,14 @@ namespace CloudberryKingdom
 
 	bool StringWorldGameData::LevelIsLoaded( const boost::shared_ptr<LevelSeedData> &data )
 	{
+		bool val = false;
 		data->Loaded->MyMutex.Lock();
 		{
-			return data->Loaded->getval();
+			val = data->Loaded->getval();
 		}
 		data->Loaded->MyMutex.Unlock();
+
+		return val;
 	}
 
 	void StringWorldGameData::SetLevel()
@@ -273,7 +279,7 @@ namespace CloudberryKingdom
 			{
 				boost::shared_ptr<ObjectBase> obj = NextLevelSeed->MyGame->MyLevel->FindIObject( LevelConnector::EndOfLevelCode );
 
-				boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( obj );
+				boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( obj );
 				if ( 0 != door )
 					door->setOnOpen( boost::make_shared<EOG_StandardDoorActionProxy>() );
 			}
@@ -407,7 +413,7 @@ namespace CloudberryKingdom
 			return;
 
 		// ActionGames immediately switch to next game when they are done.
-		boost::shared_ptr<ActionGameData> ActionGame = boost::static_pointer_cast<ActionGameData>( Tools::CurGameData );
+		boost::shared_ptr<ActionGameData> ActionGame = boost::dynamic_pointer_cast<ActionGameData>( Tools::CurGameData );
 		if ( 0 != ActionGame && ActionGame->Done )
 			TellGameToBringNext( 0, ActionGame );
 

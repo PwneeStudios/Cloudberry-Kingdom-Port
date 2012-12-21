@@ -226,7 +226,7 @@ namespace CloudberryKingdom
 		setPauseGame( true );
 
 		// Find the initial door
-		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( MyGame->MyLevel->FindIObject( LevelConnector::StartOfLevelCode ) );
 		if ( 0 != door )
 		{
 			for ( BobVec::const_iterator bob = MyGame->MyLevel->Bobs.begin(); bob != MyGame->MyLevel->Bobs.end(); ++bob )

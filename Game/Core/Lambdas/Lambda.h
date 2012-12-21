@@ -3,7 +3,7 @@
 
 namespace CloudberryKingdom
 {
-	struct Lambda
+	struct Lambda : boost::enable_shared_from_this<Lambda>
 	{
 	
 		virtual void Apply() = 0;

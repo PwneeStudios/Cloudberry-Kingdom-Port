@@ -635,7 +635,7 @@ namespace CloudberryKingdom
 
 	int Menu::SortByHeightMethod( const boost::shared_ptr<MenuItem> &item1, const boost::shared_ptr<MenuItem> &item2 )
 	{
-		return Compare( -item1->Pos.Y, item2->Pos.Y );
+		return Compare( item2->Pos.Y, item1->Pos.Y );
 	}
 
 	void Menu::SortByHeight()
