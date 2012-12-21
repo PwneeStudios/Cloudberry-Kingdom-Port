@@ -156,7 +156,10 @@
     </ClCompile>
     <ClCompile Include="src\Utility\Log.cpp" />
     <ClCompile Include="src\Utility\MutexPc.cpp" />
-    <ClCompile Include="src\Utility\MutexWiiU.cpp" />
+    <ClCompile Include="src\Utility\MutexWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>

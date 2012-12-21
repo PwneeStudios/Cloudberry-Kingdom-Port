@@ -103,7 +103,19 @@ void SchedulerWiiU::RunJob( Job *job )
 
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	RunJob( new ResourceLoaderJob( holder, resource ) );
+	resource->Load();
+	resource->GpuCreate();
+
+	if( !resource->IsLoaded() )
+	{
+		LOG.Write( "Failed: %s\n", resource->GetPath().c_str() );
+		return;
+	}
+
+	LOG.Write( "Loaded: %s\n", resource->GetPath().c_str() );
+	holder->SetResource( resource );
+
+	CreateGpuResource( holder, resource );
 }
 
 void SchedulerWiiU::CreateGpuResource( ResourceHolder *holder, Resource *resource )
