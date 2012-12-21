@@ -103,6 +103,7 @@ void SchedulerWiiU::RunJob( Job *job )
 
 void SchedulerWiiU::CreateResource( ResourceHolder *holder, Resource *resource )
 {
+	//RunJob( new ResourceLoaderJob( holder, resource ) );
 	resource->Load();
 	resource->GpuCreate();
 

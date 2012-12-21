@@ -2,6 +2,8 @@
 
 #ifdef CAFE
 	#include <cafe/demo.h>
+	#include <Content/File.h>
+	#include <Content/Filesystem.h>
 #else
 	#include <fstream>
 	#include <streambuf>
@@ -16,11 +18,17 @@ bool File::ReadAsString( const std::string &path, std::string &str )
 
 #ifdef CAFE
 	u32 length;
-	LOG.Write( "DEMOFSSimpleRead( %s )\n", path.c_str() );
-	char *fileContents = reinterpret_cast< char * >( DEMOFSSimpleRead( path.c_str(), &length ) );
+
+	boost::shared_ptr<File> file = FILESYSTEM.Open( path );
+	length = file->Size();
+	char *buf = new char[ length ];
+	file->Read( buf, length );
+
 	str.reserve( length );
-	str.assign( fileContents, fileContents + length );
-	DEMOFree( fileContents );
+	str.assign( buf, buf + length );
+	
+	delete buf;
+
 	return true;
 #else
 	ifstream file( path.c_str(), ios::in );

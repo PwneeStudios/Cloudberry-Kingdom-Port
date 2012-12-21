@@ -11,6 +11,7 @@ class FilePc : public File
 {
 	
 	std::fstream fs_;
+	unsigned int size;
 
 private:
 
@@ -26,6 +27,9 @@ public:
 		fs_( path, std::ios_base::in | std::ios_base::binary
 			| ( write ? std::ios_base::out | std::ios_base::trunc : 0 ) )
 	{
+		fs_.seekg( 0, std::ios_base::end );
+		size = fs_.tellg();
+		fs_.seekg( 0 );
 	}
 
 	/**
@@ -80,6 +84,14 @@ public:
 	bool IsEOF()
 	{
 		return fs_.eof();
+	}
+
+	/**
+	 * @see File::Size()
+	 */
+	unsigned int Size()
+	{
+		return size_;
 	}
 
 };

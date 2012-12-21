@@ -2,6 +2,7 @@
 
 #include <Content/File.h>
 #include <Utility/Log.h>
+#include <Utility/Mutex.h>
 
 #include <cafe.h>
 #include <cafe/fs.h>
@@ -102,12 +103,21 @@ public:
 		return get_ >= length_;
 	}
 
+	/**
+	 * @see File::Size()
+	 */
+	unsigned int Size()
+	{
+		return length_;
+	}
 };
 
 struct FilesystemWiiUInternal
 {
 	FSClient *Client;
 	FSCmdBlock *Cmd;
+
+	Mutex FileSystemMutex;
 };
 
 FilesystemWiiU::FilesystemWiiU() :
@@ -147,6 +157,8 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 	std::string localPath = ( path[ 0 ] == '/' ? "/vol/content" : "/vol/content/" ) + path;
 	LOG.Write( "Opening %s\n", localPath.c_str() );
 
+	// FIXME: The mutex might not be necessary if the file system supports multithreading.
+	internal_->FileSystemMutex.Lock();
 	FSOpenFile( internal_->Client, internal_->Cmd, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
 
 	memset( &stat, 0, sizeof( FSStat ) );
@@ -155,6 +167,7 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 	char *buffer = reinterpret_cast< char * >( MEMAllocFromDefaultHeapEx( stat.size, FS_IO_BUFFER_ALIGN ) );
 	FSReadFile( internal_->Client, internal_->Cmd, buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
 	FSCloseFile( internal_->Client, internal_->Cmd, fh, FS_RET_NO_ERROR );
+	internal_->FileSystemMutex.Unlock();
 
 	return boost::static_pointer_cast<File>( boost::make_shared<FileWiiU>( buffer, stat.size ) );
 }

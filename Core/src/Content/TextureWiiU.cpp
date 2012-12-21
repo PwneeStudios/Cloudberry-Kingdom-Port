@@ -1,5 +1,7 @@
 #include <Content/TextureWiiU.h>
 
+#include <Content/File.h>
+#include <Content/Filesystem.h>
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <Utility/Log.h>
@@ -31,7 +33,6 @@ void TextureWiiU::GpuCreate()
 {
 	BOOL ok;
 	u32 len;
-	void *buf;
 
 	std::string path = GetPath();
 
@@ -43,14 +44,16 @@ void TextureWiiU::GpuCreate()
 		path[ path.length() - 1 ] = 'x';
 	}
 
-	LOG.Write( "DEMOFSSimpleRead( %s )\n", path.c_str() );
-	buf = DEMOFSSimpleRead( path.c_str(), &len );
+	boost::shared_ptr<File> file = FILESYSTEM.Open( path );
+	char *buf = new char[ file->Size() ];
+	file->Read( buf, file->Size() );
+
 	ok = DEMOGFDReadTexture( &internal_->Texture, 0, buf );
+
+	delete[] buf;
 
 	if( ok )
 		setLoaded( true );
-	
-	DEMOFree( buf );
 }
 
 void TextureWiiU::GpuDestroy()
