@@ -3,8 +3,8 @@
 
 enum ButtonState
 {
-	ButtonState_Pressed,
-	ButtonState_Released
+	ButtonState_Released,
+	ButtonState_Pressed
 };
 
 enum Keys
@@ -650,5 +650,15 @@ enum Keys
     //     CLEAR key
 	Keys_OemClear = 254
 };
+
+
+enum PlayerIndex
+{
+    PlayerIndex_One = 0,
+    PlayerIndex_Two = 1,
+    PlayerIndex_Three = 2,
+    PlayerIndex_Four = 3
+};
+
 
 #endif

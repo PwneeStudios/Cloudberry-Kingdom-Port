@@ -1,7 +1,7 @@
 #ifndef _GAMEPADBUTTONS_H_
 #define _GAMEPADBUTTONS_H_
 
-#include <enums.h>
+#include "InputEnums.h"
 
 struct GamePadButtons
 {

@@ -7,6 +7,7 @@
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
+#include <Input/GamePad.h>
 #include <Input/Keyboard.h>
 
 #include <GL/glew.h>
@@ -59,10 +60,14 @@ CorePc::CorePc( GameLoop &game ) :
 	content_ = new Wad( "Content/" );
 
 	td_ = new TextDrawer;
+
+	GamePad::Initialize();
 }
 
 CorePc::~CorePc()
 {
+	GamePad::Shutdown();
+
 	delete td_;
 
 	delete qd_;
@@ -82,6 +87,7 @@ int CorePc::Run()
 
 	while( running_ )
 	{
+		GamePad::Update();
 		Keyboard::Update();
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );

@@ -200,14 +200,6 @@ enum PendulumMoveType
 	PendulumMoveType_SQUARE
 };
 
-enum PlayerIndex
-{
-    PlayerIndex_One = 0,
-    PlayerIndex_Two = 1,
-    PlayerIndex_Three = 2,
-    PlayerIndex_Four = 3
-};
-
 enum StatGroup
 {
 	StatGroup_LIFETIME,

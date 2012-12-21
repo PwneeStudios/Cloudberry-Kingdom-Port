@@ -1,6 +1,8 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Utility\MutexWiiU.cpp
+src\Input\GamePadWiiU.cpp
 src\Graphics\EffectWiiU.cpp
 src\Graphics\EffectPassWiiU.cpp
 src\Graphics\EffectParameterWiiU.cpp

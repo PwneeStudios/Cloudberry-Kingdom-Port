@@ -7,7 +7,6 @@
 	-o Cloudberry_Kingdom.elf
 	-I.
 Game\Hacks\NET\StringBuilder.cpp
-Game\Hacks\MutexWiiU.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp
 Game\CloudberryKingdom.cpp
@@ -361,7 +360,6 @@ Game\Hacks\FileReader.cpp
 Game\Hacks\NET\BinaryReader.cpp
 Game\Hacks\NET\BinaryWriter.cpp
 Game\Hacks\XNA\ContentManager.cpp
-Game\Hacks\XNA\GamePad.cpp
 Game\Hacks\XNA\GraphicsDevice.cpp
 Game\Hacks\XNA\GraphicsDeviceManager.cpp
 Game\Hacks\XNA\SpriteBatch.cpp

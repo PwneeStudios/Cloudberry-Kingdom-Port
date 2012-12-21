@@ -30,7 +30,7 @@
 #include "Core/Graphics/Draw/Simple/SimpleObject.h"
 
 #include <Input/MouseState.h>
-#include "Hacks/XNA/GamePadState.h"
+#include <Input/GamePadState.h>
 #include "Hacks/XNA/GameTime.h"
 #include "Hacks/NET/StreamReader.h"
 #include "Hacks/NET/StreamWriter.h"

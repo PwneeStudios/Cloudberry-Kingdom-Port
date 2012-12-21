@@ -6,10 +6,11 @@
 #include <cafe/procui.h>
 #include <Content/Wad.h>
 #include <cstdlib>
-#include <Utility/Limits.h>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
+#include <Input/GamePad.h>
+#include <Utility/Limits.h>
 #include <Utility/Log.h>
 
 // Private.
@@ -53,11 +54,16 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	content_ = new Wad( "" );
 
 	td_ = new TextDrawer;
+
+	GamePad::Initialize();
 }
 
 CoreWiiU::~CoreWiiU()
 {
 	LOG.Write( "SHUTDOWN START\n" );
+	
+	GamePad::Shutdown();
+
 	delete td_;
 
 	delete qd_;
@@ -85,11 +91,15 @@ int CoreWiiU::Run()
 
 	while( DEMOIsRunning() )
 	{
+		GamePad::Update();
+
 		game_.Update();
 
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
 			DEMODRCBeforeRender();
+			//GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 0 );
+			//GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
 
 			GX2SetContextState( DEMODRCContextState );
 

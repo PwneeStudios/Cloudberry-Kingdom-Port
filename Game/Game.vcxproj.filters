@@ -1083,9 +1083,6 @@
     <ClCompile Include="Hacks\FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hacks\XNA\GamePad.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Hacks\XNA\SpriteBatch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1093,12 +1090,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Hacks\NET\StringBuilder.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hacks\MutexPc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Hacks\MutexWiiU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -2243,24 +2234,6 @@
     <ClInclude Include="Hacks\XNA\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePadButtons.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePadDPad.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePadState.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePadThumbSticks.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\GamePadTriggers.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hacks\XNA\GameServiceContainer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2322,9 +2295,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\Viewport.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\Mutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\NET\File.h">

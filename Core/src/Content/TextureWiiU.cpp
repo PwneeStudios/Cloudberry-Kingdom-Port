@@ -43,6 +43,7 @@ void TextureWiiU::GpuCreate()
 		path[ path.length() - 1 ] = 'x';
 	}
 
+	LOG.Write( "DEMOFSSimpleRead( %s )\n", path.c_str() );
 	buf = DEMOFSSimpleRead( path.c_str(), &len );
 	ok = DEMOGFDReadTexture( &internal_->Texture, 0, buf );
 

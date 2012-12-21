@@ -66,8 +66,15 @@
     <ClInclude Include="include\Math\Vectors.h" />
     <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
+    <ClInclude Include="include\Utility\Mutex.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
+    <ClInclude Include="include\Input\GamePad.h" />
+    <ClInclude Include="include\Input\GamePadButtons.h" />
+    <ClInclude Include="include\Input\GamePadDPad.h" />
+    <ClInclude Include="include\Input\GamePadState.h" />
+    <ClInclude Include="include\Input\GamePadThumbSticks.h" />
+    <ClInclude Include="include\Input\GamePadTriggers.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
@@ -100,6 +107,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Graphics\EffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Input\GamePadPc.cpp" />
+    <ClCompile Include="src\Input\GamePadWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
@@ -143,6 +155,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Utility\Log.cpp" />
+    <ClCompile Include="src\Utility\MutexPc.cpp" />
+    <ClCompile Include="src\Utility\MutexWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>
