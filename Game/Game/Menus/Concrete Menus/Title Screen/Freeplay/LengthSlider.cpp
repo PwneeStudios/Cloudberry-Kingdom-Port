@@ -7,19 +7,39 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 	}
+	boost::shared_ptr<LengthSlider> LengthSlider::LengthSlider_Construct()
+	{
+		MenuSliderBase::MenuSliderBase_Construct();
+
+		return boost::static_pointer_cast<LengthSlider>( shared_from_this() );
+	}
 
 	LengthSlider::LengthSlider( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<LengthSlider> LengthSlider::LengthSlider_Construct( const boost::shared_ptr<EzText> &Text )
+	{
+		MenuSliderBase::MenuSliderBase_Construct();
+
 		Init( Text, Text->Clone() );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<LengthSlider>( shared_from_this() );
 	}
 
 	LengthSlider::LengthSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<LengthSlider> LengthSlider::LengthSlider_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
+	{
+		MenuSliderBase::MenuSliderBase_Construct();
+
 		Init( Text, SelectedText );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<LengthSlider>( shared_from_this() );
 	}
 
 	void LengthSlider::InitializeSlider()

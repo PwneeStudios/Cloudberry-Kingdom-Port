@@ -343,7 +343,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<MenuList> CustomHero_GUI::MakeList()
 	{
-		boost::shared_ptr<MenuList> list = boost::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> list = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( list );
 
 		list->GrayOutOnUnselectable = true;
@@ -418,7 +418,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Base( _hero );
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) ) );
 			SetListItemProperties( item );
 			BaseList->AddItem( item, hero );
 		}
@@ -436,7 +436,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Move( _hero );
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) ) );
 			SetListItemProperties( item );
 			JumpList->AddItem( item, hero );
 		}
@@ -455,7 +455,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Shape( _hero );
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) ) );
 			SetListItemProperties( item );
 			SizeList->AddItem( item, hero );
 		}
@@ -723,10 +723,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_A" ) ) ) );
-			A = Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) );
+			A = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) ) );
 		}
 		else
-			A = Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) );
+			A = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) ) );
 		item->Name = std::wstring( L"test" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -745,10 +745,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_B" ) ) ) );
-			B = Back = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
+			B = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
 		}
 		else
-			B = Back = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
+			B = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
 		item->Name = std::wstring( L"back" );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -763,10 +763,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
-			X = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) );
+			X = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) ) );
 		}
 		else
-			X = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) );
+			X = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) ) );
 
 		item->Name = std::wstring( L"continue" );
 		AddItem( item );
@@ -780,7 +780,7 @@ namespace CloudberryKingdom
 		item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 
 		// Reset
-		item = ResetButton = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) ) );
 		item->Name = std::wstring( L"reset" );
 		AddItem( item );
 		item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));

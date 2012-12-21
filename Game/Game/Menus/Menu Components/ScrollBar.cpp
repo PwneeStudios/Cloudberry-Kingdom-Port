@@ -74,7 +74,7 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		slider = boost::make_shared<MenuScrollBar>();
+		slider = MakeMagic( MenuScrollBar, () );
 		slider->setSliderBackSize( Vector2(1.15f,.72f) * slider->getSliderBackSize() );
 		slider->CustomEndPoints = true;
 		slider->CustomStart = Vector2( 0, -800 );

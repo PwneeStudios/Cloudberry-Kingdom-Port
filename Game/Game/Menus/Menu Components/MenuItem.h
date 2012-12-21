@@ -5,13 +5,11 @@
 
 namespace CloudberryKingdom
 {
-	//public delegate void MenuItemGo(MenuItem item);
+
 	struct MenuItem : public boost::enable_shared_from_this<MenuItem>
 	{
-
 	
 		static void InitializeStatics();
-
 	
 		int Code;
 		std::wstring Name;
@@ -111,10 +109,9 @@ namespace CloudberryKingdom
 		virtual void FadeIn();
 
 		MenuItem();
-
+		boost::shared_ptr<MenuItem> MenuItem_Construct();
 	
 		void SetToDefaultColors();
-
 	
 		virtual Vector2 Size();
 
@@ -129,6 +126,10 @@ namespace CloudberryKingdom
 		MenuItem( const boost::shared_ptr<EzText> &Text );
 		MenuItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Name );
 		MenuItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
+
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text );
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const std::wstring &Name );
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
 		void ScaleText( float scale );
 

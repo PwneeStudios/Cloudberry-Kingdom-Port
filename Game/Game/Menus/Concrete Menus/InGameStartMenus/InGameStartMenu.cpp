@@ -186,7 +186,7 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 
 		// Resume
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESUME, ItemFont ) ) );
 		item->Name = std::wstring( L"Resume" );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->MyText->setScale( item->MyText->getScale() * 1.1f );
@@ -196,14 +196,14 @@ bool InGameStartMenu::PreventMenu = false;
 
 
 		// Statistics
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_STATISTICS, ItemFont ) ) );
 		item->Name = std::wstring( L"Stats" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoStatsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// SaveLoadSeed
 		Localization::Words word = Tools::CurLevel->CanLoadLevels ? Localization::Words_SAVE_LOAD : Localization::Words_SAVE_SEED;
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( word, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( word, ItemFont ) ) );
 		item->Name = std::wstring( L"SaveLoadSeed" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
@@ -214,13 +214,13 @@ bool InGameStartMenu::PreventMenu = false;
 		AddItem( item );
 
 		// Options
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) ) );
 		item->Name = std::wstring( L"Options" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoOptionsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// Controls
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) ) );
 		item->Name = std::wstring( L"Controls" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
@@ -228,7 +228,7 @@ bool InGameStartMenu::PreventMenu = false;
 		// Remove player
 		if ( RemoveMeOption )
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_REMOVE_ME, ItemFont ) ) );
 			item->Name = std::wstring( L"Remove" );
 			item->setGo( Cast::ToItem( boost::make_shared<GoRemoveProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 			AddItem( item );
@@ -358,7 +358,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::MakeExitItem()
 	{
-		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<VerifyExitProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 
 		AddItem( item );

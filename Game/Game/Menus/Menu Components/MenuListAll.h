@@ -5,11 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Brackets
 	{
 	
 		boost::shared_ptr<QuadClass> Br1, Br2;
-
 	
 		Brackets();
 
@@ -36,6 +36,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Brackets> MyBrackets;
 	
 		MenuListAll();
+		boost::shared_ptr<MenuListAll> MenuListAll_Construct();
 
 		virtual void PhsxStep( bool Selected );
 

@@ -46,13 +46,13 @@ namespace CloudberryKingdom
 		MyPile->Add( HeaderText );
 
 		// Ok
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
 		item->setGo( boost::make_shared<VerifyQuitOkLambda>() );
 		item->Name = std::wstring( L"Yes" );
 		AddItem( item );
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->Name = std::wstring( L"No" );
 		AddItem( item );

@@ -78,7 +78,7 @@ namespace CloudberryKingdom
 		MyPile->Add( HeaderText );
 
 		// Save seed
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
 		item->Name = std::wstring( L"Save" );
 		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );

@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Load seed
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) ) );
 		item->Name = std::wstring( L"Load" );
 		item->setGo( boost::make_shared<LoadProxy1>( boost::static_pointer_cast<LoadSeedAs>( shared_from_this() ) ) );
 		AddItem( item );

@@ -1480,14 +1480,15 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		data->MyGeometry = LevelGeometry_RIGHT;
 		//data.MyGeometry = LevelGeometry.Up;
 		//data.PieceLength = 90000;
-		data->PieceLength = 15000;
+		//data->PieceLength = 15000;
 		//data.PieceLength = 37000;
+		data->PieceLength = 4000;
 		data->NumPieces = 1;
 
 		data->MyGameType = NormalGameData::Factory;
 		//data.MyGameType = PlaceGameData.Factory;
 
-		//data.MyGameFlags.IsTethered = true;
+		//data.MyGameFlags.IsTethered = true; 
 		//data.MyGameFlags.IsDoppleganger = true;
 		//data.MyGameFlags.IsDopplegangerInvert = true;
 

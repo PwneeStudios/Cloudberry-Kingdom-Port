@@ -5,15 +5,16 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MenuScrollBar : public MenuSlider
 	{
 	
 		MenuScrollBar();
+		boost::shared_ptr<MenuScrollBar> MenuScrollBar_Construct();
 
 		boost::shared_ptr<EzTexture> Normal, Held;
 	
 		virtual void InitializeSlider();
-
 	
 		Vector2 StartPlus;
 		Vector2 EndPlus;
@@ -22,6 +23,7 @@ namespace CloudberryKingdom
 
 	
 		void InitializeInstanceFields();
+
 	};
 }
 

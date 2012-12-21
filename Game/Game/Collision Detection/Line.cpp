@@ -3,6 +3,16 @@
 namespace CloudberryKingdom
 {
 
+	Line::Line()
+	{
+	}
+
+	MovingLine::MovingLine() :
+		Invalidated( false ),
+		SkipOverlap( false ), SkipEdge( false )
+	{
+	}
+
 	void MovingLine::SetCurrent( Vector2 _p1, Vector2 _p2 )
 	{
 		Current.p1 = _p1;

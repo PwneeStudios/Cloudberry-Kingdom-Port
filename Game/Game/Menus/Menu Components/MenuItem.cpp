@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<MenuItem> MenuItem::Clone()
 	{
-		boost::shared_ptr<MenuItem> clone = boost::make_shared<MenuItem>( MyText->Clone(), MySelectedText->Clone() );
+		boost::shared_ptr<MenuItem> clone = MakeMagic( MenuItem, ( MyText->Clone(), MySelectedText->Clone() ) );
 		if ( Icon != 0 )
 		{
 			clone->Icon = Icon->Clone();
@@ -142,9 +142,15 @@ namespace CloudberryKingdom
 	MenuItem::MenuItem()
 	{
 		InitializeInstanceFields();
+	}
+
+	boost::shared_ptr<MenuItem> MenuItem::MenuItem_Construct()
+	{
 		SetToDefaultColors();
 
 		setOverrideA( false );
+
+		return boost::static_pointer_cast<MenuItem>( shared_from_this() );
 	}
 
 	void MenuItem::SetToDefaultColors()
@@ -180,20 +186,35 @@ namespace CloudberryKingdom
 	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuItem> MenuItem::MenuItem_Construct( const boost::shared_ptr<EzText> &Text )
+	{
 		Init( Text, Text->Clone() );
+
+		return boost::static_pointer_cast<MenuItem>( shared_from_this() );
 	}
 
 	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Name )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuItem> MenuItem::MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const std::wstring &Name )
+	{
 		Init( Text, Text->Clone() );
 		this->Name = Name;
+
+		return boost::static_pointer_cast<MenuItem>( shared_from_this() );
 	}
 
 	MenuItem::MenuItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuItem> MenuItem::MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
+	{
 		Init( Text, SelectedText );
+
+		return boost::static_pointer_cast<MenuItem>( shared_from_this() );
 	}
 
 	void MenuItem::ScaleText( float scale )

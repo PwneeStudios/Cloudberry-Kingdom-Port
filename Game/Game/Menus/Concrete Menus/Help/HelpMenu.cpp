@@ -432,7 +432,7 @@ namespace CloudberryKingdom
 		std::wstring CoinPrefix = std::wstring( L"{pCoin_Blue,68,?}" );
 
 		// Watch the computer
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Watch ), ItemFont ) ) );
 		item->Name = std::wstring( L"WatchComputer" );
 		Item_WatchComputer = item;
 		item->SetIcon( ObjectIcon::RobotIcon->Clone() );
@@ -446,13 +446,13 @@ namespace CloudberryKingdom
 		// Show path
 		if ( On_ShowPath() )
 		{
-			item = toggle = boost::make_shared<MenuToggle>( ItemFont );
+			item = MakeMagic( MenuToggle, ( ItemFont ) );
 			toggle->OnToggle = boost::make_shared<Toggle_ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) );
 			toggle->Toggle( true );
 		}
 		else
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) ) );
 			item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = std::wstring( L"ShowPath" );
@@ -465,13 +465,13 @@ namespace CloudberryKingdom
 		// Slow mo
 		if ( On_SlowMo() )
 		{
-			item = toggle = boost::make_shared<MenuToggle>( ItemFont );
+			item = MakeMagic( MenuToggle, ( ItemFont ) );
 			toggle->OnToggle = boost::make_shared<Toggle_SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ));
 			toggle->Toggle( true );
 		}
 		else
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) ) );
 			item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
 		}
 		item->Name = std::wstring( L"SlowMo" );

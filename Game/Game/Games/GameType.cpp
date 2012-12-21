@@ -561,17 +561,24 @@ namespace CloudberryKingdom
 
 	void GameData::DoToDoOnResetList()
 	{
+		boost::shared_ptr<GameData> SaveMeJesus = shared_from_this();
+
 		std::vector<boost::shared_ptr<Lambda> > list = std::vector<boost::shared_ptr<Lambda> >( ToDoOnReset );
 		ToDoOnReset.clear();
 
 		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
-			( *f )->Apply();
+		{
+			boost::shared_ptr<Lambda> _f = *f;
+			_f->Apply();
+		}
 
 		list.clear();
 	}
 
 	void GameData::DoToDoList()
 	{
+		boost::shared_ptr<GameData> SaveMeJesus = shared_from_this();
+
 		if ( CurToDo.size() > 0 )
 		{
 			DoingToDoList = true;
@@ -582,24 +589,29 @@ namespace CloudberryKingdom
 			CurToDo.clear();
 			for ( std::vector<boost::shared_ptr<ToDoItem> >::const_iterator item = NextToDo.begin(); item != NextToDo.end(); ++item )
 			{
+				const boost::shared_ptr<ToDoItem> _item = *item;
+
 				// Skip deleted items
-				if ( ( *item )->getMarkedForDeletion() )
+				if ( _item->getMarkedForDeletion() )
 					continue;
 
 				bool Keep = true;
-				if ( !( PauseGame && ( *item )->PauseOnPause ) )
+				if ( !( PauseGame && _item->PauseOnPause ) )
 				{
 					// Execute the function
-					CurItemStep = ( *item )->Step;
-					Keep = !( *item )->MyFunc->Apply();
-					( *item )->Step++;
+					CurItemStep = _item->Step;
+					Keep = !_item->MyFunc->Apply();
+					_item->Step++;
 				}
 
 				if ( Keep )
 				{
 					// Keep the function if it returned false
-					CurToDo.push_back( *item );
+					CurToDo.push_back( _item );
 				}
+
+				if ( NextToDo.empty() )
+					break;
 			}
 			DoingToDoList = false;
 		}
@@ -828,7 +840,7 @@ namespace CloudberryKingdom
 	{
 		for ( ObjectVec::const_iterator obj = MyLevel->Objects.begin(); obj != MyLevel->Objects.end(); ++obj )
 		{
-			boost::shared_ptr<Checkpoint> checkpoint = boost::static_pointer_cast<Checkpoint>( *obj );
+			boost::shared_ptr<Checkpoint> checkpoint = boost::dynamic_pointer_cast<Checkpoint>( *obj );
 			if ( 0 != checkpoint )
 				checkpoint->Revert();
 		}
@@ -1061,6 +1073,8 @@ namespace CloudberryKingdom
 
 	void GameData::PhsxStep()
 	{
+		boost::shared_ptr<GameData> SaveMeJesus = shared_from_this();
+
 		if ( Loading || Tools::ShowLoadingScreen )
 			return;
 
@@ -1328,11 +1342,16 @@ namespace CloudberryKingdom
 
 	void GameData::DoToDoOnDeathList()
 	{
+		boost::shared_ptr<GameData> SaveMeJesus = shared_from_this();
+
 		std::vector<boost::shared_ptr<Lambda> > list = std::vector<boost::shared_ptr<Lambda> >( ToDoOnDeath );
 		ToDoOnDeath.clear();
 
 		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
-			( *f )->Apply();
+		{
+			boost::shared_ptr<Lambda> _f = *f;
+			_f->Apply();
+		}
 
 		list.clear();
 	}
@@ -1353,7 +1372,10 @@ namespace CloudberryKingdom
 		ToDoOnDoneDying.clear();
 
 		for ( std::vector<boost::shared_ptr<Lambda> >::const_iterator f = list.begin(); f != list.end(); ++f )
-			( *f )->Apply();
+		{
+			boost::shared_ptr<Lambda> _f = *f;
+			_f->Apply();
+		}
 
 		list.clear();
 	}

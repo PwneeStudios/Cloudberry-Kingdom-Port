@@ -4,9 +4,9 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	struct LambdaFunc
+	struct LambdaFunc : boost::enable_shared_from_this<LambdaFunc<T> >
 	{
-	
+
 		virtual T Apply() = 0;
 	};
 }

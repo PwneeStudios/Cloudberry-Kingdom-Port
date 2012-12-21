@@ -318,7 +318,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Customize
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) ) );
 		item->Name = std::wstring( L"Reset" );
 		item->setGo( boost::make_shared<ResetProxy>( boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
 		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();

@@ -323,13 +323,13 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Arcade
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, ItemFont ) ) );
 		item->Name = std::wstring( L"Arcade" );
 		item->setGo( boost::make_shared<StartMenuLambda_Arcade>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Campaign
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont ) ) );
 		item->Name = std::wstring( L"Campaign" );
 		AddItem( item );
 		item->setGo( boost::make_shared<StartMenuLambda_Campaign>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
@@ -341,7 +341,7 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Free Play
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FREE_PLAY, ItemFont ) ) );
 		item->Name = std::wstring( L"Freeplay" );
 		item->setGo( boost::make_shared<StartMenuLambda_Freeplay>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
@@ -353,7 +353,7 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Options
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont ) ) );
 		item->Name = std::wstring( L"Options" );
 		item->setGo( boost::make_shared<StartMenuLambda_Options>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );
@@ -364,7 +364,7 @@ namespace CloudberryKingdom
 		//AddItem(item);
 
 		// Exit
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EXIT, ItemFont ) ) );
 		item->Name = std::wstring( L"Exit" );
 		item->setGo( boost::make_shared<StartMenuLambda_Exit>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
 		AddItem( item );

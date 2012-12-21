@@ -24,10 +24,8 @@ namespace CloudberryKingdom
 
 			// Placement info
 			float TopOffset, BottomOffset;
-
 		
 			void InitializeInstanceFields();
-
 
 			FireSpinnerTileInfo()
 			{
@@ -71,17 +69,13 @@ namespace CloudberryKingdom
 
 		FireSpinner( bool BoxesOnly );
 
-	
 		virtual void ActivePhsxStep();
-
 	
 		void SetCurrent( float Step );
 		void SetTarget( float Step );
 		void GetLine( float Step, Vector2 &p1, Vector2 &p2 );
 
-	
 		virtual void DrawGraphics();
-
 	
 		virtual void Move( Vector2 shift );
 

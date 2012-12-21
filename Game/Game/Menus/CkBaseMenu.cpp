@@ -349,10 +349,10 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		//item = new MenuItem(new EzText(ButtonString.Back(86) + text, ItemFont));
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) ) );
 	#else
 		//item = new MenuItem(new EzText(ButtonString.Back(86) + " " + text, ItemFont));
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Back( 86 ) + std::wstring( L" " ) + Localization::WordString( Word ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back( 86 ) + std::wstring( L" " ) + Localization::WordString( Word ) ) ) );
 	#endif
 
 		item->setGo( boost::make_shared<MakeBackButtonHelper>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );

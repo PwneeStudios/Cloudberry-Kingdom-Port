@@ -116,13 +116,13 @@ namespace CloudberryKingdom
 		HeaderText->setPos( HeaderPos + Vector2( -200, 200 ) );
 
 		// Yes
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
 		item->setGo( boost::make_shared<YesProxy>( boost::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
 		item->setGo( boost::make_shared<NoProxy>( boost::static_pointer_cast<VerifyPurchaseMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -338,7 +338,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
-		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) );
+		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HATS_FOR_SALE, Resources::Font_Grobold42_2 ) ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( -1608.809f, 951.508f );
 		SetHeaderProperties( Header->MyText );
@@ -361,7 +361,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 				continue;
 
 			//item = new MenuItem(new EzText(pic + postfix, ItemFont));
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) ) );
 			item->MyObject = boost::static_pointer_cast<Object>( *hat );
 
 			AddItem( item );
@@ -380,7 +380,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) ) );
 			item->MyObject = boost::static_pointer_cast<Object>( clr );
 
 			AddItem( item );
@@ -414,7 +414,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 			if ( clr->Price <= 0 )
 				continue;
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"xxx" ), ItemFont ) ) );
 			item->MyObject = clr;
 
 			AddItem( item );
@@ -438,7 +438,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::MakeHeader( boost::shared_ptr<MenuItem> &Header, const std::wstring &str )
 	{
-		Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, Resources::Font_Grobold42_2 ) );
+		Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( str, Resources::Font_Grobold42_2 ) ) );
 		MyMenu->Add( Header );
 		ItemPos.Y -= 40;
 		Header->Pos = ItemPos + Vector2( -130, 40 );

@@ -55,8 +55,15 @@ namespace CloudberryKingdom
 	MenuListAll::MenuListAll()
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuListAll> MenuListAll::MenuListAll_Construct()
+	{
+		MenuList::MenuList_Construct();
+
 		setExpandOnGo( false );
 		ClickForNextItem = false;
+
+		return boost::static_pointer_cast<MenuListAll>( shared_from_this() );
 	}
 
 	void MenuListAll::PhsxStep( bool Selected )

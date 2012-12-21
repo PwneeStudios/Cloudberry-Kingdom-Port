@@ -4,7 +4,7 @@
 namespace CloudberryKingdom
 {
 	template<typename T>
-	struct Lambda_1
+	struct Lambda_1 : boost::enable_shared_from_this<Lambda_1<T> >
 	{
 
 	

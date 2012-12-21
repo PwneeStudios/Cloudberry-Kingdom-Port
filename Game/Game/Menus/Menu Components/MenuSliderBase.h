@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	/// <summary>
 	/// The base struct for all derived MenuSlider classes
 	/// </summary>
@@ -67,10 +68,12 @@ namespace CloudberryKingdom
 
 	
 		MenuSliderBase();
-
 		MenuSliderBase( const boost::shared_ptr<EzText> &Text );
 		MenuSliderBase( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
+		boost::shared_ptr<MenuSliderBase> MenuSliderBase_Construct();
+		boost::shared_ptr<MenuSliderBase> MenuSliderBase_Construct( const boost::shared_ptr<EzText> &Text );
+		boost::shared_ptr<MenuSliderBase> MenuSliderBase_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 	
 		std::wstring BaseString;
 	

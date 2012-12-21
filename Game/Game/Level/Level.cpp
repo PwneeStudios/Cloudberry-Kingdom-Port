@@ -2100,7 +2100,7 @@ bool Level::dodebug = false;
 		}
 
 		// Door properties
-		boost::shared_ptr<Door> door = boost::static_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
+		boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( FindIObject( LevelConnector::EndOfLevelCode ) );
 		if ( 0 != door )
 			door->AutoOpen = Style->AutoOpenDoor;
 

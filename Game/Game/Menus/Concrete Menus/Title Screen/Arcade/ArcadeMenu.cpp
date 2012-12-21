@@ -153,7 +153,7 @@ namespace CloudberryKingdom
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
 		// Header
-		boost::shared_ptr<MenuItem> Header = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) );
+		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) ) );
 		Header->Name = std::wstring( L"Header" );
 		MyMenu->Add( Header );
 		SetItemProperties( Header );
