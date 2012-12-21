@@ -149,7 +149,7 @@ namespace CloudberryKingdom
 
 	void CustomizeMenu::AddMenuItem( Localization::Words Word, const std::wstring &Name )
 	{
-		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Word, ItemFont ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Word, ItemFont ) ) );
 		item->Name = Name;
 		item->setGo( Cast::ToItem( boost::make_shared<CreateColorSelectProxy>( boost::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) ) );
 
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 		AddMenuItem( Localization::Words_CAPE, std::wstring( L"Cape" ) );
 		AddMenuItem( Localization::Words_LINING, std::wstring( L"Lining" ) );
 
-		boost::shared_ptr<MenuItem> back = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ), std::wstring( L"Done" ) );
+		boost::shared_ptr<MenuItem> back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ), std::wstring( L"Done" ) ) );
 		AddItem( back );
 		back->setGo( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) );
 	}
@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 			/*for ( Set<boost::shared_ptr<Hat> >::const_iterator hat = CharacterSelectManager::AvailableHats->begin(); hat != CharacterSelectManager::AvailableHats->end(); ++hat )*/
 			{
 				int hat_index = IndexOf( ColorSchemeManager::HatInfo, hat->first );
-				boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hat->first->Name, Resources::Font_Grobold42, false, true ) );
+				boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hat->first->Name, Resources::Font_Grobold42, false, true ) ) );
 				item->ScaleText( .375f );
 				item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( hat_index ) );
 
@@ -221,7 +221,7 @@ namespace CloudberryKingdom
 			//for ( CloudberryKingdom::Set<boost::shared_ptr<Hat> >::const_iterator beard = CharacterSelectManager::AvailableBeards->begin(); beard != CharacterSelectManager::AvailableBeards->end(); ++beard )
 			{
 				int beard_index = IndexOf( ColorSchemeManager::BeardInfo, beard->first );
-				boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( beard->first->Name, Resources::Font_Grobold42, false, true ) );
+				boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( beard->first->Name, Resources::Font_Grobold42, false, true ) ) );
 				item->ScaleText( .375f );
 				item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( beard_index ) );
 
@@ -247,7 +247,7 @@ namespace CloudberryKingdom
 						continue;
 
 				int clr_index = IndexOf( list, *item );
-				boost::shared_ptr<MenuItem> _item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( data->Name, Resources::Font_Grobold42, false, true ) );
+				boost::shared_ptr<MenuItem> _item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( data->Name, Resources::Font_Grobold42, false, true ) ) );
 				_item->ScaleText( .375f );
 				_item->MyObject = boost::static_pointer_cast<Object>( boost::make_shared<WrappedInt>( clr_index ) );
 

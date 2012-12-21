@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzFont> font = Resources::Font_Grobold42;
 		float FontScale = .775f;
 
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"Sign in?" ), font ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"Sign in?" ), font ) ) );
 		item->Name = std::wstring( L"Header" );
 		item->MyText->setScale( .89f );
 
@@ -124,7 +124,7 @@ namespace CloudberryKingdom
 		std::vector<std::wstring> ItemString = VecFromArray( tempVector );
 		for ( int i = 0; i < 2; i++ )
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ItemString[ i ], font ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ItemString[ i ], font ) ) );
 			item->MySelectedText->setScale( FontScale );
 			item->MyText->setScale( item->MySelectedText->getScale() );
 			item->SelectionOscillate = false;

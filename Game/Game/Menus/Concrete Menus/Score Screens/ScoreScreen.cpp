@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 
 			boost::shared_ptr<MenuItem> item;
 
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_KEEP_SETTINGS, ItemFont ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_KEEP_SETTINGS, ItemFont ) ) );
 			item->Name = std::wstring( L"Continue" );
 			item->setGo( boost::make_shared<MenuGo_NewLevelProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			AddItem( item );
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 
 			if ( _Add_Watch )
 			{
-				item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont ) );
+				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont ) ) );
 				item->Name = std::wstring( L"Replay" );
 				item->setGo( boost::make_shared<MenuGo_WatchReplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 
 			if ( _Add_Save )
 			{
-				item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_SAVED_SEEDS, ItemFont ) );
+				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVED_SEEDS, ItemFont ) ) );
 				item->Name = std::wstring( L"Save" );
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );

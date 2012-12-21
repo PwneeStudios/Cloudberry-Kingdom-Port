@@ -109,6 +109,8 @@ namespace CloudberryKingdom
 		MenuItem::MenuItem_Construct();
 
 		MenuItem::Init( 0, 0 );
+
+		return boost::static_pointer_cast<MenuList>( shared_from_this() );
 	}
 
 	void MenuList::InitializeArrows()

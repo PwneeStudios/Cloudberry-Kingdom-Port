@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		MyMenu->OnB = Cast::ToMenu( boost::make_shared<BackProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 		MyMenu->OnA = Cast::ToMenu( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) );
 
-		MyList = boost::make_shared<MenuList>();
+		MyList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( MyList );
 		MyList->Name = std::wstring( L"list" );
 		MyList->Center = true;
@@ -120,14 +120,14 @@ namespace CloudberryKingdom
 		MyMenu->Add( MyList );
 
 		//var Done = new MenuItem(new EzText("Use", ItemFont));
-		boost::shared_ptr<MenuItem> Done = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_USE, ItemFont ) );
+		boost::shared_ptr<MenuItem> Done = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_USE, ItemFont ) ) );
 		Done->Name = std::wstring( L"Done" );
 		Done->setGo( Cast::ToItem( boost::make_shared<SelectProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( Done );
 
 		//var BackButton = new MenuItem(new EzText("{pBackArrow2,80,?}", ItemFont));
 		//var BackButton = new MenuItem(new EzText("Cancel", ItemFont));
-		boost::shared_ptr<MenuItem> BackButton = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) );
+		boost::shared_ptr<MenuItem> BackButton = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CANCEL, ItemFont ) ) );
 		BackButton->Name = std::wstring( L"Cancel" );
 		BackButton->setGo( Cast::ToItem( boost::make_shared<BackProxy>( boost::static_pointer_cast<ListSelectPanel>( boost::static_pointer_cast<ListSelectPanel>( shared_from_this() ) ) ) ) );
 		AddItem( BackButton );

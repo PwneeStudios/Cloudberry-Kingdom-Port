@@ -76,13 +76,13 @@ namespace CloudberryKingdom
 
 
 		// Yes
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( std::wstring( L"Yes" ) ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( std::wstring( L"Yes" ) ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteYesGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( std::wstring( L"No" ) ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( std::wstring( L"No" ) ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteNoGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();

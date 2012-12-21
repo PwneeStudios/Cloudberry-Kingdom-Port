@@ -3,7 +3,8 @@
 namespace CloudberryKingdom
 {
 
-	MenuScrollBar::MenuScrollBar()
+	MenuScrollBar::MenuScrollBar() :
+		MenuSlider( boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42 ) )
 	{
 		InitializeInstanceFields();
 	}

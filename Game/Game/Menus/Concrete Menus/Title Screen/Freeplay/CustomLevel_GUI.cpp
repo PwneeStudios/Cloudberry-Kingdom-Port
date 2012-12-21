@@ -577,14 +577,14 @@ namespace CloudberryKingdom
 		MyPile->Add( LocationText );
 		LocationText->setPos( Vector2( -1050.111f, 933 ) );
 
-		boost::shared_ptr<MenuList> LocationList = boost::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> LocationList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( LocationList );
 		LocationList->Name = std::wstring( L"Location" );
 		LocationList->Center = !LeftJustify;
 		LocationList->MyExpandPos = Vector2( -498.1506f, 713.873f );
 		for ( std::vector<boost::shared_ptr<TileSet> >::const_iterator tileset = FreeplayTilesets.begin(); tileset != FreeplayTilesets.end(); ++tileset )
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ( *tileset )->NameInGame, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ( *tileset )->NameInGame, ItemFont, false, true ) ) );
 			SetItemProperties( item );
 			
 			boost::shared_ptr<TileSet> t = *tileset;
@@ -607,7 +607,7 @@ namespace CloudberryKingdom
 		MyPile->Add( GameText );
 		GameText->setPos( Vector2( -1061.11f, 933 - 222 ) );
 
-		boost::shared_ptr<MenuList> GameList = boost::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> GameList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( GameList );
 		GameList->Name = std::wstring( L"Game" );
 		GameList->MyExpandPos = Vector2( -580, 500.873f );
@@ -625,7 +625,7 @@ namespace CloudberryKingdom
 		}
 		for ( std::vector<Localization::Words>::const_iterator name = GameNames.begin(); name != GameNames.end(); ++name )
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( *name, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( *name, ItemFont, false, true ) ) );
 			SetItemProperties( item );
 			GameList->AddItem( item, MakeSmartObject( *name ) );
 		}
@@ -643,7 +643,7 @@ namespace CloudberryKingdom
 		MyPile->Add( HeroText );
 		HeroText->setPos( Vector2( -1044.443f, 933 - 2 * 222 ) );
 
-		HeroList = boost::make_shared<MenuList>();
+		HeroList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( HeroList );
 		HeroList->Name = std::wstring( L"Hero" );
 		HeroList->Center = !LeftJustify;
@@ -652,11 +652,11 @@ namespace CloudberryKingdom
 			AddHeroItem( *hero );
 
 		// Random
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont, false, true ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont, false, true ) ) );
 		SetItemProperties( item );
 		HeroList->AddItem( item, MakeSmartObject( BobPhsxRandom::getInstance() ) );
 		// Custom
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( CustomHeroString, ItemFont, false, true ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CustomHeroString, ItemFont, false, true ) ) );
 		SetItemProperties( item );
 		HeroList->AddItem( item, 0 );
 
@@ -676,7 +676,7 @@ namespace CloudberryKingdom
 		DiffText->setPos( Vector2( -1233.889f, 40.55557f ) );
 
 		std::vector<Localization::Words> Names = CampaignHelper::DifficultyNames;
-		DiffList = boost::make_shared<MenuList>();
+		DiffList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( DiffList );
 		DiffList->Name = std::wstring( L"Diff" );
 		DiffList->Center = !LeftJustify;
@@ -684,7 +684,7 @@ namespace CloudberryKingdom
 		DiffList->DoIndexWrapping = false;
 		for ( int i = 0; i < 5; i++ )
 		{
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Names[ i ], ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Names[ i ], ItemFont, false, true ) ) );
 			SetItemProperties( item );
 			DiffList->AddItem( item, MakeSmartObject( Names[ i ] ) );
 		}
@@ -752,7 +752,7 @@ namespace CloudberryKingdom
 	#if defined(XBOX)
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, std::wstring( L"Button_A" ) ) );
 	#endif
-		Start = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) );
+		Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
 		Start->Name = std::wstring( L"Start" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -772,9 +772,9 @@ namespace CloudberryKingdom
 		// Load
 		boost::shared_ptr<MenuItem> Load;
 	#if defined(PC_VERSION)
-		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) );
+		Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) ) );
 	#else
-		Load = item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) );
+		Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) ) );
 	#endif
 		Load->Name = std::wstring( L"Load" );
 		Load->setGo( boost::make_shared<BringLoadProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );
@@ -793,7 +793,7 @@ namespace CloudberryKingdom
 	#if defined(XBOX)
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, std::wstring( L"Button_B" ) ) );
 	#endif
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
 		item->Name = std::wstring( L"Back" );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -818,7 +818,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<MenuItem> CustomLevel_GUI::AddHeroItem( const boost::shared_ptr<BobPhsx> &hero )
 	{
 		boost::shared_ptr<MenuItem> item;
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) ) );
 		item->MyObject = MakeSmartObject( hero );
 		SetItemProperties( item );
 		HeroList->AddItem( item, MakeSmartObject( hero ) );

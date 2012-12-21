@@ -111,7 +111,7 @@ namespace CloudberryKingdom
 		MyMenu = boost::make_shared<Menu>( false );
 		MyMenu->setControl( getControl() );
 
-		boost::shared_ptr<MenuItem> OkItem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( OkText, ItemFont, true, true ), std::wstring( L"Message" ) );
+		boost::shared_ptr<MenuItem> OkItem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( OkText, ItemFont, true, true ), std::wstring( L"Message" ) ) );
 		OkItem->setGo( Cast::ToItem( boost::make_shared<OkProxy>( boost::static_pointer_cast<AlertBaseMenu>( shared_from_this() ) ) ) );
 		AddItem( OkItem );
 		OkItem->SelectSound.reset();

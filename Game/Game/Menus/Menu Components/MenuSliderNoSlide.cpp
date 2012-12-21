@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 	{
 		Init( Text, Text->Clone() );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<MenuSliderNoSlide>( shared_from_this() );
 	}
 
 	MenuSliderNoSlide::MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
@@ -19,6 +21,8 @@ namespace CloudberryKingdom
 	{
 		Init( Text, SelectedText );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<MenuSliderNoSlide>( shared_from_this() );
 	}
 
 #if defined(PC_VERSION)

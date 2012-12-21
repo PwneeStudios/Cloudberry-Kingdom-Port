@@ -86,14 +86,14 @@ namespace CloudberryKingdom
 		HeaderText->setPos( Vector2( -701.1883f, 816.7295f ) );
 
 		// Yes
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
 		item->Name = std::wstring( L"Yes" );
 		item->setGo( Cast::ToItem( boost::make_shared<CloudberryKingdomGame::ExitProxy>( Tools::TheGame ) ) );
 		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, std::wstring( L"cb_crying" ) );
 		AddItem( item );
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
 		item->Name = std::wstring( L"No" );
 		item->setGo( boost::make_shared<MenuReturnToCallerLambda>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->AdditionalOnSelect = boost::make_shared<InitTextureNameSetter>( Berry, std::wstring( L"cb_enthusiastic" ) );

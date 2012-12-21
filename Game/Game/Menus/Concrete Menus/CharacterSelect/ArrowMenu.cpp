@@ -51,14 +51,14 @@ namespace CloudberryKingdom
 		Vector2 padding = Vector2( 0, 80 );
 
 		// Left arrow
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"{pcharmenu_larrow_1,70,?}" ), ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"{pcharmenu_larrow_1,70,?}" ), ItemFont ) ) );
 		item->AlwaysDrawAsSelected = true;
 		item->setGo( Cast::ToItem( boost::make_shared<SimpleMenuBase::SimpleSelect_LeftProxy>( MySimple ) ) );
 		ItemPos = Vector2( -SeparationWidth, 250 );
 		AddItem( item );
 
 		// Right arrow
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( std::wstring( L"{pcharmenu_rarrow_1,70,?}" ), ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"{pcharmenu_rarrow_1,70,?}" ), ItemFont ) ) );
 		item->AlwaysDrawAsSelected = true;
 		item->setGo( Cast::ToItem( boost::make_shared<SimpleMenuBase::SimpleSelect_RightProxy>( MySimple ) ) );
 		ItemPos = Vector2( SeparationWidth, 250 );

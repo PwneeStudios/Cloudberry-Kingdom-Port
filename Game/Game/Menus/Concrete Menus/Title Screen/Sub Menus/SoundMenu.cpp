@@ -101,14 +101,14 @@ namespace CloudberryKingdom
 		MusicSlider->Name = std::wstring( L"Music" );
 		AddItem( MusicSlider );
 
-		boost::shared_ptr<MenuItem> item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) ) );
 		item->setGo( boost::make_shared<InitHideHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		item->Name = std::wstring( L"Controls" );
 		AddItem( item );
 
 	#if defined(PC_VERSION)
 		// Custom controls
-		boost::shared_ptr<MenuItem> mitem = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) );
+		boost::shared_ptr<MenuItem> mitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) ) );
 		mitem->setGo( boost::make_shared<InitCallCustomControlsHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		mitem->Name = std::wstring( L"Custom" );
 		AddItem( mitem );
@@ -119,7 +119,7 @@ namespace CloudberryKingdom
 		RezText->Name = std::wstring( L"RezText" );
 		MyPile->Add( RezText );
 
-		boost::shared_ptr<MenuList> FsRezList = boost::make_shared<MenuList>();
+		boost::shared_ptr<MenuList> FsRezList = MakeMagic( MenuList, () );
 			MenuList_PostConstruct( FsRezList );
 		FsRezList->Name = std::wstring( L"RezList" );
 		FsRezList->Center = false;
@@ -144,7 +144,7 @@ namespace CloudberryKingdom
 			std::wstring str = ::ToString( ( *mode )->Width ) + std::wstring( L" x " ) + ::ToString( ( *mode )->Height );
 			//std::wstring str = std::wstring( L"Hello" );
 			Tools::Write( str.c_str() );
-			item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( str, ItemFont, false, true ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( str, ItemFont, false, true ) ) );
 			SetItemProperties( item );
 			FsRezList->AddItem( item, MakeSmartObject( *mode ) );
 
@@ -168,7 +168,7 @@ namespace CloudberryKingdom
 		FullScreenText->Name = std::wstring( L"Fullscreen" );
 		MyPile->Add( FullScreenText );
 
-		boost::shared_ptr<MenuToggle> toggle = boost::make_shared<MenuToggle>( ItemFont );
+		boost::shared_ptr<MenuToggle> toggle = MakeMagic( MenuToggle, ( ItemFont ) );
 		toggle->OnToggle = boost::make_shared<InitOnToggleHelper>();
 		toggle->Name = std::wstring( L"FullscreenToggle" );
 		toggle->Toggle( Tools::getFullscreen() );
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 		Text->setScale( Text->getScale() * .9f );
 
 		// Toggle
-		boost::shared_ptr<MenuToggle> Toggle = boost::make_shared<MenuToggle>( ItemFont );
+		boost::shared_ptr<MenuToggle> Toggle = MakeMagic( MenuToggle, ( ItemFont ) );
 		Toggle->OnToggle = boost::make_shared<Toggle_BorderlessProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) );
 		Toggle->Toggle( Tools::WindowBorder );
 		Toggle->Name = std::wstring( L"WindowBorderToggle" );

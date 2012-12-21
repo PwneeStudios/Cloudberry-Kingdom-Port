@@ -46,13 +46,13 @@ namespace CloudberryKingdom
 		MyPile->Add( PlayerText );
 
 		// Yes
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
 		item->setGo( boost::make_shared<VerifyRemoveYesLambda>( boost::static_pointer_cast<VerifyRemoveMenu>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
 		item->setGo( boost::make_shared<MenuReturnToCallerLambda>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();

@@ -252,7 +252,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Customize
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CUSTOM, ItemFont ) ) );
 		item->Name = std::wstring( L"Custom" );
 		item->setGo( Cast::ToItem( boost::make_shared<SimpleToCustomProxy>( boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		ItemPos = Vector2( -523, -174 );
@@ -260,13 +260,13 @@ namespace CloudberryKingdom
 		AddItem( item );
 
 		// Random
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) ) );
 		item->Name = std::wstring( L"Random" );
 		item->setGo( Cast::ToItem( boost::make_shared<CharacterSelect::RandomizeProxy>( MyCharacterSelect ) ) );
 		AddItem( item );
 
 		// Confirm
-		item = boost::make_shared<MenuItem>( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) ) );
 		item->Name = std::wstring( L"Done" );
 		item->setGo( Cast::ToItem( boost::make_shared<SimpleToDoneProxy>( boost::static_pointer_cast<SimpleMenuBase>( shared_from_this() ) ) ) );
 		AddItem( item );
