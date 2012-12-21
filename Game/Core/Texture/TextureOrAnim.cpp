@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Hacks\String.h>
+
 namespace CloudberryKingdom
 {
 
@@ -16,14 +18,16 @@ namespace CloudberryKingdom
 
 	void TextureOrAnim::Set( const std::wstring &name )
 	{
-		if ( Tools::TextureWad->AnimationDict.find( name ) != Tools::TextureWad->AnimationDict.end() )
+		std::wstring lowercaseName = ToLower( name );
+
+		if ( Tools::TextureWad->AnimationDict.find( lowercaseName ) != Tools::TextureWad->AnimationDict.end() )
 		{
-			MyAnim = Tools::TextureWad->AnimationDict[ name ];
+			MyAnim = Tools::TextureWad->AnimationDict[ lowercaseName ];
 			IsAnim = true;
 		}
 		else
 		{
-			MyTexture = Tools::Texture( name );
+			MyTexture = Tools::Texture( lowercaseName );
 			IsAnim = false;
 		}
 	}

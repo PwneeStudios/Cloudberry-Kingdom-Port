@@ -869,6 +869,9 @@ namespace CloudberryKingdom
 	sprite_anim( std::wstring( L"fblock_cave" ), std::wstring( L"fblock_cave" ), 1, 3, 2 );
 	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_cave" ), -3.f, 3.f, 2.f ) );
 
+	sprite_anim( std::wstring( L"Bouncy_Forest" ), std::wstring( L"Bouncy_Forest" ), 1, 3, 2 );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_Forest" ), -6.f, 6.f, 13.f ) );
+
 	sprite_anim( std::wstring( L"Bouncy_cave" ), std::wstring( L"Bouncy_cave" ), 1, 3, 2 );
 	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_cave" ), -6.f, 6.f, 13.f ) );
 

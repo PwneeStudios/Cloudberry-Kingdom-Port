@@ -16,6 +16,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Lambda_1<boost::shared_ptr<ControlItem> > > Reset;
 
 		ControlItem( Localization::Words description, Keys key );
+		boost::shared_ptr<ControlItem> ControlItem_Construct( Localization::Words description, Keys key );
 
 		void SetKey( Keys key );
 

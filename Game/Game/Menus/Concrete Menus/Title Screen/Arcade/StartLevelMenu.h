@@ -5,12 +5,15 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct LevelItem : public MenuItem
 	{
 	
 		int StartLevel, MenuIndex;
 
 		LevelItem( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked );
+		boost::shared_ptr<LevelItem> LevelItem_Construct( const boost::shared_ptr<EzText> &Text, int StartLevel, int MenuIndex, bool Locked );
+
 	};
 
 	struct StartLevelMenu : public CkBaseMenu

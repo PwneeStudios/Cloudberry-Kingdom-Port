@@ -99,11 +99,12 @@ namespace CloudberryKingdom
 			bool MarkedForDeletion;
 
 			SeedItem( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font );
+			boost::shared_ptr<SeedItem> SeedItem_Construct( const std::wstring &name, const std::wstring &seed, const boost::shared_ptr<EzFont> &font );
 
 			void ToggleDeletion();
-
 		
 			void InitializeInstanceFields();
+
 		};
 
 	

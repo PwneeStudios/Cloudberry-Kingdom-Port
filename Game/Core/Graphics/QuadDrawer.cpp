@@ -273,7 +273,7 @@ namespace CloudberryKingdom
 			
 			// FIXME: HEHEHE.
 			QUAD_DRAWER->SetEffect( quad.MyEffect->effect );
-			CurrentEffect->SetCameraParameters();
+			//CurrentEffect->SetCameraParameters();
 
 			CurrentTexture = quad.getMyTexture();
 
@@ -653,6 +653,9 @@ namespace CloudberryKingdom
 
 	void QuadDrawer::Flush()
 	{
+		if ( CurrentTexture != 0 )
+			CurrentEffect->SetCameraParameters();
+		QUAD_DRAWER->Flush();
 		return; // FIXME: We shoudl not return.
 	//#if DEBUG
 	//            if (Device.SamplerStates[1] == null) Tools.Write("!");

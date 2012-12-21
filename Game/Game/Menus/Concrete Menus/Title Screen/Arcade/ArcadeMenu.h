@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 		bool Locked;
 
 		ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq );
+		boost::shared_ptr<ArcadeItem> ArcadeItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq );
+
 	};
 
 	struct ArcadeBaseMenu : public CkBaseMenu
