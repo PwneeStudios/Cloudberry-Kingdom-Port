@@ -49,6 +49,9 @@ public:
 	/// Have we reached the end of file?
 	virtual bool IsEOF() = 0;
 
+	/// Size of whole file.
+	virtual unsigned int Size() = 0;
+
 	/// Read a file into a string.
 	/**
 	 * @param path Path to file.

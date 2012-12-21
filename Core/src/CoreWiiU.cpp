@@ -93,8 +93,6 @@ int CoreWiiU::Run()
 	{
 		GamePad::Update();
 
-		game_.Update();
-
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
 			DEMODRCBeforeRender();
@@ -116,7 +114,10 @@ int CoreWiiU::Run()
 
 		DEMOGfxSetContextState();
 
-		qd_->Flush();
+		GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+		GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+
+		game_.Update();
 
 		DEMOGfxSetContextState();
 

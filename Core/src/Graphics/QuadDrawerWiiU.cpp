@@ -114,8 +114,6 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);*/
-
-	GX2SetDebugMode( ( GX2DebugMode )( GX2_DEBUG_MODE_FLUSH_PER_DRAW | GX2_DEBUG_MODE_DONE_PER_FLUSH ) );
 }
 
 QuadDrawerWiiU::~QuadDrawerWiiU()
@@ -187,23 +185,14 @@ void QuadDrawerWiiU::Flush()
 	if( internal_->NumElements == 0 )
 		return;
 
-	GX2SetDepthOnlyControl( GX2_TRUE, GX2_TRUE, GX2_COMPARE_ALWAYS );
-	GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
-
+	
 	internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);
 	memcpy( internal_->Vertices, &internal_->LocalQuadBuffer[ 0 ], internal_->NumElements * sizeof( QuadVert ) );
 	GX2RUnlockBuffer( &internal_->QuadBuffer );
 
-	//GX2RUnlockBuffer( &internal_->QuadBuffer );
-	//GX2SetShaders( &internal_->SimpleShader.fetchShader, internal_->SimpleShader.pVertexShader, internal_->SimpleShader.pPixelShader );
 	internal_->Effect->CurrentTechnique->Passes[ 0 ]->Apply();
-	/*internal_->Effect->Parameters( "u_cameraPos" )->SetValue( Vector4( 0, 0, 0.001f, 0.001f ) );
-	internal_->Effect->Parameters( "u_cameraAspect" )->SetValue( 1.77778f );
-	internal_->Effect->Parameters( "u_flipVector" )->SetValue( Vector2( -1, -1 ) );
-	internal_->Effect->Parameters( "u_flipCenter" )->SetValue( Vector2( 0, 0 ) );
-	internal_->Effect->Parameters( "u_illumination" )->SetValue( 1.f );*/
 
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 0, 0 );
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 1, offsetof( QuadVert, TexCoord ) );
@@ -215,8 +204,6 @@ void QuadDrawerWiiU::Flush()
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
-		/*batch.Map->Activate( internal_->SamplerLocation );
-		GX2SetPixelSampler( &internal_->Sampler, internal_->SamplerLocation );*/
 		batch.Map->Activate( 0 );
 		GX2DrawEx( GX2_PRIMITIVE_QUADS, batch.NumElements, batch.Offset, 1 );	
 	}
@@ -227,6 +214,9 @@ void QuadDrawerWiiU::Flush()
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);*/
+
+	// FIXME: Maybe a GX2Flush() is sufficient?
+	GX2DrawDone();
 }
 
 void QuadDrawerWiiU::Unlock()
