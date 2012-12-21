@@ -127,6 +127,10 @@ namespace CloudberryKingdom
 		MenuItem( const boost::shared_ptr<EzText> &Text, const std::wstring &Name );
 		MenuItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text );
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const std::wstring &Name );
+		boost::shared_ptr<MenuItem> MenuItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
+
 		void ScaleText( float scale );
 
 		/// <summary>
