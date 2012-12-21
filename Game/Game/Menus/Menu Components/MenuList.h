@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MenuList : public MenuItem
 	{
 	
@@ -69,15 +70,13 @@ namespace CloudberryKingdom
 		virtual void FadeOut();
 
 		MenuList();
-
+		boost::shared_ptr<MenuList> MenuList_Construct();
 	
 		void InitializeArrows();
-
 	
 		virtual float Height();
 
 		virtual float Width();
-
 	
 		std::map<boost::shared_ptr<MenuItem>, boost::shared_ptr<Object> > ObjDict;
 	

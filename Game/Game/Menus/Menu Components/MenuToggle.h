@@ -5,11 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MenuToggle : public MenuItem
 	{
 	
 		MenuToggle( const boost::shared_ptr<EzFont> &Font );
-
+		boost::shared_ptr<MenuToggle> MenuToggle_Construct( const boost::shared_ptr<EzFont> &Font );
 	
 		bool MyState;
 	
@@ -17,10 +18,11 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<Lambda_1<bool> > OnToggle;
 		virtual void PhsxStep( bool Selected );
-
 	
 		void InitializeInstanceFields();
+
 	};
+
 }
 
 

@@ -142,9 +142,15 @@ namespace CloudberryKingdom
 	MenuItem::MenuItem()
 	{
 		InitializeInstanceFields();
+	}
+
+	boost::shared_ptr<MenuItem> MenuItem::MenuItem_Construct()
+	{
 		SetToDefaultColors();
 
 		setOverrideA( false );
+
+		return boost::static_pointer_cast<MenuItem>( shared_from_this() );
 	}
 
 	void MenuItem::SetToDefaultColors()

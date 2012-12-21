@@ -91,12 +91,12 @@ namespace CloudberryKingdom
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
-		boost::shared_ptr<MenuSlider> FxSlider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( Localization::Words_SOUND_VOLUME, ItemFont ) );
+		boost::shared_ptr<MenuSlider> FxSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_SOUND_VOLUME, ItemFont ) ) );
 		FxSlider->setMyFloat( Tools::SoundVolume );
 		FxSlider->Name = std::wstring( L"Sound" );
 		AddItem( FxSlider );
 
-		boost::shared_ptr<MenuSlider> MusicSlider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( Localization::Words_MUSIC_VOLUME, ItemFont ) );
+		boost::shared_ptr<MenuSlider> MusicSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_MUSIC_VOLUME, ItemFont ) ) );
 		MusicSlider->setMyFloat( Tools::MusicVolume );
 		MusicSlider->Name = std::wstring( L"Music" );
 		AddItem( MusicSlider );

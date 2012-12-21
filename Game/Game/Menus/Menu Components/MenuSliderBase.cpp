@@ -66,23 +66,43 @@ namespace CloudberryKingdom
 	MenuSliderBase::MenuSliderBase()
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuSliderBase> MenuSliderBase::MenuSliderBase_Construct()
+	{
+		MenuItem::MenuItem_Construct();
+
 		boost::shared_ptr<EzText> NoText = boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42 );
 		Init( NoText, NoText->Clone() );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<MenuSliderBase>( shared_from_this() );
 	}
 
 	MenuSliderBase::MenuSliderBase( const boost::shared_ptr<EzText> &Text )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuSliderBase> MenuSliderBase::MenuSliderBase_Construct( const boost::shared_ptr<EzText> &Text )
+	{
+		MenuItem::MenuItem_Construct();
+
 		Init( Text, Text->Clone() );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<MenuSliderBase>( shared_from_this() );
 	}
 
 	MenuSliderBase::MenuSliderBase( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		InitializeInstanceFields();
+	}
+	boost::shared_ptr<MenuSliderBase> MenuSliderBase::MenuSliderBase_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
+	{
+		MenuItem::MenuItem_Construct();
 		Init( Text, SelectedText );
 		InitializeSlider();
+
+		return boost::static_pointer_cast<MenuSliderBase>( shared_from_this() );
 	}
 
 	void MenuSliderBase::InitializeSlider()

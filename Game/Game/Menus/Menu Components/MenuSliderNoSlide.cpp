@@ -5,11 +5,17 @@ namespace CloudberryKingdom
 
 	MenuSliderNoSlide::MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text )
 	{
+	}
+	boost::shared_ptr<MenuSliderNoSlide> MenuSliderNoSlide::MenuSliderNoSlide_Construct( const boost::shared_ptr<EzText> &Text )
+	{
 		Init( Text, Text->Clone() );
 		InitializeSlider();
 	}
 
 	MenuSliderNoSlide::MenuSliderNoSlide( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
+	{
+	}
+	boost::shared_ptr<MenuSliderNoSlide> MenuSliderNoSlide::MenuSliderNoSlide_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText )
 	{
 		Init( Text, SelectedText );
 		InitializeSlider();

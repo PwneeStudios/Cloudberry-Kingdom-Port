@@ -703,7 +703,7 @@ namespace CloudberryKingdom
 		MyPile->Add( LengthText );
 		LengthText->setPos( Vector2( -1224.999f, -191.6667f ) );
 
-		length = boost::make_shared<LengthSlider>();
+		length = MakeMagic( LengthSlider, () );
 		length->Name = std::wstring( L"Length" );
 		length->_Go.reset();
 		AddItem( length );
@@ -723,7 +723,7 @@ namespace CloudberryKingdom
 		MyPile->Add( CheckpointsText );
 		CheckpointsText->setPos( Vector2( -1008.33f, -661.1111f ) );
 
-		checkpoints = boost::make_shared<MenuSliderNoSlide>( boost::make_shared<EzText>( std::wstring( L"x " ), ItemFont ) );
+		checkpoints = MakeMagic( MenuSliderNoSlide, ( boost::make_shared<EzText>( std::wstring( L"x " ), ItemFont ) ) );
 		checkpoints->Name = std::wstring( L"Checkpoints" );
 		checkpoints->setMyFloat( boost::make_shared<WrappedFloat>( 1.f, 0.f, 4.f ) );
 		checkpoints->InitialSlideSpeed = 1;

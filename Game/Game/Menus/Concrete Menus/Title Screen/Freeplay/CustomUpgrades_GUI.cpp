@@ -204,7 +204,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::AddUpgrade( Upgrade upgrade )
 	{
-		boost::shared_ptr<MenuSlider> slider = boost::make_shared<MenuSlider>( boost::make_shared<EzText>( std::wstring( L"" ), ItemFont ) );
+		boost::shared_ptr<MenuSlider> slider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( std::wstring( L"" ), ItemFont ) ) );
 		slider->setSliderBackSize( slider->getSliderBackSize() * Vector2(1.15f, .72f) * .975f * ScaleList );
 		slider->SetIcon( ObjectIcon::CreateIcon( upgrade ) );
 		slider->Icon->SetScale( .6f * ScaleList );

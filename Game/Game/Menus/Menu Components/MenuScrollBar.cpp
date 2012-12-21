@@ -3,9 +3,15 @@
 namespace CloudberryKingdom
 {
 
-	MenuScrollBar::MenuScrollBar() : MenuSlider(boost::make_shared<EzText>(std::wstring( L"" ), Resources::Font_Grobold42))
+	MenuScrollBar::MenuScrollBar()
 	{
 		InitializeInstanceFields();
+	}
+
+	boost::shared_ptr<MenuScrollBar> MenuScrollBar::MenuScrollBar_Construct()
+	{
+		MenuSlider::MenuSlider_Construct( boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42 ) );
+		return boost::static_pointer_cast<MenuScrollBar>( shared_from_this() );
 	}
 
 	void MenuScrollBar::InitializeSlider()

@@ -21,6 +21,8 @@ namespace CloudberryKingdom
 		MenuSlider( const boost::shared_ptr<EzText> &Text );
 		MenuSlider( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 
+		boost::shared_ptr<MenuSlider> MenuSlider_Construct( const boost::shared_ptr<EzText> &Text );
+		boost::shared_ptr<MenuSlider> MenuSlider_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<EzText> &SelectedText );
 	
 		virtual void InitializeSlider();
 
