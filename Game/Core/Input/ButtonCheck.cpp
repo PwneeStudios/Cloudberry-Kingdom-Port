@@ -219,6 +219,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		Tools::PrevKeyboard = Tools::Keyboard;
 		Tools::PrevMouse = Tools::Mouse;
+#endif
 
 		// Store the previous states of the Xbox controllers.
 		for ( int i = 0; i < 4; i++ )
@@ -227,7 +228,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 			//if ( Tools::PrevGamepadState[ i ] != 0 )
 				Tools::PrevGamepadState[ i ] = Tools::GamepadState[ i ];
 		}
-#endif
+
 	}
 
 #if defined(PC_VERSION)

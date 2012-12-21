@@ -88,6 +88,37 @@ void GamePad::Update()
 		PAD_STATE[ i ].ThumbSticks.Left = Vector2( status[ i ].stickX / 128.f, status[ i ].stickY / 128.f );
 		PAD_STATE[ i ].ThumbSticks.Right = Vector2( status[ i ].substickX / 128.f, status[ i ].substickY / 128.f );
 	}
+
+	s32 error;
+	VPADStatus vpadStatus;
+	VPADRead( VPADBASE_CHAN0, &vpadStatus, 1, &error );
+
+	if( error == VPAD_READ_ERR_NONE )
+	{
+		PAD_STATE[ 0 ].Buttons.A = vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.B = vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.X = vpadStatus.hold & VPAD_BUTTON_X ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.Y = vpadStatus.hold & VPAD_BUTTON_Y ? ButtonState_Pressed : ButtonState_Released;
+
+		PAD_STATE[ 0 ].Buttons.LeftShoulder = vpadStatus.hold & VPAD_BUTTON_L ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.RightShoulder = vpadStatus.hold & VPAD_BUTTON_R ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.Start = vpadStatus.hold & VPAD_BUTTON_PLUS ? ButtonState_Pressed : ButtonState_Released;
+
+		PAD_STATE[ 0 ].DPad.Down = vpadStatus.hold & VPAD_BUTTON_DOWN ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].DPad.Left = vpadStatus.hold & VPAD_BUTTON_LEFT ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].DPad.Right = vpadStatus.hold & VPAD_BUTTON_RIGHT ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].DPad.Up = vpadStatus.hold & VPAD_BUTTON_UP ? ButtonState_Pressed : ButtonState_Released;
+		/*PAD_STATE[ 0 ].Buttons.LeftStick = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.RightStick = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.Back = ( status[ i ].button & PAD_BUTTON_START ) ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Buttons.BigButton = ( status[ i ].button & PAD_BUTTON_MENU ) ? ButtonState_Pressed : ButtonState_Released;*/
+
+		PAD_STATE[ 0 ].Triggers.Left =  ( vpadStatus.hold & VPAD_TRIGGER_ZL ) / VPAD_TRIGGER_ZL ? ButtonState_Pressed : ButtonState_Released;
+		PAD_STATE[ 0 ].Triggers.Right = ( vpadStatus.hold & VPAD_TRIGGER_ZR ) / VPAD_TRIGGER_ZR ? ButtonState_Pressed : ButtonState_Released;
+
+		PAD_STATE[ 0 ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
+		PAD_STATE[ 0 ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
+	}
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )
