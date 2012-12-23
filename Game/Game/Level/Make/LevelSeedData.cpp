@@ -550,9 +550,10 @@ namespace CloudberryKingdom
 			}
 
 			std::vector<std::wstring> terms;
+			std::wstring lower_identifier = ToLower( identifier );
 
 			// Seed [This must come first]
-			if ( ToLower( identifier ) == std::wstring( L"s" ) )
+			if ( lower_identifier == std::wstring( L"s" ) )
 			{
 				/*try
 				{*/
@@ -564,7 +565,7 @@ namespace CloudberryKingdom
 				}*/
 			}
 			// Game type
-			else if ( ToLower( identifier ) == std::wstring( L"g" ) )
+			else if ( lower_identifier == std::wstring( L"g" ) )
 			{
 				MyGameType = NormalGameData::Factory;
 				//try
@@ -577,7 +578,7 @@ namespace CloudberryKingdom
 				//}
 			}
 			// Geometry
-			else if ( ToLower( identifier ) == std::wstring( L"geo" ) )
+			else if ( lower_identifier == std::wstring( L"geo" ) )
 			{
 				/*try
 				{*/
@@ -589,7 +590,7 @@ namespace CloudberryKingdom
 				}*/
 			}
 			// Hero [This must come before "ph:"]
-			else if ( ToLower( identifier ) == std::wstring( L"h" ) )
+			else if ( lower_identifier == std::wstring( L"h" ) )
 			{
 					terms = Split( data, L',' );
 					if ( terms.size() == 4 )
@@ -598,14 +599,14 @@ namespace CloudberryKingdom
 						DefaultHeroType = BobPhsxNormal::getInstance();
 			}
 			// Custom physics [This must come after "h:"]
-			else if ( ToLower( identifier ) == std::wstring( L"ph" ) )
+			else if ( lower_identifier == std::wstring( L"ph" ) )
 			{
 					BobPhsx::CustomPhsxData custom = BobPhsx::CustomPhsxData();
 					custom.Init( data );
 					DefaultHeroType->SetCustomPhsx( custom );
 			}
 			// Tileset
-			else if ( ToLower( identifier ) == std::wstring( L"t" ) )
+			else if ( lower_identifier == std::wstring( L"t" ) )
 			{
 					MyTileSet.reset();
 					if ( data.length() > 0 )
@@ -623,7 +624,7 @@ namespace CloudberryKingdom
 						SetTileSet( std::wstring( L"castle" ) );
 			}
 			// Number of pieces
-			else if ( ToLower( identifier ) == std::wstring( L"n" ) )
+			else if ( lower_identifier == std::wstring( L"n" ) )
 			{
 					/*try
 					{*/
@@ -636,7 +637,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Length
-			else if ( ToLower( identifier ) == std::wstring( L"l" ) )
+			else if ( lower_identifier == std::wstring( L"l" ) )
 			{
 					/*try
 					{*/
@@ -650,37 +651,37 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Upgrades
-			else if ( ToLower( identifier ) == std::wstring( L"u" ) )
+			else if ( lower_identifier == std::wstring( L"u" ) )
 			{
 					UpgradeStrs.push_back( data );
 			}
 			// Wall
-			else if ( ToLower( identifier ) == WallFlag )
+			else if ( lower_identifier == WallFlag )
 			{
 					HasWall = true;
 			}
 			// Fade In
-			else if ( ToLower( identifier ) == FadeInFlag )
+			else if ( lower_identifier == FadeInFlag )
 			{
 					FadeIn = true;
 			}
 			// Fade Out
-			else if ( ToLower( identifier ) == FadeOutFlag )
+			else if ( lower_identifier == FadeOutFlag )
 			{
 					FadeOut = true;
 			}
 			// No start door
-			else if ( ToLower( identifier ) == NoStartDoorFlag )
+			else if ( lower_identifier == NoStartDoorFlag )
 			{
 					NoStartDoor = true;
 			}
 			// Level number
-			else if ( ToLower( identifier ) == LevelFlag )
+			else if ( lower_identifier == LevelFlag )
 			{
 					LevelNum = ParseInt( data );
 			}
 			// Weather intensity
-			else if ( ToLower( identifier ) == WeatherIntensityFlag )
+			else if ( lower_identifier == WeatherIntensityFlag )
 			{
 					/*try
 					{*/
@@ -692,7 +693,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Wait length to open door
-			else if ( ToLower( identifier ) == WaitLengthToOpenDoorString )
+			else if ( lower_identifier == WaitLengthToOpenDoorString )
 			{
 					/*try
 					{*/
@@ -704,7 +705,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Song to play at beginning of level
-			else if ( ToLower( identifier ) == SongString )
+			else if ( lower_identifier == SongString )
 			{
 					/*try
 					{*/
@@ -716,7 +717,7 @@ namespace CloudberryKingdom
 					}*/
 			}
 			// Open door sound
-			else if ( ToLower( identifier ) == OpenDoorSoundFlag )
+			else if ( lower_identifier == OpenDoorSoundFlag )
 			{
 					OpenDoorSound = true;
 

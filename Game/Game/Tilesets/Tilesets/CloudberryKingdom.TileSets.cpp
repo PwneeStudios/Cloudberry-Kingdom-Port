@@ -397,7 +397,7 @@ namespace CloudberryKingdom
 	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, std::wstring( L"fblock_sea" ), -3.f, 3.f, 2.f ) );
 
 	sprite_anim( std::wstring( L"Bouncy_sea" ), std::wstring( L"Bouncy_Cloud" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_sea" ), -6.f, 6.f, 13.f, true) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_sea" ), -6.f, 6.f, 13.f ) );
 
 	sprite_anim( std::wstring( L"flame_Sea" ), std::wstring( L"firespinner_flame_Sea" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_Sea" ) );
@@ -682,7 +682,7 @@ namespace CloudberryKingdom
 	info->Lasers->Scale = 1;
 	info->Lasers->Tint_Full = Vector4( 1, 1, 1,.95f );
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
-
+	 
 	sprite_anim( std::wstring( L"fblock_forest" ), std::wstring( L"fblock_forest" ), 1, 3, 2 );
 	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_forest" ), -3.f, 3.f, 2.f ) );
 
