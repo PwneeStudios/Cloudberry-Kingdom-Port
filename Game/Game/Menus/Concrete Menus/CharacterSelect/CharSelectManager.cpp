@@ -2,6 +2,7 @@
 
 #include <Hacks/List.h>
 #include <MasterHack.h>
+#include <Core\Tools\Set.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

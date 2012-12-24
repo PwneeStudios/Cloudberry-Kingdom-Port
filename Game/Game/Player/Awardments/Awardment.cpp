@@ -5,6 +5,8 @@
 
 #include <MasterHack.h>
 
+#include <Core\Tools\Set.h>
+
 namespace CloudberryKingdom
 {
 

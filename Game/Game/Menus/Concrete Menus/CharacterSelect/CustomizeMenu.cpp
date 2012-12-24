@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Hacks/List.h"
+#include <Core\Tools\Set.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

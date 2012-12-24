@@ -3,6 +3,7 @@
 #include "Hacks/List.h"
 #include "Hacks/Queue.h"
 #include "Hacks/String.h"
+#include <Core\Tools\Set.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

@@ -4,6 +4,9 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include "Video.h"
+#include <Core\Tools\Set.h>
+
 namespace CloudberryKingdom
 {
 

@@ -10,10 +10,13 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <MasterHack.h>
 #include <Utility/Log.h>
+#include <Core\Tools\Set.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/Background.h"
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
+#include <Game\Video.h>
 
 namespace CloudberryKingdom
 {
@@ -1732,12 +1735,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
-				ScreenSaver_Construct( Intro );
-				Intro->Init();
+				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
+				//ScreenSaver_Construct( Intro );
+				//Intro->Init();
 
 				return;
 	#else

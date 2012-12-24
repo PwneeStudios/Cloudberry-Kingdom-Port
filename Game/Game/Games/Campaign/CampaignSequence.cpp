@@ -3,6 +3,9 @@
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>
 #include <Hacks/String.h>
+#include <Core\Tools\Set.h>
+
+#include <Game\Video.h>
 
 namespace CloudberryKingdom
 {

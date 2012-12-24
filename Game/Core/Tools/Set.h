@@ -1,12 +1,13 @@
 #ifndef SET
 #define SET
 
-#include <global_header.h>
+#include <map>
 
 namespace CloudberryKingdom
 {
+
 	template<typename T>
-	struct Set// : public IEnumerable, public IEnumerable<T>
+	struct Set
 	{
 	
 		std::map<T, bool> dict;
@@ -40,23 +41,20 @@ namespace CloudberryKingdom
 				dict.insert( std::make_pair( item, true ) );
 		}
 
-		/*boost::shared_ptr<IEnumerator> IEnumerable_GetEnumerator()
-		{
-			return dict.Keys->GetEnumerator();
-		}
-		boost::shared_ptr<IEnumerator<T> > GetEnumerator()
-		{
-			return dict.Keys->GetEnumerator();
-		}*/
-
 		T Choose( const boost::shared_ptr<Rand> &Rnd )
 		{
-			// FIXME: Please don't do this -_-
 			int i = Rnd->RndInt( 0, dict.size() - 1 );
-			std::map<T, bool>::iterator itr = dict.begin();
-			while( i > 0 )
+			
+			std::map<T, bool>::const_iterator itr = dict.begin();
+			int count = 0;
+			while ( count < i )
+			{
 				++itr;
+				++count;
+			}
+			
 			return itr->first;
+			//return (*(itr + i)).first;
 		}
 
 		bool Contains( T item )

@@ -2,6 +2,8 @@
 
 #include "Hacks/List.h"
 
+#include <Core\Tools\Set.h>
+
 namespace CloudberryKingdom
 {
 

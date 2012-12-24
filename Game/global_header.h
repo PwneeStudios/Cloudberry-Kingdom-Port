@@ -109,8 +109,7 @@ inline boost::shared_ptr<Object> MakeSmartObject( boost::shared_ptr<T> ptr )
 #include "Core/Tools/ColorHelper.h"
 #include "Core/Tools/CoreMath.h"
 #include "Core/Tools/Random.h"
-#include "Core/Tools/Set.h"
-#include "Game/Video.h"
+
 #include "Game/Collision Detection/AABox.h"
 #include "Game/Collision Detection/Circle.h"
 #include "Game/Collision Detection/FloatRectangle.h"

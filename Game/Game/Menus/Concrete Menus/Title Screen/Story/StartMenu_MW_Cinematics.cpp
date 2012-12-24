@@ -1,5 +1,9 @@
 #include <global_header.h>
 
+#include <Core\Tools\Set.h>
+
+#include <Game\Video.h>
+
 namespace CloudberryKingdom
 {
 
