@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/Queue.h"
+#include <MasterHack.h>
 
 #include <Core/Animation/AnimQueue.h>
 
@@ -10,6 +11,7 @@ namespace CloudberryKingdom
 	void BobPhsxBouncy::InitializeStatics()
 	{
 		BobPhsxBouncy::instance = boost::make_shared<BobPhsxBouncy>();
+			InitBobPhsxSingleton( BobPhsxBouncy::instance );
 	}
 
 	// Statics
@@ -36,6 +38,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxBouncy::Clone()
 	{
 		boost::shared_ptr<BobPhsxBouncy> newBob = boost::make_shared<BobPhsxBouncy>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -166,9 +169,9 @@ namespace CloudberryKingdom
 		}
 
 		if ( MyBob->IsSpriteBased )
-			MyBob->PlayerObject->PlayUpdate( 1 );
+			MyBob->PlayerObject->PlayUpdate( 1.f );
 		else
-			MyBob->PlayerObject->PlayUpdate( 1000 / 60 / 150 );
+			MyBob->PlayerObject->PlayUpdate( 1000.f / 60.f / 150.f );
 	}
 
 	void BobPhsxBouncy::InitializeInstanceFields()

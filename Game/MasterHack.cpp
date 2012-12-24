@@ -11,6 +11,12 @@
 namespace CloudberryKingdom
 {
 
+	void InitBobPhsxSingleton( const boost::shared_ptr<BobPhsx> &This )
+	{
+		if ( !This->SingletonInitialized )
+			This->InitSingleton();
+	}
+
 	void CharacterSelect_PostConstruct( const boost::shared_ptr<CharacterSelect> &This, int PlayerIndex, bool QuickJoin )
 	{
 		boost::shared_ptr<GameData> game = Tools::CurGameData;

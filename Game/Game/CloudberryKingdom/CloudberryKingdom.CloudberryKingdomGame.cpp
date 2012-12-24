@@ -403,7 +403,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		{
 			if ( !rez.Fullscreen )
 			{
-				rez.Height = static_cast<int>( ( 720 / 1280 ) * rez.Width );
+				rez.Height = static_cast<int>( ( 720.f / 1280.f ) * rez.Width );
 			}
 
 			MyGraphicsDeviceManager->PreferredBackBufferWidth = rez.Width;

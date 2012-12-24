@@ -203,7 +203,7 @@ namespace CloudberryKingdom
 		if ( MyStyle == Style_BUBBLE )
 		{
 			MyPile->BubbleDown( sound );
-			MyPile->FadeOut( 1 / 20 );
+			MyPile->FadeOut( 1.f / 20.f );
 		}
 		if ( MyStyle == Style_FADE )
 			MyPile->FadeOut( .0175f );

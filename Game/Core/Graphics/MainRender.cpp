@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 
 	void MainRender::MakeInnerViewport()
 	{
-		float targetAspectRatio = 1280 / 720.f;
+		float targetAspectRatio = 1280.f / 720.f;
 		// figure out the largest area that fits in this resolution at the desired aspect ratio
 		int width = MyGraphicsDevice->PP->BackBufferWidth;
 		SpriteScaling = width / 1280.f;

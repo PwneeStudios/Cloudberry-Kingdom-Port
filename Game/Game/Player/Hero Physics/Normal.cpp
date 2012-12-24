@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/Queue.h"
+#include <MasterHack.h>
 
 #include <Core\Animation\AnimQueue.h>
 
@@ -10,6 +11,7 @@ namespace CloudberryKingdom
 	void BobPhsxNormal::InitializeStatics()
 	{
 		BobPhsxNormal::instance = boost::make_shared<BobPhsxNormal>();
+			InitBobPhsxSingleton( BobPhsxNormal::instance );
 	}
 
 	// Statics
@@ -35,6 +37,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxNormal::Clone()
 	{
 		boost::shared_ptr<BobPhsxNormal> newBob = boost::make_shared<BobPhsxNormal>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -519,7 +522,7 @@ namespace CloudberryKingdom
 			else
 			{
 				float Prev_xVel = getxVel();
-				setxVel( getxVel() - Sign(getxVel()) * 7 / 4 * fric );
+				setxVel( getxVel() - Sign(getxVel()) * 7.f / 4.f * fric );
 
 				if ( !Ducking )
 				{
@@ -1022,7 +1025,7 @@ namespace CloudberryKingdom
 		// Masochistic
 		if ( getMyLevel()->getStyle()->Masochistic )
 		{
-			if ( getPos().Y < TR.Y - 400 && getxVel() > -2 && getPos().X > CurPhsxStep * (4000 / 800) )
+			if ( getPos().Y < TR.Y - 400 && getxVel() > -2 && getPos().X > CurPhsxStep * (4000.f / 800.f) )
 			{
 				switch ( ( CurPhsxStep / 60 ) % 2 )
 				{
@@ -1172,7 +1175,7 @@ namespace CloudberryKingdom
 					t = abs( ( Step % static_cast<int>( InnerPeriod ) ) / InnerPeriod );
 					break;
 				case 3:
-					InnerPeriod *= 7 / 4;
+					InnerPeriod *= 7.f / 4.f;
 					t = ( static_cast<float>( sin( Step / InnerPeriod ) ) + 1 ) / 2;
 					break;
 				case 4:
@@ -1409,7 +1412,7 @@ namespace CloudberryKingdom
 			MyBob->PlayerObject->PlayUpdate( 1000 * AnimSpeed * Tools::dt / 150 );
 		else
 			// Fixed speed update
-			MyBob->PlayerObject->PlayUpdate( AnimSpeed * 17 / 19 * 1000 / 60 / 150 );
+			MyBob->PlayerObject->PlayUpdate( AnimSpeed * 17.f / 19.f * 1000.f / 60.f / 150.f );
 	}
 
 	void BobPhsxNormal::SpriteAnimStep()

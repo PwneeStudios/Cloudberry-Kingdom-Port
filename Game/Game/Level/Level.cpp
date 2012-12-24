@@ -1073,7 +1073,7 @@ namespace CloudberryKingdom
 		SuppressCheckpoints = true;
 		GhostCheckpoints = true;
 
-		MyReplayGUI = boost::make_shared<ReplayGUI>();
+		MyReplayGUI = MakeMagic( ReplayGUI, () );
 		MyReplayGUI->Type = ReplayGUIType_REPLAY;
 		MyGame->AddGameObject( MyReplayGUI );
 
@@ -1131,7 +1131,7 @@ namespace CloudberryKingdom
 		if ( GUI )
 		{
 			// Create the GUI
-			MyReplayGUI = boost::make_shared<ReplayGUI>();
+			MyReplayGUI = MakeMagic( ReplayGUI, () );
 			MyReplayGUI->Type = ReplayGUIType_COMPUTER;
 			MyGame->AddGameObject( MyReplayGUI );
 

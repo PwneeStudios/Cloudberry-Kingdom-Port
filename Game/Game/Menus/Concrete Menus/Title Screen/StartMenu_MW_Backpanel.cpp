@@ -46,7 +46,7 @@ namespace CloudberryKingdom
 		Title = boost::make_shared<QuadClass>( std::wstring( L"Title" ), 1778.f );
 		//MyPile.Add(Title, "Title");
 
-		Title_Trim = boost::make_shared<QuadClass>( std::wstring( L"Title_Trim" ), 1778 * 783 / 1280.f );
+		Title_Trim = boost::make_shared<QuadClass>( std::wstring( L"Title_Trim" ), 1778 * 783.f / 1280.f );
 		MyPile->Add( Title_Trim, std::wstring( L"Title_Trim" ) );
 
 		Scene_NoBob_Blur = boost::make_shared<QuadClass>( std::wstring( L"Title_NoBob_Blur" ), 1778.f );

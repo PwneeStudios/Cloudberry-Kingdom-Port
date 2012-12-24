@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxInvert::InitializeStatics()
 	{
 		BobPhsxInvert::instance = boost::make_shared<BobPhsxInvert>();
+			InitBobPhsxSingleton( BobPhsxInvert::instance );
 	}
 
 	// Statics
@@ -33,6 +36,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxInvert::Clone()
 	{
 		boost::shared_ptr<BobPhsxInvert> newBob = boost::make_shared<BobPhsxInvert>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}

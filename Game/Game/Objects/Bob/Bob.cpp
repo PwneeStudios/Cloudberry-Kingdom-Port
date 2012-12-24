@@ -545,6 +545,7 @@ namespace CloudberryKingdom
 		Box2 = boost::make_shared<AABox>( getCore()->Data.Position, PlayerObject->BoxList[ 2 ]->Size() / 2 );
 
 		MyPhsx = boost::make_shared<BobPhsx>();
+			InitBobPhsxSingleton( MyPhsx );
 		MyPhsx->Init( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 
 		SetColorScheme( ColorSchemeManager::ColorSchemes[ 0 ] );
@@ -611,6 +612,7 @@ namespace CloudberryKingdom
 		if ( CharacterSelect2 )
 		{
 			MyPhsx = boost::make_shared<BobPhsxCharSelect>();
+				InitBobPhsxSingleton( MyPhsx );
 			MyPhsx->Init( boost::static_pointer_cast<Bob>( shared_from_this() ) );
 			MakeCape( CapeType_NORMAL );
 		}
@@ -770,7 +772,7 @@ namespace CloudberryKingdom
 
 		getCore()->Data.Position += getCore()->Data.Velocity;
 
-		PlayerObject->PlayUpdate( 1000 / 60 / 150 );
+		PlayerObject->PlayUpdate( 1000.f / 60.f / 150.f );
 
 		// Check to see if any other players are alive
 		/*

@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxBig::InitializeStatics()
 	{
 		BobPhsxBig::instance = boost::make_shared<BobPhsxBig>();
+			InitBobPhsxSingleton( BobPhsxBig::instance );
 	}
 
 	// Statics

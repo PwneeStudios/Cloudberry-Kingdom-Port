@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxRandom::InitializeStatics()
 	{
 		BobPhsxRandom::instance = boost::make_shared<BobPhsxRandom>();
+			InitBobPhsxSingleton( BobPhsxRandom::instance );
 	}
 
 	// Statics
@@ -35,6 +38,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxRandom::Clone()
 	{
 		boost::shared_ptr<BobPhsxRandom> newBob = boost::make_shared<BobPhsxRandom>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}

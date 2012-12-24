@@ -558,7 +558,7 @@ namespace CloudberryKingdom
 
 		float EffectiveSpeed = Vector2::Dot( vel, TargetVel );
 		if ( 15 * EffectiveSpeed > dif.Length() || dif.Length() < 2 * Speed )
-			vel = 1 / 16 * dif;
+			vel = 1.f / 16.f * dif;
 		else
 		{
 			TargetVel *= Speed;

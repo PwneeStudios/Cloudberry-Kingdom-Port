@@ -14,6 +14,13 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 	}
 
+	boost::shared_ptr<ReplayGUI> ReplayGUI::ReplayGUI_Construct()
+	{
+		CkBaseMenu::CkBaseMenu_Construct();
+
+		return boost::static_pointer_cast<ReplayGUI>( shared_from_this() );
+	}
+
 	void ReplayGUI::SetGrayHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );

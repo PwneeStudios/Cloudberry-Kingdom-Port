@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxWheel::InitializeStatics()
 	{
 		BobPhsxWheel::instance = boost::make_shared<BobPhsxWheel>();
+			InitBobPhsxSingleton( BobPhsxWheel::instance );
 		BobPhsxWheel::AnimIndex = 0;
 	}
 
@@ -33,6 +36,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxWheel::Clone()
 	{
 		boost::shared_ptr<BobPhsxWheel> newBob = boost::make_shared<BobPhsxWheel>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}

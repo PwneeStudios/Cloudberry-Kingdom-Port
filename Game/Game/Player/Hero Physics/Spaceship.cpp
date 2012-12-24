@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxSpaceship::InitializeStatics()
 	{
 		BobPhsxSpaceship::instance = boost::make_shared<BobPhsxSpaceship>();
+			InitBobPhsxSingleton( BobPhsxSpaceship::instance );
 	}
 
 	// Statics
@@ -34,6 +37,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxSpaceship::Clone()
 	{
 		boost::shared_ptr<BobPhsxSpaceship> newBob = boost::make_shared<BobPhsxSpaceship>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -334,14 +338,14 @@ namespace CloudberryKingdom
 			MyBob->CurInput.xVec.Y = -1;
 		MyBob->CurInput.xVec.Y *= __min( 1, abs( MyBob->TargetPosition.Y - MyBob->getCore()->Data.Position.Y ) / 100 );
 
-		if ( getPos().X > CurPhsxStep * (4000 / 600) )
+		if ( getPos().X > CurPhsxStep * (4000.f / 600.f) )
 		{
 			if ( getPos().Y > MyBob->TargetPosition.Y && (CurPhsxStep / 40) % 3 == 0 )
 				MyBob->CurInput.xVec.X = -1;
 			if ( getPos().Y < MyBob->TargetPosition.Y && (CurPhsxStep / 25) % 4 == 0 )
 				MyBob->CurInput.xVec.X = -1;
 		}
-		if ( getPos().Y < MyBob->TargetPosition.Y && getPos().X < CurPhsxStep * (4000 / 900) )
+		if ( getPos().Y < MyBob->TargetPosition.Y && getPos().X < CurPhsxStep * (4000.f / 900.f) )
 		{
 			MyBob->CurInput.xVec.X = 1;
 		}

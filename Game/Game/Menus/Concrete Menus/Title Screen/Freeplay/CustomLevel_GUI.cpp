@@ -752,7 +752,7 @@ namespace CloudberryKingdom
 	#if defined(XBOX)
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, std::wstring( L"Button_A" ) ) );
 	#endif
-		Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
+		item = Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
 		Start->Name = std::wstring( L"Start" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -772,9 +772,9 @@ namespace CloudberryKingdom
 		// Load
 		boost::shared_ptr<MenuItem> Load;
 	#if defined(PC_VERSION)
-		Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) ) );
+		item = Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) ) );
 	#else
-		Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) ) );
+		item = Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) ) );
 	#endif
 		Load->Name = std::wstring( L"Load" );
 		Load->setGo( boost::make_shared<BringLoadProxy1>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) );

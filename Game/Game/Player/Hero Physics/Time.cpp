@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxTime::InitializeStatics()
 	{
 		BobPhsxTime::instance = boost::make_shared<BobPhsxTime>();
+			InitBobPhsxSingleton( BobPhsxTime::instance );
 	}
 
 	// Statics
@@ -30,6 +33,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxTime::Clone()
 	{
 		boost::shared_ptr<BobPhsxTime> newBob = boost::make_shared<BobPhsxTime>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsxTime>( newBob );
 	}

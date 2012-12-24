@@ -311,7 +311,7 @@ namespace CloudberryKingdom
 	void DrawPile::BubbleDownAndFade( bool sound )
 	{
 		BubbleDown( sound, 5 );
-		FadeOut( 1 / 20 );
+		FadeOut( 1.f / 20.f );
 	}
 
 	void DrawPile::BubbleUp( bool sound )

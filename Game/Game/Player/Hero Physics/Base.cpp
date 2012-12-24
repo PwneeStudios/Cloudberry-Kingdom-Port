@@ -3,6 +3,8 @@
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -559,14 +561,15 @@ namespace CloudberryKingdom
 	BobPhsx::BobPhsx()
 	{
 		InitializeInstanceFields();
-		if ( !SingletonInitialized )
-			InitSingleton();
+		//if ( !SingletonInitialized )
+		//	InitSingleton();
 	}
 
 	boost::shared_ptr<BobPhsx> BobPhsx::Clone()
 	{
 		// FIXME: Verify MemberwiseClone() behavior.
 		boost::shared_ptr<BobPhsx> newBob = boost::make_shared<BobPhsx>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return newBob;
 	}

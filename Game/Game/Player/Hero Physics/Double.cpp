@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxDouble::InitializeStatics()
 	{
 		BobPhsxDouble::instance = boost::make_shared<BobPhsxDouble>();
+			InitBobPhsxSingleton( BobPhsxDouble::instance );
 	}
 
 	// Statics
@@ -63,7 +66,7 @@ namespace CloudberryKingdom
 		Name = Localization::Words_DOUBLE_JUMP;
 		Adjective = std::wstring( L"double jump" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286 / 240 );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286.f / 240.f );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( -.3f,.085f ) );
 	}
 

@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 	void Arrow::AnimStep()
 	{
 		if ( MyObject->DestinationAnim() == 0 && MyObject->Loop )
-			MyObject->PlayUpdate( 1 / 6.7f );
+			MyObject->PlayUpdate( 1.f / 6.7f );
 	}
 
 	void Arrow::MyPhsxStep()

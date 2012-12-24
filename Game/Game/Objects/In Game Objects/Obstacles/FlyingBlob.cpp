@@ -362,7 +362,7 @@ namespace CloudberryKingdom
 				if ( abs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
 					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * BobXFriction;
 				else
-					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7 / 4 * BobXFriction;
+					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7.f / 4.f * BobXFriction;
 			}
 		}
 	}

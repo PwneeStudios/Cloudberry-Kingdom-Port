@@ -282,9 +282,11 @@ namespace CloudberryKingdom
 
 	void MenuSliderBase::InitializeInstanceFields()
 	{
+		Discrete = false;
+
 		DelayToSlideSound = Menu::DefaultMenuInfo::Menu_Slide_SoundDelay;
 		DelayToSlideSoundCount = 0;
-		InitialSlideSpeed = 1 / 55;
+		InitialSlideSpeed = 1.f / 55.f;
 		MaxSlideSpeed = 3.5f / 55;
 		Acceleration = .03f;
 		Speed = 0;
