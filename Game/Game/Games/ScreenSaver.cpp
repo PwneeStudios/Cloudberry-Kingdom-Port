@@ -1,7 +1,7 @@
 ﻿#include <global_header.h>
 
-#include "Hacks/List.h"
-
+#include <Hacks/List.h>
+#include <Hacks/String.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -182,7 +182,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::WindLambda::Apply()
 	{
-		wind_t->LerpTo( 1, 40 );
+		wind_t->LerpTo( 1.f, 40 );
 	}
 
 	ScreenSaver::PosLerpToLambda::PosLerpToLambda( const boost::shared_ptr<FancyVector2> &pos_t, int zoomout_length, LerpStyle style )
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::PosLerpToLambda::Apply()
 	{
-		pos_t->LerpTo( 1, zoomout_length + 6, style );
+		pos_t->LerpTo( 1.f, zoomout_length + 6, style );
 	}
 
 	ScreenSaver::ZoomLerpToLambda::ZoomLerpToLambda( const boost::shared_ptr<FancyVector2> &zoom_t, int zoomout_length, LerpStyle style )
@@ -344,7 +344,7 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::BackgroundPhsx()
 	{
-		 StringWorldGameData::BackgroundPhsx();
+		StringWorldGameData::BackgroundPhsx();
 
 		if ( Tools::TheGame->LoadingScreen_Renamed != 0 && !Tools::TheGame->LoadingScreen_Renamed->IsDone )
 		{
@@ -395,6 +395,9 @@ namespace CloudberryKingdom
 			cam->EffectivePos.Y = cam->Data.Position.Y;
 			cam->EffectiveZoom = Vector2( CoreMath::LerpRestrict( .0025f,.001f, zoom_t->getVal() ) );
 		}
+
+		if ( pos_t != 0 )
+			Tools::Write( ( std::wstring( L"pos_t" ) + ToString( pos_t->getVal() ) ).c_str() );
 
 
 		if ( DoBackgroundPhsx && NextIsReady() && (Tools::CurLevel->CurPhsxStep > Duration || Tools::CurLevel->CurPhsxStep > Tools::CurLevel->CurPiece->PieceLength - 50) )
