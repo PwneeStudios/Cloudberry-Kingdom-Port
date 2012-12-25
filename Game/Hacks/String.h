@@ -115,7 +115,8 @@ inline std::wstring Format( const wchar_t *format, ... )
 inline std::wstring FormatWithSeparators( int i )
 {
 	std::wstringstream wss;
-	wss.imbue( std::locale( "en_US.UTF-8" ) );
+	//wss.imbue( std::locale( "en_US.UTF-8" ) );
+	wss.imbue( std::locale( "" ) ); // This should using the local culture's version of number formating. Test it?
 	wss << i;
 	return wss.str();
 }
