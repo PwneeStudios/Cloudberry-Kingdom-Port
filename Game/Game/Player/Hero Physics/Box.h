@@ -33,8 +33,10 @@ namespace CloudberryKingdom
 
 		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
-		virtual void DuckingPhsx();
+        std::wstring ExtraQuadString;
+        std::wstring ExtraTextureString;
 
+		virtual void DuckingPhsx();
 	
 		virtual void ParentDoXAccel();
 	

@@ -275,6 +275,10 @@ namespace CloudberryKingdom
 		const static std::vector<boost::shared_ptr<PlayerData> > &getAlivePlayers();
 		static std::vector<boost::shared_ptr<PlayerData> > _AlivePlayers;
 
+
+		static int NumAlivePlayers();
+		static int NumExistingPlayers();
+
 #if defined(PC_VERSION)
 		const static boost::shared_ptr<PlayerData> &getPlayer();
 #endif

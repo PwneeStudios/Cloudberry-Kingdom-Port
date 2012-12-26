@@ -290,7 +290,8 @@ enum LadderType
 enum BoxStyle
 {
 	BoxStyle_TOP_ONLY,
-	BoxStyle_FULL_BOX
+	BoxStyle_FULL_BOX,
+	BoxStyle_NO_SIDES
 };
 
 enum TimeTypes

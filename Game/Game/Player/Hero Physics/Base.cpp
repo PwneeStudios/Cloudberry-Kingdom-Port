@@ -317,6 +317,16 @@ namespace CloudberryKingdom
 		else
 		{
 			custom->Name = Localization::Words_CUSTOM;
+
+            if ( Shape == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
+                custom->Name = BaseType->Name;
+
+            if ( BaseType == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
+                custom->Name = Shape->Name;
+
+            if ( BaseType == BobPhsxNormal::getInstance() && Shape == BobPhsxNormal::getInstance() )
+                custom->Name = MoveMod->Name;
+
 			//string template = BaseType.Name;
 			//string adjective = Shape.Adjective;
 			//string adjective2 = MoveMod.Adjective;

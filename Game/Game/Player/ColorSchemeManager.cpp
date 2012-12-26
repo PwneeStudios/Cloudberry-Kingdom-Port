@@ -264,6 +264,9 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.145f;
 			HatInfo.push_back( hat );
 			Hat::Knight = hat;
+
+            // Removed due to infringement issues.
+            /*
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Toad" ) );
 		hat->Name = Localization::Words_MUSHROOM_HAT;
 		hat->Price = Hat::Expensive;
@@ -280,6 +283,7 @@ namespace CloudberryKingdom
 			hat->HatPicScale *= ScaleNew * 1.105f;
 			HatInfo.push_back( hat );
 			Hat::BubbleBobble = hat;
+			*/
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Brain" ) );
 		hat->DrawHead = false;
 		hat->Name = Localization::Words_BRAIN_HAT;
@@ -596,12 +600,16 @@ namespace CloudberryKingdom
 
 		// Create the default color schemes
 		AddScheme( ColorScheme( Localization::Words_GREEN, Localization::Words_RED, Localization::Words_BLACK, Localization::Words_NONE, Localization::Words_NONE ), true );
-		AddScheme( ColorScheme( Localization::Words_GRAY, Localization::Words_RED, Localization::Words_BLACK, Localization::Words_NONE, Hat::Mustache->Name ), false );
 		AddScheme( ColorScheme( Localization::Words_HOT_PINK, Localization::Words_HOT_PINK, Localization::Words_HOT_PINK, Hat::BunnyEars->Name, Hat::Beard->Name ), false );
 		AddScheme( ColorScheme( Localization::Words_GOLD, Localization::Words_GOLD, Localization::Words_GOLD, Localization::Words_NONE, Localization::Words_NONE ), false );
 		AddScheme( ColorScheme( Localization::Words_PURPLE, Localization::Words_INDIGO, Localization::Words_HOT_PINK, Localization::Words_NONE, Localization::Words_VANDYKE ), false );
 		AddScheme( ColorScheme( Localization::Words_FOREST_GREEN, Localization::Words_YELLOW, Localization::Words_GOLD, Localization::Words_RICE_HAT, Localization::Words_RUGGED ), false );
 		AddScheme( ColorScheme( Localization::Words_RED, Localization::Words_NONE, Localization::Words_NONE, Localization::Words_ANTLERS, Localization::Words_VANDYKE ), false );
+        AddScheme( ColorScheme(Localization::Words_GRAY, Localization::Words_RED, Localization::Words_BLACK, Localization::Words_NONE, Hat::Mustache->Name ), false);
+        AddScheme( ColorScheme(Localization::Words_INDIGO, Localization::Words_CYAN, Localization::Words_SILVER, Localization::Words_WIZARD, Localization::Words_VANDYKE ), false);
+        AddScheme( ColorScheme(Localization::Words_NINJA, Localization::Words_WHITE, Localization::Words_BLACK, Localization::Words_PUMPKIN, Localization::Words_MANHATTAN ), false);
+        AddScheme( ColorScheme(Localization::Words_FOREST_GREEN, Localization::Words_FOREST_GREEN, Localization::Words_FOREST_GREEN, Localization::Words_ROBIN_HOOD, Localization::Words_VANDYKE ), false);
+        AddScheme( ColorScheme(Localization::Words_SILVER, Localization::Words_GRAY, Localization::Words_GRAY, Localization::Words_KNIGHT_HELMET, Localization::Words_LUMBERJACK ), false);
 	}
 
 	std::vector<boost::shared_ptr<MenuListItem> > ColorSchemeManager::MakeUnique( std::vector<boost::shared_ptr<MenuListItem> > &list )

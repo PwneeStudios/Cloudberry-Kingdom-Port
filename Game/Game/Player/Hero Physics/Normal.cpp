@@ -442,15 +442,7 @@ namespace CloudberryKingdom
 
 		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && !MyBob->CharacterSelect_Renamed )
 		{
-			if ( CurJump > 1 )
-				DoubleJump->Play();
-			else
-			{
-				if ( MyBob->JumpSound == 0 )
-					Bob::JumpSound_Default->Play();
-				else
-					MyBob->JumpSound->Play();
-			}
+			PlayJumpSound();
 		}
 
 		if ( Gravity > 0 && getyVel() > 0 && CurJump == 1 || Gravity < 0 && getyVel() < 0 && CurJump == 1 )
@@ -469,6 +461,19 @@ namespace CloudberryKingdom
 
 		IncrementJumpCounter();
 	}
+
+    void BobPhsxNormal::PlayJumpSound()
+    {
+        if ( CurJump > 1 )
+            DoubleJump->Play();
+        else
+        {
+            if ( MyBob->JumpSound == 0 )
+                Bob::JumpSound_Default->Play();
+            else
+                MyBob->JumpSound->Play();
+        }
+    }
 
 	float BobPhsxNormal::GetXAccel()
 	{
@@ -1637,10 +1642,8 @@ namespace CloudberryKingdom
 		SetDeathVel( DeathType );
 
 		Clear( obj->AnimQueue );
-		//obj->AnimQueue.clear();
-		obj->EnqueueAnimation( 5, 0, false, true );
-		//obj.EnqueueAnimation("ToPieces", 0, false, true);
-		//obj.EnqueueAnimation("ToPieces", 0, false, true);
+		obj->EnqueueAnimation( 9, 0, false, true );
+
 		obj->DequeueTransfers();
 		obj->DestAnim()->AnimSpeed *= 1.85f;
 

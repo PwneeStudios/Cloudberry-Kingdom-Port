@@ -21,8 +21,9 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 6, 0, 0, 0 );
 		Name = Localization::Words_ROCKETBOX;
 		NameTemplate = std::wstring( L"rocketbox" );
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
-		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, -.485f ) );
+		//Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( L"CartIcon" ), Color::White, DefaultIconWidth * 1.315f);
+		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0, 0 ) );
 	}
 
 	const boost::shared_ptr<BobPhsxRocketbox> &BobPhsxRocketbox::getInstance()
@@ -55,12 +56,27 @@ namespace CloudberryKingdom
 
 	void BobPhsxRocketbox::Init( const boost::shared_ptr<Bob> &bob )
 	{
+        StandAnim = 17; JumpAnim = 18; DuckAnim = 19;
+
+        ExtraQuadString = L"MainQuad";
+        ExtraTextureString = L"CartAlone";
+
+        CapeOffset += Vector2(-50, 50);
+        CapeOffset_Ducking += Vector2(-50, 50);
+
 		BobPhsxBox::Init( bob );
 		//if (MyBob.Core.MyLevel.PlayMode == 0)
 		if ( Prototype != 0 && MyBob->PlayerObject != 0 && MyBob->PlayerObject->QuadList.size() > 0 )
 		{
 			LeftWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Left" ) ) );
+            LeftWheel->Show = true;
+            LeftWheel->SetColor( ColorHelper.GrayColor( .5f ) );
+            LeftWheel->MyEffect = Tools.HslGreenEffect;
+
 			RightWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Right" ) ) );
+            RightWheel->Show = true;
+            RightWheel->MyEffect = Tools.HslGreenEffect;
+            RightWheel->SetColor( ColorHelper.GrayColor( .5f ) );
 		}
 	}
 
@@ -82,8 +98,13 @@ namespace CloudberryKingdom
 
 	void BobPhsxRocketbox::DoXAccel()
 	{
+        bool HoldDucking = Ducking;
+        Ducking = false;
+
 		MyBob->CurInput.xVec.X = 1;
 		BobPhsxBox::ParentDoXAccel();
+
+		Ducking = HoldDucking;
 	}
 
 	void BobPhsxRocketbox::AnimStep()
@@ -92,7 +113,10 @@ namespace CloudberryKingdom
 
 		if ( MyBob->getCore()->MyLevel->PlayMode == 0 )
 		{
-			WheelAngle -= getxVel() *.33f / 60;
+			WheelAngle -= getxVel() * 1.f / 60;
+
+            LeftWheel->MyEffect = Tools::HslEffect;
+            RightWheel->MyEffect = Tools::HslEffect;
 
 			LeftWheel->PointxAxisTo( CoreMath::AngleToDir( WheelAngle ) );
 			RightWheel->PointxAxisTo( CoreMath::AngleToDir( WheelAngle ) );
@@ -115,20 +139,23 @@ namespace CloudberryKingdom
 		// Rocketman thrust
 		if ( MyBob->getCore()->MyLevel->PlayMode == 0 )
 		{
-			Vector2 pos = Vector2( -45, -30 );
-			pos.Y -= 40;
-			Vector2 dir = Vector2( -1.115f, -.025f );
+			//Vector2 pos = Vector2( -45, -30 );
+			//pos.Y -= 40;
+			//Vector2 dir = Vector2( -1.115f, -.025f );
 
-			if ( MyBob->PlayerObject->xFlip )
-			{
-				pos.X *= -1;
-				dir.X *= -1;
-			}
-			pos += getPos();
+			//if ( MyBob->PlayerObject->xFlip )
+			//{
+			//	pos.X *= -1;
+			//	dir.X *= -1;
+			//}
+			//pos += getPos();
 
-			int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
-			ParticleEffects::CartThrust( MyBob->getCore()->MyLevel, layer, pos, dir, Vector2() );
-			//ParticleEffects.Thrust(MyBob.Core.MyLevel, layer, pos, dir, Vel / 1.5f);
+			//int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
+			//ParticleEffects::CartThrust( MyBob->getCore()->MyLevel, layer, pos, dir, Vector2() );
+
+            int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
+            float intensity = 1.3f * __min( .3f + ( MyBob->CurInput.xVec.X + .3f ), 1.f );
+            ParticleEffects.Thrust(MyBob->getCore()->MyLevel, layer, getPos() + Vector2(0, -20), Vector2(-1, 0), Vector2(-4, getyVel() ), intensity);
 		}
 	}
 

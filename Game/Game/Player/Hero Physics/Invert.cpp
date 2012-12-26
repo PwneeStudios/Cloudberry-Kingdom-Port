@@ -261,6 +261,7 @@ namespace CloudberryKingdom
 		Ceiling_Params->Make = false;
 
 		Style->BlockFillType = StyleData::_BlockFillType_INVERTABLE;
+		Style->UseLowerBlockBounds = true;
 		Style->OverlapCleanupType = StyleData::_OverlapCleanupType_SOPHISTICATED;
 
 		Style->TopSpace = 50;
@@ -270,14 +271,14 @@ namespace CloudberryKingdom
 			MParams->Aspect = MovingBlock_Parameters::AspectType_THIN;
 
 		boost::shared_ptr<GhostBlock_Parameters> GhParams = boost::static_pointer_cast<GhostBlock_Parameters>( Style->FindParams( GhostBlock_AutoGen::getInstance() ) );
-		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_FULL;
+		GhParams->BoxType = GhostBlock_Parameters::BoxTypes_LONG;
 	}
 
 	void BobPhsxInvert::ModLadderPiece( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		BobPhsxNormal::ModLadderPiece( piece );
 
-		piece->ElevatorBoxStyle = BoxStyle_FULL_BOX;
+		piece->ElevatorBoxStyle = BoxStyle_NO_SIDES;
 	}
 
 	bool BobPhsxInvert::IsBottomCollision( ColType Col, const boost::shared_ptr<AABox> &box, const boost::shared_ptr<BlockBase> &block )

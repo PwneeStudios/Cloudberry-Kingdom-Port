@@ -69,6 +69,9 @@ namespace CloudberryKingdom
 
 		InitializedAnim = false;
 		MyBob->PlayerObject->Read( 24, 0 );
+
+        MyBob->JumpSound = Tools::SoundWad->FindByName( L"BouncyJump" );
+        DullSound = Tools::SoundWad->FindByName( L"BouncyJump_Small" );
 	}
 
 	void BobPhsxBouncy::DefaultValues()
@@ -102,6 +105,11 @@ namespace CloudberryKingdom
 			ReadyToJump = true;
 	}
 
+    void BobPhsxBouncy::PlayJumpSound()
+    {
+        //base.PlayJumpSound();
+    }
+
 	void BobPhsxBouncy::Jump()
 	{
 		SuperBounceGrace = 9;
@@ -112,7 +120,7 @@ namespace CloudberryKingdom
 			{
 				if ( MyBob->CurInput.A_Button && SuperBounceGraceCount > 0 )
 				{
-					//Tools.Write("Delayed super bounce!");
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
 					setyVel( getyVel() + SuperBounce );
 					SuperBounceGraceCount = 0;
 				}
@@ -131,12 +139,15 @@ namespace CloudberryKingdom
 				DoJump();
 
 				if ( MyBob->CurInput.A_Button )
+				{
 					setyVel( getyVel() + SuperBounce );
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
+				}
 				else
 				{
-					if ( getMyLevel()->PlayMode == 0 )
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 )
 					{
-						//FakeVel = yVel + SuperBounce;
+						DullSound->Play();
 						SuperBounceGraceCount = SuperBounceGrace;
 					}
 				}

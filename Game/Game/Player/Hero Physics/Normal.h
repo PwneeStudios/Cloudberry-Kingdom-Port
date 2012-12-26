@@ -166,7 +166,8 @@ namespace CloudberryKingdom
 	
 		virtual void DoJump();
 
-	
+		virtual void PlayJumpSound();
+
 		virtual float GetXAccel();
 
 		virtual void DoXAccel();
