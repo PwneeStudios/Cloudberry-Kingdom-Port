@@ -711,11 +711,19 @@ namespace CloudberryKingdom
 					BoxSize = Vector2( 450, 250 );
 					BoxShift = Vector2( 250, -800 );
 				}
-				else //if (MyPhsxType == Camera_PhsxType.SideLevel_Right)
-				{
-					BoxSize = Vector2( 450, 250 ); //1000);
-					BoxShift = Vector2( 250, 250 );
-				}
+                else //if (MyPhsxType == PhsxType.SideLevel_Right)
+                {
+                    if (MovingCamera)
+                    {
+                        BoxSize = Vector2(450, 250);
+                        BoxShift = Vector2(600, 250);
+                    }
+                    else
+                    {
+                        BoxSize = Vector2(450, 250);
+                        BoxShift = Vector2(250, 250);
+                    }
+                }
 
 				if ( FollowCenter && Count > 1 )
 					BoxSize.X = 50;
@@ -764,8 +772,16 @@ namespace CloudberryKingdom
 					{
 						Lead = TR;
 
-						BoxSize = Vector2( 650, 0 );
-						BoxShift = Vector2( 0, 0 );
+                        if (MovingCamera)
+                        {
+                            BoxSize = Vector2(750, 0);
+                            BoxShift = Vector2(400, 0);
+                        }
+                        else
+                        {
+                            BoxSize = Vector2(650, 0);
+                            BoxShift = Vector2(0, 0);
+                        }
 					}
 
 					if ( MyPhsxType == Camera_PhsxType_SIDE_LEVEL_RIGHT )
@@ -807,7 +823,7 @@ namespace CloudberryKingdom
 			float Retard = 1;
 			if ( MyZone != 0 && Data.Position.X > MyZone->End.X )
 				Retard = CoreMath::LerpRestrict( 1.f, 0.f, ( Data.Position.X - MyZone->End.X ) / 200 );
-			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 15 ), Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
+			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 16 ), Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
 		}
 		else
 			Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );

@@ -55,6 +55,18 @@ namespace CloudberryKingdom
 	
 		float BoxHeight;
 
+        /// <summary>
+        /// Used when Style.UseLowerBlockBounds == true. Block will have a lower lip than usual.
+        /// This is used for InvertHero, so he is standing on the bottom of blocks properly.
+        /// (Otherwise you want the lips to be higher, so your head doesn't hit them as easily).
+        /// </summary>
+        float ModLowerBlockBound;
+
+        /// <summary>
+        /// When ModLowerBlockBound is used, this says whether ModLowerBlockBound is an offset from the normal bound, or an absolute bound.
+        /// </summary>
+        bool RelativeLowerLip;
+
 		void CalcTexture( int anim, float t );
 
 		float Group_CutoffWidth;
@@ -96,8 +108,8 @@ namespace CloudberryKingdom
 
 		PieceQuad( int width, const std::wstring &texture, float left, float right, float top );
 		PieceQuad( int width, const std::wstring &texture, float left, float right, float top, bool upside_down );
-	
-		void _Constructor( int width, const std::wstring &texture, float left, float right, float top, bool upside_down );
+	    PieceQuad(int width, const std::wstring &texture, float left, float right, float top, bool upside_down, float lowerlip, bool relativelowerlip);
+	    void _Constructor(int width, const std::wstring &texture, float left, float right, float top, bool upside_down, float lowerlip, bool relativelowerlip);
 
 	
 		PieceQuad();
