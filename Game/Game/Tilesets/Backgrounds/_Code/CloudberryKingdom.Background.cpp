@@ -17,6 +17,58 @@ namespace CloudberryKingdom
 	boost::shared_ptr<QuadClass> Background::TestQuad;
 	boost::shared_ptr<EzTexture> Background::TestTexture;
 
+		void AddDarkLayer( boost::shared_ptr<Background> b )
+        {
+            boost::shared_ptr<BackgroundFloaterList> __46 = boost::make_shared<BackgroundFloaterList>();
+            __46->Name = L"Dark";
+            __46->Foreground = false;
+            __46->Fixed = false;
+            
+            boost::shared_ptr<BackgroundFloater> __47 = boost::make_shared<BackgroundFloater>();
+            __47->Name = L"Dark";
+            __47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+            __47->MyQuad->Quad_Renamed._MyTexture = Tools::TextureWad->DefaultTexture;
+            __47->MyQuad->Quad_Renamed.MySetColor = bColor( 255, 255, 255, 158 );
+            __47->MyQuad->Quad_Renamed.PremultipliedColor = bColor( 157, 157, 157, 191 );
+            __47->MyQuad->Quad_Renamed.BlendAddRatio = 0.f;
+            __47->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2(-2697.719f, 1436.633f ), Vector2( 0.f, 0.f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v0.Pos = Vector2(-1.f, 1.f );
+
+            __47->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, 1436.633f ), Vector2( 18.00215f, 0.f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1.f, 1.f );
+
+            __47->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2(-2697.719f, -1321.049f ), Vector2( 0.f, 0.9999274f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v2.Pos = Vector2(-1.f, -1.f );
+
+            __47->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, -1321.049f ), Vector2( 18.00215f, 0.9999274f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1.f, -1.f );
+
+            __47->MyQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 125 ));
+            __47->MyQuad->setAlpha( .5f );
+            __47->MyQuad->Update();
+
+            __47->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+            __47->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+
+            __47->MyQuad->Base = BasePoint( 24818.6f, 0.f, 0.f, 1378.841f, 22120.88f, 57.79195f );
+
+            __47->uv_offset = Vector2( 0.f, 0.f );
+            __47->Data = PhsxData( 22120.88f, 57.79195f, 0.f, 0.f, 0.f, 0.f );
+            __47->StartData = PhsxData( 22120.88f, 57.79195f, 0.f, 0.f, 0.f, 0.f );
+            __46->Floaters.push_back(__47 );
+
+            __46->Parallax = 1.05f;
+            __46->DoPreDraw = false;
+
+            b->MyCollection->Lists.push_back(__46 );
+
+            b->SetLevel( b->MyLevel );
+
+            __47->MyQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 100 ));
+            __47->MyQuad->setAlpha( .4f );
+            __47->InitialUpdate();
+        }
+
 	void Background::AddRainLayer( const boost::shared_ptr<Background> &b )
 	{
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();

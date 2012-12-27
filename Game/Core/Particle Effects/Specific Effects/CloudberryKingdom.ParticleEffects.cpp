@@ -5,6 +5,157 @@
 namespace CloudberryKingdom
 {
 
+        static boost::shared_ptr<Particle> DieTemplate;
+        
+        void ParticleEffects::Init_CoinTemplate()
+        {
+            DieTemplate = boost::make_shared<Particle>();
+            DieTemplate->MyQuad.Init();
+            DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
+            DieTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"Coin" ) );
+
+            DieTemplate->SetSize( 45 );
+            DieTemplate->SizeSpeed = Vector2( 10, 10 );
+            DieTemplate->AngleSpeed = .013f;
+            DieTemplate->Life = 20;
+            DieTemplate->MyColor = Vector4( 1.f, 1.f, 1.f, .75f );
+            DieTemplate->ColorVel = Vector4( 0, 0, 0, -.065f );
+        }
+
+        void ParticleEffects::CoinDie_Old( boost::shared_ptr<Level> level, Vector2 pos )
+        {
+            // Normal
+            for ( int j = 0; j < 3; j++)
+            {
+                //var p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects->DieTemplate );
+                boost::shared_ptr<Particle> p = level->MainEmitter->GetNewParticle( ParticleEffects::DieTemplate );
+
+                p->Data.Position = pos + level->getRnd()->RndDir( 35 );
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"Pop" ) );
+
+                p->MyColor.W *= .6f;
+            }
+        }
+
+        void ParticleEffects::CoinDie_Perfect( boost::shared_ptr<Level> level, Vector2 pos )
+        {
+            // Perfect
+            for ( int j = 0; j < 3; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos + level->getRnd()->RndDir( 35 );
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"Sparkle" ) );
+                p->Data.Velocity = Tools::GlobalRnd->RndDir() * ( Tools::GlobalRnd->RndFloat( 10, 20 ));
+                    p->Data.Velocity *= .8f;
+                p->Size *= 2;
+                p->SizeSpeed = Vector2( 40 );
+            }
+        }
+
+        void ParticleEffects::CoinDie_Spritely( boost::shared_ptr<Level> level, Vector2 pos )
+        {
+            // Spritely
+            for ( int j = 0; j < 10; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos;
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"Sparkle" ) );
+                p->Data.Velocity = Tools::GlobalRnd->RndDir() * ( Tools::GlobalRnd->RndFloat( 7, 9 ));
+                p->Size *= 4.75f;
+                p->SizeSpeed = Vector2( 0 );
+                p->Life = ( int )( p->Life * 1.25f );
+                p->ColorVel.W /= 1.25f;
+            }
+        }
+
+        void ParticleEffects::CoinDie_ExtraLife( boost::shared_ptr<Level> level, Vector2 pos )
+        {
+            // Spritely
+            for ( int j = 0; j < 10; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos;
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"CoinCollect" ) );
+                p->Data.Velocity = Tools::GlobalRnd->RndDir() * ( Tools::GlobalRnd->RndFloat( 7, 10 ));
+                p->Size *= 5.f;
+                p->SizeSpeed = Vector2( 0 );
+                p->Life = ( int )( p->Life * 1.25f );
+                p->ColorVel.W /= 1.25f;
+            }
+        }
+
+        void ParticleEffects::CoinDie_New( boost::shared_ptr<Level> level, Vector2 pos )
+        {
+            pos += Vector2( 22, 0 );
+
+            // Coin collect
+            for ( int j = 0; j < 1; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[ 5 ]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos;
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"CoinCollect" ) );
+                p->Data.Velocity = Vector2();
+                p->AngleSpeed = -.0525f;
+                p->Size *= 2.7f;
+                p->SizeSpeed = Vector2(-10 );
+                p->Life = ( int )( p->Life * 1.35f );
+                p->ColorVel.W *= 1.f;
+                p->MyColor.W *= .5f;
+            }
+
+            for ( int j = 0; j < 3; j++)
+            {
+                boost::shared_ptr<Particle> p = level->ParticleEmitters[5]->GetNewParticle( ParticleEffects::DieTemplate );
+                //var p = level->MainEmitter->GetNewboost::make_shared<Particle>( ParticleEffects->DieTemplate );
+
+                p->Data.Position = pos;
+                //p->MyQuad->MyTexture = Tools::TextureWad->FindByName( L"Sparkle" );
+                p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( L"CoinCollect" ) );
+                p->Data.Velocity = CoreMath::DegreesToDir( 120 * j ) * ( Tools::GlobalRnd->RndFloat( 5, 8 ));
+                p->Size *= 1.5f;
+                p->SizeSpeed = Vector2( 0 );
+                p->Life = ( int )( p->Life * 1.25f );
+                p->ColorVel.W /= 1.25f;
+                p->MyColor.W *= .7f;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 boost::shared_ptr<Particle> ParticleEffects::CoinExplosionTemplate = 0;
 
 	void ParticleEffects::Init_CoinExplosion()
