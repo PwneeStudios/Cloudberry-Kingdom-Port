@@ -27,7 +27,8 @@ namespace CloudberryKingdom
 		static void ScaleGamerTag( const boost::shared_ptr<EzText> &GamerTag_Renamed );
 	
 		void SetGamerTag();
-	
+
+		void MyDraw();
 		virtual void MyPhsxStep();
 
 	};

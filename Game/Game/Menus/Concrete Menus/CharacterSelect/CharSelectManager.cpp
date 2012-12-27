@@ -53,10 +53,15 @@ namespace CloudberryKingdom
 	{
 		return select == 0;
 	}
-
+	
 	void CharacterSelectManager::AfterFinishedHelper::Apply()
 	{
 		CharacterSelectManager::AfterFinished();
+	}
+
+	void CharacterSelectManager::QuickJoinFinishHelper::Apply()
+	{
+		CharacterSelectManager::QuickJoinFinish();
 	}
 
 	const boost::shared_ptr<CharacterSelectManager> &CharacterSelectManager::getInstance()
@@ -104,7 +109,7 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		// Determine which hats are availabe
 		AvailableHats = boost::make_shared<Set<boost::shared_ptr<Hat> > >();
 		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator hat = ColorSchemeManager::HatInfo.begin(); hat != ColorSchemeManager::HatInfo.end(); ++hat )
-			if ( *hat == Hat::None || ( *hat )->AssociatedAward == 0 && PlayerManager::Bought( *hat ) || ( *hat )->AssociatedAward != 0 && PlayerManager::Awarded( ( *hat )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
+			//if ( *hat == Hat::None || ( *hat )->AssociatedAward == 0 && PlayerManager::Bought( *hat ) || ( *hat )->AssociatedAward != 0 && PlayerManager::Awarded( ( *hat )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
 				AvailableHats->Add( *hat );
 	}
 
@@ -115,28 +120,38 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		// Determine which Beards are availabe
 		AvailableBeards = boost::make_shared<Set<boost::shared_ptr<Hat> > >();
 		for ( std::vector<boost::shared_ptr<Hat> >::const_iterator Beard = ColorSchemeManager::BeardInfo.begin(); Beard != ColorSchemeManager::BeardInfo.end(); ++Beard )
-			if ( *Beard == Hat::None || ( *Beard )->AssociatedAward == 0 && PlayerManager::Bought( *Beard ) || ( *Beard )->AssociatedAward != 0 && PlayerManager::Awarded( ( *Beard )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
+			//if ( *Beard == Hat::None || ( *Beard )->AssociatedAward == 0 && PlayerManager::Bought( *Beard ) || ( *Beard )->AssociatedAward != 0 && PlayerManager::Awarded( ( *Beard )->AssociatedAward ) || CloudberryKingdomGame::UnlockAll )
 				AvailableBeards->Add( *Beard );
 	}
 
 	boost::shared_ptr<CharSelectBackdrop> CharacterSelectManager::Backdrop = 0;
+	bool CharacterSelectManager::QuickJoin = false;
 
-	void CharacterSelectManager::Start( const boost::shared_ptr<GUI_Panel> &Parent )
+	void CharacterSelectManager::Start( const boost::shared_ptr<GUI_Panel> &Parent, bool QuickJoin )
 	{
+        FakeHide = false;
+        CharacterSelectManager::QuickJoin = QuickJoin;
+
+        boost::shared_ptr<GameData> game = 0;
+        if ( Parent == 0 )
+            game = Tools::CurGameData;
+        else
+            game = Parent->MyGame;
+
 		ParentPanel = Parent;
 
 		// Add the backdrop
 		Backdrop = MakeMagic( CharSelectBackdrop, () );
-		Parent->MyGame->AddGameObject( Backdrop );
+		game->AddGameObject( Backdrop );
 
 		// Start the selects for each player
-		Parent->MyGame->WaitThenDo( 0, boost::make_shared<_StartAllProxy>(), std::wstring( L"StartCharSelect" ) );
+		game->WaitThenDo( 0, boost::make_shared<_StartAllProxy>(), std::wstring( L"StartCharSelect" ) );
 	}
 
 	void CharacterSelectManager::_StartAll()
 	{
 		for ( int i = 0; i < 4; i++ )
-			Start( i, false );
+			Start( i, CharacterSelectManager::QuickJoin );
 	}
 
 	void CharacterSelectManager::Start( int PlayerIndex, bool QuickJoin )
@@ -160,12 +175,12 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 	{
 		for ( int i = 0; i < 4; i++ )
 			if ( CharSelect[ i ] != 0 )
-				Finish( i, false );
+				Finish( i, CharacterSelectManager::QuickJoin );
 	}
 
 	void CharacterSelectManager::Finish( int PlayerIndex, bool Join )
 	{
-		if ( Join )
+		if ( Join && !CharSelect[ PlayerIndex ]->Fake && CharSelect[ PlayerIndex ]->MyState == CharacterSelect::SelectState_WAITING )
 		{
 			Tools::CurGameData->CreateBob( PlayerIndex, true );
 		}
@@ -180,6 +195,8 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 
 		if ( CharacterSelectManager::ParentPanel != 0 )
 			CharacterSelectManager::ParentPanel->Show();
+
+		CharacterSelectManager::ParentPanel = 0;
 	}
 
 	void CharacterSelectManager::Cleanup()
@@ -198,7 +215,7 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 	{
 		bool All = true;
 		for ( int i = 0; i < 4; i++ )
-			if ( CharSelect[ i ] != 0 && CharSelect[ i ]->MyState != CharacterSelect::SelectState_BEGINNING )
+			if ( CharSelect[ i ] != 0 && !CharSelect[ i ]->Fake && CharSelect[ i ]->MyState != CharacterSelect::SelectState_BEGINNING )
 				All = false;
 		return All;
 	}
@@ -208,7 +225,9 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		// False if no one has joined
 		bool SomeOneIsHere = false;
 		for ( int i = 0; i < 4; i++ )
-			if ( CharSelect[ i ] != 0 && CharSelect[ i ]->MyState != CharacterSelect::SelectState_BEGINNING )
+			if ( CharSelect[ i ] != 0 && 
+				 !( CharSelect[ i ]->QuickJoin && CharSelect[ i ]->Fake ) &&
+				 CharSelect[ i ]->MyState != CharacterSelect::SelectState_BEGINNING )
 				SomeOneIsHere = true;
 
 		if ( !SomeOneIsHere )
@@ -234,6 +253,9 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 
 	void CharacterSelectManager::Draw()
 	{
+        if ( FakeHide )
+            return;
+
 		if ( !IsShowing )
 			return;
 
@@ -266,13 +288,15 @@ boost::shared_ptr<Set<boost::shared_ptr<Hat> > > CharacterSelectManager::Availab
 		cam->SetVertexCamera();
 	}
 
+	bool CharacterSelectManager::FakeHide = false;
 	void CharacterSelectManager::AfterFinished()
 	{
 		IsShowing = false;
+		FakeHide = false;
 
 		Cleanup();
-		if ( OnDone != 0 )
-			OnDone->Apply();
+		if ( OnDone != 0 ) OnDone->Apply(); OnDone = 0;
+		CharacterSelectManager::ParentPanel = 0;
 	}
 
 bool CharacterSelectManager::Active = false;
@@ -292,7 +316,12 @@ bool CharacterSelectManager::Active = false;
 		if ( AllFinished() && IsShowing )
 		{
 			Active = false;
-			Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<AfterFinishedHelper>() );
+
+            if (QuickJoin)
+                Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<QuickJoinFinishHelper>() );
+                //Tools.CurGameData.WaitThenDo(0, AfterFinished);
+            else
+				Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<AfterFinishedHelper>() );
 		}
 
 		// Check for ready to exit from character selection
@@ -301,8 +330,15 @@ bool CharacterSelectManager::Active = false;
 			if ( ButtonCheck::State( ControllerButtons_B, -2 ).Pressed )
 			{
 				Active = false;
+				IsShowing = false;
 				EndCharSelect( 0, 0 );
 			}
 		}
 	}
+
+    void CharacterSelectManager::QuickJoinFinish()
+    {
+        FakeHide = true;
+        Tools::CurGameData->WaitThenDo( 12, boost::make_shared<AfterFinishedHelper>() );
+    }
 }

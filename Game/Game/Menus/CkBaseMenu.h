@@ -119,6 +119,8 @@ namespace CloudberryKingdom
 		bool CallToLeft;
 	
 		virtual void Call( const boost::shared_ptr<GUI_Panel> &child, int Delay );
+		
+		bool SkipCallSound;
 
 		virtual void OnReturnTo();
 

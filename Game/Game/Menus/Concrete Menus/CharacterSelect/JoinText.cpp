@@ -87,6 +87,14 @@ namespace CloudberryKingdom
 		Tools::EndGUIDraw();
 	}
 
+    void JoinText::MyDraw()
+    {
+        if ( CharacterSelectManager::FakeHide )
+            return;
+
+        CkBaseMenu::MyDraw();
+    }
+
 	void JoinText::MyPhsxStep()
 	{
 		CkBaseMenu::MyPhsxStep();

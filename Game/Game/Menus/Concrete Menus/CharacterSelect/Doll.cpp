@@ -130,6 +130,14 @@ namespace CloudberryKingdom
 				ItemIndex[ i ] = 0;
 	}
 
+    void JoinText::MyDraw()
+    {
+        if ( CharacterSelectManager::FakeHide )
+            return;
+
+        CkBaseMenu::MyDraw();
+    }
+
 	void Doll::MyPhsxStep()
 	{
 		CkBaseMenu::MyPhsxStep();

@@ -79,6 +79,7 @@ namespace CloudberryKingdom
 		MakeItems();
 
 		EnsureFancy();
+		MyMenu->setControl( getControl() );
 
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
@@ -137,14 +138,12 @@ namespace CloudberryKingdom
 			_item->SelectIconOffset = Vector2( 0, -160 );
 		}
 
-		MyMenu->setPos( Vector2( -1320, -22.22222f ) );
-
-		MyPile->setPos( Vector2( -1320, 0 ) );
+		MyMenu->setPos( Vector2( MyMenu->getPos().X, -22.22222f ) );
 	}
 
 	void CustomizeMenu::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect ) ) );
+		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect, true ) ) );
 		Hide();
 	}
 
@@ -260,6 +259,10 @@ namespace CloudberryKingdom
 		ClrSelect->SetIndexViaAssociated( MyCharacterSelect->ItemIndex[ MyMenu->CurIndex ] );
 
 		GUI_Panel::Call( ClrSelect );
+        ClrSelect->MyMenu->setControl( getControl() );
+		ClrSelect->setControl( getControl() );
+        //CharacterSelect.Shift(ClrSelect);
+
 		Hide();
 	}
 

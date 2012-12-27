@@ -39,7 +39,16 @@ namespace CloudberryKingdom
 
 		This->InitColorScheme( PlayerIndex );
 
-		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, This->shared_from_this() ) ) );
+        if (QuickJoin && PlayerIndex >= 0 && PlayerManager.Get(PlayerIndex) != 0 && PlayerManager.Get(PlayerIndex)->Exists)
+        {
+            This->Fake = true;
+            game->AddGameObject( MakeMagic( Waiting, (PlayerIndex, This->shared_from_this(), false) ) );
+        }
+        else
+        {
+            This->Fake = false;
+            game->AddGameObject( MakeMagic( JoinText, (PlayerIndex, This->shared_from_this() ) ) );
+        }
 
 		Tools::EndGUIDraw();
 	}

@@ -10,13 +10,16 @@ namespace CloudberryKingdom
 	{
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
+		bool CanGoBack;
 	
-		Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
-		boost::shared_ptr<Waiting> Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect );
+		Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect, bool _CanGoBack );
+		boost::shared_ptr<Waiting> Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect, bool _CanGoBack );
 	
 		virtual void ReleaseBody();
 	
 		virtual void Init();
+
+		void MyDraw();
 	
 		virtual void MyPhsxStep();
 

@@ -6,14 +6,15 @@ namespace CloudberryKingdom
 {
 
 	//Waiting::Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) : CkBaseMenu( false )
-	Waiting::Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect ) { }
-	boost::shared_ptr<Waiting> Waiting::Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect )
+	Waiting::Waiting( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect, bool _CanGoBack ) { }
+	boost::shared_ptr<Waiting> Waiting::Waiting_Construct( int Control, const boost::shared_ptr<CharacterSelect> &MyCharacterSelect, bool _CanGoBack )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
 		this->Tags->Add( Tag_CHAR_SELECT );
 		this->setControl( Control );
 		this->MyCharacterSelect = MyCharacterSelect;
+		this->CanGoBack = _CanGoBack;
 
 		Constructor();
 
@@ -45,6 +46,14 @@ namespace CloudberryKingdom
 		CharacterSelect::Shift( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 	}
 
+    void Waiting::MyDraw()
+    {
+        if ( CharacterSelectManager::FakeHide )
+            return;
+
+        CkBaseMenu::MyDraw();
+    }
+
 	void Waiting::MyPhsxStep()
 	{
 		CkBaseMenu::MyPhsxStep();
@@ -57,7 +66,7 @@ namespace CloudberryKingdom
 		MyCharacterSelect->MyHeroLevel->ShowHeroLevel = true;
 
 		// Check for back.
-		if ( ButtonCheck::State( ControllerButtons_B, MyCharacterSelect->PlayerIndex ).Pressed )
+		if ( CanGoBack && ButtonCheck::State( ControllerButtons_B, MyCharacterSelect->PlayerIndex ).Pressed )
 		{
 			ReturnToCaller();
 		}

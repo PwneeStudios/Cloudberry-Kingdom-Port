@@ -179,8 +179,9 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::Call( child, Delay );
 
-		if ( SelectSound != 0 )
-			SelectSound->Play();
+        if ( SelectSound != 0 && !SkipCallSound )
+            SelectSound->Play();
+        SkipCallSound = false;
 
 		if ( CallToLeft )
 		{
@@ -436,6 +437,8 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	void CkBaseMenu::InitializeInstanceFields()
 	{
+		SkipCallSound = false;
+
 		ItemPos = Vector2( -808, 110 );
 		PosAdd = Vector2( 0, -151 ) * 1.181f;
 		ItemFont = Resources::Font_Grobold42;

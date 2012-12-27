@@ -204,6 +204,8 @@ namespace CloudberryKingdom
 
 	void CharacterSelect::InitializeInstanceFields()
 	{
+		Fake = false;
+
 		MyState = SelectState_BEGINNING;
 		Join = false;
 		ItemIndex = std::vector<int>( 5 );
