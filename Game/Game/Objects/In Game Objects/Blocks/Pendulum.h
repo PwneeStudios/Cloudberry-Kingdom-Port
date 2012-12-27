@@ -41,7 +41,9 @@ namespace CloudberryKingdom
 
 		Vector2 BL_Bound();
 
-		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level );
+		BoxStyle MyBoxStyle;
+
+		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, BoxStyle _MyBoxStyle );
 
 		void MoveToBounded( Vector2 shift );
 

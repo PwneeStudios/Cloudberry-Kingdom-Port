@@ -59,7 +59,9 @@ namespace CloudberryKingdom
 		static void InitializeStatics();
 	
 		bool IsDone;
-	
+
+		boost::shared_ptr<EzText> Legal;
+
 		boost::shared_ptr<SoundEffect> Whinney;
 
 		boost::shared_ptr<DrawPile> MyPile;
@@ -81,9 +83,8 @@ namespace CloudberryKingdom
 	
 		void PhsxStep();
 
-	
-		static const bool NoShow = true;
-
+	    int DrawCount;
+        bool ReadyToFade;
 	
 		void Draw();
 

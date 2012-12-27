@@ -147,6 +147,7 @@ namespace CloudberryKingdom
 		if ( clipboard == std::wstring( L"" ) || clipboard.length() == 0 )
 			clipboard = std::wstring( L"Type in a seed!" );
 
+		clipboard = Tools::SantitizeOneLineString( clipboard, Resources::LilFont );
 		TextBox = MakeMagic( GUI_TextBox, ( clipboard, Vector2(), Vector2( 1.85f,.65f ), .95f ) );
 		TextBox->MaxLength = 80;
 		TextBox->FixedToCamera = false;

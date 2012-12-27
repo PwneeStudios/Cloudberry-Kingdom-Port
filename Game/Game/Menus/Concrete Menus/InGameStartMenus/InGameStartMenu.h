@@ -122,7 +122,8 @@ namespace CloudberryKingdom
 
 		static boost::shared_ptr<GameObject> MakeListener_Base( const boost::shared_ptr<LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> > > &Make );
 
-	
+		void OnAdd();
+
 		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
 	
@@ -145,7 +146,7 @@ namespace CloudberryKingdom
 		void GoStats();
 
 		void SetPos();
-
+		void SetPos_WithRemoveMe();
 	
 		virtual void MakeExitItem();
 

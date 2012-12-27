@@ -660,6 +660,8 @@ namespace CloudberryKingdom
 
 	void Menu::DrawNonText( int Layer )
 	{
+        if ( Items.size() == 0 ) return;
+
 		setMyCameraZoom( Tools::getCurCamera()->getZoom() );
 		if ( !Show )
 			return;
@@ -706,6 +708,8 @@ namespace CloudberryKingdom
 
 	void Menu::DrawNonText2()
 	{
+		if ( Items.size() == 0 ) return;
+
 		setMyCameraZoom( Tools::getCurCamera()->getZoom() );
 		if ( !Show )
 			return;
@@ -786,7 +790,7 @@ namespace CloudberryKingdom
 	{
 		setMyCameraZoom( Tools::getCurCamera()->getZoom() );
 
-		if ( !Show )
+		if ( !Show || Items.size() == 0 )
 			return;
 
 		DrawNonText( 0 );

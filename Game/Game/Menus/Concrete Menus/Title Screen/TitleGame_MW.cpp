@@ -46,8 +46,11 @@ namespace CloudberryKingdom
 
 	void TitleGameData_MW::ReturnTo( int code )
 	{
-		Tools::SongWad->SetPlayList( Tools::Song_Heavens );
-		Tools::SongWad->Restart( true, false );
+        if (SetToRepaly)
+        {
+			Tools::SongWad->SetPlayList( Tools::Song_Heavens );
+			Tools::SongWad->Restart( true, false );
+		}
 
 		TitleGameData::ReturnTo( code );
 	}

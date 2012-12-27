@@ -154,11 +154,24 @@ namespace CloudberryKingdom
 		MyProgressBar = boost::make_shared<ProgressBar>();
 		MyProgressBar->setPos( Vector2( 900, -400 ) );
 
-		BlackQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ), 1400.f );
+		BlackQuad = boost::make_shared<QuadClass>( std::wstring( L"White" ), 2000.f );
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 255 ) );
 		BlackQuad->setAlpha( 0 );
 		BlackQuad->Layer = 1;
 		MyPile->Add( BlackQuad );
+
+        Legal = boost::make_shared<EzText>( 
+L"{pCopyRightSymbol,78,?} 2012 by Pwnee Studios, Corp. All Rights Reserved.\n"
+L"Distributed by Ubisoft Entertainment under license from Pwnee Studios, Corp.\n"
+L"Cloudberry Kingdom, Pwnee, and Pwnee Studios are trademarks of Pwnee Studios, Corp. and is used under license.\n"
+L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US and/or other countries.",
+			Resources::Font_Grobold42, 10000.f, false, false, .66f );
+
+        Legal->MyFloatColor = ColorHelper::Gray( .9f );
+
+        BlackQuad->setAlpha( 1 );
+
+        MyPile->Add( Legal );
 	}
 
 	void InitialLoadingScreen::PhsxStep()
@@ -181,40 +194,45 @@ namespace CloudberryKingdom
 		// Fade
 		if ( LoadingPercent > 97.6f && Accelerate || !Resources::LoadingResources->MyBool )
 		{
-			BlackQuad->setAlpha( BlackQuad->getAlpha() + .0223f );
-			if ( BlackQuad->getAlpha() >= 1 )
-				DoneCount++;
+            if ( ReadyToFade )
+            {
+				BlackQuad->setAlpha( BlackQuad->getAlpha() + .0223f );
+				if ( BlackQuad->getAlpha() >= 1 )
+					DoneCount++;
+			}
 		}
 
-		if ( NoShow )
-		{
-			if ( !Resources::LoadingResources->MyBool )
-				IsDone = true;
-		}
-		else
-		{
-			if ( !Resources::LoadingResources->MyBool && DoneCount > 1 )
-				//if (!Resources.LoadingResources.MyBool)
-				IsDone = true;
-		}
+		if ( !Resources::LoadingResources->MyBool && ReadyToFade && BlackQuad->getAlpha() >= 1 && DoneCount > 25 )
+			IsDone = true;
+
+		//IsDone = false;
 	}
 
 	void InitialLoadingScreen::Draw()
 	{
-		if ( NoShow )
-			return;
+        Legal->setScale( .25f );
+        Legal->setPos( Vector2(-1500, -500) );
+
+        DrawCount++;
+        if ( !ReadyToFade && DrawCount > 2 )
+            BlackQuad->setAlpha( BlackQuad->getAlpha() - .0633f );
+        if ( DrawCount > 68 )
+            ReadyToFade = true;
 
 		MyProgressBar->setPos( Vector2( 1100, -800 ) );
 
 		MyPile->Draw( 0 );
 
-		MyProgressBar->Draw();
+		//MyProgressBar->Draw();
 
 		MyPile->Draw( 1 );
 	}
 
 	void InitialLoadingScreen::InitializeInstanceFields()
 	{
+	    DrawCount = 0;
+        ReadyToFade = false;
+
 		IsDone = false;
 		LogoCount = 0;
 		Accelerate = false;

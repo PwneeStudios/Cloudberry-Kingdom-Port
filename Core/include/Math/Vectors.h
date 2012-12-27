@@ -271,6 +271,11 @@ public:
 		return Vector4( X + a.X, Y + a.Y, Z + a.Z, W + a.W );
 	}
 
+	Vector4 operator - ( const Vector4 &a ) const
+	{
+		return Vector4( X - a.X, Y - a.Y, Z - a.Z, W - a.W );
+	}
+
 	Vector4 operator * ( const Vector4 &a ) const
 	{
 		return Vector4( X * a.X, Y * a.Y, Z * a.Z, W * a.W );

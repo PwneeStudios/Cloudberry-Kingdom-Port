@@ -140,6 +140,7 @@ namespace CloudberryKingdom
 		virtual void Reset( bool BoxesOnly );
 
 		void Init( Vector2 &center, Vector2 &size, const boost::shared_ptr<Level> &level, const boost::shared_ptr<BlockGroup> &group );
+		virtual void AdditionalInit( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, bool _UseLowerBlockBounds );
 
 		boost::shared_ptr<NormalBlockDraw> MyDraw;
 		virtual void ResetPieces();

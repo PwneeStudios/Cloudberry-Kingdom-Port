@@ -63,6 +63,7 @@ namespace CloudberryKingdom
 	{
 		StartMenu::BringFreeplay();
 
+		SkipCallSound = true;
 		GUI_Panel::Call( MakeMagic( StartMenu_MW_CustomLevel, ( Title ) ) );
 	}
 

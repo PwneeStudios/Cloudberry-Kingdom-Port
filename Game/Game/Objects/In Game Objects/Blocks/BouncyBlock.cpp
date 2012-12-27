@@ -94,6 +94,9 @@ namespace CloudberryKingdom
 		//SizeOffset = new Vector2(18);
 
 		SetState( BouncyBlockState_SUPER_STIFF );
+
+        if ( getMyLevel()->PlayMode == 0 && getInfo()->BouncyBlocks->BounceSound != 0 )
+            getInfo()->BouncyBlocks->BounceSound->Play();
 	}
 
 	void BouncyBlock::SideHit( const boost::shared_ptr<Bob> &bob )

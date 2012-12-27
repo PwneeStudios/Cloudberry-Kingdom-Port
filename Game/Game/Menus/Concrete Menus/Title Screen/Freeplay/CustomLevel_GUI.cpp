@@ -189,6 +189,7 @@ namespace CloudberryKingdom
 	void CustomLevel_GUI::InitOnIndexSelect::Apply()
 	{
 		clGui->LevelSeed->MyGameFlags.SetToDefault();
+		clGui->LevelSeed->Masochistic = false;
 
 		Localization::Words gamename = Unbox<Localization::Words>( GameList->getCurObj() );
 		if ( gamename == Localization::Words_CLASSIC_GAME )
@@ -221,6 +222,13 @@ namespace CloudberryKingdom
 			clGui->ShowCheckpoints( false );
 			clGui->HasWall = true;
 		}
+        else if ( gamename == Localization::Words_MASOCHISTIC )
+        {
+            clGui->LevelSeed->MyGameType = NormalGameData.Factory;
+            clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
+            clGui->LevelSeed->Masochistic = true;
+            clGui->SelectNormal();
+        }
 	}
 
 	CustomLevel_GUI::DiffList_OnIndexProxy::DiffList_OnIndexProxy( const boost::shared_ptr<CustomLevel_GUI> &clGui )
@@ -615,12 +623,12 @@ namespace CloudberryKingdom
 		std::vector<Localization::Words> GameNames;
 		if ( PlayerManager::NumPlayers <= 1 )
 		{
-			Localization::Words tempVector[] = { Localization::Words_CLASSIC_GAME, Localization::Words_WALL_LEVEL };
+			Localization::Words tempVector[] = { Localization::Words_CLASSIC_GAME, Localization::Words_WALL_LEVEL, Localization::Words_MASOCHISTIC };
 			GameNames = VecFromArray( tempVector );
 		}
 		else
 		{
-			Localization::Words tempVector2[] = { Localization::Words_CLASSIC_GAME, Localization::Words_BUNGEE, Localization::Words_WALL_LEVEL };
+			Localization::Words tempVector2[] = { Localization::Words_CLASSIC_GAME, Localization::Words_BUNGEE, Localization::Words_WALL_LEVEL, Localization::Words_MASOCHISTIC };
 			GameNames = std::vector<Localization::Words>( VecFromArray( tempVector2 ) );
 		}
 		for ( std::vector<Localization::Words>::const_iterator name = GameNames.begin(); name != GameNames.end(); ++name )

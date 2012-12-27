@@ -13,6 +13,15 @@ namespace CloudberryKingdom
 	struct PerfectScoreObject : public GUI_Panel
 	{
 
+		struct TextEffectProxy : public Lambda
+		{
+			boost::shared_ptr<PerfectScoreObject> pso;
+		
+			TextEffectProxy( const boost::shared_ptr<PerfectScoreObject> &pso );
+
+			void Apply();
+		};
+
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		
@@ -112,10 +121,14 @@ namespace CloudberryKingdom
 
 	
 		int Count;
+
+
+		void MyGame_OnCompleteLevel( boost::shared_ptr<Level> obj );
+		void TextEffect();
+
 		/// <summary>
 		/// When the players die reset the multiplier
 		/// </summary>
-	
 		void OnLevelRetry();
 
 	
@@ -154,6 +167,8 @@ namespace CloudberryKingdom
 
 		void Init_GUI();
 
+		void SetPos();
+	    void Release();
 	
 		virtual void MyDraw();
 		#pragma endregion

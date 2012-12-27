@@ -360,7 +360,7 @@ enum BobDeathType
 	BobDeathType_LASER,
 	BobDeathType_LAVA_FLOW,
 	BobDeathType_FALLING_SPIKE,
-	BobDeathType_UNNAMED1,
+	BobDeathType_SERPENT,
 	BobDeathType_UNNAMED2,
 	BobDeathType_UNNAMED3,
 	BobDeathType_UNNAMED4,

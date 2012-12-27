@@ -30,6 +30,7 @@ namespace CloudberryKingdom
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LASER, Localization::Words_LASER ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA_FLOW, Localization::Words_SLUDGE ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALLING_SPIKE, Localization::Words_FALLING_SPIKEY ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SERPENT, Localization::Words_SERPENT ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TIME, Localization::Words_TIME_LIMIT ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LEFT_BEHIND, Localization::Words_LEFT_BEHIND ) );
 		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_OTHER, Localization::Words_OTHER ) );
@@ -202,7 +203,8 @@ namespace CloudberryKingdom
 				{
 					boost::shared_ptr<Quad> _Quad = boost::dynamic_pointer_cast<Quad>( *quad );
 
-					if ( !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && CompareIgnoreCase( ( *quad )->Name, scheme.BeardData->QuadName ) == 0 )
+					if ( scheme.SkinColor->Clr.A != 0 && 
+                        !( scheme.HatData != 0 && !scheme.HatData->DrawHead ) && CompareIgnoreCase( ( *quad )->Name, scheme.BeardData->QuadName ) == 0 )
 					{
 						( *quad )->Show = scheme.BeardData->DrawSelf;
 
@@ -224,6 +226,17 @@ namespace CloudberryKingdom
 		if ( q != 0 )
 		{
 			q->setMyMatrix( scheme.SkinColor->M );
+
+            if ( scheme.SkinColor->Clr.A == 0 )
+            {
+                q->MyEffect = Tools::BasicEffect;
+                q->SetColor( Color::Transparent );
+            }
+            else
+            {
+                q->MyEffect = Tools::HslGreenEffect;
+                q->SetColor( Color::White );
+            }
 
 			boost::shared_ptr<CloudberryKingdom::BaseQuad> wf = PlayerObject->FindQuad( std::wstring( L"Wings_Front" ) );
 			if ( wf != 0 )
@@ -729,7 +742,7 @@ namespace CloudberryKingdom
 
 		DeathCount = 0;
 
-		getCore()->DrawLayer = 9;
+		//getCore()->DrawLayer = 9;
 
 		FlamingCorpse = false;
 
@@ -878,7 +891,10 @@ namespace CloudberryKingdom
 			return;
 
 		GamePadState pad = Tools::GamepadState[ static_cast<int>( MyPlayerIndex ) ];
-		//pad = Tools.padState[0];
+#if defined(WINDOWS)
+        bool GamepadUsed = false;
+#endif
+
 
 		if ( pad.IsConnected )
 		{
@@ -906,51 +922,51 @@ namespace CloudberryKingdom
 
 
 			CurInput.B_Button = ( pad.Buttons.LeftShoulder == ButtonState_Pressed || pad.Buttons.RightShoulder == ButtonState_Pressed );
-			//PrevB_Button = (Tools.prevPadState[(int)MyPlayerIndex].Buttons.A == ButtonState.Pressed);
-		}
-	//#endif
+#if defined(WINDOWS)
+            if ( CurInput.xVec != Vector2() || CurInput.A_Button || CurInput.B_Button )
+            {
+                GamepadUsed = true;
+                InputFromKeyboard = false;
+            }
+#endif
+        }
 
-	#if defined(WINDOWS)
+#if defined(WINDOWS)
 		Vector2 KeyboardDir = Vector2();
 
-		//if (MyPlayerIndex == PlayerIndex.One)
-		{
-			CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up );
-			CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary );
-			KeyboardDir.X = KeyboardDir.Y = 0;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up ) )
-				KeyboardDir.Y = 1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Down ) )
-				KeyboardDir.Y = -1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Right ) )
-				KeyboardDir.X = 1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Left ) )
-				KeyboardDir.X = -1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Left_Secondary ) )
-				KeyboardDir.X = -1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Right_Secondary ) )
-				KeyboardDir.X = 1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary ) )
-				KeyboardDir.Y = 1;
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Down_Secondary ) )
-				KeyboardDir.Y = -1;
-			//CurInput.B_Button |= Tools.keybState.IsKeyDownCustom(Keys.C);
-			CurInput.B_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Back_Secondary );
-		}
+		CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up );
+		CurInput.A_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary );
+		KeyboardDir.X = KeyboardDir.Y = 0;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Up ) )
+			KeyboardDir.Y = 1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Down ) )
+			KeyboardDir.Y = -1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Right ) )
+			KeyboardDir.X = 1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Left ) )
+			KeyboardDir.X = -1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Left_Secondary ) )
+			KeyboardDir.X = -1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Right_Secondary ) )
+			KeyboardDir.X = 1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Up_Secondary ) )
+			KeyboardDir.Y = 1;
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Down_Secondary ) )
+			KeyboardDir.Y = -1;
 
-		//if (MyPlayerIndex == PlayerIndex.Two)
-		//{
-		//    CurInput.A_Button |= Tools.keybState.IsKeyDownCustom(Keys.Y);
-		//    KeyboardDir.X = KeyboardDir.Y = 0;
-		//    if (Tools.keybState.IsKeyDownCustom(Keys.Y)) KeyboardDir.Y = 1;
-		//    if (Tools.keybState.IsKeyDownCustom(Keys.H)) KeyboardDir.Y = -1;
-		//    if (Tools.keybState.IsKeyDownCustom(Keys.J)) KeyboardDir.X = 1;
-		//    if (Tools.keybState.IsKeyDownCustom(Keys.G)) KeyboardDir.X = -1;
-		//}
+		CurInput.B_Button |= KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, ButtonCheck::Back_Secondary );
 
 		if ( KeyboardDir.LengthSquared() > CurInput.xVec.LengthSquared() )
 			CurInput.xVec = KeyboardDir;
-	#endif        
+
+#if defined(WINDOWS)
+        if ( !GamepadUsed && ( CurInput.xVec != Vector2() || CurInput.A_Button || CurInput.B_Button ) )
+        {
+            InputFromKeyboard = true;
+        }
+#endif
+
+#endif        
 
 		// Invert left-right for inverted levels
 		if ( getCore()->MyLevel != 0 && getCore()->MyLevel->ModZoom.X < 0 )
@@ -1518,7 +1534,9 @@ namespace CloudberryKingdom
 			Head = boost::static_pointer_cast<Quad>( PlayerObject->FindQuad( std::wstring( L"Head" ) ) );
 		temp->Pos = Head->Center->Pos;
 
-		if ( MyPhsx->Ducking )
+        if (Dead)
+            temp->Pos += Vector2( 60, -50 ) * MyPhsx->ModCapeSize + Vector2( 0, 3 * ( 1.f / MyPhsx->ModCapeSize.Y - 1 ) );
+        else  if ( MyPhsx->Ducking )
 			temp->Pos += MyPhsx->CapeOffset_Ducking * MyPhsx->ModCapeSize + Vector2( 0, 3 * ( 1 / MyPhsx->ModCapeSize.Y - 1 ) );
 		else
 			temp->Pos += MyPhsx->CapeOffset * MyPhsx->ModCapeSize;
@@ -1969,6 +1987,8 @@ namespace CloudberryKingdom
 
 	void Bob::InitializeInstanceFields()
 	{
+		InputFromKeyboard = false;
+
 		MyCapeType = static_cast<CapeType> ( 0 );
 
 		LightSourceFade = 1;

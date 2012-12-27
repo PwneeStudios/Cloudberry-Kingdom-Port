@@ -95,20 +95,20 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::Init()
 	{
-		 ArcadeBaseMenu::Init();
+		ArcadeBaseMenu::Init();
 
 		MyPile = boost::make_shared<DrawPile>();
 
 		CallDelay = ReturnToCallerDelay = 0;
 
+		// Options. Menu for PC, graphics only for consoles.
+#if defined(PC_VERSION)
 		// Menu
 		MyMenu = boost::make_shared<Menu>();
 		MyMenu->OnB.reset();
 
 		EnsureFancy();
 
-		// Options. Menu for PC, graphics only for consoles.
-	#if defined(PC_VERSION)
 		boost::shared_ptr<MenuItem> item;
 
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
@@ -122,6 +122,8 @@ namespace CloudberryKingdom
 		MyMenu->MouseOnly = true;
 		MyMenu->NoneSelected = true;
 	#else
+		EnsureFancy();
+
 		std::wstring Space = std::wstring( L"{s34,0}" );
 		boost::shared_ptr<EzText> StartText = boost::make_shared<EzText>( ButtonString::Go( 80 ) + Space + std::wstring( L"{c122,209,39,255} Start" ), ItemFont, true, true );
 		MyPile->Add( StartText, std::wstring( L"Go" ) );
@@ -162,13 +164,16 @@ namespace CloudberryKingdom
 		_item = MyMenu->FindItemByName( std::wstring( L"Leaderboard" ) );
 		if ( _item != 0 )
 		{
-			_item->setSetPos( Vector2( -808, 110 ) );
+			_item->setSetPos( Vector2( -638.5557f, 110 ) );
 			_item->MyText->setScale( 0.75f );
 			_item->MySelectedText->setScale( 0.75f );
 			_item->SelectIconOffset = Vector2( 0, 0 );
 		}
 
 		MyMenu->setPos( Vector2( 947.2223f, -608.3333f ) );
+
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Button_X" ); if ( _q != 0 ) { _q->setPos( Vector2(113.8889f, -624.9999f) ); _q->setSize( Vector2(80.f, 75.2f) ); }
 
 		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 	}

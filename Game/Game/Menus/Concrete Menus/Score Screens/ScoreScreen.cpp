@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 
 			if ( _Add_Save )
 			{
-				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVED_SEEDS, ItemFont ) ) );
+				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
 				item->Name = std::wstring( L"Save" );
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
@@ -482,7 +482,8 @@ bool ScoreScreen::UseZoomIn = true;
 
 		Active = false;
 
-		Tools::SongWad->FadeOut();
+		//Tools::SongWad->FadeOut();
+		MyGame->EndMusicOnFinish = false;
 
 		MyGame->WaitThenDo( 36, boost::make_shared<ScoreScreenEndGameHelper>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ), true ) );
 		return;

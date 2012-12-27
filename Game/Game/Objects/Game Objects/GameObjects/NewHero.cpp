@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::OnAdd();
 
-		Vector2 shift = Vector2( 0, -.5f * 2000 + 380 );
+		Vector2 shift = Vector2( 0.f, -.5f * 2000 + 380 + 500 );
 
 		// Add the text
 		text->setPos( shift );
@@ -21,6 +21,9 @@ namespace CloudberryKingdom
 
 		// Slide out
 		this->SlideOut( PresetPos_LEFT, 0 );
+
+        // Sound
+        Tools::SoundWad->FindByName( L"HeroUnlockedSound" )->Play();
 
 		if ( Perma )
 			this->SlideIn( 0 );
@@ -103,15 +106,22 @@ namespace CloudberryKingdom
 		if ( Perma )
 			return;
 
-		// Otherwise show and hide
-		if ( Count == 4 )
-			SlideIn();
+        // Otherwise show and hide
+        if ( Count == 24 )
+        {
+            //SlideIn();
+            SlideIn( 0 );
+            MyPile->BubbleUp( false );
+        }
 
-		if ( Count == 180 )
-		{
-			SlideOut( PresetPos_RIGHT, 160 );
-			ReleaseWhenDone = true;
-		}
+        if ( Count == 180 )
+        {
+            //SlideOut(PresetPos.Right, 160);
+            //ReleaseWhenDone = true;
+
+            MyPile->BubbleDownAndFade( true );
+            ReleaseWhenDoneScaling = true;
+        }
 	}
 
 	void NewHero::InitializeInstanceFields()
