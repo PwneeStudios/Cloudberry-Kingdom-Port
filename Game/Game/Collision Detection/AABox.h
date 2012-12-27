@@ -3,17 +3,6 @@
 
 namespace CloudberryKingdom
 {
-	struct FloatRectangle;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadDrawer;
-}
-
-
-namespace CloudberryKingdom
-{
 	struct AABox
 	{
 	
@@ -21,7 +10,7 @@ namespace CloudberryKingdom
 
 		Vector2 BL, TR;
 		boost::shared_ptr<FloatRectangle> Current, Target;
-		bool TopOnly;
+		bool TopOnly, NoSides;
 
 		Vector2 RealTR();
 		Vector2 RealBL();

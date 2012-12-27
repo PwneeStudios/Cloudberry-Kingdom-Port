@@ -57,11 +57,16 @@ namespace CloudberryKingdom
 	
 		std::map<int, int> ChapterStart;
 		std::map<int, boost::shared_ptr< Tuple<std::wstring, std::wstring> > > SpecialLevel;
-
+		
+		static boost::shared_ptr<PerfectScoreObject> MyPerfectScoreObject;
 	
 		virtual void Start( int Chapter );
 
 	
+		bool OnLevelBegin( boost::shared_ptr<Level> level );
+		void AdditionalPreStart();
+		void MyStringWorld_OnSwapToFirstLevel( boost::shared_ptr<LevelSeedData> data );
+
 		virtual void MakeSeedList();
 
 	

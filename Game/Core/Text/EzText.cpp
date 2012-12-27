@@ -755,7 +755,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		{
 			BracketIndex = str.find( std::wstring( L"}" ), EndIndex );
 			SpaceIndex = str.find( std::wstring( L" " ), EndIndex );
-			DelimiterIndex = str.find( L'\n', EndIndex );
+			DelimiterIndex = __max( str.find( L'\r', EndIndex), str.find( L'\n', EndIndex) );
 			if ( BracketIndex == -1 && SpaceIndex == -1 )
 			{
 				NewEndIndex = str.length();
@@ -1014,7 +1014,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			str = str.erase( 0, i );
 			if ( str.length() > 0 && str[ 0 ] == L' ' )
 				str = str.erase( 0, 1 );
-			if ( str.length() > 0 && str[ 0 ] == L'\n' )
+			if ( str.length() > 0 && ( str[ 0 ] == L'\n' || str[0] == '\r' ) )
 				str = str.erase( 0, 1 );
 
 			LineNumber++;
@@ -1158,6 +1158,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			else
 				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str,			_pos, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod, SpriteEffects_None, 1 );
 			
+			//Tools.QDrawer.DrawSquareDot( Position, new Color( 255, 255, 255 ), 5 );
 		}
 		if ( DrawPics )
 			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )

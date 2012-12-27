@@ -23,9 +23,9 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
-	Vector2 __IconPos1[] = { Vector2( 240, 400 ), Vector2(),		      Vector2() };
-	Vector2 __IconPos2[] = { Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2() };
-	Vector2 __IconPos3[] = { Vector2( 255, 310 ), Vector2( 255, 650 ), Vector2( 10, 512 ) };
+	Vector2 __IconPos1[] = { Vector2(   0, 470 ), Vector2(),		      Vector2() };
+	Vector2 __IconPos2[] = { Vector2(   0, 450 ), Vector2( 255, 630 ), Vector2() };
+	Vector2 __IconPos3[] = { Vector2( -10, 350 ), Vector2( -10, 690 ), Vector2( 235, 552 ) };
 	std::vector<Vector2> _IconPos1 = VecFromArray( __IconPos1 );
 	std::vector<Vector2> _IconPos2 = VecFromArray( __IconPos2 );
 	std::vector<Vector2> _IconPos3 = VecFromArray( __IconPos3 );

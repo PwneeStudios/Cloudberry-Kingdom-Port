@@ -145,6 +145,13 @@ enum LevelGeometry
 	LevelGeometry_BIG
 };
 
+enum MetaGameType
+{ 
+	MetaGameType_NONE,
+	MetaGameType_ESCALATION,
+	MetaGameType_TIME_CRISIS
+};
+
 enum LevelZoom
 {
 	LevelZoom_NORMAL,

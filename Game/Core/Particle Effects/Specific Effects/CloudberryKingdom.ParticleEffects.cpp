@@ -100,6 +100,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 
 	void ParticleEffects::Init()
 	{
+		Init_CoinTemplate();
 		Init_Coalesce();
 		Init_PieceExplosion();
 		Init_CoinExplosion();
@@ -267,7 +268,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 			}
 		}
 
-		DustCloudSound->Play();
+		DustCloudSound->Play( .2f );
 	}
 
 	void ParticleEffects::DustCloudExplosion( const boost::shared_ptr<Level> &level, Vector2 pos )

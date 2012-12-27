@@ -1846,6 +1846,7 @@ bool Level::dodebug = false;
 		Tools::Write( Format( _T( "Test: %d" ), TestNumber ).c_str() );
 
 		CurMakeData = makeData;
+		CurMakeData->PieceSeed->ApplyMetaGameStyling();
 		InitMakeData( CurMakeData );
 		boost::shared_ptr<SingleData> Style = boost::static_pointer_cast<SingleData>( CurMakeData->PieceSeed->Style );
 
@@ -2139,6 +2140,8 @@ bool Level::dodebug = false;
 				( *gen )->ActiveFill_1( shared_from_this(), FillBL, TR_Bound );
 		}
 		LastStep = CurPhsxStep;
+
+		Tools::Write( Format( _T( "Last step: %i" ), LastStep ).c_str() );
 	}
 
 	void Level::Stage1Cleanup( Vector2 BL_Bound, Vector2 TR_Bound )
@@ -3377,12 +3380,13 @@ int Level::AfterPostDrawLayer = 12;
 		LightQuad->setEffectName( std::wstring( L"LightMap" ) );
 	}
 
-	static float tempVector[] = { 800, 70, 690, 630, 500 };
+	static float tempVector[] = { 800, 740, 690, 630, 500 };
 	std::vector<float> Level::BobLightRadiusByDifficulty = VecFromArray( tempVector );
 
 	void Level::SetBobLightRadius( int Difficulty )
 	{
-		BobLightRadius = BobLightRadiusByDifficulty[ Difficulty ];
+		//BobLightRadius = BobLightRadiusByDifficulty[ Difficulty ];
+		BobLightRadius = 900;
 	}
 
 	void Level::FadeBobLightSourcesIn()
@@ -4008,14 +4012,14 @@ int Level::AfterPostDrawLayer = 12;
 				{
 					int NumAlive = 0;
 					Vector2 Pos = Vector2();
+					//Pos.X = -1000000;
 					for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 					{
 						if ( ( *bob )->getMyPlayerData()->IsAlive )
 						{
 							NumAlive++;
+							//Pos.X = (float)Math.Max(Pos.X, bob.Pos.X);
 							Pos += ( *bob )->getPos();
-							//Pos.X += bob.Core.Data.Velocity.X + bob.GroundSpeed;
-							//Pos.X += bob.GroundSpeed / 4;
 						}
 					}
 
@@ -4024,6 +4028,7 @@ int Level::AfterPostDrawLayer = 12;
 
 					//float New = Bobs[0].Pos.X / 10;
 					float New = ( Pos.X / NumAlive ) / 10;
+					//float New = (Pos.X) / 10;
 
 					if ( !IndependentStepSetOnce )
 						Prev = New;

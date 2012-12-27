@@ -158,10 +158,16 @@ namespace CloudberryKingdom
 			_StartType_BOTTOM,
 			_StartType_LENGTH
 		};
+
+        /// <summary>
+        /// When true, blocks have a lower lip than usual. This is used for InvertHero, so he is standing on the bottom of blocks properly.
+        /// (Otherwise you want the lips to be higher, so your head doesn't hit them as easily).
+        /// </summary>
+        bool UseLowerBlockBounds;
+
 		/// <summary>
 		/// A callback to modify AutoGen parameters after they have been set
 		/// </summary>
-	
 		boost::shared_ptr<Multicaster_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> > > MyModParams;
 
 		void Release();

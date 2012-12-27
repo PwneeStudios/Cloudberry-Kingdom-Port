@@ -434,7 +434,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 	ButtonData ButtonCheck::AllState( int iPlayerIndex )
 	{
-		static ControllerButtons tempButtons[] = { ControllerButtons_A, ControllerButtons_B, ControllerButtons_X, ControllerButtons_Y, ControllerButtons_LS, ControllerButtons_RS };
+		static ControllerButtons tempButtons[] = { ControllerButtons_A, ControllerButtons_B, ControllerButtons_X, ControllerButtons_Y, ControllerButtons_LS, ControllerButtons_RS, ControllerButtons_START };
 		static std::vector<ControllerButtons> buttons = VecFromArray( tempButtons );
 
 		return State( iPlayerIndex, buttons );

@@ -5,7 +5,6 @@ template<class A, class B>
 struct Tuple
 {
 
-
 	A Item1;
 	B Item2;
 

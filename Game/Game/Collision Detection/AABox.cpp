@@ -15,6 +15,7 @@ namespace CloudberryKingdom
 	void AABox::MakeNew()
 	{
 		TopOnly = false;
+		NoSides = false;
 		Invalidated = true;
 	}
 
@@ -26,6 +27,7 @@ namespace CloudberryKingdom
 	AABox::AABox( Vector2 center, Vector2 size )
 	{
 		TopOnly = false;
+		NoSides = false;
 		Initialize( center, size );
 	}
 
@@ -45,6 +47,7 @@ namespace CloudberryKingdom
 		Current->Clone( A->Current );
 		Target->Clone( A->Target );
 		TopOnly = A->TopOnly;
+		NoSides = A->NoSides;
 	}
 
 	void AABox::Write( const boost::shared_ptr<BinaryWriter> &writer )

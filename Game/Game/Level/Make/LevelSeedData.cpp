@@ -11,6 +11,16 @@
 namespace CloudberryKingdom
 {
 
+	LevelSeedData::_NewHeroProxy::_NewHeroProxy( const boost::shared_ptr<LevelSeedData> &lsd )
+	{
+		this->lsd = lsd;
+	}
+
+	void LevelSeedData::_NewHeroProxy::Apply( const boost::shared_ptr<Level> &level )
+	{
+		lsd->_NewHero( level );
+	}
+
 	LevelSeedData::_StartSongProxy::_StartSongProxy( const boost::shared_ptr<LevelSeedData> &lsd )
 	{
 		this->lsd = lsd;
@@ -172,21 +182,17 @@ namespace CloudberryKingdom
 		NewLevel->Geometry = MyGeometry;
 		boost::shared_ptr<Camera> cam = NewLevel->getMainCamera();
 
-		// Set lava
-		if ( NewLevel->getInfo()->AllowLava )
-		//switch (LavaMakeTypes.NeverMake)
-		switch ( LavaMake )
-		{
-			case LavaMakeTypes_ALWAYS_MAKE:
-				game->HasLava = true;
-				break;
-			case LavaMakeTypes_RANDOM:
-				game->HasLava = Rnd->RndBool( .38f );
-				break;
-			default:
-				game->HasLava = false;
-				break;
-		}
+        // Set lava
+        //if (NewLevel.Info.AllowLava)
+        //switch (LavaMake)
+        //{
+        //    case LavaMakeTypes.AlwaysMake: game.HasLava = true; break;
+        //    case LavaMakeTypes.Random: game.HasLava = Rnd.RndBool(.38f); break;
+        //    default: game.HasLava = false; break;
+        //}
+        if ( NewLevel->getInfo()->AllowLava )
+            game->HasLava = true;
+
 		if ( !NewLevel->MyBackground->AllowLava )
 			game->HasLava = false;
 
@@ -409,6 +415,10 @@ namespace CloudberryKingdom
 	const std::wstring LevelSeedData::OpenDoorSoundFlag = std::wstring( L"opendoorsound" );
 	const std::wstring LevelSeedData::SongString = std::wstring( L"song" );
 
+	const std::wstring LevelSeedData::NewHeroFlag = L"newhero";
+    const std::wstring LevelSeedData::DarknessFlag = L"darkness";
+    const std::wstring LevelSeedData::MasochistFlag = L"masochist";
+
 	void LevelSeedData::ProcessSpecial()
 	{
 		if ( HasWall )
@@ -418,6 +428,8 @@ namespace CloudberryKingdom
 
 			p->Style->MyModParams->Add( boost::make_shared<_HasWall_ProcessProxy>() );
 		}
+
+		if (NewHero) PostMake->Add( boost::make_shared<_NewHeroProx>() );
 
 		if ( NoStartDoor )
 			PostMake->Add( boost::make_shared<_NoStartDoorProxy>() );
@@ -466,6 +478,13 @@ namespace CloudberryKingdom
 			return;
 		door->CollectSelf();
 	}
+
+    void LevelSeedData::_NewHero( const boost::shared_ptr<Level> &level )
+    {
+		level->MyGame->AddGameObject( NewHero( Localization::WordString( Localization::Words_NEW_HERO_UNLOCKED ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) );
+        level->MyLevelSeed->WaitLengthToOpenDoor = 150;
+        level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
+    }
 
 	void LevelSeedData::_FadeIn_Process( const boost::shared_ptr<Level> &level )
 	{
@@ -655,6 +674,11 @@ namespace CloudberryKingdom
 			{
 					UpgradeStrs.push_back( data );
 			}
+			// Meta
+			else if ( lower_identifier == std::wstring( L"m" ) )
+			{
+				MyMetaGameType = static_cast<MetaGameType>( ParseInt( data ) );
+			}
 			// Wall
 			else if ( lower_identifier == WallFlag )
 			{
@@ -664,11 +688,30 @@ namespace CloudberryKingdom
 			else if ( lower_identifier == FadeInFlag )
 			{
 					FadeIn = true;
+                    float DefaultFadeInSpeed = FadeInSpeed;
+					FadeInSpeed = ParseFloat( data );
 			}
 			// Fade Out
 			else if ( lower_identifier == FadeOutFlag )
 			{
 					FadeOut = true;
+                    float DefaultFadeOutSpeed = FadeOutSpeed;
+                    FadeOutSpeed = ParseFloat( data );
+			}
+            // NewHero
+			else if ( lower_identifier == NewHeroFlag )
+			{
+				NewHero = true;
+			}
+            // Darkness
+			else if ( lower_identifier == DarknessFlag )
+			{
+				Darkness = true;
+			}
+            // Masochist
+			else if ( lower_identifier == MasochistFlag )
+			{
+				Masochistic = true;
 			}
 			// No start door
 			else if ( lower_identifier == NoStartDoorFlag )
@@ -809,12 +852,15 @@ namespace CloudberryKingdom
 			upgrades += std::wstring( L";" );
 		}
 
+        // Metagame origin
+        std::wstring meta = L"m:" + ::ToString( static_cast<int>( PieceSeeds[0]->MyMetaGameType ) ) + L";";
+
 		// Build final string
-		std::wstring str = version + seed + game + geometry + hero + customphsx + tileset + pieces + length + upgrades;
+		std::wstring str = version + seed + game + geometry + hero + customphsx + tileset + pieces + length + upgrades + meta;
 
 		// Add special flags
-		if ( HasWall )
-			str += WallFlag + std::wstring( L";" );
+		if ( HasWall ) str += WallFlag + std::wstring( L";" );
+		if ( Masochistic ) str += MasochistFlag + L";";
 
 		return str;
 	}
@@ -1038,6 +1084,8 @@ namespace CloudberryKingdom
 
 		MyGeometry = data->MyGeometry;
 
+		Masochistic = data->Masochistic;
+
 		BaseInit();
 	}
 
@@ -1166,6 +1214,12 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < NumPieces; i++ )
 		{
 			Piece = boost::make_shared<PieceSeedData>( i, MyGeometry, shared_from_this() );
+			
+            if ( MyMetaGameType != MetaGameType_NONE )
+                Piece->MyMetaGameType = MyMetaGameType;
+
+            Piece->Style->Masochistic = Masochistic;			
+			
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades1 );
 			RndDifficulty::ZeroUpgrades( Piece->MyUpgrades2 );
 
@@ -1272,8 +1326,17 @@ namespace CloudberryKingdom
 
 		Saveable = true;
 		HasWall = false;
+
 		FadeIn = false;
 		FadeOut = false;
+		FadeInSpeed = .032f;
+		FadeOutSpeed = .02f;
+        NewHero = false;
+        Darkness = false;
+        Masochistic = false;
+		AlwaysOverrideWaitDoorLength = false;
+		MyMetaGameType = MetaGameType_NONE;
+
 		WeatherIntensity = 1;
 		NoStartDoor = false;
 		LevelNum = -1;

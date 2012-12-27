@@ -26,6 +26,7 @@ namespace CloudberryKingdom
 		int anim;
 		bool Playing;
 		float speed;
+		bool Loop;
 
 		void UpdateTextureAnim();
 

@@ -21,7 +21,8 @@ namespace CloudberryKingdom
 	void HeroRush_Tutorial::StartMusicHelper::Apply()
 	{
 		Tools::SongWad->SuppressNextInfoDisplay = true;
-		Tools::SongWad->SetPlayList( Tools::Song_140mph );
+		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
+		//Tools::SongWad->SetPlayList( Tools::Song_140mph );
 		Tools::SongWad->Restart( true );
 	}
 

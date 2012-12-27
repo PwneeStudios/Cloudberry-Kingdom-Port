@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 		/// Special levels (such as watching a movie) do not need the normal processing (and would crash the game if they happened).
 		/// </summary>
 	
-		bool OnLevelBegin( const boost::shared_ptr<Level> &level );
+		virtual bool OnLevelBegin( const boost::shared_ptr<Level> &level );
 
 	
 		virtual void SetGameParent( const boost::shared_ptr<GameData> &game );

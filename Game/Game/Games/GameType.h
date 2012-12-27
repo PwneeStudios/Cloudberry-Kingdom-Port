@@ -349,6 +349,7 @@ namespace CloudberryKingdom
 		virtual void Finish( bool Replay );
 
 
+		bool SetToRepaly;
 		bool EndMusicOnFinish;
 		virtual void StandardFinish( bool Replay );
 

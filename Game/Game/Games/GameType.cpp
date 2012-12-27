@@ -388,6 +388,8 @@ namespace CloudberryKingdom
 		if ( PreviousLoadFunction != 0 )
 			PreviousLoadFunction->Apply();
 		ExecutingPreviousLoadFunction = false;
+
+		SetToRepaly = false;
 	}
 
 	void GameData::WaitThenDo( int WaitLength, const boost::shared_ptr<Lambda> f )
@@ -1001,6 +1003,7 @@ namespace CloudberryKingdom
 
 	void GameData::QuickJoinPhsx()
 	{
+		if ( CharacterSelectManager::FakeHide ) return;
 		if ( MyLevel == 0 )
 			return;
 		if ( MyLevel->Watching || MyLevel->Replay )
@@ -1014,7 +1017,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < 4; i++ )
 			if ( !PlayerManager::Get( i )->Exists && ButtonCheck::State( ControllerButtons_A, i ).Pressed )
 			{
-				CharacterSelectManager::Start( 0 );
+				CharacterSelectManager::Start( 0, true );
 			}
 	}
 
@@ -1686,6 +1689,7 @@ namespace CloudberryKingdom
 		MyStatGroup = StatGroup_LEVEL;
 		Freeplay = false;
 		ParentGame = 0;
+		SetToRepaly = false;
 		EndMusicOnFinish = true;
 		PreviousLoadFunction = 0;
 		ExecutingPreviousLoadFunction = false;
