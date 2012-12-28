@@ -125,22 +125,42 @@ void SoundEffect::Load( const std::string &path )
 	if( ckId != 'atad' )
 		return;
 
+	ALuint frequency = samplesPerSecond;
+	ALenum format = 0;
+	unsigned char *data;
 	
-	return;
+	if( bitsPerSample == 8 )
+	{
+		if( numChannels == 1 )
+			format = AL_FORMAT_MONO8;
+		else if( numChannels == 2 )
+			format = AL_FORMAT_STEREO8;
+	}
+	else if( bitsPerSample == 16 )
+	{
+		if( numChannels == 1 )
+			format = AL_FORMAT_MONO16;
+		else if( numChannels == 2 )
+			format = AL_FORMAT_STEREO16;
+	}
+
+	if( !format )
+		return;
+
+	data = new unsigned char[ ckSize ];
+	soundFile->Read( reinterpret_cast< char * >( data ), ckSize );
 
 	alGenBuffers( 1, &internal_->Buffer );
 	alGenSources( 1, &internal_->Source );
 
-	ALuint frequency;
-	ALenum format;
-	unsigned char *data;
-	int size;
+	alBufferData( internal_->Buffer, format, data, ckSize, frequency );
 
-	alBufferData( internal_->Buffer, format, data, size, frequency );
+	delete[] data;
+
+	alSourceQueueBuffers( internal_->Source, 1, &internal_->Buffer );
 }
 
 void SoundEffect::Play( float volume, float pitch, float pan )
 {
-	alSourceQueueBuffers( internal_->Source, 1, &internal_->Buffer );
 	alSourcePlay( internal_->Source );
 }
