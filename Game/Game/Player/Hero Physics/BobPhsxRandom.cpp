@@ -50,5 +50,6 @@ namespace CloudberryKingdom
 
 	BobPhsxRandom::BobPhsxRandom()
 	{
+		DefaultValues();
 	}
 }

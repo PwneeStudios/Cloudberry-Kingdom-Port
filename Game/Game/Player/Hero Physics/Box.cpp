@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxBox::DefaultValues()
 	{
-		 BobPhsxNormal::DefaultValues();
+		BobPhsxNormal::DefaultValues();
 
 		BobJumpAccel = ( Gravity + 3.45f ) / 19;
 		BobInitialJumpSpeed = 6;

@@ -52,6 +52,7 @@ namespace CloudberryKingdom
 	BobPhsxRocketbox::BobPhsxRocketbox()
 	{
 		InitializeInstanceFields();
+		DefaultValues();
 	}
 
 	void BobPhsxRocketbox::Init( const boost::shared_ptr<Bob> &bob )

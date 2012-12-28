@@ -53,6 +53,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.
 		//Set( shared_from_this() );
+		DefaultValues();
 	}
 
 	void BobPhsxTime::Set( const boost::shared_ptr<BobPhsx> &phsx )

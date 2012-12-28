@@ -61,6 +61,7 @@ namespace CloudberryKingdom
 		SuperBounceGrace( 0 )
 	{
 		InitializeInstanceFields();
+		DefaultValues();
 	}
 
 	void BobPhsxBouncy::Init( const boost::shared_ptr<Bob> &bob )
@@ -76,7 +77,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxBouncy::DefaultValues()
 	{
-		 BobPhsxNormal::DefaultValues();
+		BobPhsxNormal::DefaultValues();
 
 		BlobMod = .4f;
 

@@ -3,6 +3,12 @@
 namespace CloudberryKingdom
 {
 
+	ComputerRecording::ComputerRecording() :
+		IsFromPool( false ),
+		Sparse( false ), SuperSparse( false )
+	{
+	}
+
 	void ComputerRecording::InitializeStatics()
 	{
 		ComputerRecording::Pool = std::stack<boost::shared_ptr<ComputerRecording> >();
@@ -219,5 +225,7 @@ namespace CloudberryKingdom
 			AutoJump = std::vector<int>( length );
 			AutoOnGround = std::vector<bool>( length );
 		}
+		else
+			Tools::Nothing();
 	}
 }

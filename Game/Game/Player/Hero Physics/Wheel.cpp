@@ -62,7 +62,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxWheel::DefaultValues()
 	{
-		 BobPhsxNormal::DefaultValues();
+		BobPhsxNormal::DefaultValues();
 
 		MaxSpeed = 21; // 22f;
 		XAccel = .2f;
