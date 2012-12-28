@@ -755,7 +755,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		{
 			BracketIndex = str.find( std::wstring( L"}" ), EndIndex );
 			SpaceIndex = str.find( std::wstring( L" " ), EndIndex );
-			DelimiterIndex = __max( str.find( L'\r', EndIndex), str.find( L'\n', EndIndex) );
+			int rslash = str.find( L'\r', EndIndex);
+			int nslash = str.find( L'\n', EndIndex);
+			DelimiterIndex = __max( rslash, nslash );
 			if ( BracketIndex == -1 && SpaceIndex == -1 )
 			{
 				NewEndIndex = str.length();

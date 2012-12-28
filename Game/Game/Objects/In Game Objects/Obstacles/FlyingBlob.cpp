@@ -515,7 +515,7 @@ namespace CloudberryKingdom
 		if ( getCore()->SkippedPhsx )
 			return;
 
-		if ( Life <= 1 )
+		if ( Life < 1 )
 			Death();
 
 		Box->SwapToCurrent();
