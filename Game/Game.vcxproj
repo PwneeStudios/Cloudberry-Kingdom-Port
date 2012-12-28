@@ -766,7 +766,6 @@
     <ClInclude Include="Hacks\XNA\GraphicsDevice.h" />
     <ClInclude Include="Hacks\XNA\GraphicsDeviceManager.h" />
     <ClInclude Include="Hacks\NET\IAsyncResult.h" />
-    <ClInclude Include="Hacks\XNA\MediaPlayer.h" />
     <ClInclude Include="Hacks\NET\Path.h" />
     <ClInclude Include="Hacks\XNA\PreparingDeviceSettingsEventArgs.h" />
     <ClInclude Include="Hacks\XNA\PresentationParameters.h" />
@@ -776,8 +775,6 @@
     <ClInclude Include="Hacks\XNA\SamplerState.h" />
     <ClInclude Include="Hacks\XNA\SignedInEventArgs.h" />
     <ClInclude Include="Hacks\XNA\SignedInGamer.h" />
-    <ClInclude Include="Hacks\XNA\Song.h" />
-    <ClInclude Include="Hacks\XNA\SoundEffect.h" />
     <ClInclude Include="Hacks\XNA\SpriteBatch.h" />
     <ClInclude Include="Hacks\XNA\SpriteFont.h" />
     <ClInclude Include="Hacks\NET\Stopwatch.h" />

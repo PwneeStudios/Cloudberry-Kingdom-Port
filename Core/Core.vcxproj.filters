@@ -210,6 +210,18 @@
     <ClInclude Include="include\Utility\Mutex.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Audio\MediaPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio\Song.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio\SoundEffect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Audio\AudioEnums.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -360,6 +372,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Utility\MutexWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectPc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\MediaPlayerPc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

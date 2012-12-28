@@ -3,7 +3,7 @@
 
 #include <global_header.h>
 
-#include "Hacks/XNA/Song.h"
+#include <Audio/Song.h>
 
 namespace CloudberryKingdom
 {

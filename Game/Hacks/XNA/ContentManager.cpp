@@ -1,5 +1,6 @@
 #include <global_header.h>
 
+#include <Audio/SoundEffect.h>
 #include <Content/Texture.h>
 #include <Content/Wad.h>
 #include <Core.h>
@@ -12,7 +13,9 @@
 
 template<> boost::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( const std::wstring &name )
 {
-	return boost::make_shared<SoundEffect>();
+	boost::shared_ptr<SoundEffect> sound = boost::make_shared<SoundEffect>();
+	sound->Load( WstringToUtf8( name ) );
+	return sound;
 }
 
 template<> boost::shared_ptr<Song> ContentManager::Load<Song>( const std::wstring &name )

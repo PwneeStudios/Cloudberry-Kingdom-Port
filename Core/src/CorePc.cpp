@@ -1,6 +1,7 @@
 #include <CorePc.h>
 
 #include <Architecture/Scheduler.h>
+#include <Audio/MediaPlayer.h>
 #include <Content/Wad.h>
 #include <cstdlib>
 #include <Utility/Limits.h>
@@ -62,10 +63,12 @@ CorePc::CorePc( GameLoop &game ) :
 	td_ = new TextDrawer;
 
 	GamePad::Initialize();
+	MediaPlayer::Initialize();
 }
 
 CorePc::~CorePc()
 {
+	MediaPlayer::Shutdown();
 	GamePad::Shutdown();
 
 	delete td_;

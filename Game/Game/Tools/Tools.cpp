@@ -7,7 +7,7 @@
 #include "Hacks/NET/Path.h"
 #include "Hacks/NET/Directory.h"
 #include <Input/GamePad.h>
-#include "Hacks/XNA/MediaPlayer.h"
+#include <Audio/MediaPlayer.h>
 #include <Input/Mouse.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>

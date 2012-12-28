@@ -446,17 +446,12 @@ enum SpriteSortMode
 	SpriteSortMode_Immediate
 };
 
-enum MediaState
-{
-	MediaState_Paused,
-	MediaState_Playing
-};
-
 enum SpriteEffects
 {
 	SpriteEffects_None
 };
 
 #include <Input/InputEnums.h>
+#include <Audio/AudioEnums.h>
 
 #endif
