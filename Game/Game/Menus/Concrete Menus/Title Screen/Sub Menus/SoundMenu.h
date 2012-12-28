@@ -111,7 +111,8 @@ namespace CloudberryKingdom
 		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );
 
 	
-		void SetPosition();
+		void SetPosition_PC();
+		void SetPosition_Console();
 
 	
 		virtual void OnAdd();

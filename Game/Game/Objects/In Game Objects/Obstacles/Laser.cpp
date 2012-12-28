@@ -22,7 +22,7 @@ namespace CloudberryKingdom
 		PhsxCutoff_Playing = Vector2( 500 );
 		PhsxCutoff_BoxesOnly = Vector2( -100 );
 
-		SmallerWidth = 170 / 200;
+		SmallerWidth = 170.f / 200.f;
 
 		AlwaysOn = false;
 		AlwaysOff = false;

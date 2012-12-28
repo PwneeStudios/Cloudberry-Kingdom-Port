@@ -147,7 +147,7 @@ namespace CloudberryKingdom
 
 		MyStringWorld->StartLevelMusic.reset();
 
-		// Start menu
+		// Start menu and help menu
 		MyStringWorld->OnLevelBegin = boost::make_shared<OnBeginLambda>();
 
 		// Additional preprocessing
@@ -253,10 +253,7 @@ namespace CloudberryKingdom
 		// Adjust the piece seed data
 		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
-			// Shorten the initial computer delay
-			( *piece )->Style->ComputerWaitLengthRange = Vector2( 8, 35 ); //38);
-
-			( *piece )->Style->MyModParams->Add( boost::make_shared<MakeMyModParamsHelper>() );
+			( *piece )->MyMetaGameType = MetaGameType_ESCALATION;
 		}
 
 		return data;

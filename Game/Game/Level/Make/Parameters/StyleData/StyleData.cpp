@@ -308,6 +308,8 @@ namespace CloudberryKingdom
 
 	void StyleData::InitializeInstanceFields()
 	{
+		UseLowerBlockBounds = false;
+
 		MyGroundType = MyTopType = static_cast<GroundType>( 0 );
 		RemovedUnusedOverlappingBlocks = false;
 		RemoveBlockOnCol = false;

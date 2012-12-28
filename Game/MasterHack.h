@@ -16,6 +16,8 @@ struct PresentationParameters;
 namespace CloudberryKingdom
 {
 
+	void InitBobPhsxSingleton( const boost::shared_ptr<BobPhsx> &This );
+
 	void CharacterSelect_PostConstruct( const boost::shared_ptr<CharacterSelect> &This, int PlayerIndex, bool QuickJoin );
 
 	void MenuList_PostConstruct( const boost::shared_ptr<MenuList> &This );

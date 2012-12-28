@@ -308,7 +308,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::CharSelect()
 	{
-		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), false );
 	}
 
 	int ShopMenu::HatCompare( const boost::shared_ptr<Hat> &h1, const boost::shared_ptr<Hat> &h2 )
@@ -498,7 +498,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 		ItemPos = Vector2( -1257.38f, -5900.f );
 
-	//#if PC_VERSION
+	//#if defined(PC_VERSION)
 	//            // Customize
 	//            ItemPos.Y -= 5;
 	//            item = new MenuItem(new EzText(Localization.Words.Customize, ItemFont));

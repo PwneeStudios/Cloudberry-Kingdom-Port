@@ -36,7 +36,8 @@ namespace CloudberryKingdom
 	
 		void GetIndices( std::vector<int> ItemIndex, std::vector<std::vector<boost::shared_ptr<MenuListItem> > > &ItemList );
 
-	
+
+		void MyDraw();
 		virtual void MyPhsxStep();
 
 	

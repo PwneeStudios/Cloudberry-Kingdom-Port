@@ -3,6 +3,8 @@
 
 #include "Hacks/NET/TimeSpan.h"
 
+#include <ctime>
+
 struct DateTime
 {
 
@@ -18,16 +20,23 @@ struct DateTime
 
 	static DateTime Now()
 	{
-		// FIXME: return the current date
-		return DateTime(0, 0, 0);
+		//return DateTime(0, 0, 0);
+
+		DateTime d;
+		d.Time = static_cast<int>( time(0) );
+		
+		return d;
 	}
 
 };
 
 static TimeSpan operator - ( DateTime dt1, DateTime dt2 )
 {
-	// FIXME: Implement
-	return TimeSpan();
+	TimeSpan t;
+	//t.TotalSeconds = static_cast<float>( dt1.Time - dt2.Time ) / CLOCKS_PER_SEC;
+	t.TotalSeconds = static_cast<float>( dt1.Time - dt2.Time );
+	
+	return t;
 }
 
 #endif

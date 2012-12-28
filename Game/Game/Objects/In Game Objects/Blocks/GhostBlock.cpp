@@ -13,6 +13,7 @@ namespace CloudberryKingdom
 	void GhostBlock::MakeNew()
 	{
 		TallBox = false;
+		TallInvertBox = false;
 
 		MyAnimSpeed = .1666f;
 
@@ -75,6 +76,7 @@ namespace CloudberryKingdom
 	}
 
 float GhostBlock::TallScale = 1.45f;
+float TallInvertScale = 1.635f;
 
 	void GhostBlock::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level )
 	{
@@ -85,6 +87,8 @@ float GhostBlock::TallScale = 1.45f;
 
 		if ( TallBox )
 			size.Y *= TallScale;
+        else if ( TallInvertBox )
+            size.Y *= TallInvertScale;
 
 		// Use PieceQuad group if it exists.
 		if ( level->getInfo()->GhostBlocks->Group != 0 )
@@ -237,8 +241,11 @@ int GhostBlock::LengthOfPhaseChange = 35;
 
 		if ( TallBox )
 			MyObject->Base.Origin -= MyObject->Boxes[ 0 ]->Center() - MyBox->Current->Center - Vector2(0, MyBox->Current->Size.Y * (TallScale - 1) / 2);
+        else if ( TallInvertBox )
+            MyObject->Base.Origin -= MyObject->Boxes[ 0 ]->Center() - MyBox->Current->Center - Vector2(0, MyBox->Current->Size.Y * (TallInvertScale - 1) / 2);
 		else
 			MyObject->Base.Origin -= MyObject->Boxes[ 0 ]->Center() - MyBox->Current->Center;
+		
 		if ( getInfo() != 0 )
 			MyObject->Base.Origin += getInfo()->GhostBlocks->Shift;
 
@@ -251,6 +258,8 @@ int GhostBlock::LengthOfPhaseChange = 35;
 
 		if ( TallBox )
 			Scale.Y /= TallScale;
+        else if ( TallInvertBox )
+            Scale.Y /= TallInvertScale;
 
 		MyObject->Base.e1.X = Scale.X;
 		MyObject->Base.e2.Y = Scale.Y;

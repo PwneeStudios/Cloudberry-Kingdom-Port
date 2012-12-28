@@ -14,7 +14,22 @@ namespace CloudberryKingdom
 			PieceOrbStyle_CLOUD,
 			PieceOrbStyle_FIRE
 		};
-	
+
+
+		static boost::shared_ptr<Particle> DieTemplate;
+		static void Init_CoinTemplate();
+		static void CoinDie_Old( boost::shared_ptr<Level> level, Vector2 pos );
+		static void CoinDie_Perfect( boost::shared_ptr<Level> level, Vector2 pos );
+		static void CoinDie_Spritely( boost::shared_ptr<Level> level, Vector2 pos );
+		static void CoinDie_ExtraLife( boost::shared_ptr<Level> level, Vector2 pos );
+		static void CoinDie_New( boost::shared_ptr<Level> level, Vector2 pos );
+
+
+
+
+
+
+
 		static boost::shared_ptr<Particle> CoinExplosionTemplate;
 
 		static void Init_CoinExplosion();

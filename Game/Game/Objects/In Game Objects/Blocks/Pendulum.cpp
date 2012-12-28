@@ -70,8 +70,20 @@ namespace CloudberryKingdom
 		return min;
 	}
 
-	void Pendulum::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level )
+	void Pendulum::Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, BoxStyle _MyBoxStyle )
 	{
+        this->MyBoxStyle = _MyBoxStyle;
+
+        if ( MyBoxStyle == BoxStyle_NO_SIDES )
+        {
+            getBox()->TopOnly = false;
+            getBox()->NoSides = true;
+        }
+        else if ( MyBoxStyle == BoxStyle_FULL_BOX )
+        {
+            getBox()->TopOnly = false;
+        }
+
 		BlockBase::Init( center, size, level, level->getInfo()->Pendulums->Group );
 
 		getCore()->Data.Position = getCore()->StartData.Position = PivotPoint = center;
@@ -109,28 +121,6 @@ namespace CloudberryKingdom
 
 	Vector2 Pendulum::CalcPosition( float t )
 	{
-		/*
-		Vector2 Top, Bottom;
-		if (Core.MyLevel == null)
-		{
-		    Top = new Vector2(PivotPoint.X, 0);
-		    Bottom = new Vector2(PivotPoint.X, 0);
-		}
-		else
-		{
-		    Top = new Vector2(PivotPoint.X, Cam.TR.Y);
-		    Bottom = new Vector2(PivotPoint.X, Cam.BL.Y);
-		}
-	
-		float s;
-		if (t < .25f)
-		    s = t / .25f;
-		else
-		    s = 1 - (t - .25f) / .75f;
-		//return Vector2.Lerp(Bottom, Top, s);
-		return Vector2.Lerp(Top, Bottom, s);
-		*/
-
 		//switch ( MoveType )
 		{
 			//default:
@@ -275,7 +265,7 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<Pendulum> BlockA = boost::dynamic_pointer_cast<Pendulum>( A );
 
-		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel() );
+		Init( BlockA->getBox()->Current->Center, BlockA->getBox()->Current->Size, BlockA->getMyLevel(), MyBoxStyle );
 
 		getCore()->Clone(A->getCore());
 
@@ -295,5 +285,6 @@ namespace CloudberryKingdom
 	void Pendulum::InitializeInstanceFields()
 	{
 		MyTime = 0;
+		MyBoxStyle = static_cast<BoxStyle>( 0 );
 	}
 }

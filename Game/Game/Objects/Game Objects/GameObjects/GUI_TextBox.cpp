@@ -1,7 +1,8 @@
 #include <global_header.h>
 
-#include "Hacks/Queue.h"
-#include "Hacks/Clipboard.h"
+#include <Hacks/Queue.h>
+#include <Hacks\List.h>
+#include <Hacks/Clipboard.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
@@ -82,10 +83,18 @@ namespace CloudberryKingdom
 
 	void GUI_TextBox::MyPhsxStep()
 	{
+		int static DownCount = 0;
+		int const RepeatKeyOnceDelay = 65, RepeatKeyMultipleDelay = 38;
+		static std::vector<Keys> LastPress;
+
 		GUI_Text::MyPhsxStep();
 
 		if ( !Active )
+		{
+			DownCount = 0;
+			LastPress.clear();
 			return;
+		}
 
 		// Decide if we should draw the caret
 		if ( HasFocus )
@@ -99,7 +108,43 @@ namespace CloudberryKingdom
 				Caret->Show = Tools::TheGame->DrawCount / 30 % 2 == 0;
 			}
 
-	#if defined(WINDOWS)
+#if defined(WINDOWS)
+			std::vector<Keys> keys = Tools::Keyboard.GetPressedKeys();
+			if ( keys.size() > 0 )
+			{
+				if (DownCount == 0 || DownCount == RepeatKeyOnceDelay ||
+					DownCount > RepeatKeyOnceDelay && (DownCount - RepeatKeyOnceDelay) % RepeatKeyMultipleDelay == 0 ||
+					LastPress.size() > 0 && keys.size() > 0 && LastPress[0] != keys[0] )
+				{				
+					DeleteSelected();
+
+					for ( std::vector<Keys>::const_iterator itr = keys.begin(); itr != keys.end(); ++itr )
+					{
+						LastPress.push_back( *itr );
+
+						wchar_t wchar = static_cast<wchar_t>( *itr );
+						if ( IsAcceptableChar( wchar ) && ( !LimitLength || static_cast<int>( MyText->FirstString().length() ) < MaxLength) )
+						{
+							MyText->AppendText( wchar );
+							Recenter();
+						}
+
+						if ( *itr == Keys_Back )
+							Backspace();
+						if ( *itr == Keys_Enter )
+							Enter();
+					}
+				}
+
+				DownCount++;
+			}
+			else
+			{
+				DownCount = 0;
+				LastPress.clear();
+			}
+
+
 			KeyboardExtension::Freeze = false;
 			if ( ButtonCheck::State( Keys_Escape ).Down )
 			{
@@ -123,14 +168,20 @@ namespace CloudberryKingdom
 				Clear();
 				return;
 			}
-			KeyboardExtension::Freeze = true;
+			if ( HasFocus )
+				KeyboardExtension::Freeze = true;
 	#endif
 
 			GamepadInteract();
 		}
 		else
+		{
 			// Don't draw the caret when we don't have focus
 			Caret->Show = false;
+			
+			DownCount = 0;
+			LastPress.clear();
+		}
 	}
 
 	void GUI_TextBox::Cancel()
@@ -367,23 +418,6 @@ namespace CloudberryKingdom
 	}
 
 #if defined(WINDOWS)
-	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::CharEntered( const boost::shared_ptr<Object> &o, const boost::shared_ptr<CharacterEventArgs> &e )
-	{
-		if ( !Active )
-			return;
-
-		DeleteSelected();
-
-		if ( IsAcceptableChar( e->getCharacter() ) && (!LimitLength || MyText->FirstString().length() < MaxLength) )
-		{
-			MyText->AppendText( e->getCharacter() );
-			Recenter();
-		}
-	}*/
-#endif
-
-#if defined(WINDOWS)
 	bool GUI_TextBox::IsAcceptableChar( wchar_t c )
 	{
 		int ascii = static_cast<int>( c );
@@ -414,20 +448,6 @@ namespace CloudberryKingdom
 		if ( DoRecenter )
 			MyText->setPos( Vector2( -MyText->GetWorldWidth() / 2, 0 ) );
 	}
-
-#if defined(WINDOWS)
-	// FIXME: Related to removal of TextInput.
-	/*void GUI_TextBox::KeyDown( const boost::shared_ptr<Object> &o, const boost::shared_ptr<KeyEventArgs> &e )
-	{
-		if ( !Active )
-			return;
-
-		if ( e->getKeyCode() == Keys::Back )
-			Backspace();
-		if ( e->getKeyCode() == Keys::Enter )
-			Enter();
-	}*/
-#endif
 
 	void GUI_TextBox::Backspace()
 	{

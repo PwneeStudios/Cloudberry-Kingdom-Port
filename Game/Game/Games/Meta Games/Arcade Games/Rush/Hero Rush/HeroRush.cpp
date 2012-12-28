@@ -209,14 +209,7 @@ namespace CloudberryKingdom
 		// Adjust the piece seed data
 		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
-			// Shorten the initial computer delay
-			( *piece )->Style->ComputerWaitLengthRange = Vector2( 4, 23 );
-
-			// Only one path
-			( *piece )->Paths = 1;
-			( *piece )->LockNumOfPaths = true;
-
-			( *piece )->Style->MyModParams->Add( boost::make_shared<MakeMyModParamsHelper>() );
+			( *piece )->MyMetaGameType = MetaGameType_TIME_CRISIS;
 		}
 
 		return data;

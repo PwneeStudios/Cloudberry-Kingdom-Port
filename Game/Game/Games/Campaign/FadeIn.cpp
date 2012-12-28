@@ -54,7 +54,8 @@ namespace CloudberryKingdom
 
 	void FadeInObject::End()
 	{
-		MyGame->FadeIn( .032f );
+		//MyGame->FadeIn( .032f );
+		MyGame->FadeIn( getMyLevel()->MyLevelSeed == 0 ? .032f : getMyLevel()->MyLevelSeed->FadeInSpeed );
 
 		setPauseGame( false );
 

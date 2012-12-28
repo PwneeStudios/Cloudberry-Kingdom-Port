@@ -6,17 +6,6 @@ namespace CloudberryKingdom
 	Coin::CoinTileInfo::CoinTileInfo()
 	{
 		InitializeInstanceFields();
-		DieTemplate = boost::make_shared<Particle>();
-		DieTemplate->MyQuad.Init();
-		DieTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		DieTemplate->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Coin" ) ) );
-
-		DieTemplate->SetSize( 45 );
-		DieTemplate->SizeSpeed = Vector2( 10, 10 );
-		DieTemplate->AngleSpeed = .013f;
-		DieTemplate->Life = 20;
-		DieTemplate->MyColor = Vector4( 1, 1, 1,.75f );
-		DieTemplate->ColorVel = Vector4( 0, 0, 0, -.065f );
 	}
 
 	void Coin::CoinTileInfo::InitializeInstanceFields()
@@ -41,6 +30,13 @@ namespace CloudberryKingdom
 		getCore()->DrawLayer = 5;
 
 		Box->Initialize( Vector2(), Vector2(1) );
+
+        if ( MyQuad != 0 )
+        {
+            MyQuad->Quad_Renamed.t = 0;
+            MyQuad->Quad_Renamed.Playing = false;
+            MyQuad->Quad_Renamed.Loop = false;
+        }
 	}
 
 	void Coin::Release()
@@ -76,17 +72,13 @@ namespace CloudberryKingdom
 
 		getCore()->Active = false;
 
-		getInfo()->Coins->MySound->Play(.65f,.1f, 0);
+		getInfo()->Coins->MySound->Play( .45f, .1f, 0.f );
 
 		// Effect
 		if ( getInfo()->Coins->ShowEffect )
 		{
-			for ( int j = 0; j < 3; j++ )
-			{
-				boost::shared_ptr<CloudberryKingdom::Particle> p = getCore()->MyLevel->MainEmitter->GetNewParticle(getInfo()->Coins->DieTemplate);
-				p->Data.Position = getCore()->Data.Position + getMyLevel()->getRnd()->RndDir(35);
-				p->MyQuad.setMyTexture( Tools::TextureWad->FindByName( std::wstring( L"Pop" ) ) );
-			}
+            ParticleEffects::CoinDie_New( getMyLevel(), getPos() );
+            ParticleEffects::CoinDie_Old( getMyLevel(), getPos() );
 		}
 
 		// Text float
@@ -121,6 +113,8 @@ namespace CloudberryKingdom
 			case CoinType_BLUE:
 				AlwaysActive = false;
 				MyQuad->Set( getInfo()->Coins->Sprite );
+                MyQuad->Quad_Renamed.Playing = false;
+                MyQuad->Quad_Renamed.Loop = false;
 				break;
 			default:
 				break;
@@ -144,13 +138,26 @@ namespace CloudberryKingdom
 		if ( !AlwaysActive )
 		if ( !getCore()->MyLevel->getMainCamera()->OnScreen(getCore()->Data.Position, 200) )
 		{
+            if (!getMyLevel()->BoxesOnly)
+            {
+                MyQuad->Quad_Renamed.Playing = false;
+                MyQuad->Quad_Renamed.Loop = false;
+                MyQuad->Quad_Renamed.t = 0;
+            }
+
 			getCore()->SkippedPhsx = true;
 			getCore()->WakeUpRequirements = true;
 			return;
 		}
 		getCore()->SkippedPhsx = false;
 
-		//MyQuad.Quad.Playing = true;
+        // Shimmer
+        if ( !getMyLevel()->BoxesOnly )
+        {
+            MyQuad->Quad_Renamed.Playing = true;
+            MyQuad->Quad_Renamed.Loop = false;
+            MyQuad->Quad_Renamed.t = static_cast<float>( getMyLevel()->CurPhsxStep % 110 );
+        }
 
 		if ( MyType == CoinType_RED )
 			getCore()->Data.Position = GetPos();

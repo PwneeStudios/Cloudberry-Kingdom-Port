@@ -349,10 +349,12 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Ck->MouseBack->Quad_Renamed.SetColor( Color( unsigned char( 255 ), unsigned char( 150 ), unsigned char( 150 ), unsigned char( 100 ) ) );
 	#endif
 
+		ObjectIcon::InitIcons();
+
 		CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad();
 
 		Prototypes::LoadObjects();
-		ObjectIcon::InitIcons();
+
 
 		//std::cout << _T( "Total resources: " ) << ResourceLoadedCountRef->MyFloat << std::endl;
 		LOG.Write( "Total resources: %d\n", static_cast<int>( ResourceLoadedCountRef->MyFloat ) );

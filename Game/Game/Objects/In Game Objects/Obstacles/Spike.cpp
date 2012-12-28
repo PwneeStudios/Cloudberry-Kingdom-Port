@@ -291,7 +291,7 @@ namespace CloudberryKingdom
 		if ( t > UpT + WaitT1 + .66f * DownT )
 			Exposed = false;
 
-		MyObject->PlayUpdate( AnimSpeed * 1000 / 60 / 150 );
+		MyObject->PlayUpdate( AnimSpeed * 1000.f / 60.f / 150.f );
 
 		float s = MyObject->t;
 		if ( s > 1 )

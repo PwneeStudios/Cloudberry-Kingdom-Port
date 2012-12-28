@@ -108,10 +108,16 @@ namespace CloudberryKingdom
 				tile->StartBlock->SnapWidthUp( size );
 			else
 				tile->Pillars->SnapWidthUp( size );
+        }
 
-			//size.Y = 170;
-			//Extend(Side.Bottom, Box.TR.Y - 170);
-		}
+        if ( getBlockCore()->StartPiece )
+        {
+            center.X -= 500;
+        }
+        if ( getBlockCore()->EndPiece )
+        {
+            center.X += 500;
+        }
 
 		MyBox->Initialize( center, size );
 

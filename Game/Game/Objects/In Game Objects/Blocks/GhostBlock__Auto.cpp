@@ -112,12 +112,14 @@ boost::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = boost::make
 
 			gblock = boost::static_pointer_cast<GhostBlock>( level->getRecycle()->GetObject(ObjectType_GHOST_BLOCK, false) );
 
-			// Box type
-			if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )
-				gblock->TallBox = true;
-			else
-				gblock->TallBox = false;
-
+            // Box type
+            if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_TOP_ONLY )
+                gblock->TallBox = false;
+            else if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_FULL )
+                gblock->TallBox = true;
+            else if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )
+                gblock->TallInvertBox = true;
+				
 			gblock->Init( pos + offset, size, level );
 
 			gblock->getBlockCore()->BlobsOnTop = false;
@@ -148,12 +150,12 @@ boost::shared_ptr<GhostBlock_AutoGen> GhostBlock_AutoGen::instance = boost::make
 			else if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_FULL )
 			{
 				gblock->getBox()->TopOnly = false;
-				gblock->TallBox = false;
+				gblock->TallBox = true;
 			}
 			else if ( Params->BoxType == GhostBlock_Parameters::BoxTypes_LONG )
 			{
 				gblock->getBox()->TopOnly = false;
-				gblock->TallBox = true;
+				gblock->TallInvertBox = true;
 			}
 
 			level->AddBlock( gblock );

@@ -5,9 +5,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxBouncy : public BobPhsxNormal
 	{
-
 	
 		static void InitializeStatics();
 
@@ -31,6 +31,8 @@ namespace CloudberryKingdom
 
 		virtual void Init( const boost::shared_ptr<Bob> &bob );
 
+		boost::shared_ptr<EzSound> DullSound;
+
 		virtual void DefaultValues();
 
 		virtual void DuckingPhsx();
@@ -43,6 +45,8 @@ namespace CloudberryKingdom
 		int SuperBounceGraceCount;
 		int SuperBounceGrace;
 	
+		void PlayJumpSound();
+
 		virtual void Jump();
 
 		virtual void AnimStep();

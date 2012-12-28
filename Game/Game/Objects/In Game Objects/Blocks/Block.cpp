@@ -224,11 +224,39 @@ namespace CloudberryKingdom
 	{
 		size *= level->getInfo()->ScaleAll * level->getInfo()->ScaleAllBlocks;
 
-		//if (Core.MyTileSet.FixedWidths)
 		if ( level->MyTileSet->FixedWidths )
 			group->SnapWidthUp( size );
 		MyBox->Initialize( center, size );
 		MyDraw->MyTemplate = getCore()->getMyTileSet()->GetPieceTemplate( boost::static_pointer_cast<BlockBase>( shared_from_this() ), level->getRnd(), group);
+
+        bool _UseLowerBlockBounds = false;
+        if ( level != 0 && level->CurMakeData != 0 )
+            _UseLowerBlockBounds = level->getStyle()->UseLowerBlockBounds;
+
+        AdditionalInit( center, size, level, _UseLowerBlockBounds );
+    }
+
+    void BlockBase::AdditionalInit( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level, bool _UseLowerBlockBounds )
+    {
+        float newsizey = MyDraw->MyTemplate->ModLowerBlockBound;
+        if ( _UseLowerBlockBounds && newsizey != 0)
+        {
+            float shift;
+
+            if ( MyDraw->MyTemplate->RelativeLowerLip)
+            {
+                shift = newsizey;
+                center.Y -= shift / 2;
+                size.Y += shift;
+            }
+            else
+            {
+                shift = (newsizey - size.Y);
+                center.Y -= shift / 2;
+                size.Y += shift;
+            }
+            MyBox->Initialize( center, size );
+        }
 
 		getCore()->Data.Position = getBlockCore()->Data.Position = getBlockCore()->StartData.Position = center;
 

@@ -39,7 +39,6 @@ namespace CloudberryKingdom
 		MinVal( MinVal ),
 		MaxVal( MaxVal )
 	{
-		InitializeInstanceFields();
 		this->setVal( Val );
 		DefaultValue = this->getVal();
 	}

@@ -18,6 +18,7 @@ namespace CloudberryKingdom
 		anim = 0;
 		Playing = true;
 		speed = 1;
+		Loop = true;
 	}
 
 	void SimpleQuad::Set( const boost::shared_ptr<TextureOrAnim> &t_or_a )
@@ -63,7 +64,10 @@ namespace CloudberryKingdom
 		this->t = frame;
 
 		if ( t >= TextureAnim->Anims[ anim ].Data.size() )
+		{
 			t = 0;
+			if ( !Loop ) Playing = false;
+		}
 		else if ( t < 0 )
 		{
 			t += TextureAnim->Anims[ anim ].Data.size();
@@ -107,6 +111,7 @@ namespace CloudberryKingdom
 		anim = 0;
 		Playing = false;
 		speed = 0;
+		Loop = false;
 
 		Hide = false;
 
@@ -129,6 +134,7 @@ namespace CloudberryKingdom
 		anim = quad.anim;
 		Playing = quad.Playing;
 		speed = quad.speed;
+		Loop = quad.Loop;
 
 		Hide = false;
 
@@ -172,6 +178,7 @@ namespace CloudberryKingdom
 		TextureAnim = quad->TextureAnim;
 
 		Hide = false;
+		Loop = true;
 
 		MySetColor = quad->MyColor;
 		PremultipliedColor = quad->PremultipliedColor;

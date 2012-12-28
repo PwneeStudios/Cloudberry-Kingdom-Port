@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Hacks/List.h"
+#include <Core\Tools\Set.h>
 
 #if ! defined(PC_VERSION) && (defined(XBOX) || defined(XBOX_SIGNIN))
 
@@ -669,6 +670,26 @@ namespace CloudberryKingdom
 	}
 
 	std::vector<boost::shared_ptr<PlayerData> > PlayerManager::_AlivePlayers = std::vector<boost::shared_ptr<PlayerData> >();
+
+    int PlayerManager::NumAlivePlayers()
+    {
+        int Num = 0;
+        for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
+            if ( ( *data )->Exists && ( *data )->IsAlive )
+                Num++;
+            
+        return Num;
+    }
+
+    int PlayerManager::NumExistingPlayers()
+    {
+        int Num = 0;
+        for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator data = Players.begin(); data != Players.end(); ++data )
+            if ( ( *data )->Exists && ( *data )->Exists )
+                Num++;
+
+        return Num;
+    }
 
 #if defined(PC_VERSION)
 	const boost::shared_ptr<PlayerData> &PlayerManager::getPlayer()

@@ -17,6 +17,58 @@ namespace CloudberryKingdom
 	boost::shared_ptr<QuadClass> Background::TestQuad;
 	boost::shared_ptr<EzTexture> Background::TestTexture;
 
+		void Background::AddDarkLayer( const boost::shared_ptr<Background> &b )
+        {
+            boost::shared_ptr<BackgroundFloaterList> __46 = boost::make_shared<BackgroundFloaterList>();
+            __46->Name = L"Dark";
+            __46->Foreground = false;
+            __46->Fixed = false;
+            
+            boost::shared_ptr<BackgroundFloater> __47 = boost::make_shared<BackgroundFloater>();
+            __47->Name = L"Dark";
+            __47->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+            __47->MyQuad->Quad_Renamed._MyTexture = Tools::TextureWad->DefaultTexture;
+            __47->MyQuad->Quad_Renamed.MySetColor = bColor( 255, 255, 255, 158 );
+            __47->MyQuad->Quad_Renamed.PremultipliedColor = bColor( 157, 157, 157, 191 );
+            __47->MyQuad->Quad_Renamed.BlendAddRatio = 0.f;
+            __47->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2(-2697.719f, 1436.633f ), Vector2( 0.f, 0.f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v0.Pos = Vector2(-1.f, 1.f );
+
+            __47->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, 1436.633f ), Vector2( 18.00215f, 0.f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1.f, 1.f );
+
+            __47->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2(-2697.719f, -1321.049f ), Vector2( 0.f, 0.9999274f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v2.Pos = Vector2(-1.f, -1.f );
+
+            __47->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 46939.48f, -1321.049f ), Vector2( 18.00215f, 0.9999274f ), bColor( 157, 157, 157, 91 ));
+            __47->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1.f, -1.f );
+
+            __47->MyQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 125 ));
+            __47->MyQuad->setAlpha( .5f );
+            __47->MyQuad->Update();
+
+            __47->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+            __47->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+
+            __47->MyQuad->Base = BasePoint( 24818.6f, 0.f, 0.f, 1378.841f, 22120.88f, 57.79195f );
+
+            __47->uv_offset = Vector2( 0.f, 0.f );
+            __47->Data = PhsxData( 22120.88f, 57.79195f, 0.f, 0.f, 0.f, 0.f );
+            __47->StartData = PhsxData( 22120.88f, 57.79195f, 0.f, 0.f, 0.f, 0.f );
+            __46->Floaters.push_back(__47 );
+
+            __46->Parallax = 1.05f;
+            __46->DoPreDraw = false;
+
+            b->MyCollection->Lists.push_back(__46 );
+
+            b->SetLevel( b->MyLevel );
+
+            __47->MyQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 100 ));
+            __47->MyQuad->setAlpha( .4f );
+            __47->InitialUpdate();
+        }
+
 	void Background::AddRainLayer( const boost::shared_ptr<Background> &b )
 	{
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloaterList> __46 = boost::make_shared<CloudberryKingdom::BackgroundFloaterList>();
@@ -3515,13 +3567,13 @@ namespace CloudberryKingdom
 		__1->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __2 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__2->Name = std::wstring( L"sea_backdrop_p1_0" );
+		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__2->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_backdrop" ) );
 		__2->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__2->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__2->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__2->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__2->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__2->MyQuad->Base = BasePoint( 40199, 0, 0, 17007.27f, -3333.766f, 0 );
 
@@ -3533,20 +3585,20 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __3 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__3->Name = std::wstring( L"sea_backdrop_p2_0" );
+		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__3->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_backdrop_p2" ) );
 		__3->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__3->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__3->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__3->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__3->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
-		__3->MyQuad->Base = BasePoint( 40199, 0, 0, 17007.27f, 77064.25f, 0 );
+		__3->MyQuad->Base = BasePoint( 40199, 0, 0, 17007.27f, 77064.23f, 0 );
 
 		__3->uv_speed = Vector2( 0, 0 );
 		__3->uv_offset = Vector2( 0, 0 );
-		__3->Data = PhsxData( 77064.25f, 0, 0, 0, 0, 0 );
-		__3->StartData = PhsxData( 77064.25f, 0, 0, 0, 0, 0 );
+		__3->Data = PhsxData( 77064.23f, 0, 0, 0, 0, 0 );
+		__3->StartData = PhsxData( 77064.23f, 0, 0, 0, 0, 0 );
 		__1->Floaters.push_back( __3 );
 
 		__1->Parallax = 0.06f;
@@ -3559,13 +3611,13 @@ namespace CloudberryKingdom
 		__4->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __5 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__5->Name = std::wstring( L"sea_behind_water_1" );
+		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__5->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_1" ) );
 		__5->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__5->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__5->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__5->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__5->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__5->MyQuad->Base = BasePoint( 2439.164f, 0, 0, 5446.352f, -13367.37f, -754.4899f );
 
@@ -3577,15 +3629,15 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __6 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__6->Name = std::wstring( L"sea_behind_water_3" );
+		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__6->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_3" ) );
 		__6->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__6->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__6->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__6->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__6->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
-		__6->MyQuad->Base = BasePoint( 8032.311f, 0, 0, 2956.627f, 1839.004f, -3958.902f );
+		__6->MyQuad->Base = BasePoint( 8032.311f, 0.f, 0.f, 2956.285f, 1839.004f, -3958.902f );
 
 		__6->uv_speed = Vector2( 0, 0 );
 		__6->uv_offset = Vector2( 0, 0 );
@@ -3595,13 +3647,13 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __7 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__7->Name = std::wstring( L"sea_behind_water_2" );
+		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__7->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_2" ) );
 		__7->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__7->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__7->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__7->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__7->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__7->MyQuad->Base = BasePoint( 3021.783f, 0, 0, 4421.52f, 14889.68f, -2327.567f );
 
@@ -3613,15 +3665,15 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __8 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__8->Name = std::wstring( L"sea_behind_water_3" );
+		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__8->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_behind_water_3" ) );
 		__8->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__8->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__8->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__8->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__8->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
-		__8->MyQuad->Base = BasePoint( 8032.311f, 0, 0, 2956.627f, 33263.91f, -4019.146f );
+		__8->MyQuad->Base = BasePoint( 8032.311f, 0, 0, 2956.285f, 33263.91f, -4019.146f );
 
 		__8->uv_speed = Vector2( 0, 0 );
 		__8->uv_offset = Vector2( 0, 0 );
@@ -3639,20 +3691,20 @@ namespace CloudberryKingdom
 		__9->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __10 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__10->Name = std::wstring( L"sea_seamonster" );
+		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__10->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_seamonster" ) );
 		__10->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__10->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__10->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__10->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__10->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
-		__10->MyQuad->Base = BasePoint( 1440, 0, 0, 817.7778f, 4668.237f, -2436.043f );
+		__10->MyQuad->Base = BasePoint( 1440, 0, 0, 817.7778f, 4668.236f, -2436.043f );
 
 		__10->uv_speed = Vector2( 0, 0 );
 		__10->uv_offset = Vector2( 0, 0 );
-		__10->Data = PhsxData( 4668.237f, -2436.043f, 10, 0, 0, 0 );
-		__10->StartData = PhsxData( 4668.237f, -2436.043f, 10, 0, 0, 0 );
+		__10->Data = PhsxData( 4668.236f, -2436.043f, 10, 0, 0, 0 );
+		__10->StartData = PhsxData( 4668.236f, -2436.043f, 10, 0, 0, 0 );
 		__9->Floaters.push_back( __10 );
 
 		__9->Parallax = 0.25f;
@@ -3665,25 +3717,27 @@ namespace CloudberryKingdom
 		__11->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __12 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__12->Name = std::wstring( L"sea_clouds" );
-		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_clouds" ) );
-		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__12->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, 3457.797f ), Vector2( 1.241851f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
+
+		__12->MyQuad->Quad_Renamed.v0.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, 3457.797f ), Vector2( 1.591826f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__12->MyQuad->Quad_Renamed.v0.Pos = Vector2( -1, 1 );
 
-		__12->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, 3457.797f ), Vector2( 3.242014f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v1.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, 3457.797f ), Vector2( 3.592155f, 0 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__12->MyQuad->Quad_Renamed.v1.Pos = Vector2( 1, 1 );
 
-		__12->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, -3651.485f ), Vector2( 1.241851f, 1 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v2.Vertex = MyOwnVertexFormat( Vector2( -9694.891f, -3651.485f ), Vector2( 1.591826f, 1 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__12->MyQuad->Quad_Renamed.v2.Pos = Vector2( -1, -1 );
 
-		__12->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, -3651.485f ), Vector2( 3.242014f, 1 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
+		__12->MyQuad->Quad_Renamed.v3.Vertex = MyOwnVertexFormat( Vector2( 47179.37f, -3651.485f ), Vector2( 3.592155f, 1 ), Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) ) );
 		__12->MyQuad->Quad_Renamed.v3.Pos = Vector2( 1, -1 );
 
 		__12->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__12->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__12->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+
+		__12->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_clouds" ) );
+		__12->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__12->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__12->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
 		__12->MyQuad->Base = BasePoint( 28437.13f, 0, 0, 3554.641f, 18742.24f, -96.84418f );
 
@@ -3703,6 +3757,9 @@ namespace CloudberryKingdom
 		__13->Fixed = false;
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __14 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__14->Name = std::wstring( L"sea_water_1" );
+		__14->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__14->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__14->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__14->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_water_1" ) );
 		__14->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__14->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
@@ -3721,13 +3778,13 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __15 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
 		__15->Name = std::wstring( L"sea_water_2" );
+		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 		__15->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_water_2" ) );
 		__15->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
 		__15->MyQuad->Quad_Renamed.BlendAddRatio = 0;
-		__15->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
-		__15->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
-		__15->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
 
 		__15->MyQuad->Base = BasePoint( 7761.776f, 0, 0, 557.1197f, 16882.17f, -2834.259f );
 
@@ -3738,158 +3795,179 @@ namespace CloudberryKingdom
 		__13->Floaters.push_back( __15 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __16 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__16->Name = std::wstring( L"sea_rock_1" );
-		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
-		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__16->Name = std::wstring( L"sea_water_3" );
 		__16->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__16->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__16->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__16->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_water_1" ) );
+		__16->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__16->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__16->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__16->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 644.2549f, -1623.055f );
+		__16->MyQuad->Base = BasePoint( 7761.776f, 0.f, 0.f, 557.1197f, 32405.72f, -2833.575f );
 
 		__16->uv_speed = Vector2( 0, 0 );
 		__16->uv_offset = Vector2( 0, 0 );
-		__16->Data = PhsxData( 644.2549f, -1623.055f, 0, 0, 0, 0 );
-		__16->StartData = PhsxData( 644.2549f, -1623.055f, 0, 0, 0, 0 );
+		__16->Data = PhsxData( 32405.72f, -2833.575f, 0.f, 0.f, 0.f, 0.f );
+		__16->StartData = PhsxData( 32405.72f, -2833.575f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __16 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __17 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__17->Name = std::wstring( L"sea_rock_2" );
-		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
-		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__17->Name = std::wstring( L"sea_rock_1" );
 		__17->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__17->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__17->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__17->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
+		__17->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__17->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__17->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__17->MyQuad->Base = BasePoint( 1200, 0, 0, 1008.589f, 10703.01f, -2166.667f );
+		__17->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 644.2549f, -1623.055f );
 
 		__17->uv_speed = Vector2( 0, 0 );
 		__17->uv_offset = Vector2( 0, 0 );
-		__17->Data = PhsxData( 10703.01f, -2166.667f, 0, 0, 0, 0 );
-		__17->StartData = PhsxData( 10703.01f, -2166.667f, 0, 0, 0, 0 );
+		__17->Data = PhsxData( 644.2549f, -1623.055f, 0.f, 0.f, 0.f, 0.f );
+		__17->StartData = PhsxData( 644.2549f, -1623.055f, 0.f, 0.f, 0.f, 0.f );
 		__13->Floaters.push_back( __17 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __18 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__18->Name = std::wstring( L"sea_rock_3" );
-		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_3" ) );
-		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__18->Name = std::wstring( L"sea_rock_2" );
 		__18->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__18->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__18->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__18->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
+		__18->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__18->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__18->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__18->MyQuad->Base = BasePoint( 3412.958f, 0, 0, 3211.681f, -3843.269f, -342.5923f );
+		__18->MyQuad->Base = BasePoint( 1200.f, 0.f, 0.f, 1008.589f, 10703.01f, -2166.667f );
 
 		__18->uv_speed = Vector2( 0, 0 );
 		__18->uv_offset = Vector2( 0, 0 );
-		__18->Data = PhsxData( -3843.269f, -342.5923f, 0, 0, 0, 0 );
-		__18->StartData = PhsxData( -3843.269f, -342.5923f, 0, 0, 0, 0 );
+		__18->Data = PhsxData( 10703.01f, -2166.667f, 0, 0, 0, 0 );
+		__18->StartData = PhsxData( 10703.01f, -2166.667f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __18 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __19 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__19->Name = std::wstring( L"sea_rock_4" );
-		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
-		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__19->Name = std::wstring( L"sea_rock_3" );
 		__19->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__19->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__19->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__19->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_3" ) );
+		__19->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__19->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__19->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__19->MyQuad->Base = BasePoint( 220.506f, 0, 0, 162.2992f, 9069.232f, -2839.639f );
+		__19->MyQuad->Base = BasePoint( 3412.958f, 0.f, 0.f, 3211.681f, -3843.27f, -342.5923f );
 
 		__19->uv_speed = Vector2( 0, 0 );
 		__19->uv_offset = Vector2( 0, 0 );
-		__19->Data = PhsxData( 9069.232f, -2839.639f, 0, 0, 0, 0 );
-		__19->StartData = PhsxData( 9069.232f, -2839.639f, 0, 0, 0, 0 );
+		__19->Data = PhsxData( -3843.27f, -342.5923f, 0, 0, 0, 0 );
+		__19->StartData = PhsxData( -3843.27f, -342.5923f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __19 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __20 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__20->Name = std::wstring( L"sea_rock_5" );
-		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_5" ) );
-		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__20->Name = std::wstring( L"sea_rock_4" );
 		__20->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__20->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__20->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__20->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
+		__20->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__20->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__20->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__20->MyQuad->Base = BasePoint( 2536.874f, 0, 0, 1736.723f, 14098.87f, -1460.87f );
+		__20->MyQuad->Base = BasePoint( 220.506f, 0.f, 0.f, 162.2992f, 9069.232f, -2839.639f );
 
 		__20->uv_speed = Vector2( 0, 0 );
 		__20->uv_offset = Vector2( 0, 0 );
-		__20->Data = PhsxData( 14098.87f, -1460.87f, 0, 0, 0, 0 );
-		__20->StartData = PhsxData( 14098.87f, -1460.87f, 0, 0, 0, 0 );
+		__20->Data = PhsxData( 9069.232f, -2839.639f, 0, 0, 0, 0 );
+		__20->StartData = PhsxData( 9069.232f, -2839.639f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __20 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __21 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__21->Name = std::wstring( L"sea_rock_1" );
-		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
-		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__21->Name = std::wstring( L"sea_rock_5" );
 		__21->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__21->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__21->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__21->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_5" ) );
+		__21->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__21->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__21->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__21->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 6594.551f, -1877.636f );
+		__21->MyQuad->Base = BasePoint( 2536.874f, 0.f, 0.f, 1736.723f, 14098.87f, -1460.87f );
 
 		__21->uv_speed = Vector2( 0, 0 );
 		__21->uv_offset = Vector2( 0, 0 );
-		__21->Data = PhsxData( 6594.551f, -1877.636f, 0, 0, 0, 0 );
-		__21->StartData = PhsxData( 6594.551f, -1877.636f, 0, 0, 0, 0 );
+		__21->Data = PhsxData( 14098.87f, -1460.87f, 0, 0, 0, 0 );
+		__21->StartData = PhsxData( 14098.87f, -1460.87f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __21 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __22 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__22->Name = std::wstring( L"sea_rock_2" );
-		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
-		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__22->Name = std::wstring( L"sea_rock_1" );
 		__22->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__22->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__22->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__22->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_1" ) );
+		__22->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__22->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__22->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__22->MyQuad->Base = BasePoint( 1200, 0, 0, 1008.589f, 18768.2f, -2215.924f );
+		__22->MyQuad->Base = BasePoint( 1200, 0, 0, 1316.289f, 6594.551f, -1877.636f );
 
 		__22->uv_speed = Vector2( 0, 0 );
 		__22->uv_offset = Vector2( 0, 0 );
-		__22->Data = PhsxData( 18768.2f, -2215.924f, 0, 0, 0, 0 );
-		__22->StartData = PhsxData( 18768.2f, -2215.924f, 0, 0, 0, 0 );
+		__22->Data = PhsxData( 6594.551f, -1877.636f, 0, 0, 0, 0 );
+		__22->StartData = PhsxData( 6594.551f, -1877.636f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __22 );
 
 		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __23 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
-		__23->Name = std::wstring( L"sea_rock_4" );
-		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
-		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
-		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+		__23->Name = std::wstring( L"sea_rock_2" );
 		__23->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
 		__23->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
 		__23->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__23->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_2" ) );
+		__23->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__23->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__23->MyQuad->Quad_Renamed.BlendAddRatio = 0;
 
-		__23->MyQuad->Base = BasePoint( 220.506f, 0, 0, 162.2992f, 4206.418f, -2972.248f );
+		__23->MyQuad->Base = BasePoint( 1200.f, 0.f, 0.f, 1008.589f, 18768.2f, -2215.924f );
 
 		__23->uv_speed = Vector2( 0, 0 );
 		__23->uv_offset = Vector2( 0, 0 );
-		__23->Data = PhsxData( 4206.418f, -2972.248f, 0, 0, 0, 0 );
-		__23->StartData = PhsxData( 4206.418f, -2972.248f, 0, 0, 0, 0 );
+		__23->Data = PhsxData( 18768.2f, -2215.924f, 0, 0, 0, 0 );
+		__23->StartData = PhsxData( 18768.2f, -2215.924f, 0, 0, 0, 0 );
 		__13->Floaters.push_back( __23 );
+
+
+
+		boost::shared_ptr<CloudberryKingdom::BackgroundFloater> __24 = boost::make_shared<CloudberryKingdom::BackgroundFloater>();
+		__24->Name = std::wstring( L"sea_rock_4" );
+		__24->MyQuad->Quad_Renamed.MyEffect = Tools::BasicEffect;
+		__24->MyQuad->Quad_Renamed.ExtraTexture1 = 0;
+		__24->MyQuad->Quad_Renamed.ExtraTexture2 = 0;
+		__24->MyQuad->Quad_Renamed._MyTexture = Tools::Texture( std::wstring( L"sea_rock_4" ) );
+		__24->MyQuad->Quad_Renamed.MySetColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__24->MyQuad->Quad_Renamed.PremultipliedColor = Color( static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ), static_cast<unsigned char>( 255 ) );
+		__24->MyQuad->Quad_Renamed.BlendAddRatio = 0;
+
+		__24->MyQuad->Base = BasePoint( 220.506f, 0.f, 0.f, 162.2992f, 4206.418f, -2972.248f );
+
+		__24->uv_speed = Vector2( 0, 0 );
+		__24->uv_offset = Vector2( 0, 0 );
+		__24->Data = PhsxData( 4206.418f, -2972.248f, 0.f, 0.f, 0.f, 0.f );
+		__24->StartData = PhsxData( 4206.418f, -2972.248f, 0.f, 0.f, 0.f, 0.f );
+		__13->Floaters.push_back( __24 );
+
+
 
 		__13->Parallax = 0.3f;
 		__13->DoPreDraw = false;
 		b->MyCollection->Lists.push_back( __13 );
 
 		b->Light = 1;
-		//b.BL = new Vector2(-4630f, -4500f);
-		//b.TR = new Vector2(28986.07f, 1452.433f);
-		b->BL = Vector2( -100000, -10000 );
-		b->TR = Vector2( 100000, 10000 );
+
+		b->BL = Vector2( -100000.f, -10000.f );
+		b->TR = Vector2( 100000.f, 10000.f );
 	}
 
 	int Background::GetGuid()

@@ -7,10 +7,13 @@ namespace CloudberryKingdom
 {
 	struct PieceSeedData
 	{
+		MetaGameType MyMetaGameType;
+
+		void ApplyMetaGameStyling();
+
 		/// <summary>
-		/// Uses the upgrade data inMyUpgrades1 to calculate the level gen data.
+		/// Uses the upgrade data in MyUpgrades1 to calculate the level gen data.
 		/// </summary>
-	
 		void CalculateSimple();
 
 		boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > PreStage1, PreStage2;

@@ -241,7 +241,7 @@ namespace CloudberryKingdom
 		// Open the door and show players
 		int Wait = WaitLengthToOpenDoor_FirstLevel;
 
-		if ( CurLevelIndex > 0 )
+		if ( CurLevelIndex > 0 || CurLevelSeed->AlwaysOverrideWaitDoorLength )
 			Wait = CurLevelSeed->WaitLengthToOpenDoor;
 		game->WaitThenDo( Wait, boost::make_shared<OpenAndShowLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ), level, door, CurLevelSeed ) );
 	}
@@ -583,11 +583,13 @@ namespace CloudberryKingdom
 		boost::shared_ptr<GameData> game = door->getCore()->MyLevel->MyGame;
 
 		Tools::SongWad->FadeOut();
-		game->FadeToBlack( .02f, 47 );
+		float fadespeed = door->getMyLevel()->MyLevelSeed == 0 ? .02f : door->getMyLevel()->MyLevelSeed->FadeOutSpeed;
+		game->FadeToBlack( fadespeed, 47 );
 
 		// Tell the current Game to perform the following
 		//TellGameToBringNext(98, game);
-		TellGameToBringNext( 165, game );
+		//TellGameToBringNext( 165, game );
+		TellGameToBringNext( 115 + static_cast<int>( 1.f / fadespeed ), game);
 	}
 
 	void StringWorldGameData::TellGameToBringNext( int delay, const boost::shared_ptr<GameData> &game )

@@ -416,7 +416,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 				if ( arrow != 0 )
 				{
-					arrow->Scale( 1 / 1.25f );
+					arrow->Scale( 1.f / 1.25f );
 				}
 	#endif
 			}

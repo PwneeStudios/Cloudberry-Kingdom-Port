@@ -98,6 +98,7 @@ namespace CloudberryKingdom
 
 		int Count_ButtonA;
 		BobInput CurInput, PrevInput;
+		bool InputFromKeyboard;
 		boost::shared_ptr<BobPhsx> MyPhsx;
 
 		/// <summary>

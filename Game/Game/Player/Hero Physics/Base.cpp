@@ -3,6 +3,8 @@
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
@@ -315,6 +317,16 @@ namespace CloudberryKingdom
 		else
 		{
 			custom->Name = Localization::Words_CUSTOM;
+
+            if ( Shape == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
+                custom->Name = BaseType->Name;
+
+            if ( BaseType == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
+                custom->Name = Shape->Name;
+
+            if ( BaseType == BobPhsxNormal::getInstance() && Shape == BobPhsxNormal::getInstance() )
+                custom->Name = MoveMod->Name;
+
 			//string template = BaseType.Name;
 			//string adjective = Shape.Adjective;
 			//string adjective2 = MoveMod.Adjective;
@@ -559,14 +571,15 @@ namespace CloudberryKingdom
 	BobPhsx::BobPhsx()
 	{
 		InitializeInstanceFields();
-		if ( !SingletonInitialized )
-			InitSingleton();
+		//if ( !SingletonInitialized )
+		//	InitSingleton();
 	}
 
 	boost::shared_ptr<BobPhsx> BobPhsx::Clone()
 	{
 		// FIXME: Verify MemberwiseClone() behavior.
 		boost::shared_ptr<BobPhsx> newBob = boost::make_shared<BobPhsx>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return newBob;
 	}

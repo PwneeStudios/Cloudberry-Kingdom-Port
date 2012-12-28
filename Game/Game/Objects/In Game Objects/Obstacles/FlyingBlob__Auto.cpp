@@ -163,110 +163,6 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 		}
 	}
 
-	/*void FlyingBlob_AutoGen::Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed )
-	{
-		for ( int i = 0; i < array_Renamed.GetLength( 0 ); i++ )
-			for ( int j = 0; j < array_Renamed.GetLength( 1 ); j++ )
-				if ( array_Renamed[ i ][ j ] != 0 && array_Renamed[ i ][ j ]->getCore()->MarkedForDeletion )
-					array_Renamed[ i ][ j ] = 0;
-	}
-
-	void FlyingBlob_AutoGen::Clean( array_Renamed<boost::shared_ptr<ObjectBase> , 2> *array_Renamed, int i, int j )
-	{
-		if ( array_Renamed[ i ][ j ] == 0 )
-			return;
-		array_Renamed[ i ][ j ]->CollectSelf();
-		array_Renamed[ i ][ j ] = 0;
-	}
-
-	void FlyingBlob_AutoGen::CleanupTunnel( const boost::shared_ptr<Level> &level )
-	{
-		// Get Goomba parameters
-		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
-
-		std::vector<std::vector<unsigned long long> > GUIDs = Params->TunnelGUIDs;
-		std::vector<ObjectVec > Blobs = std::vector<ObjectVec >( GUIDs.GetLength( 0 ), GUIDs.GetLength( 1 ) );
-
-		for ( int i = 0; i < Blobs.GetLength( 0 ); i++ )
-			for ( int j = 0; j < Blobs.GetLength( 1 ); j++ )
-				Blobs[ i ][ j ] = level->GuidToObj( GUIDs[ i ][ j ] );
-
-		// Head room
-		for ( int i = 0; i < Blobs.GetLength( 0 ); i++ )
-		{
-			for ( int j = Blobs.GetLength( 1 ) - 1; j >= 1; j-- )
-			{
-				if ( Blobs[ i ][ j ] == 0 )
-					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
-					continue;
-
-				if ( Blobs[ i ][ j - 1 ] == 0 )
-					Clean( Blobs, i, j );
-			}
-		}
-
-		// Remove ceiling
-		if ( !Params->TunnelCeiling )
-		{
-			for ( int i = 0; i < Blobs.GetLength( 0 ); i++ )
-			{
-				int j;
-				for ( j = Blobs.GetLength( 1 ) - 1; j >= 1; j-- )
-					if ( Blobs[ i ][ j ] == 0 )
-						break;
-
-				for ( ; j < Blobs.GetLength( 1 ); j++ )
-					Clean( Blobs, i, j );
-			}
-		}
-
-		for ( int i = 0; i < Blobs.GetLength( 0 ); i++ )
-		{
-			for ( int j = 0; j < Blobs.GetLength( 1 ); j++ )
-			{
-				if ( Blobs[ i ][ j ] == 0 )
-					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
-					continue;
-
-				if ( j - 1 >= 0 && Blobs[ i ][ j - 1 ] == 0 )
-					continue;
-				if ( j + 1 < Blobs.GetLength( 1 ) && Blobs[ i ][ j + 1 ] == 0 )
-					continue;
-				if ( j - 2 >= 0 && Blobs[ i ][ j - 2 ] == 0 )
-					continue;
-				if ( j + 2 < Blobs.GetLength( 1 ) && Blobs[ i ][ j + 2 ] == 0 )
-					continue;
-				if ( j - 3 >= 0 && Blobs[ i ][ j - 3 ] == 0 )
-					continue;
-				if ( j + 3 < Blobs.GetLength( 1 ) && Blobs[ i ][ j + 3 ] == 0 )
-					continue;
-
-				Blobs[ i ][ j ]->CollectSelf();
-			}
-		}
-		Clean( Blobs );
-
-		// Remove warts
-		for ( int i = 1; i < Blobs.GetLength( 0 ) - 1; i++ )
-		{
-			for ( int j = 1; j < Blobs.GetLength( 1 ); j++ )
-			{
-				if ( Blobs[ i ][ j ] == 0 )
-					continue;
-				if ( Blobs[ i ][ j ]->getCore()->GenData.Used )
-					continue;
-
-				if ( Blobs[ i - 1 ][ j ] == 0 && Blobs[ i + 1 ][ j ] == 0 && Blobs[ i ][ j - 1 ] == 0 )
-					Clean( Blobs, i, j );
-			}
-		}
-
-		GUIDs = Params->TunnelGUIDs.clear();
-		Blobs.clear();
-	}*/
-
 	void FlyingBlob_AutoGen::PreFill_1( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )
 	{
 		AutoGen::ActiveFill_1( level, BL, TR );
@@ -274,8 +170,6 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 		// Get Goomba parameters
 		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
 
-		if ( Params->Special.Tunnel )
-			Tunnel( level, BL, TR );
 		if ( Params->Special.Pinwheel )
 			Pinwheel( level, BL, TR );
 	}
@@ -286,9 +180,6 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 
 		// Get Goomba parameters
 		boost::shared_ptr<FlyingBlob_Parameters> Params = boost::static_pointer_cast<FlyingBlob_Parameters>( level->getStyle()->FindParams( FlyingBlob_AutoGen::getInstance() ) );
-
-		/*if ( Params->Special.Tunnel )
-			CleanupTunnel( level );*/
 	}
 
 	void FlyingBlob_AutoGen::PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR )

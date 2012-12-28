@@ -10,10 +10,13 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <MasterHack.h>
 #include <Utility/Log.h>
+#include <Core\Tools\Set.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 #include "Game/Tilesets/Backgrounds/Background.h"
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
+
+#include <Game\Video.h>
 
 namespace CloudberryKingdom
 {
@@ -403,7 +406,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		{
 			if ( !rez.Fullscreen )
 			{
-				rez.Height = static_cast<int>( ( 720 / 1280 ) * rez.Width );
+				rez.Height = static_cast<int>( ( 720.f / 1280.f ) * rez.Width );
 			}
 
 			MyGraphicsDeviceManager->PreferredBackBufferWidth = rez.Width;
@@ -1426,12 +1429,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		//data.MyBackgroundType = BackgroundType.Dungeon;
 
-		//TileSetToTest = "sea_rain";
-		//TileSetToTest = "hills";
-		TileSetToTest = L"forest";
-		//TileSetToTest = std::wstring( L"cloud" );
-		//TileSetToTest = "cave";
-		//TileSetToTest = "castle";
+		TileSetToTest = L"sea_rain";
+		//TileSetToTest = L"hills";
+		//TileSetToTest = L"forest";
+		//TileSetToTest = L"cloud";
+		//TileSetToTest = L"cave";
+		//TileSetToTest = L"castle";
 
 		if ( TileSetToTest == std::wstring( L"" ) )
 			data->SetTileSet( std::wstring( L"castle" ) );
@@ -1543,32 +1546,14 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades1 );
 
 
-		//piece.MyUpgrades1->Get(Upgrade.SpikeyLine) = 5f;
-		//piece.MyUpgrades1->Get(Upgrade.Ceiling) = 10;
-		////piece.MyUpgrades1->Get(Upgrade.Elevator) = 11;
-		//piece.MyUpgrades1->Get(Upgrade.SpikeyGuy) = 5;
-		//piece.MyUpgrades1->Get(Upgrade.FireSpinner) = 6;
-		//piece.MyUpgrades1->Get(Upgrade.GhostBlock) = 6;
-		piece->MyUpgrades1->Get( Upgrade_BOUNCY_BLOCK ) = 6;
-		//piece.MyUpgrades1->Get(Upgrade.Serpent) = 5;
-		//piece.MyUpgrades1->Get(Upgrade.Cloud) = 5;
-		//piece.MyUpgrades1->Get(Upgrade.Pinky) = 5;
-		//piece.MyUpgrades1->Get(Upgrade.Fireball) = 3;
-		//piece.MyUpgrades1->Get(Upgrade.Pendulum) = 3;
-		//piece.MyUpgrades1->Get(Upgrade.BouncyBlock) = 5;
-		//piece.MyUpgrades1->Get(Upgrade.FallingBlock) = 5;
-
 		//__Roughly_Abusive( piece );
 		//__Roughly_Maso(piece);
 		//piece.Style.Masochistic = true;
 
-		piece->MyUpgrades1->Get( Upgrade_MOVING_BLOCK ) = 8;
-		//piece.MyUpgrades1->Get(Upgrade.LavaDrip) = 9;
-		//piece.MyUpgrades1->Get(Upgrade.Serpent) = 9;
-		//piece.MyUpgrades1->Get(Upgrade.Pendulum) = 9;
-		//piece.MyUpgrades1->Get(Upgrade.Fireball) = 9f;
-		//piece.MyUpgrades1->Get(Upgrade.Jump) = 8;
-		//piece.MyUpgrades1->Get(Upgrade.Speed) = 9;
+		//piece->MyUpgrades1->Get( Upgrade_MOVING_BLOCK ) = 8;
+		//piece->MyUpgrades1->Get( Upgrade_BOUNCY_BLOCK ) = 6;
+		piece->MyUpgrades1->Get(Upgrade_JUMP) = 8;
+
 
 
 		piece->MyUpgrades1->CalcGenData( piece->MyGenData->gen1, piece->Style );
@@ -1577,21 +1562,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		piece->LockNumOfPaths = true;
 		piece->Style->SinglePathType = StyleData::_SinglePathType_NORMAL;
 
-		/*
-		piece.Paths = 2;
-	
-		SingleData style = piece.Style as SingleData;
-		style.InitialDoorYRange = new Vector2(-800);
-		style.DoublePathType = StyleData._DoublePathType.Gap;
-		*/
-
-		//piece.Style.MyModParams = TestLevelModParams;
 
 		piece->Style->ChanceToKeepUnused = 0;
 
 		RndDifficulty::ZeroUpgrades( piece->MyUpgrades2 );
 		CopyFromTo( piece->MyUpgrades1->UpgradeLevels, piece->MyUpgrades2->UpgradeLevels );
-		//piece.MyUpgrades2->Get( Upgrade.Cloud ) = 10;
 		piece->MyUpgrades2->CalcGenData( piece->MyGenData->gen2, piece->Style );
 
 		piece->Style->MyInitialPlatsType = StyleData::InitialPlatsType_DOOR;

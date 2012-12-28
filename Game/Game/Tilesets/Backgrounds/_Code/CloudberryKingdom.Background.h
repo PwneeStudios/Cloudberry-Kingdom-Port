@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct Background : public boost::enable_shared_from_this<Background>
 	{
 	
+		static void AddDarkLayer( const boost::shared_ptr<Background> &b );
+
 		static void AddRainLayer( const boost::shared_ptr<Background> &b );
 
 		static void TurnOnSnow( const boost::shared_ptr<Background> &b );

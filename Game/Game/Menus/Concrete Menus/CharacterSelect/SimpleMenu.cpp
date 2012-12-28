@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Core\Tools\Set.h>
+
 namespace CloudberryKingdom
 {
 
@@ -103,7 +105,8 @@ namespace CloudberryKingdom
 
 	void SimpleMenuBase::SimpleToDone()
 	{
-		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect ) ) );
+		SkipCallSound = true;
+		GUI_Panel::Call( MakeMagic( Waiting, ( getControl(), MyCharacterSelect, true ) ) );
 		Hide();
 	}
 

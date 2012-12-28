@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 			}
 			else
 				// Trim excess
-				height = static_cast<int>( ( 720 / 1280 ) * width );
+				height = static_cast<int>( ( 720.f / 1280.f ) * width );
 
 		Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferWidth = width;
 		Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferHeight = height;
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 		/*int width = Backbuffer.X, height = Backbuffer.Y;
 		if ( !Tools::TheGame->MyGraphicsDeviceManager->IsFullScreen )
 		{
-			height = static_cast<int>( ( 720 / 1280 ) * width );
+			height = static_cast<int>( ( 720.f / 1280.f ) * width );
 		}
 
 		Tools::TheGame->MyGraphicsDeviceManager->PreferredBackBufferWidth = width;

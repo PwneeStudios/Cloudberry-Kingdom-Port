@@ -11,6 +11,12 @@
 namespace CloudberryKingdom
 {
 
+	void InitBobPhsxSingleton( const boost::shared_ptr<BobPhsx> &This )
+	{
+		if ( !This->SingletonInitialized )
+			This->InitSingleton();
+	}
+
 	void CharacterSelect_PostConstruct( const boost::shared_ptr<CharacterSelect> &This, int PlayerIndex, bool QuickJoin )
 	{
 		boost::shared_ptr<GameData> game = Tools::CurGameData;
@@ -33,7 +39,16 @@ namespace CloudberryKingdom
 
 		This->InitColorScheme( PlayerIndex );
 
-		game->AddGameObject( MakeMagic( JoinText, ( PlayerIndex, This->shared_from_this() ) ) );
+        if ( QuickJoin && PlayerIndex >= 0 && PlayerManager::Get( PlayerIndex ) != 0 && PlayerManager::Get( PlayerIndex )->Exists)
+        {
+            This->Fake = true;
+            game->AddGameObject( MakeMagic( Waiting, (PlayerIndex, This->shared_from_this(), false) ) );
+        }
+        else
+        {
+            This->Fake = false;
+            game->AddGameObject( MakeMagic( JoinText, (PlayerIndex, This->shared_from_this() ) ) );
+        }
 
 		Tools::EndGUIDraw();
 	}

@@ -56,6 +56,11 @@ namespace CloudberryKingdom
 		text->MyText->MyFloatColor = ( bColor( 0, 195, 17 ) ).ToVector4();
 		text->MyText->OutlineColor = ( bColor( 0, 80, 8 ) ).ToVector4();
 		getCore()->MyLevel->MyGame->AddGameObject(text);
+
+        ParticleEffects::CoinDie_ExtraLife( MyGame->MyLevel, Coin::PosOfLastCoinGrabbed );
+
+        boost::shared_ptr<EzSound> sound = Tools::SoundWad->FindByName( L"ExtraLifeSound" );
+        if ( sound != 0 ) sound->Play();
 	}
 
 	std::wstring GUI_NextLife::ToString()

@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 	{
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
-		GameData::Draw();
+		//GameData::Draw();
 	}
 
 	void ActionGameData::Release()

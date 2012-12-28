@@ -64,7 +64,7 @@ namespace CloudberryKingdom
 		GhostBlock( bool BoxesOnly );
 
 		static float TallScale;
-		bool TallBox;
+		bool TallBox, TallInvertBox;
 		void Init( Vector2 center, Vector2 size, const boost::shared_ptr<Level> &level );
 
 		virtual void Reset( bool BoxesOnly );

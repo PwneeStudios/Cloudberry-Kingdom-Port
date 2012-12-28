@@ -50,17 +50,24 @@ namespace CloudberryKingdom
 	PieceQuad::PieceQuad( int width, const std::wstring &texture, float left, float right, float top )
 	{
 		InitializeInstanceFields();
-		_Constructor( width, texture, left, right, top, false );
+		_Constructor( width, texture, left, right, top, false, 0.f, false );
 	}
 
 	PieceQuad::PieceQuad( int width, const std::wstring &texture, float left, float right, float top, bool upside_down )
 	{
 		InitializeInstanceFields();
-		_Constructor( width, texture, left, right, top, upside_down );
+		_Constructor( width, texture, left, right, top, upside_down, 0.f, false );
 	}
 
-	void PieceQuad::_Constructor( int width, const std::wstring &texture, float left, float right, float top, bool upside_down )
-	{
+    PieceQuad::PieceQuad(int width, const std::wstring &texture, float left, float right, float top, bool upside_down, float lowerlip, bool relativelowerlip)
+    {
+        _Constructor(width, texture, left, right, top, upside_down, lowerlip, relativelowerlip);
+    }
+    void PieceQuad::_Constructor(int width, const std::wstring &texture, float left, float right, float top, bool upside_down, float lowerlip, bool relativelowerlip)
+    {
+        ModLowerBlockBound = lowerlip;
+        RelativeLowerLip = relativelowerlip;
+
 		InitAll();
 		Init( 0, Tools::BasicEffect );
 		Pillar_Width = width;
@@ -264,6 +271,10 @@ namespace CloudberryKingdom
 		Invert = false;
 
 		BoxHeight = -1;
+
+        ModLowerBlockBound = 0;
+		RelativeLowerLip = false;
+
 		Group_CutoffWidth = 0;
 		Layer = 0;
 		Playing = false;

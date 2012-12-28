@@ -139,44 +139,18 @@ namespace CloudberryKingdom
 
 	void ListSelectPanel::OnAdd()
 	{
-		 CkBaseMenu::OnAdd();
+		CkBaseMenu::OnAdd();
 
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"list" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 83.33337f, 153.1746f ) );
-			_item->MyText->setScale( 0.375f );
-			_item->MySelectedText->setScale( 0.375f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Done" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -177.4444f, 46.11105f ) );
-			_item->MyText->setScale( 0.5535835f );
-			_item->MySelectedText->setScale( 0.5535835f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Cancel" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -183.0001f, -79.44217f ) );
-			_item->MyText->setScale( 0.5352504f );
-			_item->MySelectedText->setScale( 0.5352504f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"list" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-2.77784f, 153.1746f) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Done" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-227.4442f, 51.66659f) ); _item->MyText->setScale( 0.5535835f ); _item->MySelectedText->setScale( 0.5535835f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Cancel" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-230.2225f, -82.21997f) ); _item->MyText->setScale( 0.5352504f ); _item->MySelectedText->setScale( 0.5352504f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
 
-		MyMenu->setPos( Vector2( -1418.571f, -484.127f ) );
+        MyMenu->setPos( Vector2(MyMenu->getPos().X, -484.127f) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 87.69827f, 534.1268f ) );
-			_t->setScale( 1 );
-		}
-		MyPile->setPos( Vector2( -1414.604f, -492.0635f ) );
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"Header" ); if ( _t != 0 ) { _t->setPos( Vector2(9.920441f, 536.9045f) ); _t->setScale( 1.f ); }
+        MyPile->setPos( Vector2(MyPile->getPos().X, -492.0635f) );
 	}
 
 	void ListSelectPanel::Back()

@@ -461,6 +461,7 @@ namespace CloudberryKingdom
 		// Start
 		boost::shared_ptr<MenuItem> item;
 		boost::shared_ptr<MenuItem> Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
+		item = Start;
 		item->Name = std::wstring( L"Start" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		item->JiggleOnGo = false;

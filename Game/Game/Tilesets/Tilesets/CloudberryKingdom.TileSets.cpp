@@ -29,8 +29,8 @@ namespace CloudberryKingdom
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, std::wstring( L"pillar_cloud_600" ), -15.f, 15.f, 3.f ) );
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, std::wstring( L"pillar_cloud_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_cloud" ), -550.f, 135.f, 1450.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_cloud" ), -15.f, 670.f, 1450.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_cloud" ), -550.f + 1000, 135.f, 1450.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_cloud" ), -15.f, 670.f - 1000, 1450.f ) );
 
 	info->ShiftStartDoor = 30;
 	info->ShiftStartBlock = Vector2( 120, 0 );
@@ -58,10 +58,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( std::wstring( L"fblock_cloud" ), std::wstring( L"fblock_cloud" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_cloud" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_cloud" ), -3.f, 3.f, 2.f, false, 103.f + 3, false ) );
 
 	sprite_anim( std::wstring( L"Bouncy_cloud" ), std::wstring( L"Bouncy_cloud" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_cloud" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_cloud" ), -6.f, 6.f, 13.f, false, 124.f, false ) );
 
 	sprite_anim( std::wstring( L"flame_cloud" ), std::wstring( L"firespinner_flame_cloud" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_cloud" ) );
@@ -77,20 +77,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( std::wstring( L"ghostblock_cloud" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_cloud_190" ), -4.f, 13.f, 10.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_cloud_135" ), -4.f, 4.f, 10.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_cloud_80" ), -1.f, 1.f, 2.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_cloud_40" ), -1.f, 1.f, 2.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_cloud_190" ), -4.f, 13.f, 10.f, false, 190.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_cloud_135" ), -4.f, 4.f, 4.f, false, 135.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_cloud_80" ), -1.f, 1.f, 2.f, false, 80.f + 1.8f, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_cloud_40" ), -1.f, 1.f, 2.f, false, 40.f + 3, false ) );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cloud_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cloud_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cloud_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cloud_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cloud_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cloud_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cloud_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cloud_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cloud_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cloud_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cloud_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cloud_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
 	sprite_anim( std::wstring( L"Serpent_Cloud" ), std::wstring( L"Serpent_Cloud" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Cloud" ) );
@@ -143,13 +143,14 @@ namespace CloudberryKingdom
 	info->Blobs->Body->Sprite = TextureOrAnim::Get( std::wstring( L"blob_cloud" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo5" ) );
+	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo2" ) );
 
 	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"cloud_cloud" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 104 );
 
-	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	//info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -189,10 +190,8 @@ namespace CloudberryKingdom
 	t->Ceilings->Add( boost::make_shared<PieceQuad>( 600, std::wstring( L"pillar_castle_600" ), -20.f, 20.f, 0.f, true ) );
 	t->Ceilings->Add( boost::make_shared<PieceQuad>( 1000, std::wstring( L"pillar_castle_1000" ), -20.f, 20.f, 0.f, true ) );
 
-	//t.StartBlock.Add(new PieceQuad(400, "wall_castle", -670, 15, 1407));
-	//t.EndBlock.Add(new PieceQuad(400, "wall_castle", -15, 670, 1407));
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_castle" ), -950.f, 15.f, 1670.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_castle" ), -45.f, 920.f, 1670.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_castle" ), -950.f + 1000, 15.f, 1670.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_castle" ), -45.f, 920.f - 1000, 1670.f ) );
 
 	info->ShiftStartDoor = 0;
 	info->ShiftStartBlock = Vector2( 100, 0 );
@@ -223,14 +222,15 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Full = Vector4( 1, 1, 1,.95f );
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 	info->Lasers->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Icon_Laser" ) );
+	info->Lasers->Icon->Offset = Vector2(0, -8);
 
 	sprite_anim( std::wstring( L"fblock_castle" ), std::wstring( L"fblock_castle" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_castle" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_castle" ), -3.f, 3.f, 2.f, false, 103.f + 3, false ) );
 	info->FallingBlocks->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"fblock_castle" ) );
 	info->FallingBlocks->Icon->Size = Vector2( 40, -1 );
 
 	sprite_anim( std::wstring( L"Bouncy_castle" ), std::wstring( L"Bouncy_castle" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_castle" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_castle" ), -6.f, 6.f, 13.f, false, 124.f, false ) );
 	info->BouncyBlocks->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Bouncy_Castle" ) );
 
 	sprite_anim( std::wstring( L"flame_castle" ), std::wstring( L"firespinner_flame_castle_v1" ), 1, 4, 6 );
@@ -250,27 +250,27 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Ghostblock_Castle" ) );
 	info->GhostBlocks->Icon->Size = Vector2( 40, -1 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_castle_190" ), -1.f, 1.f, 25.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_castle_135" ), -1.f, 1.f, 25.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_castle_80" ), -1.f, 1.f, 5.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_castle_40" ), -1.f, 1.f, 5.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_castle_190" ), -1.f, 1.f, 25.f, false, 190.f - 21, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_castle_135" ), -1.f, 1.f, 19.f, false, 135.f - 15.5f, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_castle_80" ), -1.f, 1.f, 5.f, false, 80.f - 5, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_castle_40" ), -1.f, 1.f, 5.f, false, 40.f - 1, false ) );
 	info->MovingBlocks->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"MovingBlock_Castle_40" ) );
 	info->MovingBlocks->Icon->Size = Vector2( 40, -1 );
 	info->MovingBlocks->Icon_Big = boost::make_shared<SpriteInfo>( boost::shared_ptr<TextureOrAnim>() );
 	info->MovingBlocks->Icon_Big->Sprite = TextureOrAnim::Get( std::wstring( L"MovingBlock_Castle_135" ) );
 	info->MovingBlocks->Icon_Big->Size = Vector2( 40, -1 );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Castle_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Castle_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Castle_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Castle_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 	info->Elevators->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Elevator_Castle_80" ) );
 
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Castle_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Castle_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Castle_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Castle_190" ), -1.f, 1.f, 1.f ) );
-	//info.Pendulums.Icon.Sprite = "Elevator_Castle_80";
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Castle_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Castle_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Castle_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Castle_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+
 	info->Pendulums->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Pendulum_Icon_Castle" ) );
 
 	sprite_anim( std::wstring( L"Serpent_Castle" ), std::wstring( L"Serpent_Castle" ), 1, 2, 8 );
@@ -289,8 +289,12 @@ namespace CloudberryKingdom
 	info->Spikes->Base->Sprite = TextureOrAnim::Get( std::wstring( L"spike_base_castle" ) );
 	info->Spikes->Base->Size = Vector2( 54, -1 );
 	info->Spikes->PeakHeight = .335f;
-	info->Spikes->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Spike_Castle" ) );
-	info->Spikes->Icon->Size = Vector2( 25, -1 );
+	//info->Spikes->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Spike_Castle" ) );
+	//info->Spikes->Icon->Size = new Vector2(18, -1);
+	info->Spikes->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"SpikeIcon" ) );
+	info->Spikes->Icon->Offset = Vector2(0, 5.5f);
+	info->Spikes->Icon->Size = Vector2(29, -1);
+
 
 	info->Boulders->Ball->Sprite = TextureOrAnim::Get( std::wstring( L"Floater_Spikey_castle_v1" ) );
 	info->Boulders->Ball->Size = Vector2( 150, -1 );
@@ -312,6 +316,7 @@ namespace CloudberryKingdom
 	info->SpikeyGuys->Chain->Width = 55;
 	info->SpikeyGuys->Chain->RepeatWidth = 1900;
 	info->SpikeyGuys->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Floater_Buzzsaw_Yellow_Castle" ) );
+	info->SpikeyGuys->Icon->Offset = Vector2(0, -16);
 
 	info->SpikeyLines->Ball->Sprite = TextureOrAnim::Get( std::wstring( L"Floater_Spikey_Castle_v2" ) );
 	info->SpikeyLines->Ball->Size = Vector2( 150, -1 );
@@ -325,7 +330,7 @@ namespace CloudberryKingdom
 	info->Blobs->Body->Sprite = TextureOrAnim::Get( std::wstring( L"blob_castle" ) );
 	info->Blobs->Body->Size = Vector2( 137, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo5" ) );
+	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo8" ) );
 	info->Blobs->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Blob_Castle" ) );
 
 	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"cloud_castle" ) );
@@ -334,7 +339,8 @@ namespace CloudberryKingdom
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 355 );
 	info->Fireballs->Icon->Sprite = TextureOrAnim::Get( std::wstring( L"Icon_Fireball" ) );
 
-	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	//info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -365,8 +371,8 @@ namespace CloudberryKingdom
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, std::wstring( L"pillar_sea_600" ), -15.f, 15.f, 3.f ) );
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, std::wstring( L"pillar_sea_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_sea" ), -670.f, 15.f, 1420.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_sea" ), -55.f, 630.f, 1420.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_sea" ), -670.f + 1000, 15.f, 1420.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_sea" ), -55.f, 630.f - 1000, 1420.f ) );
 
 	info->ShiftStartDoor = -140;
 	info->ShiftStartBlock = Vector2( 320, 0 );
@@ -394,10 +400,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( std::wstring( L"fblock_sea" ), std::wstring( L"fblock_sea" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, std::wstring( L"fblock_sea" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, std::wstring( L"fblock_sea" ), -3.f, 3.f, 2.f, false, 103.f + 10, false ) );
 
 	sprite_anim( std::wstring( L"Bouncy_sea" ), std::wstring( L"Bouncy_Cloud" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_sea" ), -6.f, 6.f, 13.f, true) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_sea" ), -6.f, 6.f, 13.f, false, 124.f, false ) );
 
 	sprite_anim( std::wstring( L"flame_Sea" ), std::wstring( L"firespinner_flame_Sea" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_Sea" ) );
@@ -413,20 +419,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( std::wstring( L"ghostblock_sea" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_sea_190" ), -1.f, 1.f, 12.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_sea_135" ), -1.f, 1.f, 12.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_sea_80" ), -1.f, 1.f, 4.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_sea_40" ), -1.f, 1.f, 4.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_sea_190" ), -1.f, 1.f, 12.f, false, 190.f - 4, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_sea_135" ), -1.f, 1.f, 7.f, false, 135.f - 1.5f, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_sea_80" ), -1.f, 1.f, 4.f, false, 80.f - 4, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_sea_40" ), -1.f, 1.f, 0.f, false, 40.f + 2, false ) );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Sea_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Sea_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Sea_135" ), -1.f, 1.f, 0.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Sea_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Sea_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Sea_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Sea_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Sea_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Sea_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Sea_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Sea_135" ), -1.f, 1.f, 0.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Sea_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
 	sprite_anim( std::wstring( L"Serpent_Sea" ), std::wstring( L"Serpent_Sea" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Sea" ) );
@@ -512,8 +518,8 @@ namespace CloudberryKingdom
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, std::wstring( L"pillar_hills_600" ), -15.f, 15.f, 3.f ) );
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, std::wstring( L"pillar_hills_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_hills" ), -880.f, 40.f, 1650.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_hills" ), -40.f, 880.f, 1650.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_hills" ), -880.f + 1000, 40.f - 0, 1650.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_hills" ), -40.f, 880.f - 1000, 1650.f ) );
 
 	info->ShiftStartDoor = -140;
 	info->ShiftStartBlock = Vector2( 200, 0 );
@@ -541,10 +547,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( std::wstring( L"fblock_hills" ), std::wstring( L"fblock_hills" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, std::wstring( L"fblock_hills" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 110, std::wstring( L"fblock_hills" ), -3.f, 3.f, 2.f, false, 103.f + 10, false ) );
 
 	sprite_anim( std::wstring( L"Bouncy_hills" ), std::wstring( L"Bouncy_hills" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_hills" ), -15.f, 15.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_hills" ), -15.f, 15.f, 13.f, false, 124.f, false ) );
 
 	sprite_anim( std::wstring( L"flame_Hills" ), std::wstring( L"firespinner_flame_Hills" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_Hills" ) );
@@ -560,24 +566,24 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( std::wstring( L"ghostblock_hills" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_hills_190" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_hills_135" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_hills_80" ), -1.f, 1.f, 3.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_hills_40" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_hills_190" ), -1.f, 1.f, 7.f, false, 190.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_hills_135" ), -1.f, 1.f, 6.f, false, 135.f - 1, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_hills_80" ), -1.f, 1.f, 1.f, false, 80.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_hills_40" ), -1.f, 1.f, 1.f, false, 40.f + 3, false ) );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Hills_40" ), -1.f, 1.f, 1.f, false, -3.f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Hills_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Hills_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Hills_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Hills_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Hills_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Hills_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Hills_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Hills_40" ), -1.f, 1.f, 1.f, false, -3.f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Hills_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Hills_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Hills_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
-	sprite_anim( std::wstring( L"Serpent_Hills" ), std::wstring( L"Serpent_Castle" ), 1, 2, 5 );
+	sprite_anim( std::wstring( L"Serpent_Hills" ), std::wstring( L"Serpent_Castle" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Hills" ) );
-	sprite_anim( std::wstring( L"Serpent_Fish_Hills" ), std::wstring( L"Serpent_Fish_Castle" ), 1, 2, 8 );
+	sprite_anim( std::wstring( L"Serpent_Fish_Hills" ), std::wstring( L"Serpent_Fish_Castle" ), 1, 2, 5 );
 	info->Serpents->Fish->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Fish_Hills" ) );
 	info->Serpents->Fish->Size = Vector2( 60, -1 );
 	info->Serpents->Fish->Offset = Vector2( 55, 0 );
@@ -619,13 +625,14 @@ namespace CloudberryKingdom
 	info->Blobs->Body->Sprite = TextureOrAnim::Get( std::wstring( L"blob_hills" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo5" ) );
+	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo7" ) );
 
 	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"cloud_hills" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 0 );
 
-	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	//info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -655,8 +662,8 @@ namespace CloudberryKingdom
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 600, std::wstring( L"pillar_forest_600" ), -15.f, 15.f, 3.f ) );
 	t->Pillars->Add( boost::make_shared<PieceQuad>( 1000, std::wstring( L"pillar_forest_1000" ), -15.f, 15.f, 3.f ) );
 
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_forest" ), -670.f, 15.f, 1500.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_forest" ), -15.f, 670.f, 1500.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_forest" ), -670.f + 1000, 15.f, 1500.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_forest" ), -15.f, 670.f - 1000, 1500.f ) );
 
 	info->ShiftStartDoor = 25;
 	info->ShiftStartBlock = Vector2( 50, 0 );
@@ -682,12 +689,12 @@ namespace CloudberryKingdom
 	info->Lasers->Scale = 1;
 	info->Lasers->Tint_Full = Vector4( 1, 1, 1,.95f );
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
-
+	 
 	sprite_anim( std::wstring( L"fblock_forest" ), std::wstring( L"fblock_forest" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_forest" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_forest" ), -3.f, 3.f, 2.f, false, 103.f + 3, false ) );
 
 	sprite_anim( std::wstring( L"Bouncy_Forest" ), std::wstring( L"Bouncy_Forest" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_Forest" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_Forest" ), -6.f, 6.f, 13.f, false, 124.f, false ) );
 
 	sprite_anim( std::wstring( L"flame_forest" ), std::wstring( L"firespinner_flame_forest" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_forest" ) );
@@ -703,21 +710,21 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( std::wstring( L"ghostblock_forest_1" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_forest_190_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 150, std::wstring( L"movingblock_forest_150" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_forest_135_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_forest_80_v2" ), -1.f, 1.f, 1.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_forest_40_v2" ), -1.f, 1.f, 1.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_forest_190_v2" ), -1.f, 1.f, 1.f, false, 190.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 150, std::wstring( L"movingblock_forest_150" ), -1.f, 1.f, 1.f, false, 150.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_forest_135_v2" ), -1.f, 1.f, 1.f, false, 135.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_forest_80_v2" ), -1.f, 1.f, 1.f, false, 80.f + 3, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_forest_40_v2" ), -1.f, 1.f, 1.f, false, 40.f + 3, false ) );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Forest_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Forest_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Forest_135" ), -1.f, 1.f, 3.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Forest_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Forest_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Forest_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Forest_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Forest_190" ), -1.f, 1.f, 1.f ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Forest_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Forest_80" ), -1.f, 1.f, -2.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Forest_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Forest_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
 	sprite_anim( std::wstring( L"Serpent_Forest" ), std::wstring( L"Serpent_Forest" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Forest" ) );
@@ -780,7 +787,8 @@ namespace CloudberryKingdom
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 192.5f );
 
-	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	//info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;
@@ -837,8 +845,8 @@ namespace CloudberryKingdom
 	//t.Ceilings.Add(new PieceQuad(600, "pillar_cave_600_v3", -20, 20, 0, true));
 	//t.Ceilings.Add(new PieceQuad(1000, "pillar_cave_1000_v3", -20, 20, 0, true));
 
-	t->StartBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_cave" ), -650.f, 120.f, 1548.f ) );
-	t->EndBlock->Add( boost::make_shared<PieceQuad>( 400, std::wstring( L"wall_cave" ), -34.f, 736.f, 1548.f ) );
+	t->StartBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_cave" ), -650.f + 1000, 120.f, 1548.f ) );
+	t->EndBlock->Add( boost::make_shared<PieceQuad>( 900, std::wstring( L"wall_cave" ), -34.f, 736.f - 1000, 1548.f ) );
 
 	info->ShiftStartDoor = -180;
 	info->ShiftStartBlock = Vector2( 300, 0 );
@@ -867,10 +875,10 @@ namespace CloudberryKingdom
 	info->Lasers->Tint_Half = Vector4( 1, 1, 1,.4f );
 
 	sprite_anim( std::wstring( L"fblock_cave" ), std::wstring( L"fblock_cave" ), 1, 3, 2 );
-	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_cave" ), -3.f, 3.f, 2.f ) );
+	info->FallingBlocks->Group->Add( boost::make_shared<PieceQuad>( 103, std::wstring( L"fblock_cave" ), -3.f, 3.f, 2.f, false, 103.f + 3, false ) );
 
 	sprite_anim( std::wstring( L"Bouncy_cave" ), std::wstring( L"Bouncy_cave" ), 1, 3, 2 );
-	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_cave" ), -6.f, 6.f, 13.f ) );
+	info->BouncyBlocks->Group->Add( boost::make_shared<PieceQuad>( 124, std::wstring( L"bouncy_cave" ), -6.f, 6.f, 13.f, false, 124.f, false ) );
 
 	sprite_anim( std::wstring( L"flame_cave" ), std::wstring( L"firespinner_flame_cloud" ), 1, 4, 6 );
 	info->Spinners->Flame->Sprite = TextureOrAnim::Get( std::wstring( L"flame_cave" ) );
@@ -886,24 +894,20 @@ namespace CloudberryKingdom
 	info->GhostBlocks->Sprite = TextureOrAnim::Get( std::wstring( L"ghostblock_cave" ) );
 	info->GhostBlocks->Shift = Vector2( 0, -15 );
 
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_cave_190" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_cave_135" ), -1.f, 1.f, 7.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_cave_80" ), -1.f, 1.f, 3.f ) );
-	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_cave_40" ), -1.f, 1.f, 3.f ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"movingblock_cave_190" ), -1.f, 1.f, 7.f, false, 190.f + 0, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"movingblock_cave_135" ), -1.f, 1.f, 13.f, false, 135.f - 9, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"movingblock_cave_80" ), -1.f, 1.f, 3.f, false, 80.f + 0, false ) );
+	info->MovingBlocks->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"movingblock_cave_40" ), -1.f, 1.f, 3.f, false, 40.f + 0, false ) );
 
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
-	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
-	//info.Elevators.Group.Add(40, "Cave_40_v2", -1, 1, 1));
-	//info.Elevators.Group.Add(80, "Cave_80_v2", -1, 1, 1));
-	//info.Elevators.Group.Add(135, "Cave_135_v2", -1, 1, 1));
-	//info.Elevators.Group.Add(190, "Cave_190_v2", -1, 1, 1));
-
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cave_40" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cave_80" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cave_135" ), -1.f, 1.f, 1.f ) );
-	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cave_190" ), -1.f, 1.f, 1.f ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cave_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cave_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cave_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Elevators->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cave_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 40, std::wstring( L"Elevator_Cave_40" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 80, std::wstring( L"Elevator_Cave_80" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 135, std::wstring( L"Elevator_Cave_135" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
+	info->Pendulums->Group->Add( boost::make_shared<PieceQuad>( 190, std::wstring( L"Elevator_Cave_190" ), -1.f, 1.f, 1.f, false, -1.5f, true ) );
 
 	sprite_anim( std::wstring( L"Serpent_Cave" ), std::wstring( L"Serpent_Cloud" ), 1, 2, 8 );
 	info->Serpents->Serpent_Renamed->Sprite = TextureOrAnim::Get( std::wstring( L"Serpent_Cave" ) );
@@ -962,13 +966,14 @@ namespace CloudberryKingdom
 	info->Blobs->Body->Sprite = TextureOrAnim::Get( std::wstring( L"blob_cave" ) );
 	info->Blobs->Body->Size = Vector2( 130, -1 );
 	info->Blobs->Body->Offset = Vector2( 20, 20 );
-	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo5" ) );
+	info->Blobs->GooSprite = TextureOrAnim::Get( std::wstring( L"BlobGoo2" ) );
 
 	info->Clouds->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"cloud_cave" ) );
 
 	info->Fireballs->Sprite->ColorMatrix = ColorHelper::HsvTransform( 1, 1, 104 );
 
-	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	//info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"coin_blue" ) );
+	info->Coins->Sprite->Sprite = TextureOrAnim::Get( std::wstring( L"CoinShimmer" ) );
 	info->Coins->Sprite->Size = Vector2( 105, -1 );
 	info->Coins->ShowCoin = true;
 	info->Coins->ShowEffect = true;

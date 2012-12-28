@@ -9,7 +9,16 @@ namespace CloudberryKingdom
 	struct LevelSeedData : public boost::enable_shared_from_this<LevelSeedData>
 	{
 
-	
+		struct _NewHeroProxy : public Lambda_1<boost::shared_ptr<Level> >
+		{
+		
+			boost::shared_ptr<LevelSeedData> lsd;
+		
+			_NewHeroProxy( const boost::shared_ptr<LevelSeedData> &lsd );
+
+			void Apply( const boost::shared_ptr<Level> &level );
+		};	
+
 		struct _StartSongProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
@@ -204,11 +213,11 @@ namespace CloudberryKingdom
 		static const std::wstring WallFlag;
 	
 		bool FadeIn;
-	
+		float FadeInSpeed;
 		static const std::wstring FadeInFlag;
 	
 		bool FadeOut;
-	
+		float FadeOutSpeed;
 		static const std::wstring FadeOutFlag;
 	
 		float WeatherIntensity;
@@ -223,12 +232,16 @@ namespace CloudberryKingdom
 	
 		static const std::wstring LevelFlag;
 
+        bool NewHero; static const std::wstring NewHeroFlag;
+        bool Darkness; static const std::wstring DarknessFlag;
+        bool Masochistic; static const std::wstring MasochistFlag;
+
 		/// <summary>
 		/// How long to wait before opening the initial door.
 		/// </summary>
 	
 		int WaitLengthToOpenDoor;
-	
+		bool AlwaysOverrideWaitDoorLength;
 		static const std::wstring WaitLengthToOpenDoorString;
 	
 		bool OpenDoorSound;
@@ -243,7 +256,8 @@ namespace CloudberryKingdom
 	
 		static const std::wstring SongString;
 
-	
+		MetaGameType MyMetaGameType;
+
 		void ProcessSpecial();
 
 	
@@ -254,7 +268,7 @@ namespace CloudberryKingdom
 		static void _SetWeather_Process( const boost::shared_ptr<Level> &level );
 
 		static void _NoStartDoor( const boost::shared_ptr<Level> &level );
-
+		static void _NewHero( const boost::shared_ptr<Level> &level );
 		static void _FadeIn_Process( const boost::shared_ptr<Level> &level );
 
 		static void _FadeOut_Process( const boost::shared_ptr<Level> &level );

@@ -97,23 +97,24 @@ namespace CloudberryKingdom
 	void FallingBlock::HitHeadOn( const boost::shared_ptr<Bob> &bob )
 	{
 		/* Use this if you want inverted Bobs to set off falling blocks
-		 * 
+		 */
 		// We only care about inverted Bobs landing on us upside down.
-		if (bob.MyPhsx.Gravity > 0) return;
+		if ( bob->MyPhsx->Gravity > 0 ) return;
 	
 		// Don't register as a land if the Bob is moving downward.
-		if (bob.Core.Data.Velocity.Y < -3)
+		if ( bob->getCore()->Data.Velocity.Y < -3 )
 		{
-		    BlockCore.StoodOn = false;
+		    getBlockCore()->StoodOn = false;
 		    return;
 		}
+		getBlockCore()->StoodOn = true;
+
+		if ( State == FallingBlockState_REGULAR )
+		    SetState( FallingBlockState_TOUCHED );
 	
-		if (State == FallingBlockState.Regular)
-		    SetState(FallingBlockState.Touched);
-	
-		if (bob.Core.Data.Velocity.Y > 10)
+		if ( bob->getCore()->Data.Velocity.Y > 10 )
 		    Life -= 8;
-		 * */
+		 /* */
 	}
 
 	void FallingBlock::LandedOn( const boost::shared_ptr<Bob> &bob )

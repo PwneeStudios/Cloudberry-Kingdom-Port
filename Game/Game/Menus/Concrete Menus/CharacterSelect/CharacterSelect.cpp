@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/List.h"
+#include <Core\Tools\Set.h>
 
 namespace CloudberryKingdom
 {
@@ -71,7 +72,8 @@ namespace CloudberryKingdom
 			if ( i == 1 || i == 2 )
 				continue;
 
-			std::vector<boost::shared_ptr<MenuListItem> > list = std::vector<boost::shared_ptr<MenuListItem> >( ItemList[ i ].capacity() );
+			std::vector<boost::shared_ptr<MenuListItem> > list = std::vector<boost::shared_ptr<MenuListItem> >();
+			list.reserve( ItemList[ i ].capacity() );
 
 			for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = ItemList[ i ].begin(); item != ItemList[ i ].end(); ++item )
 				if ( PlayerManager::BoughtOrFree( boost::static_pointer_cast<Buyable>( ( *item )->obj ) ) )
@@ -202,6 +204,8 @@ namespace CloudberryKingdom
 
 	void CharacterSelect::InitializeInstanceFields()
 	{
+		Fake = false;
+
 		MyState = SelectState_BEGINNING;
 		Join = false;
 		ItemIndex = std::vector<int>( 5 );

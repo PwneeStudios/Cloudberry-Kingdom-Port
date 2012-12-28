@@ -1,10 +1,14 @@
 ﻿#include <global_header.h>
+
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxMeat::InitializeStatics()
 	{
 		BobPhsxMeat::instance = boost::make_shared<BobPhsxMeat>();
+			InitBobPhsxSingleton( BobPhsxMeat::instance );
 	}
 
 	// Statics
@@ -70,6 +74,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxMeat::Clone()
 	{
 		boost::shared_ptr<BobPhsxMeat> newBob = boost::make_shared<BobPhsxMeat>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -120,6 +125,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		// Pulled out to avoid using shared_from_this inside constructor.
 		//Set( shared_from_this() );
+		DefaultValues();
 	}
 
 	void BobPhsxMeat::Init( const boost::shared_ptr<Bob> &bob )

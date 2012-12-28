@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 	void Checkpoint::AnimStep()
 	{
 		if ( MyObject->DestinationAnim() == 0 && MyObject->Loop )
-			MyObject->PlayUpdate( 1 / 3 ); //MyAnimSpeed);
+			MyObject->PlayUpdate( 1.f / 3.f );
 	}
 
 	void Checkpoint::PhsxStep()

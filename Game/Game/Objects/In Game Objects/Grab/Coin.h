@@ -6,48 +6,6 @@
 
 namespace CloudberryKingdom
 {
-	struct SpriteInfo;
-}
-
-namespace CloudberryKingdom
-{
-	struct EzSound;
-}
-
-namespace CloudberryKingdom
-{
-	struct Particle;
-}
-
-namespace CloudberryKingdom
-{
-	struct AABox;
-}
-
-namespace CloudberryKingdom
-{
-	struct QuadClass;
-}
-
-namespace CloudberryKingdom
-{
-	struct GameData;
-}
-
-namespace CloudberryKingdom
-{
-	struct Bob;
-}
-
-namespace CloudberryKingdom
-{
-	struct ObjectBase;
-}
-
-
-
-namespace CloudberryKingdom
-{
 	struct Coin : public ObjectBase
 	{
 	
@@ -69,7 +27,6 @@ namespace CloudberryKingdom
 
 			boost::shared_ptr<EzSound> MySound;
 
-			boost::shared_ptr<Particle> DieTemplate;
 			CoinTileInfo();
 
 		

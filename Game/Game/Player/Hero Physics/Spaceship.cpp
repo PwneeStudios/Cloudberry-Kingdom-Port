@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxSpaceship::InitializeStatics()
 	{
 		BobPhsxSpaceship::instance = boost::make_shared<BobPhsxSpaceship>();
+			InitBobPhsxSingleton( BobPhsxSpaceship::instance );
 	}
 
 	// Statics
@@ -34,6 +37,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxSpaceship::Clone()
 	{
 		boost::shared_ptr<BobPhsxSpaceship> newBob = boost::make_shared<BobPhsxSpaceship>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -84,19 +88,29 @@ namespace CloudberryKingdom
 		if ( MyBob->CharacterSelect2 )
 			return;
 
+        if (MyBob->getMyLevel()->PlayMode == 0 && !MyBob->InputFromKeyboard && !MyBob->getMyLevel()->Watching)
+        {
+            if (MyBob->CurInput.A_Button)
+                MyBob->CurInput.xVec.X = 1;
+            else if (MyBob->CurInput.xVec.X > .5f)
+                MyBob->CurInput.xVec.X = .5f;
+        }
 
 		getMyLevel()->MyCamera->MovingCamera = true;
 
 		MyBob->getCore()->Data.Velocity *= .86f;
-		//MyBob.Core.Data.Velocity.X += 2.8f;
 		MyBob->getCore()->Data.Velocity.X += 2.3f;
 
 		if ( MyBob->CurInput.xVec.Length() > 0.2f )
 		{
-			MyBob->getCore()->Data.Velocity += XAccel * MyBob->CurInput.xVec;
+            float boost = 1;
+            if ( MyBob->CurInput.xVec.X == 1 )
+                boost = 1.2f;
+
+			MyBob->getCore()->Data.Velocity += boost * XAccel * MyBob->CurInput.xVec;
 
 			float Magnitude = MyBob->getCore()->Data.Velocity.Length();
-			if ( Magnitude > MaxSpeed )
+			if ( Magnitude > boost * MaxSpeed )
 			{
 				MyBob->getCore()->Data.Velocity.Normalize();
 				MyBob->getCore()->Data.Velocity *= MaxSpeed;
@@ -121,6 +135,9 @@ namespace CloudberryKingdom
 		if ( MyBob->getCore()->MyLevel->PlayMode == 0 && MyBob->CurInput.xVec.X > -.3f )
 		{
 			float intensity = __min( .3f + ( MyBob->CurInput.xVec.X + .3f ), 1 );
+            if ( MyBob->CurInput.xVec.X <= .5f )
+                intensity = __min( intensity, .3f + ( .1f + .3f ) );
+
 			int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
 			ParticleEffects::Thrust( MyBob->getCore()->MyLevel, layer, getPos() + Vector2(0, 10), Vector2(-1, 0), Vector2(-10, getyVel()), intensity );
 		}
@@ -334,17 +351,22 @@ namespace CloudberryKingdom
 			MyBob->CurInput.xVec.Y = -1;
 		MyBob->CurInput.xVec.Y *= __min( 1, abs( MyBob->TargetPosition.Y - MyBob->getCore()->Data.Position.Y ) / 100 );
 
-		if ( getPos().X > CurPhsxStep * (4000 / 600) )
+		if ( getPos().X > CurPhsxStep * 1.1f * (4000.f / 600.f) )
 		{
 			if ( getPos().Y > MyBob->TargetPosition.Y && (CurPhsxStep / 40) % 3 == 0 )
 				MyBob->CurInput.xVec.X = -1;
 			if ( getPos().Y < MyBob->TargetPosition.Y && (CurPhsxStep / 25) % 4 == 0 )
 				MyBob->CurInput.xVec.X = -1;
 		}
-		if ( getPos().Y < MyBob->TargetPosition.Y && getPos().X < CurPhsxStep * (4000 / 900) )
+		if ( getPos().Y < MyBob->TargetPosition.Y && getPos().X < CurPhsxStep * (4000.f / 900.f) )
 		{
 			MyBob->CurInput.xVec.X = 1;
 		}
+
+        if ( getPos().X < getMyLevel()->getMainCamera()->BL.X + 400 )
+            MyBob->CurInput.xVec.X = 1;
+        if ( getPos().X > getMyLevel()->getMainCamera()->TR.X - 500 && MyBob->CurInput.xVec.X > 0 )
+            MyBob->CurInput.xVec.X /= 2;
 
 		if ( getPos().X > getMyLevel()->Fill_TR.X - 1200 )
 		{

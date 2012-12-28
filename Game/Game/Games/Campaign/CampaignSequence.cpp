@@ -1,8 +1,13 @@
 ﻿#include <global_header.h>
 
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>
 #include <Hacks/String.h>
+#include <Core\Tools\Set.h>
+
+#include <Game\Video.h>
 
 namespace CloudberryKingdom
 {
@@ -45,12 +50,50 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
+	boost::shared_ptr<PerfectScoreObject> CampaignSequence::MyPerfectScoreObject = 0;
+
 	void CampaignSequence::Start( int Chapter )
 	{
+		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true ) );
+
 		int StartLevel = ChapterStart[ Chapter ];
 
 		LevelSequence::Start( StartLevel );
 	}
+
+    bool CampaignSequence::OnLevelBegin( boost::shared_ptr<Level> level )
+    {
+        if ( LevelSequence::OnLevelBegin( level ) ) return true;
+
+        //level.MyGame.AddGameObject(InGameStartMenu.MakeListener());
+        level->MyGame->AddGameObject( HelpMenu::MakeListener() );
+        return false;
+    }
+
+		struct OnSwapHelper : Lambda_1<boost::shared_ptr<LevelSeedData> >
+		{
+			boost::shared_ptr<CampaignSequence> cs;
+			OnSwapHelper( boost::shared_ptr<CampaignSequence> _cs )
+			{
+				cs = _cs;
+			}
+
+			void Apply( const boost::shared_ptr<LevelSeedData> &data )
+			{
+				cs->MyStringWorld_OnSwapToFirstLevel( data );
+			}
+		};
+
+    void CampaignSequence::AdditionalPreStart()
+    {
+        MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapHelper>( boost::static_pointer_cast<CampaignSequence>( shared_from_this() ) ) );
+    }
+
+    void CampaignSequence::MyStringWorld_OnSwapToFirstLevel( boost::shared_ptr<LevelSeedData> data )
+    {
+        MyPerfectScoreObject->PreventRelease = true;
+        data->MyGame->AddGameObject( MyPerfectScoreObject );
+    }
 
 	void CampaignSequence::MakeSeedList()
 	{
@@ -183,11 +226,36 @@ namespace CloudberryKingdom
 		level->MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>() );
 		level->MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>() );
 
-		boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
-		level->MyGame->AddGameObject( title );
+        // Level Title only
+        //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization.WordString(Localization.Words.Level)));
+            
+        // Level Title plus Hero Name
+        if ( !level->MyLevelSeed->NewHero )
+        {
+            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
+            title->Shift( Vector2(0, -45) );
+            level->MyGame->AddGameObject( title );
+        }
 
-		level->MyGame->AddGameObject( MakeMagic( GUI_CampaignScore, () ) );
-		level->MyGame->AddGameObject( MakeMagic( GUI_Level, (level->MyLevelSeed->LevelNum) ) );
+        //if (!level.MyLevelSeed.NewHero)
+        //{
+        //    var hero_title = new LevelTitle(string.Format("{0}", Localization.WordString(level.DefaultHeroType.Name)));
+        //    hero_title.Shift(new Vector2(0, -180));
+        //    level.MyGame.AddGameObject(hero_title);
+        //}
+
+        if ( level->MyLevelSeed->Darkness )
+        {
+            GameData::UseBobLighting( level, 0 );
+            Background::AddDarkLayer( level->MyBackground );
+        }
+
+        boost::shared_ptr<GUI_CampaignScore> CScore = MakeMagic( GUI_CampaignScore, () );
+        CScore->PreventRelease = false;
+        boost::shared_ptr<GUI_Level> CLevel = MakeMagic( GUI_Level, ( level->MyLevelSeed->LevelNum ) );
+        CLevel->PreventRelease = false;
+        level->MyGame->AddGameObject( CScore );
+		level->MyGame->AddGameObject( CLevel );//, MyPerfectScoreObject);
 
 		level->MyGame->MyBankType = GameData::BankType_CAMPAIGN;
 	}

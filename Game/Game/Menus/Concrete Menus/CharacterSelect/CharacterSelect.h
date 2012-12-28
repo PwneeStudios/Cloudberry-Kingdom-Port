@@ -62,6 +62,7 @@ namespace CloudberryKingdom
 
 		void Release();
 
+		bool Fake;
 		CharacterSelect( int PlayerIndex, bool QuickJoin );
 
 		void InitColorScheme( int PlayerIndex );

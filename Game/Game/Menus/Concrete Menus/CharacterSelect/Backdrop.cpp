@@ -57,6 +57,14 @@ namespace CloudberryKingdom
 		SetPos();
 	}
 
+    void CharSelectBackdrop::MyDraw()
+    {
+        if ( CharacterSelectManager::FakeHide )
+            return;
+
+        CkBaseMenu::MyDraw();
+    }
+
 	void CharSelectBackdrop::SetPos()
 	{
 	}

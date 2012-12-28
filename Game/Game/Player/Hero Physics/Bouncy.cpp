@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/Queue.h"
+#include <MasterHack.h>
 
 #include <Core/Animation/AnimQueue.h>
 
@@ -10,6 +11,7 @@ namespace CloudberryKingdom
 	void BobPhsxBouncy::InitializeStatics()
 	{
 		BobPhsxBouncy::instance = boost::make_shared<BobPhsxBouncy>();
+			InitBobPhsxSingleton( BobPhsxBouncy::instance );
 	}
 
 	// Statics
@@ -36,6 +38,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxBouncy::Clone()
 	{
 		boost::shared_ptr<BobPhsxBouncy> newBob = boost::make_shared<BobPhsxBouncy>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -58,6 +61,7 @@ namespace CloudberryKingdom
 		SuperBounceGrace( 0 )
 	{
 		InitializeInstanceFields();
+		DefaultValues();
 	}
 
 	void BobPhsxBouncy::Init( const boost::shared_ptr<Bob> &bob )
@@ -66,11 +70,14 @@ namespace CloudberryKingdom
 
 		InitializedAnim = false;
 		MyBob->PlayerObject->Read( 24, 0 );
+
+        MyBob->JumpSound = Tools::SoundWad->FindByName( L"BouncyJump" );
+        DullSound = Tools::SoundWad->FindByName( L"BouncyJump_Small" );
 	}
 
 	void BobPhsxBouncy::DefaultValues()
 	{
-		 BobPhsxNormal::DefaultValues();
+		BobPhsxNormal::DefaultValues();
 
 		BlobMod = .4f;
 
@@ -99,6 +106,11 @@ namespace CloudberryKingdom
 			ReadyToJump = true;
 	}
 
+    void BobPhsxBouncy::PlayJumpSound()
+    {
+        //base.PlayJumpSound();
+    }
+
 	void BobPhsxBouncy::Jump()
 	{
 		SuperBounceGrace = 9;
@@ -109,7 +121,7 @@ namespace CloudberryKingdom
 			{
 				if ( MyBob->CurInput.A_Button && SuperBounceGraceCount > 0 )
 				{
-					//Tools.Write("Delayed super bounce!");
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
 					setyVel( getyVel() + SuperBounce );
 					SuperBounceGraceCount = 0;
 				}
@@ -128,12 +140,15 @@ namespace CloudberryKingdom
 				DoJump();
 
 				if ( MyBob->CurInput.A_Button )
+				{
 					setyVel( getyVel() + SuperBounce );
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 ) MyBob->JumpSound->Play();
+				}
 				else
 				{
-					if ( getMyLevel()->PlayMode == 0 )
+					if ( getMyLevel()->PlayMode == 0 && !MyBob->CharacterSelect2 )
 					{
-						//FakeVel = yVel + SuperBounce;
+						DullSound->Play();
 						SuperBounceGraceCount = SuperBounceGrace;
 					}
 				}
@@ -166,9 +181,9 @@ namespace CloudberryKingdom
 		}
 
 		if ( MyBob->IsSpriteBased )
-			MyBob->PlayerObject->PlayUpdate( 1 );
+			MyBob->PlayerObject->PlayUpdate( 1.f );
 		else
-			MyBob->PlayerObject->PlayUpdate( 1000 / 60 / 150 );
+			MyBob->PlayerObject->PlayUpdate( 1000.f / 60.f / 150.f );
 	}
 
 	void BobPhsxBouncy::InitializeInstanceFields()

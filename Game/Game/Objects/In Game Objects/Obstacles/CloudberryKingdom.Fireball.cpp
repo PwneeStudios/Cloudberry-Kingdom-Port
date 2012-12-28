@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 		return;
 
 
-		t += 1 / 60;
+		t += 1.f / 60.f;
 
 		device->SetRenderTarget( FireballRenderTarget );
 		device->Clear( Color::Transparent );
@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 		EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 		return;
 
-		t += 1 / 60;
+		t += 1.f / 60.f;
 
 		device->SetRenderTarget( FlameRenderTarget );
 		device->Clear( Color::Transparent );

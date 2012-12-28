@@ -1,5 +1,7 @@
 #include <global_header.h>
 
+#include <Core\Tools\Set.h>
+
 namespace CloudberryKingdom
 {
 
@@ -122,6 +124,13 @@ bool InGameStartMenu::PreventMenu = false;
 		return listener;
 	}
 
+	void InGameStartMenu::OnAdd()
+    {
+		CkBaseMenu::OnAdd();
+
+        MyMenu->setControl( getControl() );
+    }
+
 	void InGameStartMenu::SetHeaderProperties( const boost::shared_ptr<EzText> &text )
 	{
 		CkBaseMenu::SetHeaderProperties( text );
@@ -133,7 +142,7 @@ bool InGameStartMenu::PreventMenu = false;
 	{
 		CkBaseMenu::OnReturnTo();
 
-		if ( MyMenu->getCurItem() == RemoveMe )
+		if ( MyMenu->getCurItem() == RemoveMe && VerifyRemoveMenu::YesChosen )
 			ReturnToCaller( false );
 	}
 
@@ -157,6 +166,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Make the backdrop
 		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1080x840" ), 1500.f, true );
+		backdrop->Name = L"Backdrop";
 
 		MyPile->Add( backdrop );
 		backdrop->setPos( Vector2( -975.6945f, 54.86111f ) );
@@ -219,11 +229,11 @@ bool InGameStartMenu::PreventMenu = false;
 		item->setGo( Cast::ToItem( boost::make_shared<GoOptionsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
-		// Controls
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) ) );
-		item->Name = std::wstring( L"Controls" );
-		item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
-		AddItem( item );
+		//// Controls
+		//item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) ) );
+		//item->Name = std::wstring( L"Controls" );
+		//item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
+		//AddItem( item );
 
 		// Remove player
 		if ( RemoveMeOption )
@@ -245,7 +255,11 @@ bool InGameStartMenu::PreventMenu = false;
 		EnsureFancy();
 		Shift( Vector2( 1045.139f, -10.41669f ) );
 
-		SetPos();
+        if ( RemoveMeOption )
+            SetPos_WithRemoveMe();
+        else
+            SetPos();
+
 		MyMenu->SortByHeight();
 		MyMenu->SelectItem( 0 );
 	}
@@ -302,65 +316,53 @@ bool InGameStartMenu::PreventMenu = false;
 		setPauseGame( true );
 	}
 
-	void InGameStartMenu::SetPos()
-	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Resume" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1501.999f, 708.3334f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Stats" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1504.778f, 469.9999f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"SaveLoadSeed" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1504.777f, 231.6667f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1496.443f, -3.88887f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Controls" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1501.999f, -258.8889f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1499.222f, -502.7777f ) );
-		}
+    void InGameStartMenu::SetPos()
+    {
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Resume" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1501.999f, 708.3334f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Stats" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1504.778f, 469.9999f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"SaveLoadSeed" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1504.777f, 231.6667f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Options" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1496.443f, -3.88887f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Exit" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1496.444f, -252.7777f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
 
-		MyMenu->setPos( Vector2( 1109.028f, 20.13885f ) );
+        MyMenu->setPos( Vector2(1109.028f, -40.97224f) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -1463.89f, 1474.667f ) );
-		}
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"Header" ); if ( _t != 0 ) { _t->setPos( Vector2(-1463.89f, 1474.667f) ); _t->setScale( 1.12375f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -989.5837f, -0.6944637f ) );
-			_q->setSize( Vector2( 1198.763f, 932.3713f ) );
-		}
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Backdrop" ); if ( _q != 0 ) { _q->setPos( Vector2(-972.9169f, 29.86109f) ); _q->setSize( Vector2(1132.148f, 880.288f) ); }
 
-		MyPile->setPos( Vector2( 995.1394f, -13.19449f ) );
-	}
+        MyPile->setPos( Vector2(995.1394f, -13.19449f) );
+    }
+
+    void InGameStartMenu::SetPos_WithRemoveMe()
+    {
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Resume" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1501.999f, 708.3334f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Stats" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1504.778f, 469.9999f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"SaveLoadSeed" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1504.777f, 231.6667f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Options" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1496.443f, -3.88887f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Exit" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1488.11f, -488.8888f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+        _item = MyMenu->FindItemByName( L"Remove" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1488.11f, -249.4445f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
+
+        MyMenu->setPos( Vector2(1106.25f, 50.69439f) );
+
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"Header" ); if ( _t != 0 ) { _t->setPos( Vector2(-1463.89f, 1474.667f) ); _t->setScale( 1.12375f ); }
+
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Dark" ); if ( _q != 0 ) { _q->setPos( Vector2(0.f, 0.f) ); _q->setSize( Vector2(8888.889f, 5000.f) ); }
+        _q = MyPile->FindQuad( L"Backdrop" ); if ( _q != 0 ) { _q->setPos( Vector2(-942.361f, 27.08332f) ); _q->setSize( Vector2(1167.945f, 908.121f) ); }
+
+        MyPile->setPos( Vector2(995.1394f, -13.19449f) );
+    }
 
 	void InGameStartMenu::MakeExitItem()
 	{
 		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<VerifyExitProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
-
+		item->Name = L"Exit";
 		AddItem( item );
 	}
 

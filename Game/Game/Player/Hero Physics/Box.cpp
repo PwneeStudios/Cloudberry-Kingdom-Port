@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/Queue.h"
+#include <MasterHack.h>
 
 #include <Core\Animation\AnimQueue.h>
 
@@ -10,6 +11,7 @@ namespace CloudberryKingdom
 	void BobPhsxBox::InitializeStatics()
 	{
 		BobPhsxBox::instance = boost::make_shared<BobPhsxBox>();
+			InitBobPhsxSingleton( BobPhsxBox::instance );
 	}
 
 	// Statics
@@ -37,6 +39,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<BobPhsx> BobPhsxBox::Clone()
 	{
 		boost::shared_ptr<BobPhsxBox> newBob = boost::make_shared<BobPhsxBox>();
+			InitBobPhsxSingleton( newBob );
 		CopyTo( newBob );
 		return boost::static_pointer_cast<BobPhsx>( newBob );
 	}
@@ -61,7 +64,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxBox::DefaultValues()
 	{
-		 BobPhsxNormal::DefaultValues();
+		BobPhsxNormal::DefaultValues();
 
 		BobJumpAccel = ( Gravity + 3.45f ) / 19;
 		BobInitialJumpSpeed = 6;
@@ -101,35 +104,14 @@ namespace CloudberryKingdom
 
 	void BobPhsxBox::DuckingPhsx()
 	{
-		bool HoldDucking = Ducking;
-
 		BobPhsxNormal::DuckingPhsx();
-
-		//if (DuckingCount == 2)
-		//{
-		//    Vector2 shift = new Vector2(0, -30);
-
-		//    Pos += shift;
-
-		//    MyBob.Box.Target.Center += shift;
-		//    MyBob.Box2.Target.Center += shift;
-		//    MyBob.Box.Target.CalcBounds();
-		//    MyBob.Box2.Target.CalcBounds();
-
-		//    Obj.ParentQuad.Center.Move(Obj.ParentQuad.Center.Pos + shift);
-		//    Obj.ParentQuad.Update();
-		//    Obj.Update(null, ObjectDrawOrder.WithOutline);
-
-		//    if (MyBob.MyCape != null)
-		//        MyBob.MyCape.Move(shift);
-		//}
 
 		if ( Ducking )
 		{
 			boost::shared_ptr<CloudberryKingdom::ObjectClass> p = MyBob->PlayerObject;
 			p->DrawExtraQuad = true;
-			p->ExtraQuadToDraw = boost::static_pointer_cast<Quad>( p->FindQuad( std::wstring( L"MainQuad" ) ) );
-			p->ExtraQuadToDrawTexture = Tools::Texture( std::wstring( L"BoxAlone" ) );
+			p->ExtraQuadToDraw = boost::static_pointer_cast<Quad>( p->FindQuad( ExtraQuadString ) );
+			p->ExtraQuadToDrawTexture = Tools::Texture( std::wstring( ExtraTextureString ) );
 		}
 		else
 		{
@@ -205,11 +187,10 @@ namespace CloudberryKingdom
 			//MyBob.PlayerObject.DoSpriteAnim = false;
 
 			Clear( MyBob->PlayerObject->AnimQueue );
-			//MyBob->PlayerObject->AnimQueue.clear();
 			if ( getyVel() > 0 )
-				MyBob->PlayerObject->EnqueueAnimation( 6,.8f, false );
+				MyBob->PlayerObject->EnqueueAnimation( StandAnim, .8f, false );
 			else
-				MyBob->PlayerObject->EnqueueAnimation( 7,.8f, false );
+				MyBob->PlayerObject->EnqueueAnimation( JumpAnim, .8f, false );
 			MyBob->PlayerObject->DequeueTransfers();
 			MyBob->PlayerObject->LastAnimEntry->AnimSpeed *= 200;
 		}
@@ -225,13 +206,16 @@ namespace CloudberryKingdom
 		}
 
 		if ( MyBob->IsSpriteBased )
-			MyBob->PlayerObject->PlayUpdate( 1 );
+			MyBob->PlayerObject->PlayUpdate( 1.f );
 		else
-			MyBob->PlayerObject->PlayUpdate( 1000 / 60 / 150 );
+			MyBob->PlayerObject->PlayUpdate( 1000.f / 60.f / 150.f );
 	}
 
 	void BobPhsxBox::InitializeInstanceFields()
 	{
+        ExtraQuadString = L"MainQuad";
+        ExtraTextureString = L"BoxAlone";
+
 		StandAnim = 6;
 		JumpAnim = 7;
 		DuckAnim = 8;

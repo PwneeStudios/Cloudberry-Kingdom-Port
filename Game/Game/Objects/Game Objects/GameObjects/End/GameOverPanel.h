@@ -20,7 +20,6 @@ namespace CloudberryKingdom
 
 			void Apply();
 		};
-
 	
 		struct TextBoxActiveHelper : public Lambda
 		{
@@ -156,36 +155,27 @@ namespace CloudberryKingdom
 		void SetPos();
 
 #if defined(PC_VERSION)
-	
 		virtual void ReleaseBody();
 
 	
 		void MakeTextBox();
-
 #else
-	
 		virtual void ReleaseBody();
 #endif
 
-	
 		void AddScore();
 
-	
 		virtual void SetHeaderProperties( const boost::shared_ptr<EzText> &text );
 
-	
 		void MakeMenu();
 
-	
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
-
 	
 		void Action_Done();
 
 		void Action_PlayAgain();
 
 		void Action_ShowHighScores();
-
 	
 		GameOverPanel();
 		GameOverPanel( int GameId_Score, int GameId_Level );
@@ -193,12 +183,12 @@ namespace CloudberryKingdom
 		boost::shared_ptr<GameOverPanel> GameOverPanel_Construct();
 		boost::shared_ptr<GameOverPanel> GameOverPanel_Construct( int GameId_Score, int GameId_Level );
 
-	
 		virtual void MyDraw();
-
 	
 		void InitializeInstanceFields();
+
 	};
+
 }
 
 

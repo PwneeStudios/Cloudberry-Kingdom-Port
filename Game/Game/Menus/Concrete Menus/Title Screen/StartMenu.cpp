@@ -163,7 +163,7 @@ namespace CloudberryKingdom
 	void StartMenu::CharacterSelect()
 	{
 		GUI_Panel::Hide();
-		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), false );
 		CharacterSelectManager::OnDone = boost::make_shared<DoneWithCharSelectProxy>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) );
 		CharacterSelectManager::OnBack.reset();
 	}

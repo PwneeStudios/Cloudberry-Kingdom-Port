@@ -7,6 +7,11 @@
 namespace CloudberryKingdom
 {
 
+    std::wstring FormatFunc( int n )
+    {
+        return FormatWithSeparators( n );
+    }
+
 	StatsMenu::StringificationWrapper::StringificationWrapper( const boost::shared_ptr<LambdaFunc_1<int, int> > &f )
 	{
 		this->f = f;
@@ -14,7 +19,8 @@ namespace CloudberryKingdom
 
 	std::wstring StatsMenu::StringificationWrapper::Apply( const int &i )
 	{
-		return ToString( f->Apply( i ) );
+		//return ToString( f->Apply( i ) );
+		return FormatFunc( f->Apply( i ) );
 	}
 
 	StatsMenu::StatsLevels::StatsLevels( std::vector<boost::shared_ptr<PlayerStats> > Stats )

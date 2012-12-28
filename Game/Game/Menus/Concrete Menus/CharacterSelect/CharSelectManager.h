@@ -41,10 +41,13 @@ namespace CloudberryKingdom
 	
 		struct AfterFinishedHelper : public Lambda
 		{
-		
 			void Apply();
 		};
 
+		struct QuickJoinFinishHelper : public Lambda
+		{
+			void Apply();
+		};
 	
 		static boost::shared_ptr<Lambda> OnBack, OnDone;
 
@@ -87,8 +90,9 @@ namespace CloudberryKingdom
 		static void UpdateAvailableBeards();
 
 		static boost::shared_ptr<CharSelectBackdrop> Backdrop;
+		static bool QuickJoin;
 	
-		static void Start( const boost::shared_ptr<GUI_Panel> &Parent );
+		static void Start( const boost::shared_ptr<GUI_Panel> &Parent, bool QuickJoin);
 
 	
 		static void _StartAll();
@@ -107,6 +111,7 @@ namespace CloudberryKingdom
 
 		static bool AllExited();
 
+		static bool FakeHide;
 		static bool AllFinished();
 
 		static bool AllNull();
@@ -124,6 +129,8 @@ namespace CloudberryKingdom
 		static bool Active;
 	
 		static void PhsxStep();
+
+		static void QuickJoinFinish();
 	};
 }
 

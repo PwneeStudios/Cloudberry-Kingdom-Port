@@ -94,6 +94,11 @@ namespace CloudberryKingdom
 
 		if ( boxstyle == BoxStyle_FULL_BOX )
 			getBox()->TopOnly = false;
+        else if ( boxstyle == BoxStyle_NO_SIDES )
+        {
+            getBox()->TopOnly = false;
+            getBox()->NoSides = true;
+        }
 
 		//// Not TopOnly if hero is a spaceship.
 		//if (Parent != null && Parent.Core.MyLevel.DefaultHeroType is BobPhsxSpaceship && Box.TopOnly)
@@ -108,6 +113,10 @@ namespace CloudberryKingdom
 		getBlockCore()->Layer = .3f;
 
 		BlockBase::Init( center, size, level, level->getInfo()->Elevators->Group );
+
+        if ( Parent->getMyLevel()->CurMakeData != 0 && Parent->getMyLevel()->getStyle()->UseLowerBlockBounds )
+            BlockBase::AdditionalInit( center, size, level, Parent->getMyLevel()->getStyle()->UseLowerBlockBounds );
+
 		Reset( level->BoxesOnly );
 
 		getCore()->RemoveOnReset = true;

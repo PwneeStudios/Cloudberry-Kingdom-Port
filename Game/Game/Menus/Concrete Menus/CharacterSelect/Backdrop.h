@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
-	
+		void MyDraw();
 		void SetPos();
 	};
 }

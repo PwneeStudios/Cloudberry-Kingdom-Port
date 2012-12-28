@@ -2,6 +2,7 @@
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>
+#include <Hacks\Compare.h>
 
 namespace CloudberryKingdom
 {
@@ -55,7 +56,8 @@ namespace CloudberryKingdom
 		this->DefaultValue = DefaultValue;
 		this->Capacity = Capacity;
 
-		Scores = std::vector<boost::shared_ptr<ScoreEntry> >( Capacity );
+		Scores = std::vector<boost::shared_ptr<ScoreEntry> >();
+		Scores.reserve( Capacity );
 
 		for ( int i = 0; i < Capacity; i++ )
 			Scores.push_back( boost::make_shared<ScoreEntry>( DefaultValue ) );
@@ -114,7 +116,8 @@ namespace CloudberryKingdom
 
 	int ScoreList::ScoreCompare( const boost::shared_ptr<ScoreEntry> &score1, const boost::shared_ptr<ScoreEntry> &score2 )
 	{
-		return score2->Value - score1->Value;
+		//return score2->Value - score1->Value;
+		return Compare( score2->Value, score1->Value );
 	}
 
 	void ScoreList::Sort()

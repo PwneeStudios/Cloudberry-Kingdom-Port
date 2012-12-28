@@ -1,6 +1,8 @@
 #include <global_header.h>
 
-#include "Hacks/List.h"
+#include "Hacks\List.h"
+#include <Core\Tools\Set.h>
+#include <Hacks\NET\DateTime.h>
 
 namespace CloudberryKingdom
 {
@@ -20,7 +22,8 @@ namespace CloudberryKingdom
 	int ScoreDatabase::CurrentDate()
 	{
 		TimeSpan t = ( DateTime::Now() - DateTime( 2000, 1, 1 ) );
-		int minutes = static_cast<int>( t.TotalMinutes );
+		//int minutes = static_cast<int>( t.getTotalSeconds() / 60.f );
+		int minutes = static_cast<int>( t.getTotalSeconds() / 10.f ); // This is wrong, but works, since we never actually care what units this time is.
 
 		return minutes;
 	}
@@ -83,7 +86,7 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER NOTE: The variable ScoreList was renamed since it is named the same as a user-defined type:
 		boost::shared_ptr<ScoreList> ScoreList_Renamed = boost::make_shared<ScoreList>( 10, 0 );
-		std::vector<boost::shared_ptr<ScoreEntry> > Scores = Games[ Game ];
+		std::vector<boost::shared_ptr<ScoreEntry> > &Scores = Games[ Game ];
 
 		int Count = 0;
 //C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
@@ -102,7 +105,7 @@ namespace CloudberryKingdom
 	{
 		EnsureList( Game );
 
-		std::vector<boost::shared_ptr<ScoreEntry> > Scores = Games[ Game ];
+		std::vector<boost::shared_ptr<ScoreEntry> > &Scores = Games[ Game ];
 		return static_cast<int>( Scores.size() ) < Capacity || Score > Min(Scores)->Value || Min(Scores)->Fake;
 	}
 
@@ -145,7 +148,7 @@ namespace CloudberryKingdom
 		if ( !Qualifies( score->GameId, score->Value ) )
 			return;
 
-		std::vector<boost::shared_ptr<ScoreEntry> > list = Games[ score->GameId ];
+		std::vector<boost::shared_ptr<ScoreEntry> > &list = Games[ score->GameId ];
 
 		list.push_back( score );
 		Sort( list );

@@ -141,8 +141,12 @@ boost::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = boost::ma
 		switch ( Style->BlockFillType )
 		{
 			case StyleData::_BlockFillType_REGULAR:
-				size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos) ),
-							    static_cast<float>( GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_Y, pos), GenData->Get(DifficultyParam_MAX_BOX_SIZE_Y, pos) ) ) );
+				size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(
+									GenData->Get( DifficultyParam_MIN_BOX_SIZE_X, pos ),
+									GenData->Get( DifficultyParam_MAX_BOX_SIZE_X, pos ) ) ),
+								static_cast<float>( level->getRnd()->Rnd->Next(
+									GenData->Get( DifficultyParam_MIN_BOX_SIZE_Y, pos ),
+									GenData->Get( DifficultyParam_MAX_BOX_SIZE_Y, pos ) ) ) );
 				if ( -2 * size.Y + pos.Y < BL.Y - 100 )
 					size.Y = ( pos.Y - BL.Y + 100 ) / 2;
 
@@ -161,8 +165,11 @@ boost::shared_ptr<NormalBlock_AutoGen> NormalBlock_AutoGen::instance = boost::ma
 				break;
 
 			case StyleData::_BlockFillType_TOP_ONLY:
-				size = Vector2( static_cast<float>( level->getRnd()->Rnd->Next(GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos) ),
-								static_cast<float>( GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos)), 50 ) );
+				size = Vector2(
+					static_cast<float>( level->getRnd()->Rnd->Next(
+						GenData->Get(DifficultyParam_MIN_BOX_SIZE_X, pos),
+						GenData->Get(DifficultyParam_MAX_BOX_SIZE_X, pos) ) ),
+					50.f );
 
 				if ( pos.X - size.X < BL.X )
 					offset.X += BL.X - ( pos.X - size.X );

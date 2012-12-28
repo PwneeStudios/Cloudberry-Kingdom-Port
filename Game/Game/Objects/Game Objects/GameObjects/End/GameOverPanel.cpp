@@ -203,14 +203,14 @@ namespace CloudberryKingdom
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
-		MyPile->Add( Text, std::wstring( L"Level" ) );
+		MyPile->Add( Text, std::wstring( L"LevelVal" ) );
 
 		// 'Score' text
 		MyPile->Add( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( std::wstring( L"Score" ) ) ) );
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
-		MyPile->Add( Text, std::wstring( L"Score" ) );
+		MyPile->Add( Text, std::wstring( L"ScoreVal" ) );
 
 		// 'Distance' text
 		//Text = new EzText("Distance: " + Distance.ToString() + " feet", ItemFont);
@@ -232,6 +232,24 @@ namespace CloudberryKingdom
 
 	void GameOverPanel::SetPos()
 	{
+            //MenuItem _item;
+            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, 110f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
+            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, -68.33099f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
+            //_item = MyMenu.FindItemByName(""); if (_item != null) { _item.SetPos = new Vector2(-808f, -246.662f); _item.MyText.Scale = 0.7743f; _item.MySelectedText.Scale = 0.7743f; _item.SelectIconOffset = new Vector2(0f, 0f); }
+
+            MyMenu->setPos( Vector2( 400.f, -240.f ) );
+
+            boost::shared_ptr<EzText> _t;
+            _t = MyPile->FindEzText( L"Header" ); if (_t != 0) { _t->setPos( Vector2(-675.6388f, 575.4443f) ); _t->setScale( 1.f ); }
+            _t = MyPile->FindEzText( L"Level" ); if (_t != 0) { _t->setPos( Vector2(-857.3064f, 384.5554f) ); _t->setScale( 0.999f ); }
+            _t = MyPile->FindEzText( L"LevelVal" ); if (_t != 0) { _t->setPos( Vector2(-26.75146f, 376.2222f) ); _t->setScale( 0.999f ); }
+            _t = MyPile->FindEzText( L"Score" ); if (_t != 0) { _t->setPos( Vector2(-871.1947f, 159.f) ); _t->setScale( 0.999f ); }
+            _t = MyPile->FindEzText( L"ScoreVal" ); if (_t != 0) { _t->setPos( Vector2(-12.86145f, 150.6666f) ); _t->setScale( 0.999f ); }
+
+            QuadClass _q;
+            //_q = MyPile->FindQuad( L"" ); if (_q != null) { _q->setPos( Vector2(22.2233f, 10.55567f); _q.Size = Vector2(1440f, 900f) ); }
+
+            MyPile->setPos( Vector2(0.f, 0.f) );
 	}
 
 #if defined(PC_VERSION)

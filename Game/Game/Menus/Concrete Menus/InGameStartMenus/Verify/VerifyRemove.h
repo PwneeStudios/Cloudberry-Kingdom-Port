@@ -23,6 +23,12 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
+		void SetPos();
+
+		static bool YesChosen;
+
+        void _Yes( boost::shared_ptr<MenuItem> _item );
+
 	};
 }
 

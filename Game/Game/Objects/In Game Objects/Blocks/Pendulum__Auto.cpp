@@ -75,10 +75,14 @@ namespace CloudberryKingdom
 		Vector2 offset = Vector2( 0, -300 );
 
 		boost::shared_ptr<Pendulum> p = boost::static_pointer_cast<Pendulum>( level->getRecycle()->GetObject(ObjectType_PENDULUM, true) );
-		p->Init( pos + offset, size, level );
+		p->Init( pos + offset, size, level, level->CurMakeData->PieceSeed->ElevatorBoxStyle );
 
 		if ( level->getPieceSeed()->GeometryType == LevelGeometry_RIGHT )
-			p->PivotPoint.Y = p->getPos().Y + 2000;
+        {
+            p->PivotPoint.Y = p->getPos().Y + 2000;
+            if (p->PivotPoint.Y < level->getMainCamera()->TR.Y)
+                p->PivotPoint.Y = level->getMainCamera()->TR.Y;
+        }
 		else
 		{
 			p->PivotPoint.X = level->getMainCamera()->BL.X - 160;

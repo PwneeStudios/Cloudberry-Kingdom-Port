@@ -281,17 +281,30 @@ namespace CloudberryKingdom
 			switch ( static_cast<int>( Difficulty ) )
 			{
 				case 0:
-					piece->getRnd()->Choose(EasyUpgrades).Apply(piece, Difficulty);
+					Tools::GlobalRnd->Choose(EasyUpgrades).Apply(piece, Difficulty);
 					break;
 				case 1:
-					piece->getRnd()->Choose(NormalUpgrades).Apply(piece, Difficulty);
+					Tools::GlobalRnd->Choose(NormalUpgrades).Apply(piece, Difficulty);
 					break;
 				case 2:
-					piece->getRnd()->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
+					Tools::GlobalRnd->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
 					break;
 				default:
-					piece->getRnd()->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
+					Tools::GlobalRnd->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
 					break;
+
+				//case 0:
+				//	piece->getRnd()->Choose(EasyUpgrades).Apply(piece, Difficulty);
+				//	break;
+				//case 1:
+				//	piece->getRnd()->Choose(NormalUpgrades).Apply(piece, Difficulty);
+				//	break;
+				//case 2:
+				//	piece->getRnd()->Choose(AbusiveUpgrades).Apply(piece, Difficulty);
+				//	break;
+				//default:
+				//	piece->getRnd()->Choose(HardcoreUpgrades).Apply(piece, Difficulty);
+				//	break;
 			}
 		}
 

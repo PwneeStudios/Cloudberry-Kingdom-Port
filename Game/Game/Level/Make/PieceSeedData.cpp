@@ -6,6 +6,53 @@
 namespace CloudberryKingdom
 {
 
+	struct MetaGameEscalationProxy : public Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
+	{
+		void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
+		{
+            boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
+            Params->StartFrame = 90;
+            Params->FillType = Coin_Parameters::FillTypes_REGULAR;
+		}
+	};
+
+	struct MetaGameTimeCrisisProxy : public Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
+	{
+		void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
+		{
+			boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
+			Params->FillType = Coin_Parameters::FillTypes_RUSH;
+		}
+	};
+
+    void PieceSeedData::ApplyMetaGameStyling()
+    {
+        switch (MyMetaGameType)
+        {
+            case MetaGameType_ESCALATION:
+                // Shorten the initial computer delay
+                Style->ComputerWaitLengthRange = Vector2(8, 35);
+
+                Style->MyModParams->Add( boost::make_shared<MetaGameEscalationProxy>() );
+
+                break;
+
+            case MetaGameType_TIME_CRISIS:
+                // Shorten the initial computer delay
+                Style->ComputerWaitLengthRange = Vector2(4, 23);
+
+                // Only one path
+                Paths = 1; LockNumOfPaths = true;
+
+				Style->MyModParams->Add( boost::make_shared<MetaGameTimeCrisisProxy>() );
+
+                break;
+
+            default:
+                break;
+        }
+    }
+
 	void PieceSeedData::CalculateSimple()
 	{
 		MyUpgrades1->CalcGenData( MyGenData->gen1, Style );
@@ -140,6 +187,8 @@ namespace CloudberryKingdom
 
 	void PieceSeedData::InitializeInstanceFields()
 	{
+		MyMetaGameType = MetaGameType_NONE;
+
 		CheckpointsAtStart = false; InitialCheckpointsHere = false;
 
 		MyPieceIndex = 0;

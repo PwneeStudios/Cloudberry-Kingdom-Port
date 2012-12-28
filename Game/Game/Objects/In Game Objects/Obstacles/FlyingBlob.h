@@ -98,14 +98,16 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<AABox> Box, Box2;
 
-		int Life, StartLife;
+		float Life, StartLife;
 
 		int Direction;
 
 		bool NeverSkip;
 
 	
-		boost::shared_ptr<Bob> KillingBob;
+        Vector2 KilledLocation;
+        boost::shared_ptr<Bob> KillingBob, KillingBob2, KillingBob3;
+        int KillBobTimeStamp;
 
 	
 		void SetColor( BlobColor color );

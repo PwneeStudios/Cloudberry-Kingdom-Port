@@ -145,6 +145,13 @@ enum LevelGeometry
 	LevelGeometry_BIG
 };
 
+enum MetaGameType
+{ 
+	MetaGameType_NONE,
+	MetaGameType_ESCALATION,
+	MetaGameType_TIME_CRISIS
+};
+
 enum LevelZoom
 {
 	LevelZoom_NORMAL,
@@ -290,7 +297,8 @@ enum LadderType
 enum BoxStyle
 {
 	BoxStyle_TOP_ONLY,
-	BoxStyle_FULL_BOX
+	BoxStyle_FULL_BOX,
+	BoxStyle_NO_SIDES
 };
 
 enum TimeTypes
@@ -359,7 +367,7 @@ enum BobDeathType
 	BobDeathType_LASER,
 	BobDeathType_LAVA_FLOW,
 	BobDeathType_FALLING_SPIKE,
-	BobDeathType_UNNAMED1,
+	BobDeathType_SERPENT,
 	BobDeathType_UNNAMED2,
 	BobDeathType_UNNAMED3,
 	BobDeathType_UNNAMED4,

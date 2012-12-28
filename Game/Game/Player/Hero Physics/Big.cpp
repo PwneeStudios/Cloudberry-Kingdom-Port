@@ -1,11 +1,14 @@
 ﻿#include <global_header.h>
 
+#include <MasterHack.h>
+
 namespace CloudberryKingdom
 {
 
 	void BobPhsxBig::InitializeStatics()
 	{
 		BobPhsxBig::instance = boost::make_shared<BobPhsxBig>();
+			InitBobPhsxSingleton( BobPhsxBig::instance );
 	}
 
 	// Statics
@@ -42,7 +45,13 @@ namespace CloudberryKingdom
 		Name = Localization::Words_FAT_BOB;
 		Adjective = std::wstring( L"Fatty" );
 
-		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.55f );
+		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.45f );
+
+        float scale = 1.57f / 1.4f;
+        boost::static_pointer_cast<PictureIcon>( Icon )->IconQuad->Quad_Renamed.v0.Pos.X *= scale;
+        boost::static_pointer_cast<PictureIcon>( Icon )->IconQuad->Quad_Renamed.v1.Pos.X *= scale;
+		boost::static_pointer_cast<PictureIcon>( Icon )->IconQuad->Quad_Renamed.v2.Pos.X *= scale;
+        boost::static_pointer_cast<PictureIcon>( Icon )->IconQuad->Quad_Renamed.v3.Pos.X *= scale;
 	}
 
 	const boost::shared_ptr<BobPhsxBig> &BobPhsxBig::getInstance()
@@ -54,5 +63,6 @@ namespace CloudberryKingdom
 	{
 		// Pulled out to avoid using shared_from_this inside constructor.
 		//Set( shared_from_this() );
+		DefaultValues();
 	}
 }

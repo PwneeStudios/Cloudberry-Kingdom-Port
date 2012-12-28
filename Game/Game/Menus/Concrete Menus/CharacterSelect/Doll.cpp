@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include "Hacks/List.h"
+#include <Core\Tools\Set.h>
 
 #include <MasterHack.h>
 
@@ -128,6 +129,14 @@ namespace CloudberryKingdom
 			if ( ItemIndex[ i ] < 0 )
 				ItemIndex[ i ] = 0;
 	}
+
+    void Doll::MyDraw()
+    {
+        if ( CharacterSelectManager::FakeHide )
+            return;
+
+        CkBaseMenu::MyDraw();
+    }
 
 	void Doll::MyPhsxStep()
 	{

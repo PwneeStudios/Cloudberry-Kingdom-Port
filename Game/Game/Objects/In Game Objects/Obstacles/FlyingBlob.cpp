@@ -129,6 +129,9 @@ namespace CloudberryKingdom
 		Direction = -1;
 
 		GiveVelocity = false;
+
+        KillingBob = KillingBob2 = KillingBob3 = 0;
+        KillBobTimeStamp = 0;
 	}
 
 	void FlyingBlob::Init( Vector2 pos, const boost::shared_ptr<Level> &level )
@@ -292,6 +295,12 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::Death()
 	{
+        // Don't die if we were just recently squished but still have life left.
+        if ( getMyLevel()->PlayMode == 0 && !getMyLevel()->Watching && !getMyLevel()->Replay && Life > 0 && getMyLevel()->CurPhsxStep - KillBobTimeStamp < 40)
+        {
+            return;
+        }
+
 		getCore()->Active = false;
 		if ( DeleteOnDeath )
 			getCore()->getRecycle()->CollectObject( shared_from_this() );
@@ -302,7 +311,8 @@ namespace CloudberryKingdom
 		if ( KillingBob != 0 && KillingBob->GiveStats() )
 			KillingBob->getMyTempStats()->Blobs++;
 
-		Squish( Vector2() );
+		if ( Life < .1f )
+			Squish( Vector2() );
 	}
 
 	void FlyingBlob::Squish( Vector2 vel )
@@ -362,7 +372,7 @@ namespace CloudberryKingdom
 				if ( abs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
 					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * BobXFriction;
 				else
-					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7 / 4 * BobXFriction;
+					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7.f / 4.f * BobXFriction;
 			}
 		}
 	}
@@ -400,6 +410,12 @@ namespace CloudberryKingdom
 	void FlyingBlob::UpdatePos()
 	{
 		float Step = 0;
+
+        if ( getMyLevel()->PlayMode == 0 && KillingBob != 0 && !getMyLevel()->Watching && !getMyLevel()->Replay )
+        {
+            getCore()->Data.Position = KilledLocation;
+            return;
+        }
 
 		switch ( MyPhsxType )
 		{
@@ -499,7 +515,7 @@ namespace CloudberryKingdom
 		if ( getCore()->SkippedPhsx )
 			return;
 
-		if ( Life <= 0 )
+		if ( Life < 1 )
 			Death();
 
 		Box->SwapToCurrent();
@@ -535,6 +551,8 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::DrawGraphics()
 	{
+		if ( Life < 1 ) return;
+
 		if ( !getCore()->Held )
 		{
 			if ( !getCore()->Active || getCore()->SkippedPhsx )
@@ -694,13 +712,27 @@ namespace CloudberryKingdom
 
 			if ( DoInteraction && ( UnderFoot || SideHit ) )
 			{
+                if ( bob == KillingBob || bob == KillingBob2 || bob == KillingBob3 )
+                    return;
+
 				if ( boost::dynamic_pointer_cast<BobPhsxSpaceship>( getCore()->MyLevel->DefaultHeroType ) != 0 )
 					UnderFoot = false;
 
 				if ( UnderFoot )
 				{
-					Life--;
-					KillingBob = bob;
+                    if ( getMyLevel()->PlayMode == 0 && !getMyLevel()->Watching && !getMyLevel()->Replay )
+                    {
+                        Life -= .5f;
+                        KillBobTimeStamp = getMyLevel()->CurPhsxStep;
+                        Squish( Vector2(0) );
+                    }
+                    else
+                        Life--;
+
+                    if ( KillingBob == 0 ) { KillingBob = bob; KilledLocation = getPos(); }
+                    else if ( KillingBob2 == 0 ) KillingBob2 = bob;
+                    else if ( KillingBob3 == 0 ) KillingBob3 = bob;
+
 					if ( bob->GiveStats() )
 						bob->getMyTempStats()->Score += 50;
 
@@ -720,20 +752,13 @@ namespace CloudberryKingdom
 						bob->MyPhsx->LandOnSomething( true, shared_from_this() );
 					}
 
-					// This code is to modify the player's velocity rather than override it.
-					// (For when the velocity is large)
-					////else
-					////{
-					////    bob.MyPhsx.JumpLengthModifier = (30f - (bob.Core.Data.Velocity.Y - 4)) / 30f;
-					////    if (bob.MyPhsx.JumpLengthModifier > 0)
-					////        bob.MyPhsx.JumpLengthModifier = (float)Math.Pow(bob.MyPhsx.JumpLengthModifier, .385f);
-					////}
-
-					//bob.MyPhsx.JumpLengthModifier = 1.1f;
 					bob->MyPhsx->MaxJumpAccelMultiple = 1 + .8f * bob->MyPhsx->BlobMod;
 				}
 				else
-					bob->Die( BobDeathType_BLOB, shared_from_this() );
+                {
+                    if ( Life >= 1 )
+						bob->Die( BobDeathType_BLOB, shared_from_this() );
+				}
 			}
 		}
 	}
@@ -799,6 +824,8 @@ namespace CloudberryKingdom
 
 	void FlyingBlob::InitializeInstanceFields()
 	{
+		KillBobTimeStamp = 0;
+
 		MaxVel = 16;
 		MaxAcc = 2;
 		DistAccMod = 1;
