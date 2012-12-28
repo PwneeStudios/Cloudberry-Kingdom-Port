@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 				ItemIndex[ i ] = 0;
 	}
 
-    void JoinText::MyDraw()
+    void Doll::MyDraw()
     {
         if ( CharacterSelectManager::FakeHide )
             return;

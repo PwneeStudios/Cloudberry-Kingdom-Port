@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 						LastPress.push_back( *itr );
 
 						wchar_t wchar = static_cast<wchar_t>( *itr );
-						if ( IsAcceptableChar( wchar ) && (!LimitLength || MyText->FirstString().length() < MaxLength) )
+						if ( IsAcceptableChar( wchar ) && ( !LimitLength || static_cast<int>( MyText->FirstString().length() ) < MaxLength) )
 						{
 							MyText->AppendText( wchar );
 							Recenter();

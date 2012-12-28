@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<QuadClass> Background::TestQuad;
 	boost::shared_ptr<EzTexture> Background::TestTexture;
 
-		void AddDarkLayer( boost::shared_ptr<Background> b )
+		void Background::AddDarkLayer( const boost::shared_ptr<Background> &b )
         {
             boost::shared_ptr<BackgroundFloaterList> __46 = boost::make_shared<BackgroundFloaterList>();
             __46->Name = L"Dark";

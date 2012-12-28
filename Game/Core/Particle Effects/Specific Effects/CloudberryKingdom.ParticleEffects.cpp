@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-        static boost::shared_ptr<Particle> DieTemplate;
+        boost::shared_ptr<Particle> ParticleEffects::DieTemplate;
         
         void ParticleEffects::Init_CoinTemplate()
         {

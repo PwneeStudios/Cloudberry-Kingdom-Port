@@ -128,7 +128,7 @@ namespace CloudberryKingdom
 			Effect( obj->getCore()->Data.Position );
 
 			// Increase the bonus
-			MyGame->WaitThenDo( 2, boost::make_shared<TextEffectProxy>( shared_from_this() ) );
+			MyGame->WaitThenDo( 2, boost::make_shared<TextEffectProxy>( boost::static_pointer_cast<PerfectScoreObject>( shared_from_this() ) ) );
 			//setNextBonus( getNextBonus() + BonusIncrement );
 		}
 

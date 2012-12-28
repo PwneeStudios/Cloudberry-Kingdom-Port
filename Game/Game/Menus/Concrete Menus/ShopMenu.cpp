@@ -308,7 +308,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 
 	void ShopMenu::CharSelect()
 	{
-		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this(), false ) );
+		CharacterSelectManager::Start( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), false );
 	}
 
 	int ShopMenu::HatCompare( const boost::shared_ptr<Hat> &h1, const boost::shared_ptr<Hat> &h2 )

@@ -3,7 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	void NewHero::OnAdd()
+	void NewHero_GUI::OnAdd()
 	{
 		GUI_Panel::OnAdd();
 
@@ -29,45 +29,45 @@ namespace CloudberryKingdom
 			this->SlideIn( 0 );
 	}
 
-	NewHero::NewHero( const std::wstring &str ) :
+	NewHero_GUI::NewHero_GUI( const std::wstring &str ) :
 		Perma( false ),
 		Count( 0 )
 	{
 	}
-	boost::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str )
+	boost::shared_ptr<NewHero_GUI> NewHero_GUI::NewHero_GUI_Construct( const std::wstring &str )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( str, Vector2(), 1, false );
 
-		return boost::static_pointer_cast<NewHero>( shared_from_this() );
+		return boost::static_pointer_cast<NewHero_GUI>( shared_from_this() );
 	}
 
-	NewHero::NewHero( const std::wstring &str, Vector2 shift, float scale, bool perma ) :
+	NewHero_GUI::NewHero_GUI( const std::wstring &str, Vector2 shift, float scale, bool perma ) :
 		Perma( false ),
 		Count( 0 )
 	{
 	}
-	boost::shared_ptr<NewHero> NewHero::NewHero_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	boost::shared_ptr<NewHero_GUI> NewHero_GUI::NewHero_GUI_Construct( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
 		Init( str, shift, scale, perma );
 
-		return boost::static_pointer_cast<NewHero>( shared_from_this() );
+		return boost::static_pointer_cast<NewHero_GUI>( shared_from_this() );
 	}
 
-	boost::shared_ptr<NewHero> NewHero::HeroTitle( const std::wstring &str )
+	boost::shared_ptr<NewHero_GUI> NewHero_GUI::HeroTitle( const std::wstring &str )
 	{
-		boost::shared_ptr<NewHero> title = MakeMagic( NewHero, ( str, Vector2( 150, -130 ), 1.f, false ) );
+		boost::shared_ptr<NewHero_GUI> title = MakeMagic( NewHero_GUI, ( str, Vector2( 150, -130 ), 1.f, false ) );
 		title->SlideInLength = 55;
 
 		return title;
 	}
 
-	void NewHero::Init( const std::wstring &str, Vector2 shift, float scale, bool perma )
+	void NewHero_GUI::Init( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
 		SlideInLength = 84;
 
@@ -92,7 +92,7 @@ namespace CloudberryKingdom
 		text->ShadowColor = bColor( 30, 30, 30 );
 	}
 
-	void NewHero::MyPhsxStep()
+	void NewHero_GUI::MyPhsxStep()
 	{
 		GUI_Panel::MyPhsxStep();
 
@@ -124,7 +124,7 @@ namespace CloudberryKingdom
         }
 	}
 
-	void NewHero::InitializeInstanceFields()
+	void NewHero_GUI::InitializeInstanceFields()
 	{
 		Count = 0;
 	}

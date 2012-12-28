@@ -224,7 +224,7 @@ namespace CloudberryKingdom
 		}
         else if ( gamename == Localization::Words_MASOCHISTIC )
         {
-            clGui->LevelSeed->MyGameType = NormalGameData.Factory;
+            clGui->LevelSeed->MyGameType = NormalGameData::Factory;
             clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
             clGui->LevelSeed->Masochistic = true;
             clGui->SelectNormal();

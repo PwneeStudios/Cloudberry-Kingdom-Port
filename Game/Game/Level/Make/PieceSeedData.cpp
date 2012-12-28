@@ -6,9 +6,9 @@
 namespace CloudberryKingdom
 {
 
-	class MetaGameEscalationProxy : Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
+	struct MetaGameEscalationProxy : public Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
 	{
-		void Apply( boost::shared_ptr<Level> level, boost::shared_ptr<PieceSeedData> p )
+		void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 		{
             boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
             Params->StartFrame = 90;
@@ -16,9 +16,9 @@ namespace CloudberryKingdom
 		}
 	};
 
-	class MetaGameTimeCrisisProxy : Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
+	struct MetaGameTimeCrisisProxy : public Lambda_2<boost::shared_ptr<Level>, boost::shared_ptr<PieceSeedData> >
 	{
-		void Apply( boost::shared_ptr<Level> level, boost::shared_ptr<PieceSeedData> p )
+		void Apply( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &p )
 		{
 			boost::shared_ptr<Coin_Parameters> Params = boost::static_pointer_cast<Coin_Parameters>( p->Style->FindParams( Coin_AutoGen::getInstance() ) );
 			Params->FillType = Coin_Parameters::FillTypes_RUSH;

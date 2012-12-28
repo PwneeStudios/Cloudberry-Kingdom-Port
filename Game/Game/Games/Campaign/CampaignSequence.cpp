@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
+
 #include <Hacks/Parse.h>
 #include <Hacks/FileReader.h>
 #include <Hacks/String.h>
@@ -48,6 +50,8 @@ namespace CloudberryKingdom
 		return instance;
 	}
 
+	boost::shared_ptr<PerfectScoreObject> CampaignSequence::MyPerfectScoreObject = 0;
+
 	void CampaignSequence::Start( int Chapter )
 	{
 		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true ) );
@@ -66,7 +70,7 @@ namespace CloudberryKingdom
         return false;
     }
 
-		class OnSwapHelper : Lambda_1<boost::shared_ptr<LevelSeedData> >
+		struct OnSwapHelper : Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 			boost::shared_ptr<CampaignSequence> cs;
 			OnSwapHelper( boost::shared_ptr<CampaignSequence> _cs )
@@ -74,7 +78,7 @@ namespace CloudberryKingdom
 				cs = _cs;
 			}
 
-			void Apply( boost::shared_ptr<LevelSeedData> data )
+			void Apply( const boost::shared_ptr<LevelSeedData> &data )
 			{
 				cs->MyStringWorld_OnSwapToFirstLevel( data );
 			}
@@ -82,7 +86,7 @@ namespace CloudberryKingdom
 
     void CampaignSequence::AdditionalPreStart()
     {
-        MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapHelper>( shared_from_this() ) );
+        MyStringWorld->OnSwapToFirstLevel->Add( boost::make_shared<OnSwapHelper>( boost::static_pointer_cast<CampaignSequence>( shared_from_this() ) ) );
     }
 
     void CampaignSequence::MyStringWorld_OnSwapToFirstLevel( boost::shared_ptr<LevelSeedData> data )

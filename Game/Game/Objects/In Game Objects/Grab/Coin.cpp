@@ -156,7 +156,7 @@ namespace CloudberryKingdom
         {
             MyQuad->Quad_Renamed.Playing = true;
             MyQuad->Quad_Renamed.Loop = false;
-            MyQuad->Quad_Renamed.t = getMyLevel()->CurPhsxStep % 110;
+            MyQuad->Quad_Renamed.t = static_cast<float>( getMyLevel()->CurPhsxStep % 110 );
         }
 
 		if ( MyType == CoinType_RED )

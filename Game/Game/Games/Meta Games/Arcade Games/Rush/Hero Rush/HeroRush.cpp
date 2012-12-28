@@ -209,7 +209,7 @@ namespace CloudberryKingdom
 		// Adjust the piece seed data
 		for ( std::vector<boost::shared_ptr<PieceSeedData> >::const_iterator piece = data->PieceSeeds.begin(); piece != data->PieceSeeds.end(); ++piece )
 		{
-			piece->MyMetaGameType = MetaGameType_TIME_CRISIS;
+			( *piece )->MyMetaGameType = MetaGameType_TIME_CRISIS;
 		}
 
 		return data;

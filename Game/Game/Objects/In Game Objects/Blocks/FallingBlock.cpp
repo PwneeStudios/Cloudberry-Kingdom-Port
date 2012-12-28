@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		if ( State == FallingBlockState_REGULAR )
 		    SetState( FallingBlockState_TOUCHED );
 	
-		if ( bob->getCore()->Data.Velocity.Y > 1 0)
+		if ( bob->getCore()->Data.Velocity.Y > 10 )
 		    Life -= 8;
 		 /* */
 	}

@@ -57,7 +57,7 @@ namespace CloudberryKingdom
 		SetPos();
 	}
 
-    void JoinText::MyDraw()
+    void CharSelectBackdrop::MyDraw()
     {
         if ( CharacterSelectManager::FakeHide )
             return;

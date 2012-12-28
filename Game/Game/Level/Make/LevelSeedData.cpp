@@ -429,7 +429,7 @@ namespace CloudberryKingdom
 			p->Style->MyModParams->Add( boost::make_shared<_HasWall_ProcessProxy>() );
 		}
 
-		if (NewHero) PostMake->Add( boost::make_shared<_NewHeroProx>() );
+		if (NewHero) PostMake->Add( boost::make_shared<_NewHeroProxy>( shared_from_this() ) );
 
 		if ( NoStartDoor )
 			PostMake->Add( boost::make_shared<_NoStartDoorProxy>() );
@@ -481,7 +481,7 @@ namespace CloudberryKingdom
 
     void LevelSeedData::_NewHero( const boost::shared_ptr<Level> &level )
     {
-		level->MyGame->AddGameObject( NewHero( Localization::WordString( Localization::Words_NEW_HERO_UNLOCKED ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) );
+		level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString( Localization::Words_NEW_HERO_UNLOCKED ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) ) );
         level->MyLevelSeed->WaitLengthToOpenDoor = 150;
         level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
     }

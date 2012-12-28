@@ -70,13 +70,13 @@ namespace CloudberryKingdom
 		{
 			LeftWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Left" ) ) );
             LeftWheel->Show = true;
-            LeftWheel->SetColor( ColorHelper.GrayColor( .5f ) );
-            LeftWheel->MyEffect = Tools.HslGreenEffect;
+            LeftWheel->SetColor( ColorHelper::GrayColor( .5f ) );
+            LeftWheel->MyEffect = Tools::HslGreenEffect;
 
 			RightWheel = boost::dynamic_pointer_cast<Quad>( MyBob->PlayerObject->FindQuad( std::wstring( L"Wheel_Right" ) ) );
             RightWheel->Show = true;
-            RightWheel->MyEffect = Tools.HslGreenEffect;
-            RightWheel->SetColor( ColorHelper.GrayColor( .5f ) );
+            RightWheel->MyEffect = Tools::HslGreenEffect;
+            RightWheel->SetColor( ColorHelper::GrayColor( .5f ) );
 		}
 	}
 
@@ -155,7 +155,7 @@ namespace CloudberryKingdom
 
             int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
             float intensity = 1.3f * __min( .3f + ( MyBob->CurInput.xVec.X + .3f ), 1.f );
-            ParticleEffects.Thrust(MyBob->getCore()->MyLevel, layer, getPos() + Vector2(0, -20), Vector2(-1, 0), Vector2(-4, getyVel() ), intensity);
+            ParticleEffects::Thrust( MyBob->getCore()->MyLevel, layer, getPos() + Vector2(0, -20), Vector2(-1, 0), Vector2(-4, getyVel() ), intensity );
 		}
 	}
 
