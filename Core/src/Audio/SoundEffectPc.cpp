@@ -162,5 +162,8 @@ void SoundEffect::Load( const std::string &path )
 
 void SoundEffect::Play( float volume, float pitch, float pan )
 {
+	alSourcef( internal_->Source, AL_GAIN, volume );
+	alSourcef( internal_->Source, AL_PITCH, powf( 2.f, pitch ) );
+	alSource3f( internal_->Source, AL_POSITION, pan, 0, 0 );
 	alSourcePlay( internal_->Source );
 }

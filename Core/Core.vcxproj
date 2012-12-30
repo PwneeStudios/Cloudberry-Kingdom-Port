@@ -28,6 +28,7 @@
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Audio\AudioEnums.h" />
+    <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />
     <ClInclude Include="include\Audio\Song.h" />
     <ClInclude Include="include\Audio\SoundEffect.h" />
@@ -71,6 +72,7 @@
     <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
     <ClInclude Include="include\Utility\Mutex.h" />
+    <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
     <ClInclude Include="include\Input\GamePad.h" />
@@ -99,6 +101,14 @@
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
     <ClCompile Include="src\Audio\MediaPlayerPc.cpp" />
+    <ClCompile Include="src\Audio\MediaPlayerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Content\FilesystemWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>

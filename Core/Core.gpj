@@ -1,6 +1,8 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Audio\MediaPlayerWiiU.cpp
+src\Audio\SoundEffectWiiU.cpp
 src\Utility\MutexWiiU.cpp
 src\Input\GamePadWiiU.cpp
 src\Graphics\EffectWiiU.cpp

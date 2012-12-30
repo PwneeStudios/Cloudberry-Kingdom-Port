@@ -91,7 +91,7 @@ public:
 	 */
 	unsigned int Size()
 	{
-		return size;
+		return size_;
 	}
 
 };
