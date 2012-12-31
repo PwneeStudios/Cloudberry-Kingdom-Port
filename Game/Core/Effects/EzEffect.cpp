@@ -29,8 +29,8 @@ namespace CloudberryKingdom
 
 		ExtraTexture1 = texture;
 
-		if ( texture != 0 )
-			ExtraTexture1_Param->SetValue( texture->getTex() );
+		/*if ( texture != 0 )
+			ExtraTexture1_Param->SetValue( texture->getTex() );*/
 	}
 
 	void EzEffect::SetExtraTexture2( const boost::shared_ptr<EzTexture> &texture )
@@ -40,8 +40,8 @@ namespace CloudberryKingdom
 
 		ExtraTexture2 = texture;
 
-		if ( texture != 0 )
-			ExtraTexture2_Param->SetValue( texture->getTex() );
+		/*if ( texture != 0 )
+			ExtraTexture2_Param->SetValue( texture->getTex() );*/
 	}
 
 	void EzEffect::InitializeInstanceFields()

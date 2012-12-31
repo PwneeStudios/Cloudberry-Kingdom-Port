@@ -84,6 +84,7 @@ void TexturePc::GpuDestroy()
 
 void TexturePc::Activate( unsigned int sampler )
 {
+	glActiveTexture( GL_TEXTURE0 + sampler );
 	glBindTexture( GL_TEXTURE_2D, internal_->TexturePcId );
 }
 

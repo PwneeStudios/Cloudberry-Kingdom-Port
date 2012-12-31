@@ -3,6 +3,8 @@
 #include <cassert>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
+#include <Content/Wad.h>
+#include <Core.h>
 #include <cstring>
 #include <fstream>
 #include <GL/glew.h>
@@ -285,7 +287,11 @@ void QuadDrawerPc::Flush()
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-	glActiveTexture( GL_TEXTURE0 + 0 );
+	ResourcePtr< Texture > castle = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Backdrop_2.png" );
+	castle->Activate( 2 );
+
+	ResourcePtr< Texture > mask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Mask.png" );
+	mask->Activate( 1 );
 
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )

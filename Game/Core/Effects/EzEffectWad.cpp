@@ -76,8 +76,10 @@ namespace CloudberryKingdom
 		Neweffect->xCameraAspect = effect->Parameters( "u_cameraAspect" );
 		Neweffect->xCameraPos = effect->Parameters("u_cameraPos" );
 
-		Neweffect->ExtraTexture1_Param = effect->Parameters( "ExtraTexture1" );
-		Neweffect->ExtraTexture2_Param = effect->Parameters( "ExtraTexture2" );
+		Neweffect->ExtraTexture1_Param = effect->Parameters( "u_backTexture" );
+		Neweffect->ExtraTexture1_Param->SetValue( 1 );
+		Neweffect->ExtraTexture2_Param = effect->Parameters( "u_maskTexture" );
+		Neweffect->ExtraTexture1_Param->SetValue( 2 );
 
 		Neweffect->Hsl = effect->Parameters( "u_colorMatrix" );
 
