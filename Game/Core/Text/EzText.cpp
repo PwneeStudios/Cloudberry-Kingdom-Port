@@ -659,8 +659,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				{
 					Parse_Type = ParseData_PIC;
 
-	//C# TO C++ CONVERTER TODO TASK: There is no direct native C++ equivalent to the .NET String 'Split' method:
-					std::vector<std::wstring> string_bits; // = str.Split( L',' );
+					std::vector<std::wstring> string_bits;
 					Split( str, ',', string_bits );
 
 					Comma1 = str.find( std::wstring( L"," ) );
@@ -1171,23 +1170,26 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				piccolor = ColorHelper::PremultiplyAlpha( piccolor );
 
 				Vector2 pos = Loc + getScale() * ZoomMod * Vector2( static_cast<float>( (*pic)->rect.X ), static_cast<float>( (*pic)->rect.Y ) );
-				Vector2 scale = getScale() * ZoomMod * Vector2((*pic)->rect.Width / static_cast<float>((*pic)->tex->Width), (*pic)->rect.Height / static_cast<float>((*pic)->tex->Height));
+				//Vector2 scale = getScale() * ZoomMod * Vector2((*pic)->rect.Width / static_cast<float>((*pic)->tex->Width), (*pic)->rect.Height / static_cast<float>((*pic)->tex->Height));
+				Vector2 scale = getScale() * ZoomMod * Vector2( (*pic)->rect.Width, (*pic)->rect.Height );
 
 				//Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects_None, 0 );
 
-				pos = Tools::ToWorldCoordinates( pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X ) + Position;
-				scale *= 1000.f / 320.f;
-				
-				::SimpleQuad sq;
-				sq.V[0] = pos;
-				sq.V[1] = pos + Vector2( 0, scale.Y );
-				sq.V[2] = pos + Vector2( scale.X, scale.Y );
-				sq.V[3] = pos + Vector2( scale.X, 0 );
+				Vector2 pos2 = pos + scale;
+				pos = Tools::ToWorldCoordinates( pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
+				pos2 = Tools::ToWorldCoordinates( pos2, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
+				//scale *= 1000.f / 320.f;
 
-				sq.V[0] = Vector2(0, 1);
-				sq.V[1] = Vector2(0, 0);
-				sq.V[2] = Vector2(1, 0);
-				sq.V[3] = Vector2(1, 1);
+				::SimpleQuad sq;
+				sq.V[0] = Vector2( pos.X, pos2.Y );
+				sq.V[1] = Vector2( pos.X, pos.Y );
+				sq.V[2] = Vector2( pos2.X, pos.Y );
+				sq.V[3] = Vector2( pos2.X, pos2.Y );
+
+				sq.T[0] = Vector2(0, 1);
+				sq.T[1] = Vector2(0, 0);
+				sq.T[2] = Vector2(1, 0);
+				sq.T[3] = Vector2(1, 1);
 				
 				sq.Diffuse = ( *pic )->tex->getTex()->texture_;
 				sq.Color = Vector4(1);
