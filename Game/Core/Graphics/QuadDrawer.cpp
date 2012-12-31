@@ -399,7 +399,7 @@ namespace CloudberryKingdom
 
 		Vector2 Tangent = x2 - x1;
 		Vector2 Normal = Vector2( Tangent.Y, -Tangent.X );
-		Normal.Normalize();
+		Normal.FastNormalize();
 
 		LineQuad.MyEffect = DefaultEffect;
 		if ( fx == 0 )
@@ -456,7 +456,7 @@ namespace CloudberryKingdom
 		color = ColorHelper::PremultiplyAlpha( color );
 
 		Vector2 Tangent = x2 - x1;
-		Tangent.Normalize();
+		Tangent.FastNormalize();
 
 		Vector2 Mid1 = x1 + Tangent * width / Tex1->getAspectRatio();
 		Vector2 Mid2 = x2 - Tangent * width / Tex3->getAspectRatio();

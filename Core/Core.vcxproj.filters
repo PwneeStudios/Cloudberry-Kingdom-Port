@@ -392,5 +392,8 @@
     <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\Math\Vectors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

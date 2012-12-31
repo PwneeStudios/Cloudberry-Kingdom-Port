@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 			Length = LevelLength_Short;
 		else
 		{
-			float t = static_cast<float>( ( ( ( Index + 1 ) % LevelsPerDifficulty ) / 5 + 1 ) / 5 );
+			float t = static_cast<float>( ( ( ( Index + 1 ) % LevelsPerDifficulty ) / 5 + 1 ) / 5.f );
 			Length = CoreMath::LerpRestrict( LevelLength_Short, LevelLength_Long, t );
 		}
 

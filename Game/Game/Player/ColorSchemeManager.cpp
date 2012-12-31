@@ -81,6 +81,8 @@ namespace CloudberryKingdom
 		HatInfo = std::vector<boost::shared_ptr<Hat> >();
 		BeardInfo = std::vector<boost::shared_ptr<Hat> >();
 
+		CapeOn = boost::make_shared<CapeOnLambda>();
+
 		// Fill the beard list
 		boost::shared_ptr<Hat> beard;
 
