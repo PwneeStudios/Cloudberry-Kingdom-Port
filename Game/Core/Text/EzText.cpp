@@ -1171,7 +1171,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 				Vector2 pos = Loc + getScale() * ZoomMod * Vector2( static_cast<float>( (*pic)->rect.X ), static_cast<float>( (*pic)->rect.Y ) );
 				//Vector2 scale = getScale() * ZoomMod * Vector2((*pic)->rect.Width / static_cast<float>((*pic)->tex->Width), (*pic)->rect.Height / static_cast<float>((*pic)->tex->Height));
-				Vector2 scale = getScale() * ZoomMod * Vector2( (*pic)->rect.Width, (*pic)->rect.Height );
+				Vector2 scale = getScale() * ZoomMod * Vector2( static_cast<float>( (*pic)->rect.Width ), static_cast<float>( (*pic)->rect.Height ) );
 
 				//Tools::Render->MySpriteBatch->Draw( ( *pic )->tex->getTex(), pos, 0, piccolor, 0, Vector2(), scale, SpriteEffects_None, 0 );
 

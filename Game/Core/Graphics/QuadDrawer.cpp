@@ -86,7 +86,13 @@ namespace CloudberryKingdom
 
 	void QuadDrawer::DrawQuad( const boost::shared_ptr<Quad> &quad )
 	{
-		if ( i + 6 > N || i != 0 && ( CurrentEffect->effect != quad->MyEffect->effect || CurrentTexture->getTex() != quad->MyTexture->getTex() || CurrentMatrixSignature != quad->MyMatrixSignature ) )
+		if ( //i + 6 > N || i != 0 &&
+			//i + 6 >= N || i != 0
+			//&&
+			( CurrentTexture != 0 && CurrentEffect != 0 ) &&
+			( CurrentEffect->effect != quad->MyEffect->effect ||
+			  //CurrentTexture->getTex() != quad->MyTexture->getTex() ||
+			  CurrentMatrixSignature != quad->MyMatrixSignature ) )
 			Flush();
 
 		if ( i == 0 )
@@ -176,10 +182,10 @@ namespace CloudberryKingdom
 			Illumination = quad.Illumination;
 
 		if ( i + 6 >= N || CurrentEffect->effect != quad.MyEffect->effect
-			|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
-			&& !quad.getMyTexture()->FromPacked
-			|| CurrentTexture != quad.getMyTexture()->Packed
-			&& quad.getMyTexture()->FromPacked
+			//|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
+			//&& !quad.getMyTexture()->FromPacked
+			//|| CurrentTexture != quad.getMyTexture()->Packed
+			//&& quad.getMyTexture()->FromPacked
 			|| CurrentEffect->CurrentIllumination != Illumination )
 			Flush();
 
@@ -258,10 +264,10 @@ namespace CloudberryKingdom
 			//&&
 			( CurrentTexture != 0 && CurrentEffect != 0 ) &&
 			( CurrentEffect->effect != quad.MyEffect->effect
-				|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
-				&& !quad.getMyTexture()->FromPacked
-				|| CurrentTexture != quad.getMyTexture()->Packed
-				&& quad.getMyTexture()->FromPacked
+				//|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
+				//&& !quad.getMyTexture()->FromPacked
+				//|| CurrentTexture != quad.getMyTexture()->Packed
+				//&& quad.getMyTexture()->FromPacked
 				|| Current_U_Wrap != quad.U_Wrap
 				|| Current_V_Wrap != quad.V_Wrap
 				|| CurrentEffect->CurrentIllumination != Illumination ) )
@@ -399,7 +405,7 @@ namespace CloudberryKingdom
 
 		Vector2 Tangent = x2 - x1;
 		Vector2 Normal = Vector2( Tangent.Y, -Tangent.X );
-		Normal.Normalize();
+		Normal.FastNormalize();
 
 		LineQuad.MyEffect = DefaultEffect;
 		if ( fx == 0 )
@@ -456,7 +462,7 @@ namespace CloudberryKingdom
 		color = ColorHelper::PremultiplyAlpha( color );
 
 		Vector2 Tangent = x2 - x1;
-		Tangent.Normalize();
+		Tangent.FastNormalize();
 
 		Vector2 Mid1 = x1 + Tangent * width / Tex1->getAspectRatio();
 		Vector2 Mid2 = x2 - Tangent * width / Tex3->getAspectRatio();

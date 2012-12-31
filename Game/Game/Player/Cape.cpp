@@ -3,6 +3,12 @@
 #include "Graphics/Effect.h"
 #include "Graphics/EffectTechnique.h"
 
+#include <Core.h>
+#include <Content/Wad.h>
+#include <Graphics/Types.h>
+#include <Graphics/QuadDrawer.h>
+#include <Utility/Log.h>
+
 namespace CloudberryKingdom
 {
 
@@ -410,10 +416,10 @@ namespace CloudberryKingdom
 					Vector2 Center = ( Nodes[ j ].Data.Position + Nodes[ k ].Data.Position ) / 2;
 					Vector2 dif;
 					dif = ( Nodes[ j ].Data.Position - Center );
-					dif.Normalize();
+					dif.FastNormalize();
 					Nodes[ j ].Data.Position = Center + ext * L / 2 * dif;
 					dif = ( Nodes[ k ].Data.Position - Center );
-					dif.Normalize();
+					dif.FastNormalize();
 					Nodes[ k ].Data.Position = Center + ext * L / 2 * dif;
 				}
 
@@ -479,14 +485,35 @@ namespace CloudberryKingdom
 		if ( !Effect->IsUpToDate )
 			Effect->SetCameraParameters();
 
+		// From old cape draw code
+		//Effect->xTexture->SetValue( MyQuad->Quad_Renamed.getMyTexture()->getTex() );
+		//Effect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-		Effect->xTexture->SetValue( MyQuad->Quad_Renamed.getMyTexture()->getTex() );
-		Effect->effect->CurrentTechnique->Passes[ 0 ]->Apply();
-
-		//Tools.QDrawer.SetAddressMode(true, true);
 		Tools::QDrawer->SetAddressMode( false, false );
 
-		Tools::Device->DrawUserPrimitives( GfxPrimitiveType_TriangleList, Vertices, 0, NumTriangles );
+		// From old cape draw code
+		//Tools::Device->DrawUserPrimitives( GfxPrimitiveType_TriangleList, Vertices, 0, NumTriangles );
+
+		// New cape drawing code here
+		for ( int i = 0; i < NumVertices; i += 6 )
+		{
+			::SimpleQuad sq;
+			sq.Color = Vertices[ i ].TheColor.ToVector4();
+			sq.V[0] = Vertices[ i ].xy;
+			sq.V[1] = Vertices[ i + 1 ].xy;
+			sq.V[3] = Vertices[ i + 2 ].xy;
+			sq.V[2] = Vertices[ i + 3 ].xy;
+
+			sq.T[0] = Vertices[ i ].uv;
+			sq.T[1] = Vertices[ i + 1 ].uv;
+			sq.T[3] = Vertices[ i + 2 ].uv;
+			sq.T[2] = Vertices[ i + 3 ].uv;
+
+			sq.Diffuse = MyQuad->Quad_Renamed.getMyTexture()->getTex()->texture_;
+			
+			QUAD_DRAWER->Draw( sq );
+		}
+
 
 		Tools::QDrawer->Flush();
 
