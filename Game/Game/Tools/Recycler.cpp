@@ -117,6 +117,8 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<ObjectBase> RecycleBin::NewObject( bool BoxesOnly )
 	{
+		boost::shared_ptr<LavaBlock_Castle> lava;
+
 		switch ( MyType )
 		{
 			case ObjectType_FLYING_BLOB:
@@ -142,8 +144,9 @@ namespace CloudberryKingdom
 			case ObjectType_BOUNCY_BLOCK:
 				return boost::make_shared<BouncyBlock>( BoxesOnly );
 			case ObjectType_LAVA_BLOCK:
-				//return new LavaBlock(BoxesOnly);
-				return boost::make_shared<LavaBlock_Castle>( BoxesOnly );
+				lava = boost::make_shared<LavaBlock_Castle>( BoxesOnly );
+				lava->MakeNew();
+				return lava;
 			case ObjectType_BOULDER:
 				return boost::make_shared<Boulder>( BoxesOnly );
 			case ObjectType_SPIKEY_GUY:
