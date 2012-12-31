@@ -253,8 +253,11 @@ namespace CloudberryKingdom
 		else
 			Illumination = quad.Illumination;
 
-		if ( i + 6 >= N || i != 0
-			&& ( CurrentEffect->effect != quad.MyEffect->effect
+		if (
+			//i + 6 >= N || i != 0
+			//&&
+			( CurrentTexture != 0 && CurrentEffect != 0 ) &&
+			( CurrentEffect->effect != quad.MyEffect->effect
 				|| CurrentTexture->getTex() != quad.getMyTexture()->getTex()
 				&& !quad.getMyTexture()->FromPacked
 				|| CurrentTexture != quad.getMyTexture()->Packed

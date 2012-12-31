@@ -11,6 +11,17 @@ namespace CloudberryKingdom
 	std::vector<float> OscillateParams::JiggleScale = VecFromArray( _oscillateparams );
 
 
+	OscillateParams::OscillateParams()
+	{
+		MyType = static_cast<Type>( 0 );
+		w = base_value = max_addition = 0;
+
+		Count = 0;
+
+		UseGlobalCount = false;
+		scale = 0;
+		Done = false;
+	}
 
 	void OscillateParams::SetType( Type type )
 	{

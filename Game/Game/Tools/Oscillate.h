@@ -3,14 +3,13 @@
 
 #include <global_header.h>
 
-
-
-
 namespace CloudberryKingdom
 {
 	struct OscillateParams
 	{
 	
+		OscillateParams();
+
 		enum Type
 		{
 			Type_NONE,
@@ -19,7 +18,6 @@ namespace CloudberryKingdom
 			Type_GET_BIG_SLOW,
 			Type_JIGGLE
 		};
-
 	
 		Type MyType;
 		void SetType( Type type );
@@ -34,13 +32,10 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Dummy variable for internal use.
 		/// </summary>
-	
 		float scale;
-
 	
 		void Set( float w, float base_value, float max_addition );
 
-	
 		float TargetJiggleScale;
 	
 		void Reset();
@@ -58,8 +53,8 @@ namespace CloudberryKingdom
 
 		float GetScale_GetBig( float speed );
 
-	
 		float GetScale();
+
 	};
 
 	struct Oscillate
@@ -68,6 +63,7 @@ namespace CloudberryKingdom
 		static float GetAngle( float Step, float w );
 
 		static float GetScale_Oscillate( float Step, float w, float base_value, float max_addition );
+
 	};
 }
 

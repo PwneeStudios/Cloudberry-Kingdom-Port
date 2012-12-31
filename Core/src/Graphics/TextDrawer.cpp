@@ -46,6 +46,8 @@ Vector2 TextDrawer::MeasureString( const ResourcePtr< Font > &font_, const std::
 {
 	Vector2 size;
 
+	if ( text.length() == 0 ) return Vector2();
+
 	for( size_t i = 0; i < text.size(); ++i )
 	{
 		const Vector2 &dim = font_->GetDimensions( text[ i ] );
