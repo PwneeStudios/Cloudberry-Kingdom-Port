@@ -353,8 +353,28 @@
 
 	const Matrix Matrix::operator * ( const Matrix &m ) const
 	{
-		// FIXME: Implement this.
-		return Matrix::Identity();
+		Matrix product = Matrix(
+			M11 * m.M11 + M12 * m.M21 + M13 * m.M31 + M14 * m.M41,
+			M11 * m.M12 + M12 * m.M22 + M13 * m.M32 + M14 * m.M42,
+			M11 * m.M13 + M12 * m.M23 + M13 * m.M33 + M14 * m.M43,
+			M11 * m.M14 + M12 * m.M24 + M13 * m.M34 + M14 * m.M44,
+
+			M21 * m.M11 + M22 * m.M21 + M23 * m.M31 + M24 * m.M41,
+			M21 * m.M12 + M22 * m.M22 + M23 * m.M32 + M24 * m.M42,
+			M21 * m.M13 + M22 * m.M23 + M23 * m.M33 + M24 * m.M43,
+			M21 * m.M14 + M22 * m.M24 + M23 * m.M34 + M24 * m.M44,
+
+			M31 * m.M11 + M32 * m.M21 + M33 * m.M31 + M34 * m.M41,
+			M31 * m.M12 + M32 * m.M22 + M33 * m.M32 + M34 * m.M42,
+			M31 * m.M13 + M32 * m.M23 + M33 * m.M33 + M34 * m.M43,
+			M31 * m.M14 + M32 * m.M24 + M33 * m.M34 + M34 * m.M44,
+
+			M41 * m.M11 + M42 * m.M21 + M43 * m.M31 + M44 * m.M41,
+			M41 * m.M12 + M42 * m.M22 + M43 * m.M32 + M44 * m.M42,
+			M41 * m.M13 + M42 * m.M23 + M43 * m.M33 + M44 * m.M43,
+			M41 * m.M14 + M42 * m.M24 + M43 * m.M34 + M44 * m.M44 );
+
+		return product;
 	}
 
 const Matrix operator * ( float s, const Matrix &m )

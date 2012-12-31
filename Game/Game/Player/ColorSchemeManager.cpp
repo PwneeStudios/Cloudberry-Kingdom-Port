@@ -483,23 +483,23 @@ namespace CloudberryKingdom
 		//colorm = HsvTransform(1.25f, 1.3f, 0) * LinearColorTransform(305); // Yellow
 
 		// Fill the skin color list
-		ColorList.push_back( _i( 3500, 0, Color( static_cast<unsigned char>( 1 ), static_cast<unsigned char>( 1 ), static_cast<unsigned char>( 1 ) ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_WHITE ) ); // 0
+		ColorList.push_back( _i( 3500, 0, Color( 1.f, 1.f, 1.f ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_WHITE ) ); // 0
 		ColorList.push_back( _i( 3501, 0, Color::Silver, ColorHelper::HsvTransform( .85f, 0, 0 ), Localization::Words_SILVER ) ); // 1
 		ColorList.push_back( _i( 3502, 0, Color::Gray, ColorHelper::HsvTransform( .525f, 0, 0 ), Localization::Words_GRAY ) ); // 2
-		ColorList.push_back( _i( 3503, 0, Color( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ) ), Color( static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ) ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_BLACK ) ); // 3
+		ColorList.push_back( _i( 3503, 0, Color( 0.f, 0.f, 0.f ), Color( static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ) ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_BLACK ) ); // 3
 
 		ColorList.push_back( _i( 3504, 0, Color::Cyan, ColorHelper::LinearColorTransform( 45 ), Localization::Words_CYAN ) ); // 4
-		ColorList.push_back( _i( 3505, 0, Color( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 1 ) ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_BLUE ) ); // 5
+		ColorList.push_back( _i( 3505, 0, Color( 0.f, 0.f, 1.f ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_BLUE ) ); // 5
 		ColorList.push_back( _i( 3506, 0, Color::DarkBlue, ColorHelper::LinearColorTransform( 80 ), Localization::Words_TEAL ) ); // 6
 		ColorList.push_back( _i( 3507, 0, Color::Indigo, ColorHelper::HsvTransform( .8f, 1.3f, 225 ), Localization::Words_INDIGO ) ); // 7
 		ColorList.push_back( _i( 3508, 0, Color::Purple, ColorHelper::HsvTransform( .85f, 1.1f, 205 ), Localization::Words_PURPLE ) ); // 8
 		ColorList.push_back( _i( 3509, 0, Color::Brown, ColorHelper::HsvTransform( 1, 1, 80 ), Localization::Words_BROWN ) ); // 9
-		ColorList.push_back( _i( 3510, 0, Color( static_cast<unsigned char>( 1 ), static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 0 ) ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_RED ) ); // 10
+		ColorList.push_back( _i( 3510, 0, Color( 1.f, 0.f, 0.f ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_RED ) ); // 10
 		ColorList.push_back( _i( 3511, 0, Color::HotPink, ColorHelper::HsvTransform( 1.3f, 1.2f, 200 ), Localization::Words_HOT_PINK ) ); // 11
-		ColorList.push_back( _i( 3512, 0, Color( 1,.6f, 0 ),ColorHelper::HsvTransform( .9f, 1.3f, 110 ), Localization::Words_ORANGE ) ); // 12
+		ColorList.push_back( _i( 3512, 0, Color( 1, .6f, 0 ),ColorHelper::HsvTransform( .9f, 1.3f, 110 ), Localization::Words_ORANGE ) ); // 12
 		ColorList.push_back( _i( 3513, 0, Color::Gold, ColorHelper::HsvTransform( 1.3f, 1.2f, 100 ), Localization::Words_GOLD ) ); // 13
 		ColorList.push_back( _i( 3514, 0, Color::Yellow, ColorHelper::HsvTransform( 1.5f, 1.5f, 100 ), Localization::Words_YELLOW ) ); // 14
-		ColorList.push_back( _i( 3515, 0, Color( static_cast<unsigned char>( 0 ), static_cast<unsigned char>( 1 ), static_cast<unsigned char>( 0 ) ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_GREEN ) ); // 15
+		ColorList.push_back( _i( 3515, 0, Color( 0.f, 1.f, 0.f ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_GREEN ) ); // 15
 		ColorList.push_back( _i( 3516, 0, Color::LimeGreen, ColorHelper::HsvTransform( 1.25f, 1.35f, 0 ), Localization::Words_LIME_GREEN ) ); // 16
 		ColorList.push_back( _i( 3517, 0, Color::ForestGreen, ColorHelper::HsvTransform( .75f,.8f, 0 ), Localization::Words_FOREST_GREEN ) ); // 17
 
