@@ -657,7 +657,11 @@ namespace CloudberryKingdom
 	void QuadDrawer::Flush()
 	{
 		if ( CurrentTexture != 0 )
+		{
 			CurrentEffect->SetCameraParameters();
+			CurrentEffect->Hsl->SetValue( getCurrentMatrix() );
+		}
+
 		QUAD_DRAWER->Flush();
 		return; // FIXME: We shoudl not return.
 	//#if DEBUG

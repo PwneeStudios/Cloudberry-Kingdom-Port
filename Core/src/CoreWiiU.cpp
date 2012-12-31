@@ -1,6 +1,7 @@
 #include <CoreWiiU.h>
 
 #include <Architecture/Scheduler.h>
+#include <Audio/MediaPlayer.h>
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <cafe/procui.h>
@@ -56,12 +57,14 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	td_ = new TextDrawer;
 
 	GamePad::Initialize();
+	MediaPlayer::Initialize();
 }
 
 CoreWiiU::~CoreWiiU()
 {
 	LOG.Write( "SHUTDOWN START\n" );
 	
+	MediaPlayer::Shutdown();
 	GamePad::Shutdown();
 
 	delete td_;

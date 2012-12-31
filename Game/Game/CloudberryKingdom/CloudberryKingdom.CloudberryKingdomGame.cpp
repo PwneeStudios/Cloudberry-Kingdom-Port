@@ -3,7 +3,7 @@
 #include <Hacks/List.h>
 #include <Hacks/Queue.h>
 
-#include <Hacks/XNA/MediaPlayer.h>
+#include <Audio/MediaPlayer.h>
 
 #include <iostream>
 

@@ -2246,9 +2246,6 @@
     <ClInclude Include="Hacks\XNA\GraphicsDeviceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Hacks\XNA\MediaPlayer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Hacks\XNA\PreparingDeviceSettingsEventArgs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -2265,12 +2262,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\SignedInGamer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\Song.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\SoundEffect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\SpriteBatch.h">

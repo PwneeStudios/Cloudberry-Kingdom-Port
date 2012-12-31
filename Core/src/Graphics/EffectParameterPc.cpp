@@ -105,7 +105,7 @@ void EffectParameter::Apply()
 			glUniform4fv( internal_->Location, 1, &internal_->CachedVector4.X );
 			break;
 		case ParamType_Matrix:
-			glUniform4fv( internal_->Location, 4, internal_->CachedMatrix.M );
+			glUniformMatrix4fv( internal_->Location, 1, GL_TRUE, internal_->CachedMatrix.M );
 			break;
 		case ParamType_Texture:
 			break;

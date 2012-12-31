@@ -3,7 +3,7 @@
 #include "Hacks/List.h"
 #include "Hacks/String.h"
 
-#include "Hacks/XNA/MediaPlayer.h"
+#include <Audio/MediaPlayer.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 

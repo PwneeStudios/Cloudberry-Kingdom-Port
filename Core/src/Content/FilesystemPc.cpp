@@ -11,7 +11,7 @@ class FilePc : public File
 {
 	
 	std::fstream fs_;
-	unsigned int size;
+	unsigned int size_;
 
 private:
 
@@ -28,7 +28,7 @@ public:
 			| ( write ? std::ios_base::out | std::ios_base::trunc : 0 ) )
 	{
 		fs_.seekg( 0, std::ios_base::end );
-		size = fs_.tellg();
+		size_ = static_cast< unsigned int >( fs_.tellg() );
 		fs_.seekg( 0 );
 	}
 
@@ -91,7 +91,7 @@ public:
 	 */
 	unsigned int Size()
 	{
-		return size;
+		return size_;
 	}
 
 };

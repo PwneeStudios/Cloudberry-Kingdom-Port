@@ -2,8 +2,8 @@
 #define _CONTENTMANAGER_H_
 
 #include "Hacks/XNA/GameServiceContainer.h"
-#include <Hacks/XNA/SoundEffect.h>
-#include <Hacks/XNA/Song.h>
+#include <Audio/SoundEffect.h>
+#include <Audio/Song.h>
 #include <Hacks/XNA/Texture2D.h>
 #include <Hacks/XNA/SpriteFont.h>
 #include <Graphics/Effect.h>

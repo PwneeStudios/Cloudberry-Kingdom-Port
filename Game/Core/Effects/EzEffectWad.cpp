@@ -79,7 +79,7 @@ namespace CloudberryKingdom
 		Neweffect->ExtraTexture1_Param = effect->Parameters( "ExtraTexture1" );
 		Neweffect->ExtraTexture2_Param = effect->Parameters( "ExtraTexture2" );
 
-		Neweffect->Hsl = effect->Parameters( "ColorMatrix" );
+		Neweffect->Hsl = effect->Parameters( "u_colorMatrix" );
 
 		Neweffect->Simplest = effect->Techniques( "Simplest" );
 

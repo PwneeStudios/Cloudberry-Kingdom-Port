@@ -27,6 +27,11 @@
     <ClInclude Include="include\Architecture\SchedulerPc.h" />
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
+    <ClInclude Include="include\Audio\AudioEnums.h" />
+    <ClInclude Include="src\Audio\CKSounds.h" />
+    <ClInclude Include="include\Audio\MediaPlayer.h" />
+    <ClInclude Include="include\Audio\Song.h" />
+    <ClInclude Include="include\Audio\SoundEffect.h" />
     <ClInclude Include="include\Content\File.h" />
     <ClInclude Include="include\Content\FilesystemPc.h" />
     <ClInclude Include="include\Content\Filesystem.h" />
@@ -67,6 +72,7 @@
     <ClInclude Include="include\Utility\Limits.h" />
     <ClInclude Include="include\Utility\Log.h" />
     <ClInclude Include="include\Utility\Mutex.h" />
+    <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
     <ClInclude Include="include\Input\GamePad.h" />
@@ -94,6 +100,15 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
+    <ClCompile Include="src\Audio\MediaPlayerPc.cpp" />
+    <ClCompile Include="src\Audio\MediaPlayerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Content\FilesystemWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -154,6 +169,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Audio\SoundEffectPc.cpp" />
     <ClCompile Include="src\Utility\Log.cpp" />
     <ClCompile Include="src\Utility\MutexPc.cpp" />
     <ClCompile Include="src\Utility\MutexWiiU.cpp">
@@ -189,10 +205,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
