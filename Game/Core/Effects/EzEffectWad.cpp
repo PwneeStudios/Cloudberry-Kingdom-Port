@@ -71,6 +71,7 @@ namespace CloudberryKingdom
 		Neweffect->FlipVector = effect->Parameters( "u_flipVector" );
 		Neweffect->FlipCenter = effect->Parameters( "u_flipCenter" );
 		Neweffect->xTexture = effect->Parameters( "u_texture" );
+		Neweffect->xTexture->SetValue( 0 );
 		Neweffect->Illumination = effect->Parameters( "u_illumination" );
 		Neweffect->t = effect->Parameters( "t" );
 		Neweffect->xCameraAspect = effect->Parameters( "u_cameraAspect" );
@@ -79,7 +80,7 @@ namespace CloudberryKingdom
 		Neweffect->ExtraTexture1_Param = effect->Parameters( "u_backTexture" );
 		Neweffect->ExtraTexture1_Param->SetValue( 1 );
 		Neweffect->ExtraTexture2_Param = effect->Parameters( "u_maskTexture" );
-		Neweffect->ExtraTexture1_Param->SetValue( 2 );
+		Neweffect->ExtraTexture2_Param->SetValue( 2 );
 
 		Neweffect->Hsl = effect->Parameters( "u_colorMatrix" );
 

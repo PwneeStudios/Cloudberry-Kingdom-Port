@@ -12,7 +12,7 @@ uniform sampler2D u_maskTexture;
 void main()
 {
 	vec4 texColor = texture( u_texture, v_texcoord );
-	float mask = texture( u_maskTexture, v_texcoord ).g;
+	float mask = texture( u_maskTexture, v_texcoord ).a;
 
 	vec2 coordinates = ( vec2( v_position.x, -v_position.y ) + vec2( 1, 1 ) ) / 2;
 	vec4 backColor = texture( u_backTexture, coordinates );
@@ -20,7 +20,7 @@ void main()
 	vec4 output = v_color * texColor;
 	
 	if( mask > 0 )
-		output = ( 1 - output.a ) * backColor;// + output.a * output;
+		output = ( 1 - output.a ) * backColor + output.a * output;
 	
     gl_FragColor = output;
 }
