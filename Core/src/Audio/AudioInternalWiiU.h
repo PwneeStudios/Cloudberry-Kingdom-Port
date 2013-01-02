@@ -9,6 +9,7 @@ struct Voice
     AXVPB *AXVoice;
     SPSoundEntry *SPEntry;
 
+	bool Paused;
 	AXPBVE Ve;
 };
 

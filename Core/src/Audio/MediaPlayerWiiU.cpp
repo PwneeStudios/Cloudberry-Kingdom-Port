@@ -17,6 +17,8 @@ static u32 SPDLength;
 Voice Voices[ AX_MAX_VOICES ];
 AXPBCHMIX MixChannels[ AX_MAX_NUM_TV_CHS ];
 
+Voice *BGMusic;
+
 static void FrameCallback()
 {
 	for( int i = 0; i < AX_MAX_VOICES; ++i )
@@ -25,10 +27,17 @@ static void FrameCallback()
 
 		if( v.AXVoice && !AXVoiceIsProtected( v.AXVoice ) )
 		{
+			if( v.Paused )
+				continue;
+
 			if( AX_PB_STATE_STOP == v.AXVoice->state )
 			{
+				if( BGMusic == &v )
+					BGMusic = NULL;
+
 				AXFreeVoice( v.AXVoice );
 				v.AXVoice = NULL;
+				v.Paused = false;
 			}
 		}
 	}
@@ -40,6 +49,7 @@ void VoiceDropCallback( void *p )
 
 	Voices[ v->index ].AXVoice = NULL;
 	Voices[ v->index ].SPEntry = NULL;
+	Voices[ v->index ].Paused = false;
 }
 
 void MediaPlayer::Initialize()
@@ -70,6 +80,8 @@ void MediaPlayer::Initialize()
 	SPData = reinterpret_cast< u8 * >( buffer );
 
 	SPInitSoundTable( SPTable, SPData, NULL );
+
+	BGMusic = NULL;
 }
 
 void MediaPlayer::Shutdown()
@@ -82,18 +94,53 @@ void MediaPlayer::Shutdown()
 
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
+	MediaPlayer::Stop();
+
+	AXVPB *axVoice = AXAcquireVoice( AX_PRIORITY_NODROP, VoiceDropCallback, 0 );
+
+	if( axVoice )
+	{
+		AXVoiceBegin( axVoice );
+
+		BGMusic = &Voices[ axVoice->index ];
+		BGMusic->AXVoice = axVoice;
+
+		BGMusic->Ve.currentVolume = static_cast< u16 >( MediaPlayer::Volume * 32768 );
+		BGMusic->Ve.currentDelta = 0;
+		AXSetVoiceDeviceMix( axVoice, AX_DEVICE_TV, AX_TV_ID0, MixChannels );
+		AXSetVoiceVe( axVoice, &BGMusic->Ve );
+
+		AXSetVoiceSrcType( axVoice, AX_SRC_TYPE_LINEAR );
+		AXSetVoiceState( axVoice, AX_PB_STATE_RUN );
+
+		AXSetVoiceSrcRatio( axVoice, 1.f );
+		AXSetDeviceCompressor( AX_DEVICE_TV, 0 );
+
+		AXVoiceEnd( axVoice );
+	}
 }
 
 void MediaPlayer::Pause()
 {
+	if( BGMusic )
+		BGMusic->Paused = true;
 }
 
 void MediaPlayer::Resume()
 {
+	if( BGMusic )
+		BGMusic->Paused = false;
 }
 
 void MediaPlayer::Stop()
 {
+	if( BGMusic )
+	{
+		AXFreeVoice( BGMusic->AXVoice );
+		BGMusic->AXVoice = NULL;
+		BGMusic->Paused = false;
+		BGMusic = NULL;
+	}
 }
 
 MediaState MediaPlayer::GetState()

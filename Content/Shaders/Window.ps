@@ -17,11 +17,11 @@ void main()
 	vec2 coordinates = ( vec2( v_position.x, -v_position.y ) + vec2( 1, 1 ) ) / 2;
 	vec4 backColor = texture( u_backTexture, coordinates );
 	
-	vec4 output = v_color * texColor;
+	vec4 outColor = v_color * texColor;
 	
 	if( mask > 0 )
-		output = ( 1 - output.a ) * backColor + output.a * output;
+		outColor = ( 1 - outColor.a ) * backColor + outColor.a * outColor;
 	
-    gl_FragColor = output;
+    gl_FragColor = outColor;
 }
 
