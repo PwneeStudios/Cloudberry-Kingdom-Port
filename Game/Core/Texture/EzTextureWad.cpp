@@ -91,9 +91,13 @@ namespace CloudberryKingdom
 			// Get the name from the path
 			int i = path.rfind( std::wstring( L"/" ) );
 
-			// If the name is the path, return what we found
+			// If the name is the path then try a backslash
 			if ( i <= 0 )
-				return PathTexture;
+			{
+				i = path.rfind( std::wstring( L"\\" ) );
+				if ( i <= 0 )
+					return PathTexture;
+			}
 
 			// Otherwise find the name and return the result
 			std::wstring name = path.substr( i + 1 );

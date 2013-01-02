@@ -323,6 +323,17 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Old_Art_Holdover" ) );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Title" ) );
 
+		//for ( std::vector<boost::shared_ptr<EzTexture> >::const_iterator Tex = Tools::TextureWad->TextureList.begin(); Tex != Tools::TextureWad->TextureList.end(); ++Tex )
+		//{
+		//	// If texture hasn't been loaded yet, load it
+		//	if ( ( *Tex )->getTex() == 0 && !(*Tex)->FromCode )
+		//	{
+		//		( *Tex )->setTex( Tools::GameClass->getContent()->Load<Texture2D>( ( *Tex )->Path ) );
+
+		//		Resources::ResourceLoadedCountRef->setVal( Resources::ResourceLoadedCountRef->getVal() + 1 );
+		//	}
+		//}
+
 		//Tools::Write( _T( "ArtMusic done..." ) );
 		LOG.Write( "ArtMusic done...\n" );
 

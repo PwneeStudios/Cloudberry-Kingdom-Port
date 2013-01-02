@@ -163,6 +163,9 @@ namespace CloudberryKingdom
 		Challenge_HeroRush2::instance = boost::make_shared<Challenge_HeroRush2>();
 
 		CloudberryKingdomGame::TitleGameFactory = TitleGameData_MW::Factory;
+
+		// Load campaign
+		CampaignSequence::instance = boost::make_shared<CampaignSequence>();
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )

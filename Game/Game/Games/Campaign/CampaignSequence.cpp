@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		CampaignSequence::EndAction( level );
 	}
 
-	boost::shared_ptr<CampaignSequence> CampaignSequence::instance = boost::make_shared<CampaignSequence>();
+	boost::shared_ptr<CampaignSequence> CampaignSequence::instance;
 
 	const boost::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
 	{
@@ -97,11 +97,9 @@ namespace CloudberryKingdom
 
 	void CampaignSequence::MakeSeedList()
 	{
-		Seeds.push_back( 0 );
+		Seeds.push_back( L"" );
 
 		Tools::UseInvariantCulture();
-		//boost::shared_ptr<FileStream> stream = File->Open( std::wstring( L"Content/Campaign/CampaignList.txt" ), FileMode::Open, FileAccess::Read, FileShare::None );
-		//boost::shared_ptr<StreamReader> reader = boost::make_shared<StreamReader>( stream );
 #if defined(PC_VERSION)
 		FileReader reader = FileReader( std::wstring( L"Content/Campaign/CampaignList.txt" ) );
 #else
@@ -140,23 +138,18 @@ namespace CloudberryKingdom
 					int chapter = ParseInt( data );
 					//ChapterStart.AddOrOverwrite( chapter, count );
 					DictionaryExtension::AddOrOverwrite( ChapterStart, chapter, count );
-
 			}
 			else if ( identifier == std::wstring( L"movie" ) )
 			{
 					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
-					Seeds.push_back( 0 );
+					Seeds.push_back( L"" );
 					count++;
-
-
 			}
 			else if ( identifier == std::wstring( L"end" ) )
 			{
 					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, std::wstring( L"" ) ) );
-					Seeds.push_back( 0 );
+					Seeds.push_back( L"" );
 					count++;
-
-
 			}
 			else if ( identifier == std::wstring( L"seed" ) )
 			{
@@ -166,7 +159,6 @@ namespace CloudberryKingdom
 					Seeds.push_back( seed );
 					count++;
 					level++;
-
 			}
 
 			line = reader.ReadLine();
@@ -232,7 +224,7 @@ namespace CloudberryKingdom
         // Level Title plus Hero Name
         if ( !level->MyLevelSeed->NewHero )
         {
-            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
+            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
             title->Shift( Vector2(0, -45) );
             level->MyGame->AddGameObject( title );
         }
@@ -287,6 +279,7 @@ namespace CloudberryKingdom
 	CampaignSequence::CampaignSequence()
 	{
 		InitializeInstanceFields();
+		MakeSeedList();
 	}
 
 	void CampaignSequence::InitializeInstanceFields()

@@ -838,7 +838,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::RemoveComment_SlashStyle( const std::wstring &str )
 	{
-		std::wstring ws;
+		std::wstring ws = str;
 		int CommentIndex = str.find( std::wstring( L"//" ) );
 		if ( CommentIndex >= 0 )
 			ws = str.substr( 0, CommentIndex );
@@ -847,7 +847,7 @@ namespace CloudberryKingdom
 
 	std::wstring Tools::RemoveComment_DashStyle( const std::wstring &str )
 	{
-		std::wstring ws;
+		std::wstring ws = str;
 		int CommentIndex = str.find( std::wstring( L"--" ) );
 		if ( CommentIndex >= 0 )
 			ws = str.substr( 0, CommentIndex );

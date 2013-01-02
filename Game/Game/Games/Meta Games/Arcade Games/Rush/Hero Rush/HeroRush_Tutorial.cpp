@@ -346,9 +346,9 @@ namespace CloudberryKingdom
 		boost::shared_ptr<GUI_Score> score = 0;
 		for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
 		{
-			if ( boost::static_pointer_cast<GUI_Score>( *obj ) != 0 )
+			if ( boost::dynamic_pointer_cast<GUI_Score>( *obj ) != 0 )
 			{
-				score = boost::static_pointer_cast<GUI_Score>( *obj );
+				score = boost::dynamic_pointer_cast<GUI_Score>( *obj );
 				break;
 			}
 		}

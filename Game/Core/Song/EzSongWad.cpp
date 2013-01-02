@@ -54,9 +54,16 @@ namespace CloudberryKingdom
 		if ( !song->DisplayInfo )
 			return;
 
-		SongInfoText = boost::make_shared<EzText>( song->SongName + std::wstring( L"\n" ) + song->ArtistName, Resources::LilFont, true, true );
-		SongInfoText->_Pos = Vector2( -850, -790 );
-		SongInfoText->MyFloatColor = Vector4( 1, 1, 1, 4.5f );
+		std::wstring songname = song->SongName;
+		Replace( songname, L'_', L' ' );
+		std::wstring artistname = song->ArtistName;
+		Replace( artistname, '_', ' ');
+		//SongInfoText = new EzText(songname + "\n" + artistname, Resources.LilFont, true, true);
+		SongInfoText = boost::make_shared<EzText>( songname + std::wstring( L"\n" ) + artistname, Resources::Font_Grobold42_2, true, true );
+		SongInfoText->_Pos = Vector2(-850, -790);
+		SongInfoText->MyFloatColor = Vector4(1, 1, 1, 4.5f);
+		SongInfoText->MyFloatColor = Vector4(.9f, .9f, .9f, 4.5f);
+		SongInfoText->setScale( .3f );
 		SongInfoText->Alpha = -.45f;
 		SongInfoText->FixedToCamera = true;
 
@@ -67,7 +74,10 @@ namespace CloudberryKingdom
 	{
 		if ( CloudberryKingdomGame::ShowSongInfo && DisplayInfo && DisplayingInfo && SongInfoText != 0 && !Tools::ShowLoadingScreen && Tools::CurGameData != 0 && !Tools::CurGameData->PauseGame && !Tools::CurGameData->SuppressSongInfo )
 		{
-			SongInfoText->Draw( DefaultCam );
+			//SongInfoText->Draw( DefaultCam );
+			boost::shared_ptr<Camera> cam = Tools::getCurCamera();
+			if ( cam != 0 )
+				SongInfoText->Draw( cam );
 		}
 	}
 
@@ -104,6 +114,11 @@ namespace CloudberryKingdom
 		if ( DisplayingInfo && SongInfoText != 0 )
 		{
 			SongInfoText->MyFloatColor.W -= .02f;
+
+			SongInfoText->OutlineColor.W = SongInfoText->MyFloatColor.W;
+			SongInfoText->OutlineColor = Vector4( 0, 0, 0, SongInfoText->OutlineColor.W );
+			if (SongInfoText->MyFloatColor.W < 1)
+				SongInfoText->MyFloatColor = Vector4( .9f * SongInfoText->MyFloatColor.W );
 
 			if ( SongInfoText->Alpha < 1 )
 				SongInfoText->Alpha += .03f;
