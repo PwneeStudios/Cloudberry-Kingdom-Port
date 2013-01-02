@@ -152,7 +152,8 @@ namespace CloudberryKingdom
 
 	void Localization::ReadSubtitleInfo( const std::wstring &VideoName )
 	{
-		std::wstring path = Path::Combine( std::wstring( L"Content" ), std::wstring( L"Localization" ), std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
+		//std::wstring path = Path::Combine( std::wstring( L"Content" ), std::wstring( L"Localization" ), std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
+		std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
 
 		ReadSubtitles( path );
 	}

@@ -28,7 +28,7 @@ namespace CloudberryKingdom
 	LevelSequence::LevelSequence()
 	{
 		InitializeInstanceFields();
-		MakeSeedList();
+		//MakeSeedList(); // In C# this calls the dervided class's MakeSeedList. In C++ we have moved this to the derived constructor.
 	}
 
 	void LevelSequence::MakeSeedList()
@@ -39,11 +39,11 @@ namespace CloudberryKingdom
 
 	void LevelSequence::Start( int StartLevel )
 	{
-	#if defined(DEBUG)
-		// For debug purposes we reload the list of seeds each time, so that hot modifications can be made.
-		Seeds.clear();
-		MakeSeedList();
-	#endif
+	//#if defined(DEBUG)
+	//	// For debug purposes we reload the list of seeds each time, so that hot modifications can be made.
+	//	Seeds.clear();
+	//	MakeSeedList();
+	//#endif
 
 		StartIndex = StartLevel;
 
