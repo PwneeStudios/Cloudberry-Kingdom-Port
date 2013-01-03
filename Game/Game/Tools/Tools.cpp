@@ -758,8 +758,10 @@ namespace CloudberryKingdom
 			NewVolume = 0;
 		if ( NewVolume != CurVolume )
 		{
-			MediaPlayer::Volume = NewVolume;
-			CurVolume = MediaPlayer::Volume;
+			/*MediaPlayer::Volume = NewVolume;
+			CurVolume = MediaPlayer::Volume;*/
+			MediaPlayer::SetVolume( NewVolume );
+			CurVolume = MediaPlayer::GetVolume();
 		}
 	}
 

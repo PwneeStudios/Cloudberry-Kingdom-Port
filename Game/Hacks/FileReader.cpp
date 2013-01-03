@@ -20,6 +20,8 @@ std::wstring FileReader::ReadLine()
 	std::wstring s = Utf8ToWstring( file_->ReadLine() );
 	// FIXME: get rid of this hack. file_->ReadLine should itself not include \r or \n at the end.
 	if ( static_cast<int>( s.rfind( L"\r" ) ) >= 0 )
-		s.pop_back();
+		//s.pop_back();
+		s.resize( s.size() - 1 );
+
 	return s;
 }

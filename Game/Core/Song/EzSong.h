@@ -3,8 +3,6 @@
 
 #include <global_header.h>
 
-#include <Audio/Song.h>
-
 namespace CloudberryKingdom
 {
 	struct EzSong : public boost::enable_shared_from_this<EzSong>

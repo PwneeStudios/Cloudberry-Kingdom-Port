@@ -1,9 +1,11 @@
 #include <global_header.h>
 
 #include <Audio/SoundEffect.h>
+#include <Audio/Song.h>
 #include <Content/Texture.h>
 #include <Content/Wad.h>
 #include <Core.h>
+#include <Graphics/Effect.h>
 
 #include "ContentManager.h"
 #include "GraphicsDevice.h"
@@ -20,7 +22,10 @@ template<> boost::shared_ptr<SoundEffect> ContentManager::Load<SoundEffect>( con
 
 template<> boost::shared_ptr<Song> ContentManager::Load<Song>( const std::wstring &name )
 {
-	return boost::make_shared<Song>();
+	LOG.Write( "Loading song %s\n", WstringToUtf8( name ).c_str() );
+	boost::shared_ptr<Song> song = boost::make_shared<Song>();
+	song->Load( WstringToUtf8( name ) );
+	return song;
 }
 
 template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const std::wstring &name )
@@ -29,8 +34,8 @@ template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const s
 	
 #if defined(DEBUG)
 	// WARNING: Fast load
-	//t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" );
-	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
+	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" );
+	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #else
 	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #endif

@@ -1,12 +1,11 @@
 #ifndef _CONTENTMANAGER_H_
 #define _CONTENTMANAGER_H_
 
+#include <string>
+
 #include "Hacks/XNA/GameServiceContainer.h"
-#include <Audio/SoundEffect.h>
-#include <Audio/Song.h>
 #include <Hacks/XNA/Texture2D.h>
 #include <Hacks/XNA/SpriteFont.h>
-#include <Graphics/Effect.h>
 
 struct ContentManager
 {

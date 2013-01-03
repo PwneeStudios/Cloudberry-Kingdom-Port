@@ -3,6 +3,7 @@
 
 #include "enums.h"
 #include "forward_declarations.h"
+#include <ForwardDeclarations.h>
 
 // System includes.
 #include <algorithm>

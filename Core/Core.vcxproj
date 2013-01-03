@@ -11,6 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\cafe_sdk\system\src\demo\ax\streamlib\AXStream.h" />
     <ClInclude Include="..\zlib-1.2.7\crc32.h" />
     <ClInclude Include="..\zlib-1.2.7\deflate.h" />
     <ClInclude Include="..\zlib-1.2.7\gzguts.h" />
@@ -73,6 +74,8 @@
     <ClInclude Include="include\Utility\Log.h" />
     <ClInclude Include="include\Utility\Mutex.h" />
     <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
+    <ClInclude Include="src\Audio\SongInternalWiiU.h" />
+    <ClInclude Include="src\Audio\streamlib\AXStream.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
     <ClInclude Include="include\Input\GamePad.h" />
@@ -83,6 +86,7 @@
     <ClInclude Include="include\Input\GamePadTriggers.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\cafe_sdk\system\src\demo\ax\streamlib\AXStreamServer.c" />
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp" />
     <ClCompile Include="..\zlib-1.2.7\adler32.c" />
@@ -105,7 +109,15 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Audio\SongWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\AXStreamServer.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>

@@ -1,8 +1,14 @@
 #ifndef _SONG_H_
 #define _SONG_H_
 
+#include <string>
+
 class Song
 {
+
+	struct SongInternal *internal_;
+
+	friend class MediaPlayer;
 
 public:
 
@@ -11,10 +17,10 @@ public:
 		double TotalSeconds;
 	} Duration;
 
-	Song()
-	{
-		Duration.TotalSeconds = 0;
-	}
+	Song();
+	~Song();
+
+	void Load( const std::string &path );
 
 };
 

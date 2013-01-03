@@ -60,4 +60,12 @@ MediaState MediaPlayer::GetState()
 }
 
 bool MediaPlayer::IsRepeating = false;
-float MediaPlayer::Volume = 1.f;
+
+void MediaPlayer::SetVolume( float volume )
+{
+}
+
+float MediaPlayer::GetVolume()
+{
+	return 0.f;
+}

@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		{
 			for ( int i = StartFrame; i <= EndFrame; i++ )
 			{
-				int len = i == 0 ? 1 : static_cast<int>( std::log10( static_cast<float>( i ) ) ) + 1;
+				int len = i == 0 ? 1 : static_cast<int>( std::log10( static_cast<float>( i ) + 0.01f ) ) + 1;
 				std::wstring padding = len <= length ? pad[ length - len ] : std::wstring( L"" );
 				AddFrame( Tools::Texture( TextureRoot + format + padding + StringConverterHelper::toString( i ) ), 0 );
 			}
