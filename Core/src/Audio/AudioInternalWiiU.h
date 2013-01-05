@@ -9,8 +9,9 @@ struct Voice
     AXVPB *AXVoice;
     SPSoundEntry *SPEntry;
 
-	bool Paused;
 	AXPBVE Ve;
+	bool Streaming;
+	bool Left;
 };
 
 extern Voice Voices[ AX_MAX_VOICES ];

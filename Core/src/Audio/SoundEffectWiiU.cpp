@@ -90,8 +90,8 @@ void SoundEffect::Play( float volume, float pitch, float pan )
 
 		v = &Voices[ axVoice->index ];
 		v->AXVoice = axVoice;
-
 		v->SPEntry = SPGetSoundEntry( SPTable, internal_->SoundId );
+		v->Streaming = false;
 
 		SPPrepareSound( v->SPEntry, v->AXVoice, ( v->SPEntry )->sampleRate );
 

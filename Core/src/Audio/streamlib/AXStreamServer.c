@@ -112,7 +112,7 @@ static char * mode_names[] = {
                                 // and buffer contains entire loop.
 };
 
-static int reporting = 0;
+static int reporting = 0xff;
 //static int reporting = REPORTING_ADDBUFFER|REPORTING_STATE_CHANGES;
 //static int reporting = REPORTING_OFFSETS|REPORTING_STATE_READY|REPORTING_STATE_LOOPED;
 /*---------------------------------------------------------------------------*
