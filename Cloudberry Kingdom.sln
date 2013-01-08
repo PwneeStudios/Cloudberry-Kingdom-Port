@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C++ Express 2010
+# Visual Studio 2010
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cloudberry PC", "Cloudberry PC\Cloudberry PC.vcxproj", "{F3E95B4A-92FC-45FC-9820-FDA51D35AD6E}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7DEC367F-F7A3-4228-AFD8-45222FC65C41} = {7DEC367F-F7A3-4228-AFD8-45222FC65C41}

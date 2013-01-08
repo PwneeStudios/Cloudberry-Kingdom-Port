@@ -76,6 +76,7 @@
     <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
     <ClInclude Include="src\Audio\SongInternalWiiU.h" />
     <ClInclude Include="src\Audio\streamlib\AXStream.h" />
+    <ClInclude Include="src\Audio\streamlib\streamPool.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
     <ClInclude Include="include\Input\GamePad.h" />
@@ -109,6 +110,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Audio\SongPc.cpp" />
     <ClCompile Include="src\Audio\SongWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
@@ -120,6 +122,9 @@
     <ClCompile Include="src\Audio\streamlib\AXStreamServer.c">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\streamPool.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Content\FilesystemWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

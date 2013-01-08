@@ -237,6 +237,9 @@
     <ClInclude Include="src\Audio\streamlib\AXStream.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Audio\streamlib\streamPool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -408,6 +411,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Audio\streamlib\AXStreamServer.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\streamPool.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SongPc.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

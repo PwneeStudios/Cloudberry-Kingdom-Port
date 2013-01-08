@@ -353,6 +353,10 @@ static void FrameCallback()
 
 					case AXS_STATE_BUF_REQ:
 						{
+							/*AXPBOFFSET offsets;
+							AXGetVoiceOffsets(v.AXVoice, &offsets);
+							OSReport("PWNEE-REPORT-%8.8x C-%8.8x E-%8.8x L-%8.8x\n", offsets.samples, offsets.currentOffset, offsets.endOffset, offsets.loopOffset);*/
+
 							/*StreamBuffer *buffer = v.Left ? Decoder->GetLeftChannel() : Decoder->GetRightChannel();
 							Decoder->Free( v.Left ? Decoder->GetRightChannel() : Decoder->GetLeftChannel() );
 							AXStreamAddBuffer( v.AXVoice, &buffer->Offset, Decoder->IsDone() ? AXS_LAST : AXS_NORMAL );*/
