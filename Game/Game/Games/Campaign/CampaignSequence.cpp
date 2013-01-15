@@ -135,37 +135,35 @@ namespace CloudberryKingdom
 
 			if ( identifier == std::wstring( L"chapter" ) )
 			{
-					int chapter = ParseInt( data );
-					//ChapterStart.AddOrOverwrite( chapter, count );
+				int chapter = 0;
+				if ( ParseInt( data, chapter ) )
 					DictionaryExtension::AddOrOverwrite( ChapterStart, chapter, count );
 			}
 			else if ( identifier == std::wstring( L"movie" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
-					Seeds.push_back( L"" );
-					count++;
+				// FIXME WARNING this should not be commented out once videos work
+					//DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
+					//Seeds.push_back( L"" );
+					//count++;
 			}
 			else if ( identifier == std::wstring( L"end" ) )
 			{
-					DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, std::wstring( L"" ) ) );
-					Seeds.push_back( L"" );
-					count++;
+				DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, std::wstring( L"" ) ) );
+				Seeds.push_back( L"" );
+				count++;
 			}
 			else if ( identifier == std::wstring( L"seed" ) )
 			{
-					std::wstring seed = data;
-					seed += Format( _T( "level:%d;" ), level );
+				std::wstring seed = data;
+				seed += Format( _T( "level:%d;" ), level );
 
-					Seeds.push_back( seed );
-					count++;
-					level++;
+				Seeds.push_back( seed );
+				count++;
+				level++;
 			}
 
 			line = reader.ReadLine();
 		}
-
-		//reader->Close();
-		//stream->Close();
 	}
 
 	boost::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > SeedAction )

@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include "Hacks/List.h"
+#include "Hacks/Dict.h"
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
 
@@ -574,129 +575,130 @@ namespace CloudberryKingdom
 			// Seed [This must come first]
 			if ( lower_identifier == std::wstring( L"s" ) )
 			{
-				/*try
-				{*/
-					setSeed( ParseInt( data ) );
-				/*}
-				catch ( ... )
+				int seedval = 0;
+				if ( ParseInt( data, seedval ) )
+				{
+					setSeed( seedval );
+				}
+				else
 				{
 					setSeed( GetHashCode(data) );
-				}*/
+				}
 			}
 			// Game type
 			else if ( lower_identifier == std::wstring( L"g" ) )
 			{
 				MyGameType = NormalGameData::Factory;
-				//try
-				//{
-				//	MyGameType = GameData::FactoryDict[ data ];
-				//}
-				//catch ( ... )
-				//{
-				//	MyGameType = NormalGameData::Factory;
-				//}
 			}
 			// Geometry
 			else if ( lower_identifier == std::wstring( L"geo" ) )
 			{
-				/*try
-				{*/
-					MyGeometry = static_cast<LevelGeometry>( ParseInt( data ) );
-				/*}
-				catch ( ... )
+				int geomval = 0;
+				if ( ParseInt( data, geomval ) )
+				{
+					MyGeometry = static_cast<LevelGeometry>( geomval );
+				}
+				else
 				{
 					MyGeometry = LevelGeometry_RIGHT;
-				}*/
+				}
 			}
 			// Hero [This must come before "ph:"]
 			else if ( lower_identifier == std::wstring( L"h" ) )
 			{
-					terms = Split( data, L',' );
-					if ( terms.size() == 4 )
-						DefaultHeroType = BobPhsx::MakeCustom( terms[ 0 ], terms[ 1 ], terms[ 2 ], terms[ 3 ] );
-					else
-						DefaultHeroType = BobPhsxNormal::getInstance();
+				terms = Split( data, L',' );
+				if ( terms.size() == 4 )
+					DefaultHeroType = BobPhsx::MakeCustom( terms[ 0 ], terms[ 1 ], terms[ 2 ], terms[ 3 ] );
+				else
+					DefaultHeroType = BobPhsxNormal::getInstance();
 			}
 			// Custom physics [This must come after "h:"]
 			else if ( lower_identifier == std::wstring( L"ph" ) )
 			{
-					BobPhsx::CustomPhsxData custom = BobPhsx::CustomPhsxData();
-					custom.Init( data );
-					DefaultHeroType->SetCustomPhsx( custom );
+				BobPhsx::CustomPhsxData custom = BobPhsx::CustomPhsxData();
+				custom.Init( data );
+				DefaultHeroType->SetCustomPhsx( custom );
 			}
 			// Tileset
 			else if ( lower_identifier == std::wstring( L"t" ) )
 			{
-					MyTileSet.reset();
-					if ( data.length() > 0 )
-					{
-						/*try
-						{*/
-							SetTileSet( data );
-						/*}
-						catch ( ... )
-						{
-							MyTileSet.reset();
-						}*/
-					}
-					if ( MyTileSet == 0 )
-						SetTileSet( std::wstring( L"castle" ) );
+				MyTileSet.reset();
+				if ( data.length() > 0 && Contains( TileSets::NameLookup, data ) )
+				{
+					SetTileSet( data );
+				}
+				if ( MyTileSet == 0 )
+					SetTileSet( std::wstring( L"castle" ) );
 			}
 			// Number of pieces
 			else if ( lower_identifier == std::wstring( L"n" ) )
 			{
-					/*try
-					{*/
-						NumPieces = ParseInt( data );
-						NumPieces = CoreMath::RestrictVal( 1, 5, NumPieces );
-					/*}
-					catch ( ... )
-					{
-						NumPieces = 1;
-					}*/
+				int numval = 0;
+				if( ParseInt( data, numval ) )
+				{
+					NumPieces = numval;
+					NumPieces = CoreMath::RestrictVal( 1, 5, NumPieces );
+				}
+				else
+				{
+					NumPieces = 1;
+				}
 			}
 			// Length
 			else if ( lower_identifier == std::wstring( L"l" ) )
 			{
-					/*try
-					{*/
-						Length = ParseInt( data );
-						Length = CoreMath::RestrictVal( 2000, 50000, Length );
-						PieceLength = Length;
-					/*}
-					catch ( ... )
-					{
-						PieceLength = Length = 5000;
-					}*/
+				int lengthval = 0;
+				if ( ParseInt( data, lengthval ) )
+				{
+					Length = lengthval;
+					Length = CoreMath::RestrictVal( 2000, 50000, Length );
+					PieceLength = Length;
+				}
+				else
+				{
+					PieceLength = Length = 5000;
+				}
 			}
 			// Upgrades
 			else if ( lower_identifier == std::wstring( L"u" ) )
 			{
-					UpgradeStrs.push_back( data );
+				UpgradeStrs.push_back( data );
 			}
 			// Meta
 			else if ( lower_identifier == std::wstring( L"m" ) )
 			{
-				MyMetaGameType = static_cast<MetaGameType>( ParseInt( data ) );
+				int metaval = 0;
+				if ( ParseInt( data, metaval ) )
+					MyMetaGameType = static_cast<MetaGameType>( metaval );
+				else
+					MyMetaGameType = MetaGameType_NONE;
 			}
 			// Wall
 			else if ( lower_identifier == WallFlag )
 			{
-					HasWall = true;
+				HasWall = true;
 			}
 			// Fade In
 			else if ( lower_identifier == FadeInFlag )
 			{
-					FadeIn = true;
-                    float DefaultFadeInSpeed = FadeInSpeed;
-					FadeInSpeed = ParseFloat( data );
+				FadeIn = true;
+
+				float fadeinval = 0;
+				if ( ParseFloat( data, fadeinval ) )
+				{
+					FadeInSpeed = fadeinval;
+				}
 			}
 			// Fade Out
 			else if ( lower_identifier == FadeOutFlag )
 			{
-					FadeOut = true;
-                    float DefaultFadeOutSpeed = FadeOutSpeed;
-                    FadeOutSpeed = ParseFloat( data );
+				FadeOut = true;
+                
+				float fadeoutval = 0;
+				if ( ParseFloat( data, fadeoutval ) )
+				{
+					FadeOutSpeed = fadeoutval;
+				}
 			}
             // NewHero
 			else if ( lower_identifier == NewHeroFlag )
@@ -716,54 +718,52 @@ namespace CloudberryKingdom
 			// No start door
 			else if ( lower_identifier == NoStartDoorFlag )
 			{
-					NoStartDoor = true;
+				NoStartDoor = true;
 			}
 			// Level number
 			else if ( lower_identifier == LevelFlag )
 			{
-					LevelNum = ParseInt( data );
+				int levelval = 0;
+				if ( ParseInt( data, levelval ) )
+					LevelNum = levelval;
+				else
+					LevelNum = 0;
 			}
 			// Weather intensity
 			else if ( lower_identifier == WeatherIntensityFlag )
 			{
-					/*try
-					{*/
-						WeatherIntensity = ParseFloat( data );
-					/*}
-					catch ( ... )
-					{
-						WeatherIntensity = 1;
-					}*/
+				float weatherval = 0;
+				if ( ParseFloat( data, weatherval ) )
+				{
+					WeatherIntensity = weatherval;
+				}
+				else
+				{
+					WeatherIntensity = 1;
+				}
 			}
 			// Wait length to open door
 			else if ( lower_identifier == WaitLengthToOpenDoorString )
 			{
-					/*try
-					{*/
-						WaitLengthToOpenDoor = ParseInt( data );
-					/*}
-					catch ( ... )
-					{
-						WaitLengthToOpenDoor = 6;
-					}*/
+				int waitlengthval = 0;
+				if ( ParseInt( data, waitlengthval ) )
+				{
+					WaitLengthToOpenDoor = waitlengthval;
+				}
+				else
+				{
+					WaitLengthToOpenDoor = 6;
+				}
 			}
 			// Song to play at beginning of level
 			else if ( lower_identifier == SongString )
 			{
-					/*try
-					{*/
-						MySong = Tools::SongWad->FindByName( data );
-					/*}
-					catch ( ... )
-					{
-						MySong.reset();
-					}*/
+				MySong = Tools::SongWad->FindByName( data );
 			}
 			// Open door sound
 			else if ( lower_identifier == OpenDoorSoundFlag )
 			{
-					OpenDoorSound = true;
-
+				OpenDoorSound = true;
 			}
 			else
 			{
@@ -872,17 +872,16 @@ namespace CloudberryKingdom
 		std::vector<std::wstring> terms = Split( UpgradeStrs[ index ], L',' );
 
 		// Try and load the data into the upgrade array.
-		// FIXME: Fix try/catch.
-		/*try
-		{*/
-			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
-				piece->MyUpgrades1->UpgradeLevels[ i ] = ParseFloat( terms[ i ] );
-		/*}
-		catch ( ... )
+		bool result = false;
+
+		for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
 		{
-			// If we fail, zero all the upgrades.
-			piece->MyUpgrades1->Zero();
-		}*/
+			float val = 0;
+			if ( ParseFloat( terms[ i ], val ) )
+				piece->MyUpgrades1->UpgradeLevels[ i ] = val;
+			else
+				piece->MyUpgrades1->UpgradeLevels[ i ] = 0;
+		}
 
 		piece->StandardClose();
 	}

@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 	{
 		// Get the block width
 		std::wstring num_str = first.substr( first.find( std::wstring( L"_" ) ) + 1 );
-		int width = ParseInt( num_str );
+		int width = 0; ParseInt( num_str, width );
 
 		// Get the rest of the information
 		boost::shared_ptr<CloudberryKingdom::PieceQuad> piecequad = ParseBlockLine( width, bits );
@@ -273,32 +273,35 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "box_height":
 			else if ( bits[ i ] == std::wstring( L"box_height" ) )
 			{
-					c->BoxHeight = 2 * ParseFloat( bits[ i + 1 ] );
+					c->BoxHeight = 0; ParseFloat( bits[ i + 1 ], c->BoxHeight );
+					c->BoxHeight = 2 * c->BoxHeight;
 			}
 //ORIGINAL LINE: case "width":
 			else if ( bits[ i ] == std::wstring( L"width" ) )
 			{
-					c->Data.RepeatWidth = 2 * ParseFloat( bits[ i + 1 ] );
+					c->Data.RepeatWidth = 0; ParseFloat( bits[ i + 1 ], c->Data.RepeatWidth );
+					c->Data.RepeatWidth = 2 * c->Data.RepeatWidth;
 			}
 //ORIGINAL LINE: case "height":
 			else if ( bits[ i ] == std::wstring( L"height" ) )
 			{
-					c->Data.RepeatHeight = 2 * ParseFloat( bits[ i + 1 ] );
+					c->Data.RepeatHeight = 0; ParseFloat( bits[ i + 1 ], c->Data.RepeatHeight );
+					c->Data.RepeatHeight = 2 * c->Data.RepeatHeight;
 			}
 //ORIGINAL LINE: case "left":
 			else if ( bits[ i ] == std::wstring( L"left" ) )
 			{
-					c->Data.Center_BL_Shift.X = ParseFloat( bits[ i + 1 ] );
+					c->Data.Center_BL_Shift.X = 0; ParseFloat( bits[ i + 1 ], c->Data.Center_BL_Shift.X );
 			}
 //ORIGINAL LINE: case "right":
 			else if ( bits[ i ] == std::wstring( L"right" ) )
 			{
-					c->Data.Center_TR_Shift.X = ParseFloat( bits[ i + 1 ] );
+					c->Data.Center_TR_Shift.X = 0; ParseFloat( bits[ i + 1 ], c->Data.Center_TR_Shift.X );
 			}
 //ORIGINAL LINE: case "top":
 			else if ( bits[ i ] == std::wstring( L"top" ) )
 			{
-					float shift = ParseFloat( bits[ i + 1 ] );
+					float shift = 0; ParseFloat( bits[ i + 1 ], shift );
 					c->Data.Center_TR_Shift.Y = shift;
 					c->Data.Center_BL_Shift.Y = shift;
 			}

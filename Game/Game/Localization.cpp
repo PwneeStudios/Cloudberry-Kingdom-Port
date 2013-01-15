@@ -183,6 +183,8 @@ namespace CloudberryKingdom
 
 		int Index = 0;
 
+		float timeval = 0;
+
 		line = reader->ReadLine();
 		while ( line != std::wstring( L"" ) )
 		{
@@ -208,16 +210,18 @@ namespace CloudberryKingdom
 
 			if ( identifier == std::wstring( L"show" ) )
 			{
+				if ( ParseFloat( data, timeval ) )
+				{
 					boost::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_%d" ), Index ) );
-					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, ParseFloat( data ), SubtitleTexture ) );
+					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, timeval, SubtitleTexture ) );
 
 					Index++;
-
-
+				}
 			}
 			else if ( identifier == std::wstring( L"hide" ) )
 			{
-					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, ParseFloat( data ), boost::shared_ptr<EzTexture>() ) );
+				if ( ParseFloat( data, timeval ) )
+					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, timeval, boost::shared_ptr<EzTexture>() ) );
 			}
 
 			line = reader->ReadLine();

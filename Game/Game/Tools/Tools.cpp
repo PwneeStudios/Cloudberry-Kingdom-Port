@@ -858,8 +858,8 @@ namespace CloudberryKingdom
 	{
 		Vector2 Vec = Vector2();
 
-		Vec.X = ParseFloat( bit1 );
-		Vec.Y = ParseFloat( bit2 );
+		ParseFloat( bit1, Vec.X );
+		ParseFloat( bit2, Vec.Y );
 
 		return Vec;
 	}
@@ -868,10 +868,10 @@ namespace CloudberryKingdom
 	{
 		Vector4 Vec = Vector4();
 
-		Vec.X = ParseFloat( bit1 );
-		Vec.Y = ParseFloat( bit2 );
-		Vec.Z = ParseFloat( bit3 );
-		Vec.W = ParseFloat( bit4 );
+		ParseFloat( bit1, Vec.X );
+		ParseFloat( bit2, Vec.Y );
+		ParseFloat( bit3, Vec.Z );
+		ParseFloat( bit4, Vec.W );
 
 		return Vec;
 	}
@@ -880,12 +880,12 @@ namespace CloudberryKingdom
 	{
 		PhsxData data = PhsxData();
 
-		data.Position.X = ParseFloat( bit1 );
-		data.Position.Y = ParseFloat( bit2 );
-		data.Velocity.X = ParseFloat( bit3 );
-		data.Velocity.Y = ParseFloat( bit4 );
-		data.Acceleration.X = ParseFloat( bit5 );
-		data.Acceleration.Y = ParseFloat( bit6 );
+		ParseFloat( bit1, data.Position.X     );
+		ParseFloat( bit2, data.Position.Y     );
+		ParseFloat( bit3, data.Velocity.X     );
+		ParseFloat( bit4, data.Velocity.Y     );
+		ParseFloat( bit5, data.Acceleration.X );
+		ParseFloat( bit6, data.Acceleration.Y );
 
 		return data;
 	}
@@ -894,12 +894,12 @@ namespace CloudberryKingdom
 	{
 		BasePoint b = BasePoint();
 
-		b.e1.X = ParseFloat( bit1 );
-		b.e1.Y = ParseFloat( bit2 );
-		b.e2.X = ParseFloat( bit3 );
-		b.e2.Y = ParseFloat( bit4 );
-		b.Origin.X = ParseFloat( bit5 );
-		b.Origin.Y = ParseFloat( bit6 );
+		ParseFloat( bit1, b.e1.X     );
+		ParseFloat( bit2, b.e1.Y     );
+		ParseFloat( bit3, b.e2.X     );
+		ParseFloat( bit4, b.e2.Y     );
+		ParseFloat( bit5, b.Origin.X );
+		ParseFloat( bit6, b.Origin.Y );
 
 		return b;
 	}
@@ -908,11 +908,11 @@ namespace CloudberryKingdom
 	{
 		MyOwnVertexFormat b = MyOwnVertexFormat();
 
-		b.xy.X = ParseFloat( bit1 );
-		b.xy.Y = ParseFloat( bit2 );
-
-		b.uv.X = ParseFloat( bit3 );
-		b.uv.Y = ParseFloat( bit4 );
+		ParseFloat( bit1, b.xy.X );
+		ParseFloat( bit2, b.xy.Y );
+						 
+		ParseFloat( bit3, b.uv.X );
+		ParseFloat( bit4, b.uv.Y );
 
 		b.TheColor.R = Parse<unsigned char>( bit5 );
 		b.TheColor.G = Parse<unsigned char>( bit6 );
@@ -930,8 +930,8 @@ namespace CloudberryKingdom
 		std::wstring Component1, Component2;
 		Component1 = str.substr( 0, CommaIndex );
 		Component2 = str.substr( CommaIndex + 1, str.length() - CommaIndex - 1 );
-		Vec.X = ParseFloat( Component1 );
-		Vec.Y = ParseFloat( Component2 );
+		ParseFloat( Component1, Vec.X );
+		ParseFloat( Component2, Vec.Y );
 
 		return Vec;
 	}
@@ -973,7 +973,8 @@ namespace CloudberryKingdom
 		Component1 = str.substr( 0, LineIndex );
 		Component2 = str.substr( LineIndex + 1, str.length() - LineIndex - 1 );
 
-		return NewSound( ParseToFileName( Component1 ), ParseFloat( Component2 ) );
+		float val = 0; ParseFloat( Component2, val );
+		return NewSound( ParseToFileName( Component1 ), val );
 	}
 
 	boost::shared_ptr<EzSound> Tools::NewSound( const std::wstring &name, float volume )

@@ -172,7 +172,7 @@ namespace CloudberryKingdom
 		{*/
 			for ( int i = 0; i < static_cast<int>( terms.size() ); i++ )
 			{
-				float v = ParseFloat( terms[ i ] );
+				float v = 0; ParseFloat( terms[ i ], v );
 				data[ i ] = CoreMath::RestrictVal( Bounds( i ).MinValue, Bounds( i ).MaxValue, v );
 			}
 		/*}
@@ -348,23 +348,21 @@ namespace CloudberryKingdom
 	{
 		int _BaseType, _Shape, _MoveMod, _Special;
 
-		// FIXME: Make sure try/catch works as before.
-		/*try
-		{*/
-			_BaseType = ParseInt( BaseType );
-			_Shape = ParseInt( Shape );
-			_MoveMod = ParseInt( MoveMod );
-			_Special = ParseInt( Special );
-		/*}
-		catch ( ... )
+		bool result = 
+			ParseInt( BaseType, _BaseType ) &&
+			ParseInt( Shape   , _Shape    ) &&
+			ParseInt( MoveMod , _MoveMod  ) &&
+			ParseInt( Special , _Special  );
+
+		if ( !result )
 		{
 			_BaseType = _Shape = _MoveMod = _Special = 0;
-		}*/
+		}
 
 		_BaseType = CoreMath::RestrictVal( 0, Hero_BaseType_LENGTH - 1, _BaseType );
-		_Shape = CoreMath::RestrictVal( 0, Hero_Shape_LENGTH - 1, _Shape );
-		_MoveMod = CoreMath::RestrictVal( 0, Hero_MoveMod_LENGTH - 1, _MoveMod );
-		_Special = CoreMath::RestrictVal( 0, Hero_Special_LENGTH - 1, _Special );
+		_Shape =    CoreMath::RestrictVal( 0, Hero_Shape_LENGTH - 1,    _Shape );
+		_MoveMod =  CoreMath::RestrictVal( 0, Hero_MoveMod_LENGTH - 1,  _MoveMod );
+		_Special =  CoreMath::RestrictVal( 0, Hero_Special_LENGTH - 1,  _Special );
 
 		//return MakeCustom(_BaseType, _Shape, _MoveMod);
 		return MakeCustom( _BaseType, _Shape, _MoveMod, _Special );

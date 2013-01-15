@@ -142,8 +142,8 @@ namespace CloudberryKingdom
 
 					// Name, file, start frame, end frame
 					std::wstring root = bits[ 1 ];
-					int start_frame = ParseInt( bits[ 2 ] );
-					int end_frame = ParseInt( bits[ 3 ] );
+					int start_frame = 0; ParseInt( bits[ 2 ], start_frame );
+					int end_frame = 0; ParseInt( bits[ 3 ], end_frame );
 
 					// Speed or frame length
 					bool _use_speed = false;
@@ -151,11 +151,11 @@ namespace CloudberryKingdom
 					float speed = 1;
 					if ( bits[ 4 ] == std::wstring( L"speed" ) )
 					{
-						speed = ParseFloat( bits[ 5 ] );
+						ParseFloat( bits[ 5 ], speed );
 						_use_speed = true;
 					}
 					else
-						frame_length = ParseInt( bits[ 4 ] );
+						ParseInt( bits[ 4 ], frame_length );
 
 					// Reverse
 					bool reverse = false;
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "Scale":
 				if ( bits[ 0 ] == std::wstring( L"Scale" ) )
 				{
-						scale = ParseFloat( bits[ 1 ] );
+						 ParseFloat( bits[ 1 ], scale );
 
 				}
 //ORIGINAL LINE: case "Shift":

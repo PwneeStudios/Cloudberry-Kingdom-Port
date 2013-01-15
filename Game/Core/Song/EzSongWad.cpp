@@ -333,7 +333,6 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzSong> EzSongWad::FindByName( const std::wstring &name )
 	{
 		for ( std::vector<boost::shared_ptr<EzSong> >::const_iterator Sng = SongList.begin(); Sng != SongList.end(); ++Sng )
-//C# TO C++ CONVERTER TODO TASK: The following .NET 'String.Compare' reference is not converted:
 			if ( CompareIgnoreCase( ( *Sng )->Name, name ) == 0 )
 				return *Sng;
 
