@@ -14,19 +14,22 @@
     <ClCompile Include="boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
     <ClCompile Include="boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp" />
     <ClCompile Include="Core\src\Architecture\SchedulerPS3.cpp" />
+    <ClCompile Include="Core\src\Audio\MediaPlayerPS3.cpp" />
+    <ClCompile Include="Core\src\Audio\SongPS3.cpp" />
+    <ClCompile Include="Core\src\Audio\SoundEffectPS3.cpp" />
     <ClCompile Include="Core\src\Content\File.cpp" />
     <ClCompile Include="Core\src\Content\Filesystem.cpp" />
-    <ClCompile Include="Core\src\Content\FilesystemPc.cpp" />
+    <ClCompile Include="Core\src\Content\FilesystemPS3.cpp" />
     <ClCompile Include="Core\src\Content\Font.cpp" />
-    <ClCompile Include="Core\src\Content\TexturePc.cpp" />
+    <ClCompile Include="Core\src\Content\TexturePS3.cpp" />
     <ClCompile Include="Core\src\Content\Wad.cpp" />
     <ClCompile Include="Core\src\Core.cpp" />
-    <ClCompile Include="Core\src\CorePc.cpp" />
+    <ClCompile Include="Core\src\CorePS3.cpp" />
     <ClCompile Include="Core\src\Graphics\Color.cpp" />
-    <ClCompile Include="Core\src\Graphics\EffectParameterPc.cpp" />
-    <ClCompile Include="Core\src\Graphics\EffectPass.cpp" />
-    <ClCompile Include="Core\src\Graphics\EffectPc.cpp" />
-    <ClCompile Include="Core\src\Graphics\QuadDrawerPc.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectParameterPS3.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectPassPS3.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectPS3.cpp" />
+    <ClCompile Include="Core\src\Graphics\QuadDrawerPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
     <ClCompile Include="Core\src\Input\GamePadPc.cpp" />
     <ClCompile Include="Core\src\Input\Input.cpp" />
@@ -34,7 +37,7 @@
     <ClCompile Include="Core\src\Input\Keyboard.cpp" />
     <ClCompile Include="Core\src\Input\Mouse.cpp" />
     <ClCompile Include="Core\src\Utility\Log.cpp" />
-    <ClCompile Include="Core\src\Utility\MutexPc.cpp" />
+    <ClCompile Include="Core\src\Utility\MutexPS3.cpp" />
     <ClCompile Include="PS3Main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -386,16 +389,16 @@
     <ClInclude Include="Core\include\Audio\SoundEffect.h" />
     <ClInclude Include="Core\include\Content\File.h" />
     <ClInclude Include="Core\include\Content\Filesystem.h" />
-    <ClInclude Include="Core\include\Content\FilesystemPc.h" />
+    <ClInclude Include="Core\include\Content\FilesystemPS3.h" />
     <ClInclude Include="Core\include\Content\Font.h" />
     <ClInclude Include="Core\include\Content\Resource.h" />
     <ClInclude Include="Core\include\Content\ResourcePtr.h" />
     <ClInclude Include="Core\include\Content\Sound.h" />
     <ClInclude Include="Core\include\Content\Texture.h" />
-    <ClInclude Include="Core\include\Content\TexturePc.h" />
+    <ClInclude Include="Core\include\Content\TexturePS3.h" />
     <ClInclude Include="Core\include\Content\Wad.h" />
     <ClInclude Include="Core\include\Core.h" />
-    <ClInclude Include="Core\include\CorePc.h" />
+    <ClInclude Include="Core\include\CorePS3.h" />
     <ClInclude Include="Core\include\Datastructures\Freelist.h" />
     <ClInclude Include="Core\include\ForwardDeclarations.h" />
     <ClInclude Include="Core\include\GameLoop.h" />
@@ -425,7 +428,8 @@
     <ClInclude Include="Core\include\Utility\Limits.h" />
     <ClInclude Include="Core\include\Utility\Log.h" />
     <ClInclude Include="Core\include\Utility\Mutex.h" />
-    <ClInclude Include="Core\src\Graphics\EffectInternalPc.h" />
+    <ClInclude Include="Core\src\Audio\SongInternalPS3.h" />
+    <ClInclude Include="Core\src\Graphics\EffectInternalPS3.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{46EC60F3-1A50-404B-BA9B-D203DA8DAF55}</ProjectGuid>
@@ -457,7 +461,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
     <ClCompile>
-      <PreprocessorDefinitions>PS3;DEBUG;GAME;NOT_PC;UNICODE;_UNICODE;_DEBUG;__CELL_ASSERT__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>PS3;BOOST_NO_TYPEID;DEBUG;GAME;NOT_PC;UNICODE;_UNICODE;_DEBUG;__CELL_ASSERT__;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>

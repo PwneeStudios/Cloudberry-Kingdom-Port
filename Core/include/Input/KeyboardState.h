@@ -4,6 +4,7 @@
 #include "InputEnums.h"
 
 #include <vector>
+#include <string.h>
 
 class KeyboardState
 {

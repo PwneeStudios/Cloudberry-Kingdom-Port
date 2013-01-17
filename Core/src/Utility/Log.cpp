@@ -27,6 +27,8 @@ void Log::RemoveListener( LogListener &listener )
 
 void Log::Write( const char *fmt, ... )
 {
+#if defined( CAFE ) || defined( PS3 )
+#else
 	char buffer[ 512 ];
 
 	va_list args;
@@ -38,6 +40,7 @@ void Log::Write( const char *fmt, ... )
 
 	for( ListenerList::iterator i = listeners_.begin(); i != listeners_.end(); ++i )
 		( *i )->Write( str );
+#endif
 }
 
 Log &Log::GetSingleton()

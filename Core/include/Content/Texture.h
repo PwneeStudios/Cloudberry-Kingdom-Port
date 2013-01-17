@@ -10,6 +10,8 @@
 
 #ifdef CAFE
 	#include "TextureWiiU.h"
+#elif PS3
+	#include "TexturePS3.h"
 #else
 	#include "TexturePc.h"
 #endif
@@ -23,6 +25,8 @@ class Texture : public Resource
 	/// Platform specific implementation.
 #ifdef CAFE
 	TextureWiiU impl_;
+#elif PS3
+	TexturePS3 impl_;
 #else
 	TexturePc impl_;
 #endif

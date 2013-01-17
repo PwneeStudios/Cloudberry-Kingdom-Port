@@ -1,4 +1,4 @@
-#include <Architecture/SchedulerPc.h>
+#include <Architecture/SchedulerPS3.h>
 
 #include <Architecture/Job.h>
 #include <Architecture/Scheduler.h>
@@ -89,32 +89,32 @@ struct SchedulerInternal
 {
 };
 
-SchedulerPc::SchedulerPc() :
+SchedulerPS3::SchedulerPS3() :
 	internal_( new SchedulerInternal )
 {
 }
 
-SchedulerPc::~SchedulerPc()
+SchedulerPS3::~SchedulerPS3()
 {
 	delete internal_;
 }
 
-void SchedulerPc::MainThread()
+void SchedulerPS3::MainThread()
 {
 }
 
-void SchedulerPc::RunJob( Job *job )
+void SchedulerPS3::RunJob( Job *job )
 {
 }
 
-void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )
+void SchedulerPS3::CreateResource( ResourceHolder *holder, Resource *resource )
 {
 }
 
-void SchedulerPc::CreateGpuResource( ResourceHolder *holder, Resource *resource )
+void SchedulerPS3::CreateGpuResource( ResourceHolder *holder, Resource *resource )
 {
 }
 
-void SchedulerPc::WorkerThread()
+void SchedulerPS3::WorkerThread()
 {
 }

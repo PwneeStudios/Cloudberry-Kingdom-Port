@@ -1,6 +1,9 @@
 #include <Input/Keyboard.h>
 #include <Input/KeyboardState.h>
 
+#if defined( CAFE ) || defined( PS3 )
+#else
+
 #include <GL/glfw.h>
 
 int XnaToGlfw[] = {
@@ -264,12 +267,17 @@ int XnaToGlfw[] = {
 
 int GlfwToXna[ GLFW_KEY_LAST ];
 
+#endif
+
 KeyboardState Keyboard::currentState_;
 
 void Keyboard::Update()
 {
+#if defined( CAFE ) || defined( PS3 )
+#else
 	for( int i = 0; i < 256; ++i )
 		currentState_.keyState_[ i ] = XnaToGlfw[ i ] ? glfwGetKey( XnaToGlfw[ i ] ) == GLFW_PRESS : false;
+#endif
 }
 
 KeyboardState Keyboard::GetState()

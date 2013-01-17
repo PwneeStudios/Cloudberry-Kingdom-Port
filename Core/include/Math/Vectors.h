@@ -1,10 +1,10 @@
 #ifndef _VECTORS_H_
 #define _VECTORS_H_
 
-#include <cmath>
 #include <cstdlib>
 #include <Utility/Limits.h>
-#include <cstring>
+#include <string.h>
+#include <math.h>
 
 // Magic! I wonder if this is actually faster.
 inline float InvSqrt( float x )

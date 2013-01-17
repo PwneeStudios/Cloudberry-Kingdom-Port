@@ -11,6 +11,8 @@
 
 #ifdef CAFE
 	#include "FilesystemWiiU.h"
+#elif PS3
+	#include "FilesystemPS3.h"
 #else
 	#include "FilesystemPc.h"
 #endif
@@ -26,6 +28,8 @@ class Filesystem : public Singleton< Filesystem >
 
 #ifdef CAFE
 	FilesystemWiiU impl_;
+#elif PS3
+	FilesystemPS3 impl_;
 #else
 	FilesystemPc impl_;
 #endif
