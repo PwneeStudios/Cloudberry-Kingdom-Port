@@ -11,7 +11,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\cafe_sdk\system\src\demo\ax\streamlib\AXStream.h" />
     <ClInclude Include="..\zlib-1.2.7\crc32.h" />
     <ClInclude Include="..\zlib-1.2.7\deflate.h" />
     <ClInclude Include="..\zlib-1.2.7\gzguts.h" />
@@ -87,7 +86,6 @@
     <ClInclude Include="include\Input\GamePadTriggers.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\cafe_sdk\system\src\demo\ax\streamlib\AXStreamServer.c" />
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp" />
     <ClCompile Include="..\zlib-1.2.7\adler32.c" />
