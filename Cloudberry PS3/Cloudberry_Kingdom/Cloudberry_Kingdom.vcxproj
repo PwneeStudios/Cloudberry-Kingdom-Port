@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|PS3">
+      <Configuration>Debug</Configuration>
+      <Platform>PS3</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|PS3">
+      <Configuration>Release</Configuration>
+      <Platform>PS3</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Core\src\Architecture\SchedulerPc.cpp" />
+    <ClCompile Include="Core\src\Content\File.cpp" />
+    <ClCompile Include="Core\src\Content\Filesystem.cpp" />
+    <ClCompile Include="Core\src\Content\FilesystemPc.cpp" />
+    <ClCompile Include="Core\src\Content\Font.cpp" />
+    <ClCompile Include="Core\src\Content\TexturePc.cpp" />
+    <ClCompile Include="Core\src\Content\Wad.cpp" />
+    <ClCompile Include="Core\src\Core.cpp" />
+    <ClCompile Include="Core\src\CorePc.cpp" />
+    <ClCompile Include="Core\src\Graphics\Color.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectParameterPc.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectPass.cpp" />
+    <ClCompile Include="Core\src\Graphics\EffectPc.cpp" />
+    <ClCompile Include="Core\src\Graphics\QuadDrawerPc.cpp" />
+    <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
+    <ClCompile Include="Core\src\Input\GamePadPc.cpp" />
+    <ClCompile Include="Core\src\Input\Input.cpp" />
+    <ClCompile Include="Core\src\Input\InputPc.cpp" />
+    <ClCompile Include="Core\src\Input\Keyboard.cpp" />
+    <ClCompile Include="Core\src\Input\Mouse.cpp" />
+    <ClCompile Include="Core\src\Utility\Log.cpp" />
+    <ClCompile Include="Core\src\Utility\MutexPc.cpp" />
+    <ClCompile Include="PS3Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Core\include\Architecture\Job.h" />
+    <ClInclude Include="Core\include\Architecture\Scheduler.h" />
+    <ClInclude Include="Core\include\Architecture\SchedulerPc.h" />
+    <ClInclude Include="Core\include\Architecture\Singleton.h" />
+    <ClInclude Include="Core\include\Audio\AudioEnums.h" />
+    <ClInclude Include="Core\include\Audio\MediaPlayer.h" />
+    <ClInclude Include="Core\include\Audio\Song.h" />
+    <ClInclude Include="Core\include\Audio\SoundEffect.h" />
+    <ClInclude Include="Core\include\Content\File.h" />
+    <ClInclude Include="Core\include\Content\Filesystem.h" />
+    <ClInclude Include="Core\include\Content\FilesystemPc.h" />
+    <ClInclude Include="Core\include\Content\Font.h" />
+    <ClInclude Include="Core\include\Content\Resource.h" />
+    <ClInclude Include="Core\include\Content\ResourcePtr.h" />
+    <ClInclude Include="Core\include\Content\Sound.h" />
+    <ClInclude Include="Core\include\Content\Texture.h" />
+    <ClInclude Include="Core\include\Content\TexturePc.h" />
+    <ClInclude Include="Core\include\Content\Wad.h" />
+    <ClInclude Include="Core\include\Core.h" />
+    <ClInclude Include="Core\include\CorePc.h" />
+    <ClInclude Include="Core\include\Datastructures\Freelist.h" />
+    <ClInclude Include="Core\include\ForwardDeclarations.h" />
+    <ClInclude Include="Core\include\GameLoop.h" />
+    <ClInclude Include="Core\include\Graphics\Color.h" />
+    <ClInclude Include="Core\include\Graphics\Effect.h" />
+    <ClInclude Include="Core\include\Graphics\EffectParameter.h" />
+    <ClInclude Include="Core\include\Graphics\EffectPass.h" />
+    <ClInclude Include="Core\include\Graphics\EffectTechnique.h" />
+    <ClInclude Include="Core\include\Graphics\QuadDrawer.h" />
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h" />
+    <ClInclude Include="Core\include\Graphics\TextDrawer.h" />
+    <ClInclude Include="Core\include\Graphics\Types.h" />
+    <ClInclude Include="Core\include\Input\GamePad.h" />
+    <ClInclude Include="Core\include\Input\GamePadButtons.h" />
+    <ClInclude Include="Core\include\Input\GamePadDPad.h" />
+    <ClInclude Include="Core\include\Input\GamePadState.h" />
+    <ClInclude Include="Core\include\Input\GamePadThumbSticks.h" />
+    <ClInclude Include="Core\include\Input\GamePadTriggers.h" />
+    <ClInclude Include="Core\include\Input\Input.h" />
+    <ClInclude Include="Core\include\Input\InputEnums.h" />
+    <ClInclude Include="Core\include\Input\InputPc.h" />
+    <ClInclude Include="Core\include\Input\Keyboard.h" />
+    <ClInclude Include="Core\include\Input\KeyboardState.h" />
+    <ClInclude Include="Core\include\Input\Mouse.h" />
+    <ClInclude Include="Core\include\Input\MouseState.h" />
+    <ClInclude Include="Core\include\Math\Vectors.h" />
+    <ClInclude Include="Core\include\Utility\Limits.h" />
+    <ClInclude Include="Core\include\Utility\Log.h" />
+    <ClInclude Include="Core\include\Utility\Mutex.h" />
+    <ClInclude Include="Core\src\Graphics\EffectInternalPc.h" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{46EC60F3-1A50-404B-BA9B-D203DA8DAF55}</ProjectGuid>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>SNC</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>SNC</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
+    <IncludePath>Core\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
+    <IncludePath>Core\include;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
+    <ClCompile>
+      <PreprocessorDefinitions>_DEBUG;__CELL_ASSERT__;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
+    <ClCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions);</PreprocessorDefinitions>
+      <OptimizationLevel>Level2</OptimizationLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <Import Condition="'$(ConfigurationType)' == 'Makefile' and Exists('$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets')" Project="$(VCTargetsPath)\Platforms\$(Platform)\SCE.Makefile.$(Platform).targets" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
