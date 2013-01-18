@@ -193,6 +193,7 @@ namespace CloudberryKingdom
 		enum BankType
 		{
 			BankType_CAMPAIGN,
+			BankType_ESCALATION,
 			BankType_INFINITE
 		};
 	
@@ -473,6 +474,8 @@ namespace CloudberryKingdom
 		/// A collection of objects in the game that are not in the level, such as GUIs.
 		/// </summary>
 		GameObjVec MyGameObjects, NewGameObjects;
+
+		void ReInitGameObjects();
 
 		/// <summary>
 		/// Remove all GameObjects with a specified tag.

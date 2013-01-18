@@ -37,6 +37,11 @@ namespace CloudberryKingdom
 	float _IconScale[] = { .8f,.8f,.8f };
 	std::vector<float> Challenge_HeroRush2::IconScale = VecFromArray( _IconScale );
 
+	void Challenge_HeroRush2::AdditionalSwap(int levelindex)
+    {
+        Awardments::CheckForAward_HeroRush2_Level( levelindex - StartIndex );
+    }	
+
 	void Challenge_HeroRush2::MakeExitDoorIcon( int levelindex )
 	{
 		HeroSpec spec = HeroList[ ( levelindex + 1 - StartIndex ) % HeroList.size() ];
@@ -81,8 +86,13 @@ namespace CloudberryKingdom
 
 	Challenge_HeroRush2::Challenge_HeroRush2()
 	{
-		GameTypeId = 1;
+		GameTypeId = 3;
 		MenuName = Name = Localization::Words_HYBRID_RUSH;
+	}
+
+	void Challenge_HeroRush2::MakeHeroList()
+	{
+		HeroList.clear();
 
 		// Create the list of custom heros
 		int _BaseTypes[] = { Hero_BaseType_BOUNCY, Hero_BaseType_BOX, Hero_BaseType_CLASSIC, Hero_BaseType_SPACESHIP, Hero_BaseType_WHEEL };
@@ -92,29 +102,40 @@ namespace CloudberryKingdom
 		int _MoveTypes[] = { Hero_MoveMod_CLASSIC, Hero_MoveMod_DOUBLE, Hero_MoveMod_JETPACK };
 		std::vector<int> MoveTypes = VecFromArray( _MoveTypes );
 
-		for ( std::vector<int>::const_iterator basetype = BaseTypes.begin(); basetype != BaseTypes.end(); ++basetype )
-			for ( std::vector<int>::const_iterator shape = ShapeTypes.begin(); shape != ShapeTypes.end(); ++shape )
-				for ( std::vector<int>::const_iterator move = MoveTypes.begin(); move != MoveTypes.end(); ++move )
-				{
-					// Spaceships can only have their shape modified
-					if ( *basetype == Hero_BaseType_SPACESHIP && *move != Hero_MoveMod_CLASSIC )
-						continue;
+		for ( int i = 0; i < 2; i++ )
+		{
+			for ( std::vector<int>::const_iterator basetype = BaseTypes.begin(); basetype != BaseTypes.end(); ++basetype )
+				for ( std::vector<int>::const_iterator shape = ShapeTypes.begin(); shape != ShapeTypes.end(); ++shape )
+					for ( std::vector<int>::const_iterator move = MoveTypes.begin(); move != MoveTypes.end(); ++move )
+					{
+						if ( i == 0 && *basetype == Hero_BaseType_BOX ) continue;
 
-					// Normal bob is added later (to make sure it is first)
-					if ( *basetype == Hero_BaseType_CLASSIC && *shape == Hero_Shape_CLASSIC && *move == Hero_MoveMod_CLASSIC )
-						continue;
+						// Spaceships can only have their shape modified
+						if ( *basetype == Hero_BaseType_SPACESHIP && *move != Hero_MoveMod_CLASSIC )
+							continue;
 
-					// Bouncey can not be double jump
-					if ( *basetype == Hero_BaseType_BOUNCY && *move == Hero_MoveMod_DOUBLE )
-						continue;
+						// Normal bob is added later (to make sure it is first)
+						if ( *basetype == Hero_BaseType_CLASSIC && *shape == Hero_Shape_CLASSIC && *move == Hero_MoveMod_CLASSIC )
+							continue;
 
-					//HeroList[NumHeros++] = new HeroSpec(basetype, shape, move);
-					HeroList.push_back( HeroSpec( *basetype, *shape, *move ) );
-				}
+						// Bouncey can not be double jump
+						if ( *basetype == Hero_BaseType_BOUNCY && *move == Hero_MoveMod_DOUBLE )
+							continue;
+
+						//HeroList[NumHeros++] = new HeroSpec(basetype, shape, move);
+						HeroList.push_back( HeroSpec( *basetype, *shape, *move ) );
+					}
+		}
 	}
 
 	void Challenge_HeroRush2::ShuffleHeros()
 	{
+        MakeHeroList();
+
+        Insert( HeroList, 0, HeroSpec( Hero_BaseType_ROCKET_BOX, Hero_Shape_CLASSIC, Hero_MoveMod_CLASSIC ) );
+        Insert( HeroList, 0, HeroSpec( Hero_BaseType_ROCKET_BOX, Hero_Shape_CLASSIC, Hero_MoveMod_CLASSIC ) );
+
+
 		// Shuffle the non-classic heros
 		HeroList = Tools::GlobalRnd->Shuffle( HeroList );
 
@@ -131,7 +152,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<BobPhsx> Challenge_HeroRush2::GetHero( int i )
 	{
-		//return BobPhsx.MakeCustom(HeroList[i % NumHeros]);
+		//return BobPhsx::MakeCustom(HeroList[i % NumHeros]);
 		return BobPhsx::MakeCustom( HeroList[ i % HeroList.size() ] );
 	}
 

@@ -57,6 +57,13 @@ namespace CloudberryKingdom
 		}
 	}
 
+    void MenuList::Release()
+    {
+        MenuItem::Release();
+
+        MyMenuListExpand = 0;
+    }
+
 #if defined(WINDOWS)
 	bool MenuList::HitTest( Vector2 pos, Vector2 padding )
 	{
@@ -275,6 +282,9 @@ namespace CloudberryKingdom
 	void MenuList::PhsxStep( bool Selected )
 	{
 		MenuItem::PhsxStep( Selected );
+
+        if (MyMenuListExpand != 0 && MyMenuListExpand->getCore()->Released)
+            MyMenuListExpand.reset();
 
 		HoldSelected = Selected;
 		int CurIndex = ListIndex;

@@ -1068,6 +1068,8 @@ namespace CloudberryKingdom
 
 	void Level::WatchReplay( bool SaveCurInfo )
 	{
+		Awardments::CheckForAward_Replay(PlayerManager::Score_Attempts);
+
 		Tools::setPhsxSpeed( 1 );
 
 		SuppressCheckpoints = true;
@@ -1167,7 +1169,7 @@ namespace CloudberryKingdom
 			    Comp.SetColorScheme(ColorSchemeManager.ComputerColorSchemes[index]);
 			}
 			else
-			    Comp.SetColorScheme(Tools.GlobalRnd.RandomItem<ColorScheme>(ColorSchemeManager.ComputerColorSchemes));
+			    Comp.SetColorScheme(Tools::GlobalRnd.RandomItem<ColorScheme>(ColorSchemeManager.ComputerColorSchemes));
 			*/
 			Comp->SetColorScheme( ColorSchemeManager::ComputerColorSchemes[ 0 ] );
 
@@ -3195,7 +3197,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		for ( ObjectVec::const_iterator obj = PreRecycleBin.begin(); obj != PreRecycleBin.end(); ++obj )
 		{
-			//if (obj is MovingPlatform && ((MovingPlatform)obj).Parent != null) Tools.Write("!");
+			//if (obj is MovingPlatform && ((MovingPlatform)obj).Parent != null) Tools::Write("!");
 			( *obj )->getCore()->MarkedForDeletion = false;
 			( *obj )->getCore()->MyLevel.reset();
 			getRecycle()->CollectObject(*obj);
@@ -3414,8 +3416,11 @@ int Level::AfterPostDrawLayer = 12;
 		{
 			for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
 			{
-				Color c = Color( 1, 1, 1, ( *bob )->LightSourceFade );
-				Tools::QDrawer->DrawLightSource( ( *bob )->getPos(), 670, 5, c ); //new Color(.75f, .75f, .75f, .75f));
+                int DeadCount = CoreMath::RestrictVal( 0, 1000, ( *bob )->DeadCount - 3 );
+                float fade = CoreMath::RestrictVal( 0.f, 1.f, ( *bob )->LightSourceFade - DeadCount * .0175f );
+				Color c = Color( 1.f, 1.f, 1.f, ( *bob )->LightSourceFade );
+				float radius = CoreMath::RestrictVal( 0.0f, 1000.0f, 860.0f + DeadCount * 27.0f + CoreMath::Periodic( -30, 30, 40, CurPhsxStep ) );
+				Tools::QDrawer->DrawLightSource( ( *bob )->getPos(), radius, 5.f, c ); //new Color(.75f, .75f, .75f, .75f));
 			}
 			Tools::QDrawer->Flush();
 		}
@@ -3884,6 +3889,16 @@ int Level::AfterPostDrawLayer = 12;
 		}
 	}
 
+    void Level::CalcObstaclsSeen()
+    {
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+            ( *player )->getStats()->ObstaclesSeen = NumObstacles;
+
+		for ( BobVec::const_iterator bob = Bobs.begin(); bob != Bobs.end(); ++bob )
+            Awardments::CheckForAward_Obstacles( *bob );
+    }
+
 	void Level::PhsxStep( bool NotDrawing )
 	{
 		PhsxStep( NotDrawing, true );
@@ -3931,6 +3946,9 @@ int Level::AfterPostDrawLayer = 12;
 
 		if ( ReplayPaused )
 			return;
+
+        if ( CurPhsxStep == 300 )
+            CalcObstaclsSeen();
 
 		EvolveParticles();
 
@@ -4007,6 +4025,7 @@ int Level::AfterPostDrawLayer = 12;
 					PrevIndependentPhsxStep = IndependentPhsxStep - 1;
 				break;
 
+			case TimeTypes_Y_SYNC:
 			case TimeTypes_X_SYNC:
 				if ( Bobs.size() > 0 && Bobs[ 0 ] != 0 )
 				{
@@ -4026,9 +4045,11 @@ int Level::AfterPostDrawLayer = 12;
 					if ( NumAlive == 0 )
 						break;
 
-					//float New = Bobs[0].Pos.X / 10;
-					float New = ( Pos.X / NumAlive ) / 10;
-					//float New = (Pos.X) / 10;
+                    float New = 0;
+                    if ( TimeType == TimeTypes_X_SYNC )
+                        New = (Pos.X / NumAlive) / 10;
+                    else
+                        New = (Pos.Y / NumAlive) / 4.5f;
 
 					if ( !IndependentStepSetOnce )
 						Prev = New;
@@ -4097,6 +4118,7 @@ int Level::AfterPostDrawLayer = 12;
 	{
 		NumCoins = 0;
 		TotalCoinScore = 0;
+		NumObstacles = 0;
 		for ( ObjectVec::const_iterator obj = Objects.begin(); obj != Objects.end(); ++obj )
 		{
 			boost::shared_ptr<Coin> coin = boost::dynamic_pointer_cast<Coin>( *obj );
@@ -4111,6 +4133,10 @@ int Level::AfterPostDrawLayer = 12;
 			{
 				NumBlobs++;
 			}
+
+			boost::shared_ptr<_Death> death = boost::dynamic_pointer_cast<_Death>( *obj );
+            if ( 0 != death )
+                NumObstacles++;
 		}
 	}
 
@@ -4128,7 +4154,7 @@ int Level::AfterPostDrawLayer = 12;
 		MaxRight = EndBuffer = 0;
 		LastStep = 0;
 		CoinsCountInStats = false;
-		NumCoins = NumBlobs = TotalCoinScore = 0;
+		NumCoins = NumBlobs = TotalCoinScore = NumObstacles = 0;
 		Finished = false;
 		RecordPosition = false;
 		Geometry = static_cast<LevelGeometry>( 0 );

@@ -49,9 +49,9 @@ namespace CloudberryKingdom
 
 		EnsureFancy();
 
-		//Text = new EzText("Press any key to start", Resources.Font_Grobold42, true);
+		//Text = new EzText("Press any key to start", Resources::Font_Grobold42, true);
 		Text = boost::make_shared<EzText>( Localization::Words_PRESS_START, Resources::Font_Grobold42, true );
-		//Text = new EzText(Localization.Words.PressStart, ItemFont);
+		//Text = new EzText(Localization::Words_PressStart, ItemFont);
 
 		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();
 		Text->OutlineColor = Color::Black.ToVector4();
@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 		{
 			DelayToAllowInput = 10;
 
-			//Tools.Nothing();
+			//Tools::Nothing();
 			GUI_Panel::Call( MakeMagic( StartMenu_MW, ( Title ) ) );
 			Hide();
 		}

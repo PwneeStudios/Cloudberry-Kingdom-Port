@@ -35,6 +35,7 @@ namespace CloudberryKingdom
 		std::vector<int> DeathsBy;
 
 		int TimeAlive;
+		int ObstaclesSeen;
 		#pragma endregion
 
 		// Add all fields and elements of arrays to the corresponding field in this instance.

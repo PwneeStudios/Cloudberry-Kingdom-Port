@@ -72,7 +72,7 @@ namespace CloudberryKingdom
 
 		// Attach an action to the door
 		MakeFinalDoor::AttachDoorAction( MadeDoor );
-		//door.OnOpen = ((StringWorldGameData)Tools.WorldMap).EOL_StringWorldDoorAction;
+		//door.OnOpen = ((StringWorldGameData)Tools::WorldMap).EOL_StringWorldDoorAction;
 	}
 
 	void MakeFinalDoorVertical::Cleanup()

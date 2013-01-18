@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 
 		std::map<int, boost::shared_ptr<ScoreEntry> > HighScores;
 
-		int CampaignLevel, CampaignCoins;
+		int CampaignLevel, CampaignCoins, CampaignIndex;
 
 		int MyIndex;
 
@@ -63,6 +63,11 @@ namespace CloudberryKingdom
 		#pragma endregion
 
 	
+		int GetTotalLevel();
+        int GetTotalCampaignLevel();
+        int GetTotalCampaignIndex();
+		int GetTotalArcadeLevel();
+
 		int GetHighScore( int GameId );
 
 		void AddHighScore( const boost::shared_ptr<ScoreEntry> &score );

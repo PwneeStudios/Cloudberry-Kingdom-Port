@@ -8,42 +8,43 @@ namespace CloudberryKingdom
 	struct Awardment : public boost::enable_shared_from_this<Awardment>
 	{
 
-	
-		std::wstring Name, Description;
+        static std::wstring NewGameMode;
+        static std::wstring Default;
+
+        Localization::Words Name, Description;
+        std::wstring TitleType;
+
 		boost::shared_ptr<Hat> Unlockable;
 		int Guid;
 
-		Awardment( int Guid, const std::wstring &Name, const std::wstring &Description, const boost::shared_ptr<Hat> &Unlockable );
+        /// <summary>
+        /// An associated integer, usually representing a number the player must surpass to achieve the awardment.
+        /// </summary>
+        int MyInt;
+
+        /// <summary>
+        /// Whether this award is a legitimate Achievement/Trophy/Awardment/etc, as defined by the relevant console.
+        /// Unofficial awards are used to track progress without giving an official award to the player.
+        /// </summary>
+        bool Official;
+
+        /// <summary>
+        /// Whether to show a custom message when the award is given.
+        /// On Xbox there is a system level message for official awards, hence no additional message is needed.
+        /// </summary>
+        bool ShowWhenAwarded;
+
+        Awardment(int Guid, Localization::Words Name, Localization::Words Description);
+
+        //Awardment(int Guid, Localization.Words Name, Localization.Words Description, string TitleType, bool ShowWhenAwarded)
+		Awardment(int Guid, std::wstring Name, std::wstring Description, std::wstring TitleType, bool ShowWhenAwarded);
 
 	};
 
 	struct Awardments
 	{
-
 	
 		static void InitializeStatics();
-
-	
-		struct CheckpointsStatsLambda : public PlayerIntLambda
-		{
-		
-			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
-		};
-
-	
-		struct CoinsStatsLambda : public PlayerIntLambda
-		{
-		
-			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
-		};
-
-	
-		struct TotalCoinsStatsLambda : public PlayerIntLambda
-		{
-		
-			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
-		};
-
 	
 		static std::vector<boost::shared_ptr<Awardment> > Awards;
 		static std::map<int, boost::shared_ptr<Awardment> > AwardsDict;
@@ -60,76 +61,56 @@ namespace CloudberryKingdom
 		/// <returns>The amount to delay by.</returns>
 		static int AwardDelay();
 
-		static void CheckForAward_HoldForward();
 
-		static void CheckForAward_NoCoins();
+		static void CheckForAward_TimeCrisisUnlock(int Level, boost::shared_ptr<PlayerData> player);
+		static void CheckForAward_HeroRushUnlock(int Level, boost::shared_ptr<PlayerData> player);
+		static void CheckForAward_HeroRush2Unlock(int Level, boost::shared_ptr<PlayerData> player);
+		static void CheckForAward_HeroRush2_Level(int Level);
+		static void CheckForAward_ArcadeScore(int Score);
+		static void CheckForAward_ArcadeScore2(int Score);
+		static void CheckForAward_Invisible(int Level);
+		static void CheckForAward_Die(boost::shared_ptr<Bob> bob);
+		static void CheckForAward_NoDeath(boost::shared_ptr<PlayerData> player);
+		static void CheckForAward_UnlockAllArcade();
+		static void CheckForAward_Save();
+		static void CheckForAward_Obstacles(boost::shared_ptr<Bob> bob);
+		static void CheckForAward_Buy();
+		static void CheckForAward_Replay(int Attempts);
+		static void CheckForAward_Bungee(boost::shared_ptr<GameData> game);
 
+        static void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award );
+        static void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award, const boost::shared_ptr<PlayerData> player);
 	
-		static int HeroRushScore;
-	
-		static void CheckForAward_HeroRush_Score( int Score );
+        static boost::shared_ptr<Awardment> Award_Campaign1;
+        static boost::shared_ptr<Awardment> Award_ArcadeHighScore;
+        static boost::shared_ptr<Awardment> Award_Bungee;
+        static boost::shared_ptr<Awardment> Award_ArcadeHighScore2;
+        static boost::shared_ptr<Awardment> Award_Die;
+        static boost::shared_ptr<Awardment> Award_Campaign3;
+        static boost::shared_ptr<Awardment> Award_Invisible;
+        static boost::shared_ptr<Awardment> Award_Hats;
+        static boost::shared_ptr<Awardment> Award_Campaign2;
+        static boost::shared_ptr<Awardment> Award_UnlockAllArcade;
+        static boost::shared_ptr<Awardment> Award_NoDeath;
+        static boost::shared_ptr<Awardment> Award_Save;
+        static boost::shared_ptr<Awardment> Award_Obstacles;
+        static boost::shared_ptr<Awardment> Award_Buy;
+        static boost::shared_ptr<Awardment> Award_Campaign4;
+        static boost::shared_ptr<Awardment> Award_BuyHat;
+        static boost::shared_ptr<Awardment> Award_HeroRush2Level;
+        static boost::shared_ptr<Awardment> Award_Replay;
+        static boost::shared_ptr<Awardment> Award_Campaign5;
+        
+        // Arcade Unlocks
+        static boost::shared_ptr<Awardment> UnlockTimeCrisis;
+        static boost::shared_ptr<Awardment> UnlockHeroRush;
+        static boost::shared_ptr<Awardment> UnlockHeroRush2;
 
-	
-		static int HeroRush2Score;
-	
-		static void CheckForAward_HeroRush2_Score( int Score );
-
-	
-		static int HeroRush2_LevelUnlock;
-	
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
-		static void CheckForAward_HeroRush2Unlock( int Level_Renamed );
-
-//C# TO C++ CONVERTER NOTE: The parameter Level was renamed since it is named the same as a user-defined type:
-		static void CheckForAward_Escalation_Level( int Level_Renamed );
-
-		static void CheckForAward_BeatCampaign( int Index );
-
-		//static int FastCampaign_Minutes = 5;
-	
-		static int FastCampaign_Minutes;
-	
-		static void CheckForAward_FastCampaign( int Index );
-
-		static void CheckForAward_EbenezerAbusiveCastle( int Index );
-
-		static void CheckForAward_PerfectEasyCastle( int Index );
-
-		static void CheckForAward_NoDeathNormalCastle( int Index );
-
-		static void CheckForAward_PartiallyInvisible( int Index );
-
-		static void CheckForAward_TotallyInvisible( int Index );
-
-		static const int LotsOfJumps = 10000;
-		static void CheckForAward_JumpAlot( const boost::shared_ptr<Bob> &bob );
+        const static int TimeCrisis_LevelUnlock = 50;
+        const static int HeroRush_LevelUnlock = 250;
+        const static int HeroRush2_LevelUnlock = 500;
 
 		static float CurShift, Shift;
-		static void GiveAward( const boost::shared_ptr<Awardment> &award );
-
-	
-		static std::wstring BeatStr;
-	
-		static std::vector<boost::shared_ptr<Awardment> > BeatCampaign;
-		static boost::shared_ptr<Awardment> JumpAlot;
-
-		static boost::shared_ptr<Awardment> HoldForwardFreeplay;
-		static boost::shared_ptr<Awardment> HeroRush_Score;
-		static boost::shared_ptr<Awardment> Escalation_Levels;
-
-		static boost::shared_ptr<Awardment> FastCampaign2;
-
-		static boost::shared_ptr<Awardment> HeroRush2_Score;
-		static boost::shared_ptr<Awardment> PartiallyInvisibleCampaign;
-		static boost::shared_ptr<Awardment> TotallyInvisibleCampaign;
-
-		static boost::shared_ptr<Awardment> NoCoinFreeplay;
-
-		static boost::shared_ptr<Awardment> AllCoinsAbusiveCastle;
-		static boost::shared_ptr<Awardment> NoDeathsNormalCastle;
-		static boost::shared_ptr<Awardment> PerfectEasyCastle;
-
-		static boost::shared_ptr<Awardment> UnlockHeroRush2;
 
 		static void Init();
 	};

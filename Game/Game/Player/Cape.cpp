@@ -194,8 +194,8 @@ namespace CloudberryKingdom
 
 		MyQuad = boost::make_shared<QuadClass>();
 		MyQuad->SetToDefault();
-		//MyQuad.Quad.MyTexture = Tools.TextureWad.FindByName("FallingBlock13");//"White");
-		//MyQuad.Quad.MyEffect = Tools.BasicEffect;
+		//MyQuad.Quad.MyTexture = Tools::TextureWad.FindByName("FallingBlock13");//"White");
+		//MyQuad.Quad.MyEffect = Tools::BasicEffect;
 
 
 		//NumTriangles = 4 * Sections * HorizontalSections;

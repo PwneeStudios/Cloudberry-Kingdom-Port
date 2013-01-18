@@ -318,7 +318,7 @@ namespace CloudberryKingdom
 		data->setSeed( Tools::GlobalRnd->Rnd->Next() );
 
 		// Debug: set hero type
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Spaceship, Hero_Shape.Small, Hero_MoveMod.Classic);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Spaceship, Hero_Shape.Small, Hero_MoveMod.Classic);
 
 		// Vertical levels have no checkpoints
 		if ( LevelSeed->MyGeometry != LevelGeometry_RIGHT )

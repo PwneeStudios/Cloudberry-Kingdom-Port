@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzTexture> ButtonTexture::getX()
 	{
 		return ButtonString::ActualKeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
-		//return Tools.TextureWad.FindByName("Xbox_X");
+		//return Tools::TextureWad.FindByName("Xbox_X");
 	}
 
 	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
@@ -408,12 +408,29 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		return true;
 	}
 
+        Vector2 EzText::MeasureString(std::wstring text)
+        {
+            Vector2 val;
+            
+            //val = MyFont.Font.MeasureString(text);
+            //return val;
+
+            val = Tools::QDrawer->MeasureString( MyFont->HFont, text );
+            return val;
+        }
+
+        Vector2 EzText::MeasureString( boost::shared_ptr<StringBuilder> text )
+        {
+            return Tools::QDrawer->MeasureString( MyFont->HFont, text );
+            //return MyFont.Font.MeasureString(text);
+        }
+
 	void EzText::SubstituteText( const std::wstring &text )
 	{
 		Bits[ 0 ]->str = text;
 		Bits[ 0 ]->builder_str.reset();
 		TextWidth -= Bits[ 0 ]->size.X;
-		Bits[ 0 ]->size = MyFont->Font->MeasureString( text );
+		Bits[ 0 ]->size = MeasureString( text );
 		TextWidth += Bits[ 0 ]->size.X;
 	}
 
@@ -421,7 +438,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	{
 		Bits[ 0 ]->builder_str = text;
 		TextWidth -= Bits[ 0 ]->size.X;
-		Bits[ 0 ]->size = MyFont->Font->MeasureString( *text );
+		Bits[ 0 ]->size = MeasureString( *text );
 		TextWidth += Bits[ 0 ]->size.X;
 	}
 
@@ -787,8 +804,6 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	Vector2 EzText::StringSize( std::wstring str )
 	{
-		MyFont->FixFont();
-
 		Vector2 Size = Vector2();
 		int BeginBracketIndex, EndBracketIndex;
 		bool flag = false;
@@ -814,7 +829,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				flag = true;
 		}
 
-		Vector2 TextSize = MyFont->Font->MeasureString( str );
+		Vector2 TextSize = MeasureString( str );
 		TextSize.Y *= Tools::TheGame->Resolution.LineHeightMod;
 
 		Size.X += TextSize.X;
@@ -825,10 +840,8 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	float EzText::AddLine( std::wstring str, float StartX, float StartY, int LineNumber )
 	{
-		MyFont->FixFont();
-
 		Vector2 loc = Vector2( StartX, 0 );
-		float LineHeight = MyFont->Font->MeasureString( std::wstring( L" " ) ).Y;
+		float LineHeight = MeasureString( std::wstring( L" " ) ).Y;
 		int BeginBracketIndex, EndBracketIndex;
 
 		bool FirstElement = true;
@@ -869,7 +882,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				if ( Parse_Type == ParseData_COLOR )
 				{
 					CurColor = Parse_Color;
-					loc.X += .35f * MyFont->Font->Spacing;
+					loc.X += .35f * MyFont->HFont->font->CharSpacing;
 				}
 			}
 			// Parse text info
@@ -887,7 +900,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 				bit->str = str.substr( 0, i );
 				str = str.erase( 0, i );
 
-				bit->size = MyFont->Font->MeasureString( bit->str );
+				bit->size = MeasureString( bit->str );
 				bit->size.Y *= Tools::TheGame->Resolution.LineHeightMod;
 
 				bit->loc = loc + Vector2( 0, StartY );
@@ -920,7 +933,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 	float EzText::GetWorldWidth( const std::wstring &str )
 	{
-		return getScale() * GetWorldFloat( MyFont->Font->MeasureString( str ).X );
+		return getScale() * GetWorldFloat( MeasureString( str ).X );
 	}
 
 	const Vector2 &EzText::getMyCameraZoom() const
@@ -1036,7 +1049,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		{
 			for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 				( *bit )->loc.X += LineSizes[ ( *bit )->LineNumber ].X / 2 * Tools::TheGame->Resolution.LineHeightMod;
-			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools.TheGame.Resolution.LineHeightMod);
+			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic ) // * Tools::TheGame.Resolution.LineHeightMod);
 				( *pic )->rect.X += static_cast<int>( LineSizes[ ( *pic )->LineNumber ].X / 2 );
 		}
 		else
@@ -1091,9 +1104,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			setScale( getScale() * ShadowScale );
 
 			_Pos -= ShadowOffset;
-			if ( MyFont->OutlineFont != 0 || OutlineColor.W == 0 )
-				_Draw( cam, false, PicShadow, MyFont->OutlineFont, ShadowColor.ToVector4() );
-			_Draw( cam, false, false, MyFont->Font, ShadowColor.ToVector4() );
+			if ( MyFont->HOutlineFont != 0 || OutlineColor.W == 0 )
+				_Draw( cam, false, PicShadow, MyFont->HOutlineFont, ShadowColor.ToVector4() );
+			_Draw( cam, false, false, MyFont->HFont, ShadowColor.ToVector4() );
 			_Pos += ShadowOffset;
 
 			setScale( _HoldScale );
@@ -1105,9 +1118,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			PicColor = Color::White;
 		}
 
-		if ( MyFont->OutlineFont != 0 && OutlineColor.W != 0 )
-			_Draw( cam, false, true, MyFont->OutlineFont, OutlineColor );
-		_Draw( cam, EndBatch, true, MyFont->Font, MyFloatColor );
+		if ( MyFont->HOutlineFont != 0 && OutlineColor.W != 0 )
+			_Draw( cam, false, true, MyFont->HOutlineFont, OutlineColor );
+		_Draw( cam, EndBatch, true, MyFont->HFont, MyFloatColor );
 
 		// Draw box outline
 		if ( Tools::DrawBoxes )
@@ -1125,12 +1138,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			Alpha = HoldAlpha;
 	}
 
-	void EzText::_Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<SpriteFont> &font, Vector4 color )
+	void EzText::_Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<HackSpriteFont> &font, Vector4 color )
 	{
 		if ( MyFloatColor.W <= 0 )
 			return;
-
-		MyFont->FixFont();
 
 		MyColor.R = Tools::FloatToByte( color.X );
 		MyColor.G = Tools::FloatToByte( color.Y );
@@ -1142,11 +1153,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			ZoomMod = getMyCameraZoom().X / .001f;
 
 		Vector2 Position = _Pos + JustificationShift;
-		if ( FixedToCamera )
-			Position += cam->Data.Position;
+		if ( FixedToCamera ) Position += cam->Data.Position;
+		if ( FixedToCamera ) Position += Vector2(Tools::EffectWad->getCameraPosition().X, Tools::EffectWad->getCameraPosition().Y);
 		Vector2 Loc = Tools::ToScreenCoordinates( Position, cam, Tools::EffectWad->ModZoom );
 
-		Tools::StartSpriteBatch();
 		for ( std::vector<boost::shared_ptr<EzTextBit> >::const_iterator bit = Bits.begin(); bit != Bits.end(); ++bit )
 		{
 			Color textcolor = ColorHelper::PremultiplyAlpha( Color( MyColor.ToVector4() * (*bit)->clr.ToVector4() ) );
@@ -1155,11 +1165,11 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			_pos = Tools::ToWorldCoordinates( _pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
 
 			if ( ( *bit )->builder_str != 0 )
-				Tools::Render->MySpriteBatch->DrawString( font, *( *bit )->builder_str, _pos, textcolor, 0, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2(Tools::TheGame->Resolution.LineHeightMod, Tools::TheGame->Resolution.LineHeightMod) * getScale() * ZoomMod, SpriteEffects_None, 1 );
+				Tools::QDrawer->DrawString( font, *( *bit )->builder_str, _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod );
 			else
-				Tools::Render->MySpriteBatch->DrawString( font, ( *bit )->str,			_pos, textcolor, Angle, (*bit)->size * Tools::TheGame->Resolution.TextOrigin, Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod, SpriteEffects_None, 1 );
+				Tools::QDrawer->DrawString( font, ( *bit )->str,		  _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod );
 			
-			//Tools.QDrawer.DrawSquareDot( Position, new Color( 255, 255, 255 ), 5 );
+			//Tools::QDrawer.DrawSquareDot( Position, new Color( 255, 255, 255 ), 5 );
 		}
 		if ( DrawPics )
 			for ( std::vector<boost::shared_ptr<EzTextPic> >::const_iterator pic = Pics.begin(); pic != Pics.end(); ++pic )
@@ -1196,9 +1206,6 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 
 				QUAD_DRAWER->Draw( sq );
 			}
-
-		if ( EndBatch )
-			Tools::Render->EndSpriteBatch();
 	}
 
 	void EzText::CalcBounds()

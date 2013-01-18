@@ -872,9 +872,6 @@ namespace CloudberryKingdom
 		if ( !MyBob->CompControl && !MyBob->getCore()->MyLevel->Watching && MyBob->getCore()->MyLevel->PlayMode == 0 )
 		{
 			MyBob->getMyStats()->Jumps++;
-
-			// Check for Lots of Jumps awardment
-			Awardments::CheckForAward_JumpAlot( MyBob );
 		}
 	}
 
@@ -884,6 +881,8 @@ namespace CloudberryKingdom
 
 	void BobPhsx::Die( BobDeathType DeathType )
 	{
+        // Check for lots of deaths
+        Awardments::CheckForAward_Die(MyBob);
 	}
 
 	bool BobPhsx::SkipInteraction( const boost::shared_ptr<BlockBase> &block )

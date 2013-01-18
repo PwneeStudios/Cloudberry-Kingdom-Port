@@ -44,8 +44,8 @@ namespace CloudberryKingdom
 		//public static void LoadRes()
 		//{
 		//    Incr();
-		//    PlayerManager.SavePlayerData = new _SavePlayerData();
-		//    PlayerManager.SavePlayerData.Load();
+		//    PlayerManager::SavePlayerData = new _SavePlayerData();
+		//    PlayerManager::SavePlayerData.Load();
 		//    Wait();
 		//}
 

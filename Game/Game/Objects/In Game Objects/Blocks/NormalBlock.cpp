@@ -268,7 +268,7 @@ float NormalBlock::TopOnlyHeight = 60;
 			{
 				//if (BlockCore.Ceiling)
 					MyDraw->Draw();
-				//Tools.QDrawer.Flush();
+				//Tools::QDrawer.Flush();
 			}
 
 			if ( getCore()->Encased )

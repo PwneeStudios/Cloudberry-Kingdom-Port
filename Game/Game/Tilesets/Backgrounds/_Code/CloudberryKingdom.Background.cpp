@@ -4090,7 +4090,7 @@ namespace CloudberryKingdom
 
 			if ( TestTexture == 0 )
 			{
-				//TestTexture = Tools.Texture("BGPlain");
+				//TestTexture = Tools::Texture("BGPlain");
 				TestTexture = Tools::Texture( std::wstring( L"11 hill_4" ) );
 			}
 			TestQuad->Quad_Renamed.setMyTexture( TestTexture );

@@ -68,7 +68,7 @@ namespace CloudberryKingdom
 		if ( !MakeInBackground )
 			Tools::CurGameData = shared_from_this();
 
-		//Tools.Recycle.Empty();
+		//Tools::Recycle.Empty();
 		Loading = true;
 
 		if ( !MakeInBackground )

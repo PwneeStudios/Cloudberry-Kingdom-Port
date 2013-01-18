@@ -30,11 +30,6 @@ namespace CloudberryKingdom
 	
 		boost::shared_ptr<EzText> Text;
 	
-		void SetText( const boost::shared_ptr<Awardment> &award );
-
-	
-		virtual void SizeAndPosition();
-
 		int Step;
 		virtual void MyPhsxStep();
 

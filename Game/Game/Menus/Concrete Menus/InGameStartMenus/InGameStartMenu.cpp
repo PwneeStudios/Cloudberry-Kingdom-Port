@@ -281,7 +281,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::GoOptions()
 	{
-		Call( MakeMagic( SoundMenu, ( getControl() ) ), 0 );
+		Call( MakeMagic( SoundMenu, ( getControl(), false ) ), 0 );
 
 		Hide( PresetPos_LEFT );
 		setPauseGame( true );

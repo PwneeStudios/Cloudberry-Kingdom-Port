@@ -228,9 +228,9 @@ namespace CloudberryKingdom
 	
 		static const std::wstring NoStartDoorFlag;
 	
-		int LevelNum;
+		int LevelNum, LevelIndex;
 	
-		static const std::wstring LevelFlag;
+		static const std::wstring LevelFlag, IndexFlag;
 
         bool NewHero; static const std::wstring NewHeroFlag;
         bool Darkness; static const std::wstring DarknessFlag;

@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 	void Camera::StartShake( float Intensity, int Length, bool Sound )
 	{
 		//if (Sound)
-		//    Tools.Sound("Rumble_Short").Play();
+		//    Tools::Sound("Rumble_Short").Play();
 
 		ShakeCount = 0;
 		ShakeLength = Length;
@@ -373,7 +373,7 @@ namespace CloudberryKingdom
 		}
 		if ( Oscillating && !DisableOscillate )
 		{
-			//OscillateOffset = new Vector2(0, 40 * (float)Math.Sin(.95f * Tools.t));
+			//OscillateOffset = new Vector2(0, 40 * (float)Math.Sin(.95f * Tools::t));
 			OscillateOffset = Vector2( 0, 40 * static_cast<float>( sin( .95f * t ) ) );
 			t += Tools::dt;
 			Data.Position -= OscillateOffset;

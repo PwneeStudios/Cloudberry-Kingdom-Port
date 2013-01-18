@@ -258,7 +258,7 @@ namespace CloudberryKingdom
 		// Make the hero
 		Hero = MyGame->MyLevel->DefaultHeroType = BobPhsx::MakeCustom( Base, Size, Jump, BobPhsxNormal::getInstance() );
 
-		//var data = new BobPhsx.CustomPhsxData();
+		//var data = new BobPhsx::CustomPhsxData();
 		//data.Init(GravitySlider.Val, AccelSlider.Val, MaxSpeedSlider.Val, MaxFallSpeedSlider.Val, JumpLengthSlider.Val, DoubleJumpLengthSlider.Val, JumpAccelSlider.Val, DoubleJumpAccelSlider.Val, JetPackSlider.Val, JetPackFuelSlider.Val, NumJumpsSlider.Val, SizeSlider.Val, PhasedSizeSlider.Val, PhasedGravitySlider.Val, PhasePeriodSlider.Val, FrictionSlider.Val);
 		Hero->SetCustomPhsx( HeroPhsxData );
 	}

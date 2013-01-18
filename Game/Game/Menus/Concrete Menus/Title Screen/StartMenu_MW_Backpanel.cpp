@@ -245,7 +245,7 @@ namespace CloudberryKingdom
 		{
 			t += .01f;
 
-			//Scene.Size = new Vector2(1069.027f, 429.9995f) * Tools.SmoothLerp(.85f, 1f, t);
+			//Scene.Size = new Vector2(1069.027f, 429.9995f) * Tools::SmoothLerp(.85f, 1f, t);
 
 			Vector4 c1 = Vector4( 0 );
 			Vector4 c2 = Vector4( 1 );

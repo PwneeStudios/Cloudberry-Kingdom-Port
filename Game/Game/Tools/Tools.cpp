@@ -503,7 +503,7 @@ namespace CloudberryKingdom
 #if defined(WINDOWS)
 	Vector2 Tools::MouseGUIPos( Vector2 zoom )
 	{
-		//return Tools.ToGUICoordinates(new Vector2(Tools.CurMouseState.X, Tools.CurMouseState.Y), Tools.CurLevel.MainCamera, zoom);
+		//return Tools::ToGUICoordinates(new Vector2(Tools::CurMouseState.X, Tools::CurMouseState.Y), Tools::CurLevel.MainCamera, zoom);
 		return Tools::ToGUICoordinates( getMousePos(), Tools::CurLevel->getMainCamera(), zoom );
 	}
 #endif
@@ -716,6 +716,7 @@ namespace CloudberryKingdom
 		return files;
 	}
 
+	boost::shared_ptr<EzEffect> Tools::Text_NoOutline, Tools::Text_ThinOutline, Tools::Text_ThickOutline;
 	void Tools::LoadEffects( const boost::shared_ptr<ContentManager> &Content, bool CreateNewWad )
 	{
 		if ( CreateNewWad )
@@ -734,6 +735,15 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_NoOutline" ), L"Text_NoOutline" );
+        Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_ThinOutline" ), L"Text_ThinOutline" );
+        Text_ThinOutline = EffectWad->FindByName( L"Text_ThinOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_ThickOutline" ), L"Text_ThickOutline" );
+        Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -1102,40 +1112,41 @@ namespace CloudberryKingdom
 		Tools::QDrawer->setGlobalIllumination( HoldIllumination );
 	}
 
-	void Tools::StartSpriteBatch()
-	{
-		StartSpriteBatch( false );
-	}
+        /// <summary>
+        /// Call before drawing GUI elements unaffected by the camera.
+        /// Does not affect the current drawing camera ("fake").
+        /// </summary>
+        void Tools::StartGUIDraw_Fake()
+        {
+            GUIDraws++;
+            if (GUIDraws > 1) return;
 
-	void Tools::StartSpriteBatch( bool AsPaint )
-	{
-		if ( !Tools::Render->UsingSpriteBatch )
-		{
-			Tools::QDrawer->Flush();
-			//Tools.spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend);
-			//float scale = 1440f / 1280f;
-			//float scale = 800f / 1280f;
-			float scale = Tools::Render->SpriteScaling;
+            // Start the GUI drawing if this is the first call to GUIDraw
+            Tools::CurLevel->getMainCamera()->HoldZoom = Tools::CurLevel->getMainCamera()->getZoom();
+            Tools::CurLevel->getMainCamera()->setZoom( Vector2(.001f, .001f) );
+            Tools::CurLevel->getMainCamera()->Update();
 
-			if ( AsPaint )
-			{
-				PaintEffect_SpriteBatch->Parameters( "xTexture" )->SetValue( Tools::TextureWad->FindByName( std::wstring( L"PaintSplotch" ) )->getTex() );
-				//PaintEffect_SpriteBatch.Parameters["SceneTexture"].SetValue(Tools.TextureWad.FindByName("PaintSplotch").Tex); 
-				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, Tools::PaintEffect_SpriteBatch, Matrix::CreateScale( scale, scale, 1 ) );
-			}
-			else
-				Tools::Render->MySpriteBatch->Begin( SpriteSortMode_Immediate, GfxBlendState_AlphaBlend, GfxSamplerState_LinearClamp, GfxDepthStencilState_None, GfxRasterizerState_CullCounterClockwise, 0, Matrix::CreateScale( scale, scale, 1 ) );
+            // Save global illumination level
+            HoldIllumination = Tools::QDrawer->getGlobalIllumination();
+            Tools::QDrawer->setGlobalIllumination( 1.f );
+        }
 
-			Tools::Render->UsingSpriteBatch = true;
-		}
-	}
+        /// <summary>
+        /// Call after finishing drawing GUI elements unaffected by the camera.
+        /// Does not affect the current drawing camera ("fake").
+        /// </summary>
+        void Tools::EndGUIDraw_Fake()
+        {
+            GUIDraws--;
+            if (GUIDraws > 0) return;
 
-	void Tools::DrawText( Vector2 pos, const boost::shared_ptr<Camera> &cam, const std::wstring &str, const boost::shared_ptr<SpriteFont> &font )
-	{
-		Vector2 loc = ToScreenCoordinates( pos, cam, Vector2(1) );
+            // End the GUI drawing if this is the last call to GUIDraw
+            Tools::CurLevel->getMainCamera()->setZoom( Tools::CurLevel->getMainCamera()->HoldZoom );
+            Tools::CurLevel->getMainCamera()->Update();
 
-		Tools::Render->MySpriteBatch->DrawString( font, str, loc, Color::Azure, 0, Vector2(), Vector2( .5f,.5f ), SpriteEffects_None, 0 );
-	}
+            // Restor global illumination level
+            Tools::QDrawer->setGlobalIllumination( HoldIllumination );
+        }
 
 	void Tools::SetDefaultEffectParams( float AspectRatio )
 	{

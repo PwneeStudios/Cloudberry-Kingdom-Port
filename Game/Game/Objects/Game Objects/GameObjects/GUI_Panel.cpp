@@ -215,9 +215,9 @@ namespace CloudberryKingdom
 
 	void GUI_Panel::Constructor()
 	{
-		Tools::StartGUIDraw();
+		Tools::StartGUIDraw_Fake();
 		Init();
-		Tools::EndGUIDraw();
+		Tools::EndGUIDraw_Fake();
 	}
 
 	void GUI_Panel::Init()
@@ -280,7 +280,7 @@ namespace CloudberryKingdom
 	void GUI_Panel::SlideOut( PresetPos Preset, int Frames )
 	{
 		// Don't slide out if we've already slid out
-		//if (!Active && !Tools.CurCamera.OnScreen(Pos.AbsVal)) return;
+		//if (!Active && !Tools::CurCamera.OnScreen(Pos.AbsVal)) return;
 
 		Active = false;
 
@@ -333,7 +333,7 @@ namespace CloudberryKingdom
 		if ( FixedToCamera )
 		{
 			return Pos->Playing || abs( Pos->RelVal.X ) < .85f * Tools::CurLevel->getMainCamera()->GetWidth() && abs(Pos->RelVal.Y) < .85f * Tools::CurLevel->getMainCamera()->GetHeight();
-				// Pos.RelVal.Length() < .5f * Tools.CurLevel.MainCamera.GetWidth();
+				// Pos.RelVal.Length() < .5f * Tools::CurLevel.MainCamera.GetWidth();
 		}
 		else
 			return MyGame->getCam()->OnScreen(Pos->Update(), 800);

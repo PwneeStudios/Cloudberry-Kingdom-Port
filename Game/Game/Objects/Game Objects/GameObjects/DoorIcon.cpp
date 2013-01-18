@@ -108,7 +108,7 @@ namespace CloudberryKingdom
 	void DoorIcon::MyDraw()
 	{
 		//if (Level == 201)
-		//    Tools.Write("");
+		//    Tools::Write("");
 
 		if ( Hid )
 			return;

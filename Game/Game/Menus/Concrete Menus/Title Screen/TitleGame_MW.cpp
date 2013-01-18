@@ -99,9 +99,9 @@ namespace CloudberryKingdom
 
 		// Music
 		Tools::Warning();
-		//Tools.MusicVolume.Val = 0f;
+		//Tools::MusicVolume.Val = 0f;
 		Tools::SongWad->SuppressNextInfoDisplay = true;
-		//Tools.SongWad.SetPlayList(Tools.Song_WritersBlock);
+		//Tools::SongWad.SetPlayList(Tools::Song_WritersBlock);
 		Tools::SongWad->SetPlayList( Tools::Song_Heavens );
 		Tools::SongWad->Start( true );
 

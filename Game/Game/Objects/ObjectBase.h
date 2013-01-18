@@ -213,7 +213,7 @@ namespace CloudberryKingdom
 		//    set
 		//    {
 		//        _Active = value;
-		//        if (this == "BossCenter" && value) Tools.Break();
+		//        if (this == "BossCenter" && value) Tools::Break();
 		//    }
 		//}
 

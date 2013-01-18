@@ -31,13 +31,14 @@ namespace CloudberryKingdom
 
 		static std::vector<float> IconScale;
 
-	
+        void AdditionalSwap(int levelindex);
+
 		virtual void MakeExitDoorIcon( int levelindex );
 	
 	
 		Challenge_HeroRush2();
 
-	
+		void MakeHeroList();
 		void ShuffleHeros();
 
 	

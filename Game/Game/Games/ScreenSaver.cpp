@@ -137,10 +137,13 @@ namespace CloudberryKingdom
 	#endif
 		ss->PressA->MyText->setScale( ss->PressA->MyText->getScale() * .68f );
 		ss->PressA->PreventRelease = true;
-		ss->PressA->FixedToCamera = true;
+
 		ss->PressA->Oscillate_Renamed = true;
 		if ( !ForTrailer )
 			Tools::CurGameData->AddGameObject( ss->PressA );
+
+        ss->PressA->MyText->FixedToCamera = true;
+        ss->PressA->FixedToCamera = true;
 	}
 
 	ScreenSaver::AddListenerLambda::AddListenerLambda( const boost::shared_ptr<ScreenSaver> &ss )
@@ -457,7 +460,7 @@ namespace CloudberryKingdom
 		else
 			data->SetTileSet( FixedTileSet );
 
-		//data.SetTileSet(Tools.GlobalRnd.ChooseOne("sea", "forest", "cave", "castle", "cloud", "hills",
+		//data.SetTileSet(Tools::GlobalRnd.ChooseOne("sea", "forest", "cave", "castle", "cloud", "hills",
 		//                                          "sea_rain", "forest_snow", "hills_rain"));
 
 		// Adjust the piece seed data

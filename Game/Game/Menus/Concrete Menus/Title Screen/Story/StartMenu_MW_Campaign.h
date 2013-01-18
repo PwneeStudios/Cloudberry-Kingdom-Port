@@ -17,12 +17,14 @@ namespace CloudberryKingdom
 		};
 	
 		int Chapter;
+		bool Locked;
 
 		CampaignChapterItem( const boost::shared_ptr<EzText> &Text, int Chapter );
 		boost::shared_ptr<CampaignChapterItem> CampaignChapterItem_Construct( const boost::shared_ptr<EzText> &Text, int Chapter );
 
 		void InitializeInstanceFields();
 
+		void UpdateLock();
 	};
 
 	struct StartMenu_MW_Campaign : public StartMenu
@@ -31,6 +33,20 @@ namespace CloudberryKingdom
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;
 		using StartMenu::Call;
+
+		void OnReturnTo();
+		void Update();
+
+		struct OnReturnFromGameLambda : public Lambda
+		{
+		
+			boost::shared_ptr<StartMenu_MW_Campaign> sm;
+		
+			OnReturnFromGameLambda( const boost::shared_ptr<StartMenu_MW_Campaign> &sm );
+
+			void Apply();
+		};
+
 
 		struct CampaignGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
@@ -82,6 +98,8 @@ namespace CloudberryKingdom
 
 		int _StartLevel;
 		void Go( int StartLevel );
+
+		void OnReturnFromGame();
 
 		void SetPos_NoCinematic();
 

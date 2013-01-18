@@ -722,7 +722,7 @@ namespace CloudberryKingdom
 				{
                     if ( getMyLevel()->PlayMode == 0 && !getMyLevel()->Watching && !getMyLevel()->Replay )
                     {
-                        Life -= .5f;
+                        Life -= .25f;
                         KillBobTimeStamp = getMyLevel()->CurPhsxStep;
                         Squish( Vector2(0) );
                     }

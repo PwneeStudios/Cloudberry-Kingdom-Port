@@ -3,10 +3,10 @@
 namespace CloudberryKingdom
 {
 
-	StartMenu_MW_Options::StartMenu_MW_Options( int Control, bool Centered ) : SoundMenu( Control ) { }
+	StartMenu_MW_Options::StartMenu_MW_Options( int Control, bool Centered ) : SoundMenu( Control, true ) { }
 	boost::shared_ptr<StartMenu_MW_Options> StartMenu_MW_Options::StartMenu_MW_Options_Construct( int Control, bool Centered )
 	{
-		SoundMenu::SoundMenu_Construct( Control );
+		SoundMenu::SoundMenu_Construct( Control, true );
 
 		CallDelay = ReturnToCallerDelay = 0;
 

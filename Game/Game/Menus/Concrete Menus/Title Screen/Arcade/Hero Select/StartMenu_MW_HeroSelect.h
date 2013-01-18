@@ -9,11 +9,11 @@ namespace CloudberryKingdom
 	{
 	
 		boost::shared_ptr<BobPhsx> Hero;
-		bool Locked;
+        boost::shared_ptr<BobPhsx> RequiredHero;
+        int RequiredHeroLevel;
 
-		HeroItem( const boost::shared_ptr<BobPhsx> &Hero );
-		boost::shared_ptr<HeroItem> HeroItem_Construct( const boost::shared_ptr<BobPhsx> &Hero );
-
+		HeroItem( const std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > &pair );
+		boost::shared_ptr<HeroItem> HeroItem_Construct( const std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > &pair );
 	};
 
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu
@@ -70,6 +70,11 @@ namespace CloudberryKingdom
 		StartMenu_MW_HeroSelect( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem );
 		boost::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect_Construct( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem );
 
+		bool Lock;
+		bool Locked();
+		bool Locked(boost::shared_ptr<HeroItem> item);
+		bool Invisible(boost::shared_ptr<HeroItem> item);
+
 		virtual void Release();
 
 	
@@ -100,6 +105,8 @@ namespace CloudberryKingdom
 
 	
 		void UpdateScore();
+
+		void Update();
 
 		void SetPos();
 

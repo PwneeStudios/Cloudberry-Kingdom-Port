@@ -52,18 +52,63 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<PerfectScoreObject> CampaignSequence::MyPerfectScoreObject = 0;
 
+        void CampaignSequence::OnChapterFinished(int chapter)
+        {
+            // Clean campaign stats
+			std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+				( *player )->CampaignStats->Clean();
+
+            // Didn't die during the chapter?
+			vec = PlayerManager::getAlivePlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+				Awardments::CheckForAward_NoDeath( ( *player ) );
+
+            // Give beat chapter award
+            boost::shared_ptr<Awardment> award = 0;
+            switch (chapter)
+            {
+				case 1: award = Awardments::Award_Campaign1; break;
+				case 2: award = Awardments::Award_Campaign2; break;
+				case 3: award = Awardments::Award_Campaign3; break;
+				case 4: award = Awardments::Award_Campaign4; break;
+				case 5: award = Awardments::Award_Campaign5; break;
+				default: Tools::Break(); break;
+            }
+            Awardments::GiveAward(award);
+        }
+
 	void CampaignSequence::Start( int Chapter )
 	{
 		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true ) );
 
 		int StartLevel = ChapterStart[ Chapter ];
 
+        int NextChapterStart = Contains( ChapterStart, Chapter + 1 ) ? ChapterStart[Chapter + 1] : StartLevel + 100000;
+        int MaxLevelAttained = PlayerManager::MaxPlayerTotalCampaignIndex() + 1;
+
+        if ( MaxLevelAttained > StartLevel && MaxLevelAttained < NextChapterStart )
+            StartLevel = MaxLevelAttained;
+
 		LevelSequence::Start( StartLevel );
 	}
+
+	int CampaignSequence::ChapterFinishing;
+
+    void CampaignSequence::CheckForFinishedChapter()
+    {
+        if ( ChapterFinishing >= 0 )
+        {
+            OnChapterFinished( ChapterFinishing );
+            ChapterFinishing = -1;
+        }
+    }
 
     bool CampaignSequence::OnLevelBegin( boost::shared_ptr<Level> level )
     {
         if ( LevelSequence::OnLevelBegin( level ) ) return true;
+
+		CheckForFinishedChapter();
 
         //level.MyGame.AddGameObject(InGameStartMenu.MakeListener());
         level->MyGame->AddGameObject( HelpMenu::MakeListener() );
@@ -97,6 +142,11 @@ namespace CloudberryKingdom
 
 	void CampaignSequence::MakeSeedList()
 	{
+        int LastRealLevelIndex = -1;
+        int LastSetChapter = -1;
+        ChapterStart = std::map<int, int>();
+        ChapterEnd = std::map<int, int>();
+
 		Seeds.push_back( L"" );
 
 		Tools::UseInvariantCulture();
@@ -137,7 +187,18 @@ namespace CloudberryKingdom
 			{
 				int chapter = 0;
 				if ( ParseInt( data, chapter ) )
+				{
+					// Mark end of chapter
+					if (LastRealLevelIndex > 0)
+					{
+						ChapterEnd[ LastSetChapter ] = LastRealLevelIndex;
+						LastRealLevelIndex = -1;
+					}
+
 					DictionaryExtension::AddOrOverwrite( ChapterStart, chapter, count );
+				
+					LastSetChapter = chapter;
+				}
 			}
 			else if ( identifier == std::wstring( L"movie" ) )
 			{
@@ -155,7 +216,8 @@ namespace CloudberryKingdom
 			else if ( identifier == std::wstring( L"seed" ) )
 			{
 				std::wstring seed = data;
-				seed += Format( _T( "level:%d;" ), level );
+				seed += Format( _T( "level:%d;index:%d;" ), level, count );
+				LastRealLevelIndex = level;
 
 				Seeds.push_back( seed );
 				count++;
@@ -164,6 +226,13 @@ namespace CloudberryKingdom
 
 			line = reader.ReadLine();
 		}
+
+        // Mark end of last chapter
+        if ( LastRealLevelIndex > 0 )
+        {
+            ChapterEnd[ LastSetChapter ] = LastRealLevelIndex;
+            LastRealLevelIndex = -1;
+        }
 	}
 
 	boost::shared_ptr<LevelSeedData> CampaignSequence::MakeActionSeed( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > SeedAction )
@@ -217,7 +286,7 @@ namespace CloudberryKingdom
 		level->MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>() );
 
         // Level Title only
-        //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization.WordString(Localization.Words.Level)));
+        //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization.WordString(Localization::Words_Level)));
             
         // Level Title plus Hero Name
         if ( !level->MyLevelSeed->NewHero )
@@ -261,7 +330,23 @@ namespace CloudberryKingdom
 	{
 		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
 		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+		{
 			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
+
+            ( *player )->CampaignIndex = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelIndex );
+            ( *player )->Changed = true;
+		}
+
+        // Check for end of chapter
+		for ( std::map<int, int>::const_iterator key = instance->ChapterEnd.begin(); key != instance->ChapterEnd.end(); key++ )
+		{
+            if ( key->second == level->MyLevelSeed->LevelNum )
+            {
+                ChapterFinishing = key->first;
+                if (ChapterFinishing == 0) ChapterFinishing = -1;
+                break;
+            }
+		}
 	}
 
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > CampaignSequence::MakeWatchMovieAction( const std::wstring &movie )
@@ -272,16 +357,23 @@ namespace CloudberryKingdom
 	void CampaignSequence::EndAction( const boost::shared_ptr<Level> &level )
 	{
 		level->MyGame->EndGame->Apply( false );
+		
+		CheckForFinishedChapter();
 	}
 
 	CampaignSequence::CampaignSequence()
 	{
 		InitializeInstanceFields();
+		
+		ChapterFinishing = -1;
+
 		MakeSeedList();
 	}
 
 	void CampaignSequence::InitializeInstanceFields()
 	{
+		StartLevel = 0;
+
 		ChapterStart = std::map<int, int>();
 		SpecialLevel = std::map<int, boost::shared_ptr<Tuple<std::wstring, std::wstring> > >();
 	}

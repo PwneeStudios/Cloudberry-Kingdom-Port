@@ -64,8 +64,8 @@ namespace CloudberryKingdom
 		/*
 		int Types;
 		if (Difficulty == 0) Types = 0;
-		else Types = MyLevel.Rnd.Rnd.Next(Math.Min(Tools.UpgradeTypes - 1, Generic.MinTypes),
-		                            Math.Min(Tools.UpgradeTypes - 1, Generic.MaxTypes));
+		else Types = MyLevel.Rnd.Rnd.Next(Math.Min(Tools::UpgradeTypes - 1, Generic.MinTypes),
+		                            Math.Min(Tools::UpgradeTypes - 1, Generic.MaxTypes));
 	
 		int[] UpgradeChoices = ChooseUpgrades(Types);
 	

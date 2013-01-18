@@ -76,7 +76,6 @@ namespace CloudberryKingdom
 
 
 	
-		static std::vector<std::wstring> TextureName;
 		std::vector<boost::shared_ptr<HighScorePanel> > Panels;
 
 	

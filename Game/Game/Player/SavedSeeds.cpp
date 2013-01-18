@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 	{
 		if ( IsSeedValue( seed ) )
 		{
+			Awardments::CheckForAward_Save();
+
 			SeedStrings.push_back( seed + std::wstring( L"name:" ) + name + std::wstring( L";" ) );
 			SaveGroup::SaveAll();
 		}

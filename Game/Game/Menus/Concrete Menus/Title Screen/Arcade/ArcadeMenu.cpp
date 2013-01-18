@@ -5,6 +5,11 @@
 namespace CloudberryKingdom
 {
 
+	bool ArcadeItem::IsLocked()
+    {
+        return MyPrereq != 0 && !PlayerManager::Awarded( MyPrereq ) && !CloudberryKingdomGame::Unlock_Levels;
+    }
+
 	ArcadeItem::ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq ) : MenuItem( Text )
 	{
 	}
@@ -14,8 +19,6 @@ namespace CloudberryKingdom
 
 		this->MyChallenge = MyChallenge;
 		this->MyPrereq = MyPrereq;
-
-		Locked = MyPrereq != 0 && !PlayerManager::Awarded( MyPrereq ) && !CloudberryKingdomGame::UnlockAll;
 
 		return boost::static_pointer_cast<ArcadeItem>( shared_from_this() );
 	}
@@ -83,6 +86,16 @@ namespace CloudberryKingdom
 		SelectedItem.reset();
 	}
 
+	ArcadeMenu::OnSelectProxy::OnSelectProxy( const boost::shared_ptr<ArcadeMenu> &am )
+	{
+		this->am = am;
+	}
+
+	void ArcadeMenu::OnSelectProxy::Apply()
+	{
+		am->OnSelect();
+	}
+
 	ArcadeMenu::GoProxy::GoProxy( const boost::shared_ptr<ArcadeMenu> &am )
 	{
 		this->am = am;
@@ -104,6 +117,8 @@ namespace CloudberryKingdom
 	{
 		ArcadeBaseMenu::OnReturnTo();
 		SetLockColors();
+
+		UpdateAfterPlaying();
 	}
 
 	void ArcadeMenu::SetLockColors()
@@ -111,7 +126,7 @@ namespace CloudberryKingdom
 		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = MyMenu->Items.begin(); item != MyMenu->Items.end(); ++item )
 		{
 			boost::shared_ptr<Awardment> award = boost::dynamic_pointer_cast<Awardment>( ( *item )->MyObject );
-			if ( 0 != award && !PlayerManager::Awarded( award ) && !CloudberryKingdomGame::UnlockAll )
+			if ( 0 != award && !PlayerManager::Awarded( award ) && !CloudberryKingdomGame::Unlock_Levels )
 			{
 				( *item )->MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
 				( *item )->MySelectedText->MyFloatColor = ( bColor( 255, 160, 160 ) ).ToVector4();
@@ -137,6 +152,89 @@ namespace CloudberryKingdom
 		return boost::static_pointer_cast<ArcadeMenu>( shared_from_this() );
 	}
 
+    boost::shared_ptr<BobPhsx> ArcadeMenu::JetpackWheelie;
+    boost::shared_ptr<BobPhsx> ArcadeMenu::BigBouncy;
+    boost::shared_ptr<BobPhsx> ArcadeMenu::Ultimate;
+
+	std::map<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > ArcadeMenu::HeroArcadeList;
+
+	void ArcadeMenu::StaticInit()
+	{
+        // Heroes
+        BobPhsxNormal::getInstance()->Id = 0;
+        BobPhsxBig::getInstance()->Id = 1;
+        BobPhsxInvert::getInstance()->Id = 2;
+        BobPhsxDouble::getInstance()->Id = 3;
+        BobPhsxJetman::getInstance()->Id = 4;
+        BobPhsxBouncy::getInstance()->Id = 5;
+        BobPhsxBox::getInstance()->Id = 6;
+        BobPhsxScale::getInstance()->Id = 7;
+        BobPhsxTime::getInstance()->Id = 8;
+        BobPhsxSmall::getInstance()->Id = 9;
+        BobPhsxSpaceship::getInstance()->Id = 10;
+        BobPhsxWheel::getInstance()->Id = 11;
+
+        ArcadeMenu::JetpackWheelie = BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK);
+        ArcadeMenu::JetpackWheelie->Name = Localization::Words_JETPACK_WHEELIE;
+        ArcadeMenu::JetpackWheelie->Id = 12;
+
+        ArcadeMenu::BigBouncy = BobPhsx::MakeCustom(Hero_BaseType_BOUNCY, Hero_Shape_BIG, Hero_MoveMod_JETPACK);
+        ArcadeMenu::BigBouncy->Name = Localization::Words_HERO;
+        ArcadeMenu::BigBouncy->Id = 13;
+
+        ArcadeMenu::Ultimate = BobPhsx::MakeCustom(Hero_BaseType_CLASSIC, Hero_Shape_CLASSIC, Hero_MoveMod_CLASSIC);
+        ArcadeMenu::Ultimate->Name = Localization::Words_MASOCHISTIC;
+        BobPhsx::CustomPhsxData UltimatePhsx = BobPhsx::CustomPhsxData();
+        UltimatePhsx.Init();
+        UltimatePhsx[BobPhsx::CustomData_ACCEL] = 2.2f;
+        UltimatePhsx[BobPhsx::CustomData_FRICTION] = 2.2f;
+        UltimatePhsx[BobPhsx::CustomData_MAXSPEED] = 2.35f;
+        UltimatePhsx[BobPhsx::CustomData_GRAVITY] = .575f;
+        UltimatePhsx[BobPhsx::CustomData_JUMPLENGTH] = 1.51f;
+        UltimatePhsx[BobPhsx::CustomData_JUMPLENGTH2] = 1.5212f;
+        UltimatePhsx[BobPhsx::CustomData_JUMPACCEL] = .8f;
+        UltimatePhsx[BobPhsx::CustomData_JUMPACCEL2] = .8f;
+        UltimatePhsx[BobPhsx::CustomData_MAXFALL] = 2.2f;
+        UltimatePhsx[BobPhsx::CustomData_NUMJUMPS] = 1;
+        UltimatePhsx[BobPhsx::CustomData_SIZE] = .2f;
+        ArcadeMenu::Ultimate->SetCustomPhsx( UltimatePhsx );
+        ArcadeMenu::Ultimate->Id = 14;
+
+        HeroArcadeList = std::map<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >();
+
+			HeroArcadeList[ BobPhsxNormal::getInstance() ] =   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::shared_ptr<BobPhsx>(), 0 );
+			HeroArcadeList[ BobPhsxBig::getInstance() ] =      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxNormal::getInstance() ), 30);
+			HeroArcadeList[ BobPhsxRocketbox::getInstance() ] =std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBig::getInstance() ), 30);
+			HeroArcadeList[ BobPhsxInvert::getInstance() ] =   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxRocketbox::getInstance() ), 40);
+			HeroArcadeList[ BobPhsxJetman::getInstance() ] =   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxInvert::getInstance() ), 40);
+			HeroArcadeList[ BobPhsxBouncy::getInstance() ] =   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxJetman::getInstance() ), 50);
+			HeroArcadeList[ BobPhsxSpaceship::getInstance() ] =std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxBouncy::getInstance() ), 60);
+			HeroArcadeList[ BobPhsxDouble::getInstance() ] =   std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSpaceship::getInstance() ), 70);
+			HeroArcadeList[ BobPhsxWheel::getInstance() ] =    std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxDouble::getInstance() ), 70);
+			HeroArcadeList[ BobPhsxSmall::getInstance() ] =    std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxWheel::getInstance() ), 80);
+                
+			HeroArcadeList[ JetpackWheelie ] =                std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BobPhsxSmall::getInstance() ), 100);
+			HeroArcadeList[ BigBouncy ] =                     std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( JetpackWheelie ), 100);
+			HeroArcadeList[ Ultimate ] =                      std::pair<boost::shared_ptr<BobPhsx>, int>( boost::static_pointer_cast<BobPhsx>( BigBouncy ), 100);
+	}
+
+    void ArcadeMenu::CheckForArcadeUnlocks(boost::shared_ptr<ScoreEntry> score)
+    {
+        std::vector<boost::shared_ptr<PlayerData> > CopyOfExistingPlayers =
+			std::vector<boost::shared_ptr<PlayerData> >( PlayerManager::getExistingPlayers() );
+
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = CopyOfExistingPlayers.begin(); player != CopyOfExistingPlayers.end(); ++player )
+        {
+            int TotalArcadeLevel = ( *player )->GetTotalArcadeLevel();
+            Awardments::CheckForAward_TimeCrisisUnlock( TotalArcadeLevel, *player );
+            Awardments::CheckForAward_HeroRushUnlock( TotalArcadeLevel, *player );
+            Awardments::CheckForAward_HeroRush2Unlock( TotalArcadeLevel, *player );
+        }
+
+        Awardments::CheckForAward_ArcadeScore( score->Value );
+        Awardments::CheckForAward_ArcadeScore2( score->Value );
+    }
+
 	void ArcadeMenu::Init()
 	{
 		 ArcadeBaseMenu::Init();
@@ -159,6 +257,38 @@ namespace CloudberryKingdom
 
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
+            // Level
+            boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_LEVEL, Resources::Font_Grobold42);
+            LevelText->_Scale *= .72f;
+            StartMenu::SetText_Green(LevelText, true);
+            MyPile->Add( LevelText, L"Level");
+            LevelText->Show = false;
+
+            boost::shared_ptr<EzText> LevelNum = boost::make_shared<EzText>( L"Garbage", Resources::Font_Grobold42);
+            LevelNum->_Scale *= 1.1f;
+            StartMenu::SetText_Green(LevelNum, true);
+            MyPile->Add( LevelNum, L"LevelNum");
+            LevelNum->Show = false;
+
+            // Requirement
+            RequiredText = boost::make_shared<EzText>(Localization::Words_Required, Resources::Font_Grobold42);
+            RequiredText->_Scale *= 1.f;
+            StartMenu::SetText_Green(RequiredText, true);
+            MyPile->Add( RequiredText, L"Requirement");
+            RequiredText->Alpha = 0;
+
+            RequiredText2 = boost::make_shared<EzText>( L"Garbage", Resources::Font_Grobold42);
+            RequiredText2->_Scale *= 1.f;
+            StartMenu::SetText_Green(RequiredText2, true);
+            MyPile->Add( RequiredText2, L"Requirement2");
+            RequiredText2->Alpha = 0;
+
+            TextBack = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100.f, true);
+            TextBack->setAlpha( 1.f );
+            TextBack->setDegrees( 90 );
+            MyPile->Add( TextBack, L"BoxLeft");
+
+
 		// Header
 		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) ) );
 		Header->Name = std::wstring( L"Header" );
@@ -172,19 +302,19 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( -1689.523f, 520.4127f );
 
 		// Escalation
-		item = AddChallenge( Challenge_Escalation::getInstance(), 0, 0, std::wstring( L"Escalation" ) );
+		item = AddChallenge( Challenge_Escalation::getInstance(), 0, std::wstring( L"Escalation" ) );
 
 		// Time Crisis
-		item = AddChallenge( Challenge_TimeCrisis::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Time Crisis" ) );
+		item = AddChallenge( Challenge_TimeCrisis::getInstance(), Awardments::UnlockTimeCrisis, std::wstring( L"Time Crisis" ) );
 
 		// Hero Rush
-		item = AddChallenge( Challenge_HeroRush::getInstance(), 0, Awardments::UnlockHeroRush2, std::wstring( L"Hero Rush" ) );
+		item = AddChallenge( Challenge_HeroRush::getInstance(), Awardments::UnlockHeroRush, std::wstring( L"Hero Rush" ) );
 
 		// Hero Rush 2
-		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, 0, std::wstring( L"Hero Rush 2" ) );
+		item = AddChallenge( Challenge_HeroRush2::getInstance(), Awardments::UnlockHeroRush2, std::wstring( L"Hero Rush 2" ) );
 
 		// Bungee Co-op
-		//item = AddChallenge(Challenge_HeroRush2.Instance, Awardments.UnlockHeroRush2, null, "Bungee");
+		//item = AddChallenge(Challenge_HeroRush2.Instance, Awardments::UnlockHeroRush2, null, "Bungee");
 
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
@@ -203,6 +333,8 @@ namespace CloudberryKingdom
 		MyMenu->SelectItem( 1 );
 
 		SetLockColors();
+
+		UpdateAfterPlaying();
 	}
 
 	void ArcadeMenu::SetParams()
@@ -221,12 +353,14 @@ namespace CloudberryKingdom
 		return Vector2( -174.6031f, -603.1746f );
 	}
 
-	boost::shared_ptr<MenuItem> ArcadeMenu::AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const boost::shared_ptr<Awardment> &goal, const std::wstring &itemname )
+	boost::shared_ptr<MenuItem> ArcadeMenu::AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const std::wstring &itemname )
 	{
 		boost::shared_ptr<ArcadeItem> item;
 		Localization::Words word = challenge->MenuName != 0 ? challenge->MenuName : challenge->Name;
 
 		item = MakeMagic( ArcadeItem, ( boost::make_shared<EzText>( word, ItemFont ), challenge, prereq ) );
+
+		item->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<ArcadeMenu>( shared_from_this() ) );
 
 		item->Name = itemname;
 		AddItem( item );
@@ -236,17 +370,90 @@ namespace CloudberryKingdom
 		return item;
 	}
 
+		void ArcadeMenu::UpdateAfterPlaying()
+        {
+            int Level = PlayerManager::MaxPlayerTotalArcadeLevel();
+            bool ShowLevel = Level > 0;
+
+            if (ShowLevel)
+            {
+                MyPile->FindEzText( L"Level" )->Show = true;
+                
+                boost::shared_ptr<EzText> _t = MyPile->FindEzText( L"LevelNum" );
+                _t->Show = true;
+                _t->SubstituteText( ToString( Level ) );
+            }
+            else
+            {
+                MyPile->FindEzText( L"Level" )->Show = false;
+                MyPile->FindEzText( L"LevelNum" )->Show = false;
+            }
+
+			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = MyMenu->Items.begin(); _item != MyMenu->Items.end(); ++_item )
+            {
+                boost::shared_ptr<ArcadeItem> item = boost::dynamic_pointer_cast<ArcadeItem>( *_item );
+                if (0 == item) continue;
+
+                if (item->IsLocked())
+                {
+                    item->MyText->Alpha = .4f;
+                    item->MySelectedText->Alpha = .4f;
+                }
+                else
+                {
+                    item->MyText->Alpha = 1.f;
+                    item->MySelectedText->Alpha = 1.f;
+                }
+            }
+        }
+
+        void ArcadeMenu::OnSelect()
+        {
+			boost::shared_ptr<ArcadeItem> item = boost::dynamic_pointer_cast<ArcadeItem>( MyMenu->getCurItem() );
+            if (0 == item) return;
+
+            Lock = item->IsLocked();
+
+            if (Lock)
+            {
+                boost::shared_ptr<EzText> _t;
+                _t = MyPile->FindEzText( L"Requirement2" );
+                //_t.Show = true;
+                //_t.SubstituteText(Localization.WordString(Localization::Words_Required) + " " +
+                //                  Localization.WordString(Localization::Words_Level) + " " + item.MyPrereq.MyInt.ToString());
+                _t->SubstituteText(Localization::WordString(Localization::Words_LEVEL) + L" " + ToString( item->MyPrereq->MyInt ) );
+            }
+            else
+            {
+                //MyPile.FindEzText("Requirement").Show = false;
+            }
+        }
+
 	void ArcadeMenu::Go( const boost::shared_ptr<MenuItem> &item )
 	{
 	}
 
 	void ArcadeMenu::MyPhsxStep()
 	{
+        if (Lock)
+        {
+            RequiredText->Alpha += .2f;
+            if (RequiredText->Alpha > 1) RequiredText->Alpha = 1;
+        }
+        else
+        {
+            RequiredText->Alpha -= .2f;
+            if (RequiredText->Alpha < 0) RequiredText->Alpha = 0;
+        }
+        TextBack->setAlpha( RequiredText->Alpha );
+        RequiredText2->Alpha = RequiredText->Alpha;
+
 		ArcadeBaseMenu::MyPhsxStep();
 	}
 
 	void ArcadeMenu::InitializeInstanceFields()
 	{
 		Long = false;
+		Lock = false;
 	}
 }

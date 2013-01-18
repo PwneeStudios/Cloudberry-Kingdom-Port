@@ -71,6 +71,29 @@ namespace CloudberryKingdom
 	
 		static Version GameVersion;
 
+
+
+
+        static bool GodMode;
+        static bool ForFrapsRecording;;
+
+        static bool AlwaysGiveTutorials;
+        static bool Unlock_Customization;
+        static bool Unlock_Levels;
+
+        static bool getIsDemo();
+
+        static void OfferToBuy(SignedInGamer gamer);
+
+
+
+
+
+
+
+
+
+
 		/// <summary>
 		/// The command line arguments.
 		/// </summary>
@@ -115,17 +138,6 @@ namespace CloudberryKingdom
 		void setDrawMouseBackIcon( const bool &value );
 #endif
 
-#if defined(DEBUG) || defined(INCLUDE_EDITOR)
-		static bool AlwaysGiveTutorials;
-		static bool UnlockAll;
-		static bool SimpleAiColors;
-#else
-		static bool AlwaysGiveTutorials;
-		static bool UnlockAll;
-		static bool SimpleAiColors;
-#endif
-
-	
 		bool LogoScreenUp;
 
 		/// <summary>
@@ -153,11 +165,11 @@ namespace CloudberryKingdom
 //		{
 //			add
 //			{
-//				Tools.GameClass.Exiting += value;
+//				Tools::GameClass.Exiting += value;
 //			}
 //			remove
 //			{
-//				Tools.GameClass.Exiting -= value;
+//				Tools::GameClass.Exiting -= value;
 //			}
 //		}
 
@@ -178,6 +190,8 @@ namespace CloudberryKingdom
 
 	
 		void Initialize();
+
+		void InitialResolution();
 
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	
@@ -214,7 +228,8 @@ namespace CloudberryKingdom
 	
 		void DoToDoList();
 
-	
+		void GodModePhxs();
+
 		void PhsxStep();
 
 #if defined(WINDOWS)

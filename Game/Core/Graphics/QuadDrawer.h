@@ -17,12 +17,57 @@
 #include "Core/Graphics/Draw/Simple/SimpleObject.h"
 
 #include <Hacks\XNA\SamplerState.h>
+#include <Hacks\Dict.h>
 
 namespace CloudberryKingdom
 {
+
+    struct GlyphData
+    {
+
+        Vector4 TextureCoordinates;
+        Vector2 Size;
+        Vector2 Offset;
+
+		GlyphData();
+        GlyphData(Vector4 TextureCoordinates_, Vector2 Size_, Vector2 Offset_);
+
+	};
+
+	struct HackFont
+    {
+
+        std::map<int, GlyphData> Data;
+
+        /// Texture path.
+        std::wstring texturePath_;
+
+        /// Spacing offset between characters.
+        int charSpacing_;
+
+		boost::shared_ptr<EzTexture> MyTexture;
+
+        GlyphData GetData( wchar_t c );
+
+        float CharSpacing;
+
+        HackFont(std::string name);
+
+    };
+
+    struct HackSpriteFont
+    {
+
+        boost::shared_ptr<HackFont> font;
+        int thickness;
+
+        HackSpriteFont( boost::shared_ptr<HackFont> font_, int thickness_ );
+
+    };
+
+
 	struct QuadDrawer
 	{
-
 	
 		static void InitializeStatics();
 
@@ -127,6 +172,14 @@ namespace CloudberryKingdom
 
 	
 		void InitializeInstanceFields();
+
+
+		void QuadDrawer::DrawPic(Vector2 pos, Vector2 pos2, boost::shared_ptr<EzTexture> texture, Color color);
+		void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale);
+		void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale);
+		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s);
+		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s);
+
 	};
 }
 

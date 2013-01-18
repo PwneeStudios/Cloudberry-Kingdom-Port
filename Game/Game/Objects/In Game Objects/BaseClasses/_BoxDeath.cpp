@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 
 					if ( col )
 					{
-						//if ((Pos - bob.Pos).Length() > 2000) Tools.Write(0);
+						//if ((Pos - bob.Pos).Length() > 2000) Tools::Write(0);
 						getCore()->getRecycle()->CollectObject( shared_from_this() );
 					}
 				}

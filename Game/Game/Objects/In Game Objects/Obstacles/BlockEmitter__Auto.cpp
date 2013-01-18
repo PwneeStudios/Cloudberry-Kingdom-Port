@@ -204,7 +204,7 @@ boost::shared_ptr<BlockEmitter_AutoGen> BlockEmitter_AutoGen::instance = boost::
 		//float SpeedAdd = Params.SpeedAdd.GetVal(Pos);
 
 		float Vel = Params->Speed.GetVal( Pos ) + 0;
-		//Tools.ChooseOne(SpeedAdd, 0, -SpeedAdd);
+		//Tools::ChooseOne(SpeedAdd, 0, -SpeedAdd);
 
 		//MyLevel.Rnd.RndFloat(-Params.SpeedAdd.GetVal(Pos),
 		//             Params.SpeedAdd.GetVal(Pos));

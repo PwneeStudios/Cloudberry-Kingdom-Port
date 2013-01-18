@@ -13,14 +13,28 @@ namespace CloudberryKingdom
 	{
 		Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 
+
+		// Volume control
+		Tools::SoundVolume = boost::make_shared<WrappedFloat>();
+		Tools::SoundVolume->MinVal = 0;
+		Tools::SoundVolume->MaxVal = 1;
+		Tools::SoundVolume->setVal( .7f );
+
+		Tools::MusicVolume = boost::make_shared<WrappedFloat>();
+		Tools::MusicVolume->MinVal = 0;
+		Tools::MusicVolume->MaxVal = 1;
+		Tools::MusicVolume->setVal( 1 );
+		Tools::MusicVolume->SetCallback = boost::make_shared<CloudberryKingdomGame::UpdateVolumeProxy>();
+
+#if defined(DEBUG) || defined(INCLUDE_EDITOR)
+		Tools::SoundVolume->setVal( 0 );
+		Tools::MusicVolume->setVal( 0 );
+#endif
+
+
 		//Tools::GameClass = shared_from_this();
 		MyGame = boost::make_shared<CloudberryKingdomGame>();
 		Tools::TheGame = MyGame;
-
-	#if defined(PC_VERSION)
-	#elif defined(XBOX) || defined(XBOX_SIGNIN)
-		getComponents()->Add(boost::make_shared<GamerServicesComponent>(this));
-	#endif
 	}
 
 	bool XnaGameClass::getIsActive()

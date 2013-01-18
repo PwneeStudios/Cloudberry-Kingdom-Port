@@ -482,6 +482,16 @@ namespace CloudberryKingdom
 		WaitThenDo( Delay + 17, boost::make_shared<FadeInAfterBlack>( black, OnBlack, shared_from_this() ), std::wstring( L"SlideOut_FadeIn" ) );
 	}
 
+    void GameData::ReInitGameObjects()
+    {
+        Tools::StartGUIDraw_Fake();
+
+		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
+            ( *obj )->Init();
+
+        Tools::EndGUIDraw_Fake();
+    }
+
 	void GameData::RemoveGameObjects( GameObject::Tag tag )
 	{
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
@@ -868,6 +878,7 @@ namespace CloudberryKingdom
 			{
 				PlayerManager::RevivePlayer( ( *bob )->MyPlayerIndex );
 				( *bob )->Dead = ( *bob )->Dying = false;
+				( *bob )->DeadCount = 0;
 
 				( *bob )->Init( false, ( *bob )->MyPiece->StartData[ ( *bob )->MyPieceIndex ], shared_from_this() );
 				( *bob )->Move( CheckpointBob->getCore()->Data.Position - (*bob)->getCore()->Data.Position );

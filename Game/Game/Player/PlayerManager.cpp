@@ -68,7 +68,11 @@ namespace CloudberryKingdom
 		return 0;
 	}
 
+#if defined(DEBUG)
+	bool UserPowers::CanSkipScreensaver = true;
+#else
 	bool UserPowers::CanSkipScreensaver = false;
+#endif
 	Set<std::wstring> UserPowers::WatchedVideo;
 
 	void UserPowers::Set( bool &variable, bool value )
@@ -162,6 +166,15 @@ namespace CloudberryKingdom
 	void PlayerManager::LoadRezAndKeysLambda::Apply( const std::vector<unsigned char> &Data )
 	{
 		PlayerManager::_LoadRezAndKeys( Data );
+	}
+
+	PlayerManager::LoadRezAndKeysFailLambda::LoadRezAndKeysFailLambda()
+	{
+	}
+
+	void PlayerManager::LoadRezAndKeysFailLambda::Apply()
+	{
+		PlayerManager::_Fail();
 	}
 #endif
 
@@ -272,10 +285,17 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	RezData PlayerManager::LoadRezAndKeys()
 	{
-		EzStorage::Load( std::wstring( L"Settings" ), std::wstring( L"Custom" ), boost::make_shared<LoadRezAndKeysLambda>(), 0 );
+		EzStorage::Load( std::wstring( L"Settings" ), std::wstring( L"Custom" ),
+			boost::make_shared<LoadRezAndKeysLambda>(), boost::make_shared<LoadRezAndKeysFailLambda>() );
 
 		return d;
 	}
+
+    void PlayerManager::_Fail()
+    {
+        d = RezData();
+        d.Custom = false;
+    }
 #endif
 
 #if defined(PC_VERSION)
@@ -510,6 +530,47 @@ namespace CloudberryKingdom
 
 		return max;
 	}
+
+        int PlayerManager::MaxPlayerTotalArcadeLevel()
+        {
+            int max = 0;
+
+			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+                max = __max( max, ( *player )->GetTotalArcadeLevel( ) );
+
+            return max;
+        }
+
+        int PlayerManager::MaxPlayerTotalCampaignLevel()
+        {
+            int max = 0;
+			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+                max = __max( max, ( *player )->GetTotalCampaignLevel( ) );
+
+            return max;
+        }
+
+        int PlayerManager::MaxPlayerTotalCampaignIndex()
+        {
+            int max = 0;
+			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+                max = __max( max, ( *player )->GetTotalCampaignIndex( ) );
+
+            return max;
+        }
+
+        int PlayerManager::MaxPlayerTotalLevel()
+        {
+            int max = 0;
+			std::vector<boost::shared_ptr<PlayerData> > vec = getExistingPlayers();
+			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+                max = __max( max, ( *player )->GetTotalLevel( ) );
+
+            return max;
+        }
 
 	bool PlayerManager::Awarded( const boost::shared_ptr<Awardment> &award )
 	{
@@ -795,6 +856,7 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 
 	void PlayerManager::ReviveBob( const boost::shared_ptr<Bob> &bob )
 	{
+		bob->DeadCount = 0;
 		bob->Dead = bob->Dying = false;
 
 		RevivePlayer( bob->MyPlayerIndex );

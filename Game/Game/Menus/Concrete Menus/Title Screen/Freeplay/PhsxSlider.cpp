@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 
 		setMyFloat( boost::make_shared<WrappedFloat>( CustomHero_GUI::HeroPhsxData[ MyType ], BobPhsx::CustomPhsxData::Bounds( type ).MinValue, BobPhsx::CustomPhsxData::Bounds( type ).MaxValue ) );
 								   //CustomHero_GUI.Hero.MyCustomPhsxData[type],
-								   //BobPhsx.CustomPhsxData.Bounds(type).DefaultValue,
+								   //BobPhsx::CustomPhsxData.Bounds(type).DefaultValue,
 		Process->Apply( shared_from_this() );
 		ScaleText( .33f );
 

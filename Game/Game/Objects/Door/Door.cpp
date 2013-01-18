@@ -468,6 +468,8 @@ namespace CloudberryKingdom
 
 		if ( !TemporaryBlock )
 		{
+			Awardments::CheckForAward_Bungee( getMyLevel()->MyGame );
+
 			getOnOpen()->Apply( boost::static_pointer_cast<Door>( shared_from_this() ) );
 			DoorOperated++;
 		}

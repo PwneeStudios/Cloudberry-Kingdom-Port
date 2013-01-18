@@ -42,8 +42,8 @@ namespace CloudberryKingdom
 		Specification = HeroSpec( 0, 1, 0, 0 );
 		Name = Localization::Words_TINY_BOB;
 		Adjective = std::wstring( L"tiny" );
-		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Tiny"), Color.White, DefaultIconWidth);
-		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * .6f);
+		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Tiny"), Color.White, DefaultIconWidth);
+		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * .6f);
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth *.8f );
 	}
 

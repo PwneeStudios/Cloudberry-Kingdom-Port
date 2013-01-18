@@ -311,7 +311,7 @@ namespace CloudberryKingdom
 		if ( Tools::DrawGraphics && !getCore()->BoxesOnly )
 		{
 			SetAlpha();
-			//Tools.QDrawer.DrawQuad(ref MyQuad);
+			//Tools::QDrawer.DrawQuad(ref MyQuad);
 
 			MyObject->Draw( Tools::QDrawer, Tools::EffectWad );
 			Tools::QDrawer->Flush();

@@ -17,12 +17,6 @@ namespace CloudberryKingdom
 		this->StartLevel = StartLevel - 1;
 		this->MenuIndex = MenuIndex;
 
-		if ( Locked )
-		{
-			MyText->MyFloatColor = ( bColor( 255, 100, 100 ) ).ToVector4();
-			MySelectedText->MyFloatColor = ( bColor( 255, 160, 160 ) ).ToVector4();
-		}
-
 		return boost::static_pointer_cast<LevelItem>( shared_from_this() );
 	}
 
@@ -146,7 +140,7 @@ namespace CloudberryKingdom
 		// assuming they have previously gotten to that level.
 		IndexCutoff = 1;
 		for ( int i = 0; i < static_cast<int>( Levels.size() ); i++ )
-			if ( HighestLevel >= Levels[ i ] || CloudberryKingdomGame::UnlockAll )
+			if ( HighestLevel >= Levels[ i ] || CloudberryKingdomGame::Unlock_Levels )
 				IndexCutoff = i + 1;
 
 		Initialize();
@@ -190,6 +184,20 @@ namespace CloudberryKingdom
 
 			AddItem( item );
 			item->SelectedPos.X -= 25;
+
+            if (Locked)
+            {
+                item->MyText->Alpha = .4f;
+                item->MySelectedText->Alpha = .4f;
+
+                //item->MyText.MyFloatColor.X *= .8f;
+                //item->MySelectedText.MyFloatColor.X *= .8f;
+                //item->MyText.MyFloatColor *= .8f;
+                //item->MySelectedText.MyFloatColor *= .8f;
+
+                //item->MyText.MyFloatColor =         new Color(255, 100, 100).ToVector4();
+                //item->MySelectedText.MyFloatColor = new Color(255, 160, 160).ToVector4();
+            }
 		}
 		ItemPos += PosAdd *.3f;
 

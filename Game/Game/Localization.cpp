@@ -10,11 +10,28 @@
 namespace CloudberryKingdom
 {
 
-	LanguageInfo::LanguageInfo( Localization::Language MyLanguage, const std::wstring &MyDirectory )
+	LanguageInfo::LanguageInfo( Localization::Language MyLanguage, const std::wstring &MyDirectory, const std::wstring &FontSuffix )
 	{
 		this->MyLanguage = MyLanguage;
 		this->MyDirectory = MyDirectory;
+		this->FontSuffix = FontSuffix;
 	}
+
+    void Localization::LoadFont()
+    {
+        std::wstring name = L"Grobold_" + CurrentLanguage->FontSuffix;
+        FontTexture = Content->Load<Texture2D>( Path::Combine( L"Fonts", name ) );
+
+        Resources::hf = boost::make_shared<HackFont>( WstringToUtf8( name )  );
+            
+        if ( Resources::Font_Grobold42 != 0 )
+        {
+            Resources::Font_Grobold42->HFont->font = Resources::hf;
+            Resources::Font_Grobold42->HOutlineFont->font = Resources::hf;
+            Resources::Font_Grobold42_2->HFont->font = Resources::hf;
+            Resources::Font_Grobold42_2->HOutlineFont->font = Resources::hf;
+        }
+    }
 
 	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const boost::shared_ptr<EzTexture> &MyTexture )
 	{
@@ -29,6 +46,7 @@ namespace CloudberryKingdom
 	const int Localization::NumLanguages = 10;
 	std::map<Localization::Language, boost::shared_ptr<LanguageInfo> > Localization::Languages;
 	boost::shared_ptr<LanguageInfo> Localization::CurrentLanguage;
+	boost::shared_ptr<Texture2D> Localization::FontTexture;
 	std::map<Localization::Language, std::map<Localization::Words, std::wstring> > Localization::Text;
 
 	void Localization::ReadTranslationGrid( const std::wstring &path )
@@ -72,11 +90,14 @@ namespace CloudberryKingdom
 		//stream->Close();
 	}
 
+    std::wstring Localization::LanguageName(Language language)
+    {
+        return Text[ language ][ Words_IDENTIFIER ];
+    }
+
 	std::wstring Localization::WordString( Words Word )
 	{
-		//return Text[Language.Portuguese][Word];
 		return Text[ CurrentLanguage->MyLanguage ][ Word ];
-		//return "boob";
 	}
 
 	std::wstring Localization::WordToTextureName( Words Word )
@@ -111,42 +132,42 @@ namespace CloudberryKingdom
 
 		CurrentLanguage = Languages[ SelectedLanguage ];
 
-		// FIXME: Load subtitles another way.
-		/*std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Subtitles" ), CurrentLanguage->MyDirectory );
-		std::vector<std::wstring> files = Tools::GetFiles( path, false );
-
-		for ( std::vector<std::wstring>::const_iterator file = files.begin(); file != files.end(); ++file )
-		{
-			if ( Tools::GetFileExt( path, *file ) == std::wstring( L"xnb" ) )
-			{
-				//var texture = Tools.TextureWad.AddTexture(null, Tools.GetFileName(path, file));
-				boost::shared_ptr<CloudberryKingdom::EzTexture> texture = Tools::TextureWad->AddTexture( 0, Tools::GetFileName( std::wstring( L"Content" ), *file ) );
-				texture->Load();
-			}
-		}*/
+        // Load font. Lock first if it alread exists.
+        if ( Resources::hf == 0 )
+        {
+            LoadFont();
+        }
+        else
+        {
+            Resources::hf_Mutex.Lock();
+            {
+                LoadFont();
+            }
+			Resources::hf_Mutex.Unlock();
+        }
 	}
 
 	void Localization::Initialize()
 	{
 		/*Content = boost::make_shared<ContentManager>( Tools::GameClass->getServices(), Path::Combine(std::wstring( L"Content" ), std::wstring( L"Localization" )) );*/
 #if defined(PC_VERSION)
-		Content = boost::make_shared<ContentManager>( Path::Combine(std::wstring( L"Content" ), std::wstring( L"Localization" )) );
+		Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 #else
-		Content = boost::make_shared<ContentManager>( std::wstring( L"Localization" ) );
+		Content = boost::make_shared<ContentManager>( std::wstring( L"" ) );
 #endif
 
-		Languages.insert( std::make_pair( Language_CHINESE, boost::make_shared<LanguageInfo>( Language_CHINESE, std::wstring( L"Chinese" ) ) ) );
-		Languages.insert( std::make_pair( Language_ENGLISH, boost::make_shared<LanguageInfo>( Language_ENGLISH, std::wstring( L"English" ) ) ) );
-		Languages.insert( std::make_pair( Language_FRENCH, boost::make_shared<LanguageInfo>( Language_FRENCH, std::wstring( L"French" ) ) ) );
-		Languages.insert( std::make_pair( Language_GERMAN, boost::make_shared<LanguageInfo>( Language_GERMAN, std::wstring( L"German" ) ) ) );
-		Languages.insert( std::make_pair( Language_ITALIAN, boost::make_shared<LanguageInfo>( Language_ITALIAN, std::wstring( L"Italian" ) ) ) );
-		Languages.insert( std::make_pair( Language_JAPANESE, boost::make_shared<LanguageInfo>( Language_JAPANESE, std::wstring( L"Japanese" ) ) ) );
-		Languages.insert( std::make_pair( Language_KOREAN, boost::make_shared<LanguageInfo>( Language_KOREAN, std::wstring( L"Korean" ) ) ) );
-		Languages.insert( std::make_pair( Language_PORTUGUESE, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Portuguese" ) ) ) );
-		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Russian" ) ) ) );
-		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"English" ) ) ) );
+		Languages.insert( std::make_pair( Language_CHINESE, boost::make_shared<LanguageInfo>( Language_CHINESE, std::wstring( L"Chinese" ), std::wstring( L"Chinese" ) ) ) );
+		Languages.insert( std::make_pair( Language_ENGLISH, boost::make_shared<LanguageInfo>( Language_ENGLISH, std::wstring( L"English" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_FRENCH, boost::make_shared<LanguageInfo>( Language_FRENCH, std::wstring( L"French" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_GERMAN, boost::make_shared<LanguageInfo>( Language_GERMAN, std::wstring( L"German" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_ITALIAN, boost::make_shared<LanguageInfo>( Language_ITALIAN, std::wstring( L"Italian" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_JAPANESE, boost::make_shared<LanguageInfo>( Language_JAPANESE, std::wstring( L"Japanese" ), std::wstring( L"Japanese" ) ) ) );
+		Languages.insert( std::make_pair( Language_KOREAN, boost::make_shared<LanguageInfo>( Language_KOREAN, std::wstring( L"Korean" ), std::wstring( L"Korean" ) ) ) );
+		Languages.insert( std::make_pair( Language_PORTUGUESE, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Portuguese" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Russian" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"English" ), std::wstring( L"Western" ) ) ) );
 
-		std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Localization.tsv" ) );
+		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"Localization.tsv" ) ) );
 		ReadTranslationGrid( path );
 	}
 

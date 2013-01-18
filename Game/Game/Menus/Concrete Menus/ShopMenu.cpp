@@ -501,7 +501,7 @@ boost::shared_ptr<ShopMenu> ShopMenu::ActiveShop = 0;
 	//#if defined(PC_VERSION)
 	//            // Customize
 	//            ItemPos.Y -= 5;
-	//            item = new MenuItem(new EzText(Localization.Words.Customize, ItemFont));
+	//            item = new MenuItem(new EzText(Localization::Words_Customize, ItemFont));
 	//            item.Go = MenuGo_Customize;
 	//            //AddItem(item);
 	//            item.MySelectedText.MyFloatColor = new Color(50, 220, 50).ToVector4();

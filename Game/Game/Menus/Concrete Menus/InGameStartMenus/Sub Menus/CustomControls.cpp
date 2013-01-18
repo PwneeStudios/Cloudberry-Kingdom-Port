@@ -296,7 +296,7 @@ namespace CloudberryKingdom
 		//backdrop.Pos = new Vector2(1157.441f, 51.19061f);
 		//backdrop.Quad.SetColor(new Color(215, 215, 215, 255));
 
-		//var text = new EzText("Press any key to switch control of selected item.", Resources.Font_Grobold42, 700, true, true, .675f);
+		//var text = new EzText("Press any key to switch control of selected item.", Resources::Font_Grobold42, 700, true, true, .675f);
 		//text.Scale *= .68f;
 		//text.Pos = new Vector2(1158.73f, 79.36493f);
 		//MyPile.Add(text, "instructions");

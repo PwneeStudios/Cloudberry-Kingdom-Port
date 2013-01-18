@@ -30,12 +30,12 @@ namespace CloudberryKingdom
 
 		//static public int[] ChooseUpgrades(int Num)
 		//{
-		//    bool[] Valid = new bool[Tools.UpgradeTypes];
-		//    for (int i = 0; i < Tools.UpgradeTypes; i++)
+		//    bool[] Valid = new bool[Tools::UpgradeTypes];
+		//    for (int i = 0; i < Tools::UpgradeTypes; i++)
 		//        Valid[i] = true;
 		//    Valid[(int)Upgrade.Speed] = false;
 		//    Valid[(int)Upgrade.General] = false;
-		//    return MyLevel.Rnd.RndIndex(Tools.UpgradeTypes, Num, Valid);
+		//    return MyLevel.Rnd.RndIndex(Tools::UpgradeTypes, Num, Valid);
 		//}
 
 

@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 		Name = Localization::Words_HERO_IN_ABOX;
 		NameTemplate = std::wstring( L"hero in a box" );
 
-		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);
+		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Box_Duck_0000" ) ), Color::White, DefaultIconWidth * 1.35f );
 		( boost::static_pointer_cast<PictureIcon>( Icon ) )->IconQuad->Quad_Renamed.Shift( Vector2( 0,.0485f ) );
 	}

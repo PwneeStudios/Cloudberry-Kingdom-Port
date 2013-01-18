@@ -640,7 +640,7 @@ namespace CloudberryKingdom
 
 	void QuadClass::setAlpha( const float &value )
 	{
-		//if (value == 1) Tools.Write("");
+		//if (value == 1) Tools::Write("");
 		Quad_Renamed.SetAlpha( value );
 	}
 
@@ -715,7 +715,7 @@ namespace CloudberryKingdom
 			Quad_Renamed.SetColor( ShadowColor );
 			Quad_Renamed.Update( Base );
 			Tools::QDrawer->DrawQuad( Quad_Renamed );
-			//Tools.QDrawer.Flush();
+			//Tools::QDrawer.Flush();
 			Quad_Renamed.MyEffect = Tools::BasicEffect;
 			Base.Origin += ShadowOffset;
 			Quad_Renamed.SetColor( _HoldColor );

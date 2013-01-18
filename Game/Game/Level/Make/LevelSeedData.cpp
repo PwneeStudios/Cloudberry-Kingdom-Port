@@ -412,6 +412,7 @@ namespace CloudberryKingdom
 	const std::wstring LevelSeedData::WeatherIntensityFlag = std::wstring( L"weather" );
 	const std::wstring LevelSeedData::NoStartDoorFlag = std::wstring( L"nostartdoor" );
 	const std::wstring LevelSeedData::LevelFlag = std::wstring( L"level" );
+	const std::wstring LevelSeedData::IndexFlag = std::wstring( L"index" );
 	const std::wstring LevelSeedData::WaitLengthToOpenDoorString = std::wstring( L"opendoor" );
 	const std::wstring LevelSeedData::OpenDoorSoundFlag = std::wstring( L"opendoorsound" );
 	const std::wstring LevelSeedData::SongString = std::wstring( L"song" );
@@ -728,6 +729,15 @@ namespace CloudberryKingdom
 					LevelNum = levelval;
 				else
 					LevelNum = 0;
+			}
+			// Index number
+			else if ( lower_identifier == IndexFlag )
+			{
+				int Indexval = 0;
+				if ( ParseInt( data, Indexval ) )
+					LevelIndex = Indexval;
+				else
+					LevelIndex = 0;
 			}
 			// Weather intensity
 			else if ( lower_identifier == WeatherIntensityFlag )
@@ -1339,6 +1349,7 @@ namespace CloudberryKingdom
 		WeatherIntensity = 1;
 		NoStartDoor = false;
 		LevelNum = -1;
+		LevelIndex = -1;
 		WaitLengthToOpenDoor = 6;
 		OpenDoorSound = false;
 		MySong = 0;
