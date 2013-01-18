@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 		{
 			int i = Rnd->RndInt( 0, dict.size() - 1 );
 			
-			std::map<T, bool>::const_iterator itr = dict.begin();
+			typename std::map<T, bool>::const_iterator itr = dict.begin();
 			int count = 0;
 			while ( count < i )
 			{

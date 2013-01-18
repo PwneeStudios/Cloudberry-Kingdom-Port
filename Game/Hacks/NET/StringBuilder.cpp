@@ -1,6 +1,6 @@
 #include "StringBuilder.h"
 
-#include <cmath>
+#include <math.h>
 #include <Hacks/List.h>
 #include <Utility/Limits.h>
 

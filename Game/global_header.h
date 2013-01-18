@@ -20,7 +20,12 @@
 #include <stack>
 #include <string>
 #include <vector>
-#include <tchar.h>
+
+#ifdef PS3
+	#define _T( x ) L##x
+#else
+	#include <tchar.h>
+#endif
 
 // Syntactic sugar
 #define MakeMagic( classname, params ) \

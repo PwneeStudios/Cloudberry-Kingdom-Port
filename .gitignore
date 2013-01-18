@@ -37,6 +37,7 @@ Content
 *.dlf
 *.xml
 *.db
+Cloudberry PS3/Cloudberry_Kingdom/Game/
 Cloudberry PS3/Cloudberry_Kingdom/Core/
 Cloudberry PS3/Cloudberry_Kingdom/boost_shared_ptr/
 Cloudberry PS3/Cloudberry_Kingdom/PS3_Debug/

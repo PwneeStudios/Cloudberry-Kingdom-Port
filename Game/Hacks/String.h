@@ -9,6 +9,7 @@
 #include <string>
 #include <sstream>
 #include <vector>
+#include <ctype.h>
 
 #include "Parse.h"
 
