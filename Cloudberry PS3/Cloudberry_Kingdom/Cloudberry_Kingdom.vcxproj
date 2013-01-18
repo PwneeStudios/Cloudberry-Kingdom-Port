@@ -31,7 +31,7 @@
     <ClCompile Include="Core\src\Graphics\EffectPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\QuadDrawerPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
-    <ClCompile Include="Core\src\Input\GamePadPc.cpp" />
+    <ClCompile Include="Core\src\Input\GamePadPS3.cpp" />
     <ClCompile Include="Core\src\Input\Input.cpp" />
     <ClCompile Include="Core\src\Input\InputPc.cpp" />
     <ClCompile Include="Core\src\Input\Keyboard.cpp" />
@@ -767,7 +767,7 @@
     <ClInclude Include="Core\include\Graphics\EffectPass.h" />
     <ClInclude Include="Core\include\Graphics\EffectTechnique.h" />
     <ClInclude Include="Core\include\Graphics\QuadDrawer.h" />
-    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h" />
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h" />
     <ClInclude Include="Core\include\Graphics\TextDrawer.h" />
     <ClInclude Include="Core\include\Graphics\Types.h" />
     <ClInclude Include="Core\include\Input\GamePad.h" />

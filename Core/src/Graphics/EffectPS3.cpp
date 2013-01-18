@@ -27,6 +27,11 @@ Effect::~Effect()
 
 void Effect::Load( const std::string &name )
 {
+	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( *this, 0 );
+	DefaultTechnique = boost::make_shared<EffectTechnique>(
+		boost::shared_ptr<EffectPass>( new EffectPass( *this, 0 ) )
+	);
+	CurrentTechnique = DefaultTechnique;
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )

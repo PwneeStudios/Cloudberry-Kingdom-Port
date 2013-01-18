@@ -1,4 +1,4 @@
-#include <Graphics/QuadDrawerPc.h>
+#include <Graphics/QuadDrawerPS3.h>
 
 #include <cassert>
 #include <Content/ResourcePtr.h>
@@ -77,7 +77,7 @@ struct QuadDrawerInternal
 };
 
 
-QuadDrawerPc::QuadDrawerPc() :
+QuadDrawerPS3::QuadDrawerPS3() :
 	internal_( new QuadDrawerInternal )
 {
 	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
@@ -91,12 +91,12 @@ QuadDrawerPc::QuadDrawerPc() :
 	internal_->CastleBackground = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Backdrop_2.png" );
 }
 
-QuadDrawerPc::~QuadDrawerPc()
+QuadDrawerPS3::~QuadDrawerPS3()
 {
 	delete internal_;
 }
 
-void QuadDrawerPc::SetEffect( const boost::shared_ptr<Effect> &effect )
+void QuadDrawerPS3::SetEffect( const boost::shared_ptr<Effect> &effect )
 {
 	internal_->CurrentEffect = effect;
 
@@ -108,14 +108,14 @@ void QuadDrawerPc::SetEffect( const boost::shared_ptr<Effect> &effect )
 	internal_->ExtraTextureParameter2 = effect->Parameters( "u_maskTexture" );
 }
 
-boost::shared_ptr<Effect> QuadDrawerPc::GetEffect()
+boost::shared_ptr<Effect> QuadDrawerPS3::GetEffect()
 {
 	return internal_->CurrentEffect;
 }
 
-void QuadDrawerPc::Draw( const SimpleQuad &quad )
+void QuadDrawerPS3::Draw( const SimpleQuad &quad )
 {
-	if( internal_->NumElements >= MAX_QUADS * 4 )
+	/*if( internal_->NumElements >= MAX_QUADS * 4 )
 		return;
 
 	RenderBatch rb;
@@ -148,10 +148,10 @@ void QuadDrawerPc::Draw( const SimpleQuad &quad )
 			batches.push_back( rb );
 		}
 	}
-	internal_->NumElements += 4;
+	internal_->NumElements += 4;*/
 }
 
-void QuadDrawerPc::Flush()
+void QuadDrawerPS3::Flush()
 {
 	if( internal_->NumElements == 0 )
 		return;
