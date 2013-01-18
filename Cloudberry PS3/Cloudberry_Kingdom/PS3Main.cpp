@@ -1,6 +1,20 @@
+#include <Core.h>
+#include <CloudberryKingdom.h>
+#include <Content/Filesystem.h>
 #include <iostream>
 
 #include <Utility/Log.h>
+
+class OSLog : public LogListener
+{
+	
+public:
+
+	void Write( const std::string &text )
+	{
+		std::cout << text;
+	}
+};
 
 namespace boost
 {
@@ -12,7 +26,22 @@ namespace boost
 
 int main(int argc, char *argv)
 {
-	std::cout << "Hello, world!" << std::endl;
+	OSLog osLog;
+	Log theLog;
 
-	return 0;
+	Filesystem *filesystem = new Filesystem;
+	
+	theLog.AddListener( osLog );
+
+	CloudberryKingdomWrapper *game = new CloudberryKingdomWrapper;
+	Core *core = new Core( *game );
+	int result = core->Run();
+	delete core;
+	delete game;
+
+	delete filesystem;
+
+	theLog.RemoveListener( osLog );
+
+	return result;
 }
