@@ -3,6 +3,8 @@
 #include <cassert>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
+#include <Content/Wad.h>
+#include <Core.h>
 #include <cstring>
 #include <fstream>
 #include <GL/glew.h>
@@ -46,7 +48,19 @@ struct QuadDrawerInternal
 
 	boost::shared_ptr<Effect> CurrentEffect;
 	boost::shared_ptr<EffectParameter> TextureParameter;
+	boost::shared_ptr<EffectParameter> ExtraTextureParameter1;
+	boost::shared_ptr<EffectParameter> ExtraTextureParameter2;
 
+	ResourcePtr< Texture > MiddleFrame;
+	ResourcePtr< Texture > LeftFrame;
+	ResourcePtr< Texture > RightFrame;
+
+	ResourcePtr< Texture > MiddleFrameMask;
+	ResourcePtr< Texture > LeftFrameMask;
+	ResourcePtr< Texture > RightFrameMask;
+
+	ResourcePtr< Texture > CastleBackground;
+	
 	BatchList Batches;
 
 	QuadDrawerInternal() :
@@ -192,6 +206,16 @@ QuadDrawerPc::QuadDrawerPc() :
 
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
+	internal_->LeftFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Frame.png" );
+	internal_->RightFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Frame.png" );
+
+	internal_->MiddleFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Mask.png" );
+	internal_->LeftFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Mask.png" );
+	internal_->RightFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Mask.png" );
+
+	internal_->CastleBackground = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Backdrop_2.png" );
 }
 
 QuadDrawerPc::~QuadDrawerPc()
@@ -215,6 +239,8 @@ void QuadDrawerPc::SetEffect( const boost::shared_ptr<Effect> &effect )
 	internal_->TexCoordAttrib = effect->Attributes( "a_texcoord" );
 	internal_->ColorAttrib = effect->Attributes( "a_color" );
 	internal_->TextureParameter = effect->Parameters( "u_texture" );
+	internal_->ExtraTextureParameter1 = effect->Parameters( "u_backTexture" );
+	internal_->ExtraTextureParameter2 = effect->Parameters( "u_maskTexture" );
 }
 
 boost::shared_ptr<Effect> QuadDrawerPc::GetEffect()
@@ -266,6 +292,8 @@ void QuadDrawerPc::Flush()
 		return;
 
 	internal_->TextureParameter->SetValue( 0 );
+	internal_->ExtraTextureParameter1->SetValue( 1 );
+	internal_->ExtraTextureParameter2->SetValue( 2 );
 
 	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
@@ -285,13 +313,21 @@ void QuadDrawerPc::Flush()
 		sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
 	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
-	glActiveTexture( GL_TEXTURE0 + 0 );
+	internal_->CastleBackground->Activate( 1 );
 
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
 		batch.Map->Activate( 0 );
+
+		if( batch.Map == internal_->LeftFrame )
+			internal_->LeftFrameMask->Activate( 2 );
+		else if( batch.Map == internal_->MiddleFrame )
+			internal_->MiddleFrameMask->Activate( 2 );
+		else if( batch.Map == internal_->RightFrame )
+			internal_->RightFrameMask->Activate( 2 );
+
 		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
 	}
 

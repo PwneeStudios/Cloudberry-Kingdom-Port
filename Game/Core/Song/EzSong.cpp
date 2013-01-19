@@ -1,6 +1,7 @@
 ﻿#include <global_header.h>
 
 #include <Audio/MediaPlayer.h>
+#include <Audio/Song.h>
 
 namespace CloudberryKingdom
 {

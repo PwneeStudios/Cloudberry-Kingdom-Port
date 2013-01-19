@@ -56,9 +56,9 @@ CorePc::CorePc( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	qd_ = new QuadDrawer;
-
 	content_ = new Wad( "Content/" );
+
+	qd_ = new QuadDrawer;
 
 	td_ = new TextDrawer;
 

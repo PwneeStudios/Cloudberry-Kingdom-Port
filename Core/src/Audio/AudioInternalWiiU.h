@@ -10,6 +10,8 @@ struct Voice
     SPSoundEntry *SPEntry;
 
 	AXPBVE Ve;
+	bool Streaming;
+	bool Left;
 };
 
 extern Voice Voices[ AX_MAX_VOICES ];

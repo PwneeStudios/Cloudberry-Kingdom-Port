@@ -90,8 +90,8 @@ void SoundEffect::Play( float volume, float pitch, float pan )
 
 		v = &Voices[ axVoice->index ];
 		v->AXVoice = axVoice;
-
 		v->SPEntry = SPGetSoundEntry( SPTable, internal_->SoundId );
+		v->Streaming = false;
 
 		SPPrepareSound( v->SPEntry, v->AXVoice, ( v->SPEntry )->sampleRate );
 
@@ -103,7 +103,6 @@ void SoundEffect::Play( float volume, float pitch, float pan )
 		v->Ve.currentDelta = 0;
 		AXSetVoiceDeviceMix( v->AXVoice, AX_DEVICE_TV, AX_TV_ID0, MixChannels );
 		AXSetVoiceVe( v->AXVoice, &v->Ve );
-		LOG.Write( "Volume %f: %f -> %X\n", volume, volume * 32768, v->Ve.currentVolume );
 
 		AXSetVoiceSrcType( v->AXVoice, AX_SRC_TYPE_LINEAR );
 		AXSetVoiceState( v->AXVoice, AX_PB_STATE_RUN );

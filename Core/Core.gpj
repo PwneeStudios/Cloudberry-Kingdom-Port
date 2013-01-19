@@ -1,6 +1,8 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+src\Audio\streamlib\streamPool.c
+src\Audio\SongWiiU.cpp
 src\Audio\MediaPlayerWiiU.cpp
 src\Audio\SoundEffectWiiU.cpp
 src\Utility\MutexWiiU.cpp
@@ -23,3 +25,4 @@ src\Content\Wad.cpp
 src\Core.cpp
 src\CoreWiiU.cpp
 src\Graphics\QuadDrawerWiiU.cpp
+src\Audio\streamlib\AXStreamServer.c

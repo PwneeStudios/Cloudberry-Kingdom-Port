@@ -73,6 +73,9 @@
     <ClInclude Include="include\Utility\Log.h" />
     <ClInclude Include="include\Utility\Mutex.h" />
     <ClInclude Include="src\Audio\AudioInternalWiiU.h" />
+    <ClInclude Include="src\Audio\SongInternalWiiU.h" />
+    <ClInclude Include="src\Audio\streamlib\AXStream.h" />
+    <ClInclude Include="src\Audio\streamlib\streamPool.h" />
     <ClInclude Include="src\Graphics\EffectInternalPc.h" />
     <ClInclude Include="src\Graphics\EffectInternalWiiU.h" />
     <ClInclude Include="include\Input\GamePad.h" />
@@ -100,15 +103,26 @@
     <ClCompile Include="..\zlib-1.2.7\trees.c" />
     <ClCompile Include="..\zlib-1.2.7\uncompr.c" />
     <ClCompile Include="..\zlib-1.2.7\zutil.c" />
-    <ClCompile Include="include\Math\Vectors.cpp" />
     <ClCompile Include="src\Audio\MediaPlayerPc.cpp" />
     <ClCompile Include="src\Audio\MediaPlayerWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\SongPc.cpp" />
+    <ClCompile Include="src\Audio\SongWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Audio\SoundEffectWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\AXStreamServer.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Audio\streamlib\streamPool.c">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Content\FilesystemWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

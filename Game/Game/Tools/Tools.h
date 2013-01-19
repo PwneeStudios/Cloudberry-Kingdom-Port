@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		template<typename TSource>
 		static TSource Find( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
-			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+			for ( typename std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
 					return ( *obj );
 			return TSource();
@@ -189,7 +189,7 @@ namespace CloudberryKingdom
 		static std::vector<TSource> FindAll( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			std::vector<TSource> newlist = std::vector<TSource>();
-			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+			for ( typename std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
 					newlist.push_back( *obj );
 			return newlist;
@@ -199,7 +199,7 @@ namespace CloudberryKingdom
 		static bool All( std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
 			bool all = true;
-			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+			for ( typename std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( !predicate->Apply( *obj ) )
 					all = false;
 			return all;
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
 		template<typename TSource>
 		static bool Any( const std::vector<TSource> &list, const boost::shared_ptr<LambdaFunc_1<TSource, bool> > &predicate )
 		{
-			for ( std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
+			for ( typename std::vector<TSource>::const_iterator obj = list.begin(); obj != list.end(); ++obj )
 				if ( predicate->Apply( *obj ) )
 					return true;
 			return false;
@@ -269,7 +269,7 @@ namespace CloudberryKingdom
 		{
 			TSource min = TSource();
 			float minval = 0;
-			for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
+			for ( typename std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
 				if ( min == 0 || val->Apply( *item ) < minval )
 				{
 					minval = val->Apply( *item );
@@ -284,7 +284,7 @@ namespace CloudberryKingdom
 		{
 			TSource max = TSource();
 			float maxval = 0;
-			for ( std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
+			for ( typename std::vector<TSource>::const_iterator item = source.begin(); item != source.end(); ++item )
 				if ( max == 0 || val->Apply( *item ) > maxval )
 				{
 					maxval = val->Apply( *item );

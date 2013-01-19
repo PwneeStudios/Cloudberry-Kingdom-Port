@@ -28,7 +28,9 @@ public:
 
 	static bool IsRepeating;
 
-	static float Volume;
+	static void SetVolume( float volume );
+
+	static float GetVolume();
 
 };
 

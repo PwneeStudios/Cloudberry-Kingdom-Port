@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	
 		void Apply( const T1 &t1, const T2 &t2 )
 		{
-			for ( std::vector<boost::shared_ptr<Lambda_2<T1, T2> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
+			for ( typename std::vector<boost::shared_ptr<Lambda_2<T1, T2> > >::const_iterator L = MyList.begin(); L != MyList.end(); ++L )
 				( *L )->Apply( t1, t2 );
 		}
 

@@ -6,6 +6,7 @@
 	-object_dir=objs\Cloudberry_Kingdom
 	-o Cloudberry_Kingdom.elf
 	-I.
+	-laacdec.a
 Game\Hacks\NET\StringBuilder.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp

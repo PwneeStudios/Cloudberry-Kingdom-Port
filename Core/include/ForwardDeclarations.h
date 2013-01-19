@@ -23,6 +23,7 @@ template< class ResourceType > class ResourcePtr;
 class Scheduler;
 struct SimpleQuad;
 template< class T > class Singleton;
+class Song;
 class TextDrawer;
 class Texture;
 class Vector2;
