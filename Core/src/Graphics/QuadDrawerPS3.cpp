@@ -165,8 +165,15 @@ void QuadDrawerPS3::Flush()
 
 	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
-	//glUseProgram( internal_->Program );
-	//glUniform1i( internal_->TexUniform, 0 );
+	glEnableClientState( GL_VERTEX_ARRAY );
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+	glEnableClientState( GL_COLOR_ARRAY );
+
+	// Draw stuff here.
+
+	glDisableClientState( GL_COLOR_ARRAY );
+	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
+	glDisableClientState( GL_VERTEX_ARRAY );
 
 	internal_->CastleBackground->Activate( 1 );
 

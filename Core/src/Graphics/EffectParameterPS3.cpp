@@ -89,14 +89,18 @@ void EffectParameter::Apply()
 		case ParamType_None:
 			break;
 		case ParamType_Vector4:
+			cgGLSetParameter4fv( internal_->Parameter, &internal_->CachedVector4.X );
 			break;
 		case ParamType_Matrix:
+			cgGLSetMatrixParameterfr( internal_->Parameter, internal_->CachedMatrix.M );
 			break;
 		case ParamType_Texture:
 			break;
 		case ParamType_Vector2:
+			cgGLSetParameter2fv( internal_->Parameter, &internal_->CachedVector2.X );
 			break;
 		case ParamType_Float:
+			cgGLSetParameter1f( internal_->Parameter, internal_->CachedSingle );
 			break;
 		case ParamType_Int:
 			break;

@@ -12,6 +12,9 @@
 
 void Effect::Apply()
 {
+	cgGLBindProgram( internal_->VertexProgram );
+	cgGLBindProgram( internal_->FragmentProgram );
+
 	std::map<std::string, boost::shared_ptr<EffectParameter> >::iterator i;
 	for( i = internal_->Parameters.begin(); i != internal_->Parameters.end(); ++i )
 		i->second->Apply();
@@ -44,6 +47,8 @@ void Effect::Load( const std::string &name )
 		boost::shared_ptr<EffectPass>( new EffectPass( *this, 0 ) )
 	);
 
+	CurrentTechnique = DefaultTechnique;
+
 	CGparameter parameter = cgGetFirstLeafParameter( internal_->VertexProgram, CG_GLOBAL );
 	while( parameter )
 	{
@@ -67,7 +72,6 @@ void Effect::Load( const std::string &name )
 
 		parameter = cgGetNextLeafParameter( parameter );
 	}
-	CurrentTechnique = DefaultTechnique;
 }
 
 boost::shared_ptr<EffectParameter> Effect::Parameters( const std::string &name )
