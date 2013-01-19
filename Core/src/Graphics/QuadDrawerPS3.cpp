@@ -13,6 +13,9 @@
 #include <string>
 #include <vector>
 
+#include <PSGL/psgl.h>
+#include <PSGL/psglu.h>
+
 /// Maximum number of displayable quads.
 #define MAX_QUADS 1024
 
