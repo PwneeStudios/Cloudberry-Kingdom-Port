@@ -107,8 +107,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	psglInit( &initOpts );
 
 	static PSGLdevice *device = NULL;
-	device = psglCreateDeviceAuto( GL_ARGB_SCE, GL_DEPTH_COMPONENT24,
-		GL_MULTISAMPLING_4X_SQUARE_ROTATED_SCE );
+	device = psglCreateDeviceAuto( GL_ARGB_SCE, GL_NONE,
+		GL_MULTISAMPLING_NONE_SCE/*GL_MULTISAMPLING_4X_SQUARE_ROTATED_SCE*/ );
 
 
 	if( !device )
@@ -136,17 +136,32 @@ CorePS3::CorePS3( GameLoop &game ) :
 	
 	psglResetCurrentContext();
 
+	// FIXME: Remove debugging!
+	cgGLSetDebugMode( GL_TRUE );
+
 	glViewport( 0, 0, width, height );
 	glScissor( 0, 0, width, height );
-	glClearColor( 1.f, 0.f, 0.f, 1.f );
-	glEnable( GL_DEPTH_TEST );
+	
+	glClearColor( 0.f, 0.f, 0.f, 1.f );
+	/*glClearDepthf( 1.f );
+	glDepthFunc( GL_LEQUAL );
+	glEnable( GL_DEPTH_TEST );*/
+
+	glDisable( GL_CULL_FACE );
+	glEnable( GL_VSYNC_SCE );
+
+	glEnable( GL_BLEND );
+	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
+
+	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_VERTEX ) );
+	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_FRAGMENT ) );
 
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT );
 	psglSwap();
 
 	scheduler_ = new Scheduler;
 
-	content_ = new Wad( "Content/" );
+	content_ = new Wad( "/app_home/" );
 
 	qd_ = new QuadDrawer;
 

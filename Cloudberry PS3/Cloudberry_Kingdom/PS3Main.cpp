@@ -1,7 +1,7 @@
 #include <Core.h>
 #include <CloudberryKingdom.h>
 #include <Content/Filesystem.h>
-#include <iostream>
+#include <stdio.h>
 
 #include <Utility/Log.h>
 
@@ -12,7 +12,7 @@ public:
 
 	void Write( const std::string &text )
 	{
-		std::cout << text;
+		printf( text.c_str() );
 	}
 };
 

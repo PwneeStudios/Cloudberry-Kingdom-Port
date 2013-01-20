@@ -37,16 +37,9 @@ typedef std::vector< RenderBatch > BatchList;
 
 struct QuadDrawerInternal
 {
-	unsigned int QuadBuffer[2];
-	unsigned int CurrentBuffer;
+	unsigned int QuadBuffer;
 	unsigned int NumElements;
 	QuadVert *Vertices;
-
-	//unsigned int Program;
-	unsigned int VertexAttrib;
-	unsigned int TexCoordAttrib;
-	unsigned int ColorAttrib;
-	//unsigned int TexUniform;
 
 	boost::shared_ptr<Effect> CurrentEffect;
 	boost::shared_ptr<EffectParameter> TextureParameter;
@@ -66,14 +59,8 @@ struct QuadDrawerInternal
 	BatchList Batches;
 
 	QuadDrawerInternal() :
-		CurrentBuffer( 0 ),
 		NumElements( 0 ),
-		Vertices( 0 ),
-		//Program( 0 ),
-		VertexAttrib( 0 ),
-		TexCoordAttrib( 0 ),
-		ColorAttrib( 0 )//,
-		//TexUniform( 0 )
+		Vertices( 0 )
 	{
 
 	}
@@ -83,6 +70,12 @@ struct QuadDrawerInternal
 QuadDrawerPS3::QuadDrawerPS3() :
 	internal_( new QuadDrawerInternal )
 {
+	glGenBuffers( 1, &internal_->QuadBuffer );
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glBufferData( GL_ARRAY_BUFFER, MAX_QUADS * 4 * sizeof( QuadVert ), 0, GL_DYNAMIC_DRAW );
+	internal_->Vertices = reinterpret_cast< QuadVert * >( glMapBuffer( GL_ARRAY_BUFFER, GL_WRITE_ONLY ) );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
 	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
 	internal_->LeftFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Frame.png" );
 	internal_->RightFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Frame.png" );
@@ -96,6 +89,12 @@ QuadDrawerPS3::QuadDrawerPS3() :
 
 QuadDrawerPS3::~QuadDrawerPS3()
 {
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glUnmapBuffer( GL_ARRAY_BUFFER );
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
+
+	glDeleteBuffers( 1, &internal_->QuadBuffer );
+
 	delete internal_;
 }
 
@@ -103,12 +102,9 @@ void QuadDrawerPS3::SetEffect( const boost::shared_ptr<Effect> &effect )
 {
 	internal_->CurrentEffect = effect;
 
-	internal_->VertexAttrib = effect->Attributes( "a_position" );
-	internal_->TexCoordAttrib = effect->Attributes( "a_texcoord" );
-	internal_->ColorAttrib = effect->Attributes( "a_color" );
-	internal_->TextureParameter = effect->Parameters( "u_texture" );
-	internal_->ExtraTextureParameter1 = effect->Parameters( "u_backTexture" );
-	internal_->ExtraTextureParameter2 = effect->Parameters( "u_maskTexture" );
+	internal_->TextureParameter = effect->Parameters( "TextureSampler" );
+	internal_->ExtraTextureParameter1 = effect->Parameters( "BackTextureSampler" );
+	internal_->ExtraTextureParameter2 = effect->Parameters( "MaskTextureSampler" );
 }
 
 boost::shared_ptr<Effect> QuadDrawerPS3::GetEffect()
@@ -118,7 +114,7 @@ boost::shared_ptr<Effect> QuadDrawerPS3::GetEffect()
 
 void QuadDrawerPS3::Draw( const SimpleQuad &quad )
 {
-	/*if( internal_->NumElements >= MAX_QUADS * 4 )
+	if( internal_->NumElements >= MAX_QUADS * 4 )
 		return;
 
 	RenderBatch rb;
@@ -151,7 +147,7 @@ void QuadDrawerPS3::Draw( const SimpleQuad &quad )
 			batches.push_back( rb );
 		}
 	}
-	internal_->NumElements += 4;*/
+	internal_->NumElements += 4;
 }
 
 void QuadDrawerPS3::Flush()
@@ -163,22 +159,44 @@ void QuadDrawerPS3::Flush()
 	internal_->ExtraTextureParameter1->SetValue( 1 );
 	internal_->ExtraTextureParameter2->SetValue( 2 );
 
-	internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glUnmapBuffer( GL_ARRAY_BUFFER );
 
 	glEnableClientState( GL_VERTEX_ARRAY );
-	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
-	glEnableClientState( GL_COLOR_ARRAY );
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glVertexPointer( 2, GL_FLOAT, sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Position ) ) );
 
-	// Draw stuff here.
+	glEnableClientState( GL_TEXTURE_COORD_ARRAY );
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glTexCoordPointer( 2, GL_FLOAT, sizeof( QuadVert ), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, TexCoord ) ) );
+
+	glEnableClientState( GL_COLOR_ARRAY );
+	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
+	glColorPointer( 4, GL_FLOAT, sizeof( QuadVert), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
+
+	internal_->CastleBackground->Activate( 1 );
+
+	BatchList::iterator i;
+	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
+	{
+		RenderBatch &batch = *i;
+
+		batch.Map->Activate( *internal_->TextureParameter.get() );
+		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
+
+		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );
+	}
 
 	glDisableClientState( GL_COLOR_ARRAY );
 	glDisableClientState( GL_TEXTURE_COORD_ARRAY );
 	glDisableClientState( GL_VERTEX_ARRAY );
 
-	internal_->CastleBackground->Activate( 1 );
+	internal_->Vertices = reinterpret_cast< QuadVert * >(
+		glMapBuffer( GL_ARRAY_BUFFER, GL_WRITE_ONLY )
+	);
+	glBindBuffer( GL_ARRAY_BUFFER, 0 );
 
 
 	internal_->Batches.clear();
 	internal_->NumElements = 0;
-	internal_->CurrentBuffer = 1 - internal_->CurrentBuffer;
 }

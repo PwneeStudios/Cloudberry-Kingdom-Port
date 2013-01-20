@@ -68,21 +68,39 @@ namespace CloudberryKingdom
 		Neweffect->Name = Name;
 		Neweffect->effect = effect;
 
+#ifdef PS3
 		Neweffect->FlipVector = effect->Parameters( "FlipVector" );
 		Neweffect->FlipCenter = effect->Parameters( "FlipCenter" );
-		Neweffect->xTexture = effect->Parameters( "xTexture" );
+		Neweffect->xTexture = effect->Parameters( "TextureSampler" );
 		Neweffect->xTexture->SetValue( 0 );
 		Neweffect->Illumination = effect->Parameters( "Illumination" );
 		Neweffect->t = effect->Parameters( "t" );
 		Neweffect->xCameraAspect = effect->Parameters( "xCameraAspect" );
 		Neweffect->xCameraPos = effect->Parameters("xCameraPos" );
 
+		Neweffect->ExtraTexture1_Param = effect->Parameters( "BackTextureSampler" );
+		Neweffect->ExtraTexture1_Param->SetValue( 1 );
+		Neweffect->ExtraTexture2_Param = effect->Parameters( "MaskTextureSampler" );
+		Neweffect->ExtraTexture2_Param->SetValue( 2 );
+
+		Neweffect->Hsl = effect->Parameters( "ColorMatrix" );
+#else
+		Neweffect->FlipVector = effect->Parameters( "u_flipVector" );
+		Neweffect->FlipCenter = effect->Parameters( "u_flipCenter" );
+		Neweffect->xTexture = effect->Parameters( "u_texture" );
+		Neweffect->xTexture->SetValue( 0 );
+		Neweffect->Illumination = effect->Parameters( "u_illumination" );
+		Neweffect->t = effect->Parameters( "t" );
+		Neweffect->xCameraAspect = effect->Parameters( "u_cameraAspect" );
+		Neweffect->xCameraPos = effect->Parameters("u_cameraPos" );
+
 		Neweffect->ExtraTexture1_Param = effect->Parameters( "u_backTexture" );
 		Neweffect->ExtraTexture1_Param->SetValue( 1 );
 		Neweffect->ExtraTexture2_Param = effect->Parameters( "u_maskTexture" );
 		Neweffect->ExtraTexture2_Param->SetValue( 2 );
 
-		Neweffect->Hsl = effect->Parameters( "ColorMatrix" );
+		Neweffect->Hsl = effect->Parameters( "u_colorMatrix" );
+#endif
 
 		Neweffect->Simplest = effect->Techniques( "Simplest" );
 

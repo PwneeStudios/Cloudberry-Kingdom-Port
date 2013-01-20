@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstdarg>
+#include <stdio.h>
 
 // Single instance of the log.
 template<> Log *Singleton< Log >::singleton_ = 0;
@@ -27,7 +28,7 @@ void Log::RemoveListener( LogListener &listener )
 
 void Log::Write( const char *fmt, ... )
 {
-#if defined( CAFE ) || defined( PS3 )
+#if defined( CAFE )
 #else
 	char buffer[ 512 ];
 

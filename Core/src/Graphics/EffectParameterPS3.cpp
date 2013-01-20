@@ -84,6 +84,9 @@ float EffectParameter::GetValueSingle()
 
 void EffectParameter::Apply()
 {
+	if( internal_->Parameter == 0 )
+		return;
+
 	switch( internal_->PType )
 	{
 		case ParamType_None:
@@ -103,6 +106,8 @@ void EffectParameter::Apply()
 			cgGLSetParameter1f( internal_->Parameter, internal_->CachedSingle );
 			break;
 		case ParamType_Int:
+			cgGLSetTextureParameter( internal_->Parameter, internal_->CachedInt );
+			cgGLEnableTextureParameter( internal_->Parameter );
 			break;
 	}
 }
