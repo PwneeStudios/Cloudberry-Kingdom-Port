@@ -43,3 +43,5 @@ Cloudberry PS3/Cloudberry_Kingdom/boost_shared_ptr/
 Cloudberry PS3/Cloudberry_Kingdom/PS3_Debug/
 *.exe
 PS3_Debug
+ContentPS3
+ContentWiiU

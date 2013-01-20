@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzFont> Resources::LilFont = 0;
 
 	boost::shared_ptr<HackFont> Resources::hf;
-	Mutex Resources::hf_Mutex;
+	boost::shared_ptr<Mutex> Resources::hf_Mutex;
 
 	void Resources::FontLoad()
     {
@@ -251,17 +251,15 @@ namespace CloudberryKingdom
 		LoadingResources = boost::make_shared<WrappedBool>( false );
 		LoadingResources->MyBool = true;
 
+		// Load the art!
+		PreloadArt();
+
         // Localization
-        //Localization.SetLanguage(Localization.Language.English);
-        Localization::SetLanguage(Localization::Language_JAPANESE);
-        //Localization.SetLanguage(Localization.Language.Portuguese);
-        //Localization.SetLanguage(Localization.Language.Russian);
+        Localization::SetLanguage(Localization::Language_ENGLISH);
+        //Localization::SetLanguage(Localization::Language_JAPANESE);
 
 		// Fonts
 		FontLoad();
-
-		// Load the art!
-		PreloadArt();
 
 		// Load the music!
 		LoadMusic( CreateNewWads );
@@ -309,6 +307,8 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 	void Resources::_LoadThread()
 	{
+		hf_Mutex = boost::make_shared<Mutex>();
+
 		boost::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
 		Tools::Write( Format( _T( "Load thread starts ... NOW!" ) ).c_str() );

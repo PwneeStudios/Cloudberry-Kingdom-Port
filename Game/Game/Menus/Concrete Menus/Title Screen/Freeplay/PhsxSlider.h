@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 
 	
 		PhsxSlider( Localization::Words word, BobPhsx::CustomData type );
-
+		boost::shared_ptr<PhsxSlider> PhsxSlider_Construct( Localization::Words word, BobPhsx::CustomData type );
 	
 		bool _State;
 	

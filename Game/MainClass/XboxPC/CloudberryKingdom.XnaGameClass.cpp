@@ -13,6 +13,7 @@ namespace CloudberryKingdom
 	{
 		Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
 
+		Tools::InitializeStatics();
 
 		// Volume control
 		Tools::SoundVolume = boost::make_shared<WrappedFloat>();

@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		static boost::shared_ptr<EzFont> LilFont;
 
 		static boost::shared_ptr<HackFont> hf;
-		static Mutex hf_Mutex;
+		static boost::shared_ptr<Mutex> hf_Mutex;
 
 		/// <summary>
 		/// Load the necessary fonts.

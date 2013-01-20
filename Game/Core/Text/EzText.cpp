@@ -1165,9 +1165,9 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 			_pos = Tools::ToWorldCoordinates( _pos, cam, getMyCameraZoom() * Tools::EffectWad->ModZoom.X );
 
 			if ( ( *bit )->builder_str != 0 )
-				Tools::QDrawer->DrawString( font, *( *bit )->builder_str, _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod );
+				Tools::QDrawer->DrawString( font, *( *bit )->builder_str, _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod * (1000.f / 360.f) );
 			else
-				Tools::QDrawer->DrawString( font, ( *bit )->str,		  _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod );
+				Tools::QDrawer->DrawString( font, ( *bit )->str,		  _pos, textcolor.ToVector4(), Vector2( Tools::TheGame->Resolution.LineHeightMod ) * getScale() * ZoomMod * (1000.f / 360.f) );
 			
 			//Tools::QDrawer.DrawSquareDot( Position, new Color( 255, 255, 255 ), 5 );
 		}

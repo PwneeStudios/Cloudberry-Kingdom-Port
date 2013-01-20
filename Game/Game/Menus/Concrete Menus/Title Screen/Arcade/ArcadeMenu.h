@@ -106,7 +106,7 @@ namespace CloudberryKingdom
         static boost::shared_ptr<BobPhsx> BigBouncy;
         static boost::shared_ptr<BobPhsx> Ultimate;
 
-        static std::map<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > HeroArcadeList;
+        static std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > HeroArcadeList;
 	
 		ArcadeMenu();
 		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();

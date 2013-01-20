@@ -1,5 +1,11 @@
 #include <global_header.h>
 
+#include <Core.h>
+#include <Content/Wad.h>
+#include <Graphics/Types.h>
+#include <Graphics/QuadDrawer.h>
+#include <Utility/Log.h>
+
 #include <Hacks/List.h>
 #include <Hacks/Queue.h>
 
@@ -23,7 +29,7 @@ namespace CloudberryKingdom
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
 	{
 		TitleGameData_MW::InitializeStatics();
-		Tools::InitializeStatics();
+		
 		Globals::InitializeStatics();
 		ButtonCheck::InitializeStatics();
 		PlayerManager::InitializeStatics();
@@ -46,13 +52,13 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::InitializeStatics();
 		Particle::InitializeStatics();
 		
-		CampaignHelper::InitializeStatics();		
+		CampaignHelper::InitializeStatics();
+
+		Awardments::InitializeStatics();
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
 	{
-		Awardments::InitializeStatics();
-		
 		EzText::InitializeStatics();
 
 		BobPhsx::DefaultInfo::InitializeStatics();
@@ -85,6 +91,7 @@ namespace CloudberryKingdom
 		BobPhsxSmall::getInstance()->Set( BobPhsxSmall::getInstance() );
 
 		BobPhsxSpaceship::InitializeStatics();
+		BobPhsxTimeship::InitializeStatics();
 		BobPhsxTime::InitializeStatics();
 		BobPhsxTime::getInstance()->Set( BobPhsxTime::getInstance() );
 
@@ -988,6 +995,8 @@ float CloudberryKingdomGame::fps = 0;
 		Tools::SetDefaultEffectParams( MainCamera->AspectRatio );
 
 		Tools::Render->SetStandardRenderStates();
+
+		QUAD_DRAWER->SetEffect( Tools::BasicEffect->effect );
 
 		return false;
 	}

@@ -20,7 +20,10 @@ namespace CloudberryKingdom
     void Localization::LoadFont()
     {
         std::wstring name = L"Grobold_" + CurrentLanguage->FontSuffix;
-        FontTexture = Content->Load<Texture2D>( Path::Combine( L"Fonts", name ) );
+		boost::shared_ptr<EzTexture> ez_t = Tools::Texture(name);
+        FontTexture = ez_t->getTex(); //Content->Load<Texture2D>( Path::Combine( L"Fonts", name ) );
+		FontTexture->Width = ez_t->Width;
+		FontTexture->Height = ez_t->Height;
 
         Resources::hf = boost::make_shared<HackFont>( WstringToUtf8( name )  );
             
@@ -139,11 +142,11 @@ namespace CloudberryKingdom
         }
         else
         {
-            Resources::hf_Mutex.Lock();
+            Resources::hf_Mutex->Lock();
             {
                 LoadFont();
             }
-			Resources::hf_Mutex.Unlock();
+			Resources::hf_Mutex->Unlock();
         }
 	}
 

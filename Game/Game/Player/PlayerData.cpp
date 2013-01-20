@@ -162,7 +162,7 @@ namespace CloudberryKingdom
             int level = 0;
             int id;
 
-			for ( std::map<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >::const_iterator game = 
+			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator game = 
 				ArcadeMenu::HeroArcadeList.begin(); game != ArcadeMenu::HeroArcadeList.end(); ++game )
             {
                 id = Challenge_Escalation::getInstance()->CalcGameId_Level(game->first);

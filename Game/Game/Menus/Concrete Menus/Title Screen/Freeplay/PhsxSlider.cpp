@@ -25,9 +25,16 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzFont> PhsxSlider::Font = 0;
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > PhsxSlider::Process = 0;
 
-	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( boost::make_shared<EzText>( word, Font ) )
+	PhsxSlider::PhsxSlider( Localization::Words word, BobPhsx::CustomData type ) : MenuSlider( boost::shared_ptr<EzText>( 0 ) )
 	{
 		InitializeInstanceFields();
+	}
+
+	boost::shared_ptr<PhsxSlider> PhsxSlider::PhsxSlider_Construct( Localization::Words word, BobPhsx::CustomData type )
+	{
+		MenuSlider_Construct( boost::make_shared<EzText>( word, Font ) );
+
+
 		MyType = type;
 
 		setMyFloat( boost::make_shared<WrappedFloat>( CustomHero_GUI::HeroPhsxData[ MyType ], BobPhsx::CustomPhsxData::Bounds( type ).MinValue, BobPhsx::CustomPhsxData::Bounds( type ).MaxValue ) );
@@ -46,6 +53,8 @@ namespace CloudberryKingdom
 		End *= .8f;
 
 		GrayOutOnUnselectable = true;
+
+		return boost::static_pointer_cast<PhsxSlider>( shared_from_this() );
 	}
 
 	void PhsxSlider::setState( const bool &value )

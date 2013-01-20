@@ -736,13 +736,13 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );
 
-        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_NoOutline" ), L"Text_NoOutline" );
+        EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_NoOutline" ), L"Text_NoOutline" );
         Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
 
-        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_ThinOutline" ), L"Text_ThinOutline" );
+        EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_ThinOutline" ), L"Text_ThinOutline" );
         Text_ThinOutline = EffectWad->FindByName( L"Text_ThinOutline" );
 
-        EffectWad->AddEffect( Content->Load<Effect>( L"Effects\\Text_ThickOutline" ), L"Text_ThickOutline" );
+        EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_ThickOutline" ), L"Text_ThickOutline" );
         Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
 
 		BasicEffect = EffectWad->EffectList[ 0 ];

@@ -67,6 +67,8 @@ namespace CloudberryKingdom
         }
 
         HackFont::HackFont(std::string name)
+			: CharSpacing(0)
+			, charSpacing_(0)
         {
 			using namespace std;
 
@@ -92,15 +94,17 @@ namespace CloudberryKingdom
             {
                 int additional = 19;
 
-				ss >> Char;		ss.get();
-				ss >> X;		ss.get();
-				ss >> Y;		ss.get();
-				ss >> Width;	ss.get();
-				ss >> Height;	ss.get();
-				ss >> Xoffset;	ss.get();
-				ss >> Yoffset;	ss.get();
-				ss >> OrigW;	ss.get();
-				ss >> OrigH;	//ss.get();
+				stringstream line_ss( line );
+
+				line_ss >> Char;	line_ss.get();
+				line_ss >> X;		line_ss.get();
+				line_ss >> Y;		line_ss.get();
+				line_ss >> Width;	line_ss.get();
+				line_ss >> Height;	line_ss.get();
+				line_ss >> Xoffset;	line_ss.get();
+				line_ss >> Yoffset;	line_ss.get();
+				line_ss >> OrigW;	line_ss.get();
+				line_ss >> OrigH;	//line_ss.get();
 
 				Width += additional;
 				Height += additional;
@@ -110,6 +114,8 @@ namespace CloudberryKingdom
                 Data[ Char ] = GlyphData( Vector4( static_cast<float>( X ), static_cast<float>( Y ), static_cast<float>( Width ), static_cast<float>( Height ) ),
 										  Vector2( static_cast<float>( OrigW ), static_cast<float>( OrigH) ),
 										  Vector2( static_cast<float>( Xoffset ), static_cast<float>( Yoffset ) ) );
+
+				safeGetline( ss, line );
             }
         }
 
@@ -888,6 +894,7 @@ namespace CloudberryKingdom
 
             CurrentTexture = font->MyTexture;
             CurrentEffect = fx;
+			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
 
             Vector2 p = position + Vector2(35, -25) * scale / 2.0533333f;
 	        for (int j = 0; j < static_cast<int>( s.length() ); ++j)

@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	}
 	boost::shared_ptr<HeroItem> HeroItem::HeroItem_Construct( const std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > &pair )
 	{
-		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) );
+		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( pair.first->Name, Resources::Font_Grobold42_2 ) );
 
         this->Hero = pair.first;
         this->RequiredHero = pair.second.first;
@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 		mini->ItemsToShow = 6;
 		FontScale *= .75f;
 
-		for ( std::map<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> >::const_iterator phsx = ArcadeMenu::HeroArcadeList.begin(); phsx != ArcadeMenu::HeroArcadeList.end(); ++phsx )
+		for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator phsx = ArcadeMenu::HeroArcadeList.begin(); phsx != ArcadeMenu::HeroArcadeList.end(); ++phsx )
 		{
 			boost::shared_ptr<HeroItem> item = MakeMagic( HeroItem, ( *phsx ) );
 			item->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
