@@ -79,6 +79,9 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     uint8_t format = attrib.tex.format;
     bool bSwizzled = !(format & CELL_GCM_TEXTURE_LN);
 
+	if( bSwizzled )
+		JS_TRACE( "Swizzled!\n" );
+
     if (bLoadInPlace && !bSwizzled && bForceSwizzling)
     {	
         //if the texture has no mipmaps we could theoratically configure the HW to swizzle while uploading

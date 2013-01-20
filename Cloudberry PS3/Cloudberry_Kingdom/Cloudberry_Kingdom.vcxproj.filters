@@ -1181,6 +1181,9 @@
     <ClCompile Include="Core\src\Content\PS3\psglGtfLoader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\src\Input\PS3\gfxPad.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\include\Architecture\Job.h">
@@ -3611,6 +3614,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="core\src\content\ps3\gcmutil_error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Input\PS3\gfxPad.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

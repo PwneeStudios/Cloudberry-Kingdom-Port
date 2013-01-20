@@ -109,12 +109,14 @@ void SchedulerPS3::RunJob( Job *job )
 
 void SchedulerPS3::CreateResource( ResourceHolder *holder, Resource *resource )
 {
-	ResourceLoaderJob job( holder, resource, false );
+	ResourceLoaderJob job( holder, resource, true );
 	job.Do();
 }
 
 void SchedulerPS3::CreateGpuResource( ResourceHolder *holder, Resource *resource )
 {
+	ResourceCreatorJob job( holder, resource );
+	job.Do();
 }
 
 void SchedulerPS3::WorkerThread()

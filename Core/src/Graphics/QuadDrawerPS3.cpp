@@ -155,9 +155,9 @@ void QuadDrawerPS3::Flush()
 	if( internal_->NumElements == 0 )
 		return;
 
-	internal_->TextureParameter->SetValue( 0 );
+	/*internal_->TextureParameter->SetValue( 0 );
 	internal_->ExtraTextureParameter1->SetValue( 1 );
-	internal_->ExtraTextureParameter2->SetValue( 2 );
+	internal_->ExtraTextureParameter2->SetValue( 2 );*/
 
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
 	glUnmapBuffer( GL_ARRAY_BUFFER );
@@ -174,7 +174,7 @@ void QuadDrawerPS3::Flush()
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
 	glColorPointer( 4, GL_FLOAT, sizeof( QuadVert), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
 
-	internal_->CastleBackground->Activate( 1 );
+	//internal_->CastleBackground->Activate( 1 );
 
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )

@@ -38,6 +38,7 @@
     <ClCompile Include="Core\src\Input\InputPc.cpp" />
     <ClCompile Include="Core\src\Input\Keyboard.cpp" />
     <ClCompile Include="Core\src\Input\Mouse.cpp" />
+    <ClCompile Include="Core\src\Input\PS3\gfxPad.cpp" />
     <ClCompile Include="Core\src\Utility\Log.cpp" />
     <ClCompile Include="Core\src\Utility\MutexPS3.cpp" />
     <ClCompile Include="Game\CloudberryKingdom.cpp" />
@@ -794,6 +795,7 @@
     <ClInclude Include="Core\src\Content\PS3\gtfloader.h" />
     <ClInclude Include="Core\src\Content\PS3\psglGtfLoader.h" />
     <ClInclude Include="Core\src\Graphics\EffectInternalPS3.h" />
+    <ClInclude Include="Core\src\Input\PS3\gfxPad.h" />
     <ClInclude Include="Game\CloudberryKingdom.h" />
     <ClInclude Include="Game\Core\Animation\AnimationData_Integer.h" />
     <ClInclude Include="Game\Core\Animation\AnimationData_Vector.h" />
@@ -1241,6 +1243,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
     <IncludePath>Core\include;boost_shared_ptr;Game;$(IncludePath)</IncludePath>
+    <SourcePath>C:\usr\local\cell\target\ppu\src\PSGL\jetstream\src\Raster\JSGCM</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
     <IncludePath>Core\include;boost_shared_ptr;Game;$(IncludePath)</IncludePath>

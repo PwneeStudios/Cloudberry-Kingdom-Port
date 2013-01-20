@@ -109,5 +109,7 @@ void EffectParameter::Apply()
 			cgGLSetTextureParameter( internal_->Parameter, internal_->CachedInt );
 			cgGLEnableTextureParameter( internal_->Parameter );
 			break;
+		default:
+			break;
 	}
 }
