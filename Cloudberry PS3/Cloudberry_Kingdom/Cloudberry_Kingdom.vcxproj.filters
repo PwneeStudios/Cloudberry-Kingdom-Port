@@ -35,9 +35,6 @@
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Core\src\Input\GamePadPc.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Core\src\Input\Input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1175,6 +1172,15 @@
     <ClCompile Include="Game\MasterHack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\src\Input\GamePadPS3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\PS3\gtfloader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Content\PS3\psglGtfLoader.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\include\Architecture\Job.h">
@@ -1241,9 +1247,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\include\Graphics\QuadDrawer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\include\Graphics\TextDrawer.h">
@@ -3596,6 +3599,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\stringconverter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Content\PS3\psglGtfLoader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Content\PS3\gtfloader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="core\src\content\ps3\gcmutil_error.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

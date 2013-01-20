@@ -109,6 +109,13 @@ public:
 		impl_.Activate( sampler );
 	}
 
+#ifdef PS3
+	void Activate( class EffectParameter &parameter )
+	{
+		impl_.Activate( parameter );
+	}
+#endif
+
 };
 
 #endif

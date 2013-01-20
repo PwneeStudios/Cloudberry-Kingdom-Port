@@ -8,6 +8,8 @@
 // Pick the implementation we want to use.
 #ifdef CAFE
 	#include "QuadDrawerWiiU.h"
+#elif PS3
+	#include "QuadDrawerPS3.h"
 #else
 	#include "QuadDrawerPc.h"
 #endif
@@ -21,6 +23,8 @@ class QuadDrawer
 	/// IMPL from the PIMPL.
 #ifdef CAFE
 	QuadDrawerWiiU impl_;
+#elif PS3
+	QuadDrawerPS3 impl_;
 #else
 	QuadDrawerPc impl_;
 #endif

@@ -4,6 +4,9 @@
 
 #include "EffectInternalPS3.h"
 
+#include <PSGL/psgl.h>
+#include <PSGL/psglu.h>
+
 enum ParamType
 {
 	ParamType_None,
@@ -17,6 +20,7 @@ enum ParamType
 
 struct EffectParameterInternal
 {
+	CGparameter Parameter;
 	ParamType PType;
 	Vector4 CachedVector4;
 	Matrix CachedMatrix;
@@ -28,6 +32,7 @@ struct EffectParameterInternal
 EffectParameter::EffectParameter( const Effect &effect, int id ) :
 	internal_( new EffectParameterInternal )
 {
+	internal_->Parameter = reinterpret_cast< CGparameter >( id );
 	internal_->PType = ParamType_None;
 	internal_->CachedSingle = 0;
 	internal_->CachedInt = 0;
@@ -79,21 +84,30 @@ float EffectParameter::GetValueSingle()
 
 void EffectParameter::Apply()
 {
+	if( internal_->Parameter == 0 )
+		return;
+
 	switch( internal_->PType )
 	{
 		case ParamType_None:
 			break;
 		case ParamType_Vector4:
+			cgGLSetParameter4fv( internal_->Parameter, &internal_->CachedVector4.X );
 			break;
 		case ParamType_Matrix:
+			cgGLSetMatrixParameterfr( internal_->Parameter, internal_->CachedMatrix.M );
 			break;
 		case ParamType_Texture:
 			break;
 		case ParamType_Vector2:
+			cgGLSetParameter2fv( internal_->Parameter, &internal_->CachedVector2.X );
 			break;
 		case ParamType_Float:
+			cgGLSetParameter1f( internal_->Parameter, internal_->CachedSingle );
 			break;
 		case ParamType_Int:
+			cgGLSetTextureParameter( internal_->Parameter, internal_->CachedInt );
+			cgGLEnableTextureParameter( internal_->Parameter );
 			break;
 	}
 }

@@ -21,6 +21,8 @@
     <ClCompile Include="Core\src\Content\Filesystem.cpp" />
     <ClCompile Include="Core\src\Content\FilesystemPS3.cpp" />
     <ClCompile Include="Core\src\Content\Font.cpp" />
+    <ClCompile Include="Core\src\Content\PS3\gtfloader.cpp" />
+    <ClCompile Include="Core\src\Content\PS3\psglGtfLoader.cpp" />
     <ClCompile Include="Core\src\Content\TexturePS3.cpp" />
     <ClCompile Include="Core\src\Content\Wad.cpp" />
     <ClCompile Include="Core\src\Core.cpp" />
@@ -31,7 +33,7 @@
     <ClCompile Include="Core\src\Graphics\EffectPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\QuadDrawerPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
-    <ClCompile Include="Core\src\Input\GamePadPc.cpp" />
+    <ClCompile Include="Core\src\Input\GamePadPS3.cpp" />
     <ClCompile Include="Core\src\Input\Input.cpp" />
     <ClCompile Include="Core\src\Input\InputPc.cpp" />
     <ClCompile Include="Core\src\Input\Keyboard.cpp" />
@@ -767,7 +769,7 @@
     <ClInclude Include="Core\include\Graphics\EffectPass.h" />
     <ClInclude Include="Core\include\Graphics\EffectTechnique.h" />
     <ClInclude Include="Core\include\Graphics\QuadDrawer.h" />
-    <ClInclude Include="Core\include\Graphics\QuadDrawerPc.h" />
+    <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h" />
     <ClInclude Include="Core\include\Graphics\TextDrawer.h" />
     <ClInclude Include="Core\include\Graphics\Types.h" />
     <ClInclude Include="Core\include\Input\GamePad.h" />
@@ -788,6 +790,9 @@
     <ClInclude Include="Core\include\Utility\Log.h" />
     <ClInclude Include="Core\include\Utility\Mutex.h" />
     <ClInclude Include="Core\src\Audio\SongInternalPS3.h" />
+    <ClInclude Include="core\src\content\ps3\gcmutil_error.h" />
+    <ClInclude Include="Core\src\Content\PS3\gtfloader.h" />
+    <ClInclude Include="Core\src\Content\PS3\psglGtfLoader.h" />
     <ClInclude Include="Core\src\Graphics\EffectInternalPS3.h" />
     <ClInclude Include="Game\CloudberryKingdom.h" />
     <ClInclude Include="Game\Core\Animation\AnimationData_Integer.h" />

@@ -5,7 +5,7 @@
 
 #include <Hacks/String.h>
 
-#ifdef CAFE
+#if defined( CAFE ) || defined( PS3 )
 #define NTOHS( x ) ( ( ( ( x ) & 0xff ) << 8 ) | ( ( ( x ) >> 8 ) & 0xff ) )
 #define NTOHL( x ) ( ( NTOHS( x & 0xffff ) << 16 ) | NTOHS( ( x >> 16 ) & 0xffff ) )
 #define NTOHLL( x ) ( ( NTOHL( x & 0xffffffff ) << 32 ) | NTOHL( ( x >> 32 ) & 0xffffffff ) )
