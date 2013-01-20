@@ -32,11 +32,11 @@ namespace CloudberryKingdom
     {
         //hf = new HackFont("Grobold_" + Localization.CurrentLanguage.FontSuffix);
 
-        Resources::Font_Grobold42 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline", -50.f, 40.f);
+        Resources::Font_Grobold42 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline", -50.f, 40);
         Resources::Font_Grobold42->HFont = boost::make_shared<HackSpriteFont>(hf, 0);
         Resources::Font_Grobold42->HOutlineFont = boost::make_shared<HackSpriteFont>(hf, 1);
 
-        Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline2", -50.f, 40.f);
+        Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline2", -50.f, 40);
         Resources::Font_Grobold42_2->HFont = boost::make_shared<HackSpriteFont>(hf, 0);
         Resources::Font_Grobold42_2->HOutlineFont = boost::make_shared<HackSpriteFont>(hf, 2);
 

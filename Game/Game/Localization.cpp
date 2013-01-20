@@ -65,6 +65,13 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < NumLanguages; i++ )
 			Text.insert( std::make_pair( static_cast<Language>( i ), std::map<Words, std::wstring>() ) );
 
+		//std::wstring bpath = L"C:/Users/Ezra/Desktop/Dir/Pwnee/CK/Source/CloudberryKingdomPort/Cloudberry-Kingdom-Port/Content/Localization/Test.lcl";
+		//BinaryReader breader = BinaryReader( bpath );
+		//std::wstring s1 = breader.ReadString();
+		//std::wstring s2 = breader.ReadString();
+		//std::wstring s3 = breader.ReadString();
+		//std::wstring s4 = breader.ReadString();
+
 		// Open the giant translation file
 		Tools::UseInvariantCulture();
 		//boost::shared_ptr<FileStream> stream = File->Open( path, FileMode::Open, FileAccess::Read, FileShare::None );

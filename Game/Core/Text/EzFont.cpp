@@ -13,12 +13,6 @@ namespace CloudberryKingdom
 		Initialize( FontName, OutlineFontName, CharacterSpacing, LineSpacing );
 	}
 
-	EzFont::EzFont( const std::wstring &FontName, const std::wstring &OutlineFontName, float CharacterSpacing, float LineSpacingMod )
-	{
-		Initialize( FontName, OutlineFontName, CharacterSpacing, LineSpacing );
-		LineSpacing = static_cast<int>( LineSpacing * LineSpacingMod );
-	}
-
 	void EzFont::Initialize( const std::wstring &FontName, const std::wstring &OutlineFontName, float CharacterSpacing, int LineSpacing )
 	{
 		this->CharacterSpacing = CharacterSpacing;
