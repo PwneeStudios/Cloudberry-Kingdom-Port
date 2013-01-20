@@ -39,13 +39,19 @@ GamePadState GamePad::GetState( PlayerIndex index )
 	gs.Buttons.Back = gfxSelectDown( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Buttons.Start = gfxStartDown( i ) ? ButtonState_Pressed : ButtonState_Released;
 
-	gs.Buttons.BigButton;
+	( void )gs.Buttons.BigButton;
 
 	gs.Buttons.LeftShoulder = gfxL1Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.Buttons.RightShoulder = gfxR1Down( i ) ? ButtonState_Pressed : ButtonState_Released;
 
-	gs.Buttons.LeftStick;
-	gs.Buttons.RightStick;
+	gs.Buttons.LeftStick = gfxL3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
+	gs.Buttons.RightStick = gfxR3Down( i ) ? ButtonState_Pressed : ButtonState_Released;
+
+	gs.Triggers.Left = gfxL2Pressure( i );
+	gs.Triggers.Right = gfxR2Pressure( i );
+
+	gfxLeftStick( i, gs.ThumbSticks.Left.X, gs.ThumbSticks.Left.Y );
+	gfxRightStick( i, gs.ThumbSticks.Right.X, gs.ThumbSticks.Right.Y );
 
 	return gs;
 }

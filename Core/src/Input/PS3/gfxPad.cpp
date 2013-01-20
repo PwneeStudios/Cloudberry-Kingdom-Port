@@ -169,6 +169,14 @@ bool gfxL2Down(int pad)
 	return false;
 }
 
+bool gfxL3Down(int pad)
+{
+
+	if(PadData[pad].button[CELL_PAD_BTN_OFFSET_DIGITAL1] & CELL_PAD_CTRL_L3)
+		return true;
+
+	return false;
+}
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
@@ -199,6 +207,14 @@ bool gfxR2Down(int pad)
 	return false;
 }
 
+bool gfxR3Down(int pad)
+{
+
+	if(PadData[pad].button[CELL_PAD_BTN_OFFSET_DIGITAL1] & CELL_PAD_CTRL_R3)
+		return true;
+
+	return false;
+}
 //-----------------------------------------------------------------------------
 
 
@@ -312,3 +328,31 @@ bool gfxDpadCircle(int pad)
 	return false;
 }
 //-----------------------------------------------------------------------------
+
+float gfxL2Pressure(int pad)
+{
+	return static_cast< float >( PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_PRESS_L2 ] ) / 255.f;
+}
+
+float gfxR2Pressure(int pad)
+{
+	return static_cast< float >( PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_PRESS_R2 ] ) / 255.f;
+}
+
+void gfxLeftStick(int pad, float &x, float &y)
+{
+	int xVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_LEFT_X ];
+	int yVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_LEFT_Y ];
+
+	x = ( static_cast< float >( xVal ) - 127.5f ) / 127.5f;
+	y = ( static_cast< float >( yVal ) - 127.5f ) / 127.5f;
+}
+
+void gfxRightStick(int pad, float &x, float &y)
+{
+	int xVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_RIGHT_X ];
+	int yVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_RIGHT_Y ];
+
+	x = ( static_cast< float >( xVal ) - 127.5f ) / 127.5f;
+	y = ( static_cast< float >( yVal ) - 127.5f ) / 127.5f;
+}
