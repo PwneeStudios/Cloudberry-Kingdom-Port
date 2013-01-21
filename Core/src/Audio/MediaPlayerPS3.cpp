@@ -2,8 +2,11 @@
 
 #include <Utility/Log.h>
 
+#include <Audio/PS3/mscommon.h>
+
 void MediaPlayer::Initialize()
 {
+
 }
 
 void MediaPlayer::Shutdown()

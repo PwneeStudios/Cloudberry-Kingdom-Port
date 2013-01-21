@@ -2,6 +2,7 @@
 
 #include <Architecture/Scheduler.h>
 #include <Audio/MediaPlayer.h>
+#include <Audio/PS3/mscommon.h>
 #include <Content/Wad.h>
 #include <Core.h>
 #include <cstdlib>
@@ -85,6 +86,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_FS ), "Failed to load FS\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_USBD ), "Failed to load USBD\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_IO ), "Failed to load IO\n" );
+
+	LoadModules();
 
 	int ret = cellSysutilRegisterCallback( 0, SystemCallback, NULL );
 	if( ret != CELL_OK )
@@ -183,6 +186,8 @@ CorePS3::~CorePS3()
 	delete content_;
 
 	delete scheduler_;
+
+	UnloadModules();
 }
 
 int CorePS3::Run()

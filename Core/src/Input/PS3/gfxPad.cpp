@@ -345,7 +345,7 @@ void gfxLeftStick(int pad, float &x, float &y)
 	int yVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_LEFT_Y ];
 
 	x = ( static_cast< float >( xVal ) - 127.5f ) / 127.5f;
-	y = ( static_cast< float >( yVal ) - 127.5f ) / 127.5f;
+	y = ( 127.5f - static_cast< float >( yVal ) ) / 127.5f;
 }
 
 void gfxRightStick(int pad, float &x, float &y)
@@ -354,5 +354,5 @@ void gfxRightStick(int pad, float &x, float &y)
 	int yVal = PadData[ pad ].button[ CELL_PAD_BTN_OFFSET_ANALOG_RIGHT_Y ];
 
 	x = ( static_cast< float >( xVal ) - 127.5f ) / 127.5f;
-	y = ( static_cast< float >( yVal ) - 127.5f ) / 127.5f;
+	y = ( 127.5f - static_cast< float >( yVal ) ) / 127.5f;
 }

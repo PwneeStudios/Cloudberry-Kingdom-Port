@@ -23,7 +23,7 @@ GamePadState GamePad::GetState( PlayerIndex index )
 
 	gs.IsConnected = true;
 
-	gs.DPad.Left = gfxDpadLeft( i ) ? ButtonState_Pressed : ButtonState_Released;
+	gs.DPad.Left = gfxDpadLeft (i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.DPad.Right = gfxDpadRight( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.DPad.Up = gfxDpadUp( i ) ? ButtonState_Pressed : ButtonState_Released;
 	gs.DPad.Down = gfxDpadDown( i ) ? ButtonState_Pressed : ButtonState_Released;
