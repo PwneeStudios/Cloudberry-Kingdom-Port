@@ -51,8 +51,8 @@ namespace CloudberryKingdom
 
 	void ZoneTrigger::Draw()
 	{
-		//if (Tools.DrawBoxes && Core.Active)
-		//    Box.Draw(Tools.QDrawer, Color.Teal, 30);
+		//if (Tools::DrawBoxes && Core.Active)
+		//    Box.Draw(Tools::QDrawer, Color.Teal, 30);
 	}
 
 	void ZoneTrigger::Clone( const boost::shared_ptr<ObjectBase> &A )

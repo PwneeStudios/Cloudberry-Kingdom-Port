@@ -423,6 +423,7 @@ namespace CloudberryKingdom
 		static boost::shared_ptr<Rand> GlobalRnd;
 		static boost::shared_ptr<EzEffectWad> EffectWad;
 		static boost::shared_ptr<EzEffect> BasicEffect, NoTexture, CircleEffect, LightSourceEffect, HslEffect, HslGreenEffect, WindowEffect;
+		static boost::shared_ptr<EzEffect> Text_NoOutline, Text_ThinOutline, Text_ThickOutline;
 		static boost::shared_ptr<Effect> PaintEffect_SpriteBatch;
 		static boost::shared_ptr<EzTextureWad> TextureWad;
 		static boost::shared_ptr<ContentManager> SoundContentManager;
@@ -625,22 +626,13 @@ namespace CloudberryKingdom
 		/// </summary>
 	
 		static void StartGUIDraw();
+		static void StartGUIDraw_Fake();
 
 		/// <summary>
 		/// Call after finishing drawing GUI elements unaffected by the camera.
 		/// </summary>
 		static void EndGUIDraw();
-
-		/// <summary>
-		/// Starts the SpriteBatch if it isn't started already. The quad drawer is flushed first.
-		/// </summary>
-		static void StartSpriteBatch();
-		static void StartSpriteBatch( bool AsPaint );
-
-		/// <summary>
-		/// Core wrapper for drawing text. Assumes SpriteBatch is started.
-		/// </summary>
-		static void DrawText( Vector2 pos, const boost::shared_ptr<Camera> &cam, const std::wstring &str, const boost::shared_ptr<SpriteFont> &font );
+		static void EndGUIDraw_Fake();
 
 		static void SetDefaultEffectParams( float AspectRatio );
 

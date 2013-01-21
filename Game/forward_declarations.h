@@ -390,6 +390,8 @@ namespace CloudberryKingdom
 	struct ComputerRecording;
 	struct GhostBlock_Parameters;
 	struct GhostBlock_AutoGen;
+	struct HackFont;
+	struct HackSpriteFont;
 	struct EzFont;
 	struct PresetUpgrades;
 	struct GameOverPanel;

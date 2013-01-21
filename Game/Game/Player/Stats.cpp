@@ -20,6 +20,7 @@ namespace CloudberryKingdom
 		chunk->WriteSingle( 7, Checkpoints );
 		chunk->WriteSingle( 8, Jumps );
 		chunk->WriteSingle( 10, TimeAlive );
+		chunk->WriteSingle( 11, ObstaclesSeen );
 
 		for ( int i = 0; i < static_cast<int>( DeathsBy.size() ); i++ )
 			WriteDeathChunk_9( chunk, i );
@@ -68,6 +69,7 @@ namespace CloudberryKingdom
 				case 10:
 					chunk->ReadSingle( TimeAlive );
 					break;
+				case 11: chunk->ReadSingle( ObstaclesSeen ); break;
 
 				case 9:
 					ReadDeathChunk_9( chunk );
@@ -153,6 +155,7 @@ namespace CloudberryKingdom
 		Berries = 0;
 
 		TimeAlive = 0;
+		ObstaclesSeen = 0;
 
 		FinalTimeSpentNotMoving = 0;
 		FinalTimeSpent = 0;

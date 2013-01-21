@@ -50,6 +50,18 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 	
+		struct InitOnConfirmedIndexSelect_Language : public Lambda
+		{
+		
+			boost::shared_ptr<SoundMenu> sm;
+			boost::shared_ptr<MenuList> FsLanguageList;
+
+		
+			InitOnConfirmedIndexSelect_Language( const boost::shared_ptr<SoundMenu> &sm, const boost::shared_ptr<MenuList> &FsLanguageList );
+
+			void Apply();
+		};
+
 		struct Toggle_BorderlessProxy : public Lambda_1<bool>
 		{
 		
@@ -61,13 +73,12 @@ namespace CloudberryKingdom
 			void Apply( const bool &state );
 		};
 
-	
-		SoundMenu( int Control );
-		boost::shared_ptr<SoundMenu> SoundMenu_Construct( int Control );
+		static bool LanguageOption;
 
-#if defined(PC_VERSION)
-#endif
+		SoundMenu( int Control, bool LanguageOption );
+		boost::shared_ptr<SoundMenu> SoundMenu_Construct( int Control, bool LanguageOption );
 
+		Localization::Language ChosenLanguage;
 	
 		boost::shared_ptr<EzText> HeaderText;
 	
@@ -77,7 +88,7 @@ namespace CloudberryKingdom
 		//private void AddToggle_FixedTimestep()
 		//{
 		//    // Header
-		//    var Text = new EzText(Localization.Words.FixedTimeStep, ItemFont);
+		//    var Text = new EzText(Localization::Words_FixedTimeStep, ItemFont);
 		//    SetHeaderProperties(Text);
 		//    MyPile.Add(Text);
 		//    Text.Pos = new Vector2(-1232.142f, -499.9359f);
@@ -87,7 +98,7 @@ namespace CloudberryKingdom
 		//    var Toggle = new MenuToggle(ItemFont);
 		//    Toggle.OnToggle = Toggle_FixedTimestep;
 
-		//    Toggle.Toggle(Tools.FixedTimeStep);
+		//    Toggle.Toggle(Tools::FixedTimeStep);
 		//    Toggle.PrefixText = "";
 		//    AddItem(Toggle);
 		//    Toggle.SetPos = new Vector2(1315.078f, -451.4125f);
@@ -95,13 +106,14 @@ namespace CloudberryKingdom
 
 		//private void Toggle_FixedTimestep(bool state)
 		//{
-		//    PlayerManager.SavePlayerData.ResolutionPreferenceSet = true;
-		//    Tools.FixedTimeStep = state;
+		//    PlayerManager::SavePlayerData.ResolutionPreferenceSet = true;
+		//    Tools::FixedTimeStep = state;
 		//    SaveGroup.SaveAll();
-		//    PlayerManager.SaveRezAndKeys();
+		//    PlayerManager::SaveRezAndKeys();
 		//}
 
-	
+		void ReturnToCaller();
+
 		void AddToggle_Borderless();
 
 		void Toggle_Borderless( bool state );

@@ -125,6 +125,8 @@ namespace CloudberryKingdom
 
 	void StartMenu::MenuGo_Campaign( const boost::shared_ptr<MenuItem> &item )
 	{
+		if (CloudberryKingdomGame::getIsDemo()) return;
+
 		MyNextMenu = Next_CAMPAIGN;
 		BringCharacterSelect();
 	}
@@ -189,7 +191,7 @@ namespace CloudberryKingdom
 
 	void StartMenu::MenuGo_Options( const boost::shared_ptr<MenuItem> &item )
 	{
-		Call( MakeMagic( SoundMenu, ( getControl() ) ), 0 );
+		Call( MakeMagic( SoundMenu, ( getControl(), false ) ), 0 );
 	}
 
 	void StartMenu::MenuGo_Exit( const boost::shared_ptr<MenuItem> &item )

@@ -192,7 +192,7 @@ namespace CloudberryKingdom
 			else
 				CustomLevel_GUI::SeedStringToLoad = seedstr;
 
-	//#if DEBUG
+	//#if defined(DEBUG)
 	//                // otherwise, hard load the game, and forget about how it connects to anything else.
 	//                // This will cause crashes if you try to exit the game afterwards, but is fine for testing purposes.
 	//                else

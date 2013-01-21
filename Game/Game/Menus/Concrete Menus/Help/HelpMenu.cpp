@@ -156,7 +156,10 @@ namespace CloudberryKingdom
 		switch ( MyGame->MyBankType )
 		{
 			case GameData::BankType_INFINITE:
-				return 99;
+				return 999;
+
+			case GameData::BankType_ESCALATION:
+                return Challenge::Coins;
 
 			case GameData::BankType_CAMPAIGN:
 				return PlayerManager::PlayerMax( boost::make_shared<CampaignCoinsLambda>() );
@@ -171,6 +174,10 @@ namespace CloudberryKingdom
 
 		switch ( MyGame->MyBankType )
 		{
+			case GameData::BankType_ESCALATION:
+                Challenge::Coins -= Cost;
+                break;
+
 			case GameData::BankType_CAMPAIGN:
 				vec = PlayerManager::getExistingPlayers();
 				for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
@@ -181,15 +188,15 @@ namespace CloudberryKingdom
 				break;
 		}
 
-		//PlayerManager.CoinsSpent += Cost;
+		Awardments::CheckForAward_Buy();
+		//PlayerManager::CoinsSpent += Cost;
 
 		SetCoins( Bank() );
 	}
 
 	void HelpMenu::SetCoins( int Coins )
 	{
-		if ( Coins > 99 )
-			Coins = 99;
+		//if ( Coins > 99 ) Coins = 99;
 		CoinsText->SubstituteText( std::wstring( L"x" ) + StringConverterHelper::toString( Coins ) );
 	}
 
@@ -444,6 +451,7 @@ namespace CloudberryKingdom
 		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_WATCH_COMPUTER );
 
 		// Show path
+		boost::shared_ptr<MenuItem> PathItem;
 		if ( On_ShowPath() )
 		{
 			item = MakeMagic( MenuToggle, ( ItemFont ) );
@@ -452,8 +460,11 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) ) );
-			item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+            PathItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Path ), ItemFont ) ) );
+            if (Bank() >= Cost_Path)
+                item->setGo( Cast::ToItem( boost::make_shared<ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+            else
+                item->setGo( 0 );
 		}
 		item->Name = std::wstring( L"ShowPath" );
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
@@ -463,6 +474,7 @@ namespace CloudberryKingdom
 		Item_ShowPath = item;
 
 		// Slow mo
+		boost::shared_ptr<MenuItem> SlowItem;
 		if ( On_SlowMo() )
 		{
 			item = MakeMagic( MenuToggle, ( ItemFont ) );
@@ -471,8 +483,11 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) ) );
-			item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+            SlowItem = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( CoinPrefix + std::wstring( L"x" ) + StringConverterHelper::toString( Cost_Slow ), ItemFont ) ) );
+            if (Bank() >= Cost_Slow)
+                item->setGo( Cast::ToItem( boost::make_shared<SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) ) ) );
+            else
+                item->setGo( 0 );
 		}
 		item->Name = std::wstring( L"SlowMo" );
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
@@ -480,6 +495,19 @@ namespace CloudberryKingdom
 		AddItem( item );
 		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ACTIVATE_SLOW_MO );
 		Item_SlowMo = item;
+
+        // Fade if not usable
+        if ( PathItem != 0 && PathItem->getGo() == 0 )
+        {
+            PathItem->MyText->Alpha = .6f;
+            PathItem->MySelectedText->Alpha = .6f;
+        }
+
+        if ( SlowItem != 0 && SlowItem->getGo() == 0 )
+        {
+            SlowItem->MyText->Alpha = .6f;
+            SlowItem->MySelectedText->Alpha = .6f;
+        }
 
 		MyMenu->OnStart = MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 		MyMenu->OnY = Cast::ToAction( boost::make_shared<MenuReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );

@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		//    set
 		//    {
 		//        if (code == 23)
-		//            Tools.Write("");
+		//            Tools::Write("");
 		//        _RelVal = value;
 		//    }
 		//}

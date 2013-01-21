@@ -8,8 +8,128 @@
 
 #include "Hacks/XNA/SamplerState.h"
 
+#include <algorithm>
+#include <Content/File.h>
+#include <sstream>
+#include <string>
+
 namespace CloudberryKingdom
 {
+
+		static std::istream& safeGetline( std::istream& is, std::string &t )
+		{
+			t.clear();
+
+			std::istream::sentry se( is, true );
+			std::streambuf *sb = is.rdbuf();
+
+			for(;;)
+			{
+				int c = sb->sbumpc();
+				switch (c) {
+				case '\r':
+					c = sb->sgetc();
+					if( c == '\n' )
+						sb->sbumpc();
+					return is;
+				case '\n':
+				case EOF:
+					return is;
+				default:
+					t += ( char )c;
+				}
+			}
+		}
+
+		GlyphData::GlyphData()
+		{
+		}
+
+        GlyphData::GlyphData(Vector4 TextureCoordinates_, Vector2 Size_, Vector2 Offset_)
+        {
+            TextureCoordinates = TextureCoordinates_;
+            Size = Size_;
+            Offset = Offset_;
+        }
+
+        GlyphData HackFont::GetData( wchar_t c )
+        {
+            if ( Contains<int, GlyphData>( Data, c ) )
+                return Data[c];
+            else
+            {
+#if defined(DEBUG)
+                return Data['#'];
+#else
+                return Data[' '];
+#endif
+            }
+        }
+
+        HackFont::HackFont(std::string name)
+			: CharSpacing(0)
+			, charSpacing_(0)
+        {
+			using namespace std;
+
+			string fileContents;
+			string path = "Content/Fonts/" + name + ".fnt";
+			if( !File::ReadAsString( path, fileContents ) )
+			{
+				return;
+			}
+
+			stringstream ss( fileContents );
+			string line;
+
+            MyTexture = boost::make_shared<EzTexture>();
+            MyTexture->setTex( Localization::FontTexture );
+
+			safeGetline( ss, line ); // Burn one line
+			safeGetline( ss, line ); // Burn one line
+
+            safeGetline( ss, line );
+            int Char, X, Y, Width, Height, Xoffset, Yoffset, OrigW, OrigH;
+            while ( line.length() > 1 )
+            {
+                int additional = 19;
+
+				stringstream line_ss( line );
+
+				line_ss >> Char;	line_ss.get();
+				line_ss >> X;		line_ss.get();
+				line_ss >> Y;		line_ss.get();
+				line_ss >> Width;	line_ss.get();
+				line_ss >> Height;	line_ss.get();
+				line_ss >> Xoffset;	line_ss.get();
+				line_ss >> Yoffset;	line_ss.get();
+				line_ss >> OrigW;	line_ss.get();
+				line_ss >> OrigH;	//line_ss.get();
+
+				Width += additional;
+				Height += additional;
+				OrigW += additional;
+				OrigH += additional;
+
+                Data[ Char ] = GlyphData( Vector4( static_cast<float>( X ), static_cast<float>( Y ), static_cast<float>( Width ), static_cast<float>( Height ) ),
+										  Vector2( static_cast<float>( OrigW ), static_cast<float>( OrigH) ),
+										  Vector2( static_cast<float>( Xoffset ), static_cast<float>( Yoffset ) ) );
+
+				safeGetline( ss, line );
+            }
+        }
+
+
+        HackSpriteFont::HackSpriteFont( boost::shared_ptr<HackFont> font_, int thickness_ )
+        {
+            font = font_;
+            thickness = thickness_;
+        }
+
+
+
+
+
 
 	void QuadDrawer::InitializeStatics()
 	{
@@ -670,9 +790,9 @@ namespace CloudberryKingdom
 
 		QUAD_DRAWER->Flush();
 		return; // FIXME: We shoudl not return.
-	//#if DEBUG
-	//            if (Device.SamplerStates[1] == null) Tools.Write("!");
-	//            if (Device.SamplerStates[1] != ClampClamp) Tools.Write("!");
+	//#if defined(DEBUG)
+	//            if (Device.SamplerStates[1] == null) Tools::Write("!");
+	//            if (Device.SamplerStates[1] != ClampClamp) Tools::Write("!");
 	//#endif
 
 		//if (CurrentTexture != null)
@@ -682,7 +802,7 @@ namespace CloudberryKingdom
 			CurrentEffect->Hsl->SetValue( getCurrentMatrix() );
 
 			// Test HSV transform
-			//CurrentEffect.Hsl.SetValue(ColorHelper.HsvTransform(Tools.Num_0_to_2, 1f, Tools.Num_0_to_360));
+			//CurrentEffect.Hsl.SetValue(ColorHelper.HsvTransform(Tools::Num_0_to_2, 1f, Tools::Num_0_to_360));
 
 			if ( !CurrentEffect->IsUpToDate )
 				CurrentEffect->SetCameraParameters();
@@ -716,4 +836,157 @@ namespace CloudberryKingdom
 		_GlobalIllumination = 1;
 		Illumination = 1;
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+        void QuadDrawer::DrawPic(Vector2 pos, Vector2 pos2, boost::shared_ptr<EzTexture> texture, Color color)
+        {
+            if (CurrentTexture != texture || CurrentEffect != Tools::BasicEffect)
+                Flush();
+
+            CurrentTexture = texture;
+            CurrentEffect = Tools::BasicEffect;
+
+			::SimpleQuad sq;
+			sq.V[0] = Vector2( pos.X, pos.Y );
+			sq.V[1] = Vector2( pos.X, pos2.Y );
+			sq.V[3] = Vector2( pos2.X, pos.Y );
+			sq.V[2] = Vector2( pos2.X, pos2.Y );
+
+			sq.T[0] = Vector2( 0, 0 );
+			sq.T[1] = Vector2( 0, 1 );
+			sq.T[3] = Vector2( 1, 0 );
+			sq.T[2] = Vector2( 1, 1 );
+
+			sq.Color = color.ToVector4();
+
+			sq.Diffuse = texture->getTex()->texture_;
+			QUAD_DRAWER->Draw( sq );
+		}
+
+        void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale)
+        {
+            boost::shared_ptr<HackFont> font = spritefont->font;
+
+            scale *= 1.12f;
+
+            boost::shared_ptr<EzEffect> fx = 0;
+            switch (spritefont->thickness)
+            {
+				case 0: fx = Tools::Text_NoOutline; break;
+				case 1: fx = Tools::Text_ThinOutline; break;
+				case 2: fx = Tools::Text_ThickOutline; break;
+                default: return;
+            }
+
+            if (CurrentTexture != font->MyTexture || i > 1000 || fx != CurrentEffect)
+                Flush();
+
+            CurrentTexture = font->MyTexture;
+            CurrentEffect = fx;
+			QUAD_DRAWER->SetEffect( CurrentEffect->effect );
+
+            Vector2 p = position + Vector2(35, -25) * scale / 2.0533333f;
+	        for (int j = 0; j < static_cast<int>( s.length() ); ++j)
+	        {
+                GlyphData data = font->GetData( s[j] );
+
+                Vector4 tq = data.TextureCoordinates;
+                Vector2 d = data.Size;
+                Vector2 l = p + Vector2(data.Offset.X, -data.Offset.Y) * scale;
+
+                if (s[j] != ' ')
+                {
+                    Vector2 inv_size = Vector2(1.f) / Vector2( static_cast<float>( font->MyTexture->getTex()->Width ), static_cast<float>( font->MyTexture->getTex()->Height ) );
+
+					::SimpleQuad sq;
+					sq.V[0] = Vector2(l.X, l.Y);
+					sq.V[1] = Vector2(l.X, l.Y - tq.W * scale.Y);
+					sq.V[3] = Vector2(l.X + tq.Z * scale.X, l.Y);
+					sq.V[2] = Vector2(l.X + tq.Z * scale.X, l.Y - tq.W * scale.Y);
+
+					sq.T[0] = Vector2(tq.X, tq.Y) * inv_size;
+					sq.T[1] = Vector2(tq.X, tq.Y + tq.W) * inv_size;
+					sq.T[3] = Vector2(tq.X + tq.Z, tq.Y) * inv_size;
+					sq.T[2] = Vector2(tq.X + tq.Z, tq.Y + tq.W) * inv_size;
+
+					sq.Color = color;
+
+					sq.Diffuse = font->MyTexture->getTex()->texture_;
+					QUAD_DRAWER->Draw( sq );
+                }
+
+		        p += Vector2( d.X + font->CharSpacing - 18, 0 ) * scale;
+	        }
+        }
+
+        void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale)
+        {
+        }
+
+        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s)
+        {
+            boost::shared_ptr<HackFont> font = spritefont->font;
+
+	        Vector2 size = Vector2(0);
+
+	        if ( s.length() == 0 ) return Vector2(0);
+
+	        for( int j = 0; j < static_cast<int>( s.length() ); ++j )
+	        {
+                GlyphData data = font->GetData( s[j] );
+                Vector2 dim = data.Size;
+
+		        size.X += dim.X + (float)( font->CharSpacing - 18 );
+		        size.Y = __max( size.Y, dim.Y );
+	        }
+
+            size.Y = __max( size.Y, 133 );
+
+	        size = size - Vector2( (float)( font->CharSpacing ), 0 ) + Vector2(50, 0);
+            size *= 1.12f;
+
+            if (size.X < 0) Tools::Nothing();
+
+            return size;
+        }
+
+        Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s)
+        {
+            boost::shared_ptr<HackFont> font = spritefont->font;
+
+	        Vector2 size = Vector2(0);
+
+	        if ( s->getLength() == 0 ) return Vector2(0);
+
+	        for( int j = 0; j < s->getLength(); ++j )
+	        {
+                GlyphData data = font->GetData( s->buffer[j] );
+                Vector2 dim = data.Size;
+
+		        size.X += dim.X + (float)( font->CharSpacing - 18 );
+		        size.Y = __max( size.Y, dim.Y );
+	        }
+
+            size.Y = __max( size.Y, 133 );
+
+	        size = size - Vector2( (float)( font->CharSpacing ), 0 ) + Vector2(50, 0);
+            size *= 1.12f;
+
+            if (size.X < 0) Tools::Nothing();
+
+            return size;
+        }
+
+
 }

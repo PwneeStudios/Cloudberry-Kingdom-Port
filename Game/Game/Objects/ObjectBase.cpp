@@ -646,7 +646,7 @@ namespace CloudberryKingdom
 		WriteReadTools::WritePhsxData( writer, StartData );
 
 		writer->Write( StepOffset );
-		//WriteReadTools.WritePhsxData(writer, GenData);
+		//WriteReadTools::WritePhsxData(writer, GenData);
 
 		WriteReadTools::WriteVector2( writer, ParentOffset );
 	}
@@ -691,7 +691,7 @@ namespace CloudberryKingdom
 		WriteReadTools::ReadPhsxData( reader, StartData );
 
 		StepOffset = reader->ReadInt32();
-		//WriteReadTools.WritePhsxData(Readr, GenData = reader
+		//WriteReadTools::WritePhsxData(Readr, GenData = reader
 
 		WriteReadTools::ReadVector2( reader, ParentOffset );
 	}

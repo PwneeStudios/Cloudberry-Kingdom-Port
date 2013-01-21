@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 				Paste();
 				return;
 			}
-			//if (ButtonCheck.State(Keys.V).Pressed && Tools.CntrlDown()) { Paste(); return; }
+			//if (ButtonCheck.State(Keys.V).Pressed && Tools::CntrlDown()) { Paste(); return; }
 			if ( ButtonCheck::State( Keys_C ).Down && Tools::CntrlDown() )
 			{
 				Copy();
@@ -347,8 +347,8 @@ namespace CloudberryKingdom
 		//MyPile.Insert(0, Backdrop);
 
 		// Caret
-		//var font = Resources.Font_Grobold42;
-		boost::shared_ptr<CloudberryKingdom::EzFont> font = Resources::LilFont;
+		//var font = Resources::Font_Grobold42;
+		boost::shared_ptr<CloudberryKingdom::EzFont> font = Resources::Font_Grobold42;
 		Caret = boost::make_shared<EzText>( std::wstring( L"_" ), font, 1000.f, false, true,.575f );
 		Caret->MyFloatColor = Color::Black.ToVector4();
 		Caret->setPos( MyText->getPos() );

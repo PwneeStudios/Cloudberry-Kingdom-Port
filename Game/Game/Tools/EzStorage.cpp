@@ -1,5 +1,7 @@
 ﻿#include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
@@ -46,9 +48,9 @@ namespace CloudberryKingdom
 
 		LoadAll();
 
-		//PlayerManager.Player.LifetimeStats.Coins += 1000;
-		//PlayerManager.Player.Awardments += 4;
-		//PlayerManager.Player.Awardments += 7;
+		//PlayerManager::Player.LifetimeStats.Coins += 1000;
+		//PlayerManager::Player.Awardments += 4;
+		//PlayerManager::Player.Awardments += 7;
 	}
 
 	void SaveGroup::Wait()
@@ -79,9 +81,11 @@ namespace CloudberryKingdom
 
 	void SaveGroup::SaveAll()
 	{
+		if (CloudberryKingdomGame::getIsDemo()) return;
+
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
 		{
-			//if (!(ThingToSave is ScoreList)) Tools.Write("!");
+			//if (!(ThingToSave is ScoreList)) Tools::Write("!");
 
 			Incr();
 			( *ThingToSave )->Save();

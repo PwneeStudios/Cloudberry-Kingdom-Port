@@ -364,8 +364,8 @@ namespace CloudberryKingdom
 		CurLevelSeed = NextLevelSeed;
 		CurLevelIndex = NextLevelIndex;
 
-		//Tools.CurGameData = CurLevelSeed.MyGame;
-		//Tools.CurLevel = CurLevelSeed.MyGame.MyLevel;
+		//Tools::CurGameData = CurLevelSeed.MyGame;
+		//Tools::CurLevel = CurLevelSeed.MyGame.MyLevel;
 
 		// Set end of game function
 		Tools::CurGameData->EndGame = boost::make_shared<FinishLambda>( boost::static_pointer_cast<StringWorldGameData>( shared_from_this() ) );
@@ -544,7 +544,7 @@ namespace CloudberryKingdom
 		for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			( *bob )->CollectSelf();
 
-		//Tools.CurGameData.AddGameObject(new VictoryPanel());
+		//Tools::CurGameData.AddGameObject(new VictoryPanel());
 
 		// Absorb game stats
 		PlayerManager::AbsorbTempStats();

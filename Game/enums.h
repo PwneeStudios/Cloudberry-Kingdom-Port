@@ -305,7 +305,8 @@ enum TimeTypes
 {
 	TimeTypes_UNSET,
 	TimeTypes_REGULAR,
-	TimeTypes_X_SYNC
+	TimeTypes_X_SYNC,
+	TimeTypes_Y_SYNC
 };
 
 enum Hero_BaseType

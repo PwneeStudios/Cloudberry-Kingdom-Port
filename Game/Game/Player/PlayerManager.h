@@ -86,6 +86,13 @@ namespace CloudberryKingdom
 			void Apply( const std::vector<unsigned char> &Data );
 		};
 
+		struct LoadRezAndKeysFailLambda : public Lambda
+		{
+		
+			LoadRezAndKeysFailLambda();
+
+			void Apply();
+		};
 	
 		struct GetGroupGamerTagNameLength : public LambdaFunc_1<boost::shared_ptr<StringBuilder>, float>
 		{
@@ -159,6 +166,7 @@ namespace CloudberryKingdom
 
 	
 		static void _LoadRezAndKeys( std::vector<unsigned char> Data );
+        static void _Fail();
 #endif
 	
 		static bool PartiallyInvisible, TotallyInvisible;
@@ -207,6 +215,12 @@ namespace CloudberryKingdom
 		static std::wstring GetGroupGamerTag( int MaxLength );
 
 		static int MaxPlayerHighScore( int GameId );
+
+
+		static int MaxPlayerTotalArcadeLevel();
+		static int MaxPlayerTotalCampaignLevel();
+		static int MaxPlayerTotalCampaignIndex();
+		static int MaxPlayerTotalLevel();
 
 		/// <summary>
 		/// Returns true if any of the current players has been awarded the specified awardment.

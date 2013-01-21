@@ -242,7 +242,7 @@ namespace CloudberryKingdom
 				boost::shared_ptr<ClrTextFx> data = boost::static_pointer_cast<ClrTextFx>( ( *item )->obj );
 
 				// Check if color is available
-				if ( !CloudberryKingdomGame::UnlockAll )
+				if ( !CloudberryKingdomGame::Unlock_Customization )
 					if ( data->Price > 0 && !PlayerManager::Bought( data ) )
 						continue;
 

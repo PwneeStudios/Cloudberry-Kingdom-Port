@@ -137,7 +137,7 @@ namespace CloudberryKingdom
 		{
 			boost::shared_ptr<CloudberryKingdom::Particle> p = Flame_Emitter->GetNewParticle( EmitterTemplate );
 			Vector2 Dir = Rnd->RndDir();
-			p->Data.Position = 20 * Dir; //+ Tools.CurLevel.MainCamera.Data.Position;
+			p->Data.Position = 20 * Dir; //+ Tools::CurLevel.MainCamera.Data.Position;
 			//p.Data.Velocity = 4 * (float)MyLevel.Rnd.Rnd.NextDouble() * Dir;
 			p->Data.Velocity = 8.5f * static_cast<float>( Rnd->Rnd->NextDouble() ) * Dir;
 			p->Data.Acceleration -= .07f * p->Data.Velocity;
@@ -195,7 +195,7 @@ namespace CloudberryKingdom
 		FireballTexture->setTex( FireballRenderTarget );
 
 		// Save to file
-		//FireballTexture.Tex.Save(string.Format("Fireball_{0}.png", Tools.DrawCount), ImageFileFormat.Png);
+		//FireballTexture.Tex.Save(string.Format("Fireball_{0}.png", Tools::DrawCount), ImageFileFormat.Png);
 	}
 
 	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
@@ -346,7 +346,7 @@ namespace CloudberryKingdom
 
 	Vector2 Fireball::GetPos()
 	{
-		//if (!Alive) Tools.Write("!");
+		//if (!Alive) Tools::Write("!");
 
 		// FIXME: check fmod is doing same as modular arithmetic
 		//float Step = ( getCore()->MyLevel->IndependentPhsxStep - Offset + Period ) % Period;
@@ -357,7 +357,7 @@ namespace CloudberryKingdom
 
 		PrevStep = Step;
 
-		//Tools.Write(Core.StartData.Velocity.Length());
+		//Tools::Write(Core.StartData.Velocity.Length());
 		return getCore()->StartData.Position + Step * getCore()->StartData.Velocity;
 	}
 

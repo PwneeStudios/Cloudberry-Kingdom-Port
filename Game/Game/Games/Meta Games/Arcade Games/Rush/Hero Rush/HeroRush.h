@@ -76,6 +76,8 @@ namespace CloudberryKingdom
 	
 		int LevelsPerDifficulty;
 	
+		virtual void AdditionalSwap(int levelindex);
+
 		virtual void AdditionalPreStart();
 
 	
@@ -85,8 +87,10 @@ namespace CloudberryKingdom
 		virtual boost::shared_ptr<LevelSeedData> GetSeed( int Index );
 
 	
-		static std::vector<boost::shared_ptr<BobPhsx> > HeroTypes;
+		static std::vector<boost::shared_ptr<BobPhsx> > _HeroTypes, HeroTypes;
 
+		void ShuffleHeros();
+		void Start(int StartLevel);
 	
 		virtual boost::shared_ptr<BobPhsx> GetHero( int i );
 

@@ -7,6 +7,7 @@ namespace CloudberryKingdom
 	{
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
 		Call( MakeMagic( StartMenu_MW_Options, ( getControl(), true ) ), 0 );
+		CallingOptionsMenu = true;
 	}
 
 	void StartMenu_MW::Exit()
@@ -29,6 +30,7 @@ namespace CloudberryKingdom
 		StartMenu::StartMenu_Construct();
 
 		this->Title = Title;
+		CallingOptionsMenu = false;
 
 		return boost::static_pointer_cast<StartMenu_MW>( shared_from_this() );
 	}
@@ -78,6 +80,17 @@ namespace CloudberryKingdom
 	{
 		StartMenu::OnAdd();
 	}
+
+    void StartMenu_MW::OnReturnTo()
+    {
+        if (CallingOptionsMenu)
+        {
+            MyMenu->SelectItem(4);
+            CallingOptionsMenu = false;
+        }
+
+        StartMenu::OnReturnTo();
+    }
 
 	bool StartMenu_MW::MenuReturnToCaller( const boost::shared_ptr<Menu> &menu )
 	{

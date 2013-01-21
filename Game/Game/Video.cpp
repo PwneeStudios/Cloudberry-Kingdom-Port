@@ -59,6 +59,10 @@ namespace CloudberryKingdom
 
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
+#if DEBUG
+            CanSkipVideo = true;
+#endif
+
 		Subtitles = Localization::GetSubtitles( MovieName );
 		SubtitleIndex = 0;
 		SubtitleQuad->Show = false;
@@ -77,7 +81,7 @@ namespace CloudberryKingdom
 		Playing = true;
 		Cleaned = false;
 
-		//CurrentVideo = Tools.GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
+		//CurrentVideo = Tools::GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
 		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
 		VPlayer = boost::make_shared<VideoPlayer>();
@@ -187,12 +191,12 @@ bool MainVideo::Paused = false;
 		Subtitle();
 
 	//#if WINDOWS && DEBUG
-	//                Tools.StartSpriteBatch();
-	//                Tools.Render.MySpriteBatch.DrawString(Resources.LilFont.Font,
+	//                Tools::StartSpriteBatch();
+	//                Tools::Render.MySpriteBatch.DrawString(Resources::LilFont.Font,
 	//                        ElapsedTime().ToString(),
-	//                        Tools.CurCamera.Pos + new Vector2(900, 100),
+	//                        Tools::CurCamera.Pos + new Vector2(900, 100),
 	//                        Color.Orange, 0, Vector2.Zero, 1.5f, SpriteEffects.None, 0);
-	//                Tools.Render.EndSpriteBatch();
+	//                Tools::Render.EndSpriteBatch();
 	//#endif
 
 		return true;

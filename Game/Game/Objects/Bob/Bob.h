@@ -122,6 +122,7 @@ namespace CloudberryKingdom
 		int PlaceDelay;
 		int PlaceTimer;
 
+		bool Flying;
 		bool Immortal, DoNotTrackOffScreen;
 
 		bool TopCol, BottomCol;
@@ -164,6 +165,7 @@ namespace CloudberryKingdom
 		int MyPieceIndexOffset;
 		boost::shared_ptr<ComputerRecording> MyRecord;
 
+		int DeadCount;
 
 		bool Dying, Dead, FlamingCorpse;
 
@@ -376,6 +378,8 @@ namespace CloudberryKingdom
 		/// Whether to do object interactions.
 		/// </summary>
 		bool DoObjectInteractions;
+
+		void FlyingPhsx();
 
 		virtual void PhsxStep();
 

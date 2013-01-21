@@ -2,19 +2,22 @@
 
 #include <Hacks\List.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
-	HeroItem::HeroItem( const boost::shared_ptr<BobPhsx> &Hero ) : MenuItem( boost::shared_ptr<EzText>( 0 ) )
+	HeroItem::HeroItem( const std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > &pair )
+		: MenuItem( boost::shared_ptr<EzText>( 0 ) )
 	{
 	}
-	boost::shared_ptr<HeroItem> HeroItem::HeroItem_Construct( const boost::shared_ptr<BobPhsx> &Hero )
+	boost::shared_ptr<HeroItem> HeroItem::HeroItem_Construct( const std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > &pair )
 	{
-		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( Hero->Name, Resources::Font_Grobold42_2 ) );
+		MenuItem::MenuItem_Construct( boost::make_shared<EzText>( pair.first->Name, Resources::Font_Grobold42_2 ) );
 
-		this->Hero = Hero;
-
-		Locked = false;
+        this->Hero = pair.first;
+        this->RequiredHero = pair.second.first;
+        this->RequiredHeroLevel = pair.second.second;
 
 		return boost::static_pointer_cast<HeroItem>( shared_from_this() );
 	}
@@ -54,6 +57,8 @@ namespace CloudberryKingdom
 	{
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
+		this->Lock = false;
+
 		this->Title = Title;
 		this->Arcade = Arcade;
 		this->MyArcadeItem = MyArcadeItem;
@@ -74,11 +79,67 @@ namespace CloudberryKingdom
 		Arcade.reset();
 	}
 
+        bool StartMenu_MW_HeroSelect::Locked()
+        {
+            boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
+            if ( 0 == item ) return false;
+
+            return Locked(item);
+        }
+
+        bool StartMenu_MW_HeroSelect::Locked(boost::shared_ptr<HeroItem> item)
+        {
+            if ( item->RequiredHero == 0 ) return false;
+
+            int level = MyArcadeItem->MyChallenge->CalcTopGameLevel( item->RequiredHero );
+            return level < item->RequiredHeroLevel && !CloudberryKingdomGame::Unlock_Levels;
+        }
+
+        bool StartMenu_MW_HeroSelect::Invisible(boost::shared_ptr<HeroItem> item)
+        {
+            if ( item->RequiredHero == 0 ) return false;
+
+            int level = MyArcadeItem->MyChallenge->CalcTopGameLevel( item->RequiredHero );
+            return level < item->RequiredHeroLevel && !CloudberryKingdomGame::Unlock_Levels && item->RequiredHeroLevel >= 100;
+        }
+
+
 	void StartMenu_MW_HeroSelect::OnSelect()
 	{
 		boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
 		if ( 0 == item )
 			return;
+
+            Lock = Locked();
+
+            if (Lock)
+            {
+                int level = item->RequiredHeroLevel;
+                std::wstring name = Localization::WordString( item->RequiredHero->Name );
+                std::wstring m = Localization::WordString( Localization::Words_LEVEL ) + L" " + ToString( level );
+
+                boost::shared_ptr<EzText> _t;
+                MyPile->FindEzText( L"LockedHeader" )->Show = true;
+                _t = MyPile->FindEzText( L"RequiredHero" ); _t->Show = true; _t->SubstituteText( name );
+                _t = MyPile->FindEzText( L"RequiredLevel" ); _t->Show = true; _t->SubstituteText( m );
+                
+
+                MyPile->FindEzText( L"ScoreHeader" )->Show = false;
+                MyPile->FindEzText( L"Score" )->Show = false;
+                MyPile->FindEzText( L"LevelHeader" )->Show = false;
+                MyPile->FindEzText( L"Level" )->Show = false;
+            }
+            else
+            {
+                MyPile->FindEzText( L"LockedHeader" )->Show = false;
+                MyPile->FindEzText( L"RequiredHero" )->Show = false;
+                MyPile->FindEzText( L"RequiredLevel" )->Show = false;
+
+                MyPile->FindEzText( L"ScoreHeader" )->Show = true;
+                MyPile->FindEzText( L"Score" )->Show = true;
+                MyPile->FindEzText( L"LevelHeader" )->Show = true;
+                MyPile->FindEzText( L"Level" )->Show = true;
+            }
 
 		Challenge::ChosenHero = item->Hero;
 		MyHeroDoll->MakeHeroDoll( item->Hero );
@@ -138,6 +199,8 @@ namespace CloudberryKingdom
 		// Options. Menu for PC, graphics only for consoles.
 		Options = MakeMagic( HeroSelectOptions, ( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) ) );
 		MyGame->AddGameObject( Options );
+
+		Update();
 	}
 
 	void StartMenu_MW_HeroSelect::Init()
@@ -151,29 +214,7 @@ namespace CloudberryKingdom
 		Score = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
 		Level_Renamed = boost::make_shared<EzText>( std::wstring( L"0" ), Resources::Font_Grobold42_2 );
 
-		// Heroes
-		BobPhsxNormal::getInstance()->Id = 0;
-		BobPhsxBig::getInstance()->Id = 1;
-		BobPhsxInvert::getInstance()->Id = 2;
-		BobPhsxDouble::getInstance()->Id = 3;
-		BobPhsxJetman::getInstance()->Id = 4;
-		BobPhsxBouncy::getInstance()->Id = 5;
-		BobPhsxBox::getInstance()->Id = 6;
-		BobPhsxScale::getInstance()->Id = 7;
-		BobPhsxTime::getInstance()->Id = 8;
-		BobPhsxSmall::getInstance()->Id = 9;
-		BobPhsxSpaceship::getInstance()->Id = 10;
-		BobPhsxWheel::getInstance()->Id = 11;
 
-		boost::shared_ptr<BobPhsx> JetpackWheelie = BobPhsx::MakeCustom( Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK );
-		JetpackWheelie->Name = Localization::Words_JETPACK_WHEELIE;
-		JetpackWheelie->Id = 12;
-
-		//BobPhsxMeat.Instance =
-		//BobPhsxRocketbox.Instance =
-
-		boost::shared_ptr<BobPhsx>  tempVector[] = { BobPhsxNormal::getInstance(), BobPhsxBig::getInstance(), BobPhsxInvert::getInstance(), BobPhsxDouble::getInstance(), BobPhsxJetman::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBox::getInstance(), BobPhsxScale::getInstance(), BobPhsxTime::getInstance(), BobPhsxSmall::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxWheel::getInstance(), JetpackWheelie };
-		std::vector<boost::shared_ptr<BobPhsx> > list = VecFromArray( tempVector );
 
 		// Menu
 		boost::shared_ptr<MiniMenu> mini = boost::make_shared<MiniMenu>();
@@ -186,7 +227,7 @@ namespace CloudberryKingdom
 		mini->ItemsToShow = 6;
 		FontScale *= .75f;
 
-		for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator phsx = list.begin(); phsx != list.end(); ++phsx )
+		for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator phsx = ArcadeMenu::HeroArcadeList.begin(); phsx != ArcadeMenu::HeroArcadeList.end(); ++phsx )
 		{
 			boost::shared_ptr<HeroItem> item = MakeMagic( HeroItem, ( *phsx ) );
 			item->AdditionalOnSelect = boost::make_shared<OnSelectProxy>( boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() ) );
@@ -228,6 +269,26 @@ namespace CloudberryKingdom
 		MyPile->Add( LevelHeader, std::wstring( L"LevelHeader" ) );
 
 		MyPile->Add( Level_Renamed, std::wstring( L"Level" ) );
+
+            // Locked
+            boost::shared_ptr<EzText> LockedHeader = boost::make_shared<EzText>( Localization::Words_Required, Resources::Font_Grobold42 );
+            LockedHeader->_Scale *= .9f;
+            StartMenu::SetText_Green(LockedHeader, true );
+            MyPile->Add(LockedHeader, L"LockedHeader" );
+            LockedHeader->Show = false;
+
+            boost::shared_ptr<EzText> RequiredHero = boost::make_shared<EzText>( L"Garbage", Resources::Font_Grobold42 );
+            RequiredHero->_Scale *= .72f;
+            StartMenu::SetText_Green(RequiredHero, true );
+            MyPile->Add(RequiredHero, L"RequiredHero" );
+            RequiredHero->Show = false;
+
+            boost::shared_ptr<EzText> RequiredLevel = boost::make_shared<EzText>( L"Garbage", Resources::Font_Grobold42 );
+            RequiredLevel->_Scale *= .72f;
+            StartMenu::SetText_Green(RequiredLevel, true );
+            MyPile->Add(RequiredLevel, L"RequiredLevel" );
+            RequiredLevel->Show = false;
+
 		#pragma endregion
 
 		/// <summary>
@@ -246,6 +307,7 @@ namespace CloudberryKingdom
 		ArcadeBaseMenu::OnReturnTo();
 
 		UpdateScore();
+		Update();
 	}
 
 	void StartMenu_MW_HeroSelect::UpdateScore()
@@ -261,6 +323,35 @@ namespace CloudberryKingdom
 		Score->SubstituteText( StringConverterHelper::toString( TopScore ) );
 		Level_Renamed->SubstituteText( StringConverterHelper::toString( TopLevel ) );
 	}
+
+    void StartMenu_MW_HeroSelect::Update()
+    {
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = MyMenu->Items.begin(); _item != MyMenu->Items.end(); ++_item )
+        {
+            boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( *_item );
+            if ( 0 != item )
+            {
+                if ( Locked( item ) )
+                {
+                    item->MyText->Alpha = .4f;
+                    item->MySelectedText->Alpha = .4f;
+
+                    if (Invisible(item))
+                    {
+                        item->Selectable = false;
+                        item->MyText->Alpha = 0;
+                        item->MySelectedText->Alpha = 0;
+                    }
+
+                }
+                else
+                {
+                    item->MyText->Alpha = 1.f;
+                    item->MySelectedText->Alpha = 1.f;
+                }
+            }
+        }
+    }
 
 	void StartMenu_MW_HeroSelect::SetPos()
 	{
@@ -291,6 +382,11 @@ namespace CloudberryKingdom
 			_t->setPos( Vector2( 1163.887f, -155.5555f ) );
 			_t->setScale( 1 );
 		}
+
+        _t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0) { _t->setPos( Vector2(33.33325f, 441.6666f) ); _t->_Scale = 0.9f; }
+        _t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0) { _t->setPos( Vector2(280.5552f, 163.8889f) ); _t->_Scale = 0.72f; }
+        _t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0) { _t->setPos( Vector2(277.7778f, -44.44443f) ); _t->_Scale = 0.72f; }
+
 
 		boost::shared_ptr<QuadClass> _q;
 		_q = MyPile->FindQuad( std::wstring( L"BoxLeft" ) );
@@ -324,7 +420,15 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopLevel() ) );
+		if (Lock) return;
+
+		boost::shared_ptr<HeroItem> _item = boost::dynamic_pointer_cast<HeroItem>( MyMenu->getCurItem() );
+		if ( 0 == _item ) return;
+		int TopLevelForHero = MyArcadeItem->MyChallenge->CalcTopGameLevel( _item->Hero );
+
+		//int TopLevelForHero = MyArcadeItem.MyChallenge.TopLevel();
+
+		boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( TopLevelForHero ) );
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
 		levelmenu->StartFunc = boost::make_shared<StartFuncProxy>( boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );

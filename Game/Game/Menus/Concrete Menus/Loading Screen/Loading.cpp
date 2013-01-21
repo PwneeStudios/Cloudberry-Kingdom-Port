@@ -147,7 +147,7 @@ namespace CloudberryKingdom
 
 		MyPile = boost::make_shared<DrawPile>();
 
-		//Tools.TextureWad.FindOrLoad(Content, "Splash");
+		//Tools::TextureWad.FindOrLoad(Content, "Splash");
 		//Splash = new QuadClass("Splash", 1400);
 		//MyPile.Add(Splash);
 

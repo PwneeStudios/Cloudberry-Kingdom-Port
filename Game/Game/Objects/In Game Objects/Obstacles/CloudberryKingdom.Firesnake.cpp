@@ -65,10 +65,10 @@ namespace CloudberryKingdom
 	void Firesnake::DrawGraphics()
 	{
 		//// Chains
-		//Tools.QDrawer.DrawLine(Orbit, Core.Data.Position,
+		//Tools::QDrawer.DrawLine(Orbit, Core.Data.Position,
 		//            new Color(255, 255, 255, 215),
 		//            Info.Orbs.ChainWidth,
-		//            Info.Orbs.ChainSprite.MyTexture, Tools.BasicEffect, Info.Orbs.ChainRepeatWidth, 0, 0f);
+		//            Info.Orbs.ChainSprite.MyTexture, Tools::BasicEffect, Info.Orbs.ChainRepeatWidth, 0, 0f);
 
 		// Draw the Firesnake
 		MyQuad->setPos( getPos() );

@@ -224,8 +224,8 @@ namespace CloudberryKingdom
 			if ( DrawSelf && !getBlockCore()->BoxesOnly )
 			{
 				//Vector2 add = new Vector2(Box.Current.Size.X, 0);
-				//Tools.QDrawer.DrawLine(Core.Data.Position + add, PivotPoint + add, Info.SpikeyGuys.Chain);
-				//Tools.QDrawer.DrawLine(Core.Data.Position - add, PivotPoint - add, Info.SpikeyGuys.Chain);
+				//Tools::QDrawer.DrawLine(Core.Data.Position + add, PivotPoint + add, Info.SpikeyGuys.Chain);
+				//Tools::QDrawer.DrawLine(Core.Data.Position - add, PivotPoint - add, Info.SpikeyGuys.Chain);
 
 				Tools::QDrawer->DrawLine( getCore()->Data.Position, PivotPoint, getInfo()->Boulders->Chain );
 

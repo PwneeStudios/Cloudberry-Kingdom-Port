@@ -302,6 +302,10 @@ namespace CloudberryKingdom
 		MyHighLevelList->Add( HighLevelEntry );
 		ScoreDatabase::Add( HighScoreEntry );
 		ScoreDatabase::Add( HighLevelEntry );
+        Leaderboard::WriteToLeaderboard(HighScoreEntry);
+        Leaderboard::WriteToLeaderboard(HighLevelEntry);
+
+        ArcadeMenu::CheckForArcadeUnlocks(HighScoreEntry);
 	}
 
 	void GameOverPanel::SetHeaderProperties( const boost::shared_ptr<EzText> &text )

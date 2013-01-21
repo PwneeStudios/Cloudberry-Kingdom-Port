@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 	
 		boost::shared_ptr<Challenge> MyChallenge;
 		boost::shared_ptr<Awardment> MyPrereq;
-		bool Locked;
+		bool IsLocked();
 
 		ArcadeItem( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq );
 		boost::shared_ptr<ArcadeItem> ArcadeItem_Construct( const boost::shared_ptr<EzText> &Text, const boost::shared_ptr<Challenge> &MyChallenge, const boost::shared_ptr<Awardment> &MyPrereq );
@@ -67,7 +67,17 @@ namespace CloudberryKingdom
 
 	struct ArcadeMenu : public ArcadeBaseMenu
 	{
-	
+
+		struct OnSelectProxy : public Lambda
+		{
+		
+			boost::shared_ptr<ArcadeMenu> am;
+		
+			OnSelectProxy( const boost::shared_ptr<ArcadeMenu> &am );
+
+			void Apply();
+		};
+
 		struct GoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
@@ -82,7 +92,8 @@ namespace CloudberryKingdom
 	
 		bool Long;
 
-	
+		static void CheckForArcadeUnlocks(boost::shared_ptr<ScoreEntry> score);
+
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
 	
@@ -91,9 +102,19 @@ namespace CloudberryKingdom
 	
 		void SetLockColors();
 
+        static boost::shared_ptr<BobPhsx> JetpackWheelie;
+        static boost::shared_ptr<BobPhsx> BigBouncy;
+        static boost::shared_ptr<BobPhsx> Ultimate;
+
+        static std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > HeroArcadeList;
 	
 		ArcadeMenu();
 		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
+
+		static void StaticInit();
+
+        boost::shared_ptr<EzText> RequiredText, RequiredText2;
+        boost::shared_ptr<QuadClass> TextBack;
 
 		virtual void Init();
 
@@ -102,8 +123,11 @@ namespace CloudberryKingdom
 
 		Vector2 GetGoalPos();
 
-		boost::shared_ptr<MenuItem> AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const boost::shared_ptr<Awardment> &goal, const std::wstring &itemname );
+		boost::shared_ptr<MenuItem> AddChallenge( const boost::shared_ptr<Challenge> &challenge, const boost::shared_ptr<Awardment> &prereq, const std::wstring &itemname );
 
+		void UpdateAfterPlaying();
+        bool Lock;
+        void OnSelect();
 	
 		virtual void Go( const boost::shared_ptr<MenuItem> &item );
 

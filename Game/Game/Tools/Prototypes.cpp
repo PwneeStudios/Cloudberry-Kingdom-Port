@@ -142,8 +142,8 @@ namespace CloudberryKingdom
 
 					// Name, file, start frame, end frame
 					std::wstring root = bits[ 1 ];
-					int start_frame = ParseInt( bits[ 2 ] );
-					int end_frame = ParseInt( bits[ 3 ] );
+					int start_frame = 0; ParseInt( bits[ 2 ], start_frame );
+					int end_frame = 0; ParseInt( bits[ 3 ], end_frame );
 
 					// Speed or frame length
 					bool _use_speed = false;
@@ -151,11 +151,11 @@ namespace CloudberryKingdom
 					float speed = 1;
 					if ( bits[ 4 ] == std::wstring( L"speed" ) )
 					{
-						speed = ParseFloat( bits[ 5 ] );
+						ParseFloat( bits[ 5 ], speed );
 						_use_speed = true;
 					}
 					else
-						frame_length = ParseInt( bits[ 4 ] );
+						ParseInt( bits[ 4 ], frame_length );
 
 					// Reverse
 					bool reverse = false;
@@ -164,7 +164,7 @@ namespace CloudberryKingdom
 
 					q->TextureAnim->ClearAnim( anim );
 
-					//if (name.Contains("ounc")) Tools.Write("!");
+					//if (name.Contains("ounc")) Tools::Write("!");
 
 					int num_frames = end_frame > start_frame ? end_frame - start_frame + 1 : start_frame - end_frame + 1;
 					for ( int i = 0; i < num_frames; i++ )
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
 //ORIGINAL LINE: case "Scale":
 				if ( bits[ 0 ] == std::wstring( L"Scale" ) )
 				{
-						scale = ParseFloat( bits[ 1 ] );
+						 ParseFloat( bits[ 1 ], scale );
 
 				}
 //ORIGINAL LINE: case "Shift":
@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 				else
 				{
 						Tools::Break();
-						//Tools.ReadLineToObj(BobPhsxMario.Instance, bits);
+						//Tools::ReadLineToObj(BobPhsxMario.Instance, bits);
 				}
 			}
 
@@ -294,14 +294,14 @@ namespace CloudberryKingdom
 		p->PlayUpdate( 0 );
 
 		// Use object
-		if ( Tools::CurLevel != 0 && Tools::CurLevel->Bobs.size() > 0 ) // && Tools.CurLevel.DefaultHeroType == BobPhsxNormal.Instance)
+		if ( Tools::CurLevel != 0 && Tools::CurLevel->Bobs.size() > 0 ) // && Tools::CurLevel.DefaultHeroType == BobPhsxNormal.Instance)
 		{
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject = boost::make_shared<ObjectClass>( p, false, false );
 			ObjectClass_PostConstruct_3params( Tools::CurLevel->Bobs[ 0 ]->PlayerObject, p, false, false );
 			std::queue<boost::shared_ptr<AnimQueueEntry> > empty;
 			std::swap( Tools::CurLevel->Bobs[ 0 ]->PlayerObject->AnimQueue, empty );
 			Tools::CurLevel->Bobs[ 0 ]->PlayerObject->EnqueueAnimation( 0, 0, true );
-			//Tools.CurLevel.Bobs[0].MyPhsx.Prototype.PlayerObject = p;
+			//Tools::CurLevel.Bobs[0].MyPhsx.Prototype.PlayerObject = p;
 			//BobPhsxNormal.Instance.Prototype.PlayerObject = p;
 		}
 		else
@@ -414,11 +414,11 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Bob> NewBob;
 
 		//// Bezier base object
-		//NewBob = new Bob(Path.Combine(Globals.ContentDirectory, "Objects/stickman.smo"), Tools.EffectWad, Tools.TextureWad);
+		//NewBob = new Bob(Path.Combine(Globals.ContentDirectory, "Objects/stickman.smo"), Tools::EffectWad, Tools::TextureWad);
 		//NewBob.MyObjectType = BobPhsxNormal.Instance;
 		//NewBob.DrawOutline = true;
 		//NewBob.CanHaveCape = true;
-		//NewBob.PlayerObject.ParentQuad.MyEffect = Tools.BasicEffect;
+		//NewBob.PlayerObject.ParentQuad.MyEffect = Tools::BasicEffect;
 		//NewBob.PlayerObject.FindQuad("Hat_FireHead").MyTexture = Fireball.FlameTexture;
 
 		// Tigar base object
@@ -536,6 +536,8 @@ namespace CloudberryKingdom
 		BobPhsxSpaceship::getInstance()->Prototype = NewBob;
 		bob.insert( std::make_pair( BobPhsxSpaceship::getInstance(), NewBob ) );
 
+		BobPhsxTimeship::getInstance()->Prototype = NewBob;
+		bob.insert( std::make_pair( BobPhsxTimeship::getInstance(), NewBob ) );
 
 		// Meat
 		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/MeatBoy.smo" ) );
@@ -568,5 +570,7 @@ namespace CloudberryKingdom
 		//PlaceBob = LoadObject(Path.Combine(Globals.ContentDirectory, "Objects/place_bob.smo"));
 
 		Resources::ResourceLoadedCountRef->MyFloat++;
+
+		ArcadeMenu::StaticInit();
 	}
 }

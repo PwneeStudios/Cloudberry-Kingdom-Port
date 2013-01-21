@@ -52,7 +52,7 @@ namespace CloudberryKingdom
 		if ( MyTemplate != 0 )
 			template_Renamed = MyTemplate;
 
-		//MyPieces.Init(Tools.TextureWad.FindByName("White"), Tools.BasicEffect);
+		//MyPieces.Init(Tools::TextureWad.FindByName("White"), Tools::BasicEffect);
 
 		if ( template_Renamed != 0 )
 		{

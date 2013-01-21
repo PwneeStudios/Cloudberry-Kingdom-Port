@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 		Challenge_HeroRush::StartTime_ByDifficulty = VecFromArray( tempVector2 );
 
 		boost::shared_ptr<BobPhsx> tempVector3[] = { BobPhsxNormal::getInstance(), BobPhsxJetman::getInstance(), BobPhsxDouble::getInstance(), BobPhsxSmall::getInstance(), BobPhsxWheel::getInstance(), BobPhsxSpaceship::getInstance(), BobPhsxBouncy::getInstance(), BobPhsxBig::getInstance() };
-		Challenge_HeroRush::HeroTypes = VecFromArray( tempVector3 );
+		Challenge_HeroRush::_HeroTypes = VecFromArray( tempVector3 );
 
 		std::wstring tempVector4[] = { std::wstring( L"sea" ), std::wstring( L"hills" ), std::wstring( L"forest" ), std::wstring( L"cloud" ), std::wstring( L"cave" ), std::wstring( L"castle" ) };
 		Challenge_HeroRush::tilesets = VecFromArray( tempVector4 );
@@ -27,7 +27,7 @@ namespace CloudberryKingdom
 	std::vector<int> Challenge_HeroRush::MaxTime_ByDifficulty;
 	std::vector<int> Challenge_HeroRush::StartTime_ByDifficulty;
 
-	std::vector<boost::shared_ptr<BobPhsx> > Challenge_HeroRush::HeroTypes;
+	std::vector<boost::shared_ptr<BobPhsx> > Challenge_HeroRush::_HeroTypes, Challenge_HeroRush::HeroTypes;
 	std::vector<std::wstring> Challenge_HeroRush::tilesets;
 
 
@@ -59,7 +59,9 @@ namespace CloudberryKingdom
 
 	void Challenge_HeroRush::AdditionalPreStartOnSwapToLevelHelper::Apply( const int &levelindex )
 	{
-		Awardments::CheckForAward_HeroRush2Unlock( levelindex - chr->StartIndex );
+		chr->AdditionalSwap( levelindex );
+
+		//Awardments::CheckForAward_HeroRush2Unlock( levelindex - chr->StartIndex );
 
 		// Add hero icon to exit door
 		chr->MakeExitDoorIcon( levelindex );
@@ -98,7 +100,7 @@ namespace CloudberryKingdom
 	Challenge_HeroRush::Challenge_HeroRush()
 	{
 		InitializeInstanceFields();
-		GameTypeId = 1;
+		GameTypeId = 2;
 		MenuName = Name = Localization::Words_HERO_RUSH;
 	}
 
@@ -126,6 +128,10 @@ namespace CloudberryKingdom
 
 		Tools::CurGameData->AddGameObject( MakeMagic( DoorIcon, ( GetHero( levelindex + 1 - StartIndex ), Tools::CurLevel->getFinalDoor()->getPos() + shift, 1.f ) ) );
 	}
+
+    void Challenge_HeroRush::AdditionalSwap(int levelindex)
+    {
+    }
 
 	void Challenge_HeroRush::AdditionalPreStart()
 	{
@@ -177,6 +183,36 @@ namespace CloudberryKingdom
 
 		return seed;
 	}
+
+        void Challenge_HeroRush::ShuffleHeros()
+        {
+            HeroTypes.clear();
+
+            for (int i = 0; i < 5; i++)
+            {
+                HeroTypes.push_back(BobPhsxNormal::getInstance());
+                
+                _HeroTypes = Tools::GlobalRnd->Shuffle(_HeroTypes);
+				AddRange( HeroTypes, _HeroTypes );
+
+                HeroTypes.push_back(BobPhsxBox::getInstance());
+
+                _HeroTypes = Tools::GlobalRnd->Shuffle(_HeroTypes);
+                AddRange( HeroTypes, _HeroTypes );
+
+                HeroTypes.push_back(BobPhsxRocketbox::getInstance());
+
+                _HeroTypes = Tools::GlobalRnd->Shuffle(_HeroTypes);
+                AddRange( HeroTypes, _HeroTypes );
+            }
+        }
+
+        void Challenge_HeroRush::Start(int StartLevel)
+        {
+            ShuffleHeros();
+
+            Rush::Start(StartLevel);
+        }
 
 	boost::shared_ptr<BobPhsx> Challenge_HeroRush::GetHero( int i )
 	{

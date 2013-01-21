@@ -26,15 +26,15 @@ namespace CloudberryKingdom
 		static string[] _bits_to_save = new string[] { "xy", "uv", "Color" };
 		public void WriteCode(string prefix, StreamWriter writer)
 		{
-		    Tools.WriteFieldsToCode(this, prefix, writer, _bits_to_save);
+		    Tools::WriteFieldsToCode(this, prefix, writer, _bits_to_save);
 		}
 		public void Write(StreamWriter writer)
 		{
-		    Tools.WriteFields(this, writer, _bits_to_save);
+		    Tools::WriteFields(this, writer, _bits_to_save);
 		}
 		public void Read(StreamReader reader)
 		{
-		    Tools.ReadFields(this, reader);
+		    Tools::ReadFields(this, reader);
 		}*/
 	};
 }

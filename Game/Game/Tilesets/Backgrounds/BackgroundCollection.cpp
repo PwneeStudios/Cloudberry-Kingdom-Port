@@ -84,7 +84,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Camera> Cam = MyLevel->getMainCamera();
 		Cam->SetVertexCamera();
 		//Vector4 cameraPos = new Vector4(Cam.Data.Position.X, Cam.Data.Position.Y, Cam.Zoom.X, Cam.Zoom.Y);
-		//Tools.EffectWad.SetCameraPosition(cameraPos);
+		//Tools::EffectWad.SetCameraPosition(cameraPos);
 	}
 
 	void BackgroundCollection::Draw()

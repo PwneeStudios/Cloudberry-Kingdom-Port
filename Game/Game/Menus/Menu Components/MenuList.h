@@ -34,6 +34,8 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Lambda_2<boost::shared_ptr<MenuListExpand>, boost::shared_ptr<MenuItem> > > AdditionalExpandProcessing;
 		void Expand();
 
+        void Release();
+
 		std::vector<boost::shared_ptr<MenuItem> > MyList;
 		int ListIndex;
 

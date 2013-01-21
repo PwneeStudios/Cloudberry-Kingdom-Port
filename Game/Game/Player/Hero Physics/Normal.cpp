@@ -25,7 +25,7 @@ namespace CloudberryKingdom
 		Name = Localization::Words_CLASSIC_HERO;
 		NameTemplate = std::wstring( L"hero" );
 
-		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * 1.1f);
+		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * 1.1f);
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.2f );
 	}
 
@@ -146,7 +146,7 @@ namespace CloudberryKingdom
 
 	BobPhsxNormal::BobPhsxNormal()
 	{
-		//LandSound = Tools.SoundWad.FindByName("Land");
+		//LandSound = Tools::SoundWad.FindByName("Land");
 
 		InitializeInstanceFields();
 		ThrustSound->MaxInstances = 8;
@@ -1553,7 +1553,7 @@ namespace CloudberryKingdom
 
 		if ( MyBob->CharacterSelect_Renamed )
 			// Use time invariant update
-			//MyBob.PlayerObject.PlayUpdate(1000f * AnimSpeed * Tools.dt / 150f);
+			//MyBob.PlayerObject.PlayUpdate(1000f * AnimSpeed * Tools::dt / 150f);
 			getObj()->PlayUpdate(getObj()->LoadingRunSpeed);
 		else
 			// Fixed speed update

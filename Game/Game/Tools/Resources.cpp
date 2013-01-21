@@ -25,15 +25,26 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzFont> Resources::Font_Grobold42, Resources::Font_Grobold42_2 = 0;
 	boost::shared_ptr<EzFont> Resources::LilFont = 0;
 
+	boost::shared_ptr<HackFont> Resources::hf;
+	boost::shared_ptr<Mutex> Resources::hf_Mutex;
+
 	void Resources::FontLoad()
-	{
-		Resources::Font_Grobold42 = boost::make_shared<EzFont>( std::wstring( L"Fonts/Grobold_42" ), std::wstring( L"Fonts/Grobold_42_Outline" ), -50.f, 40 );
-		Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( std::wstring( L"Fonts/Grobold_42" ), std::wstring( L"Fonts/Grobold_42_Outline2" ), -50.f, 40 );
+    {
+        //hf = new HackFont("Grobold_" + Localization.CurrentLanguage.FontSuffix);
 
-		Resources::LilFont = boost::make_shared<EzFont>( std::wstring( L"Fonts/LilFont" ) );
+        Resources::Font_Grobold42 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline", -50.f, 40);
+        Resources::Font_Grobold42->HFont = boost::make_shared<HackSpriteFont>(hf, 0);
+        Resources::Font_Grobold42->HOutlineFont = boost::make_shared<HackSpriteFont>(hf, 1);
 
-		Tools::Write( _T( "Fonts done..." ) );
-	}
+        Resources::Font_Grobold42_2 = boost::make_shared<EzFont>( L"Fonts/Grobold_42", L"Fonts/Grobold_42_Outline2", -50.f, 40);
+        Resources::Font_Grobold42_2->HFont = boost::make_shared<HackSpriteFont>(hf, 0);
+        Resources::Font_Grobold42_2->HOutlineFont = boost::make_shared<HackSpriteFont>(hf, 2);
+
+        //Resources::LilFont = EzFont( L"Fonts/LilFont");
+        Resources::LilFont = Resources::Font_Grobold42;
+
+        Tools::Write( L"Fonts done...");
+    }
 
 	void Resources::LoadInfo()
 	{
@@ -81,10 +92,10 @@ namespace CloudberryKingdom
 		//if (LoadDynamic)
 		{
 			//if (!AlwaysSkipDynamicArt)
-			//    Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Art);
-			//Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Backgrounds);
-			//Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Animations);
-			//Tools.TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Tilesets);
+			//    Tools::TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Art);
+			//Tools::TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Backgrounds);
+			//Tools::TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Animations);
+			//Tools::TextureWad.LoadAllDynamic(Content, EzTextureWad.WhatToLoad.Tilesets);
 		}
 		//#endif
 
@@ -240,11 +251,15 @@ namespace CloudberryKingdom
 		LoadingResources = boost::make_shared<WrappedBool>( false );
 		LoadingResources->MyBool = true;
 
-		// Fonts
-		FontLoad();
-
 		// Load the art!
 		PreloadArt();
+
+        // Localization
+        Localization::SetLanguage(Localization::Language_ENGLISH);
+        //Localization::SetLanguage(Localization::Language_JAPANESE);
+
+		// Fonts
+		FontLoad();
 
 		// Load the music!
 		LoadMusic( CreateNewWads );
@@ -292,6 +307,8 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 
 	void Resources::_LoadThread()
 	{
+		hf_Mutex = boost::make_shared<Mutex>();
+
 		boost::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
 		Tools::Write( Format( _T( "Load thread starts ... NOW!" ) ).c_str() );
@@ -315,7 +332,7 @@ boost::shared_ptr<Thread> Resources::LoadThread = 0;
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Buttons" ) );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Characters" ) );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
-		//Tools.TextureWad.LoadFolder(Tools.GameClass.Content, "Effects");
+		//Tools::TextureWad.LoadFolder(Tools::GameClass.Content, "Effects");
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"HeroItems" ) );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Initial" ) );
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"LoadScreen_Level" ) );

@@ -87,7 +87,7 @@ boost::shared_ptr<Serpent_AutoGen> Serpent_AutoGen::instance = boost::make_share
 					serpent->getCore()->GenData.LimitGeneralDensity = false;
 
 					// Make sure we stay in bounds
-					//Tools.EnsureBounds_X(serpent, TR, BL);
+					//Tools::EnsureBounds_X(serpent, TR, BL);
 
 					level->AddObject( serpent );
 				}

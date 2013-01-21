@@ -320,7 +320,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		FlameTemplate->MyQuad.Init();
 		FlameTemplate->MyQuad.UseGlobalIllumination = false;
 		FlameTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		FlameTemplate->MyQuad.setMyTexture( Fireball::FlameTexture ); // Tools.TextureWad.FindByName("Fire4");
+		FlameTemplate->MyQuad.setMyTexture( Fireball::FlameTexture ); // Tools::TextureWad.FindByName("Fire4");
 		FlameTemplate->SetSize( 196 ); //106);
 		FlameTemplate->SizeSpeed = Vector2( -.3f, -.3f );
 		FlameTemplate->AngleSpeed = .015f;
@@ -341,7 +341,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 		ThrustTemplate->MyQuad.Init();
 		ThrustTemplate->MyQuad.UseGlobalIllumination = false;
 		ThrustTemplate->MyQuad.MyEffect = Tools::BasicEffect;
-		ThrustTemplate->MyQuad.setMyTexture( Fireball::FlameTexture ); // Tools.TextureWad.FindByName("Fire");
+		ThrustTemplate->MyQuad.setMyTexture( Fireball::FlameTexture ); // Tools::TextureWad.FindByName("Fire");
 		ThrustTemplate->SetSize( 60 ); //33);
 		ThrustTemplate->SizeSpeed = Vector2( -.3f, -.3f );
 		ThrustTemplate->AngleSpeed = .05f;
@@ -456,7 +456,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 	void ParticleEffects::Flame( const boost::shared_ptr<ParticleEmitter> &emitter, Vector2 pos, int frame, float intensity, int life, bool ModFade )
 	{
 		//if (frame % 3 != 0) return;
-		//if (Tools.TheGame.DrawCount % 3 == 0) return;
+		//if (Tools::TheGame.DrawCount % 3 == 0) return;
 
 		boost::shared_ptr<ParticleEmitter> emit = emitter;
 
@@ -652,9 +652,9 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 			p->MyColor *= color;
 
 			p->Data.Position = pos + 75 * Dir;
-			//p.Data.Velocity = 25 * intensity * (float)Tools.GlobalRnd.Rnd.NextDouble() * Dir;
-			//p.Data.Velocity = 18 * intensity * (float)Tools.GlobalRnd.Rnd.NextDouble() * Dir;
-			//p.Data.Velocity = 50 * intensity * (float)Tools.GlobalRnd.Rnd.NextDouble() * Dir;
+			//p.Data.Velocity = 25 * intensity * (float)Tools::GlobalRnd.Rnd.NextDouble() * Dir;
+			//p.Data.Velocity = 18 * intensity * (float)Tools::GlobalRnd.Rnd.NextDouble() * Dir;
+			//p.Data.Velocity = 50 * intensity * (float)Tools::GlobalRnd.Rnd.NextDouble() * Dir;
 			p->Data.Velocity = vel * static_cast<float>( Tools::GlobalRnd->Rnd->NextDouble() ) * Dir;
 				p->Data.Position += Tools::GlobalRnd->RndFloat( 0, 2 ) * p->Data.Velocity;
 			p->Angle = Tools::GlobalRnd->RndFloat( 0, 100 );

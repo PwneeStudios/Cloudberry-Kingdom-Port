@@ -1,5 +1,11 @@
 #include <global_header.h>
 
+#include <Core.h>
+#include <Content/Wad.h>
+#include <Graphics/Types.h>
+#include <Graphics/QuadDrawer.h>
+#include <Utility/Log.h>
+
 #include <Hacks/List.h>
 #include <Hacks/Queue.h>
 
@@ -23,7 +29,7 @@ namespace CloudberryKingdom
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
 	{
 		TitleGameData_MW::InitializeStatics();
-		Tools::InitializeStatics();
+		
 		Globals::InitializeStatics();
 		ButtonCheck::InitializeStatics();
 		PlayerManager::InitializeStatics();
@@ -46,13 +52,13 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::InitializeStatics();
 		Particle::InitializeStatics();
 		
-		CampaignHelper::InitializeStatics();		
+		CampaignHelper::InitializeStatics();
+
+		Awardments::InitializeStatics();
 	}
 
 	void CloudberryKingdomGame::StaticIntializer_AfterResourcesLoad()
 	{
-		Awardments::InitializeStatics();
-		
 		EzText::InitializeStatics();
 
 		BobPhsx::DefaultInfo::InitializeStatics();
@@ -85,6 +91,7 @@ namespace CloudberryKingdom
 		BobPhsxSmall::getInstance()->Set( BobPhsxSmall::getInstance() );
 
 		BobPhsxSpaceship::InitializeStatics();
+		BobPhsxTimeship::InitializeStatics();
 		BobPhsxTime::InitializeStatics();
 		BobPhsxTime::getInstance()->Set( BobPhsxTime::getInstance() );
 
@@ -205,6 +212,52 @@ namespace CloudberryKingdom
 
 Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 
+        bool GodMode = true;
+
+        //bool ForFrapsRecording = true;
+        bool ForFrapsRecording = false;
+
+#if defined(DEBUG)
+        bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
+        bool CloudberryKingdomGame::Unlock_Customization = true;
+        bool CloudberryKingdomGame::Unlock_Levels = false;
+#else
+        bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
+        bool CloudberryKingdomGame::Unlock_Customization = true;
+        bool CloudberryKingdomGame::Unlock_Levels = false;
+#endif
+
+        bool FakeDemo = false;
+        bool CloudberryKingdomGame::getIsDemo()
+        {
+//#if XBOX
+//                return Guide.IsTrialMode;
+//#endif
+                return false;
+        }
+
+        static void OfferToBuy(SignedInGamer gamer)
+        {
+//#if XBOX
+//            if (gamer.Privileges.AllowPurchaseContent)
+//            {
+//                Guide.ShowMarketplace(gamer.PlayerIndex);
+//                return;
+//            }
+//
+//            foreach (SignedInGamer _gamer in Gamer.SignedInGamers)
+//            {
+//                if (_gamer.Privileges.AllowPurchaseContent)
+//                {
+//                    Guide.ShowMarketplace(_gamer.PlayerIndex);
+//                    return;
+//                }
+//            }
+//#endif
+        }
+
+
+
 bool CloudberryKingdomGame::StartAsBackgroundEditor = false;
 bool CloudberryKingdomGame::StartAsTestLevel = false;
 bool CloudberryKingdomGame::StartAsBobAnimationTest = false;
@@ -239,30 +292,6 @@ float CloudberryKingdomGame::fps = 0;
 	{
 		_DrawMouseBackIcon = value;
 	}
-#endif
-
-#if defined(DEBUG) || defined(INCLUDE_EDITOR)
-bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
-#endif
-
-#if defined(DEBUG) || defined(INCLUDE_EDITOR)
-bool CloudberryKingdomGame::UnlockAll = true;
-#endif
-
-#if defined(DEBUG) || defined(INCLUDE_EDITOR)
-bool CloudberryKingdomGame::SimpleAiColors = false;
-#endif
-
-#if ! (defined(DEBUG) || defined(INCLUDE_EDITOR))
-bool CloudberryKingdomGame::AlwaysGiveTutorials = false;
-#endif
-
-#if ! (defined(DEBUG) || defined(INCLUDE_EDITOR))
-bool CloudberryKingdomGame::UnlockAll = true;
-#endif
-
-#if ! (defined(DEBUG) || defined(INCLUDE_EDITOR))
-bool CloudberryKingdomGame::SimpleAiColors = false;
 #endif
 
 	void CloudberryKingdomGame::Exit()
@@ -329,43 +358,26 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		ButtonString::Init();
 		ButtonCheck::Reset();
 
-		// Volume control
-		Tools::SoundVolume = boost::make_shared<WrappedFloat>();
-		Tools::SoundVolume->MinVal = 0;
-		Tools::SoundVolume->MaxVal = 1;
-		Tools::SoundVolume->setVal( .7f );
+		// Fill the pools
+		ComputerRecording::InitPool();
+	}
 
-		Tools::MusicVolume = boost::make_shared<WrappedFloat>();
-		Tools::MusicVolume->MinVal = 0;
-		Tools::MusicVolume->MaxVal = 1;
-		Tools::MusicVolume->setVal( 1 );
-		Tools::MusicVolume->SetCallback = boost::make_shared<UpdateVolumeProxy>();
-
-	#if defined(DEBUG) || defined(INCLUDE_EDITOR)
-		Tools::SoundVolume->setVal( 0 );
-		Tools::MusicVolume->setVal( 0 );
-	#endif
-
+	void CloudberryKingdomGame::InitialResolution()
+	{
 	#if defined(PC_VERSION)
 		// The PC version let's the player specify resolution, key mapping, and so on.
 		// Try to load these now.
 		RezData rez;
 
-		//PlayerManager.SavePlayerData = new _SavePlayerData();
-		//PlayerManager.SavePlayerData.ContainerName = "PlayerData";
-		//PlayerManager.SavePlayerData.FileName = "PlayerData.hsc";
-		//PlayerManager.SaveRezAndKeys();
-		//rez = PlayerManager.LoadRezAndKeys();
-		//Tools.Warning();
-		try
-		{
-			rez = PlayerManager::LoadRezAndKeys();
-		}
-		catch ( ... )
-		{
-			rez = RezData();
-			rez.Custom = false;
-		}
+		//PlayerManager::SavePlayerData = new _SavePlayerData();
+		//PlayerManager::SavePlayerData.ContainerName = "PlayerData";
+		//PlayerManager::SavePlayerData.FileName = "PlayerData.hsc";
+		//PlayerManager::SaveRezAndKeys();
+		//rez = PlayerManager::LoadRezAndKeys();
+		//Tools::Warning();
+
+		rez = PlayerManager::LoadRezAndKeys();
+
 	#elif defined(WINDOWS)
 		PlayerManager::RezData rez = PlayerManager::RezData();
 		rez.Custom = true;
@@ -452,9 +464,6 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		MyGraphicsDeviceManager->ApplyChanges();
 
-		// Fill the pools
-		ComputerRecording::InitPool();
-
 		fps = 0;
 	}
 
@@ -487,7 +496,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		boost::shared_ptr<CloudberryKingdom::CloudberryKingdomGame> Ck = Tools::TheGame;
 
 		//BenchmarkLoadSize();
-		//Tools.Warning();
+		//Tools::Warning();
 
 		MyGraphicsDevice = MyGraphicsDeviceManager->MyGraphicsDevice;
 
@@ -529,14 +538,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//Thread::CurrentThread->CurrentCulture = System::Globalization::CultureInfo::InvariantCulture;
 		SaveGroup::Initialize();
 
-		// Localization
-		Localization::SetLanguage( Localization::Language_ENGLISH );
-		//Localization.SetLanguage(Localization.Language.Portuguese);
-
 		// Benchmarking and preprocessing
 		//PreprocessArt();
 		//BenchmarkAll();
-		//Tools.Warning(); return;
+		//Tools::Warning(); return;
 
 		//_LoadThread(); return;
 
@@ -612,6 +617,89 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		ToDo->Clear();
 	}
 
+        void CloudberryKingdomGame::GodModePhxs()
+        {
+#if !DEBUG
+			// Turn on/off immortality.
+			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+			{
+				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+				{
+					( *bob )->Immortal = !( *bob )->Immortal;
+				}
+			}
+#endif
+            // Give 100,000 points to each player
+            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
+            {
+				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+				{
+					( *bob )->getMyStats()->Score += 100000;
+				}
+            }
+
+            // Kill everyone but Player One
+            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_U ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_U ) )
+            {
+				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+				{
+                    if (( *bob )->MyPlayerIndex != 0 && !(( *bob )->Dead || ( *bob )->Dying))
+                    {
+                        //Fireball.Explosion(bob.Core.Data.Position, bob.Core.MyLevel);
+                        //Fireball.ExplodeSound.Play();
+
+                        //bob.Core.Show = false;
+                        //bob.Dead = true;
+
+                        ( *bob )->Die( BobDeathType_OTHER, true, false);
+                    }
+                }
+            }
+
+            // Turn on/off flying.
+            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+            {
+				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+				{
+                    ( *bob )->Flying = !( *bob )->Flying;
+                }
+            }
+
+            // Go to last door
+            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
+            {
+                // Find last door
+                if ( Tools::CurLevel != 0 )
+                {
+                    boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
+
+                    if (0 != door)
+                    {
+                        for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+                        {
+                            ( *bob )->Immortal = true;
+                            Tools::MoveTo( ( *bob ), door->getPos() );
+                        }
+
+						for ( ObjectVec::const_iterator obj = Tools::CurLevel->Objects.begin(); obj != Tools::CurLevel->Objects.end(); obj++ )
+                        {
+                            boost::shared_ptr<CameraZone> zone = boost::dynamic_pointer_cast<CameraZone>( ( *obj ) );
+                            
+							if ( 0 != zone )
+                            {
+                                if (Tools::CurLevel->getMainCamera()->MyZone == 0 ||
+                                    Tools::CurLevel->getMainCamera()->MyZone->Box->Current->BL.X <= zone->Box->Current->BL.X)
+                                {
+                                    Tools::CurLevel->getMainCamera()->MyZone = zone;
+                                    Tools::CurLevel->getMainCamera()->setPos( zone->End );
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 	void CloudberryKingdomGame::PhsxStep()
 	{
 		DoToDoList();
@@ -621,6 +709,14 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		if ( DebugModePhsx() )
 			return;
 	#endif
+
+#if defined(DEBUG)
+            GodModePhxs();
+#else
+            if (GodMode)
+                GodModePhxs();
+#endif
+
 
 		// Do game update.
 		if ( !Tools::StepControl || ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_Enter ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_Enter ) ) )
@@ -722,8 +818,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	{
 		//var TargetElapsedTime = new TimeSpan(0, 0, 0, 0, (int)(1000f / 60f));
 		//var TargetElapsedTime = new TimeSpan(0, 0, 0, 0, (int)(1000f / 10f));
-		//Tools.GameClass.TargetElapsedTime = TargetElapsedTime;
-		//Tools.GameClass.IsFixedTimeStep = true;
+		//Tools::GameClass.TargetElapsedTime = TargetElapsedTime;
+		//Tools::GameClass.IsFixedTimeStep = true;
 	}
 
 	void CloudberryKingdomGame::Draw( const boost::shared_ptr<GameTime> &gameTime )
@@ -900,6 +996,8 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		Tools::Render->SetStandardRenderStates();
 
+		QUAD_DRAWER->SetEffect( Tools::BasicEffect->effect );
+
 		return false;
 	}
 
@@ -987,7 +1085,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		Start();
 		Tools::TextureWad->LoadFolder( Tools::GameClass->getContent(), std::wstring( L"Coins" ) );
-		//Tools.TextureWad.LoadFolder(Tools.GameClass.Content, "Effects");
+		//Tools::TextureWad.LoadFolder(Tools::GameClass.Content, "Effects");
 		long long LoadEffects = Stop();
 
 		Start();
@@ -1147,9 +1245,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		}
 
 		//// Give award
-		//if (Tools.keybState.IsKeyDown(Keys.S) && !Tools.PrevKeyboardState.IsKeyDown(Keys.S))
+		//if (Tools::keybState.IsKeyDown(Keys.S) && !Tools::PrevKeyboardState.IsKeyDown(Keys.S))
 		//{
-		//    Awardments.GiveAward(Awardments.UnlockHeroRush2);
+		//    Awardments::GiveAward(Awardments::UnlockHeroRush2);
 		//}
 
 		if ( !KeyboardExtension::Freeze && KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_F ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_F ) )
@@ -1199,12 +1297,12 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 			for ( std::vector<boost::shared_ptr<BobPhsx> >::const_iterator hero = Bob::HeroTypes.begin(); hero != Bob::HeroTypes.end(); ++hero )
 				( *hero )->ResetInfo();
 
-			//Tools.TextureWad.LoadAllDynamic(Tools.GameClass.Content, EzTextureWad.WhatToLoad.Animations);
+			//Tools::TextureWad.LoadAllDynamic(Tools::GameClass.Content, EzTextureWad.WhatToLoad.Animations);
 
 			//LoadInfo();
 
 			//// Reset blocks
-			//foreach (BlockBase block in Tools.CurLevel.Blocks)
+			//foreach (BlockBase block in Tools::CurLevel.Blocks)
 			//{
 			//    NormalBlock nblock = block as NormalBlock;
 			//    if (null != nblock) nblock.ResetPieces();
@@ -1295,9 +1393,9 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 				Tools::CurLevel->getMainCamera()->EffectiveZoom /= .99f;
 			}
 
-			// Turn on/off FreeCam, which allows the user to pan the camera through the level freely.
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
-				Tools::FreeCam = !Tools::FreeCam;
+			//// Turn on/off FreeCam, which allows the user to pan the camera through the level freely.
+			//if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
+			//	Tools::FreeCam = !Tools::FreeCam;
 		}
 #endif // #if defined(WINDOWS)
 
@@ -1318,8 +1416,6 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::DrawDebugInfo()
 	{
-		Tools::StartSpriteBatch();
-
 		//if ( Tools::ShowNums )
 		//{
 		//	std::wstring nums = Tools::Num_0_to_2 + std::wstring( L"\n\n" ) + Tools::Num_0_to_360;
@@ -1333,19 +1429,19 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	#if defined(WINDOWS)
 		// Grace period for falling
 		//string str = "";
-		//if (Tools.CurLevel != null && Tools.CurLevel.Bobs.Count > 0)
+		//if (Tools::CurLevel != null && Tools::CurLevel.Bobs.Count > 0)
 		//{
-		//    //var phsx = Tools.CurLevel.Bobs[0].MyPhsx as BobPhsxNormal;
+		//    //var phsx = Tools::CurLevel.Bobs[0].MyPhsx as BobPhsxNormal;
 		//    //if (null != phsx) str = phsx.FallingCount.ToString();
 
-		//    var phsx = Tools.CurLevel.Bobs[0].MyPhsx as BobPhsxMeat;
+		//    var phsx = Tools::CurLevel.Bobs[0].MyPhsx as BobPhsxMeat;
 		//    //if (null != phsx) str = phsx.WallJumpCount.ToString();
 		//    if (null != phsx) str = phsx.StepsSinceSide.ToString();
 		//}
 
 		// Mouse
-		//string str = string.Format("Mouse delta: {0}", Tools.DeltaMouse);
-		//string str = string.Format("Mouse in window: {0}", Tools.MouseInWindow);
+		//string str = string.Format("Mouse delta: {0}", Tools::DeltaMouse);
+		//string str = string.Format("Mouse in window: {0}", Tools::MouseInWindow);
 
 		// VPlayer
 		//string str = "";
@@ -1363,10 +1459,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		std::wstring str = debugstring;
 
 		// Phsx count
-		//string str  = string.Format("CurLevel PhsxStep: {0}\n", Tools.CurLevel.CurPhsxStep);
+		//string str  = string.Format("CurLevel PhsxStep: {0}\n", Tools::CurLevel.CurPhsxStep);
 
 		// Score
-		//PlayerData p = PlayerManager.Get(0);
+		//PlayerData p = PlayerManager::Get(0);
 		//string str = string.Format("Death {0}, {1}, {2}, {3}, {4}", p.TempStats.TotalDeaths, p.LevelStats.TotalDeaths, p.GameStats.TotalDeaths, p.CampaignStats.TotalDeaths, Campaign.Attempts);
 		//Campaign.CalcScore();
 		//string str2 = string.Format("Coins {0}, {1}, {2}, {3}, {4}", p.TempStats.Coins, p.LevelStats.Coins, p.GameStats.Coins, p.CampaignStats.Coins, Campaign.Coins);
@@ -1388,8 +1484,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		//str = string.Format("{0,-5} {1,-5} {2,-5} {3,-5} {4,-5}", Level.Pre1, Level.Step1, Level.Pre2, Level.Step2, Level.Post);
 
-		Tools::Render->MySpriteBatch->DrawString( Resources::LilFont->Font, str, Vector2( 0, 100 ), Color::Orange, 0, Vector2(), Vector2(1), SpriteEffects_None, 0 );
-		Tools::Render->EndSpriteBatch();
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, str, Vector2(0, 100), Color::Orange.ToVector4(), Vector2(1) );
 	}
 
 	void CloudberryKingdomGame::MakeEmptyLevel()
@@ -1414,10 +1509,10 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 	void CloudberryKingdomGame::MakeTestLevel()
 	{
-		//PlayerManager.Players[0].Exists = true;
-		//PlayerManager.Players[1].Exists = true;
-		//PlayerManager.Players[2].Exists = true;
-		//PlayerManager.Players[3].Exists = true;
+		//PlayerManager::Players[0].Exists = true;
+		//PlayerManager::Players[1].Exists = true;
+		//PlayerManager::Players[2].Exists = true;
+		//PlayerManager::Players[3].Exists = true;
 
 		boost::shared_ptr<LevelSeedData> data = boost::make_shared<LevelSeedData>();
 
@@ -1446,11 +1541,11 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 
 		//data.SetTileSet(TileSets.Dungeon);
 
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Wheel, Hero_Shape.Small, Hero_MoveMod.Jetpack);
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Bouncy, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Box, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Classic, Hero_Shape.Small, Hero_MoveMod.Double);
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Wheel, Hero_Shape.Small, Hero_MoveMod.Double);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Wheel, Hero_Shape.Small, Hero_MoveMod.Jetpack);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Bouncy, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Box, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Classic, Hero_Shape.Small, Hero_MoveMod.Double);
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Wheel, Hero_Shape.Small, Hero_MoveMod.Double);
 
 		data->DefaultHeroType = BobPhsxNormal::getInstance();
 		//data.DefaultHeroType = BobPhsxBouncy.Instance;
@@ -1468,18 +1563,18 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 		//data.DefaultHeroType = BobPhsxBox.Instance;
 
 		// 8-jumps
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Classic, Hero_Shape.Classic, Hero_MoveMod.Double);
-		//var d = new BobPhsx.CustomPhsxData();
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Classic, Hero_Shape.Classic, Hero_MoveMod.Double);
+		//var d = new BobPhsx::CustomPhsxData();
 		//d.Init();
-		//d[BobPhsx.CustomData.numjumps] = 2;
+		//d[BobPhsx::CustomData.numjumps] = 2;
 		//data.DefaultHeroType.SetCustomPhsx(d);
 
 		// Long jetpack
-		//data.DefaultHeroType = BobPhsx.MakeCustom(Hero_BaseType.Classic, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
-		//var d = new BobPhsx.CustomPhsxData();
+		//data.DefaultHeroType = BobPhsx::MakeCustom(Hero_BaseType.Classic, Hero_Shape.Classic, Hero_MoveMod.Jetpack);
+		//var d = new BobPhsx::CustomPhsxData();
 		//d.Init();
-		//d[BobPhsx.CustomData.jetpackfuel] *= 2;
-		//d[BobPhsx.CustomData.jetpackaccel] *= 2;
+		//d[BobPhsx::CustomData.jetpackfuel] *= 2;
+		//d[BobPhsx::CustomData.jetpackaccel] *= 2;
 		//data.DefaultHeroType.SetCustomPhsx(d);
 
 
@@ -1539,7 +1634,7 @@ bool CloudberryKingdomGame::SimpleAiColors = false;
 	void CloudberryKingdomGame::TestLevelInit( const boost::shared_ptr<PieceSeedData> &piece )
 	{
 		//writelist();
-		//Tools.Write("!");
+		//Tools::Write("!");
 
 		//piece.ZoomType = LevelZoom.Big;
 		piece->ExtraBlockLength = 1000;

@@ -385,7 +385,7 @@ namespace CloudberryKingdom
 		if ( ButtonCheck::MouseInUse )
 		{
 			/*
-			if (Tools.MouseDown())
+			if (Tools::MouseDown())
 			    NoneSelected = false;
 			else*/
 		{

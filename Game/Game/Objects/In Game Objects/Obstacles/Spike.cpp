@@ -317,7 +317,7 @@ namespace CloudberryKingdom
 			MyQuad->setPos( getPos() );
 			MyQuad->Draw();
 
-			//MyBaseQuad.Quad.MyEffect = Tools.EffectWad.FindByName("Hsl");
+			//MyBaseQuad.Quad.MyEffect = Tools::EffectWad.FindByName("Hsl");
 			MyBaseQuad->setPos( getPos() );
 			MyBaseQuad->Draw();
 		}

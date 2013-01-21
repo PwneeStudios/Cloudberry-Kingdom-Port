@@ -34,31 +34,33 @@ inline std::wstring ToString<DateTime>( const DateTime &dt )
 //	return s;
 //}
 
-inline int ParseInt( const std::wstring &s )
+inline bool ParseInt( const std::wstring &s, int &val )
 {
 	using namespace std;
 
-	int num = 0;
 	wstringstream converter;
 
 	converter << s;
-	converter >> num;
+	converter >> val;
 
-	return num;
+	if ( !converter ) return false;
+
+	return true;
 }
 
 // FIXME: do we need to specify precision or anything here?
-inline float ParseFloat( const std::wstring &s )
+inline float ParseFloat( const std::wstring &s, float &val )
 {
 	using namespace std;
 
-	float num = 0;
 	wstringstream converter;
 
 	converter << s;
-	converter >> num;
+	converter >> val;
 
-	return num;
+	if ( !converter ) return false;
+
+	return true;
 }
 
 #endif

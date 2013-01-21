@@ -23,6 +23,7 @@ namespace CloudberryKingdom
 		IsAlive( false ),
 		CampaignLevel( 0 ),
 		CampaignCoins( 0 ),
+		CampaignIndex( 0 ),
 		MyIndex( 0 ),
 		RandomNameIndex( 0 ),
 		KeyboardUsedLast( 0 ),
@@ -61,6 +62,7 @@ namespace CloudberryKingdom
 		// Campaign (Chunks 100 and up)
 		Chunk::WriteSingle( writer, 100, CampaignCoins );
 		Chunk::WriteSingle( writer, 101, CampaignLevel );
+		Chunk::WriteSingle( writer, 102, CampaignIndex );
 	}
 
 	void PlayerData::FailLoad()
@@ -133,9 +135,55 @@ namespace CloudberryKingdom
 				case 101:
 					CampaignLevel = chunk->ReadInt();
 					break;
+				case 102:
+					CampaignIndex = chunk->ReadInt();
+					break;
 			}
 		}
 	}
+
+        int PlayerData::GetTotalLevel()
+        {
+            return GetTotalArcadeLevel() + GetTotalCampaignLevel();
+        }
+
+        int PlayerData::GetTotalCampaignLevel()
+        {
+            return CampaignLevel;
+        }
+
+        int PlayerData::GetTotalCampaignIndex()
+        {
+            return CampaignIndex;
+        }
+
+        int PlayerData::GetTotalArcadeLevel()
+        {
+            int level = 0;
+            int id;
+
+			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator game = 
+				ArcadeMenu::HeroArcadeList.begin(); game != ArcadeMenu::HeroArcadeList.end(); ++game )
+            {
+                id = Challenge_Escalation::getInstance()->CalcGameId_Level(game->first);
+                if ( Contains( HighScores, id ) )
+                    level += HighScores[id]->Value;
+
+                id = Challenge_TimeCrisis::getInstance()->CalcGameId_Level(game->first);
+                if ( Contains( HighScores, id ) )
+                    level += HighScores[id]->Value;
+
+                id = Challenge_HeroRush::getInstance()->CalcGameId_Level(game->first);
+                if ( Contains( HighScores, id ) )
+                    level += HighScores[id]->Value;
+
+                id = Challenge_HeroRush2::getInstance()->CalcGameId_Level(game->first);
+                if ( Contains( HighScores, id ) )
+                    level += HighScores[id]->Value;
+            }
+
+            return level;
+        }
 
 	int PlayerData::GetHighScore( int GameId )
 	{

@@ -23,6 +23,15 @@ namespace CloudberryKingdom
 	struct Challenge : public boost::enable_shared_from_this<Challenge>
 	{
 
+		static int Coins;
+
+		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
+		{
+		
+			void Apply( const boost::shared_ptr<ObjectBase> &obj );
+
+		};
+
 	
 		struct PassGetSeedAsLambda : public LambdaFunc_1<int, boost::shared_ptr<LevelSeedData> >
 		{
@@ -62,7 +71,8 @@ namespace CloudberryKingdom
 	
 		int GameTypeId;
 
-	
+		int CalcTopGameLevel(boost::shared_ptr<BobPhsx> hero);
+		int CalcGameId_Level(boost::shared_ptr<BobPhsx> hero);
 		int SetGameId();
 
 	
@@ -71,7 +81,6 @@ namespace CloudberryKingdom
 		/// <summary>
 		/// Get the top score that anyone on this machine has ever gotten.
 		/// </summary>
-	
 		int TopScore();
 
 		/// <summary>
@@ -83,12 +92,17 @@ namespace CloudberryKingdom
 		/// Get the top score that anyone playing has ever gotten.
 		/// </summary>
 		int TopPlayerScore();
+		int TopPlayerScore( boost::shared_ptr<BobPhsx> hero );
 
 		/// <summary>
 		/// Get the highest level that anyone playing has ever gotten.
 		/// </summary>
 		int TopPlayerLevel();
 
+        /// <summary>
+        /// Get the top score that anyone playing has ever gotten.
+        /// </summary>
+        int TopPlayerScore(BobPhsx hero);
 	
 		virtual void ShowEndScreen();
 

@@ -162,7 +162,7 @@ namespace CloudberryKingdom
 	void Bob::SetColorScheme( ColorScheme scheme )
 	{
 		//scheme = ColorSchemeManager.ColorSchemes[2];
-		//Tools.Write(scheme.ToString());
+		//Tools::Write(scheme.ToString());
 
 		if ( BoxesOnly || PlayerObject->QuadList.empty() )
 			return;
@@ -316,6 +316,7 @@ namespace CloudberryKingdom
 		SaveNoBlock( false ),
 		PlaceDelay( 0 ),
 		PlaceTimer( 0 ),
+		Flying( false ),
 		Immortal( false ), DoNotTrackOffScreen( false ),
 		TopCol( false ), BottomCol( false ),
 		CompControl( false ), CharacterSelect_Renamed( false ), CharacterSelect2( false ), Cinematic( false ), DrawWithLevel( false ), AffectsCamera( false ),
@@ -324,6 +325,7 @@ namespace CloudberryKingdom
 		CodeControl( false ),
 		MyPieceIndex( 0 ),
 		MyPieceIndexOffset( 0 ),
+		DeadCount( 0 ),
 		Dying( false ), Dead( false ), FlamingCorpse( false ),
 		BoxesOnly( false ),
 		ScreenWrap( false ), ScreenWrapToCenter( false ), CollideWithCamera( false ),
@@ -640,6 +642,7 @@ namespace CloudberryKingdom
 		GroundSpeed = 0;
 
 		Dead = Dying = false;
+		DeadCount = 0;
 
 		Move( StartData.Position - getCore()->Data.Position );
 		getCore()->StartData = getCore()->Data = StartData;
@@ -789,7 +792,7 @@ namespace CloudberryKingdom
 
 		// Check to see if any other players are alive
 		/*
-		if (PlayerManager.AllDead())
+		if (PlayerManager::AllDead())
 		{
 		    // Check to see if we should give a hint about quickspawning
 		    if (Hints.CurrentGiver != null)
@@ -803,6 +806,7 @@ namespace CloudberryKingdom
 		if ( !Dead && ( ( IsVisible() && getCore()->Show && getCore()->Data.Position.Y < getCore()->MyLevel->getMainCamera()->BL.Y - getGame()->DoneDyingDistance ) || (!IsVisible() && DeathCount > getGame()->DoneDyingCount) ) )
 		{
 			Tools::CurGameData->BobDoneDying( getCore()->MyLevel, boost::static_pointer_cast<Bob>( shared_from_this() ) );
+			if (!Dead && !Dying) DeadCount = 0;
 			Dead = true;
 		}
 
@@ -873,7 +877,7 @@ namespace CloudberryKingdom
 				}
 
 				// If multiplayer, decrease the bob's camera weight
-				//if (Moved && PlayerManager.GetNumPlayers() > 1)
+				//if (Moved && PlayerManager::GetNumPlayers() > 1)
 				//{
 				//    CameraWeight = 0;
 				//    CameraWeightSpeed = .01f;
@@ -1313,7 +1317,7 @@ namespace CloudberryKingdom
 
 		if ( MyPhsx->IsTopCollision( Col, box, block ) )
 		{
-			//if (Col != ColType.Top) Tools.Write(0);
+			//if (Col != ColType.Top) Tools::Write(0);
 
 			Col = ColType_TOP;
 
@@ -1375,8 +1379,8 @@ namespace CloudberryKingdom
 					TopCol = true;
 				}
 
-				//if (Col == ColType.Right) Tools.Write(0);
-				//if (Col == ColType.Left) Tools.Write(0);
+				//if (Col == ColType.Right) Tools::Write(0);
+				//if (Col == ColType.Left) Tools::Write(0);
 
 				if ( MyPhsx->IsBottomCollision( Col, box, block ) )
 					Col = ColType_BOTTOM;
@@ -1602,6 +1606,13 @@ namespace CloudberryKingdom
 		MyPhsx->OnGround = true;
 	}
 
+    void Bob::FlyingPhsx()
+    {
+        MyPhsx->setVel( MyPhsx->getVel() * .985f );
+
+        MyPhsx->setVel( MyPhsx->getVel() + CurInput.xVec );
+    }
+
 	void Bob::PhsxStep()
 	{
 		DoLightSourceFade();
@@ -1634,6 +1645,8 @@ namespace CloudberryKingdom
 		if ( MyBobLinks.size() > 0 )
 			for ( std::vector<boost::shared_ptr<BobLink> >::const_iterator link = MyBobLinks.begin(); link != MyBobLinks.end(); ++link )
 				( *link )->PhsxStep( boost::static_pointer_cast<Bob>( shared_from_this() ) );
+
+		if (Dead || Dying) DeadCount++;
 
 		if ( Dying )
 		{
@@ -1722,7 +1735,10 @@ namespace CloudberryKingdom
 		if ( MyPhsx->OnGround )
 			Windx /= 2;
 		getCore()->Data.Velocity.X -= Windx;
-		MyPhsx->PhsxStep();
+        if (Flying)
+            FlyingPhsx();
+        else
+			MyPhsx->PhsxStep();
 		getCore()->Data.Velocity.X += Windx;
 		MyPhsx->CopyPrev();
 		if ( MoveData.InvertDirX )
@@ -1967,7 +1983,7 @@ namespace CloudberryKingdom
 									if ( !Delete )
 									{
 										//if (Col == ColType.Bottom && !block.Core.GenData.Used)
-										//    Tools.Write("");
+										//    Tools::Write("");
 
 										//if (!MyPhsx.SkipInteraction(block))
 											InteractWithBlock( ( *block )->getBox(), *block, Col );

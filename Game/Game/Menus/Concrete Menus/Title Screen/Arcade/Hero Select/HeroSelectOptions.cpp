@@ -180,7 +180,13 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::Go( const boost::shared_ptr<MenuItem> &item )
 	{
-		boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( MyArcadeItem->MyChallenge->TopPlayerLevel() ) );
+        boost::shared_ptr<HeroItem> _item = boost::dynamic_pointer_cast<HeroItem>( HeroSelect->MyMenu->getCurItem() );
+        if ( 0 == _item ) return;
+        int TopLevelForHero = MyArcadeItem->MyChallenge->CalcTopGameLevel( _item->Hero );
+        //int TopLevelForHero = MyArcadeItem.MyChallenge.TopPlayerLevel();
+
+		boost::shared_ptr<StartLevelMenu> levelmenu = MakeMagic( StartLevelMenu, ( TopLevelForHero ) );
+
 
 		levelmenu->MyMenu->SelectItem( StartLevelMenu::PreviousMenuIndex );
 		levelmenu->StartFunc = boost::make_shared<StartFuncProxy>( boost::static_pointer_cast<ArcadeBaseMenu>( shared_from_this() ) );

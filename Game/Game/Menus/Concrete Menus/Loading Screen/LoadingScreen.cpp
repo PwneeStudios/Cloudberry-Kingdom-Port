@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 		TextObject.reset();
 
 		boost::shared_ptr<BobPhsx> type;
-		//if (Tools.WorldMap != null)
+		//if (Tools::WorldMap != null)
 		if ( Tools::CurGameData == 0 || Tools::CurGameData->DefaultHeroType == 0 )
 			type = Tools::WorldMap->DefaultHeroType;
 		else
@@ -82,9 +82,9 @@ namespace CloudberryKingdom
 			Vector2 size = CenterObject->BoxList[ 0 ]->Size();
 			float ratio = size.Y / size.X;
 			int width = Tools::TheGame->Resolution.Bob_Renamed.X;
-			CenterObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, width, static_cast<int>( width * ratio ) ); //Tools.Device.PresentationParameters.BackBufferWidth / 4, Tools.Device.PresentationParameters.BackBufferHeight / 4);
+			CenterObject->FinishLoading( Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device->PP, width, static_cast<int>( width * ratio ) ); //Tools::Device.PresentationParameters.BackBufferWidth / 4, Tools::Device.PresentationParameters.BackBufferHeight / 4);
 
-			//CenterObject.FinishLoading(Tools.QDrawer, Tools.Device, Tools.TextureWad, Tools.EffectWad, Tools.Device.PresentationParameters, 400, 550);
+			//CenterObject.FinishLoading(Tools::QDrawer, Tools::Device, Tools::TextureWad, Tools::EffectWad, Tools::Device.PresentationParameters, 400, 550);
 			CenterObject->ParentQuad->Scale( Vector2( 1.35f, 1.35f ) );
 			CenterObject->Read( 1, 0 );
 			CenterObject->EnqueueAnimation( 1, 0, true );

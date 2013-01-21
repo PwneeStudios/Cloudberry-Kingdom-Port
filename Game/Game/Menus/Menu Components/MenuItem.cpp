@@ -88,7 +88,7 @@ namespace CloudberryKingdom
 	{
 		_OverrideA = value;
 		//if (value && this is MenuSliderBase)
-		//    Tools.Write("");
+		//    Tools::Write("");
 	}
 
 	const std::wstring MenuItem::getMyString() const

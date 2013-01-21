@@ -169,7 +169,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 			Hat::FireHead = hat;
 		//hat = new Hat("Hat_Ghost");
-		//hat.Name = Localization.Words.Ghost;
+		//hat.Name = Localization::Words_Ghost;
 		//hat.Price = Hat.Cheap;
 		//hat.Guid = 25;
 		//    hat.HatPicScale *= .8f;
@@ -197,7 +197,7 @@ namespace CloudberryKingdom
 		//hat = new Hat("", false);
 		//hat.Price = Hat.Mid;
 		//hat.Guid = 29;
-		//    hat.HatPicTexture = Tools.TextureWad.FindByName("QM_Happy");
+		//    hat.HatPicTexture = Tools::TextureWad.FindByName("QM_Happy");
 		//    hat.HatPicScale *= .85f;
 		//    HatInfo.Add(hat);
 		//    Hat.NoHead = hat;
@@ -463,7 +463,7 @@ namespace CloudberryKingdom
 
 
 		//hat = new Hat("Hat_Cattails", true, false);
-		//hat.HatPicTexture = Tools.TextureWad.FindByName("HatPic_Horns");
+		//hat.HatPicTexture = Tools::TextureWad.FindByName("HatPic_Horns");
 		//HatInfo.Add(hat);
 
 

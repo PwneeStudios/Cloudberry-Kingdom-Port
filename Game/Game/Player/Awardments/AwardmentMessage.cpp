@@ -22,16 +22,17 @@ namespace CloudberryKingdom
 
 		MakeBackdrop();
 
-		SetText( award );
+		boost::shared_ptr<EzText> Title, Description;
 
-		boost::shared_ptr<EzText> Title;
-		if ( award->Unlockable == 0 )
-			Title = boost::make_shared<EzText>( std::wstring( L"" ), Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
-		else
-			Title = boost::make_shared<EzText>( award->Name, Resources::Font_Grobold42_2, 1800.f, false, false,.575f );
-		Title->setPos( Vector2( -1726.192f, 369.0475f ) );
-		Title->setScale( Title->getScale() * .79f );
-		MyPile->Add( Title );
+        Title = boost::make_shared<EzText>(award->TitleType, Resources::Font_Grobold42_2, 1800.f, false, false, .575f);
+        Title->setPos( Vector2(-1726.192f, 300) );
+        Title->_Scale *= .6f;
+        MyPile->Add(Title);
+
+        Description = boost::make_shared<EzText>(award->Description, Resources::Font_Grobold42_2, 1800.f, true, true, .575f);
+        Description->setPos( Vector2(0, 100) );
+        Description->_Scale *= .6f;
+        MyPile->Add(Description);
 
 		return boost::static_pointer_cast<AwardmentMessage>( shared_from_this() );
 	}
@@ -61,45 +62,6 @@ namespace CloudberryKingdom
 
 		Kill( true );
 		Active = false;
-	}
-
-	void AwardmentMessage::SetText( const boost::shared_ptr<Awardment> &award )
-	{
-		std::wstring text = award->Name;
-
-		// Erase previous text
-		MyPile->MyTextList.clear();
-
-		// Add the new text
-		Text = boost::make_shared<EzText>( text, ItemFont, 1800.f, false, false, .575f );
-
-		if ( award->Unlockable == 0 )
-		{
-			Text->setScale( Text->getScale() * 1.15f );
-			MyPile->Add( Text );
-
-			Vector2 size = Text->GetWorldSize();
-			Text->setPos( Vector2( -size.X / 2 - 350, size.Y *.85f ) + Vector2( 38, 32 ) );
-		}
-		else
-		{
-			Text->setScale( Text->getScale() * .74f );
-			MyPile->Add( Text );
-			SizeAndPosition();
-		}
-	}
-
-	void AwardmentMessage::SizeAndPosition()
-	{
-		Vector2 size = Text->GetWorldSize();
-		float MaxSize = 1200;
-		if ( size.X > MaxSize )
-			Text->setScale( Text->getScale() * MaxSize / size.X );
-
-		size = Text->GetWorldSize();
-		Text->setPos( Vector2( -size.X / 2 - 350, size.Y *.85f ) );
-
-		Text->setPos( Text->getPos() + Vector2(0, -42) );
 	}
 
 	void AwardmentMessage::MyPhsxStep()

@@ -248,7 +248,7 @@ namespace CloudberryKingdom
 
 		if ( Tools::DrawBoxes )
 		{
-			//MyBox.Draw(Tools.QDrawer, Color.Olive, 15);
+			//MyBox.Draw(Tools::QDrawer, Color.Olive, 15);
 			MyBox->DrawFilled( Tools::QDrawer, Color::SpringGreen );
 		}
 
@@ -256,7 +256,7 @@ namespace CloudberryKingdom
 		{
 			if ( !getBlockCore()->BoxesOnly )
 			{
-				//MyDraw.MyPieces.Center.MyEffect = Tools.EffectWad.FindByName("Hsl");
+				//MyDraw.MyPieces.Center.MyEffect = Tools::EffectWad.FindByName("Hsl");
 				MyDraw->Update();
 				MyDraw->MyPieces->Base.Origin += Offset;
 				//MyDraw.MyPieces.Base.Origin += Offset

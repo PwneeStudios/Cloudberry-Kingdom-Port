@@ -7,120 +7,133 @@
 
 #include <Core\Tools\Set.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+
 namespace CloudberryKingdom
 {
 
+    boost::shared_ptr<Awardment> Awardments::Award_Campaign1;
+    boost::shared_ptr<Awardment> Awardments::Award_ArcadeHighScore;
+    boost::shared_ptr<Awardment> Awardments::Award_Bungee;
+    boost::shared_ptr<Awardment> Awardments::Award_ArcadeHighScore2;
+    boost::shared_ptr<Awardment> Awardments::Award_Die;
+    boost::shared_ptr<Awardment> Awardments::Award_Campaign3;
+    boost::shared_ptr<Awardment> Awardments::Award_Invisible;
+    boost::shared_ptr<Awardment> Awardments::Award_Hats;
+    boost::shared_ptr<Awardment> Awardments::Award_Campaign2;
+    boost::shared_ptr<Awardment> Awardments::Award_UnlockAllArcade;
+    boost::shared_ptr<Awardment> Awardments::Award_NoDeath;
+    boost::shared_ptr<Awardment> Awardments::Award_Save;
+    boost::shared_ptr<Awardment> Awardments::Award_Obstacles;
+    boost::shared_ptr<Awardment> Awardments::Award_Buy;
+    boost::shared_ptr<Awardment> Awardments::Award_Campaign4;
+    boost::shared_ptr<Awardment> Awardments::Award_BuyHat;
+    boost::shared_ptr<Awardment> Awardments::Award_HeroRush2Level;
+    boost::shared_ptr<Awardment> Awardments::Award_Replay;
+    boost::shared_ptr<Awardment> Awardments::Award_Campaign5;
+
+    boost::shared_ptr<Awardment> Awardments::UnlockTimeCrisis;
+    boost::shared_ptr<Awardment> Awardments::UnlockHeroRush;
+    boost::shared_ptr<Awardment> Awardments::UnlockHeroRush2;
+
+    std::wstring Awardment::NewGameMode;
+    std::wstring Awardment::Default;
+
 	void Awardments::InitializeStatics()
 	{
-		Awardments::HeroRushScore = 500000;
-		Awardments::HeroRush2Score = 500000;
-		Awardments::HeroRush2_LevelUnlock = 35;
-		Awardments::FastCampaign_Minutes = 20;
-		Awardments::CurShift = 0;
-		Awardments::Shift = 520;
+        Awardment::NewGameMode = L"New Game Mode";
+        Awardment::Default = L"Awardment";
 
-		Awardments::BeatStr = std::wstring( L"Beat a classic castle\non" );
-	
-		boost::shared_ptr<Awardment> tempVector[] = { boost::shared_ptr<Awardment>(), boost::make_shared<Awardment>( 1, std::wstring( L"Italian Plumbing" ), Awardments::BeatStr + CampaignHelper::GetName( 2 ), Hat::Toad ), boost::make_shared<Awardment>( 2, std::wstring( L"Bubbly Bop" ), Awardments::BeatStr + CampaignHelper::GetName( 3 ), Hat::BubbleBobble ), boost::make_shared<Awardment>( 3, std::wstring( L"Ghouls n' stickmen" ), Awardments::BeatStr + CampaignHelper::GetName( 4 ), Hat::Knight ), boost::make_shared<Awardment>( 4, std::wstring( L"Gosu Master" ), Awardments::BeatStr + CampaignHelper::GetName( 5 ), Hat::Gosu ) };
-		Awardments::BeatCampaign = VecFromArray( tempVector );
-	
-		for ( std::vector<boost::shared_ptr<Awardment> >::iterator award = Awardments::BeatCampaign.begin(); award != Awardments::BeatCampaign.end(); ++award ) 
-		{
-			if ( *award != 0 )
-				Awardment_PostConstruct( *award );
-		}
+        Award_Campaign1 = boost::make_shared<Awardment>( 1, Localization::Words_AwardTitle_Campaign1, Localization::Words_AwardText_Campaign1);
+        Award_ArcadeHighScore = boost::make_shared<Awardment>( 2, Localization::Words_AwardTitle_ArcadeHighScore, Localization::Words_AwardText_ArcadeHighScore);
+        Award_Bungee = boost::make_shared<Awardment>( 3, Localization::Words_AwardTitle_Bungee, Localization::Words_AwardText_Bungee);
+        Award_ArcadeHighScore2 = boost::make_shared<Awardment>( 4, Localization::Words_AwardTitle_ArcadeHighScore2, Localization::Words_AwardText_ArcadeHighScore2);
+        Award_Die = boost::make_shared<Awardment>( 5, Localization::Words_AwardTitle_Die, Localization::Words_AwardText_Die);
+        Award_Campaign3 = boost::make_shared<Awardment>( 6, Localization::Words_AwardTitle_Campaign3, Localization::Words_AwardText_Campaign3);
+        Award_Invisible = boost::make_shared<Awardment>( 7, Localization::Words_AwardTitle_Invisible, Localization::Words_AwardText_Invisible);
+        Award_Hats = boost::make_shared<Awardment>( 8, Localization::Words_AwardTitle_Hats, Localization::Words_AwardText_Hats);
+        Award_Campaign2 = boost::make_shared<Awardment>( 9, Localization::Words_AwardTitle_Campaign2, Localization::Words_AwardText_Campaign2);
+        Award_UnlockAllArcade = boost::make_shared<Awardment>( 10, Localization::Words_AwardTitle_UnlockAllArcade, Localization::Words_AwardText_UnlockAllArcade);
+        Award_NoDeath = boost::make_shared<Awardment>( 11, Localization::Words_AwardTitle_NoDeath, Localization::Words_AwardText_NoDeath);
+        Award_Save = boost::make_shared<Awardment>( 12, Localization::Words_AwardTitle_Save, Localization::Words_AwardText_Save);
+        Award_Obstacles = boost::make_shared<Awardment>( 13, Localization::Words_AwardTitle_Obstacles, Localization::Words_AwardText_Obstacles);
+        Award_Buy = boost::make_shared<Awardment>( 14, Localization::Words_AwardTitle_Buy, Localization::Words_AwardText_Buy);
+        Award_Campaign4 = boost::make_shared<Awardment>( 15, Localization::Words_AwardTitle_Campaign4, Localization::Words_AwardText_Campaign4);
+        Award_BuyHat = boost::make_shared<Awardment>( 16, Localization::Words_AwardTitle_BuyHat, Localization::Words_AwardText_BuyHat);
+        Award_HeroRush2Level = boost::make_shared<Awardment>( 17, Localization::Words_AwardTitle_HeroRush2Level, Localization::Words_AwardText_HeroRush2Level);
+        Award_Replay = boost::make_shared<Awardment>( 18, Localization::Words_AwardTitle_Replay, Localization::Words_AwardText_Replay);
+        Award_Campaign5 = boost::make_shared<Awardment>( 19, Localization::Words_AwardTitle_Campaign5, Localization::Words_AwardText_Campaign5);
 
-		// FIXME: This should be LotsOfJumps but it's trapped in the header.
-		Awardments::JumpAlot = boost::make_shared<Awardment>( 5, std::wstring( L"Jumple-upagus" ), std::wstring( L"Jump " ) + StringConverterHelper::toString( /*LotsOfJumps*/10000 ) + std::wstring( L" times." ), Hat::Bubble );
-		Awardment_PostConstruct( Awardments::JumpAlot );
-		Awardments::HoldForwardFreeplay = boost::make_shared<Awardment>( 6, std::wstring( L"White Rabbit" ), std::wstring( std::wstring( L"Beat a max length " ) ) + CampaignHelper::GetName( 2 ) + std::wstring( std::wstring( L"level, always holding forward. Classic hero. No checkpoints." ) ), Hat::Cloud_Renamed );
-		Awardment_PostConstruct( Awardments::HoldForwardFreeplay );
-		Awardments::HeroRush_Score = boost::make_shared<Awardment>( 7, std::wstring( L"Locked IN" ), std::wstring( std::wstring( L"Score " ) ) + ToString( HeroRushScore ) + std::wstring( std::wstring( L" points in Hero Rush." ) ), Hat::FallingBlockHead );
-		Awardment_PostConstruct( Awardments::HeroRush_Score );
-		Awardments::Escalation_Levels = boost::make_shared<Awardment>( 8, std::wstring( L"Iron Man" ), std::wstring( L"Beat 26.2 levels in Escalation." ), Hat::FireHead );
-		Awardment_PostConstruct( Awardments::Escalation_Levels );
-		Awardments::FastCampaign2 = boost::make_shared<Awardment>( 10, std::wstring( L"Minute man" ), std::wstring( std::wstring( L"Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( std::wstring( L"castle in under " ) ) + StringConverterHelper::toString( FastCampaign_Minutes ) + std::wstring( std::wstring( L" minutes." ) ), Hat::Pink );
-		Awardment_PostConstruct( Awardments::FastCampaign2 );
-		Awardments::HeroRush2_Score = boost::make_shared<Awardment>( 12, std::wstring( L"Jack of all sticks" ), std::wstring( std::wstring( L"Score " ) ) + ToString( HeroRush2Score ) + std::wstring( std::wstring( L" points\nin Hero Rush 2:\n{c255,10,10,255}Revenge of the Double Jump." ) ), Hat::Fedora );
-		Awardment_PostConstruct( Awardments::HeroRush2_Score );
-		Awardments::PartiallyInvisibleCampaign = boost::make_shared<Awardment>( 13, std::wstring( L"I HAVE NO FEET" ), std::wstring( std::wstring( L"Beat an" ) ) + CampaignHelper::GetName( 3 ) + std::wstring( std::wstring( L"castle while invisible. Cape and hat recommended." ) ), Hat::Ghost );
-		Awardment_PostConstruct( Awardments::PartiallyInvisibleCampaign );
-		Awardments::TotallyInvisibleCampaign = boost::make_shared<Awardment>( 14, std::wstring( L"Mind Games" ), std::wstring( L"Beat a" ) + CampaignHelper::GetName( 1 ) + std::wstring( L"castle while invisible, with no hat and no cape." ), Hat::Brain );
-		Awardment_PostConstruct( Awardments::TotallyInvisibleCampaign );
-		Awardments::NoCoinFreeplay = boost::make_shared<Awardment>( 15, std::wstring( L"Chromotephobia" ), std::wstring( L"Beat a max length " ) + CampaignHelper::GetName( 2 ) + std::wstring( L"level without grabbing a single coin. Classic hero. No checkpoints." ), Hat::CheckpointHead );
-		Awardment_PostConstruct( Awardments::NoCoinFreeplay );
-		Awardments::AllCoinsAbusiveCastle = boost::make_shared<Awardment>( 16, std::wstring( L"Ebenezer" ), std::wstring( L"Grab every coin in\nan" ) + CampaignHelper::GetName( 3 ) + std::wstring( L"castle." ), Hat::TopHat );
-		Awardment_PostConstruct( Awardments::AllCoinsAbusiveCastle );
-		Awardments::NoDeathsNormalCastle = boost::make_shared<Awardment>( 17, std::wstring( L"Untouchable" ), std::wstring( L"Beat an" ) + CampaignHelper::GetName( 2 ) + std::wstring( L"castle without dying once." ), Hat::Afro );
-		Awardment_PostConstruct( Awardments::NoDeathsNormalCastle );
-		Awardments::PerfectEasyCastle = boost::make_shared<Awardment>( 18, std::wstring( L"Perfection" ), std::wstring( L"Grab every coin in a" ) + CampaignHelper::GetName( 1 ) + std::wstring( L"castle without dying once. Image is everything." ), Hat::Halo );
-		Awardment_PostConstruct( Awardments::PerfectEasyCastle );
-		Awardments::UnlockHeroRush2 = boost::make_shared<Awardment>( 100, std::wstring( L"Hero Rush 2 unlocked!" ),
-			Format( _T( "%lsRequired:%ls\n   Level %d in %lsHero Rush" ),
-			EzText::ColorToMarkup( Color( static_cast<unsigned char>( 205 ), static_cast<unsigned char>( 10 ), static_cast<unsigned char>( 10 ) ) ).c_str(),
-				EzText::ColorToMarkup( Color::White ).c_str(),
-				HeroRush2_LevelUnlock,
-				EzText::ColorToMarkup( Color( static_cast<unsigned char>( 26 ), static_cast<unsigned char>( 178 ), static_cast<unsigned char>( 231 ) ) ).c_str() ),
-			boost::shared_ptr<Hat>() );
-		Awardment_PostConstruct( Awardments::UnlockHeroRush2 );
+        // Arcade Unlocks
+        UnlockTimeCrisis = boost::make_shared<Awardment>(100, L"Time Crisis Unlocked!", 
+            L"Fill me in!",
+            Awardment::NewGameMode, false);
+
+        UnlockHeroRush = boost::make_shared<Awardment>(101, L"Hero Rush unlocked!",
+            L"Fill me in!",
+            Awardment::NewGameMode, false);
+
+        UnlockHeroRush2 = boost::make_shared<Awardment>(102, L"Hero Rush 2 unlocked!",
+            L"Fill me in!",
+            Awardment::NewGameMode, false);
+
+        Awardment_PostConstruct( Award_Campaign1 );
+		Awardment_PostConstruct( Award_ArcadeHighScore );
+		Awardment_PostConstruct( Award_Bungee );
+		Awardment_PostConstruct( Award_ArcadeHighScore2 );
+		Awardment_PostConstruct( Award_Die );
+		Awardment_PostConstruct( Award_Campaign3 );
+		Awardment_PostConstruct( Award_Invisible );
+		Awardment_PostConstruct( Award_Hats );
+		Awardment_PostConstruct( Award_Campaign2 );
+		Awardment_PostConstruct( Award_UnlockAllArcade );
+		Awardment_PostConstruct( Award_NoDeath );
+		Awardment_PostConstruct( Award_Save );
+		Awardment_PostConstruct( Award_Obstacles );
+		Awardment_PostConstruct( Award_Buy );
+		Awardment_PostConstruct( Award_Campaign4 );
+		Awardment_PostConstruct( Award_BuyHat );
+		Awardment_PostConstruct( Award_HeroRush2Level );
+		Awardment_PostConstruct( Award_Replay );
+		Awardment_PostConstruct( Award_Campaign5 );
 	}
 
 	// Statics
 	std::vector<boost::shared_ptr<Awardment> > Awardments::Awards;
 	std::map<int, boost::shared_ptr<Awardment> > Awardments::AwardsDict;
 
-	int Awardments::HeroRushScore = 500000;
-	int Awardments::HeroRush2Score = 500000;
-	int Awardments::HeroRush2_LevelUnlock = 35;
-	int Awardments::FastCampaign_Minutes = 20;
-	float Awardments::CurShift, Awardments::Shift = 520;
 
-	std::wstring Awardments::BeatStr;
-	std::vector<boost::shared_ptr<Awardment> > Awardments::BeatCampaign;
-	boost::shared_ptr<Awardment> Awardments::JumpAlot;
-	boost::shared_ptr<Awardment> Awardments::HoldForwardFreeplay;
-	boost::shared_ptr<Awardment> Awardments::HeroRush_Score;
-	boost::shared_ptr<Awardment> Awardments::Escalation_Levels;
-	boost::shared_ptr<Awardment> Awardments::FastCampaign2;
-	boost::shared_ptr<Awardment> Awardments::HeroRush2_Score;
-	boost::shared_ptr<Awardment> Awardments::PartiallyInvisibleCampaign;
-	boost::shared_ptr<Awardment> Awardments::TotallyInvisibleCampaign;
-	boost::shared_ptr<Awardment> Awardments::NoCoinFreeplay;
-	boost::shared_ptr<Awardment> Awardments::AllCoinsAbusiveCastle;
-	boost::shared_ptr<Awardment> Awardments::NoDeathsNormalCastle;
-	boost::shared_ptr<Awardment> Awardments::PerfectEasyCastle;
-	boost::shared_ptr<Awardment> Awardments::UnlockHeroRush2;
+    Awardment::Awardment(int Guid, Localization::Words Name, Localization::Words Description)
+    {
+        Official = true;
+#if defined(XBOX)
+        ShowWhenAwarded = false;
+#else
+        ShowWhenAwarded = true;
+#endif
 
+        this->Name = Name;
+        this->Description = Description;
+        this->Unlockable = Unlockable;
+        this->Guid = Guid;
+        this->TitleType = Default;
+    }
 
+    //Awardment(int Guid, Localization.Words Name, Localization.Words Description, string TitleType, bool ShowWhenAwarded)
+	Awardment::Awardment(int Guid, std::wstring Name, std::wstring Description, std::wstring TitleType, bool ShowWhenAwarded)
+    {
+        Official = false;
 
-	Awardment::Awardment( int Guid, const std::wstring &Name, const std::wstring &Description, const boost::shared_ptr<Hat> &Unlockable )
-	{
-		this->Name = Name;
-		this->Description = Description;
-		this->Unlockable = Unlockable;
-		this->Guid = Guid;
+        //this->Name = Name;
+        //this->Description = Description;
+        this->Name = Localization::Words_NONE;;
+        this->Description = Localization::Words_NONE;
 
-		// Pulled out to avoid using shared_from_this inside constructor.
-		//if ( this->Unlockable != 0 )
-		//	this->Unlockable->AssociatedAward = shared_from_this();
-
-		//Awardments::Awards.push_back( shared_from_this() );
-	}
-
-	int Awardments::CheckpointsStatsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
-	{
-		return p->GetStats( StatGroup_LEVEL )->Checkpoints;
-	}
-
-	int Awardments::CoinsStatsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
-	{
-		return p->GetStats( StatGroup_LEVEL )->Coins;
-	}
-
-	int Awardments::TotalCoinsStatsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
-	{
-		return p->GetStats( StatGroup_LEVEL )->TotalCoins;
-	}
+        this->Unlockable = Unlockable;
+        this->Guid = Guid;
+        this->TitleType = TitleType;
+        this->ShowWhenAwarded = ShowWhenAwarded;
+    }		
 
 	bool Awardments::MessageOnScreen()
 	{
@@ -141,161 +154,174 @@ namespace CloudberryKingdom
 			return 0;
 	}
 
-	void Awardments::CheckForAward_HoldForward()
-	{
-		bool Ran = false;
-		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
-		{
-			boost::shared_ptr<PlayerStats> stats = ( *p )->GetStats( StatGroup_LEVEL );
-			float ratio = stats->FinalTimeSpentNotMoving / static_cast<float>( stats->FinalTimeSpent );
-			if ( ratio < .05f && stats->FinalTimeSpentNotMoving < 35 )
-				Ran = true;
-		}
 
-		bool Reqs = CustomLevel_GUI::IsMaxLength && CustomLevel_GUI::Difficulty >= 1 && PlayerManager::PlayerSum( boost::make_shared<CheckpointsStatsLambda>() ) == 0 && Tools::CurGameData->Freeplay && Tools::CurGameData->DefaultHeroType == BobPhsxNormal::getInstance();
+        void Awardments::CheckForAward_TimeCrisisUnlock(int Level, boost::shared_ptr<PlayerData> player)
+        {
+            if (Level >= UnlockTimeCrisis->MyInt)
+                GiveAward(UnlockTimeCrisis, player);
+        }
 
-		if ( Ran && Reqs )
-			GiveAward( HoldForwardFreeplay );
-	}
+        void Awardments::CheckForAward_HeroRushUnlock(int Level, boost::shared_ptr<PlayerData> player)
+        {
+            if (Level >= UnlockHeroRush->MyInt)
+                GiveAward(UnlockHeroRush, player);
+        }
 
-	void Awardments::CheckForAward_NoCoins()
-	{
-		bool NoCoins = PlayerManager::PlayerSum( boost::make_shared<CoinsStatsLambda>() ) == 0 && PlayerManager::PlayerMax(boost::make_shared<TotalCoinsStatsLambda>()) > 5;
+        void Awardments::CheckForAward_HeroRush2Unlock(int Level, boost::shared_ptr<PlayerData> player)
+        {
+            if (Level >= UnlockHeroRush2->MyInt)
+            {
+                GiveAward(UnlockHeroRush2, player);
+                CheckForAward_UnlockAllArcade();
+            }
+        }
 
-		bool Reqs = CustomLevel_GUI::IsMaxLength && CustomLevel_GUI::Difficulty >= 1 && PlayerManager::PlayerSum( boost::make_shared<CheckpointsStatsLambda>() ) == 0 && Tools::CurGameData->Freeplay && Tools::CurGameData->DefaultHeroType == BobPhsxNormal::getInstance();
+        void Awardments::CheckForAward_HeroRush2_Level(int Level)
+        {
+            if (Level >= 50)
+                GiveAward(Awardments::Award_HeroRush2Level);
+        }
 
-		if ( NoCoins && Reqs )
-			GiveAward( NoCoinFreeplay );
-	}
+        void Awardments::CheckForAward_ArcadeScore(int Score)
+        {
+            if (Score >= 500000)
+                GiveAward(Awardments::Award_ArcadeHighScore);
+        }
 
-	void Awardments::CheckForAward_HeroRush_Score( int Score )
-	{
-		if ( Score > HeroRushScore )
-			GiveAward( HeroRush_Score );
-	}
+        void Awardments::CheckForAward_ArcadeScore2(int Score)
+        {
+            if (Score >= 1500000)
+                GiveAward(Awardments::Award_ArcadeHighScore2);
+        }
 
-	void Awardments::CheckForAward_HeroRush2_Score( int Score )
-	{
-		if ( Score > HeroRush2Score )
-			GiveAward( HeroRush2_Score );
-	}
+        void Awardments::CheckForAward_Invisible(int Level)
+        {
+            if (Level < 20) return;
 
-	void Awardments::CheckForAward_HeroRush2Unlock( int Level_Renamed )
-	{
-		//if (Level >= 3)
-		if ( Level_Renamed >= HeroRush2_LevelUnlock )
-			GiveAward( UnlockHeroRush2 );
-	}
+            if (PlayerManager::TotallyInvisible)
+                GiveAward(Award_Invisible);
+        }
 
-	void Awardments::CheckForAward_Escalation_Level( int Level_Renamed )
-	{
-		if ( Level_Renamed >= 26.2f - 1 )
-			GiveAward( Escalation_Levels );
-	}
+        void Awardments::CheckForAward_Die(boost::shared_ptr<Bob> bob)
+        {
+            int deaths = bob->getMyStats()->getTotalDeaths() + PlayerManager::Get(bob)->GameStats->getTotalDeaths() + PlayerManager::Get(bob)->LifetimeStats->getTotalDeaths();
+            if (deaths >= 1337)
+                GiveAward(Award_Die);
+        }
 
-	void Awardments::CheckForAward_BeatCampaign( int Index )
-	{
-		GiveAward( BeatCampaign[ Index ] );
-	}
+        void Awardments::CheckForAward_NoDeath(boost::shared_ptr<PlayerData> player)
+        {
+            int deaths = player->CampaignStats->getTotalDeaths();
+            if (deaths == 0)
+                GiveAward(Award_NoDeath, player);
+        }
 
-	void Awardments::CheckForAward_FastCampaign( int Index )
-	{
-		if ( Index != 2 )
-			return;
+        void Awardments::CheckForAward_UnlockAllArcade()
+        {
+            GiveAward(Award_UnlockAllArcade);
+        }
 
-		//if (Campaign.Time < FastCampaign_Minutes * 60 * 62)
-		//    GiveAward(FastCampaign2);
-	}
+        void Awardments::CheckForAward_Save()
+        {
+            GiveAward(Award_Save);
+        }
 
-	void Awardments::CheckForAward_EbenezerAbusiveCastle( int Index )
-	{
-		if ( Index < 2 )
-			return;
+        void Awardments::CheckForAward_Obstacles(boost::shared_ptr<Bob> bob)
+        {
+            int obstacles = bob->getMyStats()->ObstaclesSeen + PlayerManager::Get(bob)->GameStats->ObstaclesSeen + PlayerManager::Get(bob)->LifetimeStats->ObstaclesSeen;
 
-		//if (Campaign.Coins == Campaign.TotalCoins)
-		//    GiveAward(AllCoinsAbusiveCastle);
-	}
+            if (obstacles >= 1000)
+                GiveAward(Award_Obstacles);
+        }
 
-	void Awardments::CheckForAward_PerfectEasyCastle( int Index )
-	{
-		if ( Index < 0 )
-			return;
+        void Awardments::CheckForAward_Buy()
+        {
+            GiveAward(Award_Buy);
+        }
 
-		//if (Campaign.Coins == Campaign.TotalCoins && Campaign.Attempts == 0)
-		//    GiveAward(PerfectEasyCastle);
-	}
+        void Awardments::CheckForAward_Replay(int Attempts)
+        {
+            if (Attempts >= 50)
+                GiveAward(Award_Replay);
+        }
 
-	void Awardments::CheckForAward_NoDeathNormalCastle( int Index )
-	{
-		if ( Index < 0 )
-			return;
+        void Awardments::CheckForAward_Bungee(boost::shared_ptr<GameData> game)
+        {
+            if (game == 0) return;
+            if (game->MyLevel == 0) return;
+            if (game->MyLevel->MyLevelSeed == 0) return;
 
-		//if (Campaign.Attempts == 0)
-		//    GiveAward(NoDeathsNormalCastle);
-	}
+            if (game->MyLevel->MyLevelSeed->MyGameFlags.IsTethered &&
+                PlayerManager::NumPlayers > 3)
+            {
+                int AliveCount = 0;
+				for ( BobVec::const_iterator bob = game->MyLevel->Bobs.begin(); bob != game->MyLevel->Bobs.end(); ++bob )
+                {
+                    if (!( *bob )->Dead && !( *bob )->Dying)
+                        AliveCount++;
+                }
 
-	void Awardments::CheckForAward_PartiallyInvisible( int Index )
-	{
-		if ( Index < 2 )
-			return;
+                if (AliveCount != 1) return;
 
-		if ( PlayerManager::PartiallyInvisible )
-			GiveAward( PartiallyInvisibleCampaign );
-	}
+				for ( BobVec::const_iterator bob = game->MyLevel->Bobs.begin(); bob != game->MyLevel->Bobs.end(); ++bob )
+                    if (!( *bob )->Dead && !( *bob )->Dying)
+                        GiveAward(Award_Bungee, ( *bob )->getMyPlayerData() );
+            }
+        }
 
-	void Awardments::CheckForAward_TotallyInvisible( int Index )
-	{
-		if ( Index < 0 )
-			return;
+        void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award )
+        {
+            GiveAward(award, 0);
+        }
+        void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award, const boost::shared_ptr<PlayerData> player)
+        {
+            if (CloudberryKingdomGame::getIsDemo()) return;
 
-		if ( PlayerManager::TotallyInvisible )
-			GiveAward( TotallyInvisibleCampaign );
-	}
+            if (award == 0) return;
 
-	void Awardments::CheckForAward_JumpAlot( const boost::shared_ptr<Bob> &bob )
-	{
-		int jumps = bob->getMyStats()->Jumps + PlayerManager::Get(bob)->GameStats->Jumps + PlayerManager::Get(bob)->LifetimeStats->Jumps;
-		// FIXME: This should be LotsOfJumps but it's trapped in the header.
-		if ( jumps >= /*LotsOfJumps*/10000 )
-			GiveAward( JumpAlot );
-	}
+            if ( player == 0 && PlayerManager::NotAllAwarded(award) ||
+                 player != 0 && !player->Awardments_Renamed->Has( award->Guid ) )
+            {
+                // Give the award to each player, or to the specified player
+                if (player == 0)
+                {
+					std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+					for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
+                        ( *p )->Awardments_Renamed->Add( award->Guid );
+                }
+                else
+                    player->Awardments_Renamed->Add( award->Guid );
 
-	void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award )
-	{
-		if ( award == 0 )
-			return;
+                // Show a note saying the reward was given
+                if (award->ShowWhenAwarded)
+                {
+                    boost::shared_ptr<AwardmentMessage> msg = MakeMagic( AwardmentMessage, ( award ) );
+                    Tools::CurGameData->AddGameObject(msg);
 
-		if ( PlayerManager::NotAllAwarded( award ) )
-		{
-			// Give the award to each player
-			std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
-			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator p = vec.begin(); p != vec.end(); ++p )
-				( *p )->Awardments_Renamed->Add( award->Guid );
+					// Remove all other hints
+					for ( GameObjVec::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
+					{
+						if ( *obj == msg )
+							continue;
 
-			// Show a note saying the reward was given
-			boost::shared_ptr<AwardmentMessage> msg = MakeMagic( AwardmentMessage, ( award ) );
-			// Don't add any awardments!
-			//Tools.CurGameData.AddGameObject(msg);
-			Tools::Warning();
+						boost::shared_ptr<AwardmentMessage> _msg = boost::dynamic_pointer_cast<AwardmentMessage>( *obj );
+						if ( 0 != _msg )
+							_msg->MyPile->setPos( _msg->MyPile->getPos() + Vector2(0, Shift) );
+					}
+                }
 
-			// Remove all other hints
-			for ( GameObjVec::const_iterator obj = Tools::CurGameData->MyGameObjects.begin(); obj != Tools::CurGameData->MyGameObjects.end(); ++obj )
-			{
-				if ( *obj == msg )
-					continue;
+                PlayerManager::SavePlayerData->Changed = true;
+            }
+        }
 
-				boost::shared_ptr<AwardmentMessage> _msg = boost::dynamic_pointer_cast<AwardmentMessage>( *obj );
-				if ( 0 != _msg )
-					_msg->MyPile->setPos( _msg->MyPile->getPos() + Vector2(0, Shift) );
-			}
-
-			PlayerManager::SavePlayerData->Changed = true;
-		}
-	}
+	float Awardments::CurShift = 0, Awardments::Shift = 520;
 
 	void Awardments::Init()
 	{
+        UnlockTimeCrisis->MyInt = TimeCrisis_LevelUnlock;
+        UnlockHeroRush->MyInt = HeroRush_LevelUnlock;
+        UnlockHeroRush2->MyInt = HeroRush2_LevelUnlock;
+
 		for ( std::vector<boost::shared_ptr<Awardment> >::const_iterator award = Awards.begin(); award != Awards.end(); ++award )
 			AwardsDict.insert( std::make_pair( ( *award )->Guid, *award ) );
 	}

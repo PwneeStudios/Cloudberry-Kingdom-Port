@@ -369,7 +369,7 @@ namespace CloudberryKingdom
 		void EndOfLevelBonus( const boost::shared_ptr<PlayerData> &FinishingPlayer, bool IncrLevels );
 
 		bool CoinsCountInStats;
-		int NumCoins, NumBlobs, TotalCoinScore;
+		int NumCoins, NumBlobs, TotalCoinScore, NumObstacles;
 		bool Finished;
 		/// <summary>
 		/// Ends the playable level: players can no longer die, scores are finalized
@@ -967,6 +967,8 @@ namespace CloudberryKingdom
 		void UpdateBobs();
 
 	
+		void CalcObstaclsSeen();
+
 		void PhsxStep( bool NotDrawing );
 		void PhsxStep( bool NotDrawing, bool GUIPhsx );
 

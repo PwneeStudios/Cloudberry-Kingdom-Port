@@ -408,10 +408,6 @@ bool ScoreScreen::UseZoomIn = true;
 		MyPile->Add( boost::make_shared<EzText>( CoreMath::ShortTime( PlayerManager::Score_Time ), ItemFont, std::wstring( std::wstring( L"Blobs" ) ) ) );
 		MyPile->Add( boost::make_shared<EzText>( Tools::ScoreString( PlayerManager::Score_Attempts ), ItemFont, std::wstring( std::wstring( L"Deaths" ) ) ) );
 
-		// Awardments
-		Awardments::CheckForAward_HoldForward();
-		Awardments::CheckForAward_NoCoins();
-
 		// Prevent menu interactions for a second
 		MyMenu->Active = false;
 

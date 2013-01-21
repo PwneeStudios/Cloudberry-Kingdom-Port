@@ -319,7 +319,7 @@ bool CharacterSelectManager::Active = false;
 
             if (QuickJoin)
                 Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<QuickJoinFinishHelper>() );
-                //Tools.CurGameData.WaitThenDo(0, AfterFinished);
+                //Tools::CurGameData.WaitThenDo(0, AfterFinished);
             else
 				Tools::CurGameData->SlideOut_FadeIn( 0, boost::make_shared<AfterFinishedHelper>() );
 		}

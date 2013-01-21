@@ -13,7 +13,6 @@ namespace CloudberryKingdom
 		/// True when we are still loading resources during the game's initial load.
 		/// This is wrapped in a struct so that it can be used as a lock.
 		/// </summary>
-	
 		static boost::shared_ptr<WrappedBool> LoadingResources;
 
 		/// <summary>
@@ -24,6 +23,9 @@ namespace CloudberryKingdom
 
 		static boost::shared_ptr<EzFont> Font_Grobold42, Font_Grobold42_2;
 		static boost::shared_ptr<EzFont> LilFont;
+
+		static boost::shared_ptr<HackFont> hf;
+		static boost::shared_ptr<Mutex> hf_Mutex;
 
 		/// <summary>
 		/// Load the necessary fonts.

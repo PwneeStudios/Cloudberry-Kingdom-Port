@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 		using StartMenu::SlideIn;
 		using StartMenu::Call;
 
+		bool CallingOptionsMenu;
+
 		virtual void MenuGo_Options( const boost::shared_ptr<MenuItem> &item );
 
 		virtual void Exit();
@@ -37,7 +39,8 @@ namespace CloudberryKingdom
 
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
-	
+		virtual void OnReturnTo();
+
 		virtual void OnAdd();
 
 		virtual bool MenuReturnToCaller( const boost::shared_ptr<Menu> &menu );

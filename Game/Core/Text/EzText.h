@@ -173,6 +173,9 @@ namespace CloudberryKingdom
 		/// Replaces the first bit of text, with no reformatting
 		/// </summary>
 	
+		Vector2 EzText::MeasureString( std::wstring text );
+		Vector2 EzText::MeasureString( boost::shared_ptr<StringBuilder> text );
+
 		void SubstituteText( const std::wstring &text );
 		void SubstituteText( const boost::shared_ptr<StringBuilder> &text );
 		void SubstituteText( Localization::Words word );
@@ -366,7 +369,7 @@ namespace CloudberryKingdom
 
 		static bool ZoomWithCamera_Override;
 		bool ZoomWithCam;
-		void _Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<SpriteFont> &font, Vector4 color );
+		void _Draw( const boost::shared_ptr<Camera> &cam, bool EndBatch, bool DrawPics, const boost::shared_ptr<HackSpriteFont> &font, Vector4 color );
 
 		void CalcBounds();
 

@@ -83,9 +83,6 @@ namespace CloudberryKingdom
 		SlideIn();
 	}
 
-	static std::wstring tempVector[] = { std::wstring( L"score_screen_grey" ), std::wstring( L"score_screen_grey" ), std::wstring( L"score_screen_grey" ) };
-	std::vector<std::wstring> HighScorePanel::TextureName = VecFromArray( tempVector );
-
 	HighScorePanel::HighScorePanel( boost::shared_ptr<ScoreList> scorelist, boost::shared_ptr<ScoreList> levellist ) :
 		Instant( false )
 	{
@@ -229,7 +226,7 @@ namespace CloudberryKingdom
 	void HighScorePanel::MakeSwapText()
 	{
 	#if defined(PC_VERSION)
-		//SwapText = new EzText(ButtonString.Enter(200), Resources.Font_Grobold42_2, 1450, false, true, .6f);
+		//SwapText = new EzText(ButtonString.Enter(200), Resources::Font_Grobold42_2, 1450, false, true, .6f);
 		//SwapText.Pos = new Vector2(-1169.281f, 602.9366f);
 	#else
 		SwapText = boost::make_shared<EzText>( ButtonString::Go( 130 ), Resources::Font_Grobold42_2, 1450, false, true,.6f );

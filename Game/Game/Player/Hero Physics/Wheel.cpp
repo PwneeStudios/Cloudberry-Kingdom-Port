@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		Name = Localization::Words_WHEELIE;
 		NameTemplate = std::wstring( L"wheelie" );
 
-		//Icon = new PictureIcon(Tools.TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);
+		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Wheel_0000" ) ), Color::White, 1.4f * DefaultIconWidth );
 	}
 

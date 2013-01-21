@@ -18,6 +18,12 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<LevelSeedData> RegularLevel::HeroLevel( float Difficulty, const boost::shared_ptr<BobPhsx> &Hero, int Length )
 	{
+		if (Hero == ArcadeMenu::Ultimate)
+		{
+			Length *= 2;
+			Difficulty *= 2;
+		}
+
 		boost::shared_ptr<LevelSeedData> data = boost::make_shared<LevelSeedData>();
 
 		StandardInit( data );

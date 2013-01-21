@@ -58,6 +58,9 @@ namespace CloudberryKingdom
 
 	bool Challenge_Escalation::OnBeginLambda::Apply( const boost::shared_ptr<Level> &level )
 	{
+        level->MyGame->MyBankType = GameData::BankType_ESCALATION;
+        level->MyGame->OnCoinGrab->Add( boost::make_shared<Challenge::OnCoinGrabProxy>() );
+
 		level->MyGame->AddGameObject( HelpMenu::MakeListener() );
 		level->MyGame->AddGameObject( InGameStartMenu::MakeListener() );
 		return false;
@@ -90,7 +93,10 @@ namespace CloudberryKingdom
 
 	void Challenge_Escalation::AdditionalPreStartOnSwapToLevelHelper::Apply( const int &levelindex )
 	{
-		Awardments::CheckForAward_Escalation_Level( levelindex - ce->StartIndex );
+		int score = PlayerManager::GetGameScore();
+		Awardments::CheckForAward_ArcadeScore( score );
+		Awardments::CheckForAward_ArcadeScore2( score );
+		Awardments::CheckForAward_Invisible( levelindex - ce->StartIndex );
 
 		// Score multiplier, x1, x1.5, x2, ... for levels 0, 20, 40, ...
 		float multiplier = 1 + ( ( levelindex + 1 ) / ce->LevelsPerDifficulty ) *.5f;
@@ -200,7 +206,7 @@ namespace CloudberryKingdom
 		}
 
 		// Hero title
-		//var g = Tools.CurGameData;
+		//var g = Tools::CurGameData;
 		//g.AddGameObject(new LevelTitle(g.MyLevel.DefaultHeroType.Name, new Vector2(150, -300), .7f, true));
 	}
 

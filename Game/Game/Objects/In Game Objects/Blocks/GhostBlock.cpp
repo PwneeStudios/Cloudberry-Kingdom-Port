@@ -331,7 +331,7 @@ int GhostBlock::LengthOfPhaseChange = 35;
 				{
 					MyObject->SetColor( color );
 					MyObject->Draw( Tools::QDrawer, Tools::EffectWad );
-					//Tools.QDrawer.Flush();
+					//Tools::QDrawer.Flush();
 				}
 				else
 				{

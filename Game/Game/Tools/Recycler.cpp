@@ -271,7 +271,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<ObjectBase> Recycler::GetObject( ObjectType type, bool BoxesOnly )
 	{
 		//if (type == ObjectType.FlyingBlob)
-		//    Tools.Write("!");
+		//    Tools::Write("!");
 
 		if ( type == ObjectType_UNDEFINED )
 			//throw (new System.Exception("No type found for desired object"));

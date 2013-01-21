@@ -11,7 +11,7 @@ namespace CloudberryKingdom
 	
 		struct FireSpinnerTileInfo : public TileInfoBase
 		{
-			//public SpriteInfo Flame = new SpriteInfo(Tools.Texture("small flame"), new Vector2(72, 72), Vector2.Zero, new Color(255, 140, 140));
+			//public SpriteInfo Flame = new SpriteInfo(Tools::Texture("small flame"), new Vector2(72, 72), Vector2.Zero, new Color(255, 140, 140));
 		
 			boost::shared_ptr<SpriteInfo> Flame;
 			boost::shared_ptr<SpriteInfo> Base;
