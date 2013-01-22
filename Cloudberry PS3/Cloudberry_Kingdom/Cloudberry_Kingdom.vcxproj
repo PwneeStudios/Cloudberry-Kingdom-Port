@@ -352,7 +352,9 @@
     <ClCompile Include="Game\Game\Player\Hero Physics\Small.cpp" />
     <ClCompile Include="Game\Game\Player\Hero Physics\Spaceship.cpp" />
     <ClCompile Include="Game\Game\Player\Hero Physics\Time.cpp" />
+    <ClCompile Include="Game\Game\Player\Hero Physics\TimeShip.cpp" />
     <ClCompile Include="Game\Game\Player\Hero Physics\Wheel.cpp" />
+    <ClCompile Include="Game\Game\Player\Leaderboard.cpp" />
     <ClCompile Include="Game\Game\Player\PlayerData.cpp" />
     <ClCompile Include="Game\Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Game\Player\SavedSeeds.cpp" />
@@ -1125,7 +1127,9 @@
     <ClInclude Include="Game\Game\Player\Hero Physics\Small.h" />
     <ClInclude Include="Game\Game\Player\Hero Physics\Spaceship.h" />
     <ClInclude Include="Game\Game\Player\Hero Physics\Time.h" />
+    <ClInclude Include="game\game\player\hero physics\timeship.h" />
     <ClInclude Include="Game\Game\Player\Hero Physics\Wheel.h" />
+    <ClInclude Include="game\game\player\leaderboard.h" />
     <ClInclude Include="Game\Game\Player\PlayerData.h" />
     <ClInclude Include="Game\Game\Player\PlayerManager.h" />
     <ClInclude Include="Game\Game\Player\SavedSeeds.h" />

@@ -617,88 +617,90 @@ float CloudberryKingdomGame::fps = 0;
 		ToDo->Clear();
 	}
 
-        void CloudberryKingdomGame::GodModePhxs()
-        {
+    void CloudberryKingdomGame::GodModePhxs()
+    {
+#ifdef PC
 #if !DEBUG
-			// Turn on/off immortality.
-			if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+		// Turn on/off immortality.
+		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+		{
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
-				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-				{
-					( *bob )->Immortal = !( *bob )->Immortal;
-				}
+				( *bob )->Immortal = !( *bob )->Immortal;
 			}
+		}
 #endif
-            // Give 100,000 points to each player
-            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
-            {
-				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-				{
-					( *bob )->getMyStats()->Score += 100000;
-				}
-            }
+        // Give 100,000 points to each player
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
+        {
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			{
+				( *bob )->getMyStats()->Score += 100000;
+			}
+        }
 
-            // Kill everyone but Player One
-            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_U ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_U ) )
-            {
-				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-				{
-                    if (( *bob )->MyPlayerIndex != 0 && !(( *bob )->Dead || ( *bob )->Dying))
-                    {
-                        //Fireball.Explosion(bob.Core.Data.Position, bob.Core.MyLevel);
-                        //Fireball.ExplodeSound.Play();
-
-                        //bob.Core.Show = false;
-                        //bob.Dead = true;
-
-                        ( *bob )->Die( BobDeathType_OTHER, true, false);
-                    }
-                }
-            }
-
-            // Turn on/off flying.
-            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
-            {
-				for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-				{
-                    ( *bob )->Flying = !( *bob )->Flying;
-                }
-            }
-
-            // Go to last door
-            if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
-            {
-                // Find last door
-                if ( Tools::CurLevel != 0 )
+        // Kill everyone but Player One
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_U ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_U ) )
+        {
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			{
+                if (( *bob )->MyPlayerIndex != 0 && !(( *bob )->Dead || ( *bob )->Dying))
                 {
-                    boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
+                    //Fireball.Explosion(bob.Core.Data.Position, bob.Core.MyLevel);
+                    //Fireball.ExplodeSound.Play();
 
-                    if (0 != door)
+                    //bob.Core.Show = false;
+                    //bob.Dead = true;
+
+                    ( *bob )->Die( BobDeathType_OTHER, true, false);
+                }
+            }
+        }
+
+        // Turn on/off flying.
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+        {
+			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
+			{
+                ( *bob )->Flying = !( *bob )->Flying;
+            }
+        }
+
+        // Go to last door
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
+        {
+            // Find last door
+            if ( Tools::CurLevel != 0 )
+            {
+                boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
+
+                if (0 != door)
+                {
+                    for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
                     {
-                        for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-                        {
-                            ( *bob )->Immortal = true;
-                            Tools::MoveTo( ( *bob ), door->getPos() );
-                        }
+                        ( *bob )->Immortal = true;
+                        Tools::MoveTo( ( *bob ), door->getPos() );
+                    }
 
-						for ( ObjectVec::const_iterator obj = Tools::CurLevel->Objects.begin(); obj != Tools::CurLevel->Objects.end(); obj++ )
-                        {
-                            boost::shared_ptr<CameraZone> zone = boost::dynamic_pointer_cast<CameraZone>( ( *obj ) );
+					for ( ObjectVec::const_iterator obj = Tools::CurLevel->Objects.begin(); obj != Tools::CurLevel->Objects.end(); obj++ )
+                    {
+                        boost::shared_ptr<CameraZone> zone = boost::dynamic_pointer_cast<CameraZone>( ( *obj ) );
                             
-							if ( 0 != zone )
+						if ( 0 != zone )
+                        {
+                            if (Tools::CurLevel->getMainCamera()->MyZone == 0 ||
+                                Tools::CurLevel->getMainCamera()->MyZone->Box->Current->BL.X <= zone->Box->Current->BL.X)
                             {
-                                if (Tools::CurLevel->getMainCamera()->MyZone == 0 ||
-                                    Tools::CurLevel->getMainCamera()->MyZone->Box->Current->BL.X <= zone->Box->Current->BL.X)
-                                {
-                                    Tools::CurLevel->getMainCamera()->MyZone = zone;
-                                    Tools::CurLevel->getMainCamera()->setPos( zone->End );
-                                }
+                                Tools::CurLevel->getMainCamera()->MyZone = zone;
+                                Tools::CurLevel->getMainCamera()->setPos( zone->End );
                             }
                         }
                     }
                 }
             }
         }
+#endif
+    }
 
 	void CloudberryKingdomGame::PhsxStep()
 	{

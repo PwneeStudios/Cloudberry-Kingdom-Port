@@ -73,7 +73,11 @@ namespace CloudberryKingdom
 			using namespace std;
 
 			string fileContents;
+#ifdef PS3
+			string path = "/app_home/Fonts/" + name + ".fnt";
+#else
 			string path = "Content/Fonts/" + name + ".fnt";
+#endif
 			if( !File::ReadAsString( path, fileContents ) )
 			{
 				return;

@@ -202,8 +202,8 @@ int psglCreateTextureReferenceFromGTFFile(const char *filename, psglTextureRefer
     glTexParameterf(target,GL_TEXTURE_MAX_ANISOTROPY_EXT, 4.0f );
     glTexParameteri( target, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR );
     glTexParameteri( target, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
-    glTexParameteri( target, GL_TEXTURE_WRAP_S, GL_REPEAT );
-    glTexParameteri( target, GL_TEXTURE_WRAP_T, GL_REPEAT );
+	glTexParameteri( target, GL_TEXTURE_WRAP_S, GL_CLAMP );
+    glTexParameteri( target, GL_TEXTURE_WRAP_T, GL_CLAMP );
     glTexParameteri( target, GL_TEXTURE_MAX_LOD, attrib.tex.mipmap-1 );
 	glTexParameteri( target, GL_TEXTURE_ALLOCATION_HINT_SCE, GL_TEXTURE_TILED_GPU_SCE );
 

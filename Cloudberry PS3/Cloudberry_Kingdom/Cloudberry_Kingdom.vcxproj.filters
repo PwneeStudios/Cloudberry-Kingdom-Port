@@ -1187,6 +1187,12 @@
     <ClCompile Include="Core\src\Audio\PS3\mscommon.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Game\Player\Leaderboard.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\Hero Physics\TimeShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\include\Architecture\Job.h">
@@ -3623,6 +3629,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\include\Audio\PS3\mscommon.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\player\leaderboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\player\hero physics\timeship.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
