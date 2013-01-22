@@ -1261,7 +1261,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
