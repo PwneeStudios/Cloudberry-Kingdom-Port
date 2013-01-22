@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 		Languages.insert( std::make_pair( Language_JAPANESE, boost::make_shared<LanguageInfo>( Language_JAPANESE, std::wstring( L"Japanese" ), std::wstring( L"Japanese" ) ) ) );
 		Languages.insert( std::make_pair( Language_KOREAN, boost::make_shared<LanguageInfo>( Language_KOREAN, std::wstring( L"Korean" ), std::wstring( L"Korean" ) ) ) );
 		Languages.insert( std::make_pair( Language_PORTUGUESE, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Portuguese" ), std::wstring( L"Western" ) ) ) );
-		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_PORTUGUESE, std::wstring( L"Russian" ), std::wstring( L"Western" ) ) ) );
+		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_RUSSIAN, std::wstring( L"Russian" ), std::wstring( L"Western" ) ) ) );
 		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"English" ), std::wstring( L"Western" ) ) ) );
 
 		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"Localization.tsv" ) ) );
