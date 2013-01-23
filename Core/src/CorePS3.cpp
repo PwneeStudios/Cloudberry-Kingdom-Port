@@ -164,7 +164,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	content_ = new Wad( "/app_home/" );
+	content_ = new Wad( "/app_home/ContentPS3/" );
 
 	qd_ = new QuadDrawer;
 

@@ -20,6 +20,32 @@ void *songBuffer = NULL;
 long stream = -1;
 float musicVolume;
 
+
+static void StreamCallback( int streamNumber, void *userData, int callbackType, void *readBuffer, int readSize )
+{
+	switch( callbackType )
+	{
+	case CELL_MS_CALLBACK_MOREDATA:
+		LOG.Write( "More data\n" );
+		break;
+	case CELL_MS_CALLBACK_CLOSESTREAM:
+		LOG.Write( "Close stream\n" );
+		break;
+	case CELL_MS_CALLBACK_FINISHEDDRY:
+		LOG.Write( "Finished dry\n" );
+		break;
+	case CELL_MS_CALLBACK_FINISHSTREAM:
+		LOG.Write( "Finish stream\n" );
+		if( streamNumber == stream )
+		{
+			cellMSStreamClose( streamNumber );
+			stream = -1;
+		}
+		break;
+	}
+}
+
+
 void MediaPlayer::Initialize()
 {
 	CellAudioPortParam audioParam;
@@ -149,9 +175,9 @@ float vol;
 // Set address and size of data to play
 
     MS_Info.FirstBuffer         = (void *)((long)pSampleData1);
-    MS_Info.FirstBufferSize     = nSize; // size in bytes
-    MS_Info.SecondBuffer         = (void *)((long)pSampleData2);
-    MS_Info.SecondBufferSize     = nSize2; // size in bytes
+    MS_Info.FirstBufferSize     = nSize;
+    MS_Info.SecondBuffer         = 0;
+    MS_Info.SecondBufferSize     = 0;
 
 	// Set pitch and number of channels
     MS_Info.Pitch               = nFrequency;
@@ -166,6 +192,7 @@ float vol;
 
     cellMSStreamSetInfo(nCh, &MS_Info);
 
+	cellMSStreamSetCallbackFunc( nCh, StreamCallback );
 // Note: No callback has been setup. This sound will just constantly play. No callbacks required.
 
     cellMSStreamPlay(nCh);

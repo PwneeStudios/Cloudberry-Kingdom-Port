@@ -80,6 +80,6 @@ Song::~Song()
 
 void Song::Load( const std::string &path )
 {
-	internal_->Path = "/app_home/" + path;
+	internal_->Path = "/app_home/ContentPS3/" + path;
 	Duration.TotalSeconds = GetMP3Length( internal_->Path );
 }
