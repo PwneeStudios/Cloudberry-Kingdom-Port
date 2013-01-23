@@ -78,8 +78,10 @@ Song::~Song()
 	delete internal_;
 }
 
+extern std::string PS3_PATH_PREFIX;
+
 void Song::Load( const std::string &path )
 {
-	internal_->Path = "/app_home/ContentPS3/" + path;
+	internal_->Path = PS3_PATH_PREFIX + "ContentPS3/" + path;
 	Duration.TotalSeconds = GetMP3Length( internal_->Path );
 }

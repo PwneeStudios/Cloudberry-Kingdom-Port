@@ -17,7 +17,11 @@
 #include <cell/sysmodule.h>
 #include <PSGL/psgl.h>
 #include <PSGL/psglu.h>
+#include <sys/process.h>
 #include <sys/spu_initialize.h>
+#include <sysutil/sysutil_gamecontent.h>
+
+SYS_PROCESS_PARAM ( 1001, 0x80000 )
 
 // Private.
 CorePS3::CorePS3( const CorePS3 &other ) :
@@ -73,6 +77,8 @@ static void SystemCallback( uint64_t status, uint64_t param, void *userdata )
 	}
 }
 
+std::string PS3_PATH_PREFIX;
+
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -86,8 +92,28 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_FS ), "Failed to load FS\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_USBD ), "Failed to load USBD\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_IO ), "Failed to load IO\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_GAME ), "Failed to load IO\n" );
 
 	LoadModules();
+
+	unsigned int type;
+	unsigned int attributes;
+	CellGameContentSize size;
+	char dirName[ CELL_GAME_PATH_MAX ];
+	cellGameBootCheck( &type, &attributes, &size, dirName );
+
+	char contentInfoPath[ CELL_GAME_PATH_MAX ];
+	char usrdirPath[ CELL_GAME_PATH_MAX ];
+
+	cellGameContentPermit( contentInfoPath, usrdirPath );
+	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
+	// To test an hdd game in release mode with the debugger we need to tell it about the
+	// game code.  Also the files should be pre-installed on the disk.
+	//PS3_PATH_PREFIX = "/dev_hdd0/game/TEST00000/USRDIR/";
+	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
+#ifdef DEBUG
+	PS3_PATH_PREFIX = "/app_home/";
+#endif
 
 	int ret = cellSysutilRegisterCallback( 0, SystemCallback, NULL );
 	if( ret != CELL_OK )
@@ -164,7 +190,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	content_ = new Wad( "/app_home/ContentPS3/" );
+	content_ = new Wad( PS3_PATH_PREFIX + "ContentPS3/" );
 
 	qd_ = new QuadDrawer;
 
