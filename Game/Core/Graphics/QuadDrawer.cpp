@@ -13,6 +13,8 @@
 #include <sstream>
 #include <string>
 
+extern std::string PS3_PATH_PREFIX;
+
 namespace CloudberryKingdom
 {
 
@@ -73,7 +75,11 @@ namespace CloudberryKingdom
 			using namespace std;
 
 			string fileContents;
+#ifdef PS3
+			string path = PS3_PATH_PREFIX + "ContentPS3/Fonts/" + name + ".fnt";
+#else
 			string path = "Content/Fonts/" + name + ".fnt";
+#endif
 			if( !File::ReadAsString( path, fileContents ) )
 			{
 				return;

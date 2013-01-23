@@ -3,6 +3,7 @@
 
 struct SongInternal
 {
+	std::string Path;
 };
 
 #endif

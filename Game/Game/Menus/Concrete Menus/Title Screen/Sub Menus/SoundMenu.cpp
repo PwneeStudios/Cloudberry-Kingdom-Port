@@ -55,6 +55,7 @@ namespace CloudberryKingdom
 		SaveGroup::SaveAll();
 		PlayerManager::SaveRezAndKeys();
 	}
+#endif
 
 	SoundMenu::InitOnConfirmedIndexSelect_Language::InitOnConfirmedIndexSelect_Language( const boost::shared_ptr<SoundMenu> &sm, const boost::shared_ptr<MenuList> &FsLanguageList )
 	{
@@ -71,6 +72,7 @@ namespace CloudberryKingdom
         //PlayerManager::SaveRezAndKeys();
 	}
 
+#if defined(PC_VERSION)
 	SoundMenu::Toggle_BorderlessProxy::Toggle_BorderlessProxy( const boost::shared_ptr<SoundMenu> &sm )
 	{
 		this->sm = sm;

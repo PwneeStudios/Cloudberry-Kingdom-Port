@@ -37,10 +37,12 @@ Effect::~Effect()
 	delete internal_;
 }
 
+extern std::string PS3_PATH_PREFIX;
+
 void Effect::Load( const std::string &name )
 {
-	internal_->VertexProgram = cgCreateProgramFromFile( cgCreateContext(), CG_BINARY, ( "/app_home/" + name + ".vpo" ).c_str(), cgGLGetLatestProfile( CG_GL_VERTEX ), NULL, NULL );
-	internal_->FragmentProgram = cgCreateProgramFromFile( cgCreateContext(), CG_BINARY, ( "/app_home/" + name + ".fpo" ).c_str(), cgGLGetLatestProfile( CG_GL_FRAGMENT ), NULL, NULL );
+	internal_->VertexProgram = cgCreateProgramFromFile( cgCreateContext(), CG_BINARY, ( PS3_PATH_PREFIX + "ContentPS3/" + name + ".vpo" ).c_str(), cgGLGetLatestProfile( CG_GL_VERTEX ), NULL, NULL );
+	internal_->FragmentProgram = cgCreateProgramFromFile( cgCreateContext(), CG_BINARY, ( PS3_PATH_PREFIX + "ContentPS3/" + name + ".fpo" ).c_str(), cgGLGetLatestProfile( CG_GL_FRAGMENT ), NULL, NULL );
 
 	internal_->Parameters[ "SecretDefaultParameter" ] = boost::make_shared<EffectParameter>( *this, 0 );
 	DefaultTechnique = boost::make_shared<EffectTechnique>(

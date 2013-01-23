@@ -9,6 +9,20 @@ std::vector<std::wstring> MusicList()
 	std::vector<std::wstring> v;
 	v.reserve( 800 );
 
+#ifdef PS3	
+	v.push_back( std::wstring( L"Music/140_Mph_in_the_Fog^Blind_Digital.mp3" ) );
+	v.push_back( std::wstring( L"Music/Blue_Chair^Blind_Digital.mp3" ) );
+	v.push_back( std::wstring( L"Music/Evidence^Blind_Digital.mp3" ) );
+	v.push_back( std::wstring( L"Music/Get_a_Grip^Peacemaker.mp3" ) );
+	v.push_back( std::wstring( L"Music/Happy.mp3" ) );
+	v.push_back( std::wstring( L"Music/House^Blind_Digital.mp3" ) );
+	v.push_back( std::wstring( L"Music/Nero's_Law^Peacemaker.mp3" ) );
+	v.push_back( std::wstring( L"Music/Ripcurl^Blind_Digital.mp3" ) );
+	v.push_back( std::wstring( L"Music/The_Fat_is_in_the_Fire^Peacemaker.mp3" ) );
+	v.push_back( std::wstring( L"Music/The_Heavens_Opened^Peacemaker.mp3" ) );
+	v.push_back( std::wstring( L"Music/Tidy_Up^Peacemaker.mp3" ) );
+	v.push_back( std::wstring( L"Music/Writer's_Block^Peacemaker.mp3" ) );
+#else
 	v.push_back( std::wstring( L"Music/140_Mph_in_the_Fog^Blind_Digital.wma" ) );
 	v.push_back( std::wstring( L"Music/Blue_Chair^Blind_Digital.wma" ) );
 	v.push_back( std::wstring( L"Music/Evidence^Blind_Digital.wma" ) );
@@ -21,6 +35,7 @@ std::vector<std::wstring> MusicList()
 	v.push_back( std::wstring( L"Music/The_Heavens_Opened^Peacemaker.wma" ) );
 	v.push_back( std::wstring( L"Music/Tidy_Up^Peacemaker.wma" ) );
 	v.push_back( std::wstring( L"Music/Writer's_Block^Peacemaker.wma" ) );
+#endif
 
 	return v;
 }

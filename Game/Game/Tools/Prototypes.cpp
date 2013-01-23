@@ -540,7 +540,7 @@ namespace CloudberryKingdom
 		bob.insert( std::make_pair( BobPhsxTimeship::getInstance(), NewBob ) );
 
 		// Meat
-		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/MeatBoy.smo" ) );
+		std::wstring MeatBoyPath = Path::Combine( Globals::ContentDirectory, std::wstring( L"Objects/meatboy.smo" ) );
 		NewBob = boost::make_shared<Bob>( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance(), true );
 		NewBob->LoadFromFile( MeatBoyPath, Tools::EffectWad, Tools::TextureWad, BobPhsxMeat::getInstance() );
 		NewBob->IsSpriteBased = false;

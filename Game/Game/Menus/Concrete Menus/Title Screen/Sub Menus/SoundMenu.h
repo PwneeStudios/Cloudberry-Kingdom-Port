@@ -84,6 +84,8 @@ namespace CloudberryKingdom
 	
 		virtual void Init();
 
+		void ReturnToCaller();
+
 #if defined(PC_VERSION)
 		//private void AddToggle_FixedTimestep()
 		//{
@@ -111,8 +113,6 @@ namespace CloudberryKingdom
 		//    SaveGroup.SaveAll();
 		//    PlayerManager::SaveRezAndKeys();
 		//}
-
-		void ReturnToCaller();
 
 		void AddToggle_Borderless();
 
