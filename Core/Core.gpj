@@ -1,6 +1,7 @@
 #!gbuild
 [Library]
 	-object_dir=objs\Core
+	-I../fmodex/inc
 src\Audio\streamlib\streamPool.c
 src\Audio\SongWiiU.cpp
 src\Audio\MediaPlayerWiiU.cpp
