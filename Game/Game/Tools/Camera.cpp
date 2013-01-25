@@ -382,7 +382,7 @@ namespace CloudberryKingdom
 		if ( SpeedVel != 0 )
 		{
 			float dif = TargetSpeed - Speed;
-			Speed += __min( SpeedVel, abs( dif ) ) * Sign( dif );
+			Speed += __min( SpeedVel, fabs( dif ) ) * Sign( dif );
 		}
 
 		switch ( MyPhsxType )
@@ -540,8 +540,8 @@ namespace CloudberryKingdom
 		Vector2 CurMaxSpeed = Vector2::Max( Vector2( Speed ), 1.05f * MaxPlayerSpeed );
 
 		CurMaxSpeed = Vector2( 60 );
-		Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
-		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
+		Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * fabs( Target.X - Data.Position.X ), CurMaxSpeed.X );
+		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * fabs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
 
 		Update();
 	}
@@ -823,12 +823,12 @@ namespace CloudberryKingdom
 			float Retard = 1;
 			if ( MyZone != 0 && Data.Position.X > MyZone->End.X )
 				Retard = CoreMath::LerpRestrict( 1.f, 0.f, ( Data.Position.X - MyZone->End.X ) / 200 );
-			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 16 ), Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
+			Data.Position.X += __max( Retard * __min( MyLevel->CurPhsxStep *.1f, 16 ), Sign( Target.X - Data.Position.X ) * __min( .15f * fabs( Target.X - Data.Position.X ), CurMaxSpeed.X ) );
 		}
 		else
-			Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * abs( Target.X - Data.Position.X ), CurMaxSpeed.X );
+			Data.Position.X += Sign( Target.X - Data.Position.X ) * __min( .15f * fabs( Target.X - Data.Position.X ), CurMaxSpeed.X );
 
-		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * abs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
+		Data.Position.Y += Sign( Target.Y - Data.Position.Y ) * __min( .15f * fabs( Target.Y - Data.Position.Y ), CurMaxSpeed.Y );
 
 
 		Update();

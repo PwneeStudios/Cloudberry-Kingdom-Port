@@ -235,7 +235,7 @@ namespace CloudberryKingdom
 		// Additional wall jumping phsx
 		if ( WallJumpCount > 0 )
 		{
-			if ( !MyBob->CurInput.A_Button || abs( MyBob->CurInput.xVec.X ) > 0.3f && Sign( MyBob->CurInput.xVec.X ) == getStickyDir() )
+			if ( !MyBob->CurInput.A_Button || fabs( MyBob->CurInput.xVec.X ) > 0.3f && Sign( MyBob->CurInput.xVec.X ) == getStickyDir() )
 				WallJumpCount = 0;
 			else
 			{
@@ -360,8 +360,8 @@ namespace CloudberryKingdom
 			NewTarget();
 		}
 
-		if ( abs( getxVel() ) < 5 && getyVel() > 5 && OnGround )
-			if ( abs( Target.X - getPos().X ) < 200 )
+		if ( fabs( getxVel() ) < 5 && getyVel() > 5 && OnGround )
+			if ( fabs( Target.X - getPos().X ) < 200 )
 			{
 				NewTarget();
 				if ( getPos().X > getCam()->getPos().X && Target.X > getCam()->getPos().X )

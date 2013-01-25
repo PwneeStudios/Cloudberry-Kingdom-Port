@@ -280,7 +280,7 @@ namespace CloudberryKingdom
 
 	Vector2 Level::BaseMetric::Apply( const boost::shared_ptr<ObjectBase> &A, const boost::shared_ptr<ObjectBase> &B )
 	{
-		return Vector2( abs( A->getCore()->Data.Position.X - B->getCore()->Data.Position.X ), abs(A->getCore()->Data.Position.Y - B->getCore()->Data.Position.Y) );
+		return Vector2( fabs( A->getCore()->Data.Position.X - B->getCore()->Data.Position.X ), fabs(A->getCore()->Data.Position.Y - B->getCore()->Data.Position.Y) );
 	}
 
 	Level::ConstLambda::ConstLambda( Vector2 c )
@@ -794,7 +794,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<NormalBlock> Level::MakePillarBack( Vector2 p1, Vector2 p2 )
 	{
 		boost::shared_ptr<NormalBlock> doo = boost::static_pointer_cast<NormalBlock>( getRecycle()->GetObject(ObjectType_NORMAL_BLOCK, true) );
-		doo->Init( ( p1 + p2 ) / 2, Vector2( 350, abs( p2.Y - p1.Y ) / 2 ), getMyTileSetInfo() );
+		doo->Init( ( p1 + p2 ) / 2, Vector2( 350, fabs( p2.Y - p1.Y ) / 2 ), getMyTileSetInfo() );
 
 		AddBlock( doo );
 
@@ -3752,7 +3752,7 @@ int Level::AfterPostDrawLayer = 12;
 		{
 			if ( !obj->getCore()->MarkedForDeletion && !(*obj2)->getCore()->MarkedForDeletion && obj != *obj2 )
 			{
-				float d = static_cast<float>( abs( obj->getPos().X - (*obj2)->getPos().X ) );
+				float d = static_cast<float>( fabs( obj->getPos().X - (*obj2)->getPos().X ) );
 
 				if ( d < MinDist )
 				{
@@ -3870,7 +3870,7 @@ int Level::AfterPostDrawLayer = 12;
 						A = ( *bob )->MyPiece->Recording_Renamed[ i ]->AutoOnGround[ index ];
 						B = ( *bob )->MyPhsx->OnGround;
 						Vector2 dif = a - b;
-						if ( abs( dif.X ) > .001f || abs( dif.Y ) > .001f )
+						if ( fabs( dif.X ) > .001f || fabs( dif.Y ) > .001f )
 						{
 							if ( CurPhsxStep < ( *bob )->MyPiece->PieceLength - 15 )
 							{

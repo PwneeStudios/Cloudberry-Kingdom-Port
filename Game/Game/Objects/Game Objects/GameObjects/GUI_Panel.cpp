@@ -332,7 +332,7 @@ namespace CloudberryKingdom
 	{
 		if ( FixedToCamera )
 		{
-			return Pos->Playing || abs( Pos->RelVal.X ) < .85f * Tools::CurLevel->getMainCamera()->GetWidth() && abs(Pos->RelVal.Y) < .85f * Tools::CurLevel->getMainCamera()->GetHeight();
+			return Pos->Playing || fabs( Pos->RelVal.X ) < .85f * Tools::CurLevel->getMainCamera()->GetWidth() && fabs(Pos->RelVal.Y) < .85f * Tools::CurLevel->getMainCamera()->GetHeight();
 				// Pos.RelVal.Length() < .5f * Tools::CurLevel.MainCamera.GetWidth();
 		}
 		else

@@ -49,7 +49,7 @@ namespace CloudberryKingdom
 			if ( i >= 0 && i < static_cast<int>( Text.size() ) )
 			{
 				Text[ i ]->_Pos = getCore()->Data.Position - (i - ContinuousIndex) * Vector2(0, 100);
-				Text[ i ]->MyFloatColor.W = Alpha *.5f * ( 2 - abs( i - ContinuousIndex ) );
+				Text[ i ]->MyFloatColor.W = Alpha *.5f * ( 2 - fabs( i - ContinuousIndex ) );
 				Text[ i ]->Draw( MyCam, false );
 			}
 		}

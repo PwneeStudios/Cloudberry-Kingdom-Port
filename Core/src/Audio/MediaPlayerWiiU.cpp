@@ -492,6 +492,8 @@ void InitializeVoice( AXVPB *v, bool left, AACDecoder *decoder )
 
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
+	return;
+
 	MediaPlayer::Stop();
 
 	Decoder->Initialize( reinterpret_cast< u8 * >( song->internal_->Data ), song->internal_->Length );

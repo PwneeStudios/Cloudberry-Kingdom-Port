@@ -205,7 +205,7 @@ namespace CloudberryKingdom
 							_quad->Center->RelPos = shift / scale;
 							_quad->xAxis->RelPos.X = scale * static_cast<float>( texture->Width ) / static_cast<float>( texture->Height );
 							if ( reverse )
-								_quad->xAxis->RelPos.X = -abs( _quad->xAxis->RelPos.X );
+								_quad->xAxis->RelPos.X = -fabs( _quad->xAxis->RelPos.X );
 							_quad->yAxis->RelPos.Y = scale;
 
 							if ( BrandNew )

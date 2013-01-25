@@ -218,9 +218,9 @@ void TexturePc::loadPng()
 static unsigned char Paeth( short a, short b, short c )
 {
 	short p = a + b - c;
-	short pa = abs( p - a );
-	short pb = abs( p - b );
-	short pc = abs( p - c );
+	short pa = fabs( p - a );
+	short pb = fabs( p - b );
+	short pc = fabs( p - c );
 
 	if( pa <= pb && pa <= pc )
 		return static_cast< unsigned char >( a );

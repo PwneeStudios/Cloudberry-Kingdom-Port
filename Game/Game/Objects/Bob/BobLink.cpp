@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 			Force = a_out * ( Length - L );
 		else
 			Force = a_in * ( Length - L );
-		if ( abs( Force ) > MaxForce )
+		if ( fabs( Force ) > MaxForce )
 			Force = ::Sign( Force ) * MaxForce;
 
 		Vector2 Bottom = Vector2::Min( j->getCore()->Data.Position, k->getCore()->Data.Position );

@@ -220,7 +220,7 @@ namespace CloudberryKingdom
 				float s = j / static_cast<float>( HorizontalSections );
 
 				Nodes[ i * ( HorizontalSections + 1 ) + j ].Data.Position = s * pos2 + ( 1 - s ) * pos1;
-				Nodes[ i * ( HorizontalSections + 1 ) + j ].Data.Position.Y -= 30 * ( 1 - 2 * abs( s - .5f ) ) * t;
+				Nodes[ i * ( HorizontalSections + 1 ) + j ].Data.Position.Y -= 30 * ( 1 - 2 * fabs( s - .5f ) ) * t;
 				Nodes[ i * ( HorizontalSections + 1 ) + j ].Show = j == 0 || j == HorizontalSections || i == Sections;
 				Nodes[ i * ( HorizontalSections + 1 ) + j ].AnchorIndex = -1;
 

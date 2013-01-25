@@ -267,8 +267,8 @@ namespace CloudberryKingdom
 
 				case LevelGeometry_DOWN:
 				case LevelGeometry_UP:
-					level->MakeVertical( 3000, abs( ( *Piece )->End.Y - ( *Piece )->Start.Y ), 0, ReturnEarly, makeData );
-					Height += abs( ( *Piece )->End.Y - ( *Piece )->Start.Y );
+					level->MakeVertical( 3000, fabs( ( *Piece )->End.Y - ( *Piece )->Start.Y ), 0, ReturnEarly, makeData );
+					Height += fabs( ( *Piece )->End.Y - ( *Piece )->Start.Y );
 					break;
 
 				//case LevelGeometry.Big:
@@ -507,7 +507,7 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::DefaultRead( const std::wstring &str )
 	{
-		int i = abs( GetHashCode(str) );
+		int i = fabs( GetHashCode(str) );
 
 		// Length
 		Length = PieceLength = static_cast<int>( ( static_cast<unsigned int>( i * 997 ) ) % 7000 + 5000 );
@@ -898,10 +898,10 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::ModPieceViaHash( const boost::shared_ptr<PieceSeedData> &piece )
 	{
-		PieceHash = abs( PieceHash );
+		PieceHash = fabs( PieceHash );
 		PieceHash *= 997;
 		PieceHash %= 1024;
-		PieceHash = abs( PieceHash );
+		PieceHash = fabs( PieceHash );
 
 		int Bias = static_cast<int>( 75 - static_cast<unsigned int>( PieceHash ) % 50 );
 

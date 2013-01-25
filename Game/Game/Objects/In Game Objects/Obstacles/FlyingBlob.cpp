@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 			p->Data.Position = getCore()->Data.Position + 50 * Dir;
 			p->Data.Velocity = 20 * static_cast<float>( getMyLevel()->getRnd()->Rnd->NextDouble() ) * Dir;
 
-			p->Data.Velocity.Y = .5f * abs( p->Data.Velocity.Y );
+			p->Data.Velocity.Y = .5f * fabs( p->Data.Velocity.Y );
 			p->Data.Velocity.Y += 6;
 			p->Data.Velocity += vel;
 			p->AngleSpeed *= 2 * static_cast<float>( getMyLevel()->getRnd()->Rnd->NextDouble() - .5f );
@@ -363,13 +363,13 @@ namespace CloudberryKingdom
 				getCore()->Data.Velocity.X = BobMaxSpeed[ static_cast<int>(MyMoveType) ] / 10;
 		}
 
-		if ( !( Left || Right ) || !Run && abs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
+		if ( !( Left || Right ) || !Run && fabs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
 		{
-			if ( abs( getCore()->Data.Velocity.X ) < 2 )
+			if ( fabs( getCore()->Data.Velocity.X ) < 2 )
 				getCore()->Data.Velocity.X /= 2;
 			else
 			{
-				if ( abs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
+				if ( fabs( getCore()->Data.Velocity.X ) > BobMaxSpeed[ static_cast<int>(MyMoveType) ] )
 					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * BobXFriction;
 				else
 					getCore()->Data.Velocity.X -= ::Sign(getCore()->Data.Velocity.X) * 7.f / 4.f * BobXFriction;

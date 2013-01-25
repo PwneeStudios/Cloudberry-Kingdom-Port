@@ -304,7 +304,7 @@ namespace CloudberryKingdom
 			DelayCount--;
 
 			float Sensitivity = ButtonCheck::ThresholdSensitivity;
-			if ( abs( Dir.X ) < Sensitivity / 2 )
+			if ( fabs( Dir.X ) < Sensitivity / 2 )
 				DelayCount -= 3;
 		}
 		else
@@ -326,7 +326,7 @@ namespace CloudberryKingdom
 	#endif
 
 				float Sensitivity = ButtonCheck::ThresholdSensitivity;
-				if ( abs( Dir.X ) > Sensitivity )
+				if ( fabs( Dir.X ) > Sensitivity )
 				{
 					IncrementIndex( ::Sign( Dir.X ) );
 				}

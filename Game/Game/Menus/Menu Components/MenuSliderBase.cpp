@@ -242,7 +242,7 @@ namespace CloudberryKingdom
 			else
 			{
 				float Sensitivty = ButtonCheck::ThresholdSensitivity;
-				if ( abs( Dir.X ) > Sensitivty )
+				if ( fabs( Dir.X ) > Sensitivty )
 				{
 					getMyFloat()->setVal( static_cast<float>( static_cast<int>( getMyFloat()->getVal() ) + ::Sign( Dir.X ) ) );
 					Slide();
@@ -253,7 +253,7 @@ namespace CloudberryKingdom
 		}
 		else
 		{
-			if ( abs( Dir.X ) > .5f )
+			if ( fabs( Dir.X ) > .5f )
 			{
 				getMyFloat()->setVal(getMyFloat()->getVal() + Dir.X * Speed);
 				Slide();
@@ -261,7 +261,7 @@ namespace CloudberryKingdom
 				Speed = Acceleration * MaxSlideSpeed + ( 1 - Acceleration ) * Speed;
 			}
 
-			if ( abs( Dir.X ) < .5f || ::Sign( Dir.X ) != ::Sign( PrevDir.X ) )
+			if ( fabs( Dir.X ) < .5f || ::Sign( Dir.X ) != ::Sign( PrevDir.X ) )
 				Speed = InitialSlideSpeed;
 		}
 

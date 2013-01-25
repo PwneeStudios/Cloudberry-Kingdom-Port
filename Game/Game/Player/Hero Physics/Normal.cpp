@@ -325,7 +325,7 @@ namespace CloudberryKingdom
 
 			int layer = __max( 1, MyBob->getCore()->DrawLayer - 1 );
 
-			float scale = .5f * ( abs( Mod.X ) - 1 ) + 1;
+			float scale = .5f * ( fabs( Mod.X ) - 1 ) + 1;
 
 			if ( Ducking )
 				ParticleEffects::Thrust( MyBob->getCore()->MyLevel, layer, getPos() + Mod * ThrustPos_Duck, Mod * ThrustDir_Duck, getVel() / 1.5f, scale );
@@ -511,9 +511,9 @@ namespace CloudberryKingdom
 		}
 
 		bool Run = false;
-		if ( abs( MyBob->CurInput.xVec.X ) < .15f || !Run && abs( getxVel() ) > MaxSpeed || (Ducking && (OnGround || FallingCount < 2)) )
+		if ( fabs( MyBob->CurInput.xVec.X ) < .15f || !Run && fabs( getxVel() ) > MaxSpeed || (Ducking && (OnGround || FallingCount < 2)) )
 		{
-			if ( Ducking && ( OnGround || FallingCount < 2 ) && abs( getxVel() ) < 2 )
+			if ( Ducking && ( OnGround || FallingCount < 2 ) && fabs( getxVel() ) < 2 )
 				setxVel( 0 );
 
 			float fric = XFriction;
@@ -522,7 +522,7 @@ namespace CloudberryKingdom
 
 			fric *= FricMod;
 
-			if ( abs( getxVel() ) < 2 )
+			if ( fabs( getxVel() ) < 2 )
 				setxVel( getxVel() / 12 );
 			else
 			{
@@ -532,7 +532,7 @@ namespace CloudberryKingdom
 				if ( !Ducking )
 				{
 					// If we were above max speed do not reduce below max speed this frame if xVec.x > 0
-					if ( abs( Prev_xVel ) >= MaxSpeed && abs( getxVel() ) < MaxSpeed )
+					if ( fabs( Prev_xVel ) >= MaxSpeed && fabs( getxVel() ) < MaxSpeed )
 						setxVel( Sign( getxVel() ) * MaxSpeed *.999f );
 				}
 			}
@@ -1177,7 +1177,7 @@ namespace CloudberryKingdom
 					break;
 				case 2:
 					InnerPeriod *= 3;
-					t = abs( ( Step % static_cast<int>( InnerPeriod ) ) / InnerPeriod );
+					t = fabs( ( Step % static_cast<int>( InnerPeriod ) ) / InnerPeriod );
 					break;
 				case 3:
 					InnerPeriod *= 7.f / 4.f;
@@ -1303,7 +1303,7 @@ namespace CloudberryKingdom
 
 
 		// Falling animation
-		if ( !OnGround && !Ducking && !Jumped && MyBob->PlayerObject->DestinationAnim() != 3 && abs(getxVel()) < 4 && DynamicLessThan(getyVel(), -15) )
+		if ( !OnGround && !Ducking && !Jumped && MyBob->PlayerObject->DestinationAnim() != 3 && fabs(getxVel()) < 4 && DynamicLessThan(getyVel(), -15) )
 		{
 			Clear( MyBob->PlayerObject->AnimQueue );
 			//MyBob->PlayerObject->AnimQueue.clear();
@@ -1343,7 +1343,7 @@ namespace CloudberryKingdom
 
 		// Standing animation
 		if ( !Ducking )
-			if ( abs( getxVel() ) < 1 && OnGround && MyBob->PlayerObject->DestinationAnim() != 0 || MyBob->PlayerObject->DestinationAnim() == 2 && OnGround && DynamicLessThan(getyVel(), 0) )
+			if ( fabs( getxVel() ) < 1 && OnGround && MyBob->PlayerObject->DestinationAnim() != 0 || MyBob->PlayerObject->DestinationAnim() == 2 && OnGround && DynamicLessThan(getyVel(), 0) )
 			{
 			{
 					int HoldDest = MyBob->PlayerObject->DestinationAnim();
@@ -1358,7 +1358,7 @@ namespace CloudberryKingdom
 
 		// Running animation
 		if ( !Ducking )
-			if ( ( abs( getxVel() ) >= 1 && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
+			if ( ( fabs( getxVel() ) >= 1 && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
 			{
 				{
 					Clear( MyBob->PlayerObject->AnimQueue );
@@ -1409,7 +1409,7 @@ namespace CloudberryKingdom
 			if ( IceRun )
 				AnimSpeed = RunAnimSpeed * __max( .35f,.1f * SameInputDirectionCount );
 			else
-				AnimSpeed = RunAnimSpeed * __max( .35f,.1f * abs( getxVel() ) );
+				AnimSpeed = RunAnimSpeed * __max( .35f,.1f * fabs( getxVel() ) );
 		}
 
 		if ( MyBob->CharacterSelect_Renamed )
@@ -1473,7 +1473,7 @@ namespace CloudberryKingdom
 
 		// Standing animation
 		if ( !Ducking )
-			if ( ( abs( getxVel() ) < 1 || IceRun ) && OnGround && MyBob->PlayerObject->DestinationAnim() != 0 || MyBob->PlayerObject->DestinationAnim() == 2 && OnGround && DynamicLessThan(getyVel(), 0) )
+			if ( ( fabs( getxVel() ) < 1 || IceRun ) && OnGround && MyBob->PlayerObject->DestinationAnim() != 0 || MyBob->PlayerObject->DestinationAnim() == 2 && OnGround && DynamicLessThan(getyVel(), 0) )
 			{
 				if ( !( MyBob->PlayerObject->DestinationAnim() == 5 && SameInputDirectionCount > 0 ) )
 				if ( !( IceRun && SameInputDirectionCount > 0 && OnGround ) )
@@ -1493,7 +1493,7 @@ namespace CloudberryKingdom
 		if ( !Ducking )
 		{
 			// Slide
-			if ( !IceRun && abs( getxVel() ) >= .35f && OnGround && Sign(MyBob->CurInput.xVec.X) != Sign(getxVel()) && abs(MyBob->CurInput.xVec.X) > 0.35f )
+			if ( !IceRun && fabs( getxVel() ) >= .35f && OnGround && Sign(MyBob->CurInput.xVec.X) != Sign(getxVel()) && fabs(MyBob->CurInput.xVec.X) > 0.35f )
 			{
 				if ( MyBob->PlayerObject->DestinationAnim() != 5 )
 				{
@@ -1503,7 +1503,7 @@ namespace CloudberryKingdom
 			}
 			else
 
-			if ( ( ( abs( getxVel() ) >= .35f && !IceRun || SameInputDirectionCount > 0 && IceRun ) && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
+			if ( ( ( fabs( getxVel() ) >= .35f && !IceRun || SameInputDirectionCount > 0 && IceRun ) && OnGround ) && (MyBob->PlayerObject->DestinationAnim() != 1 || MyBob->PlayerObject->AnimQueue.empty() || !MyBob->PlayerObject->Play || !MyBob->PlayerObject->Loop) )
 			{
 				{
 					Clear( MyBob->PlayerObject->AnimQueue );
@@ -1548,7 +1548,7 @@ namespace CloudberryKingdom
 				AnimSpeed = 1.29f * RunAnimSpeed * __min( 1, SameInputDirectionCount != 0 ? 1 : 0 );
 			}
 			else
-				AnimSpeed = 1.29f * RunAnimSpeed * __max( .35f,.1f * abs( getxVel() ) );
+				AnimSpeed = 1.29f * RunAnimSpeed * __max( .35f,.1f * fabs( getxVel() ) );
 		}
 
 		if ( MyBob->CharacterSelect_Renamed )

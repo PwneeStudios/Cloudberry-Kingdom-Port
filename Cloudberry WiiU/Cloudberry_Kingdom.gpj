@@ -7,6 +7,8 @@
 	-o Cloudberry_Kingdom.elf
 	-I.
 	-laacdec.a
+Game\Game\Player\Hero Physics\TimeShip.cpp
+Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp

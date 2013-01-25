@@ -561,7 +561,7 @@ namespace CloudberryKingdom
 			if ( Dir.Length() < .2f )
 				DelayCount = 0;
 
-			if ( abs( Dir.Y ) > ButtonCheck::ThresholdSensitivity )
+			if ( fabs( Dir.Y ) > ButtonCheck::ThresholdSensitivity )
 			{
 				MotionCount++;
 				if ( DelayCount <= 0 )

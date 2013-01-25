@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 			for ( int i = 0; i < MyLevel->CurPiece->NumBobs; i++ )
 			{
 				Vector2 BobPos = MyLevel->CurPiece->Recording_Renamed[ i ]->AutoLocs[ j ];
-				float Dist = abs( BobPos.X - Pos.X );
+				float Dist = fabs( BobPos.X - Pos.X );
 
 				if ( Dist < MinDist )
 				{

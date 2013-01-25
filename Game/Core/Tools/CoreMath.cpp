@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include <cmath>
 #include <Hacks\String.h>
 #include <Hacks\List.h>
 
@@ -127,7 +128,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::AngleDist( float a1, float a2 )
 	{
-		float dist = abs( a1 - a2 );
+		float dist = fabs( a1 - a2 );
 		dist = fmod( dist, 360.f );
 		return __min( dist, 360 - dist );
 	}
@@ -170,7 +171,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::SupNorm( Vector2 v )
 	{
-		return __max( abs( v.X ), abs( v.Y ) );
+		return __max( fabs( v.X ), fabs( v.Y ) );
 	}
 
 	Vector2 CoreMath::Sign( Vector2 v )
@@ -213,7 +214,7 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	Vector2 CoreMath::Abs( Vector2 v )
 	{
-		return Vector2( abs( v.X ), abs( v.Y ) );
+		return Vector2( fabs( v.X ), fabs( v.Y ) );
 	}
 
 	bool CoreMath::Close( Vector2 v1, Vector2 v2, Vector2 Cutoff )
@@ -403,8 +404,8 @@ float CoreMath::c = 180 / static_cast<float>( M_PI );
 
 	float CoreMath::ParabolaInterp( float t, Vector2 apex, float zero1, float power )
 	{
-		float q = static_cast<float>( pow( abs( zero1 - apex.X ), power ) );
-		return apex.Y * static_cast<float>( q - pow( abs( t - apex.X ), power ) ) / q;
+		float q = static_cast<float>( pow( fabs( zero1 - apex.X ), power ) );
+		return apex.Y * static_cast<float>( q - pow( fabs( t - apex.X ), power ) ) / q;
 	}
 
 	Vector2 CoreMath::Reciprocal( Vector2 v )

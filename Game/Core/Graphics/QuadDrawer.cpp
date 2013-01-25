@@ -77,6 +77,8 @@ namespace CloudberryKingdom
 			string fileContents;
 #ifdef PS3
 			string path = PS3_PATH_PREFIX + "ContentPS3/Fonts/" + name + ".fnt";
+#elif CAFE
+			string path = "Fonts/" + name + ".fnt";
 #else
 			string path = "Content/Fonts/" + name + ".fnt";
 #endif

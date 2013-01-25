@@ -202,7 +202,7 @@ namespace CloudberryKingdom
 		if ( NoMoveCount > 0 )
 			NoMoveCount--;
 
-		if ( abs( Dir.X - PrevDir.X ) > ButtonCheck::ThresholdSensitivity || NoMoveCount == 0 )
+		if ( fabs( Dir.X - PrevDir.X ) > ButtonCheck::ThresholdSensitivity || NoMoveCount == 0 )
 		{
 			if ( Dir.X > ButtonCheck::ThresholdSensitivity )
 				SimpleSelect_Right();

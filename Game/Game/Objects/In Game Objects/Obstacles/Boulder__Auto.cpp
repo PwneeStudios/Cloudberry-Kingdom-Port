@@ -182,7 +182,7 @@ boost::shared_ptr<Boulder_AutoGen> Boulder_AutoGen::instance = boost::make_share
 		if ( ( bob->MyPhsx->OnGround || bob->getCore()->Data.Velocity.Y < 0 ) )
 			pos.Y = bob->getCore()->Data.Position.Y + 200;
 		pos.Y = __max( bob->getCore()->MyLevel->getMainCamera()->BL.Y + 270, __min(pos.Y, bob->getCore()->MyLevel->getMainCamera()->TR.Y - 550) );
-		if ( abs( bob->getCore()->Data.Position.Y - pos.Y ) < 100 )
+		if ( fabs( bob->getCore()->Data.Position.Y - pos.Y ) < 100 )
 			pos.X += .4f * ( pos.X - bob->getCore()->Data.Position.X );
 
 		return pos;

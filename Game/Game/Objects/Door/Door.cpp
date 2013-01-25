@@ -425,11 +425,11 @@ namespace CloudberryKingdom
 		float scale = bob->GetScale().X;
 
 		float x_pad = DoorSize.X + HitBoxPadding.X + getInfo()->Doors->SizePadding.X + 22 + .018f * bob->Box->Current->Size.X + __max(0, 36 * (scale - 1));
-		x_pad = CoreMath::RestrictVal( abs( bob->getCore()->Data.Velocity.X * 1.3f ), 500.f, x_pad );
+		x_pad = CoreMath::RestrictVal( fabs( bob->getCore()->Data.Velocity.X * 1.3f ), 500.f, x_pad );
 		float y_pad = DoorSize.Y + HitBoxPadding.Y + getInfo()->Doors->SizePadding.X + 50 + __max(0, 80 * (scale - 1));
 
 		bool InteractedWith = false;
-		if ( ( ( abs( bob->getPos().X - getPos().X ) < x_pad && abs(bob->getPos().Y - getPos().Y) < y_pad ) ) && (!bob->CompControl || AllowCompControl) && !getCore()->MyLevel->Watching && !getCore()->MyLevel->Replay )
+		if ( ( ( fabs( bob->getPos().X - getPos().X ) < x_pad && fabs(bob->getPos().Y - getPos().Y) < y_pad ) ) && (!bob->CompControl || AllowCompControl) && !getCore()->MyLevel->Watching && !getCore()->MyLevel->Replay )
 		{
 			NearCount++;
 			//if (NearCount > 10 || MyPressNote != null) // For debugging purposes, always have the note show up.
