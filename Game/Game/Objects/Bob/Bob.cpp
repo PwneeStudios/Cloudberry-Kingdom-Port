@@ -910,9 +910,9 @@ namespace CloudberryKingdom
 				CurInput.A_Button = false;
 
 			CurInput.xVec.X = CurInput.xVec.Y = 0;
-			if ( abs( pad.ThumbSticks.Left.X ) > .15f )
+			if ( fabs( pad.ThumbSticks.Left.X ) > .15f )
 				CurInput.xVec.X = pad.ThumbSticks.Left.X;
-			if ( abs( pad.ThumbSticks.Left.Y ) > .15f )
+			if ( fabs( pad.ThumbSticks.Left.Y ) > .15f )
 				CurInput.xVec.Y = pad.ThumbSticks.Left.Y;
 
 			if ( pad.DPad.Right == ButtonState_Pressed )
@@ -1558,12 +1558,12 @@ namespace CloudberryKingdom
 			float t = getCore()->MyLevel->GetPhsxStep() / 2.5f;
 			if ( CharacterSelect2 )
 				t = Tools::DrawCount / 2.5f;
-			float AmplitudeX = __min( 2.5f, abs( vel.X - AdditionalWind.X ) / 20 );
+			float AmplitudeX = __min( 2.5f, fabs( vel.X - AdditionalWind.X ) / 20 );
 			MyCape->AnchorPoint[ 0 ].Y += 15 * static_cast<float>( cos( t ) * AmplitudeX );
 			float Amp = 2;
 			if ( vel.Y < 0 )
 				Amp = 8;
-			float AmplitudeY = __min( 2.5f, abs( vel.Y - AdditionalWind.Y ) / 45 );
+			float AmplitudeY = __min( 2.5f, fabs( vel.Y - AdditionalWind.Y ) / 45 );
 			MyCape->AnchorPoint[ 0 ].X += Amp * static_cast<float>( sin( t ) * AmplitudeY );
 		}
 		//MyCape.AnchorPoint[0].X += .1f * (Core.Data.Velocity).X;
@@ -1630,7 +1630,7 @@ namespace CloudberryKingdom
 		{
 			ImmortalCountDown--;
 			if ( ImmortalCountDown < ImmortalLength - 15 )
-			if ( abs( CurInput.xVec.X ) > .5f || CurInput.A_Button )
+			if ( fabs( CurInput.xVec.X ) > .5f || CurInput.A_Button )
 				ImmortalCountDown = 0;
 		}
 
@@ -1664,7 +1664,7 @@ namespace CloudberryKingdom
 		{
 			getMyTempStats()->FinalTimeSpent++;
 
-			if ( abs( CurInput.xVec.X ) < .75f )
+			if ( fabs( CurInput.xVec.X ) < .75f )
 				getMyTempStats()->FinalTimeSpentNotMoving++;
 		}
 

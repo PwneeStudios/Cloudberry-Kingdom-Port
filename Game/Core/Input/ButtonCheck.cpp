@@ -5,6 +5,7 @@
 #include <Input/GamePad.h>
 #include <Hacks\List.h>
 
+#include <cmath>
 #include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -306,9 +307,9 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		Vector2 HoldDir = ButtonCheck::State( ControllerButtons_LJ, Control ).Dir;
 
 		// Take bigger magnitude of the two
-		if ( abs( HoldDir.X ) > abs( Dir.X ) )
+		if ( fabs( HoldDir.X ) > fabs( Dir.X ) )
 			Dir.X = HoldDir.X;
-		if ( abs( HoldDir.Y ) > abs( Dir.Y ) )
+		if ( fabs( HoldDir.Y ) > fabs( Dir.Y ) )
 			Dir.Y = HoldDir.Y;
 
 		// Make sure we exceed the threshold
@@ -316,9 +317,9 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		if ( Threshold )
 		{
 			float Sensitivty = ButtonCheck::ThresholdSensitivity;
-			if ( abs( Dir.X ) < Sensitivty )
+			if ( fabs( Dir.X ) < Sensitivty )
 				Dir.X = 0;
-			if ( abs( Dir.Y ) < Sensitivty )
+			if ( fabs( Dir.Y ) < Sensitivty )
 				Dir.Y = 0;
 		}
 
@@ -346,15 +347,15 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 			if ( PlayerManager::Get( i )->Exists || !MustExist )
 			{
 				Vector2 HoldDir = ButtonCheck::State( ControllerButtons_LJ, i ).Dir;
-				if ( abs( HoldDir.X ) > abs( Dir.X ) )
+				if ( fabs( HoldDir.X ) > fabs( Dir.X ) )
 					Dir.X = HoldDir.X;
-				if ( abs( HoldDir.Y ) > abs( Dir.Y ) )
+				if ( fabs( HoldDir.Y ) > fabs( Dir.Y ) )
 					Dir.Y = HoldDir.Y;
 
 				HoldDir = ButtonCheck::State( ControllerButtons_DPAD, i ).Dir;
-				if ( abs( HoldDir.X ) > abs( Dir.X ) )
+				if ( fabs( HoldDir.X ) > fabs( Dir.X ) )
 					Dir.X = HoldDir.X;
-				if ( abs( HoldDir.Y ) > abs( Dir.Y ) )
+				if ( fabs( HoldDir.Y ) > fabs( Dir.Y ) )
 					Dir.Y = HoldDir.Y;
 			}
 		}

@@ -227,7 +227,7 @@ namespace CloudberryKingdom
 
 		Vector2 dir = ButtonCheck::GetDir( -1 );
 
-		if ( Tools::TheGame->DrawCount % 7 == 0 && abs( dir.Y ) > .5f )
+		if ( Tools::TheGame->DrawCount % 7 == 0 && fabs( dir.Y ) > .5f )
 		{
 			if ( dir.Y > 0 )
 				setText( getText().substr(0, getLength() - 1) + IncrChar(c) );

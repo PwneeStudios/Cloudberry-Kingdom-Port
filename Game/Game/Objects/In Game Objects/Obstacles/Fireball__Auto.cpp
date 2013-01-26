@@ -103,7 +103,7 @@ boost::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = boost::make_sha
 
 		if ( Params->Arc )
 		{
-			emitter->getCore()->StartData.Acceleration.Y = -abs(Speed) / 100;
+			emitter->getCore()->StartData.Acceleration.Y = -fabs(Speed) / 100;
 		}
 
 		float MaxAngle = Params->FireballMaxAngle.GetVal( pos );
@@ -118,7 +118,7 @@ boost::shared_ptr<Fireball_AutoGen> Fireball_AutoGen::instance = boost::make_sha
 		if ( level->getStyle()->Masochistic )
 			emitter->Period = static_cast<int>( .9f * emitter->Period );
 
-		float v = abs( 2 * emitter->getCore()->StartData.Position.Y / (.785f * emitter->Period) );
+		float v = fabs( 2 * emitter->getCore()->StartData.Position.Y / (.785f * emitter->Period) );
 		emitter->getCore()->StartData.Velocity *= Speed * v / emitter->getCore()->StartData.Velocity.Y;
 		float actual_v = emitter->getCore()->StartData.Velocity.Length();
 

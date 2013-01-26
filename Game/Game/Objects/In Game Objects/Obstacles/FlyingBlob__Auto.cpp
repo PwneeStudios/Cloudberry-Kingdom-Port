@@ -98,7 +98,7 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 
 			SetMoveType( blob, Radius, FlyingBlob_Parameters::MotionType_CIRLCES, level->getRnd() );
 
-			blob->Displacement.X = Dir * abs( blob->Displacement.X );
+			blob->Displacement.X = Dir * fabs( blob->Displacement.X );
 
 			blob->getCore()->GenData.RemoveIfUnused = false;
 
@@ -133,7 +133,7 @@ boost::shared_ptr<FlyingBlob_AutoGen> FlyingBlob_AutoGen::instance = boost::make
 		blob->getCore()->GenData.RemoveIfUnused = false;
 
 		SetMoveType( blob, Params->TunnelDisplacement, Params->TunnelMotionType, Rnd );
-		blob->Displacement.X = abs( blob->Displacement.X );
+		blob->Displacement.X = fabs( blob->Displacement.X );
 
 		blob->Offset = 0;
 	}

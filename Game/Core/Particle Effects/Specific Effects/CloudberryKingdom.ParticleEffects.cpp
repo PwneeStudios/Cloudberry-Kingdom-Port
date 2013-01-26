@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include <cmath>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
@@ -409,7 +410,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 			p->Size *= scale;
 			if ( k % 2 == 0 )
 			{
-				p->Data.Velocity.Y = -.5f * abs( p->Data.Velocity.Y );
+				p->Data.Velocity.Y = -.5f * fabs( p->Data.Velocity.Y );
 				p->Data.Velocity.Y -= 10;
 			}
 			else
@@ -435,7 +436,7 @@ boost::shared_ptr<Particle> ParticleEffects::CoalesceTemplate = 0;
 			p->Data.Velocity = 10 * static_cast<float>( Tools::GlobalRnd->Rnd->NextDouble() ) * Dir;
 			if ( k % 2 == 0 )
 			{
-				p->Data.Velocity.Y = -.5f * abs( p->Data.Velocity.Y );
+				p->Data.Velocity.Y = -.5f * fabs( p->Data.Velocity.Y );
 				p->Data.Velocity.Y -= 10;
 			}
 			else

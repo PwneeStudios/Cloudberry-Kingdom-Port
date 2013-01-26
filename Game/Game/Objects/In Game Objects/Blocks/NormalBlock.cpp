@@ -426,7 +426,7 @@ float NormalBlock::TopOnlyHeight = 60;
 			{
 				boost::shared_ptr<NormalBlock> Normal = boost::dynamic_pointer_cast<NormalBlock>( *nblock );
 				if ( 0 != Normal && !Normal->getCore()->MarkedForDeletion && !Normal->getCore()->GenData.AlwaysUse )
-					if ( !Normal->getCore()->GenData.Used && abs(Normal->getBox()->Current->TR.Y - block->getBox()->TR.Y) < 15 && !(Normal->getBox()->Current->TR.X < block->getBox()->Current->BL.X - 350 || Normal->getBox()->Current->BL.X > block->getBox()->Current->TR.X + 350) )
+					if ( !Normal->getCore()->GenData.Used && fabs(Normal->getBox()->Current->TR.Y - block->getBox()->TR.Y) < 15 && !(Normal->getBox()->Current->TR.X < block->getBox()->Current->BL.X - 350 || Normal->getBox()->Current->BL.X > block->getBox()->Current->TR.X + 350) )
 					{
 						bob->DeleteObj( Normal );
 						Normal->setIsActive( false );

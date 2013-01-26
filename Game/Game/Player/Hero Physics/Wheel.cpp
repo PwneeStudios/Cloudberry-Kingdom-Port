@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		float xVec = MyBob->CurInput.xVec.X;
 		int xVecSign = Sign( xVec );
 
-		if ( abs( xVec ) > 0.2f )
+		if ( fabs( xVec ) > 0.2f )
 		{
 			// Faster acc if we are trying to reverse directions
 			if ( Sign( xVec ) != Sign( AngleSpeed ) )
@@ -118,7 +118,7 @@ namespace CloudberryKingdom
 		{
 			// Friction
 			AngleSpeed -= AngleFriction * Sign( AngleSpeed );
-			if ( abs( AngleSpeed ) < AngleFriction * 1.2f )
+			if ( fabs( AngleSpeed ) < AngleFriction * 1.2f )
 				AngleSpeed = 0;
 		}
 
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsxNormal::SideHit( side, block );
 
-		if ( abs( AngleSpeed ) > 0.5f * MaxAngleSpeed )
+		if ( fabs( AngleSpeed ) > 0.5f * MaxAngleSpeed )
 		{
 			if ( side == ColType_LEFT )
 				MyBob->getCore()->Data.Velocity.Y += .15f * (AngleToDist(AngleSpeed) - MyBob->getCore()->Data.Velocity.Y);

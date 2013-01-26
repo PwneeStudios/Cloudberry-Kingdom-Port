@@ -242,7 +242,7 @@ namespace CloudberryKingdom
 		if ( RndMoveType == 1 )
 			t = ( static_cast<float>( sinf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 2 )
-			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
+			t = fabs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
 		MyBob->TargetPosition.X = MyBob->MoveData.MinTargetY - 160 + t * ( 200 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
 		//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
@@ -251,7 +251,7 @@ namespace CloudberryKingdom
 			MyBob->CurInput.xVec.X = 1;
 		if ( MyBob->getCore()->Data.Position.X > MyBob->TargetPosition.X )
 			MyBob->CurInput.xVec.X = -1;
-		MyBob->CurInput.xVec.X *= __min( 1, abs( MyBob->TargetPosition.X - MyBob->getCore()->Data.Position.X ) / 100 );
+		MyBob->CurInput.xVec.X *= __min( 1, fabs( MyBob->TargetPosition.X - MyBob->getCore()->Data.Position.X ) / 100 );
 
 		if ( getPos().X > MyBob->TargetPosition.X + 400 )
 			MyBob->CurInput.xVec.X = 1;
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 		if ( RndMoveType == 1 )
 			t = ( static_cast<float>( sinf( MyBob->getCore()->MyLevel->GetPhsxStep() / 40.f ) ) + 1.f ) / 2.f;
 		if ( RndMoveType == 2 )
-			t = abs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
+			t = fabs( ( MyBob->getCore()->MyLevel->GetPhsxStep() % 120 ) / 120.f );
 
 		MyBob->TargetPosition.Y = MyBob->MoveData.MinTargetY - 200 + t * ( -90 + MyBob->MoveData.MaxTargetY - MyBob->MoveData.MinTargetY );
 				//+ 200 * (float)Math.Cos(MyBob.Core.MyLevel.GetPhsxStep() / 20f);
@@ -349,7 +349,7 @@ namespace CloudberryKingdom
 			MyBob->CurInput.xVec.Y = 1;
 		if ( MyBob->getCore()->Data.Position.Y > MyBob->TargetPosition.Y )
 			MyBob->CurInput.xVec.Y = -1;
-		MyBob->CurInput.xVec.Y *= __min( 1, abs( MyBob->TargetPosition.Y - MyBob->getCore()->Data.Position.Y ) / 100 );
+		MyBob->CurInput.xVec.Y *= __min( 1, fabs( MyBob->TargetPosition.Y - MyBob->getCore()->Data.Position.Y ) / 100 );
 
 		if ( getPos().X > CurPhsxStep * 1.1f * (4000.f / 600.f) )
 		{

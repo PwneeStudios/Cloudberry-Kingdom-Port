@@ -85,14 +85,14 @@ namespace CloudberryKingdom
 	{
 		BobPhsxNormal::Init( bob );
 
-		BobJumpAccel = -abs( BobJumpAccel );
+		BobJumpAccel = -fabs( BobJumpAccel );
 
-		Gravity = abs( Gravity );
-		BobInitialJumpSpeed = abs( BobInitialJumpSpeed );
-		BobInitialJumpSpeed2 = abs( BobInitialJumpSpeed2 );
-		BobInitialJumpSpeedDucking = abs( BobInitialJumpSpeedDucking );
-		BobInitialJumpSpeedDucking2 = abs( BobInitialJumpSpeedDucking2 );
-		BobMaxFallSpeed = -abs( BobMaxFallSpeed );
+		Gravity = fabs( Gravity );
+		BobInitialJumpSpeed = fabs( BobInitialJumpSpeed );
+		BobInitialJumpSpeed2 = fabs( BobInitialJumpSpeed2 );
+		BobInitialJumpSpeedDucking = fabs( BobInitialJumpSpeedDucking );
+		BobInitialJumpSpeedDucking2 = fabs( BobInitialJumpSpeedDucking2 );
+		BobMaxFallSpeed = -fabs( BobMaxFallSpeed );
 	}
 
 	void BobPhsxInvert::PhsxStep()
@@ -233,7 +233,7 @@ namespace CloudberryKingdom
 
 	void BobPhsxInvert::SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData )
 	{
-		if ( Count <= 0 || abs( MyBob->TargetPosition.Y - getPos().Y ) < 200 )
+		if ( Count <= 0 || fabs( MyBob->TargetPosition.Y - getPos().Y ) < 200 )
 		{
 			Count = getMyLevel()->getRnd()->RndInt(30, 60);
 
