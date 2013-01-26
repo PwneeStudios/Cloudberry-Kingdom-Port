@@ -507,7 +507,7 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::DefaultRead( const std::wstring &str )
 	{
-		int i = fabs( GetHashCode(str) );
+		int i = abs( GetHashCode(str) );
 
 		// Length
 		Length = PieceLength = static_cast<int>( ( static_cast<unsigned int>( i * 997 ) ) % 7000 + 5000 );
@@ -898,10 +898,10 @@ namespace CloudberryKingdom
 
 	void LevelSeedData::ModPieceViaHash( const boost::shared_ptr<PieceSeedData> &piece )
 	{
-		PieceHash = fabs( PieceHash );
+		PieceHash = abs( PieceHash );
 		PieceHash *= 997;
 		PieceHash %= 1024;
-		PieceHash = fabs( PieceHash );
+		PieceHash = abs( PieceHash );
 
 		int Bias = static_cast<int>( 75 - static_cast<unsigned int>( PieceHash ) % 50 );
 
