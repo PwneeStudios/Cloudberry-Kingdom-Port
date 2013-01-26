@@ -8,12 +8,16 @@ namespace CloudberryKingdom
 	struct NormalFactory : public GameFactory
 	{
 	
+		virtual ~NormalFactory() { }
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+
 	};
 
 	struct NormalGameData : public GameData
 	{
 	
+		virtual ~NormalGameData() { }
+
 		virtual void SetCreatedBobParameters( const boost::shared_ptr<Bob> &bob );
 
 		virtual void SetAdditionalLevelParameters();

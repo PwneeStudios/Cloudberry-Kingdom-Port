@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct TextList : public ObjectBase
 	{
 	
+		virtual ~TextList() { }
+
 		virtual void Release();
 
 		std::vector<EzText*> Text;
@@ -39,6 +42,7 @@ namespace CloudberryKingdom
 
 		virtual void Move( Vector2 shift );
 	};
+
 }
 
 

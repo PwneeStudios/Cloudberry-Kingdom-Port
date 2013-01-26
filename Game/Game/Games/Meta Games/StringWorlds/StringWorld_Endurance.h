@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StringWorldEndurance : public StringWorldGameData
 	{
 	
+		virtual ~StringWorldEndurance() { }
+
 		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		

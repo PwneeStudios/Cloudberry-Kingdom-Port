@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 	{
 
 	
+		virtual ~SlowMo() { }
+		
 		SlowMo();
 		boost::shared_ptr<SlowMo> SlowMo_Construct();
 	

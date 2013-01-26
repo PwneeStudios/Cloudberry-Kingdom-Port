@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct CustomizeMenu : public CkBaseMenu
 	{
+
+		virtual ~CustomizeMenu() { }
 	
 		struct GoProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

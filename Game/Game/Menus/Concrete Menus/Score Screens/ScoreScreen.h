@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct ScoreScreen : public CkBaseMenu
 	{
+
+		virtual ~ScoreScreen() { }
 	
 		struct OnAddHelper : public Lambda
 		{
@@ -24,6 +26,8 @@ namespace CloudberryKingdom
 		struct VariableCoinsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~VariableCoinsLambda() { }
+
 			StatGroup MyStats;
 		
 			VariableCoinsLambda( StatGroup MyStats );
@@ -34,6 +38,8 @@ namespace CloudberryKingdom
 		struct VariableTotalCoinsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~VariableTotalCoinsLambda() { }
+
 			StatGroup MyStats;
 		
 			VariableTotalCoinsLambda( StatGroup MyStats );
@@ -44,6 +50,8 @@ namespace CloudberryKingdom
 		struct VariableBlobsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~VariableBlobsLambda() { }
+
 			StatGroup MyStats;
 		
 			VariableBlobsLambda( StatGroup MyStats );
@@ -54,6 +62,8 @@ namespace CloudberryKingdom
 		struct VariableTotalBlobsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~VariableTotalBlobsLambda() { }
+
 			StatGroup MyStats;
 		
 			VariableTotalBlobsLambda( StatGroup MyStats );

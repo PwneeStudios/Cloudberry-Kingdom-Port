@@ -28,9 +28,12 @@ namespace CloudberryKingdom
 	struct ConveyorBlock_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~ConveyorBlock_Parameters() { }
+
 		Param Width, KeepUnused, Speed;
 
 		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
+
 	};
 
 	struct ConveyorBlock_AutoGen : public AutoGen

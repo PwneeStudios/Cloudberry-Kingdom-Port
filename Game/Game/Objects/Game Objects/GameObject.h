@@ -8,9 +8,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct GameObject : public ObjectBase
 	{
 	
+		virtual ~GameObject() { }
+
 		enum Tag
 		{
 			Tag_REMOVE_ON_LEVEL_FINISH,
@@ -163,6 +166,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

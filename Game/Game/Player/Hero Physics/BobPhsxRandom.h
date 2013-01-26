@@ -5,10 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxRandom : public BobPhsx
 	{
-
 	
+		virtual ~BobPhsxRandom() { }
+
 		static void InitializeStatics();
 
 	
@@ -27,6 +29,7 @@ namespace CloudberryKingdom
 		// Instancable struct
 		BobPhsxRandom();
 	};
+
 }
 
 

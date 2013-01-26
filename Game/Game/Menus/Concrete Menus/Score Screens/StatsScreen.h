@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct StatsMenu : public CkBaseMenu
 	{
+
+		virtual ~StatsMenu() { }
 	
 		struct StringificationWrapper : public LambdaFunc_1<int, std::wstring>
 		{

@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct HeroDoll : public CkBaseMenu
 	{
 	
+		virtual ~HeroDoll() { }
+
 		HeroDoll( int Control );
 		boost::shared_ptr<HeroDoll> HeroDoll_Construct( int Control );
 

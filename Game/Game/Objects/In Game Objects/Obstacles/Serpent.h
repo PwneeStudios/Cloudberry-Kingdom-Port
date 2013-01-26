@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Serpent : public _BoxDeath
 	{
+
+		virtual ~Serpent() { }
 	
 		struct SerpentTileInfo : public TileInfoBase
 		{
@@ -60,6 +63,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

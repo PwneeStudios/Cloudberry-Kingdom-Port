@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Options : public SoundMenu
 	{
 
+		virtual ~StartMenu_MW_Options() { }
+
 		using SoundMenu::SlideOut;
 		using SoundMenu::SlideIn;
 		using SoundMenu::Call;

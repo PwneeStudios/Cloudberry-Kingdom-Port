@@ -7,7 +7,6 @@ namespace CloudberryKingdom
 	struct Buyable : public Object
 	{
 
-	
 		virtual ~Buyable() { }
 
 		virtual int GetGuid() = 0;

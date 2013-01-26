@@ -8,7 +8,9 @@ namespace CloudberryKingdom
 
 	struct HelpBlurb : public CkBaseMenu
 	{
-	
+
+		virtual ~HelpBlurb() { }
+
 		struct SetText_ActionHelper : public Lambda
 		{
 		

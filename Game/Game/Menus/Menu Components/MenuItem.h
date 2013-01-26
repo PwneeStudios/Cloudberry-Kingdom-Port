@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct MenuItem : public boost::enable_shared_from_this<MenuItem>
 	{
 	
+		virtual ~MenuItem() { }
+
 		static void InitializeStatics();
 	
 		int Code;

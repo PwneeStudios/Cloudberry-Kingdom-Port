@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 
 	struct GUI_Panel : public GameObject
 	{
+
+		virtual ~GUI_Panel() { }
 	
 		struct ReturnToCallerHelper : public Lambda
 		{

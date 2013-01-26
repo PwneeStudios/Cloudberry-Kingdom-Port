@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Template_GameObject : public GameObject
 	{
 	
+		virtual ~Template_GameObject() { }
+
 		Template_GameObject();
 
 		virtual void Init();
@@ -16,7 +19,9 @@ namespace CloudberryKingdom
 		virtual void MyDraw();
 
 		virtual void MyPhsxStep();
+
 	};
+
 }
 
 

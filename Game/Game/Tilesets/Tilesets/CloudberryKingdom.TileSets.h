@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct TileSets
 	{
 	
@@ -53,6 +54,7 @@ namespace CloudberryKingdom
 
 		static void LoadSpriteEffects();
 	};
+
 }
 
 

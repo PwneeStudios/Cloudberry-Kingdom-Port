@@ -5,9 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Bob : public ObjectBase
 	{
 
+		virtual ~Bob() { }
 	
 		static void InitializeStatics();
 
@@ -411,6 +413,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct CameraZone : public ZoneTrigger
 	{
 	
+		virtual ~CameraZone() { }
+
 		struct ZoneTriggerLambda : public Lambda_1<boost::shared_ptr<ZoneTrigger> >
 		{
 		
@@ -59,6 +62,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

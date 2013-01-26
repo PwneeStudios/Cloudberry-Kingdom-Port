@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct InGameStartMenu : public CkBaseMenu
 	{
+
+		virtual ~InGameStartMenu() { }
 	
 		struct MakeListenerHelper : public LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> >
 		{

@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	/// <summary>
 	/// This object tracks a player's action.
 	/// When a level is finished without dying and with every coin grabbed, a bonus is given.
@@ -12,6 +13,8 @@ namespace CloudberryKingdom
 	/// </summary>
 	struct PerfectScoreObject : public GUI_Panel
 	{
+
+		virtual ~PerfectScoreObject() { }
 
 		struct TextEffectProxy : public Lambda
 		{
@@ -176,6 +179,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

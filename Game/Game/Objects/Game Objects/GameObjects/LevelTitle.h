@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct LevelTitle : public GUI_Panel
 	{
 	
+		virtual ~LevelTitle() { }
+
 		virtual void OnAdd();
 
 		boost::shared_ptr<EzText> text;

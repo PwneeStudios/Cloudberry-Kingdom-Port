@@ -18,8 +18,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct BlockData : public ObjectData
 	{
+
+		virtual ~BlockData() { }
 	
 		void Decide_RemoveIfUnused( float ChanceToKeep, const boost::shared_ptr<Rand> &Rnd );
 
@@ -121,6 +124,8 @@ namespace CloudberryKingdom
 	struct BlockBase : public ObjectBase
 	{
 	
+		virtual ~BlockBase() { }
+
 		boost::shared_ptr<AABox> MyBox;
 		const boost::shared_ptr<AABox> &getBox() const;
 
@@ -182,6 +187,7 @@ namespace CloudberryKingdom
 		void StampAsFullyUsed( int CurPhsxStep );
 		void Stretch( Side side, float amount );
 	};
+
 }
 
 #endif	//#ifndef BLOCK

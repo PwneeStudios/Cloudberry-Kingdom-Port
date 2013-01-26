@@ -31,6 +31,8 @@ namespace CloudberryKingdom
 	};
 	struct Laser : public _LineDeath, public IBound
 	{
+
+		virtual ~Laser() { }
 	
 		struct LaserTileInfo : public TileInfoBase
 		{
@@ -96,6 +98,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

@@ -5,9 +5,10 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BackgroundFloaterList : public boost::enable_shared_from_this<BackgroundFloaterList>
 	{
-	
+
 		struct ClearBackgroundListLambda : public LambdaFunc_1<boost::shared_ptr<BackgroundFloater>, bool>
 		{
 		
@@ -75,6 +76,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

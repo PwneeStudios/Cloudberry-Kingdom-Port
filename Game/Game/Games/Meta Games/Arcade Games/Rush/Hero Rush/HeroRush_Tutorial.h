@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 	struct HeroRush_Tutorial : public GameObject
 	{
 
+		virtual ~HeroRush_Tutorial() { }
 	
 		static void InitializeStatics();
 

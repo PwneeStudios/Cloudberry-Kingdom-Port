@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct VerifyDeleteSeeds : public VerifyBaseMenu
 	{
+
+		virtual ~VerifyDeleteSeeds() { }
 	
 		struct VerifyDeleteYesGoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

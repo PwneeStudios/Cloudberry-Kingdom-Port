@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct Waiting : public CkBaseMenu
 	{
 	
+		virtual ~Waiting() { }
+
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 		bool CanGoBack;
 	

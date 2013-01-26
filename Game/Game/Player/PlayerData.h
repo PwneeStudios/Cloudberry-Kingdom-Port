@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct PlayerData : public SaveLoad
 	{
-	
+
+		virtual ~PlayerData() { }
+
 		boost::shared_ptr<SavedSeeds> MySavedSeeds;
 
 		PlayerIndex MyPlayerIndex;
@@ -120,6 +123,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

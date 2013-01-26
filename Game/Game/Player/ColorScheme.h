@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		};
 
 	
-		virtual std::wstring ToString();
+		std::wstring ToString();
 
 	
 		int IndexOf( std::vector<boost::shared_ptr<MenuListItem> > &list, const boost::shared_ptr<ClrTextFx> &clr );

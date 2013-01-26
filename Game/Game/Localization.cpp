@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 			std::vector<std::wstring> bits = Split( line, L'\t' );
 
 			for ( int i = 0; i < NumLanguages; i++ )
-				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i + 2 ] ) );
+				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i + 1 ] ) );
 
 			line = reader->ReadLine();
 			LineCount++;

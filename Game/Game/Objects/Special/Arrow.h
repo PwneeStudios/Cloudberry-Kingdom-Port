@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 {
 	struct Arrow : public GameObject
 	{
+
+		virtual ~Arrow() { }
 	
 		enum Orientation
 		{
@@ -65,6 +67,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

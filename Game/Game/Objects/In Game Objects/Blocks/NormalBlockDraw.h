@@ -3,9 +3,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct NormalBlockDraw
 	{
-
 	
 		bool Shadow;
 		Vector2 ShadowOffset;

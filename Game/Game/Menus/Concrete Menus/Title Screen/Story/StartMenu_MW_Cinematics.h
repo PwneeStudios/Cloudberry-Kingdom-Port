@@ -21,6 +21,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Cinematics : public StartMenu
 	{
 
+		virtual ~StartMenu_MW_Cinematics() { }
+
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;
 		using StartMenu::Call;

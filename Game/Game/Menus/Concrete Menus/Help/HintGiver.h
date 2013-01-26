@@ -21,6 +21,8 @@ namespace CloudberryKingdom
 
 	struct HintGiver : public GUI_Panel
 	{
+
+		virtual ~HintGiver() { }
 	
 		struct Check_QuickSpawnHelper : public Lambda
 		{

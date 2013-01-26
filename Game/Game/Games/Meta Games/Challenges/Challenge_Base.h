@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 	struct Challenge : public boost::enable_shared_from_this<Challenge>
 	{
 
+		virtual ~Challenge() { }
+
 		static int Coins;
 
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >

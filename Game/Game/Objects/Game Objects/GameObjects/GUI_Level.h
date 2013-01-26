@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct GUI_Level : public GUI_Panel
 	{
 	
+		virtual ~GUI_Level() { }
+
 		Localization::Words Prefix;
 
 		/// <summary>
@@ -56,6 +58,8 @@ namespace CloudberryKingdom
 
 	struct GUI_CampaignLevel : public GUI_Level
 	{
+
+		virtual ~GUI_CampaignLevel() { }
 	
 		GUI_CampaignLevel();
 		boost::shared_ptr<GUI_CampaignLevel> GUI_CampaignLevel_Construct();

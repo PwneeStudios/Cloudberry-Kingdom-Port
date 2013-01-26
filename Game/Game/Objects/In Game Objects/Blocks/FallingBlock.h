@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct FallingBlock : public BlockBase
 	{
 	
+		virtual ~FallingBlock() { }
+
 		struct FallingBlockTileInfo : public TileInfoBase
 		{
 		

@@ -5,7 +5,7 @@ namespace CloudberryKingdom
 {
 	struct MakeThing
 	{
-	
+
 		MakeThing() { }
 		virtual ~MakeThing() { }
 

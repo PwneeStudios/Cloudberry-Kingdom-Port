@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct PressNote : public GUI_Text
 	{
+
+		virtual ~PressNote() { }
 	
 		static const int ButtonScale = 87;
 		static const float TextScale;
@@ -29,15 +31,14 @@ namespace CloudberryKingdom
 	
 		void FadeOut();
 
-	
 		virtual void MyPhsxStep();
-
 	
 		virtual void Draw();
-
 	
 		void InitializeInstanceFields();
+
 	};
+
 }
 
 

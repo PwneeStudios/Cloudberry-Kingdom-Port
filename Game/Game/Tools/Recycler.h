@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct RecycleBin
 	{
 	
@@ -64,6 +65,7 @@ namespace CloudberryKingdom
 		void Empty();
 		void Empty( bool DoGC );
 	};
+
 }
 
 

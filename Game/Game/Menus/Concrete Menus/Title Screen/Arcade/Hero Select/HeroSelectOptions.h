@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct HeroSelectOptions : public ArcadeBaseMenu
 	{
 
+		virtual ~HeroSelectOptions() { }
+
 		using ArcadeBaseMenu::SlideOut;
 		using ArcadeBaseMenu::SlideIn;
 		using ArcadeBaseMenu::Call;

@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct SaveSeedAs : public VerifyBaseMenu
 	{
+
+		virtual ~SaveSeedAs() { }
 	
 		struct SaveProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

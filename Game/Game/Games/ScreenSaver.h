@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct ScreenSaver : public StringWorldGameData
 	{
+
+		virtual ~ScreenSaver() { }
 	
 		struct ConstructorPressAListenerHelper : public Lambda
 		{

@@ -28,12 +28,15 @@ namespace CloudberryKingdom
 	struct ILevelConnector : public ObjectBase
 	{
 	
+		virtual ~ILevelConnector() { }
+
 		virtual const boost::shared_ptr<LevelSeedData> &getNextLevelSeedData() const = 0;
 		virtual void setNextLevelSeedData( const boost::shared_ptr<LevelSeedData> &value ) = 0;
 		virtual boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > getOnOpen() const = 0;
 		virtual void setOnOpen( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value ) = 0;
 		virtual const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &getOnEnter() const = 0;
 		virtual void setOnEnter( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Door> > > &value ) = 0;
+
 	};
 }
 

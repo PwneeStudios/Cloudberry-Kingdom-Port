@@ -23,6 +23,8 @@ namespace CloudberryKingdom
 	struct LavaDrip_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~LavaDrip_Parameters() { }
+
 		float LavaDripStepCutoff;
 		Param LavaDripStep, Speed;
 		VectorParam Length;

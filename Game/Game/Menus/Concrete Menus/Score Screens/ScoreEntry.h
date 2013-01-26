@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct ScoreEntry
 	{
 
+		virtual ~ScoreEntry() { }
+
 		enum Format
 		{
 			Format_SCORE,

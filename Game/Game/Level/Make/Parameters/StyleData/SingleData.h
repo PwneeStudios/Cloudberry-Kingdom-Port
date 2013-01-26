@@ -16,6 +16,8 @@ namespace CloudberryKingdom
 	struct SingleData : public StyleData
 	{
 	
+		virtual ~SingleData() { }
+
 		Vector2 InitialDoorYRange;
 
 		SingleData( const boost::shared_ptr<Rand> &Rnd );

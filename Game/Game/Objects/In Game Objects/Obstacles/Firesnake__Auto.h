@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Firesnake_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Firesnake_Parameters() { }
+
 		struct _Special
 		{
 		};

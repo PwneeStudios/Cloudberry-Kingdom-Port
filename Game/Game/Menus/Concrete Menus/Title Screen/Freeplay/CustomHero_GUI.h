@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 	struct CustomHero_GUI : public CkBaseMenu
 	{
 
+		virtual ~CustomHero_GUI() { }
 	
 		static void InitializeStatics();
 

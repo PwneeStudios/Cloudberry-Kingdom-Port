@@ -6,9 +6,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Boulder : public _CircleDeath, public IBound
 	{
 	
+		virtual ~Boulder() { }
+
 		enum PivotLocationTypes
 		{
 			PivotLocationTypes_TOP_BOTTOM,
@@ -95,6 +98,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

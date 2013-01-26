@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Prototypes
 	{
 	
@@ -35,6 +36,7 @@ namespace CloudberryKingdom
 
 		static void LoadObjects();
 	};
+
 }
 
 

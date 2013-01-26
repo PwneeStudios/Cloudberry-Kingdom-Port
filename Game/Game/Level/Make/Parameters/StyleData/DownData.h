@@ -14,6 +14,8 @@ namespace CloudberryKingdom
 	struct DownData : public VerticalData
 	{
 	
+		virtual ~DownData() { }
+
 		virtual void CalculateKeepUnused( float JumpLevel );
 
 	

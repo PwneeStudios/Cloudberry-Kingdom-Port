@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct CapeNode
 	{
 	
@@ -15,6 +16,7 @@ namespace CloudberryKingdom
 		float Weight;
 
 		bool Show;
+
 	};
 
 	struct CapeLink
@@ -25,6 +27,7 @@ namespace CloudberryKingdom
 		bool Show;
 
 		void Init();
+
 	};
 
 	struct Cape

@@ -5,12 +5,14 @@
 
 namespace CloudberryKingdom
 {
+
 	struct PlayerIntLambda : public LambdaFunc_1<boost::shared_ptr<PlayerData> , int>
 	{
 	
 		PlayerIntLambda();
 
-		virtual int Apply( const boost::shared_ptr<PlayerData> &p );
+		int Apply( const boost::shared_ptr<PlayerData> &p );
+
 	};
 
 	struct UserPowers
@@ -36,6 +38,8 @@ namespace CloudberryKingdom
 
 	struct _SavePlayerData : public SaveLoad
 	{
+
+		virtual ~_SavePlayerData() { }
 	
 		_SavePlayerData();
 
@@ -126,7 +130,8 @@ namespace CloudberryKingdom
 		struct BankLambda : public PlayerIntLambda
 		{
 		
-			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
+			int Apply( const boost::shared_ptr<PlayerData> &p );
+
 		};
 
 	

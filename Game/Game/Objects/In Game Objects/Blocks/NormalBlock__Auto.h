@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct NormalBlock_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~NormalBlock_Parameters() { }
+
 		Param KeepUnused;
 
 		/// <summary>

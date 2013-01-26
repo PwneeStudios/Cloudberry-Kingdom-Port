@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 	struct MovingPlatform : public BlockBase
 	{
 	
+		virtual ~MovingPlatform() { }
+
 		struct ElevatorTileInfo : public TileInfoBase
 		{
 		

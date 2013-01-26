@@ -6,9 +6,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Coin : public ObjectBase
 	{
 	
+		virtual ~Coin() { }
+
 		enum CoinType
 		{
 			CoinType_BLUE,
@@ -89,6 +92,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

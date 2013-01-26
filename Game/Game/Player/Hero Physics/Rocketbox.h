@@ -5,9 +5,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct BobPhsxRocketbox : public BobPhsxBox
 	{
 
+		virtual ~BobPhsxRocketbox() { }
 	
 		static void InitializeStatics();
 
@@ -46,6 +48,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

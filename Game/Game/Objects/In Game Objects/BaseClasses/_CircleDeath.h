@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct _CircleDeath : public _Death
 	{
-	
+
+		virtual ~_CircleDeath() { }
+
 		boost::shared_ptr<CircleBox> Circle;
 		float Radius;
 
@@ -33,6 +36,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

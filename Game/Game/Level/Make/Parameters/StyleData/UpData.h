@@ -22,12 +22,15 @@ namespace CloudberryKingdom
 	struct UpData : public VerticalData
 	{
 	
+		virtual ~UpData() { }
+
 		virtual void CalculateKeepUnused( float JumpLevel );
 
 	
 		UpData( const boost::shared_ptr<Rand> &Rnd );
 
 		virtual void Randomize();
+
 	};
 }
 

@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct SuperCheer : public GameObject
 	{
 	
+		virtual ~SuperCheer() { }
+
 		struct CheerHelper : public Lambda
 		{
 		

@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_CustomLevel : public CustomLevel_GUI
 	{
 
+		virtual ~StartMenu_MW_CustomLevel() { }
+
 		using CustomLevel_GUI::SlideOut;
 		using CustomLevel_GUI::SlideIn;
 		using CustomLevel_GUI::Call;

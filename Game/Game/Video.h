@@ -9,9 +9,9 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MainVideo
 	{
-
 	
 		static void InitializeStatics();
 

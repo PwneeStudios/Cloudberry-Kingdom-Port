@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Fireball_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~Fireball_Parameters() { }
 	
 		Param FireballMaxAngle, FireballMinDist, MaxFireballDensity, Period;
 		Param KeepUnused;

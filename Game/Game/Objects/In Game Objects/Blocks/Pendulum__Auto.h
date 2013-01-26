@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Pendulum_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Pendulum_Parameters() { }
+
 		enum MotionType
 		{
 			MotionType_VERTICAL,

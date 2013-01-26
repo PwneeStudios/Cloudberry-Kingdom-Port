@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 
 	struct Doll : public CkBaseMenu
 	{
+
+		virtual ~Doll() { }
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

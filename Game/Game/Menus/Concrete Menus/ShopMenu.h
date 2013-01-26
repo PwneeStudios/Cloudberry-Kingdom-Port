@@ -8,16 +8,18 @@ namespace CloudberryKingdom
 	struct VerifyPurchaseMenu : public VerifyBaseMenu
 	{
 	
+		virtual ~VerifyPurchaseMenu() { }
+
 		struct CoinSoundPlayer : public Lambda
 		{
 		
 			float pitch;
 			boost::shared_ptr<EzSound> sound;
-
 		
 			CoinSoundPlayer( float pitch );
 
 			void Apply();
+
 		};
 
 	
@@ -25,11 +27,11 @@ namespace CloudberryKingdom
 		{
 		
 			boost::shared_ptr<VerifyPurchaseMenu> vpm;
-
 		
 			YesProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm );
 
 			void Apply( const boost::shared_ptr<MenuItem> &item );
+
 		};
 
 	
@@ -37,25 +39,22 @@ namespace CloudberryKingdom
 		{
 		
 			boost::shared_ptr<VerifyPurchaseMenu> vpm;
-
 		
 			NoProxy( const boost::shared_ptr<VerifyPurchaseMenu> &vpm );
 
 			void Apply( const boost::shared_ptr<MenuItem> &item );
-		};
 
+		};
 	
 		boost::shared_ptr<Buyable> buyable;
 		int Cost;
 		VerifyPurchaseMenu( int Control, const boost::shared_ptr<Buyable> &buyable );
 		boost::shared_ptr<VerifyPurchaseMenu> VerifyPurchaseMenu_Construct( int Control, const boost::shared_ptr<Buyable> &buyable );
-
 	
 		void Yes( const boost::shared_ptr<MenuItem> &item );
 
 		void No( const boost::shared_ptr<MenuItem> &item );
 
-	
 		virtual void MakeBackdrop();
 
 		virtual void Init();

@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct Background : public boost::enable_shared_from_this<Background>
 	{
+
+		virtual ~Background() { }
 	
 		static void AddDarkLayer( const boost::shared_ptr<Background> &b );
 
@@ -103,6 +106,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

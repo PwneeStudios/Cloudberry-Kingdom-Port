@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct HelpMenu : public CkBaseMenu
 	{
 
+		virtual ~HelpMenu() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;
@@ -174,7 +176,9 @@ namespace CloudberryKingdom
 		struct CampaignCoinsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~CampaignCoinsLambda() { }
 			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
+
 		};
 
 	

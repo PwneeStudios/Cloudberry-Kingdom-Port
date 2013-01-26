@@ -9,10 +9,11 @@ namespace CloudberryKingdom
 	struct GUI_TextBox : public GUI_Text
 	{
 
+		virtual ~GUI_TextBox() { }
+
 		/// <summary>
 		/// Event handler. Activated when the the user presses Enter while the textbox has focus.
 		/// </summary>
-	
 		boost::shared_ptr<Multicaster> OnEnter;
 		boost::shared_ptr<Multicaster> OnEscape;
 
@@ -124,6 +125,8 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	struct GUI_EnterName : public GUI_TextBox
 	{
+
+		virtual ~GUI_EnterName() { }
 
 		GUI_EnterName();
 		boost::shared_ptr<GUI_EnterName> GUI_EnterName_Construct();

@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct DoorIcon : public GUI_Panel
 	{
+
+		virtual ~DoorIcon() { }
 	
 		int Level_Renamed;
 	

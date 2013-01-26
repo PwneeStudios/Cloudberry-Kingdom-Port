@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct HintBlurb : public CkBaseMenu
 	{
 
+		virtual ~HintBlurb() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;

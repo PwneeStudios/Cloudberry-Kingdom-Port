@@ -8,7 +8,9 @@ namespace CloudberryKingdom
 
 	struct MenuList : public MenuItem
 	{
-	
+		
+		virtual ~MenuList() { }
+
 		struct ExpandProxy1 : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		

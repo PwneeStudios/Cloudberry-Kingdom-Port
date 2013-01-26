@@ -7,10 +7,12 @@ namespace CloudberryKingdom
 {
 	struct GUI_Multiplier : public GUI_Panel
 	{
+
+		virtual ~GUI_Multiplier() { }
+
 		/// <summary>
 		/// Return a string representation of the Multiplier
 		/// </summary>
-	
 		virtual std::wstring ToString();
 
 	

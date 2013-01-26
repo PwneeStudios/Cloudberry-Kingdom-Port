@@ -41,6 +41,8 @@ namespace CloudberryKingdom
 
 	struct FireSpinner_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~FireSpinner_Parameters() { }
 		/*
 		public enum DirectionStyle { Homogenous, Random, HorizontalSplit, VerticalSplit };
 		public DirectionStyle Direction;

@@ -51,6 +51,7 @@ namespace CloudberryKingdom
 	struct GameData : public boost::enable_shared_from_this<GameData>
 	{
 
+		virtual ~GameData() { }
 	
 		static void InitializeStatics();
 
@@ -881,14 +882,20 @@ namespace CloudberryKingdom
 
 	struct GameFactory
 	{
+
+		virtual ~GameFactory() { }
 	
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+
 	};
 
 	struct SimpleGameFactory
 	{
 	
+		virtual ~SimpleGameFactory() { }
+
 		virtual boost::shared_ptr<GameData> Make();
+
 	};
 
 }

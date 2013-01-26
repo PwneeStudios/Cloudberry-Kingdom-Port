@@ -10,10 +10,8 @@ namespace CloudberryKingdom
 
 	struct BackgroundType
 	{
-
 	
 		static void InitializeStatics();
-
 	
 		static std::map<std::wstring, boost::shared_ptr<BackgroundTemplate> > NameLookup, PathLookup;
 
@@ -38,6 +36,8 @@ namespace CloudberryKingdom
 	struct BackgroundTemplate : public boost::enable_shared_from_this<BackgroundTemplate>
 	{
 	
+		virtual ~BackgroundTemplate() { }
+
 		std::wstring Name;
 		bool MadeOfCode;
 		bool MadeOfText;
@@ -53,11 +53,14 @@ namespace CloudberryKingdom
 
 	
 		void InitializeInstanceFields();
+
 	};
 
 	struct RegularBackground : public Background
 	{
 	
+		virtual ~RegularBackground() { }
+
 		boost::shared_ptr<BackgroundTemplate> MyTemplate;
 
 		RegularBackground();

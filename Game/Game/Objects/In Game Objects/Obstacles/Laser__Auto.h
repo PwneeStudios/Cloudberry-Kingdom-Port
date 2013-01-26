@@ -24,6 +24,8 @@ namespace CloudberryKingdom
 	struct Laser_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Laser_Parameters() { }
+
 		float LaserStepCutoff;
 		Param LaserStep, LaserPeriod;
 

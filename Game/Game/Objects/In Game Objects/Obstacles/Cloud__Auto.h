@@ -8,9 +8,12 @@ namespace CloudberryKingdom
 	struct Cloud_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Cloud_Parameters() { }
+
 		Param Size, Shiftiness;
 
 		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
+
 	};
 
 	struct Cloud_AutoGen : public AutoGen

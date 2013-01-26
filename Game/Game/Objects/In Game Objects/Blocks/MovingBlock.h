@@ -27,6 +27,8 @@ namespace CloudberryKingdom
 	
 	struct MovingBlock : public BlockBase, public IBound
 	{
+
+		virtual ~MovingBlock() { }
 	
 		struct MovingBlockTileInfo : public TileInfoBase
 		{

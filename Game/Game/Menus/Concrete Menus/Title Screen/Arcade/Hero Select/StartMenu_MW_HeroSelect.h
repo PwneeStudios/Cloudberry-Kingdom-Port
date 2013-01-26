@@ -19,6 +19,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_HeroSelect : public ArcadeBaseMenu
 	{
 
+		virtual ~StartMenu_MW_HeroSelect() { }
+
 		using ArcadeBaseMenu::SlideOut;
 		using ArcadeBaseMenu::SlideIn;
 		using ArcadeBaseMenu::Call;

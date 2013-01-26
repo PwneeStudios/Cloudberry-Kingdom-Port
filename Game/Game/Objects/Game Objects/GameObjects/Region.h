@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Region : public GUI_Panel
 	{
 	
+		virtual ~Region() { }
+
 		Region( const Vector2 &pos, const Vector2 &size );
 		boost::shared_ptr<Region> Region_Construct( const Vector2 &pos, const Vector2 &size );
 	
@@ -18,12 +21,11 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Door> AttachedDoor;
 	
 		virtual void MyPhsxStep();
-
 	
 		virtual bool OnScreen();
-
 	
 		virtual void MyDraw();
+
 	};
 }
 

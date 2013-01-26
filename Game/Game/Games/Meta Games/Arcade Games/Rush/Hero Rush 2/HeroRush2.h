@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct Challenge_HeroRush2 : public Challenge_HeroRush
 	{
 	
+		virtual ~Challenge_HeroRush2() { }
+
 		struct OnSwapLambda : public Lambda_1<boost::shared_ptr<LevelSeedData> >
 		{
 		

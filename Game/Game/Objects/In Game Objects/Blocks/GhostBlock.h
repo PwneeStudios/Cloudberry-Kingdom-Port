@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct GhostBlock : public BlockBase
 	{
 
+		virtual ~GhostBlock() { }
+
 	
 		struct GhostBlockTileInfo : public TileInfoBase
 		{

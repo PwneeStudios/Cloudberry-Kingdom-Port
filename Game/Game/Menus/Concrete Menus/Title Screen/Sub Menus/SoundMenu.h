@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct SoundMenu : public VerifyBaseMenu
 	{
+
+		virtual ~SoundMenu() { }
 	
 		struct InitOnToggleHelper : public Lambda_1<bool>
 		{

@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct Cheer : public GameObject
 	{
 	
+		virtual ~Cheer() { }
+
 		boost::shared_ptr<DrawPile> MyPile;
 
 	

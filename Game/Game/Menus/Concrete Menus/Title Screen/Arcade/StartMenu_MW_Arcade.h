@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Arcade : public ArcadeMenu
 	{
 
+		virtual ~StartMenu_MW_Arcade() { }
+
 		using ArcadeMenu::SlideOut;
 		using ArcadeMenu::SlideIn;
 		using ArcadeMenu::Call;

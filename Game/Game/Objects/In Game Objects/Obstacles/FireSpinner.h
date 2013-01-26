@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct FireSpinner : public _LineDeath
 	{
+
+		virtual ~FireSpinner() { }
 	
 		struct FireSpinnerTileInfo : public TileInfoBase
 		{
@@ -83,6 +86,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

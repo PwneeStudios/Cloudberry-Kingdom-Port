@@ -5,18 +5,21 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MenuListExpand : public CkBaseMenu
 	{
+
+		virtual ~MenuListExpand() { }
 	
 		struct OnSelectProxy : public Lambda
 		{
 		
 			boost::shared_ptr<MenuListExpand> mle;
 
-		
 			OnSelectProxy( const boost::shared_ptr<MenuListExpand> &mle );
 
 			void Apply();
+
 		};
 
 	

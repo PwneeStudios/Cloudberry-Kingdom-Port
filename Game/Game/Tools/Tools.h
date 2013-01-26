@@ -39,6 +39,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct StringExtension
 	{
 	

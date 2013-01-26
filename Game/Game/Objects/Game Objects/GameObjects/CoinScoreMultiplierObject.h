@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct CoinScoreMultiplierObject : public GameObject
 	{
+
+		virtual ~CoinScoreMultiplierObject() { }
 	
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
@@ -81,6 +83,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct BlockEmitter : public ObjectBase
 	{
 	
+		virtual ~BlockEmitter() { }
+
 		MovingPlatform::MoveType MyMoveType;
 		float Amp;
 

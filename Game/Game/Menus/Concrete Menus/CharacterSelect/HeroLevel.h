@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 
 	struct HeroLevel : public CkBaseMenu
 	{
+
+		virtual ~HeroLevel() { }
 	
 		boost::shared_ptr<CharacterSelect> MyCharacterSelect;
 	

@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct ReplayGUI : public CkBaseMenu
 	{
 	
+		virtual ~ReplayGUI() { }
+
 		virtual void ReturnToCaller();
 	
 		bool SkipPhsxStep;

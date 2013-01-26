@@ -10,6 +10,7 @@ namespace CloudberryKingdom
 
 	struct CampaignSequence : public LevelSequence
 	{
+		virtual ~CampaignSequence() { }
 
 	
 		struct PostMakeCampaignProxy : public Lambda_1<boost::shared_ptr<Level> >

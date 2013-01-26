@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct SpikeyGuy_Parameters : public AutoGen_Parameters
 	{
-	
+
+		virtual ~SpikeyGuy_Parameters() { }
+
 		struct _Special
 		{
 			/// <summary>
@@ -33,6 +36,8 @@ namespace CloudberryKingdom
 
 	struct SpikeyGuy_AutoGen : public AutoGen
 	{
+
+		virtual ~SpikeyGuy_AutoGen() { }
 	
 		struct MinDistHelper : public LambdaFunc_1<Vector2, Vector2>
 		{
@@ -79,6 +84,7 @@ namespace CloudberryKingdom
 	
 		virtual void PreFill_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 	};
+
 }
 
 

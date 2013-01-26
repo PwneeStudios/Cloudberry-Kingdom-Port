@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Camera : public IPos, public boost::enable_shared_from_this<Camera>
 	{
 
@@ -181,19 +182,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
-}
 
-/* REMNANT: autozoom
-if (MyZone != null && MyZone.FreeY)
-if (MyLevel.Bobs.Count > 1)
-{
-    float zoom = Math.Max(TR.X - BL.X, (TR.Y - BL.Y) * AspectRatio) + 450;
-    zoom /= 2850;
-    zoom = (float)Math.Pow(zoom, 1.7f);
-    zoom = Math.Max(1, Math.Min(1.5f, zoom));
-    Zoom = new Vector2(.001f, .001f) / zoom;
 }
-*/
-
 
 #endif	//#ifndef CAMERA

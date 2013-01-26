@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct GhostBlock_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~GhostBlock_Parameters() { }
+
 		enum BoxTypes
 		{
 			BoxTypes_TOP_ONLY,

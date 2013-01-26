@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Cloud : public _Obstacle
 	{
+
+		virtual ~Cloud() { }
 	
 		struct CloudTileInfo : public TileInfoBase
 		{
@@ -73,6 +76,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

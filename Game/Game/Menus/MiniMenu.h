@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MiniMenu : public Menu
 	{
+
+		virtual ~MiniMenu() { }
 	
 		int ItemsToShow;
 	

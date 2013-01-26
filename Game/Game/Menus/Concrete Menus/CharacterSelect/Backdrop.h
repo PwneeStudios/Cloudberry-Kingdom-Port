@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct CharSelectBackdrop : public CkBaseMenu
 	{
+
+		virtual ~CharSelectBackdrop() { }
 	
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;

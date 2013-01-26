@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Firesnake : public _CircleDeath
 	{
+
+		virtual ~Firesnake() { }
 	
 		struct FiresnakeTileInfo : public TileInfoBase
 		{
@@ -53,6 +56,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 
