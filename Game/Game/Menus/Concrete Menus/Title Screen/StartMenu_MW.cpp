@@ -107,7 +107,7 @@ namespace CloudberryKingdom
 		CallDelay = ReturnToCallerDelay = 0;
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
-		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_MENU, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Menu, ItemFont ) ) );
 		Header->ScaleText( 1.3f );
 		SetItemProperties( Header );
 		Header->Selectable = false;

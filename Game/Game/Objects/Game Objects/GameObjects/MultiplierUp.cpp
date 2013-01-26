@@ -70,7 +70,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 		MyPile->setPos( MyPile->getPos() + shift );
 
-		text = boost::make_shared<EzText>( Localization::Words_MULTIPLIER_INCREASED, Resources::Font_Grobold42, true, true );
+		text = boost::make_shared<EzText>( Localization::Words_MultiplierIncreased, Resources::Font_Grobold42, true, true );
 		text->setScale( text->getScale() * scale );
 
 		//// Happy Blue

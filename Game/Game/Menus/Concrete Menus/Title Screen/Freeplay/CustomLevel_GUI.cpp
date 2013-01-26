@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		CustomLevel_GUI::FreeplayHeroes = std::vector<boost::shared_ptr<BobPhsx> >();
 		CustomLevel_GUI::IsMaxLength = false;
 		CustomLevel_GUI::Difficulty = 0;
-		CustomLevel_GUI::CustomHeroString = Localization::Words_FACTORY;
+		CustomLevel_GUI::CustomHeroString = Localization::Words_Factory;
 		CustomLevel_GUI::RightPanelCenter = Vector2( -285, 0 );
 		CustomLevel_GUI::SeedStringToLoad = std::wstring( L"" );
 		CustomLevel_GUI::ExitFreeplay = false;
@@ -192,13 +192,13 @@ namespace CloudberryKingdom
 		clGui->LevelSeed->Masochistic = false;
 
 		Localization::Words gamename = Unbox<Localization::Words>( GameList->getCurObj() );
-		if ( gamename == Localization::Words_CLASSIC_GAME )
+		if ( gamename == Localization::Words_ClassicGame )
 		{
 			clGui->LevelSeed->MyGameType = NormalGameData::Factory;
 			clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
 			clGui->SelectNormal();
 		}
-		else if ( gamename == Localization::Words_BUNGEE )
+		else if ( gamename == Localization::Words_Bungee )
 		{
 			clGui->LevelSeed->MyGameType = NormalGameData::Factory;
 			clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
@@ -213,7 +213,7 @@ namespace CloudberryKingdom
 		//{
 		//    SelectDownLevel();
 		//}
-		else if ( gamename == Localization::Words_WALL_LEVEL )
+		else if ( gamename == Localization::Words_WallLevel )
 		{
 			clGui->LevelSeed->MyGameType = NormalGameData::Factory;
 			clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 			clGui->ShowCheckpoints( false );
 			clGui->HasWall = true;
 		}
-        else if ( gamename == Localization::Words_MASOCHISTIC )
+        else if ( gamename == Localization::Words_Masochistic )
         {
             clGui->LevelSeed->MyGameType = NormalGameData::Factory;
             clGui->LevelSeed->MyGeometry = LevelGeometry_RIGHT;
@@ -579,7 +579,7 @@ namespace CloudberryKingdom
 		//Screenshot.SetDefaultShadow(15);
 
 		// Location
-		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( Localization::Words_LOCATION, ItemFont );
+		boost::shared_ptr<EzText> LocationText = boost::make_shared<EzText>( Localization::Words_Location, ItemFont );
 		LocationText->Name = std::wstring( L"Location" );
 		SetHeaderProperties( LocationText );
 		MyPile->Add( LocationText );
@@ -609,7 +609,7 @@ namespace CloudberryKingdom
 		LocationList->SetIndex( 0 );
 
 		// Game type
-		boost::shared_ptr<EzText> GameText = boost::make_shared<EzText>( Localization::Words_GAME, ItemFont );
+		boost::shared_ptr<EzText> GameText = boost::make_shared<EzText>( Localization::Words_Game, ItemFont );
 		GameText->Name = std::wstring( L"Game" );
 		SetHeaderProperties( GameText );
 		MyPile->Add( GameText );
@@ -623,12 +623,12 @@ namespace CloudberryKingdom
 		std::vector<Localization::Words> GameNames;
 		if ( PlayerManager::NumPlayers <= 1 )
 		{
-			Localization::Words tempVector[] = { Localization::Words_CLASSIC_GAME, Localization::Words_WALL_LEVEL, Localization::Words_MASOCHISTIC };
+			Localization::Words tempVector[] = { Localization::Words_ClassicGame, Localization::Words_WallLevel, Localization::Words_Masochistic };
 			GameNames = VecFromArray( tempVector );
 		}
 		else
 		{
-			Localization::Words tempVector2[] = { Localization::Words_CLASSIC_GAME, Localization::Words_BUNGEE, Localization::Words_WALL_LEVEL, Localization::Words_MASOCHISTIC };
+			Localization::Words tempVector2[] = { Localization::Words_ClassicGame, Localization::Words_Bungee, Localization::Words_WallLevel, Localization::Words_Masochistic };
 			GameNames = std::vector<Localization::Words>( VecFromArray( tempVector2 ) );
 		}
 		for ( std::vector<Localization::Words>::const_iterator name = GameNames.begin(); name != GameNames.end(); ++name )
@@ -645,7 +645,7 @@ namespace CloudberryKingdom
 		GameList->OnIndexSelect = boost::make_shared<InitOnIndexSelect>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ), GameList );
 
 		// Hero
-		HeroText = boost::make_shared<EzText>( Localization::Words_HERO, ItemFont );
+		HeroText = boost::make_shared<EzText>( Localization::Words_Hero, ItemFont );
 		HeroText->Name = std::wstring( L"Hero" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
@@ -660,7 +660,7 @@ namespace CloudberryKingdom
 			AddHeroItem( *hero );
 
 		// Random
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont, false, true ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Random, ItemFont, false, true ) ) );
 		SetItemProperties( item );
 		HeroList->AddItem( item, MakeSmartObject( BobPhsxRandom::getInstance() ) );
 		// Custom
@@ -677,7 +677,7 @@ namespace CloudberryKingdom
 		HeroList->SetIndex( 0 );
 
 		// Difficulty
-		boost::shared_ptr<EzText> DiffText = boost::make_shared<EzText>( Localization::Words_DIFFICULTY, ItemFont );
+		boost::shared_ptr<EzText> DiffText = boost::make_shared<EzText>( Localization::Words_Difficulty, ItemFont );
 		DiffText->Name = std::wstring( L"Diff" );
 		SetHeaderProperties( DiffText );
 		MyPile->Add( DiffText );
@@ -705,7 +705,7 @@ namespace CloudberryKingdom
 
 
 		// Length
-		boost::shared_ptr<EzText> LengthText = boost::make_shared<EzText>( Localization::Words_LENGTH, ItemFont );
+		boost::shared_ptr<EzText> LengthText = boost::make_shared<EzText>( Localization::Words_Length, ItemFont );
 		LengthText->Name = std::wstring( L"Length" );
 		SetHeaderProperties( LengthText );
 		MyPile->Add( LengthText );
@@ -725,7 +725,7 @@ namespace CloudberryKingdom
 		MiniCheckpoint->SetShadow( false );
 
 		// Checkpoints
-		CheckpointsText = boost::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont );
+		CheckpointsText = boost::make_shared<EzText>( Localization::Words_Checkpoints, ItemFont );
 		CheckpointsText->Name = std::wstring( L"Checkpoints" );
 		SetHeaderProperties( CheckpointsText );
 		MyPile->Add( CheckpointsText );
@@ -760,7 +760,7 @@ namespace CloudberryKingdom
 	#if defined(XBOX)
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, std::wstring( L"Button_A" ) ) );
 	#endif
-		item = Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
+		item = Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Start, ItemFont ) ) );
 		Start->Name = std::wstring( L"Start" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -780,7 +780,7 @@ namespace CloudberryKingdom
 		// Load
 		boost::shared_ptr<MenuItem> Load;
 	#if defined(PC_VERSION)
-		item = Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_LEVEL, ItemFont ) ) );
+		item = Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LoadLevel, ItemFont ) ) );
 	#else
 		item = Load = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Y( 90 ) + std::wstring( L" Load" ), ItemFont ) ) );
 	#endif
@@ -801,7 +801,7 @@ namespace CloudberryKingdom
 	#if defined(XBOX)
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, std::wstring( L"Button_B" ) ) );
 	#endif
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
 		item->Name = std::wstring( L"Back" );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -840,9 +840,9 @@ namespace CloudberryKingdom
 	void CustomLevel_GUI::DiffList_OnIndex()
 	{
 		if ( DiffList->ListIndex == 0 )
-			Start->SubstituteText( Localization::Words_CONTINUE );
+			Start->SubstituteText( Localization::Words_Continue );
 		else
-			Start->SubstituteText( Localization::Words_START );
+			Start->SubstituteText( Localization::Words_Start );
 	}
 
 	void CustomLevel_GUI::StartLevel()

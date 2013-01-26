@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/List.h"
 
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		GameTypeId = 2;
-		MenuName = Name = Localization::Words_HERO_RUSH;
+		MenuName = Name = Localization::Words_HeroRush;
 	}
 
 	void Challenge_HeroRush::SetTimerProperties( int Difficulty )

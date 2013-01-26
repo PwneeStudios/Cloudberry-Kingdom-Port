@@ -72,13 +72,13 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		HeaderText = boost::make_shared<EzText>( Localization::Words_SAVE_RANDOM_SEED_AS, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_SaveRandomSeedAs, ItemFont );
 		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
 		// Save seed
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
 		item->Name = std::wstring( L"Save" );
 		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
@@ -102,14 +102,14 @@ namespace CloudberryKingdom
 			Player->MySavedSeeds->SaveSeed( Tools::CurLevel->MyLevelSeed->ToString(), TextBox->getText() );
 
 			// Success!
-			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SEED_SAVED_SUCCESSFULLY, Localization::Words_HOORAY ) );
+			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_SeedSavedSuccessfully, Localization::Words_Hooray ) );
 			ok->OnOk = boost::make_shared<OnOkProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}
 		else
 		{
 			// Failure!
-			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_NO_NAME_GIVEN, Localization::Words_OH ) );
+			boost::shared_ptr<AlertBaseMenu> ok = MakeMagic( AlertBaseMenu, ( getControl(), Localization::Words_NoNameGiven, Localization::Words_Oh ) );
 			ok->OnOk = boost::make_shared<OnOkProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) );
 			GUI_Panel::Call( ok );
 		}

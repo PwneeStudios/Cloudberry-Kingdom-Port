@@ -26,7 +26,7 @@ namespace CloudberryKingdom
 
 	Localization::Words AggressiveUpgrades_GUI::HeaderText()
 	{
-		return Localization::Words_AGGRESSIVE;
+		return Localization::Words_Aggressive;
 	}
 
 	PassiveUpgrades_GUI::PassiveUpgrades_GUI( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<CustomLevel_GUI> &CustomLevel ) : CustomUpgrades_GUI( PieceSeed, CustomLevel ) { }
@@ -53,7 +53,7 @@ namespace CloudberryKingdom
 
 	Localization::Words PassiveUpgrades_GUI::HeaderText()
 	{
-		return Localization::Words_PASSIVE;
+		return Localization::Words_Passive;
 	}
 
 	CustomUpgrades_GUI::BlockPieceSeedSetter::BlockPieceSeedSetter( const boost::shared_ptr<CustomUpgrades_GUI> &gui, Upgrade upgrade, const boost::shared_ptr<MenuSlider> &slider )
@@ -331,7 +331,7 @@ namespace CloudberryKingdom
 
 	Localization::Words CustomUpgrades_GUI::HeaderText()
 	{
-		return Localization::Words_NONE;
+		return Localization::Words_None;
 	}
 
 	void CustomUpgrades_GUI::SetPos()
@@ -460,7 +460,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		// Start
 		boost::shared_ptr<MenuItem> item;
-		boost::shared_ptr<MenuItem> Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_START, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> Start = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Start, ItemFont ) ) );
 		item = Start;
 		item->Name = std::wstring( L"Start" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
@@ -474,7 +474,7 @@ namespace CloudberryKingdom
 		MyMenu->OnA = Cast::ToMenu( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) );
 
 		// Random
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RANDOM, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Random, ItemFont ) ) );
 		item->Name = std::wstring( L"Random" );
 		item->setGo( Cast::ToItem( boost::make_shared<RandomizeProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
@@ -484,7 +484,7 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4();
 
 		// Zero
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Reset, ItemFont ) ) );
 		item->Name = std::wstring( L"Reset" );
 		item->setGo( Cast::ToItem( boost::make_shared<ZeroProxy>( boost::static_pointer_cast<CustomUpgrades_GUI>( shared_from_this() ) ) ) );
 		AddItem( item );
@@ -494,7 +494,7 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = ( bColor( 235, 255, 80 ) ).ToVector4();
 
 		// Back
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
 		item->Name = std::wstring( L"Back" );
 		item->_Go.reset();
 		AddItem( item );

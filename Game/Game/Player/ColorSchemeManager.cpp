@@ -87,35 +87,35 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Hat> beard;
 
 		Hat::Vandyke = beard = boost::make_shared<Hat>( std::wstring( L"None" ) );
-		beard->Name = Localization::Words_VANDYKE;
+		beard->Name = Localization::Words_Vandyke;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259001;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Beard = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Beard" ) );
-		beard->Name = Localization::Words_RUGGED;
+		beard->Name = Localization::Words_Rugged;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259002;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Mustache = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Moustache" ) );
-		beard->Name = Localization::Words_MANHATTAN;
+		beard->Name = Localization::Words_Manhattan;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259003;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::BigBeard = beard = boost::make_shared<Hat>( std::wstring( L"Facial_BigBeard" ) );
-		beard->Name = Localization::Words_LUMBERJACK;
+		beard->Name = Localization::Words_Lumberjack;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259004;
 		beard->HatPicShift = Vector2();
 		BeardInfo.push_back( beard );
 
 		Hat::Goatee = beard = boost::make_shared<Hat>( std::wstring( L"Facial_Goatee" ) );
-		beard->Name = Localization::Words_GOATEE;
+		beard->Name = Localization::Words_Goatee;
 		beard->Price = Hat::Expensive;
 		beard->Guid = 5259005;
 		beard->HatPicShift = Vector2();
@@ -125,35 +125,35 @@ namespace CloudberryKingdom
 		// Fill the hat list
 		boost::shared_ptr<Hat> hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"None" ) );
-		hat->Name = Localization::Words_NONE;
+		hat->Name = Localization::Words_None;
 		hat->Guid = 19;
 			HatInfo.push_back( hat );
 			Hat::None = hat;
 
 
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Viking" ) );
-		hat->Name = Localization::Words_VIKING;
+		hat->Name = Localization::Words_Viking;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 20;
 			hat->HatPicShift = Vector2( -.02f,.075f );
 			HatInfo.push_back( hat );
 			Hat::Viking = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Fedora" ) );
-		hat->Name = Localization::Words_FEDORA;
+		hat->Name = Localization::Words_Fedora;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 21;
 			hat->HatPicScale *= 1.075f;
 			HatInfo.push_back( hat );
 			Hat::Fedora = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Afro" ) );
-		hat->Name = Localization::Words_AFRO;
+		hat->Name = Localization::Words_Afro;
 		hat->Price = Hat::Mid;
 		hat->Guid = 22;
 			hat->HatPicScale *= 1.065f;
 			HatInfo.push_back( hat );
 			Hat::Afro = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Halo" ) );
-		hat->Name = Localization::Words_HALO;
+		hat->Name = Localization::Words_Halo;
 		hat->Price = Hat::Mid;
 		hat->Guid = 23;
 			hat->HatPicScale *= 1.07f;
@@ -161,7 +161,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 			Hat::Halo = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_FireHead" ), false );
-		hat->Name = Localization::Words_FIREHEAD;
+		hat->Name = Localization::Words_Firehead;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 24;
 			hat->HatPicTexture = Fireball::FlameTexture;
@@ -181,7 +181,7 @@ namespace CloudberryKingdom
 		//    HatInfo.Add(hat);
 		//    Hat.CheckpointHead = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Horns" ), true, false );
-		hat->Name = Localization::Words_HORNS;
+		hat->Name = Localization::Words_Horns;
 		hat->Price = Hat::Mid;
 		hat->Guid = 27;
 			hat->HatPicTexture = Tools::TextureWad->FindByName( std::wstring( L"HatPic_Horns" ) );
@@ -239,7 +239,7 @@ namespace CloudberryKingdom
 		//    HatInfo.Add(hat);
 		//    Hat.Pink = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Bubble" ), true );
-		hat->Name = Localization::Words_BUBBLE;
+		hat->Name = Localization::Words_Bubble;
 		hat->DrawHead = false;
 		hat->Price = Hat::Mid;
 		hat->Guid = 36;
@@ -251,7 +251,7 @@ namespace CloudberryKingdom
 	float DefaultShiftX = -.35f;
 
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_TopHat" ) );
-		hat->Name = Localization::Words_TOP_HAT;
+		hat->Name = Localization::Words_TopHat;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 37;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 			Hat::TopHat = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Knight" ), false );
-		hat->Name = Localization::Words_KNIGHT_HELMET;
+		hat->Name = Localization::Words_KnightHelmet;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 38;
 			hat->HatPicShift = Vector2( DefaultShiftX,.105f );
@@ -278,7 +278,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 			Hat::Toad = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_BubbleBobble" ) );
-		hat->Name = Localization::Words_OM_NOM_NOM;
+		hat->Name = Localization::Words_OmNomNom;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 40;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -288,7 +288,7 @@ namespace CloudberryKingdom
 			*/
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Brain" ) );
 		hat->DrawHead = false;
-		hat->Name = Localization::Words_BRAIN_HAT;
+		hat->Name = Localization::Words_BrainHat;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 41;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -297,7 +297,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 			Hat::Brain = hat;
 		hat = boost::make_shared<Hat>( std::wstring( L"Hat_Gosu" ) );
-		hat->Name = Localization::Words_GOSU;
+		hat->Name = Localization::Words_Gosu;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 42;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -309,7 +309,7 @@ namespace CloudberryKingdom
 
 		// Buyables
 		Hat::RobinHood = hat = boost::make_shared<Hat>( std::wstring( L"Hat_RobinHood" ) );
-		hat->Name = Localization::Words_ROBIN_HOOD;
+		hat->Name = Localization::Words_RobinHood;
 		hat->Price = Hat::Mid;
 		hat->Guid = 1;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -317,7 +317,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Rasta = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Rasta" ) );
-		hat->Name = Localization::Words_REGGAE;
+		hat->Name = Localization::Words_Reggae;
 		hat->Price = Hat::Mid;
 		hat->Guid = 2;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -326,7 +326,7 @@ namespace CloudberryKingdom
 
 		Hat::Pumpkin = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pumpkin" ) );
 		hat->DrawHead = false;
-		hat->Name = Localization::Words_PUMPKIN;
+		hat->Name = Localization::Words_Pumpkin;
 		hat->Price = Hat::Mid;
 		hat->Guid = 3;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -335,7 +335,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Pirate = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pirate" ) );
-		hat->Name = Localization::Words_PIRATE_HAT;
+		hat->Name = Localization::Words_PirateHat;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 4;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -343,7 +343,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Miner = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Miner" ) );
-		hat->Name = Localization::Words_HARD_HAT;
+		hat->Name = Localization::Words_HardHat;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 5;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -351,7 +351,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Glasses = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Glasses" ) );
-		hat->Name = Localization::Words_FOUR_EYES;
+		hat->Name = Localization::Words_FourEyes;
 		hat->Price = Hat::Mid;
 		hat->Guid = 6;
 			hat->HatPicShift = Vector2( DefaultShiftX,.1f );
@@ -359,7 +359,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::BunnyEars = hat = boost::make_shared<Hat>( std::wstring( L"Hat_BunnyEars" ) );
-		hat->Name = Localization::Words_BUNNY_EARS;
+		hat->Name = Localization::Words_BunnyEars;
 		hat->Price = Hat::Mid;
 		hat->Guid = 7;
 			hat->HatPicShift = Vector2( DefaultShiftX, -.135f );
@@ -374,7 +374,7 @@ namespace CloudberryKingdom
 		//    HatInfo.Add(hat);
 
 		Hat::Antlers = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Antlers" ) );
-		hat->Name = Localization::Words_ANTLERS;
+		hat->Name = Localization::Words_Antlers;
 		hat->Price = Hat::Mid;
 		hat->Guid = 9;
 			hat->HatPicShift = Vector2( DefaultShiftX, -.135f );
@@ -382,7 +382,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Arrow_Renamed = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Arrow" ) );
-		hat->Name = Localization::Words_ARROW_THROUGH_HEAD;
+		hat->Name = Localization::Words_ArrowThroughHead;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 10;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -390,7 +390,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Bag = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Bag" ) );
-		hat->Name = Localization::Words_BROWN_BAG;
+		hat->Name = Localization::Words_BrownBag;
 		hat->DrawHead = false;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 11;
@@ -400,7 +400,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Cone = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Cone" ) );
-		hat->Name = Localization::Words_TRAFFIC_CONE;
+		hat->Name = Localization::Words_TrafficCone;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 12;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -408,7 +408,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Pope = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Pope" ) );
-		hat->Name = Localization::Words_POPE_HAT;
+		hat->Name = Localization::Words_PopeHat;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 13;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -416,7 +416,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Rice = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Rice" ) );
-		hat->Name = Localization::Words_RICE_HAT;
+		hat->Name = Localization::Words_RiceHat;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 14;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -424,7 +424,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Santa = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Santa" ) );
-		hat->Name = Localization::Words_SANTA_CLAUS;
+		hat->Name = Localization::Words_SantaClaus;
 		hat->Price = Hat::Expensive;
 		hat->Guid = 15;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -432,7 +432,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Sombrero = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Sombrero" ) );
-		hat->Name = Localization::Words_SOMBRERO;
+		hat->Name = Localization::Words_Sombrero;
 		hat->Price = Hat::Cheap;
 		hat->Guid = 16;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -441,7 +441,7 @@ namespace CloudberryKingdom
 
 		Hat::Tiki = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Tiki" ) );
 		hat->DrawHead = false;
-		hat->Name = Localization::Words_TIKI_MASK;
+		hat->Name = Localization::Words_TikiMask;
 		hat->Price = Hat::Mid;
 		hat->Guid = 17;
 			hat->HatPicShift = Vector2( DefaultShiftX,.075f );
@@ -449,7 +449,7 @@ namespace CloudberryKingdom
 			HatInfo.push_back( hat );
 
 		Hat::Wizard = hat = boost::make_shared<Hat>( std::wstring( L"Hat_Wizard" ) );
-		hat->Name = Localization::Words_WIZARD;
+		hat->Name = Localization::Words_Wizard;
 		hat->Price = Hat::Mid;
 		hat->Guid = 18;
 			hat->HatPicShift = Vector2( DefaultShiftX, -.015f );
@@ -459,7 +459,7 @@ namespace CloudberryKingdom
 		for ( int i = 0; i < static_cast<int>( HatInfo.size() ); i++ )
 			HatList.push_back( boost::make_shared<MenuListItem>( 
 				boost::static_pointer_cast<Object>( boost::make_shared<WrappedValue<int> >( i ) ),
-				Localization::Words_NONE ) );
+				Localization::Words_None ) );
 
 
 		//hat = new Hat("Hat_Cattails", true, false);
@@ -483,28 +483,28 @@ namespace CloudberryKingdom
 		//colorm = HsvTransform(1.25f, 1.3f, 0) * LinearColorTransform(305); // Yellow
 
 		// Fill the skin color list
-		ColorList.push_back( _i( 3500, 0, Color( 1.f, 1.f, 1.f ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_WHITE ) ); // 0
-		ColorList.push_back( _i( 3501, 0, Color::Silver, ColorHelper::HsvTransform( .85f, 0, 0 ), Localization::Words_SILVER ) ); // 1
-		ColorList.push_back( _i( 3502, 0, Color::Gray, ColorHelper::HsvTransform( .525f, 0, 0 ), Localization::Words_GRAY ) ); // 2
-		ColorList.push_back( _i( 3503, 0, Color( 0.f, 0.f, 0.f ), Color( static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ) ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_BLACK ) ); // 3
+		ColorList.push_back( _i( 3500, 0, Color( 1.f, 1.f, 1.f ), ColorHelper::HsvTransform( 1.25f, 0, 0 ), Localization::Words_White ) ); // 0
+		ColorList.push_back( _i( 3501, 0, Color::Silver, ColorHelper::HsvTransform( .85f, 0, 0 ), Localization::Words_Silver ) ); // 1
+		ColorList.push_back( _i( 3502, 0, Color::Gray, ColorHelper::HsvTransform( .525f, 0, 0 ), Localization::Words_Gray ) ); // 2
+		ColorList.push_back( _i( 3503, 0, Color( 0.f, 0.f, 0.f ), Color( static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ), static_cast<unsigned char>( 50 ) ), ColorHelper::HsvTransform( .3f, 0, 0 ), Localization::Words_Black ) ); // 3
 
-		ColorList.push_back( _i( 3504, 0, Color::Cyan, ColorHelper::LinearColorTransform( 45 ), Localization::Words_CYAN ) ); // 4
-		ColorList.push_back( _i( 3505, 0, Color( 0.f, 0.f, 1.f ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_BLUE ) ); // 5
-		ColorList.push_back( _i( 3506, 0, Color::DarkBlue, ColorHelper::LinearColorTransform( 80 ), Localization::Words_TEAL ) ); // 6
-		ColorList.push_back( _i( 3507, 0, Color::Indigo, ColorHelper::HsvTransform( .8f, 1.3f, 225 ), Localization::Words_INDIGO ) ); // 7
-		ColorList.push_back( _i( 3508, 0, Color::Purple, ColorHelper::HsvTransform( .85f, 1.1f, 205 ), Localization::Words_PURPLE ) ); // 8
-		ColorList.push_back( _i( 3509, 0, Color::Brown, ColorHelper::HsvTransform( 1, 1, 80 ), Localization::Words_BROWN ) ); // 9
-		ColorList.push_back( _i( 3510, 0, Color( 1.f, 0.f, 0.f ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_RED ) ); // 10
-		ColorList.push_back( _i( 3511, 0, Color::HotPink, ColorHelper::HsvTransform( 1.3f, 1.2f, 200 ), Localization::Words_HOT_PINK ) ); // 11
-		ColorList.push_back( _i( 3512, 0, Color( 1, .6f, 0 ),ColorHelper::HsvTransform( .9f, 1.3f, 110 ), Localization::Words_ORANGE ) ); // 12
-		ColorList.push_back( _i( 3513, 0, Color::Gold, ColorHelper::HsvTransform( 1.3f, 1.2f, 100 ), Localization::Words_GOLD ) ); // 13
-		ColorList.push_back( _i( 3514, 0, Color::Yellow, ColorHelper::HsvTransform( 1.5f, 1.5f, 100 ), Localization::Words_YELLOW ) ); // 14
-		ColorList.push_back( _i( 3515, 0, Color( 0.f, 1.f, 0.f ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_GREEN ) ); // 15
-		ColorList.push_back( _i( 3516, 0, Color::LimeGreen, ColorHelper::HsvTransform( 1.25f, 1.35f, 0 ), Localization::Words_LIME_GREEN ) ); // 16
-		ColorList.push_back( _i( 3517, 0, Color::ForestGreen, ColorHelper::HsvTransform( .75f,.8f, 0 ), Localization::Words_FOREST_GREEN ) ); // 17
+		ColorList.push_back( _i( 3504, 0, Color::Cyan, ColorHelper::LinearColorTransform( 45 ), Localization::Words_Cyan ) ); // 4
+		ColorList.push_back( _i( 3505, 0, Color( 0.f, 0.f, 1.f ), ColorHelper::LinearColorTransform( 120 ), Localization::Words_Blue ) ); // 5
+		ColorList.push_back( _i( 3506, 0, Color::DarkBlue, ColorHelper::LinearColorTransform( 80 ), Localization::Words_Teal ) ); // 6
+		ColorList.push_back( _i( 3507, 0, Color::Indigo, ColorHelper::HsvTransform( .8f, 1.3f, 225 ), Localization::Words_Indigo ) ); // 7
+		ColorList.push_back( _i( 3508, 0, Color::Purple, ColorHelper::HsvTransform( .85f, 1.1f, 205 ), Localization::Words_Purple ) ); // 8
+		ColorList.push_back( _i( 3509, 0, Color::Brown, ColorHelper::HsvTransform( 1, 1, 80 ), Localization::Words_Brown ) ); // 9
+		ColorList.push_back( _i( 3510, 0, Color( 1.f, 0.f, 0.f ), ColorHelper::HsvTransform( .95f, 1.3f, 0 ) * ColorHelper::LinearColorTransform( 240 ), Localization::Words_Red ) ); // 10
+		ColorList.push_back( _i( 3511, 0, Color::HotPink, ColorHelper::HsvTransform( 1.3f, 1.2f, 200 ), Localization::Words_HotPink ) ); // 11
+		ColorList.push_back( _i( 3512, 0, Color( 1, .6f, 0 ),ColorHelper::HsvTransform( .9f, 1.3f, 110 ), Localization::Words_Orange ) ); // 12
+		ColorList.push_back( _i( 3513, 0, Color::Gold, ColorHelper::HsvTransform( 1.3f, 1.2f, 100 ), Localization::Words_Gold ) ); // 13
+		ColorList.push_back( _i( 3514, 0, Color::Yellow, ColorHelper::HsvTransform( 1.5f, 1.5f, 100 ), Localization::Words_Yellow ) ); // 14
+		ColorList.push_back( _i( 3515, 0, Color( 0.f, 1.f, 0.f ), ColorHelper::LinearColorTransform( 0 ), Localization::Words_Green ) ); // 15
+		ColorList.push_back( _i( 3516, 0, Color::LimeGreen, ColorHelper::HsvTransform( 1.25f, 1.35f, 0 ), Localization::Words_LimeGreen ) ); // 16
+		ColorList.push_back( _i( 3517, 0, Color::ForestGreen, ColorHelper::HsvTransform( .75f,.8f, 0 ), Localization::Words_ForestGreen ) ); // 17
 
-		ColorList.push_back( _i( 3518, 0, ColorHelper::GrayColor( .2f ), ColorHelper::HsvTransform( 0, 0, 1 ), Localization::Words_NINJA ) ); // 18
-		ColorList.push_back( _i( 3519, 0, Color::White, ColorHelper::HsvTransform( 1.75f, 0, 1 ), Localization::Words_BRIGHT_WHITE ) ); // 19
+		ColorList.push_back( _i( 3518, 0, ColorHelper::GrayColor( .2f ), ColorHelper::HsvTransform( 0, 0, 1 ), Localization::Words_Ninja ) ); // 18
+		ColorList.push_back( _i( 3519, 0, Color::White, ColorHelper::HsvTransform( 1.75f, 0, 1 ), Localization::Words_BrightWhite ) ); // 19
 
 
 
@@ -522,15 +522,15 @@ namespace CloudberryKingdom
 		 */
 		Matrix m = Matrix();
 		m.M11 = m.M12 = m.M13 = m.M14 = m.M21 = m.M22 = m.M23 = m.M24 = m.M31 = m.M32 = m.M33 = m.M34 = m.M41 = m.M42 = m.M43 = m.M44 = 0;
-		boost::shared_ptr<MenuListItem> NoTexture = _i( 3524, 0, Color::Transparent, m, Localization::Words_CLEAR ); // 6
+		boost::shared_ptr<MenuListItem> NoTexture = _i( 3524, 0, Color::Transparent, m, Localization::Words_Clear ); // 6
 		TextureList.push_back( NoTexture );
 
 
 		// Fill the cape color list
 		boost::shared_ptr<ClrTextFx> cape;
 		None = boost::make_shared<ClrTextFx>( 3525, 0, Color( 1.f, 1.f, 1.f, 0.f ), Matrix::Identity() );
-		None->Name = Localization::Words_NONE;
-		CapeColorList.push_back( boost::make_shared<MenuListItem>( None, Localization::Words_NONE ) );
+		None->Name = Localization::Words_None;
+		CapeColorList.push_back( boost::make_shared<MenuListItem>( None, Localization::Words_None ) );
 		//CapeColorList.AddRange( ColorList );
 		AddRange( CapeColorList, ColorList );
 
@@ -601,17 +601,17 @@ namespace CloudberryKingdom
 		ClrList = MakeUnique( temp );
 
 		// Create the default color schemes
-		AddScheme( ColorScheme( Localization::Words_GREEN, Localization::Words_RED, Localization::Words_BLACK, Localization::Words_NONE, Localization::Words_NONE ), true );
-		AddScheme( ColorScheme( Localization::Words_HOT_PINK, Localization::Words_HOT_PINK, Localization::Words_HOT_PINK, Hat::BunnyEars->Name, Hat::Beard->Name ), false );
-		AddScheme( ColorScheme( Localization::Words_GOLD, Localization::Words_GOLD, Localization::Words_GOLD, Localization::Words_NONE, Localization::Words_NONE ), false );
-		AddScheme( ColorScheme( Localization::Words_PURPLE, Localization::Words_INDIGO, Localization::Words_HOT_PINK, Localization::Words_NONE, Localization::Words_VANDYKE ), false );
-		AddScheme( ColorScheme( Localization::Words_FOREST_GREEN, Localization::Words_YELLOW, Localization::Words_GOLD, Localization::Words_RICE_HAT, Localization::Words_RUGGED ), false );
-		AddScheme( ColorScheme( Localization::Words_RED, Localization::Words_NONE, Localization::Words_NONE, Localization::Words_ANTLERS, Localization::Words_VANDYKE ), false );
-        AddScheme( ColorScheme(Localization::Words_GRAY, Localization::Words_RED, Localization::Words_BLACK, Localization::Words_NONE, Hat::Mustache->Name ), false);
-        AddScheme( ColorScheme(Localization::Words_INDIGO, Localization::Words_CYAN, Localization::Words_SILVER, Localization::Words_WIZARD, Localization::Words_VANDYKE ), false);
-        AddScheme( ColorScheme(Localization::Words_NINJA, Localization::Words_WHITE, Localization::Words_BLACK, Localization::Words_PUMPKIN, Localization::Words_MANHATTAN ), false);
-        AddScheme( ColorScheme(Localization::Words_FOREST_GREEN, Localization::Words_FOREST_GREEN, Localization::Words_FOREST_GREEN, Localization::Words_ROBIN_HOOD, Localization::Words_VANDYKE ), false);
-        AddScheme( ColorScheme(Localization::Words_SILVER, Localization::Words_GRAY, Localization::Words_GRAY, Localization::Words_KNIGHT_HELMET, Localization::Words_LUMBERJACK ), false);
+		AddScheme( ColorScheme( Localization::Words_Green, Localization::Words_Red, Localization::Words_Black, Localization::Words_None, Localization::Words_None ), true );
+		AddScheme( ColorScheme( Localization::Words_HotPink, Localization::Words_HotPink, Localization::Words_HotPink, Hat::BunnyEars->Name, Hat::Beard->Name ), false );
+		AddScheme( ColorScheme( Localization::Words_Gold, Localization::Words_Gold, Localization::Words_Gold, Localization::Words_None, Localization::Words_None ), false );
+		AddScheme( ColorScheme( Localization::Words_Purple, Localization::Words_Indigo, Localization::Words_HotPink, Localization::Words_None, Localization::Words_Vandyke ), false );
+		AddScheme( ColorScheme( Localization::Words_ForestGreen, Localization::Words_Yellow, Localization::Words_Gold, Localization::Words_RiceHat, Localization::Words_Rugged ), false );
+		AddScheme( ColorScheme( Localization::Words_Red, Localization::Words_None, Localization::Words_None, Localization::Words_Antlers, Localization::Words_Vandyke ), false );
+        AddScheme( ColorScheme(Localization::Words_Gray, Localization::Words_Red, Localization::Words_Black, Localization::Words_None, Hat::Mustache->Name ), false);
+        AddScheme( ColorScheme(Localization::Words_Indigo, Localization::Words_Cyan, Localization::Words_Silver, Localization::Words_Wizard, Localization::Words_Vandyke ), false);
+        AddScheme( ColorScheme(Localization::Words_Ninja, Localization::Words_White, Localization::Words_Black, Localization::Words_Pumpkin, Localization::Words_Manhattan ), false);
+        AddScheme( ColorScheme(Localization::Words_ForestGreen, Localization::Words_ForestGreen, Localization::Words_ForestGreen, Localization::Words_RobinHood, Localization::Words_Vandyke ), false);
+        AddScheme( ColorScheme(Localization::Words_Silver, Localization::Words_Gray, Localization::Words_Gray, Localization::Words_KnightHelmet, Localization::Words_Lumberjack ), false);
 	}
 
 	std::vector<boost::shared_ptr<MenuListItem> > ColorSchemeManager::MakeUnique( std::vector<boost::shared_ptr<MenuListItem> > &list )

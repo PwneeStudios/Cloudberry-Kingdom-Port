@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 
 namespace CloudberryKingdom
@@ -29,7 +29,7 @@ Vector2 TutorialHelper::ReadyGoPos = Vector2( 0, 80 );
 
 	void TutorialHelper::ReadyGo( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &End )
 	{
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_READY, ReadyGoPos ));
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_Ready, ReadyGoPos ));
 		text->FixedToCamera = true;
 		game->AddGameObject( text );
 
@@ -39,7 +39,7 @@ Vector2 TutorialHelper::ReadyGoPos = Vector2( 0, 80 );
 
 	void TutorialHelper::ReadyGo_Go( const boost::shared_ptr<GameData> &game, const boost::shared_ptr<Lambda> &End )
 	{
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GO, ReadyGoPos ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_Go, ReadyGoPos ) );
 		text->MyPile->MyPopPitch = 3;
 		text->FixedToCamera = true;
 		game->AddGameObject( text );

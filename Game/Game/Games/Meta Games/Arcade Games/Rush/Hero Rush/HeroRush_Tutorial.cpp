@@ -266,7 +266,7 @@ namespace CloudberryKingdom
 	{
 		ShowTitle = false;
 
-		boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HERO_RUSH );
+		boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HeroRush );
 
 		MyGame->AddGameObject( text );
 
@@ -287,7 +287,7 @@ namespace CloudberryKingdom
 		arrow->PointTo( endpos );
 		MyGame->AddGameObject( arrow );
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_TO_THE_EXIT, arrow->getCore()->Data.Position + Vector2(-200, 400) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GetToTheExit, arrow->getCore()->Data.Position + Vector2(-200, 400) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
@@ -306,7 +306,7 @@ namespace CloudberryKingdom
 		MyGame->AddGameObject( arrow );
 
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SECONDS_ON_THE_CLOCK, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_SecondsOnTheClock, arrow->getCore()->Data.Position + Vector2(830, -130) ) );
 
 		boost::shared_ptr<GUI_Text> text2 = MakeMagic( GUI_Text, ( StringConverterHelper::toString( HeroRush->Timer->getSeconds() ), arrow->getCore()->Data.Position + Vector2(830, -130) + Vector2(-150, 0) ) );
 
@@ -334,7 +334,7 @@ namespace CloudberryKingdom
 			arrows.push_back( arrow );
 		}
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_COINS_ADD_SECONDS, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_CoinsAddSeconds, Tools::CurLevel->getMainCamera()->Data.Position + Vector2(0, -750) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial
@@ -366,7 +366,7 @@ namespace CloudberryKingdom
 		arrow->PointTo( scorepos );
 		MyGame->AddGameObject( arrow );
 
-		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GET_AHIGH_SCORE, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) ) );
+		boost::shared_ptr<GUI_Text> text = MakeMagic( GUI_Text, ( Localization::Words_GetAHighScore, arrow->getCore()->Data.Position + Vector2(-500, -100) + Vector2(-38.88892f, -150) ) );
 		MyGame->AddGameObject( text );
 
 		// On (A) go to next part of the tutorial

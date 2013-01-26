@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 		BobPhsxBox::InitSingleton();
 
 		Specification = HeroSpec( 6, 0, 0, 0 );
-		Name = Localization::Words_ROCKETBOX;
+		Name = Localization::Words_Rocketbox;
 		NameTemplate = std::wstring( L"rocketbox" );
 		//Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Cart" ) ), Color::White, DefaultIconWidth );
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( L"CartIcon" ), Color::White, DefaultIconWidth * 1.315f);

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/Queue.h"
 #include <MasterHack.h>
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 1, 0, 0, 0 );
-		Name = Localization::Words_HERO_IN_ABOX;
+		Name = Localization::Words_HeroInABox;
 		NameTemplate = std::wstring( L"hero in a box" );
 
 		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Box"), Color.White, DefaultIconWidth * 1.125f);

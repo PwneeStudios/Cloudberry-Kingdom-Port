@@ -93,7 +93,7 @@ namespace CloudberryKingdom
 		player = MenuItem::GetActivatingPlayerData();
 
 		// Header
-		HeaderText = boost::make_shared<EzText>( Localization::Words_RANDOM_SEED, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_RandomSeed, ItemFont );
 		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
@@ -104,7 +104,7 @@ namespace CloudberryKingdom
 		if ( CanSave )
 		{
 			// Save seed
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
 			item->Name = std::wstring( L"Save" );
 			item->setGo( MakeSave( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ), player ) );
 			AddItem( item );
@@ -113,7 +113,7 @@ namespace CloudberryKingdom
 		if ( CanLoad )
 		{
 			// Load seed
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_SEED, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LoadSeed, ItemFont ) ) );
 			item->Name = std::wstring( L"Load" );
 			item->setGo( boost::make_shared<LoadProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
@@ -123,7 +123,7 @@ namespace CloudberryKingdom
 		if ( CanSave )
 		{
 			// Copy seed
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_COPY_TO_CLIPBOARD, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CopyToClipboard, ItemFont ) ) );
 			item->Name = std::wstring( L"Copy" );
 			item->setGo( boost::make_shared<CopyProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 		if ( CanLoad )
 		{
 			// Load seed from string
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LOAD_FROM_CLIPBOARD, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LoadFromClipboard, ItemFont ) ) );
 			item->Name = std::wstring( L"LoadString" );
 			item->setGo( boost::make_shared<LoadStringProxy>( boost::static_pointer_cast<SaveLoadSeedMenu>( shared_from_this() ) ) );
 			AddItem( item );

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 2, 0, 0, 0 );
-		Name = Localization::Words_WHEELIE;
+		Name = Localization::Words_Wheelie;
 		NameTemplate = std::wstring( L"wheelie" );
 
 		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Wheel"), Color.White, 1.4f * DefaultIconWidth);

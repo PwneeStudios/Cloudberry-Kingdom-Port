@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
@@ -313,10 +313,10 @@ namespace CloudberryKingdom
 
 		// Set the name
 		if ( BaseType == BobPhsxNormal::getInstance() && Shape == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
-			custom->Name = Localization::Words_CLASSIC_HERO;
+			custom->Name = Localization::Words_ClassicHero;
 		else
 		{
-			custom->Name = Localization::Words_CUSTOM;
+			custom->Name = Localization::Words_Custom;
 
             if ( Shape == BobPhsxNormal::getInstance() && MoveMod == BobPhsxNormal::getInstance() )
                 custom->Name = BaseType->Name;
@@ -992,7 +992,7 @@ namespace CloudberryKingdom
 
 
 		CustomPhsx = false;
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 		Id = -1;
 		Adjective = std::wstring( L"" );
 		NameTemplate = std::wstring( L"Hero" );

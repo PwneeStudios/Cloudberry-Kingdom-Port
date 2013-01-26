@@ -221,7 +221,7 @@ namespace CloudberryKingdom
 		BackArrow->FancyPos->SetCenter( BackButton->FancyPos );
 
 		// Header
-		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_LEVEL, Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_Level, Resources::Font_Grobold42 );
 		MyPile->Add( Header );
 		SetHeaderProperties( Header );
 

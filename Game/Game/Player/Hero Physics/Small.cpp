@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -40,7 +40,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 0, 1, 0, 0 );
-		Name = Localization::Words_TINY_BOB;
+		Name = Localization::Words_TinyBob;
 		Adjective = std::wstring( L"tiny" );
 		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Tiny"), Color.White, DefaultIconWidth);
 		//Icon = new PictureIcon(Tools::TextureWad.FindByName("HeroIcon_Classic"), Color.White, DefaultIconWidth * .6f);

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 0, 0, 1, 0 );
-		Name = Localization::Words_DOUBLE_JUMP;
+		Name = Localization::Words_DoubleJump;
 		Adjective = std::wstring( L"double jump" );
 
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"HeroIcon_Double" ) ), Color::White, 1.1f * DefaultIconWidth * 286.f / 240.f );

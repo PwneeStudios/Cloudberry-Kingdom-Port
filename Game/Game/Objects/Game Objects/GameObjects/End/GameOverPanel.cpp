@@ -187,7 +187,7 @@ namespace CloudberryKingdom
 		backdrop->setPos( Vector2( 22.2233f, 10.55567f ) );
 
 		// 'Game Over' text
-		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_GAME_OVER, Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_GameOver, Resources::Font_Grobold42_2, 1450.f, false, true, .6f );
 		Text->setScale( 1 );
 		Text->MyFloatColor = ( bColor( 255, 255, 255 ) ).ToVector4();
 		Text->OutlineColor = ( bColor( 0, 0, 0 ) ).ToVector4();
@@ -199,14 +199,14 @@ namespace CloudberryKingdom
 
 
 		// 'Levels' text
-		MyPile->Add( boost::make_shared<EzText>( Localization::Words_LEVEL, ItemFont, static_cast<std::wstring>( std::wstring( L"Level" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_Level, ItemFont, static_cast<std::wstring>( std::wstring( L"Level" ) ) ) );
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Levels ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -893.4177f, 378.9999f ) );
 		MyPile->Add( Text, std::wstring( L"LevelVal" ) );
 
 		// 'Score' text
-		MyPile->Add( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont, static_cast<std::wstring>( std::wstring( L"Score" ) ) ) );
+		MyPile->Add( boost::make_shared<EzText>( Localization::Words_Score, ItemFont, static_cast<std::wstring>( std::wstring( L"Score" ) ) ) );
 		Text = boost::make_shared<EzText>( Format( _T( "%d" ), Score ), ItemFont );
 		SetHeaderProperties( Text );
 		Text->setPos( Vector2( -873.9723f, 147.8889f ) );
@@ -331,15 +331,15 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 		FontScale *= .89f * 1.16f;
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PlayAgain, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_PlayAgainProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HighScores, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_ShowHighScoresProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Done, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<Action_DoneProxy>( boost::static_pointer_cast<GameOverPanel>( shared_from_this() ) ) ) );
 		AddItem( item );
 	}

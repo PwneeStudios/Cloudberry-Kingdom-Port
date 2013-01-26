@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/List.h"
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
@@ -1017,16 +1017,16 @@ namespace CloudberryKingdom
 
 	void TileSets::LoadCode()
 	{
-		AddTileSet( Load_Sea()->SetBackground(std::wstring( L"sea" ))->SetNameInGame(Localization::Words_SEA) );
-		AddTileSet( Load_Sea()->SetBackground(std::wstring( L"sea_rain" ))->SetName(std::wstring( L"sea_rain" ))->SetNameInGame(Localization::Words_SEA) );
-		AddTileSet( Load_Hills()->SetBackground(std::wstring( L"hills" ))->SetNameInGame(Localization::Words_HILLS) );
-		AddTileSet( Load_Hills()->SetBackground(std::wstring( L"hills_rain" ))->SetName(std::wstring( L"hills_rain" ))->SetNameInGame(Localization::Words_HILLS) );
-		AddTileSet( Load_Forest()->SetBackground(std::wstring( L"forest" ))->SetNameInGame(Localization::Words_FOREST) );
-		AddTileSet( Load_Forest()->SetBackground(std::wstring( L"forest_snow" ))->SetName(std::wstring( L"forest_snow" ))->SetNameInGame(Localization::Words_FOREST) );
-		AddTileSet( Load_Cloud()->SetBackground(std::wstring( L"cloud" ))->SetNameInGame(Localization::Words_CLOUD) );
-		AddTileSet( Load_Cloud()->SetBackground(std::wstring( L"cloud_rain" ))->SetName(std::wstring( L"cloud_rain" ))->SetNameInGame(Localization::Words_CLOUD) );
-		AddTileSet( Load_Cave()->SetBackground(std::wstring( L"cave" ))->SetNameInGame(Localization::Words_CAVE) );
-		AddTileSet( Load_Castle()->SetBackground(std::wstring( L"castle" ))->SetNameInGame(Localization::Words_CASTLE) );
+		AddTileSet( Load_Sea()->SetBackground(std::wstring( L"sea" ))->SetNameInGame(Localization::Words_Sea) );
+		AddTileSet( Load_Sea()->SetBackground(std::wstring( L"sea_rain" ))->SetName(std::wstring( L"sea_rain" ))->SetNameInGame(Localization::Words_Sea) );
+		AddTileSet( Load_Hills()->SetBackground(std::wstring( L"hills" ))->SetNameInGame(Localization::Words_Hills) );
+		AddTileSet( Load_Hills()->SetBackground(std::wstring( L"hills_rain" ))->SetName(std::wstring( L"hills_rain" ))->SetNameInGame(Localization::Words_Hills) );
+		AddTileSet( Load_Forest()->SetBackground(std::wstring( L"forest" ))->SetNameInGame(Localization::Words_Forest) );
+		AddTileSet( Load_Forest()->SetBackground(std::wstring( L"forest_snow" ))->SetName(std::wstring( L"forest_snow" ))->SetNameInGame(Localization::Words_Forest) );
+		AddTileSet( Load_Cloud()->SetBackground(std::wstring( L"cloud" ))->SetNameInGame(Localization::Words_Cloud) );
+		AddTileSet( Load_Cloud()->SetBackground(std::wstring( L"cloud_rain" ))->SetName(std::wstring( L"cloud_rain" ))->SetNameInGame(Localization::Words_Cloud) );
+		AddTileSet( Load_Cave()->SetBackground(std::wstring( L"cave" ))->SetNameInGame(Localization::Words_Cave) );
+		AddTileSet( Load_Castle()->SetBackground(std::wstring( L"castle" ))->SetNameInGame(Localization::Words_Castle) );
 	}
 
 	void TileSets::LoadTileSet( const std::wstring &path )
@@ -1081,7 +1081,7 @@ namespace CloudberryKingdom
 		// None
 		DefaultTileSet = None = info = boost::make_shared<TileSet>();
 		info->Name = std::wstring( L"None" );
-		info->NameInGame = Localization::Words_NONE;
+		info->NameInGame = Localization::Words_None;
 		info->Guid = 5551;
 		AddTileSet( info );
 		info->MyBackgroundType = BackgroundType::None;
@@ -1094,7 +1094,7 @@ namespace CloudberryKingdom
 		// Random
 		Random = info = boost::make_shared<TileSet>();
 		info->Name = std::wstring( L"Random" );
-		info->NameInGame = Localization::Words_RANDOM;
+		info->NameInGame = Localization::Words_Random;
 		info->Guid = 5552;
 		AddTileSet( info );
 		info->MyBackgroundType = BackgroundType::Random;

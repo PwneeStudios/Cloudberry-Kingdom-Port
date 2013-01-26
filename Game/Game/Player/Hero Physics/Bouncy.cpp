@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/Queue.h"
 #include <MasterHack.h>
@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 3, 0, 0, 0 );
-		Name = Localization::Words_BOUNCY;
+		Name = Localization::Words_Bouncy;
 		NameTemplate = std::wstring( L"bouncey bounce" );
 
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Horse_0000" ) ), Color::White, 1.35875f * DefaultIconWidth );

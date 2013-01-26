@@ -270,14 +270,14 @@ namespace CloudberryKingdom
 		// Header
 		boost::shared_ptr<MenuItem> Header;
 		if ( group == StatGroup_LIFETIME )
-			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) ) );
+			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Statistics, Resources::Font_Grobold42_2 ) ) );
 		else if ( group == StatGroup_CAMPAIGN )
 		{
-			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_STORY_MODE, Resources::Font_Grobold42_2 ) ) );
+			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_StoryMode, Resources::Font_Grobold42_2 ) ) );
 			Header->MyText->setScale( Header->MyText->getScale() * .725f );
 		}
 		else
-			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_STATISTICS, Resources::Font_Grobold42_2 ) ) );
+			Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Statistics, Resources::Font_Grobold42_2 ) ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( HeaderPos, ItemPos.Y - 40 );
 		SetHeaderProperties( Header->MyText );
@@ -323,26 +323,26 @@ namespace CloudberryKingdom
 			}
 		}
 	#endif
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LEVELS_BEAT, ItemFont ) ) ), boost::make_shared<StatsLevels>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_JUMPS, ItemFont ) ) ), boost::make_shared<StatsJumps>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SCORE, ItemFont ) ) ), boost::make_shared<StatsScore>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LevelsBeat, ItemFont ) ) ), boost::make_shared<StatsLevels>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Jumps, ItemFont ) ) ), boost::make_shared<StatsJumps>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Score, ItemFont ) ) ), boost::make_shared<StatsScore>( Stats ) );
 
 
 		// Coins
-		boost::shared_ptr<MenuItem> coinitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_COINS, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> coinitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Coins, ItemFont ) ) );
 		coinitem->Selectable = false;
 		AddItem( coinitem );
 
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_GRABBED, ItemFont ) ) ), boost::make_shared<StatsCoins>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_COINS_OUT_OF, ItemFont ) ) ), boost::make_shared<StatsTotalCoins>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PERCENT, ItemFont ) ) ), boost::make_shared<StatsCoinPercentGotten>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Grabbed, ItemFont ) ) ), boost::make_shared<StatsCoins>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CoinsOutOf, ItemFont ) ) ), boost::make_shared<StatsTotalCoins>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Percent, ItemFont ) ) ), boost::make_shared<StatsCoinPercentGotten>( Stats ) );
 
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FLYING_BLOBS, ItemFont ) ) ), boost::make_shared<StatsBlobs>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CHECKPOINTS, ItemFont ) ) ), boost::make_shared<StatsCheckpoints>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_AVERAGE_LIFE, ItemFont ) ) ), boost::make_shared<StatsLifeExpectancy>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FlyingBlobs, ItemFont ) ) ), boost::make_shared<StatsBlobs>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Checkpoints, ItemFont ) ) ), boost::make_shared<StatsCheckpoints>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_AverageLife, ItemFont ) ) ), boost::make_shared<StatsLifeExpectancy>( Stats ) );
 
 		// Deaths
-		Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DEATHS, Resources::Font_Grobold42_2 ) ) );
+		Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Deaths, Resources::Font_Grobold42_2 ) ) );
 		MyMenu->Add( Header );
 		Header->Pos = Vector2( HeaderPos, ItemPos.Y - 40 );
 		SetHeaderProperties( Header->MyText );

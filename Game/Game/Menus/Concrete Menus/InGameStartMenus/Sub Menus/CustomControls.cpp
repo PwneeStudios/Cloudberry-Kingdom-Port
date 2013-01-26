@@ -325,7 +325,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Customize
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Reset, ItemFont ) ) );
 		item->Name = std::wstring( L"Reset" );
 		item->setGo( boost::make_shared<ResetProxy>( boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() ) ) );
 		item->MySelectedText->MyFloatColor = ( bColor( 50, 220, 50 ) ).ToVector4();
@@ -375,61 +375,61 @@ namespace CloudberryKingdom
 
 		boost::shared_ptr<ControlItem> item;
 
-		item = MakeMagic( ControlItem, ( Localization::Words_QUICK_SPAWN, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_QuickSpawn, ButtonCheck::Quickspawn_KeyboardKey->KeyboardKey ) );
 		item->Name = std::wstring( L"quickspawn" );
 		item->SetSecondaryKey = boost::make_shared<KeyQuickspawn_KeyboardKey>();
 		item->Reset = boost::make_shared<ResetQuickspawn_KeyboardKey>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_POWER_UP_MENU, ButtonCheck::Help_KeyboardKey->KeyboardKey ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_PowerUpMenu, ButtonCheck::Help_KeyboardKey->KeyboardKey ) );
 		item->Name = std::wstring( L"powerup" );
 		item->SetSecondaryKey = boost::make_shared<KeyHelp_KeyboardKey>();
 		item->Reset = boost::make_shared<ResetHelp_KeyboardKey>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_LEFT, ButtonCheck::Left_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_Left, ButtonCheck::Left_Secondary ) );
 		item->Name = std::wstring( L"left" );
 		item->SetSecondaryKey = boost::make_shared<KeyLeft_Secondary>();
 		item->Reset = boost::make_shared<ResetLeft_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_RIGHT, ButtonCheck::Right_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_Right, ButtonCheck::Right_Secondary ) );
 		item->Name = std::wstring( L"right" );
 		item->SetSecondaryKey = boost::make_shared<KeyRight_Secondary>();
 		item->Reset = boost::make_shared<ResetRight_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_UP, ButtonCheck::Up_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_Up, ButtonCheck::Up_Secondary ) );
 		item->Name = std::wstring( L"up" );
 		item->SetSecondaryKey = boost::make_shared<KeyUp_Secondary>();
 		item->Reset = boost::make_shared<ResetUp_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_DOWN, ButtonCheck::Down_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_Down, ButtonCheck::Down_Secondary ) );
 		item->Name = std::wstring( L"down" );
 		item->SetSecondaryKey = boost::make_shared<KeyDown_Secondary>();
 		item->Reset = boost::make_shared<ResetDown_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_REPLAY_PREV, ButtonCheck::ReplayPrev_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_ReplayPrev, ButtonCheck::ReplayPrev_Secondary ) );
 		item->Name = std::wstring( L"replayprev" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayPrev_Secondary>();
 		item->Reset = boost::make_shared<ResetReplayPrev_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_REPLAY_NEXT, ButtonCheck::ReplayNext_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_ReplayNext, ButtonCheck::ReplayNext_Secondary ) );
 		item->Name = std::wstring( L"replaynext" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayNext_Secondary>();
 		item->Reset = boost::make_shared<ResetReplayNext_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_REPLAY_TOGGLE, ButtonCheck::SlowMoToggle_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_ReplayToggle, ButtonCheck::SlowMoToggle_Secondary ) );
 		item->Name = std::wstring( L"replaytoggle" );
 		item->SetSecondaryKey = boost::make_shared<KeyReplayToggle_Secondary>();
 		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();
 		AddItem( item );
 
-		item = MakeMagic( ControlItem, ( Localization::Words_ACTIVATE_SLOW_MO, ButtonCheck::SlowMoToggle_Secondary ) );
+		item = MakeMagic( ControlItem, ( Localization::Words_ActivateSlowMo, ButtonCheck::SlowMoToggle_Secondary ) );
 		item->Name = std::wstring( L"toggleslowmo" );
 		item->SetSecondaryKey = boost::make_shared<KeySlowMoToggle_Secondary>();
 		item->Reset = boost::make_shared<ResetSlowMoToggle_Secondary>();

@@ -170,26 +170,26 @@ namespace CloudberryKingdom
 		PhsxSlider::Font = ItemFont;
 		PhsxSlider::Process = boost::make_shared<AddItemProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) );
 
-		AccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_ACCELERATION, BobPhsx::CustomData_ACCEL ) );
-		MaxSpeedSlider = MakeMagic( PhsxSlider, ( Localization::Words_MAX_VELOCITY, BobPhsx::CustomData_MAXSPEED ) );
-		SizeSlider = MakeMagic( PhsxSlider, ( Localization::Words_SIZE, BobPhsx::CustomData_SIZE ) );
-		GravitySlider = MakeMagic( PhsxSlider, ( Localization::Words_GRAVITY, BobPhsx::CustomData_GRAVITY ) );
-		MaxFallSpeedSlider = MakeMagic( PhsxSlider, ( Localization::Words_MAX_FALL_SPEED, BobPhsx::CustomData_MAXFALL ) );
-		FrictionSlider = MakeMagic( PhsxSlider, ( Localization::Words_FRICTION, BobPhsx::CustomData_FRICTION ) );
-		JumpLengthSlider = MakeMagic( PhsxSlider, ( Localization::Words_JUMP_LENGTH, BobPhsx::CustomData_JUMPLENGTH ) );
-		JumpAccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_JUMP_ACC, BobPhsx::CustomData_JUMPACCEL ) );
+		AccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_Acceleration, BobPhsx::CustomData_ACCEL ) );
+		MaxSpeedSlider = MakeMagic( PhsxSlider, ( Localization::Words_MaxVelocity, BobPhsx::CustomData_MAXSPEED ) );
+		SizeSlider = MakeMagic( PhsxSlider, ( Localization::Words_Size, BobPhsx::CustomData_SIZE ) );
+		GravitySlider = MakeMagic( PhsxSlider, ( Localization::Words_Gravity, BobPhsx::CustomData_GRAVITY ) );
+		MaxFallSpeedSlider = MakeMagic( PhsxSlider, ( Localization::Words_MaxFallSpeed, BobPhsx::CustomData_MAXFALL ) );
+		FrictionSlider = MakeMagic( PhsxSlider, ( Localization::Words_Friction, BobPhsx::CustomData_FRICTION ) );
+		JumpLengthSlider = MakeMagic( PhsxSlider, ( Localization::Words_JumpLength, BobPhsx::CustomData_JUMPLENGTH ) );
+		JumpAccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_JumpAcc, BobPhsx::CustomData_JUMPACCEL ) );
 
-		NumJumpsSlider = MakeMagic( PhsxSlider, ( Localization::Words_NUM_JUMPS, BobPhsx::CustomData_NUMJUMPS ) );
+		NumJumpsSlider = MakeMagic( PhsxSlider, ( Localization::Words_NumJumps, BobPhsx::CustomData_NUMJUMPS ) );
 		NumJumpsSlider->Discrete = true;
-		DoubleJumpLengthSlider = MakeMagic( PhsxSlider, ( Localization::Words_DOUBLE_JUMP_LENGTH, BobPhsx::CustomData_JUMPLENGTH2 ) );
-		DoubleJumpAccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_DOUBLE_JUMP_ACCEL, BobPhsx::CustomData_JUMPACCEL2 ) );
+		DoubleJumpLengthSlider = MakeMagic( PhsxSlider, ( Localization::Words_DoubleJumpLength, BobPhsx::CustomData_JUMPLENGTH2 ) );
+		DoubleJumpAccelSlider = MakeMagic( PhsxSlider, ( Localization::Words_DoubleJumpAccel, BobPhsx::CustomData_JUMPACCEL2 ) );
 
-		JetPackSlider = MakeMagic( PhsxSlider, ( Localization::Words_JETPACK_ACC, BobPhsx::CustomData_JETPACKACCEL ) );
-		JetPackFuelSlider = MakeMagic( PhsxSlider, ( Localization::Words_JETPACK_FUEL, BobPhsx::CustomData_JETPACKFUEL ) );
+		JetPackSlider = MakeMagic( PhsxSlider, ( Localization::Words_JetpackAcc, BobPhsx::CustomData_JETPACKACCEL ) );
+		JetPackFuelSlider = MakeMagic( PhsxSlider, ( Localization::Words_JetpackFuel, BobPhsx::CustomData_JETPACKFUEL ) );
 
-		PhasedSizeSlider = MakeMagic( PhsxSlider, ( Localization::Words_PHASED_SIZE, BobPhsx::CustomData_SIZE2 ) );
-		PhasedGravitySlider = MakeMagic( PhsxSlider, ( Localization::Words_PHASED_GRAVITY, BobPhsx::CustomData_GRAVITY2 ) );
-		PhasePeriodSlider = MakeMagic( PhsxSlider, ( Localization::Words_PHASE_PERIOD, BobPhsx::CustomData_PHASEPERIOD ) );
+		PhasedSizeSlider = MakeMagic( PhsxSlider, ( Localization::Words_PhasedSize, BobPhsx::CustomData_SIZE2 ) );
+		PhasedGravitySlider = MakeMagic( PhsxSlider, ( Localization::Words_PhasedGravity, BobPhsx::CustomData_GRAVITY2 ) );
+		PhasePeriodSlider = MakeMagic( PhsxSlider, ( Localization::Words_PhasePeriod, BobPhsx::CustomData_PHASEPERIOD ) );
 	}
 
 	void CustomHero_GUI::StartTest()
@@ -395,7 +395,7 @@ namespace CloudberryKingdom
 		SelectedItemShift = Vector2( 0, 0 );
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_HERO_FACTORY, Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_HeroFactory, Resources::Font_Grobold42 );
 		HeaderText->Name = std::wstring( L"Header" );
 		SetSuperHeader( HeaderText );
 		HeaderText->setPos( Vector2( -1169.842f, 985.7144f ) );
@@ -409,7 +409,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Hero lists
-		BaseHeader = HeroText = boost::make_shared<EzText>( Localization::Words_BASE, ItemFont );
+		BaseHeader = HeroText = boost::make_shared<EzText>( Localization::Words_Base, ItemFont );
 		HeroText->Name = std::wstring( L"base" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
@@ -427,7 +427,7 @@ namespace CloudberryKingdom
 		AddItem( BaseList );
 
 		// Hero jump
-		JumpHeader = HeroText = boost::make_shared<EzText>( Localization::Words_JUMP, ItemFont );
+		JumpHeader = HeroText = boost::make_shared<EzText>( Localization::Words_Jump, ItemFont );
 		HeroText->Name = std::wstring( L"jump" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
@@ -445,7 +445,7 @@ namespace CloudberryKingdom
 		AddItem( JumpList );
 
 		// Hero shape
-		SizeHeader = HeroText = boost::make_shared<EzText>( Localization::Words_SHAPE, ItemFont );
+		SizeHeader = HeroText = boost::make_shared<EzText>( Localization::Words_Shape, ItemFont );
 		HeroText->Name = std::wstring( L"size" );
 		SetHeaderProperties( HeroText );
 		MyPile->Add( HeroText );
@@ -725,10 +725,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_A" ) ) ) );
-			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) ) );
+			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
 		}
 		else
-			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_TEST, ItemFont ) ) );
+			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
 		item->Name = std::wstring( L"test" );
 		item->JiggleOnGo = false;
 		AddItem( item );
@@ -747,10 +747,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_B" ) ) ) );
-			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
+			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
 		}
 		else
-			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_BACK, ItemFont ) ) );
+			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
 		item->Name = std::wstring( L"back" );
 		AddItem( item );
 		item->SelectSound.reset();
@@ -765,10 +765,10 @@ namespace CloudberryKingdom
 		if ( WithButtonPics )
 		{
 			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
-			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) ) );
+			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
 		}
 		else
-			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY, ItemFont ) ) );
+			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
 
 		item->Name = std::wstring( L"continue" );
 		AddItem( item );
@@ -782,7 +782,7 @@ namespace CloudberryKingdom
 		item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
 
 		// Reset
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RESET, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Reset, ItemFont ) ) );
 		item->Name = std::wstring( L"reset" );
 		AddItem( item );
 		item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));

@@ -12,11 +12,11 @@ namespace CloudberryKingdom
 		switch ( MyFormat )
 		{
 			case ScoreEntry::Format_SCORE:
-				return Localization::Words_HIGH_SCORES;
+				return Localization::Words_HighScores;
 			case ScoreEntry::Format_LEVEL:
-				return Localization::Words_BEST_LEVEL;
+				return Localization::Words_BestLevel;
 			default:
-				return Localization::Words_NONE;
+				return Localization::Words_None;
 		}
 	}
 

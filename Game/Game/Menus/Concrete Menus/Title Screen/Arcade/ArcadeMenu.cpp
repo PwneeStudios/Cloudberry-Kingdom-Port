@@ -175,15 +175,15 @@ namespace CloudberryKingdom
         BobPhsxWheel::getInstance()->Id = 11;
 
         ArcadeMenu::JetpackWheelie = BobPhsx::MakeCustom(Hero_BaseType_WHEEL, Hero_Shape_CLASSIC, Hero_MoveMod_JETPACK);
-        ArcadeMenu::JetpackWheelie->Name = Localization::Words_JETPACK_WHEELIE;
+        ArcadeMenu::JetpackWheelie->Name = Localization::Words_JetpackWheelie;
         ArcadeMenu::JetpackWheelie->Id = 12;
 
         ArcadeMenu::BigBouncy = BobPhsx::MakeCustom(Hero_BaseType_BOUNCY, Hero_Shape_BIG, Hero_MoveMod_JETPACK);
-        ArcadeMenu::BigBouncy->Name = Localization::Words_HERO;
+        ArcadeMenu::BigBouncy->Name = Localization::Words_Hero;
         ArcadeMenu::BigBouncy->Id = 13;
 
         ArcadeMenu::Ultimate = BobPhsx::MakeCustom(Hero_BaseType_CLASSIC, Hero_Shape_CLASSIC, Hero_MoveMod_CLASSIC);
-        ArcadeMenu::Ultimate->Name = Localization::Words_MASOCHISTIC;
+        ArcadeMenu::Ultimate->Name = Localization::Words_Masochistic;
         BobPhsx::CustomPhsxData UltimatePhsx = BobPhsx::CustomPhsxData();
         UltimatePhsx.Init();
         UltimatePhsx[BobPhsx::CustomData_ACCEL] = 2.2f;
@@ -258,7 +258,7 @@ namespace CloudberryKingdom
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
             // Level
-            boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_LEVEL, Resources::Font_Grobold42);
+            boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_Level, Resources::Font_Grobold42);
             LevelText->_Scale *= .72f;
             StartMenu::SetText_Green(LevelText, true);
             MyPile->Add( LevelText, L"Level");
@@ -290,7 +290,7 @@ namespace CloudberryKingdom
 
 
 		// Header
-		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_THE_ARCADE, Resources::Font_Grobold42_2 ) ) );
+		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_TheArcade, Resources::Font_Grobold42_2 ) ) );
 		Header->Name = std::wstring( L"Header" );
 		MyMenu->Add( Header );
 		SetItemProperties( Header );
@@ -421,7 +421,7 @@ namespace CloudberryKingdom
                 //_t.Show = true;
                 //_t.SubstituteText(Localization.WordString(Localization::Words_Required) + " " +
                 //                  Localization.WordString(Localization::Words_Level) + " " + item.MyPrereq.MyInt.ToString());
-                _t->SubstituteText(Localization::WordString(Localization::Words_LEVEL) + L" " + ToString( item->MyPrereq->MyInt ) );
+                _t->SubstituteText(Localization::WordString(Localization::Words_Level) + L" " + ToString( item->MyPrereq->MyInt ) );
             }
             else
             {

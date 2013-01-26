@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>
@@ -63,7 +63,7 @@ namespace CloudberryKingdom
 		DrawHead( false ),
 		DrawSelf( false ),
 		AllowsFacialHair( false ),
-		Name( Localization::Words_NONE )
+		Name( Localization::Words_None )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -82,7 +82,7 @@ namespace CloudberryKingdom
 		DrawHead( false ),
 		DrawSelf( false ),
 		AllowsFacialHair( false ),
-		Name( Localization::Words_NONE )
+		Name( Localization::Words_None )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -101,7 +101,7 @@ namespace CloudberryKingdom
 		DrawHead( false ),
 		DrawSelf( false ),
 		AllowsFacialHair( false ),
-		Name( Localization::Words_NONE )
+		Name( Localization::Words_None )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 		DrawHead( false ),
 		DrawSelf( false ),
 		AllowsFacialHair( false ),
-		Name( Localization::Words_NONE )
+		Name( Localization::Words_None )
 	{
 		InitializeInstanceFields();
 		HatPicScale = Vector2(1);
@@ -137,7 +137,7 @@ namespace CloudberryKingdom
 	{
 		Guid = 0;
 		AllowsFacialHair = true;
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 	}
 
 	ColorScheme::FindColorLambda::FindColorLambda( Localization::Words word )

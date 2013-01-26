@@ -66,9 +66,9 @@ namespace CloudberryKingdom
 		// Header
 		std::wstring Text;
 		if ( NumSeeds == 1 )
-			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS ).c_str(), NumSeeds );
+			Text = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), NumSeeds );
 		else
-			Text = Format( Localization::WordString( Localization::Words_DELETE_SEEDS_PLURAL ).c_str(), NumSeeds );
+			Text = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), NumSeeds );
 		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Text, ItemFont, static_cast<std::wstring>( std::wstring( L"Header" ) ) );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
@@ -76,13 +76,13 @@ namespace CloudberryKingdom
 
 
 		// Yes
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont, static_cast<std::wstring>( std::wstring( L"Yes" ) ) ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Yes, ItemFont, static_cast<std::wstring>( std::wstring( L"Yes" ) ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteYesGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont, static_cast<std::wstring>( std::wstring( L"No" ) ) ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_No, ItemFont, static_cast<std::wstring>( std::wstring( L"No" ) ) ) ) );
 		item->setGo( boost::make_shared<VerifyDeleteNoGoLambda>( boost::static_pointer_cast<VerifyDeleteSeeds>( shared_from_this() ) ) );
 		AddItem( item );
 		item->SelectSound.reset();

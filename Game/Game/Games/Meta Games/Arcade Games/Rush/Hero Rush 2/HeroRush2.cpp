@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/List.h"
 
@@ -87,7 +87,7 @@ namespace CloudberryKingdom
 	Challenge_HeroRush2::Challenge_HeroRush2()
 	{
 		GameTypeId = 3;
-		MenuName = Name = Localization::Words_HYBRID_RUSH;
+		MenuName = Name = Localization::Words_HybridRush;
 	}
 
 	void Challenge_HeroRush2::MakeHeroList()

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		BobPhsx::InitSingleton();
 
 		Specification = HeroSpec( 4, 0, 0, 0 );
-		Name = Localization::Words_SPACESHIP;
+		Name = Localization::Words_Spaceship;
 		NameTemplate = std::wstring( L"spaceship" );
 		Icon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
 	}

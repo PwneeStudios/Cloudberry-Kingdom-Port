@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::WordString( Localization::Words_REMOVE_PLAYER_QUESTION ) + L"?", ItemFont, false );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::WordString( Localization::Words_RemovePlayerQuestion ) + L"?", ItemFont, false );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 		HeaderText->Name = L"Header";
@@ -45,14 +45,14 @@ namespace CloudberryKingdom
 		MyPile->Add( PlayerText );
 
 		// Yes
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Yes, ItemFont ) ) );
 		item->setGo( boost::make_shared<VerifyRemoveYesLambda>( boost::static_pointer_cast<VerifyRemoveMenu>( shared_from_this() ) ) );
 		item->Name = L"Yes";
 		AddItem( item );
 		item->SelectSound.reset();
 
 		// No
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_No, ItemFont ) ) );
 		item->setGo( boost::make_shared<MenuReturnToCallerLambda>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
 		item->Name = L"No";
 		AddItem( item );

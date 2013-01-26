@@ -269,15 +269,15 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 		FontScale *= .89f * 1.16f;
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PLAY_AGAIN, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_PlayAgain, ItemFont ) ) );
 		item->setGo( boost::make_shared<Action_PlayAgainProxy1>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HIGH_SCORES, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_HighScores, ItemFont ) ) );
 		item->_Go.reset();
 		AddItem( item );
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Done, ItemFont ) ) );
 		item->setGo( boost::make_shared<Action_DoneProxy1>( boost::static_pointer_cast<HighScorePanel>( shared_from_this() ) ) );
 		AddItem( item );
 	}

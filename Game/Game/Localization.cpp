@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/String.h"
 #include "Hacks/Parse.h"
@@ -90,7 +90,7 @@ namespace CloudberryKingdom
 			std::vector<std::wstring> bits = Split( line, L'\t' );
 
 			for ( int i = 0; i < NumLanguages; i++ )
-				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i + 1 ] ) );
+				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i ] ) );
 
 			line = reader->ReadLine();
 			LineCount++;
@@ -102,7 +102,7 @@ namespace CloudberryKingdom
 
     std::wstring Localization::LanguageName(Language language)
     {
-        return Text[ language ][ Words_IDENTIFIER ];
+        return Text[ language ][ Words_Identifier ];
     }
 
 	std::wstring Localization::WordString( Words Word )
@@ -177,7 +177,7 @@ namespace CloudberryKingdom
 		Languages.insert( std::make_pair( Language_RUSSIAN, boost::make_shared<LanguageInfo>( Language_RUSSIAN, std::wstring( L"Russian" ), std::wstring( L"Western" ) ) ) );
 		Languages.insert( std::make_pair( Language_SPANISH, boost::make_shared<LanguageInfo>( Language_SPANISH, std::wstring( L"English" ), std::wstring( L"Western" ) ) ) );
 
-		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"Localization.tsv" ) ) );
+		std::wstring path = Path::Combine( Content->RootDirectory, Path::Combine( std::wstring( L"Localization" ), std::wstring( L"LocalizationCpp.tsv" ) ) );
 		ReadTranslationGrid( path );
 	}
 

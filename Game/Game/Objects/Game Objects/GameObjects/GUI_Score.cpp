@@ -31,7 +31,7 @@ namespace CloudberryKingdom
 	std::wstring GUI_Score::ToString()
 	{
 		Tools::Warning();
-		return Localization::WordString( Localization::Words_SCORE ) + std::wstring( L" " ) + StringConverterHelper::toString( GetScore() );
+		return Localization::WordString( Localization::Words_Score ) + std::wstring( L" " ) + StringConverterHelper::toString( GetScore() );
 	}
 
 	void GUI_Score::OnAdd()

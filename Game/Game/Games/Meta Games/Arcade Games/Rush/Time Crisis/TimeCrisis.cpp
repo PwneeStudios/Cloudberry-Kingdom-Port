@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {
@@ -29,7 +29,7 @@ namespace CloudberryKingdom
 	Challenge_TimeCrisis::Challenge_TimeCrisis()
 	{
 		GameTypeId = 1;
-		MenuName = Name = Localization::Words_TIME_CRISIS;
+		MenuName = Name = Localization::Words_TimeCrisis;
 	}
 
 	boost::shared_ptr<BobPhsx> Challenge_TimeCrisis::GetHero( int i )

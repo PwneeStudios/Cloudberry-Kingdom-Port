@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Hacks/List.h"
 #include "Hacks/String.h"
@@ -18,23 +18,23 @@ namespace CloudberryKingdom
 		typedef std::pair<BobDeathType, Localization::Words> DeathNamePair;
 		Bob::BobDeathNames = std::map<BobDeathType, Localization::Words>();
 		
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_NONE, Localization::Words_NONE ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIREBALL, Localization::Words_FIREBALL ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIRE_SPINNER, Localization::Words_FIRESPINNER ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BOULDER, Localization::Words_BOULDER ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKEY_GUY, Localization::Words_SPIKEY_GUY ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKE, Localization::Words_SPIKE ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALL, Localization::Words_FALLING ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA, Localization::Words_LAVA ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BLOB, Localization::Words_FLYING_BLOBS ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LASER, Localization::Words_LASER ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA_FLOW, Localization::Words_SLUDGE ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALLING_SPIKE, Localization::Words_FALLING_SPIKEY ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SERPENT, Localization::Words_SERPENT ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TIME, Localization::Words_TIME_LIMIT ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LEFT_BEHIND, Localization::Words_LEFT_BEHIND ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_OTHER, Localization::Words_OTHER ) );
-		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TOTAL, Localization::Words_TOTAL ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_NONE, Localization::Words_None ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIREBALL, Localization::Words_Fireball ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FIRE_SPINNER, Localization::Words_Firespinner ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BOULDER, Localization::Words_Boulder ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKEY_GUY, Localization::Words_SpikeyGuy ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SPIKE, Localization::Words_Spike ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALL, Localization::Words_Falling ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA, Localization::Words_Lava ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_BLOB, Localization::Words_FlyingBlobs ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LASER, Localization::Words_Laser ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LAVA_FLOW, Localization::Words_Sludge ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_FALLING_SPIKE, Localization::Words_FallingSpikey ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_SERPENT, Localization::Words_Serpent ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TIME, Localization::Words_TimeLimit ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_LEFT_BEHIND, Localization::Words_LeftBehind ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_OTHER, Localization::Words_Other ) );
+		Bob::BobDeathNames.insert( DeathNamePair( BobDeathType_TOTAL, Localization::Words_Total ) );
 
 		Bob::AllExplode = true;
 		Bob::ShowCorpseAfterExplode = false;

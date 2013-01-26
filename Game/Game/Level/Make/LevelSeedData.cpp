@@ -483,7 +483,7 @@ namespace CloudberryKingdom
 
     void LevelSeedData::_NewHero( const boost::shared_ptr<Level> &level )
     {
-		level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString( Localization::Words_NEW_HERO_UNLOCKED ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) ) );
+		level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString( Localization::Words_NewHeroUnlocked ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) ) );
         level->MyLevelSeed->WaitLengthToOpenDoor = 150;
         level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
     }

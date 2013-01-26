@@ -49,24 +49,24 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzText> text;
 
 	#if defined(PC_VERSION)
-		text = boost::make_shared<EzText>( Localization::Words_QUICK_SPAWN, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_QuickSpawn, Resources::Font_Grobold42 );
 		MyPile->Add( text, std::wstring( L"quickspawn" ) );
 		text->MyFloatColor = ColorHelper::Gray( .955f );
 
-		text = boost::make_shared<EzText>( Localization::Words_POWER_UP_MENU, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_PowerUpMenu, Resources::Font_Grobold42 );
 		MyPile->Add( text, std::wstring( L"powerups" ) );
 		text->MyFloatColor = ColorHelper::Gray( .955f );
 
-		text = boost::make_shared<EzText>( Localization::Words_MENU, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_Menu, Resources::Font_Grobold42 );
 		MyPile->Add( text, std::wstring( L"menu" ) );
 		text->MyFloatColor = CampaignHelper::DifficultyColor[ 1 ].ToVector4();
 
-		text = boost::make_shared<EzText>( Localization::Words_ACCEPT, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_Accept, Resources::Font_Grobold42 );
 		MyPile->Add( text, std::wstring( L"accept" ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
-		text = boost::make_shared<EzText>( Localization::Words_BACK, Resources::Font_Grobold42 );
+		text = boost::make_shared<EzText>( Localization::Words_Back, Resources::Font_Grobold42 );
 		MyPile->Add( text, std::wstring( L"back" ) );
 		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
