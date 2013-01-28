@@ -110,6 +110,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 			std::vector<Keys> keys = Tools::Keyboard.GetPressedKeys();
+			
 			if ( keys.size() > 0 )
 			{
 				if (DownCount == 0 || DownCount == RepeatKeyOnceDelay ||
@@ -131,7 +132,7 @@ namespace CloudberryKingdom
 
 						if ( *itr == Keys_Back )
 							Backspace();
-						if ( *itr == Keys_Enter )
+						if ( *itr == Keys_Enter && !Tools::PrevKeyboard.IsKeyDown(Keys_Enter) )
 							Enter();
 					}
 				}
