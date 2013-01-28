@@ -109,7 +109,7 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 
 	//InitShader( &internal_->SimpleShader, &internal_->QuadBuffer, internal_->SamplerLocation );
 
-	GX2InitSampler( &internal_->Sampler, GX2_TEX_CLAMP_CLAMP, GX2_TEX_XY_FILTER_BILINEAR );
+	GX2InitSampler( &internal_->Sampler, GX2_TEX_CLAMP_MIRROR, GX2_TEX_XY_FILTER_BILINEAR );
 
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )

@@ -14,6 +14,12 @@
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
+#include <fmod.hpp>
+
+// FIXME: This is done in order to get access to update the FMOD system every frame.
+// This should really be done through a method like MediaPlayer::Update().
+extern FMOD::System *FMODSystem;
+
 // Private.
 CoreWiiU::CoreWiiU( const CoreWiiU &other ) :
 	game_( other.game_ ),
@@ -94,6 +100,8 @@ int CoreWiiU::Run()
 
 	while( DEMOIsRunning() )
 	{
+		FMODSystem->update();
+
 		GamePad::Update();
 
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
@@ -119,6 +127,12 @@ int CoreWiiU::Run()
 
 		GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
 		GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+		/*GX2SetBlendControl( GX2_RENDER_TARGET_0,
+			GX2_BLEND_SRC_COLOR, GX2_BLEND_DST_COLOR, GX2_BLEND_COMBINE_ADD,
+			GX2_TRUE, GX2_BLEND_SRC_ALPHA, GX2_BLEND_ZERO, GX2_BLEND_COMBINE_ADD );*/
+		GX2SetBlendControl( GX2_RENDER_TARGET_0,
+			GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
+			GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
 
 		game_.Update();
 

@@ -2,30 +2,30 @@
 
 #include <cafe/pad.h>
 #include <cafe/vpad.h>
-//#include <cafe/wpad.h>
+#include <cafe/wenc.h>
+#include <cafe/pads/wpad/wpad.h>
 
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
-/*static void ConnectCallback( s32 chan, s32 reason )
+static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
-}*/
+}
 
 void GamePad::Initialize()
 {
 	PADInit();
-	/*WPADInit();
+	WPADInit();
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
-		WPADSetConnectCallback( i, ConnectCallback );*/
+		WPADSetConnectCallback( i, ConnectCallback );
 }
 
 void GamePad::Update()
 {
-	/*PADStatus status[ PAD_MAX_CONTROLLERS ];
-	memset( status, 0, sizeof( status ) );
+	memset( PAD_STATE, 0, sizeof( PAD_STATE ) );
 
-	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
+	for( int i = 0; i < __min( WPAD_MAX_CONTROLLERS, WPAD_MAX_CONTROLLERS ); i++ )
 	{
 		u32 type;
 		s32 status = WPADProbe( i, &type );
@@ -39,19 +39,35 @@ void GamePad::Update()
 			u16 button;
 			WPADRead( i, &cr );
 
-			if( cr.err == WPAD_ERR_NONE
-				|| cr.err == WPAD_ERR_CORRUPTED )
-			{
-			}
+			if( /*cr.err == WPAD_ERR_NONE
+				|| */cr.err == WPAD_ERR_CORRUPTED )
+				continue;
+
+			
+			PAD_STATE[ i ].IsConnected = true;
+
+			PAD_STATE[ i ].Buttons.A = ( cr.button & WPAD_BUTTON_2 ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.B = ( cr.button & WPAD_BUTTON_A
+										|| cr.button & WPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.X = ( cr.button & WPAD_BUTTON_1 ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].Buttons.Y = ( cr.button & WPAD_BUTTON_B
+										|| cr.button & WPAD_BUTTON_MINUS ) ? ButtonState_Pressed : ButtonState_Released;
+
+			PAD_STATE[ i ].Buttons.Start = ( cr.button & WPAD_BUTTON_PLUS ) ? ButtonState_Pressed : ButtonState_Released;
+
+			PAD_STATE[ i ].DPad.Down = ( cr.button & WPAD_BUTTON_LEFT ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Left = ( cr.button & WPAD_BUTTON_UP ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Right = ( cr.button & WPAD_BUTTON_DOWN ) ? ButtonState_Pressed : ButtonState_Released;
+			PAD_STATE[ i ].DPad.Up = ( cr.button & WPAD_BUTTON_RIGHT ) ? ButtonState_Pressed : ButtonState_Released;
 		}
-	}*/
+	}
+
+	return;
 
 	PADStatus status[ PAD_MAX_CONTROLLERS ];
 	memset( status, 0, sizeof( status ) );
 	PADRead( status );
 	static Vector2 textPos( 0, 0 );
-
-	memset( PAD_STATE, 0, sizeof( PAD_STATE ) );
 
 	for( int i = 0; i < PAD_MAX_CONTROLLERS; ++i )
 	{

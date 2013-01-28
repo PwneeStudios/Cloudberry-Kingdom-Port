@@ -1,12 +1,13 @@
 #ifndef _SONG_INTERNAL_WIIU_
 #define _SONG_INTERNAL_WIIU_
 
-#include <string>
+#include <fmod.hpp>
+
+extern FMOD::System *FMODSystem;
 
 struct SongInternal
 {
-	void *Data;
-	size_t Length;
+	FMOD::Sound *Song;
 };
 
 #endif

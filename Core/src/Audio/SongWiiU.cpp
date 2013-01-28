@@ -1,9 +1,6 @@
 #include <Audio/Song.h>
 
-#include <cafe/mem.h>
-
-#include <Content/File.h>
-#include <Content/Filesystem.h>
+#include <Utility/Log.h>
 
 #include "SongInternalWiiU.h"
 
@@ -12,33 +9,37 @@ Song::Song() :
 {
 	Duration.TotalSeconds = 0;
 
-	internal_->Data = 0;
-	internal_->Length = 0;
+	internal_->Song = NULL;
 }
 
 Song::~Song() 
 {
-	MEMFreeToDefaultHeap( internal_->Data );
+	if( internal_->Song )
+		internal_->Song->release();
 
 	delete internal_;
 }
 
 void Song::Load( const std::string &path )
 {
-	std::string temp = path;
+	std::string internalPath = "/vol/content/" + path;
+	size_t pathLength = internalPath.size();
 
-	std::string extension = temp.substr( temp.length() - 3, 3 );
-	if( extension == "wma" )
+	internalPath[ pathLength - 3 ] = 'm';
+	internalPath[ pathLength - 2 ] = 'p';
+	internalPath[ pathLength - 1 ] = '3';
+
+	FMOD_RESULT result;
+	result = FMODSystem->createStream( internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
+	if( result != FMOD_OK )
 	{
-		temp[ temp.length() - 3 ] = 'a';
-		temp[ temp.length() - 2 ] = 'a';
-		temp[ temp.length() - 1 ] = 'c';
+		LOG.Write( "Failed to load song: %s\n", internalPath.c_str() );
+		internal_->Song = NULL;
+		return;
 	}
 
-	boost::shared_ptr< File > file = FILESYSTEM.Open( temp );
+	unsigned int length;
+	internal_->Song->getLength( &length, FMOD_TIMEUNIT_MS );
 
-	internal_->Data = MEMAllocFromDefaultHeapEx( file->Size(), 64 );
-	internal_->Length = file->Size();
-
-	file->Read( reinterpret_cast< char * >( internal_->Data ), internal_->Length );
+	Duration.TotalSeconds = static_cast< float >( length ) / 1000.f;
 }
