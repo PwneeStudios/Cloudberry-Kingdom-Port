@@ -882,6 +882,32 @@ namespace CloudberryKingdom
 			QUAD_DRAWER->Draw( sq );
 		}
 
+		void QuadDrawer::DrawCircleDot( Vector2 pos )
+		{
+            if (CurrentTexture != Tools::TextureWad->TextureList[1] || CurrentEffect != Tools::BasicEffect)
+                Flush();
+
+            CurrentTexture = Tools::TextureWad->TextureList[1];
+            CurrentEffect = Tools::BasicEffect;
+
+			::SimpleQuad sq;
+			float size = 10;
+			sq.V[0] = Vector2( pos.X + size, pos.Y + size );
+			sq.V[1] = Vector2( pos.X + size, pos.Y - size );
+			sq.V[3] = Vector2( pos.X - size, pos.Y + size );
+			sq.V[2] = Vector2( pos.X - size, pos.Y - size );
+
+			sq.T[0] = Vector2( 0, 0 );
+			sq.T[1] = Vector2( 0, 1 );
+			sq.T[3] = Vector2( 1, 0 );
+			sq.T[2] = Vector2( 1, 1 );
+
+			sq.Color = Vector4(1, 1, 1, 1);
+
+			sq.Diffuse = Tools::TextureWad->TextureList[1]->getTex()->texture_;
+			QUAD_DRAWER->Draw( sq );
+		}
+
         void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale)
         {
             boost::shared_ptr<HackFont> font = spritefont->font;

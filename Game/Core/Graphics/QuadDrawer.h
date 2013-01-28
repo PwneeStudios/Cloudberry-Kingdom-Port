@@ -180,6 +180,8 @@ namespace CloudberryKingdom
 		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s);
 		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s);
 
+		void DrawCircleDot( Vector2 pos );
+
 	};
 }
 

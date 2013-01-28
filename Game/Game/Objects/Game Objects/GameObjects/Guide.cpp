@@ -6,7 +6,7 @@ namespace CloudberryKingdom
 {
 
 	ShowGuide::ShowGuide() {}
-	void ShowGuide::ShowGuide_Costruct()
+	boost::shared_ptr<ShowGuide> ShowGuide::ShowGuide_Construct()
 	{
 		GUI_Panel::GUI_Panel_Construct();
 
@@ -16,6 +16,8 @@ namespace CloudberryKingdom
 		PauseOnPause = true;
 
 		Tags->Add( GameObject::Tag_REMOVE_ON_LEVEL_FINISH );
+
+		return boost::static_pointer_cast<ShowGuide>( shared_from_this() );
 	}
 
 	void ShowGuide::ReleaseBody()

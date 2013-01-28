@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 
 		void Toggle_SlowMo( bool state );
 
-		void SlowMo();
+		void DoSlowMo();
 
 	
 		virtual void OnAdd();

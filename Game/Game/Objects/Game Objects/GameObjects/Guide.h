@@ -12,7 +12,7 @@ namespace CloudberryKingdom
 		virtual ~ShowGuide() { }
 
 		ShowGuide();
-		void ShowGuide_Costruct();
+		boost::shared_ptr<ShowGuide> ShowGuide_Construct();
 
 		virtual void ReleaseBody();
 
