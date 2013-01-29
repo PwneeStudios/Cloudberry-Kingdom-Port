@@ -7,8 +7,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Fireball : public _CircleDeath
 	{
+
+		virtual ~Fireball() { }
 	
 		struct FireballTileInfo : public TileInfoBase
 		{
@@ -89,6 +92,7 @@ namespace CloudberryKingdom
 	
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

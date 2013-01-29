@@ -341,7 +341,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
 	{
-		return MakeBackButton( Localization::Words_BACK );
+		return MakeBackButton( Localization::Words_Back );
 	}
 
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton( Localization::Words Word )

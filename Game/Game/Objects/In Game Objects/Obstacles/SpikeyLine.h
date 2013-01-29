@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct SpikeyLine : public _CircleDeath, public IBound
 	{
+
+		virtual ~SpikeyLine() { }
 	
 		struct SpikeyLineTileInfo : public TileInfoBase
 		{
@@ -71,6 +73,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

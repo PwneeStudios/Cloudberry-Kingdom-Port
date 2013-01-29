@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 	struct ILoadingScreen
 	{
 	
+		virtual ~ILoadingScreen() { }
+
 		virtual void AddHint( const std::wstring &hint, int extra_wait ) = 0;
 
 		virtual void Start() = 0;

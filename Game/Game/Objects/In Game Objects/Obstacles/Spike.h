@@ -9,7 +9,9 @@ namespace CloudberryKingdom
 	struct Spike : public _BoxDeath
 	{
 
-	 static void InitializeStatics();
+		virtual ~Spike() { }
+
+		static void InitializeStatics();
 
 	
 		struct SpikeTileInfo : public TileInfoBase
@@ -99,6 +101,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

@@ -5,9 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxJetman : public BobPhsxNormal
 	{
 
+		virtual ~BobPhsxJetman() { }
 	
 		static void InitializeStatics();
 
@@ -27,6 +29,7 @@ namespace CloudberryKingdom
 		// Instancable struct
 		BobPhsxJetman();
 	};
+
 }
 
 

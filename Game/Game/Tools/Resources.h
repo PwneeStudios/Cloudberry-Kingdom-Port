@@ -7,6 +7,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Resources
 	{
 		/// <summary>
@@ -52,6 +53,7 @@ namespace CloudberryKingdom
 	
 		static void _LoadThread();
 	};
+
 }
 
 

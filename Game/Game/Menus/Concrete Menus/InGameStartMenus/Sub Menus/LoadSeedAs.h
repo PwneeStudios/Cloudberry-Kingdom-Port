@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct LoadSeedAs : public VerifyBaseMenu
 	{
+
+		virtual ~LoadSeedAs() { }
 	
 		struct LoadSeedAsOnEnterLambda : public Lambda
 		{

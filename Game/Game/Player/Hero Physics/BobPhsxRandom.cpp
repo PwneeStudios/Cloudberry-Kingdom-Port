@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -19,7 +19,7 @@ namespace CloudberryKingdom
 	{
 		BobPhsx::InitSingleton();
 
-		Name = Localization::Words_RANDOM;
+		Name = Localization::Words_Random;
 		Icon = ObjectIcon::RandomIcon;
 	}
 

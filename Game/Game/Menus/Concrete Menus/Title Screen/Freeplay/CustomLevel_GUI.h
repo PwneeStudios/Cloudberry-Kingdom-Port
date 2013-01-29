@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct CustomLevel_GUI : public CkBaseMenu
 	{
 
+		virtual ~CustomLevel_GUI() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 

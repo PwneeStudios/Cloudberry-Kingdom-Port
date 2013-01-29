@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BouncyBlock_Parameters : public AutoGen_Parameters
 	{
-	
+
+		virtual ~BouncyBlock_Parameters() { }
+
 		struct _Special
 		{
 			/// <summary>
@@ -22,6 +25,7 @@ namespace CloudberryKingdom
 		_Special Special;
 
 		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
+
 	};
 
 	struct BouncyBlock_AutoGen : public AutoGen

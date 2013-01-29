@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct GUI_NextLife : public GameObject
 	{
 	
+		virtual ~GUI_NextLife() { }
+
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		

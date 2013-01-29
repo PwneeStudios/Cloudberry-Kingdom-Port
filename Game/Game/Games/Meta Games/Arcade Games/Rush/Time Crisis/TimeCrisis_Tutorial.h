@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 	struct TimeCrisis_Tutorial : public HeroRush_Tutorial
 	{
 	
+		virtual ~TimeCrisis_Tutorial() { }
+
 		boost::shared_ptr<Challenge_TimeCrisis> TimeCrisis;
 	
 		TimeCrisis_Tutorial( const boost::shared_ptr<Challenge_TimeCrisis> &TimeCrisis );

@@ -116,7 +116,7 @@ namespace CloudberryKingdom
             {
                 int level = item->RequiredHeroLevel;
                 std::wstring name = Localization::WordString( item->RequiredHero->Name );
-                std::wstring m = Localization::WordString( Localization::Words_LEVEL ) + L" " + ToString( level );
+                std::wstring m = Localization::WordString( Localization::Words_Level ) + L" " + ToString( level );
 
                 boost::shared_ptr<EzText> _t;
                 MyPile->FindEzText( L"LockedHeader" )->Show = true;
@@ -258,13 +258,13 @@ namespace CloudberryKingdom
 		MyPile->Add( BackBox, std::wstring( L"BoxRight" ) );
 
 		// Score, level
-		boost::shared_ptr<EzText> ScoreHeader = boost::make_shared<EzText>( Localization::Words_HIGH_SCORE, Resources::Font_Grobold42_2 );
+		boost::shared_ptr<EzText> ScoreHeader = boost::make_shared<EzText>( Localization::Words_HighScore, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( ScoreHeader, true );
 		MyPile->Add( ScoreHeader, std::wstring( L"ScoreHeader" ) );
 
 		MyPile->Add( Score, std::wstring( L"Score" ) );
 
-		boost::shared_ptr<EzText> LevelHeader = boost::make_shared<EzText>( Localization::Words_BEST_LEVEL, Resources::Font_Grobold42_2 );
+		boost::shared_ptr<EzText> LevelHeader = boost::make_shared<EzText>( Localization::Words_BestLevel, Resources::Font_Grobold42_2 );
 		StartMenu::SetText_Green( LevelHeader, true );
 		MyPile->Add( LevelHeader, std::wstring( L"LevelHeader" ) );
 

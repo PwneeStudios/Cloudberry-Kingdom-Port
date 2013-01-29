@@ -3,6 +3,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Unset
 	{
 
@@ -13,6 +14,7 @@ namespace CloudberryKingdom
 		static float Float;
 		static Vector2 Vector;
 	};
+
 }
 
 

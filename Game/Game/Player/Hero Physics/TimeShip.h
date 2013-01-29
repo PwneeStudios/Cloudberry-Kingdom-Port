@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxTimeship : public BobPhsxSpaceship
 	{
+
+		virtual ~BobPhsxTimeship() { }
 	
 		static void InitializeStatics();
 	
@@ -41,6 +44,7 @@ namespace CloudberryKingdom
 
 		void InitializeInstanceFields();
 	};
+
 }
 
 

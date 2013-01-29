@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct LevelSeedData : public boost::enable_shared_from_this<LevelSeedData>
 	{
 
+		virtual ~LevelSeedData() { }
+
 		struct _NewHeroProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		

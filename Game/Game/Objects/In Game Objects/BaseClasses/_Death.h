@@ -7,6 +7,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct _Death : public _Obstacle
 	{
 	
@@ -20,6 +21,7 @@ namespace CloudberryKingdom
 		{
 			InitializeInstanceFields();
 		}
+
 	};
 }
 

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -20,7 +20,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 0, 0, 3, 0 );
-		Name = Localization::Words_VIRIDIAN;
+		Name = Localization::Words_Viridian;
 		Adjective = std::wstring( L"Anti-Grav" );
 
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * -1.2f );

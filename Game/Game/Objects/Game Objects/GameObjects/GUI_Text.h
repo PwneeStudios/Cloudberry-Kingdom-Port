@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct GUI_Text : public GUI_Panel
 	{
 	
+		virtual ~GUI_Text() { }
+
 		enum Style
 		{
 			Style_BUBBLE,
@@ -47,7 +50,6 @@ namespace CloudberryKingdom
 
 		void Init( const std::wstring &text, Vector2 pos, bool centered, Style style, const boost::shared_ptr<EzFont> &font );
 
-	
 		virtual boost::shared_ptr<EzText> MakeText( Localization::Words word, bool centered, const boost::shared_ptr<EzFont> &font );
 
 		virtual boost::shared_ptr<EzText> MakeText( const std::wstring &text, bool centered, const boost::shared_ptr<EzFont> &font );
@@ -73,6 +75,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

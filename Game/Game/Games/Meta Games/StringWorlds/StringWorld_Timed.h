@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct StringWorldTimed : public StringWorldGameData
 	{
+
+		virtual ~StringWorldTimed() { }
 	
 		struct StringWorldOnTimerExpiredLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{

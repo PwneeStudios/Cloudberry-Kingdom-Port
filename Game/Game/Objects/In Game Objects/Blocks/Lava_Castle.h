@@ -14,6 +14,8 @@ namespace CloudberryKingdom
 	struct LavaBlock_Castle : public LavaBlock
 	{
 	
+		virtual ~LavaBlock_Castle() { }
+
 		LavaBlock_Castle( bool BoxesOnly );
 
 		virtual void MakeNew();

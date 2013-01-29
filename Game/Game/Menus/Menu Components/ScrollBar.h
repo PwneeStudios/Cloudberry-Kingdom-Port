@@ -7,7 +7,9 @@ namespace CloudberryKingdom
 {
 	struct ScrollBar : public CkBaseMenu
 	{
-	
+
+		virtual ~ScrollBar() { }
+
 		struct ScrollBarReleaseLambda : public Lambda
 		{
 		

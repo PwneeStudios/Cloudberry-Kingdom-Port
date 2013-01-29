@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {
@@ -43,44 +43,44 @@ namespace CloudberryKingdom
 		switch ( upgrade )
 		{
 			case Upgrade_BOUNCY_BLOCK:
-				return Localization::Words_BOUNCY_BLOCKS;
+				return Localization::Words_BouncyBlocks;
 			case Upgrade_CLOUD:
-				return Localization::Words_CLOUDS;
+				return Localization::Words_Clouds;
 			case Upgrade_ELEVATOR:
-				return Localization::Words_ELEVATORS;
+				return Localization::Words_Elevators;
 			case Upgrade_FALLING_BLOCK:
-				return Localization::Words_FALLING_BLOCKS;
+				return Localization::Words_FallingBlocks;
 			case Upgrade_FIRE_SPINNER:
-				return Localization::Words_FIRESPINNERS;
+				return Localization::Words_Firespinners;
 			case Upgrade_SPIKEY_GUY:
-				return Localization::Words_BOULDERS;
+				return Localization::Words_Boulders;
 			case Upgrade_PINKY:
-				return Localization::Words_SPIKEY_GUYS;
+				return Localization::Words_SpikeyGuys;
 			case Upgrade_FLY_BLOB:
-				return Localization::Words_FLYING_BLOBS;
+				return Localization::Words_FlyingBlobs;
 			case Upgrade_GHOST_BLOCK:
-				return Localization::Words_GHOST_BLOCKS;
+				return Localization::Words_GhostBlocks;
 			case Upgrade_LASER:
-				return Localization::Words_LASERS;
+				return Localization::Words_Lasers;
 			case Upgrade_MOVING_BLOCK:
-				return Localization::Words_MOVING_BLOCKS;
+				return Localization::Words_MovingBlocks;
 			case Upgrade_SPIKE:
-				return Localization::Words_SPIKES;
+				return Localization::Words_Spikes;
 			case Upgrade_FIREBALL:
-				return Localization::Words_FIREBALLS;
+				return Localization::Words_Fireballs;
 			case Upgrade_FIRESNAKE:
-				return Localization::Words_NONE;
+				return Localization::Words_None;
 			case Upgrade_SPIKEY_LINE:
-				return Localization::Words_SPIKEY_LINES;
+				return Localization::Words_SpikeyLines;
 			case Upgrade_SERPENT:
-				return Localization::Words_SERPENT;
+				return Localization::Words_Serpent;
 			case Upgrade_LAVA_DRIP:
-				return Localization::Words_SLUDGE;
+				return Localization::Words_Sludge;
 			case Upgrade_PENDULUM:
-				return Localization::Words_PENDULUMS;
+				return Localization::Words_Pendulums;
 
 			default:
-				return Localization::Words_NONE;
+				return Localization::Words_None;
 		}
 	}
 
@@ -125,9 +125,9 @@ namespace CloudberryKingdom
 		//UpgradeIcons.Add(Upgrade.Firesnake, new PictureIcon("Firesnake", "Icon_Firesnake", Color.Orange, StandardWidth * .905f));
 		//UpgradeIcons.Add(Upgrade.SpikeyLine, new PictureIcon("Spikey line", "Icon_SpikeyLine", Color.Orange, StandardWidth * .905f));
 
-		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, boost::make_shared<PictureIcon>( Localization::Words_JUMP_DIFFICULTY, std::wstring( L"Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, boost::make_shared<PictureIcon>( Localization::Words_LEVEL_SPEED, std::wstring( L"SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
-		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, boost::make_shared<PictureIcon>( Localization::Words_CEILINGS, std::wstring( L"CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_JUMP, boost::make_shared<PictureIcon>( Localization::Words_JumpDifficulty, std::wstring( L"Jump" ), Color::Orange, StandardWidth * 1.07f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_SPEED, boost::make_shared<PictureIcon>( Localization::Words_LevelSpeed, std::wstring( L"SpeedIcon" ), Color::Orange, StandardWidth * 1.036f ) ) );
+		UpgradeIcons.insert( std::make_pair( Upgrade_CEILING, boost::make_shared<PictureIcon>( Localization::Words_Ceilings, std::wstring( L"CeilingIcon" ), Color::Orange, StandardWidth *.9f ) ) );
 
 		ObjIcons = std::map<ObjectType, boost::shared_ptr<ObjectIcon> >();
 		//ObjIcons.Add(ObjectType.FallingBlock, UpgradeIcons[Upgrade.FallingBlock]);
@@ -165,7 +165,7 @@ namespace CloudberryKingdom
 
 	ObjectIcon::ObjectIcon() :
 		Flipped( false ),
-		DisplayText( Localization::Words_NONE ),
+		DisplayText( Localization::Words_None ),
 		PrevSetRatio( 0 )
 	{
 		InitializeInstanceFields();
@@ -247,7 +247,7 @@ namespace CloudberryKingdom
 		else
 			IconTexture = IconQuad->Quad_Renamed.TextureAnim->Anims[ 0 ].Data[ 0 ];
 
-		this->DisplayText = Localization::Words_NONE;
+		this->DisplayText = Localization::Words_None;
 		this->NormalWidth = 161 * 1.31f * info->Size.X / 62;
 	}
 

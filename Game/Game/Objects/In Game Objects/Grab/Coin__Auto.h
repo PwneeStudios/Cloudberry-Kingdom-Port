@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Coin_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Coin_Parameters() { }
+
 		enum FillTypes
 		{
 			FillTypes_NONE,

@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct BackgroundFloater
 	{
+
+		virtual ~BackgroundFloater() { }
 	
 		float _SpinVelocity;
 	
@@ -62,6 +65,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

@@ -8,12 +8,15 @@ namespace CloudberryKingdom
 	struct ActionFactory : public GameFactory
 	{
 	
+		virtual ~ActionFactory() { }
+
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
 	};
 
 	struct ActionGameData : public GameData
 	{
 
+		virtual ~ActionGameData() { }
 	
 		static void InitializeStatics();
 

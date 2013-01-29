@@ -21,12 +21,16 @@ namespace CloudberryKingdom
 				   move == B.move &&
 				   special == B.special;
 		}
-		virtual std::wstring ToString();
+
+		std::wstring ToString();
 
 	};
 
 	struct BobPhsx : public Object, public boost::enable_shared_from_this<BobPhsx>
 	{
+
+		virtual ~BobPhsx() { }
+
 		struct DefaultInfo
 		{
 		
@@ -84,7 +88,7 @@ namespace CloudberryKingdom
 			static int Length;
 			void Init();
 			void Init( std::vector<float> vals );
-			virtual std::wstring ToString();
+			std::wstring ToString();
 			void Init( const std::wstring &str );
 			float &operator []( CustomData type );
 		};
@@ -284,6 +288,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 #endif	//#ifndef BASE

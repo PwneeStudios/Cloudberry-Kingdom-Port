@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct HighScorePanel : public CkBaseMenu
 	{
+
+		virtual ~HighScorePanel() { }
 	
 		using GUI_Panel::SlideIn;
 
@@ -127,6 +129,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

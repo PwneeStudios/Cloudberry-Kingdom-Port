@@ -142,7 +142,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Cinematics::MakeHeader()
 	{
-		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
+		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_StoryMode, ItemFont );
 		Header->Name = std::wstring( L"Header" );
 		Header->setScale( Header->getScale() * 1.3f );
 		SetText( Header );

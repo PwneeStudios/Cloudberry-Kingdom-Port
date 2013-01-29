@@ -67,6 +67,8 @@ namespace CloudberryKingdom
 
 	struct Menu : public boost::enable_shared_from_this<Menu>
 	{
+
+		virtual ~Menu() { }
 	
 		struct FindItemByNameLambda : public LambdaFunc_1<boost::shared_ptr<MenuItem> , bool>
 		{

@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct MovingBlock_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~MovingBlock_Parameters() { }
 	
 		enum MotionType
 		{

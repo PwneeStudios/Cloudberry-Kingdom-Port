@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BlockGroup
 	{
 	
@@ -28,6 +29,7 @@ namespace CloudberryKingdom
 
 		static int SnapWidthUp( float width, std::vector<int> Widths );
 	};
+
 }
 
 

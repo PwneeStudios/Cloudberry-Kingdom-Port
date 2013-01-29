@@ -15,7 +15,7 @@ namespace CloudberryKingdom
 	{
 		GUI_TextBox::GUI_TextBox_Construct(PlayerManager::getDefaultName(), Vector2());
 
-		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_NEW_HIGH_SCORE, Resources::Font_Grobold42 );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_NewHighScore, Resources::Font_Grobold42 );
 
 		Text->setPos( Vector2( -579.365f, 253.9681f ) );
 		Text->setScale( Text->getScale() * .7f );
@@ -110,6 +110,7 @@ namespace CloudberryKingdom
 
 #if defined(WINDOWS)
 			std::vector<Keys> keys = Tools::Keyboard.GetPressedKeys();
+			
 			if ( keys.size() > 0 )
 			{
 				if (DownCount == 0 || DownCount == RepeatKeyOnceDelay ||
@@ -131,7 +132,7 @@ namespace CloudberryKingdom
 
 						if ( *itr == Keys_Back )
 							Backspace();
-						if ( *itr == Keys_Enter )
+						if ( *itr == Keys_Enter && !Tools::PrevKeyboard.IsKeyDown(Keys_Enter) )
 							Enter();
 					}
 				}

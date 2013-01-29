@@ -30,6 +30,8 @@ namespace CloudberryKingdom
 	struct MakeFinalDoor_Float : public MakeThing
 	{
 	
+		virtual ~MakeFinalDoor_Float() { }
+
 		boost::shared_ptr<Level> MyLevel;
 
 		/// <summary>

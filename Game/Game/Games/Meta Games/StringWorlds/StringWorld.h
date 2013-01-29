@@ -47,6 +47,8 @@ namespace CloudberryKingdom
 	struct StringWorldGameData : public GameData
 	{
 	
+		virtual ~StringWorldGameData() { }
+
 		struct StartOfLevelLambda : public LambdaFunc<bool>
 		{
 		

@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct FlyingBlob_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~FlyingBlob_Parameters() { }
 	
 		enum MotionType
 		{

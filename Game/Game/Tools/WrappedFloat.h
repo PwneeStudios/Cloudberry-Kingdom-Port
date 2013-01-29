@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct WrappedBool
 	{
 	
@@ -49,6 +50,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

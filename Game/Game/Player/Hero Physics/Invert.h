@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxInvert : public BobPhsxNormal
 	{
+
+		virtual ~BobPhsxInvert() { }
 
 		static void InitializeStatics();
 	
@@ -77,6 +80,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

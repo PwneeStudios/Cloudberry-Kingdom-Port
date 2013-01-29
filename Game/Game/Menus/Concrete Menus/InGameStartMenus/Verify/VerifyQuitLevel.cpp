@@ -40,19 +40,19 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_EXIT_LEVEL_QUESTION, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_ExitLevelQuestion, ItemFont );
 		SetHeaderProperties( HeaderText );
 		HeaderText->Name = std::wstring( L"Header" );
 		MyPile->Add( HeaderText );
 
 		// Ok
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_YES, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Yes, ItemFont ) ) );
 		item->setGo( boost::make_shared<VerifyQuitOkLambda>() );
 		item->Name = std::wstring( L"Yes" );
 		AddItem( item );
 
 		// No
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_NO, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_No, ItemFont ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->Name = std::wstring( L"No" );
 		AddItem( item );

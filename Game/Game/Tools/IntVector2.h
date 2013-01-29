@@ -1,7 +1,9 @@
 ﻿#ifndef INTVECTOR2
 #define INTVECTOR2
+
 namespace CloudberryKingdom
 {
+
 	struct IntVector2
 	{
 	
@@ -24,6 +26,7 @@ namespace CloudberryKingdom
 
 		operator Vector2();
 	};
+
 }
 
 

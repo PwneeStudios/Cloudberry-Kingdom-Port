@@ -9,6 +9,7 @@ namespace CloudberryKingdom
 	struct BlockEmitter_Parameters : public AutoGen_Parameters
 	{
 
+		virtual ~BlockEmitter_Parameters() { }
 	
 		enum Style
 		{

@@ -21,7 +21,8 @@ namespace CloudberryKingdom
 
 	struct LevelSequence : public boost::enable_shared_from_this<LevelSequence>
 	{
-	
+		virtual ~LevelSequence() { }
+
 		struct OnLevelBeginLambda : public LambdaFunc_1<boost::shared_ptr<Level> , bool>
 		{
 		

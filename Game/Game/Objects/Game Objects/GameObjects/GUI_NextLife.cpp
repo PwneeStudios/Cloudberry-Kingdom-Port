@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		MyGame->RemoveLastCoinText();
 
 		// Add text
-		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_EXTRA_LIFE, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
+		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_ExtraLife, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
 		text->MyText->setScale( text->MyText->getScale() * 1.33f );
 		text->getCore()->DrawLayer = 8;
 		text->MyText->MyFloatColor = ( bColor( 0, 195, 17 ) ).ToVector4();

@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct NormalBlock : public BlockBase
 	{
+
+		virtual ~NormalBlock() { }
 
 		// Members
 		

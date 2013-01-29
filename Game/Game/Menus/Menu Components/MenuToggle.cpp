@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {
@@ -24,13 +24,13 @@ namespace CloudberryKingdom
 
 		if ( state )
 		{
-			MyText->SubstituteText( Localization::Words_ON );
-			MySelectedText->SubstituteText( Localization::Words_ON );
+			MyText->SubstituteText( Localization::Words_On );
+			MySelectedText->SubstituteText( Localization::Words_On );
 		}
 		else
 		{
-			MyText->SubstituteText( Localization::Words_OFF );
-			MySelectedText->SubstituteText( Localization::Words_OFF );
+			MyText->SubstituteText( Localization::Words_Off );
+			MySelectedText->SubstituteText( Localization::Words_Off );
 		}
 	}
 

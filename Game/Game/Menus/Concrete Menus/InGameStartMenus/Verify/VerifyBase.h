@@ -7,8 +7,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct VerifyBaseMenu : public CkBaseMenu
 	{
+
+		virtual ~VerifyBaseMenu() { }
+
 		/// <summary>
 		/// Called when the user chooses yes/no.
 		/// Bool is set to the user's choice.

@@ -4,9 +4,12 @@
 #include <global_header.h>
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxCharSelect : public BobPhsxNormal
 	{
 	
+		virtual ~BobPhsxCharSelect() { }
+
 		bool OverrideAnimBehavior;
 
 		virtual void PhsxStep2();
@@ -21,7 +24,9 @@ namespace CloudberryKingdom
 		{
 			InitializeInstanceFields();
 		}
+
 	};
+
 }
 
 

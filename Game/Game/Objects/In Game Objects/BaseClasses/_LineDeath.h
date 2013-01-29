@@ -13,9 +13,12 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
+
 	struct _LineDeath : public _Death
 	{
 	
+		virtual ~_LineDeath() { }
+
 		MovingLine MyLine;
 	
 		Vector2 p1, p2;

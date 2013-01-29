@@ -16,11 +16,14 @@ namespace CloudberryKingdom
 		void Draw( Vector2 Center );
 
 		void AddToDrawPile( const boost::shared_ptr<DrawPile> &pile );
+
 	};
 
 	struct MenuListAll : public MenuList
 	{
 	
+		virtual ~MenuListAll() { }
+
 		boost::shared_ptr<MenuItem> SelectedItem;
 
 #if defined(WINDOWS)

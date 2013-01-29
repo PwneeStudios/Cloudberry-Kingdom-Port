@@ -9,12 +9,12 @@ namespace CloudberryKingdom
 	struct GUI_Score : public GUI_Panel
 	{
 
+		virtual ~GUI_Score() { }
+
 		/// <summary>
 		/// Return a string representation of the score
 		/// </summary>
-	
 		virtual std::wstring ToString();
-
 	
 		bool AddedOnce;
 	
@@ -55,6 +55,8 @@ namespace CloudberryKingdom
 	struct GUI_CampaignScore : public GUI_Score
 	{
 	
+		virtual ~GUI_CampaignScore() { }
+
 		struct RunningCampaignScoreLambda : public PlayerIntLambda
 		{
 		

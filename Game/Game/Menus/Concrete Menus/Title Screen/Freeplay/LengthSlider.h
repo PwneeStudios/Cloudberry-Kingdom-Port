@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct LengthSlider : public MenuSliderBase
 	{
 	
+		virtual ~LengthSlider() { }
+
 		using MenuItem::Draw;
 	
 		LengthSlider();

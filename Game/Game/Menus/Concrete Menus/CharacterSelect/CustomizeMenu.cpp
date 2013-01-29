@@ -164,13 +164,13 @@ namespace CloudberryKingdom
 		FontScale = .5835f;
 		ItemFont = Resources::Font_Grobold42;
 
-		AddMenuItem( Localization::Words_COLOR, std::wstring( L"Color" ) );
-		AddMenuItem( Localization::Words_BEARD, std::wstring( L"Beard" ) );
-		AddMenuItem( Localization::Words_HAT, std::wstring( L"Hat" ) );
-		AddMenuItem( Localization::Words_CAPE, std::wstring( L"Cape" ) );
-		AddMenuItem( Localization::Words_LINING, std::wstring( L"Lining" ) );
+		AddMenuItem( Localization::Words_Color, std::wstring( L"Color" ) );
+		AddMenuItem( Localization::Words_Beard, std::wstring( L"Beard" ) );
+		AddMenuItem( Localization::Words_Hat, std::wstring( L"Hat" ) );
+		AddMenuItem( Localization::Words_Cape, std::wstring( L"Cape" ) );
+		AddMenuItem( Localization::Words_Lining, std::wstring( L"Lining" ) );
 
-		boost::shared_ptr<MenuItem> back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_DONE, ItemFont ), std::wstring( L"Done" ) ) );
+		boost::shared_ptr<MenuItem> back = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Done, ItemFont ), std::wstring( L"Done" ) ) );
 		AddItem( back );
 		back->setGo( boost::make_shared<GoProxy>( boost::static_pointer_cast<CustomizeMenu>( shared_from_this() ) ) );
 	}
@@ -194,7 +194,7 @@ namespace CloudberryKingdom
 		// Make the hat select
 		if ( MyMenu->CurIndex == 2 )
 		{
-			boost::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_HAT, MyCharacterSelect, MyMenu->CurIndex ) );
+			boost::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_Hat, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = list;
 
 			for ( std::map<boost::shared_ptr<Hat>, bool >::const_iterator hat = CharacterSelectManager::AvailableHats->dict.begin(); hat != CharacterSelectManager::AvailableHats->dict.end(); ++hat )
@@ -214,7 +214,7 @@ namespace CloudberryKingdom
 		// Make the beard select
 		else if ( MyMenu->CurIndex == 1 )
 		{
-			boost::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_BEARD, MyCharacterSelect, MyMenu->CurIndex ) );
+			boost::shared_ptr<ListSelectPanel> list = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_Beard, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = list;
 
 			for ( std::map<boost::shared_ptr<Hat>, bool >::const_iterator beard = CharacterSelectManager::AvailableBeards->dict.begin(); beard != CharacterSelectManager::AvailableBeards->dict.end(); ++beard )
@@ -234,7 +234,7 @@ namespace CloudberryKingdom
 		else
 		{
 			std::vector<boost::shared_ptr<MenuListItem> > list = MyCharacterSelect->ItemList[ MyMenu->CurIndex ];
-			boost::shared_ptr<ListSelectPanel> select = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_COLOR, MyCharacterSelect, MyMenu->CurIndex ) );
+			boost::shared_ptr<ListSelectPanel> select = MakeMagic( ListSelectPanel, ( getControl(), Localization::Words_Color, MyCharacterSelect, MyMenu->CurIndex ) );
 			ClrSelect = select;
 
 			for ( std::vector<boost::shared_ptr<MenuListItem> >::const_iterator item = list.begin(); item != list.end(); ++item )

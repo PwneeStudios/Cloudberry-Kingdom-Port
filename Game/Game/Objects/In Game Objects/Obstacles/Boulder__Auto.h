@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Boulder_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~Boulder_Parameters() { }
 	
 		struct _Special
 		{

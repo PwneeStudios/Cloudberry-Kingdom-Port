@@ -11,6 +11,8 @@ namespace CloudberryKingdom
 	/// </summary>
 	struct MenuSliderBase : public MenuItem
 	{
+
+		virtual ~MenuSliderBase() { }
 	
 		struct SetCallbackProxy : public Lambda
 		{

@@ -428,7 +428,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuToggle> toggle;
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_COINS, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_Coins, ItemFont );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText, std::wstring( L"Header" ) );
 		HeaderText->setPos( Vector2( -1663.889f, 971.8889f ) );
@@ -448,7 +448,7 @@ namespace CloudberryKingdom
 		ItemPos = Vector2( -1033.333f, 429.4446f );
 		PosAdd = Vector2( 0, -520 );
 		AddItem( item );
-		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_WATCH_COMPUTER );
+		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_WatchComputer );
 
 		// Show path
 		boost::shared_ptr<MenuItem> PathItem;
@@ -470,7 +470,7 @@ namespace CloudberryKingdom
 		item->SetIcon( ObjectIcon::PathIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -20, -75 ) );
 		AddItem( item );
-		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_SHOW_PATH );
+		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ShowPath );
 		Item_ShowPath = item;
 
 		// Slow mo
@@ -493,7 +493,7 @@ namespace CloudberryKingdom
 		item->SetIcon( ObjectIcon::SlowMoIcon->Clone() );
 		item->Icon->setPos( IconOffset + Vector2( -20, -55 ) );
 		AddItem( item );
-		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ACTIVATE_SLOW_MO );
+		item->AdditionalOnSelect = Blurb->SetText_Action( Localization::Words_ActivateSlowMo );
 		Item_SlowMo = item;
 
         // Fade if not usable

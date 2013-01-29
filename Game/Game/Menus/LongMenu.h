@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct LongMenu : public Menu
 	{
+
+		virtual ~LongMenu() { }
 	
 		float Offset;
 		float OffsetStep;

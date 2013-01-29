@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct OscillateParams
 	{
 	
@@ -65,6 +66,7 @@ namespace CloudberryKingdom
 		static float GetScale_Oscillate( float Step, float w, float base_value, float max_addition );
 
 	};
+
 }
 
 

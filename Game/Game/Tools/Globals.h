@@ -5,9 +5,10 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Globals
 	{
-	
+
 		static void InitializeStatics();
 
 	
@@ -39,6 +40,7 @@ namespace CloudberryKingdom
 
 		static std::vector<std::wstring> UpgradeString;
 	};
+
 }
 
 

@@ -7,6 +7,9 @@ namespace CloudberryKingdom
 {
 	struct AutoGen_Parameters : public boost::enable_shared_from_this<AutoGen_Parameters>
 	{
+
+		virtual ~AutoGen_Parameters() { }
+
 		/// <summary>
 		/// Whether to intelligently spread out the period offsets of placed obstacles
 		/// </summary>
@@ -74,6 +77,8 @@ namespace CloudberryKingdom
 	struct AutoGen : public boost::enable_shared_from_this<AutoGen>
 	{
 	
+		virtual ~AutoGen() { }
+
 		AutoGen();
 
 		virtual boost::shared_ptr<AutoGen_Parameters> SetParameters( const boost::shared_ptr<PieceSeedData> &data, const boost::shared_ptr<Level> &level );
@@ -89,6 +94,7 @@ namespace CloudberryKingdom
 		virtual void Cleanup_2( const boost::shared_ptr<Level> &level, Vector2 BL, Vector2 TR );
 
 	};
+
 }
 
 

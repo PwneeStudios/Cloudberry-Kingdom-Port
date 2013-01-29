@@ -13,8 +13,11 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
+	
 	struct TextFloat : public GameObject
 	{
+
+		virtual ~TextFloat() { }
 	
 		boost::shared_ptr<EzText> MyText;
 
@@ -44,6 +47,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

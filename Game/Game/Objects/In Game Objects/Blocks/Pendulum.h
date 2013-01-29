@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Pendulum : public BlockBase, public IBound
 	{
+
+		virtual ~Pendulum() { }
 	
 		struct PendulumTileInfo : public TileInfoBase
 		{
@@ -75,6 +78,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

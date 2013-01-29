@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW : public StartMenu
 	{
 
+		virtual ~StartMenu_MW() { }
+
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;
 		using StartMenu::Call;

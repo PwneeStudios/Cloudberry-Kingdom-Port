@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct Ceiling_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~Ceiling_Parameters() { }
+
 		enum Style
 		{
 			Style_NORMAL,

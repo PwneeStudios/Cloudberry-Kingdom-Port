@@ -151,7 +151,7 @@ namespace CloudberryKingdom
 		pos += Vector2( 110, 70 );
 
 		// Text float
-		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_PERFECT, pos + Vector2( 21, 76.5f ) );
+		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_Perfect, pos + Vector2( 21, 76.5f ) );
 		boost::shared_ptr<TextFloat> text2 = boost::make_shared<TextFloat>( StringConverterHelper::toString( BonusValue() ), pos + Vector2( 21, -93.5f ) );
 
 		text->MyText->setScale( text->MyText->getScale() * 1.5f );

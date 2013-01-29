@@ -20,6 +20,8 @@ namespace CloudberryKingdom
 	struct Escalation_Tutorial : public GameObject
 	{
 	
+		virtual ~Escalation_Tutorial() { }
+
 		struct ConfigureSongsHelper : public Lambda
 		{
 		

@@ -8,12 +8,12 @@ namespace CloudberryKingdom
 	struct CampaignHelper
 	{
 
-	
 		static void InitializeStatics();
 
 		static std::wstring GetName( int difficulty );
 		static std::vector<Color> DifficultyColor;
 		static std::vector<Localization::Words> DifficultyNames;
+
 	};
 }
 

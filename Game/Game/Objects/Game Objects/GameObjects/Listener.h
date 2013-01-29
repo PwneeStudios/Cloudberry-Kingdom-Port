@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Listener : public GUI_Panel
 	{
+
+		virtual ~Listener() { }
 
 		enum Type
 		{
@@ -39,6 +42,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

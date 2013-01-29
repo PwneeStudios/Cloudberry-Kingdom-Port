@@ -13,9 +13,12 @@ namespace CloudberryKingdom
 	struct MakeDarkBottom : public MakeFinalDoorVertical
 	{
 	
+		virtual ~MakeDarkBottom() { }
+
 		MakeDarkBottom( const boost::shared_ptr<Level> &level );
 
 		virtual void Phase3();
+
 	};
 }
 

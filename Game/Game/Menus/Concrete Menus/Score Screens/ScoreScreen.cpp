@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 
 			boost::shared_ptr<MenuItem> item;
 
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_KEEP_SETTINGS, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_KeepSettings, ItemFont ) ) );
 			item->Name = std::wstring( L"Continue" );
 			item->setGo( boost::make_shared<MenuGo_NewLevelProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			AddItem( item );
@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 
 			if ( _Add_Watch )
 			{
-				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont ) ) );
+				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_WatchReplay, ItemFont ) ) );
 				item->Name = std::wstring( L"Replay" );
 				item->setGo( boost::make_shared<MenuGo_WatchReplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
@@ -151,13 +151,13 @@ namespace CloudberryKingdom
 
 			if ( _Add_Save )
 			{
-				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
+				item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
 				item->Name = std::wstring( L"Save" );
 				item->setGo( boost::make_shared<MenuGo_SaveProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 				AddItem( item );
 			}
 
-			MakeBackButton( Localization::Words_BACK_TO_FREEPLAY );
+			MakeBackButton( Localization::Words_BackToFreeplay );
 			MyMenu->OnB = Cast::ToMenu( boost::make_shared<MenuGo_ContinueProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 
 			EnsureFancy();
@@ -170,7 +170,7 @@ namespace CloudberryKingdom
 			MyPile->Add( ContinueButton );
 			ContinueButton->setPos( Vector2( 180, -477.7778f ) + ShiftAll );
 
-			boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_CONTINUE, ItemFont );
+			boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_Continue, ItemFont );
 			ContinueText->Name = std::wstring( L"Continue" );
 			SetHeaderProperties( ContinueText );
 			ContinueText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
@@ -184,7 +184,7 @@ namespace CloudberryKingdom
 				MyPile->Add( XButton );
 				XButton->setPos( Vector2( 180, -325.3333f ) + ShiftAll );
 
-				boost::shared_ptr<EzText> ReplayText = boost::make_shared<EzText>( Localization::Words_WATCH_REPLAY, ItemFont );
+				boost::shared_ptr<EzText> ReplayText = boost::make_shared<EzText>( Localization::Words_WatchReplay, ItemFont );
 				SetHeaderProperties( ReplayText );
 				ReplayText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 				ReplayText->MyFloatColor = ( bColor( 184, 231, 231 ) ).ToVector4();

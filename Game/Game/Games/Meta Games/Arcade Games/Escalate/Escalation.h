@@ -8,7 +8,7 @@ namespace CloudberryKingdom
 
 	struct Challenge_Escalation : public Challenge
 	{
-
+		virtual ~Challenge_Escalation() { }
 	
 		static void InitializeStatics();
 

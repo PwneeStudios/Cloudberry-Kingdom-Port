@@ -316,7 +316,7 @@ namespace CloudberryKingdom
 		FontScale = .666f;
 
 		// Header
-		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SAVE_SEED, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
 		item->Name = std::wstring( L"Header" );
 		item->Selectable = false;
 		SetHeaderProperties( item->MySelectedText );

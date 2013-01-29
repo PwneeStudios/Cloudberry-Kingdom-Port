@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct ExplodeBobs : public GUI_Panel
 	{
+
+		virtual ~ExplodeBobs() { }
 	
 		enum Speed
 		{
@@ -39,6 +41,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

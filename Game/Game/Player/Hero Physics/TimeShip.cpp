@@ -24,7 +24,7 @@ namespace CloudberryKingdom
 		BobPhsx::InitSingleton();
 
 		Specification = HeroSpec( 5, 0, 0, 0 );
-		Name = Localization::Words_SPACESHIP;
+		Name = Localization::Words_Spaceship;
 		NameTemplate = std::wstring( L"spaceship" );
 		Icon = boost::make_shared<PictureIcon>( Tools::Texture( std::wstring( L"Spaceship_Paper" ) ), Color::White, 1.15f * DefaultIconWidth );
 	}

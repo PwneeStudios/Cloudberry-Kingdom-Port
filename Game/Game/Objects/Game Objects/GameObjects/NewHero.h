@@ -5,8 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct NewHero_GUI : public GUI_Panel
 	{
+
+		virtual ~NewHero_GUI() { }
+
 		virtual void OnAdd();
 
 		boost::shared_ptr<EzText> text;
@@ -28,6 +32,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

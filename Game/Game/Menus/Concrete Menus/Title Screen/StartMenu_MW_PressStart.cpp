@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		//Text = new EzText("Press any key to start", Resources::Font_Grobold42, true);
-		Text = boost::make_shared<EzText>( Localization::Words_PRESS_START, Resources::Font_Grobold42, true );
+		Text = boost::make_shared<EzText>( Localization::Words_PressStart, Resources::Font_Grobold42, true );
 		//Text = new EzText(Localization::Words_PressStart, ItemFont);
 
 		Text->MyFloatColor = ( bColor( 226, 10, 83 ) ).ToVector4();

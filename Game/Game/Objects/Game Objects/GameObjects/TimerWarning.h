@@ -6,9 +6,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct TimerWarning : public GameObject
 	{
-	
+
+		virtual ~TimerWarning() { }
+
 		boost::shared_ptr<GUI_Timer> MyTimer;
 	
 		boost::shared_ptr<QuadClass> Fullscreen;
@@ -40,6 +43,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

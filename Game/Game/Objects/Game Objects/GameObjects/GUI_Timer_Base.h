@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct GUI_Timer_Base : public GUI_Panel
 	{
+
+		virtual ~GUI_Timer_Base() { }
 	
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
@@ -81,6 +83,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

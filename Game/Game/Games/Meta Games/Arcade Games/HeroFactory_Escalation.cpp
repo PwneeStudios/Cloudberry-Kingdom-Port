@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 namespace CloudberryKingdom
 {
@@ -14,7 +14,7 @@ namespace CloudberryKingdom
 	Challenge_HeroFactoryEscalation::Challenge_HeroFactoryEscalation()
 	{
 		GameTypeId = 10;
-		Name = Localization::Words_CUSTOM;
+		Name = Localization::Words_Custom;
 	}
 
 	boost::shared_ptr<BobPhsx> Challenge_HeroFactoryEscalation::GetHero( int i )

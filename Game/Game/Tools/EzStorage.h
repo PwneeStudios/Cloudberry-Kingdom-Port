@@ -65,6 +65,8 @@ namespace CloudberryKingdom
 
 	struct SaveLoad : public boost::enable_shared_from_this<SaveLoad>
 	{
+
+		virtual ~SaveLoad() { }
 	
 		struct SaveLambda : public Lambda_1<boost::shared_ptr<BinaryWriter> >
 		{
@@ -143,7 +145,6 @@ namespace CloudberryKingdom
 	struct EzStorage
 	{
 
-	
 		static void InitializeStatics();
 
 	
@@ -167,6 +168,7 @@ namespace CloudberryKingdom
 	
 		static void LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic );
 	};
+
 }
 
 

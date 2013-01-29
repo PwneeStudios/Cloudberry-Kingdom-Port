@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MultiplierUp : public GUI_Panel
 	{
+
+		virtual ~MultiplierUp() { }
 	
 		virtual void OnAdd();
 
@@ -28,6 +31,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

@@ -74,10 +74,10 @@ namespace CloudberryKingdom
 	{
 		if ( CloudberryKingdomGame::ShowSongInfo && DisplayInfo && DisplayingInfo && SongInfoText != 0 && !Tools::ShowLoadingScreen && Tools::CurGameData != 0 && !Tools::CurGameData->PauseGame && !Tools::CurGameData->SuppressSongInfo )
 		{
-			//SongInfoText->Draw( DefaultCam );
-			boost::shared_ptr<Camera> cam = Tools::getCurCamera();
-			if ( cam != 0 )
-				SongInfoText->Draw( cam );
+			SongInfoText->Draw( DefaultCam );
+			//boost::shared_ptr<Camera> cam = Tools::getCurCamera();
+			//if ( cam != 0 )
+			//	SongInfoText->Draw( cam );
 		}
 	}
 

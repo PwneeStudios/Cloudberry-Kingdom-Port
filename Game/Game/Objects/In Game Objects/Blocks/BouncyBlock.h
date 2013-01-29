@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BouncyBlock : public BlockBase
 	{
+
+		virtual ~BouncyBlock() { }
 	
 		struct BouncyBlockTileInfo : public TileInfoBase
 		{
@@ -73,6 +76,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

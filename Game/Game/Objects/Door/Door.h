@@ -37,6 +37,8 @@ namespace CloudberryKingdom
 {
 	struct Door : public ILevelConnector
 	{
+
+		virtual ~Door() { }
 	
 		struct ShakeLambda : public Lambda
 		{

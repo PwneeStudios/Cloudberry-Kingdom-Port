@@ -13,6 +13,8 @@ namespace CloudberryKingdom
 	struct CkBaseMenu : public GUI_Panel
 	{
 
+		virtual ~CkBaseMenu() { }
+
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
 		using GUI_Panel::Call;

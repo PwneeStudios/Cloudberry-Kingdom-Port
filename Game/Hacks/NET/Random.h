@@ -36,7 +36,7 @@ private:
 
 	void initialize( int Seed )
 	{
-		int num = /*( Seed == -2147483648 ) ? 2147483647 : */fabs(Seed);
+		int num = /*( Seed == -2147483648 ) ? 2147483647 : */abs(Seed);
 		int num2 = 161803398 - num;
 
 		SeedArray[55] = num2;

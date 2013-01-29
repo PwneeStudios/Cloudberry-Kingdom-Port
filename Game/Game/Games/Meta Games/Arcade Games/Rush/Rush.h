@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct Rush : public Challenge
 	{
 	
+		virtual ~Rush() { }
+
 		struct RushOnTimeExpiredLambda : public Lambda_1<boost::shared_ptr<GUI_Timer_Base> >
 		{
 		

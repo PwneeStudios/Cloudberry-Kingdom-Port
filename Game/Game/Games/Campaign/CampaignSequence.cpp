@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
 
@@ -291,7 +291,7 @@ namespace CloudberryKingdom
         // Level Title plus Hero Name
         if ( !level->MyLevelSeed->NewHero )
         {
-            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_LEVEL ).c_str() ) ) );
+            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_Level ).c_str() ) ) );
             title->Shift( Vector2(0, -45) );
             level->MyGame->AddGameObject( title );
         }

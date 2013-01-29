@@ -9,7 +9,9 @@ namespace CloudberryKingdom
 #if defined(NOT_PC) && (defined(XBOX) || defined(XBOX_SIGNIN))
 	struct SignInMenu : public CkBaseMenu
 	{
-	
+
+		virtual ~SignInMenu() { }
+
 		struct SignInNoLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		

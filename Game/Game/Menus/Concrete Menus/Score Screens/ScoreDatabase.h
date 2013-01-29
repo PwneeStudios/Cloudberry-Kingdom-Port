@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct ScoreDatabase : public SaveLoad
 	{
+
+		virtual ~ScoreDatabase() { }
 	
 		static void InitializeStatics();
 

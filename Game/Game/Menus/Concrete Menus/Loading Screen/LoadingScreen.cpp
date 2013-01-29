@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		BlackQuad->SetToDefault();
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 0 ) );
 
-		LoadingText = boost::make_shared<EzText>( Localization::Words_LOADING, Resources::Font_Grobold42, true, true );
+		LoadingText = boost::make_shared<EzText>( Localization::Words_Loading, Resources::Font_Grobold42, true, true );
 		LoadingText->setScale( LoadingText->getScale() * .445f );
 		LoadingText->FixedToCamera = true;
 		LoadingText->_Pos = Vector2( 21, -106 );

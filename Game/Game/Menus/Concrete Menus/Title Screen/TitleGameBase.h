@@ -8,15 +8,18 @@ namespace CloudberryKingdom
 	struct TitleFactory : public GameFactory
 	{
 	
+		virtual ~TitleFactory() { }
+
 		virtual boost::shared_ptr<GameData> Make( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground );
+
 	};
 
 	struct TitleGameData : public GameData
 	{
 
+		virtual ~TitleGameData() { }
 	
 		static void InitializeStatics();
-
 	
 		static boost::shared_ptr<GameFactory> Factory;
 

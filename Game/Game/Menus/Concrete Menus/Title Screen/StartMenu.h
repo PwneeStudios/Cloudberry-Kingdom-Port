@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu : public CkBaseMenu
 	{
 
+		virtual ~StartMenu() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;

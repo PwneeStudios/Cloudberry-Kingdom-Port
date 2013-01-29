@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BobPhsxNormal : public BobPhsx
 	{
+
+		virtual ~BobPhsxNormal() { }
 
 		// Members
 		bool InitializedAnim;
@@ -239,6 +242,7 @@ virtual void SetTarget( const boost::shared_ptr<RichLevelGenData> &GenData );
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

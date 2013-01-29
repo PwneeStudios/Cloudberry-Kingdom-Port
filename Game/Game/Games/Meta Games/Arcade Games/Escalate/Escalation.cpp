@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>
@@ -121,7 +121,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		GameTypeId = 0;
-		MenuName = Name = Localization::Words_ESCALATION;
+		MenuName = Name = Localization::Words_Escalation;
 	}
 
 	void Challenge_Escalation::Start( int StartLevel )
@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 		if ( levelindex > StartIndex )
 		{
 			Tools::Warning();
-			boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_LEVEL ).c_str(), levelindex + 1 ) ) );
+			boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_Level ).c_str(), levelindex + 1 ) ) );
 			Tools::CurGameData->AddGameObject( title );
 
 			if ( ( levelindex + 1 ) % LevelsPerDifficulty == 0 )

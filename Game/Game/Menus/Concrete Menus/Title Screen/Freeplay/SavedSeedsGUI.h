@@ -7,7 +7,9 @@ namespace CloudberryKingdom
 {
 	struct SavedSeedsGUI : public CkBaseMenu
 	{
-	
+
+		virtual ~SavedSeedsGUI() { }
+
 		struct PostMakeStandardLoadHelper : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		

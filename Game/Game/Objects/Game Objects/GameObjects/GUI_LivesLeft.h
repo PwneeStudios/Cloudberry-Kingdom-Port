@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 	/// </summary>
 	struct GUI_LivesLeft : public GUI_Panel
 	{
+
+		virtual ~GUI_LivesLeft() { }
 	
 		struct BringStartDelayHelper : public Lambda
 		{

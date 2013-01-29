@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct BobPhsxBouncy : public BobPhsxNormal
 	{
 	
+		virtual ~BobPhsxBouncy() { }
+
 		static void InitializeStatics();
 
 		// Singleton
@@ -54,6 +56,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

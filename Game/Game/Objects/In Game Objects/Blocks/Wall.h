@@ -30,6 +30,8 @@ namespace CloudberryKingdom
 {
 	struct Wall : public BlockBase
 	{
+
+		virtual ~Wall() { }
 	
 		enum BufferType
 		{

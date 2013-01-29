@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 {
 	struct MakeFinalDoor : public MakeThing, public boost::enable_shared_from_this<MakeFinalDoor>
 	{
+
+		virtual ~MakeFinalDoor() { }
 	
 		struct VanillaFillEndPieceLambda : public Lambda_1<boost::shared_ptr<BlockBase> >
 		{

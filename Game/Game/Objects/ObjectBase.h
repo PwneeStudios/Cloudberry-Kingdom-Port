@@ -11,6 +11,7 @@ namespace CloudberryKingdom
 	struct ObjectBase : public boost::enable_shared_from_this<ObjectBase>
 	{
 
+		virtual ~ObjectBase() { }
 	
 		const boost::shared_ptr<GameData> &getGame() const;
 		const boost::shared_ptr<Level> &getMyLevel() const;
@@ -141,6 +142,7 @@ namespace CloudberryKingdom
 	struct ObjectData
 	{
 
+		virtual ~ObjectData() { }
 	
 		static void InitializeStatics();
 
@@ -353,6 +355,7 @@ namespace CloudberryKingdom
 			InitializeInstanceFields();
 		}
 	};
+
 }
 
 

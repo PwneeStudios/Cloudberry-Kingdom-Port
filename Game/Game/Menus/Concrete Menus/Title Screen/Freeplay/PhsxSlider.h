@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct PhsxSlider : public MenuSlider
 	{
 	
+		virtual ~PhsxSlider() { }
+
 		struct PhsxDataSetter : public Lambda
 		{
 		

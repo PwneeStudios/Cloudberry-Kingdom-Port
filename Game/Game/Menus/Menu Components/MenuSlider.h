@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MenuSlider : public MenuSliderBase
 	{
+
+		virtual ~MenuSlider() { }
 	
 		Vector2 SliderShift, TabOffset;
 

@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	struct ControlItem : public MenuItem
 	{
-	
+
 		boost::shared_ptr<QuadClass> MyQuad;
 		Keys MyKey;
 		boost::shared_ptr<Lambda_1<Keys> > SetSecondaryKey;
@@ -25,6 +25,8 @@ namespace CloudberryKingdom
 
 	struct CustomControlsMenu : public CkBaseMenu
 	{
+
+		virtual ~CustomControlsMenu() { }
 	
 		struct ResetProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{

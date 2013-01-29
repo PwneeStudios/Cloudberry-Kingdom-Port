@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+
 	/// <summary>
 	/// A simple timer. The timer is removed on level resets, and removes itself when the timer expires.
 	/// </summary>

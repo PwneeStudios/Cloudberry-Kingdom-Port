@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct Spike_Parameters : public AutoGen_Parameters
 	{
+
+		virtual ~Spike_Parameters() { }
 	
 		enum OffsetStyles
 		{

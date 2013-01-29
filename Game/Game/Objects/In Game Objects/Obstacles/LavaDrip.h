@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct LavaDrip : public _BoxDeath
 	{
+
+		virtual ~LavaDrip() { }
 	
 		struct LavaDripTileInfo : public TileInfoBase
 		{
@@ -58,6 +60,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

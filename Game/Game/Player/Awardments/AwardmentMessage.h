@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct AwardmentMessage : public CkBaseMenu
 	{
 
+		virtual ~AwardmentMessage() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;
@@ -45,6 +47,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

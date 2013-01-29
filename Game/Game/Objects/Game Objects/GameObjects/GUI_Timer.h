@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct GUI_Timer : public GUI_Timer_Base
 	{
-	
+
+		virtual ~GUI_Timer() { }
+
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
 		
@@ -31,13 +34,9 @@ namespace CloudberryKingdom
 			void Apply( const boost::shared_ptr<Level> &level );
 		};
 
-
-	
 		virtual void OnAdd();
 
-	
 		virtual void ReleaseBody();
-
 	
 		int CoinTimeValue, MinLevelStartTimeValue;
 		int MaxTime;
@@ -52,6 +51,7 @@ namespace CloudberryKingdom
 		GUI_Timer();
 		boost::shared_ptr<GUI_Timer> GUI_Timer_Construct();
 	};
+
 }
 
 

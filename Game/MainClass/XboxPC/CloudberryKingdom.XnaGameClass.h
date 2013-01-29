@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 	struct XnaGameClass : public Game, public boost::enable_shared_from_this<XnaGameClass>
 	{
 	
+		virtual ~XnaGameClass() { }
+
 		boost::shared_ptr<CloudberryKingdomGame> MyGame;
 	
 		XnaGameClass();

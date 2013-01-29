@@ -16,9 +16,12 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
+	
 	struct ConveyorBlock : public BlockBase
 	{
 	
+		virtual ~ConveyorBlock() { }
+
 		boost::shared_ptr<QuadClass> MyQuad, LeftEnd, RightEnd;
 
 		virtual void MakeNew();
@@ -56,6 +59,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

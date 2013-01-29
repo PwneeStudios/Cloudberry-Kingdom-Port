@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct ListSelectPanel : public CkBaseMenu
 	{
+
+		virtual ~ListSelectPanel() { }
 	
 		struct OnSelectProxy : public Lambda
 		{

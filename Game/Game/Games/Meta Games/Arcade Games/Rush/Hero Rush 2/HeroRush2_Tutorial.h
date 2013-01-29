@@ -15,6 +15,8 @@ namespace CloudberryKingdom
 	struct HeroRush2_Tutorial : public HeroRush_Tutorial
 	{
 	
+		virtual ~HeroRush2_Tutorial() { }
+
 		boost::shared_ptr<Challenge_HeroRush2> HeroRush2;
 	
 		HeroRush2_Tutorial( const boost::shared_ptr<Challenge_HeroRush2> &HeroRush2 );

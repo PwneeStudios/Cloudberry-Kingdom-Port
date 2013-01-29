@@ -6,8 +6,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct FlyingBlob : public _Obstacle, public IBound
 	{
+
+		virtual ~FlyingBlob() { }
 
 		static void InitializeStatics();
 
@@ -178,6 +181,7 @@ namespace CloudberryKingdom
 	
 		void InitializeInstanceFields();
 	};
+
 }
 
 

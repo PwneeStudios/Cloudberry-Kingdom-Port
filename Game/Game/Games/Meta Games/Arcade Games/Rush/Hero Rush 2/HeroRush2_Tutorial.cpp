@@ -13,7 +13,7 @@ namespace CloudberryKingdom
 	{
 		ShowTitle = false;
 
-		boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HYBRID_RUSH );
+		boost::shared_ptr<GUI_Text> text = GUI_Text::SimpleTitle( Localization::Words_HybridRush );
 		text->MyText->setPos( text->MyText->getPos() + Vector2(0, -110) );
 
 		MyGame->AddGameObject( text );

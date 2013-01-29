@@ -12,6 +12,8 @@ namespace CloudberryKingdom
 	struct GUI_Lives : public GUI_Panel
 	{
 
+		virtual ~GUI_Lives() { }
+
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
 		using GUI_Panel::Call;

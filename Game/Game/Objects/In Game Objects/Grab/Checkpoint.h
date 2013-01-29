@@ -5,9 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct Checkpoint : public ObjectBase
 	{
 
+		virtual ~Checkpoint() { }
 	
 		static void InitializeStatics();
 
@@ -91,6 +93,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

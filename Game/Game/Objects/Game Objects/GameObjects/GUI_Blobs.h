@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct GUI_Blobs : public GUI_Panel
 	{
 
+		virtual ~GUI_Blobs() { }
+
 		using GUI_Panel::SlideOut;
 		using GUI_Panel::SlideIn;
 		using GUI_Panel::Call;
@@ -16,7 +18,10 @@ namespace CloudberryKingdom
 		struct TempStatsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~TempStatsLambda() { }
+			
 			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
+
 		};
 
 	

@@ -28,9 +28,12 @@ namespace CloudberryKingdom
 	struct FallingBlock_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~FallingBlock_Parameters() { }
+
 		Param Delay, Width, AngryRatio, AngrySpeed, AngryAccel, KeepUnused;
 
 		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
+	
 	};
 
 	struct FallingBlock_AutoGen : public AutoGen

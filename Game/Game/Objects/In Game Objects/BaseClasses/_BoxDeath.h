@@ -28,9 +28,12 @@ namespace CloudberryKingdom
 
 namespace CloudberryKingdom
 {
+	
 	struct _BoxDeath : public _Death
 	{
 	
+		virtual ~_BoxDeath() { }
+
 		boost::shared_ptr<AABox> Box;
 	
 		Vector2 BoxSize;
@@ -68,6 +71,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

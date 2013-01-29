@@ -5,9 +5,12 @@
 
 namespace CloudberryKingdom
 {
+
 	struct SpikeyLine_Parameters : public AutoGen_Parameters
 	{
 	
+		virtual ~SpikeyLine_Parameters() { }
+
 		struct _Special
 		{
 		};
@@ -20,6 +23,7 @@ namespace CloudberryKingdom
 		//public List<List<SpikeyLine> > Lines = new List<List<SpikeyLine>>();
 
 		virtual void SetParameters( const boost::shared_ptr<PieceSeedData> &PieceSeed, const boost::shared_ptr<Level> &level );
+	
 	};
 
 	struct SpikeyLine_AutoGen : public AutoGen

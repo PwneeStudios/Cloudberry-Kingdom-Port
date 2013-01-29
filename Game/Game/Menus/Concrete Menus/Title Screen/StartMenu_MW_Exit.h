@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Exit : public VerifyQuitGameMenu2
 	{
 
+		virtual ~StartMenu_MW_Exit() { }
+
 		using VerifyQuitGameMenu2::SlideOut;
 		using VerifyQuitGameMenu2::SlideIn;
 		using VerifyQuitGameMenu2::Call;

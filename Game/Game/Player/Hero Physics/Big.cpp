@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <MasterHack.h>
 
@@ -42,7 +42,7 @@ namespace CloudberryKingdom
 		BobPhsxNormal::InitSingleton();
 
 		Specification = HeroSpec( 0, 3, 0, 0 );
-		Name = Localization::Words_FAT_BOB;
+		Name = Localization::Words_FatBob;
 		Adjective = std::wstring( L"Fatty" );
 
 		Icon = boost::make_shared<PictureIcon>( Tools::TextureWad->FindByName( std::wstring( L"Bob_Run_0024" ) ), Color::White, DefaultIconWidth * 1.45f );

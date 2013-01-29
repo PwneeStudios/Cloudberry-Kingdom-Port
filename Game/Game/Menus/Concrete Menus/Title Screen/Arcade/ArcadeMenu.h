@@ -19,6 +19,8 @@ namespace CloudberryKingdom
 
 	struct ArcadeBaseMenu : public CkBaseMenu
 	{
+
+		virtual ~ArcadeBaseMenu() { }
 	
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
@@ -67,6 +69,8 @@ namespace CloudberryKingdom
 
 	struct ArcadeMenu : public ArcadeBaseMenu
 	{
+
+		virtual ~ArcadeMenu() { }
 
 		struct OnSelectProxy : public Lambda
 		{

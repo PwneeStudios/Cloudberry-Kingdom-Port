@@ -201,7 +201,7 @@ namespace CloudberryKingdom
 
 	void GUI_Level::InitializeInstanceFields()
 	{
-		Prefix = Localization::Words_LEVEL;
+		Prefix = Localization::Words_Level;
 		DoSlideIn = true;
 		AddedOnce = false;
 	}

@@ -212,31 +212,31 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Chapter 1
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_BEGINNING, ItemFont ), 1 ) );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheBeginning, ItemFont ), 1 ) );
 		item->Name = std::wstring( L"MainCampaign" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 2
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_NEXT_NINETY_NINE, ItemFont ), 2 ) );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheNextNinetyNine, ItemFont ), 2 ) );
 		item->Name = std::wstring( L"Easy" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 3
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AGAUNTLET_OF_DOOM, ItemFont ), 3 ) );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AGauntletOfDoom, ItemFont ), 3 ) );
 		item->Name = std::wstring( L"Hard" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 4
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_ALMOST_HERO, ItemFont ), 4 ) );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AlmostHero, ItemFont ), 4 ) );
 		item->Name = std::wstring( L"Hardcore" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
 
 		// Chapter 5
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_THE_MASOCHIST, ItemFont ), 5 ) );
+		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheMasochist, ItemFont ), 5 ) );
 		item->Name = std::wstring( L"Maso" );
 		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
 		AddItem( item );
@@ -249,7 +249,7 @@ namespace CloudberryKingdom
         TextBack->setDegrees( 90 );
         MyPile->Add(TextBack, L"BoxLeft");
 
-        boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_LEVEL, Resources::Font_Grobold42);
+        boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_Level, Resources::Font_Grobold42);
         LevelText->_Scale *= .72f;
         StartMenu::SetText_Green( LevelText, true );
         MyPile->Add(LevelText, L"Level");
@@ -267,7 +267,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::MakeHeader()
 	{
-		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_STORY_MODE, ItemFont );
+		boost::shared_ptr<EzText> Header = boost::make_shared<EzText>( Localization::Words_StoryMode, ItemFont );
 		Header->Name = std::wstring( L"Header" );
 		Header->setScale( Header->getScale() * 1.3f );
 		SetText( Header );

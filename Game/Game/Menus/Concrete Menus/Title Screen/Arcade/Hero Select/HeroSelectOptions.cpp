@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 80.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LEADERBOARD, ItemFont, false, true ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Leaderboard, ItemFont, false, true ) ) );
 
 		item->Name = std::wstring( L"Leaderboard" );
 		item->setGo( Cast::ToItem( boost::make_shared<BringLeaderboardProxy>( boost::static_pointer_cast<HeroSelectOptions>( shared_from_this() ) ) ) );

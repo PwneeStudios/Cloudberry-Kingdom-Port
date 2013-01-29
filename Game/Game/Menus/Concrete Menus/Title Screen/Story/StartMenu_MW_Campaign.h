@@ -11,6 +11,8 @@ namespace CloudberryKingdom
 		struct CampaignLevelsLambda : public PlayerIntLambda
 		{
 		
+			virtual ~CampaignLevelsLambda() { }
+
 			CampaignLevelsLambda();
 
 			virtual int Apply( const boost::shared_ptr<PlayerData> &p );
@@ -29,6 +31,8 @@ namespace CloudberryKingdom
 
 	struct StartMenu_MW_Campaign : public StartMenu
 	{
+
+		virtual ~StartMenu_MW_Campaign() { }
 
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;

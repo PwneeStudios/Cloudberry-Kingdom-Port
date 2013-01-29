@@ -126,8 +126,8 @@ namespace CloudberryKingdom
 
         //this->Name = Name;
         //this->Description = Description;
-        this->Name = Localization::Words_NONE;;
-        this->Description = Localization::Words_NONE;
+        this->Name = Localization::Words_None;;
+        this->Description = Localization::Words_None;
 
         this->Unlockable = Unlockable;
         this->Guid = Guid;

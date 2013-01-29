@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct BackgroundCollection
 	{
 	

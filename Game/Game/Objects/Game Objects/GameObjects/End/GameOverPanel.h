@@ -7,6 +7,8 @@ namespace CloudberryKingdom
 {
 	struct GameOverPanel : public CkBaseMenu
 	{
+
+		virtual ~GameOverPanel() { }
 		
 		using GUI_Panel::Call;
 	

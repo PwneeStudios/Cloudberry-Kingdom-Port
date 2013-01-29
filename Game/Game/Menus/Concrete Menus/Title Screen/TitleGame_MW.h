@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	{
 
 	
+		virtual ~TitleGameData_MW_Factory() { }
+
 		virtual boost::shared_ptr<GameData> Make();
 
 	};
@@ -16,10 +18,9 @@ namespace CloudberryKingdom
 	struct TitleGameData_MW : public TitleGameData
 	{
 	
+		virtual ~TitleGameData_MW() { }
 	
 		static void InitializeStatics();
-
-
 	
 		struct _InitProxy : public Lambda
 		{

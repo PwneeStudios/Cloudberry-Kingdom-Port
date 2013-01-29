@@ -5,15 +5,20 @@
 
 namespace CloudberryKingdom
 {
+
 	struct BackgroundFloater_Stationary : public BackgroundFloater
 	{
-	
+
+		virtual ~BackgroundFloater_Stationary() { }
+
 		BackgroundFloater_Stationary( const boost::shared_ptr<Level> &level );
 
 		virtual void PhsxStep( const boost::shared_ptr<BackgroundFloaterList> &list );
 
 		virtual void Draw();
+
 	};
+
 }
 
 

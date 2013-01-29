@@ -3,8 +3,6 @@
 
 struct Directory
 {
-
-
 	
 	static std::wstring GetCurrentDirectory()
 	{

@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct MakeFinalDoorVertical : public MakeThing
 	{
+
+		virtual ~MakeFinalDoorVertical() { }
 	
 		struct ElementPositionProjectY : public LambdaFunc_1<boost::shared_ptr<BlockBase> , float>
 		{

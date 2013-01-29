@@ -114,22 +114,22 @@ namespace CloudberryKingdom
 		this->FontScale *= .9f;
 
 		// Header
-		HeaderText = boost::make_shared<EzText>( Localization::Words_OPTIONS, ItemFont );
+		HeaderText = boost::make_shared<EzText>( Localization::Words_Options, ItemFont );
 		HeaderText->Name = std::wstring( L"Header" );
 		SetHeaderProperties( HeaderText );
 		MyPile->Add( HeaderText );
 
-		boost::shared_ptr<MenuSlider> FxSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_SOUND_VOLUME, ItemFont ) ) );
+		boost::shared_ptr<MenuSlider> FxSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_SoundVolume, ItemFont ) ) );
 		FxSlider->setMyFloat( Tools::SoundVolume );
 		FxSlider->Name = std::wstring( L"Sound" );
 		AddItem( FxSlider );
 
-		boost::shared_ptr<MenuSlider> MusicSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_MUSIC_VOLUME, ItemFont ) ) );
+		boost::shared_ptr<MenuSlider> MusicSlider = MakeMagic( MenuSlider, ( boost::make_shared<EzText>( Localization::Words_MusicVolume, ItemFont ) ) );
 		MusicSlider->setMyFloat( Tools::MusicVolume );
 		MusicSlider->Name = std::wstring( L"Music" );
 		AddItem( MusicSlider );
 
-		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CONTROLS, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Controls, ItemFont ) ) );
 		item->setGo( boost::make_shared<InitHideHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		item->Name = std::wstring( L"Controls" );
 		AddItem( item );
@@ -137,7 +137,7 @@ namespace CloudberryKingdom
             if (LanguageOption)
             {
                 // Language
-                boost::shared_ptr<EzText> LanguageText = boost::make_shared<EzText>(Localization::Words_LANGUAGE, ItemFont);
+                boost::shared_ptr<EzText> LanguageText = boost::make_shared<EzText>(Localization::Words_Language, ItemFont);
                 SetHeaderProperties(LanguageText);
                 LanguageText->Name = L"Language";
                 MyPile->Add(LanguageText);
@@ -167,13 +167,13 @@ namespace CloudberryKingdom
 
 	#if defined(PC_VERSION)
 		// Custom controls
-		boost::shared_ptr<MenuItem> mitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EDIT_CONTROLS, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> mitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EditControls, ItemFont ) ) );
 		mitem->setGo( boost::make_shared<InitCallCustomControlsHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
 		mitem->Name = std::wstring( L"Custom" );
 		AddItem( mitem );
 
 		// Full screen resolutions
-		boost::shared_ptr<EzText> RezText = boost::make_shared<EzText>( Localization::Words_RESOLUTION, ItemFont );
+		boost::shared_ptr<EzText> RezText = boost::make_shared<EzText>( Localization::Words_Resolution, ItemFont );
 		SetHeaderProperties( RezText );
 		RezText->Name = std::wstring( L"RezText" );
 		MyPile->Add( RezText );
@@ -222,7 +222,7 @@ namespace CloudberryKingdom
 		FsRezList->OnConfirmedIndexSelect = boost::make_shared<InitOnConfirmedIndexSelect>( FsRezList );
 
 		// Full screen toggle
-		boost::shared_ptr<EzText> FullScreenText = boost::make_shared<EzText>( Localization::Words_FULL_SCREEN, ItemFont );
+		boost::shared_ptr<EzText> FullScreenText = boost::make_shared<EzText>( Localization::Words_FullScreen, ItemFont );
 		SetHeaderProperties( FullScreenText );
 		FullScreenText->Name = std::wstring( L"Fullscreen" );
 		MyPile->Add( FullScreenText );
@@ -273,7 +273,7 @@ namespace CloudberryKingdom
 	void SoundMenu::AddToggle_Borderless()
 	{
 		// Text
-		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_WINDOW_BORDER, ItemFont );
+		boost::shared_ptr<EzText> Text = boost::make_shared<EzText>( Localization::Words_WindowBorder, ItemFont );
 		SetHeaderProperties( Text );
 		Text->Name = std::wstring( L"WindowBorder" );
 		MyPile->Add( Text );

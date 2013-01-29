@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
 
+		virtual ~StartMenu_MW_Backpanel() { }
+
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 #include <Hacks/List.h>
 #include <Hacks/String.h>
@@ -131,9 +131,9 @@ namespace CloudberryKingdom
 		UserPowers::Set( UserPowers::CanSkipScreensaver, true );
 
 	#if defined(PC_VERSION)
-		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true ) );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
 	#else
-		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PRESS_ANY_KEY, Vector2( 0, -865 ), true ) );
+		ss->PressA = MakeMagic( GUI_Text, ( Localization::Words_PressAnyKey, Vector2( 0, -865 ), true ) );
 	#endif
 		ss->PressA->MyText->setScale( ss->PressA->MyText->getScale() * .68f );
 		ss->PressA->PreventRelease = true;

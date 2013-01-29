@@ -3419,7 +3419,7 @@ int Level::AfterPostDrawLayer = 12;
                 int DeadCount = CoreMath::RestrictVal( 0, 1000, ( *bob )->DeadCount - 3 );
                 float fade = CoreMath::RestrictVal( 0.f, 1.f, ( *bob )->LightSourceFade - DeadCount * .0175f );
 				Color c = Color( 1.f, 1.f, 1.f, ( *bob )->LightSourceFade );
-				float radius = CoreMath::RestrictVal( 0.0f, 1000.0f, 860.0f + DeadCount * 27.0f + CoreMath::Periodic( -30, 30, 40, CurPhsxStep ) );
+				float radius = CoreMath::RestrictVal( 0.0f, 1000.0f, 860.0f + DeadCount * 27.0f + CoreMath::Periodic( -30.f, 30.f, 40.f, static_cast<float>( CurPhsxStep ) ) );
 				Tools::QDrawer->DrawLightSource( ( *bob )->getPos(), radius, 5.f, c ); //new Color(.75f, .75f, .75f, .75f));
 			}
 			Tools::QDrawer->Flush();

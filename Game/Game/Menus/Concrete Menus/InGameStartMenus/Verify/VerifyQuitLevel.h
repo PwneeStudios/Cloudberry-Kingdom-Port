@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct VerifyQuitLevelMenu : public VerifyBaseMenu
 	{
 	
+		virtual ~VerifyQuitLevelMenu() { }
+
 		struct VerifyQuitOkLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		

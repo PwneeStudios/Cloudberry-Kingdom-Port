@@ -5,8 +5,11 @@
 
 namespace CloudberryKingdom
 {
+
 	struct ZoneTrigger : public ObjectBase
 	{
+
+		virtual ~ZoneTrigger() { }
 	
 		boost::shared_ptr<Lambda_1<boost::shared_ptr<ZoneTrigger> > > MyContainsEvent;
 
@@ -33,6 +36,7 @@ namespace CloudberryKingdom
 
 		virtual void Clone( const boost::shared_ptr<ObjectBase> &A );
 	};
+
 }
 
 

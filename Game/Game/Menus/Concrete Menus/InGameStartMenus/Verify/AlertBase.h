@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 
 	struct AlertBaseMenu : public CkBaseMenu
 	{
+
+		virtual ~AlertBaseMenu() { }
 	
 		struct OkProxy : public Lambda
 		{

@@ -1,4 +1,4 @@
-﻿#include <global_header.h>
+#include <global_header.h>
 
 
 namespace CloudberryKingdom
@@ -27,7 +27,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 	ClrTextFx::ClrTextFx() :
 		Guid( 0 ),
 		Price( 0 ),
-		Name( Localization::Words_NONE ),
+		Name( Localization::Words_None ),
 		UsePaintTexture( true )
 	{
 	}
@@ -43,7 +43,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		Texture = Tools::TextureWad->TextureList[ 0 ];
@@ -62,7 +62,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		Texture = Tools::TextureWad->TextureList[ 0 ];
@@ -82,7 +82,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = color;
 		this->DetailColor = DetailColor;
@@ -101,7 +101,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		this->Texture = texture;
@@ -119,7 +119,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );
@@ -137,7 +137,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );
@@ -155,7 +155,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );
@@ -173,7 +173,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 
 		ModObject.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = this->DetailColor = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );
@@ -191,7 +191,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );
@@ -210,7 +210,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = color;
 		this->Texture = texture;
@@ -229,7 +229,7 @@ std::vector<ClrTextFx> ClrTextFx::FullList = std::vector<ClrTextFx>();
 		ModObject.reset();
 		PicTexture.reset();
 		PicScale = Vector2(1);
-		Name = Localization::Words_NONE;
+		Name = Localization::Words_None;
 
 		this->Clr = color;
 		this->Texture = Tools::TextureWad->FindByName( texture );

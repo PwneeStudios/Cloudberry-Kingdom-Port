@@ -8,6 +8,7 @@ namespace CloudberryKingdom
 	struct Challenge_HeroRush : public Rush
 	{
 
+		virtual ~Challenge_HeroRush() { }
 	
 		static void InitializeStatics();
 
