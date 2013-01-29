@@ -3,8 +3,8 @@
 
 #include <global_header.h>
 
-#include "Hacks/XNA/Video.h"
-#include "Hacks/XNA/VideoPlayer.h"
+#include <Graphics/Video.h>
+#include <Graphics/VideoPlayer.h>
 #include "Hacks/NET/DateTime.h"
 
 namespace CloudberryKingdom

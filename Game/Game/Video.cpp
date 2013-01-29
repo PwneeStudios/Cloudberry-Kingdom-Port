@@ -60,10 +60,11 @@ namespace CloudberryKingdom
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
 #if DEBUG
-            CanSkipVideo = true;
+		CanSkipVideo = true;
 #endif
 
-		Subtitles = Localization::GetSubtitles( MovieName );
+		// FIXME: We do want subtitles later.
+		//Subtitles = Localization::GetSubtitles( MovieName );
 		SubtitleIndex = 0;
 		SubtitleQuad->Show = false;
 
@@ -82,13 +83,16 @@ namespace CloudberryKingdom
 		Cleaned = false;
 
 		//CurrentVideo = Tools::GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
-		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+
+		// FIXME: Actually load video later.
+		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
 		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
 		VPlayer->Play( CurrentVideo );
 
-		Duration = CurrentVideo->Duration.TotalSeconds;
+		// FIXME: this will be set to something real later.
+		Duration = 71.f;//CurrentVideo->Duration.TotalSeconds;
 		StartTime = DateTime::Now();
 	}
 

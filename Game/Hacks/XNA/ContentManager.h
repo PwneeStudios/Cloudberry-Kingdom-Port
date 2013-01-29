@@ -4,7 +4,7 @@
 #include <string>
 
 #include "Hacks/XNA/GameServiceContainer.h"
-#include <Hacks/XNA/Texture2D.h>
+#include <Graphics/Texture2D.h>
 #include <Hacks/XNA/SpriteFont.h>
 
 struct ContentManager

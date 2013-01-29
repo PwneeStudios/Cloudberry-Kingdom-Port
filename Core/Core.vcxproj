@@ -28,6 +28,7 @@
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Audio\AudioEnums.h" />
+    <ClInclude Include="include\Graphics\Texture2D.h" />
     <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />
     <ClInclude Include="include\Audio\Song.h" />
@@ -84,6 +85,8 @@
     <ClInclude Include="include\Input\GamePadState.h" />
     <ClInclude Include="include\Input\GamePadThumbSticks.h" />
     <ClInclude Include="include\Input\GamePadTriggers.h" />
+    <ClInclude Include="include\Graphics\Video.h" />
+    <ClInclude Include="include\Graphics\VideoPlayer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp" />
@@ -140,6 +143,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Graphics\Texture2D.cpp" />
     <ClCompile Include="src\Input\GamePadPc.cpp" />
     <ClCompile Include="src\Input\GamePadWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>

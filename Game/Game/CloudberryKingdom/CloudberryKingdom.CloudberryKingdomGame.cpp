@@ -562,7 +562,7 @@ float CloudberryKingdomGame::fps = 0;
 	#endif
 
 		// FIXME: Start videos later.
-		//MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+		MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 	}
 
 	void CloudberryKingdomGame::UnloadContent()
