@@ -2196,7 +2196,7 @@ const int TEXTURE_HEIGHTS[] = {
 };
 
 
-const bool *VIDEO_MEMORY[] = {
+const bool VIDEO_MEMORY[] = {
 true,
 true,
 true,

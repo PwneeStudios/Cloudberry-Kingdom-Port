@@ -3,6 +3,7 @@
 #include <Core.h>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
+#include <Content/TextureWiiUInternal.h>
 #include <Content/Wad.h>
 #include <Graphics/Video.h>
 #include <Graphics/Texture2D.h>
@@ -70,6 +71,9 @@ static u8 g_SkipH264Rendering = 1;
 
 static H264DECResult g_H264decresult[NUM_DECODE][MAX_FRAME_BUFFER];
 static H264DECOutput g_H264decoutput[NUM_DECODE];
+
+static boost::shared_ptr< Texture2D > VideoTextures[ NUM_DECODE ][ NUM_H264_BUFFER ];
+static ResourcePtr< Texture > TextureResourcePtrs[ NUM_DECODE ][ NUM_H264_BUFFER ];
 
 typedef struct __LIST_H264DEC_FM__ {
     s32     used;
@@ -821,6 +825,9 @@ VideoPlayer::VideoPlayer()
                     0);                          // detached
 
     OSResumeThread(&Thread[0]);
+
+	InitShader();
+	InitAttribData();
 }
 
 VideoPlayer::~VideoPlayer()
@@ -832,9 +839,17 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 {
 }
 
+void VideoPlayer::DrawFrame()
+{
+	drawTVFrame();
+}
+
 boost::shared_ptr< Texture2D > VideoPlayer::GetTexture()
 {
-	boost::shared_ptr< Texture2D > tex = boost::make_shared< Texture2D >( NULL, 1280, 720 );
-	tex->texture_ = CONTENT->Load< Texture >( "Art/default.gtx" );
-	return tex;
+	u8 decIdx = 0;
+    u32 h264ReadBufIdx = (g_H264WriteBufIdx[decIdx] == 0)? 1 : 0;
+
+    GX2Invalidate(GX2_INVALIDATE_TEXTURE, g_LTexture[decIdx][h264ReadBufIdx].surface.imagePtr, g_LTexture[decIdx][h264ReadBufIdx].surface.imageSize);
+
+	return VideoTextures[ decIdx ][ h264ReadBufIdx ];
 }

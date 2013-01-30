@@ -22,6 +22,8 @@ public:
 
 	void Play( const boost::shared_ptr< Video > &video );
 
+	void DrawFrame();
+
 	boost::shared_ptr< Texture2D > GetTexture();
 
 };

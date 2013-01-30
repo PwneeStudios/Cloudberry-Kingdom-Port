@@ -184,13 +184,14 @@ bool MainVideo::Paused = false;
 		if ( ElapsedTime() > Duration )
 			Playing = false;
 
-		VEZTexture->setTex( VPlayer->GetTexture() );
+		VPlayer->DrawFrame();
+		/*VEZTexture->setTex( VPlayer->GetTexture() );
 		VEZTexture->Width = VEZTexture->getTex()->Width;
 		VEZTexture->Height = VEZTexture->getTex()->Height;
 
 		Vector2 Pos = Tools::getCurCamera()->getPos();
 		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
-		Tools::QDrawer->Flush();
+		Tools::QDrawer->Flush();*/
 
 		Subtitle();
 

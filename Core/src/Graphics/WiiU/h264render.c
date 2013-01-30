@@ -57,7 +57,7 @@ static DEMO_F32x3F32x2 QUAD_VERTEX_DATA[] = {
 static AttribBuffer g_QuadAttribData;
 static GX2Sampler g_Sampler;
 
-static char *GSHFileName = "assets/shaders/demo_gx2/cafe/simple/nv12decode.gsh";
+static char *GSHFileName = "/vol/content/Shaders/nv12decode.gsh";
 // Uniform inputs
 static s32 g_Mode[4] = {0, 0, 0, 0};
 
