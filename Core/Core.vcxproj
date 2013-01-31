@@ -28,6 +28,7 @@
     <ClInclude Include="include\Architecture\SchedulerWiiU.h" />
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Audio\AudioEnums.h" />
+    <ClInclude Include="include\Content\TextureWiiUInternal.h" />
     <ClInclude Include="include\Graphics\Texture2D.h" />
     <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />

@@ -1876,6 +1876,8 @@ VideoPlayer::~VideoPlayer()
 {
 	for( int i = 0; i < 2; ++i )
 	{
+		MP4PlayerCorePtr[ i ]->vthread_end = 1;
+		MP4PlayerCorePtr[ i ]->athread_end = 1;
 		vendflag[ i ] = 1;
 		aendflag[ i ] = 1;
 	}
@@ -1986,7 +1988,7 @@ void VideoPlayer::DrawFrame()
                     }
                 }
                 if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 1)
-                {
+    {
 
                     ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
                     if (ret != 0)
