@@ -89,6 +89,7 @@ namespace CloudberryKingdom
 
 		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
+		VPlayer->SetVolume( __max( Tools::SoundVolume->getVal(), Tools::MusicVolume->getVal() ) );
 		VPlayer->Play( CurrentVideo );
 
 		// FIXME: this will be set to something real later.

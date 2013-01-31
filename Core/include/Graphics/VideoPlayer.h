@@ -20,6 +20,8 @@ public:
 	VideoPlayer();
 	~VideoPlayer();
 
+	void SetVolume( float volume );
+
 	void Play( const boost::shared_ptr< Video > &video );
 
 	void DrawFrame();

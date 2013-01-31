@@ -38,6 +38,9 @@
 #include <cafe/h264.h>
 #include "WiiU/h264render.h"
 
+#include <fmod.hpp>
+#include <fmod_errors.h>
+
 #define DEF_PLAY_LOOP   (1)     // for test
 
 #define UVD_ALIGN_PITCH_IN_PIXELS(PitchInPixels)    ((PitchInPixels + 0xFF) & ~0xFF)
@@ -53,6 +56,7 @@
 #define MAX_LAST_IDR    (5)
 
 const char INPUT_FILENAME_TV[] = "/vol/content/Movies/Video.h264";
+const char INPUT_SOUND[] = "/vol/content/Movies/Sound.mp3";
 const char INPUT_FILENAME_DRC[] = "./vol/content/codecdemo/building.h264";
 
 // bitstream buffer size
@@ -81,6 +85,12 @@ typedef struct __LIST_H264DEC_FM__ {
 }List_H264DecFm;
 
 List_H264DecFm List_h264decfm[NUM_DECODE][MAX_FRAME_BUFFER];
+
+// Sound stuff.
+extern FMOD::System *FMODSystem;
+FMOD::Channel *MovieChannel = NULL;
+FMOD::Sound *MovieSound = NULL;
+static float Volume = 1.f;
 
 /*************************************************************
         variables
@@ -312,6 +322,15 @@ static int decode_h264(s32 intArg, void *ptrArg)
 
         prevendTime = OSGetTime();
 
+		// Prepare sound for playback.
+		FMOD_RESULT result;
+		result = FMODSystem->createStream( INPUT_SOUND, FMOD_DEFAULT, 0, &MovieSound );
+		if( result != FMOD_OK )
+		{
+			printf( "Failed to start movie soundtrack\n" );
+			MovieSound = NULL;
+		}
+
         FSInitCmdBlock(&Cmd);
 
         rbuf = (u8*)MEMAllocFromDefaultHeapEx(BUFFER_SIZE, 512);
@@ -487,6 +506,21 @@ static int decode_h264(s32 intArg, void *ptrArg)
             return -1;
         }
         printf("H264DECGetImageSize w:%d, h:%d\n", width, height);
+
+		// Start music/sound.
+		if( MovieSound )
+		{
+			result = FMODSystem->playSound( MovieChannel ? FMOD_CHANNEL_REUSE : FMOD_CHANNEL_FREE,
+				MovieSound, true, &MovieChannel );
+
+			if( result == FMOD_OK )
+			{
+				MovieChannel->setVolume( Volume );
+				MovieChannel->setPaused( false );
+			}
+			else
+				printf( "Failed to play music!\n" );
+		}
 
         // ----- ----- ----- ----- execute loop ----- ----- ----- -----
         while (1)
@@ -833,6 +867,11 @@ VideoPlayer::VideoPlayer()
 VideoPlayer::~VideoPlayer()
 {
 	delete internal_;
+}
+
+void VideoPlayer::SetVolume( float volume )
+{
+	//Volume = volume;
 }
 
 void VideoPlayer::Play( const boost::shared_ptr< Video > &video )

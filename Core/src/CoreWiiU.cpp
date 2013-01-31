@@ -45,7 +45,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	DEMOInit();
 	DEMOTestInit( 0, NULL );
-	DEMOGfxInit( 0, NULL );
+	char *gfxArgs[] = { "DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8" };
+	DEMOGfxInit( 2, gfxArgs );
 	DEMODRCInit( 0, NULL );
 
 	// Allocate space for MEM1 for process switching.
