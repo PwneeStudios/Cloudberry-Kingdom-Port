@@ -229,6 +229,8 @@ namespace CloudberryKingdom
 	StatsMenu::StatsMenu( StatGroup group ) :
 		n( 0 ), HeaderPos( 0 )
 	{
+		//PlayerManager::Players[1]->Exists = true;
+		//PlayerManager::Players[2]->Exists = true;
 	}
 	boost::shared_ptr<StatsMenu> StatsMenu::StatsMenu_Construct( StatGroup group )
 	{

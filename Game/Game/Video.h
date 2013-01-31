@@ -27,8 +27,7 @@ namespace CloudberryKingdom
 
 		static boost::shared_ptr<EzTexture> VEZTexture;
 
-		static double Duration;
-		static DateTime StartTime;
+		static double Duration, Elapsed;
 
 		static bool CanSkip;
 		static float LengthUntilUserCanSkip;
@@ -45,11 +44,8 @@ namespace CloudberryKingdom
 	
 		static void StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip );
 
-		/// <summary>
-		/// Returns the length of time the video has already been playing in seconds.
-		/// </summary>
-		/// <returns></returns>
-		static double ElapsedTime();
+
+		static void UpdateElapsedTime();
 
 		static bool Paused;
 		static void UserInput();

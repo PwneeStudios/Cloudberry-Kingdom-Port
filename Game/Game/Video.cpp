@@ -18,7 +18,7 @@ namespace CloudberryKingdom
 		MainVideo::VPlayer = 0;
 		MainVideo::VEZTexture = boost::make_shared<EzTexture>();
 		MainVideo::Duration = 0;
-		MainVideo::StartTime;
+		MainVideo::Elapsed = 0;
 		MainVideo::CanSkip = false;
 		MainVideo::LengthUntilUserCanSkip = 0;
 		MainVideo::Subtitles;
@@ -32,8 +32,7 @@ namespace CloudberryKingdom
 	boost::shared_ptr<Video> MainVideo::CurrentVideo;
 	boost::shared_ptr<VideoPlayer> MainVideo::VPlayer;
 	boost::shared_ptr<EzTexture> MainVideo::VEZTexture;
-	double MainVideo::Duration;
-	DateTime MainVideo::StartTime;
+	double MainVideo::Duration, MainVideo::Elapsed;
 	bool MainVideo::CanSkip;
 	float MainVideo::LengthUntilUserCanSkip;
 	std::vector<boost::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
@@ -89,13 +88,13 @@ namespace CloudberryKingdom
 		VPlayer->Play( CurrentVideo );
 
 		Duration = CurrentVideo->Duration.TotalSeconds;
-		StartTime = DateTime::Now();
+		Elapsed = 0;
 	}
 
-	double MainVideo::ElapsedTime()
-	{
-		return ( DateTime::Now() - StartTime ).TotalSeconds;
-	}
+    void MainVideo::UpdateElapsedTime()
+    {
+        Elapsed += Tools::TheGame->DeltaT;
+    }
 
 bool MainVideo::Paused = false;
 
@@ -118,7 +117,7 @@ bool MainVideo::Paused = false;
 	//#endif
 
 		// End the video if the user presses a key
-		if ( CanSkip && PlayerManager::Players.size() > 0 && ElapsedTime() > 0.3f || ElapsedTime() > LengthUntilUserCanSkip )
+		if ( CanSkip && PlayerManager::Players.size() > 0 && Elapsed > 0.3f || Elapsed > LengthUntilUserCanSkip )
 		{
 			// Update songs
 			if ( Tools::SongWad != 0 )
@@ -143,7 +142,7 @@ bool MainVideo::Paused = false;
 			return;
 
 		boost::shared_ptr<SubtitleAction> NextSubtitle = Subtitles[ SubtitleIndex ];
-		if ( ElapsedTime() > NextSubtitle->Time )
+		if ( Elapsed > NextSubtitle->Time )
 		{
 			switch ( NextSubtitle->MyAction )
 			{
@@ -175,10 +174,11 @@ bool MainVideo::Paused = false;
 
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
+		UpdateElapsedTime();
 		UserInput();
 
-		if ( ElapsedTime() > Duration )
-			Playing = false;
+        if ( Elapsed > Duration )
+            Playing = false;
 
 		VEZTexture->setTex( VPlayer->GetTexture() );
 		VEZTexture->Width = VEZTexture->getTex()->Width;

@@ -375,7 +375,8 @@ Words_NotRanked,
 Words_NotRankedFriends,
 Words_TotalArcade,
 Words_Select,
-Words_SignIn
+Words_SignIn,
+Words_Chapter,
 		};
 
 	
