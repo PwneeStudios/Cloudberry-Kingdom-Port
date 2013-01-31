@@ -1122,7 +1122,10 @@ namespace CloudberryKingdom
 			InitSectionDraw();
 
 			for ( int i = 1; i < N; i += 2 )
-				DrawSection( i, Loc );
+			{
+				//DrawSection( i, Loc );
+				Tools::QDrawer->DrawCircleDot( Loc[ i ] );
+			}
 
 			if ( Loc.size() > 0 && N > Step )
 				DrawGuidePiece( Step, Loc, 2 );

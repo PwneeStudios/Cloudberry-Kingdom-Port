@@ -9,6 +9,16 @@ uniform sampler2D u_texture;
 
 void main()
 {
-    gl_FragColor = v_color * texture( u_texture, v_texcoord );
+    float d = ( v_texcoord.x - .5 ) * ( v_texcoord.x - .5 ) + ( v_texcoord.y - .5 ) * ( v_texcoord.y - .5 );
+    //vec4 baseColor = texture( u_texture, v_texcoord );
+    
+    vec4 _output = v_color;
+	
+    _output.a *= clamp( 100 * ( .25 - d ), 0.0, 1.0 );
+
+    // Premultiply the alpha
+    _output.rgb *= _output.a;
+	        
+    gl_FragColor = _output;
 }
 

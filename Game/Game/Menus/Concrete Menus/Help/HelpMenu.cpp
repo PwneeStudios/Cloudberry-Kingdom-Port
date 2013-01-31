@@ -143,7 +143,7 @@ namespace CloudberryKingdom
 
 	void HelpMenu::SlowMoProxy::Apply()
 	{
-		hm->SlowMo();
+		hm->DoSlowMo();
 	}
 
 	int HelpMenu::CampaignCoinsLambda::Apply( const boost::shared_ptr<PlayerData> &p )
@@ -291,7 +291,7 @@ namespace CloudberryKingdom
 	{
 		if ( state )
 		{
-			boost::shared_ptr<ShowGuide> guide = boost::make_shared<ShowGuide>();
+			boost::shared_ptr<ShowGuide> guide = MakeMagic( ShowGuide, () );
 
 			MyGame->AddGameObject( guide );
 		}
@@ -329,7 +329,7 @@ namespace CloudberryKingdom
 	{
 		if ( state )
 		{
-			boost::shared_ptr<CloudberryKingdom::SlowMo> slowmo = boost::make_shared<CloudberryKingdom::SlowMo>();
+			boost::shared_ptr<SlowMo> slowmo = MakeMagic( SlowMo, () );
 			slowmo->setControl( getControl() );
 
 			MyGame->AddGameObject( slowmo );
@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 		}
 	}
 
-	void HelpMenu::SlowMo()
+	void HelpMenu::DoSlowMo()
 	{
 		if ( !Allowed_SlowMo() )
 			return;
@@ -454,7 +454,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> PathItem;
 		if ( On_ShowPath() )
 		{
-			item = MakeMagic( MenuToggle, ( ItemFont ) );
+			item = toggle = MakeMagic( MenuToggle, ( ItemFont ) );
 			toggle->OnToggle = boost::make_shared<Toggle_ShowPathProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ) );
 			toggle->Toggle( true );
 		}
@@ -477,7 +477,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> SlowItem;
 		if ( On_SlowMo() )
 		{
-			item = MakeMagic( MenuToggle, ( ItemFont ) );
+			item = toggle = MakeMagic( MenuToggle, ( ItemFont ) );
 			toggle->OnToggle = boost::make_shared<Toggle_SlowMoProxy>( boost::static_pointer_cast<HelpMenu>( shared_from_this() ));
 			toggle->Toggle( true );
 		}
