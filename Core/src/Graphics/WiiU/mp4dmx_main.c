@@ -1,12 +1,18 @@
-#include <Graphics/VideoPlayer.h>
+/*---------------------------------------------------------------------------*
 
-#include <Core.h>
-#include <Content/ResourcePtr.h>
-#include <Content/Texture.h>
-#include <Content/TextureWiiUInternal.h>
-#include <Content/Wad.h>
-#include <Graphics/Video.h>
-#include <Graphics/Texture2D.h>
+  Copyright 2011 Nintendo.  All rights reserved.
+
+  These coded instructions, statements, and computer programs contain
+  proprietary information of Nintendo of America Inc. and/or Nintendo
+  Company Ltd., and are protected by Federal copyright law.  They may
+  not be disclosed to third parties or copied or duplicated in any form,
+  in whole or in part, without the prior written consent of Nintendo.
+
+ *---------------------------------------------------------------------------*/
+
+/*=========================================================================*
+            includes
+ *=========================================================================*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -18,9 +24,14 @@
 #include <cafe/ax.h>
 #include <cafe/mix.h>
 #include <cafe/ai.h>
-#include "WiiU/MovieTest.h"
-#include "WiiU/videorender.h"
-
+#ifdef USE_PROCESS_SWITCHING
+#include <cafe/vpad.h>
+#endif
+#ifdef PROFILE_ENABLE
+#include <cafe/profiler.h>
+#endif
+#include "MovieTest.h"
+#include "videorender.h"
 
 #pragma ghs nowarning 111
 
@@ -30,11 +41,9 @@
 
 #define UNASSIGNED_END_TIME_STAMP   0xFFFFFFFFFFFFFFFFULL
 
-#define INPUTNAME_DEFINED
-
 #ifdef INPUTNAME_DEFINED
-#define MP4_INPUT_SAMPLE1       "/vol/content/Movies/TestVideo9.mp4";    // TV
-#define MP4_INPUT_SAMPLE2       "/vol/content/Movies/TestVideo9.mp4";          // DRC
+#define MP4_INPUT_SAMPLE1       "/vol/content/codecdemo/01_sample_base.mp4";    // TV
+#define MP4_INPUT_SAMPLE2       "/vol/content/codecdemo/metronome_8M720p30p.mp4";          // DRC
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
@@ -92,10 +101,6 @@ const char       fileName[2][1024];
 
 s32     LoopCounter[2];
 
-FSClient*      GpClient[2];
-FSCmdBlock*    GpCmd[2];
-FSFileHandle   Gfh[2];
-
 #ifdef USE_PROCESS_SWITCHING
 OSEvent gDoRelease;
 OSEvent gAcquired;
@@ -120,6 +125,9 @@ s32 exc_start_time_stamp[2];
 s32 exc_end_time_stamp[2];
 #endif
 
+FSClient*      GpClient[2];
+FSCmdBlock*    GpCmd[2];
+FSFileHandle   Gfh[2];
 
 /*-------------------------------------------------------------------------*
     Name:           ProcessChangeWait
@@ -782,7 +790,7 @@ s32 cbGetMediaSampleData(MP4DMXFW_UNIT *unit, void *handle)
             if (MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].Status == 0)
             {
                 MP4PlayerCorePtr[threadnum]->voutfound = 1;
-                MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].bufp = reinterpret_cast< u8 * >( unit->sample->data_ptr );
+                MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].bufp = unit->sample->data_ptr;
                 MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].PTS = unit->sample->pts;
                 MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].Size = (s32)unit->sample->size;
                 MP4PlayerCorePtr[threadnum]->OutputVideoInfo[MP4PlayerCorePtr[threadnum]->ff_v].Status = 1;
@@ -898,12 +906,12 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
     MP4PlayerCorePtr[intArg]->streamFullBuffer = (u8 *)MEMAllocFromDefaultHeapEx(FILEMEMORYSIZE, 64);
 
     // Allocate buffers.
-    GpClient[intArg] = reinterpret_cast< FSClient * >( MEMAllocFromDefaultHeap(sizeof(FSClient)) );
+    GpClient[intArg] = MEMAllocFromDefaultHeap(sizeof(FSClient));
     if (!GpClient[intArg])
     {
         OSHalt("Error: cannot allocate memory for fs client.\n");
     }
-    GpCmd[intArg]    = reinterpret_cast< FSCmdBlock * >( MEMAllocFromDefaultHeap(sizeof(FSCmdBlock)) );
+    GpCmd[intArg]    = MEMAllocFromDefaultHeap(sizeof(FSCmdBlock));
     if (!GpCmd[intArg])
     {
         OSHalt("Error: cannot allocate memory for command block.\n");
@@ -1860,51 +1868,109 @@ int sCore2Main(int intArg, void *ptrArg)
 #endif
 #endif
 
-struct VideoPlayerInternal
+
+/*-------------------------------------------------------------------------*
+    Name:           main
+    Description:    
+    Arguments:      
+    Returns:        
+ *-------------------------------------------------------------------------*/
+s32 main(s32 argc, s8* argv[])
 {
-};
+    s32 initargc = 2;
+    s8* initargv[] = {"DEMO_CB_FORMAT 8_8_8_8", "DEMO_SCAN_FORMAT 8_8_8_8"};
+#ifdef USE_PROCESS_SWITCHING
+    static VPADStatus s_vpads[VPAD_MAX_CONTROLLERS][VPAD_MAX_READ_BUFS];
+#endif
 
-VideoPlayer::VideoPlayer()
-	: internal_( new VideoPlayerInternal )
-	, IsLooped( false )
-{
-	InitShader();
-    InitAttribData();
-}
+    //=====================================================================
+    // Demo Setup
+    //=====================================================================
 
-VideoPlayer::~VideoPlayer()
-{
-	for( int i = 0; i < 2; ++i )
-	{
-		vendflag[ i ] = 1;
-		aendflag[ i ] = 1;
-	}
+#ifdef PROFILE_ENABLE
+    BOOL profInitResult; void *buffer = MEMAllocFromDefaultHeap(PROFILER_MINBUFFERSIZE);
+    PROFILERInitialize(buffer, PROFILER_MINBUFFERSIZE);
+    PROFILERSetDefaultProfileSettings(0, PROFILER_SETTINGS_FLAGS_CALLSTACK, 0, PROFILERSampleRate_100x);
+    PROFILERStart();
+#endif
 
-	OSJoinThread(&Thread[2], NULL);
-    OSJoinThread(&Thread[3], NULL);
+#ifndef INPUTNAME_DEFINED
+    /* get the input file name */
+    if (argc != 3)
+    {
+        OSReport("[ERROR] please set input_file name.\n");
+        OSReport("[Usage] caferun mp4demux_movie.elf input_filename_for_TV input_filename_for_DRC\n");
+        return DEMOTestResult();
+    }
+    else
+    {
+        strncpy(fileName[0], argv[1], 1023);
+        fileName[0][1023] = '\0';
+        OSReport("TV file name:%s\n", argv[1]);
+        strncpy(fileName[1], argv[2], 1023);
+        fileName[1][1023] = '\0';
+        OSReport("DRC file name:%s\n", argv[2]);
+    }
+#endif
 
-    OSJoinThread(&Thread[0], NULL);
-    OSJoinThread(&Thread[1], NULL);
-
-	FreeShader();
-	FreeAttribData();
-
-	delete internal_;
-}
-
-void VideoPlayer::SetVolume( float volume )
-{
-	//Volume = volume;
-}
-
-void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
-{
 #ifdef INPUTNAME_DEFINED
     mp4Filename[0] = MP4_INPUT_SAMPLE1;     // set input file name
     mp4Filename[1] = MP4_INPUT_SAMPLE2;     // set input file name
 #endif
+    // give the system a few seconds to get ready
+    OSSleepSeconds(5);
 
-	vendflag[0] = 0;
+    DEMOInit();
+    DEMOTestInit(argc, (char **)argv);
+#ifdef USE_PROCESS_SWITCHING
+    DEMOPadInit();
+    VPADInit();
+#endif
+    DEMOGfxInit(initargc, (char **)initargv);
+    DEMODRCInit(argc, (char **)argv);
+    DEMOFontInit();
+    FSInit();
+
+    InitShader();
+    InitAttribData();
+
+#ifdef USE_PROCESS_SWITCHING
+    pSysQueue = OSGetSystemMessageQueue();
+
+    /* init switching signals */
+    OSInitEvent(&gDoRelease, FALSE, OS_EVENT_MANUAL);
+    OSInitEvent(&gAcquired, FALSE, OS_EVENT_MANUAL);
+    OSInitEvent(&gDoRelease_[0], FALSE, OS_EVENT_MANUAL);
+    OSInitEvent(&gAcquired_[0], FALSE, OS_EVENT_MANUAL);
+    OSInitEvent(&gDoRelease_[1], FALSE, OS_EVENT_MANUAL);
+    OSInitEvent(&gAcquired_[1], FALSE, OS_EVENT_MANUAL);
+#ifdef USE_SINGLE_CORE
+    OSRunThread(OSGetDefaultThread(0), sCore0Main, 0, NULL);
+    OSRunThread(OSGetDefaultThread(2), sCore2Main, 0, NULL);
+    OSReport("Core0:dummy\n");
+    OSReport("Core1:MP4Player Thread\n");
+    OSReport("Core2:dummy\n");
+#else
+#if TEST_MODE == 1
+    OSRunThread(OSGetDefaultThread(2), sCore2Main, 0, NULL);
+    OSReport("Core0:MP4Player[TV] Thread\n");
+    OSReport("Core1:Video Render & Audio Control Thread\n");
+    OSReport("Core2:dummy\n");
+#elif TEST_MODE == 2
+    OSRunThread(OSGetDefaultThread(0), sCore0Main, 0, NULL);
+    OSReport("Core0:dummy\n");
+    OSReport("Core1:Video Render & Audio Control Thread\n");
+    OSReport("Core2:MP4Player[DRC] Thread\n");
+#else
+    OSReport("Core0:MP4Player[TV] Thread\n");
+    OSReport("Core1:Video Render & Audio Control Thread\n");
+    OSReport("Core2:MP4Player[DRC] Thread\n");
+#endif
+#endif
+
+#endif
+
+    vendflag[0] = 0;
     aendflag[0] = 0;
     sys_timestart[0] = 0;
     sys_basetime[0] = 0;
@@ -1915,15 +1981,15 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
     LoopCounter[0] = 0;
     LoopCounter[1] = 0;
 
-	// Create the video thread.
-    /*OSCreateThread( &Thread[0],   // ptr to the thread to init
+    // Create the video thread.
+    OSCreateThread( &Thread[0],   // ptr to the thread to init
                     VideoOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
                     ThreadStack[0] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
-                    0);*/         // detached
+                    0);         // detached
 
     // Create the audio thread.
     OSCreateThread( &Thread[1],   // ptr to the thread to init
@@ -1938,7 +2004,64 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
     OSResumeThread(&Thread[0]);
     OSResumeThread(&Thread[1]);
 
-	// Create the play thread.
+#ifdef USE_PROCESS_SWITCHING
+    debounce = 0;
+    debounce_[0] = 0;
+    debounce_[1] = 0;
+    inForeground = TRUE;
+    inForeground_[0] = TRUE;
+    inForeground_[1] = TRUE;
+    process_sleep_time = 0;
+    threadabort[0][0] = threadabort[0][1] = threadabort[0][2] = 0;
+    threadabort[1][0] = threadabort[1][1] = threadabort[1][2] = 0;
+    CoreDecodeActive[0] = TRUE;
+    CoreDecodeActive[1] = TRUE;
+    CoreDecodeSleep[0] = FALSE;
+    CoreDecodeSleep[1] = FALSE;
+    CoreDecodeEnd[0] = FALSE;
+    CoreDecodeEnd[1] = FALSE;
+    CoreProcessEnd = FALSE;
+#endif
+
+    // initialize audio system and MIXer application
+    AXInit();
+    AXSetMode(AX_MODE_STEREO);
+
+    // You do not need to do these two statements
+    // if you are to use only the DSP mixer
+//        __AXMixInit(AXMIX_DSP_ENABLE|AXMIX_PPC_ENABLE);
+    AXSetDefaultMixerSelect(AX_PB_MIXER_SELECT_DSP);
+
+    MIXInit();
+    MIXSetSoundMode(MIX_SOUND_MODE_STEREO);
+
+    //=====================================================================
+    // Demo Start
+    //=====================================================================
+
+#if !defined(USE_PROCESS_SWITCHING) || defined(USE_SINGLE_CORE)
+#if TEST_MODE == 1
+    // Create the play thread.
+    OSCreateThread( &Thread[2],   // ptr to the thread to init
+                    MP4PlayTVorDRC,                 // ptr to the start routine
+                    0,                              // params passed to start routine
+                    NULL,
+                    ThreadStack[2] + STACK_SIZE,    // initial stack address
+                    STACK_SIZE,                     // stack size
+                    16,                             // scheduling priority
+                    0);         // detached
+#elif TEST_MODE == 2
+    // Create the play thread.
+    OSCreateThread( &Thread[3],   // ptr to the thread to init
+                    MP4PlayTVorDRC,                 // ptr to the start routine
+                    1,                              // params passed to start routine
+                    NULL,
+                    ThreadStack[3] + STACK_SIZE,    // initial stack address
+                    STACK_SIZE,                     // stack size
+                    16,                             // scheduling priority
+                    0);         // detached
+#else
+    // Create the play thread.
     OSCreateThread( &Thread[2],   // ptr to the thread to init
                     MP4PlayTVorDRC,                 // ptr to the start routine
                     0,                              // params passed to start routine
@@ -1956,65 +2079,284 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
                     0);         // detached
+#endif
+#endif
 
+    // Start the play thread.
+#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
+#if TEST_MODE == 1
+    OSRunThread(OSGetDefaultThread(0), MP4PlayTVorDRC,  0, NULL);
+#elif TEST_MODE == 2
+    OSRunThread(OSGetDefaultThread(2), MP4PlayDRC, 1, NULL);
+#else
+    OSRunThread(OSGetDefaultThread(0), MP4PlayTVorDRC,  0, NULL);
+    OSRunThread(OSGetDefaultThread(2), MP4PlayDRC, 1, NULL);
+#endif
+#else
+#if TEST_MODE == 1
+    OSResumeThread(&Thread[2]);
+#elif TEST_MODE == 2
+    OSResumeThread(&Thread[3]);
+#else
     OSResumeThread(&Thread[2]);
     OSResumeThread(&Thread[3]);
-}
+#endif
+#endif
 
-void VideoPlayer::DrawFrame()
-{
-    s32 ret;
-    u32 vsys_currtime;
-
-    vsys_currtime = OSTicksToMilliseconds(OSGetTime());
-	for( int i = 0; i < 1; i++ )
+    // thread finish waitting
+    while (1)
     {
-        if ((vendflag[i] == 0) && sys_timestart[i])
+#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
+#if TEST_MODE == 1
+        if ((CoreDecodeEnd[0]==TRUE))
+#elif TEST_MODE == 2
+        if ((CoreDecodeEnd[1]==TRUE))
+#else
+        if ((CoreDecodeEnd[0]==TRUE) && 
+            (CoreDecodeEnd[1]==TRUE))
+#endif
+#else
+#if TEST_MODE == 1
+        if ((OSIsThreadTerminated(&Thread[2])==TRUE))
+#elif TEST_MODE == 2
+        if ((OSIsThreadTerminated(&Thread[3])==TRUE))
+#else
+        if ((OSIsThreadTerminated(&Thread[2])==TRUE) && 
+            (OSIsThreadTerminated(&Thread[3])==TRUE))
+#endif
+#endif
         {
-            if (((vsys_currtime - sys_basetime[i]) >= MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS))
+            break;
+        }
+
+#ifdef USE_PROCESS_SWITCHING
+        {
+            // ------------------------------- //
+            // beginning of process switch detect
+            // ------------------------------- //
+            static OSMessage       msg;
+            static BOOL            ok;
+            static s32 starttime, endtime;
+
+            // Memory for VPAD reads
+            s32 vpadErr;
             {
-                if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS)
+                if (OSReceiveMessage(pSysQueue, &msg, OS_MESSAGE_NOBLOCK))
                 {
-                    if ((((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS) > VIDEOSKIP_DELAY))
+                    if (msg.data0 == OS_SYSTEM_MESSAGE_DATA0_RELEASE_FOREGROUND)
                     {
-                        MP4PlayerCorePtr[i]->FrameSkipFlag = 1;
-                        OSReport("FrameSkip\n");
+#ifndef USE_SINGLE_CORE
+                        CoreDecodeActive[0] = FALSE;
+                        CoreDecodeActive[1] = FALSE;
+#if TEST_MODE == 1
+                        while (CoreDecodeSleep[0] == FALSE);
+#elif TEST_MODE == 2
+                        while (CoreDecodeSleep[1] == FALSE);
+#else
+                        while ((CoreDecodeSleep[0] == FALSE) || (CoreDecodeSleep[1] == FALSE));
+#endif
+                        inForeground = FALSE;
+                        starttime = OSTicksToMilliseconds(OSGetTime());
+#if TEST_MODE == 1
+                        while (!threadabort[0][0] || !threadabort[0][1])
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[0][0]:%d, threadabort[0][1]:%d\n", threadabort[0][0], threadabort[0][1]);
+                        }
+                        AudioProcessPause(0);
+#elif TEST_MODE == 2
+                        while (!threadabort[1][0] || !threadabort[1][1])
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[1][0]:%d, threadabort[1][1]:%d\n", threadabort[1][0], threadabort[1][1]);
+                        }
+                        AudioProcessPause(1);
+#else
+                        while ((!threadabort[0][0] && !threadabort[1][0]) || (!threadabort[0][1] && !threadabort[1][1]))
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[0][0]:%d, threadabort[0][1]:%d, threadabort[1][0]:%d, threadabort[1][1]:%d\n", threadabort[0][0], threadabort[0][1], threadabort[1][0], threadabort[1][1]);
+                        }
+                        AudioProcessPause(0);
+                        AudioProcessPause(1);
+#endif
+#else
+                        inForeground = FALSE;
+                        starttime = OSTicksToMilliseconds(OSGetTime());
+#if TEST_MODE == 1
+                        while (!threadabort[0][0] || !threadabort[0][1] || !threadabort[0][2])
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[0][0]:%d, threadabort[0][1]:%d, threadabort[0][2]:%d\n", threadabort[0][0], threadabort[0][1], threadabort[0][2]);
+                        }
+                        AudioProcessPause(0);
+#elif TEST_MODE == 2
+                        while (!threadabort[1][0] || !threadabort[1][1] || !threadabort[1][2])
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[1][0]:%d, threadabort[1][1]:%d, threadabort[1][2]:%d\n", threadabort[1][0], threadabort[1][1], threadabort[1][2]);
+                        }
+                        AudioProcessPause(1);
+#else
+                        while ((!threadabort[0][0] && !threadabort[1][0]) || (!threadabort[0][1] && !threadabort[1][1]) || !threadabort[0][2] || !threadabort[1][2])
+                        {
+                            OSYieldThread();
+//                            OSReport("threadabort[0][0]:%d, threadabort[0][1]:%d, threadabort[0][2]:%d, threadabort[1][0]:%d, threadabort[1][1]:%d, threadabort[1][2]:%d\n",
+//                                threadabort[0][0], threadabort[0][1], threadabort[0][2], threadabort[1][0], threadabort[1][1], threadabort[1][2]);
+                        }
+                        AudioProcessPause(0);
+                        AudioProcessPause(1);
+#endif
+#endif
+                        OSResetEvent(&gAcquired);
+                        OSSignalEvent(&gDoRelease);
+                        DEMODRCReleaseForeground();
+                        DEMOGfxReleaseForeground();
+                        VPADShutdown();
+                        OSSavesDone_ReadyToRelease();
+                        OSReleaseForeground();
+                        OSSleepMilliseconds(10);
                     }
-                    else
+                    else if (msg.data0 == OS_SYSTEM_MESSAGE_DATA0_EXIT)
                     {
-                        MP4PlayerCorePtr[i]->FrameSkipFlag = 0;
+                        OSReport("Received request to Exit from Kernel\n");
+                        DEMOStopRunning();
                     }
-                }
-                if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 1)
-                {
+                }else if (inForeground){
+                    // get input / do ai + physics, etc
+                    DEMOPadRead();
 
-                    ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
-                    if (ret != 0)
-                    {
-                        OSReport("VideoDraw Failed.\n");
-                        vendflag[i] = 1;
-                        break;
-                    }
-                    MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS = 0x7FFFFFFF;
-                    MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status = 0;
-                    MP4PlayerCorePtr[i]->df_v++;
-                    if (MP4PlayerCorePtr[i]->df_v == VIDEO_BUFFER_NUM)
-                    {
-                        MP4PlayerCorePtr[i]->df_v = 0;
-                    }
+                    VPADRead(0, &s_vpads[0][0], VPAD_MAX_READ_BUFS, &vpadErr);
 
+                    // check for HBM press+release
+                    if (DEMOPadGetButtonDown(0) & DEMO_PAD_BUTTON_START)
+                        debounce = 1;
+                    else if (s_vpads[0][0].release & VPAD_BUTTON_HOME)
+                        debounce = 1;
+#ifndef USE_SINGLE_CORE
+                    else if (debounce && debounce_[0] && debounce_[1])
+#else
+                    else if (debounce)
+#endif
+                    {
+                        debounce = 0;
+                        OSReport("\nSwitch To HBM!\n");
+                        ok = OSSendAppSwitchRequest(PFID_HomeButtonMenu, (void *)"Pause", 6);
+                        if (!ok)
+                        {
+                            OSReport("OSSendAppSwitchRequest() failed.\n");
+                        }
+                        else
+                            OSReport("Sent Request ok.\n\n");
+                    }
                 }
             }
-            if (!vendflag[i] && MP4PlayerCorePtr[i]->vthread_end && (MP4PlayerCorePtr[i]->df_v == MP4PlayerCorePtr[i]->ff_v) && (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 0))
+            // ---------------------------- //
+            // end of process switch detect
+            // ---------------------------- //
+            OSYieldThread();
+
+            while(!inForeground)
             {
-                OSReport("Video[%d] Thread End\n", i);
-                vendflag[i] = 1;
+                if (OSReceiveMessage(pSysQueue, &msg, OS_MESSAGE_NOBLOCK))
+                {
+                    if (msg.data0 == OS_SYSTEM_MESSAGE_DATA0_ACQUIRED_FOREGROUND)
+                    {
+                        VPADInit();
+                        DEMOGfxAcquiredForeground();
+                        DEMODRCAcquiredForeground();
+
+                        DEMOGfxSetContextState();
+                        InitShader();
+                        InitAttribData();
+
+                        OSResetEvent(&gDoRelease);
+                        OSSignalEvent(&gAcquired);
+
+                        endtime = OSTicksToMilliseconds(OSGetTime());
+                        process_sleep_time = endtime - starttime;
+                        sys_basetime[0] += process_sleep_time;
+                        sys_basetime[1] += process_sleep_time;
+
+#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
+#if TEST_MODE == 1
+                        if (CoreDecodeEnd[0]==FALSE)
+                        {
+                            AudioProcessReStart(0);
+                        }
+#elif TEST_MODE == 2
+                        if (CoreDecodeEnd[1]==FALSE)
+                        {
+                            AudioProcessReStart(1);
+                        }
+#else
+                        if (CoreDecodeEnd[0]==FALSE)
+                        {
+                            AudioProcessReStart(0);
+                        }
+                        if (CoreDecodeEnd[1]==FALSE)
+                        {
+                            AudioProcessReStart(1);
+                        }
+#endif
+#else
+#if TEST_MODE == 1
+                        AudioProcessReStart(0);
+#elif TEST_MODE == 2
+                        AudioProcessReStart(1);
+#else
+                        AudioProcessReStart(0);
+                        AudioProcessReStart(1);
+#endif
+#endif
+
+#ifndef USE_SINGLE_CORE
+                        CoreDecodeActive[0] = TRUE;
+                        CoreDecodeActive[1] = TRUE;
+#endif
+                        inForeground = TRUE;
+                    }
+                }
             }
         }
+#endif
+        OSYieldThread();
     }
-}
 
-boost::shared_ptr< Texture2D > VideoPlayer::GetTexture()
-{
-	return boost::shared_ptr< Texture2D >( NULL );
+    //=====================================================================
+    // Demo Exit
+    //=====================================================================
+
+#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
+    CoreProcessEnd = TRUE;
+    OSSleepMilliseconds(10);
+#else
+#if TEST_MODE == 1
+    OSJoinThread(&Thread[2], NULL);
+#elif TEST_MODE == 2
+    OSJoinThread(&Thread[3], NULL);
+#else
+    OSJoinThread(&Thread[2], NULL);
+    OSJoinThread(&Thread[3], NULL);
+#endif
+#endif
+
+//    shutdownAudioSystem();
+
+    OSJoinThread(&Thread[0], NULL);
+    OSJoinThread(&Thread[1], NULL);
+
+    FreeShader();
+    FreeAttribData();
+    // demo shutdown
+    DEMOGfxShutdown();
+#ifdef USE_PROCESS_SWITCHING
+    VPADShutdown();
+    DEMOPadShutdown();
+#endif
+    DEMOShutdown();
+
+    OSReport("MP4Player demo finish.\n");
+
+    return DEMOTestResult();
 }

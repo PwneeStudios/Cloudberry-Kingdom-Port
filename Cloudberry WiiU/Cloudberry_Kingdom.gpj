@@ -7,8 +7,9 @@
 	-o Cloudberry_Kingdom.elf
 	-I.
 	-laacdec.a
-	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodexL.a
+	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodex.a
 	-lh264.a
+	-lmp4dmx.a
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp

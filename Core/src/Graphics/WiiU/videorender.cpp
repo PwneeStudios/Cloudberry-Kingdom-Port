@@ -1,6 +1,6 @@
 /*---------------------------------------------------------------------------*
 
-  Copyright 2010-2011 Nintendo.  All rights reserved.
+  Copyright 2011 Nintendo.  All rights reserved.
 
   These coded instructions, statements, and computer programs contain
   proprietary information of Nintendo of America Inc. and/or Nintendo
@@ -20,35 +20,28 @@
 
 #include <stdio.h>    //for sprintf
 #include <cafe/demo.h>
-#include <cafe/h264.h>
 
-#include "h264render.h"
+#include    <cafe/h264.h>
+#include    "videorender.h"
 
 // --------- GX2 Data ---------
 
-GX2Texture      g_LTexture[NUM_DECODE][NUM_H264_BUFFER];
-GX2Texture      g_UVTexture[NUM_DECODE][NUM_H264_BUFFER];
-
-u32             g_H264WriteBufIdx[NUM_DECODE] = {0, 0};
+GX2Texture      g_LTexture[2];
+GX2Texture      g_UVTexture[2];
 
 // Shader data
 static DEMOGfxShader s_Shader;
 
-#if 1
 static DEMO_F32x3F32x2 QUAD_VERTEX_DATA[] = {
-    {-1.0f, 1.0f, 0.0f, 0.0f,  0.0f},
-    { 1.0f, 1.0f, 0.0f, 1.0f,  0.0f},
-    {-1.0f,-1.0f, 0.0f, 0.0f,  1.0f},
-    { 1.0f,-1.0f, 0.0f, 1.0f,  1.0f},
+    {-1.f,  1.f, 0.0f,
+      0.0f,  0.0f,},
+    { 1.f,  1.f, 0.0f,
+      1.0f,  0.0f},
+    {-1.f, -1.f, 0.0f,
+      0.0f,  1.0f},
+    { 1.f, -1.f, 0.0f,
+      1.0f,  1.0f},
 };
-#else
-static DEMO_F32x3F32x2 QUAD_VERTEX_DATA[] = {
-    {-0.9f, 0.9f, 0.0f, 0.0f,  0.0f},
-    { 0.9f, 0.9f, 0.0f, 1.0f,  0.0f},
-    {-0.9f,-0.9f, 0.0f, 0.0f,  1.0f},
-    { 0.9f,-0.9f, 0.0f, 1.0f,  1.0f},
-};
-#endif
 
 #define POS_OFFSET 0
 #define TEXCOORD_OFFSET (sizeof(DEMO_F32x3))
@@ -60,6 +53,7 @@ static GX2Sampler g_Sampler;
 static char *GSHFileName = "/vol/content/Shaders/nv12decode.gsh";
 // Uniform inputs
 static s32 g_Mode[4] = {0, 0, 0, 0};
+
 
 // The initialization function for the rendering portions of this sample.
 // It is responsible for allocating the three types of shaders and buffers
@@ -126,39 +120,39 @@ void FreeShader()
     DEMOGfxFreeShaders(&s_Shader);
 }
 
-void InitVideoBuffer(u8 decIdx, u8 bufIdx, u16 width, u16 height)
+void InitVideoBuffer(s32 dest, u16 width, u16 height)
 {
     // Set up another linear L8 texture
-    GX2InitTexture(&g_LTexture[decIdx][bufIdx],
+    GX2InitTexture(&g_LTexture[dest],
                    width,  // width
                    height,  // height
                    1,      // depth
                    1,      // num mips
                    GX2_SURFACE_FORMAT_TC_R8_UNORM,
                    GX2_SURFACE_DIM_2D);
-    g_LTexture[decIdx][bufIdx].surface.tileMode = GX2_TILE_MODE_LINEAR_ALIGNED;
+    g_LTexture[dest].surface.tileMode = GX2_TILE_MODE_LINEAR_ALIGNED;
 
     //pitch setting doesn't seem to have any affect
     //Ltex.surface.pitch    = UVD_ALIGN_PITCH_IN_PIXELS(BITSTREAM_HEIGHT);
     // Recalculate, reinit due to tileMode change
-    GX2CalcSurfaceSizeAndAlignment(&g_LTexture[decIdx][bufIdx].surface);
-    GX2InitTextureRegs(&g_LTexture[decIdx][bufIdx]);
+    GX2CalcSurfaceSizeAndAlignment(&g_LTexture[dest].surface);
+    GX2InitTextureRegs(&g_LTexture[dest]);
 
     // Set up another linear UV8 texture
-    GX2InitTexture(&g_UVTexture[decIdx][bufIdx],
+    GX2InitTexture(&g_UVTexture[dest],
                    width/2,  // width
                    height/2,  // height
                    1,      // depth
                    1,      // num mips
                    GX2_SURFACE_FORMAT_TC_R8_G8_UNORM,
                    GX2_SURFACE_DIM_2D);
-    g_UVTexture[decIdx][bufIdx].surface.tileMode = GX2_TILE_MODE_LINEAR_ALIGNED;
+    g_UVTexture[dest].surface.tileMode = GX2_TILE_MODE_LINEAR_ALIGNED;
 
     //pitch setting doesn't seem to have any affect
     //UVtex.surface.pitch    = UVD_ALIGN_PITCH_IN_PIXELS(BITSTREAM_HEIGHT);
     // Recalculate, reinit due to tileMode change
-    GX2CalcSurfaceSizeAndAlignment(&g_UVTexture[decIdx][bufIdx].surface);
-    GX2InitTextureRegs(&g_UVTexture[decIdx][bufIdx]);
+    GX2CalcSurfaceSizeAndAlignment(&g_UVTexture[dest].surface);
+    GX2InitTextureRegs(&g_UVTexture[dest]);
 }
 
 // Initialize attribute buffer and data
@@ -196,17 +190,17 @@ void FreeAttribData()
 void drawTVFrame()
 {
     u32 attribBuffer = 0;
-    u8 decIdx = 0;
-    u32 h264ReadBufIdx = (g_H264WriteBufIdx[decIdx] == 0)? 1 : 0;
 
-    GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.0f, 0.0f, 1.0f);
+    // When using the DEMO library, it is necessary to call
+    // DEMOGfxBeforeRender and DEMOGfxDoneRender before and after drawing.
+    // This function waits for the previous flip to complete.
+//    DEMOGfxBeforeRender();
+
+    GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.3, 0.45, 1.0f);
     GX2ClearDepthStencil(&DEMODepthBuffer, GX2_CLEAR_BOTH);
 
     // Restore state that was saved when DEMOGfxInit was called.
     DEMOGfxSetContextState();
-
-    GX2SetColorBuffer(&DEMOColorBuffer, GX2_RENDER_TARGET_0);
-    GX2SetDepthBuffer(&DEMODepthBuffer);
 
     // Set Attrib buffer
     GX2SetAttribBuffer(attribBuffer,
@@ -219,16 +213,12 @@ void drawTVFrame()
                    s_Shader.pVertexShader,
                    s_Shader.pPixelShader);
 
-    // Invalidate texture cache
-    GX2Invalidate(GX2_INVALIDATE_TEXTURE, g_LTexture[decIdx][h264ReadBufIdx].surface.imagePtr, g_LTexture[decIdx][h264ReadBufIdx].surface.imageSize);
-    GX2Invalidate(GX2_INVALIDATE_TEXTURE, g_UVTexture[decIdx][h264ReadBufIdx].surface.imagePtr, g_UVTexture[decIdx][h264ReadBufIdx].surface.imageSize);
-
     // Set L Texture and sampler
-    GX2SetPixelTexture(&g_LTexture[decIdx][h264ReadBufIdx], s_Shader.samplersPS.location[0]);
+    GX2SetPixelTexture(&g_LTexture[0], s_Shader.samplersPS.location[0]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[0]);
 
     // Set UV Texture and sampler
-    GX2SetPixelTexture(&g_UVTexture[decIdx][h264ReadBufIdx], s_Shader.samplersPS.location[1]);
+    GX2SetPixelTexture(&g_UVTexture[0], s_Shader.samplersPS.location[1]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[1]);
 
      // Set pixel shader uniform register
@@ -237,6 +227,11 @@ void drawTVFrame()
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
 
+    // Restore state that was saved when DEMOGfxInit was called.
+    GX2SetContextState(DEMOContextState);
+
+//    DEMOGfxDoneRender();
+
     return;
 }
 
@@ -244,11 +239,12 @@ void drawTVFrame()
 void drawDRCFrame()
 {
     u32 attribBuffer = 0;
-    u8 decIdx = 1;
-    u32 h264ReadBufIdx = (g_H264WriteBufIdx[decIdx] == 0)? 1 : 0;
+
+//  DEMOGfxBeforeRender();
+//  DEMOGfxDoneRender();
 
    // DEMODRCBeforeRender and DEMODRCDoneRender before and after drc drawing.
-    DEMODRCBeforeRender();
+//    DEMODRCBeforeRender();
 
     // The GX2Clear family of functions end up modifying the rendering state
     // while state shadowing is disabled. When using state shadowing it is
@@ -272,11 +268,11 @@ void drawDRCFrame()
                    s_Shader.pPixelShader);
 
     // Set L Texture and sampler
-    GX2SetPixelTexture(&g_LTexture[decIdx][h264ReadBufIdx], s_Shader.samplersPS.location[0]);
+    GX2SetPixelTexture(&g_LTexture[1], s_Shader.samplersPS.location[0]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[0]);
 
     // Set UV Texture and sampler
-    GX2SetPixelTexture(&g_UVTexture[decIdx][h264ReadBufIdx], s_Shader.samplersPS.location[1]);
+    GX2SetPixelTexture(&g_UVTexture[1], s_Shader.samplersPS.location[1]);
     GX2SetPixelSampler(&g_Sampler, s_Shader.samplersPS.location[1]);
 
      // Set pixel shader uniform register
@@ -287,7 +283,7 @@ void drawDRCFrame()
 
     // This function will copy presenting the rendered buffer to the drc screen buffer
     // Need to call DEMOGfxDoneRender for swapping after this.
-    DEMODRCDoneRender();
+//    DEMODRCDoneRender();
 
     return;
 }

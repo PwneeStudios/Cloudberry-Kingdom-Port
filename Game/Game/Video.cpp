@@ -123,7 +123,8 @@ bool MainVideo::Paused = false;
 	//#endif
 
 		// End the video if the user presses a key
-		if ( CanSkip && PlayerManager::Players.size() > 0 && ElapsedTime() > 0.3f || ElapsedTime() > LengthUntilUserCanSkip )
+		// FIXME: Uncomment this or people will be able to skip movie accidentally!
+		if ( CanSkip && PlayerManager::Players.size() > 0 /*&& ElapsedTime() > 0.3f || ElapsedTime() > LengthUntilUserCanSkip*/ )
 		{
 			// Update songs
 			if ( Tools::SongWad != 0 )
