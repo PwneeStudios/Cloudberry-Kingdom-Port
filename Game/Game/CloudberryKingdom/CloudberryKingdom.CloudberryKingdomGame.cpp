@@ -212,10 +212,43 @@ namespace CloudberryKingdom
 
 Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 
-        bool GodMode = true;
+		// Flags
+		bool CloudberryKingdomGame::GodMode = true;
+		bool CloudberryKingdomGame::AsianButtonSwitch = false;
 
-        //bool ForFrapsRecording = true;
-        bool ForFrapsRecording = false;
+#if PC_VERSION
+        // Steam Beta
+		//bool CloudberryKingdomGame::HideLogos = true;
+		//bool CloudberryKingdomGame::LockCampaign = true;
+		//bool CloudberryKingdomGame::SimpleMainMenu = true;
+		//bool CloudberryKingdomGame::SimpleLeaderboards = true;
+
+		// PC Beta
+		bool CloudberryKingdomGame::HideLogos = false;
+		bool CloudberryKingdomGame::LockCampaign = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		bool CloudberryKingdomGame::SimpleLeaderboards = true;
+#elif XBOX
+		bool CloudberryKingdomGame::HideLogos = false;
+		bool CloudberryKingdomGame::LockCampaign = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+#elif CAFE
+		bool CloudberryKingdomGame::HideLogos = false;
+		bool CloudberryKingdomGame::LockCampaign = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = true;
+		bool CloudberryKingdomGame::SimpleLeaderboards = true;
+#elif PS3
+		bool CloudberryKingdomGame::HideLogos = false;
+		bool CloudberryKingdomGame::LockCampaign = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+#endif
+
+
+
+
+		bool ForFrapsRecording = false;
 
 #if defined(DEBUG)
         bool CloudberryKingdomGame::AlwaysGiveTutorials = true;
@@ -562,7 +595,10 @@ float CloudberryKingdomGame::fps = 0;
 	#endif
 
 		// FIXME: Start videos later.
-		//MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+		if (!HideLogos)
+		{
+			//MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+		}
 	}
 
 	void CloudberryKingdomGame::UnloadContent()
@@ -619,19 +655,12 @@ float CloudberryKingdomGame::fps = 0;
 
     void CloudberryKingdomGame::GodModePhxs()
     {
-#ifdef PC
-#if !DEBUG
-		// Turn on/off immortality.
-		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
-		{
-			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
-			{
-				( *bob )->Immortal = !( *bob )->Immortal;
-			}
-		}
-#endif
         // Give 100,000 points to each player
+#ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_RJ, -2).Pressed )
+#endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
@@ -640,7 +669,11 @@ float CloudberryKingdomGame::fps = 0;
         }
 
         // Kill everyone but Player One
+#ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_U ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_U ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_X, -2).Down )
+#endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
@@ -658,7 +691,11 @@ float CloudberryKingdomGame::fps = 0;
         }
 
         // Turn on/off flying.
+#ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_A, -2).Pressed )
+#endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
 			{
@@ -667,7 +704,11 @@ float CloudberryKingdomGame::fps = 0;
         }
 
         // Go to last door
+#if PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
+#else
+		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_B, -2).Down )
+#endif
         {
             // Find last door
             if ( Tools::CurLevel != 0 )
@@ -699,7 +740,6 @@ float CloudberryKingdomGame::fps = 0;
                 }
             }
         }
-#endif
     }
 
 	void CloudberryKingdomGame::PhsxStep()
@@ -1222,7 +1262,7 @@ float CloudberryKingdomGame::fps = 0;
 		std::cout << _T( "" ) << std::endl;
 	}
 
-#if defined(DEBUG)
+#if defined(PC_DEBUG) || defined(WINDOWS) && defined(DEBUG)
 	bool CloudberryKingdomGame::DebugModePhsx()
 	{
 	#if defined(WINDOWS)
@@ -1339,6 +1379,7 @@ float CloudberryKingdomGame::fps = 0;
 			HideForeground = !HideForeground;
 
 		// Turn on/off immortality.
+		if ( !GodMode )
 		if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
 		{
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
@@ -1486,7 +1527,9 @@ float CloudberryKingdomGame::fps = 0;
 
 		//str = string.Format("{0,-5} {1,-5} {2,-5} {3,-5} {4,-5}", Level.Pre1, Level.Step1, Level.Pre2, Level.Step2, Level.Post);
 
+		if ( Tools::getCurCamera() == 0 ) return;
 		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, str, Vector2(0, 100), Color::Orange.ToVector4(), Vector2(1) );
+		Tools::QDrawer->Flush();
 	}
 
 	void CloudberryKingdomGame::MakeEmptyLevel()

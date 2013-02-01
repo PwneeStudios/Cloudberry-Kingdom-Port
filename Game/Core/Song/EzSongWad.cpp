@@ -172,6 +172,13 @@ namespace CloudberryKingdom
 
 	void EzSongWad::Next( const boost::shared_ptr<EzSong> &song )
 	{
+		bool HoldSuppress = SuppressNextInfoDisplay;
+
+		Start( true );
+
+		SuppressNextInfoDisplay = HoldSuppress;
+
+
 		CurIndex = IndexOf( PlayList, song );
 
 		if ( CurIndex < 0 )

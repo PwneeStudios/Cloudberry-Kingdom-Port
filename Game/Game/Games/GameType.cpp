@@ -332,8 +332,7 @@ namespace CloudberryKingdom
 		StandardFinish( Replay );
 
 		// Start the world map music
-		ParentGame->KillToDo( std::wstring( L"StartMusic" ) );
-		ParentGame->WaitThenDo( 50, boost::make_shared<PlayWorldMapMusicLambda>(), std::wstring( L"StartMusic" ) );
+		//Tools::PlayHappyMusic(ParentGame, 50);
 	}
 
 	void GameData::StandardFinish( bool Replay )

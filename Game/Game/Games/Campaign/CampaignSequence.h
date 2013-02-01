@@ -55,7 +55,11 @@ namespace CloudberryKingdom
 		static boost::shared_ptr<CampaignSequence> instance;
 		const static boost::shared_ptr<CampaignSequence> &getInstance();
 
-	
+		static Localization::Words ChapterName[];
+
+		int StartLevel;
+		static bool MusicStarted;
+
 		std::map<int, int> ChapterStart;
 		std::map<int, int> ChapterEnd;
 		std::map<int, boost::shared_ptr< Tuple<std::wstring, std::wstring> > > SpecialLevel;
@@ -87,6 +91,7 @@ namespace CloudberryKingdom
 
 		static void OnCoinGrab( const boost::shared_ptr<ObjectBase> &obj );
 
+		static void MarkProgress( const boost::shared_ptr<Level> &level );
 		static void OnCompleteLevel( const boost::shared_ptr<Level> &level );
 
 		static boost::shared_ptr<Lambda_1<boost::shared_ptr<Level> > > MakeWatchMovieAction( const std::wstring &movie );

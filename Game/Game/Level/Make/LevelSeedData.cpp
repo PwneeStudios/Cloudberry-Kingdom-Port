@@ -421,6 +421,11 @@ namespace CloudberryKingdom
     const std::wstring LevelSeedData::DarknessFlag = L"darkness";
     const std::wstring LevelSeedData::MasochistFlag = L"masochist";
 
+	const std::wstring RepeatHeroFlag = "repeathero";
+	const std::wstring ChapterNameFlag = "chapter";
+	const std::wstring ScoreScreenFlag = "scorescreen";
+
+
 	void LevelSeedData::ProcessSpecial()
 	{
 		if ( HasWall )
@@ -432,6 +437,12 @@ namespace CloudberryKingdom
 		}
 
 		if (NewHero) PostMake->Add( boost::make_shared<_NewHeroProxy>( shared_from_this() ) );
+
+		if (RepeatHero) PostMake->Add( boost::make_shared<_RepeatHeroProxy>( shared_from_this() ) );
+
+		if (ShowChapterName) PostMake->Add( boost::make_shared<_ShowChapterNameProxy>( shared_from_this() ) );
+
+		if (GiveScoreScreen) PostMake->Add( boost::make_shared<_ScoreScreenProxy>( shared_from_this() ) );
 
 		if ( NoStartDoor )
 			PostMake->Add( boost::make_shared<_NoStartDoorProxy>() );
@@ -449,11 +460,43 @@ namespace CloudberryKingdom
 			PostMake->Add( boost::make_shared<_StartSongProxy>( shared_from_this() ) );
 	}
 
+	void LevelSeedData::WaitThenPlay( boost::shared_ptr<GameData> game, int wait, boost::shared_ptr<EzSong> song)
+	{
+		game->WaitThenDo( wait, boost::make_shared<WaitThenPlayProxy>( song ) );
+	}
+
+	LevelSeedData::WaitThenPlayProxy::WaitThenPlayProxy( boost::shared_ptr<EzSong> _song )
+	{
+		song = _song;
+	}
+
+	void LevelSeedData::WaitThenPlayProxy::Apply()
+	{
+		if ( song == 0 )
+		{
+			Tools::SongWad->Start( true );
+			Tools::SongWad->Next();
+		}
+		else
+		{
+			Tools::SongWad->Next( song );
+		}
+		Tools::SongWad->PlayNext = true;
+	}
+
+
 	void LevelSeedData::_StartSong( const boost::shared_ptr<Level> &level )
 	{
-		Tools::SongWad->SetPlayList( Tools::SongList_Standard );
-		Tools::SongWad->Next( MySong );
-		Tools::SongWad->PlayNext = true;
+		if ( MySong == Tools::Song_Happy )
+		{
+			Tools::SongWad->SetPlayList(MySong);
+			WaitThenPlay(level->MyGame, 40, MySong);
+		}
+		else
+		{
+			Tools::SongWad->SetPlayList(Tools::SongList_Standard);
+			WaitThenPlay(level->MyGame, 40, MySong);
+		}
 	}
 
 	void LevelSeedData::_HasWall_Process( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &piece )
@@ -483,10 +526,51 @@ namespace CloudberryKingdom
 
     void LevelSeedData::_NewHero( const boost::shared_ptr<Level> &level )
     {
-		level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString( Localization::Words_NewHeroUnlocked ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) ) );
-        level->MyLevelSeed->WaitLengthToOpenDoor = 150;
+		//level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString( Localization::Words_NewHeroUnlocked ) + L"\n" + Localization::WordString( level->DefaultHeroType->Name ) ) ) );
+        level->MyGame->AddGameObject( MakeMagic( NewHero_GUI, ( Localization::WordString (level->DefaultHeroType->Name ) ) ) );
+		level->MyLevelSeed->WaitLengthToOpenDoor = 150;
         level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
     }
+
+		void _RepeatHero(boost::shared_ptr<Level> level)
+		{
+			level->MyGame->AddGameObject( MakeMagic( LevelTitle, ( Localization::WordString( level->DefaultHeroType->Name ), Vector2(0, 200), 1, false) ) );
+		}
+
+		void _ShowChapterName(boost::shared_ptr<Level> level)
+		{
+			if (level->MyLevelSeed->ChapterNameIndex < 0 || level->MyLevelSeed->ChapterNameIndex >= CampaignSequence::ChapterName.Length) return;
+
+			level->SetBack(27);
+
+			Tools.SongWad->SuppressNextInfoDisplay = true;
+			Tools.SongWad->DisplayingInfo = false;
+
+			level->MyGame->AddGameObject( MakeMagic( ChapterTitle, (CampaignSequence::ChapterName[ level->MyLevelSeed->ChapterNameIndex ] ) ) );
+			level->MyLevelSeed->WaitLengthToOpenDoor = 150;
+			level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
+		}
+
+		void _ScoreScreen(boost::shared_ptr<Level> level)
+		{
+			level->MyGame->MakeScore = boost::make_shared<LevelSeedData::MakeScoreProxy>( level );
+
+			boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( level->FindIObject(LevelConnector::EndOfLevelCode) );
+			door->setOnOpen( boost::make_shared<LevelSeedData::EOL_DoorActionProxy>() );
+
+			level->StartRecording();
+		}
+
+		LevelSeedData::MakeScoreProxy::MakeScoreProxy( boost::shared_ptr<Level> _level )
+		{
+			level = _level;
+		}
+
+		void LevelSeedData::MakeScoreProxy::Apply( boost::shared_ptr<GameObject> obj )
+		{
+			CampaignSequence.MarkProgress(level);
+			return MakeMagic( ScoreScreen, ( StatGroup::StatGroup_LEVEL, level->MyGame, true ) );
+		}
 
 	void LevelSeedData::_FadeIn_Process( const boost::shared_ptr<Level> &level )
 	{
@@ -706,6 +790,28 @@ namespace CloudberryKingdom
 			{
 				NewHero = true;
 			}
+
+					// RepeatHero
+					else if ( lower_identifier == RepeatHeroFlag )
+					{
+						RepeatHero = true;
+					}	
+					// Chapter Name
+					else if ( lower_identifier == ChapterNameFlag)
+					{
+						ShowChapterName = true;
+						int chapterindex = 0;
+						if ( ParseInt( data, chapterindex ) )
+							ChapterNameIndex = chapterindex - 1;
+						else
+							ChapterNameIndex = -1;
+					}
+					// Score Screen
+					else if ( lower_identifier == ScoreScreenFlag)
+					{
+						GiveScoreScreen = true;
+					}
+
             // Darkness
 			else if ( lower_identifier == DarknessFlag )
 			{
@@ -994,7 +1100,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::PostMake_StandardLoad( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::PostMake_Standard( level, true, false );
-		level->MyGame->MakeScore = boost::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level );
+		level->MyGame->MakeScore = boost::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level, false );
 	}
 
 	void LevelSeedData::PostMake_Standard( const boost::shared_ptr<Level> &level, bool StartMusic, bool ShowMultiplier )
@@ -1341,6 +1447,10 @@ namespace CloudberryKingdom
 		FadeInSpeed = .032f;
 		FadeOutSpeed = .02f;
         NewHero = false;
+		RepeatHero = false;
+		ChapterNameIndex = -1; ShowChapterName = false;
+		GiveScoreScreen = false;
+
         Darkness = false;
         Masochistic = false;
 		AlwaysOverrideWaitDoorLength = false;

@@ -88,6 +88,8 @@ namespace CloudberryKingdom
 	{
 		GameTypeId = 3;
 		MenuName = Name = Localization::Words_HybridRush;
+
+		SetGameId();
 	}
 
 	void Challenge_HeroRush2::MakeHeroList()

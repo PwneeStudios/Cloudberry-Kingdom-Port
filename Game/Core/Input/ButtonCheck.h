@@ -7,6 +7,7 @@
 
 namespace CloudberryKingdom
 {
+
 	struct KeyboardExtension
 	{
 	
@@ -15,6 +16,7 @@ namespace CloudberryKingdom
 		static void UnfreezeInput();
 
 		static bool IsKeyDownCustom( KeyboardState &keyboard, Keys key );
+
 	};
 
 	struct ButtonStatistics
@@ -109,6 +111,7 @@ namespace CloudberryKingdom
 		/// </summary>
 		static bool MouseInUse;
 		static bool PrevMouseInUse;
+		static bool ControllerInUse;
 
 		static void UpdateControllerAndKeyboard_StartOfStep();
 
@@ -211,10 +214,10 @@ namespace CloudberryKingdom
 	
 		ButtonCheck();
 
-		std::wstring GetString();
-
 		void Phsx();
+
 	};
+
 }
 
 

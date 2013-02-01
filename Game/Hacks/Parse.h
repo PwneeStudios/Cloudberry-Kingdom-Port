@@ -49,7 +49,7 @@ inline bool ParseInt( const std::wstring &s, int &val )
 }
 
 // FIXME: do we need to specify precision or anything here?
-inline float ParseFloat( const std::wstring &s, float &val )
+inline bool ParseFloat( const std::wstring &s, float &val )
 {
 	using namespace std;
 

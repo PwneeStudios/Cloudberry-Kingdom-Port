@@ -15,6 +15,7 @@ namespace CloudberryKingdom
 	{
 		ButtonCheck::MouseInUse = false;
 		ButtonCheck::PrevMouseInUse = false;
+		ButtonCheck::ControllerInUse = false;
 
 		ButtonCheck::Quickspawn_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = boost::make_shared<ButtonClass>();
 		ButtonCheck::Start_Secondary = Keys_None;
@@ -151,7 +152,10 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 			Incr = false;
 			for ( int i = 0; i < 4; i++ )
 				if ( Controller[ i ]->DownCount( *button ) > 0 )
+				{
 					Incr = true;
+					ButtonCheck::ControllerInUse = true;
+				}
 
 			All->IncrCount( *button, Incr );
 		}
@@ -235,10 +239,16 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 #if defined(PC_VERSION)
 	void ButtonCheck::UpdateMouseUse()
 	{
+
+        bool AnyKey = ButtonCheck::AnyKeyboardKey();
+
+        if (AnyKey)
+            ButtonCheck::ControllerInUse = false;
+
 	#if defined(PC_VERSION)
-		if ( ButtonCheck::AnyKeyboardKey() || (PlayerManager::Players.size() > 0 && PlayerManager::getPlayer() != 0 && ButtonCheck::GetMaxDir(false).Length() > 0.3f) )
+		if ( AnyKey || (PlayerManager::Players.size() > 0 && PlayerManager::getPlayer() != 0 && ButtonCheck::GetMaxDir(false).Length() > 0.3f) )
 	#else
-		if ( ButtonCheck::AnyKeyboardKey() || (PlayerManager::Players.size() > 0 && ButtonCheck::GetMaxDir(true).Length() > ::3) )
+		if ( AnyKey || (PlayerManager::Players.size() > 0 && ButtonCheck::GetMaxDir(true).Length() > ::3) )
 	#endif
 			MouseInUse = false;
 
@@ -741,9 +751,11 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 			}
 			case ControllerButtons_LJ:
 				Data.Dir = Pad.ThumbSticks.Left;
+				Data.Down = (Pad.Buttons.LeftStick == ButtonState_Pressed);
 				break;
 			case ControllerButtons_RJ:
 				Data.Dir = Pad.ThumbSticks.Right;
+				Data.Down = (Pad.Buttons.RightStick == ButtonState_Pressed);
 				break;
 			case ControllerButtons_DPAD:
 			{
@@ -862,40 +874,6 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 		Dir = 0;
 
 		Satisfied = false;
-	}
-
-	std::wstring ButtonCheck::GetString()
-	{
-		std::wstring s;
-
-		switch ( MyType )
-		{
-			case MashType_HOLD:
-				s = std::wstring( L"Hold {p" );
-				break;
-			case MashType_TAP:
-				s = std::wstring( L"Tap {p" );
-				break;
-			case MashType_HOLD_DIR:
-				s = std::wstring( L"Hold {p" );
-				break;
-			default:
-				s = std::wstring( L"" );
-				break;
-		}
-
-		s += std::wstring( L"Big_Button_" ) + Tools::ButtonNames[ static_cast<int>( MyButton1 ) ] + std::wstring( L",75,75}" );
-
-		switch ( MyType )
-		{
-			case MashType_HOLD_DIR:
-				s += std::wstring( L" " ) + Tools::DirNames[ Dir ];
-				break;
-			default:
-				break;
-		}
-
-		return s;
 	}
 
 	void ButtonCheck::Phsx()

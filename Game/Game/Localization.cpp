@@ -36,11 +36,13 @@ namespace CloudberryKingdom
         }
     }
 
-	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const boost::shared_ptr<EzTexture> &MyTexture )
+	SubtitleAction::SubtitleAction( ActionType MyAction, float Time, const std::wstring &Text )
 	{
 		this->MyAction = MyAction;
 		this->Time = Time;
-		this->MyTexture = MyTexture;
+
+		this->Text = Text;
+		Replace( this->Text, std::wstring( L"\\n" ), std::wstring( L"\n" ) );
 	}
 
 	boost::shared_ptr<ContentManager> Localization::Content;
@@ -86,7 +88,7 @@ namespace CloudberryKingdom
 
 		while ( line != std::wstring( L"" ) )
 		{
-			//var bits = line.Split('|');
+			Replace( line, std::wstring( L"\\n" ), std::wstring( L"\n" ) );
 			std::vector<std::wstring> bits = Split( line, L'\t' );
 
 			for ( int i = 0; i < NumLanguages; i++ )
@@ -181,10 +183,22 @@ namespace CloudberryKingdom
 		ReadTranslationGrid( path );
 	}
 
+        float Localization::ParseTime( const std::wstring &s )
+        {
+            std::vector<std::wstring> data = Split( s, L':' );
+
+			float output = 0;
+            float seconds = ParseFloat( data[2], output ) ? output : -1;
+            float minutes = ParseFloat( data[1], output ) ? output : -1;
+
+            return seconds + minutes * 60;
+        }
+
 	void Localization::ReadSubtitleInfo( const std::wstring &VideoName )
 	{
-		//std::wstring path = Path::Combine( std::wstring( L"Content" ), std::wstring( L"Localization" ), std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
 		std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
+
+		if ( !File.Exists( path ) ) return;
 
 		ReadSubtitles( path );
 	}
@@ -226,33 +240,23 @@ namespace CloudberryKingdom
 				continue;
 			}
 
-			int space = line.find( L' ' );
-			std::wstring identifier, data;
-			if ( space > 0 )
-			{
-				identifier = line.substr( 0, space );
-				data = line.substr( space + 1 );
-			}
-			else
-			{
-				identifier = line;
-				data = std::wstring( L"" );
-			}
+			std::vector<std::wstring> data = Split( line, L'\t' );
 
-			if ( identifier == std::wstring( L"show" ) )
-			{
-				if ( ParseFloat( data, timeval ) )
-				{
-					boost::shared_ptr<CloudberryKingdom::EzTexture> SubtitleTexture = Tools::Texture( Format( _T( "Chunk_%d" ), Index ) );
-					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_SHOW, timeval, SubtitleTexture ) );
+            if ( data.size() <= 1 ) continue;
+			
+			std::wstring identifier = data[1];
 
-					Index++;
-				}
-			}
-			else if ( identifier == std::wstring( L"hide" ) )
+			if ( identifier == std::wstring( L"+" ) )
 			{
-				if ( ParseFloat( data, timeval ) )
-					Subtitles.push_back( boost::make_shared<SubtitleAction>( SubtitleAction::ActionType_HIDE, timeval, boost::shared_ptr<EzTexture>() ) );
+				if (data.size() < 3) continue;
+
+                Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_SHOW, ParseTime( data[0] ), data[2] ) );
+                        
+                Index++;
+			}
+			else if ( identifier == std::wstring( L"-" ) )
+			{
+				Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_HIDE, ParseTime( data[0] ), 0 ) );
 			}
 
 			line = reader->ReadLine();

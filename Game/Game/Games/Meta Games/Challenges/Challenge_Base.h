@@ -26,6 +26,8 @@ namespace CloudberryKingdom
 		virtual ~Challenge() { }
 
 		static int Coins;
+		static int CurrentScore;
+		static int CurrentId;
 
 		struct OnCoinGrabProxy : public Lambda_1<boost::shared_ptr<ObjectBase> >
 		{
@@ -73,8 +75,9 @@ namespace CloudberryKingdom
 	
 		int GameTypeId;
 
-		int CalcTopGameLevel(boost::shared_ptr<BobPhsx> hero);
-		int CalcGameId_Level(boost::shared_ptr<BobPhsx> hero);
+		int CalcTopGameLevel( boost::shared_ptr<BobPhsx> hero );
+		int CalcGameId_Score( boost::shared_ptr<BobPhsx> hero )
+		int CalcGameId_Level( boost::shared_ptr<BobPhsx> hero );
 		int SetGameId();
 
 	

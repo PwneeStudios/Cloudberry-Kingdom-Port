@@ -45,6 +45,11 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<CampaignSequence> CampaignSequence::instance;
 
+	Localization::Words ChapterName[] = { Localization::Words::Words_Chapter1, Localization::Words::Words_Chapter2, Localization::Words::Words_Chapter3,
+										  Localization::Words::Words_Chapter4, Localization::Words::Words_Chapter5, Localization::Words::Words_Chapter6,
+										  Localization::Words::Words_TheMasochist };
+
+
 	const boost::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
 	{
 		return instance;
@@ -68,27 +73,38 @@ namespace CloudberryKingdom
             boost::shared_ptr<Awardment> award = 0;
             switch (chapter)
             {
-				case 1: award = Awardments::Award_Campaign1; break;
-				case 2: award = Awardments::Award_Campaign2; break;
-				case 3: award = Awardments::Award_Campaign3; break;
-				case 4: award = Awardments::Award_Campaign4; break;
-				case 5: award = Awardments::Award_Campaign5; break;
-				default: Tools::Break(); break;
+				case 2: award = Awardments::Award_Campaign1; break;
+				case 4: award = Awardments::Award_Campaign2; break;
+				case 6: award = Awardments::Award_Campaign3; break;
+				case 7: award = Awardments::Award_Campaign4; break;
+
+				default: break;
             }
             Awardments::GiveAward(award);
         }
 
+		bool CampaignSequence::MusicStarted = false;
 	void CampaignSequence::Start( int Chapter )
 	{
+		MusicStarted = false;
+
 		MyPerfectScoreObject = MakeMagic( PerfectScoreObject, ( false, true ) );
 
-		int StartLevel = ChapterStart[ Chapter ];
+		// Continue at last level reached.
+		if ( Chapter < 0 )
+		{
+			StartLevel = ChapterStart[ Chapter ];
 
-        int NextChapterStart = Contains( ChapterStart, Chapter + 1 ) ? ChapterStart[Chapter + 1] : StartLevel + 100000;
-        int MaxLevelAttained = PlayerManager::MaxPlayerTotalCampaignIndex() + 1;
+			int NextChapterStart = Contains( ChapterStart, Chapter + 1 ) ? ChapterStart[Chapter + 1] : StartLevel + 100000;
+			int MaxLevelAttained = PlayerManager::MaxPlayerTotalCampaignIndex() + 1;
 
-        if ( MaxLevelAttained > StartLevel && MaxLevelAttained < NextChapterStart )
-            StartLevel = MaxLevelAttained;
+			if ( MaxLevelAttained > StartLevel && MaxLevelAttained < NextChapterStart )
+				StartLevel = MaxLevelAttained;
+		}
+		else
+		{
+			StartLevel = ChapterStart[ Chapter ];
+		}
 
 		LevelSequence::Start( StartLevel );
 	}
@@ -282,6 +298,21 @@ namespace CloudberryKingdom
 		if ( level->MyLevelSeed->MyGameType == ActionGameData::Factory )
 			return;
 
+		if ( level->MyLevelSeed->MySong == 0 )
+		{
+			if ( !MusicStarted )
+			{
+				Tools::SongWad->SetPlayList(Tools::SongList_Standard);
+				Tools::SongWad->Shuffle();
+				LevelSeedData::WaitThenPlay(level->MyGame, 40, 0);
+			}
+		}
+		else
+		{
+			Tools::SongWad->SuppressNextInfoDisplay = true;
+		}
+		MusicStarted = true;
+
 		level->MyGame->OnCoinGrab->Add( boost::make_shared<OnCoinGrabProxy>() );
 		level->MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>() );
 
@@ -289,7 +320,7 @@ namespace CloudberryKingdom
         //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization.WordString(Localization::Words_Level)));
             
         // Level Title plus Hero Name
-        if ( !level->MyLevelSeed->NewHero )
+        if ( !level->MyLevelSeed->NewHero && !level->MyLevelSeed->ShowChapterName )
         {
             boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_Level ).c_str() ) ) );
             title->Shift( Vector2(0, -45) );
@@ -328,14 +359,7 @@ namespace CloudberryKingdom
 
 	void CampaignSequence::OnCompleteLevel( const boost::shared_ptr<Level> &level )
 	{
-		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
-		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
-		{
-			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
-
-            ( *player )->CampaignIndex = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelIndex );
-            ( *player )->Changed = true;
-		}
+		MarkProgress( level );
 
         // Check for end of chapter
 		for ( std::map<int, int>::const_iterator key = instance->ChapterEnd.begin(); key != instance->ChapterEnd.end(); key++ )
@@ -346,6 +370,18 @@ namespace CloudberryKingdom
                 if (ChapterFinishing == 0) ChapterFinishing = -1;
                 break;
             }
+		}
+	}
+
+	void CampaignSequence::MarkProgress( const boost::shared_ptr<Level> &level )
+	{
+		std::vector<boost::shared_ptr<PlayerData> > vec = PlayerManager::getExistingPlayers();
+		for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator player = vec.begin(); player != vec.end(); ++player )
+		{
+			( *player )->CampaignLevel = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelNum );
+
+            ( *player )->CampaignIndex = __max( ( *player )->CampaignLevel, level->MyLevelSeed->LevelIndex );
+            ( *player )->Changed = true;
 		}
 	}
 
@@ -365,6 +401,7 @@ namespace CloudberryKingdom
 	{
 		InitializeInstanceFields();
 		
+		MusicStarted = false;
 		ChapterFinishing = -1;
 
 		MakeSeedList();

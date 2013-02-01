@@ -19,71 +19,44 @@ namespace CloudberryKingdom
 	// Statics
 	bool EzText::ZoomWithCamera_Override;
 
+	boost::shared_ptr<EzTexture> ButtonTexture::getGo() { return CloudberryKingdomGame::AsianButtonSwitch ? _Back : _Go; }
+	boost::shared_ptr<EzTexture> ButtonTexture::getBack() { return CloudberryKingdomGame::AsianButtonSwitch ? _Go : _Back; }
 
-#if defined(PC_VERSION)
-	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Enter_Key" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Esc_Key" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getX()
-	{
-		return ButtonString::ActualKeyToTexture( ButtonCheck::SlowMoToggle_Secondary );
-		//return Tools::TextureWad.FindByName("Xbox_X");
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"LeftRight_Key" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
-	{
-		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayPrev_Secondary );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
-	{
-		return ButtonString::ActualKeyToTexture( ButtonCheck::ReplayNext_Secondary );
-	}
+#if PC_VERSION					 
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_A" : L"Enter_Key" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_B" : L"Esc_Key" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return ButtonCheck.ControllerInUse ? Tools::Texture( L"Xbox_X" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return ButtonCheck.ControllerInUse ? Tools::Texture( L"Xbox_Y" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_Dir" : L"LeftRight_Key" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_LB" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_RB" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary ) ); }
+#elif PS3						 
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( L"PS3_X" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( L"PS3_Circle" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( L"PS3_Square" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( L"PS3_Triangle" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( L"PS3_Dir" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( L"PS3_1" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( L"PS3_1" ); }
+#elif CAFE
+    bool ButtonTexture::UseGamepad = true;
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( UseGamepad ? "WiiU_B" : "WiiU_2" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( UseGamepad ? "WiiU_A" : "WiiU_1" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( UseGamepad ? "WiiU_Y" : "WiiU_1" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( UseGamepad ? "WiiU_X" : "WiiU_Dash" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( UseGamepad ? "WiiU_Dir" : "WiiU_Dir" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( UseGamepad ? "WiiU_R" : "WiiU_R" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( UseGamepad ? "WiiU_L" : "WiiU_L" ); }
+#else
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( L"Xbox_A" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( L"Xbox_B" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( L"Xbox_X" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( L"Xbox_Y" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( L"Xbox_Dir" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( L"Xbox_LB" ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( L"Xbox_RB" ); }
 #endif
 
-#if ! defined(PC_VERSION)
-	boost::shared_ptr<EzTexture> ButtonTexture::getGo()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_A" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getBack()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_B" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getX()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_X" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_Dir" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_LB" ) );
-	}
-
-	boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper()
-	{
-		return Tools::TextureWad->FindByName( std::wstring( L"Xbox_RB" ) );
-	}
-#endif
 
 #if defined(PC_VERSION)
 std::map<Keys, std::wstring> ButtonString::KeyToString;
@@ -183,79 +156,17 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 #endif
 
 #if defined(PC_VERSION)
-	std::wstring ButtonString::Back( int size )
-	{
-		return std::wstring( L"" );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::Go( int size )
-	{
-		return std::wstring( L"" );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::Backspace( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Back ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::Enter( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Enter ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::X( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::Y( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::LeftRight( int size )
-	{
-		return Format( _T( "{pLeftRight_Key,%d,?}{s15,0}" ), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::LeftBumper( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::ReplayPrev_Secondary ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::RightBumper( int size )
-	{
-		return Format( _T( "{p%ls,%d,?}{s15,0}" ), KeyToTexture( ButtonCheck::ReplayNext_Secondary ).c_str(), size );
-	}
-#endif
-
-#if defined(PC_VERSION)
 	std::wstring ButtonString::Up( int size )
 	{
 		return Format( _T( "{pUp_Key,%d,?}{s15,0}" ), size );
 	}
-#endif
-
-#if defined(PC_VERSION)
-	std::wstring ButtonString::Jump( int size )
+	std::wstring ButtonString::Backspace( int size )
 	{
-		return Format( _T( "{pUp_Key,%d,?}{s15,0}" ), size );
+		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Back ).c_str(), size );
+	}
+	std::wstring ButtonString::Enter( int size )
+	{
+		return Format( _T( "{p%ls,%d,?}{s70,0}" ), KeyToTexture( Keys_Enter ).c_str(), size );
 	}
 #endif
 
@@ -265,15 +176,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		if ( key == Keys_Enter || key == Keys_Space )
 			size = static_cast<int>( 2.0083f * size );
 
-		//switch ( key )
-		//{
-			//case Keys.Space:
-			//    return string.Format("{{pSpace_Key,{0},?}}{{s15,0}}", size * BackScale);
-			//case Keys.Enter:
-			//    return string.Format("{{pEnter_Key,{0},?}}{{s15,0}}", size * BackScale);
-			//default:
 		return Format( _T( "{p%ls,%d,?}{s15,0}" ), ButtonString::KeyToTexture( key ).c_str(), size );
-		//}
 	}
 #endif
 
@@ -290,61 +193,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	}
 #endif
 
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::Back( int size )
-	{
-		return Format( _T( "{pXbox_B,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::Go( int size )
-	{
-		return Format( _T( "{pXbox_A,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::X( int size )
-	{
-		return Format( _T( "{pXbox_X,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::Y( int size )
-	{
-		return Format( _T( "{pXbox_Y,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::LeftRight( int size )
-	{
-		return Format( _T( "{pXbox_Dir,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::LeftBumper( int size )
-	{
-		return Format( _T( "{pXbox_LB,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::RightBumper( int size )
-	{
-		return Format( _T( "{pXbox_RB,%d,?}" ), size );
-	}
-#endif
-
-#if ! defined(PC_VERSION)
-	std::wstring ButtonString::Jump( int size )
-	{
-		return Format( _T( "{pXbox_A,%d,?}" ), size );
-	}
-#endif
+    std::wstring ButtonString::Back(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getBack()->Name, size ); }
+    std::wstring ButtonString::Go(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getGo()->Name, size ); }
+    std::wstring ButtonString::X(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getX()->Name, size ); }
+    std::wstring ButtonString::Y(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getBack()->Name, size ); }
+    std::wstring ButtonString::LeftRight(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getLeftRight()->Name, size ); }
+    std::wstring ButtonString::LeftBumper(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getLeftBumper()->Name, size ); }
+    std::wstring ButtonString::RightBumper(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getRightBumper()->Name, size ); }
+    std::wstring ButtonString::Jump(int size) { return Format( L"{{p%s,%s,?}}", ButtonTexture::getGo()->Name, size ); }
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b )
 	{
@@ -700,7 +556,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 						Parse_PicShift = Vector2();
 
 					Vector2 size;
-					boost::shared_ptr<EzTexture> texture = Tools::TextureWad->FindByName( Parse_PicName );
+					boost::shared_ptr<EzTexture> texture = Tools::Texture( Parse_PicName );
 					float ratio = static_cast<float>( texture->Width ) / static_cast<float>( texture->Height );
 
 					// 's' scale the texture
@@ -865,7 +721,7 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 					if ( !FirstElement )
 						Parse_PicShift.X -= .25f * Parse_PicSize.X;
 
-					pic->tex = Tools::TextureWad->FindByName( Parse_PicName );
+					pic->tex = Tools::Texture( Parse_PicName );
 
 					float y = .5f * Tools::TheGame->Resolution.LineHeightMod * MyFont->LineSpacing - .5f * Parse_PicSize.Y + StartY;
 					pic->rect = Rectangle( static_cast<int>( loc.X + Parse_PicShift.X ), static_cast<int>( y + loc.Y + Parse_PicShift.Y ), static_cast<int>( Parse_PicSize.X ), static_cast<int>( Parse_PicSize.Y ) );

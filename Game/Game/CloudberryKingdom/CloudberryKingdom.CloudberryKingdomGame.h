@@ -74,8 +74,18 @@ namespace CloudberryKingdom
 
 
 
-        static bool GodMode;
-        static bool ForFrapsRecording;;
+		// Flags
+		static bool GodMode;
+		static bool HideLogos;
+		static bool LockCampaign;
+		static bool SimpleMainMenu;
+		static bool SimpleLeaderboards;
+		static bool AsianButtonSwitch;
+
+
+
+
+        static bool ForFrapsRecording;
 
         static bool AlwaysGiveTutorials;
         static bool Unlock_Customization;

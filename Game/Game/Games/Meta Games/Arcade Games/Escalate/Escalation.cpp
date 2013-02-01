@@ -97,6 +97,7 @@ namespace CloudberryKingdom
 		Awardments::CheckForAward_ArcadeScore( score );
 		Awardments::CheckForAward_ArcadeScore2( score );
 		Awardments::CheckForAward_Invisible( levelindex - ce->StartIndex );
+		ArcadeMenu::CheckForArcadeUnlocks_OnSwapIn( levelindex );
 
 		// Score multiplier, x1, x1.5, x2, ... for levels 0, 20, 40, ...
 		float multiplier = 1 + ( ( levelindex + 1 ) / ce->LevelsPerDifficulty ) *.5f;

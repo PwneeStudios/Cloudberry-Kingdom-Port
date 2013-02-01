@@ -204,6 +204,20 @@ inline void Replace( std::wstring &s, wchar_t x, wchar_t y )
 	}
 }
 
+inline void Replace( std::wstring &s, const std::wstring &x, const std::wstring &y )
+{
+    if ( x.empty() )
+        return;
+
+    size_t start_pos = 0;
+
+    while ( ( start_pos = s.find( x, start_pos ) ) != std::string::npos )
+	{
+        s.replace( start_pos, x.length(), y );
+        start_pos += y.length();
+    }
+}
+
 //std::wstring operator += ( std::wstring &LHS, const std::wstring &RHS )
 //{
 //	LHS.append( RHS );

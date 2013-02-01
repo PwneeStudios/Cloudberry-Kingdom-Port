@@ -11,6 +11,23 @@ namespace CloudberryKingdom
 
 		virtual ~LevelSeedData() { }
 
+		struct MakeScoreProxy : public LambdaFunc<boost::shared_ptr<GameObject> >
+		{
+			boost::shared_ptr<Level> level;
+
+			MakeScoreProxy( boost::shared_ptr<Level> _level );
+
+			void Apply( boost::shared_ptr<GameObject> obj );
+		};
+
+		struct WaitThenPlayProxy : public Lambda
+		{
+			boost::shared_ptr<EzSong> song;
+
+			WaitThenPlayProxy( boost::shared_ptr<EzSong> _song );
+			void Apply();
+		};
+
 		struct _NewHeroProxy : public Lambda_1<boost::shared_ptr<Level> >
 		{
 		
@@ -235,6 +252,11 @@ namespace CloudberryKingdom
 		static const std::wstring LevelFlag, IndexFlag;
 
         bool NewHero; static const std::wstring NewHeroFlag;
+
+		bool RepeatHero; static const std::wstring RepeatHeroFlag;
+		int ChapterNameIndex; bool ShowChapterName; static const std::wstring ChapterNameFlag;
+		bool GiveScoreScreen; static const std::wstring ScoreScreenFlag;;
+
         bool Darkness; static const std::wstring DarknessFlag;
         bool Masochistic; static const std::wstring MasochistFlag;
 
@@ -262,7 +284,8 @@ namespace CloudberryKingdom
 
 		void ProcessSpecial();
 
-	
+		void WaitThenPlay( boost::shared_ptr<GameData> game, int wait, boost::shared_ptr<EzSong> song );
+
 		void _StartSong( const boost::shared_ptr<Level> &level );
 
 		static void _HasWall_Process( const boost::shared_ptr<Level> &level, const boost::shared_ptr<PieceSeedData> &piece );

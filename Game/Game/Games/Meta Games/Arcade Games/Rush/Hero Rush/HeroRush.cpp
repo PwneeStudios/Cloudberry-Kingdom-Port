@@ -61,7 +61,7 @@ namespace CloudberryKingdom
 	{
 		chr->AdditionalSwap( levelindex );
 
-		//Awardments::CheckForAward_HeroRush2Unlock( levelindex - chr->StartIndex );
+		ArcadeMenu::CheckForArcadeUnlocks_OnSwapIn( levelindex );
 
 		// Add hero icon to exit door
 		chr->MakeExitDoorIcon( levelindex );
@@ -100,8 +100,11 @@ namespace CloudberryKingdom
 	Challenge_HeroRush::Challenge_HeroRush()
 	{
 		InitializeInstanceFields();
+
 		GameTypeId = 2;
 		MenuName = Name = Localization::Words_HeroRush;
+
+		SetGameId();
 	}
 
 	void Challenge_HeroRush::SetTimerProperties( int Difficulty )

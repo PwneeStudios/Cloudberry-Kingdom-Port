@@ -5,7 +5,9 @@
 namespace CloudberryKingdom
 {
 
-	int Challenge::Coins;
+	int Challenge::Coins = 0;
+	int Challenge::CurrentScore = 0;
+	int Challenge::CurrentId = 0;
 
 	void Challenge::OnCoinGrabProxy::Apply( const boost::shared_ptr<ObjectBase> &obj )
 	{
@@ -47,13 +49,23 @@ namespace CloudberryKingdom
         return PlayerManager::MaxPlayerHighScore(id);
     }
 
+    int Challenge::CalcGameId_Score( boost::shared_ptr<BobPhsx> hero )
+    {
+        int HeroId = hero == 0 ? 0 : hero.Id;
+
+		//GameId_Level = 100 * HeroId + GameTypeId;
+		//return GameId_Level;
+		return 100 * HeroId + GameTypeId;
+    }
+
     int Challenge::CalcGameId_Level(boost::shared_ptr<BobPhsx> hero)
     {
         int HeroId = hero == 0 ? 0 : hero->Id;
 
-        GameId_Level = 100 * HeroId + GameTypeId + LevelMask;
-        return GameId_Level;
-    }
+		//GameId_Level = 100 * HeroId + GameTypeId + LevelMask;
+		//return GameId_Level;
+		return 100 * HeroId + GameTypeId + LevelMask;
+	}
 
 	int Challenge::SetGameId()
 	{
@@ -109,6 +121,9 @@ namespace CloudberryKingdom
 
 	void Challenge::Start( int Difficulty )
 	{
+        CurrentId = GameId_Level;
+        CurrentScore = 0;
+
         PlayerManager::PartiallyInvisible = true;
         PlayerManager::TotallyInvisible = true;
 
@@ -122,6 +137,8 @@ namespace CloudberryKingdom
 
 	void Challenge::Aftermath()
 	{
+        CurrentId = -1;
+        CurrentScore = -1;
 		boost::shared_ptr<AftermathData> data = Tools::CurrentAftermath;
 	}
 

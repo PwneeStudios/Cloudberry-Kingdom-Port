@@ -1912,7 +1912,7 @@ bool Level::dodebug = false;
 		{
 			VoidHeight = 40;
 			boost::shared_ptr<LavaBlock> lblock = boost::static_pointer_cast<LavaBlock>( getRecycle()->GetObject(ObjectType_LAVA_BLOCK, false) );
-			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 800) + Style->LowerSafetyNetOffset, MaxLeft - 1000, MaxRight + 1000, 5000 );
+			lblock->Init( getMainCamera()->BL.Y + getRnd()->RndFloat(300, 550) + Style->LowerSafetyNetOffset, MaxLeft - 1000, MaxRight + 1000, 5000 );
 			lblock->StampAsUsed( 0 );
 			AddBlock( lblock );
 		}

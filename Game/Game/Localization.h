@@ -417,6 +417,8 @@ Words_Credits,
 	
 		static void Initialize();
 
+		static float Localization::ParseTime( const std::wstring &s );
+
 		static void ReadSubtitleInfo( const std::wstring &VideoName );
 
 	
@@ -457,10 +459,10 @@ Words_Credits,
 
 		ActionType MyAction;
 
-		boost::shared_ptr<EzTexture> MyTexture;
+		std::wstring Text;
 
-		SubtitleAction( ActionType MyAction, float Time, const boost::shared_ptr<EzTexture> &MyTexture );
-
+		SubtitleAction( ActionType MyAction, float Time, const std::wstring &Text );
+		
 	};
 
 }
