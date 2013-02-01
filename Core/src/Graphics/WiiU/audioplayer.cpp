@@ -35,6 +35,7 @@ static void handleFinalMixDRC(AX_FINAL_MIX_CB_STRUCT *info);
 
 static AXPBOFFSET addrL[2];
 static AXPBOFFSET addrR[2];
+static AXPBOFFSET Gaddr[2];
 
 
 /*-------------------------------------------------------------------------*
@@ -161,13 +162,18 @@ static void startStreamPcm16(s32 threadnum)
     addrR[threadnum].endOffset     = MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE >> 1;
     addrR[threadnum].currentOffset = 0;
 
+    memcpy(&Gaddr[0], &addrL[0], sizeof(AXPBOFFSET));
+    memcpy(&Gaddr[1], &addrR[0], sizeof(AXPBOFFSET));
+
     if (threadnum)
     {
         AXSetDeviceUpsampleStage        (AX_DEVICE_DRC, 0); // 32kHz データ再生する時は、この引数を 1 に。
+        AXRegisterDeviceFinalMixCallback(AX_DEVICE_DRC, NULL);
     }
     else
     {
         AXSetDeviceUpsampleStage        (AX_DEVICE_TV,  0); // 32kHz データ再生する時は、この引数を 1 に。
+        AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  NULL);
     }
 }
 
@@ -305,35 +311,6 @@ static void handleFinalMixDRC(AX_FINAL_MIX_CB_STRUCT *info)
 
 
 /*-------------------------------------------------------------------------*
-    Name:           AudioStart
-    Description:    audio system start
-    Arguments:      none
-    Returns:        none
- *-------------------------------------------------------------------------*/
-void AudioStart(s32 mode)
-{
-    if (mode == 0)
-    {
-        if (MP4DemuxCorePtr[0]->AudioTrackFound)
-        {
-            AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  handleFinalMixTV);
-            OSSleepMilliseconds(50);
-            MP4PlayerCorePtr[0]->Audio_Action = STREAM_STARTED;
-        }
-    }
-    else if (mode == 1)
-    {
-        if (MP4DemuxCorePtr[1]->AudioTrackFound)
-        {
-            AXRegisterDeviceFinalMixCallback(AX_DEVICE_DRC, handleFinalMixDRC);
-            OSSleepMilliseconds(50);
-            MP4PlayerCorePtr[1]->Audio_Action = STREAM_STARTED;
-        }
-    }
-}
-
-
-/*-------------------------------------------------------------------------*
     Name:           AudioInit
     Description:    audio system initialize
     Arguments:      none
@@ -381,14 +358,6 @@ void AudioBufferAlloc(s32 SampleSize, s32 threadnum)
 void AudioExit(s32 threadnum)
 {
     // stop the adpcm stream
-    if (threadnum == 0)
-    {
-        AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  NULL);
-    }
-    else
-    {
-        AXRegisterDeviceFinalMixCallback(AX_DEVICE_DRC,  NULL);
-    }
     MP4PlayerCorePtr[threadnum]->Audio_Action = STREAM_NONE;
 
     memset(MP4PlayerCorePtr[threadnum]->PCMBufferL, 0, MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE);   // Buffer Initialize
@@ -413,6 +382,48 @@ void AudioExit(s32 threadnum)
     }
     
     OSReport("Audio Shut down completed\r");
+}
+
+
+void AudioInit2 (s32 threadnum)
+{
+    if (MP4DemuxCorePtr[threadnum]->AudioTrackFound == 1)
+    {
+        memcpy(&addrL[0], &Gaddr[0], sizeof(AXPBOFFSET));
+        memcpy(&addrR[0], &Gaddr[1], sizeof(AXPBOFFSET));
+        AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  NULL);
+        MP4PlayerCorePtr[threadnum]->Audio_Action = STREAM_NONE;
+        memset(MP4PlayerCorePtr[threadnum]->PCMBufferL, 0, MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE);   // Buffer Initialize
+        memset(MP4PlayerCorePtr[threadnum]->PCMBufferR, 0, MP4PlayerCorePtr[threadnum]->STREAMBUFFER_SIZE);   // Buffer Initialize
+    }
+}
+
+
+void AudioRestart (s32 threadnum)
+{
+    if (MP4DemuxCorePtr[threadnum]->AudioTrackFound == 1)
+    {
+        MP4PlayerCorePtr[threadnum]->audioinfo.done   = 0;
+        MP4PlayerCorePtr[threadnum]->audioinfo.offset = 0;
+
+        MP4PlayerCorePtr[threadnum]->AudioPrevPtr = 0;
+        MP4PlayerCorePtr[threadnum]->AudioCurrBufID = 0;
+
+        MP4PlayerCorePtr[threadnum]->AudioBuff_Offset = 0;
+        MP4PlayerCorePtr[threadnum]->pre_AudioBuff_Offset = -1;
+
+        AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  handleFinalMixTV);
+        MP4PlayerCorePtr[threadnum]->Audio_Action = STREAM_STARTED;
+    }
+}
+
+void AudioRestart2 (s32 threadnum)
+{
+    if (MP4DemuxCorePtr[threadnum]->AudioTrackFound == 1)
+    {
+        AXRegisterDeviceFinalMixCallback(AX_DEVICE_TV,  handleFinalMixTV);
+        MP4PlayerCorePtr[threadnum]->Audio_Action = STREAM_STARTED;
+    }
 }
 
 

@@ -141,6 +141,10 @@ typedef struct __MP4PlayerCore__ {
     s32     execendflag;
     s32     voutfound;
     s32     aoutfound;
+    s32     mode;
+    s32     SeekOffsetTime;
+    s32     current_time;
+    s32     ref_current_time;
 
     // File System Variables
     u32     file_input_mode;
@@ -239,6 +243,7 @@ typedef struct __MP4DemuxCore__ {
     s32     AACDecFirstFlag;
     s32     AACSampeRate;
     s32     AACChannelNum;
+    s32     AACRestart;
     s32     AACRefPts;
     s32     AACOutStartFlag;
 
@@ -254,13 +259,6 @@ typedef struct __MP4DemuxCore__ {
     s32 (*cbsetfunc)(MP4DMXFW_UNIT *, void *);
     s32 (*cbgetfunc)(MP4DMXFW_UNIT *, void *);
 
-    MP4DMXMpoMp4VideoTrackInf    mp4VideoTrackInf;
-    MP4DMXMpoMp4AudioTrackInf    mp4AudioTrackInf;
-    MP4DMXAvcConfig              AVCconfig;
-
-#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
-    s32      MP4Duration;
-#endif
     s32      MP4DmxNewStatus;
     s32      MP4DmxOldStatus;
     s32      MP4DmxAfterHeaderSize;
@@ -270,7 +268,50 @@ typedef struct __MP4DemuxCore__ {
 
     s32      VideoTrackFound;
     s32      AudioTrackFound;
+    MP4DMXMpoMp4VideoTrackInf    mp4VideoTrackInf;
+    MP4DMXMpoMp4AudioTrackInf    mp4AudioTrackInf;
+    MP4DMXAvcConfig              AVCconfig;
     s32      SampleStop;
+
+    s32      MP4Duration;
+    s32      g_SkipMode_Flash;
+    s32      vthresh;
+    s32      athresh;
+    u64      ref_start_time;
 } MP4DemuxCore;
+
+
+/* MoviePlayer GUI Control Structure */
+typedef struct __MP4PlayerGUICtl__ {
+    u32     SyncStart[2];
+    u32     VThreadStop[2];
+    u32     AThreadStop[2];
+    u32     PlayBaseTime;
+    u32     SyncStop;
+    u32     CurPlayState;
+    s32     UserSeekTime;
+    s32     ffbytime;
+    s32     rewbytime;
+    u32     PlayTime;
+    u32     PlayFrame;
+    s32     PlayAbort;
+    s32     PlayState;
+    s32     PauseState;
+    s32     AudioInitState;
+    s32     FileCounter;
+    s32     CurFilePos;
+    u8      *ViewAreaPtr;
+    s32     ViewAreaSize;
+    s32     PlayInfoEnable;
+
+    s32     VideoInterevalPerFrame;
+    s32     SeekOutputEnd;
+    s32     VideoOutSkip;
+    s32     VideoSeekState;
+    s32     NextCtlMode;
+    s32     FirstPlay;
+    s32     PlayCurrTime;
+} MP4PlayerGUICtl;
+
 
 #endif /* __MOVIETEST_API_H__ */

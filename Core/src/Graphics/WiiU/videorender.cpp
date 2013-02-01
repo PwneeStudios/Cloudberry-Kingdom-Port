@@ -26,6 +26,8 @@
 
 // --------- GX2 Data ---------
 
+extern void DrawMenu(u32 mode);
+
 GX2Texture      g_LTexture[2];
 GX2Texture      g_UVTexture[2];
 
@@ -33,13 +35,13 @@ GX2Texture      g_UVTexture[2];
 static DEMOGfxShader s_Shader;
 
 static DEMO_F32x3F32x2 QUAD_VERTEX_DATA[] = {
-    {-1.f,  1.f, 0.0f,
+    {-0.9f,  0.9f, 0.0f,
       0.0f,  0.0f,},
-    { 1.f,  1.f, 0.0f,
+    { 0.9f,  0.9f, 0.0f,
       1.0f,  0.0f},
-    {-1.f, -1.f, 0.0f,
+    {-0.9f, -0.9f, 0.0f,
       0.0f,  1.0f},
-    { 1.f, -1.f, 0.0f,
+    { 0.9f, -0.9f, 0.0f,
       1.0f,  1.0f},
 };
 
@@ -187,7 +189,7 @@ void FreeAttribData()
     DEMOGfxFreeMEM2(pAttribData->pVertexBuffer);
 }
 
-void drawTVFrame()
+void drawTVFrame(u32 mode)
 {
     u32 attribBuffer = 0;
 
@@ -226,9 +228,11 @@ void drawTVFrame()
 
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
+    DrawMenu(mode);
 
     // Restore state that was saved when DEMOGfxInit was called.
     GX2SetContextState(DEMOContextState);
+//        DEMOFontPrintf(4,2, "<Waiting for DRC attach>");
 
 //    DEMOGfxDoneRender();
 

@@ -21,6 +21,7 @@
 #include "videorender.h"
 #include "MovieTest.h"
 
+
 /*=========================================================================*
             definitions
  *=========================================================================*/
@@ -83,7 +84,7 @@ s32 VideoDraw(u8 *ip, s32 threadnum)
         GX2InitTexturePtrs(&g_UVTexture[threadnum], (void*)(ip+y_size), 0);
         if (threadnum == 0)
         {
-            drawTVFrame();
+            drawTVFrame(0);
         }
         else
         {
@@ -111,6 +112,71 @@ s32 VideoDraw(u8 *ip, s32 threadnum)
         }
         
     }
+
+    return 0;
+}
+
+
+s32 VideoDrawFirst(u8 *ip, s32 threadnum)
+{
+    if ((MP4DemuxCorePtr[threadnum]->H264ImageWidth * MP4DemuxCorePtr[threadnum]->H264ImageHeight)*3/2 > VIDEO_MAX_IMAGE_SIZE)
+    {
+        OSReport("[VideoDraw Fail] Width:%d, Height:%d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
+        return -1;
+    }
+
+    if (MP4PlayerCorePtr[threadnum]->OutputFrames == 0)
+    {
+        OSReport("Movie size : %d x %d\n", MP4DemuxCorePtr[threadnum]->H264ImageWidth, MP4DemuxCorePtr[threadnum]->H264ImageHeight);
+    }
+
+    {
+#ifdef PRINT_TIME
+        s32 starttime, endtime;
+#endif
+        u32 y_size = ((UVD_ALIGN_PITCH_IN_PIXELS(MP4DemuxCorePtr[threadnum]->H264ImageWidth))*MP4DemuxCorePtr[threadnum]->H264ImageHeight);
+        GX2InitTexturePtrs(&g_LTexture[threadnum], ip, 0);
+        GX2InitTexturePtrs(&g_UVTexture[threadnum], (void*)(ip+y_size), 0);
+        if (threadnum == 0)
+        {
+            drawTVFrame(0);
+        }
+        else
+        {
+            drawDRCFrame();
+        }
+        DEMODRCBeforeRender();
+        DEMODRCDoneRender();
+#ifdef PRINT_TIME
+        starttime = OSTicksToMilliseconds(OSGetTime());
+#endif
+#ifdef PRINT_TIME
+        endtime = OSTicksToMilliseconds(OSGetTime());
+        OSReport("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, threadnum);
+#endif
+        DEMOGfxDoneRender();
+        DEMOGfxBeforeRender();
+    }
+
+    return 0;
+}
+
+
+/*-------------------------------------------------------------------------*
+    Name:           DrawScreen
+    Description:    draw video frame
+    Arguments:      <input>
+                        ip                  frame buffer pointer
+    Returns:        MP4DMXFW_RET_SUCCESS    Success
+                    MP4DMXFW_RET_ERROR      Error
+ *-------------------------------------------------------------------------*/
+s32 DrawScreen(s32 threadnum)
+{
+    drawTVFrame(0);
+    DEMODRCBeforeRender();
+    DEMODRCDoneRender();
+    DEMOGfxDoneRender();
+    DEMOGfxBeforeRender();
 
     return 0;
 }
@@ -398,13 +464,13 @@ s32 VideoInit(s32 threadnum)
         }
         else
         {
-            if (MP4PlayerCorePtr[threadnum]->h264decfm[i] == NULL)
-            {
-                OSReport("cannot allocate framebuffer\n");
-                return MP4DMXFW_RET_ERROR;
-            }
-            MP4PlayerCorePtr[threadnum]->List_h264decfm[i].used = 0;
-            MP4PlayerCorePtr[threadnum]->List_h264decfm[i].h264decfm = MP4PlayerCorePtr[threadnum]->h264decfm[i];
+        if (MP4PlayerCorePtr[threadnum]->h264decfm[i] == NULL)
+        {
+            OSReport("cannot allocate framebuffer\n");
+            return MP4DMXFW_RET_ERROR;
+        }
+        MP4PlayerCorePtr[threadnum]->List_h264decfm[i].used = 0;
+        MP4PlayerCorePtr[threadnum]->List_h264decfm[i].h264decfm = MP4PlayerCorePtr[threadnum]->h264decfm[i];
         }
     }
 

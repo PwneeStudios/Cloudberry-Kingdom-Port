@@ -37,7 +37,7 @@ void InitVideoBuffer(s32 dest, u16 width, u16 height);
 void InitAttribData(void);
 void FreeAttribData(void);
 
-void drawTVFrame(void);
+void drawTVFrame(u32 mode);
 void drawDRCFrame(void);
 
 #ifdef __cplusplus
