@@ -96,6 +96,12 @@ FSClient*      GpClient[2];
 FSCmdBlock*    GpCmd[2];
 FSFileHandle   Gfh[2];
 
+s32 exc_start_time_stamp[2];
+s32 exc_end_time_stamp[2];
+
+bool EXIT_PLAYBACK = false;
+bool GLOBAL_VIDEO_OVERRIDE = false;
+
 #ifdef USE_PROCESS_SWITCHING
 OSEvent gDoRelease;
 OSEvent gAcquired;
@@ -116,8 +122,7 @@ static volatile BOOL   CoreProcessEnd;
 s32 process_sleep_time;
 s32 threadabort[2][8];
 #ifndef USE_SINGLE_CORE
-s32 exc_start_time_stamp[2];
-s32 exc_end_time_stamp[2];
+
 #endif
 
 
@@ -234,9 +239,11 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
         if (vendflag[0] && vendflag[1])
 #endif
         {
-//            break;
+            break;
         }
     }
+
+	GLOBAL_VIDEO_OVERRIDE = false;
 
     OSReport("Video Thread Finish\n");
     return(0);
@@ -256,7 +263,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
 
     OSReport("Audio Thread Start\n");
 
-    while(1)
+    while( 1 )
     {
         asys_currtime = OSTicksToMilliseconds(OSGetTime());
 #if TEST_MODE == 1
@@ -331,7 +338,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
         if (aendflag[0] && aendflag[1])
 #endif
         {
-//            break;
+			break;
         }
     }
 
@@ -963,7 +970,7 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
         }
     }
 
-    while (1)
+    while ( !EXIT_PLAYBACK )
     {
         OSReport("MP4Play[%d] Thread Start\n", intArg);
         if (MP4PlayerCorePtr[intArg]->file_input_mode == 0)
@@ -1170,12 +1177,25 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
             }
         }
 #else
-        iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (int16_t)0, (s64)UNASSIGNED_END_TIME_STAMP, intArg );
-        if( iMlibRet != MP4DMXFW_RET_SUCCESS )
-        {
-            OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
-            goto ERROR;
-        }
+		exc_start_time_stamp[intArg] = 0;
+        exc_end_time_stamp[intArg]   = 0;
+		for( int i = 0; i < MP4DemuxCorePtr[intArg]->MP4Duration/100; ++i )
+		{
+			exc_end_time_stamp[ intArg ] = exc_start_time_stamp[ intArg ] + 100;
+
+			iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (int16_t)exc_start_time_stamp[intArg],
+				(s64)exc_end_time_stamp[intArg], intArg );
+			if( iMlibRet != MP4DMXFW_RET_SUCCESS )
+			{
+				OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
+				goto ERROR;
+			}
+
+			if( EXIT_PLAYBACK )
+				break;
+
+			exc_start_time_stamp[ intArg ] += 100;
+		}
 #endif
 
 ERROR:
@@ -1874,16 +1894,10 @@ VideoPlayer::VideoPlayer()
 
 VideoPlayer::~VideoPlayer()
 {
-	for( int i = 0; i < 2; ++i )
-	{
-		MP4PlayerCorePtr[ i ]->vthread_end = 1;
-		MP4PlayerCorePtr[ i ]->athread_end = 1;
-		vendflag[ i ] = 1;
-		aendflag[ i ] = 1;
-	}
+	EXIT_PLAYBACK = true;
 
 	OSJoinThread(&Thread[2], NULL);
-    OSJoinThread(&Thread[3], NULL);
+    //OSJoinThread(&Thread[3], NULL);
 
     OSJoinThread(&Thread[0], NULL);
     OSJoinThread(&Thread[1], NULL);
@@ -1901,6 +1915,8 @@ void VideoPlayer::SetVolume( float volume )
 
 void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 {
+	EXIT_PLAYBACK = false;
+
 #ifdef INPUTNAME_DEFINED
     mp4Filename[0] = MP4_INPUT_SAMPLE1;     // set input file name
     mp4Filename[1] = MP4_INPUT_SAMPLE2;     // set input file name
@@ -1918,14 +1934,14 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
     LoopCounter[1] = 0;
 
 	// Create the video thread.
-    /*OSCreateThread( &Thread[0],   // ptr to the thread to init
+    OSCreateThread( &Thread[0],   // ptr to the thread to init
                     VideoOutputThread,              // ptr to the start routine
                     0,                              // params passed to start routine
                     NULL,
                     ThreadStack[0] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
-                    0);*/         // detached
+                    0);         // detached
 
     // Create the audio thread.
     OSCreateThread( &Thread[1],   // ptr to the thread to init
@@ -1937,6 +1953,7 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     16,                             // scheduling priority
                     0);         // detached
 
+	GLOBAL_VIDEO_OVERRIDE = true;
     OSResumeThread(&Thread[0]);
     OSResumeThread(&Thread[1]);
 
@@ -1950,22 +1967,22 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     16,                             // scheduling priority
                     0);         // detached
     // Create the play thread.
-    OSCreateThread( &Thread[3],   // ptr to the thread to init
+    /*OSCreateThread( &Thread[3],   // ptr to the thread to init
                     MP4PlayTVorDRC,                 // ptr to the start routine
                     1,                              // params passed to start routine
                     NULL,
                     ThreadStack[3] + STACK_SIZE,    // initial stack address
                     STACK_SIZE,                     // stack size
                     16,                             // scheduling priority
-                    0);         // detached
+                    0);*/         // detached
 
     OSResumeThread(&Thread[2]);
-    OSResumeThread(&Thread[3]);
+    //OSResumeThread(&Thread[3]);
 }
 
 void VideoPlayer::DrawFrame()
 {
-    s32 ret;
+   /* s32 ret;
     u32 vsys_currtime;
 
     vsys_currtime = OSTicksToMilliseconds(OSGetTime());
@@ -1988,7 +2005,7 @@ void VideoPlayer::DrawFrame()
                     }
                 }
                 if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 1)
-    {
+				{
 
                     ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
                     if (ret != 0)
@@ -2013,7 +2030,7 @@ void VideoPlayer::DrawFrame()
                 vendflag[i] = 1;
             }
         }
-    }
+    }*/
 }
 
 boost::shared_ptr< Texture2D > VideoPlayer::GetTexture()

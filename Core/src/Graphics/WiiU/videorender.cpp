@@ -194,7 +194,7 @@ void drawTVFrame()
     // When using the DEMO library, it is necessary to call
     // DEMOGfxBeforeRender and DEMOGfxDoneRender before and after drawing.
     // This function waits for the previous flip to complete.
-//    DEMOGfxBeforeRender();
+    DEMOGfxBeforeRender();
 
     GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.3, 0.45, 1.0f);
     GX2ClearDepthStencil(&DEMODepthBuffer, GX2_CLEAR_BOTH);
@@ -230,7 +230,7 @@ void drawTVFrame()
     // Restore state that was saved when DEMOGfxInit was called.
     GX2SetContextState(DEMOContextState);
 
-//    DEMOGfxDoneRender();
+    DEMOGfxDoneRender();
 
     return;
 }

@@ -93,6 +93,8 @@ CoreWiiU::~CoreWiiU()
 	LOG.Write( "SHUTDOWN END\n" );
 }
 
+extern bool GLOBAL_VIDEO_OVERRIDE;
+
 int CoreWiiU::Run()
 {
 	running_ = true;
@@ -120,14 +122,17 @@ int CoreWiiU::Run()
 			DEMODRCDoneRender();
 		}*/
 
-		DEMOGfxBeforeRender();
-		GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
-		GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
+		if( !GLOBAL_VIDEO_OVERRIDE )
+		{
+			DEMOGfxBeforeRender();
+			GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
+			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );
 
-		DEMOGfxSetContextState();
+			DEMOGfxSetContextState();
 
-		GX2SetColorBuffer(&DEMOColorBuffer, GX2_RENDER_TARGET_0);
-		GX2SetDepthBuffer(&DEMODepthBuffer);
+			GX2SetColorBuffer(&DEMOColorBuffer, GX2_RENDER_TARGET_0);
+			GX2SetDepthBuffer(&DEMODepthBuffer);
+		}
 
 		//GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
 		//GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
@@ -140,9 +145,12 @@ int CoreWiiU::Run()
 
 		game_.Update();
 
-		DEMOGfxSetContextState();
+		if( !GLOBAL_VIDEO_OVERRIDE )
+		{
+			DEMOGfxSetContextState();
 
-		DEMOGfxDoneRender();
+			DEMOGfxDoneRender();
+		}
 
 		// Close down.
 		if( !running_ )

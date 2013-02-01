@@ -258,9 +258,7 @@ typedef struct __MP4DemuxCore__ {
     MP4DMXMpoMp4AudioTrackInf    mp4AudioTrackInf;
     MP4DMXAvcConfig              AVCconfig;
 
-#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
     s32      MP4Duration;
-#endif
     s32      MP4DmxNewStatus;
     s32      MP4DmxOldStatus;
     s32      MP4DmxAfterHeaderSize;

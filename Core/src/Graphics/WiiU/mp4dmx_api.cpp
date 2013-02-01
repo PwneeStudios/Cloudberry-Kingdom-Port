@@ -1289,9 +1289,7 @@ s32 MP4DMXFW_ExecuteForHeader(void *pMlibHandle, MP4DMXFW_CtrlParam *ctrl_param,
                 ret = MP4DMXGetHeaderInf(&headerInfo, pMlibHandle);
                 printHeaderInfo(&headerInfo);
 
-#if defined(USE_PROCESS_SWITCHING) && !defined(USE_SINGLE_CORE)
                 MP4DemuxCorePtr[threadnum]->MP4Duration = (headerInfo.fragment_duration*1000)/headerInfo.timescale;
-#endif
                 for (track_cnt = 0; track_cnt < headerInfo.track_num; track_cnt++)
                 {
                     ret = MP4DMXGetTrackInf(track_cnt,&trackInfo, pMlibHandle);

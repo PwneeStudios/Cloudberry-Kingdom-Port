@@ -196,7 +196,8 @@ bool MainVideo::Paused = false;
 		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
 		Tools::QDrawer->Flush();*/
 
-		Subtitle();
+		// FIXME: Need to put subtitles back.
+		//Subtitle();
 
 	//#if WINDOWS && DEBUG
 	//                Tools::StartSpriteBatch();
