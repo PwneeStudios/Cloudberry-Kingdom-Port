@@ -1,6 +1,7 @@
 #include <global_header.h>
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Hacks\String.h>
 
 namespace CloudberryKingdom
 {
@@ -34,15 +35,9 @@ namespace CloudberryKingdom
         Locked = false;
         if (!CloudberryKingdomGame::Unlock_Levels)
         {
-            switch (Chapter)
-            {
-                case 1: Locked = false; break;
-                case 2: Locked = !PlayerManager::Awarded(Awardments::Award_Campaign1); break;
-                case 3: Locked = !PlayerManager::Awarded(Awardments::Award_Campaign2); break;
-                case 4: Locked = !PlayerManager::Awarded(Awardments::Award_Campaign3); break;
-				case 5: Locked = !PlayerManager::Awarded(Awardments::Award_Campaign4); break;
-                default: Locked = false; break;
-            }
+			int level = PlayerManager::MaxPlayerTotalCampaignLevel();
+			if ( Contains( CampaignSequence::getInstance()->ChapterEnd, (Chapter - 1) ) )
+				Locked = level < CampaignSequence.getInstance()->ChapterEnd[ Chapter - 1 ];
         }
 	}
 
@@ -62,17 +57,45 @@ namespace CloudberryKingdom
 
         void StartMenu_MW_Campaign::Update()
         {
+			boost::shared_ptr<EzText> _t;
+
             // Update level text
             int Level = PlayerManager::MaxPlayerTotalCampaignIndex();
             bool ShowLevel = Level > 0;
 
+			//bool ShowLevel = false;
+
+			//string template_level = Localization.WordString(Localization.Words.Continue) + ", " +
+			//              Localization.WordString(Localization.Words.Level) + " {0}";
+			std::wstring template_level = Localization.WordString( Localization::Words::Words_Continue );
+
+			boost::shared_ptr<MenuItem> __item = MyMenu->FindItemByName( L"Continue" );
+			if ( __item != 0 )
+			{
+				if (Level < 1)
+				{
+					Level = 1;
+					__item->Selectable = false;
+					__item->Show = false;
+					MyMenu->SelectItem(1);
+				}
+				else
+				{
+					__item->Selectable = true;
+					__item->Show = true;
+				}
+
+				__item->MyText->SubstituteText( Format( template_level.c_str(), Level ) );
+				__item->MySelectedText->SubstituteText( Format( template_level.c_str(), Level ) );
+			}
+
+
             if (ShowLevel)
-            //if (true)
             {
                 MyPile->FindEzText( L"Level" )->Show = true;
                 MyPile->FindQuad( L"BoxLeft" )->Show = true;
 
-                boost::shared_ptr<EzText> _t = MyPile->FindEzText( L"LevelNum" );
+                _t = MyPile->FindEzText( L"LevelNum" );
                 _t->Show = true;
                 _t->SubstituteText( ToString( Level ) );
             }
@@ -127,6 +150,7 @@ namespace CloudberryKingdom
 	{
 		sm->Active = true;
 		sm->MyGame->FadeIn( .05f );
+		sm->MyGame->KillToDo( L"StartMusic" );
 		CampaignSequence::getInstance()->Start(sm->_StartLevel);
 		sm->MyGame->WaitThenDo(0, boost::make_shared<OnReturnFromGameLambda>( sm ) );
 	}
@@ -211,36 +235,22 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<MenuItem> item;
 
-		// Chapter 1
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheBeginning, ItemFont ), 1 ) );
-		item->Name = std::wstring( L"MainCampaign" );
-		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
-		AddItem( item );
+			// Continue
+			int level = PlayerManager::MaxPlayerTotalCampaignIndex();
+			item = MakeMagic( CampaignChapterItem, (boost::make_shared<EzText>( L"xxx", ItemFont), -1) );
+			item->Name = L"Continue";
+			item->Go = Go;
+			AddItem(item);
 
-		// Chapter 2
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheNextNinetyNine, ItemFont ), 2 ) );
-		item->Name = std::wstring( L"Easy" );
-		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 3
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AGauntletOfDoom, ItemFont ), 3 ) );
-		item->Name = std::wstring( L"Hard" );
-		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 4
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_AlmostHero, ItemFont ), 4 ) );
-		item->Name = std::wstring( L"Hardcore" );
-		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 5
-		item = MakeMagic( CampaignChapterItem, ( boost::make_shared<EzText>( Localization::Words_TheMasochist, ItemFont ), 5 ) );
-		item->Name = std::wstring( L"Maso" );
-		item->setGo( boost::make_shared<CampaignGoLambda>( boost::static_pointer_cast<StartMenu_MW_Campaign>( shared_from_this() ) ) );
-		AddItem( item );
-
+            // Chapter 1
+			for (int i = 1; i <= 7; i++)
+			{
+				item = MakeMagic( CampaignChapterItem, (boost::make_shared<EzText>(CampaignSequence::ChapterName[i - 1], ItemFont), i) );
+				item->Name = L"Chapter" + ToString( i );
+				item->Go = Go;
+				AddItem(item);
+			}
+			
 		MyMenu->SelectItem( 0 );
 
         // Level
@@ -279,6 +289,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::Go( const boost::shared_ptr<MenuItem> &item )
 	{
+		if ( CloudberryKingdomGame::LockCampaign ) return;
+
 		boost::shared_ptr<CampaignChapterItem> c_item = boost::dynamic_pointer_cast<CampaignChapterItem>( item );
 		if ( 0 == c_item )
 			return;
@@ -290,7 +302,10 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Campaign::Go( int StartLevel )
 	{
+		MyGame->KillToDo("StartMusic");
 		Tools::SongWad->FadeOut();
+		Tools::SongWad->DisplayingInfo = false;
+
 		MyGame->FadeToBlack( .0225f, 20 );
 		Active = false;
 
@@ -302,79 +317,45 @@ namespace CloudberryKingdom
     {
         Update();
         SaveGroup::SaveAll();
+
+		Tools::PlayHappyMusic( MyGame );
     }
 
-	void StartMenu_MW_Campaign::SetPos_NoCinematic()
-	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"MainCampaign" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 686.4453f, 191.6667f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-			_item->SetSelectedPos( Vector2( 622.5566f, 186.1112f ) );
+        void StartMenu_MW_Campaign::SetPos_NoCinematic()
+        {
+            boost::shared_ptr<MenuItem> _item;
+            _item = MyMenu->FindItemByName( L"Chapter1" ); if (_item != 0 ) { _item->setSetPos( Vector2( 686.4453f, 191.6667f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, 186.1112f )); }
+            _item = MyMenu->FindItemByName( L"Chapter2" ); if (_item != 0 ) { _item->setSetPos( Vector2( 708.665f, -36.44455f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
+            _item = MyMenu->FindItemByName( L"Chapter3" ); if (_item != 0 ) { _item->setSetPos( Vector2( 711.4443f, -239.5557f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
+            _item = MyMenu->FindItemByName( L"Chapter4" ); if (_item != 0 ) { _item->setSetPos( Vector2( 714.2227f, -437.111f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
+            _item = MyMenu->FindItemByName( L"Chapter5" ); if (_item != 0 ) { _item->setSetPos( Vector2( 730.8906f, -656.889f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
+
+            MyMenu->setPos( Vector2(-783.3339f, 227.7778f ) );
+        }
+
+        void StartMenu_MW_Campaign::SetPos_WithCinematic()
+        {
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Continue" ); if (_item != 0 ) { _item->setSetPos( Vector2( 726.1112f, 262.7778f ) ); _item->MyText->setScale( 0.6477503f ); _item->MySelectedText->setScale( 0.6477503f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter1" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, 58.33334f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter2" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, -92.00005f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter3" ); if (_item != 0 ) { _item->setSetPos( Vector2( 742.7776f, -247.8891f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter4" ); if (_item != 0 ) { _item->setSetPos( Vector2( 745.5554f, -400.9998f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter5" ); if (_item != 0 ) { _item->setSetPos( Vector2( 740.f, -548.5557f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter6" ); if (_item != 0 ) { _item->setSetPos( Vector2( 750.3334f, -700.3333f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Chapter7" ); if (_item != 0 ) { _item->setSetPos( Vector2( 750.3334f, -850.6672f ) ); _item->MyText->setScale( 0.5883336f ); _item->MySelectedText->setScale( 0.5883336f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+
+			MyMenu->setPos( Vector2(-708.3339f, 216.6667f ) );
+
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-800.0029f, 863.8889f ) ); _t->setScale( 1.3f ); }
+			_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-1241.667f, -577.7778f ) ); _t->setScale( 0.7490832f ); }
+			_t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2(-775.0001f, -513.8888f ) ); _t->setScale( 1.001751f ); }
+
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-755.5557f, -702.7777f ) ); _q->setSize( Vector2( 172.6158f, 503.8864f ) ); }
+
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
 		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Easy" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 708.665f, -36.44455f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Hard" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 711.4443f, -239.5557f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Hardcore" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 714.2227f, -437.111f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Maso" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 730.8906f, -656.889f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-			_item->SetSelectedPos( Vector2( 622.5566f, -1 ) );
-		}
-
-		MyMenu->setPos( Vector2( -783.3339f, 227.7778f ) );
-	}
-
-	void StartMenu_MW_Campaign::SetPos_WithCinematic()
-    {
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"MainCampaign" ); if (_item != 0 ) { _item->setSetPos( Vector2( 686.4453f, 191.6667f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, 186.1112f )); }
-        _item = MyMenu->FindItemByName( L"Easy" ); if (_item != 0 ) { _item->setSetPos( Vector2( 708.665f, -36.44455f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Hard" ); if (_item != 0 ) { _item->setSetPos( Vector2( 711.4443f, -239.5557f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Hardcore" ); if (_item != 0 ) { _item->setSetPos( Vector2( 714.2227f, -437.111f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Maso" ); if (_item != 0 ) { _item->setSetPos( Vector2( 730.8906f, -656.889f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2( 622.5566f, -1.f )); }
-
-        MyMenu->setPos( Vector2(-783.3339f, 227.7778f ) );
-
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-800.0029f, 863.8889f ) ); _t->setScale( 1.3f ); }
-        _t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2(-1241.667f, -577.7778f ) ); _t->setScale( 0.7490832f ); }
-        _t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2(-775.0001f, -513.8888f ) ); _t->setScale( 1.001751f ); }
-
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-755.5557f, -702.7777f ) ); _q->setSize( Vector2( 172.6158f, 503.8864f ) ); }
-
-        MyPile->setPos( Vector2( 0.f, 0.f ) );
     }
 }

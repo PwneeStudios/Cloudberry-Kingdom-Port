@@ -112,7 +112,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<EzFont> font = Resources::Font_Grobold42;
 		float FontScale = .775f;
 
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( std::wstring( L"Sign in?" ), font ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_SignIn, font ) ) );
 		item->Name = std::wstring( L"Header" );
 		item->MyText->setScale( .89f );
 
@@ -120,7 +120,7 @@ namespace CloudberryKingdom
 		item->Selectable = false;
 		pos.Y -= 1.35f * YSpacing;
 
-		const std::wstring tempVector[] = { std::wstring( L"Yes" ), std::wstring( L"No" ) };
+		const std::wstring tempVector[] = { Localization::WordString( Localization::Words::Words_Yes ), Localization::WordString( Localization::Words::Words_No ) };
 		std::vector<std::wstring> ItemString = VecFromArray( tempVector );
 		for ( int i = 0; i < 2; i++ )
 		{

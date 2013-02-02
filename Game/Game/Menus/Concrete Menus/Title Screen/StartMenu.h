@@ -214,16 +214,7 @@ namespace CloudberryKingdom
 	
 		static void GrayItem( const boost::shared_ptr<MenuItem> &item );
 
-		void MakeMenu();
-
-		void BlackBox();
-
-		void Centered();
-
-		void Forest();
-
-		void Title3();
-
+		virtual void MakeMenu();
 	
 		virtual void SetChildControl( const boost::shared_ptr<GUI_Panel> &child );
 

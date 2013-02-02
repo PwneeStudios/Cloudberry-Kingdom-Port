@@ -52,6 +52,8 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
+		EnableBounce();
+
 		this->setControl( Control );
 		this->Player = Player;
 		FixedToCamera = true;
@@ -83,8 +85,12 @@ namespace CloudberryKingdom
 		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
-
-		MakeBackButton();
+#if PC_VERSION
+            MakeBackButton();
+#else
+            MakeBackButton();
+            //MakeStaticBackButton();
+#endif
 
 		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
@@ -114,8 +120,16 @@ namespace CloudberryKingdom
 			GUI_Panel::Call( ok );
 		}
 
-		Hide( PresetPos_LEFT );
-		Active = false;
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
+        else
+        {
+			Hide( PresetPos_LEFT );
+			Active = false;
+		}
 	}
 
 	void SaveSeedAs::OnReturnTo()

@@ -94,11 +94,17 @@ namespace CloudberryKingdom
 	}
 
 bool InGameStartMenu::PreventMenu = false;
+	
 
-	InGameStartMenu::InGameStartMenu( int Control ) : CkBaseMenu( false ) { }
+	InGameStartMenu::InGameStartMenu( int Control ) : CkBaseMenu( false )
+	{
+		CenterItems = false;
+	}
 	boost::shared_ptr<InGameStartMenu> InGameStartMenu::InGameStartMenu_Construct( int Control )
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
+
+		EnableBounce();
 
 		this->setControl( Control );
 
@@ -165,7 +171,12 @@ bool InGameStartMenu::PreventMenu = false;
 		MakeDarkBack();
 
 		// Make the backdrop
-		boost::shared_ptr<QuadClass> backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1080x840" ), 1500.f, true );
+        boost::shared_ptr<QuadClass> backdrop;
+        if (UseBounce)
+            backdrop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 1500.0f, true );
+        else
+            backdrop = boost::make_shared<QuadClass>( L"Backplate_1080x840", 1500.0f, true );		
+		
 		backdrop->Name = L"Backdrop";
 
 		MyPile->Add( backdrop );
@@ -178,12 +189,6 @@ bool InGameStartMenu::PreventMenu = false;
 
 		boost::shared_ptr<MenuItem> item;
 
-		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_Menu, ItemFont );
-		HeaderText->Name = std::wstring( L"Header" );
-		SetHeaderProperties( HeaderText );
-		MyPile->Add( HeaderText );
-		HeaderText->setPos( Vector2( -1663.889f, 971.8889f ) );
 
 		ItemPos = Vector2( -1560.333f, 600 );
 		PosAdd = Vector2( 0, -270 );
@@ -196,7 +201,7 @@ bool InGameStartMenu::PreventMenu = false;
 		}
 
 		// Resume
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Resume, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Resume, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"Resume" );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->MyText->setScale( item->MyText->getScale() * 1.1f );
@@ -206,14 +211,14 @@ bool InGameStartMenu::PreventMenu = false;
 
 
 		// Statistics
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Statistics, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Statistics, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"Stats" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoStatsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		// SaveLoadSeed
 		Localization::Words word = Tools::CurLevel->CanLoadLevels ? Localization::Words_SaveLoad : Localization::Words_SaveSeed;
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( word, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( word, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"SaveLoadSeed" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoSaveLoadProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		if ( !Tools::CurLevel->CanLoadLevels && !Tools::CurLevel->CanSaveLevel )
@@ -224,13 +229,13 @@ bool InGameStartMenu::PreventMenu = false;
 		AddItem( item );
 
 		// Options
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Options, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Options, ItemFont, CenterItems ) ) );
 		item->Name = std::wstring( L"Options" );
 		item->setGo( Cast::ToItem( boost::make_shared<GoOptionsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		AddItem( item );
 
 		//// Controls
-		//item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Controls, ItemFont ) ) );
+		//item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Controls, ItemFont, CenterItems ) ) );
 		//item->Name = std::wstring( L"Controls" );
 		//item->setGo( Cast::ToItem( boost::make_shared<GoControlsProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		//AddItem( item );
@@ -238,7 +243,7 @@ bool InGameStartMenu::PreventMenu = false;
 		// Remove player
 		if ( RemoveMeOption )
 		{
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RemoveMe, ItemFont ) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_RemoveMe, ItemFont, CenterItems ) ) );
 			item->Name = std::wstring( L"Remove" );
 			item->setGo( Cast::ToItem( boost::make_shared<GoRemoveProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 			AddItem( item );
@@ -264,17 +269,53 @@ bool InGameStartMenu::PreventMenu = false;
 		MyMenu->SelectItem( 0 );
 	}
 
+        bool InGameStartMenu::MenuReturnToCaller( boost::shared_ptr<Menu> menu )
+        {
+			getMyLevel()->ReplayPaused = true;
+
+            HoldLevel = getMyLevel();
+            MyGame->WaitThenDo( 7, Unpause );
+
+            return CkBaseMenu::MenuReturnToCaller( menu );
+        }
+
+        boost::shared_ptr<Level> HoldLevel;
+        void InGameStartMenu::Unpause()
+        {
+            HoldLevel->ReplayPaused = false;
+            HoldLevel.reset();
+        }
+
 	void InGameStartMenu::GoRemove()
 	{
 		boost::shared_ptr<VerifyRemoveMenu> verify = MakeMagic( VerifyRemoveMenu, ( getControl() ) );
 		GUI_Panel::Call( verify );
-		Hide( PresetPos_LEFT );
+		
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
+        }
+        else
+        {		
+			Hide( PresetPos_LEFT );
+		}
+
 		setPauseGame( true );
 	}
 
 	void InGameStartMenu::GoControls()
 	{
-		MyGame->WaitThenDo( 4, boost::make_shared<GoControlsHelper>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
+        }
+        else
+        {
+			MyGame->WaitThenDo( 4, boost::make_shared<GoControlsHelper>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
+		}
+
 		boost::shared_ptr<ControlScreen> screen = MakeMagic( ControlScreen, ( getControl() ) );
 		Call( screen, 22 );
 	}
@@ -283,7 +324,16 @@ bool InGameStartMenu::PreventMenu = false;
 	{
 		Call( MakeMagic( SoundMenu, ( getControl(), false ) ), 0 );
 
-		Hide( PresetPos_LEFT );
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
+        else
+        {
+			Hide( PresetPos_LEFT );
+		}
+
 		setPauseGame( true );
 	}
 
@@ -304,15 +354,35 @@ bool InGameStartMenu::PreventMenu = false;
 			Call( MakeMagic( SaveLoadSeedMenu, ( getControl(), getMyLevel()->CanLoadLevels, getMyLevel()->CanSaveLevel ) ), 0 );
 	#endif
 		}
-		Hide( PresetPos_LEFT );
+
+        if ( UseBounce )
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
+        else
+        {
+			Hide( PresetPos_LEFT );
+		}
+
 		setPauseGame( true );
 
 	}
 
 	void InGameStartMenu::GoStats()
 	{
-		Call( MakeMagic( StatsMenu, ( StatGroup_LIFETIME ) ), 19 );
-		Hide( PresetPos_LEFT );
+		Call( MakeMagic( StatsMenu, ( StatGroup_LIFETIME ) ), UseBounce ? 0 : 19 );
+		
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
+        else
+        {		
+			Hide( PresetPos_LEFT );
+		}
+
 		setPauseGame( true );
 	}
 
@@ -326,9 +396,6 @@ bool InGameStartMenu::PreventMenu = false;
         _item = MyMenu->FindItemByName( L"Exit" ); if ( _item != 0 ) { _item->setSetPos( Vector2(-1496.444f, -252.7777f) ); _item->MyText->setScale( 0.775f ); _item->MySelectedText->setScale( 0.775f ); _item->SelectIconOffset = Vector2(0.f, 0.f); }
 
         MyMenu->setPos( Vector2(1109.028f, -40.97224f) );
-
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Header" ); if ( _t != 0 ) { _t->setPos( Vector2(-1463.89f, 1474.667f) ); _t->setScale( 1.12375f ); }
 
         boost::shared_ptr<QuadClass> _q;
         _q = MyPile->FindQuad( L"Backdrop" ); if ( _q != 0 ) { _q->setPos( Vector2(-972.9169f, 29.86109f) ); _q->setSize( Vector2(1132.148f, 880.288f) ); }
@@ -360,7 +427,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 	void InGameStartMenu::MakeExitItem()
 	{
-		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ExitLevel, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ExitLevel, ItemFont, CenterItems ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<VerifyExitProxy>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) ) );
 		item->Name = L"Exit";
 		AddItem( item );
@@ -369,7 +436,17 @@ bool InGameStartMenu::PreventMenu = false;
 	void InGameStartMenu::VerifyExit()
 	{
 		Call( MakeMagic( VerifyQuitLevelMenu, ( getControl() ) ), 0 );
-		Hide( PresetPos_LEFT );
+		
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
+        else
+        {		
+			Hide( PresetPos_LEFT );
+		}
+
 		setPauseGame( true );
 	}
 

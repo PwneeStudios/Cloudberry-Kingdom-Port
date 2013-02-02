@@ -37,7 +37,6 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::SlideIn( int Frames )
 	{
-		//Title.BackPanel.SetState(StartMenu_MW_Backpanel.State.Scene_Blur);
 		Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_TITLE );
 		StartMenu::SlideIn( 0 );
 	}
@@ -85,7 +84,7 @@ namespace CloudberryKingdom
     {
         if (CallingOptionsMenu)
         {
-            MyMenu->SelectItem(4);
+            MyMenu->SelectItem(3);
             CallingOptionsMenu = false;
         }
 
@@ -102,99 +101,75 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::Init()
 	{
-		 StartMenu::Init();
+		StartMenu::Init();
 
 		CallDelay = ReturnToCallerDelay = 0;
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
-
-		boost::shared_ptr<MenuItem> Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Menu, ItemFont ) ) );
-		Header->ScaleText( 1.3f );
-		SetItemProperties( Header );
-		Header->Selectable = false;
-		MyMenu->Add( Header, 0 );
-		MyMenu->SelectItem( 1 );
 
 		BackBox = boost::make_shared<QuadClass>( std::wstring( L"Title_Strip" ) );
 		BackBox->setAlpha( .9f );
 		MyPile->Add( BackBox, std::wstring( L"Back" ) );
 
-		MyPile->FadeIn( .33f );
-
-		//BlackBox();
-		SmallBlackBox();
+		SetPos();
 	}
 
-	void StartMenu_MW::BlackBox()
+	void StartMenu_MW::MakeMenu()
+    {
+        boost::shared_ptr<MenuItem> item;
+
+        // Arcade
+        item = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_TheArcade, ItemFont, true ) ) );
+        item->Name = L"Arcade";
+        item->setGo( boost::make_shared<StartMenuLambda_Arcade>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+        AddItem(item);
+
+        // Campaign
+        item = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_StoryMode, ItemFont, true ) ) );
+        item->Name = L"Campaign";
+        AddItem(item);
+        item->setGo( boost::make_shared<StartMenuLambda_Campaign>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+
+        // Free Play
+        item = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_FreePlay, ItemFont, true ) ) );
+        item->Name = L"Freeplay";
+        item->setGo( boost::make_shared<StartMenuLambda_Freeplay>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+        AddItem(item);
+
+        // Options
+        item = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_Options, ItemFont, true ) ) );
+        item->Name = L"Options";
+        item->setGo( boost::make_shared<StartMenuLambda_Options>( boost::static_pointer_cast<StartMenu>( shared_from_this() ) ) );
+        AddItem(item);
+
+        // Exit
+        item = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_Back, ItemFont, true ) ) );
+        item->Name = L"Exit";
+        item->setGo( boost::make_shared<ItemReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+        AddItem(item);
+
+        EnsureFancy();
+
+        this->CallToLeft = true;
+    }
+
+	void StartMenu_MW::SetPos()
 	{
-		EnsureFancy();
-	}
+        BackBox->TextureName = L"White";
+        BackBox->Quad->SetColor( ColorHelper->Gray(.1f ));
+        BackBox->setAlpha( .73f );
 
-	void StartMenu_MW::SmallBlackBox()
-	{
-		BackBox->setTextureName( std::wstring( L"White" ) );
-		BackBox->Quad_Renamed.SetColor( ColorHelper::Gray( .1f ) );
-		BackBox->setAlpha( .73f );
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Arcade" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, 365.5279f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Campaign" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, 160.3057f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Freeplay" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -26.47217f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Options" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -216.0278f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"Exit" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0, -419.1389f ) ); _item->MyText->setScale( 0.66f ); _item->MySelectedText->setScale( 0.66f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 255.5566f, -8.333374f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Arcade" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -2232.778f, 337.7501f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Campaign" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -2233.943f, 149.1946f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Freeplay" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -2156.22f, -34.80548f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Options" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -2090.221f, -213.25f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Exit" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1950.778f, -413.5834f ) );
-			_item->MyText->setScale( 0.66f );
-			_item->MySelectedText->setScale( 0.66f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        MyMenu->setPos( Vector2(-80.55566f, -219.4445f ) );
 
-		MyMenu->setPos( Vector2( 1709.92f, -246.1907f ) );
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-61.11133f, -336.1111f ) ); _q->setSize( Vector2( 524.4158f, 524.4158f ) ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Back" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -61.11133f, -336.1111f ) );
-			_q->setSize( Vector2( 524.4158f, 524.4158f ) );
-		}
-
-		MyPile->setPos( Vector2( -27.77734f, -33.33337f ) );
+        MyPile->setPos( Vector2(-27.77734f, -33.33337f ) );
 	}
 }

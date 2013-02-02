@@ -267,10 +267,13 @@ namespace CloudberryKingdom
 #endif
 
 #if defined(PC_VERSION)
-	CustomControlsMenu::CustomControlsMenu() { }
+	CustomControlsMenu::CustomControlsMenu() : CkBaseMenu( false ) { }
 	boost::shared_ptr<CustomControlsMenu> CustomControlsMenu::CustomControlsMenu_Construct()
 	{
-		CkBaseMenu::CkBaseMenu_Construct();
+		CkBaseMenu::CkBaseMenu_Construct( false );
+
+        EnableBounce();
+        Constructor();
 
 		return boost::static_pointer_cast<CustomControlsMenu>( shared_from_this() );
 	}
@@ -279,7 +282,15 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+        if (UseBounce)
+        {
+            Backdrop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 1500.f, true );
+        }
+        else
+        {
+			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+		}
+
 		MyPile->Add( Backdrop );
 		Backdrop->setSize( Vector2( 1376.984f, 1077.035f ) );
 		Backdrop->setPos( Vector2( -18.6521f, -10.31725f ) );

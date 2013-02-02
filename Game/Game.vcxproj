@@ -177,6 +177,7 @@
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_CustomLevel.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Exit.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.cpp" />
+    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.cpp" />
@@ -430,6 +431,7 @@
     <ClInclude Include="Core\Tools\Random.h" />
     <ClInclude Include="Core\Tools\Set.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h" />
+    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h" />
     <ClInclude Include="Game\Player\Hero Physics\TimeShip.h" />
     <ClInclude Include="Game\Player\Leaderboard.h" />
     <ClInclude Include="Hacks\Compare.h" />

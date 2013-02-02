@@ -44,25 +44,24 @@ namespace CloudberryKingdom
         Awardment::NewGameMode = L"New Game Mode";
         Awardment::Default = L"Awardment";
 
-        Award_Campaign1 = boost::make_shared<Awardment>( 1, Localization::Words_AwardTitle_Campaign1, Localization::Words_AwardText_Campaign1);
-        Award_ArcadeHighScore = boost::make_shared<Awardment>( 2, Localization::Words_AwardTitle_ArcadeHighScore, Localization::Words_AwardText_ArcadeHighScore);
-        Award_Bungee = boost::make_shared<Awardment>( 3, Localization::Words_AwardTitle_Bungee, Localization::Words_AwardText_Bungee);
-        Award_ArcadeHighScore2 = boost::make_shared<Awardment>( 4, Localization::Words_AwardTitle_ArcadeHighScore2, Localization::Words_AwardText_ArcadeHighScore2);
-        Award_Die = boost::make_shared<Awardment>( 5, Localization::Words_AwardTitle_Die, Localization::Words_AwardText_Die);
-        Award_Campaign3 = boost::make_shared<Awardment>( 6, Localization::Words_AwardTitle_Campaign3, Localization::Words_AwardText_Campaign3);
-        Award_Invisible = boost::make_shared<Awardment>( 7, Localization::Words_AwardTitle_Invisible, Localization::Words_AwardText_Invisible);
-        Award_Hats = boost::make_shared<Awardment>( 8, Localization::Words_AwardTitle_Hats, Localization::Words_AwardText_Hats);
-        Award_Campaign2 = boost::make_shared<Awardment>( 9, Localization::Words_AwardTitle_Campaign2, Localization::Words_AwardText_Campaign2);
-        Award_UnlockAllArcade = boost::make_shared<Awardment>( 10, Localization::Words_AwardTitle_UnlockAllArcade, Localization::Words_AwardText_UnlockAllArcade);
-        Award_NoDeath = boost::make_shared<Awardment>( 11, Localization::Words_AwardTitle_NoDeath, Localization::Words_AwardText_NoDeath);
-        Award_Save = boost::make_shared<Awardment>( 12, Localization::Words_AwardTitle_Save, Localization::Words_AwardText_Save);
-        Award_Obstacles = boost::make_shared<Awardment>( 13, Localization::Words_AwardTitle_Obstacles, Localization::Words_AwardText_Obstacles);
-        Award_Buy = boost::make_shared<Awardment>( 14, Localization::Words_AwardTitle_Buy, Localization::Words_AwardText_Buy);
-        Award_Campaign4 = boost::make_shared<Awardment>( 15, Localization::Words_AwardTitle_Campaign4, Localization::Words_AwardText_Campaign4);
-        Award_BuyHat = boost::make_shared<Awardment>( 16, Localization::Words_AwardTitle_BuyHat, Localization::Words_AwardText_BuyHat);
-        Award_HeroRush2Level = boost::make_shared<Awardment>( 17, Localization::Words_AwardTitle_HeroRush2Level, Localization::Words_AwardText_HeroRush2Level);
-        Award_Replay = boost::make_shared<Awardment>( 18, Localization::Words_AwardTitle_Replay, Localization::Words_AwardText_Replay);
-        Award_Campaign5 = boost::make_shared<Awardment>( 19, Localization::Words_AwardTitle_Campaign5, Localization::Words_AwardText_Campaign5);
+        Award_Campaign1 = boost::make_shared<Awardment>( 1, L"Award_Campaign1", Localization::Words_AwardTitle_Campaign1, Localization::Words_AwardText_Campaign1);
+        Award_ArcadeHighScore = boost::make_shared<Awardment>( 2, L"Award_ArcadeHighScore", Localization::Words_AwardTitle_ArcadeHighScore, Localization::Words_AwardText_ArcadeHighScore);
+        Award_Bungee = boost::make_shared<Awardment>( 3, L"Award_Bungee", Localization::Words_AwardTitle_Bungee, Localization::Words_AwardText_Bungee);
+        Award_ArcadeHighScore2 = boost::make_shared<Awardment>( 4, L"Award_ArcadeHighScore2", Localization::Words_AwardTitle_ArcadeHighScore2, Localization::Words_AwardText_ArcadeHighScore2);
+        Award_Die = boost::make_shared<Awardment>( 5, L"Award_Die", Localization::Words_AwardTitle_Die, Localization::Words_AwardText_Die);
+        Award_Campaign3 = boost::make_shared<Awardment>( 6, "Award_Campaign3", Localization::Words_AwardTitle_Campaign3, Localization::Words_AwardText_Campaign3);
+        Award_Invisible = boost::make_shared<Awardment>( 7, "Award_Invisible", Localization::Words_AwardTitle_Invisible, Localization::Words_AwardText_Invisible);
+        Award_Hats = boost::make_shared<Awardment>( 8, "Award_Hats", Localization::Words_AwardTitle_Hats, Localization::Words_AwardText_Hats);
+        Award_Campaign2 = boost::make_shared<Awardment>( 9, "Award_Campaign2", Localization::Words_AwardTitle_Campaign2, Localization::Words_AwardText_Campaign2);
+        Award_UnlockAllArcade = boost::make_shared<Awardment>( 10, "Award_UnlockAllArcade", Localization::Words_AwardTitle_UnlockAllArcade, Localization::Words_AwardText_UnlockAllArcade);
+        Award_NoDeath = boost::make_shared<Awardment>( 11, "Award_NoDeath", Localization::Words_AwardTitle_NoDeath, Localization::Words_AwardText_NoDeath);
+        Award_Save = boost::make_shared<Awardment>( 12, "Award_Save", Localization::Words_AwardTitle_Save, Localization::Words_AwardText_Save);
+        Award_Obstacles = boost::make_shared<Awardment>( 13, "Award_Obstacles", Localization::Words_AwardTitle_Obstacles, Localization::Words_AwardText_Obstacles);
+        Award_Buy = boost::make_shared<Awardment>( 14, "Award_Buy", Localization::Words_AwardTitle_Buy, Localization::Words_AwardText_Buy);
+        Award_Campaign4 = boost::make_shared<Awardment>( 15, "Award_Campaign4", Localization::Words_AwardTitle_Campaign4, Localization::Words_AwardText_Campaign4);
+        Award_BuyHat = boost::make_shared<Awardment>( 16, "Award_BuyHat", Localization::Words_AwardTitle_BuyHat, Localization::Words_AwardText_BuyHat);
+        Award_HeroRush2Level = boost::make_shared<Awardment>( 17, "Award_HeroRush2Level", Localization::Words_AwardTitle_HeroRush2Level, Localization::Words_AwardText_HeroRush2Level);
+		Award_Replay = boost::make_shared<Awardment>(18, "Award_Replay", Localization::Words::Words_AwardTitle_Replay, Localization::Words::Words_AwardText_Replay);
 
         // Arcade Unlocks
         UnlockTimeCrisis = boost::make_shared<Awardment>(100, L"Time Crisis Unlocked!", 
@@ -103,7 +102,7 @@ namespace CloudberryKingdom
 	std::map<int, boost::shared_ptr<Awardment> > Awardments::AwardsDict;
 
 
-    Awardment::Awardment(int Guid, Localization::Words Name, Localization::Words Description)
+    Awardment::Awardment(int Guid, std::wstring Key, Localization::Words Name, Localization::Words Description)
     {
         Official = true;
 #if defined(XBOX)
@@ -111,6 +110,8 @@ namespace CloudberryKingdom
 #else
         ShowWhenAwarded = true;
 #endif
+		
+		this->Key = Key;
 
         this->Name = Name;
         this->Description = Description;
@@ -129,7 +130,13 @@ namespace CloudberryKingdom
         this->Name = Localization::Words_None;;
         this->Description = Localization::Words_None;
 
+#ifdef NOT_PC
+        ShowWhenAwarded = false;
+		this->Unlockable = false;
+#else
         this->Unlockable = Unlockable;
+#endif
+
         this->Guid = Guid;
         this->TitleType = TitleType;
         this->ShowWhenAwarded = ShowWhenAwarded;
@@ -291,6 +298,19 @@ namespace CloudberryKingdom
                 }
                 else
                     player->Awardments_Renamed->Add( award->Guid );
+
+#if NOT_PC
+				// FIXME give award here on PS3
+				Tools::Warning();
+                //if (award->Official)
+                //{
+                //    foreach (var gamer in Gamer.SignedInGamers)
+                //    {
+                //        SignedInGamer AwardedGamer = gamer;
+                //        gamer.BeginAwardAchievement(award.Key, GiveAchievementCallback, AwardedGamer);
+                //    }
+                //}
+#endif
 
                 // Show a note saying the reward was given
                 if (award->ShowWhenAwarded)

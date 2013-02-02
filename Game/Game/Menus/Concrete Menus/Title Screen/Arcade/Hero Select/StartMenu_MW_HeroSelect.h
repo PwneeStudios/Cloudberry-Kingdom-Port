@@ -95,6 +95,7 @@ namespace CloudberryKingdom
 
 		virtual void OnAdd();
 
+		boost::shared_ptr<QuadClass> Scroll, ScrollTop, ScrollBottom;
 		boost::shared_ptr<HeroDoll> MyHeroDoll;
 		virtual void Init();
 
@@ -102,11 +103,14 @@ namespace CloudberryKingdom
 //C# TO C++ CONVERTER NOTE: The variable Level was renamed since it is named the same as a user-defined type:
 		boost::shared_ptr<EzText> Score, Level_Renamed;
 
-	
+
+		void MyPhsxStep();
 		virtual void OnReturnTo();
 
 	
 		void UpdateScore();
+
+		int NumSelectableItems;
 
 		void Update();
 

@@ -127,7 +127,7 @@ namespace CloudberryKingdom
 		}
 
 
-		Tools::Song_Happy = Tools::SongWad->FindByName( std::wstring( L"Happy" ) );
+		Tools::Song_Happy = Tools::SongWad->FindByName( std::wstring( L"Happy^James_Stant" ) );
 		Tools::Song_Happy->DisplayInfo = false;
 
 		Tools::Song_140mph = Tools::SongWad->FindByName( std::wstring( L"140_Mph_in_the_Fog^Blind_Digital" ) );
@@ -164,12 +164,10 @@ namespace CloudberryKingdom
 		Tools::Song_WritersBlock->Volume = 1;
 
 		// Create the standard playlist
-		//Tools::SongList_Standard.AddRange( Tools::SongWad->SongList );
 		AddRange( Tools::SongList_Standard, Tools::SongWad->SongList );
-		//Tools::SongList_Standard.Remove( Tools::Song_Happy );
 		Remove( Tools::SongList_Standard, Tools::Song_Happy );
-		//Tools::SongList_Standard.Remove( Tools::Song_140mph );
 		Remove( Tools::SongList_Standard, Tools::Song_140mph );
+		Remove( Tools::SongList_Standard, Tools::Song_Heavens );
 	}
 
 	void Resources::LoadSound( bool CreateNewWad )
@@ -256,7 +254,6 @@ namespace CloudberryKingdom
 
         // Localization
         Localization::SetLanguage(Localization::Language_ENGLISH);
-        //Localization::SetLanguage(Localization::Language_JAPANESE);
 
 		// Fonts
 		FontLoad();

@@ -15,11 +15,17 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Options::SlideIn( int Frames )
 	{
-		SoundMenu::SlideIn( 0 );
+		if (UseBounce)
+			SoundMenu::SlideIn(Frames);
+		else
+			SoundMenu::SlideIn( 0 );
 	}
 
 	void StartMenu_MW_Options::SlideOut( PresetPos Preset, int Frames )
 	{
-		SoundMenu::SlideOut( Preset, 0 );
+        if (UseBounce)
+            SoundMenu::SlideOut(Preset, Frames);
+        else
+			SoundMenu::SlideOut( Preset, 0 );
 	}
 }

@@ -80,13 +80,14 @@ namespace CloudberryKingdom
 
 
 		// Scroll menu as needed
-		if ( Items[ CurIndex ]->MyText->getPos().Y < Tools::CurLevel->getMainCamera()->getPos().Y + 300 )
+		float min = __min( Items[CurIndex]->MyText->getPos().Y, CurIndex > 0 ? Items[CurIndex - 1]->MyText->getPos().Y : 100000 );
+		if ( min < Tools::CurLevel->getMainCamera()->getPos().Y + 300 )
 		{
 			FancyPos->setRelValY( FancyPos->getRelValY() + OffsetStep );
 			if ( LastItem->Pos.Y + FancyPos->RelVal.Y > -Tools::getCurCamera()->GetHeight() / 2 + MaxBottomSpace )
 				FancyPos->setRelValY( -LastItem->Pos.Y - Tools::getCurCamera()->GetHeight() / 2 + MaxBottomSpace );
 		}
-		if ( Items[ CurIndex ]->MyText->getPos().Y > Tools::CurLevel->getMainCamera()->getPos().Y - 300 )
+		if ( min > Tools::CurLevel->getMainCamera()->getPos().Y - 300 )
 			FancyPos->setRelValY( FancyPos->getRelValY() - OffsetStep );
 
 		if ( FancyPos->RelVal.Y < 0 )

@@ -20,7 +20,9 @@ namespace CloudberryKingdom
 			text->setScale( text->getScale() * max / size.X );
 
 		// Slide out
-		this->SlideOut( PresetPos_LEFT, 0 );
+		//this->SlideOut( PresetPos_LEFT, 0 );
+		SlideIn(0);
+		MyPile->setAlpha( 0 );
 
         // Sound
         Tools::SoundWad->FindByName( L"HeroUnlockedSound" )->Play();
@@ -69,6 +71,8 @@ namespace CloudberryKingdom
 
 	void NewHero_GUI::Init( const std::wstring &str, Vector2 shift, float scale, bool perma )
 	{
+		shift += Vector2( 0, -350 );
+
 		SlideInLength = 84;
 
 		this->Perma = perma;
@@ -81,7 +85,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( MyPile->getPos() + shift );
 
 		Tools::Warning(); // May be text, rather than Localization.Words
-		text = boost::make_shared<EzText>( str, Resources::Font_Grobold42, true, true );
+		text = boost::make_shared<EzText>( str, Resources::Font_Grobold42, 3000, true, true, .55f );
 		text->setScale( text->getScale() * scale );
 
 		text->MyFloatColor = ( bColor( 26, 188, 241 ) ).ToVector4();
@@ -107,21 +111,29 @@ namespace CloudberryKingdom
 			return;
 
         // Otherwise show and hide
-        if ( Count == 24 )
+		if (getMyLevel()->MyLevelSeed->ShowChapterName  && Count == 120 ||
+			!getMyLevel()->MyLevelSeed->ShowChapterName && Count == 40)
         {
-            //SlideIn();
-            SlideIn( 0 );
-            MyPile->BubbleUp( false );
-        }
+                //SlideIn();
+				//SlideIn(0);
+				//MyPile->BubbleUp(false);
+				MyPile->FadeIn(.02f);
+		}
 
-        if ( Count == 180 )
+		if (getMyLevel()->MyLevelSeed->ShowChapterName && Count == 180 ||
+			!getMyLevel()->MyLevelSeed->ShowChapterName && Count == 150)
         {
             //SlideOut(PresetPos.Right, 160);
             //ReleaseWhenDone = true;
 
-            MyPile->BubbleDownAndFade( true );
-            ReleaseWhenDoneScaling = true;
+            //MyPile->BubbleDownAndFade(true);
+            //ReleaseWhenDoneScaling = true;
+			MyPile->FadeOut(.025f);
         }
+
+		if (Count == 400)
+			Release();
+
 	}
 
 	void NewHero_GUI::InitializeInstanceFields()

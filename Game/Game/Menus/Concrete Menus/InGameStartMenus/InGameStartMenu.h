@@ -9,6 +9,8 @@ namespace CloudberryKingdom
 	struct InGameStartMenu : public CkBaseMenu
 	{
 
+		bool CenterItems;
+
 		virtual ~InGameStartMenu() { }
 	
 		struct MakeListenerHelper : public LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> >
@@ -137,6 +139,11 @@ namespace CloudberryKingdom
 		virtual void Init();
 
 	
+		bool MenuReturnToCaller( boost::shared_ptr<Menu> menu );
+        boost::shared_ptr<Level> HoldLevel;
+        void Unpause();
+
+
 		void GoRemove();
 
 		void GoControls();

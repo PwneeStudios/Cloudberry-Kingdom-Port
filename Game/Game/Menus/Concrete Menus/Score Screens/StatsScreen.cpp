@@ -167,11 +167,11 @@ namespace CloudberryKingdom
 	std::vector<Vector2> StatsMenu::x4_name = VecFromArray( tempVector4 );
 	float tempVector5[] = { 1920 };
 	std::vector<float> StatsMenu::x1 = VecFromArray( tempVector5 );
-	float tempVector6[] = { 1722.699f, 2454.445f };
+	float tempVector6[] = { 1722.699f - 200, 2454.445f - 30 };
 	std::vector<float> StatsMenu::x2 = VecFromArray( tempVector6 );
-	float tempVector7[] = { 1650, 2075, 2505 };
+	float tempVector7[] = { 1650.0f - 200, 2075.0f - 140.0f, 2505.0f - 80.0f };
 	std::vector<float> StatsMenu::x3 = VecFromArray( tempVector7 );
-	float tempVector8[] = { 1550, 1905, 2260, 2615 };
+	float tempVector8[] = { 1525.0f - 200, 1905.0f - 180.0f, 2260.0f - 160.0f, 2615.0f - 140.0f };
 	std::vector<float> StatsMenu::x4 = VecFromArray( tempVector8 );
 	std::vector<float> tempVector9[] = { std::vector<float>(), StatsMenu::x1, StatsMenu::x2, StatsMenu::x3, StatsMenu::x4 };
 	std::vector<std::vector<float> > StatsMenu::x = VecFromArray( tempVector9 );
@@ -186,6 +186,9 @@ namespace CloudberryKingdom
 	boost::shared_ptr<MenuItem> StatsMenu::AddRow( const boost::shared_ptr<MenuItem> &Item, const boost::shared_ptr<LambdaFunc_1<int, std::wstring> > &f )
 	{
 		AddItem( Item );
+
+		Item->MyText->setScale( .5f );
+		Item->MySelectedText->setScale( .5f );
 
 		int index = 0;
 		boost::shared_ptr<EzText> Text;
@@ -210,6 +213,8 @@ namespace CloudberryKingdom
 				else
 					Text->setScale( Text->getScale() * .5f );
 
+				Text->setScale( Text->getScale() * .77f );
+
 				Text->RightJustify = true;
 
 				index++;
@@ -226,6 +231,30 @@ namespace CloudberryKingdom
 		CategoryDelays();
 	}
 
+        
+
+    void StatsMenu::SetParams()
+    {
+    //float[] x1 = { 1920 };
+    //float[] x2 = { 1722.699f - 200, 2454.445f - 30 };
+    //float[] x3 = { 1650f - 200, 2075f - 140, 2505f - 80 };
+    //float[] x4 = { 1525f - 200, 1905f - 180, 2260f - 160, 2615f - 140};
+    //x = new float[][]{ null, x1, x2, x3, x4 };
+
+
+        PlayerManager::Players[1]->Exists = false;
+        PlayerManager::Players[2]->Exists = false;
+        PlayerManager::Players[3]->Exists = false;
+            
+
+        ItemPos = Vector2(-1225, 950);
+        PosAdd = Vector2(0, -141) * 1.2f * 1.1f;
+        HeaderPosAdd = PosAdd + Vector2(0, -120);
+
+        BarPos = Vector2(340, 125);
+    }
+
+
 	StatsMenu::StatsMenu( StatGroup group ) :
 		n( 0 ), HeaderPos( 0 )
 	{
@@ -238,7 +267,8 @@ namespace CloudberryKingdom
 
 		CkBaseMenu::CkBaseMenu_Construct();
 		
-		n = PlayerManager::GetNumPlayers();
+		//n = PlayerManager::GetNumPlayers();
+		EnableBounce();
 
 		// Grab the stats for each player
 		for ( int i = 0; i < 4; i++ )
@@ -260,14 +290,11 @@ namespace CloudberryKingdom
 		MyMenu->setControl( -1 );
 
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
+            
+		SetParams();
+        n = PlayerManager.GetNumPlayers();
 
-		MakeBack();
-
-		ItemPos = Vector2( -1305, 950 );
-		PosAdd = Vector2( 0, -151 ) * 1.2f * 1.1f;
-		Vector2 HeaderPosAdd = PosAdd + Vector2( 0, -120 );
-
-		BarPos = Vector2( 340, 125 );
+        boost::shared_ptr<MenuItem> Header;
 
 		// Header
 		boost::shared_ptr<MenuItem> Header;
@@ -294,32 +321,13 @@ namespace CloudberryKingdom
 		Header->Pos = Vector2( -1138.889f, 988.0952f );
 		Header->Selectable = false;
 		int index = 0;
+		if ( PlayerManager::NumPlayers > 1 )
 		for ( int j = 0; j < 4; j++ )
 		{
 			if ( PlayerManager::Get( j )->Exists )
 			{
-				//string val = "Hobabby!";
-				std::wstring val = PlayerManager::Get( j )->GetName();
-				Text = boost::make_shared<EzText>( val, ItemFont, true, true );
-				Text->Layer = 1;
-				MyPile->Add( Text );
-				Text->FancyPos->SetCenter( Header->FancyPos );
-				GamerTag::ScaleGamerTag( Text );
-
-				//Text.Pos = new Vector2(1090 + xSpacing * j, -147.1428f);
-				//if (j % 2 == 0) Text.FancyPos.RelVal.Y -= 150;
-				//Text.Scale *= .85f;
-
-				Text->setPos( name_pos[ n ][ index ] );
-
-				if ( n == 1 )
-					Text->setScale( Text->getScale() * 1.15f );
-				else if ( n == 2 )
-					Text->setScale( Text->getScale() * 1.05f );
-				else if ( n == 3 )
-					Text->setScale( Text->getScale() * .95f );
-				else
-					Text->setScale( Text->getScale() * .85f );
+                std::wstring val = PlayerManager::Get(j)->GetName();
+                Text = MakeGamerTag(Header, index, val);
 
 				index++;
 			}
@@ -329,19 +337,27 @@ namespace CloudberryKingdom
 		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Jumps, ItemFont ) ) ), boost::make_shared<StatsJumps>( Stats ) );
 		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Score, ItemFont ) ) ), boost::make_shared<StatsScore>( Stats ) );
 
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FlyingBlobs, ItemFont ) ) ), boost::make_shared<StatsBlobs>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Checkpoints, ItemFont ) ) ), boost::make_shared<StatsCheckpoints>( Stats ) );
+		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_AverageLife, ItemFont ) ) ), boost::make_shared<StatsLifeExpectancy>( Stats ) );
+
 
 		// Coins
-		boost::shared_ptr<MenuItem> coinitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Coins, ItemFont ) ) );
-		coinitem->Selectable = false;
-		AddItem( coinitem );
+        Header = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_Coins, Resources::Font_Grobold42_2) ) );
+        MyMenu->Add(Header);
+        Header->Pos = Vector2(HeaderPos, ItemPos.Y - 40);
+        SetHeaderProperties(Header->MyText);
+        Header->MyText->setScale(Header->MyText->getScale() * 1.15f);
+        Header->Selectable = false;
+        ItemPos += HeaderPosAdd;
+
+		//boost::shared_ptr<MenuItem> coinitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Coins, ItemFont ) ) );
+		//coinitem->Selectable = false;
+		//AddItem( coinitem );
 
 		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Grabbed, ItemFont ) ) ), boost::make_shared<StatsCoins>( Stats ) );
 		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_CoinsOutOf, ItemFont ) ) ), boost::make_shared<StatsTotalCoins>( Stats ) );
 		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Percent, ItemFont ) ) ), boost::make_shared<StatsCoinPercentGotten>( Stats ) );
-
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FlyingBlobs, ItemFont ) ) ), boost::make_shared<StatsBlobs>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Checkpoints, ItemFont ) ) ), boost::make_shared<StatsCheckpoints>( Stats ) );
-		AddRow( MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_AverageLife, ItemFont ) ) ), boost::make_shared<StatsLifeExpectancy>( Stats ) );
 
 		// Deaths
 		Header = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Deaths, Resources::Font_Grobold42_2 ) ) );
@@ -377,7 +393,15 @@ namespace CloudberryKingdom
 
 
 		// Darker Backdrop
-		boost::shared_ptr<QuadClass> Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), std::wstring( L"Backdrop" ) );
+		boost::shared_ptr<QuadClass> Backdrop;
+        if (UseBounce)
+        {
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
+            Backdrop->setAlpha( Backdrop->getAlpha() * .8f );
+        }
+        else
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), std::wstring( L"Backdrop" ) );
+
 		MyPile->Add( Backdrop );
 		MyPile->Add( Backdrop );
 
@@ -385,33 +409,43 @@ namespace CloudberryKingdom
 		MyMenu->setPos( Vector2( 67.45706f, 0 ) );
 		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 
+		MakeBack();
+
 		SetPos();
 
 		return boost::static_pointer_cast<StatsMenu>( shared_from_this() );
 	}
 
+	boost::shared_ptr<EzText> StatsMenu::MakeGamerTag( boost::shared_ptr<MenuItem> Header, int index, std::wstring val )
+    {
+        boost::shared_ptr<EzText> Text;
+        Text = boost::make_shared<EzText>( val, ItemFont, true, true );
+        Text->Layer = 1;
+        MyPile->Add( Text );
+        Text->FancyPos->SetCenter( Header->FancyPos );
+        //GamerTag.ScaleGamerTag(Text);
+
+        Text->setPos( name_pos[n][index] );
+
+        if (n == 1) Text->setScale( Text->getScale() * .65f );
+        else if (n == 2) Text->setScale( Text->getScale() * .5f );
+        else if (n == 3) Text->setScale( Text->getScale() * .4f );
+        else Text->setScale( Text->getScale() * .4f );
+        return Text;
+    }
+
 	void StatsMenu::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 1230.718f, 975.2383f ) );
-			_item->MyText->setScale( 0.375f );
-			_item->MySelectedText->setScale( 0.375f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		MyMenu->setPos( Vector2( 67.45706f, 0 ) );
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1230.718f, 975.2383f ) ); _item->MyText->setScale( 0.375f ); _item->MySelectedText->setScale( 0.375f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        MyMenu->setPos( Vector2( 67.45706f, 0.f ) );
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -91.66821f, -103.8888f ) );
-			_q->setSize( Vector2( 1907.893f, 1089.838f ) );
-		}
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-91.66821f, -103.8888f ) ); _q->setSize( Vector2( 1907.893f, 1089.838f ) ); }
+        _q = MyPile->FindQuad( L"Button_Back" ); if (_q != 0 ) { _q->setPos( Vector2( 1522.222f, -983.3331f ) ); _q->setSize( Vector2( 90.f, 90.f ) ); }
+        _q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2( 1322.222f, -1008.333f ) ); _q->setSize( Vector2( 100.f, 86.f ) ); }
 
-		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+        MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 	}
 
 	void StatsMenu::OnAdd()
@@ -432,9 +466,14 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		ItemPos = Vector2( 1230.718f, 975.2383f );
+
+#ifdef PC_VERSION
 		item = MakeBackButton();
 		item->UnaffectedByScroll = true;
 		item->ScaleText( .5f );
+#else
+        MakeStaticBackButton();
+#endif
 	}
 
 	void StatsMenu::MyPhsxStep()

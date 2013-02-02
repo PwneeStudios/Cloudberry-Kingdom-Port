@@ -171,7 +171,8 @@ L"Ubisoft and the Ubisoft logo are trademarks of Ubisoft Entertainment in the US
 
         BlackQuad->setAlpha( 1 );
 
-        MyPile->Add( Legal );
+		if ( !CloudberryKingdomGame::HideLogos )
+			MyPile->Add( Legal );
 	}
 
 	void InitialLoadingScreen::PhsxStep()

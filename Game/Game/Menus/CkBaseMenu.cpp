@@ -1,8 +1,54 @@
 #include <global_header.h>
-
+#include <Hacks\List.h>
 
 namespace CloudberryKingdom
 {
+
+        void CkBaseMenu::EnableBounce()
+        {
+            MasterAlpha = 1;
+
+            zoom = boost::make_shared<FancyVector2>();
+            UseBounce = true;
+        }
+
+        void CkBaseMenu::BouncDraw()
+        {
+            if (zoom != 0)
+            {
+                Vector2 v = zoom->Update();
+                MasterAlpha = v.X * v.X;
+
+                MyGame->getCam()->setZoom( .001f * v );
+                MyGame->getCam()->SetVertexCamera();
+                EzText.ZoomWithCamera_Override = true;
+            }
+            else
+            {
+                MasterAlpha = 1.0f;
+            }
+
+            MyPile->setAlpha( MasterAlpha );
+        }
+
+        void CkBaseMenu::MyDraw()
+        {
+            if (UseBounce)
+                BouncDraw();
+
+			GUI_Panel::MyDraw();
+        }
+
+
+
+
+
+
+
+
+
+
+
 
 	CkBaseMenu::ReturnToCallerProxy::ReturnToCallerProxy( const boost::shared_ptr<CkBaseMenu> &cbm )
 	{
@@ -31,7 +77,7 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::MakeBackButtonHelper::Apply( const boost::shared_ptr<MenuItem> &menuitem )
 	{
-		bm->MyMenu->OnB->Apply( bm->MyMenu );
+		bm->_MakeBackGo(menuitem);
 	}
 
 	void CkBaseMenu::MakeDarkBack()
@@ -191,23 +237,32 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::OnReturnTo()
 	{
-		if ( CallToLeft )
-		{
-			// Reset the menu's selected item's oscillate
-			if ( MyMenu != 0 )
-				MyMenu->getCurItem()->OnSelect();
+        if (UseBounce)
+        {
+            GUI_Panel::OnReturnTo();
+            RegularSlideOut( PresetPos::PresetPos_RIGHTRight, 0 );
+            BubbleUp();
+        }
+        else
+        {
+			if ( CallToLeft )
+			{
+				// Reset the menu's selected item's oscillate
+				if ( MyMenu != 0 )
+					MyMenu->getCurItem()->OnSelect();
 
-			// Activate and show the panel
-			Active = true;
+				// Activate and show the panel
+				Active = true;
 
-			if ( !Hid )
-				return;
-			GUI_Panel::Show();
-			this->SlideOut( PresetPos_LEFT, 0 );
-			this->SlideIn();
+				if ( !Hid )
+					return;
+				GUI_Panel::Show();
+				this->SlideOut( PresetPos_LEFT, 0 );
+				this->SlideIn();
+			}
+			else
+				GUI_Panel::OnReturnTo();
 		}
-		else
-			GUI_Panel::OnReturnTo();
 	}
 
 	void CkBaseMenu::ReturnToCaller()
@@ -260,7 +315,25 @@ namespace CloudberryKingdom
 		//SlideLength = 38;
 
 		Show();
-	}
+
+        BubbleUp();
+    }
+
+    void CkBaseMenu::BubbleUp()
+    {
+        if ( zoom != 0 )
+        {
+            SlideIn( 0 );
+			Vector2 vals[] = { Vector2(0.98f), Vector2(1.02f), Vector2(.99f), Vector2(1.005f), Vector2(1.0f) };
+            zoom->MultiLerp( 5, VecFromArray( vals ) );
+        }
+    }
+
+    void CkBaseMenu::BubbleDown()
+    {
+		Vector2 vals[] = { Vector2(1.0f), Vector2(1.01f), Vector2(.9f), Vector2(.4f), Vector2(0.0f) };
+        zoom->MultiLerp( 5, VecFromArray( vals ) );
+    }
 
 	void CkBaseMenu::ReleaseBody()
 	{
@@ -305,6 +378,41 @@ namespace CloudberryKingdom
 	}
 
 	void CkBaseMenu::SlideOut( GUI_Panel::PresetPos Preset, int Frames )
+    {
+        if (UseBounce)
+            BounceSlideOut(Preset, Frames);
+        else
+            RegularSlideOut(Preset, Frames);
+    }
+
+    void CkBaseMenu::BounceSlideOut( GUI_Panel::PresetPos Preset, int Frames )
+    {
+        ReturnToCallerDelay = 15;
+
+        if (Frames == 0)
+        {
+            RegularSlideOut( Preset, Frames );
+            return;
+        }
+
+        BubbleDown();
+        MyGame->WaitThenDo( 15, boost::make_shared<Release>( shared_from_this() ) );
+
+        Active = true;
+
+        ReleaseWhenDone = false;
+        ReleaseWhenDoneScaling = false;
+    }
+
+	CkBaseMenu::ReleaseProxy::ReleaseProxy( boost::shared_ptr<CkBaseMenu> _bm )
+	{
+		bm = _bm;
+	}
+	void CkBaseMenu::ReleaseProxy::Apply()
+	{
+	}
+
+    void CkBaseMenu::RegularSlideOut( GUI_Panel::PresetPos Preset, int Frames )
 	{
 		GUI_Panel::SlideOut( Preset, Frames );
 
@@ -339,6 +447,12 @@ namespace CloudberryKingdom
 			SlideOut( pos, frames );
 	}
 
+	void CkBaseMenu::MakeStaticBackButton()
+	{
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, L"Button_Back" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( L"BackArrow2", L"BackArrow" ) );
+	}
+
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
 	{
 		return MakeBackButton( Localization::Words_Back );
@@ -349,10 +463,14 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 	#if defined(PC_VERSION)
-		//item = new MenuItem(new EzText(ButtonString.Back(86) + text, ItemFont));
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back( 86 ) + Localization::WordString( Word ), ItemFont ) ) );
+        if (ButtonCheck.ControllerInUse)
+            item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back(86) + L" " + Localization::WordString( Word ) ) ) );
+        else
+        {
+            //item = new MenuItem(new EzText(ButtonString.Back(86) + Localization.WordString(Word), ItemFont));
+            item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Word ), ItemFont ) ) );
+        }
 	#else
-		//item = new MenuItem(new EzText(ButtonString.Back(86) + " " + text, ItemFont));
 		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back( 86 ) + std::wstring( L" " ) + Localization::WordString( Word ) ) ) );
 	#endif
 
@@ -365,6 +483,11 @@ namespace CloudberryKingdom
 
 		return item;
 	}
+
+    void CkBaseMenu::_MakeBackGo( boost::shared_ptr<MenuItem> item )
+    {
+        item->MyMenu->OnB->Apply( item->MyMenu );
+    }
 
 	void CkBaseMenu::MakeBackdrop( const boost::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL )
 	{
@@ -392,6 +515,8 @@ boost::shared_ptr<PieceQuad> CkBaseMenu::MenuTemplate = 0;
 int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	CkBaseMenu::CkBaseMenu() :
+        MasterAlpha( 0 ),
+        UseBounce( false ),
 		FontScale( 0 ),
 		ItemShadows( true ),
 		CallToLeft( false ),

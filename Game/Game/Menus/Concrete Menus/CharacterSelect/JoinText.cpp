@@ -40,12 +40,13 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		// Press A to join
-		Tools::Warning();
-	#if defined(PC_VERSION)
-		Text = boost::make_shared<EzText>( std::wstring( L"Press\n" ) + ButtonString::Go_Controller( 89 ) + std::wstring( L"\nto join!" ), Resources::Font_Grobold42, 1000.f, true, true, .65f );
-	#else
-		Text = boost::make_shared<EzText>( std::wstring( L"Press\n{pXbox_A,72,?}\nto join!" ), Resources::Font_Grobold42, true, true );
-	#endif
+#if PC_VERSION
+        std::wstring pressa = Format( Localization::WordString( Localization::Words::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( 89 ) );
+#else
+        std::wstring pressa = Format( Localization::WordString( Localization::Words::Words_PressToJoin ).c_str(), ButtonString::Go( 89 ) );
+#endif
+        Text = boost::make_shared<EzText>( pressa, Resources.Font_Grobold42, true, true);
+			
 		Text->setScale( .7765f );
 
 		Text->ShadowOffset = Vector2( 7.5f, 7.5f );

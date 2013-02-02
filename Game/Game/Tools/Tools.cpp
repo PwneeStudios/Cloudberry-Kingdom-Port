@@ -722,19 +722,6 @@ namespace CloudberryKingdom
 		if ( CreateNewWad )
 			EffectWad = boost::make_shared<EzEffectWad>();
 
-		/*EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Circle" ) ), std::wstring( L"Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Shell" ) ), std::wstring( L"Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Paint" ) ), std::wstring( L"Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Lava" ) ), std::wstring( L"Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );*/
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"NoTexture" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Circle" ) );
@@ -802,11 +789,26 @@ namespace CloudberryKingdom
 		CurrentLoadingScreen->Start();
 	}
 
+	void Tools::PlayHappyMusic(boost::shared_ptr<GameData> game)
+	{
+		PlayHappyMusic(game, 85);
+	}
+
+	void Tools::PlayHappyMusic(boost::shared_ptr<GameData> game, int Delay)
+	{
+		game->KillToDo( L"StartMusic" );
+		game->WaitThenDo( Delay, () =>
+		{
+			Tools.PlayHappyMusic();
+		}, L"StartMusic");
+	}
+
 	void Tools::PlayHappyMusic()
 	{
 		Tools::SongWad->SuppressNextInfoDisplay = true;
 		Tools::SongWad->SetPlayList( Tools::Song_Heavens );
 		Tools::SongWad->Start( true );
+		Tools::SongWad->Restart(true);
 	}
 
 	void Tools::EndLoadingScreen()

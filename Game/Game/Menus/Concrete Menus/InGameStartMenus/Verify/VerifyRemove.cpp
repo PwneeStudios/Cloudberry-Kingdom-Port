@@ -13,10 +13,10 @@ namespace CloudberryKingdom
 		vrm->_Yes( _item );
 	}
 
-	VerifyRemoveMenu::VerifyRemoveMenu( int Control ) : VerifyBaseMenu( Control ) { }
+	VerifyRemoveMenu::VerifyRemoveMenu( int Control ) : VerifyBaseMenu( Control, true ) { }
 	boost::shared_ptr<VerifyRemoveMenu> VerifyRemoveMenu::VerifyRemoveMenu_Construct( int Control )
 	{
-		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control, true );
 
 		return boost::static_pointer_cast<VerifyRemoveMenu>( shared_from_this() );
 	}

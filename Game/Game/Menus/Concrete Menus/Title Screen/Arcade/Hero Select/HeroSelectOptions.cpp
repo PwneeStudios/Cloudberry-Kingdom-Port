@@ -59,27 +59,36 @@ namespace CloudberryKingdom
 
 	void HeroSelectOptions::BringLeaderboard()
 	{
-		boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( HeroSelect->MyMenu->getCurItem() );
-		if ( 0 == item )
-			return;
+		if ( CloudberryKingdomGame::SimpleLeaderboards )
+		{
+			boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( HeroSelect->MyMenu->getCurItem() );
+			if ( 0 == item )
+				return;
 
-		boost::shared_ptr<CloudberryKingdom::Challenge> challenge = HeroSelect->MyArcadeItem->MyChallenge;
-		challenge->SetGameId();
+			boost::shared_ptr<CloudberryKingdom::Challenge> challenge = HeroSelect->MyArcadeItem->MyChallenge;
+			challenge->SetGameId();
 
-		int GameId_Score = HeroSelect->MyArcadeItem->MyChallenge->GameId_Score;
-		int GameId_Level = HeroSelect->MyArcadeItem->MyChallenge->GameId_Level;
+			int GameId_Score = HeroSelect->MyArcadeItem->MyChallenge->GameId_Score;
+			int GameId_Level = HeroSelect->MyArcadeItem->MyChallenge->GameId_Level;
 
-		boost::shared_ptr<CloudberryKingdom::ScoreList> MyHighScoreList = ScoreDatabase::GetList( GameId_Score );
-		MyHighScoreList->MyFormat = ScoreEntry::Format_SCORE;
+			boost::shared_ptr<CloudberryKingdom::ScoreList> MyHighScoreList = ScoreDatabase::GetList( GameId_Score );
+			MyHighScoreList->MyFormat = ScoreEntry::Format_SCORE;
 
-		boost::shared_ptr<CloudberryKingdom::ScoreList> MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
-		MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
+			boost::shared_ptr<CloudberryKingdom::ScoreList> MyHighLevelList = ScoreDatabase::GetList( GameId_Level );
+			MyHighLevelList->MyFormat = ScoreEntry::Format_LEVEL;
 
-		boost::shared_ptr<HighScorePanel> panel = MakeMagic( HighScorePanel, ( true, MyHighScoreList, MyHighLevelList ) );
-		panel->NoDelays();
-		HeroSelect->Call( panel );
-		HeroSelect->Hide();
-		HeroSelect->MyHeroDoll->Hide();
+			boost::shared_ptr<HighScorePanel> panel = MakeMagic( HighScorePanel, ( true, MyHighScoreList, MyHighLevelList ) );
+			panel->NoDelays();
+			HeroSelect->Call( panel );
+			HeroSelect->Hide();
+			HeroSelect->MyHeroDoll->Hide();
+		}
+		else
+		{
+            HeroSelect->Call( MakeMagic( LeaderboardGUI, (0, 0) ), 0);
+            HeroSelect->Hide();
+            HeroSelect->MyHeroDoll->Hide();
+		}
 	}
 
 	void HeroSelectOptions::MyPhsxStep()

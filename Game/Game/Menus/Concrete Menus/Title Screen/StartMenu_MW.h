@@ -49,13 +49,14 @@ namespace CloudberryKingdom
 
 		virtual void Init();
 
+		void MakeMenu();
 	
 		boost::shared_ptr<QuadClass> BackBox;
 
-		void BlackBox();
+		void SetPos();
 
-		void SmallBlackBox();
 	};
+
 }
 
 

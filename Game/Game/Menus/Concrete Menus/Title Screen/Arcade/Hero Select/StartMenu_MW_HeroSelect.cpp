@@ -55,6 +55,8 @@ namespace CloudberryKingdom
 	StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem ) : ArcadeBaseMenu() { }
 	boost::shared_ptr<StartMenu_MW_HeroSelect> StartMenu_MW_HeroSelect::StartMenu_MW_HeroSelect_Construct( const boost::shared_ptr<TitleGameData_MW> &Title, const boost::shared_ptr<ArcadeMenu> &Arcade, const boost::shared_ptr<ArcadeItem> &MyArcadeItem )
 	{
+		NumSelectableItems = 0;
+
 		ArcadeBaseMenu::ArcadeBaseMenu_Construct();
 
 		this->Lock = false;
@@ -63,12 +65,16 @@ namespace CloudberryKingdom
 		this->Arcade = Arcade;
 		this->MyArcadeItem = MyArcadeItem;
 
+		NumSelectableItems = 0;
+
 		return boost::static_pointer_cast<StartMenu_MW_HeroSelect>( shared_from_this() );
 	}
 
 	void StartMenu_MW_HeroSelect::Release()
 	{
 		ArcadeBaseMenu::Release();
+
+		Scroll.reset();
 
 		if ( MyHeroDoll != 0 )
 			MyHeroDoll->Release();
@@ -299,8 +305,31 @@ namespace CloudberryKingdom
 
 		MyPile->FadeIn( .33f );
 
+        // Scroll bar
+        Scroll = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        MyPile->Add(Scroll, L"Scroll" );
+
+        ScrollTop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        MyPile->Add(ScrollTop, L"ScrollTop" );
+        ScrollTop->Show = false;
+
+        ScrollBottom = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        MyPile->Add(ScrollBottom, L"ScrollBottom" );
+        ScrollBottom->Show = false;
+
 		SetPos();
 	}
+
+    void StartMenu_MW_HeroSelect::MyPhsxStep()
+    {
+        ArcadeBaseMenu::MyPhsxStep();
+
+        if (Scroll != 0)
+        {
+            float t = (float)MyMenu->CurIndex / (float)(NumSelectableItems - 1);
+            Scroll->getPosY() = (1 - t) * (ScrollTop->getPosY() - Scroll->getSizeY() ) + (t) * ScrollBottom->getPosY();
+        }
+    }
 
 	void StartMenu_MW_HeroSelect::OnReturnTo()
 	{
@@ -316,8 +345,8 @@ namespace CloudberryKingdom
 		if ( 0 == item )
 			return;
 
-		int TopScore = MyArcadeItem->MyChallenge->TopScore();
-		int TopLevel = MyArcadeItem->MyChallenge->TopLevel();
+        int TopScore = __max( MyArcadeItem->MyChallenge->TopScore(), PlayerManager->MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Score( item->Hero ) ) );
+        int TopLevel = __max( MyArcadeItem->MyChallenge->TopLevel(), PlayerManager->MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Level( item->Hero ) ) );
 
 		Score->RightJustify = Level_Renamed->RightJustify = true;
 		Score->SubstituteText( StringConverterHelper::toString( TopScore ) );
@@ -326,6 +355,8 @@ namespace CloudberryKingdom
 
     void StartMenu_MW_HeroSelect::Update()
     {
+		NumSelectableItems = 0;
+
 		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = MyMenu->Items.begin(); _item != MyMenu->Items.end(); ++_item )
         {
             boost::shared_ptr<HeroItem> item = boost::dynamic_pointer_cast<HeroItem>( *_item );
@@ -342,12 +373,14 @@ namespace CloudberryKingdom
                         item->MyText->Alpha = 0;
                         item->MySelectedText->Alpha = 0;
                     }
-
+                    else
+                        NumSelectableItems++;
                 }
                 else
                 {
                     item->MyText->Alpha = 1.f;
                     item->MySelectedText->Alpha = 1.f;
+					NumSelectableItems++;
                 }
             }
         }
@@ -355,67 +388,28 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_HeroSelect::SetPos()
 	{
-		MyMenu->setPos( Vector2( -1340.222f, 104.4444f ) );
+        MyMenu->setPos( Vector2(-1340.222f, 104.4444f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"ScoreHeader" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -22.22266f, 636.1111f ) );
-			_t->setScale( 1 );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Score" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 1161.11f, 366.6667f ) );
-			_t->setScale( 1 );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"LevelHeader" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -2.779297f, 105.5556f ) );
-			_t->setScale( 1 );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"Level" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 1163.887f, -155.5555f ) );
-			_t->setScale( 1 );
-		}
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"ScoreHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-22.22266f, 636.1111f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 1161.11f, 366.6667f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"LevelHeader" ); if (_t != 0 ) { _t->setPos( Vector2(-2.779297f, 105.5556f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 1163.887f, -155.5555f ) ); _t->setScale( 1.f ); }
+        _t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0 ) { _t->setPos( Vector2( 33.33325f, 441.6666f ) ); _t->setScale( 0.9f ); }
+        _t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0 ) { _t->setPos( Vector2( 280.5552f, 163.8889f ) ); _t->setScale( 0.72f ); }
+        _t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0 ) { _t->setPos( Vector2( 277.7778f, -44.44443f ) ); _t->setScale( 0.72f ); }
 
-        _t = MyPile->FindEzText( L"LockedHeader" ); if (_t != 0) { _t->setPos( Vector2(33.33325f, 441.6666f) ); _t->_Scale = 0.9f; }
-        _t = MyPile->FindEzText( L"RequiredHero" ); if (_t != 0) { _t->setPos( Vector2(280.5552f, 163.8889f) ); _t->_Scale = 0.72f; }
-        _t = MyPile->FindEzText( L"RequiredLevel" ); if (_t != 0) { _t->setPos( Vector2(277.7778f, -44.44443f) ); _t->_Scale = 0.72f; }
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2(-972.2227f, -127.7778f ) ); _q->setSize( Vector2( 616.5465f, 1004.329f ) ); }
+        _q = MyPile->FindQuad( L"BoxRight" ); if (_q != 0 ) { _q->setPos( Vector2( 666.6641f, -88.88879f ) ); _q->setSize( Vector2( 776.5515f, 846.666f ) ); }
+        _q = MyPile->FindQuad( L"Back" ); if (_q != 0 ) { _q->setPos( Vector2(-1269.443f, -1011.111f ) ); _q->setSize( Vector2( 64.49973f, 64.49973f ) ); }
+        _q = MyPile->FindQuad( L"BackArrow" ); if (_q != 0 ) { _q->setPos( Vector2(-1416.666f, -1016.667f ) ); _q->setSize( Vector2( 71.89921f, 61.83332f ) ); }
+            
+        _q = MyPile->FindQuad( L"Scroll" ); if (_q != 0 ) { _q->setPos( Vector2(-1450.f, -441.2393f ) ); _q->setSize( Vector2( 25.9999f, 106.8029f ) ); }
+        _q = MyPile->FindQuad( L"ScrollTop" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -100.0001f ) ); _q->setSize( Vector2( 27.57401f, 18.96959f ) ); }
+        _q = MyPile->FindQuad( L"ScrollBottom" ); if (_q != 0 ) { _q->setPos( Vector2(-1444.444f, -752.2221f ) ); _q->setSize( Vector2( 28.7499f, 21.2196f ) ); }
 
-
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"BoxLeft" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -972.2227f, -127.7778f ) );
-			_q->setSize( Vector2( 616.5467f, 1004.329f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"BoxRight" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 666.6641f, -88.88879f ) );
-			_q->setSize( Vector2( 776.5515f, 846.666f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"Back" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -1269.443f, -1011.111f ) );
-			_q->setSize( Vector2( 64.49973f, 64.49973f ) );
-		}
-		_q = MyPile->FindQuad( std::wstring( L"BackArrow" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( -1416.666f, -1016.667f ) );
-			_q->setSize( Vector2( 71.89921f, 61.83332f ) );
-		}
-
-		MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
-
+        MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 	}
 
 	void StartMenu_MW_HeroSelect::Go( const boost::shared_ptr<MenuItem> &item )

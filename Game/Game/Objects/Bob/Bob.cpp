@@ -1611,6 +1611,8 @@ namespace CloudberryKingdom
 
     void Bob::FlyingPhsx()
     {
+		if ( MyPhsx->OnGround && CurInput.xVec.Y > 0) MyPhsx->setyVel( MyPhsx->getyVel() + .7f );
+
         MyPhsx->setVel( MyPhsx->getVel() * .985f );
 
         MyPhsx->setVel( MyPhsx->getVel() + CurInput.xVec );

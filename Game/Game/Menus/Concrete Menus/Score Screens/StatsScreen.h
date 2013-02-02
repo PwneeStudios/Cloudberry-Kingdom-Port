@@ -180,9 +180,11 @@ namespace CloudberryKingdom
 		virtual void Init();
 
 #if defined(PC_VERSION)
-	
 		boost::shared_ptr<ScrollBar> bar;
 #endif
+
+        Vector2 HeaderPosAdd;
+        void SetParams();
 
 		int n;
 		float HeaderPos;
@@ -192,6 +194,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<StatsMenu> StatsMenu_Construct( StatGroup group );
 
 
+		boost::shared_ptr<EzText> MakeGamerTag( boost::shared_ptr<MenuItem> Header, int index, std::wstring val );
 	
 		void SetPos();
 

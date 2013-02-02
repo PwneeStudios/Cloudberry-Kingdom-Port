@@ -154,12 +154,13 @@ namespace CloudberryKingdom
 
 	
 		int DelayPhsx;
+		bool InCampaign;
 
 		ScoreScreen( bool CallBaseConstructor );
 		boost::shared_ptr<ScoreScreen> ScoreScreen_Construct( bool CallBaseConstructor );
 
-		ScoreScreen( StatGroup group, const boost::shared_ptr<GameData> &game );
-		boost::shared_ptr<ScoreScreen> ScoreScreen_Construct( StatGroup group, const boost::shared_ptr<GameData> &game );
+		ScoreScreen( StatGroup group, const boost::shared_ptr<GameData> &game, const bool InCampaign );
+		boost::shared_ptr<ScoreScreen> ScoreScreen_Construct( StatGroup group, const boost::shared_ptr<GameData> &game, const bool InCampaign );
 	
 		virtual void SetItemProperties( const boost::shared_ptr<MenuItem> &item );
 
@@ -208,11 +209,15 @@ namespace CloudberryKingdom
 		/// </summary>
 		virtual void MenuGo_Continue( const boost::shared_ptr<MenuItem> &item );
 
+		void EOL_WaitThenDoEndAction( boost::shared_ptr<Door> door );
+
 		/// <summary>
 		/// Called when 'Exit Freeplay' is selected from the menu.
 		/// The Score Screen slides out and the current game's EndGame function is called.
 		/// </summary>
-		virtual bool MenuGo_ExitFreeplay( const boost::shared_ptr<Menu> &menu );
+		virtual void MenuGo_ExitFreeplay( const boost::shared_ptr<MenuItem> &item );
+
+		void MenuGo_ExitCampaign( boost::shared_ptr<MenuItem> item );
 
 		void MenuGo_Stats( const boost::shared_ptr<MenuItem> &item );
 

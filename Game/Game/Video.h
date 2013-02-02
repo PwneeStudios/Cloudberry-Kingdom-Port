@@ -34,7 +34,7 @@ namespace CloudberryKingdom
 
 		static std::vector<boost::shared_ptr<SubtitleAction> > Subtitles;
 		static int SubtitleIndex;
-		static boost::shared_ptr<QuadClass> SubtitleQuad;
+		static boost::shared_ptr<EzText> SubtitleText;
 
 	
 		static void StartVideo_CanSkipIfWatched( const std::wstring &MovieName );

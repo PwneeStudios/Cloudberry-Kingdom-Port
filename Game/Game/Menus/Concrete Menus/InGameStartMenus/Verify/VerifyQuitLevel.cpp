@@ -21,13 +21,17 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( CallBaseConstructor );
 
+		EnableBounce();
+
 		return boost::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
 
-	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control ) { }
+	VerifyQuitLevelMenu::VerifyQuitLevelMenu( int Control ) : VerifyBaseMenu( Control, true ) { }
 	boost::shared_ptr<VerifyQuitLevelMenu> VerifyQuitLevelMenu::VerifyQuitLevelMenu_Construct( int Control )
 	{
-		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control, true );
+
+		//EnableBounce();
 
 		return boost::static_pointer_cast<VerifyQuitLevelMenu>( shared_from_this() );
 	}
@@ -40,19 +44,19 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 		// Header
-		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_ExitLevelQuestion, ItemFont );
+		boost::shared_ptr<EzText> HeaderText = boost::make_shared<EzText>( Localization::Words_ExitLevelQuestion, ItemFont, true );
 		SetHeaderProperties( HeaderText );
 		HeaderText->Name = std::wstring( L"Header" );
 		MyPile->Add( HeaderText );
 
 		// Ok
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Yes, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Yes, ItemFont, true ) ) );
 		item->setGo( boost::make_shared<VerifyQuitOkLambda>() );
 		item->Name = std::wstring( L"Yes" );
 		AddItem( item );
 
 		// No
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_No, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_No, ItemFont, true ) ) );
 		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
 		item->Name = std::wstring( L"No" );
 		AddItem( item );
@@ -67,42 +71,18 @@ namespace CloudberryKingdom
 
 	void VerifyQuitLevelMenu::SetPos()
 	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Yes" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 800, 361 ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"No" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 800, 61 ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Yes" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 380.4445f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+        _item = MyMenu->FindItemByName( L"No" ); if (_item != 0 ) { _item->setSetPos( Vector2( 0.f, 94.33334f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( -1000.001f, -302.7777f ) );
+        MyMenu->setPos( Vector2( 0.f, -302.7777f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 597.2208f, 746.8888f ) );
-			_t->setScale( 0.96f );
-		}
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 777.4443f ) ); _t->setScale( 0.96f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 1161.806f, 316.6668f ) );
-			_q->setSize( Vector2( 1500, 902.439f ) );
-		}
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 316.6668f ) ); _q->setSize( Vector2( 1281.083f, 729.4391f ) ); }
 
-		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
+        MyPile->setPos( Vector2( 0.f, -319.4444f ) );
 	}
 }

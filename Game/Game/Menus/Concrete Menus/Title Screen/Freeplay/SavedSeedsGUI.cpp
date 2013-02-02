@@ -142,6 +142,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::CkBaseMenu_Construct();
 
+		EnableBounce();
+
 		return boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() );
 	}
 
@@ -337,8 +339,11 @@ namespace CloudberryKingdom
 
 		// Backdrop
 		boost::shared_ptr<QuadClass> backdrop;
+        if (UseBounce)
+            backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500, true);
+        else
+            backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500, true);
 
-		backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
 		backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( backdrop );
 

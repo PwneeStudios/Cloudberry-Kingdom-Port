@@ -99,41 +99,17 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<MenuItem> item;
 
-		// Chapter 1
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Over the Edge" ), ItemFont ), std::wstring( L"Cutscene_1" ) ) );
-		item->Name = std::wstring( L"1" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
-		AddItem( item );
+			ItemPos = Vector2(740.f, 58.33334f) + Vector2(-708.3339f, 216.6667f);
+			FontScale = 0.5883336f;
+			PosAdd = Vector2(0, -140);
 
-		// Chapter 2
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Into the Forest" ), ItemFont ), std::wstring( L"Cutscene_2" ) ) );
-		item->Name = std::wstring( L"2" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 3
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Woes of a Kidnapper" ), ItemFont ), std::wstring( L"Cutscene_3" ) ) );
-		item->Name = std::wstring( L"3" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 4
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Welterweight" ), ItemFont ), std::wstring( L"Cutscene_4" ) ) );
-		item->Name = std::wstring( L"4" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
-		AddItem( item );
-
-		// Chapter 5
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"Cloudberry Pie" ), ItemFont ), std::wstring( L"Cutscene_5" ) ) );
-		item->Name = std::wstring( L"5" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ));
-		AddItem( item );
-
-		// Chapter 6
-		item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>( std::wstring( L"I Always Told You" ), ItemFont ), std::wstring( L"Cutscene_6" ) ) );
-		item->Name = std::wstring( L"6" );
-		item->setGo( boost::make_shared<CinematicsGoLambda>( boost::static_pointer_cast<StartMenu_MW_Cinematics>( shared_from_this() ) ) );
-		AddItem( item );
+			for (int i = 0; i < 4; i++)
+			{
+				//item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>(Localization::WordString(Localization::Words::Words_Level) + L" " + (1 + 10 * i).ToString(), ItemFont), L"Cutscene_1");
+				//item.Name = "Subsection" + i.ToString();
+				//item.Go = Go;
+				//AddItem(item);
+			}
 
 		MyMenu->SelectItem( 0 );
 

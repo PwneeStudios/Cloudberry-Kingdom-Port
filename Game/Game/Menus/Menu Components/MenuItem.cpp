@@ -315,8 +315,14 @@ namespace CloudberryKingdom
 			if ( SelectionOscillate )
 			{
 				float scale = MyOscillateParams.GetScale();
-				Vector2 PosShift = Vector2( .5f * ( scale - 1 ) * MySelectedText->GetWorldWidth(), 0 );
-				MySelectedText->setPos( MySelectedText->getPos() - PosShift );
+
+                Vector2 PosShift = Vector2(0);
+                if ( !MySelectedText->Centered )
+                {
+                    PosShift = Vector2(.5f * (scale - 1.f) * MySelectedText->GetWorldWidth(), 0);
+                    MySelectedText->setPos( MySelectedText->getPos() - PosShift );
+                }
+
 				MySelectedText->setScale( MySelectedText->getScale() * scale );
 				MySelectedText->ShadowScale = 1 / ( .9f * ( scale - 1 ) + 1 );
 				MySelectedText->ShadowOffset *= 15 * ( scale - 1 ) + 1;

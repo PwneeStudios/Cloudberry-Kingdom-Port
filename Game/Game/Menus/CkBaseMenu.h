@@ -13,6 +13,22 @@ namespace CloudberryKingdom
 	struct CkBaseMenu : public GUI_Panel
 	{
 
+		struct ReleaseProxy : public Lambda
+		{
+			boost::shared_ptr<CkBaseMenu> bm;
+
+			ReleaseProxy( boost::shared_ptr<CkBaseMenu> _bm );
+			void Apply();
+		};
+
+        boost::shared_ptr<FancyVector2> zoom;
+        float MasterAlpha;
+        bool UseBounce;
+
+		void EnableBounce();
+		void BouncDraw();
+		void MyDraw();
+
 		virtual ~CkBaseMenu() { }
 
 		using GUI_Panel::SlideOut;
@@ -81,7 +97,7 @@ namespace CloudberryKingdom
 
 		virtual void SetTextProperties( const boost::shared_ptr<EzText> &text );
 
-		void SetSelectedTextProperties( const boost::shared_ptr<EzText> &text );
+		virtual void SetSelectedTextProperties( const boost::shared_ptr<EzText> &text );
 
 		/// <summary>
 		/// Amount a menu item is shifted when selected.
@@ -140,6 +156,8 @@ namespace CloudberryKingdom
 	
 		virtual void OnAdd();
 
+		void BubbleUp();
+		void BubbleDown();
 	
 		virtual void ReleaseBody();
 
@@ -155,6 +173,8 @@ namespace CloudberryKingdom
 	
 		virtual void SlideOut( GUI_Panel::PresetPos Preset, int Frames );
 
+		void BounceSlideOut( GUI_Panel::PresetPos Preset, int Frames );
+		void RegularSlideOut( GUI_Panel::PresetPos Preset, int Frames );
 	
 		virtual void SlideOut_RightPanel( GUI_Panel::PresetPos Preset, int Frames );
 
@@ -165,9 +185,12 @@ namespace CloudberryKingdom
 		virtual void Hide( PresetPos pos, int frames );
 
 	
+		void MakeStaticBackButton();
+
 		boost::shared_ptr<MenuItem> MakeBackButton();
 		boost::shared_ptr<MenuItem> MakeBackButton( Localization::Words Word );
 
+		void _MakeBackGo( boost::shared_ptr<MenuItem> item );
 	
 		static void MakeBackdrop( const boost::shared_ptr<Menu> &menu, Vector2 TR, Vector2 BL );
 

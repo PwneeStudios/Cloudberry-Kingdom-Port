@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 	{
 		CkBaseMenu::CkBaseMenu_Construct( false );
 
+		EnableBounce();
+
 		this->setControl( Control );
 		this->Message = Message;
 		this->OkText = OkText;
@@ -78,7 +80,11 @@ namespace CloudberryKingdom
 
 	void AlertBaseMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+        if (UseBounce)
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500, true );
+        else
+			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+
 		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 	}
@@ -103,7 +109,7 @@ namespace CloudberryKingdom
 		// Make the backdrop
 		MakeBackdrop();
 
-		boost::shared_ptr<EzText> message = boost::make_shared<EzText>( Message, ItemFont, 700.f, true, true );
+		boost::shared_ptr<EzText> message = boost::make_shared<EzText>( Message, ItemFont, 700.f, true, true, .75f );
 		message->Name = std::wstring( L"Message" );
 		MyPile->Add( message );
 
@@ -121,35 +127,18 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 
+        boost::shared_ptr<MenuItem> _item;
+        _item = MyMenu->FindItemByName( L"Message" ); if (_item != 0 ) { _item->setSetPos( Vector2( 22.55518f, -626.111f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Message" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 22.55518f, -626.111f ) );
-			_item->MyText->setScale( 0.8f );
-			_item->MySelectedText->setScale( 0.8f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        MyMenu->setPos( Vector2( 0.f, 0.f ) );
 
-		MyMenu->setPos( Vector2( 0, 0 ) );
+        boost::shared_ptr<EzText> _t;
+        _t = MyPile->FindEzText( L"Message" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 1.f ); }
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Message" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 0, 0 ) );
-			_t->setScale( 1 );
-		}
+        boost::shared_ptr<QuadClass> _q;
+        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 902.439f ) ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1500, 902.439f ) );
-		}
-
-		MyPile->setPos( Vector2( 0, 0 ) );
+        MyPile->setPos( Vector2( 0.f, 0.f ) );
 	}
+
 }

@@ -1098,6 +1098,9 @@
     <ClCompile Include="Game\Player\Leaderboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CloudberryKingdom.h">
@@ -2361,6 +2364,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Game\Player\Leaderboard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

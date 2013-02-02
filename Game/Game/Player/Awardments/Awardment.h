@@ -17,6 +17,8 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Hat> Unlockable;
 		int Guid;
 
+		public std::wstring Key;
+
         /// <summary>
         /// An associated integer, usually representing a number the player must surpass to achieve the awardment.
         /// </summary>
@@ -34,7 +36,7 @@ namespace CloudberryKingdom
         /// </summary>
         bool ShowWhenAwarded;
 
-        Awardment(int Guid, Localization::Words Name, Localization::Words Description);
+        Awardment(int Guid, std::wstring Key, Localization::Words Name, Localization::Words Description);
 
         //Awardment(int Guid, Localization.Words Name, Localization.Words Description, string TitleType, bool ShowWhenAwarded)
 		Awardment(int Guid, std::wstring Name, std::wstring Description, std::wstring TitleType, bool ShowWhenAwarded);

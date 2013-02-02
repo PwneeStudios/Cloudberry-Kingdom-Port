@@ -6,6 +6,14 @@
 namespace CloudberryKingdom
 {
 
+    struct HeroUnlockedMessage : public AwardmentMessage
+    {
+
+        HeroUnlockedMessage();
+		boost::shared_ptr<HeroUnlockedMessage> HeroUnlockedMessage_Construct( );
+
+	};
+
 	struct AwardmentMessage : public CkBaseMenu
 	{
 
@@ -21,6 +29,7 @@ namespace CloudberryKingdom
 		AwardmentMessage( const boost::shared_ptr<Awardment> &award );
 		boost::shared_ptr<AwardmentMessage> AwardmentMessage_Construct( const boost::shared_ptr<Awardment> &award );
 
+		void MakeText( std::wstring TitleWord, std::wstring DescriptionWord );
 	
 		virtual void MakeBackdrop();
 

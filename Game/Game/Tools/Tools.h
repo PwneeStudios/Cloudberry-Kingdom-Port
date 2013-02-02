@@ -488,6 +488,8 @@ namespace CloudberryKingdom
 
 		static void BeginLoadingScreen( bool KillMusic );
 
+		static void PlayHappyMusic(boost::shared_ptr<GameData> game);
+		static void PlayHappyMusic(boost::shared_ptr<GameData> game, int Delay);
 		static void PlayHappyMusic();
 
 		static void EndLoadingScreen();

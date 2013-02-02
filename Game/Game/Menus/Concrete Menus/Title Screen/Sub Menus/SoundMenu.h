@@ -86,6 +86,18 @@ namespace CloudberryKingdom
 	
 		virtual void Init();
 
+		void Go_CustomControls();
+
+		bool Fade;
+
+		boost::shared_ptr<QuadClass> Black;
+		void Go_Controls();
+		void Go_Credits();
+		void StartFade();
+		void StartCredits();
+		void AfterCredits();
+		void Release();
+
 		void ReturnToCaller();
 
 #if defined(PC_VERSION)
@@ -130,6 +142,8 @@ namespace CloudberryKingdom
 
 	
 		virtual void OnAdd();
+
+		virtual void MyDraw();
 	};
 }
 

@@ -23,6 +23,7 @@ namespace CloudberryKingdom
 		MakeBackdrop();
 
 		SetText( std::wstring( L"Hold {pXbox_A,85,?} to jump higher!" ) );
+		SetText( Format( Localization::WordString( Localization::Words::Words_JumpHigherNote ).c_str(), ButtonString::Go( 85 ) ) );
 
 		return boost::static_pointer_cast<HintBlurb>( shared_from_this() );
 	}

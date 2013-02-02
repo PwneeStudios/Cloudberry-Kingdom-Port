@@ -88,8 +88,10 @@ namespace CloudberryKingdom
 		{
 			DelayToAllowInput = 10;
 
-			//Tools::Nothing();
-			GUI_Panel::Call( MakeMagic( StartMenu_MW, ( Title ) ) );
+            if (CloudberryKingdomGame::SimpleMainMenu)
+                Call( MakeMagic(StartMenu_MW_Simple, (Title) ) );
+            else
+				GUI_Panel::Call( MakeMagic( StartMenu_MW_Pre, ( Title ) ) );
 			Hide();
 		}
 	}

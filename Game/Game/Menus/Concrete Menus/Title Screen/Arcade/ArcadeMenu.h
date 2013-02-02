@@ -111,11 +111,16 @@ namespace CloudberryKingdom
         static boost::shared_ptr<BobPhsx> Ultimate;
 
         static std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > HeroArcadeList;
-	
+        static std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > > LeaderboardList;
+        static std::map<int, int> ChallengeGoal;
+
 		ArcadeMenu();
 		boost::shared_ptr<ArcadeMenu> ArcadeMenu_Construct();
 
 		static void StaticInit();
+
+		static int LeaderboardIndex(boost::shared_ptr<Challenge> challenge, boost::shared_ptr<BobPhsx> phsx);
+		static void CheckForArcadeUnlocks_OnSwapIn(int level);
 
         boost::shared_ptr<EzText> RequiredText, RequiredText2;
         boost::shared_ptr<QuadClass> TextBack;

@@ -16,11 +16,13 @@ namespace CloudberryKingdom
 	void StartMenu_MW_Exit::SlideIn( int Frames )
 	{
 		VerifyQuitGameMenu2::SlideIn( 0 );
+		//VerifyQuitGameMenu2::SlideIn( 0 );
 		//MyPile.FadeIn(.1f);
 	}
 
 	void StartMenu_MW_Exit::SlideOut( PresetPos Preset, int Frames )
 	{
-		VerifyQuitGameMenu2::SlideOut( Preset, 0 );
+		VerifyQuitGameMenu2::SlideOut( Preset, Frames );
+		//VerifyQuitGameMenu2::SlideOut( Preset, 0 );
 	}
 }

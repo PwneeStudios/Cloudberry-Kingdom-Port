@@ -71,7 +71,13 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
-		this->CallToLeft = true;
+            EnableBounce();
+
+        if (UseBounce)
+            CallToLeft = false;
+        else
+			CallToLeft = true;
+
 		this->setControl( Control );
 		FixedToCamera = true;
 
@@ -138,7 +144,13 @@ namespace CloudberryKingdom
 			AddItem( item );
 		}
 	#endif
-		MakeBackButton();
+		
+#if PC_VERSION
+            MakeBackButton();
+#else
+            MakeBackButton();
+            //MakeStaticBackButton();
+#endif
 
 		MyMenu->OnX = MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
@@ -330,6 +342,13 @@ namespace CloudberryKingdom
 	{
 		boost::shared_ptr<SaveSeedAs> SaveAs = MakeMagic( SaveSeedAs, ( panel->getControl(), player ) );
 		panel->Call( SaveAs, 0 );
+
+        boost::shared_ptr<CkBaseMenu> ckpanel = boost::dynamic_pointer_cast<CkBaseMenu>( panel );
+        if ( 0 != ckpanel && ckpanel->UseBounce )
+        {
+            ckpanel->Hid = true;
+            ckpanel->RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
 	}
 #endif
 
@@ -385,6 +404,12 @@ boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 	{
 		boost::shared_ptr<SavedSeedsGUI> LoadMenu = MakeMagic( SavedSeedsGUI, () );
 		Call( LoadMenu, 0 );
+
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
 	}
 
 #if defined(WINDOWS)
@@ -399,6 +424,12 @@ boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
 	{
 		boost::shared_ptr<LoadSeedAs> LoadAs = MakeMagic( LoadSeedAs, ( getControl(), player ) );
 		Call( LoadAs, 0 );
+
+        if (UseBounce)
+        {
+            Hid = true;
+            RegularSlideOut( PresetPos_RIGHT, 0 );
+        }
 	}
 
 	void SaveLoadSeedMenu::OnAdd()

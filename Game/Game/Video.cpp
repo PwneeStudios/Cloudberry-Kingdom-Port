@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		MainVideo::LengthUntilUserCanSkip = 0;
 		MainVideo::Subtitles;
 		MainVideo::SubtitleIndex = 0;
-		MainVideo::SubtitleQuad = boost::make_shared<QuadClass>();
+		MainVideo::SubtitleText = boost::make_shared<EzText>();
 	}
 
 	// Statics
@@ -37,7 +37,7 @@ namespace CloudberryKingdom
 	float MainVideo::LengthUntilUserCanSkip;
 	std::vector<boost::shared_ptr<SubtitleAction> > MainVideo::Subtitles;
 	int MainVideo::SubtitleIndex;
-	boost::shared_ptr<QuadClass> MainVideo::SubtitleQuad;
+	boost::shared_ptr<EzText> MainVideo::SubtitleText;
 
 
 	void MainVideo::StartVideo_CanSkipIfWatched( const std::wstring &MovieName )
@@ -62,9 +62,16 @@ namespace CloudberryKingdom
             CanSkipVideo = true;
 #endif
 
-		Subtitles = Localization::GetSubtitles( MovieName );
-		SubtitleIndex = 0;
-		SubtitleQuad->Show = false;
+        if (Subtitles.size() > 0)
+        {
+            SubtitleIndex = 0;
+        }
+
+        if (SubtitleText != 0)
+        {
+            SubtitleText->Release();
+            SubtitleText.reset();
+        }
 
 		if ( Content == 0 )
 		{
@@ -86,6 +93,8 @@ namespace CloudberryKingdom
 		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
 		VPlayer->Play( CurrentVideo );
+
+		VPlayer->Volume = __max( Tools::MusicVolume->getVal(), Tools::SoundVolume->getVal() );
 
 		Duration = CurrentVideo->Duration.TotalSeconds;
 		Elapsed = 0;
@@ -135,8 +144,11 @@ bool MainVideo::Paused = false;
 		if ( Subtitles.empty() )
 			return;
 
-		SubtitleQuad->Draw();
-		Tools::QDrawer->Flush();
+        if ( SubtitleText != 0 )
+        {
+            SubtitleText->Draw( Tools::getCurCamera() );
+            Tools::QDrawer->Flush();
+        }
 
 		if ( SubtitleIndex >= static_cast<int>( Subtitles.size() ) )
 			return;
@@ -147,16 +159,17 @@ bool MainVideo::Paused = false;
 			switch ( NextSubtitle->MyAction )
 			{
 				case SubtitleAction::ActionType_SHOW:
-					SubtitleQuad->Show = true;
-					SubtitleQuad->Quad_Renamed.setMyTexture( NextSubtitle->MyTexture );
-					SubtitleQuad->ScaleToTextureSize();
-					SubtitleQuad->Scale( 1.445f );
-					SubtitleQuad->Update();
-					SubtitleQuad->setPos( Vector2( 0, -700.f - SubtitleQuad->Quad_Renamed.getHeight() / 2.f ) );
+                    SubtitleText = boost::make_shared<EzText>( NextSubtitle->Text, Resources::Font_Grobold42, 1433.333f, true, true, .666f );
+                    SubtitleText->Show = true;
+                    SubtitleText->_Scale = .4000f;
+                    SubtitleText->setPos( Vector2(0, -830 + SubtitleText->Height / 2) );
+                    SubtitleText->MyFloatColor = ColorHelper.Gray(.925f);
+                    SubtitleText->OutlineColor = ColorHelper.Gray(.100f);
 					break;
 
 				case SubtitleAction::ActionType_HIDE:
-					SubtitleQuad->Show = false;
+                    SubtitleText->Show = false;
+                    SubtitleText->Release();
 					break;
 			}
 

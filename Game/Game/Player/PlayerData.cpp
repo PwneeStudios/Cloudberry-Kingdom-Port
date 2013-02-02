@@ -47,11 +47,11 @@ namespace CloudberryKingdom
 
 		// Awardments
 		for ( std::map<int, bool>::const_iterator guid = Awardments_Renamed->dict.begin(); guid != Awardments_Renamed->dict.end(); ++guid )
-			Chunk::WriteSingle( writer, 2, ColorSchemeIndex );
+			Chunk::WriteSingle( writer, 2, guid->first );
 
 		// Purchases
 		for ( std::map<int, bool>::const_iterator guid = Purchases->dict.begin(); guid != Purchases->dict.end(); ++guid )
-			Chunk::WriteSingle( writer, 3, ColorSchemeIndex );
+			Chunk::WriteSingle( writer, 3, guid->first );
 
 		// Stats
 		LifetimeStats->WriteChunk_4( writer );

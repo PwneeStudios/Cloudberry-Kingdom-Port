@@ -41,6 +41,8 @@ namespace CloudberryKingdom
 		// Executed once the game exits back to this menu
 		slm->MyGame->AddToDo( boost::make_shared<GameReturnProxy>( slm ) );
 
+		Tools::PlayHappyMusic( slm->MyGame );
+
 		slm->StartFunc->Apply( litem );
 	}
 

@@ -26,13 +26,15 @@ namespace CloudberryKingdom
 		return boost::static_pointer_cast<VerifyBaseMenu>( shared_from_this() );
 	}
 
-	VerifyBaseMenu::VerifyBaseMenu( int Control ) : CkBaseMenu( false ) { }
-	boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( int Control )
+	VerifyBaseMenu::VerifyBaseMenu( int Control, bool DoEnableBounce ) : CkBaseMenu( false ) { }
+	boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu::VerifyBaseMenu_Construct( int Control, bool DoEnableBounce )
 	{
 		InitializeInstanceFields();
 
 		CkBaseMenu::CkBaseMenu_Construct( false );
 		
+		if (DoEnableBounce) EnableBounce();
+
 		this->setControl( Control );
 
 		Constructor();
@@ -59,7 +61,12 @@ namespace CloudberryKingdom
 
 	void VerifyBaseMenu::MakeBackdrop()
 	{
-		Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+        boost::shared_ptr<QuadClass> Backdrop;
+        if (UseBounce)
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft", 1500, true);
+        else
+			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
+
 		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 		Backdrop->setPos( Vector2( 1181.251f, 241.6668f ) );
@@ -72,9 +79,13 @@ namespace CloudberryKingdom
 
 		setPauseGame( true );
 
-		ReturnToCallerDelay = 10;
-		SlideInLength = 26;
-		SlideOutLength = 26;
+		if (!UseBounce)
+		{
+			ReturnToCallerDelay = 10;
+			SlideInLength = 26;
+			SlideOutLength = 26;
+		}
+
 
 		this->SlideInFrom = PresetPos_RIGHT;
 		this->SlideOutTo = PresetPos_RIGHT;

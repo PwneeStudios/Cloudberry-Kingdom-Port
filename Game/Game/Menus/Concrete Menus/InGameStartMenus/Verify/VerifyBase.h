@@ -29,8 +29,8 @@ namespace CloudberryKingdom
 		VerifyBaseMenu();
 		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct();
 
-		VerifyBaseMenu( int Control );
-		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( int Control );
+		VerifyBaseMenu( int Control, bool DoEnableBounce );
+		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( int Control, bool DoEnableBounce );
 
 		VerifyBaseMenu( bool CallBaseConstructor );
 		boost::shared_ptr<VerifyBaseMenu> VerifyBaseMenu_Construct( bool CallBaseConstructor );
