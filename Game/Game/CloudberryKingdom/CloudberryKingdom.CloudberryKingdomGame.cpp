@@ -597,7 +597,7 @@ float CloudberryKingdomGame::fps = 0;
 		// FIXME: Start videos later.
 		if (!HideLogos)
 		{
-			//MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+			MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 		}
 	}
 

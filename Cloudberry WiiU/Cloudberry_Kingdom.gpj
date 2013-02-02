@@ -7,6 +7,9 @@
 	-o Cloudberry_Kingdom.elf
 	-I.
 	-laacdec.a
+	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodex.a
+	-lh264.a
+	-lmp4dmx.a
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp
@@ -367,7 +370,6 @@ Game\Hacks\XNA\GraphicsDevice.cpp
 Game\Hacks\XNA\GraphicsDeviceManager.cpp
 Game\Hacks\XNA\SpriteBatch.cpp
 Game\Hacks\XNA\SpriteFont.cpp
-Game\Hacks\XNA\Texture2D.cpp
 Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp
 Game\MasterHack.cpp
 tgt\cafe_libs.gpj

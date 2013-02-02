@@ -8,7 +8,7 @@
 #include "Hacks/XNA/RenderTarget2D.h"
 #include "Hacks/XNA/GraphicsDevice.h"
 #include "Hacks/XNA/PresentationParameters.h"
-#include "Hacks/XNA/Texture2D.h"
+#include <Graphics/Texture2D.h>
 
 namespace CloudberryKingdom
 {

@@ -1,7 +1,7 @@
 #ifndef _RENDERTARGET2D_H_
 #define _RENDERTARGET2D_H_
 
-#include "Texture2D.h"
+#include <Graphics/Texture2D.h>
 
 struct GraphicsDevice;
 

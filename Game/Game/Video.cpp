@@ -59,7 +59,7 @@ namespace CloudberryKingdom
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
 #if DEBUG
-            CanSkipVideo = true;
+		CanSkipVideo = true;
 #endif
 
         if (Subtitles.size() > 0)
@@ -72,6 +72,11 @@ namespace CloudberryKingdom
             SubtitleText->Release();
             SubtitleText.reset();
         }
+
+		// FIXME: We do want subtitles later.
+		//Subtitles = Localization::GetSubtitles( MovieName );
+		SubtitleIndex = 0;
+		SubtitleText->Show = false;
 
 		if ( Content == 0 )
 		{
@@ -88,15 +93,20 @@ namespace CloudberryKingdom
 		Cleaned = false;
 
 		//CurrentVideo = Tools::GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
-		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+
+		// FIXME: Actually load video later.
+		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
 		VPlayer = boost::make_shared<VideoPlayer>();
 		VPlayer->IsLooped = false;
+		VPlayer->SetVolume( __max( Tools::SoundVolume->getVal(), Tools::MusicVolume->getVal() ) );
 		VPlayer->Play( CurrentVideo );
 
 		VPlayer->Volume = __max( Tools::MusicVolume->getVal(), Tools::SoundVolume->getVal() );
 
-		Duration = CurrentVideo->Duration.TotalSeconds;
+		// FIXME: this will be set to something real later.
+		Duration = 71.f;//CurrentVideo->Duration.TotalSeconds;
+
 		Elapsed = 0;
 	}
 
@@ -126,7 +136,9 @@ bool MainVideo::Paused = false;
 	//#endif
 
 		// End the video if the user presses a key
-		if ( CanSkip && PlayerManager::Players.size() > 0 && Elapsed > 0.3f || Elapsed > LengthUntilUserCanSkip )
+
+		// FIXME: Uncomment this or people will be able to skip movie accidentally!
+		if ( CanSkip && PlayerManager::Players.size() > 0 /*&& Elapsed > 0.3f || Elapsed > LengthUntilUserCanSkip*/ )
 		{
 			// Update songs
 			if ( Tools::SongWad != 0 )
@@ -193,13 +205,14 @@ bool MainVideo::Paused = false;
         if ( Elapsed > Duration )
             Playing = false;
 
-		VEZTexture->setTex( VPlayer->GetTexture() );
+		VPlayer->DrawFrame();
+		/*VEZTexture->setTex( VPlayer->GetTexture() );
 		VEZTexture->Width = VEZTexture->getTex()->Width;
 		VEZTexture->Height = VEZTexture->getTex()->Height;
 
 		Vector2 Pos = Tools::getCurCamera()->getPos();
 		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
-		Tools::QDrawer->Flush();
+		Tools::QDrawer->Flush();*/
 
 		Subtitle();
 
@@ -226,6 +239,7 @@ bool MainVideo::Cleaned = true;
 
 		// FIXME: No deleting.
 		//delete VPlayer;
+		VPlayer.reset();
 		CurrentVideo.reset();
 
 		Cleaned = true;

@@ -2,14 +2,10 @@
 
 #include <Content/File.h>
 #include <Content/Filesystem.h>
+#include <Content/TextureWiiUInternal.h>
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <Utility/Log.h>
-
-struct TextureInternal
-{
-	GX2Texture *Texture;
-};
 
 TextureWiiU::TextureWiiU() :
 	internal_( new TextureInternal )

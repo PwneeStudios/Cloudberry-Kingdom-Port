@@ -1062,9 +1062,6 @@
     <ClCompile Include="Hacks\XNA\ContentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Hacks\XNA\Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -2283,15 +2280,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\StorageDevice.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\Video.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Hacks\XNA\VideoPlayer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Hacks\XNA\Viewport.h">

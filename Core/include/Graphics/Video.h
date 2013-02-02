@@ -6,8 +6,6 @@
 struct Video
 {
 
-
-
 	TimeSpan Duration;
 
 };

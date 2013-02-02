@@ -370,7 +370,6 @@
     <ClCompile Include="Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Hacks\XNA\SpriteBatch.cpp" />
     <ClCompile Include="Hacks\XNA\SpriteFont.cpp" />
-    <ClCompile Include="Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="MasterHack.cpp" />
   </ItemGroup>
@@ -790,12 +789,9 @@
     <ClInclude Include="Hacks\NET\StreamReader.h" />
     <ClInclude Include="Hacks\NET\StreamWriter.h" />
     <ClInclude Include="Hacks\NET\StringBuilder.h" />
-    <ClInclude Include="Hacks\XNA\Texture2D.h" />
     <ClInclude Include="Hacks\NET\Thread.h" />
     <ClInclude Include="Hacks\NET\TimeSpan.h" />
     <ClInclude Include="Hacks\NET\Tuple.h" />
-    <ClInclude Include="Hacks\XNA\Video.h" />
-    <ClInclude Include="Hacks\XNA\VideoPlayer.h" />
     <ClInclude Include="Hacks\XNA\Viewport.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

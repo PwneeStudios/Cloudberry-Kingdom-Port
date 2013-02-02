@@ -9,9 +9,9 @@
 class TextureWiiU : public Resource
 {
 
-	struct TextureInternal *internal_;
-
 public:
+
+	struct TextureInternal *internal_;
 
 	TextureWiiU();
 	~TextureWiiU();

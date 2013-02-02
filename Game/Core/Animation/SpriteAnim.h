@@ -5,7 +5,7 @@
 
 #include "Core/Lambdas/Lambda_2.h"
 
-#include "Hacks/XNA/Texture2D.h"
+#include <Graphics/Texture2D.h>
 
 namespace CloudberryKingdom
 {

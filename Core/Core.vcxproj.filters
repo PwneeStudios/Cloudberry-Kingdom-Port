@@ -237,6 +237,18 @@
     <ClInclude Include="src\Audio\streamlib\streamPool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Graphics\VideoPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Graphics\Texture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Content\TextureWiiUInternal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -411,6 +423,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Audio\SongPc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\Texture2D.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
