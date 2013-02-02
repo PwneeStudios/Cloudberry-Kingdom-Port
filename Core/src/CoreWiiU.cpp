@@ -132,6 +132,12 @@ int CoreWiiU::Run()
 
 			GX2SetColorBuffer(&DEMOColorBuffer, GX2_RENDER_TARGET_0);
 			GX2SetDepthBuffer(&DEMODepthBuffer);
+
+			GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
+			GX2SetColorControl( GX2_LOGIC_OP_COPY, 0x1, GX2_DISABLE, GX2_ENABLE );
+			GX2SetBlendControl( GX2_RENDER_TARGET_0,
+				GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD,
+				GX2_TRUE, GX2_BLEND_ONE, GX2_BLEND_ONE_MINUS_SRC_ALPHA, GX2_BLEND_COMBINE_ADD );
 		}
 
 		//GX2SetDepthOnlyControl( GX2_FALSE, GX2_FALSE, GX2_COMPARE_ALWAYS );
@@ -150,6 +156,10 @@ int CoreWiiU::Run()
 			DEMOGfxSetContextState();
 
 			DEMOGfxDoneRender();
+		}
+		else
+		{
+			DEMOGfxWaitForSwap( 1, 100 );
 		}
 
 		// Close down.

@@ -7,9 +7,9 @@
 std::vector<std::wstring> MusicList()
 {
 	std::vector<std::wstring> v;
-	v.reserve( 800 );
+	v.reserve( 25 );
 
-#ifdef PS3	
+#if defined( PS3 ) || defined( CAFE )	
 	v.push_back( std::wstring( L"Music/140_Mph_in_the_Fog^Blind_Digital.mp3" ) );
 	v.push_back( std::wstring( L"Music/Blue_Chair^Blind_Digital.mp3" ) );
 	v.push_back( std::wstring( L"Music/Evidence^Blind_Digital.mp3" ) );

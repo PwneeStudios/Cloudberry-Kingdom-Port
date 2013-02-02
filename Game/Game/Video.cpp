@@ -14,7 +14,11 @@ namespace CloudberryKingdom
 	{
 		MainVideo::Content = 0;
 		MainVideo::Playing = false;
+#ifdef CAFE
+		MainVideo::CurrentVideo = boost::make_shared< Video >();
+#else
 		MainVideo::CurrentVideo = 0;
+#endif
 		MainVideo::VPlayer = 0;
 		MainVideo::VEZTexture = boost::make_shared<EzTexture>();
 		MainVideo::Duration = 0;
@@ -56,6 +60,16 @@ namespace CloudberryKingdom
 		StartVideo( MovieName, CanSkip, LengthUntilCanSkip );
 	}
 
+	// NOTE: This overrides functionality of MainVideo::UpdateElapsedTime()
+	// in order to be used from the WiiU video player.
+	static void UpdateElapsedTimeProxy( bool finish )
+	{
+		if( finish )
+			MainVideo::Elapsed += 100000000.0;
+		else
+			MainVideo::Elapsed += Tools::TheGame->DeltaT;
+	}
+
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
 #if DEBUG
@@ -82,17 +96,33 @@ namespace CloudberryKingdom
 		Cleaned = false;
 
 		//CurrentVideo = Tools::GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
+#ifdef CAFE
+		// I cry a little more.
+		if( MovieName == L"Cutscene_1" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_1.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"LogoSalad" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/LogoSalad.mp4";
+			CurrentVideo->Duration.TotalSeconds = 9.f;
+		}
+#endif
 
 		// FIXME: Actually load video later.
 		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
+#ifdef CAFE
+		VPlayer = boost::make_shared<VideoPlayer>( UpdateElapsedTimeProxy );
+#else
 		VPlayer = boost::make_shared<VideoPlayer>();
+#endif
 		VPlayer->IsLooped = false;
 		VPlayer->SetVolume( __max( Tools::SoundVolume->getVal(), Tools::MusicVolume->getVal() ) );
 		VPlayer->Play( CurrentVideo );
 
-		// FIXME: this will be set to something real later.
-		Duration = 71.f;//CurrentVideo->Duration.TotalSeconds;
+		Duration = CurrentVideo->Duration.TotalSeconds;
 		Elapsed = 0;
 	}
 
@@ -181,7 +211,10 @@ bool MainVideo::Paused = false;
 
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
+#ifndef CAFE
 		UpdateElapsedTime();
+#endif
+
 		UserInput();
 
         if ( Elapsed > Duration )

@@ -33,8 +33,8 @@
 #define INPUTNAME_DEFINED
 
 #ifdef INPUTNAME_DEFINED
-#define MP4_INPUT_SAMPLE1       "/vol/content/Movies/TestVideo9.mp4";    // TV
-#define MP4_INPUT_SAMPLE2       "/vol/content/Movies/TestVideo9.mp4";          // DRC
+#define MP4_INPUT_SAMPLE1       "/vol/content/Movies/LogoSalad.mp4";    // TV
+#define MP4_INPUT_SAMPLE2       "/vol/content/Movies/LogoSalad.mp4";	// DRC
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time
@@ -101,6 +101,7 @@ s32 exc_end_time_stamp[2];
 
 bool EXIT_PLAYBACK = false;
 bool GLOBAL_VIDEO_OVERRIDE = false;
+static void (*UpdateElapsedTime)(bool) = NULL;
 
 #ifdef USE_PROCESS_SWITCHING
 OSEvent gDoRelease;
@@ -200,6 +201,10 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                             (vsys_currtime - sys_basetime[i]), MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS, abs((vsys_currtime - sys_basetime[i]) - MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].PTS), i);
 #endif
                         ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
+
+						// Update time counter.
+						if( UpdateElapsedTime )
+							UpdateElapsedTime( false );
                         if (ret != 0)
                         {
                             OSReport("VideoDraw Failed.\n");
@@ -236,7 +241,7 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 #elif TEST_MODE == 2
         if (vendflag[1])
 #else
-        if (vendflag[0] && vendflag[1])
+        if (vendflag[0]/* && vendflag[1]*/)
 #endif
         {
             break;
@@ -335,7 +340,7 @@ static s32 AudioOutputThread(s32 intArg, void *ptrArg)
 #elif TEST_MODE == 2
         if (aendflag[1])
 #else
-        if (aendflag[0] && aendflag[1])
+        if (aendflag[0]/* && aendflag[1]*/)
 #endif
         {
 			break;
@@ -1182,23 +1187,31 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 		for( int i = 0; i < MP4DemuxCorePtr[intArg]->MP4Duration/100; ++i )
 		{
 			exc_end_time_stamp[ intArg ] = exc_start_time_stamp[ intArg ] + 100;
+			if( exc_end_time_stamp[ intArg ] >= MP4DemuxCorePtr[ intArg ]->MP4Duration )
+				exc_end_time_stamp[ intArg ] = MP4DemuxCorePtr[ intArg ]->MP4Duration;
 
-			iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (int16_t)exc_start_time_stamp[intArg],
-				(s64)exc_end_time_stamp[intArg], intArg );
+			if( exc_end_time_stamp[ intArg ] <= exc_start_time_stamp[ intArg ] )
+				EXIT_PLAYBACK = true;
+
+			if( EXIT_PLAYBACK )
+				break;
+
+			iMlibRet = MP4DMXFW_Execute( pMlibHandle, &MP4PlayerCorePtr[intArg]->MP4DMUXParam, 0, (u64)exc_start_time_stamp[intArg],
+				(u64)exc_end_time_stamp[intArg], intArg );
 			if( iMlibRet != MP4DMXFW_RET_SUCCESS )
 			{
 				OSReport("MP4DMXFW_Execute Failed. ret = %d\n", iMlibRet );
 				goto ERROR;
 			}
 
-			if( EXIT_PLAYBACK )
-				break;
-
 			exc_start_time_stamp[ intArg ] += 100;
 		}
 #endif
 
 ERROR:
+		EXIT_PLAYBACK = true;
+		UpdateElapsedTime( true );
+		OSYieldThread();
 
         MP4PlayerCorePtr[intArg]->execendflag = 1;
         iMlibRet = MP4DMXFW_End( pMlibHandle, intArg );
@@ -1884,10 +1897,12 @@ struct VideoPlayerInternal
 {
 };
 
-VideoPlayer::VideoPlayer()
+VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(bool) )
 	: internal_( new VideoPlayerInternal )
 	, IsLooped( false )
 {
+	::UpdateElapsedTime = UpdateElapsedTime;
+
 	InitShader();
     InitAttribData();
 }
@@ -1917,10 +1932,13 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 {
 	EXIT_PLAYBACK = false;
 
-#ifdef INPUTNAME_DEFINED
+	mp4Filename[ 0 ] = video->Path.c_str();
+	mp4Filename[ 1 ] = video->Path.c_str();
+
+/*#ifdef INPUTNAME_DEFINED
     mp4Filename[0] = MP4_INPUT_SAMPLE1;     // set input file name
     mp4Filename[1] = MP4_INPUT_SAMPLE2;     // set input file name
-#endif
+#endif*/
 
 	vendflag[0] = 0;
     aendflag[0] = 0;
