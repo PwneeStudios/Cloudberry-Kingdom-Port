@@ -5,6 +5,7 @@
 
 namespace CloudberryKingdom
 {
+	
 	struct StartMenu_MW_Backpanel : public CkBaseMenu
 	{
 

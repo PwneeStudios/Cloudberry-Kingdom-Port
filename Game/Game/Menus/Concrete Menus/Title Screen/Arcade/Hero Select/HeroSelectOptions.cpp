@@ -1,5 +1,8 @@
 #include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game\Player\LeaderboardView.h>
+
 namespace CloudberryKingdom
 {
 

@@ -53,7 +53,7 @@ namespace CloudberryKingdom
         Title->_Scale *= .6f;
         MyPile->Add( Title, L"Title" );
 
-        Description = boost::make_shared<EzText>(Description, Resources::Font_Grobold42_2, 1800.f, true, true, .575f);
+        Description = boost::make_shared<EzText>( DescriptionWord, Resources::Font_Grobold42_2, 1800.f, true, true, .575f);
         Description->setPos( Vector2(0, 100) );
         Description->_Scale *= .6f;
         MyPile->Add(Description, L"Description");

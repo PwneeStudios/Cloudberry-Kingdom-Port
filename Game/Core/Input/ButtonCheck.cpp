@@ -41,6 +41,7 @@ namespace CloudberryKingdom
 	// Statics
 	bool ButtonCheck::MouseInUse;
 	bool ButtonCheck::PrevMouseInUse;
+	bool ButtonCheck::ControllerInUse;
 
 	boost::shared_ptr<ButtonClass> ButtonCheck::Quickspawn_KeyboardKey, ButtonCheck::Help_KeyboardKey, ButtonCheck::QuickReset_KeyboardKey;
 	Keys ButtonCheck::Start_Secondary, ButtonCheck::Go_Secondary, ButtonCheck::Back_Secondary, ButtonCheck::ReplayPrev_Secondary, ButtonCheck::ReplayNext_Secondary, ButtonCheck::ReplayToggle_Secondary, ButtonCheck::SlowMoToggle_Secondary, ButtonCheck::Left_Secondary, ButtonCheck::Right_Secondary, ButtonCheck::Up_Secondary, ButtonCheck::Down_Secondary;

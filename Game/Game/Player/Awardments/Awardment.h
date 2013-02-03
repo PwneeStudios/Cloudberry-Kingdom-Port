@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<Hat> Unlockable;
 		int Guid;
 
-		public std::wstring Key;
+		std::wstring Key;
 
         /// <summary>
         /// An associated integer, usually representing a number the player must surpass to achieve the awardment.
@@ -101,7 +101,6 @@ namespace CloudberryKingdom
         static boost::shared_ptr<Awardment> Award_BuyHat;
         static boost::shared_ptr<Awardment> Award_HeroRush2Level;
         static boost::shared_ptr<Awardment> Award_Replay;
-        static boost::shared_ptr<Awardment> Award_Campaign5;
         
         // Arcade Unlocks
         static boost::shared_ptr<Awardment> UnlockTimeCrisis;

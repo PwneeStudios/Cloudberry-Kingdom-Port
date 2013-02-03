@@ -198,7 +198,7 @@ namespace CloudberryKingdom
 	{
 		std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
 
-		if ( !File.Exists( path ) ) return;
+		if ( !File::Exists( path ) ) return;
 
 		ReadSubtitles( path );
 	}
@@ -256,7 +256,7 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == std::wstring( L"-" ) )
 			{
-				Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_HIDE, ParseTime( data[0] ), 0 ) );
+				Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_HIDE, ParseTime( data[0] ), L"" ) );
 			}
 
 			line = reader->ReadLine();

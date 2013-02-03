@@ -76,7 +76,7 @@ namespace CloudberryKingdom
 		int GameTypeId;
 
 		int CalcTopGameLevel( boost::shared_ptr<BobPhsx> hero );
-		int CalcGameId_Score( boost::shared_ptr<BobPhsx> hero )
+		int CalcGameId_Score( boost::shared_ptr<BobPhsx> hero );
 		int CalcGameId_Level( boost::shared_ptr<BobPhsx> hero );
 		int SetGameId();
 

@@ -1,5 +1,9 @@
 #include <global_header.h>
 
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
+#include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h>
+#include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h>
+
 namespace CloudberryKingdom
 {
 
@@ -88,8 +92,8 @@ namespace CloudberryKingdom
 		{
 			DelayToAllowInput = 10;
 
-            if (CloudberryKingdomGame::SimpleMainMenu)
-                Call( MakeMagic(StartMenu_MW_Simple, (Title) ) );
+            if ( CloudberryKingdomGame::SimpleMainMenu )
+                Call( MakeMagic( StartMenu_MW_Simple, ( Title ) ) );
             else
 				GUI_Panel::Call( MakeMagic( StartMenu_MW_Pre, ( Title ) ) );
 			Hide();

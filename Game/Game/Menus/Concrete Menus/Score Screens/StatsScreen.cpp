@@ -292,9 +292,7 @@ namespace CloudberryKingdom
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
             
 		SetParams();
-        n = PlayerManager.GetNumPlayers();
-
-        boost::shared_ptr<MenuItem> Header;
+        n = PlayerManager::GetNumPlayers();
 
 		// Header
 		boost::shared_ptr<MenuItem> Header;

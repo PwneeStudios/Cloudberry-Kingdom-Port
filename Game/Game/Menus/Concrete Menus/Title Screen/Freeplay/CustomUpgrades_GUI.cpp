@@ -110,7 +110,7 @@ namespace CloudberryKingdom
 		//cuGui->BigIcon->SetScale( 2 );
 		cuGui->BigIcon->SetScale( 1.55f );
 		cuGui->BigIcon->FancyPos->SetCenter( cuGui->Pos );
-		cuGui->BigIcon->setPos( Vector2( 475.0f + 500 * ( 1 - cuGui->ScaleList ), 465f ) );
+		cuGui->BigIcon->setPos( Vector2( 475.0f + 500 * ( 1 - cuGui->ScaleList ), 465.0f ) );
 		cuGui->BigIcon->MyOscillateParams.max_addition *= .25f;
 
 		cuGui->TopText->Show = true;

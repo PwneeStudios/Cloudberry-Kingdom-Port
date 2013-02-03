@@ -23,7 +23,7 @@ namespace CloudberryKingdom
 		MainVideo::LengthUntilUserCanSkip = 0;
 		MainVideo::Subtitles;
 		MainVideo::SubtitleIndex = 0;
-		MainVideo::SubtitleText = boost::make_shared<EzText>();
+		MainVideo::SubtitleText = 0;
 	}
 
 	// Statics
@@ -73,11 +73,6 @@ namespace CloudberryKingdom
             SubtitleText.reset();
         }
 
-		// FIXME: We do want subtitles later.
-		//Subtitles = Localization::GetSubtitles( MovieName );
-		SubtitleIndex = 0;
-		SubtitleText->Show = false;
-
 		if ( Content == 0 )
 		{
 			Content = boost::make_shared<ContentManager>( std::wstring( L"Content" ) );
@@ -102,10 +97,10 @@ namespace CloudberryKingdom
 		VPlayer->SetVolume( __max( Tools::SoundVolume->getVal(), Tools::MusicVolume->getVal() ) );
 		VPlayer->Play( CurrentVideo );
 
-		VPlayer->Volume = __max( Tools::MusicVolume->getVal(), Tools::SoundVolume->getVal() );
+		VPlayer->SetVolume( __max( Tools::MusicVolume->getVal(), Tools::SoundVolume->getVal() ) );
 
 		// FIXME: this will be set to something real later.
-		Duration = 71.f;//CurrentVideo->Duration.TotalSeconds;
+		Duration = 1.f;//CurrentVideo->Duration.TotalSeconds;
 
 		Elapsed = 0;
 	}
@@ -175,8 +170,8 @@ bool MainVideo::Paused = false;
                     SubtitleText->Show = true;
                     SubtitleText->_Scale = .4000f;
                     SubtitleText->setPos( Vector2(0, -830 + SubtitleText->Height / 2) );
-                    SubtitleText->MyFloatColor = ColorHelper.Gray(.925f);
-                    SubtitleText->OutlineColor = ColorHelper.Gray(.100f);
+                    SubtitleText->MyFloatColor = ColorHelper::Gray(.925f);
+                    SubtitleText->OutlineColor = ColorHelper::Gray(.100f);
 					break;
 
 				case SubtitleAction::ActionType_HIDE:
@@ -200,7 +195,7 @@ bool MainVideo::Paused = false;
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
 		UpdateElapsedTime();
-		UserInput();
+ 		UserInput();
 
         if ( Elapsed > Duration )
             Playing = false;

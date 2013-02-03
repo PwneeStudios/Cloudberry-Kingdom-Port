@@ -9,6 +9,8 @@
 #include "Game/Tilesets/Backgrounds/Background.h"
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
 
+#include <Game/Objects/Game Objects/GameObjects/ChapterTitle.h>
+
 namespace CloudberryKingdom
 {
 
@@ -21,6 +23,37 @@ namespace CloudberryKingdom
 	{
 		lsd->_NewHero( level );
 	}
+
+	LevelSeedData::_RepeatHeroProxy::_RepeatHeroProxy( const boost::shared_ptr<LevelSeedData> &lsd )
+	{
+		this->lsd = lsd;
+	}
+
+	void LevelSeedData::_RepeatHeroProxy::Apply( const boost::shared_ptr<Level> &level )
+	{
+		lsd->_RepeatHero( level );
+	}
+
+	LevelSeedData::_ShowChapterNameProxy::_ShowChapterNameProxy( const boost::shared_ptr<LevelSeedData> &lsd )
+	{
+		this->lsd = lsd;
+	}
+
+	void LevelSeedData::_ShowChapterNameProxy::Apply( const boost::shared_ptr<Level> &level )
+	{
+		lsd->_ShowChapterName( level );
+	}
+
+	LevelSeedData::_ScoreScreenProxy::_ScoreScreenProxy( const boost::shared_ptr<LevelSeedData> &lsd )
+	{
+		this->lsd = lsd;
+	}
+
+	void LevelSeedData::_ScoreScreenProxy::Apply( const boost::shared_ptr<Level> &level )
+	{
+		lsd->_ScoreScreen( level );
+	}
+
 
 	LevelSeedData::_StartSongProxy::_StartSongProxy( const boost::shared_ptr<LevelSeedData> &lsd )
 	{
@@ -121,7 +154,7 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<GameObject> LevelSeedData::ScoreScreenLambda::Apply()
 	{
-		return MakeMagic( ScoreScreen, ( stats, level->MyGame ) );
+		return MakeMagic( ScoreScreen, ( stats, level->MyGame, false ) );
 	}
 
 	void LevelSeedData::EOL_DoorActionProxy::Apply( const boost::shared_ptr<Door> &door )
@@ -418,12 +451,17 @@ namespace CloudberryKingdom
 	const std::wstring LevelSeedData::SongString = std::wstring( L"song" );
 
 	const std::wstring LevelSeedData::NewHeroFlag = L"newhero";
+
+	const std::wstring LevelSeedData::RepeatHeroFlag;
+	const std::wstring LevelSeedData::ChapterNameFlag;
+	const std::wstring LevelSeedData::ScoreScreenFlag;;
+
     const std::wstring LevelSeedData::DarknessFlag = L"darkness";
     const std::wstring LevelSeedData::MasochistFlag = L"masochist";
 
-	const std::wstring RepeatHeroFlag = "repeathero";
-	const std::wstring ChapterNameFlag = "chapter";
-	const std::wstring ScoreScreenFlag = "scorescreen";
+	const std::wstring RepeatHeroFlag = L"repeathero";
+	const std::wstring ChapterNameFlag = L"chapter";
+	const std::wstring ScoreScreenFlag = L"scorescreen";
 
 
 	void LevelSeedData::ProcessSpecial()
@@ -532,26 +570,26 @@ namespace CloudberryKingdom
         level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
     }
 
-		void _RepeatHero(boost::shared_ptr<Level> level)
+		void LevelSeedData::_RepeatHero( const boost::shared_ptr<Level> &level )
 		{
-			level->MyGame->AddGameObject( MakeMagic( LevelTitle, ( Localization::WordString( level->DefaultHeroType->Name ), Vector2(0, 200), 1, false) ) );
+			level->MyGame->AddGameObject( MakeMagic( LevelTitle, ( Localization::WordString( level->DefaultHeroType->Name ), Vector2(0, 200), 1.f, false) ) );
 		}
 
-		void _ShowChapterName(boost::shared_ptr<Level> level)
+		void LevelSeedData::_ShowChapterName( const boost::shared_ptr<Level> &level )
 		{
-			if (level->MyLevelSeed->ChapterNameIndex < 0 || level->MyLevelSeed->ChapterNameIndex >= CampaignSequence::ChapterName.Length) return;
+			if ( level->MyLevelSeed->ChapterNameIndex < 0 || level->MyLevelSeed->ChapterNameIndex >= static_cast<int>( CampaignSequence::ChapterName.size() ) ) return;
 
 			level->SetBack(27);
 
-			Tools.SongWad->SuppressNextInfoDisplay = true;
-			Tools.SongWad->DisplayingInfo = false;
+			Tools::SongWad->SuppressNextInfoDisplay = true;
+			Tools::SongWad->DisplayingInfo = false;
 
-			level->MyGame->AddGameObject( MakeMagic( ChapterTitle, (CampaignSequence::ChapterName[ level->MyLevelSeed->ChapterNameIndex ] ) ) );
+			level->MyGame->AddGameObject( MakeMagic( ChapterTitle, ( CampaignSequence::ChapterName[ level->MyLevelSeed->ChapterNameIndex ] ) ) );
 			level->MyLevelSeed->WaitLengthToOpenDoor = 150;
 			level->MyLevelSeed->AlwaysOverrideWaitDoorLength = true;
 		}
 
-		void _ScoreScreen(boost::shared_ptr<Level> level)
+		void LevelSeedData::_ScoreScreen( const boost::shared_ptr<Level> &level )
 		{
 			level->MyGame->MakeScore = boost::make_shared<LevelSeedData::MakeScoreProxy>( level );
 
@@ -566,9 +604,9 @@ namespace CloudberryKingdom
 			level = _level;
 		}
 
-		void LevelSeedData::MakeScoreProxy::Apply( boost::shared_ptr<GameObject> obj )
+		boost::shared_ptr<GameObject> LevelSeedData::MakeScoreProxy::Apply()
 		{
-			CampaignSequence.MarkProgress(level);
+			CampaignSequence::MarkProgress( level );
 			return MakeMagic( ScoreScreen, ( StatGroup::StatGroup_LEVEL, level->MyGame, true ) );
 		}
 
@@ -1100,7 +1138,7 @@ namespace CloudberryKingdom
 	void LevelSeedData::PostMake_StandardLoad( const boost::shared_ptr<Level> &level )
 	{
 		LevelSeedData::PostMake_Standard( level, true, false );
-		level->MyGame->MakeScore = boost::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level, false );
+		level->MyGame->MakeScore = boost::make_shared<ScoreScreenLambda>( StatGroup_LEVEL, level );
 	}
 
 	void LevelSeedData::PostMake_Standard( const boost::shared_ptr<Level> &level, bool StartMusic, bool ShowMultiplier )

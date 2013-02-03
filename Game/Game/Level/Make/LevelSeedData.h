@@ -17,7 +17,7 @@ namespace CloudberryKingdom
 
 			MakeScoreProxy( boost::shared_ptr<Level> _level );
 
-			void Apply( boost::shared_ptr<GameObject> obj );
+			boost::shared_ptr<GameObject> Apply();
 		};
 
 		struct WaitThenPlayProxy : public Lambda
@@ -34,6 +34,35 @@ namespace CloudberryKingdom
 			boost::shared_ptr<LevelSeedData> lsd;
 		
 			_NewHeroProxy( const boost::shared_ptr<LevelSeedData> &lsd );
+
+			void Apply( const boost::shared_ptr<Level> &level );
+		};	
+
+		struct _RepeatHeroProxy : public Lambda_1<boost::shared_ptr<Level> >
+		{
+			boost::shared_ptr<LevelSeedData> lsd;
+		
+			_RepeatHeroProxy( const boost::shared_ptr<LevelSeedData> &lsd );
+
+			void Apply( const boost::shared_ptr<Level> &level );
+		};	
+
+		struct _ShowChapterNameProxy : public Lambda_1<boost::shared_ptr<Level> >
+		{
+		
+			boost::shared_ptr<LevelSeedData> lsd;
+		
+			_ShowChapterNameProxy( const boost::shared_ptr<LevelSeedData> &lsd );
+
+			void Apply( const boost::shared_ptr<Level> &level );
+		};	
+
+		struct _ScoreScreenProxy : public Lambda_1<boost::shared_ptr<Level> >
+		{
+		
+			boost::shared_ptr<LevelSeedData> lsd;
+		
+			_ScoreScreenProxy( const boost::shared_ptr<LevelSeedData> &lsd );
 
 			void Apply( const boost::shared_ptr<Level> &level );
 		};	
@@ -168,7 +197,6 @@ namespace CloudberryKingdom
 	
 		struct EOL_DoorActionProxy : public Lambda_1<boost::shared_ptr<Door> >
 		{
-		
 			void Apply( const boost::shared_ptr<Door> &door );
 		};
 
@@ -284,7 +312,7 @@ namespace CloudberryKingdom
 
 		void ProcessSpecial();
 
-		void WaitThenPlay( boost::shared_ptr<GameData> game, int wait, boost::shared_ptr<EzSong> song );
+		static void WaitThenPlay( boost::shared_ptr<GameData> game, int wait, boost::shared_ptr<EzSong> song );
 
 		void _StartSong( const boost::shared_ptr<Level> &level );
 
@@ -294,6 +322,9 @@ namespace CloudberryKingdom
 
 		static void _NoStartDoor( const boost::shared_ptr<Level> &level );
 		static void _NewHero( const boost::shared_ptr<Level> &level );
+		static void _RepeatHero( const boost::shared_ptr<Level> &level );
+		static void _ShowChapterName( const boost::shared_ptr<Level> &level );
+		static void _ScoreScreen( const boost::shared_ptr<Level> &level );
 		static void _FadeIn_Process( const boost::shared_ptr<Level> &level );
 
 		static void _FadeOut_Process( const boost::shared_ptr<Level> &level );

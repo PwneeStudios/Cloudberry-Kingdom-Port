@@ -156,8 +156,6 @@ namespace CloudberryKingdom
     boost::shared_ptr<BobPhsx> ArcadeMenu::BigBouncy;
     boost::shared_ptr<BobPhsx> ArcadeMenu::Ultimate;
 
-	std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > ArcadeMenu::HeroArcadeList;
-
 	void ArcadeMenu::StaticInit()
 	{
         // Heroes
@@ -227,7 +225,7 @@ namespace CloudberryKingdom
 			{
                 LeaderboardList.push_back(
 					std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(
-					Challenge_Escalation.getInstance(), hero->first) );
+					Challenge_Escalation::getInstance(), hero->first) );
 			}
 
 			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator
@@ -235,11 +233,11 @@ namespace CloudberryKingdom
 			{
                 LeaderboardList.push_back(
 					std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(
-					Challenge_TimeCrisis.getInstance(), hero->first) );
+					Challenge_TimeCrisis::getInstance(), hero->first) );
 			}
 
-            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_HeroRush.getInstance(), 0 ) );
-            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_HeroRush2.getInstance(), 0 ) );
+            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_HeroRush::getInstance(), 0 ) );
+            LeaderboardList.push_back( std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >( Challenge_HeroRush2::getInstance(), 0 ) );
 
             // Goals
             ChallengeGoal = std::map<int, int>();
@@ -247,18 +245,22 @@ namespace CloudberryKingdom
 				hero = HeroArcadeList.begin(); hero != HeroArcadeList.end(); ++hero )
             {
                 if ( hero->second.first == 0 ) continue;
-                ChallengeGoal[ Challenge_Escalation.getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
-                ChallengeGoal[ Challenge_TimeCrisis.getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
+                ChallengeGoal[ Challenge_Escalation::getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
+                ChallengeGoal[ Challenge_TimeCrisis::getInstance()->CalcGameId_Level( hero->second.first ) ] = hero->second.second;
             }
 	}
+
+	std::map<int, int> ArcadeMenu::ChallengeGoal;
+	std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > > ArcadeMenu::LeaderboardList;
+	std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > > ArcadeMenu::HeroArcadeList;
 
 
         int ArcadeMenu::LeaderboardIndex(boost::shared_ptr<Challenge> challenge, boost::shared_ptr<BobPhsx> phsx)
         {
             int index = 0;
 
-			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator
-				tuple = HeroArcadeList.begin(); tuple != HeroArcadeList.end(); ++tuple )
+			for ( std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > >::const_iterator
+				tuple = LeaderboardList.begin(); tuple != LeaderboardList.end(); ++tuple )
 			{
                 if ( tuple->first == challenge && tuple->second == phsx )
                 {
@@ -274,31 +276,31 @@ namespace CloudberryKingdom
         void ArcadeMenu::CheckForArcadeUnlocks_OnSwapIn(int level)
         {
             // Always add new hero message (for testing)
-            //Tools.CurGameData.AddGameObject(new HeroUnlockedMessage());
+            //Tools::CurGameData.AddGameObject(new HeroUnlockedMessage());
 
             bool DoSave = false;
 
-            Tools.Assert(Challenge.CurrentId >= 0);
+            Tools::Assert(Challenge::CurrentId >= 0);
 
             std::vector<boost::shared_ptr<PlayerData> > CopyOfExistingPlayers = PlayerManager::getExistingPlayers();
 			for ( std::vector<boost::shared_ptr<PlayerData> >::const_iterator
 				player = CopyOfExistingPlayers.begin(); player != CopyOfExistingPlayers.end(); ++player )
             {
                 // Check for goals
-                //if (ChallengeGoal.ContainsKey(Challenge.CurrentId))
+                //if (ChallengeGoal.ContainsKey(Challenge::CurrentId))
                 {
-                    int CurHighLevel = ( *player )->GetHighScore(Challenge.CurrentId);
+                    int CurHighLevel = ( *player )->GetHighScore(Challenge::CurrentId);
                     //if (level + 1 >= Goal && CurHighLevel < Goal)
 					if (level >= CurHighLevel)
                     {
 						//DoSave = true;
-                        ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge.CurrentId,                       level + 1,              Challenge.CurrentScore, level + 1, 0, 0, 0));
-                        ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge.CurrentId - Challenge.LevelMask, Challenge.CurrentScore, Challenge.CurrentScore, level + 1, 0, 0, 0));
+                        ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge::CurrentId,                       level + 1,              Challenge::CurrentScore, level + 1, 0, 0, 0));
+                        ( *player )->AddHighScore( boost::make_shared<ScoreEntry>( ( *player )->GetName(), Challenge::CurrentId - Challenge::LevelMask, Challenge::CurrentScore, Challenge::CurrentScore, level + 1, 0, 0, 0));
                     }
 
-					if ( Contains( ChallengeGoal, Challenge.CurrentId ) )
+					if ( Contains( ChallengeGoal, Challenge::CurrentId ) )
 					{
-						int Goal = ChallengeGoal[Challenge.CurrentId];
+						int Goal = ChallengeGoal[Challenge::CurrentId];
 
 						if (level + 1 >= Goal && CurHighLevel < Goal)
 						{
@@ -309,14 +311,14 @@ namespace CloudberryKingdom
 
                 // Check for awards
                 int TotalArcadeLevel = ( *player )->GetTotalArcadeLevel();
-                Awardments.CheckForAward_TimeCrisisUnlock(TotalArcadeLevel, ( *player ) );
-                Awardments.CheckForAward_HeroRushUnlock(TotalArcadeLevel, ( *player ) );
-                Awardments.CheckForAward_HeroRush2Unlock(TotalArcadeLevel, ( *player ) );
+                Awardments::CheckForAward_TimeCrisisUnlock(TotalArcadeLevel, ( *player ) );
+                Awardments::CheckForAward_HeroRushUnlock(TotalArcadeLevel, ( *player ) );
+                Awardments::CheckForAward_HeroRush2Unlock(TotalArcadeLevel, ( *player ) );
             }
 
             if (DoSave)
             {
-                SaveGroup.SaveAll();
+                SaveGroup::SaveAll();
                 Tools::CurGameData->AddGameObject( boost::make_shared<HeroUnlockedMessage>() );
             }
         }
@@ -511,8 +513,8 @@ namespace CloudberryKingdom
                 boost::shared_ptr<EzText> _t;
                 _t = MyPile->FindEzText( L"Requirement2" );
                 //_t.Show = true;
-                //_t.SubstituteText(Localization.WordString(Localization::Words_Required) + " " +
-                //                  Localization.WordString(Localization::Words_Level) + " " + item.MyPrereq.MyInt.ToString());
+                //_t.SubstituteText(Localization::WordString(Localization::Words_Required) + " " +
+                //                  Localization::WordString(Localization::Words_Level) + " " + item.MyPrereq.MyInt.ToString());
                 _t->SubstituteText(Localization::WordString(Localization::Words_Level) + L" " + ToString( item->MyPrereq->MyInt ) );
             }
             else

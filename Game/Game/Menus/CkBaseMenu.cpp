@@ -21,7 +21,7 @@ namespace CloudberryKingdom
 
                 MyGame->getCam()->setZoom( .001f * v );
                 MyGame->getCam()->SetVertexCamera();
-                EzText.ZoomWithCamera_Override = true;
+                EzText::ZoomWithCamera_Override = true;
             }
             else
             {
@@ -240,7 +240,7 @@ namespace CloudberryKingdom
         if (UseBounce)
         {
             GUI_Panel::OnReturnTo();
-            RegularSlideOut( PresetPos::PresetPos_RIGHTRight, 0 );
+            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
             BubbleUp();
         }
         else
@@ -396,7 +396,7 @@ namespace CloudberryKingdom
         }
 
         BubbleDown();
-        MyGame->WaitThenDo( 15, boost::make_shared<Release>( shared_from_this() ) );
+        MyGame->WaitThenDo( 15, boost::make_shared<ReleaseProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
 
         Active = true;
 
@@ -410,6 +410,7 @@ namespace CloudberryKingdom
 	}
 	void CkBaseMenu::ReleaseProxy::Apply()
 	{
+		bm->Release();
 	}
 
     void CkBaseMenu::RegularSlideOut( GUI_Panel::PresetPos Preset, int Frames )
@@ -449,8 +450,10 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::MakeStaticBackButton()
 	{
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, L"Button_Back" ) );
-		MyPile->Add( boost::make_shared<QuadClass>( L"BackArrow2", L"BackArrow" ) );
+		boost::shared_ptr<EzTexture> tx = ButtonTexture::getBack();
+
+		MyPile->Add( boost::make_shared<QuadClass>( tx->Name, 90.f ), L"Button_Back" );
+		MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"BackArrow2" ) ), L"BackArrow" );
 	}
 
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
@@ -463,11 +466,11 @@ namespace CloudberryKingdom
 		boost::shared_ptr<MenuItem> item;
 
 	#if defined(PC_VERSION)
-        if (ButtonCheck.ControllerInUse)
+        if (ButtonCheck::ControllerInUse)
             item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back(86) + L" " + Localization::WordString( Word ) ) ) );
         else
         {
-            //item = new MenuItem(new EzText(ButtonString.Back(86) + Localization.WordString(Word), ItemFont));
+            //item = new MenuItem(new EzText(ButtonString.Back(86) + Localization::WordString(Word), ItemFont));
             item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Word ), ItemFont ) ) );
         }
 	#else
@@ -536,6 +539,7 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 
 	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor ),
 		FontScale( 0 ),
+		UseBounce( false ),
 		ItemShadows( true ),
 		CallToLeft( false ),
 		SlideInFrom( PresetPos_LEFT ),

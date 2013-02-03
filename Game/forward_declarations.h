@@ -3,6 +3,8 @@
 
 namespace CloudberryKingdom
 {
+	struct StartMenu_MW_Pre;
+	struct StartMenu_MW_Simple;
 	struct Particle;
 	struct MyOwnVertexFormat;
 	struct ColData;

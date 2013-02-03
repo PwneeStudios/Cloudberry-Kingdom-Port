@@ -14,8 +14,6 @@ namespace CloudberryKingdom
 		using ArcadeBaseMenu::SlideIn;
 		using ArcadeBaseMenu::Call;
 
-		using GUI_Panel::Call;
-
 	
 		struct BringLeaderboardProxy : public Lambda
 		{

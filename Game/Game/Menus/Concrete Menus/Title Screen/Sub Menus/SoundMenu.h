@@ -9,7 +9,112 @@ namespace CloudberryKingdom
 	{
 
 		virtual ~SoundMenu() { }
-	
+
+		struct Go_ControlsProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			Go_ControlsProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->Go_Controls();
+			}
+
+		};
+
+		struct Go_CustomControlsProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			Go_CustomControlsProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->Go_CustomControls();
+			}
+
+		};
+
+		struct Go_CreditsProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			Go_CreditsProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->Go_Credits();
+			}
+
+		};
+
+		struct StartFadeProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			StartFadeProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->StartFade();
+			}
+
+		};
+
+		struct StartCreditsProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			StartCreditsProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->StartCredits();
+			}
+
+		};
+
+
+		struct AfterCreditsProxy : public Lambda
+		{
+
+			boost::shared_ptr<SoundMenu> sm;
+
+			AfterCreditsProxy( boost::shared_ptr<SoundMenu> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply()
+			{
+				sm->AfterCredits();
+			}
+
+		};
+
+		
+
 		struct InitOnToggleHelper : public Lambda_1<bool>
 		{
 		

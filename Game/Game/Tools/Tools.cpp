@@ -797,11 +797,16 @@ namespace CloudberryKingdom
 	void Tools::PlayHappyMusic(boost::shared_ptr<GameData> game, int Delay)
 	{
 		game->KillToDo( L"StartMusic" );
-		game->WaitThenDo( Delay, () =>
-		{
-			Tools.PlayHappyMusic();
-		}, L"StartMusic");
+		game->WaitThenDo( Delay, boost::make_shared<PlayHappyProxy>(), L"StartMusic");
 	}
+
+	void Tools::PlayHappyProxy::Apply()
+	{
+		Tools::PlayHappyMusic();
+	}
+
+
+
 
 	void Tools::PlayHappyMusic()
 	{

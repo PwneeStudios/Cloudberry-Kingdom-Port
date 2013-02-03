@@ -6,8 +6,7 @@
 struct SignedInEventArgs
 {
 
-
-	SignedInGamer Gamer;
+	SignedInGamer _Gamer;
 
 };
 

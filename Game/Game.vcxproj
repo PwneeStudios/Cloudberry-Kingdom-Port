@@ -179,6 +179,7 @@
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.cpp" />
+    <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.cpp" />
     <ClCompile Include="Game\Menus\Concrete Menus\Title Screen\Sub Menus\SoundMenu.cpp" />
@@ -205,6 +206,7 @@
     <ClCompile Include="Game\Objects\Door\Door.cpp" />
     <ClCompile Include="Game\Objects\Door\PressNote.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObject.cpp" />
+    <ClCompile Include="Game\Objects\Game Objects\GameObjects\ChapterTitle.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\Cheer.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.cpp" />
     <ClCompile Include="Game\Objects\Game Objects\GameObjects\DoorIcon.cpp" />
@@ -325,6 +327,7 @@
     <ClCompile Include="Game\Player\Hero Physics\TimeShip.cpp" />
     <ClCompile Include="Game\Player\Hero Physics\Wheel.cpp" />
     <ClCompile Include="Game\Player\Leaderboard.cpp" />
+    <ClCompile Include="Game\Player\LeaderboardView.cpp" />
     <ClCompile Include="Game\Player\PlayerData.cpp" />
     <ClCompile Include="Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Player\SavedSeeds.cpp" />
@@ -431,8 +434,11 @@
     <ClInclude Include="Core\Tools\Set.h" />
     <ClInclude Include="Game\Level\Make\MakePiece\MakeVertical\MakeFinalDoor_Vertical.h" />
     <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h" />
+    <ClInclude Include="Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h" />
+    <ClInclude Include="Game\Objects\Game Objects\GameObjects\ChapterTitle.h" />
     <ClInclude Include="Game\Player\Hero Physics\TimeShip.h" />
     <ClInclude Include="Game\Player\Leaderboard.h" />
+    <ClInclude Include="Game\Player\LeaderboardView.h" />
     <ClInclude Include="Hacks\Compare.h" />
     <ClInclude Include="Hacks\Dict.h" />
     <ClInclude Include="Hacks\List.h" />

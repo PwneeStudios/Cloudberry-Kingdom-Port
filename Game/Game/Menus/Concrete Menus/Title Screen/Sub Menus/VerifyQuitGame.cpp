@@ -16,10 +16,10 @@ namespace CloudberryKingdom
 		Berry->setTextureName( textureName );
 	}
 
-	VerifyQuitGameMenu2::VerifyQuitGameMenu2( int Control ) : VerifyBaseMenu( Control ) { }
+	VerifyQuitGameMenu2::VerifyQuitGameMenu2( int Control ) : VerifyBaseMenu( Control, true ) { }
 	boost::shared_ptr<VerifyQuitGameMenu2> VerifyQuitGameMenu2::VerifyQuitGameMenu2_Construct( int Control )
 	{
-		VerifyBaseMenu::VerifyBaseMenu_Construct( Control );
+		VerifyBaseMenu::VerifyBaseMenu_Construct( Control, true );
 
 		EnableBounce();
 		
@@ -60,7 +60,7 @@ namespace CloudberryKingdom
 		text->Shadow = false;
 		text->setScale( text->getScale() * 1.15f );
 
-		text->MyFloatColor = ColorHelper.Gray(.9f);
+		text->MyFloatColor = ColorHelper::Gray(.9f);
 	}
 
 	void VerifyQuitGameMenu2::Init()

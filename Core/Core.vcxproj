@@ -145,6 +145,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Graphics\Texture2D.cpp" />
+    <ClCompile Include="src\Graphics\VideoPlayerPc.cpp" />
     <ClCompile Include="src\Input\GamePadPc.cpp" />
     <ClCompile Include="src\Input\GamePadWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
@@ -225,10 +226,10 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(IncludePath)</IncludePath>
+    <IncludePath>$(SolutionDir)OpenAL\include;$(ProjectDir)include;$(SolutionDir)glfw-2.7.6\include;$(SolutionDir)glew-1.9.0\include;$(SolutionDir)zlib-1.2.7;$(SolutionDir)boost_shared_ptr;$(SolutionDir)Game;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>

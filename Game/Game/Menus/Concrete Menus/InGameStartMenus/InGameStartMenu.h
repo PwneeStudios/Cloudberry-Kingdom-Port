@@ -12,7 +12,16 @@ namespace CloudberryKingdom
 		bool CenterItems;
 
 		virtual ~InGameStartMenu() { }
-	
+
+		struct UnpauseLambda : public Lambda
+		{
+			boost::shared_ptr<InGameStartMenu> igsm;
+		
+			UnpauseLambda( boost::shared_ptr<InGameStartMenu> igsm );
+
+			void Apply();
+		};
+
 		struct MakeListenerHelper : public LambdaFunc_1<boost::shared_ptr<Listener> , boost::shared_ptr<GUI_Panel> >
 		{
 		

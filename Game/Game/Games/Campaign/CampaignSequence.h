@@ -55,9 +55,8 @@ namespace CloudberryKingdom
 		static boost::shared_ptr<CampaignSequence> instance;
 		const static boost::shared_ptr<CampaignSequence> &getInstance();
 
-		static Localization::Words ChapterName[];
+		static std::vector<Localization::Words> ChapterName;
 
-		int StartLevel;
 		static bool MusicStarted;
 
 		std::map<int, int> ChapterStart;

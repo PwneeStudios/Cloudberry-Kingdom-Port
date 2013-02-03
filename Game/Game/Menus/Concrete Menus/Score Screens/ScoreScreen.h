@@ -10,7 +10,28 @@ namespace CloudberryKingdom
 	{
 
 		virtual ~ScoreScreen() { }
-	
+
+		struct EOL_WaitThenDoEndActionWaitProxy : public Lambda
+		{
+		
+			boost::shared_ptr<StringWorldGameData> sw;
+			boost::shared_ptr<Door> door;
+
+			EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door );
+
+			void Apply();
+		};
+
+
+		struct EOL_WaitThenDoEndActionProxy : public Lambda_1<boost::shared_ptr<Door> >
+		{
+			boost::shared_ptr<ScoreScreen> ss;
+
+			EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss );
+			void Apply( const boost::shared_ptr<Door> &door );
+		};
+
+
 		struct OnAddHelper : public Lambda
 		{
 		
@@ -144,6 +165,27 @@ namespace CloudberryKingdom
 			void Apply( const boost::shared_ptr<MenuItem> &item );
 		};
 
+		struct MenuGo_ExitCampaignProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+		
+			boost::shared_ptr<ScoreScreen> ss;
+
+		
+			MenuGo_ExitCampaignProxy( const boost::shared_ptr<ScoreScreen> &ss );
+
+			void Apply( const boost::shared_ptr<MenuItem> &item );
+		};
+
+		struct MenuGo_ExitFreeplayProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+		
+			boost::shared_ptr<ScoreScreen> ss;
+
+		
+			MenuGo_ExitFreeplayProxy( const boost::shared_ptr<ScoreScreen> &ss );
+
+			void Apply( const boost::shared_ptr<MenuItem> &item );
+		};
 	
 		bool _Add_Watch, _Add_Save;
 	

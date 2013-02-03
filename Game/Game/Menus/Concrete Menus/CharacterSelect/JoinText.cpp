@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 #else
         std::wstring pressa = Format( Localization::WordString( Localization::Words::Words_PressToJoin ).c_str(), ButtonString::Go( 89 ) );
 #endif
-        Text = boost::make_shared<EzText>( pressa, Resources.Font_Grobold42, true, true);
+        Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, true, true);
 			
 		Text->setScale( .7765f );
 

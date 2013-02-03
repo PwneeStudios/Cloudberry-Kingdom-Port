@@ -4,6 +4,30 @@
 
 namespace CloudberryKingdom
 {
+		
+			ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::EOL_WaitThenDoEndActionWaitProxy( const boost::shared_ptr<StringWorldGameData> &sw, const boost::shared_ptr<Door> &door )
+			{
+				this->sw = sw;
+				this->door = door;
+			}
+
+			void ScoreScreen::EOL_WaitThenDoEndActionWaitProxy::Apply()
+			{
+				sw->EOL_StringWorldDoorEndAction( door );
+			}
+
+
+
+			ScoreScreen::EOL_WaitThenDoEndActionProxy::EOL_WaitThenDoEndActionProxy( boost::shared_ptr<ScoreScreen> ss )
+			{
+				this->ss = ss;
+			}
+
+			void ScoreScreen::EOL_WaitThenDoEndActionProxy::Apply( const boost::shared_ptr<Door> &door )
+			{
+				ss->EOL_WaitThenDoEndAction( door );
+			}
+
 
 	ScoreScreen::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScoreScreen> &ss )
 	{
@@ -117,6 +141,27 @@ namespace CloudberryKingdom
 		ss->MenuGo_Save( item );
 	}
 
+	ScoreScreen::MenuGo_ExitCampaignProxy::MenuGo_ExitCampaignProxy( const boost::shared_ptr<ScoreScreen> &ss )
+	{
+		this->ss = ss;
+	}
+
+	void ScoreScreen::MenuGo_ExitCampaignProxy::Apply( const boost::shared_ptr<MenuItem> &item )
+	{
+		ss->MenuGo_Save( item );
+	}
+
+	ScoreScreen::MenuGo_ExitFreeplayProxy::MenuGo_ExitFreeplayProxy( const boost::shared_ptr<ScoreScreen> &ss )
+	{
+		this->ss = ss;
+	}
+
+	void ScoreScreen::MenuGo_ExitFreeplayProxy::Apply( const boost::shared_ptr<MenuItem> &item )
+	{
+		ss->MenuGo_Save( item );
+	}
+
+
 	void ScoreScreen::MakeMenu()
 	{
 		if ( AsMenu )
@@ -171,12 +216,12 @@ namespace CloudberryKingdom
 			{
 				//back = MakeBackButton(Localization.Words.Back);
 				back = MakeBackButton( Localization::Words::Words_Exit );
-				back->Go = MenuGo_ExitCampaign;
+				item->setGo( boost::make_shared<MenuGo_ExitCampaignProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 			else
 			{
 				back = MakeBackButton( Localization::Words_BackToFreeplay );
-				back->Go = MenuGo_ExitFreeplay;
+				item->setGo( boost::make_shared<MenuGo_ExitFreeplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 
 
@@ -516,15 +561,15 @@ bool ScoreScreen::UseZoomIn = true;
 			boost::shared_ptr<StringWorldGameData> stringworld = boost::dynamic_pointer_cast<StringWorldGameData>( Tools::WorldMap );
 
 			boost::shared_ptr<Door> door = boost::dynamic_pointer_cast<Door>( Tools::CurLevel->FindIObject( LevelConnector::EndOfLevelCode ) );
-			door->setOnOpen( d => GameData.EOL_DoorAction(d) );
+			door->setOnOpen( boost::make_shared<LevelSeedData::EOL_DoorActionProxy>() );
 
 			if ( stringworld != 0 )
 			{
 				bool fade = door->getMyLevel()->MyLevelSeed != 0 && door->getMyLevel()->MyLevelSeed->FadeOut;
 				if (fade)
-					door->setOnEnter(stringworld.EOL_StringWorldDoorEndAction_WithFade);
+					door->setOnEnter( boost::make_shared<LevelSeedData::EOL_StringWorldDoorEndAction_WithFadeProxy>( stringworld ) );
 				else
-					door->setOnEnter(EOL_WaitThenDoEndAction);
+					door->setOnEnter( boost::make_shared<EOL_WaitThenDoEndActionProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 								   
 				stringworld->EOL_StringWorldDoorAction( door );
 			}
@@ -541,7 +586,7 @@ bool ScoreScreen::UseZoomIn = true;
 
 		if ( stringworld != 0 )
 		{
-			door->getGame()->WaitThenDo(35, () => stringworld.EOL_StringWorldDoorEndAction(door) );
+			door->getGame()->WaitThenDo( 35, boost::make_shared<EOL_WaitThenDoEndActionWaitProxy>( stringworld, door ) );
 		}
 	}
 
@@ -563,7 +608,7 @@ bool ScoreScreen::UseZoomIn = true;
 		Tools::CurrentAftermath->Success = false;
 		Tools::CurrentAftermath->EarlyExit = true;
 
-		Tools::CurGameData->EndGame( false );
+		Tools::CurGameData->EndGame->Apply( false );
 	}
 
 	void ScoreScreen::MenuGo_Stats( const boost::shared_ptr<MenuItem> &item )

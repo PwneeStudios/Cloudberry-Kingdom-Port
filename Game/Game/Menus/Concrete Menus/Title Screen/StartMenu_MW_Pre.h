@@ -14,10 +14,104 @@ namespace CloudberryKingdom
 		using StartMenu::SlideOut;
 		using StartMenu::SlideIn;
 		using StartMenu::Call;
+		using StartMenu::Hide;
 
 		bool CallingOptionsMenu;
 		boost::shared_ptr<QuadClass> BackBox;
 		boost::shared_ptr<TitleGameData_MW> Title;
+
+
+
+		struct MenuGo_PlayProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_PlayProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Play( item );
+			}
+		};
+
+		struct MenuGo_AchievementsProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_AchievementsProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Achievements( item );
+			}
+		};
+
+		struct MenuGo_LeaderboardsProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_LeaderboardsProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Leaderboards( item );
+			}
+		};
+
+		struct MenuGo_BuyGameProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_BuyGameProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_BuyGame( item );
+			}
+		};
+
+		struct MenuGo_OptionsProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_OptionsProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Options( item );
+			}
+		};
+
+		struct MenuGo_ExitProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
+		{
+			boost::shared_ptr<StartMenu_MW_Pre> sm;
+
+			MenuGo_ExitProxy( boost::shared_ptr<StartMenu_MW_Pre> sm )
+			{
+				this->sm = sm;
+			}
+
+			void Apply( const boost::shared_ptr<MenuItem> &item )
+			{
+				sm->MenuGo_Exit( item );
+			}
+		};
+
 
 		void MenuGo_Options( boost::shared_ptr<MenuItem> item );
 		void Exit();

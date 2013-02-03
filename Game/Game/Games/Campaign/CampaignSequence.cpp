@@ -6,6 +6,7 @@
 #include <Hacks/FileReader.h>
 #include <Hacks/String.h>
 #include <Core\Tools\Set.h>
+#include "Hacks/List.h"
 
 #include <Game\Video.h>
 
@@ -45,9 +46,10 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<CampaignSequence> CampaignSequence::instance;
 
-	Localization::Words ChapterName[] = { Localization::Words::Words_Chapter1, Localization::Words::Words_Chapter2, Localization::Words::Words_Chapter3,
-										  Localization::Words::Words_Chapter4, Localization::Words::Words_Chapter5, Localization::Words::Words_Chapter6,
-										  Localization::Words::Words_TheMasochist };
+	Localization::Words _ChapterName[] = { Localization::Words::Words_Chapter1, Localization::Words::Words_Chapter2, Localization::Words::Words_Chapter3,
+										   Localization::Words::Words_Chapter4, Localization::Words::Words_Chapter5, Localization::Words::Words_Chapter6,
+										   Localization::Words::Words_TheMasochist };
+	std::vector<Localization::Words> CampaignSequence::ChapterName = VecFromArray( _ChapterName );
 
 
 	const boost::shared_ptr<CampaignSequence> &CampaignSequence::getInstance()
@@ -317,7 +319,7 @@ namespace CloudberryKingdom
 		level->MyGame->OnCompleteLevel->Add( boost::make_shared<OnCompleteLevelProxy>() );
 
         // Level Title only
-        //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization.WordString(Localization::Words_Level)));
+        //var title = new LevelTitle(string.Format("{1} {0}", level.MyLevelSeed.LevelNum, Localization::WordString(Localization::Words_Level)));
             
         // Level Title plus Hero Name
         if ( !level->MyLevelSeed->NewHero && !level->MyLevelSeed->ShowChapterName )
@@ -329,7 +331,7 @@ namespace CloudberryKingdom
 
         //if (!level.MyLevelSeed.NewHero)
         //{
-        //    var hero_title = new LevelTitle(string.Format("{0}", Localization.WordString(level.DefaultHeroType.Name)));
+        //    var hero_title = new LevelTitle(string.Format("{0}", Localization::WordString(level.DefaultHeroType.Name)));
         //    hero_title.Shift(new Vector2(0, -180));
         //    level.MyGame.AddGameObject(hero_title);
         //}

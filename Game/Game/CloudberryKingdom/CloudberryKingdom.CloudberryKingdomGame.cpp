@@ -24,6 +24,8 @@
 
 #include <Game\Video.h>
 
+#include <Game\Player\LeaderboardView.h>
+
 namespace CloudberryKingdom
 {
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
@@ -173,6 +175,8 @@ namespace CloudberryKingdom
 
 		// Load campaign
 		CampaignSequence::instance = boost::make_shared<CampaignSequence>();
+
+		LeaderboardItem::StaticIntialize();
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
@@ -216,7 +220,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		bool CloudberryKingdomGame::GodMode = true;
 		bool CloudberryKingdomGame::AsianButtonSwitch = false;
 
-#if PC_VERSION
+#ifdef PC_VERSION
         // Steam Beta
 		//bool CloudberryKingdomGame::HideLogos = true;
 		//bool CloudberryKingdomGame::LockCampaign = true;

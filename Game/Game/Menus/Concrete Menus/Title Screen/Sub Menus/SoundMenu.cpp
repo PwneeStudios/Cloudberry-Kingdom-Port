@@ -4,6 +4,11 @@
 #include <MasterHack.h>
 #include <Game\CloudberryKingdom\CloudberryKingdom.CloudberryKingdomGame.h>
 
+#include <Game\Video.h>
+
+#include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.h>
+#include <Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.h>
+
 namespace CloudberryKingdom
 {
 
@@ -143,8 +148,7 @@ namespace CloudberryKingdom
 		AddItem( MusicSlider );
 
 		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Controls, ItemFont, CenterItems ) ) );
-		//item->setGo( boost::make_shared<InitHideHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
-		item->setGo( Go_Controls );
+		item->setGo( Cast::ToItem( boost::make_shared<Go_ControlsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 		item->Name = std::wstring( L"Controls" );
 		AddItem( item );
 
@@ -182,8 +186,7 @@ namespace CloudberryKingdom
 	#if defined(PC_VERSION)
 		// Custom controls
 		boost::shared_ptr<MenuItem> mitem = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_EditControls, ItemFont, CenterItems ) ) );
-		//mitem->setGo( boost::make_shared<InitCallCustomControlsHelper>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
-		mitem->setGo( Cast.ToItem(Go_CustomControls) );
+		mitem->setGo( Cast::ToItem( boost::make_shared<Go_CustomControlsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 		mitem->Name = std::wstring( L"Custom" );
 		AddItem( mitem );
 
@@ -254,10 +257,10 @@ namespace CloudberryKingdom
 	#endif
 
 		// Credits
-		if (LanguageOption && !CloudberryKingdomGame.HideLogos)
+		if ( LanguageOption && !CloudberryKingdomGame::HideLogos )
 		{
 			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>(Localization::Words::Words_Credits, ItemFont, CenterItems) ) );
-			item->setGo( Cast::ToItem(Go_Credits) );
+			mitem->setGo( Cast::ToItem( boost::make_shared<Go_CreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 			item->Name = L"Credits";
 			AddItem(item);
 		}
@@ -321,8 +324,8 @@ namespace CloudberryKingdom
 			Tools::SongWad->FadeOut();
 			MyMenu->Active = false;
 
-			MyGame->WaitThenDo(4, StartFade);
-			MyGame->WaitThenDo(87, StartCredits);
+			MyGame->WaitThenDo(4, boost::make_shared<StartFadeProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) );
+			MyGame->WaitThenDo(87, boost::make_shared<StartCreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ));
 		}
 
 		void SoundMenu::StartFade()
@@ -333,8 +336,8 @@ namespace CloudberryKingdom
 
 		void SoundMenu::StartCredits()
 		{
-			MyGame->WaitThenDo(20, AfterCredits);
-			MainVideo::StartVideo_CanSkipIfWatched( L"Credits" );
+			MyGame->WaitThenDo(20, boost::make_shared<AfterCreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ));
+			MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"Credits" ) );
 		}
 
 		void SoundMenu::AfterCredits()
@@ -357,8 +360,8 @@ namespace CloudberryKingdom
 
 				for ( GameObjVec::const_iterator obj = MyGame->MyGameObjects.begin(); obj != MyGame->MyGameObjects.end(); ++obj )
                 {
-                    boost::shared_ptr<GUI_Panel> panel = boost::dynamic_pointer_cast<GUI_Panel>( obj );
-                    if (0 != panel)
+                    boost::shared_ptr<GUI_Panel> panel = boost::dynamic_pointer_cast<GUI_Panel>( *obj );
+                    if ( 0 != panel )
 					{
 						if ( boost::dynamic_pointer_cast<StartMenu_MW_Pre>( panel ) != 0 ||
 							 boost::dynamic_pointer_cast<StartMenu_MW_PressStart>( panel ) != 0 ||
@@ -371,8 +374,8 @@ namespace CloudberryKingdom
 
                 MyGame->PhsxStepsToDo += 20;
 
-                ButtonCheck.PreventInput();
-                ButtonCheck.PreventTimeStamp += 20;
+                ButtonCheck::PreventInput();
+                ButtonCheck::PreventTimeStamp += 20;
             }
 
             VerifyBaseMenu::Release();

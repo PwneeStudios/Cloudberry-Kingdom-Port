@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 	void AlertBaseMenu::MakeBackdrop()
 	{
         if (UseBounce)
-            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500, true );
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
         else
 			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
 

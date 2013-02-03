@@ -51,7 +51,7 @@ namespace CloudberryKingdom
 
     int Challenge::CalcGameId_Score( boost::shared_ptr<BobPhsx> hero )
     {
-        int HeroId = hero == 0 ? 0 : hero.Id;
+        int HeroId = hero == 0 ? 0 : hero->Id;
 
 		//GameId_Level = 100 * HeroId + GameTypeId;
 		//return GameId_Level;

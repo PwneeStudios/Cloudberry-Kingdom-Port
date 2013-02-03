@@ -6,14 +6,6 @@
 namespace CloudberryKingdom
 {
 
-    struct HeroUnlockedMessage : public AwardmentMessage
-    {
-
-        HeroUnlockedMessage();
-		boost::shared_ptr<HeroUnlockedMessage> HeroUnlockedMessage_Construct( );
-
-	};
-
 	struct AwardmentMessage : public CkBaseMenu
 	{
 
@@ -55,6 +47,14 @@ namespace CloudberryKingdom
 
 	
 		void InitializeInstanceFields();
+	};
+
+    struct HeroUnlockedMessage : public AwardmentMessage
+    {
+
+        HeroUnlockedMessage();
+		boost::shared_ptr<HeroUnlockedMessage> HeroUnlockedMessage_Construct( );
+
 	};
 
 }

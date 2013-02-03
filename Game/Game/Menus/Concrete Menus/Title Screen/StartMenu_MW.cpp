@@ -154,8 +154,8 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW::SetPos()
 	{
-        BackBox->TextureName = L"White";
-        BackBox->Quad->SetColor( ColorHelper->Gray(.1f ));
+        BackBox->setTextureName( L"White" );
+        BackBox->Quad_Renamed.SetColor( ColorHelper::Gray(.1f ));
         BackBox->setAlpha( .73f );
 
         boost::shared_ptr<MenuItem> _item;

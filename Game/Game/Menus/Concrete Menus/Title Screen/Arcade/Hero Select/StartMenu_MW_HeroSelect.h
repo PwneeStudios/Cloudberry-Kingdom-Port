@@ -25,8 +25,6 @@ namespace CloudberryKingdom
 		using ArcadeBaseMenu::SlideIn;
 		using ArcadeBaseMenu::Call;
 
-		using GUI_Panel::Call;
-	
 		struct OnSelectProxy : public Lambda
 		{
 		

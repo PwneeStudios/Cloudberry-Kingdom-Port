@@ -101,52 +101,52 @@ namespace CloudberryKingdom
 
 		SetPos();
 #else
-        text = boost::make_shared<EzText>("+", Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>("+", Resources::Font_Grobold42, true);
         MyPile->Add(text, L"plus");
         text->MyFloatColor = ColorHelper.Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_QuickSpawn, Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words::Words_QuickSpawn, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"quickspawn");
         text->MyFloatColor = ColorHelper.Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Jump, Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words::Words_Jump, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"jump");
         text->MyFloatColor = ColorHelper.Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_PowerUpMenu, Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words::Words_PowerUpMenu, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"powerups");
         text->MyFloatColor = ColorHelper.Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Accept, Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words::Words_Accept, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"accept");
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Back, Resources.Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words::Words_Back, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"back");
 
         boost::shared_ptr<QuadClass> q;
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getX); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getX() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"x");
 
         q = boost::make_shared<QuadClass>("door_castle_1"); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"door");
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getY); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getY() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"y");
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getLeftBumper); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getLeftBumper() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"lb");
-        q = boost::make_shared<QuadClass>(ButtonTexture::getRightBumper); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getRightBumper() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"rb");
 
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getGo); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"jump");
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getGo); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getGo() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"accep");
 
-        q = boost::make_shared<QuadClass>(ButtonTexture::getBack); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>(ButtonTexture::getBack() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"back");
 
         SetPos();

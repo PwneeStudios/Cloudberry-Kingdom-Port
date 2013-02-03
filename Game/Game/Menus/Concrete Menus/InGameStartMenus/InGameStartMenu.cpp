@@ -5,6 +5,16 @@
 namespace CloudberryKingdom
 {
 
+	InGameStartMenu::UnpauseLambda::UnpauseLambda( boost::shared_ptr<InGameStartMenu> igsm )
+	{
+		this->igsm = igsm;
+	}
+
+	void InGameStartMenu::UnpauseLambda::Apply()
+	{
+		igsm->Unpause();
+	}
+
 	boost::shared_ptr<GUI_Panel> InGameStartMenu::MakeListenerHelper::Apply( const boost::shared_ptr<Listener> &listener )
 	{
 		return MakeMagic( InGameStartMenu, ( listener->TriggeringPlayerIndex ) );
@@ -274,7 +284,7 @@ bool InGameStartMenu::PreventMenu = false;
 			getMyLevel()->ReplayPaused = true;
 
             HoldLevel = getMyLevel();
-            MyGame->WaitThenDo( 7, Unpause );
+            MyGame->WaitThenDo( 7, boost::make_shared<UnpauseLambda>( boost::static_pointer_cast<InGameStartMenu>( shared_from_this() ) ) );
 
             return CkBaseMenu::MenuReturnToCaller( menu );
         }

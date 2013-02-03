@@ -63,14 +63,13 @@ namespace CloudberryKingdom
 	{
         boost::shared_ptr<QuadClass> Backdrop;
         if (UseBounce)
-            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft", 1500, true);
+            Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
         else
 			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );
 
 		Backdrop->Name = std::wstring( L"Backdrop" );
 		MyPile->Add( Backdrop );
 		Backdrop->setPos( Vector2( 1181.251f, 241.6668f ) );
-			//new Vector2(1525.001f, 200.0001f);
 	}
 
 	void VerifyBaseMenu::Init()

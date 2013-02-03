@@ -13,6 +13,7 @@ namespace CloudberryKingdom
 		using CkBaseMenu::SlideOut;
 		using CkBaseMenu::SlideIn;
 		using CkBaseMenu::Call;
+		using CkBaseMenu::Hide;
 
 		enum Next
 		{

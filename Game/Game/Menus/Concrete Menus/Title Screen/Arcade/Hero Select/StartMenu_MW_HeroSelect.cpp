@@ -306,14 +306,14 @@ namespace CloudberryKingdom
 		MyPile->FadeIn( .33f );
 
         // Scroll bar
-        Scroll = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        Scroll = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100.f );
         MyPile->Add(Scroll, L"Scroll" );
 
-        ScrollTop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        ScrollTop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100.f );
         MyPile->Add(ScrollTop, L"ScrollTop" );
         ScrollTop->Show = false;
 
-        ScrollBottom = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100 );
+        ScrollBottom = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 100.f );
         MyPile->Add(ScrollBottom, L"ScrollBottom" );
         ScrollBottom->Show = false;
 
@@ -327,7 +327,7 @@ namespace CloudberryKingdom
         if (Scroll != 0)
         {
             float t = (float)MyMenu->CurIndex / (float)(NumSelectableItems - 1);
-            Scroll->getPosY() = (1 - t) * (ScrollTop->getPosY() - Scroll->getSizeY() ) + (t) * ScrollBottom->getPosY();
+            Scroll->setPosY( (1 - t) * (ScrollTop->getPosY() - Scroll->getSizeY() ) + (t) * ScrollBottom->getPosY() );
         }
     }
 
@@ -345,8 +345,8 @@ namespace CloudberryKingdom
 		if ( 0 == item )
 			return;
 
-        int TopScore = __max( MyArcadeItem->MyChallenge->TopScore(), PlayerManager->MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Score( item->Hero ) ) );
-        int TopLevel = __max( MyArcadeItem->MyChallenge->TopLevel(), PlayerManager->MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Level( item->Hero ) ) );
+        int TopScore = __max( MyArcadeItem->MyChallenge->TopScore(), PlayerManager::MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Score( item->Hero ) ) );
+        int TopLevel = __max( MyArcadeItem->MyChallenge->TopLevel(), PlayerManager::MaxPlayerHighScore(MyArcadeItem->MyChallenge->CalcGameId_Level( item->Hero ) ) );
 
 		Score->RightJustify = Level_Renamed->RightJustify = true;
 		Score->SubstituteText( StringConverterHelper::toString( TopScore ) );

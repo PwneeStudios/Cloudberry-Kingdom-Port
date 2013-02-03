@@ -19,14 +19,14 @@ namespace CloudberryKingdom
 	// Statics
 	bool EzText::ZoomWithCamera_Override;
 
-	boost::shared_ptr<EzTexture> ButtonTexture::getGo() { return CloudberryKingdomGame::AsianButtonSwitch ? _Back : _Go; }
-	boost::shared_ptr<EzTexture> ButtonTexture::getBack() { return CloudberryKingdomGame::AsianButtonSwitch ? _Go : _Back; }
+	boost::shared_ptr<EzTexture> ButtonTexture::getGo() { return CloudberryKingdomGame::AsianButtonSwitch ? _Back() : _Go(); }
+	boost::shared_ptr<EzTexture> ButtonTexture::getBack() { return CloudberryKingdomGame::AsianButtonSwitch ? _Go() : _Back(); }
 
 #if PC_VERSION					 
     boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_A" : L"Enter_Key" ); }
     boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_B" : L"Esc_Key" ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return ButtonCheck.ControllerInUse ? Tools::Texture( L"Xbox_X" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return ButtonCheck.ControllerInUse ? Tools::Texture( L"Xbox_Y" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_X" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_Y" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( ButtonCheck::ControllerInUse ? L"Xbox_Dir" : L"LeftRight_Key" ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_LB" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( L"Xbox_RB" ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary ) ); }

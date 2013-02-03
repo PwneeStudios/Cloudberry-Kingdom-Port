@@ -32,7 +32,7 @@ namespace CloudberryKingdom
 
 	void CharacterSelectManager::SignInGamerLambda::Apply()
 	{
-		int index = static_cast<int>( e->Gamer.MyPlayerIndex );
+		int index = static_cast<int>( e->_Gamer.MyPlayerIndex );
 		boost::shared_ptr<CharacterSelect> select = CharSelect[ index ];
 		if ( select != 0 )
 		{

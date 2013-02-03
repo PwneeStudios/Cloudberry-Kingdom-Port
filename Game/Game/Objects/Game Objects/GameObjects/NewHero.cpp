@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( MyPile->getPos() + shift );
 
 		Tools::Warning(); // May be text, rather than Localization.Words
-		text = boost::make_shared<EzText>( str, Resources::Font_Grobold42, 3000, true, true, .55f );
+		text = boost::make_shared<EzText>( str, Resources::Font_Grobold42, 3000.f, true, true, .55f );
 		text->setScale( text->getScale() * scale );
 
 		text->MyFloatColor = ( bColor( 26, 188, 241 ) ).ToVector4();

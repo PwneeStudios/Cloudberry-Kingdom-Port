@@ -127,6 +127,13 @@ namespace CloudberryKingdom
 	struct Tools
 	{
 
+		struct PlayHappyProxy : public Lambda
+		{
+
+			void Apply();
+
+		};
+
 	
 		static void InitializeStatics();
 

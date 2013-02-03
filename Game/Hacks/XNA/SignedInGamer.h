@@ -3,7 +3,14 @@
 
 #include <enums.h>
 
-// FIXME: SignedInGamer and SignedInEventArgs uses the Xbox XNA gamer concept.
+// FIXME: Gamer and SignedInGamer and SignedInEventArgs uses the Xbox XNA gamer concept.
+struct Gamer
+{
+
+	std::wstring Gamertag;
+
+};
+
 struct SignedInGamer
 {
 

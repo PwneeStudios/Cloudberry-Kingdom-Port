@@ -4,8 +4,8 @@
 #include <boost/shared_ptr.hpp>
 
 // Forward declarations.
-class Texture2D;
-class Video;
+struct Texture2D;
+struct Video;
 struct VideoPlayerInternal;
 
 struct VideoPlayer
