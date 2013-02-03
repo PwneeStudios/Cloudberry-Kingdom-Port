@@ -10,6 +10,10 @@
 	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodex.a
 	-lh264.a
 	-lmp4dmx.a
+	-lnn_ipc.a
+	-lnn_os.a
+	-lnn_dbg.a
+	-lnn_nstd.a
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp

@@ -11,6 +11,7 @@
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
 #include <Input/GamePad.h>
+#include <nn/save.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
@@ -65,12 +66,17 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
+
+	// FIXME: Docs say to delay this as much as possible.
+	SAVEInit();
 }
 
 CoreWiiU::~CoreWiiU()
 {
 	LOG.Write( "SHUTDOWN START\n" );
 	
+	SAVEShutdown();
+
 	MediaPlayer::Shutdown();
 	GamePad::Shutdown();
 

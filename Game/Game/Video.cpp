@@ -103,6 +103,36 @@ namespace CloudberryKingdom
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_1.mp4";
 			CurrentVideo->Duration.TotalSeconds = 64.f;
 		}
+		else if( MovieName == L"Cutscene_2" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_2.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"Cutscene_3" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_3.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"Cutscene_4" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_4.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"Cutscene_5" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_5.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"Cutscene_6" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Cutscene_6.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
+		else if( MovieName == L"Credits" )
+		{
+			CurrentVideo->Path = "/vol/content/Movies/Credits.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.f;
+		}
 		else if( MovieName == L"LogoSalad" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/LogoSalad.mp4";
