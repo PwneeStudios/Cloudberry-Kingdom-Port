@@ -226,10 +226,10 @@ namespace CloudberryKingdom
 	void HighScorePanel::MakeSwapText()
 	{
 	#if defined(PC_VERSION)
-		//SwapText = new EzText(ButtonString.Enter(200), Resources::Font_Grobold42_2, 1450, false, true, .6f);
+		//SwapText = new EzText(ButtonString.Enter(200), Resources::Font_Grobold42_2, 1450.f, false, true, .6f);
 		//SwapText.Pos = new Vector2(-1169.281f, 602.9366f);
 	#else
-		SwapText = boost::make_shared<EzText>( ButtonString::Go( 130 ), Resources::Font_Grobold42_2, 1450, false, true,.6f );
+		SwapText = boost::make_shared<EzText>( ButtonString::Go( 130 ), Resources::Font_Grobold42_2, 1450.f, false, true,.6f );
 		SwapText->setPos( Vector2( -1014.837f, 597.3811f ) );
 	#endif
 

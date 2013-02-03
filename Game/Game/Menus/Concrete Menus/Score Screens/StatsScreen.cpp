@@ -131,7 +131,7 @@ namespace CloudberryKingdom
 
 	bool StatsMenu::OnAddHelper::Apply()
 	{
-#if defined(WINDOWS)
+#if defined(WINDOWS) && !defined(NOT_PC)
 		return bar->MyMenu->HitTest();
 #else
 		return false;

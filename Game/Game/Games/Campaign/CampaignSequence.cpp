@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		int level = 1, count = 1;
 
 		line = reader.ReadLine();
-		while ( line != std::wstring( L"" ) )
+		while ( line != std::wstring( L"eof" ) )
 		{
 			line = Tools::RemoveComment_DashStyle( line );
 			if ( line == std::wstring( L"" ) || line.length() <= 1 )
@@ -220,10 +220,9 @@ namespace CloudberryKingdom
 			}
 			else if ( identifier == std::wstring( L"movie" ) )
 			{
-				// FIXME WARNING this should not be commented out once videos work
-					//DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
-					//Seeds.push_back( L"" );
-					//count++;
+				DictionaryExtension::AddOrOverwrite(SpecialLevel, count, boost::make_shared<Tuple<std::wstring, std::wstring> >( identifier, data ) );
+				Seeds.push_back( L"" );
+				count++;
 			}
 			else if ( identifier == std::wstring( L"end" ) )
 			{
@@ -324,7 +323,7 @@ namespace CloudberryKingdom
         // Level Title plus Hero Name
         if ( !level->MyLevelSeed->NewHero && !level->MyLevelSeed->ShowChapterName )
         {
-            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%d %ls" ), level->MyLevelSeed->LevelNum, Localization::WordString( Localization::Words_Level ).c_str() ) ) );
+            boost::shared_ptr<LevelTitle> title = MakeMagic( LevelTitle, ( Format( _T( "%ls %d" ), Localization::WordString( Localization::Words_Level ).c_str(), level->MyLevelSeed->LevelNum ) ) );
             title->Shift( Vector2(0, -45) );
             level->MyGame->AddGameObject( title );
         }

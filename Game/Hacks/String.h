@@ -101,6 +101,7 @@ struct IgnoreCaseComparator
 
 };
 
+
 inline std::wstring Format( const wchar_t *format, ... )
 {
 	wchar_t buffer[512];

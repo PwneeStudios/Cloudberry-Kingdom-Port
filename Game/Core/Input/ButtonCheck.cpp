@@ -634,7 +634,7 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 
 		if ( ( SingleOutPlayer && iPlayerIndex == ThisPlayerOnly ) || ( UseKeyboardMapping && ( iPlayerIndex == 0 || PlayerManager::Get( iPlayerIndex )->Exists ) ) )
 		{
-	//#if PC_VERSION
+	//#ifdef PC_VERSION
 			if ( Button == ControllerButtons_ENTER )
 				key = Keys_Enter;
 

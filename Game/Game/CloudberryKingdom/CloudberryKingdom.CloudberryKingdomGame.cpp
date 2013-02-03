@@ -267,7 +267,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
         bool FakeDemo = false;
         bool CloudberryKingdomGame::getIsDemo()
         {
-//#if XBOX
+//#ifdef XBOX
 //                return Guide.IsTrialMode;
 //#endif
                 return false;
@@ -275,7 +275,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 
         static void OfferToBuy(SignedInGamer gamer)
         {
-//#if XBOX
+//#ifdef XBOX
 //            if (gamer.Privileges.AllowPurchaseContent)
 //            {
 //                Guide.ShowMarketplace(gamer.PlayerIndex);
@@ -416,15 +416,22 @@ float CloudberryKingdomGame::fps = 0;
 		rez = PlayerManager::LoadRezAndKeys();
 
 	#elif defined(WINDOWS)
-		PlayerManager::RezData rez = PlayerManager::RezData();
+		RezData rez = RezData();
 		rez.Custom = true;
 	#if defined(DEBUG) || defined(INCLUDE_EDITOR)
 		rez.Fullscreen = false;
 	#else
 		rez.Fullscreen = true;
 	#endif
+
+	#if defined(WINDOWS)
+		rez.Width = 1280;
+		rez.Height = 720;
+	#else
 		rez.Width = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Width;
 		rez.Height = GraphicsAdapter::DefaultAdapter->CurrentDisplayMode->Height;
+	#endif
+
 	#endif
 
 		// Some possible resolutions.
@@ -708,7 +715,7 @@ float CloudberryKingdomGame::fps = 0;
         }
 
         // Go to last door
-#if PC_VERSION
+#ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
 #else
 		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_B, -2).Down )

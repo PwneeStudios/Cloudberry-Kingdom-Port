@@ -340,7 +340,7 @@ namespace CloudberryKingdom
 
 	void CustomUpgrades_GUI::SetPos()
 	{
-#if PC_VERSION
+#ifdef PC_VERSION
         boost::shared_ptr<MenuItem> _item;
         _item = MyMenu->FindItemByName( L"Start" ); if (_item != 0 ) { _item->setSetPos( Vector2( 317.0639f, 22.30127f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
         _item = MyMenu->FindItemByName( L"Random" ); if (_item != 0 ) { _item->setSetPos( Vector2( 325.7295f, -155.4283f ) ); _item->MyText->setScale( 0.8f ); _item->MySelectedText->setScale( 0.8f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }

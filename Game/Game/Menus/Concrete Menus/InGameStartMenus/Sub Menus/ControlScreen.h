@@ -18,17 +18,12 @@ namespace CloudberryKingdom
 		boost::shared_ptr<ControlScreen> ControlScreen_Construct( int Control );
 
 #if defined(PC_VERSION)
-	
 		boost::shared_ptr<QuadClass> MakeQuad( Keys key );
 #endif
 	
 		virtual void Init();
 
-#if defined(PC_VERSION)
-	
 		void SetPos();
-#endif
-
 	
 		virtual void MyPhsxStep();
 	};

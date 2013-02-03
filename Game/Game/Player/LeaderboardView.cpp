@@ -130,8 +130,8 @@ namespace CloudberryKingdom
         item->Name = L"ViewGamer";
         item->JiggleOnGo = false;
         AddItem( item );
-#if NOT_PC
-        MyPile->Add( QuadClass( ButtonTexture->Go, 90, "Button_ViewGamer" ));
+#ifdef NOT_PC
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, L"Button_ViewGamer" ) );
         item->Selectable = false;
 #endif
         item->setGo( Cast::ToItem( boost::make_shared<ViewGamerProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -142,8 +142,8 @@ namespace CloudberryKingdom
         item->Name = L"SwitchView";
         item->JiggleOnGo = false;
         AddItem( item );
-#if NOT_PC
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture->Y, 90, L"Button_SwitchView" ) );
+#ifdef NOT_PC
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getY(), 90, L"Button_SwitchView" ) );
         item->Selectable = false;
 #endif
         item->setGo( Cast::ToItem( boost::make_shared<SwitchViewProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -154,16 +154,16 @@ namespace CloudberryKingdom
         item->Name = L"SwitchSort";
         item->JiggleOnGo = false;
         AddItem( item );
-#if NOT_PC
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture->X, 90, L"Button_SwitchSort" ) );
+#ifdef NOT_PC
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90, L"Button_SwitchSort" ) );
         item->Selectable = false;
 #endif
         item->setGo( Cast::ToItem( boost::make_shared<SwitchSortProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
         MyMenu->OnX = Cast::ToMenu( boost::make_shared<SwitchSortProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) );
 
         // Back
-#if NOT_PC
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture->Back, 90, L"Button_Back" ));
+#ifdef NOT_PC
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, L"Button_Back" ) );
         MyPile->Add( boost::make_shared<QuadClass>( L"BackArrow2", L"BackArrow" ));
         item->Selectable = false;
 #endif

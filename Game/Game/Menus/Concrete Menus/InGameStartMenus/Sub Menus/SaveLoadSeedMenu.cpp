@@ -145,7 +145,7 @@ namespace CloudberryKingdom
 		}
 	#endif
 		
-#if PC_VERSION
+#ifdef PC_VERSION
             MakeBackButton();
 #else
             MakeBackButton();

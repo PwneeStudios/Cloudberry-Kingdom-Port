@@ -148,7 +148,7 @@ namespace CloudberryKingdom
 
 	void ScoreScreen::MenuGo_ExitCampaignProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
-		ss->MenuGo_Save( item );
+		ss->MenuGo_ExitCampaign( item );
 	}
 
 	ScoreScreen::MenuGo_ExitFreeplayProxy::MenuGo_ExitFreeplayProxy( const boost::shared_ptr<ScoreScreen> &ss )
@@ -158,7 +158,7 @@ namespace CloudberryKingdom
 
 	void ScoreScreen::MenuGo_ExitFreeplayProxy::Apply( const boost::shared_ptr<MenuItem> &item )
 	{
-		ss->MenuGo_Save( item );
+		ss->MenuGo_ExitFreeplay( item );
 	}
 
 

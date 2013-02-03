@@ -302,7 +302,7 @@ namespace CloudberryKingdom
                 else
                     player->Awardments_Renamed->Add( award->Guid );
 
-#if NOT_PC
+#ifdef NOT_PC
 				// FIXME give award here on PS3
 				Tools::Warning();
                 //if (award->Official)

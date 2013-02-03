@@ -85,7 +85,7 @@ namespace CloudberryKingdom
 		item->setGo( boost::make_shared<SaveProxy>( boost::static_pointer_cast<SaveSeedAs>( shared_from_this() ) ) );
 		AddItem( item );
 
-#if PC_VERSION
+#ifdef PC_VERSION
             MakeBackButton();
 #else
             MakeBackButton();

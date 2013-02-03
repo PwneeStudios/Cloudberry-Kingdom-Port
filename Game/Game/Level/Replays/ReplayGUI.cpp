@@ -156,7 +156,7 @@ namespace CloudberryKingdom
 
 			if ( Type == ReplayGUIType_COMPUTER )
             {
-#if PC_VERSION
+#ifdef PC_VERSION
                 boost::shared_ptr<EzText> _t;
                 _t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-662.845f, -832.2222f ) ); _t->setScale( 0.44f ); }
                 _t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-103.3335f, -835.0001f ) ); _t->setScale( 0.44f ); }
@@ -208,7 +208,7 @@ namespace CloudberryKingdom
             }
             else
             {
-#if PC_VERSION
+#ifdef PC_VERSION
                 boost::shared_ptr<EzText> _t;
                 _t = MyPile->FindEzText( L"Play" ); if (_t != 0 ) { _t->setPos( Vector2(-991.6671f, -827.778f ) ); _t->setScale( 0.4145834f ); }
                 _t = MyPile->FindEzText( L"Back" ); if (_t != 0 ) { _t->setPos( Vector2(-472.2223f, -838.8888f ) ); _t->setScale( 0.4147499f ); }

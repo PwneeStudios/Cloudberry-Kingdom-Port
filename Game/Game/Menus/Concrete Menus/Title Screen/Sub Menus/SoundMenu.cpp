@@ -125,7 +125,7 @@ namespace CloudberryKingdom
 
 		this->FontScale *= .9f;
 
-#if PC_VERSION
+#ifdef PC_VERSION
         bool CenterItems = false;
 #else
         bool CenterItems = false;
@@ -260,12 +260,12 @@ namespace CloudberryKingdom
 		if ( LanguageOption && !CloudberryKingdomGame::HideLogos )
 		{
 			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>(Localization::Words::Words_Credits, ItemFont, CenterItems) ) );
-			mitem->setGo( Cast::ToItem( boost::make_shared<Go_CreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
+			item->setGo( Cast::ToItem( boost::make_shared<Go_CreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 			item->Name = L"Credits";
 			AddItem(item);
 		}
 
-#if PC_VERSION
+#ifdef PC_VERSION
             MakeBackButton();
 #else
             MakeBackButton();
@@ -285,7 +285,7 @@ namespace CloudberryKingdom
 		MyMenu->SelectItem( 0 );
 	}
 
-#if PC_VERSION
+#ifdef PC_VERSION
         void SoundMenu::Go_CustomControls()
         {
             if (UseBounce)

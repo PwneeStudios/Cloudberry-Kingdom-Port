@@ -130,7 +130,7 @@ namespace CloudberryKingdom
 
 	bool SavedSeedsGUI::OnAddHelper::Apply()
 	{
-#if defined(WINDOWS)
+#if defined(WINDOWS) && !defined(NOT_PC)
 		return bar->MyMenu->HitTest();
 #else
 		return false;
@@ -480,7 +480,7 @@ namespace CloudberryKingdom
 
 		// Scroll bar
 	#if defined(WINDOWS)
-	//#if PC_VERSION
+	//#ifdef PC_VERSION
 		//if (false)
 		{
 			bar = MakeMagic( ScrollBar, ( boost::static_pointer_cast<LongMenu>( MyMenu ), boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );

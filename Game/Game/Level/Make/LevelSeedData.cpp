@@ -452,9 +452,9 @@ namespace CloudberryKingdom
 
 	const std::wstring LevelSeedData::NewHeroFlag = L"newhero";
 
-	const std::wstring LevelSeedData::RepeatHeroFlag;
-	const std::wstring LevelSeedData::ChapterNameFlag;
-	const std::wstring LevelSeedData::ScoreScreenFlag;;
+	const std::wstring LevelSeedData::RepeatHeroFlag = L"repeathero";
+	const std::wstring LevelSeedData::ChapterNameFlag = L"chapter";
+	const std::wstring LevelSeedData::ScoreScreenFlag = L"scorescreen";
 
     const std::wstring LevelSeedData::DarknessFlag = L"darkness";
     const std::wstring LevelSeedData::MasochistFlag = L"masochist";
@@ -835,7 +835,7 @@ namespace CloudberryKingdom
 						RepeatHero = true;
 					}	
 					// Chapter Name
-					else if ( lower_identifier == ChapterNameFlag)
+					else if ( lower_identifier == ChapterNameFlag )
 					{
 						ShowChapterName = true;
 						int chapterindex = 0;
@@ -845,7 +845,7 @@ namespace CloudberryKingdom
 							ChapterNameIndex = -1;
 					}
 					// Score Screen
-					else if ( lower_identifier == ScoreScreenFlag)
+					else if ( lower_identifier == ScoreScreenFlag )
 					{
 						GiveScoreScreen = true;
 					}

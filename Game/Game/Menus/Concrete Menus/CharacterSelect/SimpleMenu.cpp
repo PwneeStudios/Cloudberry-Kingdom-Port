@@ -372,7 +372,7 @@ namespace CloudberryKingdom
 		MyPile->Add( CustomizeText, std::wstring( L"Y" ) );
 
 		// Press X to randomize
-        q = boost::make_shared<QuadClass>( ButtonTexture.getX() );
+        q = boost::make_shared<QuadClass>( ButtonTexture::getX() );
         MyPile->Add(q, L"x");
 
 		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( Localization::Words::Words_Random, ItemFont, true, true );

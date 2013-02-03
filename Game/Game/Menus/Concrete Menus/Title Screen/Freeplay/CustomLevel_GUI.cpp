@@ -768,7 +768,7 @@ namespace CloudberryKingdom
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
 	#if defined(NOT_PC)
-        MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getGo(), 90, L"Button_A" ) );
+        MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_A" ) ) );
         item->Selectable = false;
 	#endif
 		item->setGo( Cast::ToItem( boost::make_shared<BringNextProxy>( boost::static_pointer_cast<CustomLevel_GUI>( shared_from_this() ) ) ) );
@@ -788,7 +788,7 @@ namespace CloudberryKingdom
 		//item.MyText.MyFloatColor = Menu.DefaultMenuInfo.UnselectedNextColor;
 		//item.MySelectedText.MyFloatColor = Menu.DefaultMenuInfo.SelectedNextColor;
 	#if defined(NOT_PC)
-		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getY(), 90, L"Button_Y" ) );
+		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.f, std::wstring( L"Button_Y" ) ) );
 		item->Selectable = false;
 	#endif
 		item->ScaleText( .92f );
@@ -803,7 +803,7 @@ namespace CloudberryKingdom
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 	#if defined(NOT_PC)
-		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getBack(), 90, L"Button_B" ) );
+		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, std::wstring( L"Button_B" ) ) );
 		item->Selectable = false;
 	#endif
 		item->ScaleText( .92f );
@@ -882,7 +882,7 @@ namespace CloudberryKingdom
 
 	void CustomLevel_GUI::SetPos()
 	{
-#if PC_VERSION
+#ifdef PC_VERSION
             boost::shared_ptr<MenuItem> _item;
             _item = MyMenu->FindItemByName( L"Location" ); if (_item != 0 ) { _item->setSetPos( Vector2(-66.66797f, 677.9999f ) ); }
             _item = MyMenu->FindItemByName( L"Game" ); if (_item != 0 ) { _item->setSetPos( Vector2(-24.66602f, 475.4443f ) ); }

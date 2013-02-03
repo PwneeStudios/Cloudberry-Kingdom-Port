@@ -17,7 +17,6 @@ namespace CloudberryKingdom
         static boost::shared_ptr<EzTexture> getGo();
         static boost::shared_ptr<EzTexture> getBack();
 
-#if PC_VERSION
         static boost::shared_ptr<EzTexture> _Go();
         static boost::shared_ptr<EzTexture> _Back();
         static boost::shared_ptr<EzTexture> getX();
@@ -25,31 +24,9 @@ namespace CloudberryKingdom
         static boost::shared_ptr<EzTexture> getLeftRight();
         static boost::shared_ptr<EzTexture> getLeftBumper();
 		static boost::shared_ptr<EzTexture> getRightBumper();
-#elif PS3
-        static boost::shared_ptr<EzTexture> _Go();
-        static boost::shared_ptr<EzTexture> _Back();
-        static boost::shared_ptr<EzTexture> getX();
-        static boost::shared_ptr<EzTexture> getY();
-        static boost::shared_ptr<EzTexture> getLeftRight();
-        static boost::shared_ptr<EzTexture> getLeftBumper();
-        static boost::shared_ptr<EzTexture> getRightBumper();
-#elif CAFE
-        static bool UseGamepad;
-        static boost::shared_ptr<EzTexture> _Go();
-        static boost::shared_ptr<EzTexture> _Back();
-        static boost::shared_ptr<EzTexture> getX();
-        static boost::shared_ptr<EzTexture> getY();
-        static boost::shared_ptr<EzTexture> getLeftRight();
-        static boost::shared_ptr<EzTexture> getLeftBumper();
-        static boost::shared_ptr<EzTexture> getRightBumper();
-#else
-        static boost::shared_ptr<EzTexture> _Go();
-        static boost::shared_ptr<EzTexture> _Back();
-        static boost::shared_ptr<EzTexture> getX();
-        static boost::shared_ptr<EzTexture> getY();
-        static boost::shared_ptr<EzTexture> getLeftRight();
-        static boost::shared_ptr<EzTexture> getLeftBumper();
-        static boost::shared_ptr<EzTexture> getRightBumper();
+
+#if CAFE
+		static bool UseGamepad;
 #endif
 
 	};

@@ -101,21 +101,21 @@ namespace CloudberryKingdom
 
 		SetPos();
 #else
-        text = boost::make_shared<EzText>("+", Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>( L"+", Resources::Font_Grobold42, true);
         MyPile->Add(text, L"plus");
-        text->MyFloatColor = ColorHelper.Gray(.955f);
+        text->MyFloatColor = ColorHelper::Gray(.955f);
 
         text = boost::make_shared<EzText>(Localization::Words::Words_QuickSpawn, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"quickspawn");
-        text->MyFloatColor = ColorHelper.Gray(.955f);
+        text->MyFloatColor = ColorHelper::Gray(.955f);
 
         text = boost::make_shared<EzText>(Localization::Words::Words_Jump, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"jump");
-        text->MyFloatColor = ColorHelper.Gray(.955f);
+        text->MyFloatColor = ColorHelper::Gray(.955f);
 
         text = boost::make_shared<EzText>(Localization::Words::Words_PowerUpMenu, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"powerups");
-        text->MyFloatColor = ColorHelper.Gray(.955f);
+        text->MyFloatColor = ColorHelper::Gray(.955f);
 
         text = boost::make_shared<EzText>(Localization::Words::Words_Accept, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"accept");
@@ -128,7 +128,7 @@ namespace CloudberryKingdom
         q = boost::make_shared<QuadClass>(ButtonTexture::getX() ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"x");
 
-        q = boost::make_shared<QuadClass>("door_castle_1"); q->ScaleXToMatchRatio(130);
+        q = boost::make_shared<QuadClass>( L"door_castle_1" ); q->ScaleXToMatchRatio(130);
         MyPile->Add(q, L"door");
 
         q = boost::make_shared<QuadClass>(ButtonTexture::getY() ); q->ScaleXToMatchRatio(130);
@@ -154,7 +154,7 @@ namespace CloudberryKingdom
 	}
 
 
-#if PC_VERSION
+#ifdef PC_VERSION
         void ControlScreen::SetPos()
         {
             boost::shared_ptr<EzText> _t;

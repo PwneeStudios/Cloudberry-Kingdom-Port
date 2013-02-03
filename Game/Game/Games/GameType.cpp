@@ -1162,7 +1162,7 @@ namespace CloudberryKingdom
 
 
 		// Quick join
-	//#if XBOX
+	//#ifdef XBOX
 		if ( AllowQuickJoin )
 			QuickJoinPhsx();
 	//#endif
