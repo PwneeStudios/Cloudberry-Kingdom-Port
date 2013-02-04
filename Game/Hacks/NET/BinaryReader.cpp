@@ -15,17 +15,17 @@
 #define NTOHLL( x ) ( x )
 #endif
 
-BinaryReader::BinaryReader( const std::wstring &path ) :
+FileBinaryReader::FileBinaryReader( const std::wstring &path ) :
 	file_( FILESYSTEM.Open( WstringToUtf8( path ) ) )
 {
 	assert( file_->IsOpen() );
 }
 
-void BinaryReader::Close()
+void FileBinaryReader::Close()
 {
 }
 
-int BinaryReader::ReadInt32()
+int FileBinaryReader::ReadInt32()
 {
 	int t;
 	file_->Read( reinterpret_cast<char *>( &t ), 4 );
@@ -33,7 +33,7 @@ int BinaryReader::ReadInt32()
 	return t;
 }
 
-unsigned int BinaryReader::ReadUInt32()
+unsigned int FileBinaryReader::ReadUInt32()
 {
 	unsigned int t;
 	file_->Read( reinterpret_cast<char *>( &t ), 4 );
@@ -42,7 +42,7 @@ unsigned int BinaryReader::ReadUInt32()
 }
 
 // FIXME: This may actually need to return a 64 bit unsigned integer.
-unsigned long BinaryReader::ReadUInt64()
+unsigned long FileBinaryReader::ReadUInt64()
 {
 	unsigned long long t;
 	file_->Read( reinterpret_cast<char *>( &t ), 8 );
@@ -50,7 +50,7 @@ unsigned long BinaryReader::ReadUInt64()
 	return static_cast<unsigned long>( t );
 }
 
-std::wstring BinaryReader::ReadString()
+std::wstring FileBinaryReader::ReadString()
 {
 	int length = 0;
 	int num2 = 0;
@@ -77,7 +77,7 @@ std::wstring BinaryReader::ReadString()
 	return str;
 }
 
-Vector2 BinaryReader::ReadVector2()
+Vector2 FileBinaryReader::ReadVector2()
 {
 	Vector2 v;
 	v.X = ReadSingle();
@@ -85,14 +85,14 @@ Vector2 BinaryReader::ReadVector2()
 	return v;
 }
 
-bool BinaryReader::ReadBoolean()
+bool FileBinaryReader::ReadBoolean()
 {
 	bool b;
 	file_->Read( reinterpret_cast<char *>( &b ), 1 );
 	return b;
 }
 
-float BinaryReader::ReadSingle()
+float FileBinaryReader::ReadSingle()
 {
 	unsigned int t;
 	file_->Read( reinterpret_cast<char *>( &t ), 4 );
@@ -100,14 +100,39 @@ float BinaryReader::ReadSingle()
 	return *reinterpret_cast<float *>( &t );
 }
 
-unsigned char BinaryReader::ReadByte()
+unsigned char FileBinaryReader::ReadByte()
 {
 	unsigned char c;
 	file_->Read( reinterpret_cast<char *>( &c ), 1 );
 	return c;
 }
 
-unsigned char BinaryReader::PeekChar()
+unsigned char FileBinaryReader::PeekChar()
 {
 	return static_cast<unsigned char>( file_->Peek() );;
 }
+
+#ifdef CAFE
+
+struct SaveReaderWiiUInternal
+{
+};
+
+SaveReaderWiiU::SaveReaderWiiU( const std::string &path, bool global )
+	: internal_( new SaveReaderWiiUInternal )
+{
+
+}
+
+SaveReaderWiiU::~SaveReaderWiiU()
+{
+	delete internal_;
+}
+
+bool SaveReaderWiiU::ReadEverything( std::vector< unsigned char > &data )
+{
+	return false;
+}
+
+
+#endif

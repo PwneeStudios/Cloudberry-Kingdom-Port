@@ -14,6 +14,7 @@
 	-lnn_os.a
 	-lnn_dbg.a
 	-lnn_nstd.a
+	-lnn_act.a
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp

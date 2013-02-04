@@ -47,8 +47,8 @@ namespace CloudberryKingdom
 		// Now read the file
 		Tools::UseInvariantCulture();
 		//boost::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Open, FileAccess::Read, FileShare::None );
-		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( fullpath );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( fullpath );
 		Read( reader );
 		//reader->Close();
 		//stream->Close();

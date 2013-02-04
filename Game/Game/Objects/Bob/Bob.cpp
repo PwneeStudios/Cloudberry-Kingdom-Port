@@ -510,8 +510,8 @@ namespace CloudberryKingdom
 	{
 		Tools::UseInvariantCulture();
 		//boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( file );
 
 		Vector2 size = Vector2( 1, 2 );
 		float ratio = size.Y / size.X;
