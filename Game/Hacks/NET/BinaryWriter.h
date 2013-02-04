@@ -14,19 +14,33 @@ class File;
 struct BinaryWriter
 {
 
+	BinaryWriter() { }
+	virtual ~BinaryWriter() { }
+	virtual void Write( const unsigned char *buffer, int offset, int length ) = 0;
+	virtual void Write( int i ) = 0;
+	virtual void Write( unsigned int i ) = 0;
+	virtual void Write( unsigned long long i ) = 0;
+	virtual void Write( const Vector2 &v ) = 0;
+	virtual void Write( const std::wstring &s ) = 0;
+	virtual void Write( float v ) = 0;
+	virtual void Write( unsigned char c ) = 0;
+
+};
+
+struct FileBinaryWriter : BinaryWriter
+{
 	boost::shared_ptr<File> file_;
 
-	BinaryWriter( std::wstring path );
-	~BinaryWriter();
-	void Write( const unsigned char *buffer, int offset, int length );
-	void Write( int i );
-	void Write( unsigned int i );
-	void Write( unsigned long long i );
-	void Write( const Vector2 &v );
-	void Write( const std::wstring &s );
-	void Write( float v );
-	void Write( unsigned char c );
-
+	FileBinaryWriter( std::wstring path );
+	~FileBinaryWriter();
+	virtual void Write( const unsigned char *buffer, int offset, int length );
+	virtual void Write( int i );
+	virtual void Write( unsigned int i );
+	virtual void Write( unsigned long long i );
+	virtual void Write( const Vector2 &v );
+	virtual void Write( const std::wstring &s );
+	virtual void Write( float v );
+	virtual void Write( unsigned char c );
 };
 
 #endif

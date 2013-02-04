@@ -267,6 +267,7 @@ namespace CloudberryKingdom
 
 	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
+		printf( "Save( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
 		if ( !DeviceOK() )
 			GetDevice();
 
@@ -322,6 +323,7 @@ namespace CloudberryKingdom
 
 	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic )
 	{
+		printf( "Save( FileName = %s );\n", WstringToUtf8( FileName ).c_str() );
 		// Check to see whether the save exists.
 		if ( container->FileExists( FileName ) )
 			// Delete it so that we can create one fresh.

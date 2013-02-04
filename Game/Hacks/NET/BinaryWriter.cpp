@@ -5,43 +5,43 @@
 
 #include <Hacks/String.h>
 
-BinaryWriter::BinaryWriter( std::wstring path ) :
+FileBinaryWriter::FileBinaryWriter( std::wstring path ) :
 	file_( FILESYSTEM.Open( WstringToUtf8( path ), true ) )
 {
 	assert( file_->IsOpen() );
 }
 
-BinaryWriter::~BinaryWriter()
+FileBinaryWriter::~FileBinaryWriter()
 {
 }
 
-void BinaryWriter::Write( const unsigned char *buffer, int offset, int length )
+void FileBinaryWriter::Write( const unsigned char *buffer, int offset, int length )
 {
 	file_->Write( reinterpret_cast<const char *>( buffer + offset ), length );
 }
 
-void BinaryWriter::Write( int i )
+void FileBinaryWriter::Write( int i )
 {
 	file_->Write( reinterpret_cast<const char *>( &i ), 4 );
 }
 
-void BinaryWriter::Write( unsigned int i )
+void FileBinaryWriter::Write( unsigned int i )
 {
 	file_->Write( reinterpret_cast<const char *>( &i ), 4 );
 }
 
-void BinaryWriter::Write( unsigned long long i )
+void FileBinaryWriter::Write( unsigned long long i )
 {
 	file_->Write( reinterpret_cast<const char *>( &i ), 8 );
 }
 
-void BinaryWriter::Write( const Vector2 &v )
+void FileBinaryWriter::Write( const Vector2 &v )
 {
 	Write( v.X );
 	Write( v.Y );
 }
 
-void BinaryWriter::Write( const std::wstring &s )
+void FileBinaryWriter::Write( const std::wstring &s )
 {
 	std::string bytes( WstringToUtf8( s ) );
 
@@ -53,12 +53,12 @@ void BinaryWriter::Write( const std::wstring &s )
 	file_->Write( bytes.c_str(), bytes.length() );
 }
 
-void BinaryWriter::Write( float v )
+void FileBinaryWriter::Write( float v )
 {
 	file_->Write( reinterpret_cast<const char *>( &v ), 4 );
 }
 
-void BinaryWriter::Write( unsigned char c )
+void FileBinaryWriter::Write( unsigned char c )
 {
 	file_->Write( reinterpret_cast<const char *>( &c ), 1 );
 }

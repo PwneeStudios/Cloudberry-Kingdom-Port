@@ -17,7 +17,11 @@ public:
 
 	bool IsLooped;
 
+#ifdef CAFE
+	VideoPlayer( void (*UpdateElapsedTime)(bool) );
+#else
 	VideoPlayer();
+#endif
 	~VideoPlayer();
 
 	void SetVolume( float volume );

@@ -259,6 +259,11 @@ typedef struct __MP4DemuxCore__ {
     s32 (*cbsetfunc)(MP4DMXFW_UNIT *, void *);
     s32 (*cbgetfunc)(MP4DMXFW_UNIT *, void *);
 
+    MP4DMXMpoMp4VideoTrackInf    mp4VideoTrackInf;
+    MP4DMXMpoMp4AudioTrackInf    mp4AudioTrackInf;
+    MP4DMXAvcConfig              AVCconfig;
+
+    s32      MP4Duration;
     s32      MP4DmxNewStatus;
     s32      MP4DmxOldStatus;
     s32      MP4DmxAfterHeaderSize;

@@ -23,11 +23,6 @@ Song::~Song()
 void Song::Load( const std::string &path )
 {
 	std::string internalPath = "/vol/content/" + path;
-	size_t pathLength = internalPath.size();
-
-	internalPath[ pathLength - 3 ] = 'm';
-	internalPath[ pathLength - 2 ] = 'p';
-	internalPath[ pathLength - 1 ] = '3';
 
 	FMOD_RESULT result;
 	result = FMODSystem->createStream( internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
@@ -38,8 +33,29 @@ void Song::Load( const std::string &path )
 		return;
 	}
 
-	unsigned int length;
-	internal_->Song->getLength( &length, FMOD_TIMEUNIT_MS );
-
-	Duration.TotalSeconds = static_cast< float >( length ) / 1000.f;
+	// I cry a little bit inside.
+	if( path.find( "140_Mph_in_the_Fog^Blind_Digital" ) != std::string::npos )
+		Duration.TotalSeconds = 245.f;
+	else if( path.find( "Blue_Chair^Blind_Digital" ) != std::string::npos )
+		Duration.TotalSeconds = 318.f;
+	else if( path.find( "Evidence^Blind_Digital" ) != std::string::npos )
+		Duration.TotalSeconds = 173.f;
+	else if( path.find( "Get_a_Grip^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 119.f;
+	else if( path.find( "Happy" ) != std::string::npos )
+		Duration.TotalSeconds = 128.f;
+	else if( path.find( "House^Blind_Digital" ) != std::string::npos )
+		Duration.TotalSeconds = 345.f;
+	else if( path.find( "Nero's_Law^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 217.f;
+	else if( path.find( "Ripcurl^Blind_Digital" ) != std::string::npos )
+		Duration.TotalSeconds = 351.f;
+	else if( path.find( "The_Fat_is_in_the_Fire^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 167.f;
+	else if( path.find( "The_Heavens_Opened^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 223.f;
+	else if( path.find( "Tidy_Up^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 135.f;
+	else if( path.find( "Writer's_Block^Peacemaker" ) != std::string::npos )
+		Duration.TotalSeconds = 145.f;
 }

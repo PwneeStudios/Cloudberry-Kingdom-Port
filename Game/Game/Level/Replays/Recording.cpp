@@ -30,7 +30,7 @@ namespace CloudberryKingdom
 		//boost::shared_ptr<FileStream> stream = File->Open( fullpath, FileMode::Create, FileAccess::Write, FileShare::None );
 		//boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( stream, Encoding::UTF8 );
 		{
-			boost::shared_ptr<BinaryWriter> writer = boost::make_shared<BinaryWriter>( fullpath );
+			boost::shared_ptr<BinaryWriter> writer = boost::make_shared<FileBinaryWriter>( fullpath );
 			Write( writer );
 		}
 		//writer->Close();

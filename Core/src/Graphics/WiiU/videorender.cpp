@@ -196,7 +196,7 @@ void drawTVFrame(u32 mode)
     // When using the DEMO library, it is necessary to call
     // DEMOGfxBeforeRender and DEMOGfxDoneRender before and after drawing.
     // This function waits for the previous flip to complete.
-//    DEMOGfxBeforeRender();
+    DEMOGfxBeforeRender();
 
     GX2ClearColor(&DEMOColorBuffer, 0.0f, 0.3, 0.45, 1.0f);
     GX2ClearDepthStencil(&DEMODepthBuffer, GX2_CLEAR_BOTH);
@@ -234,7 +234,7 @@ void drawTVFrame(u32 mode)
     GX2SetContextState(DEMOContextState);
 //        DEMOFontPrintf(4,2, "<Waiting for DRC attach>");
 
-//    DEMOGfxDoneRender();
+    DEMOGfxDoneRender();
 
     return;
 }

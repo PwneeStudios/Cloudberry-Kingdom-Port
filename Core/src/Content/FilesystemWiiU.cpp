@@ -6,6 +6,8 @@
 
 #include <cafe.h>
 #include <cafe/fs.h>
+#include <nn/act.h>
+#include <nn/save.h>
 #include <sstream>
 
 /**
@@ -112,6 +114,71 @@ public:
 	}
 };
 
+class SaveFile : public File
+{
+
+public:
+
+	virtual ~SaveFile() { }
+
+	/**
+	 * @see File::Read()
+	 */
+	virtual size_t Read( char *buffer, size_t length )
+	{
+		return 0;
+	}
+
+	/**
+	 * @see File::Write()
+	 */
+	virtual size_t Write( const char *buffer, size_t length )
+	{
+		return 0;
+	}
+
+	/**
+	 * @see File::ReadLine()
+	 */
+	virtual std::string ReadLine()
+	{
+		return "";
+	}
+
+	/**
+	 * @see File::Peek()
+	 */
+	virtual int Peek()
+	{
+		return 0;
+	}
+
+	/**
+	 * @see File::IsOpen()
+	 */
+	virtual bool IsOpen()
+	{
+		return false;
+	}
+
+	/**
+	 * @see File::IsEOF()
+	 */
+	virtual bool IsEOF()
+	{
+		return true;
+	}
+
+	/**
+	 * @see File::Size()
+	 */
+	virtual unsigned int Size()
+	{
+		return 0;
+	}
+
+};
+
 struct FilesystemWiiUInternal
 {
 	FSClient *Client;
@@ -151,23 +218,23 @@ FilesystemWiiU::~FilesystemWiiU()
 
 boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool write )
 {
-	FSFileHandle fh;
-	FSStat stat;
+		FSFileHandle fh;
+		FSStat stat;
 
-	std::string localPath = ( path[ 0 ] == '/' ? "/vol/content" : "/vol/content/" ) + path;
-	LOG.Write( "Opening %s\n", localPath.c_str() );
+		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content" : "/vol/content/" ) + path;
+		LOG.Write( "Opening %s\n", localPath.c_str() );
 
-	// FIXME: The mutex might not be necessary if the file system supports multithreading.
-	internal_->FileSystemMutex.Lock();
-	FSOpenFile( internal_->Client, internal_->Cmd, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
+		// FIXME: The mutex might not be necessary if the file system supports multithreading.
+		internal_->FileSystemMutex.Lock();
+		FSOpenFile( internal_->Client, internal_->Cmd, localPath.c_str(), "r", &fh, FS_RET_NO_ERROR );
 
-	memset( &stat, 0, sizeof( FSStat ) );
-	FSGetStatFile( internal_->Client, internal_->Cmd, fh, &stat, FS_RET_NO_ERROR );
+		memset( &stat, 0, sizeof( FSStat ) );
+		FSGetStatFile( internal_->Client, internal_->Cmd, fh, &stat, FS_RET_NO_ERROR );
 
-	char *buffer = reinterpret_cast< char * >( MEMAllocFromDefaultHeapEx( stat.size, FS_IO_BUFFER_ALIGN ) );
-	FSReadFile( internal_->Client, internal_->Cmd, buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
-	FSCloseFile( internal_->Client, internal_->Cmd, fh, FS_RET_NO_ERROR );
-	internal_->FileSystemMutex.Unlock();
+		char *buffer = reinterpret_cast< char * >( MEMAllocFromDefaultHeapEx( stat.size, FS_IO_BUFFER_ALIGN ) );
+		FSReadFile( internal_->Client, internal_->Cmd, buffer, stat.size, 1, fh, 0, FS_RET_NO_ERROR );
+		FSCloseFile( internal_->Client, internal_->Cmd, fh, FS_RET_NO_ERROR );
+		internal_->FileSystemMutex.Unlock();
 
-	return boost::static_pointer_cast<File>( boost::make_shared<FileWiiU>( buffer, stat.size ) );
+		return boost::static_pointer_cast<File>( boost::make_shared<FileWiiU>( buffer, stat.size ) );
 }
