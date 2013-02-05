@@ -767,7 +767,7 @@ namespace CloudberryKingdom
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
 
-if (ButtonCheck.ControllerInUse)
+if (ButtonCheck::ControllerInUse)
 {
         MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_A" ) ) );
         item->Selectable = false;
@@ -788,7 +788,7 @@ if (ButtonCheck.ControllerInUse)
 		item->Pos = item->SelectedPos = Vector2( 682.1445f, -238.8095f );
 		//item.MyText.MyFloatColor = Menu.DefaultMenuInfo.UnselectedNextColor;
 		//item.MySelectedText.MyFloatColor = Menu.DefaultMenuInfo.SelectedNextColor;
-if (ButtonCheck.ControllerInUse)
+if (ButtonCheck::ControllerInUse)
 {
 		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.f, std::wstring( L"Button_Y" ) ) );
 		item->Selectable = false;
@@ -804,7 +804,7 @@ if (ButtonCheck.ControllerInUse)
 		item->Pos = item->SelectedPos = Vector2( 922.9375f, -523.8096f );
 		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
 		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
-if (ButtonCheck.ControllerInUse)
+if (ButtonCheck::ControllerInUse)
 {
 		MyPile->Add(boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, std::wstring( L"Button_B" ) ) );
 		item->Selectable = false;

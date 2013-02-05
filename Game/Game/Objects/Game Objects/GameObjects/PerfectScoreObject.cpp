@@ -77,7 +77,7 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::ReleaseBody();
 
-		Dots.reset();
+		Dots.clear();
 
 		//MyGame.OnCoinGrab -= OnCoinGrab;
 		//MyGame.OnLevelRetry -= OnLevelRetry;

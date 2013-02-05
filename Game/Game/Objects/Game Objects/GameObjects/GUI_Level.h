@@ -36,8 +36,7 @@ namespace CloudberryKingdom
 		void UpdateLevelText();
 
 	
-		GUI_Level();
-		boost::shared_ptr<GUI_Level> GUI_Level_Construct();
+
 		GUI_Level( bool TimeCrisis );
 		boost::shared_ptr<GUI_Level> GUI_Level_Construct( bool TimeCrisis );
 

@@ -382,8 +382,8 @@ Words_Chapter4,
 Words_Chapter5,
 Words_Chapter6,
 Words_Credits,
-Words_Delete,
 Words_PlayerLevel,
+Words_Delete,
 		};
 
 	

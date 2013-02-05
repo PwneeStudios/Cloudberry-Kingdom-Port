@@ -3,8 +3,7 @@
 namespace CloudberryKingdom
 {
 
-	//GUI_CampaignLevel::GUI_CampaignLevel() : GUI_Level(false)
-	GUI_CampaignLevel::GUI_CampaignLevel()
+	GUI_CampaignLevel::GUI_CampaignLevel() : GUI_Level( false )
 	{
 	}
 
@@ -83,22 +82,6 @@ namespace CloudberryKingdom
 		LevelText->SubstituteText( ToString() );
 	}
 
-	GUI_Level::GUI_Level() :
-		Prefix( static_cast<Localization::Words>( 0 ) ),
-		DoSlideIn( false ),
-		AddedOnce( false ),
-		Level_Renamed( 0 )	
-	{
-	}
-	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct()
-	{
-		InitializeInstanceFields();
-		GUI_Panel::GUI_Panel_Construct();
-
-		DoInit( false );
-
-		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
-	}
 
 	GUI_Level::GUI_Level( bool TimeCrisis ) :
 		Prefix( static_cast<Localization::Words>( 0 ) ),
