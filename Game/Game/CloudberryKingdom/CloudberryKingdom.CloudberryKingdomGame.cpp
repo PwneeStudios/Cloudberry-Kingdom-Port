@@ -675,7 +675,7 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
 #else
-		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_RJ, -2).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_RJ, -2).Pressed )
 #endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
@@ -688,7 +688,7 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_U ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_U ) )
 #else
-		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_X, -2).Down )
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_X, -2).Down )
 #endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
@@ -710,7 +710,7 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_O ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_O ) )
 #else
-		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_A, -2).Pressed )
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_A, -2).Pressed )
 #endif
         {
 			for ( BobVec::const_iterator bob = Tools::CurLevel->Bobs.begin(); bob != Tools::CurLevel->Bobs.end(); ++bob )
@@ -723,7 +723,7 @@ float CloudberryKingdomGame::fps = 0;
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_P ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_P ) )
 #else
-		if ( ButtonCheck::State( ControllerButtons::ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons::ControllerButtons_B, -2).Down )
+		if ( ButtonCheck::State( ControllerButtons_LJ, -2 ).Down && ButtonCheck::State( ControllerButtons_B, -2).Down )
 #endif
         {
             // Find last door

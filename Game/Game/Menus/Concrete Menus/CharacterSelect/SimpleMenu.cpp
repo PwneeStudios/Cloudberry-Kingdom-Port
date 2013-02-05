@@ -349,7 +349,7 @@ namespace CloudberryKingdom
         q = boost::make_shared<QuadClass>( ButtonTexture::getGo() );
         MyPile->Add(q, L"go");
 
-		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words::Words_Continue, ItemFont, true, true );
+		boost::shared_ptr<EzText> ContinueText = boost::make_shared<EzText>( Localization::Words_Continue, ItemFont, true, true );
 		ContinueText->setScale( this->FontScale );
 		ContinueText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		ContinueText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
@@ -362,7 +362,7 @@ namespace CloudberryKingdom
         q = boost::make_shared<QuadClass>( ButtonTexture::getY() );
         MyPile->Add(q, L"y");
 
-		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( Localization::Words::Words_Custom, ItemFont, true, true );
+		boost::shared_ptr<EzText> CustomizeText = boost::make_shared<EzText>( Localization::Words_Custom, ItemFont, true, true );
 		CustomizeText->setScale( this->FontScale );
 		CustomizeText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		CustomizeText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );
@@ -375,7 +375,7 @@ namespace CloudberryKingdom
         q = boost::make_shared<QuadClass>( ButtonTexture::getX() );
         MyPile->Add(q, L"x");
 
-		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( Localization::Words::Words_Random, ItemFont, true, true );
+		boost::shared_ptr<EzText> RandomText = boost::make_shared<EzText>( Localization::Words_Random, ItemFont, true, true );
 		RandomText->setScale( this->FontScale );
 		RandomText->ShadowOffset = Vector2( 7.5f, 7.5f );
 		RandomText->ShadowColor = Color( static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ), static_cast<unsigned char>( 30 ) );

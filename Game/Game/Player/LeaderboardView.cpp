@@ -9,9 +9,9 @@ namespace CloudberryKingdom
     {
         switch ( type )
         {
-			case LeaderboardType_FriendsScores: return Localization::WordString( Localization::Words::Words_FriendsScores );
-            case LeaderboardType_MyScores: return Localization::WordString( Localization::Words::Words_MyScores );
-            case LeaderboardType_TopScores: return Localization::WordString( Localization::Words::Words_TopScores );
+			case LeaderboardType_FriendsScores: return Localization::WordString( Localization::Words_FriendsScores );
+            case LeaderboardType_MyScores: return Localization::WordString( Localization::Words_MyScores );
+            case LeaderboardType_TopScores: return Localization::WordString( Localization::Words_TopScores );
             default: return L"";
         }
     }
@@ -20,8 +20,8 @@ namespace CloudberryKingdom
     {
         switch ( type )
         {
-            case LeaderboardSortType::LeaderboardSortType_Level: return Localization::WordString( Localization::Words::Words_SortByLevel );
-            case LeaderboardSortType::LeaderboardSortType_Score: return Localization::WordString( Localization::Words::Words_SortByScore );
+            case LeaderboardSortType_Level: return Localization::WordString( Localization::Words_SortByLevel );
+            case LeaderboardSortType_Score: return Localization::WordString( Localization::Words_SortByScore );
             default: return L"";
         }
     }
@@ -50,14 +50,14 @@ namespace CloudberryKingdom
         SetIndex( 0 );
 
         CurrentType = LeaderboardType_FriendsScores;
-        CurrentSort = LeaderboardSortType::LeaderboardSortType_Level;
-        CurrentMessage = Message::Message_None;
+        CurrentSort = LeaderboardSortType_Level;
+        CurrentMessage = Message_None;
 
         DelayCount_LeftRight = MotionCount_LeftRight = 0;
 
         this->Title = Title;
         if ( Title != 0 )
-            Title->BackPanel->SetState( StartMenu_MW_Backpanel::State::State_SCENE_BLUR );
+            Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR );
 
         UpdateView();
 
@@ -102,17 +102,17 @@ namespace CloudberryKingdom
         ItemShift = boost::make_shared<QuadClass>(); ItemShift->Show = false; MyPile->Add( ItemShift, L"Offset" );
 
         // Messages
-        CurrentMessage = Message::Message_None;
-        NotRankedFriends = boost::make_shared<EzText>( Localization::Words::Words_NotRankedFriends, ItemFont, 2000.f, true, true );
+        CurrentMessage = Message_None;
+        NotRankedFriends = boost::make_shared<EzText>( Localization::Words_NotRankedFriends, ItemFont, 2000.f, true, true );
         MyPile->Add( NotRankedFriends, L"NotRankedFriends" );
 
-        NotRanked = boost::make_shared<EzText>( Localization::Words::Words_NotRanked, ItemFont, 2000.f, true, true );
+        NotRanked = boost::make_shared<EzText>( Localization::Words_NotRanked, ItemFont, 2000.f, true, true );
         MyPile->Add( NotRanked, L"NotRanked" );
 
-        LoadingStr0 = Localization::WordString( Localization::Words::Words_Loading );
-        LoadingStr1 = Localization::WordString( Localization::Words::Words_Loading ) + L".";
-        LoadingStr2 = Localization::WordString( Localization::Words::Words_Loading ) + L"..";
-        LoadingStr3 = Localization::WordString( Localization::Words::Words_Loading ) + L"...";
+        LoadingStr0 = Localization::WordString( Localization::Words_Loading );
+        LoadingStr1 = Localization::WordString( Localization::Words_Loading ) + L".";
+        LoadingStr2 = Localization::WordString( Localization::Words_Loading ) + L"..";
+        LoadingStr3 = Localization::WordString( Localization::Words_Loading ) + L"...";
         LoadingCount = 0;
 
         LoadingText = boost::make_shared<EzText>( LoadingStr1, ItemFont, 1000.f, true, true );
@@ -126,7 +126,7 @@ namespace CloudberryKingdom
         boost::shared_ptr<MenuItem> item;
 
         // View Gamer
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_ViewGamerCard, ItemFont ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_ViewGamerCard, ItemFont ) ) );
         item->Name = L"ViewGamer";
         item->JiggleOnGo = false;
         AddItem( item );
@@ -138,7 +138,7 @@ namespace CloudberryKingdom
         MyMenu->OnA = Cast::ToMenu( boost::make_shared<ViewGamerProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) );
 
         // Switch View
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_FriendsScores, ItemFont ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_FriendsScores, ItemFont ) ) );
         item->Name = L"SwitchView";
         item->JiggleOnGo = false;
         AddItem( item );
@@ -150,7 +150,7 @@ namespace CloudberryKingdom
         MyMenu->OnY = boost::make_shared<SwitchViewProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) );
 
         // Switch Sort
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_SortByScore, ItemFont ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SortByScore, ItemFont ) ) );
         item->Name = L"SwitchSort";
         item->JiggleOnGo = false;
         AddItem( item );
@@ -180,7 +180,7 @@ namespace CloudberryKingdom
     void LeaderboardGUI::UpdateLoadingText()
     {
             
-		if ( CurrentMessage == Message::Message_Loading )
+		if ( CurrentMessage == Message_Loading )
         {
 
             LoadingText->Show = true;
@@ -208,25 +208,25 @@ namespace CloudberryKingdom
     {
         if ( CurrentView == 0 )
         {
-            CurrentMessage = Message::Message_Loading;
+            CurrentMessage = Message_Loading;
         }
         else
         {
             if ( CurrentView->Loading )
-                CurrentMessage = Message::Message_Loading;
+                CurrentMessage = Message_Loading;
             else if ( CurrentView->TotalEntries == 0 )
             {
                 if ( CurrentType == LeaderboardType_FriendsScores )
-                    CurrentMessage = Message::Message_NotRankedFriends;
+                    CurrentMessage = Message_NotRankedFriends;
                 else
-                    CurrentMessage = Message::Message_NotRanked;
+                    CurrentMessage = Message_NotRanked;
             }
         }
 
         UpdateLoadingText();
 
-        NotRanked->Show        = CurrentMessage == Message::Message_NotRanked;
-        NotRankedFriends->Show = CurrentMessage == Message::Message_NotRankedFriends;
+        NotRanked->Show        = CurrentMessage == Message_NotRanked;
+        NotRankedFriends->Show = CurrentMessage == Message_NotRankedFriends;
     }
 
     void LeaderboardGUI::ViewGamer()
@@ -240,7 +240,7 @@ namespace CloudberryKingdom
 
     LeaderboardGUI::LeaderboardSortType LeaderboardGUI::Incr( LeaderboardSortType type )
     {
-        return ( LeaderboardSortType )(((( int )type + 1 ) + ( int )LeaderboardSortType::LeaderboardSortType_Length ) % ( int )LeaderboardSortType::LeaderboardSortType_Length );
+        return ( LeaderboardSortType )(((( int )type + 1 ) + ( int )LeaderboardSortType_Length ) % ( int )LeaderboardSortType_Length );
     }
 
     void LeaderboardGUI::SwitchView()
@@ -273,7 +273,7 @@ namespace CloudberryKingdom
         std::wstring Name;
         if ( CurrentChallenge == 0 )
         {
-            Name = Localization::WordString( Localization::Words::Words_TotalArcade );
+            Name = Localization::WordString( Localization::Words_TotalArcade );
         }
         else
         {
@@ -386,7 +386,7 @@ namespace CloudberryKingdom
 
         UpdateMessages();
             
-        if ( CurrentMessage == Message::Message_None )
+        if ( CurrentMessage == Message_None )
             CurrentView->Draw( TL->getPos() + Pos->AbsVal, MasterAlpha );
     }
 
@@ -444,7 +444,7 @@ namespace CloudberryKingdom
 
         if ( Player == 0 )
         {
-            this->GamerTag = Localization::WordString( Localization::Words::Words_Loading ) + L"...";
+            this->GamerTag = Localization::WordString( Localization::Words_Loading ) + L"...";
             this->Val = L"...";
         }
         else

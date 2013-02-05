@@ -47,7 +47,7 @@ namespace CloudberryKingdom
 		BlackQuad->SetToDefault();
 		BlackQuad->Quad_Renamed.SetColor( bColor( 0, 0, 0, 0 ) );
 
-		LoadingText = boost::make_shared<EzText>( Localization::WordString( Localization::Words::Words_Loading ) + L"...", Resources::Font_Grobold42, true, true );
+		LoadingText = boost::make_shared<EzText>( Localization::WordString( Localization::Words_Loading ) + L"...", Resources::Font_Grobold42, true, true );
 		LoadingText->setScale( LoadingText->getScale() * .445f );
 		LoadingText->FixedToCamera = true;
 		LoadingText->_Pos = Vector2( 21, -106 );

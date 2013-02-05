@@ -217,7 +217,7 @@ namespace CloudberryKingdom
 
             // Compile a list of all leaderboards
             LeaderboardList = std::vector<std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> > >();
-            LeaderboardList.push_back(std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx>>(0, 0));
+            LeaderboardList.push_back(std::pair<boost::shared_ptr<Challenge>, boost::shared_ptr<BobPhsx> >(0, 0));
             
 		
 			for ( std::vector<std::pair<boost::shared_ptr<BobPhsx>, std::pair<boost::shared_ptr<BobPhsx>, int> > >::const_iterator

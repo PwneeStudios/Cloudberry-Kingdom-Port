@@ -41,9 +41,9 @@ namespace CloudberryKingdom
 
 		// Press A to join
 #ifdef PC_VERSION
-		std::wstring pressa = Format( Localization::WordString( Localization::Words::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( 89 ).c_str() );
+		std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go_Controller( 89 ).c_str() );
 #else
-        std::wstring pressa = Format( Localization::WordString( Localization::Words::Words_PressToJoin ).c_str(), ButtonString::Go( 89 ).c_str() );
+        std::wstring pressa = Format( Localization::WordString( Localization::Words_PressToJoin ).c_str(), ButtonString::Go( 89 ).c_str() );
 #endif
         Text = boost::make_shared<EzText>( pressa, Resources::Font_Grobold42, true, true);
 			

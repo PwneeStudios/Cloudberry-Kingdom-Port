@@ -60,7 +60,7 @@ namespace CloudberryKingdom
         Award_Campaign4 = boost::make_shared<Awardment>( 15, L"Award_Campaign4", Localization::Words_AwardTitle_Campaign4, Localization::Words_AwardText_Campaign4);
         Award_BuyHat = boost::make_shared<Awardment>( 16, L"Award_BuyHat", Localization::Words_AwardTitle_BuyHat, Localization::Words_AwardText_BuyHat);
         Award_HeroRush2Level = boost::make_shared<Awardment>( 17, L"Award_HeroRush2Level", Localization::Words_AwardTitle_HeroRush2Level, Localization::Words_AwardText_HeroRush2Level);
-		Award_Replay = boost::make_shared<Awardment>(18, L"Award_Replay", Localization::Words::Words_AwardTitle_Replay, Localization::Words::Words_AwardText_Replay);
+		Award_Replay = boost::make_shared<Awardment>(18, L"Award_Replay", Localization::Words_AwardTitle_Replay, Localization::Words_AwardText_Replay);
 
         // Arcade Unlocks
         UnlockTimeCrisis = boost::make_shared<Awardment>(100, L"Time Crisis Unlocked!", 

@@ -16,7 +16,6 @@
 	-lnn_nstd.a
 	-lnn_act.a
 Game\Game\Player\Hero Physics\TimeShip.cpp
-Game\Game\Player\Leaderboard.cpp
 Game\Hacks\NET\StringBuilder.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_collector.cpp
 boost_shared_ptr\libs\smart_ptr\src\sp_debug_hooks.cpp
@@ -380,3 +379,8 @@ Game\MasterHack.cpp
 tgt\cafe_libs.gpj
 tgt\eppc.Cafe.ld
 Main.cpp
+Game\Game\Player\Leaderboard.cpp
+Game\Game\Player\LeaderboardView.cpp
+Game\Game\Objects\Game Objects\GameObjects\ChapterTitle.cpp
+Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp
+Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.cpp

@@ -67,7 +67,7 @@ namespace CloudberryKingdom
 
 			//string template_level = Localization::WordString(Localization.Words.Continue) + ", " +
 			//              Localization::WordString(Localization.Words.Level) + " {0}";
-			std::wstring template_level = Localization::WordString( Localization::Words::Words_Continue );
+			std::wstring template_level = Localization::WordString( Localization::Words_Continue );
 
 			boost::shared_ptr<MenuItem> __item = MyMenu->FindItemByName( L"Continue" );
 			if ( __item != 0 )

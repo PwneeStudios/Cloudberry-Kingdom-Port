@@ -46,9 +46,9 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<CampaignSequence> CampaignSequence::instance;
 
-	Localization::Words _ChapterName[] = { Localization::Words::Words_Chapter1, Localization::Words::Words_Chapter2, Localization::Words::Words_Chapter3,
-										   Localization::Words::Words_Chapter4, Localization::Words::Words_Chapter5, Localization::Words::Words_Chapter6,
-										   Localization::Words::Words_TheMasochist };
+	Localization::Words _ChapterName[] = { Localization::Words_Chapter1, Localization::Words_Chapter2, Localization::Words_Chapter3,
+										   Localization::Words_Chapter4, Localization::Words_Chapter5, Localization::Words_Chapter6,
+										   Localization::Words_TheMasochist };
 	std::vector<Localization::Words> CampaignSequence::ChapterName = VecFromArray( _ChapterName );
 
 

@@ -7,7 +7,7 @@ namespace CloudberryKingdom
 
     HeroUnlockedMessage::HeroUnlockedMessage() : AwardmentMessage( 0 )
     {
-        MakeText( L"", Localization::WordString( Localization::Words::Words_NewHeroUnlocked ) );
+        MakeText( L"", Localization::WordString( Localization::Words_NewHeroUnlocked ) );
 
         boost::shared_ptr<EzText> _t;
         _t = MyPile->FindEzText( L"Title" ); if (_t != 0 ) { _t->setPos( Vector2(-1726.192f, 300.f ) ); _t->setScale( 0.6f ); }

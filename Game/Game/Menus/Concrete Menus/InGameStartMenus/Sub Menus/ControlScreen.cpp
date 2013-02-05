@@ -105,22 +105,22 @@ namespace CloudberryKingdom
         MyPile->Add(text, L"plus");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_QuickSpawn, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_QuickSpawn, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"quickspawn");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Jump, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Jump, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"jump");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_PowerUpMenu, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_PowerUpMenu, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"powerups");
         text->MyFloatColor = ColorHelper::Gray(.955f);
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Accept, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Accept, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"accept");
 
-        text = boost::make_shared<EzText>(Localization::Words::Words_Back, Resources::Font_Grobold42, true);
+        text = boost::make_shared<EzText>(Localization::Words_Back, Resources::Font_Grobold42, true);
         MyPile->Add(text, L"back");
 
         boost::shared_ptr<QuadClass> q;

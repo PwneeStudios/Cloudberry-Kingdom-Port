@@ -105,7 +105,7 @@ namespace CloudberryKingdom
 
 			for (int i = 0; i < 4; i++)
 			{
-				//item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>(Localization::WordString(Localization::Words::Words_Level) + L" " + (1 + 10 * i).ToString(), ItemFont), L"Cutscene_1");
+				//item = MakeMagic( CinematicsLevelItem, ( boost::make_shared<EzText>(Localization::WordString(Localization::Words_Level) + L" " + (1 + 10 * i).ToString(), ItemFont), L"Cutscene_1");
 				//item.Name = "Subsection" + i.ToString();
 				//item.Go = Go;
 				//AddItem(item);

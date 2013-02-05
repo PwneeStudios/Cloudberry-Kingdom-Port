@@ -244,7 +244,7 @@ namespace CloudberryKingdom
         if (UseBounce)
         {
             GUI_Panel::OnReturnTo();
-            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
+            RegularSlideOut( PresetPos_RIGHT, 0 );
             BubbleUp();
         }
         else

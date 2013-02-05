@@ -259,7 +259,7 @@ namespace CloudberryKingdom
 		// Credits
 		if ( LanguageOption && !CloudberryKingdomGame::HideLogos )
 		{
-			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>(Localization::Words::Words_Credits, ItemFont, CenterItems) ) );
+			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>(Localization::Words_Credits, ItemFont, CenterItems) ) );
 			item->setGo( Cast::ToItem( boost::make_shared<Go_CreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 			item->Name = L"Credits";
 			AddItem(item);

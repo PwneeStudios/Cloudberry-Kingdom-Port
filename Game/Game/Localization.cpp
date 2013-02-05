@@ -250,13 +250,13 @@ namespace CloudberryKingdom
 			{
 				if (data.size() < 3) continue;
 
-                Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_SHOW, ParseTime( data[0] ), data[2] ) );
+                Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType_SHOW, ParseTime( data[0] ), data[2] ) );
                         
                 Index++;
 			}
 			else if ( identifier == std::wstring( L"-" ) )
 			{
-				Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType::ActionType_HIDE, ParseTime( data[0] ), L"" ) );
+				Subtitles.push_back(boost::make_shared<SubtitleAction>(SubtitleAction::ActionType_HIDE, ParseTime( data[0] ), L"" ) );
 			}
 
 			line = reader->ReadLine();

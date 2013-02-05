@@ -366,16 +366,16 @@ else
 		CkBaseMenu::MyPhsxStep();
 
 		// Update "Confirm"
-		//if ( ButtonCheck::State( ControllerButtons::A, -2 )->Pressed )
+		//if ( ButtonCheck::State( ControllerButtons_A, -2 )->Pressed )
 		{
 			int n = NumSeedsToDelete();
 			//MyPile->FindQuad( L"Confirm" )->Show = n > 0;
 			//MyPile->FindEzText( L"Confirm" )->Show = n > 0;
 
 			std::wstring GoString;
-			if ( n == 0 )      GoString = Localization::WordString( Localization::Words::Words_LoadSeed );
-			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words::Words_DeleteSeeds ).c_str(), n );
-			else		       GoString = Format( Localization::WordString( Localization::Words::Words_DeleteSeedsPlural ).c_str(), n );
+			if ( n == 0 )      GoString = Localization::WordString( Localization::Words_LoadSeed );
+			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), n );
+			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), n );
 
 			MyMenu->FindItemByName( L"Load" )->MyText->SubstituteText( GoString );
 			MyMenu->FindItemByName( L"Load" )->MySelectedText->SubstituteText( GoString );
@@ -508,14 +508,14 @@ else
 	{
 		FontScale *= .8f;
 
-		//MakeBackButton( Localization::Words::Words_Back, false )->UnaffectedByScroll = true;
+		//MakeBackButton( Localization::Words_Back, false )->UnaffectedByScroll = true;
 
         boost::shared_ptr<MenuItem> item;
 
 if ( ButtonCheck::ControllerInUse )
 {
 		// Load
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_LoadSeed, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_LoadSeed, ItemFont ) ) );
 		item->Name = L"Load";
 		AddItem( item );
 		item->SelectSound = 0;
@@ -531,7 +531,7 @@ if ( ButtonCheck::ControllerInUse )
 if ( ButtonCheck::ControllerInUse )
 {
 		// Delete
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Delete, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Delete, ItemFont ) ) );
 		item->Name = L"Delete";
 		AddItem( item );
 		item->SelectSound = 0;
@@ -546,7 +546,7 @@ if ( ButtonCheck::ControllerInUse )
 }
 
 		// Back
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Back, ItemFont ) ) );
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
 		item->Name = L"Back";
 		AddItem( item );
 		item->SelectSound = 0;

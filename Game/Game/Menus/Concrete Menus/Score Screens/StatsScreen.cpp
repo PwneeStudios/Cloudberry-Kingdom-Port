@@ -341,7 +341,7 @@ namespace CloudberryKingdom
 
 
 		// Coins
-        Header = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words::Words_Coins, Resources::Font_Grobold42_2) ) );
+        Header = MakeMagic( MenuItem, (boost::make_shared<EzText>(Localization::Words_Coins, Resources::Font_Grobold42_2) ) );
         MyMenu->Add(Header);
         Header->Pos = Vector2(HeaderPos, ItemPos.Y - 40);
         SetHeaderProperties(Header->MyText);

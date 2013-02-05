@@ -304,7 +304,7 @@ bool InGameStartMenu::PreventMenu = false;
         if (UseBounce)
         {
             Hid = true;
-            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
+            RegularSlideOut( PresetPos_RIGHT, 0 );
         }
         else
         {		
@@ -319,7 +319,7 @@ bool InGameStartMenu::PreventMenu = false;
         if (UseBounce)
         {
             Hid = true;
-            RegularSlideOut( PresetPos::PresetPos_RIGHT, 0 );
+            RegularSlideOut( PresetPos_RIGHT, 0 );
         }
         else
         {

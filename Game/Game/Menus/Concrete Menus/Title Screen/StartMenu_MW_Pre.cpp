@@ -9,7 +9,7 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Pre::MenuGo_Options( boost::shared_ptr<MenuItem> item )
     {
-        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State::State_SCENE_BLUR_DARK );
+        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
         Call( MakeMagic( StartMenu_MW_Options, ( getControl(), true ) ), 0 );
         CallingOptionsMenu = true;
     }
@@ -17,7 +17,7 @@ namespace CloudberryKingdom
     void StartMenu_MW_Pre::Exit()
     {
         SelectSound = 0;
-        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State::State_SCENE_BLUR_DARK );
+        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_BLUR_DARK );
         Call( MakeMagic( StartMenu_MW_Exit, ( getControl() ) ), 0 );
     }
 
@@ -45,7 +45,7 @@ namespace CloudberryKingdom
 
     void StartMenu_MW_Pre::SlideIn( int Frames )
     {
-        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State::State_SCENE_TITLE );
+        Title->BackPanel->SetState( StartMenu_MW_Backpanel::State_SCENE_TITLE );
         StartMenu::SlideIn( 0 );
     }
 
@@ -129,31 +129,31 @@ namespace CloudberryKingdom
         AddItem( item );
 
         // Leaderboard
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Leaderboard, ItemFont, true ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Leaderboard, ItemFont, true ) ) );
         item->Name = L"Leaderboard";
         item->setGo( boost::make_shared<MenuGo_LeaderboardsProxy>( boost::static_pointer_cast<StartMenu_MW_Pre>( shared_from_this() ) ) );
         AddItem( item );
 
         // Achievements
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Achievement, ItemFont, true ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Achievement, ItemFont, true ) ) );
         item->Name = L"Achievements";
         item->setGo( boost::make_shared<MenuGo_AchievementsProxy>( boost::static_pointer_cast<StartMenu_MW_Pre>( shared_from_this() ) ) );
         AddItem( item );
 
         //// Options
-        //item = MenuItem( boost::make_shared<EzText>( Localization::Words::Words_Options, ItemFont, true ));
+        //item = MenuItem( boost::make_shared<EzText>( Localization::Words_Options, ItemFont, true ));
         //item->Name = L"Options";
         //item->setGo( boost::make_shared<MenuGo_OptionsProxy>( boost::static_pointer_cast<StartMenu_MW_Pre>( shared_from_this() ) ) );
         //AddItem( item );
 
         // Buy Game
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_UnlockFullGame, ItemFont, true ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_UnlockFullGame, ItemFont, true ) ) );
         item->Name = L"Buy";
         item->setGo( boost::make_shared<MenuGo_BuyGameProxy>( boost::static_pointer_cast<StartMenu_MW_Pre>( shared_from_this() ) ) );
         AddItem( item );
 
         // Exit
-        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Exit, ItemFont, true ) ) );
+        item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Exit, ItemFont, true ) ) );
         item->Name = L"Exit";
         item->setGo( boost::make_shared<MenuGo_ExitProxy>( boost::static_pointer_cast<StartMenu_MW_Pre>( shared_from_this() ) ) );
         AddItem( item );

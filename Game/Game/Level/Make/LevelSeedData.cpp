@@ -607,7 +607,7 @@ namespace CloudberryKingdom
 		boost::shared_ptr<GameObject> LevelSeedData::MakeScoreProxy::Apply()
 		{
 			CampaignSequence::MarkProgress( level );
-			return MakeMagic( ScoreScreen, ( StatGroup::StatGroup_LEVEL, level->MyGame, true ) );
+			return MakeMagic( ScoreScreen, ( StatGroup_LEVEL, level->MyGame, true ) );
 		}
 
 	void LevelSeedData::_FadeIn_Process( const boost::shared_ptr<Level> &level )
