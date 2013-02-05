@@ -45,6 +45,14 @@ void Effect::Load( const std::string &name )
 		);
 	}
 
+	for( int i = 0; i < internal_->Shader.pPixelShader->numUniforms; ++i )
+	{
+		GX2UniformVar *var = &internal_->Shader.pPixelShader->uniformVars[ i ];
+		internal_->Parameters[ var->name ] = boost::make_shared<EffectParameter>( *this,
+			GX2GetPixelUniformVarOffset( internal_->Shader.pPixelShader, var->name )
+		);
+	}
+
 	for( int i = 0; i < internal_->Shader.pPixelShader->numSamplers; ++i )
 	{
 		GX2SamplerVar *var = &internal_->Shader.pPixelShader->samplerVars[ i ];

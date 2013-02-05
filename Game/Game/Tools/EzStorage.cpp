@@ -268,6 +268,8 @@ namespace CloudberryKingdom
 	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		printf( "Save( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
+		
+#ifndef CAFE
 		if ( !DeviceOK() )
 			GetDevice();
 
@@ -301,6 +303,11 @@ namespace CloudberryKingdom
 			InUseLock->Unlock();
 		}
 
+#endif
+
+		boost::shared_ptr< StorageContainer > container = boost::make_shared< StorageContainer >();
+		SaveToContainer( container, FileName, SaveLogic, Fail );
+
 		// Device is hooked up and ready for us to save to
 
 		// Open a container
@@ -321,14 +328,37 @@ namespace CloudberryKingdom
 	   , 0);*/
 	}
 
-	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<BinaryWriter*> > &SaveLogic )
+	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr< BinaryWriter > > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
-		printf( "Save( FileName = %s );\n", WstringToUtf8( FileName ).c_str() );
+		std::string path = WstringToUtf8( FileName );
+		printf( "Save( FileName = %s );\n", path.c_str() );
+#ifndef CAFE
 		// Check to see whether the save exists.
 		if ( container->FileExists( FileName ) )
 			// Delete it so that we can create one fresh.
 			container->DeleteFile( FileName );
+#endif
 
+#ifdef CAFE
+		if( SaveLogic != 0 )
+		{
+			bool global = FileName == L"HighScores";
+			boost::shared_ptr< SaveWriterWiiU > writer = boost::make_shared< SaveWriterWiiU >( path, global );
+
+			if( !writer->IsOpen() )
+			{
+				if( Fail != 0 )
+					Fail->Apply();
+			}
+			else
+				SaveLogic->Apply( writer );
+			
+			//writer->Close();
+
+		}
+#endif
+
+#ifndef CAFE
 		// FIXME: Implement this.
 
 		// Create the file.
@@ -357,10 +387,12 @@ namespace CloudberryKingdom
 
 			InUseLock->Unlock();
 		}
+#endif
 	}
 
 	void EzStorage::Load( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
+#ifndef CAFE
 		if ( !DeviceOK() )
 			GetDevice();
 
@@ -393,7 +425,10 @@ namespace CloudberryKingdom
 
 			InUseLock->Unlock();
 		}
+#endif
 
+		boost::shared_ptr< StorageContainer > container = boost::make_shared< StorageContainer >();
+		LoadFromContainer( container, FileName, LoadLogic, Fail );
 		// Device is hooked up and ready for us to load from
 
 		// Open a container
@@ -419,7 +454,7 @@ namespace CloudberryKingdom
 	void EzStorage::LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic )
 	{
 		// Fallback action if file doesn't exist
-		if ( !container->FileExists( FileName ) )
+		/*if ( !container->FileExists( FileName ) )
 		{
 			// FIXME: Should never delete things.
 			//delete container;
@@ -438,7 +473,26 @@ namespace CloudberryKingdom
 				FailLogic->Apply();
 
 			return;
+		}*/
+
+#ifdef CAFE
+		if( LoadLogic != 0 )
+		{
+			std::string path = WstringToUtf8( FileName );
+
+			bool global = FileName == L"HighScores";
+			boost::shared_ptr< SaveReaderWiiU > reader = boost::make_shared< SaveReaderWiiU >( path, global );
+			std::vector< unsigned char > data;
+			if( reader->ReadEverything( data ) )
+			{
+				LoadLogic->Apply( data );
+			}
+			else
+			{
+				FailLogic->Apply();
+			}
 		}
+#endif
 
 		// FIXME: Implement this.
 
@@ -464,6 +518,7 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
+#ifndef CAFE
 		{
 			InUseLock->Lock();
 
@@ -471,5 +526,7 @@ namespace CloudberryKingdom
 
 			InUseLock->Unlock();
 		}
+#endif
 	}
+
 }

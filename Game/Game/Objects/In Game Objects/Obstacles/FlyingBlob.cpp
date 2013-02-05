@@ -260,8 +260,8 @@ namespace CloudberryKingdom
 		boost::shared_ptr<ObjectClass> SourceObject;
 		Tools::UseInvariantCulture();
 		//boost::shared_ptr<FileStream> stream = File->Open( file, FileMode::Open, FileAccess::Read, FileShare::None );
-		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
-		boost::shared_ptr<BinaryReader> reader = boost::make_shared<BinaryReader>( file );
+		//boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( stream, Encoding::UTF8 );
+		boost::shared_ptr<BinaryReader> reader = boost::make_shared<FileBinaryReader>( file );
 
 		SourceObject = boost::make_shared<ObjectClass>( Tools::QDrawer, Tools::Device, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );
 		ObjectClass_PostConstruct( SourceObject, Tools::QDrawer, Tools::Device, Tools::Device->PP, 0, 0, EffectWad->FindByName( std::wstring( L"BasicEffect" ) ), TextureWad->FindByName( std::wstring( L"White" ) ) );

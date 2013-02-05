@@ -27,7 +27,7 @@ struct BinaryWriter
 
 };
 
-struct FileBinaryWriter : BinaryWriter
+struct FileBinaryWriter : public BinaryWriter
 {
 	boost::shared_ptr<File> file_;
 
@@ -42,5 +42,33 @@ struct FileBinaryWriter : BinaryWriter
 	virtual void Write( float v );
 	virtual void Write( unsigned char c );
 };
+
+#ifdef CAFE
+
+struct SaveWriterWiiU : public BinaryWriter
+{
+
+private:
+
+	struct SaveWriterWiiUInternal *internal_;
+
+public:
+
+	SaveWriterWiiU( const std::string &path, bool global );
+	~SaveWriterWiiU();
+	
+	bool IsOpen();
+	virtual void Write( const unsigned char *buffer, int offset, int length );
+	virtual void Write( int i );
+	virtual void Write( unsigned int i );
+	virtual void Write( unsigned long long i );
+	virtual void Write( const Vector2 &v );
+	virtual void Write( const std::wstring &s );
+	virtual void Write( float v );
+	virtual void Write( unsigned char c );
+
+};
+
+#endif
 
 #endif

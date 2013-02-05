@@ -9,9 +9,9 @@ namespace CloudberryKingdom
 
 		Tools::UseInvariantCulture();
 		//stream = File->Open( FileName, FileMode::Open, FileAccess::Read, FileShare::None );
-		//reader = boost::make_shared<BinaryReader>( stream, Encoding::UTF8 );
+		//reader = boost::make_shared<FileBinaryReader>( stream, Encoding::UTF8 );
 		//
-		reader = boost::make_shared<BinaryReader>( FileName );
+		reader = boost::make_shared<FileBinaryReader>( FileName );
 	}
 
 	EzReader::~EzReader()
