@@ -77,6 +77,8 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::ReleaseBody();
 
+		Dots.reset();
+
 		//MyGame.OnCoinGrab -= OnCoinGrab;
 		//MyGame.OnLevelRetry -= OnLevelRetry;
 	}
@@ -332,6 +334,16 @@ int PerfectScoreObject::GlobalBonus = 0;
 
 		if ( Hold != getMultiplier() )
 			MyPile->BubbleUp( false );
+
+		// Update dots
+		int NumDots = getNextBonus() / getBaseBonus();
+		Dots[0]->setSize( Vector2(19.9642f, 21.49991f) * CoreMath::Periodic(.96f, 1.03f, 1.0f, Tools::t) );
+		for (int i = 0; i < 8; i++)
+		{
+			Dots[i]->Quad_Renamed.setMyTexture( i < NumDots ? Full : Empty );
+			Dots[i]->setPos( Dots[0]->getPos() + i * Vector2(34, 0) );
+			Dots[i]->setSize( Dots[0]->getSize() );
+		}
 	}
 
 	void PerfectScoreObject::Init_GUI()
@@ -369,6 +381,21 @@ int PerfectScoreObject::GlobalBonus = 0;
 		Text->RightJustify = true;
 
 		MyPile->Add( Text );
+
+			Full = Tools::Texture( std::wstring( L"Dot_Full" ) );
+			Empty = Tools::Texture( std::wstring( L"Dot_Empty" ) );
+			Dots = std::vector<boost::shared_ptr<QuadClass> >();
+			for ( int i = 0; i < 8; i++)
+			{
+				boost::shared_ptr<QuadClass> dot = boost::make_shared<QuadClass>( L"White" );
+				dot->setSize( Vector2( 13.54166f, 14.58333f ) );
+
+				MyPile->Add( dot, std::wstring( L"Dot" ) + ::ToString( i ) );
+				Dots.push_back( dot );
+			}
+
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Dot0" ); if (_q != 0 ) { _q->setPos( Vector2(-302.7778f, -91.66668f ) ); _q->setSize( Vector2( 19.2969f, 20.78128f ) ); }
 
 		SetPos();
 	}

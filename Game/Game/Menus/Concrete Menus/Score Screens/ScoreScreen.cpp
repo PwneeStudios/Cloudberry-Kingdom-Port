@@ -214,13 +214,12 @@ namespace CloudberryKingdom
 			boost::shared_ptr<MenuItem> back;
 			if (InCampaign)
 			{
-				//back = MakeBackButton(Localization.Words.Back);
-				back = MakeBackButton( Localization::Words::Words_Exit );
+				back = MakeBackButton( Localization::Words::Words_Exit, true );
 				item->setGo( boost::make_shared<MenuGo_ExitCampaignProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 			else
 			{
-				back = MakeBackButton( Localization::Words_BackToFreeplay );
+				back = MakeBackButton( Localization::Words_BackToFreeplay, true );
 				item->setGo( boost::make_shared<MenuGo_ExitFreeplayProxy>( boost::static_pointer_cast<ScoreScreen>( shared_from_this() ) ) );
 			}
 

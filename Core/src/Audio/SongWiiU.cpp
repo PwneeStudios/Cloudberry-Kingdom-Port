@@ -42,7 +42,7 @@ void Song::Load( const std::string &path )
 		Duration.TotalSeconds = 173.f;
 	else if( path.find( "Get_a_Grip^Peacemaker" ) != std::string::npos )
 		Duration.TotalSeconds = 119.f;
-	else if( path.find( "Happy" ) != std::string::npos )
+	else if( path.find( "Happy^James_Stant" ) != std::string::npos )
 		Duration.TotalSeconds = 128.f;
 	else if( path.find( "House^Blind_Digital" ) != std::string::npos )
 		Duration.TotalSeconds = 345.f;

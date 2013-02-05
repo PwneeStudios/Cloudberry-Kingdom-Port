@@ -43,7 +43,7 @@ namespace CloudberryKingdom
 		EnsureFancy();
 
 		boost::shared_ptr<QuadClass> Backdrop;
-        if (UseBounce)
+        if (UseSimpleBackdrop)
             Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
         else		
 			Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1230x740" ), 1500.f, true );

@@ -226,27 +226,32 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 		//bool CloudberryKingdomGame::LockCampaign = true;
 		//bool CloudberryKingdomGame::SimpleMainMenu = true;
 		//bool CloudberryKingdomGame::SimpleLeaderboards = true;
+		//bool CloudberryKingdomGame::FakeAwardments = false;
 
 		// PC Beta
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
-		bool CloudberryKingdomGame::SimpleLeaderboards = true;
+		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif XBOX
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = false;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif CAFE
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = true;
 		bool CloudberryKingdomGame::SimpleLeaderboards = true;
+		bool CloudberryKingdomGame::FakeAwardments = false;
 #elif PS3
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
 		bool CloudberryKingdomGame::SimpleMainMenu = false;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
+		bool CloudberryKingdomGame::FakeAwardments = false;
 #endif
 
 

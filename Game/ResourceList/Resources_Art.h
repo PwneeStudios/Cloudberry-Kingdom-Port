@@ -733,6 +733,8 @@ L"Fonts/Grobold_Japanese",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Smooth",
+L"Art/Menu/Dot_Empty",
+L"Art/Menu/Dot_Full",
 L"White",
 
 };
@@ -1462,6 +1464,8 @@ const int TEXTURE_WIDTHS[] = {
 2048,
 1024,
 128,
+13,
+13,
 8,
 
 };
@@ -2191,6 +2195,8 @@ const int TEXTURE_HEIGHTS[] = {
 1300,
 1024,
 128,
+14,
+14,
 8,
 
 };
@@ -2914,6 +2920,8 @@ false,
 false,
 false,
 false,
+true,
+true,
 true,
 true,
 true,
@@ -3660,6 +3668,8 @@ L"Fonts/Grobold_Japanese",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Smooth",
+L"Art/Menu/Dot_Empty",
+L"Art/Menu/Dot_Full",
 L"White",
 
 };
@@ -4396,6 +4406,8 @@ const int TEXTURE_WIDTHS[] = {
 2048,
 1024,
 128,
+13,
+13,
 8,
 
 };
@@ -5132,6 +5144,8 @@ const int TEXTURE_HEIGHTS[] = {
 1300,
 1024,
 128,
+14,
+14,
 8,
 
 };
@@ -5891,6 +5905,8 @@ L"Fonts/Grobold_Japanese",
 L"Fonts/Grobold_Korean",
 L"Fonts/Grobold_Western",
 L"Smooth",
+L"Art/Menu/Dot_Empty",
+L"Art/Menu/Dot_Full",
 L"White",
 
 };
@@ -6647,6 +6663,8 @@ const int TEXTURE_WIDTHS[] = {
 2048,
 1024,
 128,
+13,
+13,
 8,
 
 };
@@ -7403,6 +7421,8 @@ const int TEXTURE_HEIGHTS[] = {
 1300,
 1024,
 128,
+14,
+14,
 8,
 
 };

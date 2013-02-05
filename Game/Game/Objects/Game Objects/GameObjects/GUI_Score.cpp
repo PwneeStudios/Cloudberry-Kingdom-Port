@@ -82,41 +82,26 @@ namespace CloudberryKingdom
 		ScoreText->SubstituteText( ToString() );
 	}
 
-	GUI_Score::GUI_Score() :
+
+
+	GUI_Score::GUI_Score( bool TimeCrisis ) :
 		AddedOnce( false ),
 		Score( 0 ),
 		DoSlideIn( false ),
 		UpdateAfterLevelFinish( false )
 	{
 	}
-	boost::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct()
+	boost::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool TimeCrisis )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		DoInit( false );
+		DoInit( false, TimeCrisis );
 
 		return boost::static_pointer_cast<GUI_Score>( shared_from_this() );
 	}
 
-	GUI_Score::GUI_Score( bool SlideIn ) :
-		AddedOnce( false ),
-		Score( 0 ),
-		DoSlideIn( false ),
-		UpdateAfterLevelFinish( false )
-	{
-	}
-	boost::shared_ptr<GUI_Score> GUI_Score::GUI_Score_Construct( bool SlideIn )
-	{
-		InitializeInstanceFields();
-		GUI_Panel::GUI_Panel_Construct();
-
-		DoInit( SlideIn );
-
-		return boost::static_pointer_cast<GUI_Score>( shared_from_this() );
-	}
-
-	void GUI_Score::DoInit( bool SlideIn )
+	void GUI_Score::DoInit( bool SlideIn, bool TimeCrisis )
 	{
 		DoSlideIn = SlideIn;
 
@@ -142,6 +127,7 @@ namespace CloudberryKingdom
 			o = Color::White;
 
 			ScoreText = boost::make_shared<EzText>( ToString(), font, 950.f, false, true );
+			ScoreText->Name = L"Score";
 			ScoreText->setScale( scale );
 			ScoreText->setPos( Vector2( 381.4434f, 85.55492f ) );
 			ScoreText->MyFloatColor = c.ToVector4();
@@ -150,6 +136,19 @@ namespace CloudberryKingdom
 		ScoreText->RightJustify = true;
 
 		MyPile->Add( ScoreText );
+
+		if ( TimeCrisis )
+		{
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 381.4434f, 85.55492f ) ); _t->setScale( 0.5f ); }
+			MyPile->setPos( Vector2( 1240.555f, 756.1112f ) );
+		}
+		else
+		{
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Score" ); if (_t != 0 ) { _t->setPos( Vector2( 381.4434f, 85.55492f ) ); _t->setScale( 0.5f ); }
+			MyPile->setPos( Vector2( 865.5554f, 781.1111f ) );
+		}
 	}
 
 	void GUI_Score::MyDraw()

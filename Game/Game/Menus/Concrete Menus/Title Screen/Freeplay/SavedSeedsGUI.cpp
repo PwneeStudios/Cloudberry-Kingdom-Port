@@ -120,7 +120,12 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::StartLevelProxy1::Apply( const boost::shared_ptr<MenuItem> &_menu )
 	{
-		ssGui->StartLevel( _seed );
+		int n = ssGui->NumSeedsToDelete();
+
+		if (n > 0)
+			ssGui->Back( ssGui->MyMenu );
+		else
+			ssGui->StartLevel(_seed);
 	}
 
 	SavedSeedsGUI::OnAddHelper::OnAddHelper( const boost::shared_ptr<ScrollBar> &bar )
@@ -284,6 +289,7 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::Init()
 	{
+		EnableBounce();
 		CkBaseMenu::Init();
 
 		setControl( -1 );
@@ -317,47 +323,64 @@ namespace CloudberryKingdom
 
 		FontScale = .666f;
 
+		// Backdrop
+		boost::shared_ptr<QuadClass> backdrop;
+		if (UseSimpleBackdrop)
+			backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
+		else
+			backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true );
+
+		backdrop->Name = L"Backdrop";
+		MyPile->Add( backdrop );
+
 		// Header
-		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SaveSeed, ItemFont ) ) );
+		boost::shared_ptr<MenuItem> item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_SavedSeeds, ItemFont ) ) );
 		item->Name = std::wstring( L"Header" );
 		item->Selectable = false;
 		SetHeaderProperties( item->MySelectedText );
 		AddItem( item );
 
-	#if defined(PC_VERSION)
 		Vector2 SavePos = ItemPos;
-		MakeBackButton()->UnaffectedByScroll = true;
-		ItemPos = SavePos;
-	#endif
-
 		MakeOptions();
+		ItemPos = SavePos;
+		
 		MakeList();
 
 	#if !defined(PC_VERSION)
 		OptionalBackButton();
 	#endif
 
-		// Backdrop
-		boost::shared_ptr<QuadClass> backdrop;
-        if (UseBounce)
-            backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true);
-        else
-            backdrop = boost::make_shared<QuadClass>( std::wstring( L"Backplate_1500x900" ), 1500.f, true);
-
-		backdrop->Name = std::wstring( L"Backdrop" );
-		MyPile->Add( backdrop );
-
 		SetPos();
-	#if defined(PC_VERSION)
-		MyMenu->SelectItem( 2 );
-	#else
-		MyMenu->SelectItem( 0 );
-	#endif
+if ( ButtonCheck::ControllerInUse )
+{
+		MyMenu->SelectItem( 4 );
+}
+else
+{
+		MyMenu->SelectItem( 3 );
+}
 	}
 
 	void SavedSeedsGUI::MyPhsxStep()
 	{
 		CkBaseMenu::MyPhsxStep();
+
+		// Update "Confirm"
+		//if ( ButtonCheck::State( ControllerButtons::A, -2 )->Pressed )
+		{
+			int n = NumSeedsToDelete();
+			//MyPile->FindQuad( L"Confirm" )->Show = n > 0;
+			//MyPile->FindEzText( L"Confirm" )->Show = n > 0;
+
+			std::wstring GoString;
+			if ( n == 0 )      GoString = Localization::WordString( Localization::Words::Words_LoadSeed );
+			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words::Words_DeleteSeeds ).c_str(), n );
+			else		       GoString = Format( Localization::WordString( Localization::Words::Words_DeleteSeedsPlural ).c_str(), n );
+
+			MyMenu->FindItemByName( L"Load" )->MyText->SubstituteText( GoString );
+			MyMenu->FindItemByName( L"Load" )->MySelectedText->SubstituteText( GoString );
+		}
+
 	#if defined(WINDOWS)
 		if ( ButtonCheck::State( Keys_Delete ).Pressed )
 			Delete( MyMenu );
@@ -376,6 +399,16 @@ namespace CloudberryKingdom
 			verify->OnSelect->Add( boost::make_shared<DoDeletionProxy>( boost::static_pointer_cast<SavedSeedsGUI>( shared_from_this() ) ) );
 
 			Call( verify, 0 );
+
+			if (UseBounce)
+			{
+				Hid = true;
+				RegularSlideOut(PresetPos_RIGHT, 0);
+			}
+			else
+			{
+				Hide(PresetPos_LEFT);
+			}
 		}
 		else
 			ReturnToCaller();
@@ -386,6 +419,12 @@ namespace CloudberryKingdom
 	void SavedSeedsGUI::OnReturnTo()
 	{
 		Hid = false;
+
+		CallToLeft = false;
+		UseBounce = false;
+		SlideOutLength = 0;
+		ReturnToCallerDelay = 0;
+
 		CkBaseMenu::OnReturnTo();
 	}
 
@@ -398,66 +437,38 @@ namespace CloudberryKingdom
 
 	void SavedSeedsGUI::SetPos()
 	{
-	#if defined(PC_VERSION)
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 27.77808f, 925.0002f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"Back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 278.9676f, 937.6984f ) );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"castle_testsave" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 80.5547f, 516.1112f ) );
-		}
+if ( ButtonCheck::ControllerInUse )
+{
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2( 69.44482f, 955.5558f ) ); _item->MyText->setScale( 0.666f ); _item->MySelectedText->setScale( 0.666f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( Vector2( 736.1101f, 983.3332f ) ); _item->MyText->setScale( 0.4186335f ); _item->MySelectedText->setScale( 0.4186335f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Delete" ); if (_item != 0 ) { _item->setSetPos( Vector2( 741.6659f, 860.5553f ) ); _item->MyText->setScale( 0.3892168f ); _item->MySelectedText->setScale( 0.3892168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 741.6665f, 756.6665f ) ); _item->MyText->setScale( 0.4212168f ); _item->MySelectedText->setScale( 0.4212168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
+			MyMenu->setPos( Vector2(-1016.667f, 0.f ) );
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 2.77771f, 22.22221f ) );
-			_q->setSize( Vector2( 1572.44f, 1572.44f ) );
-		}
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( Vector2( 658.3345f, 911.1108f ) ); _q->setSize( Vector2( 56.16665f, 56.16665f ) ); }
+			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2( 661.1113f, 794.4444f ) ); _q->setSize( Vector2( 57.66665f, 57.66665f ) ); }
+			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2( 663.8892f, 677.7778f ) ); _q->setSize( Vector2( 56.41664f, 56.41664f ) ); }
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 2.77771f, 22.22221f ) ); _q->setSize( Vector2( 1572.44f, 1572.44f ) ); }
 
-		MyPile->setPos( Vector2( 0, 0 ) );
-	#else
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"Header" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( 27.77808f, 925.0002f ) );
-		}
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
+}
+else
+{
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2( 88.88916f, 941.6669f ) ); _item->MyText->setScale( 0.666f ); _item->MySelectedText->setScale( 0.666f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Load" ); if (_item != 0 ) { _item->setSetPos( Vector2( 591.6653f, 988.889f ) ); _item->MyText->setScale( 0.3920501f ); _item->MySelectedText->setScale( 0.3920501f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 591.6661f, 893.8889f ) ); _item->MyText->setScale( 0.3935499f ); _item->MySelectedText->setScale( 0.3935499f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( -1016.667f, 0 ) );
+			MyMenu->setPos( Vector2(-1016.667f, 0.f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Load" ) );
-		if ( _t != 0 )
-			_t->setPos( Vector2( 564.6826f, -51.11127f ) );
-		_t = MyPile->FindEzText( std::wstring( L"Delete" ) );
-		if ( _t != 0 )
-			_t->setPos( Vector2( 570.572f, -309.3967f ) );
-		_t = MyPile->FindEzText( std::wstring( L"Back" ) );
-		if ( _t != 0 )
-			_t->setPos( Vector2( 579.6982f, -569.7302f ) );
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 2.77771f, 22.22221f ) ); _q->setSize( Vector2( 1572.44f, 1572.44f ) ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 2.77771f, 22.22221f ) );
-			_q->setSize( Vector2( 1572.44f, 1572.44f ) );
-		}
-
-		MyPile->setPos( Vector2( 0, 0 ) );
-	#endif
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
+}
 	}
 
 	void SavedSeedsGUI::MakeList()
@@ -497,58 +508,58 @@ namespace CloudberryKingdom
 	{
 		FontScale *= .8f;
 
-	#if defined(PC_VERSION)
-		boost::shared_ptr<MenuItem> item;
-		//// Load
-		//item = new MenuItem(new EzText("Load", ItemFont));
-		//item.Name = "Load";
-		//AddItem(item);
-		//item.SelectSound = null;
-		//item.Go = ItemReturnToCaller;
-		//item.MyText.MyFloatColor = Menu.DefaultMenuInfo.UnselectedBackColor;
-		//item.MySelectedText.MyFloatColor = Menu.DefaultMenuInfo.SelectedBackColor;
+		//MakeBackButton( Localization::Words::Words_Back, false )->UnaffectedByScroll = true;
 
-		//// Delete
-		//item = new MenuItem(new EzText("Delete", ItemFont));
-		//item.Name = "Delete";
-		//AddItem(item);
-		//item.SelectSound = null;
-		//item.Go = ItemReturnToCaller;
-		//item.MyText.MyFloatColor = new Color(204, 220, 255).ToVector4();
-		//item.MySelectedText.MyFloatColor = new Color(204, 220, 255).ToVector4();
+        boost::shared_ptr<MenuItem> item;
 
-		//// Back
-		//item = new MenuItem(new EzText("Back", ItemFont));
-		//item.Name = "Back";
-		//AddItem(item);
-		//item.SelectSound = null;
-		//item.Go = ItemReturnToCaller;
-		//item.MyText.MyFloatColor = Menu.DefaultMenuInfo.UnselectedBackColor;
-		//item.MySelectedText.MyFloatColor = Menu.DefaultMenuInfo.SelectedBackColor;
-	#else
-		float scale = .75f;
+if ( ButtonCheck::ControllerInUse )
+{
+		// Load
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_LoadSeed, ItemFont ) ) );
+		item->Name = L"Load";
+		AddItem( item );
+		item->SelectSound = 0;
+		item->UnaffectedByScroll = true;
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, L"Button_A" ) );
+		item->Selectable = false;
+#if XBOX
+		item->MyText->MyFloatColor = Menu::DefaultMenuInfo->UnselectedBackColor;
+		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo->SelectedBackColor;
+#endif
+}
 
-		boost::shared_ptr<EzText> text;
-		text = boost::make_shared<EzText>( ButtonString::Go( 90 ) + std::wstring( L" Load" ), ItemFont );
-		text->Name = std::wstring( L"Load" );
-		text->setScale( text->getScale() * scale );
-		text->setPos( Vector2( 417.4604f, -159.4446f ) );
-		text->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
-		MyPile->Add( text );
+if ( ButtonCheck::ControllerInUse )
+{
+		// Delete
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Delete, ItemFont ) ) );
+		item->Name = L"Delete";
+		AddItem( item );
+		item->SelectSound = 0;
+		item->UnaffectedByScroll = true;
 
-		text = boost::make_shared<EzText>( ButtonString::X( 90 ) + std::wstring( L" Delete" ), ItemFont );
-		text->Name = std::wstring( L"Delete" );
-		text->setScale( text->getScale() * scale );
-		text->setPos( Vector2( 531.6831f, -389.9523f ) );
-		text->MyFloatColor = ( Color( static_cast<unsigned char>( 204 ), static_cast<unsigned char>( 220 ), static_cast<unsigned char>( 255 ) ) ).ToVector4();
-		MyPile->Add( text );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, L"Button_X" ));
+		item->Selectable = false;
+#if XBOX
+		item->MyText->MyFloatColor = Color( 204, 220, 255 )->ToVector4();
+		item->MySelectedText->MyFloatColor = Color( 204, 220, 255 )->ToVector4();
+#endif
+}
 
-		text = boost::make_shared<EzText>( ButtonString::Back( 90 ) + std::wstring( L" Back" ), ItemFont );
-		text->Name = std::wstring( L"Back" );
-		text->setScale( text->getScale() * scale );
-		text->setPos( Vector2( 682.4761f, -622.5079f ) );
-		text->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
-		MyPile->Add( text );
-	#endif
+		// Back
+		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Back, ItemFont ) ) );
+		item->Name = L"Back";
+		AddItem( item );
+		item->SelectSound = 0;
+		item->setGo( boost::make_shared<ItemReturnToCallerProxy>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) ) );
+		item->UnaffectedByScroll = true;
+if ( ButtonCheck::ControllerInUse )
+{
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, L"Button_B" ) );
+		item->Selectable = false;
+}
+#if XBOX
+		item->MyText->MyFloatColor = Menu::DefaultMenuInfo->UnselectedBackColor;
+		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo->SelectedBackColor;
+#endif
 	}
 }

@@ -108,12 +108,12 @@ namespace CloudberryKingdom
     Awardment::Awardment(int Guid, std::wstring Key, Localization::Words Name, Localization::Words Description)
     {
         Official = true;
-#if defined(XBOX)
-        ShowWhenAwarded = false;
-#else
-        ShowWhenAwarded = true;
-#endif
-		
+			
+		if ( CloudberryKingdomGame::FakeAwardments )
+			ShowWhenAwarded = true;
+		else
+			ShowWhenAwarded = false;
+
 		this->Key = Key;
 
         this->Name = Name;
@@ -133,12 +133,7 @@ namespace CloudberryKingdom
         this->Name = Localization::Words_None;;
         this->Description = Localization::Words_None;
 
-#ifdef NOT_PC
-        ShowWhenAwarded = false;
-		this->Unlockable = false;
-#else
-        this->Unlockable = Unlockable;
-#endif
+		ShowWhenAwarded = false;
 
         this->Guid = Guid;
         this->TitleType = TitleType;

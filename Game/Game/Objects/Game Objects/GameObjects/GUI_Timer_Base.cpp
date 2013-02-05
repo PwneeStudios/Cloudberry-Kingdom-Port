@@ -115,7 +115,7 @@ namespace CloudberryKingdom
 		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		MyPile->setPos( Vector2( -90, 865 ) );
+		MyPile->setPos( Vector2( -115.0f, 803.8889f ) );
 		SlideInLength = 0;
 
 		// Object is carried over through multiple levels, so prevent it from being released.

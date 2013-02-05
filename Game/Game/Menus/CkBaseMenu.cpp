@@ -10,6 +10,8 @@ namespace CloudberryKingdom
 
             zoom = boost::make_shared<FancyVector2>();
             UseBounce = true;
+
+			UseSimpleBackdrop = UseBounce && (boost::dynamic_pointer_cast<NormalGameData>( Tools::CurGameData ) == 0 );
         }
 
         void CkBaseMenu::BouncDraw()
@@ -161,6 +163,8 @@ namespace CloudberryKingdom
 
 	void CkBaseMenu::Init()
 	{
+		UseSimpleBackdrop = UseBounce && (boost::dynamic_pointer_cast<NormalGameData>( Tools::CurGameData ) == 0 );
+
 		GUI_Panel::Init();
 
 		// Sounds
@@ -458,24 +462,21 @@ namespace CloudberryKingdom
 
 	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton()
 	{
-		return MakeBackButton( Localization::Words_Back );
+		return MakeBackButton( Localization::Words_Back, true );
 	}
 
-	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton( Localization::Words Word )
+	boost::shared_ptr<MenuItem> CkBaseMenu::MakeBackButton( Localization::Words Word, bool AddButtonTexture )
 	{
 		boost::shared_ptr<MenuItem> item;
 
-	#if defined(PC_VERSION)
-        if (ButtonCheck::ControllerInUse)
+        if (ButtonCheck::ControllerInUse && AddButtonTexture )
+		{
             item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back(86) + L" " + Localization::WordString( Word ) ) ) );
+		}
         else
         {
-            //item = new MenuItem(new EzText(ButtonString.Back(86) + Localization::WordString(Word), ItemFont));
             item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::WordString( Word ), ItemFont ) ) );
         }
-	#else
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( ButtonString::Back( 86 ) + std::wstring( L" " ) + Localization::WordString( Word ) ) ) );
-	#endif
 
 		item->setGo( boost::make_shared<MakeBackButtonHelper>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) );
 		item->Name = std::wstring( L"Back" );
@@ -520,6 +521,7 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 	CkBaseMenu::CkBaseMenu() :
         MasterAlpha( 0 ),
         UseBounce( false ),
+		UseSimpleBackdrop( false ),
 		FontScale( 0 ),
 		ItemShadows( true ),
 		CallToLeft( false ),
@@ -540,6 +542,7 @@ int CkBaseMenu::DefaultMenuLayer = Level::LastInLevelDrawLayer;
 	CkBaseMenu::CkBaseMenu( bool CallBaseConstructor ) : GUI_Panel( CallBaseConstructor ),
 		FontScale( 0 ),
 		UseBounce( false ),
+		UseSimpleBackdrop( false ),
 		ItemShadows( true ),
 		CallToLeft( false ),
 		SlideInFrom( PresetPos_LEFT ),

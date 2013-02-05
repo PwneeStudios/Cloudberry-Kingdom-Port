@@ -38,14 +38,14 @@ namespace CloudberryKingdom
 	
 		GUI_Level();
 		boost::shared_ptr<GUI_Level> GUI_Level_Construct();
-		GUI_Level( bool SlideIn );
-		boost::shared_ptr<GUI_Level> GUI_Level_Construct( bool SlideIn );
+		GUI_Level( bool TimeCrisis );
+		boost::shared_ptr<GUI_Level> GUI_Level_Construct( bool TimeCrisis );
 
 		GUI_Level( int LevelNum );
 		boost::shared_ptr<GUI_Level> GUI_Level_Construct( int LevelNum );
 
 	
-		void DoInit( bool SlideIn );
+		void DoInit( bool SlideIn, bool TimeCrisis );
 
 	
 		virtual void MyDraw();

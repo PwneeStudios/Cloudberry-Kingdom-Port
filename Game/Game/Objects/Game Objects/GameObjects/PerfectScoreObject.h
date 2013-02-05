@@ -165,6 +165,8 @@ namespace CloudberryKingdom
 		bool AddedOnce;
 		void OnAdd_GUI();
 
+		std::vector<boost::shared_ptr<QuadClass> > Dots;
+		boost::shared_ptr<EzTexture> Full, Empty;
 		boost::shared_ptr<EzText> Text;
 		void UpdateScoreText();
 

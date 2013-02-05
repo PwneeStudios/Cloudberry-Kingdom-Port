@@ -43,6 +43,7 @@ namespace CloudberryKingdom
 
 		// Give extra life
 		GUI_Lives_Renamed->setNumLives( GUI_Lives_Renamed->getNumLives() + 1 );
+		GUI_Lives_Renamed->Bring( true );
 
 		//MyGame.AddGameObject(new SuperCheer(2));
 
@@ -53,8 +54,11 @@ namespace CloudberryKingdom
 		boost::shared_ptr<TextFloat> text = boost::make_shared<TextFloat>( Localization::Words_ExtraLife, Coin::PosOfLastCoinGrabbed + Vector2( 21, 22.5f ) );
 		text->MyText->setScale( text->MyText->getScale() * 1.33f );
 		text->getCore()->DrawLayer = 8;
-		text->MyText->MyFloatColor = ( bColor( 0, 195, 17 ) ).ToVector4();
-		text->MyText->OutlineColor = ( bColor( 0, 80, 8 ) ).ToVector4();
+			//text->MyText->MyFloatColor = bColor(0, 195, 17).ToVector4();
+			//text->MyText->OutlineColor = bColor(0, 80, 8).ToVector4();
+			text->MyText->MyFloatColor = bColor(84, 232, 79).ToVector4();
+            text->MyText->OutlineColor = bColor(0, 0, 0).ToVector4();
+			CkColorHelper::_x_x_HappyBlueColor( text->MyText );
 		getCore()->MyLevel->MyGame->AddGameObject(text);
 
         ParticleEffects::CoinDie_ExtraLife( MyGame->MyLevel, Coin::PosOfLastCoinGrabbed );
@@ -66,7 +70,8 @@ namespace CloudberryKingdom
 	std::wstring GUI_NextLife::ToString()
 	{
 		//string str = string.Format("x{0}/{1}", Coins, Max);
-		std::wstring str = Format( _T( "%d/%d" ), getCoins(), Max );
+		//std::wstring str = Format( _T( "%d/%d" ), getCoins(), Max );
+		std::wstring str = ::ToString( Max - getCoins() );
 
 		return str;
 	}
@@ -140,21 +145,12 @@ namespace CloudberryKingdom
 	void GUI_NextLife::SetPos()
 	{
 		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"coin" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( 189.7776f, 111.7778f ) );
-		}
+		_t = MyPile->FindEzText( L"coin" ); if (_t != 0 ) { _t->setPos( Vector2( 189.7776f, 111.7778f ) ); _t->setScale( 0.55f ); }
 
 		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"coin" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 140.7331f, 117.8001f ) );
-			_q->ScaleYToMatchRatio( 100 );
-		}
+		_q = MyPile->FindQuad( L"coin" ); if (_q != 0 ) { _q->setPos( Vector2( 140.7331f, 117.8001f ) ); _q->setSize( Vector2( 100.f, 100.f ) ); }
 
-		setPos( Vector2( 1002.133f, 670.5443f ) );
+		MyPile->setPos( Vector2( 1232.689f, 762.2109f ) );
 	}
 
 	void GUI_NextLife::OnAdd()

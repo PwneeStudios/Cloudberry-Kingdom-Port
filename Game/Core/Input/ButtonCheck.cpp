@@ -15,7 +15,11 @@ namespace CloudberryKingdom
 	{
 		ButtonCheck::MouseInUse = false;
 		ButtonCheck::PrevMouseInUse = false;
+#ifdef PC_VERSION
 		ButtonCheck::ControllerInUse = false;
+#else
+		ButtonCheck::ControllerInUse = true;
+#endif
 
 		ButtonCheck::Quickspawn_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::Help_KeyboardKey = boost::make_shared<ButtonClass>(), ButtonCheck::QuickReset_KeyboardKey = boost::make_shared<ButtonClass>();
 		ButtonCheck::Start_Secondary = Keys_None;
@@ -240,8 +244,8 @@ boost::shared_ptr<ButtonStatistics> ButtonStats::All = 0;
 #if defined(PC_VERSION)
 	void ButtonCheck::UpdateMouseUse()
 	{
-
-        bool AnyKey = ButtonCheck::AnyKeyboardKey();
+        //bool AnyKey = ButtonCheck::AnyKeyboardKey();
+		bool AnyKey = Tools::Keyboard.GetPressedKeys().size() > 0;
 
         if (AnyKey)
             ButtonCheck::ControllerInUse = false;

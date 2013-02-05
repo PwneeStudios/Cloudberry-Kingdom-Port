@@ -20,14 +20,20 @@ namespace CloudberryKingdom
 		GUI_Level::OnAdd();
 
 		UpdateLevelText();
+
+		boost::shared_ptr<EzText> _t;
+		_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.55f ); }
+		MyPile->setPos( Vector2( 1590.556f, 803.2224f ) );
 	}
 
 	std::wstring GUI_CampaignLevel::ToString()
 	{
-		if ( MyGame == 0 )
-			return std::wstring( L"   " );
+		return GUI_Level::ToString();
 
-		return MyGame->MyLevel->Name;
+		//if ( MyGame == 0 )
+		//	return std::wstring( L"   " );
+
+		//return MyGame->MyLevel->Name;
 	}
 
 	std::wstring GUI_Level::ToString()
@@ -94,7 +100,7 @@ namespace CloudberryKingdom
 		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
-	GUI_Level::GUI_Level( bool SlideIn ) :
+	GUI_Level::GUI_Level( bool TimeCrisis ) :
 		Prefix( static_cast<Localization::Words>( 0 ) ),
 		DoSlideIn( false ),
 		AddedOnce( false ),
@@ -102,12 +108,12 @@ namespace CloudberryKingdom
 	{
 	}
 
-	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool SlideIn )
+	boost::shared_ptr<GUI_Level> GUI_Level::GUI_Level_Construct( bool TimeCrisis )
 	{
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		DoInit( SlideIn );
+		DoInit( false, TimeCrisis );
 
 		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
@@ -125,7 +131,7 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		GUI_Panel::GUI_Panel_Construct();
 
-		DoInit( false );
+		DoInit( false, false );
 		PreventRelease = false;
 
 		SetLevel( LevelNum );
@@ -133,14 +139,17 @@ namespace CloudberryKingdom
 		return boost::static_pointer_cast<GUI_Level>( shared_from_this() );
 	}
 
-	void GUI_Level::DoInit( bool SlideIn )
+	void GUI_Level::DoInit( bool SlideIn, bool TimeCrisis )
 	{
 		DoSlideIn = SlideIn;
 
 		MyPile = boost::make_shared<DrawPile>();
 		EnsureFancy();
 
-		MyPile->setPos( Vector2( 1590.556f, 803.2224f ) );
+		if (TimeCrisis)
+			MyPile->setPos( Vector2( 1621.112f, 711.5558f ) );
+		else
+			MyPile->setPos( Vector2( 1590.556f, 803.2224f ) );
 
 		// Object is carried over through multiple levels, so prevent it from being released.
 		PreventRelease = true;
@@ -177,7 +186,7 @@ namespace CloudberryKingdom
 
 		LevelText->RightJustify = true;
 
-		MyPile->Add( LevelText );
+		MyPile->Add( LevelText, L"Level" );
 	}
 
 	void GUI_Level::MyDraw()

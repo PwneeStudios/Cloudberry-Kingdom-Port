@@ -8,6 +8,8 @@ namespace CloudberryKingdom
 	struct ComputerRecording : public boost::enable_shared_from_this<ComputerRecording>
 	{
 
+		bool Released;
+
 		ComputerRecording();
 
 		static void InitializeStatics();

@@ -19,11 +19,13 @@ namespace CloudberryKingdom
 	{
 		MenuSlider::InitializeSlider();
 
-		Normal = Tools::TextureWad->FindByName( std::wstring( L"BouncyBlock1" ) );
-		Held = Tools::TextureWad->FindByName( std::wstring( L"BouncyBlock2" ) );
-
-		EndQuad = boost::make_shared<QuadClass>( std::wstring( L"Joint" ), 85.f, true );
-		StartQuad = boost::make_shared<QuadClass>( std::wstring( L"Joint" ), 85.f, true );
+		Normal = Tools::TextureWad->FindByName( std::wstring( L"Floater_Spikey_Forest" ) );
+		Held = Tools::TextureWad->FindByName( std::wstring( L"Floater_Spikey_Forest" ) );
+			
+		//EndQuad = boost::make_shared<QuadClass>( L"Floater_Buzzsaw_Forest", 85, true );
+		//StartQuad = boost::make_shared<QuadClass>( L"Floater_Buzzsaw_Forest", 85, true );
+		EndQuad = boost::make_shared<QuadClass>( std::wstring( L"Firespinner_Base_Forest_1" ), 73.f, true );
+		StartQuad = boost::make_shared<QuadClass>( std::wstring( L"Firespinner_Base_Forest_1" ), 73.f, true );
 	}
 
 	void MenuScrollBar::Draw( bool Text, const boost::shared_ptr<Camera> &cam, bool Selected )
@@ -47,9 +49,9 @@ namespace CloudberryKingdom
 			else
 				Slider->Quad_Renamed.setMyTexture( Normal );
 	#endif
+			Slider->ScaleYToMatchRatio( 100.f );
 
-			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 85, 0, 0.f );
-						//new Color(255, 255, 255, 215),
+			Tools::QDrawer->DrawLine( Start + StartPlus, End + EndPlus, bColor( 255, 255, 255, 235 ), 85, SliderBack->Quad_Renamed.getMyTexture(), Tools::BasicEffect, 3000, 0, 0.f );
 			StartQuad->setPos( Start );
 			EndQuad->setPos( End );
 

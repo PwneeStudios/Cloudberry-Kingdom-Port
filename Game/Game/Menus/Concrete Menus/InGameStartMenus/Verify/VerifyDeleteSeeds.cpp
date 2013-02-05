@@ -48,6 +48,8 @@ namespace CloudberryKingdom
 	{
 		VerifyBaseMenu::VerifyBaseMenu_Construct( false );
 
+		EnableBounce();
+
 		this->NumSeeds = NumSeeds;
 		this->setControl( Control );
 

@@ -352,7 +352,7 @@ namespace CloudberryKingdom
 		MyMenu->OnB = boost::make_shared<MenuReturnToCallerLambdaFunc>( boost::static_pointer_cast<GUI_Panel>( shared_from_this() ) );
 
             // Level
-            boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_Level, Resources::Font_Grobold42);
+            boost::shared_ptr<EzText> LevelText = boost::make_shared<EzText>(Localization::Words_PlayerLevel, Resources::Font_Grobold42);
             LevelText->_Scale *= .72f;
             StartMenu::SetText_Green(LevelText, true);
             MyPile->Add( LevelText, L"Level");

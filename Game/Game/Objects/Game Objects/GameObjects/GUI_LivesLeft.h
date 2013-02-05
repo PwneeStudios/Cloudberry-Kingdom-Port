@@ -117,8 +117,9 @@ namespace CloudberryKingdom
 		void SetParams();
 
 		bool PauseOnShow;
+		float FadeInMult;
 	
-		void Bring();
+		void Bring(bool PlusOne );
 
 
 		virtual void Reset( bool BoxesOnly );

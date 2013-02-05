@@ -107,47 +107,47 @@ namespace CloudberryKingdom
 		if( MovieName == L"Cutscene_1" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_1.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 64.083333f;
 		}
 		else if( MovieName == L"Cutscene_2" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_2.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 34.0416666f;
 		}
 		else if( MovieName == L"Cutscene_3" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_3.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 30.8333333f;
 		}
 		else if( MovieName == L"Cutscene_4" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_4.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 40.25f;
 		}
 		else if( MovieName == L"Cutscene_5" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_5.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 55.29166666f;
 		}
 		else if( MovieName == L"Cutscene_6" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Cutscene_6.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 206.875f;
 		}
 		else if( MovieName == L"Credits" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/Credits.mp4";
-			CurrentVideo->Duration.TotalSeconds = 64.f;
+			CurrentVideo->Duration.TotalSeconds = 142.0833333f;
 		}
 		else if( MovieName == L"LogoSalad" )
 		{
 			CurrentVideo->Path = "/vol/content/Movies/LogoSalad.mp4";
-			CurrentVideo->Duration.TotalSeconds = 9.f;
+			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
+#elif PC_VERSION
+		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 #endif
 
-		// FIXME: Actually load video later.
-		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 
 #ifdef CAFE
 		VPlayer = boost::make_shared<VideoPlayer>( UpdateElapsedTimeProxy );

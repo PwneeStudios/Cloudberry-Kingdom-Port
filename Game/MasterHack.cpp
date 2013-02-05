@@ -367,8 +367,8 @@ namespace CloudberryKingdom
 		This->MyCoinScoreMultiplier = boost::make_shared<CoinScoreMultiplierObject>();
 
 		// Level and Score
-		This->MyGUI_Score = MakeMagic( GUI_Score, () ) ;
-		This->MyGUI_Level = MakeMagic( GUI_Level, () );
+		This->MyGUI_Score = MakeMagic( GUI_Score, ( false ) ) ;
+		This->MyGUI_Level = MakeMagic( GUI_Level, ( false ) );
 
 		// Add game objects, including 'Perfect' watcher
 		This->OnSwapToFirstLevel->Add( boost::make_shared<StringWorldEndurance::OnSwapLambda>( boost::static_pointer_cast<StringWorldEndurance>( This->shared_from_this() ) ) );
@@ -385,8 +385,8 @@ namespace CloudberryKingdom
 		This->Warning = boost::make_shared<TimerWarning>();
 		This->Warning->MyTimer = Timer;
 
-		This->MyGUI_Score = MakeMagic( GUI_Score, () );
-		This->MyGUI_Level = MakeMagic( GUI_Level, () );
+		This->MyGUI_Score = MakeMagic( GUI_Score, ( false ) );
+		This->MyGUI_Level = MakeMagic( GUI_Level, ( false ) );
 
 		Timer->OnTimeExpired->Add( boost::make_shared<StringWorldTimed::StringWorldOnTimerExpiredLambda>( This->MyGUI_Score, This->MyGUI_Level ) );
 

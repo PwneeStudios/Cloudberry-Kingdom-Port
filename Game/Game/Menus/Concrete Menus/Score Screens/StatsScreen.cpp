@@ -392,7 +392,8 @@ namespace CloudberryKingdom
 
 		// Darker Backdrop
 		boost::shared_ptr<QuadClass> Backdrop;
-        if (UseBounce)
+		//if (UseSimpleBackdrop)
+		if (true)
         {
             Backdrop = boost::make_shared<QuadClass>( std::wstring( L"Arcade_BoxLeft" ), 1500.f, true );
             Backdrop->setAlpha( Backdrop->getAlpha() * .8f );

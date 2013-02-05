@@ -327,6 +327,9 @@ namespace CloudberryKingdom
             if ( BaseType == BobPhsxNormal::getInstance() && Shape == BobPhsxNormal::getInstance() )
                 custom->Name = MoveMod->Name;
 
+			if (BaseType == BobPhsxWheel::getInstance() && MoveMod == BobPhsxJetman::getInstance() )
+				custom->Name = Localization::Words::Words_JetpackWheelie;
+
 			//string template = BaseType.Name;
 			//string adjective = Shape.Adjective;
 			//string adjective2 = MoveMod.Adjective;

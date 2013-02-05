@@ -282,7 +282,7 @@ namespace CloudberryKingdom
 #if defined(PC_VERSION)
 	void CustomControlsMenu::MakeBackdrop()
 	{
-        if (UseBounce)
+        if (UseSimpleBackdrop)
         {
             Backdrop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 1500.f, true );
         }

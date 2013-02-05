@@ -341,13 +341,16 @@ namespace CloudberryKingdom
             Background::AddDarkLayer( level->MyBackground );
         }
 
-        boost::shared_ptr<GUI_CampaignScore> CScore = MakeMagic( GUI_CampaignScore, () );
-        CScore->PreventRelease = false;
+        //boost::shared_ptr<GUI_CampaignScore> CScore = MakeMagic( GUI_CampaignScore, () );
+        //CScore->PreventRelease = false;
+		//level->MyGame->AddGameObject( CScore );
         boost::shared_ptr<GUI_Level> CLevel = MakeMagic( GUI_Level, ( level->MyLevelSeed->LevelNum ) );
+			boost::shared_ptr<EzText> _t;
+			_t = CLevel->MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 0.f, 0.f ) ); _t->setScale( 0.55f ); }
+			CLevel->MyPile->setPos( Vector2( 1590.556f, 856.0002f ) );
         CLevel->PreventRelease = false;
-        level->MyGame->AddGameObject( CScore );
-		level->MyGame->AddGameObject( CLevel );//, MyPerfectScoreObject);
-
+		level->MyGame->AddGameObject( CLevel );
+		
 		level->MyGame->MyBankType = GameData::BankType_CAMPAIGN;
 	}
 

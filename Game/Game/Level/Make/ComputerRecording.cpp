@@ -5,7 +5,9 @@ namespace CloudberryKingdom
 
 	ComputerRecording::ComputerRecording() :
 		IsFromPool( false ),
-		Sparse( false ), SuperSparse( false )
+		Released( false ),
+		Sparse( false ),
+		SuperSparse( false )
 	{
 	}
 
@@ -48,6 +50,10 @@ namespace CloudberryKingdom
 
 	void ComputerRecording::ToPool( const boost::shared_ptr<ComputerRecording> &record )
 	{
+		if ( record->Released ) return;
+
+		record->Released = true;
+
 		Pool.push( record );
 	}
 
@@ -84,6 +90,8 @@ namespace CloudberryKingdom
 
 	void ComputerRecording::Clean()
 	{
+		Released = false;
+
 		for ( int i = 0; i < static_cast<int>( Input.size() ); i++ )
 			Input[ i ].Clean();
 		for ( int i = 0; i < static_cast<int>( AutoJump.size() ); i++ )

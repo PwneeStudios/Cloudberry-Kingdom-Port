@@ -34,13 +34,11 @@ namespace CloudberryKingdom
 
 		bool DoSlideIn;
 	
-		GUI_Score();
-		boost::shared_ptr<GUI_Score> GUI_Score_Construct();
-		GUI_Score( bool SlideIn );
-		boost::shared_ptr<GUI_Score> GUI_Score_Construct( bool SlideIn );
+		GUI_Score( bool TimeCrisis );
+		boost::shared_ptr<GUI_Score> GUI_Score_Construct( bool TimeCrisis );
 
 	
-		void DoInit( bool SlideIn );
+		void DoInit( bool SlideIn, bool TimeCrisis );
 
 	
 		virtual void MyDraw();

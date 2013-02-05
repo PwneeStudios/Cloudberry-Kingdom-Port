@@ -637,7 +637,9 @@ namespace CloudberryKingdom
 
 	bool PlayerManager::NotAllAwarded( const boost::shared_ptr<Awardment> &award )
 	{
-		return Tools::Any( getExistingPlayers(),
+		std::vector<boost::shared_ptr<PlayerData> > CopyOfExistingPlayers = std::vector<boost::shared_ptr<PlayerData> >( getExistingPlayers() );
+
+		return Tools::Any( CopyOfExistingPlayers,
 			boost::static_pointer_cast<LambdaFunc_1<boost::shared_ptr<PlayerData>, bool> >( boost::make_shared<NotAllAwardedLambda>(award) ) );
 	}
 

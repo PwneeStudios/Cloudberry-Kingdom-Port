@@ -62,7 +62,8 @@ namespace CloudberryKingdom
 	void AwardmentMessage::MakeBackdrop()
 	{
         Backdrop = boost::make_shared<QuadClass>( 0, true, true );
-        Backdrop->setTextureName( L"MessageBoxThin" );
+        //Backdrop->setTextureName( L"MessageBoxThin" );
+		Backdrop->setTextureName( L"WidePlaque" );
         Backdrop->SetSize( Vector2(1750.f, 284.8255f) );
         Backdrop->setPos( Vector2(-11.9043f, 59.52365f) );
         Backdrop->setDegrees( 0 );

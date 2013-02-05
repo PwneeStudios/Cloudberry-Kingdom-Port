@@ -24,6 +24,7 @@ namespace CloudberryKingdom
         boost::shared_ptr<FancyVector2> zoom;
         float MasterAlpha;
         bool UseBounce;
+		bool UseSimpleBackdrop;
 
 		void EnableBounce();
 		void BouncDraw();
@@ -188,7 +189,7 @@ namespace CloudberryKingdom
 		void MakeStaticBackButton();
 
 		boost::shared_ptr<MenuItem> MakeBackButton();
-		boost::shared_ptr<MenuItem> MakeBackButton( Localization::Words Word );
+		boost::shared_ptr<MenuItem> MakeBackButton( Localization::Words Word, bool AddButtonTexture );
 
 		void _MakeBackGo( boost::shared_ptr<MenuItem> item );
 	

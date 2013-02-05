@@ -82,25 +82,25 @@ namespace CloudberryKingdom
 
 	void StartMenu_MW_Arcade::SetPos()
 	{
-        boost::shared_ptr<MenuItem> _item;
-        _item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2771.113f, 901.9052f ) ); _item->MyText->setScale( 1.9f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Escalation" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2458.969f, 323.413f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Time Crisis" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2467.301f, 123.0817f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Hero Rush" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2456.189f, -88.36035f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
-        _item = MyMenu->FindItemByName( L"Hero Rush 2" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2472.857f, -285.9135f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"Header" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2771.113f, 901.9052f ) ); _item->MyText->setScale( 1.9f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Escalation" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2458.969f, 323.413f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Time Crisis" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2467.301f, 123.0817f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Hero Rush" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2456.189f, -88.36035f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
+			_item = MyMenu->FindItemByName( L"Hero Rush 2" ); if (_item != 0 ) { _item->setSetPos( Vector2(-2472.857f, -285.9135f ) ); _item->MyText->setScale( 0.95f ); _item->MySelectedText->setScale( 0.95f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); _item->SetSelectedPos( Vector2(-2490.635f, -1.f )); }
 
-        MyMenu->setPos( Vector2( 1070.889f, -45.5556f ) );
+			MyMenu->setPos( Vector2( 1070.889f, -45.5556f ) );
 
-        boost::shared_ptr<EzText> _t;
-        _t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 430.5557f, -686.1109f ) ); _t->setScale( 0.72f ); }
-        _t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2( 1016.667f, -677.7777f ) ); _t->setScale( 0.9744995f ); }
-        _t = MyPile->FindEzText( L"Requirement" ); if (_t != 0 ) { _t->setPos( Vector2( 55.55463f, 47.22229f ) ); _t->setScale( 0.8550834f ); }
-        _t = MyPile->FindEzText( L"Requirement2" ); if (_t != 0 ) { _t->setPos( Vector2( 233.3332f, -169.4445f ) ); _t->setScale( 0.8706668f ); }
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Level" ); if (_t != 0 ) { _t->setPos( Vector2( 75.00003f, -741.6663f ) ); _t->setScale( 0.72f ); }
+			_t = MyPile->FindEzText( L"LevelNum" ); if (_t != 0 ) { _t->setPos( Vector2( 1016.667f, -677.7777f ) ); _t->setScale( 0.9744995f ); }
+			_t = MyPile->FindEzText( L"Requirement" ); if (_t != 0 ) { _t->setPos( Vector2( 55.55463f, 47.22229f ) ); _t->setScale( 0.8550834f ); }
+			_t = MyPile->FindEzText( L"Requirement2" ); if (_t != 0 ) { _t->setPos( Vector2( 233.3332f, -169.4445f ) ); _t->setScale( 0.8706668f ); }
 
-        boost::shared_ptr<QuadClass> _q;
-        _q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2( 672.2224f, -219.4444f ) ); _q->setSize( Vector2( 302.8795f, 689.2195f ) ); }
-        _q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-290.4752f, -2200.793f ) ); _q->setSize( Vector2( 1234.721f, 740.8326f ) ); }
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"BoxLeft" ); if (_q != 0 ) { _q->setPos( Vector2( 672.2224f, -219.4444f ) ); _q->setSize( Vector2( 302.8795f, 689.2195f ) ); }
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-290.4752f, -2200.793f ) ); _q->setSize( Vector2( 1234.721f, 740.8326f ) ); }
 
-        MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
+			MyPile->setPos( Vector2( 83.33417f, 130.9524f ) );
 	}
 }

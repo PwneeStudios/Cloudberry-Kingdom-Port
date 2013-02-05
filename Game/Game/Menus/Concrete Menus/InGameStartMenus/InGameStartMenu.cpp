@@ -182,7 +182,7 @@ bool InGameStartMenu::PreventMenu = false;
 
 		// Make the backdrop
         boost::shared_ptr<QuadClass> backdrop;
-        if (UseBounce)
+        if (UseSimpleBackdrop)
             backdrop = boost::make_shared<QuadClass>( L"Arcade_BoxLeft", 1500.0f, true );
         else
             backdrop = boost::make_shared<QuadClass>( L"Backplate_1080x840", 1500.0f, true );		

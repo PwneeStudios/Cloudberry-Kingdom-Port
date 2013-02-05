@@ -81,7 +81,7 @@ namespace CloudberryKingdom
 		static bool SimpleMainMenu;
 		static bool SimpleLeaderboards;
 		static bool AsianButtonSwitch;
-
+		static bool FakeAwardments;
 
 
 

@@ -35,7 +35,7 @@ namespace CloudberryKingdom
 
 	void GUI_LivesLeft::BringInitialDelayHelper::Apply()
 	{
-		guiLl->MyPile->AlphaVel = guiLl->FadeInVel;
+		guiLl->MyPile->AlphaVel = guiLl->FadeInVel * guiLl->FadeInMult;
 		guiLl->MyGame->CinematicToDo( guiLl->ShowLength, boost::make_shared<BringShowLengthHelper>( guiLl ) );
 	}
 
@@ -92,6 +92,7 @@ namespace CloudberryKingdom
 
 	GUI_LivesLeft::GUI_LivesLeft( int Lives ) :
 		PauseOnShow( false ),
+		FadeInMult( 0 ),
 		_NumLives( 0 ),
 		UseBlackBack( false ),
 		FadeInVel( 0 ), FadeOutVel( 0 ),
@@ -170,8 +171,24 @@ namespace CloudberryKingdom
 		StartDelay = 30;
 	}
 
-	void GUI_LivesLeft::Bring()
+	void GUI_LivesLeft::Bring( bool PlusOne )
 	{
+		if ( PlusOne )
+		{
+			FadeInMult = 2;
+
+			LivesLeftText->MyFloatColor = bColor( 84, 232, 79 ).ToVector4();
+			LivesLeftText->OutlineColor = bColor( 0, 0, 0 ).ToVector4();
+			CkColorHelper::_x_x_HappyBlueColor( LivesLeftText );
+		}
+		else
+		{
+			FadeInMult = 1;
+
+			LivesLeftText->MyFloatColor = bColor( 255, 255, 255 ).ToVector4();
+			LivesLeftText->OutlineColor = bColor( 0, 0, 0 ).ToVector4();
+		}
+
 		if ( PauseOnShow )
 		{
 			setPauseLevel( true );
@@ -188,7 +205,7 @@ namespace CloudberryKingdom
 		GUI_Panel::Reset( BoxesOnly );
 
 		if ( !getCore()->MyLevel->Watching && getCore()->MyLevel->PlayMode == 0 )
-			Bring();
+			Bring( false );
 	}
 
 	void GUI_LivesLeft::OnAdd()
@@ -290,6 +307,7 @@ namespace CloudberryKingdom
 		_NumLives = 2;
 		UseBlackBack = false;
 		PauseOnShow = false;
+		FadeInMult = 0;
 		LastLife = 0;
 	}
 }
