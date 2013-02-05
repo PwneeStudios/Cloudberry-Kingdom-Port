@@ -145,7 +145,13 @@ namespace CloudberryKingdom
 			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
 #elif PC_VERSION
-		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+		// FIXME
+		Tools::Warning();
+		CurrentVideo.reset();
+		Duration = 1;
+		Elapsed = 0;
+		return;
 #endif
 
 
@@ -262,7 +268,12 @@ bool MainVideo::Paused = false;
         if ( Elapsed > Duration )
             Playing = false;
 
+#ifdef PC_VERSION
+		// FIXME: PC version should draw the video
+		return true;
+#else
 		VPlayer->DrawFrame();
+#endif
 		/*VEZTexture->setTex( VPlayer->GetTexture() );
 		VEZTexture->Width = VEZTexture->getTex()->Width;
 		VEZTexture->Height = VEZTexture->getTex()->Height;
