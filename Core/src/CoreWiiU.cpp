@@ -71,6 +71,23 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	// FIXME: Docs say to delay this as much as possible.
 	SAVEInit();
 	nn::act::Initialize();
+
+	u8 accountSlot = nn::act::GetSlotNo();
+	u32 persistentId = nn::act::GetPersistentIdEx( accountSlot );
+
+	if( nn::act::IsSlotOccupied( accountSlot ) )
+	{
+		LOG.Write( "Creating account for slot %d with id 0x%X\n", accountSlot, persistentId );
+
+		if( SAVEInitSaveDir( accountSlot ) != SAVE_STATUS_OK )
+		{
+			LOG.Write( "Failed to create save directory.\n" );
+		}
+	}
+
+	LOG.Write( "Creating global directory\n" );
+	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
+		LOG.Write( "Failed to create common directory.\n" );
 }
 
 CoreWiiU::~CoreWiiU()

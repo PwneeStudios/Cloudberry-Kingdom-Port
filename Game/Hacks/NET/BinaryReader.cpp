@@ -2,8 +2,15 @@
 
 #include <Content/File.h>
 #include <Content/Filesystem.h>
-
 #include <Hacks/String.h>
+#include <Utility/Log.h>
+
+#ifdef CAFE
+#include <cafe.h>
+#include <cafe/fs.h>
+#include <nn/save.h>
+#include <nn/act.h>
+#endif
 
 #if defined( CAFE ) || defined( PS3 )
 #define NTOHS( x ) ( ( ( ( x ) & 0xff ) << 8 ) | ( ( ( x ) >> 8 ) & 0xff ) )
@@ -116,22 +123,81 @@ unsigned char FileBinaryReader::PeekChar()
 
 struct SaveReaderWiiUInternal
 {
+	FSClient Client;
+	FSCmdBlock Cmd;
+
+	FSStatus OpenStatus;
+	FSFileHandle Fh;
+
+	u8 AccountSlot;
 };
+
+static void stateChangeCallback( FSClient *pClient, FSVolumeState state, void *pContext )
+{
+	FSError lastError = FSGetLastError( pClient );
+	LOG.Write( "Volume state of client 0X%08X changed to %d\n", pClient, state );
+	LOG.Write( "Last error: %d\n", lastError );
+}
 
 SaveReaderWiiU::SaveReaderWiiU( const std::string &path, bool global )
 	: internal_( new SaveReaderWiiUInternal )
 {
+	memset( internal_, 0, sizeof( SaveReaderWiiUInternal ) );
 
+	FSAddClient( &internal_->Client, FS_RET_NO_ERROR );
+	FSInitCmdBlock( &internal_->Cmd );
+
+	FSStateChangeParams stateChangeParams = {
+		.userCallback = stateChangeCallback,
+		.userContext = NULL,
+		.ioMsgQueue = NULL
+	};
+
+	FSSetStateChangeNotification( &internal_->Client, &stateChangeParams );
+
+	internal_->AccountSlot = global ? ACT_SLOT_NO_COMMON : nn::act::GetSlotNo();
+
+	internal_->OpenStatus = SAVEOpenFile( &internal_->Client, &internal_->Cmd,
+		internal_->AccountSlot, path.c_str(), "r", &internal_->Fh, FS_RET_ALL_ERROR );
 }
 
 SaveReaderWiiU::~SaveReaderWiiU()
 {
+	FSStatus ret;
+	if( internal_->Fh != FS_INVALID_HANDLE_VALUE && internal_->Fh > 0 )
+		ret = FSCloseFile( &internal_->Client, &internal_->Cmd, internal_->Fh, FS_RET_ALL_ERROR );
+
+	FSDelClient( &internal_->Client, FS_RET_NO_ERROR );
+
 	delete internal_;
 }
 
 bool SaveReaderWiiU::ReadEverything( std::vector< unsigned char > &data )
 {
-	return false;
+	if( internal_->OpenStatus != FS_STATUS_OK || internal_->Fh <= 0 )
+		return false;
+
+	FSStat stat;
+	FSStatus ret = FSGetStatFile( &internal_->Client, &internal_->Cmd, internal_->Fh, &stat, FS_RET_ALL_ERROR );
+
+	if( ret != FS_STATUS_OK || stat.size == 0 )
+		return false;
+
+	data.resize( stat.size );
+	unsigned char *aligned = reinterpret_cast< unsigned char * >( MEMAllocFromDefaultHeapEx( stat.size, FS_IO_BUFFER_ALIGN ) );
+	ret = FSReadFile( &internal_->Client, &internal_->Cmd, aligned, data.size(), 1,
+		internal_->Fh, 0, FS_RET_ALL_ERROR );
+	data.assign( aligned, aligned + stat.size );
+	MEMFreeToDefaultHeap( aligned );
+
+	if( ret < 0 )
+		return false;
+
+	if( ret == FS_STATUS_OK )
+		return true;
+
+	// Make sure 1 element was read.
+	return ret == 1;
 }
 
 
