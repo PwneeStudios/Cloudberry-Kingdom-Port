@@ -66,7 +66,11 @@ void EffectParameter::SetValue( const Matrix &m )
 		return;
 
 	internal_->PType = ParamType_Matrix;
-	internal_->CachedMatrix = m;
+	internal_->CachedMatrix.M11 = m.M11;  internal_->CachedMatrix.M12 = m.M21; internal_->CachedMatrix.M13 = m.M31; internal_->CachedMatrix.M14 = m.M41;
+	internal_->CachedMatrix.M21 = m.M12;  internal_->CachedMatrix.M22 = m.M22; internal_->CachedMatrix.M23 = m.M32; internal_->CachedMatrix.M24 = m.M42;
+	internal_->CachedMatrix.M31 = m.M13;  internal_->CachedMatrix.M32 = m.M23; internal_->CachedMatrix.M33 = m.M33; internal_->CachedMatrix.M34 = m.M43;
+	internal_->CachedMatrix.M41 = m.M14;  internal_->CachedMatrix.M42 = m.M24; internal_->CachedMatrix.M43 = m.M34; internal_->CachedMatrix.M44 = m.M44;
+
 	/*GX2SetShaders( &internal_->Parent->Shader.fetchShader, internal_->Parent->Shader.pVertexShader, internal_->Parent->Shader.pPixelShader );
 	GX2SetVertexUniformReg( internal_->Offset, 16, m.M );*/
 }
@@ -123,7 +127,7 @@ void EffectParameter::Apply()
 			GX2SetVertexUniformReg( internal_->Offset, 4, &internal_->CachedVector4 );
 			break;
 		case ParamType_Matrix:
-			GX2SetVertexUniformReg( internal_->Offset, 16, internal_->CachedMatrix.M );
+			GX2SetPixelUniformReg( internal_->Offset, 16, internal_->CachedMatrix.M );
 			break;
 		case ParamType_Texture:
 			break;
