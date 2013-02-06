@@ -4,7 +4,7 @@
 #include "Hacks/Parse.h"
 
 #include "Hacks/NET/File.h"
-#include "Hacks/NET/Path.h"
+#include "Hacks/NET/Path::h"
 #include "Hacks/FileReader.h"
 
 namespace CloudberryKingdom
@@ -196,7 +196,7 @@ namespace CloudberryKingdom
 
 	void Localization::ReadSubtitleInfo( const std::wstring &VideoName )
 	{
-		std::wstring path = Path::Combine( Content->RootDirectory, std::wstring( L"Subtitles" ), VideoName ) + std::wstring( L".txt" );
+		std::wstring path = Path::Combine( std::wstring( L"Content" ), Path::Combine( std::wstring( L"Localization" ), Path::Combine( std::wstring( L"Subtitles" ), Path::Combine( CurrentLanguage->MyDirectory, VideoName ) ) ) ) + L".tsv";
 
 		if ( !File::Exists( path ) ) return;
 

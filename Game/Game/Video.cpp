@@ -76,6 +76,8 @@ namespace CloudberryKingdom
 		CanSkipVideo = true;
 #endif
 
+		Subtitles = Localization::GetSubtitles( MovieName );
+
         if (Subtitles.size() > 0)
         {
             SubtitleIndex = 0;
