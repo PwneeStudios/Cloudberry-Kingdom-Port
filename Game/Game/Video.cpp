@@ -5,7 +5,9 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include "Video.h"
-#include <Core\Tools\Set.h>
+#include <Core/Tools/Set.h>
+#include <Core.h>
+#include <Graphics/QuadDrawer.h>
 
 namespace CloudberryKingdom
 {
@@ -67,7 +69,30 @@ namespace CloudberryKingdom
 		if( finish )
 			MainVideo::Elapsed += 100000000.0;
 		else
-			MainVideo::Elapsed += Tools::TheGame->DeltaT;
+			MainVideo::Elapsed += 0.1f;/*2 *Tools::TheGame->DeltaT*/;
+	}
+
+	// Helper method to draw subtitles from the other thread.
+	static void DrawSubtitles()
+	{
+		Tools::Render->SetStandardRenderStates();
+
+		Tools::QDrawer->SetInitialState();
+
+		Tools::EffectWad->SetCameraPosition(
+			Vector4( 0, 0, 0.001, 0.001 )
+		);
+
+		// FIXME: Get this from a variable.
+		Tools::SetDefaultEffectParams( 1.77778f );
+
+		Tools::Render->SetStandardRenderStates();
+
+		QUAD_DRAWER->SetEffect( Tools::BasicEffect->effect );
+
+		MainVideo::Subtitle();
+		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, ToString( MainVideo::Elapsed ),  Vector2( 0 ), Vector4( 1 ), Vector2( 1 ) );
+		Tools::QDrawer->Flush();
 	}
 
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
@@ -75,6 +100,8 @@ namespace CloudberryKingdom
 #if DEBUG
 		CanSkipVideo = true;
 #endif
+
+		Subtitles = Localization::GetSubtitles( MovieName );
 
         if (Subtitles.size() > 0)
         {
@@ -156,7 +183,7 @@ namespace CloudberryKingdom
 
 
 #ifdef CAFE
-		VPlayer = boost::make_shared<VideoPlayer>( UpdateElapsedTimeProxy );
+		VPlayer = boost::make_shared<VideoPlayer>( UpdateElapsedTimeProxy, DrawSubtitles );
 #else
 		VPlayer = boost::make_shared<VideoPlayer>();
 #endif

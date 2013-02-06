@@ -187,6 +187,9 @@ void FreeAttribData()
     DEMOGfxFreeMEM2(pAttribData->pVertexBuffer);
 }
 
+// Subtitles drawing function pointer from VideoPlayerWiiU.cpp.
+extern void (*DrawSubtitles)();
+
 void drawTVFrame()
 {
     u32 attribBuffer = 0;
@@ -226,6 +229,9 @@ void drawTVFrame()
 
     // Draw
     GX2Draw(GX2_PRIMITIVE_TRIANGLE_STRIP, g_QuadAttribData.vertexCount);
+
+	if( DrawSubtitles )
+		DrawSubtitles();
 
     // Restore state that was saved when DEMOGfxInit was called.
     GX2SetContextState(DEMOContextState);

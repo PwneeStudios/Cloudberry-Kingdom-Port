@@ -658,7 +658,7 @@ else
 }
 
             // Start
-            A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Test, ItemFont ) ) );
+            A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
             item->Name = L"test";
             item->JiggleOnGo = false;
             AddItem( item );
@@ -677,7 +677,7 @@ if ( ButtonCheck::ControllerInUse )
 
 
             // Back
-            B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Back, ItemFont ) ) );
+            B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
             item->Name = L"back";
             AddItem( item );
             item->SelectSound = 0;
@@ -692,7 +692,7 @@ if ( ButtonCheck::ControllerInUse )
 }
 
             // Continue
-            X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Play, ItemFont ) ) );
+            X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
             item->Name = L"continue";
             AddItem( item );
             item->SelectSound = 0;
@@ -708,7 +708,7 @@ if ( ButtonCheck::ControllerInUse )
 }
 
             // Reset
-            item = ResetButton = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Reset, ItemFont ) ) );
+            item = ResetButton = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Reset, ItemFont ) ) );
             item->Name = L"reset";
             AddItem( item );
 			item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
