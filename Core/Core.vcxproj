@@ -29,6 +29,7 @@
     <ClInclude Include="include\Architecture\Singleton.h" />
     <ClInclude Include="include\Audio\AudioEnums.h" />
     <ClInclude Include="include\Content\TextureWiiUInternal.h" />
+    <ClInclude Include="include\Graphics\RenderTarget2D.h" />
     <ClInclude Include="include\Graphics\Texture2D.h" />
     <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />
@@ -153,6 +154,11 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Graphics\EffectWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Graphics\RenderTarget2DPc.cpp" />
+    <ClCompile Include="src\Graphics\RenderTarget2DWiiU.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>

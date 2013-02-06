@@ -782,7 +782,6 @@
     <ClInclude Include="Hacks\XNA\PresentationParameters.h" />
     <ClInclude Include="Hacks\NET\Random.h" />
     <ClInclude Include="Hacks\XNA\Rectangle.h" />
-    <ClInclude Include="Hacks\XNA\RenderTarget2D.h" />
     <ClInclude Include="Hacks\XNA\SamplerState.h" />
     <ClInclude Include="Hacks\XNA\SignedInEventArgs.h" />
     <ClInclude Include="Hacks\XNA\SignedInGamer.h" />
