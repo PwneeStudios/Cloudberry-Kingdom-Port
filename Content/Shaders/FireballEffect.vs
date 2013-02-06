@@ -10,6 +10,7 @@ attribute vec4 a_color;
 varying vec2 v_position;
 varying vec2 v_texcoord;
 varying vec4 v_color;
+varying float v_t;
 
 uniform vec4 u_cameraPos;
 uniform float u_cameraAspect;
@@ -17,6 +18,8 @@ uniform float u_cameraAspect;
 uniform vec2 u_flipVector;
 uniform vec2 u_flipCenter;
 uniform float u_illumination;
+
+uniform float t;
 
 void main()
 {
@@ -30,5 +33,7 @@ void main()
 	v_texcoord = a_texcoord;
     v_color = a_color;
 	v_color.rgb *= u_illumination;
+	
+	v_t = t;
 }
 

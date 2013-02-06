@@ -384,6 +384,9 @@ Words_Chapter6,
 Words_Credits,
 Words_PlayerLevel,
 Words_Delete,
+Words_UpSell_Campaign,
+Words_UpSell_Hero,
+Words_UpSell_FreePlay,
 		};
 
 	
