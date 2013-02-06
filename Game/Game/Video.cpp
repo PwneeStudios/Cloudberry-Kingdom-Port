@@ -145,7 +145,13 @@ namespace CloudberryKingdom
 			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
 #elif PC_VERSION
-		CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
+		// FIXME
+		Tools::Warning();
+		CurrentVideo.reset();
+		Duration = 1;
+		Elapsed = 0;
+		return;
 #endif
 
 
@@ -252,6 +258,8 @@ bool MainVideo::Paused = false;
 			return false;
 		}
 
+		Tools::EffectWad->SetCameraPosition( Vector4( 0.f, 0.f, .001f, .001f ) );
+
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
 #ifndef CAFE
@@ -262,12 +270,18 @@ bool MainVideo::Paused = false;
         if ( Elapsed > Duration )
             Playing = false;
 
+#ifdef PC_VERSION
+		// FIXME: PC version should draw the video
+		return true;
+#else
 		VPlayer->DrawFrame();
+#endif
 		/*VEZTexture->setTex( VPlayer->GetTexture() );
 		VEZTexture->Width = VEZTexture->getTex()->Width;
 		VEZTexture->Height = VEZTexture->getTex()->Height;
 
-		Vector2 Pos = Tools::getCurCamera()->getPos();
+		Vector2 Pos = Vector2(0);
+		//Vector2 Pos = Tools::getCurCamera()->getPos();
 		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
 		Tools::QDrawer->Flush();*/
 

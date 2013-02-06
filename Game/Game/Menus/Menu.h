@@ -43,6 +43,15 @@ namespace CloudberryKingdom
 			void Apply();
 		};
 
+		struct Lambda_1Wrapper_MenuItem : public Lambda
+		{
+		
+			boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > a;
+		
+			Lambda_1Wrapper_MenuItem( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a );
+
+			void Apply();
+		};
 	
 		struct ToMenuHelper : public LambdaFunc_1<boost::shared_ptr<Menu> , bool>
 		{
@@ -63,6 +72,8 @@ namespace CloudberryKingdom
 		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > ToItem( const boost::shared_ptr<Lambda> &a );
 
 		static boost::shared_ptr<Lambda> ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a );
+
+		static boost::shared_ptr<Lambda> ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a );
 	};
 
 	struct Menu : public boost::enable_shared_from_this<Menu>
@@ -93,8 +104,17 @@ namespace CloudberryKingdom
 		
 			static Vector4 SelectedNextColor;
 			static Vector4 SelectedBackColor;
+			static Vector4 SelectedXColor;
+			static Vector4 SelectedYColor;
 			static Vector4 UnselectedNextColor;
 			static Vector4 UnselectedBackColor;
+			static Vector4 UnselectedXColor;
+			static Vector4 UnselectedYColor;
+
+			static void SetNext( boost::shared_ptr<MenuItem> item);
+			static void SetBack( boost::shared_ptr<MenuItem> item);
+			static void SetX( boost::shared_ptr<MenuItem> item);
+			static void SetY( boost::shared_ptr<MenuItem> item);
 
 			static boost::shared_ptr<EzSound> Menu_UpDown_Sound;
 			static boost::shared_ptr<EzSound> Menu_Select_Sound;

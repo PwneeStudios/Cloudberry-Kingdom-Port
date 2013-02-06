@@ -132,10 +132,19 @@ namespace CloudberryKingdom
 		ActionGameData::InitializeStatics();
 
 		// Menu::DefaultMenuInfo
-		Menu::DefaultMenuInfo::SelectedNextColor = ( bColor( 100, 250, 100, 255 ) ).ToVector4();
-		Menu::DefaultMenuInfo::SelectedBackColor = ( bColor( 250, 100, 100, 255 ) ).ToVector4();
-		Menu::DefaultMenuInfo::UnselectedNextColor = ( bColor( 40, 180, 40, 255 ) ).ToVector4();
-		Menu::DefaultMenuInfo::UnselectedBackColor = ( bColor( 180, 40, 40, 255 ) ).ToVector4();
+            Menu::DefaultMenuInfo::SelectedNextColor = bColor(100, 250, 100, 255).ToVector4();
+			Menu::DefaultMenuInfo::UnselectedNextColor = bColor(40, 180, 40, 255).ToVector4();
+
+			Menu::DefaultMenuInfo::SelectedBackColor = bColor(250, 100, 100, 255).ToVector4();
+            Menu::DefaultMenuInfo::UnselectedBackColor = bColor(180, 40, 40, 255).ToVector4();
+			
+			Menu::DefaultMenuInfo::SelectedXColor = bColor(75, 142, 240, 255).ToVector4();
+			Menu::DefaultMenuInfo::UnselectedXColor = bColor(55, 125, 229, 255).ToVector4();
+			
+			Menu::DefaultMenuInfo::SelectedYColor = bColor(255, 226, 155, 255).ToVector4();
+			Menu::DefaultMenuInfo::UnselectedYColor = bColor(255, 198, 55, 255).ToVector4();
+
+
 		Menu::DefaultMenuInfo::Menu_UpDown_Sound = Tools::NewSound( std::wstring( L"Menu_Hover" ),.7f );
 		Menu::DefaultMenuInfo::Menu_Select_Sound = Tools::NewSound( std::wstring( L"Menu_Select" ),.6f );
 		Menu::DefaultMenuInfo::Menu_Slide_Sound = Tools::NewSound( std::wstring( L"Menu_Tick" ),.3f );

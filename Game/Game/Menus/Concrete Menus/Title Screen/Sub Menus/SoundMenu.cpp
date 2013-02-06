@@ -108,13 +108,7 @@ namespace CloudberryKingdom
 
 	void SoundMenu::Init()
 	{
-			ChosenLanguage = Localization::CurrentLanguage->MyLanguage;
-
-#if defined(PC_VERSION)
-            bool ConsoleVersion = false;
-#else
-            bool ConsoleVersion = true;
-#endif
+		ChosenLanguage = Localization::CurrentLanguage->MyLanguage;
 
 		VerifyBaseMenu::Init();
 
@@ -125,11 +119,7 @@ namespace CloudberryKingdom
 
 		this->FontScale *= .9f;
 
-#ifdef PC_VERSION
         bool CenterItems = false;
-#else
-        bool CenterItems = false;
-#endif
 
 		// Header
 		HeaderText = boost::make_shared<EzText>( Localization::Words_Options, ItemFont );
@@ -257,12 +247,22 @@ namespace CloudberryKingdom
 	#endif
 
 		// Credits
+#ifdef XBOX
+		if (true)
+#else
 		if ( LanguageOption && !CloudberryKingdomGame::HideLogos )
+#endif
 		{
 			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>(Localization::Words_Credits, ItemFont, CenterItems) ) );
 			item->setGo( Cast::ToItem( boost::make_shared<Go_CreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ) ) );
 			item->Name = L"Credits";
 			AddItem(item);
+
+			// Black
+			Black = boost::make_shared<QuadClass>();
+			Black->FullScreen( Tools::getCurCamera() );
+			Black->Quad_Renamed.SetColor( Color::Black );
+			Black->setAlpha( 0 );
 		}
 
 #ifdef PC_VERSION
@@ -272,10 +272,11 @@ namespace CloudberryKingdom
             //MakeStaticBackButton();
 #endif
 
-		if ( ConsoleVersion )
-			SetPosition_Console();
-		else
+#ifdef PC_VERSION
 			SetPosition_PC();
+#else
+			SetPosition_Console();
+#endif
 
 		MyMenu->SortByHeight();
 
@@ -337,7 +338,7 @@ namespace CloudberryKingdom
 		void SoundMenu::StartCredits()
 		{
 			MyGame->WaitThenDo(20, boost::make_shared<AfterCreditsProxy>( boost::static_pointer_cast<SoundMenu>( shared_from_this() ) ));
-			MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"Credits" ) );
+			MainVideo::StartVideo( std::wstring( L"Credits" ), false, 1.0f );
 		}
 
 		void SoundMenu::AfterCredits()
@@ -459,7 +460,8 @@ namespace CloudberryKingdom
                 _item = MyMenu->FindItemByName( L"Sound" ); if (_item != 0 ) { _item->setSetPos( Vector2(-27.38177f, 745.9205f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1686.11f, -152.7778f ); }
                 _item = MyMenu->FindItemByName( L"Music" ); if (_item != 0 ) { _item->setSetPos( Vector2(-27.38177f, 531.5082f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1686.11f, -150.0001f ); }
                 _item = MyMenu->FindItemByName( L"Controls" ); if (_item != 0 ) { _item->setSetPos( Vector2(-27.38177f, 306.3806f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-                _item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1344.84f, -129.4444f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Credits" ); if (_item != 0 ) { _item->setSetPos( Vector2(-27.38177f, 85.99994f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1344.84f, -129.4444f ) ); _item->MyText->setScale( 0.6704169f ); _item->MySelectedText->setScale( 0.6704169f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
                 MyMenu->setPos( Vector2(-980.1562f, -338.0954f ) );
 
@@ -477,6 +479,60 @@ namespace CloudberryKingdom
         {
             if ( LanguageOption )
             {
+if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_ITALIAN )
+{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Sound" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 729.2538f ) ); _item->MyText->setScale( 0.6606668f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -152.7778f ); }
+				_item = MyMenu->FindItemByName( L"Music" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 537.0638f ) ); _item->MyText->setScale( 0.6916667f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -136.1112f ); }
+				_item = MyMenu->FindItemByName( L"RezList" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1077.38f, 151.8088f ) ); _item->MyText->setScale( 0.6119168f ); _item->MySelectedText->setScale( 0.6119168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"FullscreenToggle" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1090.078f, 101.3653f ) ); _item->MyText->setScale( 0.6095002f ); _item->MySelectedText->setScale( 0.6095002f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"LanguageList" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1088.888f, -200.1113f ) ); _item->MyText->setScale( 0.6166669f ); _item->MySelectedText->setScale( 0.6166669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Controls" ); if (_item != 0 ) { _item->setSetPos( Vector2( 538.491f, -254.7306f ) ); _item->MyText->setScale( 0.6705834f ); _item->MySelectedText->setScale( 0.6705834f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Custom" ); if (_item != 0 ) { _item->setSetPos( Vector2( 402.7765f, -441.3655f ) ); _item->MyText->setScale( 0.6581671f ); _item->MySelectedText->setScale( 0.6581671f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Credits" ); if (_item != 0 ) { _item->setSetPos( Vector2( 580.5563f, -616.7772f ) ); _item->MyText->setScale( 0.6445836f ); _item->MySelectedText->setScale( 0.6445836f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1603.173f, -621.111f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+
+				MyMenu->setPos( Vector2(-1007.934f, -43.651f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1072.62f, 968.3172f ) ); _t->setScale( 0.864f ); }
+				_t = MyPile->FindEzText( L"Language" ); if (_t != 0 ) { _t->setPos( Vector2(-1161.11f, -133.3337f ) ); _t->setScale( 0.6308331f ); }
+				_t = MyPile->FindEzText( L"RezText" ); if (_t != 0 ) { _t->setPos( Vector2(-1157.143f, 213.9516f ) ); _t->setScale( 0.6066011f ); }
+				_t = MyPile->FindEzText( L"Fullscreen" ); if (_t != 0 ) { _t->setPos( Vector2(-1151.586f, 33.39727f ) ); _t->setScale( 0.5670165f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-18.6521f, -10.31725f ) ); _q->setSize( Vector2( 1376.984f, 1077.035f ) ); }
+
+				MyPile->setPos( Vector2( 29.76172f, 21.82541f ) );
+}
+else if ( Localization::CurrentLanguage->MyLanguage == Localization::Language_SPANISH )
+{
+				boost::shared_ptr<MenuItem> _item;
+				_item = MyMenu->FindItemByName( L"Sound" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 729.2538f ) ); _item->MyText->setScale( 0.6606668f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -152.7778f ); }
+				_item = MyMenu->FindItemByName( L"Music" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 537.0638f ) ); _item->MyText->setScale( 0.6916667f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -136.1112f ); }
+				_item = MyMenu->FindItemByName( L"RezList" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1077.38f, 151.8088f ) ); _item->MyText->setScale( 0.6119168f ); _item->MySelectedText->setScale( 0.6119168f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"FullscreenToggle" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1090.078f, 101.3653f ) ); _item->MyText->setScale( 0.6095002f ); _item->MySelectedText->setScale( 0.6095002f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"LanguageList" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1088.888f, -200.1113f ) ); _item->MyText->setScale( 0.6166669f ); _item->MySelectedText->setScale( 0.6166669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Controls" ); if (_item != 0 ) { _item->setSetPos( Vector2( 538.491f, -254.7306f ) ); _item->MyText->setScale( 0.6705834f ); _item->MySelectedText->setScale( 0.6705834f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Custom" ); if (_item != 0 ) { _item->setSetPos( Vector2( 402.7765f, -441.3655f ) ); _item->MyText->setScale( 0.6581671f ); _item->MySelectedText->setScale( 0.6581671f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Credits" ); if (_item != 0 ) { _item->setSetPos( Vector2( 580.5563f, -616.7772f ) ); _item->MyText->setScale( 0.6445836f ); _item->MySelectedText->setScale( 0.6445836f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+				_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1603.173f, -621.111f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f );  }
+
+				MyMenu->setPos( Vector2(-1007.934f, -43.651f ) );
+
+				boost::shared_ptr<EzText> _t;
+				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1072.62f, 968.3172f ) ); _t->setScale( 0.864f ); }
+				_t = MyPile->FindEzText( L"Language" ); if (_t != 0 ) { _t->setPos( Vector2(-1161.11f, -133.3337f ) ); _t->setScale( 0.6308331f ); }
+				_t = MyPile->FindEzText( L"RezText" ); if (_t != 0 ) { _t->setPos( Vector2(-1157.143f, 213.9516f ) ); _t->setScale( 0.6066011f ); }
+				_t = MyPile->FindEzText( L"Fullscreen" ); if (_t != 0 ) { _t->setPos( Vector2(-1151.586f, 33.39727f ) ); _t->setScale( 0.5670165f ); }
+
+				boost::shared_ptr<QuadClass> _q;
+				_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-18.6521f, -10.31725f ) ); _q->setSize( Vector2( 1376.984f, 1077.035f ) ); }
+
+				MyPile->setPos( Vector2( 29.76172f, 21.82541f ) );
+}
+else
+{
 				boost::shared_ptr<MenuItem> _item;
 				_item = MyMenu->FindItemByName( L"Sound" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 729.2538f ) ); _item->MyText->setScale( 0.6606668f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -152.7778f ); }
 				_item = MyMenu->FindItemByName( L"Music" ); if (_item != 0 ) { _item->setSetPos( Vector2(-169.048f, 537.0638f ) ); _item->MyText->setScale( 0.6916667f ); _item->MySelectedText->setScale( 0.6606668f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); boost::static_pointer_cast<MenuSlider>( _item )->SliderShift = Vector2( 1869.443f, -136.1112f ); }
@@ -485,21 +541,22 @@ namespace CloudberryKingdom
 				_item = MyMenu->FindItemByName( L"LanguageList" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1088.888f, -200.1113f ) ); _item->MyText->setScale( 0.6166669f ); _item->MySelectedText->setScale( 0.6166669f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Controls" ); if (_item != 0 ) { _item->setSetPos( Vector2( 538.491f, -254.7306f ) ); _item->MyText->setScale( 0.6705834f ); _item->MySelectedText->setScale( 0.6705834f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Custom" ); if (_item != 0 ) { _item->setSetPos( Vector2( 402.7765f, -441.3655f ) ); _item->MyText->setScale( 0.6581671f ); _item->MySelectedText->setScale( 0.6581671f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
-				_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1603.173f, -621.111f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 				_item = MyMenu->FindItemByName( L"Credits" ); if (_item != 0 ) { _item->setSetPos( Vector2( 580.5563f, -616.7772f ) ); _item->MyText->setScale( 0.6445836f ); _item->MySelectedText->setScale( 0.6445836f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+				_item = MyMenu->FindItemByName( L"Back" ); if (_item != 0 ) { _item->setSetPos( Vector2( 1603.173f, -621.111f ) ); _item->MyText->setScale( 0.72f ); _item->MySelectedText->setScale( 0.72f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
 				MyMenu->setPos( Vector2(-1007.934f, -43.651f ) );
 
 				boost::shared_ptr<EzText> _t;
 				_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-1072.62f, 968.3172f ) ); _t->setScale( 0.864f ); }
 				_t = MyPile->FindEzText( L"Language" ); if (_t != 0 ) { _t->setPos( Vector2(-1036.11f, -119.4448f ) ); _t->setScale( 0.6748332f ); }
-				_t = MyPile->FindEzText( L"RezText" ); if (_t != 0 ) { _t->setPos( Vector2(-1032.143f, 236.1738f ) ); _t->setScale( 0.6868508f ); }
+				_t = MyPile->FindEzText( L"RezText" ); if (_t != 0 ) { _t->setPos( Vector2(-1040.476f, 238.9516f ) ); _t->setScale( 0.6868508f ); }
 				_t = MyPile->FindEzText( L"Fullscreen" ); if (_t != 0 ) { _t->setPos( Vector2(-1040.475f, 63.95281f ) ); _t->setScale( 0.7051834f ); }
 
 				boost::shared_ptr<QuadClass> _q;
 				_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2(-18.6521f, -10.31725f ) ); _q->setSize( Vector2( 1376.984f, 1077.035f ) ); }
 
 				MyPile->setPos( Vector2( 29.76172f, 21.82541f ) );
+}
 			}
             else
             {
@@ -527,19 +584,11 @@ namespace CloudberryKingdom
                 MyPile->setPos( Vector2( 29.76172f, 21.82541f ) );
             }
         }
+		
 
 	void SoundMenu::OnAdd()
 	{
 		 VerifyBaseMenu::OnAdd();
-
-		if (LanguageOption)
-		{
-			// Black
-			Black = boost::make_shared<QuadClass>();
-			Black->FullScreen( Tools::getCurCamera() );
-			Black->Quad_Renamed.SetColor( Color::Black );
-			Black->setAlpha( 0 );
-		}
 	}
 
 		void SoundMenu::MyDraw()

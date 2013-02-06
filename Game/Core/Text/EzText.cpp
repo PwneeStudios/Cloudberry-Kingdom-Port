@@ -23,13 +23,21 @@ namespace CloudberryKingdom
 	boost::shared_ptr<EzTexture> ButtonTexture::getBack() { return CloudberryKingdomGame::AsianButtonSwitch ? _Go() : _Back(); }
 
 #ifdef PC_VERSION					 
-    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_A" ) : std::wstring( L"Enter_Key" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_B" ) : std::wstring( L"Esc_Key" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_X" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_Y" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_Dir" ) : std::wstring( L"LeftRight_Key" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_LB" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_RB" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( true ? L"WiiU_B" : L"WiiU_2" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( true ? L"WiiU_A" : L"WiiU_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( true ? L"WiiU_Y" : L"WiiU_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( true ? L"WiiU_X" : L"WiiU_Dash" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( true ? L"WiiU_Dir" : L"WiiU_Dir" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return Tools::Texture( std::wstring( true ? L"WiiU_R" : L"WiiU_R" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( true ? L"WiiU_L" : L"WiiU_L" ) ); }
+
+    //boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_A" ) : std::wstring( L"Enter_Key" ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_B" ) : std::wstring( L"Esc_Key" ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::getX() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_X" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::SlowMoToggle_Secondary ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::getY() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_Y" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::Help_KeyboardKey->KeyboardKey ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( ButtonCheck::ControllerInUse ? std::wstring( L"Xbox_Dir" ) : std::wstring( L"LeftRight_Key" ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::getLeftBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_LB" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayPrev_Secondary ) ); }
+    //boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return ButtonCheck::ControllerInUse ? Tools::Texture( std::wstring( L"Xbox_RB" ) ) : Tools::Texture( ButtonString::KeyToTexture( ButtonCheck::ReplayNext_Secondary ) ); }
 #elif PS3						 
     boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( L"PS3_X" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( L"PS3_Circle" ) ); }

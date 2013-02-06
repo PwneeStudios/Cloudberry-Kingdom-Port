@@ -418,6 +418,8 @@ namespace CloudberryKingdom
 		BaseList->Name = std::wstring( L"base" );
 		for ( Hero_BaseType _hero = static_cast<Hero_BaseType>( 0 ); _hero != Hero_BaseType_LENGTH; Incr( _hero ) )
 		{
+			if ( _hero == Hero_BaseType_MEAT ) continue;
+
 			boost::shared_ptr<BobPhsx> hero = BobPhsx::GetPhsx_Base( _hero );
 
 			item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( hero->Name, ItemFont, false, true ) ) );
@@ -610,103 +612,33 @@ namespace CloudberryKingdom
 	}
 
 	void CustomHero_GUI::SetPos()
-	{
-		boost::shared_ptr<MenuItem> _item;
-		_item = MyMenu->FindItemByName( std::wstring( L"base" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1655.38f, 642.6317f ) );
-			_item->MyText->setScale( 0.5f );
-			_item->MySelectedText->setScale( 0.5f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"jump" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1653.446f, 451.6321f ) );
-			_item->MyText->setScale( 0.5f );
-			_item->MySelectedText->setScale( 0.5f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"size" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1656.223f, 256.2355f ) );
-			_item->MyText->setScale( 0.5f );
-			_item->MySelectedText->setScale( 0.5f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"test" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1914.311f, 134.3449f ) );
-			_item->MyText->setScale( 0.7685415f );
-			_item->MySelectedText->setScale( 0.7685415f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"back" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1909.15f, -90.52583f ) );
-			_item->MyText->setScale( 0.6955291f );
-			_item->MySelectedText->setScale( 0.6955291f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"continue" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1915.104f, -288.0107f ) );
-			_item->MyText->setScale( 0.7520385f );
-			_item->MySelectedText->setScale( 0.7520385f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
-		_item = MyMenu->FindItemByName( std::wstring( L"reset" ) );
-		if ( _item != 0 )
-		{
-			_item->setSetPos( Vector2( -1916.694f, -502.1649f ) );
-			_item->MyText->setScale( 0.7f );
-			_item->MySelectedText->setScale( 0.7f );
-			_item->SelectIconOffset = Vector2( 0, 0 );
-		}
+        {
+			boost::shared_ptr<MenuItem> _item;
+			_item = MyMenu->FindItemByName( L"base" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1655.38f, 642.6317f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"jump" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1653.446f, 451.6321f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"size" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1656.223f, 256.2355f ) ); _item->MyText->setScale( 0.5f ); _item->MySelectedText->setScale( 0.5f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"test" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1914.311f, 134.3449f ) ); _item->MyText->setScale( 0.7685415f ); _item->MySelectedText->setScale( 0.7685415f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"back" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1909.15f, -90.52583f ) ); _item->MyText->setScale( 0.6955291f ); _item->MySelectedText->setScale( 0.6955291f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"continue" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1915.104f, -288.0107f ) ); _item->MyText->setScale( 0.7520385f ); _item->MySelectedText->setScale( 0.7520385f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
+			_item = MyMenu->FindItemByName( L"reset" ); if (_item != 0 ) { _item->setSetPos( Vector2(-1916.694f, -502.1649f ) ); _item->MyText->setScale( 0.7f ); _item->MySelectedText->setScale( 0.7f ); _item->SelectIconOffset = Vector2( 0.f, 0.f ); }
 
-		MyMenu->setPos( Vector2( 1166.862f, -69.45605f ) );
+			MyMenu->setPos( Vector2( 1166.862f, -69.45605f ) );
 
-		boost::shared_ptr<EzText> _t;
-		_t = MyPile->FindEzText( std::wstring( L"Header" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -664.2021f, 960.7101f ) );
-			_t->setScale( 0.8010691f );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"base" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -1269.655f, 708.4517f ) );
-			_t->setScale( 0.6189448f );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"jump" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -1270.534f, 507.2669f ) );
-			_t->setScale( 0.5981081f );
-		}
-		_t = MyPile->FindEzText( std::wstring( L"size" ) );
-		if ( _t != 0 )
-		{
-			_t->setPos( Vector2( -1234.811f, 317.9383f ) );
-			_t->setScale( 0.6634525f );
-		}
+			boost::shared_ptr<EzText> _t;
+			_t = MyPile->FindEzText( L"Header" ); if (_t != 0 ) { _t->setPos( Vector2(-664.2021f, 960.7101f ) ); _t->setScale( 0.8010691f ); }
+			_t = MyPile->FindEzText( L"base" ); if (_t != 0 ) { _t->setPos( Vector2(-1269.655f, 708.4517f ) ); _t->setScale( 0.6189448f ); }
+			_t = MyPile->FindEzText( L"jump" ); if (_t != 0 ) { _t->setPos( Vector2(-1270.534f, 507.2669f ) ); _t->setScale( 0.5981081f ); }
+			_t = MyPile->FindEzText( L"size" ); if (_t != 0 ) { _t->setPos( Vector2(-1234.811f, 317.9383f ) ); _t->setScale( 0.6634525f ); }
 
-		boost::shared_ptr<QuadClass> _q;
-		_q = MyPile->FindQuad( std::wstring( L"Backdrop" ) );
-		if ( _q != 0 )
-		{
-			_q->setPos( Vector2( 0, 0 ) );
-			_q->setSize( Vector2( 1500, 1083.871f ) );
-		}
+			boost::shared_ptr<QuadClass> _q;
+			_q = MyPile->FindQuad( L"Backdrop" ); if (_q != 0 ) { _q->setPos( Vector2( 0.f, 0.f ) ); _q->setSize( Vector2( 1500.f, 1083.871f ) ); }
+			_q = MyPile->FindQuad( L"Button_A" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -77.78476f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
+			_q = MyPile->FindQuad( L"Button_B" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -297.2718f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
+			_q = MyPile->FindQuad( L"Button_X" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -505.6396f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
+			_q = MyPile->FindQuad( L"Button_Y" ); if (_q != 0 ) { _q->setPos( Vector2(-830.694f, -702.895f ) ); _q->setSize( Vector2( 84.f, 84.f ) ); }
 
-		MyPile->setPos( Vector2( 0, 0 ) );
-	}
+			MyPile->setPos( Vector2( 0.f, 0.f ) );
+		}
 
 	void CustomHero_GUI::MakeOptionItems()
 	{
@@ -714,78 +646,81 @@ namespace CloudberryKingdom
 
 		float bigscale = .52f;
 		float scale = .52f;
+		
+		bool WithButtonPics;
+if (ButtonCheck::ControllerInUse)
+{
+		WithButtonPics = true;
+}
+else
+{
+		WithButtonPics = false;            
+}
 
-	#if defined(PC_VERSION)
-		bool WithButtonPics = false;
-	#else
-		bool WithButtonPics = true;
-	#endif
+            // Start
+            A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Test, ItemFont ) ) );
+            item->Name = L"test";
+            item->JiggleOnGo = false;
+            AddItem( item );
+            item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
+if ( ButtonCheck::ControllerInUse )
+{
+#if XBOX || PC_VERSION
+			Menu::DefaultMenuInfo::SetNext( item );
+#endif
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, std::wstring( L"Button_A" ) ) );
+            item->Selectable = false;
+}
 
-		// Start
-		if ( WithButtonPics )
-		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_A" ) ) ) );
-			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
-		}
-		else
-			A = Start = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Test, ItemFont ) ) );
-		item->Name = std::wstring( L"test" );
-		item->JiggleOnGo = false;
-		AddItem( item );
-		item->setGo( Cast::ToItem( boost::make_shared<StartTestProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
-		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
-		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
-	#if defined(NOT_PC)
-		item->Selectable = false;
-	#endif
-
-		// Select 'Start Level' when the user presses (A)
-		MyMenu->OnA = Cast::ToMenu( Start->getGo() );
+            // Select 'Start Level' when the user presses ( A )
+            MyMenu->OnA = Cast::ToMenu( Start->getGo() );
 
 
-		// Back
-		if ( WithButtonPics )
-		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_B" ) ) ) );
-			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
-		}
-		else
-			B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Back, ItemFont ) ) );
-		item->Name = std::wstring( L"back" );
-		AddItem( item );
-		item->SelectSound.reset();
-		item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
-		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
-		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
-	#if defined(NOT_PC)
-		item->Selectable = false;
-	#endif
+            // Back
+            B = Back = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Back, ItemFont ) ) );
+            item->Name = L"back";
+            AddItem( item );
+            item->SelectSound = 0;
+            item->setGo( Cast::ToItem( boost::make_shared<ReturnToCallerProxy>( boost::static_pointer_cast<CkBaseMenu>( shared_from_this() ) ) ) );
+if ( ButtonCheck::ControllerInUse )
+{
+#if XBOX || PC_VERSION
+			Menu::DefaultMenuInfo::SetBack( item );
+#endif
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, std::wstring( L"Button_B" ) ) );
+            item->Selectable = false;
+}
 
-		// Continue
-		if ( WithButtonPics )
-		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, static_cast<std::wstring>( std::wstring( L"Button_X" ) ) ) );
-			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
-		}
-		else
-			X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Play, ItemFont ) ) );
+            // Continue
+            X = item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Play, ItemFont ) ) );
+            item->Name = L"continue";
+            AddItem( item );
+            item->SelectSound = 0;
+			item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
+if ( ButtonCheck::ControllerInUse )
+{
+#if XBOX || PC_VERSION
+			Menu::DefaultMenuInfo::SetX( item );
+#endif
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, std::wstring( L"Button_X" ) ) );
+            item->Selectable = false;
+            MyMenu->OnX = Cast::ToMenu( X->getGo() );
+}
 
-		item->Name = std::wstring( L"continue" );
-		AddItem( item );
-		item->SelectSound.reset();
-		item->MyText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4() *.93f;
-		item->MySelectedText->MyFloatColor = ( bColor( 204, 220, 255 ) ).ToVector4();
-	#if defined(NOT_PC)
-		item->Selectable = false;
-		MyMenu->OnX = Cast::ToMenu( X->getGo() );
-	#endif
-		item->setGo( Cast::ToItem( boost::make_shared<NextProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ) );
-
-		// Reset
-		item = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words_Reset, ItemFont ) ) );
-		item->Name = std::wstring( L"reset" );
-		AddItem( item );
-		item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
+            // Reset
+            item = ResetButton = MakeMagic( MenuItem, ( boost::make_shared<EzText>( Localization::Words::Words_Reset, ItemFont ) ) );
+            item->Name = L"reset";
+            AddItem( item );
+			item->setGo( Cast::ToItem( boost::make_shared<ResetSlidersProxy>( boost::static_pointer_cast<CustomHero_GUI>( shared_from_this() ) ) ));
+if ( ButtonCheck::ControllerInUse )
+{
+#if XBOX || PC_VERSION
+			Menu::DefaultMenuInfo::SetY( item );
+#endif
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.0f, std::wstring( L"Button_Y" ) ) );
+            item->Selectable = false;
+            MyMenu->OnY = Cast::ToAction( item->getGo() );
+}
 	}
 
 	bool CustomHero_GUI::AdvancedAvailable()
