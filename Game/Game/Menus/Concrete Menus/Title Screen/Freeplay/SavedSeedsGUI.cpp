@@ -377,8 +377,12 @@ else
 			else if ( n == 1 ) GoString = Format( Localization::WordString( Localization::Words_DeleteSeeds ).c_str(), n );
 			else		       GoString = Format( Localization::WordString( Localization::Words_DeleteSeedsPlural ).c_str(), n );
 
-			MyMenu->FindItemByName( L"Load" )->MyText->SubstituteText( GoString );
-			MyMenu->FindItemByName( L"Load" )->MySelectedText->SubstituteText( GoString );
+			boost::shared_ptr<MenuItem> _item = MyMenu->FindItemByName( L"Load" );
+			if ( _item != 0 )
+			{
+				_item->MyText->SubstituteText( GoString );
+				_item->MySelectedText->SubstituteText( GoString );
+			}
 		}
 
 	#if defined(WINDOWS)
@@ -520,11 +524,11 @@ if ( ButtonCheck::ControllerInUse )
 		AddItem( item );
 		item->SelectSound = 0;
 		item->UnaffectedByScroll = true;
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, L"Button_A" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, std::wstring( L"Button_A" ) ) );
 		item->Selectable = false;
 #if XBOX
-		item->MyText->MyFloatColor = Menu::DefaultMenuInfo->UnselectedBackColor;
-		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo->SelectedBackColor;
+		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
+		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 #endif
 }
 
@@ -537,7 +541,7 @@ if ( ButtonCheck::ControllerInUse )
 		item->SelectSound = 0;
 		item->UnaffectedByScroll = true;
 
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, L"Button_X" ));
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, std::wstring( L"Button_X" ) ) );
 		item->Selectable = false;
 #if XBOX
 		item->MyText->MyFloatColor = Color( 204, 220, 255 )->ToVector4();
@@ -554,12 +558,12 @@ if ( ButtonCheck::ControllerInUse )
 		item->UnaffectedByScroll = true;
 if ( ButtonCheck::ControllerInUse )
 {
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, L"Button_B" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, std::wstring( L"Button_B" ) ) );
 		item->Selectable = false;
 }
 #if XBOX
-		item->MyText->MyFloatColor = Menu::DefaultMenuInfo->UnselectedBackColor;
-		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo->SelectedBackColor;
+		item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
+		item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
 #endif
 	}
 }

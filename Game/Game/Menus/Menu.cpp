@@ -9,10 +9,50 @@ namespace CloudberryKingdom
 {
 
 	// Statics
-	Vector4 Menu::DefaultMenuInfo::SelectedNextColor;
-	Vector4 Menu::DefaultMenuInfo::SelectedBackColor;
-	Vector4 Menu::DefaultMenuInfo::UnselectedNextColor;
-	Vector4 Menu::DefaultMenuInfo::UnselectedBackColor;
+            Vector4 Menu::DefaultMenuInfo::SelectedNextColor;
+			Vector4 Menu::DefaultMenuInfo::UnselectedNextColor;
+
+			Vector4 Menu::DefaultMenuInfo::SelectedBackColor;
+            Vector4 Menu::DefaultMenuInfo::UnselectedBackColor;
+			
+			Vector4 Menu::DefaultMenuInfo::SelectedXColor;
+			Vector4 Menu::DefaultMenuInfo::UnselectedXColor;
+			
+			Vector4 Menu::DefaultMenuInfo::SelectedYColor;
+			Vector4 Menu::DefaultMenuInfo::UnselectedYColor;
+
+			void Menu::DefaultMenuInfo::SetNext( boost::shared_ptr<MenuItem> item)
+			{
+				item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedNextColor;
+				item->MyText->OutlineColor = Color::Black.ToVector4();
+				item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedNextColor;
+				item->MySelectedText->OutlineColor = Color::Black.ToVector4();
+			}
+
+			void Menu::DefaultMenuInfo::SetBack( boost::shared_ptr<MenuItem> item)
+			{
+				item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedBackColor;
+				item->MyText->OutlineColor = Color::Black.ToVector4();
+				item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedBackColor;
+				item->MySelectedText->OutlineColor = Color::Black.ToVector4();
+			}
+
+			void Menu::DefaultMenuInfo::SetX( boost::shared_ptr<MenuItem> item)
+			{
+				item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedXColor;
+				item->MyText->OutlineColor = Color::Black.ToVector4();
+				item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedXColor;
+				item->MySelectedText->OutlineColor = Color::Black.ToVector4();
+			}
+
+			void Menu::DefaultMenuInfo::SetY( boost::shared_ptr<MenuItem> item)
+			{
+				item->MyText->MyFloatColor = Menu::DefaultMenuInfo::UnselectedYColor;
+				item->MyText->OutlineColor = Color::Black.ToVector4();
+				item->MySelectedText->MyFloatColor = Menu::DefaultMenuInfo::SelectedYColor;
+				item->MySelectedText->OutlineColor = Color::Black.ToVector4();
+			}
+
 	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_UpDown_Sound;
 	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Select_Sound;
 	boost::shared_ptr<EzSound> Menu::DefaultMenuInfo::Menu_Slide_Sound;
@@ -69,6 +109,16 @@ namespace CloudberryKingdom
 		a->Apply( 0 );
 	}
 
+	Cast::Lambda_1Wrapper_MenuItem::Lambda_1Wrapper_MenuItem( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a )
+	{
+		this->a = a;
+	}
+
+	void Cast::Lambda_1Wrapper_MenuItem::Apply()
+	{
+		a->Apply( 0 );
+	}
+
 	Cast::ToMenuHelper::ToMenuHelper( const boost::shared_ptr<Lambda> &a )
 	{
 		this->a = a;
@@ -98,6 +148,11 @@ namespace CloudberryKingdom
 	boost::shared_ptr<Lambda> Cast::ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<Menu> > > &a )
 	{
 		return boost::make_shared<Lambda_1Wrapper>( a );
+	}
+
+	boost::shared_ptr<Lambda> Cast::ToAction( const boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > &a )
+	{
+		return boost::make_shared<Lambda_1Wrapper_MenuItem>( a );
 	}
 
 	Menu::FindItemByNameLambda::FindItemByNameLambda( const std::wstring &name )

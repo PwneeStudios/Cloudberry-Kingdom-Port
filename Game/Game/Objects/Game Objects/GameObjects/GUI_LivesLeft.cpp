@@ -212,6 +212,9 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::OnAdd();
 
+		MyPile->AlphaVel = FadeOutVel;
+		MyPile->setAlpha( 0 );
+
 		// Black background
 		if ( UseBlackBack )
 		{

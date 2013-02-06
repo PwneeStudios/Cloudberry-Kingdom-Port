@@ -512,10 +512,8 @@ namespace CloudberryKingdom
             {
                 boost::shared_ptr<EzText> _t;
                 _t = MyPile->FindEzText( L"Requirement2" );
-                //_t.Show = true;
-                //_t.SubstituteText(Localization::WordString(Localization::Words_Required) + " " +
-                //                  Localization::WordString(Localization::Words_Level) + " " + item.MyPrereq.MyInt.ToString());
-                _t->SubstituteText(Localization::WordString(Localization::Words_Level) + L" " + ToString( item->MyPrereq->MyInt ) );
+                //_t->SubstituteText( Localization::WordString( Localization::Words::Words_Level ) + " " + item->MyPrereq->MyInt->ToString());
+				_t->SubstituteText( Localization::WordString( Localization::Words::Words_PlayerLevel ) + L" " + ToString( item->MyPrereq->MyInt ) );
             }
             else
             {

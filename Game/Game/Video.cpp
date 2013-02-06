@@ -258,6 +258,8 @@ bool MainVideo::Paused = false;
 			return false;
 		}
 
+		Tools::EffectWad->SetCameraPosition( Vector4( 0.f, 0.f, .001f, .001f ) );
+
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 
 #ifndef CAFE
@@ -278,7 +280,8 @@ bool MainVideo::Paused = false;
 		VEZTexture->Width = VEZTexture->getTex()->Width;
 		VEZTexture->Height = VEZTexture->getTex()->Height;
 
-		Vector2 Pos = Tools::getCurCamera()->getPos();
+		Vector2 Pos = Vector2(0);
+		//Vector2 Pos = Tools::getCurCamera()->getPos();
 		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
 		Tools::QDrawer->Flush();*/
 
