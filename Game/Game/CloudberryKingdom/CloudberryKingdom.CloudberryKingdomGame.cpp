@@ -900,6 +900,16 @@ float CloudberryKingdomGame::fps = 0;
 		//if ( LogoScreenUp )
 		//	Resources::LoadThread->Join( 1 );
 
+#ifdef CAFE
+		// Main Video
+		if ( MainVideo::Draw() )
+			return;
+
+		// Prepare to draw
+		Tools::DrawCount++;
+		if ( SetupToRender() )
+			return;
+#else
 		// Prepare to draw
 		Tools::DrawCount++;
 		if ( SetupToRender() )
@@ -908,7 +918,7 @@ float CloudberryKingdomGame::fps = 0;
 		// Main Video
 		if ( MainVideo::Draw() )
 			return;
-
+#endif
 		// Fps
 		UpdateFps( gameTime );
 

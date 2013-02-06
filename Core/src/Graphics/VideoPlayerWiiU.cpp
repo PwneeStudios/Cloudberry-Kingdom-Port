@@ -102,6 +102,7 @@ s32 exc_end_time_stamp[2];
 bool EXIT_PLAYBACK = false;
 bool GLOBAL_VIDEO_OVERRIDE = false;
 static void (*UpdateElapsedTime)(bool) = NULL;
+void (*DrawSubtitles)() = NULL;
 
 #ifdef USE_PROCESS_SWITCHING
 OSEvent gDoRelease;
@@ -202,9 +203,12 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 #endif
                         ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
 
+						/*if( DrawSubtitles )
+							DrawSubtitles();*/
+
 						// Update time counter.
-						if( UpdateElapsedTime )
-							UpdateElapsedTime( false );
+						/*if( UpdateElapsedTime )
+							UpdateElapsedTime( false );*/
                         if (ret != 0)
                         {
                             OSReport("VideoDraw Failed.\n");
@@ -1205,6 +1209,10 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 			}
 
 			exc_start_time_stamp[ intArg ] += 100;
+
+			// Update time since we started.
+			if( UpdateElapsedTime )
+				UpdateElapsedTime( false );
 		}
 #endif
 
@@ -1897,11 +1905,12 @@ struct VideoPlayerInternal
 {
 };
 
-VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(bool) )
+VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(bool), void (*DrawSubtitles)() )
 	: internal_( new VideoPlayerInternal )
 	, IsLooped( false )
 {
 	::UpdateElapsedTime = UpdateElapsedTime;
+	::DrawSubtitles = DrawSubtitles;
 
 	InitShader();
     InitAttribData();

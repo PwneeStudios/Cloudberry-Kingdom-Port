@@ -196,7 +196,18 @@ namespace CloudberryKingdom
 
 	void Localization::ReadSubtitleInfo( const std::wstring &VideoName )
 	{
-		std::wstring path = Path::Combine( std::wstring( L"Content" ), Path::Combine( std::wstring( L"Localization" ), Path::Combine( std::wstring( L"Subtitles" ), Path::Combine( CurrentLanguage->MyDirectory, VideoName ) ) ) ) + L".tsv";
+		if( VideoName == L"LogoSalad" )
+			return;
+
+		std::wstring path = Path::Combine(
+#ifdef CAFE
+			std::wstring(),
+#else
+			std::wstring( L"Content" ),
+#endif
+			Path::Combine( std::wstring( L"Localization" ),
+				Path::Combine( std::wstring( L"Subtitles" ),
+					Path::Combine( CurrentLanguage->MyDirectory, VideoName ) ) ) ) + L".tsv";
 
 		if ( !File::Exists( path ) ) return;
 

@@ -18,7 +18,7 @@ public:
 	bool IsLooped;
 
 #ifdef CAFE
-	VideoPlayer( void (*UpdateElapsedTime)(bool) );
+	VideoPlayer( void (*UpdateElapsedTime)(bool), void (*DrawSubtitles)() );
 #else
 	VideoPlayer();
 #endif
