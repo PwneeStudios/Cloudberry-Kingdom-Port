@@ -34,3 +34,4 @@ src\Core.cpp
 src\CoreWiiU.cpp
 src\Graphics\QuadDrawerWiiU.cpp
 src\Audio\streamlib\AXStreamServer.c
+src\Graphics\RenderTarget2DWiiU.cpp

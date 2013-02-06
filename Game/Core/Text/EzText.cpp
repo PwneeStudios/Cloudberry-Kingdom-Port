@@ -193,14 +193,14 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 	}
 #endif
 
-	std::wstring ButtonString::Back(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getBack()->Name.c_str(), size ); }
-    std::wstring ButtonString::Go(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getGo()->Name.c_str(), size ); }
-    std::wstring ButtonString::X(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getX()->Name.c_str(), size ); }
-    std::wstring ButtonString::Y(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getBack()->Name.c_str(), size ); }
-    std::wstring ButtonString::LeftRight(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getLeftRight()->Name.c_str(), size ); }
-    std::wstring ButtonString::LeftBumper(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getLeftBumper()->Name.c_str(), size ); }
-    std::wstring ButtonString::RightBumper(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getRightBumper()->Name.c_str(), size ); }
-    std::wstring ButtonString::Jump(int size) { return Format( L"{p%ws,%d,?}", ButtonTexture::getGo()->Name.c_str(), size ); }
+	std::wstring ButtonString::Back(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getBack()->Name.c_str(), size ); }
+    std::wstring ButtonString::Go(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getGo()->Name.c_str(), size ); }
+    std::wstring ButtonString::X(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getX()->Name.c_str(), size ); }
+    std::wstring ButtonString::Y(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getBack()->Name.c_str(), size ); }
+    std::wstring ButtonString::LeftRight(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getLeftRight()->Name.c_str(), size ); }
+    std::wstring ButtonString::LeftBumper(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getLeftBumper()->Name.c_str(), size ); }
+    std::wstring ButtonString::RightBumper(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getRightBumper()->Name.c_str(), size ); }
+    std::wstring ButtonString::Jump(int size) { return Format( L"{p%ls,%d,?}", ButtonTexture::getGo()->Name.c_str(), size ); }
 
 	std::wstring EzText::ColorToMarkup( int r, int g, int b )
 	{

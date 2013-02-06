@@ -24,6 +24,7 @@ class Texture : public Resource
 
 	/// Platform specific implementation.
 #ifdef CAFE
+	friend struct RenderTarget2D;
 	TextureWiiU impl_;
 #elif PS3
 	TexturePS3 impl_;

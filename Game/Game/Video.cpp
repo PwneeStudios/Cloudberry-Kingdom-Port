@@ -298,7 +298,7 @@ bool MainVideo::Cleaned = true;
 		// FIXME: No deleting.
 		//delete VPlayer;
 		VPlayer.reset();
-		CurrentVideo.reset();
+		//CurrentVideo.reset();
 
 		Cleaned = true;
 	}

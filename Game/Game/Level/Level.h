@@ -3,7 +3,7 @@
 
 #include <global_header.h>
 
-#include <Hacks\XNA\RenderTarget2D.h>
+#include <Graphics/RenderTarget2D.h>
 
 namespace CloudberryKingdom
 {

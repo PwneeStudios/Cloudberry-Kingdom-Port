@@ -21,6 +21,7 @@ struct Texture2D
 	int Height;
 
 	Texture2D( const boost::shared_ptr<GraphicsDevice> &device, int width, int height );
+	virtual ~Texture2D() { }
 
 	// FIXME: Implement this.
 	void Dispose();

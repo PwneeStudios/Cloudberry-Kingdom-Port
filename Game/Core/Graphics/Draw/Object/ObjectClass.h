@@ -5,10 +5,10 @@
 
 #include "Hacks/NET/BinaryWriter.h"
 #include "Hacks/NET/BinaryReader.h"
-#include "Hacks/XNA/RenderTarget2D.h"
 #include "Hacks/XNA/GraphicsDevice.h"
 #include "Hacks/XNA/PresentationParameters.h"
 #include <Graphics/Texture2D.h>
+#include <Graphics/RenderTarget2D.h>
 
 namespace CloudberryKingdom
 {

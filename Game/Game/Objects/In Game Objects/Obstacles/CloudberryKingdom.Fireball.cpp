@@ -151,17 +151,21 @@ namespace CloudberryKingdom
 		Emitter_Emitter->Phsx();
 	}
 
-	void Fireball::DrawFireballTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
+	void Fireball::DrawFireballTexture( const boost::shared_ptr<GraphicsDevice> &, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		// FIXME
-		FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
-		return;
+		/*FireballTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+		return;*/
 
 
 		t += 1.f / 60.f;
 
-		device->SetRenderTarget( FireballRenderTarget );
-		device->Clear( Color::Transparent );
+		FireballRenderTarget->Set();
+		//device->SetRenderTarget( FireballRenderTarget );
+
+		FireballRenderTarget->Clear( 0.f, 0.f, 0.f, 0.f );
+		//device->Clear( Color::Transparent );
+
 		float scalex = 350;
 		float scaley = 150;
 
@@ -174,10 +178,15 @@ namespace CloudberryKingdom
 
 		ShadeQuad->SetColor( Color::White );
 		ShadeQuad->MyEffect->t->SetValue( t / TimeScale );
-		if ( Tools::DrawCount > 5 )
+		/*if ( Tools::DrawCount > 5 )
 		ShadeQuad->MyTexture = EmitterTexture;
 		else
-		ShadeQuad->MyTexture = BaseFireballTexture;
+		ShadeQuad->MyTexture = BaseFireballTexture;*/
+		if( EmitterTexture->_Tex )
+			ShadeQuad->MyTexture = EmitterTexture;
+		else
+			ShadeQuad->MyTexture = BaseFireballTexture;
+
 		Tools::QDrawer->DrawQuad( ShadeQuad );
 		Tools::QDrawer->Flush();
 
@@ -189,7 +198,8 @@ namespace CloudberryKingdom
 		Tools::QDrawer->DrawQuad( ShadeQuad );
 		Tools::QDrawer->Flush();
 
-		device->SetRenderTarget( Tools::DestinationRenderTarget );
+		//device->SetRenderTarget( Tools::DestinationRenderTarget );
+		RenderTarget2D::SetDefault();
 		Tools::Render->ResetViewport();
 
 		FireballTexture->setTex( FireballRenderTarget );
@@ -198,17 +208,20 @@ namespace CloudberryKingdom
 		//FireballTexture.Tex.Save(string.Format("Fireball_{0}.png", Tools::DrawCount), ImageFileFormat.Png);
 	}
 
-	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &device, const boost::shared_ptr<EzEffectWad> &EffectWad )
+	void Fireball::DrawEmitterTexture( const boost::shared_ptr<GraphicsDevice> &, const boost::shared_ptr<EzEffectWad> &EffectWad )
 	{
 		// FIXME
-		FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
+		/*FlameTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
 		EmitterTexture->_Tex = Tools::TextureWad->TextureList[0]->_Tex;
-		return;
+		return;*/
 
 		t += 1.f / 60.f;
 
-		device->SetRenderTarget( FlameRenderTarget );
-		device->Clear( Color::Transparent );
+		//device->SetRenderTarget( FlameRenderTarget );
+		FlameRenderTarget->Set();
+
+		//device->Clear( Color::Transparent );
+		FlameRenderTarget->Clear( 0.f, 0.f, 0.f, 0.f );
 		float scalex = 175;
 		float scaley = 175;
 
@@ -220,18 +233,25 @@ namespace CloudberryKingdom
 
 		Flame_Emitter->Draw();
 
-		device->SetRenderTarget( Tools::DestinationRenderTarget );
+		//device->SetRenderTarget( Tools::DestinationRenderTarget );
+		RenderTarget2D::SetDefault();
+
 		Tools::Render->ResetViewport();
 		FlameTexture->setTex( FlameRenderTarget );
 
 
 		// Draw emitter
-		device->SetRenderTarget( EmitterRenderTarget );
-		device->Clear( Color::Transparent );
+		//device->SetRenderTarget( EmitterRenderTarget );
+		EmitterRenderTarget->Set();
+
+		//device->Clear( Color::Transparent );
+		EmitterRenderTarget->Clear( 0.f, 0.f, 0.f, 0.f );
 
 		Emitter_Emitter->Draw();
 
-		device->SetRenderTarget( Tools::DestinationRenderTarget );
+		//device->SetRenderTarget( Tools::DestinationRenderTarget );
+		RenderTarget2D::SetDefault();
+
 		Tools::Render->ResetViewport();
 		EmitterTexture->setTex( EmitterRenderTarget );
 	}
