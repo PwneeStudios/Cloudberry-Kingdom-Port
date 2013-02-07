@@ -342,7 +342,22 @@ namespace CloudberryKingdom
 #ifdef CAFE
 		if( SaveLogic != 0 )
 		{
-			bool global = FileName == L"HighScores";
+			bool global = false;
+
+			if( FileName == L"HighScores" )
+			{
+				global = true;
+			}
+			else if( FileName == L"PlayerData.hsc" )
+			{
+				global = false;
+			}
+			else
+			{
+				path = "PlayerProgress";
+				global = false;
+			}
+
 			boost::shared_ptr< SaveWriterWiiU > writer = boost::make_shared< SaveWriterWiiU >( path, global );
 
 			if( !writer->IsOpen() )
@@ -480,7 +495,22 @@ namespace CloudberryKingdom
 		{
 			std::string path = WstringToUtf8( FileName );
 
-			bool global = FileName == L"HighScores";
+			bool global = false;
+
+			if( FileName == L"HighScores" )
+			{
+				global = true;
+			}
+			else if( FileName == L"PlayerData.hsc" )
+			{
+				global = false;
+			}
+			else
+			{
+				path = "PlayerProgress";
+				global = false;
+			}
+
 			boost::shared_ptr< SaveReaderWiiU > reader = boost::make_shared< SaveReaderWiiU >( path, global );
 			std::vector< unsigned char > data;
 			if( reader->ReadEverything( data ) )

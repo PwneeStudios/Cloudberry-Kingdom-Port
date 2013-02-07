@@ -36,6 +36,9 @@ CoreWiiU &CoreWiiU::operator = ( const CoreWiiU &rhs )
 	return *this;
 }
 
+char *GLOBAL_ACCOUNT_NAME;
+static char LOCAL_ACCOUNT_NAME[ ACT_ACCOUNT_ID_SIZE ];
+
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
 	game_( game ),
@@ -85,6 +88,11 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 		}
 	}
 
+	GLOBAL_ACCOUNT_NAME = LOCAL_ACCOUNT_NAME;
+	memset( LOCAL_ACCOUNT_NAME, 0, sizeof( LOCAL_ACCOUNT_NAME ) );
+	sprintf( LOCAL_ACCOUNT_NAME, "Errorberry" );
+	nn::act::GetAccountId( LOCAL_ACCOUNT_NAME );
+	
 	LOG.Write( "Creating global directory\n" );
 	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
 		LOG.Write( "Failed to create common directory.\n" );

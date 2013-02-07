@@ -86,10 +86,10 @@ void GamePad::Update()
 		PAD_STATE[ i ].IsConnected |= true;
 
 		// Mapping is inverse of XBox.
-		PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.A, ( status[ i ].button & PAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
-		PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.B, ( status[ i ].button & PAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
-		PAD_STATE[ i ].Buttons.Y = __max( PAD_STATE[ i ].Buttons.X, ( status[ i ].button & PAD_BUTTON_X ) ? ButtonState_Pressed : ButtonState_Released );
-		PAD_STATE[ i ].Buttons.X = __max( PAD_STATE[ i ].Buttons.Y, ( status[ i ].button & PAD_BUTTON_Y ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, ( status[ i ].button & PAD_BUTTON_A ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, ( status[ i ].button & PAD_BUTTON_B ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.Y = __max( PAD_STATE[ i ].Buttons.Y, ( status[ i ].button & PAD_BUTTON_X ) ? ButtonState_Pressed : ButtonState_Released );
+		PAD_STATE[ i ].Buttons.X = __max( PAD_STATE[ i ].Buttons.X, ( status[ i ].button & PAD_BUTTON_Y ) ? ButtonState_Pressed : ButtonState_Released );
 
 		PAD_STATE[ i ].Buttons.LeftShoulder = __max( PAD_STATE[ i ].Buttons.LeftShoulder, ( status[ i ].button & PAD_BUTTON_L ) ? ButtonState_Pressed : ButtonState_Released );
 		PAD_STATE[ i ].Buttons.RightShoulder = __max( PAD_STATE[ i ].Buttons.RightShoulder, ( status[ i ].button & PAD_BUTTON_R ) ? ButtonState_Pressed : ButtonState_Released );
@@ -121,10 +121,10 @@ void GamePad::Update()
 		if( error == VPAD_READ_ERR_NONE )
 		{
 			// Mapping is inverse of XBox.
-			PAD_STATE[ 0 ].Buttons.B = __max( PAD_STATE[ 0 ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.A = __max( PAD_STATE[ 0 ].Buttons.B, vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.Y = __max( PAD_STATE[ 0 ].Buttons.X, vpadStatus.hold & VPAD_BUTTON_X ? ButtonState_Pressed : ButtonState_Released );
-			PAD_STATE[ 0 ].Buttons.X = __max( PAD_STATE[ 0 ].Buttons.Y, vpadStatus.hold & VPAD_BUTTON_Y ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ 0 ].Buttons.B = __max( PAD_STATE[ 0 ].Buttons.B, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ 0 ].Buttons.A = __max( PAD_STATE[ 0 ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ 0 ].Buttons.Y = __max( PAD_STATE[ 0 ].Buttons.Y, vpadStatus.hold & VPAD_BUTTON_X ? ButtonState_Pressed : ButtonState_Released );
+			PAD_STATE[ 0 ].Buttons.X = __max( PAD_STATE[ 0 ].Buttons.X, vpadStatus.hold & VPAD_BUTTON_Y ? ButtonState_Pressed : ButtonState_Released );
 
 			PAD_STATE[ 0 ].Buttons.LeftShoulder = __max( PAD_STATE[ 0 ].Buttons.LeftShoulder, vpadStatus.hold & VPAD_BUTTON_L ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ 0 ].Buttons.RightShoulder = __max( PAD_STATE[ 0 ].Buttons.RightShoulder, vpadStatus.hold & VPAD_BUTTON_R ? ButtonState_Pressed : ButtonState_Released );
