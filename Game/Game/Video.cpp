@@ -64,12 +64,12 @@ namespace CloudberryKingdom
 
 	// NOTE: This overrides functionality of MainVideo::UpdateElapsedTime()
 	// in order to be used from the WiiU video player.
-	static void UpdateElapsedTimeProxy( bool finish )
+	static void UpdateElapsedTimeProxy( float amount, bool reset )
 	{
-		if( finish )
-			MainVideo::Elapsed += 100000000.0;
+		if( reset )
+			MainVideo::Elapsed = 0.f;
 		else
-			MainVideo::Elapsed += 0.1f;/*2 *Tools::TheGame->DeltaT*/;
+			MainVideo::Elapsed += amount;
 	}
 
 	// Helper method to draw subtitles from the other thread.
@@ -90,9 +90,12 @@ namespace CloudberryKingdom
 
 		QUAD_DRAWER->SetEffect( Tools::BasicEffect->effect );
 
-		MainVideo::Subtitle();
-		Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, ToString( MainVideo::Elapsed ),  Vector2( 0 ), Vector4( 1 ), Vector2( 1 ) );
-		Tools::QDrawer->Flush();
+		// FIXME: This ensures that the subtitle is never displayed when a movie is killed.
+		if( MainVideo::Elapsed < 500000.f )
+			MainVideo::Subtitle();
+
+		/*Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, ToString( MainVideo::Elapsed ),  Vector2( 0 ), Vector4( 1 ), Vector2( 1 ) );
+		Tools::QDrawer->Flush();*/
 	}
 
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
@@ -182,6 +185,10 @@ namespace CloudberryKingdom
 #endif
 
 
+		
+		Duration = CurrentVideo->Duration.TotalSeconds;
+		Elapsed = 0;
+
 #ifdef CAFE
 		VPlayer = boost::make_shared<VideoPlayer>( UpdateElapsedTimeProxy, DrawSubtitles );
 #else
@@ -193,9 +200,6 @@ namespace CloudberryKingdom
 
 		VPlayer->SetVolume( __max( Tools::MusicVolume->getVal(), Tools::SoundVolume->getVal() ) );
 
-		Duration = CurrentVideo->Duration.TotalSeconds;
-
-		Elapsed = 0;
 	}
 
     void MainVideo::UpdateElapsedTime()
@@ -226,7 +230,7 @@ bool MainVideo::Paused = false;
 		// End the video if the user presses a key
 
 		// FIXME: Uncomment this or people will be able to skip movie accidentally!
-		if ( CanSkip && PlayerManager::Players.size() > 0 /*&& Elapsed > 0.3f || Elapsed > LengthUntilUserCanSkip*/ )
+		if ( CanSkip && PlayerManager::Players.size() > 0 && Elapsed > 0.3f || Elapsed > LengthUntilUserCanSkip )
 		{
 			// Update songs
 			if ( Tools::SongWad != 0 )

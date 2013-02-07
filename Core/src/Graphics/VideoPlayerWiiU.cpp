@@ -101,7 +101,7 @@ s32 exc_end_time_stamp[2];
 
 bool EXIT_PLAYBACK = false;
 bool GLOBAL_VIDEO_OVERRIDE = false;
-static void (*UpdateElapsedTime)(bool) = NULL;
+static void (*UpdateElapsedTime)(float, bool) = NULL;
 void (*DrawSubtitles)() = NULL;
 
 #ifdef USE_PROCESS_SWITCHING
@@ -158,22 +158,21 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
     s32 i;
     s32 ret;
     u32 vsys_currtime;
-#ifdef PRINT_TIME
     s32 starttime, endtime;
-#endif
+
 
     OSReport("Video Thread Start\n");
 
     while(1)
     {
         vsys_currtime = OSTicksToMilliseconds(OSGetTime());
-#if TEST_MODE == 1
+//#if TEST_MODE == 1
         for (i = 0; i < 1; i++)
-#elif TEST_MODE == 2
+/*#elif TEST_MODE == 2
         for (i = 1; i < 2; i++)
 #else
         for (i = 0; i < 2; i++)
-#endif
+#endif*/
         {
             if ((vendflag[i] == 0) && sys_timestart[i])
             {
@@ -193,9 +192,8 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                     }
                     if (MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].Status == 1)
                     {
-#ifdef PRINT_TIME
                         starttime = OSTicksToMilliseconds(OSGetTime());
-#endif
+
                         // video frame draw
 #ifdef PRINT_LOG
                         OSReport("CurrTime:%d, VPTS:%d, VDIFF:%d, thread:%d\n",
@@ -203,12 +201,6 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
 #endif
                         ret = VideoDraw(MP4PlayerCorePtr[i]->OutputVideoInfo[MP4PlayerCorePtr[i]->df_v].bufp, i);
 
-						/*if( DrawSubtitles )
-							DrawSubtitles();*/
-
-						// Update time counter.
-						/*if( UpdateElapsedTime )
-							UpdateElapsedTime( false );*/
                         if (ret != 0)
                         {
                             OSReport("VideoDraw Failed.\n");
@@ -222,8 +214,14 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
                         {
                             MP4PlayerCorePtr[i]->df_v = 0;
                         }
-#ifdef PRINT_TIME
+
                         endtime = OSTicksToMilliseconds(OSGetTime());
+
+						// Update time since we started.
+						if( UpdateElapsedTime )
+							UpdateElapsedTime( static_cast< float >( endtime - starttime ) / 1000.f , false );
+
+#ifdef PRINT_LOG
                         OSReport("Time(VideoDraw):%d, thread:%d\n", endtime - starttime, i);
 #endif
                     }
@@ -1186,6 +1184,9 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
             }
         }
 #else
+		if( UpdateElapsedTime )
+			UpdateElapsedTime( 0.f, true );
+
 		exc_start_time_stamp[intArg] = 0;
         exc_end_time_stamp[intArg]   = 0;
 		for( int i = 0; i < MP4DemuxCorePtr[intArg]->MP4Duration/100; ++i )
@@ -1209,16 +1210,12 @@ static s32 MP4PlayTVorDRC(s32 intArg, void *ptrArg)
 			}
 
 			exc_start_time_stamp[ intArg ] += 100;
-
-			// Update time since we started.
-			if( UpdateElapsedTime )
-				UpdateElapsedTime( false );
 		}
 #endif
 
 ERROR:
 		EXIT_PLAYBACK = true;
-		UpdateElapsedTime( true );
+		UpdateElapsedTime( 10000000.f, false );
 		OSYieldThread();
 
         MP4PlayerCorePtr[intArg]->execendflag = 1;
@@ -1905,7 +1902,7 @@ struct VideoPlayerInternal
 {
 };
 
-VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(bool), void (*DrawSubtitles)() )
+VideoPlayer::VideoPlayer( void (*UpdateElapsedTime)(float, bool), void (*DrawSubtitles)() )
 	: internal_( new VideoPlayerInternal )
 	, IsLooped( false )
 {

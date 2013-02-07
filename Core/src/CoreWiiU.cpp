@@ -59,9 +59,9 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	scheduler_ = new Scheduler;
 
-	qd_ = new QuadDrawer;
-
 	content_ = new Wad( "" );
+
+	qd_ = new QuadDrawer;
 
 	td_ = new TextDrawer;
 
