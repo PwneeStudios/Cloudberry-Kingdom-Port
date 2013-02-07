@@ -421,7 +421,7 @@ else
 		Menu::DefaultMenuInfo::SetNext( item );
 if (ButtonCheck::ControllerInUse)
 {
-        MyPile->Add( boost::make_shared<QuadClass>(ButtonTexture::getGo(), 90, std::wstring( L"Button_A" ) ) );
+        MyPile->Add( boost::make_shared<QuadClass>(ButtonTexture::getGo(), 90.f, std::wstring( L"Button_A" ) ) );
         item->Selectable = false;
 }
 
@@ -440,7 +440,7 @@ if (ButtonCheck::ControllerInUse)
 #if XBOX || PC_VERSION
 			Menu::DefaultMenuInfo::SetX( item );
 #endif
-		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getX(), 90, std::wstring( L"Button_X" ) ) );
+		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getX(), 90.f, std::wstring( L"Button_X" ) ) );
         item->Selectable = false;
 }
 
@@ -458,7 +458,7 @@ if (ButtonCheck::ControllerInUse)
 #if XBOX || PC_VERSION
 		Menu::DefaultMenuInfo::SetY( item );
 #endif
-        MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getY(), 90, std::wstring( L"Button_Y" ) ) );
+        MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getY(), 90.f, std::wstring( L"Button_Y" ) ) );
         item->Selectable = false;
 }
 
@@ -473,7 +473,7 @@ if (ButtonCheck::ControllerInUse)
 		Menu::DefaultMenuInfo::SetBack( item );
 if (ButtonCheck::ControllerInUse)
 {       
-		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getBack(), 90, std::wstring( L"Button_B" ) ) );
+		MyPile->Add(boost::make_shared<QuadClass>(ButtonTexture::getBack(), 90.f, std::wstring( L"Button_B" ) ) );
         item->Selectable = false;
 }
 	}

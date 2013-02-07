@@ -1065,7 +1065,12 @@ float CloudberryKingdomGame::fps = 0;
 		Tools::Render->SetStandardRenderStates();
 
 		Tools::QDrawer->SetInitialState();
+
+		// FIXME
+#if PC_VERSION
+#else
 		ComputeFire();
+#endif
 
 		Tools::EffectWad->SetCameraPosition( cameraPos );
 
