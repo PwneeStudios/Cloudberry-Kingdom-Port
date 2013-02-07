@@ -8,3 +8,15 @@ RenderTarget2D::RenderTarget2D( const boost::shared_ptr<GraphicsDevice> &device,
 RenderTarget2D::~RenderTarget2D()
 {
 }
+
+void RenderTarget2D::Set()
+{
+}
+
+void RenderTarget2D::SetDefault()
+{
+}
+
+void RenderTarget2D::Clear( float r, float g, float b, float a )
+{
+}

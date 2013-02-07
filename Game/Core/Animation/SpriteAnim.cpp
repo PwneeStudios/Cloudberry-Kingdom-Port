@@ -35,6 +35,11 @@ namespace CloudberryKingdom
 	// FIXME: This Texture2D * used to be boost::shared_ptr<Texture2D>.
 	boost::shared_ptr<Texture2D> SpriteAnimGroup::Get( int anim, float t, Vector2 &padding )
 	{
+		// FIXME
+		return Tools::Texture( std::wstring( L"Bob_Run_0024" ) )->_Tex;
+
+
+
 		if ( SpriteAnims.find( anim ) == SpriteAnims.end() )
 		{
 			t = 0.f;
