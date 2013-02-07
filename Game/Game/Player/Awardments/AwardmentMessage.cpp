@@ -6,7 +6,13 @@ namespace CloudberryKingdom
 {
 
     HeroUnlockedMessage::HeroUnlockedMessage() : AwardmentMessage( 0 )
+	{
+	}
+
+	boost::shared_ptr<HeroUnlockedMessage> HeroUnlockedMessage::HeroUnlockedMessage_Construct()
     {
+		AwardmentMessage::AwardmentMessage_Construct( 0 );
+
         MakeText( L"", Localization::WordString( Localization::Words_NewHeroUnlocked ) );
 
         boost::shared_ptr<EzText> _t;
@@ -17,6 +23,8 @@ namespace CloudberryKingdom
         _q = MyPile->FindQuad( L"ArcadeBox" ); if (_q != 0 ) { _q->setPos( Vector2( 4.763306f, 0.f ) ); _q->setSize( Vector2( 919.4252f, 163.4914f ) ); }
 
         MyPile->setPos( Vector2( 36.11108f, 827.7778f ) );
+
+		return boost::static_pointer_cast<HeroUnlockedMessage>( shared_from_this() );
     }
 
 	AwardmentMessage::AwardmentMessage( const boost::shared_ptr<Awardment> &award ) { InitializeInstanceFields(); }
