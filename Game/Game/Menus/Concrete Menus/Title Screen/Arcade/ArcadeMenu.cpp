@@ -319,7 +319,9 @@ namespace CloudberryKingdom
             if (DoSave)
             {
                 SaveGroup::SaveAll();
-                Tools::CurGameData->AddGameObject( boost::make_shared<HeroUnlockedMessage>() );
+                
+				Tools::CurGameData->AddGameObject( MakeMagic(HeroUnlockedMessage, () ) );
+				//Tools::CurGameData->AddGameObject( boost::make_shared<HeroUnlockedMessage>() );
             }
         }
 
