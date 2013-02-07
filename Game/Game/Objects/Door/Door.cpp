@@ -438,6 +438,20 @@ namespace CloudberryKingdom
 
 	#if defined(WINDOWS)
 			if ( ButtonCheck::State( ControllerButtons_X, static_cast<int>( bob->MyPlayerIndex ) ).Down || ( bob->CurInput.xVec.Y > .85f && bob->GetPlayerData()->KeyboardUsedLast ) || AutoOpen )
+	#elif CAFE
+			bool down = false || AutoOpen;
+			if ( !down )
+			{
+				ButtonData bd_X = ButtonCheck::State( ControllerButtons_X, bob->MyPlayerIndex );
+				if ( bd_X.Down && bd_X.Type == ControllerType_Standard ) down = true;
+			}
+			if ( !down )
+			{
+				ButtonData bd_B = ButtonCheck::State( ControllerButtons_B, bob->MyPlayerIndex );
+				if ( bd_B.Down && bd_B.Type == ControllerType_Mini ) down = true;
+			}
+
+			if ( down )
 	#else
 			if ( ButtonCheck::State( ControllerButtons_X, bob->MyPlayerIndex ).Down || AutoOpen )
 	#endif
