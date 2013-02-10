@@ -886,5 +886,9 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 			Players[ i ] = boost::make_shared<PlayerData>();
 			Players[ i ]->Init( i );
 		}
+
+		Players[ 0 ]->ContainerName = std::wstring( L"PlayerData" );
+		Players[ 0 ]->FileName = std::wstring( L"PlayerData" );
+		Players[ 0 ]->Load();
 	}
 }

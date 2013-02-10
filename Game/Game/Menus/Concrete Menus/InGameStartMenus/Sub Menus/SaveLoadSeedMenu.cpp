@@ -330,14 +330,11 @@ namespace CloudberryKingdom
 	#endif
 	}
 
-#if defined(WINDOWS)
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		return boost::make_shared<MakeSaveHelper>( panel, player );
 	}
-#endif
 
-#if defined(WINDOWS)
 	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		boost::shared_ptr<SaveSeedAs> SaveAs = MakeMagic( SaveSeedAs, ( panel->getControl(), player ) );
@@ -350,55 +347,6 @@ namespace CloudberryKingdom
             ckpanel->RegularSlideOut( PresetPos_RIGHT, 0 );
         }
 	}
-#endif
-
-#if ! defined(WINDOWS)
-	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
-	{
-		return boost::make_shared<SaveLoadSeedsMakeSaveLambda>( player );
-	}
-#endif
-
-#if ! defined(WINDOWS)
-boost::shared_ptr<IAsyncResult> SaveLoadSeedMenu::kyar = 0;
-#endif
-
-#if ! defined(WINDOWS)
-boost::shared_ptr<PlayerData> SaveLoadSeedMenu::_player = 0;
-#endif
-
-#if ! defined(WINDOWS)
-	void SaveLoadSeedMenu::Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<PlayerData> &activeplayer )
-	{
-		_player = activeplayer;
-		
-		// FIXME: Uncomment this.
-		//kyar = Guide::BeginShowKeyboardInput( _player->MyPlayerIndex, std::wstring( L"Save random seed as..." ), std::wstring( L"Choose a name to save this level as." ), Tools::CurLevel->MyLevelSeed->SuggestedName(), OnKeyboardComplete, 0 );
-	}
-#endif
-
-#if ! defined(WINDOWS)
-	void SaveLoadSeedMenu::OnKeyboardComplete( const boost::shared_ptr<IAsyncResult> &ar )
-	{
-		// Get the input from the virtual keyboard
-
-		// FIXME: Uncomment this.
-		std::wstring input;// = Guide::EndShowKeyboardInput( kyar );
-
-		if ( input == std::wstring( L"" ) )
-			return;
-
-		// Strip anything after a semicolon (because this will confuse the seed parser)
-		if ( input.find( std::wstring( L";" ) ) != std::string::npos )
-		{
-			input = input.substr( 0, input.find( std::wstring( L";" ) ) );
-		}
-
-		// Save the seed
-//C# TO C++ CONVERTER TODO TASK: There is no native C++ equivalent to 'ToString':
-		_player->MySavedSeeds->SaveSeed( Tools::CurLevel->MyLevelSeed->ToString(), input );
-	}
-#endif
 
 	void SaveLoadSeedMenu::Load( const boost::shared_ptr<MenuItem> &_item )
 	{
