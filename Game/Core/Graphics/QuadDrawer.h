@@ -174,11 +174,11 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 
-		void QuadDrawer::DrawPic(Vector2 pos, Vector2 pos2, boost::shared_ptr<EzTexture> texture, Color color);
-		void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale);
-		void QuadDrawer::DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale);
-		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s);
-		Vector2 QuadDrawer::MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s);
+		void DrawPic(Vector2 pos, Vector2 pos2, boost::shared_ptr<EzTexture> texture, Color color);
+		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s, Vector2 position, Vector4 color, Vector2 scale);
+		void DrawString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s, Vector2 position, Vector4 color, Vector2 scale);
+		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, std::wstring s);
+		Vector2 MeasureString(boost::shared_ptr<HackSpriteFont> spritefont, boost::shared_ptr<StringBuilder> s);
 
 		void DrawCircleDot( Vector2 pos );
 

@@ -3376,7 +3376,12 @@ int Level::AfterPostDrawLayer = 12;
 		LightTexture->Name = std::wstring( L"LightTexture" );
 
 		boost::shared_ptr<PresentationParameters> pp = Tools::Device->PP;
+
+#ifdef CAFE
+		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, 1280, 720, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+#else
 		LightRenderTarget = boost::make_shared<RenderTarget2D>( Tools::Device, pp->BackBufferWidth, pp->BackBufferHeight, false, pp->BackBufferFormat, pp->DepthStencilFormat, pp->MultiSampleCount, true );
+#endif
 
 		LightQuad = boost::make_shared<QuadClass>();
 		LightQuad->setEffectName( std::wstring( L"LightMap" ) );
@@ -3403,8 +3408,11 @@ int Level::AfterPostDrawLayer = 12;
 
 		getMainCamera()->SetVertexCamera();
 		Tools::QDrawer->WashTexture();
-		Tools::Device->SetRenderTarget( LightRenderTarget );
-		Tools::Device->Clear( Color::Transparent );
+
+		//Tools::Device->SetRenderTarget( LightRenderTarget );
+		LightRenderTarget->Set();
+		//Tools::Device->Clear( Color::Transparent );
+		LightRenderTarget->Clear( 0.f, 0.f, 0.f, 0.f );
 
 		// Closing circle
 		if ( Circle != 0 )
@@ -3426,7 +3434,10 @@ int Level::AfterPostDrawLayer = 12;
 		}
 
 		Tools::QDrawer->Flush();
-		Tools::Device->SetRenderTarget( Tools::DestinationRenderTarget );
+
+		//Tools::Device->SetRenderTarget( Tools::DestinationRenderTarget );
+		RenderTarget2D::SetDefault();
+
 		Tools::TheGame->MyGraphicsDevice->Clear( Color::Black );
 		Tools::Render->ResetViewport();
 		LightTexture->setTex( LightRenderTarget );

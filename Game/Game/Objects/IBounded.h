@@ -10,6 +10,9 @@ namespace CloudberryKingdom
 	/// <\summary>
 	struct IBound
 	{
+
+		virtual ~IBound() { }
+
 		/// <summary>
 		/// Returns the TR bound
 		/// </summary>

@@ -6,6 +6,8 @@
 #include <cafe/demo/demoGfxTypes.h>
 #include <Content/ResourcePtr.h>
 #include <Content/Texture.h>
+#include <Content/Wad.h>
+#include <Core.h>
 #include <Graphics/Types.h>
 #include <Graphics/Effect.h>
 #include <Graphics/EffectTechnique.h>
@@ -91,6 +93,16 @@ struct QuadDrawerInternal
 	BatchList Batches;
 
 	boost::shared_ptr<Effect> Effect;
+
+	ResourcePtr< Texture > MiddleFrame;
+	ResourcePtr< Texture > LeftFrame;
+	ResourcePtr< Texture > RightFrame;
+
+	ResourcePtr< Texture > MiddleFrameMask;
+	ResourcePtr< Texture > LeftFrameMask;
+	ResourcePtr< Texture > RightFrameMask;
+
+	ResourcePtr< Texture > CastleBackground;
 };
 
 QuadDrawerWiiU::QuadDrawerWiiU() :
@@ -114,6 +126,16 @@ QuadDrawerWiiU::QuadDrawerWiiU() :
 	/*internal_->Vertices = reinterpret_cast< QuadVert * >(
 		GX2RLockBuffer( &internal_->QuadBuffer )
 	);*/
+
+	internal_->MiddleFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Frame.png" );
+	internal_->LeftFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Frame.png" );
+	internal_->RightFrame = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Frame.png" );
+
+	internal_->MiddleFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Center_Mask.png" );
+	internal_->LeftFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Left_Mask.png" );
+	internal_->RightFrameMask = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Window_Right_Mask.png" );
+
+	internal_->CastleBackground = CONTENT->Load< Texture >( "Art/Environments/Castle/Background/v2/Castle_Backdrop_2.png" );
 }
 
 QuadDrawerWiiU::~QuadDrawerWiiU()
@@ -199,12 +221,34 @@ void QuadDrawerWiiU::Flush()
 	GX2UTSetAttributeBuffer( &internal_->QuadBuffer, 2, offsetof( QuadVert, Color ) );
 
 	GX2SetPixelSampler( &internal_->Sampler, 0 );
+	GX2SetPixelSampler( &internal_->Sampler, 1 );
+	GX2SetPixelSampler( &internal_->Sampler, 2 );
+
+	internal_->CastleBackground->Activate( 0 );
 
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
-		batch.Map->Activate( 0 );
+
+		if( batch.Map == internal_->LeftFrame )
+		{
+			internal_->LeftFrameMask->Activate( 1 );
+			batch.Map->Activate( 2 );
+		}
+		else if( batch.Map == internal_->MiddleFrame )
+		{
+			internal_->MiddleFrameMask->Activate( 1 );
+			batch.Map->Activate( 2 );
+		}
+		else if( batch.Map == internal_->RightFrame )
+		{
+			internal_->RightFrameMask->Activate( 1 );
+			batch.Map->Activate( 2 );
+		}
+		else
+			batch.Map->Activate( 0 );
+
 		GX2DrawEx( GX2_PRIMITIVE_QUADS, batch.NumElements, batch.Offset, 1 );	
 	}
 	

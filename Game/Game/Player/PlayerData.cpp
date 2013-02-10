@@ -330,8 +330,16 @@ namespace CloudberryKingdom
 		//text.OutlineColor = Generic.PlayerColorSchemes[PlayerIndex].OutlineColor.Clr.ToVector4();
 	}
 
+	// From CoreWiiU.  Trying to get the account name.
+	extern char *GLOBAL_ACCOUNT_NAME;
+
 	std::wstring PlayerData::GetName()
 	{
+/*#if CAFE
+		if( MyIndex == 0 )
+			return Utf8ToWstring( GLOBAL_ACCOUNT_NAME );
+#endif*/
+
 	#if defined(XBOX) || defined(XBOX_SIGNIN)
 		if ( getMyGamer() != 0 )
 			return getMyGamer()->Gamertag;

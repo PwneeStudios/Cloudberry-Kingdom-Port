@@ -798,19 +798,19 @@ float CloudberryKingdomGame::fps = 0;
 	void CloudberryKingdomGame::PhsxStep()
 	{
 		DoToDoList();
-	#if defined(WINDOWS)
+#if defined(WINDOWS)
 	#if defined(PC_DEBUG) || (defined(WINDOWS) && defined(DEBUG)) || defined(INCLUDE_EDITOR)
 		// Debug tools
 		if ( DebugModePhsx() )
 			return;
 	#endif
 
-#if defined(DEBUG)
+	#if defined(DEBUG)
+        GodModePhxs();
+	#else
+        if (GodMode)
             GodModePhxs();
-#else
-            if (GodMode)
-                GodModePhxs();
-#endif
+	#endif
 
 
 		// Do game update.
@@ -825,9 +825,17 @@ float CloudberryKingdomGame::fps = 0;
 		// Quick Spawn
 		CheckForQuickSpawn_PC();
 	#endif
+#else
+
+	#if defined(DEBUG)
+		GodModePhxs();
 	#else
-		DoGameDataPhsx();
+		if (GodMode)
+			GodModePhxs();
 	#endif
+
+		DoGameDataPhsx();
+#endif
 
 		// Quick Spawn: Note, we must check this for PC version too, since PC players may use game pads.
 		CheckForQuickSpawn_Xbox();

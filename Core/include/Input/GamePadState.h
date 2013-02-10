@@ -10,12 +10,20 @@ struct GamePadState
 {
 	bool IsConnected;
 
+	enum ControllerType
+	{
+		ControllerType_Standard,
+		ControllerType_Mini
+	};
+
+	ControllerType Type;
+
 	GamePadButtons Buttons;
 	GamePadTriggers Triggers;
 	GamePadDPad DPad;
 	GamePadThumbSticks ThumbSticks;
 
-	GamePadState() : IsConnected( false ) { }
+	GamePadState() : IsConnected( false ), Type( ControllerType_Standard ) { }
 };
 
 #endif

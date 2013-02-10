@@ -8,6 +8,10 @@ namespace CloudberryKingdom
 		LineHeightMod = 1;
 	}
 
+	ResolutionGroup::~ResolutionGroup()
+	{
+	}
+
 	boost::shared_ptr<DisplayMode> ResolutionGroup::LastSetMode = 0;
 
 	IntVector2 ResolutionGroup::SafeResolution( int width, int height )

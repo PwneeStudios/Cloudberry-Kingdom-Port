@@ -84,6 +84,7 @@ namespace CloudberryKingdom
 
 		// Read the file, adding translations to the corresponding dictionaries
 		int LineCount = 0;
+
 		for ( int i = 0; i < Words_EnumLength; i++)
 		{
 			line = reader->ReadLine();
@@ -199,7 +200,7 @@ namespace CloudberryKingdom
 			return;
 
 		std::wstring path = Path::Combine(
-#ifdef CAFE
+#if defined( CAFE ) || defined( PS3 )
 			std::wstring(),
 #else
 			std::wstring( L"Content" ),

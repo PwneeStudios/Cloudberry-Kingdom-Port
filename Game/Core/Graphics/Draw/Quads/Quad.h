@@ -128,6 +128,7 @@ namespace CloudberryKingdom
 		Quad( const boost::shared_ptr<Quad> &quad, bool DeepClone );
 
 		Quad();
+		~Quad();
 
 
 		Vector2 getSize() const;

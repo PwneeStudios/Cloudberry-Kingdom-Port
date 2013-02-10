@@ -31,71 +31,71 @@ namespace CloudberryKingdom
 			std::vector<UpgradeSequenceSingle> UpgradeList;
 		
 
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5,
-				DifficultyGroups::UpgradeSequenceSingle s6,
-				DifficultyGroups::UpgradeSequenceSingle s7,
-				DifficultyGroups::UpgradeSequenceSingle s8,
-				DifficultyGroups::UpgradeSequenceSingle s9,
-				DifficultyGroups::UpgradeSequenceSingle s10 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5,
-				DifficultyGroups::UpgradeSequenceSingle s6,
-				DifficultyGroups::UpgradeSequenceSingle s7,
-				DifficultyGroups::UpgradeSequenceSingle s8,
-				DifficultyGroups::UpgradeSequenceSingle s9 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5,
-				DifficultyGroups::UpgradeSequenceSingle s6,
-				DifficultyGroups::UpgradeSequenceSingle s7,
-				DifficultyGroups::UpgradeSequenceSingle s8 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5,
-				DifficultyGroups::UpgradeSequenceSingle s6,
-				DifficultyGroups::UpgradeSequenceSingle s7 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5,
-				DifficultyGroups::UpgradeSequenceSingle s6 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4,
-				DifficultyGroups::UpgradeSequenceSingle s5 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3,
-				DifficultyGroups::UpgradeSequenceSingle s4 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2,
-				DifficultyGroups::UpgradeSequenceSingle s3 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1,
-				DifficultyGroups::UpgradeSequenceSingle s2 );
-			DifficultyGroups::UpgradeSequence::UpgradeSequence(
-				DifficultyGroups::UpgradeSequenceSingle s1 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5,
+				UpgradeSequenceSingle s6,
+				UpgradeSequenceSingle s7,
+				UpgradeSequenceSingle s8,
+				UpgradeSequenceSingle s9,
+				UpgradeSequenceSingle s10 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5,
+				UpgradeSequenceSingle s6,
+				UpgradeSequenceSingle s7,
+				UpgradeSequenceSingle s8,
+				UpgradeSequenceSingle s9 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5,
+				UpgradeSequenceSingle s6,
+				UpgradeSequenceSingle s7,
+				UpgradeSequenceSingle s8 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5,
+				UpgradeSequenceSingle s6,
+				UpgradeSequenceSingle s7 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5,
+				UpgradeSequenceSingle s6 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4,
+				UpgradeSequenceSingle s5 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3,
+				UpgradeSequenceSingle s4 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2,
+				UpgradeSequenceSingle s3 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1,
+				UpgradeSequenceSingle s2 );
+			UpgradeSequence(
+				UpgradeSequenceSingle s1 );
 		};
 
 	

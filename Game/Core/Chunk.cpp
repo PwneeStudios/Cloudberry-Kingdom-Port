@@ -18,7 +18,6 @@ namespace CloudberryKingdom
 		_StartPosition( offset )
 	{
 		_Position = 0;
-		_StartPosition = 0;
 
 		this->Data = Data;
 	}
@@ -145,7 +144,7 @@ namespace CloudberryKingdom
 	void Chunk::Copy( const unsigned char *data, int StartIndex, int BytesToCopy )
 	{
 		Position = 0;
-		EnsureRoom( BytesToCopy );
+		//EnsureRoom( BytesToCopy );
 
 		Position = 8;
 

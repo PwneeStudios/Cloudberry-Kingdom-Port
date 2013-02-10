@@ -177,6 +177,10 @@ namespace CloudberryKingdom
 		Backdrop->ScaleYToMatchRatio( 210 );
 	}
 
+	ObjectIcon::~ObjectIcon()
+	{
+	}
+
 	void ObjectIcon::SetShadow( Color color )
 	{
 	}

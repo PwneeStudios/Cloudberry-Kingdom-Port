@@ -33,7 +33,10 @@
     <ClCompile Include="Core\src\Graphics\EffectPassPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\EffectPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\QuadDrawerPS3.cpp" />
+    <ClCompile Include="Core\src\Graphics\RenderTarget2DPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
+    <ClCompile Include="Core\src\Graphics\Texture2D.cpp" />
+    <ClCompile Include="Core\src\Graphics\VideoPlayerPS3.cpp" />
     <ClCompile Include="Core\src\Input\GamePadPS3.cpp" />
     <ClCompile Include="Core\src\Input\Input.cpp" />
     <ClCompile Include="Core\src\Input\InputPc.cpp" />
@@ -209,7 +212,9 @@
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_CustomLevel.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Exit.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.cpp" />
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.cpp" />
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.cpp" />
     <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\SoundMenu.cpp" />
@@ -236,6 +241,7 @@
     <ClCompile Include="Game\Game\Objects\Door\Door.cpp" />
     <ClCompile Include="Game\Game\Objects\Door\PressNote.cpp" />
     <ClCompile Include="Game\Game\Objects\Game Objects\GameObject.cpp" />
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\ChapterTitle.cpp" />
     <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\Cheer.cpp" />
     <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.cpp" />
     <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\DoorIcon.cpp" />
@@ -355,6 +361,7 @@
     <ClCompile Include="Game\Game\Player\Hero Physics\TimeShip.cpp" />
     <ClCompile Include="Game\Game\Player\Hero Physics\Wheel.cpp" />
     <ClCompile Include="Game\Game\Player\Leaderboard.cpp" />
+    <ClCompile Include="Game\Game\Player\LeaderboardView.cpp" />
     <ClCompile Include="Game\Game\Player\PlayerData.cpp" />
     <ClCompile Include="Game\Game\Player\PlayerManager.cpp" />
     <ClCompile Include="Game\Game\Player\SavedSeeds.cpp" />
@@ -400,7 +407,6 @@
     <ClCompile Include="Game\Hacks\XNA\GraphicsDeviceManager.cpp" />
     <ClCompile Include="Game\Hacks\XNA\SpriteBatch.cpp" />
     <ClCompile Include="Game\Hacks\XNA\SpriteFont.cpp" />
-    <ClCompile Include="Game\Hacks\XNA\Texture2D.cpp" />
     <ClCompile Include="Game\MainClass\XboxPC\CloudberryKingdom.XnaGameClass.cpp" />
     <ClCompile Include="Game\MasterHack.cpp" />
     <ClCompile Include="PS3Main.cpp" />
@@ -761,6 +767,7 @@
     <ClInclude Include="Core\include\Content\Sound.h" />
     <ClInclude Include="Core\include\Content\Texture.h" />
     <ClInclude Include="Core\include\Content\TexturePS3.h" />
+    <ClInclude Include="Core\include\Content\TexturePS3Internal.h" />
     <ClInclude Include="Core\include\Content\Wad.h" />
     <ClInclude Include="Core\include\Core.h" />
     <ClInclude Include="Core\include\CorePS3.h" />
@@ -774,8 +781,12 @@
     <ClInclude Include="Core\include\Graphics\EffectTechnique.h" />
     <ClInclude Include="Core\include\Graphics\QuadDrawer.h" />
     <ClInclude Include="Core\include\Graphics\QuadDrawerPS3.h" />
+    <ClInclude Include="Core\include\Graphics\RenderTarget2D.h" />
     <ClInclude Include="Core\include\Graphics\TextDrawer.h" />
+    <ClInclude Include="Core\include\Graphics\Texture2D.h" />
     <ClInclude Include="Core\include\Graphics\Types.h" />
+    <ClInclude Include="Core\include\Graphics\Video.h" />
+    <ClInclude Include="Core\include\Graphics\VideoPlayer.h" />
     <ClInclude Include="Core\include\Input\GamePad.h" />
     <ClInclude Include="Core\include\Input\GamePadButtons.h" />
     <ClInclude Include="Core\include\Input\GamePadDPad.h" />
@@ -981,7 +992,9 @@
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_CustomLevel.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Exit.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Options.h" />
+    <ClInclude Include="game\game\menus\concrete menus\title screen\startmenu_mw_pre.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_PressStart.h" />
+    <ClInclude Include="game\game\menus\concrete menus\title screen\startmenu_mw_simple.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Campaign.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Story\StartMenu_MW_Cinematics.h" />
     <ClInclude Include="Game\Game\Menus\Concrete Menus\Title Screen\Sub Menus\SoundMenu.h" />
@@ -1008,6 +1021,7 @@
     <ClInclude Include="Game\Game\Objects\Door\Door.h" />
     <ClInclude Include="Game\Game\Objects\Door\PressNote.h" />
     <ClInclude Include="Game\Game\Objects\Game Objects\GameObject.h" />
+    <ClInclude Include="game\game\objects\game objects\gameobjects\chaptertitle.h" />
     <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\Cheer.h" />
     <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\CoinScoreMultiplierObject.h" />
     <ClInclude Include="Game\Game\Objects\Game Objects\GameObjects\DoorIcon.h" />
@@ -1130,6 +1144,7 @@
     <ClInclude Include="game\game\player\hero physics\timeship.h" />
     <ClInclude Include="Game\Game\Player\Hero Physics\Wheel.h" />
     <ClInclude Include="game\game\player\leaderboard.h" />
+    <ClInclude Include="game\game\player\leaderboardview.h" />
     <ClInclude Include="Game\Game\Player\PlayerData.h" />
     <ClInclude Include="Game\Game\Player\PlayerManager.h" />
     <ClInclude Include="Game\Game\Player\SavedSeeds.h" />
@@ -1210,7 +1225,6 @@
     <ClInclude Include="Game\Hacks\XNA\SpriteFont.h" />
     <ClInclude Include="Game\Hacks\XNA\StorageContainer.h" />
     <ClInclude Include="Game\Hacks\XNA\StorageDevice.h" />
-    <ClInclude Include="Game\Hacks\XNA\Texture2D.h" />
     <ClInclude Include="Game\Hacks\XNA\Video.h" />
     <ClInclude Include="Game\Hacks\XNA\VideoPlayer.h" />
     <ClInclude Include="Game\Hacks\XNA\Viewport.h" />
@@ -1264,7 +1278,7 @@
     </ClCompile>
     <Link>
       <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_game_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
-      <InfoStripping>StripSymsAndDebug</InfoStripping>
+      <InfoStripping>None</InfoStripping>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">

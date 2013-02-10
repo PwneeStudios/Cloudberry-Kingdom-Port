@@ -180,8 +180,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	glEnable( GL_VSYNC_SCE );
 
 	glEnable( GL_BLEND );
-	glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA );
-
+	glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+	
 	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_VERTEX ) );
 	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_FRAGMENT ) );
 

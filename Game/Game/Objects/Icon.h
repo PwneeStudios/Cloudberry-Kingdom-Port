@@ -50,6 +50,7 @@ namespace CloudberryKingdom
 
 		OscillateParams MyOscillateParams;
 		ObjectIcon();
+		virtual ~ObjectIcon();
 
 		virtual void SetShadow( Color color );
 

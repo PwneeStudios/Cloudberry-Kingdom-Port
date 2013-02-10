@@ -1023,8 +1023,11 @@ namespace CloudberryKingdom
 		Vector4 HoldCameraPos = EffectWad->getCameraPosition();
 		float HoldCameraAspect = EffectWad->EffectList[ 0 ]->xCameraAspect->GetValueSingle();
 
-		device->SetRenderTarget( ToTextureRenderTarget );
-		device->Clear( Color::Transparent );
+		/*device->SetRenderTarget( ToTextureRenderTarget );
+		device->Clear( Color::Transparent );*/
+		ToTextureRenderTarget->Set();
+		ToTextureRenderTarget->Clear( 0, 0, 0, 0 );
+
 		for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			( *fx )->effect->CurrentTechnique = ( *fx )->Simplest;
 		float scalex = Padding.X + ( BoxList[ 0 ]->TR->Pos.X - BoxList[ 0 ]->BL->Pos.X ) / 2;
@@ -1040,7 +1043,10 @@ namespace CloudberryKingdom
 		for ( std::vector<boost::shared_ptr<EzEffect> >::const_iterator fx = MyEffects.begin(); fx != MyEffects.end(); ++fx )
 			( *fx )->xCameraAspect->SetValue( 1.f );
 		ContainedDraw();
-		device->SetRenderTarget( Tools::DestinationRenderTarget );
+		
+		//device->SetRenderTarget( Tools::DestinationRenderTarget );
+		RenderTarget2D::SetDefault();
+
 		Tools::Render->ResetViewport();
 
 		EffectWad->SetCameraPosition( HoldCameraPos );

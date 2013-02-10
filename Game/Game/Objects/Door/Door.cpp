@@ -1,5 +1,6 @@
 ﻿#include <global_header.h>
 
+#include <Input/GamePad.h>
 #include "Door.h"
 
 namespace CloudberryKingdom
@@ -443,12 +444,12 @@ namespace CloudberryKingdom
 			if ( !down )
 			{
 				ButtonData bd_X = ButtonCheck::State( ControllerButtons_X, bob->MyPlayerIndex );
-				if ( bd_X.Down && bd_X.Type == ControllerType_Standard ) down = true;
+				if ( bd_X.Down && GamePad::GetState( bob->MyPlayerIndex ).Type == GamePadState::ControllerType_Standard ) down = true;
 			}
 			if ( !down )
 			{
 				ButtonData bd_B = ButtonCheck::State( ControllerButtons_B, bob->MyPlayerIndex );
-				if ( bd_B.Down && bd_B.Type == ControllerType_Mini ) down = true;
+				if ( bd_B.Down && GamePad::GetState( bob->MyPlayerIndex ).Type == GamePadState::ControllerType_Mini ) down = true;
 			}
 
 			if ( down )
