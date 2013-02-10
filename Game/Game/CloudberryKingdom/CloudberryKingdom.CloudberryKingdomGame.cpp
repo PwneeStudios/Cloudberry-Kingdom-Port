@@ -26,8 +26,36 @@
 
 #include <Game\Player\LeaderboardView.h>
 
+#include <stdio.h>
+#include <string.h>
+#include <malloc.h>
+#include <crtdbg.h>
+//#include <dbgint.h>
+
 namespace CloudberryKingdom
 {
+
+	_CrtMemState s1, s2, s3;
+
+	void CloudberryKingdomGame::memdebug_DumpStart()
+	{
+		_CrtMemCheckpoint( &s1 );
+	}
+
+	void CloudberryKingdomGame::memdebug_DumpEnd()
+	{
+		_CrtMemCheckpoint( &s2 );
+
+		if ( _CrtMemDifference( &s3, &s1, &s2 ) )
+		{
+			_CrtDumpMemoryLeaks();
+			Tools::Write( L"---------------------------------------------------------" );
+			_CrtMemDumpStatistics( &s3 );
+		}
+	}
+
+
+
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
 	{
 		TitleGameData_MW::InitializeStatics();
@@ -1918,12 +1946,13 @@ float CloudberryKingdomGame::fps = 0;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>();
-				//ScreenSaver_Construct( Intro );
-				//Intro->Init();
+#ifdef _CRTDBG_MAP_ALLOC
+				CloudberryKingdomGame::memdebug_DumpStart();
+#endif
+				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>(); ScreenSaver_Construct( Intro ); Intro->Init();
 
 				return;
 	#else
