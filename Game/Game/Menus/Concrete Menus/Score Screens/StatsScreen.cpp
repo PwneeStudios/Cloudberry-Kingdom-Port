@@ -483,8 +483,6 @@ namespace CloudberryKingdom
 	void StatsMenu::MyDraw()
 	{
 		CkBaseMenu::MyDraw();
-
-		MyPile->Draw( 1 );
 	}
 
 	void StatsMenu::InitializeInstanceFields()

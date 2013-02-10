@@ -83,18 +83,18 @@ namespace CloudberryKingdom
 		std::wstring line;
 
 		// Read the file, adding translations to the corresponding dictionaries
-		line = reader->ReadLine();
 		int LineCount = 0;
 
-		while ( LineCount <= Words_UpSell_FreePlay && line != std::wstring( L"" ) )
+		for ( int i = 0; i < Words_EnumLength; i++)
 		{
+			line = reader->ReadLine();
+
 			Replace( line, std::wstring( L"\\n" ), std::wstring( L"\n" ) );
 			std::vector<std::wstring> bits = Split( line, L'\t' );
 
 			for ( int i = 0; i < NumLanguages; i++ )
 				Text[ static_cast<Language>( i ) ].insert( std::make_pair( static_cast<Words>( LineCount ), bits[ i ] ) );
 
-			line = reader->ReadLine();
 			LineCount++;
 		}
 

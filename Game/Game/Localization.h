@@ -387,6 +387,8 @@ Words_Delete,
 Words_UpSell_Campaign,
 Words_UpSell_Hero,
 Words_UpSell_FreePlay,
+
+Words_EnumLength
 		};
 
 	
