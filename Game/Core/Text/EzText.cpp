@@ -512,6 +512,10 @@ std::map<Keys, std::wstring> ButtonString::KeyToString;
 		Init( str, Width, Centered, YCentered, LineHeightMod );
 	}
 
+	EzText::~EzText()
+	{
+	}
+
 	void EzText::CheckForLineEnd( Vector2 TextSize )
 	{
 		LineHeight = __max( LineHeight, TextSize.Y );

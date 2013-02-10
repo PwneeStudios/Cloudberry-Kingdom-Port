@@ -179,7 +179,7 @@ namespace CloudberryKingdom
 		int level = 1, count = 1;
 
 		line = reader.ReadLine();
-		while ( line != std::wstring( L"eof" ) )
+		while ( line.find( L"eof" ) == std::wstring::npos /*line != std::wstring( L"eof" )*/ )
 		{
 			line = Tools::RemoveComment_DashStyle( line );
 			if ( line == std::wstring( L"" ) || line.length() <= 1 )

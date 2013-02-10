@@ -125,6 +125,10 @@ namespace CloudberryKingdom
 		{
 			InitializeInstanceFields();
 		}
+
+		virtual ~BaseQuad()
+		{
+		}
 	};
 }
 

@@ -628,6 +628,10 @@ namespace CloudberryKingdom
 		//SetColor( Color( 1.f, 1.f, 1.f ) );
 	}
 
+	Quad::~Quad()
+	{
+	}
+
 	Vector2 Quad::getSize() const
 	{
 		return Vector2( xAxis->RelPos.Length(), yAxis->RelPos.Length() );

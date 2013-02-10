@@ -16,7 +16,7 @@ namespace CloudberryKingdom
 	{
 		MainVideo::Content = 0;
 		MainVideo::Playing = false;
-#ifdef CAFE
+#if defined( CAFE )
 		MainVideo::CurrentVideo = boost::make_shared< Video >();
 #else
 		MainVideo::CurrentVideo = 0;
@@ -132,7 +132,7 @@ namespace CloudberryKingdom
 		Cleaned = false;
 
 		//CurrentVideo = Tools::GameClass.Content.Load<Video>(Path.Combine("Movies", MovieName));
-#ifdef CAFE
+#if defined( CAFE )
 		// I cry a little more.
 		if( MovieName == L"Cutscene_1" )
 		{
@@ -174,7 +174,7 @@ namespace CloudberryKingdom
 			CurrentVideo->Path = "/vol/content/Movies/LogoSalad.mp4";
 			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
-#elif PC_VERSION
+#elif defined( PC_VERSION ) || defined( PS3 )
 		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 		// FIXME
 		Tools::Warning();
@@ -301,7 +301,7 @@ bool MainVideo::Paused = false;
         if ( Elapsed > Duration )
             Playing = false;
 
-#ifdef PC_VERSION
+#if defined( PC_VERSION ) || defined( PS3 )
 		// FIXME: PC version should draw the video
 		return true;
 #else

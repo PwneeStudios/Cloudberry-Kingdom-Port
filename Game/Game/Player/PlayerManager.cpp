@@ -886,5 +886,10 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 			Players[ i ] = boost::make_shared<PlayerData>();
 			Players[ i ]->Init( i );
 		}
+
+		// FIXME: Need to load the player data properly.
+		Players[ 0 ]->ContainerName = std::wstring( L"Gamers" );
+		Players[ 0 ]->FileName = std::wstring( L"PlayerProgress" );
+		Players[ 0 ]->Load();
 	}
 }

@@ -10,7 +10,7 @@ namespace CloudberryKingdom
 {
 	struct IPos
 	{
-	
+		virtual ~IPos() { }
 		virtual Vector2 getPos() = 0;
 	};
 

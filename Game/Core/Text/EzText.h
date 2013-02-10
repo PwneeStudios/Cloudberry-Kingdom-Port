@@ -174,8 +174,8 @@ namespace CloudberryKingdom
 		/// Replaces the first bit of text, with no reformatting
 		/// </summary>
 	
-		Vector2 EzText::MeasureString( std::wstring text );
-		Vector2 EzText::MeasureString( boost::shared_ptr<StringBuilder> text );
+		Vector2 MeasureString( std::wstring text );
+		Vector2 MeasureString( boost::shared_ptr<StringBuilder> text );
 
 		void SubstituteText( const std::wstring &text );
 		void SubstituteText( const boost::shared_ptr<StringBuilder> &text );
@@ -273,7 +273,7 @@ namespace CloudberryKingdom
 		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, bool Centered, bool YCentered );
 		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered );
 		EzText( const std::wstring &str, const boost::shared_ptr<EzFont> &font, float Width, bool Centered, bool YCentered, float LineHeightMod );
-
+		virtual ~EzText();
 	
 		Vector2 loc;
 		float LineHeight;

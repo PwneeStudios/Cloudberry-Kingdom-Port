@@ -13,6 +13,7 @@ namespace CloudberryKingdom
 	{
 	
 		ResolutionGroup();
+		virtual ~ResolutionGroup();
 
 		static boost::shared_ptr<DisplayMode> LastSetMode;
 

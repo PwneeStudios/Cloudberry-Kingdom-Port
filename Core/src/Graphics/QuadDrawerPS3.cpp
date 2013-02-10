@@ -174,14 +174,28 @@ void QuadDrawerPS3::Flush()
 	glBindBuffer( GL_ARRAY_BUFFER, internal_->QuadBuffer );
 	glColorPointer( 4, GL_FLOAT, sizeof( QuadVert), reinterpret_cast< const GLvoid * >( offsetof( QuadVert, Color ) ) );
 
-	//internal_->CastleBackground->Activate( 1 );
+	internal_->CastleBackground->Activate( *internal_->ExtraTextureParameter1.get() );
 
 	BatchList::iterator i;
 	for( i = internal_->Batches.begin(); i != internal_->Batches.end(); ++i )
 	{
 		RenderBatch &batch = *i;
 
+		if( batch.Map == internal_->LeftFrame )
+		{
+			internal_->LeftFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+		}
+		else if( batch.Map == internal_->MiddleFrame )
+		{
+			internal_->MiddleFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+		}
+		else if( batch.Map == internal_->RightFrame )
+		{
+			internal_->RightFrameMask->Activate( *internal_->ExtraTextureParameter2.get() );
+		}
+		
 		batch.Map->Activate( *internal_->TextureParameter.get() );
+
 		internal_->CurrentEffect->CurrentTechnique->Passes[ 0 ]->Apply();
 
 		glDrawArrays( GL_QUADS, batch.Offset, batch.NumElements );

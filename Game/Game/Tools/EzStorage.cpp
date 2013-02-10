@@ -2,6 +2,10 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef PS3
+#include <stdio.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -55,7 +59,8 @@ namespace CloudberryKingdom
 
 	void SaveGroup::Wait()
 	{
-		while ( true )
+		// FIXME: This should be used when loading/saving is asynchronous.
+		/*while ( true )
 		{
 			//lock ( Count )
 			{
@@ -71,7 +76,7 @@ namespace CloudberryKingdom
 			}
 
 			Thread::Delay( 1 );
-		}
+		}*/
 	}
 
 	void SaveGroup::Add( const boost::shared_ptr<SaveLoad> &ThingToSave )
@@ -134,26 +139,26 @@ namespace CloudberryKingdom
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( Count )
-		{
+		/*{
 			CountLock->Lock();
 
 			Count->MyInt++;
 
 			CountLock->Unlock();
-		}
+		}*/
 	}
 
 	void SaveGroup::Decr()
 	{
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( Count )
-		{
+		/*{
 			CountLock->Lock();
 
 			Count->MyInt--;
 
 			CountLock->Unlock();
-		}
+		}*/
 	}
 
 	SaveLoad::SaveLambda::SaveLambda( const boost::shared_ptr<SaveLoad> &sl )

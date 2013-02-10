@@ -86,7 +86,7 @@ namespace CloudberryKingdom
 		line = reader->ReadLine();
 		int LineCount = 0;
 
-		while ( line != std::wstring( L"" ) )
+		while ( LineCount <= Words_UpSell_FreePlay && line != std::wstring( L"" ) )
 		{
 			Replace( line, std::wstring( L"\\n" ), std::wstring( L"\n" ) );
 			std::vector<std::wstring> bits = Split( line, L'\t' );
@@ -200,7 +200,7 @@ namespace CloudberryKingdom
 			return;
 
 		std::wstring path = Path::Combine(
-#ifdef CAFE
+#if defined( CAFE ) || defined( PS3 )
 			std::wstring(),
 #else
 			std::wstring( L"Content" ),

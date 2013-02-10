@@ -14,7 +14,7 @@ std::vector<std::wstring> MusicList()
 	v.push_back( std::wstring( L"Music/Blue_Chair^Blind_Digital.mp3" ) );
 	v.push_back( std::wstring( L"Music/Evidence^Blind_Digital.mp3" ) );
 	v.push_back( std::wstring( L"Music/Get_a_Grip^Peacemaker.mp3" ) );
-	v.push_back( std::wstring( L"Music/Happy.mp3" ) );
+	v.push_back( std::wstring( L"Music/Happy^James_Stant.mp3" ) );
 	v.push_back( std::wstring( L"Music/House^Blind_Digital.mp3" ) );
 	v.push_back( std::wstring( L"Music/Nero's_Law^Peacemaker.mp3" ) );
 	v.push_back( std::wstring( L"Music/Ripcurl^Blind_Digital.mp3" ) );

@@ -333,6 +333,10 @@ namespace CloudberryKingdom
 		Initialize( Center, UseFancySize, UseFancyAngle );
 	}
 
+	QuadClass::~QuadClass()
+	{
+	}
+
 	void QuadClass::Initialize( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle )
 	{
 		Quad_Renamed.Init();

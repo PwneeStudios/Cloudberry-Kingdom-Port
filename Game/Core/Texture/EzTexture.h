@@ -50,7 +50,7 @@ namespace CloudberryKingdom
 		void InitializeInstanceFields();
 
 		EzTexture();
-
+		virtual ~EzTexture();
 	};
 
 }

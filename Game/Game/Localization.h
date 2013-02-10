@@ -422,7 +422,7 @@ Words_UpSell_FreePlay,
 	
 		static void Initialize();
 
-		static float Localization::ParseTime( const std::wstring &s );
+		static float ParseTime( const std::wstring &s );
 
 		static void ReadSubtitleInfo( const std::wstring &VideoName );
 

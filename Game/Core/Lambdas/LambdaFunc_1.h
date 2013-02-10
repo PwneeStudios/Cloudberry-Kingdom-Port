@@ -7,7 +7,10 @@ namespace CloudberryKingdom
 	struct LambdaFunc_1 : boost::enable_shared_from_this<LambdaFunc_1<T, OutputType> >
 	{
 	
+		virtual ~LambdaFunc_1() { }
+
 		virtual OutputType Apply( const T &t ) = 0;
+
 	};
 }
 

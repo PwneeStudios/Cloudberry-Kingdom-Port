@@ -1154,9 +1154,6 @@
     <ClCompile Include="Game\Hacks\XNA\SpriteFont.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game\Hacks\XNA\Texture2D.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Game\Hacks\FileReader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -1191,6 +1188,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Game\Game\Player\Hero Physics\TimeShip.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\Texture2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Pre.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Menus\Concrete Menus\Title Screen\StartMenu_MW_Simple.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Objects\Game Objects\GameObjects\ChapterTitle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game\Game\Player\LeaderboardView.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\VideoPlayerPS3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\RenderTarget2DPS3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -3544,9 +3562,6 @@
     <ClInclude Include="Game\Hacks\XNA\StorageDevice.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Game\Hacks\XNA\Texture2D.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Game\Hacks\XNA\Video.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -3635,6 +3650,33 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="game\game\player\hero physics\timeship.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\RenderTarget2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Texture2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\Video.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Graphics\VideoPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\menus\concrete menus\title screen\startmenu_mw_pre.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\menus\concrete menus\title screen\startmenu_mw_simple.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\objects\game objects\gameobjects\chaptertitle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="game\game\player\leaderboardview.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\include\Content\TexturePS3Internal.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

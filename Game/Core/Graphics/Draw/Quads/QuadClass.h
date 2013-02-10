@@ -97,6 +97,7 @@ namespace CloudberryKingdom
 		QuadClass( const boost::shared_ptr<FancyVector2> &Center );
 		QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize );
 		QuadClass( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
+		virtual ~QuadClass();
 
 		void Initialize( const boost::shared_ptr<FancyVector2> &Center, bool UseFancySize, bool UseFancyAngle );
 
