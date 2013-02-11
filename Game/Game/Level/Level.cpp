@@ -3428,7 +3428,17 @@ int Level::AfterPostDrawLayer = 12;
                 float fade = CoreMath::RestrictVal( 0.f, 1.f, ( *bob )->LightSourceFade - DeadCount * .0175f );
 				Color c = Color( 1.f, 1.f, 1.f, ( *bob )->LightSourceFade );
 				float radius = CoreMath::RestrictVal( 0.0f, 1000.0f, 860.0f + DeadCount * 27.0f + CoreMath::Periodic( -30.f, 30.f, 40.f, static_cast<float>( CurPhsxStep ) ) );
-				Tools::QDrawer->DrawLightSource( ( *bob )->getPos(), radius, 5.f, c ); //new Color(.75f, .75f, .75f, .75f));
+				
+				Vector2 position = ( *bob )->getPos();
+
+#if defined( PS3 )
+				// FIXME: Seems like we have an issue where the texture coordinates are flipped.
+				// This is to be expected as OpenGL and DirectX have the texture coordinate origin in the lower left
+				// and upper right respectively.
+				position.Y = -position.Y;
+#endif
+
+				Tools::QDrawer->DrawLightSource( position, radius, 5.f, c ); //new Color(.75f, .75f, .75f, .75f));
 			}
 			Tools::QDrawer->Flush();
 		}

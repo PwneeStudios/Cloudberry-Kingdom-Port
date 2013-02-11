@@ -13,8 +13,6 @@ namespace CloudberryKingdom
 
 		virtual ~SaveLoadSeedMenu() { }
 
-#if defined(WINDOWS)
-	
 		struct MakeSaveHelper : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
 		
@@ -26,19 +24,6 @@ namespace CloudberryKingdom
 
 			void Apply( const boost::shared_ptr<MenuItem> &_item );
 		};
-#else
-	
-		struct SaveLoadSeedsMakeSaveLambda : public Lambda_1<boost::shared_ptr<MenuItem> >
-		{
-		
-			boost::shared_ptr<PlayerData> player;
-		
-			SaveLoadSeedsMakeSaveLambda( const boost::shared_ptr<PlayerData> &player );
-
-			void Apply( const boost::shared_ptr<MenuItem> &item );
-		};
-#endif
-
 	
 		struct LoadProxy : public Lambda_1<boost::shared_ptr<MenuItem> >
 		{
@@ -91,24 +76,11 @@ namespace CloudberryKingdom
 	
 		void SetPosition();
 
-#if defined(WINDOWS)
-	
 		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player );
 
 	
 		boost::shared_ptr<IAsyncResult> kyar;
 		static void Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player );
-#else
-	
-		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player );
-
-	
-		static boost::shared_ptr<IAsyncResult> kyar;
-		static boost::shared_ptr<PlayerData> _player;
-		static void Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<PlayerData> &activeplayer );
-
-		static void OnKeyboardComplete( const boost::shared_ptr<IAsyncResult> &ar );
-#endif
 
 		void Load( const boost::shared_ptr<MenuItem> &_item );
 

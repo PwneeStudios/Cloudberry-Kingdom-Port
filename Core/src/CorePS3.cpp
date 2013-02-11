@@ -181,6 +181,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	glEnable( GL_BLEND );
 	glBlendFunc( GL_ONE, GL_ONE_MINUS_SRC_ALPHA );
+
+	glDisable( GL_DEPTH_TEST );
 	
 	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_VERTEX ) );
 	cgGLEnableProfile( cgGLGetLatestProfile( CG_GL_FRAGMENT ) );

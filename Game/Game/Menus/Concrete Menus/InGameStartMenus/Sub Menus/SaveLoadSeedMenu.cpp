@@ -5,7 +5,7 @@
 namespace CloudberryKingdom
 {
 
-#if defined(WINDOWS)
+
 	SaveLoadSeedMenu::MakeSaveHelper::MakeSaveHelper( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		this->panel = panel;
@@ -16,17 +16,6 @@ namespace CloudberryKingdom
 	{
 		SaveLoadSeedMenu::Save( _item, panel, player );
 	}
-#else
-	SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::SaveLoadSeedsMakeSaveLambda( const boost::shared_ptr<PlayerData> &player )
-	{
-		this->player = player;
-	}
-
-	void SaveLoadSeedMenu::SaveLoadSeedsMakeSaveLambda::Apply( const boost::shared_ptr<MenuItem> &item )
-	{
-		SaveLoadSeedMenu::Save( item, player );
-	}
-#endif
 
 	SaveLoadSeedMenu::LoadProxy::LoadProxy( const boost::shared_ptr<SaveLoadSeedMenu> &slsm )
 	{
@@ -329,6 +318,7 @@ namespace CloudberryKingdom
 		MyPile->setPos( Vector2( -1125.001f, -319.4444f ) );
 	#endif
 	}
+
 
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
