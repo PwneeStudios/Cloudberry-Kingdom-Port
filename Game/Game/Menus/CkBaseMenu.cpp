@@ -343,10 +343,16 @@ namespace CloudberryKingdom
 	{
 		GUI_Panel::ReleaseBody();
 
-		if ( getTopPanel() != 0 )
-			getTopPanel()->Release();
-		if ( getRightPanel() != 0 )
-			getRightPanel()->Release();
+		if ( getTopPanel() != 0 ) getTopPanel()->Release(); //_TopPanel.reset();
+		if ( getRightPanel() != 0 ) getRightPanel()->Release(); //_RightPanel.reset();
+
+		if ( zoom != 0 ) zoom->Release(); zoom.reset();
+		if ( DarkBack != 0 ) DarkBack->Release(); DarkBack.reset();
+
+		SelectSound.reset(); BackSound.reset();
+		ItemFont.reset();
+		_RightPanel.reset(); _TopPanel.reset();
+		MenuTemplate.reset();
 	}
 
 	void CkBaseMenu::Show()

@@ -29,7 +29,6 @@ namespace CloudberryKingdom
 		if ( Lists.empty() )
 			return;
 
-//C# TO C++ CONVERTER TODO TASK: There is no equivalent to implicit typing in C++ unless the C++11 inferred typing option is selected:
 		for ( std::vector<boost::shared_ptr<BackgroundFloaterList> >::const_iterator list = Lists.begin(); list != Lists.end(); ++list )
 			( *list )->Reset();
 	}

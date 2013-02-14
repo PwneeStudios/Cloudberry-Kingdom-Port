@@ -33,11 +33,11 @@ template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const s
 	boost::shared_ptr<Texture2D> t2d = boost::make_shared<Texture2D>(boost::shared_ptr<GraphicsDevice>(), 1, 1);
 	
 #if defined(DEBUG)
-	// WARNING: Fast load
-	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" );
+	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
 	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #else
-	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
+	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
+	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #endif
 
 	return t2d;

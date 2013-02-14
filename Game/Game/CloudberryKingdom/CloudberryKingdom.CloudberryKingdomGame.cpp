@@ -35,25 +35,36 @@
 namespace CloudberryKingdom
 {
 
+#if defined(_CRTDBG_MAP_ALLOC) && defined(WINDOWS)
 	_CrtMemState s1, s2, s3;
 
 	void CloudberryKingdomGame::memdebug_DumpStart()
 	{
+	   // Send all reports to STDOUT
+	   _CrtSetReportMode( _CRT_WARN, _CRTDBG_MODE_FILE );
+	   _CrtSetReportFile( _CRT_WARN, _CRTDBG_FILE_STDOUT );
+	   _CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_FILE );
+	   _CrtSetReportFile( _CRT_ERROR, _CRTDBG_FILE_STDOUT );
+	   _CrtSetReportMode( _CRT_ASSERT, _CRTDBG_MODE_FILE );
+	   _CrtSetReportFile( _CRT_ASSERT, _CRTDBG_FILE_STDOUT );
+
 		_CrtMemCheckpoint( &s1 );
 	}
 
 	void CloudberryKingdomGame::memdebug_DumpEnd()
 	{
+		Recycler::DumpMetaBin();
+
 		_CrtMemCheckpoint( &s2 );
 
 		if ( _CrtMemDifference( &s3, &s1, &s2 ) )
 		{
-			_CrtDumpMemoryLeaks();
+			//_CrtDumpMemoryLeaks();
 			Tools::Write( L"---------------------------------------------------------" );
 			_CrtMemDumpStatistics( &s3 );
 		}
 	}
-
+#endif
 
 
 	void CloudberryKingdomGame::StaticIntializer_NoDependence()
@@ -1954,13 +1965,13 @@ float CloudberryKingdomGame::fps = 0;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
-#ifdef _CRTDBG_MAP_ALLOC
+#if defined(_CRTDBG_MAP_ALLOC) && defined(WINDOWS)
 				CloudberryKingdomGame::memdebug_DumpStart();
 #endif
-				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>(); ScreenSaver_Construct( Intro ); Intro->Init();
+				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>(); ScreenSaver_Construct( Intro ); Intro->Init();
 
 				return;
 	#else

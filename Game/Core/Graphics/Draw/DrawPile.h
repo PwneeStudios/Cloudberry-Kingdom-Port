@@ -43,6 +43,8 @@ namespace CloudberryKingdom
 		std::vector<boost::shared_ptr<EzText> > MyTextList;
 		std::vector<boost::shared_ptr<QuadClass> > MyQuadList;
 
+		void Release();
+
 		DrawPile();
 
 		DrawPile( const boost::shared_ptr<FancyVector2> &Center );

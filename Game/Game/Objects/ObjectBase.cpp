@@ -403,6 +403,8 @@ namespace CloudberryKingdom
 
 		InteractingPlayer.reset();
 		_InteractingBob.reset();
+
+		_TileSet.reset();
 	}
 
 	void ObjectData::SetParentObj( const boost::shared_ptr<ObjectBase> &obj )

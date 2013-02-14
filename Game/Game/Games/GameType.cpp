@@ -101,6 +101,7 @@ namespace CloudberryKingdom
 
 	void GameData::ReleaseThisLambda::Apply()
 	{
+		game->Release();
 	}
 
 	GameData::WaitThenDoCoversion::WaitThenDoCoversion( int WaitLength, const boost::shared_ptr<Lambda> &f )
@@ -660,9 +661,7 @@ namespace CloudberryKingdom
 		ParentGame.reset();
 		EndGame.reset();
 
-		if ( MyLevel != 0 )
-			MyLevel->Release();
-		MyLevel.reset();
+		if ( MyLevel != 0 ) MyLevel->Release(); MyLevel.reset();
 
 		for ( GameObjVec::const_iterator obj = MyGameObjects.begin(); obj != MyGameObjects.end(); ++obj )
 			( *obj )->Release();
@@ -694,6 +693,10 @@ namespace CloudberryKingdom
 
 		Recycler::ReturnRecycler( Recycle );
 		Recycle.reset();
+
+		OnReturnTo_OneOff.reset();
+		OnCompleteLevel.reset();
+		MakeScore.reset();
 	}
 
 	boost::shared_ptr<GameData> GameData::Factory( const boost::shared_ptr<LevelSeedData> &data, bool MakeInBackground )

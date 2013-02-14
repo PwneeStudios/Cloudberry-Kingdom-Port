@@ -35,6 +35,7 @@ namespace CloudberryKingdom
 	void BackgroundFloater::Release()
 	{
 		MyLevel.reset();
+
 		MyQuad->Release();
 	}
 

@@ -214,23 +214,22 @@ namespace CloudberryKingdom
 			return;
 		Released = true;
 
-		if ( SelectIcon != 0 )
-			SelectIcon->Release();
-			SelectIcon.reset();
-		if ( FancyPos != 0 )
-			FancyPos->Release();
-			FancyPos.reset();
+		if ( SelectIcon != 0 ) SelectIcon->Release(); SelectIcon.reset();
+		if ( FancyPos != 0 ) FancyPos->Release(); FancyPos.reset();
 
-		if ( ReleaseParents && ParentMenu != 0 )
-			ParentMenu->Release( true );
-		ParentMenu.reset();
+		if ( ReleaseParents && ParentMenu != 0 ) ParentMenu->Release( true ); ParentMenu.reset();
 
 		if ( Items.size() > 0 )
 			for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator item = Items.begin(); item != Items.end(); ++item )
 				( *item )->Release();
 		Items.clear();
 
-		OnStart = OnX = OnA = OnB = 0;
+		OnStart.reset(); OnX.reset(); OnA.reset(); OnB.reset();
+		OnSelect.reset(); OnY.reset();
+
+		UpDownSound.reset(); SelectSound.reset(); BackSound.reset(); SlideSound.reset(); ListScrollSound.reset();
+		MyPieceQuad.reset(); MyPieceQuadTemplate.reset();
+		MyPieceQuad2.reset(); MyPieceQuadTemplate2.reset();
 
 		AdditionalCheckForOutsideClick.reset();
 	}

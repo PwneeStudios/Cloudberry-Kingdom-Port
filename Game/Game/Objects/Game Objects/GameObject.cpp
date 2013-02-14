@@ -118,14 +118,18 @@ namespace CloudberryKingdom
 	{
 		ObjectBase::Release();
 
-		if ( OnRelease != 0 )
-			OnRelease->Apply();
-		OnRelease.reset();
+		if ( OnRelease != 0 ) OnRelease->Apply(); OnRelease.reset();
 
 		MyGame.reset();
 
 		getCore()->Active = false;
 		getCore()->MarkedForDeletion = true;
+
+		//if ( Tags != 0 )
+		//{
+		//	Tags->dict.clear();
+		//	Tags.reset();
+		//}
 	}
 
 	void GameObject::MakeNew()
