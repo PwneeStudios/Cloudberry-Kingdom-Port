@@ -58,7 +58,7 @@ namespace CloudberryKingdom
 	{
 		Tools::ShowLoadingScreen = false;
 		Tools::TheGame->LogoScreenPropUp = false;
-		Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
+		//Tools::Write( _T( "+++++++++++++++++++ Ending screensave load..." ) );
 	}
 
 	ScreenSaver::GetSeedFuncLambdaSS::GetSeedFuncLambdaSS( const boost::shared_ptr<ScreenSaver> &ss )
@@ -324,7 +324,7 @@ namespace CloudberryKingdom
 		WaitLengthToOpenDoor_FirstLevel = 10 + InitialDarkness - 3;
 
 		Tools::TheGame->LogoScreenPropUp = true;
-		Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
+		//Tools::Write( _T( "+++++++++++++++++++ Beginning screensave load..." ) );
 
 		this->GetSeedFunc = boost::make_shared<GetSeedFuncLambdaSS>( boost::static_pointer_cast<ScreenSaver>( shared_from_this() ) );
 
@@ -407,8 +407,8 @@ namespace CloudberryKingdom
 			cam->EffectiveZoom = Vector2( CoreMath::LerpRestrict( .0025f,.001f, zoom_t->getVal() ) );
 		}
 
-		if ( pos_t != 0 )
-			Tools::Write( ( std::wstring( L"pos_t" ) + ToString( pos_t->getVal() ) ).c_str() );
+		//if ( pos_t != 0 )
+		//	Tools::Write( ( std::wstring( L"pos_t" ) + ToString( pos_t->getVal() ) ).c_str() );
 
 
 		if ( DoBackgroundPhsx && NextIsReady() && (Tools::CurLevel->CurPhsxStep > Duration || Tools::CurLevel->CurPhsxStep > Tools::CurLevel->CurPiece->PieceLength - 50) )

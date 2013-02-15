@@ -19,6 +19,67 @@
 #include <cstddef>
 #include <new>
 
+#ifdef BOOST_BIN
+
+#include <vector>
+#include <string>
+#include <Utility/mutex.h>
+
+// BoostBin stuff here
+#ifdef BOOST_BIN
+
+struct GenericBoostBin;
+
+extern std::vector< GenericBoostBin * > MetaBoostBin;
+
+template <typename T> void OnAssignment( const boost::shared_ptr<T> * p );
+struct Level; struct Coin_Parameters; struct FireSpinner_Parameters; struct Spike_Parameters; struct NormalGameData; struct MakeData;
+
+struct GenericBoostBin
+{
+	
+	Mutex* mutex;
+	bool MutexInitalized;
+
+	std::string ClassName;
+
+	inline GenericBoostBin( std::string name );
+
+	inline virtual ~GenericBoostBin();
+
+	inline void MakeMutex();
+
+	inline void Lock();
+	inline void Unlock();
+
+	virtual int Count() = 0;
+
+};
+
+#define CLASS_NAME( t ) #t
+
+template <typename T>
+struct BoostBin : GenericBoostBin
+{
+
+	std::vector<boost::shared_ptr<T> > MyVec;
+
+	BoostBin();
+
+	int Count();
+
+};
+
+#endif
+
+
+#endif
+
+
+
+
+
+
 namespace boost
 {
 
@@ -132,7 +193,15 @@ template< class T > boost::shared_ptr< T > make_shared()
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+    
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A > boost::shared_ptr< T > allocate_shared( A const & a )
@@ -212,7 +281,14 @@ boost::shared_ptr< T > make_shared( A1 && a1 )
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1 >
@@ -255,7 +331,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2 )
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2 >
@@ -300,7 +383,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3 )
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3 >
@@ -347,7 +437,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4 )
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4 >
@@ -396,7 +493,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4, A5 &
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4, class A5 >
@@ -447,7 +551,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4, A5 &
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4, class A5, class A6 >
@@ -500,7 +611,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4, A5 &
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4, class A5, class A6, class A7 >
@@ -555,7 +673,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4, A5 &
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8 >
@@ -612,7 +737,14 @@ boost::shared_ptr< T > make_shared( A1 && a1, A2 && a2, A3 && a3, A4 && a4, A5 &
     T * pt2 = static_cast< T* >( pv );
 
     boost::detail::sp_enable_shared_from_this( &pt, pt2, pt2 );
-    return boost::shared_ptr< T >( pt, pt2 );
+#ifdef BOOST_BIN
+	boost::shared_ptr<T> sp = boost::shared_ptr< T >( pt, pt2 );
+	static BoostBin< T > * bin = new BoostBin< T >();
+	bin->Lock(); bin->MyVec.push_back( sp ); bin->Unlock();
+	return sp;
+#else
+	return boost::shared_ptr< T >( pt, pt2 );
+#endif
 }
 
 template< class T, class A, class A1, class A2, class A3, class A4, class A5, class A6, class A7, class A8, class A9 >
@@ -977,5 +1109,68 @@ boost::shared_ptr< T > allocate_shared( A const & a, A1 const & a1, A2 const & a
 #undef BOOST_SP_MSD
 
 } // namespace boost
+
+
+// BoostBin stuff here
+#ifdef BOOST_BIN
+
+extern std::vector< GenericBoostBin * > MetaBoostBin;
+
+inline GenericBoostBin::GenericBoostBin( std::string name )
+	: ClassName( name ), MutexInitalized( false )
+{
+	MetaBoostBin.push_back( this );
+}
+
+inline void GenericBoostBin::MakeMutex()
+{
+	mutex = new Mutex();
+	MutexInitalized = true;
+}
+
+inline void GenericBoostBin::Lock()
+{
+	if ( MutexInitalized )
+		mutex->Lock();
+}
+
+inline void GenericBoostBin::Unlock()
+{
+	if ( MutexInitalized )
+		mutex->Unlock();
+}
+
+inline GenericBoostBin::~GenericBoostBin() { }
+
+template <typename T>
+BoostBin<T>::BoostBin() :
+	//GenericBoostBin( CLASS_NAME( T ) )
+	GenericBoostBin( typeid(T).name() )
+{
+		
+}
+
+
+template <typename T>
+int BoostBin<T>::Count()
+{
+	Lock();
+
+	int count = 0;
+	for (std::vector<boost::shared_ptr<T> >::const_iterator ptr = MyVec.begin(); ptr != MyVec.end(); ++ptr )
+	{
+		if ( ( *ptr ).pn.use_count() > 1 )
+		{
+			count++;
+		}
+	}
+
+	Unlock();
+
+	return count;
+}
+
+#endif
+
 
 #endif // #ifndef BOOST_SMART_PTR_MAKE_SHARED_HPP_INCLUDED

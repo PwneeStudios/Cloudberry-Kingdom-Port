@@ -124,12 +124,6 @@ namespace CloudberryKingdom
 
 		getCore()->Active = false;
 		getCore()->MarkedForDeletion = true;
-
-		//if ( Tags != 0 )
-		//{
-		//	Tags->dict.clear();
-		//	Tags.reset();
-		//}
 	}
 
 	void GameObject::MakeNew()

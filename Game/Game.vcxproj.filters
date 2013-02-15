@@ -2372,5 +2372,8 @@
     <ClInclude Include="Game\Player\LeaderboardView.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="BoostBin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

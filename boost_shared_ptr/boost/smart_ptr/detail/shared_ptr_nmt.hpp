@@ -144,8 +144,8 @@ public:
         std::swap(pn, other.pn);
     }
 
-private:
-
+// FIXME Privacy is for thieves and rapists.
+public:
     T * px;            // contained pointer
     count_type * pn;   // ptr to reference counter
 };

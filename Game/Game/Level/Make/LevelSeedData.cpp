@@ -1201,6 +1201,15 @@ namespace CloudberryKingdom
 		Name += std::wstring( L"_Released" );
 #endif
 
+		MySong.reset();
+		OnBeginLoad.reset();
+		Loaded.reset();
+		DefaultHeroType.reset();
+		Rnd.reset();
+		MyBackgroundType.reset();
+		MyTileSet.reset();
+		MyCustomDifficulty.reset();
+
 		ReleasePieces();
 		PieceSeeds.clear();
 		MyGame.reset();

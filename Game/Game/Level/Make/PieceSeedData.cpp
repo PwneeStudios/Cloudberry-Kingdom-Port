@@ -74,10 +74,20 @@ namespace CloudberryKingdom
 
 	void PieceSeedData::Release()
 	{
+		PreStage1.reset();
+		PreStage2.reset();
 		if ( Style != 0 ) Style->Release(); Style.reset();
 		PieceSeed.reset();
+		
+		if ( MyGenData != 0 )
+		{
+			MyGenData->gen1.reset();
+			MyGenData->gen2.reset();
+		}
 		MyGenData.reset();
+
 		MyLevelSeed.reset();
+		MyUpgrades1.reset(); MyUpgrades2.reset();
 	}
 
 	void PieceSeedData::CopyFrom( const boost::shared_ptr<PieceSeedData> &piece )

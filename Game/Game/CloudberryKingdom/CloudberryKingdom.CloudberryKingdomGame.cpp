@@ -26,11 +26,9 @@
 
 #include <Game\Player\LeaderboardView.h>
 
-#include <stdio.h>
-#include <string.h>
-#include <malloc.h>
-#include <crtdbg.h>
-//#include <dbgint.h>
+#ifdef BOOST_BIN
+#include <BoostBin.h>
+#endif
 
 namespace CloudberryKingdom
 {
@@ -41,12 +39,12 @@ namespace CloudberryKingdom
 	void CloudberryKingdomGame::memdebug_DumpStart()
 	{
 	   // Send all reports to STDOUT
-	   _CrtSetReportMode( _CRT_WARN, _CRTDBG_MODE_FILE );
-	   _CrtSetReportFile( _CRT_WARN, _CRTDBG_FILE_STDOUT );
-	   _CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_FILE );
-	   _CrtSetReportFile( _CRT_ERROR, _CRTDBG_FILE_STDOUT );
-	   _CrtSetReportMode( _CRT_ASSERT, _CRTDBG_MODE_FILE );
-	   _CrtSetReportFile( _CRT_ASSERT, _CRTDBG_FILE_STDOUT );
+	   //_CrtSetReportMode( _CRT_WARN, _CRTDBG_MODE_FILE );
+	   //_CrtSetReportFile( _CRT_WARN, _CRTDBG_FILE_STDOUT );
+	   //_CrtSetReportMode( _CRT_ERROR, _CRTDBG_MODE_FILE );
+	   //_CrtSetReportFile( _CRT_ERROR, _CRTDBG_FILE_STDOUT );
+	   //_CrtSetReportMode( _CRT_ASSERT, _CRTDBG_MODE_FILE );
+	   //_CrtSetReportFile( _CRT_ASSERT, _CRTDBG_FILE_STDOUT );
 
 		_CrtMemCheckpoint( &s1 );
 	}
@@ -59,7 +57,7 @@ namespace CloudberryKingdom
 
 		if ( _CrtMemDifference( &s3, &s1, &s2 ) )
 		{
-			//_CrtDumpMemoryLeaks();
+			_CrtDumpMemoryLeaks();
 			Tools::Write( L"---------------------------------------------------------" );
 			_CrtMemDumpStatistics( &s3 );
 		}
@@ -225,6 +223,10 @@ namespace CloudberryKingdom
 		CampaignSequence::instance = boost::make_shared<CampaignSequence>();
 
 		LeaderboardItem::StaticIntialize();
+
+#ifdef BOOST_BIN
+		MakeLocks();
+#endif
 	}
 
 	CloudberryKingdomGame::ExitProxy::ExitProxy( const boost::shared_ptr<CloudberryKingdomGame> &ckg )
@@ -719,6 +721,13 @@ float CloudberryKingdomGame::fps = 0;
 
     void CloudberryKingdomGame::GodModePhxs()
     {
+#ifdef BOOST_BIN
+        if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_D ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_D ) )
+		{
+			Stats();
+		}
+#endif
+
         // Give 100,000 points to each player
 #ifdef PC_VERSION
         if ( KeyboardExtension::IsKeyDownCustom( Tools::Keyboard, Keys_I ) && !KeyboardExtension::IsKeyDownCustom( Tools::PrevKeyboard, Keys_I ) )
@@ -1965,13 +1974,13 @@ float CloudberryKingdomGame::fps = 0;
 
 	#if defined(DEBUG)
 				// Start at Title Screen
-				Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
+				//Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 
 				// Test screen saver
 #if defined(_CRTDBG_MAP_ALLOC) && defined(WINDOWS)
 				CloudberryKingdomGame::memdebug_DumpStart();
 #endif
-				//boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>(); ScreenSaver_Construct( Intro ); Intro->Init();
+				boost::shared_ptr<ScreenSaver> Intro = boost::make_shared<ScreenSaver>(); ScreenSaver_Construct( Intro ); Intro->Init();
 
 				return;
 	#else
@@ -1997,6 +2006,7 @@ float CloudberryKingdomGame::fps = 0;
 		_DrawMouseBackIcon = false;
 #endif
 		ToDo = boost::make_shared<Multicaster>();
+	
 #if defined(WINDOWS)
 		ShowMouse = false;
 #endif

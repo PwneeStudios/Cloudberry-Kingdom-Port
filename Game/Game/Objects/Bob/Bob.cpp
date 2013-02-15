@@ -107,6 +107,8 @@ namespace CloudberryKingdom
 
 	void Bob::Release()
 	{
+		CeilingParams.reset();
+
 		ObjectBase::Release();
 
 		ControlFunc.reset();

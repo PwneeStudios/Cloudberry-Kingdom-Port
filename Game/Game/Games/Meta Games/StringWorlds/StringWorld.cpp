@@ -125,6 +125,8 @@ namespace CloudberryKingdom
 		if ( Released )
 			return;
 
+		GetSeedFunc.reset();
+
 		if ( NextLevelSeed != 0 )
 		{
             if ( LevelIsLoaded( NextLevelSeed ) )

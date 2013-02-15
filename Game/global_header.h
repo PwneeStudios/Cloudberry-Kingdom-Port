@@ -1,6 +1,11 @@
 #ifndef SUPER_GLOBAL_HEADER_H
 #define SUPER_GLOBAL_HEADER_H
 
+//#define _CRTDBG_MAP_ALLOC
+//#include <stdlib.h>
+//#include <crtdbg.h>
+//#define new DEBUG_NEW
+
 #include "enums.h"
 #include "forward_declarations.h"
 #include <ForwardDeclarations.h>

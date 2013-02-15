@@ -132,7 +132,7 @@ namespace CloudberryKingdom
         AddItem( item );
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, L"Button_ViewGamer" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.f, std::wstring( L"Button_ViewGamer" ) ) );
         item->Selectable = false;
 }
         item->setGo( Cast::ToItem( boost::make_shared<ViewGamerProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -145,7 +145,7 @@ if ( ButtonCheck::ControllerInUse )
         AddItem( item );
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getY(), 90, L"Button_SwitchView" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getY(), 90.f, std::wstring( L"Button_SwitchView" ) ) );
         item->Selectable = false;
 }
         item->setGo( Cast::ToItem( boost::make_shared<SwitchViewProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -158,7 +158,7 @@ if ( ButtonCheck::ControllerInUse )
         AddItem( item );
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90, L"Button_SwitchSort" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.f, std::wstring( L"Button_SwitchSort" ) ) );
         item->Selectable = false;
 }
         item->setGo( Cast::ToItem( boost::make_shared<SwitchSortProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -167,8 +167,8 @@ if ( ButtonCheck::ControllerInUse )
         // Back
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, L"Button_Back" ) );
-        MyPile->Add( boost::make_shared<QuadClass>( L"BackArrow2", L"BackArrow" ));
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.f, std::wstring( L"Button_Back" ) ) );
+        MyPile->Add( boost::make_shared<QuadClass>( std::wstring( L"BackArrow2" ), std::wstring( L"BackArrow" ) ) );
         item->Selectable = false;
 }
         item->setGo( Cast::ToItem( boost::make_shared<SwitchSortProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );

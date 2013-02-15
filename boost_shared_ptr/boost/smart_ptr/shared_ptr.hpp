@@ -1,6 +1,11 @@
 #ifndef BOOST_SMART_PTR_SHARED_PTR_HPP_INCLUDED
 #define BOOST_SMART_PTR_SHARED_PTR_HPP_INCLUDED
 
+#ifdef DEBUG
+#define BOOST_BIN
+#endif
+
+
 //
 //  shared_ptr.hpp
 //
@@ -313,6 +318,9 @@ public:
 
     shared_ptr & operator=( shared_ptr const & r ) // never throws
     {
+#ifdef BOOST_BIN
+		OnAssignment( this );
+#endif
         this_type(r).swap(*this);
         return *this;
     }
@@ -479,7 +487,7 @@ public:
 
 #ifndef BOOST_NO_MEMBER_TEMPLATE_FRIENDS
 
-private:
+public:
 
     template<class Y> friend class shared_ptr;
     template<class Y> friend class weak_ptr;

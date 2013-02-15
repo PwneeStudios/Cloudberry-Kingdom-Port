@@ -9,7 +9,9 @@ namespace CloudberryKingdom
 	void StyleData::Release()
 	{
 		MyModParams->Clear();
+		MyModParams.reset();
 		GenParams.clear();
+		Rnd.reset();
 	}
 
 	void StyleData::CalcGenParams( const boost::shared_ptr<PieceSeedData> &SeedData, const boost::shared_ptr<Level> &level )

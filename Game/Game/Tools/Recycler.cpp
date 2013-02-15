@@ -24,6 +24,9 @@ namespace CloudberryKingdom
 		for ( std::vector<boost::shared_ptr<ObjectBase> >::const_iterator obj = BoxObject.begin(); obj != BoxObject.end(); ++obj )
 			if ( ( *obj )->getCore()->MyLevel == 0 )
 				( *obj )->Release();
+
+		FullObject.clear();
+		BoxObject.clear();
 	}
 
 	RecycleBin::RecycleBin( ObjectType type )

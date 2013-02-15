@@ -215,7 +215,7 @@ public:
 
 #ifndef BOOST_NO_MEMBER_TEMPLATE_FRIENDS
 
-private:
+public:
 
     template<class Y> friend class weak_ptr;
     template<class Y> friend class shared_ptr;
