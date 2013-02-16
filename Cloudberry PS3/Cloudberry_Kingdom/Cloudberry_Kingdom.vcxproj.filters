@@ -1211,6 +1211,15 @@
     <ClCompile Include="Core\src\Graphics\RenderTarget2DPS3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\libhlPlayer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\SailAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\SailSoundAdapter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\include\Architecture\Job.h">
@@ -3677,6 +3686,39 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Core\include\Content\TexturePS3Internal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\fp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\vp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\fp_csc_yuv420.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\sample_config.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\sample_player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailSoundAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayerApi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayerApi.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailAdapter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailAllocator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

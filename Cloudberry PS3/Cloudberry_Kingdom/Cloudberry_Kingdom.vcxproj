@@ -32,6 +32,9 @@
     <ClCompile Include="Core\src\Graphics\EffectParameterPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\EffectPassPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\EffectPS3.cpp" />
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\libhlPlayer.cpp" />
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\SailAdapter.cpp" />
+    <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\SailSoundAdapter.cpp" />
     <ClCompile Include="Core\src\Graphics\QuadDrawerPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\RenderTarget2DPS3.cpp" />
     <ClCompile Include="Core\src\Graphics\TextDrawer.cpp" />
@@ -810,6 +813,17 @@
     <ClInclude Include="Core\src\Content\PS3\gtfloader.h" />
     <ClInclude Include="Core\src\Content\PS3\psglGtfLoader.h" />
     <ClInclude Include="Core\src\Graphics\EffectInternalPS3.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayer.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayerApi.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\libhlPlayerApi.hpp" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailAdapter.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailAllocator.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\highlevel\common\SailSoundAdapter.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\fp.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\fp_csc_yuv420.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\sample_config.h" />
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\sample_player.hpp" />
+    <ClInclude Include="Core\src\Graphics\PS3\psgl_player\vp.h" />
     <ClInclude Include="Core\src\Input\PS3\gfxPad.h" />
     <ClInclude Include="Game\CloudberryKingdom.h" />
     <ClInclude Include="Game\Core\Animation\AnimationData_Integer.h" />
@@ -1263,11 +1277,11 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
-    <IncludePath>Core\include;boost_shared_ptr;Game;$(IncludePath)</IncludePath>
+    <IncludePath>Core\include;boost_shared_ptr;Game;Core\src\Graphics\PS3\highlevel\common;$(IncludePath)</IncludePath>
     <SourcePath>C:\usr\local\cell\target\ppu\src\PSGL\jetstream\src\Raster\JSGCM</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|PS3'">
-    <IncludePath>Core\include;boost_shared_ptr;Game;$(IncludePath)</IncludePath>
+    <IncludePath>Core\include;boost_shared_ptr;Game;Core\src\Graphics\PS3\highlevel\common;$(IncludePath)</IncludePath>
     <SourcePath>C:\usr\local\cell\target\ppu\src\PSGL\jetstream\src\Raster\JSGCM</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|PS3'">
@@ -1277,7 +1291,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_game_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_game_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpamf_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsail_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
       <InfoStripping>None</InfoStripping>
     </Link>
   </ItemDefinitionGroup>
@@ -1288,7 +1302,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_game_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_cmd.a;$(SCE_PS3_ROOT)\target\ppu\lib\libgcm_sys_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libresc_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysmodule_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libsysutil_game_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libmstreamSPURSMP3.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpthread.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLFX.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGL.a;$(SCE_PS3_ROOT)\target\ppu\lib\PSGL\RSX\debug\libPSGLU.a;$(SCE_PS3_ROOT)\target\ppu\lib\libaudio_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libusbd_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libspurs_stub.a;$(SCE_PS3_ROOT)\target\ppu\lib\libpamf_stub.a;%(AdditionalDependencies)</AdditionalDependencies>
       <OutputFormat>ELFFile</OutputFormat>
       <InfoStripping>StripSymsAndDebug</InfoStripping>
     </Link>

@@ -58,7 +58,7 @@ CorePS3 &CorePS3::operator = ( const CorePS3 &rhs )
 	}												   \
 }
 
-static void SystemCallback( uint64_t status, uint64_t param, void *userdata )
+static void SystemCallback( const uint64_t status, const uint64_t param, void *userdata )
 {
 	( void )param;
 	( void )userdata;
@@ -71,6 +71,9 @@ static void SystemCallback( uint64_t status, uint64_t param, void *userdata )
 		break;
 	case CELL_SYSUTIL_DRAWING_BEGIN:
 	case CELL_SYSUTIL_DRAWING_END:
+		break;
+	case CELL_SYSUTIL_SYSTEM_MENU_OPEN:
+	case CELL_SYSUTIL_SYSTEM_MENU_CLOSE:
 		break;
 	default:
 		LOG.Write( "Unknown callback status: 0x%llx\n", status );
@@ -115,7 +118,8 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = "/app_home/";
 #endif
 
-	int ret = cellSysutilRegisterCallback( 0, SystemCallback, NULL );
+	// Audio system uses system callback 0.
+	int ret = cellSysutilRegisterCallback( 1, SystemCallback, NULL );
 	if( ret != CELL_OK )
 	{
 		LOG.Write( "Failed to register system callback: error=0x%x\n", ret );
