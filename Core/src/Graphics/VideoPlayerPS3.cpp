@@ -23,7 +23,7 @@ struct VideoPlayerInternal
 	sys_ppu_thread_t displayThread;
 };
 
-static const int NUM_SPU = 2;
+static const int NUM_SPU = 4;
 static const int SPURS_SPU_PRIORITY = 100;
 static const int SPURS_PPU_PRIORITY = 100;
 
@@ -38,7 +38,7 @@ static Texture *MovieTexture = NULL;
 static ResourceHolder *MovieTextureHolder = NULL;
 static boost::shared_ptr< Texture2D > ExternalTexture = NULL;
 
-static void DrawThread( uint64_t arg )
+/*static void DrawThread( uint64_t arg )
 {
 	( void )arg;
 
@@ -60,7 +60,10 @@ static void DrawThread( uint64_t arg )
 	}
 
 	sys_ppu_thread_exit( 0 );
-};
+};*/
+
+// Share the SPURS instance from the media player in mscommon.cpp.
+extern CellSpurs spurs;
 
 VideoPlayer::VideoPlayer()
 	: internal_( new VideoPlayerInternal )
@@ -68,12 +71,12 @@ VideoPlayer::VideoPlayer()
 {
 	memset( internal_, 0, sizeof( VideoPlayerInternal ) );
 
-	std::string moviePath = PS3_PATH_PREFIX + "ContentPS3/" +
-		"Movies/LogoSalad.avi";
+	/*std::string moviePath = PS3_PATH_PREFIX + "ContentPS3/" +
+		"Movies/LogoSalad.mp4";*/
 
-	internal_->mpSpurs = reinterpret_cast< CellSpurs * >( memalign( CELL_SPURS_ALIGN, sizeof( CellSpurs ) ) );
+	//internal_->mpSpurs = reinterpret_cast< CellSpurs * >( memalign( CELL_SPURS_ALIGN, sizeof( CellSpurs ) ) );
 
-	CellSpursAttribute attr;
+	/*CellSpursAttribute attr;
 	int ret = cellSpursAttributeInitialize( &attr, NUM_SPU, SPURS_SPU_PRIORITY, SPURS_PPU_PRIORITY, false );
 	assert( ret == CELL_OK );
 	ret = cellSpursAttributeEnableSpuPrintfIfAvailable( &attr );
@@ -81,10 +84,10 @@ VideoPlayer::VideoPlayer()
 	ret = cellSpursAttributeSetNamePrefix( &attr, "hlpSpurs", strlen( "hlpSpurs" ) );
 	assert( ret == CELL_OK );
 	ret = cellSpursInitializeWithAttribute( internal_->mpSpurs, &attr );
-	assert( ret == CELL_OK );
+	assert( ret == CELL_OK );*/
 
 	VideoPlayerInit videoPlayerInit;
-	videoPlayerInit.pSharedSpurs = internal_->mpSpurs;
+	videoPlayerInit.pSharedSpurs = &spurs;//internal_->mpSpurs;
 	videoPlayerInit.width = 0;
 	videoPlayerInit.height = 0;
 	videoPlayerInit.RGBAOutput = true;
@@ -125,21 +128,21 @@ VideoPlayer::VideoPlayer()
 	ExternalTexture = boost::make_shared< Texture2D >( NULL, 1280, 720 );
 	ExternalTexture->texture_ = MovieTextureHolder;
 
-	if( CELL_OK != sys_ppu_thread_create( &internal_->displayThread, DrawThread, NULL,
+	/*if( CELL_OK != sys_ppu_thread_create( &internal_->displayThread, DrawThread, NULL,
 										dispThrPriority, appStackSize, SYS_PPU_THREAD_CREATE_JOINABLE,
 										"Video draw vsync thread" ) )
 		LOG.Write( "VideoPlayer(): failed to create draw thread\n" );
 	else
-		LOG.Write( "VideoPlayer(): created draw thread, id = %d\n", static_cast< int >( internal_->displayThread ) );
+		LOG.Write( "VideoPlayer(): created draw thread, id = %d\n", static_cast< int >( internal_->displayThread ) );*/
 
-	char buffer[ 512 ];
-	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );
+	/*char buffer[ 512 ];
+	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );*/
 
 	// Global player reference so it can be used from another thread.
 	g_Player = internal_->Player;
 
 
-	bool check = internal_->Player->Play( buffer, false );
+	/*bool check = internal_->Player->Play( buffer, false );
 	if( !check )
 	{
 		LOG.Write( "Couldn't play file: %s\n", buffer );
@@ -155,24 +158,24 @@ VideoPlayer::VideoPlayer()
 		MovieTexture = NULL;
 
 		ExternalTexture = NULL;
-	}
+	}*/
 
-	int playerMemory = 0;
+	/*int playerMemory = 0;
 	int textureMemory = 0;
-	internal_->Player->Memstats( &playerMemory, &textureMemory );
+	internal_->Player->Memstats( &playerMemory, &textureMemory );*/
 }
 
 VideoPlayer::~VideoPlayer()
 {
 	g_runDrawThread = false;
 
-	if( g_Player )
+	/*if( g_Player )
 	{
 		uint64_t stat;
 		int rc = sys_ppu_thread_join( internal_->displayThread, &stat );
 		if( rc != CELL_OK )
 			LOG.Write( "Failed to join thread with error 0x%x\n", rc );
-	}
+	}*/
 
 	g_Player = NULL;
 	delete internal_->Player;
@@ -195,11 +198,11 @@ VideoPlayer::~VideoPlayer()
 	glDeleteBuffers( 1, &PBO );
 	PBO = 0;
 
-	int ret = cellSpursFinalize( internal_->mpSpurs );
+	/*int ret = cellSpursFinalize( internal_->mpSpurs );
 	if( ret != CELL_OK )
-		LOG.Write( "cellSpursFinalize() failed 0x%x\n", ret );
+		LOG.Write( "cellSpursFinalize() failed 0x%x\n", ret );*/
 
-	free( internal_->mpSpurs );
+	//free( internal_->mpSpurs );
 
 	delete internal_;
 }
@@ -211,11 +214,44 @@ void VideoPlayer::SetVolume( float volume )
 
 void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
 {
+	/*std::string moviePath = PS3_PATH_PREFIX + "ContentPS3/" +
+		"Movies/LogoSalad.mp4";*/
+	std::string moviePath = PS3_PATH_PREFIX + video->Path;
 
+	char buffer[ 512 ];
+	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );
+
+	bool check = internal_->Player->Play( buffer, false );
+	if( !check )
+	{
+		LOG.Write( "Couldn't play file: %s\n", buffer );
+		delete internal_->Player;
+		internal_->Player = NULL;
+		g_Player = NULL;
+
+		delete MovieTextureHolder;
+		MovieTextureHolder = NULL;
+
+		glDeleteTextures( 1, &MovieTexture->impl_.internal_->Ref.textureID );
+		delete MovieTexture;
+		MovieTexture = NULL;
+
+		ExternalTexture = NULL;
+	}
 }
 
 void VideoPlayer::DrawFrame()
 {
+	VideoFrameInfo displayFrame;
+
+	if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
+	{
+		if( PBOBuffer )
+		{
+			// Queue up new frame.
+			memcpy( PBOBuffer, displayFrame.buffer, 1280 * 720 * sizeof( uint32_t ) );
+		}
+	}
 }
 
 boost::shared_ptr< Texture2D > VideoPlayer::GetTexture()

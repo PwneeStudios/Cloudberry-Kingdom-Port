@@ -44,7 +44,7 @@ volatile bool s_receivedExitGameRequest;
 /**********************************************************************************/
 // SPURS information
 /**********************************************************************************/
-#define				SPURS_SPU_NUM	1
+#define				SPURS_SPU_NUM	4
 #define				SPU_THREAD_GROUP_PRIORITY		250
 CellSpurs			spurs __attribute__((aligned (128)));
 #endif
