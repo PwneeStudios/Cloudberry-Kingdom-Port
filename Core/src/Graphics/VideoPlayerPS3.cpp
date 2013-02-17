@@ -60,7 +60,7 @@ static boost::shared_ptr< Texture2D > ExternalTexture = NULL;
 	}
 
 	sys_ppu_thread_exit( 0 );
-};*/
+}*/
 
 // Share the SPURS instance from the media player in mscommon.cpp.
 extern CellSpurs spurs;
@@ -133,8 +133,8 @@ VideoPlayer::VideoPlayer()
 										"Video draw vsync thread" ) )
 		LOG.Write( "VideoPlayer(): failed to create draw thread\n" );
 	else
-		LOG.Write( "VideoPlayer(): created draw thread, id = %d\n", static_cast< int >( internal_->displayThread ) );*/
-
+		LOG.Write( "VideoPlayer(): created draw thread, id = %d\n", static_cast< int >( internal_->displayThread ) );
+	*/
 	/*char buffer[ 512 ];
 	snprintf( buffer, sizeof( buffer ), "%s", moviePath.c_str() );*/
 
@@ -191,6 +191,9 @@ VideoPlayer::~VideoPlayer()
 	}
 
 	ExternalTexture = NULL;
+
+	// Empty pbo used by the video player.
+	memset( PBOBuffer, 0, 1280 * 720 * sizeof( uint32_t ) );
 
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 	glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
