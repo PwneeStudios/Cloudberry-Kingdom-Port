@@ -20,6 +20,7 @@
 #include <sys/process.h>
 #include <sys/spu_initialize.h>
 #include <sysutil/sysutil_gamecontent.h>
+#include <sysutil/sysutil_savedata.h>
 
 SYS_PROCESS_PARAM ( 1001, 0x80000 )
 
@@ -80,7 +81,12 @@ static void SystemCallback( const uint64_t status, const uint64_t param, void *u
 	}
 }
 
+// FIXME: EXTERNALS FOR SHARING INFORMATION GLOBALLY!
+
 std::string PS3_PATH_PREFIX;
+
+int GLOBAL_WIDTH;
+int GLOBAL_HEIGHT;
 
 CorePS3::CorePS3( GameLoop &game ) :
 	running_( false ),
@@ -152,6 +158,9 @@ CorePS3::CorePS3( GameLoop &game ) :
 
 	GLuint width, height;
 	psglGetDeviceDimensions( device, &width, &height );
+
+	GLOBAL_WIDTH = width;
+	GLOBAL_HEIGHT = height;
 
 	LOG.Write( "Initializing device, resolution %d x %d\n", width, height );
 
@@ -240,6 +249,12 @@ int CorePS3::Run()
 		game_.Update();
 
 		qd_->Flush();
+
+		int ret = cellSysutilCheckCallback();
+		if( ret )
+		{
+			LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+		}
 
 		psglSwap();
 	}

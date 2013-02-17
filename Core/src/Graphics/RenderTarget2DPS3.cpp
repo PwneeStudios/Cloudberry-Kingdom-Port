@@ -78,13 +78,17 @@ void RenderTarget2D::Set()
 	
 }
 
+// Screen width and height from CorePS3.cpp.
+extern int GLOBAL_WIDTH;
+extern int GLOBAL_HEIGHT;
+
 void RenderTarget2D::SetDefault()
 {
 	glBindFramebufferOES( GL_FRAMEBUFFER_OES, 0 );
 
 	// FIXME: Hardcoded sizes.
-	glViewport( 0, 0, 1280, 1080 );
-	glScissor( 0, 0, 1280, 1080 );
+	glViewport( 0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT );
+	glScissor( 0, 0, GLOBAL_WIDTH, GLOBAL_HEIGHT );
 
 	glClearColor( 0.f, 0.f, 0.f, 1.f );
 	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );

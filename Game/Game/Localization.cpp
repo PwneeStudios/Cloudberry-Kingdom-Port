@@ -198,6 +198,8 @@ namespace CloudberryKingdom
 	{
 		if( VideoName == L"LogoSalad" )
 			return;
+		else if( VideoName == L"Credits" )
+			return;
 
 		std::wstring path = Path::Combine(
 #if defined( CAFE ) || defined( PS3 )
