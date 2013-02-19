@@ -20,7 +20,6 @@ enum {
 };
 
 static void *_file_buffer = NULL;
-static int _file_buffer_size = 0;
 static bool _save_done = false;
 static bool _load_done = false;
 
@@ -495,7 +494,15 @@ namespace CloudberryKingdom
 
 		const std::vector< unsigned char > &saveData = writer->GetBuffer();
 		memset( _file_buffer, 0, AUTOSAVE_SIZE );
-		memcpy( _file_buffer, &saveData[ 0 ], saveData.size() );
+		unsigned int bufferLength = saveData.size();
+
+		// The first 4 bytes are the length of the buffer.
+		memcpy( _file_buffer, &bufferLength, sizeof( unsigned int ) );
+
+		// FIXME: Write checksum here.
+		
+		// Write the rest of the save data.
+		memcpy( reinterpret_cast< char * >( _file_buffer ) + 2 * sizeof( unsigned int ), &saveData[ 0 ], saveData.size() );
 
 		int ret = cellSaveDataAutoSave2(
 			CELL_SAVEDATA_VERSION_420,
@@ -822,12 +829,25 @@ namespace CloudberryKingdom
 
 		if( ret == CELL_SAVEDATA_RET_OK && _file_buffer )
 		{
-			std::vector< unsigned char > data;
-			data.reserve( AUTOSAVE_SIZE );
-			data.assign( reinterpret_cast< unsigned char * >( _file_buffer ),
-				reinterpret_cast< unsigned char * >( _file_buffer ) + AUTOSAVE_SIZE );
-			LoadLogic->Apply( data );
+			unsigned int *intPtr = reinterpret_cast< unsigned int * >( _file_buffer );
+			unsigned int bufferSize = *intPtr++;
+			unsigned int checksum = *intPtr++;
+
+			if( bufferSize > 0 && bufferSize < ( AUTOSAVE_SIZE - 2 * sizeof( unsigned int ) ) )
+			{
+				std::vector< unsigned char > data;
+				data.reserve( AUTOSAVE_SIZE );
+				data.assign( reinterpret_cast< unsigned char * >( intPtr ),
+					reinterpret_cast< unsigned char * >( intPtr ) + bufferSize );
+				LoadLogic->Apply( data );
+			}
+			else
+			{
+				FailLogic->Apply();
+			}
 		}
+		else
+			FailLogic->Apply();
 
 		if( setBuf.buf )
 			free( setBuf.buf );

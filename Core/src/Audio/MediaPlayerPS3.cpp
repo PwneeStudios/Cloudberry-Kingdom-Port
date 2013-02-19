@@ -6,6 +6,8 @@
 #include <Audio/Song.h>
 #include "SongInternalPS3.h"
 
+#include <sys/ppu_thread.h>
+
 static int SUBNUM = 1;
 static int PLAYSUB = SUBNUM | CELL_MS_BUS_FLAG;
 static bool multiStreamUpdateThreadRunning = false;
@@ -202,8 +204,23 @@ float vol;
     return nCh;
 }
 
+
+/*void StartMP3Playback( uint64_t context )
+{
+	SaveToContainerArgs *args = reinterpret_cast< SaveToContainerArgs * >( context );
+
+	EzStorage::SaveToContainer( args->Container, args->FileName, args->SaveLogic, args->Fail );
+
+	delete args;
+
+	sys_ppu_thread_exit( 0 );
+}*/
+
 void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 {
+	/*sys_ppu_thread_t tid;
+	int ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
+	*/
 	if( stream >= 0 )
 	{
 		cellMSStreamClose( stream );
@@ -214,7 +231,7 @@ void MediaPlayer::Play( const boost::shared_ptr<Song> &song )
 	LoadMP3( song->internal_->Path.c_str(), &addr, &size );
 
 	stream = cellMSStreamOpen();
-	sys_timer_usleep( fps60 * 60 * 2 );
+	//sys_timer_usleep( fps60 * 60 * 2 );
 	stream = TriggerStream( stream, addr, addr, size, size, 44100, 2 );
 }
 
