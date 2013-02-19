@@ -1,0 +1,37 @@
+#!gbuild
+[Library]
+	-object_dir=objs\Core
+	-I../fmodex/inc
+src\Graphics\WiiU\audioplayer.cpp
+src\Graphics\WiiU\mp4dmx_api.cpp
+src\Graphics\WiiU\videoplayer.cpp
+src\Graphics\WiiU\videorender.cpp
+src\Graphics\VideoWiiU.cpp
+src\Graphics\VideoPlayerWiiU.cpp
+src\Graphics\Texture2D.cpp
+src\Audio\streamlib\streamPool.c
+src\Audio\SongWiiU.cpp
+src\Audio\MediaPlayerWiiU.cpp
+src\Audio\SoundEffectWiiU.cpp
+src\Utility\MutexWiiU.cpp
+src\Input\GamePadWiiU.cpp
+src\Graphics\EffectWiiU.cpp
+src\Graphics\EffectPassWiiU.cpp
+src\Graphics\EffectParameterWiiU.cpp
+src\Content\Filesystem.cpp
+src\Content\FilesystemWiiU.cpp
+src\Graphics\Color.cpp
+src\Input\InputWiiU.cpp
+src\Input\Input.cpp
+src\Content\File.cpp
+src\Utility\Log.cpp
+src\Content\TextureWiiU.cpp
+src\Graphics\TextDrawer.cpp
+src\Content\Font.cpp
+src\Architecture\SchedulerWiiU.cpp
+src\Content\Wad.cpp
+src\Core.cpp
+src\CoreWiiU.cpp
+src\Graphics\QuadDrawerWiiU.cpp
+src\Audio\streamlib\AXStreamServer.c
+src\Graphics\RenderTarget2DWiiU.cpp
