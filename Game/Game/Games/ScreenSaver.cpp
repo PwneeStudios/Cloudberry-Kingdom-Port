@@ -42,6 +42,9 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ConstructorPressAListenerHelperHelper::Apply()
 	{
+#ifdef _CRTDBG_MAP_ALLOC
+		CloudberryKingdomGame::memdebug_DumpEnd();
+#endif
 		Tools::CurGameData = CloudberryKingdomGame::TitleGameFactory->Make();
 		Tools::CurGameData->FadeIn( .0275f );
 		Tools::AddToDo( boost::make_shared<ScreenSaverReleaseHelper>( ss ) );

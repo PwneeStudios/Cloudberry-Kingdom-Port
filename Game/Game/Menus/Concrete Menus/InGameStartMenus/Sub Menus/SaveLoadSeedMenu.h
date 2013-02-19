@@ -77,15 +77,13 @@ namespace CloudberryKingdom
 		void SetPosition();
 
 		static boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player );
-
 	
 		boost::shared_ptr<IAsyncResult> kyar;
 		static void Save( const boost::shared_ptr<MenuItem> &_item, const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player );
 
 		void Load( const boost::shared_ptr<MenuItem> &_item );
 
-#if defined(WINDOWS)
-
+#ifdef WINDOWS
 		void Copy( const boost::shared_ptr<MenuItem> &_item );
 #endif
 

@@ -3985,7 +3985,13 @@ namespace CloudberryKingdom
 
 	void Background::Release()
 	{
-		MyLevel.reset();
+		MyCollection->Release();
+		MyCollection.reset();
+
+		MyType.reset();
+		MyTileSet.reset();
+
+        MyLevel.reset();
 	}
 
 	void Background::Reset()

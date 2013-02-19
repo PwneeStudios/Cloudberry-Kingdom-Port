@@ -56,6 +56,27 @@ namespace CloudberryKingdom
 		FancyPos->RelVal = value;
 	}
 
+	void DrawPile::Release()
+	{
+		//if ( MyTextList != 0 )
+		{
+			for ( std::vector<boost::shared_ptr<EzText> >::const_iterator t = MyTextList.begin(); t != MyTextList.end(); ++t )
+			{
+				( *t )->Release();
+			}
+		}
+		MyTextList.clear();
+
+		//if ( MyQuadList != 0 )
+		{
+			for ( std::vector<boost::shared_ptr<QuadClass> >::const_iterator q = MyQuadList.begin(); q != MyQuadList.end(); ++q )
+			{
+				( *q )->Release();
+			}
+		}
+		MyQuadList.clear();
+	}
+
 	DrawPile::DrawPile()
 	{
 		InitializeInstanceFields();

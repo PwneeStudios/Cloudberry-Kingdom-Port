@@ -837,7 +837,7 @@
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>DEBUG;GAME;WINDOWS;PC;PC_VERSION;WIN32;UNICODE;_UNICODE;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DEBUG;GAME;WINDOWS;PC;PC_VERSION;WIN32;UNICODE;_UNICODE;_DEBUG;_LIB;_CRTDBG_MAP_ALLOC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
     </ClCompile>

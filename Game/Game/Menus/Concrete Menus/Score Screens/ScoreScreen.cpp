@@ -466,7 +466,7 @@ bool ScoreScreen::UseZoomIn = true;
 		PlayerManager::CalcScore( MyStatGroup );
 
 		int Coins = PlayerManager::PlayerSum( boost::make_shared<VariableCoinsLambda>( MyStatGroup ) );
-		int CoinTotal = PlayerManager::PlayerMax( boost::make_shared<VariableTotalBlobsLambda>( MyStatGroup ) );
+		int CoinTotal = PlayerManager::PlayerMax( boost::make_shared<VariableTotalCoinsLambda>( MyStatGroup ) );
 		int Blobs = PlayerManager::PlayerSum( boost::make_shared<VariableBlobsLambda>( MyStatGroup ) );
 		int BlobTotal = PlayerManager::PlayerMax( boost::make_shared<VariableTotalBlobsLambda>( MyStatGroup ) );
 

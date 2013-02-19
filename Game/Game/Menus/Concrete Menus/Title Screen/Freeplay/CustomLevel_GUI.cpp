@@ -1074,7 +1074,7 @@ else
 
 	void CustomLevel_GUI::MyDraw()
 	{
-		if ( !Active && CallingPanel != 0 && !CallingPanel->Pos->Playing )
+		if ( !Active && CallingPanel != 0 && CallingPanel->Pos != 0 && !CallingPanel->Pos->Playing )
 			MyMenu->Show = false;
 		else
 			MyMenu->Show = true;

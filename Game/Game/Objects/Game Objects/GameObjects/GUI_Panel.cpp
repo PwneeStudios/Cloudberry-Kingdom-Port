@@ -438,7 +438,13 @@ namespace CloudberryKingdom
 	{
 		GameObject::ReleaseBody();
 
+		if ( MyMenu != 0 ) MyMenu->Release(); MyMenu.reset();
+		if ( MyPile != 0 ) MyPile->Release(); MyPile.reset();
+
 		Caller.reset();
+
+		if ( Pos != 0 ) Pos->Release(); Pos.reset();
+		OnOutsideClick.reset();
 	}
 
 	void GUI_Panel::PauseAnimation()

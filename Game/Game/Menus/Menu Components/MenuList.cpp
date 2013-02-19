@@ -61,7 +61,24 @@ namespace CloudberryKingdom
     {
         MenuItem::Release();
 
-        MyMenuListExpand = 0;
+		//Tools::Warning();
+		//return;
+
+        MyMenuListExpand.reset();
+		
+		for ( std::vector<boost::shared_ptr<MenuItem> >::const_iterator _item = MyList.begin(); _item != MyList.end(); ++_item )
+		{
+			if ( ( *_item ) != 0 ) ( *_item )->Release();
+		}
+		MyList.clear();
+		
+		AdditionalExpandProcessing.reset();
+
+		RightArrow.reset(); LeftArrow.reset();;
+		RightArrow_Selected.reset(); LeftArrow_Selected.reset();;
+		OnIndexSelect.reset(); OnConfirmedIndexSelect.reset();;
+		ObjDict.clear();
+		CurMenuItem.reset();
     }
 
 #if defined(WINDOWS)

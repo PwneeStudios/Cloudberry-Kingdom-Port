@@ -104,12 +104,15 @@ namespace CloudberryKingdom
 		MyObject.reset();
 		MyMenu.reset();
 
-		if ( MyText != 0 )
-			MyText->Release();
-			MyText.reset();
-		if ( MySelectedText != 0 )
-			MySelectedText->Release();
-			MySelectedText.reset();
+		if ( MyText != 0 ) MyText->Release(); MyText.reset();
+		if ( MySelectedText != 0 ) MySelectedText->Release(); MySelectedText.reset();
+
+		SelectSound.reset(); SlideSound.reset(); ListScrollSound.reset();
+		if ( FancyPos != 0 ) FancyPos->Release(); FancyPos.reset();
+		Icon.reset();
+		OnClick.reset();
+		AdditionalOnSelect.reset();
+		MySelectedFont.reset(); MyFont.reset();
 
 		_Go.reset();
 	}

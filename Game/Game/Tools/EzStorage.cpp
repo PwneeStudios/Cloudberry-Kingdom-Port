@@ -108,6 +108,11 @@ namespace CloudberryKingdom
 
 	void SaveGroup::SaveAll()
 	{
+#if PC_VERSION
+		// FIXME: save/load on PC version
+		return;
+#endif
+
 		if (CloudberryKingdomGame::getIsDemo()) return;
 
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToSave = ThingsToSave.begin(); ThingToSave != ThingsToSave.end(); ++ThingToSave )
@@ -149,6 +154,11 @@ namespace CloudberryKingdom
 
 	void SaveGroup::LoadAll()
 	{
+#if PC_VERSION
+		// FIXME: save/load on PC version
+		return;
+#endif
+
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{
 			Incr();

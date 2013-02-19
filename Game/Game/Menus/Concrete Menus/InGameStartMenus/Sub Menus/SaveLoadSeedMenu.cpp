@@ -5,7 +5,6 @@
 namespace CloudberryKingdom
 {
 
-
 	SaveLoadSeedMenu::MakeSaveHelper::MakeSaveHelper( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		this->panel = panel;

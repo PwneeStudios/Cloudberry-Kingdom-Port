@@ -1,6 +1,15 @@
 #ifndef CLOUDBERRYKINGDOM_CLOUDBERRYKINGDOMGAME
 #define CLOUDBERRYKINGDOM_CLOUDBERRYKINGDOMGAME
 
+#define MEM_DEBUG
+
+#ifdef MEM_DEBUG
+	#include <stdlib.h>
+	#include <crtdbg.h>
+	#include <errno.h>
+#endif
+
+
 #include <global_header.h>
 
 #include "Hacks/XNA/GraphicsDevice.h"
@@ -15,6 +24,9 @@ namespace CloudberryKingdom
 
 	struct CloudberryKingdomGame : public boost::enable_shared_from_this<CloudberryKingdomGame>
 	{
+
+		static void memdebug_DumpStart();
+		static void memdebug_DumpEnd();
 
 	
 		static void StaticIntializer_NoDependence();

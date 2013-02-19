@@ -2548,7 +2548,7 @@ int Level::AfterPostDrawLayer = 12;
 		LevelPieces.clear();
 		CurPiece.reset();
 
-		MyBackground.reset();
+		if ( MyBackground != 0 ) MyBackground->Release(); MyBackground.reset();
 
 		if ( MainEmitter != 0 )
 		{
@@ -2608,6 +2608,8 @@ int Level::AfterPostDrawLayer = 12;
 			HoldCamera->Release();
 			HoldCamera.reset();
 		OnCameraChange.reset();
+
+		MyTileSet.reset();
 	}
 
 	const boost::shared_ptr<Door> Level::getFinalDoor() const
