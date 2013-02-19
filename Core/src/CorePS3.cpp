@@ -18,6 +18,7 @@
 #include <np.h>
 #include <PSGL/psgl.h>
 #include <PSGL/psglu.h>
+#include <sys/ppu_thread.h>
 #include <sys/process.h>
 #include <sys/spu_initialize.h>
 #include <sysutil/sysutil_gamecontent.h>
@@ -350,6 +351,23 @@ int TrophyStatusCallback( SceNpTrophyContext context, SceNpTrophyStatus status, 
 	return ret;
 }
 
+void RegisterTrophyContextThread( uint64_t context )
+{
+	ContextRegistered = false;
+
+	// Register trophy.
+	int ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
+	if( ret < 0 )
+	{
+		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
+		ContextRegistered = false;
+	}
+
+	LOG.Write( "Trophy configuration done.\n" );
+
+	sys_ppu_thread_exit( 0 );
+}
+
 int CorePS3::Run()
 {
 	running_ = true;
@@ -373,13 +391,12 @@ int CorePS3::Run()
 		LOG.Write( "Couldn't create trophy handle: 0x%x\n", ret );
 
 	// Kick off trophy synchronization.
-	ContextRegistered = false;
-	ret = sceNpTrophyRegisterContext( TrophyContext, TrophyHandle, TrophyStatusCallback, NULL, 0 );
-	if( ret < 0 )
-	{
-		LOG.Write( "Couldn't register trophy context: 0x%x\n", ret );
-		ContextRegistered = false;
-	}
+	sys_ppu_thread_t tid;
+	ret = sys_ppu_thread_create( &tid, RegisterTrophyContextThread, 0,
+		1001, 16 * 1024, 0, "RegisterTrophyContextThread" );
+	if( ret != 0 )
+		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
+
 
 	while( running_ )
 	{

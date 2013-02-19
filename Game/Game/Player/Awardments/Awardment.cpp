@@ -10,6 +10,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #ifdef PS3
+#include <sys/ppu_thread.h>
 #include <TrophyPS3.h>
 #include <Utility/Log.h>
 #endif
@@ -279,6 +280,43 @@ namespace CloudberryKingdom
             }
         }
 
+#ifdef PS3
+		int TranslateAwardmentGuid( int xboxTrophyId )
+		{
+			const int XBOX_TO_PS3[] = { -1, 0, 5, 4, 6, 7, 2, 8, -1, 1, 9, 10, 11, 12, 13, 3, -1, 14, 15 };
+
+			if( xboxTrophyId < 0 || xboxTrophyId > 18 )
+				return -1;
+
+			return XBOX_TO_PS3[ xboxTrophyId ];
+		}
+
+		void AwardAwardmentThread( uint64_t awardGuid )
+		{
+			SceNpTrophyContext context;
+			SceNpTrophyHandle handle;
+
+			// Try to give awardment on PS3.
+			if( GetTrophyContext( context, handle ) )
+			{
+				int ps3Id = TranslateAwardmentGuid( awardGuid );
+
+				if( ps3Id >= 0 )
+				{
+					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
+					int ret = sceNpTrophyUnlockTrophy( context, handle, ps3Id, &platinumId );
+
+					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
+						LOG.Write( "Unlocked impossible platinum trophy!\n" );
+				}
+			}
+
+			LOG.Write( "Awardment given!\n" );
+
+			sys_ppu_thread_exit( 0 );
+		}
+#endif
+
         void Awardments::GiveAward( const boost::shared_ptr<Awardment> &award )
         {
             GiveAward(award, 0);
@@ -315,18 +353,12 @@ namespace CloudberryKingdom
 #endif
 
 #ifdef PS3
-				SceNpTrophyContext context;
-				SceNpTrophyHandle handle;
+				sys_ppu_thread_t tid;
+				int ret = sys_ppu_thread_create( &tid, AwardAwardmentThread,
+					award->Guid, 1001, 16 * 1024, 0, "AwardAwardmentThread" );
 
-				// Try to give awardment on PS3.
-				if( GetTrophyContext( context, handle ) )
-				{
-					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
-					int ret = sceNpTrophyUnlockTrophy( context, handle, award->Guid, &platinumId );
-
-					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
-						LOG.Write( "Unlocked impossible platinum trophy!\n" );
-				}
+				if( ret != 0 )
+					LOG.Write( "Failed to start AwardAwardmentThread" );
 #endif
 
                 // Show a note saying the reward was given
