@@ -1,12 +1,7 @@
 #include <iostream>
 
-template <typename T> void OnAssignment( const boost::shared_ptr<T> * p )
-{
-	if ( dynamic_cast< Level * >( p ) != 0 )
-	{
-		CloudberryKingdom::Tools::Nothing();
-	}
-}
+#include <Game/Level/Level.h>
+
 
 std::vector< GenericBoostBin * > MetaBoostBin;
 

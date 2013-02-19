@@ -32,8 +32,15 @@ struct GenericBoostBin;
 
 extern std::vector< GenericBoostBin * > MetaBoostBin;
 
-template <typename T> void OnAssignment( const boost::shared_ptr<T> * p );
+template <typename T> void OnAssignment( const boost::shared_ptr<T> * p ) { }
+
 struct Level; struct Coin_Parameters; struct FireSpinner_Parameters; struct Spike_Parameters; struct NormalGameData; struct MakeData;
+template <> void OnAssignment<Level>( const boost::shared_ptr<Level> * p )
+{
+
+}
+
+
 
 struct GenericBoostBin
 {
