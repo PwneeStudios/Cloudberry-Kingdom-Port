@@ -318,6 +318,7 @@ namespace CloudberryKingdom
 	#endif
 	}
 
+
 	boost::shared_ptr<Lambda_1<boost::shared_ptr<MenuItem> > > SaveLoadSeedMenu::MakeSave( const boost::shared_ptr<GUI_Panel> &panel, const boost::shared_ptr<PlayerData> &player )
 	{
 		return boost::make_shared<MakeSaveHelper>( panel, player );

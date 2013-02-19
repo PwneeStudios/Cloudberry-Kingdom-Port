@@ -36,8 +36,8 @@ template<> boost::shared_ptr<Texture2D> ContentManager::Load<Texture2D>( const s
 	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
 	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #else
-	t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
-	//t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
+	//t2d->texture_ = CONTENT->Load<Texture>( "Art/default.png" ); // WARNING: Fast load
+	t2d->texture_ = CONTENT->Load<Texture>( WstringToUtf8( name ) + ".png" );
 #endif
 
 	return t2d;

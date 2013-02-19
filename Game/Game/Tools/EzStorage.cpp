@@ -4,6 +4,28 @@
 
 #ifdef PS3
 #include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+
+#include <sys/ppu_thread.h>
+#include <sysutil/sysutil_savedata.h>
+
+#define AUTOSAVEDATA_DIRNAME "TEST00000-AUTO-"
+
+#define AUTOSAVE_FILENAME "SYS-DATA"
+#define AUTOSAVE_SIZE (10 * 1024)
+enum {
+	FILE_INDEX_MUSTEXIST = 0,
+	FILE_INDEX_END
+};
+
+static void *_file_buffer = NULL;
+static bool _save_done = false;
+static bool _load_done = false;
+
+const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
+	0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf, 0xff
+};
 #endif
 
 namespace CloudberryKingdom
@@ -280,12 +302,32 @@ namespace CloudberryKingdom
 		result->AsyncWaitHandle->Close();*/
 	}
 
+#ifdef PS3
+	struct SaveToContainerArgs
+	{
+		boost::shared_ptr<StorageContainer> Container;
+		std::wstring FileName;
+		boost::shared_ptr<Lambda_1<boost::shared_ptr< BinaryWriter > > > SaveLogic;
+		boost::shared_ptr<Lambda> Fail;
+	};
+
+	void SaveToContainerThread( uint64_t context )
+	{
+		SaveToContainerArgs *args = reinterpret_cast< SaveToContainerArgs * >( context );
+
+		EzStorage::SaveToContainer( args->Container, args->FileName, args->SaveLogic, args->Fail );
+
+		delete args;
+
+		sys_ppu_thread_exit( 0 );
+	}
+#endif
+
 	void EzStorage::Save( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr<BinaryWriter> > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		printf( "Save( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
 		
-#ifndef CAFE
-		if ( !DeviceOK() )
+		/*if ( !DeviceOK() )
 			GetDevice();
 
 		if ( !DeviceOK() )
@@ -316,12 +358,28 @@ namespace CloudberryKingdom
 			InUse->MyBool = true;
 
 			InUseLock->Unlock();
-		}
+		}*/
 
-#endif
 
 		boost::shared_ptr< StorageContainer > container = boost::make_shared< StorageContainer >();
+
+#if defined( PS3 )
+		int ret;
+		sys_ppu_thread_t tid;
+
+		SaveToContainerArgs *args = new SaveToContainerArgs;
+		args->Container = container;
+		args->FileName = FileName;
+		args->SaveLogic = SaveLogic;
+		args->Fail = Fail;
+
+		ret = sys_ppu_thread_create( &tid, SaveToContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "SaveToContainerThread" );
+
+		if( ret != 0 )
+			Fail->Apply();
+#else
 		SaveToContainer( container, FileName, SaveLogic, Fail );
+#endif
 
 		// Device is hooked up and ready for us to save to
 
@@ -343,15 +401,137 @@ namespace CloudberryKingdom
 	   , 0);*/
 	}
 
+#ifdef PS3
+	void CallbackDataStatusSave( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
+	{
+		set->reCreateMode = CELL_SAVEDATA_RECREATE_NO;
+		set->setParam = &get->getParam;
+		set->indicator = NULL;
+
+		if( get->isNewData )
+		{
+			printf( "Save data %s does NOT exists.\n", get->dir.dirName );
+
+			int sizeKb = get->sysSizeKB + AUTOSAVE_SIZE / 1024;
+			int neededKb = get->hddFreeSizeKB - sizeKb;
+
+			printf( "hddFreeSizeKB = %d, sizeKb = %d, neededKb = %d\n", get->hddFreeSizeKB, sizeKb, neededKb );
+			if( neededKb < 0 )
+			{
+				printf( "Not enough space to save! Need %d more KB.\n", neededKb );
+
+				result->errNeedSizeKB = neededKb;
+				result->result = CELL_SAVEDATA_CBRESULT_ERR_NOSPACE;
+				return;
+			}
+		}
+
+		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
+	}
+
+	void CallbackFileOperationSave( CellSaveDataCBResult *result, CellSaveDataFileGet *get, CellSaveDataFileSet *set )
+	{
+		result->result = _save_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
+
+		if( _save_done )
+			return;
+
+		set->fileOperation = CELL_SAVEDATA_FILEOP_WRITE;
+		set->fileBuf = _file_buffer;
+		set->fileBufSize = AUTOSAVE_SIZE;
+		set->fileName = AUTOSAVE_FILENAME;
+		set->fileSize = AUTOSAVE_SIZE;
+		set->fileOffset = 0;
+
+		set->fileType = CELL_SAVEDATA_FILETYPE_SECUREFILE;
+		memcpy( set->secureFileId, secureFileId, CELL_SAVEDATA_SECUREFILEID_SIZE );
+		set->reserved = NULL;
+
+		_save_done = true;
+	}
+#endif
+
 	void EzStorage::SaveToContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<boost::shared_ptr< BinaryWriter > > > &SaveLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
 		std::string path = WstringToUtf8( FileName );
 		printf( "Save( FileName = %s );\n", path.c_str() );
-#ifndef CAFE
+
 		// Check to see whether the save exists.
-		if ( container->FileExists( FileName ) )
+		/*if ( container->FileExists( FileName ) )
 			// Delete it so that we can create one fresh.
-			container->DeleteFile( FileName );
+			container->DeleteFile( FileName );*/
+
+#ifdef PS3
+
+		if( FileName == L"HighScores" || FileName == L"PlayerData.hsc" )
+		{
+			if( Fail )
+				Fail->Apply();
+			return;
+		}
+
+		// FIXME: Allow more than one save operation in flight.
+		static bool saveInFlight = false;
+		
+		if( saveInFlight )
+			return;
+
+		saveInFlight = true;
+		_save_done = false;
+
+		path = "SaveData.bam";
+
+		char dirName[ CELL_SAVEDATA_DIRNAME_SIZE ];
+		
+		strncpy( dirName, AUTOSAVEDATA_DIRNAME, CELL_SAVEDATA_DIRNAME_SIZE );
+		dirName[ CELL_SAVEDATA_DIRNAME_SIZE ] = 0;
+
+		CellSaveDataSetBuf setBuf;
+		setBuf.dirListMax = 0;
+		setBuf.fileListMax = FILE_INDEX_END;
+		memset( setBuf.reserved, 0, sizeof( setBuf.reserved ) );
+		setBuf.bufSize = sizeof( CellSaveDataFileStat );
+		setBuf.buf = malloc( setBuf.bufSize );
+
+		assert( setBuf.buf );
+
+		boost::shared_ptr< MemoryBinaryWriter > writer = boost::make_shared< MemoryBinaryWriter >( 64 * 1024 );
+		SaveLogic->Apply( writer );
+
+		_file_buffer = malloc( AUTOSAVE_SIZE );
+
+		assert( _file_buffer );
+
+		const std::vector< unsigned char > &saveData = writer->GetBuffer();
+		memset( _file_buffer, 0, AUTOSAVE_SIZE );
+		unsigned int bufferLength = saveData.size();
+
+		// The first 4 bytes are the length of the buffer.
+		memcpy( _file_buffer, &bufferLength, sizeof( unsigned int ) );
+
+		// FIXME: Write checksum here.
+		
+		// Write the rest of the save data.
+		memcpy( reinterpret_cast< char * >( _file_buffer ) + 2 * sizeof( unsigned int ), &saveData[ 0 ], saveData.size() );
+
+		int ret = cellSaveDataAutoSave2(
+			CELL_SAVEDATA_VERSION_420,
+			dirName,
+			CELL_SAVEDATA_ERRDIALOG_ALWAYS,
+			&setBuf,
+			CallbackDataStatusSave,
+			CallbackFileOperationSave,
+			SYS_MEMORY_CONTAINER_ID_INVALID,
+			NULL
+		);
+
+		if( _file_buffer )
+		{
+			free( _file_buffer );
+			_file_buffer = NULL;
+		}
+
+		saveInFlight = false;
 #endif
 
 #ifdef CAFE
@@ -388,7 +568,6 @@ namespace CloudberryKingdom
 		}
 #endif
 
-#ifndef CAFE
 		// FIXME: Implement this.
 
 		// Create the file.
@@ -410,20 +589,41 @@ namespace CloudberryKingdom
 
 //C# TO C++ CONVERTER TODO TASK: There is no built-in support for multithreading in native C++:
 		//lock ( InUse )
-		{
+		/*{
 			InUseLock->Lock();
 
 			InUse->MyBool = false;
 
 			InUseLock->Unlock();
-		}
-#endif
+		}*/
 	}
+
+#ifdef PS3
+	struct LoadFromContainerArgs
+	{
+		boost::shared_ptr< StorageContainer > Container;
+		std::wstring FileName;
+		boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > LoadLogic;
+		boost::shared_ptr<Lambda> Fail;
+	};
+
+	void LoadFromContainerThread( uint64_t context )
+	{
+		LoadFromContainerArgs *args = reinterpret_cast< LoadFromContainerArgs * >( context );
+
+		EzStorage::LoadFromContainer( args->Container, args->FileName, args->LoadLogic, args->Fail );
+
+		delete args;
+
+		sys_ppu_thread_exit( 0 );
+	}
+#endif
 
 	void EzStorage::Load( const std::wstring &ContainerName, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &Fail )
 	{
-#ifndef CAFE
-		if ( !DeviceOK() )
+		printf( "Load( ContainerName = %s, FileName = %s );\n", WstringToUtf8( ContainerName ).c_str(), WstringToUtf8( FileName ).c_str() );
+		
+		/*if ( !DeviceOK() )
 			GetDevice();
 
 		if ( !DeviceOK() )
@@ -454,11 +654,27 @@ namespace CloudberryKingdom
 			InUse->MyBool = true;
 
 			InUseLock->Unlock();
-		}
-#endif
+		}*/
 
 		boost::shared_ptr< StorageContainer > container = boost::make_shared< StorageContainer >();
+
+#if defined( PS3 )
+		int ret;
+		sys_ppu_thread_t tid;
+
+		LoadFromContainerArgs *args = new LoadFromContainerArgs;
+		args->Container = container;
+		args->FileName = FileName;
+		args->LoadLogic = LoadLogic;
+		args->Fail = Fail;
+
+		ret = sys_ppu_thread_create( &tid, LoadFromContainerThread, reinterpret_cast< uint64_t >( args ), 1001, 16 * 1024, 0, "LoadFromContainerThread" );
+
+		if( ret != 0 )
+			Fail->Apply();
+#else
 		LoadFromContainer( container, FileName, LoadLogic, Fail );
+#endif
 		// Device is hooked up and ready for us to load from
 
 		// Open a container
@@ -481,8 +697,88 @@ namespace CloudberryKingdom
 	   , 0);*/
 	}
 
+#ifdef PS3
+	void CallbackDataStatusLoad( CellSaveDataCBResult *result, CellSaveDataStatGet *get, CellSaveDataStatSet *set )
+	{
+		// Check if there is any data to load.
+		if( get->isNewData )
+		{
+			printf( "NO SAVE DATA FOUND!\n" );
+			result->result = CELL_SAVEDATA_CBRESULT_ERR_NODATA;
+			return;
+		}
+
+		// There is some data!
+		if( get->fileListNum < get->fileNum )
+		{
+			printf( "MORE FILES THAN EXPECTED!\n" );
+			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
+			return;
+		}
+
+		bool foundAutosave = false;
+		for( unsigned int i = 0; i < get->fileListNum; ++i )
+		{
+			if( strcmp( get->fileList[ i ].fileName, AUTOSAVE_FILENAME ) == 0 )
+			{
+				if( get->fileList[ i ].st_size != AUTOSAVE_SIZE )
+				{
+					printf( "Save file is of the wrong size! Expected %d but got %d.\n", AUTOSAVE_SIZE, get->fileList[ i ].st_size );
+					result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
+					return;
+				}
+
+				foundAutosave = true;
+			}
+		}
+
+		if( !foundAutosave )
+		{
+			printf( "Save file %s missing!\n", AUTOSAVE_FILENAME );
+			result->result = CELL_SAVEDATA_CBRESULT_ERR_BROKEN;
+			return;
+		}
+
+		set->reCreateMode = CELL_SAVEDATA_RECREATE_NO_NOBROKEN;
+		set->setParam = NULL;
+		set->indicator = NULL;
+
+		result->result = CELL_SAVEDATA_CBRESULT_OK_NEXT;
+		result->userdata = NULL;
+		printf( "CallbackDataStatusLoad end.\n" );
+	}
+
+	void CallbackFileOperationLoad( CellSaveDataCBResult *result, CellSaveDataFileGet *get, CellSaveDataFileSet *set )
+	{
+		result->result = _load_done ? CELL_SAVEDATA_CBRESULT_OK_LAST : CELL_SAVEDATA_CBRESULT_OK_NEXT;
+
+		if( _load_done )
+			return;
+
+		if( _file_buffer )
+			free( _file_buffer );
+
+		_file_buffer = malloc( AUTOSAVE_SIZE );
+
+		set->fileOperation = CELL_SAVEDATA_FILEOP_READ;
+		set->fileBuf = _file_buffer;
+		set->fileBufSize = AUTOSAVE_SIZE;
+		set->fileOffset = 0;
+		set->fileName = AUTOSAVE_FILENAME;
+		set->fileSize = AUTOSAVE_SIZE;
+		set->fileType = CELL_SAVEDATA_FILETYPE_SECUREFILE;
+		memcpy( set->secureFileId, secureFileId, CELL_SAVEDATA_SECUREFILEID_SIZE );
+		set->reserved = NULL;
+
+		_load_done = true;
+	}
+#endif
+
 	void EzStorage::LoadFromContainer( const boost::shared_ptr<StorageContainer> &container, const std::wstring &FileName, const boost::shared_ptr<Lambda_1<std::vector<unsigned char> > > &LoadLogic, const boost::shared_ptr<Lambda> &FailLogic )
 	{
+		std::string path = WstringToUtf8( FileName );
+		printf( "Load( FileName = %s );\n", path.c_str() );
+
 		// Fallback action if file doesn't exist
 		/*if ( !container->FileExists( FileName ) )
 		{
@@ -504,6 +800,74 @@ namespace CloudberryKingdom
 
 			return;
 		}*/
+
+#ifdef PS3
+		if( FileName == L"HighScores" || FileName == L"PlayerData.hsc" )
+		{
+			FailLogic->Apply();
+			return;
+		}
+
+		path = "SaveData.bam";
+
+		_load_done = false;
+
+		char dirName[ CELL_SAVEDATA_PREFIX_SIZE ];
+		CellSaveDataSetBuf setBuf;
+
+		strncpy( dirName, AUTOSAVEDATA_DIRNAME, CELL_SAVEDATA_PREFIX_SIZE );
+		dirName[ CELL_SAVEDATA_PREFIX_SIZE - 1 ] = 0;
+
+		setBuf.dirListMax = 0;
+		setBuf.fileListMax = FILE_INDEX_END;
+		memset( setBuf.reserved, 0, sizeof( setBuf.reserved ) );
+		setBuf.bufSize = FILE_INDEX_END * sizeof( CellSaveDataFileStat );
+		setBuf.buf = malloc( setBuf.bufSize );
+
+		assert( setBuf.buf );
+
+		int ret = cellSaveDataAutoLoad2(
+			CELL_SAVEDATA_VERSION_420,
+			dirName,
+			CELL_SAVEDATA_ERRDIALOG_NONE,
+			&setBuf,
+			CallbackDataStatusLoad,
+			CallbackFileOperationLoad,
+			SYS_MEMORY_CONTAINER_ID_INVALID,
+			NULL
+		);
+
+		if( ret == CELL_SAVEDATA_RET_OK && _file_buffer )
+		{
+			unsigned int *intPtr = reinterpret_cast< unsigned int * >( _file_buffer );
+			unsigned int bufferSize = *intPtr++;
+			unsigned int checksum = *intPtr++;
+
+			if( bufferSize > 0 && bufferSize < ( AUTOSAVE_SIZE - 2 * sizeof( unsigned int ) ) )
+			{
+				std::vector< unsigned char > data;
+				data.reserve( AUTOSAVE_SIZE );
+				data.assign( reinterpret_cast< unsigned char * >( intPtr ),
+					reinterpret_cast< unsigned char * >( intPtr ) + bufferSize );
+				LoadLogic->Apply( data );
+			}
+			else
+			{
+				FailLogic->Apply();
+			}
+		}
+		else
+			FailLogic->Apply();
+
+		if( setBuf.buf )
+			free( setBuf.buf );
+
+		if( _file_buffer )
+		{
+			free( _file_buffer );
+			_file_buffer = NULL;
+		}
+#endif
 
 #ifdef CAFE
 		if( LoadLogic != 0 )

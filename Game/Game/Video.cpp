@@ -2,12 +2,17 @@
 
 #include "Hacks/NET/Path.h"
 
+#include <Content/ResourcePtr.h>
+#include <Content/Texture.h>
+#include <Graphics/Texture2D.h>
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 #include "Video.h"
 #include <Core/Tools/Set.h>
 #include <Core.h>
 #include <Graphics/QuadDrawer.h>
+
+#include <boost/shared_ptr.hpp>
 
 namespace CloudberryKingdom
 {
@@ -16,7 +21,7 @@ namespace CloudberryKingdom
 	{
 		MainVideo::Content = 0;
 		MainVideo::Playing = false;
-#if defined( CAFE )
+#if defined( CAFE ) || defined( PS3 )
 		MainVideo::CurrentVideo = boost::make_shared< Video >();
 #else
 		MainVideo::CurrentVideo = 0;
@@ -98,6 +103,8 @@ namespace CloudberryKingdom
 		Tools::QDrawer->Flush();*/
 	}
 
+	extern std::string PS3_PATH_PREFIX;
+
 	void MainVideo::StartVideo( const std::wstring &MovieName, bool CanSkipVideo, float LengthUntilCanSkip )
 	{
 #if DEBUG
@@ -174,7 +181,48 @@ namespace CloudberryKingdom
 			CurrentVideo->Path = "/vol/content/Movies/LogoSalad.mp4";
 			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
 		}
-#elif defined( PC_VERSION ) || defined( PS3 )
+#elif defined( PS3 )
+		if( MovieName == L"Cutscene_1" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_1.mp4";
+			CurrentVideo->Duration.TotalSeconds = 64.083333f;
+		}
+		else if( MovieName == L"Cutscene_2" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_2.mp4";
+			CurrentVideo->Duration.TotalSeconds = 34.0416666f;
+		}
+		else if( MovieName == L"Cutscene_3" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_3.mp4";
+			CurrentVideo->Duration.TotalSeconds = 30.8333333f;
+		}
+		else if( MovieName == L"Cutscene_4" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_4.mp4";
+			CurrentVideo->Duration.TotalSeconds = 40.25f;
+		}
+		else if( MovieName == L"Cutscene_5" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_5.mp4";
+			CurrentVideo->Duration.TotalSeconds = 55.29166666f;
+		}
+		else if( MovieName == L"Cutscene_6" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Cutscene_6.mp4";
+			CurrentVideo->Duration.TotalSeconds = 206.875f;
+		}
+		else if( MovieName == L"Credits" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/Credits.mp4";
+			CurrentVideo->Duration.TotalSeconds = 142.0833333f;
+		}
+		else if( MovieName == L"LogoSalad" )
+		{
+			CurrentVideo->Path = "ContentPS3/Movies/LogoSalad.mp4";
+			CurrentVideo->Duration.TotalSeconds = 9.933333333f;
+		}
+#elif defined( PC_VERSION )
 		//CurrentVideo = Content->Load<Video>( Path::Combine( std::wstring( L"Movies" ), MovieName ) );
 		// FIXME
 		Tools::Warning();
@@ -183,8 +231,6 @@ namespace CloudberryKingdom
 		Elapsed = 0;
 		return;
 #endif
-
-
 		
 		Duration = CurrentVideo->Duration.TotalSeconds;
 		Elapsed = 0;
@@ -301,24 +347,33 @@ bool MainVideo::Paused = false;
         if ( Elapsed > Duration )
             Playing = false;
 
-#if defined( PC_VERSION ) || defined( PS3 )
+#if defined( PC_VERSION )
 		// FIXME: PC version should draw the video
 		return true;
 #else
 		VPlayer->DrawFrame();
 #endif
-		/*VEZTexture->setTex( VPlayer->GetTexture() );
-		VEZTexture->Width = VEZTexture->getTex()->Width;
-		VEZTexture->Height = VEZTexture->getTex()->Height;
 
-		Vector2 Pos = Vector2(0);
-		//Vector2 Pos = Tools::getCurCamera()->getPos();
-		Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
-		Tools::QDrawer->Flush();*/
+#if defined( PS3 )
+		boost::shared_ptr< Texture2D > texture = VPlayer->GetTexture();
 
-		// FIXME: Need to put subtitles back.
-		//Subtitle();
+		if( texture )
+		{
+			VEZTexture->setTex( VPlayer->GetTexture() );
+			VEZTexture->Width = VEZTexture->getTex()->Width;
+			VEZTexture->Height = VEZTexture->getTex()->Height;
 
+			Vector2 Pos = Vector2(0);
+			//Vector2 Pos = Tools::getCurCamera()->getPos();
+			Tools::QDrawer->DrawToScaleQuad( Pos, Color::White, 3580, VEZTexture, Tools::BasicEffect );
+			Tools::QDrawer->Flush();
+		}
+#endif
+
+#if defined( PS3 )
+		Subtitle();
+#endif
+		
 	//#if WINDOWS && DEBUG
 	//                Tools::StartSpriteBatch();
 	//                Tools::Render.MySpriteBatch.DrawString(Resources::LilFont.Font,

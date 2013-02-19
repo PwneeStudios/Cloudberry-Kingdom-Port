@@ -9,6 +9,11 @@
 
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
+#ifdef PS3
+#include <TrophyPS3.h>
+#include <Utility/Log.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -298,8 +303,7 @@ namespace CloudberryKingdom
                     player->Awardments_Renamed->Add( award->Guid );
 
 #ifdef NOT_PC
-				// FIXME give award here on PS3
-				Tools::Warning();
+				//Tools::Warning();
                 //if (award->Official)
                 //{
                 //    foreach (var gamer in Gamer.SignedInGamers)
@@ -308,6 +312,21 @@ namespace CloudberryKingdom
                 //        gamer.BeginAwardAchievement(award.Key, GiveAchievementCallback, AwardedGamer);
                 //    }
                 //}
+#endif
+
+#ifdef PS3
+				SceNpTrophyContext context;
+				SceNpTrophyHandle handle;
+
+				// Try to give awardment on PS3.
+				if( GetTrophyContext( context, handle ) )
+				{
+					SceNpTrophyId platinumId = SCE_NP_TROPHY_INVALID_TROPHY_ID;
+					int ret = sceNpTrophyUnlockTrophy( context, handle, award->Guid, &platinumId );
+
+					if( platinumId != SCE_NP_TROPHY_INVALID_TROPHY_ID )
+						LOG.Write( "Unlocked impossible platinum trophy!\n" );
+				}
 #endif
 
                 // Show a note saying the reward was given
