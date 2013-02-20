@@ -197,7 +197,7 @@ VideoPlayer::~VideoPlayer()
 
 	/*glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 	glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
-	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );/*
+	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );*/
 	glDeleteBuffers( 1, &PBO );
 	PBO = 0;
 

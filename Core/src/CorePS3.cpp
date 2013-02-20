@@ -187,7 +187,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	PS3_PATH_PREFIX = std::string( usrdirPath ) + "/";
 	// To test an hdd game in release mode with the debugger we need to tell it about the
 	// game code.  Also the files should be pre-installed on the disk.
-	//PS3_PATH_PREFIX = "/dev_hdd0/game/TEST00000/USRDIR/";
+	PS3_PATH_PREFIX = "/dev_hdd0/game/NPEB01312/USRDIR/";
 	LOG.Write( "Running in %s\nContent dir %s\n", dirName, usrdirPath );
 #ifdef DEBUG
 	PS3_PATH_PREFIX = "/app_home/";

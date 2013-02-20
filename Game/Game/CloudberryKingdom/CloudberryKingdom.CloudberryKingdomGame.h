@@ -3,7 +3,7 @@
 
 #define MEM_DEBUG
 
-#ifdef MEM_DEBUG
+#if defined( MEM_DEBUG ) && defined( WINDOWS )
 	#include <stdlib.h>
 	#include <crtdbg.h>
 	#include <errno.h>

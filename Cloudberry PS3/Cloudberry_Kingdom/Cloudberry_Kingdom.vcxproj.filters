@@ -1220,6 +1220,9 @@
     <ClCompile Include="Core\src\Graphics\PS3\highlevel\lib\src\SailSoundAdapter.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Game\Hacks\String.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Core\include\Architecture\Job.h">

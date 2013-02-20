@@ -114,14 +114,7 @@ inline std::wstring Format( const wchar_t *format, ... )
 	return std::wstring( buffer );
 }
 
-inline std::wstring FormatWithSeparators( int i )
-{
-	std::wstringstream wss;
-	//wss.imbue( std::locale( "en_US.UTF-8" ) );
-	wss.imbue( std::locale( "" ) ); // This should using the local culture's version of number formating. Test it?
-	wss << i;
-	return wss.str();
-}
+std::wstring FormatWithSeparators( int i );
 
 
 // FIXME: Do not understand why format doesn't take a wstring like this method (Used in VerifyDeleteSeed.cpp, other Format wouldn't compile)

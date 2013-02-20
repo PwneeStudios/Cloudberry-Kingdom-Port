@@ -28,9 +28,12 @@
 
 #include <stdio.h>
 #include <string.h>
-#include <malloc.h>
-#include <crtdbg.h>
-//#include <dbgint.h>
+
+#ifdef WINDOWS
+	#include <malloc.h>
+	#include <crtdbg.h>
+	//#include <dbgint.h>
+#endif
 
 namespace CloudberryKingdom
 {
@@ -297,7 +300,7 @@ Version CloudberryKingdomGame::GameVersion = Version( 0, 2, 4 );
 #elif PS3
 		bool CloudberryKingdomGame::HideLogos = false;
 		bool CloudberryKingdomGame::LockCampaign = false;
-		bool CloudberryKingdomGame::SimpleMainMenu = false;
+		bool CloudberryKingdomGame::SimpleMainMenu = true;
 		bool CloudberryKingdomGame::SimpleLeaderboards = false;
 		bool CloudberryKingdomGame::FakeAwardments = false;
 #endif
