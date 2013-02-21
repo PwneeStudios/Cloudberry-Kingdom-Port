@@ -116,7 +116,7 @@ VideoPlayer::VideoPlayer()
 	glTexParameteri( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR );
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE );
 	glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE );
-	glTextureReferenceSCE( GL_TEXTURE_2D, 1, 1280, 720, 1, GL_RGBA8, 1280 * sizeof( uint32_t ), 0 );
+	glTextureReferenceSCE( GL_TEXTURE_2D, 1, 1280, 720, 1, GL_RGBA, 1280 * sizeof( uint32_t ), 0 );
 	glBindTexture( GL_TEXTURE_2D, 0 );
 	
 	glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
@@ -193,7 +193,7 @@ VideoPlayer::~VideoPlayer()
 	ExternalTexture = NULL;
 
 	// Empty pbo used by the video player.
-	memset( PBOBuffer, 0, 1280 * 720 * sizeof( uint32_t ) );
+	//memset( PBOBuffer, 0, 1280 * 720 * sizeof( uint32_t ) );
 
 	/*glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
 	glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
@@ -250,16 +250,21 @@ void VideoPlayer::DrawFrame()
 	if( g_Player && g_Player->vsyncGetFrame( &displayFrame ) )
 	{
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, PBO );
-		PBOBuffer = reinterpret_cast< uint8_t * >( 
+		/*PBOBuffer = reinterpret_cast< uint8_t * >( 
 			glMapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, GL_READ_WRITE )
 		);
-		/*if( PBOBuffer )
-		{*/
+		if( PBOBuffer )
+		{
 			// Queue up new frame.
 			memcpy( PBOBuffer, displayFrame.buffer, 1280 * 720 * sizeof( uint32_t ) );
-		//}
-		glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );
+		}
+		glUnmapBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE );*/
+		glBufferSubData( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0, displayFrame.width * displayFrame.height * sizeof( uint32_t ),
+			displayFrame.buffer );
 		glBindBuffer( GL_TEXTURE_REFERENCE_BUFFER_SCE, 0 );
+
+		glFlush();
+		glFinish();
 	}
 }
 

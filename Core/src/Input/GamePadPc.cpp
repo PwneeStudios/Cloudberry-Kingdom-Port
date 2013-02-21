@@ -20,3 +20,7 @@ void GamePad::SetVibration( PlayerIndex index, float left, float right )
 void GamePad::Shutdown()
 {
 }
+
+void GamePad::DisableController( PlayerIndex index )
+{
+}

@@ -21,8 +21,9 @@
 #include <stdio.h>    //for sprintf
 #include <cafe/demo.h>
 
-#include    <cafe/h264.h>
-#include    "videorender.h"
+#include <cafe/h264.h>
+#include <nn/erreula.h>
+#include "videorender.h"
 
 // --------- GX2 Data ---------
 
@@ -235,6 +236,10 @@ void drawTVFrame()
 
     // Restore state that was saved when DEMOGfxInit was called.
     GX2SetContextState(DEMOContextState);
+
+	DEMOGfxSetContextState();
+
+	nn::erreula::DrawTV();
 
     DEMOGfxDoneRender();
 

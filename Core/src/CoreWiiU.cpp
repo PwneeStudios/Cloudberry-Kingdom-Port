@@ -5,6 +5,8 @@
 #include <cafe/demo.h>
 #include <cafe/gx2.h>
 #include <cafe/procui.h>
+#include <cafe/sci/sciEnum.h>
+#include <cafe/sci/sciPublicApi.h>
 #include <Content/Wad.h>
 #include <cstdlib>
 #include <GameLoop.h>
@@ -13,6 +15,7 @@
 #include <Input/GamePad.h>
 #include <nn/act.h>
 #include <nn/save.h>
+#include <nn/erreula.h>
 #include <Utility/Limits.h>
 #include <Utility/Log.h>
 
@@ -38,6 +41,22 @@ CoreWiiU &CoreWiiU::operator = ( const CoreWiiU &rhs )
 
 char *GLOBAL_ACCOUNT_NAME;
 static char LOCAL_ACCOUNT_NAME[ ACT_ACCOUNT_ID_SIZE ];
+static u8 *ErrorViewerWorkArea = NULL;
+extern FSClient *GLOBAL_FSClient;
+bool ReEnableHomeButton = false;
+
+u32 HomeButtonDeniedCallback( void *context )
+{
+	LOG.Write( "HOME BUTTON DENIED!\n" );
+
+	if( !ReEnableHomeButton )
+	{
+		nn::erreula::HomeNixSignArg nixArg;
+		AppearHomeNixSign( nixArg );
+	}
+
+	return 0;
+}
 
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
@@ -60,6 +79,29 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	mem1Storage_ = MEMAllocFromDefaultHeap( mem1Size );
 	ProcUISetMEM1Storage( mem1Storage_, mem1Size );
 
+	// Error viewer.
+	LOG.Write( "nn::erreula::GetWorkMemorySize() = %d MB\n", nn::erreula::GetWorkMemorySize() / ( 1024 * 1024 ) );
+
+	nn::erreula::CreateArg createArg;
+	u8 *workBuffer = new u8[ nn::erreula::GetWorkMemorySize() ];
+	ErrorViewerWorkArea = workBuffer;
+	createArg.mBuffer = workBuffer;
+	createArg.mFSClient = GLOBAL_FSClient;
+
+	// FIXME: This is where the region is changed for the errorviewer.
+	createArg.mRegion = nn::erreula::cRegionType_Us;
+
+	SCICafeLanguage language;
+	SCIStatus status = SCIGetCafeLanguage( &language );
+	if( status == SCI_STATUS_SUCCESS )
+		createArg.mLang = static_cast< nn::erreula::LangType >( language );
+
+	nn::erreula::Create( createArg );
+	ReEnableHomeButton = false;
+	// End error viewer.
+
+	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 0 );
+
 	scheduler_ = new Scheduler;
 
 	content_ = new Wad( "" );
@@ -70,6 +112,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 	GamePad::Initialize();
 	MediaPlayer::Initialize();
+
 
 	// FIXME: Docs say to delay this as much as possible.
 	SAVEInit();
@@ -116,6 +159,10 @@ CoreWiiU::~CoreWiiU()
 
 	delete scheduler_;
 
+	nn::erreula::Destroy();
+
+	delete ErrorViewerWorkArea;
+
 	// Free MEM1 backup.
 	ProcUISetMEM1Storage( NULL, 0 );
 	MEMFreeToDefaultHeap( mem1Storage_ );
@@ -140,6 +187,9 @@ int CoreWiiU::Run()
 		FMODSystem->update();
 
 		GamePad::Update();
+		
+		nn::erreula::ControllerInfo controllerInfo;
+		nn::erreula::Calc( controllerInfo );
 
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
@@ -189,6 +239,8 @@ int CoreWiiU::Run()
 		{
 			DEMOGfxSetContextState();
 
+			nn::erreula::DrawTV();
+
 			DEMOGfxDoneRender();
 		}
 		else
@@ -201,6 +253,14 @@ int CoreWiiU::Run()
 		{
 			DEMOStopRunning();
 			dynamic_cast< QuadDrawerWiiU * >( qd_ )->Unlock();
+		}
+
+		// Enable home button when the disable home button sign is no longer visible.
+		if( ReEnableHomeButton && !nn::erreula::IsAppearHomeNixSign() )
+		{
+			OSEnableHomeButtonMenu( TRUE );
+
+			ReEnableHomeButton = false;
 		}
 	}
 

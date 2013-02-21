@@ -64,3 +64,7 @@ void GamePad::Shutdown()
 {
 	gfxPadEnd();
 }
+
+void GamePad::DisableController( PlayerIndex index )
+{
+}

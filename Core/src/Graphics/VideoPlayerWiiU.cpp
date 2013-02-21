@@ -18,6 +18,7 @@
 #include <cafe/ax.h>
 #include <cafe/mix.h>
 #include <cafe/ai.h>
+#include <nn/erreula.h>
 #include "WiiU/MovieTest.h"
 #include "WiiU/videorender.h"
 
@@ -146,6 +147,8 @@ static void ProcessChangeWait(s32 threadnum, s32 pos)
 }
 #endif
 
+// Flag in CoreWiiU to have it re-enable the home button when warning fades out.
+extern bool ReEnableHomeButton;
 
 /*-------------------------------------------------------------------------*
     Name:           VideoOutputThread
@@ -160,6 +163,8 @@ static s32 VideoOutputThread(s32 intArg, void *ptrArg)
     u32 vsys_currtime;
     s32 starttime, endtime;
 
+	// Enabled on the main thread.
+	OSEnableHomeButtonMenu( FALSE );
 
     OSReport("Video Thread Start\n");
 
@@ -1926,6 +1931,9 @@ VideoPlayer::~VideoPlayer()
 	FreeShader();
 	FreeAttribData();
 
+	ReEnableHomeButton = true;
+	nn::erreula::DisappearHomeNixSign();
+
 	delete internal_;
 }
 
@@ -1977,7 +1985,9 @@ void VideoPlayer::Play( const boost::shared_ptr< Video > &video )
                     16,                             // scheduling priority
                     0);         // detached
 
+
 	GLOBAL_VIDEO_OVERRIDE = true;
+	
     OSResumeThread(&Thread[0]);
     OSResumeThread(&Thread[1]);
 

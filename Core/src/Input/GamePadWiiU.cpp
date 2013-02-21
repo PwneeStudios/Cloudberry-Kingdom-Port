@@ -9,7 +9,11 @@ GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
+	{
 		WPADSetDataFormat( chan, WPAD_FMT_CORE );
+		WPADControlSpeaker( chan, WPAD_SPEAKER_OFF, NULL );
+		WPADControlDpd( chan, WPAD_DPD_OFF, NULL );
+	}
 }
 
 void GamePad::Initialize()
@@ -163,4 +167,9 @@ void GamePad::SetVibration( PlayerIndex index, float left, float right )
 
 void GamePad::Shutdown()
 {
+}
+
+void GamePad::DisableController( PlayerIndex index )
+{
+	WPADDisconnect( static_cast< s32 >( index ) );
 }

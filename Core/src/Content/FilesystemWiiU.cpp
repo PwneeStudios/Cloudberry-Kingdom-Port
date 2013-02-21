@@ -179,6 +179,8 @@ public:
 
 };
 
+FSClient *GLOBAL_FSClient = NULL;
+
 struct FilesystemWiiUInternal
 {
 	FSClient *Client;
@@ -186,6 +188,11 @@ struct FilesystemWiiUInternal
 
 	Mutex FileSystemMutex;
 };
+
+void StateChangeCallback( FSClient *client, FSVolumeState state, void *context )
+{
+	LOG.Write( "StateChangeCallback on 0x%x: 0x%x\n", client, state );
+}
 
 FilesystemWiiU::FilesystemWiiU() :
 	internal_( new FilesystemWiiUInternal )
@@ -200,19 +207,35 @@ FilesystemWiiU::FilesystemWiiU() :
 	if( !internal_->Cmd )
 		OSHalt( "Error: cannot allocate command queue.\n" );
 
+	FSStateChangeParams changeParams =
+	{
+		.userCallback = StateChangeCallback,
+		.userContext = NULL,
+		.ioMsgQueue = NULL
+	};
+
+	FSSetStateChangeNotification( internal_->Client, &changeParams );
+
 	FSAddClient( internal_->Client, FS_RET_NO_ERROR );
 	LOG.Write( "Client added\n" );
 
 	FSInitCmdBlock( internal_->Cmd );
 	LOG.Write( "Command block ready\n" );
+
+	GLOBAL_FSClient = internal_->Client;
 }
 
 FilesystemWiiU::~FilesystemWiiU()
 {
+	GLOBAL_FSClient = NULL;
+
+	FSDelClient( internal_->Client, 0 );
+
+	FSShutdown();
+
 	MEMFreeToDefaultHeap( internal_->Client );
 	MEMFreeToDefaultHeap( internal_->Cmd );
 
-	FSShutdown();
 	delete internal_;
 }
 

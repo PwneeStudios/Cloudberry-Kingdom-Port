@@ -13,6 +13,8 @@ struct GamePad
 	static GamePadState GetState( PlayerIndex index );
 	static void SetVibration( PlayerIndex index, float left, float right );
 
+	static void DisableController( PlayerIndex index );
+
 };
 
 #endif
