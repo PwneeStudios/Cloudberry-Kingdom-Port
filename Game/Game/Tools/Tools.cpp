@@ -736,19 +736,19 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );*/
 #if defined( CAFE )
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Circle" ) ), std::wstring( L"Circle" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Shell" ) ), std::wstring( L"Shell" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Paint" ) ), std::wstring( L"Paint" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Lava" ) ), std::wstring( L"Lava" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
-		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/Window" ) ), std::wstring( L"Window" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Circle" ) ), std::wstring( L"Circle" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Shell" ) ), std::wstring( L"Shell" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/FireballEffect" ) ), std::wstring( L"Fireball" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Paint" ) ), std::wstring( L"Paint" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Lava" ) ), std::wstring( L"Lava" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/LightMap" ) ), std::wstring( L"LightMap" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/LightSource" ) ), std::wstring( L"LightSource" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/BwEffect" ) ), std::wstring( L"BW" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Hsl_Green" ) ), std::wstring( L"Hsl_Green" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Hsl" ) ), std::wstring( L"Hsl" ) );
+		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"0010/Shaders/Window" ) ), std::wstring( L"Window" ) );
 #elif defined( PS3 )
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Basic" ) );
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/NoTexture" ) ), std::wstring( L"NoTexture" ) );
