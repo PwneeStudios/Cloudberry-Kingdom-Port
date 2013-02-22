@@ -307,6 +307,7 @@ int CoreWiiU::Run()
 				{
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
+					currentErrorCode = 0;
 				}
 			}
 
