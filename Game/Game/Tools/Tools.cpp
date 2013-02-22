@@ -779,6 +779,16 @@ namespace CloudberryKingdom
 		EffectWad->AddEffect( Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) ), std::wstring( L"Window" ) );
 #endif
 
+#ifdef CAFE
+		EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_NoOutline" ), L"Text_NoOutline" );
+        Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_ThinOutline" ), L"Text_ThinOutline" );
+        Text_ThinOutline = EffectWad->FindByName( L"Text_ThinOutline" );
+
+        EffectWad->AddEffect( Content->Load<Effect>( L"0010/Shaders/Text_ThickOutline" ), L"Text_ThickOutline" );
+        Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
+#else
         EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_NoOutline" ), L"Text_NoOutline" );
         Text_NoOutline = EffectWad->FindByName( L"Text_NoOutline" );
 
@@ -787,6 +797,7 @@ namespace CloudberryKingdom
 
         EffectWad->AddEffect( Content->Load<Effect>( L"Shaders/Text_ThickOutline" ), L"Text_ThickOutline" );
         Text_ThickOutline = EffectWad->FindByName( L"Text_ThickOutline" );
+#endif
 
 		BasicEffect = EffectWad->EffectList[ 0 ];
 		NoTexture = EffectWad->EffectList[ 1 ];
@@ -797,7 +808,11 @@ namespace CloudberryKingdom
 		WindowEffect = EffectWad->FindByName( std::wstring( L"Window" ) );
 
 		//PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"Shaders/Paint_SpriteBatch" ) );
+#ifdef CAFE
+		PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"0010/Shaders/BasicEffect" ) );
+#else
 		PaintEffect_SpriteBatch = Content->Load<Effect>( std::wstring( L"Shaders/BasicEffect" ) );
+#endif
 	}
 
 	float Tools::BoxSize( Vector2 TR, Vector2 BL )
