@@ -1,6 +1,7 @@
 #include <Content/FilesystemWiiU.h>
 
 #include <Content/File.h>
+#include <Utility/Error.h>
 #include <Utility/Log.h>
 #include <Utility/Mutex.h>
 
@@ -192,6 +193,11 @@ struct FilesystemWiiUInternal
 void StateChangeCallback( FSClient *client, FSVolumeState state, void *context )
 {
 	LOG.Write( "StateChangeCallback on 0x%x: 0x%x\n", client, state );
+
+	if( FSGetVolumeState( client ) != FS_VOLSTATE_READY )
+	{
+		DisplayError( FSGetLastErrorCodeForViewer( client ) );
+	}
 }
 
 FilesystemWiiU::FilesystemWiiU() :

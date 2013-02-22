@@ -239,7 +239,16 @@ void drawTVFrame()
 
 	DEMOGfxSetContextState();
 
+	GX2SurfaceFormat f = DEMOColorBuffer.surface.format;
+	DEMOColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+	GX2InitColorBufferRegs( &DEMOColorBuffer );
+	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+
 	nn::erreula::DrawTV();
+
+	DEMOColorBuffer.surface.format = f;
+	GX2InitColorBufferRegs( &DEMOColorBuffer );
+	GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
 
     DEMOGfxDoneRender();
 

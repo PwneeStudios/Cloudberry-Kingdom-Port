@@ -16,6 +16,7 @@
 #include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 #include <MasterHack.h>
 #include <Utility/Log.h>
+#include <Utility/ConsoleInformation.h>
 #include <Core\Tools\Set.h>
 
 #include "Game/Tilesets/Backgrounds/_Code/CloudberryKingdom.Background.h"
@@ -664,7 +665,13 @@ float CloudberryKingdomGame::fps = 0;
 		// FIXME: Start videos later.
 		if (!HideLogos)
 		{
-			MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+			ConsoleRegion region = GetConsoleRegion();
+
+			// FIXME: Keep playing logo salad.
+			/*if( region == ConsoleRegion_USA )
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
+			else
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );*/
 		}
 	}
 

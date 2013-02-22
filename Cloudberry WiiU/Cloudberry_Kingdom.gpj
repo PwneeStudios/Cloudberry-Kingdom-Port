@@ -18,6 +18,9 @@
 	-lnn_erreula_static.a
 	-lsci.a
 	-lnn_util.a
+	-lproc_ui.a
+	-lkpad.a
+	-lkmpls.a
 Game\Hacks\String.cpp
 Game\Game\Player\Hero Physics\TimeShip.cpp
 Game\Hacks\NET\StringBuilder.cpp

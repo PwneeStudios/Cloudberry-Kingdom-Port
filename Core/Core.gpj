@@ -2,6 +2,8 @@
 [Library]
 	-object_dir=objs\Core
 	-I../fmodex/inc
+src\Utility\ErrorWiiU.cpp
+src\Utility\ConsoleInformationWiiU.cpp
 src\Graphics\WiiU\audioplayer.cpp
 src\Graphics\WiiU\mp4dmx_api.cpp
 src\Graphics\WiiU\videoplayer.cpp

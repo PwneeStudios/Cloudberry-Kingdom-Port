@@ -31,6 +31,8 @@
     <ClInclude Include="include\Content\TextureWiiUInternal.h" />
     <ClInclude Include="include\Graphics\RenderTarget2D.h" />
     <ClInclude Include="include\Graphics\Texture2D.h" />
+    <ClInclude Include="include\Utility\ConsoleInformation.h" />
+    <ClInclude Include="include\Utility\Error.h" />
     <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />
     <ClInclude Include="include\Audio\Song.h" />
@@ -232,6 +234,24 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="src\Audio\SoundEffectPc.cpp" />
+    <ClCompile Include="src\Utility\ConsoleInformationPc.cpp" />
+    <ClCompile Include="src\Utility\ConsoleInformationPS3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ConsoleInformationWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorPc.cpp" />
+    <ClCompile Include="src\Utility\ErrorPS3.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorWiiU.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="src\Utility\Log.cpp" />
     <ClCompile Include="src\Utility\MutexPc.cpp" />
     <ClCompile Include="src\Utility\MutexWiiU.cpp">

@@ -15,11 +15,13 @@
 
 #include <fmod.hpp>
 #include <fmod_errors.h>
+#include <fmodwiiu.h>
 
 FMOD::System *FMODSystem;
 FMOD::Channel *CurrentChannel;
 
 float Volume;
+extern FSClient *GLOBAL_FSClient;
 
 #define ERR_CHECK( result ) \
 	if( result != FMOD_OK )															   \
@@ -36,7 +38,17 @@ void MediaPlayer::Initialize()
 	result = FMOD::System_Create( &FMODSystem );
 	ERR_CHECK( result );
 
-	result = FMODSystem->init( 100, FMOD_INIT_NORMAL, 0 );
+	static FMOD_WIIU_EXTRADRIVERDATA g_extraDriverData;
+	memset( &g_extraDriverData, 0, sizeof( g_extraDriverData ) );
+
+	g_extraDriverData.threadFile = FMOD_THREAD_DEFAULT;
+	g_extraDriverData.threadGeometry = FMOD_THREAD_DEFAULT;
+	g_extraDriverData.threadMixer = FMOD_THREAD_DEFAULT;
+	g_extraDriverData.threadNonBlocking = FMOD_THREAD_DEFAULT;
+	g_extraDriverData.threadStream = FMOD_THREAD_DEFAULT;
+	g_extraDriverData.fileSystemClient = GLOBAL_FSClient;
+
+	result = FMODSystem->init( 100, FMOD_INIT_NORMAL, &g_extraDriverData );
 	ERR_CHECK( result );
 
 	CurrentChannel = NULL;

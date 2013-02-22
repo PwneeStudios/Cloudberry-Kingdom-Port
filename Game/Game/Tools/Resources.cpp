@@ -13,6 +13,7 @@
 #include <ResourceList\Resources_Art.h>
 #include <ResourceList\Resources_Music.h>
 #include <ResourceList\Resources_Sound.h>
+#include <Utility/ConsoleInformation.h>
 #include <Utility/Log.h>
 
 #include "Game/Tilesets/Tilesets/CloudberryKingdom.TileSets.h"
@@ -252,8 +253,44 @@ namespace CloudberryKingdom
 		// Load the art!
 		PreloadArt();
 
+		ConsoleLanguage language = GetConsoleLanguage();
+		Localization::Language selectedLanguage = Localization::Language_ENGLISH;
+
+		switch( language )
+		{
+		case ConsoleLanguage_JAPANESE:
+			selectedLanguage = Localization::Language_JAPANESE;
+			break;
+		case ConsoleLanguage_ENGLISH:
+			// English is the default language.
+			break;
+		case ConsoleLanguage_FRENCH:
+			selectedLanguage = Localization::Language_FRENCH;
+			break;
+		case ConsoleLanguage_GERMAN:
+			selectedLanguage = Localization::Language_GERMAN;
+			break;
+		case ConsoleLanguage_ITALIAN:
+			selectedLanguage = Localization::Language_ITALIAN;
+			break;
+		case ConsoleLanguage_SPANISH:
+			selectedLanguage = Localization::Language_SPANISH;
+			break;
+		case ConsoleLanguage_CHINESE:
+			selectedLanguage = Localization::Language_CHINESE;
+			break;
+		case ConsoleLanguage_KOREAN:
+			selectedLanguage = Localization::Language_KOREAN;
+			break;
+		case ConsoleLanguage_PORTUGUESE:
+			selectedLanguage = Localization::Language_PORTUGUESE;
+			break;
+		case ConsoleLanguage_RUSSIAN:
+			selectedLanguage = Localization::Language_KOREAN;
+			break;
+		}
         // Localization
-        Localization::SetLanguage(Localization::Language_ENGLISH);
+        Localization::SetLanguage( selectedLanguage );
 
 		// Fonts
 		FontLoad();

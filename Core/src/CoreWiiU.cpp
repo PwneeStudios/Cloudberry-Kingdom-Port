@@ -20,6 +20,7 @@
 #include <Utility/Log.h>
 
 #include <fmod.hpp>
+#include <fmodwiiu.h>
 
 // FIXME: This is done in order to get access to update the FMOD system every frame.
 // This should really be done through a method like MediaPlayer::Update().
@@ -49,14 +50,23 @@ u32 HomeButtonDeniedCallback( void *context )
 {
 	LOG.Write( "HOME BUTTON DENIED!\n" );
 
-	if( !ReEnableHomeButton )
+	if( !nn::erreula::IsAppearHomeNixSign() )
 	{
 		nn::erreula::HomeNixSignArg nixArg;
 		AppearHomeNixSign( nixArg );
 	}
+	else
+		LOG.Write( "ALREADY VISIBLE!\n" );
 
 	return 0;
 }
+
+/*u32 SaveOnExitCallback( void *context )
+{
+	OSSavesDone_ReadyToRelease();
+
+	return 0;
+}*/
 
 CoreWiiU::CoreWiiU( GameLoop &game ) :
 	running_( false ),
@@ -88,11 +98,42 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	createArg.mBuffer = workBuffer;
 	createArg.mFSClient = GLOBAL_FSClient;
 
-	// FIXME: This is where the region is changed for the errorviewer.
+	// Set up error viewer region.
 	createArg.mRegion = nn::erreula::cRegionType_Us;
+	SCIPlatformRegion region;
+	SCIStatus status = SCIGetPlatformRegion( &region );
+	if( status == SCI_STATUS_SUCCESS )
+	{
+		switch( region )
+		{
+		case SCI_PLATFORM_REGION_JPN:
+			createArg.mRegion = nn::erreula::cRegionType_Jp;
+			break;
+		case SCI_PLATFORM_REGION_USA:
+			createArg.mRegion = nn::erreula::cRegionType_Us;
+			break;
+		case SCI_PLATFORM_REGION_EUR:
+			createArg.mRegion = nn::erreula::cRegionType_Eu;
+			break;
+		//case SCI_PLATFORM_REGION_AUS: // Obsolete.
+		case SCI_PLATFORM_REGION_CHN:
+			createArg.mRegion = nn::erreula::cRegionType_Cn;
+			break;
+		case SCI_PLATFORM_REGION_KOR:
+			createArg.mRegion = nn::erreula::cRegionType_Kr;
+			break;
+		case SCI_PLATFORM_REGION_TWN:
+			createArg.mRegion = nn::erreula::cRegionType_Tw;
+			break;
+		default:
+			// By default the region is US.
+			break;
+		}
+	}
 
+	createArg.mLang = nn::erreula::cLangType_En;
 	SCICafeLanguage language;
-	SCIStatus status = SCIGetCafeLanguage( &language );
+	status = SCIGetCafeLanguage( &language );
 	if( status == SCI_STATUS_SUCCESS )
 		createArg.mLang = static_cast< nn::erreula::LangType >( language );
 
@@ -100,7 +141,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	ReEnableHomeButton = false;
 	// End error viewer.
 
-	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 0 );
+	ProcUIRegisterCallback( PROCUI_MESSAGE_HBDENIED, HomeButtonDeniedCallback, NULL, 200 );
+	//ProcUISetSaveCallback( SaveOnExitCallback, NULL );
 
 	scheduler_ = new Scheduler;
 
@@ -175,6 +217,7 @@ CoreWiiU::~CoreWiiU()
 }
 
 extern bool GLOBAL_VIDEO_OVERRIDE;
+extern std::list< int > GLOBAL_ERROR_QUEUE;
 
 int CoreWiiU::Run()
 {
@@ -182,14 +225,114 @@ int CoreWiiU::Run()
 	
 	game_.Initialize();
 
+	bool viewerVisible = false;
+
+	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
+
 	while( DEMOIsRunning() )
 	{
+		// Error viewer bits.
+		/*if( !viewerVisible )
+		{
+			if( GLOBAL_ERROR_QUEUE.size() > 0 )
+			{
+				FMOD_WiiU_SetMute( TRUE );
+
+				s32 errorCode = GLOBAL_ERROR_QUEUE.front();
+				GLOBAL_ERROR_QUEUE.pop_front();
+
+				nn::erreula::AppearArg appearArg;
+				appearArg.setControllerType( nn::erreula::cControllerType_Remo0 );
+				appearArg.setScreenType( nn::erreula::cScreenType_Dual );
+				appearArg.setErrorCode( errorCode );
+				nn::erreula::AppearErrorViewer( appearArg );
+				viewerVisible = true;
+			}
+		}
+
+		VPADStatus vpad_status;
+		KPADStatus wpad_status[ WPAD_MAX_CONTROLLERS ];*/
+		nn::erreula::ControllerInfo info;
+
+		/*VPADRead( 0, &vpad_status, 1, NULL );
+		VPADGetTPCalibratedPoint( 0, &vpad_status.tpData, &vpad_status.tpData );
+		// Set calibrated values
+		info.vpad_status = &vpad_status;
+
+		for ( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
+		{
+			s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
+			if( kpad_read_length > 0 )
+			{
+				info.kpad_status[i] = &wpad_status[i];
+			}
+			else
+			{
+				// Pass NULL if it could not be read
+				info.kpad_status[i] = NULL;
+			}
+		}*/
+
+		nn::erreula::Calc( info );
+
+		/*if( viewerVisible )
+		{
+			if( nn::erreula::IsDecideSelectButtonError() )
+			{
+				if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Display )
+				{
+					nn::erreula::DisappearErrorViewer();
+					FMOD_WiiU_SetMute( FALSE );
+					viewerVisible = false;
+				}
+			}
+
+			if( !GLOBAL_VIDEO_OVERRIDE && viewerVisible )
+			{
+				if( DEMODRCGetStatus() != GX2_DRC_NONE )
+				{
+					DEMODRCBeforeRender();
+
+					GX2SetContextState( DEMODRCContextState );
+
+					GX2SurfaceFormat f = DEMODRCColorBuffer.surface.format;
+					DEMODRCColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+					GX2InitColorBufferRegs(&DEMODRCColorBuffer);
+					GX2SetColorBuffer(&DEMODRCColorBuffer, GX2_RENDER_TARGET_0);
+
+					nn::erreula::DrawDRC();
+
+					DEMODRCColorBuffer.surface.format = f;
+					GX2InitColorBufferRegs(&DEMODRCColorBuffer);
+					GX2SetColorBuffer(&DEMODRCColorBuffer, GX2_RENDER_TARGET_0);
+
+					GX2SetContextState( DEMODRCContextState );
+
+					DEMODRCDoneRender();
+				}
+
+				DEMOGfxSetContextState();
+
+				GX2SurfaceFormat f = DEMOColorBuffer.surface.format;
+				DEMOColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+				GX2InitColorBufferRegs( &DEMOColorBuffer );
+				GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+
+				nn::erreula::DrawTV();
+
+				DEMOColorBuffer.surface.format = f;
+				GX2InitColorBufferRegs( &DEMOColorBuffer );
+				GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+
+				DEMOGfxDoneRender();
+			}
+
+			continue;
+		}*/
+		// End error viewer bits.
 		FMODSystem->update();
 
 		GamePad::Update();
-		
-		nn::erreula::ControllerInfo controllerInfo;
-		nn::erreula::Calc( controllerInfo );
 
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
@@ -239,14 +382,23 @@ int CoreWiiU::Run()
 		{
 			DEMOGfxSetContextState();
 
+			GX2SurfaceFormat f = DEMOColorBuffer.surface.format;
+			DEMOColorBuffer.surface.format = static_cast< GX2SurfaceFormat >( f | 0x00000400 );
+			GX2InitColorBufferRegs( &DEMOColorBuffer );
+			GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
+
 			nn::erreula::DrawTV();
+
+			DEMOColorBuffer.surface.format = f;
+			GX2InitColorBufferRegs( &DEMOColorBuffer );
+			GX2SetColorBuffer( &DEMOColorBuffer, GX2_RENDER_TARGET_0 );
 
 			DEMOGfxDoneRender();
 		}
-		else
+		/*else
 		{
 			DEMOGfxWaitForSwap( 1, 100 );
-		}
+		}*/
 
 		// Close down.
 		if( !running_ )

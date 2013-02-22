@@ -51,6 +51,8 @@ struct SchedulerInternal
 	OSSemaphore JobQueueSemaphore;
 
 	OSThread *Threads[2];
+	//OSThread Threads[2];
+	void *Stack;
 };
 
 /// Bootstrap for worker thread.
@@ -73,6 +75,15 @@ SchedulerWiiU::SchedulerWiiU() :
 
 	internal_->Threads[ 0 ] = OSGetDefaultThread( 2 );
 	OSRunThread( internal_->Threads[ 0 ], ThreadProc, 1, this );
+	/*internal_->Stack = new char[ 1024 * 1024 ];
+	BOOL ret = OSCreateThread( &internal_->Threads[ 0 ], ThreadProc, 1, this,
+		internal_->Stack, 1024 * 1024, 20, OS_THREAD_ATTR_AFFINITY_CORE2 );
+	OSSetThreadName( &internal_->Threads[ 0 ], "SchedulerThread" );
+
+	if( !ret )
+		LOG.Write( "NO JOB SYSTEM!" );
+
+	OSResumeThread( &internal_->Threads[ 0 ] );*/
 }
 
 SchedulerWiiU::~SchedulerWiiU()
@@ -83,6 +94,7 @@ SchedulerWiiU::~SchedulerWiiU()
 		OSSignalSemaphore( &internal_->JobQueueSemaphore );
 
 	OSJoinThread( internal_->Threads[ 0 ], NULL );
+	//OSJoinThread( &internal_->Threads[ 0 ], NULL );
 
 	LOG.Write( "Worker threads shut down.\n" );
 
@@ -97,6 +109,14 @@ void SchedulerWiiU::RunJob( Job *job )
 {
 	OSLockMutex( &internal_->JobQueueMutex );
 	internal_->JobQueue.push_back( job );
+	OSUnlockMutex( &internal_->JobQueueMutex );
+	OSSignalSemaphore( &internal_->JobQueueSemaphore );
+}
+
+void SchedulerWiiU::RunJobASAP( Job *job )
+{
+	OSLockMutex( &internal_->JobQueueMutex );
+	internal_->JobQueue.push_front( job );
 	OSUnlockMutex( &internal_->JobQueueMutex );
 	OSSignalSemaphore( &internal_->JobQueueSemaphore );
 }

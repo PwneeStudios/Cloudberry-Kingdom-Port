@@ -255,6 +255,12 @@
     <ClInclude Include="include\Graphics\RenderTarget2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Utility\ConsoleInformation.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Utility\Error.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Core.cpp">
@@ -459,6 +465,24 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Graphics\RenderTarget2DWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ConsoleInformationPc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ConsoleInformationWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ConsoleInformationPS3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorPc.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorWiiU.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Utility\ErrorPS3.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
