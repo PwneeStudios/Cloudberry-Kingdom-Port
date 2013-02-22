@@ -42,6 +42,8 @@ namespace CloudberryKingdom
 
 	void ScreenSaver::ConstructorPressAListenerHelperHelper::Apply()
 	{
+		SaveGroup::LoadAll();
+
 #ifdef _CRTDBG_MAP_ALLOC
 		CloudberryKingdomGame::memdebug_DumpEnd();
 #endif

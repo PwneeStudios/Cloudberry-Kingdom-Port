@@ -36,7 +36,7 @@ SoundEffect::~SoundEffect()
 void SoundEffect::Load( const std::string &path )
 {
 	FMOD_RESULT result;
-	result = FMODSystem->createSound( ( "/vol/content/" + path ).c_str(), FMOD_DEFAULT, 0, &internal_->Sound );
+	result = FMODSystem->createSound( ( "/vol/content/0010/" + path ).c_str(), FMOD_DEFAULT, 0, &internal_->Sound );
 	if( result != FMOD_OK )
 	{
 		LOG.Write( "Failed to load sound: %s\n", path.c_str() );

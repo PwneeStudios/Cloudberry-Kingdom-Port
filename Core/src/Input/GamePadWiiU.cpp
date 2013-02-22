@@ -5,10 +5,13 @@
 #include <cafe/wenc.h>
 #include <cafe/pads/wpad/wpad.h>
 
+#include <Utility/Error.h>
+
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
 
 VPADStatus vpadStatus;
 s32 readLength;
+bool vpadConnected;
 
 static void ConnectCallback( s32 chan, s32 reason )
 {
@@ -29,6 +32,7 @@ void GamePad::Initialize()
 		WPADSetConnectCallback( i, ConnectCallback );
 
 	memset( &vpadStatus, 0, sizeof( VPADStatus ) );
+	vpadConnected = true;
 }
 
 void GamePad::Update()
@@ -129,6 +133,8 @@ void GamePad::Update()
 
 		if( error == VPAD_READ_ERR_NONE )
 		{
+			vpadConnected = true;
+
 			// Mapping is inverse of XBox.
 			PAD_STATE[ i ].Buttons.A = __max( PAD_STATE[ i ].Buttons.A, vpadStatus.hold & VPAD_BUTTON_A ? ButtonState_Pressed : ButtonState_Released );
 			PAD_STATE[ i ].Buttons.B = __max( PAD_STATE[ i ].Buttons.B, vpadStatus.hold & VPAD_BUTTON_B ? ButtonState_Pressed : ButtonState_Released );
@@ -156,7 +162,13 @@ void GamePad::Update()
 
 			PAD_STATE[ i ].ThumbSticks.Left = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
 			PAD_STATE[ i ].ThumbSticks.Right = Vector2( vpadStatus.lStick.x, vpadStatus.lStick.y );
-		
+		}
+		else if( error == VPAD_READ_ERR_NO_CONTROLLER && vpadConnected == true )
+		{
+			vpadConnected = false;
+
+			// Unable to communicate with the WiiU gamepad.
+			DisplayError( 1650101 );
 		}
 	}
 }

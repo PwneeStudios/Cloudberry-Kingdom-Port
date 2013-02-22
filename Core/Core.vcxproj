@@ -33,6 +33,7 @@
     <ClInclude Include="include\Graphics\Texture2D.h" />
     <ClInclude Include="include\Utility\ConsoleInformation.h" />
     <ClInclude Include="include\Utility\Error.h" />
+    <ClInclude Include="include\Utility\Save.h" />
     <ClInclude Include="src\Audio\CKSounds.h" />
     <ClInclude Include="include\Audio\MediaPlayer.h" />
     <ClInclude Include="include\Audio\Song.h" />
@@ -258,6 +259,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</ExcludedFromBuild>
     </ClCompile>
+    <ClCompile Include="src\Utility\SaveWiiU.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{EC9842FF-099E-4DFC-917B-98BD9B4486FD}</ProjectGuid>

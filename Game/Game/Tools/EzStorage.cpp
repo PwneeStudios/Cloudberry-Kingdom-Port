@@ -28,6 +28,10 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 };
 #endif
 
+#ifdef CAFE
+#include <Utility/Save.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -72,7 +76,8 @@ namespace CloudberryKingdom
 		Add( PlayerManager::getPlayer() );
 	#endif
 
-		LoadAll();
+		// FIXME: This is called later after everything is loaded.
+		//LoadAll();
 
 		//PlayerManager::Player.LifetimeStats.Coins += 1000;
 		//PlayerManager::Player.Awardments += 4;
@@ -158,6 +163,9 @@ namespace CloudberryKingdom
 		// FIXME: save/load on PC version
 		return;
 #endif
+
+		if( !InitializeSave() )
+			return;
 
 		for ( std::vector<boost::shared_ptr<SaveLoad> >::const_iterator ThingToLoad = ThingsToSave.begin(); ThingToLoad != ThingsToSave.end(); ++ThingToLoad )
 		{

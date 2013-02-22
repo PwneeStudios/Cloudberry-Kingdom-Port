@@ -157,7 +157,8 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 
 
 	// FIXME: Docs say to delay this as much as possible.
-	SAVEInit();
+	// This was reimplemented in InitializeSave to delay execution.
+	/*SAVEInit();
 	nn::act::Initialize();
 
 	u8 accountSlot = nn::act::GetSlotNo();
@@ -180,7 +181,7 @@ CoreWiiU::CoreWiiU( GameLoop &game ) :
 	
 	LOG.Write( "Creating global directory\n" );
 	if( SAVEInitSaveDir( ACT_SLOT_NO_COMMON ) != SAVE_STATUS_OK )
-		LOG.Write( "Failed to create common directory.\n" );
+		LOG.Write( "Failed to create common directory.\n" );*/
 }
 
 CoreWiiU::~CoreWiiU()
@@ -220,6 +221,7 @@ extern bool GLOBAL_VIDEO_OVERRIDE;
 extern std::list< int > GLOBAL_ERROR_QUEUE;
 extern VPADStatus vpadStatus;
 extern s32 readLength;
+extern bool vpadConnected;
 
 int CoreWiiU::Run()
 {
@@ -230,6 +232,7 @@ int CoreWiiU::Run()
 	//bool viewerVisible = false;
 
 	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
+	s32 currentErrorCode = 0;
 
 	while( DEMOIsRunning() )
 	{
@@ -241,6 +244,7 @@ int CoreWiiU::Run()
 				FMOD_WiiU_SetMute( TRUE );
 
 				s32 errorCode = GLOBAL_ERROR_QUEUE.front();
+				currentErrorCode = errorCode;
 				GLOBAL_ERROR_QUEUE.pop_front();
 
 				nn::erreula::AppearArg appearArg;
@@ -257,9 +261,10 @@ int CoreWiiU::Run()
 		VPADStatus vpad_status;
 		//KPADStatus wpad_status[ WPAD_MAX_CONTROLLERS ];
 		nn::erreula::ControllerInfo info;
+		memset( &info, 0, sizeof( info ) );
 
 		//s32 readLength = VPADRead( 0, &vpad_status, 1, NULL );
-		if( readLength > 0 )
+		if( readLength > 0 && vpadConnected )
 		{
 			// Set calibrated values
 			VPADGetTPCalibratedPoint( 0, &vpadStatus.tpData, &vpadStatus.tpData );
@@ -294,6 +299,14 @@ int CoreWiiU::Run()
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
 					//viewerVisible = false;
+				}
+			}
+			else if( currentErrorCode == 1650101 )
+			{
+				if( vpadConnected )
+				{
+					nn::erreula::DisappearErrorViewer();
+					FMOD_WiiU_SetMute( FALSE );
 				}
 			}
 
@@ -342,23 +355,23 @@ int CoreWiiU::Run()
 		// End error viewer bits.
 		FMODSystem->update();
 
-		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
-		{
-			DEMODRCBeforeRender();
-			//GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 0 );
-			//GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
-
-			GX2SetContextState( DEMODRCContextState );
-
-			qd_->Flush();
-
-			GX2SetContextState( DEMODRCContextState );
-
-			DEMODRCDoneRender();
-		}*/
-
 		if( !GLOBAL_VIDEO_OVERRIDE )
 		{
+			if( DEMODRCGetStatus() != GX2_DRC_NONE )
+			{
+				DEMODRCBeforeRender();
+				GX2ClearColor( &DEMODRCColorBuffer, 0, 0, 0, 0 );
+				GX2ClearDepthStencil( &DEMODRCDepthBuffer, GX2_CLEAR_BOTH );
+
+				GX2SetContextState( DEMODRCContextState );
+
+				// FIXME: DRC drawing here.
+
+				GX2SetContextState( DEMODRCContextState );
+
+				DEMODRCDoneRender();
+			}
+
 			DEMOGfxBeforeRender();
 			GX2ClearColor( &DEMOColorBuffer, 0, 0, 0, 0 );
 			GX2ClearDepthStencil( &DEMODepthBuffer, GX2_CLEAR_BOTH );

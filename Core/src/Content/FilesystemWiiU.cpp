@@ -250,7 +250,7 @@ boost::shared_ptr<File> FilesystemWiiU::Open( const std::string &path, bool writ
 		FSFileHandle fh;
 		FSStat stat;
 
-		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content" : "/vol/content/" ) + path;
+		std::string localPath = ( path[ 0 ] == '/' ? "/vol/content/0010" : "/vol/content/0010/" ) + path;
 		LOG.Write( "Opening %s\n", localPath.c_str() );
 
 		// FIXME: The mutex might not be necessary if the file system supports multithreading.

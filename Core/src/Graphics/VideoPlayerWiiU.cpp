@@ -34,8 +34,8 @@
 #define INPUTNAME_DEFINED
 
 #ifdef INPUTNAME_DEFINED
-#define MP4_INPUT_SAMPLE1       "/vol/content/Movies/LogoSalad.mp4";    // TV
-#define MP4_INPUT_SAMPLE2       "/vol/content/Movies/LogoSalad.mp4";	// DRC
+#define MP4_INPUT_SAMPLE1       "/vol/content/0010/Movies/LogoSalad.mp4";    // TV
+#define MP4_INPUT_SAMPLE2       "/vol/content/0010/Movies/LogoSalad.mp4";	// DRC
 #endif
 
 #define VIDEOSKIP_DELAY         (70)                            // permissible delay time

@@ -668,10 +668,10 @@ float CloudberryKingdomGame::fps = 0;
 			ConsoleRegion region = GetConsoleRegion();
 
 			// FIXME: Keep playing logo salad.
-			/*if( region == ConsoleRegion_USA )
+			if( region == ConsoleRegion_USA )
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 			else
-				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );*/
+				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );
 		}
 	}
 

@@ -22,7 +22,7 @@ Song::~Song()
 
 void Song::Load( const std::string &path )
 {
-	std::string internalPath = "/vol/content/" + path;
+	std::string internalPath = "/vol/content/0010/" + path;
 
 	FMOD_RESULT result;
 	result = FMODSystem->createStream( internalPath.c_str(), FMOD_NONBLOCKING, 0, &internal_->Song );
