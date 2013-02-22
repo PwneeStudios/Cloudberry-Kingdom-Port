@@ -6,6 +6,10 @@
 #include <cafe/pads/wpad/wpad.h>
 
 GamePadState PAD_STATE[ PAD_MAX_CONTROLLERS ];
+
+VPADStatus vpadStatus;
+s32 readLength;
+
 static void ConnectCallback( s32 chan, s32 reason )
 {
 	if( reason >= 0 )
@@ -23,6 +27,8 @@ void GamePad::Initialize()
 
 	for( int i = 0; i < WPAD_MAX_CONTROLLERS; i++ )
 		WPADSetConnectCallback( i, ConnectCallback );
+
+	memset( &vpadStatus, 0, sizeof( VPADStatus ) );
 }
 
 void GamePad::Update()
@@ -117,10 +123,9 @@ void GamePad::Update()
 
 	// Update DRC.
 	s32 error;
-	for( int i = 0; i < VPAD_MAX_CONTROLLERS; ++i )
+	for( int i = 0; i < 1/*VPAD_MAX_CONTROLLERS*/; ++i )
 	{
-		VPADStatus vpadStatus;
-		VPADRead( VPADBASE_CHAN0 + i, &vpadStatus, 1, &error );
+		readLength = VPADRead( VPADBASE_CHAN0 + i, &vpadStatus, 1, &error );
 
 		if( error == VPAD_READ_ERR_NONE )
 		{

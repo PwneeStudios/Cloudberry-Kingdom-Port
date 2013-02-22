@@ -218,6 +218,8 @@ CoreWiiU::~CoreWiiU()
 
 extern bool GLOBAL_VIDEO_OVERRIDE;
 extern std::list< int > GLOBAL_ERROR_QUEUE;
+extern VPADStatus vpadStatus;
+extern s32 readLength;
 
 int CoreWiiU::Run()
 {
@@ -248,18 +250,25 @@ int CoreWiiU::Run()
 				nn::erreula::AppearErrorViewer( appearArg );
 				viewerVisible = true;
 			}
-		}
+		}*/
+
+		GamePad::Update();
 
 		VPADStatus vpad_status;
-		KPADStatus wpad_status[ WPAD_MAX_CONTROLLERS ];*/
+		//KPADStatus wpad_status[ WPAD_MAX_CONTROLLERS ];
 		nn::erreula::ControllerInfo info;
 
-		/*VPADRead( 0, &vpad_status, 1, NULL );
-		VPADGetTPCalibratedPoint( 0, &vpad_status.tpData, &vpad_status.tpData );
-		// Set calibrated values
-		info.vpad_status = &vpad_status;
+		//s32 readLength = VPADRead( 0, &vpad_status, 1, NULL );
+		if( readLength > 0 )
+		{
+			// Set calibrated values
+			VPADGetTPCalibratedPoint( 0, &vpadStatus.tpData, &vpadStatus.tpData );
+			info.vpad_status = &vpadStatus;
+		}
+		else
+			info.vpad_status = NULL;
 
-		for ( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
+		/*for ( int i = 0; i < WPAD_MAX_CONTROLLERS; ++i )
 		{
 			s32 kpad_read_length = KPADRead( i, &wpad_status[i], 1 );
 			if( kpad_read_length > 0 )
@@ -331,8 +340,6 @@ int CoreWiiU::Run()
 		}*/
 		// End error viewer bits.
 		FMODSystem->update();
-
-		GamePad::Update();
 
 		/*if( DEMODRCGetStatus() != GX2_DRC_NONE )
 		{
