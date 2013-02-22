@@ -48,8 +48,8 @@ namespace CloudberryKingdom
     boost::shared_ptr<EzTexture> ButtonTexture::getRightBumper() { return Tools::Texture( std::wstring( L"PS3_1" ) ); }
 #elif CAFE
     bool ButtonTexture::UseGamepad = true;
-    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_2" ) ); }
-    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_1" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Go() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_A" : L"WiiU_2" ) ); }
+    boost::shared_ptr<EzTexture> ButtonTexture::_Back() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_B" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getX() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Y" : L"WiiU_1" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getY() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_X" : L"WiiU_Dash" ) ); }
     boost::shared_ptr<EzTexture> ButtonTexture::getLeftRight() { return Tools::Texture( std::wstring( UseGamepad ? L"WiiU_Dir" : L"WiiU_Dir" ) ); }

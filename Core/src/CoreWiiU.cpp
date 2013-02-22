@@ -227,14 +227,14 @@ int CoreWiiU::Run()
 	
 	game_.Initialize();
 
-	bool viewerVisible = false;
+	//bool viewerVisible = false;
 
 	//GLOBAL_ERROR_QUEUE.push_back( 1010102 );
 
 	while( DEMOIsRunning() )
 	{
 		// Error viewer bits.
-		/*if( !viewerVisible )
+		if( nn::erreula::GetStateErrorViewer() == nn::erreula::cState_Blank )
 		{
 			if( GLOBAL_ERROR_QUEUE.size() > 0 )
 			{
@@ -248,9 +248,9 @@ int CoreWiiU::Run()
 				appearArg.setScreenType( nn::erreula::cScreenType_Dual );
 				appearArg.setErrorCode( errorCode );
 				nn::erreula::AppearErrorViewer( appearArg );
-				viewerVisible = true;
+				//viewerVisible = true;
 			}
-		}*/
+		}
 
 		GamePad::Update();
 
@@ -284,7 +284,8 @@ int CoreWiiU::Run()
 
 		nn::erreula::Calc( info );
 
-		/*if( viewerVisible )
+		nn::erreula::State viewerState = nn::erreula::GetStateErrorViewer();
+		if( viewerState != nn::erreula::cState_Blank )
 		{
 			if( nn::erreula::IsDecideSelectButtonError() )
 			{
@@ -292,11 +293,11 @@ int CoreWiiU::Run()
 				{
 					nn::erreula::DisappearErrorViewer();
 					FMOD_WiiU_SetMute( FALSE );
-					viewerVisible = false;
+					//viewerVisible = false;
 				}
 			}
 
-			if( !GLOBAL_VIDEO_OVERRIDE && viewerVisible )
+			if( !GLOBAL_VIDEO_OVERRIDE /*&& viewerVisible*/ )
 			{
 				if( DEMODRCGetStatus() != GX2_DRC_NONE )
 				{
@@ -337,7 +338,7 @@ int CoreWiiU::Run()
 			}
 
 			continue;
-		}*/
+		}
 		// End error viewer bits.
 		FMODSystem->update();
 
@@ -402,10 +403,10 @@ int CoreWiiU::Run()
 
 			DEMOGfxDoneRender();
 		}
-		/*else
+		else
 		{
 			DEMOGfxWaitForSwap( 1, 100 );
-		}*/
+		}
 
 		// Close down.
 		if( !running_ )
