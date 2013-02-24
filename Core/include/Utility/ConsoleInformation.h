@@ -46,4 +46,12 @@ ConsoleRegion GetConsoleRegion();
  */
 ConsoleLanguage GetConsoleLanguage();
 
+/// Return level of parental control.
+/**
+ * A return value of 0 means there is no parental control.
+ *
+ * @returns Level of parental control. -1 if there was an error.
+ */
+int GetParentalControlLevel();
+
 #endif

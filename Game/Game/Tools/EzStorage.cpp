@@ -28,7 +28,7 @@ const char secureFileId[ CELL_SAVEDATA_SECUREFILEID_SIZE ] = {
 };
 #endif
 
-#ifdef CAFE
+#if defined( CAFE ) || defined( PS3 )
 #include <Utility/Save.h>
 #endif
 

@@ -2,9 +2,9 @@
 
 #include <list>
 
-std::list< int > GLOBAL_ERROR_QUEUE;
+std::list< ErrorType > GLOBAL_ERROR_QUEUE;
 
-void DisplayError( int errorCode )
+void DisplayError( ErrorType errorCode )
 {
 	GLOBAL_ERROR_QUEUE.push_back( errorCode );
 }

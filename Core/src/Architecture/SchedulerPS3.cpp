@@ -157,6 +157,11 @@ void SchedulerPS3::RunJob( Job *job )
 	sem_post( &internal_->JobQueueSemaphore );
 }
 
+void SchedulerPS3::RunJobASAP( Job *job )
+{
+	assert( !"No way to run job ASAP" );
+}
+
 void SchedulerPS3::CreateResource( ResourceHolder *holder, Resource *resource )
 {
 	ResourceLoaderJob job( holder, resource, true );

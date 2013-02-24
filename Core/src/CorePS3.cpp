@@ -6,12 +6,14 @@
 #include <Content/Wad.h>
 #include <Core.h>
 #include <cstdlib>
-#include <Utility/Limits.h>
 #include <GameLoop.h>
 #include <Graphics/QuadDrawer.h>
 #include <Graphics/TextDrawer.h>
 #include <Input/GamePad.h>
 #include <Input/Keyboard.h>
+#include <list>
+#include <Utility/Error.h>
+#include <Utility/Limits.h>
 #include <Utility/Log.h>
 
 #include <cell/sysmodule.h>
@@ -22,6 +24,7 @@
 #include <sys/process.h>
 #include <sys/spu_initialize.h>
 #include <sysutil/sysutil_gamecontent.h>
+#include <sysutil/sysutil_msgdialog.h>
 #include <sysutil/sysutil_savedata.h>
 
 SYS_PROCESS_PARAM ( 1001, 0x80000 )
@@ -305,6 +308,7 @@ CorePS3::~CorePS3()
 static SceNpTrophyContext TrophyContext;
 static SceNpTrophyHandle TrophyHandle;
 static bool ContextRegistered;
+extern std::list< int > GLOBAL_ERROR_QUEUE;
 
 bool GetTrophyContext( SceNpTrophyContext &context, SceNpTrophyHandle &handle )
 {
@@ -368,6 +372,10 @@ void RegisterTrophyContextThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
+void ErrorDialogCallback( int buttonType, void *userData )
+{
+}
+
 int CorePS3::Run()
 {
 	running_ = true;
@@ -397,11 +405,20 @@ int CorePS3::Run()
 	if( ret != 0 )
 		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
+	DisplayError( 0x1234abcd );
 
 	while( running_ )
 	{
 		GamePad::Update();
 		Keyboard::Update();
+
+		if( GLOBAL_ERROR_QUEUE.size() > 0 )
+		{
+			int error = GLOBAL_ERROR_QUEUE.front();
+			GLOBAL_ERROR_QUEUE.pop_front();
+
+			int ret = cellMsgDialogOpenErrorCode( error, ErrorDialogCallback, NULL, NULL );
+		}
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
 
