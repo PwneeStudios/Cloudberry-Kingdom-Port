@@ -173,6 +173,8 @@ namespace CloudberryKingdom
 			( *ThingToLoad )->Load();
 			Wait();
 		}
+
+		PlayerManager::Players[ 0 ]->Load();
 	}
 
 	void SaveGroup::Incr()

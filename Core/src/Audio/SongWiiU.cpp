@@ -14,8 +14,11 @@ Song::Song() :
 
 Song::~Song() 
 {
+	// FIXME: Do we still need to clean up even when we release the system?
+	/*
 	if( internal_->Song )
 		internal_->Song->release();
+	*/
 
 	delete internal_;
 }
