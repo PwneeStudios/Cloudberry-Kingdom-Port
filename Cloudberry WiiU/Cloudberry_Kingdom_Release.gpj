@@ -1,13 +1,13 @@
 #!gbuild
 [Program]
-	-lCore.a
+	-lCoreRelease.a
 	-lgx2.a
 	-lgx2spark.a
 	-object_dir=objs\Cloudberry_Kingdom
 	-o Cloudberry_Kingdom.elf
 	-I.
 	-laacdec.a
-	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\lib\libfmodex.a
+	-lC:\Pwnee\Port\Cloudberry_Kingdom\fmodex\api\lib\libfmodex.a
 	-lh264.a
 	-lmp4dmx.a
 	-lnn_ipc.a
