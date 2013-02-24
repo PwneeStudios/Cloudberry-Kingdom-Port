@@ -177,6 +177,11 @@ void SchedulerPc::RunJob( Job *job )
 	glfwSignalCond( internal_->JobQueueCV );
 }
 
+void SchedulerPc::RunJobASAP( Job *job )
+{
+	assert( !"Running jobs ASAP is not supported." );
+}
+
 void SchedulerPc::CreateResource( ResourceHolder *holder, Resource *resource )
 {
 	glfwLockMutex( internal_->JobQueueMutex );
