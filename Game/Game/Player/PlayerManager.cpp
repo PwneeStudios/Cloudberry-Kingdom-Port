@@ -888,13 +888,13 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 		}
 
 		// FIXME: Need to load the player data properly.
-#ifdef CAFE
+/*#ifdef CAFE
 		Players[ 0 ]->ContainerName = std::wstring( L"Gamers" );
 		Players[ 0 ]->FileName = std::wstring( L"PlayerProgress" );
 #else
 		Players[ 0 ]->ContainerName = std::wstring( L"PlayerData" );
 		Players[ 0 ]->FileName = std::wstring( L"PlayerData" );
 #endif
-		Players[ 0 ]->Load();
+		Players[ 0 ]->Load();*/
 	}
 }
