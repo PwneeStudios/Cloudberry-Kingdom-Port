@@ -895,6 +895,6 @@ int Showed_ShouldLeaveLevel, PlayerManager::Showed_ShouldWatchComputer = 0;
 		Players[ 0 ]->ContainerName = std::wstring( L"PlayerData" );
 		Players[ 0 ]->FileName = std::wstring( L"PlayerData" );
 #endif
-		Players[ 0 ]->Load();
+		//Players[ 0 ]->Load();
 	}
 }
