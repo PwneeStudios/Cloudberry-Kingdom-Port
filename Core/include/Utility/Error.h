@@ -2,6 +2,7 @@
 #define _ERROR_H_
 
 #ifdef CAFE
+#include <cafe.h>
 typedef s32 ErrorType;
 #else
 typedef unsigned int ErrorType;

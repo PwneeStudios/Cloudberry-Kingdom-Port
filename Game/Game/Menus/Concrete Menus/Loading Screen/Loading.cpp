@@ -142,10 +142,10 @@ namespace CloudberryKingdom
 		InitializeInstanceFields();
 		this->ResourceCount = ResourceCount;
 
-		Whinney = Content->Load<SoundEffect>( std::wstring( L"Whinney" ) );
+		//Whinney = Content->Load<SoundEffect>( std::wstring( L"Whinney" ) );
 
-		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadOutline" ) );
-		Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadFill" ) );
+		//Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadOutline" ) );
+		//Tools::TextureWad->FindOrLoad( Content, std::wstring( L"Art/LoadScreen_Initial/LoadFill" ) );
 
 		MyPile = boost::make_shared<DrawPile>();
 
