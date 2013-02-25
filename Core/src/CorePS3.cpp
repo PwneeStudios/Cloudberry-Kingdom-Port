@@ -174,6 +174,7 @@ CorePS3::CorePS3( GameLoop &game ) :
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_IO ), "Failed to load IO\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_GAME ), "Failed to load IO\n" );
 	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_NP ), "Failed to load NP\n" );
+	CELL_ERR_CHECK( cellSysmoduleLoadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA ), "Failed to load License Area\n" );
 
 	LoadModules();
 
@@ -302,6 +303,7 @@ CorePS3::~CorePS3()
 
 	UnloadModules();
 
+	cellSysmoduleUnloadModule( CELL_SYSMODULE_SYSUTIL_LICENSEAREA );
 	cellSysmoduleUnloadModule( CELL_SYSMODULE_SYSUTIL_NP );
 }
 
