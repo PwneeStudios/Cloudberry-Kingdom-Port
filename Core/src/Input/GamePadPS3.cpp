@@ -1,6 +1,7 @@
 #include <Input/GamePad.h>
 
 #include "PS3/gfxPad.h"
+#include <Utility/Error.h>
 
 void GamePad::Initialize()
 {
@@ -10,6 +11,20 @@ void GamePad::Initialize()
 void GamePad::Update()
 {
 	gfxPadRead();
+
+	int numConnected = 0;
+	for( int i = 0; i < 4; ++i )
+	{
+		if( gfxPadConnected( i ) )
+			++numConnected;
+	}
+
+	if( numConnected == 0 )
+	{
+		DisplayError( ErrorType(
+			"Error:\nNo Gamepad detected\nPlease press the PS button if the gamepad is connected"
+		) );
+	}
 }
 
 GamePadState GamePad::GetState( PlayerIndex index )

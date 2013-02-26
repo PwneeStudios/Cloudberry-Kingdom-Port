@@ -4,6 +4,10 @@
 
 #include "Leaderboard.h"
 
+#ifdef PS3
+#include <np.h>
+#endif
+
 namespace CloudberryKingdom
 {
 
@@ -203,4 +207,13 @@ namespace CloudberryKingdom
             }
         }
     }
+
+	void Leaderboard::Initialize()
+	{
+	}
+
+	void Leaderboard::Shutdown()
+	{
+	}
+
 }

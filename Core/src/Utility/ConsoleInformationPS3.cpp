@@ -77,3 +77,21 @@ int GetParentalControlLevel()
 
 	return controlLevel;
 }
+
+bool IsAsianButtonConfiguration()
+{
+	int assignButton;
+
+	if( cellSysutilGetSystemParamInt( CELL_SYSUTIL_SYSTEMPARAM_ID_ENTER_BUTTON_ASSIGN, &assignButton ) < 0 )
+		return false;
+
+	switch( assignButton )
+	{
+	case CELL_SYSUTIL_ENTER_BUTTON_ASSIGN_CIRCLE:
+		return true;
+	case CELL_SYSUTIL_ENTER_BUTTON_ASSIGN_CROSS:
+		break;
+	}
+
+	return false;
+}

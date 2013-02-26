@@ -374,8 +374,11 @@ void RegisterTrophyContextThread( uint64_t context )
 	sys_ppu_thread_exit( 0 );
 }
 
+static bool ErrorDialogOpen = false;
+
 void ErrorDialogCallback( int buttonType, void *userData )
 {
+	ErrorDialogOpen = false;
 }
 
 int CorePS3::Run()
@@ -384,8 +387,13 @@ int CorePS3::Run()
 
 	game_.Initialize();
 
+	// Initialize NP score system.
+	int ret = sceNpScoreInit();
+	if( ret < 0 )
+		LOG.Write( "Failed to initialize score system: 0x%x\n", ret );
+
 	// Initialize trophy system.
-	int ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
+	ret = sceNpTrophyInit( NULL, 0, SYS_MEMORY_CONTAINER_ID_INVALID, 0 );
 	if( ret < 0 )
 		LOG.Write( "Failed to initialize trophy system: 0x%x\n", ret );
 
@@ -407,19 +415,44 @@ int CorePS3::Run()
 	if( ret != 0 )
 		LOG.Write( "Failed to start RegisterTrophyContextThread: 0x%x\n", ret );
 
-	DisplayError( 0x1234abcd );
+	DisplayError( ErrorType( 0x8002a1a4 ) );
 
 	while( running_ )
 	{
 		GamePad::Update();
 		Keyboard::Update();
 
+		if( ErrorDialogOpen )
+		{
+			int ret = cellSysutilCheckCallback();
+			if( ret )
+				LOG.Write( "cellSysutilChecCallback() = 0x%x\n", ret );
+
+			psglSwap();
+			continue;
+		}
+
 		if( GLOBAL_ERROR_QUEUE.size() > 0 )
 		{
-			int error = GLOBAL_ERROR_QUEUE.front();
+			ErrorType error = GLOBAL_ERROR_QUEUE.front();
 			GLOBAL_ERROR_QUEUE.pop_front();
 
-			int ret = cellMsgDialogOpenErrorCode( error, ErrorDialogCallback, NULL, NULL );
+			int ret = 0;
+			switch( error.GetMessageType() )
+			{
+			case ErrorType::CODE:
+				ret = cellMsgDialogOpenErrorCode( error.GetCode(), ErrorDialogCallback, NULL, NULL );
+				break;
+			case ErrorType::STRING:
+				ret = cellMsgDialogOpen2( error.IsFatal() ? CELL_MSGDIALOG_TYPE_SE_TYPE_ERROR : CELL_MSGDIALOG_TYPE_SE_TYPE_NORMAL,
+					error.GetMessage().c_str(), ErrorDialogCallback, NULL, NULL );
+				break;
+			}
+			if( ret == 0 )
+			{
+				ErrorDialogOpen = true;
+				continue;
+			}
 		}
 
 		glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );

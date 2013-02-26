@@ -662,11 +662,14 @@ float CloudberryKingdomGame::fps = 0;
 		SignedInGamer::SignedOut += boost::make_shared<EventHandler<SignedOutEventArgs*> >( shared_from_this(), &CloudberryKingdomGame::SignedInGamer_SignedOut );
 	#endif
 
+		
+		ConsoleRegion region = GetConsoleRegion();
+
+		CloudberryKingdomGame::AsianButtonSwitch = IsAsianButtonConfiguration();
+
 		// FIXME: Start videos later.
 		if (!HideLogos)
 		{
-			ConsoleRegion region = GetConsoleRegion();
-
 			// FIXME: Keep playing logo salad.
 			if( region == ConsoleRegion_USA )
 				MainVideo::StartVideo_CanSkipIfWatched( std::wstring( L"LogoSalad" ) );

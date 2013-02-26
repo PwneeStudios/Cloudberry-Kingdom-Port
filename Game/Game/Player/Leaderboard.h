@@ -72,6 +72,9 @@ namespace CloudberryKingdom
 		void RequestMore(int RequestPage);
 		void Update(LeaderboardType Type /*, IAsyncResult ar*/);
 
+
+		static void Initialize();
+		static void Shutdown();
 	};
 
 }
