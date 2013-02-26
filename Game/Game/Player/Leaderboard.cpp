@@ -76,9 +76,9 @@ namespace CloudberryKingdom
 
     Leaderboard::Leaderboard(int game_id)
     {
-		bool WritingInProgress = false;
+		WritingInProgress = false;
 		MySortType = static_cast< LeaderboardType >( 0 );
-        int RequestPage;
+        RequestPage = 0;
 
         Items.clear();
         FriendItems.clear();
@@ -203,4 +203,76 @@ namespace CloudberryKingdom
             }
         }
     }
+
+
+
+	void LeaderboardItem::StaticIntialize()
+	{
+		DefaultItem = boost::make_shared<LeaderboardItem>( OnlineGamer(), 0, 0 );
+	}
+
+    boost::shared_ptr<LeaderboardItem> LeaderboardItem::DefaultItem;
+
+    LeaderboardItem::LeaderboardItem()
+	{
+	}
+
+    LeaderboardItem::LeaderboardItem( OnlineGamer Player, int Val, int Rank )
+    {
+        this->Player = Player;
+        this->Rank = ToString( Rank );
+
+        if ( Player.Id > 0 )
+        {
+            this->GamerTag = Localization::WordString( Localization::Words_Loading ) + L"...";
+            this->Val = L"...";
+
+			scale = 1;
+        }
+        else
+        {
+            this->GamerTag = Player.GamerTag();
+            this->Val = ToString( Val );
+
+            float width = Tools::QDrawer->MeasureString( Resources::Font_Grobold42->HFont, GamerTag ).X;
+            if ( width > 850.0f )
+                scale = 850.0f / width;
+            else
+                scale = 1;
+        }
+    }
+
+    void LeaderboardItem::Draw( Vector2 Pos, bool Selected, float alpha, float Offset_GamerTag, float Offset_Val, float ItemShift )
+    {
+        Vector4 color = ColorHelper::Gray(.9f );
+        Vector4 ocolor = Color::Black.ToVector4();
+
+        if ( Selected )
+        {
+            //ocolor = Color( 191, 191, 191 ).ToVector4();
+            //color = Color( 175, 8, 64 ).ToVector4();
+
+            color = Color::LimeGreen.ToVector4();
+            ocolor = bColor( 0, 0, 0 ).ToVector4();
+        }
+            
+        color *= alpha;
+
+        Vector2 GamerTag_Offset = .1f * Vector2( Offset_GamerTag, -( 1.0f - scale ) * 1000.0f );
+        Vector2 Val_Offset = .1f * Vector2( Offset_Val, 0 );
+        Vector2 Size = .1f * Vector2( ItemShift );
+
+        if ( Selected )
+        {
+            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Rank, Pos, ocolor, Size );
+            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, GamerTag, Pos + GamerTag_Offset, ocolor, scale * Size );
+            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Val, Pos + Val_Offset, ocolor, Size );
+        }
+
+        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Rank, Pos, color, Size );
+        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, GamerTag, Pos + GamerTag_Offset, color, scale * Size );
+        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Val, Pos + Val_Offset, color, Size );
+    }
+
+
 }

@@ -157,11 +157,11 @@ namespace CloudberryKingdom
         int Start;
         int End() { return CoreMath::RestrictVal( 0, TotalEntries, Start + EntriesPerPage ); }
 
-        std::map<int, boost::shared_ptr<LeaderboardItem> > getItems();
+        std::map<int, LeaderboardItem> &getItems();
 
 		boost::shared_ptr<Leaderboard> MyLeaderboard;
 
-        LeaderboardView();
+        LeaderboardView( int Id, LeaderboardType CurrentType );
 
         void IncrIndex( int change );
 
@@ -177,6 +177,7 @@ namespace CloudberryKingdom
 
 		void Draw( Vector2 Pos, float alpha );
 		void DrawList( float alpha, Vector2 CurPos, float Shift );
+		void DrawDict( float alpha, Vector2 CurPos, float Shift );
 
 	};
 

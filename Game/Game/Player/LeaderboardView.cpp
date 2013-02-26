@@ -1,6 +1,10 @@
 #include <global_header.h>
 
+#include <Hacks\List.h>
+
 #include "LeaderboardView.h"
+
+#include <Game/CloudberryKingdom/CloudberryKingdom.CloudberryKingdomGame.h>
 
 namespace CloudberryKingdom
 {
@@ -56,7 +60,7 @@ namespace CloudberryKingdom
             //Leaderboard::LeaderboardFriends.push_back(get all the friends);
         }
 
-        this->Control = Control;
+        this->setControl( Control );
 
         EnableBounce();
 
@@ -145,7 +149,7 @@ namespace CloudberryKingdom
         AddItem( item );
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90, L"Button_ViewGamer" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getGo(), 90.0f, std::wstring( L"Button_ViewGamer" ) ) );
         item->Selectable = false;
 }
 else
@@ -161,7 +165,7 @@ else
         AddItem( item );
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90, L"Button_SwitchView" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, std::wstring( L"Button_SwitchView" ) ) );
         item->Selectable = false;
 }
         item->setGo( Cast::ToItem( boost::make_shared<SwitchViewProxy>( boost::static_pointer_cast<LeaderboardGUI>( shared_from_this() ) ) ) );
@@ -177,7 +181,7 @@ if ( ButtonCheck::ControllerInUse )
 {
 		if (ShowSortOption)
 		{
-			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, L"Button_SwitchSort" ) );
+			MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getX(), 90.0f, std::wstring( L"Button_SwitchSort" ) ) );
 		}
         item->Selectable = false;
 }
@@ -189,7 +193,7 @@ if ( ButtonCheck::ControllerInUse )
 		}
 
 		// Left/Right
-		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 90.0f, L"Button_LeftRight" ) );
+		MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getLeftRight(), 90.0f, std::wstring( L"Button_LeftRight" ) ) );
 		boost::shared_ptr<EzText> text = boost::make_shared<EzText>( Localization::WordString( Localization::Words_Previous) + L" / " +
 											Localization::WordString( Localization::Words_Next), ItemFont );
 		StartMenu::SetTextUnselected_Red( text );
@@ -198,7 +202,7 @@ if ( ButtonCheck::ControllerInUse )
         // Back
 if ( ButtonCheck::ControllerInUse )
 {
-        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90, L"Button_Back" ) );
+        MyPile->Add( boost::make_shared<QuadClass>( ButtonTexture::getBack(), 90.0f, std::wstring( L"Button_Back" ) ) );
         MyPile->Add( boost::make_shared<QuadClass>( L"BackArrow2", L"BackArrow" ));
         item->Selectable = false;
 }
@@ -211,7 +215,7 @@ if ( ButtonCheck::ControllerInUse )
 
         UpdateMessages();
 
-if (ButtonCheck::ControllerInUse)
+if ( ButtonCheck::ControllerInUse )
 {
 		MyMenu->NoneSelected = true;
 }
@@ -327,8 +331,8 @@ if (ButtonCheck::ControllerInUse)
         {
             Name = Localization::WordString( Localization::Words_TotalArcade );
                 
-				Name = Localization.WordString( Localization::Words_PlayerLevel ) + L" (" +
-                        Localization.WordString( Localization::Words_TheArcade ) + L" + " + Localization::WordString( Localization::Words_StoryMode ) + L")";
+				Name = Localization::WordString( Localization::Words_PlayerLevel ) + L" (" +
+                        Localization::WordString( Localization::Words_TheArcade ) + L" + " + Localization::WordString( Localization::Words_StoryMode ) + L")";
                 Id = 9999;
         }
         else
@@ -427,7 +431,7 @@ if (ButtonCheck::ControllerInUse)
         if ( getControl() < 0 )
         {
             //Dir = ButtonCheck::GetMaxDir( getControl() == -1 );
-			Dir = ButtonCheck.GetMaxDir( false );
+			Dir = ButtonCheck::GetMaxDir( false );
         }
         else
             Dir = ButtonCheck::GetDir( getControl() );
@@ -705,70 +709,6 @@ else
 
 
 
-	void LeaderboardItem::StaticIntialize()
-	{
-		DefaultItem = boost::make_shared<LeaderboardItem>( 0, 0, 0 );
-	}
-
-
-    boost::shared_ptr<LeaderboardItem> LeaderboardItem::DefaultItem;
-
-    LeaderboardItem::LeaderboardItem( boost::shared_ptr<Gamer> Player, int Val, int Rank )
-    {
-        this->Player = Player;
-        this->Rank = ToString( Rank );
-
-        if ( Player == 0 )
-        {
-            this->GamerTag = Localization::WordString( Localization::Words_Loading ) + L"...";
-            this->Val = L"...";
-
-			scale = 1;
-        }
-        else
-        {
-            this->GamerTag = Player->Gamertag;
-            this->Val = ToString( Val );
-
-            float width = Tools::QDrawer->MeasureString( Resources::Font_Grobold42->HFont, GamerTag ).X;
-            if ( width > 850.0f )
-                scale = 850.0f / width;
-            else
-                scale = 1;
-        }
-    }
-
-    void LeaderboardItem::Draw( Vector2 Pos, bool Selected, float alpha )
-    {
-        Vector4 color = ColorHelper::Gray(.9f );
-        Vector4 ocolor = Color::Black.ToVector4();
-
-        if ( Selected )
-        {
-            //ocolor = Color( 191, 191, 191 ).ToVector4();
-            //color = Color( 175, 8, 64 ).ToVector4();
-
-            color = Color::LimeGreen.ToVector4();
-            ocolor = bColor( 0, 0, 0 ).ToVector4();
-        }
-            
-        color *= alpha;
-
-        Vector2 GamerTag_Offset = .1f * Vector2( LeaderboardGUI::Offset_GamerTag->getPos().X, -( 1.0f - scale ) * 1000.0f );
-        Vector2 Val_Offset = .1f * Vector2( LeaderboardGUI::Offset_Val->getPos().X, 0 );
-        Vector2 Size = .1f * Vector2( LeaderboardGUI::ItemShift->getSizeX() );
-
-        if ( Selected )
-        {
-            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Rank, Pos, ocolor, Size );
-            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, GamerTag, Pos + GamerTag_Offset, ocolor, scale * Size );
-            Tools::QDrawer->DrawString( Resources::Font_Grobold42->HOutlineFont, Val, Pos + Val_Offset, ocolor, Size );
-        }
-
-        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Rank, Pos, color, Size );
-        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, GamerTag, Pos + GamerTag_Offset, color, scale * Size );
-        Tools::QDrawer->DrawString( Resources::Font_Grobold42->HFont, Val, Pos + Val_Offset, color, Size );
-    }
 
 
 
@@ -786,12 +726,12 @@ else
     int Start;
     int End() { return CoreMath::RestrictVal( 0, TotalEntries, Start + EntriesPerPage ); }
 
-    std::map<int, boost::shared_ptr<LeaderboardItem> > LeaderboardView::getItems()
+    std::map<int, LeaderboardItem> &LeaderboardView::getItems()
 	{
 		return MyLeaderboard->Items;
 	}
 
-    LeaderboardView::LeaderboardView()
+    LeaderboardView::LeaderboardView( int Id, LeaderboardType CurrentType )
     {
         TotalEntries = 0;// 1000000;
         Index = 1;
@@ -799,7 +739,7 @@ else
 
         Loading = true;
 
-        LeaderboardItem::DefaultItem = boost::make_shared<LeaderboardItem>( 0, 0, 0 );
+        LeaderboardItem::DefaultItem = boost::make_shared<LeaderboardItem>( OnlineGamer(), 0, 0 );
 
         MyLeaderboard = boost::make_shared<Leaderboard>( Id );
 
@@ -820,7 +760,7 @@ else
 			Start = Index - EntriesPerPage;
         if ( Index < Start )
             Start = Index;
-		Start = CoreMath::Restrict( 1, TotalEntries, Start );
+		Start = CoreMath::RestrictVal( 1, TotalEntries, Start );
     }
 
     int DelayCount_UpDown, MotionCount_UpDown;
@@ -916,12 +856,12 @@ else
 			// FIXME
             //lock (Items)
             {
-                if ( getItems().size > 0)
+                if ( getItems().size() > 0)
                 {
                     if ( Contains( getItems(), Index ) )
                     {
-                        Gamer gamer = getItems()[Index]->Player;
-                        if ( gamer != 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 ) 
+                        OnlineGamer gamer = getItems()[Index].Player;
+                        if ( gamer.Id > 0 && MenuItem::ActivatingPlayer >= 0 && MenuItem::ActivatingPlayer <= 3 ) 
                         {
 							// Show the gamer card!
 #if XBOX
@@ -935,11 +875,11 @@ else
 
         void LeaderboardView::SetType( LeaderboardType type )
         {
-            if (type == LeaderboardType_FriendsScores && MyLeaderboard->FriendItems.size > 0)
+            if (type == LeaderboardType_FriendsScores && MyLeaderboard->FriendItems.size() > 0)
             {
                 Loading = false;
                 Start = Index = 1;
-                TotalEntries = MyLeaderboard.FriendItems.Count;
+                TotalEntries = MyLeaderboard->FriendItems.size();
                 UpdateBounds();
             }
             else
@@ -947,7 +887,7 @@ else
                 Loading = true;
             }
 
-            MyLeaderboard.SetType(type);
+            MyLeaderboard->SetType( type );
         }
 
     void LeaderboardView::Draw( Vector2 Pos, float alpha )
@@ -988,9 +928,41 @@ else
                 LeaderboardGUI::Highlight->Show = false;
             }
 
-            if ( Contains( Items, i ) )
+            if ( i - 1 < static_cast<int>( MyLeaderboard->FriendItems.size() ) )
             {
-                Items[ i ]->Draw( CurPos, Selected, alpha );
+				MyLeaderboard->FriendItems[ i - 1 ].Draw( CurPos, Selected, alpha,
+					LeaderboardGUI::Offset_GamerTag->getPos().X,
+					LeaderboardGUI::Offset_Val->getPos().X,
+					LeaderboardGUI::ItemShift->getSizeX() );
+            }
+
+            CurPos.Y += Shift;
+        }
+    }
+
+    void LeaderboardView::DrawDict(float alpha, Vector2 CurPos, float Shift)
+    {
+        bool RequestMore = false;
+        int MinExisting = Start, MaxExisting = Start, MinMissing = -1, MaxMissing = -1;
+
+        for ( int i = Start; i <= End(); i++ )
+        {
+            bool Selected = i == Index;
+
+            if ( Selected )
+            {
+                LeaderboardGUI::Highlight->setPosY( CurPos.Y - 70 );
+                LeaderboardGUI::Highlight->Show = true;
+                LeaderboardGUI::Highlight->Draw();
+                LeaderboardGUI::Highlight->Show = false;
+            }
+
+            if ( Contains( getItems(), i ) )
+            {
+                getItems()[ i ].Draw( CurPos, Selected, alpha,
+					LeaderboardGUI::Offset_GamerTag->getPos().X,
+					LeaderboardGUI::Offset_Val->getPos().X,
+					LeaderboardGUI::ItemShift->getSizeX() );
 
                 MaxExisting = __max( MaxExisting, i );
                 MinExisting = __min( MinExisting, i );
@@ -1005,7 +977,10 @@ else
                 boost::shared_ptr<LeaderboardItem> Default = LeaderboardItem::DefaultItem;
                 Default->Rank = ToString( i );
 
-                Default->Draw( CurPos, Selected, alpha );
+                Default->Draw( CurPos, Selected, alpha,
+					LeaderboardGUI::Offset_GamerTag->getPos().X,
+					LeaderboardGUI::Offset_Val->getPos().X,
+					LeaderboardGUI::ItemShift->getSizeX() );
             }
 
             CurPos.Y += Shift;

@@ -2,6 +2,8 @@
 
 #include <Hacks/String.h>
 
+#include <Game\Player\Leaderboard.h>
+
 namespace CloudberryKingdom
 {
 

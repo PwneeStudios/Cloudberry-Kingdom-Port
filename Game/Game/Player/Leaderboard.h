@@ -7,7 +7,19 @@
 namespace CloudberryKingdom
 {
 
-	typedef int OnlineGamer;
+	struct OnlineGamer
+	{
+		int Id;
+		std::wstring GamerTag()
+		{
+			return L"Dummy gamer tag! Fix me!";
+		}
+
+		OnlineGamer()
+		{
+			Id = -232323;
+		}
+	};
 
     enum LeaderboardType { LeaderboardType_FriendsScores, LeaderboardType_TopScores, LeaderboardType_MyScores, LeaderboardType_Length };
     enum LeaderboardSortType { LeaderboardSortType_Score, LeaderboardSortType_Level, LeaderboardSortType_Length };
@@ -25,9 +37,10 @@ namespace CloudberryKingdom
 		static void StaticIntialize();
         static boost::shared_ptr<LeaderboardItem> DefaultItem;
 
-        LeaderboardItem( boost::shared_ptr<Gamer> Player, int Val, int Rank );
+		LeaderboardItem();
+        LeaderboardItem( OnlineGamer Gamer, int Val, int Rank );
 
-		void Draw( Vector2 Pos, bool Selected, float alpha );
+		void Draw( Vector2 Pos, bool Selected, float alpha, float Offset_GamerTag, float Offset_Val, float ItemShift );
 
     };
 

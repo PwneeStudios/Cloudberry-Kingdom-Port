@@ -131,6 +131,8 @@ namespace CloudberryKingdom
 		/// </summary>
 		bool Active;
 
+		bool BubblingOut;
+
 		/// <summary>
 		/// The GUI_Panel that called up this GUI_Panel, if it exists.
 		/// </summary>

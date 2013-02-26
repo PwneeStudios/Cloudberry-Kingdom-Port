@@ -207,6 +207,8 @@ namespace CloudberryKingdom
 		static void SetItemProperties_Green( const boost::shared_ptr<MenuItem> &item, bool outline );
 
 		static void SetItemProperties_Red( const boost::shared_ptr<MenuItem> &item );
+		static void SetTextSelected_Red( const boost::shared_ptr<EzText> &text );
+		static void SetTextUnselected_Red( const boost::shared_ptr<EzText> &text );
 
 		virtual void OnAdd();
 
